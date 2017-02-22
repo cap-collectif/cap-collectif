@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import OpinionCreateForm from './OpinionCreateForm';
+import { OpinionCreateForm } from './OpinionCreateForm';
 import { defaultValidation } from './OpinionForm';
 import IntlData from '../../../translations/FR';
 
@@ -10,6 +10,10 @@ describe('<OpinionCreateForm />', () => {
   const props = {
     projectId: '1',
     stepId: 1,
+    step: {
+      titleHelpText: null,
+      descriptionHelpText: null,
+    },
     opinionType: { appendixTypes: [{
       type: '1',
       id: '1',
@@ -43,12 +47,14 @@ describe('<OpinionCreateForm />', () => {
         label: 'title',
         name: 'title',
         type: 'text',
+        help: null,
       },
       {
         id: 'opinion_body',
         label: 'body',
         name: 'body',
         type: 'editor',
+        help: null,
       },
       {
         id: 'appendix_1',

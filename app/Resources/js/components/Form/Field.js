@@ -30,7 +30,7 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props.meta;
-    const { children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName } = this.props;
+    const { children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName, help } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
@@ -38,6 +38,7 @@ const Field = React.createClass({
         id={id}
         type={type}
         name={name}
+        help={help}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}

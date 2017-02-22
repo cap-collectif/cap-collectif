@@ -17,9 +17,10 @@ const validate = (values) => {
   return errors;
 };
 
-const OpinionEditForm = React.createClass({
+export const OpinionEditForm = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onFailure: PropTypes.func.isRequired,
   },
@@ -62,7 +63,7 @@ const OpinionEditForm = React.createClass({
   },
 
   render() {
-    const { opinion, onFailure } = this.props;
+    const { opinion, onFailure, step } = this.props;
     const dynamicsInitialValues = {};
     for (const appendix of opinion.appendices) {
       dynamicsInitialValues[appendix.type.title] = appendix.body;
@@ -76,8 +77,8 @@ const OpinionEditForm = React.createClass({
         onSubmitFail={onFailure}
         fields={[
           { name: 'check', label: 'check', type: 'checkbox', id: 'opinion_check', divClassName: 'alert alert-warning edit-confirm-alert' },
-          { name: 'title', label: 'title', type: 'text', id: 'opinion_title' },
-          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
+          { name: 'title', label: 'title', type: 'text', id: 'opinion_title', help: step.titleHelpText },
+          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body', help: step.descriptionHelpText },
         ].concat(opinion.appendices.map((a, i) => { return { label: a.type.title, name: a.type.title, type: 'editor', id: `opinion_appendix-${i + 1}` }; }))}
         initialValues={$.extend({},
           { title: opinion.title,

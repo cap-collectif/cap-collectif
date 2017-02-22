@@ -22,6 +22,7 @@ describe('<OpinionEditForm />', () => {
     onFailure: () => {},
     handleSubmit: () => {},
     validate: () => {},
+    step: {},
     ...IntlData,
   };
 
