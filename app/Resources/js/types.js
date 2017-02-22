@@ -47,6 +47,7 @@ export type FeatureToggles = {
   districts: boolean,
   user_type: boolean,
   votes_evolution: boolean,
+  export: boolean,
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
   vote_without_account: boolean

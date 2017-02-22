@@ -62,7 +62,7 @@ class FeaturesCategoryResolver
         ],
         'settings.modules' => [
             'conditions' => [],
-            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'districts', 'registration', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'login_facebook', 'login_gplus', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering'],
+            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'districts', 'registration', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'login_facebook', 'login_gplus', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering', 'export'],
         ],
         'settings.notifications' => [
             'conditions' => [],

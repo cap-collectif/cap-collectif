@@ -870,6 +870,7 @@ capco:
     zipcode_at_register: Demander le code postal
     phone_confirmation: Vérification des comptes par SMS
     server_side_rendering: Rendu serveur
+    export: Actualisation des exports
 
 action_enable: Activer
 action_disable: Désactiver
