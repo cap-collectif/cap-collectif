@@ -113,13 +113,12 @@ global:
 
 homepage:
   jumbotron:
-    body: Contenu de l'entête
+    body: Accroche du site
     button: Libellé du bouton principal
     button_link: Lien du bouton principal
     darken: Assombrissement de l'image de fond
     title: Titre/objet du site
     margin: Marges
-  meta_description: Méta description
 
 ideas:
   content:

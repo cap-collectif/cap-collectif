@@ -37,7 +37,7 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
-          return;
+            return;
         }
         $withoutVote = $input->getOption('withoutVote');
         $this->downloadResolver = $container->get('capco.project.download.resolver');

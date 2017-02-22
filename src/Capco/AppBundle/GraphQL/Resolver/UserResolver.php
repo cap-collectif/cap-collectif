@@ -77,6 +77,7 @@ class UserResolver implements ContainerAwareInterface
                 $role
             );
         }, $object->getRoles());
+
         return implode('|', $convertedRoles);
     }
 

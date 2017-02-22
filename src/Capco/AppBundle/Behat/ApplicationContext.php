@@ -118,20 +118,20 @@ class ApplicationContext extends UserContext
          $this->navigationContext->iVisitedPage($pageName);
      }
 
-     /**
-      * @Given I should see the shield
-      */
+      /**
+       * @Given I should see the shield
+       */
       public function iShouldSeeTheShield()
       {
-        $this->assertSession()->elementExists('css', '#shield-mode');
+          $this->assertSession()->elementExists('css', '#shield-mode');
       }
 
-      /**
-       * @Given I should not see the shield
-       */
+       /**
+        * @Given I should not see the shield
+        */
        public function iShouldNotSeeTheShield()
        {
-         $this->assertSession()->elementNotExists('css', '#shield-mode');
+           $this->assertSession()->elementNotExists('css', '#shield-mode');
        }
 
      /**

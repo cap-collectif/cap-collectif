@@ -156,7 +156,7 @@ fragment sourceInfos on Source {
     {
         $container = $this->getContainer();
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
-          return;
+            return;
         }
 
         $steps = $container->get('doctrine')

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
-use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -74,7 +73,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
-          return;
+            return;
         }
         $csvGenerator = new GraphQLToCsv();
         $fileName = 'users.csv';
@@ -90,5 +89,4 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         );
         $output->writeln('The export file "'.$fileName.'" has been created.');
     }
-
 }

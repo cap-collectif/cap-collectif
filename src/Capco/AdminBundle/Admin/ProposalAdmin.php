@@ -482,5 +482,4 @@ class ProposalAdmin extends Admin
 
         return parent::getList();
     }
-
 }

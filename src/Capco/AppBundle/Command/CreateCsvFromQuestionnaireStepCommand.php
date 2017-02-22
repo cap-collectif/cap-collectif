@@ -20,7 +20,7 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
-          return;
+            return;
         }
         $resolver = $container->get('capco.project.download.resolver');
 
