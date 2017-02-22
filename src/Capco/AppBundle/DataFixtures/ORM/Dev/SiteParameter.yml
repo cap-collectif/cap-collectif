@@ -337,10 +337,3 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 'assistance@cap-collectif.com'
         position: 3
         type: 4
-
-    SiteParameterMetaDescription:
-        keyname: homepage.meta_description
-        category: pages.homepage
-        value: Participez à l'élaboration de la loi
-        position: 101
-        type: 0

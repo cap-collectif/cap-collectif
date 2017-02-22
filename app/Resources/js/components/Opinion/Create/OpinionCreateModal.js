@@ -56,7 +56,11 @@ const OpinionCreateModal = React.createClass({
       <Modal
         animation={false}
         show={show}
-        onHide={onClose}
+        onHide={() => {
+          if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
+            onClose();
+          }
+        }}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg"
       >
