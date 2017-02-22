@@ -18,9 +18,13 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $resolver = $this->getContainer()->get('capco.project.download.resolver');
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+          return;
+        }
+        $resolver = $container->get('capco.project.download.resolver');
 
-        $steps = $this->getContainer()
+        $steps = $container
             ->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
             ->findAll()
@@ -33,7 +37,7 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
                 $filename .= $qs->getProject()->getSlug().'_';
             }
             $filename .= $qs->getSlug().'.xlsx';
-            $path = $this->getContainer()->getParameter('kernel.root_dir');
+            $path = $container->getParameter('kernel.root_dir');
             $writer->save($path.'/../web/export/'.$filename);
             $output->writeln('The export file "'.$filename.'" has been created.');
         }

@@ -52,6 +52,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('phone_confirmation');
         $toggleManager->activate('server_side_rendering');
         $toggleManager->activate('profiles');
+        $toggleManager->deactivate('export');
         $toggleManager->deactivate('zipcode_at_register');
         $toggleManager->deactivate('shield_mode');
         $toggleManager->deactivate('login_saml');

@@ -66,22 +66,26 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         eventCommentsCount
         projectsCount
     }
-}           
+}
         ';
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+          return;
+        }
         $csvGenerator = new GraphQLToCsv();
         $fileName = 'users.csv';
-        $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir').'/../web/export/'.$fileName, 'w');
+        $writer = Writer::createFromPath($container->getParameter('kernel.root_dir').'/../web/export/'.$fileName, 'w');
         $writer->setDelimiter(',');
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
         $requestString = $this->getUsersGraphQLQuery();
         $csvGenerator->generate(
             $requestString,
-            $this->getContainer()->get('overblog_graphql.request_executor'),
+            $container->get('overblog_graphql.request_executor'),
             $writer
         );
         $output->writeln('The export file "'.$fileName.'" has been created.');

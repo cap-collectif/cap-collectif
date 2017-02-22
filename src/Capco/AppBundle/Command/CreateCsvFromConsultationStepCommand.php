@@ -154,7 +154,12 @@ fragment sourceInfos on Source {
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $steps = $this->getContainer()->get('doctrine')
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+          return;
+        }
+
+        $steps = $container->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->findAll();
         $csvGenerator = new GraphQLToCsv();

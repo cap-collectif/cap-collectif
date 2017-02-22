@@ -35,9 +35,13 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+          return;
+        }
         $withoutVote = $input->getOption('withoutVote');
-        $this->downloadResolver = $this->getContainer()->get('capco.project.download.resolver');
-        $this->doctrine = $this->getContainer()->get('doctrine');
+        $this->downloadResolver = $container->get('capco.project.download.resolver');
+        $this->doctrine = $container->get('doctrine');
 
         if ($project = $this->getProject($input)) {
             $steps = $project->getSteps()
@@ -53,7 +57,7 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
 
         foreach ($steps as $step) {
             $this->createExport($step, !$withoutVote)
-                ->save($this->getContainer()->getParameter('kernel.root_dir').'/../web/export/'.$this->filename($step));
+                ->save($container->getParameter('kernel.root_dir').'/../web/export/'.$this->filename($step));
             $output->writeln('The export file "'.$this->filename($step).'" has been created.');
         }
     }

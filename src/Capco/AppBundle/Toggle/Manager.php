@@ -31,6 +31,7 @@ class Manager
         'phone_confirmation',
         'reporting',
         'themes',
+        'export',
         'districts',
         'user_type',
         'votes_evolution',
