@@ -26,7 +26,9 @@
     "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
   },
   "jest": {
-    "roots": ["app/Resources/js"],
+    "roots": [
+      "app/Resources/js"
+    ],
     "testEnvironment": "jsdom",
     "testRegex": "\\-test.js$",
     "setupFiles": [
