@@ -35,8 +35,13 @@ class ProjectsController extends FOSRestController
     {
         $shouldLimit = !$paramFetcher->get('limit') && $this->get('capco.toggle.manager')->isActive('projects_form');
 
-        return $this->get('capco.project.search.resolver')
-            ->search(ProjectSearchParameters::createFromRequest($paramFetcher, $shouldLimit));
+        $projectSearchParameters = ProjectSearchParameters::createFromRequest($paramFetcher, $shouldLimit);
+
+        if ($shouldLimit && !$paramFetcher->get('limit') && $this->get('capco.toggle.manager')->isActive('projects_form')) {
+            $projectSearchParameters->setElements($this->get('capco.site_parameter.resolver')->getValue('projects.pagination'));
+        }
+
+        return $this->get('capco.project.search.resolver')->search($projectSearchParameters);
     }
 
     /**
