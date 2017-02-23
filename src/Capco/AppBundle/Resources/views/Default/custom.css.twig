@@ -538,7 +538,9 @@
 
     .home-page .jumbotron {
         background-color: {{ homeHeaderBg | raw }};
-        padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
+        {% if null == capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
+            padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
+        {% endif %}
     }
 
     .proposal-vote__widget {
