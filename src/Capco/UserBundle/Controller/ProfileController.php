@@ -127,7 +127,8 @@ class ProfileController extends BaseController
         $ideasCount = count($ideasRaw);
 
         $replies = $this
-            ->get('doctrine.orm.entity_manager')
+            ->getDoctrine()
+            ->getManager()
             ->getRepository('CapcoAppBundle:Reply')
             ->findBy([
                 'author' => $user,
