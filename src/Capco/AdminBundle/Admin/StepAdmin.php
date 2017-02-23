@@ -151,6 +151,19 @@ class StepAdmin extends Admin
                   'label' => 'admin.fields.step.opinionCountShownBySection',
                   'required' => true,
                 ])
+                ->end()
+                ->with('admin.fields.proposal_form.group_help_texts')
+                ->add('titleHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.title_help_text',
+                    'required' => false,
+                    'help' => 'admin.fields.proposal_form.help_text_title_help_text',
+                ])
+                ->add('descriptionHelpText', null, [
+                    'label' => 'admin.fields.proposal_form.description_help_text',
+                    'required' => false,
+                    'help' => 'admin.fields.proposal_form.help_text_description_help_text',
+                ])
+                ->end()
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper

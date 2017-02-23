@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
 import OpinionEditForm from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 
-const OpinionEditModal = React.createClass({
+export const OpinionEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     opinion: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -79,4 +81,9 @@ const OpinionEditModal = React.createClass({
 
 });
 
-export default OpinionEditModal;
+export default connect(
+  (state) => {
+    return {
+      step: state.project.projects[state.project.currentProjectById].steps.filter(step => step.type === 'consultation')[0],
+    };
+  }, null, null, { withRef: true })(OpinionEditModal);
