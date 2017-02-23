@@ -286,6 +286,7 @@ export const ProposalForm = React.createClass({
           type="text"
           autoComplete="off"
           value={this.state.form.title}
+          help={form.titleHelpText}
           onChange={this.handleTitleChange}
           label={this.getIntlMessage('proposal.title')}
           groupClassName={this.getGroupStyle('title')}

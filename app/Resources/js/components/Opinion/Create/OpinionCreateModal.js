@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import OpinionCreateForm from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -12,7 +11,6 @@ const OpinionCreateModal = React.createClass({
     show: PropTypes.bool.isRequired,
     projectId: PropTypes.string.isRequired,
     stepId: PropTypes.number.isRequired,
-    step: PropTypes.object.isRequired,
     opinionTypeId: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
   },
@@ -53,7 +51,7 @@ const OpinionCreateModal = React.createClass({
 
   render() {
     const { isSubmitting, opinionType } = this.state;
-    const { onClose, show, stepId, projectId, step } = this.props;
+    const { onClose, show, stepId, projectId } = this.props;
     return (
       <Modal
         animation={false}
@@ -81,7 +79,6 @@ const OpinionCreateModal = React.createClass({
             ref={c => this.form = c}
             projectId={projectId}
             stepId={stepId}
-            step={step}
             opinionType={opinionType}
             onSubmitSuccess={this.handleSubmitSuccess}
             onFailure={this.stopSubmit}
@@ -102,10 +99,4 @@ const OpinionCreateModal = React.createClass({
 
 });
 
-export default connect(
-  (state, props) => {
-    return {
-      step: state.project.projects[props.projectId].steps.filter(step => step.id === props.stepId)[0],
-    };
-  }, null, null, { withRef: true },
-)(OpinionCreateModal);
+export default OpinionCreateModal;

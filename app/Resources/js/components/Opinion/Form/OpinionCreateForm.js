@@ -3,12 +3,11 @@ import { IntlMixin } from 'react-intl';
 import OpinionForm, { defaultValidation } from './OpinionForm';
 import Fetcher, { json } from '../../../services/Fetcher';
 
-export const OpinionCreateForm = React.createClass({
+const OpinionCreateForm = React.createClass({
   propTypes: {
     projectId: PropTypes.string.isRequired,
     stepId: PropTypes.number.isRequired,
     opinionType: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onFailure: PropTypes.func.isRequired,
   },
@@ -46,7 +45,7 @@ export const OpinionCreateForm = React.createClass({
   },
 
   render() {
-    const { opinionType, onFailure, step } = this.props;
+    const { opinionType, onFailure } = this.props;
     if (!opinionType) return;
     const dynamicsField = opinionType.appendixTypes.map((type) => {
       return { name: type.title, label: type.title, type: 'editor', id: `appendix_${type.id}` };
@@ -59,8 +58,8 @@ export const OpinionCreateForm = React.createClass({
         onSubmit={this.handleSubmit}
         onSubmitFail={onFailure}
         fields={[
-          { name: 'title', label: 'title', type: 'text', id: 'opinion_title', help: step.titleHelpText },
-          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body', help: step.descriptionHelpText },
+          { name: 'title', label: 'title', type: 'text', id: 'opinion_title' },
+          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body' },
         ].concat(dynamicsField)
         }
       />

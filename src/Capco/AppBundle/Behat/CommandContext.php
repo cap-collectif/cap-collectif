@@ -51,7 +51,7 @@ class CommandContext implements KernelAwareContext
     public function exitCodeShouldBe($code)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            (int) $code,
+            intval($code),
             $this->statusCode
         );
     }

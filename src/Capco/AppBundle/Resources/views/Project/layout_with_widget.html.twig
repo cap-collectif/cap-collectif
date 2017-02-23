@@ -36,8 +36,6 @@
       'budget': step.step.budget|default(null),
       'timeless': step.step.isTimeless()|default(false),
       'isPrivate': step.step.isPrivate()|default(false),
-      'titleHelpText': step.step.titleHelpText|default(null),
-      'descriptionHelpText': step.step.descriptionHelpText|default(null),
       '_links': {
         'show': step.step.getType() == 'other' ? '' : path('app_project_show_'~ step.step.getType(), {'projectSlug': project.slug, 'stepSlug': step.step.slug})
       }

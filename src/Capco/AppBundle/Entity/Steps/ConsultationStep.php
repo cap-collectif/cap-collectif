@@ -112,16 +112,6 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
      */
     private $consultationStepType;
 
-    /**
-     * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
-     */
-    private $titleHelpText;
-
-    /**
-     * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
-     */
-    private $descriptionHelpText;
-
     public function __construct()
     {
         parent::__construct();
@@ -419,35 +409,5 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     public function isParticipative(): bool
     {
         return true;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getTitleHelpText()
-    {
-        return $this->titleHelpText;
-    }
-
-    public function setTitleHelpText(string $titleHelpText = null): self
-    {
-        $this->titleHelpText = $titleHelpText;
-
-        return $this;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getDescriptionHelpText()
-    {
-        return $this->descriptionHelpText;
-    }
-
-    public function setDescriptionHelpText(string $descriptionHelpText = null): self
-    {
-        $this->descriptionHelpText = $descriptionHelpText;
-
-        return $this;
     }
 }
