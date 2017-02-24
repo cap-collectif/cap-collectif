@@ -54,10 +54,11 @@ class QuestionnairesController extends FOSRestController
             $rankingQuestions = [];
             $choiceQuestions = [];
             foreach ($questions as $question) {
-                if ($question->getInputType() === 'ranking') {
+                $type = $question->getInputType();
+                if ($type === 'ranking') {
                     $rankingQuestions[] = $question;
                 }
-                if ($question->getInputType() === 'radio') {
+                if ($type === 'radio' || $type === 'select') {
                     $choiceQuestions[] = $question;
                 }
             }

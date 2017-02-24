@@ -20,7 +20,7 @@
       'creditsLeftByStepId': project|credits_list_list(app.user)
     }
   } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}
 {% endblock %}
 
 {% block body %}
