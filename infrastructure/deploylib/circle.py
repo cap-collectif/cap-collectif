@@ -78,19 +78,19 @@ def save_cache():
         return
 
     if not create_fresh_cache:
-       if simpleMatch is not None:
-           changes = local('git diff --name-only %s | cat' % simpleMatch.group(1), capture=True).split("\n")
-       else:
-           changes = local('git diff --name-only %s %s | cat' % (match.group(1), match.group(2)), capture=True).split("\n")
+        if simpleMatch is not None:
+            changes = local('git diff --name-only %s | cat' % simpleMatch.group(1), capture=True).split("\n")
+        else:
+            changes = local('git diff --name-only %s %s | cat' % (match.group(1), match.group(2)), capture=True).split("\n")
 
-       for change in changes:
-           match = re.search('^docker-compose.yml', change)
+        for change in changes:
+            match = re.search('^docker-compose.yml', change)
 
-           if match is None:
-               match = re.search('^infrastructure/services', change)
+            if match is None:
+                match = re.search('^infrastructure/services', change)
 
-           if match is not None:
-               change_in_infrastructure = True
+            if match is not None:
+                change_in_infrastructure = True
 
     if change_in_infrastructure or create_fresh_cache:
         env.compose('build')

@@ -7,12 +7,12 @@ Feature: Registration
     And I visited "home page"
     When I press "Inscription"
     And I fill in the following:
-    | _username             | Naruto42             |
-    | _email                | naruto42@gmail.com   |
-    | _password             | narutoisthebest      |
-    | _zipcode              | 94123                |
-    And I select "Citoyen" from "_user_type"
-    And I check "_charte"
+    | username             | Naruto42             |
+    | email                | naruto42@gmail.com   |
+    | password             | narutoisthebest      |
+    | zipcode              | 94123                |
+    And I select "Citoyen" from "user_type"
+    And I check "charte"
     And I press "S'inscrire"
     Then I wait 5 seconds
     Then I can see I am logged in as "Naruto42"
@@ -23,10 +23,10 @@ Feature: Registration
     And I visited "home page"
     When I press "Inscription"
     And I fill in the following:
-      | _username             | Naruto42             |
-      | _email                | naruto42@gmail.com   |
-      | _password             | narutoisthebest      |
-    And I check "_charte"
+      | username             | Naruto42             |
+      | email                | naruto42@gmail.com   |
+      | password             | narutoisthebest      |
+    And I check "charte"
     And I press "S'inscrire"
     Then I wait 5 seconds
     Then I can see I am logged in as "Naruto42"
@@ -37,10 +37,10 @@ Feature: Registration
     And I visited "home page"
     When I press "Inscription"
     And I fill in the following:
-    | _username             | p                    |
-    | _email                | poupouil.com         |
-    | _password             | 1234                 |
-    | _zipcode              | 94                   |
+    | username             | p                    |
+    | email                | poupouil.com         |
+    | password             | 1234                 |
+    | zipcode              | 94                   |
     And I press "S'inscrire"
     Then I should see "Le nom doit faire au moins 2 caractères."
     And I should see "Cet email n'est pas valide."
