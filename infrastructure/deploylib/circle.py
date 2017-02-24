@@ -65,11 +65,15 @@ def save_fixtures_image(tag='latest'):
 def save_cache():
     "Rebuild infrastructure and save cache"
     compare_url = local('echo $CIRCLE_COMPARE_URL', capture=True)
+    cache_dir_is_present = os.path.exists('~/docker')
+
+    commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
+    create_fresh_cache = not cache_dir_is_present or re.search('\[fresh-cache\]', commit_message)
 
     simpleMatch = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)$', compare_url)
     match = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)\.\.\.([a-z0-9]+?)$', compare_url)
 
-    if simpleMatch is None and match is None:
+    if not create_fresh_cache and simpleMatch is None and match is None:
         return
 
     if simpleMatch is not None:
@@ -88,7 +92,7 @@ def save_cache():
         if match is not None:
             change_in_infrastructure = True
 
-    if change_in_infrastructure or not os.path.exists('~/docker'):
+    if change_in_infrastructure or create_fresh_cache:
         env.compose('build')
         local('docker pull elasticsearch:1.7.3')
         local('docker pull redis:3')
