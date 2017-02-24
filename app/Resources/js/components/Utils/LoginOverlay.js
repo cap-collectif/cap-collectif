@@ -3,7 +3,6 @@ import React, { PropTypes, cloneElement } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import LoginModal from '../User/Login/LoginModal';
 import RegistrationModal from '../User/Registration/RegistrationModal';
 import { showLoginModal } from '../../redux/modules/user';
 import type { State, Dispatch } from '../../types';
@@ -87,7 +86,6 @@ export const LoginOverlay = React.createClass({
        >
          { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
-       <LoginModal />
        <RegistrationModal
          show={showRegistration}
          onClose={this.handleRegistrationClose}

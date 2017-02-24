@@ -53,6 +53,7 @@ class QuestionnairesController extends FOSRestController
             $questions = $questionnaire->getRealQuestions();
             $rankingQuestions = [];
             $choiceQuestions = [];
+            $multipleQuestions = [];
             foreach ($questions as $question) {
                 $type = $question->getInputType();
                 if ($type === 'ranking') {
@@ -60,6 +61,9 @@ class QuestionnairesController extends FOSRestController
                 }
                 if ($type === 'radio' || $type === 'select') {
                     $choiceQuestions[] = $question;
+                }
+                if ($type === 'checkbox') {
+                    $multipleQuestions[] = $question;
                 }
             }
             foreach ($rankingQuestions as $rakingQuestion) {
@@ -89,6 +93,28 @@ class QuestionnairesController extends FOSRestController
                 $results[] = [
               'questionnaire_id' => $questionnaire->getId(),
               'question_title' => $rakingQuestion->getTitle(),
+              'scores' => $scores,
+            ];
+            }
+            foreach ($multipleQuestions as $multipleQuestion) {
+                $questionChoices = $multipleQuestion->getQuestionChoices();
+                $choices = $questionChoices->map(function ($choice) {
+                    return $choice->getTitle();
+                })->toArray();
+                $scores = array_combine($choices, array_map(function ($h) {
+                    return 0;
+                }, $choices));
+                foreach ($multipleQuestion->getResponses() as $response) {
+                    $reply = $response->getReply();
+                    if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                        foreach ($response->getValue()['labels'] as $label) {
+                            $scores[$label] += 1;
+                        }
+                    }
+                }
+                $results[] = [
+              'questionnaire_id' => $questionnaire->getId(),
+              'question_title' => $multipleQuestion->getTitle(),
               'scores' => $scores,
             ];
             }

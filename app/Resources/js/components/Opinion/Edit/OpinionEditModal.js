@@ -40,7 +40,7 @@ export const OpinionEditModal = React.createClass({
 
   render() {
     const { isSubmitting } = this.state;
-    const { onClose, show, opinion, step } = this.props;
+    const { onClose, show, opinion } = this.props;
     return (
       <Modal
         animation={false}
@@ -64,7 +64,6 @@ export const OpinionEditModal = React.createClass({
             opinion={opinion}
             onSubmitSuccess={this.handleSubmitSuccess}
             onFailure={this.stopSubmit}
-            step={step}
           />
         </Modal.Body>
         <Modal.Footer>
