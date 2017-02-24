@@ -76,12 +76,12 @@ const FlashMessages = React.createClass({
       return (
         <div className="flashmessages">
           {
-            errors && errors.map((message: string, index: number): ?React$Element<> => {
+            errors && errors.map((message: string, index: number) => {
               return this.renderMessage(index, message, 'warning');
             })
           }
           {
-            success && success.map((message: string, index: number): ?React$Element<> => {
+            success && success.map((message: string, index: number) => {
               return this.renderMessage(index, message, 'success');
             })
           }
