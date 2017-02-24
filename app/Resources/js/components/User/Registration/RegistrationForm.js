@@ -94,7 +94,7 @@ export const RegistrationForm = React.createClass({
     const dynamicsField = [];
     if (features.user_type) {
       dynamicsField.push({
-        id: 'user_type',
+        id: '_user_type',
         name: 'userType',
         type: 'select',
         inputClassName: 'null',
@@ -111,7 +111,7 @@ export const RegistrationForm = React.createClass({
     }
     if (features.zipcode_at_register) {
       dynamicsField.push({
-        id: 'zipcode',
+        id: '_zipcode',
         name: 'zipcode',
         type: 'text',
         label: (
@@ -137,7 +137,7 @@ export const RegistrationForm = React.createClass({
             label: this.getIntlMessage('registration.username'),
             labelClassName: 'h5',
             type: 'text',
-            id: 'username',
+            id: '_username',
             autoComplete: 'username',
           },
           {
@@ -145,7 +145,7 @@ export const RegistrationForm = React.createClass({
             label: this.getIntlMessage('global.email'),
             labelClassName: 'h5',
             type: 'email',
-            id: 'email',
+            id: '_email',
             popover: {
               id: 'registration-email-tooltip',
               message: this.getIntlMessage('registration.tooltip.email'),
@@ -165,26 +165,26 @@ export const RegistrationForm = React.createClass({
             autoComplete: 'new-password',
           },
         ]
-          .concat(dynamicsField)
-          .concat([
-            {
-              id: 'charte',
-              name: 'charte',
-              type: 'checkbox',
-              label: (
-                <FormattedHTMLMessage
-                  message={this.getIntlMessage('registration.charte')}
-                  link={<a className="external-link" href={cguLink}>{cguName}</a>}
-                />
-              ),
-              labelClassName: 'h5',
-            },
-            {
-              id: 'captcha',
-              name: 'captcha',
-              type: 'captcha',
-            },
-          ])
+        .concat(dynamicsField)
+        .concat([
+          {
+            id: '_charte',
+            name: 'charte',
+            type: 'checkbox',
+            label: (
+              <FormattedHTMLMessage
+                message={this.getIntlMessage('registration.charte')}
+                link={<a className="external-link" href={cguLink}>{cguName}</a>}
+              />
+            ),
+            labelClassName: 'h5',
+          },
+          {
+            id: '_captcha',
+            name: 'captcha',
+            type: 'captcha',
+          },
+        ])
         }
       />
     );

@@ -37,7 +37,7 @@ describe('<RegistrationForm />', () => {
         label: 'Nom ou pseudonyme',
         labelClassName: 'h5',
         type: 'text',
-        id: 'username',
+        id: '_username',
         autoComplete: 'username',
       },
     );
@@ -51,7 +51,7 @@ describe('<RegistrationForm />', () => {
         label: 'Adresse électronique',
         labelClassName: 'h5',
         type: 'email',
-        id: 'email',
+        id: '_email',
         popover: {
           id: 'registration-email-tooltip',
           message: 'Vous recevrez un e-mail contenant un lien permettant de confirmer qu\'il s\'agit bien de votre adresse.',
@@ -87,7 +87,7 @@ describe('<RegistrationForm />', () => {
         name: 'userType',
         type: 'select',
         labelClassName: 'h5',
-        id: 'user_type',
+        id: '_user_type',
         options: [
           {
             label: 'type_1',
@@ -108,7 +108,7 @@ describe('<RegistrationForm />', () => {
         name: 'charte',
         labelClassName: 'h5',
         type: 'checkbox',
-        id: 'charte',
+        id: '_charte',
       },
     );
     expect(checkbox.label).toBeDefined();
