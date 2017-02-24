@@ -425,7 +425,6 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
 
 function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, *> {
   const { proposalForm } = action;
-  // $FlowFixMe
   const globalState = yield select();
   const formData = new FormData();
   const data = { ...globalState.form.proposal.values };
@@ -452,7 +451,6 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
-  // $FlowFixMe
   const globalState = yield select();
   step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   const state = globalState.proposal;
@@ -503,7 +501,6 @@ export function* fetchSelections(action: LoadSelectionsAction): Generator<*, *, 
 
 export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
   const { filter, value } = action;
-  // $FlowFixMe
   const state = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
   const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
@@ -513,7 +510,6 @@ export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generat
 
 export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
   const { order } = action;
-  // $FlowFixMe
   const state = yield select();
   const orderByStep = LocalStorageService.get('proposal.orderByStep') || {};
   orderByStep[state.project.currentProjectStepById] = order;

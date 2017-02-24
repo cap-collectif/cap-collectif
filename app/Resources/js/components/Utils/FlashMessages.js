@@ -25,7 +25,7 @@ const FlashMessages = React.createClass({
     };
   },
 
-  renderText(message: string | Object): string | void {
+  renderText(message: string | Object): React$Element<> | string | void {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {

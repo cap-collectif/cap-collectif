@@ -82,7 +82,6 @@ export function* fetchStepsSaga(action: RequestLoadStepsAction): Generator<*, *,
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
   try {
-    // $FlowFixMe
     const globalState: GlobalState = yield select();
     const state = globalState.project;
     const queryStrings = {
