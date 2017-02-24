@@ -65,33 +65,32 @@ def save_fixtures_image(tag='latest'):
 @task(environments=['testing'])
 def save_cache():
     "Rebuild infrastructure and save cache"
-    compare_url = local('echo $CIRCLE_COMPARE_URL', capture=True)
     cache_dir_is_present = os.path.exists('~/docker')
-
     commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
     create_fresh_cache = not cache_dir_is_present or re.search('\[fresh-cache\]', commit_message)
+    change_in_infrastructure = False
 
+    compare_url = local('echo $CIRCLE_COMPARE_URL', capture=True)
     simpleMatch = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)$', compare_url)
     match = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)\.\.\.([a-z0-9]+?)$', compare_url)
 
     if not create_fresh_cache and simpleMatch is None and match is None:
         return
 
-    if simpleMatch is not None:
-        changes = local('git diff --name-only %s | cat' % simpleMatch.group(1), capture=True).split("\n")
-    else:
-        changes = local('git diff --name-only %s %s | cat' % (match.group(1), match.group(2)), capture=True).split("\n")
+    if not create_fresh_cache:
+       if simpleMatch is not None:
+           changes = local('git diff --name-only %s | cat' % simpleMatch.group(1), capture=True).split("\n")
+       else:
+           changes = local('git diff --name-only %s %s | cat' % (match.group(1), match.group(2)), capture=True).split("\n")
 
-    change_in_infrastructure = False
+       for change in changes:
+           match = re.search('^docker-compose.yml', change)
 
-    for change in changes:
-        match = re.search('^docker-compose.yml', change)
+           if match is None:
+               match = re.search('^infrastructure/services', change)
 
-        if match is None:
-            match = re.search('^infrastructure/services', change)
-
-        if match is not None:
-            change_in_infrastructure = True
+           if match is not None:
+               change_in_infrastructure = True
 
     if change_in_infrastructure or create_fresh_cache:
         env.compose('build')
