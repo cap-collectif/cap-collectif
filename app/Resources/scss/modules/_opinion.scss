@@ -3,7 +3,6 @@
 ================================================================*/
 .opinion {
 
-    background-color: $white;
     font-size: 15px;
 
     &:hover {
@@ -22,7 +21,7 @@
         $color: nth($type, 2);
         $text: set-link-text-color($color);
 
-        &.opinion--#{$name} .opinion__header {
+        &.opinion--#{$name} {
             background-color: $color;
             color: $text;
         }
