@@ -2,63 +2,9 @@
 
 {% set showVotesWidget = currentStep.slug is defined and not currentStep.isPresentationStep() and capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
-{% set projectSteps = [] %}
-
-{% for step in project.steps if step.step.isEnabled %}
-    {% set stepStatuses = [] %}
-    {% for status in step.step.statuses %}
-      {%
-        set stepStatuses = stepStatuses|merge([
-          {
-            'id': status.id,
-            'name': status.name
-          }
-        ])
-      %}
-    {% endfor %}
-    {%
-    set projectSteps = projectSteps|merge([{
-      'id': step.step.id,
-      'title': step.step.title,
-      'body': step.step.body,
-      'startAt': step.step.startAt ? step.step.startAt|localizeddate('medium', 'none') : null,
-      'endAt': step.step.endAt ? step.step.endAt|localizeddate('medium', 'none') : null,
-      'position': step.step.position,
-      'type': step.step.getType(),
-      'showProgressSteps': step.step.allowingProgressSteps|default(false),
-      'statuses': stepStatuses,
-      'open': step.step.open,
-      'voteThreshold': step.step.voteThreshold|default(null),
-      'votesHelpText': step.step.votesHelpText|default(null),
-      'votesLimit': step.step.votesLimit|default(null),
-      'votable': step.step.isVotable()|default(false),
-      'voteType': step.step.voteType|default(0),
-      'budget': step.step.budget|default(null),
-      'timeless': step.step.isTimeless()|default(false),
-      'isPrivate': step.step.isPrivate()|default(false),
-      'titleHelpText': step.step.titleHelpText|default(null),
-      'descriptionHelpText': step.step.descriptionHelpText|default(null),
-      '_links': {
-        'show': step.step.getType() == 'other' ? '' : path('app_project_show_'~ step.step.getType(), {'projectSlug': project.slug, 'stepSlug': step.step.slug})
-      }
-    }])
-    %}
-{% endfor %}
-{% set state = {
-  'project': {
-    'currentProjectStepById': currentStep.id|default(null),
-    'currentProjectById': project.id,
-    'projects': {
-      (project.id) : {
-        'slug': project.slug,
-        'steps': projectSteps
-      }
-    }
-  }
-} %}
 
 {% block reduxStore %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
 {% endblock %}
 
 {% block mainContent %}

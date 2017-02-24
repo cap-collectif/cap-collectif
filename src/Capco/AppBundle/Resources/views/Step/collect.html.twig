@@ -28,7 +28,7 @@
       'proposalShowedId': [],
     }
   } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : state|merge(initialState)} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState, 'project': project} %}
 {% endblock %}
 
 {% block title %}
