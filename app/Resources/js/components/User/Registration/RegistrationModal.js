@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
-import { LoginSocialButtons } from '../Login/LoginSocialButtons';
+import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 
@@ -45,7 +45,6 @@ export const RegistrationModal = React.createClass({
       onClose,
       show,
       parameters,
-      features,
     } = this.props;
     const textTop = parameters['signin.text.top'];
     const textBottom = parameters['signin.text.bottom'];
@@ -71,10 +70,6 @@ export const RegistrationModal = React.createClass({
               </Alert>
           }
           <LoginSocialButtons
-            features={{
-              login_facebook: features.login_facebook,
-              login_gplus: features.login_gplus,
-            }}
             prefix="registration."
           />
           <RegistrationForm
@@ -105,7 +100,6 @@ export const RegistrationModal = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  features: state.default.features,
   parameters: state.default.parameters,
   show: state.user.showRegistrationModal,
 });

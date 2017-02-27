@@ -157,6 +157,10 @@ export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'SHOW_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: true };
+    case 'CLOSE_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':

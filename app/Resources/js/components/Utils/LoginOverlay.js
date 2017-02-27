@@ -29,7 +29,15 @@ export const LoginOverlay = React.createClass({
 
   // We add Popover if user is not connected
   render() {
-    const { user, children, enabled, showRegistrationButton, isLoginOrRegistrationModalOpen, openRegistrationModal, openLoginModal } = this.props;
+    const {
+      user,
+      children,
+      enabled,
+      showRegistrationButton,
+      isLoginOrRegistrationModalOpen,
+      openRegistrationModal,
+      openLoginModal,
+    } = this.props;
 
     if (!enabled || user) {
       return children;
@@ -67,7 +75,7 @@ export const LoginOverlay = React.createClass({
          trigger="click"
          rootClose
          placement="top"
-         overlay={isLoginOrRegistrationModalOpen ? popover : null}
+         overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}
        >
          { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
