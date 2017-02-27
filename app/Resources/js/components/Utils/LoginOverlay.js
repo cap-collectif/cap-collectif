@@ -3,8 +3,7 @@ import React, { PropTypes, cloneElement } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import RegistrationModal from '../User/Registration/RegistrationModal';
-import { showLoginModal } from '../../redux/modules/user';
+import { showLoginModal, showRegistrationModal } from '../../redux/modules/user';
 import type { State, Dispatch } from '../../types';
 
 export const LoginOverlay = React.createClass({
@@ -14,7 +13,10 @@ export const LoginOverlay = React.createClass({
     children: PropTypes.element.isRequired,
     features: PropTypes.object.isRequired,
     enabled: PropTypes.bool,
+    isLoginOrRegistrationModalOpen: PropTypes.bool.isRequired,
+    showRegistrationButton: PropTypes.bool.isRequired,
     openLoginModal: PropTypes.func.isRequired,
+    openRegistrationModal: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -25,40 +27,30 @@ export const LoginOverlay = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      showRegistration: false,
-    };
-  },
-
-  popover: null,
-
-  handleRegistrationClick() {
-    this.setState({ showRegistration: true });
-  },
-
-  handleRegistrationClose() {
-    this.setState({ showRegistration: false });
-  },
-
   // We add Popover if user is not connected
   render() {
-    const { user, children, enabled, features, openLoginModal } = this.props;
-    const { showRegistration } = this.state;
+    const {
+      user,
+      children,
+      enabled,
+      showRegistrationButton,
+      isLoginOrRegistrationModalOpen,
+      openRegistrationModal,
+      openLoginModal,
+    } = this.props;
 
     if (!enabled || user) {
       return children;
     }
 
-    const popover = showRegistration
-      ? <span />
-      : (<Popover ref={c => this.popover = c} id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
+    const popover = (
+      <Popover id="login-popover" title={this.getIntlMessage('vote.popover.title')}>
         <p>{ this.getIntlMessage('vote.popover.body') }</p>
         {
-          features.registration &&
+          showRegistrationButton &&
             <p>
               <Button
-                onClick={this.handleRegistrationClick}
+                onClick={openRegistrationModal}
                 className="center-block btn-block"
               >
                 { this.getIntlMessage('global.registration') }
@@ -74,22 +66,19 @@ export const LoginOverlay = React.createClass({
             { this.getIntlMessage('global.login') }
           </Button>
         </p>
-      </Popover>)
-    ;
+      </Popover>
+    );
+
     return (
      <span>
        <OverlayTrigger
          trigger="click"
          rootClose
          placement="top"
-         overlay={popover}
+         overlay={isLoginOrRegistrationModalOpen ? <span /> : popover}
        >
          { cloneElement(children, { onClick: null }) }
        </OverlayTrigger>
-       <RegistrationModal
-         show={showRegistration}
-         onClose={this.handleRegistrationClose}
-       />
      </span>
     );
   },
@@ -97,11 +86,13 @@ export const LoginOverlay = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  features: state.default.features,
   user: state.user.user,
+  showRegistrationButton: state.default.features.registration,
+  isLoginOrRegistrationModalOpen: state.user.showLoginModal || state.user.showRegistrationModal,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   openLoginModal: () => { dispatch(showLoginModal()); },
+  openRegistrationModal: () => { dispatch(showRegistrationModal()); },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
