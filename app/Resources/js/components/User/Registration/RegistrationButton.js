@@ -3,7 +3,8 @@ import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
-import type { State } from '../../../types';
+import { showRegistrationModal } from '../../../redux/modules/user';
+import type { State, Dispatch } from '../../../types';
 
 export const RegistrationButton = React.createClass({
   propTypes: {
@@ -13,6 +14,7 @@ export const RegistrationButton = React.createClass({
     className: PropTypes.string,
     bsStyle: PropTypes.string,
     buttonStyle: PropTypes.object,
+    openRegistrationModal: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -26,20 +28,6 @@ export const RegistrationButton = React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      show: false,
-    };
-  },
-
-  handleClick() {
-    this.setState({ show: true });
-  },
-
-  handleClose() {
-    this.setState({ show: false });
-  },
-
   render() {
     const {
       bsStyle,
@@ -48,6 +36,7 @@ export const RegistrationButton = React.createClass({
       features,
       style,
       user,
+      openRegistrationModal,
     } = this.props;
     if (!features.registration || !!user) {
       return null;
@@ -56,16 +45,13 @@ export const RegistrationButton = React.createClass({
       <span style={style}>
         <Button
           style={buttonStyle}
-          onClick={this.handleClick}
+          onClick={openRegistrationModal}
           bsStyle={bsStyle}
           className={`navbar-btn btn--registration ${className}`}
         >
           { this.getIntlMessage('global.registration') }
         </Button>
-        <RegistrationModal
-          show={this.state.show}
-          onClose={this.handleClose}
-        />
+        <RegistrationModal />
       </span>
     );
   },
@@ -76,5 +62,8 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  openRegistrationModal: () => { dispatch(showRegistrationModal()); },
+});
 
-export default connect(mapStateToProps)(RegistrationButton);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationButton);

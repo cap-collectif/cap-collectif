@@ -6,6 +6,8 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm from './RegistrationForm';
 import { LoginSocialButtons } from '../Login/LoginSocialButtons';
+import { closeRegistrationModal } from '../../../redux/modules/user';
+import type { State, Dispatch } from '../../../types';
 
 export const RegistrationModal = React.createClass({
   propTypes: {
@@ -64,9 +66,9 @@ export const RegistrationModal = React.createClass({
         <Modal.Body>
           {
             textTop &&
-            <Alert bsStyle="info" className="text-center">
-              <FormattedHTMLMessage message={textTop} />
-            </Alert>
+              <Alert bsStyle="info" className="text-center">
+                <FormattedHTMLMessage message={textTop} />
+              </Alert>
           }
           <LoginSocialButtons
             features={{
@@ -82,9 +84,9 @@ export const RegistrationModal = React.createClass({
           />
           {
             textBottom &&
-            <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-              <FormattedHTMLMessage message={textBottom} />
-            </div>
+              <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
+                <FormattedHTMLMessage message={textBottom} />
+              </div>
           }
         </Modal.Body>
         <Modal.Footer>
@@ -102,11 +104,14 @@ export const RegistrationModal = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.default.features,
-    parameters: state.default.parameters,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+  parameters: state.default.parameters,
+  show: state.user.showRegistrationModal,
+});
 
-export default connect(mapStateToProps)(RegistrationModal);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onClose: () => { dispatch(closeRegistrationModal()); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);

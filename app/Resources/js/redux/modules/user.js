@@ -7,6 +7,7 @@ import type { Dispatch, Action } from '../../types';
 
 export type State = {
   showLoginModal: boolean,
+  showRegistrationModal: boolean,
   isSubmittingAccountForm: boolean,
   showConfirmPasswordModal: boolean,
   confirmationEmailResent: boolean,
@@ -27,6 +28,8 @@ export type State = {
   }
 };
 
+type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
+type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
@@ -37,6 +40,8 @@ type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
 export type SubmitConfirmPasswordAction = { type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: string };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 export type UserAction =
+    ShowRegistrationModalAction |
+    CloseRegistrationModalAction |
     ShowLoginModalAction |
     CloseLoginModalAction |
     StartSubmittingAccountFormAction |
@@ -50,12 +55,15 @@ export type UserAction =
 
 const initialState : State = {
   showLoginModal: false,
+  showRegistrationModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   user: null,
 };
 
+export const showRegistrationModal = (): ShowRegistrationModalAction => ({ type: 'SHOW_REGISTRATION_MODAL' });
+export const closeRegistrationModal = (): CloseRegistrationModalAction => ({ type: 'CLOSE_REGISTRATION_MODAL' });
 export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({ type: 'SHOW_CONFIRM_PASSWORD_MODAL' });
