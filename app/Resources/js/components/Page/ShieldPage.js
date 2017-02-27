@@ -27,10 +27,10 @@ export const Shield = React.createClass({
     const { showRegistration, submitting, dispatch }: Props = this.props;
     if (showRegistration) {
       return (
-        <div className="col-md-4 col-md-offset-4">
-          <LoginButton className="btn--connection" />
+        <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 block box block--bordered">
+          <LoginButton className="btn--connection btn-block" />
           { ' ' }
-          <RegistrationButton />
+          <RegistrationButton className="btn-block" />
         </div>
       );
     }
