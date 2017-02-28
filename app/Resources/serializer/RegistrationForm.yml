@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\RegistrationForm:
+    exclusion_policy: ALL
+    virtual_properties:
+        getRealQuestions:
+            serialized_name: fields
+            type: array
+            groups: [Default, Questions]

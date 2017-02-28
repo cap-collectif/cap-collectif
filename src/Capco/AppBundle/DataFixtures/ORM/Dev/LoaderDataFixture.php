@@ -13,6 +13,8 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__.'/MediaCategory.yml',
             __DIR__.'/Media.yml',
 
+            __DIR__.'/RegistrationForm.yml',
+
             __DIR__.'/UserType.yml',
             __DIR__.'/User.yml',
 
