@@ -8,7 +8,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import type { Dispatch, Action } from '../../types';
+import type { State as GlobalState, Dispatch, Action } from '../../types';
 
 const PROPOSAL_PAGINATION = 20;
 
@@ -425,7 +425,7 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
 
 function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, *> {
   const { proposalForm } = action;
-  const globalState = yield select();
+  const globalState: GlobalState = yield select();
   const formData = new FormData();
   const data = { ...globalState.form.proposal.values };
   delete data.project;
@@ -451,7 +451,7 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
-  const globalState = yield select();
+  const globalState: GlobalState = yield select();
   step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   const state = globalState.proposal;
   let url = '';
@@ -501,7 +501,7 @@ export function* fetchSelections(action: LoadSelectionsAction): Generator<*, *, 
 
 export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
   const { filter, value } = action;
-  const state = yield select();
+  const state: GlobalState = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
   const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
   filtersByStep[state.project.currentProjectStepById] = filters;
