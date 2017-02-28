@@ -46,7 +46,7 @@ snc_redis:
     session:
         client: session
         ttl: 1209600 # Two weeks
-        prefix: session_"%kernel.environment%"_ # We add env in prefix to allow multi environments sessions in dev
+        prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
         locking: true # Not using locking improve performance, but may cause bugs
 
 twig:
