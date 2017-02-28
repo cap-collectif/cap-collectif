@@ -9,7 +9,7 @@ import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
 import { login } from '../../../redux/modules/user';
 
-export const validate = (values) => {
+export const validate = (values, props) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
@@ -29,9 +29,13 @@ export const validate = (values) => {
   if (!values.captcha && (window && window.location.host !== 'capco.test')) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
+  for (const field of props.dynamicFields) {
+    if (field.required && !values[`dynamic-${field.id}`]) {
+      errors[`dynamic-${field.id}`] = 'global.required';
+    }
+  }
   return errors;
 };
-
 
 export const RegistrationForm = React.createClass({
   propTypes: {
@@ -41,15 +45,32 @@ export const RegistrationForm = React.createClass({
     parameters: PropTypes.object.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFail: PropTypes.func.isRequired,
+    dynamicFields: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   handleSubmit(values) {
     const form = Object.assign({}, values);
     delete form.charte;
+    const apiForm = {};
+    const responses = [];
+    Object.keys(form).map((key) => {
+      if (key.startWith('dynamic-')) {
+        const question = key.split('-')[1];
+        if (typeof form[key] !== 'undefined' && form[key].length > 0) {
+          responses.push({
+            question,
+            value: form[key],
+          });
+        }
+      }
+    });
+    if (responses.length) {
+      apiForm.responses = responses;
+    }
     return new Promise((resolve, reject) => {
       UserActions
-      .register(form)
+      .register(apiForm)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
@@ -88,7 +109,7 @@ export const RegistrationForm = React.createClass({
   },
 
   render() {
-    const { features, userTypes, parameters, onSubmitSuccess } = this.props;
+    const { dynamicFields, features, userTypes, parameters, onSubmitSuccess } = this.props;
     const cguName = parameters['signin.cgu.name'];
     const cguLink = parameters['signin.cgu.link'];
     const dynamicsField = [];
@@ -123,6 +144,21 @@ export const RegistrationForm = React.createClass({
         autoComplete: 'postal-code',
       });
     }
+    dynamicFields.forEach((field) => {
+      dynamicsField.push({
+        id: field.id,
+        name: `dynamic-${field.id}`,
+        type: field.type,
+        label: (
+          <span>
+            {field.question} {
+              !field.required && <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+            }
+          </span>
+        ),
+        labelClassName: 'h5',
+      });
+    });
     return (
       <Form
         form="registration-form"
@@ -131,6 +167,7 @@ export const RegistrationForm = React.createClass({
         onSubmit={this.handleSubmit}
         onSubmitFail={this.handleSubmitFail}
         onSubmitSuccess={onSubmitSuccess}
+        dynamicFields={dynamicFields}
         fields={[
           {
             name: 'username',
@@ -192,12 +229,11 @@ export const RegistrationForm = React.createClass({
 
 });
 
-const mapStateToProps = (state: State) => {
-  return {
-    features: state.default.features,
-    userTypes: state.default.userTypes,
-    parameters: state.default.parameters,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+  userTypes: state.default.userTypes,
+  parameters: state.default.parameters,
+  dynamicFields: state.user.registration_form_fields,
+});
 
 export default connect(mapStateToProps, null, null, { withRef: true })(RegistrationForm);

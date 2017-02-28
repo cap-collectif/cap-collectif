@@ -20,6 +20,7 @@ describe('<RegistrationForm />', () => {
       user_type: false,
       zipcode_at_register: false,
     },
+    dynamicFields: [],
   };
 
   it('renders a form with inputs and a captcha', () => {

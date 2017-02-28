@@ -79,7 +79,13 @@ Feature: Users
       "username": "user2",
       "email": "user2@test.com",
       "plainPassword": "supersecureuserpass",
-      "captcha": "fakekey"
+      "captcha": "fakekey",
+      "responses": [
+        {
+          "question": 6,
+          "value": "Réponse à la question obligatoire"
+        }
+      ]
     }
     """
     Then the JSON response status code should be 201
@@ -100,7 +106,7 @@ Feature: Users
       Then the JSON response should match:
       """
       {
-        "code":400,
+        "code": 400,
         "message":"Validation Failed",
         "errors":{
           "children":{
@@ -109,7 +115,8 @@ Feature: Users
               "errors": ["email.throwable"]
             },
             "plainPassword":[],
-            "captcha":[]
+            "captcha":[],
+            "responses": []
           }
         }
       }
@@ -141,7 +148,8 @@ Feature: Users
             "username":[],
             "email":[],
             "plainPassword":[],
-            "captcha":[]
+            "captcha":[],
+            "responses": []
           }
         }
       }
@@ -158,7 +166,13 @@ Feature: Users
         "plainPassword": "supersecureuserpass",
         "captcha": "fakekey",
         "userType": 1,
-        "zipcode": "99999"
+        "zipcode": "99999",
+        "responses": [
+          {
+            "question": 6,
+            "value": "Réponse à la question obligatoire"
+          }
+        ]
       }
       """
       Then the JSON response status code should be 201

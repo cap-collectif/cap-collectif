@@ -43,3 +43,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     proposalForm: '@proposalform1'
     question: '@mediaquestion2'
     position: 4
+  qaq12:
+    registrationForm: '@registrationForm'
+    question: '@simplequestion6'
+    position: 1
+  qaq13:
+    registrationForm: '@registrationForm'
+    question: '@simplequestion7'
+    position: 2

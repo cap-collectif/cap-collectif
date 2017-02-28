@@ -2,12 +2,14 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\MediaBundle\Entity\Media;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -267,6 +269,40 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $newEmailToConfirm = null;
     protected $newEmailConfirmationToken = null;
 
+    private $responses;
+
+    public function addResponse(AbstractResponse $response): self
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses[] = $response;
+            $response->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(AbstractResponse $response): self
+    {
+        $this->responses->removeElement($response);
+
+        return $this;
+    }
+
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function setResponses(Collection $responses): self
+    {
+        $this->responses = $responses;
+        foreach ($responses as $response) {
+            $response->setUser($this);
+        }
+
+        return $this;
+    }
+
     public function getNewEmailToConfirm()
     {
         return $this->newEmailToConfirm;
@@ -307,6 +343,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->roles = ['ROLE_USER'];
         $this->opinions = new ArrayCollection();
         $this->opinionVersions = new ArrayCollection();
+        $this->responses = new ArrayCollection();
         $this->ideas = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->arguments = new ArrayCollection();

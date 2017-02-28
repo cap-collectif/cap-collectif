@@ -3,6 +3,8 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Capco\AppBundle\Form\ValueResponseType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,10 +13,12 @@ use Capco\AppBundle\Toggle\Manager;
 class ApiRegistrationFormType extends AbstractType
 {
     private $toggleManager;
+    private $transformer;
 
-    public function __construct(Manager $toggleManager)
+    public function __construct(Manager $toggleManager, $transformer)
     {
         $this->toggleManager = $toggleManager;
+        $this->transformer = $transformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -34,6 +38,16 @@ class ApiRegistrationFormType extends AbstractType
         if ($this->toggleManager->isActive('zipcode_at_register')) {
             $builder->add('zipcode', null, ['required' => false]);
         }
+
+        $builder
+            ->add('responses', CollectionType::class, [
+                'allow_add' => true,
+                'allow_delete' => false,
+                'by_reference' => false,
+                'type' => new ValueResponseType($this->transformer),
+                'required' => false,
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

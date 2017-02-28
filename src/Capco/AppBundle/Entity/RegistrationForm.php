@@ -14,7 +14,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="registration_form")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
 class RegistrationForm
 {
