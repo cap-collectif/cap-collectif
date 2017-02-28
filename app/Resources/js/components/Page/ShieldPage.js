@@ -27,34 +27,39 @@ export const Shield = React.createClass({
     const { showRegistration, submitting, dispatch }: Props = this.props;
     if (showRegistration) {
       return (
-        <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 block box block--bordered">
-          <LoginButton className="btn--connection btn-block" />
-          { ' ' }
-          <RegistrationButton className="btn-block" />
+        <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+          <div className="panel-body">
+            <LoginButton className="btn--connection btn-block" />
+            { ' ' }
+            <RegistrationButton className="btn-block" />
+          </div>
         </div>
       );
     }
     return (
-      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 block box block--bordered">
-        <form id="login-form" onSubmit={(e: Event) => {
-          e.preventDefault();
-          dispatch(submit('login'));
-        }}>
-          <LoginBox />
-          <Button
-            id="confirm-login"
-            type="submit"
-            className="btn-block btn-success"
-            disabled={submitting}
-            bsStyle="primary"
-          >
-            {
-              submitting
-              ? this.getIntlMessage('global.loading')
-              : this.getIntlMessage('global.login_me')
-            }
-          </Button>
-        </form>
+      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+        <div className="panel-body">
+          <form id="login-form" onSubmit={(e: Event) => {
+            e.preventDefault();
+            dispatch(submit('login'));
+          }}>
+            <LoginBox />
+            <Button
+              id="confirm-login"
+              type="submit"
+              style={{ marginTop: 10 }}
+              className="btn-block btn-success"
+              disabled={submitting}
+              bsStyle="primary"
+            >
+              {
+                submitting
+                ? this.getIntlMessage('global.loading')
+                : this.getIntlMessage('global.login_me')
+              }
+            </Button>
+          </form>
+        </div>
       </div>
     );
   },

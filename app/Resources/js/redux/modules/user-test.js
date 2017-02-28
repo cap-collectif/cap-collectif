@@ -14,7 +14,6 @@ import type { State } from './user';
 
 const initialState : State = {
   showLoginModal: false,
-  showRegistrationModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
