@@ -47,7 +47,7 @@ snc_redis:
         client: session
         ttl: 1209600 # Two weeks
         prefix: "%kernel.environment%" # required for multi environments
-        locking: false
+        locking: true # Not using locking improve performance, but may cause bugs
 
 twig:
     debug: "%kernel.debug%"
