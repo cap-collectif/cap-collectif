@@ -27,6 +27,11 @@ class Version20170228175653 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_3D2575641F87CEDB ON questionnaire_abstractquestion (registration_form_id)');
     }
 
+    public function postUp(Schema $schema)
+    {
+        $this->connection->insert('registration_form', []);
+    }
+
     /**
      * @param Schema $schema
      */
