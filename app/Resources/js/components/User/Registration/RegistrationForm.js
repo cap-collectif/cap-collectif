@@ -50,12 +50,12 @@ export const RegistrationForm = React.createClass({
   mixins: [IntlMixin],
 
   handleSubmit(values) {
-    const form = Object.assign({}, values);
+    const form = { ...values };
     delete form.charte;
-    const apiForm = {};
     const responses = [];
+    const apiForm = {};
     Object.keys(form).map((key) => {
-      if (key.startWith('dynamic-')) {
+      if (key.startsWith('dynamic-')) {
         const question = key.split('-')[1];
         if (typeof form[key] !== 'undefined' && form[key].length > 0) {
           responses.push({
@@ -63,6 +63,8 @@ export const RegistrationForm = React.createClass({
             value: form[key],
           });
         }
+      } else {
+        apiForm[key] = form[key];
       }
     });
     if (responses.length) {
