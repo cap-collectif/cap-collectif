@@ -6,6 +6,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": Object {
     "newEmailToConfirm": null,
   },
@@ -18,6 +19,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": null,
 }
 `;
@@ -28,6 +30,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": true,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": null,
 }
 `;
@@ -38,6 +41,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": null,
 }
 `;
@@ -48,6 +52,7 @@ Object {
   "isSubmittingAccountForm": true,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": null,
 }
 `;
@@ -58,6 +63,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": null,
 }
 `;
@@ -68,6 +74,7 @@ Object {
   "isSubmittingAccountForm": false,
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
+  "showRegistrationModal": false,
   "user": Object {
     "newEmailToConfirm": "popo@gmail.com",
   },

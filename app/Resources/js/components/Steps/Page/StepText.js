@@ -1,5 +1,4 @@
 import React from 'react';
-/* import ReactDOM from 'react-dom'; */
 import { FormattedHTMLMessage } from 'react-intl';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 
@@ -40,7 +39,7 @@ const StepText = React.createClass({
     };
     return (
       <div className="step__intro" >
-        <div className="opinion  opinion--current  opinion--default">
+        <div style={{ fontSize: 15 }}>
           <div className="box">
             <div ref="content" className="step__intro__content" style={style}>
               <FormattedHTMLMessage message={text} />

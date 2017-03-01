@@ -8,6 +8,7 @@ import IntlData from '../../../translations/FR';
 describe('<RegistrationButton />', () => {
   const props = {
     ...IntlData,
+    openRegistrationModal: jest.fn(),
   };
 
   const style = { marginTop: '0' };

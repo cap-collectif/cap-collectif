@@ -8,6 +8,9 @@ describe('<LoginOverlay />', () => {
   const props = {
     ...IntlData,
     openLoginModal: jest.fn(),
+    isLoginOrRegistrationModalOpen: false,
+    showRegistrationButton: false,
+    openRegistrationModal: jest.fn(),
   };
 
   it('renders children if not enabled', () => {
