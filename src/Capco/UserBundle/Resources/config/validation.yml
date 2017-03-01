@@ -1,6 +1,5 @@
 Capco\UserBundle\Entity\User:
   constraints:
-    - Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestions: { message: proposal.missing_required_responses, formField: registrationForm, groups: [registration] }
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: already_used_email, groups: [registration] }
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: phone, message: already_used_phone, groups: [registration, profile] }
   properties:

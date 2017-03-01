@@ -7,8 +7,6 @@ import IntlData from '../../translations/FR';
 describe('<LoginOverlay />', () => {
   const props = {
     ...IntlData,
-    isLoginOrRegistrationModalOpen: false,
-    openRegistrationModal: jest.fn(),
     openLoginModal: jest.fn(),
     isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,
@@ -17,7 +15,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders children if not enabled', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled={false} showRegistrationButton {...props}>
+      <LoginOverlay enabled={false} features={{ registration: true }} {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );
@@ -26,7 +24,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders children if user is logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={{}} showRegistrationButton {...props}>
+      <LoginOverlay enabled user={{}} features={{ registration: true }} {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );
@@ -35,7 +33,7 @@ describe('<LoginOverlay />', () => {
 
   it('renders popover if user is not logged', () => {
     const wrapper = shallow(
-      <LoginOverlay enabled user={null} showRegistrationButton {...props}>
+      <LoginOverlay enabled user={null} features={{ registration: true }} {...props}>
         <div className="foo" />
       </LoginOverlay>,
     );

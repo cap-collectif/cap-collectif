@@ -1,10 +1,4 @@
 services:
-  capco.has_required_responses.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator
-    arguments: ['@capco.registration_form.repository']
-    tags:
-      - { name: validator.constraint_validator, alias: has_required_responses.validator }
-
   capco.already_vote.validator:
     class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator
     arguments: ['@doctrine.orm.entity_manager']

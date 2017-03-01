@@ -5,9 +5,9 @@
     'features': features_list(),
     'userTypes': user_type_list()|default([]),
     'parameters': site_parameters_list(),
+    'isLoggedIn': app.user ? true : false,
   },
   'user': {
-    'registration_form_fields': registration_form_list_fields(),
     'user': app.user
       ? {
         'id': app.user.id,

@@ -8,32 +8,15 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Repository\RegistrationFormRepository;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
-    protected $formRepo;
-
-    public function __construct(RegistrationFormRepository $formRepo)
-    {
-        $this->formRepo = $formRepo;
-    }
-
-    private function getQuestions(Constraint $constraint, $object)
-    {
-        if ($constraint->formField === 'registrationForm') {
-            $form = $this->formRepo->findCurrent();
-            return $form->getQuestions();
-        }
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $form = $accessor->getValue($object, $constraint->formField);
-        return $form->getQuestions();
-    }
-
     public function validate($object, Constraint $constraint)
     {
-        $questions = $this->getQuestions($constraint, $object);
+        $accessor = PropertyAccess::createPropertyAccessor();
         $responses = $object->getResponses();
+        $form = $accessor->getValue($object, $constraint->formField);
+        $questions = $form->getQuestions();
         foreach ($questions as $qaq) {
             $question = $qaq->getQuestion();
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {

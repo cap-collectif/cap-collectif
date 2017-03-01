@@ -60,7 +60,8 @@ export type State = {
     themes: Array<Object>,
     features: FeatureToggles,
     userTypes: Array<Object>,
-    parameters: Object
+    parameters: Object,
+    isLoggedIn: boolean
   },
   idea: IdeaState,
   proposal: ProposalState,

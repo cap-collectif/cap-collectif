@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { SubmissionError, change } from 'redux-form';
+import UserActions from '../../../actions/UserActions';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
+import Form from '../../Form/Form';
 import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
-import { register as onSubmit } from '../../../redux/modules/user';
-import renderComponent from '../../Form/Field';
+import { login } from '../../../redux/modules/user';
 
-export const validate = (values, props) => {
+export const validate = (values) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
@@ -27,161 +29,175 @@ export const validate = (values, props) => {
   if (!values.captcha && (window && window.location.host !== 'capco.test')) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
-  for (const field of props.dynamicFields) {
-    if (field.required && !values[`dynamic-${field.id}`]) {
-      errors[`dynamic-${field.id}`] = 'global.required';
-    }
-  }
   return errors;
 };
 
-export const form = 'registration-form';
+
 export const RegistrationForm = React.createClass({
   propTypes: {
-    addUserTypeField: PropTypes.bool.isRequired,
-    addZipcodeField: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    features: PropTypes.object.isRequired,
     userTypes: PropTypes.array.isRequired,
-    cguLink: PropTypes.string.isRequired,
-    cguName: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    dynamicFields: PropTypes.array.isRequired,
+    parameters: PropTypes.object.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired,
+    onSubmitFail: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  render() {
-    const {
-      cguLink,
-      cguName,
-      dynamicFields,
-      addZipcodeField,
-      addUserTypeField,
-      userTypes,
-      handleSubmit,
-     } = this.props;
-    return (
-      <form onSubmit={handleSubmit}>
-        <Field
-          name="username"
-          id="username"
-          component={renderComponent}
-          type="text"
-          label={this.getIntlMessage('registration.username')}
-          labelClassName="h5"
-        />
-        <Field
-          name="email"
-          id="email"
-          component={renderComponent}
-          type="email"
-          label={this.getIntlMessage('global.email')}
-          labelClassName="h5"
-          popover={{
-            id: 'registration-email-tooltip',
-            message: this.getIntlMessage('registration.tooltip.email'),
-          }}
-        />
-        <Field
-          name="plainPassword"
-          id="password"
-          component={renderComponent}
-          type="password"
-          label={this.getIntlMessage('registration.password')}
-          labelClassName="h5"
-          popover={{
-            id: 'registration-password-tooltip',
-            message: this.getIntlMessage('registration.tooltip.password'),
-          }}
-        />
-        {
-          addUserTypeField &&
-            <Field
-              id="user_type"
-              name="userType"
-              component={renderComponent}
-              type="select"
-              label={
-                <span>
-                  {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                </span>
+  handleSubmit(values) {
+    const form = Object.assign({}, values);
+    delete form.charte;
+    return new Promise((resolve, reject) => {
+      UserActions
+      .register(form)
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+        });
+        login({ username: values.email, password: values.plainPassword }, this.props.dispatch);
+        resolve();
+      })
+      .catch((error) => {
+        const response = error.response;
+        const errors = { _error: 'Registration failed !' };
+        if (response.errors) {
+          if (response.errors.children.email.errors && response.errors.children.email.errors.length > 0) {
+            response.errors.children.email.errors.map((string) => {
+              if (string === 'already_used_email') {
+                errors.email = 'registration.constraints.email.already_used';
+              } else {
+                errors.email = `registration.constraints.${string}`;
               }
-              labelClassName="h5"
-            >
-              <option value="">{this.getIntlMessage('registration.select.type')}</option>
-              {
-                userTypes.map((type, i) => (<option key={i + 1} value={type.id}>{type.name}</option>))
-              }
-            </Field>
-        }
-        {
-          addZipcodeField &&
-            <Field
-              id="zipcode"
-              name="zipcode"
-              component={renderComponent}
-              type="text"
-              label={
-                <span>
-                  {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                </span>
-              }
-              labelClassName="h5"
-              autoComplete="postal-code"
-            />
-        }
-        {
-          dynamicFields.map(field => (
-            <Field
-              id={field.id}
-              name={`dynamic-${field.id}`}
-              component={renderComponent}
-              type={field.type}
-              label={
-                <span>
-                  {field.question} {
-                    !field.required && <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                  }
-                </span>
-              }
-              labelClassName="h5"
-            />
-          ))
-        }
-        <Field
-          id="charte"
-          name="charte"
-          component={renderComponent}
-          type="checkbox"
-          label={
-            <FormattedHTMLMessage
-              message={this.getIntlMessage('registration.charte')}
-              link={<a className="external-link" href={cguLink}>{cguName}</a>}
-            />
+            });
           }
-          labelClassName="h5"
-        />
-        <Field
-          id="captcha"
-          component={renderComponent}
-          name="captcha"
-          type="captcha"
-        />
-      </form>
+          if (response.errors.children.captcha.errors && response.errors.children.captcha.errors.length > 0) {
+            errors.captcha = 'registration.constraints.captcha.invalid';
+          }
+          reject(new SubmissionError(errors));
+        }
+      });
+    });
+  },
+
+  handleSubmitFail() {
+    const { dispatch, onSubmitFail } = this.props;
+    window.grecaptcha.reset();
+    onSubmitFail();
+    dispatch(change('registration-form', 'captcha', null));
+  },
+
+  render() {
+    const { features, userTypes, parameters, onSubmitSuccess } = this.props;
+    const cguName = parameters['signin.cgu.name'];
+    const cguLink = parameters['signin.cgu.link'];
+    const dynamicsField = [];
+    if (features.user_type) {
+      dynamicsField.push({
+        id: 'user_type',
+        name: 'userType',
+        type: 'select',
+        inputClassName: 'null',
+        label: (
+          <span>
+            {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+          </span>
+        ),
+        labelClassName: 'h5',
+        placeholder: this.getIntlMessage('registration.select.type'),
+        options: userTypes.map((type) => { return { value: type.id, label: type.name }; }),
+        meta: { active: true },
+      });
+    }
+    if (features.zipcode_at_register) {
+      dynamicsField.push({
+        id: 'zipcode',
+        name: 'zipcode',
+        type: 'text',
+        label: (
+          <span>
+            {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+          </span>
+        ),
+        labelClassName: 'h5',
+        autoComplete: 'postal-code',
+      });
+    }
+    return (
+      <Form
+        form="registration-form"
+        validate={validate}
+        ref={c => this.form = c}
+        onSubmit={this.handleSubmit}
+        onSubmitFail={this.handleSubmitFail}
+        onSubmitSuccess={onSubmitSuccess}
+        fields={[
+          {
+            name: 'username',
+            label: this.getIntlMessage('registration.username'),
+            labelClassName: 'h5',
+            type: 'text',
+            id: 'username',
+            autoComplete: 'username',
+          },
+          {
+            name: 'email',
+            label: this.getIntlMessage('global.email'),
+            labelClassName: 'h5',
+            type: 'email',
+            id: 'email',
+            popover: {
+              id: 'registration-email-tooltip',
+              message: this.getIntlMessage('registration.tooltip.email'),
+            },
+            autoComplete: 'email',
+          },
+          {
+            name: 'plainPassword',
+            label: this.getIntlMessage('registration.password'),
+            labelClassName: 'h5',
+            type: 'password',
+            id: 'password',
+            popover: {
+              id: 'registration-password-tooltip',
+              message: this.getIntlMessage('registration.tooltip.password'),
+            },
+            autoComplete: 'new-password',
+          },
+        ]
+          .concat(dynamicsField)
+          .concat([
+            {
+              id: 'charte',
+              name: 'charte',
+              type: 'checkbox',
+              label: (
+                <FormattedHTMLMessage
+                  message={this.getIntlMessage('registration.charte')}
+                  link={<a className="external-link" href={cguLink}>{cguName}</a>}
+                />
+              ),
+              labelClassName: 'h5',
+            },
+            {
+              id: 'captcha',
+              name: 'captcha',
+              type: 'captcha',
+            },
+          ])
+        }
+      />
     );
   },
+
 });
 
-const mapStateToProps = (state: State) => ({
-  addUserTypeField: state.default.features.user_type,
-  addZipcodeField: state.default.features.user_type,
-  userTypes: state.default.userTypes,
-  cguName: state.default.parameters['signin.cgu.name'],
-  cguLink: state.default.parameters['signin.cgu.link'],
-  dynamicFields: state.user.registration_form_fields,
-});
+const mapStateToProps = (state: State) => {
+  return {
+    features: state.default.features,
+    userTypes: state.default.userTypes,
+    parameters: state.default.parameters,
+  };
+};
 
-const connector = connect(mapStateToProps);
-export default connector(reduxForm({
-  form,
-  validate,
-  onSubmit,
-})(RegistrationForm));
+export default connect(mapStateToProps, null, null, { withRef: true })(RegistrationForm);

@@ -9,11 +9,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
 
-  capco.registration_form.repository:
-    class: Capco\AppBundle\Repository\RegistrationFormRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:RegistrationForm']
-
   capco.abstract_question.repository:
     class: Capco\AppBundle\Repository\AbstractQuestionRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

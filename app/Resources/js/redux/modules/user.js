@@ -74,7 +74,7 @@ export const userRequestEmailChange = (email: string): UserRequestEmailChangeAct
 export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({ type: 'CANCEL_EMAIL_CHANGE' });
 export const submitConfirmPasswordFormSucceed = (password: string): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
 
-export const login = (data: { username: string, password: string }, dispatch: Dispatch): Promise<*> => {
+export const login = (data: { email: string, password: string }, dispatch: Dispatch): Promise<*> => {
   return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -93,61 +93,6 @@ export const login = (data: { username: string, password: string }, dispatch: Di
       return true;
     }
     throw new SubmissionError({ _error: 'global.login_failed' });
-  });
-};
-
-export const register = (values: Object, dispatch: Dispatch) => {
-  const form = { ...values };
-  delete form.charte;
-  const responses = [];
-  const apiForm = {};
-  Object.keys(form).map((key) => {
-    if (key.startsWith('dynamic-')) {
-      const question = key.split('-')[1];
-      if (typeof form[key] !== 'undefined' && form[key].length > 0) {
-        responses.push({
-          question,
-          value: form[key],
-        });
-      }
-    } else {
-      apiForm[key] = form[key];
-    }
-  });
-  if (responses.length) {
-    apiForm.responses = responses;
-  }
-  return Fetcher
-  .post('/users', apiForm)
-  .then(() => {
-    FluxDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: { bsStyle: 'success', content: 'alert.success.add.user' },
-    });
-    login({ username: values.email, password: values.plainPassword }, dispatch);
-    dispatch(closeRegistrationModal());
-  })
-  .catch((error) => {
-    const response = error.response;
-    const errors: Object = { _error: 'Registration failed !' };
-    window.grecaptcha.reset();
-    dispatch(change('registration-form', 'captcha', null));
-    if (response.errors) {
-      const children = response.errors.children;
-      if (children.email.errors && children.email.errors.length > 0) {
-        children.email.errors.map((string) => {
-          if (string === 'already_used_email') {
-            errors.email = 'registration.constraints.email.already_used';
-          } else {
-            errors.email = `registration.constraints.${string}`;
-          }
-        });
-      }
-      if (children.captcha.errors && children.captcha.errors.length > 0) {
-        errors.captcha = 'registration.constraints.captcha.invalid';
-      }
-      throw new SubmissionError(errors);
-    }
   });
 };
 

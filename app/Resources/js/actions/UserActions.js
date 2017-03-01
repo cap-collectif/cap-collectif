@@ -14,4 +14,7 @@ export default {
     return Fetcher.post('/sms-confirmation', data);
   },
 
+  register: (data) => {
+    return Fetcher.post('/users', data);
+  },
 };

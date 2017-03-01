@@ -87,9 +87,15 @@ services:
       tags:
         - { name: form.type }
 
+  capco.form.registration:
+      class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
+      arguments: ["@capco.toggle.manager"]
+      tags:
+        - { name: form.type }
+
   capco.form.admin_registration:
       class: Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType
-      arguments: ["@capco.toggle.manager", "@capco.form.transformer.entity_to_id"]
+      arguments: ["@capco.toggle.manager"]
       tags:
         - { name: form.type }
 

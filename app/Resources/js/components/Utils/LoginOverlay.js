@@ -11,6 +11,7 @@ export const LoginOverlay = React.createClass({
   propTypes: {
     user: PropTypes.object,
     children: PropTypes.element.isRequired,
+    features: PropTypes.object.isRequired,
     enabled: PropTypes.bool,
     isLoginOrRegistrationModalOpen: PropTypes.bool.isRequired,
     showRegistrationButton: PropTypes.bool.isRequired,

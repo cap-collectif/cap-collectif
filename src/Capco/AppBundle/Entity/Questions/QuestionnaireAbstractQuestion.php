@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,13 +33,6 @@ class QuestionnaireAbstractQuestion
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      **/
     protected $proposalForm;
-
-    /**
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="questions", cascade={"persist"})
-     * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
-    protected $registrationForm;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"persist", "remove"})
@@ -116,26 +108,22 @@ class QuestionnaireAbstractQuestion
         return $this->question;
     }
 
+    /**
+     * @return ProposalForm
+     */
     public function getProposalForm()
     {
         return $this->proposalForm;
     }
 
+    /**
+     * @param ProposalForm $proposalForm
+     *
+     * @return $this
+     */
     public function setProposalForm(ProposalForm $proposalForm = null)
     {
         $this->proposalForm = $proposalForm;
-
-        return $this;
-    }
-
-    public function getRegistrationForm()
-    {
-        return $this->registrationForm;
-    }
-
-    public function setRegistrationForm(RegistrationForm $registrationForm = null)
-    {
-        $this->registrationForm = $registrationForm;
 
         return $this;
     }
