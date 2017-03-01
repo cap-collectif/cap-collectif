@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { Modal, Alert } from 'react-bootstrap';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import RegistrationForm from './RegistrationForm';
+import RegistrationForm, { form } from './RegistrationForm';
 import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
@@ -15,33 +16,15 @@ export const RegistrationModal = React.createClass({
     onClose: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
     parameters: PropTypes.object.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleSubmit() {
-    this.setState({ isSubmitting: true });
-    this.form.getWrappedInstance().form.submit();
-  },
-
-  stopSubmit() {
-    this.setState({ isSubmitting: false });
-  },
-
-  handleSubmitSuccess() {
-    const { onClose } = this.props;
-    this.stopSubmit();
-    onClose();
-  },
-
   render() {
-    const { isSubmitting } = this.state;
     const {
+      submitting,
+      onSubmit,
       onClose,
       show,
       parameters,
@@ -89,8 +72,8 @@ export const RegistrationModal = React.createClass({
           <SubmitButton
             id="confirm-register"
             label="global.register"
-            isSubmitting={isSubmitting}
-            onSubmit={this.handleSubmit}
+            isSubmitting={submitting}
+            onSubmit={onSubmit}
           />
         </Modal.Footer>
       </Modal>
@@ -102,10 +85,12 @@ export const RegistrationModal = React.createClass({
 const mapStateToProps = (state: State) => ({
   parameters: state.default.parameters,
   show: state.user.showRegistrationModal,
+  submitting: isSubmitting(form)(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClose: () => { dispatch(closeRegistrationModal()); },
+  onSubmit: () => { dispatch(submit(form)); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);

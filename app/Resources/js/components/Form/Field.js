@@ -20,6 +20,7 @@ const Field = React.createClass({
     placeholder: PropTypes.string,
     children: PropTypes.any,
     id: PropTypes.string.isRequired,
+    popover: PropTypes.object.isRequired,
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
@@ -30,7 +31,7 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props.meta;
-    const { children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName, help } = this.props;
+    const { popover, children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName, help } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
@@ -39,6 +40,7 @@ const Field = React.createClass({
         type={type}
         name={name}
         help={help}
+        popover={popover}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}

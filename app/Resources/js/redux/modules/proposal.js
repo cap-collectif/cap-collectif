@@ -8,7 +8,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import type { State as GlobalState, Uuid, Dispatch, Action } from '../../types';
+import type { State as GlobalState, Dispatch, Action } from '../../types';
 
 const PROPOSAL_PAGINATION = 20;
 
