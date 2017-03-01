@@ -21,7 +21,7 @@
         $color: nth($type, 2);
         $text: set-link-text-color($color);
 
-        &.opinion--#{$name} {
+        &.opinion--#{$name} .opinion__header {
             background-color: $color;
             color: $text;
         }
