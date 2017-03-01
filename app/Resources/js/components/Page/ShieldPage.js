@@ -13,24 +13,24 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 type Props = {
   showRegistration: boolean,
   submitting: boolean,
-  dispatch: Dispatch
+  onSubmit: () => void
 };
-export const Shield = React.createClass({
+export const ShieldPage = React.createClass({
   propTypes: {
     showRegistration: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { showRegistration, submitting, dispatch }: Props = this.props;
+    const { showRegistration, submitting, onSubmit }: Props = this.props;
     if (showRegistration) {
       return (
         <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
           <div className="panel-body">
             <LoginButton className="btn--connection btn-block" />
-            { ' ' }
+            <div style={{ marginTop: 10 }} />
             <RegistrationButton className="btn-block" />
           </div>
         </div>
@@ -39,10 +39,7 @@ export const Shield = React.createClass({
     return (
       <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
         <div className="panel-body">
-          <form id="login-form" onSubmit={(e: Event) => {
-            e.preventDefault();
-            dispatch(submit('login'));
-          }}>
+          <form id="login-form" onSubmit={onSubmit}>
             <LoginBox />
             <Button
               id="confirm-login"
@@ -70,5 +67,11 @@ const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,
   submitting: isSubmitting('login')(state),
 });
-const connector: Connector<{}, Props> = connect(mapStateToProps);
-export default connector(Shield);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onSubmit: (e: Event) => {
+    e.preventDefault();
+    dispatch(submit('login'));
+  },
+});
+const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
+export default connector(ShieldPage);
