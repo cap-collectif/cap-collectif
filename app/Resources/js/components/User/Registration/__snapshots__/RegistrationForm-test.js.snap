@@ -1,0 +1,342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    id="username"
+    label="Nom ou pseudonyme"
+    labelClassName="h5"
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="email"
+    label="Adresse électronique"
+    labelClassName="h5"
+    name="email"
+    popover={
+      Object {
+        "id": "registration-email-tooltip",
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
+      }
+    }
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Créez un mot de passe"
+    labelClassName="h5"
+    name="plainPassword"
+    popover={
+      Object {
+        "id": "registration-password-tooltip",
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
+      }
+    }
+    type="password"
+  />
+  <Field
+    component={[Function]}
+    id={6}
+    label={
+      <span>
+        Champ pas facultatif
+         
+      </span>
+    }
+    labelClassName="h5"
+    name="dynamic-6"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
+    name="charte"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
+</form>
+`;
+
+exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    id="username"
+    label="Nom ou pseudonyme"
+    labelClassName="h5"
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="email"
+    label="Adresse électronique"
+    labelClassName="h5"
+    name="email"
+    popover={
+      Object {
+        "id": "registration-email-tooltip",
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
+      }
+    }
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Créez un mot de passe"
+    labelClassName="h5"
+    name="plainPassword"
+    popover={
+      Object {
+        "id": "registration-password-tooltip",
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
+      }
+    }
+    type="password"
+  />
+  <Field
+    component={[Function]}
+    id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
+    name="charte"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
+</form>
+`;
+
+exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    id="username"
+    label="Nom ou pseudonyme"
+    labelClassName="h5"
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="email"
+    label="Adresse électronique"
+    labelClassName="h5"
+    name="email"
+    popover={
+      Object {
+        "id": "registration-email-tooltip",
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
+      }
+    }
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Créez un mot de passe"
+    labelClassName="h5"
+    name="plainPassword"
+    popover={
+      Object {
+        "id": "registration-password-tooltip",
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
+      }
+    }
+    type="password"
+  />
+  <Field
+    component={[Function]}
+    id="user_type"
+    label={
+      <span>
+        Statut
+         
+        <span
+          className="excerpt"
+        >
+           (facultatif)
+        </span>
+      </span>
+    }
+    labelClassName="h5"
+    name="userType"
+    type="select"
+  >
+    <option
+      value=""
+    >
+      Je suis...
+    </option>
+    <option
+      value={1}
+    >
+      type_1
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
+    name="charte"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
+</form>
+`;
+
+exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    id="username"
+    label="Nom ou pseudonyme"
+    labelClassName="h5"
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="email"
+    label="Adresse électronique"
+    labelClassName="h5"
+    name="email"
+    popover={
+      Object {
+        "id": "registration-email-tooltip",
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
+      }
+    }
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="password"
+    label="Créez un mot de passe"
+    labelClassName="h5"
+    name="plainPassword"
+    popover={
+      Object {
+        "id": "registration-password-tooltip",
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
+      }
+    }
+    type="password"
+  />
+  <Field
+    autoComplete="postal-code"
+    component={[Function]}
+    id="zipcode"
+    label={
+      <span>
+        Code postal
+         
+        <span
+          className="excerpt"
+        >
+           (facultatif)
+        </span>
+      </span>
+    }
+    labelClassName="h5"
+    name="zipcode"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
+    name="charte"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
+</form>
+`;

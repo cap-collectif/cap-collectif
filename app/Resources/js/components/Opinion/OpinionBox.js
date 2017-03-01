@@ -50,7 +50,7 @@ const OpinionBox = React.createClass({
     const parentTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
     const headerTitle = this.getBoxLabel();
 
-    const colorClass = `opinion opinion--${color} opinion--current`;
+    const colorClass = `opinion opinion--${color} opinion--default`;
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>

@@ -9,9 +9,9 @@ services:
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
+    arguments: ["@capco.toggle.manager", "@capco.form.transformer.entity_to_id"]
     tags:
       - { name: form.type, alias: capco_user_registration }
-    arguments: ["@capco.toggle.manager"]
 
   capco_user.profile.form.type:
     class: Capco\UserBundle\Form\Type\ProfileFormType

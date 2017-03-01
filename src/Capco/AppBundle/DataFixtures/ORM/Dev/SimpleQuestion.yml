@@ -29,3 +29,13 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     helpText: Décrivez dans les grandes lignes le budget de votre proposition
     required: true
     type: 2 # editor
+  simplequestion6:
+    id: 6
+    title: Champ pas facultatif
+    required: true
+    type: 0
+  simplequestion7:
+    id: 7
+    title: Champ facultatif
+    required: false
+    type: 0

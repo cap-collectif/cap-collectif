@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\UserBundle\Entity\User;
 
 /**
  * Response.
@@ -40,6 +41,12 @@ abstract class AbstractResponse
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $proposal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="responses", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $user;
 
     /**
      * @var Reply
@@ -92,6 +99,18 @@ abstract class AbstractResponse
         $this->proposal = $proposal;
 
         return $this;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

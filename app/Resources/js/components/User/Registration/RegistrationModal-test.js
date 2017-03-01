@@ -9,7 +9,9 @@ import RegistrationForm from './RegistrationForm';
 describe('<RegistrationModal />', () => {
   const props = {
     ...IntlData,
-    onClose: () => {},
+    onClose: jest.fn(),
+    onSubmit: jest.fn(),
+    submitting: false,
   };
 
   const parametersWithTexts = {
@@ -33,8 +35,6 @@ describe('<RegistrationModal />', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
     const form = wrapper.find(RegistrationForm);
     expect(form).toHaveLength(1);
-    expect(form.prop('onSubmitFail')).toBeDefined();
-    expect(form.prop('onSubmitSuccess')).toBeDefined();
   });
 
   it('renders a top text and a bottom text if specified', () => {
