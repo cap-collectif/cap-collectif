@@ -203,7 +203,7 @@ const mapStateToProps = (state) => {
   return {
     features: state.default.features,
     proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
-    steps: state.project.projects[state.project.currentProjectById].steps,
+    steps: state.project.projectsById[state.project.currentProjectById].steps,
   };
 };
 

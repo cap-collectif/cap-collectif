@@ -9,7 +9,7 @@ export type State = {
   currentProjectStepById: ?number,
   currentProjectById: ?Uuid,
   projects: Array<Object>,
-  projectsById: Object,
+  projectsById: {[id: Uuid]: Object},
   projectTypes: Array<Object>,
   pages: number,
   pages: ?Array<Object>,

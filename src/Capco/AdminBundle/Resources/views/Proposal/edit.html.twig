@@ -1,28 +1,25 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
 {% block form %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'data' : {
-      'proposal': {
-        'proposalsById': {
-          (admin.subject.id) : {
-            'selections': [],
-            'status': admin.subject.status
-            ? {
-                'id': admin.subject.status.id,
-                'name': admin.subject.status.name
-              }
-           : null
-          }
-        },
-      },
-      'project': {
-        'projectsById': {
-          (admin.subject.proposalForm.step.getProjectId()) : {
-            'steps': []
-          }
+    {% include '@CapcoApp/redux_store.html.twig' with {
+      'project': admin.subject.proposalForm.step.getProject(),
+      'data' : {
+        'proposal': {
+          'proposalsById': {
+            (admin.subject.id) : {
+              'selections': [],
+              'status': admin.subject.status
+              ? {
+                  'id': admin.subject.status.id,
+                  'name': admin.subject.status.name
+                }
+             : null
+            }
+          },
         }
       }
-    }} %}
+    }
+    %}
     {{ react_intl_component('ProposalAdminSelectionsApp', {
       'props': {
         'proposalId': admin.subject.id,

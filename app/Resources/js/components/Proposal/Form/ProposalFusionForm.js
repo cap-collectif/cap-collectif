@@ -81,7 +81,7 @@ const getCurrentCollectStep = (state): ?Object => {
   if (!selectedProject) {
     return null;
   }
-  const project = getBudgetProjects(state.project.projects).find(p => p.id === selectedProject);
+  const project = getBudgetProjects(state.project.projectsById).find(p => p.id === selectedProject);
   if (!project) {
     return null;
   }
@@ -90,7 +90,7 @@ const getCurrentCollectStep = (state): ?Object => {
 
 export default connect(state =>
   ({
-    projects: getBudgetProjects(state.project.projects),
+    projects: getBudgetProjects(state.project.projectsById),
     currentCollectStep: getCurrentCollectStep(state),
   }),
    { onMount: fetchProjects, onProjectChange: change },

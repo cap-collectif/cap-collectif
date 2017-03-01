@@ -231,7 +231,7 @@ const mapStateToProps = (state) => {
   return {
     userVotesCountByStepId: mapValues(state.proposal.userVotesByStepId, votes => votes.length),
     creditsLeftByStepId: state.proposal.creditsLeftByStepId,
-    votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
+    votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(step => step.votable),
     projectId: state.project.currentProjectById,
   };
 };

@@ -118,7 +118,7 @@ const ProposalVoteModal = React.createClass({
 
 const mapStateToProps = (state, props) => {
   const steps = state.project.currentProjectById
-    ? state.project.projects[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)
+    ? state.project.projectsById[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)
     : [];
   return {
     user: state.user.user,

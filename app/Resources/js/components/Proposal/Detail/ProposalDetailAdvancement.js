@@ -176,7 +176,7 @@ export const ProposalDetailAdvancement = React.createClass({
 
 const mapStateToProps = (state) => {
   return {
-    project: state.project.projects[state.project.currentProjectById],
+    project: state.project.projectsById[state.project.currentProjectById],
   };
 };
 

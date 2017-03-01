@@ -94,7 +94,7 @@ const mapStateToProps = (state, props) => {
     }
   }
   return {
-    votableSteps: state.project.projects[state.project.currentProjectById].steps.filter(step => step.votable),
+    votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(step => step.votable),
     currentUserVotesByStepId: undefined,
     userVotesByStepId,
   };

@@ -8,7 +8,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import type { State as GlobalState, Dispatch, Action } from '../../types';
+import type { State as GlobalState, Uuid, Dispatch, Action } from '../../types';
 
 const PROPOSAL_PAGINATION = 20;
 
@@ -452,7 +452,9 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
   const globalState: GlobalState = yield select();
-  step = step || globalState.project.projects[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
+  if (globalState.project.currentProjectById) {
+    step = step || globalState.project.projectsById[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
+  }
   const state = globalState.proposal;
   let url = '';
   switch (step.type) {
@@ -503,16 +505,20 @@ export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generat
   const { filter, value } = action;
   const state: GlobalState = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
-  const filtersByStep = LocalStorageService.get('proposal.filtersByStep') || {};
-  filtersByStep[state.project.currentProjectStepById] = filters;
+  const filtersByStep: {[id: number]: Object} = LocalStorageService.get('proposal.filtersByStep') || {};
+  if (state.project.currentProjectStepById) {
+    filtersByStep[state.project.currentProjectStepById] = filters;
+  }
   LocalStorageService.set('proposal.filtersByStep', filtersByStep);
 }
 
 export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
   const { order } = action;
-  const state = yield select();
-  const orderByStep = LocalStorageService.get('proposal.orderByStep') || {};
-  orderByStep[state.project.currentProjectStepById] = order;
+  const state: GlobalState = yield select();
+  const orderByStep: {[id: number]: string} = LocalStorageService.get('proposal.orderByStep') || {};
+  if (state.project.currentProjectStepById) {
+    orderByStep[state.project.currentProjectStepById] = order;
+  }
   LocalStorageService.set('proposal.orderByStep', orderByStep);
 }
 

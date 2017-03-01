@@ -85,6 +85,6 @@ export const OpinionEditModal = React.createClass({
 export default connect(
   (state) => {
     return {
-      step: state.project.projects[state.project.currentProjectById].steps.filter(step => step.type === 'consultation')[0],
+      step: state.project.projectsById[state.project.currentProjectById].steps.filter(step => step.type === 'consultation')[0],
     };
   }, null, null, { withRef: true })(OpinionEditModal);
