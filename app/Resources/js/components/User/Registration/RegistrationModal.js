@@ -14,7 +14,6 @@ export const RegistrationModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    features: PropTypes.object.isRequired,
     parameters: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
