@@ -78,7 +78,7 @@ const NavbarRight = React.createClass({
               </MenuItem>
             </NavDropdown>
           : <li>
-            <RegistrationButton />
+            <RegistrationButton className="navbar-btn" />
             { ' ' }
             <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
           </li>

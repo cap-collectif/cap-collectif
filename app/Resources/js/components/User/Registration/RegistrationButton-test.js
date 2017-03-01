@@ -25,13 +25,13 @@ describe('<RegistrationButton />', () => {
     const button = span.find('Button');
     expect(button).toHaveLength(1);
     expect(button.prop('bsStyle')).toEqual('primary');
-    expect(button.prop('className')).toEqual('navbar-btn btn--registration ');
+    expect(button.prop('className')).toEqual('btn--registration ');
     expect(button.prop('onClick')).toBeDefined();
   });
 
   it('renders specified className on button', () => {
     const wrapper = shallow(<RegistrationButton features={{ registration: true }} className="css-class" {...props} />);
-    expect(wrapper.find('Button').prop('className')).toEqual('navbar-btn btn--registration css-class');
+    expect(wrapper.find('Button').prop('className')).toEqual('btn--registration css-class');
   });
 
   it('renders specified style on wrapper', () => {

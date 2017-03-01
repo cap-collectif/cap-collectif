@@ -47,7 +47,7 @@ export const RegistrationButton = React.createClass({
           style={buttonStyle}
           onClick={openRegistrationModal}
           bsStyle={bsStyle}
-          className={`navbar-btn btn--registration ${className}`}
+          className={`btn--registration ${className}`}
         >
           { this.getIntlMessage('global.registration') }
         </Button>
