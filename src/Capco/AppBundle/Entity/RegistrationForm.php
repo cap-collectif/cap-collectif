@@ -2,14 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Traits\UuidTrait;
 
 /**

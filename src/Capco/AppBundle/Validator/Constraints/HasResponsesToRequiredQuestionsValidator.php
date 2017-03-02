@@ -23,10 +23,12 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     {
         if ($constraint->formField === 'registrationForm') {
             $form = $this->formRepo->findCurrent();
+
             return $form->getQuestions();
         }
         $accessor = PropertyAccess::createPropertyAccessor();
         $form = $accessor->getValue($object, $constraint->formField);
+
         return $form->getQuestions();
     }
 

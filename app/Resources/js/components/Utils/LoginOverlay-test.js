@@ -7,8 +7,6 @@ import IntlData from '../../translations/FR';
 describe('<LoginOverlay />', () => {
   const props = {
     ...IntlData,
-    isLoginOrRegistrationModalOpen: false,
-    openRegistrationModal: jest.fn(),
     openLoginModal: jest.fn(),
     isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,
