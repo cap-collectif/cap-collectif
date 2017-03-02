@@ -442,9 +442,12 @@ class SynthesisElement
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
-        $this->title = $title;
+        // QuickFix: | is used as a separator so we can not use it
+        $this->title = str_replace('|', '', $title);
+
+        return $this;
     }
 
     /**

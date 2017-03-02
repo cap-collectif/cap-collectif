@@ -30,7 +30,6 @@ export const LoginModal = React.createClass({
         animation={false}
         show={show}
         onHide={onClose}
-        autoFocus
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
       >
