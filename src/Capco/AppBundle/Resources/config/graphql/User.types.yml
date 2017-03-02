@@ -9,6 +9,7 @@ User:
             email:
                 type: "String!"
                 description: "email."
+                resolve: "@=resolver('user_email', [value])"
             username:
                 type: "String!"
                 description: "Username of the user."
