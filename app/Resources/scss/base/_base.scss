@@ -8,6 +8,19 @@ body {
     font-size: $font-size-base;
 }
 
+body .modal-open {
+    overflow: hidden;
+    position: fixed;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}
+
 #app-wrapper {
     overflow-x: hidden !important;
 }
