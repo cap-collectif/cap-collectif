@@ -34,6 +34,7 @@ export const RegistrationModal = React.createClass({
       <Modal
         animation={false}
         show={show}
+        autoFocus
         onHide={onClose}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
