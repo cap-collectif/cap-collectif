@@ -13,8 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 class QuestionnairesController extends FOSRestController
 {
     /**
-     * Get a questionnaire.
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get a questionnaire",
@@ -23,15 +21,10 @@ class QuestionnairesController extends FOSRestController
      *    404 = "Returned when opinion is not found",
      *  }
      * )
-     *
      * @Get("/questionnaires/{id}")
      * @ParamConverter("questionnaire", options={"mapping": {"id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200, serializerGroups={"Questionnaires", "Questions"})
      * @Cache(smaxage="120", public=true)
-     *
-     * @param Questionnaire $questionnaire
-     *
-     * @return array
      */
     public function getQuestionnaireAction(Questionnaire $questionnaire)
     {
@@ -77,7 +70,7 @@ class QuestionnairesController extends FOSRestController
                 foreach ($rakingQuestion->getResponses() as $response) {
                     $reply = $response->getReply();
                     if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
-                        // The score is the maximum number of choices for the question
+                      // The score is the maximum number of choices for the question
                       // 4 replies gives 4 3 2 1 points
                       // 2 replies with maximum 4 gives 4 3 points
                       $score = $rakingQuestion->getValidationRule()
@@ -119,15 +112,17 @@ class QuestionnairesController extends FOSRestController
             ];
             }
             foreach ($choiceQuestions as $choiceQuestion) {
-                $scores = [];
+                $choices = $choiceQuestion->getQuestionChoices()->map(function ($choice) {
+                    return $choice->getTitle();
+                })->toArray();
+                $scores = array_combine($choices, array_map(function ($h) {
+                    return 0;
+                }, $choices));
                 foreach ($choiceQuestion->getResponses() as $response) {
                     $reply = $response->getReply();
                     if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
-                        $value = $response->getValue();
-                        if (isset($scores[$value])) {
-                            $scores[$value] += 1;
-                        } else {
-                            $scores[$value] = 0;
+                        foreach ($response->getValue()['labels'] as $label) {
+                            $scores[$label] += 1;
                         }
                     }
                 }

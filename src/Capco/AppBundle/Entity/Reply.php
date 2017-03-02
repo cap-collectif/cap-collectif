@@ -17,8 +17,6 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 
 /**
- * Reply.
- *
  * @ORM\Table(name="reply")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
@@ -49,8 +47,6 @@ class Reply implements Contribution
     private $author;
 
     /**
-     * @var Questionnaire
-     *
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="replies")
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")
@@ -58,13 +54,11 @@ class Reply implements Contribution
     private $questionnaire;
 
     /**
-     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="reply", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $responses;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
      */

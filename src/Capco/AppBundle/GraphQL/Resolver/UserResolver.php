@@ -32,15 +32,6 @@ class UserResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
-    public function resolveEmail($object): string
-    {
-        if (strpos($object->getEmail(), 'twitter_') === 0) {
-            return '';
-        }
-
-        return $object->getEmail();
-    }
-
     public function resolveCreatedAt($object): string
     {
         return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
