@@ -48,6 +48,10 @@ class ShieldListener
           'hwi_oauth_service_redirect',
           'app_get_api_token',
           'sonata_media_view',
+          'fos_user_resetting_request',
+          'fos_user_resetting_reset',
+          'fos_user_resetting_send_email',
+          'fos_user_resetting_check_email',
           'sonata_media_download',
           '_wdt',
         ];
