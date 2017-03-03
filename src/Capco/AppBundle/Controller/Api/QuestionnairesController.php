@@ -44,94 +44,70 @@ class QuestionnairesController extends FOSRestController
         $results = [];
         foreach ($questionnaires as $questionnaire) {
             $questions = $questionnaire->getRealQuestions();
-            $rankingQuestions = [];
-            $choiceQuestions = [];
-            $multipleQuestions = [];
+            $questionsResults = [];
+            $scores = [];
             foreach ($questions as $question) {
                 $type = $question->getInputType();
                 if ($type === 'ranking') {
-                    $rankingQuestions[] = $question;
-                }
-                if ($type === 'radio' || $type === 'select') {
-                    $choiceQuestions[] = $question;
-                }
-                if ($type === 'checkbox') {
-                    $multipleQuestions[] = $question;
-                }
-            }
-            foreach ($rankingQuestions as $rakingQuestion) {
-                $questionChoices = $rakingQuestion->getQuestionChoices();
-                $choices = $questionChoices->map(function ($choice) {
-                    return $choice->getTitle();
-                })->toArray();
-                $scores = array_combine($choices, array_map(function ($h) {
-                    return 0;
-                }, $choices));
-                foreach ($rakingQuestion->getResponses() as $response) {
-                    $reply = $response->getReply();
-                    if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
-                        // The score is the maximum number of choices for the question
-                      // 4 replies gives 4 3 2 1 points
-                      // 2 replies with maximum 4 gives 4 3 points
-                      $score = $rakingQuestion->getValidationRule()
-                        ? $rakingQuestion->getValidationRule()->getNumber()
-                        : $rakingQuestion->getQuestionChoices()->count()
-                      ;
-                        foreach ($response->getValue()['labels'] as $label) {
-                            $scores[$label] += $score;
-                            --$score;
+                    $questionChoices = $question->getQuestionChoices();
+                    $choices = $questionChoices->map(function ($choice) {
+                        return $choice->getTitle();
+                    })->toArray();
+                    $scores = array_combine($choices, array_map(function ($h) {
+                        return 0;
+                    }, $choices));
+                    foreach ($question->getResponses() as $response) {
+                        $reply = $response->getReply();
+                        if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                            // The score is the maximum number of choices for the question
+                        // 4 replies gives 4 3 2 1 points
+                        // 2 replies with maximum 4 gives 4 3 points
+                        $score = $question->getValidationRule()
+                          ? $question->getValidationRule()->getNumber()
+                          : $question->getQuestionChoices()->count()
+                        ;
+                            foreach ($response->getValue()['labels'] as $label) {
+                                $scores[$label] += $score;
+                                --$score;
+                            }
                         }
                     }
                 }
-                $results[] = [
+                if ($type === 'radio' || $type === 'select' || $type === 'checkbox') {
+                    $choices = $question->getQuestionChoices()->map(function ($choice) {
+                        return $choice->getTitle();
+                    })->toArray();
+                    $scores = array_combine($choices, array_map(function ($h) {
+                        return 0;
+                    }, $choices));
+                    foreach ($question->getResponses() as $response) {
+                        $reply = $response->getReply();
+                        if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                            if (is_string($response->getValue())) {
+                                $scores[$response->getValue()] += 1;
+                            } else {
+                                foreach ($response->getValue()['labels'] as $label) {
+                                    $scores[$label] += 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                $data = [
+                  'question_title' => $question->getTitle(),
+                  'question_id' => $question->getId(),
+                  'question_type' => $question->getInputType(),
+                ];
+                if (count($scores) > 0) {
+                    $data['scores'] = $scores;
+                }
+                $questionsResults[] = $data;
+            }
+            $results[] = [
               'questionnaire_id' => $questionnaire->getId(),
-              'question_title' => $rakingQuestion->getTitle(),
-              'scores' => $scores,
+              'questionnaire_title' => $questionnaire->getTitle(),
+              'questions' => $questionsResults,
             ];
-            }
-            foreach ($multipleQuestions as $multipleQuestion) {
-                $questionChoices = $multipleQuestion->getQuestionChoices();
-                $choices = $questionChoices->map(function ($choice) {
-                    return $choice->getTitle();
-                })->toArray();
-                $scores = array_combine($choices, array_map(function ($h) {
-                    return 0;
-                }, $choices));
-                foreach ($multipleQuestion->getResponses() as $response) {
-                    $reply = $response->getReply();
-                    if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
-                        foreach ($response->getValue()['labels'] as $label) {
-                            $scores[$label] += 1;
-                        }
-                    }
-                }
-                $results[] = [
-              'questionnaire_id' => $questionnaire->getId(),
-              'question_title' => $multipleQuestion->getTitle(),
-              'scores' => $scores,
-            ];
-            }
-            foreach ($choiceQuestions as $choiceQuestion) {
-                $choices = $choiceQuestion->getQuestionChoices()->map(function ($choice) {
-                    return $choice->getTitle();
-                })->toArray();
-                $scores = array_combine($choices, array_map(function ($h) {
-                    return 0;
-                }, $choices));
-                foreach ($choiceQuestion->getResponses() as $response) {
-                    $reply = $response->getReply();
-                    if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
-                        foreach ($response->getValue()['labels'] as $label) {
-                            $scores[$label] += 1;
-                        }
-                    }
-                }
-                $results[] = [
-                'questionnaire_id' => $questionnaire->getId(),
-                'question_title' => $choiceQuestion->getTitle(),
-                'scores' => $scores,
-              ];
-            }
         }
 
         return $results;
