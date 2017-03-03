@@ -45,8 +45,8 @@ class QuestionnairesController extends FOSRestController
         foreach ($questionnaires as $questionnaire) {
             $questions = $questionnaire->getRealQuestions();
             $questionsResults = [];
-            $scores = [];
             foreach ($questions as $question) {
+                $scores = [];
                 $type = $question->getInputType();
                 if ($type === 'ranking') {
                     $questionChoices = $question->getQuestionChoices();
