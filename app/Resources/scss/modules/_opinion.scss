@@ -152,6 +152,10 @@
         .opinion__text {
             padding-top: 0;
             margin-bottom: 0;
+            overflow: hidden;
+            float: left;
+            width: 100%;
+            word-wrap: break-word;
         }
 
         .btn,
