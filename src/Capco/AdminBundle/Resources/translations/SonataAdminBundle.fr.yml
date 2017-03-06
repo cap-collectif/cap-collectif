@@ -79,6 +79,10 @@ admin.label.pages.members: Liste des membres
 admin.label.pages.registration: Inscription
 admin.label.pages.themes: Thèmes
 admin.label.pages.types: Types de projet
+admin.label.pages.shield: Authentification
+
+shield.introduction: Texte d'introduction
+
 
 admin.label.settings.appearance: Apparence
 admin.label.settings.global: Général

@@ -56,6 +56,10 @@ class FeaturesCategoryResolver
             'conditions' => [],
             'features' => [],
         ],
+        'pages.shield' => [
+            'conditions' => [],
+            'features' => ['shield_mode'],
+        ],
         'settings.global' => [
             'conditions' => [],
             'features' => [],
@@ -67,10 +71,6 @@ class FeaturesCategoryResolver
         'settings.notifications' => [
             'conditions' => [],
             'features' => [],
-        ],
-        'settings.shield_mode' => [
-            'conditions' => [],
-            'features' => ['shield_mode'],
         ],
         'settings.appearance' => [
             'conditions' => [],

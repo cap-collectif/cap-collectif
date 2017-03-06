@@ -137,9 +137,12 @@ ideas:
 image:
   default_avatar: Avatar par défaut
   header: Image de fond
+  shield: Logo
   logo: Logo
   picto: Pictogramme
   votes_bar: Illustration de la barre des votes
+
+shield.introduction: Texte d'introduction
 
 login:
   text:

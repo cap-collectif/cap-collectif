@@ -29,3 +29,9 @@ Capco\AppBundle\Entity\SiteImage:
         media: @MediaVotesBar
         isEnabled: true
         position: 5
+    SiteImageShield:
+        keyname: image.shield
+        category: pages.shield
+        media: @Logo
+        isEnabled: true
+        position: 1
