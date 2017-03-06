@@ -53,7 +53,9 @@ const ElementTitle = React.createClass({
       return (
         <span style={style} className={className} onClick={onClick} >
           {this.renderTitle()}
-          <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
+          { this.props.className === 'tree__item__title' &&
+            <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
+          }
         </span>
       );
     }
