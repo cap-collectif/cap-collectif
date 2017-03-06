@@ -50,16 +50,11 @@ class ConsultationStepExtractor
 
     /**
      * Update or create all elements from consultation step and return updated synthesis.
-     *
-     * @param Synthesis        $synthesis
-     * @param ConsultationStep $consultationStep
-     *
-     * @return bool|Synthesis
      */
-    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep = null)
+    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep): Synthesis
     {
-        if (!$consultationStep || !$consultationStep->getIsEnabled()) {
-            return false;
+        if (!$consultationStep->getIsEnabled()) {
+            return $synthesis;
         }
 
         $this->synthesis = $synthesis;
@@ -80,35 +75,29 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from opinion types and all children elements.
-     *
-     * @param $opinionTypes
-     * @param SynthesisElement|null $parent
      */
     public function createElementsFromOpinionTypes($opinionTypes, SynthesisElement $parent = null)
     {
-        foreach ($opinionTypes as $ot) {
+        foreach ($opinionTypes as $opinionType) {
             // Create or update element from opinion type
-            $elementFromOT = $this->getRelatedElement($ot, $parent);
+            $elementFromOT = $this->getRelatedElement($opinionType, $parent);
 
             // Create elements from opinions
             $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->findBy([
                 'step' => $this->consultationStep,
-                'OpinionType' => $ot,
+                'OpinionType' => $opinionType,
             ]);
             if (count($opinions) > 0) {
                 $this->createElementsFromOpinions($opinions, $elementFromOT);
             }
 
             //Create elements from opinion type children
-            $this->createElementsFromOpinionTypes($ot->getChildren(), $elementFromOT);
+            $this->createElementsFromOpinionTypes($opinionType->getChildren(), $elementFromOT);
         }
     }
 
     /**
      * Create or update elements from opinions and all children elements.
-     *
-     * @param $opinions
-     * @param SynthesisElement|null $parent
      */
     public function createElementsFromOpinions($opinions, SynthesisElement $parent = null)
     {
@@ -142,9 +131,6 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from versions and all children elements.
-     *
-     * @param $versions
-     * @param SynthesisElement|null $parent
      */
     public function createElementsFromVersions($versions, SynthesisElement $parent = null)
     {
@@ -165,10 +151,6 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from arguments and all children elements.
-     *
-     * @param $arguments
-     * @param SynthesisElement $prosFolder
-     * @param SynthesisElement $consFolder
      */
     public function createElementsFromArguments($arguments, SynthesisElement $prosFolder, SynthesisElement $consFolder = null)
     {
@@ -189,9 +171,6 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from sources and all children elements.
-     *
-     * @param $sources
-     * @param SynthesisElement $parent
      */
     public function createElementsFromSources($sources, SynthesisElement $parent)
     {
@@ -205,13 +184,8 @@ class ConsultationStepExtractor
 
     /**
      * Returns updated or created element from a given contribution.
-     *
-     * @param $contribution
-     * @param SynthesisElement $parent
-     *
-     * @return SynthesisElement|null
      */
-    public function getRelatedElement($contribution, SynthesisElement $parent = null)
+    public function getRelatedElement($contribution, SynthesisElement $parent = null): SynthesisElement
     {
         $element = null;
         foreach ($this->previousElements as $el) {
@@ -234,13 +208,8 @@ class ConsultationStepExtractor
 
     /**
      * Get or create a new folder from a provided parent.
-     *
-     * @param $label
-     * @param SynthesisElement $parent
-     *
-     * @return SynthesisElement
      */
-    public function createFolderInElement($label, SynthesisElement $parent)
+    public function createFolderInElement(string $label, SynthesisElement $parent): SynthesisElement
     {
         $label = $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
 
@@ -263,14 +232,7 @@ class ConsultationStepExtractor
         return $folder;
     }
 
-    /**
-     * Create a new element from a contribution.
-     *
-     * @param $contribution
-     *
-     * @return SynthesisElement
-     */
-    public function createElementFrom($contribution)
+    public function createElementFrom($contribution): SynthesisElement
     {
         $element = new SynthesisElement();
         $element->setLinkedDataClass(get_class($contribution));
@@ -296,13 +258,8 @@ class ConsultationStepExtractor
 
     /**
      * Update an element from a contribution.
-     *
-     * @param SynthesisElement $element
-     * @param $contribution
-     *
-     * @return SynthesisElement
      */
-    public function updateElementFrom(SynthesisElement $element, $contribution)
+    public function updateElementFrom(SynthesisElement $element, $contribution): SynthesisElement
     {
         // Update last modified, archive status and deletion date
         $element->setLinkedDataLastUpdate($contribution->getUpdatedAt());
@@ -324,13 +281,8 @@ class ConsultationStepExtractor
 
     /**
      * Set data of element from contribution, depending on type.
-     *
-     * @param SynthesisElement $element
-     * @param $contribtution
-     *
-     * @return SynthesisElement
      */
-    public function setDataFrom(SynthesisElement $element, $contribution)
+    public function setDataFrom(SynthesisElement $element, $contribution): SynthesisElement
     {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);
@@ -351,15 +303,7 @@ class ConsultationStepExtractor
 
     // ************************* Set element data from contributions ***************************
 
-    /**
-     * Set element data from an opinion type.
-     *
-     * @param SynthesisElement $element
-     * @param OpinionType      $opinionType
-     *
-     * @return SynthesisElement
-     */
-    public function setDataFromOpinionType(SynthesisElement $element, OpinionType $opinionType)
+    public function setDataFromOpinionType(SynthesisElement $element, OpinionType $opinionType): SynthesisElement
     {
         // Set author
         $element->setAuthor(null);
@@ -374,15 +318,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from an opinion.
-     *
-     * @param SynthesisElement $element
-     * @param Opinion          $opinion
-     *
-     * @return SynthesisElement
-     */
-    public function setDataFromOpinion(SynthesisElement $element, Opinion $opinion)
+    public function setDataFromOpinion(SynthesisElement $element, Opinion $opinion): SynthesisElement
     {
         // Set author
         $element->setAuthor($opinion->getAuthor());
@@ -414,15 +350,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from a version.
-     *
-     * @param SynthesisElement $element
-     * @param OpinionVersion   $version
-     *
-     * @return SynthesisElement
-     */
-    public function setDataFromVersion(SynthesisElement $element, OpinionVersion $version)
+    public function setDataFromVersion(SynthesisElement $element, OpinionVersion $version): SynthesisElement
     {
         // Set author
         $element->setAuthor($version->getAuthor());
@@ -450,15 +378,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from a source.
-     *
-     * @param SynthesisElement $element
-     * @param Source           $source
-     *
-     * @return SynthesisElement
-     */
-    public function setDataFromSource(SynthesisElement $element, Source $source)
+    public function setDataFromSource(SynthesisElement $element, Source $source): SynthesisElement
     {
         // Set author
         $element->setAuthor($source->getAuthor());
@@ -482,15 +402,7 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    /**
-     * Set element data from an argument.
-     *
-     * @param SynthesisElement $element
-     * @param Argument         $argument
-     *
-     * @return SynthesisElement
-     */
-    public function setDataFromArgument(SynthesisElement $element, Argument $argument)
+    public function setDataFromArgument(SynthesisElement $element, Argument $argument): SynthesisElement
     {
         // Set author
         $element->setAuthor($argument->getAuthor());
@@ -507,12 +419,12 @@ class ConsultationStepExtractor
 
     // ******************************** Helpers **********************************************
 
-    public function isElementRelated(SynthesisElement $element, $object)
+    public function isElementRelated(SynthesisElement $element, $object): bool
     {
         return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() == $object->getId();
     }
 
-    public function elementIsOutdated(SynthesisElement $element, $object)
+    public function elementIsOutdated(SynthesisElement $element, $object): bool
     {
         return $object->getUpdatedAt() > $element->getLinkedDataLastUpdate();
     }

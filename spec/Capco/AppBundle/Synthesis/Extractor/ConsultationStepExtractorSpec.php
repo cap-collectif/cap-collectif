@@ -33,7 +33,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->shouldHaveType(ConsultationStepExtractor::class);
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, Synthesis $synthesis, ConsultationStep $consultationStep)
+    function it_can_create_or_update_elements_from_consultation_step(Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         // Objects can not be mocked because we need to call get_class() method on them
 
@@ -94,12 +94,11 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $consultationStep->getIsEnabled()->willReturn(true);
         $consultationStep->getConsultationStepType()->willReturn($consultationStepType)->shouldBeCalled();
 
-        $em->flush()->shouldBeCalled();
-
-        $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
-            ->shouldReturnAnInstanceOf(Synthesis::class);
-
-        expect(count($synthesis->getElements()))->toBe(4);
+        $updatedSynthesis = $this
+          ->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
+          ->shouldReturnAnInstanceOf(Synthesis::class)
+        ;
+        expect(count($updatedSynthesis->getElements()))->toBe(count($currentElements));
     }
 
     function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
