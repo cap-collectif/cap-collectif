@@ -61,7 +61,7 @@ class SynthesisElementHandler
         return $tree;
     }
 
-    public function countElementsFromSynthesisByType($synthesis, $type = null)
+    public function countElementsFromSynthesisByType($synthesis, $type = null): int
     {
         if ($type === null || !in_array($type, self::$types)) {
             throw new NotFoundHttpException();
@@ -120,7 +120,7 @@ class SynthesisElementHandler
         return $division;
     }
 
-    public function ignoreElementChildren(SynthesisElement $element)
+    public function ignoreElementChildren(SynthesisElement $element): SynthesisElement
     {
         foreach ($element->getChildren() as $child) {
             $child->setPublished(false);
