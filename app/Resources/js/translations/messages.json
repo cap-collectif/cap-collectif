@@ -58,9 +58,7 @@
     },
     "delete": {
       "modal": {
-        "bold": "\u00cates-vous s\u00fbr de vouloir supprimer cet argument ?",
-        "infos": "Cette suppression marquera la fin de ce contenu à jamais.",
-        "title": "Supprimer l'argument"
+        "infos": "Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action."
       }
     },
     "edit": {
@@ -283,6 +281,8 @@
       "hours": "{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}"
     },
     "remove": "Supprimer",
+    "removeDefinitively": "Supprimer définitivement",
+    "removeMessage": "Êtes-vous sûr de vouloir supprimer cette contribution ?",
     "report": {
       "reported": "Signalé",
       "submit": "Signaler"
@@ -397,7 +397,7 @@
       "title": "Le titre de la proposition doit faire au moins 2 caractères."
     },
     "delete": {
-      "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
+      "confirm": "Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action."
     },
     "diff": {
       "infos": "Les ajouts en vert et les suppressions en rouge",
@@ -651,7 +651,7 @@
     "count_fusions": "{num, plural, =0{} one{dont # issue d'une fusion} other{dont # issues d'une fusion}}",
     "confirm_close_modal": "Êtes-vous sûr de vouloir annuler votre proposition ?",
     "delete": {
-      "confirm": "Voulez-vous vraiment supprimer la proposition \"{title}\" ?"
+      "confirm": "Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action."
     },
     "description": "Description",
     "details": "Mes votes",

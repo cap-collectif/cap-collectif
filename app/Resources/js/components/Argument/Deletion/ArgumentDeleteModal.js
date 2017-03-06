@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 
 import ArgumentStore from '../../../stores/ArgumentStore';
 import CloseButton from '../../Form/CloseButton';
@@ -52,22 +52,19 @@ const ArgumentDeleteModal = React.createClass({
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('argument.delete.modal.title')}
+              {this.getIntlMessage('global.removeMessage')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="h4">
-            {this.getIntlMessage('argument.delete.modal.bold')}
-          </p>
-          <div>
-            {this.getIntlMessage('argument.delete.modal.infos')}
-          </div>
+          <FormattedHTMLMessage
+            message={this.getIntlMessage('argument.delete.modal.infos')}
+          />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
             <SubmitButton
               id={'confirm-argument-delete'}
-              label={'global.delete'}
+              label="global.removeDefinitively"
               isSubmitting={isSubmitting}
               onSubmit={this.handleSubmit.bind(null, this)}
               bsStyle="danger"

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import OpinionActions from '../../../actions/OpinionActions';
@@ -69,7 +69,6 @@ const OpinionDelete = React.createClass({
   },
 
   render() {
-    const { opinion } = this.props;
     if (this.isTheUserTheAuthor()) {
       const { showModal, isSubmitting } = this.state;
       return (
@@ -91,14 +90,13 @@ const OpinionDelete = React.createClass({
           >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-lg">
-                { this.getIntlMessage('global.remove') }
+                { this.getIntlMessage('global.removeMessage') }
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <p>
-                <FormattedMessage
+                <FormattedHTMLMessage
                   message={this.getIntlMessage('opinion.delete.confirm')}
-                  title={opinion.title}
                 />
               </p>
             </Modal.Body>
@@ -108,7 +106,7 @@ const OpinionDelete = React.createClass({
                 id="confirm-opinion-delete"
                 isSubmitting={isSubmitting}
                 onSubmit={this.delete}
-                label="global.remove"
+                label="global.removeDefinitively"
                 bsStyle="danger"
               />
             </Modal.Footer>

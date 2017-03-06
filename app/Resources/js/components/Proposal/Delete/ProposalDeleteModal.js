@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
@@ -35,12 +35,12 @@ const ProposalDeleteModal = React.createClass({
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('global.remove') }
+              { this.getIntlMessage('global.removeMessage') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>
-              <FormattedMessage
+              <FormattedHTMLMessage
                 message={this.getIntlMessage('proposal.delete.confirm')}
                 title={proposal.title}
               />
@@ -54,7 +54,7 @@ const ProposalDeleteModal = React.createClass({
               id="confirm-proposal-delete"
               isSubmitting={isDeleting}
               onSubmit={() => { deleteProposal(form.id, proposal, dispatch); }}
-              label="global.remove"
+              label="global.removeDefinitively"
               bsStyle="danger"
             />
           </Modal.Footer>

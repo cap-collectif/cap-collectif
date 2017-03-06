@@ -33,7 +33,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->shouldHaveType(ConsultationStepExtractor::class);
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(Synthesis $synthesis, ConsultationStep $consultationStep)
+    function it_can_create_or_update_elements_from_consultation_step(EntityManager $em, Synthesis $synthesis, ConsultationStep $consultationStep)
     {
         // Objects can not be mocked because we need to call get_class() method on them
 
@@ -94,11 +94,12 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $consultationStep->getIsEnabled()->willReturn(true);
         $consultationStep->getConsultationStepType()->willReturn($consultationStepType)->shouldBeCalled();
 
-        $updatedSynthesis = $this
-          ->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
-          ->shouldReturnAnInstanceOf(Synthesis::class)
-        ;
-        expect(count($updatedSynthesis->getElements()))->toBe(count($currentElements));
+        $em->flush()->shouldBeCalled();
+
+        $synthesis = $this->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
+            ->shouldReturnAnInstanceOf(Synthesis::class);
+
+        expect(count($synthesis->getElements()))->toBe(4);
     }
 
     function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
@@ -110,22 +111,22 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Related element (same class, same id)
         $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
-        $this->isElementExisting($element, $opinion)->shouldReturn(true);
+        $this->isElementRelated($element, $opinion)->shouldReturn(true);
 
         // Not related (different id)
         $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
-        $this->isElementExisting($element, $opinion)->shouldReturn(false);
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
 
         // Not related (different class)
         $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
-        $this->isElementExisting($element, $opinion)->shouldReturn(false);
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
 
         // Not related (both different)
         $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
         $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
-        $this->isElementExisting($element, $opinion)->shouldReturn(false);
+        $this->isElementRelated($element, $opinion)->shouldReturn(false);
     }
 
     function it_can_tell_if_element_is_outdated(SynthesisElement $element, Opinion $opinion)
@@ -136,17 +137,17 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         // Element before object (element outdated)
         $element->getLinkedDataLastUpdate()->willReturn($before)->shouldBeCalled();
         $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
-        $this->isElementOutdated($element, $opinion)->shouldReturn(true);
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(true);
 
         // Object before element
         $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
         $opinion->getUpdatedAt()->willReturn($before)->shouldBeCalled();
-        $this->isElementOutdated($element, $opinion)->shouldReturn(false);
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
 
         // Same dates
         $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
         $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
-        $this->isElementOutdated($element, $opinion)->shouldReturn(false);
+        $this->elementIsOutdated($element, $opinion)->shouldReturn(false);
     }
 
     function it_can_update_an_element_from_an_object(SynthesisElement $element, User $author, Opinion $object)

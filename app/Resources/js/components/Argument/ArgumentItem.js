@@ -46,7 +46,7 @@ const ArgumentItem = React.createClass({
             </p>
             {this.renderDate()}
           </div>
-          <p className="opinion__text">
+          <p className="opinion__text" style={{ overflow: 'hidden', float: 'left', width: '100%', wordWrap: 'break-word' }}>
             <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
           </p>
           <ArgumentButtons
