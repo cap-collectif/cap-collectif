@@ -5,7 +5,7 @@ import { Tooltip } from 'react-bootstrap';
 
 export const calculPourcentage = (element: Object, parent: Object): number => {
   let percentage = Math.round(
-    (element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000,
+    (element.childrenCount / parent.children.length) * 1000,
   ) / 10;
   percentage = percentage > 0 ? percentage : 0;
   return percentage;
@@ -21,14 +21,15 @@ const SynthesisPourcentageTooltip = React.createClass({
   render() {
     const { element, parent } = this.props;
     return (
-      <Tooltip>
-        <FormattedMessage
+      <Tooltip id={`tooltip-pourcentage-${element.id}`}>
+        {`${calculPourcentage(element, parent)}%`}
+        {/* <FormattedMessage
           message={this.getIntlMessage('synthesis.percentage.tooltip')}
-          contributions={element.publishedChildrenCount}
+          contributions={element.childrenCount}
           scoreSign={element.childrenScore < 0 ? '-' : '+'}
           score={Math.abs(element.childrenScore)}
           percentage={calculPourcentage(element, parent)}
-        />
+        /> */}
       </Tooltip>
     );
   },

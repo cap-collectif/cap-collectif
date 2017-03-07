@@ -57,8 +57,8 @@ const ElementTitle = React.createClass({
       return (
         <span style={style} className={className} onClick={onClick} >
           {this.renderTitle()}
-          { this.props.className === 'tree__item__title' &&
-            <OverlayTrigger popover={(parent ? <SynthesisPourcentageTooltip element={element} parent={parent} /> : <span />)}>
+          { this.props.className === 'tree__item__title' && parent &&
+            <OverlayTrigger placement="top" overlay={<SynthesisPourcentageTooltip element={element} parent={parent} />}>
               <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
             </OverlayTrigger>
           }
