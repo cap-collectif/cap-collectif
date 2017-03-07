@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
-import { OverlayTrigger } from 'react-bootstrap';
-import SynthesisPourcentageTooltip from '../View/SynthesisPourcentageTooltip';
 
 const ElementTitle = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    parent: React.PropTypes.object,
     linkType: React.PropTypes.string,
     hasLink: React.PropTypes.bool,
     className: React.PropTypes.string,
@@ -50,17 +47,14 @@ const ElementTitle = React.createClass({
       linkType,
       onClick,
       style,
-      parent,
     } = this.props;
     const className = this.props.className + (onClick ? ' btn btn-link' : '');
     if (!hasLink) {
       return (
         <span style={style} className={className} onClick={onClick} >
           {this.renderTitle()}
-          { this.props.className === 'tree__item__title' && parent &&
-            <OverlayTrigger placement="top" overlay={<SynthesisPourcentageTooltip element={element} parent={parent} />}>
-              <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
-            </OverlayTrigger>
+          { this.props.className === 'tree__item__title' &&
+            <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
           }
         </span>
       );
