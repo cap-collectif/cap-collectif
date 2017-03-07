@@ -65,7 +65,7 @@ const ElementsFinder = React.createClass({
     }
   },
 
-  renderTreeItems(elements, level, expand = false) {
+  renderTreeItems(elements, level, expand = false, parent = null) {
     const {
       expanded,
       hiddenElementId,
@@ -82,8 +82,8 @@ const ElementsFinder = React.createClass({
               if (!hiddenElementId || element.id !== hiddenElementId) {
                 return (
                   <li key={element.id} className={classes} >
-                    {this.renderTreeItemContent(element)}
-                    {this.renderTreeItems(element.children, level + 1, expanded[element.id])}
+                    {this.renderTreeItemContent(element, parent)}
+                    {this.renderTreeItems(element.children, level + 1, expanded[element.id], element)}
                   </li>
                 );
               }
@@ -94,7 +94,7 @@ const ElementsFinder = React.createClass({
     }
   },
 
-  renderTreeItemContent(element) {
+  renderTreeItemContent(element, parent = null) {
     const { selectedId } = this.props;
     const classes = classNames({
       tree__item__content: true,
@@ -107,7 +107,7 @@ const ElementsFinder = React.createClass({
           ? <ElementIcon className="tree__item__icon" element={element} />
           : null
         }
-        {this.renderItemTitle(element)}
+        <ElementTitle element={element} parent={parent} className="tree__item__title" hasLink={false} />
       </div>
     );
   },
@@ -124,12 +124,6 @@ const ElementsFinder = React.createClass({
         <i className={classes} onClick={ev => this.toggleExpand(ev, element)}></i>
       );
     }
-  },
-
-  renderItemTitle(element) {
-    return (
-      <ElementTitle element={element} className="tree__item__title" hasLink={false} />
-    );
   },
 
   renderTree() {
