@@ -4,8 +4,6 @@ import {
   RECEIVE_OPINION,
   DELETE_OPINION_SUCCESS,
   DELETE_OPINION_FAILURE,
-  CREATE_OPINION_VERSION_SUCCESS,
-  CREATE_OPINION_VERSION_FAILURE,
   UPDATE_OPINION_VERSION_SUCCESS,
   UPDATE_OPINION_VERSION_FAILURE,
   DELETE_OPINION_VERSION_SUCCESS,
@@ -63,23 +61,6 @@ export default {
   },
 
   // Create or update versions
-
-  createVersion: (opinion, data) => {
-    return Fetcher
-    .post(`/opinions/${opinion}/versions`, data)
-    .then((version) => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_OPINION_VERSION_SUCCESS,
-      });
-      return version.json();
-    })
-    .catch(() => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_OPINION_VERSION_FAILURE,
-      });
-    });
-  },
-
   updateVersion: (opinion, version, data) => {
     return Fetcher
       .put(`/opinions/${opinion}/versions/${version}`, data)

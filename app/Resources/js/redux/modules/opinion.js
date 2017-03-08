@@ -8,6 +8,12 @@ import type { Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
+type StartCreateOpinionVersionAction = { type: 'opinion/START_CREATE_OPINION_VERSION' };
+type CancelCreateOpinionVersionAction = { type: 'opinion/CANCEL_CREATE_OPINION_VERSION' };
+type ShowOpinionVersionEditModalAction = { type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL' };
+type CloseOpinionVersionEditModalAction = { type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL' };
+type ShowOpinionVersionCreateModalAction = { type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL' };
+type CloseOpinionVersionCreateModalAction = { type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL' };
 export type OpinionAction =
     { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
@@ -15,6 +21,12 @@ export type OpinionAction =
   | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: Uuid }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
+  | ShowOpinionVersionEditModalAction
+  | CloseOpinionVersionEditModalAction
+  | ShowOpinionVersionCreateModalAction
+  | CloseOpinionVersionCreateModalAction
+  | StartCreateOpinionVersionAction
+  | CancelCreateOpinionVersionAction
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {
@@ -44,6 +56,32 @@ const initialState: State = {
   opinionsById: {},
   currentVersionId: null,
   versionsById: {},
+  isEditingOpinionVersion: false,
+  showOpinionVersionEditModal: false,
+  isCreatingOpinionVersion: false,
+  showOpinionVersionCreateModal: false,
+};
+
+const startCreatingOpinionVersion = () => ({ type: 'opinion/START_CREATE_OPINION_VERSION' });
+const cancelCreatingOpinionVersion = () => ({ type: 'opinion/CANCEL_CREATE_OPINION_VERSION' });
+export const showOpinionVersionEditModal = (): ShowOpinionVersionEditModalAction => ({ type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL' });
+export const closeOpinionVersionEditModal = (): CloseOpinionVersionEditModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL' });
+export const closeOpinionVersionCreateModal = (): CloseOpinionVersionCreateModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL' });
+export const showOpinionVersionCreateModal = (): ShowOpinionVersionCreateModalAction => ({ type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL' });
+
+export const createOpinionVersion = (dispatch: Dispatch, data: Object, opinionId: string) => {
+  dispatch(startCreatingOpinionVersion());
+  return Fetcher
+    .post(`/opinions/${opinionId}/versions`, data)
+    .then(
+      (version) => {
+        dispatch(closeOpinionVersionCreateModal());
+        window.location.href = `${window.location.href}/versions/${version.slug}`;
+      },
+      () => {
+        dispatch(cancelCreatingOpinionVersion());
+      },
+    );
 };
 
 export function* fetchAllOpinionVotes(action: FetchOpinionVotesAction): Generator<*, *, *> {

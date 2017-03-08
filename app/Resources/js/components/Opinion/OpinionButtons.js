@@ -4,7 +4,7 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
-import OpinionVersionForm from './OpinionVersionForm';
+import OpinionVersionEditButton from './OpinionVersionEditButton';
 import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
@@ -49,13 +49,11 @@ const OpinionButtons = React.createClass({
     if (this.isContribuable() && this.isTheUserTheAuthor()) {
       if (this.isVersion()) {
         return (
-          <OpinionVersionForm
+          <OpinionVersionEditButton
             className="pull-right"
             style={{ marginLeft: '5px' }}
-            mode="edit"
             opinionId={opinion.parent.id}
             version={opinion}
-            isContribuable
           />
         );
       }

@@ -3,9 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-
 import OpinionVersionList from './OpinionVersionList';
-import OpinionVersionForm from './OpinionVersionForm';
+import OpinionVersionCreateButton from './OpinionVersionCreateButton';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 
@@ -85,7 +84,7 @@ const OpinionVersionsBox = React.createClass({
       <div>
         <Row>
           <Col xs={12} sm={6} md={6}>
-            <OpinionVersionForm {...this.props} />
+            <OpinionVersionCreateButton {...this.props} />
           </Col>
           <Col xs={12} sm={6} md={6} className="block--first-mobile">
             { this.renderFilter() }
