@@ -194,7 +194,11 @@ const ViewElement = React.createClass({
     if (parent) {
       return (
         <div className="synthesis__element">
-          <OverlayTrigger placement="top" overlay={<SynthesisPourcentageTooltipLabel element={element} parent={parent} />}>
+          <OverlayTrigger placement="top" overlay={
+            <Tooltip>
+              <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
+            </Tooltip>
+            }>
             <div className="synthesis__element__bar">
               <span className="synthesis__element__bar__value" style={{ width: `${calculPourcentage(element, parent)}%` }} />
               {this.renderTitle()}
