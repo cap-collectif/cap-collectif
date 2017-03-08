@@ -39,7 +39,11 @@ export type State = {
   currentOpinionId: ?Uuid,
   currentVersionId: ?Uuid,
   opinionsById: ContributionMap,
-  versionsById: ContributionMap
+  versionsById: ContributionMap,
+  isEditingOpinionVersion: boolean,
+  showOpinionVersionEditModal: boolean,
+  isCreatingOpinionVersion: boolean,
+  showOpinionVersionCreateModal: boolean
 };
 
 const VOTES_PREVIEW_COUNT = 8;
@@ -64,22 +68,44 @@ const initialState: State = {
 
 const startCreatingOpinionVersion = () => ({ type: 'opinion/START_CREATE_OPINION_VERSION' });
 const cancelCreatingOpinionVersion = () => ({ type: 'opinion/CANCEL_CREATE_OPINION_VERSION' });
+const startEditingOpinionVersion = () => ({ type: 'opinion/START_EDIT_OPINION_VERSION' });
+const cancelEditingOpinionVersion = () => ({ type: 'opinion/CANCEL_EDIT_OPINION_VERSION' });
 export const showOpinionVersionEditModal = (): ShowOpinionVersionEditModalAction => ({ type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL' });
 export const closeOpinionVersionEditModal = (): CloseOpinionVersionEditModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL' });
 export const closeOpinionVersionCreateModal = (): CloseOpinionVersionCreateModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL' });
 export const showOpinionVersionCreateModal = (): ShowOpinionVersionCreateModalAction => ({ type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL' });
 
-export const createOpinionVersion = (dispatch: Dispatch, data: Object, opinionId: string) => {
+export const createOpinionVersion = (data: Object, dispatch: Dispatch, { opinionId }: {opinionId: string}): Promise<*> => {
   dispatch(startCreatingOpinionVersion());
   return Fetcher
-    .post(`/opinions/${opinionId}/versions`, data)
+    .postToJson(`/opinions/${opinionId}/versions`, data)
     .then(
-      (version) => {
+      (version: { slug: string }) => {
         dispatch(closeOpinionVersionCreateModal());
         window.location.href = `${window.location.href}/versions/${version.slug}`;
       },
       () => {
         dispatch(cancelCreatingOpinionVersion());
+      },
+    );
+};
+
+export const editOpinionVersion = (dispatch: Dispatch, data: Object, props): Promise<*> => {
+  dispatch(startEditingOpinionVersion());
+  const apiData = {
+    title: data.title,
+    body: data.body,
+    comment: data.comment,
+  };
+  return Fetcher
+    .put(`/opinions/${props.opinionId}/versions/${props.versionId}`, apiData)
+    .then(
+      () => {
+        dispatch(closeOpinionVersionEditModal());
+        location.reload(); // TODO when enough time
+      },
+      () => {
+        dispatch(cancelEditingOpinionVersion());
       },
     );
 };
@@ -263,6 +289,30 @@ const removeVote = (state: State, oldVote: Object, object: Object, type: string)
 
 export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
+    case 'opinion/START_CREATE_OPINION_VERSION': {
+      return { ...state, isCreatingOpinionVersion: true };
+    }
+    case 'opinion/CANCEL_CREATE_OPINION_VERSION': {
+      return { ...state, isCreatingOpinionVersion: false };
+    }
+    case 'opinion/START_EDIT_OPINION_VERSION': {
+      return { ...state, isEditingOpinionVersion: true };
+    }
+    case 'opinion/CANCEL_EDIT_OPINION_VERSION': {
+      return { ...state, isEditingOpinionVersion: false };
+    }
+    case 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL': {
+      return { ...state, showOpinionVersionEditModal: true };
+    }
+    case 'opinion/CANCEL_OPINION_VERSION_EDIT_MODAL': {
+      return { ...state, cancelOpinionVersionEditModal: false };
+    }
+    case 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL': {
+      return { ...state, showOpinionVersionCreateModal: true };
+    }
+    case 'opinion/CANCEL_OPINION_VERSION_CREATE_MODAL': {
+      return { ...state, cancelOpinionVersionCreateModal: false };
+    }
     case OPINION_VOTES_FETCH_SUCCEEDED: {
       let votes = state.opinionsById[action.opinionId].votes;
       if (votes.length <= VOTES_PREVIEW_COUNT) {

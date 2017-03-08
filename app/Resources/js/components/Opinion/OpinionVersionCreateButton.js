@@ -4,12 +4,14 @@ import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
+import { showOpinionVersionCreateModal } from '../../redux/modules/opinion';
 
 const OpinionVersionCreateButton = React.createClass({
   propTypes: {
     className: PropTypes.string,
     style: PropTypes.object.isRequired,
     isContribuable: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -22,17 +24,16 @@ const OpinionVersionCreateButton = React.createClass({
   },
 
   render() {
-    const { style, className } = this.props;
+    const { isContribuable, dispatch, style, className } = this.props;
     if (!style.display) {
       style.display = 'inline-block';
     }
-    const { isContribuable } = this.props;
     return (
       <div className={className} style={style}>
         {
           isContribuable &&
             <LoginOverlay>
-              <Button bsStyle="primary" onClick={() => this.show()}>
+              <Button bsStyle="primary" onClick={() => { dispatch(showOpinionVersionCreateModal()); }}>
                 <i className="cap cap-add-1"></i>
                 { ` ${this.getIntlMessage('opinion.add_new_version')}`}
               </Button>

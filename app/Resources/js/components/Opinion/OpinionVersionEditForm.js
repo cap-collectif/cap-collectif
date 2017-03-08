@@ -2,116 +2,64 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import Input from '../Form/Input';
+import { Field, reduxForm } from 'redux-form';
+import renderInput from '../Form/Field';
+import { editOpinionVersion as onSubmit } from '../../redux/modules/opinion';
+import type { State } from '../../types';
 
-const OpinionVersionCreateForm = React.createClass({
+export const formName = 'opinion-version-edit';
+const validate = (values, props) => {
+  const errors = {};
+  if (!values.confirm) {
+    errors.confirm = 'global.required';
+  }
+  if (values.body === props.initialValues.body) {
+    errors.body = 'opinion.version.body_error';
+  }
+  if (values.title) {
+    if (values.title.length <= 2) {
+      errors.title = 'opinion.version.title_error';
+    }
+  } else {
+    errors.title = 'global.required';
+  }
+  return errors;
+};
+const OpinionVersionEditForm = React.createClass({
   propTypes: {
     versionId: PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],
 
-  // getInitialState() {
-  //   const {
-  //     version,
-  //   } = this.props;
-  //   return {
-  //     form: {
-  //       title: version ? version.title : '',
-  //       body: version ? version.body : opinionBody,
-  //       comment: version ? version.comment : null,
-  //     },
-  //   };
-  // },
-
-  // componentDidMount() {
-  //   const {
-  //     mode,
-  //     opinionBody,
-  //   } = this.props;
-  //   this.formValidationRules.body = {
-  //     notEqual: { value: opinionBody, message: 'opinion.version.body_error' },
-  //   };
-  //
-  //   if (mode === 'edit') {
-  //     this.formValidationRules.confirm = {
-  //       isTrue: { message: 'opinion.version.confirm_error' },
-  //     };
-  //   }
-  // },
-
-  // update() {
-  //   const {
-  //     opinionId,
-  //     version,
-  //   } = this.props;
-  //   this.setState({ submitted: true }, () => {
-  //     if (!this.isValid()) {
-  //       return;
-  //     }
-  //
-  //     this.setState({ isSubmitting: true });
-  //
-  //     const data = {
-  //       title: this.state.form.title,
-  //       body: this.state.form.body,
-  //       comment: this.state.form.comment,
-  //     };
-  //
-  //     if (version) {
-  //       OpinionActions
-  //         .updateVersion(opinionId, version.id, data)
-  //         .then(() => {
-  //           this.setState(this.getInitialState());
-  //           this.close();
-  //           location.reload(); // TODO when enough time
-  //           return true;
-  //         })
-  //         .catch(() => {
-  //           this.setState({ isSubmitting: false, submitted: false });
-  //         });
-  //     }
-  //   });
-  // },
-  //
-  // formValidationRules: {
-  //   title: {
-  //     notBlank: { message: 'opinion.version.title_error' },
-  //     min: { value: 2, message: 'opinion.version.title_error' },
-  //   },
-  //   body: undefined,
-  //   confirm: undefined,
-  // },
-
   render() {
-    // const { style, className, user, features, mode } = this.props;
     return (
       <form>
         <div className="alert alert-warning edit-confirm-alert">
-          <Input
+          <Field
             name="confirm"
             type="checkbox"
-            groupClassName={this.getGroupStyle('confirm')}
+            component={renderInput}
             label={this.getIntlMessage('opinion.version.confirm')}
           />
         </div>
-        <Input
+        <Field
           name="title"
           type="text"
+          component={renderInput}
           label={this.getIntlMessage('opinion.version.title')}
-          groupClassName={this.getGroupStyle('title')}
         />
-        <Input
+        <Field
           name="body"
           type="editor"
+          component={renderInput}
           label={this.getIntlMessage('opinion.version.body')}
-          groupClassName={this.getGroupStyle('body')}
           help={this.getIntlMessage('opinion.version.body_helper')}
         />
-        <Input
+        <Field
           name="comment"
           type="editor"
+          component={renderInput}
           label={this.getIntlMessage('opinion.version.comment')}
-          groupClassName={this.getGroupStyle('comment')}
           help={this.getIntlMessage('opinion.version.comment_helper')}
         />
       </form>
@@ -119,8 +67,16 @@ const OpinionVersionCreateForm = React.createClass({
   },
 });
 
-const mapStateToProps = state => ({
+export default connect((state: State) => ({
+  initialValues: {
+    title: state.opinion.versionsById[state.opinion.currentVersionId].title,
+    body: state.opinion.versionsById[state.opinion.currentVersionId].body,
+    comment: state.opinion.versionsById[state.opinion.currentVersionId].comment,
+  },
+  opinionId: state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
   versionId: state.opinion.currentVersionId,
-});
-
-export default connect(mapStateToProps)(OpinionVersionCreateForm);
+}))(reduxForm({
+  form: formName,
+  onSubmit,
+  validate,
+})(OpinionVersionEditForm));

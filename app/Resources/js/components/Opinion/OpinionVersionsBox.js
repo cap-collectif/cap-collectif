@@ -7,6 +7,7 @@ import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
 import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
+import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 
 const OpinionVersionsBox = React.createClass({
   propTypes: {
@@ -82,6 +83,7 @@ const OpinionVersionsBox = React.createClass({
   render() {
     return (
       <div>
+        <OpinionVersionCreateModal />
         <Row>
           <Col xs={12} sm={6} md={6}>
             <OpinionVersionCreateButton {...this.props} />

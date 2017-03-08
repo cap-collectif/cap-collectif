@@ -28,6 +28,9 @@
       'versionsById': {
         (version.id) : {
           'id': version.id,
+          'parent': {
+            'id': version.parent.id,
+          },
           'votes': [],
           'votesCount': version.getVotesCountAll(),
           'votesCountOk': version.votesCountOk,

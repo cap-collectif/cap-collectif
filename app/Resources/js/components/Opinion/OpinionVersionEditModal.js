@@ -4,23 +4,21 @@ import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
-import { closeOpinionVersionCreateModal } from '../../redux/modules/opinion';
-import OpinionVersionCreateForm, { formName } from './OpinionVersionCreateForm';
+import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
+import OpinionVersionEditForm, { formName } from './OpinionVersionEditForm';
 import type { State } from '../../types';
 
-const OpinionVersionCreateModal = React.createClass({
+const OpinionVersionEditModal = React.createClass({
   propTypes: {
-    className: PropTypes.string,
     show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
-    style: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
     const { dispatch, submitting, show } = this.props;
-    const onClose = () => { dispatch(closeOpinionVersionCreateModal()); };
+    const onClose = () => { dispatch(closeOpinionVersionEditModal()); };
     return (
         <Modal
           animation={false}
@@ -40,7 +38,7 @@ const OpinionVersionCreateModal = React.createClass({
                 { this.getIntlMessage('opinion.add_new_version_infos') }
               </p>
             </div>
-            <OpinionVersionCreateForm />
+            <OpinionVersionEditForm />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={onClose}>
@@ -54,7 +52,7 @@ const OpinionVersionCreateModal = React.createClass({
               {
                 submitting
                 ? this.getIntlMessage('global.loading')
-                : this.getIntlMessage('global.publish')
+                : this.getIntlMessage('global.edit')
               }
             </Button>
           </Modal.Footer>
@@ -64,8 +62,8 @@ const OpinionVersionCreateModal = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  show: state.opinion.showOpinionVersionCreateModal,
-  submitting: state.opinion.isCreatingOpinionVersion,
+  show: state.opinion.showOpinionVersionEditModal,
+  submitting: state.opinion.isEditingOpinionVersion,
 });
 
-export default connect(mapStateToProps)(OpinionVersionCreateModal);
+export default connect(mapStateToProps)(OpinionVersionEditModal);

@@ -4,6 +4,8 @@ import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
+import { createOpinionVersion as onSubmit } from '../../redux/modules/opinion';
+import type { State } from '../../types';
 
 export const formName = 'opinion-version-create';
 const validate = (values, props) => {
@@ -27,34 +29,8 @@ const validate = (values, props) => {
 const OpinionVersionCreateForm = React.createClass({
   propTypes: {
     opinionId: PropTypes.string.isRequired,
-    opinionBody: PropTypes.string,
   },
   mixins: [IntlMixin],
-
-  getDefaultProps() {
-    return {
-      opinionBody: '',
-      mode: 'create',
-      user: null,
-    };
-  },
-
-  // create() {
-  //     this.setState({ isSubmitting: true });
-  //
-  //     OpinionActions
-  //     .createVersion(opinionId, this.state.form)
-  //     .then((version) => {
-  //       this.setState(this.getInitialState());
-  //       this.close();
-  //       window.location.href = `${window.location.href}/versions/${version.slug}`;
-  //       return true;
-  //     })
-  //     .catch(() => {
-  //       this.setState({ isSubmitting: false, submitted: false });
-  //     });
-  // },
-
 
   render() {
     return (
@@ -64,14 +40,12 @@ const OpinionVersionCreateForm = React.createClass({
           type="text"
           component={renderInput}
           label={this.getIntlMessage('opinion.version.title')}
-          groupClassName={this.getGroupStyle('title')}
         />
         <Field
           name="body"
           type="editor"
           component={renderInput}
           label={this.getIntlMessage('opinion.version.body')}
-          groupClassName={this.getGroupStyle('body')}
           help={this.getIntlMessage('opinion.version.body_helper')}
         />
         <Field
@@ -79,7 +53,6 @@ const OpinionVersionCreateForm = React.createClass({
           type="editor"
           component={renderInput}
           label={this.getIntlMessage('opinion.version.comment')}
-          groupClassName={this.getGroupStyle('comment')}
           help={this.getIntlMessage('opinion.version.comment_helper')}
         />
       </form>
@@ -87,13 +60,15 @@ const OpinionVersionCreateForm = React.createClass({
   },
 });
 
-export default connect((state, props) => ({
+export default connect((state: State) => ({
   initialValues: {
     title: '',
     body: state.opinion.opinionsById[state.opinion.currentOpinionId].body,
     comment: null,
   },
+  opinionId: state.opinion.currentOpinionId,
 }))(reduxForm({
   form: formName,
+  onSubmit,
   validate,
 })(OpinionVersionCreateForm));

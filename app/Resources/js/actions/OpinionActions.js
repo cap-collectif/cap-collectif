@@ -4,8 +4,6 @@ import {
   RECEIVE_OPINION,
   DELETE_OPINION_SUCCESS,
   DELETE_OPINION_FAILURE,
-  UPDATE_OPINION_VERSION_SUCCESS,
-  UPDATE_OPINION_VERSION_FAILURE,
   DELETE_OPINION_VERSION_SUCCESS,
   DELETE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
@@ -58,22 +56,6 @@ export default {
       }
     }
     return votes;
-  },
-
-  // Create or update versions
-  updateVersion: (opinion, version, data) => {
-    return Fetcher
-      .put(`/opinions/${opinion}/versions/${version}`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_VERSION_SUCCESS,
-        });
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_VERSION_FAILURE,
-        });
-      });
   },
 
   deleteVersion: (version, opinion) => {

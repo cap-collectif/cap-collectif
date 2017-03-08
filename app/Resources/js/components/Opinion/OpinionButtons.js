@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionEditButton from './OpinionVersionEditButton';
+import OpinionVersionEditModal from './OpinionVersionEditModal';
 import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
@@ -70,6 +71,7 @@ const OpinionButtons = React.createClass({
     const opinion = this.props.opinion;
     return (
       <ButtonToolbar>
+        <OpinionVersionEditModal />
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
