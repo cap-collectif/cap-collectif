@@ -15,11 +15,8 @@ const OpinionVersionEditButton = React.createClass({
 
   getDefaultProps() {
     return {
-      opinionBody: '',
-      isContribuable: false,
       className: '',
       style: {},
-      user: null,
     };
   },
 

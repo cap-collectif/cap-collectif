@@ -55,7 +55,7 @@ const OpinionVersionCreateForm = React.createClass({
 export default connect((state: State) => ({
   initialValues: {
     title: '',
-    body: state.opinion.opinionsById[state.opinion.currentOpinionId].body,
+    body: state.opinion.currentOpinionId && state.opinion.opinionsById[state.opinion.currentOpinionId].body,
     comment: null,
   },
   opinionId: state.opinion.currentOpinionId,

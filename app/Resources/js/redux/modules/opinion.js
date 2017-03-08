@@ -8,6 +8,8 @@ import type { Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
+type StartEditOpinionVersionAction = { type: 'opinion/START_EDIT_OPINION_VERSION' };
+type CancelEditOpinionVersionAction = { type: 'opinion/CANCEL_EDIT_OPINION_VERSION' };
 type StartCreateOpinionVersionAction = { type: 'opinion/START_CREATE_OPINION_VERSION' };
 type CancelCreateOpinionVersionAction = { type: 'opinion/CANCEL_CREATE_OPINION_VERSION' };
 type ShowOpinionVersionEditModalAction = { type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL' };
@@ -21,6 +23,8 @@ export type OpinionAction =
   | { type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED', votes: OpinionVotes, opinionId: Uuid }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
+  | StartEditOpinionVersionAction
+  | CancelEditOpinionVersionAction
   | ShowOpinionVersionEditModalAction
   | CloseOpinionVersionEditModalAction
   | ShowOpinionVersionCreateModalAction
@@ -30,7 +34,13 @@ export type OpinionAction =
 ;
 type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {
-  id: string,
+  id: Uuid,
+  body: string,
+  title: string,
+  comment: string,
+  parent: {
+    id: Uuid
+  },
   votes: OpinionVotes,
   votesCount: number,
   user_vote: ?VoteValue
@@ -66,10 +76,10 @@ const initialState: State = {
   showOpinionVersionCreateModal: false,
 };
 
-const startCreatingOpinionVersion = () => ({ type: 'opinion/START_CREATE_OPINION_VERSION' });
-const cancelCreatingOpinionVersion = () => ({ type: 'opinion/CANCEL_CREATE_OPINION_VERSION' });
-const startEditingOpinionVersion = () => ({ type: 'opinion/START_EDIT_OPINION_VERSION' });
-const cancelEditingOpinionVersion = () => ({ type: 'opinion/CANCEL_EDIT_OPINION_VERSION' });
+const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({ type: 'opinion/START_CREATE_OPINION_VERSION' });
+const cancelCreatingOpinionVersion = (): CancelCreateOpinionVersionAction => ({ type: 'opinion/CANCEL_CREATE_OPINION_VERSION' });
+const startEditingOpinionVersion = (): StartEditOpinionVersionAction => ({ type: 'opinion/START_EDIT_OPINION_VERSION' });
+const cancelEditingOpinionVersion = (): CancelEditOpinionVersionAction => ({ type: 'opinion/CANCEL_EDIT_OPINION_VERSION' });
 export const showOpinionVersionEditModal = (): ShowOpinionVersionEditModalAction => ({ type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL' });
 export const closeOpinionVersionEditModal = (): CloseOpinionVersionEditModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL' });
 export const closeOpinionVersionCreateModal = (): CloseOpinionVersionCreateModalAction => ({ type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL' });
@@ -90,7 +100,7 @@ export const createOpinionVersion = (data: Object, dispatch: Dispatch, { opinion
     );
 };
 
-export const editOpinionVersion = (dispatch: Dispatch, data: Object, props): Promise<*> => {
+export const editOpinionVersion = (dispatch: Dispatch, data: Object, { opinionId, versionId }: {opinionId: string, versionId: string}): Promise<*> => {
   dispatch(startEditingOpinionVersion());
   const apiData = {
     title: data.title,
@@ -98,7 +108,7 @@ export const editOpinionVersion = (dispatch: Dispatch, data: Object, props): Pro
     comment: data.comment,
   };
   return Fetcher
-    .put(`/opinions/${props.opinionId}/versions/${props.versionId}`, apiData)
+    .put(`/opinions/${opinionId}/versions/${versionId}`, apiData)
     .then(
       () => {
         dispatch(closeOpinionVersionEditModal());
