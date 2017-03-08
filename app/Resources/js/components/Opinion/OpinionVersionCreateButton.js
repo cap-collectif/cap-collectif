@@ -45,9 +45,4 @@ const OpinionVersionCreateButton = React.createClass({
 
 });
 
-const mapStateToProps = state => ({
-  user: state.user.user,
-  features: state.default.features,
-});
-
-export default connect(mapStateToProps)(OpinionVersionCreateButton);
+export default connect()(OpinionVersionCreateButton);

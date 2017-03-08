@@ -10,14 +10,6 @@ import type { State } from '../../types';
 export const formName = 'opinion-version-create';
 const validate = (values, props) => {
   const errors = {};
-  // formValidationRules: {
-  //   title: {
-  //     notBlank: { message: 'opinion.version.title_error' },
-  //     min: { value: 2, message: 'opinion.version.title_error' },
-  //   },
-  //   body: undefined,
-  //   confirm: undefined,
-  // },
   if (values.body === props.initialValues.body) {
     errors.body = 'opinion.version.body_error';
   }
