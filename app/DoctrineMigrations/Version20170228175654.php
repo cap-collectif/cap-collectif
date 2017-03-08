@@ -20,7 +20,7 @@ class Version20170228175654 extends AbstractMigration
             'category' => 'pages.shield',
             'value' => '',
             'position' => 2,
-            'enabled' => true,
+            'is_enabled' => true,
             'type' => 1,
         ]);
         $this->connection->insert('site_image', ['keyname' => 'image.shield', 'category' => 'pages.shield', 'Media_id' => null, 'is_enabled' => true, 'position' => 1]);

@@ -10,7 +10,7 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 import type { State as GlobalState, Dispatch, Action } from '../../types';
 
-const PROPOSAL_PAGINATION = 20;
+const PROPOSAL_PAGINATION = 51;
 
 type Status = { id: number };
 type ChangeFilterAction = { type: 'proposal/CHANGE_FILTER', filter: string, value: string };
