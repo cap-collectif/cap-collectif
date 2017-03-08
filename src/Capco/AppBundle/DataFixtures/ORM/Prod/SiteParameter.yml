@@ -344,7 +344,6 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterShieldText:
         keyname: shield.introduction
         category: pages.shield
-        value: |
-              <p>Ce site est réservé aux inscrits</p>
+        value: ""
         position: 2
         type: 1

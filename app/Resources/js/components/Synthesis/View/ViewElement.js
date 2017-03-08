@@ -198,7 +198,7 @@ const ViewElement = React.createClass({
             <Tooltip>
               <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
             </Tooltip>
-            }>
+          }>
             <div className="synthesis__element__bar">
               <span className="synthesis__element__bar__value" style={{ width: `${calculPourcentage(element, parent)}%` }} />
               {this.renderTitle()}
