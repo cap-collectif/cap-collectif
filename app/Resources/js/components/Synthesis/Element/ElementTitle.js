@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { IntlMixin } from 'react-intl';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import SynthesisPourcentageTooltipLabel from '../View/SynthesisPourcentageTooltipLabel';
 
 const ElementTitle = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
+    parent: React.PropTypes.object,
     linkType: React.PropTypes.string,
     hasLink: React.PropTypes.bool,
     className: React.PropTypes.string,
@@ -47,16 +50,25 @@ const ElementTitle = React.createClass({
       linkType,
       onClick,
       style,
+      parent,
     } = this.props;
     const className = this.props.className + (onClick ? ' btn btn-link' : '');
     if (!hasLink) {
       return (
-        <span style={style} className={className} onClick={onClick} >
-          {this.renderTitle()}
-          { this.props.className === 'tree__item__title' &&
-            <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
-          }
-        </span>
+            this.props.className === 'tree__item__title' && element && parent
+            ? <OverlayTrigger placement="top" overlay={
+              <Tooltip>
+                <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
+              </Tooltip>
+            }>
+              <span style={style} className={className} onClick={onClick} >
+                {this.renderTitle()}
+                <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
+              </span>
+            </OverlayTrigger>
+            : <span style={style} className={className} onClick={onClick}>
+              {this.renderTitle()}
+            </span>
       );
     }
     if (linkType === 'edition') {

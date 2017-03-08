@@ -292,18 +292,28 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $separator = addcslashes($config['path_separator'], '%');
         $path = $config['path'];
         $qb = $this->createQueryBuilder('se')
-            ->select('se.id', 'se.level', 'se.path', 'se.displayType', 'se.title', 'se.body', 'se.description', 'se.published', 'COUNT(c.id) as childrenCount')
+            ->select(
+              'se.id',
+              'se.level',
+              'se.path',
+              'se.displayType',
+              'se.title',
+              'se.body',
+              'se.description',
+              'se.published',
+              'COUNT(c.id) as childrenCount',
+              'se.publishedChildrenCount',
+              'se.publishedParentChildrenCount',
+              'se.childrenScore',
+              'se.parentChildrenScore',
+              '(se.publishedChildrenCount + se.childrenScore) as childrenElementsNb',
+              '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb'
+            )
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
         if ($type === 'published') {
             $qb->addSelect(
                 'se.votes',
-                'se.publishedChildrenCount',
-                'se.publishedParentChildrenCount',
-                'se.childrenScore',
-                'se.parentChildrenScore',
-                '(se.publishedChildrenCount + se.childrenScore) as childrenElementsNb',
-                '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb',
                 'se.linkedDataUrl',
                 'se.subtitle',
                 'a.username as authorName',

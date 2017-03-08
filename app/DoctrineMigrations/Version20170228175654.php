@@ -20,7 +20,7 @@ class Version20170228175654 extends AbstractMigration
             'category' => 'pages.shield',
             'value' => '<p>Ce site est réservé aux inscrits</p>',
             'position' => 2,
-            'is_enabled' => true,
+            'enabled' => true,
             'type' => 1,
         ]);
         $this->connection->insert('site_image', ['keyname' => 'image.shield', 'category' => 'pages.shield', 'Media_id' => null, 'is_enabled' => true, 'position' => 1]);

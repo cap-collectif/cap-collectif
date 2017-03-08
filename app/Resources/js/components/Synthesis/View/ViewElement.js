@@ -6,6 +6,7 @@ import UserAvatar from '../../User/UserAvatar';
 import VotePiechart from '../../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
+import SynthesisPourcentageTooltipLabel, { calculPourcentage } from './SynthesisPourcentageTooltipLabel';
 
 const ViewElement = React.createClass({
   propTypes: {
@@ -26,20 +27,6 @@ const ViewElement = React.createClass({
     return {
       showChildrenModal: false,
     };
-  },
-
-  getPercentageTooltip(contributions, score, percentage) {
-    return (
-      <Tooltip>
-        <FormattedMessage
-          message={this.getIntlMessage('synthesis.percentage.tooltip')}
-          contributions={contributions}
-          scoreSign={score < 0 ? '-' : '+'}
-          score={Math.abs(score)}
-          percentage={percentage}
-        />
-      </Tooltip>
-    );
   },
 
   openOriginalContribution() {
@@ -120,10 +107,10 @@ const ViewElement = React.createClass({
           />
           {element.linkedDataUrl
             ? <a
-                style={{ marginLeft: '15px' }}
-                href={element.linkedDataUrl}
-                onClick={this.openOriginalContribution}
-            >
+              style={{ marginLeft: '15px' }}
+              href={element.linkedDataUrl}
+              onClick={this.openOriginalContribution}
+              >
               {this.getIntlMessage('synthesis.counter.link')}
             </a>
             : null
@@ -156,19 +143,14 @@ const ViewElement = React.createClass({
       settings,
     } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
-      let percentage = Math.round(
-        (element.childrenElementsNb / parent.childrenElementsNb) * 1000,
-      ) / 10;
-      percentage = percentage > 0 ? percentage : 0;
-      const tooltip = this.getPercentageTooltip(
-        element.publishedChildrenCount,
-        element.childrenScore,
-        percentage,
-      );
       return (
-        <OverlayTrigger placement="top" overlay={tooltip}>
+        <OverlayTrigger placement="top" overlay={
+          <Tooltip>
+            <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
+          </Tooltip>
+        }>
           <span className="small excerpt pull-right">
-            {percentage}%
+            {calculPourcentage(element, parent)}%
           </span>
         </OverlayTrigger>
       );
@@ -210,20 +192,11 @@ const ViewElement = React.createClass({
       parent,
     } = this.props;
     if (parent) {
-      let percentage = Math.round(
-        (element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000,
-      ) / 10;
-      percentage = percentage > 0 ? percentage : 0;
-      const tooltip = this.getPercentageTooltip(
-        element.publishedChildrenCount,
-        element.childrenScore,
-        percentage,
-      );
       return (
         <div className="synthesis__element">
-          <OverlayTrigger placement="top" overlay={tooltip}>
+          <OverlayTrigger placement="top" overlay={<SynthesisPourcentageTooltipLabel element={element} parent={parent} />}>
             <div className="synthesis__element__bar">
-              <span className="synthesis__element__bar__value" style={{ width: `${percentage}%` }} />
+              <span className="synthesis__element__bar__value" style={{ width: `${calculPourcentage(element, parent)}%` }} />
               {this.renderTitle()}
             </div>
           </OverlayTrigger>
