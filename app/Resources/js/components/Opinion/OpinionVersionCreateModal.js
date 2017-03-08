@@ -10,11 +10,9 @@ import type { State } from '../../types';
 
 const OpinionVersionCreateModal = React.createClass({
   propTypes: {
-    className: PropTypes.string,
     show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
-    style: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
