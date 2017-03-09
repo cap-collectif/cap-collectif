@@ -99,7 +99,7 @@ class Notify implements MailerInterface
         $sitename = $this->resolver->getValue('global.site.fullname');
 
         $subject = $this->translator->trans($subjectString, ['%sitename%' => $sitename], 'CapcoAppBundle');
-        $url = $this->router->generate('capco_user_confirmation_email', [
+        $url = $this->router->generate('account_confirm_email', [
         'token' => $user->getConfirmationToken(),
       ], true);
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
@@ -116,7 +116,7 @@ class Notify implements MailerInterface
 
     public function sendAdminConfirmationEmailMessage(UserInterface $user)
     {
-        $url = $this->router->generate('capco_user_confirmation_email', [
+        $url = $this->router->generate('account_confirm_email', [
           'token' => $user->getConfirmationToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
         $sitename = $this->resolver->getValue('global.site.fullname');
@@ -134,7 +134,7 @@ class Notify implements MailerInterface
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('capco_user_confirmation_email', [
+        $url = $this->router->generate('account_confirm_email', [
           'token' => $user->getConfirmationToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
         $rendered = $this->templating->render($template, [
