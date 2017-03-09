@@ -8,7 +8,6 @@ body {
     font-size: $font-size-base;
 
     &.modal-open {
-        position:fixed;
         overflow:hidden;
 
         .modal {
