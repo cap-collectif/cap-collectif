@@ -100,7 +100,7 @@ export const createOpinionVersion = (data: Object, dispatch: Dispatch, { opinion
     );
 };
 
-export const editOpinionVersion = (dispatch: Dispatch, data: Object, { opinionId, versionId }: {opinionId: string, versionId: string}): Promise<*> => {
+export const editOpinionVersion = (data: Object, dispatch: Dispatch, { opinionId, versionId }: {opinionId: string, versionId: string}): Promise<*> => {
   dispatch(startEditingOpinionVersion());
   const apiData = {
     title: data.title,
@@ -314,14 +314,14 @@ export const reducer = (state: State = initialState, action: Action): State => {
     case 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL': {
       return { ...state, showOpinionVersionEditModal: true };
     }
-    case 'opinion/CANCEL_OPINION_VERSION_EDIT_MODAL': {
-      return { ...state, cancelOpinionVersionEditModal: false };
+    case 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL': {
+      return { ...state, showOpinionVersionEditModal: false };
     }
     case 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL': {
       return { ...state, showOpinionVersionCreateModal: true };
     }
-    case 'opinion/CANCEL_OPINION_VERSION_CREATE_MODAL': {
-      return { ...state, cancelOpinionVersionCreateModal: false };
+    case 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL': {
+      return { ...state, showOpinionVersionCreateModal: false };
     }
     case OPINION_VOTES_FETCH_SUCCEEDED: {
       let votes = state.opinionsById[action.opinionId].votes;

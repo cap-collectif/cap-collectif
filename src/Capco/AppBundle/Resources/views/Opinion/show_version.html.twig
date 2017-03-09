@@ -33,6 +33,12 @@
           'body': version.body,
           'parent': {
             'id': version.parent.id,
+            'type': {
+              'voteWidgetType': version.parent.opinionType.voteWidgetType,
+            }
+          },
+          'type': {
+            'voteWidgetType': version.parent.opinionType.voteWidgetType,
           },
           'votes': [],
           'votesCount': version.getVotesCountAll(),

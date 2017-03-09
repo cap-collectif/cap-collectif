@@ -71,7 +71,6 @@ const OpinionButtons = React.createClass({
     const opinion = this.props.opinion;
     return (
       <ButtonToolbar>
-        <OpinionVersionEditModal />
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
@@ -81,6 +80,7 @@ const OpinionButtons = React.createClass({
           title={opinion.title}
           url={opinion._links.show}
         />
+        <OpinionVersionEditModal />
       </ButtonToolbar>
     );
   },

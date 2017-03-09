@@ -8,13 +8,11 @@ import { editOpinionVersion as onSubmit } from '../../redux/modules/opinion';
 import type { State } from '../../types';
 
 export const formName = 'opinion-version-edit';
+
 const validate = (values, props) => {
   const errors = {};
   if (!values.confirm) {
     errors.confirm = 'global.required';
-  }
-  if (values.body === props.initialValues.body) {
-    errors.body = 'opinion.version.body_error';
   }
   if (values.title) {
     if (values.title.length <= 2) {
@@ -25,6 +23,7 @@ const validate = (values, props) => {
   }
   return errors;
 };
+
 const OpinionVersionEditForm = React.createClass({
   propTypes: {
     versionId: PropTypes.string.isRequired,
