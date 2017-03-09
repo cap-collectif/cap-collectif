@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ConfirmationController extends Controller
 {
     /**
-     * @Route("/account/email_confirmation/{token}", defaults={"_feature_flags" = "registration"})
-     * @Route("/email-confirmation/{token}", defaults={"_feature_flags" = "registration"}) // legacy url
+     * @Route("/account/email_confirmation/{token}", name="account_confirm_email", defaults={"_feature_flags" = "registration"})
+     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", defaults={"_feature_flags" = "registration"}) // legacy url
      */
     public function emailAction($token)
     {
@@ -66,7 +66,7 @@ class ConfirmationController extends Controller
     }
 
     /**
-     * @Route("/account/new_email_confirmation/{token}")
+     * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email")
      */
     public function newEmailAction($token)
     {

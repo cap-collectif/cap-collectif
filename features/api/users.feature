@@ -186,7 +186,7 @@ Feature: Users
     {
       "username": "admin2",
       "email": "admin2@test.com",
-      "roles": ["USER_ADMIN"]
+      "roles": ["ROLE_ADMIN"]
     }
     """
     Then the JSON response status code should be 201

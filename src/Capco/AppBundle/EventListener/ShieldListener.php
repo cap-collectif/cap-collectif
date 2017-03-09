@@ -44,6 +44,8 @@ class ShieldListener
           'facebook_login',
           'google_login',
           'api_login_check',
+          'account_confirm_email',
+          'account_confirm_new_email',
           'capco_app_api_users_postuser',
           'hwi_oauth_service_redirect',
           'app_get_api_token',
