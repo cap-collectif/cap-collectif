@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import ViewTree from './View/ViewTree';
+import TreeView from './TreeView';
 
 const ViewBox = React.createClass({
   propTypes: {
@@ -24,7 +24,7 @@ const ViewBox = React.createClass({
     if (synthesis.enabled || (user && user.vip)) {
       return (
         <div className="synthesis__view">
-          <ViewTree synthesis={synthesis} />
+          <TreeView synthesis={synthesis} />
         </div>
       );
     }
