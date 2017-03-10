@@ -6,12 +6,14 @@ const ElementIcon = React.createClass({
   propTypes: {
     element: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
+    style: React.PropTypes.object,
   },
   mixins: [IntlMixin],
 
   getDefaultProps() {
     return ({
       className: '',
+      style: {},
     });
   },
 
@@ -19,6 +21,7 @@ const ElementIcon = React.createClass({
     const {
       className,
       element,
+      style,
     } = this.props;
     if (element.displayType) {
       const classes = `${classNames({
@@ -28,7 +31,7 @@ const ElementIcon = React.createClass({
         'cap-book-1': element.displayType === 'root',
       })} ${className}`;
       return (
-        <i className={classes}></i>
+        <i className={classes} style={style}></i>
       );
     }
     return null;

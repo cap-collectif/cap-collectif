@@ -6,17 +6,20 @@ import Loader from '../Utils/Loader';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
+import ElementIcon from './Element/ElementIcon';
 
 decorators.Header = (props: Object) => {
   const style = props.style;
-  const iconType = props.node.displayType === 'folder' ? 'folder' : 'file-text';
-  const iconClass = `fa fa-${iconType}`;
-  const iconStyle = { marginRight: '5px' };
+  const title = props.node.title != null ? props.node.title : `${props.node.body.substr(0, 140)}...`;
   return (
         <div style={style.base}>
           <div style={style.title}>
-            <i className={iconClass} style={iconStyle} />
-            {props.node.title}
+            <ElementIcon
+              element={props.node}
+              className="element__icon"
+              style={{ marginRight: '5px', marginLeft: '5px' }}
+            />
+            {title}
           </div>
           <div>
             {props.node.subtitle}
@@ -61,7 +64,6 @@ const TreeView = React.createClass({
     return {
       settings: SynthesisStore.settings,
       elements: [],
-      expanded: {},
       isLoading: true,
     };
   },
@@ -81,7 +83,6 @@ const TreeView = React.createClass({
   onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
-      expanded: SynthesisElementStore.expandedItems.view,
       isLoading: false,
     });
   },
@@ -94,7 +95,6 @@ const TreeView = React.createClass({
 
   render() {
     const elements = cleanEmptyChildren(this.state.elements);
-    console.log(elements);
     return (
       <Loader show={this.state.isLoading}>
         {
