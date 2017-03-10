@@ -98,7 +98,7 @@
     "react-router-bootstrap": "^0.23.1",
     "react-select": "^1.0.0-rc.2",
     "react-toggle": "^2.2.1",
-    "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/cbc028c55c6f6cd0d91cccafbb6446912f0d0f91",
+    "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/6995b4123e3f3d94a4fb9200f884b3371e168628",
     "react-truncate": "^2.0.5",
     "readmore": "0.0.2",
     "redux": "^3.4.0",

@@ -4878,9 +4878,9 @@ react-toggle@^2.2.1:
   dependencies:
     classnames "^2.2.5"
 
-"react-treebeard@https://github.com/cap-collectif/react-treebeard/tarball/cbc028c55c6f6cd0d91cccafbb6446912f0d0f91":
+"react-treebeard@https://github.com/cap-collectif/react-treebeard/tarball/6995b4123e3f3d94a4fb9200f884b3371e168628":
   version "1.1.4"
-  resolved "https://github.com/cap-collectif/react-treebeard/tarball/cbc028c55c6f6cd0d91cccafbb6446912f0d0f91#93c8b6f4dca3fff0de5eb7bfdc1c4db021d90ef8"
+  resolved "https://github.com/cap-collectif/react-treebeard/tarball/6995b4123e3f3d94a4fb9200f884b3371e168628#39293163b69eb383d0b5b0adf861d55bfd7fec2b"
   dependencies:
     babel-runtime "^5.8.29"
     deep-equal "^1.0.1"
