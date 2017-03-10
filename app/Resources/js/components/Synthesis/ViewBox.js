@@ -23,7 +23,7 @@ const ViewBox = React.createClass({
     } = this.props;
     if (synthesis.enabled || (user && user.vip)) {
       return (
-        <div className="synthesis__view">
+        <div className="">
           <TreeView synthesis={synthesis} />
         </div>
       );

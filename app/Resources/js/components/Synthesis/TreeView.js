@@ -17,11 +17,13 @@ decorators.Header = (props: Object) => {
             <ElementIcon
               element={props.node}
               className="element__icon"
-              style={{ marginRight: '5px', marginLeft: '5px' }}
+              style={{ marginRight: '5px', marginLeft: '5px', color: props.node.displayType === 'folder' ? '#4B515D' : '#33b5e5' }}
             />
-            {title}
+            <span style={{ color: 'black', fontSize: '16px' }}>
+              {title}
+            </span>
           </div>
-          <div>
+          <div className="excerpt">
             {props.node.subtitle}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import ViewTree from './ViewTree';
+import TreeView from '../TreeView';
 
 const Preview = React.createClass({
   propTypes: {
@@ -18,7 +18,7 @@ const Preview = React.createClass({
     const { synthesis } = this.props;
     return (
       <div className="synthesis__view" style={{ paddingTop: '30px' }}>
-        <ViewTree synthesis={synthesis} />
+        <TreeView synthesis={synthesis} />
       </div>
     );
   },
