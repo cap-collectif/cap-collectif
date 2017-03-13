@@ -220,6 +220,11 @@ class StepAdmin extends Admin
                   'choices' => QuestionnaireStep::$verificationLabels,
                   'translation_domain' => 'SonataAdminBundle',
               ])
+              ->add('footer', CKEditorType::class, [
+                  'label' => 'admin.fields.step.footer',
+                  'required' => false,
+                  'translation_domain' => 'SonataAdminBundle',
+              ])
             ;
         }
 

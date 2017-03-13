@@ -52,6 +52,23 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     private $questionnaire = null;
 
     /**
+     * @ORM\Column(name="footer", type="text", nullable=true)
+     */
+    private $footer = null;
+
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
+    public function setFooter(string $footer = null)
+    {
+        $this->footer = $footer;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getType()

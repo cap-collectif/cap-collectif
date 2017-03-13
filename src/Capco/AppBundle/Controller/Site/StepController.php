@@ -355,7 +355,7 @@ class StepController extends Controller
             'form' => $step->getQuestionnaire() ?: null,
             'userReplies' => $userRepliesRaw,
         ], 'json', SerializationContext::create()
-            ->setGroups(['Questionnaires', 'Questions', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
+            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps','Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
         ;
 
         return [

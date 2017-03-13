@@ -715,6 +715,7 @@ admin:
       trashed_reason: Raison de la mise à la corbeille
     step:
       body: Introduction
+      footer: Pied de page
       budget: Budget alloué
       created_at: Création
       default_sort: Tri des propositions par défaut
