@@ -129,23 +129,31 @@ export const RegistrationForm = React.createClass({
             />
         }
         {
-          dynamicFields.map((field, key) => (
-            <Field
-              id={field.id}
-              key={key}
-              name={`dynamic-${field.id}`}
-              component={renderComponent}
-              type={field.type}
-              label={
-                <span>
-                  {field.question} {
-                    !field.required && <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                  }
-                </span>
-              }
-              labelClassName="h5"
-            />
-          ))
+          dynamicFields.map((field, key) => {
+            let children;
+            if (field.choices) {
+              const choices = field.choices.map((choice, i) => <option key={i + 1} value={choice.id}>{choice.label}</option>);
+              children = [<option key={0} value="">Choisissez</option>, ...choices];
+            }
+            return (
+              <Field
+                id={field.id}
+                key={key}
+                name={`dynamic-${field.id}`}
+                component={renderComponent}
+                type={field.type}
+                label={
+                  <span>
+                    {field.question} {
+                      !field.required && <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+                    }
+                  </span>
+                }
+                labelClassName="h5"
+                children={children}
+              />
+            );
+          })
         }
         <Field
           id="charte"
