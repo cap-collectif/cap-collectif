@@ -96,7 +96,7 @@ export const login = (data: { username: string, password: string }, dispatch: Di
   });
 };
 
-export const register = (values: Object, dispatch: Dispatch) => {
+export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: Object) => {
   const form = { ...values };
   delete form.charte;
   const responses = [];
@@ -105,9 +105,14 @@ export const register = (values: Object, dispatch: Dispatch) => {
     if (key.startsWith('dynamic-')) {
       const question = key.split('-')[1];
       if (typeof form[key] !== 'undefined' && form[key].length > 0) {
+        const field = dynamicFields.find(fi => String(fi.id) === question);
+        let value = form[key];
+        if (field.type === 'select') {
+          value = { labels: [form[key]], other: null };
+        }
         responses.push({
           question,
-          value: form[key],
+          value,
         });
       }
     } else {

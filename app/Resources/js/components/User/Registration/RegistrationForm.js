@@ -132,8 +132,8 @@ export const RegistrationForm = React.createClass({
           dynamicFields.map((field, key) => {
             let children;
             if (field.choices) {
-              const choices = field.choices.map((choice, i) => <option key={i + 1} value={choice.id}>{choice.label}</option>);
-              children = [<option key={0} value="">Choisissez</option>, ...choices];
+              const choices = field.choices.map((choice, i) => <option key={i + 1} value={choice.label}>{choice.label}</option>);
+              children = [<option key={0} value="">{ this.getIntlMessage('global.select') }</option>, ...choices];
             }
             return (
               <Field
@@ -181,7 +181,7 @@ export const RegistrationForm = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   addUserTypeField: state.default.features.user_type,
-  addZipcodeField: state.default.features.user_type,
+  addZipcodeField: state.default.features.zipcode,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],

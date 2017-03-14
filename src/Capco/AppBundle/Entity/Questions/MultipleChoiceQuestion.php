@@ -27,19 +27,17 @@ class MultipleChoiceQuestion extends AbstractQuestion
      */
     protected $randomQuestionChoices = false;
 
-    /** @var bool
+    /**
      * @ORM\Column(name="other_allowed", type="boolean", nullable=false)
      */
     protected $otherAllowed = false;
 
     /**
-     * @var MultipleChoiceQuestionValidationRule
      * @ORM\Embedded(class="MultipleChoiceQuestionValidationRule", columnPrefix="validation_")
      */
     protected $validationRule;
 
     /**
-     * @var bool
      * @ORM\Column(type="boolean", name="has_validation_rule")
      * Used to handle case where validationRule VO is null (meaning that all its fields are set to null)
      */

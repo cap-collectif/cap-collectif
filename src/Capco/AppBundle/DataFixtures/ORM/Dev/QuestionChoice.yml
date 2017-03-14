@@ -44,3 +44,9 @@ Capco\AppBundle\Entity\QuestionChoice:
   questionchoice14:
     title: Choix 3 avec un titre très long pour le test du rendu
     position: 3
+  questionchoice15:
+    title: Sangohan
+    position: 3
+  questionchoice16:
+    title: Végéta
+    position: 3
