@@ -11,7 +11,9 @@ Feature: Registration
     | email                | naruto42@gmail.com   |
     | password             | narutoisthebest      |
     | zipcode              | 94123                |
+    | dynamic-6            | plop                 |
     And I select "Citoyen" from "user_type"
+    And I select "Sangohan" from "dynamic-14"
     And I check "charte"
     And I press "S'inscrire"
     Then I wait 5 seconds
@@ -26,6 +28,8 @@ Feature: Registration
       | username             | Naruto42             |
       | email                | naruto42@gmail.com   |
       | password             | narutoisthebest      |
+      | dynamic-6            | plop                 |
+    And I select "Sangohan" from "dynamic-14"
     And I check "charte"
     And I press "S'inscrire"
     Then I wait 5 seconds

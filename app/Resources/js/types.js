@@ -22,7 +22,7 @@ export type Action =
   | ReportAction
 ;
 
-export type FeatureToggles = {
+export type FeatureToggles = {|
   login_saml: boolean,
   blog: boolean,
   calendar: boolean,
@@ -51,7 +51,7 @@ export type FeatureToggles = {
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
   vote_without_account: boolean
-};
+|};
 
 export type State = {
   form: Object,

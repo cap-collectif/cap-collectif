@@ -137,7 +137,7 @@ export const RegistrationForm = React.createClass({
             }
             return (
               <Field
-                id={field.id}
+                id={`dynamic-${field.id}`}
                 key={key}
                 name={`dynamic-${field.id}`}
                 component={renderComponent}
@@ -181,7 +181,7 @@ export const RegistrationForm = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   addUserTypeField: state.default.features.user_type,
-  addZipcodeField: state.default.features.zipcode,
+  addZipcodeField: state.default.features.zipcode_at_register,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
