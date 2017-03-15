@@ -3,7 +3,6 @@ import Fetcher from '../../services/Fetcher';
 import type { Action, Dispatch } from '../../types';
 
 export type FeatureToggles = {|
-  login_saml: boolean,
   blog: boolean,
   calendar: boolean,
   ideas: boolean,
@@ -36,6 +35,41 @@ export type FeatureToggles = {|
 type ToggleFeatureSucceededAction = { type: 'default/TOGGLE_FEATURE_SUCCEEDED', feature: string, enabled: boolean };
 export type DefaultAction = ToggleFeatureSucceededAction;
 
+const initialState = {
+  districts: [],
+  themes: [],
+  features: {
+    login_saml: false,
+    blog: false,
+    calendar: false,
+    ideas: false,
+    idea_creation: false,
+    idea_trash: false,
+    login_facebook: false,
+    login_gplus: false,
+    members_list: false,
+    newsletter: false,
+    profiles: false,
+    projects_form: false,
+    project_trash: false,
+    search: false,
+    share_buttons: false,
+    shield_mode: false,
+    registration: false,
+    phone_confirmation: false,
+    reporting: false,
+    themes: false,
+    districts: false,
+    user_type: false,
+    votes_evolution: false,
+    export: false,
+    server_side_rendering: false,
+    zipcode_at_register: false,
+    vote_without_account: false,
+  },
+  userTypes: [],
+  parameters: {},
+};
 export type State = {
     districts: Array<Object>,
     themes: Array<Object>,
@@ -58,8 +92,12 @@ export const toggleFeature = (dispatch: Dispatch, feature: string, enabled: bool
     }, () => {});
 };
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
+    case '@@INIT':
+      return { ...initialState, ...state };
+    case 'default/TOGGLE_FEATURE_SUCCEEDED':
+      return { ...state, features: { ...state.features, [action.feature]: action.enabled } };
     default:
       return state;
   }

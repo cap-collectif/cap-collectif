@@ -1,31 +1,24 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
+import { toggleFeature } from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
 
-const toggleFeatureA = {};
 const showNewFieldModal = {};
 
 const RegistrationAdminPage = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
-    toggleFeature: PropTypes.func.isRequired,
+    onToggle: PropTypes.func.isRequired,
     addNewField: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  componentDidMount() {
-    $('input').iCheck('destroy');
-  },
-
-  componentDidUpdate() {
-    $('input').iCheck('destroy');
-  },
-
   render() {
-    const { toggleFeature, addNewField, features } = this.props;
+    const { onToggle, addNewField, features } = this.props;
     return (
       <div style={{ marginLeft: 15 }}>
         <h2>Réseaux sociaux</h2>
@@ -34,7 +27,7 @@ const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.login_facebook}
-              onChange={() => toggleFeature('login_facebook', !features.login_facebook)}
+              onChange={() => onToggle('login_facebook', !features.login_facebook)}
             />
           </Col>
           <Col xs={11}>Facebook</Col>
@@ -43,7 +36,7 @@ const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.login_gplus}
-              onChange={() => toggleFeature('login_gplus', !features.login_gplus)}
+              onChange={() => onToggle('login_gplus', !features.login_gplus)}
             />
           </Col>
           <Col xs={11}>Google</Col>
@@ -66,7 +59,7 @@ const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.zipcode_at_register}
-              onChange={() => toggleFeature('zipcode_at_register', !features.zipcode_at_register)}
+              onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
             />
           </Col>
           <Col xs={11}>Code postal</Col>
@@ -75,7 +68,7 @@ const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.user_type}
-              onChange={() => toggleFeature('user_type', !features.user_type)}
+              onChange={() => onToggle('user_type', !features.user_type)}
             />
           </Col>
           <Col xs={11}>Type de profil</Col>
@@ -102,7 +95,9 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggleFeature: (feature, value) => dispatch(toggleFeatureA(feature, value)),
+  onToggle: (feature, value) => {
+    toggleFeature(dispatch, feature, value);
+  },
   addNewField: () => dispatch(showNewFieldModal()),
 });
 
