@@ -228,6 +228,7 @@ class ApplicationContext extends UserContext
 
     /**
      * @Given feature :featureA is disabled
+     * @Given feature :featureA should be disabled
      */
     public function featureIsDisabled(string $feature)
     {
