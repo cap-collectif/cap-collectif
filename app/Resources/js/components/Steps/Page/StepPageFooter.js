@@ -17,7 +17,7 @@ const StepPageFooter = React.createClass({
       <div>
         <div
           className="block block--bordered"
-          style={{ marginTop: 20 }}
+          style={{ marginTop: 30 }}
         >
           <div style={{ padding: 10 }}>
             <FormattedHTMLMessage message={footer} />
