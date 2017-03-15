@@ -31,6 +31,7 @@ class FeaturesController extends FOSRestController
         if (!$form->isValid()) {
             return $form;
         }
+
         $data = $form->getData();
         if ($form->getData()['enabled']) {
           $toggleManager->activate($feature);

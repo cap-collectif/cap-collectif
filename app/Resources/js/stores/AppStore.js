@@ -9,6 +9,7 @@ import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea'
 import { reducer as proposalReducer, saga as proposalSaga } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
+import { reducer as defaultReducer } from '../redux/modules/default';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
 import type { Store } from '../types';
 
@@ -28,7 +29,7 @@ export default function configureStore(initialState: Object): Store {
   const sagaMiddleware = createSagaMiddleware();
 
   const reducers = {
-    default: () => initialState.default,
+    default: defaultReducer,
     idea: ideaReducer,
     proposal: proposalReducer,
     project: projectReducer,
