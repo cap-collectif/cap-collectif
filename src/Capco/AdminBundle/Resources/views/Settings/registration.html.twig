@@ -1,5 +1,14 @@
 {% extends 'CapcoAdminBundle::standard_layout.html.twig' %}
 
+{% block javascripts %}
+{{ parent() }}
+<script>
+setTimeout(function() {
+  jQuery("input[type='checkbox']").iCheck('destroy');
+}, 200)
+</script>
+{% endblock %}
+
 {% block content %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     <div class="col-xs-12 col-md-12">

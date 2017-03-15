@@ -48,6 +48,11 @@ class Manager
         $this->context = $contextFactory->createContext();
     }
 
+    public function exists(string $name): bool
+    {
+        return in_array($name, self::$toggles, true);
+    }
+
     public function activate($name)
     {
         $this->toggleManager->add($this->createToggle($name, Toggle::ALWAYS_ACTIVE));

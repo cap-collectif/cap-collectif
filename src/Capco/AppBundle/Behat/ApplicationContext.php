@@ -207,7 +207,7 @@ class ApplicationContext extends UserContext
      * @Given features :featureA, :featureB are enabled
      * @Given features :featureA, :featureB, :featureC are enabled
      */
-    public function featureIsEnabled($featureA, $featureB = null, $featureC = null)
+    public function activateFeatures($featureA, $featureB = null, $featureC = null)
     {
         $this->getService('capco.toggle.manager')->activate($featureA);
         if ($featureB) {
@@ -216,6 +216,22 @@ class ApplicationContext extends UserContext
                 $this->getService('capco.toggle.manager')->activate($featureC);
             }
         }
+    }
+
+    /**
+     * @Given feature :featureA should be enabled
+     */
+    public function featureIsEnabled(string $feature)
+    {
+        expect($this->getService('capco.toggle.manager')->isActive($feature))->toBe(true);
+    }
+
+    /**
+     * @Given feature :featureA is disabled
+     */
+    public function featureIsDisabled(string $feature)
+    {
+        expect($this->getService('capco.toggle.manager')->isActive($feature))->toBe(false);
     }
 
     /**

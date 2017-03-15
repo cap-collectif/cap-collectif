@@ -20,8 +20,9 @@ class SettingsController extends Controller
       $em = $this->get('doctrine')->getManager();
       $form = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
 
+      $adminPool = $this->get('sonata.admin.pool');
       return [
-          'admin_pool' => $this->get('sonata.admin.pool'),
+          'admin_pool' => $adminPool,
       ];
     }
 

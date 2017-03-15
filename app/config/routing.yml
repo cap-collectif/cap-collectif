@@ -12,6 +12,13 @@ overblog_graphql_endpoint:
 capco_api_login_check:
   path: /api/login_check
 
+capco_api_toggles:
+  resource: "@CapcoAppBundle/Controller/Api/FeaturesController.php"
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
 capco_api_synthesis:
   resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
   type: annotation
