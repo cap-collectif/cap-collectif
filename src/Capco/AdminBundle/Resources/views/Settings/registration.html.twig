@@ -1,0 +1,21 @@
+{% extends 'CapcoAdminBundle::standard_layout.html.twig' %}
+
+{% block content %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    <div class="col-xs-12 col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h2>{{ 'admin.label.pages.registration' | trans({}, 'SonataAdminBundle') }}</h2>
+            </div>
+            {{
+              react_intl_component(
+                'RegistrationAdminApp',
+                {
+                  'props': {},
+                  'rendering': 'client_side'
+                }
+              )
+            }}
+        </div>
+    </div>
+{% endblock %}

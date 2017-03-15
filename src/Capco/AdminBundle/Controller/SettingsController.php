@@ -5,10 +5,26 @@ namespace Capco\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends Controller
 {
+  /**
+   * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
+   * @Template()
+   * @Security("has_role('ROLE_ADMIN')")
+   */
+  public function registrationAction(Request $request)
+  {
+      $em = $this->get('doctrine')->getManager();
+      $form = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+
+      return [
+          'admin_pool' => $this->get('sonata.admin.pool'),
+      ];
+    }
+
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template()
