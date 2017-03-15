@@ -213,20 +213,24 @@ class StepAdmin extends Admin
             ;
         }
 
-        if ($subject instanceof QuestionnaireStep && $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
-            $formMapper
-              ->add('verification', 'choice', [
-                  'label' => 'admin.fields.step.verification',
-                  'choices' => QuestionnaireStep::$verificationLabels,
-                  'translation_domain' => 'SonataAdminBundle',
-              ])
-              ->add('footer', CKEditorType::class, [
-                  'config_name' => 'admin_editor',
-                  'label' => 'admin.fields.step.footer',
-                  'required' => false,
-                  'translation_domain' => 'SonataAdminBundle',
-              ])
-            ;
+        if ($subject instanceof QuestionnaireStep) {
+          $formMapper
+            ->add('footer', CKEditorType::class, [
+                'config_name' => 'admin_editor',
+                'label' => 'admin.fields.step.footer',
+                'required' => false,
+                'translation_domain' => 'SonataAdminBundle',
+            ])
+          ;
+          if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
+              $formMapper
+                ->add('verification', 'choice', [
+                    'label' => 'admin.fields.step.verification',
+                    'choices' => QuestionnaireStep::$verificationLabels,
+                    'translation_domain' => 'SonataAdminBundle',
+                ])
+              ;
+          }
         }
 
         $formMapper->end();
