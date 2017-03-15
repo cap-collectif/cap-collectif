@@ -221,6 +221,7 @@ class StepAdmin extends Admin
                   'translation_domain' => 'SonataAdminBundle',
               ])
               ->add('footer', CKEditorType::class, [
+                  'config_name' => 'admin_editor',
                   'label' => 'admin.fields.step.footer',
                   'required' => false,
                   'translation_domain' => 'SonataAdminBundle',
