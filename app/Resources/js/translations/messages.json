@@ -172,6 +172,17 @@
     "change": {
       "required": "Cette valeur doit être modifiée."
     },
+    "question": {
+      "types": {
+        "text": "Réponse courte",
+        "textarea": "Réponse longue",
+        "editor": "Réponse longue avec éditeur de texte",
+        "radio": "Boutons radio (une seule réponse possible)",
+        "select": "Liste déroulante (une seule réponse possible)",
+        "checkbox": "Cases à cocher (plusieurs réponses possibles)",
+        "ranking": "Vote avec classement (plusieurs réponses possibles)"
+      }
+    },
     "continue": "Continuer",
     "confirm": "Confirmer",
     "content": "Contenu",

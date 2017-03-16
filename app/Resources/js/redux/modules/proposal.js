@@ -8,7 +8,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import type { State as GlobalState, Dispatch, Action } from '../../types';
+import type { Exact, State as GlobalState, Dispatch, Action } from '../../types';
 
 const PROPOSAL_PAGINATION = 51;
 
@@ -97,6 +97,7 @@ export type State = {
   order: string,
   filters: Object,
   terms: ?string,
+  lastEditedStepId: ?number,
   currentPaginationPage: number,
   lastEditedProposalId: ?number,
   lastNotifiedStepId: ?number
@@ -108,6 +109,7 @@ const initialState: State = {
   queryCount: undefined,
   creditsLeftByStepId: {},
   proposalsById: {},
+  lastEditedStepId: null,
   userVotesByStepId: {},
   currentVotesModal: null,
   currentVoteModal: null,
@@ -566,7 +568,7 @@ export function* saga(): Generator<*, *, *> {
   ];
 }
 
-const voteReducer = (state: State, action): State => {
+const voteReducer = (state: State, action): Exact<State> => {
   const proposal = state.proposalsById[action.proposalId];
   const votesByStepId = proposal.votesByStepId || {};
   votesByStepId[action.stepId].unshift(action.vote);
@@ -591,7 +593,7 @@ const voteReducer = (state: State, action): State => {
     creditsLeftByStepId,
   };
 };
-const deleteVoteReducer = (state: State, action): State => {
+const deleteVoteReducer = (state: State, action): Exact<State> => {
   const proposal = state.proposalsById[action.proposalId];
   if (!proposal) {
     const userVotesByStepId = state.userVotesByStepId;
@@ -622,7 +624,7 @@ const deleteVoteReducer = (state: State, action): State => {
   };
 };
 
-const updateSelectionStatusSucceedReducer = (state: State, action): State => {
+const updateSelectionStatusSucceedReducer = (state: State, action): Exact<State> => {
   const proposalsById = state.proposalsById;
   const proposal = proposalsById[action.proposalId];
   const selections = proposal.selections.map((s) => {
@@ -636,7 +638,7 @@ const updateSelectionStatusSucceedReducer = (state: State, action): State => {
   return { ...state, proposalsById, lastEditedStepId, lastNotifiedStepId: null };
 };
 
-const updateProposalStatusReducer = (state: State, action): State => {
+const updateProposalStatusReducer = (state: State, action): Exact<State> => {
   const proposalsById = state.proposalsById;
   const proposal = proposalsById[action.proposalId];
   proposalsById[action.proposalId] = { ...proposal, status: action.status };
@@ -644,7 +646,7 @@ const updateProposalStatusReducer = (state: State, action): State => {
   return { ...state, proposalsById, lastEditedStepId, lastNotifiedStepId: null };
 };
 
-const unselectReducer = (state: State, action): State => {
+const unselectReducer = (state: State, action): Exact<State> => {
   const proposalsById = state.proposalsById;
   const proposal = proposalsById[action.proposalId];
   const selections = proposal.selections.filter(s => s.step.id !== action.stepId);
@@ -652,7 +654,7 @@ const unselectReducer = (state: State, action): State => {
   return { ...state, proposalsById, lastEditedStepId: null, lastNotifiedStepId: null };
 };
 
-const fetchSucceededReducer = (state: State, action): State => {
+const fetchSucceededReducer = (state: State, action): Exact<State> => {
   const proposalsById = action.proposals.reduce((map, obj) => {
     map[obj.id] = obj;
     return map;
@@ -661,7 +663,7 @@ const fetchSucceededReducer = (state: State, action): State => {
   return { ...state, proposalsById, proposalShowedId, isLoading: false, queryCount: action.count };
 };
 
-const selectSucceededReducer = (state: State, action): State => {
+const selectSucceededReducer = (state: State, action): Exact<State> => {
   const proposalsById = state.proposalsById;
   const proposal = proposalsById[action.proposalId];
   const selections = [...proposal.selections, { step: { id: action.stepId }, status: null }];
@@ -669,7 +671,7 @@ const selectSucceededReducer = (state: State, action): State => {
   return { ...state, proposalsById };
 };
 
-const fetchVotesSucceedReducer = (state: State, action): State => {
+const fetchVotesSucceedReducer = (state: State, action): Exact<State> => {
   const proposal = state.proposalsById[action.proposalId];
   const votesByStepId = proposal.votesByStepId || [];
   votesByStepId[action.stepId] = action.votes;
@@ -678,7 +680,7 @@ const fetchVotesSucceedReducer = (state: State, action): State => {
   return { ...state, proposalsById };
 };
 
-export const reducer = (state: State = initialState, action: Action): $Shape<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

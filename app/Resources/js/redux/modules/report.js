@@ -1,5 +1,5 @@
 // @flow
-import type { Action, Dispatch, Uuid } from '../../types';
+import type { Exact, Action, Dispatch, Uuid } from '../../types';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
@@ -123,7 +123,7 @@ export const submitProposalReport = (proposal: Object, data: Object, dispatch: D
   );
 };
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'report/START_LOADING':
       return { ...state, isLoading: true };

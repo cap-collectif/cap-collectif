@@ -1,8 +1,8 @@
 // @flow
 import Fetcher from '../../services/Fetcher';
-import type { Action, Dispatch } from '../../types';
+import type { Exact, Action, Dispatch } from '../../types';
 
-export type FeatureToggles = {|
+export type FeatureToggles = {
   blog: boolean,
   calendar: boolean,
   ideas: boolean,
@@ -30,14 +30,29 @@ export type FeatureToggles = {|
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
   vote_without_account: boolean
-|};
+};
 
+type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
+type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
 type ToggleFeatureSucceededAction = { type: 'default/TOGGLE_FEATURE_SUCCEEDED', feature: string, enabled: boolean };
-export type DefaultAction = ToggleFeatureSucceededAction;
+export type DefaultAction =
+  ToggleFeatureSucceededAction |
+  ShowNewFieldModalAction |
+  HideNewFieldModalAction
+;
+export type State = {
+    districts: Array<Object>,
+    showNewFieldModal: boolean,
+    themes: Array<Object>,
+    features: Exact<FeatureToggles>,
+    userTypes: Array<Object>,
+    parameters: Object
+};
 
-const initialState = {
+const initialState: State = {
   districts: [],
   themes: [],
+  showNewFieldModal: false,
   features: {
     login_saml: false,
     blog: false,
@@ -70,19 +85,24 @@ const initialState = {
   userTypes: [],
   parameters: {},
 };
-export type State = {
-    districts: Array<Object>,
-    themes: Array<Object>,
-    features: FeatureToggles,
-    userTypes: Array<Object>,
-    parameters: Object
-};
 
 export const toggleFeatureSucceeded = (feature: string, enabled: boolean): ToggleFeatureSucceededAction => ({
   type: 'default/TOGGLE_FEATURE_SUCCEEDED',
   feature,
   enabled,
 });
+export const showNewFieldModal = (): ShowNewFieldModalAction => ({ type: 'default/SHOW_NEW_FIELD_MODAL' });
+export const hideNewFieldModal = (): HideNewFieldModalAction => ({ type: 'default/HIDE_NEW_FIELD_MODAL' });
+
+export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
+  return Fetcher
+    .post('/registration_form/questions', values)
+    .then(() => {
+      dispatch(hideNewFieldModal());
+    },
+    () => {},
+  );
+};
 
 export const toggleFeature = (dispatch: Dispatch, feature: string, enabled: boolean): Promise<*> => {
   return Fetcher
@@ -92,10 +112,14 @@ export const toggleFeature = (dispatch: Dispatch, feature: string, enabled: bool
     }, () => {});
 };
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'default/SHOW_NEW_FIELD_MODAL':
+      return { ...state, showNewFieldModal: true };
+    case 'default/HIDE_NEW_FIELD_MODAL':
+      return { ...state, showNewFieldModal: false };
     case 'default/TOGGLE_FEATURE_SUCCEEDED':
       return { ...state, features: { ...state.features, [action.feature]: action.enabled } };
     default:

@@ -31,6 +31,7 @@ import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonA
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from './startup/ProposalAdminSelectionsApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
+import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
 import appStore from '../js/stores/AppStore';
 
@@ -40,6 +41,7 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  AdminModalsApp,
   RegistrationAdminApp,
   ShieldApp,
   ProjectListPageApp,

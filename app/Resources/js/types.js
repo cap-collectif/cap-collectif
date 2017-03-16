@@ -8,6 +8,7 @@ import type { State as IdeaState, IdeaAction } from './redux/modules/idea';
 import type { State as ReportState, ReportAction } from './redux/modules/report';
 import type { State as DefaultState, DefaultAction } from './redux/modules/default';
 
+export type Exact<T> = T & $Shape<T>;
 export type Uuid = string;
 export type VoteValue = -1 | 0 | 1;
 export type Opinion = { id: Uuid };

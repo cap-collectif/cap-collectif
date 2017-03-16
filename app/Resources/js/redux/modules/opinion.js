@@ -4,7 +4,7 @@ import { call, put } from 'redux-saga/effects';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
-import type { Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../types';
+import type { Exact, Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../types';
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
@@ -240,12 +240,12 @@ export const voteVersion = (value: VoteValue, version: Uuid, opinion: Uuid, disp
   vote(value, version, opinion, dispatch)
 );
 
-const updateOpinion = (state: State, opinion: Opinion): State => ({
+const updateOpinion = (state: State, opinion: Opinion): Exact<State> => ({
   ...state,
   opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
 });
 
-const updateVersion = (state: State, version: Version): State => ({
+const updateVersion = (state: State, version: Version): Exact<State> => ({
   ...state,
   versionsById: { ...state.versionsById, [version.id]: version },
 });
@@ -256,7 +256,7 @@ const getVoteStringByValue = (value: VoteValue): string => {
   return 'Mitige';
 };
 
-const appendVote = (state: State, newVote: Object, object: Object, type: string): State => {
+const appendVote = (state: State, newVote: Object, object: Object, type: string): Exact<State> => {
   const previousVote = object.votes.find(v => v.user.uniqueId === newVote.user.uniqueId);
   const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
   if (typeof previousVote === 'undefined') { // first vote
@@ -283,7 +283,7 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
   return type === 'version' ? updateVersion(state, contribution) : updateOpinion(state, contribution);
 };
 
-const removeVote = (state: State, oldVote: Object, object: Object, type: string): State => {
+const removeVote = (state: State, oldVote: Object, object: Object, type: string): Exact<State> => {
   const indexToRemove = object.votes.findIndex(v => v.user && v.user.uniqueId === oldVote.user.uniqueId);
   const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
   const lol = {
@@ -297,7 +297,7 @@ const removeVote = (state: State, oldVote: Object, object: Object, type: string)
   return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
 };
 
-export const reducer = (state: State = initialState, action: Action): State => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'opinion/START_CREATE_OPINION_VERSION': {
       return { ...state, isCreatingOpinionVersion: true };

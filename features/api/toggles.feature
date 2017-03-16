@@ -49,7 +49,7 @@ Feature: Toggles
     }
     """
 
-  @security
+  @database
   Scenario: Admin API client wants to update a toggle
     Given I am logged in to api as admin
     And feature "login_facebook" is disabled

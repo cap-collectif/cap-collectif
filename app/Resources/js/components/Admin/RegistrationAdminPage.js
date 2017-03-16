@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import { Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { toggleFeature } from '../../redux/modules/default';
+import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
-
-const showNewFieldModal = {};
 
 const RegistrationAdminPage = React.createClass({
   propTypes: {

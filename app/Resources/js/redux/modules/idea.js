@@ -4,7 +4,7 @@ import { call, put } from 'redux-saga/effects';
 import type { IOEffect } from 'redux-saga/effects';
 import { find, findLast } from 'lodash';
 import Fetcher from '../../services/Fetcher';
-import type { Action } from '../../types';
+import type { Exact, Action } from '../../types';
 
 export const VOTES_PREVIEW_COUNT = 8;
 
@@ -83,7 +83,7 @@ export function* saga(): Generator<IOEffect, *, *> {
   yield* takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
 }
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'idea/VOTES_FETCH_SUCCEEDED': {
       let votes = state.ideas[action.ideaId].votes;

@@ -3,7 +3,7 @@ import { takeEvery } from 'redux-saga';
 import { select, call, put } from 'redux-saga/effects';
 import { stringify } from 'qs';
 import Fetcher from '../../services/Fetcher';
-import type { State as GlobalState, Uuid, Action } from '../../types';
+import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 
 export type State = {
   currentProjectStepById: ?number,
@@ -11,7 +11,7 @@ export type State = {
   projects: Array<Object>,
   projectsById: {[id: Uuid]: Object},
   projectTypes: Array<Object>,
-  pages: number,
+  page: number,
   pages: ?Array<Object>,
   limit: ?number,
   orderBy: ?string,
@@ -106,7 +106,7 @@ export function* saga(): Generator<*, *, *> {
   ];
 }
 
-export const reducer = (state: State = initialState, action: Action) => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

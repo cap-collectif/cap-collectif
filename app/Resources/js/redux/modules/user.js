@@ -3,7 +3,7 @@ import { submit, change, SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
-import type { Dispatch, Action } from '../../types';
+import type { Exact, Dispatch, Action } from '../../types';
 
 export type State = {
   showLoginModal: boolean,
@@ -213,7 +213,7 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
     });
 };
 
-export const reducer = (state: State = initialState, action: Action): State => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
