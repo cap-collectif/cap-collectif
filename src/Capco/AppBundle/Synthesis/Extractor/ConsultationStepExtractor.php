@@ -242,6 +242,7 @@ class ConsultationStepExtractor
             $element->setDisplayType('folder');
             $element->setArchived(true);
             $element->setPublished(true);
+
             return $this->setDataFromOpinionType($element, $data);
         }
 
@@ -308,6 +309,7 @@ class ConsultationStepExtractor
         $element->setSubtitle($opinionType->getSubtitle());
         $element->setBody(null);
         $element->setVotes([]);
+
         return $element;
     }
 

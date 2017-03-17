@@ -4,19 +4,15 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\ApiToggleType;
 use Capco\AppBundle\Form\ApiQuestionType;
 use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
-
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -45,9 +41,9 @@ class FeaturesController extends FOSRestController
 
         $data = $form->getData();
         if ($form->getData()['enabled']) {
-          $toggleManager->activate($feature);
+            $toggleManager->activate($feature);
         } else {
-          $toggleManager->deactivate($feature);
+            $toggleManager->deactivate($feature);
         }
     }
 
@@ -81,7 +77,7 @@ class FeaturesController extends FOSRestController
                 $question->addQuestionChoice($questionChoice);
             }
         }
-        $question->setType((int)$data['type']);
+        $question->setType((int) $data['type']);
         $question->setTitle($data['question']);
         $question->setRequired($data['required']);
 
@@ -97,7 +93,6 @@ class FeaturesController extends FOSRestController
         return $question;
     }
 
-
     /**
      * @Put("/registration_form")
      * @Security("has_role('ROLE_ADMIN')")
@@ -105,16 +100,16 @@ class FeaturesController extends FOSRestController
      */
     public function putRegistrationFormAction(Request $request)
     {
-      $em = $this->get('doctrine')->getManager();
-      $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
-      $form = $this->createForm(new AdminConfigureRegistrationType(), $registrationForm);
-      $form->submit($request->request->all(), false);
+        $em = $this->get('doctrine')->getManager();
+        $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+        $form = $this->createForm(new AdminConfigureRegistrationType(), $registrationForm);
+        $form->submit($request->request->all(), false);
 
-      if (!$form->isValid()) {
-          return $form;
-      }
+        if (!$form->isValid()) {
+            return $form;
+        }
 
-      $em->flush();
+        $em->flush();
     }
 
     /**

@@ -3,12 +3,8 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Capco\AppBundle\Form\ValueResponseType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Toggle\Manager;
 
 class AdminConfigureRegistrationType extends AbstractType
 {

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +20,7 @@ class ApiQuestionType extends AbstractType
             ->add('choices', CollectionType::class, [
                 'entry_type' => ApiQuestionChoiceType::class,
                 'allow_add' => true,
-                'required' => false
+                'required' => false,
             ])
         ;
     }

@@ -38,7 +38,7 @@ class RegistrationFormExtension extends \Twig_Extension
           'bottomText' => $form->getBottomText(),
           'topTextDisplayed' => $form->isTopTextDisplayed(),
           'topText' => $form->getTopText(),
-          'questions' => json_decode($serializedQuestions, true)
+          'questions' => json_decode($serializedQuestions, true),
         ];
     }
 }
