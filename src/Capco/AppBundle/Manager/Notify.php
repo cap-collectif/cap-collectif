@@ -146,7 +146,7 @@ class Notify implements MailerInterface
 
     public function sendNewEmailConfirmationEmailMessage(UserInterface $user)
     {
-        $url = $this->router->generate('capco_user_confirmation_newemail', [
+        $url = $this->router->generate('account_confirm_new_email', [
           'token' => $user->getNewEmailConfirmationToken(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
         $sitename = $this->resolver->getValue('global.site.fullname');
