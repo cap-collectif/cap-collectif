@@ -27,6 +27,12 @@ export const AddNewQuestionForm = React.createClass({
           component={renderInput}
         />
         <Field
+          name="required"
+          type="checkbox"
+          label={'Saisie obligatoire'}
+          component={renderInput}
+        />
+        <Field
           name="type"
           type="select"
           label={'Type'}
@@ -82,5 +88,6 @@ const mapStateToProps = (state: State) => ({
 const connector = connect(mapStateToProps);
 export default reduxForm({
   onSubmit,
+  initialValues: { required: false },
   form: formName,
 })(connector(AddNewQuestionForm));

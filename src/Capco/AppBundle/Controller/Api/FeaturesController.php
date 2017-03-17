@@ -10,12 +10,14 @@ use Capco\AppBundle\Form\ApiQuestionType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\QuestionChoice;
 
@@ -91,5 +93,19 @@ class FeaturesController extends FOSRestController
         $em->flush();
 
         return $question;
+    }
+
+
+    /**
+     * @Delete("/registration_form/questions/{id}")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function deleteRegistrationQuestionAction(AbstractQuestion $question)
+    {
+        $em = $this->get('doctrine')->getManager();
+        $em->remove($question);
+        $em->flush();
     }
 }

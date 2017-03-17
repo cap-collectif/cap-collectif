@@ -11,6 +11,7 @@ export type State = {
   isSubmittingAccountForm: boolean,
   showConfirmPasswordModal: boolean,
   confirmationEmailResent: boolean,
+  registration_form_fields: Array<Object>,
   user: ?{
     id: string,
     username: string,
@@ -39,6 +40,7 @@ type CancelEmailChangeSucceedAction = { type: 'CANCEL_EMAIL_CHANGE' };
 type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
 export type SubmitConfirmPasswordAction = { type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: string };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
+type DeleteRegistrationFieldSucceededAction = { type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id: number };
 export type UserAction =
     ShowRegistrationModalAction |
     CloseRegistrationModalAction |
@@ -50,6 +52,7 @@ export type UserAction =
     CancelEmailChangeSucceedAction |
     CloseConfirmPasswordModalAction |
     UserRequestEmailChangeAction |
+    DeleteRegistrationFieldSucceededAction |
     SubmitConfirmPasswordAction
 ;
 
@@ -60,8 +63,11 @@ const initialState : State = {
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   user: null,
+  registration_form_fields: [],
 };
 
+
+export const deleteRegistrationFieldSucceeded = (id: number): DeleteRegistrationFieldSucceededAction => ({ type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id });
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({ type: 'SHOW_REGISTRATION_MODAL' });
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({ type: 'CLOSE_REGISTRATION_MODAL' });
 export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
@@ -217,6 +223,16 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'DELETE_REGISTRATION_FIELD_SUCCEEDED': {
+      const index = state.registration_form_fields.findIndex((el => el.id === action.id));
+      return {
+        ...state,
+        registration_form_fields: [
+          ...state.registration_form_fields.slice(0, index),
+          ...state.registration_form_fields.slice(index + 1),
+        ],
+      };
+    }
     case 'SHOW_REGISTRATION_MODAL':
       return { ...state, showRegistrationModal: true };
     case 'CLOSE_REGISTRATION_MODAL':

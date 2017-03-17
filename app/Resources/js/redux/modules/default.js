@@ -1,6 +1,8 @@
 // @flow
+import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import type { Exact, Action, Dispatch } from '../../types';
+import { deleteRegistrationFieldSucceeded } from './user';
 
 export type FeatureToggles = {
   blog: boolean,
@@ -99,6 +101,20 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
     .post('/registration_form/questions', values)
     .then(() => {
       dispatch(hideNewFieldModal());
+      window.location.reload();
+    },
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
+};
+
+export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
+  return Fetcher
+    .delete(`/registration_form/questions/${id}`)
+    .then(() => {
+      dispatch(deleteRegistrationFieldSucceeded(id));
+      window.location.reload();
     },
     () => {},
   );

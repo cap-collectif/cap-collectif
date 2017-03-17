@@ -2,9 +2,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import { Col, Button } from 'react-bootstrap';
+import { Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
+import { toggleFeature, showNewFieldModal, deleteRegistrationField } from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
 
 const RegistrationAdminPage = React.createClass({
@@ -12,13 +12,15 @@ const RegistrationAdminPage = React.createClass({
     features: PropTypes.object.isRequired,
     onToggle: PropTypes.func.isRequired,
     addNewField: PropTypes.func.isRequired,
+    deleteField: PropTypes.func.isRequired,
+    dynamicFields: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { onToggle, addNewField, features } = this.props;
+    const { onToggle, deleteField, addNewField, features, dynamicFields } = this.props;
     return (
-      <div style={{ marginLeft: 15 }}>
+      <div style={{ margin: '0 15px' }}>
         <h2>Réseaux sociaux</h2>
         <p>Permettre l'inscription via:</p>
         <div className="row" style={{ padding: '10px 0' }}>
@@ -74,6 +76,27 @@ const RegistrationAdminPage = React.createClass({
         <p>
           <strong>Champ(s) supplémentaire(s)</strong>
         </p>
+        {
+          dynamicFields.length > 0 &&
+            <ListGroup>
+              {
+                dynamicFields.map(field =>
+                  <ListGroupItem>
+                    <Button
+                      className="pull-right"
+                      onClick={() => deleteField(field.id)}
+                    >
+                      Supprimer
+                    </Button>
+                    <div>
+                      <strong>{field.question}</strong>
+                    </div>
+                    <span>{field.type}</span>
+                  </ListGroupItem>,
+                )
+              }
+            </ListGroup>
+        }
         <Button onClick={() => addNewField()}>
           Ajouter
         </Button>
@@ -91,12 +114,16 @@ const RegistrationAdminPage = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  dynamicFields: state.user.registration_form_fields,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature, value) => {
     toggleFeature(dispatch, feature, value);
   },
   addNewField: () => dispatch(showNewFieldModal()),
+  deleteField: (id) => {
+    deleteRegistrationField(id, dispatch);
+  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
