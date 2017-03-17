@@ -18,6 +18,13 @@ const initialState : State = {
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
+  registration_form: {
+    bottomTextDisplayed: false,
+    topTextDisplayed: false,
+    bottomText: '',
+    topText: '',
+    questions: [],
+  },
   user: null,
 };
 

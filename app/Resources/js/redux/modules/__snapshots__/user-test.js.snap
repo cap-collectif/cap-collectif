@@ -4,6 +4,13 @@ exports[`User Reducer Should handle CANCEL_EMAIL_CHANGE 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -17,6 +24,13 @@ exports[`User Reducer Should handle CLOSE_CONFIRM_PASSWORD_MODAL 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -28,6 +42,13 @@ exports[`User Reducer Should handle SHOW_CONFIRM_PASSWORD_MODAL 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": true,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -39,6 +60,13 @@ exports[`User Reducer Should handle STOP_SUBMIT_ACCOUNT_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -50,6 +78,13 @@ exports[`User Reducer Should handle SUBMIT_ACCOUNT_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": true,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -61,6 +96,13 @@ exports[`User Reducer Should handle SUBMIT_CONFIRM_PASSWORD_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
@@ -72,6 +114,13 @@ exports[`User Reducer Should handle USER_REQUEST_EMAIL_CHANGE 1`] = `
 Object {
   "confirmationEmailResent": false,
   "isSubmittingAccountForm": false,
+  "registration_form": Object {
+    "bottomText": "",
+    "bottomTextDisplayed": false,
+    "questions": Array [],
+    "topText": "",
+    "topTextDisplayed": false,
+  },
   "showConfirmPasswordModal": false,
   "showLoginModal": false,
   "showRegistrationModal": false,
