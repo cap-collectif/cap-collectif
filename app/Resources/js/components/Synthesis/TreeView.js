@@ -11,6 +11,12 @@ import ElementIcon from './Element/ElementIcon';
 decorators.Header = (props: Object) => {
   const style = props.style;
   const title = props.node.title != null ? props.node.title : `${props.node.body.substr(0, 140)}...`;
+  let titleElement;
+  if (props.node.linkedDataUrl && props.node.displayType !== 'folder') {
+    titleElement = (<a href={props.node.linkedDataUrl}>{title}</a>);
+  } else {
+    titleElement = title;
+  }
   return (
         <div style={style.base}>
           <div style={style.title}>
@@ -20,7 +26,7 @@ decorators.Header = (props: Object) => {
               style={{ float: 'left', marginRight: '5px', paddingLeft: '5px', color: props.node.displayType === 'folder' ? '#4B515D' : '#33b5e5' }}
             />
             <div style={{ overflow: 'hidden', color: 'black', fontSize: '16px', fontWeight: props.node.displayType === 'folder' ? '500' : 'normal' }}>
-              {title}
+              {titleElement}
             </div>
           </div>
           <div className="excerpt">
