@@ -6,6 +6,7 @@ import { Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { toggleFeature, showNewFieldModal, deleteRegistrationField } from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
+import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 
 const RegistrationAdminPage = React.createClass({
   propTypes: {
@@ -106,6 +107,7 @@ const RegistrationAdminPage = React.createClass({
         </div>
         <h2>Documents à accepter</h2>
         <h2>Communication</h2>
+        <RegistrationCommunicationForm />
       </div>
     );
   },
@@ -114,7 +116,7 @@ const RegistrationAdminPage = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  dynamicFields: state.user.registration_form_fields,
+  dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature, value) => {

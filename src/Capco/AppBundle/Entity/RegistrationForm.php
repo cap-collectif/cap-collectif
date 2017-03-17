@@ -21,6 +21,74 @@ class RegistrationForm
      */
     private $questions;
 
+    /**
+     * @ORM\Column(name="bottom_text_displayed", type="boolean", nullable=false)
+     */
+    private $bottomTextDisplayed = false;
+
+    public function isBottomTextDisplayed(): bool
+    {
+        return $this->bottomTextDisplayed;
+    }
+
+    public function setBottomTextDisplayed($bottomTextDisplayed): self
+    {
+        $this->bottomTextDisplayed = $bottomTextDisplayed;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(name="top_text_displayed", type="boolean", nullable=false)
+     */
+    private $topTextDisplayed = false;
+
+    public function isTopTextDisplayed(): bool
+    {
+        return $this->topTextDisplayed;
+    }
+
+    public function setTopTextDisplayed($topTextDisplayed): self
+    {
+        $this->topTextDisplayed = $topTextDisplayed;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(name="top_text", type="text")
+     */
+    private $topText = '';
+
+    public function setTopText(string $topText)
+    {
+        $this->topText = $topText;
+
+        return $this;
+    }
+
+    public function getTopText(): string
+    {
+        return $this->topText;
+    }
+
+    /**
+     * @ORM\Column(name="bottom_text", type="text")
+     */
+    private $bottomText;
+
+    public function setBottomText(string $bottomText)
+    {
+        $this->bottomText = $bottomText;
+
+        return $this;
+    }
+
+    public function getBottomText(): string
+    {
+        return $this->bottomText;
+    }
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();

@@ -20,7 +20,7 @@ class RegistrationFormExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('registration_form_list_fields', [$this, 'serializeFields']),
+            new \Twig_SimpleFunction('registration_form_serialize', [$this, 'serializeFields']),
         ];
     }
 
@@ -33,6 +33,12 @@ class RegistrationFormExtension extends \Twig_Extension
             (new SerializationContext())->setGroups(['Questions'])
         );
 
-        return json_decode($serializedQuestions, true);
+        return [
+          'bottomTextDisplayed' => $form->isBottomTextDisplayed(),
+          'bottomText' => $form->getBottomText(),
+          'topTextDisplayed' => $form->isTopTextDisplayed(),
+          'topText' => $form->getTopText(),
+          'questions' => json_decode($serializedQuestions, true)
+        ];
     }
 }

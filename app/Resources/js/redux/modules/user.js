@@ -11,7 +11,13 @@ export type State = {
   isSubmittingAccountForm: boolean,
   showConfirmPasswordModal: boolean,
   confirmationEmailResent: boolean,
-  registration_form_fields: Array<Object>,
+  registration_form: {
+    bottomTextDisplayed: boolean,
+    topTextDisplayed: boolean,
+    bottomText: string,
+    topText: string,
+    questions: Array<Object>
+  },
   user: ?{
     id: string,
     username: string,
@@ -63,9 +69,14 @@ const initialState : State = {
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   user: null,
-  registration_form_fields: [],
+  registration_form: {
+    bottomText: '',
+    topText: '',
+    bottomTextDisplayed: false,
+    topTextDisplayed: false,
+    questions: [],
+  },
 };
-
 
 export const deleteRegistrationFieldSucceeded = (id: number): DeleteRegistrationFieldSucceededAction => ({ type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id });
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({ type: 'SHOW_REGISTRATION_MODAL' });
@@ -224,13 +235,16 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case '@@INIT':
       return { ...initialState, ...state };
     case 'DELETE_REGISTRATION_FIELD_SUCCEEDED': {
-      const index = state.registration_form_fields.findIndex((el => el.id === action.id));
+      const index = state.registration_form.questions.findIndex((el => el.id === action.id));
       return {
         ...state,
-        registration_form_fields: [
-          ...state.registration_form_fields.slice(0, index),
-          ...state.registration_form_fields.slice(index + 1),
-        ],
+        registration_form: {
+          ...state.registration_form,
+          questions: [
+            ...state.registration_form.questions.slice(0, index),
+            ...state.registration_form.questions.slice(index + 1),
+          ],
+        },
       };
     }
     case 'SHOW_REGISTRATION_MODAL':

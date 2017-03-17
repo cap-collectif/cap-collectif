@@ -7,7 +7,7 @@
     'parameters': site_parameters_list(),
   },
   'user': {
-    'registration_form_fields': registration_form_list_fields(),
+    'registration_form': registration_form_serialize(),
     'user': app.user
       ? {
         'id': app.user.id,

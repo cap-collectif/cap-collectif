@@ -19,7 +19,7 @@ export const AddNewQuestionForm = React.createClass({
   render() {
     const { showChoices } = this.props;
     return (
-      <div>
+      <form>
         <Field
           name="question"
           type="text"
@@ -77,7 +77,7 @@ export const AddNewQuestionForm = React.createClass({
               )}
             />
         }
-      </div>
+      </form>
     );
   },
 });

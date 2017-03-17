@@ -257,18 +257,6 @@ Capco\AppBundle\Entity\SiteParameter:
         value: '<p>Et moi aussi</p>'
         position: 251
         type: 1
-    SiteParameterSigninTop:
-        keyname: signin.text.top
-        category: pages.registration
-        value: '<p>Allez viens</p>'
-        position: 252
-        type: 1
-    SiteParameterSignBottom:
-        keyname: signin.text.bottom
-        category: pages.registration
-        value: '<p>Les informations recueillies font l’objet d’un traitement informatique destiné au fonctionnement de la plateforme contributive. Le [nom du propriétéaire] est l’unique destinataire de ces données. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée en 2004, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à [adresse de contact]. Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.</p>'
-        position: 253
-        type: 1
 
     SiteParameterEventTitle:
         keyname: events.jumbotron.title

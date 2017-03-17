@@ -96,6 +96,17 @@ export const toggleFeatureSucceeded = (feature: string, enabled: boolean): Toggl
 export const showNewFieldModal = (): ShowNewFieldModalAction => ({ type: 'default/SHOW_NEW_FIELD_MODAL' });
 export const hideNewFieldModal = (): HideNewFieldModalAction => ({ type: 'default/HIDE_NEW_FIELD_MODAL' });
 
+
+export const updateRegistrationCommunicationForm = (values: Object) => {
+  return Fetcher
+    .put('/registration_form', values)
+    .then(() => {},
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
+};
+
 export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
   return Fetcher
     .post('/registration_form/questions', values)

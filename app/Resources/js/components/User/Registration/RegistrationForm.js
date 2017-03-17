@@ -185,7 +185,7 @@ const mapStateToProps = (state: State) => ({
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
-  dynamicFields: state.user.registration_form_fields,
+  dynamicFields: state.user.registration_form.questions,
 });
 
 const connector = connect(mapStateToProps);
