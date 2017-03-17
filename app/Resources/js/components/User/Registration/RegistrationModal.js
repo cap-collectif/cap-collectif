@@ -16,7 +16,6 @@ export const RegistrationModal = React.createClass({
     onClose: PropTypes.func.isRequired,
     textTop: PropTypes.string,
     textBottom: PropTypes.string,
-    parameters: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
@@ -86,7 +85,6 @@ export const RegistrationModal = React.createClass({
 const mapStateToProps = (state: State) => ({
   textTop: state.user.registration_form.topTextDisplayed && state.user.registration_form.topText,
   textBottom: state.user.registration_form.bottomTextDisplayed && state.user.registration_form.bottomText,
-  parameters: state.default.parameters,
   show: state.user.showRegistrationModal,
   submitting: isSubmitting(form)(state),
 });

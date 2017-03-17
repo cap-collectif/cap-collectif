@@ -42,7 +42,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   />
   <Field
     component={[Function]}
-    id={6}
+    id="dynamic-6"
     label={
       <span>
         Champ pas facultatif

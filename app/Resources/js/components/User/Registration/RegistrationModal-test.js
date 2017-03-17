@@ -14,40 +14,37 @@ describe('<RegistrationModal />', () => {
     submitting: false,
   };
 
-  const parametersWithTexts = {
-    'signin.text.top': 'Texte du haut',
-    'signin.text.bottom': 'Texte du bas',
-  };
-
   it('renders hidden modal if not shown', () => {
-    const wrapper = shallow(<RegistrationModal show={false} features={{}} parameters={{}} {...props} />);
+    const wrapper = shallow(<RegistrationModal show={false} features={{}} {...props} />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(false);
   });
 
   it('renders modal if shown', () => {
-    const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
+    const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(true);
   });
 
   it('renders a form', () => {
-    const wrapper = shallow(<RegistrationModal show features={{}} parameters={{}} {...props} />);
+    const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
     const form = wrapper.find(RegistrationForm);
     expect(form).toHaveLength(1);
   });
 
   it('renders a top text and a bottom text if specified', () => {
-    const wrapper = shallow(<RegistrationModal show features={{}} parameters={parametersWithTexts} {...props} />);
+    const top = 'Texte du haut';
+    const bottom = 'Texte du bas';
+    const wrapper = shallow(<RegistrationModal show features={{}} textTop={top} textBottom={bottom} {...props} />);
     const topText = wrapper.find('Alert');
     expect(topText).toHaveLength(1);
     expect(topText.prop('className')).toEqual('text-center');
     expect(topText.prop('bsStyle')).toEqual('info');
     const topMessage = topText.find('FormattedHTMLMessage');
-    expect(topMessage.prop('message')).toEqual(parametersWithTexts['signin.text.top']);
+    expect(topMessage.prop('message')).toEqual(top);
     const bottomText = wrapper.find('.text-center.small.excerpt');
     expect(bottomText).toHaveLength(1);
     const bottomMessage = bottomText.find('FormattedHTMLMessage');
-    expect(bottomMessage.prop('message')).toEqual(parametersWithTexts['signin.text.bottom']);
+    expect(bottomMessage.prop('message')).toEqual(bottom);
   });
 });
