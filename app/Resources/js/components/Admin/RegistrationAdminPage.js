@@ -72,9 +72,9 @@ export const RegistrationAdminPage = React.createClass({
               onChange={() => onToggle('user_type', !features.user_type)}
             />
           </Col>
-          <Col xs={11}>Type de profil</Col>
+          <Col xs={11}>Statut</Col>
         </div>
-        <p>
+        <p style={{ marginTop: 10 }}>
           <strong>Champ(s) supplémentaire(s)</strong>
         </p>
         {
@@ -98,14 +98,13 @@ export const RegistrationAdminPage = React.createClass({
               }
             </ListGroup>
         }
-        <Button onClick={() => addNewField()}>
+        <Button style={{ marginBottom: 10 }} onClick={() => addNewField()}>
           Ajouter
         </Button>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}><Toggle checked disabled /></Col>
           <Col xs={11}>Je ne suis pas un robot</Col>
         </div>
-        <h2>Documents à accepter</h2>
         <h2>Communication</h2>
         <RegistrationCommunicationForm />
       </div>
