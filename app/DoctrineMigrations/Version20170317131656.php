@@ -23,7 +23,7 @@ class Version20170317131656 extends AbstractMigration
             'top_text_displayed' => count($topText) > 0,
             'top_text' => $topText,
             'bottom_text' => $bottomText,
-        ], ['id' => $form['id']]);
+        ], ['id' => $form]);
 
         $this->connection->delete('site_parameter', ['keyname' => 'signin.text.top']);
         $this->connection->delete('site_parameter', ['keyname' => 'signin.text.bottom']);
