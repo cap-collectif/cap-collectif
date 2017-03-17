@@ -8,7 +8,7 @@ import { toggleFeature, showNewFieldModal, deleteRegistrationField } from '../..
 import type { State, Dispatch } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 
-const RegistrationAdminPage = React.createClass({
+export const RegistrationAdminPage = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
     onToggle: PropTypes.func.isRequired,

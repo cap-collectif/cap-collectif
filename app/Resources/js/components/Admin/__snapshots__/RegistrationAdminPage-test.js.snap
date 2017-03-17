@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationAdminPage /> renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "margin": "0 15px",
+    }
+  }
+>
+  <h2>
+    Réseaux sociaux
+  </h2>
+  <p>
+    Permettre l'inscription via:
+  </p>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Facebook
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Google
+    </Col>
+  </div>
+  <h2>
+    Données recueillies
+  </h2>
+  <p>
+    Receuillir les données suivantes auprès de l'utilisateur:
+  </p>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Nom ou pseudonyme
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Mot de passe
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Code postal
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Type de profil
+    </Col>
+  </div>
+  <p>
+    <strong>
+      Champ(s) supplémentaire(s)
+    </strong>
+  </p>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    onClick={[Function]}
+  >
+    Ajouter
+  </Button>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Je ne suis pas un robot
+    </Col>
+  </div>
+  <h2>
+    Documents à accepter
+  </h2>
+  <h2>
+    Communication
+  </h2>
+  <Connect(ReduxForm) />
+</div>
+`;

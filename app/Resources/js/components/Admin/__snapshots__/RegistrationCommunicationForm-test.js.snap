@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    label="Afficher un message personnalisé au dessus du formulaire"
+    name="topTextDisplayed"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    name="topText"
+    type="editor"
+  />
+  <Field
+    component={[Function]}
+    label="Afficher un message personnalisé en dessous du formulaire"
+    name="bottomTextDisplayed"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    name="bottomText"
+    type="editor"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    type="submit"
+  >
+    Enregistrer
+  </Button>
+</form>
+`;
