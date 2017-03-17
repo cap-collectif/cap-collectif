@@ -193,10 +193,16 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Type de profil
+      Statut
     </Col>
   </div>
-  <p>
+  <p
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
     <strong>
       Champ(s) supplémentaire(s)
     </strong>
@@ -210,6 +216,11 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     navDropdown={false}
     navItem={false}
     onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
   >
     Ajouter
   </Button>
@@ -243,9 +254,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Je ne suis pas un robot
     </Col>
   </div>
-  <h2>
-    Documents à accepter
-  </h2>
   <h2>
     Communication
   </h2>
