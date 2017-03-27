@@ -6,6 +6,7 @@ import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
 import FlashMessages from '../Utils/FlashMessages';
 import { fetchOpinionVotes } from '../../redux/modules/opinion';
+import type { Dispatch } from '../../types';
 
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
@@ -88,7 +89,7 @@ const OpinionPage = React.createClass({
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     fetchOpinionVotes: opinionId => dispatch(fetchOpinionVotes(opinionId)),
   };

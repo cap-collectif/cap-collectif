@@ -1,12 +1,21 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import { Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { toggleFeature, showNewFieldModal, deleteRegistrationField } from '../../redux/modules/default';
-import type { State, Dispatch } from '../../types';
+import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
+
+type Props = {
+  features: FeatureToggles,
+  onToggle: (feature: FeatureToggle, value: boolean) => void,
+  addNewField: () => void,
+  deleteField: (id: number) => void,
+  dynamicFields: Array<Object>
+};
 
 export const RegistrationAdminPage = React.createClass({
   propTypes: {
@@ -100,7 +109,7 @@ export const RegistrationAdminPage = React.createClass({
                     <div>
                       <strong>{field.question}</strong>
                     </div>
-                    <span>{field.type}</span>
+                    <span>{this.getIntlMessage(`global.question.types${field.type}`)}</span>
                   </ListGroupItem>,
                 )
               }
@@ -126,14 +135,14 @@ const mapStateToProps = (state: State) => ({
   dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onToggle: (feature, value) => {
+  onToggle: (feature: FeatureToggle, value: boolean) => {
     toggleFeature(dispatch, feature, value);
   },
-  addNewField: () => dispatch(showNewFieldModal()),
-  deleteField: (id) => {
+  addNewField: () => { dispatch(showNewFieldModal()); },
+  deleteField: (id: number) => {
     deleteRegistrationField(id, dispatch);
   },
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default connector(RegistrationAdminPage);

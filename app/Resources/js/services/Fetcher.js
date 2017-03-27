@@ -120,7 +120,7 @@ class Fetcher {
     ;
   }
 
-  patch(uri: string, body: Object) {
+  patch(uri: string, body: Object): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {
@@ -134,7 +134,7 @@ class Fetcher {
     ;
   }
 
-  delete(uri: string) {
+  delete(uri: string): Promise<*> {
     return AuthService.login()
       .then(() => {
         return fetch(config.api + uri, {

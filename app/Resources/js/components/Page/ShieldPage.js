@@ -13,7 +13,7 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 type Props = {
   showRegistration: boolean,
   submitting: boolean,
-  onSubmit: () => void
+  onSubmit: (e: Event) => void
 };
 export const ShieldPage = React.createClass({
   propTypes: {

@@ -16,6 +16,8 @@ type ShowOpinionVersionEditModalAction = { type: 'opinion/SHOW_OPINION_VERSION_E
 type CloseOpinionVersionEditModalAction = { type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL' };
 type ShowOpinionVersionCreateModalAction = { type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL' };
 type CloseOpinionVersionCreateModalAction = { type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL' };
+type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
+
 export type OpinionAction =
     { type: 'opinion/OPINION_VOTE_SUCCEEDED', opinionId: Uuid, vote: OpinionVote }
   | { type: 'opinion/VERSION_VOTE_SUCCEEDED', versionId: Uuid, vote: OpinionVote }
@@ -31,8 +33,8 @@ export type OpinionAction =
   | CloseOpinionVersionCreateModalAction
   | StartCreateOpinionVersionAction
   | CancelCreateOpinionVersionAction
+  | FetchOpinionVotesAction
 ;
-type FetchOpinionVotesAction = { type: 'opinion/OPINION_VOTES_FETCH_REQUESTED', opinionId: Uuid, versionId: ?Uuid };
 type ContributionMap = {[id: Uuid]: {
   id: Uuid,
   body: string,

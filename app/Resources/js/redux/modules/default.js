@@ -1,38 +1,8 @@
 // @flow
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
-import type { Exact, Action, Dispatch } from '../../types';
+import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import { deleteRegistrationFieldSucceeded } from './user';
-
-export type FeatureToggles = {
-  blog: boolean,
-  calendar: boolean,
-  ideas: boolean,
-  idea_creation: boolean,
-  idea_trash: boolean,
-  login_facebook: boolean,
-  login_gplus: boolean,
-  login_saml: boolean,
-  members_list: boolean,
-  newsletter: boolean,
-  profiles: boolean,
-  projects_form: boolean,
-  project_trash: boolean,
-  search: boolean,
-  share_buttons: boolean,
-  shield_mode: boolean,
-  registration: boolean,
-  phone_confirmation: boolean,
-  reporting: boolean,
-  themes: boolean,
-  districts: boolean,
-  user_type: boolean,
-  votes_evolution: boolean,
-  export: boolean,
-  server_side_rendering: boolean,
-  zipcode_at_register: boolean,
-  vote_without_account: boolean
-};
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
@@ -88,7 +58,7 @@ const initialState: State = {
   parameters: {},
 };
 
-export const toggleFeatureSucceeded = (feature: string, enabled: boolean): ToggleFeatureSucceededAction => ({
+export const toggleFeatureSucceeded = (feature: FeatureToggle, enabled: boolean): ToggleFeatureSucceededAction => ({
   type: 'default/TOGGLE_FEATURE_SUCCEEDED',
   feature,
   enabled,
@@ -131,7 +101,7 @@ export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
   );
 };
 
-export const toggleFeature = (dispatch: Dispatch, feature: string, enabled: boolean): Promise<*> => {
+export const toggleFeature = (dispatch: Dispatch, feature: FeatureToggle, enabled: boolean): Promise<*> => {
   return Fetcher
     .put(`/toggles/${feature}`, { enabled })
     .then(() => {
