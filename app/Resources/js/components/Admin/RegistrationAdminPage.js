@@ -22,8 +22,17 @@ export const RegistrationAdminPage = React.createClass({
     const { onToggle, deleteField, addNewField, features, dynamicFields } = this.props;
     return (
       <div style={{ margin: '0 15px' }}>
+        <div className="row" style={{ padding: '10px 0' }}>
+          <Col xs={1}>
+            <Toggle
+              checked={features.registration}
+              onChange={() => onToggle('registration', !features.registration)}
+            />
+          </Col>
+          <Col xs={11}>Permettre l'inscription</Col>
+        </div>
         <h2>Réseaux sociaux</h2>
-        <p>Permettre l'inscription via:</p>
+        <p>Permettre l'inscription via :</p>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
@@ -43,7 +52,6 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={11}>Google</Col>
         </div>
         <h2>Données recueillies</h2>
-        <p>Receuillir les données suivantes auprès de l'utilisateur:</p>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle checked disabled />
