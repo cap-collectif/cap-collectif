@@ -9,7 +9,7 @@ import type { State } from '../../types';
 
 export const formName = 'opinion-version-edit';
 
-const validate = (values, props) => {
+const validate = (values) => {
   const errors = {};
   if (!values.confirm) {
     errors.confirm = 'global.required';

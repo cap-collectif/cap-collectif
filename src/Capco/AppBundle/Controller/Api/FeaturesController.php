@@ -49,7 +49,7 @@ class FeaturesController extends FOSRestController
 
     /**
      * @Post("/registration_form/questions")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      * @View(statusCode=200, serializerGroups={})
      */
     public function postRegistrationQuestionAction(Request $request)
@@ -88,6 +88,42 @@ class FeaturesController extends FOSRestController
         $abs->setPosition(0);
 
         $em->persist($abs);
+        $em->flush();
+
+        return $question;
+    }
+
+    /**
+     * @Put("/registration_form/questions/{id}")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
+    {
+        $form = $this->createForm(new ApiQuestionType());
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $em = $this->get('doctrine')->getManager();
+
+        $data = $form->getData();
+        if ($data['type'] === '4') {
+            foreach ($data['choices'] as $key => $choice) {
+                // $questionChoice = new QuestionChoice();
+                // $questionChoice->setTitle($choice['label']);
+                // $questionChoice->setPosition($key);
+                // $question->addQuestionChoice($questionChoice);
+            }
+        }
+        $question->setType((int) $data['type']);
+        $question->setTitle($data['question']);
+        $question->setRequired($data['required']);
+
+        // $abs = $question->getAbstractQuestion();
+        // $abs->setPosition(0);
         $em->flush();
 
         return $question;

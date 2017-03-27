@@ -7,9 +7,14 @@ import { deleteRegistrationFieldSucceeded } from './user';
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
 type ToggleFeatureSucceededAction = { type: 'default/TOGGLE_FEATURE_SUCCEEDED', feature: string, enabled: boolean };
+type ShowUpdateFieldModalAction = { type: 'default/SHOW_UPDATE_FIELD_MODAL', id: number };
+type HideUpdateFieldModalAction = { type: 'default/HIDE_UPDATE_FIELD_MODAL' };
+
 export type DefaultAction =
   ToggleFeatureSucceededAction |
   ShowNewFieldModalAction |
+  ShowUpdateFieldModalAction |
+  HideUpdateFieldModalAction |
   HideNewFieldModalAction
 ;
 export type State = {
@@ -18,7 +23,8 @@ export type State = {
     themes: Array<Object>,
     features: Exact<FeatureToggles>,
     userTypes: Array<Object>,
-    parameters: Object
+    parameters: Object,
+    updatingRegistrationFieldModal: ?number
 };
 
 const initialState: State = {
@@ -56,6 +62,7 @@ const initialState: State = {
   },
   userTypes: [],
   parameters: {},
+  updatingRegistrationFieldModal: null,
 };
 
 export const toggleFeatureSucceeded = (feature: FeatureToggle, enabled: boolean): ToggleFeatureSucceededAction => ({
@@ -65,7 +72,19 @@ export const toggleFeatureSucceeded = (feature: FeatureToggle, enabled: boolean)
 });
 export const showNewFieldModal = (): ShowNewFieldModalAction => ({ type: 'default/SHOW_NEW_FIELD_MODAL' });
 export const hideNewFieldModal = (): HideNewFieldModalAction => ({ type: 'default/HIDE_NEW_FIELD_MODAL' });
+export const updateRegistrationFieldModal = (id: number): ShowUpdateFieldModalAction => ({ type: 'default/SHOW_UPDATE_FIELD_MODAL', id });
+export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({ type: 'default/HIDE_UPDATE_FIELD_MODAL' });
 
+export const requestUpdateRegistrationField = (values: Object, dispatch: Dispatch, { fieldId }: { fieldId: number}) => {
+  return Fetcher
+    .put(`/registration_form/questions/${fieldId}`, values)
+    .then(
+      () => {},
+      () => {
+        throw new SubmissionError({ _error: 'Un problème est survenu' });
+      },
+    );
+};
 
 export const updateRegistrationCommunicationForm = (values: Object) => {
   return Fetcher
@@ -116,6 +135,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'default/SHOW_UPDATE_FIELD_MODAL':
+      return { ...state, updatingRegistrationFieldModal: action.id };
+    case 'default/HIDE_UPDATE_FIELD_MODAL':
+      return { ...state, updatingRegistrationFieldModal: null };
     case 'default/SHOW_NEW_FIELD_MODAL':
       return { ...state, showNewFieldModal: true };
     case 'default/HIDE_NEW_FIELD_MODAL':

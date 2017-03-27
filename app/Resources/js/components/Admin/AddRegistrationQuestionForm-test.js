@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddNewQuestionForm } from './AddNewQuestionForm';
+import { RegistrationQuestionForm } from './RegistrationQuestionForm';
 import IntlData from '../../translations/FR';
 
 describe('<AddNewQuestionForm />', () => {
@@ -11,12 +11,12 @@ describe('<AddNewQuestionForm />', () => {
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<AddNewQuestionForm showChoices={false} {...props} />);
+    const wrapper = shallow(<RegistrationQuestionForm showChoices={false} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly for multiple choices', () => {
-    const wrapper = shallow(<AddNewQuestionForm showChoices {...props} />);
+    const wrapper = shallow(<RegistrationQuestionForm showChoices {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

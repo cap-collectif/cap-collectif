@@ -30,6 +30,7 @@ export type State = {
     media: ?{
         url: string
     },
+    roles: Array<string>,
     displayName: string,
     uniqueId: string
   }

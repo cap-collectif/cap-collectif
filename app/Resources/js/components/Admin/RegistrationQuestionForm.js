@@ -1,26 +1,19 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
-import { Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
+import { Field, FieldArray, formValueSelector } from 'redux-form';
+import { Button, Alert } from 'react-bootstrap';
 import renderInput from '../Form/Field';
-import { addNewRegistrationField as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
-
-const validate = (values: Object) => {
-  const errors = {};
-  if (values.type === '4' && (!values.choices || values.choices.length < 2)) {
-    errors.choices = { _error: 'Au moins 2 options requises.' };
-  }
-  return errors;
-};
 
 const renderDynamicFields = ({ fields, meta: { touched, error, submitFailed } }) => (
   <div>
     <label htmlFor="options">Options</label>
     { error && <Alert bsStyle="danger">{error}</Alert> }
     {
+      // .sort((a, b) => a.position - b.position)
       fields.map((field, index) =>
         <div key={index} className="row" style={{ marginBottom: 10 }}>
           <Field
@@ -30,7 +23,9 @@ const renderDynamicFields = ({ fields, meta: { touched, error, submitFailed } })
             wrapperClassName="col-sm-10"
           />
           <div className="col-sm-2" style={{ marginTop: -15 }}>
-            <Button onClick={() => fields.remove(index)}>
+            <Button
+              onClick={() => fields.remove(index)}
+            >
               Retirer
             </Button>
           </div>
@@ -45,8 +40,10 @@ const renderDynamicFields = ({ fields, meta: { touched, error, submitFailed } })
   </div>
 );
 
-export const formName = 'add-new-question';
-export const AddNewQuestionForm = React.createClass({
+type Props = {
+  showChoices: boolean
+};
+export const RegistrationQuestionForm = React.createClass({
   propTypes: {
     showChoices: PropTypes.bool.isRequired,
   },
@@ -95,13 +92,8 @@ export const AddNewQuestionForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
-  showChoices: formValueSelector(formName)(state, 'type') === '4',
+const mapStateToProps = (state: State, props: { form: string }) => ({
+  showChoices: formValueSelector(props.form)(state, 'type') === '4',
 });
-const connector = connect(mapStateToProps);
-export default reduxForm({
-  onSubmit,
-  validate,
-  initialValues: { required: false, choices: [{}, {}] },
-  form: formName,
-})(connector(AddNewQuestionForm));
+const connector: Connector<{}, Props> = connect(mapStateToProps);
+export default connector(RegistrationQuestionForm);

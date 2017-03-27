@@ -3,9 +3,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import { Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Alert, Well, Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { toggleFeature, showNewFieldModal, deleteRegistrationField } from '../../redux/modules/default';
+import { toggleFeature, showNewFieldModal, updateRegistrationFieldModal, deleteRegistrationField } from '../../redux/modules/default';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 
@@ -13,22 +13,26 @@ type Props = {
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
   addNewField: () => void,
+  isSuperAdmin: boolean,
   deleteField: (id: number) => void,
+  updateField: (id: number) => void,
   dynamicFields: Array<Object>
 };
 
 export const RegistrationAdminPage = React.createClass({
   propTypes: {
+    isSuperAdmin: PropTypes.bool.isRequired,
     features: PropTypes.object.isRequired,
     onToggle: PropTypes.func.isRequired,
     addNewField: PropTypes.func.isRequired,
     deleteField: PropTypes.func.isRequired,
+    updateField: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { onToggle, deleteField, addNewField, features, dynamicFields } = this.props;
+    const { updateField, isSuperAdmin, onToggle, deleteField, addNewField, features, dynamicFields } = this.props;
     return (
       <div style={{ margin: '0 15px' }}>
         <div className="row" style={{ padding: '10px 0' }}>
@@ -91,33 +95,52 @@ export const RegistrationAdminPage = React.createClass({
           </Col>
           <Col xs={11}>Statut</Col>
         </div>
-        <p style={{ marginTop: 10 }}>
-          <strong>Champ(s) supplémentaire(s)</strong>
-        </p>
-        {
-          dynamicFields.length > 0 &&
-            <ListGroup>
-              {
-                dynamicFields.map(field =>
-                  <ListGroupItem>
-                    <Button
-                      className="pull-right"
-                      onClick={() => deleteField(field.id)}
-                    >
-                      Supprimer
-                    </Button>
-                    <div>
-                      <strong>{field.question}</strong>
-                    </div>
-                    <span>{this.getIntlMessage(`global.question.types.${field.type}`)}</span>
-                  </ListGroupItem>,
-                )
-              }
-            </ListGroup>
-        }
-        <Button style={{ marginBottom: 10 }} onClick={() => addNewField()}>
-          Ajouter
-        </Button>
+        <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
+          <p style={{ marginTop: 10 }}>
+            {
+              !isSuperAdmin &&
+                <Alert bsStyle="info">Cette section est modifiable uniquement par votre administrateur cap-collectif.</Alert>
+            }
+            <strong>Champ(s) supplémentaire(s)</strong>
+          </p>
+          {
+            dynamicFields.length > 0 &&
+              <ListGroup>
+                {
+                  dynamicFields.map(field =>
+                    <ListGroupItem>
+                      <div className="pull-right">
+                        <Button
+                          disabled={!isSuperAdmin}
+                          style={{ marginRight: 5 }}
+                          onClick={!isSuperAdmin ? null : () => updateField(field.id)}
+                        >
+                          Modifier
+                        </Button>
+                        <Button
+                          disabled={!isSuperAdmin}
+                          onClick={!isSuperAdmin ? null : () => deleteField(field.id)}
+                        >
+                          Supprimer
+                        </Button>
+                      </div>
+                      <div>
+                        <strong>{field.question}</strong>
+                      </div>
+                      <span>{this.getIntlMessage(`global.question.types.${field.type}`)}</span>
+                    </ListGroupItem>,
+                  )
+                }
+              </ListGroup>
+          }
+          <Button
+            disabled={!isSuperAdmin}
+            style={{ marginBottom: 10 }}
+            onClick={!isSuperAdmin ? null : () => { addNewField(); }}
+          >
+            Ajouter
+          </Button>
+        </Well>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}><Toggle checked disabled /></Col>
           <Col xs={11}>Je ne suis pas un robot</Col>
@@ -132,6 +155,7 @@ export const RegistrationAdminPage = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
+  isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
   dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -139,9 +163,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     toggleFeature(dispatch, feature, value);
   },
   addNewField: () => { dispatch(showNewFieldModal()); },
-  deleteField: (id: number) => {
-    deleteRegistrationField(id, dispatch);
-  },
+  updateField: (id: number) => { dispatch(updateRegistrationFieldModal(id)); },
+  deleteField: (id: number) => { deleteRegistrationField(id, dispatch); },
 });
 
 const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);

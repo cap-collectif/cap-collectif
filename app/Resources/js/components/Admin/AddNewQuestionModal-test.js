@@ -2,10 +2,10 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddNewQuestionModal } from './AddNewQuestionModal';
+import { AddRegistrationQuestionModal } from './AddRegistrationQuestionModal';
 import IntlData from '../../translations/FR';
 
-describe('<AddNewQuestionModal />', () => {
+describe('<AddRegistrationQuestionModal />', () => {
   const props = {
     ...IntlData,
     submitting: false,
@@ -15,7 +15,7 @@ describe('<AddNewQuestionModal />', () => {
   };
 
   it('renders correctly', () => {
-    const wrapper = shallow(<AddNewQuestionModal {...props} />);
+    const wrapper = shallow(<AddRegistrationQuestionModal {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

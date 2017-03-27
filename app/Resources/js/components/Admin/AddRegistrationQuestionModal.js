@@ -3,13 +3,14 @@ import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import { hideNewFieldModal } from '../../redux/modules/default';
 import type { Dispatch, State } from '../../types';
-import AddNewQuestionForm, { formName } from './AddNewQuestionForm';
+import AddRegistrationQuestionForm, { formName } from './AddRegistrationQuestionForm';
 
-export const AddNewQuestionModal = React.createClass({
+export const AddRegistrationQuestionModal = React.createClass({
   propTypes: {
     submitting: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
@@ -40,7 +41,7 @@ export const AddNewQuestionModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddNewQuestionForm />
+          <AddRegistrationQuestionForm />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -63,6 +64,13 @@ export const AddNewQuestionModal = React.createClass({
   },
 });
 
+type Props = {
+  submitting: boolean,
+  show: boolean,
+  onSubmit: (e: Event) => void,
+  onClose: () => void
+};
+
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
   show: state.default.showNewFieldModal,
@@ -75,5 +83,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClose: () => { dispatch(hideNewFieldModal()); },
 });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-export default connector(AddNewQuestionModal);
+const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
+export default connector(AddRegistrationQuestionModal);
