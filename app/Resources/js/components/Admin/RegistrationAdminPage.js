@@ -109,7 +109,7 @@ export const RegistrationAdminPage = React.createClass({
                     <div>
                       <strong>{field.question}</strong>
                     </div>
-                    <span>{this.getIntlMessage(`global.question.types${field.type}`)}</span>
+                    <span>{this.getIntlMessage(`global.question.types.${field.type}`)}</span>
                   </ListGroupItem>,
                 )
               }

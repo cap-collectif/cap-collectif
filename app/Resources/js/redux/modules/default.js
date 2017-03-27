@@ -78,6 +78,9 @@ export const updateRegistrationCommunicationForm = (values: Object) => {
 };
 
 export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
+  if (values.type !== '4') {
+    delete values.choices;
+  }
   return Fetcher
     .post('/registration_form/questions', values)
     .then(() => {

@@ -31,12 +31,12 @@ export const AddNewQuestionModal = React.createClass({
         show={show}
         onHide={onClose}
         autoFocus
-        bsSize="small"
+        bsSize="large"
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            Modifier le champ supplémentaire
+            Ajouter un champ supplémentaire
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

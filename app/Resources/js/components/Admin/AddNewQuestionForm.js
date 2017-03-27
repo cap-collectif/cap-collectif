@@ -2,14 +2,50 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
-import { Button } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import renderInput from '../Form/Field';
 import { addNewRegistrationField as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
 
-export const formName = 'add-new-question';
+const validate = (values: Object) => {
+  const errors = {};
+  if (values.type === '4' && (!values.choices || values.choices.length < 2)) {
+    errors.choices = { _error: 'Au moins 2 options requises.' };
+  }
+  return errors;
+};
 
+const renderDynamicFields = ({ fields, meta: { touched, error, submitFailed } }) => (
+  <div>
+    <label htmlFor="options">Options</label>
+    { error && <Alert bsStyle="danger">{error}</Alert> }
+    {
+      fields.map((field, index) =>
+        <div key={index} className="row" style={{ marginBottom: 10 }}>
+          <Field
+            name={`${field}.label`}
+            type="text"
+            component={renderInput}
+            wrapperClassName="col-sm-10"
+          />
+          <div className="col-sm-2" style={{ marginTop: -15 }}>
+            <Button onClick={() => fields.remove(index)}>
+              Retirer
+            </Button>
+          </div>
+        </div>,
+      )
+    }
+    <div>
+      <Button onClick={() => fields.push({})}>
+        Ajouter
+      </Button>
+    </div>
+  </div>
+);
+
+export const formName = 'add-new-question';
 export const AddNewQuestionForm = React.createClass({
   propTypes: {
     showChoices: PropTypes.bool.isRequired,
@@ -51,30 +87,7 @@ export const AddNewQuestionForm = React.createClass({
           showChoices &&
             <FieldArray
               name="choices"
-              component={({ fields }) => (
-                <div>
-                  <label>Options</label>
-                  {
-                    fields.map((member, index) =>
-                      <div key={index} style={{ marginBottom: 10 }}>
-                        <Field
-                          name={`${member}.label`}
-                          type="text"
-                          component={renderInput}
-                        />
-                        <Button onClick={() => fields.remove(index)}>
-                          Retirer
-                        </Button>
-                      </div>,
-                    )
-                  }
-                  <div>
-                    <Button onClick={() => fields.push({})}>
-                      Ajouter
-                    </Button>
-                  </div>
-                </div>
-              )}
+              component={renderDynamicFields}
             />
         }
       </form>
@@ -88,6 +101,7 @@ const mapStateToProps = (state: State) => ({
 const connector = connect(mapStateToProps);
 export default reduxForm({
   onSubmit,
-  initialValues: { required: false },
+  validate,
+  initialValues: { required: false, choices: [{}, {}] },
   form: formName,
 })(connector(AddNewQuestionForm));

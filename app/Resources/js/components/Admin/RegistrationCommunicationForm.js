@@ -53,6 +53,7 @@ export const RegistrationCommunicationForm = React.createClass({
         <Button
           type="submit"
           disabled={submitting}
+          style={{ marginBottom: 15 }}
         >
           {
             submitting
