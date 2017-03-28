@@ -79,17 +79,21 @@ export const requestUpdateRegistrationField = (values: Object, dispatch: Dispatc
   return Fetcher
     .put(`/registration_form/questions/${fieldId}`, values)
     .then(
-      () => {},
+      () => {
+        dispatch(hideRegistrationFieldModal());
+        window.location.reload();
+      },
       () => {
         throw new SubmissionError({ _error: 'Un problème est survenu' });
       },
     );
 };
 
-export const updateRegistrationCommunicationForm = (values: Object) => {
+export const updateRegistrationCommunicationForm = (values: Object, dispatch: Dispatch) => {
   return Fetcher
     .put('/registration_form', values)
-    .then(() => {},
+    .then(() => {
+    },
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },

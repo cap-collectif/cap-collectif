@@ -26,6 +26,17 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Then the question :questionAId should be positioned before :questionBId
+     */
+    public function questionIsBefore(int $questionAId, int $questionBId)
+    {
+        $this->getEntityManager()->clear();
+        $qA = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionAId);
+        $qB = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionBId);
+        expect($qB->getQuestionnaireAbstractQuestion()->getPosition() - $qA->getQuestionnaireAbstractQuestion()->getPosition() > 0)->toBe(true);
+    }
+
+    /**
      * @Then user :userId should have role :role
      * @Given user :userId has role :role
      */

@@ -54,3 +54,19 @@ Feature: Admin registration
       }
       """
       Then the JSON response status code should be 200
+
+    @database
+    Scenario: Admin API client wants to update question order
+      Given I am logged in to api as xlacot
+      And the question 6 should be positioned before 14
+      When I send a PATCH request to "/api/registration_form/questions" with json:
+      """
+      {
+        "questions": [
+            { "id": 14 },
+            { "id": 6 }
+        ]
+      }
+      """
+      Then the JSON response status code should be 204
+      Then the question 14 should be positioned before 6

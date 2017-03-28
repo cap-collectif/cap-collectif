@@ -11,3 +11,15 @@
   "modules/sonata",
   "modules/editor"
 ;
+
+.draghandle {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-image: url(../svg/draghandle.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: .25;
+  margin-right: 20px;
+  cursor: row-resize;
+}

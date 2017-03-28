@@ -48,6 +48,7 @@ type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
 export type SubmitConfirmPasswordAction = { type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password: string };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 type DeleteRegistrationFieldSucceededAction = { type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id: number };
+type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 export type UserAction =
     ShowRegistrationModalAction |
     CloseRegistrationModalAction |
@@ -60,6 +61,7 @@ export type UserAction =
     CloseConfirmPasswordModalAction |
     UserRequestEmailChangeAction |
     DeleteRegistrationFieldSucceededAction |
+    ReorderSucceededAction |
     SubmitConfirmPasswordAction
 ;
 
@@ -231,6 +233,12 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
     });
 };
 
+const reorderSuceeded = (questions: Array<Object>): ReorderSucceededAction => ({ type: 'REORDER_REGISTRATION_QUESTIONS', questions });
+export const reorderRegistrationQuestions = (questions: Array<Object>, dispatch: Dispatch) => {
+  Fetcher.patch('/registration_form/questions', { questions });
+  dispatch(reorderSuceeded(questions));
+};
+
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
@@ -245,6 +253,15 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
             ...state.registration_form.questions.slice(0, index),
             ...state.registration_form.questions.slice(index + 1),
           ],
+        },
+      };
+    }
+    case 'REORDER_REGISTRATION_QUESTIONS': {
+      return {
+        ...state,
+        registration_form: {
+          ...state.registration_form,
+          questions: action.questions,
         },
       };
     }

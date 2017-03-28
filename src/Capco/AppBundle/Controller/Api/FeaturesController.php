@@ -10,6 +10,7 @@ use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -93,6 +94,31 @@ class FeaturesController extends FOSRestController
         return $question;
     }
 
+
+    /**
+     * Used to reorder questions
+     *
+     * @Patch("/registration_form/questions")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @View(statusCode=200, serializerGroups={})
+     */
+    public function patchRegistrationQuestionAction(Request $request)
+    {
+        $orderedQuestions = json_decode($request->getContent(), true)['questions'];
+        $em = $this->get('doctrine')->getManager();
+        $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+        $absQuestions = $em->getRepository('CapcoAppBundle:Questions\QuestionnaireAbstractQuestion')->findByRegistrationForm($registrationForm);
+
+        foreach ($orderedQuestions as $key => $orderQuestion) {
+          foreach ($absQuestions as $absQuestion) {
+            if ($orderQuestion['id'] === $absQuestion->getQuestion()->getId()) {
+                $absQuestion->setPosition($key);
+            }
+          }
+        }
+        $em->flush();
+    }
+
     /**
      * @Put("/registration_form/questions/{id}")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -101,12 +127,6 @@ class FeaturesController extends FOSRestController
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
     {
-        if ((int) $data['type'] !== $question->getType()) {
-          // type has changed we remove and create a new question
-          $this->deleteRegistrationQuestionAction($question);
-          return $this->postRegistrationQuestionAction($request);
-        }
-
         $form = $this->createForm(new ApiQuestionType());
         $form->submit($request->request->all(), false);
 
@@ -115,8 +135,13 @@ class FeaturesController extends FOSRestController
         }
 
         $em = $this->get('doctrine')->getManager();
-
         $data = $form->getData();
+
+        if ((int) $data['type'] !== $question->getType()) {
+          // type has changed we remove and create a new question
+          $this->deleteRegistrationQuestionAction($question);
+          return $this->postRegistrationQuestionAction($request);
+        }
         if ($data['type'] === '4') {
             // Remove previous choices
             $question->resetQuestionChoices();

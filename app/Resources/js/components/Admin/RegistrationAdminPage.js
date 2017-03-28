@@ -3,19 +3,21 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { IntlMixin } from 'react-intl';
-import { Alert, Well, Col, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { toggleFeature, showNewFieldModal, updateRegistrationFieldModal, deleteRegistrationField } from '../../redux/modules/default';
+import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
+import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
+import { reorderRegistrationQuestions } from '../../redux/modules/user';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
+import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 
 type Props = {
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
   addNewField: () => void,
   isSuperAdmin: boolean,
-  deleteField: (id: number) => void,
-  updateField: (id: number) => void,
+  reorder: (list: Array<Object>) => void,
   dynamicFields: Array<Object>
 };
 
@@ -25,14 +27,13 @@ export const RegistrationAdminPage = React.createClass({
     features: PropTypes.object.isRequired,
     onToggle: PropTypes.func.isRequired,
     addNewField: PropTypes.func.isRequired,
-    deleteField: PropTypes.func.isRequired,
-    updateField: PropTypes.func.isRequired,
+    reorder: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { updateField, isSuperAdmin, onToggle, deleteField, addNewField, features, dynamicFields } = this.props;
+    const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
     return (
       <div style={{ margin: '0 15px' }}>
         <div className="row" style={{ padding: '10px 0' }}>
@@ -105,33 +106,14 @@ export const RegistrationAdminPage = React.createClass({
           </p>
           {
             dynamicFields.length > 0 &&
-              <ListGroup>
-                {
-                  dynamicFields.map(field =>
-                    <ListGroupItem>
-                      <div className="pull-right">
-                        <Button
-                          disabled={!isSuperAdmin}
-                          style={{ marginRight: 5 }}
-                          onClick={!isSuperAdmin ? null : () => updateField(field.id)}
-                        >
-                          Modifier
-                        </Button>
-                        <Button
-                          disabled={!isSuperAdmin}
-                          onClick={!isSuperAdmin ? null : () => deleteField(field.id)}
-                        >
-                          Supprimer
-                        </Button>
-                      </div>
-                      <div>
-                        <strong>{field.question}</strong>
-                      </div>
-                      <span>{this.getIntlMessage(`global.question.types.${field.type}`)}</span>
-                    </ListGroupItem>,
-                  )
-                }
-              </ListGroup>
+              <RegistrationQuestionSortableList
+                items={dynamicFields}
+                onSortEnd={({ oldIndex, newIndex }) => {
+                  reorder(arrayMove(dynamicFields, oldIndex, newIndex));
+                }}
+                lockAxis="y"
+                useDragHandle
+              />
           }
           <Button
             disabled={!isSuperAdmin}
@@ -163,8 +145,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     toggleFeature(dispatch, feature, value);
   },
   addNewField: () => { dispatch(showNewFieldModal()); },
-  updateField: (id: number) => { dispatch(updateRegistrationFieldModal(id)); },
-  deleteField: (id: number) => { deleteRegistrationField(id, dispatch); },
+  reorder: (list: Array<Object>) => {
+    reorderRegistrationQuestions(list, dispatch);
+  },
 });
 
 const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
