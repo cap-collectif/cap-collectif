@@ -3,7 +3,7 @@ Feature: Admin registration
 
   @database
   Scenario: Admin API client wants to add a question
-    Given I am logged in to api as admin
+    Given I am logged in to api as xlacot
     When I send a POST request to "/api/registration_form/questions" with json:
     """
     {
@@ -37,3 +37,20 @@ Feature: Admin registration
       }
       """
       Then the JSON response status code should be 204
+
+    @database
+    Scenario: Admin API client wants to update a question
+      Given I am logged in to api as xlacot
+      When I send a PUT request to "/api/registration_form/questions/14" with json:
+      """
+      {
+        "type": "4",
+        "question": "Nouveau nom",
+        "required": false,
+        "choices": [
+            { "label": "Nouveau choix 1" },
+            { "label": "Nouveau choix 2" }
+        ]
+      }
+      """
+      Then the JSON response status code should be 200

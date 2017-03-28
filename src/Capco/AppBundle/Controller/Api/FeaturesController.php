@@ -96,10 +96,17 @@ class FeaturesController extends FOSRestController
     /**
      * @Put("/registration_form/questions/{id}")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
+     * @ParamConverter("question", options={"mapping": {"id": "id"}})
      * @View(statusCode=200, serializerGroups={})
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
     {
+        if ((int) $data['type'] !== $question->getType()) {
+          // type has changed we remove and create a new question
+          $this->deleteRegistrationQuestionAction($question);
+          return $this->postRegistrationQuestionAction($request);
+        }
+
         $form = $this->createForm(new ApiQuestionType());
         $form->submit($request->request->all(), false);
 
@@ -111,19 +118,19 @@ class FeaturesController extends FOSRestController
 
         $data = $form->getData();
         if ($data['type'] === '4') {
+            // Remove previous choices
+            $question->resetQuestionChoices();
             foreach ($data['choices'] as $key => $choice) {
-                // $questionChoice = new QuestionChoice();
-                // $questionChoice->setTitle($choice['label']);
-                // $questionChoice->setPosition($key);
-                // $question->addQuestionChoice($questionChoice);
+                $questionChoice = new QuestionChoice();
+                $questionChoice->setTitle($choice['label']);
+                $questionChoice->setPosition($key);
+                $question->addQuestionChoice($questionChoice);
             }
         }
         $question->setType((int) $data['type']);
         $question->setTitle($data['question']);
         $question->setRequired($data['required']);
 
-        // $abs = $question->getAbstractQuestion();
-        // $abs->setPosition(0);
         $em->flush();
 
         return $question;

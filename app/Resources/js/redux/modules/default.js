@@ -18,13 +18,13 @@ export type DefaultAction =
   HideNewFieldModalAction
 ;
 export type State = {
-    districts: Array<Object>,
-    showNewFieldModal: boolean,
-    themes: Array<Object>,
-    features: Exact<FeatureToggles>,
-    userTypes: Array<Object>,
-    parameters: Object,
-    updatingRegistrationFieldModal: ?number
+    +districts: Array<Object>,
+    +showNewFieldModal: boolean,
+    +themes: Array<Object>,
+    +features: Exact<FeatureToggles>,
+    +userTypes: Array<Object>,
+    +parameters: Object,
+    +updatingRegistrationFieldModal: ?number
 };
 
 const initialState: State = {
@@ -113,14 +113,17 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
 };
 
 export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
-  return Fetcher
-    .delete(`/registration_form/questions/${id}`)
-    .then(() => {
-      dispatch(deleteRegistrationFieldSucceeded(id));
-      window.location.reload();
-    },
-    () => {},
-  );
+  if (confirm('Confirmez la suppression ?')) { // eslint-disable-line
+    return Fetcher
+      .delete(`/registration_form/questions/${id}`)
+      .then(
+        () => {
+          dispatch(deleteRegistrationFieldSucceeded(id));
+          window.location.reload();
+        },
+      () => {},
+    );
+  }
 };
 
 export const toggleFeature = (dispatch: Dispatch, feature: FeatureToggle, enabled: boolean): Promise<*> => {

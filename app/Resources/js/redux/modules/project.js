@@ -6,21 +6,21 @@ import Fetcher from '../../services/Fetcher';
 import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 
 export type State = {
-  currentProjectStepById: ?number,
-  currentProjectById: ?Uuid,
-  projects: Array<Object>,
-  projectsById: {[id: Uuid]: Object},
-  projectTypes: Array<Object>,
-  page: number,
-  pages: ?Array<Object>,
-  limit: ?number,
-  orderBy: ?string,
-  type: ?string,
-  filters: Object,
-  term: ?string,
-  theme: ?string,
-  isLoading: boolean,
-  count: number
+  +currentProjectStepById: ?number,
+  +currentProjectById: ?Uuid,
+  +projects: Array<Object>,
+  +projectsById: {[id: Uuid]: Object},
+  +projectTypes: Array<Object>,
+  +page: number,
+  +pages: ?Array<Object>,
+  +limit: ?number,
+  +orderBy: ?string,
+  +type: ?string,
+  +filters: Object,
+  +term: ?string,
+  +theme: ?string,
+  +isLoading: boolean,
+  +count: number
 };
 
 const initialState : State = {

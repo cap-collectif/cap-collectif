@@ -57,7 +57,7 @@ class QuestionChoice
      *
      * @return $this
      */
-    public function setQuestion(AbstractQuestion $question)
+    public function setQuestion(AbstractQuestion $question = null)
     {
         $this->question = $question;
 

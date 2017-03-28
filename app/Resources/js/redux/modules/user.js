@@ -6,33 +6,33 @@ import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 
 export type State = {
-  showLoginModal: boolean,
-  showRegistrationModal: boolean,
-  isSubmittingAccountForm: boolean,
-  showConfirmPasswordModal: boolean,
-  confirmationEmailResent: boolean,
-  registration_form: {
-    bottomTextDisplayed: boolean,
-    topTextDisplayed: boolean,
-    bottomText: string,
-    topText: string,
-    questions: Array<Object>
+  +showLoginModal: boolean,
+  +showRegistrationModal: boolean,
+  +isSubmittingAccountForm: boolean,
+  +showConfirmPasswordModal: boolean,
+  +confirmationEmailResent: boolean,
+  +registration_form: {
+    +bottomTextDisplayed: boolean,
+    +topTextDisplayed: boolean,
+    +bottomText: string,
+    +topText: string,
+    +questions: Array<Object>
   },
-  user: ?{
-    id: string,
-    username: string,
-    isEmailConfirmed: boolean,
-    isPhoneConfirmed: boolean,
-    phone: string,
-    isAdmin: boolean,
-    email: string,
-    newEmailToConfirm: ?string,
-    media: ?{
-        url: string
+  +user: ?{
+    +id: string,
+    +username: string,
+    +isEmailConfirmed: boolean,
+    +isPhoneConfirmed: boolean,
+    +phone: string,
+    +isAdmin: boolean,
+    +email: string,
+    +newEmailToConfirm: ?string,
+    +media: ?{
+        +url: string
     },
-    roles: Array<string>,
-    displayName: string,
-    uniqueId: string
+    +roles: Array<string>,
+    +displayName: string,
+    +uniqueId: string
   }
 };
 

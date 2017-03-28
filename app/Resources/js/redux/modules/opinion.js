@@ -48,14 +48,14 @@ type ContributionMap = {[id: Uuid]: {
   user_vote: ?VoteValue
 }};
 export type State = {
-  currentOpinionId: ?Uuid,
-  currentVersionId: ?Uuid,
-  opinionsById: ContributionMap,
-  versionsById: ContributionMap,
-  isEditingOpinionVersion: boolean,
-  showOpinionVersionEditModal: boolean,
-  isCreatingOpinionVersion: boolean,
-  showOpinionVersionCreateModal: boolean
+  +currentOpinionId: ?Uuid,
+  +currentVersionId: ?Uuid,
+  +opinionsById: ContributionMap,
+  +versionsById: ContributionMap,
+  +isEditingOpinionVersion: boolean,
+  +showOpinionVersionEditModal: boolean,
+  +isCreatingOpinionVersion: boolean,
+  +showOpinionVersionCreateModal: boolean
 };
 
 const VOTES_PREVIEW_COUNT = 8;

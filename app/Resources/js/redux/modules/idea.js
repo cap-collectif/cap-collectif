@@ -32,8 +32,8 @@ type DeleteVoteSucceedAction = { type: 'idea/DELETE_VOTE_SUCCEEDED', ideaId: num
 export type IdeaAction = RequestVotesFetchAction | ReceivedVotesFetchSuccededAction | ReceivedVotesFetchFailedAction | VoteSucceedAction | DeleteVoteSucceedAction;
 
 export type State = {
-  currentIdeaById: ?number,
-  ideas: IdeaMap
+  +currentIdeaById: ?number,
+  +ideas: IdeaMap
 };
 
 const initialState: State = {
