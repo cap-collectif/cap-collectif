@@ -73,7 +73,7 @@ type Props = {
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
-  show: state.default.updatingRegistrationFieldModal !== null,
+  show: state.default.updatingRegistrationFieldModal && state.default.updatingRegistrationFieldModal !== null,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
