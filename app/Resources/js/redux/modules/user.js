@@ -36,6 +36,8 @@ export type State = {
   }
 };
 
+type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
+type UpdateRegistrationFieldAction = { type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED', id: number, element: Object };
 type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
@@ -50,6 +52,7 @@ type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 type DeleteRegistrationFieldSucceededAction = { type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id: number };
 type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 export type UserAction =
+    UpdateRegistrationFieldAction |
     ShowRegistrationModalAction |
     CloseRegistrationModalAction |
     ShowLoginModalAction |
@@ -62,6 +65,7 @@ export type UserAction =
     UserRequestEmailChangeAction |
     DeleteRegistrationFieldSucceededAction |
     ReorderSucceededAction |
+    AddRegistrationFieldAction |
     SubmitConfirmPasswordAction
 ;
 
@@ -81,6 +85,8 @@ const initialState : State = {
   },
 };
 
+export const addRegistrationFieldSucceeded = (element: Object): AddRegistrationFieldAction => ({ type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element });
+export const updateRegistrationFieldSucceeded = (id: number, element: Object): UpdateRegistrationFieldAction => ({ type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED', element, id });
 export const deleteRegistrationFieldSucceeded = (id: number): DeleteRegistrationFieldSucceededAction => ({ type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id });
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({ type: 'SHOW_REGISTRATION_MODAL' });
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({ type: 'CLOSE_REGISTRATION_MODAL' });
@@ -253,6 +259,29 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
             ...state.registration_form.questions.slice(0, index),
             ...state.registration_form.questions.slice(index + 1),
           ],
+        },
+      };
+    }
+    case 'UPDATE_REGISTRATION_FIELD_SUCCEEDED': {
+      const index = state.registration_form.questions.findIndex((el => el.id === action.id));
+      return {
+        ...state,
+        registration_form: {
+          ...state.registration_form,
+          questions: [
+            ...state.registration_form.questions.slice(0, index),
+            action.element,
+            ...state.registration_form.questions.slice(index + 1),
+          ],
+        },
+      };
+    }
+    case 'ADD_REGISTRATION_FIELD_SUCCEEDED': {
+      return {
+        ...state,
+        registration_form: {
+          ...state.registration_form,
+          questions: [...state.registration_form.questions, action.element],
         },
       };
     }

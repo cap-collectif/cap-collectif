@@ -51,7 +51,7 @@ class FeaturesController extends FOSRestController
     /**
      * @Post("/registration_form/questions")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
-     * @View(statusCode=200, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"Questions"})
      */
     public function postRegistrationQuestionAction(Request $request)
     {
@@ -123,7 +123,7 @@ class FeaturesController extends FOSRestController
      * @Put("/registration_form/questions/{id}")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      * @ParamConverter("question", options={"mapping": {"id": "id"}})
-     * @View(statusCode=200, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={"Questions"})
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
     {

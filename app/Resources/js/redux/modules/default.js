@@ -2,7 +2,7 @@
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
-import { deleteRegistrationFieldSucceeded } from './user';
+import { addRegistrationFieldSucceeded, updateRegistrationFieldSucceeded, deleteRegistrationFieldSucceeded } from './user';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
@@ -77,11 +77,11 @@ export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({ t
 
 export const requestUpdateRegistrationField = (values: Object, dispatch: Dispatch, { fieldId }: { fieldId: number}) => {
   return Fetcher
-    .put(`/registration_form/questions/${fieldId}`, values)
+    .putToJson(`/registration_form/questions/${fieldId}`, values)
     .then(
-      () => {
+      (question: Object) => {
         dispatch(hideRegistrationFieldModal());
-        window.location.reload();
+        dispatch(updateRegistrationFieldSucceeded(fieldId, question));
       },
       () => {
         throw new SubmissionError({ _error: 'Un problème est survenu' });
@@ -89,7 +89,7 @@ export const requestUpdateRegistrationField = (values: Object, dispatch: Dispatc
     );
 };
 
-export const updateRegistrationCommunicationForm = (values: Object, dispatch: Dispatch) => {
+export const updateRegistrationCommunicationForm = (values: Object) => {
   return Fetcher
     .put('/registration_form', values)
     .then(() => {
@@ -105,10 +105,10 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
     delete values.choices;
   }
   return Fetcher
-    .post('/registration_form/questions', values)
-    .then(() => {
+    .postToJson('/registration_form/questions', values)
+    .then((question: Object) => {
       dispatch(hideNewFieldModal());
-      window.location.reload();
+      dispatch(addRegistrationFieldSucceeded(question));
     },
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
@@ -123,7 +123,6 @@ export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
       .then(
         () => {
           dispatch(deleteRegistrationFieldSucceeded(id));
-          window.location.reload();
         },
       () => {},
     );

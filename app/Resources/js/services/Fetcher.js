@@ -120,6 +120,21 @@ class Fetcher {
     ;
   }
 
+  putToJson(uri: string, body: Object): Promise<*> {
+    return AuthService.login()
+      .then(() => {
+        return fetch(config.api + uri, {
+          method: 'PUT',
+          headers: createHeaders(),
+          beforeSend: addAuthorization,
+          body: JSON.stringify(body),
+        })
+          .then(status)
+          .then(json);
+      })
+    ;
+  }
+
   patch(uri: string, body: Object): Promise<*> {
     return AuthService.login()
       .then(() => {
