@@ -17,7 +17,7 @@ export default reduxForm({
   validate,
   initialValues: {
     required: false,
-    choices: [{ position: 1 }, { position: 2 }],
+    choices: [{}, {}],
   },
   form: formName,
 })(RegistrationQuestionForm);

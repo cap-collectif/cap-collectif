@@ -313,7 +313,6 @@ EOF;
      */
     public function theJsonResponseStatusCodeShouldBe($code)
     {
-      var_dump((string) $this->response->getBody());
         PHPUnit::assertSame(
             (int) $code,
             (int) $this->response->getStatusCode(),
