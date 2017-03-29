@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationQuestionForm /> renders correctly 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    label="Titre"
+    name="question"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    label="Saisie obligatoire"
+    name="required"
+    type="checkbox"
+  />
+  <Field
+    component={[Function]}
+    label="Type"
+    name="type"
+    type="select"
+  >
+    <option
+      disabled={true}
+      value=""
+    >
+      Choisir une valeur
+    </option>
+    <option
+      value={0}
+    >
+      Réponse courte
+    </option>
+    <option
+      value={4}
+    >
+      Liste déroulante (une seule réponse possible)
+    </option>
+  </Field>
+</form>
+`;

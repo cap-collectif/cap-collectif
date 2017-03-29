@@ -1,10 +1,6 @@
 // @flow
-import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import type { Connector } from 'react-redux';
 import { addNewRegistrationField as onSubmit } from '../../redux/modules/default';
-import type { State } from '../../types';
 import RegistrationQuestionForm from './RegistrationQuestionForm';
 
 const validate = (values: Object) => {

@@ -14,7 +14,7 @@ const validate = (values: Object) => {
   return errors;
 };
 
-const typeToEnum = (type) => {
+const typeToEnum = (type: string) => {
   switch (type) {
     case 'select':
       return '4';

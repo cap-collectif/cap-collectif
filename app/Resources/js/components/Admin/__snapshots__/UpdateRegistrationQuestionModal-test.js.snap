@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AddNewQuestionModal /> renders correctly 1`] = `
+exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
 <Modal
   animation={false}
   aria-labelledby="contained-modal-title-lg"
   autoFocus={true}
   backdrop={true}
   bsClass="modal"
-  bsSize="small"
+  bsSize="large"
   dialogComponentClass={[Function]}
   enforceFocus={true}
   keyboard={true}
@@ -33,13 +33,13 @@ exports[`<AddNewQuestionModal /> renders correctly 1`] = `
       bsClass="modal"
       id="contained-modal-title-lg"
     >
-      Modifier le champ supplémentaire
+      Modifier un champ supplémentaire
     </ModalTitle>
   </ModalHeader>
   <ModalBody
     bsClass="modal"
   >
-    <ReduxForm />
+    <Connect(ReduxForm) />
   </ModalBody>
   <ModalFooter
     bsClass="modal"
@@ -54,7 +54,7 @@ exports[`<AddNewQuestionModal /> renders correctly 1`] = `
       bsClass="btn"
       bsStyle="primary"
       disabled={false}
-      id="confirm-new-question"
+      id="confirm-update-question"
       navDropdown={false}
       navItem={false}
       onClick={[Function]}

@@ -5,7 +5,7 @@ import type { Connector } from 'react-redux';
 import { IntlMixin } from 'react-intl';
 import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
+import { arrayMove } from 'react-sortable-hoc';
 import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import { reorderRegistrationQuestions } from '../../redux/modules/user';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
@@ -137,14 +137,16 @@ export const RegistrationAdminPage = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
     toggleFeature(dispatch, feature, value);
   },
-  addNewField: () => { dispatch(showNewFieldModal()); },
+  addNewField: () => {
+    dispatch(showNewFieldModal());
+  },
   reorder: (list: Array<Object>) => {
     reorderRegistrationQuestions(list, dispatch);
   },

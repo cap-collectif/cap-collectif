@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationSortableQuestion /> renders correctly 1`] = `
+<ListGroupItem
+  bsClass="list-group-item"
+  className="row"
+  style={
+    Object {
+      "marginLeft": 0,
+      "marginRight": 0,
+    }
+  }
+>
+  <div
+    className="col-xs-1"
+  >
+    <sortableHandle(DragHandle) />
+  </div>
+  <div
+    className="col-xs-8"
+  >
+    <strong />
+    <div>
+      Liste déroulante (une seule réponse possible)
+    </div>
+  </div>
+  <div
+    className="col-xs-3"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="pull-right"
+      disabled={false}
+      navDropdown={false}
+      navItem={false}
+      onClick={[Function]}
+    >
+      Supprimer
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="pull-right"
+      disabled={false}
+      navDropdown={false}
+      navItem={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "marginRight": 5,
+        }
+      }
+    >
+      Modifier
+    </Button>
+  </div>
+</ListGroupItem>
+`;
+
+exports[`<RegistrationSortableQuestion /> renders correctly when not a superAdmin 1`] = `
+<ListGroupItem
+  bsClass="list-group-item"
+  className="row"
+  style={
+    Object {
+      "marginLeft": 0,
+      "marginRight": 0,
+    }
+  }
+>
+  <div
+    className="col-xs-1"
+  >
+    <sortableHandle(DragHandle) />
+  </div>
+  <div
+    className="col-xs-8"
+  >
+    <strong />
+    <div>
+      Liste déroulante (une seule réponse possible)
+    </div>
+  </div>
+  <div
+    className="col-xs-3"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="pull-right"
+      disabled={true}
+      navDropdown={false}
+      navItem={false}
+      onClick={null}
+    >
+      Supprimer
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="pull-right"
+      disabled={true}
+      navDropdown={false}
+      navItem={false}
+      onClick={null}
+      style={
+        Object {
+          "marginRight": 5,
+        }
+      }
+    >
+      Modifier
+    </Button>
+  </div>
+</ListGroupItem>
+`;

@@ -8,12 +8,11 @@ import { Button, Alert } from 'react-bootstrap';
 import renderInput from '../Form/Field';
 import type { State } from '../../types';
 
-const renderDynamicFields = ({ fields, meta: { touched, error, submitFailed } }) => (
+const renderDynamicFields = ({ fields, meta: { error } }) => ( // eslint-disable-line
   <div>
     <label htmlFor="options">Options</label>
     { error && <Alert bsStyle="danger">{error}</Alert> }
     {
-      // .sort((a, b) => a.position - b.position)
       fields.map((field, index) =>
         <div key={index} className="row" style={{ marginBottom: 10 }}>
           <Field
@@ -95,5 +94,5 @@ export const RegistrationQuestionForm = React.createClass({
 const mapStateToProps = (state: State, props: { form: string }) => ({
   showChoices: formValueSelector(props.form)(state, 'type') === '4',
 });
-const connector: Connector<{}, Props> = connect(mapStateToProps);
+const connector: Connector<{ form: string }, Props> = connect(mapStateToProps);
 export default connector(RegistrationQuestionForm);

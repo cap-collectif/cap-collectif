@@ -9,14 +9,15 @@ import { updateRegistrationFieldModal, deleteRegistrationField } from '../../red
 import type { State, Dispatch } from '../../types';
 import DragHandle from './DragHandle';
 
+type ParentProps = { value: Object };
 type Props = {
   isSuperAdmin: boolean,
   value: Object,
-  deleteField: (id: number) => void,
-  updateField: (id: number) => void
+  deleteField: () => void,
+  updateField: () => void
 };
 
-export const RegistrationQuestion = React.createClass({
+export const RegistrationSortableQuestion = React.createClass({
   propTypes: {
     value: PropTypes.object.isRequired,
     isSuperAdmin: PropTypes.bool.isRequired,
@@ -61,11 +62,11 @@ export const RegistrationQuestion = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
-const mapDispatchToProps = (dispatch: Dispatch, props: Props) => ({
+const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
   updateField: () => { dispatch(updateRegistrationFieldModal(props.value.id)); },
   deleteField: () => { deleteRegistrationField(props.value.id, dispatch); },
 });
-const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
-export default SortableElement(connector(RegistrationQuestion));
+const connector: Connector<ParentProps, Props> = connect(mapStateToProps, mapDispatchToProps);
+export default SortableElement(connector(RegistrationSortableQuestion));

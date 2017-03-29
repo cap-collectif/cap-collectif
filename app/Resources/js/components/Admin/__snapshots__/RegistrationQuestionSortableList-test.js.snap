@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationSortableQuestionList /> renders correctly 1`] = `
+<ListGroup
+  componentClass="div"
+>
+  <sortableElement(Connect(RegistrationSortableQuestion))
+    collection={0}
+    index={0}
+    value={Object {}}
+  />
+  <sortableElement(Connect(RegistrationSortableQuestion))
+    collection={0}
+    index={1}
+    value={Object {}}
+  />
+</ListGroup>
+`;

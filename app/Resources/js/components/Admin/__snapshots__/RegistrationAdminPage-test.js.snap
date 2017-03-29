@@ -8,11 +8,40 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   }
 >
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Permettre l'inscription
+    </Col>
+  </div>
   <h2>
     Réseaux sociaux
   </h2>
   <p>
-    Permettre l'inscription via:
+    Permettre l'inscription via :
   </p>
   <div
     className="row"
@@ -75,9 +104,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
   <h2>
     Données recueillies
   </h2>
-  <p>
-    Receuillir les données suivantes auprès de l'utilisateur:
-  </p>
   <div
     className="row"
     style={
@@ -196,34 +222,336 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Statut
     </Col>
   </div>
-  <p
+  <Well
+    bsClass="div"
+  >
+    <p
+      style={
+        Object {
+          "marginTop": 10,
+        }
+      }
+    >
+      <strong>
+        Champ(s) supplémentaire(s)
+      </strong>
+    </p>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      navDropdown={false}
+      navItem={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Ajouter
+    </Button>
+  </Well>
+  <div
+    className="row"
     style={
       Object {
-        "marginTop": 10,
+        "padding": "10px 0",
       }
     }
   >
-    <strong>
-      Champ(s) supplémentaire(s)
-    </strong>
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Je ne suis pas un robot
+    </Col>
+  </div>
+  <h2>
+    Communication
+  </h2>
+  <Connect(ReduxForm) />
+</div>
+`;
+
+exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = `
+<div
+  style={
+    Object {
+      "margin": "0 15px",
+    }
+  }
+>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Permettre l'inscription
+    </Col>
+  </div>
+  <h2>
+    Réseaux sociaux
+  </h2>
+  <p>
+    Permettre l'inscription via :
   </p>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    navDropdown={false}
-    navItem={false}
-    onClick={[Function]}
+  <div
+    className="row"
     style={
       Object {
-        "marginBottom": 10,
+        "padding": "10px 0",
       }
     }
   >
-    Ajouter
-  </Button>
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Facebook
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Google
+    </Col>
+  </div>
+  <h2>
+    Données recueillies
+  </h2>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Nom ou pseudonyme
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        checked={true}
+        disabled={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Mot de passe
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Code postal
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      componentClass="div"
+      xs={11}
+    >
+      Statut
+    </Col>
+  </div>
+  <Well
+    bsClass="well"
+  >
+    <p
+      style={
+        Object {
+          "marginTop": 10,
+        }
+      }
+    >
+      <Alert
+        bsClass="alert"
+        bsStyle="info"
+        closeLabel="Close Alert"
+      >
+        Cette section est modifiable uniquement par votre administrateur cap-collectif.
+      </Alert>
+      <strong>
+        Champ(s) supplémentaire(s)
+      </strong>
+    </p>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={true}
+      navDropdown={false}
+      navItem={false}
+      onClick={null}
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      Ajouter
+    </Button>
+  </Well>
   <div
     className="row"
     style={
