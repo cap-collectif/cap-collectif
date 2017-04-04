@@ -32,14 +32,14 @@ def clean_cache():
 @task(environments=['testing'])
 def load_cache():
     "Load cache"
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_application.tar ]]; then docker load -i ~/docker/capcotest_application.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_applicationdata.tar ]]; then docker load -i ~/docker/capcotest_applicationdata.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_builder.tar ]]; then docker load -i ~/docker/capcotest_builder.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_seleniumhub.tar ]]; then docker load -i ~/docker/capcotest_seleniumhub.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_chrome.tar ]]; then docker load -i ~/docker/capcotest_chrome.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_mailcacher.tar ]]; then docker load -i ~/docker/capcotest_mailcacher.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_elasticsearch.tar ]]; then docker load -i ~/docker/capcotest_elasticsearch.tar; fi"')
-    local('/bin/bash -c "if [[ -e ~/docker/capcotest_redis.tar ]]; then docker load -i ~/docker/capcotest_redis.tar; fi"')
+    local('docker load -i ~/docker/capcotest_application.tar || true')
+    local('docker load -i ~/docker/capcotest_applicationdata.tar || true')
+    local('docker load -i ~/docker/capcotest_builder.tar || true')
+    local('docker load -i ~/docker/capcotest_seleniumhub.tar || true')
+    local('docker load -i ~/docker/capcotest_chrome.tar || true')
+    local('docker load -i ~/docker/capcotest_mailcacher.tar || true')
+    local('docker load -i ~/docker/capcotest_elasticsearch.tar || true')
+    local('docker load -i ~/docker/capcotest_redis.tar || true')
 
 
 @task(environments=['testing'])
