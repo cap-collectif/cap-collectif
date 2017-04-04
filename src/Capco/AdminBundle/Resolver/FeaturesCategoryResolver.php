@@ -37,7 +37,7 @@ class FeaturesCategoryResolver
             'features' => ['projects_form', 'project_trash'],
         ],
         'pages.registration' => [
-            'conditions' => ['registration'],
+            'conditions' => [],
             'features' => ['user_type', 'zipcode_at_register'],
         ],
         'pages.members' => [
