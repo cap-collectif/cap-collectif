@@ -14,16 +14,19 @@ class Version20170317131656 extends AbstractMigration
 
     public function postUp(Schema $schema)
     {
-        $form = $this->connection->fetchColumn('SELECT id FROM registration_form')[0];
+        $form = $this->connection->fetchColumn('SELECT id FROM registration_form');
         $bottomText = $this->connection->fetchColumn('SELECT value FROM site_parameter WHERE keyname = "signin.text.bottom"');
         $topText = $this->connection->fetchColumn('SELECT value FROM site_parameter WHERE keyname = "signin.text.top"');
 
-        $this->connection->update('registration_form', [
-            'bottom_text_displayed' => count($bottomText) > 0,
-            'top_text_displayed' => count($topText) > 0,
-            'top_text' => $topText,
-            'bottom_text' => $bottomText,
-        ], ['id' => $form]);
+        if (is_array($form)) {
+          $this->connection->update('registration_form', [
+              'bottom_text_displayed' => count($bottomText) > 0,
+              'top_text_displayed' => count($topText) > 0,
+              'top_text' => $topText,
+              'bottom_text' => $bottomText,
+          ], ['id' => $form[0]])
+          ;
+        }
 
         $this->connection->delete('site_parameter', ['keyname' => 'signin.text.top']);
         $this->connection->delete('site_parameter', ['keyname' => 'signin.text.bottom']);

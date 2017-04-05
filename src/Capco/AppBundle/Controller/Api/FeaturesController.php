@@ -94,9 +94,8 @@ class FeaturesController extends FOSRestController
         return $question;
     }
 
-
     /**
-     * Used to reorder questions
+     * Used to reorder questions.
      *
      * @Patch("/registration_form/questions")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -110,11 +109,11 @@ class FeaturesController extends FOSRestController
         $absQuestions = $em->getRepository('CapcoAppBundle:Questions\QuestionnaireAbstractQuestion')->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
-          foreach ($absQuestions as $absQuestion) {
-            if ($orderQuestion['id'] === $absQuestion->getQuestion()->getId()) {
-                $absQuestion->setPosition($key);
+            foreach ($absQuestions as $absQuestion) {
+                if ($orderQuestion['id'] === $absQuestion->getQuestion()->getId()) {
+                    $absQuestion->setPosition($key);
+                }
             }
-          }
         }
         $em->flush();
     }
@@ -138,9 +137,10 @@ class FeaturesController extends FOSRestController
         $data = $form->getData();
 
         if ((int) $data['type'] !== $question->getType()) {
-          // type has changed we remove and create a new question
+            // type has changed we remove and create a new question
           $this->deleteRegistrationQuestionAction($question);
-          return $this->postRegistrationQuestionAction($request);
+
+            return $this->postRegistrationQuestionAction($request);
         }
         if ($data['type'] === '4') {
             // Remove previous choices
@@ -170,6 +170,7 @@ class FeaturesController extends FOSRestController
     {
         $em = $this->get('doctrine')->getManager();
         $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+
         $form = $this->createForm(new AdminConfigureRegistrationType(), $registrationForm);
         $form->submit($request->request->all(), false);
 

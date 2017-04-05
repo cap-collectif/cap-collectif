@@ -214,7 +214,7 @@ class StepAdmin extends Admin
         }
 
         if ($subject instanceof QuestionnaireStep) {
-          $formMapper
+            $formMapper
             ->add('footer', CKEditorType::class, [
                 'config_name' => 'admin_editor',
                 'label' => 'admin.fields.step.footer',
@@ -222,15 +222,15 @@ class StepAdmin extends Admin
                 'translation_domain' => 'SonataAdminBundle',
             ])
           ;
-          if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
-              $formMapper
+            if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
+                $formMapper
                 ->add('verification', 'choice', [
                     'label' => 'admin.fields.step.verification',
                     'choices' => QuestionnaireStep::$verificationLabels,
                     'translation_domain' => 'SonataAdminBundle',
                 ])
               ;
-          }
+            }
         }
 
         $formMapper->end();

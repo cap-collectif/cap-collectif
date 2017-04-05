@@ -1,15 +1,25 @@
 application:
     environment:
         DOCKER_GID: 998
+        SYMFONY_SSR_MODE: external_server
         BLACKFIRE_SERVER_ID: c5118c2f-055f-4385-9c8a-ac31955ffb20
         BLACKFIRE_SERVER_TOKEN: ***REMOVED***
         BLACKFIRE_CLIENT_ID: ***REMOVED***
         BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
     volumes:
         - ../../:/var/www
-        - /var/run/docker.sock:/run/docker.sock:ro
-        - /usr/bin/docker:/usr/bin/docker
+        # - /var/run/docker.sock:/run/docker.sock:ro
+        # - /usr/bin/docker:/usr/bin/docker
         - /etc/localtime:/etc/localtime:ro
+
+builder:
+    build: ../services/builder
+    volumes:
+        - ../../:/var/www
+        - ~/.composer:/home/capco/.composer
+        - ~/.cache/yarn:/home/capco/.cache/yarn
+        - ~/.cache/bower:/home/capco/.cache/bower
+    command: echo "Use 'docker-compose run builder build' to build deps"
 
 elasticsearch:
     image: elasticsearch:1.7.3

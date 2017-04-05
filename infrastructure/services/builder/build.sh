@@ -1,23 +1,24 @@
 #!/bin/bash
+set -e
 
 if [ "$PRODUCTION" ]; then
   echo "Building for production"
   # We create var directory used by Symfony
-  mkdir -m 777 -p var || exit 1
+  mkdir -m 777 -p var
   # We install vendors with composer
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress || exit 1
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
   # We build bootstrap.php.cache in the `var` directory
-  php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var || exit 1
+  php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php va
 
   # Frontend deps
-  yarn install --pure-lockfile || exit 1
-  bower install --config.interactive=false --allow-root || exit 1
-  yarn run build:prod || exit 1
+  yarn install --pure-lockfile
+  bower install --config.interactive=false --allow-root
+  yarn run build:prod
 
   # Server side rendering deps
-  yarn run build-server-bundle:prod || exit 1
+  yarn run build-server-bundle:prod
 else
   echo "Building for development/testing"
   # Symfony deps
@@ -31,6 +32,7 @@ else
   # Frontend deps
   yarn install --pure-lockfile
   bower install --config.interactive=false
+
   echo "Testing node-sass binding..."
   if ./node_modules/node-sass/bin/node-sass >/dev/null 2>&1 | grep --quiet `npm rebuild node-sass` >/dev/null 2>&1; then
       echo "Building node-sass binding for the container..."

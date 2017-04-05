@@ -20,7 +20,7 @@ def check_dependencies():
 @task(environments=['local', 'testing'])
 def check_codestyle():
     "Check code style"
-    env.compose_run('npm run checkcs', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
     env.compose_run('php-cs-fixer fix --rules=@Symfony --using-cache=no --dry-run --diff src', 'builder', '.', no_deps=True)
@@ -30,15 +30,15 @@ def check_codestyle():
 def lint():
     "Lint"
     env.compose_run('php-cs-fixer fix --rules=@Symfony --using-cache=no --diff src || echo true', 'builder', '.', no_deps=True)
-    env.compose_run('npm run lint', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
 
 @task(environments=['local', 'testing'])
 def static_analysis():
     "Run static analysis tools"
-    local('npm run typecheck')
-    env.service_command('php bin/phpstan analyse src', 'application', env.www_app)
+    local('yarn run typecheck')
+    env.service_command('php bin/phpstan analyse src || true', 'application', env.www_app)
 
 
 @task(environments=['local', 'testing'])
@@ -50,7 +50,7 @@ def phpspec():
 @task(environments=['local', 'testing'])
 def jest():
     "Run JS Unit Tests"
-    env.compose_run('npm test', 'builder', '.', no_deps=True)
+    env.compose('run -e CI=True builder yarn test')
 
 
 @task(environments=['local', 'testing'])

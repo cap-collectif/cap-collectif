@@ -65,19 +65,17 @@ def save_fixtures_image(tag='latest'):
 @task(environments=['testing'])
 def save_cache():
     "Rebuild infrastructure and save cache"
-    cache_dir_is_present = os.path.exists('~/docker')
     commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
-    create_fresh_cache = not cache_dir_is_present or re.search('\[fresh-cache\]', commit_message)
+    create_fresh_cache = re.search('\[fresh-cache\]', commit_message)
     change_in_infrastructure = False
 
     compare_url = local('echo $CIRCLE_COMPARE_URL', capture=True)
     simpleMatch = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)$', compare_url)
     match = re.search('https://github.com/jolicode/CapCollectif-SF2/compare/([a-z0-9]+?)\.\.\.([a-z0-9]+?)$', compare_url)
 
-    if not create_fresh_cache and simpleMatch is None and match is None:
-        return
-
-    if not create_fresh_cache:
+    if create_fresh_cache is False:
+        if simpleMatch is None and match is None:
+            return
         if simpleMatch is not None:
             changes = local('git diff --name-only %s | cat' % simpleMatch.group(1), capture=True).split("\n")
         else:
@@ -91,6 +89,12 @@ def save_cache():
 
             if match is not None:
                 change_in_infrastructure = True
+
+    if create_fresh_cache:
+        print 'Creating a fresh docker cache !'
+
+    if change_in_infrastructure:
+        print 'Changes detected in infrastructure, creating an updated cache !'
 
     if change_in_infrastructure or create_fresh_cache:
         env.compose('build')

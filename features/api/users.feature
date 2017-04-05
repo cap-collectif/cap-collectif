@@ -84,6 +84,10 @@ Feature: Users
         {
           "question": 6,
           "value": "Réponse à la question obligatoire"
+        },
+        {
+          "question": 14,
+          "value": "Sangohan"
         }
       ]
     }
@@ -171,6 +175,10 @@ Feature: Users
           {
             "question": 6,
             "value": "Réponse à la question obligatoire"
+          },
+          {
+            "question": 14,
+            "value": "Sangohan"
           }
         ]
       }

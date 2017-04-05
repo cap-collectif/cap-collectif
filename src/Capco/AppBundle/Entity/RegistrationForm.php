@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 
@@ -20,6 +21,11 @@ class RegistrationForm
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EmailDomain", mappedBy="registrationForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $domains;
 
     /**
      * @ORM\Column(name="bottom_text_displayed", type="boolean", nullable=false)
@@ -133,6 +139,39 @@ class RegistrationForm
     {
         $this->questions->removeElement($question);
         $question->setRegistrationForm(null);
+
+        return $this;
+    }
+
+    public function getDomains(): Collection
+    {
+        return $this->domains;
+    }
+
+    public function resetDomains(): self
+    {
+        foreach ($this->domains as $domain) {
+            $domain->setRegistrationForm(null);
+        }
+        $this->domains = new ArrayCollection();
+
+        return $this;
+    }
+
+    public function addDomain(EmailDomain $domain): self
+    {
+        if (!$this->domains->contains($domain)) {
+            $this->domains->add($domain);
+        }
+        $domain->setRegistrationForm($this);
+
+        return $this;
+    }
+
+    public function removeDomain(EmailDomain $domain): self
+    {
+        $this->domains->removeElement($domain);
+        $domain->setRegistrationForm(null);
 
         return $this;
     }

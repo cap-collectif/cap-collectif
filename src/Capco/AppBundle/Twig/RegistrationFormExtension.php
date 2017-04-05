@@ -33,11 +33,18 @@ class RegistrationFormExtension extends \Twig_Extension
             (new SerializationContext())->setGroups(['Questions'])
         );
 
+        $serializedDomains = $this->serializer->serialize(
+            $form->getDomains(),
+            'json',
+            (new SerializationContext())->setGroups(['EmailDomain'])
+        );
+
         return [
           'bottomTextDisplayed' => $form->isBottomTextDisplayed(),
           'bottomText' => $form->getBottomText(),
           'topTextDisplayed' => $form->isTopTextDisplayed(),
           'topText' => $form->getTopText(),
+          'domains' => json_decode($serializedDomains, true),
           'questions' => json_decode($serializedQuestions, true),
         ];
     }

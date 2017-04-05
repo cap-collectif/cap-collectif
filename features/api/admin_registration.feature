@@ -70,3 +70,17 @@ Feature: Admin registration
       """
       Then the JSON response status code should be 204
       Then the question 14 should be positioned before 6
+
+      @database
+      Scenario: Admin API client wants to update emails domains
+        Given I am logged in to api as admin
+        When I send a PUT request to "/api/registration_form" with json:
+        """
+        {
+            "domains": [
+              { "value": "gouv.fr" },
+              { "value": "jolicode.com" }
+            ]
+        }
+        """
+        Then the JSON response status code should be 204

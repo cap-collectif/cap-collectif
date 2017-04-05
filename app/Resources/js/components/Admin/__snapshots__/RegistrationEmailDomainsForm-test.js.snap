@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationEmailDomainsForm /> renders correctly 1`] = `
+<div>
+  <p
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
+    <strong>
+      Nom(s) de domaine
+    </strong>
+  </p>
+  <form
+    onSubmit={[Function]}
+  >
+    <FieldArray
+      component={[Function]}
+      name="domains"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      navDropdown={false}
+      navItem={false}
+      type="submit"
+    >
+      Enregistrer
+    </Button>
+  </form>
+</div>
+`;

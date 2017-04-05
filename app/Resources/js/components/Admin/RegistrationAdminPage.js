@@ -11,6 +11,7 @@ import { reorderRegistrationQuestions } from '../../redux/modules/user';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
+import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
 
 type Props = {
   features: FeatureToggles,
@@ -65,6 +66,20 @@ export const RegistrationAdminPage = React.createClass({
           </Col>
           <Col xs={11}>Google</Col>
         </div>
+        <h2>Autorisation</h2>
+        <div className="row" style={{ padding: '10px 0' }}>
+          <Col xs={1}>
+            <Toggle
+              checked={features.restrict_registration_via_email_domain}
+              onChange={() => onToggle('restrict_registration_via_email_domain', !features.restrict_registration_via_email_domain)}
+            />
+          </Col>
+          <Col xs={11}>Limiter l'inscription à certains noms de domaine</Col>
+        </div>
+        {
+          features.restrict_registration_via_email_domain &&
+            <RegistrationEmailDomainsForm />
+        }
         <h2>Données recueillies</h2>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>

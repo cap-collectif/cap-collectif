@@ -24,6 +24,7 @@ const initialState : State = {
     bottomText: '',
     topText: '',
     questions: [],
+    domains: [],
   },
   user: null,
 };

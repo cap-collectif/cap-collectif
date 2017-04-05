@@ -34,14 +34,6 @@ database:
 redis:
     image: redis:3
 
-builder:
-    build: ../services/builder
-    volumes:
-        - ../../:/var/www
-        - ~/.composer:/home/capco/.composer
-        - ~/.yarn-cache:/home/capco/.yarn-cache
-    command: echo "Use 'docker-compose run builder build' to build deps"
-
 seleniumhub:
   image: selenium/hub:2.53.1-beryllium
   ports:

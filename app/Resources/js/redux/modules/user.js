@@ -16,7 +16,8 @@ export type State = {
     +topTextDisplayed: boolean,
     +bottomText: string,
     +topText: string,
-    +questions: Array<Object>
+    +questions: Array<Object>,
+    +domains: Array<string>
   },
   +user: ?{
     +id: string,
@@ -82,6 +83,7 @@ const initialState : State = {
     bottomTextDisplayed: false,
     topTextDisplayed: false,
     questions: [],
+    domains: [],
   },
 };
 
@@ -99,6 +101,10 @@ export const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => 
 export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({ type: 'USER_REQUEST_EMAIL_CHANGE', email });
 export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({ type: 'CANCEL_EMAIL_CHANGE' });
 export const submitConfirmPasswordFormSucceed = (password: string): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
+
+export const setRegistrationEmailDomains = (values: { domains: Array<{value: string}>}): Promise<*> => {
+  return Fetcher.put('/registration_form', values);
+};
 
 export const login = (data: { username: string, password: string }, dispatch: Dispatch): Promise<*> => {
   return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
@@ -169,6 +175,8 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
         children.email.errors.map((string) => {
           if (string === 'already_used_email') {
             errors.email = 'registration.constraints.email.already_used';
+          } else if (string === 'check_email.domain') {
+            errors.email = 'registration.constraints.email.not_authorized';
           } else {
             errors.email = `registration.constraints.${string}`;
           }

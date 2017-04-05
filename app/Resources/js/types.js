@@ -34,6 +34,7 @@ export type FeatureToggles = {
   shield_mode: boolean,
   registration: boolean,
   phone_confirmation: boolean,
+  restrict_registration_via_email_domain: boolean,
   reporting: boolean,
   themes: boolean,
   districts: boolean,
@@ -48,6 +49,7 @@ export type FeatureToggle =
   'blog' |
   'calendar' |
   'ideas' |
+  'restrict_registration_via_email_domain' |
   'idea_creation' |
   'idea_trash' |
   'login_facebook' |

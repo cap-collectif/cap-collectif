@@ -511,7 +511,8 @@
         "max": "Votre email doit faire moins de 128 caractères",
         "invalid": "Cet email n'est pas valide.",
         "throwable": "Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.",
-        "already_used": "Cette adresse électronique est déjà utilisée."
+        "already_used": "Cette adresse électronique est déjà utilisée.",
+        "not_authorized": "Inscription impossible. Cette adresse électronique n'est pas autorisée à l'inscription."
       },
       "charte": {
         "check": "Veuillez cocher la case pour accepter la charte."

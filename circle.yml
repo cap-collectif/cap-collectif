@@ -7,7 +7,6 @@ machine:
         - sudo apt-get --reinstall install python-dev libffi-dev python-pyasn1 python-pyasn1-modules --yes
         - sudo pip install --upgrade ndg-httpsclient
         - sudo pip install docker-compose==1.8.0 Fabric==1.12.0
-
     services:
         - docker
 
@@ -16,8 +15,7 @@ dependencies:
         - ~/docker
         - ~/.composer
         - ~/.cache/yarn
-        - ~/.yarn-cache
-        - node_modules
+        - ~/.cache/bower
 
     override:
         - fab testing.circle.fix_environment_variables_with_lxc

@@ -114,7 +114,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
     public function resetQuestionChoices(): self
     {
         foreach ($this->questionChoices as $choice) {
-          $choice->setQuestion(null);
+            $choice->setQuestion(null);
         }
         $this->questionChoices = new ArrayCollection();
 

@@ -1,4 +1,10 @@
 services:
+  capco.check_email_domain.validator:
+    class: Capco\AppBundle\Validator\Constraints\CheckEmailDomainValidator
+    arguments: ['@capco.toggle.manager', '@capco.registration_form.repository']
+    tags:
+      - { name: validator.constraint_validator, alias: capco.check_email_domain.validator }
+
   capco.has_required_responses.validator:
     class: Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator
     arguments: ['@capco.registration_form.repository']

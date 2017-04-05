@@ -8,7 +8,9 @@ import os
 @task
 def deploy(environment='dev', user='capco'):
     "Deploy"
-    env.compose('run -u ' + user + ' ' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
+    if os.environ.get('CI') == 'true':
+        env.compose('run -u root builder chown capco:capco -R /var/www/web /home/capco/.composer /home/capco/.cache/yarn /home/capco/.cache/bower')
+    env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
     env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)

@@ -23,7 +23,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install php7.0
+# Install php7.1
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
@@ -42,7 +42,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV NODE_VERSION 6.10.0
-
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
@@ -73,7 +72,6 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer 
 
 COPY capco.ini /etc/php/7.1/cli/conf.d/capco.ini
 COPY build.sh /usr/bin/build
-
 
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/

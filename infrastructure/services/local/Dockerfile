@@ -48,32 +48,13 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install recent v8, phpv8js
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
-    git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools && \
-    export PATH=/usr/local/depot_tools:$PATH && \
-    cd /tmp && \
-    rm -rf /tmp/* && \
-    fetch --nohooks v8 && \
-    cd v8 && \
-    git checkout 4.9.385.28 && \
-    gclient sync --nohooks && \
-    export GYP_DEFINES="use_system_icu=1" && \
-    export GYPFLAGS="-Dv8_use_external_startup_data=0 -Dclang=0" && \
-    make native library=shared snapshot=on -j4 && \
-    cp out/native/lib.target/lib*.so /usr/lib/ && \
-    cp out/native/obj.target/tools/gyp/libv8_libplatform.a /usr/lib && \
-    cp -R include/* /usr/include && \
-    git clone https://github.com/phpv8/v8js.git --branch 1.1.0 /tmp/v8js && \
-    cd /tmp/v8js && phpize && ./configure && \
-    make all test install && \
-    cd / && \
-    rm -rf /tmp/* /usr/local/depot_tools && \
-    apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
-    apt-get autoremove -y && \
-    apt-get clean all
+# Install nodejs and deps for npm install
+ENV NPM_CONFIG_LOGLEVEL warn
+ENV NODE_VERSION 6.10.0
+RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
+  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 # Install rabbitmq lib and php-amqp
 RUN apt-get update && \
@@ -159,6 +140,7 @@ COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 # COPY blackfire/run              /etc/service/blackfire/run # Wait for credentials
 COPY rabbitmq/run               /etc/service/rabbitmq/run
+COPY nodejs/run                 /etc/service/nodejs/run
 
 # Configuration
 COPY nginx/nginx.conf           /etc/nginx/nginx.conf
@@ -168,7 +150,7 @@ COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
 COPY cron/crontab               /etc/cron.d/crontab
 COPY varnish/capco.vcl          /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs   /etc/logrotate.d/mysql-slow-logs
+COPY logrotate/mysql-slow-logs  /etc/logrotate.d/mysql-slow-logs
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache

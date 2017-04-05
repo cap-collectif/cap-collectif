@@ -59,7 +59,7 @@ Feature: Toggles
       "enabled": true
     }
     """
-    Then the JSON response status code should be 200
+    Then the JSON response status code should be 204
     And feature "login_facebook" should be enabled
     When I send a PUT request to "/api/toggles/login_facebook" with json:
     """
@@ -67,4 +67,5 @@ Feature: Toggles
       "enabled": false
     }
     """
-    Then feature "login_facebook" should be disabled
+    Then the JSON response status code should be 204
+    And feature "login_facebook" should be disabled

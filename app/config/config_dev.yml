@@ -10,8 +10,7 @@ framework:
 
 limenius_react:
     serverside_rendering:
-        fail_loud: false
-        trace: false
+        mode: "external_server"
 
 web_profiler:
     toolbar: true

@@ -55,6 +55,7 @@ const initialState: State = {
     districts: false,
     user_type: false,
     votes_evolution: false,
+    restrict_registration_via_email_domain: false,
     export: false,
     server_side_rendering: false,
     zipcode_at_register: false,

@@ -164,6 +164,7 @@ def merge(user, default):
                 user[k] = merge(user[k], v)
     return user
 
+
 env.directory = '/home/capco'
 env.docker = True
 env.service_command = command

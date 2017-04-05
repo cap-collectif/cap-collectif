@@ -28,7 +28,7 @@ Feature: Project
     And feature "projects_form" is enabled
     And I visited "projects page"
     And I wait 1 seconds
-    Then I should see 8 ".thumbnail--custom" elements
+    Then I should see 10 ".thumbnail--custom" elements
     And I select "Transport" from "project-theme"
     And I wait 1 seconds
     Then I should see 7 ".thumbnail--custom" elements

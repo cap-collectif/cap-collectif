@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Limenius\ReactBundle\Twig\ReactRenderExtension;
+use Limenius\ReactRenderer\Twig\ReactRenderExtension;
 
 class ReactIntlRenderExtension extends \Twig_Extension
 {

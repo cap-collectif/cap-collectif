@@ -527,6 +527,12 @@ Feature: Synthesis
         "published": true,
         "description": @null@,
         "childrenCount": @integer@,
+        "childrenScore": @integer@,
+        "childrenElementsNb": @integer@,
+        "parentChildrenScore": @integer@,
+        "parentChildrenElementsNb": @integer@,
+        "publishedParentChildrenCount": @integer@,
+        "publishedChildrenCount": @integer@,
         "children": [
           {
             "id": @string@,
@@ -538,6 +544,12 @@ Feature: Synthesis
             "published": @boolean@,
             "description": @null@,
             "childrenCount": @integer@,
+            "childrenScore": @integer@,
+            "childrenElementsNb": @integer@,
+            "parentChildrenScore": @integer@,
+            "parentChildrenElementsNb": @integer@,
+            "publishedParentChildrenCount": @integer@,
+            "publishedChildrenCount": @integer@,
             "children": [@...@]
           }
         ]
@@ -564,6 +576,12 @@ Feature: Synthesis
         "description": @null@,
         "published": true,
         "childrenCount": @integer@,
+        "childrenScore": @integer@,
+        "childrenElementsNb": @integer@,
+        "parentChildrenScore": @integer@,
+        "parentChildrenElementsNb": @integer@,
+        "publishedParentChildrenCount": @integer@,
+        "publishedChildrenCount": @integer@,
         "children": [
           {
             "id": @string@,
@@ -575,6 +593,12 @@ Feature: Synthesis
             "body": @string@,
             "description": @null@,
             "childrenCount": @integer@,
+            "childrenScore": @integer@,
+            "childrenElementsNb": @integer@,
+            "parentChildrenScore": @integer@,
+            "parentChildrenElementsNb": @integer@,
+            "publishedParentChildrenCount": @integer@,
+            "publishedChildrenCount": @integer@,
             "children": [@...@]
           }
         ]

@@ -5,16 +5,24 @@ namespace Capco\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class AdminConfigureRegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('bottomTextDisplayed', null, ['required' => true])
-            ->add('bottomText', null, ['required' => true])
-            ->add('topTextDisplayed', null, ['required' => true])
-            ->add('topText', null, ['required' => true])
+            ->add('domains', CollectionType::class, [
+              'allow_add' => true,
+              'allow_delete' => true,
+              'entry_type' => EmailDomainType::class,
+              'by_reference' => false,
+              'required' => false,
+            ])
+            ->add('bottomTextDisplayed', null, ['required' => false])
+            ->add('bottomText', null, ['required' => false])
+            ->add('topTextDisplayed', null, ['required' => false])
+            ->add('topText', null, ['required' => false])
         ;
     }
 

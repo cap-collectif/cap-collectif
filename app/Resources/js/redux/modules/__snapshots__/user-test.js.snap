@@ -7,6 +7,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -27,6 +28,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -45,6 +47,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -63,6 +66,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -81,6 +85,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -99,6 +104,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,
@@ -117,6 +123,7 @@ Object {
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
+    "domains": Array [],
     "questions": Array [],
     "topText": "",
     "topTextDisplayed": false,

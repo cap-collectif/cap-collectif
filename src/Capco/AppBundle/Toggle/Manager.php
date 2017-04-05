@@ -30,6 +30,7 @@ class Manager
         'registration',
         'phone_confirmation',
         'reporting',
+        'restrict_registration_via_email_domain',
         'themes',
         'export',
         'districts',
