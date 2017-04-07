@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Radio /> should render correctly 1`] = `
+<div
+  className="form-group undefined"
+  id="reply-1"
+>
+  <label
+    className="control-label "
+    htmlFor="reply-1"
+  >
+    label
+  </label>
+  <span
+    className="help-block"
+  >
+    Un seul choix possible
+  </span>
+  <ReactRadioGroup
+    defaultInputStyle={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+    defaultLabelStyle={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+    name="choices-for-field-12"
+    onChange={[Function]}
+  >
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-24"
+      image={null}
+      label="Maxime Arrouard"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Maxime Arrouard"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-25"
+      image={null}
+      label="Spylou Super Sayen"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Spylou Super Sayen"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-26"
+      image={null}
+      label="Cyril Lage"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Cyril Lage"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-27"
+      image={null}
+      label="Superman"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Superman"
+    />
+  </ReactRadioGroup>
+</div>
+`;
+
+exports[`<Radio /> should render correctly with other allowed 1`] = `
+<div
+  className="form-group undefined"
+  id="reply-1"
+>
+  <label
+    className="control-label "
+    htmlFor="reply-1"
+  >
+    label
+  </label>
+  <span
+    className="help-block"
+  >
+    Un seul choix possible
+  </span>
+  <ReactRadioGroup
+    defaultInputStyle={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+    defaultLabelStyle={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+    name="choices-for-field-12"
+    onChange={[Function]}
+  >
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-24"
+      image={null}
+      label="Maxime Arrouard"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Maxime Arrouard"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-25"
+      image={null}
+      label="Spylou Super Sayen"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Spylou Super Sayen"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-26"
+      image={null}
+      label="Cyril Lage"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Cyril Lage"
+    />
+    <Input
+      disabled={false}
+      errors={null}
+      id="reply-1_choice-27"
+      image={null}
+      label="Superman"
+      labelClassName="h5"
+      medias={Array []}
+      name="choices-for-field-12"
+      type="radio"
+      value="Superman"
+    />
+    <Other
+      disabled={false}
+      field={
+        Object {
+          "choices": Array [
+            Object {
+              "id": 24,
+              "label": "Maxime Arrouard",
+            },
+            Object {
+              "id": 25,
+              "label": "Spylou Super Sayen",
+            },
+            Object {
+              "id": 26,
+              "label": "Cyril Lage",
+            },
+            Object {
+              "id": 27,
+              "label": "Superman",
+            },
+          ],
+          "helpText": "Un seul choix possible",
+          "id": 12,
+          "isOtherAllowed": true,
+          "required": true,
+          "slug": "quel-est-ton-athlete-favori",
+          "type": "radio",
+        }
+      }
+      onChange={[Function]}
+    />
+  </ReactRadioGroup>
+</div>
+`;

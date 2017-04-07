@@ -11,6 +11,7 @@ const Checkbox = React.createClass({
     field: PropTypes.object.isRequired,
     getGroupStyle: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    label: PropTypes.any.isRequired,
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
@@ -68,6 +69,7 @@ const Checkbox = React.createClass({
       getGroupStyle,
       id,
       labelClassName,
+      label,
       renderFormErrors,
     } = this.props;
     const field = this.props.field;
@@ -78,15 +80,13 @@ const Checkbox = React.createClass({
     };
     labelClasses[labelClassName] = true;
 
-    const optional = this.getIntlMessage('global.form.optional');
-
     return (
       <div
         className={`form-group ${getGroupStyle(field.id)}`}
         id={id}
       >
         <label htmlFor={fieldName} className={classNames(labelClasses)}>
-          {field.question + (field.required ? '' : optional)}
+          {label}
         </label>
         <span className="help-block">
           {field.helpText}

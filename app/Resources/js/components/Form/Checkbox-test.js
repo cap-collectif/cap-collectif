@@ -1,10 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import CheckboxGroup from 'react-checkbox-group';
 import IntlData from '../../translations/FR';
-import Input from './Input';
-import Other from './Other';
 import Checkbox from './Checkbox';
 
 describe('<Checkbox />', () => {
@@ -12,10 +9,9 @@ describe('<Checkbox />', () => {
     id: 11,
     type: 'checkbox',
     slug: 'pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places',
-    question: 'Pour quel type d\'épreuve êtes vous prêt à acheter des places',
     helpText: 'Plusieurs choix sont possibles',
-    required: false,
-    isOtherAllowed: true,
+    required: true,
+    isOtherAllowed: false,
     choices: [
       { id: 20, label: 'Athlétisme' },
       { id: 21, label: 'Natation' },
@@ -23,55 +19,32 @@ describe('<Checkbox />', () => {
       { id: 23, label: 'Sports individuels' },
     ],
   };
-  const emptyFunction = () => {};
+  const props = {
+    label: 'label',
+    id: 'reply-1',
+    ...IntlData,
+    disabled: false,
+    onChange: jest.fn(),
+    getGroupStyle: jest.fn(),
+    renderFormErrors: jest.fn(),
+  };
 
-  it('should render a CheckboxGroup component with right props', () => {
-    const wrapper = shallow(<Checkbox
-      field={field}
-      id={`reply-${field.id}`}
-      onChange={emptyFunction}
-      getGroupStyle={emptyFunction}
-      renderFormErrors={emptyFunction}
-      disabled={false}
-      {...IntlData}
-    />);
-    expect(wrapper.find(CheckboxGroup)).toHaveLength(1);
-    expect(wrapper.find(CheckboxGroup).prop('name')).toEqual(`choices-for-field-${field.id}`);
-    expect(wrapper.find(CheckboxGroup).prop('value')).toBeDefined();
-    expect(wrapper.find(CheckboxGroup).prop('onChange')).toBeDefined();
+  it('should render correctly', () => {
+    const wrapper = shallow(
+      <Checkbox
+        field={field}
+        {...props}
+      />);
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a CheckboxGroup component with 4 Input components inside', () => {
-    const wrapper = shallow(<Checkbox
-      field={field}
-      id={`reply-${field.id}`}
-      onChange={emptyFunction}
-      getGroupStyle={emptyFunction}
-      renderFormErrors={emptyFunction}
-      disabled={false}
-      {...IntlData}
-    />);
-    expect(wrapper.find(CheckboxGroup).find(Input)).toHaveLength(4);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('id')).toEqual(`reply-11_choice-${field.choices[0].id}`);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('name')).toEqual(`choices-for-field-${field.id}`);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('type')).toEqual('checkbox');
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('label')).toEqual(field.choices[0].label);
-    expect(wrapper.find(CheckboxGroup).find(Input).first().prop('value')).toEqual(field.choices[0].label);
-  });
-
-  it('should render a CheckboxGroup component with an Other component inside', () => {
-    const wrapper = shallow(<Checkbox
-      field={field}
-      id={`reply-${field.id}`}
-      onChange={emptyFunction}
-      getGroupStyle={emptyFunction}
-      renderFormErrors={emptyFunction}
-      disabled={false}
-      {...IntlData}
-    />);
-    expect(wrapper.find(CheckboxGroup).find(Other)).toHaveLength(1);
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('field')).toEqual(field);
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('onChange')).toBeDefined();
-    expect(wrapper.find(CheckboxGroup).find(Other).prop('disabled')).toBeDefined();
+  it('should render with an other field', () => {
+    const wrapper = shallow(
+      <Checkbox
+        field={{ ...field, isOtherAllowed: true }}
+        {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });

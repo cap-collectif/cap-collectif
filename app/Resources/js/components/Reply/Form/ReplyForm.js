@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { Alert } from 'react-bootstrap';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -9,6 +10,20 @@ import Radio from '../../Form/Radio';
 import Checkbox from '../../Form/Checkbox';
 import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
+
+const getRequiredFieldIndicationStrategory = (fields: Array<{required: boolean}>) => {
+  const numberOfRequiredFields = fields.reduce((a, b) => (a + b.required ? 1 : 0), 0);
+  if (numberOfRequiredFields === 0) {
+    return 'no_required';
+  }
+  if (numberOfRequiredFields === fields.length) {
+    return 'all_required';
+  }
+  if (numberOfRequiredFields > fields.length / 2) {
+    return 'majority_required';
+  }
+  return 'minority_required';
+};
 
 const ReplyForm = React.createClass({
   propTypes: {
@@ -197,25 +212,36 @@ const ReplyForm = React.createClass({
   },
 
   render() {
-    const optional = this.getIntlMessage('global.form.optional');
     const {
       disabled,
       form,
     } = this.props;
+    const strategy = getRequiredFieldIndicationStrategory(form.fields);
     return (
       <form id="reply-form" ref="form">
         {
           form.description &&
-          <div>
-            <FormattedHTMLMessage message={form.description} />
-            <hr />
-          </div>
+            <div>
+              <FormattedHTMLMessage message={form.description} />
+              <hr />
+              {
+                strategy === 'all_required' &&
+                  <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>
+              }
+            </div>
         }
         {
           form.fields.map((field) => {
             const key = field.slug;
             const inputType = field.type || 'text';
-
+            // const optional = this.getIntlMessage('global.form.optional');
+            const labelAppend = field.required
+            ? (strategy === 'majority_required' ? ' <span class="small warning">Obligatoire</span>' : '')
+            : (strategy === 'minority_required' ? ' <span class="small excerpt">Facultatif</span>' : '')
+            ;
+            const labelMessage = field.question + labelAppend;
+            const label = <FormattedHTMLMessage message={labelMessage} />
+              ;
             switch (inputType) {
               case 'checkbox':
                 return (
@@ -228,6 +254,7 @@ const ReplyForm = React.createClass({
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
                     values={this.state.form}
+                    label={label}
                     labelClassName="h4"
                     disabled={disabled}
                   />
@@ -243,6 +270,7 @@ const ReplyForm = React.createClass({
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
+                    label={label}
                     labelClassName="h4"
                     disabled={disabled}
                   />
@@ -255,7 +283,7 @@ const ReplyForm = React.createClass({
                     ref={c => this[`field-${field.id}`] = c}
                     id={`reply-${field.id}`}
                     type={inputType}
-                    label={field.question + (field.required ? '' : optional)}
+                    label={label}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState(`form.${field.id}`)}
@@ -280,6 +308,7 @@ const ReplyForm = React.createClass({
                     ref={c => this[`field-${field.id}`] = c}
                     id={`reply-${field.id}`}
                     field={field}
+                    label={label}
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
@@ -295,7 +324,7 @@ const ReplyForm = React.createClass({
                     key={key}
                     id={`reply-${field.id}`}
                     type={inputType}
-                    label={field.question + (field.required ? '' : optional)}
+                    label={label}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState(`form.${field.id}`)}
@@ -309,8 +338,8 @@ const ReplyForm = React.createClass({
           })
         }
         {
-          form.anonymousAllowed
-            ? <div>
+          form.anonymousAllowed &&
+            <div>
               <hr style={{ marginBottom: '30px' }} />
               <Input
                 type="checkbox"
@@ -320,7 +349,6 @@ const ReplyForm = React.createClass({
                 disabled={disabled}
               />
             </div>
-            : null
         }
       </form>
     );

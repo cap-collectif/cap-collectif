@@ -3,10 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import ReplyForm from './ReplyForm';
-import Input from '../../Form/Input';
-import Checkbox from '../../Form/Checkbox';
-import Radio from '../../Form/Radio';
-import Ranking from '../../Form/Ranking';
 
 describe('<ReplyForm />', () => {
   const form = {
@@ -78,115 +74,21 @@ describe('<ReplyForm />', () => {
       },
     ],
   };
-  const isSubmitting = false;
-  const handleSubmitSuccess = () => {};
-  const handleFailure = () => {};
+  const props = {
+    isSubmitting: false,
+    onSubmitSuccess: jest.fn(),
+    onSubmitFailure: jest.fn(),
+    onValidationFailure: jest.fn(),
+    ...IntlData,
+  };
 
-  it('should render a Input text component with right props', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      {...IntlData}
-    />);
-    const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'text'));
-    expect(component).toHaveLength(1);
-    expect(component.prop('type')).toEqual(form.fields[0].type);
-    expect(component.prop('label')).toEqual(form.fields[0].question);
-    expect(component.prop('id')).toEqual(`reply-${form.fields[0].id}`);
-  });
-
-  it('should render a Checkbox component with right props', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      disabled={false}
-      {...IntlData}
-    />);
-    expect(wrapper.find(Checkbox)).toHaveLength(1);
-    expect(wrapper.find(Checkbox).prop('id')).toEqual(`reply-${form.fields[1].id}`);
-    expect(wrapper.find(Checkbox).prop('field')).toEqual(form.fields[1]);
-    expect(wrapper.find(Checkbox).prop('onChange')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('getGroupStyle')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('renderFormErrors')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('disabled')).toBeDefined();
-  });
-
-  it('should render a Radio component with right props', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      {...IntlData}
-    />);
-    expect(wrapper.find(Radio)).toHaveLength(1);
-    expect(wrapper.find(Radio).prop('id')).toEqual(`reply-${form.fields[2].id}`);
-    expect(wrapper.find(Radio).prop('field')).toEqual(form.fields[2]);
-    expect(wrapper.find(Checkbox).prop('onChange')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('getGroupStyle')).toBeDefined();
-    expect(wrapper.find(Checkbox).prop('renderFormErrors')).toBeDefined();
-  });
-
-  it('should render a Input select component with right props', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      {...IntlData}
-    />);
-    const component = wrapper.findWhere(n => (n.type() === Input && n.prop('type') === 'select'));
-    expect(component).toHaveLength(1);
-    expect(component.prop('type')).toEqual(form.fields[3].type);
-    expect(component.prop('label')).toEqual(`${form.fields[3].question} (facultatif)`);
-    expect(component.prop('id')).toEqual(`reply-${form.fields[3].id}`);
-    expect(component.prop('help')).toEqual(form.fields[3].helpText);
-  });
-
-  it('should render a Ranking component with right props', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      {...IntlData}
-    />);
-    const component = wrapper.find('Ranking');
-    expect(component).toHaveLength(1);
-    expect(component.prop('id')).toEqual(`reply-${form.fields[4].id}`);
-    expect(component.prop('field')).toEqual(form.fields[4]);
-    expect(component.prop('onChange')).toBeDefined();
-    expect(component.prop('labelClassName')).toEqual('h4');
-  });
-
-  it('should render disabled fields when form is disabled', () => {
-    const wrapper = shallow(<ReplyForm
-      form={form}
-      isSubmitting={isSubmitting}
-      onSubmitSuccess={handleSubmitSuccess}
-      onSubmitFailure={handleFailure}
-      onValidationFailure={handleFailure}
-      disabled
-      {...IntlData}
-    />);
-    const disabledInputs = wrapper.findWhere(n => (n.type() === Input && n.prop('disabled') === true));
-    expect(disabledInputs).toHaveLength(2);
-    const disabledCheckboxes = wrapper.findWhere(n => (n.type() === Checkbox && n.prop('disabled') === true));
-    expect(disabledCheckboxes).toHaveLength(1);
-    const disabledRadios = wrapper.findWhere(n => (n.type() === Radio && n.prop('disabled') === true));
-    expect(disabledRadios).toHaveLength(1);
-    const enabledFields = wrapper.findWhere(n => ((n.type() === Input || n.type === Checkbox || n.type === Radio) && n.prop('disabled') === false));
-    expect(enabledFields).toHaveLength(0);
-    const disabledRanking = wrapper.findWhere(n => (n.type() === Ranking && n.prop('disabled') === true));
-    expect(disabledRanking).toHaveLength(1);
+  it('should render correctly', () => {
+    const wrapper = shallow(
+      <ReplyForm
+        form={form}
+        {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 });

@@ -12,6 +12,7 @@ const Ranking = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
+    label: PropTypes.any.isRequired,
     labelClassName: PropTypes.string,
   },
   mixins: [IntlMixin],
@@ -49,21 +50,20 @@ const Ranking = React.createClass({
       labelClassName,
       getGroupStyle,
       disabled,
+      label,
       renderFormErrors,
     } = this.props;
     const labelClasses = classNames({
       'control-label': true,
       [labelClassName]: true,
     });
-    const optional = this.getIntlMessage('global.form.optional');
-
     return (
       <div
         className={`form-group ${getGroupStyle(field.id)}`}
         id={id}
       >
         <label htmlFor={id} className={labelClasses}>
-          {field.question + (field.required ? '' : optional)}
+          { label }
         </label>
         {
           field.helpText

@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Checkbox /> should render correctly 1`] = `
+<div
+  className="form-group undefined"
+  id="reply-1"
+>
+  <label
+    className="control-label "
+    htmlFor="choices-for-field-11"
+  >
+    label
+  </label>
+  <span
+    className="help-block"
+  >
+    Plusieurs choix sont possibles
+  </span>
+  <CheckboxGroup
+    className="input-choices"
+    id="choices-for-field-11"
+    name="choices-for-field-11"
+    onChange={[Function]}
+    value={Array []}
+  >
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-20"
+        image={null}
+        label="Athlétisme"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Athlétisme"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-21"
+        image={null}
+        label="Natation"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Natation"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-22"
+        image={null}
+        label="Sports collectifs"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Sports collectifs"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-23"
+        image={null}
+        label="Sports individuels"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Sports individuels"
+      />
+    </div>
+  </CheckboxGroup>
+</div>
+`;
+
+exports[`<Checkbox /> should render with an other field 1`] = `
+<div
+  className="form-group undefined"
+  id="reply-1"
+>
+  <label
+    className="control-label "
+    htmlFor="choices-for-field-11"
+  >
+    label
+  </label>
+  <span
+    className="help-block"
+  >
+    Plusieurs choix sont possibles
+  </span>
+  <CheckboxGroup
+    className="input-choices"
+    id="choices-for-field-11"
+    name="choices-for-field-11"
+    onChange={[Function]}
+    value={Array []}
+  >
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-20"
+        image={null}
+        label="Athlétisme"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Athlétisme"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-21"
+        image={null}
+        label="Natation"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Natation"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-22"
+        image={null}
+        label="Sports collectifs"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Sports collectifs"
+      />
+    </div>
+    <div>
+      <Input
+        disabled={false}
+        errors={null}
+        id="reply-1_choice-23"
+        image={null}
+        label="Sports individuels"
+        labelClassName="h5"
+        medias={Array []}
+        name="choices-for-field-11"
+        type="checkbox"
+        value="Sports individuels"
+      />
+    </div>
+    <Other
+      disabled={false}
+      field={
+        Object {
+          "choices": Array [
+            Object {
+              "id": 20,
+              "label": "Athlétisme",
+            },
+            Object {
+              "id": 21,
+              "label": "Natation",
+            },
+            Object {
+              "id": 22,
+              "label": "Sports collectifs",
+            },
+            Object {
+              "id": 23,
+              "label": "Sports individuels",
+            },
+          ],
+          "helpText": "Plusieurs choix sont possibles",
+          "id": 11,
+          "isOtherAllowed": true,
+          "required": true,
+          "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+          "type": "checkbox",
+        }
+      }
+      onChange={[Function]}
+    />
+  </CheckboxGroup>
+</div>
+`;
