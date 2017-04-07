@@ -12,14 +12,19 @@ import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
 
 const getRequiredFieldIndicationStrategory = (fields: Array<{required: boolean}>) => {
-  const numberOfRequiredFields = fields.reduce((a, b) => (a + b.required ? 1 : 0), 0);
+  const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
+  const numberOfFields = fields.length;
+  const halfNumberOfFields = numberOfFields / 2;
   if (numberOfRequiredFields === 0) {
     return 'no_required';
   }
-  if (numberOfRequiredFields === fields.length) {
+  if (numberOfRequiredFields === numberOfFields) {
     return 'all_required';
   }
-  if (numberOfRequiredFields > fields.length / 2) {
+  if (numberOfRequiredFields === halfNumberOfFields) {
+    return 'half_required';
+  }
+  if (numberOfRequiredFields > halfNumberOfFields) {
     return 'majority_required';
   }
   return 'minority_required';
@@ -224,24 +229,26 @@ const ReplyForm = React.createClass({
             <div>
               <FormattedHTMLMessage message={form.description} />
               <hr />
-              {
-                strategy === 'all_required' &&
-                  <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>
-              }
             </div>
+        }
+        {
+          strategy === 'all_required' &&
+            <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>
         }
         {
           form.fields.map((field) => {
             const key = field.slug;
             const inputType = field.type || 'text';
-            // const optional = this.getIntlMessage('global.form.optional');
             const labelAppend = field.required
-            ? (strategy === 'majority_required' ? ' <span class="small warning">Obligatoire</span>' : '')
-            : (strategy === 'minority_required' ? ' <span class="small excerpt">Facultatif</span>' : '')
+            ? strategy === 'minority_required'
+              ? ' <span class="small warning">Obligatoire</span>'
+              : ''
+            : (strategy === 'majority_required' || strategy === 'half_required')
+              ? ' <span class="small excerpt">Facultatif</span>'
+              : ''
             ;
             const labelMessage = field.question + labelAppend;
-            const label = <FormattedHTMLMessage message={labelMessage} />
-              ;
+            const label = (<FormattedHTMLMessage message={labelMessage} />);
             switch (inputType) {
               case 'checkbox':
                 return (
@@ -259,7 +266,6 @@ const ReplyForm = React.createClass({
                     disabled={disabled}
                   />
                 );
-
               case 'radio':
                 return (
                   <Radio
@@ -275,7 +281,6 @@ const ReplyForm = React.createClass({
                     disabled={disabled}
                   />
                 );
-
               case 'select':
                 return (
                   <Input
@@ -283,24 +288,21 @@ const ReplyForm = React.createClass({
                     ref={c => this[`field-${field.id}`] = c}
                     id={`reply-${field.id}`}
                     type={inputType}
-                    label={label}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState(`form.${field.id}`)}
                     errors={this.renderFormErrors(field.id)}
                     defaultValue=""
+                    label={label}
                     labelClassName="h4"
                     disabled={disabled}
                   >
                     <option value="" disabled>{this.getIntlMessage('global.select')}</option>
                     {
-                      field.choices.map((choice) => {
-                        return <option key={choice.id} value={choice.label}>{choice.label}</option>;
-                      })
+                      field.choices.map(choice => <option key={choice.id} value={choice.label}>{choice.label}</option>)
                     }
                   </Input>
                 );
-
               case 'ranking':
                 return (
                   <Ranking
@@ -308,10 +310,10 @@ const ReplyForm = React.createClass({
                     ref={c => this[`field-${field.id}`] = c}
                     id={`reply-${field.id}`}
                     field={field}
-                    label={label}
                     getGroupStyle={this.getGroupStyle}
                     renderFormErrors={this.renderFormErrors}
                     onChange={this.onChange}
+                    label={label}
                     labelClassName="h4"
                     disabled={disabled}
                   />
@@ -324,12 +326,12 @@ const ReplyForm = React.createClass({
                     key={key}
                     id={`reply-${field.id}`}
                     type={inputType}
-                    label={label}
                     help={field.helpText}
                     groupClassName={this.getGroupStyle(field.id)}
                     valueLink={this.linkState(`form.${field.id}`)}
                     errors={this.renderFormErrors(field.id)}
                     placeholder={this.getIntlMessage('reply.your_response')}
+                    label={label}
                     labelClassName="h4"
                     disabled={disabled}
                   />

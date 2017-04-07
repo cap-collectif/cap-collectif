@@ -1,16 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ReplyForm /> should render correctly 1`] = `
+exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
 <form
   id="reply-form"
 >
-  <div>
-    <FormattedHTMLMessage
-      message="Iste aut quasi voluptatibus totam. Repellat dolor ullam quibusdam tempore neque impedit aut."
-      tagName="span"
-    />
-    <hr />
-  </div>
   <Input
     disabled={false}
     errors={null}
@@ -32,58 +25,6 @@ exports[`<ReplyForm /> should render correctly 1`] = `
       Object {
         "requestChange": [Function],
         "value": "",
-      }
-    }
-  />
-  <Checkbox
-    disabled={false}
-    field={
-      Object {
-        "choices": Array [
-          Object {
-            "id": 20,
-            "label": "Athlétisme",
-          },
-          Object {
-            "id": 21,
-            "label": "Natation",
-          },
-          Object {
-            "id": 22,
-            "label": "Sports collectifs",
-          },
-          Object {
-            "id": 23,
-            "label": "Sports individuels",
-          },
-        ],
-        "helpText": "Plusieurs choix sont possibles",
-        "id": 11,
-        "isOtherAllowed": true,
-        "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
-        "required": false,
-        "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
-        "type": "checkbox",
-      }
-    }
-    getGroupStyle={[Function]}
-    id="reply-11"
-    label={
-      <FormattedHTMLMessage
-        message="Pour quel type d'épreuve êtes vous prêt à acheter des places <span class=\\"small excerpt\\">Facultatif</span>"
-        tagName="span"
-      />
-    }
-    labelClassName="h4"
-    onChange={[Function]}
-    renderFormErrors={[Function]}
-    values={
-      Object {
-        "10": "",
-        "11": Array [],
-        "12": "",
-        "13": "",
-        "14": "",
       }
     }
   />
@@ -207,6 +148,550 @@ exports[`<ReplyForm /> should render correctly 1`] = `
     label={
       <FormattedHTMLMessage
         message="Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+</form>
+`;
+
+exports[`<ReplyForm /> should render correctly with majority of required fields 1`] = `
+<form
+  id="reply-form"
+>
+  <Input
+    disabled={false}
+    errors={null}
+    groupClassName=""
+    help=""
+    id="reply-10"
+    image={null}
+    label={
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    medias={Array []}
+    placeholder="Votre réponse"
+    type="text"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": "",
+      }
+    }
+  />
+  <Radio
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 24,
+            "label": "Maxime Arrouard",
+          },
+          Object {
+            "id": 25,
+            "label": "Spylou Super Sayen",
+          },
+          Object {
+            "id": 26,
+            "label": "Cyril Lage",
+          },
+          Object {
+            "id": 27,
+            "label": "Superman",
+          },
+        ],
+        "helpText": "Un seul choix possible",
+        "id": 12,
+        "isOtherAllowed": true,
+        "question": "Quel est ton athlète favori ?",
+        "required": true,
+        "slug": "quel-est-ton-athlete-favori",
+        "type": "radio",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-12"
+    label={
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ?"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+  <Ranking
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 28,
+            "label": "Pas assez fort (Mon sonotone est en panne)",
+          },
+          Object {
+            "id": 29,
+            "label": "Assez fort (Mon sonotone est mal réglé)",
+          },
+          Object {
+            "id": 30,
+            "label": "Trop fort (Mon sonotone est tout neuf)",
+          },
+        ],
+        "helpText": "Merci de répondre sincèrement",
+        "id": 14,
+        "question": "Nelson Monfort parle-t-il:",
+        "required": false,
+        "slug": "nelson-monfort-parle-t-il",
+        "type": "ranking",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-14"
+    label={
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+</form>
+`;
+
+exports[`<ReplyForm /> should render correctly with minority of required fields 1`] = `
+<form
+  id="reply-form"
+>
+  <Input
+    disabled={false}
+    errors={null}
+    groupClassName=""
+    help=""
+    id="reply-10"
+    image={null}
+    label={
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ? <span class=\\"small warning\\">Obligatoire</span>"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    medias={Array []}
+    placeholder="Votre réponse"
+    type="text"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": "",
+      }
+    }
+  />
+  <Checkbox
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 20,
+            "label": "Athlétisme",
+          },
+          Object {
+            "id": 21,
+            "label": "Natation",
+          },
+          Object {
+            "id": 22,
+            "label": "Sports collectifs",
+          },
+          Object {
+            "id": 23,
+            "label": "Sports individuels",
+          },
+        ],
+        "helpText": "Plusieurs choix sont possibles",
+        "id": 11,
+        "isOtherAllowed": true,
+        "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+        "required": false,
+        "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+        "type": "checkbox",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-11"
+    label={
+      <FormattedHTMLMessage
+        message="Pour quel type d'épreuve êtes vous prêt à acheter des places"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+    values={
+      Object {
+        "10": "",
+        "11": Array [],
+        "12": "",
+        "13": "",
+        "14": "",
+      }
+    }
+  />
+  <Radio
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 24,
+            "label": "Maxime Arrouard",
+          },
+          Object {
+            "id": 25,
+            "label": "Spylou Super Sayen",
+          },
+          Object {
+            "id": 26,
+            "label": "Cyril Lage",
+          },
+          Object {
+            "id": 27,
+            "label": "Superman",
+          },
+        ],
+        "helpText": "Un seul choix possible",
+        "id": 12,
+        "isOtherAllowed": true,
+        "question": "Quel est ton athlète favori ?",
+        "required": true,
+        "slug": "quel-est-ton-athlete-favori",
+        "type": "radio",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-12"
+    label={
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ? <span class=\\"small warning\\">Obligatoire</span>"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+  <Input
+    defaultValue=""
+    disabled={false}
+    errors={null}
+    groupClassName=""
+    help="Merci de répondre sincèrement"
+    id="reply-13"
+    image={null}
+    label={
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": "",
+      }
+    }
+  >
+    <option
+      disabled={true}
+      value=""
+    >
+      Choisir une valeur
+    </option>
+    <option
+      value="Pas assez fort (Mon sonotone est en panne)"
+    >
+      Pas assez fort (Mon sonotone est en panne)
+    </option>
+    <option
+      value="Assez fort (Mon sonotone est mal réglé)"
+    >
+      Assez fort (Mon sonotone est mal réglé)
+    </option>
+    <option
+      value="Trop fort (Mon sonotone est tout neuf)"
+    >
+      Trop fort (Mon sonotone est tout neuf)
+    </option>
+  </Input>
+  <Ranking
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 28,
+            "label": "Pas assez fort (Mon sonotone est en panne)",
+          },
+          Object {
+            "id": 29,
+            "label": "Assez fort (Mon sonotone est mal réglé)",
+          },
+          Object {
+            "id": 30,
+            "label": "Trop fort (Mon sonotone est tout neuf)",
+          },
+        ],
+        "helpText": "Merci de répondre sincèrement",
+        "id": 14,
+        "question": "Nelson Monfort parle-t-il:",
+        "required": false,
+        "slug": "nelson-monfort-parle-t-il",
+        "type": "ranking",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-14"
+    label={
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+</form>
+`;
+
+exports[`<ReplyForm /> should render correctly with only facultatives fields 1`] = `
+<form
+  id="reply-form"
+>
+  <Checkbox
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 20,
+            "label": "Athlétisme",
+          },
+          Object {
+            "id": 21,
+            "label": "Natation",
+          },
+          Object {
+            "id": 22,
+            "label": "Sports collectifs",
+          },
+          Object {
+            "id": 23,
+            "label": "Sports individuels",
+          },
+        ],
+        "helpText": "Plusieurs choix sont possibles",
+        "id": 11,
+        "isOtherAllowed": true,
+        "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+        "required": false,
+        "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+        "type": "checkbox",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-11"
+    label={
+      <FormattedHTMLMessage
+        message="Pour quel type d'épreuve êtes vous prêt à acheter des places"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+    values={
+      Object {
+        "11": Array [],
+        "13": "",
+        "14": "",
+      }
+    }
+  />
+  <Input
+    defaultValue=""
+    disabled={false}
+    errors={null}
+    groupClassName=""
+    help="Merci de répondre sincèrement"
+    id="reply-13"
+    image={null}
+    label={
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    medias={Array []}
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": "",
+      }
+    }
+  >
+    <option
+      disabled={true}
+      value=""
+    >
+      Choisir une valeur
+    </option>
+    <option
+      value="Pas assez fort (Mon sonotone est en panne)"
+    >
+      Pas assez fort (Mon sonotone est en panne)
+    </option>
+    <option
+      value="Assez fort (Mon sonotone est mal réglé)"
+    >
+      Assez fort (Mon sonotone est mal réglé)
+    </option>
+    <option
+      value="Trop fort (Mon sonotone est tout neuf)"
+    >
+      Trop fort (Mon sonotone est tout neuf)
+    </option>
+  </Input>
+  <Ranking
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 28,
+            "label": "Pas assez fort (Mon sonotone est en panne)",
+          },
+          Object {
+            "id": 29,
+            "label": "Assez fort (Mon sonotone est mal réglé)",
+          },
+          Object {
+            "id": 30,
+            "label": "Trop fort (Mon sonotone est tout neuf)",
+          },
+        ],
+        "helpText": "Merci de répondre sincèrement",
+        "id": 14,
+        "question": "Nelson Monfort parle-t-il:",
+        "required": false,
+        "slug": "nelson-monfort-parle-t-il",
+        "type": "ranking",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-14"
+    label={
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    onChange={[Function]}
+    renderFormErrors={[Function]}
+  />
+</form>
+`;
+
+exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
+<form
+  id="reply-form"
+>
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    closeLabel="Close Alert"
+  >
+    Tous les champs sont obligatoires
+  </Alert>
+  <Input
+    disabled={false}
+    errors={null}
+    groupClassName=""
+    help=""
+    id="reply-10"
+    image={null}
+    label={
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?"
+        tagName="span"
+      />
+    }
+    labelClassName="h4"
+    medias={Array []}
+    placeholder="Votre réponse"
+    type="text"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": "",
+      }
+    }
+  />
+  <Radio
+    disabled={false}
+    field={
+      Object {
+        "choices": Array [
+          Object {
+            "id": 24,
+            "label": "Maxime Arrouard",
+          },
+          Object {
+            "id": 25,
+            "label": "Spylou Super Sayen",
+          },
+          Object {
+            "id": 26,
+            "label": "Cyril Lage",
+          },
+          Object {
+            "id": 27,
+            "label": "Superman",
+          },
+        ],
+        "helpText": "Un seul choix possible",
+        "id": 12,
+        "isOtherAllowed": true,
+        "question": "Quel est ton athlète favori ?",
+        "required": true,
+        "slug": "quel-est-ton-athlete-favori",
+        "type": "radio",
+      }
+    }
+    getGroupStyle={[Function]}
+    id="reply-12"
+    label={
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ?"
         tagName="span"
       />
     }

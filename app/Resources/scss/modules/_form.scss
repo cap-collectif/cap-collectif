@@ -12,6 +12,10 @@ Hack form button - radio check
     filter: alpha(opacity = 0);
 }
 
+.warning {
+  color: $warning-text!important;
+}
+
 [data-toggle=buttons] > .btn > .checkbox,
 [data-toggle=buttons] > .btn > .radio {
     margin-top: 0;

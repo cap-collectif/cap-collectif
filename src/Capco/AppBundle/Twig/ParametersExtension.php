@@ -46,8 +46,6 @@ class ParametersExtension extends \Twig_Extension
         $keys = [
             'login.text.top',
             'login.text.bottom',
-            'signin.text.top',
-            'signin.text.bottom',
             'signin.cgu.name',
             'signin.cgu.link',
         ];
