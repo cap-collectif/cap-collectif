@@ -28,6 +28,10 @@ class DistrictExtension extends \Twig_Extension
             $list[] = ['id' => $district->getId(), 'name' => $district->getName()];
         }
 
+        usort($list, function ($a, $b) {
+            return $a['name'] <=> $b['name'];
+        });
+
         return $list;
     }
 }
