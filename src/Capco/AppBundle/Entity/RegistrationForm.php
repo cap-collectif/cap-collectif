@@ -37,7 +37,7 @@ class RegistrationForm
         return $this->bottomTextDisplayed;
     }
 
-    public function setBottomTextDisplayed($bottomTextDisplayed): self
+    public function setBottomTextDisplayed(bool $bottomTextDisplayed): self
     {
         $this->bottomTextDisplayed = $bottomTextDisplayed;
 
@@ -54,7 +54,7 @@ class RegistrationForm
         return $this->topTextDisplayed;
     }
 
-    public function setTopTextDisplayed($topTextDisplayed): self
+    public function setTopTextDisplayed(bool $topTextDisplayed): self
     {
         $this->topTextDisplayed = $topTextDisplayed;
 
@@ -66,7 +66,7 @@ class RegistrationForm
      */
     private $topText = '';
 
-    public function setTopText(string $topText)
+    public function setTopText(string $topText = null)
     {
         $this->topText = $topText;
 
@@ -83,7 +83,7 @@ class RegistrationForm
      */
     private $bottomText;
 
-    public function setBottomText(string $bottomText)
+    public function setBottomText(string $bottomText = null)
     {
         $this->bottomText = $bottomText;
 
@@ -115,7 +115,7 @@ class RegistrationForm
         return $this->questions;
     }
 
-    public function setQuestions($questions)
+    public function setQuestions(Collection $questions)
     {
         foreach ($questions as $question) {
             $question->setRegistrationForm($this);
