@@ -141,7 +141,7 @@ class OpinionController extends Controller
             'app_project_show_opinions_sorted',
             'app_project_show_consultation',
             'app_consultation_show_opinions',
-            'app_consultation_show_opinions_sorted'
+            'app_consultation_show_opinions_sorted',
         ];
         $baseUrl = $request->getHost();
         $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
