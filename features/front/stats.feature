@@ -13,12 +13,8 @@ Feature: Stats
     Given I go to a project stats page
     And I go to the selection step stats
     Then I should see votes stats
-    When I filter votes stats by theme
-    Then the votes stats should be filtered by theme
     And I filter votes stats by category
     Then the votes stats should be filtered by category
-    And I filter votes stats by district
-    Then the votes stats should be filtered by theme and district
 
   @javascript
   Scenario: Anonymous user wants to see all districts

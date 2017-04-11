@@ -106,15 +106,6 @@ trait ProjectStepsTrait
     }
 
     /**
-     * @When I filter votes stats by theme
-     */
-    public function iFilterVotesStatsByTheme()
-    {
-        $this->navigationContext->getPage('project stats page')->filterByTheme();
-        $this->iWait(1);
-    }
-
-    /**
      * @When I filter votes stats by district
      */
     public function iFilterVotesStatsByDistrict()
@@ -130,24 +121,6 @@ trait ProjectStepsTrait
     {
         $this->navigationContext->getPage('project stats page')->filterByCategory();
         $this->iWait(1);
-    }
-
-    /**
-     * @Then the votes stats should be filtered by theme
-     */
-    public function theVotesStatsShouldBeFilteredByTheme()
-    {
-        $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
-        $this->assertNumElements(3, $selector);
-    }
-
-    /**
-     * @Then the votes stats should be filtered by theme and district
-     */
-    public function theVotesStatsShouldBeFilteredByThemeAndDistrict()
-    {
-        $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
-        $this->assertNumElements(0, $selector);
     }
 
     /**

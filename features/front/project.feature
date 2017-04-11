@@ -156,6 +156,7 @@ Feature: Project
       | stepSlug    | collecte-des-avis                |
     And I should see "Corbeille"
     When I click the "#trash-link" element
+    And I wait 1 seconds
     Then I should see "Vous devez être connecté pour réaliser cette action."
 
   @javascript

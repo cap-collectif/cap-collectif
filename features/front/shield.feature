@@ -11,7 +11,8 @@ Scenario: Anonymous should see shield, can't register but can connect
   And I fill in the following:
     | username    | user@test.com       |
     | password    | user                |
-  And I press "Connexion"
+  And I press "Se connecter"
+  And I wait 2 seconds
   Then I can see I am logged in as "user"
   And I should not see the shield
 

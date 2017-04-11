@@ -49,4 +49,3 @@ Feature: Registration
     Then I should see "Le nom doit faire au moins 2 caractères."
     And I should see "Cet email n'est pas valide."
     And I should see "Le mot de passe doit faire au moins 8 caractères."
-    And I should see "Veuillez cocher la case pour accepter la charte."
