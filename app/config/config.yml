@@ -371,3 +371,12 @@ limenius_react:
       trace: false
       server_bundle_path: "%kernel.root_dir%/../web/js/server-bundle.js"
       server_socket_path: "/var/node.sock"
+
+fos_http_cache:
+    proxy_client:
+       default: varnish
+       varnish:
+          http:
+            servers:
+                - 127.0.0.1
+            base_url: 127.0.0.1

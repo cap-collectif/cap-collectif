@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionBox /> should render correctly 1`] = `
+<div
+  className="block block--bordered opinion__details"
+>
+  <div
+    className="opinion opinion--info opinion--current"
+  >
+    <div
+      className="opinion__header opinion__header--centered"
+      style={
+        Object {
+          "height": "auto",
+        }
+      }
+    >
+      <a
+        className="pull-left btn btn-default opinion__header__back"
+      >
+        <i
+          className="cap cap-arrow-1-1"
+        />
+        <span
+          className="hidden-xs hidden-sm"
+        >
+           
+          Retour
+        </span>
+      </a>
+      <div
+        className="opinion__header__title"
+      />
+      <h2
+        className="h4 opinion__header__title"
+      >
+        <FormattedMessage
+          message="Proposition"
+          tagName="span"
+        />
+        <p
+          className="small excerpt"
+          style={
+            Object {
+              "marginTop": "5px",
+            }
+          }
+        >
+          opinionType
+        </p>
+      </h2>
+    </div>
+    <OpinionPreview
+      link={false}
+      opinion={
+        Object {
+          "answer": Object {},
+          "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
+        }
+      }
+      opinionTerm={0}
+      rankingThreshold={0}
+      showTypeLabel={false}
+    />
+  </div>
+  <OpinionAppendices
+    opinion={
+      Object {
+        "answer": Object {},
+        "title": "title",
+        "type": Object {
+          "color": "info",
+          "title": "opinionType",
+        },
+      }
+    }
+  />
+  <div
+    className="opinion__description"
+  >
+    <p
+      className="h4"
+      style={
+        Object {
+          "marginTop": "0",
+        }
+      }
+    >
+      title
+    </p>
+    <OpinionBody
+      opinion={
+        Object {
+          "answer": Object {},
+          "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
+        }
+      }
+    />
+    <div
+      aria-label="Formulaire de vote"
+      className="opinion__buttons"
+      style={
+        Object {
+          "marginBottom": "15px",
+          "marginTop": "15px",
+        }
+      }
+    >
+      <Connect(OpinionButtons)
+        opinion={
+          Object {
+            "answer": Object {},
+            "title": "title",
+            "type": Object {
+              "color": "info",
+              "title": "opinionType",
+            },
+          }
+        }
+      />
+    </div>
+    <OpinionVotesBox
+      opinion={
+        Object {
+          "answer": Object {},
+          "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
+        }
+      }
+    />
+  </div>
+  <OpinionAnswer
+    answer={Object {}}
+  />
+</div>
+`;

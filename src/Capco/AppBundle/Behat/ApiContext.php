@@ -22,7 +22,7 @@ class ApiContext extends ApplicationContext
      */
     public function createClient()
     {
-        $this->client = new Client(['base_url' => 'http://capco.test/']);
+        $this->client = new Client(['base_uri' => 'http://capco.test/']);
         $this->token = null;
     }
 
@@ -100,27 +100,24 @@ class ApiContext extends ApplicationContext
 
     /**
      * Create a client with a an Authorization header.
-     *
-     * @param string $username
-     * @param string $password
      */
-    protected function createAuthenticatedClient($username = 'test', $password = 'test')
+    protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')
     {
-        $request = $this->client->createRequest(
+        $response = $this->client->request(
             'POST',
             '/api/login_check',
             [
                 'headers' => [
                   'X-Requested-With' => 'XMLHttpRequest',
                 ],
-                'body' => [
+                'json' => [
                     'username' => $username,
                     'password' => $password,
                 ],
             ]
         );
-        $response = $this->client->send($request);
-        $this->token = $response->json()['token'];
+        $body = (string) $response->getBody();
+        $this->token = json_decode($body, true)['token'];
     }
 
     /**
@@ -251,14 +248,13 @@ EOF;
      */
     public function iSendARequest($method, $url)
     {
-        $request = $this->client->createRequest($method, $url, [
+        $this->response = $this->client->request($method, $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
             'exceptions' => false,
         ]);
-        $this->response = $this->client->send($request);
     }
 
     /**
@@ -266,12 +262,11 @@ EOF;
      */
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
-        $request = $this->client->createRequest($method, $url, [
-            'body' => $table->getHash(),
+        $this->response = $this->client->request($method, $url, [
+            'json' => $table->getHash(),
             'exceptions' => false,
             'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
         ]);
-        $this->response = $this->client->send($request);
     }
 
     /**
@@ -279,21 +274,20 @@ EOF;
      */
     public function iSendARequestWithJsonFromPyString($method, $url, PyStringNode $string)
     {
-        $request = $this->client->createRequest($method, $url, [
-            'body' => $string->getRaw(),
+        $this->response = $this->client->request($method, $url, [
+            'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
         ]);
-        $this->response = $this->client->send($request);
     }
 
-    private function iSendARequestWithJson($method, $url, $body)
+    private function iSendARequestWithJson(string $method, string $url, string $body)
     {
-        $request = $this->client->createRequest($method, $url, [
-            'body' => $body,
+        $this->response = $this->client->request($method, $url, [
+            'json' => json_decode($body, true),
             'exceptions' => false,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
@@ -301,7 +295,6 @@ EOF;
                 'Accept' => 'application/json',
             ],
         ]);
-        $this->response = $this->client->send($request);
     }
 
     /**
@@ -311,7 +304,7 @@ EOF;
      *
      * @Then /^(?:the )?JSON response status code should be (\d+)$/
      */
-    public function theJsonResponseStatusCodeShouldBe($code)
+    public function theJsonResponseStatusCodeShouldBe(int $code)
     {
         PHPUnit::assertSame(
             (int) $code,
@@ -325,7 +318,6 @@ EOF;
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
-        $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
@@ -500,7 +492,6 @@ EOF;
      */
     public function thereShouldBeACreateLogOnResponseElement()
     {
-        $this->response->json(); // check if json
         $body = (string) $this->response->getBody();
         $data = json_decode($body, true);
         $elementId = $data['id'];
@@ -551,7 +542,7 @@ EOF;
     {
         $max = 100000;
         $pinned = true;
-        foreach ($this->response->json()['comments'] as $comment) {
+        foreach (json_decode($this->response->getBody()->getContents(), true)['comments'] as $comment) {
             if ($pinned && !$comment['pinned']) {
                 $max = 100000;
                 $pinned = false;

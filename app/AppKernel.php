@@ -58,6 +58,8 @@ class AppKernel extends Kernel
             new Capco\MediaBundle\CapcoMediaBundle(),
             new Capco\ClassificationBundle\CapcoClassificationBundle(),
 
+            new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
+
             // search
             new FOS\ElasticaBundle\FOSElasticaBundle(),
 

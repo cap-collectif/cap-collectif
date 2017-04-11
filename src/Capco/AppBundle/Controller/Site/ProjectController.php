@@ -289,11 +289,6 @@ class ProjectController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Project:show_meta.html.twig")
-     *
-     * @param $projectSlug
-     * @param $currentStepSlug
-     *
-     * @return array
      */
     public function showMetaAction($projectSlug, $currentStepSlug)
     {

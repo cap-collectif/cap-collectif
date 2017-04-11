@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class OpinionController extends Controller
 {
@@ -39,13 +40,6 @@ class OpinionController extends Controller
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
-     *
-     * @param Project          $project
-     * @param ConsultationStep $currentStep
-     * @param OpinionType      $opinionType
-     * @param $page
-     * @param Request $request
-     * @param $opinionsSort
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
@@ -93,7 +87,6 @@ class OpinionController extends Controller
     public function showOpinionVersionAction(Request $request, $projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug)
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
-
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version || !$version->canDisplay()) {
@@ -102,12 +95,19 @@ class OpinionController extends Controller
 
         $currentStep = $opinion->getStep();
         $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
+        $backLink = $this->generateUrl('app_project_show_opinion', [
+          'projectSlug' => $projectSlug,
+          'stepSlug' => $stepSlug,
+          'opinionTypeSlug' => $opinionTypeSlug,
+          'opinionSlug' => $opinionSlug,
+        ]);
 
         return [
             'version' => $version,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
             'opinion' => $opinion,
+            'backLink' => $backLink,
             'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $opinion->getVotes(),
@@ -115,81 +115,13 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_project_delete_opinion")
-     * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/delete", name="app_consultation_delete_opinion")
-     */
-    public function deleteOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
-        }
-
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlug($opinionSlug);
-
-        if (!$opinion) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
-        }
-
-        if (!$opinion->canContribute()) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('opinion.error.no_contribute', [], 'CapcoAppBundle'));
-        }
-
-        $opinionType = $opinion->getOpinionType();
-        $currentStep = $opinion->getStep();
-        $project = $currentStep->getProject();
-
-        $userCurrent = $this->getUser()->getId();
-        $userPostOpinion = $opinion->getAuthor()->getId();
-
-        if ($userCurrent !== $userPostOpinion) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('opinion.error.not_author', [], 'CapcoAppBundle'));
-        }
-
-        //Champ CSRF
-        $form = $this->createFormBuilder()->getForm();
-
-        if ($request->getMethod() === 'POST') {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($opinion);
-                $em->flush();
-
-                $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('opinion.delete.success'));
-
-                return $this->redirect($this->generateUrl('app_project_show_consultation', ['projectSlug' => $project->getSlug(), 'stepSlug' => $currentStep->getSlug()]));
-            } else {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('opinion.delete.error'));
-            }
-        }
-
-        return [
-            'opinion' => $opinion,
-            'project' => $project,
-            'currentStep' => $currentStep,
-            'opinionType' => $opinionType,
-            'form' => $form->createView(),
-        ];
-    }
-
-    /**
-     * Page opinion.
-     *
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_project_show_opinion")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}", name="app_consultation_show_opinion")
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
-     *
-     * @param $projectSlug
-     * @param $stepSlug
-     * @param $opinionTypeSlug
-     * @param $opinionSlug
-     * @param Request $request
-     *
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      */
-    public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug)
+    public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 
@@ -202,11 +134,30 @@ class OpinionController extends Controller
 
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
+        $urlResolver = $this->get('capco.url.resolver');
+        $referer = $request->headers->get('referer');
+        $availableRoutes = [
+            'app_project_show_opinions',
+            'app_project_show_opinions_sorted',
+            'app_project_show_consultation',
+            'app_consultation_show_opinions',
+            'app_consultation_show_opinions_sorted'
+        ];
+        $baseUrl = $request->getHost();
+        $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
+        $backLink = $referer &&
+          filter_var($referer, FILTER_VALIDATE_URL) !== false &&
+          in_array($this->get('router')->match($pathinfos)['_route'], $availableRoutes, true)
+            ? $referer
+            : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL)
+        ;
+
         return [
             'currentUrl' => $currentUrl,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
             'opinion' => $opinion,
+            'backLink' => $backLink,
             'opinionType' => $opinion->getOpinionType(),
             'project_steps' => $steps,
         ];

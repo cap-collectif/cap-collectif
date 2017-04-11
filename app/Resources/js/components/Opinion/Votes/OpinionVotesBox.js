@@ -2,12 +2,10 @@
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
-import type { State, OpinionAndVersion } from '../../../types';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {
@@ -78,11 +76,4 @@ const OpinionVotesBox = React.createClass({
 
 });
 
-const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
-  opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length ? state.opinion.opinionsById[props.opinion.id] : state.opinion.versionsById[props.opinion.id]),
-  },
-});
-
-export default connect(mapStateToProps)(OpinionVotesBox);
+export default OpinionVotesBox;

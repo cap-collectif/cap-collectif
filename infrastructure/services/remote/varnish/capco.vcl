@@ -6,6 +6,10 @@ backend default {
   .port = "8080";
 }
 
+acl invalidators {
+    "localhost";
+}
+
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
 
@@ -22,6 +26,36 @@ sub vcl_recv {
     set req.http.X-Forwarded-Port = "443";
   } else {
     set req.http.X-Forwarded-Port = "80";
+  }
+
+  # Allow to invalidate cache
+  if (req.method == "PURGE") {
+      if (!client.ip ~ invalidators) {
+          return (synth(405, "Not allowed"));
+      }
+      return (purge);
+  }
+  if (req.http.Cache-Control ~ "no-cache" && client.ip ~ invalidators) {
+    set req.hash_always_miss = true;
+  }
+  if (req.method == "BAN") {
+      if (!client.ip ~ invalidators) {
+          return (synth(405, "Not allowed"));
+      }
+      if (req.http.X-Cache-Tags) {
+            ban("obj.http.X-Host ~ " + req.http.X-Host
+                + " && obj.http.X-Url ~ " + req.http.X-Url
+                + " && obj.http.content-type ~ " + req.http.X-Content-Type
+                + " && obj.http.X-Cache-Tags ~ " + req.http.X-Cache-Tags
+            );
+      }
+      else {
+          ban("obj.http.X-Host ~ " + req.http.X-Host
+              + " && obj.http.X-Url ~ " + req.http.X-Url
+              + " && obj.http.content-type ~ " + req.http.X-Content-Type
+          );
+      }
+      return (synth(200, "Banned"));
   }
 
   # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.

@@ -104,7 +104,16 @@
         "swarrot/swarrot-bundle": "1.3.3",
         "hslavich/simplesamlphp-bundle": "^1.1",
         "overblog/graphql-bundle": "^0.6.2",
-        "league/csv": "^8.1"
+        "league/csv": "^8.1",
+        "friendsofsymfony/http-cache-bundle": "2.0.0-beta1",
+        "php-http/socket-client": "^1.2",
+        "php-http/discovery": "^1.2",
+        "php-http/httplug": "^1.1",
+        "php-http/client-common": "^1.5",
+        "friendsofsymfony/http-cache": "2.0.0-beta1",
+        "guzzlehttp/guzzle": "6.2.3",
+        "php-http/guzzle6-adapter": "^1.1",
+        "guzzlehttp/psr7": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -114,7 +123,6 @@
         "behat/mink-selenium2-driver": "^1.3",
         "behat/mink-browserkit-driver": "^1.3",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
-        "guzzlehttp/guzzle": "~5.0",
         "coduo/php-matcher": "~2.0",
         "docker-php/docker-php": "^1.22",
         "jolicode/jolinotif": "^1.0",

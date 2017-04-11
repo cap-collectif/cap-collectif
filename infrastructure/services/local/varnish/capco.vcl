@@ -21,7 +21,11 @@ sub vcl_recv {
     set req.http.X-Forwarded-Port = "80";
   }
 
-  ## local docker only configuration
+  # Disable cache for development
+  if (req.http.host == "capco.dev") {
+    return (pass);
+  }
+  
   # Disable cache for blackfire
   if (req.http.X-Blackfire-Query) {
     return (pass);
@@ -29,7 +33,11 @@ sub vcl_recv {
 
   # Allow purge
   if (req.method == "PURGE") {
-    return (purge);
+      return (purge);
+  }
+
+  if (req.http.Cache-Control ~ "no-cache") {
+    set req.hash_always_miss = true;
   }
 
   # Allow ban
@@ -37,12 +45,6 @@ sub vcl_recv {
     ban("req.http.host == " + req.http.host);
     return(synth(200, "Ban added"));
   }
-
-  # Disable cache for development
-  if (req.http.host == "capco.dev") {
-    return (pass);
-  }
-  ## End local docker only
 
   # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
   if (req.method != "GET" && req.method != "HEAD") {
@@ -62,4 +64,15 @@ sub vcl_recv {
       unset req.http.Cookie;
     }
   }
+}
+
+sub vcl_deliver {
+    # Add extra headers for debugging
+    if (resp.http.X-Cache-Debug) {
+        if (resp.http.X-Varnish ~ " ") {
+            set resp.http.X-Cache = "HIT";
+        } else {
+            set resp.http.X-Cache = "MISS";
+        }
+    }
 }

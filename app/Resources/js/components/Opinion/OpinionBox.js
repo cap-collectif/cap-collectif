@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
@@ -7,8 +8,9 @@ import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
+import type { State, OpinionAndVersion } from '../../types';
 
-const OpinionBox = React.createClass({
+export const OpinionBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
     rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
@@ -46,7 +48,6 @@ const OpinionBox = React.createClass({
     } = this.props;
     const opinion = this.props.opinion;
     const color = this.getOpinionType().color;
-    const backLink = this.isVersion() ? opinion.parent._links.show : opinion._links.type;
     const parentTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
     const headerTitle = this.getBoxLabel();
 
@@ -55,7 +56,7 @@ const OpinionBox = React.createClass({
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>
           <div className="opinion__header opinion__header--centered" style={{ height: 'auto' }}>
-            <a className="pull-left btn btn-default opinion__header__back" href={backLink}>
+            <a className="pull-left btn btn-default opinion__header__back" href={opinion.backLink}>
               <i className="cap cap-arrow-1-1"></i>
               <span className="hidden-xs hidden-sm"> {this.getIntlMessage('opinion.header.back')}</span>
             </a>
@@ -84,4 +85,14 @@ const OpinionBox = React.createClass({
 
 });
 
-export default OpinionBox;
+
+const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
+  opinion: {
+    ...props.opinion,
+    ...(Object.keys(state.opinion.opinionsById).length
+      ? state.opinion.opinionsById[props.opinion.id]
+      : state.opinion.versionsById[props.opinion.id]),
+  },
+});
+
+export default connect(mapStateToProps)(OpinionBox);

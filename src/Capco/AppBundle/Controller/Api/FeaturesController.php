@@ -179,6 +179,9 @@ class FeaturesController extends FOSRestController
         }
 
         $em->flush();
+
+        $cacheManager = $this->get('fos_http_cache.cache_manager');
+        $cacheManager->invalidateRoute('app_homepage')->flush();
     }
 
     /**
