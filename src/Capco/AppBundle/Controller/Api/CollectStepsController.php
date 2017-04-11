@@ -43,11 +43,13 @@ class CollectStepsController extends FOSRestController
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
         if ($proposalForm->getStep()->isPrivate()) {
-            if (!$this->getUser()) {
+            $user = $this->getUser();
+            if (!$user) {
                 return ['proposals' => [], 'count' => 0, 'order' => $order];
             }
-
-            $providedFilters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+            if (!$user->isAdmin()) {
+                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
+            }
         }
 
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;

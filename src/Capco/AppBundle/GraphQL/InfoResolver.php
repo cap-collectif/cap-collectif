@@ -16,7 +16,10 @@ class InfoResolver
     {
         if (is_array($array)) {
             foreach ($array as $key => $value) {
-                $newString = is_int($key) ? $string : ($string !== '' ? $string.'_' : '').$key;
+                $newString = is_int($key)
+                  ? $string
+                  : ($string !== '' ? $string.'_' : '').$key
+                ;
                 $this->appendString($newString, $value, $result);
             }
 

@@ -16,7 +16,7 @@ class CsvWriter
         return count(array_filter($array, 'is_array')) > 0;
     }
 
-    private function getCleanRow(): array
+    private function createCleanRow(): array
     {
         return array_combine($this->headers, array_map(function ($h) {
             return '';
@@ -43,18 +43,18 @@ class CsvWriter
 
     public function writeNewRow(&$rows, array $currentData, string $fieldKey)
     {
-        $row = $this->getCleanRow();
+        $row = $this->createCleanRow();
         $this->writeRowData($row, $currentData, $fieldKey);
         $rows[] = array_values($row);
-      // children rows
-      foreach ($currentData as $dataFieldKey => $dataFieldValue) {
-          if (is_array($dataFieldValue) && $this->isMultiDimensionalArray($dataFieldValue)) {
-              foreach ($dataFieldValue as $key => $value) {
-                  if ($value) {
-                      $this->writeNewRow($rows, $value, $fieldKey.'_'.$dataFieldKey);
-                  }
-              }
-          }
-      }
+        // children rows
+        foreach ($currentData as $dataFieldKey => $dataFieldValue) {
+            if (is_array($dataFieldValue) && $this->isMultiDimensionalArray($dataFieldValue)) {
+                foreach ($dataFieldValue as $key => $value) {
+                    if ($value) {
+                        $this->writeNewRow($rows, $value, $fieldKey.'_'.$dataFieldKey);
+                    }
+                }
+            }
+        }
     }
 }

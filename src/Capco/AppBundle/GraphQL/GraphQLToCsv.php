@@ -31,7 +31,6 @@ class GraphQLToCsv
             }
             foreach ($rows as $row) {
                 $writer->insertOne($row);
-
                 // https://github.com/thephpleague/csv/issues/114
                 usleep(100);
             }
