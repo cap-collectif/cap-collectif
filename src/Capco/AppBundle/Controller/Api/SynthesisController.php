@@ -237,7 +237,6 @@ class SynthesisController extends FOSRestController
      *
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @QueryParam(name="type", nullable=true, default="published")
-     * @QueryParam(name="depth", nullable=true, default=3)
      * @QueryParam(name="parent", nullable=true, default=null)
      * @Get("/syntheses/{id}/elements/tree")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsTree"})
@@ -245,7 +244,6 @@ class SynthesisController extends FOSRestController
     public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        $depth = $paramFetcher->get('depth');
         $parent = $paramFetcher->get('parent');
 
         $isVisibleOnlyByAdmin = $type !== 'published' || !$synthesis->isEnabled();
@@ -254,7 +252,7 @@ class SynthesisController extends FOSRestController
         }
 
         $tree = $this->get('capco.synthesis.synthesis_element_handler')
-                    ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent, $depth);
+                    ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
 
         return $tree;
     }
@@ -430,7 +428,7 @@ class SynthesisController extends FOSRestController
     public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)
     {
         $synthesis->setDisplayRules($request->request->get('rules'));
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         return $synthesis;
     }
