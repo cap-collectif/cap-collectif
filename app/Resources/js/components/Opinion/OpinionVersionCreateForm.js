@@ -8,16 +8,20 @@ import { createOpinionVersion as onSubmit } from '../../redux/modules/opinion';
 import type { State } from '../../types';
 
 export const formName = 'opinion-version-create';
-const validate = (values, props) => {
+const validate = ({ body, title, comment }: Object, props: Object) => {
   const errors = {};
-  if (values.body === props.initialValues.body) {
+  if (body === props.initialValues.body) {
     errors.body = 'opinion.version.body_error';
   }
-  if (!values.title) {
+  if (title.length < 2) {
     errors.title = 'global.required';
+  }
+  if (comment.length < 2) {
+    errors.comment = 'global.required';
   }
   return errors;
 };
+
 const OpinionVersionCreateForm = React.createClass({
   propTypes: {
     opinionId: PropTypes.string.isRequired,
@@ -56,7 +60,7 @@ export default connect((state: State) => ({
   initialValues: {
     title: '',
     body: state.opinion.currentOpinionId && state.opinion.opinionsById[state.opinion.currentOpinionId].body,
-    comment: null,
+    comment: '',
   },
   opinionId: state.opinion.currentOpinionId,
 }))(reduxForm({

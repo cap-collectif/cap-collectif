@@ -186,6 +186,19 @@ Feature: Opinions Versions
     """
     Then the JSON response status code should be 201
 
+  @security
+  Scenario: logged in API client wants to add a version
+    Given I am logged in to api as user
+    When I send a POST request to "/api/opinions/57/versions" with json:
+    """
+    {
+      "title": "",
+      "body": "",
+      "comment": ""
+    }
+    """
+    Then the JSON response status code should be 400
+
   @database
   Scenario: logged in API client wants to add a version to an uncontributable opinion
     Given I am logged in to api as user

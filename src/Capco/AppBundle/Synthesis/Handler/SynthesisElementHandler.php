@@ -56,7 +56,9 @@ class SynthesisElementHandler
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
         ;
 
-        return $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
+        $tree = $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
+
+        return $tree;
     }
 
     public function countElementsFromSynthesisByType($synthesis, $type = null): int
@@ -65,7 +67,7 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        return (int) $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($synthesis, $type);
+        return intval($this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($synthesis, $type));
     }
 
     public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)
