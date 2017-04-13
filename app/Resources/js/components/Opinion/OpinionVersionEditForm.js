@@ -9,17 +9,24 @@ import type { State } from '../../types';
 
 export const formName = 'opinion-version-edit';
 
-const validate = (values) => {
+const validate = ({ confirm, title, comment }) => {
   const errors = {};
-  if (!values.confirm) {
+  if (!confirm) {
     errors.confirm = 'global.required';
   }
-  if (values.title) {
-    if (values.title.length <= 2) {
+  if (title) {
+    if (title.length <= 2) {
       errors.title = 'opinion.version.title_error';
     }
   } else {
     errors.title = 'global.required';
+  }
+  if (comment) {
+    if (comment.length <= 2) {
+      errors.comment = 'opinion.version.comment_error';
+    }
+  } else {
+    errors.comment = 'global.required';
   }
   return errors;
 };
