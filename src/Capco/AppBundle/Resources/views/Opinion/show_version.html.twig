@@ -34,15 +34,12 @@
           'backLink': backLink,
           'parent': {
             'id': version.parent.id,
-            'title': version.parent.title,
             'type': {
-              'votesHelpText': version.parent.opinionType.votesHelpText,
               'voteWidgetType': version.parent.opinionType.voteWidgetType,
             }
           },
           'type': {
             'voteWidgetType': version.parent.opinionType.voteWidgetType,
-            'votesHelpText': version.parent.opinionType.votesHelpText,
           },
           'votes': [],
           'votesCount': version.getVotesCountAll(),
