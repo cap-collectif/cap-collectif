@@ -411,7 +411,7 @@ class SynthesisController extends FOSRestController
     }
 
     /**
-     * Update synthesis disaply rules.
+     * Update synthesis display rules.
      *
      * @ApiDoc(
      *  resource=true,

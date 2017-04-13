@@ -1,7 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Treebeard, decorators } from 'react-treebeard';
-import { NAV_DEPTH } from '../../constants/SynthesisElementConstants';
 import Loader from '../Utils/Loader';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -10,7 +9,7 @@ import ElementIcon from './Element/ElementIcon';
 
 decorators.Header = (props: Object) => {
   const style = props.style;
-  const title = props.node.title != null ? props.node.title : `${props.node.body.substr(0, 140)}...`;
+  const title = props.node.title !== null ? props.node.title : `${props.node.body.substr(0, 140)}...`;
   let titleElement;
   if (props.node.linkedDataUrl && props.node.displayType !== 'folder') {
     titleElement = (<a href={props.node.linkedDataUrl}>{title}</a>);
@@ -62,6 +61,18 @@ const cleanEmptyChildren = (elements: Array<Object>): Array<Object> => {
   });
 };
 
+const preToggleElement = (elements: Array<Object>, depth: number): Array<Object> => {
+  return elements.map((el) => {
+    if (el.level <= depth) {
+      el.toggled = true;
+    }
+    if (el.children && el.children.length > 0) {
+      el.children = preToggleElement(el.children, depth);
+    }
+    return el;
+  });
+};
+
 const TreeView = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
@@ -97,12 +108,13 @@ const TreeView = React.createClass({
 
   loadElementsTreeFromServer(parent = null) {
     const { synthesis } = this.props;
-    const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
-    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent, depth > 2 ? depth : depth + NAV_DEPTH);
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent);
   },
 
   render() {
-    const elements = cleanEmptyChildren(this.state.elements);
+    const { synthesis } = this.props;
+    const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
+    const elements = preToggleElement(cleanEmptyChildren(this.state.elements), depth);
     return (
       <Loader show={this.state.isLoading}>
         {
