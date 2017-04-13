@@ -25,7 +25,7 @@ const OpinionVotesBox = React.createClass({
 
   isContribuable() {
     const { opinion } = this.props;
-    return this.isVersion() ? opinion.parent.isContribuable : opinion.isContribuable;
+    return opinion.isContribuable;
   },
 
   showVotesButtons() {
