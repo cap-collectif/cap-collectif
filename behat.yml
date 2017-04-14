@@ -1,9 +1,4 @@
 frontend:
-    formatters:
-        pretty:
-            verbose:  true
-            paths:    true
-            snippets: true
     extensions:
         Behat\Symfony2Extension:
           kernel:
@@ -32,11 +27,6 @@ frontend:
                 tags: "~@javascript"
 
 javascript:
-    formatters:
-        pretty:
-            verbose:  true
-            paths:    true
-            snippets: true
     extensions:
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
             url: http://mailcatchersmtp
@@ -90,11 +80,6 @@ commands:
                 - Alex\MailCatcher\Behat\MailCatcherContext
 
 api:
-    formatters:
-        pretty:
-            verbose:  true
-            paths:    true
-            snippets: true
     extensions:
         Tonic\Behat\ParallelScenarioExtension: ~
         Behat\Symfony2Extension: ~
@@ -115,3 +100,32 @@ graphql:
             paths: [ %paths.base%/features/graphql ]
             contexts:
                 - Capco\AppBundle\Behat\GraphQLContext
+
+back:
+    extensions:
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: false
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'http://capco.test'
+            browser_name: chrome
+            sessions:
+               default:
+                    selenium2:
+                        capabilities:
+                            version: ''
+                        wd_host: http://selenium:4444/wd/hub
+    suites:
+        javascript:
+            paths: [ %paths.base%/features/back ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext

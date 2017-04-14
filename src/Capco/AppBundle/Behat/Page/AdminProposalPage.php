@@ -1,0 +1,23 @@
+<?php
+
+namespace Capco\AppBundle\Behat\Page;
+
+use Capco\AppBundle\Behat\PageTrait;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
+
+class AdminProposalPage extends Page
+{
+    use PageTrait;
+
+    protected $path = '/admin/capco/app/proposal/list';
+
+    protected $elements = [
+        'create proposal merge button' => '#add-proposal-fusion',
+    ];
+
+    public function clickCreateProposalMergeButton()
+    {
+        $this->getElement('create proposal merge button')->click();
+    }
+}

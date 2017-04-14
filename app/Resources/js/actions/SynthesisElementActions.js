@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import * as Actions from '../constants/SynthesisElementActionsConstants';
+import { NAV_DEPTH } from '../constants/SynthesisElementConstants';
 import { DISMISS_MESSAGE } from '../constants/MessageConstants';
 
 const idOf = (val) => {
@@ -119,7 +120,7 @@ export default {
   loadElementsTreeFromServer: (synthesis, type, parent = null, depth = null) => {
     let url = `/syntheses/${synthesis}/elements/tree?type=${type}`;
     url += parent ? `&parent=${parent}` : '';
-    url += depth ? `&depth=${depth}` : '';
+    url += parent ? `&depth=${depth}` : '';
     Fetcher
       .get(url)
       .then((data) => {
