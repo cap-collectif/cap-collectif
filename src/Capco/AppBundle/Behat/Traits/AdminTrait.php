@@ -9,15 +9,31 @@ trait AdminTrait
     */
     public function iGoToTheAdminProposalsPage()
     {
-        $this->visitPageWithParams('proposals admin page');
+        $this->visitPageWithParams('admin proposal page');
     }
 
     /**
-    * @When I click the merge button
+    * @When I click the create merge button
     */
     public function iClickTheMergeButton()
     {
       $this->navigationContext->getPage('proposals admin page')->clickCreateProposalMergeButton();
+    }
+
+    /**
+    * @When I fill the proposal merge form
+    */
+    public function iFillTheProposalMergeForm()
+    {
+      // $this->navigationContext->getPage('proposals admin page')->clickCreateProposalMergeButton();
+    }
+
+    /**
+    * @When I submit the create merge form
+    */
+    public function iSubmitTheCreateMergeForm()
+    {
+
     }
 
 }
