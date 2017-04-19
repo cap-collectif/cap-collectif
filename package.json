@@ -96,7 +96,7 @@
     "react-redux": "^5.0.3",
     "react-router": "^2.7.0",
     "react-router-bootstrap": "^0.23.1",
-    "react-select": "^1.0.0-rc.2",
+    "react-select": "1.0.0-rc.2",
     "react-sortable-hoc": "^0.6.1",
     "react-toggle": "^2.2.1",
     "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/6995b4123e3f3d94a4fb9200f884b3371e168628",

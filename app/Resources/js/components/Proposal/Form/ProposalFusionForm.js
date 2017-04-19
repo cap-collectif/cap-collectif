@@ -31,6 +31,7 @@ export const ProposalFusionForm = React.createClass({
       <form className="form-horizontal">
         <Field
           name="project"
+          id="project"
           label="Projet lié"
           placeholder="Sélectionnez un projet"
           isLoading={projects.length === 0}

@@ -1,6 +1,7 @@
 <?php
 
 namespace Capco\AppBundle\Behat\Traits;
+use Behat\Gherkin\Node\TableNode;
 
 trait AdminTrait
 {
@@ -25,7 +26,13 @@ trait AdminTrait
     */
     public function iFillTheProposalMergeForm()
     {
-      $this->selectOption('project', '7');
+      $this->getSession()->getPage()->find('css', "#project .Select-input input")->setValue('7');
+      $this->iWait(3);
+      $this->getSession()->getPage()->find('css', "#childConnections")->click();
+      $this->getSession()->getPage()->find('css', "#childConnections .Select-option[id*=\"-option-1\"]")->click();
+      $this->getSession()->getPage()->find('css', "#childConnections .Select-option[id*=\"-option-1\"]")->click();
+      $this->fillField('title', 'test');
+      $this->fillField('proposal-admin-body', 'Description');
     }
 
     /**
@@ -33,7 +40,7 @@ trait AdminTrait
     */
     public function iSubmitTheCreateMergeForm()
     {
-
+      $this->navigationContext->getPage('admin proposal page')->clickSubmitProposalMergeButton();
     }
 
 }

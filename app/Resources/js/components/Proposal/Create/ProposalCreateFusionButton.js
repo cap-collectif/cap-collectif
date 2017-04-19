@@ -87,7 +87,7 @@ export const ProposalCreateFusionButton = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={() => close()} />
             <SubmitButton
-              id="confirm-proposal-create"
+              id="confirm-proposal-merge-create"
               isSubmitting={isSubmitting}
               onSubmit={() => submit(proposalFormId)}
             />
