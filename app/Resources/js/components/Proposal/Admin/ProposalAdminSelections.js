@@ -5,7 +5,6 @@ import { ListGroup, ListGroupItem, Well, Col, Button, FormControl } from 'react-
 import Toggle from 'react-toggle';
 import Loader from '../../Utils/Loader';
 import { loadSelections, selectStep, unSelectStep, updateStepStatus, sendProposalNotification, sendSelectionNotification } from '../../../redux/modules/proposal';
-import { loadSteps } from '../../../redux/modules/project';
 
 export const ProposalAdminSelections = React.createClass({
   propTypes: {
@@ -19,9 +18,8 @@ export const ProposalAdminSelections = React.createClass({
   mixins: [IntlMixin],
 
   componentDidMount() {
-    const { dispatch, projectId, proposalId } = this.props;
+    const { dispatch, proposalId } = this.props;
     dispatch(loadSelections(proposalId));
-    dispatch(loadSteps(projectId));
   },
 
   render() {
@@ -136,7 +134,7 @@ export default connect((state, props) => {
   const steps = state.project.projectsById[props.projectId].steps;
   const proposal = state.proposal.proposalsById[props.proposalId];
   return {
-    steps: steps.filter(s => s.step_type === 'collect' || s.step_type === 'selection').map((s) => {
+    steps: Object.keys(steps).map(s => steps[s]).filter(s => s.step_type === 'collect' || s.step_type === 'selection').map((s) => {
       const selectionAsArray = proposal.selections.filter(sel => sel.step.id === s.id);
       s.isSelected = s.step_type === 'collect' || selectionAsArray.length > 0;
       if (s.step_type === 'collect') {

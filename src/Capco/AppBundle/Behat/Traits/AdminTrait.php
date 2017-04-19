@@ -17,7 +17,7 @@ trait AdminTrait
     */
     public function iClickTheMergeButton()
     {
-      $this->navigationContext->getPage('proposals admin page')->clickCreateProposalMergeButton();
+      $this->navigationContext->getPage('admin proposal page')->clickCreateProposalMergeButton();
     }
 
     /**
@@ -25,7 +25,7 @@ trait AdminTrait
     */
     public function iFillTheProposalMergeForm()
     {
-      // $this->navigationContext->getPage('proposals admin page')->clickCreateProposalMergeButton();
+      $this->selectOption('project', '7');
     }
 
     /**

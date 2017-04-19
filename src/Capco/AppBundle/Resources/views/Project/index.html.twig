@@ -45,16 +45,14 @@
     </div>
 
     <div class="container container--custom">
-        {{ react_intl_component('ProjectListPageApp', {
-            'props': props,
+        {{
+           react_intl_component('ProjectListPageApp', {
             'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-        }) }}
+           })
+        }}
     </div>
 {% endblock %}
 
 {% block reduxStore %}
-    {% set initialState = {
-        'project': params
-    } %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+    {% include '@CapcoApp/redux_store.html.twig' with {'projectReducerData' : params} %}
 {% endblock %}

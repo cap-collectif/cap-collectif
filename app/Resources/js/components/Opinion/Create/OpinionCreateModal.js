@@ -105,7 +105,7 @@ const OpinionCreateModal = React.createClass({
 export default connect(
   (state, props) => {
     return {
-      step: state.project.projectsById[props.projectId].steps.filter(step => step.id === props.stepId)[0],
+      step: state.project.projectsById[props.projectId].stepsById[props.stepId],
     };
   }, null, null, { withRef: true },
 )(OpinionCreateModal);

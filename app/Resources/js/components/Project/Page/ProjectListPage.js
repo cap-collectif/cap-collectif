@@ -23,7 +23,7 @@ export const ProjectListPage = React.createClass({
 
   render() {
     const { project, features, dispatch } = this.props;
-
+    const projects = Object.keys(project.projectsById).filter(id => project.visibleProjects.includes(id)).map(id => project.projectsById[id]) || [];
     return (
       <div>
         <Row>
@@ -31,7 +31,7 @@ export const ProjectListPage = React.createClass({
         </Row>
         <br /><br />
         <Loader show={project.isLoading}>
-          <ProjectList projects={project.projects || []} />
+          <ProjectList projects={projects} />
           {
             features.projects_form && project.count > 0 &&
             <Pagination nbPages={project.pages} current={project.page} onChange={(wantedPage) => {
