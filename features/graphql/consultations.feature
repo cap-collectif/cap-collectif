@@ -24,7 +24,7 @@ Feature: Consultations
       "data": {
         "consultations": [
           {
-            "id": @string@,
+            "id": @integer@,
             "title": @string@,
             "contribuable": @boolean@,
             "sections": [
@@ -35,7 +35,7 @@ Feature: Consultations
             ],
             "contributions": [
               {
-                "id": @string@
+                "id": @integer@
               },
               @...@
             ]

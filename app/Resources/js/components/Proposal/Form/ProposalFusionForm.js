@@ -3,12 +3,12 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
+import { fetchProjects } from '../../../redux/modules/project';
 import Fetcher from '../../../services/Fetcher';
 import { renderSelect } from '../../Form/Select';
-import type { State, Uuid } from '../../../types';
 
-export const formName = 'proposal';
-const validate = (values: Object): Object => {
+const formName = 'proposal';
+const validate = (values) => {
   const errors = {};
   if (values.childConnections && values.childConnections.length < 2) {
     errors.childConnections = 'Sélectionnez au moins 2 propositions.';
@@ -20,10 +20,15 @@ export const ProposalFusionForm = React.createClass({
   propTypes: {
     proposalForm: PropTypes.object,
     projects: PropTypes.array.isRequired,
+    onMount: PropTypes.func.isRequired,
     currentCollectStep: PropTypes.object,
     onProjectChange: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
+
+  componentDidMount() {
+    this.props.onMount();
+  },
 
   render() {
     const { currentCollectStep, projects, onProjectChange } = this.props;
@@ -31,7 +36,6 @@ export const ProposalFusionForm = React.createClass({
       <form className="form-horizontal">
         <Field
           name="project"
-          id="project"
           label="Projet lié"
           placeholder="Sélectionnez un projet"
           isLoading={projects.length === 0}
@@ -64,31 +68,32 @@ export const ProposalFusionForm = React.createClass({
   },
 });
 
-const getBudgetProjects = (projects: {[id: Uuid]: Object}): Array<Object> => {
-  return Object.keys(projects).map(key => projects[key]).filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
+const getBudgetProjects = (projects: Array<Object>): Array<Object> => {
+  return projects.filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
 };
 
-const getSelectedProjectId = (state: State): Uuid => {
+const getSelectedProjectId = (state): string => {
   return formValueSelector(formName)(state, 'project');
 };
 
-const getCurrentCollectStep = (state: State): ?Object => {
-  const id = getSelectedProjectId(state);
-  if (!id) {
+const getCurrentCollectStep = (state): ?Object => {
+  const selectedProject = getSelectedProjectId(state);
+  if (!selectedProject) {
     return null;
   }
-  const project = state.project.projectsById[id];
+  const project = getBudgetProjects(state.project.projectsById).find(p => p.id === selectedProject);
   if (!project) {
     return null;
   }
-  return Object.keys(project.steps).map(k => project.steps[k]).filter(s => s.type === 'collect')[0];
+  return project.steps.filter(s => s.type === 'collect')[0];
 };
 
-export default connect(state => ({
-  projects: getBudgetProjects(state.project.projectsById),
-  currentCollectStep: getCurrentCollectStep(state),
-}),
-{ onProjectChange: change },
+export default connect(state =>
+  ({
+    projects: getBudgetProjects(state.project.projectsById),
+    currentCollectStep: getCurrentCollectStep(state),
+  }),
+   { onMount: fetchProjects, onProjectChange: change },
 )(reduxForm({
   form: formName,
   destroyOnUnmount: false,

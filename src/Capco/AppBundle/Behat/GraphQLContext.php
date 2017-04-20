@@ -19,7 +19,7 @@ class GraphQLContext implements Context
      */
     public function createClient()
     {
-        $this->client = new Client(['base_uri' => 'http://capco.test/']);
+        $this->client = new Client(['base_url' => 'http://capco.test/']);
     }
 
     /**
@@ -27,17 +27,17 @@ class GraphQLContext implements Context
      */
     public function iSendAraphQLQuery(PyStringNode $query)
     {
-        $response = $this->client->request(
-            'GET',
-            '/graphql/',
-            [
-              'exceptions' => false,
-              'query' => ['query' => $query->getRaw()],
-              'headers' => [
+        $request = $this->client->createRequest('GET', 'graphql/', [
+            'exceptions' => false,
+            'query' => ['query' => $query->getRaw()],
+            'headers' => [
                 'Content-Type' => 'application/graphql',
-              ],
-            ]
-        );
+            ],
+        ]);
+        $urlQuery = $request->getQuery();
+        $urlQuery->setEncodingType(Query::RFC1738);
+        $request->setQuery($urlQuery);
+        $response = $this->client->send($request);
         PHPUnit::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
         PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);

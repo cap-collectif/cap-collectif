@@ -455,7 +455,7 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
   const globalState: GlobalState = yield select();
   if (globalState.project.currentProjectById) {
-    step = step || globalState.project.projectsById[globalState.project.currentProjectById].stepsById[globalState.project.currentProjectStepById];
+    step = step || globalState.project.projectsById[globalState.project.currentProjectById].steps.filter(s => s.id === globalState.project.currentProjectStepById)[0];
   }
   const state = globalState.proposal;
   let url = '';

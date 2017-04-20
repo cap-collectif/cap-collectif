@@ -8,7 +8,7 @@ import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 export type State = {
   +currentProjectStepById: ?number,
   +currentProjectById: ?Uuid,
-  +visibleProjects: Array<Uuid>,
+  +projects: Array<Object>,
   +projectsById: {[id: Uuid]: Object},
   +projectTypes: Array<Object>,
   +page: number,
@@ -26,7 +26,7 @@ export type State = {
 const initialState : State = {
   currentProjectStepById: null,
   currentProjectById: null,
-  visibleProjects: [],
+  projects: [],
   projectsById: {},
   projectTypes: [],
   page: 1,
@@ -40,30 +40,45 @@ const initialState : State = {
   isLoading: true,
   count: 0,
 };
+type RequestLoadStepsAction = { type: 'project/STEPS_FETCH_REQUESTED', projectId: string };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
 type ChangeOrderByAction = { type: 'project/CHANGE_ORDER_BY', orderBy: ?string };
 type ChangeProjectTypeAction = { type: 'project/CHANGE_TYPE', projectType: ?string };
 type ChangeProjectTermAction = { type: 'project/CHANGE_TERM', term: ?string };
 type ChangeProjectThemeAction = { type: 'project/CHANGE_THEME', theme: ?string };
+type ReceivedStepsSucceedAction = { type: 'project/STEPS_FETCH_SUCCEEDED', steps: Array<Object>, projectId: string };
 type ReceivedProjectSucceedAction = { type: 'project/PROJECTS_FETCH_SUCCEEDED', project: Object };
 
 export type ProjectAction =
-    RequestFetchProjectsAction
+    RequestLoadStepsAction
+  | RequestFetchProjectsAction
   | ChangePageAction
   | ChangeOrderByAction
   | ChangeProjectTypeAction
   | ChangeProjectTermAction
   | ChangeProjectThemeAction
+  | ReceivedStepsSucceedAction
   | ReceivedProjectSucceedAction
 ;
 
+export const loadSteps = (projectId: Uuid): RequestLoadStepsAction => ({ type: 'project/STEPS_FETCH_REQUESTED', projectId });
 export const fetchProjects = (): RequestFetchProjectsAction => ({ type: 'project/PROJECTS_FETCH_REQUESTED' });
 export const changePage = (page: number): ChangePageAction => ({ type: 'project/CHANGE_PAGE', page });
 export const changeOrderBy = (orderBy: ?string): ChangeOrderByAction => ({ type: 'project/CHANGE_ORDER_BY', orderBy });
 export const changeType = (projectType: ?string): ChangeProjectTypeAction => ({ type: 'project/CHANGE_TYPE', projectType });
 export const changeTerm = (term: ?string): ChangeProjectTermAction => ({ type: 'project/CHANGE_TERM', term });
 export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({ type: 'project/CHANGE_THEME', theme });
+
+export function* fetchStepsSaga(action: RequestLoadStepsAction): Generator<*, *, *> {
+  try {
+    const result: Array<Object> = yield call(Fetcher.get, `/projects/${action.projectId}/steps`);
+    const receivedAction : ReceivedStepsSucceedAction = { type: 'project/STEPS_FETCH_SUCCEEDED', steps: result, projectId: action.projectId };
+    yield put(receivedAction);
+  } catch (e) {
+    console.log(e); // eslint-disable-line
+  }
+}
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
   try {
@@ -87,6 +102,7 @@ export function* fetchProjectsSaga(): Generator<*, *, *> {
 export function* saga(): Generator<*, *, *> {
   yield [
     takeEvery('project/PROJECTS_FETCH_REQUESTED', fetchProjectsSaga),
+    takeEvery('project/STEPS_FETCH_REQUESTED', fetchStepsSaga),
   ];
 }
 
@@ -97,14 +113,12 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'project/PROJECTS_FETCH_REQUESTED':
       return { ...state, isLoading: true };
     case 'project/PROJECTS_FETCH_SUCCEEDED':
-      return {
-        ...state,
-        count: action.project.count,
-        page: action.project.page,
-        pages: action.project.pages,
-        visibleProjects: action.project.projects.map(p => p.id),
-        isLoading: false,
-      };
+      return { ...state, ...action.project, isLoading: false };
+    case 'project/STEPS_FETCH_SUCCEEDED': {
+      const projectsById = state.projectsById;
+      projectsById[action.projectId].steps = action.steps;
+      return { ...state, projectsById };
+    }
     case 'project/PROJECTS_FETCH_FAILED':
       return { ...state, isLoading: false };
     case 'project/CHANGE_FILTER': {

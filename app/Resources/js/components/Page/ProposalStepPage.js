@@ -113,7 +113,7 @@ export const ProposalStepPage = React.createClass({
 
 const mapStateToProps = (state, props) => ({
   stepId: undefined,
-  step: state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
+  step: state.project.projectsById[state.project.currentProjectById].steps.filter(s => s.id === props.stepId)[0],
   proposals: state.proposal.proposalShowedId.map(proposal => state.proposal.proposalsById[proposal]),
   queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,

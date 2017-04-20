@@ -15,7 +15,7 @@ Query:
                 args:
                     id:
                         description: "If omitted, returns all consultations. If provided, returns the consultation of the particular id."
-                        type: "ID"
+                        type: "ID!"
                 resolve: "@=resolver('consultation', [args])"
             votesByContribution:
                 type: "[PropositionVote]"

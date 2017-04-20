@@ -51,7 +51,6 @@ export const ProposalAdminForm = React.createClass({
         />
         <Field
           name="body"
-          id="proposal-admin-body"
           type="editor"
           component={renderInput}
           label={this.getIntlMessage('proposal.body')}
