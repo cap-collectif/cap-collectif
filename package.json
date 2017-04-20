@@ -14,7 +14,17 @@
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
-    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix app/Resources/js"
+    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix app/Resources/js",
+    "prettier": "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80 \"app/Resources/js/**/*.js\"",
+    "precommit": "lint-staged"
+  },
+  "pre-commit": "precommit",
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -71,10 +81,13 @@
     "imports-loader": "^0.7.0",
     "jquery": "^3.1.0",
     "json-brunch": "^1.5.4",
+    "lint-staged": "^3.4.0",
     "lodash": "^4.17.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
     "normalizr": "^2.3.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.2.2",
     "process-env-brunch": "^1.4.4-d",
     "qs": "^6.3.1",
     "quill": "^0.20.1",
