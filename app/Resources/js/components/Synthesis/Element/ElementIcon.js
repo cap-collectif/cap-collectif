@@ -28,7 +28,6 @@ const ElementIcon = React.createClass({
         cap: true,
         'cap-baloon': element.displayType === 'contribution',
         'cap-folder-2': element.displayType === 'folder',
-        'cap-bubble-conversation-5': element.displayType === 'grouping',
         'cap-book-1': element.displayType === 'root',
       })} ${className}`;
       return (

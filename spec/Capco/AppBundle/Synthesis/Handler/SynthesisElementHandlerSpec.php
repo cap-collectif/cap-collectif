@@ -183,7 +183,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
     function it_can_create_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisElement $element, Synthesis $synthesis)
     {
         $element->setSynthesis($synthesis)->shouldBeCalled();
-        $element->setDisplayType('folder')->shouldNotBeCalled();
+        $element->setDisplayType('folder')->shouldBeCalled();
         $element->setAuthor(null)->shouldBeCalled();
         $em->persist($element)->shouldBeCalled();
         $em->flush()->shouldBeCalled();

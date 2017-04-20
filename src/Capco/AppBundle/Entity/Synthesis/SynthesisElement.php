@@ -115,7 +115,7 @@ class SynthesisElement
     /**
      * @var string
      * @ORM\Column(name="display_type", type="string", length=255, nullable=false)
-     * @Assert\Choice(choices={"folder", "contribution", "source", "grouping"})
+     * @Assert\Choice(choices={"folder", "contribution", "source"})
      */
     private $displayType;
 

@@ -71,6 +71,7 @@ class SynthesisElementHandler
     public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)
     {
         $element->setSynthesis($synthesis);
+        $element->setDisplayType('folder');
         $element->setAuthor($user);
 
         $this->em->persist($element);

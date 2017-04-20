@@ -6,7 +6,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 
 class SynthesisElementType extends AbstractType
 {
@@ -29,12 +28,9 @@ class SynthesisElementType extends AbstractType
             ->add('comment', null, ['required' => false])
             ->add('parent',
                 EntityType::class, [
-                'class' => SynthesisElement::class,
+                'class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
                 'property' => 'id',
                 'required' => false,
-            ])
-            ->add('displayType', null, [
-                'required' => true,
             ])
         ;
 
@@ -49,7 +45,7 @@ class SynthesisElementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => SynthesisElement::class,
+            'data_class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisElement',
             'csrf_protection' => false,
         ]);
     }
