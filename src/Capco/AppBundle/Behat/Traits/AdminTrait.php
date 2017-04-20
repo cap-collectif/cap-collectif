@@ -1,46 +1,44 @@
 <?php
 
 namespace Capco\AppBundle\Behat\Traits;
-use Behat\Gherkin\Node\TableNode;
 
 trait AdminTrait
 {
     /**
-    * @When I go to the admin proposals page
-    */
+     * @When I go to the admin proposals page
+     */
     public function iGoToTheAdminProposalsPage()
     {
         $this->visitPageWithParams('admin proposal page');
     }
 
     /**
-    * @When I click the create merge button
-    */
+     * @When I click the create merge button
+     */
     public function iClickTheMergeButton()
     {
-      $this->navigationContext->getPage('admin proposal page')->clickCreateProposalMergeButton();
+        $this->navigationContext->getPage('admin proposal page')->clickCreateProposalMergeButton();
     }
 
     /**
-    * @When I fill the proposal merge form
-    */
+     * @When I fill the proposal merge form
+     */
     public function iFillTheProposalMergeForm()
     {
-      $this->getSession()->getPage()->find('css', "#project .Select-input input")->setValue('7');
-      $this->iWait(3);
-      $this->getSession()->getPage()->find('css', "#childConnections")->click();
-      $this->getSession()->getPage()->find('css', "#childConnections .Select-option[id*=\"-option-1\"]")->click();
-      $this->getSession()->getPage()->find('css', "#childConnections .Select-option[id*=\"-option-1\"]")->click();
-      $this->fillField('title', 'test');
-      $this->fillField('proposal-admin-body', 'Description');
+        $this->getSession()->getPage()->find('css', '#project .Select-input input')->setValue('7');
+        $this->iWait(3);
+        $this->getSession()->getPage()->find('css', '#childConnections')->click();
+        $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
+        $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
+        $this->fillField('title', 'test');
+        $this->fillField('proposal-admin-body', 'Description');
     }
 
     /**
-    * @When I submit the create merge form
-    */
+     * @When I submit the create merge form
+     */
     public function iSubmitTheCreateMergeForm()
     {
-      $this->navigationContext->getPage('admin proposal page')->clickSubmitProposalMergeButton();
+        $this->navigationContext->getPage('admin proposal page')->clickSubmitProposalMergeButton();
     }
-
 }

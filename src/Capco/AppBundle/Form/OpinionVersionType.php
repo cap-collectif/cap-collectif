@@ -18,21 +18,21 @@ class OpinionVersionType extends AbstractType
                 'constraints' => [
                   new Assert\NotNull(),
                   new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2])
+                  new Assert\Length(['min' => 2]),
                 ],
             ])
             ->add('body', PurifiedTextareaType::class, [
                 'constraints' => [
                   new Assert\NotNull(),
                   new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2])
+                  new Assert\Length(['min' => 2]),
                 ],
             ])
             ->add('comment', PurifiedTextareaType::class, [
                 'constraints' => [
                   new Assert\NotNull(),
                   new Assert\NotBlank(),
-                  new Assert\Length(['min' => 2])
+                  new Assert\Length(['min' => 2]),
                 ],
             ])
         ;

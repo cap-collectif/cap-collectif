@@ -19,7 +19,7 @@ describe('Project Reducer', () => {
       ],
       count: 2,
       page: 1,
-      pages: 1
+      pages: 1,
     };
     const newState = reducer(initialState, {
       type: 'project/PROJECTS_FETCH_SUCCEEDED',
@@ -30,7 +30,7 @@ describe('Project Reducer', () => {
       count: 2,
       page: 1,
       pages: 1,
-      visibleProjects: ["1", "2"],
+      visibleProjects: ['1', '2'],
     });
   });
 });

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
 
 class AdminProposalPage extends Page
 {
@@ -14,7 +13,7 @@ class AdminProposalPage extends Page
 
     protected $elements = [
         'create proposal merge button' => '#add-proposal-fusion',
-        'submit proposal merge' => '#confirm-proposal-merge-create'
+        'submit proposal merge' => '#confirm-proposal-merge-create',
     ];
 
     public function clickCreateProposalMergeButton()
@@ -24,6 +23,6 @@ class AdminProposalPage extends Page
 
     public function clickSubmitProposalMergeButton()
     {
-      $this->getElement('submit proposal merge')->click();
+        $this->getElement('submit proposal merge')->click();
     }
 }

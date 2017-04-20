@@ -325,6 +325,6 @@ class ProjectController extends Controller
         $parameters['projectTypes'] = $this->getDoctrine()->getRepository('CapcoAppBundle:ProjectType')
             ->findAll();
 
-        return [ 'params' => $parameters ];
+        return ['params' => $parameters];
     }
 }

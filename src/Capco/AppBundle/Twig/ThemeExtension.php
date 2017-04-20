@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Router;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
@@ -24,8 +23,7 @@ class ThemeExtension extends \Twig_Extension
         $twig,
         Serializer $serializer,
         Router $router
-        )
-    {
+        ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
         $this->twig = $twig;
@@ -82,11 +80,11 @@ class ThemeExtension extends \Twig_Extension
                   '_links' => [
                       'show' => $realStep->getType() == 'other' ? '' :
                         $this->router->generate(
-                          'app_project_show_'. $realStep->getType(),
+                          'app_project_show_'.$realStep->getType(),
                           ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()],
                           UrlGeneratorInterface::ABSOLUTE_URL
-                        )
-                  ]
+                        ),
+                  ],
                 ];
                 $projectStepsData[] = $stepData;
                 $projectStepsByIdData[$realStep->getId()] = $stepData;
@@ -100,6 +98,7 @@ class ThemeExtension extends \Twig_Extension
             $projectData['stepsById'] = $projectStepsByIdData;
             $data[$project->getId()] = $projectData;
         }
+
         return $data;
     }
 
