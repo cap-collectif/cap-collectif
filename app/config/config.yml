@@ -366,10 +366,9 @@ overblog_graphql:
 
 limenius_react:
   serverside_rendering:
-      mode: %ssr_mode%
+      mode: external_server
       fail_loud: false # Fix warnings then set to true
       trace: false
-      server_bundle_path: "%kernel.root_dir%/../web/js/server-bundle.js"
       server_socket_path: "/var/node.sock"
 
 fos_http_cache:
