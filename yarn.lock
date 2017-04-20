@@ -4871,7 +4871,7 @@ react-router@^2.7.0:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-select@^1.0.0-rc.2:
+react-select@1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.0.0-rc.2.tgz#9fc11b149a3dc1ac831289d21b40a59742f82f8d"
   dependencies:

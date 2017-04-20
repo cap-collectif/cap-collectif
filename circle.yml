@@ -37,9 +37,11 @@ test:
         - fab testing.qa.check_dependencies
         - fab testing.qa.static_analysis
         - fab testing.qa.behat:fast_failure=false,profile=api
-        - fab testing.qa.behat:fast_failure=false,profile=commands,parallel=true
+        - fab testing.qa.behat:fast_failure=false,profile=graphql
+        - fab testing.qa.behat:fast_failure=false,profile=commands
         - fab testing.qa.behat:fast_failure=false,profile=frontend
         - fab testing.qa.behat:fast_failure=false,profile=javascript
+        - fab testing.qa.behat:fast_failure=false,profile=back
     post:
         - docker ps && docker stop $(docker ps -a -q) && fab testing.circle.save_logs
 

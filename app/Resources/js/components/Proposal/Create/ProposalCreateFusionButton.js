@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
@@ -8,11 +9,12 @@ import {
   openCreateFusionModal,
   submitFusionForm,
 } from '../../../redux/modules/proposal';
-import ProposalFusionForm from '../Form/ProposalFusionForm';
+import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import ProposalAdminForm from '../Form/ProposalAdminForm';
 import Fetcher from '../../../services/Fetcher';
+import type { State, Uuid } from '../../../types';
 
 export const ProposalCreateFusionButton = React.createClass({
   propTypes: {
@@ -26,9 +28,7 @@ export const ProposalCreateFusionButton = React.createClass({
   mixins: [IntlMixin],
 
   getInitialState() {
-    return {
-      proposalForm: null,
-    };
+    return { proposalForm: null };
   },
 
   componentDidUpdate(prevProps) {
@@ -42,12 +42,14 @@ export const ProposalCreateFusionButton = React.createClass({
     if (proposalFormId) {
       Fetcher
       .get(`/proposal_forms/${proposalFormId}`)
-      .then(proposalForm => this.setState({ proposalForm }));
+      .then((proposalForm) => {
+        this.setState({ proposalForm });
+      });
     }
   },
 
   render() {
-    const { showModal, isSubmitting, open, close, submit } = this.props;
+    const { proposalFormId, showModal, isSubmitting, open, close, submit } = this.props;
     const { proposalForm } = this.state;
     return (
       <div>
@@ -85,9 +87,9 @@ export const ProposalCreateFusionButton = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={() => close()} />
             <SubmitButton
-              id="confirm-proposal-create"
+              id="confirm-proposal-merge-create"
               isSubmitting={isSubmitting}
-              onSubmit={() => submit(proposalForm.id)}
+              onSubmit={() => submit(proposalFormId)}
             />
           </Modal.Footer>
         </Modal>
@@ -97,9 +99,10 @@ export const ProposalCreateFusionButton = React.createClass({
 
 });
 
-const mapStateToProps = (state) => {
-  const selectedProject = formValueSelector('proposal')(state, 'project');
-  const currentCollectStep = selectedProject ? state.project.projectsById.find(p => p.id === selectedProject).steps.filter(step => step.type === 'collect')[0] : null;
+const mapStateToProps = (state: State) => {
+  const selectedProjectId: Uuid = formValueSelector(formName)(state, 'project');
+  const project = state.project.projectsById[selectedProjectId];
+  const currentCollectStep = project ? project.steps.filter(s => s.type === 'collect')[0] : null;
   return {
     showModal: state.proposal.isCreatingFusion,
     isSubmitting: state.proposal.isSubmittingFusion,

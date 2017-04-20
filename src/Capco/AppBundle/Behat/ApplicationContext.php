@@ -15,6 +15,7 @@ use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use WebDriver\Exception\ElementNotVisible;
@@ -41,6 +42,7 @@ class ApplicationContext extends UserContext
     use SharingStepsTrait;
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
+    use AdminTrait;
 
     /**
      * @BeforeScenario

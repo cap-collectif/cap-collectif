@@ -325,10 +325,6 @@ class ProjectController extends Controller
         $parameters['projectTypes'] = $this->getDoctrine()->getRepository('CapcoAppBundle:ProjectType')
             ->findAll();
 
-        return [
-            'props' => $this->get('serializer')->serialize(['project' => $parameters], 'json',
-                SerializationContext::create()->setGroups(['ProjectType'])),
-            'params' => $parameters,
-        ];
+        return ['params' => $parameters];
     }
 }

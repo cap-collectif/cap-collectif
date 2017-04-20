@@ -10,13 +10,16 @@ describe('Project Reducer', () => {
   it('Should handle PROJECTS_FETCH_SUCCEEDED', () => {
     const initialState = {
       isLoading: false,
-      projects: [],
+      visibleProjects: [],
     };
     const result = {
       projects: [
-        {},
-        {},
+        { id: '1' },
+        { id: '2' },
       ],
+      count: 2,
+      page: 1,
+      pages: 1,
     };
     const newState = reducer(initialState, {
       type: 'project/PROJECTS_FETCH_SUCCEEDED',
@@ -24,7 +27,10 @@ describe('Project Reducer', () => {
     });
     expect(newState).toEqual({
       isLoading: false,
-      projects: result.projects,
+      count: 2,
+      page: 1,
+      pages: 1,
+      visibleProjects: ['1', '2'],
     });
   });
 });
