@@ -63,16 +63,18 @@ RUN apt-get update && \
     cd /tmp && \
     fetch v8 && \
     cd v8 && \
-    git checkout 4.9.385.28 && \
+    git checkout 6.0.42 && \
     gclient sync && \
-    export GYP_DEFINES="use_system_icu=1" && \
+    # export GYP_DEFINES="use_system_icu=1" && \
     export GYPFLAGS="-Dv8_use_external_startup_data=0" && \
     make native library=shared snapshot=on -j4 && \
     cp out/native/lib.target/lib*.so /usr/lib/ && \
     cp out/native/obj.target/tools/gyp/libv8_libplatform.a /usr/lib && \
     cp -R include/* /usr/include && \
-    git clone https://github.com/phpv8/v8js.git --branch 1.1.0 /tmp/v8js && \
-    cd /tmp/v8js && phpize && ./configure && \
+    git clone https://github.com/phpv8/v8js.git --branch 1.3.6 /tmp/v8js && \
+    cd /tmp/v8js && \
+    phpize && \
+    ./configure && \
     make all test install && \
     cd / && \
     rm -rf /tmp/* /usr/local/depot_tools && \
