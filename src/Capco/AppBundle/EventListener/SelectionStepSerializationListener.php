@@ -5,7 +5,6 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 

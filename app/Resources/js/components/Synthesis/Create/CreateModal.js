@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Modal, Input, Button } from 'react-bootstrap';
+import { Modal, Input, Button, ButtonGroup } from 'react-bootstrap';
 
 import ElementsFinder from './../ElementsFinder';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
@@ -34,6 +34,7 @@ const CreateModal = React.createClass({
       parent: this.getElementInTreeById(elements, selectedId),
       expanded: this.getExpandedBasedOnSelectedId(),
       description: null,
+      displayType: 'folder',
     };
   },
 
@@ -96,6 +97,10 @@ const CreateModal = React.createClass({
     });
   },
 
+  setDisplayType(displayType) {
+    this.setState({ displayType });
+  },
+
   setParent(element) {
     if (element) {
       const value = element !== 'root' ? element : null;
@@ -123,15 +128,13 @@ const CreateModal = React.createClass({
     this.setState({
       name: null,
       description: null,
+      displayType: 'folder',
     });
     toggle(false);
   },
 
   create() {
-    const {
-      process,
-      synthesis,
-    } = this.props;
+    const { process, synthesis } = this.props;
     this.hide();
     const element = {
       archived: true,
@@ -139,6 +142,7 @@ const CreateModal = React.createClass({
       title: this.state.name,
       description: this.state.description,
       parent: this.state.parent,
+      displayType: this.state.displayType,
     };
     if (typeof process === 'function') {
       process(element);
@@ -153,7 +157,7 @@ const CreateModal = React.createClass({
         <h2 className="h4">
           {` ${this.getIntlMessage('synthesis.edition.action.create.name.label')}`}
         </h2>
-        <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('synthesis.edition.action.create.name.placeholder')} valueLink={this.linkState('name')} />
+        <Input type="text" id="new_element_title" name="new_element[title]" className="new-element__title" placeholder={this.getIntlMessage('synthesis.edition.action.create.name.placeholder')} onChange={this.setName} />
       </div>
     );
   },
@@ -164,7 +168,7 @@ const CreateModal = React.createClass({
         <h2 className="h4">
           {` ${this.getIntlMessage('synthesis.edition.action.create.description.label')}`}
         </h2>
-        <Input type="textarea" id="new_element_description" name="new_element[description]" className="new-element__title" valueLink={this.linkState('description')} />
+        <Input type="textarea" id="new_element_description" name="new_element[description]" className="new-element__title" onChange={this.setDescription} />
       </div>
     );
   },
@@ -177,6 +181,18 @@ const CreateModal = React.createClass({
           <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.create.optional')}`}</span>
         </h2>
         {this.renderParentFinder()}
+      </div>
+    );
+  },
+
+  renderType() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">Type</h2>
+        <ButtonGroup style={{ width: '100%' }}>
+          <Button onClick={this.setDisplayType.bind(this, 'folder')} active={this.state.displayType === 'folder'} style={{ width: '50%' }}>Dossier</Button>
+          <Button onClick={this.setDisplayType.bind(this, 'grouping')} active={this.state.displayType === 'grouping'} style={{ width: '50%' }}>Regroupement</Button>
+        </ButtonGroup>
       </div>
     );
   },
@@ -203,20 +219,21 @@ const CreateModal = React.createClass({
   render() {
     const { show } = this.props;
     return (
-    <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--create">
-      <Modal.Header closeButton>
-        <Modal.Title>{this.getIntlMessage('synthesis.edition.action.create.title')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {this.renderName()}
-        {this.renderDescription()}
-        {this.renderParent()}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.create.btn_cancel')}</Button>
-        <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.create.btn_submit')}</Button>
-      </Modal.Footer>
-    </Modal>
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--create">
+        <Modal.Header closeButton>
+          <Modal.Title>{this.getIntlMessage('synthesis.edition.action.create.title')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {this.renderName()}
+          {this.renderType()}
+          {this.renderDescription()}
+          {this.renderParent()}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="button" onClick={this.hide.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.create.btn_cancel')}</Button>
+          <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.create.btn_submit')}</Button>
+        </Modal.Footer>
+      </Modal>
     );
   },
 
