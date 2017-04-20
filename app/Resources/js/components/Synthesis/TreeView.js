@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Treebeard, decorators } from 'react-treebeard';
+import { Treebeard, decorators, theme } from 'react-treebeard';
 import Loader from '../Utils/Loader';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -115,6 +115,8 @@ const TreeView = React.createClass({
     const { synthesis } = this.props;
     const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
     const elements = preToggleElement(cleanEmptyChildren(this.state.elements), depth);
+    const styles = theme;
+    styles.tree.node.link.display = 'flex';
     return (
       <Loader show={this.state.isLoading}>
         {
@@ -125,6 +127,7 @@ const TreeView = React.createClass({
               onToggle={(node, toggled) => {
                 this.setState({ elements: updateToggle(elements, node, toggled) });
               }}
+              style={styles}
             />
           ))
         }
