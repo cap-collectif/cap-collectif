@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Button, Modal, Input } from 'react-bootstrap';
+import { Button, ButtonGroup, Modal, Input } from 'react-bootstrap';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
@@ -32,6 +32,7 @@ const PublishModal = React.createClass({
       comment: element ? element.comment : null,
       title: element ? element.title : null,
       description: element ? element.description : null,
+      displayType: element ? element.displayType : null,
       elements: [],
       expanded: {
         root: true,
@@ -58,6 +59,7 @@ const PublishModal = React.createClass({
           comment: nextProps.element.comment,
           title: nextProps.element.title,
           description: nextProps.element.description,
+          displayType: nextProps.element.displayType,
           expanded: this.getExpandedBasedOnElement(),
         });
       }
@@ -103,6 +105,10 @@ const PublishModal = React.createClass({
     }
   },
 
+  setDisplayType(displayType) {
+    this.setState({ displayType });
+  },
+
   hide() {
     const { toggle } = this.props;
     toggle(false);
@@ -126,6 +132,7 @@ const PublishModal = React.createClass({
       parent: this.state.parent,
       comment: this.state.comment,
       description: this.state.description,
+      displayType: this.state.displayType,
       title: this.state.title,
     };
     if (typeof process === 'function') {
@@ -137,6 +144,7 @@ const PublishModal = React.createClass({
       element.comment = data.comment;
       element.description = data.description;
       element.title = data.title;
+      element.displayType = data.displayType || null;
       process(element);
       return;
     }
@@ -187,6 +195,18 @@ const PublishModal = React.createClass({
           {` ${this.getIntlMessage('synthesis.edition.action.publish.field.parent')}`}
         </h2>
         {this.renderParentFinder()}
+      </div>
+    );
+  },
+
+  renderType() {
+    return (
+      <div className="modal__action">
+        <h2 className="h4">Type</h2>
+        <ButtonGroup style={{ width: '100%' }}>
+          <Button onClick={this.setDisplayType.bind(this, 'folder')} active={this.state.displayType === 'folder'} style={{ width: '50%' }}>Dossier</Button>
+          <Button onClick={this.setDisplayType.bind(this, 'grouping')} active={this.state.displayType === 'grouping'} style={{ width: '50%' }}>Regroupement</Button>
+        </ButtonGroup>
       </div>
     );
   },
@@ -253,7 +273,7 @@ const PublishModal = React.createClass({
   },
 
   render() {
-    const { show } = this.props;
+    const { show, element } = this.props;
     return (
       <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
         <Modal.Header closeButton>
@@ -261,6 +281,7 @@ const PublishModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
+          {(element.displayType === 'grouping' || element.displayType === 'folder') && this.renderType()}
           {this.renderDescription()}
           {this.renderParent()}
           {this.renderNotation()}
