@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Capco\AppBundle\Form\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class ProjectsController extends FOSRestController
 {
@@ -30,6 +31,7 @@ class ProjectsController extends FOSRestController
      * @QueryParam(name="type", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", nullable=true)
      * @QueryParam(name="term", nullable=true)
      * @View(serializerGroups={"Projects", "Steps", "UserDetails", "UserVotes", "ThemeDetails", "ProjectType"})
+     * @Cache(smaxage="60", public=true)
      */
     public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {

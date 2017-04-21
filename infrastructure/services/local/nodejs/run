@@ -2,7 +2,8 @@
 
 echo "Starting nodejs..."
 
-rm /tmp/node_ssr.sock || true
-cd /tmp
+rm /var/node_ssr.sock || true
+cd /var
 
+exec true
 exec node /var/www/nodejs/server.js -user capco

@@ -1,5 +1,6 @@
 const net = require('net');
 const fs = require('fs');
+var exec = require( "child_process" ).exec;
 
 const socket = 'node_ssr.sock';
 const bundlePath = '/var/www/web/js/';
@@ -18,19 +19,29 @@ Handler.prototype.handle = function (connection) {
     connection.setEncoding('utf8');
     let completeData = '';
     connection.on('data', (data) => {
+      console.log('[Node.js server] Received data !');
       completeData += data;
-      try {
-        const result = eval(completeData);
-        console.log('[Node.js server] Processed request !');
-        connection.write(result);
-        connection.end();
-      } catch (e) {
-        if (e instanceof SyntaxError) {
-          console.log('[Node.js server] Received incomplete data !');
+    });
+    const evalCode = function() {
+      if (completeData.length === 0) {
+        setTimeout(evalCode, 20);
+      } else {
+        try {
+          const result = eval(completeData);
+          console.log('[Node.js server] Processed request !');
+          connection.write(result);
+          connection.end();
+        } catch (e) {
+          if (e instanceof SyntaxError) {
+            console.log('[Node.js server] Data not full !');
+            setTimeout(evalCode, 20);
+          }
         }
       }
-    });
+    }
+    evalCode();
   };
+
   if (this.initialized) {
     callback();
   } else {
@@ -96,10 +107,8 @@ fs.watchFile(bundlePath + bundleFileName, (curr) => {
 unixServer.listen(socket, () => {
   const sock = `${process.cwd()}/${socket}`;
   fs.chmodSync(sock, '777');
-  if (user == "capco") {
-    console.log(`[Node.js server] Giving access to socket for "${user}".`)
-    fs.chownSync(sock, 1000, 1000);
-  }
+  console.log(`[Node.js server] Giving access to socket for "${user}".`)
+  exec("chown "+ user +":"+ user +" "+ sock);
   console.log(`[Node.js server] Listening socket: unix://${sock}`);
 });
 

@@ -10,7 +10,7 @@ if [ "$PRODUCTION" ]; then
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
   composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
   # We build bootstrap.php.cache in the `var` directory
-  php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php va
+  php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
   # Frontend deps
   yarn install --pure-lockfile
