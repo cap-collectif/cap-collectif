@@ -1,10 +1,10 @@
 const net = require('net');
 const fs = require('fs');
 
-const socket = 'node.sock';
+const socket = 'node_ssr.sock';
 const bundlePath = '/var/www/web/js/';
 
-let user = 'root';
+let user = 'capco';
 let bundleFileName = 'server-bundle.js';
 let currentArg;
 
@@ -95,7 +95,7 @@ fs.watchFile(bundlePath + bundleFileName, (curr) => {
 
 unixServer.listen(socket, () => {
   const sock = `${process.cwd()}/${socket}`;
-  fs.chmodSync(sock, '775');
+  fs.chmodSync(sock, '777');
   if (user == "capco") {
     console.log(`[Node.js server] Giving access to socket for "${user}".`)
     fs.chownSync(sock, 1000, 1000);
