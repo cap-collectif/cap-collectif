@@ -129,6 +129,7 @@
     "eslint": "^3.18.0",
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-prettier": "^1.7.0",
     "eslint-plugin-flowtype": "^2.30.4",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jest": "^19.0.1",

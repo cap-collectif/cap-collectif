@@ -1,13 +1,7 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'prettier', 'prettier/flowtype', 'prettier/react'],
   parser: 'babel-eslint',
-  plugins: [
-    'flowtype',
-    'import',
-    'react',
-    'jsx-a11y',
-    'jest'
-  ],
+  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest'],
   globals: {
     $: true,
     screen: true,
@@ -22,7 +16,7 @@ module.exports = {
     fetch: true,
     Modernizr: true,
     jQuery: true,
-    __SERVER__: true
+    __SERVER__: true,
   },
   // parserOptions: {
   //   ecmaVersion: 2017,
@@ -38,20 +32,24 @@ module.exports = {
     'jest/no-identical-title': 'error',
     'flowtype/boolean-style': ['error', 'boolean'],
     'flowtype/define-flow-type': 1,
-    'flowtype/delimiter-dangle': ['error','never'],
+    'flowtype/delimiter-dangle': ['error', 'never'],
     'flowtype/generic-spacing': ['error', 'never'],
     'flowtype/no-primitive-constructor-types': 'error',
-    'flowtype/no-weak-types': ['error', {'Object': false, 'Function': false}],
+    'flowtype/no-weak-types': ['error', { Object: false, Function: false }],
     'flowtype/object-type-delimiter': ['error', 'comma'],
     'flowtype/require-parameter-type': ['off'],
-    'flowtype/require-return-type': ['off', 'always', { 'annotateUndefined': 'never'}],
+    'flowtype/require-return-type': [
+      'off',
+      'always',
+      { annotateUndefined: 'never' },
+    ],
     'flowtype/require-valid-file-annotation': 'error',
-    'flowtype/semi': [ 'error', 'always'],
-    'flowtype/space-after-type-colon': [ 'error', 'always'],
-    'flowtype/space-before-generic-bracket': [ 'error', 'never'],
-    'flowtype/space-before-type-colon': [ 'error', 'never'],
+    'flowtype/semi': ['error', 'always'],
+    'flowtype/space-after-type-colon': ['error', 'always'],
+    'flowtype/space-before-generic-bracket': ['error', 'never'],
+    'flowtype/space-before-type-colon': ['error', 'never'],
     'flowtype/type-id-match': 'off',
-    'flowtype/union-intersection-spacing': [ 'error', 'always'],
+    'flowtype/union-intersection-spacing': ['error', 'always'],
     'flowtype/use-flow-type': 1,
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/require-default-props': 'off',
@@ -91,11 +89,11 @@ module.exports = {
     'no-param-reassign': 'off',
     'consistent-return': 'off',
     'array-callback-return': 'off',
-    'no-return-assign': 'off'
+    'no-return-assign': 'off',
   },
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
-    }
-  }
+  settings: {
+    flowtype: {
+      onlyFilesWithFlowAnnotation: true,
+    },
+  },
 };
