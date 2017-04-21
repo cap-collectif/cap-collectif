@@ -14,27 +14,31 @@ function Handler() {
   this.initialized = false;
 }
 
+let i = 0;
 Handler.prototype.handle = function (connection) {
   const callback = function () {
     connection.setEncoding('utf8');
+    i = i + 1;
     let completeData = '';
+    console.log('[SSR] Processing request #' + i);
     connection.on('data', (data) => {
-      console.log('[Node.js server] Received data !');
       completeData += data;
     });
     const evalCode = function() {
       if (completeData.length === 0) {
-        setTimeout(evalCode, 20);
-      } else {
+        setTimeout(evalCode, 10);
+      }
+      else {
         try {
           const result = eval(completeData);
-          console.log('[Node.js server] Processed request !');
+          console.log('[SSR] Completed successfully request #'+ i);
           connection.write(result);
           connection.end();
-        } catch (e) {
+        }
+        catch (e) {
           if (e instanceof SyntaxError) {
-            console.log('[Node.js server] Data not full !');
-            setTimeout(evalCode, 20);
+            console.log('[SSR] Data reveived not full, waiting request #'+ i);
+            setTimeout(evalCode, 10);
           }
         }
       }
@@ -44,13 +48,14 @@ Handler.prototype.handle = function (connection) {
 
   if (this.initialized) {
     callback();
-  } else {
+  }
+  else {
     this.queue.push(callback);
   }
 };
 
 Handler.prototype.initialize = function () {
-  console.log(`[Node.js server] Processing ${this.queue.length} pending requests`);
+  console.log(`[SSR] Processing ${this.queue.length} pending requests`);
   let callback = this.queue.pop();
   while (callback) {
     callback();
@@ -82,7 +87,7 @@ try {
 }
 
 require(bundlePath + bundleFileName);
-console.log(`[Node.js server] Loaded server bundle: ${bundlePath}${bundleFileName}`);
+console.log(`[SSR] Loaded server bundle: ${bundlePath}${bundleFileName}`);
 handler.initialize();
 
 const unixServer = net.createServer((connection) => {
@@ -92,14 +97,14 @@ const unixServer = net.createServer((connection) => {
 fs.watchFile(bundlePath + bundleFileName, (curr) => {
   if (curr && curr.blocks && curr.blocks > 0) {
     if (handler.initialized) {
-      console.log('[Node.js server] Restarting the node process, to reload server bundle!');
+      console.log('[SSR] Restarting the node process, to reload server bundle!');
       unixServer.close();
       process.exit();
       return;
     }
 
     require(bundlePath + bundleFileName);
-    console.log(`[Node.js server] Loaded server bundle: ${bundlePath}${bundleFileName}`);
+    console.log(`[SSR] Loaded server bundle: ${bundlePath}${bundleFileName}`);
     handler.initialize();
   }
 });
@@ -107,9 +112,9 @@ fs.watchFile(bundlePath + bundleFileName, (curr) => {
 unixServer.listen(socket, () => {
   const sock = `${process.cwd()}/${socket}`;
   fs.chmodSync(sock, '777');
-  console.log(`[Node.js server] Giving access to socket for "${user}".`)
+  console.log(`[SSR] Giving access to socket for "${user}".`)
   exec("chown "+ user +":"+ user +" "+ sock);
-  console.log(`[Node.js server] Listening socket: unix://${sock}`);
+  console.log(`[SSR] Listening socket: unix://${sock}`);
 });
 
 process.on('SIGINT', () => {
