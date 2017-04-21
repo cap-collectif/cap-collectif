@@ -15,22 +15,24 @@ function Handler() {
 }
 
 let i = 0;
-Handler.prototype.handle = function (connection) {
+Handler.prototype.handle = function (req) {
   const callback = function () {
-    connection.setEncoding('utf8');
+    req.setEncoding('utf8');
     i = i + 1;
+    // const buffer = new Buffer(1000);
     let completeData = '';
     console.log('[SSR] Processing request #' + i);
-    connection.on('data', (data) => {
+    req.on('data', (data) => {
       completeData += data;
+      // buffer.write(data, "utf-8");
     });
     let tries = 0;
     const evalCode = function() {
       tries = tries + 1;
-      if (tries > 20) {
-        console.log('[SSR] Failed request #'+ i);
-        connection.write('');
-        connection.end();
+      if (tries > 10) {
+        console.log('[SSR] Failed request #' + i);
+        req.write('');
+        req.end();
         return;
       }
       if (completeData.length === 0) {
@@ -39,9 +41,9 @@ Handler.prototype.handle = function (connection) {
       else {
         try {
           const result = eval(completeData);
-          console.log('[SSR] Completed successfully request #'+ i);
-          connection.write(result);
-          connection.end();
+          console.log('[SSR] Completed successfully request #' + i);
+          req.write(result);
+          req.end();
         }
         catch (e) {
           if (e instanceof SyntaxError) {

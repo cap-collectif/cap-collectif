@@ -10,6 +10,14 @@
     },
     "repositories": [
         {
+          "type": "vcs",
+          "url": "https://github.com/cap-collectif/ReactBundle"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/cap-collectif/ReactRenderer"
+        },
+        {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/id-to-uuid"
         },
@@ -81,7 +89,6 @@
         "snc/redis-bundle": "^2.0",
         "ekino/newrelic-bundle": "~1.3",
         "caxy/htmldiff-bundle": "dev-master",
-        "limenius/react-bundle": "0.11.1",
         "google/recaptcha": "^1.1",
         "gfreeau/get-jwt-bundle": "^1.0",
         "friendsofsymfony/rest-bundle": "^1.6",
@@ -113,7 +120,9 @@
         "friendsofsymfony/http-cache": "2.0.0-beta1",
         "guzzlehttp/guzzle": "6.2.3",
         "php-http/guzzle6-adapter": "^1.1",
-        "guzzlehttp/psr7": "^1.4"
+        "guzzlehttp/psr7": "^1.4",
+        "limenius/react-renderer": "dev-master",
+        "limenius/react-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
