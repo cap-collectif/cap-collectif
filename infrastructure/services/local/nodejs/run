@@ -5,4 +5,5 @@ echo "Starting nodejs..."
 rm /var/node_ssr.sock || true
 cd /var
 
+exec true
 exec node /var/www/nodejs/server.js -user capco
