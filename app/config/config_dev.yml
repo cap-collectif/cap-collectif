@@ -8,10 +8,6 @@ framework:
     profiler:
         only_exceptions: false
 
-limenius_react:
-    serverside_rendering:
-        mode: "external_server"
-
 web_profiler:
     toolbar: true
     intercept_redirects: false

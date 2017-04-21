@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const socket = 'node.sock';
 const bundlePath = '/var/www/web/js/';
-let bundleFileName = 'server-bundle.js';
 
+let user = 'root';
+let bundleFileName = 'server-bundle.js';
 let currentArg;
 
 function Handler() {
@@ -52,13 +53,15 @@ const handler = new Handler();
 
 process.argv.forEach((val) => {
   if (val[0] == '-') {
-    currentArg = val.slice(1);
-    return;
+    user = 'capco';
+    // currentArg = val.slice(1);
+    // return;
   }
 
-  if (currentArg == 's') {
-    bundleFileName = val;
-  }
+  // if (currentArg == 'user') {
+  //   console.log('User is '+ val);
+  //   user = val;
+  // }
 });
 
 try {
@@ -93,8 +96,11 @@ fs.watchFile(bundlePath + bundleFileName, (curr) => {
 unixServer.listen(socket, () => {
   const sock = `${process.cwd()}/${socket}`;
   fs.chmodSync(sock, '775');
-  fs.chownSync(sock, 1000, 1000);
-  console.log(`[Node.js server] Listening socket: ${sock}`);
+  if (user == "capco") {
+    console.log(`[Node.js server] Giving access to socket for "${user}".`)
+    fs.chownSync(sock, 1000, 1000);
+  }
+  console.log(`[Node.js server] Listening socket: unix://${sock}`);
 });
 
 process.on('SIGINT', () => {
