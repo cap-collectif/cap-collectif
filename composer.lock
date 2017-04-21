@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e88e0b8200a459e887e113a754593820",
-    "content-hash": "213b9a72dc2069f64cac06383ff5d7de",
+    "hash": "daa4baa1d7b6bf9a4690e437b5227303",
+    "content-hash": "c77287bd4fc44a558bdd670b244a32f8",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3875,20 +3875,20 @@
         },
         {
             "name": "limenius/react-bundle",
-            "version": "dev-master",
+            "version": "v0.11.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/ReactBundle.git",
-                "reference": "6b79dba5d7c240fc7161c5eab1f71af2b3f09276"
+                "url": "https://github.com/Limenius/ReactBundle.git",
+                "reference": "4546725e96dfaa70fda3b9d993de603d2eedff22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/ReactBundle/zipball/6b79dba5d7c240fc7161c5eab1f71af2b3f09276",
-                "reference": "6b79dba5d7c240fc7161c5eab1f71af2b3f09276",
+                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/4546725e96dfaa70fda3b9d993de603d2eedff22",
+                "reference": "4546725e96dfaa70fda3b9d993de603d2eedff22",
                 "shasum": ""
             },
             "require": {
-                "limenius/react-renderer": "dev-master",
+                "limenius/react-renderer": "^0.11.0",
                 "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "symfony/config": "^2.7.0|^3.0.6",
@@ -3906,17 +3906,7 @@
                     "Limenius\\ReactBundle\\": ""
                 }
             },
-            "scripts": {
-                "default-scripts": [
-                    "rm -rf vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility; cp -rp vendor/wimg/php-compatibility vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility"
-                ],
-                "post-install-cmd": [
-                    "@default-scripts"
-                ],
-                "post-update-cmd": [
-                    "@default-scripts"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3931,23 +3921,20 @@
                 "isomorphic",
                 "react"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/ReactBundle/tree/master"
-            },
-            "time": "2017-04-21 16:46:10"
+            "time": "2017-03-04 09:46:39"
         },
         {
             "name": "limenius/react-renderer",
-            "version": "dev-master",
+            "version": "v0.11.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/ReactRenderer.git",
-                "reference": "9d9d7d18082fd1c5f4707fc3d2e22fa7b97f54ef"
+                "url": "https://github.com/Limenius/ReactRenderer.git",
+                "reference": "5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/ReactRenderer/zipball/9d9d7d18082fd1c5f4707fc3d2e22fa7b97f54ef",
-                "reference": "9d9d7d18082fd1c5f4707fc3d2e22fa7b97f54ef",
+                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f",
+                "reference": "5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f",
                 "shasum": ""
             },
             "require": {
@@ -3966,22 +3953,7 @@
                     "Limenius\\ReactRenderer\\": "src/Limenius/ReactRenderer"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Limemius\\ReactRenderer\\Tests\\": "tests/Limenius/ReactRenderer/Tests"
-                }
-            },
-            "scripts": {
-                "default-scripts": [
-                    "rm -rf vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility; cp -rp vendor/wimg/php-compatibility vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility"
-                ],
-                "post-install-cmd": [
-                    "@default-scripts"
-                ],
-                "post-update-cmd": [
-                    "@default-scripts"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3998,10 +3970,7 @@
                 "reactjs",
                 "twig"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/ReactRenderer/tree/master"
-            },
-            "time": "2017-04-21 16:30:30"
+            "time": "2017-03-04 09:15:11"
         },
         {
             "name": "liuggio/ExcelBundle",
@@ -4317,16 +4286,16 @@
         },
         {
             "name": "nacmartin/phpexecjs",
-            "version": "v0.8.7",
+            "version": "v0.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nacmartin/phpexecjs.git",
-                "reference": "f7f1c99b559ec63b9be37f2c356a21fd4856f726"
+                "reference": "fa271f397b2a2f2618e44e2656d21e0d30851430"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/f7f1c99b559ec63b9be37f2c356a21fd4856f726",
-                "reference": "f7f1c99b559ec63b9be37f2c356a21fd4856f726",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/fa271f397b2a2f2618e44e2656d21e0d30851430",
+                "reference": "fa271f397b2a2f2618e44e2656d21e0d30851430",
                 "shasum": ""
             },
             "require": {
@@ -4349,7 +4318,7 @@
                 }
             ],
             "description": "Run JavaScript code from PHP",
-            "time": "2016-09-28 08:36:23"
+            "time": "2016-03-18 20:11:47"
         },
         {
             "name": "namshi/jose",
@@ -8444,30 +8413,29 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.33.2",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
+                "reference": "ddc9e3e20ee9c0b6908f401ac8353635b750eca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
-                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
+                "reference": "ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.7"
             },
             "require-dev": {
-                "psr/container": "^1.0",
                 "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
+                "symfony/phpunit-bridge": "~3.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.33-dev"
+                    "dev-master": "1.31-dev"
                 }
             },
             "autoload": {
@@ -8502,7 +8470,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-04-20 17:39:48"
+            "time": "2017-01-11 19:36:15"
         },
         {
             "name": "twilio/sdk",
@@ -12462,8 +12430,6 @@
         "cap-collectif/id-to-uuid": 20,
         "friendsofsymfony/http-cache-bundle": 10,
         "friendsofsymfony/http-cache": 10,
-        "limenius/react-renderer": 20,
-        "limenius/react-bundle": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "tonicforhealth/behat-parallel-scenario": 20
     },
