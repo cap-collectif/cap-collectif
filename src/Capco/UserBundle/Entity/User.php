@@ -60,9 +60,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->id === $user->getId();
     }
 
-    /**
-     * @var int
-     */
     protected $id;
 
     /**
@@ -370,11 +367,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->encoder;
     }
 
-    /**
-     * Get id.
-     *
-     * @return int $id
-     */
     public function getId()
     {
         return $this->id;

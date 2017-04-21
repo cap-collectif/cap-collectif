@@ -66,6 +66,7 @@ class ProjectDownloadResolver
         $headers = [
             'id',
             'author',
+            'author_id',
             'phone',
             'created',
             'anonymous',
