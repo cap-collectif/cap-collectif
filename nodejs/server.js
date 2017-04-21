@@ -24,7 +24,15 @@ Handler.prototype.handle = function (connection) {
     connection.on('data', (data) => {
       completeData += data;
     });
+    let tries = 0;
     const evalCode = function() {
+      tries = tries + 1;
+      if (tries > 20) {
+        console.log('[SSR] Failed request #'+ i);
+        connection.write('');
+        connection.end();
+        return;
+      }
       if (completeData.length === 0) {
         setTimeout(evalCode, 10);
       }
