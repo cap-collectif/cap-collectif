@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import OpinionEditForm from '../Form/OpinionEditForm';
+import { submit, isSubmitting } from 'redux-form';
+import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
+import type { State } from '../../../types';
 
 export const OpinionEditModal = React.createClass({
   propTypes: {
@@ -12,79 +14,61 @@ export const OpinionEditModal = React.createClass({
     opinion: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleSubmit() {
-    if (this.form.isValid()) {
-      this.form.submit();
-      this.setState({ isSubmitting: true });
-    }
-  },
-
-  handleSubmitSuccess() {
-    const { onClose } = this.props;
-    this.setState({ isSubmitting: false });
-    onClose();
-  },
-
-  stopSubmit() {
-    this.setState({ isSubmitting: false });
-  },
-
   render() {
-    const { isSubmitting } = this.state;
-    const { onClose, show, opinion, step } = this.props;
+    const { dispatch, submitting, onClose, show, opinion, step } = this.props;
     return (
       <Modal
         animation={false}
         show={show}
         onHide={() => {
-          if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
+          if (
+            window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))
+          ) {
+            // eslint-disable-line no-alert
             onClose();
           }
         }}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            { this.getIntlMessage('global.edit') }
+            {this.getIntlMessage('global.edit')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <OpinionEditForm
-            ref={c => this.form = c}
-            opinion={opinion}
-            onSubmitSuccess={this.handleSubmitSuccess}
-            onFailure={this.stopSubmit}
-            step={step}
-          />
+          <OpinionEditForm opinion={opinion} step={step} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
           <SubmitButton
             label="global.edit"
             id={'confirm-opinion-update'}
-            isSubmitting={isSubmitting}
-            onSubmit={this.handleSubmit}
+            isSubmitting={submitting}
+            onSubmit={() => {
+              dispatch(submit(formName));
+            }}
           />
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default connect(
-  (state) => {
+  (state: State) => {
     return {
-      step: state.project.projectsById[state.project.currentProjectById].steps.filter(step => step.type === 'consultation')[0],
+      submitting: isSubmitting(formName)(state),
+      step: state.project.projectsById[
+        state.project.currentProjectById
+      ].steps.filter(step => step.type === 'consultation')[0],
     };
-  }, null, null, { withRef: true })(OpinionEditModal);
+  },
+  null,
+  null,
+  { withRef: true },
+)(OpinionEditModal);

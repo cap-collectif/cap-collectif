@@ -1,8 +1,9 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import Form from '../../Form/Form';
 
-export const defaultValidation = ({ title, body }) => {
+export const defaultValidation = ({ title, body }: Object) => {
   const errors = {};
   if (!title || title.length < 2) {
     errors.title = 'opinion.constraints.title';
@@ -30,13 +31,7 @@ const OpinionForm = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    return (
-      <Form
-        ref={c => this.form = c}
-        translations={labels}
-        {...this.props}
-      />
-    );
+    return <Form translations={labels} {...this.props} />;
   },
 });
 
