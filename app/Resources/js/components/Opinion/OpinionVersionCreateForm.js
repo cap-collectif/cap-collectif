@@ -16,7 +16,11 @@ const validate = ({ body, title, comment }: Object, props: Object) => {
   if (title.length < 2) {
     errors.title = 'global.required';
   }
-  if (comment.length < 2) {
+  if (comment) {
+    if ($(comment).text().length <= 2) {
+      errors.comment = 'opinion.version.comment_error';
+    }
+  } else {
     errors.comment = 'global.required';
   }
   return errors;
@@ -59,12 +63,15 @@ const OpinionVersionCreateForm = React.createClass({
 export default connect((state: State) => ({
   initialValues: {
     title: '',
-    body: state.opinion.currentOpinionId && state.opinion.opinionsById[state.opinion.currentOpinionId].body,
+    body: state.opinion.currentOpinionId &&
+      state.opinion.opinionsById[state.opinion.currentOpinionId].body,
     comment: '',
   },
   opinionId: state.opinion.currentOpinionId,
-}))(reduxForm({
-  form: formName,
-  onSubmit,
-  validate,
-})(OpinionVersionCreateForm));
+}))(
+  reduxForm({
+    form: formName,
+    onSubmit,
+    validate,
+  })(OpinionVersionCreateForm),
+);

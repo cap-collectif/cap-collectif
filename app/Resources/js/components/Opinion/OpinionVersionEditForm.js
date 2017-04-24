@@ -22,7 +22,7 @@ const validate = ({ confirm, title, comment }) => {
     errors.title = 'global.required';
   }
   if (comment) {
-    if (comment.length <= 2) {
+    if ($(comment).text().length <= 2) {
       errors.comment = 'opinion.version.comment_error';
     }
   } else {
@@ -75,14 +75,20 @@ const OpinionVersionEditForm = React.createClass({
 
 export default connect((state: State) => ({
   initialValues: {
-    title: state.opinion.currentVersionId && state.opinion.versionsById[state.opinion.currentVersionId].title,
-    body: state.opinion.currentVersionId && state.opinion.versionsById[state.opinion.currentVersionId].body,
-    comment: state.opinion.currentVersionId && state.opinion.versionsById[state.opinion.currentVersionId].comment,
+    title: state.opinion.currentVersionId &&
+      state.opinion.versionsById[state.opinion.currentVersionId].title,
+    body: state.opinion.currentVersionId &&
+      state.opinion.versionsById[state.opinion.currentVersionId].body,
+    comment: state.opinion.currentVersionId &&
+      state.opinion.versionsById[state.opinion.currentVersionId].comment,
   },
-  opinionId: state.opinion.currentVersionId && state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
+  opinionId: state.opinion.currentVersionId &&
+    state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
   versionId: state.opinion.currentVersionId,
-}))(reduxForm({
-  form: formName,
-  onSubmit,
-  validate,
-})(OpinionVersionEditForm));
+}))(
+  reduxForm({
+    form: formName,
+    onSubmit,
+    validate,
+  })(OpinionVersionEditForm),
+);
