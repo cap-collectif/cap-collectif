@@ -17,7 +17,7 @@ const validate = ({ body, title, comment }: Object, props: Object) => {
     errors.title = 'global.required';
   }
   if (comment) {
-    if ($(comment).text().length <= 2) {
+    if ($(comment).text().length < 2) {
       errors.comment = 'opinion.version.comment_error';
     }
   } else {

@@ -22,7 +22,7 @@ const validate = ({ confirm, title, comment }) => {
     errors.title = 'global.required';
   }
   if (comment) {
-    if ($(comment).text().length <= 2) {
+    if ($(comment).text().length < 2) {
       errors.comment = 'opinion.version.comment_error';
     }
   } else {
