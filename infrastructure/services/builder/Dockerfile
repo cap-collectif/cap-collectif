@@ -41,7 +41,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
 
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.10.2
+ENV NODE_VERSION 6.10.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
@@ -66,7 +66,7 @@ RUN pip install pep8 autopep8
 
 # Install composer & php-cs-fixer
 RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer && \
-    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.3.0/php-cs-fixer.phar -O /usr/bin/php-cs-fixer && \
+    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.2.1/php-cs-fixer.phar -O /usr/bin/php-cs-fixer && \
     chmod +x /usr/bin/composer && \
     chmod +x /usr/bin/php-cs-fixer
 
