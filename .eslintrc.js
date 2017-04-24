@@ -32,7 +32,6 @@ module.exports = {
     'jest/no-identical-title': 'error',
     'flowtype/boolean-style': ['error', 'boolean'],
     'flowtype/define-flow-type': 1,
-    'flowtype/delimiter-dangle': ['error', 'never'],
     'flowtype/generic-spacing': ['error', 'never'],
     'flowtype/no-primitive-constructor-types': 'error',
     'flowtype/no-weak-types': ['error', { Object: false, Function: false }],

@@ -205,7 +205,7 @@ export default connect((state: State, props: PassedProps) => {
       .filter(s => s.type === 'collect' || s.type === 'selection')
       .map(s => {
         const selectionAsArray = proposal.selections.filter(
-          sel => sel.step.id === s.id,
+          selection => selection.step.id === s.id,
         );
         s.selected = s.type === 'collect' || selectionAsArray.length > 0;
         if (s.type === 'collect') {
