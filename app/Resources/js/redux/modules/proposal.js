@@ -856,10 +856,12 @@ export type ProposalAction =
   | RequestVotingAction
   | RequestLoadProposalsAction
   | ChangeTermAction
+  | ChangeOrderAction
   | OpenDeleteProposalModalAction
   | ChangePageAction
   | CloseCreateModalAction
   | OpenVoteModalAction
+  | OpenVotesModalAction
   | CancelSubmitProposalAction
   | SubmitProposalFormAction
   | OpenDeleteProposalModalAction
