@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
 import { IntlMixin } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import ReportForm, { formName } from './ReportForm';
+import ReportForm from './ReportForm';
 import { closeModal } from '../../redux/modules/report';
 
 const ReportModal = React.createClass({
@@ -24,7 +23,8 @@ const ReportModal = React.createClass({
       <Modal
         show={show}
         onHide={() => dispatch(closeModal())}
-        aria-labelledby="report-modal-title-lg">
+        aria-labelledby="report-modal-title-lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
@@ -32,7 +32,10 @@ const ReportModal = React.createClass({
           />
         </Modal.Header>
         <Modal.Body>
-          <ReportForm onSubmit={onSubmit} />
+          <ReportForm
+            ref={c => this.form = c}
+            onSubmit={onSubmit}
+          />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={() => dispatch(closeModal())} />
@@ -40,20 +43,18 @@ const ReportModal = React.createClass({
             id="report-button-submit"
             label="global.report.submit"
             isSubmitting={isLoading}
-            onSubmit={() => {
-              dispatch(submit(formName));
-            }}
+            onSubmit={() => this.form.form.submit()}
           />
         </Modal.Footer>
       </Modal>
     );
   },
+
 });
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoading: state.report.currentReportingModal === ownProps.id &&
-      isSubmitting(formName)(state),
+    isLoading: state.report.currentReportingModal === ownProps.id && state.report.isLoading,
   };
 };
 

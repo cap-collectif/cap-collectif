@@ -65,8 +65,10 @@ class ProjectDownloadResolver
     {
         $headers = [
             'id',
+            'expired',
             'author',
             'author_id',
+            'author_email',
             'phone',
             'created',
             'anonymous',
@@ -333,8 +335,10 @@ class ProjectDownloadResolver
     {
         $item = [
             'id' => $reply['id'],
+            'expired' => $reply['expired'],
             'author' => $reply['author']['username'],
             'author_id' => $reply['author']['id'],
+            'author_email' => $reply['author']['email'],
             'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),

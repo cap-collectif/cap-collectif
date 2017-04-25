@@ -1,44 +1,7 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
+import OpinionForm, { defaultValidation } from './OpinionForm';
 import Fetcher, { json } from '../../../services/Fetcher';
-import type { Dispatch } from '../../../types';
-import renderInput from '../../Form/Field';
-import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
-
-export const formName = 'opinion-create-form';
-const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
-  const { opinionType, projectId, stepId } = props;
-  const appendices = opinionType.appendixTypes
-    .filter(type => data[type.title] && data[type.title].length > 0)
-    .map(type => ({ appendixType: type.id, body: data[type.title] }));
-  const form = {
-    title: data.title,
-    body: data.body,
-    appendices,
-  };
-  return Fetcher.post(
-    `/projects/${projectId}/steps/${stepId}/opinion_types/${opinionType.id}/opinions`,
-    form,
-  )
-    .then(json)
-    .then((opinion: Object) => {
-      dispatch(closeOpinionCreateModal());
-      window.location.href = opinion._links.show;
-    });
-};
-
-const validate = ({ title, body }: Object) => {
-  const errors = {};
-  if (!title || title.length < 2) {
-    errors.title = 'opinion.constraints.title';
-  }
-  if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length < 2) {
-    errors.body = 'opinion.constraints.body';
-  }
-  return errors;
-};
 
 export const OpinionCreateForm = React.createClass({
   propTypes: {
@@ -46,50 +9,64 @@ export const OpinionCreateForm = React.createClass({
     stepId: PropTypes.number.isRequired,
     opinionType: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired,
+    onFailure: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
+  handleSubmit(data) {
+    const { opinionType, projectId, stepId, onSubmitSuccess, onFailure } = this.props;
+    const appendices = opinionType.appendixTypes
+      .filter(type => data[type.title] && data[type.title].length > 0)
+      .map(type => ({ appendixType: type.id, body: data[type.title] }),
+    );
+    const form = {
+      title: data.title,
+      body: data.body,
+      appendices,
+    };
+    return Fetcher
+        .post(`/projects/${projectId}/steps/${stepId}/opinion_types/${opinionType.id}/opinions`, form)
+        .then(json)
+        .then((opinion) => {
+          this.form.form.reset();
+          onSubmitSuccess();
+          window.location.href = opinion._links.show;
+        })
+        .catch(onFailure)
+    ;
+  },
+
+  submit() {
+    this.form.form.submit();
+  },
+
+  isValid() {
+    return this.form.form.valid;
+  },
+
   render() {
-    const { opinionType, step, handleSubmit } = this.props;
-    if (!opinionType) return null;
+    const { opinionType, onFailure, step } = this.props;
+    if (!opinionType) return;
+    const dynamicsField = opinionType.appendixTypes.map((type) => {
+      return { name: type.title, label: type.title, type: 'editor', id: `appendix_${type.id}` };
+    });
     return (
-      <form id="opinion-create-form" onSubmit={handleSubmit}>
-        <Field
-          name="title"
-          type="text"
-          id="opinion_title"
-          component={renderInput}
-          help={step.titleHelpText}
-          autoFocus
-          label={this.getIntlMessage('opinion.title')}
-        />
-        <Field
-          name="body"
-          type="editor"
-          id="opinion_body"
-          component={renderInput}
-          help={step.descriptionHelpText}
-          autoFocus
-          label={this.getIntlMessage('opinion.body')}
-        />
-        {opinionType.appendixTypes.map((field, index) => (
-          <Field
-            key={index}
-            component={renderInput}
-            name={field.title}
-            label={field.title}
-            type="editor"
-            id={`appendix_${index}`}
-          />
-        ))}
-      </form>
+      <OpinionForm
+        form="opinion-create-form"
+        validate={defaultValidation}
+        ref={c => this.form = c}
+        onSubmit={this.handleSubmit}
+        onSubmitFail={onFailure}
+        fields={[
+          { name: 'title', label: 'title', type: 'text', id: 'opinion_title', help: step.titleHelpText },
+          { name: 'body', label: 'body', type: 'editor', id: 'opinion_body', help: step.descriptionHelpText },
+        ].concat(dynamicsField)
+        }
+      />
     );
   },
+
 });
 
-export default reduxForm({
-  form: formName,
-  onSubmit,
-  validate,
-})(OpinionCreateForm);
+export default OpinionCreateForm;

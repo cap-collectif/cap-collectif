@@ -1,10 +1,8 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
-import { openOpinionCreateModal } from '../../redux/modules/opinion';
 
 const NewOpinionButton = React.createClass({
   propTypes: {
@@ -13,28 +11,33 @@ const NewOpinionButton = React.createClass({
     stepId: PropTypes.number.isRequired,
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
+  getInitialState() {
+    return {
+      modal: false,
+    };
+  },
+
+  openModal() {
+    this.setState({ modal: true });
+  },
+
+  closeModal() {
+    this.setState({ modal: false });
+  },
+
   render() {
-    const {
-      dispatch,
-      label,
-      opinionTypeSlug,
-      opinionTypeId,
-      projectId,
-      stepId,
-    } = this.props;
+    const { label, opinionTypeSlug, opinionTypeId, projectId, stepId } = this.props;
     return (
       <span>
         <LoginOverlay>
           <a
             id={`btn-add--${opinionTypeSlug}`}
-            onClick={() => {
-              dispatch(openOpinionCreateModal(opinionTypeId));
-            }}
-            className="btn btn-primary">
+            onClick={this.openModal}
+            className="btn btn-primary"
+          >
             <i className="cap cap-add-1" />
             <span className="hidden-xs">{label}</span>
           </a>
@@ -43,10 +46,13 @@ const NewOpinionButton = React.createClass({
           opinionTypeId={opinionTypeId}
           stepId={stepId}
           projectId={projectId}
+          show={this.state.modal}
+          onClose={this.closeModal}
         />
       </span>
     );
   },
+
 });
 
-export default connect()(NewOpinionButton);
+export default NewOpinionButton;

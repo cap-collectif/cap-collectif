@@ -1,36 +1,46 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import OpinionEditModal from './Edit/OpinionEditModal';
-import { openOpinionEditModal } from '../../redux/modules/opinion';
 
-export const OpinionEditButton = React.createClass({
+const OpinionEditButton = React.createClass({
   propTypes: {
-    dispatch: PropTypes.func.isRequired,
     opinion: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
+  getInitialState() {
+    return {
+      modal: false,
+    };
+  },
+
+  openModal() {
+    this.setState({ modal: true });
+  },
+
+  closeModal() {
+    this.setState({ modal: false });
+  },
+
   render() {
-    const { opinion, dispatch } = this.props;
+    const { opinion } = this.props;
     return (
       <span>
-        <Button
-          className="opinion__action--edit pull-right btn--outline btn-dark-gray"
-          onClick={() => {
-            dispatch(openOpinionEditModal(opinion.id));
-          }}>
-          <i className="cap cap-pencil-1" />
-          {' '}
-          {this.getIntlMessage('global.edit')}
+        <Button className="opinion__action--edit pull-right btn--outline btn-dark-gray" onClick={this.openModal}>
+          <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
         </Button>
-        {' '}
-        <OpinionEditModal opinion={opinion} />
+        { ' ' }
+        <OpinionEditModal
+          opinion={opinion}
+          show={this.state.modal}
+          onClose={this.closeModal}
+        />
       </span>
     );
   },
+
 });
 
-export default connect()(OpinionEditButton);
+export default OpinionEditButton;
