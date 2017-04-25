@@ -12,6 +12,7 @@ describe('<OpinionLinkCreateForm />', () => {
   const props = {
     availableTypes,
     currentType: availableTypes[0],
+    handleSubmit: jest.fn(),
     opinion: {},
     ...IntlData,
   };

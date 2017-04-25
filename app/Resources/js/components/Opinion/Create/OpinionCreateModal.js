@@ -11,7 +11,7 @@ import Fetcher from '../../../services/Fetcher';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
-const OpinionCreateModal = React.createClass({
+export const OpinionCreateModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     projectId: PropTypes.string.isRequired,

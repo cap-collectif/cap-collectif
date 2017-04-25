@@ -7,17 +7,7 @@ import IntlData from '../../../translations/FR';
 
 describe('<OpinionEditForm />', () => {
   const props = {
-    fields: [
-      {
-        name: 'title',
-        label: 'title',
-      },
-      {
-        name: 'body',
-        label: 'body',
-      },
-    ],
-    form: 'test-form',
+    handleSubmit: jest.fn(),
     opinion: {
       appendices: [{ type: { title: 'Exposé des motifs' } }],
       title: 'titre',
