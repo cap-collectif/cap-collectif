@@ -91,10 +91,8 @@ export const OpinionLinkCreateForm = React.createClass({
   },
 });
 
-const mapStateToProps = (
-  state: State,
-  { availableTypes }: { availableTypes: Array<Object> },
-) => {
+type PassedProps = { availableTypes: Array<Object> };
+const mapStateToProps = (state: State, { availableTypes }: PassedProps) => {
   const currentTypeId = formValueSelector('OpinionLinkSelectTypeForm')(
     state,
     'opinionType',
@@ -115,7 +113,7 @@ type Props = {
     opinionType: ?Uuid,
   },
 };
-const connector: Connector<{}, Props> = connect(mapStateToProps);
+const connector: Connector<PassedProps, Props> = connect(mapStateToProps);
 
 export default connector(
   reduxForm({

@@ -124,18 +124,18 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
-    "enzyme": "^2.8.0",
-    "eslint": "^3.18.0",
+    "babel-eslint": "^7.2.3",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-prettier": "^1.7.0",
-    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-flowtype": "^2.32.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jest": "^19.0.1",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.42.0",
+    "flow-bin": "^0.44.2",
     "jest": "^19.0.2",
     "jest-serializer-enzyme": "^1.0.0",
     "react-addons-test-utils": "^15.4.2"
