@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
-import renderInput from '../Form/Input';
+import renderInput from '../Form/Field';
 
-const formName = 'report-form';
+export const formName = 'report-form';
 const validate = ({ status, body }) => {
   const errors = {};
-  if (!status) {
+  if (!status || status < 0) {
     errors.status = 'global.constraints.notBlank';
   }
   if (!body || body.length < 2) {
@@ -33,8 +33,8 @@ const ReportForm = React.createClass({
           type="select"
           clearable={false}
           inputClassName={null}
-          labelClassName={null}
-          placeholder={this.getIntlMessage('global.select')}>
+          labelClassName={null}>
+          <option value={-1}>{this.getIntlMessage('global.select')}</option>
           <option value={1}>
             {this.getIntlMessage('reporting.status.offending')}
           </option>
