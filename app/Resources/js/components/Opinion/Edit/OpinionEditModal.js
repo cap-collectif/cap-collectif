@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -7,20 +8,20 @@ import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State } from '../../../types';
+import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 
 export const OpinionEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     opinion: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { dispatch, submitting, onClose, show, opinion, step } = this.props;
+    const { dispatch, submitting, show, opinion, step } = this.props;
     return (
       <Modal
         animation={false}
@@ -29,8 +30,7 @@ export const OpinionEditModal = React.createClass({
           if (
             window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))
           ) {
-            // eslint-disable-line no-alert
-            onClose();
+            dispatch(closeOpinionEditModal());
           }
         }}
         bsSize="large"
@@ -44,7 +44,11 @@ export const OpinionEditModal = React.createClass({
           <OpinionEditForm opinion={opinion} step={step} />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton
+            onClose={() => {
+              dispatch(closeOpinionEditModal());
+            }}
+          />
           <SubmitButton
             label="global.edit"
             id={'confirm-opinion-update'}
@@ -59,16 +63,13 @@ export const OpinionEditModal = React.createClass({
   },
 });
 
-export default connect(
-  (state: State) => {
-    return {
-      submitting: isSubmitting(formName)(state),
-      step: state.project.projectsById[
-        state.project.currentProjectById
-      ].steps.filter(step => step.type === 'consultation')[0],
-    };
-  },
-  null,
-  null,
-  { withRef: true },
-)(OpinionEditModal);
+export default connect((state: State, props: Object) => {
+  return {
+    show: state.opinion.showOpinionEditModal === props.opinion.id,
+    submitting: isSubmitting(formName)(state),
+    step: state.project.currentProjectById &&
+      state.project.projectsById[state.project.currentProjectById].steps.filter(
+        step => step.type === 'consultation',
+      )[0],
+  };
+})(OpinionEditModal);

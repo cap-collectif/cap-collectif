@@ -4,7 +4,7 @@ import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { Dispatch } from '../../../types';
-import renderInput from '../../Form/Input';
+import renderInput from '../../Form/Field';
 
 export const formName = 'opinion-edit-form';
 const validate = ({ title, body, check }: Object) => {

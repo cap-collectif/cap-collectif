@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -7,6 +8,7 @@ import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import Fetcher from '../../../services/Fetcher';
+import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
 const OpinionCreateModal = React.createClass({
@@ -37,15 +39,7 @@ const OpinionCreateModal = React.createClass({
 
   render() {
     const { opinionType } = this.state;
-    const {
-      submitting,
-      dispatch,
-      onClose,
-      show,
-      stepId,
-      projectId,
-      step,
-    } = this.props;
+    const { submitting, dispatch, show, stepId, projectId, step } = this.props;
     return (
       <Modal
         animation={false}
@@ -54,8 +48,7 @@ const OpinionCreateModal = React.createClass({
           if (
             window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))
           ) {
-            // eslint-disable-line no-alert
-            onClose();
+            dispatch(closeOpinionCreateModal());
           }
         }}
         bsSize="large"
@@ -79,7 +72,11 @@ const OpinionCreateModal = React.createClass({
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton
+            onClose={() => {
+              dispatch(closeOpinionCreateModal());
+            }}
+          />
           <SubmitButton
             label="global.create"
             id="confirm-opinion-create"
@@ -94,14 +91,10 @@ const OpinionCreateModal = React.createClass({
   },
 });
 
-export default connect(
-  (state: State, props: Object) => {
-    return {
-      submitting: isSubmitting(formName)(state),
-      step: state.project.projectsById[props.projectId].stepsById[props.stepId],
-    };
-  },
-  null,
-  null,
-  { withRef: true },
-)(OpinionCreateModal);
+export default connect((state: State, props: Object) => {
+  return {
+    show: state.opinion.showOpinionCreateModal === props.opinionTypeId,
+    submitting: isSubmitting(formName)(state),
+    step: state.project.projectsById[props.projectId].stepsById[props.stepId],
+  };
+})(OpinionCreateModal);

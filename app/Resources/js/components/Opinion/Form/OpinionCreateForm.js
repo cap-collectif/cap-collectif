@@ -4,11 +4,12 @@ import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { Dispatch } from '../../../types';
-import renderInput from '../../Form/Input';
+import renderInput from '../../Form/Field';
+import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 
 export const formName = 'opinion-create-form';
 const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
-  const { opinionType, projectId, stepId, onFailure } = props;
+  const { opinionType, projectId, stepId } = props;
   const appendices = opinionType.appendixTypes
     .filter(type => data[type.title] && data[type.title].length > 0)
     .map(type => ({ appendixType: type.id, body: data[type.title] }));
@@ -23,9 +24,9 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
   )
     .then(json)
     .then((opinion: Object) => {
+      dispatch(closeOpinionCreateModal());
       window.location.href = opinion._links.show;
-    })
-    .catch(onFailure);
+    });
 };
 
 const validate = ({ title, body }: Object) => {
