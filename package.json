@@ -1,20 +1,17 @@
 {
-  "name": "cap-collectif-SF2",
+  "name": "platform",
   "private": true,
-  "version": "0.1.0",
-  "description": "Cap-Collectif version Symfony2",
-  "main": "brunch-config.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --coverage",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll",
     "typecheck": "flow check",
-    "test:watch": "NODE_ENV=test jest --watchAll",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
-    "checkcs": "./node_modules/eslint/bin/eslint.js app/Resources/js",
-    "lint": "./node_modules/eslint/bin/eslint.js --cache --fix app/Resources/js",
+    "checkcs": "eslint app/Resources/js",
+    "lint": "eslint --cache --fix app/Resources/js",
     "prettier": "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80 \"app/Resources/js/**/*.js\"",
     "precommit": "lint-staged"
   },
@@ -25,15 +22,6 @@
       "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
       "git add"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jolicode/CapCollectif-SF2"
-  },
-  "author": "lbrunet@jolicode.com",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jolicode/CapCollectif-SF2/issues"
   },
   "jest": {
     "roots": [
@@ -51,7 +39,6 @@
       ".*": "<rootDir>/node_modules/babel-jest"
     }
   },
-  "homepage": "https://github.com/jolicode/CapCollectif-SF2",
   "dependencies": {
     "autosize": "^3.0.15",
     "babel-brunch": "^6.1.1",
