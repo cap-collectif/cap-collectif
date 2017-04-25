@@ -5,7 +5,7 @@
   "description": "Cap-Collectif version Symfony2",
   "main": "brunch-config.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --coverage",
     "typecheck": "flow check",
     "test:watch": "NODE_ENV=test jest --watchAll",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",

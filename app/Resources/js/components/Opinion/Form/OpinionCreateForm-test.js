@@ -2,9 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateForm } from './OpinionCreateForm';
-import { defaultValidation } from './OpinionForm';
 import IntlData from '../../../translations/FR';
-
 
 describe('<OpinionCreateForm />', () => {
   const props = {
@@ -14,11 +12,15 @@ describe('<OpinionCreateForm />', () => {
       titleHelpText: null,
       descriptionHelpText: null,
     },
-    opinionType: { appendixTypes: [{
-      type: '1',
-      id: '1',
-      title: 'appendice',
-    }] },
+    opinionType: {
+      appendixTypes: [
+        {
+          type: '1',
+          id: '1',
+          title: 'appendice',
+        },
+      ],
+    },
     fields: [
       {
         name: 'title',
@@ -40,7 +42,6 @@ describe('<OpinionCreateForm />', () => {
     const wrapper = shallow(<OpinionCreateForm {...props} />);
     expect(wrapper.is('OpinionForm')).toEqual(true);
     expect(wrapper.prop('form')).toEqual('opinion-create-form');
-    expect(wrapper.prop('validate')).toEqual(defaultValidation);
     expect(wrapper.prop('fields')).toEqual([
       {
         id: 'opinion_title',
