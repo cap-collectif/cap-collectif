@@ -52,7 +52,7 @@ export const OpinionCreateForm = React.createClass({
 
   render() {
     const { opinionType, step, handleSubmit } = this.props;
-    if (!opinionType) return;
+    if (!opinionType) return null;
     return (
       <form id="opinion-create-form" onSubmit={handleSubmit}>
         <Field

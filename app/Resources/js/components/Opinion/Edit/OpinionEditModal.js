@@ -51,7 +51,7 @@ export const OpinionEditModal = React.createClass({
           />
           <SubmitButton
             label="global.edit"
-            id={'confirm-opinion-update'}
+            id="confirm-opinion-update"
             isSubmitting={submitting}
             onSubmit={() => {
               dispatch(submit(formName));
@@ -63,13 +63,13 @@ export const OpinionEditModal = React.createClass({
   },
 });
 
-export default connect((state: State, props: Object) => {
-  return {
-    show: state.opinion.showOpinionEditModal === props.opinion.id,
-    submitting: isSubmitting(formName)(state),
-    step: state.project.currentProjectById &&
-      state.project.projectsById[state.project.currentProjectById].steps.filter(
-        step => step.type === 'consultation',
-      )[0],
-  };
-})(OpinionEditModal);
+const mapStateToProps = (state: State, props: Object) => ({
+  show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
+  submitting: isSubmitting(formName)(state),
+  step: state.project.currentProjectById &&
+    state.project.projectsById[state.project.currentProjectById].steps.filter(
+      step => step.type === 'consultation',
+    )[0],
+});
+
+export default connect(mapStateToProps)(OpinionEditModal);

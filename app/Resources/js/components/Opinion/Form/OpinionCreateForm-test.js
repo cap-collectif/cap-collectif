@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -6,6 +7,7 @@ import IntlData from '../../../translations/FR';
 
 describe('<OpinionCreateForm />', () => {
   const props = {
+    handleSubmit: jest.fn(),
     projectId: '1',
     stepId: 1,
     step: {
@@ -21,51 +23,11 @@ describe('<OpinionCreateForm />', () => {
         },
       ],
     },
-    fields: [
-      {
-        name: 'title',
-        label: 'title',
-      },
-      {
-        name: 'body',
-        label: 'body',
-      },
-    ],
-    onSubmitSuccess: () => {},
-    onFailure: () => {},
-    handleSubmit: () => {},
-    validate: () => {},
     ...IntlData,
   };
 
-  it('renders a form', () => {
+  it('renders correctly', () => {
     const wrapper = shallow(<OpinionCreateForm {...props} />);
-    expect(wrapper.is('OpinionForm')).toEqual(true);
-    expect(wrapper.prop('form')).toEqual('opinion-create-form');
-    expect(wrapper.prop('fields')).toEqual([
-      {
-        id: 'opinion_title',
-        label: 'title',
-        name: 'title',
-        type: 'text',
-        help: null,
-      },
-      {
-        id: 'opinion_body',
-        label: 'body',
-        name: 'body',
-        type: 'editor',
-        help: null,
-      },
-      {
-        id: 'appendix_1',
-        label: 'appendice',
-        name: 'appendice',
-        type: 'editor',
-      },
-    ]);
-    expect(wrapper.prop('initialValues')).not.toBeDefined();
-    expect(wrapper.prop('onSubmitFail')).toEqual(props.onFailure);
-    expect(wrapper.prop('onSubmit')).toBeDefined();
+    expect(wrapper).toMatchSnapshot();
   });
 });

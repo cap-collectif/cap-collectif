@@ -2,9 +2,12 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
-import type { Dispatch } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
+import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 
 export const formName = 'opinion-edit-form';
 const validate = ({ title, body, check }: Object) => {
@@ -41,17 +44,15 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
   return Fetcher.put(`/opinions/${opinion.id}`, form)
     .then(json)
     .then(opinionUpdated => {
+      dispatch(closeOpinionEditModal());
       window.location.href = opinionUpdated._links.show;
     });
 };
-
-// check: 'opinion.edit_check',
 
 export const OpinionEditForm = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -62,8 +63,9 @@ export const OpinionEditForm = React.createClass({
       <form id={formName} onSubmit={handleSubmit}>
         <Field
           name="check"
-          label="check"
+          label={this.getIntlMessage('opinion.edit_check')}
           type="checkbox"
+          component={renderInput}
           id="opinion_check"
           divClassName="alert alert-warning edit-confirm-alert"
         />
@@ -100,18 +102,27 @@ export const OpinionEditForm = React.createClass({
   },
 });
 
-// const dynamicsInitialValues = {};
-// for (const appendix of opinion.appendices) {
-//   dynamicsInitialValues[appendix.type.title] = appendix.body;
-// }
-
-export default reduxForm({
-  form: formName,
-  // initialValues={{
-  //   title: opinion.title,
-  //   body: opinion.body,
-  //   ...dynamicsInitialValues,
-  // }},
-  onSubmit,
-  validate,
-})(OpinionEditForm);
+const mapStateToProps = (state: State, { opinion }: Object) => {
+  const dynamicsInitialValues = {};
+  for (const appendix of opinion.appendices) {
+    dynamicsInitialValues[appendix.type.title] = appendix.body;
+  }
+  return {
+    initialValues: {
+      title: opinion.title,
+      body: opinion.body,
+      ...dynamicsInitialValues,
+    },
+  };
+};
+type Props = {
+  initialValues: Object,
+};
+const connector: Connector<{}, Props> = connect(mapStateToProps);
+export default connector(
+  reduxForm({
+    form: formName,
+    onSubmit,
+    validate,
+  })(OpinionEditForm),
+);

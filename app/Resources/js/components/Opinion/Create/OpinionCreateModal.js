@@ -20,7 +20,6 @@ const OpinionCreateModal = React.createClass({
     opinionTypeId: PropTypes.string.isRequired,
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 

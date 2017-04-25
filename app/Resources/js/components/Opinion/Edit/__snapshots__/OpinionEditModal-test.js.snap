@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionEditModal /> renders correctly 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "modals": Array [],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  show={true}
+>
+  <ModalHeader
+    aria-label="Close"
+    bsClass="modal"
+    closeButton={true}
+  >
+    <ModalTitle
+      bsClass="modal"
+      id="contained-modal-title-lg"
+    >
+      Modifier
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal"
+  >
+    <ReduxForm
+      opinion={Object {}}
+      step={Object {}}
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      id="confirm-opinion-update"
+      isSubmitting={false}
+      label="global.edit"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;

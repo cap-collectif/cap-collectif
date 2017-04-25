@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import OpinionEditModal from './Edit/OpinionEditModal';
 import { openOpinionEditModal } from '../../redux/modules/opinion';
 
-const OpinionEditButton = React.createClass({
+export const OpinionEditButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     opinion: PropTypes.object.isRequired,
