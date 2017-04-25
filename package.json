@@ -5,6 +5,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "typecheck": "flow check",
+    "typecheck:coverage": "flow-coverage-report -i 'app/Resources/js/**/*.js'",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
@@ -123,6 +124,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.44.2",
+    "flow-coverage-report": "^0.3.0",
     "jest": "^19.0.2",
     "jest-serializer-enzyme": "^1.0.0",
     "react-addons-test-utils": "^15.4.2"
