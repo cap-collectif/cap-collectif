@@ -18,8 +18,8 @@ export const ProposalAdminStepSelector = React.createClass({
     dispatch: PropTypes.func.isRequired,
     step: PropTypes.object.isRequired,
     proposalId: PropTypes.number.isRequired,
-    lastEditedStepId: PropTypes.number,
-    lastNotifiedStepId: PropTypes.number,
+    lastEditedStepId: PropTypes.string,
+    lastNotifiedStepId: PropTypes.string,
   },
   mixins: [IntlMixin],
 
