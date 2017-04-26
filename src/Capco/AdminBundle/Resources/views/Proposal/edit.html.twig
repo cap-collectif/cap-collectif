@@ -1,5 +1,14 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+{% block javascripts %}
+{{ parent() }}
+<script>
+setTimeout(function() {
+  jQuery("input[type='checkbox']").iCheck('destroy');
+}, 1000)
+</script>
+{% endblock %}
+
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' with {
       'project': admin.subject.proposalForm.step.getProject(),

@@ -59,13 +59,14 @@ type PassedProps = {
 };
 
 export default connect((state: State, props: PassedProps) => {
-  const steps = state.project.projectsById[props.projectId].stepsById;
+  const stepsById = state.project.projectsById[props.projectId].stepsById;
   const proposal = state.proposal.proposalsById[props.proposalId];
   return {
-    steps: Object.keys(steps)
-      .map(i => steps[i])
+    steps: Object.keys(stepsById)
+      .map(i => stepsById[i])
       .filter(step => step.type === 'collect' || step.type === 'selection')
-      .map(step => {
+      .map(s => {
+        const step = { ...s };
         const selectionAsArray = proposal.selections.filter(
           selection => selection.step.id === step.id,
         );
