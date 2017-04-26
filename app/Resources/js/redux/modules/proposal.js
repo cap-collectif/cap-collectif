@@ -17,7 +17,7 @@ import type {
 
 const PROPOSAL_PAGINATION = 51;
 
-type Status = { id: number };
+type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
   type: 'proposal/CHANGE_FILTER',
   filter: string,
@@ -108,12 +108,14 @@ type SendProposalNotificationFailedAction = {
   type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR',
   error: string,
 };
-
-// type Step = {
-//   type: string,
-//   id: number
-// };
-type ProposalMap = { [id: number]: Object };
+type Step = {
+  type?: string,
+  statuses?: Array<Status>,
+  id: number,
+};
+type Selection = { step: Step, status: ?Status };
+type Proposal = { selections: Array<Selection> } & Object;
+type ProposalMap = { [id: number]: Proposal };
 export type State = {
   +queryCount: ?number,
   +currentProposalId: ?number,
@@ -583,7 +585,7 @@ export const deleteVote = (
       break;
     default:
       console.log('unknown step'); // eslint-disable-line no-console
-      return;
+      return false;
   }
   return Fetcher.delete(url)
     .then(json)
@@ -854,10 +856,12 @@ export type ProposalAction =
   | RequestVotingAction
   | RequestLoadProposalsAction
   | ChangeTermAction
+  | ChangeOrderAction
   | OpenDeleteProposalModalAction
   | ChangePageAction
   | CloseCreateModalAction
   | OpenVoteModalAction
+  | OpenVotesModalAction
   | CancelSubmitProposalAction
   | SubmitProposalFormAction
   | OpenDeleteProposalModalAction

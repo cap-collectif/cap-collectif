@@ -8,6 +8,8 @@
 /web/uploads/*
 /web/export/*
 
+coverage/
+
 /var
 /build/
 /vendor/

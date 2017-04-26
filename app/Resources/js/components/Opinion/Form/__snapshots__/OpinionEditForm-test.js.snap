@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionEditForm /> renders a form 1`] = `
+<form
+  id="opinion-edit-form"
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    divClassName="alert alert-warning edit-confirm-alert"
+    id="opinion_check"
+    label="En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés."
+    name="check"
+    type="checkbox"
+  />
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    id="opinion_title"
+    label="Titre*"
+    name="title"
+    type="text"
+  />
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    id="opinion_body"
+    label="Proposition*"
+    name="body"
+    type="editor"
+  />
+  <Field
+    component={[Function]}
+    id="opinion_appendix-1"
+    label="Exposé des motifs"
+    name="Exposé des motifs"
+    type="editor"
+  />
+</form>
+`;

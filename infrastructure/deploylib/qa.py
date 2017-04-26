@@ -23,13 +23,13 @@ def check_codestyle():
     env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
-    env.compose_run('php-cs-fixer fix src --rules=@Symfony --using-cache=no --dry-run --diff', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --rules=@Symfony --using-cache=no --dry-run --diff src', 'builder', '.', no_deps=True)
 
 
 @task(environments=['local'])
 def lint():
     "Lint"
-    env.compose_run('php-cs-fixer fix src --rules=@Symfony --using-cache=no --diff || echo true', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --rules=@Symfony --using-cache=no --diff src || echo true', 'builder', '.', no_deps=True)
     env.compose_run('yarn run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
@@ -38,6 +38,7 @@ def lint():
 def static_analysis():
     "Run static analysis tools"
     local('yarn run typecheck')
+    local('yarn run typecheck:coverage || true')
     env.service_command('php bin/phpstan analyse src || true', 'application', env.www_app)
 
 
