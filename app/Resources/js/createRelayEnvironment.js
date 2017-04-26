@@ -3,16 +3,19 @@ import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
 function fetchQuery(operation, variables) {
+  console.log(operation, variables);
   return fetch(
-    `${typeof window !== 'undefined' ? window.location.host : 'capco.test'}/graphql`,
+    `${typeof window !== 'undefined' ? window.location.protocol : 'http'}//${typeof window !== 'undefined' ? window.location.host : 'capco.test'}/graphql/`,
     {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-      }, // Add authentication and other headers here
+        // Add authentication and other headers here
+      },
       body: JSON.stringify({
-        query: operation.text, // GraphQL text from input
+        operationName: operation.name,
+        query: operation.text,
         variables,
       }),
     },

@@ -22,7 +22,11 @@ exports.config = {
   },
   conventions: {
     assets: /^app\/Resources\/assets/,
-    ignored: [/[\\/]_/, 'app/Resources/js-server/registration.js', /-test.js$/],
+    ignored: [
+      /^app\/Resources\/scss\/(modules|base)/,
+      'app/Resources/js-server/registration.js',
+      /-test.js$/,
+    ],
   },
   files: {
     javascripts: {

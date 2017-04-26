@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../../createRelayEnvironment';
+// import './__generated__/ConsultationPropositionBoxQuery.graphql';
 
 class ConsultationPropositionBox extends Component {
   render() {
@@ -12,7 +13,7 @@ class ConsultationPropositionBox extends Component {
           environment={environment}
           query={graphql`
             query ConsultationPropositionBoxQuery {
-              contributions {
+              contributions(consultation: 5) {
                 id
               }
             }

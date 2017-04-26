@@ -1,7 +1,6 @@
 Query:
     type: object
     config:
-        description: "A humanoid creature in the Star Wars universe."
         fields:
             users:
                 type: "[User]"
