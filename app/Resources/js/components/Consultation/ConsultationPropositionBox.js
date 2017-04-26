@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../../createRelayEnvironment';
-// import './__generated__/ConsultationPropositionBoxQuery.graphql';
 
 class ConsultationPropositionBox extends Component {
   render() {
