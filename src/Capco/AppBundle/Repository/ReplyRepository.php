@@ -50,8 +50,7 @@ class ReplyRepository extends EntityRepository
 
     public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire)
     {
-      $qb = $this->createQueryBuilder('reply')
-            ->andWhere('reply.enabled = true')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author')
             ->leftJoin('reply.author', 'author')
             ->andWhere('reply.questionnaire = :questionnaire')

@@ -38,11 +38,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container container--custom">
-        {% if null != content_body %}
-            {{ content_body|raw }}
-        {% endif %}
-    </div>
+
+    {% if null != content_body %}
+      <div class="container container--custom">
+        {{ content_body|raw }}
+      </div>
+    {% endif %}
 
     <div class="container container--custom">
         {{
