@@ -583,7 +583,7 @@ export const deleteVote = (
       break;
     default:
       console.log('unknown step'); // eslint-disable-line no-console
-      return false;
+      return;
   }
   return Fetcher.delete(url)
     .then(json)
