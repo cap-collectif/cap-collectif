@@ -2,6 +2,8 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
+import ConsultationPropositionBox
+  from '../../Consultation/ConsultationPropositionBox';
 
 const StepInfos = React.createClass({
   displayName: 'StepInfos',
@@ -24,10 +26,10 @@ const StepInfos = React.createClass({
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
         </div>
+        <ConsultationPropositionBox />
       </div>
     );
   },
-
 });
 
 export default StepInfos;
