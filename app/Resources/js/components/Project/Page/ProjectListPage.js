@@ -25,7 +25,9 @@ export const ProjectListPage = React.createClass({
 
   render() {
     const { project, features, dispatch } = this.props;
-    const projects = Object.keys(project.projectsById).filter(id => project.visibleProjects.includes(id)).map(id => project.projectsById[id]) || [];
+    const projects = project.visibleProjects.map(
+      id => project.projectsById[id],
+    );
     return (
       <div>
         <Row>
@@ -34,15 +36,18 @@ export const ProjectListPage = React.createClass({
         <br /><br />
         <Loader show={project.isLoading}>
           <ProjectList projects={projects} />
-          {
-            features.projects_form && project.count > 0 &&
-              <Pagination nbPages={project.pages} current={project.page} onChange={(wantedPage) => {
+          {features.projects_form &&
+            project.count > 0 &&
+            <Pagination
+              nbPages={project.pages}
+              current={project.page}
+              onChange={wantedPage => {
                 if (wantedPage !== project.page) {
-                dispatch(changePage(wantedPage));
-                dispatch(fetchProjects());
-              }
-            }} />
-          }
+                  dispatch(changePage(wantedPage));
+                  dispatch(fetchProjects());
+                }
+              }}
+            />}
         </Loader>
       </div>
     );
@@ -50,9 +55,9 @@ export const ProjectListPage = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-    features: state.default.features,
-    themes: state.default.themes,
-    project: state.project,
+  features: state.default.features,
+  themes: state.default.themes,
+  project: state.project,
 });
 
 export default connect(mapStateToProps)(ProjectListPage);
