@@ -39,11 +39,11 @@
 
 {% block body %}
 
-    {% if null != content_body %}
-        <div class="container  container--custom">
+    <div class="container  container--custom">
+        {% if null != content_body %}
             {{ content_body|raw }}
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 
     <div class="container  container--custom">
 
