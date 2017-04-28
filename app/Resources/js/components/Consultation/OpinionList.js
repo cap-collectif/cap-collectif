@@ -20,7 +20,7 @@ export const OpinionList = React.createClass({
         <div className={`opinion  opinion--${section.color} opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
             <h2 className="pull-left  h4  opinion__header__title">
-              {section.contributions.length} propositions
+              {section.contributionsCount} propositions
             </h2>
             <div className="pull-right  opinion__header__filter">
               <NewOpinionButton
@@ -30,6 +30,23 @@ export const OpinionList = React.createClass({
                 projectId={'5'}
                 label={'Proposer'}
               />
+              {section.contributionsCount > 1 &&
+                <select
+                  className="form-control"
+                  style={{ marginLeft: 15 }}
+                  onChange={value => {
+                    console.log(value);
+                    window.location.href = `${window.location.protocol}//${window.location.host}/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/types/sous-partie-1/${value}`;
+                  }}>
+                  <option value="">Trier par</option>
+                  <option value="positions">Tri ordonné puis aléatoire</option>
+                  <option value="random">Tri aléatoire</option>
+                  <option value="last">Les plus récents</option>
+                  <option value="old">Les plus anciens</option>
+                  <option value="favorable">Les plus favorables</option>
+                  <option value="votes">Les plus votés</option>
+                  <option value="comments">Les plus commentés</option>
+                </select>}
             </div>
           </div>
         </div>
@@ -50,6 +67,7 @@ export default createFragmentContainer(
       id
       slug
       color
+      contributionsCount
       contributions {
         ...Opinion_opinion
       }
