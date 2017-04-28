@@ -26,7 +26,7 @@ const StepInfos = React.createClass({
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
         </div>
-        <ConsultationPropositionBox />
+        <ConsultationPropositionBox consultationId={step.id} />
       </div>
     );
   },

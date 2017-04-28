@@ -101,7 +101,6 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     private $opinions;
 
     /**
-     * @var
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType")
      * @ORM\JoinColumn(name="consultation_step_type_id", onDelete="SET NULL", nullable=true)
      */

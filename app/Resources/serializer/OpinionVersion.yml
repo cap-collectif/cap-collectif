@@ -90,7 +90,7 @@ Capco\AppBundle\Entity\OpinionVersion:
             type: boolean
             groups: [OpinionVersions]
         getVotesCountAll:
-            serialized_name: votes_total
+            serialized_name: votesCount
             type: integer
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentForCount:

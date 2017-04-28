@@ -341,7 +341,7 @@ babel-eslint@^7.2.3:
     babel-types "^6.23.0"
     babylon "^6.17.0"
 
-babel-generator@6.24.0:
+babel-generator@6.24.0, babel-generator@^6.18.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.24.0.tgz#eba270a8cc4ce6e09a61be43465d7c62c1f87c56"
   dependencies:
@@ -354,7 +354,7 @@ babel-generator@6.24.0:
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
-babel-generator@^6.18.0, babel-generator@^6.23.0:
+babel-generator@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.23.0.tgz#6b8edab956ef3116f79d8c84c5a3c05f32a74bc5"
   dependencies:
@@ -5200,14 +5200,14 @@ react-redux@^5.0.3:
     loose-envify "^1.1.0"
 
 react-relay@dev:
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.0.0-rc.2.tgz#652796949cb58f14b39542b9977882ecccd53aa2"
+  version "1.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-1.0.0-rc.3.tgz#72b5c478c294aa28c6f42dae24fe666b0f3b9487"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"
     prop-types "^15.5.8"
     react-static-container "^1.0.1"
-    relay-runtime "1.0.0-rc.2"
+    relay-runtime "1.0.0-rc.3"
 
 react-router-bootstrap@^0.23.1:
   version "0.23.1"
@@ -5483,6 +5483,13 @@ relay-compiler@dev:
 relay-runtime@1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.0.0-rc.2.tgz#3a90c5912aca3c40cd976e689fda5001f8241827"
+  dependencies:
+    babel-runtime "^6.23.0"
+    fbjs "^0.8.1"
+
+relay-runtime@1.0.0-rc.3:
+  version "1.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-1.0.0-rc.3.tgz#710b02f43050e581808bc6551f6f4ae7d17d248d"
   dependencies:
     babel-runtime "^6.23.0"
     fbjs "^0.8.1"

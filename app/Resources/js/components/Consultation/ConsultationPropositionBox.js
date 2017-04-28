@@ -1,46 +1,63 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
+import { Panel } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import environment from '../../createRelayEnvironment';
+import ConsultationFilterForm from './ConsultationFilterForm';
+import SectionRecursiveList from './SectionRecursiveList';
 
-class ConsultationPropositionBox extends Component {
+const ConsultationPropositionBox = React.createClass({
+  propTypes: {
+    consultationId: React.PropTypes.string.isRequired,
+  },
+  mixins: [IntlMixin],
+
   render() {
+    const { consultationId } = this.props;
     return (
       <div>
-        <h2>Liste d'opinions</h2>
+        <Panel>
+          <span>
+            Filtres de recherche
+          </span>
+          <span className="pull-right">
+            <ConsultationFilterForm />
+          </span>
+        </Panel>
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ConsultationPropositionBoxQuery {
-              contributions(consultation: 5) {
-                id
+            query ConsultationPropositionBoxQuery($consultationId: ID!) {
+              consultations(id: $consultationId) {
+                sections {
+                  ...SectionRecursiveList_sections
+                }
               }
             }
           `}
+          variables={{
+            consultationId,
+          }}
           render={({ error, props }) => {
             if (error) {
               return <div>{error.message}</div>;
             }
             if (props) {
-              console.log(props);
-              return <div />;
+              return (
+                <SectionRecursiveList
+                  // consultationId={props.consultations[0].id}
+                  // consultationProjectId={props.consultations[0].projectId}
+                  sections={props.consultations[0].sections}
+                />
+              );
             }
             return <div>Loading</div>;
           }}
         />
       </div>
     );
-  }
-}
-
-// const Feed = ({ feed }) => (
-//   <ol>
-//     {feed.map(entry => (
-//       <li key={`${entry.repository.owner.login  }/${  entry.repository.name}`}>
-//         {entry.repository.owner.login}/{entry.repository.name}: {entry.repository.stargazers_count} Stars
-//       </li>
-//     ))}
-//   </ol>
-// )
+  },
+});
 
 export default ConsultationPropositionBox;

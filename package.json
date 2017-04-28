@@ -20,6 +20,7 @@
   "pre-commit": "precommit",
   "lint-staged": {
     "*.js": [
+      "flow check",
       "eslint --fix",
       "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
       "git add"

@@ -2,6 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Source;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
@@ -72,9 +79,41 @@ class ConsultationResolver implements ContainerAwareInterface
         );
     }
 
-    public function resolveConsultationSections(ConsultationStep $consultation)
+    public function getSectionChildren(OpinionType $type, Arg $argument)
     {
-        return $consultation->getConsultationStepType()->getOpinionTypes();
+        return $type->getChildren();
+        //
+        // if ($argument->offsetExists('position')) {
+        //   $position = $argument->offsetGet('position');
+        //   $sections = $type->getChildren();
+        //   // return $sections->filter(
+        //   //     function ($section) use ($argument,  $position) {
+        //   //         return $section->getPosition() === $position;
+        //   //     }
+        //   // );
+        // }
+        // return [];
+    }
+
+    public function getSectionOpinions(OpinionType $type)
+    {
+        return $type->getOpinions();
+    }
+
+    public function getSectionOpinionsCount(OpinionType $type): int
+    {
+        $repo = $this->container->get('capco.opinion.repository');
+        return $repo->countByOpinionType($type->getId());
+    }
+
+    public function resolveConsultationSections(ConsultationStep $consultation, Arg $argument)
+    {
+        $sections = $consultation->getConsultationStepType()->getOpinionTypes();
+        return $sections->filter(
+            function ($section) {
+                return $section->getPosition() === 1 && $section->getParent() === null;
+            }
+        );
     }
 
     public function resolvePropositionArguments(OpinionContributionInterface $proposition, Arg $argument)

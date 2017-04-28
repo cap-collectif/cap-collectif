@@ -28,7 +28,6 @@ Capco\AppBundle\Entity\Opinion:
         versionsCount:
             expose: true
             type: integer
-            serialized_name: versions_count
             groups: [Opinions, OpinionLinkPreviews]
         argumentsCount:
             expose: true
@@ -38,12 +37,10 @@ Capco\AppBundle\Entity\Opinion:
         sourcesCount:
             expose: true
             type: integer
-            serialized_name: sources_count
             groups: [Opinions, OpinionLinkPreviews]
         connectionsCount:
             expose: true
             type: integer
-            serialized_name: connections_count
             groups: [Opinions, OpinionLinkPreviews]
         appendices:
             expose: true
@@ -101,7 +98,7 @@ Capco\AppBundle\Entity\Opinion:
             type: boolean
             groups: [Opinions, OpinionVersions]
         getVotesCountAll:
-            serialized_name: votes_total
+            serialized_name: votesCount
             type: integer
             groups: [Opinions, OpinionLinkPreviews]
         getArgumentForCount:

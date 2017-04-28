@@ -6,9 +6,38 @@ Section:
             id:
                 type: "ID!"
                 description: "The id of the section."
+            slug:
+                type: "String!"
+                description: "The slug of the section."
             title:
                 type: "String!"
                 description: "The title of the section."
-            children:
+            color:
+                type: "String!"
+                description: "The color of the section."
+            subtitle:
+                type: "String"
+                description: "The subtitle of the section."
+            contributionsCount:
+                type: "Int!"
+                resolve: "@=resolver('section_contributionsCount', [value])"
+            contributions:
+                type: "[Opinion]"
+                description: "List of contributions from this section."
+                resolve: "@=resolver('section_contributions', [value])"
+            sections:
                 type: "[Section]"
-                description: "Subsection."
+                description: "Array of subsections (possibly empty)."
+                resolve: "@=resolver('section_sections', [value, args])"
+            voteWidgetType:
+                type: "Int!"
+            commentSystem:
+                type: "Int!"
+            contribuable:
+                type: "Boolean!"
+            versionable:
+                type: "Boolean!"
+            sourceable:
+                type: "Boolean!"
+            linkable:
+                type: "Boolean!"

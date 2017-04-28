@@ -7,7 +7,10 @@ import UserLink from '../User/UserLink';
 const OpinionInfos = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
+    rankingThreshold: PropTypes.oneOfType([
+      PropTypes.oneOf([null]),
+      PropTypes.number,
+    ]),
     opinionTerm: PropTypes.number,
   },
   mixins: [IntlMixin],
@@ -25,9 +28,12 @@ const OpinionInfos = React.createClass({
     return (
       <span className="excerpt">
         <FormattedDate
-            value={moment(opinion.created_at)}
-            day="numeric" month="long" year="numeric"
-            hour="numeric" minute="numeric"
+          value={moment(opinion.createdAt)}
+          day="numeric"
+          month="long"
+          year="numeric"
+          hour="numeric"
+          minute="numeric"
         />
       </span>
     );
@@ -39,19 +45,22 @@ const OpinionInfos = React.createClass({
       return null;
     }
 
-    if (moment(opinion.updated_at).diff(opinion.created_at, 'seconds') <= 1) {
+    if (moment(opinion.updatedAt).diff(opinion.createdAt, 'seconds') <= 1) {
       return null;
     }
 
     return (
       <span className="excerpt">
-        { ' - ' }
-        { this.getIntlMessage('global.edited') }
-        { ' ' }
+        {' - '}
+        {this.getIntlMessage('global.edited')}
+        {' '}
         <FormattedDate
-          value={moment(opinion.updated_at)}
-          day="numeric" month="long" year="numeric"
-          hour="numeric" minute="numeric"
+          value={moment(opinion.updatedAt)}
+          day="numeric"
+          month="long"
+          year="numeric"
+          hour="numeric"
+          minute="numeric"
         />
       </span>
     );
@@ -63,34 +72,35 @@ const OpinionInfos = React.createClass({
       return <UserLink user={opinion.author} />;
     }
 
-    return <span>{ opinion.author_name }</span>;
+    return <span>{opinion.author_name}</span>;
   },
 
   renderRankingLabel() {
-    const {
-      opinionTerm,
-      rankingThreshold,
-    } = this.props;
+    const { opinionTerm, rankingThreshold } = this.props;
     const opinion = this.props.opinion;
-    if (rankingThreshold && rankingThreshold !== null && opinion.ranking !== null && opinion.ranking <= rankingThreshold) {
+    if (
+      rankingThreshold &&
+      rankingThreshold !== null &&
+      opinion.ranking !== null &&
+      opinion.ranking <= rankingThreshold
+    ) {
       return (
         <span className="opinion__label opinion__label--green">
-          <i className="cap cap-trophy"></i>
+          <i className="cap cap-trophy" />
           {this.isVersion()
             ? <FormattedMessage
                 message={this.getIntlMessage('opinion.ranking.versions')}
                 max={rankingThreshold}
-            />
+              />
             : opinionTerm === 0
-              ? <FormattedMessage
-                  message={this.getIntlMessage('opinion.ranking.opinions')}
-                  max={rankingThreshold}
-              />
-              : <FormattedMessage
-                  message={this.getIntlMessage('opinion.ranking.articles')}
-                  max={rankingThreshold}
-              />
-          }
+                ? <FormattedMessage
+                    message={this.getIntlMessage('opinion.ranking.opinions')}
+                    max={rankingThreshold}
+                  />
+                : <FormattedMessage
+                    message={this.getIntlMessage('opinion.ranking.articles')}
+                    max={rankingThreshold}
+                  />}
         </span>
       );
     }
@@ -101,15 +111,14 @@ const OpinionInfos = React.createClass({
   render() {
     return (
       <p className="h5 opinion__user">
-        { this.renderAuthorName() }
-        { ' • ' }
-        { this.renderDate() }
-        { this.renderEditionDate() }
-        { this.renderRankingLabel() }
+        {this.renderAuthorName()}
+        {' • '}
+        {this.renderDate()}
+        {this.renderEditionDate()}
+        {this.renderRankingLabel()}
       </p>
     );
   },
-
 });
 
 export default OpinionInfos;

@@ -36,7 +36,6 @@ Capco\AppBundle\Entity\OpinionType:
         voteWidgetType:
             expose: true
             type: integer
-            serialized_name: voteWidgetType
             groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionTypeDetails]
         commentSystem:
             expose: true

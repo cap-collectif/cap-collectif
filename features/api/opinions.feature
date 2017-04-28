@@ -18,8 +18,8 @@ Feature: Opinions
         "title": @string@,
         "body": @string@,
 
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
 
         "type": {
           "id": @string@,
@@ -62,16 +62,16 @@ Feature: Opinions
         "arguments_no_count": @integer@,
         "arguments": @array@,
 
-        "sources_count": @integer@,
+        "sourcesCount": @integer@,
         "sources": @array@,
 
-        "versions_count": @integer@,
+        "versionsCount": @integer@,
 
         "votes": @array@,
         "votes_nok": @integer@,
         "votes_ok": @integer@,
         "votes_mitige": @integer@,
-        "votes_total": @integer@,
+        "votesCount": @integer@,
 
         "appendices": [
           {
@@ -85,7 +85,7 @@ Feature: Opinions
         ],
 
         "connections": @array@,
-        "connections_count": @integer@,
+        "connectionsCount": @integer@,
 
         "author": {
           "username": @string@,
