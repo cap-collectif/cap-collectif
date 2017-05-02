@@ -7,15 +7,22 @@ import SectionList from './SectionList';
 export const SectionRecursiveList = React.createClass({
   propTypes: {
     sections: React.PropTypes.array.isRequired,
+    consultation: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { sections } = this.props;
+    const { sections, consultation } = this.props;
+    console.log(this.props);
     return (
       <div>
         {sections.map((section, index) => (
-          <SectionList key={index} section={section} level={0} />
+          <SectionList
+            key={index}
+            consultation={consultation}
+            section={section}
+            level={0}
+          />
         ))}
       </div>
     );

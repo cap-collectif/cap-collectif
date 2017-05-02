@@ -95,9 +95,27 @@ class ConsultationResolver implements ContainerAwareInterface
         // return [];
     }
 
-    public function getSectionOpinions(OpinionType $type)
+    public function getSectionOpinions(OpinionType $type, Arg $arg)
     {
-        return $type->getOpinions();
+        $limit = $argument->offsetGet('limit');
+
+        if ($type->getOpinions()->count() === 0) {
+          return [];
+        }
+
+        // Stupid hack because no link between
+        $step = $type->getOpinions()->first()->getStep();
+
+        $opinionRepo = $this->container->get('capco.opinion.repository');
+        $opinions = $opinionRepo->getByOpinionTypeAndConsultationStepOrdered(
+              $step,
+              $type->getId(),
+              $limit,
+              1,
+              $type->getDefaultFilter()
+          )
+        ;
+        return $opinions;
     }
 
     public function getSectionOpinionsCount(OpinionType $type): int

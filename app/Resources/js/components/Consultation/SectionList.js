@@ -6,18 +6,24 @@ import Section from './Section';
 const SectionList = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
+    consultation: React.PropTypes.object.isRequired,
     level: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { section, level } = this.props;
+    const { consultation, section, level } = this.props;
     return (
       <div>
-        <Section section={section} level={level} />
+        <Section consultation={consultation} section={section} level={level} />
         {section.sections &&
           section.sections.map((subSelection, index) => (
-            <SectionList key={index} section={subSelection} level={level + 1} />
+            <SectionList
+              key={index}
+              consultation={consultation}
+              section={subSelection}
+              level={level + 1}
+            />
           ))}
       </div>
     );

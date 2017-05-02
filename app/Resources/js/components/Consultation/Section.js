@@ -7,14 +7,15 @@ import OpinionList from './OpinionList';
 export const Section = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
+    consultation: React.PropTypes.object.isRequired,
     level: React.PropTypes.number.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { section, level } = this.props;
+    const { consultation, section, level } = this.props;
     return (
-      <p
+      <div
         id={`opinion-type--${section.slug}`}
         className={`anchor-offset text-center opinion-type__title level--${level}`}>
         {section.title}
@@ -22,8 +23,8 @@ export const Section = React.createClass({
         {section.subtitle &&
           <span className="small excerpt">{section.subtitle}</span>}
         {(section.contributionsCount > 0 || section.contribuable) &&
-          <OpinionList section={section} />}
-      </p>
+          <OpinionList consultation={consultation} section={section} />}
+      </div>
     );
   },
 });

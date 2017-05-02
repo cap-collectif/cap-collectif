@@ -6,7 +6,6 @@ import ConsultationPropositionBox
   from '../../Consultation/ConsultationPropositionBox';
 
 const StepInfos = React.createClass({
-  displayName: 'StepInfos',
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },
@@ -26,7 +25,7 @@ const StepInfos = React.createClass({
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
         </div>
-        <ConsultationPropositionBox consultationId={step.id} />
+        <ConsultationPropositionBox consultation={step} />
       </div>
     );
   },

@@ -8,11 +8,13 @@ import NewOpinionButton from '../Opinion/NewOpinionButton';
 export const OpinionList = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
+    consultation: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { section } = this.props;
+    const { section, consultation } = this.props;
+    console.log(this.props);
     return (
       <div
         id={`opinions--test17${section.slug}`}
@@ -26,19 +28,17 @@ export const OpinionList = React.createClass({
               <NewOpinionButton
                 opinionTypeSlug={section.slug}
                 opinionTypeId={section.id}
-                stepId={'5'}
-                projectId={'5'}
+                stepId={consultation.id}
+                projectId={consultation.projectId}
                 label={'Proposer'}
               />
               {section.contributionsCount > 1 &&
                 <select
                   className="form-control"
                   style={{ marginLeft: 15 }}
-                  onChange={value => {
-                    console.log(value);
-                    window.location.href = `${window.location.protocol}//${window.location.host}/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/types/sous-partie-1/${value}`;
+                  onChange={(event: SyntheticInputEvent) => {
+                    window.location.href = `${window.location.protocol}//${window.location.host}/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/types/sous-partie-1/${event.target.value}`;
                   }}>
-                  <option value="">Trier par</option>
                   <option value="positions">Tri ordonné puis aléatoire</option>
                   <option value="random">Tri aléatoire</option>
                   <option value="last">Les plus récents</option>
@@ -60,17 +60,16 @@ export const OpinionList = React.createClass({
   },
 });
 
-export default createFragmentContainer(
-  OpinionList,
-  graphql`
+export default createFragmentContainer(OpinionList, {
+  section: graphql`
     fragment OpinionList_section on Section {
       id
       slug
       color
       contributionsCount
-      contributions {
+      contributions(limit: $limit) {
         ...Opinion_opinion
       }
     }
   `,
-);
+});
