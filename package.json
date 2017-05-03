@@ -30,6 +30,12 @@
     "*.py": [
       "autopep8 --in-place --aggressive --aggressive --ignore=E501",
       "git add"
+    ],
+    "*.twig": [
+      "php bin/console lint:twig"
+    ],
+    "*.yml": [
+      "php bin/console lint:yaml"
     ]
   },
   "jest": {

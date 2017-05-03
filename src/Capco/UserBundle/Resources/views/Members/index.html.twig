@@ -29,8 +29,8 @@
 
 {% block body %}
 
-    <div class="container  container--custom">
-        {% set content_body = capco_site_parameter_value('members.content.body') %}
+    {% set content_body = capco_site_parameter_value('members.content.body') %}
+    <div class="container  container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
         {% if null != content_body %}
             {{ content_body|raw }}
         {% endif %}

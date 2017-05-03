@@ -1,3 +1,4 @@
+
 frontend:
     extensions:
         Behat\Symfony2Extension:

@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container container--custom">
+    <div class="container container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
         {% if null != content_body %}
             {{ content_body|raw }}
         {% endif %}
