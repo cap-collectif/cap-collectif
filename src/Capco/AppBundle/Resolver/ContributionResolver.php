@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the appname project.
+ *
+ * (c) JoliCode <coucou@jolicode.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
@@ -220,7 +229,7 @@ class ContributionResolver
         return $count;
     }
 
-    public function countStepVotes(AbstractStep $step)
+    public function countStepVotes(AbstractStep $step): int
     {
         $count = 0;
         if ($step instanceof ConsultationStep) {

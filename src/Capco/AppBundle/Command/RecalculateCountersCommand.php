@@ -1,14 +1,25 @@
 <?php
 
+/*
+ * This file is part of the appname project.
+ *
+ * (c) JoliCode <coucou@jolicode.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
+    public $force;
+
     protected function configure()
     {
         $this
@@ -26,6 +37,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get('capco.contribution.resolver');
+        $this->force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************
 
@@ -246,23 +258,19 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )')->execute();
 
         $consultationSteps = $em->getRepository('CapcoAppBundle:Steps\ConsultationStep')->findAll();
-
         foreach ($consultationSteps as $cs) {
-            $participants = $contributionResolver->countStepContributors($cs);
-            $em->createQuery('
-              UPDATE CapcoAppBundle:Steps\ConsultationStep cs
-              set cs.contributorsCount = '.$participants.'
-              where cs.id = '.$cs->getId()
-            )->execute();
-        }
-
-        foreach ($consultationSteps as $cs) {
-            $votes = $contributionResolver->countStepVotes($cs);
-            $em->createQuery('
-              UPDATE CapcoAppBundle:Steps\ConsultationStep cs
-              set cs.votesCount = '.$votes.'
-              where cs.id = '.$cs->getId()
-            )->execute();
+            if ($cs->isOpen() || $this->force) {
+                $participants = $contributionResolver->countStepContributors($cs);
+                $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs
+                set cs.contributorsCount = ' . $participants . '
+                where cs.id = ' . $cs->getId()
+              )->execute();
+                $votes = $contributionResolver->countStepVotes($cs);
+                $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs
+                set cs.votesCount = ' . $votes . '
+                where cs.id = ' . $cs->getId()
+              )->execute();
+            }
         }
 
         // ****************************** Collect step counters **************************************
@@ -276,12 +284,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $collectSteps = $em->getRepository('CapcoAppBundle:Steps\CollectStep')->findAll();
         foreach ($collectSteps as $cs) {
-            $participants = $contributionResolver->countStepContributors($cs);
-            $em->createQuery('
-              UPDATE CapcoAppBundle:Steps\CollectStep cs
-              set cs.contributorsCount = '.$participants.'
-              where cs.id = '.$cs->getId()
-            )->execute();
+            if ($cs->isOpen() || $this->force) {
+                $participants = $contributionResolver->countStepContributors($cs);
+                $em->createQuery('UPDATE CapcoAppBundle:Steps\CollectStep cs
+                set cs.contributorsCount = ' . $participants . '
+                where cs.id = ' . $cs->getId()
+              )->execute();
+            }
         }
 
         // ****************************** Questionnaire step counters **************************************
@@ -294,12 +303,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $questionnaireSteps = $em->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')->findAll();
         foreach ($questionnaireSteps as $qs) {
-            $participants = $contributionResolver->countStepContributors($qs);
-            $em->createQuery('
-              UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
-              set qs.contributorsCount = '.$participants.'
-              where qs.id = '.$qs->getId()
-            )->execute();
+            if ($qs->isOpen() || $this->force) {
+                $participants = $contributionResolver->countStepContributors($qs);
+                $em->createQuery('UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
+                set qs.contributorsCount = ' . $participants . '
+                where qs.id = ' . $qs->getId()
+              )->execute();
+            }
         }
 
         // ****************************** Selection steps counters **************************************
@@ -311,13 +321,14 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         $selectionSteps = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findAll();
         foreach ($selectionSteps as $ss) {
-            $anonymousParticipants = $em->getRepository('CapcoUserBundle:User')->countSelectionStepProposalAnonymousVoters($ss);
-            $participants = $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
-            $em->createQuery('
-              UPDATE CapcoAppBundle:Steps\SelectionStep ss
-              set ss.contributorsCount = '.$participants.'
-              where ss.id = '.$ss->getId()
-            )->execute();
+            if ($ss->isOpen() || $this->force) {
+                $anonymousParticipants = $em->getRepository('CapcoUserBundle:User')->countSelectionStepProposalAnonymousVoters($ss);
+                $participants = $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
+                $em->createQuery('UPDATE CapcoAppBundle:Steps\SelectionStep ss
+                set ss.contributorsCount = ' . $participants . '
+                where ss.id = ' . $ss->getId()
+              )->execute();
+            }
         }
 
         $output->writeln('Calculation completed');

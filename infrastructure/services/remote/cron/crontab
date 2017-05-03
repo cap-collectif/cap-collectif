@@ -13,6 +13,7 @@
 
 # Recalculate the counters from scratch
 0 4 * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
+0 5 * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
 
 # Update synthesis data (disabled for now)
 #0 4 * * * /usr/bin/timeout 2h php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod

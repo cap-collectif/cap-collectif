@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the appname project.
+ *
+ * (c) JoliCode <coucou@jolicode.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -29,10 +38,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
             $anonymousParticipants = $em->getRepository('CapcoUserBundle:User')
                 ->countProjectProposalAnonymousVotersWithCount($p);
             $participants = $contributionResolver->countProjectContributors($p) + $anonymousParticipants;
-            $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.participantsCount = '.$participants.'
-              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
+            $query = $em->createQuery('UPDATE CapcoAppBundle:Project p
+              SET p.participantsCount = ' . $participants . '
+              WHERE p.externalLink IS NULL AND p.id = \'' . $p->getId() . '\''
             );
             $query->execute();
         }
@@ -40,10 +48,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
         // Contributions count
         foreach ($projects as $p) {
             $contributions = $contributionResolver->countProjectContributions($p);
-            $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.contributionsCount = '.$contributions.'
-              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
+            $query = $em->createQuery('UPDATE CapcoAppBundle:Project p
+              SET p.contributionsCount = ' . $contributions . '
+              WHERE p.externalLink IS NULL AND p.id = \'' . $p->getId() . '\''
             );
             $query->execute();
         }
@@ -51,10 +58,9 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
         // Votes count
         foreach ($projects as $p) {
             $votes = $contributionResolver->countProjectVotes($p);
-            $query = $em->createQuery('
-              UPDATE CapcoAppBundle:Project p
-              SET p.votesCount = '.$votes.'
-              WHERE p.externalLink IS NULL AND p.id = \''.$p->getId().'\''
+            $query = $em->createQuery('UPDATE CapcoAppBundle:Project p
+              SET p.votesCount = ' . $votes . '
+              WHERE p.externalLink IS NULL AND p.id = \'' . $p->getId() . '\''
             );
             $query->execute();
         }
