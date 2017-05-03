@@ -28,7 +28,7 @@ def check_codestyle():
 
 @task(environments=['local'])
 def lint():
-    "Lint"
+    "Lint all files"
     env.compose_run('php-cs-fixer fix src --rules=@Symfony --using-cache=no --diff || echo true', 'builder', '.', no_deps=True)
     env.compose_run('yarn run lint', 'builder', '.', no_deps=True)
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
