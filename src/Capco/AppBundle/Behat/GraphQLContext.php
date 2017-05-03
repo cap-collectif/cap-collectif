@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Behat;
 
-use GuzzleHttp\Client;
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
-use PHPUnit_Framework_Assert as PHPUnit;
+use GuzzleHttp\Client;
 use GuzzleHttp\Query;
-use Behat\Behat\Context\Context;
+use PHPUnit_Framework_Assert as PHPUnit;
 
 class GraphQLContext implements Context
 {

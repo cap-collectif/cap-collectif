@@ -7,11 +7,20 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class OpinionAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title',
+    ];
+
+    protected $formOptions = [
+        'cascade_validation' => true,
+    ];
+
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
@@ -28,14 +37,40 @@ class OpinionAdmin extends Admin
         ];
     }
 
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
+    public function getTemplate($name)
+    {
+        if ($name === 'list') {
+            return 'CapcoAdminBundle:Opinion:list.html.twig';
+        }
+        if ($name === 'edit') {
+            return 'CapcoAdminBundle:Opinion:edit.html.twig';
+        }
+        if ($name === 'show') {
+            return 'CapcoAdminBundle:Opinion:show.html.twig';
+        }
+        if ($name === 'delete') {
+            return 'CapcoAdminBundle:Opinion:delete.html.twig';
+        }
 
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
+        return parent::getTemplate($name);
+    }
+
+    public function prePersist($opinion)
+    {
+        if (!$opinion->getOpinionType()) {
+            $opinionType = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->getRepository('CapcoAppBundle:OpinionType')
+                ->find($this->getPersistentParameters('opinion_type'));
+            $opinion->setOpinionType($opinionType);
+        }
+    }
+
+    public function getBatchActions()
+    {
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -155,7 +190,7 @@ class OpinionAdmin extends Admin
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
             ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.opinion.group_appendices', ['class' => 'col-md-12 '.$classname])->end()
+            ->with('admin.fields.opinion.group_appendices', ['class' => 'col-md-12 ' . $classname])->end()
             ->with('admin.fields.opinion.group_publication', ['class' => 'col-md-12'])->end()
             ->with('admin.fields.opinion.group_answer', ['class' => 'col-md-12'])->end()
             ->end()
@@ -323,6 +358,11 @@ class OpinionAdmin extends Admin
         }
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete', 'export']);
+    }
+
     private function createQueryBuilderForStep()
     {
         if (!$this->getPersistentParameter('opinion_type')) {
@@ -350,45 +390,5 @@ class OpinionAdmin extends Admin
             ->where('cs.consultationStepType = :stepType')
             ->setParameter('stepType', $consultationStepType)
         ;
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'list') {
-            return 'CapcoAdminBundle:Opinion:list.html.twig';
-        }
-        if ($name === 'edit') {
-            return 'CapcoAdminBundle:Opinion:edit.html.twig';
-        }
-        if ($name === 'show') {
-            return 'CapcoAdminBundle:Opinion:show.html.twig';
-        }
-        if ($name === 'delete') {
-            return 'CapcoAdminBundle:Opinion:delete.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    public function prePersist($opinion)
-    {
-        if (!$opinion->getOpinionType()) {
-            $opinionType = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager()
-                ->getRepository('CapcoAppBundle:OpinionType')
-                ->find($this->getPersistentParameters('opinion_type'));
-            $opinion->setOpinionType($opinionType);
-        }
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete', 'export']);
-    }
-
-    public function getBatchActions()
-    {
     }
 }

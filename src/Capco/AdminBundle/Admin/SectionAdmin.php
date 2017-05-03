@@ -2,14 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Section;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\Section;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class SectionAdmin extends Admin
 {
@@ -34,11 +34,16 @@ class SectionAdmin extends Admin
 
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0].'.id', ':ids')
+            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
         );
         $query->setParameter('ids', $ids);
 
         return $query;
+    }
+
+    public function getBatchActions()
+    {
+        return [];
     }
 
     /**
@@ -206,6 +211,12 @@ class SectionAdmin extends Admin
         ;
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('down', $this->getRouterIdParameter() . '/down');
+        $collection->add('up', $this->getRouterIdParameter() . '/up');
+    }
+
     private function createQueryForCollectSteps()
     {
         $qb = $this->getConfigurationPool()
@@ -218,16 +229,5 @@ class SectionAdmin extends Admin
         ;
 
         return $qb->getQuery();
-    }
-
-    public function getBatchActions()
-    {
-        return [];
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->add('down', $this->getRouterIdParameter().'/down');
-        $collection->add('up', $this->getRouterIdParameter().'/up');
     }
 }

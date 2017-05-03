@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\AnonymousableTrait;
 use Capco\AppBundle\Traits\ConfirmableTrait;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class EventRegistration.

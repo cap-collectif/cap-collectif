@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Entity()
@@ -15,14 +15,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class Selection
 {
-    public function getId() // for elasticsearch
-    {
-        return [
-          'selectionStep' => $this->selectionStep->getId(),
-          'proposal' => $this->proposal->getId(),
-       ];
-    }
-
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selections", cascade={"persist"})
@@ -44,6 +36,14 @@ class Selection
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $status;
+
+    public function getId() // for elasticsearch
+    {
+        return [
+          'selectionStep' => $this->selectionStep->getId(),
+          'proposal' => $this->proposal->getId(),
+       ];
+    }
 
     public function getSelectionStep()
     {

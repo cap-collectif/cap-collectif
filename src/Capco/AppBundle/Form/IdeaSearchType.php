@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IdeaSearchType extends AbstractType

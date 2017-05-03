@@ -6,22 +6,25 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use JMS\Serializer\SerializationContext;
 
 class ProjectController extends Controller
 {
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
+     *
+     * @param mixed $max
+     * @param mixed $offset
      */
     public function lastProjectsAction($max = 4, $offset = 0)
     {
@@ -159,34 +162,34 @@ class ProjectController extends Controller
             throw $this->createAccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
         }
 
-        $path = $this->container->getParameter('kernel.root_dir').'/../web/export/';
+        $path = $this->container->getParameter('kernel.root_dir') . '/../web/export/';
         $filename = '';
         if ($step->getProject()) {
-            $filename .= $step->getProject()->getSlug().'_';
+            $filename .= $step->getProject()->getSlug() . '_';
         }
         $filename .= $step->getSlug();
 
-        $csvFile = $filename.'.csv';
-        $xlsxFile = $filename.'.xlsx';
+        $csvFile = $filename . '.csv';
+        $xlsxFile = $filename . '.xlsx';
 
-        if (!file_exists($path.$csvFile) && !file_exists($path.$xlsxFile)) {
+        if (!file_exists($path . $csvFile) && !file_exists($path . $xlsxFile)) {
             $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 
             return $this->redirect($request->headers->get('referer'));
         }
 
-        $filename = file_exists($path.$csvFile) ? $csvFile : $xlsxFile;
-        $contentType = file_exists($path.$csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
+        $filename = file_exists($path . $csvFile) ? $csvFile : $xlsxFile;
+        $contentType = file_exists($path . $csvFile) ? 'text/csv' : 'application/vnd.ms-excel';
 
         $date = (new \DateTime())->format('Y-m-d');
 
         $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
-        $response = new BinaryFileResponse($path.$filename);
-        $response->headers->set('X-Accel-Redirect', '/export/'.$filename);
+        $response = new BinaryFileResponse($path . $filename);
+        $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
         $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date.'_'.$filename
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date . '_' . $filename
         );
-        $response->headers->set('Content-Type', $contentType.'; charset=utf-8');
+        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 
@@ -289,6 +292,9 @@ class ProjectController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Project:show_meta.html.twig")
+     *
+     * @param mixed $projectSlug
+     * @param mixed $currentStepSlug
      */
     public function showMetaAction($projectSlug, $currentStepSlug)
     {

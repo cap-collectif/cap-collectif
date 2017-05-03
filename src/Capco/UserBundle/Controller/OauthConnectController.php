@@ -3,11 +3,11 @@
 namespace Capco\UserBundle\Controller;
 
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * ConnectController.
@@ -23,13 +23,6 @@ class OauthConnectController extends ConnectController
     public function getFeaturesForService($service)
     {
         return $this->featuresForServices[$service];
-    }
-
-    protected function serviceHasEnabledFeature($service)
-    {
-        $toggleManager = $this->container->get('capco.toggle.manager');
-
-        return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
 
     /**
@@ -54,7 +47,7 @@ class OauthConnectController extends ConnectController
         ) {
             $key = time();
             $session = $request->getSession();
-            $session->set('_hwi_oauth.registration_error.'.$key, $error);
+            $session->set('_hwi_oauth.registration_error.' . $key, $error);
 
             return new RedirectResponse($this->generateUrl('hwi_oauth_connect_registration', ['key' => $key]));
         }
@@ -73,9 +66,9 @@ class OauthConnectController extends ConnectController
      * @param Request $request The active request
      * @param string  $service Name of the resource owner to connect to
      *
-     * @return Response
-     *
      * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return Response
      */
     public function connectServiceAction(Request $request, $service)
     {
@@ -91,9 +84,9 @@ class OauthConnectController extends ConnectController
      * @param Request $request
      * @param string  $service
      *
-     * @return RedirectResponse
-     *
      * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return RedirectResponse
      */
     public function redirectToServiceAction(Request $request, $service)
     {
@@ -103,5 +96,12 @@ class OauthConnectController extends ConnectController
         }
 
         return parent::redirectToServiceAction($request, $service);
+    }
+
+    protected function serviceHasEnabledFeature($service)
+    {
+        $toggleManager = $this->container->get('capco.toggle.manager');
+
+        return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }
 }

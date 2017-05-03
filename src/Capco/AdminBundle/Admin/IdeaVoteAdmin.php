@@ -5,8 +5,8 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class IdeaVoteAdmin extends Admin
 {
@@ -14,6 +14,13 @@ class IdeaVoteAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'idea.title',
     ];
+
+    public function getFeatures()
+    {
+        return [
+            'ideas',
+        ];
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -106,12 +113,5 @@ class IdeaVoteAdmin extends Admin
         $collection->remove('create');
         $collection->remove('delete');
         $collection->remove('edit');
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'ideas',
-        ];
     }
 }

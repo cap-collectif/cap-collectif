@@ -35,6 +35,11 @@ class ProjectType
      */
     private $projects;
 
+    public function __toString()
+    {
+        return $this->getId() ? $this->getTitle() : 'New project type';
+    }
+
     public function getTitle()
     {
         return $this->title;
@@ -91,10 +96,5 @@ class ProjectType
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getId() ? $this->getTitle() : 'New project type';
     }
 }

@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * District.

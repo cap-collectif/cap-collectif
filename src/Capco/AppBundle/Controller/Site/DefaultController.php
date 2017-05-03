@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Form\ContactType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -77,6 +77,9 @@ class DefaultController extends Controller
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
      * @Template("CapcoAppBundle:Default:footer.html.twig")
+     *
+     * @param mixed $max
+     * @param mixed $offset
      */
     public function footerAction($max = 4, $offset = 0)
     {

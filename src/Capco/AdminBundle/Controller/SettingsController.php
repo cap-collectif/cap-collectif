@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends Controller
@@ -30,6 +30,8 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template()
+     *
+     * @param mixed $category
      */
     public function listAction(Request $request, $category)
     {
@@ -71,6 +73,8 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
      * @Template()
+     *
+     * @param mixed $toggle
      */
     public function switchToggleAction($toggle)
     {

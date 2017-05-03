@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserResolver implements ContainerAwareInterface

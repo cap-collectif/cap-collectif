@@ -17,6 +17,21 @@ class VideoAdmin extends Admin
         '_sort_by' => 'title',
     ];
 
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -170,20 +185,5 @@ class VideoAdmin extends Admin
                 'label' => 'admin.fields.video.created_at',
             ])
         ;
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
-        }
-
-        return parent::getObjectMetadata($object);
     }
 }

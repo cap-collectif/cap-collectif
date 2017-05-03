@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Model\HasDiffInterface;
+use Capco\AppBundle\Traits\DiffableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="opinion_modals")

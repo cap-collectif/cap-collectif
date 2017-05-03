@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
-use Capco\AppBundle\Traits\DiffableTrait;
-use Capco\UserBundle\Entity\User;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\HasDiffInterface;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="opinion_version")
@@ -38,26 +38,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use DiffableTrait;
     use ExpirableTrait;
 
-    public function getKind(): string
-    {
-        return 'version';
-    }
-
-    public function getRelated()
-    {
-        return $this->getParent();
-    }
-
     /**
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
      */
     protected $body;
-
-    /**
-     * @ORM\Column(name="comment", type="text", nullable=true)
-     */
-    private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -74,12 +59,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinionVersion", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $sources;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="versions", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $parent;
 
     /**
      * @ORM\Column(name="sources_count", type="integer")
@@ -108,6 +87,17 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
      */
     protected $ranking = null;
 
+    /**
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="versions", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
@@ -115,6 +105,21 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->reports = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getTitle() : 'New opinion version';
+    }
+
+    public function getKind(): string
+    {
+        return 'version';
+    }
+
+    public function getRelated()
+    {
+        return $this->getParent();
     }
 
     public function isIndexable()
@@ -141,11 +146,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         $this->reports->removeElement($report);
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getId() ? $this->getTitle() : 'New opinion version';
     }
 
     public function getBody()
@@ -347,7 +347,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function userHasReport(User $user)
     {
         foreach ($this->reports as $report) {
-            if ($report->getReporter() == $user) {
+            if ($report->getReporter() === $user) {
                 return true;
             }
         }
@@ -396,8 +396,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getOpinionType();
         }
-
-        return;
     }
 
     public function getCommentSystem()
@@ -405,8 +403,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getCommentSystem();
         }
-
-        return;
     }
 
     /**

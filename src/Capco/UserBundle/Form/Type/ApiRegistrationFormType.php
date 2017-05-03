@@ -2,13 +2,13 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\ValueResponseType;
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Toggle\Manager;
 
 class ApiRegistrationFormType extends AbstractType
 {

@@ -80,28 +80,12 @@ trait ProposalStepsTrait
         $this->visitPageWithParams('collect page', self::$collectStepOpenPrivateParams);
     }
 
-    protected function openCollectStepIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('collect page')
-            ->isOpen(self::$collectStepOpenParams)
-            ;
-    }
-
     /**
      * @When I go to a closed collect step
      */
     public function iGoToAClosedCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
-    }
-
-    protected function closedCollectStepIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('collect page')
-            ->isOpen(self::$collectStepClosedParams)
-            ;
     }
 
     /**
@@ -113,22 +97,12 @@ trait ProposalStepsTrait
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
-    protected function proposalPageIsOpen()
-    {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithSimpleVoteParams);
-    }
-
     /**
      * @When I go to a proposal not yet votable
      */
     public function iGoToAProposalNotYetVotable()
     {
         $this->visitPageWithParams('proposal page', self::$proposalNotYetVotable);
-    }
-
-    protected function proposalNotYetVotablePageIsOpen()
-    {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotYetVotable);
     }
 
     /**
@@ -139,17 +113,14 @@ trait ProposalStepsTrait
         $this->visitPageWithParams('proposal page', self::$proposalNotVotableAnymore);
     }
 
-    protected function proposalNotVotableAnymoreIsOpen()
-    {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotVotableAnymore);
-    }
-
     /**
      * @Then there should be :nb proposals
+     *
+     * @param mixed $nb
      */
     public function thereShouldBeNbProposals($nb)
     {
-        $this->assertPageContainsText($nb.$nb > 1 ? ' propositions' : 'proposition');
+        $this->assertPageContainsText($nb . $nb > 1 ? ' propositions' : 'proposition');
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }
@@ -183,21 +154,14 @@ trait ProposalStepsTrait
 
     /**
      * @When I search for proposals with terms :terms
+     *
+     * @param mixed $terms
      */
     public function iSearchForProposalsWithTerms($terms)
     {
         $this->fillField('proposal-search-input', $terms);
         $this->pressButton('proposal-search-button');
         $this->iWait(1);
-    }
-
-    protected function proposalBeforeProposal($proposal1, $proposal2)
-    {
-        $this->element1ShouldBeBeforeElement2ForSelector(
-            $proposal1,
-            $proposal2,
-            '.proposal__preview .proposal__title'
-        );
     }
 
     /**
@@ -309,26 +273,6 @@ trait ProposalStepsTrait
     public function iFillTheProposalFormWithoutRequiredResponse()
     {
         $this->fillProposalForm(true, false, false);
-    }
-
-    protected function fillProposalForm($fillDistrict = false, $fillTheme = false, $requiredResponse = 'Réponse à la question 2')
-    {
-        $tableNode = new TableNode([
-            ['proposal_title', 'Nouvelle proposition créée'],
-            ['proposal_body', 'Description de ma proposition'],
-            ['proposal_custom-1', 'Réponse à la question 1'],
-        ]);
-        if ($requiredResponse !== false) {
-            $this->fillField('proposal_custom-3', $requiredResponse);
-        }
-        $this->fillFields($tableNode);
-        $this->selectOption('proposal_category', 'Politique');
-        if ($fillTheme) {
-            $this->selectOption('proposal_theme', 'Justice');
-        }
-        if ($fillDistrict) {
-            $this->selectOption('proposal_district', 'Beauregard');
-        }
     }
 
     /**
@@ -473,25 +417,12 @@ trait ProposalStepsTrait
         $this->visitPageWithParams('project user votes page', self::$votesDetailsPageParams);
     }
 
-    protected function votesDetailsPageIsOpen()
-    {
-        return $this->navigationContext->getPage('project user votes page')->isOpen();
-    }
-
     /**
      * @When I go to a selection step with simple vote enabled
      */
     public function iGoToASelectionStepWithSimpleVoteEnabled()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepWithSimpleVoteParams);
-    }
-
-    protected function selectionStepWithSimpleVoteIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithSimpleVoteParams)
-            ;
     }
 
     /**
@@ -510,28 +441,12 @@ trait ProposalStepsTrait
         $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteLimitedParams);
     }
 
-    protected function selectionStepWithBudgetVoteIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithBudgetVoteParams)
-            ;
-    }
-
     /**
      * @When I go to a selection step not yet open
      */
     public function iGoToASelectionStepNotYetOpen()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepNotYetOpen);
-    }
-
-    protected function selectionStepNotYetOpenIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepNotYetOpen)
-            ;
     }
 
     /**
@@ -542,43 +457,12 @@ trait ProposalStepsTrait
         $this->visitPageWithParams('selection page', self::$selectionStepClosed);
     }
 
-    protected function selectionStepClosedIsOpen()
-    {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepClosed)
-            ;
-    }
-
     /**
      * @When I go to a proposal with budget vote enabled
      */
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
-    }
-
-    protected function proposalPageWithBudgetVoteIsOpen()
-    {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithBudgetVoteParams);
-    }
-
-    protected function getProposalId(): int
-    {
-        if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
-            return 2;
-        }
-        if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
-            return 8;
-        }
-        if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
-            return 10;
-        }
-        if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
-            return 11;
-        }
-
-        throw new \Exception('Unknown proposalId');
     }
 
     /**
@@ -602,6 +486,9 @@ trait ProposalStepsTrait
 
     /**
      * @Then proposal :id should have author :username
+     *
+     * @param mixed $id
+     * @param mixed $username
      */
     public function proposalShouldHaveAuthor($id, $username)
     {
@@ -612,22 +499,26 @@ trait ProposalStepsTrait
     /**
      * @Given the proposal has :nb votes
      * @Then the proposal should have :nb votes
+     *
+     * @param mixed $nb
      */
     public function theProposalShouldHaveNbVotes($nb)
     {
         $this->iWait(2);
         $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '.$votesCount.' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number ' . $votesCount . ' for proposal.');
     }
 
     /**
      * @Given the proposal has :nb comments
      * @Then the proposal should have :nb comments
+     *
+     * @param mixed $nb
      */
     public function theProposalShouldHaveNbComments($nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number '.$commentsCount.' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number ' . $commentsCount . ' for proposal.');
     }
 
     /**
@@ -637,16 +528,6 @@ trait ProposalStepsTrait
     {
         $this->navigationContext->getPage('project user votes page')->removeFirstVote();
         $this->iWait(5);
-    }
-
-    protected function clickProposalVoteButtonWithLabel(string $label, int $id = null)
-    {
-        $page = $this->getCurrentPage();
-        $proposalId = $id ?: $this->getProposalId();
-        $buttonLabel = $page->getVoteButtonLabel($proposalId);
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on proposal vote button.');
-        $page->clickVoteButton($proposalId);
-        $this->iWait(2);
     }
 
     /**
@@ -834,7 +715,7 @@ trait ProposalStepsTrait
     public function theProposalVoteButtonWithIdMustNotBePresent(int $id = 0)
     {
         $execpetionMessage = $id > 0
-            ? '"proposal vote button '.$id.'" element is not present on the page'
+            ? '"proposal vote button ' . $id . '" element is not present on the page'
             : '"proposal vote button" element is not present on the page';
 
         try {
@@ -868,30 +749,12 @@ trait ProposalStepsTrait
         $this->assertPageContainsText('Vous avez atteint la limite du budget.');
     }
 
-    protected function assertProposalCommentsContains($text)
-    {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getCommentsListSelector();
-        $this->assertElementContainsText($firstVoteSelector, $text);
-    }
-
     /**
      * @Then I should see my comment in the proposal comments list
      */
     public function iShouldSeeMyCommentInTheProposalCommentsList()
     {
         $this->assertProposalCommentsContains('Coucou !');
-    }
-
-    protected function assertFirstProposalVoteContains($text)
-    {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
-        $this->assertElementContainsText($firstVoteSelector, $text);
-    }
-
-    protected function assertFirstProposalVoteNotContains($text)
-    {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
-        $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 
     /**
@@ -933,7 +796,7 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('".$page->getSelector('votes tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('votes tab') . "').length > 0");
         $page->clickVotesTab();
         $this->iWait(1);
     }
@@ -945,8 +808,156 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('".$page->getSelector('comments tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('comments tab') . "').length > 0");
         $page->clickCommentsTab();
         $this->iWait(1);
+    }
+
+    protected function openCollectStepIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('collect page')
+            ->isOpen(self::$collectStepOpenParams)
+            ;
+    }
+
+    protected function closedCollectStepIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('collect page')
+            ->isOpen(self::$collectStepClosedParams)
+            ;
+    }
+
+    protected function proposalPageIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithSimpleVoteParams);
+    }
+
+    protected function proposalNotYetVotablePageIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotYetVotable);
+    }
+
+    protected function proposalNotVotableAnymoreIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotVotableAnymore);
+    }
+
+    protected function proposalBeforeProposal($proposal1, $proposal2)
+    {
+        $this->element1ShouldBeBeforeElement2ForSelector(
+            $proposal1,
+            $proposal2,
+            '.proposal__preview .proposal__title'
+        );
+    }
+
+    protected function fillProposalForm($fillDistrict = false, $fillTheme = false, $requiredResponse = 'Réponse à la question 2')
+    {
+        $tableNode = new TableNode([
+            ['proposal_title', 'Nouvelle proposition créée'],
+            ['proposal_body', 'Description de ma proposition'],
+            ['proposal_custom-1', 'Réponse à la question 1'],
+        ]);
+        if ($requiredResponse !== false) {
+            $this->fillField('proposal_custom-3', $requiredResponse);
+        }
+        $this->fillFields($tableNode);
+        $this->selectOption('proposal_category', 'Politique');
+        if ($fillTheme) {
+            $this->selectOption('proposal_theme', 'Justice');
+        }
+        if ($fillDistrict) {
+            $this->selectOption('proposal_district', 'Beauregard');
+        }
+    }
+
+    protected function votesDetailsPageIsOpen()
+    {
+        return $this->navigationContext->getPage('project user votes page')->isOpen();
+    }
+
+    protected function selectionStepWithSimpleVoteIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepWithSimpleVoteParams)
+            ;
+    }
+
+    protected function selectionStepWithBudgetVoteIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepWithBudgetVoteParams)
+            ;
+    }
+
+    protected function selectionStepNotYetOpenIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepNotYetOpen)
+            ;
+    }
+
+    protected function selectionStepClosedIsOpen()
+    {
+        return $this->navigationContext
+            ->getPage('selection page')
+            ->isOpen(self::$selectionStepClosed)
+            ;
+    }
+
+    protected function proposalPageWithBudgetVoteIsOpen()
+    {
+        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithBudgetVoteParams);
+    }
+
+    protected function getProposalId(): int
+    {
+        if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
+            return 2;
+        }
+        if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
+            return 8;
+        }
+        if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
+            return 10;
+        }
+        if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
+            return 11;
+        }
+
+        throw new \Exception('Unknown proposalId');
+    }
+
+    protected function clickProposalVoteButtonWithLabel(string $label, int $id = null)
+    {
+        $page = $this->getCurrentPage();
+        $proposalId = $id ?: $this->getProposalId();
+        $buttonLabel = $page->getVoteButtonLabel($proposalId);
+        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label ' . $buttonLabel . ' on proposal vote button.');
+        $page->clickVoteButton($proposalId);
+        $this->iWait(2);
+    }
+
+    protected function assertProposalCommentsContains($text)
+    {
+        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getCommentsListSelector();
+        $this->assertElementContainsText($firstVoteSelector, $text);
+    }
+
+    protected function assertFirstProposalVoteContains($text)
+    {
+        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
+        $this->assertElementContainsText($firstVoteSelector, $text);
+    }
+
+    protected function assertFirstProposalVoteNotContains($text)
+    {
+        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
+        $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 }

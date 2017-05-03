@@ -2,16 +2,16 @@
 
 namespace Capco\AdminBundle\Block;
 
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Toggle\Manager;
-use Sonata\CoreBundle\Validator\ErrorElement;
-use Sonata\BlockBundle\Model\BlockInterface;
 
 class RecentPostBlockService extends BaseBlockService
 {

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -35,6 +35,7 @@ class SourceRepository extends EntityRepository
      * Get all by opinion.
      *
      * @param $opinionId
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -57,6 +58,7 @@ class SourceRepository extends EntityRepository
      * Get all by version.
      *
      * @param $versionId
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -156,9 +158,9 @@ class SourceRepository extends EntityRepository
      *
      * @param $source
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneBySlug(string $slug)
     {
@@ -181,6 +183,7 @@ class SourceRepository extends EntityRepository
      * Get all trashed or unpublished sources for project.
      *
      * @param $step
+     * @param mixed $project
      *
      * @return mixed
      */
@@ -241,6 +244,7 @@ class SourceRepository extends EntityRepository
      * Get enabled sources by project step.
      *
      * @param $step
+     * @param mixed $asArray
      *
      * @return mixed
      */

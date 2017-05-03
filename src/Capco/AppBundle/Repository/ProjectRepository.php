@@ -44,6 +44,7 @@ class ProjectRepository extends EntityRepository
      * Get projects by user.
      *
      * @param user
+     * @param mixed $user
      *
      * @return mixed
      */
@@ -69,9 +70,9 @@ class ProjectRepository extends EntityRepository
      *
      * @param $slug
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneBySlugWithStepsAndEventsAndPosts(string $slug)
     {
@@ -143,7 +144,7 @@ class ProjectRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('p.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -153,7 +154,7 @@ class ProjectRepository extends EntityRepository
             ;
         }
 
-        if (isset(Project::$sortOrder[$sort]) && Project::$sortOrder[$sort] == Project::SORT_ORDER_CONTRIBUTIONS_COUNT) {
+        if (isset(Project::$sortOrder[$sort]) && Project::$sortOrder[$sort] === Project::SORT_ORDER_CONTRIBUTIONS_COUNT) {
             $qb->orderBy('p.contributionsCount', 'DESC');
         } else {
             $qb->orderBy('p.publishedAt', 'DESC');
@@ -192,7 +193,7 @@ class ProjectRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('p.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -204,6 +205,9 @@ class ProjectRepository extends EntityRepository
 
     /**
      * Get last enabled projects.
+     *
+     * @param mixed $limit
+     * @param mixed $offset
      */
     public function getLastPublished($limit = 1, $offset = 0)
     {
@@ -266,8 +270,9 @@ class ProjectRepository extends EntityRepository
      * Get last projects by theme.
      *
      * @param theme
-     * @param int $limit
-     * @param int $offset
+     * @param int   $limit
+     * @param int   $offset
+     * @param mixed $themeId
      *
      * @return mixed
      */

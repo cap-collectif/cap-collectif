@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * SynthesisDivision.

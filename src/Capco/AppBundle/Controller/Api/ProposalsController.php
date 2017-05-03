@@ -2,42 +2,42 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Form\ProposalType;
+use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\ProposalAdminType;
+use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Patch;
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swarrot\Broker\Message;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\Event\CommentChangedEvent;
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Swarrot\Broker\Message;
 
 class ProposalsController extends FOSRestController
 {
@@ -239,7 +239,7 @@ class ProposalsController extends FOSRestController
         $parent = $comment->getParent();
 
         if ($parent) {
-            if (!$parent instanceof ProposalComment || $proposal != $parent->getProposal()) {
+            if (!$parent instanceof ProposalComment || $proposal !== $parent->getProposal()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this proposal');
             }
 

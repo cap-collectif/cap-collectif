@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SiteImage.
@@ -161,6 +161,7 @@ class SiteImage
      *
      *
      * @param bool isEnabled
+     * @param mixed $isEnabled
      *
      * @return SiteImage
      */

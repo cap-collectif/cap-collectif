@@ -15,9 +15,9 @@ class ConsultationStepTypeRepository extends EntityRepository
      *
      * @param $id
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getRelatedTypes($id)
     {

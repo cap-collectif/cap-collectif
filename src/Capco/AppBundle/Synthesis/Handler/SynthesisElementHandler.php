@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Synthesis\Handler;
 
-use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
-use Doctrine\ORM\EntityManager;
-use Capco\AppBundle\Manager\LogManager;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
+use Capco\AppBundle\Manager\LogManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SynthesisElementHandler
@@ -25,7 +25,7 @@ class SynthesisElementHandler
 
     public function getElementsFromSynthesisByType($synthesis, $type = null, $term = null, $offset = 0, $limit = null)
     {
-        if ($type === null || !in_array($type, self::$types)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
@@ -48,7 +48,7 @@ class SynthesisElementHandler
 
     public function getElementsTreeFromSynthesisByType($synthesis, $type = null, $parentId = null, $depth = null)
     {
-        if ($type === null || !in_array($type, self::$types)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
@@ -61,7 +61,7 @@ class SynthesisElementHandler
 
     public function countElementsFromSynthesisByType($synthesis, $type = null): int
     {
-        if ($type === null || !in_array($type, self::$types)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 

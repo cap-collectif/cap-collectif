@@ -46,6 +46,6 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
         }
         $em->flush();
 
-        $output->writeln($count.' responses successfully fixed.');
+        $output->writeln($count . ' responses successfully fixed.');
     }
 }

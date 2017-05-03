@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializationContext;
-use Capco\AppBundle\Helper\StepHelper;
 
 class ThemeExtension extends \Twig_Extension
 {
@@ -84,9 +84,9 @@ class ThemeExtension extends \Twig_Extension
                   'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
                   'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
                   '_links' => [
-                      'show' => $realStep->getType() == 'other' ? '' :
+                      'show' => $realStep->getType() === 'other' ? '' :
                         $this->router->generate(
-                          'app_project_show_'.$realStep->getType(),
+                          'app_project_show_' . $realStep->getType(),
                           ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()],
                           UrlGeneratorInterface::ABSOLUTE_URL
                         ),

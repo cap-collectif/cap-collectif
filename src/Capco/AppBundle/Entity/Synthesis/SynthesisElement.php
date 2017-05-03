@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * SynthesisElement.

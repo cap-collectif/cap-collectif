@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\OpinionType;
 use Doctrine\ORM\Query;
 
 /**

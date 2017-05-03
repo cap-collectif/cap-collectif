@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\IdTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**

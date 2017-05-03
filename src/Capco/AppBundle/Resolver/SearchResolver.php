@@ -7,10 +7,10 @@ use Elastica\Filter\Nested;
 use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\MultiMatch;
+use Elastica\Query\AbstractQuery;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
-use Elastica\Query\AbstractQuery;
+use Elastica\Query\MultiMatch;
 use Elastica\Result;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 use Symfony\Component\Validator\Constraints\Uuid;
@@ -91,36 +91,6 @@ class SearchResolver
         ];
     }
 
-    protected function getRandomSortedQuery(AbstractQuery $query): Query
-    {
-        $functionScore = new FunctionScore();
-        $functionScore->setQuery($query);
-        $functionScore->setRandomScore();
-
-        return new Query($functionScore);
-    }
-
-    protected function getMultiMatchQuery($term): Query\BoolQuery
-    {
-        $boolQuery = new Query\BoolQuery();
-
-        $shouldQuery = new MultiMatch();
-        $shouldQuery->setQuery($term);
-        $shouldQuery->setFields([
-            'title', 'title.std',
-            'body', 'body.std',
-            'object', 'object.std',
-            'teaser', 'teaser.std',
-            'username', 'username.std',
-            'biography', 'biography.std',
-        ]);
-
-        $boolQuery->addMust($shouldQuery);
-        $boolQuery->addShould($shouldQuery);
-
-        return $boolQuery;
-    }
-
     /**
      * Take an array of filters and return correct elastica object.
      * The array of filters can contain either simple filters (fieldName => value)
@@ -150,40 +120,6 @@ class SearchResolver
         return $boolFilter;
     }
 
-    protected function getSortSettings(string $sort = '_score', string $order = 'desc'): array
-    {
-        return [
-            $sort => [
-                'order' => $order,
-                'missing' => $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
-            ],
-        ];
-    }
-
-    /**
-     * get array of settings for highlighted results.
-     *
-     * @return array
-     */
-    protected function getHighlightSettings()
-    {
-        return [
-            'pre_tags' => ['<span class="search__highlight">'],
-            'post_tags' => ['</span>'],
-            'number_of_fragments' => 3,
-            'fragment_size' => 175,
-            'fields' => [
-                'title' => ['number_of_fragments' => 0],
-                'object' => new \stdClass(),
-                'body' => new \stdClass(),
-                'teaser' => new \stdClass(),
-                'excerpt' => new \stdClass(),
-                'username' => ['number_of_fragments' => 0],
-                'biography' => new \stdClass(),
-            ],
-        ];
-    }
-
     public function searchProposals($page, $pagination, $order, $terms, $providedFilters)
     {
         $type = 'proposal';
@@ -199,7 +135,7 @@ class SearchResolver
                 break;
             case 'votes':
                 $stepId = $providedFilters['step'] ?? $providedFilters['selectionStep'];
-                $sortField = 'votesCountByStepId.'.$stepId;
+                $sortField = 'votesCountByStepId.' . $stepId;
                 $sortOrder = 'desc';
                 break;
             case 'comments':
@@ -262,6 +198,70 @@ class SearchResolver
             }, $results['results']),
             'count' => $results['count'],
             'order' => $order,
+        ];
+    }
+
+    protected function getRandomSortedQuery(AbstractQuery $query): Query
+    {
+        $functionScore = new FunctionScore();
+        $functionScore->setQuery($query);
+        $functionScore->setRandomScore();
+
+        return new Query($functionScore);
+    }
+
+    protected function getMultiMatchQuery($term): Query\BoolQuery
+    {
+        $boolQuery = new Query\BoolQuery();
+
+        $shouldQuery = new MultiMatch();
+        $shouldQuery->setQuery($term);
+        $shouldQuery->setFields([
+            'title', 'title.std',
+            'body', 'body.std',
+            'object', 'object.std',
+            'teaser', 'teaser.std',
+            'username', 'username.std',
+            'biography', 'biography.std',
+        ]);
+
+        $boolQuery->addMust($shouldQuery);
+        $boolQuery->addShould($shouldQuery);
+
+        return $boolQuery;
+    }
+
+    protected function getSortSettings(string $sort = '_score', string $order = 'desc'): array
+    {
+        return [
+            $sort => [
+                'order' => $order,
+                'missing' => $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
+            ],
+        ];
+    }
+
+    /**
+     * get array of settings for highlighted results.
+     *
+     * @return array
+     */
+    protected function getHighlightSettings()
+    {
+        return [
+            'pre_tags' => ['<span class="search__highlight">'],
+            'post_tags' => ['</span>'],
+            'number_of_fragments' => 3,
+            'fragment_size' => 175,
+            'fields' => [
+                'title' => ['number_of_fragments' => 0],
+                'object' => new \stdClass(),
+                'body' => new \stdClass(),
+                'teaser' => new \stdClass(),
+                'excerpt' => new \stdClass(),
+                'username' => ['number_of_fragments' => 0],
+                'biography' => new \stdClass(),
+            ],
         ];
     }
 }

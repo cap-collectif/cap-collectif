@@ -2,8 +2,8 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

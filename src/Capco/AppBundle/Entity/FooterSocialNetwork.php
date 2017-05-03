@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * FooterSocialNetwork.

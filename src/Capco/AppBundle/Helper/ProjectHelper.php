@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Helper;
 
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 
 class ProjectHelper
 {

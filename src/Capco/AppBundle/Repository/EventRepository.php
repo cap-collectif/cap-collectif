@@ -15,6 +15,13 @@ class EventRepository extends EntityRepository
 {
     /**
      * Get events depending on theme, project and search term, ordered by startAt criteria.
+     *
+     * @param null|mixed $archived
+     * @param null|mixed $themeSlug
+     * @param null|mixed $projectSlug
+     * @param null|mixed $term
+     * @param null|mixed $limit
+     * @param null|mixed $offset
      */
     public function getSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null, $limit = null, $offset = null)
     {
@@ -46,7 +53,7 @@ class EventRepository extends EntityRepository
 
         if ($term) {
             $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -99,7 +106,7 @@ class EventRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -113,9 +120,9 @@ class EventRepository extends EntityRepository
      *
      * @param $slug
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOne($slug)
     {
@@ -172,6 +179,7 @@ class EventRepository extends EntityRepository
      * Get Events by theme.
      *
      * @param theme
+     * @param mixed $theme
      *
      * @return mixed
      */
@@ -202,7 +210,7 @@ class EventRepository extends EntityRepository
     protected function whereIsFuture(QueryBuilder $qb, $alias = 'e')
     {
         return $qb
-            ->andWhere(':now < '.$alias.'.startAt')
+            ->andWhere(':now < ' . $alias . '.startAt')
             ->setParameter('now', new \DateTime());
     }
 
@@ -210,14 +218,14 @@ class EventRepository extends EntityRepository
     {
         if ($archived) {
             return $qb
-                ->andWhere('('.$alias.'.endAt IS NOT NULL AND :now > '.$alias.'.endAt) OR ('.$alias.'.endAt IS NULL AND DATE(:now) > DATE('.$alias.'.startAt))')
+                ->andWhere('(' . $alias . '.endAt IS NOT NULL AND :now > ' . $alias . '.endAt) OR (' . $alias . '.endAt IS NULL AND DATE(:now) > DATE(' . $alias . '.startAt))')
                 ->setParameter('now', new \DateTime())
-                ->orderBy($alias.'.startAt', 'DESC')
+                ->orderBy($alias . '.startAt', 'DESC')
             ;
         }
 
         return $qb
-            ->andWhere('('.$alias.'.endAt IS NULL AND DATE(:now) <= DATE('.$alias.'.startAt)) OR ('.$alias.'.endAt IS NOT NULL AND :now < '.$alias.'.endAt)')
+            ->andWhere('(' . $alias . '.endAt IS NULL AND DATE(:now) <= DATE(' . $alias . '.startAt)) OR (' . $alias . '.endAt IS NOT NULL AND :now < ' . $alias . '.endAt)')
             ->setParameter('now', new \DateTime())
         ;
     }

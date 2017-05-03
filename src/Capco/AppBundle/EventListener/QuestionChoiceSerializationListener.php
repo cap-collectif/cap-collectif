@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\QuestionChoice;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Capco\AppBundle\Entity\QuestionChoice;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class QuestionChoiceSerializationListener extends AbstractSerializationListener

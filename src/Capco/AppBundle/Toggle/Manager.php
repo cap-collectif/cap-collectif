@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Toggle;
 
+use Qandidate\Toggle\ContextFactory;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleManager;
-use Qandidate\Toggle\ContextFactory;
 
 class Manager
 {
@@ -125,19 +125,6 @@ class Manager
         return !$value;
     }
 
-    private function createToggle($name, $status, array $conditions = [])
-    {
-        $toggle = new Toggle($name, $conditions);
-
-        if ($status === Toggle::INACTIVE) {
-            $toggle->deactivate();
-        } else {
-            $toggle->activate($status);
-        }
-
-        return $toggle;
-    }
-
     /**
      * @param $features
      *
@@ -156,5 +143,18 @@ class Manager
         }
 
         return false;
+    }
+
+    private function createToggle($name, $status, array $conditions = [])
+    {
+        $toggle = new Toggle($name, $conditions);
+
+        if ($status === Toggle::INACTIVE) {
+            $toggle->deactivate();
+        } else {
+            $toggle->activate($status);
+        }
+
+        return $toggle;
     }
 }

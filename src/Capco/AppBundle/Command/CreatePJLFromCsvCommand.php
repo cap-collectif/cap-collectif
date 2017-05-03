@@ -2,27 +2,27 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\AppendixType;
+use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Entity\OpinionModal;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
-use Capco\AppBundle\Entity\OpinionModal;
-use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\UserBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CreatePJLFromCsvCommand extends ContainerAwareCommand
 {
@@ -91,25 +91,25 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
     protected function findOpinionTypeByTitle($title, $parentTitle = false, $rootTitle = false)
     {
         foreach ($this->opinionTypes as $type) {
-            if ($type->getTitle() == $title) {
+            if ($type->getTitle() === $title) {
                 if (!$parentTitle) {
                     return $type;
                 }
 
                 $parent = $type->getParent();
-                if ($parent->getTitle() == $parentTitle) {
+                if ($parent->getTitle() === $parentTitle) {
                     if (!$rootTitle) {
                         return $type;
                     }
                     $root = $parent->getParent();
 
-                    if ($root->getTitle() == $rootTitle) {
+                    if ($root->getTitle() === $rootTitle) {
                         return $type;
                     }
                 }
             }
         }
-        throw new \InvalidArgumentException('Unknown opinion title: '.$title, 1);
+        throw new \InvalidArgumentException('Unknown opinion title: ' . $title, 1);
     }
 
     protected function configure()
@@ -184,7 +184,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         foreach ($em->getRepository('CapcoAppBundle:SocialNetwork')->findAll() as $sn) {
             $sn->setIsEnabled(true);
-            if ($sn->getTitle() == 'Twitter') {
+            if ($sn->getTitle() === 'Twitter') {
                 $sn->setLink('https://twitter.com/axellelemaire');
             } else {
                 $sn->setIsEnabled(false);
@@ -193,7 +193,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         foreach ($em->getRepository('CapcoAppBundle:Section')->findAll() as $section) {
             $section->setEnabled(false);
-            if ($section->getTitle() == 'Introduction') {
+            if ($section->getTitle() === 'Introduction') {
                 $section->setEnabled(true);
                 $section->setTitle('Construisons ensemble la République Numérique');
                 $section->setBody('Le numérique et ses usages sont au cœur d’un vaste mouvement de transformation de notre économie, de redéfinition de nos espaces publics et privés, et de construction du lien social. Les conséquences de ces évolutions sont dès à présent globales, et dessinent l’avenir de l’ensemble de notre société. La République du 21e siècle sera nécessairement numérique : elle doit anticiper les changements à l’œuvre, en saisir pleinement les opportunités, et dessiner une société conforme à ses principes de liberté, d’égalité et de fraternité.');
@@ -378,7 +378,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             }
 
             $content = $opinion->getBody();
-            $content .= '<p>'.$row['paragraphe'].'</p>';
+            $content .= '<p>' . $row['paragraphe'] . '</p>';
             $opinion->setBody($content);
 
             $em->persist($opinion);
@@ -391,18 +391,18 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
             if (count($opinion->getAppendices()) === 0) {
                 $motif = new OpinionAppendix();
                 $motif->setAppendixType($exposayDayMotif);
-                $motif->setBody('<p>'.$row['motif'].'</p>');
+                $motif->setBody('<p>' . $row['motif'] . '</p>');
                 $opinion->addAppendice($motif);
             } else {
                 $motif = $opinion->getAppendices()[0];
                 $content = $motif->getBody();
-                $content .= '<p>'.$row['motif'].'</p>';
+                $content .= '<p>' . $row['motif'] . '</p>';
                 $motif->setBody($content);
             }
 
@@ -415,7 +415,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                           ->findOneByTitle($row['opinion']);
 
             if (!is_object($opinion)) {
-                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

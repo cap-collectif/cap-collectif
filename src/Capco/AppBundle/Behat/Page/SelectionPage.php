@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class SelectionPage extends Page
 {
@@ -60,12 +60,12 @@ class SelectionPage extends Page
 
     public function getVoteButton(int $id)
     {
-        return $this->getElement('proposal vote button '.$id);
+        return $this->getElement('proposal vote button ' . $id);
     }
 
     public function getVoteButtonSelector(int $id = 2): string
     {
-        return $this->getSelector('proposal vote button '.$id);
+        return $this->getSelector('proposal vote button ' . $id);
     }
 
     public function clickVoteButton(int $id = 2)
@@ -86,7 +86,7 @@ class SelectionPage extends Page
 
     public function getVotesCounter(int $id)
     {
-        return $this->getElement('proposal votes counter '.$id);
+        return $this->getElement('proposal votes counter ' . $id);
     }
 
     public function getVotesCount(int $id = 2)
@@ -96,7 +96,7 @@ class SelectionPage extends Page
 
     public function getCommentsCounter(int $id)
     {
-        return $this->getElement('proposal comments counter '.$id);
+        return $this->getElement('proposal comments counter ' . $id);
     }
 
     public function getCommentsCount(int $id = 2)
@@ -118,7 +118,7 @@ class SelectionPage extends Page
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
-        $proposalsUrl = $expectedUrl.'/proposals/';
+        $proposalsUrl = $expectedUrl . '/proposals/';
 
         if ($currentUrl !== $expectedUrl) {
             if (false === strrpos($currentUrl, $proposalsUrl)) {

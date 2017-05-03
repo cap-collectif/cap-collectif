@@ -35,7 +35,7 @@ class CommentVote extends AbstractVote
      */
     public function setComment(Comment $comment)
     {
-        if (null != $comment) {
+        if (null !== $comment) {
             $this->comment = $comment;
             $comment->addVote($this);
         }
@@ -55,7 +55,7 @@ class CommentVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->comment != null) {
+        if ($this->comment !== null) {
             $this->comment->removeVote($this);
         }
     }

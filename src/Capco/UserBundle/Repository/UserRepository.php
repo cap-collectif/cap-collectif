@@ -2,17 +2,17 @@
 
 namespace Capco\UserBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Project;
 
 /**
  * UserRepository.
@@ -257,7 +257,7 @@ class UserRepository extends EntityRepository
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
         $rawQuery = 'SELECT u.id, count(distinct pv) as proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH '.$voteWith.'
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH ' . $voteWith . '
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
           LEFT JOIN s.projectAbstractStep pas
@@ -566,7 +566,7 @@ class UserRepository extends EntityRepository
             ;
         }
 
-        if (isset(User::$sortOrder[$sort]) && User::$sortOrder[$sort] == User::SORT_ORDER_CONTRIBUTIONS_COUNT) {
+        if (isset(User::$sortOrder[$sort]) && User::$sortOrder[$sort] === User::SORT_ORDER_CONTRIBUTIONS_COUNT) {
             $qb = $this->orderByContributionsCount($qb, 'DESC');
         } else {
             $qb->orderBy('u.createdAt', 'DESC');
@@ -578,16 +578,6 @@ class UserRepository extends EntityRepository
         }
 
         return new Paginator($qb);
-    }
-
-    /**
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function getIsEnabledQueryBuilder()
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.enabled = :enabled')
-            ->setParameter('enabled', true);
     }
 
     public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC')
@@ -604,5 +594,15 @@ class UserRepository extends EntityRepository
             ->setParameter('role', serialize(['ROLE_SUPER_ADMIN']));
 
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.enabled = :enabled')
+            ->setParameter('enabled', true);
     }
 }

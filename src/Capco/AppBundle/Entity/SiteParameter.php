@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SiteParameter.
@@ -94,11 +94,6 @@ class SiteParameter
      */
     private $category = 'settings.global';
 
-    public function __toString()
-    {
-        return $this->getId() ? $this->getKeyname() : 'New parameter';
-    }
-
     /**
      * Constructor.
      */
@@ -106,6 +101,11 @@ class SiteParameter
     {
         $this->updatedAt = new \Datetime();
         $this->type = self::TYPE_SIMPLE_TEXT;
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getKeyname() : 'New parameter';
     }
 
     /**

@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Behat\Symfony2Extension\Context\KernelDictionary;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
@@ -23,6 +23,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run :string
+     *
+     * @param mixed $string
      */
     public function iRun($string)
     {
@@ -31,6 +33,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run a command :command with parameters:
+     *
+     * @param mixed $command
      */
     public function runCommandWithParameters($command, PyStringNode $parameters)
     {
@@ -47,6 +51,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Then the command exit code should be :code
+     *
+     * @param mixed $code
      */
     public function exitCodeShouldBe($code)
     {
@@ -58,6 +64,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Then I should see :content in output
+     *
+     * @param mixed $content
      */
     public function iShouldSee($content)
     {

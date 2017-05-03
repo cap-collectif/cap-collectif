@@ -2,10 +2,10 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Capco\AppBundle\Toggle\Manager;
 
 class ProfileFormType extends AbstractType
 {

@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
@@ -40,6 +40,9 @@ class OpinionController extends Controller
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
+     *
+     * @param mixed      $page
+     * @param null|mixed $opinionsSort
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
     {
@@ -49,7 +52,7 @@ class OpinionController extends Controller
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
 
-        if (false == $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
+        if (false === $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
             throw $this->createNotFoundException('This type does not exist for this consultation step');
         }
 
@@ -83,6 +86,12 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
+     *
+     * @param mixed $projectSlug
+     * @param mixed $stepSlug
+     * @param mixed $opinionTypeSlug
+     * @param mixed $opinionSlug
+     * @param mixed $versionSlug
      */
     public function showOpinionVersionAction(Request $request, $projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug)
     {
@@ -120,6 +129,11 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
+     *
+     * @param mixed $projectSlug
+     * @param mixed $stepSlug
+     * @param mixed $opinionTypeSlug
+     * @param mixed $opinionSlug
      */
     public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
     {

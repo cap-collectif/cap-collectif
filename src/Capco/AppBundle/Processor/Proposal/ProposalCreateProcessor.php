@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Swarrot\Broker\Message;
-use Swarrot\Processor\ProcessorInterface;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Swarrot\Broker\Message;
+use Swarrot\Processor\ProcessorInterface;
 
 class ProposalCreateProcessor implements ProcessorInterface
 {

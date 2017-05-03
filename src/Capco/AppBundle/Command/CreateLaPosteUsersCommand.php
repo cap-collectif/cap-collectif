@@ -24,9 +24,9 @@ class CreateLaPosteUsersCommand extends ContainerAwareCommand
 
         for ($i = 1; $i <= 50; ++$i) {
             $user = $userManager->createUser();
-            $username = 'EquipeCDM'.(string) $i;
+            $username = 'EquipeCDM' . (string) $i;
             $user->setUsername($username);
-            $user->setEmail(filter_var($username.'@laposte.net', FILTER_SANITIZE_EMAIL));
+            $user->setEmail(filter_var($username . '@laposte.net', FILTER_SANITIZE_EMAIL));
             $user->setPlainpassword('laposte');
             $user->setEnabled(true);
             $userManager->updateUser($user);
@@ -34,11 +34,11 @@ class CreateLaPosteUsersCommand extends ContainerAwareCommand
 
         foreach ($rows as $row) {
             $user = $userManager->createUser();
-            $user->setUsername($row[0].' '.$row[1]);
+            $user->setUsername($row[0] . ' ' . $row[1]);
             $user->setEmail(filter_var($row[3], FILTER_SANITIZE_EMAIL));
             $user->setPlainpassword('laposte');
             $user->setEnabled(true);
-            $user->setBiography($row[2].', '.$row[4]);
+            $user->setBiography($row[2] . ', ' . $row[4]);
             $userManager->updateUser($user);
         }
     }

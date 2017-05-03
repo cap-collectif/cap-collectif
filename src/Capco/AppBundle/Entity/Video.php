@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Idea.

@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\ProposalCollectVoteType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CollectStepsController extends FOSRestController
 {
@@ -80,7 +80,7 @@ class CollectStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if proposal is in step
-        if ($collectStep != $proposal->getProposalForm()->getStep()) {
+        if ($collectStep !== $proposal->getProposalForm()->getStep()) {
             throw new BadRequestHttpException('This proposal is not associated to this collect step.');
         }
 
@@ -118,7 +118,7 @@ class CollectStepsController extends FOSRestController
             return $form;
         }
 
-        if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {
+        if ($form->has('comment') && null !== ($content = $form->get('comment')->getData())) {
             $comment = new ProposalComment();
             $comment
                 ->setAuthor($vote->getUser())
@@ -158,7 +158,7 @@ class CollectStepsController extends FOSRestController
         $em = $this->get('doctrine.orm.entity_manager');
 
         // Check if proposal is in step
-        if ($collectStep != $proposal->getProposalForm()->getStep()) {
+        if ($collectStep !== $proposal->getProposalForm()->getStep()) {
             throw new BadRequestHttpException('This proposal is not associated to this collect step.');
         }
 

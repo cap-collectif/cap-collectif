@@ -2,21 +2,39 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\AppendixType;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionTypeAppendixType;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionTypeAppendixType;
-use Capco\AppBundle\Entity\AppendixType;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 
 class ImportStructureFromCsvCommand extends ContainerAwareCommand
 {
     public $rootOpinionTypes = [];
     public $filePath;
+
+    public function findOpinionTypeByPath($path, $types)
+    {
+        $opinionTypeTitles = explode('|', $path, 2);
+        $current = $opinionTypeTitles[0];
+
+        foreach ($types as $type) {
+            if ($type->getTitle() === $current) {
+                $next = isset($opinionTypeTitles[1]) ? $opinionTypeTitles[1] : null;
+                if (!$next) {
+                    return $type;
+                }
+
+                return $this->findOpinionTypeByPath($next, $type->getChildren());
+            }
+        }
+        throw new \InvalidArgumentException('Unknown opinion title: "' . $current . '"', 1);
+    }
 
     protected function configure()
     {
@@ -46,24 +64,6 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
         return $this->getContainer()
                     ->get('import.csvtoarray')
                     ->convert($this->filePath);
-    }
-
-    public function findOpinionTypeByPath($path, $types)
-    {
-        $opinionTypeTitles = explode('|', $path, 2);
-        $current = $opinionTypeTitles[0];
-
-        foreach ($types as $type) {
-            if ($type->getTitle() == $current) {
-                $next = isset($opinionTypeTitles[1]) ? $opinionTypeTitles[1] : null;
-                if (!$next) {
-                    return $type;
-                }
-
-                return $this->findOpinionTypeByPath($next, $type->getChildren());
-            }
-        }
-        throw new \InvalidArgumentException('Unknown opinion title: "'.$current.'"', 1);
     }
 
     protected function import(InputInterface $input, OutputInterface $output)

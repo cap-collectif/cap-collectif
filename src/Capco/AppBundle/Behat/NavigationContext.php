@@ -28,6 +28,8 @@ class NavigationContext extends PageObjectContext
 
     /**
      * @Then The first source vote counter should be :value
+     *
+     * @param mixed $value
      */
     public function theFirstSourceVoteCounterShouldBe($value)
     {
@@ -36,6 +38,8 @@ class NavigationContext extends PageObjectContext
 
     /**
      * @Then The first comment vote counter should be :value
+     *
+     * @param mixed $value
      */
     public function theFirstCommentVoteCounterShouldBe($value)
     {

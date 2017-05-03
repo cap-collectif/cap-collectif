@@ -23,7 +23,7 @@ class IdeaHelper
 
     public function findUserVoteOrCreate(Idea $idea, User $user = null)
     {
-        if ($user == null) {
+        if ($user === null) {
             return new IdeaVote($idea);
         }
 

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * MenuItem.
@@ -110,11 +110,6 @@ class MenuItem
      */
     private $associatedFeatures;
 
-    public function __toString()
-    {
-        return $this->getId() ? $this->getTitle() : 'New menu item';
-    }
-
     /**
      * Constructor.
      */
@@ -122,6 +117,11 @@ class MenuItem
     {
         $this->updatedAt = new \Datetime();
         $this->associatedFeatures = null;
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getTitle() : 'New menu item';
     }
 
     /**
@@ -358,7 +358,7 @@ class MenuItem
     public function setPage($page)
     {
         $this->Page = $page;
-        if (null != $this->getPage()) {
+        if (null !== $this->getPage()) {
             $this->Page->addMenuItem($this);
         }
     }
@@ -368,7 +368,7 @@ class MenuItem
      */
     public function deleteMenuItem()
     {
-        if ($this->Page != null) {
+        if ($this->Page !== null) {
             $this->Page->removeMenuItem($this);
         }
     }

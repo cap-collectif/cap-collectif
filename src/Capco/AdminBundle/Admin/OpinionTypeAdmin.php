@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
 
 class OpinionTypeAdmin extends Admin
 {
@@ -42,6 +42,31 @@ class OpinionTypeAdmin extends Admin
             'consultation_step_type_id' => $consultationStepTypeId,
             'consultation_step_type_name' => $consultationStepTypeName,
         ];
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name === 'edit' || $name === 'create') {
+            return 'CapcoAdminBundle:OpinionType:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
+    public function prePersist($type)
+    {
+        if (!$type->getConsultationStepType()) {
+            $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
+            if ($consultationStepTypeId !== null) {
+                $consultationStepType = $this->getConfigurationPool()
+                    ->getContainer()
+                    ->get('doctrine')
+                    ->getManager()
+                    ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
+                    ->find($consultationStepTypeId);
+                $type->setConsultationStepType($consultationStepType);
+            }
+        }
     }
 
     /**
@@ -153,6 +178,11 @@ class OpinionTypeAdmin extends Admin
         ;
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['create', 'edit', 'delete']);
+    }
+
     private function createQueryForParent()
     {
         $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
@@ -176,35 +206,5 @@ class OpinionTypeAdmin extends Admin
         }
 
         return $qb->getQuery();
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'edit' || $name === 'create') {
-            return 'CapcoAdminBundle:OpinionType:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    public function prePersist($type)
-    {
-        if (!$type->getConsultationStepType()) {
-            $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
-            if ($consultationStepTypeId !== null) {
-                $consultationStepType = $this->getConfigurationPool()
-                    ->getContainer()
-                    ->get('doctrine')
-                    ->getManager()
-                    ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
-                    ->find($consultationStepTypeId);
-                $type->setConsultationStepType($consultationStepType);
-            }
-        }
     }
 }

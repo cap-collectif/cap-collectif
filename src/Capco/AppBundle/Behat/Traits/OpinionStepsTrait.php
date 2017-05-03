@@ -76,11 +76,6 @@ trait OpinionStepsTrait
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.') > -1");
     }
 
-    protected function opinionPageIsOpen()
-    {
-        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinion);
-    }
-
     /**
      * Go to a opinion in a closed step.
      *
@@ -89,11 +84,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinionInAClosedStep()
     {
         $this->visitPageWithParams('opinion page', self::$opinionInClosedStep);
-    }
-
-    protected function opinionPageInClosedStepIsOpen()
-    {
-        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinionInClosedStep);
     }
 
     /**
@@ -114,11 +104,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinionWithNoSources()
     {
         $this->visitPageWithParams('opinion page', self::$opinionWithNoSources);
-    }
-
-    protected function opinionWithNoSourcesPageIsOpen()
-    {
-        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinionWithNoSources);
     }
 
     /**
@@ -160,7 +145,7 @@ trait OpinionStepsTrait
     public function iGoOnTheSourcesTab()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('sources tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('sources tab') . "').length > 0");
         $page->clickSourcesTab();
         $this->iWait(1);
     }
@@ -171,7 +156,7 @@ trait OpinionStepsTrait
     public function iGoOnTheArgumentsTab()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('arguments tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('arguments tab') . "').length > 0");
         $page->clickArgumentsTab();
         $this->iWait(1);
     }
@@ -182,7 +167,7 @@ trait OpinionStepsTrait
     public function iGoOnTheConnectionsTab()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('connections tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('connections tab') . "').length > 0");
         $page->clickConnectionsTab();
         $this->iWait(1);
     }
@@ -193,7 +178,7 @@ trait OpinionStepsTrait
     public function iGoOnTheVotesEvolutionTab()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(3000, "$('".$page->getSelector('votes evolution tab')."').length > 0");
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('votes evolution tab') . "').length > 0");
         $page->clickVotesEvolutionTab();
         $this->iWait(1);
     }
@@ -235,28 +220,28 @@ trait OpinionStepsTrait
     {
         $this->submitArgumentForTypeWithText('yes',
             'Tu vois, ce n\'est pas un simple sport car il faut se recréer... pour recréer... a better you et '
-            .'cette officialité peut vraiment retarder ce qui devrait devenir... Et j\'ai toujours grandi parmi '
-            .'les chiens. Même si on se ment, je sais que, grâce à ma propre vérité en vérité, la vérité, il n\'y'
-            .' a pas de vérité et parfois c\'est bon parfois c\'est pas bon. Et là, vraiment, j\'essaie de tout '
-            .'coeur de donner la plus belle réponse de la terre ! Si je t\'emmerde, tu me le dis, j\'ai vraiment '
-            .'une grande mission car entre penser et dire, il y a un monde de différence et finalement tout '
-            .'refaire depuis le début. Et j\'ai toujours grandi parmi les chiens. Je me souviens en fait, je ne '
-            .'suis pas un simple danseur car il faut toute la splendeur du aware et cette officialité peut '
-            .'vraiment retarder ce qui devrait devenir... Donc on n\'est jamais seul spirituellement ! '
-            .'You see, j\'ai vraiment une grande mission car entre penser et dire, il y a un monde de '
-            .'différence parce que spirituellement, on est tous ensemble, ok ? Et tu as envie de le dire au '
-            .'monde entier, including yourself. You see, je sais que, grâce à ma propre vérité on est tous '
-            .'capables de donner des informations à chacun car l\'aboutissement de l\'instinct, c\'est '
-            .'l\'amour ! Mais ça, c\'est uniquement lié au spirit. Si je t\'emmerde, tu me le dis, je suis mon '
-            .'meilleur modèle car entre penser et dire, il y a un monde de différence et c\'est très, très '
-            .'beau d\'avoir son propre moi-même ! Donc on n\'est jamais seul spirituellement ! Tu comprends, '
-            .'je ne suis pas un simple danseur car il y a de bonnes règles, de bonnes rules car l\'aboutissement '
-            .'de l\'instinct, c\'est l\'amour ! Il y a un an, je t\'aurais parlé de mes muscles. Ah non attention, '
-            .'après il faut s\'intégrer tout ça dans les environnements et on est tous capables de donner des '
-            .'informations à chacun et parfois c\'est bon parfois c\'est pas bon. Donc on n\'est jamais seul '
-            .'spirituellement ! Je me souviens en fait, je suis mon meilleur modèle car c\'est un très, très '
-            .'gros travail et ça, c\'est très dur, et, et, et... c\'est très facile en même temps. Pour te dire '
-            .'comme on a beaucoup à apprendre sur la vie !'
+            . 'cette officialité peut vraiment retarder ce qui devrait devenir... Et j\'ai toujours grandi parmi '
+            . 'les chiens. Même si on se ment, je sais que, grâce à ma propre vérité en vérité, la vérité, il n\'y'
+            . ' a pas de vérité et parfois c\'est bon parfois c\'est pas bon. Et là, vraiment, j\'essaie de tout '
+            . 'coeur de donner la plus belle réponse de la terre ! Si je t\'emmerde, tu me le dis, j\'ai vraiment '
+            . 'une grande mission car entre penser et dire, il y a un monde de différence et finalement tout '
+            . 'refaire depuis le début. Et j\'ai toujours grandi parmi les chiens. Je me souviens en fait, je ne '
+            . 'suis pas un simple danseur car il faut toute la splendeur du aware et cette officialité peut '
+            . 'vraiment retarder ce qui devrait devenir... Donc on n\'est jamais seul spirituellement ! '
+            . 'You see, j\'ai vraiment une grande mission car entre penser et dire, il y a un monde de '
+            . 'différence parce que spirituellement, on est tous ensemble, ok ? Et tu as envie de le dire au '
+            . 'monde entier, including yourself. You see, je sais que, grâce à ma propre vérité on est tous '
+            . 'capables de donner des informations à chacun car l\'aboutissement de l\'instinct, c\'est '
+            . 'l\'amour ! Mais ça, c\'est uniquement lié au spirit. Si je t\'emmerde, tu me le dis, je suis mon '
+            . 'meilleur modèle car entre penser et dire, il y a un monde de différence et c\'est très, très '
+            . 'beau d\'avoir son propre moi-même ! Donc on n\'est jamais seul spirituellement ! Tu comprends, '
+            . 'je ne suis pas un simple danseur car il y a de bonnes règles, de bonnes rules car l\'aboutissement '
+            . 'de l\'instinct, c\'est l\'amour ! Il y a un an, je t\'aurais parlé de mes muscles. Ah non attention, '
+            . 'après il faut s\'intégrer tout ça dans les environnements et on est tous capables de donner des '
+            . 'informations à chacun et parfois c\'est bon parfois c\'est pas bon. Donc on n\'est jamais seul '
+            . 'spirituellement ! Je me souviens en fait, je suis mon meilleur modèle car c\'est un très, très '
+            . 'gros travail et ça, c\'est très dur, et, et, et... c\'est très facile en même temps. Pour te dire '
+            . 'comme on a beaucoup à apprendre sur la vie !'
         );
     }
 
@@ -335,7 +320,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number '.$votesCount.' for argument after edition.');
+        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number ' . $votesCount . ' for argument after edition.');
     }
 
     /**
@@ -380,15 +365,6 @@ trait OpinionStepsTrait
     public function iShouldNotSeeTheArgumentDeleteButton()
     {
         $this->iShouldNotSeeElementOnPage('argument delete button', $this->currentPage);
-    }
-
-    protected function clickArgumentVoteButtonWithLabel($label)
-    {
-        $page = $this->getCurrentPage();
-        $buttonLabel = $page->getArgumentVoteButtonLabel();
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on argument vote button.');
-        $page->clickArgumentVoteButton();
-        $this->iWait(2);
     }
 
     /**
@@ -461,17 +437,6 @@ trait OpinionStepsTrait
         $this->getCurrentPage()->clickArgumentReportButton();
     }
 
-    // ************************************** Sources ***************************************************
-
-    protected function clickSourceVoteButtonWithLabel($label)
-    {
-        $page = $this->getCurrentPage();
-        $buttonLabel = $page->getSourceVoteButtonLabel();
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on source vote button.');
-        $page->clickSourceVoteButton();
-        $this->iWait(2);
-    }
-
     /**
      * @When I vote for the first source
      */
@@ -504,7 +469,7 @@ trait OpinionStepsTrait
     public function iCreateANewSource()
     {
         $page = $this->getCurrentPage();
-        $this->getSession()->wait(2000, "$('".$page->getSelector('add source button')."').length > 0");
+        $this->getSession()->wait(2000, "$('" . $page->getSelector('add source button') . "').length > 0");
         $page->clickAddSource();
         $this->iWait(1);
         $page->fillSourceForm();
@@ -581,7 +546,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number '.$votesCount.' for source after edition.');
+        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number ' . $votesCount . ' for source after edition.');
     }
 
     /**
@@ -671,11 +636,6 @@ trait OpinionStepsTrait
         $this->visitPageWithParams('opinion version page', self::$version);
     }
 
-    protected function versionPageIsOpen()
-    {
-        return $this->navigationContext->getPage('opinion version page')->isOpen(self::$version);
-    }
-
     /**
      * Go to a version in a closed step.
      *
@@ -684,11 +644,6 @@ trait OpinionStepsTrait
     public function iGoToAnOpinionVersionInAClosedStep()
     {
         $this->visitPageWithParams('opinion version page', self::$versionInClosedStep);
-    }
-
-    protected function versionPageInClosedStepIsOpen()
-    {
-        return $this->navigationContext->getPage('opinion version page')->isOpen(self::$versionInClosedStep);
     }
 
     /**
@@ -764,5 +719,50 @@ trait OpinionStepsTrait
     {
         $votesInModalSelector = $this->navigationContext->getPage('opinion version page')->getVotesInModalSelector();
         $this->assertNumElements(49, $votesInModalSelector);
+    }
+
+    protected function opinionPageIsOpen()
+    {
+        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinion);
+    }
+
+    protected function opinionPageInClosedStepIsOpen()
+    {
+        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinionInClosedStep);
+    }
+
+    protected function opinionWithNoSourcesPageIsOpen()
+    {
+        return $this->navigationContext->getPage('opinion page')->isOpen(self::$opinionWithNoSources);
+    }
+
+    protected function clickArgumentVoteButtonWithLabel($label)
+    {
+        $page = $this->getCurrentPage();
+        $buttonLabel = $page->getArgumentVoteButtonLabel();
+        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label ' . $buttonLabel . ' on argument vote button.');
+        $page->clickArgumentVoteButton();
+        $this->iWait(2);
+    }
+
+    // ************************************** Sources ***************************************************
+
+    protected function clickSourceVoteButtonWithLabel($label)
+    {
+        $page = $this->getCurrentPage();
+        $buttonLabel = $page->getSourceVoteButtonLabel();
+        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label ' . $buttonLabel . ' on source vote button.');
+        $page->clickSourceVoteButton();
+        $this->iWait(2);
+    }
+
+    protected function versionPageIsOpen()
+    {
+        return $this->navigationContext->getPage('opinion version page')->isOpen(self::$version);
+    }
+
+    protected function versionPageInClosedStepIsOpen()
+    {
+        return $this->navigationContext->getPage('opinion version page')->isOpen(self::$versionInClosedStep);
     }
 }

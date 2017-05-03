@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 /**
  * @ORM\Table(name="argument")
@@ -27,16 +27,6 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
-
-    public function getKind(): string
-    {
-        return 'argument';
-    }
-
-    public function getRelated()
-    {
-        return $this->getParent();
-    }
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -148,14 +138,24 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         $this->updatedAt = new \DateTime();
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
     public function __toString()
     {
         return $this->getId() ? $this->getBodyExcerpt(50) : 'New argument';
+    }
+
+    public function getKind(): string
+    {
+        return 'argument';
+    }
+
+    public function getRelated()
+    {
+        return $this->getParent();
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 
     /**
@@ -414,9 +414,9 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
      */
     public function userHasReport(User $user = null)
     {
-        if ($user != null) {
+        if ($user !== null) {
             foreach ($this->Reports as $report) {
-                if ($report->getReporter() == $user) {
+                if ($report->getReporter() === $user) {
                     return true;
                 }
             }
@@ -457,7 +457,7 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }
@@ -487,11 +487,11 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
      */
     public function deleteArgument()
     {
-        if ($this->opinion != null) {
+        if ($this->opinion !== null) {
             $this->opinion->removeArgument($this);
         }
 
-        if ($this->opinionVersion != null) {
+        if ($this->opinionVersion !== null) {
             $this->opinionVersion->removeArgument($this);
         }
     }

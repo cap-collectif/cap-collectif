@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Synthesis
 {
+    use UuidTrait, SoftDeleteTrait;
     const SOURCE_TYPE_NONE = 'none';
     const SOURCE_TYPE_CONSULTATION = 'consultation_step';
 
@@ -26,8 +27,6 @@ class Synthesis
         self::SOURCE_TYPE_CONSULTATION => 'synthesis.source_types.consultation_step',
         self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
     ];
-
-    use UuidTrait, SoftDeleteTrait;
 
     /**
      * @ORM\Column(name="enabled", type="boolean")

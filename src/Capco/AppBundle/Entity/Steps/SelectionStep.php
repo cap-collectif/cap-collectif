@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Entity\ProposalForm;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")

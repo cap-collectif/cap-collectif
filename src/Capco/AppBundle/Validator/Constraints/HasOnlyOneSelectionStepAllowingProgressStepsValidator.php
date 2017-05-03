@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\ConstraintValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintValidator
 {

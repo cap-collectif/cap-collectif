@@ -14,9 +14,9 @@ class OpinionTypeAppendixTypeRepository extends EntityRepository
      *
      * @param $id
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getAppendixTypesByOpinionTypes(string $id)
     {

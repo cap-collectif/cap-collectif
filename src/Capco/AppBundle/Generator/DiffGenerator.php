@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Generator;
 
-use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionModal;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Model\HasDiffInterface;
+use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
 class DiffGenerator
 {

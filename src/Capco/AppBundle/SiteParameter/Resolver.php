@@ -29,7 +29,7 @@ class Resolver
 
         $value = $this->parameters[$key]['value'];
 
-        if ($this->parameters[$key]['type'] == SiteParameter::$types['integer']) {
+        if ($this->parameters[$key]['type'] === SiteParameter::$types['integer']) {
             $value = is_numeric($value) ? (int) $value : 0;
         }
 

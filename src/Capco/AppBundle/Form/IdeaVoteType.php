@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\EventListener\NoCommentWhenPrivateSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Capco\AppBundle\Form\EventListener\NoCommentWhenPrivateSubscriber;
 
 class IdeaVoteType extends AbstractType
 {

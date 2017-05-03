@@ -112,6 +112,8 @@ class UserContext extends DefaultContext
 
     /**
      * @Then I can see I am logged in as :username
+     *
+     * @param mixed $username
      */
     public function iCanSeeIamLoggedInAs($username)
     {
@@ -137,17 +139,10 @@ class UserContext extends DefaultContext
         $home->openLoginModal();
     }
 
-    private function logInWith($email, $pwd)
-    {
-        $this->iOpenLoginModal();
-        $this->fillField('username', $email);
-        $this->fillField('password', $pwd);
-        $this->pressButton('Se connecter');
-        sleep(4); // TODO
-    }
-
     /**
      * @Then I should be asked to confirm my email :email
+     *
+     * @param mixed $email
      */
     public function iShouldBeAskedToConfirmMyEmail($email)
     {
@@ -166,6 +161,9 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username phone number should be :phone
+     *
+     * @param mixed $username
+     * @param mixed $phone
      */
     public function phoneNumberShouldBe($username, $phone)
     {
@@ -175,6 +173,8 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should not be sms confirmed
+     *
+     * @param mixed $username
      */
     public function phoneConfirmedShouldBeFalse($username)
     {
@@ -184,6 +184,8 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should have an sms code to confirm
+     *
+     * @param mixed $username
      */
     public function shouldHaveAnSmsCodeToConfirm($username)
     {
@@ -195,6 +197,8 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should be sms confirmed
+     *
+     * @param mixed $username
      */
     public function shouldBePhoneConfirmed($username)
     {
@@ -204,6 +208,9 @@ class UserContext extends DefaultContext
 
     /**
      * @Given :email is registered to event :slug
+     *
+     * @param mixed $email
+     * @param mixed $slug
      */
     public function isRegisteredToEvent($email, $slug)
     {
@@ -216,5 +223,14 @@ class UserContext extends DefaultContext
 
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
+    }
+
+    private function logInWith($email, $pwd)
+    {
+        $this->iOpenLoginModal();
+        $this->fillField('username', $email);
+        $this->fillField('password', $pwd);
+        $this->pressButton('Se connecter');
+        sleep(4); // TODO
     }
 }

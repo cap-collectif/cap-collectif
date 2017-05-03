@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * SocialNetwork.
@@ -68,17 +68,17 @@ class SocialNetwork
      */
     private $media;
 
-    public function __toString()
-    {
-        return $this->getId() ? $this->getTitle() : 'New social network';
-    }
-
     /**
      * Constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getTitle() : 'New social network';
     }
 
     /**

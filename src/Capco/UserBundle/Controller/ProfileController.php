@@ -3,14 +3,14 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Capco\UserBundle\Entity\User;
+use JMS\Serializer\SerializationContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializationContext;
 
 /**
  * @Route("/profile")
@@ -66,28 +66,6 @@ class ProfileController extends BaseController
 
       return [];
   }
-
-    private function getProposalsProps(User $user)
-    {
-        $proposalsWithStep = $this
-          ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
-          ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
-      ;
-        $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
-            $sum += count($item['proposals']);
-
-            return $sum;
-        });
-        $proposalsPropsBySteps = [];
-        foreach ($proposalsWithStep as $key => $value) {
-            $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
-        }
-
-        return [
-        'proposalsPropsBySteps' => $proposalsPropsBySteps,
-        'proposalsCount' => $proposalsCount,
-      ];
-    }
 
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
@@ -330,5 +308,27 @@ class ProfileController extends BaseController
             'user' => $user,
             'votes' => $votes,
         ];
+    }
+
+    private function getProposalsProps(User $user)
+    {
+        $proposalsWithStep = $this
+          ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
+          ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
+      ;
+        $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
+            $sum += count($item['proposals']);
+
+            return $sum;
+        });
+        $proposalsPropsBySteps = [];
+        foreach ($proposalsWithStep as $key => $value) {
+            $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
+        }
+
+        return [
+        'proposalsPropsBySteps' => $proposalsPropsBySteps,
+        'proposalsCount' => $proposalsCount,
+      ];
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Theme;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\Theme;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,6 +20,28 @@ class ThemeAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), $object->getBody(), $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
+    public function getFeatures()
+    {
+        return [
+            'themes',
+        ];
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -217,27 +239,5 @@ class ThemeAdmin extends Admin
                 'label' => 'admin.fields.theme.updated_at',
             ])
         ;
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), $object->getBody(), $url);
-        }
-
-        return parent::getObjectMetadata($object);
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'themes',
-        ];
     }
 }

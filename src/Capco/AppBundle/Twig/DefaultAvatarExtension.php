@@ -22,10 +22,10 @@ class DefaultAvatarExtension extends \Twig_Extension
 
     public function getDefaultAvatarIfNull($media)
     {
-        if (null != $media) {
+        if (null !== $media) {
             return $media;
-        } else {
-            return $this->resolver->getMedia('image.default_avatar');
         }
+
+        return $this->resolver->getMedia('image.default_avatar');
     }
 }

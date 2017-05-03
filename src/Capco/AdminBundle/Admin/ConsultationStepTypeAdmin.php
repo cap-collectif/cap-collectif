@@ -15,6 +15,15 @@ class ConsultationStepTypeAdmin extends Admin
         '_sort_by' => 'title',
     ];
 
+    public function getTemplate($name)
+    {
+        if ($name === 'edit') {
+            return 'CapcoAdminBundle:ConsultationStepType:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -115,14 +124,5 @@ class ConsultationStepTypeAdmin extends Admin
             ->getManager()
             ->getRepository('CapcoAppBundle:OpinionType')
             ->getOrderedRootNodesQuery($subject);
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'edit') {
-            return 'CapcoAdminBundle:ConsultationStepType:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
     }
 }

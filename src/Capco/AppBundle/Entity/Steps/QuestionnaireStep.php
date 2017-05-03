@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Questionnaire;
 
 /**
  * Class QuestionnaireStep.

@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Answer;
+use Capco\AppBundle\Entity\Proposal;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

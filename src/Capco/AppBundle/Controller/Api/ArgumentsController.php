@@ -2,28 +2,28 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\ArgumentVote;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\Form\ReportingType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Capco\AppBundle\Entity\Opinion;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ArgumentsController extends FOSRestController
 {
@@ -218,7 +218,7 @@ class ArgumentsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        if ($argument->getOpinion() != $opinion) {
+        if ($argument->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -256,11 +256,11 @@ class ArgumentsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        if ($argument->getOpinionVersion() != $version) {
+        if ($argument->getOpinionVersion() !== $version) {
             throw new BadRequestHttpException('Not a child.');
         }
 
-        if ($opinion != $version->getParent()) {
+        if ($opinion !== $version->getParent()) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -297,7 +297,7 @@ class ArgumentsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        if ($argument->getOpinion() != $opinion) {
+        if ($argument->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -421,7 +421,7 @@ class ArgumentsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        if ($argument->getOpinion() != $opinion) {
+        if ($argument->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 

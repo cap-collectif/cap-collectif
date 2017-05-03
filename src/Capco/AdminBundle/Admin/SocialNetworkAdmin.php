@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\SocialNetwork;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\SocialNetwork;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
 class SocialNetworkAdmin extends Admin
@@ -17,6 +17,21 @@ class SocialNetworkAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -143,20 +158,5 @@ class SocialNetworkAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
-        }
-
-        return parent::getObjectMetadata($object);
     }
 }

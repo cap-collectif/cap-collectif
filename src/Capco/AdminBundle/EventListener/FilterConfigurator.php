@@ -3,8 +3,8 @@
 namespace Capco\AdminBundle\EventListener;
 
 use Doctrine\Orm\EntityManager;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FilterConfigurator

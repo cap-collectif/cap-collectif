@@ -9,11 +9,6 @@ class OpinionVersionPage extends Page
 {
     use PageTrait;
 
-    /**
-     * @var string
-     */
-    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}';
-
     public $elements = [
         // Version
         'delete button' => '#opinion-delete',
@@ -46,6 +41,11 @@ class OpinionVersionPage extends Page
         'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
         'vote first source' => '#sources-list li:first-child .source__btn--vote',
     ];
+
+    /**
+     * @var string
+     */
+    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}';
 
     public function clickSourcesTab()
     {
@@ -106,8 +106,8 @@ class OpinionVersionPage extends Page
 
     public function submitArgument($type, $text)
     {
-        $field = $this->getElement('Argument '.$type.' field');
-        $button = $this->getElement('Argument '.$type.' button');
+        $field = $this->getElement('Argument ' . $type . ' field');
+        $button = $this->getElement('Argument ' . $type . ' button');
         $field->setValue($text);
         $button->press();
     }
@@ -129,7 +129,7 @@ class OpinionVersionPage extends Page
 
     public function getArgumentVotesCount()
     {
-        return intval($this->getArgumentVotesCounter()->getText());
+        return (int) ($this->getArgumentVotesCounter()->getText());
     }
 
     public function clickArgumentEditButton()

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\DataFixtures\Processor;
 
-use Nelmio\Alice\ProcessorInterface;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Id\AssignedGenerator;
 use Capco\ClassificationBundle\Entity\Context;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Id\AssignedGenerator;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Nelmio\Alice\ProcessorInterface;
 
 class FixedIdsProcessor implements ProcessorInterface
 {

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Capco\AppBundle\Helper\StepHelper;
+use JMS\Serializer\EventDispatcher\ObjectEvent;
 
 class AbstractStepSerializationListener extends AbstractSerializationListener
 {

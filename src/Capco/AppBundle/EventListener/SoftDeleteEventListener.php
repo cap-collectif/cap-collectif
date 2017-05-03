@@ -13,11 +13,10 @@ class SoftDeleteEventListener
             if (method_exists($object, 'getDeletedAt')) {
                 if ($object->getDeletedAt() instanceof \Datetime) {
                     continue;
-                } else {
-                    $object->setDeletedAt(new \DateTime());
-                    $em->merge($object);
-                    $em->persist($object);
                 }
+                $object->setDeletedAt(new \DateTime());
+                $em->merge($object);
+                $em->persist($object);
             }
         }
     }

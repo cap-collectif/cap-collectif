@@ -62,6 +62,8 @@ trait IdeaStepsTrait
      * There should be nb ideas.
      *
      * @Then there should be :nb ideas
+     *
+     * @param mixed $nb
      */
     public function thereShouldBeNbIdeas($nb)
     {
@@ -110,15 +112,6 @@ trait IdeaStepsTrait
         );
     }
 
-    protected function ideaBeforeIdea($idea1, $idea2)
-    {
-        $this->element1ShouldBeBeforeElement2ForSelector(
-            $idea1,
-            $idea2,
-            '.idea__preview .idea__title a'
-        );
-    }
-
     /**
      * I sort ideas by comments.
      *
@@ -134,6 +127,8 @@ trait IdeaStepsTrait
      * I search for ideas with terms.
      *
      * @When I search for ideas with terms :terms
+     *
+     * @param mixed $terms
      */
     public function iSearchForIdeasWithTerms($terms)
     {
@@ -193,20 +188,6 @@ trait IdeaStepsTrait
     public function iFillTheIdeaCreateFormWithATheme()
     {
         $this->fillIdeaForm(true);
-    }
-
-    protected function fillIdeaForm($theme = false)
-    {
-        $tableNode = new TableNode([
-            ['idea_title', 'Nouvelle idée créée'],
-            ['idea_body', 'Description de mon idée'],
-            ['idea_object', 'Objectif de mon idée'],
-            ['idea_url', 'http://www.google.fr'],
-        ]);
-        $this->fillFields($tableNode);
-        if ($theme) {
-            $this->selectOption('idea_theme', 'Immobilier');
-        }
     }
 
     /**
@@ -298,7 +279,7 @@ trait IdeaStepsTrait
     public function myIdeaShouldHaveLostItsVotes()
     {
         $votesCount = $this->getCurrentPage()->getVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number '.$votesCount.' for idea after edition.');
+        \PHPUnit_Framework_Assert::assertEquals(0, $votesCount, 'Incorrect votes number ' . $votesCount . ' for idea after edition.');
     }
 
     /**
@@ -365,15 +346,6 @@ trait IdeaStepsTrait
     public function iShouldNotSeeMyIdeaAnymore()
     {
         $this->assertPageNotContainsText('Dernière idée');
-    }
-
-    protected function clickIdeaVoteButtonWithLabel($label)
-    {
-        $page = $this->getCurrentPage();
-        $buttonLabel = $page->getVoteButtonLabel();
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label '.$buttonLabel.' on idea vote button.');
-        $page->clickVoteButton();
-        $this->iWait(2);
     }
 
     /**
@@ -483,12 +455,6 @@ trait IdeaStepsTrait
         );
     }
 
-    protected function assertIdeaCommentsContains($text)
-    {
-        $commentsListSelector = $this->getCurrentPage()->getCommentsListSelector();
-        $this->assertElementContainsText($commentsListSelector, $text);
-    }
-
     /**
      * I should see my comment in the idea comments list.
      *
@@ -497,18 +463,6 @@ trait IdeaStepsTrait
     public function iShouldSeeMyCommentInTheIdeaCommentsList()
     {
         $this->assertIdeaCommentsContains('Coucou !');
-    }
-
-    protected function assertFirstIdeaVoteContains($text)
-    {
-        $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
-        $this->assertElementContainsText($firstVoteSelector, $text);
-    }
-
-    protected function assertFirstIdeaVoteNotContains($text)
-    {
-        $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
-        $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 
     /**
@@ -567,11 +521,13 @@ trait IdeaStepsTrait
      *
      * @Given the idea has :nb votes
      * @Then the idea should have :nb votes
+     *
+     * @param mixed $nb
      */
     public function theIdeaShouldHaveNbVotes($nb)
     {
         $votesCount = $this->getCurrentPage()->getVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number '.$votesCount.' for idea.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number ' . $votesCount . ' for idea.');
     }
 
     /**
@@ -579,11 +535,13 @@ trait IdeaStepsTrait
      *
      * @Given the idea has :nb comments
      * @Then the idea should have :nb comments
+     *
+     * @param mixed $nb
      */
     public function theIdeaShouldHaveNbComments($nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount();
-        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number '.$commentsCount.' for idea.');
+        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number ' . $commentsCount . ' for idea.');
     }
 
     /**
@@ -605,5 +563,55 @@ trait IdeaStepsTrait
     {
         $this->getCurrentPage()->clickIdeasTrashLink();
         $this->iWait(2);
+    }
+
+    protected function ideaBeforeIdea($idea1, $idea2)
+    {
+        $this->element1ShouldBeBeforeElement2ForSelector(
+            $idea1,
+            $idea2,
+            '.idea__preview .idea__title a'
+        );
+    }
+
+    protected function fillIdeaForm($theme = false)
+    {
+        $tableNode = new TableNode([
+            ['idea_title', 'Nouvelle idée créée'],
+            ['idea_body', 'Description de mon idée'],
+            ['idea_object', 'Objectif de mon idée'],
+            ['idea_url', 'http://www.google.fr'],
+        ]);
+        $this->fillFields($tableNode);
+        if ($theme) {
+            $this->selectOption('idea_theme', 'Immobilier');
+        }
+    }
+
+    protected function clickIdeaVoteButtonWithLabel($label)
+    {
+        $page = $this->getCurrentPage();
+        $buttonLabel = $page->getVoteButtonLabel();
+        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label ' . $buttonLabel . ' on idea vote button.');
+        $page->clickVoteButton();
+        $this->iWait(2);
+    }
+
+    protected function assertIdeaCommentsContains($text)
+    {
+        $commentsListSelector = $this->getCurrentPage()->getCommentsListSelector();
+        $this->assertElementContainsText($commentsListSelector, $text);
+    }
+
+    protected function assertFirstIdeaVoteContains($text)
+    {
+        $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
+        $this->assertElementContainsText($firstVoteSelector, $text);
+    }
+
+    protected function assertFirstIdeaVoteNotContains($text)
+    {
+        $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
+        $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 }

@@ -32,7 +32,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $medias = $em->getRepository('CapcoMediaBundle:Media')->findAll();
 
-        $output->writeln(count($medias).' medias found.');
+        $output->writeln(count($medias) . ' medias found.');
 
         foreach ($medias as $media) {
             try {
@@ -45,7 +45,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
                 $tmpFile = sprintf('%s.%s', tempnam(sys_get_temp_dir(), 'sonata_media_liip_imagine'), $media->getExtension());
                 file_put_contents($tmpFile, $file->getContent());
             } catch (\Exception $e) {
-                $output->writeln('Media '.$media.' was not found and will be removed.');
+                $output->writeln('Media ' . $media . ' was not found and will be removed.');
                 $mediasToRemove[] = $media;
             }
         }
@@ -55,7 +55,7 @@ class CleanLostMediasCommand extends ContainerAwareCommand
                 $em->remove($media);
             }
             $em->flush();
-            $output->writeln(count($mediasToRemove).' medias have been removed.');
+            $output->writeln(count($mediasToRemove) . ' medias have been removed.');
         }
     }
 }

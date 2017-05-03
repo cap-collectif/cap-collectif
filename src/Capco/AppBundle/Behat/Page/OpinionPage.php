@@ -9,11 +9,6 @@ class OpinionPage extends Page
 {
     use PageTrait;
 
-    /**
-     * @var string
-     */
-    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}';
-
     public $elements = [
         // Tabs
         'sources tab' => '#opinion-page-tabs-tab-sources',
@@ -59,6 +54,11 @@ class OpinionPage extends Page
         'source confirm delete button' => '#confirm-opinion-source-delete',
         'source report button' => '#source-35 .source__btn--report',
     ];
+
+    /**
+     * @var string
+     */
+    protected $path = '/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}';
 
     public function clickSourcesTab()
     {
@@ -119,7 +119,7 @@ class OpinionPage extends Page
 
     public function getArgumentVotesCount()
     {
-        return intval($this->getArgumentVotesCounter()->getText());
+        return (int) ($this->getArgumentVotesCounter()->getText());
     }
 
     public function clickArgumentEditButton()
@@ -173,8 +173,8 @@ class OpinionPage extends Page
 
     public function submitArgument($type, $text)
     {
-        $field = $this->getElement('argument '.$type.' field');
-        $button = $this->getElement('argument '.$type.' button');
+        $field = $this->getElement('argument ' . $type . ' field');
+        $button = $this->getElement('argument ' . $type . ' button');
         $field->setValue($text);
         $button->press();
     }
@@ -198,7 +198,7 @@ class OpinionPage extends Page
 
     public function getSourceVotesCount()
     {
-        return intval($this->getFirstSourceVotesCounter()->getText());
+        return (int) ($this->getFirstSourceVotesCounter()->getText());
     }
 
     public function clickSourceVoteButton()

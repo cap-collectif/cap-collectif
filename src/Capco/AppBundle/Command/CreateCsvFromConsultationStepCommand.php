@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
+use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use League\Csv\Writer;
 
 class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
 {
@@ -15,6 +15,36 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $this
             ->setName('capco:export:consultation')
             ->setDescription('Create csv file from consultation step data');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+            return;
+        }
+
+        $steps = $container->get('doctrine')
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->findAll();
+        $csvGenerator = new GraphQLToCsv();
+
+        foreach ($steps as $step) {
+            if ($step->getProject()) {
+                $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
+                $fileName = $step->getProject()->getSlug() . '_' . $step->getSlug() . '.csv';
+                $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $fileName, 'w');
+                $writer->setDelimiter(',');
+                $writer->setNewline("\r\n");
+                $writer->setOutputBOM(Writer::BOM_UTF8);
+                $csvGenerator->generate(
+                  $requestString,
+                  $this->getContainer()->get('overblog_graphql.request_executor'),
+                  $writer
+                );
+                $output->writeln('The export file "' . $fileName . '" has been created.');
+            }
+        }
     }
 
     private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
@@ -79,7 +109,7 @@ fragment sourceInfos on Source {
   votesCount
 }
 {
-  contributions(consultation:'.$constulationStep->getId().') {
+  contributions(consultation:' . $constulationStep->getId() . ') {
     id
   	...authorInfos
     section {
@@ -150,35 +180,5 @@ fragment sourceInfos on Source {
    }
  }
 }';
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $container = $this->getContainer();
-        if (!$container->get('capco.toggle.manager')->isActive('export')) {
-            return;
-        }
-
-        $steps = $container->get('doctrine')
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-            ->findAll();
-        $csvGenerator = new GraphQLToCsv();
-
-        foreach ($steps as $step) {
-            if ($step->getProject()) {
-                $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
-                $fileName = $step->getProject()->getSlug().'_'.$step->getSlug().'.csv';
-                $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir').'/../web/export/'.$fileName, 'w');
-                $writer->setDelimiter(',');
-                $writer->setNewline("\r\n");
-                $writer->setOutputBOM(Writer::BOM_UTF8);
-                $csvGenerator->generate(
-                  $requestString,
-                  $this->getContainer()->get('overblog_graphql.request_executor'),
-                  $writer
-                );
-                $output->writeln('The export file "'.$fileName.'" has been created.');
-            }
-        }
     }
 }

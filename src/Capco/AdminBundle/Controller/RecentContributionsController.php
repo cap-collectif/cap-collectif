@@ -2,11 +2,11 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class RecentContributionsController extends Controller
 {
@@ -33,6 +33,9 @@ class RecentContributionsController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}", name="capco_admin_contributions_show")
      * @Template("CapcoAdminBundle:RecentContributions:show.html.twig")
+     *
+     * @param mixed $type
+     * @param mixed $id
      */
     public function showAction($type, $id)
     {
@@ -55,6 +58,9 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/validate", name="capco_admin_contributions_validate")
+     *
+     * @param mixed $type
+     * @param mixed $id
      */
     public function validateAction($type, $id)
     {
@@ -84,6 +90,9 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/unpublish", name="capco_admin_contributions_unpublish")
+     *
+     * @param mixed $type
+     * @param mixed $id
      */
     public function unpublishAction(Request $request, $type, $id)
     {
@@ -129,6 +138,9 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/trash", name="capco_admin_contributions_trash")
+     *
+     * @param mixed $type
+     * @param mixed $id
      */
     public function trashAction(Request $request, $type, $id)
     {

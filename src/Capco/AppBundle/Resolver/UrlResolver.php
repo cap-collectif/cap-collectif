@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -150,11 +150,11 @@ class UrlResolver
         }
 
         if ($object instanceof Argument && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#arg-'.$object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#arg-' . $object->getId();
         }
 
         if ($object instanceof Source && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute).'#source-'.$object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#source-' . $object->getId();
         }
 
         if ($object instanceof AbstractStep) {
@@ -206,8 +206,6 @@ class UrlResolver
         if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
             return $url;
         }
-
-        return;
     }
 
     public function getAdminObjectUrl($object, $absolute = false)

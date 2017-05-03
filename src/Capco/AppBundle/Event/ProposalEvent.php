@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
 use Capco\AppBundle\Entity\Proposal;
+use Symfony\Component\EventDispatcher\Event;
 
 class ProposalEvent extends Event
 {

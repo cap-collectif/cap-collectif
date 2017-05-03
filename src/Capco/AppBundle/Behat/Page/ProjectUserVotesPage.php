@@ -9,16 +9,16 @@ class ProjectUserVotesPage extends Page
 {
     use PageTrait;
 
-    /**
-     * @var string
-     */
-    protected $path = '/projects/{projectSlug}/votes';
-
     public $elements = [
         'vote table' => '.proposals-user-votes__table',
         'vote' => '.proposals-user-votes__row',
         'first vote button' => '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete',
     ];
+
+    /**
+     * @var string
+     */
+    protected $path = '/projects/{projectSlug}/votes';
 
     public function countVotes()
     {

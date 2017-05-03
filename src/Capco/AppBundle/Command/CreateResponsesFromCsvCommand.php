@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateResponsesFromCsvCommand extends ContainerAwareCommand
 {
@@ -46,13 +46,13 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
         foreach ($responses as $row) {
             $author = $em->getRepository('CapcoUserBundle:User')->findOneBy(['email' => $row['email']]);
             if (!$author) {
-                $output->writeln('Author '.$row['email'].' does not exist. Create it manually before importing.');
+                $output->writeln('Author ' . $row['email'] . ' does not exist. Create it manually before importing.');
 
                 return 1;
             }
             $questionnaire = $em->getRepository('CapcoAppBundle:Questionnaire')->find($row['questionnaire_id']);
             if (!$questionnaire) {
-                $output->writeln('Questionnaire '.$row['questionnaire_id'].' does not exist. Create it manually before importing.');
+                $output->writeln('Questionnaire ' . $row['questionnaire_id'] . ' does not exist. Create it manually before importing.');
 
                 return 1;
             }
@@ -77,6 +77,6 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
             $em->flush();
         }
 
-        $output->writeln(count($responses).' responses have been created !');
+        $output->writeln(count($responses) . ' responses have been created !');
     }
 }

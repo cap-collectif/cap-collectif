@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
 
 class ArgumentSerializationListener extends AbstractSerializationListener
 {
@@ -45,7 +45,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
 
         if (!$opinion || !$opinionType || !$step) {
             throw new \Exception(
-                'Error during serialization of argument '.$argument->getId()
+                'Error during serialization of argument ' . $argument->getId()
             );
         }
 
@@ -61,7 +61,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
                             'opinionSlug' => $parent->getSlug(),
                         ],
                         true
-                    ).'#arg-'.$argument->getId();
+                    ) . '#arg-' . $argument->getId();
             } elseif ($parent instanceof OpinionVersion) {
                 $showUrl = $this->router->generate(
                         'app_project_show_opinion_version',
@@ -73,7 +73,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
                             'versionSlug' => $parent->getSlug(),
                         ],
                         true
-                    ).'#arg-'.$argument->getId();
+                    ) . '#arg-' . $argument->getId();
             }
 
             $event->getVisitor()->addData(

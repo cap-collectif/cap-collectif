@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Model\IndexableInterface;
 
 /**
  * Class ConsultationStep.
@@ -17,11 +17,6 @@ use Capco\AppBundle\Model\IndexableInterface;
 class ConsultationStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
     use TimelessStepTrait;
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
 
     /**
      * @var int
@@ -126,6 +121,11 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     {
         parent::__construct();
         $this->opinions = new ArrayCollection();
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 
     /**
@@ -410,7 +410,7 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     {
         $label = $this->getTitle();
         if ($this->getProject()) {
-            $label = $this->getProject()->getTitle().' - '.$label;
+            $label = $this->getProject()->getTitle() . ' - ' . $label;
         }
 
         return $label;

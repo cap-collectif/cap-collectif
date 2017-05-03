@@ -3,13 +3,13 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\UserBundle\Entity\UserType;
+use Capco\UserBundle\Form\Type\MemberSearchType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\UserBundle\Form\Type\MemberSearchType;
-use Capco\UserBundle\Entity\UserType;
 
 class MembersController extends Controller
 {
@@ -19,6 +19,10 @@ class MembersController extends Controller
      * @Route("/members/{userType}/{sort}/{page}", name="app_members_type_sorted", requirements={"page" = "\d+"}, defaults={"page" = 1, "userType" = null, "_feature_flags" = "members_list"} )
      * @Template()
      * @Cache(smaxage="60", public=true)
+     *
+     * @param mixed      $page
+     * @param null|mixed $userType
+     * @param null|mixed $sort
      */
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {
@@ -30,7 +34,7 @@ class MembersController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {

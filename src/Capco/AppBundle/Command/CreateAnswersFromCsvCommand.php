@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Answer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 {
@@ -61,7 +61,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             $slug = explode('/', $slug);
             $slug = $slug[count($slug) - 1];
 
-            $type = in_array('versions', explode('/', $row['slug']))
+            $type = in_array('versions', explode('/', $row['slug']), true)
                 ? 'version'
                 : 'opinion'
             ;
@@ -80,7 +80,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             }
 
             if (!$object) {
-                throw new \RuntimeException('Object '.$type.' '.$slug.' not found.');
+                throw new \RuntimeException('Object ' . $type . ' ' . $slug . ' not found.');
             }
 
             if ($object->getAnswer()) {
@@ -95,14 +95,14 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
             $dump .=
                 '<li>'
-                .'<a href="'
-                .$this->getContainer()->get('capco.url.resolver')->getObjectUrl($object, false)
-                .'">'
-                .$object->getAuthor()->getUsername()
-                .' - '
-                .$object->getTitle()
-                .'</a>'
-                .'</li>'
+                . '<a href="'
+                . $this->getContainer()->get('capco.url.resolver')->getObjectUrl($object, false)
+                . '">'
+                . $object->getAuthor()->getUsername()
+                . ' - '
+                . $object->getTitle()
+                . '</a>'
+                . '</li>'
             ;
 
             $progress->advance(1);
@@ -116,6 +116,6 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
         $progress->finish();
 
-        $output->writeln(count($answers).' answers have been created !');
+        $output->writeln(count($answers) . ' answers have been created !');
     }
 }

@@ -39,7 +39,7 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Comment')->find($id);
                 break;
             default:
-                throw new NotFoundHttpException('Contribution not found for type '.$type.' and id '.$id);
+                throw new NotFoundHttpException('Contribution not found for type ' . $type . ' and id ' . $id);
                 break;
         }
 
@@ -133,7 +133,7 @@ class RecentContributionsResolver
         $contributions = array_merge($opinions, $arguments, $versions, $sources, $ideas, $comments);
 
         usort($contributions, function ($a, $b) {
-            if ($a['updatedAt'] == $b['updatedAt']) {
+            if ($a['updatedAt'] === $b['updatedAt']) {
                 return 0;
             }
 

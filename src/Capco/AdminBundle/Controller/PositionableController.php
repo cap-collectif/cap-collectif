@@ -68,7 +68,7 @@ class PositionableController extends Controller
             // Fix positions for all objects and save 'em
             $objects = $resolver->getDisplayableOrdered();
             foreach ($objects as $index => $sec) {
-                if ($sec->getPosition() != $index) {
+                if ($sec->getPosition() !== $index) {
                     $sec->setPosition($index);
                     $this->admin->update($sec);
                 }

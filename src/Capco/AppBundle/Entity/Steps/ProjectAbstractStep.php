@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Entity\Project;
 
 /**
  * Class ProjectAbstractStep
@@ -41,6 +41,15 @@ class ProjectAbstractStep
      **/
     protected $step;
 
+    public function __toString()
+    {
+        if ($this->step) {
+            return $this->step->__toString();
+        }
+
+        return 'undefined step';
+    }
+
     /**
      * Get id.
      *
@@ -49,15 +58,6 @@ class ProjectAbstractStep
     public function getId()
     {
         return $this->id;
-    }
-
-    public function __toString()
-    {
-        if ($this->step) {
-            return $this->step->__toString();
-        }
-
-        return 'undefined step';
     }
 
     /**

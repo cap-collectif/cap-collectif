@@ -7,8 +7,8 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class MenuItemAdmin extends Admin
 {
@@ -33,11 +33,26 @@ class MenuItemAdmin extends Admin
 
         $query = parent::createQuery($context);
         $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0].'.id', ':ids')
+            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
         );
         $query->setParameter('ids', $ids);
 
         return $query;
+    }
+
+    public function prePersist($menuItem)
+    {
+        $this->manageLink($menuItem);
+    }
+
+    public function preUpdate($menuItem)
+    {
+        $this->manageLink($menuItem);
+    }
+
+    public function getBatchActions()
+    {
+        return [];
     }
 
     /**
@@ -200,7 +215,7 @@ class MenuItemAdmin extends Admin
             ])
         ;
 
-        if (null == $subject->getPage()) {
+        if (null === $subject->getPage()) {
             $showMapper
                 ->add('link', null, [
                     'label' => 'admin.fields.menu_item.link',
@@ -219,21 +234,15 @@ class MenuItemAdmin extends Admin
         ;
     }
 
-    public function prePersist($menuItem)
+    protected function configureRoutes(RouteCollection $collection)
     {
-        $this->manageLink($menuItem);
-    }
-
-    public function preUpdate($menuItem)
-    {
-        $this->manageLink($menuItem);
     }
 
     private function manageLink($menuItem)
     {
         $page = $menuItem->getPage();
         if ($page) {
-            $link = 'pages/'.$page->getSlug();
+            $link = 'pages/' . $page->getSlug();
             $menuItem->setLink($link);
         }
     }
@@ -257,14 +266,5 @@ class MenuItemAdmin extends Admin
             ->createQuery('CapcoAppBundle:Page', 'p')
             ->where('p.isEnabled = :enabled')
             ->setParameter('enabled', true);
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-    }
-
-    public function getBatchActions()
-    {
-        return [];
     }
 }

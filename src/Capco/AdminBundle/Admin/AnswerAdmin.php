@@ -18,6 +18,10 @@ class AnswerAdmin extends Admin
         '_sort_by' => 'title',
     ];
 
+    public function getBatchActions()
+    {
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -44,9 +48,5 @@ class AnswerAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    public function getBatchActions()
-    {
     }
 }

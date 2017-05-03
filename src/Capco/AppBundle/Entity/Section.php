@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Section.
@@ -94,6 +94,12 @@ class Section
     ];
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $step;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
@@ -165,12 +171,6 @@ class Section
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
     private $associatedFeatures;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     */
-    protected $step;
 
     public function __construct()
     {
@@ -341,6 +341,6 @@ class Section
 
     public function isCustom()
     {
-        return $this->type == 'custom';
+        return $this->type === 'custom';
     }
 }

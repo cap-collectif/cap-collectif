@@ -4,14 +4,16 @@ namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ConfirmationController extends Controller
 {
     /**
      * @Route("/account/email_confirmation/{token}", name="account_confirm_email", defaults={"_feature_flags" = "registration"})
      * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", defaults={"_feature_flags" = "registration"}) // legacy url
+     *
+     * @param mixed $token
      */
     public function emailAction($token)
     {
@@ -67,6 +69,8 @@ class ConfirmationController extends Controller
 
     /**
      * @Route("/account/new_email_confirmation/{token}", name="account_confirm_new_email")
+     *
+     * @param mixed $token
      */
     public function newEmailAction($token)
     {

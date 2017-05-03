@@ -10,10 +10,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class SelectionStepSerializationListener extends AbstractSerializationListener
 {
-    private $tokenStorage;
-    private $proposalStepVotesResolver;
     protected $serializer;
     protected $router;
+    private $tokenStorage;
+    private $proposalStepVotesResolver;
 
     public function __construct(TokenStorageInterface $tokenStorage, ProposalStepVotesResolver $proposalStepVotesResolver, Serializer $serializer, RouterInterface $router)
     {

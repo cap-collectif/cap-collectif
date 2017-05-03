@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Doctrine\ORM\EntityManager;
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\OpinionVoteChangedEvent;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
+use Capco\AppBundle\Event\OpinionVoteChangedEvent;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class VoteSubscriber implements EventSubscriberInterface
 {
@@ -31,15 +31,15 @@ class VoteSubscriber implements EventSubscriberInterface
         $action = $event->getAction();
         $opinion = $opinionVote->getOpinion();
 
-        if ($action == 'remove') {
+        if ($action === 'remove') {
             $opinion->decreaseVotesCount($opinionVote->getValue());
         }
 
-        if ($action == 'add') {
+        if ($action === 'add') {
             $opinion->increaseVotesCount($opinionVote->getValue());
         }
 
-        if ($action == 'update') {
+        if ($action === 'update') {
             $opinion->increaseVotesCount($opinionVote->getValue());
             $opinion->decreaseVotesCount($event->getPrevious());
         }
@@ -51,11 +51,11 @@ class VoteSubscriber implements EventSubscriberInterface
         $action = $event->getAction();
         $entity = $vote->getRelatedEntity();
 
-        if ($action == 'remove') {
+        if ($action === 'remove') {
             $entity->decrementVotesCount();
         }
 
-        if ($action == 'add') {
+        if ($action === 'add') {
             $entity->incrementVotesCount();
         }
     }

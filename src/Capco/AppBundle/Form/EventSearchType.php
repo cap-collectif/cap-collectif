@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventSearchType extends AbstractType

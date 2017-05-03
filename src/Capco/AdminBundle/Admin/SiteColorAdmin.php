@@ -13,6 +13,19 @@ class SiteColorAdmin extends Admin
         '_sort_by' => 'isEnabled',
     ];
 
+    public function toString($object)
+    {
+        if (!is_object($object)) {
+            return '';
+        }
+
+        if (method_exists($object, '__toString') && null !== $object->__toString()) {
+            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAdminParameters');
+        }
+
+        return parent::toString($object);
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -33,18 +46,5 @@ class SiteColorAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['edit']);
-    }
-
-    public function toString($object)
-    {
-        if (!is_object($object)) {
-            return '';
-        }
-
-        if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAdminParameters');
-        }
-
-        return parent::toString($object);
     }
 }

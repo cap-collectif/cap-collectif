@@ -2,11 +2,11 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use EmailChecker\Constraints\NotThrowawayEmail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-use EmailChecker\Constraints\NotThrowawayEmail;
 
 class ApiProfileAccountFormType extends AbstractType
 {

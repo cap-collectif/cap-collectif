@@ -7,9 +7,9 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class IdeaAdmin extends Admin
 {
@@ -17,6 +17,28 @@ class IdeaAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), $object->getBody(), $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
+    public function getFeatures()
+    {
+        return [
+            'ideas',
+        ];
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -251,28 +273,6 @@ class IdeaAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('export_voters', $this->getRouterIdParameter().'/export_voters');
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), $object->getBody(), $url);
-        }
-
-        return parent::getObjectMetadata($object);
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'ideas',
-        ];
+        $collection->add('export_voters', $this->getRouterIdParameter() . '/export_voters');
     }
 }

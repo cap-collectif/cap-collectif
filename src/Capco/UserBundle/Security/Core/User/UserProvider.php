@@ -20,9 +20,9 @@ class UserProvider extends FOSUBUserProvider
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
-        $setter_token = $setter.'AccessToken';
+        $setter = 'set' . ucfirst($service);
+        $setter_id = $setter . 'Id';
+        $setter_token = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserByEmail($email)) {
@@ -42,8 +42,8 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $email = $response->getEmail() ?: 'twitter_'.$response->getUsername();
-        $username = $response->getNickname() ?: $response->getFirstName().' '.$response->getLastName();
+        $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
+        $username = $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         $user = $this->userManager->findUserByEmail($email);
 
         if (null === $user) {
@@ -55,9 +55,9 @@ class UserProvider extends FOSUBUserProvider
         }
 
         $service = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
-        $setter_token = $setter.'AccessToken';
+        $setter = 'set' . ucfirst($service);
+        $setter_id = $setter . 'Id';
+        $setter_token = $setter . 'AccessToken';
         $user->$setter_id($response->getUsername());
         $user->$setter_token($response->getAccessToken());
 

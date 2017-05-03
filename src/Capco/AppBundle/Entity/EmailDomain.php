@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
@@ -18,6 +18,12 @@ class EmailDomain
      */
     protected $value;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="domains", cascade={"persist"})
+     * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     **/
+    protected $registrationForm;
+
     public function getValue()
     {
         return $this->value;
@@ -29,12 +35,6 @@ class EmailDomain
 
         return $this;
     }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="domains", cascade={"persist"})
-     * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
-    protected $registrationForm;
 
     public function getRegistrationForm()
     {

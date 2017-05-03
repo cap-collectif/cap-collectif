@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Theme.
@@ -522,7 +522,7 @@ class Theme implements IndexableInterface
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }
@@ -530,7 +530,7 @@ class Theme implements IndexableInterface
     public function getTeaserExcerpt($nb = 100)
     {
         $excerpt = substr($this->teaser, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }
@@ -585,16 +585,16 @@ class Theme implements IndexableInterface
 
     public function isOpened()
     {
-        return $this->status == self::$statuses['opened'];
+        return $this->status === self::$statuses['opened'];
     }
 
     public function isClosed()
     {
-        return $this->status == self::$statuses['closed'];
+        return $this->status === self::$statuses['closed'];
     }
 
     public function isFuture()
     {
-        return $this->status == self::$statuses['future'];
+        return $this->status === self::$statuses['future'];
     }
 }

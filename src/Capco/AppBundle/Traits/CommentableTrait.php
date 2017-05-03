@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Comment;
+use Doctrine\ORM\Mapping as ORM;
 
 trait CommentableTrait
 {

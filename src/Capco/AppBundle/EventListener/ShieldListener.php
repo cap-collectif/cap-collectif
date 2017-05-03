@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class ShieldListener
 {
@@ -58,7 +58,7 @@ class ShieldListener
           '_wdt',
         ];
 
-        if (in_array($route, $availableRoutes)) {
+        if (in_array($route, $availableRoutes, true)) {
             return;
         }
 

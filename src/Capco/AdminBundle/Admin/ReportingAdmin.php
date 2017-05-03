@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Reporting;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\Reporting;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReportingAdmin extends Admin
 {
@@ -15,6 +15,22 @@ class ReportingAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'isArchived',
     ];
+
+    public function getFeatures()
+    {
+        return [
+            'reporting',
+        ];
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name === 'show') {
+            return 'CapcoAdminBundle:Reporting:show.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -137,24 +153,8 @@ class ReportingAdmin extends Admin
         $collection->remove('create');
         $collection->remove('edit');
         $collection->remove('delete');
-        $collection->add('archive', $this->getRouterIdParameter().'/archive');
-        $collection->add('disable', $this->getRouterIdParameter().'/disable');
-        $collection->add('trash', $this->getRouterIdParameter().'/trash');
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'reporting',
-        ];
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'show') {
-            return 'CapcoAdminBundle:Reporting:show.html.twig';
-        }
-
-        return parent::getTemplate($name);
+        $collection->add('archive', $this->getRouterIdParameter() . '/archive');
+        $collection->add('disable', $this->getRouterIdParameter() . '/disable');
+        $collection->add('trash', $this->getRouterIdParameter() . '/trash');
     }
 }

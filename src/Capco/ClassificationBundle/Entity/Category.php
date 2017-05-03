@@ -9,16 +9,16 @@ class Category extends BaseCategory
 {
     protected $id;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * Constructor.
      */
     public function __construct()
     {
         $this->children = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

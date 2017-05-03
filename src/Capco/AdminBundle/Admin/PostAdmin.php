@@ -17,6 +17,28 @@ class PostAdmin extends Admin
         '_sort_by' => 'createdAt',
     ];
 
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), $object->getBody(), $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
+    public function getFeatures()
+    {
+        return [
+            'blog',
+        ];
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -269,27 +291,5 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.created_at',
             ])
         ;
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), $object->getBody(), $url);
-        }
-
-        return parent::getObjectMetadata($object);
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'blog',
-        ];
     }
 }

@@ -12,6 +12,8 @@ class HighlightedContentRepository extends EntityRepository implements Positiona
     /**
      * Get all sections ordered by position.
      *
+     * @param null|mixed $limit
+     *
      * @return mixed
      */
     public function getAllOrderedByPosition($limit = null)

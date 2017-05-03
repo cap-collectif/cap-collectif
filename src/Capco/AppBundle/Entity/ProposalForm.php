@@ -4,13 +4,13 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * ProposalForm.
@@ -23,6 +23,13 @@ class ProposalForm
     use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"title", "description"})
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    protected $updatedAt;
 
     /**
      * @var string
@@ -57,13 +64,6 @@ class ProposalForm
      * @ORM\OrderBy({"name" = "ASC"})
      **/
     private $categories;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "description"})
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
 
     /**
      * @var string
@@ -530,7 +530,7 @@ class ProposalForm
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
-            $label = $this->getStep()->getTitle().' - '.$label;
+            $label = $this->getStep()->getTitle() . ' - ' . $label;
         }
 
         return $label;

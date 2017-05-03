@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Post as BlogPost;
 use Capco\AppBundle\Entity\PostComment as PostComment;
-use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\CommentChangedEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use Capco\AppBundle\Form\CommentType;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class PostsController extends FOSRestController
@@ -101,10 +101,10 @@ class PostsController extends FOSRestController
 
         $parent = $comment->getParent();
         if ($parent) {
-            if (!$parent instanceof PostComment || $post != $parent->getPost()) {
+            if (!$parent instanceof PostComment || $post !== $parent->getPost()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this post');
             }
-            if ($parent->getParent() != null) {
+            if ($parent->getParent() !== null) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }

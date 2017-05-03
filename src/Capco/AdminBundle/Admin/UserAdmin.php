@@ -3,15 +3,19 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\UserBundle\Entity\User;
-use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
 class UserAdmin extends BaseAdmin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'username',
+    ];
     private $rolesLabels = [
         'ROLE_USER' => 'roles.user',
         'ROLE_ADMIN' => 'roles.admin',
@@ -21,11 +25,6 @@ class UserAdmin extends BaseAdmin
     private $rolesLabelsNoSuper = [
         'ROLE_USER' => 'roles.user',
         'ROLE_ADMIN' => 'roles.admin',
-    ];
-
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'username',
     ];
 
     public function getFormBuilder()
@@ -41,6 +40,35 @@ class UserAdmin extends BaseAdmin
         $this->defineFormBuilder($formBuilder);
 
         return $formBuilder;
+    }
+
+    public function getTemplate($name)
+    {
+        if ($name === 'delete') {
+            return 'CapcoAdminBundle:User:delete.html.twig';
+        }
+
+        return parent::getTemplate($name);
+    }
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getUsername(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
+    public function getExportFormats()
+    {
+        return ['csv'];
     }
 
     /**
@@ -181,7 +209,7 @@ class UserAdmin extends BaseAdmin
             ->add('username')
             ->add('email')
             ->add('plainPassword', 'text', [
-                'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
+                'required' => (!$this->getSubject() || null === $this->getSubject()->getId()),
             ])
             ->end()
             ->with('Profile')
@@ -285,34 +313,5 @@ class UserAdmin extends BaseAdmin
                 ->end() */
             ;
         }
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'delete') {
-            return 'CapcoAdminBundle:User:delete.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getUsername(), null, $url);
-        }
-
-        return parent::getObjectMetadata($object);
-    }
-
-    public function getExportFormats()
-    {
-        return ['csv'];
     }
 }

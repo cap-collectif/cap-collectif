@@ -4,8 +4,8 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 
 class OpinionTypeSerializationListener extends AbstractSerializationListener
 {

@@ -33,17 +33,17 @@ class UserType
      */
     private $updatedAt;
 
-    public function __toString()
-    {
-        return $this->getId() ? $this->getName() : 'New user type';
-    }
-
     /**
      * Constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getName() : 'New user type';
     }
 
     /**

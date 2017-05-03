@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Doctrine\ORM\Id\AssignedGenerator;
-use GuzzleHttp\Client;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Doctrine\ORM\Id\AssignedGenerator;
+use GuzzleHttp\Client;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 class ApiContext extends ApplicationContext
@@ -92,6 +92,9 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When I am logged in to api as :email with pwd :pwd
+     *
+     * @param mixed $email
+     * @param mixed $pwd
      */
     public function iAmLoggedInToApi($email, $pwd)
     {
@@ -99,29 +102,10 @@ class ApiContext extends ApplicationContext
     }
 
     /**
-     * Create a client with a an Authorization header.
-     */
-    protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')
-    {
-        $response = $this->client->request(
-            'POST',
-            '/api/login_check',
-            [
-                'headers' => [
-                  'X-Requested-With' => 'XMLHttpRequest',
-                ],
-                'json' => [
-                    'username' => $username,
-                    'password' => $password,
-                ],
-            ]
-        );
-        $body = (string) $response->getBody();
-        $this->token = json_decode($body, true)['token'];
-    }
-
-    /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendSourceRequest($method, $url)
     {
@@ -139,6 +123,9 @@ EOF;
 
      /**
       * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
+      *
+      * @param mixed $method
+      * @param mixed $url
       */
      public function iSendOpinionRequest($method, $url)
      {
@@ -153,6 +140,9 @@ EOF;
 
        /**
         * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid link opinion json$/
+        *
+        * @param mixed $method
+        * @param mixed $url
         */
        public function iSendOpinionLinkRequest($method, $url)
        {
@@ -168,6 +158,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid report json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendReportRequest($method, $url)
     {
@@ -183,6 +176,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendArgumentRequest($method, $url)
     {
@@ -198,6 +194,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument update json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendUpdateArgumentRequest($method, $url)
     {
@@ -212,6 +211,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendIdeaRequest($method, $url)
     {
@@ -229,6 +231,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea update json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendUpdateIdeaRequest($method, $url)
     {
@@ -245,6 +250,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendARequest($method, $url)
     {
@@ -259,6 +267,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with values:$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendARequestWithValues($method, $url, TableNode $table)
     {
@@ -271,6 +282,9 @@ EOF;
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with json:$/
+     *
+     * @param mixed $method
+     * @param mixed $url
      */
     public function iSendARequestWithJsonFromPyString($method, $url, PyStringNode $string)
     {
@@ -280,19 +294,6 @@ EOF;
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
-            ],
-        ]);
-    }
-
-    private function iSendARequestWithJson(string $method, string $url, string $body)
-    {
-        $this->response = $this->client->request($method, $url, [
-            'json' => json_decode($body, true),
-            'exceptions' => false,
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
             ],
         ]);
     }
@@ -328,6 +329,8 @@ EOF;
      * There is a synthesis with id and elements.
      *
      * @Given there is a synthesis with id :id and elements:
+     *
+     * @param mixed $id
      */
     public function thereIsASynthesisWithIdAndElements($id, TableNode $elementsIds)
     {
@@ -338,6 +341,8 @@ EOF;
      * There is a synthesis with id and published elements.
      *
      * @Given there is a synthesis with id :id and published elements:
+     *
+     * @param mixed $id
      */
     public function thereIsASynthesisWithIdAndPublishedElements($id, TableNode $elementsIds)
     {
@@ -345,7 +350,233 @@ EOF;
     }
 
     /**
+     * There is a synthesis with id based on consultation step.
+     *
+     * @Given there is a synthesis with id :sid based on consultation step :csId
+     */
+    public function thereIsASynthesisBasedOnConsultationStep(string $sId, int $csId)
+    {
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
+
+        if (null === $synthesis) {
+            // Create synthesis
+            $synthesis = new Synthesis();
+            $synthesis->setEnabled(true);
+
+            // Set id
+            $synthesis->setId($sId);
+            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
+            $metadata->setIdGenerator(new AssignedGenerator());
+
+            $this->getEntityManager()->persist($synthesis);
+            $this->getEntityManager()->flush();
+        }
+
+        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:Steps\ConsultationStep')->find($csId);
+        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+    }
+
+    /**
+     * I create an element in synthesis with values.
+     *
+     * @Given I create an element in synthesis :id with values:
+     *
+     * @param mixed $id
+     */
+    public function iCreateAnElementInSynthesisWithValues($id, TableNode $data)
+    {
+        $values = $data->getRowsHash();
+        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+
+        $element = new SynthesisElement();
+        $element->setSynthesis($synthesis);
+
+        if (array_key_exists('title', $values)) {
+            $element->setTitle($values['title']);
+        }
+        if (array_key_exists('body', $values)) {
+            $element->setBody($values['body']);
+        } else {
+            $element->setBody('blabla');
+        }
+        if (array_key_exists('notation', $values)) {
+            $element->setNotation($values['notation']);
+        }
+        if (array_key_exists('published', $values)) {
+            $element->setPublished(filter_var($values['published'], FILTER_VALIDATE_BOOLEAN));
+        }
+        if (array_key_exists('archived', $values)) {
+            $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));
+        }
+
+        // Set id
+        $element->setId($values['id']);
+        $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
+        $metadata->setIdGenerator(new AssignedGenerator());
+
+        $this->getEntityManager()->persist($element);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * There should be a log on element with sentence.
+     *
+     * @Then there should be a log on element :id with sentence :sentence
+     *
+     * @param mixed $id
+     * @param mixed $sentence
+     */
+    public function thereShouldBeALogOnElementWithSentence($id, $sentence)
+    {
+        $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
+        $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
+        $logExists = false;
+        foreach ($logs as $log) {
+            $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
+            if (in_array($sentence, $sentences, true)) {
+                $logExists = true;
+                break;
+            }
+        }
+
+        PHPUnit::assertTrue($logExists);
+    }
+
+    /**
+     * There should be a created log on response element.
+     *
+     * @Then there should be a create log on response element
+     */
+    public function thereShouldBeACreateLogOnResponseElement()
+    {
+        $body = (string) $this->response->getBody();
+        $data = json_decode($body, true);
+        $elementId = $data['id'];
+        $this->thereShouldBeALogOnElementWithSentence($elementId, 'Création de l\'élément');
+    }
+
+    /**
+     * I update opinion with values.
+     *
+     * @Given I update opinion :id with values:
+     *
+     * @param mixed $id
+     */
+    public function iUpdateOpinionWithValues($id, TableNode $data)
+    {
+        $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
+
+        if (null !== $opinion) {
+            $values = $data->getRowsHash();
+            if (array_key_exists('title', $values)) {
+                $opinion->setTitle($values['title']);
+            }
+            if (array_key_exists('body', $values)) {
+                $opinion->setBody($values['body']);
+            }
+
+            $this->getEntityManager()->persist($opinion);
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with synthesis display rules json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
+     */
+    public function iSendUpdateSynthesisDisplayRulesRequest($method, $url)
+    {
+        $json = <<< 'EOF'
+        {
+            "level": 1
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
+    /**
+     * @Then the comments should be ordered by popularity
+     */
+    public function commentsOrderedByPopularity()
+    {
+        $max = 100000;
+        $pinned = true;
+        foreach (json_decode($this->response->getBody()->getContents(), true)['comments'] as $comment) {
+            if ($pinned && !$comment['pinned']) {
+                $max = 100000;
+                $pinned = false;
+            }
+            PHPUnit::assertGreaterThanOrEqual($comment['votes_count'], $max);
+            $max = $comment['votes_count'];
+        }
+    }
+
+    /**
+     * I do nothing for x seconds.
+     *
+     * @Given I do nothing for :seconds seconds
+     *
+     * @param mixed $seconds
+     */
+    public function iDoNothingForXSeconds($seconds)
+    {
+        sleep($seconds);
+    }
+
+    /**
+     * @Then proposal with id :id should be disable
+     */
+    public function proposalWithIdShouldBeSoftDeleted(int $id)
+    {
+        $em = $this->getEntityManager();
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
+
+        PHPUnit::assertFalse($proposal->isEnabled());
+    }
+
+    /**
+     * Create a client with a an Authorization header.
+     */
+    protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')
+    {
+        $response = $this->client->request(
+            'POST',
+            '/api/login_check',
+            [
+                'headers' => [
+                  'X-Requested-With' => 'XMLHttpRequest',
+                ],
+                'json' => [
+                    'username' => $username,
+                    'password' => $password,
+                ],
+            ]
+        );
+        $body = (string) $response->getBody();
+        $this->token = json_decode($body, true)['token'];
+    }
+
+    private function iSendARequestWithJson(string $method, string $url, string $body)
+    {
+        $this->response = $this->client->request($method, $url, [
+            'json' => json_decode($body, true),
+            'exceptions' => false,
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+        ]);
+    }
+
+    /**
      * Create a synthesis with elements.
+     *
+     * @param mixed $id
+     * @param mixed $published
      */
     private function createSynthesisWithElements($id, TableNode $elementsIds, $published = false)
     {
@@ -395,181 +626,5 @@ EOF;
         }
 
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * There is a synthesis with id based on consultation step.
-     *
-     * @Given there is a synthesis with id :sid based on consultation step :csId
-     */
-    public function thereIsASynthesisBasedOnConsultationStep(string $sId, int $csId)
-    {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
-
-        if (null === $synthesis) {
-            // Create synthesis
-            $synthesis = new Synthesis();
-            $synthesis->setEnabled(true);
-
-            // Set id
-            $synthesis->setId($sId);
-            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
-            $metadata->setIdGenerator(new AssignedGenerator());
-
-            $this->getEntityManager()->persist($synthesis);
-            $this->getEntityManager()->flush();
-        }
-
-        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:Steps\ConsultationStep')->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
-    }
-
-    /**
-     * I create an element in synthesis with values.
-     *
-     * @Given I create an element in synthesis :id with values:
-     */
-    public function iCreateAnElementInSynthesisWithValues($id, TableNode $data)
-    {
-        $values = $data->getRowsHash();
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
-
-        $element = new SynthesisElement();
-        $element->setSynthesis($synthesis);
-
-        if (array_key_exists('title', $values)) {
-            $element->setTitle($values['title']);
-        }
-        if (array_key_exists('body', $values)) {
-            $element->setBody($values['body']);
-        } else {
-            $element->setBody('blabla');
-        }
-        if (array_key_exists('notation', $values)) {
-            $element->setNotation($values['notation']);
-        }
-        if (array_key_exists('published', $values)) {
-            $element->setPublished(filter_var($values['published'], FILTER_VALIDATE_BOOLEAN));
-        }
-        if (array_key_exists('archived', $values)) {
-            $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));
-        }
-
-        // Set id
-        $element->setId($values['id']);
-        $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
-        $metadata->setIdGenerator(new AssignedGenerator());
-
-        $this->getEntityManager()->persist($element);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * There should be a log on element with sentence.
-     *
-     * @Then there should be a log on element :id with sentence :sentence
-     */
-    public function thereShouldBeALogOnElementWithSentence($id, $sentence)
-    {
-        $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
-        $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
-        $logExists = false;
-        foreach ($logs as $log) {
-            $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
-            if (in_array($sentence, $sentences)) {
-                $logExists = true;
-                break;
-            }
-        }
-
-        PHPUnit::assertTrue($logExists);
-    }
-
-    /**
-     * There should be a created log on response element.
-     *
-     * @Then there should be a create log on response element
-     */
-    public function thereShouldBeACreateLogOnResponseElement()
-    {
-        $body = (string) $this->response->getBody();
-        $data = json_decode($body, true);
-        $elementId = $data['id'];
-        $this->thereShouldBeALogOnElementWithSentence($elementId, 'Création de l\'élément');
-    }
-
-    /**
-     * I update opinion with values.
-     *
-     * @Given I update opinion :id with values:
-     */
-    public function iUpdateOpinionWithValues($id, TableNode $data)
-    {
-        $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
-
-        if (null !== $opinion) {
-            $values = $data->getRowsHash();
-            if (array_key_exists('title', $values)) {
-                $opinion->setTitle($values['title']);
-            }
-            if (array_key_exists('body', $values)) {
-                $opinion->setBody($values['body']);
-            }
-
-            $this->getEntityManager()->persist($opinion);
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with synthesis display rules json$/
-     */
-    public function iSendUpdateSynthesisDisplayRulesRequest($method, $url)
-    {
-        $json = <<< 'EOF'
-        {
-            "level": 1
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @Then the comments should be ordered by popularity
-     */
-    public function commentsOrderedByPopularity()
-    {
-        $max = 100000;
-        $pinned = true;
-        foreach (json_decode($this->response->getBody()->getContents(), true)['comments'] as $comment) {
-            if ($pinned && !$comment['pinned']) {
-                $max = 100000;
-                $pinned = false;
-            }
-            PHPUnit::assertGreaterThanOrEqual($comment['votes_count'], $max);
-            $max = $comment['votes_count'];
-        }
-    }
-
-    /**
-     * I do nothing for x seconds.
-     *
-     * @Given I do nothing for :seconds seconds
-     */
-    public function iDoNothingForXSeconds($seconds)
-    {
-        sleep($seconds);
-    }
-
-    /**
-     * @Then proposal with id :id should be disable
-     */
-    public function proposalWithIdShouldBeSoftDeleted(int $id)
-    {
-        $em = $this->getEntityManager();
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
-
-        PHPUnit::assertFalse($proposal->isEnabled());
     }
 }

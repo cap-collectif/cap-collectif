@@ -19,6 +19,15 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
 
     protected $translationDomain = 'SonataAdminBundle';
 
+    public function postRemove($object)
+    {
+        // delete linked question
+        if ($object->getQuestion()) {
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+            $em->remove($object->getQuestion());
+        }
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $questionnaireId = null;
@@ -45,15 +54,6 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
                 'link_parameters' => ['questionnaireId' => $questionnaireId],
             ])
         ;
-    }
-
-    public function postRemove($object)
-    {
-        // delete linked question
-        if ($object->getQuestion()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
-            $em->remove($object->getQuestion());
-        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

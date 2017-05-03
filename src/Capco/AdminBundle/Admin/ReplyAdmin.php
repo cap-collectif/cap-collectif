@@ -12,6 +12,19 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReplyAdmin extends Admin
 {
+    public function preUpdate($object)
+    {
+        $responses = new ArrayCollection();
+        foreach ($object->getResponses() as $response) {
+            $decodedValue = json_decode($response->getValue());
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $response->setValue($decodedValue);
+            }
+            $responses->add($response);
+        }
+        $object->setResponses($responses);
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -139,18 +152,5 @@ class ReplyAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
-    }
-
-    public function preUpdate($object)
-    {
-        $responses = new ArrayCollection();
-        foreach ($object->getResponses() as $response) {
-            $decodedValue = json_decode($response->getValue());
-            if (json_last_error() === JSON_ERROR_NONE) {
-                $response->setValue($decodedValue);
-            }
-            $responses->add($response);
-        }
-        $object->setResponses($responses);
     }
 }

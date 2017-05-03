@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
-use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
@@ -29,11 +29,11 @@ class CommentResolver
     public function createCommentForType($objectType)
     {
         $comment = null;
-        if ($objectType == 'Idea') {
+        if ($objectType === 'Idea') {
             $comment = new IdeaComment();
-        } elseif ($objectType == 'Event') {
+        } elseif ($objectType === 'Event') {
             $comment = new EventComment();
-        } elseif ($objectType == 'Post') {
+        } elseif ($objectType === 'Post') {
             $comment = new PostComment();
         }
 
@@ -43,11 +43,11 @@ class CommentResolver
     public function getObjectByTypeAndId($objectType, $objectId)
     {
         $object = null;
-        if ($objectType == 'Idea') {
+        if ($objectType === 'Idea') {
             $object = $this->em->getRepository('CapcoAppBundle:Idea')->find($objectId);
-        } elseif ($objectType == 'Event') {
+        } elseif ($objectType === 'Event') {
             $object = $this->em->getRepository('CapcoAppBundle:Event')->find($objectId);
-        } elseif ($objectType == 'Post') {
+        } elseif ($objectType === 'Post') {
             $object = $this->em->getRepository('CapcoAppBundle:Post')->find($objectId);
         }
 
@@ -67,8 +67,6 @@ class CommentResolver
         if ($object instanceof Post) {
             return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost($object);
         }
-
-        return;
     }
 
     public function getRelatedObject(Comment $comment)

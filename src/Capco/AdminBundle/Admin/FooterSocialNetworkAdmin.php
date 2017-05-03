@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\FooterSocialNetwork;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\FooterSocialNetwork;
 
 class FooterSocialNetworkAdmin extends Admin
 {

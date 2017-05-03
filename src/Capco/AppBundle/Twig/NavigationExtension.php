@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Manager\MenuItemResolver;
 
 class NavigationExtension extends \Twig_Extension
 {

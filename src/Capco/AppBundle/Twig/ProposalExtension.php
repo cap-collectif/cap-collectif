@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\UserBundle\Entity\User;
 
 class ProposalExtension extends \Twig_Extension

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository\Synthesis;
 
-use Gedmo\Tree\Entity\Repository\MaterializedPathRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Gedmo\Tool\Wrapper\EntityWrapper;
+use Gedmo\Tree\Entity\Repository\MaterializedPathRepository;
 
 /**
  * SynthesisElementRepository.
@@ -15,6 +15,9 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
     /**
      * Cout elements with values.
+     *
+     * @param mixed $synthesis
+     * @param mixed $type
      *
      * @return int
      */
@@ -32,6 +35,12 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
     /**
      * Get elements with values.
+     *
+     * @param mixed $synthesis
+     * @param mixed $type
+     * @param mixed $term
+     * @param mixed $offset
+     * @param mixed $limit
      */
     public function getWith($synthesis, $type, $term, $offset = 0, $limit = 10)
     {
@@ -44,7 +53,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         if ($term !== null) {
             $qb
                 ->andWhere('se.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -88,91 +97,17 @@ class SynthesisElementRepository extends MaterializedPathRepository
         ;
     }
 
-    /**
-     * Add necessary where clauses to query builder.
-     *
-     * @param $qb
-     * @param $conditions
-     *
-     * @return mixed
-     */
-    protected function addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis)
-    {
-        $qb = $this->addAndQueryCondition($qb, 'synthesis', $synthesis);
-
-        switch ($type) {
-            case 'new':
-                $qb = $this->addAndQueryCondition($qb, 'archived', false);
-                break;
-            case 'unpublished':
-                $qb = $this->addAndQueryCondition($qb, 'archived', true);
-                $qb = $this->addAndQueryCondition($qb, 'published', false);
-                break;
-            case 'archived':
-                $qb = $this->addAndQueryCondition($qb, 'archived', true);
-                break;
-            case 'published':
-                $qb = $this->addAndQueryCondition($qb, 'archived', true);
-                $qb = $this->addAndQueryCondition($qb, 'published', true);
-                break;
-            case 'notIgnored':
-                $qb->andWhere('se.published = :published OR se.archived = :notArchived')
-                    ->setParameter('published', true)
-                    ->setParameter('notArchived', false)
-                ;
-                break;
-            default:
-                break;
-        }
-
-        return $qb;
-    }
-
-    protected function getOnClauseForChildren($type, $alias = 'c')
-    {
-        switch ($type) {
-            case 'new':
-                return $alias.'.archived = 0';
-                break;
-            case 'unpublished':
-                return $alias.'.archived = 1 AND '.$alias.'.published = 0';
-                break;
-            case 'archived':
-                return $alias.'.archived = 1';
-                break;
-            case 'published':
-                return $alias.'.archived = 1 AND '.$alias.'.published = 1';
-                break;
-            case 'notIgnored':
-                return $alias.'.published = 1 OR '.$alias.'.archived = 0';
-                break;
-            default:
-                return '';
-                break;
-        }
-    }
-
-    protected function addAndQueryCondition($qb, $field, $value)
-    {
-        if (in_array($field, self::$allowedFields)) {
-            if ($value === null) {
-                return $qb
-                    ->andWhere('se.'.$field.' IS NULL');
-            }
-
-            return $qb
-                ->andWhere('se.'.$field.' = :'.$field)
-                ->setParameter($field, $value);
-        }
-
-        return $qb;
-    }
-
     // ************************ Methods for handling tree generation *************************
 
     /**
      * Returns tree of elements depending on conditions, parent and depth.
      * Tree can be decorated with options.
+     *
+     * @param mixed      $synthesis
+     * @param mixed      $type
+     * @param null|mixed $parentId
+     * @param null|mixed $depth
+     * @param mixed      $options
      */
     public function getFormattedTree($synthesis, $type, $parentId = null, $depth = null, $options = [])
     {
@@ -239,7 +174,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                     --$l;
                 }
                 // Stack is empty (we are inspecting the root)
-                if ($l == 0) {
+                if ($l === 0) {
                     // Assigning the root child
                     $i = count($nestedTree);
                     $nestedTree[$i] = $item;
@@ -248,7 +183,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 } else {
                     // Check if item parent is present in the tree
                     $parentId = $this->extractParentIdFromPath($item['path']);
-                    if (in_array($parentId, $idsStack)) {
+                    if (in_array($parentId, $idsStack, true)) {
                         // Add child to parent
                         $i = count($stack[$l - 1][$childrenIndex]);
                         $stack[$l - 1][$childrenIndex][$i] = $item;
@@ -264,6 +199,8 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
     /**
      * Return id from a path in format Title 1-id-of-title-1|Title 2-id-of-title-2.
+     *
+     * @param mixed $path
      */
     public function extractParentIdFromPath($path)
     {
@@ -284,6 +221,12 @@ class SynthesisElementRepository extends MaterializedPathRepository
      * - allow to specify the depth of the query, to get only some levels of the tree
      * - return results as arrays with only a few fields
      * - add children count to each result.
+     *
+     * @param mixed      $synthesis
+     * @param mixed      $type
+     * @param null|mixed $parent
+     * @param null|mixed $depth
+     * @param mixed      $includeNode
      */
     public function getElementsHierarchy($synthesis, $type = 'published', $parent = null, $depth = null, $includeNode = false)
     {
@@ -328,43 +271,43 @@ class SynthesisElementRepository extends MaterializedPathRepository
             $nodePath = $parent->getPropertyValue($path);
             $expr = $qb->expr()->andX()->add(
                 $qb->expr()->like(
-                    'se.'.$path,
+                    'se.' . $path,
                     $qb->expr()->literal(
                         $nodePath
-                        .($config['path_ends_with_separator'] ? '' : $separator).'%'
+                        . ($config['path_ends_with_separator'] ? '' : $separator) . '%'
                     )
                 )
             );
 
             if ($includeNode) {
-                $includeNodeExpr = $qb->expr()->eq('se.'.$path, $qb->expr()->literal($nodePath));
+                $includeNodeExpr = $qb->expr()->eq('se.' . $path, $qb->expr()->literal($nodePath));
             } else {
-                $expr->add($qb->expr()->neq('se.'.$path, $qb->expr()->literal($nodePath)));
+                $expr->add($qb->expr()->neq('se.' . $path, $qb->expr()->literal($nodePath)));
             }
 
             if ($depth && $depth > 0) {
                 $expr->add(
                     $qb->expr()->andX(
-                        $qb->expr()->gte('se.'.$config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']))),
-                        $qb->expr()->lte('se.'.$config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']) + $depth))
+                        $qb->expr()->gte('se.' . $config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']))),
+                        $qb->expr()->lte('se.' . $config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']) + $depth))
                     )
                 );
             }
         } elseif ($depth && $depth > 0) {
-            $expr = $qb->expr()->lte('se.'.$config['level'], $qb->expr()->literal($depth - 1));
+            $expr = $qb->expr()->lte('se.' . $config['level'], $qb->expr()->literal($depth - 1));
         }
 
         if ($expr) {
-            $qb->where('('.$expr.')');
+            $qb->where('(' . $expr . ')');
         }
 
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
         if ($includeNodeExpr) {
-            $qb->orWhere('('.$includeNodeExpr.')');
+            $qb->orWhere('(' . $includeNodeExpr . ')');
         }
 
-        $orderByField = 'se.'.$config['path'];
+        $orderByField = 'se.' . $config['path'];
         $orderByDir = 'asc';
         $qb->orderBy($orderByField, $orderByDir);
 
@@ -374,5 +317,87 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->getQuery()
             ->getArrayResult()
         ;
+    }
+
+    /**
+     * Add necessary where clauses to query builder.
+     *
+     * @param $qb
+     * @param $conditions
+     * @param mixed $type
+     * @param mixed $synthesis
+     *
+     * @return mixed
+     */
+    protected function addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis)
+    {
+        $qb = $this->addAndQueryCondition($qb, 'synthesis', $synthesis);
+
+        switch ($type) {
+            case 'new':
+                $qb = $this->addAndQueryCondition($qb, 'archived', false);
+                break;
+            case 'unpublished':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                $qb = $this->addAndQueryCondition($qb, 'published', false);
+                break;
+            case 'archived':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                break;
+            case 'published':
+                $qb = $this->addAndQueryCondition($qb, 'archived', true);
+                $qb = $this->addAndQueryCondition($qb, 'published', true);
+                break;
+            case 'notIgnored':
+                $qb->andWhere('se.published = :published OR se.archived = :notArchived')
+                    ->setParameter('published', true)
+                    ->setParameter('notArchived', false)
+                ;
+                break;
+            default:
+                break;
+        }
+
+        return $qb;
+    }
+
+    protected function getOnClauseForChildren($type, $alias = 'c')
+    {
+        switch ($type) {
+            case 'new':
+                return $alias . '.archived = 0';
+                break;
+            case 'unpublished':
+                return $alias . '.archived = 1 AND ' . $alias . '.published = 0';
+                break;
+            case 'archived':
+                return $alias . '.archived = 1';
+                break;
+            case 'published':
+                return $alias . '.archived = 1 AND ' . $alias . '.published = 1';
+                break;
+            case 'notIgnored':
+                return $alias . '.published = 1 OR ' . $alias . '.archived = 0';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
+    protected function addAndQueryCondition($qb, $field, $value)
+    {
+        if (in_array($field, self::$allowedFields, true)) {
+            if ($value === null) {
+                return $qb
+                    ->andWhere('se.' . $field . ' IS NULL');
+            }
+
+            return $qb
+                ->andWhere('se.' . $field . ' = :' . $field)
+                ->setParameter($field, $value);
+        }
+
+        return $qb;
     }
 }

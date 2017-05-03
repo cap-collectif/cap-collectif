@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\Form\SearchType as SearchForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Form\SearchType as SearchForm;
 
 class SearchController extends Controller
 {

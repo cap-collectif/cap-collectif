@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Form\ProjectType;
 use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Form\ProjectType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectsController extends FOSRestController
 {
@@ -111,7 +111,7 @@ class ProjectsController extends FOSRestController
         }
 
         if ($key !== 'votes' && $step instanceof SelectionStep) {
-            throw new BadRequestHttpException('Selection steps have no '.$key.' stats.');
+            throw new BadRequestHttpException('Selection steps have no ' . $key . ' stats.');
         }
 
         if ($key !== 'votes' && ($theme || $district)) {

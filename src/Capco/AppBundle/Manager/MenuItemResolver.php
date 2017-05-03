@@ -71,7 +71,7 @@ class MenuItemResolver
         if (!$link || !$current) {
             return false;
         }
-        $fixedLink = '/'.$link;
+        $fixedLink = '/' . $link;
 
         return $link === $current || substr($current, -strlen($fixedLink)) === $fixedLink;
     }
@@ -88,7 +88,7 @@ class MenuItemResolver
             $constraint
         );
 
-        if (count($errorList) == 0) {
+        if (count($errorList) === 0) {
             return $url;
         }
 

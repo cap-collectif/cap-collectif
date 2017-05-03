@@ -15,9 +15,9 @@ class QuestionnaireRepository extends EntityRepository
     /**
      * @param $id
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOne($id)
     {

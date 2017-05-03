@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="source")
@@ -25,15 +25,9 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 {
     use UuidTrait;
 
-    public function getKind(): string
-    {
-        return 'source';
-    }
-
-    public function getRelated()
-    {
-        return $this->getParent();
-    }
+    use ValidableTrait;
+    use VotableOkTrait;
+    use ExpirableTrait;
 
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -43,10 +37,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         self::LINK => 'source.type.link',
         self::FILE => 'source.type.file',
     ];
-
-    use ValidableTrait;
-    use VotableOkTrait;
-    use ExpirableTrait;
 
     /**
      * @ORM\Column(name="title", type="string", length=100)
@@ -185,6 +175,16 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         }
 
         return 'New source';
+    }
+
+    public function getKind(): string
+    {
+        return 'source';
+    }
+
+    public function getRelated()
+    {
+        return $this->getParent();
     }
 
     public function isIndexable()
@@ -496,8 +496,8 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function setIsTrashed($isTrashed)
     {
-        if ($isTrashed != $this->isTrashed) {
-            if (false == $this->isTrashed) {
+        if ($isTrashed !== $this->isTrashed) {
+            if (false === $this->isTrashed) {
                 $this->trashedReason = null;
                 $this->trashedAt = null;
             }
@@ -582,9 +582,9 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function userHasReport(User $user = null)
     {
-        if ($user != null) {
+        if ($user !== null) {
             foreach ($this->Reports as $report) {
-                if ($report->getReporter() == $user) {
+                if ($report->getReporter() === $user) {
                     return true;
                 }
             }
@@ -624,13 +624,13 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function deleteSource()
     {
-        if ($this->Category != null) {
+        if ($this->Category !== null) {
             $this->Category->removeSource($this);
         }
-        if ($this->Opinion != null) {
+        if ($this->Opinion !== null) {
             $this->Opinion->removeSource($this);
         }
-        if ($this->opinionVersion != null) {
+        if ($this->opinionVersion !== null) {
             $this->opinionVersion->removeSource($this);
         }
     }

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Theme;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * PostRepository.
@@ -16,15 +16,6 @@ use Capco\AppBundle\Entity\Proposal;
  */
 class PostRepository extends EntityRepository
 {
-    private function createPublishedPostsByProposalQB(Proposal $proposal)
-    {
-        return $this->getIsPublishedQueryBuilder()
-          ->leftJoin('p.proposals', 'proposal')
-          ->andWhere('proposal.id = :id')
-          ->setParameter('id', $proposal->getId())
-        ;
-    }
-
     public function getPublishedPostsByProposal(Proposal $proposal)
     {
         return $this->createPublishedPostsByProposalQB($proposal)
@@ -246,8 +237,17 @@ class PostRepository extends EntityRepository
     protected function getIsPublishedQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isPublished = true')
-            ->andWhere($alias.'.publishedAt <= :now')
+            ->andWhere($alias . '.isPublished = true')
+            ->andWhere($alias . '.publishedAt <= :now')
             ->setParameter('now', new \DateTime());
+    }
+
+    private function createPublishedPostsByProposalQB(Proposal $proposal)
+    {
+        return $this->getIsPublishedQueryBuilder()
+          ->leftJoin('p.proposals', 'proposal')
+          ->andWhere('proposal.id = :id')
+          ->setParameter('id', $proposal->getId())
+        ;
     }
 }

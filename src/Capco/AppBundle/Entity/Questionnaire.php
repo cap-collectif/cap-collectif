@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Questionnaire.
@@ -22,6 +22,13 @@ class Questionnaire
     use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
+
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"title", "body"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
 
     /**
      * @var string
@@ -48,13 +55,6 @@ class Questionnaire
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "body"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    protected $updatedAt;
 
     /**
      * @var string

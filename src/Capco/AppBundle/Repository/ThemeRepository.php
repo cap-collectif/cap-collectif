@@ -59,7 +59,7 @@ class ThemeRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('t.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 

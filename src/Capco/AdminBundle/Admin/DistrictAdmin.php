@@ -3,8 +3,8 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
@@ -18,6 +18,13 @@ class DistrictAdmin extends Admin
     protected $formOptions = [
         'cascade_validation' => true,
     ];
+
+    public function getFeatures()
+    {
+        return [
+            'districts',
+        ];
+    }
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -77,12 +84,5 @@ class DistrictAdmin extends Admin
                 ],
             ])
         ;
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'districts',
-        ];
     }
 }

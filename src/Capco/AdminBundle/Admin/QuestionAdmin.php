@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
-use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -15,6 +15,26 @@ class QuestionAdmin extends Admin
     protected $formOptions = [
         'cascade_validation' => true,
     ];
+
+    public function prePersist($question)
+    {
+        if ($question instanceof MultipleChoiceQuestion) {
+            foreach ($question->getQuestionChoices() as $qc) {
+                $qc->setQuestion($question);
+            }
+        }
+    }
+
+    public function preUpdate($question)
+    {
+        if ($question instanceof MultipleChoiceQuestion) {
+            foreach ($question->getQuestionChoices() as $qc) {
+                $qc->setQuestion($question);
+            }
+        }
+
+        $question->updateTimestamp();
+    }
 
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -92,26 +112,6 @@ class QuestionAdmin extends Admin
                 ->end()
             ;
         }
-    }
-
-    public function prePersist($question)
-    {
-        if ($question instanceof MultipleChoiceQuestion) {
-            foreach ($question->getQuestionChoices() as $qc) {
-                $qc->setQuestion($question);
-            }
-        }
-    }
-
-    public function preUpdate($question)
-    {
-        if ($question instanceof MultipleChoiceQuestion) {
-            foreach ($question->getQuestionChoices() as $qc) {
-                $qc->setQuestion($question);
-            }
-        }
-
-        $question->updateTimestamp();
     }
 
     protected function configureRoutes(RouteCollection $collection)

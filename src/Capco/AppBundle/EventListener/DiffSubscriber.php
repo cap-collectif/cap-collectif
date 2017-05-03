@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Generator\DiffGenerator;
+use Capco\AppBundle\Model\HasDiffInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Capco\AppBundle\Model\HasDiffInterface;
-use Capco\AppBundle\Generator\DiffGenerator;
 
 class DiffSubscriber implements EventSubscriber
 {

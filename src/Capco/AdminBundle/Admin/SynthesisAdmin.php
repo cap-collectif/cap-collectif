@@ -14,6 +14,21 @@ class SynthesisAdmin extends Admin
         '_sort_by' => 'enabled',
     ];
 
+    public function prePersist($synthesis)
+    {
+        $this->createOrUpdateFromSource($synthesis);
+    }
+
+    public function preUpdate($synthesis)
+    {
+        $this->createOrUpdateFromSource($synthesis);
+    }
+
+    public function getBatchActions()
+    {
+        return [];
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -56,14 +71,9 @@ class SynthesisAdmin extends Admin
         ]);
     }
 
-    public function prePersist($synthesis)
+    protected function configureRoutes(RouteCollection $collection)
     {
-        $this->createOrUpdateFromSource($synthesis);
-    }
-
-    public function preUpdate($synthesis)
-    {
-        $this->createOrUpdateFromSource($synthesis);
+        return $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
     private function createOrUpdateFromSource($synthesis)
@@ -88,15 +98,5 @@ class SynthesisAdmin extends Admin
         }
 
         return $qb;
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        return $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    public function getBatchActions()
-    {
-        return [];
     }
 }

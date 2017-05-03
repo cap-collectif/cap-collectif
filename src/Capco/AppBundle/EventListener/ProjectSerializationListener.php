@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Resolver\StepResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\StepResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use JMS\Serializer\Serializer;
+use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
 class ProjectSerializationListener extends AbstractSerializationListener

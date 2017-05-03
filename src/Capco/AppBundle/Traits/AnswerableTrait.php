@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Answer;
+use Doctrine\ORM\Mapping as ORM;
 
 trait AnswerableTrait
 {

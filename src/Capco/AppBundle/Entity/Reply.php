@@ -3,18 +3,18 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="reply")
@@ -28,16 +28,6 @@ class Reply implements Contribution
     use EnableTrait;
     use PrivatableTrait;
     use ExpirableTrait;
-
-    public function getKind(): string
-    {
-        return 'reply';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
 
     /**
      * @Assert\NotNull()
@@ -68,6 +58,16 @@ class Reply implements Contribution
     {
         $this->updatedAt = new \Datetime();
         $this->responses = new ArrayCollection();
+    }
+
+    public function getKind(): string
+    {
+        return 'reply';
+    }
+
+    public function getRelated()
+    {
+        return null;
     }
 
     public function isIndexable()

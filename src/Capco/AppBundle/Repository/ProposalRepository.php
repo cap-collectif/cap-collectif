@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\District;
-use Capco\UserBundle\Entity\UserType;
-use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalRepository extends EntityRepository
 {
@@ -173,14 +173,6 @@ class ProposalRepository extends EntityRepository
         ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
-    {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.enabled = true')
-            ->andWhere($alias.'.expired = false')
-          ;
     }
 
     public function getOne(string $slug)
@@ -422,5 +414,13 @@ class ProposalRepository extends EntityRepository
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
+    {
+        return $this->createQueryBuilder($alias)
+            ->andWhere($alias . '.enabled = true')
+            ->andWhere($alias . '.expired = false')
+          ;
     }
 }

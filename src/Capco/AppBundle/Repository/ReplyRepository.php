@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Questionnaire;
-use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * ReplyRepository.
@@ -14,14 +14,6 @@ use Capco\UserBundle\Entity\User;
  */
 class ReplyRepository extends EntityRepository
 {
-    protected function getIsEnabledQueryBuilder()
-    {
-        return $this->createQueryBuilder('reply')
-            ->andWhere('reply.enabled = true')
-            ->andWhere('reply.expired = false')
-          ;
-    }
-
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire)
     {
         $qb = $this
@@ -50,7 +42,7 @@ class ReplyRepository extends EntityRepository
 
     public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire)
     {
-      $qb = $this->createQueryBuilder('reply')
+        $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.enabled = true')
             ->addSelect('author')
             ->leftJoin('reply.author', 'author')
@@ -59,5 +51,13 @@ class ReplyRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('reply')
+            ->andWhere('reply.enabled = true')
+            ->andWhere('reply.expired = false')
+          ;
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\CreatableInterface;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Model\CreatableInterface;
 
 /**
  * @ORM\Table(name="reporting")
@@ -30,16 +30,6 @@ class Reporting implements CreatableInterface
         self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
         self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
-
-    public function getKind(): string
-    {
-        return 'report';
-    }
-
-    public function getRelated()
-    {
-        return $this->getRelatedObject();
-    }
 
     /**
      * @ORM\Column(name="status", type="integer")
@@ -114,7 +104,17 @@ class Reporting implements CreatableInterface
 
     public function __toString()
     {
-        return $this->getId() ? 'Signalement de '.$this->getRelatedObject() : 'Signalement';
+        return $this->getId() ? 'Signalement de ' . $this->getRelatedObject() : 'Signalement';
+    }
+
+    public function getKind(): string
+    {
+        return 'report';
+    }
+
+    public function getRelated()
+    {
+        return $this->getRelatedObject();
     }
 
     public function getStatus()
@@ -325,23 +325,21 @@ class Reporting implements CreatableInterface
 
     public function getRelatedObject()
     {
-        if ($this->Opinion != null) {
+        if ($this->Opinion !== null) {
             return $this->Opinion;
-        } elseif ($this->Source != null) {
+        } elseif ($this->Source !== null) {
             return $this->Source;
-        } elseif ($this->Argument != null) {
+        } elseif ($this->Argument !== null) {
             return $this->Argument;
-        } elseif ($this->Idea != null) {
+        } elseif ($this->Idea !== null) {
             return $this->Idea;
-        } elseif ($this->Comment != null) {
+        } elseif ($this->Comment !== null) {
             return $this->Comment;
-        } elseif ($this->opinionVersion != null) {
+        } elseif ($this->opinionVersion !== null) {
             return $this->opinionVersion;
-        } elseif ($this->proposal != null) {
+        } elseif ($this->proposal !== null) {
             return $this->proposal;
         }
-
-        return;
     }
 
     // ***************************** Lifecycle *******************************
@@ -351,27 +349,27 @@ class Reporting implements CreatableInterface
      */
     public function deleteReport()
     {
-        if ($this->Opinion != null) {
+        if ($this->Opinion !== null) {
             $this->Opinion->removeReport($this);
         }
 
-        if ($this->Source != null) {
+        if ($this->Source !== null) {
             $this->Source->removeReport($this);
         }
 
-        if ($this->Argument != null) {
+        if ($this->Argument !== null) {
             $this->Argument->removeReport($this);
         }
 
-        if ($this->Idea != null) {
+        if ($this->Idea !== null) {
             $this->Idea->removeReport($this);
         }
 
-        if ($this->Comment != null) {
+        if ($this->Comment !== null) {
             $this->Comment->removeReport($this);
         }
 
-        if ($this->proposal != null) {
+        if ($this->proposal !== null) {
             $this->proposal->removeReport($this);
         }
     }

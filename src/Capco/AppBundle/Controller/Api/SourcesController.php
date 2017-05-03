@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\SourceVote;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\Form\ApiSourceType as SourceType;
 use Capco\AppBundle\Form\ReportingType;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class SourcesController extends FOSRestController
 {
@@ -73,7 +73,7 @@ class SourcesController extends FOSRestController
      */
     public function postOpinionVersionSourceAction(Request $request, Opinion $opinion, OpinionVersion $version)
     {
-        if ($opinion != $version->getParent()) {
+        if ($opinion !== $version->getParent()) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -124,7 +124,7 @@ class SourcesController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinion() != $opinion) {
+        if ($source->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -163,11 +163,11 @@ class SourcesController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinionVersion() != $version) {
+        if ($source->getOpinionVersion() !== $version) {
             throw new BadRequestHttpException('Not a child.');
         }
 
-        if ($opinion != $version->getParent()) {
+        if ($opinion !== $version->getParent()) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -247,7 +247,7 @@ class SourcesController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinion() != $opinion) {
+        if ($source->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
@@ -276,11 +276,11 @@ class SourcesController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        if ($source->getOpinionVersion() != $version) {
+        if ($source->getOpinionVersion() !== $version) {
             throw new BadRequestHttpException('Not a child.');
         }
 
-        if ($opinion != $version->getParent()) {
+        if ($opinion !== $version->getParent()) {
             throw new BadRequestHttpException('Not a child.');
         }
 

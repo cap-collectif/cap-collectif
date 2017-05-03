@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Sms;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class SmsService

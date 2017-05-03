@@ -5,19 +5,19 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use JMS\Serializer\SerializationContext;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class StepController extends Controller
 {
@@ -100,6 +100,8 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     *
+     * @param mixed $projectSlug
      */
     public function showRankingAction($projectSlug, RankingStep $step)
     {
@@ -142,6 +144,9 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     *
+     * @param mixed $projectSlug
+     * @param mixed $page
      */
     public function showOpinionsRankingAction($projectSlug, RankingStep $step, $page = 1)
     {

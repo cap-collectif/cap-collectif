@@ -50,7 +50,7 @@ class CommentSerializationListener extends AbstractSerializationListener
             return false;
         }
 
-        return $comment->canContribute() && $comment->getAuthor() == $user;
+        return $comment->canContribute() && $comment->getAuthor() === $user;
     }
 
     private function hasUserVoted($comment)

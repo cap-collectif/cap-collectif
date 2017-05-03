@@ -5,8 +5,8 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Helper\IdeaHelper;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class IdeaSerializationListener extends AbstractSerializationListener

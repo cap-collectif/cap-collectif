@@ -8,6 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait AnonymousableTrait
 {
     /**
+     * @var
+     *
+     * @ORM\Column(name="ip_address", type="string", nullable=true)
+     * @Assert\Ip
+     */
+    protected $ipAddress;
+    /**
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
     private $username;
@@ -17,14 +24,6 @@ trait AnonymousableTrait
      * @Assert\Email()
      */
     private $email;
-
-    /**
-     * @var
-     *
-     * @ORM\Column(name="ip_address", type="string", nullable=true)
-     * @Assert\Ip
-     */
-    protected $ipAddress;
 
     /**
      * Gets the value of username.

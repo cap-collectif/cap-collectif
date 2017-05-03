@@ -3,8 +3,8 @@
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\UserType;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * UserTypeRepository.

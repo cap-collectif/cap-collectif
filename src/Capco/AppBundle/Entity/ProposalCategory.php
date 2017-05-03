@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="proposal_category")
@@ -17,18 +17,18 @@ class ProposalCategory
     use TimestampableTrait;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=100)
-     */
-    private $name;
-
-    /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"name"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     */
+    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="categories", cascade={"persist"})

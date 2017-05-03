@@ -43,6 +43,7 @@ class SourceVoteRepository extends EntityRepository
      * Get all by source.
      *
      * @param $sourceId
+     * @param mixed $asArray
      *
      * @return mixed
      */

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\UserBundle\Entity\User;
 
 class EventRegistrationType extends AbstractType
 {
@@ -34,7 +34,7 @@ class EventRegistrationType extends AbstractType
             return;
         }
 
-        if ($this->user != null) {
+        if ($this->user !== null) {
             $builder
               ->add('private', null, [
                   'required' => false,

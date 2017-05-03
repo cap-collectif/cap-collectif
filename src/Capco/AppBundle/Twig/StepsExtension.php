@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Capco\AppBundle\Resolver\StepResolver;
-use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Helper\StepHelper;
+use Capco\AppBundle\Resolver\StepResolver;
 
 class StepsExtension extends \Twig_Extension
 {

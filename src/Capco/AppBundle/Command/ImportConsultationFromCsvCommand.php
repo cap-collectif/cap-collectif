@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
@@ -75,7 +75,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         if (!$user) {
             $output->writeln(
                 '<error>Unknown user'
-                .$userEmail.
+                . $userEmail .
                 '. Please provide an existing user email.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
@@ -85,7 +85,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         if (!$consultationStep) {
             $output->writeln(
                 '<error>Unknown consultation step'
-                .$consultationStepSlug.
+                . $consultationStepSlug .
                 '. Please provide an existing consultation step slug.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
@@ -95,7 +95,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         if (!$consultationStep->getConsultationStepType()) {
             $output->writeln(
                 '<error>Consultation step'
-                .$consultationStepSlug.
+                . $consultationStepSlug .
                 ' does not have a consultation step type associated Please create it then try importing data again.</error>');
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
@@ -143,9 +143,9 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             if (!$opinionType) {
                 $output->writeln(
                     '<error>Opinion type with path '
-                    .$row['type'].
+                    . $row['type'] .
                     ' does not exist for this consultation step (specified for opinion '
-                    .$row['titre'].
+                    . $row['titre'] .
                     ').</error>');
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
@@ -163,7 +163,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             if (is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "'
-                    .$row['titre'].
+                    . $row['titre'] .
                     '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
                 );
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
@@ -185,7 +185,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setIsTrashed(false);
             ++$i;
 
-            $content = $opinion->setBody('<p>'.nl2br(htmlspecialchars($row['contenu'])).'</p>');
+            $content = $opinion->setBody('<p>' . nl2br(htmlspecialchars($row['contenu'])) . '</p>');
 
             $em->persist($opinion);
 
@@ -199,7 +199,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 if (!is_object($opinionTypeAppendixType)) {
                     $output->writeln(
                         '<error>No appendix type defined for opinion type '
-                        .$opinion->getOpinionType()->getTitle().
+                        . $opinion->getOpinionType()->getTitle() .
                         '.</error>'
                     );
                     $output->writeln('<error>Import cancelled. No opinions created.</error>');
@@ -214,7 +214,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 } else {
                     $appendix = $opinion->getAppendices()[0];
                 }
-                $appendix->setBody('<p>'.nl2br(htmlspecialchars($row['contexte'])).'</p>');
+                $appendix->setBody('<p>' . nl2br(htmlspecialchars($row['contexte'])) . '</p>');
             }
             $progress->advance(1);
         }
@@ -224,7 +224,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         $output->writeln(
             '<info>'
-            .count($opinions).
+            . count($opinions) .
             ' opinions successfully created.</info>'
         );
     }

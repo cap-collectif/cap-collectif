@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\PositionableTrait;
 
 /**
  * Class QuestionnaireAbstractQuestion
@@ -49,6 +49,15 @@ class QuestionnaireAbstractQuestion
      **/
     protected $question;
 
+    public function __toString()
+    {
+        if ($this->question) {
+            return $this->question->__toString();
+        }
+
+        return 'undefined question';
+    }
+
     /**
      * Get id.
      *
@@ -57,15 +66,6 @@ class QuestionnaireAbstractQuestion
     public function getId()
     {
         return $this->id;
-    }
-
-    public function __toString()
-    {
-        if ($this->question) {
-            return $this->question->__toString();
-        }
-
-        return 'undefined question';
     }
 
     /**

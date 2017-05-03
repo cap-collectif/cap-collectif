@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Idea.
@@ -35,16 +35,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     use TimestampableTrait;
     use ExpirableTrait;
     use IdTrait;
-
-    public function getKind(): string
-    {
-        return 'idea';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',
@@ -176,6 +166,16 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New idea';
+    }
+
+    public function getKind(): string
+    {
+        return 'idea';
+    }
+
+    public function getRelated()
+    {
+        return null;
     }
 
     public function isIndexable()
@@ -373,7 +373,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
      */
     public function setIsTrashed($isTrashed)
     {
-        if (false == $this->isTrashed) {
+        if (false === $this->isTrashed) {
             $this->trashedReason = null;
             $this->trashedAt = null;
         }
@@ -505,7 +505,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     public function getExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }
@@ -517,7 +517,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
      */
     public function deleteIdea()
     {
-        if ($this->theme != null) {
+        if ($this->theme !== null) {
             $this->theme->removeIdea($this);
         }
     }

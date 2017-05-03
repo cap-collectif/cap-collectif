@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use JMS\Serializer\SerializationContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomepageController extends Controller
 {
@@ -65,6 +65,11 @@ class HomepageController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function highlightedContentAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -79,6 +84,11 @@ class HomepageController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Homepage:videos.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function lastVideosAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -94,6 +104,11 @@ class HomepageController extends Controller
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -114,6 +129,11 @@ class HomepageController extends Controller
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -134,6 +154,11 @@ class HomepageController extends Controller
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function lastProposalsAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -160,6 +185,11 @@ class HomepageController extends Controller
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
     {
@@ -175,6 +205,11 @@ class HomepageController extends Controller
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
+     *
+     * @param mixed      $max
+     * @param mixed      $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function lastPostsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {
@@ -224,6 +259,8 @@ class HomepageController extends Controller
      *
      * @param $max
      * @param $offset
+     * @param null|mixed $section
+     * @param null|mixed $alt
      *
      * @return array
      * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
@@ -241,6 +278,9 @@ class HomepageController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Homepage:socialNetworks.html.twig")
+     *
+     * @param null|mixed $section
+     * @param null|mixed $alt
      */
     public function socialNetworksAction($section = null, $alt = null)
     {

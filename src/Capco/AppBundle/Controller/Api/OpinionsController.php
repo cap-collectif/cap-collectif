@@ -3,34 +3,34 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Form\OpinionForm;
-use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Form\OpinionVersionType;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use Capco\AppBundle\Form\ReportingType;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class OpinionsController extends FOSRestController
 {
@@ -196,8 +196,6 @@ class OpinionsController extends FOSRestController
         $em->remove($opinion);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        return;
     }
 
     /**
@@ -538,8 +536,6 @@ class OpinionsController extends FOSRestController
         $em->remove($opinionVersion);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        return;
     }
 
     /**

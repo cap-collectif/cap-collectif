@@ -9,8 +9,6 @@ class ProjectStatsPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/projects/{projectSlug}/stats';
-
     public $elements = [
         'theme stats items' => '#stats-63-themes .stats__list__row',
         'district stats items' => '#stats-63-districts .stats__list__row',
@@ -23,6 +21,8 @@ class ProjectStatsPage extends Page
         'district filter select' => '#stats-74-votes #stats-filter-districts',
         'category filter select' => '#stats-74-votes #stats-filter-categories',
     ];
+
+    protected $path = '/projects/{projectSlug}/stats';
 
     public function getThemeStatsItemsSelector()
     {

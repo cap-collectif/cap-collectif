@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Class Comment.
@@ -37,25 +37,10 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
 {
     use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait;
 
-    public function getKind(): string
-    {
-        return 'comment';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
 
     /**
      * @ORM\Column(name="body", type="text")
@@ -163,6 +148,21 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function __toString()
     {
         return $this->getId() ? $this->getBodyExcerpt(50) : 'New comment';
+    }
+
+    public function getKind(): string
+    {
+        return 'comment';
+    }
+
+    public function getRelated()
+    {
+        return null;
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 
     /**
@@ -447,9 +447,9 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
      */
     public function userHasReport(User $user = null)
     {
-        if ($user != null) {
+        if ($user !== null) {
             foreach ($this->Reports as $report) {
-                if ($report->getReporter() == $user) {
+                if ($report->getReporter() === $user) {
                     return true;
                 }
             }
@@ -487,7 +487,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }

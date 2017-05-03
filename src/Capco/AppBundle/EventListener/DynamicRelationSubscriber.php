@@ -41,7 +41,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'cascade' => ['persist'],
                             'inversedBy' => 'parentConnections',
                             'joinTable' => [
-                                'name' => $metadata->getTableName().'_relation',
+                                'name' => $metadata->getTableName() . '_relation',
                             ],
                         ]);
                         $metadata->mapManyToMany([
@@ -61,7 +61,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                         $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1));
 
                         $metadata->mapOneToMany([
-                            'targetEntity' => $metadata->getName().'Vote',
+                            'targetEntity' => $metadata->getName() . 'Vote',
                             'fieldName' => 'votes',
                             'cascade' => ['persist', 'remove'],
                             'orphanRemoval' => true,

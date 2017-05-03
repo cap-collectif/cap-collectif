@@ -122,12 +122,10 @@ class FeaturesCategoryResolver
     public function findCategoryForToggle($toggle)
     {
         foreach (self::$categories as $name => $category) {
-            if (in_array($toggle, $category['features'])) {
+            if (in_array($toggle, $category['features'], true)) {
                 return $name;
             }
         }
-
-        return;
     }
 
     public function getEnabledPagesCategories()
@@ -162,7 +160,5 @@ class FeaturesCategoryResolver
         if (strrpos($category, 'pages.') === 0) {
             return 'admin.group.pages';
         }
-
-        return;
     }
 }

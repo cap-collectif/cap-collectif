@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Swarrot\Broker\Message;
-use Swarrot\Processor\ProcessorInterface;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManager;
+use Swarrot\Broker\Message;
+use Swarrot\Processor\ProcessorInterface;
 
 class ProposalDeleteProcessor implements ProcessorInterface
 {

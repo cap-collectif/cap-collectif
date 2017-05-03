@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Opinion;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
@@ -110,9 +110,9 @@ class OpinionRepository extends EntityRepository
      *
      * @param $opinion
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneBySlug($opinion)
     {
@@ -136,9 +136,9 @@ class OpinionRepository extends EntityRepository
      * @param $opinion
      * @param $user
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneBySlugJoinUserReports($opinion, $user)
     {
@@ -320,33 +320,33 @@ class OpinionRepository extends EntityRepository
         ;
 
         if ($opinionsSort) {
-            if ($opinionsSort == 'last') {
+            if ($opinionsSort === 'last') {
                 $qb
                     ->addOrderBy('o.createdAt', 'DESC')
                     ->addOrderBy('o.votesCountOk', 'DESC')
                 ;
-            } elseif ($opinionsSort == 'old') {
+            } elseif ($opinionsSort === 'old') {
                 $qb
                     ->addOrderBy('o.createdAt', 'ASC')
                     ->addOrderBy('o.votesCountOk', 'DESC')
                 ;
-            } elseif ($opinionsSort == 'favorable') {
+            } elseif ($opinionsSort === 'favorable') {
                 $qb
                     ->addOrderBy('o.votesCountOk', 'DESC')
                     ->addOrderBy('o.votesCountNok', 'ASC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort == 'votes') {
+            } elseif ($opinionsSort === 'votes') {
                 $qb
                     ->addOrderBy('vnb', 'DESC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort == 'comments') {
+            } elseif ($opinionsSort === 'comments') {
                 $qb
                     ->addOrderBy('o.argumentsCount', 'DESC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort == 'positions') {
+            } elseif ($opinionsSort === 'positions') {
                 $qb
                     // trick in DQL to order NULL values last
                     ->addSelect('-o.position as HIDDEN inversePosition')
@@ -355,7 +355,7 @@ class OpinionRepository extends EntityRepository
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
                 ;
-            } elseif ($opinionsSort == 'random') {
+            } elseif ($opinionsSort === 'random') {
                 $qb
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
@@ -376,6 +376,7 @@ class OpinionRepository extends EntityRepository
      * Get enabled opinions by consultation step.
      *
      * @param $step
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -434,8 +435,8 @@ class OpinionRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias.'.isEnabled = true')
-            ->andWhere($alias.'.expired = false')
+            ->andWhere($alias . '.isEnabled = true')
+            ->andWhere($alias . '.expired = false')
         ;
     }
 }

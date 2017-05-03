@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Form\Api;
 
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 
 class SynthesisElementType extends AbstractType
 {

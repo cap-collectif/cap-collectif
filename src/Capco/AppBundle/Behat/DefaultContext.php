@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Behat\MinkExtension\Context\MinkContext;
 
 // TODO: remove when we use Symfony 3.0
 // This avoid failure because of deprecated warnings
@@ -19,6 +19,11 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 {
     protected $navigationContext;
 
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
     /** @BeforeScenario */
     public function gatherContexts(BeforeScenarioScope $scope)
     {
@@ -26,11 +31,6 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 
         $this->navigationContext = $environment->getContext('Capco\AppBundle\Behat\NavigationContext');
     }
-
-    /**
-     * @var KernelInterface
-     */
-    protected $kernel;
 
     /**
      * {@inheritdoc}
@@ -52,6 +52,8 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 
     /**
      * Get Repository.
+     *
+     * @param mixed $repo
      */
     protected function getRepository($repo)
     {
@@ -95,9 +97,9 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     /**
      * Get current user instance.
      *
-     * @return null|UserInterface
-     *
      * @throws \Exception
+     *
+     * @return null|UserInterface
      */
     protected function getUser()
     {

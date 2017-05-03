@@ -3,8 +3,8 @@
 namespace Capco\MediaBundle\Controller;
 
 use Sonata\MediaBundle\Controller\MediaController as BaseController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaController extends BaseController
 {

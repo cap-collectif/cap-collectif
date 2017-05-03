@@ -2,8 +2,8 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
@@ -242,7 +242,7 @@ class OpinionController extends Controller
                             'flash_lock_error',
                             [
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
-                                '%link_start%' => '<a href="'.$this->admin->generateObjectUrl('edit', $object).'">',
+                                '%link_start%' => '<a href="' . $this->admin->generateObjectUrl('edit', $object) . '">',
                                 '%link_end%' => '</a>',
                             ],
                             'SonataAdminBundle'

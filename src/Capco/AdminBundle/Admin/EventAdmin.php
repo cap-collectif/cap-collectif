@@ -22,6 +22,40 @@ class EventAdmin extends Admin
         '_sort_by' => 'updatedAt',
     ];
 
+    public function getFeatures()
+    {
+        return [
+            'calendar',
+        ];
+    }
+
+    public function prePersist($event)
+    {
+        $this->setCoord($event);
+        $this->checkRegistration($event);
+    }
+
+    public function preUpdate($event)
+    {
+        $this->setCoord($event);
+        $this->checkRegistration($event);
+    }
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $media = $object->getMedia();
+        if ($media) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $format = $provider->getFormatName($media, 'form');
+            $url = $provider->generatePublicUrl($media, $format);
+
+            return new Metadata($object->getTitle(), $object->getBody(), $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -310,25 +344,6 @@ class EventAdmin extends Admin
         ;
     }
 
-    public function getFeatures()
-    {
-        return [
-            'calendar',
-        ];
-    }
-
-    public function prePersist($event)
-    {
-        $this->setCoord($event);
-        $this->checkRegistration($event);
-    }
-
-    public function preUpdate($event)
-    {
-        $this->setCoord($event);
-        $this->checkRegistration($event);
-    }
-
     private function checkRegistration($event)
     {
         if ($event->getLink()) {
@@ -348,26 +363,11 @@ class EventAdmin extends Admin
         $curl = new CurlHttpAdapter();
         $geocoder = new GoogleMaps($curl);
 
-        $address = $event->getAddress().', '.$event->getZipCode().' '.$event->getCity().', '.$event->getCountry();
+        $address = $event->getAddress() . ', ' . $event->getZipCode() . ' ' . $event->getCity() . ', ' . $event->getCountry();
 
         $coord = $geocoder->geocode($address)->first()->getCoordinates();
 
         $event->setLat($coord->getLatitude());
         $event->setLng($coord->getLongitude());
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $media = $object->getMedia();
-        if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), $object->getBody(), $url);
-        }
-
-        return parent::getObjectMetadata($object);
     }
 }

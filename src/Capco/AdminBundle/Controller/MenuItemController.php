@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MenuItemController extends Controller
@@ -37,10 +37,10 @@ class MenuItemController extends Controller
      * @param int|string|null $id
      * @param Request         $request
      *
-     * @return Response|RedirectResponse
-     *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
+     *
+     * @return Response|RedirectResponse
      */
     public function deleteAction($id, Request $request = null)
     {

@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\MediaBundle\Entity\Media;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,9 +24,9 @@ class DownloadController extends Controller
      * @param MediaResponse $mediaResponse
      * @param Media         $media
      *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws AccessDeniedException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function downloadAction(MediaResponse $mediaResponse, Media $media)
     {

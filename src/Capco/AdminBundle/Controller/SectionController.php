@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends PositionableController
 {
@@ -41,10 +41,10 @@ class SectionController extends PositionableController
      * @param int|string|null $id
      * @param Request         $request
      *
-     * @return Response|RedirectResponse
-     *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
+     *
+     * @return Response|RedirectResponse
      */
     public function deleteAction($id, Request $request = null)
     {

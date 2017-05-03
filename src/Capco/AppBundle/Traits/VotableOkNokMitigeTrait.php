@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVote;
-use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkNokMitigeTrait
 {

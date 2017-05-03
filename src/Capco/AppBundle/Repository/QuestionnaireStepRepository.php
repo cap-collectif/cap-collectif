@@ -14,9 +14,9 @@ class QuestionnaireStepRepository extends EntityRepository
      *
      * @param $slug
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOne($slug)
     {

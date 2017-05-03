@@ -31,10 +31,10 @@ class ValueResponseType extends AbstractType
             ->addModelTransformer($this->transformer)
         ;
 
-        $builder->add('_type', HiddenType::class, array(
+        $builder->add('_type', HiddenType::class, [
             'data' => 'value_response',
             'mapped' => false,
-        ));
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

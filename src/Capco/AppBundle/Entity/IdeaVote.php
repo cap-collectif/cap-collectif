@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * IdeaVote.
@@ -41,7 +41,7 @@ class IdeaVote extends AbstractVote
     public function __toString()
     {
         if ($this->idea) {
-            return 'Vote on '.$this->idea;
+            return 'Vote on ' . $this->idea;
         }
 
         return 'New idea vote';
@@ -51,6 +51,7 @@ class IdeaVote extends AbstractVote
      * set idea.
      *
      * @param $Idea
+     * @param mixed $idea
      *
      * @return IdeaVote
      */
@@ -77,7 +78,7 @@ class IdeaVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->idea != null) {
+        if ($this->idea !== null) {
             $this->idea->removeVote($this);
         }
     }

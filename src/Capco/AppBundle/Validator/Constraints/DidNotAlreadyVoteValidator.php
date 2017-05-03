@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class DidNotAlreadyVoteValidator extends ConstraintValidator
 {
@@ -40,7 +40,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
         $votes = $this->entityManager->getRepository($constraint->repositoryPath)->findBy($data);
 
         foreach ($votes as $vote) {
-            if ($vote->getId() != $object->getId()) {
+            if ($vote->getId() !== $object->getId()) {
                 $this->context
                     ->buildViolation($constraint->message)
                     ->atPath('email')

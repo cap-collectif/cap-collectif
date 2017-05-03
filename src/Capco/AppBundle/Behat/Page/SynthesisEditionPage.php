@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class SynthesisEditionPage extends Page
 {
@@ -36,21 +36,6 @@ class SynthesisEditionPage extends Page
         'element parent in create modal' => '.modal--create #element-root',
         'element creation submit button' => '.modal--create button[type=\'submit\']',
     ];
-
-    protected function verifyUrl(array $urlParameters = [])
-    {
-        $expectedUrl = $this->getUrl($urlParameters);
-        $currentUrl = $this->getSession()->getCurrentUrl();
-
-        if ($currentUrl !== $expectedUrl && false === strrpos($currentUrl, 'edition#/')) {
-            throw new UnexpectedPageException(
-                sprintf(
-                    'Expected to be on "%s" but found "%s" instead',
-                    $this->getUrl($urlParameters),
-                    $this->getSession()->getCurrentUrl()
-                ));
-        }
-    }
 
     public function getElementsSelector()
     {
@@ -137,5 +122,20 @@ class SynthesisEditionPage extends Page
     public function submitElementCreation()
     {
         $this->getElement('element creation submit button')->click();
+    }
+
+    protected function verifyUrl(array $urlParameters = [])
+    {
+        $expectedUrl = $this->getUrl($urlParameters);
+        $currentUrl = $this->getSession()->getCurrentUrl();
+
+        if ($currentUrl !== $expectedUrl && false === strrpos($currentUrl, 'edition#/')) {
+            throw new UnexpectedPageException(
+                sprintf(
+                    'Expected to be on "%s" but found "%s" instead',
+                    $this->getUrl($urlParameters),
+                    $this->getSession()->getCurrentUrl()
+                ));
+        }
     }
 }

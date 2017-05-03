@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Synthesis\Extractor;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Router;
-use Capco\AppBundle\Model\Contribution;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ConsultationStepExtractor
 {
@@ -75,6 +75,8 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from opinion types and all children elements.
+     *
+     * @param mixed $opinionTypes
      */
     public function createElementsFromOpinionTypes($opinionTypes, SynthesisElement $parent = null)
     {
@@ -98,6 +100,8 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from opinions and all children elements.
+     *
+     * @param mixed $opinions
      */
     public function createElementsFromOpinions($opinions, SynthesisElement $parent = null)
     {
@@ -131,6 +135,8 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from versions and all children elements.
+     *
+     * @param mixed $versions
      */
     public function createElementsFromVersions($versions, SynthesisElement $parent = null)
     {
@@ -151,6 +157,8 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from arguments and all children elements.
+     *
+     * @param mixed $arguments
      */
     public function createElementsFromArguments($arguments, SynthesisElement $prosFolder, SynthesisElement $consFolder = null)
     {
@@ -171,6 +179,8 @@ class ConsultationStepExtractor
 
     /**
      * Create or update elements from sources and all children elements.
+     *
+     * @param mixed $sources
      */
     public function createElementsFromSources($sources, SynthesisElement $parent)
     {
@@ -184,6 +194,8 @@ class ConsultationStepExtractor
 
     /**
      * Returns updated or created element from a given contribution.
+     *
+     * @param mixed $object
      */
     public function getRelatedElement($object, SynthesisElement $parent = null): SynthesisElement
     {
@@ -257,6 +269,8 @@ class ConsultationStepExtractor
 
     /**
      * Update an element from a contribution.
+     *
+     * @param mixed $data
      */
     public function updateElementFrom(SynthesisElement $element, $data): SynthesisElement
     {
@@ -280,6 +294,8 @@ class ConsultationStepExtractor
 
     /**
      * Set data of element from contribution, depending on type.
+     *
+     * @param mixed $contribution
      */
     public function setDataFromContribution(SynthesisElement $element, /*Contribution|OpinionType*/ $contribution): SynthesisElement
     {
@@ -323,12 +339,12 @@ class ConsultationStepExtractor
 
             $content = '';
             if (count($opinion->getAppendices()) > 0) {
-                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis').'</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis') . '</p>';
                 foreach ($opinion->getAppendices() as $app) {
-                    $content .= '<p>'.$app->getAppendixType()->getTitle().'</p>';
+                    $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
                     $content .= $app->getBody();
                 }
-                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis').'</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
             }
             $content .= $opinion->getBody();
 
@@ -355,9 +371,9 @@ class ConsultationStepExtractor
 
             $content = '';
             if ($version->getComment()) {
-                $content .= '<p>'.$this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis').'</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis') . '</p>';
                 $content .= $version->getComment();
-                $content .= '<p>'.$this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis').'</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
             }
             $content .= $version->getBody();
             $element->setBody($content);
@@ -416,7 +432,7 @@ class ConsultationStepExtractor
 
     public function isElementExisting(SynthesisElement $element, $object): bool
     {
-        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() == $object->getId();
+        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() === $object->getId();
     }
 
     public function isElementOutdated(SynthesisElement $element, $object): bool

@@ -2,16 +2,16 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\AppBundle\Entity\Project;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Elastica\Query\Match;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\Term;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\Match;
+use Elastica\Query\Term;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class StepController extends CRUDController
 {

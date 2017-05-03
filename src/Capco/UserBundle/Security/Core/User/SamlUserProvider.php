@@ -2,8 +2,8 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SamlUserProvider implements UserProviderInterface
 {
@@ -22,7 +22,7 @@ class SamlUserProvider implements UserProviderInterface
             $user = $this->userManager->createUser();
             $user->setSamlId($id);
             $user->setUsername($id);
-            $user->setEmail($id.'@fake-email-cap-collectif.com');
+            $user->setEmail($id . '@fake-email-cap-collectif.com');
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
         }

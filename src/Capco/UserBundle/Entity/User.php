@@ -3,16 +3,16 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
+use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
-use Capco\MediaBundle\Entity\Media;
-use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
 class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, SamlUserInterface
 {
@@ -28,44 +28,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         'date' => 'user.index.sort.date',
     ];
 
-    public function setSamlAttributes(array $attributes)
-    {
-        $this->setUsername($attributes['oda_prenom'][0].' '.$attributes['oda_nom'][0]);
-    }
-
     protected $samlId;
 
-    public function setSamlId($id)
-    {
-        $this->samlId = $id;
-
-        return $this;
-    }
-
-    public function getSamlId()
-    {
-        return $this->samlId;
-    }
-
-    // used as a lifecycleCallback
-    public function sanitizePhoneNumber()
-    {
-        if ($this->phone) {
-            $this->phone = '+'.preg_replace('/[^0-9]/', '', $this->phone);
-        }
-    }
-
-    public function isEqualTo(RealUserInterface $user)
-    {
-        return $this->id === $user->getId();
-    }
-
     protected $id;
-
-    /**
-     * @var string
-     */
-    private $slug;
 
     /**
      * @var int
@@ -266,7 +231,68 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $newEmailToConfirm = null;
     protected $newEmailConfirmationToken = null;
 
+    protected $emailConfirmationSentAt = null;
+
+    protected $smsConfirmationSentAt = null;
+    protected $smsConfirmationCode = null;
+    protected $phoneConfirmed = false;
+
+    protected $alertExpirationSent = false;
+
+    /**
+     * @var string
+     */
+    private $slug;
+
     private $responses;
+
+    public function __construct($encoder = null)
+    {
+        parent::__construct();
+
+        $this->encoder = $encoder;
+        $this->roles = ['ROLE_USER'];
+        $this->opinions = new ArrayCollection();
+        $this->opinionVersions = new ArrayCollection();
+        $this->responses = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->arguments = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->sources = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
+        $this->replies = new ArrayCollection();
+    }
+
+    public function setSamlAttributes(array $attributes)
+    {
+        $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
+    }
+
+    public function setSamlId($id)
+    {
+        $this->samlId = $id;
+
+        return $this;
+    }
+
+    public function getSamlId()
+    {
+        return $this->samlId;
+    }
+
+    // used as a lifecycleCallback
+    public function sanitizePhoneNumber()
+    {
+        if ($this->phone) {
+            $this->phone = '+' . preg_replace('/[^0-9]/', '', $this->phone);
+        }
+    }
+
+    public function isEqualTo(RealUserInterface $user)
+    {
+        return $this->id === $user->getId();
+    }
 
     public function addResponse(AbstractResponse $response): self
     {
@@ -322,32 +348,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->newEmailConfirmationToken = $token;
 
         return $this;
-    }
-
-    protected $emailConfirmationSentAt = null;
-
-    protected $smsConfirmationSentAt = null;
-    protected $smsConfirmationCode = null;
-    protected $phoneConfirmed = false;
-
-    protected $alertExpirationSent = false;
-
-    public function __construct($encoder = null)
-    {
-        parent::__construct();
-
-        $this->encoder = $encoder;
-        $this->roles = ['ROLE_USER'];
-        $this->opinions = new ArrayCollection();
-        $this->opinionVersions = new ArrayCollection();
-        $this->responses = new ArrayCollection();
-        $this->ideas = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-        $this->arguments = new ArrayCollection();
-        $this->votes = new ArrayCollection();
-        $this->sources = new ArrayCollection();
-        $this->proposals = new ArrayCollection();
-        $this->replies = new ArrayCollection();
     }
 
     public function isIndexable()

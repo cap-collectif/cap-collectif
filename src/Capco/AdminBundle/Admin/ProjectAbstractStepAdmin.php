@@ -19,6 +19,15 @@ class ProjectAbstractStepAdmin extends Admin
 
     protected $translationDomain = 'SonataAdminBundle';
 
+    public function postRemove($object)
+    {
+        // delete linked step
+        if ($object->getStep()) {
+            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+            $em->remove($object->getStep());
+        }
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -47,15 +56,6 @@ class ProjectAbstractStepAdmin extends Admin
                 'link_parameters' => ['projectId' => $projectId],
             ])
         ;
-    }
-
-    public function postRemove($object)
-    {
-        // delete linked step
-        if ($object->getStep()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
-            $em->remove($object->getStep());
-        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

@@ -3,10 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -15,13 +12,25 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Capco\AppBundle\Entity\Status;
 
 class StepAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'title',
+    ];
+
+    protected $formOptions = [
+        'cascade_validation' => true,
+    ];
+
     public function getNewInstance()
     {
         $subClass = $this->getRequest()->query->get('subclass');
@@ -55,14 +64,14 @@ class StepAdmin extends Admin
         ];
     }
 
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
+    public function getTemplate($name)
+    {
+        if ($name === 'edit') {
+            return 'CapcoAdminBundle:Step:edit.html.twig';
+        }
 
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
+        return parent::getTemplate($name);
+    }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
@@ -355,6 +364,11 @@ class StepAdmin extends Admin
         }
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['create', 'edit', 'delete']);
+    }
+
     private function createQueryForProposalForms()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
@@ -401,19 +415,5 @@ class StepAdmin extends Admin
         ;
 
         return $qb->getQuery();
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    public function getTemplate($name)
-    {
-        if ($name === 'edit') {
-            return 'CapcoAdminBundle:Step:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
     }
 }

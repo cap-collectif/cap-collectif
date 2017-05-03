@@ -17,7 +17,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if ($value->getEmail() == null) {
+        if ($value->getEmail() === null) {
             return;
         }
 
@@ -28,7 +28,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 
         $present = false;
         foreach ($registrations as $registration) {
-            if ($registration->getId() != $value->getId()) {
+            if ($registration->getId() !== $value->getId()) {
                 $present = true;
             }
         }

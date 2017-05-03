@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
-use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Model\IndexableInterface;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * @ORM\Table(name="blog_post")
@@ -132,14 +132,14 @@ class Post implements CommentableInterface, IndexableInterface
         $this->publishedAt = new \Datetime();
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsPublished();
-    }
-
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New post';
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsPublished();
     }
 
     /**
@@ -554,7 +554,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        return $this->abstract ?? substr(strip_tags($this->body), 0, 300).'[&hellip;]';
+        return $this->abstract ?? substr(strip_tags($this->body), 0, 300) . '[&hellip;]';
     }
 
     // ************************** Lifecycle **************************************

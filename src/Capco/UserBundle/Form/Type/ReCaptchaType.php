@@ -2,9 +2,9 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
 
 class ReCaptchaType extends AbstractType
 {

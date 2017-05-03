@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project.
@@ -29,6 +29,13 @@ class Project implements IndexableInterface
     const SORT_ORDER_PUBLISHED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
+    const OPENING_STATUS_FUTURE = 0;
+    const OPENING_STATUS_OPENED = 1;
+    const OPENING_STATUS_ENDED = 2;
+
+    const OPINION_TERM_OPINION = 0;
+    const OPINION_TERM_ARTICLE = 1;
+
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
@@ -39,28 +46,16 @@ class Project implements IndexableInterface
         'popularity' => 'project.sort.contributions_nb',
     ];
 
-    const OPENING_STATUS_FUTURE = 0;
-    const OPENING_STATUS_OPENED = 1;
-    const OPENING_STATUS_ENDED = 2;
-
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
         'ended' => self::OPENING_STATUS_ENDED,
     ];
 
-    const OPINION_TERM_OPINION = 0;
-    const OPINION_TERM_ARTICLE = 1;
-
     public static $opinionTermsLabels = [
         self::OPINION_TERM_OPINION => 'project.opinion_term.opinion',
         self::OPINION_TERM_ARTICLE => 'project.opinion_term.article',
     ];
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
 
     /**
      * @var string
@@ -232,6 +227,11 @@ class Project implements IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New project';
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 
     /**
@@ -833,8 +833,6 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
-
-        return;
     }
 
     public function getConsultationStepOpen()
@@ -844,8 +842,6 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
-
-        return;
     }
 
     public function getExportableSteps()

@@ -43,6 +43,7 @@ class ArgumentVoteRepository extends EntityRepository
      * Get all by argument.
      *
      * @param $version
+     * @param mixed $asArray
      *
      * @return mixed
      */

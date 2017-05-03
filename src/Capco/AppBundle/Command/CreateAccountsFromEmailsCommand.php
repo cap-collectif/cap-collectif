@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
 {
@@ -45,9 +45,9 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
         $dump = '';
         foreach ($emails as $key => $email) {
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-            $output->writeln('Creating account for '.$email);
+            $output->writeln('Creating account for ' . $email);
 
-            $username = 'DRIVE'.($key + 1);
+            $username = 'DRIVE' . ($key + 1);
             $password = bin2hex(openssl_random_pseudo_bytes(4));
 
             $user = $userManager->createUser();
@@ -56,11 +56,11 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
             $user->setPassword($passwordEncoder->encodePassword($user, $password));
             $user->setEnabled(true);
             $userManager->updateUser($user);
-            $dump .= $email.' '.$username.' '.$password."\r\n";
+            $dump .= $email . ' ' . $username . ' ' . $password . "\r\n";
         }
 
         (new Filesystem())->dumpFile('dump.txt', $dump);
 
-        $output->writeln(count($emails).' accounts have been created !');
+        $output->writeln(count($emails) . ' accounts have been created !');
     }
 }

@@ -14,6 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MultipleChoiceQuestion extends AbstractQuestion
 {
+    public static $questionTypesLabels = [
+        self::QUESTION_TYPE_RADIO => 'question.types.radio',
+        self::QUESTION_TYPE_SELECT => 'question.types.select',
+        self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
+        self::QUESTION_TYPE_RANKING => 'question.types.ranking',
+    ];
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
@@ -43,20 +49,10 @@ class MultipleChoiceQuestion extends AbstractQuestion
      */
     protected $hasValidationRule = false;
 
-    public static $questionTypesLabels = [
-        self::QUESTION_TYPE_RADIO => 'question.types.radio',
-        self::QUESTION_TYPE_SELECT => 'question.types.select',
-        self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
-        self::QUESTION_TYPE_RANKING => 'question.types.ranking',
-    ];
-
     public function __construct()
     {
         $this->questionChoices = new ArrayCollection();
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
+        unset(self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT], self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT], self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR], self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
     }
 
     /**

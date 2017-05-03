@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Helper;
 
-use Predis\Client;
 use Capco\UserBundle\Entity\User;
+use Predis\Client;
 
 class RedisStorageHelper
 {

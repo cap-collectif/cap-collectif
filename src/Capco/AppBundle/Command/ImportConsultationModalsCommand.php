@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionModal;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportConsultationModalsCommand extends ContainerAwareCommand
 {
@@ -51,7 +51,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                             ]);
 
             if (!is_object($opinion)) {
-                throw new \InvalidArgumentException('Unknown title: '.$row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

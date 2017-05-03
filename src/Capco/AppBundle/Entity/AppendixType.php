@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="appendix_type")
@@ -20,6 +20,13 @@ class AppendixType
     use TimestampableTrait;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"helpText", "title"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
      * @ORM\Column(name="help", type="text")
      */
     private $helpText;
@@ -28,13 +35,6 @@ class AppendixType
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", cascade={"persist", "remove"}, mappedBy="appendixType", orphanRemoval = true)
      */
     private $opinionTypes;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"helpText", "title"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    protected $updatedAt;
 
     public function __construct()
     {

@@ -20,10 +20,7 @@ class SimpleQuestion extends AbstractQuestion
     public function __construct()
     {
         // Simple questions can't be of those types, we unset them
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_RADIO]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_SELECT]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_CHECKBOX]);
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
+        unset(self::$questionTypesInputs[self::QUESTION_TYPE_RADIO], self::$questionTypesInputs[self::QUESTION_TYPE_SELECT], self::$questionTypesInputs[self::QUESTION_TYPE_CHECKBOX], self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
     }
 
     /**

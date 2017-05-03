@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Repository\PositionableRepository;
+use Capco\AppBundle\Toggle\Manager;
 
 class PositionableResolver
 {
@@ -60,8 +60,6 @@ class PositionableResolver
                 return $objects[$index + $relPos];
             }
         }
-
-        return;
     }
 
     /**

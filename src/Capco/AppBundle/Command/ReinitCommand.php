@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Command;
 
 use Doctrine\DBAL\ConnectionException;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\ArrayInput;
-use Joli\JoliNotif\Notification;
-use Joli\JoliNotif\NotifierFactory;
 
 class ReinitCommand extends ContainerAwareCommand
 {
@@ -88,15 +88,6 @@ class ReinitCommand extends ContainerAwareCommand
                         ->setTitle('Success')
                         ->setBody('Database reseted.')
                 );
-        }
-    }
-
-    private function runCommands(array $commands, $output)
-    {
-        foreach ($commands as $key => $value) {
-            $input = new ArrayInput($value);
-            $input->setInteractive(false);
-            $this->getApplication()->find($key)->run($input, $output);
         }
     }
 
@@ -179,5 +170,14 @@ class ReinitCommand extends ContainerAwareCommand
         $this->runCommands([
           'doctrine:migration:version' => ['--add' => true, '--all' => true],
         ], $output);
+    }
+
+    private function runCommands(array $commands, $output)
+    {
+        foreach ($commands as $key => $value) {
+            $input = new ArrayInput($value);
+            $input->setInteractive(false);
+            $this->getApplication()->find($key)->run($input, $output);
+        }
     }
 }

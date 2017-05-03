@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Opinion;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * OpinionVersionRepository.
@@ -112,23 +112,23 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('trashed', $trashed)
         ;
 
-        if ($filter == 'last') {
+        if ($filter === 'last') {
             $qb->orderBy('o.updatedAt', 'DESC');
             $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ($filter == 'old') {
+        } elseif ($filter === 'old') {
             $qb->orderBy('o.updatedAt', 'ASC');
             $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ($filter == 'favorable') {
+        } elseif ($filter === 'favorable') {
             $qb->orderBy('o.votesCountOk', 'DESC');
             $qb->addOrderBy('o.votesCountNok', 'ASC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'votes') {
+        } elseif ($filter === 'votes') {
             $qb->orderBy('vnb', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'comments') {
+        } elseif ($filter === 'comments') {
             $qb->orderBy('o.argumentsCount', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter == 'random') {
+        } elseif ($filter === 'random') {
             $qb->addSelect('RAND() as HIDDEN rand')
                 ->addOrderBy('rand')
             ;
@@ -164,6 +164,7 @@ class OpinionVersionRepository extends EntityRepository
      * Get enabled opinions by consultation step.
      *
      * @param $step
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -245,6 +246,7 @@ class OpinionVersionRepository extends EntityRepository
      * Get all versions by project ordered by votesCountOk.
      *
      * @param $project
+     * @param null|mixed $excludedAuthor
      *
      * @return mixed
      */
@@ -276,15 +278,6 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    protected function getIsEnabledQueryBuilder($alias = 'o')
-    {
-        return $this
-            ->createQueryBuilder($alias)
-            ->andWhere($alias.'.enabled = true')
-            ->andWhere($alias.'.expired = false')
-        ;
-    }
-
     public function getWithVotes(string $id, $limit = null)
     {
         $qb = $this->getIsEnabledQueryBuilder('o')
@@ -299,5 +292,14 @@ class OpinionVersionRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    protected function getIsEnabledQueryBuilder($alias = 'o')
+    {
+        return $this
+            ->createQueryBuilder($alias)
+            ->andWhere($alias . '.enabled = true')
+            ->andWhere($alias . '.expired = false')
+        ;
     }
 }

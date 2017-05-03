@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Idea;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * IdeaVoteRepository.

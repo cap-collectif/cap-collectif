@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="registration_form")
@@ -32,6 +32,26 @@ class RegistrationForm
      */
     private $bottomTextDisplayed = false;
 
+    /**
+     * @ORM\Column(name="top_text_displayed", type="boolean", nullable=false)
+     */
+    private $topTextDisplayed = false;
+
+    /**
+     * @ORM\Column(name="top_text", type="text")
+     */
+    private $topText = '';
+
+    /**
+     * @ORM\Column(name="bottom_text", type="text")
+     */
+    private $bottomText;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
+
     public function isBottomTextDisplayed(): bool
     {
         return $this->bottomTextDisplayed;
@@ -43,11 +63,6 @@ class RegistrationForm
 
         return $this;
     }
-
-    /**
-     * @ORM\Column(name="top_text_displayed", type="boolean", nullable=false)
-     */
-    private $topTextDisplayed = false;
 
     public function isTopTextDisplayed(): bool
     {
@@ -61,11 +76,6 @@ class RegistrationForm
         return $this;
     }
 
-    /**
-     * @ORM\Column(name="top_text", type="text")
-     */
-    private $topText = '';
-
     public function setTopText(string $topText = null)
     {
         $this->topText = $topText;
@@ -78,11 +88,6 @@ class RegistrationForm
         return $this->topText;
     }
 
-    /**
-     * @ORM\Column(name="bottom_text", type="text")
-     */
-    private $bottomText;
-
     public function setBottomText(string $bottomText = null)
     {
         $this->bottomText = $bottomText;
@@ -93,11 +98,6 @@ class RegistrationForm
     public function getBottomText(): string
     {
         return $this->bottomText;
-    }
-
-    public function __construct()
-    {
-        $this->questions = new ArrayCollection();
     }
 
     public function getRealQuestions()

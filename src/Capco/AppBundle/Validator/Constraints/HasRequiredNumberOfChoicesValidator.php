@@ -38,7 +38,5 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                 return;
             }
         }
-
-        return;
     }
 }

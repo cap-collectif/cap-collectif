@@ -9,12 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait VotableOkTrait
 {
-    private $votes; // Dynamic Relation
-
     /**
      * @ORM\Column(name="votes_count", type="integer")
      */
     protected $votesCount = 0;
+    private $votes; // Dynamic Relation
 
     public function resetVotes()
     {
@@ -28,9 +27,9 @@ trait VotableOkTrait
 
     public function userHasVote(User $user = null)
     {
-        if ($user != null) {
+        if ($user !== null) {
             foreach ($this->votes as $vote) {
-                if ($vote->getUser() == $user) {
+                if ($vote->getUser() === $user) {
                     return true;
                 }
             }

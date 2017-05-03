@@ -11,6 +11,9 @@ class AbstractVoteRepository extends EntityRepository
 {
     /**
      * Gets the history of votes for a certain related item.
+     *
+     * @param mixed $objectType
+     * @param mixed $object
      */
     public function getHistoryFor($objectType, $object)
     {
@@ -19,7 +22,7 @@ class AbstractVoteRepository extends EntityRepository
             ->andWhere('v.expired = false')
             ->addOrderBy('v.updatedAt', 'ASC');
 
-        if (in_array($objectType, ['opinion', 'opinionVersion'])) {
+        if (in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb->addSelect('v.updatedAt', 'v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->setParameter('object', $object)
@@ -50,10 +53,11 @@ class AbstractVoteRepository extends EntityRepository
      * Get one vote by id.
      *
      * @param $vote
-     *
-     * @return mixed
+     * @param mixed $id
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneById($id)
     {
@@ -71,6 +75,7 @@ class AbstractVoteRepository extends EntityRepository
      * Get votes by user.
      *
      * @param user
+     * @param mixed $user
      *
      * @return mixed
      */
@@ -102,7 +107,7 @@ class AbstractVoteRepository extends EntityRepository
             ->andWhere('v.expired = false')
         ;
 
-        if (in_array($objectType, ['opinion', 'opinionVersion'])) {
+        if (in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb->addSelect('v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->andWhere('v.user = :user')

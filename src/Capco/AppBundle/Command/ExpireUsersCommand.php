@@ -34,6 +34,6 @@ class ExpireUsersCommand extends ContainerAwareCommand
             $notifier->sendExpiredUserEmail($user, $contributionDeleted);
         }
 
-        $output->writeln(count($users).' user(s) expired.');
+        $output->writeln(count($users) . ' user(s) expired.');
     }
 }

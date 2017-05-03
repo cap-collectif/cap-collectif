@@ -79,6 +79,8 @@ trait SynthesisStepsTrait
      * I should see the archived synthesis elements.
      *
      * @Then I should see the archived synthesis elements
+     *
+     * @param mixed $nb
      */
     public function iShouldSeeTheArchivedSynthesisElements($nb = 15)
     {
@@ -123,6 +125,8 @@ trait SynthesisStepsTrait
      * I should see the unpublished synthesis elements.
      *
      * @Then I should see the unpublished synthesis elements
+     *
+     * @param mixed $nb
      */
     public function iShouldSeeTheUnpublishedSynthesisElements($nb = 0)
     {

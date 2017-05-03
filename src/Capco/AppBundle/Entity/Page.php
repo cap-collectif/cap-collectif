@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Page.
@@ -73,11 +73,6 @@ class Page
      */
     private $media;
 
-    public function __toString()
-    {
-        return $this->getId() ? $this->getTitle() : 'New page';
-    }
-
     /**
      * Constructor.
      */
@@ -85,6 +80,11 @@ class Page
     {
         $this->MenuItems = new ArrayCollection();
         $this->updatedAt = new \Datetime();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getTitle() : 'New page';
     }
 
     /**
@@ -278,7 +278,7 @@ class Page
     public function getExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }

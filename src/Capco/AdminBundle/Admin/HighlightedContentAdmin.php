@@ -2,21 +2,21 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\HighlightedContent;
+use Capco\AppBundle\Entity\HighlightedEvent;
+use Capco\AppBundle\Entity\HighlightedIdea;
+use Capco\AppBundle\Entity\HighlightedPost;
+use Capco\AppBundle\Entity\HighlightedProject;
+use Capco\AppBundle\Entity\HighlightedTheme;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Theme;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Capco\AppBundle\Entity\HighlightedContent;
-use Capco\AppBundle\Entity\HighlightedPost;
-use Capco\AppBundle\Entity\HighlightedEvent;
-use Capco\AppBundle\Entity\HighlightedTheme;
-use Capco\AppBundle\Entity\HighlightedIdea;
-use Capco\AppBundle\Entity\HighlightedProject;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Theme;
 
 class HighlightedContentAdmin extends Admin
 {
@@ -112,7 +112,7 @@ class HighlightedContentAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('down', $this->getRouterIdParameter().'/down');
-        $collection->add('up', $this->getRouterIdParameter().'/up');
+        $collection->add('down', $this->getRouterIdParameter() . '/down');
+        $collection->add('up', $this->getRouterIdParameter() . '/up');
     }
 }

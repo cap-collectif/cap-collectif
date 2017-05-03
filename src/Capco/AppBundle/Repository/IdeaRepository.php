@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Theme;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * IdeaRepository.
@@ -43,6 +43,9 @@ class IdeaRepository extends EntityRepository
 
     /**
      * Get all trashed ideas.
+     *
+     * @param mixed $nbByPage
+     * @param mixed $page
      */
     public function getTrashed($nbByPage = 8, $page = 1)
     {
@@ -241,7 +244,7 @@ class IdeaRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('i.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -312,7 +315,7 @@ class IdeaRepository extends EntityRepository
 
         if ($term !== null) {
             $qb->andWhere('i.title LIKE :term')
-                ->setParameter('term', '%'.$term.'%')
+                ->setParameter('term', '%' . $term . '%')
             ;
         }
 
@@ -333,6 +336,7 @@ class IdeaRepository extends EntityRepository
      * Get ideas by user.
      *
      * @param user
+     * @param mixed $user
      *
      * @return mixed
      */
@@ -357,9 +361,9 @@ class IdeaRepository extends EntityRepository
      *
      * @param $id
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOne($id)
     {
@@ -385,10 +389,12 @@ class IdeaRepository extends EntityRepository
      * Get one idea by id.
      *
      * @param $id
-     *
-     * @return mixed
+     * @param mixed      $slug
+     * @param null|mixed $user
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneJoinUserReports($slug, $user = null)
     {
@@ -416,6 +422,7 @@ class IdeaRepository extends EntityRepository
      * @param theme
      * @param $limit
      * @param $offset
+     * @param mixed $themeId
      *
      * @return mixed
      */

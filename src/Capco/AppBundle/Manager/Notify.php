@@ -9,12 +9,12 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
+use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use FOS\UserBundle\Mailer\MailerInterface;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -40,43 +40,6 @@ class Notify implements MailerInterface
         $this->urlResolver = $urlResolver;
         $this->validator = $validator;
         $this->parameters = $parameters;
-    }
-
-    private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
-    {
-        return \Swift_Message::newInstance()
-            ->setTo($to)
-            ->setSubject($subject)
-            ->setContentType($contentType)
-            ->setBody($body)
-            ->setFrom([$fromAddress => $fromName])
-        ;
-    }
-
-    private function sendInternalEmail($body, $subject, $contentType = 'text/html')
-    {
-        $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
-        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $body .= $this->translator->trans(
-            'notification.email.admin_footer', [
-              '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-            ], 'CapcoAppBundle'
-        );
-        $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
-    }
-
-    private function emailsAreValid($to, $from)
-    {
-        $emailConstraint = new EmailConstraint();
-        if ($this->validator->validateValue($to, $emailConstraint)->count() > 0) {
-            return false;
-        }
-        if ($this->validator->validateValue($from, $emailConstraint)->count() > 0) {
-            return false;
-        }
-
-        return true;
     }
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
@@ -127,7 +90,7 @@ class Notify implements MailerInterface
             'sitename' => $sitename,
             'confirmationUrl' => $url,
         ]);
-        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre inscription sur '.$sitename);
+        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre inscription sur ' . $sitename);
     }
 
     // FOS User emails
@@ -166,8 +129,8 @@ class Notify implements MailerInterface
         );
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
 
-        $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $emailToNewMail, '['.$sitename.'] Veuillez confirmer votre nouvelle adresse électronique');
-        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, '['.$sitename.'] L\'adresse électronique de '.$user->getUsername().' a été changée');
+        $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $emailToNewMail, '[' . $sitename . '] Veuillez confirmer votre nouvelle adresse électronique');
+        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, '[' . $sitename . '] L\'adresse électronique de ' . $user->getUsername() . ' a été changée');
     }
 
     public function sendResettingEmailMessage(UserInterface $user)
@@ -250,7 +213,7 @@ class Notify implements MailerInterface
           'editUrl' => $editUrl,
           'projectsUrl' => $this->router->generate('app_project', [], UrlGeneratorInterface::ABSOLUTE_URL),
       ]);
-        $this->sendEmail($author->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre consultation sur '.$sitename);
+        $this->sendEmail($author->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre consultation sur ' . $sitename);
     }
 
     public function notifyModeration($contribution)
@@ -279,13 +242,13 @@ class Notify implements MailerInterface
         $step = $proposal->getProposalForm()->getStep();
         $project = $step->getProject();
         $subject = $this->translator->trans(
-            'notification.email.proposal.'.$action.'.subject', [
+            'notification.email.proposal.' . $action . '.subject', [
               '%sitename%' => $sitename,
               '%project%' => $project->getTitle(),
             ], 'CapcoAppBundle'
         );
         $body = $this->translator->trans(
-          'notification.email.proposal.'.$action.'.body', [
+          'notification.email.proposal.' . $action . '.body', [
               '%userUrl%' => $this->router->generate(
                 'capco_user_profile_show_all', [
                   'slug' => $proposal->getAuthor()->getSlug(),
@@ -391,5 +354,42 @@ class Notify implements MailerInterface
         );
 
         $this->sendEmail($reply->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+    }
+
+    private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
+    {
+        return \Swift_Message::newInstance()
+            ->setTo($to)
+            ->setSubject($subject)
+            ->setContentType($contentType)
+            ->setBody($body)
+            ->setFrom([$fromAddress => $fromName])
+        ;
+    }
+
+    private function sendInternalEmail($body, $subject, $contentType = 'text/html')
+    {
+        $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
+        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+        $body .= $this->translator->trans(
+            'notification.email.admin_footer', [
+              '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            ], 'CapcoAppBundle'
+        );
+        $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
+    }
+
+    private function emailsAreValid($to, $from)
+    {
+        $emailConstraint = new EmailConstraint();
+        if ($this->validator->validateValue($to, $emailConstraint)->count() > 0) {
+            return false;
+        }
+        if ($this->validator->validateValue($from, $emailConstraint)->count() > 0) {
+            return false;
+        }
+
+        return true;
     }
 }

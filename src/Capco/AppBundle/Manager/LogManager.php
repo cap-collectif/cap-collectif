@@ -74,7 +74,7 @@ class LogManager
     {
         $transBase = 'synthesis.logs.sentence.';
 
-        return $this->translator->trans($transBase.$action, [
+        return $this->translator->trans($transBase . $action, [
             '%author%' => $username,
         ], 'CapcoAppBundleSynthesis');
     }

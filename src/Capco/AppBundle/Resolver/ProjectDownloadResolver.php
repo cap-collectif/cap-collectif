@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
+use Liuggio\ExcelBundle\Factory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
-use Liuggio\ExcelBundle\Factory;
 
 class ProjectDownloadResolver
 {
@@ -117,7 +117,7 @@ class ProjectDownloadResolver
         } else {
             throw new \InvalidArgumentException('Step must be of type collect or questionnaire');
         }
-        $title = $step->getProject() ? $step->getProject()->getTitle().'_' : '';
+        $title = $step->getProject() ? $step->getProject()->getTitle() . '_' : '';
         $title .= $step->getTitle();
 
         return $this->getWriterFromData($data, $this->headers, $title);
@@ -247,7 +247,7 @@ class ProjectDownloadResolver
             'content' => $this->getProposalContent($proposal),
             'link' => $this->urlArrayResolver->getRoute($proposal),
             'created' => $this->dateToString($proposal['createdAt']),
-            'updated' => $proposal['updatedAt'] != $proposal['createdAt'] ? $this->dateToString(
+            'updated' => $proposal['updatedAt'] !== $proposal['createdAt'] ? $this->dateToString(
                 $proposal['updatedAt']
             ) : null,
             'author' => $authorName,
@@ -260,7 +260,7 @@ class ProjectDownloadResolver
             'theme' => $proposal['theme'] ? $proposal['theme']['title'] : '',
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
-            'estimation' => $proposal['estimation'] ? $proposal['estimation'].' €' : '',
+            'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
             'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
         ];
 
@@ -377,8 +377,8 @@ class ProjectDownloadResolver
     {
         $body = $this->formatText(html_entity_decode($proposal['body']));
         foreach ($proposal['responses'] as $response) {
-            $body .= "\n\n".$response['question']['title'].' :';
-            $body .= "\n".$this->formatText($response['value']);
+            $body .= "\n\n" . $response['question']['title'] . ' :';
+            $body .= "\n" . $this->formatText($response['value']);
         }
 
         return $body;
@@ -387,8 +387,8 @@ class ProjectDownloadResolver
     private function getProposalAnswer(array $answer)
     {
         $body = $answer['title'];
-        $body .= "\n".$answer['author']['username'];
-        $body .= "\n\n".$this->formatText(html_entity_decode($answer['body']));
+        $body .= "\n" . $answer['author']['username'];
+        $body .= "\n\n" . $this->formatText(html_entity_decode($answer['body']));
 
         return $body;
     }
@@ -443,9 +443,9 @@ class ProjectDownloadResolver
             if (is_array($header)) {
                 $header = $header['label'];
             } else {
-                $header = $this->translator->trans('project_download.label.'.$header, [], 'CapcoAppBundle');
+                $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
             }
-            $sheet->setCellValueExplicit($currentColumn.$startRow, $header);
+            $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
             ++$currentColumn;
         }
         list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A2');
@@ -455,7 +455,7 @@ class ProjectDownloadResolver
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
                 $headerKey = is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
-                $sheet->setCellValue($currentColumn.$currentRow, $row[$headerKey]);
+                $sheet->setCellValue($currentColumn . $currentRow, $row[$headerKey]);
                 ++$currentColumn;
             }
             ++$currentRow;

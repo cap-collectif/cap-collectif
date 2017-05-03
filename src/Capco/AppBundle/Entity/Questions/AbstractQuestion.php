@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,21 +49,6 @@ abstract class AbstractQuestion
     public static $questionTypesLabels = [];
 
     /**
-     * @ORM\Column(name="help_text", type="text", nullable=true)
-     */
-    private $helpText = null;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question")
-     */
-    private $responses;
-
-    /**
-     * @ORM\Column(name="required", type="boolean", nullable=false)
-     */
-    private $required = false;
-
-    /**
      * Needed by sonata admin.
      *
      * @ORM\OneToOne(
@@ -82,17 +67,32 @@ abstract class AbstractQuestion
     protected $updatedAt;
 
     /**
-     * @var bool
-     * @ORM\Column(name="private", type="boolean", nullable=false)
-     */
-    private $private = false;
-
-    /**
      * @Assert\NotNull()
      * @Assert\Range(min=0, max=7)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;
+
+    /**
+     * @ORM\Column(name="help_text", type="text", nullable=true)
+     */
+    private $helpText = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question")
+     */
+    private $responses;
+
+    /**
+     * @ORM\Column(name="required", type="boolean", nullable=false)
+     */
+    private $required = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="private", type="boolean", nullable=false)
+     */
+    private $private = false;
 
     public function __toString()
     {
@@ -222,8 +222,6 @@ abstract class AbstractQuestion
         if (array_key_exists($this->getType(), self::$questionTypesInputs)) {
             return self::$questionTypesInputs[$this->getType()];
         }
-
-        return;
     }
 
     public function getPosition()
@@ -231,8 +229,6 @@ abstract class AbstractQuestion
         if ($this->questionnaireAbstractQuestion) {
             return $this->questionnaireAbstractQuestion->getPosition();
         }
-
-        return;
     }
 
     public function getQuestionnaire()
@@ -240,8 +236,6 @@ abstract class AbstractQuestion
         if ($this->questionnaireAbstractQuestion) {
             return $this->questionnaireAbstractQuestion->getQuestionnaire();
         }
-
-        return;
     }
 
     public function getQuestion()
@@ -249,8 +243,6 @@ abstract class AbstractQuestion
         if ($this->questionnaireAbstractQuestion) {
             return $this->questionnaireAbstractQuestion->getQuestion();
         }
-
-        return;
     }
 
     /**

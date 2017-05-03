@@ -7,8 +7,8 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class OpinionVersionAdmin extends Admin
 {
@@ -16,6 +16,10 @@ class OpinionVersionAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
+
+    public function getBatchActions()
+    {
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -233,9 +237,5 @@ class OpinionVersionAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete']);
-    }
-
-    public function getBatchActions()
-    {
     }
 }

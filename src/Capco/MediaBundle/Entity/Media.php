@@ -13,6 +13,14 @@ class Media extends BaseMedia
     protected $id;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->galleryHasMedias = new ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return int $id
@@ -20,14 +28,6 @@ class Media extends BaseMedia
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->galleryHasMedias = new ArrayCollection();
     }
 
     /**

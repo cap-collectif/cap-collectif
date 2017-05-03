@@ -5,13 +5,13 @@ namespace Capco\AppBundle\Entity\Responses;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\UserBundle\Entity\User;
 
 /**
  * Response.
@@ -32,7 +32,12 @@ abstract class AbstractResponse
     use IdTrait;
     use TimestampableTrait;
 
-    abstract public function getType();
+    /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="change", field={"value"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
 
     /**
      * @var Proposal
@@ -67,19 +72,14 @@ abstract class AbstractResponse
     private $question;
 
     /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"value"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    protected $updatedAt;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
     }
+
+    abstract public function getType();
 
     /**
      * @return Proposal

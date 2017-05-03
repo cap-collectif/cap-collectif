@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Form\EventSearchType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Form\EventRegistrationType;
-use JMS\Serializer\SerializationContext;
 
 class EventController extends Controller
 {
@@ -24,6 +24,10 @@ class EventController extends Controller
      * @Route("/events/filter/{theme}/{project}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Event:index.html.twig")
+     *
+     * @param null|mixed $theme
+     * @param null|mixed $project
+     * @param null|mixed $term
      */
     public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {
@@ -71,6 +75,10 @@ class EventController extends Controller
      * @Route("/events/archived/{theme}/{project}", name="app_event_archived_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Route("/events/archived/{theme}/{project}/{term}", name="app_event_archived_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Template("CapcoAppBundle:Event:show_archived.html.twig")
+     *
+     * @param null|mixed $theme
+     * @param null|mixed $project
+     * @param null|mixed $term
      */
     public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
     {

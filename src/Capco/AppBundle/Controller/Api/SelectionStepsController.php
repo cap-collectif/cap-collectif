@@ -2,27 +2,27 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\ProposalSelectionVoteType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Patch;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SelectionStepsController extends FOSRestController
 {
@@ -160,7 +160,7 @@ class SelectionStepsController extends FOSRestController
         }
 
         // Check if proposal is in step
-        if (!in_array($selectionStep, $proposal->getSelectionSteps())) {
+        if (!in_array($selectionStep, $proposal->getSelectionSteps(), true)) {
             throw new BadRequestHttpException('This proposal is not associated to this selection step.');
         }
 

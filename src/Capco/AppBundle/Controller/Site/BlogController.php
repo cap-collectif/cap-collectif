@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\PostSearchType;
+use JMS\Serializer\SerializationContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Capco\AppBundle\Form\PostSearchType;
-use Capco\AppBundle\Entity\Theme;
-use Capco\AppBundle\Entity\Project;
-use JMS\Serializer\SerializationContext;
 
 class BlogController extends Controller
 {
@@ -21,6 +21,10 @@ class BlogController extends Controller
      * @Route("/blog/filter/{theme}/{project}/{page}", name="app_blog_search_project", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "project" = "all", "_feature_flags" = "blog"} )
      * @Template("CapcoAppBundle:Blog:index.html.twig")
      * @Cache(smaxage="60", public=true)
+     *
+     * @param mixed      $page
+     * @param null|mixed $theme
+     * @param null|mixed $project
      */
     public function indexAction(Request $request, $page, $theme = null, $project = null)
     {
@@ -32,7 +36,7 @@ class BlogController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -80,6 +84,7 @@ class BlogController extends Controller
      * @Template("CapcoAppBundle:Blog:show.html.twig")
      *
      * @param $request
+     * @param mixed $slug
      *
      * @return array
      */

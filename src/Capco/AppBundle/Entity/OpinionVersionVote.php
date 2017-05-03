@@ -14,11 +14,6 @@ class OpinionVersionVote extends AbstractVote
     const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
 
-    public function getRelated()
-    {
-        return $this->opinionVersion;
-    }
-
     public static $voteTypes = [
         'ok' => self::VOTE_OK,
         'mitige' => self::VOTE_MITIGE,
@@ -64,6 +59,11 @@ class OpinionVersionVote extends AbstractVote
      */
     private $opinionVersion;
 
+    public function getRelated()
+    {
+        return $this->opinionVersion;
+    }
+
     /**
      * Get value.
      *
@@ -108,7 +108,7 @@ class OpinionVersionVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->opinionVersion != null) {
+        if ($this->opinionVersion !== null) {
             $this->opinionVersion->removeVote($this);
         }
     }

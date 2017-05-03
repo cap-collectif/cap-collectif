@@ -43,7 +43,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 ->andWhere('se.displayType = :displayType')
                 ->andWhere('se.path LIKE :path')
                 ->setParameter('displayType', 'contribution')
-                ->setParameter('path', $el['path'].'|%')
+                ->setParameter('path', $el['path'] . '|%')
                 ->getQuery()
                 ->getArrayResult()
             ;
@@ -77,7 +77,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 ', [$childCount, $score, $el['id']]);
             }
             if ($el['parent'] && !array_key_exists($el['parent'], $elements)) {
-                $output->writeln('Element '.$el['id'].'\'s level should probably be fixed');
+                $output->writeln('Element ' . $el['id'] . '\'s level should probably be fixed');
             }
         }
 

@@ -15,6 +15,7 @@ class OpinionVersionVoteRepository extends EntityRepository
      * Get enabled by consultation step.
      *
      * @param $step
+     * @param mixed $asArray
      *
      * @return mixed
      */

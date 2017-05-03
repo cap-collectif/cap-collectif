@@ -2,11 +2,11 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Sonata\AdminBundle\Filter\FilterInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
+use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\AdminBundle\Filter\FilterInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class CRUDController extends Controller
 {

@@ -102,19 +102,6 @@ trait QuestionnaireStepsTrait
         $this->iClickOneRankingChoiceRightArrow();
     }
 
-    protected function fillQuestionnaireForm($edition = false)
-    {
-        $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
-        if (!$edition) {
-            $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
-            $this->checkOption('reply-10_choice-1');
-            $this->checkOption('reply-10_choice-2');
-            $this->checkOption('reply-10_choice-3');
-        } else {
-            $this->fillField('reply-2', 'En fait c\'est nul, je ne veux pas des JO à Paris');
-        }
-    }
-
     /**
      * I check the reply private checkbox.
      *
@@ -311,5 +298,18 @@ trait QuestionnaireStepsTrait
         $replyModalSelector = $this->navigationContext->getPage('questionnaire page')->getReplyModalSelector();
         $this->assertElementOnPage($replyModalSelector);
         $this->assertElementContainsText($replyModalSelector, 'Réponse du');
+    }
+
+    protected function fillQuestionnaireForm($edition = false)
+    {
+        $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
+        if (!$edition) {
+            $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
+            $this->checkOption('reply-10_choice-1');
+            $this->checkOption('reply-10_choice-2');
+            $this->checkOption('reply-10_choice-3');
+        } else {
+            $this->fillField('reply-2', 'En fait c\'est nul, je ne veux pas des JO à Paris');
+        }
     }
 }

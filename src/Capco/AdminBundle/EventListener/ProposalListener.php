@@ -3,8 +3,8 @@
 namespace Capco\AdminBundle\EventListener;
 
 use Capco\AppBundle\Entity\Answer;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

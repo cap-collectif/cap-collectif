@@ -14,33 +14,6 @@ class SiteImageAdmin extends Admin
         '_sort_by' => 'isEnabled',
     ];
 
-    /**
-     * @param FormMapper $formMapper
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.site_image.is_enabled',
-                'required' => false,
-            ])
-            ->add('Media', 'sonata_type_model_list', [
-                'required' => false,
-                'label' => 'admin.fields.site_image.media',
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-            ], ])
-        ;
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->clearExcept(['edit']);
-    }
-
     public function toString($object)
     {
         if (!is_object($object)) {
@@ -67,5 +40,32 @@ class SiteImageAdmin extends Admin
         }
 
         return parent::getObjectMetadata($object);
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('isEnabled', null, [
+                'label' => 'admin.fields.site_image.is_enabled',
+                'required' => false,
+            ])
+            ->add('Media', 'sonata_type_model_list', [
+                'required' => false,
+                'label' => 'admin.fields.site_image.media',
+            ], [
+                'link_parameters' => [
+                    'context' => 'default',
+                    'hide_context' => true,
+                    'provider' => 'sonata.media.provider.image',
+            ], ])
+        ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['edit']);
     }
 }

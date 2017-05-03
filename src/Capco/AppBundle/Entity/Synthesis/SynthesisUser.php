@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Synthesis;
 
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="synthesis_user")

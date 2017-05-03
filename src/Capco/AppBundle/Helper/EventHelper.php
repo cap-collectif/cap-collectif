@@ -10,17 +10,17 @@ class EventHelper
 {
     public function isRegistrationPossible(Event $event)
     {
-        return $event->canContribute() && $event->isFuture() && $event->isRegistrationEnable() && $event->getLink() == null;
+        return $event->canContribute() && $event->isFuture() && $event->isRegistrationEnable() && $event->getLink() === null;
     }
 
     public function findUserRegistrationOrCreate(Event $event, User $user = null)
     {
-        if ($user == null) {
+        if ($user === null) {
             return new EventRegistration($event);
         }
 
         foreach ($event->getRegistrations() as $registration) {
-            if ($registration->getUser() == $user) {
+            if ($registration->getUser() === $user) {
                 return $registration;
             }
         }

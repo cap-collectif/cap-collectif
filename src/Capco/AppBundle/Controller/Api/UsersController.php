@@ -3,22 +3,22 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\ApiProfileFormType;
-use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
-use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
+use Capco\UserBundle\Form\Type\ApiProfileFormType;
+use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UsersController extends FOSRestController
@@ -119,64 +119,6 @@ class UsersController extends FOSRestController
         $userManager->updateUser($user);
 
         return $user;
-    }
-
-    private function updatePhone(Request $request)
-    {
-        $user = $this->getUser();
-        $previousPhone = $user->getPhone();
-
-        $form = $this->createForm(ApiProfileFormType::class, $user);
-        $form->submit($request->request->all(), false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-      // If phone is updated we have to make sure it's sms confirmed again
-      if ($previousPhone != null && $previousPhone != $user->getPhone()) {
-          $user->setPhoneConfirmed(false);
-          // TODO: security breach user can send unlimited sms if he change his number
-          $user->setSmsConfirmationSentAt(null);
-      }
-
-        $this->getDoctrine()->getManager()->flush();
-    }
-
-    private function updateEmail(Request $request)
-    {
-        $user = $this->getUser();
-        $newEmailToConfirm = $request->request->get('email');
-        $password = $request->request->get('password');
-        $em = $this->getDoctrine()->getManager();
-
-        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-            return new JsonResponse([
-            'message' => 'You must specify your password to update your email.',
-          ], 400);
-        }
-
-        if ($em->getRepository('CapcoUserBundle:User')->findOneByEmail($newEmailToConfirm)) {
-            return new JsonResponse([
-                'message' => 'Already used email.',
-            ], 400);
-        }
-
-        $form = $this->createForm(ApiProfileAccountFormType::class, $user);
-        $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-      // We generate a confirmation token to validate the new email
-      $token = $this->get('fos_user.util.token_generator')->generateToken();
-
-        $user->setNewEmailConfirmationToken($token);
-        $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
-
-        $em->flush();
     }
 
     /**
@@ -282,7 +224,7 @@ class UsersController extends FOSRestController
             throw new BadRequestHttpException('Ask a confirmation message before.');
         }
 
-        if ($request->request->get('code') != $user->getSmsConfirmationCode()) {
+        if ($request->request->get('code') !== $user->getSmsConfirmationCode()) {
             throw new BadRequestHttpException('sms_code_invalid');
         }
 
@@ -290,5 +232,63 @@ class UsersController extends FOSRestController
         $user->setSmsConfirmationSentAt(null);
         $user->setSmsConfirmationCode(null);
         $this->getDoctrine()->getManager()->flush();
+    }
+
+    private function updatePhone(Request $request)
+    {
+        $user = $this->getUser();
+        $previousPhone = $user->getPhone();
+
+        $form = $this->createForm(ApiProfileFormType::class, $user);
+        $form->submit($request->request->all(), false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+      // If phone is updated we have to make sure it's sms confirmed again
+      if ($previousPhone !== null && $previousPhone !== $user->getPhone()) {
+          $user->setPhoneConfirmed(false);
+          // TODO: security breach user can send unlimited sms if he change his number
+          $user->setSmsConfirmationSentAt(null);
+      }
+
+        $this->getDoctrine()->getManager()->flush();
+    }
+
+    private function updateEmail(Request $request)
+    {
+        $user = $this->getUser();
+        $newEmailToConfirm = $request->request->get('email');
+        $password = $request->request->get('password');
+        $em = $this->getDoctrine()->getManager();
+
+        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+        if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            return new JsonResponse([
+            'message' => 'You must specify your password to update your email.',
+          ], 400);
+        }
+
+        if ($em->getRepository('CapcoUserBundle:User')->findOneByEmail($newEmailToConfirm)) {
+            return new JsonResponse([
+                'message' => 'Already used email.',
+            ], 400);
+        }
+
+        $form = $this->createForm(ApiProfileAccountFormType::class, $user);
+        $form->submit(['newEmailToConfirm' => $newEmailToConfirm], false);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+      // We generate a confirmation token to validate the new email
+      $token = $this->get('fos_user.util.token_generator')->generateToken();
+
+        $user->setNewEmailConfirmationToken($token);
+        $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+
+        $em->flush();
     }
 }

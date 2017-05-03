@@ -62,15 +62,15 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
 
                 return $metas;
             })->filter(function ($element) { // many thanks sonata...
-                return !is_null($element);
+                return null !== $element;
             })->toArray();
     }
 
     protected function formatBytes(int $bytes): string
     {
-        $units = array('O', 'Ko', 'Mo', 'Go', 'To');
+        $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
 
-        return number_format($bytes / pow(1024, $power), 1, '.', ',').' '.$units[$power];
+        return number_format($bytes / pow(1024, $power), 1, '.', ',') . ' ' . $units[$power];
     }
 }

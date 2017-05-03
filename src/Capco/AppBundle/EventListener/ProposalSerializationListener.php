@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
-use Capco\AppBundle\Entity\Proposal;
 
 class ProposalSerializationListener extends AbstractSerializationListener
 {

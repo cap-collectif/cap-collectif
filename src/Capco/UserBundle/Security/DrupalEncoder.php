@@ -50,8 +50,8 @@ function drupal_random_bytes($count)
             }
 
             do {
-                $random_state = hash('sha256', microtime().mt_rand().$random_state);
-                $bytes .= hash('sha256', mt_rand().$random_state, true);
+                $random_state = hash('sha256', microtime() . mt_rand() . $random_state);
+                $bytes .= hash('sha256', mt_rand() . $random_state, true);
             } while (strlen($bytes) < $count);
         }
     }
@@ -226,7 +226,7 @@ function _password_crypt($algo, $password, $setting)
     // The first 12 characters of an existing hash are its setting string.
     $setting = substr($setting, 0, 12);
 
-    if ($setting[0] != '$' || $setting[2] != '$') {
+    if ($setting[0] !== '$' || $setting[2] !== '$') {
         return false;
     }
     $count_log2 = _password_get_count_log2($setting);
@@ -236,7 +236,7 @@ function _password_crypt($algo, $password, $setting)
     }
     $salt = substr($setting, 4, 8);
     // Hashes must have an 8 character salt.
-    if (strlen($salt) != 8) {
+    if (strlen($salt) !== 8) {
         return false;
     }
 
@@ -244,22 +244,24 @@ function _password_crypt($algo, $password, $setting)
     $count = 1 << $count_log2;
 
     // We rely on the hash() function being available in PHP 5.2+.
-    $hash = hash($algo, $salt.$password, true);
+    $hash = hash($algo, $salt . $password, true);
     do {
-        $hash = hash($algo, $hash.$password, true);
+        $hash = hash($algo, $hash . $password, true);
     } while (--$count);
 
     $len = strlen($hash);
-    $output = $setting._password_base64_encode($hash, $len);
+    $output = $setting . _password_base64_encode($hash, $len);
     // _password_base64_encode() of a 16 byte MD5 will always be 22 characters.
     // _password_base64_encode() of a 64 byte sha512 will always be 86 characters.
     $expected = 12 + ceil((8 * $len) / 6);
 
-    return (strlen($output) == $expected) ? substr($output, 0, DRUPAL_HASH_LENGTH) : false;
+    return (strlen($output) === $expected) ? substr($output, 0, DRUPAL_HASH_LENGTH) : false;
 }
 
 /**
  * Parse the log2 iteration count from a stored hash or setting string.
+ *
+ * @param mixed $setting
  */
 function _password_get_count_log2($setting)
 {
@@ -299,7 +301,7 @@ class DrupalEncoder implements PasswordEncoderInterface
 
     public function isPasswordValid($encoded, $password, $salt)
     {
-        if (substr($encoded, 0, 2) == 'U$') {
+        if (substr($encoded, 0, 2) === 'U$') {
             // This may be an updated password from user_update_7000(). Such hashes
             // have 'U' added as the first character and need an extra md5().
             $stored_hash = substr($encoded, 1);
@@ -326,6 +328,6 @@ class DrupalEncoder implements PasswordEncoderInterface
                 return false;
         }
 
-        return $hash && $stored_hash == $hash;
+        return $hash && $stored_hash === $hash;
     }
 }

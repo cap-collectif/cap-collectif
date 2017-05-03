@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
-use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Exception\UnexpectedPageException;
+use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class CollectPage extends Page
 {
@@ -62,7 +62,7 @@ class CollectPage extends Page
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
-        $opinionTypeUrl = $expectedUrl.'/proposals/';
+        $opinionTypeUrl = $expectedUrl . '/proposals/';
 
         if ($currentUrl !== $expectedUrl) {
             if (false === strrpos($currentUrl, $opinionTypeUrl)) {

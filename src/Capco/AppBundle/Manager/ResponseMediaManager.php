@@ -36,12 +36,12 @@ class ResponseMediaManager
         $responsesKeys = array_keys($uploadedMedias['responses']);
 
         foreach ($responsesKeys as $responsesKey) {
-            $questionId = $this->request->request->get('responses_'.$responsesKey.'_question');
+            $questionId = $this->request->request->get('responses_' . $responsesKey . '_question');
 
             /** @var MediaResponse $response */
             $response = $this->proposal->getResponses()->filter(
                 function (AbstractResponse $element) use ($questionId) {
-                    return $element->getQuestion()->getId() == $questionId;
+                    return $element->getQuestion()->getId() === $questionId;
                 }
             )->first();
 
@@ -50,7 +50,7 @@ class ResponseMediaManager
                 $this->addMediasFromArray($uploadedMedias, $responsesKey, $response);
             }
 
-            $this->request->request->remove('responses_'.$questionId.'_question');
+            $this->request->request->remove('responses_' . $questionId . '_question');
         }
 
         return $this->request;
@@ -72,7 +72,7 @@ class ResponseMediaManager
         $valueResponsesKeys = array_keys($valueResponses['responses']);
 
         foreach ($valueResponsesKeys as $valueResponsesKey) {
-            if (in_array($valueResponsesKey, $mediasResponsesKeys)) {
+            if (in_array($valueResponsesKey, $mediasResponsesKeys, true)) {
                 $valueResponses['responses'][$valueResponsesKey]['_type'] = 'media_response';
             } else {
                 $valueResponses['responses'][$valueResponsesKey]['_type'] = 'value_response';

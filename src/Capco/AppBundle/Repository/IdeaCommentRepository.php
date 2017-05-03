@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * IdeaCommentRepository.

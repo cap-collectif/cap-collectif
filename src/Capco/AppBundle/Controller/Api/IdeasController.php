@@ -2,28 +2,28 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\IdeaVote;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\IdeaType;
 use Capco\AppBundle\Form\IdeaVoteType;
 use Capco\AppBundle\Form\ReportingType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Event\CommentChangedEvent;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class IdeasController extends FOSRestController
 {
@@ -270,7 +270,7 @@ class IdeasController extends FOSRestController
 
         $idea->incrementVotesCount();
 
-        if ($form->has('comment') && null != ($content = $form->get('comment')->getData())) {
+        if ($form->has('comment') && null !== ($content = $form->get('comment')->getData())) {
             $comment = (new IdeaComment())
                 ->setIdea($idea)
                 ->setAuthor($vote->getUser())
@@ -437,10 +437,10 @@ class IdeasController extends FOSRestController
 
         $parent = $comment->getParent();
         if ($parent) {
-            if (!$parent instanceof IdeaComment || $idea != $parent->getIdea()) {
+            if (!$parent instanceof IdeaComment || $idea !== $parent->getIdea()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this idea');
             }
-            if ($parent->getParent() != null) {
+            if ($parent->getParent() !== null) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }

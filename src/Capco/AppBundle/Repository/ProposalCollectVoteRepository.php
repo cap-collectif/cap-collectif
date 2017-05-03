@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Doctrine\ORM\EntityRepository;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * ProposalCollectVoteRepository.
@@ -69,7 +69,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         $votesBySteps = [];
 
         foreach ($results as $result) {
-            $votesBySteps[$result['stepId']] = intval($result['votesCount']);
+            $votesBySteps[$result['stepId']] = (int) ($result['votesCount']);
         }
 
         $id = $proposal->getProposalForm()->getStep()->getId();
@@ -125,6 +125,6 @@ class ProposalCollectVoteRepository extends EntityRepository
             ;
         }
 
-        return intval($qb->getQuery()->getSingleScalarResult());
+        return (int) ($qb->getQuery()->getSingleScalarResult());
     }
 }

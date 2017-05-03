@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\CommentChangedEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
@@ -21,11 +21,11 @@ class CommentSubscriber implements EventSubscriberInterface
         $action = $event->getAction();
         $entity = $comment->getRelatedObject();
 
-        if ($action == 'remove') {
+        if ($action === 'remove') {
             $entity->decreaseCommentsCount(1);
         }
 
-        if ($action == 'add') {
+        if ($action === 'add') {
             $entity->increaseCommentsCount(1);
         }
     }

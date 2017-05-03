@@ -6,10 +6,10 @@ class DateExtension extends \Twig_Extension
 {
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('date_diff', array($this, 'getDatesDiff')),
-            new \Twig_SimpleFilter('has_significant_diff', array($this, 'hasSignificantDiff')),
-        );
+        return [
+            new \Twig_SimpleFilter('date_diff', [$this, 'getDatesDiff']),
+            new \Twig_SimpleFilter('has_significant_diff', [$this, 'hasSignificantDiff']),
+        ];
     }
 
     public function getDatesDiff($firstDate, $secondDate, $absolute = true)

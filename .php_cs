@@ -1,20 +1,10 @@
 <?php
 
-$header = <<<'EOF'
-This file is part of the appname project.
-
-(c) JoliCode <coucou@jolicode.com>
-
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-EOF;
-
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules(array(
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        'header_comment' => array('header' => $header),
         'array_syntax' => array('syntax' => 'short'),
         'ordered_class_elements' => true,
         'ordered_imports' => true,

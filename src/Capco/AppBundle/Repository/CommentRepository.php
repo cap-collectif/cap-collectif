@@ -43,9 +43,9 @@ class CommentRepository extends EntityRepository
      *
      * @param $comment
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneById($comment)
     {
@@ -82,6 +82,7 @@ class CommentRepository extends EntityRepository
      * Get comments by user.
      *
      * @param user
+     * @param mixed $user
      *
      * @return mixed
      */

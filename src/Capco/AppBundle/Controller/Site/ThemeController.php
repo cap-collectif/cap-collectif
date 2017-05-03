@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use JMS\Serializer\SerializationContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializationContext;
 
 class ThemeController extends Controller
 {
@@ -17,6 +17,9 @@ class ThemeController extends Controller
      * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Template("CapcoAppBundle:Theme:index.html.twig")
+     *
+     * @param mixed      $page
+     * @param null|mixed $term
      */
     public function indexAction(Request $request, $page, $term = null)
     {
@@ -96,6 +99,10 @@ class ThemeController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Theme:lastIdeas.html.twig")
+     *
+     * @param mixed $theme
+     * @param mixed $max
+     * @param mixed $offset
      */
     public function lastIdeasAction($theme, $max = 8, $offset = 0)
     {

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\ConstraintValidator;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\EmailDomain;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckEmailDomainValidator extends ConstraintValidator
 {

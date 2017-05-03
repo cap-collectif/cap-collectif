@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * DistrictRepository.

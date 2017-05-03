@@ -53,7 +53,7 @@ class ArgumentVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->argument != null) {
+        if ($this->argument !== null) {
             $this->argument->removeVote($this);
         }
     }

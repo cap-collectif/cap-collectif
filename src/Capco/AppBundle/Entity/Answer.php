@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\HasAuthorTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Answer.

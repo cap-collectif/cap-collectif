@@ -34,12 +34,12 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
             $writer = $resolver->getContent($qs);
             $filename = '';
             if ($qs->getProject()) {
-                $filename .= $qs->getProject()->getSlug().'_';
+                $filename .= $qs->getProject()->getSlug() . '_';
             }
-            $filename .= $qs->getSlug().'.xlsx';
+            $filename .= $qs->getSlug() . '.xlsx';
             $path = $container->getParameter('kernel.root_dir');
-            $writer->save($path.'/../web/export/'.$filename);
-            $output->writeln('The export file "'.$filename.'" has been created.');
+            $writer->save($path . '/../web/export/' . $filename);
+            $output->writeln('The export file "' . $filename . '" has been created.');
         }
     }
 }

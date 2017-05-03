@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * AbstractStep.
@@ -35,8 +35,6 @@ abstract class AbstractStep
     use DateHelperTrait;
     use IdTrait;
 
-    abstract public function getType();
-
     /**
      * @var array
      */
@@ -59,6 +57,13 @@ abstract class AbstractStep
         'questionnaire' => 'step.types.questionnaire',
         'realisation' => 'step.types.realisation',
     ];
+
+    /**
+     * Needed by sonata admin.
+     *
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    protected $projectAbstractStep;
 
     /**
      * @var string
@@ -94,13 +99,6 @@ abstract class AbstractStep
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     private $endAt = null;
-
-    /**
-     * Needed by sonata admin.
-     *
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="step", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    protected $projectAbstractStep;
 
     /**
      * @var string
@@ -148,6 +146,8 @@ abstract class AbstractStep
 
         return 'New step';
     }
+
+    abstract public function getType();
 
     /**
      * Get title.
@@ -290,6 +290,8 @@ abstract class AbstractStep
     /**
      * Set body.
      *
+     * @param mixed $body
+     *
      * @return AbstractStep
      */
     public function setBody($body)
@@ -347,8 +349,6 @@ abstract class AbstractStep
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getProject();
         }
-
-        return;
     }
 
     public function getProjectId()
@@ -363,8 +363,6 @@ abstract class AbstractStep
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getPosition();
         }
-
-        return;
     }
 
     /**
@@ -440,8 +438,6 @@ abstract class AbstractStep
                 ];
             }
         }
-
-        return;
     }
 
     public function lastOneDay()

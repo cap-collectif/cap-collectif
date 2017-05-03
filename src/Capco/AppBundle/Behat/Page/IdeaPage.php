@@ -53,7 +53,7 @@ class IdeaPage extends Page
 
     public function getVotesCount()
     {
-        return intval($this->getVotesCounter()->getText());
+        return (int) ($this->getVotesCounter()->getText());
     }
 
     public function getCommentsCounter()
@@ -63,7 +63,7 @@ class IdeaPage extends Page
 
     public function getCommentsCount()
     {
-        return intval($this->getCommentsCounter()->getText());
+        return (int) ($this->getCommentsCounter()->getText());
     }
 
     public function checkIdeaConfirmCheckbox()

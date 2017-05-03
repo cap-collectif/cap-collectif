@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Toggle\Manager;
 
 class SearchType extends AbstractType
 {
@@ -16,40 +16,6 @@ class SearchType extends AbstractType
     public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
-    }
-
-    private function generateChoices()
-    {
-        $choices = [
-            'all' => 'search.form.types.all',
-            'proposal' => 'search.form.types.proposals',
-            'comment' => 'search.form.types.comments',
-            'argument' => 'search.form.types.arguments',
-            'project' => 'search.form.types.projects',
-            'opinion' => 'search.form.types.opinions',
-            'source' => 'search.form.types.sources',
-        ];
-
-        if ($this->toggleManager->isActive('versions')) {
-            $choices['opinionVersion'] = 'search.form.types.versions';
-        }
-
-        if ($this->toggleManager->isActive('ideas')) {
-            $choices['idea'] = 'search.form.types.ideas';
-        }
-        if ($this->toggleManager->isActive('blog')) {
-            $choices['post'] = 'search.form.types.posts';
-        }
-        if ($this->toggleManager->isActive('calendar')) {
-            $choices['event'] = 'search.form.types.events';
-        }
-        if ($this->toggleManager->isActive('themes')) {
-            $choices['theme'] = 'search.form.types.themes';
-        }
-
-        $choices['user'] = 'search.form.types.users';
-
-        return $choices;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -92,5 +58,39 @@ class SearchType extends AbstractType
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
         ]);
+    }
+
+    private function generateChoices()
+    {
+        $choices = [
+            'all' => 'search.form.types.all',
+            'proposal' => 'search.form.types.proposals',
+            'comment' => 'search.form.types.comments',
+            'argument' => 'search.form.types.arguments',
+            'project' => 'search.form.types.projects',
+            'opinion' => 'search.form.types.opinions',
+            'source' => 'search.form.types.sources',
+        ];
+
+        if ($this->toggleManager->isActive('versions')) {
+            $choices['opinionVersion'] = 'search.form.types.versions';
+        }
+
+        if ($this->toggleManager->isActive('ideas')) {
+            $choices['idea'] = 'search.form.types.ideas';
+        }
+        if ($this->toggleManager->isActive('blog')) {
+            $choices['post'] = 'search.form.types.posts';
+        }
+        if ($this->toggleManager->isActive('calendar')) {
+            $choices['event'] = 'search.form.types.events';
+        }
+        if ($this->toggleManager->isActive('themes')) {
+            $choices['theme'] = 'search.form.types.themes';
+        }
+
+        $choices['user'] = 'search.form.types.users';
+
+        return $choices;
     }
 }

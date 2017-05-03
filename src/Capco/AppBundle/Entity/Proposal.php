@@ -2,15 +2,21 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,12 +24,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 
 /**
  * @ORM\Table(name="proposal")
@@ -48,29 +48,50 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SelfLinkableTrait;
     use SoftDeleteTrait;
 
-    public function getKind(): string
-    {
-        return 'proposal';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
     public static $ratings = [1, 2, 3, 4, 5];
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
+    /**
+     * @Assert\NotNull()
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    protected $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected $updateAuthor;
+
+    /**
+     * @Assert\NotNull()
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
+     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    protected $proposalForm;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $reports;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinTable(name="user_favorite_proposal")
+     */
+    protected $likers;
+
+    /**
+     * @ORM\Column(name="body", type="text")
+     * @Assert\NotBlank()
+     */
+    private $body;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
@@ -107,26 +128,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $category = null;
 
     /**
-     * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     */
-    protected $author;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    protected $updateAuthor;
-
-    /**
-     * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
-     * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     */
-    protected $proposalForm;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist", "remove"})
      */
     private $comments;
@@ -137,11 +138,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $responses;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    protected $reports;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
     private $selections;
@@ -150,12 +146,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
     private $estimation = null;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
-     * @ORM\JoinTable(name="user_favorite_proposal")
-     */
-    protected $likers;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -242,14 +232,24 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->parentConnections = new ArrayCollection();
     }
 
-    public function isIndexable(): bool
-    {
-        return $this->enabled && !$this->expired;
-    }
-
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New proposal';
+    }
+
+    public function getKind(): string
+    {
+        return 'proposal';
+    }
+
+    public function getRelated()
+    {
+        return null;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->enabled && !$this->expired;
     }
 
     public function getBody(): string
@@ -502,7 +502,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function userHasReport(User $user): bool
     {
         foreach ($this->reports as $report) {
-            if ($report->getReporter() == $user) {
+            if ($report->getReporter() === $user) {
                 return true;
             }
         }
@@ -563,8 +563,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
             return $this->getProposalForm()->getStep()->getProjectId();
         }
-
-        return;
     }
 
     public function getSelectionStepsIds(): array

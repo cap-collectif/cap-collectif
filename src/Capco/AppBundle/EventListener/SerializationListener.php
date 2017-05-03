@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Manager\LogManager;
+use Capco\UserBundle\Entity\User;
+use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Capco\AppBundle\Entity\Post;
-use Capco\UserBundle\Entity\User;
 
 class SerializationListener extends AbstractSerializationListener
 {
@@ -33,23 +33,6 @@ class SerializationListener extends AbstractSerializationListener
         ];
     }
 
-    private function getImageFormat(SerializationContext $context)
-    {
-        if ($context->getVisitingStack()->isEmpty()) {
-            return 'avatar';
-        }
-
-        $parent = $context->getVisitingStack()->top();
-        switch (true) {
-        case $parent instanceof Post:
-          return 'post';
-        case $parent instanceof User:
-          return 'avatar';
-        default:
-          return 'avatar';
-      }
-    }
-
     public function onPostMediaSerialize(ObjectEvent $event)
     {
         try {
@@ -67,7 +50,7 @@ class SerializationListener extends AbstractSerializationListener
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
-                    if (in_array('LogDetails', $groups)) {
+                    if (in_array('LogDetails', $groups, true)) {
                         $log = $event->getObject();
                         $event->getVisitor()->addData(
                             'sentences',
@@ -83,7 +66,7 @@ class SerializationListener extends AbstractSerializationListener
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
-                    if (in_array('LogDetails', $groups)) {
+                    if (in_array('LogDetails', $groups, true)) {
                         $element = $event->getObject();
                         $context = new SerializationContext();
                         $context->setGroups(['LogDetails']);
@@ -99,5 +82,22 @@ class SerializationListener extends AbstractSerializationListener
                     }
                 }
             );
+    }
+
+    private function getImageFormat(SerializationContext $context)
+    {
+        if ($context->getVisitingStack()->isEmpty()) {
+            return 'avatar';
+        }
+
+        $parent = $context->getVisitingStack()->top();
+        switch (true) {
+        case $parent instanceof Post:
+          return 'post';
+        case $parent instanceof User:
+          return 'avatar';
+        default:
+          return 'avatar';
+      }
     }
 }

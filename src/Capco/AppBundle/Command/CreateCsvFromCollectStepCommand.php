@@ -57,8 +57,8 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
 
         foreach ($steps as $step) {
             $this->createExport($step, !$withoutVote)
-                ->save($container->getParameter('kernel.root_dir').'/../web/export/'.$this->filename($step));
-            $output->writeln('The export file "'.$this->filename($step).'" has been created.');
+                ->save($container->getParameter('kernel.root_dir') . '/../web/export/' . $this->filename($step));
+            $output->writeln('The export file "' . $this->filename($step) . '" has been created.');
         }
     }
 
@@ -70,8 +70,8 @@ class CreateCsvFromCollectStepCommand extends ContainerAwareCommand
     protected function filename(CollectStep $collectStep): string
     {
         return $collectStep->getProject()
-            ? $collectStep->getProject()->getSlug().'_'.$collectStep->getSlug().'.xlsx'
-            : $collectStep->getSlug().'.xlsx';
+            ? $collectStep->getProject()->getSlug() . '_' . $collectStep->getSlug() . '.xlsx'
+            : $collectStep->getSlug() . '.xlsx';
     }
 
     protected function getProject(InputInterface $input)

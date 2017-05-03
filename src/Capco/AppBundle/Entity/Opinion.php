@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
+use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Traits\ExpirableTrait;
 
 /**
  * @ORM\Table(name="opinion", indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
@@ -37,16 +37,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     use AnswerableTrait;
     use PinnableTrait;
     use ExpirableTrait;
-
-    public function getKind(): string
-    {
-        return 'opinion';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -109,19 +99,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     protected $Author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false)
-     */
-    private $OpinionType;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
-     * @Assert\NotNull()
-     */
-    private $step;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
@@ -144,12 +121,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     protected $Reports;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"updatedAt" = "DESC"})
-     */
-    private $versions;
-
-    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionAppendix", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $appendices;
@@ -158,6 +129,25 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
      * @ORM\Column(name="ranking", type="integer", nullable=true)
      */
     protected $ranking = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
+     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false)
+     */
+    private $OpinionType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="opinions", cascade={"persist"})
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id")
+     * @Assert\NotNull()
+     */
+    private $step;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"updatedAt" = "DESC"})
+     */
+    private $versions;
 
     public function __construct()
     {
@@ -181,6 +171,16 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         }
 
         return 'New opinion';
+    }
+
+    public function getKind(): string
+    {
+        return 'opinion';
+    }
+
+    public function getRelated()
+    {
+        return null;
     }
 
     public function isIndexable()
@@ -584,7 +584,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     public function userHasReport(User $user)
     {
         foreach ($this->Reports as $report) {
-            if ($report->getReporter() == $user) {
+            if ($report->getReporter() === $user) {
                 return true;
             }
         }
@@ -625,7 +625,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     {
         $count = 0;
         foreach ($this->arguments as $arg) {
-            if (Argument::$argumentTypes[$arg->getType()] == $type) {
+            if (Argument::$argumentTypes[$arg->getType()] === $type) {
                 ++$count;
             }
         }
@@ -665,7 +665,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt.'...';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }
@@ -714,8 +714,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->getCommentSystem();
         }
-
-        return;
     }
 
     public function canAddComments()
@@ -746,10 +744,10 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
      */
     public function deleteOpinion()
     {
-        if ($this->step != null) {
+        if ($this->step !== null) {
             $this->step->removeOpinion($this);
         }
-        if ($this->OpinionType != null) {
+        if ($this->OpinionType !== null) {
             $this->OpinionType->removeOpinion($this);
         }
     }

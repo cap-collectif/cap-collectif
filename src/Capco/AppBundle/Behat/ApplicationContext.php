@@ -2,36 +2,32 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
+use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\IdeaStepsTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
+use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
-use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
-use Capco\AppBundle\Behat\Traits\AdminTrait;
+use Docker\Container;
+use Docker\Docker;
+use Docker\Exception\UnexpectedStatusCodeException;
+use Docker\Http\Client;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
-use WebDriver\Exception\ElementNotVisible;
-use Docker\Docker;
-use Docker\Http\Client;
-use Docker\Container;
-use Docker\Exception\UnexpectedStatusCodeException;
 use Symfony\Component\Process\Process;
-use Behat\Gherkin\Node\TableNode;
+use WebDriver\Exception\ElementNotVisible;
 
 class ApplicationContext extends UserContext
 {
-    protected $headers;
-    protected $dbContainer;
-    protected $currentPage = 'home page';
-
     use CommentStepsTrait;
     use IdeaStepsTrait;
     use OpinionStepsTrait;
@@ -43,9 +39,14 @@ class ApplicationContext extends UserContext
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use AdminTrait;
+    protected $headers;
+    protected $dbContainer;
+    protected $currentPage = 'home page';
 
     /**
      * @BeforeScenario
+     *
+     * @param mixed $scope
      */
     public function reset($scope)
     {
@@ -67,6 +68,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterScenario
+     *
+     * @param mixed $scope
      */
     public function resetDatabase($scope)
     {
@@ -138,6 +141,8 @@ class ApplicationContext extends UserContext
 
      /**
       * @Given I visited :pageName with:
+      *
+      * @param mixed $pageName
       */
      public function iVisitedPageWith($pageName, TableNode $parameters)
      {
@@ -169,17 +174,17 @@ class ApplicationContext extends UserContext
             if ($resultCode === TestResult::PASSED) {
                 $notification
                     ->setTitle('Behat suite ended successfully')
-                    ->setBody('Suite "'.$suiteName.'" has ended without errors (for once). Congrats !')
+                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
                 ;
             } elseif ($resultCode === TestResult::SKIPPED) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
-                    ->setBody('Suite "'.$suiteName.'" has ended successfully but some steps have been skipped.')
+                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.')
                 ;
             } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
-                    ->setBody('Suite "'.$suiteName.'" has ended with errors. Go check it out you moron !')
+                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !')
                 ;
             }
             $notifier->send($notification);
@@ -188,6 +193,8 @@ class ApplicationContext extends UserContext
 
      /**
       * @Then I should be redirected to :url
+      *
+      * @param mixed $url
       */
      public function assertRedirect($url)
      {
@@ -208,6 +215,10 @@ class ApplicationContext extends UserContext
      * @Given feature :featureA is enabled
      * @Given features :featureA, :featureB are enabled
      * @Given features :featureA, :featureB, :featureC are enabled
+     *
+     * @param mixed      $featureA
+     * @param null|mixed $featureB
+     * @param null|mixed $featureC
      */
     public function activateFeatures($featureA, $featureB = null, $featureC = null)
     {
@@ -247,6 +258,9 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then I should see :element on :page
+     *
+     * @param mixed $element
+     * @param mixed $page
      */
     public function iShouldSeeElementOnPage($element, $page)
     {
@@ -255,6 +269,9 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then I should not see :element on :page
+     *
+     * @param mixed $element
+     * @param mixed $page
      */
     public function iShouldNotSeeElementOnPage($element, $page)
     {
@@ -267,7 +284,7 @@ class ApplicationContext extends UserContext
     public function iShouldSeeElementOnPageDisabled(string $element, string $pageSlug)
     {
         $page = $this->navigationContext->getPage($pageSlug);
-        $this->getSession()->wait(2000, "$('".$page->getSelector($element)."').length > 0");
+        $this->getSession()->wait(2000, "$('" . $page->getSelector($element) . "').length > 0");
         expect($page->getElement($element)->hasAttribute('disabled'))->toBe(true);
     }
 
@@ -281,6 +298,10 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then :first should be before :second for selector :cssQuery
+     *
+     * @param mixed $first
+     * @param mixed $second
+     * @param mixed $cssQuery
      */
     public function element1ShouldBeBeforeElement2ForSelector($first, $second, $cssQuery)
     {
@@ -290,17 +311,19 @@ class ApplicationContext extends UserContext
             },
             $this->getSession()->getPage()->findAll('css', $cssQuery)
         );
-        if (!in_array($first, $items)) {
-            throw new ElementNotFoundException($this->getSession(), 'Element "'.$first.'"');
+        if (!in_array($first, $items, true)) {
+            throw new ElementNotFoundException($this->getSession(), 'Element "' . $first . '"');
         }
-        if (!in_array($second, $items)) {
-            throw new ElementNotFoundException($this->getSession(), 'Element "'.$second.'"');
+        if (!in_array($second, $items, true)) {
+            throw new ElementNotFoundException($this->getSession(), 'Element "' . $second . '"');
         }
-        \PHPUnit_Framework_TestCase::assertTrue(array_search($first, $items) < array_search($second, $items));
+        \PHPUnit_Framework_TestCase::assertTrue(array_search($first, $items, true) < array_search($second, $items, true));
     }
 
     /**
      * @When I click the :element element
+     *
+     * @param mixed $selector
      */
     public function iClickElement($selector)
     {
@@ -313,6 +336,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I hover over the :selector element
+     *
+     * @param mixed $selector
      */
     public function iHoverOverTheElement($selector)
     {
@@ -328,6 +353,9 @@ class ApplicationContext extends UserContext
     /**
      * Fills in form field with specified id|name|label|value.
      * Overrided to fill wysiwyg fields as well.
+     *
+     * @param mixed $field
+     * @param mixed $value
      */
     public function fillField($field, $value)
     {
@@ -338,7 +366,7 @@ class ApplicationContext extends UserContext
         } catch (ElementNotFoundException $e) {
             // Try to get corresponding wysiwyg field
             // Works only with quill editor for now
-            $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', $field));
+            $wrapper = $this->getSession()->getPage()->find('named', ['id_or_name', $field]);
             if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor')) {
                 throw $e;
             }
@@ -346,18 +374,20 @@ class ApplicationContext extends UserContext
             $field->setValue($value);
         } catch (ElementNotVisible $e) {
             // Ckeditor case
-            $wrapper = $this->getSession()->getPage()->find('named', array('id_or_name', 'cke_'.$field));
+            $wrapper = $this->getSession()->getPage()->find('named', ['id_or_name', 'cke_' . $field]);
             if (!$wrapper || !$wrapper->hasClass('cke')) {
                 throw $e;
             }
             $this->getSession()->getDriver()->executeScript('
-                CKEDITOR.instances["'.$field.'"].setData("'.$value.'");
+                CKEDITOR.instances["' . $field . '"].setData("' . $value . '");
             ');
         }
     }
 
     /**
      * @When I wait :seconds seconds
+     *
+     * @param mixed $seconds
      */
     public function iWait($seconds)
     {
@@ -366,31 +396,37 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I try to download :path
+     *
+     * @param mixed $path
      */
     public function iTryToDownload($path)
     {
-        $url = $this->getSession()->getCurrentUrl().$path;
+        $url = $this->getSession()->getCurrentUrl() . $path;
         $this->headers = get_headers($url);
         $this->getSession()->visit($url);
     }
 
     /**
      * @Then /^I should see response status code "([^"]*)"$/
+     *
+     * @param mixed $statusCode
      */
     public function iShouldSeeResponseStatusCode($statusCode)
     {
         $responseStatusCode = $this->getSession()->getStatusCode();
-        if (!$responseStatusCode == (int) $statusCode) {
+        if (!$responseStatusCode === (int) $statusCode) {
             throw new \Exception(sprintf('Did not see response status code %s, but %s.', $statusCode, $responseStatusCode));
         }
     }
 
     /**
      * @Then /^I should see in the header "([^"]*)"$/
+     *
+     * @param mixed $header
      */
     public function iShouldSeeInTheHeader($header)
     {
-        assert(in_array($header, $this->headers), "Did not see \"$header\" in the headers.");
+        assert(in_array($header, $this->headers, true), "Did not see \"$header\" in the headers.");
     }
 
     /**
@@ -398,6 +434,9 @@ class ApplicationContext extends UserContext
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should have class "([^"]*)"$/
+     *
+     * @param mixed $selector
+     * @param mixed $class
      */
     public function elementShouldHaveClass($selector, $class)
     {
@@ -405,7 +444,7 @@ class ApplicationContext extends UserContext
         $page = $session->getPage();
         $element = $page->find('css', $selector);
         if (!$element) {
-            throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
+            throw new ElementNotFoundException($session, 'Element "' . $selector . '"');
         }
         \PHPUnit_Framework_TestCase::assertTrue($element->hasClass($class));
     }
@@ -415,6 +454,9 @@ class ApplicationContext extends UserContext
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should not have class "([^"]*)"$/
+     *
+     * @param mixed $selector
+     * @param mixed $class
      */
     public function elementShouldNotHaveClass($selector, $class)
     {
@@ -422,7 +464,7 @@ class ApplicationContext extends UserContext
         $page = $session->getPage();
         $element = $page->find('css', $selector);
         if (!$element) {
-            throw new ElementNotFoundException($session, 'Element "'.$selector.'"');
+            throw new ElementNotFoundException($session, 'Element "' . $selector . '"');
         }
         \PHPUnit_Framework_TestCase::assertFalse($element->hasClass($class));
     }
@@ -431,6 +473,8 @@ class ApplicationContext extends UserContext
      * Checks that a button is disabled.
      *
      * @Then /^the button "([^"]*)" should be disabled$/
+     *
+     * @param mixed $locator
      */
     public function buttonShouldBeDisabled($locator)
     {
@@ -448,6 +492,9 @@ class ApplicationContext extends UserContext
      * Checks that an element has an attribute.
      *
      * @Then /^the element "([^"]*)" should have attribute :attribute $/
+     *
+     * @param mixed $selector
+     * @param mixed $attribute
      */
     public function elementHasAttribute($selector, $attribute)
     {
@@ -466,6 +513,9 @@ class ApplicationContext extends UserContext
      * @Then /^the "(?P<option>(?:[^"]|\\")*)" option from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected/
      * @Then /^the option "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
      * @Then /^"(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)" (?:is|should be) selected$/
+     *
+     * @param mixed $option
+     * @param mixed $select
      */
     public function optionIsSelectedInSelect($option, $select)
     {
@@ -474,25 +524,18 @@ class ApplicationContext extends UserContext
             throw new ElementNotFoundException($this->getSession(), 'select field', 'id|name|label|value', $select);
         }
 
-        $optionField = $selectField->find('named', array(
+        $optionField = $selectField->find('named', [
             'option',
             $option,
-        ));
+        ]);
 
         if (null === $optionField) {
             throw new ElementNotFoundException($this->getSession(), 'select option field', 'id|name|label|value', $option);
         }
 
         if (!$optionField->isSelected()) {
-            throw new ExpectationException('Select option field with value|text "'.$option.'" is not selected in the select "'.$select.'"', $this->getSession());
+            throw new ExpectationException('Select option field with value|text "' . $option . '" is not selected in the select "' . $select . '"', $this->getSession());
         }
-    }
-
-    private function visitPageWithParams($page, $params = [])
-    {
-        $this->currentPage = $page;
-        $this->navigationContext->getPage($page)->open($params);
-        $this->iWait(2);
     }
 
     /**
@@ -504,12 +547,17 @@ class ApplicationContext extends UserContext
         $this->visitPageWithParams('home page');
     }
 
+    private function visitPageWithParams($page, $params = [])
+    {
+        $this->currentPage = $page;
+        $this->navigationContext->getPage($page)->open($params);
+        $this->iWait(2);
+    }
+
     private function getCurrentPage()
     {
         if ($this->currentPage) {
             return $this->navigationContext->getPage($this->currentPage);
         }
-
-        return;
     }
 }

@@ -9,7 +9,7 @@ class EndAfterStartValidator extends ConstraintValidator
 {
     public function validate($protocol, Constraint $constraint)
     {
-        if (null != $protocol->getEndAt() && null != $protocol->getStartAt() && $protocol->getEndAt() < $protocol->getStartAt()) {
+        if (null !== $protocol->getEndAt() && null !== $protocol->getStartAt() && $protocol->getEndAt() < $protocol->getStartAt()) {
             $this->context->addViolationAt('endAt', $constraint->message, [], null);
         }
     }

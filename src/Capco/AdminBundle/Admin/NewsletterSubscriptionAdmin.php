@@ -6,8 +6,8 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class NewsletterSubscriptionAdmin extends Admin
 {
@@ -15,6 +15,13 @@ class NewsletterSubscriptionAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'email',
     ];
+
+    public function getFeatures()
+    {
+        return [
+            'newsletter',
+        ];
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -99,12 +106,5 @@ class NewsletterSubscriptionAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'newsletter',
-        ];
     }
 }

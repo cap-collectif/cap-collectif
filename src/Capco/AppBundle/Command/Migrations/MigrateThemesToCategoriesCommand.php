@@ -5,10 +5,10 @@ namespace Capco\AppBundle\Command\Migrations;
 use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
 {
@@ -51,7 +51,7 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         if (!$collectStep || !$form = $collectStep->getProposalForm()) {
             $output->writeln(
                 '<error>Unknown collect step'
-                .$collectStepSlug.
+                . $collectStepSlug .
                 '. Please provide an existing collect step slug that is linked to a proposal form.</error>');
             $output->writeln('<error>Cancelled. No migration executed.</error>');
 
@@ -88,7 +88,7 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $form->setCategoryMandatory(true);
         $em->flush();
 
-        $output->writeln('Migration executed, '.$count.' categories created.');
+        $output->writeln('Migration executed, ' . $count . ' categories created.');
 
         return 0;
     }

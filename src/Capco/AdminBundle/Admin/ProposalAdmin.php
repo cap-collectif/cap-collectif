@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Helper\EnvHelper;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -40,6 +40,15 @@ class ProposalAdmin extends Admin
         return [
             'projectId' => $projectId,
         ];
+    }
+
+    public function getList()
+    {
+        // Remove APC Cache for soft delete
+        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+        $em->getConfiguration()->getResultCacheImpl()->deleteAll();
+
+        return parent::getList();
     }
 
     // Fields to be shown on create/edit forms
@@ -448,6 +457,11 @@ class ProposalAdmin extends Admin
         ;
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
+    }
+
     private function createQueryForCategories()
     {
         $proposalFormId = 0;
@@ -467,19 +481,5 @@ class ProposalAdmin extends Admin
         ;
 
         return $qb->getQuery();
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('create');
-    }
-
-    public function getList()
-    {
-        // Remove APC Cache for soft delete
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
-        $em->getConfiguration()->getResultCacheImpl()->deleteAll();
-
-        return parent::getList();
     }
 }

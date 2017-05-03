@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Traits\IdTrait;
 
 /**
  * Event.
@@ -504,7 +504,7 @@ class Event implements CommentableInterface, IndexableInterface
     public function setLat($lat)
     {
         if (is_string($lat)) {
-            $lat = floatval($lat);
+            $lat = (float) $lat;
         }
         $this->lat = $lat;
     }
@@ -523,7 +523,7 @@ class Event implements CommentableInterface, IndexableInterface
     public function setLng($lng)
     {
         if (is_string($lng)) {
-            $lng = floatval($lng);
+            $lng = (float) $lng;
         }
         $this->lng = $lng;
     }
@@ -678,7 +678,7 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function lastOneDay()
     {
-        if ($this->endAt == null) {
+        if ($this->endAt === null) {
             return true;
         }
 

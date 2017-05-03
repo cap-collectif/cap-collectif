@@ -2,17 +2,17 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\IdeaComment;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Post;
 
 class CommentAdmin extends Admin
 {
@@ -153,7 +153,7 @@ class CommentAdmin extends Admin
             ])
         ;
 
-        if (null != $subject->getAuthor()) {
+        if (null !== $subject->getAuthor()) {
             $showMapper
                 ->add('Author', null, [
                     'label' => 'admin.fields.comment.author',

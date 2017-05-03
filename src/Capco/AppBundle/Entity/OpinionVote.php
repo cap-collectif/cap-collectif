@@ -16,11 +16,6 @@ class OpinionVote extends AbstractVote
     const VOTE_NOK = -1;
     const VOTE_MITIGE = 0;
 
-    public function getRelated()
-    {
-        return $this->opinion;
-    }
-
     public static $voteTypes = [
         'ok' => self::VOTE_OK,
         'mitige' => self::VOTE_MITIGE,
@@ -65,6 +60,11 @@ class OpinionVote extends AbstractVote
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
+
+    public function getRelated()
+    {
+        return $this->opinion;
+    }
 
     /**
      * Get value.
@@ -114,7 +114,7 @@ class OpinionVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->opinion != null) {
+        if ($this->opinion !== null) {
             $this->opinion->removeVote($this);
         }
     }

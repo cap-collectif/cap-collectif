@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\HasAuthorInterface;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class AbstractVote.
@@ -32,21 +32,6 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
 {
     use ExpirableTrait;
     use IdTrait;
-
-    public function getKind(): string
-    {
-        return 'vote';
-    }
-
-    public function getRelated()
-    {
-        return null;
-    }
-
-    public function isIndexable()
-    {
-        return !$this->isExpired();
-    }
 
     /**
      * @var \DateTime
@@ -74,6 +59,21 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+    }
+
+    public function getKind(): string
+    {
+        return 'vote';
+    }
+
+    public function getRelated()
+    {
+        return null;
+    }
+
+    public function isIndexable()
+    {
+        return !$this->isExpired();
     }
 
     /**

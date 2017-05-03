@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Opinion;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
-use Capco\AppBundle\Entity\Opinion;
 
 /**
  * ArgumentRepository.
@@ -53,6 +53,11 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Get all enabled arguments by type and opinion, sorted by argumentSort.
+     *
+     * @param mixed      $opinion
+     * @param null|mixed $type
+     * @param null|mixed $argumentSort
+     * @param null|mixed $user
      */
 
     /**
@@ -89,12 +94,12 @@ class ArgumentRepository extends EntityRepository
             ;
         }
 
-        if (null != $argumentSort) {
-            if ($argumentSort == 'popular') {
+        if (null !== $argumentSort) {
+            if ($argumentSort === 'popular') {
                 $qb->orderBy('a.votesCount', 'DESC');
-            } elseif ($argumentSort == 'last') {
+            } elseif ($argumentSort === 'last') {
                 $qb->orderBy('a.updatedAt', 'DESC');
-            } elseif ($argumentSort == 'old') {
+            } elseif ($argumentSort === 'old') {
                 $qb->orderBy('a.updatedAt', 'ASC');
             }
         }
@@ -107,6 +112,11 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Get all enabled arguments by type and opinion version, sorted by argumentSort.
+     *
+     * @param mixed      $version
+     * @param null|mixed $type
+     * @param null|mixed $argumentSort
+     * @param null|mixed $user
      */
 
     /**
@@ -144,12 +154,12 @@ class ArgumentRepository extends EntityRepository
             ;
         }
 
-        if (null != $argumentSort) {
-            if ($argumentSort == 'popular') {
+        if (null !== $argumentSort) {
+            if ($argumentSort === 'popular') {
                 $qb->orderBy('a.votesCount', 'DESC');
-            } elseif ($argumentSort == 'last') {
+            } elseif ($argumentSort === 'last') {
                 $qb->orderBy('a.updatedAt', 'DESC');
-            } elseif ($argumentSort == 'old') {
+            } elseif ($argumentSort === 'old') {
                 $qb->orderBy('a.updatedAt', 'ASC');
             }
         }
@@ -164,6 +174,7 @@ class ArgumentRepository extends EntityRepository
      * Find enabled arguments by consultation step.
      *
      * @param $step
+     * @param mixed $asArray
      *
      * @return array
      */
@@ -192,6 +203,7 @@ class ArgumentRepository extends EntityRepository
      * Get all by opinion.
      *
      * @param $opinionId
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -212,6 +224,7 @@ class ArgumentRepository extends EntityRepository
      * Get all by version.
      *
      * @param $versionId
+     * @param mixed $asArray
      *
      * @return mixed
      */
@@ -233,9 +246,9 @@ class ArgumentRepository extends EntityRepository
      *
      * @param $argument
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOneById($argument)
     {
@@ -256,6 +269,7 @@ class ArgumentRepository extends EntityRepository
      * Get all trashed or unpublished arguments for project.
      *
      * @param $step
+     * @param mixed $project
      *
      * @return mixed
      */

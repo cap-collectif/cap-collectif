@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Traits\UuidTrait;
 
 /**
  * @ORM\Table(name="consultation_step_type")
@@ -58,9 +58,9 @@ class ConsultationStepType
     {
         if ($this->id) {
             return $this->getTitle();
-        } else {
-            return 'New consultation step type';
         }
+
+        return 'New consultation step type';
     }
 
     /**

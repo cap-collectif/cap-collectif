@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\IdTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HighlightedContent.

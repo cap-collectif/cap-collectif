@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Project;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Capco\AppBundle\Entity\Project;
 use Sonata\CoreBundle\Model\Metadata;
 
 class ProjectAdmin extends Admin
@@ -20,6 +20,21 @@ class ProjectAdmin extends Admin
     protected $formOptions = [
         'cascade_validation' => true,
     ];
+
+    // For mosaic view
+    public function getObjectMetadata($object)
+    {
+        $cover = $object->getCover();
+        if ($cover) {
+            $provider = $this->getConfigurationPool()->getContainer()->get($cover->getProviderName());
+            $format = $provider->getFormatName($cover, 'form');
+            $url = $provider->generatePublicUrl($cover, $format);
+
+            return new Metadata($object->getTitle(), null, $url);
+        }
+
+        return parent::getObjectMetadata($object);
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -322,20 +337,5 @@ class ProjectAdmin extends Admin
             ])
             ->end()
         ;
-    }
-
-    // For mosaic view
-    public function getObjectMetadata($object)
-    {
-        $cover = $object->getCover();
-        if ($cover) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($cover->getProviderName());
-            $format = $provider->getFormatName($cover, 'form');
-            $url = $provider->generatePublicUrl($cover, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
-        }
-
-        return parent::getObjectMetadata($object);
     }
 }

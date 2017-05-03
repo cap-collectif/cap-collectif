@@ -15,6 +15,13 @@ class UserTypeAdmin extends Admin
         '_sort_by' => 'name',
     ];
 
+    public function getFeatures()
+    {
+        return [
+            'user_type',
+        ];
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -83,12 +90,5 @@ class UserTypeAdmin extends Admin
                 'label' => 'admin.fields.user_type.updated_at',
             ])
         ;
-    }
-
-    public function getFeatures()
-    {
-        return [
-            'user_type',
-        ];
     }
 }
