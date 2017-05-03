@@ -46,6 +46,7 @@ class ThemeExtension extends \Twig_Extension
     {
         $projects = $this->projectRepo->findAll();
         $data = [];
+
         foreach ($projects as $project) {
             $projectStepsData = [];
             $projectStepsByIdData = [];
@@ -64,7 +65,7 @@ class ThemeExtension extends \Twig_Extension
                   'title' => $realStep->getTitle(),
                   'body' => $realStep->getBody(),
                   'startAt' => $realStep->getStartAt() ? $formater->format($realStep->getStartAt()) : null,
-                  'endAt' => $realStep->getStartAt() ? $formater->format($realStep->getEndAt()): null,
+                  'endAt' => $realStep->getStartAt() ? $formater->format($realStep->getEndAt()) : null,
                   'position' => $realStep->getPosition(),
                   'type' => $realStep->getType(),
                   'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),

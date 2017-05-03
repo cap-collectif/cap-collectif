@@ -22,6 +22,10 @@
       "eslint --fix",
       "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
       "git add"
+    ],
+    "*.php": [
+      "php-cs-fixer fix --rules=@Symfony --using-cache=no --diff",
+      "git add"
     ]
   },
   "jest": {
