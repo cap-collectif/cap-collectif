@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
@@ -42,7 +43,6 @@ const ProjectPreviewCounters = React.createClass({
       </div>
     );
   },
-
 });
 
 export default ProjectPreviewCounters;

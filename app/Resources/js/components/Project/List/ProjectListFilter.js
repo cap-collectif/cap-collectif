@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Col, Row, Input, FormControl, Button } from 'react-bootstrap';
@@ -9,12 +10,13 @@ import {
   changeTheme,
   changeTerm,
 } from '../../../redux/modules/project';
+import type { State } from '../../../types';
 
 const ProjectListFilter = React.createClass({
   propTypes: {
     projectTypes: PropTypes.array.isRequired,
     features: PropTypes.object.isRequired,
-    themes: PropTypes.array,
+    themes: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     orderBy: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -34,13 +36,22 @@ const ProjectListFilter = React.createClass({
   handleSubmit(e) {
     const { dispatch } = this.props;
     e.preventDefault();
-    const value = this.state.termInputValue.length > 0 ? this.state.termInputValue : null;
+    const value = this.state.termInputValue.length > 0
+      ? this.state.termInputValue
+      : null;
     dispatch(changeTerm(value));
     dispatch(fetchProjects());
   },
 
   render() {
-    const { projectTypes, features, themes, dispatch, orderBy, type } = this.props;
+    const {
+      projectTypes,
+      features,
+      themes,
+      dispatch,
+      orderBy,
+      type,
+    } = this.props;
 
     const filters = [];
 
@@ -51,11 +62,10 @@ const ProjectListFilter = React.createClass({
         type="select"
         name="orderBy"
         value={orderBy}
-        onChange={(e) => {
+        onChange={e => {
           dispatch(changeOrderBy(e.target.value));
           dispatch(fetchProjects());
-        }}
-      >
+        }}>
         <option key="date" value="date">Les plus récents</option>
         <option key="popularity" value="popularity">Les plus populaires</option>
       </FormControl>,
@@ -69,17 +79,18 @@ const ProjectListFilter = React.createClass({
           type="select"
           name="type"
           value={type}
-          onChange={(e) => {
+          onChange={e => {
             dispatch(changeType(e.target.value));
             dispatch(fetchProjects());
-          }}
-        >
+          }}>
           <option key="all" value="">Tous les types</option>
-          {
-            projectTypes.map((projectType) => {
-              return <option value={projectType.slug}>{this.getIntlMessage(projectType.title)}</option>;
-            })
-          }
+          {projectTypes.map(projectType => {
+            return (
+              <option value={projectType.slug}>
+                {this.getIntlMessage(projectType.title)}
+              </option>
+            );
+          })}
         </FormControl>,
       );
     }
@@ -91,17 +102,14 @@ const ProjectListFilter = React.createClass({
           componentClass="select"
           type="select"
           name="theme"
-          onChange={(e) => {
+          onChange={e => {
             dispatch(changeTheme(e.target.value));
             dispatch(fetchProjects());
-          }}
-        >
+          }}>
           <option key="all" value="">Tous les thèmes</option>
-          {
-            themes.map((theme) => {
-              return <option value={theme.slug}>{theme.title}</option>;
-            })
-          }
+          {themes.map(theme => {
+            return <option value={theme.slug}>{theme.title}</option>;
+          })}
         </FormControl>,
       );
     }
@@ -114,7 +122,7 @@ const ProjectListFilter = React.createClass({
           placeholder={this.getIntlMessage('navbar.search')}
           buttonAfter={
             <Button id="project-search-button" type="submit">
-              <i className="cap cap-magnifier"></i>
+              <i className="cap cap-magnifier" />
             </Button>
           }
           groupClassName="project-search-group pull-right"
@@ -128,14 +136,15 @@ const ProjectListFilter = React.createClass({
 
     return (
       <Row>
-        { filters.map((filter) => { return <Col xs={12} sm={columnWidth}>{filter}</Col>; }) }
+        {filters.map(filter => {
+          return <Col xs={12} sm={columnWidth}>{filter}</Col>;
+        })}
       </Row>
     );
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: State) => {
   return {
     features: state.default.features,
     themes: state.default.themes,

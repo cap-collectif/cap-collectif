@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import ProjectPreviewProgressBarItem from './ProjectPreviewProgressBarItem';
@@ -10,7 +11,7 @@ const ProjectPreviewProgressBar = React.createClass({
 
   getCompletedStepsNb() {
     const { project } = this.props;
-    const completedSteps = project.steps.filter((step) => {
+    const completedSteps = project.steps.filter(step => {
       return step.status === 'closed';
     });
     return completedSteps.length;
@@ -21,7 +22,7 @@ const ProjectPreviewProgressBar = React.createClass({
     const completedStepsNb = this.getCompletedStepsNb();
     const total = project.steps.length;
     const percentage = completedStepsNb > 0 && total > 0
-      ? (completedStepsNb / total) * 100
+      ? completedStepsNb / total * 100
       : 0;
     return Math.round(percentage);
   },
@@ -33,8 +34,9 @@ const ProjectPreviewProgressBar = React.createClass({
       const width = `${100 / nbSteps}%`;
       return (
         <div className="thumbnail__steps-bar">
-          {
-            project.steps.sort((a, b) => a.position - b.position).map((step, index) => {
+          {project.steps
+            .sort((a, b) => a.position - b.position)
+            .map((step, index) => {
               return (
                 <ProjectPreviewProgressBarItem
                   key={index}
@@ -42,8 +44,7 @@ const ProjectPreviewProgressBar = React.createClass({
                   style={{ width }}
                 />
               );
-            })
-          }
+            })}
           <span className="thumbnail__steps-bar__percentage">
             {`${this.getCompletedStepsPercentage()}%`}
           </span>
@@ -52,7 +53,6 @@ const ProjectPreviewProgressBar = React.createClass({
     }
     return null;
   },
-
 });
 
 export default ProjectPreviewProgressBar;

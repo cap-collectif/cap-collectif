@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import DatesInterval from './../../Utils/DatesInterval';
@@ -15,24 +16,22 @@ const ProjectPreviewPopoverContent = React.createClass({
       <div>
         <p className="h5">{step.title}</p>
         <p><DatesInterval startAt={step.startAt} endAt={step.endAt} /></p>
-        {
-          step.status
-            ? <p className="label label-default">
+        {step.status
+          ? <p className="label label-default">
               {this.getIntlMessage(`step.status.${step.status}`)}
             </p>
-            : null
-        }
-        {
-          step.open && step.counters
+          : null}
+        {step.open && step.counters
           ? <p style={{ marginTop: '10px' }}>
-              <RemainingTime hours={step.counters.remainingHours} days={step.counters.remainingDays} />
+              <RemainingTime
+                hours={step.counters.remainingHours}
+                days={step.counters.remainingDays}
+              />
             </p>
-          : null
-        }
+          : null}
       </div>
     );
   },
-
 });
 
 export default ProjectPreviewPopoverContent;

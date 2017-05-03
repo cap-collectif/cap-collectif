@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 
@@ -18,30 +19,24 @@ const ProjectPreviewCounter = React.createClass({
   },
 
   render() {
-    const {
-      value,
-      label,
-      style,
-      showZero,
-    } = this.props;
+    const { value, label, style, showZero } = this.props;
     if (value > 0 || showZero) {
       return (
         <div className="thumbnail__number-block" style={style}>
-            <div className="thumbnail__number">
-              {value}
-            </div>
-            <div className="thumbnail__number__label excerpt small">
-              <FormattedMessage
-                message={this.getIntlMessage(label)}
-                num={value}
-              />
+          <div className="thumbnail__number">
+            {value}
+          </div>
+          <div className="thumbnail__number__label excerpt small">
+            <FormattedMessage
+              message={this.getIntlMessage(label)}
+              num={value}
+            />
           </div>
         </div>
       );
     }
     return null;
   },
-
 });
 
 export default ProjectPreviewCounter;

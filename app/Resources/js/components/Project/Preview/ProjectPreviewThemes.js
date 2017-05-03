@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -14,35 +15,24 @@ const ProjectPreviewThemes = React.createClass({
     if (features.themes && project.themes.length > 0) {
       return (
         <div className="excerpt project__preview__themes small ellipsis">
-          {
-            project.themes.map((theme, index) => {
-              return (
-                <span key={index}>
-                  <a
-                    className="excerpt"
-                    href={theme._links.show}
-                  >
-                    {theme.title}
-                  </a>
-                  {
-                    index < project.themes.length - 1 &&
-                    <span>, </span>
-                  }
-                </span>
-              );
-            })
-          }
+          {project.themes.map((theme, index) => {
+            return (
+              <span key={index}>
+                <a className="excerpt" href={theme._links.show}>
+                  {theme.title}
+                </a>
+                {index < project.themes.length - 1 && <span>, </span>}
+              </span>
+            );
+          })}
         </div>
       );
     }
-    return (
-      <div className="excerpt project__preview__themes small"></div>
-    );
+    return <div className="excerpt project__preview__themes small" />;
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { features: state.default.features };
 };
 

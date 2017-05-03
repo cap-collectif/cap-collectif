@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 export default class DefaultProjectImage extends React.Component {
@@ -12,8 +13,7 @@ export default class DefaultProjectImage extends React.Component {
         height="110px"
         viewBox="-162.5 -162.5 226.5 226.5"
         enableBackground="new -162.5 -162.5 226.5 226.5"
-        style={{ margin: '0 auto', display: 'block' }}
-      >
+        style={{ margin: '0 auto', display: 'block' }}>
         <path
           fill="none"
           stroke="#FFFFFF"
@@ -35,5 +35,4 @@ export default class DefaultProjectImage extends React.Component {
       </svg>
     );
   }
-
 }

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
+use Capco\AppBundle\Helper\StepHelper;
 
 class ThemeExtension extends \Twig_Extension
 {
@@ -22,13 +23,15 @@ class ThemeExtension extends \Twig_Extension
         ProjectRepository $projectRepo,
         $twig,
         Serializer $serializer,
-        Router $router
+        Router $router,
+        StepHelper $stepHelper
         ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
         $this->twig = $twig;
         $this->serializer = $serializer;
         $this->router = $router;
+        $this->stepHelper = $stepHelper;
     }
 
     public function getFunctions(): array
@@ -59,12 +62,13 @@ class ThemeExtension extends \Twig_Extension
                   'id' => $realStep->getId(),
                   'title' => $realStep->getTitle(),
                   'body' => $realStep->getBody(),
-                  'startAt' => $formater->format($realStep->getStartAt()),
-                  'endAt' => $formater->format($realStep->getEndAt()),
+                  'startAt' => $realStep->getStartAt() ? $formater->format($realStep->getStartAt()) : null,
+                  'endAt' => $realStep->getStartAt() ? $formater->format($realStep->getEndAt()): null,
                   'position' => $realStep->getPosition(),
                   'type' => $realStep->getType(),
                   'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),
                   'statuses' => $projectStepsStatus,
+                  'status' => $this->stepHelper->getStatus($realStep),
                   'open' => $realStep->isOpen(),
                   'proposalFormId' => method_exists($realStep, 'getProposalFormId') ? $realStep->getProposalFormId() : null,
                   'voteThreshold' => method_exists($realStep, 'getVoteThreshold') ? $realStep->getVoteThreshold() : null,

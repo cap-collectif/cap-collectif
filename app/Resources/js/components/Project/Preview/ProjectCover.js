@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
@@ -26,7 +27,6 @@ const ProjectCover = React.createClass({
       </div>
     );
   },
-
 });
 
 export default ProjectCover;

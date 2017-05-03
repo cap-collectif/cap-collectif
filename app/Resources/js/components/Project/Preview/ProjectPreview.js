@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Col } from 'react-bootstrap';
@@ -17,7 +18,7 @@ const ProjectPreview = React.createClass({
     return (
       <Col xs={12} sm={6} md={4} lg={3}>
         <div className="thumbnail  thumbnail--custom  block  block--bordered">
-          { project.projectType && <ProjectType project={project} /> }
+          {project.projectType && <ProjectType project={project} />}
           <ProjectCover project={project} />
           <ProjectPreviewBody project={project} />
           <ProjectPreviewCounters project={project} />
@@ -25,7 +26,6 @@ const ProjectPreview = React.createClass({
       </Col>
     );
   },
-
 });
 
 export default ProjectPreview;

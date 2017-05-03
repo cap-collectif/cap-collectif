@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
@@ -15,12 +16,13 @@ const ProjectType = React.createClass({
       project__preview__type: true,
     });
     return (
-      <div className={divClasses} style={{ backgroundColor: project.projectType.color }}>
-        { this.getIntlMessage(project.projectType.title) }
+      <div
+        className={divClasses}
+        style={{ backgroundColor: project.projectType.color }}>
+        {this.getIntlMessage(project.projectType.title)}
       </div>
     );
   },
-
 });
 
 export default ProjectType;

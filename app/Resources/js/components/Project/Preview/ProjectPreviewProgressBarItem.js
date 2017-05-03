@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -18,10 +19,7 @@ const ProjectPreviewProgressBarItem = React.createClass({
   },
 
   render() {
-    const {
-      step,
-      style,
-    } = this.props;
+    const { step, style } = this.props;
     const position = step.position;
     const classes = classNames({
       'thumbnail__steps-bar__item': true,
@@ -37,24 +35,16 @@ const ProjectPreviewProgressBarItem = React.createClass({
             message={this.getIntlMessage('project.preview.popover.title')}
             num={position}
           />
-        }
-      >
-        <ProjectPreviewPopoverContent
-          step={step}
-        />
+        }>
+        <ProjectPreviewPopoverContent step={step} />
       </Popover>
     );
     return (
-    <OverlayTrigger
-      rootClose
-      placement="top"
-      overlay={popover}
-    >
-      <span className={classes} style={style} />
-    </OverlayTrigger>
+      <OverlayTrigger rootClose placement="top" overlay={popover}>
+        <span className={classes} style={style} />
+      </OverlayTrigger>
     );
   },
-
 });
 
 export default ProjectPreviewProgressBarItem;

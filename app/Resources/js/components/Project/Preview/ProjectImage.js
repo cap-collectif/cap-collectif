@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import DefaultProjectImage from './DefaultProjectImage';
@@ -11,19 +12,21 @@ const ProjectImage = React.createClass({
   render() {
     const { project } = this.props;
     if (project.cover) {
-      return <img src={project.cover.url} alt="" role="presentation" className="img-responsive" />;
+      return (
+        <img
+          src={project.cover.url}
+          alt=""
+          role="presentation"
+          className="img-responsive"
+        />
+      );
     }
     return (
       <div className="bg--default bg--project">
-        {
-          !project.video
-          ? <DefaultProjectImage />
-          : null
-        }
+        {!project.video ? <DefaultProjectImage /> : null}
       </div>
     );
   },
-
 });
 
 export default ProjectImage;
