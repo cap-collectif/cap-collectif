@@ -42,6 +42,7 @@ Feature: Opinions
           "position": @integer@,
           "timeless": @boolean@,
           "counters": {
+            "remainingHours": @integer@,
             "remainingDays": @integer@,
             "contributions": @integer@,
             "contributors": @integer@,
