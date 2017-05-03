@@ -3,6 +3,9 @@
 ================================================================*/
 
 #main-navbar {
+    height: 51px !important;
+    overflow: hidden;
+
     // Search button
     a.navbar__search {
         display: inline-block;
@@ -131,6 +134,7 @@
             left: 0;
         }
     }
+
 
     #navbar-content .nav-dropdown-section {
         margin: 0;
