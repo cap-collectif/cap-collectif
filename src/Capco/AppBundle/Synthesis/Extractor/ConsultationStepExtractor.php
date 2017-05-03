@@ -432,7 +432,7 @@ class ConsultationStepExtractor
 
     public function isElementExisting(SynthesisElement $element, $object): bool
     {
-        return $element->getLinkedDataClass() === get_class($object) && $element->getLinkedDataId() === $object->getId();
+        return $element->getLinkedDataClass() === get_class($object) && (string) $element->getLinkedDataId() === (string) $object->getId();
     }
 
     public function isElementOutdated(SynthesisElement $element, $object): bool
