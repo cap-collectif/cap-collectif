@@ -40,7 +40,7 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
   />
   <Field
     component={[Function]}
-    id="appendix_0"
+    id="opinion_appendix-0"
     label="appendix-1"
     name="appendix-1"
     type="editor"
