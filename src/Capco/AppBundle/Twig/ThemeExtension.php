@@ -48,6 +48,7 @@ class ThemeExtension extends \Twig_Extension
         $data = [];
         foreach ($projects as $project) {
             $projectStepsData = [];
+            $projectStepsByIdData = [];
             foreach ($project->getSteps() as $step) {
                 $realStep = $step->getStep();
                 $projectStepsStatus = [];
