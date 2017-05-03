@@ -51,9 +51,5 @@
         </div>
     {% endif %}
 
-    {{ react_intl_component('ProposalStepPageApp', {
-        'props': props,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-        })
-    }}
+    {{ react_intl_component('ProposalStepPageApp', {'props': props}) }}
 {% endblock %}

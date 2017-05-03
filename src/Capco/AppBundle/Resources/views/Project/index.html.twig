@@ -46,9 +46,7 @@
 
     <div class="container container--custom">
         {{
-           react_intl_component('ProjectListPageApp', {
-            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-           })
+           react_intl_component('ProjectListPageApp')
         }}
     </div>
 {% endblock %}

@@ -4,6 +4,7 @@ exports.config = {
       plugins: {
         off: ['eslint-brunch'],
       },
+      optimize: true,
       sourceMaps: true,
     },
   },
@@ -21,11 +22,7 @@ exports.config = {
   },
   conventions: {
     assets: /^app\/Resources\/assets/,
-    ignored: [
-      /[\\/]_/,
-      'app/Resources/js-server/registration.js',
-      /-test.js$/,
-    ],
+    ignored: [/[\\/]_/, 'app/Resources/js-server/registration.js', /-test.js$/],
   },
   files: {
     javascripts: {
@@ -69,9 +66,7 @@ exports.config = {
           'app/Resources/js/**/**/*.json',
           'app/Resources/js/**/**/*.js',
         ],
-        'js/ckeditor/ckeditor.js': [
-          'bower_components/ckeditor/ckeditor.js',
-        ],
+        'js/ckeditor/ckeditor.js': ['bower_components/ckeditor/ckeditor.js'],
         'js/jquery.minicolors.js': [
           'bower_components/jquery-minicolors/jquery.minicolors.js',
         ],

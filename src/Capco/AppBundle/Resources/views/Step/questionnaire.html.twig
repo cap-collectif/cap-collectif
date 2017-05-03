@@ -47,11 +47,7 @@
             </p>
         </div>
     {% else %}
-        {{ react_intl_component('QuestionnaireStepPageApp', {
-            'props': props,
-            'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-           })
-        }}
+        {{ react_intl_component('QuestionnaireStepPageApp', {'props': props}) }}
     {% endif %}
 
 {% endblock %}

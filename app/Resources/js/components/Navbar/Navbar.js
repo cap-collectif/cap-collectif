@@ -28,7 +28,9 @@ const Navbar = React.createClass({
 
   componentDidMount() {
     window.addEventListener('resize', this.autocollapseNavbar);
-    this.autocollapseNavbar();
+    setTimeout(() => {
+      this.autocollapseNavbar();
+    }, 100);
   },
 
   componentWillUnmount() {
@@ -101,8 +103,7 @@ const Navbar = React.createClass({
     return (
       <Navigation
         id="main-navbar"
-        className="navbar navbar-default navbar-fixed-top"
-        style={{ overflow: moreItem ? 'visible' : 'hidden' }}>
+        className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
             <div className="container">

@@ -24,9 +24,5 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_intl_component('ProposalPageApp', {
-        'props': props,
-        'rendering': (app.user and not feature_is_active('server_side_rendering')) ? 'client_side' : 'both',
-      })
-    }}
+    {{ react_intl_component('ProposalPageApp', {'props': props}) }}
 {% endblock %}

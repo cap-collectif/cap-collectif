@@ -365,6 +365,7 @@ overblog_graphql:
             mutation: ~
 
 limenius_react:
+  default_rendering: "both"
   serverside_rendering:
       mode: "external_server"
       fail_loud: false # Fix warnings then set to true in dev

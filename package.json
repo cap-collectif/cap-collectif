@@ -33,9 +33,6 @@
     ],
     "*.twig": [
       "php bin/console lint:twig"
-    ],
-    "*.yml": [
-      "php bin/console lint:yaml"
     ]
   },
   "jest": {

@@ -25,6 +25,13 @@ class PageAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.page.title',
             ])
+            ->add('slug', null, [
+                'label' => 'admin.fields.page.slug',
+                'attr' => [
+                    'read-only' => true,
+                    'disabled' => true,
+                ],
+            ])
             ->add('body', CKEditorType::class, [
                 'label' => 'admin.fields.page.body',
                 'config_name' => 'admin_editor',
@@ -63,6 +70,9 @@ class PageAdmin extends Admin
         $listMapper
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.page.title',
+            ])
+            ->add('slug', null, [
+                'label' => 'admin.fields.page.slug',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,

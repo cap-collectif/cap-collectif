@@ -403,6 +403,7 @@ admin:
     page:
       title: Titre
       body: Contenu
+      slug: Slug
       is_enabled: Publié
       url: URL
       menu_items: Menus
