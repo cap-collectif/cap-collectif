@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { FormattedHTMLMessage } from 'react-intl';
 
@@ -14,17 +15,14 @@ const IdeasIndexHeader = React.createClass({
 
   render() {
     const { description } = this.props;
+
+    if (!description) return null;
     return (
       <div className="container container--custom">
-        {
-          description
-          ? <FormattedHTMLMessage message={description} />
-          : null
-        }
+        <FormattedHTMLMessage message={description} />
       </div>
     );
   },
-
 });
 
 export default IdeasIndexHeader;
