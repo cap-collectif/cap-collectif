@@ -835,6 +835,11 @@ class Project implements IndexableInterface
         }
     }
 
+    public function isClosed(): bool
+    {
+        return $this->getCurrentStep() ? $this->getCurrentStep()->isClosed() : true;
+    }
+
     public function getConsultationStepOpen()
     {
         foreach ($this->steps as $step) {
