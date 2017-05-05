@@ -181,7 +181,7 @@ const OpinionTabs = React.createClass({
                 <NavItem eventKey="versions" className="opinion-tabs">
                   <FormattedMessage
                     message={this.getIntlMessage('global.versions')}
-                    num={opinion.versions_count}
+                    num={opinion.versionsCount}
                   />
                 </NavItem>}
               {this.isCommentable() &&

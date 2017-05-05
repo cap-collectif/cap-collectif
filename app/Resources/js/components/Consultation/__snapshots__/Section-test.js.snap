@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Section /> renders correcty 1`] = `
+<div
+  className="anchor-offset text-center opinion-type__title level--0"
+  id="opinion-type--undefined"
+>
+  <br />
+</div>
+`;

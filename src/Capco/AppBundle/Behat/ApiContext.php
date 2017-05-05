@@ -150,7 +150,7 @@ EOF;
          {
            "title": "Nouveau titre",
            "body": "Mes modifications blablabla",
-           "OpinionType": 9
+           "OpinionType": "opinionType9"
          }
 EOF;
            $this->iSendARequestWithJson($method, $url, $json);

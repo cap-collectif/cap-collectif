@@ -11,8 +11,8 @@ Feature: Opinions Links
           "id": @integer@,
           "title": @string@,
 
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
+          "createdAt": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
 
           "versionsCount": @integer@,
           "sourcesCount": @integer@,

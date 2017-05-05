@@ -19,15 +19,18 @@ Capco\AppBundle\Entity\Opinion:
             groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews]
         createdAt:
             expose: true
+            serialized_name: createdAt
             type: DateTime
             groups: [Opinions, OpinionLinkPreviews]
         updatedAt:
             expose: true
             type: DateTime
+            serialized_name: updatedAt
             groups: [Opinions, OpinionLinkPreviews]
         versionsCount:
             expose: true
             type: integer
+            serialized_name: versionsCount
             groups: [Opinions, OpinionLinkPreviews]
         argumentsCount:
             expose: true
@@ -37,10 +40,12 @@ Capco\AppBundle\Entity\Opinion:
         sourcesCount:
             expose: true
             type: integer
+            serialized_name: sourcesCount
             groups: [Opinions, OpinionLinkPreviews]
         connectionsCount:
             expose: true
             type: integer
+            serialized_name: connectionsCount
             groups: [Opinions, OpinionLinkPreviews]
         appendices:
             expose: true

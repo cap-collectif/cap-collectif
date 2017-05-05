@@ -8,7 +8,7 @@ import environment from '../../createRelayEnvironment';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
 
-const ConsultationPropositionBox = React.createClass({
+export const ConsultationPropositionBox = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },

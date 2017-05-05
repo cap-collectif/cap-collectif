@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionRecursiveList /> renders correcty 1`] = `
+<div>
+  <SectionList
+    consultation={Object {}}
+    level={0}
+    section={Object {}}
+  />
+  <SectionList
+    consultation={Object {}}
+    level={0}
+    section={Object {}}
+  />
+</div>
+`;

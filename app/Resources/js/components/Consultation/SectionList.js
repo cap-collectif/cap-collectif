@@ -3,7 +3,7 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import Section from './Section';
 
-const SectionList = React.createClass({
+export const SectionList = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
     consultation: React.PropTypes.object.isRequired,
