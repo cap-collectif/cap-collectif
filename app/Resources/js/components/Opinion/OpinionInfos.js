@@ -110,7 +110,7 @@ const OpinionInfos = React.createClass({
 
   render() {
     return (
-      <p className="h5 opinion__user">
+      <p className="opinion__user">
         {this.renderAuthorName()}
         {' • '}
         {this.renderDate()}

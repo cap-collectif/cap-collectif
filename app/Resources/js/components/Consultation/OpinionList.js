@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
+import environment from '../../createRelayEnvironment';
+import Loader from '../Utils/Loader';
 
 export const OpinionList = React.createClass({
   propTypes: {
@@ -14,7 +16,7 @@ export const OpinionList = React.createClass({
 
   render() {
     const { section, consultation } = this.props;
-    console.log(this.props);
+    console.log(section);
     return (
       <div
         id={`opinions--test17${section.slug}`}
@@ -25,17 +27,11 @@ export const OpinionList = React.createClass({
               {section.contributionsCount} propositions
             </h2>
             <div className="pull-right  opinion__header__filter">
-              <NewOpinionButton
-                opinionTypeSlug={section.slug}
-                opinionTypeId={section.id}
-                stepId={consultation.id}
-                projectId={consultation.projectId}
-                label={'Proposer'}
-              />
+
               {section.contributionsCount > 1 &&
                 <select
                   className="form-control"
-                  style={{ marginLeft: 15 }}
+                  style={{ marginRight: 15 }}
                   onChange={(event: SyntheticInputEvent) => {
                     window.location.href = `${window.location.protocol}//${window.location.host}/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/types/sous-partie-1/${event.target.value}`;
                   }}>
@@ -47,14 +43,58 @@ export const OpinionList = React.createClass({
                   <option value="votes">Les plus votés</option>
                   <option value="comments">Les plus commentés</option>
                 </select>}
+              <NewOpinionButton
+                opinionTypeSlug={section.slug}
+                opinionTypeId={section.id}
+                stepId={consultation.id}
+                projectId={consultation.projectId}
+                label={'Proposer'}
+              />
             </div>
           </div>
         </div>
-        <ul className="media-list  opinion__list">
-          {section.contributions.map((opinion, index) => (
-            <Opinion key={index} opinion={opinion} />
-          ))}
-        </ul>
+        {section.contributionsCount > 0 &&
+          <ul className="media-list  opinion__list">
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
+              query OpinionListQuery($sectionId: ID!, $limit: Int!) {
+                contributionsBySection(sectionId: $sectionId, limit: $limit) {
+                  ...Opinion_opinion
+                }
+              }
+              `}
+              variables={{
+                sectionId: section.id,
+                limit: consultation.opinion_count_shown_by_section,
+              }}
+              render={({ error, props }) => {
+                if (error) {
+                  return <div>{error.message}</div>;
+                }
+                if (props) {
+                  return (
+                    <div>
+                      {props.contributionsBySection.map((opinion, index) => (
+                        <Opinion key={index} opinion={opinion} />
+                      ))}
+                    </div>
+                  );
+                }
+                return <Loader />;
+              }}
+            />
+          </ul>}
+        {section.contributionsCount >
+          consultation.opinion_count_shown_by_section &&
+          <div className="opinion  opinion__footer  box">
+            <a
+              href={section.url}
+              className="text-center"
+              style={{ display: 'block' }}>
+              Voir toutes les propositions
+            </a>
+          </div>}
       </div>
     );
   },
@@ -64,12 +104,10 @@ export default createFragmentContainer(OpinionList, {
   section: graphql`
     fragment OpinionList_section on Section {
       id
+      url
       slug
       color
       contributionsCount
-      contributions(limit: $limit) {
-        ...Opinion_opinion
-      }
     }
   `,
 });

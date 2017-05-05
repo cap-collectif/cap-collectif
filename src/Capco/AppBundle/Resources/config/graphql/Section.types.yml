@@ -45,3 +45,7 @@ Section:
                 type: "Boolean!"
             linkable:
                 type: "Boolean!"
+            url:
+                type: "String"
+                description: "The url of the section."
+                resolve: "@=resolver('section_url', [value])"

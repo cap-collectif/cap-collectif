@@ -1,3 +1,7 @@
+// @flow
+const baseUrl = `${typeof window !== 'undefined' ? window.location.protocol : 'http'}//${typeof window !== 'undefined' ? window.location.host : 'capco.test/'}`;
+
+export const graphQLUrl = `${baseUrl}/graphql/`;
 export default {
-  api: `${typeof window !== 'undefined' ? window.location.protocol : 'http'}//${typeof window !== 'undefined' ? window.location.host : 'capco.test/'}/api`,
+  api: `${baseUrl}/api`,
 };

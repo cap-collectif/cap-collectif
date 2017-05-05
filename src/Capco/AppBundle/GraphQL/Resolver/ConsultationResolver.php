@@ -2,17 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Source;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
@@ -95,12 +89,40 @@ class ConsultationResolver implements ContainerAwareInterface
         // return [];
     }
 
+    public function getContributionsBySection(Arg $arg)
+    {
+        $id = $arg->offsetGet('sectionId');
+        $type = $this->container->get('capco.opinion_type.repository')->find($id);
+
+        return $this->getSectionOpinions($type, $arg);
+    }
+
+    public function getSectionUrl(OpinionType $type)
+    {
+        // Stupid hack because no link between
+      if ($type->getOpinions()->count() === 0) {
+          return null;
+      }
+        $step = $type->getOpinions()->first()->getStep();
+        $project = $step->getProject();
+
+        return $this->container->get('router')->generate(
+          'app_consultation_show_opinions',
+          [
+              'projectSlug' => $project->getSlug(),
+              'stepSlug' => $step->getSlug(),
+              'opinionTypeSlug' => $type->getSlug(),
+          ],
+          UrlGeneratorInterface::ABSOLUTE_URL
+      );
+    }
+
     public function getSectionOpinions(OpinionType $type, Arg $arg)
     {
-        $limit = $argument->offsetGet('limit');
+        $limit = $arg->offsetGet('limit');
 
         if ($type->getOpinions()->count() === 0) {
-          return [];
+            return [];
         }
 
         // Stupid hack because no link between
@@ -115,18 +137,21 @@ class ConsultationResolver implements ContainerAwareInterface
               $type->getDefaultFilter()
           )
         ;
+
         return $opinions;
     }
 
     public function getSectionOpinionsCount(OpinionType $type): int
     {
         $repo = $this->container->get('capco.opinion.repository');
+
         return $repo->countByOpinionType($type->getId());
     }
 
     public function resolveConsultationSections(ConsultationStep $consultation, Arg $argument)
     {
         $sections = $consultation->getConsultationStepType()->getOpinionTypes();
+
         return $sections->filter(
             function ($section) {
                 return $section->getPosition() === 1 && $section->getParent() === null;

@@ -1,35 +1,35 @@
 // @flow
 import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { Panel } from 'react-bootstrap';
+// import { Panel } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
 import environment from '../../createRelayEnvironment';
-import ConsultationFilterForm from './ConsultationFilterForm';
+// import ConsultationFilterForm from './ConsultationFilterForm';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
 
 const ConsultationPropositionBox = React.createClass({
   propTypes: {
-    consultation: React.PropTypes.object.isRequired,
+    step: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { consultation } = this.props;
+    const { step } = this.props;
     return (
       <div>
-        <Panel>
+        {/* <Panel>
           <span>
             Filtres de recherche
           </span>
           <span className="pull-right">
             <ConsultationFilterForm />
           </span>
-        </Panel>
+        </Panel> */}
         <QueryRenderer
           environment={environment}
           query={graphql`
-          query ConsultationPropositionBoxQuery($consultationId: ID!, $limit: Int) {
+          query ConsultationPropositionBoxQuery($consultationId: ID!) {
             consultations(id: $consultationId) {
               sections {
                 ...SectionRecursiveList_sections
@@ -38,8 +38,7 @@ const ConsultationPropositionBox = React.createClass({
           }
           `}
           variables={{
-            consultationId: consultation.id,
-            limit: consultation.opinionCountShownBySection,
+            consultationId: step.id,
           }}
           render={({ error, props }) => {
             if (error) {
@@ -48,7 +47,7 @@ const ConsultationPropositionBox = React.createClass({
             if (props) {
               return (
                 <SectionRecursiveList
-                  consultation={consultation}
+                  consultation={step}
                   sections={props.consultations[0].sections}
                 />
               );

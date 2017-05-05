@@ -16,9 +16,10 @@ import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
 import ProposalPageApp from '../js/startup/ProposalPageApp';
 import QuestionnaireStepPageApp from '../js/startup/QuestionnaireStepPageApp';
 import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
-import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetApp';
+import ProposalVoteBasketWidgetApp
+  from '../js/startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from '../js/startup/AlertBoxApp';
-import StepInfosApp from '../js/startup/StepInfosApp';
+import ConsultationPageApp from '../js/startup/ConsultationPageApp';
 import ProposalListApp from '../js/startup/ProposalListApp';
 import ProposalsUserVotesPageApp from '../js/startup/ProposalsUserVotesPageApp';
 import IdeasIndexPageApp from '../js/startup/IdeasIndexPageApp';
@@ -26,9 +27,11 @@ import IdeaPageApp from '../js/startup/IdeaPageApp';
 import IdeasListApp from '../js/startup/IdeasListApp';
 import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
-import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
+import ProposalCreateFusionButtonApp
+  from '../js/startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
-import ProposalAdminSelectionsApp from '../js/startup/ProposalAdminSelectionsApp';
+import ProposalAdminSelectionsApp
+  from '../js/startup/ProposalAdminSelectionsApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
@@ -65,7 +68,7 @@ ReactOnRails.register({
   ProjectStatsPageApp,
   ProposalVoteBasketWidgetApp,
   AlertBoxApp,
-  StepInfosApp,
+  ConsultationPageApp,
   ProposalListApp,
   ProposalsUserVotesPageApp,
   PhoneProfileApp,

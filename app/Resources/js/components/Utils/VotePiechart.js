@@ -31,29 +31,29 @@ const VotePiechart = React.createClass({
       const Chart = require('react-google-charts').Chart; // eslint-disable-line
       return (
         <div className="opinion__chart" style={{ textAlign: 'center' }}>
-        <Chart
-          chartType="PieChart"
-          data={[
+          <Chart
+            chartType="PieChart"
+            data={[
               [{ type: 'string' }, { type: 'number' }],
               [this.getIntlMessage('vote.ok'), ok],
               [this.getIntlMessage('vote.mitige'), mitige],
               [this.getIntlMessage('vote.nok'), nok],
-          ]}
-          height={height}
-          width={width}
-          options={{
-            legend: 'none',
-            chartArea: {
-              left,
-              top,
-              width: '100%',
-              height: '85%',
-            },
-            colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
-            pieSliceText: 'value',
-            backgroundColor: 'transparent',
-          }}
-        />
+            ]}
+            height={height}
+            width={width}
+            options={{
+              legend: 'none',
+              chartArea: {
+                left,
+                top,
+                width: '100%',
+                height: '85%',
+              },
+              colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
+              pieSliceText: 'value',
+              backgroundColor: 'transparent',
+            }}
+          />
         </div>
       );
     }

@@ -2,8 +2,6 @@ import React from 'react';
 import { IntlMixin } from 'react-intl';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
-import ConsultationPropositionBox
-  from '../../Consultation/ConsultationPropositionBox';
 
 const StepInfos = React.createClass({
   propTypes: {
@@ -25,7 +23,6 @@ const StepInfos = React.createClass({
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
         </div>
-        <ConsultationPropositionBox consultation={step} />
       </div>
     );
   },

@@ -6,6 +6,7 @@ import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
 import OpinionInfos from '../Opinion/OpinionInfos';
 import UserAvatar from '../User/UserAvatar';
 import OpinionPreviewCounters from '../Opinion/OpinionPreviewCounters';
+import VotePiechart from '../Utils/VotePiechart';
 
 export const Opinion = React.createClass({
   propTypes: {
@@ -21,7 +22,9 @@ export const Opinion = React.createClass({
         className={`opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
         <div className="row">
           <div className="col-xs-12  col-sm-8  col-md-9  col-lg-10">
-            <div className="opinion__body box" style={{ textAlign: 'left' }}>
+            <div
+              className="opinion__body box excerpt"
+              style={{ textAlign: 'left' }}>
               <UserAvatar user={author} className="pull-left" />
               <div className="opinion__data">
                 <OpinionInfos rankingThreshold={0} opinion={opinion} />
@@ -34,7 +37,16 @@ export const Opinion = React.createClass({
               </div>
             </div>
           </div>
-          <div className="hidden-xs col-sm-4  col-md-3  col-lg-2" />
+          <div className="hidden-xs col-sm-4 col-md-3 col-lg-2">
+            <VotePiechart
+              top={10}
+              height={'90px'}
+              width={'145px'}
+              ok={opinion.votesCountOk}
+              nok={opinion.votesCountNok}
+              mitige={opinion.votesCountMitige}
+            />
+          </div>
         </div>
       </li>
     );
@@ -50,6 +62,9 @@ export default createFragmentContainer(
       title
       createdAt
       updatedAt
+      votesCountOk
+      votesCountNok
+      votesCountMitige
       votesCount
       versionsCount
       connectionsCount

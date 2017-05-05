@@ -100,7 +100,7 @@ exports.config = {
       babelrc: true,
       plugins: [
         // "add-module-exports",
-        ['relay', { modernOnly: true }],
+        ['relay'],
       ],
     },
     sass: {
