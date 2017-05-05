@@ -119,6 +119,7 @@
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",
     "redux-saga": "^0.11.1",
+    "relay-runtime": "dev",
     "sass-brunch": "^2.10.4",
     "uglify-js-brunch": "^2.10.0",
     "webpack": "^1.13.2",

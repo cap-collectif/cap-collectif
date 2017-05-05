@@ -13,7 +13,6 @@ export const SectionRecursiveList = React.createClass({
 
   render() {
     const { sections, consultation } = this.props;
-    console.log(this.props);
     return (
       <div>
         {sections.map((section, index) => (

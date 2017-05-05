@@ -16,7 +16,6 @@ export const OpinionList = React.createClass({
 
   render() {
     const { section, consultation } = this.props;
-    console.log(section);
     return (
       <div
         id={`opinions--test17${section.slug}`}
