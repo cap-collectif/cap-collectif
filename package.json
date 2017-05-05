@@ -64,6 +64,7 @@
     "babel-loader": "^6.3.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-display-name": "^2.0.0",
+    "babel-plugin-relay": "dev",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
@@ -131,7 +132,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "babel-plugin-relay": "dev",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-brunch": "^3.12.0",
