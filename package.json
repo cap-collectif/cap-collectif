@@ -11,7 +11,7 @@
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
-    "relay": "bin/console graphql:dump-schema --format graphqls && relay-compiler --src ./app/Resources/js --schema var/schema.graphqls",
+    "build-relay-schema": "bin/console graphql:dump-schema --format graphqls && relay-compiler --src ./app/Resources/js --schema var/schema.graphqls",
     "checkcs": "eslint app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
     "prettier": "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80 \"app/Resources/js/**/*.js\"",
