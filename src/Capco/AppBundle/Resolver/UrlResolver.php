@@ -15,33 +15,17 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver
 {
     protected $router;
     protected $manager;
-    protected $mediaExtension;
 
-    public function __construct(Router $router, Manager $manager, MediaExtension $mediaExtension)
+    public function __construct(Router $router, Manager $manager)
     {
         $this->router = $router;
         $this->manager = $manager;
-        $this->mediaExtension = $mediaExtension;
-    }
-
-    public function getMediaUrl($media)
-    {
-        try {
-            return $this->mediaExtension->path(
-            $media,
-            $this->getImageFormat()
-          );
-        } catch (RouteNotFoundException $e) {
-            // Avoid some SonataMedia problems
-          return '';
-        }
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -259,12 +243,5 @@ class UrlResolver
         }
 
         return '';
-    }
-
-    private function getImageFormat()
-    {
-        // $parent instanceof Post:
-        //   return 'post';
-        return 'avatar';
     }
 }

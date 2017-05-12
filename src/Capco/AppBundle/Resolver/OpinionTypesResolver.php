@@ -22,6 +22,32 @@ class OpinionTypesResolver
         $this->router = $router;
     }
 
+    public function getGroupedOpinionsForStep(ConsultationStep $step)
+    {
+        $limit = $step->getOpinionCountShownBySection();
+        $page = 1;
+        $roots = $step->getConsultationStepType()->getRootOpinionTypes();
+
+        $build = function ($tree) use (&$build, &$step, &$limit, &$page) {
+            $childrenTree = [];
+            foreach ($tree as $type) {
+                $node = $this->opinionTypeRepo->getAsArrayById($type->getId());
+                $node['opinions'] = $this->opinionRepo
+                    ->getByOpinionTypeAndConsultationStepOrdered($step, $type->getId(), $limit, $page, $type->getDefaultFilter())
+                ;
+                $node['total_opinions_count'] = count($node['opinions']);
+                if ($type->getChildren()->count() > 0) {
+                    $node['__children'] = $build($type->getChildren());
+                }
+                $childrenTree[] = $node;
+            }
+
+            return $childrenTree;
+        };
+
+        return $build($roots);
+    }
+
     public function getAllForConsultationStepType(ConsultationStepType $ct)
     {
         if ($ct === null) {

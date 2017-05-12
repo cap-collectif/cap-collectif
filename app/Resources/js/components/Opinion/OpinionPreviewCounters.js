@@ -15,9 +15,6 @@ const OpinionPreviewCounters = React.createClass({
     if (opinion.parent) {
       return opinion.parent.type;
     }
-    if (opinion.section) {
-      return opinion.section;
-    }
     return opinion.type;
   },
 
@@ -26,56 +23,34 @@ const OpinionPreviewCounters = React.createClass({
     const type = this.getType();
     const counters = [];
     if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
-      counters.push(
-        <FormattedMessage
-          message={this.getIntlMessage('global.votes')}
-          num={opinion.votesCount}
-        />,
-      );
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.votes')} num={opinion.votes_total} />);
     }
     if (!opinion.parent && type.versionable) {
-      counters.push(
-        <FormattedMessage
-          message={this.getIntlMessage('global.versions')}
-          num={opinion.versionsCount}
-        />,
-      );
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.versions')} num={opinion.versions_count} />);
     }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
-      counters.push(
-        <FormattedMessage
-          message={this.getIntlMessage('global.arguments')}
-          num={opinion.argumentsCount}
-        />,
-      );
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.arguments')} num={opinion.argumentsCount} />);
     }
     if (type.sourceable) {
-      counters.push(
-        <FormattedMessage
-          message={this.getIntlMessage('global.sources')}
-          num={opinion.sourcesCount}
-        />,
-      );
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.sources')} num={opinion.sources_count} />);
     }
     if (!opinion.parent && type.linkable) {
-      counters.push(
-        <FormattedMessage
-          message={this.getIntlMessage('global.links')}
-          num={opinion.connectionsCount}
-        />,
-      );
+      counters.push(<FormattedMessage message={this.getIntlMessage('global.links')} num={opinion.connections_count} />);
     }
     return (
       <p className="opinion__votes excerpt small">
-        {counters.map((counter, index) => {
-          if (index < counters.length - 1) {
-            return <span key={index}>{counter}<span> • </span></span>;
-          }
-          return <span key={index}>{counter}</span>;
-        })}
+        {
+          counters.map((counter, index) => {
+            if (index < (counters.length - 1)) {
+              return <span key={index}>{counter}<span> • </span></span>;
+            }
+            return <span key={index}>{counter}</span>;
+          })
+        }
       </p>
     );
   },
+
 });
 
 export default OpinionPreviewCounters;

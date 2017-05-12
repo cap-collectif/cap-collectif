@@ -6,17 +6,10 @@ User:
             id:
                 type: "ID!"
                 description: "The id of the user."
-            vip:
-                type: "Boolean!"
-            media:
-                type: "Media"
-                description: "The profile picture of the user."
             email:
                 type: "String!"
                 description: "email."
                 resolve: "@=resolver('user_email', [value])"
-            displayName:
-                type: "String!"
             username:
                 type: "String!"
                 description: "Username of the user."

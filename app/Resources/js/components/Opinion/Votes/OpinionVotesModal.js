@@ -25,12 +25,15 @@ const OpinionVotesModal = React.createClass({
     const { opinion } = this.props;
     const opinionId = opinion.parent ? opinion.parent.id : opinion.id;
     const versionId = opinion.parent ? opinion.id : null;
-    OpinionActions.loadAllVotes(opinionId, versionId).then(votes => {
-      this.setState({
-        isLoading: false,
-        votes,
-      });
-    });
+    OpinionActions
+      .loadAllVotes(opinionId, versionId)
+      .then((votes) => {
+        this.setState({
+          isLoading: false,
+          votes,
+        });
+      })
+    ;
   },
 
   show() {
@@ -43,17 +46,14 @@ const OpinionVotesModal = React.createClass({
 
   render() {
     const { opinion } = this.props;
-    const moreVotes = opinion.votesCount > 5 ? opinion.votesCount - 5 : null;
+    const moreVotes = opinion.votes_total > 5 ? opinion.votes_total - 5 : null;
     if (!moreVotes) {
       return null;
     }
 
     return (
       <span>
-        <span
-          id="opinion-votes-show-all"
-          onClick={this.show}
-          className="opinion__votes__more__link text-center">
+        <span id="opinion-votes-show-all" onClick={this.show} className="opinion__votes__more__link text-center">
           {`+${moreVotes}`}
         </span>
         <Modal
@@ -62,25 +62,21 @@ const OpinionVotesModal = React.createClass({
           onHide={this.close}
           bsSize="large"
           className="opinion__votes__more__modal"
-          aria-labelledby="opinion-votes-more-title">
+          aria-labelledby="opinion-votes-more-title"
+        >
           <Modal.Header closeButton>
             <Modal.Title id="opinion-votes-more-title">
-              {this.getIntlMessage('opinion.votes.modal.title')}
+              { this.getIntlMessage('opinion.votes.modal.title') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Loader show={this.state.isLoading}>
               <Row>
-                {this.state.votes.map((vote, index) => {
-                  return (
-                    <UserBox
-                      key={index}
-                      user={vote.user}
-                      username={vote.username}
-                      className="opinion__votes__userbox"
-                    />
-                  );
-                })}
+                {
+                  this.state.votes.map((vote, index) => {
+                    return <UserBox key={index} user={vote.user} username={vote.username} className="opinion__votes__userbox" />;
+                  })
+                }
               </Row>
             </Loader>
           </Modal.Body>
@@ -91,6 +87,7 @@ const OpinionVotesModal = React.createClass({
       </span>
     );
   },
+
 });
 
 export default OpinionVotesModal;

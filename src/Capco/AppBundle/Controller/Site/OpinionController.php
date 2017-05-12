@@ -16,6 +16,22 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 class OpinionController extends Controller
 {
     /**
+     * @Template("CapcoAppBundle:Consultation:show_opinions.html.twig")
+     */
+    public function showOpinionsAction(Project $project, ConsultationStep $currentStep)
+    {
+        $tree = $this->get('capco.opinion_types.resolver')
+            ->getGroupedOpinionsForStep($currentStep);
+
+        return [
+            'blocks' => $tree,
+            'project' => $project,
+            'currentStep' => $currentStep,
+            'opinionSortOrders' => Opinion::$sortCriterias,
+        ];
+    }
+
+    /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_project_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random"}, defaults={"page" = 1})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+"}, defaults={"page" = 1})

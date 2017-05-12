@@ -18,6 +18,14 @@ module.exports = {
     jQuery: true,
     __SERVER__: true,
   },
+  // parserOptions: {
+  //   ecmaVersion: 2017,
+  //   sourceType: 'module',
+  //   ecmaFeatures: {
+  //     jsx: true,
+  //     experimentalObjectRestSpread: true
+  //   }
+  // },
   rules: {
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

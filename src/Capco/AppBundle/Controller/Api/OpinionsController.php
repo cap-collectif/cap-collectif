@@ -35,6 +35,17 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class OpinionsController extends FOSRestController
 {
     /**
+     * Get an opinion.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Get an opinion",
+     *  statusCodes={
+     *    200 = "Returned when successful",
+     *    404 = "Returned when opinion is not found",
+     *  }
+     * )
+     *
      * @Get("/opinions/{id}")
      * @ParamConverter("opinion", options={
      *  "mapping": {"id": "id"},

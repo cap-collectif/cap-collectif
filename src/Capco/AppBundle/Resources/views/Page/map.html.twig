@@ -1,0 +1,23 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block body %}
+  <div class="container">
+    <div id="dataviz_container" style="width: 100%">
+      <iframe id="dataviz" src="/pc_carte_legislatives/front/index.html" frameborder="no" scrolling="no" width="100%"></iframe>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+  $('#dataviz').iFrameResize({
+	log:false,
+  minHeight: 1000,
+  initCallback: function() {
+		  $('#dataviz_container').css('opacity','1');
+	},
+	});
+
+</script>
+{% endblock %}

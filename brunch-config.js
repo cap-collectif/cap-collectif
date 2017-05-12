@@ -22,11 +22,7 @@ exports.config = {
   },
   conventions: {
     assets: /^app\/Resources\/assets/,
-    ignored: [
-      /^app\/Resources\/scss\/(modules|base)/,
-      'app/Resources/js-server/registration.js',
-      /-test.js$/,
-    ],
+    ignored: [/[\\/]_/, 'app/Resources/js-server/registration.js', /-test.js$/],
   },
   files: {
     javascripts: {
@@ -53,6 +49,9 @@ exports.config = {
           'bower_components/intl/Intl.js',
           'bower_components/intl/locale-data/jsonp/fr.js',
           // end
+
+          'bower_components/iframe-resizer/index.js',
+          'bower_components/iframe-resizer/js/iframeResizer.js',
 
           /^node_modules/,
 
@@ -98,10 +97,6 @@ exports.config = {
   plugins: {
     babel: {
       babelrc: true,
-      plugins: [
-        // "add-module-exports",
-        ['relay'],
-      ],
     },
     sass: {
       mode: 'native',

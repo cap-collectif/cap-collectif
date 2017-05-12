@@ -3,6 +3,7 @@ import React from 'react';
 import OpinionTypeLabel from './OpinionTypeLabel';
 
 export default class OpinionPreviewTitle extends React.Component {
+
   getType() {
     const opinion = this.props.opinion;
     if (opinion.parent) {
@@ -12,16 +13,25 @@ export default class OpinionPreviewTitle extends React.Component {
   }
 
   render() {
-    const { link, opinion, showTypeLabel } = this.props;
-    let url = '';
-    if (link) {
-      url = opinion._links ? opinion._links.show : opinion.url;
-    }
+    const {
+      link,
+      opinion,
+      showTypeLabel,
+    } = this.props;
     return (
       <h3 className="opinion__title">
-        {showTypeLabel ? <OpinionTypeLabel type={this.getType()} /> : null}
-        {showTypeLabel ? ' ' : null}
-        {link ? <a href={url}>{opinion.title}</a> : opinion.title}
+        {showTypeLabel
+          ? <OpinionTypeLabel type={this.getType()} />
+          : null
+        }
+        {showTypeLabel
+          ? ' '
+          : null
+        }
+        {link
+          ? <a href={opinion._links.show}>{ opinion.title }</a>
+          : opinion.title
+        }
       </h3>
     );
   }

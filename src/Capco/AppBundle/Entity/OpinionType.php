@@ -608,11 +608,6 @@ class OpinionType
         return $this;
     }
 
-    public function isContribuable(): bool
-    {
-        return $this->isEnabled;
-    }
-
     public function getAllAppendixTypes()
     {
         $types = new ArrayCollection();

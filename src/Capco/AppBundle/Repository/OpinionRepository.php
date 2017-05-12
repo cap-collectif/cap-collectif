@@ -286,19 +286,6 @@ class OpinionRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countByOpinionType($opinionTypeId): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(o)')
-            ->andWhere('o.isEnabled = true')
-            ->andWhere('o.OpinionType = :opinionTypeId')
-            ->setParameter('opinionTypeId', $opinionTypeId);
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     /**
      * Get opinions by opinionType and consultation step.
      *

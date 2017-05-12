@@ -31,7 +31,6 @@ Capco\AppBundle\Entity\OpinionVersion:
         createdAt:
             expose: true
             type: DateTime
-            # serialized_name: createdAt
             groups: [OpinionVersions, OpinionVersionPreviews]
         answer:
             expose: true
@@ -39,7 +38,6 @@ Capco\AppBundle\Entity\OpinionVersion:
         updatedAt:
             expose: true
             type: DateTime
-            # serialized_name: updatedAt
             groups: [OpinionVersions, OpinionVersionPreviews]
         votesCountNok:
             expose: true
@@ -73,7 +71,6 @@ Capco\AppBundle\Entity\OpinionVersion:
         sourcesCount:
             expose: true
             type: integer
-            serialized_name: sourcesCount
             groups: [OpinionVersions, OpinionVersionPreviews]
         author:
             expose: true
@@ -93,7 +90,7 @@ Capco\AppBundle\Entity\OpinionVersion:
             type: boolean
             groups: [OpinionVersions]
         getVotesCountAll:
-            serialized_name: votesCount
+            serialized_name: votes_total
             type: integer
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentForCount:
