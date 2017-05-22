@@ -28,13 +28,16 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
             ->createQueryBuilder('se');
 
         if (!$input->getOption('force')) {
-            $elements->where('se.linkedDataClass IS NOT NULL')
+            $elements->andWhere('se.linkedDataClass IS NOT NULL')
                 ->andWhere('se.linkedDataId IS NOT NULL');
         }
 
-        $elements->getQuery()->getResult();
+        $elements = $elements->getQuery()->getResult();
 
         foreach ($elements as $el) {
+            if (empty($el->getLinkedDataClass())) {
+                continue;
+            }
             $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
 
             $url = $container->get('capco.url.resolver')->getObjectUrl($contribution, false);
