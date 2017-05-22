@@ -87,7 +87,6 @@ fragment reportInfos on Reporting {
 fragment argumentInfos on Argument {
   ...relatedInfos
   id
-  ...authorInfos
   type
   body
   createdAt
@@ -101,7 +100,6 @@ fragment argumentInfos on Argument {
 fragment sourceInfos on Source {
   ...relatedInfos
   id
-  ...authorInfos
   body
   createdAt
   updatedAt

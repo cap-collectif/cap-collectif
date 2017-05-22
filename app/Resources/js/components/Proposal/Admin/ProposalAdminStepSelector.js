@@ -65,6 +65,7 @@ export const ProposalAdminStepSelector = React.createClass({
               <Col md={3} xs={12} style={{ marginTop: 6 }}>
                 <FormControl
                   componentClass="select"
+                  className="status-selector"
                   style={{ marginBottom: 0 }}
                   value={step.status ? step.status.id : -1}
                   onChange={(e: SyntheticInputEvent) => {

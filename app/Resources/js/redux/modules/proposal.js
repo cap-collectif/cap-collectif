@@ -461,7 +461,8 @@ export const updateProposalStatus = (
     .then(status => {
       dispatch(updateProposalCollectStatusSucceed(proposalId, stepId, status));
     })
-    .catch(() => {
+    .catch(e => {
+      console.log(e); // eslint-disable-line
       dispatch(updateProposalCollectStatusSucceed(proposalId, stepId));
     });
 };
@@ -491,9 +492,10 @@ export const updateStepStatus = (
 ) => {
   if (step.type === 'selection') {
     updateSelectionStatus(dispatch, proposalId, step.id, value);
-  } else {
-    updateProposalStatus(dispatch, proposalId, step.id, value);
+    return;
   }
+
+  updateProposalStatus(dispatch, proposalId, step.id, value);
 };
 
 export const unSelectStep = (
