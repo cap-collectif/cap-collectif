@@ -14,6 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class PageController extends Controller
 {
     /**
+     * @Route("/carte-election-legislatives")
+     * @Template("CapcoAppBundle:Page:map.html.twig")
+     */
+    public function mapAction()
+    {
+        return [];
+    }
+
+    /**
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")

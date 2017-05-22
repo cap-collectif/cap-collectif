@@ -54,6 +54,9 @@ exports.config = {
           'bower_components/intl/locale-data/jsonp/fr.js',
           // end
 
+          'bower_components/iframe-resizer/index.js',
+          'bower_components/iframe-resizer/js/iframeResizer.js',
+
           /^node_modules/,
 
           'bower_components/fetch/fetch.js',
