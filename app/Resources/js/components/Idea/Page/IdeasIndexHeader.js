@@ -15,11 +15,11 @@ const IdeasIndexHeader = React.createClass({
 
   render() {
     const { description } = this.props;
-
-    if (!description) return null;
     return (
-      <div className="container container--custom">
-        <FormattedHTMLMessage message={description} />
+      <div
+        className="container container--custom"
+        style={{ display: description ? 'block' : 'none' }}>
+        {description && <FormattedHTMLMessage message={description} />}
       </div>
     );
   },
