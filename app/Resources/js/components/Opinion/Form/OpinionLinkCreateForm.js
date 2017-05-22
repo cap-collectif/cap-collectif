@@ -83,7 +83,7 @@ export const OpinionLinkCreateForm = React.createClass({
             name={field.title}
             label={field.title}
             type="editor"
-            id={`opinion_appendix-${index}`}
+            id={`opinion_appendix-${index + 1}`}
           />
         ))}
       </form>

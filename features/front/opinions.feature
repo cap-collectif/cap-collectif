@@ -7,6 +7,7 @@ Feature: Opinions
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
+    And I wait 2 seconds
     When I click the "#btn-add--les-causes-1" element
     And I fill in the following:
       | opinion_title | Titre                           |
@@ -21,6 +22,7 @@ Feature: Opinions
     And I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
+    And I wait 2 seconds
     Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
 
   @javascript @security
@@ -37,6 +39,7 @@ Feature: Opinions
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
+    And I wait 2 seconds
     When I click the "#btn-add--les-causes-1" element
     Then I should see "Connectez-vous pour contribuer"
 

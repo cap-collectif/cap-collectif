@@ -50,7 +50,7 @@ Feature: Consultations
       When I send a GraphQL request:
       """
 query OpinionListQuery {
-      contributionsBySection(sectionId: "15", limit: 5) {
+      contributionsBySection(sectionId: "opinionType12", limit: 5) {
           ...Opinion_opinion
           id
         }
