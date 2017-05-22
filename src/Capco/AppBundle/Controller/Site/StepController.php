@@ -473,7 +473,7 @@ class StepController extends Controller
 
         $stepProps = $serializer->serialize([
             'step' => $currentStep,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'UserVotes']));
+        ], 'json', SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes']));
 
         $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
             'project' => $project,

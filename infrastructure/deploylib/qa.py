@@ -98,7 +98,7 @@ def save_fixtures_image(tag='latest', publish='false'):
 @task(environments=['local'])
 def blackfire_curl(url):
     "Blackfire curl"
-    local('docker exec -i capco_application_1 blackfire --client-id=$BLACKFIRE_CLIENT_ID --client-token=$BLACKFIRE_CLIENT_TOKEN curl ' + url)
+    local('eval "$(docker-machine env dinghy)" && docker exec -i capco_application_1 blackfire --client-id=$BLACKFIRE_CLIENT_ID --client-token=$BLACKFIRE_CLIENT_TOKEN curl ' + url)
 
 
 @task(environments=['local'])

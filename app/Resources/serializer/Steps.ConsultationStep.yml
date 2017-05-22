@@ -11,6 +11,10 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
            type: string
            groups: [ConsultationSteps]
            serialized_name: descriptionHelpText
+        opinionCountShownBySection:
+          expose: true
+          type: integer
+          groups: [ConsultationSteps]
     virtual_properties:
         getProjectId:
             serialized_name: projectId

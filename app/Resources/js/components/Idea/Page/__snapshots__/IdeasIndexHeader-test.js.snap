@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeasIndexHeader /> should render empty container when description is not provided 1`] = `null`;
+
+exports[`<IdeasIndexHeader /> should render ideas index description when provided 1`] = `
+<div
+  className="container container--custom"
+>
+  <FormattedHTMLMessage
+    message="<p>blabla</p>"
+    tagName="span"
+  />
+</div>
+`;

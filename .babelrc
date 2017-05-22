@@ -1,6 +1,6 @@
 {
   "presets": ["react", "flow", "latest", "stage-0"],
   "plugins": [
-    "add-module-exports"
-  ]
+    "relay",
+  ],
 }

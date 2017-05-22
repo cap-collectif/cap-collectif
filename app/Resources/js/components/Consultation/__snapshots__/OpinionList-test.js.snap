@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionList /> renders correcty 1`] = `
+<div
+  className="anchor-offset block  block--bordered"
+  id="opinions--test17undefined"
+>
+  <div
+    className="opinion  opinion--undefined opinion--default"
+  >
+    <div
+      className="opinion__header  opinion__header--mobile-centered"
+    >
+      <h2
+        className="pull-left  h4  opinion__header__title"
+      >
+         propositions
+      </h2>
+      <div
+        className="pull-right  opinion__header__filter"
+      >
+        <Connect(NewOpinionButton)
+          label="Proposer"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

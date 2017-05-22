@@ -90,8 +90,6 @@ RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire
     echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/fpm/conf.d/20-blackfire.ini && \
     echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
 
-# Install blackfire agent to profile CLI and url
-
 # Install blackfire
 RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
@@ -138,7 +136,7 @@ COPY nginx/run                  /etc/service/nginx/run
 COPY php-fpm/run                /etc/service/php-fpm/run
 COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
-# COPY blackfire/run              /etc/service/blackfire/run # Wait for credentials
+COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY nodejs/run                 /etc/service/nodejs/run
 

@@ -28,23 +28,22 @@
         'roles': app.user.roles,
       }
     : null,
-  }
-} %}
-{% set state = state|merge({
-    'project': {
-      'visibleProjects': [],
-      'currentProjectStepById': currentStep.id|default(null),
-      'currentProjectById': project.id|default(null),
-      'projectsById': list_projectsById(),
-      'projectTypes': projectReducerData.projectTypes|default([]),
-      'page': projectReducerData.page|default(null),
-      'limit': projectReducerData.limit|default(null),
-      'orderBy': projectReducerData.orderBy|default(null),
-      'term': projectReducerData.term|default(null),
-      'type': projectReducerData.type|default(null),
-      'theme': projectReducerData.theme|default(null),
-    }
-  })
+  },
+  'project': {
+    'visibleProjects': [],
+    'currentProjectStepById': currentStep.id|default(null),
+    'currentProjectById': project.id|default(null),
+    'projectsById': list_projectsById(),
+    'projectTypes': projectReducerData.projectTypes|default([]),
+    'page': projectReducerData.page|default(null),
+    'limit': projectReducerData.limit|default(null),
+    'orderBy': projectReducerData.orderBy|default(null),
+    'term': projectReducerData.term|default(null),
+    'type': projectReducerData.type|default(null),
+    'theme': projectReducerData.theme|default(null)
+  },
+}
 %}
+
 {% set state = state|merge(data is defined ? data : {}) %}
 {{ redux_store('appStore', state) }}

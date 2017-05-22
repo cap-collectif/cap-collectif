@@ -7,6 +7,11 @@ services:
   capco.resolver.consultations:
       class: Capco\AppBundle\GraphQL\Resolver\ConsultationResolver
       tags:
+          - { name: overblog_graphql.resolver, alias: "section_url", method: "getSectionUrl" }
+          - { name: overblog_graphql.resolver, alias: "contributionsBySection", method: "getContributionsBySection" }
+          - { name: overblog_graphql.resolver, alias: "section_contributionsCount", method: "getSectionOpinionsCount" }
+          - { name: overblog_graphql.resolver, alias: "section_contributions", method: "getSectionOpinions" }
+          - { name: overblog_graphql.resolver, alias: "section_sections", method: "getSectionChildren" }
           - { name: overblog_graphql.resolver, alias: "consultation", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "consultation_contributions", method: "resolveContributions" }
           - { name: overblog_graphql.resolver, alias: "proposition_section", method: "resolvePropositionSection" }
@@ -47,4 +52,3 @@ services:
         - { name: overblog_graphql.resolver, alias: "user_profileUrl", method: "resolveProfileUrl" }
         - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
         - { name: overblog_graphql.resolver, alias: "user_userType", method: "resolveType" }
-

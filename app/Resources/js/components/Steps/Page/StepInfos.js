@@ -4,7 +4,6 @@ import CountersNav from './CountersNav';
 import StepText from './StepText';
 
 const StepInfos = React.createClass({
-  displayName: 'StepInfos',
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },
@@ -27,7 +26,6 @@ const StepInfos = React.createClass({
       </div>
     );
   },
-
 });
 
 export default StepInfos;

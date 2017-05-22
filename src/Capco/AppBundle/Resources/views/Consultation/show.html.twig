@@ -21,7 +21,6 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-
     {% if currentStep.isClosed %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'step.consultation.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.consultation.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
@@ -36,10 +35,7 @@
 
     {% block content %}
         <h2 class="h2">{{ currentStep.title }}</h2>
-
-        {{ react_intl_component('StepInfosApp', { 'props': stepProps }) }}
-
-        {{ render(controller('CapcoAppBundle:Site/Opinion:showOpinions', {'project': project.id, 'currentStep': currentStep})) }}
+        {{ react_intl_component('ConsultationPageApp', { 'props': stepProps }) }}
     {% endblock %}
 {% endblock %}
 

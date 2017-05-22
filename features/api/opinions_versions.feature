@@ -40,7 +40,7 @@ Feature: Opinions Versions
             "has_user_reported": @boolean@
           },
 
-          "sources_count": @integer@,
+          "sourcesCount": @integer@,
 
           "argumentsCount": @integer@,
           "arguments_yes_count": @integer@,
@@ -51,7 +51,7 @@ Feature: Opinions Versions
 
           "ranking": "expr(value === null || value > 0)",
 
-          "votes_total": @integer@,
+          "votesCount": @integer@,
           "votes_nok": @integer@,
           "votes_ok": @integer@,
           "votes_mitige": @integer@,
@@ -96,13 +96,13 @@ Feature: Opinions Versions
         "argumentsCount": @integer@,
 
         "sources": @...@,
-        "sources_count": @integer@,
+        "sourcesCount": @integer@,
 
         "votes": @...@,
         "votes_nok": @integer@,
         "votes_ok": @integer@,
         "votes_mitige": @integer@,
-        "votes_total": @integer@,
+        "votesCount": @integer@,
 
         "parent": {
           "isContribuable": @boolean@,

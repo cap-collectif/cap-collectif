@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec /usr/bin/blackfire-agent --socket tcp://0.0.0.0:8707 --config="/dev/null" --log-level="1" --server-id=$BLACKFIRE_SERVER_ID --server-token=$BLACKFIRE_SERVER_TOKEN
+exec /usr/bin/blackfire-agent --socket tcp://0.0.0.0:8707 --config="/dev/null" --log-level="4" --server-id=$BLACKFIRE_SERVER_ID --server-token=$BLACKFIRE_SERVER_TOKEN

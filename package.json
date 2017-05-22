@@ -11,6 +11,11 @@
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
+    "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.graphql",
+    "build-relay-schema:watch": "relay-compiler --watch --src ./app/Resources/js --schema schema.graphql",
+    "dump-graphql-schema": "bin/console graphql:dump-schema --file schema.graphql --format graphqls",
+    "relay": "yarn run dump-graphql-schema && yarn run build-relay-schema",
+    "relay:watch": "yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
     "checkcs": "eslint app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
     "prettier": "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80 \"app/Resources/js/**/*.js\"",
@@ -59,6 +64,7 @@
     "babel-loader": "^6.3.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-display-name": "^2.0.0",
+    "babel-plugin-relay": "dev",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
@@ -106,6 +112,7 @@
     "react-on-rails": "^6.6.0",
     "react-radio": "^2.1.1",
     "react-redux": "^5.0.3",
+    "react-relay": "dev",
     "react-router": "^2.7.0",
     "react-router-bootstrap": "^0.23.1",
     "react-select": "1.0.0-rc.2",
@@ -117,6 +124,7 @@
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",
     "redux-saga": "^0.11.1",
+    "relay-runtime": "dev",
     "sass-brunch": "^2.10.4",
     "uglify-js-brunch": "^2.10.0",
     "webpack": "^1.13.2",
@@ -138,6 +146,7 @@
     "flow-coverage-report": "^0.3.0",
     "jest": "^19.0.2",
     "jest-serializer-enzyme": "^1.0.0",
-    "react-addons-test-utils": "^15.4.2"
+    "react-addons-test-utils": "^15.4.2",
+    "relay-compiler": "dev"
   }
 }

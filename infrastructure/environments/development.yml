@@ -1,7 +1,7 @@
 application:
     environment:
         DOCKER_GID: 100
-        BLACKFIRE_SERVER_ID: c5118c2f-055f-4385-9c8a-ac31955ffb20
+        BLACKFIRE_SERVER_ID: 638f0bb1-1c5a-4f7c-b6e4-590c0602fb79
         BLACKFIRE_SERVER_TOKEN: ***REMOVED***
         BLACKFIRE_CLIENT_ID: ***REMOVED***
         BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
