@@ -1,3 +1,4 @@
+// @flow
 import { Diff } from 'diff';
 
 function removeEmpty(array) {
@@ -24,27 +25,6 @@ function everythingHasChanged(diff) {
   return !!changed;
 }
 
-function escapeChars(text) {
-  return text
-    .replace(/è/g, '&egrave;')
-    .replace(/é/g, '&eacute;')
-    .replace(/ê/g, '&ecirc;')
-    .replace(/’/g, '&rsquo;')
-    .replace(/'/g, '&#39;')
-    .replace(/'/g, '&#39;')
-    .replace(/'/g, '&#39;')
-    .replace(/à/g, '&agrave;')
-    .replace(/«/g, '&laquo;')
-    .replace(/°/g, '&deg;')
-    .replace(/»/g, '&raquo;')
-    .replace(/ç/g, '&ccedil;')
-    .replace(/û/g, '&ucirc;')
-    .replace(/ù/g, '&ugrave;')
-    .replace(/œ/g, '&oelig;')
-    .replace(/»/g, '&raquo;')
-    .replace(/»/g, '&raquo;');
-}
-
 class CustomDiff extends Diff {
   tokenize(value) {
     let strippedValue = strip(value);
@@ -58,7 +38,9 @@ class CustomDiff extends Diff {
   pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
-    const diff = this.diff(escapeChars(oldValue), escapeChars(newValue));
+    const oldV = $('<div/>').text(oldValue).html();
+    const newV = $('<div/>').text(newValue).html();
+    const diff = this.diff(oldV, newV);
     // All text has been replaced
     if (everythingHasChanged(diff)) {
       return `<del style="color: red; text-decoration: line-through">${oldValue}</del><ins style="color: green;">${newValue}</ins>`;
