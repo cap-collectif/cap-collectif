@@ -1,0 +1,11 @@
+ContributionsConnection:
+    type: relay-connection
+    config:
+        nodeType: Opinion
+        # connectionFields:
+            # hasNextPage:
+            #     type: Boolean
+            #     resolve: false
+            # totalCount:
+            #     type: Int
+                # resolve: '@=resolver("connection")'

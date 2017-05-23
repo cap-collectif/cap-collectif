@@ -7,6 +7,7 @@ services:
   capco.resolver.consultations:
       class: Capco\AppBundle\GraphQL\Resolver\ConsultationResolver
       tags:
+          - { name: overblog_graphql.resolver, alias: "contributionsRelay", method: "getContributionsRelay" }
           - { name: overblog_graphql.resolver, alias: "section_url", method: "getSectionUrl" }
           - { name: overblog_graphql.resolver, alias: "contributionsBySection", method: "getContributionsBySection" }
           - { name: overblog_graphql.resolver, alias: "section_contributionsCount", method: "getSectionOpinionsCount" }

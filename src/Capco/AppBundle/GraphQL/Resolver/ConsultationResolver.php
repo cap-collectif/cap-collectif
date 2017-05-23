@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Model\CreatableInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -42,6 +43,33 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         throw new UserError('Could not resolve type of Contribution.');
+    }
+
+    public function getContributionsRelay(Arg $args)
+    {
+        $paginator = new Paginator(function ($offset, $limit) use ($args) {
+            $consultationId = $args->offsetGet('consultation');
+            $repo = $this->container->get('capco.opinion.repository');
+            $criteria = [
+            'step' => $consultationId,
+            'isEnabled' => true,
+            'expired' => false,
+            'isTrashed' => false,
+          ];
+            $orderBy = [];
+
+            return $repo->findBy($criteria, $orderBy, $limit, $offset);
+        });
+
+        return $paginator->forward($args);
+      //   // new Arg(
+      //   //     [
+      //   //       'first' => 1,
+      //   //       'after' => base64_encode('arrayconnection:2')
+      //   //     ]
+      //   //   )
+      // // );
+      //   return $result;
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool

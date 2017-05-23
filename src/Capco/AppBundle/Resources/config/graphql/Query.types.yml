@@ -29,6 +29,25 @@ Query:
                         description: "Returns all contributions of the provided consultation."
                         type: "ID!"
                 resolve: "@=resolver('contributions', [args])"
+            contributionsRelay:
+                type: ContributionsConnection
+                args:
+                    consultation:
+                        type: "Int!"
+                        description: "Returns contributions of the provided consultation."
+                    after:
+                        type: "String"
+                        description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                        type: "Int"
+                        description: "Returns the first n elements from the list."
+                    before:
+                        type: "String"
+                        description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                        type: "Int"
+                        description: "Returns the last n elements from the list."
+                resolve: '@=resolver("contributionsRelay", [args])'
             contributionsBySection:
                 type: "[Opinion]"
                 args:
