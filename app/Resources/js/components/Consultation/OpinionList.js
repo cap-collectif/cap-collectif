@@ -30,7 +30,7 @@ export const OpinionList = React.createClass({
               {section.contributionsCount > 1 &&
                 <select
                   className="form-control"
-                  style={{ marginRight: 15 }}
+                  style={{ marginRight: section.contribuable ? 15 : 0 }}
                   onChange={(event: SyntheticInputEvent) => {
                     window.location.href = `${window.location.protocol}//${window.location.host}/project/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/types/sous-partie-1/${event.target.value}`;
                   }}>
