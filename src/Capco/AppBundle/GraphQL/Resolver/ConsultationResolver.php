@@ -89,9 +89,9 @@ class ConsultationResolver implements ContainerAwareInterface
     public function getSectionUrl(OpinionType $type)
     {
         // Stupid hack because no link between
-      if ($type->getOpinions()->count() === 0) {
-          return null;
-      }
+        if ($type->getOpinions()->count() === 0) {
+            return null;
+        }
         $step = $type->getOpinions()->first()->getStep();
         $project = $step->getProject();
 

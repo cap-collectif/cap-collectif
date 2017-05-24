@@ -41,6 +41,8 @@ class ShieldListener
 
         $availableRoutes = [
           'capco_api_login_check',
+          'overblog_graphql_endpoint',
+          'overblog_graphql_graphiql',
           'facebook_login',
           'google_login',
           'api_login_check',

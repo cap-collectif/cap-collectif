@@ -13,6 +13,7 @@ const NewOpinionButton = React.createClass({
     stepId: PropTypes.number.isRequired,
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    disabled: PropTypes.boolean,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
@@ -25,6 +26,7 @@ const NewOpinionButton = React.createClass({
       opinionTypeId,
       projectId,
       stepId,
+      disabled,
     } = this.props;
     return (
       <span>
@@ -34,7 +36,7 @@ const NewOpinionButton = React.createClass({
             onClick={() => {
               dispatch(openOpinionCreateModal(opinionTypeId));
             }}
-            className="btn btn-primary">
+            className={`btn btn-primary${disabled ? ' disabled' : ''}`}>
             <i className="cap cap-add-1" />
             <span className="hidden-xs">{label}</span>
           </a>

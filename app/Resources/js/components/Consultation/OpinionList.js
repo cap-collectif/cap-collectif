@@ -42,13 +42,15 @@ export const OpinionList = React.createClass({
                   <option value="votes">Les plus votés</option>
                   <option value="comments">Les plus commentés</option>
                 </select>}
-              <NewOpinionButton
-                opinionTypeSlug={section.slug}
-                opinionTypeId={section.id}
-                stepId={consultation.id}
-                projectId={consultation.projectId}
-                label={'Proposer'}
-              />
+              {section.contribuable &&
+                <NewOpinionButton
+                  opinionTypeSlug={section.slug}
+                  opinionTypeId={section.id}
+                  stepId={consultation.id}
+                  projectId={consultation.projectId}
+                  disabled={!consultation.open}
+                  label={'Proposer'}
+                />}
             </div>
           </div>
         </div>
@@ -106,6 +108,7 @@ export default createFragmentContainer(OpinionList, {
       url
       slug
       color
+      contribuable
       contributionsCount
     }
   `,
