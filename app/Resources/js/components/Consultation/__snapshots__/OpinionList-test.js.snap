@@ -18,11 +18,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
       </h2>
       <div
         className="pull-right  opinion__header__filter"
-      >
-        <Connect(NewOpinionButton)
-          label="Proposer"
-        />
-      </div>
+      />
     </div>
   </div>
 </div>

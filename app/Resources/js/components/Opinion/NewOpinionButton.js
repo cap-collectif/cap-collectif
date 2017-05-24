@@ -13,7 +13,7 @@ const NewOpinionButton = React.createClass({
     stepId: PropTypes.number.isRequired,
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    disabled: PropTypes.boolean,
+    disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
