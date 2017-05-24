@@ -42,7 +42,12 @@ export const ConsultationPropositionBox = React.createClass({
           }}
           render={({ error, props }) => {
             if (error) {
-              return <div>{error.message}</div>;
+              console.log(error);
+              return (
+                <p className="text-danger">
+                  Désolé une erreur s'est produite… Réessayez plus tard.
+                </p>
+              );
             }
             if (props) {
               return (

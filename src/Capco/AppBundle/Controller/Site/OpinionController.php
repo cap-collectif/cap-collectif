@@ -143,16 +143,11 @@ class OpinionController extends Controller
         ];
         $baseUrl = $request->getHost();
         $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
-        $currentRoute = '';
-        try {
-            $currentRoute = $this->get('router')->match($pathinfos)['_route'];
-        } catch (\Exception $e) {
-        }
         $backLink = $referer &&
-            filter_var($referer, FILTER_VALIDATE_URL) !== false &&
-            in_array($currentRoute, $availableRoutes, true)
-                ? $referer
-                : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL)
+          filter_var($referer, FILTER_VALIDATE_URL) !== false &&
+          in_array($this->get('router')->match($pathinfos)['_route'], $availableRoutes, true)
+            ? $referer
+            : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL)
         ;
 
         return [
