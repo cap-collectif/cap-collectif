@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
@@ -37,6 +38,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     use AnswerableTrait;
     use PinnableTrait;
     use ExpirableTrait;
+    use TextableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -65,12 +67,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    protected $body;
 
     /**
      * @ORM\Column(name="position", type="integer", nullable=true)
@@ -221,18 +217,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }
@@ -655,19 +639,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     public function isPublished()
     {
         return $this->isEnabled && !$this->isTrashed;
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getBodyExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
-
-        return $excerpt;
     }
 
     public function getSortedAppendices()

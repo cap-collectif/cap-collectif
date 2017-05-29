@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
@@ -27,6 +28,7 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
+    use TextableTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -43,20 +45,6 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         self::TYPE_AGAINST => 'argument.show.type.against',
         self::TYPE_SIMPLE => 'argument.show.type.simple',
     ];
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *  min="3",
-     *  max="2000",
-     *  minMessage="argument.body.min_length",
-     *  maxMessage="argument.body.max_length",
-     * )
-     */
-    private $body;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -156,30 +144,6 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     public function isIndexable()
     {
         return $this->getIsEnabled();
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Argument
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
     }
 
     public function getCreatedAt()
@@ -447,19 +411,6 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     public function isPublished()
     {
         return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getBodyExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
-
-        return $excerpt;
     }
 
     public function getParent()

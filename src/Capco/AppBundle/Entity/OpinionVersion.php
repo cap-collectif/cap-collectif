@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -18,7 +19,6 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="opinion_version")
@@ -37,12 +37,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use AnswerableTrait;
     use DiffableTrait;
     use ExpirableTrait;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    protected $body;
+    use TextableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -144,18 +139,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function removeReport(Reporting $report)
     {
         $this->reports->removeElement($report);
-
-        return $this;
-    }
-
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }

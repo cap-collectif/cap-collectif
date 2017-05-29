@@ -1,0 +1,50 @@
+Capco\AppBundle\Entity\Argument:
+  properties:
+    body:
+      - NotBlank: ~
+      - Length: { min: 3, max: 2000, minMessage: "argument.body.min_length", maxMessage: "argument.body.max_length" }
+
+Capco\AppBundle\Entity\Comment:
+  properties:
+    body:
+      - NotBlank: { message: "comment.create.no_body_error" }
+
+Capco\AppBundle\Entity\Event:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Idea:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Opinion:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\OpinionVersion:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Post:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Proposal:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Reporting:
+  properties:
+    body:
+      - NotBlank: ~
+
+Capco\AppBundle\Entity\Source:
+  properties:
+    body:
+      - NotBlank: ~

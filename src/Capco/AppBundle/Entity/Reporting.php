@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Reporting implements CreatableInterface
 {
-    use IdTrait;
+    use IdTrait, TextableTrait;
 
     const SIGNALEMENT_SEX = 0;
     const SIGNALEMENT_OFF = 1;
@@ -42,12 +43,6 @@ class Reporting implements CreatableInterface
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
@@ -137,24 +132,6 @@ class Reporting implements CreatableInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $body
-     */
-    public function setBody(string $body)
-    {
-        $this->body = $body;
-
-        return $this;
     }
 
     /**

@@ -6,6 +6,7 @@ use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +22,7 @@ class Post implements CommentableInterface, IndexableInterface
 {
     use CommentableTrait;
     use IdTrait;
+    use TextableTrait;
 
     /**
      * @Assert\NotBlank()
@@ -40,14 +42,6 @@ class Post implements CommentableInterface, IndexableInterface
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @ORM\Column(name="is_published", type="boolean")
@@ -212,30 +206,6 @@ class Post implements CommentableInterface, IndexableInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Post
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -554,7 +524,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        return $this->abstract ?? substr(strip_tags($this->body), 0, 300) . '[&hellip;]';
+        return $this->abstract ?? substr(strip_tags($this->getBody()), 0, 300) . '[&hellip;]';
     }
 
     // ************************** Lifecycle **************************************

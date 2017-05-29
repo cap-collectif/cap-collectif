@@ -7,6 +7,7 @@ use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,6 +27,7 @@ class Event implements CommentableInterface, IndexableInterface
     use DateHelperTrait;
     use CommentableTrait;
     use IdTrait;
+    use TextableTrait;
 
     /**
      * @var string
@@ -41,14 +43,6 @@ class Event implements CommentableInterface, IndexableInterface
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @var \DateTime
@@ -224,30 +218,6 @@ class Event implements CommentableInterface, IndexableInterface
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Event
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**

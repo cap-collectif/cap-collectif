@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -35,18 +36,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait, TextableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank(message="comment.create.no_body_error")
-     */
-    protected $body;
 
     /**
      * @var \DateTime
@@ -163,23 +158,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function isIndexable()
     {
         return $this->getIsEnabled();
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    public function setBody(string $body): self
-    {
-        $this->body = $body;
-
-        return $this;
     }
 
     /**
@@ -477,19 +455,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function canVote()
     {
         return $this->isEnabled && !$this->isTrashed;
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getBodyExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
-
-        return $excerpt;
     }
 
     public function removeCommentFromRelatedObject()

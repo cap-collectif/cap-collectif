@@ -9,6 +9,7 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
@@ -35,6 +36,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     use TimestampableTrait;
     use ExpirableTrait;
     use IdTrait;
+    use TextableTrait;
 
     public static $sortCriterias = [
         'last' => 'idea.sort.last',
@@ -57,14 +59,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
      * @ORM\Column(length=255)
      */
     private $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @var string
@@ -229,30 +223,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Idea
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -495,19 +465,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     public function canContribute()
     {
         return $this->isEnabled && !$this->isTrashed;
-    }
-
-    /**
-     * @param int $nb
-     *
-     * @return string
-     */
-    public function getExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
-
-        return $excerpt;
     }
 
     // ************* Lifecycle *********************

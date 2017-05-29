@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -15,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page
 {
-    use IdTrait;
+    use IdTrait, TextableTrait;
 
     /**
      * @var string
@@ -29,13 +30,6 @@ class Page
      * @ORM\Column(length=255)
      */
     private $slug;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text")
-     */
-    private $body;
 
     /**
      * @var \DateTime
@@ -133,30 +127,6 @@ class Page
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Page
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -273,13 +243,5 @@ class Page
     public function removeMenuItem($menuItem)
     {
         $this->MenuItems->removeElement($menuItem);
-    }
-
-    public function getExcerpt($nb = 100)
-    {
-        $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
-
-        return $excerpt;
     }
 }

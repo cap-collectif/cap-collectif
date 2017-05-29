@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -47,6 +48,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use ExpirableTrait;
     use SelfLinkableTrait;
     use SoftDeleteTrait;
+    use TextableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -86,12 +88,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
     protected $likers;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
@@ -250,18 +246,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function isIndexable(): bool
     {
         return $this->enabled && !$this->expired;
-    }
-
-    public function getBody(): string
-    {
-        return $this->body ?? '';
-    }
-
-    public function setBody(string $body): self
-    {
-        $this->body = $body;
-
-        return $this;
     }
 
     public function getRating()

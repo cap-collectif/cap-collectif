@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
@@ -28,6 +29,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
+    use TextableTrait;
 
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -56,12 +58,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      * @Assert\Url(groups={"link"})
      */
     private $link;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    private $body;
 
     /**
      * @var \DateTime
@@ -254,30 +250,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     public function setLink($link)
     {
         $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param string $body
-     *
-     * @return Source
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }
