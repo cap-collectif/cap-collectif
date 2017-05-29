@@ -8,8 +8,8 @@ application:
         SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
         SYMFONY_REDIS_HOST: redis
-        SYMFONY_SAML_SP: oda
-        SYMFONY_SAML_AUTHENTICATION_ATTRIBUTE: oda_id
+        SYMFONY_SAML_SP: daher
+        SYMFONY_SAML_AUTHENTICATION_ATTRIBUTE: id
         SYMFONY_LOGIN_SAML_ALLOWED: 'True'
     volumes_from:
         - applicationdata
