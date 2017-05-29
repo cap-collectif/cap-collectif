@@ -45,7 +45,7 @@ export const OpinionCreateModal = React.createClass({
         show={show}
         onHide={() => {
           if (
-            window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))
+            window.confirm(this.getIntlMessage('proposal.confirm_close_modal')) // eslint-disable-line no-alert
           ) {
             dispatch(closeOpinionCreateModal());
           }

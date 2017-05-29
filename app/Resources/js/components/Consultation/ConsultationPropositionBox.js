@@ -42,7 +42,7 @@ export const ConsultationPropositionBox = React.createClass({
           }}
           render={({ error, props }) => {
             if (error) {
-              console.log(error);
+              console.log(error); // eslint-disable-line no-console
               return (
                 <p className="text-danger">
                   Désolé une erreur s'est produite… Réessayez plus tard.
