@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
@@ -31,15 +32,16 @@ const NewOpinionButton = React.createClass({
     return (
       <span>
         <LoginOverlay>
-          <a
+          <Button
+            bsStyle="primary"
+            disabled={disabled}
             id={`btn-add--${opinionTypeSlug}`}
             onClick={() => {
               dispatch(openOpinionCreateModal(opinionTypeId));
-            }}
-            className={`btn btn-primary${disabled ? ' disabled' : ''}`}>
+            }}>
             <i className="cap cap-add-1" />
             <span className="hidden-xs">{label}</span>
-          </a>
+          </Button>
         </LoginOverlay>
         <OpinionCreateModal
           opinionTypeId={opinionTypeId}
