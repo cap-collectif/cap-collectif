@@ -1085,7 +1085,7 @@
   "login": {
     "facebook": "Se connecter via Facebook",
     "google": "Se connecter via Google",
-    "saml": "Se connecter via Avoclé",
+    "saml": "Se connecter via SAML",
     "or": "OU"
   }
 }
