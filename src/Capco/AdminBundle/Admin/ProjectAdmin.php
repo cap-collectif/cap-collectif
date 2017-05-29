@@ -36,6 +36,11 @@ class ProjectAdmin extends Admin
         return parent::getObjectMetadata($object);
     }
 
+    public function getExportFormats(): array
+    {
+        return [];
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
