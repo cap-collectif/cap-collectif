@@ -256,14 +256,12 @@ class HomepageController extends Controller
 
     /**
      * @Cache(smaxage="60", public=true)
+     * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
      *
-     * @param $max
-     * @param $offset
+     * @param mixed      $max
+     * @param mixed      $offset
      * @param null|mixed $section
      * @param null|mixed $alt
-     *
-     * @return array
-     * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
      */
     public function lastEventsAction($max = 3, $offset = 0, $section = null, $alt = null)
     {

@@ -110,9 +110,7 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        return $query = $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -200,21 +198,21 @@ class EventRepository extends EntityRepository
             ->execute();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
     }
 
-    protected function whereIsFuture(QueryBuilder $qb, $alias = 'e')
+    protected function whereIsFuture(QueryBuilder $qb, $alias = 'e'): QueryBuilder
     {
         return $qb
-            ->andWhere(':now < ' . $alias . '.startAt')
+            ->andWhere(':now <= ' . $alias . '.endAt')
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsArchived($archived, QueryBuilder $qb, $alias = 'e')
+    protected function whereIsArchived($archived, QueryBuilder $qb, $alias = 'e'): QueryBuilder
     {
         if ($archived) {
             return $qb
