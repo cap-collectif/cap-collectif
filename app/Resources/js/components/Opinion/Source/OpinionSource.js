@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -27,10 +28,7 @@ const OpinionSource = React.createClass({
         <Row>
           <Col xs={12}>
             <div className="opinion__body box">
-              <UserAvatar
-                user={source.author}
-                className="pull-left"
-              />
+              <UserAvatar user={source.author} className="pull-left" />
               <div className="opinion__data">
                 <OpinionInfos rankingThreshold={null} opinion={source} />
                 <OpinionSourceTitle source={source} />
@@ -43,7 +41,6 @@ const OpinionSource = React.createClass({
       </li>
     );
   },
-
 });
 
 export default OpinionSource;

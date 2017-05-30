@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,6 +35,7 @@ abstract class AbstractStep
 {
     use DateHelperTrait;
     use IdTrait;
+    use TextableTrait;
 
     /**
      * @var array
@@ -99,13 +101,6 @@ abstract class AbstractStep
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     private $endAt = null;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body = null;
 
     /**
      * @var \DateTime
@@ -275,30 +270,6 @@ abstract class AbstractStep
     public function setProjectAbstractStep($projectAbstractStep)
     {
         $this->projectAbstractStep = $projectAbstractStep;
-    }
-
-    /**
-     * Get body.
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set body.
-     *
-     * @param mixed $body
-     *
-     * @return AbstractStep
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
     }
 
     /**

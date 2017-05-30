@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -74,9 +75,7 @@ const OpinionSourceBox = React.createClass({
       <div>
         <Row>
           <Col xs={12} sm={6} md={6}>
-            <OpinionSourceAdd
-              disabled={!opinion.isContribuable}
-            />
+            <OpinionSourceAdd disabled={!opinion.isContribuable} />
           </Col>
           <Col xs={12} sm={6} md={6}>
             <Filter
@@ -92,7 +91,6 @@ const OpinionSourceBox = React.createClass({
       </div>
     );
   },
-
 });
 
 export default OpinionSourceBox;

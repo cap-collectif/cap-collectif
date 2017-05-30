@@ -1,7 +1,8 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Label } from 'react-bootstrap';
 
-const OpinionSourceTitle = ({ source }) => {
+const OpinionSourceTitle = ({ source }: Object) => {
   return (
     <h3 className="opinion__title">
       <Label bsStyle="primary">
@@ -9,7 +10,7 @@ const OpinionSourceTitle = ({ source }) => {
       </Label>
       {' '}
       <a className="external-link" href={source.link}>
-        { source.title }
+        {source.title}
       </a>
     </h3>
   );

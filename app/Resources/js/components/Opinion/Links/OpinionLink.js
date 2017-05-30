@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
@@ -19,16 +20,19 @@ const OpinionLink = React.createClass({
     });
 
     return (
-      <li className={classes} >
+      <li className={classes}>
         <Row>
           <Col xs={12}>
-            <OpinionPreview rankingThreshold={null} opinion={link} showTypeLabel />
+            <OpinionPreview
+              rankingThreshold={null}
+              opinion={link}
+              showTypeLabel
+            />
           </Col>
         </Row>
       </li>
     );
   },
-
 });
 
 export default OpinionLink;

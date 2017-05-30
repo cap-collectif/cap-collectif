@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 
@@ -39,15 +40,15 @@ const OpinionSourceAdd = React.createClass({
           disabled={disabled}
           handleClick={this.show.bind(null, this)}
         />
-        {
-          !disabled
-          ? <OpinionSourceFormModal show={this.state.showModal} onClose={this.close} />
-          : null
-        }
+        {!disabled
+          ? <OpinionSourceFormModal
+              show={this.state.showModal}
+              onClose={this.close}
+            />
+          : null}
       </div>
     );
   },
-
 });
 
 export default OpinionSourceAdd;

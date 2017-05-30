@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -29,24 +30,21 @@ const OpinionSourceVoteButton = React.createClass({
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={`source__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
-          onClick={user ? onClick : null}
-        >
+          onClick={user ? onClick : null}>
           {hasVoted
             ? <span>{this.getIntlMessage('vote.cancel')}</span>
             : <span>
-                <i className="cap cap-hand-like-2"></i>
+                <i className="cap cap-hand-like-2" />
                 {' '}
                 {this.getIntlMessage('vote.ok')}
-            </span>
-          }
+              </span>}
         </Button>
       </LoginOverlay>
     );
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
     features: state.default.features,

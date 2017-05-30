@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Modal } from 'react-bootstrap';
@@ -14,8 +15,7 @@ const OpinionSourceFormModalTitle = React.createClass({
       <Modal.Title id="contained-modal-title-lg">
         {action === 'create'
           ? this.getIntlMessage('source.add')
-          : this.getIntlMessage('source.update')
-        }
+          : this.getIntlMessage('source.update')}
       </Modal.Title>
     );
   },

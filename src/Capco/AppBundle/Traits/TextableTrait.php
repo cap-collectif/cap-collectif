@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait TextableTrait
 {
     /**
-   * @ORM\Column(name="body", type="text")
-   */
-  private $body;
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
 
     public function getBody()
     {

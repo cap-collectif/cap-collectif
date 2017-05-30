@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 
@@ -16,12 +17,11 @@ const OpinionSourceFormInfos = React.createClass({
     return (
       <div className="modal-top bg-info">
         <p>
-          { this.getIntlMessage('source.add_infos') }
+          {this.getIntlMessage('source.add_infos')}
         </p>
       </div>
     );
   },
-
 });
 
 export default OpinionSourceFormInfos;

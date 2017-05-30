@@ -4,19 +4,19 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Section.
- *
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
 class Section
 {
     use IdTrait;
+    use TextableTrait;
 
     public static $fieldsForType = [
         'highlight' => [
@@ -130,13 +130,6 @@ class Section
     private $teaser;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="body", type="text", nullable=true)
-     */
-    private $body;
-
-    /**
      * @var int
      * @ORM\Column(name="nb_objects", type="integer", nullable=true)
      */
@@ -237,22 +230,6 @@ class Section
     public function setTeaser($teaser)
     {
         $this->teaser = $teaser;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
     }
 
     /**

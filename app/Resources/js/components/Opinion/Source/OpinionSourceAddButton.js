@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -18,15 +19,13 @@ const OpinionSourceAddButton = React.createClass({
           id="source-form__add"
           disabled={disabled}
           bsStyle="primary"
-          onClick={disabled ? null : handleClick}
-        >
-          <i className="cap cap-add-1"></i>
-          { ` ${this.getIntlMessage('opinion.add_new_source')}`}
+          onClick={disabled ? null : handleClick}>
+          <i className="cap cap-add-1" />
+          {` ${this.getIntlMessage('opinion.add_new_source')}`}
         </Button>
       </LoginOverlay>
     );
   },
-
 });
 
 export default OpinionSourceAddButton;

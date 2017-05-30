@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -37,10 +38,7 @@ const OpinionSourceVoteBox = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    const {
-      source,
-      user,
-    } = this.props;
+    const { source, user } = this.props;
     if (source.author === null || !user) {
       return false;
     }
@@ -50,8 +48,8 @@ const OpinionSourceVoteBox = React.createClass({
   render() {
     const { hasVoted } = this.state;
     const { source } = this.props;
-    const hasVotedSince = (hasVoted && !source.has_user_voted);
-    const hasUnVotedSince = (!hasVoted && source.has_user_voted);
+    const hasVotedSince = hasVoted && !source.has_user_voted;
+    const hasUnVotedSince = !hasVoted && source.has_user_voted;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
@@ -62,17 +60,18 @@ const OpinionSourceVoteBox = React.createClass({
             onClick={showVoted ? this.deleteVote : this.vote}
           />
         </form>
-        { ' ' }
+        {' '}
         <span className="opinion__votes-nb">
-          { source.votes_count + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
+          {source.votes_count +
+            (hasVotedSince ? 1 : 0) +
+            (hasUnVotedSince ? -1 : 0)}
         </span>
       </span>
     );
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

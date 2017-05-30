@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
@@ -48,27 +49,23 @@ const OpinionSourceForm = React.createClass({
     } = this.props;
     if (nextProps.isSubmitting) {
       if (this.isValid()) {
-        const tmpFixData = this.state.form;
+        const tmpFixData: Object = this.state.form;
         tmpFixData.Category = parseInt(tmpFixData.category, 10);
         delete tmpFixData.category;
         delete tmpFixData.check;
 
         if (!source) {
-          return OpinionSourceActions
-            .add(opinion, tmpFixData)
+          return OpinionSourceActions.add(opinion, tmpFixData)
             .then(() => {
               this.setState(this.getInitialState());
               onSubmitSuccess();
             })
-            .catch(onSubmitFailure)
-          ;
+            .catch(onSubmitFailure);
         }
 
-        return OpinionSourceActions
-          .update(opinion, source.id, tmpFixData)
+        return OpinionSourceActions.update(opinion, source.id, tmpFixData)
           .then(onSubmitSuccess)
-          .catch(onSubmitFailure)
-        ;
+          .catch(onSubmitFailure);
       }
 
       onValidationFailure();
@@ -97,12 +94,7 @@ const OpinionSourceForm = React.createClass({
   },
 
   renderFormErrors(field) {
-    return (
-      <FlashMessages
-        errors={this.getErrorsMessages(field)}
-        form
-      />
-    );
+    return <FlashMessages errors={this.getErrorsMessages(field)} form />;
   },
 
   render() {
@@ -112,18 +104,17 @@ const OpinionSourceForm = React.createClass({
         {source
           ? <div className="alert alert-warning edit-confirm-alert">
               <Input
-                  type="checkbox"
-                  ref="check"
-                  id="sourceEditCheck"
-                  checkedLink={this.linkState('form.check')}
-                  label={this.getIntlMessage('source.check')}
-                  labelClassName=""
-                  groupClassName={this.getGroupStyle('check')}
-                  errors={this.renderFormErrors('check')}
+                type="checkbox"
+                ref="check"
+                id="sourceEditCheck"
+                checkedLink={this.linkState('form.check')}
+                label={this.getIntlMessage('source.check')}
+                labelClassName=""
+                groupClassName={this.getGroupStyle('check')}
+                errors={this.renderFormErrors('check')}
               />
             </div>
-          : null
-        }
+          : null}
         <Input
           type="select"
           ref="category"
@@ -131,26 +122,19 @@ const OpinionSourceForm = React.createClass({
           valueLink={this.linkState('form.category')}
           label={this.getIntlMessage('source.type')}
           groupClassName={this.getGroupStyle('category')}
-          errors={this.renderFormErrors('category')}
-        >
+          errors={this.renderFormErrors('category')}>
           {source
             ? null
             : <option value="" disabled selected>
                 {this.getIntlMessage('global.select')}
+              </option>}
+          {CategoriesStore.categories.map(category => {
+            return (
+              <option key={category.id} value={category.id}>
+                {category.title}
               </option>
-          }
-          {
-            CategoriesStore.categories.map((category) => {
-              return (
-                <option
-                  key={category.id}
-                  value={category.id}
-                >
-                  {category.title}
-                </option>
-              );
-            })
-          }
+            );
+          })}
         </Input>
         <Input
           id="sourceLink"
@@ -183,7 +167,6 @@ const OpinionSourceForm = React.createClass({
       </form>
     );
   },
-
 });
 
 export default OpinionSourceForm;

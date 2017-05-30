@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\HasAuthorTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Answer.
@@ -20,6 +20,7 @@ class Answer
     use TimestampableTrait;
     use HasAuthorTrait;
     use IdTrait;
+    use TextableTrait;
 
     /**
      * @var \DateTime
@@ -32,12 +33,6 @@ class Answer
      * @ORM\Column(name="title", type="string", nullable=true)
      */
     protected $title;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     * @Assert\NotBlank()
-     */
-    protected $body;
 
     public function __construct()
     {
@@ -68,24 +63,6 @@ class Answer
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param mixed $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
 
         return $this;
     }

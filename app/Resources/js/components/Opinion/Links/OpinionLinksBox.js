@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
@@ -66,19 +67,16 @@ const OpinionLinksBox = React.createClass({
                   onChange={this.handleFilterChange}
                   value={this.state.filter}
                   values={['last', 'old']}
-              />
-              : null
-            }
+                />
+              : null}
           </Col>
         </Row>
         {!this.state.isLoading
           ? <OpinionLinkList links={this.state.links} />
-          : <Loader />
-        }
+          : <Loader />}
       </div>
     );
   },
-
 });
 
 export default OpinionLinksBox;

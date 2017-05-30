@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -49,8 +50,7 @@ const OpinionSourceFormModal = React.createClass({
         show={show}
         onHide={onClose.bind(null, this)}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <OpinionSourceFormModalTitle action={action} />
         </Modal.Header>
@@ -67,17 +67,16 @@ const OpinionSourceFormModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-            <SubmitButton
-              id={`confirm-opinion-source-${action}`}
-              label={action === 'create' ? 'global.publish' : 'global.edit'}
-              isSubmitting={isSubmitting}
-              onSubmit={this.handleSubmit.bind(null, this)}
-            />
+          <SubmitButton
+            id={`confirm-opinion-source-${action}`}
+            label={action === 'create' ? 'global.publish' : 'global.edit'}
+            isSubmitting={isSubmitting}
+            onSubmit={this.handleSubmit.bind(null, this)}
+          />
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default OpinionSourceFormModal;

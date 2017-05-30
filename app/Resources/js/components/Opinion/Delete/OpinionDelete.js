@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -43,25 +44,18 @@ const OpinionDelete = React.createClass({
     const { opinion } = this.props;
     this.setState({ isSubmitting: true });
     if (this.isVersion()) {
-      OpinionActions.deleteVersion(opinion.id, opinion.parent.id)
-        .then(() => {
-          window.location.href = opinion._links.parent;
-        })
-      ;
+      OpinionActions.deleteVersion(opinion.id, opinion.parent.id).then(() => {
+        window.location.href = opinion._links.parent;
+      });
     } else {
-      OpinionActions.deleteOpinion(opinion.id)
-        .then(() => {
-          window.location.href = opinion._links.type;
-        })
-      ;
+      OpinionActions.deleteOpinion(opinion.id).then(() => {
+        window.location.href = opinion._links.type;
+      });
     }
   },
 
   isTheUserTheAuthor() {
-    const {
-      opinion,
-      user,
-    } = this.props;
+    const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
@@ -77,20 +71,20 @@ const OpinionDelete = React.createClass({
             id="opinion-delete"
             className="pull-right btn--outline btn-danger"
             onClick={this.showModal}
-            style={{ marginLeft: '5px' }}
-          >
-            <i className="cap cap-bin-2"></i> {this.getIntlMessage('global.remove')}
+            style={{ marginLeft: '5px' }}>
+            <i className="cap cap-bin-2" />
+            {' '}
+            {this.getIntlMessage('global.remove')}
           </Button>
           <Modal
             animation={false}
             show={showModal}
             onHide={this.hideModal}
             bsSize="large"
-            aria-labelledby="contained-modal-title-lg"
-          >
+            aria-labelledby="contained-modal-title-lg">
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-lg">
-                { this.getIntlMessage('global.removeMessage') }
+                {this.getIntlMessage('global.removeMessage')}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -117,10 +111,9 @@ const OpinionDelete = React.createClass({
 
     return null;
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

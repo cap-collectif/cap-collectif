@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -22,13 +23,9 @@ const OpinionSourceDeleteModal = React.createClass({
   },
 
   handleSubmit() {
-    const {
-      onClose,
-      source,
-    } = this.props;
+    const { onClose, source } = this.props;
     this.setState({ isSubmitting: true });
-    OpinionSourceActions
-      .delete(OpinionSourceStore.opinion, source.id)
+    OpinionSourceActions.delete(OpinionSourceStore.opinion, source.id)
       .then(() => {
         onClose();
         this.setState({ isSubmitting: false });
@@ -48,11 +45,10 @@ const OpinionSourceDeleteModal = React.createClass({
         show={show}
         onHide={onClose.bind(null, this)}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('source.delete_modal.title')}
+            {this.getIntlMessage('source.delete_modal.title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -65,18 +61,17 @@ const OpinionSourceDeleteModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-            <SubmitButton
-              id={'confirm-opinion-source-delete'}
-              label={'global.delete'}
-              isSubmitting={isSubmitting}
-              onSubmit={this.handleSubmit.bind(null, this)}
-              bsStyle="danger"
-            />
+          <SubmitButton
+            id={'confirm-opinion-source-delete'}
+            label={'global.delete'}
+            isSubmitting={isSubmitting}
+            onSubmit={this.handleSubmit.bind(null, this)}
+            bsStyle="danger"
+          />
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default OpinionSourceDeleteModal;

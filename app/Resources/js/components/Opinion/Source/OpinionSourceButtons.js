@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
@@ -38,13 +39,9 @@ const OpinionSourceButtons = React.createClass({
     const { source } = this.props;
     return (
       <div>
-        <OpinionSourceVoteBox
-          source={source}
-        />
-        { ' ' }
-        <OpinionSourceReportButton
-          source={source}
-        />
+        <OpinionSourceVoteBox source={source} />
+        {' '}
+        <OpinionSourceReportButton source={source} />
         <EditButton
           onClick={this.openEditModal}
           author={source.author}
@@ -70,7 +67,6 @@ const OpinionSourceButtons = React.createClass({
       </div>
     );
   },
-
 });
 
 export default OpinionSourceButtons;

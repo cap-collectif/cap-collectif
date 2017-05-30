@@ -48,3 +48,8 @@ Capco\AppBundle\Entity\Source:
   properties:
     body:
       - NotBlank: ~
+
+Capco\AppBundle\Entity\Answer:
+  properties:
+    body:
+      - NotBlank: ~
