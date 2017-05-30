@@ -849,3 +849,8 @@ select:focus,
 textarea {
     font-size: 16px;
 }
+
+.settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
+    font-weight: normal;
+    color: #000000;
+}
