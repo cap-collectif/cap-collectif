@@ -314,6 +314,8 @@ type Query {
     consultation: Int!
   ): [Opinion]
   contributionsBySection(
+    # TMP bug fix
+    consultationId: String!
     sectionId: ID!
 
     # Max depth.
@@ -371,12 +373,6 @@ type Section {
   # The subtitle of the section.
   subtitle: String
   contributionsCount: Int!
-
-  # List of contributions from this section.
-  contributions(
-    # Max depth.
-    limit: Int!
-  ): [Opinion]
 
   # Array of subsections (possibly empty).
   sections: [Section]

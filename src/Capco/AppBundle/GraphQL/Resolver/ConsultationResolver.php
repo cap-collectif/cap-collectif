@@ -80,10 +80,12 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getContributionsBySection(Arg $arg)
     {
-        $id = $arg->offsetGet('sectionId');
-        $type = $this->container->get('capco.opinion_type.repository')->find($id);
+        $typeId = $arg->offsetGet('sectionId');
+        $type = $this->container->get('capco.opinion_type.repository')->find($typeId);
+        $consultationId = $arg->offsetGet('consultationId');
+        $step = $this->container->get('capco.consultation_step.repository')->find($consultationId);
 
-        return $this->getSectionOpinions($type, $arg);
+        return $this->getSectionOpinions($type, $arg, $step);
     }
 
     public function getSectionUrl(OpinionType $type)
@@ -106,16 +108,13 @@ class ConsultationResolver implements ContainerAwareInterface
       );
     }
 
-    public function getSectionOpinions(OpinionType $type, Arg $arg)
+    public function getSectionOpinions(OpinionType $type, Arg $arg, ConsultationStep $step)
     {
         $limit = $arg->offsetGet('limit');
 
         if ($type->getOpinions()->count() === 0) {
             return [];
         }
-
-        // Stupid hack because no link between
-        $step = $type->getOpinions()->first()->getStep();
 
         $opinionRepo = $this->container->get('capco.opinion.repository');
         $opinions = $opinionRepo->getByOpinionTypeAndConsultationStepOrdered(

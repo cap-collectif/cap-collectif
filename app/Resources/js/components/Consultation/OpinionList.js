@@ -26,7 +26,6 @@ export const OpinionList = React.createClass({
               {section.contributionsCount} propositions
             </h2>
             <div className="pull-right  opinion__header__filter">
-
               {section.contributionsCount > 1 &&
                 <select
                   className="form-control"
@@ -59,14 +58,15 @@ export const OpinionList = React.createClass({
             <QueryRenderer
               environment={environment}
               query={graphql`
-              query OpinionListQuery($sectionId: ID!, $limit: Int!) {
-                contributionsBySection(sectionId: $sectionId, limit: $limit) {
+              query OpinionListQuery($sectionId: ID!, $limit: Int!, $consultationId: String!) {
+                contributionsBySection(sectionId: $sectionId, limit: $limit, consultationId: $consultationId) {
                   ...Opinion_opinion
                 }
               }
               `}
               variables={{
                 sectionId: section.id,
+                consultationId: consultation.id,
                 limit: consultation.opinion_count_shown_by_section,
               }}
               render={({ error, props }) => {
