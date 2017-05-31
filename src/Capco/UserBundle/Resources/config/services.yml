@@ -5,7 +5,7 @@ services:
 
   saml_user_provider:
       class: Capco\UserBundle\Security\Core\User\SamlUserProvider
-      arguments: ["@fos_user.user_manager", "%simplesamlphp.saml_sp%"]
+      arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
@@ -38,7 +38,7 @@ services:
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Saml\SamlAuthenticator
-      arguments: ["@simplesamlphp.auth", "%simplesamlphp.saml_sp%", "@security.http_utils", "@capco.toggle.manager"]
+      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@capco.toggle.manager"]
 
   # We override default security services:
   security.authentication.success_handler:
