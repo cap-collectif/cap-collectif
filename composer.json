@@ -102,7 +102,6 @@
         "doctrine/dbal": "^2.5",
         "infinite-networks/form-bundle": "^1.0",
         "swarrot/swarrot-bundle": "1.3.3",
-        "hslavich/simplesamlphp-bundle": "^1.1",
         "overblog/graphql-bundle": "^0.8.0",
         "league/csv": "^8.1",
         "friendsofsymfony/http-cache-bundle": "2.0.0-beta1",
@@ -116,7 +115,9 @@
         "guzzlehttp/psr7": "^1.4",
         "overblog/graphql-php-generator": "^0.4.3",
         "webonyx/graphql-php": "^0.9.8",
-        "simplesamlphp/simplesamlphp": "^1.14"
+        "simplesamlphp/simplesamlphp": "dev-master#d68d4087416d7888393183a092f81f49354a5c8d as v1.14.9",
+        "hslavich/simplesamlphp-bundle": "^1.1@dev",
+        "simplesamlphp/saml2": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

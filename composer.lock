@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b298f12dee2a782fcf01c74d5b1e0836",
+    "content-hash": "3f1193907d206163871151671c58348f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1727,12 +1727,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/emgiezet/FOSElasticaBundle.git",
+                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
                 "reference": "f583cc5842d1fc2cb42d963f97b7b67f208be0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emgiezet/FOSElasticaBundle/zipball/f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
                 "reference": "f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
                 "shasum": ""
             },
@@ -2254,6 +2254,127 @@
             "time": "2016-02-18T15:33:43+00:00"
         },
         {
+            "name": "gettext/gettext",
+            "version": "v3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oscarotero/Gettext.git",
+                "reference": "cd3be64443551e3a693117c4bccbe53e36282456"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oscarotero/Gettext/zipball/cd3be64443551e3a693117c4bccbe53e36282456",
+                "reference": "cd3be64443551e3a693117c4bccbe53e36282456",
+                "shasum": ""
+            },
+            "require": {
+                "gettext/languages": "2.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "illuminate/view": "*",
+                "symfony/yaml": "~2",
+                "twig/extensions": "*",
+                "twig/twig": "*"
+            },
+            "suggest": {
+                "illuminate/view": "Is necessary if you want to use the Blade extractor",
+                "symfony/yaml": "Is necessary if you want to use the Yaml extractor/generator",
+                "twig/extensions": "Is necessary if you want to use the Twig extractor",
+                "twig/twig": "Is necessary if you want to use the Twig extractor"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gettext\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oscar Otero",
+                    "email": "oom@oscarotero.com",
+                    "homepage": "http://oscarotero.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP gettext manager",
+            "homepage": "https://github.com/oscarotero/Gettext",
+            "keywords": [
+                "JS",
+                "gettext",
+                "i18n",
+                "mo",
+                "po",
+                "translation"
+            ],
+            "time": "2016-08-01T18:09:57+00:00"
+        },
+        {
+            "name": "gettext/languages",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mlocati/cldr-to-gettext-plural-rules.git",
+                "reference": "49c39e51569963cc917a924b489e7025bfb9d8c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mlocati/cldr-to-gettext-plural-rules/zipball/49c39e51569963cc917a924b489e7025bfb9d8c7",
+                "reference": "49c39e51569963cc917a924b489e7025bfb9d8c7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4"
+            },
+            "bin": [
+                "bin/export-plural-rules",
+                "bin/export-plural-rules.php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gettext\\Languages\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michele Locati",
+                    "email": "mlocati@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "gettext languages with plural rules",
+            "homepage": "https://github.com/mlocati/cldr-to-gettext-plural-rules",
+            "keywords": [
+                "cldr",
+                "i18n",
+                "internationalization",
+                "l10n",
+                "language",
+                "languages",
+                "localization",
+                "php",
+                "plural",
+                "plural rules",
+                "plurals",
+                "translate",
+                "translations",
+                "unicode"
+            ],
+            "time": "2017-03-23T17:02:28+00:00"
+        },
+        {
             "name": "gfreeau/get-jwt-bundle",
             "version": "1.0.5",
             "target-dir": "Gfreeau/Bundle/GetJWTBundle",
@@ -2677,16 +2798,16 @@
         },
         {
             "name": "hslavich/simplesamlphp-bundle",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hslavich/SimplesamlphpBundle.git",
-                "reference": "44d42fe0016e0c325e5fb2b622f392f23aff91fa"
+                "reference": "da476be924f4d7c4b9b31f21a69552fc14b2cfdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hslavich/SimplesamlphpBundle/zipball/44d42fe0016e0c325e5fb2b622f392f23aff91fa",
-                "reference": "44d42fe0016e0c325e5fb2b622f392f23aff91fa",
+                "url": "https://api.github.com/repos/hslavich/SimplesamlphpBundle/zipball/da476be924f4d7c4b9b31f21a69552fc14b2cfdf",
+                "reference": "da476be924f4d7c4b9b31f21a69552fc14b2cfdf",
                 "shasum": ""
             },
             "require": {
@@ -2715,7 +2836,7 @@
                 "saml",
                 "simplesamlphp"
             ],
-            "time": "2016-02-16T18:08:26+00:00"
+            "time": "2017-01-30T17:50:41+00:00"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -3051,6 +3172,50 @@
                 "password"
             ],
             "time": "2014-11-20T16:49:30+00:00"
+        },
+        {
+            "name": "jaimeperez/twig-configurable-i18n",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaimeperez/twig-configurable-i18n.git",
+                "reference": "75d4926fd102c9e62219ad7f94a6136d2f2ccd93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaimeperez/twig-configurable-i18n/zipball/75d4926fd102c9e62219ad7f94a6136d2f2ccd93",
+                "reference": "75d4926fd102c9e62219ad7f94a6136d2f2ccd93",
+                "shasum": ""
+            },
+            "require": {
+                "twig/extensions": "^1.3"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "JaimePerez\\TwigConfigurableI18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jaime Perez",
+                    "email": "jaime.perez@uninett.no"
+                }
+            ],
+            "description": "This is an extension on top of Twig's i18n extension, allowing you to customize which functions to use for translations.",
+            "keywords": [
+                "extension",
+                "gettext",
+                "i18n",
+                "internationalization",
+                "translation",
+                "twig"
+            ],
+            "time": "2016-10-03T12:34:15+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -5867,20 +6032,20 @@
         },
         {
             "name": "robrichards/xmlseclibs",
-            "version": "1.4.2",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robrichards/xmlseclibs.git",
-                "reference": "79fb5e03c4ee4dc3ec77e4b2628231374364a017"
+                "reference": "53bb1e9cae490a8f93af41bd9df6ea897161ca05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/79fb5e03c4ee4dc3ec77e4b2628231374364a017",
-                "reference": "79fb5e03c4ee4dc3ec77e4b2628231374364a017",
+                "url": "https://api.github.com/repos/robrichards/xmlseclibs/zipball/53bb1e9cae490a8f93af41bd9df6ea897161ca05",
+                "reference": "53bb1e9cae490a8f93af41bd9df6ea897161ca05",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 5.2"
+                "php": ">= 5.3"
             },
             "suggest": {
                 "ext/mcrypt": "MCrypt extension",
@@ -5888,9 +6053,9 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "src/"
-                ]
+                "psr-4": {
+                    "RobRichards\\XMLSecLibs\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5904,7 +6069,7 @@
                 "xml",
                 "xmldsig"
             ],
-            "time": "2016-09-08T13:31:44+00:00"
+            "time": "2016-09-08T13:15:00+00:00"
         },
         {
             "name": "ruflin/elastica",
@@ -6121,24 +6286,25 @@
         },
         {
             "name": "simplesamlphp/saml2",
-            "version": "v1.9.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/saml2.git",
-                "reference": "2a2bd4398257cbe72251c68348be72707cc77262"
+                "reference": "3c5f58c98a3ee72784b6ada46aa348b33c48234b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/2a2bd4398257cbe72251c68348be72707cc77262",
-                "reference": "2a2bd4398257cbe72251c68348be72707cc77262",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/3c5f58c98a3ee72784b6ada46aa348b33c48234b",
+                "reference": "3c5f58c98a3ee72784b6ada46aa348b33c48234b",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-openssl": "*",
+                "ext-zlib": "*",
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
-                "robrichards/xmlseclibs": "^1.3"
+                "robrichards/xmlseclibs": "^2.0"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
@@ -6152,8 +6318,11 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "SAML2_": "src/"
-                }
+                    "SAML2\\": "src/"
+                },
+                "files": [
+                    "src/_autoload.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -6166,20 +6335,20 @@
                 }
             ],
             "description": "SAML2 PHP library from SimpleSAMLphp",
-            "time": "2016-12-02T12:45:13+00:00"
+            "time": "2017-05-26 15:53:39"
         },
         {
             "name": "simplesamlphp/simplesamlphp",
-            "version": "v1.14.14",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/simplesamlphp.git",
-                "reference": "0329e7fd0e9f356211a002f5b7c79da4543b5efe"
+                "reference": "d68d4087416d7888393183a092f81f49354a5c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/0329e7fd0e9f356211a002f5b7c79da4543b5efe",
-                "reference": "0329e7fd0e9f356211a002f5b7c79da4543b5efe",
+                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp/zipball/d68d4087416d7888393183a092f81f49354a5c8d",
+                "reference": "d68d4087416d7888393183a092f81f49354a5c8d",
                 "shasum": ""
             },
             "require": {
@@ -6192,20 +6361,24 @@
                 "ext-pcre": "*",
                 "ext-spl": "*",
                 "ext-zlib": "*",
+                "gettext/gettext": "^3.5",
+                "jaimeperez/twig-configurable-i18n": "^1.2",
                 "php": ">=5.3",
-                "robrichards/xmlseclibs": "~1.4.1",
-                "simplesamlphp/saml2": "~1.9.1",
+                "robrichards/xmlseclibs": "~2.0",
+                "simplesamlphp/saml2": "dev-master#f079abe36ab4101dfda654a087f8003a9673b952 as 2.4",
+                "twig/twig": "~1.0",
                 "whitehat101/apr1-md5": "~1.0"
             },
             "require-dev": {
                 "ext-pdo_sqlite": "*",
-                "phpunit/phpunit": "~3.7",
+                "mikey179/vfsstream": "~1.6",
+                "phpunit/phpunit": "~4.8",
                 "satooshi/php-coveralls": "^1.0"
             },
             "type": "project",
             "autoload": {
-                "psr-0": {
-                    "SimpleSAML": "lib/"
+                "psr-4": {
+                    "SimpleSAML\\": "lib/SimpleSAML"
                 },
                 "files": [
                     "lib/_autoload_modules.php"
@@ -6223,21 +6396,23 @@
                 {
                     "name": "Andreas Åkre Solberg",
                     "email": "andreas.solberg@uninett.no"
+                },
+                {
+                    "name": "Jaime Perez",
+                    "email": "jaime.perez@uninett.no"
                 }
             ],
-            "description": "A PHP implementation of SAML 2.0 service provider and identity provider functionality. And is also compatible with Shibboleth 1.3 and 2.0.",
+            "description": "A PHP implementation of a SAML 2.0 service provider and identity provider, also compatible with Shibboleth 1.3 and 2.0.",
             "homepage": "http://simplesamlphp.org",
             "keywords": [
-                "OpenId",
                 "SAML2",
-                "aselect",
                 "idp",
                 "oauth",
                 "shibboleth",
                 "sp",
                 "ws-federation"
             ],
-            "time": "2017-05-05T10:52:35+00:00"
+            "time": "2017-05-26 14:56:32"
         },
         {
             "name": "snc/redis-bundle",
@@ -12430,6 +12605,12 @@
             "alias_normalized": "1.0.0.0",
             "version": "dev-fix/2-nested-serializer-calls",
             "package": "jms/serializer"
+        },
+        {
+            "alias": "v1.14.9",
+            "alias_normalized": "1.14.9.0",
+            "version": "9999999-dev",
+            "package": "simplesamlphp/simplesamlphp"
         }
     ],
     "minimum-stability": "stable",
@@ -12447,6 +12628,9 @@
         "cap-collectif/id-to-uuid": 20,
         "friendsofsymfony/http-cache-bundle": 10,
         "friendsofsymfony/http-cache": 10,
+        "simplesamlphp/simplesamlphp": 20,
+        "hslavich/simplesamlphp-bundle": 20,
+        "simplesamlphp/saml2": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "tonicforhealth/behat-parallel-scenario": 20
     },
