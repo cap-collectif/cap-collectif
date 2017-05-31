@@ -357,13 +357,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->isEnabled();
     }
 
-    public function setIndexable($indexable = true)
-    {
-        $this->indexable = $indexable;
-
-        return $this;
-    }
-
     // for EncoderAwareInterface
     public function getEncoderName()
     {
