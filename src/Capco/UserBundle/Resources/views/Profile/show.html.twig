@@ -8,10 +8,11 @@
     {% set userMedia %}{% if user.Media %}{% path user.Media, 'avatar' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle'),
-        'description': user.biography,
-        'url':         url('capco_user_profile_show_all', {'slug': user.slug}),
-        'type':        'profile',
-        'image':       userMedia
+        'description':  user.biography,
+        'url':          url('capco_user_profile_show_all', {'slug': user.slug}),
+        'type':         'profile',
+        'image':        userMedia,
+        'noindex':      user.profilePageIndexed
     } only %}
 {% endblock %}
 
