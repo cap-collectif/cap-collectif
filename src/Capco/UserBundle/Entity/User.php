@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, SamlUserInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
