@@ -9,7 +9,6 @@ application:
         SYMFONY_ELASTICSEARCH_HOST: elasticsearch
         SYMFONY_REDIS_HOST: redis
         SYMFONY_SAML_SP: daher
-        SYMFONY_SAML_AUTHENTICATION_ATTRIBUTE: id
         SYMFONY_LOGIN_SAML_ALLOWED: 'True'
     volumes_from:
         - applicationdata

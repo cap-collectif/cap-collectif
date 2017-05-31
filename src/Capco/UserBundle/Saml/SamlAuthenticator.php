@@ -5,7 +5,6 @@ namespace Capco\UserBundle\Saml;
 use Capco\AppBundle\Toggle\Manager;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
-use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -77,9 +76,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
 
-        if ($user instanceof SamlUserInterface) {
-            $user->setSamlAttributes($this->samlIdp, $token->getAttributes());
-        }
+        $user->setSamlAttributes($this->samlIdp, $token->getAttributes());
 
         $authenticatedToken = new SamlToken($user, $user->getRoles());
         $authenticatedToken->setAttributes($token->getAttributes());

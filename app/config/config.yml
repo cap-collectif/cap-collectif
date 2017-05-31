@@ -353,7 +353,6 @@ exercise_html_purifier:
 
 hslavich_simplesamlphp:
     sp: "%saml_sp%"
-    authentication_attribute: "%saml_authentication_attribute%"
 
 overblog_graphql:
     definitions:

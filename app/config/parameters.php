@@ -19,7 +19,6 @@ setOverridableParameter($container, 'rabbitmq_login', 'guest', 'SYMFONY_RABBITMQ
 setOverridableParameter($container, 'rabbitmq_password', 'guest', 'SYMFONY_RABBITMQ_PASSWORD');
 
 setOverridableParameter($container, 'saml_sp', 'oda', 'SYMFONY_SAML_SP');
-setOverridableParameter($container, 'saml_authentication_attribute', 'oda_id', 'SYMFONY_SAML_AUTHENTICATION_ATTRIBUTE');
 
 // We use an elasticsearch container in dev/test
 setOverridableParameter($container, 'elasticsearch_host', '127.0.0.1', 'SYMFONY_ELASTICSEARCH_HOST');

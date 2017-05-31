@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
