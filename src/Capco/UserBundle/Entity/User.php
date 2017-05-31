@@ -266,9 +266,15 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->replies = new ArrayCollection();
     }
 
-    public function setSamlAttributes(array $attributes)
+    public function setSamlAttributes(string $idp, array $attributes)
     {
-        $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
+        if ($idp === 'oda') {
+            $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
+        }
+        if ($idp === 'daher') {
+            $this->setUsername($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
+            $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
+        }
     }
 
     public function setSamlId($id)

@@ -15,16 +15,40 @@ use Symfony\Component\Security\Http\HttpUtils;
 class SamlAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected $samlAuth;
-    protected $authAttribute;
+    protected $samlIdp;
     protected $httpUtils;
     protected $toggleManager;
 
-    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, string $authAttribute, HttpUtils $httpUtils, Manager $toggleManager)
+    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager)
     {
         $this->samlAuth = $samlAuth;
-        $this->authAttribute = $authAttribute;
+        $this->samlIdp = $samlIdp;
         $this->httpUtils = $httpUtils;
         $this->toggleManager = $toggleManager;
+    }
+
+    public function getAuthenticationAttribute()
+    {
+        if ($this->samlIdp === 'oda') {
+            return 'oda_id';
+        }
+        if ($this->samlIdp === 'daher') {
+            return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn';
+        }
+
+        throw new \Exception('Could not find your authentication attribute.');
+    }
+
+    public function findUsernameInResponse(array $attributes)
+    {
+        $authAttribute = $this->getAuthenticationAttribute();
+        if (!array_key_exists($authAttribute, $attributes)) {
+            throw new MissingSamlAuthAttributeException(
+                sprintf("Attribute '%s' was not found in SAMLResponse", $authAttribute)
+            );
+        }
+
+        return $attributes[$authAttribute][0];
     }
 
     public function createToken(Request $request, $providerKey)
@@ -41,16 +65,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->samlAuth->requireAuth(); // force the user to login with SAML
         $attributes = $this->samlAuth->getAttributes();
 
-        var_dump($attributes);
-
-        if (!array_key_exists($this->authAttribute, $attributes)) {
-            throw new MissingSamlAuthAttributeException(
-                sprintf("Attribute '%s' was not found in SAMLResponse", $this->authAttribute)
-            );
-        }
-
-        $username = $attributes[$this->authAttribute][0];
-
+        $username = $this->findUsernameInResponse($attributes);
         $token = new SamlToken($username);
         $token->setAttributes($attributes);
 
@@ -63,7 +78,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $user = $userProvider->loadUserByUsername($username);
 
         if ($user instanceof SamlUserInterface) {
-            $user->setSamlAttributes($token->getAttributes());
+            $user->setSamlAttributes($this->samlIdp, $token->getAttributes());
         }
 
         $authenticatedToken = new SamlToken($user, $user->getRoles());
