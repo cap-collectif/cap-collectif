@@ -115,7 +115,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "guzzlehttp/psr7": "^1.4",
         "overblog/graphql-php-generator": "^0.4.3",
-        "webonyx/graphql-php": "^0.9.8"
+        "webonyx/graphql-php": "^0.9.8",
+        "simplesamlphp/simplesamlphp": "^1.14"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -135,8 +136,7 @@
         "bossa/phpspec2-expect": "2.0.0",
         "phpspec/phpspec": "3.0",
         "behat/gherkin": "^4.4",
-        "phpstan/phpstan": "^0.6.4",
-        "simplesamlphp/simplesamlphp": "^1.14"
+        "phpstan/phpstan": "^0.6.4"
     },
     "scripts": {},
     "config": {

@@ -137,6 +137,10 @@ class ProfileController extends BaseController
     /**
      * @Route("/{slug}/projects", name="capco_user_profile_show_projects", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserProjects.html.twig")
+     *
+     * @param User $user
+     *
+     * @return array
      */
     public function showProjectsAction(User $user)
     {

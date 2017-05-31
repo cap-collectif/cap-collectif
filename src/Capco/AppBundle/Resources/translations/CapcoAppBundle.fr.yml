@@ -898,7 +898,6 @@ user:
       username: Nom
       media: Image
       birthday: Date de naissance
-      profilePageIndexed: Indiquer aux moteurs de recherche de ne pas référencer mon profil
       address: Adresse
       address2: Complément d'adresse
       zip_code: Code postal

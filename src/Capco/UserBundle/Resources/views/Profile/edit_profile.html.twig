@@ -35,11 +35,6 @@
                         <div class="box">
                             {{ form_errors(form) }}
                             <div class="form-group">
-                                {{ form_errors(form.profilePageIndexed) }}
-                                <div class="col-sm-12">{{ form_widget(form.profilePageIndexed) }}</div>
-                            </div>
-
-                            <div class="form-group">
                                 {{ form_errors(form.username) }}
                                 {{ form_label(form.username, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
                                 <div class="col-sm-9">{{ form_widget(form.username) }}</div>

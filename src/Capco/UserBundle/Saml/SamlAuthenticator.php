@@ -41,6 +41,8 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->samlAuth->requireAuth(); // force the user to login with SAML
         $attributes = $this->samlAuth->getAttributes();
 
+        var_dump($attributes);
+
         if (!array_key_exists($this->authAttribute, $attributes)) {
             throw new MissingSamlAuthAttributeException(
                 sprintf("Attribute '%s' was not found in SAMLResponse", $this->authAttribute)

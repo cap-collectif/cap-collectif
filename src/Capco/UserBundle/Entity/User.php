@@ -8,7 +8,7 @@ use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Hslavich\SimplesamlphpBundle\Security\Core\User\SamlUserInterface;
-use Sonata\UserBundle\Entity\BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -245,8 +245,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     private $slug;
 
     private $responses;
-
-    private $profilePageIndexed = true;
 
     public function __construct($encoder = null)
     {
@@ -1260,7 +1258,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getDisplayName()
     {
-        return $this->username ?: 'Utilisateur supprimé';
+        return $this->username ? $this->username : 'Utilisateur supprimé';
     }
 
     /**
@@ -1271,18 +1269,5 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function isAdmin()
     {
         return $this->hasRole('ROLE_ADMIN') || $this->hasRole('ROLE_SUPER_ADMIN');
-    }
-
-    public function isProfilePageIndexed(): bool
-    {
-        return !$this->profilePageIndexed;
-    }
-
-    /**
-     * @param bool $profilePageIndexed
-     */
-    public function setProfilePageIndexed(bool $profilePageIndexed = true)
-    {
-        $this->profilePageIndexed = !$profilePageIndexed;
     }
 }
