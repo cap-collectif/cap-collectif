@@ -57,8 +57,6 @@ class Version20170530150306 extends AbstractMigration implements ContainerAwareI
                         $copy->setPosition($type->getPosition());
                         $copy->setIsEnabled($type->getIsEnabled());
                         $copy->setVoteWidgetType($type->getVoteWidgetType());
-                        // $copy->setCreatedAt($type->getCreatedAt());
-                        // $copy->setUpdatedAt($type->getUpdatedAt());
                         $copy->setColor($type->getColor());
                         $copy->setVotesHelpText($type->getVotesHelpText());
                         $copy->setVersionable($type->isVersionable());
