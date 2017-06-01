@@ -69,21 +69,17 @@ class OpinionType
     protected $consultationStepType;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
 
     /**
-     * @Gedmo\Slug(fields={"title", "subtitle"}, updatable=false)
+     * @Gedmo\Slug(fields={"title", "subtitle"}, updatable=false, unique=false)
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -94,22 +90,16 @@ class OpinionType
     private $position;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="vote_widget_type", type="integer")
      */
     private $voteWidgetType = self::VOTE_WIDGET_BOTH;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
      */
     private $votesHelpText = null;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="comment_system", type="integer")
      */
     private $commentSystem = self::COMMENT_SYSTEM_BOTH;

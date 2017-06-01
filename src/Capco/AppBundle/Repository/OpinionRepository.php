@@ -310,7 +310,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getByOpinionTypeAndConsultationStepOrdered(ConsultationStep $step, $opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
+    public function getByOpinionTypeAndConsultationStepOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
         if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -324,10 +324,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.Media', 'm')
-            ->andWhere('o.step = :step')
             ->andWhere('ot.id = :opinionType')
             ->andWhere('o.isTrashed = false')
-            ->setParameter('step', $step)
             ->setParameter('opinionType', $opinionTypeId)
             ->addOrderBy('o.pinned', 'DESC')
         ;
