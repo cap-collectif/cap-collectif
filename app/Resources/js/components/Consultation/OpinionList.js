@@ -58,15 +58,14 @@ export const OpinionList = React.createClass({
             <QueryRenderer
               environment={environment}
               query={graphql`
-              query OpinionListQuery($sectionId: ID!, $limit: Int!, $consultationId: String!) {
-                contributionsBySection(sectionId: $sectionId, limit: $limit, consultationId: $consultationId) {
+              query OpinionListQuery($sectionId: ID!, $limit: Int!) {
+                contributionsBySection(sectionId: $sectionId, limit: $limit) {
                   ...Opinion_opinion
                 }
               }
               `}
               variables={{
                 sectionId: section.id,
-                consultationId: consultation.id,
                 limit: consultation.opinion_count_shown_by_section,
               }}
               render={({ error, props }) => {

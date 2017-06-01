@@ -314,8 +314,6 @@ type Query {
     consultation: Int!
   ): [Opinion]
   contributionsBySection(
-    # TMP bug fix
-    consultationId: String!
     sectionId: ID!
 
     # Max depth.

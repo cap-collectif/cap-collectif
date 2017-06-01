@@ -22,23 +22,16 @@ class OpinionController extends Controller
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/{opinionsSort}/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
-     * @ParamConverter("opinionType", class="CapcoAppBundle:OpinionType", options={"mapping": {"opinionTypeSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
-     *
-     * @param mixed      $page
-     * @param null|mixed $opinionsSort
      */
-    public function showByTypeAction(Project $project, ConsultationStep $currentStep, OpinionType $opinionType, $page, Request $request, $opinionsSort = null)
+    public function showByTypeAction(Project $project, ConsultationStep $currentStep, string $opinionTypeSlug, int $page, Request $request, string $opinionsSort = null)
     {
         if (!$currentStep->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
-
-        if (false === $opinionTypesResolver->stepAllowType($currentStep, $opinionType)) {
-            throw $this->createNotFoundException('This type does not exist for this consultation step');
-        }
+        $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
 
         $filter = $opinionsSort ?: $opinionType->getDefaultFilter();
         $currentUrl = $this
@@ -50,7 +43,7 @@ class OpinionController extends Controller
             ]);
         $opinions = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getByOpinionTypeAndConsultationStepOrdered($currentStep, $opinionType->getId(), 10, $page, $filter);
+            ->getByOpinionTypeOrdered($opinionType->getId(), 10, $page, $filter);
 
         return [
             'currentUrl' => $currentUrl,
@@ -70,14 +63,8 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
-     *
-     * @param mixed $projectSlug
-     * @param mixed $stepSlug
-     * @param mixed $opinionTypeSlug
-     * @param mixed $opinionSlug
-     * @param mixed $versionSlug
      */
-    public function showOpinionVersionAction(Request $request, $projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, $versionSlug)
+    public function showOpinionVersionAction(Request $request, string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, string $versionSlug)
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
         $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
@@ -113,13 +100,8 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
-     *
-     * @param mixed $projectSlug
-     * @param mixed $stepSlug
-     * @param mixed $opinionTypeSlug
-     * @param mixed $opinionSlug
      */
-    public function showOpinionAction($projectSlug, $stepSlug, $opinionTypeSlug, $opinionSlug, Request $request)
+    public function showOpinionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, Request $request)
     {
         $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 

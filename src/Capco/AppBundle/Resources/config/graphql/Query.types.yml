@@ -32,9 +32,6 @@ Query:
             contributionsBySection:
                 type: "[Opinion]"
                 args:
-                    consultationId:
-                        type: "String!"
-                        description: "TMP bug fix"
                     sectionId:
                         type: "ID!"
                     limit:
