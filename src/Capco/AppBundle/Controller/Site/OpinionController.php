@@ -50,7 +50,7 @@ class OpinionController extends Controller
             ]);
         $opinions = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:Opinion')
-            ->getByOpinionTypeAndConsultationStepOrdered($opinionType->getId(), 10, $page, $filter);
+            ->getByOpinionTypeOrdered($opinionType->getId(), 10, $page, $filter);
 
         return [
             'currentUrl' => $currentUrl,

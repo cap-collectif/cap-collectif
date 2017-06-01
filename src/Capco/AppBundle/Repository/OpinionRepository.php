@@ -310,7 +310,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getByOpinionTypeAndConsultationStepOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
+    public function getByOpinionTypeOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
         if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(

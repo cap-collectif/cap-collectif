@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -27,7 +26,6 @@ class Version20170530150306 extends AbstractMigration implements ContainerAwareI
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $steps = $stepRepo->findAll();
         $doneStepsIds = [];
-        $generator = new UuidGenerator();
         foreach ($steps as $step) {
             echo 'Exploring step: ' . $step->getSlug() . "\n";
             if (!in_array($step->getId(), $doneStepsIds, true) && $step->getConsultationStepType() !== null) {
@@ -43,7 +41,6 @@ class Version20170530150306 extends AbstractMigration implements ContainerAwareI
                         $doneStepsIds[] = $otherStep->getId();
                     }
                 }
-                var_dump($step->getId(), $doneStepsIds);
                 $types = $typeRepo->findBy(['consultationStepType' => $currentType]);
                 foreach ($stepsWithSameType as $stepToFix) {
                     echo 'Fixing step: ' . $stepToFix->getSlug() . "\n";

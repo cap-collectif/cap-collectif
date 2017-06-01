@@ -115,7 +115,7 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         $opinionRepo = $this->container->get('capco.opinion.repository');
-        $opinions = $opinionRepo->getByOpinionTypeAndConsultationStepOrdered(
+        $opinions = $opinionRepo->getByOpinionTypeOrdered(
               $type->getId(),
               $limit,
               1,
