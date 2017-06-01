@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Router;
 
 class OpinionTypesResolver
@@ -23,14 +22,40 @@ class OpinionTypesResolver
         $this->router = $router;
     }
 
-    public function findByStepAndSlug(ConsultationStep $step, string $slug): OpinionType
+    public function getAllForConsultationStepType(ConsultationStepType $ct)
     {
-        foreach ($step->getConsultationStepType()->getOpinionTypes() as $section) {
-            if ($section->getSlug() === $slug) {
-                return $section;
+        if ($ct === null) {
+            return [];
+        }
+
+        return $ct->getOpinionTypes();
+    }
+
+    public function consultationStepTypeAllowType(ConsultationStepType $consultationStepType, OpinionType $opinionType)
+    {
+        if ($consultationStepType === null) {
+            return [];
+        }
+
+        $allowed = false;
+        $opinionTypes = $this->getAllForConsultationStepType($consultationStepType);
+        foreach ($opinionTypes as $ot) {
+            if ($ot->getId() === $opinionType->getId()) {
+                $allowed = true;
+                break;
             }
         }
-        throw new NotFoundHttpException('This type does not exist for this consultation step');
+
+        return $allowed;
+    }
+
+    public function stepAllowType(ConsultationStep $step, OpinionType $type)
+    {
+        if (!$step->getConsultationStepType()) {
+            return false;
+        }
+
+        return $this->consultationStepTypeAllowType($step->getConsultationStepType(), $type);
     }
 
     public function getAvailableLinkTypesForConsultationStepType(ConsultationStepType $consultationStepType)

@@ -205,14 +205,14 @@ class EventRepository extends EntityRepository
             ->setParameter('isEnabled', true);
     }
 
-    protected function whereIsFuture(QueryBuilder $qb, $alias = 'e'): QueryBuilder
+    protected function whereIsFuture(QueryBuilder $qb, string $alias = 'e'): QueryBuilder
     {
         return $qb
-            ->andWhere(':now <= ' . $alias . '.endAt')
+            ->andWhere('(' . $alias . '.endAt IS NULL AND :now <= ' . $alias . '.startAt) OR (' . $alias . '.endAt IS NOT NULL AND :now < ' . $alias . '.endAt)')
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsArchived($archived, QueryBuilder $qb, $alias = 'e'): QueryBuilder
+    protected function whereIsArchived(bool $archived, QueryBuilder $qb, string $alias = 'e'): QueryBuilder
     {
         if ($archived) {
             return $qb

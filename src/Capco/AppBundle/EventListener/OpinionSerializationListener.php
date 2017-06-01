@@ -97,23 +97,19 @@ class OpinionSerializationListener extends AbstractSerializationListener
         $user = $token ? $token->getUser() : 'anon.';
 
         if ($project) {
-            $showUrl = $opinion->getSlug()
-            ?
-              $this->router->generate(
-                'app_project_show_opinion',
-                [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                ],
-                true
-                )
-            : null;
             $event->getVisitor()->addData(
                 '_links',
                 [
-                    'show' => $showUrl,
+                    'show' => $this->router->generate(
+                        'app_project_show_opinion',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                            'opinionTypeSlug' => $opinionType->getSlug(),
+                            'opinionSlug' => $opinion->getSlug(),
+                        ],
+                        true
+                    ),
                     'type' => $this->router->generate(
                         'app_consultation_show_opinions',
                         [
