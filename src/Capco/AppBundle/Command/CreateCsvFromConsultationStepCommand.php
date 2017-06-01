@@ -119,6 +119,7 @@ fragment sourceInfos on Source {
     }
     title
     body
+    bodyText
     createdAt
     updatedAt
     url
@@ -149,6 +150,7 @@ fragment sourceInfos on Source {
   		...authorInfos
       title
       body
+      bodyText
       comment
       createdAt
       updatedAt

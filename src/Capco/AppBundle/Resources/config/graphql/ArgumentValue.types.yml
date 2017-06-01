@@ -3,7 +3,7 @@ ArgumentValue:
     config:
         description: "Value of an argument"
         values:
-            FOR:
-                value: 0
             AGAINST:
+                value: 0
+            FOR:
                 value: 1

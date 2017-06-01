@@ -81,7 +81,10 @@ Version:
                 type: "String!"
                 description: "The title of the contribution."
             body:
-                type: "String!"
+                type: "HTML!"
+                description: "The content of the contribution."
+            bodyText:
+                type: "HTML!"
                 description: "The content of the contribution."
             arguments:
                 type: "[Argument]"

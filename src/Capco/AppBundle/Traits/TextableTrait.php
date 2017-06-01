@@ -16,7 +16,7 @@ trait TextableTrait
         return $this->body;
     }
 
-    public function getBodyStripped()
+    public function getBodyText()
     {
         return strip_tags($this->body);
     }
