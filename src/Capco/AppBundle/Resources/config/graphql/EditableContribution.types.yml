@@ -5,4 +5,4 @@ EditableContribution:
         fields:
             updatedAt:
                 type: "String!"
-                description: "Date of last edition."
+                description: "Identifies the date and time when the object was last updated."

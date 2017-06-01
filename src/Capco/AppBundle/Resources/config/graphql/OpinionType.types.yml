@@ -6,11 +6,11 @@ OpinionType:
         fields:
             createdAt:
                 type: "String!"
-                description: "Date of creation."
+                description: "Identifies the date and time when the object was created."
                 resolve: "@=resolver('proposition_createdAt', [value])"
             updatedAt:
                 type: "String!"
-                description: "Date of last edition."
+                description: "Identifies the date and time when the object was last updated."
                 resolve: "@=resolver('proposition_updatedAt', [value])"
             url:
                 type: "String!"

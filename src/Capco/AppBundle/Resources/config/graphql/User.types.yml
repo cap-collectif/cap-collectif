@@ -22,7 +22,7 @@ User:
                 description: "Username of the user."
             createdAt:
                 type: "String!"
-                description: "Date of creation."
+                description: "Identifies the date and time when the object was created."
                 resolve: "@=resolver('user_createdAt', [value])"
             updatedAt:
                 type: "String"

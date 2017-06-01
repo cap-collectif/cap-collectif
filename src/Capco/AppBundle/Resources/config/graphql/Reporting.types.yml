@@ -6,7 +6,7 @@ Reporting:
         fields:
             createdAt:
                 type: "String!"
-                description: "Date of creation."
+                description: "Identifies the date and time when the object was created."
                 resolve: "@=resolver('proposition_createdAt', [value])"
             author:
                 type: "User!"

@@ -1,9 +1,9 @@
 # An argument
 type Argument implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
   url: String!
   expired: Boolean!
@@ -78,11 +78,15 @@ interface ContributionWithAuthor {
   author: User!
 }
 
+scalar DateTime
+
 # A contribution with an author
 interface EditableContribution {
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
 }
+
+scalar HTML
 
 # A media
 type Media {
@@ -95,26 +99,30 @@ type Media {
 
 # A contribution
 type Opinion implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
 
-  # The url of contribution.
-  url: String!
+  # The HTTP url for this contribution.
+  url: URI!
 
   # The author of the contribution.
   author: User!
   type: OpinionType!
+
+  # true if the contribution is expired.
   expired: Boolean!
   published: Boolean!
+
+  # true if the contribution is trashed.
   trashed: Boolean!
 
-  # Date of trash.
+  # The moment the moderator trashed the contribution.
   trashedAt: String
 
-  # Reason of trash.
+  # The reason the moderator trashed the contribution.
   trashedReason: String
 
   # Number of votes.
@@ -155,11 +163,14 @@ type Opinion implements Contribution, TrashableContribution, ContributionWithAut
   # The kind of contribution.
   kind: String!
 
-  # The title of the contribution.
+  # Identifies the contribution title.
   title: String!
 
-  # The content of the contribution.
-  body: String!
+  # Identifies the body of the contribution.
+  body: HTML!
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String!
 
   # The arguments related to the contribution.
   arguments(
@@ -182,10 +193,10 @@ union OpinionOrVersion = Opinion | Version
 
 # A type of opinion
 type OpinionType implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
 
   # The url of contribution.
@@ -323,7 +334,7 @@ type Query {
 
 # A report
 type Reporting implements Contribution, ContributionWithAuthor {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
   # The author of the reporting.
@@ -387,10 +398,10 @@ type Section {
 
 # A source
 type Source implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
   expired: Boolean!
   published: Boolean!
@@ -433,6 +444,8 @@ interface TrashableContribution {
   trashedReason: String
 }
 
+scalar URI
+
 # An user
 type User {
   # The id of the user.
@@ -449,7 +462,7 @@ type User {
   # Username of the user.
   username: String!
 
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
   # Updated date of the user.
@@ -508,10 +521,10 @@ type UserType {
 
 # A version of contribution
 type Version implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
-  # Date of creation.
+  # Identifies the date and time when the object was created.
   createdAt: String!
 
-  # Date of last edition.
+  # Identifies the date and time when the object was last updated.
   updatedAt: String!
 
   # The url of version.
