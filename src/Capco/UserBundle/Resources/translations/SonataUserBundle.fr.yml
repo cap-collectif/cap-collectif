@@ -25,6 +25,7 @@ form:
   label_expires_at: Date d'expiration
   label_phone_confirmed: Compte vérifié par SMS
   label_confirmation_token: Code de vérification par email
+  label_profile_page_indexed: Indiquer aux moteurs de recherche de ne pas référencer ce profil
 
 gender:
   female: Femme

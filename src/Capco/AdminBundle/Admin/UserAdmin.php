@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserAdmin extends BaseAdmin
 {
@@ -213,6 +214,10 @@ class UserAdmin extends BaseAdmin
             ])
             ->end()
             ->with('Profile')
+            ->add('profilePageIndexed', CheckboxType::class, [
+                'required' => false,
+                'translation_domain' => 'SonataUserBundle',
+            ])
             ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
             ], [
