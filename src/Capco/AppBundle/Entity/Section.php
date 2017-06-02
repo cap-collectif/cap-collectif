@@ -100,6 +100,11 @@ class Section
     protected $step;
 
     /**
+     * @ORM\Column(name="body", type="text", nullable=true)
+     */
+    private $body = null;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)

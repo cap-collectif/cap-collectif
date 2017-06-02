@@ -6,8 +6,6 @@ use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HighlightedContent.
- *
  * @ORM\Table(name="highlighted_content")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\HighlightedContentRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")

@@ -68,6 +68,11 @@ abstract class AbstractStep
     protected $projectAbstractStep;
 
     /**
+     * @ORM\Column(name="body", type="text", nullable=true)
+     */
+    private $body = null;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)

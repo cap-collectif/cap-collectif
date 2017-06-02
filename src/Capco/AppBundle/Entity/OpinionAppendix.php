@@ -26,6 +26,11 @@ class OpinionAppendix
     protected $updatedAt;
 
     /**
+     * @ORM\Column(name="body", type="text", nullable=true)
+     */
+    private $body = null;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})
      * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
