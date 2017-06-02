@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ProposalCollectVoteAdmin extends Admin
+class ProposalSelectionVoteAdmin extends Admin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -19,6 +19,9 @@ class ProposalCollectVoteAdmin extends Admin
             ])
             ->add('proposal', null, [
                 'label' => 'admin.fields.proposal',
+            ])
+            ->add('selectionStep', null, [
+                'label' => 'admin.fields.selectionStep',
             ])
             ->add('user', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.argument_vote.voter',
