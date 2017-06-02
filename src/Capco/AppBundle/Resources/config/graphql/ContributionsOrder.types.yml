@@ -1,9 +1,0 @@
-ContributionsOrder:
-    type: enum
-    config:
-        description: "Ordering options for contributions connections"
-        values:
-            FOR:
-                value: 0
-            AGAINST:
-                value: 1

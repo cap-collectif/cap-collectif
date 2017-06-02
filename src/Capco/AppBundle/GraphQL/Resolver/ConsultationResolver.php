@@ -45,6 +45,14 @@ class ConsultationResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Contribution.');
     }
 
+    public function getConsultationTotalContributions(Arg $args): int
+    {
+        $repo = $this->container->get('capco.consultation_step.repository');
+        $consultation = $repo->find($args->offsetGet('consultation'));
+
+        return $consultation->getOpinionCount();
+    }
+
     public function getContributionsRelay(Arg $args)
     {
         $paginator = new Paginator(function ($offset, $limit) use ($args) {

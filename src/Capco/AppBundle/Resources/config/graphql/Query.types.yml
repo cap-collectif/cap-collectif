@@ -29,12 +29,15 @@ Query:
                         description: "Returns all contributions of the provided consultation."
                         type: "ID!"
                 resolve: "@=resolver('contributions', [args])"
-            contributionsRelay:
-                type: ContributionsConnection
+            contributionConnection:
+                type: "ContributionConnection"
                 args:
+                    orderBy:
+                        type: "ContributionOrder!"
+                        description: "Ordering options for contributions returned from the connection."
                     consultation:
                         type: "Int!"
-                        description: "Returns contributions of the provided consultation."
+                        description: "A consultation to filter the contributions by."
                     after:
                         type: "String"
                         description: "Returns the elements in the list that come after the specified global ID."
