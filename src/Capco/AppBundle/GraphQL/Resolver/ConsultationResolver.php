@@ -53,31 +53,22 @@ class ConsultationResolver implements ContainerAwareInterface
         return $consultation->getOpinionCount();
     }
 
-    public function getContributionsRelay(Arg $args)
+    public function getContributionsRelay(ConsultationStep $consultation, Arg $args)
     {
-        $paginator = new Paginator(function ($offset, $limit) use ($args) {
-            $consultationId = $args->offsetGet('consultation');
+        $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
-            'step' => $consultationId,
-            'isEnabled' => true,
-            'expired' => false,
-            'isTrashed' => false,
-          ];
+              'step' => $consultation->getId(),
+              'isEnabled' => true,
+              'expired' => false,
+              'isTrashed' => false,
+            ];
             $orderBy = [];
 
             return $repo->findBy($criteria, $orderBy, $limit, $offset);
         });
 
         return $paginator->forward($args);
-      //   // new Arg(
-      //   //     [
-      //   //       'first' => 1,
-      //   //       'after' => base64_encode('arrayconnection:2')
-      //   //     ]
-      //   //   )
-      // // );
-      //   return $result;
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool

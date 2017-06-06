@@ -5,6 +5,8 @@ import { QueryRenderer, graphql } from 'react-relay';
 import { IntlMixin } from 'react-intl';
 import environment from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
+import ConsultationContributionFiltered
+  from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
 
@@ -26,6 +28,7 @@ export const ConsultationPropositionBox = React.createClass({
             <ConsultationFilterForm />
           </span>
         </Panel> */}
+        <ConsultationContributionFiltered consultationId={step.id} />
         <QueryRenderer
           environment={environment}
           query={graphql`
