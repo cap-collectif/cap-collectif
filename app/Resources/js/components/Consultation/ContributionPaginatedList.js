@@ -7,12 +7,23 @@ import Opinion from './Opinion';
 export const ContributionPaginatedList = React.createClass({
   propTypes: {
     consultation: PropTypes.object.isRequired,
+    relay: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
+  _loadMore() {
+    if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
+      console.log('No More !');
+      return;
+    }
+
+    this.props.relay.loadMore(10, e => {
+      console.log(e);
+    });
+  },
+
   render() {
     const { contributionConnection } = this.props.consultation;
-    console.log('ContributionPaginatedList', this.props);
     return (
       <div className="anchor-offset block  block--bordered">
         <div className={`opinion opinion--default`}>
@@ -28,7 +39,7 @@ export const ContributionPaginatedList = React.createClass({
               <Opinion key={index} opinion={edge.node} />
             ))}
           </div>
-        </ul>}
+        </ul>
         <div className="opinion  opinion__footer  box">
           <a
             onClick={() => this._loadMore()}
