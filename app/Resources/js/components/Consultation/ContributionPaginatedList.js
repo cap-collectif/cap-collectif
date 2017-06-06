@@ -1,31 +1,32 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
 import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 
 export const ContributionPaginatedList = React.createClass({
   propTypes: {
-    consultation: React.PropTypes.object.isRequired,
+    consultation: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
+    const { contributionConnection } = this.props.consultation;
     console.log('ContributionPaginatedList', this.props);
     return (
       <div className="anchor-offset block  block--bordered">
         <div className={`opinion opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
-            {/* <h2 className="pull-left  h4  opinion__header__title">
-              {section.contributionsCount} propositions
-            </h2> */}
+            <h2 className="pull-left  h4  opinion__header__title">
+              {contributionConnection.totalCount || 0} propositions
+            </h2>
           </div>
         </div>
         <ul className="media-list  opinion__list">
           <div>
-            {this.props.consultation.contributionConnection.edges.map(
-              (node, index) => <Opinion key={index} opinion={node} />,
-            )}
+            {contributionConnection.edges.map((edge, index) => (
+              <Opinion key={index} opinion={edge.node} />
+            ))}
           </div>
         </ul>}
         <div className="opinion  opinion__footer  box">
@@ -47,8 +48,8 @@ export default createPaginationContainer(
     fragment ContributionPaginatedList_consultation on Consultation {
       contributionConnection(first: 50) @connection(key: "ContributionPaginatedList_contributionConnection") {
         edges {
+          cursor
           node {
-            id
             ...Opinion_opinion
           }
         }
@@ -59,8 +60,7 @@ export default createPaginationContainer(
     direction: 'forward',
     getConnectionFromProps(props) {
       console.log('getConnectionFromProps', props);
-      return props;
-      // return props.user && props.user.feed;
+      return props.consultation && props.consultation.contributionConnection;
     },
     getFragmentVariables(prevVars /* , totalCount*/) {
       return {

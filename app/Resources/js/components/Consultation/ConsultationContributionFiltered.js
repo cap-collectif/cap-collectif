@@ -39,7 +39,7 @@ export const ConsultationContributionFiltered = React.createClass({
             return (
               <ContributionPaginatedList
                 consultation={props.consultations[0]}
-                {...props}
+                // {...props}
               />
             );
           }
