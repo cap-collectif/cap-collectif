@@ -32,10 +32,11 @@ class QuestionChoiceSerializationListener extends AbstractSerializationListener
         $questionChoice = $event->getObject();
 
         if ($questionChoice->getImage()) {
+            $format = $questionChoice->getQuestion()->getInputType() === 'radio' ? 'form_radio' : 'form';
             try {
                 $event->getVisitor()->addData(
                     'image', [
-                        'url' => $this->mediaExtension->path($questionChoice->getImage(), 'form'),
+                        'url' => $this->mediaExtension->path($questionChoice->getImage(), $format),
                     ]
                 );
             } catch (RouteNotFoundException $e) {

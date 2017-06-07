@@ -48,3 +48,10 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: true
     type: 4
     randomQuestionChoices: true
+  multiplequestion6:
+    id: 15
+    title: Choissez le meilleur logo
+    questionChoices: ['@questionchoice17', '@questionchoice18']
+    required: false
+    type: 3
+    randomQuestionChoices: false

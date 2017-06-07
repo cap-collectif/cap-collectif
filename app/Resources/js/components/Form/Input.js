@@ -1,14 +1,19 @@
 import React from 'react';
 import autosize from 'autosize';
 import mailcheck from 'mailcheck';
-import { OverlayTrigger, Popover, Input as ReactBootstrapInput, FormGroup } from 'react-bootstrap';
+import {
+  OverlayTrigger,
+  Popover,
+  Input as ReactBootstrapInput,
+  FormGroup,
+  Thumbnail,
+} from 'react-bootstrap';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import domains from '../../utils/email_domains';
 
 export default class Input extends ReactBootstrapInput {
-
   constructor() {
     super();
     this.state = { suggestion: null };
@@ -30,10 +35,7 @@ export default class Input extends ReactBootstrapInput {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      type,
-      value,
-    } = this.props;
+    const { type, value } = this.props;
     if (type === 'textarea') {
       autosize(this.getInputDOMNode());
     }
@@ -50,23 +52,30 @@ export default class Input extends ReactBootstrapInput {
   }
 
   renderSuggestion() {
-    return this.state.suggestion &&
-        <p className="registration__help">
-          Vouliez vous dire <a href={'#email-correction'} onClick={this.setSuggestion.bind(this)} className="js-email-correction">{ this.state.suggestion }</a> ?
-        </p>
-    ;
+    return (
+      this.state.suggestion &&
+      <p className="registration__help">
+        Vouliez vous dire
+        {' '}
+        <a
+          href={'#email-correction'}
+          onClick={this.setSuggestion.bind(this)}
+          className="js-email-correction">
+          {this.state.suggestion}
+        </a>
+        {' '}
+        ?
+      </p>
+    );
   }
 
   renderErrors() {
     const { errors } = this.props;
     return errors
-      ? (
-          <span className="error-block" key="error">
-            {errors}
-          </span>
-        )
-      : null
-    ;
+      ? <span className="error-block" key="error">
+          {errors}
+        </span>
+      : null;
   }
 
   renderInput() {
@@ -88,7 +97,15 @@ export default class Input extends ReactBootstrapInput {
     }
 
     if (type && type === 'image') {
-      return <ImageUpload id={id} className={className} valueLink={valueLink} accept="image/*" preview={image} />;
+      return (
+        <ImageUpload
+          id={id}
+          className={className}
+          valueLink={valueLink}
+          accept="image/*"
+          preview={image}
+        />
+      );
     }
 
     if (type && type === 'medias') {
@@ -133,30 +150,19 @@ export default class Input extends ReactBootstrapInput {
 
     if (popover) {
       return (
-        <OverlayTrigger placement="right"
+        <OverlayTrigger
+          placement="right"
           overlay={
             <Popover id={popover.id}>
-              { popover.message }
+              {popover.message}
             </Popover>
-          }
-        >
-        {
-           super.renderInput()
-        }
+          }>
+          {super.renderInput()}
         </OverlayTrigger>
       );
     }
 
     return super.renderInput();
-  }
-
-  renderImage() {
-    const { image } = this.props;
-    if (image) {
-      return (
-        <img alt="" role="presentation" src={image} />
-      );
-    }
   }
 
   renderFormGroup(children) {
@@ -167,39 +173,45 @@ export default class Input extends ReactBootstrapInput {
       delete props.id;
     }
     return (
-      <FormGroup {...props} >
+      <FormGroup {...props}>
         {children}
       </FormGroup>
     );
   }
 
   renderChildren() {
-    const { type } = this.props;
-    return !this.isCheckboxOrRadio()
-      ? [
+    const { type, image } = this.props;
+    if (!this.isCheckboxOrRadio()) {
+      return [
         this.renderLabel(),
         this.renderHelp(),
         this.renderWrapper([
-          this.renderInputGroup(
-            this.renderInput(),
-          ),
+          this.renderInputGroup(this.renderInput()),
           type !== 'captcha' && this.renderIcon(), // no feedbacks for captcha
         ]),
         this.renderSuggestion(),
         this.renderErrors(),
-      ]
-      : this.renderWrapper([
+      ];
+    }
+    if (!image) {
+      return this.renderWrapper([
         this.renderCheckboxAndRadioWrapper(
-          this.renderLabel(
-            this.renderInput(),
-          ),
+          this.renderLabel(this.renderInput()),
         ),
         this.renderErrors(),
         this.renderHelp(),
-      ])
-    ;
+      ]);
+    }
+    return this.renderWrapper([
+      <Thumbnail src={image} style={{ textAlign: 'center' }}>
+        {this.renderCheckboxAndRadioWrapper(
+          this.renderLabel(this.renderInput()),
+        )}
+        {this.renderHelp()}
+        {this.renderErrors()}
+      </Thumbnail>,
+    ]);
   }
-
 }
 
 Input.PropTypes = {

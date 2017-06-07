@@ -275,7 +275,7 @@ abstract class AbstractQuestion
 
         $this->setUpdatedAt($now);
 
-        if ($this->getQuestionnaireAbstractQuestion()->getProposalForm()) {
+        if ($this->getQuestionnaireAbstractQuestion() && $this->getQuestionnaireAbstractQuestion()->getProposalForm()) {
             $this->getQuestionnaireAbstractQuestion()->getProposalForm()->setUpdatedAt($now);
         }
     }

@@ -55,3 +55,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     registrationForm: '@registrationForm'
     question: '@multiplequestion5'
     position: 4
+  qaq15:
+    questionnaire: '@questionnaire1'
+    question: '@multiplequestion6'
+    position: 5

@@ -129,6 +129,12 @@ liip_imagine:
             filters:
                 relative_resize: { heighten: 100 }
 
+        default_form_radio:
+            quality: 70
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [847, 847], mode: outbound, allow_upscale: false }
+
         default_img_video:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'

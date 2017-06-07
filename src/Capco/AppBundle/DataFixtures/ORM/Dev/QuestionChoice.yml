@@ -50,3 +50,11 @@ Capco\AppBundle\Entity\QuestionChoice:
   questionchoice16:
     title: Végéta
     position: 3
+  questionchoice17:
+    title: Logo 1
+    position: 1
+    image: '@MediaProject1'
+  questionchoice18:
+    title: Logo 2
+    image: '@MediaProject2'
+    position: 2

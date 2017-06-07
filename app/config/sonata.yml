@@ -125,6 +125,7 @@ sonata_media:
                 big:            { width: 500, quality: 70 }
                 blockHeader:    { width: 750, height: 500, quality: 70 }
                 project:        { width: 360, height: 240, quality: 70 }
+                form_radio: ~
                 form:           { height: 150, quality: 70 }
                 idea:           { height: 400, quality: 70 }
                 proposal:       { height: 400, quality: 70 }

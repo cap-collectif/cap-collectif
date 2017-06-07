@@ -11,8 +11,13 @@ import Checkbox from '../../Form/Checkbox';
 import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
 
-const getRequiredFieldIndicationStrategory = (fields: Array<{required: boolean}>) => {
-  const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
+const getRequiredFieldIndicationStrategory = (
+  fields: Array<{ required: boolean }>,
+) => {
+  const numberOfRequiredFields = fields.reduce(
+    (a, b) => a + (b.required ? 1 : 0),
+    0,
+  );
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
   if (numberOfRequiredFields === 0) {
@@ -54,10 +59,10 @@ const ReplyForm = React.createClass({
   getInitialState() {
     const { reply } = this.props;
     const form = {};
-    this.props.form.fields.forEach((field) => {
+    this.props.form.fields.forEach(field => {
       form[field.id] = field.type === 'checkbox' ? [] : '';
 
-      reply.responses.map((response) => {
+      reply.responses.map(response => {
         form[response.field.id] = response.value;
       });
 
@@ -125,18 +130,18 @@ const ReplyForm = React.createClass({
       if (this.isValid()) {
         const responses = [];
         const data = {};
-        Object.keys(this.state.form).map((key) => {
+        Object.keys(this.state.form).map(key => {
           const response = { question: key };
           if (Array.isArray(this.state.form[key])) {
             let currentField = null;
-            form.fields.map((field) => {
+            form.fields.map(field => {
               if (String(field.id) === key) {
                 currentField = field;
               }
             });
 
             const choicesLabels = [];
-            currentField.choices.forEach((choice) => {
+            currentField.choices.forEach(choice => {
               choicesLabels.push(choice.label);
             });
 
@@ -147,7 +152,9 @@ const ReplyForm = React.createClass({
                 other = value;
               }
             });
-            response.value = other ? { labels: this.state.form[key], other } : { labels: this.state.form[key] };
+            response.value = other
+              ? { labels: this.state.form[key], other }
+              : { labels: this.state.form[key] };
           } else {
             response.value = this.state.form[key];
           }
@@ -159,8 +166,7 @@ const ReplyForm = React.createClass({
           data.private = this.state.private;
         }
 
-        return ReplyActions
-          .add(form.id, data)
+        return ReplyActions.add(form.id, data)
           .then(onSubmitSuccess)
           .catch(onSubmitFailure);
       }
@@ -194,9 +200,15 @@ const ReplyForm = React.createClass({
 
   emptyForm() {
     const form = {};
-    this.props.form.fields.forEach((field) => {
-      form[field.id] = (field.type === 'checkbox' || field.type === 'ranking') ? [] : '';
-      if (field.type === 'checkbox' || field.type === 'radio' || field.type === 'ranking') {
+    this.props.form.fields.forEach(field => {
+      form[field.id] = field.type === 'checkbox' || field.type === 'ranking'
+        ? []
+        : '';
+      if (
+        field.type === 'checkbox' ||
+        field.type === 'radio' ||
+        field.type === 'ranking'
+      ) {
         this[`field-${field.id}`].empty();
       }
     });
@@ -217,145 +229,135 @@ const ReplyForm = React.createClass({
   },
 
   render() {
-    const {
-      disabled,
-      form,
-    } = this.props;
+    const { disabled, form } = this.props;
     const strategy = getRequiredFieldIndicationStrategory(form.fields);
     return (
       <form id="reply-form" ref="form">
-        {
-          form.description &&
-            <div>
-              <FormattedHTMLMessage message={form.description} />
-              <hr />
-            </div>
-        }
-        {
-          strategy === 'all_required' &&
-            <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>
-        }
-        {
-          form.fields.map((field) => {
-            const key = field.slug;
-            const inputType = field.type || 'text';
-            const labelAppend = field.required
+        {form.description &&
+          <div style={{ color: 'black' }}>
+            <FormattedHTMLMessage message={form.description} />
+            <hr />
+          </div>}
+        {strategy === 'all_required' &&
+          <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>}
+        {form.fields.map(field => {
+          const key = field.slug;
+          const inputType = field.type || 'text';
+          const labelAppend = field.required
             ? strategy === 'minority_required'
-              ? ' <span class="small warning">Obligatoire</span>'
-              : ''
-            : (strategy === 'majority_required' || strategy === 'half_required')
-              ? ' <span class="small excerpt">Facultatif</span>'
-              : ''
-            ;
-            const labelMessage = field.question + labelAppend;
-            const label = (<FormattedHTMLMessage message={labelMessage} />);
-            switch (inputType) {
-              case 'checkbox':
-                return (
-                  <Checkbox
-                    key={key}
-                    ref={c => this[`field-${field.id}`] = c}
-                    id={`reply-${field.id}`}
-                    field={field}
-                    getGroupStyle={this.getGroupStyle}
-                    renderFormErrors={this.renderFormErrors}
-                    onChange={this.onChange}
-                    values={this.state.form}
-                    label={label}
-                    labelClassName="h4"
-                    disabled={disabled}
-                  />
-                );
-              case 'radio':
-                return (
-                  <Radio
-                    key={key}
-                    ref={c => this[`field-${field.id}`] = c}
-                    id={`reply-${field.id}`}
-                    field={field}
-                    getGroupStyle={this.getGroupStyle}
-                    renderFormErrors={this.renderFormErrors}
-                    onChange={this.onChange}
-                    label={label}
-                    labelClassName="h4"
-                    disabled={disabled}
-                  />
-                );
-              case 'select':
-                return (
-                  <Input
-                    key={key}
-                    ref={c => this[`field-${field.id}`] = c}
-                    id={`reply-${field.id}`}
-                    type={inputType}
-                    help={field.helpText}
-                    groupClassName={this.getGroupStyle(field.id)}
-                    valueLink={this.linkState(`form.${field.id}`)}
-                    errors={this.renderFormErrors(field.id)}
-                    defaultValue=""
-                    label={label}
-                    labelClassName="h4"
-                    disabled={disabled}
-                  >
-                    <option value="" disabled>{this.getIntlMessage('global.select')}</option>
-                    {
-                      field.choices.map(choice => <option key={choice.id} value={choice.label}>{choice.label}</option>)
-                    }
-                  </Input>
-                );
-              case 'ranking':
-                return (
-                  <Ranking
-                    key={key}
-                    ref={c => this[`field-${field.id}`] = c}
-                    id={`reply-${field.id}`}
-                    field={field}
-                    getGroupStyle={this.getGroupStyle}
-                    renderFormErrors={this.renderFormErrors}
-                    onChange={this.onChange}
-                    label={label}
-                    labelClassName="h4"
-                    disabled={disabled}
-                  />
-                );
+                ? ' <span class="small warning">Obligatoire</span>'
+                : ''
+            : strategy === 'majority_required' || strategy === 'half_required'
+                ? ' <span class="small excerpt">Facultatif</span>'
+                : '';
+          const labelMessage = field.question + labelAppend;
+          const label = <FormattedHTMLMessage message={labelMessage} />;
+          switch (inputType) {
+            case 'checkbox':
+              return (
+                <Checkbox
+                  key={key}
+                  ref={c => (this[`field-${field.id}`] = c)}
+                  id={`reply-${field.id}`}
+                  field={field}
+                  getGroupStyle={this.getGroupStyle}
+                  renderFormErrors={this.renderFormErrors}
+                  onChange={this.onChange}
+                  values={this.state.form}
+                  label={label}
+                  labelClassName="h4"
+                  disabled={disabled}
+                />
+              );
+            case 'radio':
+              return (
+                <Radio
+                  key={key}
+                  ref={c => (this[`field-${field.id}`] = c)}
+                  id={`reply-${field.id}`}
+                  field={field}
+                  getGroupStyle={this.getGroupStyle}
+                  renderFormErrors={this.renderFormErrors}
+                  onChange={this.onChange}
+                  label={label}
+                  labelClassName="h4"
+                  disabled={disabled}
+                />
+              );
+            case 'select':
+              return (
+                <Input
+                  key={key}
+                  ref={c => (this[`field-${field.id}`] = c)}
+                  id={`reply-${field.id}`}
+                  type={inputType}
+                  help={field.helpText}
+                  groupClassName={this.getGroupStyle(field.id)}
+                  valueLink={this.linkState(`form.${field.id}`)}
+                  errors={this.renderFormErrors(field.id)}
+                  defaultValue=""
+                  label={label}
+                  labelClassName="h4"
+                  disabled={disabled}>
+                  <option value="" disabled>
+                    {this.getIntlMessage('global.select')}
+                  </option>
+                  {field.choices.map(choice => (
+                    <option key={choice.id} value={choice.label}>
+                      {choice.label}
+                    </option>
+                  ))}
+                </Input>
+              );
+            case 'ranking':
+              return (
+                <Ranking
+                  key={key}
+                  ref={c => (this[`field-${field.id}`] = c)}
+                  id={`reply-${field.id}`}
+                  field={field}
+                  getGroupStyle={this.getGroupStyle}
+                  renderFormErrors={this.renderFormErrors}
+                  onChange={this.onChange}
+                  label={label}
+                  labelClassName="h4"
+                  disabled={disabled}
+                />
+              );
 
-              default:
-                return (
-                  <Input
-                    ref={c => this[`field-${field.id}`] = c}
-                    key={key}
-                    id={`reply-${field.id}`}
-                    type={inputType}
-                    help={field.helpText}
-                    groupClassName={this.getGroupStyle(field.id)}
-                    valueLink={this.linkState(`form.${field.id}`)}
-                    errors={this.renderFormErrors(field.id)}
-                    placeholder={this.getIntlMessage('reply.your_response')}
-                    label={label}
-                    labelClassName="h4"
-                    disabled={disabled}
-                  />
-                );
-            }
-          })
-        }
-        {
-          form.anonymousAllowed &&
-            <div>
-              <hr style={{ marginBottom: '30px' }} />
-              <Input
-                type="checkbox"
-                name="reply-private"
-                checkedLink={this.linkState('private')}
-                label={this.getIntlMessage('reply.form.private')}
-                disabled={disabled}
-              />
-            </div>
-        }
+            default:
+              return (
+                <Input
+                  ref={c => (this[`field-${field.id}`] = c)}
+                  key={key}
+                  id={`reply-${field.id}`}
+                  type={inputType}
+                  help={field.helpText}
+                  groupClassName={this.getGroupStyle(field.id)}
+                  valueLink={this.linkState(`form.${field.id}`)}
+                  errors={this.renderFormErrors(field.id)}
+                  placeholder={this.getIntlMessage('reply.your_response')}
+                  label={label}
+                  labelClassName="h4"
+                  disabled={disabled}
+                />
+              );
+          }
+        })}
+        {form.anonymousAllowed &&
+          <div>
+            <hr style={{ marginBottom: '30px' }} />
+            <Input
+              type="checkbox"
+              name="reply-private"
+              checkedLink={this.linkState('private')}
+              label={this.getIntlMessage('reply.form.private')}
+              disabled={disabled}
+            />
+          </div>}
       </form>
     );
   },
-
 });
 
 export default ReplyForm;
