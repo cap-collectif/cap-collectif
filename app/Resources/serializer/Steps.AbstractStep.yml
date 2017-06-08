@@ -14,7 +14,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
   properties:
     id:
       expose: true
-      type: integer
+      type: string
       groups: [Opinions, Proposals, Steps, SelectionStepId]
     title:
       expose: true

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,13 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProjectAbstractStep
 {
     use PositionableTrait;
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use UuidTrait;
 
     /**
      * @Gedmo\SortableGroup
@@ -48,16 +43,6 @@ class ProjectAbstractStep
         }
 
         return 'undefined step';
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

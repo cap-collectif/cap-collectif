@@ -6,7 +6,7 @@ import IntlData from '../../../translations/FR';
 
 describe('<ProposalForm />', () => {
   const props = {
-    currentStepId: 1,
+    currentStepId: '1',
     form: {
       title: 'proposal form',
       body: 'body',

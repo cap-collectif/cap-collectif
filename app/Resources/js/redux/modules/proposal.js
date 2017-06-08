@@ -12,6 +12,7 @@ import type {
   Exact,
   State as GlobalState,
   Dispatch,
+  Uuid,
   Action,
 } from '../../types';
 
@@ -30,7 +31,7 @@ type SubmitFusionFormAction = {
 };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 };
 type LoadSelectionsAction = {
@@ -52,28 +53,28 @@ type CancelSubmitFusionFormAction = {
 };
 type OpenVotesModalAction = {
   type: 'proposal/OPEN_VOTES_MODAL',
-  stepId: number,
+  stepId: Uuid,
 };
 type CloseVotesModalActionAction = {
   type: 'proposal/CLOSE_VOTES_MODAL',
-  stepId: number,
+  stepId: Uuid,
 };
 type VoteSuccessAction = {
   type: 'proposal/VOTE_SUCCEEDED',
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   vote: Object,
   comment: Object,
 };
 type RequestLoadVotesAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 };
 type DeleteVoteSucceededAction = {
   type: 'proposal/DELETE_VOTE_SUCCEEDED',
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   vote: Object,
 };
 type RequestDeleteProposalVoteAction = {
@@ -102,7 +103,7 @@ type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
 type SendProposalNotificationSuceedAction = {
   type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED',
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 };
 type SendProposalNotificationFailedAction = {
   type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR',
@@ -139,7 +140,7 @@ export type State = {
   +order: string,
   +filters: Object,
   +terms: ?string,
-  +lastEditedStepId: ?number,
+  +lastEditedStepId: ?Uuid,
   +currentPaginationPage: number,
   +lastEditedProposalId: ?number,
   +lastNotifiedStepId: ?number,
@@ -203,15 +204,13 @@ export const openVotesModal = (stepId: number): OpenVotesModalAction => ({
   type: 'proposal/OPEN_VOTES_MODAL',
   stepId,
 });
-export const closeVotesModal = (
-  stepId: number,
-): CloseVotesModalActionAction => ({
+export const closeVotesModal = (stepId: Uuid): CloseVotesModalActionAction => ({
   type: 'proposal/CLOSE_VOTES_MODAL',
   stepId,
 });
 export const voteSuccess = (
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   vote: Object,
   comment: Object,
 ): VoteSuccessAction => ({
@@ -222,7 +221,7 @@ export const voteSuccess = (
   comment,
 });
 export const loadVotes = (
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 ): RequestLoadVotesAction => ({
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -230,7 +229,7 @@ export const loadVotes = (
   proposalId,
 });
 export const deleteVoteSucceeded = (
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
   vote: Object,
 ): DeleteVoteSucceededAction => ({
@@ -344,12 +343,12 @@ export const stopVoting = (): VoteFailedAction => ({
 
 type SelectStepSucceedAction = {
   type: 'proposal/SELECT_SUCCEED',
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 };
 type UnSelectStepSucceedAction = {
   type: 'proposal/UNSELECT_SUCCEED',
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 };
 
@@ -362,7 +361,7 @@ const unSelectStepSucceed = (
   proposalId,
 });
 const selectStepSucceed = (
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
 ): SelectStepSucceedAction => ({
   type: 'proposal/SELECT_SUCCEED',
@@ -372,12 +371,12 @@ const selectStepSucceed = (
 
 type UpdateSelectionStatusSucceedAction = {
   type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED',
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
   status: ?Status,
 };
 const updateSelectionStatusSucceed = (
-  stepId: number,
+  stepId: Uuid,
   proposalId: number,
   status: ?Status,
 ): UpdateSelectionStatusSucceedAction => ({
@@ -390,12 +389,12 @@ const updateSelectionStatusSucceed = (
 type UpdateProposalCollectStatusSucceedAction = {
   type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED',
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   status: ?Status,
 };
 const updateProposalCollectStatusSucceed = (
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   status: ?Status,
 ): UpdateProposalCollectStatusSucceedAction => ({
   type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED',
@@ -406,7 +405,7 @@ const updateProposalCollectStatusSucceed = (
 
 export const sendProposalNotificationSucceed = (
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 ): SendProposalNotificationSuceedAction => ({
   type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED',
   proposalId,
@@ -422,7 +421,7 @@ const sendProposalNotificationError = (
 export const sendProposalNotification = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 ): void => {
   Fetcher.post(`/proposals/${proposalId}/notify-status-changed`)
     .then(() => {
@@ -436,7 +435,7 @@ export const sendProposalNotification = (
 export const sendSelectionNotification = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 ): void => {
   Fetcher.post(
     `/selection_step/${stepId}/proposals/${proposalId}/notify-status-changed`,
@@ -453,7 +452,7 @@ export const sendSelectionNotification = (
 export const updateProposalStatus = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   value: string,
 ) => {
   Fetcher.patch(`/proposals/${proposalId}`, { status: value })
@@ -470,7 +469,7 @@ export const updateProposalStatus = (
 export const updateSelectionStatus = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
   value: string,
 ) => {
   Fetcher.patch(`/selection_steps/${stepId}/selections/${proposalId}`, {
@@ -501,7 +500,7 @@ export const updateStepStatus = (
 export const unSelectStep = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 ) => {
   Fetcher.delete(
     `/selection_steps/${stepId}/selections/${proposalId}`,
@@ -512,7 +511,7 @@ export const unSelectStep = (
 export const selectStep = (
   dispatch: Dispatch,
   proposalId: number,
-  stepId: number,
+  stepId: Uuid,
 ) => {
   Fetcher.post(`/selection_steps/${stepId}/selections`, {
     proposal: proposalId,

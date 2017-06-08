@@ -254,12 +254,12 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $participants = $contributionResolver->countStepContributors($cs);
                 $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                 set cs.contributorsCount = ' . $participants . '
-                where cs.id = ' . $cs->getId()
+                where cs.id = \'' . $cs->getId() . '\''
               )->execute();
                 $votes = $contributionResolver->countStepVotes($cs);
                 $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                 set cs.votesCount = ' . $votes . '
-                where cs.id = ' . $cs->getId()
+                where cs.id = \'' . $cs->getId() . '\''
               )->execute();
             }
         }
@@ -279,7 +279,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $participants = $contributionResolver->countStepContributors($cs);
                 $em->createQuery('UPDATE CapcoAppBundle:Steps\CollectStep cs
                 set cs.contributorsCount = ' . $participants . '
-                where cs.id = ' . $cs->getId()
+                where cs.id = \'' . $cs->getId() . '\''
               )->execute();
             }
         }
@@ -298,7 +298,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $participants = $contributionResolver->countStepContributors($qs);
                 $em->createQuery('UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs
                 set qs.contributorsCount = ' . $participants . '
-                where qs.id = ' . $qs->getId()
+                where qs.id = \'' . $qs->getId() . '\''
               )->execute();
             }
         }
@@ -317,7 +317,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                 $participants = $contributionResolver->countStepContributors($ss) + $anonymousParticipants;
                 $em->createQuery('UPDATE CapcoAppBundle:Steps\SelectionStep ss
                 set ss.contributorsCount = ' . $participants . '
-                where ss.id = ' . $ss->getId()
+                where ss.id = \'' . $ss->getId() . '\''
               )->execute();
             }
         }

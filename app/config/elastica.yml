@@ -331,7 +331,7 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: long
+                  type: object
                   index: not_analyzed
             likers:
               type: object
@@ -502,13 +502,13 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: long
+                  type: object
                   index: not_analyzed
             selectionStep:
               type: object
               properties:
                 id:
-                  type: long
+                  type: string
                   index: not_analyzed
           persistence:
             driver: orm

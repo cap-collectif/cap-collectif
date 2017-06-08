@@ -88,7 +88,7 @@ Feature: Proposal Restful Api
         "selections": [
           {
             "step": {
-              "id": @integer@,
+              "id": @string@,
               "projectId": @string@,
               "position": @integer@,
               "title": @string@,
@@ -233,7 +233,7 @@ Feature: Proposal Restful Api
         "selections": [
           {
             "step": {
-              "id": @integer@,
+              "id": @string@,
               "projectId": @string@,
               "position": @integer@,
               "title": @string@,
@@ -386,7 +386,7 @@ Feature: Proposal Restful Api
         "selections": [
           {
             "step": {
-              "id": @integer@,
+              "id": @string@,
               "projectId": @string@,
               "position": @integer@,
               "title": @string@,
@@ -432,7 +432,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a collect step
-    When I send a POST request to "/api/collect_steps/61/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/collectstep1/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -490,7 +490,7 @@ Feature: Proposal Restful Api
   @elasticsearch
   Scenario: Logged in API client wants to get all proposals from a private collect step
     Given I am logged in to api as user
-    When I send a POST request to "/api/collect_steps/64/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/collectstep4/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -537,7 +537,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get all proposals from a private collect step
-    When I send a POST request to "/api/collect_steps/64/proposals/search?page=1&pagination=50&order=old" with json:
+    When I send a POST request to "/api/collect_steps/collectstep4/proposals/search?page=1&pagination=50&order=old" with json:
     """
     {}
     """
@@ -552,7 +552,7 @@ Feature: Proposal Restful Api
 
   @elasticsearch
   Scenario: Anonymous API client wants to get proposals from a collect step with filters
-    When I send a POST request to "/api/collect_steps/61/proposals/search?order=last" with json:
+    When I send a POST request to "/api/collect_steps/collectstep1/proposals/search?order=last" with json:
     """
     {
       "terms": null,
@@ -915,7 +915,7 @@ Feature: Proposal Restful Api
       [
         {
           "step": {
-            "id": 6,
+            "id": "selectionStep6",
             "statuses": @...@
           },
           "status": {

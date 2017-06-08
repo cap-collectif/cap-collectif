@@ -37,7 +37,7 @@ Feature: Opinions
         },
 
         "step": {
-          "id": @integer@,
+          "id": @string@,
           "projectId": @string@,
           "position": @integer@,
           "timeless": @boolean@,
@@ -122,13 +122,13 @@ Feature: Opinions
 
   @security
   Scenario: Anonymous API client wants to add an opinion
-    When I send a POST request to "/api/projects/5/steps/5/opinion_types/opinionType10/opinions" with a valid opinion json
+    When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
     Then the JSON response status code should be 401
 
   @security
   Scenario: logged in API client wants to add an opinion to a not enabled opinionType
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/1/steps/4/opinion_types/opinionType1/opinions" with a valid opinion json
+    When I send a POST request to "/api/projects/1/steps/cstep4/opinion_types/opinionType1/opinions" with a valid opinion json
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -142,13 +142,13 @@ Feature: Opinions
   @database
   Scenario: logged in API client wants to add an opinion
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/5/steps/5/opinion_types/opinionType10/opinions" with a valid opinion json
+    When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
     Then the JSON response status code should be 201
 
   @database
   Scenario: logged in API client wants to add an opinion with appendices
     Given I am logged in to api as user
-    When I send a POST request to "/api/projects/5/steps/5/opinion_types/opinionType5/opinions" with json:
+    When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType5/opinions" with json:
     """
     {
       "title": "Nouveau titre",
@@ -170,7 +170,7 @@ Feature: Opinions
     @security
     Scenario: logged in API client wants to add an opinion with an appendixType from a wrong opinionType
       Given I am logged in to api as user
-      When I send a POST request to "/api/projects/5/steps/5/opinion_types/opinionType7/opinions" with json:
+      When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType7/opinions" with json:
       """
       {
         "title": "Nouveau titre",
@@ -199,7 +199,7 @@ Feature: Opinions
       @security
       Scenario: logged in API client wants to add an opinion with unknown appendixType
         Given I am logged in to api as user
-        When I send a POST request to "/api/projects/5/steps/5/opinion_types/opinionType7/opinions" with json:
+        When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType7/opinions" with json:
         """
         {
           "title": "Nouveau titre",

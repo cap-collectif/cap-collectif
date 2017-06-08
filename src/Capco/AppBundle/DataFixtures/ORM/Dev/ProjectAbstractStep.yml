@@ -1,129 +1,161 @@
 Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
   pas1:
+    id: pas1
     step: '@cstep1'
     project: '@p1'
     position: 2
   pas2:
+    id: pas2
     step: '@cstep2'
     project: '@p2'
     position: 1
   pas3:
+    id: pas3
     step: '@cstep3'
     project: '@p3'
     position: 1
   pas4:
+    id: pas4
     step: '@cstep4'
     project: '@p4'
     position: 1
   pas5:
+    id: pas5
     step: '@ostep1'
     project: '@p1'
     position: 3
   pas6:
+    id: pas6
     step: '@ostep2'
     project: '@p2'
     position: 2
   pas7:
+    id: pas7
     step: '@ostep3'
     project: '@p3'
     position: 2
   pas8:
+    id: pas8
     step: '@pstep1'
     project: '@p1'
     position: 1
   pas9:
+    id: pas9
     step: '@sstep1'
     project: '@p2'
     position: 3
   pas10:
+    id: pas10
     step: '@cstep5'
     project: '@p5'
     position: 1
   pas11:
+    id: pas11
     step: '@sstep2'
     project: '@p5'
     position: 2
   pas13:
+    id: pas13
     step: '@rstep1'
     project: '@p1'
     position: 4
   pas14:
+    id: pas14
     step: '@rstep2'
     project: '@p5'
     position: 4
   pas15:
+    id: pas15
     step: '@collectstep1'
     project: '@p6'
     position: 1
   pas16:
+    id: pas16
     step: '@collectstep2'
     project: '@p6'
     position: 3
   pas17:
+    id: pas17
     step: '@selectionStep1'
     project: '@p6'
     position: 4
   pas18:
+    id: pas18
     step: '@selectionStep2'
     project: '@p6'
     position: 5
   pas19:
+    id: pas19
     step: '@selectionStep3'
     project: '@p6'
     position: 6
   pas20:
+    id: pas20
     step: '@collectstep3'
     project: '@p7'
     position: 1
   pas21:
+    id: pas21
     step: '@selectionStep4'
     project: '@p7'
     position: 2
   pas22:
+    id: pas22
     step: '@selectionStep5'
     project: '@p10'
     position: 2
   pas23:
+    id: pas23
     step: '@selectionStep6'
     project: '@p6'
     position: 6
   pas24:
+    id: pas24
     step: '@questionnairestep1'
     project: '@p8'
     position: 2
   pas25:
+    id: pas25
     step: '@questionnairestep2'
     project: '@p8'
     position: 3
   pas26:
+    id: pas26
     step: '@questionnairestep3'
     project: '@p8'
     position: 4
   pas27:
+    id: pas27
     step: @pstep2
     project: '@p8'
     position: 1
   pas28:
+    id: pas28
     step: "@collectstep4"
     project: "@p6"
     position: 2
   pas29:
+    id: pas29
     step: "@selectionStep7"
     project: "@p6"
     position: 10
   pas30:
+    id: pas30
     step: "@collectstep5"
     project: "@p9"
     position: 1
   pas31:
+    id: pas31
     step: "@collectstep6"
     project: "@p10"
     position: 1
   pas32:
+    id: pas32
     step: "@collectstep7"
     project: "@p11"
     position: 1
   pas33:
+    id: pas33
     step: "@selectionStep8"
     project: "@p11"
     position: 2
