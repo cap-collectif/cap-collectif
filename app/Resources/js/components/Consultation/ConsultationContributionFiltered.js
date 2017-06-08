@@ -18,13 +18,13 @@ export const ConsultationContributionFiltered = React.createClass({
       <QueryRenderer
         environment={environment}
         query={graphql`
-        query ConsultationContributionFilteredQuery($consultationId: ID!) {
+        query ConsultationContributionFilteredQuery($consultationId: ID!, $count: Int!, $cursor: String) {
           consultations(id: $consultationId) {
             ...ContributionPaginatedList_consultation
           }
         }
         `}
-        variables={{ consultationId }}
+        variables={{ consultationId, count: 2, cursor: null }}
         render={({ error, props }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console
@@ -35,11 +35,9 @@ export const ConsultationContributionFiltered = React.createClass({
             );
           }
           if (props) {
-            console.log('ConsultationContributionFiltered', props);
             return (
               <ContributionPaginatedList
                 consultation={props.consultations[0]}
-                // {...props}
               />
             );
           }

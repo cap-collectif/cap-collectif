@@ -10,6 +10,12 @@ import ConsultationContributionFiltered
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
 
+const graphqlError = (
+  <p className="text-danger">
+    Désolé une erreur s'est produite… Réessayez plus tard.
+  </p>
+);
+
 export const ConsultationPropositionBox = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
@@ -46,19 +52,18 @@ export const ConsultationPropositionBox = React.createClass({
           render={({ error, props }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
-              return (
-                <p className="text-danger">
-                  Désolé une erreur s'est produite… Réessayez plus tard.
-                </p>
-              );
+              return graphqlError;
             }
             if (props) {
-              return (
-                <SectionRecursiveList
-                  consultation={step}
-                  sections={props.consultations[0].sections}
-                />
-              );
+              if (props.consultations[0].sections) {
+                return (
+                  <SectionRecursiveList
+                    consultation={step}
+                    sections={props.consultations[0].sections}
+                  />
+                );
+              }
+              return graphqlError;
             }
             return <Loader />;
           }}

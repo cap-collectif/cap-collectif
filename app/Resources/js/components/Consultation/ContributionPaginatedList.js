@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
 import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
+// import Loader from '../Utils/Loader';
 
 export const ContributionPaginatedList = React.createClass({
   propTypes: {
@@ -11,19 +12,8 @@ export const ContributionPaginatedList = React.createClass({
   },
   mixins: [IntlMixin],
 
-  _loadMore() {
-    if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
-      console.log('No More !');
-      return;
-    }
-
-    this.props.relay.loadMore(10, e => {
-      console.log(e);
-    });
-  },
-
   render() {
-    const { contributionConnection } = this.props.consultation;
+    const { relay, consultation: contributionConnection } = this.props;
     return (
       <div className="anchor-offset block  block--bordered">
         <div className={`opinion opinion--default`}>
@@ -40,14 +30,19 @@ export const ContributionPaginatedList = React.createClass({
             ))}
           </div>
         </ul>
-        <div className="opinion  opinion__footer  box">
-          <a
-            onClick={() => this._loadMore()}
-            className="text-center"
-            style={{ display: 'block' }}>
-            Voir plus
-          </a>
-        </div>
+        {relay.hasMore() &&
+          <div className="opinion  opinion__footer  box">
+            <a
+              onClick={() => {
+                relay.loadMore(2, e => {
+                  console.log(e);
+                });
+              }}
+              className="text-center"
+              style={{ display: 'block' }}>
+              Voir plus
+            </a>
+          </div>}
       </div>
     );
   },
@@ -57,36 +52,41 @@ export default createPaginationContainer(
   ContributionPaginatedList,
   graphql`
     fragment ContributionPaginatedList_consultation on Consultation {
-      contributionConnection(first: 50) @connection(key: "ContributionPaginatedList_contributionConnection") {
+      id
+      contributionConnection(first: $count, after: $cursor) @connection(key: "ContributionPaginatedList_contributionConnection") {
         edges {
           cursor
           node {
             ...Opinion_opinion
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        # totalCount
       }
     }
   `,
   {
     direction: 'forward',
     getConnectionFromProps(props) {
-      console.log('getConnectionFromProps', props);
       return props.consultation && props.consultation.contributionConnection;
     },
-    getFragmentVariables(prevVars /* , totalCount*/) {
+    getFragmentVariables(prevVars, totalCount) {
+      console.log('getFragmentVariables', prevVars, totalCount);
       return {
         ...prevVars,
         // count: totalCount,
       };
     },
-    getVariables(props, { count, cursor } /* , fragmentVariables*/) {
+    getVariables(props, { count, cursor }, fragmentVariables) {
+      console.log('getVariables', props, count, cursor, fragmentVariables);
       return {
         count,
         cursor,
-        // in most cases, for variables other than connection filters like
-        // `first`, `after`, etc. you may want to use the previous values.
         // orderBy: fragmentVariables.orderBy,
-        consultationId: 1,
+        consultationId: props.consultation.id,
       };
     },
     query: graphql`
@@ -94,7 +94,6 @@ export default createPaginationContainer(
         $consultationId: ID!
         $count: Int!
         $cursor: String
-        $orderby: String!
       ) {
         consultations(id: $consultationId) {
           ...ContributionPaginatedList_consultation

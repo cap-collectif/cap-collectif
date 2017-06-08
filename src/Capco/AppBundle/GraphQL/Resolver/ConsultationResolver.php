@@ -65,7 +65,7 @@ class ConsultationResolver implements ContainerAwareInterface
             ];
             $orderBy = [];
 
-            return $repo->findBy($criteria, $orderBy, $limit, $offset);
+            return $repo->findBy($criteria, $orderBy, null, $offset);
         });
 
         return $paginator->forward($args);
