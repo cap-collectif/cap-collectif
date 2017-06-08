@@ -13,7 +13,7 @@ Feature: Opinions
       | opinion_title | Titre                           |
       | opinion_body  | Description de ma proposition   |
     And I press "confirm-opinion-create"
-    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes-1/titre"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
     # Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
   @javascript @security

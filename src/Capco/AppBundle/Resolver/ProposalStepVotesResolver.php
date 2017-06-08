@@ -179,7 +179,7 @@ class ProposalStepVotesResolver
         return $firstVotableStep;
     }
 
-    public function hasVotableStepNotFuture(Project $project)
+    public function hasVotableStepNotFuture(Project $project): bool
     {
         return count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }

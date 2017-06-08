@@ -267,13 +267,13 @@ Feature: Proposal Restful Api
           "author": @...@
         },
         "votesByStepId": {
-          "6": [],
-          "61": []
+          "selectionstep1": [],
+          "collectstep1": []
         },
-        "votableStepId": 6,
+        "votableStepId": "selectionstep1",
         "votesCountByStepId": {
-          "6": 0,
-          "61": 0
+          "selectionstep1": 0,
+          "collectstep1": 0
         },
         "hasUserReported": @boolean@,
         "likers": @array@,
