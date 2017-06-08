@@ -34,6 +34,7 @@ abstract class AbstractQuestion
     const QUESTION_TYPE_CHECKBOX = 5;
     const QUESTION_TYPE_RANKING = 6;
     const QUESTION_TYPE_MEDIAS = 7;
+    const QUESTION_TYPE_BUTTON = 8;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -44,6 +45,7 @@ abstract class AbstractQuestion
         self::QUESTION_TYPE_CHECKBOX => 'checkbox',
         self::QUESTION_TYPE_RANKING => 'ranking',
         self::QUESTION_TYPE_MEDIAS => 'medias',
+        self::QUESTION_TYPE_BUTTON => 'button',
     ];
 
     public static $questionTypesLabels = [];
@@ -68,7 +70,7 @@ abstract class AbstractQuestion
 
     /**
      * @Assert\NotNull()
-     * @Assert\Range(min=0, max=7)
+     * @Assert\Range(min=0, max=8)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;

@@ -10,11 +10,15 @@ Capco\AppBundle\Entity\QuestionChoice:
       type: string
       groups: [QuestionChoices, Questions, Questionnaires]
       serialized_name: label
+    position:
+      expose: true
+      type: integer
+      groups: [QuestionChoices, Questions, Questionnaires]
     description:
       expose: true
       type: string
       groups: [QuestionChoices, Questions, Questionnaires]
-    position:
+    color:
       expose: true
-      type: integer
+      type: string
       groups: [QuestionChoices, Questions, Questionnaires]

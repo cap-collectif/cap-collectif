@@ -277,7 +277,7 @@
     },
     "phone": "Numéro de téléphone portable",
     "preview": "Aper\u00e7u",
-    "publish": "Publier",
+    "publish": "Envoyer",
     "save": "Enregistrer",
     "save_modifications": "Enregistrer les modifications",
     "login_me": "Se connecter",
@@ -800,7 +800,7 @@
       "private": "Rendre ma participation anonyme"
     },
     "not_logged_in": {
-      "error": "Vous devez être inscrit et connecté pour répondre à ce questionnaire."
+      "error": "Vous devez être connecté pour participer"
     },
     "other": "Autre",
     "private": "(anonyme)",

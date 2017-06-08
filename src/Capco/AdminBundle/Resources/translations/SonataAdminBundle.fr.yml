@@ -598,14 +598,15 @@ admin:
     question:
       title: Titre
       help_text: Texte d'aide
+      description: Description
       private: Visible uniquement par l'utilisateur et l'administrateur
-      required: Champ obligatoire
+      required: Réponse obligatoire
       position: Position
       type: Format de réponse
       updated_at: Mise à jour
       created_at: Création
       question_choices: Choix
-      random_question_choices: Ordre aléatoire des choix
+      random_question_choices: Trier les choix aléatoirement
       other_allowed: Champ "Autre" autorisé
       group_content: Question
       group_question_choices: Choix de réponse
@@ -616,6 +617,13 @@ admin:
       description: Description
       image: Image
       position: Position
+      color: Couleur
+      colors:
+        primary: Couleur primaire
+        info: Bleu clair
+        success: Vert
+        warning: Orange
+        danger: Rouge
       required: Champ obligatoire
     status:
       name: Nom

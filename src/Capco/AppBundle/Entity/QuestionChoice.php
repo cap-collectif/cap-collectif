@@ -22,6 +22,14 @@ class QuestionChoice
     use SluggableTitleTrait;
     use PositionableTrait;
 
+    public static $availableColors = [
+        'admin.fields.question_choice.colors.primary' => '#fffff',
+        'admin.fields.question_choice.colors.success' => '#5cb85c',
+        'admin.fields.question_choice.colors.info' => '#5bc0de',
+        'admin.fields.question_choice.colors.warning' => '#f0ad4e',
+        'admin.fields.question_choice.colors.danger' => '#d9534f',
+    ];
+
     /**
      * @var string
      *
@@ -42,9 +50,26 @@ class QuestionChoice
      */
     private $question;
 
+    /**
+     * @ORM\Column(name="color", type="string", nullable=true)
+     */
+    private $color;
+
     public function __toString()
     {
         return $this->title ?? 'New QuestionChoice';
+    }
+
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color = null): self
+    {
+        $this->color = $color;
+
+        return $this;
     }
 
     public function getQuestion()

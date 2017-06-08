@@ -20,3 +20,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
       expose: true
       serialized_name: validationRule
       groups: [Questions]
+    description:
+      expose: true
+      type: string
+      groups: [Questions]

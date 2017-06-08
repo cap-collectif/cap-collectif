@@ -5,6 +5,8 @@ namespace Capco\AdminBundle\Form;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,13 +20,13 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
     {
         $builder
             ->setDataMapper($this)
-            ->add('type', 'choice', [
+            ->add('type', ChoiceType::class, [
                 'label' => 'admin.fields.validation_rule.type',
                 'required' => false,
                 'choices' => MultipleChoiceQuestionValidationRule::$typeLabels,
                 'choice_translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('number', 'integer', [
+            ->add('number', IntegerType::class, [
                 'label' => 'admin.fields.validation_rule.number',
                 'required' => false,
             ])

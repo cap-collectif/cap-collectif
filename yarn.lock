@@ -341,7 +341,7 @@ babel-eslint@^7.2.3:
     babel-types "^6.23.0"
     babylon "^6.17.0"
 
-babel-generator@6.24.0:
+babel-generator@6.24.0, babel-generator@^6.18.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.24.0.tgz#eba270a8cc4ce6e09a61be43465d7c62c1f87c56"
   dependencies:
@@ -354,7 +354,7 @@ babel-generator@6.24.0:
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
-babel-generator@^6.18.0, babel-generator@^6.23.0:
+babel-generator@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.23.0.tgz#6b8edab956ef3116f79d8c84c5a3c05f32a74bc5"
   dependencies:
@@ -5098,7 +5098,7 @@ react-dom@15.3.1:
   version "15.3.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.1.tgz#6d42cd2b64c8c5e0b693f3ffaec301e6e627e24e"
 
-react-dom@^15.4.2:
+react-dom@^15.3.2, react-dom@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.2.tgz#015363f05b0a1fd52ae9efdd3a0060d90695208f"
   dependencies:
@@ -5177,6 +5177,13 @@ react-prop-types@^0.4.0:
   resolved "https://registry.yarnpkg.com/react-prop-types/-/react-prop-types-0.4.0.tgz#f99b0bfb4006929c9af2051e7c1414a5c75b93d0"
   dependencies:
     warning "^3.0.0"
+
+react-radio-buttons@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-radio-buttons/-/react-radio-buttons-1.0.11.tgz#d0477616381710030a1d7ead1cb4e9e57b4ae424"
+  dependencies:
+    react "^15.3.2"
+    react-dom "^15.3.2"
 
 react-radio@^2.1.1:
   version "2.1.2"
@@ -5273,7 +5280,7 @@ react@15.3.1:
     envify "^3.0.0"
     fbjs "^0.6.1"
 
-"react@^0.14.0 || ^15.0.0", react@^15.4.2:
+"react@^0.14.0 || ^15.0.0", react@^15.3.2, react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:

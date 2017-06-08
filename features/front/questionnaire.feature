@@ -58,7 +58,7 @@ Feature: Questionnaire
   @javascript @security
   Scenario: Anonymous user wants to add a reply to a questionnaire
     Given I go to a questionnaire step
-    Then I should see "Vous devez être inscrit et connecté pour répondre à ce questionnaire."
+    Then I should see "Vous devez être connecté pour participer"
     And the questionnaire form should be disabled
 
   @javascript @security

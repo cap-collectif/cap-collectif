@@ -58,3 +58,11 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Logo 2
     image: '@MediaProject2'
     position: 2
+  questionchoice19:
+    title: Oui
+    color: '#5cb85c'
+    position: 1
+  questionchoice20:
+    title: Il bluffe
+    color: '#d9534f'
+    position: 2

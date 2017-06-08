@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MultipleChoiceQuestion extends AbstractQuestion
 {
     public static $questionTypesLabels = [
+        self::QUESTION_TYPE_BUTTON => 'question.types.button',
         self::QUESTION_TYPE_RADIO => 'question.types.radio',
         self::QUESTION_TYPE_SELECT => 'question.types.select',
         self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
@@ -25,7 +26,6 @@ class MultipleChoiceQuestion extends AbstractQuestion
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $questionChoices;
-
     /**
      * @var bool
      *
@@ -48,6 +48,11 @@ class MultipleChoiceQuestion extends AbstractQuestion
      * Used to handle case where validationRule VO is null (meaning that all its fields are set to null)
      */
     protected $hasValidationRule = false;
+
+    /**
+     * @ORM\Column(type="text", name="description")
+     */
+    protected $description;
 
     public function __construct()
     {
@@ -185,6 +190,18 @@ class MultipleChoiceQuestion extends AbstractQuestion
         }
         $this->validationRule = $validationRule;
         $this->hasValidationRule = $validationRule !== null;
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description = null): self
+    {
+        $this->description = $description;
 
         return $this;
     }

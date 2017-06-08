@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -10,6 +11,7 @@ import Radio from '../../Form/Radio';
 import Checkbox from '../../Form/Checkbox';
 import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
+import ButtonBody from './ButtonBody';
 
 const getRequiredFieldIndicationStrategory = (
   fields: Array<{ required: boolean }>,
@@ -60,7 +62,13 @@ const ReplyForm = React.createClass({
     const { reply } = this.props;
     const form = {};
     this.props.form.fields.forEach(field => {
-      form[field.id] = field.type === 'checkbox' ? [] : '';
+      if (field.type === 'button') {
+        form[field.id] = field.choices[0].label;
+      } else if (field.type === 'checkbox') {
+        form[field.id] = [];
+      } else {
+        form[field.id] = '';
+      }
 
       reply.responses.map(response => {
         form[response.field.id] = response.value;
@@ -79,7 +87,7 @@ const ReplyForm = React.createClass({
           };
         }
       }
-      if (field.validationRule) {
+      if (field.validationRule && field.type !== 'button') {
         const rule = field.validationRule;
         switch (rule.type) {
           case 'min':
@@ -207,7 +215,8 @@ const ReplyForm = React.createClass({
       if (
         field.type === 'checkbox' ||
         field.type === 'radio' ||
-        field.type === 'ranking'
+        field.type === 'ranking' ||
+        field.type === 'button'
       ) {
         this[`field-${field.id}`].empty();
       }
@@ -324,7 +333,38 @@ const ReplyForm = React.createClass({
                   disabled={disabled}
                 />
               );
-
+            case 'button':
+              return (
+                <div>
+                  <label
+                    htmlFor={`reply-${field.id}`}
+                    className="control-label h4">
+                    {label}
+                  </label>
+                  <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+                    <ButtonBody body={field.description || ''} />
+                  </div>
+                  <RadioGroup
+                    key={key}
+                    horizontal
+                    ref={c => (this[`field-${field.id}`] = c)}
+                    id={`reply-${field.id}`}
+                    onChange={value => {
+                      this.onChange(field, value);
+                    }}
+                    value={field.choices[0].label}>
+                    {field.choices.map(choice => (
+                      <RadioButton
+                        key={choice.id}
+                        value={choice.label}
+                        iconSize={20}
+                        pointColor={choice.color}>
+                        {choice.label}
+                      </RadioButton>
+                    ))}
+                  </RadioGroup>
+                </div>
+              );
             default:
               return (
                 <Input

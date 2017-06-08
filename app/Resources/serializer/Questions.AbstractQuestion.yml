@@ -33,6 +33,10 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
       expose: true
       type: boolean
       groups: [Questions, Proposals, Replies]
+    description:
+      expose: true
+      type: string
+      groups: [Questions, Proposals, Replies]
   virtual_properties:
     getInputType:
       expose: true
