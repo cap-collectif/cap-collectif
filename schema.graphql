@@ -38,14 +38,14 @@ type Argument implements Contribution, TrashableContribution, ContributionWithAu
 
 # Value of an argument
 enum ArgumentValue {
-  FOR
   AGAINST
+  FOR
 }
 
 # A consultation
 type Consultation {
   # The id of the consultation.
-  id: String!
+  id: ID!
 
   # The id of the related project.
   projectId: String!
@@ -322,7 +322,7 @@ type Query {
   votesByContribution(contribution: Int!): [PropositionVote]
   contributions(
     # Returns all contributions of the provided consultation.
-    consultation: Int!
+    consultation: ID!
   ): [Opinion]
   contributionsBySection(
     sectionId: ID!
@@ -583,7 +583,10 @@ type Version implements Contribution, TrashableContribution, ContributionWithAut
   title: String!
 
   # The content of the contribution.
-  body: String!
+  body: HTML!
+
+  # The content of the contribution.
+  bodyText: HTML!
 
   # The arguments related to the contribution.
   arguments(
