@@ -112,10 +112,13 @@ type SendProposalNotificationFailedAction = {
 type Step = {
   type?: string,
   statuses?: Array<Status>,
-  id: number,
+  id: Uuid,
 };
 type Selection = { step: Step, status: ?Status };
-type Proposal = { selections: Array<Selection> } & Object;
+type Proposal = {
+  selections: Array<Selection>,
+  votesByStepId: { [id: Uuid]: Array<Object> },
+} & Object;
 type ProposalMap = { [id: number]: Proposal };
 export type State = {
   +queryCount: ?number,
@@ -143,7 +146,7 @@ export type State = {
   +lastEditedStepId: ?Uuid,
   +currentPaginationPage: number,
   +lastEditedProposalId: ?number,
-  +lastNotifiedStepId: ?number,
+  +lastNotifiedStepId: ?Uuid,
 };
 
 const initialState: State = {
@@ -200,7 +203,7 @@ export const submitFusionForm = (
 export const cancelSubmitFusionForm = (): CancelSubmitFusionFormAction => ({
   type: 'proposal/CANCEL_SUBMIT_FUSION_FORM',
 });
-export const openVotesModal = (stepId: number): OpenVotesModalAction => ({
+export const openVotesModal = (stepId: Uuid): OpenVotesModalAction => ({
   type: 'proposal/OPEN_VOTES_MODAL',
   stepId,
 });
@@ -772,6 +775,12 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   });
 }
 
+type FetchVotesSucceededAction = {
+  type: 'proposal/VOTES_FETCH_SUCCEEDED',
+  stepId: Uuid,
+  votes: Array<Object>,
+  proposalId: number,
+};
 type RequestFetchProposalPostsAction = {
   type: 'proposal/POSTS_FETCH_REQUESTED',
   proposalId: number,
@@ -824,7 +833,7 @@ export function* storeFiltersInLocalStorage(
   const { filter, value } = action;
   const state: GlobalState = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
-  const filtersByStep: { [id: number]: Object } = LocalStorageService.get(
+  const filtersByStep: { [id: Uuid]: Object } = LocalStorageService.get(
     'proposal.filtersByStep',
   ) || {};
   if (state.project.currentProjectStepById) {
@@ -838,7 +847,7 @@ export function* storeOrderInLocalStorage(
 ): Generator<*, *, *> {
   const { order } = action;
   const state: GlobalState = yield select();
-  const orderByStep: { [id: number]: string } = LocalStorageService.get(
+  const orderByStep: { [id: Uuid]: string } = LocalStorageService.get(
     'proposal.orderByStep',
   ) || {};
   if (state.project.currentProjectStepById) {
@@ -1042,7 +1051,10 @@ const selectSucceededReducer = (state: State, action): Exact<State> => {
   return { ...state, proposalsById };
 };
 
-const fetchVotesSucceedReducer = (state: State, action): Exact<State> => {
+const fetchVotesSucceedReducer = (
+  state: State,
+  action: FetchVotesSucceededAction,
+): Exact<State> => {
   const proposal = state.proposalsById[action.proposalId];
   const votesByStepId = proposal.votesByStepId || [];
   votesByStepId[action.stepId] = action.votes;
