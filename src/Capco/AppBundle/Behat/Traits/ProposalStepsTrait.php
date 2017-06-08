@@ -115,10 +115,8 @@ trait ProposalStepsTrait
 
     /**
      * @Then there should be :nb proposals
-     *
-     * @param mixed $nb
      */
-    public function thereShouldBeNbProposals($nb)
+    public function thereShouldBeNbProposals(int $nb)
     {
         $this->assertPageContainsText($nb . $nb > 1 ? ' propositions' : 'proposition');
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
