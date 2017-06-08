@@ -8,7 +8,7 @@ Feature: Opinions
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
-    When I click the "#btn-add--les-causes-1" element
+    When I click the "#btn-add--les-causes" element
     And I fill in the following:
       | opinion_title | Titre                           |
       | opinion_body  | Description de ma proposition   |
@@ -23,7 +23,7 @@ Feature: Opinions
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
-    Then I should not see "Proposer" in the "#opinions--le-probleme-constate-1" element
+    Then I should not see "Proposer" in the "#opinions--le-probleme-constate" element
 
   @javascript @security
   Scenario: Can not create an opinion in closed project
@@ -40,7 +40,7 @@ Feature: Opinions
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
-    When I click the "#btn-add--les-causes-1" element
+    When I click the "#btn-add--les-causes" element
     Then I should see "Connectez-vous pour contribuer"
 
   @javascript @database
@@ -69,7 +69,7 @@ Feature: Opinions
       | opinion_body | Je modifie ma proposition !   |
     And I check "opinion_check"
     And I press "confirm-opinion-update"
-    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux-1/opinion-3"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
     And I wait 1 seconds
     # Then I should see "Merci ! Votre proposition a bien été modifiée."
     And I should see "0 vote" in the ".opinion__votes" element
@@ -105,6 +105,7 @@ Feature: Opinions
     And I press "Ajouter une proposition liée"
     And I wait 1 seconds
     And I select "Section 1" from "opinionType"
+    And I wait 2 seconds
     And I fill in the following:
       | opinion_title      | Titre                           |
       | opinion_body       | Description de ma proposition   |
