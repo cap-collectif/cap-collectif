@@ -76,17 +76,17 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 3
   pas17:
     id: pas17
-    step: '@selectionStep1'
+    step: '@selectionstep1'
     project: '@p6'
     position: 4
   pas18:
     id: pas18
-    step: '@selectionStep2'
+    step: '@selectionstep2'
     project: '@p6'
     position: 5
   pas19:
     id: pas19
-    step: '@selectionStep3'
+    step: '@selectionstep3'
     project: '@p6'
     position: 6
   pas20:
@@ -96,17 +96,17 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 1
   pas21:
     id: pas21
-    step: '@selectionStep4'
+    step: '@selectionstep4'
     project: '@p7'
     position: 2
   pas22:
     id: pas22
-    step: '@selectionStep5'
+    step: '@selectionstep5'
     project: '@p10'
     position: 2
   pas23:
     id: pas23
-    step: '@selectionStep6'
+    step: '@selectionstep6'
     project: '@p6'
     position: 6
   pas24:
@@ -136,7 +136,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 2
   pas29:
     id: pas29
-    step: "@selectionStep7"
+    step: "@selectionstep7"
     project: "@p6"
     position: 10
   pas30:
@@ -156,6 +156,6 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 1
   pas33:
     id: pas33
-    step: "@selectionStep8"
+    step: "@selectionstep8"
     project: "@p11"
     position: 2
