@@ -5,14 +5,12 @@ import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';
 import ProjectStatsFilters from './ProjectStatsFilters';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
-import {
-  DEFAULT_STATS_PAGINATION,
-} from '../../../constants/ProjectStatsConstants';
+import { DEFAULT_STATS_PAGINATION } from '../../../constants/ProjectStatsConstants';
 
 const ProjectStatsList = React.createClass({
   propTypes: {
     type: React.PropTypes.string.isRequired,
-    stepId: React.PropTypes.string.isRequired,
+    stepId: React.PropTypes.number.isRequired,
     icon: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     data: React.PropTypes.object.isRequired,
@@ -43,40 +41,34 @@ const ProjectStatsList = React.createClass({
   },
 
   changeTheme(ev) {
-    this.setState(
-      {
-        theme: ev.target.value,
-      },
-      () => {
-        this.reloadData();
-      },
-    );
+    this.setState({
+      theme: ev.target.value,
+    }, () => {
+      this.reloadData();
+    });
   },
 
   changeDistrict(ev) {
-    this.setState(
-      {
-        district: ev.target.value,
-      },
-      () => {
-        this.reloadData();
-      },
-    );
+    this.setState({
+      district: ev.target.value,
+    }, () => {
+      this.reloadData();
+    });
   },
 
   changeCategory(element) {
-    this.setState(
-      {
-        category: element.target.value,
-      },
-      () => {
-        this.reloadData();
-      },
-    );
+    this.setState({
+      category: element.target.value,
+    }, () => {
+      this.reloadData();
+    });
   },
 
   reloadData() {
-    const { stepId, type } = this.props;
+    const {
+      stepId,
+      type,
+    } = this.props;
     ProjectStatsActions.load(
       stepId,
       type,
@@ -84,11 +76,13 @@ const ProjectStatsList = React.createClass({
       this.state.theme,
       this.state.district,
       this.state.category,
-    ).then(response => {
-      this.setState({
-        data: response.data,
-      });
-    });
+    )
+      .then((response) => {
+        this.setState({
+          data: response.data,
+        });
+      })
+    ;
   },
 
   render() {
@@ -106,8 +100,7 @@ const ProjectStatsList = React.createClass({
     } = this.props;
     const { data } = this.state;
 
-    const haveData =
-      data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
+    const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
 
     return (
       <div className="block" id={`stats-${stepId}-${type}`}>
@@ -122,32 +115,34 @@ const ProjectStatsList = React.createClass({
           showDistricts={step.usingDistricts || false}
           showThemes={step.usingThemes || false}
         />
-        {haveData &&
+        {
+          haveData &&
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
-              <i className={icon} /> {this.getIntlMessage(label)}
-              <span
-                id={`step-stats-display-${stepId}`}
-                className="pull-right excerpt stats__buttons">
-                <Button
-                  bsStyle="link"
-                  id={`step-stats-display-${stepId}-number`}
-                  active={!this.state.showPercentage}
-                  onClick={this.showPercentage.bind(this, false)}>
-                  {this.getIntlMessage('project.stats.display.number')}
-                </Button>
-                <span>/</span>
-                <Button
-                  bsStyle="link"
-                  id={`step-stats-display-${stepId}-percentage`}
-                  active={this.state.showPercentage}
-                  onClick={this.showPercentage.bind(this, true)}>
-                  {this.getIntlMessage('project.stats.display.percentage')}
-                </Button>
-              </span>
+              <i className={icon}></i> {this.getIntlMessage(label)}
+              <span id={`step-stats-display-${stepId}`} className="pull-right excerpt stats__buttons">
+              <Button
+                bsStyle="link"
+                id={`step-stats-display-${stepId}-number`}
+                active={!this.state.showPercentage}
+                onClick={this.showPercentage.bind(this, false)}
+              >
+                {this.getIntlMessage('project.stats.display.number')}
+              </Button>
+              <span>/</span>
+              <Button
+                bsStyle="link"
+                id={`step-stats-display-${stepId}-percentage`}
+                active={this.state.showPercentage}
+                onClick={this.showPercentage.bind(this, true)}
+              >
+                {this.getIntlMessage('project.stats.display.percentage')}
+              </Button>
+            </span>
             </ListGroupItem>
-            {data.values.length > 0
-              ? data.values.map((row, index) => {
+            {
+              data.values.length > 0
+                ? data.values.map((row, index) => {
                   return (
                     <ProjectStatsListItem
                       key={index}
@@ -157,12 +152,14 @@ const ProjectStatsList = React.createClass({
                     />
                   );
                 })
-              : <ListGroupItem className="excerpt text-center">
+                : <ListGroupItem className="excerpt text-center">
                   {this.getIntlMessage('project.stats.no_values')}
-                </ListGroupItem>}
-          </ListGroup>}
-        {haveData &&
-          data.total > data.values.length &&
+                </ListGroupItem>
+            }
+          </ListGroup>
+        }
+        {
+          haveData && data.total > data.values.length &&
           <ProjectStatsModal
             type={type}
             stepId={stepId}
@@ -173,10 +170,12 @@ const ProjectStatsList = React.createClass({
             isCurrency={isCurrency}
             theme={this.state.theme}
             district={this.state.district}
-          />}
+          />
+        }
       </div>
     );
   },
+
 });
 
 export default ProjectStatsList;

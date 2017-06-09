@@ -10,16 +10,16 @@ class ProjectStatsPage extends Page
     use PageTrait;
 
     public $elements = [
-        'theme stats items' => '#stats-collectstep3-themes .stats__list__row',
-        'district stats items' => '#stats-collectstep3-districts .stats__list__row',
-        'district stats modal items' => '#stats-modal-collectstep3-districts .stats__list__row',
-        'district stats show more button' => '#stats-collectstep3-districts .stats__all-button',
-        'user type stats items' => '#stats-collectstep3-userTypes .stats__list__row',
-        'costs stats items' => '#stats-collectstep3-costs .stats__list__row',
-        'votes stats items' => '#stats-selectionstep4-votes .stats__list__row',
-        'theme filter select' => '#stats-selectionstep4-votes #stats-filter-themes',
-        'district filter select' => '#stats-selectionstep4-votes #stats-filter-districts',
-        'category filter select' => '#stats-selectionstep4-votes #stats-filter-categories',
+        'theme stats items' => '#stats-63-themes .stats__list__row',
+        'district stats items' => '#stats-63-districts .stats__list__row',
+        'district stats modal items' => '#stats-modal-63-districts .stats__list__row',
+        'district stats show more button' => '#stats-63-districts .stats__all-button',
+        'user type stats items' => '#stats-63-userTypes .stats__list__row',
+        'costs stats items' => '#stats-63-costs .stats__list__row',
+        'votes stats items' => '#stats-74-votes .stats__list__row',
+        'theme filter select' => '#stats-74-votes #stats-filter-themes',
+        'district filter select' => '#stats-74-votes #stats-filter-districts',
+        'category filter select' => '#stats-74-votes #stats-filter-categories',
     ];
 
     protected $path = '/projects/{projectSlug}/stats';

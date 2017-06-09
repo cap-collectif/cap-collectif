@@ -37,8 +37,8 @@ class SelectionStepsController extends FOSRestController
    }
 
     /**
-     * @Post("/selection_steps/{selectionStepId}/proposals/search")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @Post("/selection_steps/{selection_step_id}/proposals/search")
+     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
@@ -58,10 +58,8 @@ class SelectionStepsController extends FOSRestController
 
         // Filters
         $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
-
         $providedFilters['selectionStep'] = $selectionStep->getId();
         $providedFilters['step'] = $selectionStep->getId();
-
         if (array_key_exists('statuses', $providedFilters)) {
             $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
             unset($providedFilters['statuses']);
@@ -146,8 +144,8 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Post("/selection_steps/{selectionStepId}/proposals/{proposal_id}/votes")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @Post("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
+     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
      */
@@ -236,8 +234,8 @@ class SelectionStepsController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_USER')")
-     * @Delete("/selection_steps/{selectionStepId}/proposals/{proposal_id}/votes")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @Delete("/selection_steps/{selection_step_id}/proposals/{proposal_id}/votes")
+     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @View(statusCode=200, serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias"})
      */
@@ -279,8 +277,8 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Post("/selection_step/{selectionStepId}/proposals/{proposal_id}/notify-status-changed")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
+     * @Post("/selection_step/{selection_step_id}/proposals/{proposal_id}/notify-status-changed")
+     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=200)

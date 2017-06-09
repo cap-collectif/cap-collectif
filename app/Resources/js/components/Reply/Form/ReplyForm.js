@@ -341,6 +341,10 @@ const ReplyForm = React.createClass({
                     className="control-label h4">
                     {label}
                   </label>
+                  {field.helpText &&
+                    <span className="help-block" key="help">
+                      {field.helpText}
+                    </span>}
                   <div style={{ paddingTop: 15, paddingBottom: 25 }}>
                     <ButtonBody body={field.description || ''} />
                   </div>

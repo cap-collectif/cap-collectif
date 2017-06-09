@@ -128,7 +128,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $firstVotableStep = $this->voteResolver->getFirstVotableStepForProposal($proposal);
         $event->getVisitor()->addData(
             'votableStepId',
-            $firstVotableStep ? $firstVotableStep->getId() : null
+            json_decode($firstVotableStep ? $firstVotableStep->getId() : null, true)
         );
 
         if ($proposal->getMedia()) {

@@ -179,7 +179,7 @@ Feature: Projects
           "position": 1,
           "open": false,
           "timeless": false,
-          "id": "pstep1",
+          "id": 11,
           "title": "Présentation",
           "enabled": true,
           "startAt": @null@,

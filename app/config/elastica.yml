@@ -43,8 +43,6 @@ fos_elastica:
             groups: [UsersInfos]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             slug:
               index: not_analyzed
             username:
@@ -75,8 +73,6 @@ fos_elastica:
             groups: [Opinions, OpinionVersions]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             body:
               analyzer: "analyse_html_%language_analyzer%"
               index_options: offsets
@@ -120,8 +116,6 @@ fos_elastica:
             groups: [Opinions, OpinionVersions]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -153,8 +147,6 @@ fos_elastica:
             groups: [Comments]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             body:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -183,8 +175,6 @@ fos_elastica:
             groups: [ConsultationSteps]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -201,8 +191,6 @@ fos_elastica:
             groups: [Events]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -241,8 +229,6 @@ fos_elastica:
             groups: [Ideas, ThemeDetails]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -282,8 +268,6 @@ fos_elastica:
           serializer:
             groups: [Proposals, ThemeDetails, UsersInfos]
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -347,7 +331,7 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: object
+                  type: long
                   index: not_analyzed
             likers:
               type: object
@@ -367,8 +351,6 @@ fos_elastica:
             groups: [Opinions]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -401,8 +383,6 @@ fos_elastica:
             groups: [OpinionVersions]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -437,8 +417,6 @@ fos_elastica:
             groups: [Posts]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -487,8 +465,6 @@ fos_elastica:
             groups: [Opinions]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -522,19 +498,17 @@ fos_elastica:
             groups: [Proposals, SelectionSteps]
           _all: { enabled: false }
           mappings:
-            id:
-                index: not_analyzed
             status:
               type: object
               properties:
                 id:
-                  type: object
+                  type: long
                   index: not_analyzed
             selectionStep:
               type: object
               properties:
                 id:
-                  type: string
+                  type: long
                   index: not_analyzed
           persistence:
             driver: orm
@@ -549,8 +523,6 @@ fos_elastica:
             groups: [SelectionSteps]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -567,8 +539,6 @@ fos_elastica:
             groups: [CollectSteps]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets
@@ -600,8 +570,6 @@ fos_elastica:
             groups: [ProposalCategories]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             name:
               index: not_analyzed
           persistence:
@@ -617,8 +585,6 @@ fos_elastica:
             groups: [ThemeDetails]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             title:
               analyzer: '%language_analyzer%'
               index_options: offsets

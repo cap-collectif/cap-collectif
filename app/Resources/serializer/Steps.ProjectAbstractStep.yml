@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
   properties:
     id:
       expose: true
-      type: string
+      type: integer
       groups: [ProjectAbstractSteps]
     project:
       expose: true

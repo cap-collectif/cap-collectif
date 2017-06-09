@@ -27,7 +27,7 @@ Query:
                 args:
                     consultation:
                         description: "Returns all contributions of the provided consultation."
-                        type: "ID!"
+                        type: "Int!"
                 resolve: "@=resolver('contributions', [args])"
             contributionsBySection:
                 type: "[Opinion]"

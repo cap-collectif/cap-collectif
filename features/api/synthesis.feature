@@ -107,7 +107,7 @@ Feature: Synthesis
   @database
   Scenario: API client wants to create a synthesis from a consultation step
     Given I am logged in to api as admin
-    And I send a POST request to "/api/syntheses/from-consultation-step/cstep2" with json:
+    And I send a POST request to "/api/syntheses/from-consultation-step/2" with json:
     """
     {
       "enabled": true
@@ -159,7 +159,7 @@ Feature: Synthesis
   @database
   Scenario: API client wants to get elements count from consultation step synthesis
     Given I am logged in to api as admin
-    And there is a synthesis with id "48" based on consultation step "cstep2"
+    And there is a synthesis with id "48" based on consultation step 2
     And I send a GET request to "/api/syntheses/48/elements/count?type=all"
     Then the JSON response should match:
     """
@@ -457,7 +457,7 @@ Feature: Synthesis
 
   @database
   Scenario: Anonymous wants to get synthesis elements published tree
-    Given there is a synthesis with id "48" based on consultation step "cstep2"
+    Given there is a synthesis with id "48" based on consultation step 2
     And I send a GET request to "/api/syntheses/48/elements/tree?type=published"
     Then the JSON response should match:
     """
@@ -512,7 +512,7 @@ Feature: Synthesis
   @database
   Scenario: API client wants to get not ignored synthesis elements tree
     Given I am logged in to api as admin
-    And there is a synthesis with id "48" based on consultation step "cstep2"
+    And there is a synthesis with id "48" based on consultation step 2
     And I send a GET request to "/api/syntheses/48/elements/tree?type=notIgnored"
     Then the JSON response should match:
     """
@@ -561,7 +561,7 @@ Feature: Synthesis
   @database
   Scenario: API client wants to get synthesis elements tree
     Given I am logged in to api as admin
-    And there is a synthesis with id "48" based on consultation step "cstep2"
+    And there is a synthesis with id "48" based on consultation step 2
     And I send a GET request to "/api/syntheses/48/elements/tree?type=all"
     Then the JSON response should match:
     """
@@ -1147,9 +1147,9 @@ Feature: Synthesis
   @database
   Scenario: After updating an opinion, I want to get the updated synthesis
     Given I am logged in to api as admin
-    And there is a synthesis with id "48" based on consultation step "cstep2"
+    And there is a synthesis with id "48" based on consultation step 2
     And I do nothing for 2 seconds
-    When I update opinion "51" with values:
+    When I update opinion 51 with values:
       | title | Je suis le nouveau titre |
     And I send a GET request to "api/syntheses/48/updated"
     Then the JSON response should match:

@@ -826,8 +826,8 @@
       "title": "{num, plural, =0{Aucune réponse} one{Ma réponse} other{Mes réponses}}"
     },
     "user_has_reply": {
-      "error": "Vous ne pouvez remplir ce formulaire qu'une fois",
-      "reason": "Vous avez déjà répondu à ce questionnaire."
+      "error": "Vous ne pouvez participer qu'une fois",
+      "reason": "Vous avez déjà participé."
     },
     "your_response": "Votre réponse"
   },

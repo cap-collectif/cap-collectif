@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -48,7 +47,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         }
     }
 
-    private function getContributionsGraphQLqueryByConsultationStep(ConsultationStep $constulationStep)
+    private function getContributionsGraphQLqueryByConsultationStep($constulationStep)
     {
         return '
 fragment relatedInfos on Contribution {
@@ -112,7 +111,7 @@ fragment sourceInfos on Source {
   votesCount
 }
 {
-  contributions(consultation: "' . $constulationStep->getId() . '") {
+  contributions(consultation:' . $constulationStep->getId() . ') {
     id
   	...authorInfos
     section {

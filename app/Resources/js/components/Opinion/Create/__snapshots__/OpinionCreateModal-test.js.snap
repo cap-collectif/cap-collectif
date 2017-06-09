@@ -54,7 +54,7 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       }
       projectId="projectId"
       step={Object {}}
-      stepId="1"
+      stepId={1}
     />
   </ModalBody>
   <ModalFooter

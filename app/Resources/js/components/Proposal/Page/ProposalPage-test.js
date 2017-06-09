@@ -4,10 +4,7 @@ import { shallow } from 'enzyme';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { ProposalPage } from './ProposalPage';
 import IntlData from '../../../translations/FR';
-import {
-  VOTE_TYPE_SIMPLE,
-  VOTE_TYPE_DISABLED,
-} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED } from '../../../constants/ProposalConstants';
 
 describe('<ProposalPage />', () => {
   const props = {
@@ -23,26 +20,26 @@ describe('<ProposalPage />', () => {
       districts: false,
     },
     steps: [
-      { id: '1', voteType: VOTE_TYPE_DISABLED },
-      { id: '2', voteType: VOTE_TYPE_SIMPLE },
+      { id: 1, voteType: VOTE_TYPE_DISABLED },
+      { id: 2, voteType: VOTE_TYPE_SIMPLE },
     ],
   };
 
   const proposalNoVotes = {
     id: 41,
     referer: 'http://capco.test',
-    votableStepId: '2',
+    votableStepId: 2,
     votesCountByStepId: {
-      '2': 0,
+      2: 0,
     },
     comments_count: 5,
   };
   const proposalWithVotes = {
     id: 42,
     referer: 'http://capco.test',
-    votableStepId: '2',
+    votableStepId: 2,
     votesCountByStepId: {
-      '2': 5,
+      2: 5,
     },
   };
 
@@ -54,9 +51,7 @@ describe('<ProposalPage />', () => {
   };
 
   it('should render a proposal page', () => {
-    const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />,
-    );
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />);
 
     const alert = wrapper.find('ProposalPageAlert');
     expect(alert).toHaveLength(1);
@@ -92,11 +87,8 @@ describe('<ProposalPage />', () => {
     expect(commentsItem.prop('eventKey')).toEqual('comments');
     expect(commentsItem.prop('className')).toEqual('tabs__pill');
     expect(commentsItem.children().first().text()).toEqual('Discussions');
-    expect(commentsItem.find('.badge').text())
-      .toEqual(`${proposalNoVotes.comments_count}`);
-    const voteButtonWrapper = tabsPills.find(
-      'Connect(ProposalVoteButtonWrapper)',
-    );
+    expect(commentsItem.find('.badge').text()).toEqual(`${proposalNoVotes.comments_count}`);
+    const voteButtonWrapper = tabsPills.find('Connect(ProposalVoteButtonWrapper)');
     expect(voteButtonWrapper).toHaveLength(1);
     expect(voteButtonWrapper.props()).toMatchObject({
       proposal: proposalNoVotes,
@@ -140,9 +132,7 @@ describe('<ProposalPage />', () => {
   });
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
-    const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />,
-    );
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />);
     const tabContainer = wrapper.find(Tab.Container);
     const tabsPills = tabContainer.find('div.tabs__pills');
     const nav = tabsPills.find(Nav);
@@ -152,8 +142,7 @@ describe('<ProposalPage />', () => {
     expect(votesItem.prop('eventKey')).toEqual('votes');
     expect(votesItem.prop('className')).toEqual('tabs__pill');
     expect(votesItem.children().first().text()).toEqual('Votes');
-    expect(votesItem.find('.badge').text())
-      .toEqual(`${proposalWithVotes.votesCountByStepId[2]}`);
+    expect(votesItem.find('.badge').text()).toEqual(`${proposalWithVotes.votesCountByStepId[2]}`);
     const tabContent = tabContainer.find(Tab.Content);
     const tabPanes = tabContent.find(Tab.Pane);
     expect(tabPanes).toHaveLength(4);
@@ -167,13 +156,7 @@ describe('<ProposalPage />', () => {
   });
 
   it('should not render a vote modal if proposal has no votabledStep', () => {
-    const wrapper = shallow(
-      <ProposalPage
-        {...props}
-        proposal={proposalWithoutVotableStep}
-        {...IntlData}
-      />,
-    );
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithoutVotableStep} {...IntlData} />);
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');
     expect(proposalVoteModal).toHaveLength(0);

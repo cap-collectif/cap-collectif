@@ -193,7 +193,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(int $limit = 1, int $offset = 0)
+    public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
@@ -221,8 +221,10 @@ class ProposalRepository extends EntityRepository
     /**
      * Get last proposals.
      *
-     * @param mixed $limit
-     * @param mixed $offset
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return mixed
      */
     public function getLastByStep($limit, $offset, CollectStep $step)
     {

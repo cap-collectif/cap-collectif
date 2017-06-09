@@ -13,7 +13,7 @@ Feature: Opinions
       | opinion_title | Titre                           |
       | opinion_body  | Description de ma proposition   |
     And I press "confirm-opinion-create"
-    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/titre"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes-1/titre"
     # Then I should see "Merci ! Votre proposition a bien été enregistrée."
 
   @javascript @security
@@ -23,7 +23,7 @@ Feature: Opinions
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
-    Then I should see 0 "#opinions--le-probleme-constate" element
+    Then I should not see "Proposer" in the "#opinions--le-probleme-constate" element
 
   @javascript @security
   Scenario: Can not create an opinion in closed project

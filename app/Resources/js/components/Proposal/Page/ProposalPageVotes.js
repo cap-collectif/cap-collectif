@@ -6,24 +6,24 @@ import { IntlMixin, FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
-import {
-  loadVotes,
-  openVotesModal,
-  closeVotesModal,
-} from '../../../redux/modules/proposal';
+import { loadVotes, openVotesModal, closeVotesModal } from '../../../redux/modules/proposal';
 
 const ProposalPageVotes = React.createClass({
   displayName: 'ProposalPageVotes',
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    stepId: PropTypes.string.isRequired,
+    stepId: PropTypes.number.isRequired,
     showModal: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
   componentDidMount() {
-    const { dispatch, stepId, proposal } = this.props;
+    const {
+      dispatch,
+      stepId,
+      proposal,
+    } = this.props;
     dispatch(loadVotes(stepId, proposal.id));
   },
 
@@ -47,41 +47,45 @@ const ProposalPageVotes = React.createClass({
           />
         </h2>
         <Row>
-          {votesToDisplay.map((vote, key) => (
-            <UserBox
-              key={key}
-              user={vote.user}
-              username={vote.username}
-              className="proposal__vote"
-            />
-          ))}
+          {
+            votesToDisplay.map((vote, key) =>
+              <UserBox
+                key={key}
+                user={vote.user}
+                username={vote.username}
+                className="proposal__vote"
+              />,
+            )
+          }
         </Row>
-        {moreVotes &&
-          <Button
-            bsStyle="primary"
-            onClick={() => {
-              dispatch(openVotesModal(stepId));
-            }}
-            className="btn--outline">
+        {
+          moreVotes &&
+            <Button
+              bsStyle="primary"
+              onClick={() => { dispatch(openVotesModal(stepId)); }}
+              className="btn--outline"
+            >
             {this.getIntlMessage('proposal.vote.show_more')}
-          </Button>}
+          </Button>
+        }
         <AllVotesModal
           votes={votes}
-          onToggleModal={() => {
-            dispatch(closeVotesModal(stepId));
-          }}
+          onToggleModal={() => { dispatch(closeVotesModal(stepId)); }}
           showModal={showModal}
         />
       </div>
     );
   },
+
 });
 
 const mapStateToProps = (state, props) => {
   return {
-    showModal: !!(state.proposal.currentVotesModal &&
+    showModal: !!(
+      state.proposal.currentVotesModal &&
       state.proposal.currentVotesModal.proposalId === props.proposal.id &&
-      state.proposal.currentVotesModal.stepId === props.stepId),
+      state.proposal.currentVotesModal.stepId === props.stepId
+    ),
   };
 };
 export default connect(mapStateToProps)(ProposalPageVotes);

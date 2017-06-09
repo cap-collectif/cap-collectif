@@ -9,7 +9,7 @@ describe('<OpinionCreateForm />', () => {
   const props = {
     handleSubmit: jest.fn(),
     projectId: '1',
-    stepId: '1',
+    stepId: 1,
     step: {
       titleHelpText: null,
       descriptionHelpText: null,

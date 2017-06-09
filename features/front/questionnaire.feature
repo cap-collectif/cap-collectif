@@ -65,7 +65,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add a reply to a closed questionnaire step
     Given I am logged in as user
     When I go to a closed questionnaire step
-    Then I should see "Participation terminée."
+    Then I should see "Questionnaire terminé"
     And the questionnaire form should be disabled
 
   @javascript @database
@@ -81,7 +81,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add another reply when multiple replies is not allowed
     Given I am logged in as admin
     When I go to a questionnaire step with no multiple replies allowed
-    Then I should see "Vous avez déjà répondu à ce questionnaire."
+    Then I should see "Vous avez déjà partcipé."
     And the questionnaire form should be disabled
 
   ## Replies list

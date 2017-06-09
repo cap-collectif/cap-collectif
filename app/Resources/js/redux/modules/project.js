@@ -6,10 +6,10 @@ import Fetcher from '../../services/Fetcher';
 import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 
 export type State = {
-  +currentProjectStepById: ?Uuid,
+  +currentProjectStepById: ?number,
   +currentProjectById: ?Uuid,
   +visibleProjects: Array<Uuid>,
-  +projectsById: { [id: Uuid]: Object },
+  +projectsById: {[id: Uuid]: Object},
   +projectTypes: Array<Object>,
   +page: number,
   +pages: ?Array<Object>,
@@ -20,10 +20,10 @@ export type State = {
   +term: ?string,
   +theme: ?string,
   +isLoading: boolean,
-  +count: number,
+  +count: number
 };
 
-const initialState: State = {
+const initialState : State = {
   currentProjectStepById: null,
   currentProjectById: null,
   visibleProjects: [],
@@ -42,56 +42,28 @@ const initialState: State = {
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
-type ChangeOrderByAction = {
-  type: 'project/CHANGE_ORDER_BY',
-  orderBy: ?string,
-};
-type ChangeProjectTypeAction = {
-  type: 'project/CHANGE_TYPE',
-  projectType: ?string,
-};
+type ChangeOrderByAction = { type: 'project/CHANGE_ORDER_BY', orderBy: ?string };
+type ChangeProjectTypeAction = { type: 'project/CHANGE_TYPE', projectType: ?string };
 type ChangeProjectTermAction = { type: 'project/CHANGE_TERM', term: ?string };
-type ChangeProjectThemeAction = {
-  type: 'project/CHANGE_THEME',
-  theme: ?string,
-};
-type ReceivedProjectSucceedAction = {
-  type: 'project/PROJECTS_FETCH_SUCCEEDED',
-  project: Object,
-};
+type ChangeProjectThemeAction = { type: 'project/CHANGE_THEME', theme: ?string };
+type ReceivedProjectSucceedAction = { type: 'project/PROJECTS_FETCH_SUCCEEDED', project: Object };
 
 export type ProjectAction =
-  | RequestFetchProjectsAction
+    RequestFetchProjectsAction
   | ChangePageAction
   | ChangeOrderByAction
   | ChangeProjectTypeAction
   | ChangeProjectTermAction
   | ChangeProjectThemeAction
-  | ReceivedProjectSucceedAction;
+  | ReceivedProjectSucceedAction
+;
 
-export const fetchProjects = (): RequestFetchProjectsAction => ({
-  type: 'project/PROJECTS_FETCH_REQUESTED',
-});
-export const changePage = (page: number): ChangePageAction => ({
-  type: 'project/CHANGE_PAGE',
-  page,
-});
-export const changeOrderBy = (orderBy: ?string): ChangeOrderByAction => ({
-  type: 'project/CHANGE_ORDER_BY',
-  orderBy,
-});
-export const changeType = (projectType: ?string): ChangeProjectTypeAction => ({
-  type: 'project/CHANGE_TYPE',
-  projectType,
-});
-export const changeTerm = (term: ?string): ChangeProjectTermAction => ({
-  type: 'project/CHANGE_TERM',
-  term,
-});
-export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({
-  type: 'project/CHANGE_THEME',
-  theme,
-});
+export const fetchProjects = (): RequestFetchProjectsAction => ({ type: 'project/PROJECTS_FETCH_REQUESTED' });
+export const changePage = (page: number): ChangePageAction => ({ type: 'project/CHANGE_PAGE', page });
+export const changeOrderBy = (orderBy: ?string): ChangeOrderByAction => ({ type: 'project/CHANGE_ORDER_BY', orderBy });
+export const changeType = (projectType: ?string): ChangeProjectTypeAction => ({ type: 'project/CHANGE_TYPE', projectType });
+export const changeTerm = (term: ?string): ChangeProjectTermAction => ({ type: 'project/CHANGE_TERM', term });
+export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({ type: 'project/CHANGE_THEME', theme });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
   try {
@@ -104,14 +76,8 @@ export function* fetchProjectsSaga(): Generator<*, *, *> {
       theme: state.theme || undefined,
       page: state.page || undefined,
     };
-    const result: Object = yield call(
-      Fetcher.get,
-      `/projects?${stringify(queryStrings)}`,
-    );
-    const succeedAction: ReceivedProjectSucceedAction = {
-      type: 'project/PROJECTS_FETCH_SUCCEEDED',
-      project: result,
-    };
+    const result: Object = yield call(Fetcher.get, `/projects?${stringify(queryStrings)}`);
+    const succeedAction: ReceivedProjectSucceedAction = { type: 'project/PROJECTS_FETCH_SUCCEEDED', project: result };
     yield put(succeedAction);
   } catch (e) {
     yield put({ type: 'project/PROJECTS_FETCH_FAILED', error: e });
@@ -119,13 +85,12 @@ export function* fetchProjectsSaga(): Generator<*, *, *> {
 }
 
 export function* saga(): Generator<*, *, *> {
-  yield [takeEvery('project/PROJECTS_FETCH_REQUESTED', fetchProjectsSaga)];
+  yield [
+    takeEvery('project/PROJECTS_FETCH_REQUESTED', fetchProjectsSaga),
+  ];
 }
 
-export const reducer = (
-  state: State = initialState,
-  action: Action,
-): Exact<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

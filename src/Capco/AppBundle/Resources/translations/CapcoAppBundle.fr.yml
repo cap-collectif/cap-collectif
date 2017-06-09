@@ -1246,7 +1246,7 @@ question:
     select: Liste déroulante (une seule réponse possible)
     checkbox: Cases à cocher (plusieurs réponses possibles)
     ranking: Vote avec classement (plusieurs réponses possibles)
-    button: Bouton normal (un seul choix possible)
+    button: Bouton normal (une seule réponse possible)
 
 search:
   title: Rechercher sur le site

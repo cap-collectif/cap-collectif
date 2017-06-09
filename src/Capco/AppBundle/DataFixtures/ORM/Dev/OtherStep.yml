@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Steps\OtherStep:
     ostep1:
-        id: ostep1
+        id: 41
         title: Proposition
         isEnabled: true
         startAt: <(new \DateTime('2015-04-25'))>
@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Steps\OtherStep:
              <h3>Argumentation</h3>
              <p><text(1000)></p>
     ostep2:
-        id: ostep2
+        id: 42
         title: Mettre en place une proposition adaptée à la synthèse
         isEnabled: true
         startAt: <(new \DateTime('2014-09-27'))>
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\Steps\OtherStep:
               <h3>Une bonne synthèse argumentée</h3>
               <p><text(500)></p>
     ostep3:
-        id: ostep3
+        id: 43
         title: À venir une synthèse optimisée
         isEnabled: true
         startAt: <(new \DateTime('2015-10-20'))>
