@@ -115,10 +115,8 @@ trait ProposalStepsTrait
 
     /**
      * @Then there should be :nb proposals
-     *
-     * @param mixed $nb
      */
-    public function thereShouldBeNbProposals($nb)
+    public function thereShouldBeNbProposals(int $nb)
     {
         $this->assertPageContainsText($nb . $nb > 1 ? ' propositions' : 'proposition');
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
@@ -586,7 +584,7 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have status :statusId
      */
-    public function proposalSelectionShouldHaveStatus(int $selectionStepId, int $proposalId, int $statusId)
+    public function proposalSelectionShouldHaveStatus(string $selectionStepId, int $proposalId, int $statusId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'selectionStep' => $selectionStepId,
@@ -599,7 +597,7 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have no status
      */
-    public function proposalSelectionShouldHaveNoStatus(int $selectionStepId, int $proposalId)
+    public function proposalSelectionShouldHaveNoStatus(string $selectionStepId, int $proposalId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'selectionStep' => $selectionStepId,
@@ -632,7 +630,7 @@ trait ProposalStepsTrait
      /**
       * @Then proposal :proposalId should be selected in selection step :stepId
       */
-     public function proposalShouldBeSelected(int $proposalId, int $selectionStepId)
+     public function proposalShouldBeSelected(int $proposalId, string $selectionStepId)
      {
          $this->getEntityManager()->clear();
          $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
@@ -645,7 +643,7 @@ trait ProposalStepsTrait
       /**
        * @Then proposal :proposalId should not be selected in selection step :stepId
        */
-      public function proposalShouldNotBeSelected(int $proposalId, int $selectionStepId)
+      public function proposalShouldNotBeSelected(int $proposalId, string $selectionStepId)
       {
           $this->getEntityManager()->clear();
           $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([

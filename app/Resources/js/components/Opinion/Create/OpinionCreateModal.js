@@ -15,7 +15,7 @@ export const OpinionCreateModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     projectId: PropTypes.string.isRequired,
-    stepId: PropTypes.number.isRequired,
+    stepId: PropTypes.string.isRequired,
     step: PropTypes.object.isRequired,
     opinionTypeId: PropTypes.string.isRequired,
     submitting: PropTypes.bool.isRequired,

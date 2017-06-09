@@ -10,7 +10,7 @@ describe('<OpinionCreateModal />', () => {
     ...IntlData,
     show: true,
     projectId: 'projectId',
-    stepId: 1,
+    stepId: '1',
     step: {},
     opinionTypeId: 'opinionTypeId',
     submitting: true,

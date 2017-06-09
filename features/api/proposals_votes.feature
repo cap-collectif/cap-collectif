@@ -3,7 +3,7 @@ Feature: Proposal Votes Restful Api
 
   @parallel-scenario
   Scenario: Anonymous API client wants to get all votes for a proposal
-    When I send a GET request to "/api/steps/71/proposals/2/votes"
+    When I send a GET request to "/api/steps/selectionstep1/proposals/2/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -25,7 +25,7 @@ Feature: Proposal Votes Restful Api
   @database @elasticsearch @security
   Scenario: Logged in API client wants to vote for a proposal in a selection step with vote limited but has reached vote limit
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/78/proposals/18/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep8/proposals/18/votes" with json:
     """
     {}
     """
@@ -41,19 +41,19 @@ Feature: Proposal Votes Restful Api
   @database @elasticsearch
   Scenario: Logged in API client wants to vote and unvote for a proposal in a selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
     """
     {
     }
     """
     Then the JSON response status code should be 200
-    And I send a DELETE request to "/api/selection_steps/71/proposals/2/votes"
+    And I send a DELETE request to "/api/selection_steps/selectionstep1/proposals/2/votes"
     Then the JSON response status code should be 200
 
   @database @elasticsearch
   Scenario: Anonymous API client wants to vote for a proposal in a selection step
     Given feature "vote_without_account" is enabled
-    When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -64,7 +64,7 @@ Feature: Proposal Votes Restful Api
 
     @database @elasticsearch
     Scenario: Anonymous API client wants to vote for a proposal in a selection step with vote_without_account feature disabled
-      When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+      When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
       """
       {
       }
@@ -82,7 +82,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Logged in API client wants to vote several times for a proposal in a selection step
     Given I am logged in to api as admin
-    When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
     """
     {
     }
@@ -106,7 +106,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Anonymous API client wants to vote several times for a proposal in a selection step
     Given feature "vote_without_account" is enabled
-    When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -135,7 +135,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Anonymous API client wants to vote with an email associated to an account
     Given feature "vote_without_account" is enabled
-    When I send a POST request to "/api/selection_steps/71/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/2/votes" with json:
     """
     {
       "username": "test",
@@ -164,7 +164,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Logged in API client wants to delete a non-existing vote
     Given I am logged in to api as user
-    When I send a DELETE request to "/api/selection_steps/71/proposals/2/votes"
+    When I send a DELETE request to "/api/selection_steps/selectionstep1/proposals/2/votes"
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -178,7 +178,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Logged in API client wants to vote for a proposal in a wrong selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/71/proposals/13/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep1/proposals/13/votes" with json:
     """
     {}
     """
@@ -195,7 +195,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/72/proposals/2/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep2/proposals/2/votes" with json:
     """
     {
     }
@@ -213,7 +213,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Logged in API client wants to vote for a proposal in a closed selection step
     Given I am logged in to api as user
-    When I send a POST request to "/api/selection_steps/73/proposals/11/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep3/proposals/11/votes" with json:
     """
     {
     }
@@ -231,7 +231,7 @@ Feature: Proposal Votes Restful Api
     @security @elasticsearch
     Scenario: Logged in API client wants to vote when he has not enough credits left
       Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_steps/74/proposals/8/votes" with json:
+      When I send a POST request to "/api/selection_steps/selectionstep4/proposals/8/votes" with json:
       """
       {
       }
@@ -252,7 +252,7 @@ Feature: Proposal Votes Restful Api
   @security @elasticsearch
   Scenario: Anonymous API client wants to vote on a selection step that has budget vote
     Given feature "vote_without_account" is enabled
-    When I send a POST request to "/api/selection_steps/74/proposals/8/votes" with json:
+    When I send a POST request to "/api/selection_steps/selectionstep4/proposals/8/votes" with json:
       """
       {
         "username": "bouh",

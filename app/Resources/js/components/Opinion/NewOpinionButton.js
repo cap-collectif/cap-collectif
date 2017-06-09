@@ -11,7 +11,7 @@ const NewOpinionButton = React.createClass({
   propTypes: {
     opinionTypeSlug: PropTypes.string.isRequired,
     opinionTypeId: PropTypes.string.isRequired,
-    stepId: PropTypes.number.isRequired,
+    stepId: PropTypes.string.isRequired,
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,

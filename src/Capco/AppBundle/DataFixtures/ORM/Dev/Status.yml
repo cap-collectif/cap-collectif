@@ -17,17 +17,17 @@ Capco\AppBundle\Entity\Status:
   status4:
     name: Soumis au vote
     position: 1
-    step: '@selectionStep1'
+    step: '@selectionstep1'
     color: info
   status5:
     name: Vote gagné
     position: 2
-    step: '@selectionStep1'
+    step: '@selectionstep1'
     color: success
   status6:
     name: Vainqueur
     position: 1
-    step: '@selectionStep2'
+    step: '@selectionstep2'
     color: success
   status7:
     name: En cours

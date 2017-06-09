@@ -1,16 +1,16 @@
 Capco\AppBundle\Entity\Steps\ConsultationStepType:
     typeAll:
-        id: '1'
+        id: typeAll
         title: Toutes
     typeDefault:
-        id: '2'
+        id: typeDefault
         title: Défaut
     typeSimple:
-        id: '3'
+        id: typeSimple
         title: Simple
     typeCauses:
-        id: '4'
+        id: typeCauses
         title: Causes
     typePJL:
-        id: '5'
+        id: typePJL
         title: Projet de loi

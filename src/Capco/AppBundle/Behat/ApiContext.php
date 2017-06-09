@@ -354,7 +354,7 @@ EOF;
      *
      * @Given there is a synthesis with id :sid based on consultation step :csId
      */
-    public function thereIsASynthesisBasedOnConsultationStep(string $sId, int $csId)
+    public function thereIsASynthesisBasedOnConsultationStep(string $sId, string $csId)
     {
         $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
 
@@ -462,7 +462,7 @@ EOF;
      *
      * @param mixed $id
      */
-    public function iUpdateOpinionWithValues($id, TableNode $data)
+    public function iUpdateOpinionWithValues(string $id, TableNode $data)
     {
         $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
 

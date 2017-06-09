@@ -10,18 +10,18 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class HasOnlyOneSelectionPerStepValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionPerStepValidator');
     }
 
-    function it_should_add_violation_if_there_is_more_than_one_selection_for_the_same_step(
+    public function it_should_add_violation_if_there_is_more_than_one_selection_for_the_same_step(
         Proposal $proposal,
         HasOnlyOneSelectionPerStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
     ) {
-        $proposal->getSelectionStepsIds()->willReturn([1, 6, 235, 235])->shouldBeCalled();
+        $proposal->getSelectionStepsIds()->willReturn(['step1', 'step2', 'step3', 'step3'])->shouldBeCalled();
 
         $this->initialize($context);
         $builder->addViolation()->shouldBeCalled();
@@ -30,13 +30,13 @@ class HasOnlyOneSelectionPerStepValidatorSpec extends ObjectBehavior
         $this->validate($proposal, $constraint);
     }
 
-    function it_should_not_add_violation_if_there_is_no_more_than_one_selection_for_the_same_step(
+    public function it_should_not_add_violation_if_there_is_no_more_than_one_selection_for_the_same_step(
         Proposal $proposal,
         HasOnlyOneSelectionPerStep $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder
     ) {
-        $proposal->getSelectionStepsIds()->willReturn([1, 6, 235])->shouldBeCalled();
+        $proposal->getSelectionStepsIds()->willReturn(['step1', 'step2', 'step3'])->shouldBeCalled();
         $this->initialize($context);
         $builder->addViolation()->shouldNotBeCalled();
         $this->validate($proposal, $constraint);

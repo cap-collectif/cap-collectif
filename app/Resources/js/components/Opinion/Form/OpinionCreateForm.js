@@ -43,7 +43,7 @@ const validate = ({ title, body }: Object) => {
 export const OpinionCreateForm = React.createClass({
   propTypes: {
     projectId: PropTypes.string.isRequired,
-    stepId: PropTypes.number.isRequired,
+    stepId: PropTypes.string.isRequired,
     opinionType: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
