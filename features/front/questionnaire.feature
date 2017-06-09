@@ -65,7 +65,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add a reply to a closed questionnaire step
     Given I am logged in as user
     When I go to a closed questionnaire step
-    Then I should see "Questionnaire terminé"
+    Then I should see "Participation terminée."
     And the questionnaire form should be disabled
 
   @javascript @database

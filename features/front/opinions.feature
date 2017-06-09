@@ -23,7 +23,7 @@ Feature: Opinions
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
-    Then I should not see "Proposer" in the "#opinions--le-probleme-constate" element
+    Then I should see 0 "#opinions--le-probleme-constate" element
 
   @javascript @security
   Scenario: Can not create an opinion in closed project
