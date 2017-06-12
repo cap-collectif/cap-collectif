@@ -523,7 +523,7 @@ fos_elastica:
           _all: { enabled: false }
           mappings:
             id:
-                index: not_analyzed
+              index: not_analyzed
             status:
               type: object
               properties:
