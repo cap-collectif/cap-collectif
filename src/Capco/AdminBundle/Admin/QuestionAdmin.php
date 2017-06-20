@@ -57,12 +57,14 @@ class QuestionAdmin extends Admin
                 ->add('help_text', 'textarea', [
                     'label' => 'admin.fields.question.help_text',
                     'required' => false,
-                ])
-                ->add('description', CKEditorType::class, [
-                    'label' => 'admin.fields.question.description',
-                    'required' => false,
-                ])
-        ;
+                ]);
+
+        if ($subject instanceof MultipleChoiceQuestion) {
+            $formMapper->add('description', CKEditorType::class, [
+                'label' => 'admin.fields.question.description',
+                'required' => false,
+            ]);
+        }
 
         if (!$subject instanceof MediaQuestion) {
             $formMapper->add(

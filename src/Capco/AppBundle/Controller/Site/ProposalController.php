@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProposalController extends Controller
 {
@@ -33,13 +33,13 @@ class ProposalController extends Controller
         $urlResolver = $this->get('capco.url.resolver');
 
         $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
-            return  $urlResolver->getStepUrl($step->getStep(), UrlGenerator::ABSOLUTE_URL);
+            return  $urlResolver->getStepUrl($step->getStep(), UrlGeneratorInterface::ABSOLUTE_URL);
         })->toArray();
 
         $refererUri = $request->headers->has('referer')
             && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false && in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
-                : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL);
+                : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([

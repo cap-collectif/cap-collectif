@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Source:
 
   ## Sources on opinions
   source1:
-    id: 'source1'
+    id: '1'
     title: Ma source
     body: blabla
     Author: '@user5'
@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category2'
     link: http://www.google.fr
   source{2..6}:
-    id: 'source<current()>'
+    id: <current()>
     title: <text(20)>
     body: <text(1000)>
     Author: '@user<numberBetween(1,3)>'
@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
   source{7..10}:
-    id: 'source<current()>'
+    id: <current()>
     title: <text(20)>
     body: <text(1000)>
     Author: '@user<numberBetween(1,4)>'
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
   source{11..30}:
-    id: 'source<current()>'
+    id: <current()>
     title: <text(20)>
     body: <text(1000)>
     Author: '@user<numberBetween(1,4)>'
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Source:
 
   ## Sources on versions
   source31:
-    id: 'source31'
+    id: '31'
     title: Source sur une version
     body: <text(1000)>
     Author: '@user5'
@@ -44,7 +44,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category<numberBetween(1,5)>'
     link: https://www.parlement-et-citoyens.fr/
   source32:
-    id: 'source32'
+    id: '32'
     title: <text(20)>
     body: <text(1000)>
     Author: @user4
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Source:
     link: https://toto.fr/
 
   source33:
-    id: 'source33'
+    id: '33'
     title: <text(20)>
     body: <text(1000)>
     Author: '@user<numberBetween(1,4)>'
@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category<numberBetween(1,5)>'
     link: https://www.parlement-et-citoyens.fr/
   source34:
-    id: 'source34'
+    id: '34'
     title: <text(20)>
     body: <text(1000)>
     Author: '@user<numberBetween(1,4)>'
@@ -69,7 +69,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category<numberBetween(1,5)>'
     link: https://toto.fr/
   source35:
-    id: 'source35'
+    id: '35'
     title: Ma super source
     body: blablablabla
     Author: '@user5'
@@ -77,7 +77,7 @@ Capco\AppBundle\Entity\Source:
     Category: '@Category2'
     link: http://www.google.fr
   source36:
-    id: 'source36'
+    id: '36'
     title: Ma méga super source
     body: blablablabla-blablablabla
     Author: '@user5'

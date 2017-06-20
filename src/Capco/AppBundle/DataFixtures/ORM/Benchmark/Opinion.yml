@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\Opinion:
+    opinion{1..1000}:
+        id: opinion<current()>
+        step: '@cstep1'
+        title: Opinion <current()>
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: '@user<numberBetween(1, 100)>'
+        OpinionType: '@opinionType<numberBetween(1, 5)>'
+        step: '@cstep1'

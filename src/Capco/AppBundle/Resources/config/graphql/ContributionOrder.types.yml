@@ -1,9 +1,0 @@
-ContributionOrder:
-    type: input-object
-    config:
-        description: "Ways in which lists of contributions can be ordered upon return."
-        fields:
-            field:
-                type: "ContributionOrderField!"
-            direction:
-                type: "OrderDirection!"

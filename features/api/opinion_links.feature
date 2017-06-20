@@ -2,7 +2,7 @@
 Feature: Opinions Links
 
   Scenario: API client wants to list links of an opinion
-    When I send a GET request to "/api/opinions/opinion60/links"
+    When I send a GET request to "/api/opinions/60/links"
     Then the JSON response should match:
     """
     {
@@ -43,7 +43,7 @@ Feature: Opinions Links
   @security
   Scenario: logged in API client wants to add an opinion link
     Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/opinion1/links" with a valid link opinion json
+    When I send a POST request to "/api/opinions/1/links" with a valid link opinion json
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -57,7 +57,7 @@ Feature: Opinions Links
   @security
   Scenario: logged in API client wants to add an opinion link
     Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/opinion2/links" with a valid link opinion json
+    When I send a POST request to "/api/opinions/2/links" with a valid link opinion json
     Then the JSON response status code should be 400
     And the JSON response should match:
     """
@@ -71,5 +71,5 @@ Feature: Opinions Links
   @database
   Scenario: logged in API client wants to add an opinion link
     Given I am logged in to api as user
-    When I send a POST request to "/api/opinions/opinion60/links" with a valid link opinion json
+    When I send a POST request to "/api/opinions/60/links" with a valid link opinion json
     Then the JSON response status code should be 201

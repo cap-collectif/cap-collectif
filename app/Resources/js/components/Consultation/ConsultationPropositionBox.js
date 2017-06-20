@@ -1,18 +1,16 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 // import { Panel } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import environment, { graphqlError } from '../../createRelayEnvironment';
+import environment from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
-import ConsultationContributionFiltered
-  from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
 
 export const ConsultationPropositionBox = React.createClass({
   propTypes: {
-    step: PropTypes.object.isRequired,
+    step: React.PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -28,7 +26,6 @@ export const ConsultationPropositionBox = React.createClass({
             <ConsultationFilterForm />
           </span>
         </Panel> */}
-        <ConsultationContributionFiltered consultationId={step.id} />
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -46,18 +43,19 @@ export const ConsultationPropositionBox = React.createClass({
           render={({ error, props }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
-              return graphqlError;
+              return (
+                <p className="text-danger">
+                  Désolé une erreur s'est produite… Réessayez plus tard.
+                </p>
+              );
             }
             if (props) {
-              if (props.consultations[0].sections) {
-                return (
-                  <SectionRecursiveList
-                    consultation={step}
-                    sections={props.consultations[0].sections}
-                  />
-                );
-              }
-              return graphqlError;
+              return (
+                <SectionRecursiveList
+                  consultation={step}
+                  sections={props.consultations[0].sections}
+                />
+              );
             }
             return <Loader />;
           }}

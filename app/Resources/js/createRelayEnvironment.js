@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { createHeaders } from './services/Fetcher';
 import { graphQLUrl } from './config';
@@ -17,12 +16,6 @@ function fetchQuery(operation, variables) {
     return response.json();
   });
 }
-
-export const graphqlError = (
-  <p className="text-danger">
-    Désolé une erreur s'est produite… Réessayez plus tard.
-  </p>
-);
 
 export default new Environment({
   network: Network.create(fetchQuery),
