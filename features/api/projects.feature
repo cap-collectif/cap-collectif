@@ -143,12 +143,12 @@ Feature: Projects
   @database
   Scenario: Admin API client can create a project
     Given I am logged in to api as admin
-    And user "42" doesn't have role "ROLE_ADMIN"
+    And user "user42" doesn't have role "ROLE_ADMIN"
     When I send a POST request to "/api/projects" with json:
     """
     {
         "title": "My new project",
-        "Author": "42"
+        "Author": "user42"
     }
     """
     Then the JSON response status code should be 201
@@ -162,8 +162,8 @@ Feature: Projects
       }
     }
     """
-    And project with slug "my-new-project" should have author "42"
-    And user "admin" should have role "ROLE_ADMIN"
+    And project with slug "my-new-project" should have author "user42"
+    And user "user42" should have role "ROLE_ADMIN"
     And project with slug "my-new-project" should not be published
     Then 1 mail should be sent
 

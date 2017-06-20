@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -10,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class OpinionController extends Controller
 {
@@ -133,7 +134,7 @@ class OpinionController extends Controller
             filter_var($referer, FILTER_VALIDATE_URL) !== false &&
             in_array($currentRoute, $availableRoutes, true)
                 ? $referer
-                : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL)
+                : $urlResolver->getStepUrl($currentStep, UrlGenerator::ABSOLUTE_URL)
         ;
 
         return [

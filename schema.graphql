@@ -61,6 +61,22 @@ type Consultation {
 
   # List of sections.
   sections: [Section]
+  contributionConnection(
+    # Ordering options for contributions returned from the connection.
+    orderBy: ContributionOrder
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ContributionConnection
 }
 
 # A contribution with an author
@@ -70,6 +86,42 @@ interface Contribution {
 
   # Related contribution.
   related: Contribution
+}
+
+# A connection to a list of items.
+type ContributionConnection {
+  totalCount: Int
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ContributionEdge]
+}
+
+# An edge in a connection.
+type ContributionEdge {
+  # The item at the end of the edge.
+  node: Opinion
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of contributions can be ordered upon return.
+input ContributionOrder {
+  field: ContributionOrderField!
+  direction: OrderDirection!
+}
+
+# Ordering options for contributions connections.
+enum ContributionOrderField {
+  POSITION
+  RANDOM
+  CREATED_AT
+  POPULAR
+  COMMENT_COUNT
+  VOTE_COUNT
 }
 
 # A contribution with an author
@@ -273,6 +325,15 @@ type OpinionType implements Contribution, TrashableContribution, ContributionWit
   # Where the proposition has been placed.
   section: Section!
   reportings: [Reporting]
+}
+
+# Possible directions in which to order a list of items when provided an orderBy argument.
+enum OrderDirection {
+  # Specifies an ascending order for a given orderBy argument.
+  ASC
+
+  # Specifies a descending order for a given orderBy argument.
+  DESC
 }
 
 # Information about pagination in a connection.

@@ -335,7 +335,7 @@ const ReplyForm = React.createClass({
               );
             case 'button':
               return (
-                <div className="form-group" id={`reply-${field.id}`}>
+                <div>
                   <label
                     htmlFor={`reply-${field.id}`}
                     className="control-label h4">
@@ -345,10 +345,9 @@ const ReplyForm = React.createClass({
                     <span className="help-block" key="help">
                       {field.helpText}
                     </span>}
-                  {field.description &&
-                    <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-                      <ButtonBody body={field.description || ''} />
-                    </div>}
+                  <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+                    <ButtonBody body={field.description || ''} />
+                  </div>
                   <RadioGroup
                     key={key}
                     horizontal

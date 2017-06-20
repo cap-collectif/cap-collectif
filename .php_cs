@@ -26,7 +26,6 @@ return PhpCsFixer\Config::create()
     ))
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->notPath('src/Capco/UserBundle/Security/DrupalEncoder.php')
             ->in(__DIR__)
     )
 ;

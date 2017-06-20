@@ -189,7 +189,6 @@ class UserAdmin extends BaseAdmin
             ->tab('User')
             ->with('Profile', ['class' => 'col-md-6'])->end()
             ->with('General', ['class' => 'col-md-6'])->end()
-            ->with('Confidentialité', ['class' => 'col-md-6'])->end()
             ->with('Social', ['class' => 'col-md-6'])->end()
             ->end()
         ;
@@ -215,6 +214,10 @@ class UserAdmin extends BaseAdmin
             ])
             ->end()
             ->with('Profile')
+            ->add('profilePageIndexed', CheckboxType::class, [
+                'required' => false,
+                'translation_domain' => 'SonataUserBundle',
+            ])
             ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
             ], [
@@ -259,12 +262,8 @@ class UserAdmin extends BaseAdmin
             ->add('googleUrl', null, ['required' => false])
             ->add('twitterUrl', null, ['required' => false])
             ->end()
+            ->end()
         ;
-        $formMapper->with('Confidentialité')
-            ->add('profilePageIndexed', CheckboxType::class, [
-                'required' => false,
-                'translation_domain' => 'SonataUserBundle',
-            ])->end()->end();
 
         if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $formMapper

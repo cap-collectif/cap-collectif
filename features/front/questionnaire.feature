@@ -12,8 +12,7 @@ Feature: Questionnaire
     When I fill the questionnaire form
     And I submit my reply
     Then I should see "Merci ! Votre réponse a bien été enregistrée."
-    And I go to a questionnaire step
-    Then I should see my reply
+    And I should see my reply
 
   @javascript @database
   Scenario: Logged in user wants to add a private reply to a questionnaire
@@ -23,8 +22,7 @@ Feature: Questionnaire
     And I check the reply private checkbox
     And I submit my reply
     Then I should see "Merci ! Votre réponse a bien été enregistrée."
-    And I go to a questionnaire step
-    Then I should see my anonymous reply
+    And I should see my anonymous reply
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions

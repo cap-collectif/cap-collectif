@@ -5,7 +5,7 @@ Feature: Opinions
 
   @parallel-scenario
   Scenario: Anonymous API client wants to retrieve an opinion
-    When I send a GET request to "/api/opinions/57"
+    When I send a GET request to "/api/opinions/opinion57"
     Then the JSON response status code should be 200
     Then the JSON response should match:
     """
@@ -228,25 +228,25 @@ Feature: Opinions
 
   @security
   Scenario: Anonymous API client wants to update a source
-    When I send a PUT request to "/api/opinions/3" with a valid opinion json
+    When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
     Then the JSON response status code should be 401
 
   @security
   Scenario: Logged in API client wants to update an opinion but is not the author
     Given I am logged in to api as admin
-    When I send a PUT request to "/api/opinions/3" with a valid opinion json
+    When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
     Then the JSON response status code should be 403
 
   @database
   Scenario: Logged in API client wants to update his opinion
     Given I am logged in to api as user
-    When I send a PUT request to "/api/opinions/3" with a valid opinion json
+    When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
     Then the JSON response status code should be 200
 
 ## Vote
 
   Scenario: Anonymous API client wants to get all votes of an opinion
-    When I send a GET request to "/api/opinions/57/votes"
+    When I send a GET request to "/api/opinions/opinion57/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
@@ -267,7 +267,7 @@ Feature: Opinions
 
   @parallel-scenario
   Scenario: Anonymous API client wants to vote on an opinion
-    When I send a PUT request to "/api/opinions/57/votes" with json:
+    When I send a PUT request to "/api/opinions/opinion57/votes" with json:
     """
     {
       "value": 1
@@ -281,7 +281,7 @@ Feature: Opinions
   Scenario: logged in API client wants to vote on an opinion
     Given I am logged in to api as user
     # create
-    When I send a PUT request to "/api/opinions/57/votes" with json:
+    When I send a PUT request to "/api/opinions/opinion57/votes" with json:
     """
     {
       "value": 1
@@ -289,7 +289,7 @@ Feature: Opinions
     """
     Then the JSON response status code should be 200
     # update
-    When I send a PUT request to "/api/opinions/57/votes" with json:
+    When I send a PUT request to "/api/opinions/opinion57/votes" with json:
     """
     {
       "value": -1
@@ -297,7 +297,7 @@ Feature: Opinions
     """
     Then the JSON response status code should be 200
     # delete
-    When I send a DELETE request to "/api/opinions/57/votes"
+    When I send a DELETE request to "/api/opinions/opinion57/votes"
     Then the JSON response status code should be 200
     And the JSON response should match:
     """
