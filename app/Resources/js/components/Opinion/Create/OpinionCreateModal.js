@@ -7,7 +7,6 @@ import { submit, isSubmitting } from 'redux-form';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import Fetcher from '../../../services/Fetcher';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
@@ -17,28 +16,22 @@ export const OpinionCreateModal = React.createClass({
     projectId: PropTypes.string.isRequired,
     stepId: PropTypes.string.isRequired,
     step: PropTypes.object.isRequired,
-    opinionTypeId: PropTypes.string.isRequired,
+    opinionType: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      opinionType: { appendixTypes: [] },
-    };
-  },
-
-  componentDidMount() {
-    const { opinionTypeId } = this.props; // Todo: remove this, everything should be passed as props
-    Fetcher.get(`/opinion_types/${opinionTypeId}`).then(data => {
-      this.setState({ opinionType: data });
-    });
-  },
-
   render() {
-    const { opinionType } = this.state;
-    const { submitting, dispatch, show, stepId, projectId, step } = this.props;
+    const {
+      opinionType,
+      submitting,
+      dispatch,
+      show,
+      stepId,
+      projectId,
+      step,
+    } = this.props;
     return (
       <Modal
         animation={false}
@@ -92,7 +85,7 @@ export const OpinionCreateModal = React.createClass({
 
 export default connect((state: State, props: Object) => {
   return {
-    show: state.opinion.showOpinionCreateModal === props.opinionTypeId,
+    show: state.opinion.showOpinionCreateModal === props.opinionType.id,
     submitting: isSubmitting(formName)(state),
     step: state.project.projectsById[props.projectId].stepsById[props.stepId],
   };

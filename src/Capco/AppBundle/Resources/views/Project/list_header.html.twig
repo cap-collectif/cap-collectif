@@ -27,10 +27,21 @@
                     </select>
                 {% endif %}
                 {% if opinionType is defined and opinionType.isEnabled and currentStep.canContribute and currentStep.canContribute %}
+                  {% set appendixTypes = [] %}
+                  {% for appendix in opinionType.getAppendixTypes() %}
+                  {% set appendixTypes = appendixTypes|merge([{
+                    'id': appendix.getAppendixTypeId(),
+                    'title': appendix.getAppendixTypeTitle(),
+                    'position': appendix.position,
+                  }]) %}
+                  {% endfor %}
                   {{ react_intl_component('NewOpinionApp', {
                     'props': {
-                      'opinionTypeSlug': opinionType.slug,
-                      'opinionTypeId': opinionType.id,
+                      'opinionType': {
+                        'id': opinionType.id,
+                        'slug': opinionType.slug,
+                        'appendixTypes': appendixTypes
+                      },
                       'projectId': project.id,
                       'stepId': currentStep.id,
                       'label': buttonLabel | trans({}, 'CapcoAppBundle')
