@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
@@ -43,6 +44,16 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         throw new UserError('Could not resolve type of Contribution.');
+    }
+
+    public function getSectionAppendixId(OpinionTypeAppendixType $type)
+    {
+        return $type->getAppendixTypeId();
+    }
+
+    public function getSectionAppendixTitle(OpinionTypeAppendixType $type)
+    {
+        return $type->getAppendixTypeTitle();
     }
 
     public function getConsultationTotalContributions(Arg $args): int

@@ -50,6 +50,8 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       opinionType={
         Object {
           "appendixTypes": Array [],
+          "id": "opinionTypeId",
+          "title": "opinionTypeTitle",
         }
       }
       projectId="projectId"

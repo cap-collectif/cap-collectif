@@ -444,6 +444,9 @@ type Section {
   subtitle: String
   contributionsCount: Int!
 
+  # Array of appendix types (possibly empty).
+  appendixTypes: [SectionAppendixType]
+
   # Array of subsections (possibly empty).
   sections: [Section]
   voteWidgetType: Int!
@@ -455,6 +458,13 @@ type Section {
 
   # The url of the section.
   url: String
+}
+
+# A section
+type SectionAppendixType {
+  id: String
+  position: Int!
+  title: String
 }
 
 # A source

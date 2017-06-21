@@ -52,7 +52,7 @@ describe('<ReplyCreateFormWrapper />', () => {
     expect(alert).toHaveLength(1);
     expect(alert.prop('bsStyle')).toEqual('warning');
     expect(alert.childAt(0).html()).toEqual(
-      '<strong>Vous avez déjà répondu à ce questionnaire.</strong>',
+      '<strong>Vous avez déjà participé.</strong>',
     );
     const form = wrapper.find('ReplyCreateForm');
     expect(form).toHaveLength(1);

@@ -12,7 +12,11 @@ describe('<OpinionCreateModal />', () => {
     projectId: 'projectId',
     stepId: '1',
     step: {},
-    opinionTypeId: 'opinionTypeId',
+    opinionType: {
+      id: 'opinionTypeId',
+      title: 'opinionTypeTitle',
+      appendixTypes: [],
+    },
     submitting: true,
     dispatch: jest.fn(),
   };
