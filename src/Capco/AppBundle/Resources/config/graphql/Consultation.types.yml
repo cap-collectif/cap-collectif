@@ -24,3 +24,22 @@ Consultation:
                 type: "[Section]"
                 description: "List of sections."
                 resolve: "@=resolver('consultation_sections', [value, args])"
+            contributionConnection:
+                type: "ContributionConnection"
+                args:
+                    orderBy:
+                      type: "ContributionOrder"
+                      description: "Ordering options for contributions returned from the connection."
+                    after:
+                      type: "String"
+                      description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                      type: "Int"
+                      description: "Returns the first n elements from the list."
+                    before:
+                      type: "String"
+                      description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                      type: "Int"
+                      description: "Returns the last n elements from the list."
+                resolve: '@=resolver("contributionsRelay", [value, args])'

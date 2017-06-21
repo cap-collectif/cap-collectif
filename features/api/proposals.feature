@@ -687,7 +687,7 @@ Feature: Proposal Restful Api
       When I send a POST request to "/api/proposal_forms/1/proposals" with json:
       """
       {
-        "author": 2,
+        "author": "user2",
         "childConnections": [1, 2],
         "title": "Acheter un sauna pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
