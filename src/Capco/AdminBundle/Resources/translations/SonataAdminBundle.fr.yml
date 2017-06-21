@@ -553,35 +553,29 @@ admin:
     proposal_form:
       add_question: Ajouter une question
       categories: Catégories
-      category_help_text: Texte d'aide pour le champ Catégorie.
-      category_mandatory: Saisie de la catégorie obligatoire
       created_at: Création
+      introduction: Introduction
       description: Description
-      description_help_text: Texte d'aide pour le champ Description.
-      district_help_text: Texte d'aide pour le champ Localisation.
+      help_text: Texte d'aide
       group_categories: Catégories
-      group_general: Formulaire
+      group_general: Général
+      group_form: Formulaire
       group_questions: Questions
-      group_help_texts: Textes d'aide
-      help_text_description_help_text: Le champ Description est présent par défaut.
-      help_text_district_help_text: Le champ Localisation est présent par défaut.
-      help_text_title_help_text: Le champ Titre est présent par défaut.
       notifications: Notifications
       notification:
         help: "Recevoir une notification par e-mail lorsqu'une proposition est :"
         on_create: Déposée
         on_update: Modifiée
         on_delete: Supprimée
-      questions: Questions
-      theme_help_text: Texte d'aide pour le champ Thème.
-      theme_mandatory: Saisie du thème obligatoire
-      district_mandatory: Saisie de la localisation obligatoire
+      questions: Champs personnalisés
+      illustration: Illustration
+      name: Nom du formulaire
       title: Titre
-      title_help_text: Texte d'aide pour le champ Titre.
       updated_at: Mise à jour
-      using_categories: Demander la saisie d'une catégorie
-      using_themes: Demander la saisie d'un thème
-      using_district: Demander la localisation
+      using_categories: Catégorie
+      using_themes: Thème
+      using_district: Localisation
+      mandatory: Saisie obligatoire
     questionnaire:
       anonymous_allowed: Autoriser les réponses anonymes
       title: Titre

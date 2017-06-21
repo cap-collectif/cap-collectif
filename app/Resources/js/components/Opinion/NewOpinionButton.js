@@ -9,7 +9,8 @@ import { openOpinionCreateModal } from '../../redux/modules/opinion';
 
 const NewOpinionButton = React.createClass({
   propTypes: {
-    opinionType: PropTypes.object.isRequired,
+    opinionTypeSlug: PropTypes.string.isRequired,
+    opinionTypeId: PropTypes.string.isRequired,
     stepId: PropTypes.string.isRequired,
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
@@ -22,7 +23,8 @@ const NewOpinionButton = React.createClass({
     const {
       dispatch,
       label,
-      opinionType,
+      opinionTypeSlug,
+      opinionTypeId,
       projectId,
       stepId,
       disabled,
@@ -33,16 +35,16 @@ const NewOpinionButton = React.createClass({
           <Button
             bsStyle="primary"
             disabled={disabled}
-            id={`btn-add--${opinionType.slug}`}
+            id={`btn-add--${opinionTypeSlug}`}
             onClick={() => {
-              dispatch(openOpinionCreateModal(opinionType.id));
+              dispatch(openOpinionCreateModal(opinionTypeId));
             }}>
             <i className="cap cap-add-1" />
             <span className="hidden-xs">{label}</span>
           </Button>
         </LoginOverlay>
         <OpinionCreateModal
-          opinionType={opinionType}
+          opinionTypeId={opinionTypeId}
           stepId={stepId}
           projectId={projectId}
         />

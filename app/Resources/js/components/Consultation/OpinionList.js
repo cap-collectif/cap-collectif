@@ -43,7 +43,8 @@ export const OpinionList = React.createClass({
                 </select>}
               {section.contribuable &&
                 <NewOpinionButton
-                  opinionType={section}
+                  opinionTypeSlug={section.slug}
+                  opinionTypeId={section.id}
                   stepId={consultation.id}
                   projectId={consultation.projectId}
                   disabled={!consultation.open}
@@ -113,11 +114,6 @@ export default createFragmentContainer(OpinionList, {
       color
       contribuable
       contributionsCount
-      appendixTypes {
-        id
-        title
-        position
-      }
     }
   `,
 });
