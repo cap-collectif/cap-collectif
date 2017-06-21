@@ -11,10 +11,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/id-to-uuid"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/ArteGEIE/serializer"
         },
         {
@@ -96,8 +92,6 @@
         "nelmio/alice": "^2.2",
         "odolbeau/rabbit-mq-admin-toolkit": "^3.1",
 
-        "cap-collectif/id-to-uuid": "dev-master",
-
         "doctrine/orm": "^2.5",
         "doctrine/dbal": "^2.5",
         "infinite-networks/form-bundle": "^1.0",
@@ -117,7 +111,8 @@
         "webonyx/graphql-php": "^0.9.8",
         "simplesamlphp/simplesamlphp": "dev-master#d68d4087416d7888393183a092f81f49354a5c8d as v1.14.9",
         "hslavich/simplesamlphp-bundle": "^1.1@dev",
-        "simplesamlphp/saml2": "dev-master"
+        "simplesamlphp/saml2": "dev-master",
+        "cap-collectif/id-to-uuid": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

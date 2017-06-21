@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "35860059d8dc14776ed11f973533cf99",
+    "content-hash": "07d3107d84ca9dbfb5688537a867d211",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -48,16 +48,16 @@
         },
         {
             "name": "cap-collectif/id-to-uuid",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:cap-collectif/id-to-uuid.git",
-                "reference": "20cdb5194994151bab1201c88a0a3c3a27d45930"
+                "url": "https://github.com/cap-collectif/id-to-uuid.git",
+                "reference": "818254d870a8167708daff45a39ac93f8ef8d599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/20cdb5194994151bab1201c88a0a3c3a27d45930",
-                "reference": "20cdb5194994151bab1201c88a0a3c3a27d45930",
+                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/818254d870a8167708daff45a39ac93f8ef8d599",
+                "reference": "818254d870a8167708daff45a39ac93f8ef8d599",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "doctrine/orm": "^2.5"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0"
+                "friendsofphp/php-cs-fixer": "^2.3"
             },
             "type": "library",
             "autoload": {
@@ -74,21 +74,18 @@
                     "CapCollectif\\IdToUuid\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Aurélien David",
-                    "email": "adavid@jolicode.com"
+                    "email": "aurelien@cap-collectif.com"
                 }
             ],
             "description": "Easily migrate from auto incremented id to uuid",
-            "support": {
-                "source": "https://github.com/cap-collectif/id-to-uuid/tree/master",
-                "issues": "https://github.com/cap-collectif/id-to-uuid/issues"
-            },
-            "time": "2017-01-13 15:53:06"
+            "time": "2017-06-21T11:20:35+00:00"
         },
         {
             "name": "caxy/htmldiff-bundle",
@@ -145,7 +142,7 @@
                 "diffing",
                 "html"
             ],
-            "time": "2016-04-10 18:38:03"
+            "time": "2016-04-10T18:38:03+00:00"
         },
         {
             "name": "caxy/php-htmldiff",
@@ -1805,7 +1802,7 @@
             "support": {
                 "source": "https://github.com/emgiezet/FOSElasticaBundle/tree/master"
             },
-            "time": "2016-03-01 15:14:30"
+            "time": "2016-03-01T15:14:30+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache",
@@ -3432,7 +3429,7 @@
             "support": {
                 "source": "https://github.com/ArteGEIE/serializer/tree/fix/2-nested-serializer-calls"
             },
-            "time": "2014-09-18 10:01:17"
+            "time": "2014-09-18T10:01:17+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -6578,7 +6575,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2016-04-15 13:32:13"
+            "time": "2016-04-15T13:32:13+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -6777,7 +6774,7 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2016-04-12 12:26:00"
+            "time": "2016-04-12T12:26:00+00:00"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -6902,7 +6899,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2016-04-08 17:08:34"
+            "time": "2016-04-08T17:08:34+00:00"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -7024,7 +7021,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2016-04-08 16:23:52"
+            "time": "2016-04-08T16:23:52+00:00"
         },
         {
             "name": "sonata-project/easy-extends-bundle",
@@ -7349,7 +7346,7 @@
             "support": {
                 "source": "https://github.com/spyl94/SonataMediaBundle/tree/master"
             },
-            "time": "2016-09-30 14:15:26"
+            "time": "2016-09-30T14:15:26+00:00"
         },
         {
             "name": "sonata-project/notification-bundle",
@@ -7504,7 +7501,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2016-04-08 16:21:08"
+            "time": "2016-04-08T16:21:08+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -8811,12 +8808,12 @@
             "version": "v3.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/geocoder-php/Geocoder.git",
+                "url": "https://github.com/geocoder-php/php-common.git",
                 "reference": "ccc178e2984c0af24881faa0ffe515f20e5e8c23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/ccc178e2984c0af24881faa0ffe515f20e5e8c23",
+                "url": "https://api.github.com/repos/geocoder-php/php-common/zipball/ccc178e2984c0af24881faa0ffe515f20e5e8c23",
                 "reference": "ccc178e2984c0af24881faa0ffe515f20e5e8c23",
                 "shasum": ""
             },
@@ -12523,7 +12520,7 @@
             "support": {
                 "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
             },
-            "time": "2016-03-15 13:13:55"
+            "time": "2016-03-15T13:13:55+00:00"
         },
         {
             "name": "tonicforhealth/behat-parallel-scenario",
@@ -12570,7 +12567,7 @@
             "support": {
                 "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
             },
-            "time": "2016-03-11 13:43:33"
+            "time": "2016-03-11T13:43:33+00:00"
         },
         {
             "name": "tonicforhealth/parallel-process-runner",
@@ -12635,7 +12632,6 @@
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
         "caxy/htmldiff-bundle": 20,
-        "cap-collectif/id-to-uuid": 20,
         "friendsofsymfony/http-cache-bundle": 10,
         "friendsofsymfony/http-cache": 10,
         "simplesamlphp/simplesamlphp": 20,

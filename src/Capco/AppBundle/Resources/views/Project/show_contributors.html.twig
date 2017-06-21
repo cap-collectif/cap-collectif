@@ -39,7 +39,13 @@
             {% set offset = pagination*page - pagination %}
             {% set limit = contributors|length <= pagination*page ? contributors|length : pagination %}
             {% for contributor in contributors|slice(offset, limit) %}
-                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.contributions, 'votes': contributor.votes, 'col': 4, 'showVotes': showVotes} only %}
+                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {
+                    'user': contributor.user,
+                    'contributions': contributor.contributions,
+                    'votes': contributor.votes,
+                    'col': 4,
+                    'showVotes': showVotes
+                } only %}
             {% endfor %}
         </div>
     </div>
