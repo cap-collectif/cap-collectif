@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Opinion:
-    opinion{1..1000}:
+    opinion{1..2000}:
         id: opinion<current()>
         step: '@cstep1'
         title: Opinion <current()>
@@ -9,5 +9,17 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: '@user<numberBetween(1, 100)>'
-        OpinionType: '@opinionType<numberBetween(1, 5)>'
+        OpinionType: '@opinionType1'
+        step: '@cstep1'
+    opinion{2001..10000}:
+        id: opinion<current()>
+        step: '@cstep1'
+        title: Opinion <current()>
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        isEnabled: true
+        isTrashed: false
+        Author: '@user<numberBetween(1, 100)>'
+        OpinionType: '@opinionType<numberBetween(2, 5)>'
         step: '@cstep1'

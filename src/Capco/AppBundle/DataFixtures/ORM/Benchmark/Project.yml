@@ -5,3 +5,9 @@ Capco\AppBundle\Entity\Project:
     Author: @user1
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true
+  project2:
+    id: project2
+    title: project-2
+    Author: @user1
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true

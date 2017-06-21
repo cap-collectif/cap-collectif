@@ -28,22 +28,22 @@ class RegistrationFormExtension extends \Twig_Extension
     {
         $form = $this->formRepo->findCurrent();
         $serializedQuestions = $this->serializer->serialize(
-            $form->getRealQuestions(),
+            $form ? $form->getRealQuestions() : [],
             'json',
             (new SerializationContext())->setGroups(['Questions'])
         );
 
         $serializedDomains = $this->serializer->serialize(
-            $form->getDomains(),
+            $form ? $form->getDomains() : [],
             'json',
             (new SerializationContext())->setGroups(['EmailDomain'])
         );
 
         return [
-          'bottomTextDisplayed' => $form->isBottomTextDisplayed(),
-          'bottomText' => $form->getBottomText(),
-          'topTextDisplayed' => $form->isTopTextDisplayed(),
-          'topText' => $form->getTopText(),
+          'bottomTextDisplayed' => $form ? $form->isBottomTextDisplayed() : '',
+          'bottomText' => $form ? $form->getBottomText() : '',
+          'topTextDisplayed' => $form ? $form->isTopTextDisplayed() : '',
+          'topText' => $form ? $form->getTopText() : '',
           'domains' => json_decode($serializedDomains, true),
           'questions' => json_decode($serializedQuestions, true),
         ];

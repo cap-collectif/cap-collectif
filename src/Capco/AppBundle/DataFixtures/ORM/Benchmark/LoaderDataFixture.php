@@ -11,6 +11,8 @@ class LoaderDataFixture extends AbstractLoader
         return [
             __DIR__ . '/User.yml',
             __DIR__ . '/QuestionnaireStep.yml',
+            __DIR__ . '/ConsultationStepType.yml',
+            __DIR__ . '/ConsultationStep.yml',
             __DIR__ . '/Project.yml',
             __DIR__ . '/ProjectAbstractStep.yml',
             __DIR__ . '/Questionnaire.yml',
@@ -19,6 +21,8 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/QuestionnaireAbstractQuestion.yml',
             __DIR__ . '/Reply.yml',
             __DIR__ . '/Response.yml',
+            __DIR__ . '/OpinionType.yml',
+            __DIR__ . '/Opinion.yml',
         ];
     }
 }

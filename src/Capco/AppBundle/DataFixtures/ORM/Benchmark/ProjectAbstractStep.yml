@@ -3,3 +3,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: @questionnaireStep1
     project: @project1
     position: 1
+  pas2:
+    step: @cstep1
+    project: @project2
+    position: 1
