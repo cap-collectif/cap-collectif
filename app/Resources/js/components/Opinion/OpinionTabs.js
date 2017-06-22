@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { IntlMixin, FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
@@ -17,7 +17,7 @@ import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
 const OpinionTabs = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -208,7 +208,7 @@ const OpinionTabs = React.createClass({
                 <NavItem className="opinion-tabs" eventKey="links">
                   <FormattedMessage
                     message={this.getIntlMessage('global.links')}
-                    num={opinion.connections_count}
+                    num={opinion.connectionsCount}
                   />
                 </NavItem>}
             </Nav>
