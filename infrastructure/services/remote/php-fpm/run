@@ -75,6 +75,17 @@ while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
   echo "Waiting for rabbitmq to boot..."
 done
 
+while ! curl http://127.0.0.1:6379 > /dev/null 2>&1;
+  do sleep 0.1
+  echo "Waiting for redis to boot..."
+done
+
+echo "Clearing doctrine cache..."
+su capco <<'EOF'
+php bin/console doctrine:cache:clear-query --env=prod --no-interaction
+php bin/console doctrine:cache:clear-result --env=prod --no-interaction
+EOF
+
 echo "Updating rabbitmq vhost to match schema..."
 su capco -c "php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml"
 

@@ -43,6 +43,8 @@ class Manager
 
     protected $context;
 
+    protected $knownValues = [];
+
     public function __construct(ToggleManager $toggleManager, ContextFactory $contextFactory)
     {
         $this->toggleManager = $toggleManager;
@@ -92,9 +94,13 @@ class Manager
         }
     }
 
-    public function isActive($name)
+    public function isActive(string $name): bool
     {
-        return $this->toggleManager->active($name, $this->context);
+        if (!isset($this->knownValues[$name])) {
+            $this->knownValues[$name] = $this->toggleManager->active($name, $this->context);
+        }
+
+        return $this->knownValues[$name];
     }
 
     public function hasOneActive($names)

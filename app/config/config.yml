@@ -31,24 +31,6 @@ framework:
     http_method_override: true
     translator: { fallback: fr }
 
-snc_redis:
-    clients:
-        default:
-            type: predis
-            alias: default
-            dsn: redis://%redis_host%
-            logging: "%kernel.debug%"
-        session:
-            type: predis
-            alias: session
-            dsn: redis://%redis_host%
-            logging: "%kernel.debug%"
-    session:
-        client: session
-        ttl: 1209600 # Two weeks
-        prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
-        locking: true # Not using locking improve performance, but may cause bugs
-
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
@@ -80,7 +62,7 @@ doctrine:
         mapping_types:
             enum: string
     orm:
-        auto_generate_proxy_classes: true
+        auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
         auto_mapping: true
         filters:
           softdeleted:
@@ -104,8 +86,47 @@ doctrine:
             dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
             is_bundle: false
         resolve_target_entities:
-          # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
-          Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
+           # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
+           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://%redis_host%
+            logging: "%kernel.debug%"
+        cache:
+            type: predis
+            alias: cache
+            dsn: redis://%redis_host%
+            logging: "%kernel.debug%"
+        session:
+            type: predis
+            alias: session
+            dsn: redis://%redis_host%
+            logging: "%kernel.debug%"
+    session:
+        client: session
+        ttl: 1209600 # Two weeks
+        prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
+        locking: true # Not using locking improve performance, but may cause bugs
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        result_cache:
+            client: cache
+            entity_manager: default
+            namespace: result_cache_%kernel.environment%_
+        query_cache:
+            client: cache
+            entity_manager: default
+            namespace: query_cache_%kernel.environment%_
+        # second_level_cache:
+        #     client: cache
+        #     entity_manager: default
 
 swiftmailer:
     default_mailer: default

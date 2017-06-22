@@ -5,13 +5,6 @@ framework:
    validation:
        cache: apc
 
-doctrine:
-   orm:
-       metadata_cache_driver: apc
-       result_cache_driver: apc
-       query_cache_driver: apc
-       auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
-
 monolog:
     handlers:
         file:

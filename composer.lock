@@ -5780,23 +5780,23 @@
         },
         {
             "name": "predis/predis",
-            "version": "v1.0.3",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04"
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/84060b9034d756b4d79641667d7f9efe1aeb8e04",
-                "reference": "84060b9034d756b4d79641667d7f9efe1aeb8e04",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=5.3.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-curl": "Allows access to Webdis when paired with phpiredis",
@@ -5819,14 +5819,14 @@
                     "homepage": "http://clorophilla.net"
                 }
             ],
-            "description": "Flexible and feature-complete PHP client library for Redis",
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
             "homepage": "http://github.com/nrk/predis",
             "keywords": [
                 "nosql",
                 "predis",
                 "redis"
             ],
-            "time": "2015-07-30T18:34:15+00:00"
+            "time": "2016-06-16T16:22:20+00:00"
         },
         {
             "name": "psr/http-message",
@@ -5983,27 +5983,28 @@
         },
         {
             "name": "qandidate/toggle-bundle",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qandidate-labs/qandidate-toggle-bundle.git",
-                "reference": "e259ec66f38dfe13632441d9292f920a9da9f599"
+                "reference": "c37fd64bf5fd5333947cdc2414772ae3187bd0e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qandidate-labs/qandidate-toggle-bundle/zipball/e259ec66f38dfe13632441d9292f920a9da9f599",
-                "reference": "e259ec66f38dfe13632441d9292f920a9da9f599",
+                "url": "https://api.github.com/repos/qandidate-labs/qandidate-toggle-bundle/zipball/c37fd64bf5fd5333947cdc2414772ae3187bd0e7",
+                "reference": "c37fd64bf5fd5333947cdc2414772ae3187bd0e7",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "qandidate/toggle": "~0.1",
-                "symfony/framework-bundle": "^2.7.0"
+                "qandidate/toggle": "~0.1|~1.0",
+                "symfony/framework-bundle": "~2.7|~3.0"
             },
             "require-dev": {
-                "symfony/browser-kit": "^2.7.0",
-                "symfony/framework-bundle": "^2.7.0",
-                "symfony/twig-bundle": "^2.7.0",
+                "phpunit/phpunit": "^4.8",
+                "symfony/browser-kit": "~2.7|~3.0",
+                "symfony/framework-bundle": "~2.7|~3.0",
+                "symfony/twig-bundle": "~2.7|~3.0",
                 "twig/twig": "~1.16,>=1.16.2"
             },
             "suggest": {
@@ -6012,7 +6013,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "0.5.x-dev"
                 }
             },
             "autoload": {
@@ -6035,7 +6036,7 @@
                 }
             ],
             "description": "This Bundle provides the integration with qandidate/toggle. It provides the services and configuration you need to implement feature toggles in your Symfony application.",
-            "time": "2016-03-04T15:29:26+00:00"
+            "time": "2016-06-14T20:51:27+00:00"
         },
         {
             "name": "robrichards/xmlseclibs",
@@ -6423,16 +6424,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "02c808d157c79ac32777e19f3ec31af24a32d2df"
+                "reference": "60b82fd31432c78d976470eae179211af7d17c60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/02c808d157c79ac32777e19f3ec31af24a32d2df",
-                "reference": "02c808d157c79ac32777e19f3ec31af24a32d2df",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/60b82fd31432c78d976470eae179211af7d17c60",
+                "reference": "60b82fd31432c78d976470eae179211af7d17c60",
                 "shasum": ""
             },
             "require": {
@@ -6484,7 +6485,7 @@
                 "redis",
                 "symfony"
             ],
-            "time": "2017-02-16T12:02:10+00:00"
+            "time": "2017-06-15T08:51:06+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",

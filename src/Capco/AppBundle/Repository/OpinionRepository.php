@@ -380,6 +380,9 @@ class OpinionRepository extends EntityRepository
                     ->setMaxResults($nbByPage)
         ;
 
+        $query->useQueryCache(true);
+        $query->useResultCache(true, 60);
+
         return new Paginator($query);
     }
 

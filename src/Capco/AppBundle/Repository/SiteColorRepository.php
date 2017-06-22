@@ -18,6 +18,8 @@ class SiteColorRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->groupBy('p.keyname')
             ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
             ->getResult();
     }
 }
