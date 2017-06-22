@@ -64,6 +64,9 @@ doctrine:
     orm:
         auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
         auto_mapping: true
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
         filters:
           softdeleted:
               class: Capco\AppBundle\Filter\SoftDeletedFilter
@@ -111,22 +114,24 @@ snc_redis:
         ttl: 1209600 # Two weeks
         prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
         locking: true # Not using locking improve performance, but may cause bugs
-    doctrine:
-        metadata_cache:
-            client: cache
-            entity_manager: default
-            document_manager: default
-        result_cache:
-            client: cache
-            entity_manager: default
-            namespace: result_cache_%kernel.environment%_
-        query_cache:
-            client: cache
-            entity_manager: default
-            namespace: query_cache_%kernel.environment%_
-        # second_level_cache:
-        #     client: cache
-        #     entity_manager: default
+    # Can't succeed to have doctrine cache work inside redis, so for now we keep apc
+    # doctrine:
+    #     metadata_cache:
+    #         client: cache
+    #         entity_manager: default
+    #         document_manager: default
+    #         namespace: metadata_cache_%kernel.environment%_
+    #     result_cache:
+    #         client: cache
+    #         entity_manager: default
+    #         namespace: result_cache_%kernel.environment%_
+    #     query_cache:
+    #         client: cache
+    #         entity_manager: default
+    #         namespace: query_cache_%kernel.environment%_
+    # second_level_cache:
+    #     client: cache
+    #     entity_manager: default
 
 swiftmailer:
     default_mailer: default
