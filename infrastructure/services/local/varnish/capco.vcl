@@ -51,7 +51,7 @@ sub vcl_recv {
     return (pass);
   }
 
-  # Remove all cookies except the session ID.
+  # Remove all cookies except the Symfony or SAML session.
   if (req.http.Cookie) {
     set req.http.Cookie = ";" + req.http.Cookie;
     set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
