@@ -25,7 +25,7 @@ sub vcl_recv {
   if (req.http.host == "capco.dev") {
     return (pass);
   }
-  
+
   # Disable cache for blackfire
   if (req.http.X-Blackfire-Query) {
     return (pass);
@@ -68,11 +68,9 @@ sub vcl_recv {
 
 sub vcl_deliver {
     # Add extra headers for debugging
-    if (resp.http.X-Cache-Debug) {
-        if (resp.http.X-Varnish ~ " ") {
-            set resp.http.X-Cache = "HIT";
-        } else {
-            set resp.http.X-Cache = "MISS";
-        }
+    if (resp.http.X-Varnish ~ " ") {
+      set resp.http.X-Cache = "HIT";
+    } else {
+      set resp.http.X-Cache = "MISS";
     }
 }

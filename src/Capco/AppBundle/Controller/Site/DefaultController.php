@@ -75,7 +75,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="0", public="false")
+     * @Cache(smaxage=60, public=true)
      * @Template("CapcoAppBundle:Default:footer.html.twig")
      *
      * @param mixed $max
