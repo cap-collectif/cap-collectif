@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProposalFormAdmin extends Admin
 {
@@ -27,48 +28,69 @@ class ProposalFormAdmin extends Admin
         $formMapper
             ->with('admin.fields.proposal_form.group_general')
             ->add('title', null, [
-                'label' => 'admin.fields.proposal_form.title',
+                'label' => 'admin.fields.proposal_form.name',
             ])
+            ->end()
+            ->with('admin.fields.proposal_form.group_form')
             ->add('description', CKEditorType::class, [
-                'label' => 'admin.fields.proposal_form.description',
+                'label' => 'admin.fields.proposal_form.introduction',
                 'config_name' => 'admin_editor',
                 'required' => false,
             ])
-            ->add('usingDistrict', CheckboxType::class, [
-                'label' => 'admin.fields.proposal_form.using_district',
+            ->add('usingText', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.title',
                 'required' => false,
+                'mapped' => false,
+                'disabled' => true,
+                'read_only' => true,
+                'attr' => ['style' => 'padding-top: 25px', 'checked' => true],
             ])
-            ->add('districtMandatory', CheckboxType::class, [
-                'label' => 'admin.fields.proposal_form.district_mandatory',
+            ->add('textMandatory', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.mandatory',
                 'required' => false,
+                'attr' => ['checked' => true],
+                'mapped' => false,
+                'disabled' => true,
+                'read_only' => true,
             ])
-        ;
+            ->add('titleHelpText', TextType::class, [
+                'label' => 'admin.fields.proposal_form.help_text',
+                'required' => false,
+                'attr' => ['class' => 'lol'],
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
-                ->add('usingThemes', null, [
+                ->add('usingThemes', CheckboxType::class, [
                     'label' => 'admin.fields.proposal_form.using_themes',
                     'required' => false,
+                    'attr' => ['style' => 'padding-top: 25px'],
                 ])
-                ->add('themeMandatory', null, [
-                    'label' => 'admin.fields.proposal_form.theme_mandatory',
+                ->add('themeMandatory', CheckboxType::class, [
+                    'label' => 'admin.fields.proposal_form.mandatory',
+                    'required' => false,
+                ])
+                ->add('themeHelpText', TextType::class, [
+                    'label' => 'admin.fields.proposal_form.help_text',
                     'required' => false,
                 ])
             ;
         }
 
         $formMapper
-            ->add('usingCategories', null, [
+            ->add('usingCategories', CheckboxType::class, [
                 'label' => 'admin.fields.proposal_form.using_categories',
                 'required' => false,
+                'attr' => ['style' => 'padding-top: 25px'],
             ])
-            ->add('categoryMandatory', null, [
-                'label' => 'admin.fields.proposal_form.category_mandatory',
+            ->add('categoryMandatory', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.mandatory',
                 'required' => false,
             ])
-            ->end()
-
-            ->with('admin.fields.proposal_form.group_categories', ['class' => 'col-md-12 categories-hideable'])
+            ->add('categoryHelpText', TextType::class, [
+                'label' => 'admin.fields.proposal_form.help_text',
+                'required' => false,
+            ])
             ->add('categories', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.categories',
                 'by_reference' => false,
@@ -76,57 +98,55 @@ class ProposalFormAdmin extends Admin
             ], [
                 'edit' => 'inline',
                 'inline' => 'table',
-            ])
-            ->end()
-
-            ->with('admin.fields.proposal_form.group_help_texts')
-            ->add('titleHelpText', null, [
-                'label' => 'admin.fields.proposal_form.title_help_text',
-                'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_title_help_text',
-            ])
-            ->add('descriptionHelpText', null, [
-                'label' => 'admin.fields.proposal_form.description_help_text',
-                'required' => false,
-                'help' => 'admin.fields.proposal_form.help_text_description_help_text',
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('districts')) {
-            $formMapper
-                ->add('districtHelpText', null, [
-                    'label' => 'admin.fields.proposal_form.district_help_text',
+            $formMapper->add('usingDistrict', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.using_district',
+                'required' => false,
+                'attr' => ['style' => 'padding-top: 25px'],
+            ])
+                ->add('districtMandatory', CheckboxType::class, [
+                    'label' => 'admin.fields.proposal_form.mandatory',
                     'required' => false,
-                    'help' => 'admin.fields.proposal_form.help_text_district_help_text',
                 ])
-            ;
+                ->add('districtHelpText', TextType::class, [
+                    'label' => 'admin.fields.proposal_form.help_text',
+                    'required' => false,
+                ]);
         }
 
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
-            $formMapper
-                ->add('themeHelpText', null, [
-                    'label' => 'admin.fields.proposal_form.theme_help_text',
-                    'required' => false,
-                ])
-            ;
-        }
+        $formMapper->add('usingDescription', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.description',
+                'required' => false,
+                'mapped' => false,
+                'disabled' => true,
+                'read_only' => true,
+                'attr' => ['style' => 'padding-top: 25px', 'checked' => true],
+            ])
+            ->add('textDescription', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.mandatory',
+                'required' => false,
+                'attr' => ['checked' => true],
+                'mapped' => false,
+                'disabled' => true,
+                'read_only' => true,
+            ])
+            ->add('descriptionHelpText', TextType::class, [
+                'label' => 'admin.fields.proposal_form.help_text',
+                'required' => false,
+            ]);
 
         $formMapper
-            ->add('categoryHelpText', null, [
-                'label' => 'admin.fields.proposal_form.category_help_text',
-                'required' => false,
-            ])
-            ->end();
-
-        $formMapper->with('admin.fields.proposal_form.notifications')
-            ->add('notificationsConfiguration', 'sonata_type_admin', [
-                'label' => 'admin.fields.proposal_form.notification.help',
-                'required' => false,
-            ])
-            ->end();
-
-        $formMapper->with('admin.fields.proposal_form.group_questions')
-            ->add('questions', 'sonata_type_collection', [
+                ->add('usingIllustration', CheckboxType::class, [
+                    'label' => 'admin.fields.proposal_form.illustration',
+                    'required' => false,
+                    'mapped' => false,
+                    'disabled' => true,
+                    'read_only' => true,
+                    'attr' => ['style' => 'padding-top: 25px', 'checked' => true],
+                ])
+                ->add('questions', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.questions',
                 'by_reference' => false,
                 'required' => false,
@@ -134,6 +154,14 @@ class ProposalFormAdmin extends Admin
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
+            ]);
+
+        $formMapper->end();
+
+        $formMapper->with('admin.fields.proposal_form.notifications')
+            ->add('notificationsConfiguration', 'sonata_type_admin', [
+                'label' => 'admin.fields.proposal_form.notification.help',
+                'required' => false,
             ])
             ->end();
     }
