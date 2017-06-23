@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
+import PinnedLabel from '../Utils/PinnedLabel';
 
 const OpinionInfos = React.createClass({
   propTypes: {
@@ -76,8 +77,7 @@ const OpinionInfos = React.createClass({
   },
 
   renderRankingLabel() {
-    const { opinionTerm, rankingThreshold } = this.props;
-    const opinion = this.props.opinion;
+    const { opinion, opinionTerm, rankingThreshold } = this.props;
     if (
       rankingThreshold &&
       rankingThreshold !== null &&
@@ -115,6 +115,7 @@ const OpinionInfos = React.createClass({
         {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
+        <PinnedLabel show={this.props.opinion.pinned} type="opinion" />
         {this.renderRankingLabel()}
       </p>
     );

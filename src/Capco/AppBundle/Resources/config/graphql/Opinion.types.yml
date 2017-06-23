@@ -21,6 +21,9 @@ Opinion:
                 description: "The author of the contribution."
             type:
                 type: "OpinionType!"
+            pinned:
+                type: "Boolean!"
+                description: "true if the contribution is pinned."
             expired:
                 type: "Boolean!"
                 description: "true if the contribution is expired."

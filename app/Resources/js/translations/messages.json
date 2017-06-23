@@ -273,7 +273,10 @@
     "password": "Mot de passe",
     "pinned": {
       "label": "\u00c9pinglé",
-      "tooltip": "Ce commentaire a été épinglé par l'administrateur."
+      "tooltip": {
+        "comment": "Ce commentaire a été épinglé par l'administrateur.",
+        "opinion": "Cette proposition a été épinglée par l'administrateur."
+      }
     },
     "phone": "Numéro de téléphone portable",
     "preview": "Aper\u00e7u",

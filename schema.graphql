@@ -164,6 +164,9 @@ type Opinion implements Contribution, TrashableContribution, ContributionWithAut
   author: User!
   type: OpinionType!
 
+  # true if the contribution is pinned.
+  pinned: Boolean!
+
   # true if the contribution is expired.
   expired: Boolean!
   published: Boolean!

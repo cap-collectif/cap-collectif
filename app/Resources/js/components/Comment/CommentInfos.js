@@ -19,9 +19,12 @@ const CommentInfos = React.createClass({
     return (
       <span className="excerpt">
         <FormattedDate
-            value={moment(comment.created_at)}
-            day="numeric" month="long" year="numeric"
-            hour="numeric" minute="numeric"
+          value={moment(comment.created_at)}
+          day="numeric"
+          month="long"
+          year="numeric"
+          hour="numeric"
+          minute="numeric"
         />
       </span>
     );
@@ -39,13 +42,16 @@ const CommentInfos = React.createClass({
 
     return (
       <span className="excerpt">
-        { ' - ' }
-        { this.getIntlMessage('comment.edited') }
-        { ' ' }
+        {' - '}
+        {this.getIntlMessage('comment.edited')}
+        {' '}
         <FormattedDate
-            value={moment(comment.updated_at)}
-            day="numeric" month="long" year="numeric"
-            hour="numeric" minute="numeric"
+          value={moment(comment.updated_at)}
+          day="numeric"
+          month="long"
+          year="numeric"
+          hour="numeric"
+          minute="numeric"
         />
       </span>
     );
@@ -57,7 +63,7 @@ const CommentInfos = React.createClass({
       return <UserLink user={comment.author} />;
     }
 
-    return <span>{ comment.author_name }</span>;
+    return <span>{comment.author_name}</span>;
   },
 
   render() {
@@ -68,12 +74,10 @@ const CommentInfos = React.createClass({
         {'  '}
         {this.renderDate()}
         {this.renderEditionDate()}
-        <PinnedLabel show={comment.pinned} />
+        <PinnedLabel show={comment.pinned} type="comment" />
       </p>
     );
   },
-
-
 });
 
 export default CommentInfos;

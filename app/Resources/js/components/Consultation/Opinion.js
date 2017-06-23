@@ -70,6 +70,7 @@ export default createFragmentContainer(
       connectionsCount
       sourcesCount
       argumentsCount
+      pinned
       author {
         vip
         displayName
