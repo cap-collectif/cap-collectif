@@ -296,6 +296,8 @@ class OpinionRepository extends EntityRepository
 
         return $qb
             ->getQuery()
+            ->useQueryCache(true)
+            // ->useResultCache(true, 60)
             ->getSingleScalarResult();
     }
 
@@ -381,7 +383,7 @@ class OpinionRepository extends EntityRepository
         ;
 
         $query->useQueryCache(true);
-        $query->useResultCache(true, 60);
+        // $query->useResultCache(true, 60);
 
         return new Paginator($query);
     }

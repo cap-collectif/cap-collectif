@@ -16,6 +16,8 @@ class ProjectTypeRepository extends EntityRepository
             ->groupBy('projects.id')
             ->distinct('p.id')
             ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
             ->getArrayResult();
     }
 }

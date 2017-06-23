@@ -64,9 +64,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
         auto_mapping: true
-        metadata_cache_driver: apc
-        result_cache_driver: apc
-        query_cache_driver: apc
+        # naming_strategy: doctrine.orm.naming_strategy.underscore
         filters:
           softdeleted:
               class: Capco\AppBundle\Filter\SoftDeletedFilter
