@@ -84,20 +84,19 @@ RUN apt-get update && \
     apt-get clean all
 
 # Install blackfire PHP Probe
-RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
-    tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
-    mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so && \
-    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/fpm/conf.d/20-blackfire.ini && \
-    echo "extension=blackfire.so\nblackfire.agent_socket=tcp://0.0.0.0:8707" > /etc/php/7.0/cli/conf.d/20-blackfire.ini
-
-# Install blackfire
 RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
     apt-get update && \
     apt-get install -y blackfire-agent blackfire-php && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    mkdir -p /var/run/blackfire
+    mkdir -p /var/run/blackfire && \
+    curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
+    tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
+    mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
+COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
+COPY blackfire/blackfire-php.ini /etc/php/7.0/fpm/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.0/cli/conf.d/92-blackfire-config.ini
 
 # Install rabbitmq
 RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
