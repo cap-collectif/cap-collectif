@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e51fe7da7b82ece6c575187d5d3a85f",
+    "content-hash": "f71791ef17d7f929e12d11cf2339ae2d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7220,12 +7220,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spyl94/SonataMediaBundle.git",
+                "url": "https://github.com/cap-collectif/SonataMediaBundle.git",
                 "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/SonataMediaBundle/zipball/98553d7faf8639ff6f2557c74a1a4e032b25f490",
+                "url": "https://api.github.com/repos/cap-collectif/SonataMediaBundle/zipball/98553d7faf8639ff6f2557c74a1a4e032b25f490",
                 "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490",
                 "shasum": ""
             },
@@ -12626,12 +12626,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spyl94/BehatPageObjectExtension.git",
+                "url": "https://github.com/cap-collectif/BehatPageObjectExtension.git",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/BehatPageObjectExtension/zipball/0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
+                "url": "https://api.github.com/repos/cap-collectif/BehatPageObjectExtension/zipball/0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
                 "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
                 "shasum": ""
             },
@@ -12692,12 +12692,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spyl94/behat-parallel-scenario.git",
+                "url": "https://github.com/cap-collectif/behat-parallel-scenario.git",
                 "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spyl94/behat-parallel-scenario/zipball/65b5b4d1130d3c9c16097d172882781e839ecfc5",
+                "url": "https://api.github.com/repos/cap-collectif/behat-parallel-scenario/zipball/65b5b4d1130d3c9c16097d172882781e839ecfc5",
                 "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5",
                 "shasum": ""
             },
@@ -12850,8 +12850,8 @@
         "simplesamlphp/simplesamlphp": 20,
         "hslavich/simplesamlphp-bundle": 20,
         "simplesamlphp/saml2": 20,
-        "sensiolabs/behat-page-object-extension": 20,
-        "tonicforhealth/behat-parallel-scenario": 20
+        "tonicforhealth/behat-parallel-scenario": 20,
+        "sensiolabs/behat-page-object-extension": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
