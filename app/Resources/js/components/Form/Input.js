@@ -8,6 +8,7 @@ import {
   FormGroup,
   Thumbnail,
 } from 'react-bootstrap';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -94,6 +95,10 @@ export default class Input extends ReactBootstrapInput {
 
     if (type && type === 'captcha') {
       return <Captcha {...this.props} />;
+    }
+
+    if (type && type === 'places') {
+      return <PlacesAutocomplete {...this.props} />;
     }
 
     if (type && type === 'image') {

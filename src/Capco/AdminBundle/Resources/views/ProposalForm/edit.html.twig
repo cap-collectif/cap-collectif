@@ -20,7 +20,16 @@
             const categoryHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryHelpText");
             const districtHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_districtHelpText");
             const categoryMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_categoryMandatory");
-            const categoriesGroup = $(".categories-hideable");
+            const categoriesGroup = $("#sonata-ba-field-container-{{ admin.uniqid }}_categories");
+
+            const usingAddressField = $("input#{{ admin.uniqid }}_usingAddress");
+            const addressMandatoryField = $("#sonata-ba-field-container-{{ admin.uniqid }}_addressMandatory");
+            const addressHelpTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_addressHelpText");
+            const latTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_latMap");
+            const lngTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_lngMap");
+            const zoomTextField = $("#sonata-ba-field-container-{{ admin.uniqid }}_zoomMap");
+
+            // MAP
 
             function toggleField(show, mandatoryField, helpField, categoryField) {
                 if (show) {
@@ -42,11 +51,30 @@
                 }
             }
 
+            function toggleFieldMap(show, mandatoryField, helpField, latField, lngField, zoomField) {
+                if (show) {
+                    mandatoryField.removeClass('hidden');
+                    helpField.removeClass('hidden');
+                    latField.removeClass('hidden');
+                    lngField.removeClass('hidden');
+                    zoomField.removeClass('hidden');
+                } else {
+                    mandatoryField.addClass('hidden');
+                    helpField.addClass('hidden');
+                    latField.addClass('hidden');
+                    lngField.addClass('hidden');
+                    zoomField.addClass('hidden');
+                }
+            }
+
             // For Themes
             toggleField(usingThemesField.prop('checked'), themeMandatoryField, themeHelpTextField, null);
 
             // For Categories
             toggleField(usingCategoriesField.prop('checked'), categoryMandatoryField, categoryHelpTextField, categoriesGroup);
+
+            // For Address
+            toggleFieldMap(usingAddressField.prop('checked'), addressMandatoryField, addressHelpTextField, latTextField, lngTextField, zoomTextField);
 
             // For District
             toggleField(usingDistrictField.prop('checked'), districtMandatoryField, districtHelpTextField, null);
@@ -64,6 +92,11 @@
             usingDistrictField.on('ifChanged', function(e) {
                 $(e.target).iCheck('update');
                 toggleField($(e.target).prop('checked'), districtMandatoryField, districtHelpTextField, null);
+            });
+
+            usingAddressField.on('ifChanged', function(e) {
+                $(e.target).iCheck('update');
+                toggleFieldMap($(e.target).prop('checked'), addressMandatoryField, addressHelpTextField, latTextField, lngTextField, zoomTextField);
             });
         });
     </script>

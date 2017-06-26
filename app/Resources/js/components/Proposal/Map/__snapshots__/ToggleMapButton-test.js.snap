@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleMapButton /> should render a toggle button with map selected 1`] = `
+<div
+  aria-label="Step view"
+  className="btn-group"
+  id="step-view-toggle"
+  role="group"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    value="mosaic"
+  >
+    <i
+      className="cap cap-th-large"
+    />
+     Mosaïque
+  </Button>
+  <Button
+    active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    value="map"
+  >
+    <i
+      className="cap cap-map-location"
+    />
+     Carte
+  </Button>
+</div>
+`;
+
+exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 1`] = `
+<div
+  aria-label="Step view"
+  className="btn-group"
+  id="step-view-toggle"
+  role="group"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <Button
+    active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    value="mosaic"
+  >
+    <i
+      className="cap cap-th-large"
+    />
+     Mosaïque
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    navDropdown={false}
+    navItem={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    value="map"
+  >
+    <i
+      className="cap cap-map-location"
+    />
+     Carte
+  </Button>
+</div>
+`;

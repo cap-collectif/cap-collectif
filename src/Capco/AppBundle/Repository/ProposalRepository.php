@@ -300,6 +300,29 @@ class ProposalRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
+    public function getProposalMarkersForCollectStep(CollectStep $step): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('author')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+            ->leftJoin('proposal.author', 'author')
+            ->andWhere('proposalForm.step = :step')
+            ->setParameter('step', $step);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function getProposalMarkersForSelectionStep(SelectionStep $step): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('author')
+            ->leftJoin('proposal.author', 'author')
+            ->andWhere('proposal.step = :step')
+            ->setParameter('step', $step);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
     public function getProposalsWithCostsForStep(CollectStep $step, int $limit = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()

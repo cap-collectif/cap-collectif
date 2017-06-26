@@ -38,6 +38,11 @@ Capco\AppBundle\Entity\ProposalForm:
             type: string
             groups: [ProposalForms]
             serialized_name: categoryHelpText
+        addressHelpText:
+            expose: true
+            type: string
+            groups: [ProposalForms]
+            serialized_name: addressHelpText
         usingThemes:
           expose: true
           type: boolean
@@ -53,6 +58,11 @@ Capco\AppBundle\Entity\ProposalForm:
           type: boolean
           groups: [ProposalForms]
           serialized_name: usingDistrict
+        usingAddress:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
+          serialized_name: usingAddress
         themeMandatory:
           expose: true
           type: boolean
@@ -71,6 +81,21 @@ Capco\AppBundle\Entity\ProposalForm:
         categories:
           expose: true
           groups: [ProposalForms]
+        zoomMap:
+          expose: true
+          type: integer
+          groups: [ProposalForms]
+          serialized_name: zoomMap
+        latMap:
+          expose: true
+          type: float
+          groups: [ProposalForms]
+          serialized_name: latMap
+        lngMap:
+          expose: true
+          type: float
+          groups: [ProposalForms]
+          serialized_name: lngMap
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

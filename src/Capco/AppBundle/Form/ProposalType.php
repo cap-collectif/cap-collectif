@@ -12,6 +12,7 @@ use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -50,6 +51,10 @@ class ProposalType extends AbstractType
 
         if ($form->isUsingCategories() && $form->getCategories()->count() > 0) {
             $builder->add('category');
+        }
+
+        if ($form->getUsingAddress()) {
+            $builder->add('location', TextType::class);
         }
 
         $builder

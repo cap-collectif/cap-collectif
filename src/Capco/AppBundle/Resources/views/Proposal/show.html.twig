@@ -26,3 +26,8 @@
 {% block body %}
     {{ react_intl_component('ProposalPageApp', {'props': props}) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+{% endblock %}

@@ -1,0 +1,136 @@
+// @flow
+import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
+import GoogleMapReact from 'google-map-react';
+import { Col, Row } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import pointsCluster from 'points-cluster';
+import Marker from './Marker';
+import ClusterMarker from './ClusterMarker';
+import { loadMarkers } from '../../../redux/modules/proposal';
+import config from '../../../config';
+
+export const MapArea = React.createClass({
+  propTypes: {
+    markers: PropTypes.object.isRequired,
+    stepId: PropTypes.string.isRequired,
+    stepType: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    defaultMapOptions: PropTypes.object.isRequired,
+    center: PropTypes.object,
+    zoom: PropTypes.number,
+    visible: PropTypes.bool,
+  },
+  mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      markers: [],
+      defaultMapOptions: {
+        center: { lat: 48.8586047, lng: 2.3137325 },
+        zoom: 12,
+      },
+      visible: true,
+    };
+  },
+
+  getInitialState() {
+    return {
+      map: null,
+    };
+  },
+
+  componentDidMount() {
+    const { dispatch, stepId, stepType } = this.props;
+    dispatch(loadMarkers(stepId, stepType));
+  },
+
+  render() {
+    const { defaultMapOptions, visible, markers } = this.props;
+
+    if (!markers) {
+      return null;
+    }
+
+    const clusters = pointsCluster(
+      Object.keys(markers).map(key => {
+        return markers[key];
+      }),
+      {
+        minZoom: 3,
+        maxZoom: 15,
+        radius: 30,
+      },
+    );
+
+    const generatedMarkers = this.state.map ? clusters(this.state.map) : [];
+
+    const styleHidden = { display: visible ? 'block' : 'none' };
+
+    return (
+      <div style={styleHidden}>
+        <Row>
+          <Col md={12}>
+            <GoogleMapReact
+              style={{
+                zIndex: 999,
+                height: 500,
+              }}
+              onChange={({ center, zoom, bounds }) => {
+                this.setState({ map: { center, zoom, bounds } });
+              }}
+              className="proposal__map"
+              defaultCenter={defaultMapOptions.center}
+              resetBoundsOnResize
+              bootstrapURLKeys={{
+                key: config.mapsAPIKey,
+                language: 'fr',
+              }}
+              defaultZoom={defaultMapOptions.zoom}
+              options={maps => ({
+                zoomControlOptions: {
+                  position: maps.ControlPosition.RIGHT_CENTER,
+                  style: maps.ZoomControlStyle.SMALL,
+                },
+                mapTypeControlOptions: {
+                  position: maps.ControlPosition.TOP_RIGHT,
+                },
+                mapTypeControl: true,
+              })}>
+              {generatedMarkers.length > 0 &&
+                generatedMarkers.map(marker => {
+                  if (marker.numPoints > 1) {
+                    return (
+                      <ClusterMarker
+                        lat={marker.y}
+                        lng={marker.x}
+                        marker={marker}
+                      />
+                    );
+                  }
+
+                  return (
+                    <Marker
+                      key={marker.points[0].id}
+                      lat={marker.points[0].lat}
+                      lng={marker.points[0].lng}
+                      marker={marker.points[0]}
+                    />
+                  );
+                })}
+            </GoogleMapReact>
+          </Col>
+        </Row>
+      </div>
+    );
+  },
+});
+
+const mapStateToProps = state => ({
+  markers: state.proposal.markers,
+  stepId: state.project.currentProjectStepById,
+  stepType: state.project.projectsById[state.project.currentProjectById]
+    .stepsById[state.project.currentProjectStepById].type,
+});
+
+export default connect(mapStateToProps)(MapArea);

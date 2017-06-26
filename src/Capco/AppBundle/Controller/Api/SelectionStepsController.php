@@ -301,4 +301,38 @@ class SelectionStepsController extends FOSRestController
 
         $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
     }
+
+    /**
+     * @Get("/selection_step/{selectionStepId}/markers")
+     * @ParamConverter("step", options={"mapping": {"selectionStepId": "id"}})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     */
+    public function getProposalsMarkerByCollectStepAction(SelectionStep $step)
+    {
+        $proposalRepository = $this->get('capco.proposal.repository');
+        $results = $proposalRepository->getProposalMarkersForSelectionStep($step);
+        $router = $this->get('router');
+
+        return array_map(function ($proposal) use ($step, $router) {
+            $location = is_array($proposal['location']) ?: \GuzzleHttp\json_decode($proposal['location'], true);
+
+            return [
+                'id' => $proposal['id'],
+                'title' => $proposal['title'],
+                'url' => $router->generate('app_project_show_proposal', ['proposalSlug' => $proposal['slug'],
+                    'projectSlug' => $step->getProject()->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                ], true),
+                'lat' => $location[0]['geometry']['location']['lat'],
+                'lng' => $location[0]['geometry']['location']['lng'],
+                'address' => $location[0]['formatted_address'],
+                'author' => [
+                    'username' => $proposal['author']['username'],
+                    'url' => $router->generate('capco_user_profile_show_all', ['slug' => $proposal['author']['slug']], true),
+                ],
+            ];
+        }, array_filter($results, function ($proposal) {
+            return $proposal['location'] !== null;
+        }));
+    }
 }

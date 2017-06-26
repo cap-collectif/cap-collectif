@@ -38,6 +38,15 @@ type LoadSelectionsAction = {
   type: 'proposal/LOAD_SELECTIONS_REQUEST',
   proposalId: number,
 };
+type LoadMarkersAction = {
+  type: 'proposal/LOAD_MARKERS_REQUEST',
+  stepType: string,
+  stepId: Uuid,
+};
+type LoadMarkersSuccessAction = {
+  type: 'proposal/LOAD_MARKERS_SUCCEEDED',
+  markers: Object,
+};
 type LoadSelectionsSucessAction = {
   type: 'proposal/LOAD_SELECTIONS_SUCCEEDED',
   proposalId: number,
@@ -109,6 +118,10 @@ type SendProposalNotificationFailedAction = {
   type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR',
   error: string,
 };
+type ChangeProposalListViewAction = {
+  type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
+  mode: string,
+};
 type Step = {
   type?: string,
   statuses?: Array<Status>,
@@ -147,6 +160,8 @@ export type State = {
   +currentPaginationPage: number,
   +lastEditedProposalId: ?number,
   +lastNotifiedStepId: ?Uuid,
+  +selectedViewByStep: string,
+  +markers: ?Object,
 };
 
 const initialState: State = {
@@ -176,7 +191,25 @@ const initialState: State = {
   currentPaginationPage: 1,
   lastEditedProposalId: null,
   lastNotifiedStepId: null,
+  selectedViewByStep: 'mosaic',
+  markers: null,
 };
+
+export const loadMarkers = (
+  stepId: Uuid,
+  stepType: string,
+): LoadMarkersAction => ({
+  type: 'proposal/LOAD_MARKERS_REQUEST',
+  stepType,
+  stepId,
+});
+
+export const loadMarkersSuccess = (
+  markers: Object,
+): LoadMarkersSuccessAction => ({
+  type: 'proposal/LOAD_MARKERS_SUCCEEDED',
+  markers,
+});
 
 export const loadSelections = (proposalId: number): LoadSelectionsAction => ({
   type: 'proposal/LOAD_SELECTIONS_REQUEST',
@@ -300,6 +333,12 @@ export const changeFilter = (
   type: 'proposal/CHANGE_FILTER',
   filter,
   value,
+});
+export const changeProposalListView = (
+  mode: string,
+): ChangeProposalListViewAction => ({
+  type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
+  mode,
 });
 type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
@@ -629,6 +668,7 @@ export const submitProposal = (
   });
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
     .then(() => {
+      dispatch(changeProposalListView('mosaic'));
       dispatch(closeCreateModal());
       dispatch(loadProposals());
       FluxDispatcher.dispatch({
@@ -827,6 +867,21 @@ export function* fetchSelections(
   }
 }
 
+export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
+  try {
+    const markers = yield call(
+      Fetcher.get,
+      `/${action.stepType}_step/${action.stepId}/markers`,
+    );
+    yield put({
+      type: 'proposal/LOAD_MARKERS_SUCCEEDED',
+      markers,
+    });
+  } catch (e) {
+    console.log(e); // eslint-disable-line
+  }
+}
+
 export function* storeFiltersInLocalStorage(
   action: ChangeFilterAction,
 ): Generator<*, *, *> {
@@ -887,7 +942,9 @@ export type ProposalAction =
   | UpdateSelectionStatusSucceedAction
   | UpdateProposalCollectStatusSucceedAction
   | CloseDeleteProposalModalAction
-  | RequestDeleteAction;
+  | RequestDeleteAction
+  | ChangeProposalListViewAction
+  | LoadMarkersAction;
 
 export function* saga(): Generator<*, *, *> {
   yield [
@@ -896,6 +953,7 @@ export function* saga(): Generator<*, *, *> {
     takeEvery('proposal/FETCH_REQUESTED', fetchProposals),
     takeEvery('proposal/SUBMIT_FUSION_FORM', submitFusionFormData),
     takeEvery('proposal/LOAD_SELECTIONS_REQUEST', fetchSelections),
+    takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
   ];
@@ -1152,6 +1210,9 @@ export const reducer = (
       };
       return { ...state, proposalsById };
     }
+    case 'proposal/LOAD_MARKERS_SUCCEEDED': {
+      return { ...state, markers: action.markers };
+    }
     case 'proposal/POSTS_FETCH_SUCCEEDED': {
       const posts = action.posts;
       const proposalsById = state.proposalsById;
@@ -1173,6 +1234,9 @@ export const reducer = (
     case 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR': {
       console.log('proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', action.error); // eslint-disable-line no-console
       return state;
+    }
+    case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
+      return { ...state, selectedViewByStep: action.mode };
     }
     default:
       return state;

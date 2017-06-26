@@ -535,6 +535,7 @@ admin:
       status: Statut
       theme: Thème
       title: Titre
+      address: Lieu ou adresse
       trashedReason: Raison de la mise dans la corbeille
       updateAuthor: Auteur de la dernière mise à jour
       updated_at: Mise à jour
@@ -576,6 +577,12 @@ admin:
       using_themes: Thème
       using_district: Localisation
       mandatory: Saisie obligatoire
+      using_address: Lieu ou addresse
+      latitude: Latitude
+      longitude: Longitude
+      zoom: Zoom
+      map_help: Permet de définir le centre de la carte
+      map: Carte
     questionnaire:
       anonymous_allowed: Autoriser les réponses anonymes
       title: Titre

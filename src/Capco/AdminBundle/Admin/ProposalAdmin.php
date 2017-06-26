@@ -12,6 +12,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProposalAdmin extends Admin
 {
@@ -69,8 +71,19 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.author',
                 'required' => true,
                 'property' => 'username',
-            ])
-            ->add('media', 'sonata_type_model_list', [
+            ]);
+
+        if ($this->getSubject()->getProposalForm()->getUsingAddress()) {
+            $formMapper->add('filedAddress', TextType::class, [
+                'label' => 'admin.fields.proposal.address',
+                'read_only' => true,
+                'attr' => [
+                    'disabled' => true,
+                ],
+            ]);
+        }
+
+        $formMapper->add('media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.proposal.media',
                 'required' => false,
             ], [
@@ -99,7 +112,7 @@ class ProposalAdmin extends Admin
                 'empty_value' => 'admin.fields.proposal.no_district',
                 'btn_add' => false,
             ])
-            ->add('estimation', 'money', [
+            ->add('estimation', MoneyType::class, [
                 'currency' => 'EUR',
                 'label' => 'admin.fields.proposal.estimation',
                 'required' => false,
@@ -398,6 +411,16 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.author_id',
             ])
         ;
+
+        if ($this->getSubject()->getProposalForm()->getUsingAddress()) {
+            $showMapper->add('filedAddress', TextType::class, [
+                'label' => 'admin.fields.proposal.address',
+                'read_only' => true,
+                'attr' => [
+                    'disabled' => true,
+                ],
+            ]);
+        }
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
             $showMapper->add('author.userType.name', null, [

@@ -25,15 +25,12 @@ class ProposalForm
     use SluggableTitleTrait;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description = null;
@@ -45,15 +42,11 @@ class ProposalForm
     private $step;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="proposalForm")
      */
     private $proposals;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -66,67 +59,61 @@ class ProposalForm
     private $categories;
 
     /**
-     * @var string
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
     private $titleHelpText;
 
     /**
-     * @var string
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
     private $descriptionHelpText;
 
     /**
-     * @var string
      * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
      */
     private $themeHelpText;
 
     /**
-     * @var string
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
     private $districtHelpText;
 
     /**
-     * @var string
      * @ORM\Column(name="category_help_text", type="string", length=255, nullable=true)
      */
     private $categoryHelpText;
 
     /**
-     * @var bool
+     * @ORM\Column(name="address_help_text", type="string", length=255, nullable=true)
+     */
+    private $addressHelpText;
+
+    /**
      * @ORM\Column(name="using_themes", type="boolean")
      */
     private $usingThemes = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="theme_mandatory", type="boolean")
      */
     private $themeMandatory = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="using_categories", type="boolean")
      */
     private $usingCategories = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="category_mandatory", type="boolean")
      */
     private $categoryMandatory = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="district_mandatory", type="boolean")
      */
     private $districtMandatory = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="using_district", type="boolean")
      */
     private $usingDistrict = false;
@@ -136,6 +123,26 @@ class ProposalForm
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=true)
      */
     private $notificationsConfiguration;
+
+    /**
+     * @ORM\Column(name="using_address", nullable=false, type="boolean")
+     */
+    private $usingAddress = false;
+
+    /**
+     * @ORM\Column(name="zoom_map", nullable=true, type="integer")
+     */
+    private $zoomMap;
+
+    /**
+     * @ORM\Column(name="lat_map", nullable=true, type="float")
+     */
+    private $latMap;
+
+    /**
+     * @ORM\Column(name="lng_map", nullable=true, type="float")
+     */
+    private $lngMap;
 
     /**
      * Constructor.
@@ -550,6 +557,66 @@ class ProposalForm
     {
         $this->notificationsConfiguration = $configuration;
         $configuration->setProposalForm($this);
+
+        return $this;
+    }
+
+    public function getUsingAddress(): bool
+    {
+        return $this->usingAddress;
+    }
+
+    public function setUsingAddress(bool $usingAddress = false): self
+    {
+        $this->usingAddress = $usingAddress;
+
+        return $this;
+    }
+
+    public function getAddressHelpText()
+    {
+        return $this->addressHelpText;
+    }
+
+    public function setAddressHelpText(string $addressHelpText = null): self
+    {
+        $this->addressHelpText = $addressHelpText;
+
+        return $this;
+    }
+
+    public function getZoomMap()
+    {
+        return $this->zoomMap;
+    }
+
+    public function setZoomMap(int $zoomMap = null): self
+    {
+        $this->zoomMap = $zoomMap;
+
+        return $this;
+    }
+
+    public function getLatMap()
+    {
+        return $this->latMap;
+    }
+
+    public function setLatMap(float $latMap = null): self
+    {
+        $this->latMap = $latMap;
+
+        return $this;
+    }
+
+    public function getLngMap()
+    {
+        return $this->lngMap;
+    }
+
+    public function setLngMap(float $lngMap = null): self
+    {
+        $this->lngMap = $lngMap;
 
         return $this;
     }

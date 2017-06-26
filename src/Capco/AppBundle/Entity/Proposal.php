@@ -35,6 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
+ * @CapcoAssert\HasLocationIfMandatory()
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
@@ -88,6 +89,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
     protected $likers;
+
+    /**
+     * @ORM\Column(name="location", type="json", nullable=true)
+     */
+    private $location;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
@@ -812,5 +818,30 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->proposedAnswer = $proposedAnswer;
 
         return $this;
+    }
+
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    public function setLocation($location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getFiledAddress(): string
+    {
+        if (!$this->getLocation()) {
+            return '';
+        }
+
+        if (!is_array($this->getLocation())) {
+            return \GuzzleHttp\json_decode($this->getLocation(), true)[0]['formatted_address'];
+        }
+
+        return $this->getLocation()[0]['formatted_address'];
     }
 }

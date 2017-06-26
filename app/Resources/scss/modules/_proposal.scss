@@ -359,3 +359,45 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 .consultation__header__title {
     margin: 15px 0 15px;
 }
+
+.proposal__map {
+    &--marker {
+        $marker-width: 39px !default;
+        $marker-height: 39px !default;
+
+        position: absolute;
+        width: $marker-width;
+        height: $marker-height;
+        left: -$marker-width / 2;
+        top: -$marker-height / 2;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    &--cluster {
+        $marker-width: 50px !default;
+        $marker-height: 50px !default;
+        $marker-border-width: 5px !default;
+        $marker-font-size: 16px !default;
+
+        position: absolute;
+        cursor: pointer;
+        width: $marker-width;
+        height: $marker-height;
+        left: -$marker-width / 2;
+        top: -$marker-height / 2;
+
+        border: $marker-border-width solid #00a7d0;
+        border-radius: 50%;
+        background-color: #4990E2;
+        text-align: center;
+        color: #ffffff;
+
+        font-size: $marker-font-size;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

@@ -15,6 +15,10 @@ Capco\AppBundle\Entity\ProposalForm:
     usingCategories: true
     themeMandatory: false
     categoryMandatory: true
+    usingAddress: true
+    zoomMap: 12
+    latMap: 48.1159675
+    lngMap: -1.7234738
   proposalform2:
     id: 2
     title: Formulaire de la collecte 2

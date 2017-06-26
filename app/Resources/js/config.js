@@ -4,4 +4,5 @@ const baseUrl = `${typeof window !== 'undefined' ? window.location.protocol : 'h
 export const graphQLUrl = `${baseUrl}/graphql/`;
 export default {
   api: `${baseUrl}/api`,
+  mapsAPIKey: '***REMOVED***',
 };

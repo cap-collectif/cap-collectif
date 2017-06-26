@@ -3,6 +3,9 @@ import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from 'react-places-autocomplete';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -61,6 +64,7 @@ export const ProposalForm = React.createClass({
         district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : -1,
         media: null,
+        location: proposal.location ? proposal.location : '',
       },
       custom: this.getInitialFormAnswers(),
       errors: {
@@ -72,6 +76,9 @@ export const ProposalForm = React.createClass({
         media: [],
       },
       suggestions: [],
+      address: proposal.location
+        ? JSON.parse(proposal.location)[0].formatted_address
+        : '',
     };
   },
 
@@ -191,6 +198,22 @@ export const ProposalForm = React.createClass({
     this.handleTitleChangeDebounced(title);
   },
 
+  handleLocationChange(location) {
+    geocodeByAddress(location)
+      .then(results => {
+        this.setState(prevState => ({
+          form: { ...prevState.form, location: JSON.stringify(results) },
+        }));
+        this.setState(prevState => ({
+          ...prevState,
+          address: results[0].formatted_address,
+        }));
+      })
+      .catch(error => {
+        console.error('Oh no!', error);
+      });
+  },
+
   handleTitleChangeDebounced(title) {
     this.setState({
       suggestions: [],
@@ -296,6 +319,13 @@ export const ProposalForm = React.createClass({
         {this.getIntlMessage('proposal.media')}
         {optional}
       </span>
+    );
+    const autocompleteItem = ({ formattedSuggestion }) => (
+      <div>
+        <i className="cap cap-map-location" />{' '}
+        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <small>{formattedSuggestion.secondaryText}</small>
+      </div>
     );
     return (
       <form id="proposal-form">
@@ -403,6 +433,51 @@ export const ProposalForm = React.createClass({
               </option>
             ))}
           </Input>}
+        {form.usingAddress &&
+          <div className="form-group">
+            <label className="control-label h5" htmlFor="places-autocomplete">
+              Adresse
+            </label>
+            {form.addressHelpText &&
+              <span className="help-block">{form.addressHelpText}</span>}
+            <PlacesAutocomplete
+              inputProps={{
+                onChange: address => {
+                  this.setState(prevState => ({ ...prevState, address }));
+                },
+                placeholder: "Recherche d'un lieu ou d'une adresse",
+                value: this.state.address,
+                type: 'text',
+                id: 'places-autocomplete',
+              }}
+              autocompleteItem={autocompleteItem}
+              onEnterKeyDown={this.handleLocationChange}
+              onSelect={this.handleLocationChange}
+              classNames={{
+                root: 'form-group',
+                input: 'form-control',
+                autocompleteContainer: {
+                  zIndex: 9999,
+                  position: 'absolute',
+                  top: '100%',
+                  backgroundColor: 'white',
+                  border: '1px solid #555555',
+                  width: '100%',
+                },
+                autocompleteItem: {
+                  zIndex: 9999,
+                  backgroundColor: '#ffffff',
+                  padding: '10px',
+                  color: '#555555',
+                  cursor: 'pointer',
+                },
+                autocompleteItemActive: {
+                  zIndex: 9999,
+                  backgroundColor: '#fafafa',
+                },
+              }}
+            />
+          </div>}
         <Input
           id="proposal_body"
           type="editor"

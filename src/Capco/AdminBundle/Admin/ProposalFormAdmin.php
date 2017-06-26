@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProposalFormAdmin extends Admin
@@ -56,7 +57,6 @@ class ProposalFormAdmin extends Admin
             ->add('titleHelpText', TextType::class, [
                 'label' => 'admin.fields.proposal_form.help_text',
                 'required' => false,
-                'attr' => ['class' => 'lol'],
             ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
@@ -99,6 +99,39 @@ class ProposalFormAdmin extends Admin
                 'edit' => 'inline',
                 'inline' => 'table',
             ]);
+
+        $formMapper->add('usingAddress', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.using_address',
+                'required' => false,
+                'attr' => ['style' => 'padding-top: 25px'],
+            ])
+            ->add('addressMandatory', CheckboxType::class, [
+                'label' => 'admin.fields.proposal_form.mandatory',
+                'required' => false,
+                'attr' => ['checked' => true],
+                'mapped' => false,
+                'disabled' => true,
+                'read_only' => true,
+            ])
+            ->add('addressHelpText', TextType::class, [
+                'label' => 'admin.fields.proposal_form.help_text',
+                'required' => false,
+            ])
+            ->add('latMap', TextType::class, [
+                'label' => 'admin.fields.proposal_form.latitude',
+                'required' => false,
+                'help' => 'admin.fields.proposal_form.map_help',
+            ])
+            ->add('lngMap', TextType::class, [
+                'label' => 'admin.fields.proposal_form.longitude',
+                'required' => false,
+                'help' => 'admin.fields.proposal_form.map_help',
+            ])
+            ->add('zoomMap', NumberType::class, [
+                'label' => 'admin.fields.proposal_form.zoom',
+                'required' => false,
+            ])
+        ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('districts')) {
             $formMapper->add('usingDistrict', CheckboxType::class, [
@@ -144,7 +177,7 @@ class ProposalFormAdmin extends Admin
                     'mapped' => false,
                     'disabled' => true,
                     'read_only' => true,
-                    'attr' => ['style' => 'padding-top: 25px', 'checked' => true],
+                    'attr' => ['style' => 'padding-top: 25px; padding-bottom: 25px', 'checked' => true],
                 ])
                 ->add('questions', 'sonata_type_collection', [
                 'label' => 'admin.fields.proposal_form.questions',
