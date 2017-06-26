@@ -193,8 +193,10 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(int $limit = 1, int $offset = 0)
+    public function getLast(int $limit = null, int $offset = null)
     {
+        $limit = $limit ?? 1;
+        $offset = $offset ?? 0;
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
             ->leftJoin('proposal.author', 'author')

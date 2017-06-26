@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
+use Capco\AppBundle\Form\Section;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -65,53 +66,42 @@ class HomepageController extends Controller
 
     /**
      * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function highlightedContentAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function highlightedContentAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(5);
 
         return [
             'highlighteds' => $highlighteds,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Template("CapcoAppBundle:Homepage:videos.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastVideosAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastVideosAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $videos = $this->get('capco.video.repository')->getLast($max, $offset);
 
         return [
             'videos' => $videos,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function popularIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function popularIdeasAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
         $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
         $props = $serializer->serialize([
@@ -122,21 +112,17 @@ class HomepageController extends Controller
             'props' => $props,
             'nbIdeas' => count($ideasRaw),
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastIdeasAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastIdeasAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
         $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
         $props = $serializer->serialize([
@@ -147,19 +133,17 @@ class HomepageController extends Controller
             'props' => $props,
             'nbIdeas' => count($ideasRaw),
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
-     *
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastProposalsAction(int $max = 4, int $offset = 0, $section = null, $alt = null)
+    public function lastProposalsAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $em = $this->getDoctrine()->getManager();
         if ($section->getStep() && $section->getStep()->isCollectStep()) {
             $proposals = $em
@@ -176,63 +160,49 @@ class HomepageController extends Controller
         return [
             'proposals' => $proposals,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastThemesAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastThemesAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $topics = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
 
         return [
             'topics' => $topics,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastPostsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastPostsAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 4;
+        $offset = $offset ?? 0;
         $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
 
         return [
             'posts' => $posts,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
-     *
-     * @param int  $max
-     * @param int  $offset
-     * @param null $section
-     * @param null $alt
-     *
-     * @return array
      */
-    public function lastProjectsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastProjectsAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 3;
+        $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
         $count = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->countPublished();
         $props = $serializer->serialize([
@@ -248,44 +218,35 @@ class HomepageController extends Controller
             'props' => $props,
             'count' => $count,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
-     *
-     * @param mixed      $max
-     * @param mixed      $offset
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function lastEventsAction($max = 3, $offset = 0, $section = null, $alt = null)
+    public function lastEventsAction(int $max = null, int $offset = null, Section $section = null)
     {
+        $max = $max ?? 3;
+        $offset = $offset ?? 0;
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
         return [
             'events' => $events,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 
     /**
      * @Template("CapcoAppBundle:Homepage:socialNetworks.html.twig")
-     *
-     * @param null|mixed $section
-     * @param null|mixed $alt
      */
-    public function socialNetworksAction($section = null, $alt = null)
+    public function socialNetworksAction(Section $section = null)
     {
         $socialNetworks = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:SocialNetwork')->getEnabled();
 
         return [
             'socialNetworks' => $socialNetworks,
             'section' => $section,
-            'alt' => $alt,
         ];
     }
 }

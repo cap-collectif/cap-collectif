@@ -34,7 +34,7 @@ class SearchType extends AbstractType
                 ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'placeholder' => false,
+                'empty_value' => false,
                 'expanded' => true,
                 'choices' => $choices,
             ])
@@ -42,7 +42,7 @@ class SearchType extends AbstractType
                 ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
-                'placeholder' => false,
+                'empty_value' => false,
                 'choices' => [
                     'score' => 'search.form.sort.score',
                     'date' => 'search.form.sort.date',
