@@ -172,7 +172,7 @@ class ThemeAdmin extends Admin
                 'choices' => Theme::$statusesLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
-                'empty_value' => 'admin.fields.theme.no_status',
+                'placeholder' => 'admin.fields.theme.no_status',
             ])
             ->add('Media', 'sonata_type_model_list', [
                 'required' => false,

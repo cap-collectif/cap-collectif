@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Theme;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ThemeSearchType extends AbstractType
 {
@@ -19,5 +20,12 @@ class ThemeSearchType extends AbstractType
                 'required' => false,
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+         'csrf_protection' => false,
+     ]);
     }
 }
