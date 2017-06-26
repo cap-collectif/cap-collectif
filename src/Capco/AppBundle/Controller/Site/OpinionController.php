@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,6 +23,7 @@ class OpinionController extends Controller
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
+     * @Cache(smaxage=60, public=true)
      */
     public function showByTypeAction(Project $project, ConsultationStep $currentStep, string $opinionTypeSlug, int $page, Request $request, string $opinionsSort = null)
     {
@@ -62,6 +64,7 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_project_show_opinion_version")
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/versions/{versionSlug}", name="app_consultation_show_opinion_version")
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
+     * @Cache(smaxage=60, public=true)
      */
     public function showOpinionVersionAction(Request $request, string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, string $versionSlug)
     {
@@ -99,6 +102,7 @@ class OpinionController extends Controller
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_project_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Route("/consultations/{projectSlug}/consultation/{stepSlug}/opinions/{opinionTypeSlug}/{opinionSlug}/sort_arguments/{argumentSort}", name="app_consultation_show_opinion_sortarguments", requirements={"argumentsSort" = "popularity|date"})
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
+     * @Cache(smaxage=60, public=true)
      */
     public function showOpinionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, Request $request)
     {
@@ -114,27 +118,31 @@ class OpinionController extends Controller
         $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
         $urlResolver = $this->get('capco.url.resolver');
-        $referer = $request->headers->get('referer');
-        $availableRoutes = [
-            'app_project_show_opinions',
-            'app_project_show_opinions_sorted',
-            'app_project_show_consultation',
-            'app_consultation_show_opinions',
-            'app_consultation_show_opinions_sorted',
-        ];
-        $baseUrl = $request->getHost();
-        $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
-        $currentRoute = '';
-        try {
-            $currentRoute = $this->get('router')->match($pathinfos)['_route'];
-        } catch (\Exception $e) {
-        }
-        $backLink = $referer &&
-            filter_var($referer, FILTER_VALIDATE_URL) !== false &&
-            in_array($currentRoute, $availableRoutes, true)
-                ? $referer
-                : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL)
-        ;
+
+        // Very bad for performances, because per user
+        //
+        // $referer = $request->headers->get('referer');
+        // $availableRoutes = [
+        //     'app_project_show_opinions',
+        //     'app_project_show_opinions_sorted',
+        //     'app_project_show_consultation',
+        //     'app_consultation_show_opinions',
+        //     'app_consultation_show_opinions_sorted',
+        // ];
+        // $baseUrl = $request->getHost();
+        // $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
+        // $currentRoute = '';
+        // try {
+        //     $currentRoute = $this->get('router')->match($pathinfos)['_route'];
+        // } catch (\Exception $e) {
+        // }
+        // $backLink = $referer &&
+        //     filter_var($referer, FILTER_VALIDATE_URL) !== false &&
+        //     in_array($currentRoute, $availableRoutes, true)
+        //         ? $referer
+        //         : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL)
+        // ;
+        $backLink = $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
         return [
             'currentUrl' => $currentUrl,
