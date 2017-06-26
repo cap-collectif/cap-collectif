@@ -83,7 +83,7 @@ Feature: Questionnaire
   Scenario: Logged in user wants to add another reply when multiple replies is not allowed
     Given I am logged in as admin
     When I go to a questionnaire step with no multiple replies allowed
-    Then I should see "Vous avez déjà partcipé."
+    Then I should see "Vous avez déjà participé."
     And the questionnaire form should be disabled
 
   ## Replies list

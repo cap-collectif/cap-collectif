@@ -155,12 +155,10 @@ class HomepageController extends Controller
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      *
-     * @param mixed      $max
-     * @param mixed      $offset
      * @param null|mixed $section
      * @param null|mixed $alt
      */
-    public function lastProposalsAction($max = 4, $offset = 0, $section = null, $alt = null)
+    public function lastProposalsAction(int $max = 4, int $offset = 0, $section = null, $alt = null)
     {
         $em = $this->getDoctrine()->getManager();
         if ($section->getStep() && $section->getStep()->isCollectStep()) {

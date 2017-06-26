@@ -40,7 +40,7 @@ class IdeaSearchType extends AbstractType
                 'choices' => Idea::$sortCriterias,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'idea.searchform.sort',
-                'placeholder' => false,
+                'empty_value' => false,
                 'attr' => ['onchange' => 'this.form.submit()'],
             ])
         ;

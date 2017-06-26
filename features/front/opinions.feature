@@ -48,7 +48,7 @@ Feature: Opinions
     Given feature "reporting" is enabled
     And I am logged in as admin
     And I go to an opinion
-    When I click the "#report-opinion-2-button" element
+    When I click the "#report-opinion-opinion2-button" element
     And I fill the reporting form
     And I submit the reporting form
     Then I should see "Merci ! La proposition a bien été signalée."
