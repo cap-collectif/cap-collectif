@@ -56,11 +56,11 @@ sub vcl_recv {
     return (pass);
   }
 
-  # Remove all cookies except the session ID.
+  # Remove all cookies except the Symfony or SAML session.
   if (req.http.Cookie) {
     set req.http.Cookie = ";" + req.http.Cookie;
     set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID)=", "; \1=");
+    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID)=", "; \1=");
     set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
     set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
@@ -73,11 +73,9 @@ sub vcl_recv {
 
 sub vcl_deliver {
     # Add extra headers for debugging
-    if (resp.http.X-Cache-Debug) {
-        if (resp.http.X-Varnish ~ " ") {
-            set resp.http.X-Cache = "HIT";
-        } else {
-            set resp.http.X-Cache = "MISS";
-        }
+    if (resp.http.X-Varnish ~ " ") {
+      set resp.http.X-Cache = "HIT";
+    } else {
+      set resp.http.X-Cache = "MISS";
     }
 }
