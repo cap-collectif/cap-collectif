@@ -22,18 +22,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class StepController extends Controller
 {
     /**
-     * @Cache(smaxage="60", public=true)
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
+     * @Cache(smaxage="60", public=true)
      * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
-     *
-     * @param string    $projectSlug
-     * @param OtherStep $step
-     *
-     * @return array
      */
-    public function showStepAction($projectSlug, OtherStep $step)
+    public function showStepAction(string $projectSlug, OtherStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -57,13 +52,9 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param $projectSlug
-     * @param PresentationStep $step
-     *
-     * @return array
+     * @Cache(smaxage="60", public=true)
      */
-    public function showPresentationAction($projectSlug, PresentationStep $step)
+    public function showPresentationAction(string $projectSlug, PresentationStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -100,10 +91,9 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param mixed $projectSlug
+     * @Cache(smaxage="60", public=true)
      */
-    public function showRankingAction($projectSlug, RankingStep $step)
+    public function showRankingAction(string $projectSlug, RankingStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -144,11 +134,11 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @Cache(smaxage="60", public=true)
      *
-     * @param mixed $projectSlug
      * @param mixed $page
      */
-    public function showOpinionsRankingAction($projectSlug, RankingStep $step, $page = 1)
+    public function showOpinionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -181,14 +171,11 @@ class StepController extends Controller
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
+     * @Cache(smaxage="60", public=true)
      *
-     * @param $projectSlug
-     * @param RankingStep $step
-     * @param $page
-     *
-     * @return array
+     * @param mixed $page
      */
-    public function showVersionsRankingAction($projectSlug, RankingStep $step, $page = 1)
+    public function showVersionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -222,13 +209,8 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
-     *
-     * @param $projectSlug
-     * @param SynthesisStep $step
-     *
-     * @return array
      */
-    public function showSynthesisAction($projectSlug, SynthesisStep $step)
+    public function showSynthesisAction(string $projectSlug, SynthesisStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -422,10 +404,7 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      *
-     * @param $projectSlug
-     * @param SynthesisStep $step
-     *
-     * @return array
+     * @param mixed $projectSlug
      */
     public function editSynthesisAction($projectSlug, SynthesisStep $step)
     {
@@ -462,6 +441,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
+     * @Cache(smaxage=60, public=true)
+     * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
     public function showConsultationAction(Project $project, ConsultationStep $currentStep)
     {
@@ -475,17 +456,10 @@ class StepController extends Controller
             'step' => $currentStep,
         ], 'json', SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes']));
 
-        $response = $this->render('CapcoAppBundle:Consultation:show.html.twig', [
+        return [
             'project' => $project,
             'currentStep' => $currentStep,
             'stepProps' => $stepProps,
-        ]);
-
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-            $response->setPublic();
-            $response->setSharedMaxAge(30);
-        }
-
-        return $response;
+        ];
     }
 }
