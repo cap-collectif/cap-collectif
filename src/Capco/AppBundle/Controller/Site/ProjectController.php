@@ -263,7 +263,8 @@ class ProjectController extends Controller
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
      * @Cache(smaxage="120", public=true)
      *
-     * @param mixed $page
+     * @param $page
+     * @param $project
      */
     public function showContributorsAction(Project $project, $page)
     {

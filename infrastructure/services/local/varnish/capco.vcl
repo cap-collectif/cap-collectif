@@ -25,7 +25,7 @@ sub vcl_recv {
   if (req.http.host == "capco.dev") {
     return (pass);
   }
-
+  
   # Disable cache for blackfire
   if (req.http.X-Blackfire-Query) {
     return (pass);
@@ -51,11 +51,11 @@ sub vcl_recv {
     return (pass);
   }
 
-  # Remove all cookies except the Symfony or SAML session.
+  # Remove all cookies except the session ID.
   if (req.http.Cookie) {
     set req.http.Cookie = ";" + req.http.Cookie;
     set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID)=", "; \1=");
+    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID)=", "; \1=");
     set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
     set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
@@ -68,9 +68,11 @@ sub vcl_recv {
 
 sub vcl_deliver {
     # Add extra headers for debugging
-    if (resp.http.X-Varnish ~ " ") {
-      set resp.http.X-Cache = "HIT";
-    } else {
-      set resp.http.X-Cache = "MISS";
+    if (resp.http.X-Cache-Debug) {
+        if (resp.http.X-Varnish ~ " ") {
+            set resp.http.X-Cache = "HIT";
+        } else {
+            set resp.http.X-Cache = "MISS";
+        }
     }
 }

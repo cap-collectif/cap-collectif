@@ -255,7 +255,7 @@ function _password_crypt($algo, $password, $setting)
     // _password_base64_encode() of a 64 byte sha512 will always be 86 characters.
     $expected = 12 + ceil((8 * $len) / 6);
 
-    return (strlen($output) === $expected) ? substr($output, 0, DRUPAL_HASH_LENGTH) : false;
+    return (strlen($output) == $expected) ? substr($output, 0, DRUPAL_HASH_LENGTH) : false;
 }
 
 /**
@@ -301,7 +301,7 @@ class DrupalEncoder implements PasswordEncoderInterface
 
     public function isPasswordValid($encoded, $password, $salt)
     {
-        if (substr($encoded, 0, 2) === 'U$') {
+        if (substr($encoded, 0, 2) == 'U$') {
             // This may be an updated password from user_update_7000(). Such hashes
             // have 'U' added as the first character and need an extra md5().
             $stored_hash = substr($encoded, 1);
@@ -328,6 +328,6 @@ class DrupalEncoder implements PasswordEncoderInterface
                 return false;
         }
 
-        return $hash && $stored_hash === $hash;
+        return $hash && $stored_hash == $hash;
     }
 }
