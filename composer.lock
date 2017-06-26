@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f71791ef17d7f929e12d11cf2339ae2d",
+    "content-hash": "647969d0f1c0aed2d9b2e8217fc0bdab",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -89,17 +89,17 @@
         },
         {
             "name": "caxy/htmldiff-bundle",
-            "version": "dev-master",
+            "version": "v0.1.1",
             "target-dir": "Caxy/HtmlDiffBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/HtmlDiffBundle.git",
-                "reference": "fabf6d592855611db77d2b5b778446d03b6df6ea"
+                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/fabf6d592855611db77d2b5b778446d03b6df6ea",
-                "reference": "fabf6d592855611db77d2b5b778446d03b6df6ea",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/064eae651f0f8d375339dfc76f9f129b84ea175c",
+                "reference": "064eae651f0f8d375339dfc76f9f129b84ea175c",
                 "shasum": ""
             },
             "require": {
@@ -142,29 +142,30 @@
                 "diffing",
                 "html"
             ],
-            "time": "2016-04-10T18:38:03+00:00"
+            "time": "2016-03-16T16:54:33+00:00"
         },
         {
             "name": "caxy/php-htmldiff",
-            "version": "v0.1.1",
+            "version": "v0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "65b1794a9a7ce790712a2ab3419f3d5600c70bb8"
+                "reference": "d7540c9938c860f2cb7083f72ba24c45f51d57bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/65b1794a9a7ce790712a2ab3419f3d5600c70bb8",
-                "reference": "65b1794a9a7ce790712a2ab3419f3d5600c70bb8",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/d7540c9938c860f2cb7083f72ba24c45f51d57bc",
+                "reference": "d7540c9938c860f2cb7083f72ba24c45f51d57bc",
                 "shasum": ""
             },
             "require": {
                 "ezyang/htmlpurifier": "^4.7",
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "sunra/php-simple-html-dom-parser": "^1.5"
             },
             "require-dev": {
                 "doctrine/cache": "~1.0",
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "~5.0"
             },
             "suggest": {
                 "doctrine/cache": "Used for caching the calculated diffs using a Doctrine Cache Provider"
@@ -197,7 +198,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-03-16T15:51:25+00:00"
+            "time": "2017-06-12T17:35:44+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -313,16 +314,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.3.1",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "bd4461328621bde0ae6b1b2675fbc6aca4ceb558"
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/bd4461328621bde0ae6b1b2675fbc6aca4ceb558",
-                "reference": "bd4461328621bde0ae6b1b2675fbc6aca4ceb558",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
+                "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
                 "shasum": ""
             },
             "require": {
@@ -331,7 +332,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^5.6.1"
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "extra": {
@@ -377,7 +378,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2016-12-30T15:59:45+00:00"
+            "time": "2017-02-24T16:22:25+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -591,27 +592,29 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.1.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
+                "reference": "17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
-                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e",
+                "reference": "17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
-                "php": ">=5.3.2"
+                "php": "^5.6 || ^7.0"
             },
             "conflict": {
                 "doctrine/orm": "< 2.4"
             },
             "require-dev": {
-                "doctrine/orm": "~2.4"
+                "doctrine/dbal": "^2.5.4",
+                "doctrine/orm": "^2.5.4",
+                "phpunit/phpunit": "^5.4.6"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
@@ -621,7 +624,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -644,20 +647,20 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-03-30T12:14:13+00:00"
+            "time": "2016-09-20T10:07:57+00:00"
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.10",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/7b9e911f9d8b30d43b96853dab26898c710d8f44",
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44",
                 "shasum": ""
             },
             "require": {
@@ -715,7 +718,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-23T23:17:10+00:00"
+            "time": "2017-02-08T12:53:47+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1572,16 +1575,16 @@
         },
         {
             "name": "exercise/htmlpurifier-bundle",
-            "version": "v0.2.3",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Exercise/HTMLPurifierBundle.git",
-                "reference": "3b5842de5e7ffee2c360eb7746519797a2fbb0f6"
+                "reference": "07c1ab56741c0b9771f30a45fed63a63b1c87b5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Exercise/HTMLPurifierBundle/zipball/3b5842de5e7ffee2c360eb7746519797a2fbb0f6",
-                "reference": "3b5842de5e7ffee2c360eb7746519797a2fbb0f6",
+                "url": "https://api.github.com/repos/Exercise/HTMLPurifierBundle/zipball/07c1ab56741c0b9771f30a45fed63a63b1c87b5d",
+                "reference": "07c1ab56741c0b9771f30a45fed63a63b1c87b5d",
                 "shasum": ""
             },
             "require": {
@@ -1619,24 +1622,27 @@
             "keywords": [
                 "htmlpurifier"
             ],
-            "time": "2015-12-01T17:32:26+00:00"
+            "time": "2016-08-25T13:24:39+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.7.0",
+            "version": "v4.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40"
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/ae1828d955112356f7677c465f94f7deb7d27a40",
-                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/95e1bae3182efc0f3422896a3236e991049dac69",
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "^1.1"
             },
             "type": "library",
             "autoload": {
@@ -1663,7 +1669,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2015-08-05T01:03:42+00:00"
+            "time": "2017-06-03T02:28:16+00:00"
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
@@ -3445,16 +3451,16 @@
         },
         {
             "name": "jolicode/jolitypo",
-            "version": "v0.2.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliTypo.git",
-                "reference": "a6bd9bb3b1fecb0ab7662d86d666f88c7e5e2ba7"
+                "reference": "f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/a6bd9bb3b1fecb0ab7662d86d666f88c7e5e2ba7",
-                "reference": "a6bd9bb3b1fecb0ab7662d86d666f88c7e5e2ba7",
+                "url": "https://api.github.com/repos/jolicode/JoliTypo/zipball/f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048",
+                "reference": "f04ed9672c2039c4e5a8e1f9cc5ccc97fa757048",
                 "shasum": ""
             },
             "require": {
@@ -3466,12 +3472,11 @@
             "conflict": {
                 "ext-apc": "3.1.11"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1.x-dev"
-                }
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.2.0",
+                "phpunit/phpunit": "~4.5"
             },
+            "type": "library",
             "autoload": {
                 "psr-0": {
                     "JoliTypo": "src/"
@@ -3485,7 +3490,7 @@
                 {
                     "name": "Damien Alexandre",
                     "email": "dalexandre@jolicode.com",
-                    "homepage": "http://damienalexandre.fr/"
+                    "homepage": "https://damienalexandre.fr/"
                 }
             ],
             "description": "Microtypography fixer for the web.",
@@ -3497,31 +3502,31 @@
                 "smartquote",
                 "typography"
             ],
-            "time": "2015-07-13T15:05:16+00:00"
+            "time": "2017-04-02T17:22:10+00:00"
         },
         {
             "name": "jolicode/jolitypo-bundle",
-            "version": "0.2",
-            "target-dir": "Joli/TypoBundle",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliTypoBundle.git",
-                "reference": "8229522da703b0594008613117136c7c4902db6f"
+                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliTypoBundle/zipball/8229522da703b0594008613117136c7c4902db6f",
-                "reference": "8229522da703b0594008613117136c7c4902db6f",
+                "url": "https://api.github.com/repos/jolicode/JoliTypoBundle/zipball/b4571660ab3cf32e619ba537c3720a1396d9aaa0",
+                "reference": "b4571660ab3cf32e619ba537c3720a1396d9aaa0",
                 "shasum": ""
             },
             "require": {
-                "jolicode/jolitypo": "~0.2",
-                "php": ">=5.3.2"
+                "jolicode/jolitypo": "^1.0",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "^2.3|^3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
-                "psr-0": {
-                    "Joli\\TypoBundle": ""
+                "psr-4": {
+                    "Joli\\TypoBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3542,7 +3547,7 @@
                 "smartquote",
                 "typography"
             ],
-            "time": "2015-10-23T07:38:52+00:00"
+            "time": "2016-08-10T09:25:21+00:00"
         },
         {
             "name": "knplabs/gaufrette",
@@ -3988,20 +3993,20 @@
         },
         {
             "name": "limenius/react-bundle",
-            "version": "v0.11.1",
+            "version": "v0.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactBundle.git",
-                "reference": "4546725e96dfaa70fda3b9d993de603d2eedff22"
+                "reference": "91130acf54bb35472edb71802ac22c324e694de7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/4546725e96dfaa70fda3b9d993de603d2eedff22",
-                "reference": "4546725e96dfaa70fda3b9d993de603d2eedff22",
+                "url": "https://api.github.com/repos/Limenius/ReactBundle/zipball/91130acf54bb35472edb71802ac22c324e694de7",
+                "reference": "91130acf54bb35472edb71802ac22c324e694de7",
                 "shasum": ""
             },
             "require": {
-                "limenius/react-renderer": "^0.11.0",
+                "limenius/react-renderer": "^0.13.1",
                 "nacmartin/phpexecjs": "^0.8",
                 "php": ">=5.5.0",
                 "symfony/config": "^2.7.0|^3.0.6",
@@ -4034,20 +4039,20 @@
                 "isomorphic",
                 "react"
             ],
-            "time": "2017-03-04T09:46:39+00:00"
+            "time": "2017-06-20T20:22:26+00:00"
         },
         {
             "name": "limenius/react-renderer",
-            "version": "v0.11.1",
+            "version": "v0.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Limenius/ReactRenderer.git",
-                "reference": "5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f"
+                "reference": "362b55f98e154f06eff63c56358a61868ce8f498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f",
-                "reference": "5cfe2cd44e257c9a0580ab2c516fc1ba5ac0024f",
+                "url": "https://api.github.com/repos/Limenius/ReactRenderer/zipball/362b55f98e154f06eff63c56358a61868ce8f498",
+                "reference": "362b55f98e154f06eff63c56358a61868ce8f498",
                 "shasum": ""
             },
             "require": {
@@ -4083,7 +4088,7 @@
                 "reactjs",
                 "twig"
             ],
-            "time": "2017-03-04T09:15:11+00:00"
+            "time": "2017-06-18T20:10:41+00:00"
         },
         {
             "name": "liuggio/ExcelBundle",
@@ -4401,16 +4406,16 @@
         },
         {
             "name": "nacmartin/phpexecjs",
-            "version": "v0.8.5",
+            "version": "v0.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nacmartin/phpexecjs.git",
-                "reference": "fa271f397b2a2f2618e44e2656d21e0d30851430"
+                "reference": "f7f1c99b559ec63b9be37f2c356a21fd4856f726"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/fa271f397b2a2f2618e44e2656d21e0d30851430",
-                "reference": "fa271f397b2a2f2618e44e2656d21e0d30851430",
+                "url": "https://api.github.com/repos/nacmartin/phpexecjs/zipball/f7f1c99b559ec63b9be37f2c356a21fd4856f726",
+                "reference": "f7f1c99b559ec63b9be37f2c356a21fd4856f726",
                 "shasum": ""
             },
             "require": {
@@ -4433,7 +4438,7 @@
                 }
             ],
             "description": "Run JavaScript code from PHP",
-            "time": "2016-03-18T20:11:47+00:00"
+            "time": "2016-09-28T08:36:23+00:00"
         },
         {
             "name": "namshi/jose",
@@ -4646,16 +4651,16 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.0.3",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "a108adf44c4663bfb72858ea2fcd174acddd317e"
+                "reference": "51e867c70f0799790b3e82276875414ce13daaca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/a108adf44c4663bfb72858ea2fcd174acddd317e",
-                "reference": "a108adf44c4663bfb72858ea2fcd174acddd317e",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/51e867c70f0799790b3e82276875414ce13daaca",
+                "reference": "51e867c70f0799790b3e82276875414ce13daaca",
                 "shasum": ""
             },
             "require": {
@@ -4663,8 +4668,9 @@
                 "php": "~7.0"
             },
             "require-dev": {
-                "composer/composer": "^1.0.0-ALPHA11@ALPHA",
-                "phpunit/phpunit": "^5.2.8"
+                "composer/composer": "^1.3",
+                "ext-zip": "*",
+                "phpunit/phpunit": "^5.4.7"
             },
             "type": "composer-plugin",
             "extra": {
@@ -4689,7 +4695,7 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-            "time": "2016-02-26T14:00:23+00:00"
+            "time": "2016-12-30T09:49:15+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -4807,25 +4813,30 @@
         },
         {
             "name": "org_heigl/hyphenator",
-            "version": "v2.0.3",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heiglandreas/Org_Heigl_Hyphenator.git",
-                "reference": "1ea68a85e67f87c4dab48d6771989248ca0cfd15"
+                "reference": "9a8ac28f654e1ec0779caaffe57edcd2575973f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Hyphenator/zipball/1ea68a85e67f87c4dab48d6771989248ca0cfd15",
-                "reference": "1ea68a85e67f87c4dab48d6771989248ca0cfd15",
+                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Hyphenator/zipball/9a8ac28f654e1ec0779caaffe57edcd2575973f6",
+                "reference": "9a8ac28f654e1ec0779caaffe57edcd2575973f6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "ext-mbstring": "*",
+                "php": "^5.3||^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9",
+                "phpunit/phpunit": "^4.8||^5.3"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Org\\Heigl\\Hyphenator": "src"
+                "psr-4": {
+                    "Org\\Heigl\\Hyphenator\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4840,13 +4851,13 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Word-Hyphenation for PHP",
+            "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
             "homepage": "http://github.com/heiglandreas/Org_Heigl_Hyphenator",
             "keywords": [
                 "hyphenate",
                 "hyphenation"
             ],
-            "time": "2013-05-16T19:30:56+00:00"
+            "time": "2017-03-20T20:12:10+00:00"
         },
         {
             "name": "overblog/graphql-bundle",
@@ -7521,6 +7532,54 @@
             "time": "2016-01-26T23:58:32+00:00"
         },
         {
+            "name": "sunra/php-simple-html-dom-parser",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sunra/php-simple-html-dom-parser.git",
+                "reference": "75b9b1cb64502d8f8c04dc11b5906b969af247c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sunra/php-simple-html-dom-parser/zipball/75b9b1cb64502d8f8c04dc11b5906b969af247c6",
+                "reference": "75b9b1cb64502d8f8c04dc11b5906b969af247c6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Sunra\\PhpSimple\\HtmlDomParser": "Src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sunra",
+                    "email": "sunra@yandex.ru",
+                    "homepage": "https://github.com/sunra"
+                },
+                {
+                    "name": "S.C. Chen",
+                    "homepage": "http://sourceforge.net/projects/simplehtmldom/"
+                }
+            ],
+            "description": "Composer adaptation of: A HTML DOM parser written in PHP5+ let you manipulate HTML in a very easy way! Require PHP 5+. Supports invalid HTML. Find tags on an HTML page with selectors just like jQuery. Extract contents from HTML in a single line.",
+            "homepage": "https://github.com/sunra/php-simple-html-dom-parser",
+            "keywords": [
+                "dom",
+                "html",
+                "parser"
+            ],
+            "time": "2016-11-22T22:57:47+00:00"
+        },
+        {
             "name": "swarrot/swarrot",
             "version": "v2.2.0",
             "source": {
@@ -9035,20 +9094,20 @@
         },
         {
             "name": "zendframework/zend-code",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-code.git",
-                "reference": "57cfbcf794a79985278d6308325bc86060af588c"
+                "reference": "2899c17f83a7207f2d7f53ec2f421204d3beea27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/57cfbcf794a79985278d6308325bc86060af588c",
-                "reference": "57cfbcf794a79985278d6308325bc86060af588c",
+                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/2899c17f83a7207f2d7f53ec2f421204d3beea27",
+                "reference": "2899c17f83a7207f2d7f53ec2f421204d3beea27",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5 || 7.0.0 - 7.0.4 || ^7.0.6",
+                "php": "^5.6 || 7.0.0 - 7.0.4 || ^7.0.6",
                 "zendframework/zend-eventmanager": "^2.6 || ^3.0"
             },
             "require-dev": {
@@ -9065,8 +9124,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev",
-                    "dev-develop": "3.1-dev"
+                    "dev-master": "3.1-dev",
+                    "dev-develop": "3.2-dev"
                 }
             },
             "autoload": {
@@ -9084,7 +9143,7 @@
                 "code",
                 "zf2"
             ],
-            "time": "2016-04-20T17:34:49+00:00"
+            "time": "2016-10-24T13:23:32+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",
@@ -9138,26 +9197,26 @@
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "3.0.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "5c80bdee0e952be112dcec0968bad770082c3a6e"
+                "reference": "c3bce7b7d47c54040b9ae51bc55491c72513b75d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/5c80bdee0e952be112dcec0968bad770082c3a6e",
-                "reference": "5c80bdee0e952be112dcec0968bad770082c3a6e",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/c3bce7b7d47c54040b9ae51bc55491c72513b75d",
+                "reference": "c3bce7b7d47c54040b9ae51bc55491c72513b75d",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5 || ^7.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
                 "athletic/athletic": "^0.1",
                 "container-interop/container-interop": "^1.1.0",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "^2.0",
+                "phpunit/phpunit": "^5.6",
+                "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-stdlib": "^2.7.3 || ^3.0"
             },
             "suggest": {
@@ -9167,8 +9226,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev",
-                    "dev-develop": "3.1-dev"
+                    "dev-master": "3.1-dev",
+                    "dev-develop": "3.2-dev"
                 }
             },
             "autoload": {
@@ -9188,7 +9247,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2016-02-18T20:53:00+00:00"
+            "time": "2016-12-19T21:47:12+00:00"
         },
         {
             "name": "zendframework/zenddiagnostics",
@@ -12843,10 +12902,8 @@
         "sonata-project/user-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/classification-bundle": 20,
-        "jolicode/jolitypo-bundle": 0,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
-        "caxy/htmldiff-bundle": 20,
         "simplesamlphp/simplesamlphp": 20,
         "hslavich/simplesamlphp-bundle": 20,
         "simplesamlphp/saml2": 20,
