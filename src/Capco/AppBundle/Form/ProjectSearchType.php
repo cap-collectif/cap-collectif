@@ -33,7 +33,7 @@ class ProjectSearchType extends AbstractType
                 ChoiceType::class, [
                     'required' => false,
                     'choices' => Project::$sortOrderLabels,
-                    'empty_value' => false,
+                    'placeholder' => false,
             ])
         ;
 
