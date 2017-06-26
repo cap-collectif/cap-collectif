@@ -8,15 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class MediaResponse.
- *
  * @ORM\Entity()
  */
 class MediaResponse extends AbstractResponse
 {
     /**
-     * @var Collection
-     *
      * @ORM\ManyToMany(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="responses_medias",
      *      joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
@@ -45,9 +41,11 @@ class MediaResponse extends AbstractResponse
         return $this;
     }
 
-    public function setMedias(ArrayCollection $medias)
+    public function setMedias(ArrayCollection $medias): self
     {
         $this->medias = $medias;
+
+        return $this;
     }
 
     public function getType(): string

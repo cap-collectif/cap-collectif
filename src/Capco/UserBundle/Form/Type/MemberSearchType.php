@@ -28,7 +28,7 @@ class MemberSearchType extends AbstractType
                 'choices' => User::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'user.index.sort.label',
-                'placeholder' => false,
+                'empty_value' => false,
                 'attr' => ['onchange' => 'this.form.submit()'],
             ])
         ;

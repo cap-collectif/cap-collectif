@@ -71,6 +71,6 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
         $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
 
-        return number_format($bytes / pow(1024, $power), 1, '.', ',') . ' ' . $units[$power];
+        return number_format($bytes / (1024 ** $power), 1) . ' ' . $units[$power];
     }
 }

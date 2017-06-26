@@ -41,7 +41,7 @@ class ResponseMediaManager
             /** @var MediaResponse $response */
             $response = $this->proposal->getResponses()->filter(
                 function (AbstractResponse $element) use ($questionId) {
-                    return $element->getQuestion()->getId() === $questionId;
+                    return (int) $element->getQuestion()->getId() === (int) $questionId;
                 }
             )->first();
 
