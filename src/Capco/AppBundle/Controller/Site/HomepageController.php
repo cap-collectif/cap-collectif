@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
-use Capco\AppBundle\Form\Section;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
