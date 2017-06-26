@@ -93,10 +93,7 @@ export const OpinionLinkCreateForm = React.createClass({
 
 type PassedProps = { availableTypes: Array<Object> };
 const mapStateToProps = (state: State, { availableTypes }: PassedProps) => {
-  const currentTypeId = formValueSelector('OpinionLinkSelectTypeForm')(
-    state,
-    'opinionType',
-  );
+  const currentTypeId = formValueSelector(formName)(state, 'opinionType');
   const initialType = availableTypes[0];
   return {
     currentType: currentTypeId
