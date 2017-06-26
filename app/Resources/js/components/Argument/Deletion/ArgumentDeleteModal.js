@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
@@ -22,13 +23,9 @@ const ArgumentDeleteModal = React.createClass({
   },
 
   handleSubmit() {
-    const {
-      argument,
-      onClose,
-    } = this.props;
+    const { argument, onClose } = this.props;
     this.setState({ isSubmitting: true });
-    ArgumentActions
-      .delete(ArgumentStore.opinion, argument.id)
+    ArgumentActions.delete(ArgumentStore.opinion, argument.id)
       .then(() => {
         onClose();
         this.setState({ isSubmitting: false });
@@ -48,11 +45,10 @@ const ArgumentDeleteModal = React.createClass({
         show={show}
         onHide={onClose}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('global.removeMessage')}
+            {this.getIntlMessage('global.removeMessage')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -62,18 +58,19 @@ const ArgumentDeleteModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-            <SubmitButton
-              id={'confirm-argument-delete'}
-              label="global.removeDefinitively"
-              isSubmitting={isSubmitting}
-              onSubmit={this.handleSubmit.bind(null, this)}
-              bsStyle="danger"
-            />
+          <SubmitButton
+            id={'confirm-argument-delete'}
+            label="global.removeDefinitively"
+            isSubmitting={isSubmitting}
+            onSubmit={() => {
+              this.handleSubmit();
+            }}
+            bsStyle="danger"
+          />
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default ArgumentDeleteModal;

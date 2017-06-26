@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 
@@ -38,12 +37,16 @@ const OpinionSourceAdd = React.createClass({
       <div>
         <OpinionSourceAddButton
           disabled={disabled}
-          handleClick={this.show.bind(null, this)}
+          handleClick={() => {
+            this.show();
+          }}
         />
         {!disabled
           ? <OpinionSourceFormModal
               show={this.state.showModal}
-              onClose={this.close}
+              onClose={() => {
+                this.close();
+              }}
             />
           : null}
       </div>

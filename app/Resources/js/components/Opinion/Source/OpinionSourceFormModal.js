@@ -60,9 +60,15 @@ const OpinionSourceFormModal = React.createClass({
             opinion={OpinionSourceStore.opinion}
             source={source}
             isSubmitting={isSubmitting}
-            onValidationFailure={this.handleFailure.bind(null, this)}
-            onSubmitSuccess={this.handleSubmitSuccess.bind(null, this)}
-            onSubmitFailure={this.handleFailure.bind(null, this)}
+            onValidationFailure={() => {
+              this.handleFailure();
+            }}
+            onSubmitSuccess={() => {
+              this.handleSubmitSuccess();
+            }}
+            onSubmitFailure={() => {
+              this.handleFailure();
+            }}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -71,7 +77,9 @@ const OpinionSourceFormModal = React.createClass({
             id={`confirm-opinion-source-${action}`}
             label={action === 'create' ? 'global.publish' : 'global.edit'}
             isSubmitting={isSubmitting}
-            onSubmit={this.handleSubmit.bind(null, this)}
+            onSubmit={() => {
+              this.handleSubmit();
+            }}
           />
         </Modal.Footer>
       </Modal>

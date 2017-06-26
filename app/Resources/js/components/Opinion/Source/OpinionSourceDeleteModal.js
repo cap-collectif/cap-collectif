@@ -65,7 +65,9 @@ const OpinionSourceDeleteModal = React.createClass({
             id={'confirm-opinion-source-delete'}
             label={'global.delete'}
             isSubmitting={isSubmitting}
-            onSubmit={this.handleSubmit.bind(null, this)}
+            onSubmit={() => {
+              this.handleSubmit();
+            }}
             bsStyle="danger"
           />
         </Modal.Footer>

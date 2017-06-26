@@ -1,7 +1,7 @@
 {
-    "name": "capco/symfony2",
+    "name": "capco/platform",
     "license": "proprietary",
-    "description": "Cap-Collectif Symfony2",
+    "description": "Cap-Collectif SaaS",
     "autoload": {
         "exclude-from-classmap": ["**/Behat/"],
         "psr-0": {
@@ -19,15 +19,15 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/spyl94/behat-parallel-scenario"
+            "url": "https://github.com/cap-collectif/behat-parallel-scenario"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/spyl94/BehatPageObjectExtension"
+            "url": "https://github.com/cap-collectif/BehatPageObjectExtension"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/spyl94/SonataMediaBundle"
+            "url": "https://github.com/cap-collectif/SonataMediaBundle"
         }
     ],
     "require": {
@@ -43,6 +43,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.3",
         "stof/doctrine-extensions-bundle": "~1.2",
         "hautelook/alice-bundle": "^1.3",
+        "doctrine/doctrine-migrations-bundle": "~1.1",
 
         "sonata-project/easy-extends-bundle": "~2.1",
         "sonata-project/core-bundle": "~2.3",
@@ -62,18 +63,17 @@
         "predis/predis": "^1.0",
         "jolicode/jolitypo-bundle": "@stable",
 
-        "doctrine/doctrine-migrations-bundle": "~1.1",
         "willdurand/geocoder": "~3.0",
         "tilleuls/ckeditor-sonata-media-bundle": "~1.0",
         "egeloen/ckeditor-bundle": "~4.0",
         "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
         "jms/serializer-bundle": "~1.0",
         "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
-        "nelmio/api-doc-bundle": "~2.9",
+        "nelmio/api-doc-bundle": "^2.13",
         "lexik/jwt-authentication-bundle": "~1.4",
         "willdurand/hateoas-bundle": "~1.1",
         "snc/redis-bundle": "^2.0",
-        "ekino/newrelic-bundle": "~1.3",
+        "ekino/newrelic-bundle": "^1.3",
         "caxy/htmldiff-bundle": "dev-master",
         "limenius/react-bundle": "0.11.1",
         "google/recaptcha": "^1.1",
@@ -81,56 +81,52 @@
         "friendsofsymfony/rest-bundle": "^1.6",
         "mattketmo/email-checker": "^1.5",
         "twilio/sdk": "^4.10",
-        "misd/phone-number-bundle": "^1.1",
-        "liuggio/excelbundle": "~2.0",
+        "misd/phone-number-bundle": "^1.2",
+        "liuggio/excelbundle": "^2.1",
 
         "ocramius/proxy-manager": "2.0.2",
         "exercise/htmlpurifier-bundle": "^0.2.3",
         "doctrine/data-fixtures": "1.1.1",
-        "nelmio/alice": "^2.2",
-        "odolbeau/rabbit-mq-admin-toolkit": "^3.1",
+        "odolbeau/rabbit-mq-admin-toolkit": "^4.0",
 
         "doctrine/orm": "^2.5",
         "doctrine/dbal": "^2.5",
         "infinite-networks/form-bundle": "^1.0",
-        "swarrot/swarrot-bundle": "1.3.3",
-        "overblog/graphql-bundle": "^0.8.0",
-        "league/csv": "^8.1",
-        "friendsofsymfony/http-cache-bundle": "2.0.0-beta1",
+        "swarrot/swarrot-bundle": "^1.4",
+        "overblog/graphql-bundle": "^0.8.5",
+        "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
         "php-http/discovery": "^1.2",
         "php-http/httplug": "^1.1",
         "php-http/client-common": "^1.5",
-        "friendsofsymfony/http-cache": "2.0.0-beta1",
         "guzzlehttp/guzzle": "6.2.3",
         "php-http/guzzle6-adapter": "^1.1",
         "guzzlehttp/psr7": "^1.4",
-        "overblog/graphql-php-generator": "^0.4.3",
-        "webonyx/graphql-php": "^0.9.8",
         "simplesamlphp/simplesamlphp": "dev-master#d68d4087416d7888393183a092f81f49354a5c8d as v1.14.9",
         "hslavich/simplesamlphp-bundle": "^1.1@dev",
         "simplesamlphp/saml2": "dev-master",
-        "cap-collectif/id-to-uuid": "^1.0"
+        "cap-collectif/id-to-uuid": "^1.0",
+        "friendsofsymfony/http-cache-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "behat/behat": "^3.2",
-        "behat/symfony2-extension": "^2.1.1",
+        "behat/behat": "^3.3",
+        "behat/symfony2-extension": "^2.1",
         "behat/mink-extension": "^2.2",
         "behat/mink-selenium2-driver": "^1.3",
         "behat/mink-browserkit-driver": "^1.3",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
-        "coduo/php-matcher": "~2.0",
-        "docker-php/docker-php": "^1.22",
-        "jolicode/jolinotif": "^1.0",
-        "phpunit/phpunit": "^5.3",
-        "pyrech/composer-changelogs": "^1.2",
+        "coduo/php-matcher": "^2.1",
+        "docker-php/docker-php": "^1.24",
+        "jolicode/jolinotif": "^1.1",
+        "pyrech/composer-changelogs": "^1.5",
         "alexandresalome/mailcatcher": "^1.0",
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
         "bossa/phpspec2-expect": "2.0.0",
         "phpspec/phpspec": "3.0",
         "behat/gherkin": "^4.4",
-        "phpstan/phpstan": "^0.6.4"
+        "phpstan/phpstan": "^0.7.0",
+        "phpunit/phpunit": "^5.0"
     },
     "scripts": {},
     "config": {
