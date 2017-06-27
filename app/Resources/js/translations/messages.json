@@ -785,6 +785,14 @@
       "step_closed": "L'étape de sélection est terminée, merci pour votre participation.",
       "step_not_yet_open": "L'étape de sélection n'est pas encore ouverte aux votes. Revenez plus tard !",
       "vote_with_my_account": "Voter avec mon compte"
+    },
+    "map": {
+      "map": "Carte",
+      "mosaic": "Mosaïque",
+      "form": {
+        "field": "Lieu ou Adresse",
+        "placeholder": "Recherche d'un lieu ou d'une adresse"
+      }
     }
   },
   "reply": {

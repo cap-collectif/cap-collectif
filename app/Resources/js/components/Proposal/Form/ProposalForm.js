@@ -435,8 +435,8 @@ export const ProposalForm = React.createClass({
           </Input>}
         {form.usingAddress &&
           <div className="form-group">
-            <label className="control-label h5" htmlFor="places-autocomplete">
-              Adresse
+            <label className="control-label h5" htmlFor="proposal_address">
+              {this.getIntlMessage('proposal.map.form.field')}
             </label>
             {form.addressHelpText &&
               <span className="help-block">{form.addressHelpText}</span>}
@@ -445,10 +445,12 @@ export const ProposalForm = React.createClass({
                 onChange: address => {
                   this.setState(prevState => ({ ...prevState, address }));
                 },
-                placeholder: "Recherche d'un lieu ou d'une adresse",
+                placeholder: this.getIntlMessage(
+                  'proposal.map.form.placeholder',
+                ),
                 value: this.state.address,
                 type: 'text',
-                id: 'places-autocomplete',
+                id: 'proposal_address',
               }}
               autocompleteItem={autocompleteItem}
               onEnterKeyDown={this.handleLocationChange}
