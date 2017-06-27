@@ -1,18 +1,13 @@
 import React from 'react';
 import autosize from 'autosize';
 import mailcheck from 'mailcheck';
-import {
-  OverlayTrigger,
-  Popover,
-  Input as ReactBootstrapInput,
-  FormGroup,
-  Thumbnail,
-} from 'react-bootstrap';
+import { OverlayTrigger, Popover, FormGroup, Thumbnail } from 'react-bootstrap';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import domains from '../../utils/email_domains';
+import ReactBootstrapInput from './ReactBootstrapInput';
 
 export default class Input extends ReactBootstrapInput {
   constructor() {
