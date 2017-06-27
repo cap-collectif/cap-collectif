@@ -23,7 +23,7 @@ Feature: Email
     """
     {
       "code": 401,
-      "message": "Invalid credentials"
+      "message": "Bad credentials"
     }
     """
 

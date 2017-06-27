@@ -167,7 +167,7 @@ Feature: Opinions Versions
     """
     {
       "code": 401,
-      "message": "Invalid credentials"
+      "message": "Bad credentials"
     }
     """
 

@@ -137,7 +137,7 @@ Feature: Projects
     Then the JSON response status code should be 401
     And the JSON response should match:
     """
-    {"code":401,"message":"Invalid credentials"}
+    {"code":401,"message":"Bad credentials"}
     """
 
   @database
