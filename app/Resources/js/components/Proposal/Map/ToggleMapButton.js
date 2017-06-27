@@ -39,7 +39,7 @@ export const ToggleMapButton = React.createClass({
             onClick={this.handleClick.bind(this, 'mosaic')}
           />
           {' '}
-          Mosaïque
+          {this.getIntlMessage('proposal.map.mosaic')}
         </Button>
         <Button
           bsStyle="default"
@@ -51,7 +51,7 @@ export const ToggleMapButton = React.createClass({
             onClick={this.handleClick.bind(this, 'map')}
           />
           {' '}
-          Carte
+          {this.getIntlMessage('proposal.map.map')}
         </Button>
       </div>
     );

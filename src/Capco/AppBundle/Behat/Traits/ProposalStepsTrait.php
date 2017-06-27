@@ -857,6 +857,7 @@ trait ProposalStepsTrait
             ['proposal_title', 'Nouvelle proposition créée'],
             ['proposal_body', 'Description de ma proposition'],
             ['proposal_custom-1', 'Réponse à la question 1'],
+            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
         ]);
         if ($requiredResponse !== false) {
             $this->fillField('proposal_custom-3', $requiredResponse);
@@ -869,6 +870,9 @@ trait ProposalStepsTrait
         if ($fillDistrict) {
             $this->selectOption('proposal_district', 'Beauregard');
         }
+        $this->iWait(1);
+        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->iWait(1);
     }
 
     protected function votesDetailsPageIsOpen()
