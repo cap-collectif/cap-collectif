@@ -24,7 +24,7 @@ const state = {
   },
 };
 
-const OriginalComponent = RankingBlock.DecoratedComponent.DecoratedComponent;
+const OriginalComponent = RankingBlock.DecoratedComponent;
 
 describe('<RankingBlock />', () => {
   it('should render two ranking boxes with correct props', () => {

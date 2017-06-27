@@ -26,12 +26,13 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
         "width": "50%",
       }
     }
-    value="mosaic"
   >
     <i
       className="cap cap-th-large"
+      onClick={[Function]}
     />
-     Mosaïque
+     
+    Mosaïque
   </Button>
   <Button
     active={true}
@@ -47,12 +48,13 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
         "width": "50%",
       }
     }
-    value="map"
   >
     <i
       className="cap cap-map-location"
+      onClick={[Function]}
     />
-     Carte
+     
+    Carte
   </Button>
 </div>
 `;
@@ -83,12 +85,13 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
         "width": "50%",
       }
     }
-    value="mosaic"
   >
     <i
       className="cap cap-th-large"
+      onClick={[Function]}
     />
-     Mosaïque
+     
+    Mosaïque
   </Button>
   <Button
     active={false}
@@ -104,12 +107,13 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
         "width": "50%",
       }
     }
-    value="map"
   >
     <i
       className="cap cap-map-location"
+      onClick={[Function]}
     />
-     Carte
+     
+    Carte
   </Button>
 </div>
 `;

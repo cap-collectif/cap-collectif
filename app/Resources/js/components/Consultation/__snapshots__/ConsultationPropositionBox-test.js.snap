@@ -35,6 +35,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
           "_subscriptions": Array [],
           "_updatedRecordIDs": Object {},
         },
+        "setNet": [Function],
         "unstable_internal": Object {
           "areEqualSelectors": [Function],
           "createFragmentSpecResolver": [Function],

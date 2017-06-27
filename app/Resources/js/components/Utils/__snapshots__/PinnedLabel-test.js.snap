@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PinnedLabel /> should not render a blue label if not shown 1`] = `null`;
+
+exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Tooltip
+      bsClass="tooltip"
+      className="in"
+      id="pinned-label"
+      placement="top"
+    >
+      Ce commentaire a été épinglé par l'administrateur.
+    </Tooltip>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <span
+    className="opinion__label opinion__label--blue"
+  >
+    <i
+      className="cap cap-pin-1"
+    />
+     
+    Épinglé
+  </span>
+</OverlayTrigger>
+`;
+
+exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Tooltip
+      bsClass="tooltip"
+      className="in"
+      id="pinned-label"
+      placement="top"
+    >
+      Cette proposition a été épinglée par l'administrateur.
+    </Tooltip>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <span
+    className="opinion__label opinion__label--blue"
+  >
+    <i
+      className="cap cap-pin-1"
+    />
+     
+    Épinglé
+  </span>
+</OverlayTrigger>
+`;

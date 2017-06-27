@@ -22,6 +22,7 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
   }
   onHide={[Function]}
   renderBackdrop={[Function]}
+  restoreFocus={true}
   show={true}
 >
   <form
