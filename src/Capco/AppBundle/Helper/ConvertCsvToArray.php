@@ -6,7 +6,9 @@ class ConvertCsvToArray
 {
     public function convert($filename, $delimiter = ';')
     {
-        if (!file_exists($filename) || !is_readable($filename)) {
+        if (!file_exists($filename)) {
+            echo "File doesn't exist !";
+
             return false;
         }
 

@@ -23,11 +23,6 @@ Feature: ProposalForm Restful Api
   "districtMandatory": @boolean@,
   "usingCategories": @boolean@,
   "categoryMandatory": @boolean@,
-  "usingAddress": @boolean@,
-  "addressHelpText": null,
-  "zoomMap": @integer@,
-  "latMap": @number@,
-  "lngMap": @number@,
   "categories":[
     {
       "name": "Aménagement",

@@ -316,9 +316,8 @@ class ProposalRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author')
-            ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('proposal.author', 'author')
-            ->andWhere('selections.selectionStep = :step')
+            ->andWhere('proposal.step = :step')
             ->setParameter('step', $step);
 
         return $qb->getQuery()->getArrayResult();

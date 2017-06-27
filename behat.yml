@@ -79,6 +79,7 @@ commands:
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\CommandContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
+                - SamParkinson\Behat\Context\FileSystemContext
 
 api:
     extensions:
