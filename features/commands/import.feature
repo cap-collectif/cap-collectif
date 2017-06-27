@@ -25,9 +25,9 @@ Scenario: Admin wants to import a consultation
 Scenario: Admin wants to create a PJL
     Given "emails.csv" contains:
     """
-    email;firstname;lastname
-    user_a@test.com;Jean;Michel
-    user_b@test.com;Po;Paul
+    email;username
+    user_a@test.com;Jean Michel
+    user_b@test.com;Po Paul
     """
     Given I run "capco:create-users-account-from-csv vfs://emails.csv vfs://users_created.csv"
     Then the command exit code should be 0

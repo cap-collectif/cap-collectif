@@ -61,7 +61,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         foreach ($rows as $row) {
             try {
                 $user = $userManager->createUser();
-                $user->setUsername($row['firstname'] . ' ' . $row['lastname']);
+                $user->setUsername($row['username']);
                 $user->setEmail(filter_var($row['email'], FILTER_SANITIZE_EMAIL));
                 $user->setConfirmationToken($tokenGenerator->generateToken());
                 $user->setEnabled(false);
