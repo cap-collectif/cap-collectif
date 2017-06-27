@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConfirmationController extends Controller
 {
     /**
-     * @Route("/account/email_confirmation/{token}", name="account_confirm_email", defaults={"_feature_flags" = "registration"})
-     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", defaults={"_feature_flags" = "registration"}) // legacy url
+     * @Route("/account/email_confirmation/{token}", name="account_confirm_email")
+     * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy")
      *
      * @param mixed $token
      */
