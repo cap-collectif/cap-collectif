@@ -35,14 +35,26 @@ export const MapArea = React.createClass({
   },
 
   getInitialState() {
+    const { defaultMapOptions } = this.props;
     return {
       map: null,
+      control: defaultMapOptions,
     };
   },
 
   componentDidMount() {
     const { dispatch, stepId, stepType } = this.props;
     dispatch(loadMarkers(stepId, stepType));
+  },
+
+  zoomIn(zoom: number, newCenter: ?Object = null) {
+    this.setState(prevState => ({
+      ...prevState,
+      control: {
+        center: newCenter || prevState.control.center,
+        zoom: prevState.control.zoom + zoom,
+      },
+    }));
   },
 
   render() {
@@ -77,16 +89,30 @@ export const MapArea = React.createClass({
                 height: 500,
               }}
               onChange={({ center, zoom, bounds }) => {
-                this.setState({ map: { center, zoom, bounds } });
+                this.setState(prevState => ({
+                  ...prevState,
+                  map: { center, zoom, bounds },
+                  control: { center, zoom },
+                }));
               }}
               className="proposal__map"
+              onChildClick={(markerId, clickedMarker) => {
+                if (clickedMarker.marker.numPoints > 1) {
+                  this.zoomIn(1, {
+                    lat: clickedMarker.lat,
+                    lng: clickedMarker.lng,
+                  });
+                }
+              }}
               defaultCenter={defaultMapOptions.center}
               resetBoundsOnResize
               bootstrapURLKeys={{
                 key: config.mapsAPIKey,
                 language: 'fr',
               }}
-              defaultZoom={defaultMapOptions.zoom}
+              zoom={this.state.control.zoom}
+              center={this.state.control.center}
+              defaultZoom={12}
               options={maps => ({
                 zoomControlOptions: {
                   position: maps.ControlPosition.RIGHT_CENTER,
@@ -129,8 +155,10 @@ export const MapArea = React.createClass({
 const mapStateToProps = state => ({
   markers: state.proposal.markers,
   stepId: state.project.currentProjectStepById,
-  stepType: state.project.projectsById[state.project.currentProjectById]
-    .stepsById[state.project.currentProjectStepById].type,
+  stepType:
+    state.project.projectsById[state.project.currentProjectById].stepsById[
+      state.project.currentProjectStepById
+    ].type,
 });
 
 export default connect(mapStateToProps)(MapArea);
