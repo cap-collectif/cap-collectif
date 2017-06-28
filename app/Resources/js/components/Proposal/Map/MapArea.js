@@ -47,12 +47,12 @@ export const MapArea = React.createClass({
     dispatch(loadMarkers(stepId, stepType));
   },
 
-  zoomIn(zoom: number, newCenter: ?Object = null) {
+  zoomTo(zoom: number, newCenter: ?Object = null) {
     this.setState(prevState => ({
       ...prevState,
       control: {
         center: newCenter || prevState.control.center,
-        zoom: prevState.control.zoom + zoom,
+        zoom,
       },
     }));
   },
@@ -70,7 +70,7 @@ export const MapArea = React.createClass({
       }),
       {
         minZoom: 3,
-        maxZoom: 15,
+        maxZoom: 14,
         radius: 30,
       },
     );
@@ -98,7 +98,7 @@ export const MapArea = React.createClass({
               className="proposal__map"
               onChildClick={(markerId, clickedMarker) => {
                 if (clickedMarker.marker.numPoints > 1) {
-                  this.zoomIn(1, {
+                  this.zoomTo(14, {
                     lat: clickedMarker.lat,
                     lng: clickedMarker.lng,
                   });

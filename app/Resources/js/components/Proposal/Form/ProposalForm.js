@@ -211,7 +211,7 @@ export const ProposalForm = React.createClass({
         }));
       })
       .catch(error => {
-        console.error('Oh no!', error);
+        console.error('Google places error!', error); // eslint-disable-line
       });
   },
 
