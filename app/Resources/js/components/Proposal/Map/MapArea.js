@@ -98,7 +98,7 @@ export const MapArea = React.createClass({
               className="proposal__map"
               onChildClick={(markerId, clickedMarker) => {
                 if (clickedMarker.marker.numPoints > 1) {
-                  this.zoomTo(14, {
+                  this.zoomTo(15, {
                     lat: clickedMarker.lat,
                     lng: clickedMarker.lng,
                   });

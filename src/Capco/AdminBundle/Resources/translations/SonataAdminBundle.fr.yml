@@ -577,12 +577,17 @@ admin:
       using_themes: Thème
       using_district: Localisation
       mandatory: Saisie obligatoire
-      using_address: Lieu ou addresse
+      using_address: Lieu ou adresse
       latitude: Latitude
       longitude: Longitude
       zoom: Zoom
       map_help: Permet de définir le centre de la carte
       map: Carte
+      group_help_texts: Textes d'aide
+      title_help_text: Texte d'aide pour le champ Titre.
+      help_text_title_help_text: Le champ Titre est présent par défaut.
+      description_help_text: Texte d'aide pour le champ Description.
+      help_text_description_help_text: Le champ Description est présent par défaut.
     questionnaire:
       anonymous_allowed: Autoriser les réponses anonymes
       title: Titre

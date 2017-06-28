@@ -36,16 +36,13 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
+        $modals = $this->getModals($input->getArgument('filePath'));
+
         $em = $this->getContainer()->get('doctrine')->getManager();
         $step = $em->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-                   ->findOneBySlug($input->getArgument('step'))
+                   ->find($input->getArgument('step'))
                 ;
 
-        if (!is_object($step)) {
-            throw new \InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
-        }
-
-        $modals = $this->getModals($input->getArgument('filePath'));
         foreach ($modals as $row) {
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneBy([
@@ -69,7 +66,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
         }
     }
 
-    protected function getModals(string $filePath)
+    protected function getModals($filePath)
     {
         return $this->getContainer()
                     ->get('import.csvtoarray')
