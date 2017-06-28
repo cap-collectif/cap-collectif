@@ -124,10 +124,11 @@ export const MapArea = React.createClass({
                 mapTypeControl: true,
               })}>
               {generatedMarkers.length > 0 &&
-                generatedMarkers.map(marker => {
+                generatedMarkers.map((marker, index) => {
                   if (marker.numPoints > 1) {
                     return (
                       <ClusterMarker
+                        key={index}
                         lat={marker.y}
                         lng={marker.x}
                         marker={marker}

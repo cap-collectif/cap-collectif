@@ -1,8 +1,8 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
-export class Marker extends Component {
+export class Marker extends PureComponent {
   render() {
     const { marker } = this.props;
 
