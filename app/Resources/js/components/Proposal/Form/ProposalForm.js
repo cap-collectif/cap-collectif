@@ -3,9 +3,7 @@ import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -140,6 +138,9 @@ export const ProposalForm = React.createClass({
           form.theme === -1
         ) {
           delete form.theme;
+        }
+        if (!form.usingAddress && form.location.length === 0) {
+          delete form.location;
         }
         if (
           !features.districts ||
@@ -294,7 +295,9 @@ export const ProposalForm = React.createClass({
       proposal,
     } = this.props;
     const optional = (
-      <span className="excerpt">{` ${this.getIntlMessage('global.form.optional')}`}</span>
+      <span className="excerpt">{` ${this.getIntlMessage(
+        'global.form.optional',
+      )}`}</span>
     );
     const themeLabel = (
       <span>
@@ -320,13 +323,12 @@ export const ProposalForm = React.createClass({
         {optional}
       </span>
     );
-    const autocompleteItem = ({ formattedSuggestion }) => (
+    const autocompleteItem = ({ formattedSuggestion }) =>
       <div>
         <i className="cap cap-map-location" />{' '}
         <strong>{formattedSuggestion.mainText}</strong>{' '}
         <small>{formattedSuggestion.secondaryText}</small>
-      </div>
-    );
+      </div>;
     return (
       <form id="proposal-form">
         {form.description &&
@@ -357,13 +359,13 @@ export const ProposalForm = React.createClass({
               />
             }>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
-              {this.state.suggestions.slice(0, 5).map(suggest => (
+              {this.state.suggestions.slice(0, 5).map(suggest =>
                 <li>
                   <a href={suggest._links.show} className="external-link">
                     {suggest.title}
                   </a>
-                </li>
-              ))}
+                </li>,
+              )}
             </ul>
             <Button
               onClick={() => {
@@ -386,11 +388,11 @@ export const ProposalForm = React.createClass({
             <option value={-1} disabled>
               {this.getIntlMessage('proposal.select.theme')}
             </option>
-            {themes.map(theme => (
+            {themes.map(theme =>
               <option key={theme.id} value={theme.id}>
                 {theme.title}
-              </option>
-            ))}
+              </option>,
+            )}
           </Input>}
         {categories.length > 0 &&
           form.usingCategories &&
@@ -427,11 +429,11 @@ export const ProposalForm = React.createClass({
             <option value="">
               {this.getIntlMessage('proposal.select.district')}
             </option>
-            {districts.map(district => (
+            {districts.map(district =>
               <option key={district.id} value={district.id}>
                 {district.name}
-              </option>
-            ))}
+              </option>,
+            )}
           </Input>}
         {form.usingAddress &&
           <div className="form-group">
