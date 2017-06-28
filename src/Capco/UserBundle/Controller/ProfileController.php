@@ -74,15 +74,22 @@ class ProfileController extends BaseController
      * @Template()
      * @Cache(smaxage="120", public=true)
      */
-    public function showAction(User $user = null)
+    public function showAction(string $slug = null)
     {
-        if (!$user && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$slug && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-
-        $user = $user ?? $this->get('security.token_storage')->getToken()->getUser();
-
         $doctrine = $this->getDoctrine();
+
+        $user = $slug
+          ? $doctrine->getRepository('CapcoUserBundle:User')->findOneBySlug($slug)
+          : $this->get('security.token_storage')->getToken()->getUser()
+        ;
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
         $serializer = $this->get('jms_serializer');
 
         $projectsRaw = $doctrine
