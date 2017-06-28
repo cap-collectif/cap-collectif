@@ -1,6 +1,5 @@
 // @flow
-import { takeEvery } from 'redux-saga';
-import { select, call, put } from 'redux-saga/effects';
+import { takeEvery, select, call, put } from 'redux-saga/effects';
 import flatten from 'flat';
 import { SubmissionError } from 'redux-form';
 import LocalStorageService from '../../services/LocalStorageService';
@@ -737,7 +736,8 @@ export function* fetchVotesByStep(
     while (hasMore) {
       const result = yield call(
         Fetcher.get,
-        `/steps/${stepId}/proposals/${proposalId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`,
+        `/steps/${stepId}/proposals/${proposalId}/votes?offset=${iterationCount *
+          votesPerIteration}&limit=${votesPerIteration}`,
       );
       hasMore = result.hasMore;
       iterationCount++;
@@ -888,9 +888,8 @@ export function* storeFiltersInLocalStorage(
   const { filter, value } = action;
   const state: GlobalState = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
-  const filtersByStep: { [id: Uuid]: Object } = LocalStorageService.get(
-    'proposal.filtersByStep',
-  ) || {};
+  const filtersByStep: { [id: Uuid]: Object } =
+    LocalStorageService.get('proposal.filtersByStep') || {};
   if (state.project.currentProjectStepById) {
     filtersByStep[state.project.currentProjectStepById] = filters;
   }
@@ -902,9 +901,8 @@ export function* storeOrderInLocalStorage(
 ): Generator<*, *, *> {
   const { order } = action;
   const state: GlobalState = yield select();
-  const orderByStep: { [id: Uuid]: string } = LocalStorageService.get(
-    'proposal.orderByStep',
-  ) || {};
+  const orderByStep: { [id: Uuid]: string } =
+    LocalStorageService.get('proposal.orderByStep') || {};
   if (state.project.currentProjectStepById) {
     orderByStep[state.project.currentProjectStepById] = order;
   }

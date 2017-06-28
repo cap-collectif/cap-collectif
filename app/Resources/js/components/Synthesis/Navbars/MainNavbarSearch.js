@@ -1,7 +1,9 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { Navbar, Input, Button } from 'react-bootstrap';
+import { Navbar, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/ReactBootstrapInput';
 
 const MainNavbarSearch = React.createClass({
   displayName: 'MainNavbarSearch',
@@ -26,12 +28,8 @@ const MainNavbarSearch = React.createClass({
 
   render() {
     const searchButton = (
-      <Button
-        type="submit"
-        style={{ paddingTop: '7px' }}
-        className="btn-gray"
-      >
-        <i className="cap cap-magnifier"></i>
+      <Button type="submit" style={{ paddingTop: '7px' }} className="btn-gray">
+        <i className="cap cap-magnifier" />
       </Button>
     );
     return (
@@ -47,7 +45,6 @@ const MainNavbarSearch = React.createClass({
       </Navbar.Form>
     );
   },
-
 });
 
 export default MainNavbarSearch;

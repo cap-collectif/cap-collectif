@@ -125,7 +125,7 @@
     "readmore": "0.0.2",
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",
-    "redux-saga": "^0.15.4",
+    "redux-saga": "v0.14.0",
     "relay-runtime": "^1.1.0",
     "sass-brunch": "^2.10.4",
     "uglify-js-brunch": "^2.10.0",

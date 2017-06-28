@@ -4,7 +4,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
 <Alert
   bsClass="alert"
   bsStyle="warning"
-  closeLabel="Close Alert"
+  closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >
   <div
@@ -33,8 +33,6 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        navDropdown={false}
-        navItem={false}
         onClick={[Function]}
         style={
           Object {
@@ -52,8 +50,6 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
         bsStyle="default"
         disabled={false}
         href="about:///profile/edit-account"
-        navDropdown={false}
-        navItem={false}
         style={
           Object {
             "marginBottom": 5,
@@ -71,7 +67,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
 <Alert
   bsClass="alert"
   bsStyle="warning"
-  closeLabel="Close Alert"
+  closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >
   <div
@@ -100,8 +96,6 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
         bsClass="btn"
         bsStyle="default"
         disabled={true}
-        navDropdown={false}
-        navItem={false}
         onClick={null}
         style={
           Object {
@@ -119,8 +113,6 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
         bsStyle="default"
         disabled={false}
         href="about:///profile/edit-account"
-        navDropdown={false}
-        navItem={false}
         style={
           Object {
             "marginBottom": 5,
@@ -138,7 +130,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
 <Alert
   bsClass="alert"
   bsStyle="warning"
-  closeLabel="Close Alert"
+  closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >
   <div
@@ -167,8 +159,6 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
         bsClass="btn"
         bsStyle="primary"
         disabled={true}
-        navDropdown={false}
-        navItem={false}
         style={
           Object {
             "marginBottom": 5,
@@ -185,8 +175,6 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
         bsStyle="default"
         disabled={false}
         href="about:///profile/edit-account"
-        navDropdown={false}
-        navItem={false}
         style={
           Object {
             "marginBottom": 5,

@@ -1,6 +1,5 @@
 // @flow
-import { takeEvery } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+import { takeEvery, call, put } from 'redux-saga/effects';
 import {
   UPDATE_OPINION_SUCCESS,
   UPDATE_OPINION_FAILURE,
@@ -250,8 +249,10 @@ export function* fetchAllOpinionVotes(
     const { opinionId, versionId } = action;
     while (hasMore) {
       const votesUrl = versionId
-        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
-        : `/opinions/${opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
+        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount *
+            votesPerIteration}&limit=${votesPerIteration}`
+        : `/opinions/${opinionId}/votes?offset=${iterationCount *
+            votesPerIteration}&limit=${votesPerIteration}`;
       const result: { votes: OpinionVotes, hasMore: boolean } = yield call(
         Fetcher.get,
         votesUrl,
@@ -422,7 +423,9 @@ const appendVote = (
   const previousVote = object.votes.find(
     v => v.user.uniqueId === newVote.user.uniqueId,
   );
-  const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
+  const voteCountIncreasing = `votesCount${getVoteStringByValue(
+    newVote.value,
+  )}`;
   if (typeof previousVote === 'undefined') {
     // first vote
     const contribution = {
@@ -441,7 +444,9 @@ const appendVote = (
     v => v.user.uniqueId === newVote.user.uniqueId,
   );
   object.votes.splice(indexOfCurrentUserVote, 1);
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(
+    previousVote.value,
+  )}`;
   const contribution = {
     ...object,
     votes: [...object.votes, newVote],
@@ -463,7 +468,9 @@ const removeVote = (
   const indexToRemove = object.votes.findIndex(
     v => v.user && v.user.uniqueId === oldVote.user.uniqueId,
   );
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(
+    oldVote.value,
+  )}`;
   const lol = {
     ...object,
     votes: [

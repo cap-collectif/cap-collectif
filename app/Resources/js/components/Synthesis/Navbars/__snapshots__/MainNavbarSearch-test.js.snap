@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainNavbarSearch /> should render a search form 1`] = `
+<NavbarForm
+  componentClass="div"
+  pullLeft={false}
+  pullRight={true}
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <Input
+      buttonAfter={
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          className="btn-gray"
+          disabled={false}
+          style={
+            Object {
+              "paddingTop": "7px",
+            }
+          }
+          type="submit"
+        >
+          <i
+            className="cap cap-magnifier"
+          />
+        </Button>
+      }
+      placeholder="Rechercher"
+      type="text"
+      valueLink={
+        Object {
+          "requestChange": [Function],
+          "value": "",
+        }
+      }
+    />
+  </form>
+</NavbarForm>
+`;
