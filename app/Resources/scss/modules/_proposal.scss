@@ -369,7 +369,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         width: $marker-width;
         height: $marker-height;
         left: -$marker-width / 2;
-        top: -$marker-height / 2;
+        top: -$marker-height;
         cursor: pointer;
         margin: 0;
         padding: 0;
