@@ -35,13 +35,14 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-intl \
         php7.1-mysql \
         php7.1-zip \
+        php7.1-mbstring \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.10.2
+ENV NODE_VERSION 6.11.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
