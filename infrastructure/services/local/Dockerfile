@@ -30,6 +30,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.0-apcu \
         php7.0-apc \
         php7.0-cli \
+        php7.0-mbstring \
         php7.0-common \
         php7.0-curl \
         php7.0-dev \
