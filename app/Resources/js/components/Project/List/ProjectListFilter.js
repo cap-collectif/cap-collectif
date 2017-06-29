@@ -148,9 +148,9 @@ const ProjectListFilter = React.createClass({
 
     return (
       <Row>
-        {filters.map(filter => {
+        {filters.map((filter, index) => {
           return (
-            <Col xs={12} sm={columnWidth}>
+            <Col key={index} xs={12} sm={columnWidth}>
               {filter}
             </Col>
           );
