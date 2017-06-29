@@ -15,7 +15,16 @@ const Field = React.createClass({
     help: PropTypes.string,
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
-    type: PropTypes.oneOf(['text', 'textarea', 'editor', 'select', 'checkbox', 'password', 'captcha', 'email']).isRequired,
+    type: PropTypes.oneOf([
+      'text',
+      'textarea',
+      'editor',
+      'select',
+      'checkbox',
+      'password',
+      'captcha',
+      'email',
+    ]).isRequired,
     label: PropTypes.string,
     placeholder: PropTypes.string,
     children: PropTypes.any,
@@ -31,7 +40,20 @@ const Field = React.createClass({
 
   render() {
     const { touched, error } = this.props.meta;
-    const { popover, children, id, autoComplete, disableValidation, placeholder, type, label, divClassName, wrapperClassName, labelClassName, help } = this.props;
+    const {
+      popover,
+      children,
+      id,
+      autoComplete,
+      disableValidation,
+      placeholder,
+      type,
+      label,
+      divClassName,
+      wrapperClassName,
+      labelClassName,
+      help,
+    } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
     const input = (
@@ -45,13 +67,12 @@ const Field = React.createClass({
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}
-        errors={(check && error) ? this.getIntlMessage(error) : null}
-        bsStyle={check ? (error ? 'error' : 'success') : null}
+        errors={check && error ? this.getIntlMessage(error) : null}
+        validationState={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
-        {...this.props.input}
-      >
+        {...this.props.input}>
         {children}
       </Input>
     );

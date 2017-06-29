@@ -62,58 +62,6 @@ export default class Input extends ReactBootstrapInput {
   //   );
   // }
 
-  // renderErrors() {
-  //   const { errors } = this.props;
-  //   return errors &&
-  //     <span className="error-block" key="error">
-  //         {errors}
-  //     </span>
-  //     ;
-  // }
-
-  // renderInput() {
-  //   const {
-  //     type,
-  //     popover,
-  //     className,
-  //     id,
-  //     image,
-  //     medias,
-  //     valueLink,
-  //   } = this.props;
-  //
-  //
-  //   if (popover) {
-  //     return (
-  //       <OverlayTrigger
-  //         placement="right"
-  //         overlay={
-  //           <Popover id={popover.id}>
-  //             {popover.message}
-  //           </Popover>
-  //         }>
-  //         {super.renderInput()}
-  //       </OverlayTrigger>
-  //     );
-  //   }
-  //
-  //   return super.renderInput();
-  // }
-
-  // renderFormGroup(children) {
-  //   const { id } = this.props;
-  //   const props = Object.assign({}, this.props);
-  //   if (id) {
-  //     props.controlId = id;
-  //     delete props.id;
-  //   }
-  //   return (
-  //     <FormGroup {...props}>
-  //       {children}
-  //     </FormGroup>
-  //   );
-  // }
-
   // renderChildren() {
   //   const { type, image } = this.props;
   //   if (!this.isCheckboxOrRadio()) {

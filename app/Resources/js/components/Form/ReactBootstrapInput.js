@@ -8,6 +8,9 @@ import {
   FormControl,
   HelpBlock,
   InputGroup,
+  Checkbox,
+  OverlayTrigger,
+  Popover,
 } from 'react-bootstrap';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
@@ -98,21 +101,23 @@ export default class ReactBootstrapInput extends Component {
     buttonAfter,
     help,
     hasFeedback,
+    popover,
     children,
     value,
     type,
+    errors,
     ...props
   }) {
     if (type === 'editor') {
-      return <Editor {...props} />;
+      return <Editor value={value} {...props} />;
     }
 
     if (type === 'captcha') {
-      return <Captcha {...props} />;
+      return <Captcha value={value} {...props} />;
     }
 
     if (type === 'places') {
-      return <PlacesAutocomplete {...props} />;
+      return <PlacesAutocomplete value={value} {...props} />;
     }
 
     if (type === 'image') {
@@ -146,7 +151,7 @@ export default class ReactBootstrapInput extends Component {
       props.componentClass = type;
     }
 
-    const formControl = (
+    let formControl = (
       <FormControl
         ref={c => {
           this.refFormControl = c;
@@ -158,6 +163,14 @@ export default class ReactBootstrapInput extends Component {
       </FormControl>
     );
 
+    if (type === 'checkbox') {
+      formControl = (
+        <Checkbox value={value} {...props}>
+          {children}
+        </Checkbox>
+      );
+    }
+
     const getFormControlWrapped = className =>
       className || hasFeedback || help
         ? <div className={className}>
@@ -167,9 +180,26 @@ export default class ReactBootstrapInput extends Component {
               <HelpBlock>
                 {help}
               </HelpBlock>}
+            {errors &&
+              <span className="error-block">
+                {errors}
+              </span>}
           </div>
         : formControl;
 
+    if (popover) {
+      return (
+        <OverlayTrigger
+          placement="right"
+          overlay={
+            <Popover id={popover.id}>
+              {popover.message}
+            </Popover>
+          }>
+          {getFormControlWrapped(wrapperClassName)}
+        </OverlayTrigger>
+      );
+    }
     if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter) {
       return getFormControlWrapped(wrapperClassName);
     }

@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -117,7 +118,13 @@ export const RegistrationForm = React.createClass({
               {this.getIntlMessage('registration.select.type')}
             </option>
             {userTypes.map((type, i) =>
+<<<<<<< HEAD
               <option key={i + 1} value={type.id}>{type.name}</option>,
+=======
+              <option key={i + 1} value={type.id}>
+                {type.name}
+              </option>,
+>>>>>>> Fix validation and errors
             )}
           </Field>}
         {addZipcodeField &&
@@ -141,7 +148,13 @@ export const RegistrationForm = React.createClass({
           let children;
           if (field.choices) {
             const choices = field.choices.map((choice, i) =>
+<<<<<<< HEAD
               <option key={i + 1} value={choice.label}>{choice.label}</option>,
+=======
+              <option key={i + 1} value={choice.label}>
+                {choice.label}
+              </option>,
+>>>>>>> Fix validation and errors
             );
             children = [
               <option key={0} value="">
@@ -176,13 +189,17 @@ export const RegistrationForm = React.createClass({
           name="charte"
           component={renderComponent}
           type="checkbox"
-          label={
+          children={
             <FormattedHTMLMessage
               message={this.getIntlMessage('registration.charte')}
-              link={<a className="external-link" href={cguLink}>{cguName}</a>}
+              link={
+                <a className="external-link" href={cguLink}>
+                  {cguName}
+                </a>
+              }
             />
           }
-          labelClassName="h5"
+          // labelClassName="h5"
         />
         {addCaptchaField &&
           <Field
