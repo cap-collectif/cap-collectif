@@ -146,16 +146,17 @@ export default class ReactBootstrapInput extends Component {
       props.componentClass = type;
     }
 
-    const formControl =
-      (children && React.cloneElement(children, props)) ||
+    const formControl = (
       <FormControl
         ref={c => {
           this.refFormControl = c;
         }}
         type={props.componentClass ? undefined : type}
         value={value}
-        {...props}
-      />;
+        {...props}>
+        {children}
+      </FormControl>
+    );
 
     const getFormControlWrapped = className =>
       className || hasFeedback || help
