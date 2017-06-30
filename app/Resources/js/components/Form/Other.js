@@ -1,4 +1,6 @@
+// @flow
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import Input from './Input';
@@ -19,13 +21,17 @@ const Other = React.createClass({
   },
 
   componentDidUpdate() {
-    this.textField.refs.input.addEventListener('blur', (event) => {
-      if (event.target.value === '') {
-        this.setState({
-          checked: false,
-        });
-      }
-    }, true);
+    ReactDOM.findDOMNode(this.textField.refFormControl).addEventListener(
+      'blur',
+      event => {
+        if (event.target.value === '') {
+          this.setState({
+            checked: false,
+          });
+        }
+      },
+      true,
+    );
   },
 
   onType(e) {
@@ -39,9 +45,9 @@ const Other = React.createClass({
 
   onCheckUncheck(e) {
     if (e.target.checked) {
-      this.textField.refs.input.focus();
+      ReactDOM.findDOMNode(this.textField.refFormControl).focus();
     } else {
-      this.textField.refs.input.value = '';
+      ReactDOM.findDOMNode(this.textField.refFormControl).value = '';
       this.setState({
         value: '',
       });
@@ -57,12 +63,11 @@ const Other = React.createClass({
       value: '',
       checked: false,
     });
-    this.textField.refs.input.value = '';
+    ReactDOM.findDOMNode(this.textField.refFormControl).value = '';
   },
 
   render() {
-    const { disabled } = this.props;
-    const field = this.props.field;
+    const { disabled, field } = this.props;
     const fieldName = `choices-for-field-${field.id}`;
 
     return (
@@ -72,16 +77,16 @@ const Other = React.createClass({
             id={`reply-${field.id}_choice-other--check`}
             name={fieldName}
             type={this.props.field.type}
-            label={this.getIntlMessage('reply.other')}
             checked={this.state.checked}
             onChange={this.onCheckUncheck}
-            disabled={disabled}
-          />
+            disabled={disabled}>
+            {this.getIntlMessage('reply.other')}
+          </Input>
         </Col>
         <Col xs={10} md={11}>
           <Input
             id={`reply-${field.id}_choice-other--field`}
-            ref={c => this.textField = c}
+            ref={c => (this.textField = c)}
             type="text"
             bsSize="small"
             onChange={this.onType}
@@ -92,7 +97,6 @@ const Other = React.createClass({
       </Row>
     );
   },
-
 });
 
 export default Other;

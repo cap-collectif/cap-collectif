@@ -12,6 +12,7 @@ import {
   Checkbox,
   OverlayTrigger,
   Popover,
+  Radio,
 } from 'react-bootstrap';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
@@ -171,6 +172,14 @@ export default class ReactBootstrapInput extends Component {
         <Checkbox value={value} {...props}>
           {children}
         </Checkbox>
+      );
+    }
+
+    if (type === 'radio') {
+      formControl = (
+        <Radio value={value} {...props}>
+          {children}
+        </Radio>
       );
     }
 
