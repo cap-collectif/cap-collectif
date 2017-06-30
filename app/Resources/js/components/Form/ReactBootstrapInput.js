@@ -8,6 +8,7 @@ import {
   FormControl,
   HelpBlock,
   InputGroup,
+  Thumbnail,
   Checkbox,
   OverlayTrigger,
   Popover,
@@ -16,6 +17,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
+import EmailInput from './EmailInput';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -106,6 +108,7 @@ export default class ReactBootstrapInput extends Component {
     value,
     type,
     errors,
+    image,
     ...props
   }) {
     if (type === 'editor') {
@@ -171,11 +174,15 @@ export default class ReactBootstrapInput extends Component {
       );
     }
 
+    if (type === 'email') {
+      formControl = <EmailInput value={value} {...props} />;
+    }
+
     const getFormControlWrapped = className =>
       className || hasFeedback || help
         ? <div className={className}>
             {formControl}
-            {hasFeedback && <FormControl.Feedback />}
+            {/* {hasFeedback && <FormControl.Feedback />} */}
             {help &&
               <HelpBlock>
                 {help}
@@ -200,6 +207,15 @@ export default class ReactBootstrapInput extends Component {
         </OverlayTrigger>
       );
     }
+
+    if (image) {
+      return (
+        <Thumbnail src={image} style={{ textAlign: 'center' }}>
+          {getFormControlWrapped(wrapperClassName)}
+        </Thumbnail>
+      );
+    }
+
     if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter) {
       return getFormControlWrapped(wrapperClassName);
     }
