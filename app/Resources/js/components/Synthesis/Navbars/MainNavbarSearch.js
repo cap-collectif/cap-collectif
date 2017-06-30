@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { Navbar, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import Input from '../../Form/ReactBootstrapInput';
+import Input from '../../Form/Input';
 
 const MainNavbarSearch = React.createClass({
   displayName: 'MainNavbarSearch',

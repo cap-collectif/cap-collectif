@@ -30,6 +30,10 @@ exports[`<MainNavbarSearch /> should render a search form 1`] = `
           />
         </Button>
       }
+      errors={null}
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
       placeholder="Rechercher"
       type="text"
       valueLink={
