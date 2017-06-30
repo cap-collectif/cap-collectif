@@ -155,12 +155,19 @@ export const reducer = (
       let index = 0;
       const actionVote = action.vote;
       if (actionVote.private) {
-        index = idea.votes.indexOf(findLast(idea.votes, v => v.private));
+        const vote = findLast(idea.votes, v => v.private);
+        if (vote) {
+          index = idea.votes.indexOf(vote);
+        }
       } else if (actionVote.user != null) {
         const user = actionVote.user;
-        index = idea.votes.indexOf(
-          find(idea.votes, v => v.user && v.user.uniqId === user.uniqId),
+        const vote = find(
+          idea.votes,
+          v => v.user && v.user.uniqId === user.uniqId,
         );
+        if (vote) {
+          index = idea.votes.indexOf(vote);
+        }
       }
       const ideas = {
         [action.ideaId]: {

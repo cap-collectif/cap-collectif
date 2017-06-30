@@ -43,6 +43,7 @@ const IdeasListSearch = React.createClass({
         <Input
           id="idea-search-input"
           type="text"
+          // $FlowFixMe
           ref={c => (this._input = c)}
           placeholder={this.getIntlMessage('idea.search')}
           buttonAfter={button}

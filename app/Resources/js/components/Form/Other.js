@@ -21,17 +21,20 @@ const Other = React.createClass({
   },
 
   componentDidUpdate() {
-    ReactDOM.findDOMNode(this.textField.refFormControl).addEventListener(
-      'blur',
-      event => {
-        if (event.target.value === '') {
-          this.setState({
-            checked: false,
-          });
-        }
-      },
-      true,
-    );
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
+    if (input instanceof HTMLInputElement) {
+      input.addEventListener(
+        'blur',
+        (event: FocusEvent) => {
+          if (event.target.value === '') {
+            this.setState({
+              checked: false,
+            });
+          }
+        },
+        true,
+      );
+    }
   },
 
   onType(e) {
@@ -44,15 +47,17 @@ const Other = React.createClass({
   },
 
   onCheckUncheck(e) {
-    if (e.target.checked) {
-      ReactDOM.findDOMNode(this.textField.refFormControl).focus();
-    } else {
-      ReactDOM.findDOMNode(this.textField.refFormControl).value = '';
-      this.setState({
-        value: '',
-      });
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
+    if (input instanceof HTMLInputElement) {
+      if (e.target.checked) {
+        input.focus();
+      } else {
+        input.value = '';
+        this.setState({
+          value: '',
+        });
+      }
     }
-
     this.setState({
       checked: e.target.checked,
     });
@@ -63,7 +68,10 @@ const Other = React.createClass({
       value: '',
       checked: false,
     });
-    ReactDOM.findDOMNode(this.textField.refFormControl).value = '';
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
+    if (input instanceof HTMLInputElement) {
+      input.value = '';
+    }
   },
 
   render() {
@@ -86,6 +94,7 @@ const Other = React.createClass({
         <Col xs={10} md={11}>
           <Input
             id={`reply-${field.id}_choice-other--field`}
+            // $FlowFixMe
             ref={c => (this.textField = c)}
             type="text"
             bsSize="small"

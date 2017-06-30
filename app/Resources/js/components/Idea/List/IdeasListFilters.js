@@ -8,7 +8,7 @@ import IdeaStore from '../../../stores/IdeaStore';
 import IdeasListSearch from './IdeasListSearch';
 import Input from '../../Form/Input';
 import IdeaCreate from '../Create/IdeaCreate';
-import { State } from '../../../types';
+import type { State } from '../../../types';
 
 export const IdeasListFilters = React.createClass({
   propTypes: {

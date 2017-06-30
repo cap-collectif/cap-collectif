@@ -23,7 +23,7 @@
   },
   "pre-commit": "precommit",
   "lint-staged": {
-    "*.js": [
+    "app/Resources/js/**/*.js": [
       "eslint --fix",
       "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
       "git add"
@@ -140,12 +140,12 @@
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-prettier": "^1.7.0",
-    "eslint-plugin-flowtype": "^2.32.1",
+    "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jest": "^19.0.1",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.48.0",
+    "flow-bin": "^0.49.1",
     "flow-coverage-report": "^0.3.0",
     "jest": "^20.0.4",
     "jest-serializer-enzyme": "^1.0.0",

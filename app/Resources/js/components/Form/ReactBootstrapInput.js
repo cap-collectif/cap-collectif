@@ -46,6 +46,7 @@ const acceptedMimeTypes = [
 ];
 
 export default class ReactBootstrapInput extends Component {
+  // $FlowFixMe
   constructor(props, context) {
     super(props, context);
     this.refFormControl = null;
@@ -56,29 +57,33 @@ export default class ReactBootstrapInput extends Component {
   getValue = () => {
     const inputNode = this.getDOMNode();
 
-    if (this.props.type === 'select' && inputNode.multiple) {
-      return this.getMultipleSelectValues(inputNode);
-    }
+    // if (this.props.type === 'select' && inputNode.multiple) {
+    //   return this.getMultipleSelectValues(inputNode);
+    // }
 
-    return inputNode.value;
+    if (inputNode instanceof HTMLInputElement) {
+      return inputNode.value;
+    }
   };
 
-  getMultipleSelectValues(selectNode) {
-    const values = [];
-    const options = selectNode.options;
+  refFormControl: ?Element;
 
-    for (let i = 0; i < options.length; i++) {
-      const opt = options[i];
+  // getMultipleSelectValues(selectNode) {
+  //   const values = [];
+  //   const options = selectNode.options;
+  //
+  //   for (let i = 0; i < options.length; i++) {
+  //     const opt = options[i];
+  //
+  //     if (opt.selected) {
+  //       values.push(opt.value || opt.text);
+  //     }
+  //   }
+  //
+  //   return values;
+  // }
 
-      if (opt.selected) {
-        values.push(opt.value || opt.text);
-      }
-    }
-
-    return values;
-  }
-
-  renderAddon(addon) {
+  renderAddon(addon: ?string) {
     return (
       addon &&
       <InputGroup.Addon>
@@ -87,7 +92,7 @@ export default class ReactBootstrapInput extends Component {
     );
   }
 
-  renderButton(button) {
+  renderButton(button: ?string) {
     return (
       button &&
       <InputGroup.Button>
@@ -111,7 +116,7 @@ export default class ReactBootstrapInput extends Component {
     errors,
     image,
     ...props
-  }) {
+  }: Object) {
     if (type === 'editor') {
       return <Editor value={value} {...props} />;
     }
