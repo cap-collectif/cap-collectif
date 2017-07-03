@@ -26,6 +26,7 @@ const Field = React.createClass({
       'email',
     ]).isRequired,
     label: PropTypes.string,
+    disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     children: PropTypes.any,
     id: PropTypes.string.isRequired,
@@ -52,6 +53,7 @@ const Field = React.createClass({
       divClassName,
       wrapperClassName,
       labelClassName,
+      disabled,
       help,
     } = this.props;
     const { autoFocus, name } = this.props.input;
@@ -62,6 +64,7 @@ const Field = React.createClass({
         type={type}
         name={name}
         help={help}
+        disabled={disabled}
         popover={popover}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
