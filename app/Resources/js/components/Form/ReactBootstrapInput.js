@@ -115,6 +115,7 @@ export default class ReactBootstrapInput extends Component {
     type,
     errors,
     image,
+    medias,
     ...props
   }: Object) {
     if (type === 'editor') {
@@ -149,7 +150,7 @@ export default class ReactBootstrapInput extends Component {
           valueLink={props.valueLink}
           accept={acceptedMimeTypes.join()}
           maxSize={26214400}
-          files={props.medias}
+          files={medias}
           disablePreview
           multiple
         />

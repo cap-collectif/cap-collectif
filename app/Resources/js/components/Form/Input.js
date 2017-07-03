@@ -4,17 +4,24 @@ import autosize from 'autosize';
 import ReactBootstrapInput from './ReactBootstrapInput';
 
 export default class Input extends ReactBootstrapInput {
+  componentDidMount() {
+    const { type } = this.props;
+    if (type === 'textarea') {
+      autosize(this.getDOMNode());
+    }
+  }
+
   componentDidUpdate() {
     const { type } = this.props;
     if (type === 'textarea') {
-      autosize(this.getInputDOMNode());
+      autosize(this.getDOMNode());
     }
   }
 
   componentWillUnmount() {
     const { type } = this.props;
     if (type === 'textarea') {
-      autosize.destroy(this.getInputDOMNode());
+      autosize.destroy(this.getDOMNode());
     }
   }
 }

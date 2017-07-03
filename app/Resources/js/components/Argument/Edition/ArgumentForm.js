@@ -46,11 +46,9 @@ const ArgumentForm = React.createClass({
         data.type = argument.type;
         delete data.confirm;
 
-        return ArgumentActions
-          .update(opinion, argument.id, data)
+        return ArgumentActions.update(opinion, argument.id, data)
           .then(onSubmitSuccess)
-          .catch(onSubmitFailure)
-        ;
+          .catch(onSubmitFailure);
       }
 
       onValidationFailure();
@@ -69,12 +67,7 @@ const ArgumentForm = React.createClass({
   },
 
   renderFormErrors(field) {
-    return (
-      <FlashMessages
-        errors={this.getErrorsMessages(field)}
-        form
-      />
-    );
+    return <FlashMessages errors={this.getErrorsMessages(field)} form />;
   },
 
   render() {
@@ -86,8 +79,7 @@ const ArgumentForm = React.createClass({
             ref="check"
             id="argument-confirm"
             checkedLink={this.linkState('form.confirm')}
-            label={this.getIntlMessage('argument.edit.confirm')}
-            labelClassName=""
+            children={this.getIntlMessage('argument.edit.confirm')}
             groupClassName={this.getGroupStyle('confirm')}
             errors={this.renderFormErrors('confirm')}
           />
@@ -95,6 +87,7 @@ const ArgumentForm = React.createClass({
         <Input
           id="argument-body"
           type="textarea"
+          rows={2}
           valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('argument.edit.body')}
           groupClassName={this.getGroupStyle('body')}
@@ -103,7 +96,6 @@ const ArgumentForm = React.createClass({
       </form>
     );
   },
-
 });
 
 export default ArgumentForm;

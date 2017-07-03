@@ -92,7 +92,7 @@ const ProjectListFilter = React.createClass({
           </option>
           {projectTypes.map(projectType => {
             return (
-              <option value={projectType.slug}>
+              <option key={projectType.slug} value={projectType.slug}>
                 {this.getIntlMessage(projectType.title)}
               </option>
             );
@@ -117,7 +117,7 @@ const ProjectListFilter = React.createClass({
           </option>
           {themes.map(theme => {
             return (
-              <option value={theme.slug}>
+              <option key={theme.slug} value={theme.slug}>
                 {theme.title}
               </option>
             );
