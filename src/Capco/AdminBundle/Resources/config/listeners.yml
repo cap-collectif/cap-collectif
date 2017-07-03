@@ -48,6 +48,7 @@ services:
     tags:
         - { name: overblog_graphql.resolver, alias: "user", method: "resolve" }
         - { name: overblog_graphql.resolver, alias: "user_email", method: "resolveEmail" }
+        - { name: overblog_graphql.resolver, alias: "user_url", method: "resolveUrl" }
         - { name: overblog_graphql.resolver, alias: "user_createdAt", method: "resolveCreatedAt" }
         - { name: overblog_graphql.resolver, alias: "user_updatedAt", method: "resolveUpdatedAt" }
         - { name: overblog_graphql.resolver, alias: "user_lastLogin", method: "resolveLastLogin" }

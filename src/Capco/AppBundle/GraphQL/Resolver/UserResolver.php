@@ -46,6 +46,17 @@ class UserResolver implements ContainerAwareInterface
         return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
     }
 
+    public function resolveUrl(User $user)
+    {
+        $manager = $this->container->get('capco.toggle.manager');
+        $router = $this->container->get('router');
+        if ($manager->isActive('profiles')) {
+            return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], true);
+        }
+
+        return null;
+    }
+
     public function resolveUpdatedAt($object): string
     {
         return $object->getUpdatedAt() ? $object->getUpdatedAt()->format(\DateTime::ATOM) : '';
