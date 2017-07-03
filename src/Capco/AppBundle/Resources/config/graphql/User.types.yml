@@ -73,9 +73,6 @@ User:
                 type: "String"
             phone:
                 type: "String"
-            profileUrl:
-                type: "String"
-                resolve: "@=resolver('user_profileUrl', [value])"
             googleId:
                 type: "String"
             facebookId:
