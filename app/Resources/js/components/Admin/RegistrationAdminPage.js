@@ -8,7 +8,12 @@ import Toggle from 'react-toggle';
 import { arrayMove } from 'react-sortable-hoc';
 import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import { reorderRegistrationQuestions } from '../../redux/modules/user';
-import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
+import type {
+  State,
+  Dispatch,
+  FeatureToggle,
+  FeatureToggles,
+} from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
@@ -19,7 +24,7 @@ type Props = {
   addNewField: () => void,
   isSuperAdmin: boolean,
   reorder: (list: Array<Object>) => void,
-  dynamicFields: Array<Object>
+  dynamicFields: Array<Object>,
 };
 
 export const RegistrationAdminPage = React.createClass({
@@ -34,7 +39,14 @@ export const RegistrationAdminPage = React.createClass({
   mixins: [IntlMixin],
 
   render() {
-    const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
+    const {
+      reorder,
+      isSuperAdmin,
+      onToggle,
+      addNewField,
+      features,
+      dynamicFields,
+    } = this.props;
     return (
       <div style={{ margin: '0 15px' }}>
         <div className="row" style={{ padding: '10px 0' }}>
@@ -52,7 +64,8 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.login_facebook}
-              onChange={() => onToggle('login_facebook', !features.login_facebook)}
+              onChange={() =>
+                onToggle('login_facebook', !features.login_facebook)}
             />
           </Col>
           <Col xs={11}>Facebook</Col>
@@ -71,15 +84,17 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.restrict_registration_via_email_domain}
-              onChange={() => onToggle('restrict_registration_via_email_domain', !features.restrict_registration_via_email_domain)}
+              onChange={() =>
+                onToggle(
+                  'restrict_registration_via_email_domain',
+                  !features.restrict_registration_via_email_domain,
+                )}
             />
           </Col>
           <Col xs={11}>Limiter l'inscription à certains noms de domaine</Col>
         </div>
-        {
-          features.restrict_registration_via_email_domain &&
-            <RegistrationEmailDomainsForm />
-        }
+        {features.restrict_registration_via_email_domain &&
+          <RegistrationEmailDomainsForm />}
         <h2>Données recueillies</h2>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
@@ -97,7 +112,8 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.zipcode_at_register}
-              onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
+              onChange={() =>
+                onToggle('zipcode_at_register', !features.zipcode_at_register)}
             />
           </Col>
           <Col xs={11}>Code postal</Col>
@@ -113,33 +129,43 @@ export const RegistrationAdminPage = React.createClass({
         </div>
         <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
           <p style={{ marginTop: 10 }}>
-            {
-              !isSuperAdmin &&
-                <Alert bsStyle="info">Cette section est modifiable uniquement par votre administrateur cap-collectif.</Alert>
-            }
+            {!isSuperAdmin &&
+              <Alert bsStyle="info">
+                Cette section est modifiable uniquement par votre administrateur
+                cap-collectif.
+              </Alert>}
             <strong>Champ(s) supplémentaire(s)</strong>
           </p>
-          {
-            dynamicFields.length > 0 &&
-              <RegistrationQuestionSortableList
-                items={dynamicFields}
-                onSortEnd={({ oldIndex, newIndex }) => {
-                  reorder(arrayMove(dynamicFields, oldIndex, newIndex));
-                }}
-                lockAxis="y"
-                useDragHandle
-              />
-          }
+          {dynamicFields.length > 0 &&
+            <RegistrationQuestionSortableList
+              items={dynamicFields}
+              onSortEnd={({ oldIndex, newIndex }) => {
+                reorder(arrayMove(dynamicFields, oldIndex, newIndex));
+              }}
+              lockAxis="y"
+              useDragHandle
+            />}
           <Button
             disabled={!isSuperAdmin}
             style={{ marginBottom: 10 }}
-            onClick={!isSuperAdmin ? null : () => { addNewField(); }}
-          >
+            onClick={
+              !isSuperAdmin
+                ? null
+                : () => {
+                    addNewField();
+                  }
+            }>
             Ajouter
           </Button>
         </Well>
         <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}><Toggle checked disabled /></Col>
+          <Col xs={1}>
+            <Toggle
+              disabled={!isSuperAdmin}
+              checked={features.captcha}
+              onChange={() => onToggle('captcha', !features.captcha)}
+            />
+          </Col>
           <Col xs={11}>Je ne suis pas un robot</Col>
         </div>
         <h2>Communication</h2>
@@ -147,12 +173,13 @@ export const RegistrationAdminPage = React.createClass({
       </div>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isSuperAdmin: !!(
+    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
+  ),
   dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -167,5 +194,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<{}, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 export default connector(RegistrationAdminPage);

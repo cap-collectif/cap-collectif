@@ -65,7 +65,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         zipCode
         city
         phone
-        url
+        profileUrl
         googleId
         facebookId
         samlId

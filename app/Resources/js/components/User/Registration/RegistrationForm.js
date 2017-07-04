@@ -24,7 +24,11 @@ export const validate = (values, props) => {
   if (!values.charte) {
     errors.charte = 'registration.constraints.charte.check';
   }
-  if (!values.captcha && (window && window.location.host !== 'capco.test')) {
+  if (
+    !values.captcha &&
+    props.addCaptchaField &&
+    (window && window.location.host !== 'capco.test')
+  ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
   for (const field of props.dynamicFields) {
@@ -40,6 +44,7 @@ export const RegistrationForm = React.createClass({
   propTypes: {
     addUserTypeField: PropTypes.bool.isRequired,
     addZipcodeField: PropTypes.bool.isRequired,
+    addCaptchaField: PropTypes.bool.isRequired,
     userTypes: PropTypes.array.isRequired,
     cguLink: PropTypes.string.isRequired,
     cguName: PropTypes.string.isRequired,
@@ -57,7 +62,8 @@ export const RegistrationForm = React.createClass({
       addUserTypeField,
       userTypes,
       handleSubmit,
-     } = this.props;
+      addCaptchaField,
+    } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <Field
@@ -92,69 +98,79 @@ export const RegistrationForm = React.createClass({
             message: this.getIntlMessage('registration.tooltip.password'),
           }}
         />
-        {
-          addUserTypeField &&
-            <Field
-              id="user_type"
-              name="userType"
-              component={renderComponent}
-              type="select"
-              label={
-                <span>
-                  {this.getIntlMessage('registration.type')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
+        {addUserTypeField &&
+          <Field
+            id="user_type"
+            name="userType"
+            component={renderComponent}
+            type="select"
+            label={
+              <span>
+                {this.getIntlMessage('registration.type')}{' '}
+                <span className="excerpt">
+                  {this.getIntlMessage('global.form.optional')}
                 </span>
-              }
-              labelClassName="h5"
-            >
-              <option value="">{this.getIntlMessage('registration.select.type')}</option>
-              {
-                userTypes.map((type, i) => (<option key={i + 1} value={type.id}>{type.name}</option>))
-              }
-            </Field>
-        }
-        {
-          addZipcodeField &&
-            <Field
-              id="zipcode"
-              name="zipcode"
-              component={renderComponent}
-              type="text"
-              label={
-                <span>
-                  {this.getIntlMessage('registration.zipcode')} <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                </span>
-              }
-              labelClassName="h5"
-              autoComplete="postal-code"
-            />
-        }
-        {
-          dynamicFields.map((field, key) => {
-            let children;
-            if (field.choices) {
-              const choices = field.choices.map((choice, i) => <option key={i + 1} value={choice.label}>{choice.label}</option>);
-              children = [<option key={0} value="">{ this.getIntlMessage('global.select') }</option>, ...choices];
+              </span>
             }
-            return (
-              <Field
-                id={`dynamic-${field.id}`}
-                key={key}
-                name={`dynamic-${field.id}`}
-                component={renderComponent}
-                type={field.type}
-                label={
-                  <span>
-                    {field.question} {
-                      !field.required && <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
-                    }
-                  </span>
-                }
-                labelClassName="h5"
-                children={children}
-              />
+            labelClassName="h5">
+            <option value="">
+              {this.getIntlMessage('registration.select.type')}
+            </option>
+            {userTypes.map((type, i) =>
+              <option key={i + 1} value={type.id}>{type.name}</option>,
+            )}
+          </Field>}
+        {addZipcodeField &&
+          <Field
+            id="zipcode"
+            name="zipcode"
+            component={renderComponent}
+            type="text"
+            label={
+              <span>
+                {this.getIntlMessage('registration.zipcode')}{' '}
+                <span className="excerpt">
+                  {this.getIntlMessage('global.form.optional')}
+                </span>
+              </span>
+            }
+            labelClassName="h5"
+            autoComplete="postal-code"
+          />}
+        {dynamicFields.map((field, key) => {
+          let children;
+          if (field.choices) {
+            const choices = field.choices.map((choice, i) =>
+              <option key={i + 1} value={choice.label}>{choice.label}</option>,
             );
-          })
-        }
+            children = [
+              <option key={0} value="">
+                {this.getIntlMessage('global.select')}
+              </option>,
+              ...choices,
+            ];
+          }
+          return (
+            <Field
+              id={`dynamic-${field.id}`}
+              key={key}
+              name={`dynamic-${field.id}`}
+              component={renderComponent}
+              type={field.type}
+              label={
+                <span>
+                  {field.question}{' '}
+                  {!field.required &&
+                    <span className="excerpt">
+                      {this.getIntlMessage('global.form.optional')}
+                    </span>}
+                </span>
+              }
+              labelClassName="h5"
+              children={children}
+            />
+          );
+        })}
         <Field
           id="charte"
           name="charte"
@@ -168,18 +184,20 @@ export const RegistrationForm = React.createClass({
           }
           labelClassName="h5"
         />
-        <Field
-          id="captcha"
-          component={renderComponent}
-          name="captcha"
-          type="captcha"
-        />
+        {addCaptchaField &&
+          <Field
+            id="captcha"
+            component={renderComponent}
+            name="captcha"
+            type="captcha"
+          />}
       </form>
     );
   },
 });
 
 const mapStateToProps = (state: State) => ({
+  addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
   userTypes: state.default.userTypes,
@@ -189,8 +207,10 @@ const mapStateToProps = (state: State) => ({
 });
 
 const connector = connect(mapStateToProps);
-export default connector(reduxForm({
-  form,
-  validate,
-  onSubmit,
-})(RegistrationForm));
+export default connector(
+  reduxForm({
+    form,
+    validate,
+    onSubmit,
+  })(RegistrationForm),
+);

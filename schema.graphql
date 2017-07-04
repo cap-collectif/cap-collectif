@@ -536,9 +536,6 @@ type User {
   # Username of the user.
   username: String!
 
-  # URL to user profile, null if the feature profiles is disabled.
-  url: String
-
   # Identifies the date and time when the object was created.
   createdAt: String!
 
@@ -565,6 +562,7 @@ type User {
   zipCode: String
   city: String
   phone: String
+  profileUrl: String
   googleId: String
   facebookId: String
   samlId: String

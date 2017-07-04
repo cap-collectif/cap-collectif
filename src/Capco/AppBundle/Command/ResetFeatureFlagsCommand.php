@@ -33,6 +33,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('blog');
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
+        $toggleManager->activate('captcha');
         $toggleManager->activate('ideas');
         $toggleManager->activate('versions');
         $toggleManager->activate('idea_creation');

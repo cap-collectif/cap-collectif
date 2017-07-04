@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -47,17 +46,6 @@ class UserResolver implements ContainerAwareInterface
         return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
     }
 
-    public function resolveUrl(User $user)
-    {
-        $manager = $this->container->get('capco.toggle.manager');
-        $router = $this->container->get('router');
-        if ($manager->isActive('profiles')) {
-            return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
-        }
-
-        return null;
-    }
-
     public function resolveUpdatedAt($object): string
     {
         return $object->getUpdatedAt() ? $object->getUpdatedAt()->format(\DateTime::ATOM) : '';
@@ -76,6 +64,17 @@ class UserResolver implements ContainerAwareInterface
     public function resolveLastLogin($object): string
     {
         return $object->getLastLogin() ? $object->getLastLogin()->format(\DateTime::ATOM) : '';
+    }
+
+    public function resolveProfileUrl($object): string
+    {
+        return $object->getSlug()
+            ? $this->container->get('router')->generate(
+                'capco_user_profile_show_all',
+                ['slug' => $object->getSlug()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
+            : '';
     }
 
     public function resolveType($object): string

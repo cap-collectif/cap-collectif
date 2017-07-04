@@ -14,6 +14,7 @@ class Manager
         'blog',
         'calendar',
         'ideas',
+        'captcha',
         'idea_creation',
         'idea_trash',
         'login_facebook',
