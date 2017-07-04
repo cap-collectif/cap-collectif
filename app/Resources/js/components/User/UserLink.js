@@ -16,7 +16,7 @@ export default class UserLink extends Component {
     if (userUrl) {
       return (
         <a className={className} href={userUrl}>
-          <strong style={{ color: '#666' }}>{username}</strong>
+          <span style={{ color: '#666' }}>{username}</span>
         </a>
       );
     }
