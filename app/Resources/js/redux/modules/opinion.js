@@ -18,6 +18,14 @@ import type {
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
+
+type ShowArgumentEditModalAction = {
+  type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
+  id: Uuid,
+};
+type HideArgumentEditModalAction = {
+  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
+};
 type StartEditOpinionVersionAction = {
   type: 'opinion/START_EDIT_OPINION_VERSION',
 };
@@ -87,6 +95,8 @@ export type OpinionAction =
       opinionId: Uuid,
     }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
+  | HideArgumentEditModalAction
+  | ShowArgumentEditModalAction
   | StartEditOpinionVersionAction
   | CancelEditOpinionVersionAction
   | ShowOpinionVersionEditModalAction
@@ -122,6 +132,7 @@ export type State = {
   +isEditingOpinionVersion: boolean,
   +showOpinionCreateModal: ?Uuid,
   +showOpinionEditModal: ?Uuid,
+  +showArgumentEditModal: ?Uuid,
   +showOpinionVersionEditModal: boolean,
   +isCreatingOpinionVersion: boolean,
   +showOpinionVersionCreateModal: boolean,
@@ -146,12 +157,24 @@ const initialState: State = {
   currentVersionId: null,
   versionsById: {},
   isEditingOpinionVersion: false,
+  showArgumentEditModal: null,
   showOpinionCreateModal: null,
   showOpinionEditModal: null,
   showOpinionVersionEditModal: false,
   isCreatingOpinionVersion: false,
   showOpinionVersionCreateModal: false,
 };
+
+export const openArgumentEditModal = (
+  id: Uuid,
+): ShowArgumentEditModalAction => ({
+  type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
+  id,
+});
+
+export const closeArgumentEditModal = (): HideArgumentEditModalAction => ({
+  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
+});
 
 const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({
   type: 'opinion/START_CREATE_OPINION_VERSION',
@@ -492,6 +515,12 @@ export const reducer = (
   action: Action,
 ): Exact<State> => {
   switch (action.type) {
+    case 'opinion/SHOW_ARGUMENT_EDIT_MODAL': {
+      return { ...state, showArgumentEditModal: action.id };
+    }
+    case 'opinion/HIDE_ARGUMENT_EDIT_MODAL': {
+      return { ...state, showArgumentEditModal: null };
+    }
     case 'opinion/START_CREATE_OPINION_VERSION': {
       return { ...state, isCreatingOpinionVersion: true };
     }

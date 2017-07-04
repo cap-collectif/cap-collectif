@@ -248,7 +248,7 @@ export default class ReactBootstrapInput extends Component {
 
   render() {
     const {
-      id,
+      // id,
       label,
       bsSize,
       groupClassName,
@@ -260,7 +260,7 @@ export default class ReactBootstrapInput extends Component {
 
     return (
       <FormGroup
-        controlId={id}
+        // controlId={id}
         bsSize={bsSize}
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
