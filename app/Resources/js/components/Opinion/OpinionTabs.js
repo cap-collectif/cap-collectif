@@ -173,8 +173,7 @@ const OpinionTabs = React.createClass({
       return (
         <Tab.Container
           id="opinion-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}
-          animation={false}>
+          defaultActiveKey={this.getDefaultKey()}>
           <div>
             <Nav bsStyle="tabs">
               {this.isVersionable() &&

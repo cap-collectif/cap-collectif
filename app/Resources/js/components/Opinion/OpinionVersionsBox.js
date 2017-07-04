@@ -11,7 +11,7 @@ import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 
 const OpinionVersionsBox = React.createClass({
   propTypes: {
-    opinionId: React.PropTypes.number.isRequired,
+    opinionId: React.PropTypes.string.isRequired,
     opinionBody: React.PropTypes.string.isRequired,
   },
   mixins: [IntlMixin],

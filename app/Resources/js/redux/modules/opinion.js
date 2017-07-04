@@ -515,6 +515,8 @@ export const reducer = (
   action: Action,
 ): Exact<State> => {
   switch (action.type) {
+    case '@@INIT':
+      return { ...initialState, ...state };
     case 'opinion/SHOW_ARGUMENT_EDIT_MODAL': {
       return { ...state, showArgumentEditModal: action.id };
     }

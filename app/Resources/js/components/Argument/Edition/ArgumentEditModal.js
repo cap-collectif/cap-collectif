@@ -13,14 +13,13 @@ const ArgumentEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     argument: PropTypes.object,
-    onClose: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
   render() {
-    const { argument, onClose, show, dispatch, submitting } = this.props;
+    const { argument, show, dispatch, submitting } = this.props;
     return (
       <Modal
         animation={false}
@@ -39,7 +38,11 @@ const ArgumentEditModal = React.createClass({
           <ArgumentForm argument={argument} />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton
+            onClose={() => {
+              dispatch(closeArgumentEditModal());
+            }}
+          />
           <SubmitButton
             id="confirm-argument-update"
             label="global.edit"
