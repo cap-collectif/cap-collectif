@@ -4,9 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Steps\ConsultationStepType;
-use Capco\UserBundle\Entity\User;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
-    private $opinionTypes = [];
     private $filePath;
 
     protected function configure()
@@ -53,13 +50,13 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         $this->import($input, $output);
     }
 
-    protected function import(InputInterface $input, OutputInterface $output)
+    protected function import(InputInterface $input, OutputInterface $output): int
     {
         $this->filePath = $input->getArgument('filePath');
         $userEmail = $input->getArgument('user');
         $consultationStepSlug = $input->getArgument('step');
 
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getContainer()->get('doctrine')->getManager();
 
         $user = $this
             ->getContainer()
@@ -185,8 +182,6 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setIsTrashed(false);
             ++$i;
 
-            $content = $opinion->setBody('<p>' . nl2br(htmlspecialchars($row['contenu'])) . '</p>');
-
             $em->persist($opinion);
 
             if (array_key_exists('contexte', $row)) {
@@ -216,7 +211,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 }
                 $appendix->setBody('<p>' . nl2br(htmlspecialchars($row['contexte'])) . '</p>');
             }
-            $progress->advance(1);
+            $progress->advance();
         }
 
         $em->flush();
@@ -227,12 +222,14 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             . count($opinions) .
             ' opinions successfully created.</info>'
         );
+
+        return 0;
     }
 
-    protected function getOpinions()
+    protected function getOpinions(): array
     {
-        return $this->getContainer()
-                    ->get('import.csvtoarray')
-                    ->convert($this->filePath);
+        return Reader::createFromPath($this->filePath)
+            ->setDelimiter(';')
+            ->fetchAll();
     }
 }
