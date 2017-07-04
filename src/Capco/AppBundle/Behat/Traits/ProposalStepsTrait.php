@@ -811,6 +811,18 @@ trait ProposalStepsTrait
         $this->iWait(1);
     }
 
+    /**
+     * @Then I should retrieve my documents in database
+     */
+    public function iShouldRetrieveMyDocumentsInDatabase()
+    {
+        $illustration = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'image.jpg']);
+        $document = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'document.pdf']);
+
+        \PHPUnit_Framework_Assert::assertNotNull($illustration);
+        \PHPUnit_Framework_Assert::assertNotNull($document);
+    }
+
     protected function openCollectStepIsOpen()
     {
         return $this->navigationContext

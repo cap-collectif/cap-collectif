@@ -55,13 +55,16 @@ const ImageUpload = React.createClass({
     files = files.filter(file => file !== null);
     if (files.length > 0 && files.length <= 5 && this.state.files.length <= 5) {
       files = files.concat(this.state.files);
-      this.setState({
-        delete: false,
-        files,
-      }, () => {
-        this.uncheckDelete();
-        valueLink.requestChange(multiple ? files : files[0]);
-      });
+      this.setState(
+        {
+          delete: false,
+          files,
+        },
+        () => {
+          this.uncheckDelete();
+          valueLink.requestChange(multiple ? files : files[0]);
+        },
+      );
     }
   },
 
@@ -90,7 +93,9 @@ const ImageUpload = React.createClass({
 
   removeMedia(media) {
     this.setState({
-      files: this.state.files.filter((file) => { return file !== media; }),
+      files: this.state.files.filter(file => {
+        return file !== media;
+      }),
     });
   },
 
@@ -120,66 +125,62 @@ const ImageUpload = React.createClass({
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
+            inputProps={{ id: `${id}_field` }}
             disablePreview={disablePreview}
-            className="image-uploader__dropzone--fullwidth"
-          >
+            className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
-              {multiple ? this.getIntlMessage('global.image_uploader.file.dropzone') : this.getIntlMessage('global.image_uploader.image.dropzone')}
+              {multiple
+                ? this.getIntlMessage('global.image_uploader.file.dropzone')
+                : this.getIntlMessage('global.image_uploader.image.dropzone')}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn" bsStyle="primary">
-                  {multiple ? this.getIntlMessage('global.image_uploader.file.btn') : this.getIntlMessage('global.image_uploader.image.btn')}
+                  {multiple
+                    ? this.getIntlMessage('global.image_uploader.file.btn')
+                    : this.getIntlMessage('global.image_uploader.image.btn')}
                 </Button>
               </p>
             </div>
           </Dropzone>
         </Col>
-        {
-          disablePreview &&
-            <Col xs={12} sm={12}>
-              <Row>
-                {
-                  this.state.files.map((file) => {
-                    return (
-                      <Col md={12}>
-                        <Label bsStyle="info" style={{ marginRight: '5px' }}>
-                          {file.name}{ ' ' }
-                          <i
-                            style={{ cursor: 'pointer' }}
-                            className="glyphicon glyphicon-remove"
-                            onClick={this.removeMedia.bind(this, file)}
-                          ></i>
-                        </Label>
-                      </Col>
-                    );
-                  })
-                }
-              </Row>
-            </Col>
-        }
-        {
-          !disablePreview &&
-            <Col xs={12} sm={12}>
-              <p className="h5 text-center">
-                {this.getIntlMessage('global.image_uploader.image.preview')}
-              </p>
-              <div className="image-uploader__preview text-center">
-                {
-                  this.state.preview &&
-                    <img alt="" role="presentation" src={this.state.preview} />
-                }
-              </div>
-              {
-              (this.state.preview || preview) &&
-                <Input
-                  type="checkbox"
-                  name="image-uploader__delete"
-                  onChange={this.onToggleDelete}
-                  ref={c => this._deleteCheckbox = c}
-                  label={this.getIntlMessage('global.image_uploader.image.delete')}
-                />
-            }
-          </Col>
-        }
+        {disablePreview &&
+          <Col xs={12} sm={12}>
+            <Row>
+              {this.state.files.map(file => {
+                return (
+                  <Col md={12}>
+                    <Label bsStyle="info" style={{ marginRight: '5px' }}>
+                      {file.name}{' '}
+                      <i
+                        style={{ cursor: 'pointer' }}
+                        className="glyphicon glyphicon-remove"
+                        onClick={this.removeMedia.bind(this, file)}
+                      />
+                    </Label>
+                  </Col>
+                );
+              })}
+            </Row>
+          </Col>}
+        {!disablePreview &&
+          <Col xs={12} sm={12}>
+            <p className="h5 text-center">
+              {this.getIntlMessage('global.image_uploader.image.preview')}
+            </p>
+            <div className="image-uploader__preview text-center">
+              {this.state.preview &&
+                <img alt="" role="presentation" src={this.state.preview} />}
+            </div>
+            {(this.state.preview || preview) &&
+              <Input
+                type="checkbox"
+                name="image-uploader__delete"
+                onChange={this.onToggleDelete}
+                ref={c => (this._deleteCheckbox = c)}
+                label={this.getIntlMessage(
+                  'global.image_uploader.image.delete',
+                )}
+              />}
+          </Col>}
       </Row>
     );
   },
