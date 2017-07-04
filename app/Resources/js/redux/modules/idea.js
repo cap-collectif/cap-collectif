@@ -45,23 +45,49 @@ type DeleteVoteSucceedAction = {
   ideaId: number,
   vote: Vote,
 };
+type ShowIdeaCreateModalAction = { type: 'idea/SHOW_CREATE_MODAL' };
+type HideIdeaCreateModalAction = { type: 'idea/HIDE_CREATE_MODAL' };
+type ShowIdeaEditModalAction = { type: 'idea/SHOW_EDIT_MODAL', id: number };
+type HideIdeaEditModalAction = { type: 'idea/HIDE_EDIT_MODAL' };
 
 export type IdeaAction =
   | RequestVotesFetchAction
   | ReceivedVotesFetchSuccededAction
   | ReceivedVotesFetchFailedAction
   | VoteSucceedAction
-  | DeleteVoteSucceedAction;
+  | DeleteVoteSucceedAction
+  | ShowIdeaCreateModalAction
+  | HideIdeaCreateModalAction
+  | ShowIdeaEditModalAction
+  | HideIdeaEditModalAction;
 
 export type State = {
   +currentIdeaById: ?number,
   +ideas: IdeaMap,
+  showCreateModal: boolean,
+  showEditModal: ?number,
 };
 
 const initialState: State = {
   currentIdeaById: null,
   ideas: {},
+  showCreateModal: false,
+  showEditModal: null,
 };
+
+export const showIdeaCreateModal = (): ShowIdeaCreateModalAction => ({
+  type: 'idea/SHOW_CREATE_MODAL',
+});
+export const hideIdeaCreateModal = (): HideIdeaCreateModalAction => ({
+  type: 'idea/HIDE_CREATE_MODAL',
+});
+export const showIdeaEditModal = (id: number): ShowIdeaEditModalAction => ({
+  type: 'idea/SHOW_EDIT_MODAL',
+  id,
+});
+export const hideIdeaEditModal = (): HideIdeaEditModalAction => ({
+  type: 'idea/HIDE_EDIT_MODAL',
+});
 
 export const deleteVoteSucceeded = (
   ideaId: number,
@@ -123,6 +149,18 @@ export const reducer = (
   action: Action,
 ): Exact<State> => {
   switch (action.type) {
+    case 'idea/SHOW_CREATE_MODAL': {
+      return { ...state, showCreateModal: true };
+    }
+    case 'idea/HIDE_CREATE_MODAL': {
+      return { ...state, showCreateModal: false };
+    }
+    case 'idea/SHOW_EDIT_MODAL': {
+      return { ...state, showEditModal: action.id };
+    }
+    case 'idea/HIDE_EDIT_MODAL': {
+      return { ...state, showEditModal: null };
+    }
     case 'idea/VOTES_FETCH_SUCCEEDED': {
       let votes = state.ideas[action.ideaId].votes;
       if (votes.length <= VOTES_PREVIEW_COUNT) {
