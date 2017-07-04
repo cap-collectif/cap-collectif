@@ -9,7 +9,7 @@ const Field = React.createClass({
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
       error: PropTypes.node,
-    }),
+    }).isRequired,
     labelClassName: PropTypes.string,
     divClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,

@@ -6,7 +6,7 @@ import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
-    answer: PropTypes.object.isRequired,
+    answer: PropTypes.object,
   },
   mixins: [IntlMixin],
 
