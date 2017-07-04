@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes, Component } from 'react';
 
 export default class UserLink extends Component {
@@ -13,7 +14,11 @@ export default class UserLink extends Component {
       ? user.displayName
       : 'Utilisateur supprimé';
     if (userUrl) {
-      return <a className={className} href={userUrl}>{username}</a>;
+      return (
+        <a className={className} href={userUrl}>
+          <strong style={{ color: '#14171a' }}>{username}</strong>
+        </a>
+      );
     }
     return <span className={className}>{username}</span>;
   }
