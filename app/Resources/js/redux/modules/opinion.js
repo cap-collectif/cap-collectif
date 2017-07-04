@@ -136,6 +136,8 @@ export type State = {
   +showOpinionVersionEditModal: boolean,
   +isCreatingOpinionVersion: boolean,
   +showOpinionVersionCreateModal: boolean,
+  +showSourceCreateModal: boolean,
+  +showSourceEditModal: ?Uuid,
 };
 
 const VOTES_PREVIEW_COUNT = 8;
@@ -163,6 +165,8 @@ const initialState: State = {
   showOpinionVersionEditModal: false,
   isCreatingOpinionVersion: false,
   showOpinionVersionCreateModal: false,
+  showSourceCreateModal: false,
+  showSourceEditModal: null,
 };
 
 export const openArgumentEditModal = (
@@ -170,6 +174,21 @@ export const openArgumentEditModal = (
 ): ShowArgumentEditModalAction => ({
   type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
   id,
+});
+
+export const showSourceEditModal = (id: Uuid) => ({
+  type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
+  id,
+});
+export const hideSourceEditModal = () => ({
+  type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
+});
+
+export const showSourceCreateModal = () => ({
+  type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
+});
+export const hideSourceCreateModal = () => ({
+  type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
 });
 
 export const closeArgumentEditModal = (): HideArgumentEditModalAction => ({
@@ -517,6 +536,18 @@ export const reducer = (
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
+    case 'opinion/SHOW_SOURCE_EDIT_MODAL': {
+      return { ...state, showSourceEditModal: action.id };
+    }
+    case 'opinion/HIDE_SOURCE_EDIT_MODAL': {
+      return { ...state, showSourceEditModal: null };
+    }
+    case 'opinion/SHOW_SOURCE_CREATE_MODAL': {
+      return { ...state, showSourceCreateModal: true };
+    }
+    case 'opinion/HIDE_SOURCE_CREATE_MODAL': {
+      return { ...state, showSourceCreateModal: false };
+    }
     case 'opinion/SHOW_ARGUMENT_EDIT_MODAL': {
       return { ...state, showArgumentEditModal: action.id };
     }
