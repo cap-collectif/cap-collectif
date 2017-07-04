@@ -816,6 +816,8 @@ trait ProposalStepsTrait
      */
     public function iShouldRetrieveMyDocumentsInDatabase()
     {
+        $this->getEntityManager()->clear();
+
         $illustration = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'image.jpg']);
         $document = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'document.pdf']);
 
