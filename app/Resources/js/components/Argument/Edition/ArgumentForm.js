@@ -63,10 +63,11 @@ const ArgumentForm = React.createClass({
   },
 });
 
+type PassedProps = { argument: Object };
 const connector: Connector<
+  PassedProps,
   {},
-  {},
-> = connect((state: State, props: { argument: Object }) => ({
+> = connect((state: State, props: PassedProps) => ({
   initialValues: {
     body: props.argument ? props.argument.body : '',
     confirm: false,
