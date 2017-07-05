@@ -63,7 +63,7 @@ export const OpinionEditForm = React.createClass({
       <form id={formName} onSubmit={handleSubmit}>
         <Field
           name="check"
-          children={this.getIntlMessage('opinion.edit_check')}
+          label={this.getIntlMessage('opinion.edit_check')}
           type="checkbox"
           component={renderInput}
           id="opinion_check"
@@ -87,7 +87,7 @@ export const OpinionEditForm = React.createClass({
           autoFocus
           label={this.getIntlMessage('opinion.body')}
         />
-        {opinion.appendices.map((field, index) =>
+        {opinion.appendices.map((field, index) => (
           <Field
             key={index}
             component={renderInput}
@@ -95,8 +95,8 @@ export const OpinionEditForm = React.createClass({
             label={field.type.title}
             type="editor"
             id={`opinion_appendix-${index + 1}`}
-          />,
-        )}
+          />
+        ))}
       </form>
     );
   },

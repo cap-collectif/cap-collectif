@@ -1,15 +1,12 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
-import { showSourceCreateModal } from '../../../redux/modules/opinion';
 
 const OpinionSourceAdd = React.createClass({
   propTypes: {
     disabled: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -19,20 +16,42 @@ const OpinionSourceAdd = React.createClass({
     };
   },
 
+  getInitialState() {
+    return {
+      isSubmitting: false,
+      showModal: false,
+    };
+  },
+
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  show() {
+    this.setState({ showModal: true });
+  },
+
   render() {
-    const { disabled, dispatch } = this.props;
+    const { disabled } = this.props;
     return (
       <div>
         <OpinionSourceAddButton
           disabled={disabled}
           handleClick={() => {
-            dispatch(showSourceCreateModal());
+            this.show();
           }}
         />
-        {!disabled && <OpinionSourceFormModal source={null} />}
+        {!disabled
+          ? <OpinionSourceFormModal
+              show={this.state.showModal}
+              onClose={() => {
+                this.close();
+              }}
+            />
+          : null}
       </div>
     );
   },
 });
 
-export default connect()(OpinionSourceAdd);
+export default OpinionSourceAdd;

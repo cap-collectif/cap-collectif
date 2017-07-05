@@ -57,10 +57,10 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 USER capco
 
 # Install yarn
-RUN npm install --global yarn@0.27.5
+RUN npm install --global yarn
 
 # Install bower
-RUN npm install --global bower@1.8.0
+RUN npm install --global bower
 
 # Install pep8
 RUN pip install pep8 autopep8

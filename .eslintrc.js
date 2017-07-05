@@ -17,9 +17,6 @@ module.exports = {
     Modernizr: true,
     jQuery: true,
     __SERVER__: true,
-    // Flow vars
-    HTMLInputElement: true,
-    Element: true,
   },
   rules: {
     'jest/no-disabled-tests': 'warn',
@@ -44,6 +41,7 @@ module.exports = {
     'flowtype/space-before-type-colon': ['error', 'never'],
     'flowtype/type-id-match': 'off',
     'flowtype/union-intersection-spacing': ['error', 'always'],
+    'flowtype/use-flow-type': 1,
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/require-default-props': 'off',
     'react/no-children-prop': 'off',
@@ -83,8 +81,6 @@ module.exports = {
     'consistent-return': 'off',
     'array-callback-return': 'off',
     'no-return-assign': 'off',
-    'flowtype/define-flow-type': 'warn',
-    'flowtype/use-flow-type': 1,
   },
   settings: {
     flowtype: {

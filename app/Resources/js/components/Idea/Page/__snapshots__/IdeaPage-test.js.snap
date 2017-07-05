@@ -7,11 +7,9 @@ exports[`<IdeaPage /> it should not show the sidebar when idea is not contribuab
     id="sidebar-container"
   >
     <Row
-      bsClass="row"
       componentClass="div"
     >
       <Col
-        bsClass="col"
         componentClass="div"
         sm={12}
         xs={12}
@@ -60,11 +58,9 @@ exports[`<IdeaPage /> it should render the idea page with header, body, and vote
     id="sidebar-container"
   >
     <Row
-      bsClass="row"
       componentClass="div"
     >
       <Col
-        bsClass="col"
         componentClass="div"
         sm={12}
         xs={12}
@@ -110,11 +106,9 @@ exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] =
     id="sidebar-container"
   >
     <Row
-      bsClass="row"
       componentClass="div"
     >
       <Col
-        bsClass="col"
         componentClass="div"
         sm={9}
         xs={12}

@@ -13,14 +13,11 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
   keyboard={true}
   manager={
     ModalManager {
-      "add": [Function],
       "containers": Array [],
       "data": Array [],
       "handleContainerOverflow": true,
       "hideSiblingNodes": true,
-      "isTopModal": [Function],
       "modals": Array [],
-      "remove": [Function],
     }
   }
   onHide={[Function]}
@@ -29,27 +26,24 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
   show={true}
 >
   <ModalHeader
-    bsClass="modal-header"
+    aria-label="Close"
+    bsClass="modal"
     closeButton={true}
-    closeLabel="Close"
   >
     <ModalTitle
-      bsClass="modal-title"
-      componentClass="h4"
+      bsClass="modal"
       id="contained-modal-title-lg"
     >
       Modifier un champ supplémentaire
     </ModalTitle>
   </ModalHeader>
   <ModalBody
-    bsClass="modal-body"
-    componentClass="div"
+    bsClass="modal"
   >
     <Connect(ReduxForm) />
   </ModalBody>
   <ModalFooter
-    bsClass="modal-footer"
-    componentClass="div"
+    bsClass="modal"
   >
     <CloseButton
       label="global.cancel"
@@ -62,6 +56,8 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
       bsStyle="primary"
       disabled={false}
       id="confirm-update-question"
+      navDropdown={false}
+      navItem={false}
       onClick={[Function]}
       type="submit"
     >

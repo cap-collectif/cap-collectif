@@ -94,8 +94,8 @@ const OpinionTabs = React.createClass({
     return this.isVersionable()
       ? 'versions'
       : this.isCommentable()
-        ? 'arguments'
-        : this.isSourceable() ? 'sources' : null;
+          ? 'arguments'
+          : this.isSourceable() ? 'sources' : null;
   },
 
   getType() {
@@ -168,12 +168,13 @@ const OpinionTabs = React.createClass({
     ) {
       // at least two tabs
 
-      const marginTop = { marginTop: '20px' };
+      const marginTop = { 'margin-top': '20px' };
 
       return (
         <Tab.Container
           id="opinion-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}>
+          defaultActiveKey={this.getDefaultKey()}
+          animation={false}>
           <div>
             <Nav bsStyle="tabs">
               {this.isVersionable() &&
@@ -234,7 +235,7 @@ const OpinionTabs = React.createClass({
                   />
                 </Tab.Pane>}
               {this.isLinkable() &&
-                <Tab.Pane eventKey="links" style={{ marginTop: '20px' }}>
+                <Tab.Pane eventKey="links" style={{ 'margin-top': '20px' }}>
                   <OpinionLinksBox {...this.props} />
                 </Tab.Pane>}
             </Tab.Content>

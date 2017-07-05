@@ -1,63 +1,83 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
-import ArgumentForm, { formName } from './ArgumentForm';
+
+import ArgumentStore from '../../../stores/ArgumentStore';
+import ArgumentActions from '../../../actions/ArgumentActions';
+import ArgumentForm from './ArgumentForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import { closeArgumentEditModal } from '../../../redux/modules/opinion';
-import type { State } from '../../../types';
 
 const ArgumentEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     argument: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
+  getInitialState() {
+    return {
+      isSubmitting: false,
+    };
+  },
+
+  handleFailure() {
+    this.setState({ isSubmitting: false });
+  },
+
+  handleSubmit() {
+    this.setState({ isSubmitting: true });
+  },
+
+  handleSubmitSuccess() {
+    const {
+      argument,
+      onClose,
+    } = this.props;
+    onClose();
+    this.setState({ isSubmitting: false });
+    ArgumentActions.load(ArgumentStore.opinion, argument.type);
+  },
+
   render() {
-    const { argument, show, dispatch, submitting } = this.props;
+    const { isSubmitting } = this.state;
+    const { argument, onClose, show } = this.props;
     return (
       <Modal
         animation={false}
         show={show}
-        onHide={() => {
-          dispatch(closeArgumentEditModal());
-        }}
+        onHide={onClose}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
+        aria-labelledby="contained-modal-title-lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
             {this.getIntlMessage('argument.update')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ArgumentForm argument={argument} />
+          <ArgumentForm
+            argument={argument}
+            isSubmitting={isSubmitting}
+            onValidationFailure={this.handleFailure}
+            onSubmitSuccess={this.handleSubmitSuccess}
+            onSubmitFailure={this.handleFailure}
+          />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton
-            onClose={() => {
-              dispatch(closeArgumentEditModal());
-            }}
-          />
+          <CloseButton onClose={onClose} />
           <SubmitButton
             id="confirm-argument-update"
             label="global.edit"
-            isSubmitting={submitting}
-            onSubmit={() => {
-              dispatch(submit(formName));
-            }}
+            isSubmitting={isSubmitting}
+            onSubmit={this.handleSubmit}
           />
         </Modal.Footer>
       </Modal>
     );
   },
+
 });
 
-export default connect((state: State, { argument }) => ({
-  show: state.opinion.showArgumentEditModal === argument.id,
-  submitting: isSubmitting(formName)(state),
-}))(ArgumentEditModal);
+export default ArgumentEditModal;

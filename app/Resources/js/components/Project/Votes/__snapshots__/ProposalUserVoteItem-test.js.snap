@@ -2,13 +2,11 @@
 
 exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
 <Row
-  bsClass="row"
   className="proposals-user-votes__row"
   componentClass="div"
   id="vote-step1-proposal1"
 >
   <Col
-    bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
     md={4}
@@ -21,7 +19,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     </a>
   </Col>
   <Col
-    bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
@@ -41,7 +38,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     />
   </Col>
   <Col
-    bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
@@ -53,7 +49,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     district
   </Col>
   <Col
-    bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
@@ -80,7 +75,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     />
   </Col>
   <Col
-    bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
     md={2}
@@ -93,6 +87,8 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       bsStyle="default"
       className="proposal-vote__delete"
       disabled={false}
+      navDropdown={false}
+      navItem={false}
       onClick={[Function]}
     >
       Retirer
