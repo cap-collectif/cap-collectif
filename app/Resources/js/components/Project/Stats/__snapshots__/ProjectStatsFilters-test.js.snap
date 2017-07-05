@@ -2,10 +2,12 @@
 
 exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
 <Row
+  bsClass="row"
   className="stats__filters"
   componentClass="div"
 >
   <Col
+    bsClass="col"
     componentClass="div"
     md={4}
     xs={12}
@@ -32,6 +34,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     </Input>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     md={4}
     xs={12}
@@ -56,6 +59,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     </Input>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     md={4}
     xs={12}
@@ -84,10 +88,12 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
 
 exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
 <Row
+  bsClass="row"
   className="stats__filters"
   componentClass="div"
 >
   <Col
+    bsClass="col"
     componentClass="div"
     md={12}
     xs={12}

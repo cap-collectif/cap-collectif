@@ -1,6 +1,5 @@
 // @flow
-import { takeEvery } from 'redux-saga';
-import { select, call, put } from 'redux-saga/effects';
+import { takeEvery, select, call, put } from 'redux-saga/effects';
 import { stringify } from 'qs';
 import Fetcher from '../../services/Fetcher';
 import type { Exact, State as GlobalState, Uuid, Action } from '../../types';

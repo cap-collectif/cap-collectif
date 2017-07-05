@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeasListFilters /> it should render a row containing sorting input and ideas search but no themes nor create button 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <Input
+      errors={null}
+      id="idea-sorting"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <option
+        value="last"
+      >
+        Les plus récentes
+      </option>
+      <option
+        value="old"
+      >
+        Les plus anciennes
+      </option>
+      <option
+        value="comments"
+      >
+        Les plus commentées
+      </option>
+      <option
+        value="popular"
+      >
+        Les plus populaires
+      </option>
+    </Input>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;
+
+exports[`<IdeasListFilters /> it should render the idea create when feature is enabled 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={2}
+    sm={3}
+    xs={12}
+  >
+    <IdeaCreate
+      className="form-group"
+      themeId={-1}
+      themes={Array []}
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <Input
+      errors={null}
+      id="idea-sorting"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <option
+        value="last"
+      >
+        Les plus récentes
+      </option>
+      <option
+        value="old"
+      >
+        Les plus anciennes
+      </option>
+      <option
+        value="comments"
+      >
+        Les plus commentées
+      </option>
+      <option
+        value="popular"
+      >
+        Les plus populaires
+      </option>
+    </Input>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;
+
+exports[`<IdeasListFilters /> it should render the themes filter when feature is enabled 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <Input
+      errors={null}
+      id="idea-filter-theme"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select"
+      value="0"
+    >
+      <option
+        value="0"
+      >
+        Tous les thèmes
+      </option>
+    </Input>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <Input
+      errors={null}
+      id="idea-sorting"
+      image={null}
+      labelClassName="h5"
+      medias={Array []}
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <option
+        value="last"
+      >
+        Les plus récentes
+      </option>
+      <option
+        value="old"
+      >
+        Les plus anciennes
+      </option>
+      <option
+        value="comments"
+      >
+        Les plus commentées
+      </option>
+      <option
+        value="popular"
+      >
+        Les plus populaires
+      </option>
+    </Input>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;

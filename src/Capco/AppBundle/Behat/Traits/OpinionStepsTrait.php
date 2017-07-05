@@ -503,8 +503,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I edit my source.
-     *
      * @When I edit my source
      */
     public function iEditMySource()
@@ -517,7 +515,7 @@ trait OpinionStepsTrait
         $page->fillSourceBodyField();
         $page->checkSourceConfirmCheckbox();
         $page->submitSourceEditForm();
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**
@@ -534,7 +532,7 @@ trait OpinionStepsTrait
         $this->iWait(1);
         $page->fillSourceBodyField();
         $page->submitSourceEditForm();
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**
