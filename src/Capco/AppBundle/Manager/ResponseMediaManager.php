@@ -94,7 +94,7 @@ class ResponseMediaManager
     protected function addMediasFromArray(array $array, int $key, MediaResponse $response)
     {
         foreach ($array['responses'][$key]['value'] as $file) {
-            $response->addMedia($this->mediaManager->createFileFromUploadedFile($file, 'sources'));
+            $response->addMedia($this->mediaManager->createFileFromUploadedFile($file));
         }
     }
 }

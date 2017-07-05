@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
+use FilesystemIterator;
 
 trait ProposalStepsTrait
 {
@@ -812,17 +813,15 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then I should retrieve my documents in database
+     * @Then I should have :filesNumber files in media folder
      */
-    public function iShouldRetrieveMyDocumentsInDatabase()
+    public function iShouldHaveXFilesInMediaFolder(int $filesNumber)
     {
-        $this->getEntityManager()->clear();
-
-        $illustration = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'image.jpg']);
-        $document = $this->getRepository('CapcoMediaBundle:Media')->findOneBy(['name' => 'document.pdf']);
-
-        \PHPUnit_Framework_Assert::assertNotNull($illustration);
-        \PHPUnit_Framework_Assert::assertNotNull($document);
+        $filesCount = iterator_count(
+            new FilesystemIterator('/var/www/web/media/default/0001/01', FilesystemIterator::SKIP_DOTS)
+        );
+        var_dump($filesCount);
+        \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
     }
 
     protected function openCollectStepIsOpen()

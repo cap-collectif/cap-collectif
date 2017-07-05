@@ -688,9 +688,10 @@ Feature: Proposal Restful Api
       Given I am logged in to api as user
       Given feature themes is enabled
       Given feature districts is enabled
+      And I should have 1281 files in media folder
       When I send a POST request to "/api/proposal_forms/1/proposals" with a document and an illustration
       Then the JSON response status code should be 201
-      And I should retrieve my documents in database
+      And I should have 7 files in media folder
 
     @database
     Scenario: Logged in admin API client wants to add a proposal with fusion
