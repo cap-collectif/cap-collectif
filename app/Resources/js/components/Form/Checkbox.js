@@ -32,14 +32,11 @@ const Checkbox = React.createClass({
   },
 
   onChange(e) {
-    const {
-      field,
-      onChange,
-    } = this.props;
+    const { field, onChange } = this.props;
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     const values = [];
 
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       if (checkbox.id !== `${field.id}-choice-other` && checkbox.checked) {
         values.push(checkbox.value);
       }
@@ -58,7 +55,7 @@ const Checkbox = React.createClass({
     });
     this.other.clear();
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
-    checkboxes.map((checkbox) => {
+    checkboxes.map(checkbox => {
       $(checkbox).prop('checked', false);
     });
   },
@@ -81,10 +78,7 @@ const Checkbox = React.createClass({
     labelClasses[labelClassName] = true;
 
     return (
-      <div
-        className={`form-group ${getGroupStyle(field.id)}`}
-        id={id}
-      >
+      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
         <label htmlFor={fieldName} className={classNames(labelClasses)}>
           {label}
         </label>
@@ -97,43 +91,37 @@ const Checkbox = React.createClass({
           name={fieldName}
           value={this.state.value}
           onChange={this.onChange}
-          className="input-choices"
-        >
-          {
-            this.props.field.choices.map((choice) => {
-              const choiceKey = `choice-${choice.id}`;
-              return (
-                <div key={choiceKey}>
-                  <Input
-                    id={`${id}_${choiceKey}`}
-                    name={fieldName}
-                    type="checkbox"
-                    label={choice.label}
-                    value={choice.label}
-                    help={choice.description}
-                    disabled={disabled}
-                    image={choice.image ? choice.image.url : null}
-                  />
-                </div>
-              );
-            })
-          }
-          {
-            this.props.field.isOtherAllowed
+          className="input-choices">
+          {this.props.field.choices.map(choice => {
+            const choiceKey = `choice-${choice.id}`;
+            return (
+              <div key={choiceKey}>
+                <Input
+                  id={`${id}_${choiceKey}`}
+                  name={fieldName}
+                  type="checkbox"
+                  value={choice.label}
+                  help={choice.description}
+                  disabled={disabled}
+                  image={choice.image ? choice.image.url : null}>
+                  {choice.label}
+                </Input>
+              </div>
+            );
+          })}
+          {this.props.field.isOtherAllowed
             ? <Other
-                ref={c => this.other = c}
+                ref={c => (this.other = c)}
                 field={this.props.field}
                 onChange={this.onChange}
                 disabled={disabled}
-            />
-            : null
-          }
+              />
+            : null}
         </CheckboxGroup>
         {renderFormErrors(field.id)}
       </div>
     );
   },
-
 });
 
 export default Checkbox;

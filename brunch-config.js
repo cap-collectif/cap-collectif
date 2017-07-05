@@ -99,13 +99,6 @@ exports.config = {
     },
   },
   plugins: {
-    babel: {
-      babelrc: true,
-      plugins: [
-        // "add-module-exports",
-        ['relay'],
-      ],
-    },
     sass: {
       mode: 'native',
     },

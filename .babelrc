@@ -2,5 +2,6 @@
   "presets": ["react", "flow", "latest", "stage-0"],
   "plugins": [
     "relay",
+    "transform-class-properties"
   ],
 }

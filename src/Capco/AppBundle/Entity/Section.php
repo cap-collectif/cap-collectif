@@ -105,17 +105,22 @@ class Section
     private $body = null;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotBlank()
      */
     private $type = 'custom';
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=100, nullable=true)
      */
-    private $title = '';
+    private $title;
 
     /**
+     * @var int
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
@@ -123,48 +128,57 @@ class Section
     private $position;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="teaser", type="text", nullable=true)
      */
     private $teaser;
 
     /**
+     * @var int
      * @ORM\Column(name="nb_objects", type="integer", nullable=true)
      */
     private $nbObjects;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="enabled", type="boolean")
      * @Assert\NotNull()
      */
     private $enabled;
 
     /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"title", "position"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
+     * @var
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
     private $associatedFeatures;
 
     public function __construct()
     {
+        $this->type = 'custom';
         $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
     {
-        $title = $this->getTitle() ?: '';
-
-        return $this->getId() ? $title : 'New section';
+        return $this->getId() ? $this->getTitle() : 'New section';
     }
 
     /**

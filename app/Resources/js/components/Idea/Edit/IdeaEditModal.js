@@ -1,89 +1,65 @@
-import React from 'react';
+// @flow
+import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
+import { connect } from 'react-redux';
+import { submit, isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import IdeaEditForm from './IdeaEditForm';
+import IdeaEditForm, { formName } from './IdeaEditForm';
+import { hideIdeaEditModal } from '../../../redux/modules/idea';
+import type { State } from '../../../types';
 
-const IdeaEditModal = React.createClass({
+export const IdeaEditModal = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
+    idea: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
   },
   mixins: [IntlMixin],
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleFailure() {
-    this.setState({ isSubmitting: false });
-  },
-
-  handleSubmit() {
-    this.setState({ isSubmitting: true });
-  },
-
-  handleSubmitSuccess() {
-    this.close();
-    this.setState({ isSubmitting: false });
-    location.reload();
-  },
-
-  close() {
-    const { onToggleModal } = this.props;
-    onToggleModal(false);
-  },
-
-  show() {
-    const { onToggleModal } = this.props;
-    onToggleModal(true);
-  },
-
   render() {
-    const {
-      idea,
-      show,
-    } = this.props;
+    const { idea, show, dispatch, submitting } = this.props;
     return (
       <div>
         <Modal
           animation={false}
           show={show}
-          onHide={this.close}
+          onHide={() => {
+            dispatch(hideIdeaEditModal());
+          }}
           bsSize="large"
-          aria-labelledby="contained-modal-title-lg"
-        >
+          aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('global.edit') }
+              {this.getIntlMessage('global.edit')}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <IdeaEditForm
-              isSubmitting={this.state.isSubmitting}
-              onSubmitSuccess={this.handleSubmitSuccess}
-              onValidationFailure={this.handleFailure}
-              onSubmitFailure={this.handleFailure}
-              idea={idea}
-            />
+            <IdeaEditForm idea={idea} />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close} />
+            <CloseButton
+              onClose={() => {
+                dispatch(hideIdeaEditModal());
+              }}
+            />
             <SubmitButton
               id="confirm-idea-edit"
-              isSubmitting={this.state.isSubmitting}
-              onSubmit={this.handleSubmit}
+              isSubmitting={submitting}
+              onSubmit={() => {
+                dispatch(submit(formName));
+              }}
             />
           </Modal.Footer>
         </Modal>
       </div>
     );
   },
-
 });
 
-export default IdeaEditModal;
+export default connect((state: State, props) => ({
+  show: state.idea.showEditModal === props.idea.id,
+  submitting: isSubmitting(formName)(state),
+}))(IdeaEditModal);
