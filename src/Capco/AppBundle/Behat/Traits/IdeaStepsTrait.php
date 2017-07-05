@@ -431,6 +431,8 @@ trait IdeaStepsTrait
     }
 
     /**
+     * I submit the idea vote form.
+     *
      * @When I submit the idea vote form
      */
     public function iSubmitTheIdeaVoteForm()

@@ -1,83 +1,109 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
-import { connect, type Connector } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import FormMixin from '../../../utils/FormMixin';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import FlashMessages from '../../Utils/FlashMessages';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentStore from '../../../stores/ArgumentStore';
-import renderComponent from '../../Form/Field';
-import { closeArgumentEditModal } from '../../../redux/modules/opinion';
-import type { State } from '../../../types';
-
-export const formName = 'argument-edit-form';
-const validate = ({ body, confirm }: Object) => {
-  const errors = {};
-  if (!body || body.length <= 2) {
-    errors.body = 'argument.constraints.min';
-  }
-  if (!confirm) {
-    errors.confirm = 'argument.constraints.confirm';
-  }
-  return errors;
-};
-
-const onSubmit = (values: Object, dispatch, { argument }) => {
-  const opinion = ArgumentStore.opinion;
-  const data = Object.assign({}, values);
-  data.type = argument.type;
-  delete data.confirm;
-  return ArgumentActions.update(opinion, argument.id, data).then(() => {
-    ArgumentActions.load(ArgumentStore.opinion, argument.type);
-    dispatch(closeArgumentEditModal());
-  });
-};
+import Input from '../../Form/Input';
 
 const ArgumentForm = React.createClass({
   propTypes: {
-    argument: PropTypes.object.isRequired,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired,
+    onSubmitFailure: PropTypes.func.isRequired,
+    argument: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
+
+  getInitialState() {
+    const { argument } = this.props;
+    return {
+      form: {
+        body: argument ? argument.body : '',
+        confirm: false,
+      },
+      errors: {
+        body: [],
+        confirm: [],
+      },
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      argument,
+      onSubmitSuccess,
+      onSubmitFailure,
+      isSubmitting,
+      onValidationFailure,
+    } = this.props;
+    if (nextProps.isSubmitting && !isSubmitting) {
+      if (this.isValid()) {
+        const opinion = ArgumentStore.opinion;
+        const data = Object.assign({}, this.state.form);
+        data.type = argument.type;
+        delete data.confirm;
+
+        return ArgumentActions
+          .update(opinion, argument.id, data)
+          .then(onSubmitSuccess)
+          .catch(onSubmitFailure)
+        ;
+      }
+
+      onValidationFailure();
+    }
+  },
+
+  formValidationRules: {
+    body: {
+      notBlank: { message: 'argument.constraints.min' },
+      min: { value: 3, message: 'argument.constraints.min' },
+      max: { value: 2000, message: 'argument.constraints.max' },
+    },
+    confirm: {
+      isTrue: { message: 'argument.constraints.confirm' },
+    },
+  },
+
+  renderFormErrors(field) {
+    return (
+      <FlashMessages
+        errors={this.getErrorsMessages(field)}
+        form
+      />
+    );
+  },
 
   render() {
     return (
       <form id="argument-form" ref="form">
         <div className="alert alert-warning edit-confirm-alert">
-          <Field
+          <Input
             type="checkbox"
-            component={renderComponent}
+            ref="check"
             id="argument-confirm"
-            name="confirm"
-            children={this.getIntlMessage('argument.edit.confirm')}
+            checkedLink={this.linkState('form.confirm')}
+            label={this.getIntlMessage('argument.edit.confirm')}
+            labelClassName=""
+            groupClassName={this.getGroupStyle('confirm')}
+            errors={this.renderFormErrors('confirm')}
           />
         </div>
-        <Field
+        <Input
           id="argument-body"
-          component={renderComponent}
           type="textarea"
-          rows={2}
-          name="body"
+          valueLink={this.linkState('form.body')}
           label={this.getIntlMessage('argument.edit.body')}
+          groupClassName={this.getGroupStyle('body')}
+          errors={this.renderFormErrors('body')}
         />
       </form>
     );
   },
+
 });
 
-type PassedProps = { argument: Object };
-const connector: Connector<
-  PassedProps,
-  {},
-> = connect((state: State, props: PassedProps) => ({
-  initialValues: {
-    body: props.argument ? props.argument.body : '',
-    confirm: false,
-  },
-}));
-
-export default connector(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-  })(ArgumentForm),
-);
+export default ArgumentForm;

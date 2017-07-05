@@ -1,5 +1,6 @@
 // @flow
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 import type { IOEffect } from 'redux-saga/effects';
 import { find, findLast } from 'lodash';
 import Fetcher from '../../services/Fetcher';
@@ -10,89 +11,37 @@ export const VOTES_PREVIEW_COUNT = 8;
 type Vote = {
   private: boolean,
   user: ?{
-    uniqId: string,
-  },
+    uniqId: string
+  }
 };
 
 type Idea = {
   id: number,
   votesCount: number,
-  votes: Array<Vote>,
+  votes: Array<Vote>
 };
 
-type IdeaMap = { [id: number]: Idea };
+type IdeaMap = {[id: number]: Idea};
 
-type RequestVotesFetchAction = {
-  type: 'idea/VOTES_FETCH_REQUESTED',
-  ideaId: number,
-};
-type ReceivedVotesFetchSuccededAction = {
-  type: 'idea/VOTES_FETCH_SUCCEEDED',
-  votes: Array<Vote>,
-  ideaId: number,
-};
-type ReceivedVotesFetchFailedAction = {
-  type: 'idea/VOTES_FETCH_FAILED',
-  error: string,
-};
-type VoteSucceedAction = {
-  type: 'idea/VOTE_SUCCEEDED',
-  ideaId: number,
-  vote: Vote,
-};
-type DeleteVoteSucceedAction = {
-  type: 'idea/DELETE_VOTE_SUCCEEDED',
-  ideaId: number,
-  vote: Vote,
-};
-type ShowIdeaCreateModalAction = { type: 'idea/SHOW_CREATE_MODAL' };
-type HideIdeaCreateModalAction = { type: 'idea/HIDE_CREATE_MODAL' };
-type ShowIdeaEditModalAction = { type: 'idea/SHOW_EDIT_MODAL', id: number };
-type HideIdeaEditModalAction = { type: 'idea/HIDE_EDIT_MODAL' };
+type RequestVotesFetchAction = { type: 'idea/VOTES_FETCH_REQUESTED', ideaId: number };
+type ReceivedVotesFetchSuccededAction = { type: 'idea/VOTES_FETCH_SUCCEEDED', votes: Array<Vote>, ideaId: number };
+type ReceivedVotesFetchFailedAction = { type: 'idea/VOTES_FETCH_FAILED', error: string };
+type VoteSucceedAction = { type: 'idea/VOTE_SUCCEEDED', ideaId: number, vote: Vote };
+type DeleteVoteSucceedAction = { type: 'idea/DELETE_VOTE_SUCCEEDED', ideaId: number, vote: Vote };
 
-export type IdeaAction =
-  | RequestVotesFetchAction
-  | ReceivedVotesFetchSuccededAction
-  | ReceivedVotesFetchFailedAction
-  | VoteSucceedAction
-  | DeleteVoteSucceedAction
-  | ShowIdeaCreateModalAction
-  | HideIdeaCreateModalAction
-  | ShowIdeaEditModalAction
-  | HideIdeaEditModalAction;
+export type IdeaAction = RequestVotesFetchAction | ReceivedVotesFetchSuccededAction | ReceivedVotesFetchFailedAction | VoteSucceedAction | DeleteVoteSucceedAction;
 
 export type State = {
   +currentIdeaById: ?number,
-  +ideas: IdeaMap,
-  showCreateModal: boolean,
-  showEditModal: ?number,
+  +ideas: IdeaMap
 };
 
 const initialState: State = {
   currentIdeaById: null,
   ideas: {},
-  showCreateModal: false,
-  showEditModal: null,
 };
 
-export const showIdeaCreateModal = (): ShowIdeaCreateModalAction => ({
-  type: 'idea/SHOW_CREATE_MODAL',
-});
-export const hideIdeaCreateModal = (): HideIdeaCreateModalAction => ({
-  type: 'idea/HIDE_CREATE_MODAL',
-});
-export const showIdeaEditModal = (id: number): ShowIdeaEditModalAction => ({
-  type: 'idea/SHOW_EDIT_MODAL',
-  id,
-});
-export const hideIdeaEditModal = (): HideIdeaEditModalAction => ({
-  type: 'idea/HIDE_EDIT_MODAL',
-});
-
-export const deleteVoteSucceeded = (
-  ideaId: number,
-  vote: Vote,
-): DeleteVoteSucceedAction => ({
+export const deleteVoteSucceeded = (ideaId: number, vote: Vote): DeleteVoteSucceedAction => ({
   type: 'idea/DELETE_VOTE_SUCCEEDED',
   ideaId,
   vote,
@@ -109,9 +58,7 @@ export const voteSuccess = (ideaId: number, vote: Vote): VoteSucceedAction => ({
   vote,
 });
 
-export function* fetchAllVotes(
-  action: RequestVotesFetchAction,
-): Generator<IOEffect, *, *> {
+export function* fetchAllVotes(action: RequestVotesFetchAction): Generator<IOEffect, *, *> {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -119,23 +66,15 @@ export function* fetchAllVotes(
     while (hasMore) {
       const result = yield call(
         Fetcher.get,
-        `/ideas/${action.ideaId}/votes?offset=${iterationCount *
-          votesPerIteration}&limit=${votesPerIteration}`,
+        `/ideas/${action.ideaId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`,
       );
       hasMore = result.hasMore;
       iterationCount++;
-      const succeededAction: ReceivedVotesFetchSuccededAction = {
-        type: 'idea/VOTES_FETCH_SUCCEEDED',
-        votes: result.votes,
-        ideaId: action.ideaId,
-      };
+      const succeededAction : ReceivedVotesFetchSuccededAction = { type: 'idea/VOTES_FETCH_SUCCEEDED', votes: result.votes, ideaId: action.ideaId };
       yield put(succeededAction);
     }
   } catch (e) {
-    const failedAction: ReceivedVotesFetchFailedAction = {
-      type: 'idea/VOTES_FETCH_FAILED',
-      error: e,
-    };
+    const failedAction: ReceivedVotesFetchFailedAction = { type: 'idea/VOTES_FETCH_FAILED', error: e };
     yield put(failedAction);
   }
 }
@@ -144,23 +83,8 @@ export function* saga(): Generator<IOEffect, *, *> {
   yield* takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
 }
 
-export const reducer = (
-  state: State = initialState,
-  action: Action,
-): Exact<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
-    case 'idea/SHOW_CREATE_MODAL': {
-      return { ...state, showCreateModal: true };
-    }
-    case 'idea/HIDE_CREATE_MODAL': {
-      return { ...state, showCreateModal: false };
-    }
-    case 'idea/SHOW_EDIT_MODAL': {
-      return { ...state, showEditModal: action.id };
-    }
-    case 'idea/HIDE_EDIT_MODAL': {
-      return { ...state, showEditModal: null };
-    }
     case 'idea/VOTES_FETCH_SUCCEEDED': {
       let votes = state.ideas[action.ideaId].votes;
       if (votes.length <= VOTES_PREVIEW_COUNT) {
@@ -193,28 +117,16 @@ export const reducer = (
       let index = 0;
       const actionVote = action.vote;
       if (actionVote.private) {
-        const vote = findLast(idea.votes, v => v.private);
-        if (vote) {
-          index = idea.votes.indexOf(vote);
-        }
+        index = idea.votes.indexOf(findLast(idea.votes, v => v.private));
       } else if (actionVote.user != null) {
         const user = actionVote.user;
-        const vote = find(
-          idea.votes,
-          v => v.user && v.user.uniqId === user.uniqId,
-        );
-        if (vote) {
-          index = idea.votes.indexOf(vote);
-        }
+        index = idea.votes.indexOf(find(idea.votes, v => v.user && v.user.uniqId === user.uniqId));
       }
       const ideas = {
         [action.ideaId]: {
           ...idea,
           ...{
-            votes: [
-              ...idea.votes.slice(0, index),
-              ...idea.votes.slice(index + 1),
-            ],
+            votes: [...idea.votes.slice(0, index), ...idea.votes.slice(index + 1)],
             userHasVote: false,
             votesCount: idea.votesCount - 1,
           },

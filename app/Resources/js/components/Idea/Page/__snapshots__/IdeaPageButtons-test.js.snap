@@ -39,7 +39,7 @@ exports[`<IdeaPageButtons /> it should render all idea buttons and modals 1`] = 
       onClick={[Function]}
     />
   </div>
-  <Connect(IdeaEditModal)
+  <IdeaEditModal
     idea={
       Object {
         "_links": Object {
@@ -50,6 +50,8 @@ exports[`<IdeaPageButtons /> it should render all idea buttons and modals 1`] = 
         "title": "Title",
       }
     }
+    onToggleModal={[Function]}
+    show={false}
   />
   <IdeaDeleteModal
     idea={

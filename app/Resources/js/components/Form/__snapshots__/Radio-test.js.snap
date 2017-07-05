@@ -35,53 +35,49 @@ exports[`<Radio /> should render correctly 1`] = `
       errors={null}
       id="reply-1_choice-24"
       image={null}
+      label="Maxime Arrouard"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Maxime Arrouard"
-    >
-      Maxime Arrouard
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-25"
       image={null}
+      label="Spylou Super Sayen"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Spylou Super Sayen"
-    >
-      Spylou Super Sayen
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-26"
       image={null}
+      label="Cyril Lage"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Cyril Lage"
-    >
-      Cyril Lage
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-27"
       image={null}
+      label="Superman"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Superman"
-    >
-      Superman
-    </Input>
+    />
   </ReactRadioGroup>
 </div>
 `;
@@ -121,53 +117,49 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
       errors={null}
       id="reply-1_choice-24"
       image={null}
+      label="Maxime Arrouard"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Maxime Arrouard"
-    >
-      Maxime Arrouard
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-25"
       image={null}
+      label="Spylou Super Sayen"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Spylou Super Sayen"
-    >
-      Spylou Super Sayen
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-26"
       image={null}
+      label="Cyril Lage"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Cyril Lage"
-    >
-      Cyril Lage
-    </Input>
+    />
     <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-27"
       image={null}
+      label="Superman"
       labelClassName="h5"
       medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Superman"
-    >
-      Superman
-    </Input>
+    />
     <Other
       disabled={false}
       field={

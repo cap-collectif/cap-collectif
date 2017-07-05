@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
@@ -10,7 +9,10 @@ const IdeasListSearch = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [
+    IntlMixin,
+    DeepLinkStateMixin,
+  ],
 
   getInitialState() {
     return {
@@ -35,7 +37,7 @@ const IdeasListSearch = React.createClass({
   render() {
     const button = (
       <Button id="idea-search-button" type="submit">
-        <i className="cap cap-magnifier" />
+        <i className="cap cap-magnifier"></i>
       </Button>
     );
     return (
@@ -43,8 +45,7 @@ const IdeasListSearch = React.createClass({
         <Input
           id="idea-search-input"
           type="text"
-          // $FlowFixMe
-          ref={c => (this._input = c)}
+          ref={c => this._input = c}
           placeholder={this.getIntlMessage('idea.search')}
           buttonAfter={button}
           valueLink={this.linkState('value')}
