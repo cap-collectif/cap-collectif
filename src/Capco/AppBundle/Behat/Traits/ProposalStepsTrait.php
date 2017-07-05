@@ -820,7 +820,6 @@ trait ProposalStepsTrait
         $filesCount = iterator_count(
             new FilesystemIterator('/var/www/web/media/default/0001/01', FilesystemIterator::SKIP_DOTS)
         );
-        var_dump($filesCount);
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
     }
 

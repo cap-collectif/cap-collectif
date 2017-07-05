@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ApiContext extends ApplicationContext
 {
+    /**
+     * @var Client
+     */
     public $client;
     public $token;
     public $response;
@@ -343,7 +346,7 @@ EOF;
         $body['media'] = new UploadedFile(
             $rootDir . '/../features/files/image.jpg',
             'image.jpg',
-            'images/jpg'
+            'image/jpg'
         );
 
         $this->response = $this->client->request($method, $url, [
@@ -351,6 +354,8 @@ EOF;
             'exceptions' => false,
             'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
         ]);
+
+        var_dump($this->response);
     }
 
     /**
