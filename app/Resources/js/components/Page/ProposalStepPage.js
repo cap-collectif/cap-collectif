@@ -1,4 +1,3 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
@@ -126,10 +125,9 @@ export const ProposalStepPage = React.createClass({
 
 const mapStateToProps = (state, props) => ({
   stepId: undefined,
-  step:
-    state.project.projectsById[state.project.currentProjectById].stepsById[
-      props.stepId
-    ],
+  step: state.project.projectsById[state.project.currentProjectById].stepsById[
+    props.stepId
+  ],
   proposals: state.proposal.proposalShowedId.map(
     proposal => state.proposal.proposalsById[proposal],
   ),

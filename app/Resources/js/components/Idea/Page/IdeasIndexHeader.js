@@ -7,6 +7,12 @@ const IdeasIndexHeader = React.createClass({
     description: React.PropTypes.string,
   },
 
+  getDefaultProps() {
+    return {
+      description: null,
+    };
+  },
+
   render() {
     const { description } = this.props;
     return (

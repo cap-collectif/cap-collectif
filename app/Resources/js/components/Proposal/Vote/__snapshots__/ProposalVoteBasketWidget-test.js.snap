@@ -2,6 +2,7 @@
 
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget vote 1`] = `
 <Uncontrolled(Navbar)
+  bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
   fixedTop={true}
@@ -64,6 +65,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       className="widget__button navbar-btn pull-right"
       disabled={false}
       href="http//capco.dev/votes"
+      navDropdown={false}
+      navItem={false}
     >
       Mes votes
     </Button>
@@ -73,6 +76,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
 
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple vote with limit 1`] = `
 <Uncontrolled(Navbar)
+  bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
   fixedTop={true}
@@ -179,6 +183,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       className="widget__button navbar-btn pull-right"
       disabled={false}
       href="http//capco.dev/votes"
+      navDropdown={false}
+      navItem={false}
     >
       Mes votes
     </Button>
@@ -213,6 +219,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
 
 exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple vote without limit 1`] = `
 <Uncontrolled(Navbar)
+  bsClass="navbar"
   bsStyle="default"
   className="proposal-vote__widget"
   fixedTop={true}
@@ -275,6 +282,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       className="widget__button navbar-btn pull-right"
       disabled={false}
       href="http//capco.dev/votes"
+      navDropdown={false}
+      navItem={false}
     >
       Mes votes
     </Button>

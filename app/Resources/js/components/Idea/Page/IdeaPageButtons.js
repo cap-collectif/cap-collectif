@@ -1,24 +1,29 @@
-// @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import IdeaReportButton from '../Report/IdeaReportButton';
 import IdeaEditModal from '../Edit/IdeaEditModal';
 import IdeaDeleteModal from '../Delete/IdeaDeleteModal';
-import { showIdeaEditModal } from '../../../redux/modules/idea';
 
 const IdeaPageButtons = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
+      showEditModal: false,
       showDeleteModal: false,
     };
+  },
+
+  showEditModal() {
+    this.toggleEditModal(true);
+  },
+
+  toggleEditModal(value) {
+    this.setState({ showEditModal: value });
   },
 
   showDeleteModal() {
@@ -30,24 +35,27 @@ const IdeaPageButtons = React.createClass({
   },
 
   render() {
-    const { idea, dispatch } = this.props;
+    const { idea } = this.props;
+
     return (
       <div className="block idea__buttons">
         <ShareButtonDropdown
           id="idea-share-button"
           title={idea.title}
           url={idea._links.show}
-        />{' '}
-        <IdeaReportButton idea={idea} />
+        />
+        {' '}
+        <IdeaReportButton
+          idea={idea}
+        />
         <div className="pull-right">
           <EditButton
             id="idea-edit-button"
             author={idea.author}
-            onClick={() => {
-              dispatch(showIdeaEditModal(idea.id));
-            }}
+            onClick={this.showEditModal}
             editable={idea.canContribute}
-          />{' '}
+          />
+          {' '}
           <DeleteButton
             id="idea-delete-button"
             author={idea.author}
@@ -55,7 +63,11 @@ const IdeaPageButtons = React.createClass({
             deletable={idea.canContribute}
           />
         </div>
-        <IdeaEditModal idea={idea} />
+        <IdeaEditModal
+          idea={idea}
+          show={this.state.showEditModal}
+          onToggleModal={this.toggleEditModal}
+        />
         <IdeaDeleteModal
           idea={idea}
           show={this.state.showDeleteModal}
@@ -64,6 +76,7 @@ const IdeaPageButtons = React.createClass({
       </div>
     );
   },
+
 });
 
-export default connect()(IdeaPageButtons);
+export default IdeaPageButtons;

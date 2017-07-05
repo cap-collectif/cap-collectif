@@ -2,43 +2,53 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IntlMixin } from 'react-intl';
-import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
+
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
 import OpinionSourceFormModalTitle from './OpinionSourceFormModalTitle';
-import OpinionSourceForm, { formName } from './OpinionSourceForm';
+import OpinionSourceForm from './OpinionSourceForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import {
-  hideSourceCreateModal,
-  hideSourceEditModal,
-} from '../../../redux/modules/opinion';
-import type { State } from '../../../types';
+import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 
 const OpinionSourceFormModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     source: PropTypes.object,
-    submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
   },
   mixins: [IntlMixin],
 
+  getInitialState() {
+    return {
+      isSubmitting: false,
+    };
+  },
+
+  handleFailure() {
+    this.setState({ isSubmitting: false });
+  },
+
+  handleSubmit() {
+    this.setState({ isSubmitting: true });
+  },
+
+  handleSubmitSuccess() {
+    const { onClose } = this.props;
+    onClose();
+    this.setState({ isSubmitting: false });
+    OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
+  },
+
   render() {
-    const { submitting, source, show, dispatch } = this.props;
+    const { isSubmitting } = this.state;
+    const { source, onClose, show } = this.props;
     const action = source ? 'update' : 'create';
     return (
       <Modal
         animation={false}
         show={show}
-        onHide={() => {
-          if (action === 'update') {
-            dispatch(hideSourceEditModal());
-          } else {
-            dispatch(hideSourceCreateModal());
-          }
-        }}
+        onHide={onClose.bind(null, this)}
         bsSize="large"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
@@ -49,24 +59,26 @@ const OpinionSourceFormModal = React.createClass({
           <OpinionSourceForm
             opinion={OpinionSourceStore.opinion}
             source={source}
+            isSubmitting={isSubmitting}
+            onValidationFailure={() => {
+              this.handleFailure();
+            }}
+            onSubmitSuccess={() => {
+              this.handleSubmitSuccess();
+            }}
+            onSubmitFailure={() => {
+              this.handleFailure();
+            }}
           />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton
-            onClose={() => {
-              if (action === 'update') {
-                dispatch(hideSourceEditModal());
-              } else {
-                dispatch(hideSourceCreateModal());
-              }
-            }}
-          />
+          <CloseButton onClose={onClose} />
           <SubmitButton
             id={`confirm-opinion-source-${action}`}
             label={action === 'create' ? 'global.publish' : 'global.edit'}
-            isSubmitting={submitting}
+            isSubmitting={isSubmitting}
             onSubmit={() => {
-              dispatch(submit(formName));
+              this.handleSubmit();
             }}
           />
         </Modal.Footer>
@@ -75,10 +87,4 @@ const OpinionSourceFormModal = React.createClass({
   },
 });
 
-export default connect((state: State, props) => ({
-  show:
-    (!props.source && state.opinion.showSourceCreateModal) ||
-    (props.source && state.opinion.showSourceEditModal === props.source.id) ||
-    false,
-  submitting: isSubmitting(formName)(state),
-}))(OpinionSourceFormModal);
+export default OpinionSourceFormModal;

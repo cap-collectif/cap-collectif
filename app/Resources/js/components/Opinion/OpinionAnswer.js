@@ -6,9 +6,15 @@ import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
-    answer: PropTypes.object,
+    answer: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.object]).isRequired,
   },
   mixins: [IntlMixin],
+
+  getDefaultProps() {
+    return {
+      answer: null,
+    };
+  },
 
   render() {
     const answer = this.props.answer;
@@ -21,15 +27,16 @@ const OpinionAnswer = React.createClass({
     });
     return (
       <div className={classes} id="answer">
-        {answer.title
-          ? <p className="h4" style={{ marginTop: '0' }}>
-              {answer.title}
-            </p>
-          : null}
+        {
+          answer.title
+          ? <p className="h4" style={{ marginTop: '0' }}>{answer.title}</p>
+          : null
+        }
         <AnswerBody answer={answer} />
       </div>
     );
   },
+
 });
 
 export default OpinionAnswer;
