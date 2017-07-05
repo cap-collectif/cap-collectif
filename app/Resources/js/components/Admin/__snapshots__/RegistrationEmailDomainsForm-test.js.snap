@@ -26,6 +26,8 @@ exports[`<RegistrationEmailDomainsForm /> renders correctly 1`] = `
       bsClass="btn"
       bsStyle="default"
       disabled={false}
+      navDropdown={false}
+      navItem={false}
       type="submit"
     >
       Enregistrer

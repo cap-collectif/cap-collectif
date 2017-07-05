@@ -14,6 +14,8 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       className="col-sm-offset-4"
       disabled={true}
       id="edit-account-profile-button"
+      navDropdown={false}
+      navItem={false}
       onClick={[Function]}
     >
       Enregistrer les modifications
@@ -40,6 +42,8 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       className="col-sm-offset-4"
       disabled={true}
       id="edit-account-profile-button"
+      navDropdown={false}
+      navItem={false}
       onClick={[Function]}
     >
       Chargement...
@@ -66,6 +70,8 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       className="col-sm-offset-4"
       disabled={false}
       id="edit-account-profile-button"
+      navDropdown={false}
+      navItem={false}
       onClick={[Function]}
     >
       Enregistrer les modifications

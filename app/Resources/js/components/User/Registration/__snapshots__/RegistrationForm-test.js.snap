@@ -56,22 +56,24 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
     name="charte"
     type="checkbox"
-  >
-    <FormattedHTMLMessage
-      link={
-        <a
-          className="external-link"
-          href="/charte"
-        >
-          la charte
-        </a>
-      }
-      message="J'ai lu et j'accepte {link}."
-      tagName="span"
-    />
-  </Field>
+  />
   <Field
     component={[Function]}
     id="captcha"
@@ -124,22 +126,24 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
     name="charte"
     type="checkbox"
-  >
-    <FormattedHTMLMessage
-      link={
-        <a
-          className="external-link"
-          href="/charte"
-        >
-          la charte
-        </a>
-      }
-      message="J'ai lu et j'accepte {link}."
-      tagName="span"
-    />
-  </Field>
+  />
   <Field
     component={[Function]}
     id="captcha"
@@ -221,22 +225,24 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
     name="charte"
     type="checkbox"
-  >
-    <FormattedHTMLMessage
-      link={
-        <a
-          className="external-link"
-          href="/charte"
-        >
-          la charte
-        </a>
-      }
-      message="J'ai lu et j'accepte {link}."
-      tagName="span"
-    />
-  </Field>
+  />
   <Field
     component={[Function]}
     id="captcha"
@@ -308,22 +314,24 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <Field
     component={[Function]}
     id="charte"
+    label={
+      <FormattedHTMLMessage
+        link={
+          <a
+            className="external-link"
+            href="/charte"
+          >
+            la charte
+          </a>
+        }
+        message="J'ai lu et j'accepte {link}."
+        tagName="span"
+      />
+    }
+    labelClassName="h5"
     name="charte"
     type="checkbox"
-  >
-    <FormattedHTMLMessage
-      link={
-        <a
-          className="external-link"
-          href="/charte"
-        >
-          la charte
-        </a>
-      }
-      message="J'ai lu et j'accepte {link}."
-      tagName="span"
-    />
-  </Field>
+  />
   <Field
     component={[Function]}
     id="captcha"

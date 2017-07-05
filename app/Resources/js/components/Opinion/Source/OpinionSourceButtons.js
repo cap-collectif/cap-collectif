@@ -1,24 +1,30 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 import OpinionSourceDeleteModal from './OpinionSourceDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import OpinionSourceVoteBox from './OpinionSourceVoteBox';
-import { showSourceEditModal } from '../../../redux/modules/opinion';
 
 const OpinionSourceButtons = React.createClass({
   propTypes: {
-    source: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    source: React.PropTypes.object.isRequired,
   },
 
   getInitialState() {
     return {
+      isEditing: false,
       isDeleting: false,
     };
+  },
+
+  openEditModal() {
+    this.setState({ isEditing: true });
+  },
+
+  closeEditModal() {
+    this.setState({ isEditing: false });
   },
 
   openDeleteModal() {
@@ -30,20 +36,24 @@ const OpinionSourceButtons = React.createClass({
   },
 
   render() {
-    const { source, dispatch } = this.props;
+    const { source } = this.props;
     return (
       <div>
-        <OpinionSourceVoteBox source={source} />{' '}
+        <OpinionSourceVoteBox source={source} />
+        {' '}
         <OpinionSourceReportButton source={source} />
         <EditButton
-          onClick={() => {
-            dispatch(showSourceEditModal(source.id));
-          }}
+          onClick={this.openEditModal}
           author={source.author}
           editable={source.isContribuable}
           className="source__btn--edit btn-xs btn-dark-gray btn--outline"
         />
-        <OpinionSourceFormModal source={source} />{' '}
+        <OpinionSourceFormModal
+          source={source}
+          show={this.state.isEditing}
+          onClose={this.closeEditModal}
+        />
+        {' '}
         <DeleteButton
           onClick={this.openDeleteModal}
           author={source.author}
@@ -59,4 +69,4 @@ const OpinionSourceButtons = React.createClass({
   },
 });
 
-export default connect()(OpinionSourceButtons);
+export default OpinionSourceButtons;
