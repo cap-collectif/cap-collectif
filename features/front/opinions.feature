@@ -32,7 +32,7 @@ Feature: Opinions
       | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
       | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should see "Consultation terminée. Merci à tous d'avoir contribué."
-    And I should not see "Proposer"
+    And the create opinion button should be disabled
 
   @javascript @security
   Scenario: Can not create an opinion when not logged in
