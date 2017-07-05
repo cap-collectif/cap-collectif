@@ -3,8 +3,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
 import { IdeasListFilters } from './IdeasListFilters';
-import IdeaCreate from '../Create/IdeaCreate';
-import IdeasListSearch from './IdeasListSearch';
 
 const props = {
   onChange: () => {},
@@ -31,10 +29,6 @@ describe('<IdeasListFilters />', () => {
     const wrapper = shallow(
       <IdeasListFilters features={featuresDisabled} {...props} {...IntlData} />,
     );
-    expect(wrapper.find('Row')).toHaveLength(1);
-    expect(wrapper.find(IdeaCreate)).toHaveLength(0);
-    expect(wrapper.find('#idea-filter-theme')).toHaveLength(0);
-    expect(wrapper.find(IdeasListSearch)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -46,7 +40,6 @@ describe('<IdeasListFilters />', () => {
         {...IntlData}
       />,
     );
-    expect(wrapper.find('#idea-filter-theme')).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -58,7 +51,6 @@ describe('<IdeasListFilters />', () => {
         {...IntlData}
       />,
     );
-    expect(wrapper.find(IdeaCreate)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 });

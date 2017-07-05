@@ -9,7 +9,7 @@ import IdeaEditModal from '../Edit/IdeaEditModal';
 import IdeaDeleteModal from '../Delete/IdeaDeleteModal';
 import { showIdeaEditModal } from '../../../redux/modules/idea';
 
-const IdeaPageButtons = React.createClass({
+export const IdeaPageButtons = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

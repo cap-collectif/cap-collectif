@@ -10,7 +10,7 @@ import IdeaEditForm, { formName } from './IdeaEditForm';
 import { hideIdeaEditModal } from '../../../redux/modules/idea';
 import type { State } from '../../../types';
 
-const IdeaEditModal = React.createClass({
+export const IdeaEditModal = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,

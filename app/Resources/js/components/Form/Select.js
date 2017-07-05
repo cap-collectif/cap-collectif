@@ -4,8 +4,8 @@ import Select from 'react-select';
 
 export const renderSelect = React.createClass({
   propTypes: {
-    input: PropTypes.any,
-    meta: PropTypes.any,
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
     touched: PropTypes.bool,
     label: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,

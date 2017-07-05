@@ -14,7 +14,7 @@ import {
 } from '../../../redux/modules/idea';
 import type { State } from '../../../types';
 
-const IdeaCreate = React.createClass({
+export const IdeaCreate = React.createClass({
   propTypes: {
     themes: PropTypes.array.isRequired,
     themeId: PropTypes.number,
