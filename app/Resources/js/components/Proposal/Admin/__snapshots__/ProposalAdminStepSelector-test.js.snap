@@ -4,6 +4,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
   className="row"
+  listItem={false}
   style={
     Object {
       "marginLeft": 0,
@@ -13,6 +14,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
   }
 >
   <Col
+    bsClass="col"
     componentClass="div"
     xs={10}
   >
@@ -24,6 +26,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={2}
   >
@@ -44,6 +47,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={12}
   >
@@ -57,6 +61,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
       }
     >
       <Col
+        bsClass="col"
         componentClass="div"
         md={1}
         style={
@@ -72,6 +77,7 @@ exports[`<ProposalAdminStepSelector /> render correctly 1`] = `
         </strong>
       </Col>
       <Col
+        bsClass="col"
         componentClass="div"
         md={3}
         style={
@@ -109,6 +115,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
 <ListGroupItem
   bsClass="list-group-item"
   className="row"
+  listItem={false}
   style={
     Object {
       "marginLeft": 0,
@@ -118,6 +125,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
   }
 >
   <Col
+    bsClass="col"
     componentClass="div"
     xs={10}
   >
@@ -129,6 +137,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={2}
   >
@@ -149,6 +158,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={12}
   >
@@ -162,6 +172,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
       }
     >
       <Col
+        bsClass="col"
         componentClass="div"
         md={1}
         style={
@@ -177,6 +188,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited 1`] = `
         </strong>
       </Col>
       <Col
+        bsClass="col"
         componentClass="div"
         md={3}
         style={
@@ -214,6 +226,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
 <ListGroupItem
   bsClass="list-group-item"
   className="row"
+  listItem={false}
   style={
     Object {
       "marginLeft": 0,
@@ -223,6 +236,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
   }
 >
   <Col
+    bsClass="col"
     componentClass="div"
     xs={10}
   >
@@ -234,6 +248,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={2}
   >
@@ -254,6 +269,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
     </div>
   </Col>
   <Col
+    bsClass="col"
     componentClass="div"
     xs={12}
   >
@@ -267,6 +283,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
       }
     >
       <Col
+        bsClass="col"
         componentClass="div"
         md={1}
         style={
@@ -282,6 +299,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
         </strong>
       </Col>
       <Col
+        bsClass="col"
         componentClass="div"
         md={3}
         style={
@@ -311,6 +329,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
         </FormControl>
       </Col>
       <Col
+        bsClass="col"
         componentClass="div"
         sm={8}
       >

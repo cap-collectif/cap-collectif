@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -7,7 +8,7 @@ import type { State } from '../../../types';
 import { register as onSubmit } from '../../../redux/modules/user';
 import renderComponent from '../../Form/Field';
 
-export const validate = (values, props) => {
+export const validate = (values: Object, props: Object) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
@@ -117,7 +118,9 @@ export const RegistrationForm = React.createClass({
               {this.getIntlMessage('registration.select.type')}
             </option>
             {userTypes.map((type, i) =>
-              <option key={i + 1} value={type.id}>{type.name}</option>,
+              <option key={i + 1} value={type.id}>
+                {type.name}
+              </option>,
             )}
           </Field>}
         {addZipcodeField &&
@@ -141,7 +144,9 @@ export const RegistrationForm = React.createClass({
           let children;
           if (field.choices) {
             const choices = field.choices.map((choice, i) =>
-              <option key={i + 1} value={choice.label}>{choice.label}</option>,
+              <option key={i + 1} value={choice.label}>
+                {choice.label}
+              </option>,
             );
             children = [
               <option key={0} value="">
@@ -176,13 +181,17 @@ export const RegistrationForm = React.createClass({
           name="charte"
           component={renderComponent}
           type="checkbox"
-          label={
+          children={
             <FormattedHTMLMessage
               message={this.getIntlMessage('registration.charte')}
-              link={<a className="external-link" href={cguLink}>{cguName}</a>}
+              link={
+                <a className="external-link" href={cguLink}>
+                  {cguName}
+                </a>
+              }
             />
           }
-          labelClassName="h5"
+          // labelClassName="h5"
         />
         {addCaptchaField &&
           <Field

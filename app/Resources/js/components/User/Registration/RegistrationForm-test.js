@@ -10,6 +10,7 @@ describe('<RegistrationForm />', () => {
     ...IntlData,
     addUserTypeField: false,
     addZipcodeField: false,
+    addCaptchaField: true,
     handleSubmit: jest.fn(),
     userTypes: [],
     cguName: 'la charte',
@@ -23,7 +24,13 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a form with user_type select if enabled', () => {
-    const wrapper = shallow(<RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} addUserTypeField />);
+    const wrapper = shallow(
+      <RegistrationForm
+        {...props}
+        userTypes={[{ id: 1, name: 'type_1' }]}
+        addUserTypeField
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -33,17 +40,21 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a form with dynamic fields', () => {
-    const wrapper = shallow(<RegistrationForm {...props}
-      dynamicFields={[
-        {
-          type: 'text',
-          required: true,
-          private: false,
-          question: 'Champ pas facultatif',
-          slug: 'champ-pas-facultatif',
-          id: 6,
-        },
-      ]} />);
+    const wrapper = shallow(
+      <RegistrationForm
+        {...props}
+        dynamicFields={[
+          {
+            type: 'text',
+            required: true,
+            private: false,
+            question: 'Champ pas facultatif',
+            slug: 'champ-pas-facultatif',
+            id: 6,
+          },
+        ]}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

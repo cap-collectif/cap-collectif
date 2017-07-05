@@ -30,7 +30,7 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
   <Alert
     bsClass="alert"
     bsStyle="danger"
-    closeLabel="Close Alert"
+    closeLabel="Close alert"
   >
     <p>
       <FormattedHTMLMessage
@@ -64,7 +64,7 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
   <Alert
     bsClass="alert"
     bsStyle="warning"
-    closeLabel="Close Alert"
+    closeLabel="Close alert"
   >
     <p>
       Un email de confirmation vous a été envoyé.

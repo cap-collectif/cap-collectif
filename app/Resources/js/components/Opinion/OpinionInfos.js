@@ -53,8 +53,7 @@ const OpinionInfos = React.createClass({
     return (
       <span className="excerpt">
         {' - '}
-        {this.getIntlMessage('global.edited')}
-        {' '}
+        {this.getIntlMessage('global.edited')}{' '}
         <FormattedDate
           value={moment(opinion.updatedAt)}
           day="numeric"
@@ -73,7 +72,11 @@ const OpinionInfos = React.createClass({
       return <UserLink user={opinion.author} />;
     }
 
-    return <span>{opinion.author_name}</span>;
+    return (
+      <span>
+        {opinion.author_name}
+      </span>
+    );
   },
 
   renderRankingLabel() {
@@ -93,14 +96,14 @@ const OpinionInfos = React.createClass({
                 max={rankingThreshold}
               />
             : opinionTerm === 0
-                ? <FormattedMessage
-                    message={this.getIntlMessage('opinion.ranking.opinions')}
-                    max={rankingThreshold}
-                  />
-                : <FormattedMessage
-                    message={this.getIntlMessage('opinion.ranking.articles')}
-                    max={rankingThreshold}
-                  />}
+              ? <FormattedMessage
+                  message={this.getIntlMessage('opinion.ranking.opinions')}
+                  max={rankingThreshold}
+                />
+              : <FormattedMessage
+                  message={this.getIntlMessage('opinion.ranking.articles')}
+                  max={rankingThreshold}
+                />}
         </span>
       );
     }
@@ -115,7 +118,7 @@ const OpinionInfos = React.createClass({
         {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
-        <PinnedLabel show={this.props.opinion.pinned} type="opinion" />
+        <PinnedLabel show={this.props.opinion.pinned || false} type="opinion" />
         {this.renderRankingLabel()}
       </p>
     );

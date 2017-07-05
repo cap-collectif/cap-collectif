@@ -15,6 +15,12 @@ if [ "$PRODUCTION" ]; then
   # Frontend deps
   yarn install --pure-lockfile
   bower install --config.interactive=false --allow-root
+
+  echo "Testing node-sass binding..."
+  if ./node_modules/node-sass/bin/node-sass >/dev/null 2>&1 | grep --quiet `npm rebuild node-sass` >/dev/null 2>&1; then
+      echo "Building node-sass binding for the container..."
+      npm rebuild node-sass > /dev/null
+  fi
   yarn run build:prod
 
   # Server side rendering deps
