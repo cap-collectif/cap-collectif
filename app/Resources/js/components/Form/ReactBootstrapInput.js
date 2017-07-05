@@ -14,7 +14,6 @@ import {
   Popover,
   Radio,
 } from 'react-bootstrap';
-import PlacesAutocomplete from 'react-places-autocomplete';
 import Editor from './Editor';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -124,10 +123,6 @@ export default class ReactBootstrapInput extends Component {
 
     if (type === 'captcha') {
       return <Captcha value={value} {...props} />;
-    }
-
-    if (type === 'places') {
-      return <PlacesAutocomplete value={value} {...props} />;
     }
 
     if (type === 'image') {
