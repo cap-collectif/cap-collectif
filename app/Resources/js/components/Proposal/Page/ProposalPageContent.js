@@ -17,13 +17,12 @@ import {
   openEditProposalModal,
 } from '../../../redux/modules/proposal';
 
-const SmallMarker = () => (
+const SmallMarker = () =>
   <img
     src="/svg/marker.svg"
     className="proposal__map--marker"
     alt="starting point"
-  />
-);
+  />;
 
 const ProposalPageContent = React.createClass({
   displayName: 'ProposalPageContent',
@@ -56,17 +55,20 @@ const ProposalPageContent = React.createClass({
             id="proposal-media"
             src={proposal.media.url}
             alt=""
-            role="presentation"
             className="block img-responsive"
           />}
         <div className="block">
-          <h3 className="h3">{this.getIntlMessage('proposal.description')}</h3>
+          <h3 className="h3">
+            {this.getIntlMessage('proposal.description')}
+          </h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {address &&
           <div className="block" style={{ height: 255 }}>
             <h4 className="h4">Lieu ou adresse</h4>
-            <p>{address[0].formatted_address}</p>
+            <p>
+              {address[0].formatted_address}
+            </p>
             <GoogleMapReact
               style={{
                 height: 175,
@@ -97,9 +99,9 @@ const ProposalPageContent = React.createClass({
               />
             </GoogleMapReact>
           </div>}
-        {proposal.responses.map((response, index) => (
-          <ProposalResponse key={index} response={response} />
-        ))}
+        {proposal.responses.map((response, index) =>
+          <ProposalResponse key={index} response={response} />,
+        )}
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper proposal={proposal} />
           <ShareButtonDropdown

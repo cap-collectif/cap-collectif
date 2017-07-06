@@ -8,39 +8,35 @@ import { Button, Alert } from 'react-bootstrap';
 import renderInput from '../Form/Field';
 import type { State } from '../../types';
 
-const renderDynamicFields = ({ fields, meta: { error } }) => ( // eslint-disable-line
+const renderDynamicFields = (
+  { fields, meta: { error } }, // eslint-disable-line
+) =>
   <div>
-    <label htmlFor="options">Options</label>
-    { error && <Alert bsStyle="danger">{error}</Alert> }
-    {
-      fields.map((field, index) =>
-        <div key={index} className="row" style={{ marginBottom: 10 }}>
-          <Field
-            name={`${field}.label`}
-            type="text"
-            component={renderInput}
-            wrapperClassName="col-sm-10"
-          />
-          <div className="col-sm-2" style={{ marginTop: -15 }}>
-            <Button
-              onClick={() => fields.remove(index)}
-            >
-              Retirer
-            </Button>
-          </div>
-        </div>,
-      )
-    }
+    <p>Options</p>
+    {error &&
+      <Alert bsStyle="danger">
+        {error}
+      </Alert>}
+    {fields.map((field, index) =>
+      <div key={index} className="row" style={{ marginBottom: 10 }}>
+        <Field
+          name={`${field}.label`}
+          type="text"
+          component={renderInput}
+          wrapperClassName="col-sm-10"
+        />
+        <div className="col-sm-2" style={{ marginTop: -15 }}>
+          <Button onClick={() => fields.remove(index)}>Retirer</Button>
+        </div>
+      </div>,
+    )}
     <div>
-      <Button onClick={() => fields.push({})}>
-        Ajouter
-      </Button>
+      <Button onClick={() => fields.push({})}>Ajouter</Button>
     </div>
-  </div>
-);
+  </div>;
 
 type Props = {
-  showChoices: boolean
+  showChoices: boolean,
 };
 export const RegistrationQuestionForm = React.createClass({
   propTypes: {
@@ -64,28 +60,24 @@ export const RegistrationQuestionForm = React.createClass({
           label={'Saisie obligatoire'}
           component={renderInput}
         />
-        <Field
-          name="type"
-          type="select"
-          label={'Type'}
-          component={renderInput}
-        >
-          <option value="" disabled>{this.getIntlMessage('global.select')}</option>
-          <option value={0}>{this.getIntlMessage('global.question.types.text')}</option>
+        <Field name="type" type="select" label={'Type'} component={renderInput}>
+          <option value="" disabled>
+            {this.getIntlMessage('global.select')}
+          </option>
+          <option value={0}>
+            {this.getIntlMessage('global.question.types.text')}
+          </option>
           {/* <option value={1}>{this.getIntlMessage('global.question.types.textarea')}</option> */}
           {/* <option value={2}>{this.getIntlMessage('global.question.types.editor')}</option> */}
           {/* <option value={3}>{this.getIntlMessage('global.question.types.radio')}</option> */}
-          <option value={4}>{this.getIntlMessage('global.question.types.select')}</option>
+          <option value={4}>
+            {this.getIntlMessage('global.question.types.select')}
+          </option>
           {/* <option value={5}>{this.getIntlMessage('global.question.types.checkbox')}</option> */}
           {/* <option value={6}>{this.getIntlMessage('global.question.types.ranking')}</option> */}
         </Field>
-        {
-          showChoices &&
-            <FieldArray
-              name="choices"
-              component={renderDynamicFields}
-            />
-        }
+        {showChoices &&
+          <FieldArray name="choices" component={renderDynamicFields} />}
       </form>
     );
   },
