@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginOverlay /> renders children if not enabled 1`] = `
+<div
+  className="foo"
+/>
+`;
+
+exports[`<LoginOverlay /> renders children if user is logged 1`] = `
+<div
+  className="foo"
+/>
+`;
+
+exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
+<span>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <Popover
+        bsClass="popover"
+        id="login-popover"
+        placement="right"
+        title="Connectez-vous pour contribuer"
+      >
+        <p>
+          Vous devez être connecté pour réaliser cette action.
+        </p>
+        <p>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="success"
+            className="center-block btn-block"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Connexion
+          </Button>
+        </p>
+      </Popover>
+    }
+    placement="top"
+    rootClose={true}
+    trigger="click"
+  >
+    <div
+      className="foo"
+      onClick={null}
+    />
+  </OverlayTrigger>
+</span>
+`;

@@ -8,4 +8,5 @@ Feature: Merge proposals
     When I click the create merge button
     And I fill the proposal merge form
     And I submit the create merge form
-    Then I should not see "Publier"
+    And I wait 2 seconds
+    Then I should not see "Envoyer"

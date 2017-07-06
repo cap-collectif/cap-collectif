@@ -31,15 +31,14 @@ const Radio = React.createClass({
   },
 
   reverseOnChange(value, e) {
-    const {
-      field,
-      onChange,
-    } = this.props;
+    const { field, onChange } = this.props;
     if (field.isOtherAllowed) {
-      const otherRadioElement = Array.from(ReactDOM.findDOMNode(this.other).getElementsByTagName('*')).find((node) => {
+      const otherRadioElement = Array.from(
+        ReactDOM.findDOMNode(this.other).getElementsByTagName('*'),
+      ).find(node => {
         return node.type === 'radio';
       });
-      if ((otherRadioElement.id !== e.target.id) && e.target.type !== 'text') {
+      if (otherRadioElement.id !== e.target.id && e.target.type !== 'text') {
         this.other.clear();
       }
     }
@@ -48,10 +47,12 @@ const Radio = React.createClass({
 
   empty() {
     this.other.clear();
-    const radioElements = Array.from(ReactDOM.findDOMNode(this.radioGroup).getElementsByTagName('input')).filter((node) => {
+    const radioElements = Array.from(
+      ReactDOM.findDOMNode(this.radioGroup).getElementsByTagName('input'),
+    ).filter(node => {
       return node.type === 'radio';
     });
-    radioElements.map((radio) => {
+    radioElements.map(radio => {
       $(radio).prop('checked', false);
     });
   },
@@ -74,10 +75,7 @@ const Radio = React.createClass({
     labelClasses[labelClassName] = true;
 
     return (
-      <div
-        className={`form-group ${getGroupStyle(field.id)}`}
-        id={id}
-      >
+      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
         <label htmlFor={id} className={classNames(labelClasses)}>
           {label}
         </label>
@@ -85,44 +83,38 @@ const Radio = React.createClass({
           {field.helpText}
         </span>
         <RadioGroup
-          ref={c => this.radioGroup = c}
+          ref={c => (this.radioGroup = c)}
           name={fieldName}
-          onChange={this.reverseOnChange}
-        >
-          {
-            this.props.field.choices.map((choice) => {
-              const choiceKey = `choice-${choice.id}`;
-              return (
-                <Input
-                  key={choiceKey}
-                  id={`${id}_${choiceKey}`}
-                  name={fieldName}
-                  type="radio"
-                  label={choice.label}
-                  value={choice.label}
-                  help={choice.description}
-                  disabled={disabled}
-                  image={choice.image ? choice.image.url : null}
-                />
-              );
-            })
-          }
-          {
-            this.props.field.isOtherAllowed
-              ? <Other
-                ref={c => this.other = c}
+          onChange={this.reverseOnChange}>
+          {this.props.field.choices.map(choice => {
+            const choiceKey = `choice-${choice.id}`;
+            return (
+              <Input
+                key={choiceKey}
+                id={`${id}_${choiceKey}`}
+                name={fieldName}
+                type="radio"
+                value={choice.label}
+                help={choice.description}
+                disabled={disabled}
+                image={choice.image ? choice.image.url : null}>
+                {choice.label}
+              </Input>
+            );
+          })}
+          {this.props.field.isOtherAllowed
+            ? <Other
+                ref={c => (this.other = c)}
                 field={this.props.field}
                 onChange={this.onChange}
                 disabled={disabled}
               />
-            : null
-          }
+            : null}
         </RadioGroup>
         {renderFormErrors(field.id)}
       </div>
     );
   },
-
 });
 
 export default Radio;

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
-use FilesystemIterator;
 
 trait ProposalStepsTrait
 {
@@ -810,17 +809,6 @@ trait ProposalStepsTrait
         $this->getSession()->wait(3000, "$('" . $page->getSelector('comments tab') . "').length > 0");
         $page->clickCommentsTab();
         $this->iWait(1);
-    }
-
-    /**
-     * @Then I should have :filesNumber files in media folder
-     */
-    public function iShouldHaveXFilesInMediaFolder(int $filesNumber)
-    {
-        $filesCount = iterator_count(
-            new FilesystemIterator('/var/www/web/media/default/0001/01', FilesystemIterator::SKIP_DOTS)
-        );
-        \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
     }
 
     protected function openCollectStepIsOpen()

@@ -2,7 +2,7 @@
 
 exports[`<RegistrationSortableQuestionList /> renders correctly 1`] = `
 <ListGroup
-  componentClass="div"
+  bsClass="list-group"
 >
   <sortableElement(Connect(RegistrationSortableQuestion))
     collection={0}

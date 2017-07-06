@@ -13,11 +13,14 @@ exports[`<AddRegistrationQuestionModal /> renders correctly 1`] = `
   keyboard={true}
   manager={
     ModalManager {
+      "add": [Function],
       "containers": Array [],
       "data": Array [],
       "handleContainerOverflow": true,
       "hideSiblingNodes": true,
+      "isTopModal": [Function],
       "modals": Array [],
+      "remove": [Function],
     }
   }
   onHide={[Function]}
@@ -26,24 +29,27 @@ exports[`<AddRegistrationQuestionModal /> renders correctly 1`] = `
   show={true}
 >
   <ModalHeader
-    aria-label="Close"
-    bsClass="modal"
+    bsClass="modal-header"
     closeButton={true}
+    closeLabel="Close"
   >
     <ModalTitle
-      bsClass="modal"
+      bsClass="modal-title"
+      componentClass="h4"
       id="contained-modal-title-lg"
     >
       Ajouter un champ supplémentaire
     </ModalTitle>
   </ModalHeader>
   <ModalBody
-    bsClass="modal"
+    bsClass="modal-body"
+    componentClass="div"
   >
     <ReduxForm />
   </ModalBody>
   <ModalFooter
-    bsClass="modal"
+    bsClass="modal-footer"
+    componentClass="div"
   >
     <CloseButton
       label="global.cancel"
@@ -56,8 +62,6 @@ exports[`<AddRegistrationQuestionModal /> renders correctly 1`] = `
       bsStyle="primary"
       disabled={false}
       id="confirm-new-question"
-      navDropdown={false}
-      navItem={false}
       onClick={[Function]}
       type="submit"
     >

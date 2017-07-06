@@ -13,11 +13,14 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
   keyboard={true}
   manager={
     ModalManager {
+      "add": [Function],
       "containers": Array [],
       "data": Array [],
       "handleContainerOverflow": true,
       "hideSiblingNodes": true,
+      "isTopModal": [Function],
       "modals": Array [],
+      "remove": [Function],
     }
   }
   onHide={[Function]}
@@ -30,24 +33,27 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
     onSubmit={[Function]}
   >
     <ModalHeader
-      aria-label="Close"
-      bsClass="modal"
+      bsClass="modal-header"
       closeButton={true}
+      closeLabel="Close"
     >
       <ModalTitle
-        bsClass="modal"
+        bsClass="modal-title"
+        componentClass="h4"
         id="contained-modal-title-lg"
       >
         Connexion
       </ModalTitle>
     </ModalHeader>
     <ModalBody
-      bsClass="modal"
+      bsClass="modal-body"
+      componentClass="div"
     >
       <Connect(LoginBox) />
     </ModalBody>
     <ModalFooter
-      bsClass="modal"
+      bsClass="modal-footer"
+      componentClass="div"
     >
       <CloseButton
         label="global.cancel"
@@ -60,8 +66,6 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
         bsStyle="primary"
         disabled={false}
         id="confirm-login"
-        navDropdown={false}
-        navItem={false}
         type="submit"
       >
         Se connecter

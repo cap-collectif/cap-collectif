@@ -80,7 +80,6 @@ class ProposalAdmin extends Admin
                 'attr' => [
                     'disabled' => true,
                 ],
-                'mapped' => false,
             ]);
         }
 

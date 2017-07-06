@@ -63,8 +63,8 @@ class ProposalType extends AbstractType
                 'allow_delete' => false,
                 'by_reference' => false,
                 'types' => [
-                    ValueResponseType::class,
-                    MediaResponseType::class,
+                    new ValueResponseType($this->transformer),
+                    new MediaResponseType($this->transformer),
                 ],
                 'required' => false,
             ])

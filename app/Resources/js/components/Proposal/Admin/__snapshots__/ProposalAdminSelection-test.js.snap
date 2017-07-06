@@ -40,7 +40,7 @@ exports[`<ProposalAdminSelection /> render correctly 1`] = `
     show={false}
   >
     <ListGroup
-      componentClass="div"
+      bsClass="list-group"
       style={
         Object {
           "margin": 10,

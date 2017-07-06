@@ -31,7 +31,7 @@ trait TextableTrait
     public function getBodyExcerpt(int $nb = 100): string
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt .= '…';
+        $excerpt = $excerpt . '...';
 
         return $excerpt;
     }

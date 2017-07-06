@@ -1,12 +1,13 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Button, ButtonGroup, Modal, Input } from 'react-bootstrap';
+import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import NotationButtons from './../Edit/NotationButtons';
 import ElementsFinder from './../ElementsFinder';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/ReactBootstrapInput';
 
 const PublishModal = React.createClass({
   propTypes: {
@@ -82,7 +83,7 @@ const PublishModal = React.createClass({
     if (this.state.elements && element && element.id !== 'root') {
       expanded[element.id] = true;
       if (element) {
-        element.path.split(',').map((id) => {
+        element.path.split(',').map(id => {
           expanded[id] = true;
         });
       }
@@ -120,10 +121,7 @@ const PublishModal = React.createClass({
   },
 
   publish() {
-    const {
-      process,
-      synthesis,
-    } = this.props;
+    const { process, synthesis } = this.props;
     this.hide();
     const data = {
       archived: true,
@@ -181,9 +179,17 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.title')}`}
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.title',
+          )}`}
         </h2>
-        <Input type="text" id="publish_element_title" name="publish_element[title]" className="publish-element__title" valueLink={this.linkState('title')} />
+        <Input
+          type="text"
+          id="publish_element_title"
+          name="publish_element[title]"
+          className="publish-element__title"
+          valueLink={this.linkState('title')}
+        />
       </div>
     );
   },
@@ -192,7 +198,9 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.parent')}`}
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.parent',
+          )}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -204,18 +212,25 @@ const PublishModal = React.createClass({
       <div className="modal__action">
         <h2 className="h4">Type</h2>
         <ButtonGroup style={{ width: '100%' }}>
-          <Button onClick={this.setDisplayType.bind(this, 'folder')} active={this.state.displayType === 'folder'} style={{ width: '50%' }}>Dossier</Button>
-          <Button onClick={this.setDisplayType.bind(this, 'grouping')} active={this.state.displayType === 'grouping'} style={{ width: '50%' }}>Regroupement</Button>
+          <Button
+            onClick={this.setDisplayType.bind(this, 'folder')}
+            active={this.state.displayType === 'folder'}
+            style={{ width: '50%' }}>
+            Dossier
+          </Button>
+          <Button
+            onClick={this.setDisplayType.bind(this, 'grouping')}
+            active={this.state.displayType === 'grouping'}
+            style={{ width: '50%' }}>
+            Regroupement
+          </Button>
         </ButtonGroup>
       </div>
     );
   },
 
   renderParentFinder() {
-    const {
-      element,
-      synthesis,
-    } = this.props;
+    const { element, synthesis } = this.props;
     const parentId = this.state.parent ? this.state.parent.id : 'root';
     return (
       <ElementsFinder
@@ -235,11 +250,23 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.notation')}`}
-          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.notation',
+          )}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
+          )}`}</span>
         </h2>
-        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
-        <p className="small excerpt action__help">{this.getIntlMessage('synthesis.edition.action.publish.help.notation')}</p>
+        <NotationButtons
+          notation={this.state.notation}
+          onChange={this.setNotation}
+          block
+        />
+        <p className="small excerpt action__help">
+          {this.getIntlMessage(
+            'synthesis.edition.action.publish.help.notation',
+          )}
+        </p>
       </div>
     );
   },
@@ -248,11 +275,21 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.comment')}`}
-          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.comment',
+          )}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
+          )}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
-          <Input type="textarea" id="publish_element_comment" name="publish_element[comment]" className="publish-element__comment" valueLink={this.linkState('comment')} />
+          <Input
+            type="textarea"
+            id="publish_element_comment"
+            name="publish_element[comment]"
+            className="publish-element__comment"
+            valueLink={this.linkState('comment')}
+          />
         </form>
       </div>
     );
@@ -262,11 +299,21 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.publish.field.description')}`}
-          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage('synthesis.edition.action.publish.optional')}`}</span>
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.description',
+          )}`}
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
+          )}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
-          <Input type="textarea" id="publish_element_description" name="publish_element[description]" className="publish-element__description" valueLink={this.linkState('description')} />
+          <Input
+            type="textarea"
+            id="publish_element_description"
+            name="publish_element[description]"
+            className="publish-element__description"
+            valueLink={this.linkState('description')}
+          />
         </form>
       </div>
     );
@@ -275,26 +322,37 @@ const PublishModal = React.createClass({
   render() {
     const { show, element } = this.props;
     return (
-      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
+      <Modal
+        show={show}
+        onHide={this.hide}
+        animation={false}
+        dialogClassName="modal--publish">
         <Modal.Header closeButton>
-          <Modal.Title>{this.getIntlMessage('synthesis.edition.action.publish.title')}</Modal.Title>
+          <Modal.Title>
+            {this.getIntlMessage('synthesis.edition.action.publish.title')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
-          {(element.displayType === 'grouping' || element.displayType === 'folder') && this.renderType()}
+          {(element.displayType === 'grouping' ||
+            element.displayType === 'folder') &&
+            this.renderType()}
           {this.renderDescription()}
           {this.renderParent()}
           {this.renderNotation()}
           {this.renderComment()}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide}>{this.getIntlMessage('synthesis.edition.action.publish.btn_cancel')}</Button>
-          <Button bsStyle="primary" type="submit" onClick={this.publish}>{this.getIntlMessage('synthesis.edition.action.publish.btn_submit')}</Button>
+          <Button type="button" onClick={this.hide}>
+            {this.getIntlMessage('synthesis.edition.action.publish.btn_cancel')}
+          </Button>
+          <Button bsStyle="primary" type="submit" onClick={this.publish}>
+            {this.getIntlMessage('synthesis.edition.action.publish.btn_submit')}
+          </Button>
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default PublishModal;

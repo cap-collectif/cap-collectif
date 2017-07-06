@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
@@ -8,7 +9,9 @@ import Input from './Input';
 const ImageUpload = React.createClass({
   propTypes: {
     preview: PropTypes.string,
-    valueLink: PropTypes.object.isRequired,
+    valueLink: PropTypes.object,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
     id: PropTypes.string,
     className: PropTypes.string,
     multiple: PropTypes.bool,
@@ -43,15 +46,18 @@ const ImageUpload = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.valueLink.value) {
+    const value = nextProps.valueLink
+      ? nextProps.valueLink.value
+      : nextProps.value;
+    if (value) {
       this.setState({
-        preview: nextProps.valueLink.value.preview,
+        preview: value.preview,
       });
     }
   },
 
   onDrop(files) {
-    const { valueLink, multiple } = this.props;
+    const { valueLink, onChange, multiple } = this.props;
     files = files.filter(file => file !== null);
     if (files.length > 0 && files.length <= 5 && this.state.files.length <= 5) {
       files = files.concat(this.state.files);
@@ -62,7 +68,11 @@ const ImageUpload = React.createClass({
         },
         () => {
           this.uncheckDelete();
-          valueLink.requestChange(multiple ? files : files[0]);
+          if (valueLink) {
+            valueLink.requestChange(multiple ? files : files[0]);
+          } else {
+            onChange(multiple ? files : files[0]);
+          }
         },
       );
     }
@@ -73,21 +83,26 @@ const ImageUpload = React.createClass({
   },
 
   onToggleDelete() {
-    const { valueLink } = this.props;
-    const deleteValue = this._deleteCheckbox.getChecked();
+    const { valueLink, onChange } = this.props;
+    const deleteValue = !this._deleteCheckbox.getValue();
+    console.log('deleteValue', deleteValue);
+    if (deleteValue) {
+      if (valueLink) {
+        valueLink.requestChange(null);
+      } else {
+        onChange(null);
+      }
+    }
     this.setState({
       delete: deleteValue,
       preview: null,
     });
-    if (deleteValue) {
-      valueLink.requestChange(false);
-    }
   },
 
   uncheckDelete() {
     const ref = this._deleteCheckbox;
     if (ref) {
-      $(ref.getInputDOMNode()).prop('checked', false);
+      $(ref.getDOMNode()).prop('checked', false);
     }
   },
 
@@ -125,7 +140,6 @@ const ImageUpload = React.createClass({
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
-            inputProps={{ id: `${id}_field` }}
             disablePreview={disablePreview}
             className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
@@ -176,7 +190,7 @@ const ImageUpload = React.createClass({
                 name="image-uploader__delete"
                 onChange={this.onToggleDelete}
                 ref={c => (this._deleteCheckbox = c)}
-                label={this.getIntlMessage(
+                children={this.getIntlMessage(
                   'global.image_uploader.image.delete',
                 )}
               />}

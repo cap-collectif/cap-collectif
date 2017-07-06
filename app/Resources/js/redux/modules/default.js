@@ -1,30 +1,46 @@
 // @flow
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
-import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
-import { addRegistrationFieldSucceeded, updateRegistrationFieldSucceeded, deleteRegistrationFieldSucceeded } from './user';
+import type {
+  Exact,
+  Action,
+  Dispatch,
+  FeatureToggle,
+  FeatureToggles,
+} from '../../types';
+import {
+  addRegistrationFieldSucceeded,
+  updateRegistrationFieldSucceeded,
+  deleteRegistrationFieldSucceeded,
+} from './user';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
-type ToggleFeatureSucceededAction = { type: 'default/TOGGLE_FEATURE_SUCCEEDED', feature: string, enabled: boolean };
-type ShowUpdateFieldModalAction = { type: 'default/SHOW_UPDATE_FIELD_MODAL', id: number };
+type ToggleFeatureSucceededAction = {
+  type: 'default/TOGGLE_FEATURE_SUCCEEDED',
+  feature: string,
+  enabled: boolean,
+};
+type ShowUpdateFieldModalAction = {
+  type: 'default/SHOW_UPDATE_FIELD_MODAL',
+  id: number,
+};
 type HideUpdateFieldModalAction = { type: 'default/HIDE_UPDATE_FIELD_MODAL' };
 
 export type DefaultAction =
-  ToggleFeatureSucceededAction |
-  ShowNewFieldModalAction |
-  ShowUpdateFieldModalAction |
-  HideUpdateFieldModalAction |
-  HideNewFieldModalAction
-;
+  | ToggleFeatureSucceededAction
+  | ShowNewFieldModalAction
+  | ShowUpdateFieldModalAction
+  | HideUpdateFieldModalAction
+  | HideNewFieldModalAction;
 export type State = {
-    +districts: Array<Object>,
-    +showNewFieldModal: boolean,
-    +themes: Array<Object>,
-    +features: Exact<FeatureToggles>,
-    +userTypes: Array<Object>,
-    +parameters: Object,
-    +updatingRegistrationFieldModal: ?number
+  +districts: Array<Object>,
+  +showNewFieldModal: boolean,
+  +themes: Array<Object>,
+  +features: Exact<FeatureToggles>,
+  +userTypes: Array<Object>,
+  +parameters: Object,
+  +updatingRegistrationFieldModal: ?number,
 };
 
 const initialState: State = {
@@ -41,6 +57,7 @@ const initialState: State = {
     login_facebook: false,
     login_gplus: false,
     members_list: false,
+    captcha: false,
     newsletter: false,
     profiles: false,
     projects_form: false,
@@ -66,35 +83,52 @@ const initialState: State = {
   updatingRegistrationFieldModal: null,
 };
 
-export const toggleFeatureSucceeded = (feature: FeatureToggle, enabled: boolean): ToggleFeatureSucceededAction => ({
+export const toggleFeatureSucceeded = (
+  feature: FeatureToggle,
+  enabled: boolean,
+): ToggleFeatureSucceededAction => ({
   type: 'default/TOGGLE_FEATURE_SUCCEEDED',
   feature,
   enabled,
 });
-export const showNewFieldModal = (): ShowNewFieldModalAction => ({ type: 'default/SHOW_NEW_FIELD_MODAL' });
-export const hideNewFieldModal = (): HideNewFieldModalAction => ({ type: 'default/HIDE_NEW_FIELD_MODAL' });
-export const updateRegistrationFieldModal = (id: number): ShowUpdateFieldModalAction => ({ type: 'default/SHOW_UPDATE_FIELD_MODAL', id });
-export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({ type: 'default/HIDE_UPDATE_FIELD_MODAL' });
+export const showNewFieldModal = (): ShowNewFieldModalAction => ({
+  type: 'default/SHOW_NEW_FIELD_MODAL',
+});
+export const hideNewFieldModal = (): HideNewFieldModalAction => ({
+  type: 'default/HIDE_NEW_FIELD_MODAL',
+});
+export const updateRegistrationFieldModal = (
+  id: number,
+): ShowUpdateFieldModalAction => ({
+  type: 'default/SHOW_UPDATE_FIELD_MODAL',
+  id,
+});
+export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({
+  type: 'default/HIDE_UPDATE_FIELD_MODAL',
+});
 
-export const requestUpdateRegistrationField = (values: Object, dispatch: Dispatch, { fieldId }: { fieldId: number}) => {
-  return Fetcher
-    .putToJson(`/registration_form/questions/${fieldId}`, values)
-    .then(
-      (question: Object) => {
-        dispatch(hideRegistrationFieldModal());
-        dispatch(updateRegistrationFieldSucceeded(fieldId, question));
-      },
-      () => {
-        throw new SubmissionError({ _error: 'Un problème est survenu' });
-      },
-    );
+export const requestUpdateRegistrationField = (
+  values: Object,
+  dispatch: Dispatch,
+  { fieldId }: { fieldId: number },
+) => {
+  return Fetcher.putToJson(
+    `/registration_form/questions/${fieldId}`,
+    values,
+  ).then(
+    (question: Object) => {
+      dispatch(hideRegistrationFieldModal());
+      dispatch(updateRegistrationFieldSucceeded(fieldId, question));
+    },
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
 };
 
 export const updateRegistrationCommunicationForm = (values: Object) => {
-  return Fetcher
-    .put('/registration_form', values)
-    .then(() => {
-    },
+  return Fetcher.put('/registration_form', values).then(
+    () => {},
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },
@@ -105,9 +139,8 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
   if (values.type !== '4') {
     delete values.choices;
   }
-  return Fetcher
-    .postToJson('/registration_form/questions', values)
-    .then((question: Object) => {
+  return Fetcher.postToJson('/registration_form/questions', values).then(
+    (question: Object) => {
       dispatch(hideNewFieldModal());
       dispatch(addRegistrationFieldSucceeded(question));
     },
@@ -118,27 +151,34 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
 };
 
 export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
-  if (confirm('Confirmez la suppression ?')) { // eslint-disable-line
-    return Fetcher
-      .delete(`/registration_form/questions/${id}`)
-      .then(
-        () => {
-          dispatch(deleteRegistrationFieldSucceeded(id));
-        },
+  if (window.confirm('Confirmez la suppression ?')) {
+    // eslint-disable-line
+    return Fetcher.delete(`/registration_form/questions/${id}`).then(
+      () => {
+        dispatch(deleteRegistrationFieldSucceeded(id));
+      },
       () => {},
     );
   }
 };
 
-export const toggleFeature = (dispatch: Dispatch, feature: FeatureToggle, enabled: boolean): Promise<*> => {
-  return Fetcher
-    .put(`/toggles/${feature}`, { enabled })
-    .then(() => {
+export const toggleFeature = (
+  dispatch: Dispatch,
+  feature: FeatureToggle,
+  enabled: boolean,
+): Promise<*> => {
+  return Fetcher.put(`/toggles/${feature}`, { enabled }).then(
+    () => {
       dispatch(toggleFeatureSucceeded(feature, enabled));
-    }, () => {});
+    },
+    () => {},
+  );
 };
 
-export const reducer = (state: State = initialState, action: Action): Exact<State> => {
+export const reducer = (
+  state: State = initialState,
+  action: Action,
+): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
@@ -151,7 +191,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'default/HIDE_NEW_FIELD_MODAL':
       return { ...state, showNewFieldModal: false };
     case 'default/TOGGLE_FEATURE_SUCCEEDED':
-      return { ...state, features: { ...state.features, [action.feature]: action.enabled } };
+      return {
+        ...state,
+        features: { ...state.features, [action.feature]: action.enabled },
+      };
     default:
       return state;
   }

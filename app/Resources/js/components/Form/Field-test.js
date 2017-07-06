@@ -33,36 +33,50 @@ describe('<Field />', () => {
     const wrapper = shallow(<Field {...defaultProps} />);
     expect(wrapper.is('Input')).toEqual(true);
     expect(wrapper.prop('errors')).toEqual(null);
-    expect(wrapper.prop('bsStyle')).toEqual(null);
+    expect(wrapper.prop('validationState')).toEqual(null);
     expect(wrapper.prop('hasFeedback')).toEqual(false);
   });
 
   it('renders a validated <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true }} />);
+    const wrapper = shallow(
+      <Field {...defaultProps} meta={{ touched: true }} />,
+    );
     expect(wrapper.is('Input')).toEqual(true);
     expect(wrapper.prop('errors')).toEqual(null);
-    expect(wrapper.prop('bsStyle')).toEqual('success');
+    expect(wrapper.prop('validationState')).toEqual('success');
     expect(wrapper.prop('hasFeedback')).toEqual(true);
   });
 
   it('renders an errored <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />);
+    const wrapper = shallow(
+      <Field
+        {...defaultProps}
+        meta={{ touched: true, error: 'global.required' }}
+      />,
+    );
     expect(wrapper.is('Input')).toEqual(true);
     expect(wrapper.prop('errors')).toEqual('Cette valeur est requise.');
-    expect(wrapper.prop('bsStyle')).toEqual('error');
+    expect(wrapper.prop('validationState')).toEqual('error');
     expect(wrapper.prop('hasFeedback')).toEqual(true);
   });
 
   it('renders a validation disabled <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} input={Object.assign(defaultProps.input, { disableValidation: true })} />);
+    const wrapper = shallow(
+      <Field
+        {...defaultProps}
+        input={Object.assign(defaultProps.input, { disableValidation: true })}
+      />,
+    );
     expect(wrapper.is('Input')).toEqual(true);
     expect(wrapper.prop('errors')).toEqual(null);
-    expect(wrapper.prop('bsStyle')).toEqual(null);
+    expect(wrapper.prop('validationState')).toEqual(null);
     expect(wrapper.prop('hasFeedback')).toEqual(false);
   });
 
   it('renders a div around <Input /> element', () => {
-    const wrapper = shallow(<Field {...defaultProps} divClassName="myclassName" />);
+    const wrapper = shallow(
+      <Field {...defaultProps} divClassName="myclassName" />,
+    );
     expect(wrapper.is('div')).toEqual(true);
     expect(wrapper.prop('className')).toEqual('myclassName');
     expect(wrapper.find('Input').length).toEqual(1);
