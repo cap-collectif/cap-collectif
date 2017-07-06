@@ -10,8 +10,9 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
   />
   <Input
     addonAfter={
-      <span
-        className="glyphicon glyphicon-refresh"
+      <Glyphicon
+        bsClass="glyphicon"
+        glyph="refresh"
       />
     }
     autoComplete="off"
@@ -217,8 +218,9 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
   />
   <Input
     addonAfter={
-      <span
-        className="glyphicon glyphicon-refresh"
+      <Glyphicon
+        bsClass="glyphicon"
+        glyph="refresh"
       />
     }
     autoComplete="off"
