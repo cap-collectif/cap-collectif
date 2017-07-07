@@ -10,6 +10,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class IdeaVoteRepository extends EntityRepository
 {
+    public function getAnonymousCount(): int
+    {
+        $qb = $this->createQueryBuilder('v')
+        ->select('count(DISTINCT v.email)')
+        ->where('v.user IS NULL')
+    ;
+
+        return $qb->getQuery()
+        ->getSingleScalarResult()
+        ;
+    }
+
     public function findAllByIdea(Idea $idea)
     {
         return $this->createQueryBuilder('v')

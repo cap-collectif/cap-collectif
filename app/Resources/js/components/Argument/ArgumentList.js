@@ -66,36 +66,24 @@ const ArgumentList = React.createClass({
 
   loadArguments() {
     const { opinion } = this.props;
-    ArgumentActions.load(opinion, this.state.type);
+    ArgumentActions.load(
+      opinion,
+      this.state.type,
+    );
   },
 
   renderFilter() {
     const { type } = this.props;
-    const { order } = this.state;
-    const htmlFor = `filter-arguments-${type}`;
     if (this.state.arguments.length > 1) {
       return (
         <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label htmlFor={htmlFor}>
-            <span className="sr-only">
-              {this.getIntlMessage(`argument.filter.${type}`)}
-            </span>
+          <label className="sr-only" htmlFor={`filter-arguments-${type}`}>
+            {this.getIntlMessage(`argument.filter.${type}`)}
           </label>
-          <select
-            id={htmlFor}
-            ref="filter"
-            className="form-control pull-right"
-            value={order}
-            onChange={() => this.updateSelectedValue()}>
-            <option value="last">
-              {this.getIntlMessage('global.filter_last')}
-            </option>
-            <option value="old">
-              {this.getIntlMessage('global.filter_old')}
-            </option>
-            <option value="popular">
-              {this.getIntlMessage('global.filter_popular')}
-            </option>
+          <select id={`filter-arguments-${type}`} ref="filter" className="form-control pull-right" value={this.state.order} onChange={() => this.updateSelectedValue()}>
+            <option value="last">{this.getIntlMessage('global.filter_last')}</option>
+            <option value="old">{this.getIntlMessage('global.filter_old')}</option>
+            <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
           </select>
         </Col>
       );
@@ -104,50 +92,40 @@ const ArgumentList = React.createClass({
 
   render() {
     const { type } = this.props;
-    const { count, isLoading } = this.state;
     return (
-      <div
-        id={`opinion__arguments--${type}`}
-        className="block--tablet block--bordered">
+      <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
           <Col xs={12} sm={6} md={6}>
             <h4 className="opinion__header__title">
               {type === 'simple'
-                ? <FormattedMessage
-                    message={this.getIntlMessage('argument.simple.list')}
-                    num={count}
-                  />
+                ? <FormattedMessage message={this.getIntlMessage('argument.simple.list')} num={this.state.count} />
                 : type === 'yes'
-                  ? <FormattedMessage
-                      message={this.getIntlMessage('argument.yes.list')}
-                      num={count}
-                    />
-                  : <FormattedMessage
-                      message={this.getIntlMessage('argument.no.list')}
-                      num={count}
-                    />}
+                  ? <FormattedMessage message={this.getIntlMessage('argument.yes.list')} num={this.state.count} />
+                  : <FormattedMessage message={this.getIntlMessage('argument.no.list')} num={this.state.count} />
+              }
             </h4>
           </Col>
-          {this.renderFilter()}
+          { this.renderFilter() }
         </Row>
-        {!isLoading
+        {!this.state.isLoading
           ? <ul className="media-list opinion__list">
-              {this.state.arguments.map(argument => {
-                if (
-                  (type === 'yes' || type === 'simple') &&
-                  argument.type === 1
-                ) {
+            {
+              this.state.arguments.map((argument) => {
+                if ((type === 'yes' || type === 'simple') && argument.type === 1) {
                   return <ArgumentItem key={argument.id} argument={argument} />;
                 }
                 if (type === 'no' && argument.type === 0) {
                   return <ArgumentItem key={argument.id} argument={argument} />;
                 }
-              })}
-            </ul>
-          : <Loader />}
-      </div>
+              })
+            }
+          </ul>
+          : <Loader />
+        }
+    </div>
     );
   },
+
 });
 
 export default ArgumentList;

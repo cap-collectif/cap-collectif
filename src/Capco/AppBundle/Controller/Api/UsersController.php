@@ -24,6 +24,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UsersController extends FOSRestController
 {
     /**
+   * @Get("/users_counters")
+   * @View()
+   */
+  public function getUsersCountersAction()
+  {
+      $em = $this->getDoctrine()->getManager();
+      $registeredContributorCount = $em->getRepository('CapcoUserBundle:User')->getRegisteredContributorCount();
+      $anonymousComments = $em->getRepository('CapcoAppBundle:Comment')->getAnonymousCount();
+      $anonymousVoters =
+          $em->getRepository('CapcoAppBundle:IdeaVote')->getAnonymousCount()
+        + $em->getRepository('CapcoAppBundle:ProposalCollectVote')->getAnonymousCount()
+        + $em->getRepository('CapcoAppBundle:ProposalSelectionVote')->getAnonymousCount()
+      ;
+
+      return [
+          'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
+          'registeredContributors' => $registeredContributorCount,
+          'anonymousComments' => $anonymousComments,
+          'anonymousVoters' => $anonymousVoters,
+      ];
+  }
+
+    /**
      * @ApiDoc(
      *  resource=true,
      *  description="Get users",

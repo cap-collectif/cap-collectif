@@ -12,6 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalCollectVoteRepository extends EntityRepository
 {
+    public function getAnonymousCount(): int
+    {
+        $qb = $this->createQueryBuilder('v')
+        ->select('count(DISTINCT v.email)')
+        ->where('v.user IS NULL')
+    ;
+
+        return $qb->getQuery()
+        ->getSingleScalarResult()
+        ;
+    }
+
     public function getUserVotesGroupedByStepIds(array $collectStepsIds, User $user = null): array
     {
         $userVotes = [];

@@ -35,15 +35,7 @@ const RankingItem = React.createClass({
   },
 
   render() {
-    const {
-      id,
-      item,
-      position,
-      isDragging,
-      connectDragSource,
-      arrowFunctions,
-      disabled,
-    } = this.props;
+    const { id, item, position, isDragging, connectDragSource, arrowFunctions, disabled } = this.props;
     const opacity = isDragging ? 0.5 : 1;
     const classes = classNames({
       ranking__item: true,
@@ -55,22 +47,22 @@ const RankingItem = React.createClass({
         <div style={{ marginBottom: '5px' }}>
           <div className="ranking__item__label-block">
             <span className="ranking__item__icon hidden-xs">
-              <i className="cap cap-cursor-move" />
+              <i className="cap cap-cursor-move"></i>
             </span>
             <span className="ranking__item__label">
-              {position ? `${position}. ` : null}
-              {item.label}
+              { position ? (`${position}. `) : null}
+              { item.label }
             </span>
           </div>
         </div>
-        {item.description &&
-          <p className="excerpt small ranking__item__description">
-            {item.description}
-          </p>}
-        {item.image &&
-          <div>
-            <img className="ranking__item__image" alt="" src={item.image.url} />
-          </div>}
+        {
+          item.description &&
+            <p className="excerpt small ranking__item__description">{item.description}</p>
+        }
+        {
+          item.image &&
+            <div><img className="ranking__item__image" alt="" role="presentation" src={item.image.url} /></div>
+        }
         <RankingArrows
           item={item}
           arrowFunctions={arrowFunctions}
@@ -79,10 +71,10 @@ const RankingItem = React.createClass({
       </div>,
     );
   },
+
 });
 
-export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
-  // eslint-disable-line new-cap
+export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({ // eslint-disable-line new-cap
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))(RankingItem);

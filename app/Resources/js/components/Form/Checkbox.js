@@ -18,7 +18,6 @@ const Checkbox = React.createClass({
     labelClassName: PropTypes.string,
   },
   mixins: [IntlMixin],
-  other: Other,
 
   getDefaultProps() {
     return {
@@ -55,7 +54,6 @@ const Checkbox = React.createClass({
     this.setState({
       value: [],
     });
-    // $FlowFixMe
     this.other.clear();
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     checkboxes.map(checkbox => {
@@ -78,9 +76,7 @@ const Checkbox = React.createClass({
     const labelClasses = {
       'control-label': true,
     };
-    if (labelClassName) {
-      labelClasses[labelClassName] = true;
-    }
+    labelClasses[labelClassName] = true;
 
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
