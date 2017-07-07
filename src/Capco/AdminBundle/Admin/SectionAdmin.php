@@ -41,7 +41,7 @@ class SectionAdmin extends Admin
         return $query;
     }
 
-    public function getBatchActions()
+    public function getBatchActions(): array
     {
         return [];
     }
