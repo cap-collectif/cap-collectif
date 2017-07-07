@@ -6,7 +6,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label
@@ -93,7 +93,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label

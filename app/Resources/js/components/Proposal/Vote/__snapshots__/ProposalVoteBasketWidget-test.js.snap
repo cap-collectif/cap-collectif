@@ -11,7 +11,6 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       <img
         alt=""
         className="widget__image"
-        role="presentation"
         src="http://capco.dev/images.png"
       />
     </NavbarBrand>
@@ -82,7 +81,6 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       <img
         alt=""
         className="widget__image"
-        role="presentation"
         src="http://capco.dev/images.png"
       />
     </NavbarBrand>
@@ -222,7 +220,6 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       <img
         alt=""
         className="widget__image"
-        role="presentation"
         src="http://capco.dev/images.png"
       />
     </NavbarBrand>

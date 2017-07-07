@@ -45,7 +45,6 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
     alt=""
     className="block img-responsive"
     id="idea-media"
-    role="presentation"
     src="image.png"
   />
   <div
