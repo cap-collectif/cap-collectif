@@ -26,6 +26,7 @@ exports.config = {
       /^app\/Resources\/scss\/(modules|base)/,
       'app/Resources/js-server/registration.js',
       /-test.js$/,
+      /.snap$/,
     ],
   },
   files: {
