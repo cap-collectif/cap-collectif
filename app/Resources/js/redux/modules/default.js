@@ -152,7 +152,7 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
 
 export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
   if (window.confirm('Confirmez la suppression ?')) {
-    // eslint-disable-line
+    // eslint-disable-line no-alert
     return Fetcher.delete(`/registration_form/questions/${id}`).then(
       () => {
         dispatch(deleteRegistrationFieldSucceeded(id));
