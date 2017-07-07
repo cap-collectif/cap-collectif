@@ -29,13 +29,12 @@ class UsersController extends FOSRestController
    */
   public function getUsersCountersAction()
   {
-      $em = $this->getDoctrine()->getManager();
-      $registeredContributorCount = $em->getRepository('CapcoUserBundle:User')->getRegisteredContributorCount();
-      $anonymousComments = $em->getRepository('CapcoAppBundle:Comment')->getAnonymousCount();
+      $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
+      $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
       $anonymousVoters =
-          $em->getRepository('CapcoAppBundle:IdeaVote')->getAnonymousCount()
-        + $em->getRepository('CapcoAppBundle:ProposalCollectVote')->getAnonymousCount()
-        + $em->getRepository('CapcoAppBundle:ProposalSelectionVote')->getAnonymousCount()
+          $this->get('capco.idea_vote.repository')->getAnonymousCount()
+        + $this->get('capco.proposal_collect_vote.repository')->getAnonymousCount()
+        + $this->get('capco.proposal_selection_vote.repository')->getAnonymousCount()
       ;
 
       return [
