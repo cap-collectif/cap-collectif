@@ -65,12 +65,7 @@ export const ProposalVoteBasketWidget = React.createClass({
         {image &&
           <Navbar.Header>
             <Navbar.Brand>
-              <img
-                className="widget__image"
-                alt=""
-                role="presentation"
-                src={image}
-              />
+              <img className="widget__image" alt="" src={image} />
             </Navbar.Brand>
             <Navbar.Toggle>
               <i
@@ -101,11 +96,11 @@ export const ProposalVoteBasketWidget = React.createClass({
                     className="widget__counter__select"
                     valueLink={this.linkState('selectedStepId')}
                     label={false}>
-                    {votableSteps.map(step => (
+                    {votableSteps.map(step =>
                       <option key={step.id} value={step.id}>
                         {step.title}
-                      </option>
-                    ))}
+                      </option>,
+                    )}
                   </Input>
                 </span>
               </li>}

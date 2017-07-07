@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
@@ -13,8 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
-    use AnonymousVoteRepositoryTrait;
-
     public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
     {
         $userVotes = [];

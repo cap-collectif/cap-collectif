@@ -8,7 +8,7 @@ import Input from './Input';
 
 const ImageUpload = React.createClass({
   propTypes: {
-    preview: PropTypes.string,
+    preview: PropTypes.any,
     valueLink: PropTypes.object,
     value: PropTypes.any,
     onChange: PropTypes.func,
@@ -19,9 +19,10 @@ const ImageUpload = React.createClass({
     maxSize: PropTypes.number,
     minSize: PropTypes.number,
     disablePreview: PropTypes.bool,
-    files: PropTypes.array,
+    files: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
+  _deleteCheckbox: Input,
 
   getDefaultProps() {
     return {
@@ -56,9 +57,9 @@ const ImageUpload = React.createClass({
     }
   },
 
-  onDrop(files) {
+  onDrop(droppedFiles) {
     const { valueLink, onChange, multiple } = this.props;
-    files = files.filter(file => file !== null);
+    let files = droppedFiles.filter(file => file !== null);
     if (files.length > 0 && files.length <= 5 && this.state.files.length <= 5) {
       files = files.concat(this.state.files);
       this.setState(
@@ -68,10 +69,14 @@ const ImageUpload = React.createClass({
         },
         () => {
           this.uncheckDelete();
-          if (valueLink) {
-            valueLink.requestChange(multiple ? files : files[0]);
-          } else {
-            onChange(multiple ? files : files[0]);
+          const newValue = multiple ? files : files[0];
+          if (typeof newValue !== 'undefined') {
+            if (valueLink) {
+              valueLink.requestChange(newValue);
+            }
+            if (onChange && typeof onChange !== 'undefined') {
+              onChange(newValue);
+            }
           }
         },
       );
@@ -89,7 +94,7 @@ const ImageUpload = React.createClass({
     if (deleteValue) {
       if (valueLink) {
         valueLink.requestChange(null);
-      } else {
+      } else if (onChange && typeof onChange !== 'undefined') {
         onChange(null);
       }
     }
@@ -127,8 +132,10 @@ const ImageUpload = React.createClass({
     } = this.props;
     const classes = {
       'image-uploader': true,
-      [className]: true,
     };
+    if (className) {
+      classes[className] = true;
+    }
 
     return (
       <Row id={id} className={classNames(classes)}>
@@ -181,8 +188,7 @@ const ImageUpload = React.createClass({
               {this.getIntlMessage('global.image_uploader.image.preview')}
             </p>
             <div className="image-uploader__preview text-center">
-              {this.state.preview &&
-                <img alt="" role="presentation" src={this.state.preview} />}
+              {this.state.preview && <img alt="" src={this.state.preview} />}
             </div>
             {(this.state.preview || preview) &&
               <Input
