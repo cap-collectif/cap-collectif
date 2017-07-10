@@ -1,146 +1,220 @@
-// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import renderComponent from '../../Form/Field';
-import { isUrl } from '../../../services/Validator';
-import type { State } from '../../../types';
-
-const validate = (
-  { title, body, object, url, confirm, theme }: Object,
-  { showThemes }: Object,
-) => {
-  const errors = {};
-  if (!title || title.length <= 2) {
-    errors.title = 'idea.constraints.title';
-  }
-  if (!body || body.length <= 2) {
-    errors.body = 'idea.constraints.body';
-  }
-  if (!object || object.length <= 2) {
-    errors.object = 'idea.constraints.object';
-  }
-  if (url && !isUrl(url)) {
-    errors.url = 'idea.constraints.url';
-  }
-  if (!confirm) {
-    errors.confirm = 'idea.constraints.confirm';
-  }
-  if (showThemes && theme < 0) {
-    errors.theme = 'idea.constraints.theme';
-  }
-  return errors;
-};
+import FormMixin from '../../../utils/FormMixin';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import FlashMessages from '../../Utils/FlashMessages';
+import Input from '../../Form/Input';
 
 export const IdeaForm = React.createClass({
   propTypes: {
     themes: PropTypes.array.isRequired,
     themeId: PropTypes.number,
+    isSubmitting: PropTypes.bool.isRequired,
+    onValidationFailure: PropTypes.func.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired,
+    onSubmitFailure: PropTypes.func.isRequired,
     idea: PropTypes.object,
     showThemes: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
       themeId: -1,
+      idea: null,
     };
   },
 
+  getInitialState() {
+    const {
+      idea,
+      themeId,
+    } = this.props;
+    return {
+      form: {
+        title: idea ? idea.title : '',
+        body: idea ? idea.body : '',
+        object: idea ? idea.object : '',
+        url: idea ? idea.url : '',
+        media: null,
+        theme: idea ? idea.theme.id : themeId,
+        confirm: !!!idea, // eslint-disable-line no-extra-boolean-cast
+      },
+      errors: {
+        title: [],
+        body: [],
+        object: [],
+        url: [],
+        media: [],
+        theme: [],
+        confirm: [],
+      },
+    };
+  },
+
+  componentDidMount() {
+    this.updateThemeConstraint();
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const { showThemes } = this.props;
+    if (nextProps.showThemes !== showThemes) {
+      this.updateThemeConstraint();
+    }
+  },
+
+  reinitState() {
+    this.setState(this.getInitialState());
+  },
+
+  updateThemeConstraint() {
+    const { showThemes } = this.props;
+    if (showThemes) {
+      this.formValidationRules.theme = {
+        minValue: { value: 0, message: 'idea.constraints.theme' },
+      };
+      return;
+    }
+    this.formValidationRules.theme = {};
+  },
+
+  formValidationRules: {
+    title: {
+      min: { value: 2, message: 'idea.constraints.title' },
+      notBlank: { message: 'idea.constraints.title' },
+    },
+    body: {
+      min: { value: 2, message: 'idea.constraints.body' },
+      notBlank: { message: 'idea.constraints.body' },
+    },
+    object: {
+      min: { value: 2, message: 'idea.constraints.object' },
+      notBlank: { message: 'idea.constraints.object' },
+    },
+    url: {
+      isUrl: { message: 'idea.constraints.url' },
+    },
+    confirm: {
+      isTrue: { message: 'idea.constraints.confirm' },
+    },
+  },
+
+  renderFormErrors(field) {
+    const errors = this.getErrorsMessages(field);
+    if (errors.length === 0) {
+      return null;
+    }
+    return <FlashMessages errors={errors} form />;
+  },
+
   render() {
-    const { idea, showThemes, themes } = this.props;
+    const {
+      idea,
+      showThemes,
+      themes,
+    } = this.props;
     return (
-      <form id="idea-form">
-        {idea &&
-          <div className="alert alert-warning edit-confirm-alert">
-            <Field
+      <form id="idea-form" ref="form">
+        {idea
+          ? <div className="alert alert-warning edit-confirm-alert">
+            <Input
               type="checkbox"
-              component={renderComponent}
+              ref="confirm"
               id="idea_confirm"
-              name="confirm"
-              children={this.getIntlMessage('idea.confirm')}
+              checkedLink={this.linkState('form.confirm')}
+              label={this.getIntlMessage('idea.confirm')}
+              labelClassName=""
+              groupClassName={this.getGroupStyle('confirm')}
+              errors={this.renderFormErrors('confirm')}
             />
-          </div>}
-        <Field
+          </div>
+          : null
+        }
+        <Input
           id="idea_title"
           type="text"
-          component={renderComponent}
-          name="title"
+          ref="title"
+          valueLink={this.linkState('form.title')}
           label={`${this.getIntlMessage('idea.form.title')} *`}
+          groupClassName={this.getGroupStyle('title')}
+          errors={this.renderFormErrors('title')}
         />
-        {showThemes &&
-          <Field
-            id="idea_theme"
-            type="select"
-            component={renderComponent}
-            name="theme"
-            label={`${this.getIntlMessage('idea.form.theme')} *`}>
-            <option value={-1} disabled>
-              {this.getIntlMessage('idea.form.select_theme')}
-            </option>
-            {themes.map(theme => {
-              return (
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
-                </option>
-              );
-            })}
-          </Field>}
-        <Field
-          id="idea_body"
-          type="editor"
-          name="body"
-          component={renderComponent}
-          label={`${this.getIntlMessage('idea.form.body')} *`}
-        />
-        <Field
-          id="idea_object"
-          type="editor"
-          name="object"
-          component={renderComponent}
-          label={`${this.getIntlMessage('idea.form.object')} *`}
-        />
-        <Field
-          id="idea_url"
-          type="text"
-          name="url"
-          component={renderComponent}
-          label={this.getIntlMessage('idea.form.url')}
-          help={this.getIntlMessage('idea.form.url_help')}
-          placeholder={this.getIntlMessage('idea.form.url_placeholder')}
-        />
-        <Field
-          id="idea_media"
-          type="image"
-          name="media"
-          component={renderComponent}
-          image={idea && idea.media ? idea.media.url : null}
-          label={this.getIntlMessage('idea.form.media')}
-        />
+
+        {
+          showThemes
+            ? <Input
+              id="idea_theme"
+              type="select"
+              ref="theme"
+              valueLink={this.linkState('form.theme')}
+              label={`${this.getIntlMessage('idea.form.theme')} *`}
+              groupClassName={this.getGroupStyle('theme')}
+              errors={this.renderFormErrors('theme')}
+              >
+              <option value={-1} disabled>{this.getIntlMessage('idea.form.select_theme')}</option>
+              {
+                themes.map((theme) => {
+                  return (
+                    <option key={theme.id} value={theme.id}>
+                      {theme.title}
+                    </option>
+                  );
+                })
+              }
+            </Input>
+            : null
+        }
+
+      <Input
+        id="idea_body"
+        type="editor"
+        label={`${this.getIntlMessage('idea.form.body')} *`}
+        groupClassName={this.getGroupStyle('body')}
+        errors={this.renderFormErrors('body')}
+        valueLink={this.linkState('form.body')}
+      />
+
+      <Input
+        id="idea_object"
+        type="editor"
+        label={`${this.getIntlMessage('idea.form.object')} *`}
+        groupClassName={this.getGroupStyle('object')}
+        errors={this.renderFormErrors('object')}
+        valueLink={this.linkState('form.object')}
+      />
+
+      <Input
+        id="idea_url"
+        type="text"
+        label={this.getIntlMessage('idea.form.url')}
+        groupClassName={this.getGroupStyle('url')}
+        errors={this.renderFormErrors('url')}
+        valueLink={this.linkState('form.url')}
+        help={this.getIntlMessage('idea.form.url_help')}
+        placeholder={this.getIntlMessage('idea.form.url_placeholder')}
+      />
+
+      <Input
+        id="idea_media"
+        type="image"
+        image={idea && idea.media ? idea.media.url : null}
+        label={this.getIntlMessage('idea.form.media')}
+        groupClassName={this.getGroupStyle('media')}
+        errors={this.renderFormErrors('media')}
+        valueLink={this.linkState('form.media')}
+      />
+
       </form>
     );
   },
+
 });
 
-const mapStateToProps = (state: State, { idea, themeId }) => {
+const mapStateToProps = (state) => {
   return {
     themes: state.default.themes,
-    initialValues: {
-      title: idea ? idea.title : '',
-      body: idea ? idea.body : '',
-      object: idea ? idea.object : '',
-      url: idea ? idea.url : '',
-      media: null,
-      theme: idea ? idea.theme.id : themeId,
-      confirm: !!!idea, // eslint-disable-line no-extra-boolean-cast
-    },
   };
 };
 
-const connector = connect(mapStateToProps, null, null, { withRef: true });
-export default connector(
-  reduxForm({
-    validate,
-  })(IdeaForm),
-);
+export default connect(mapStateToProps, null, null, { withRef: true })(IdeaForm);

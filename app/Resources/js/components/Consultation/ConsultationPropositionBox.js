@@ -18,32 +18,6 @@ export const ConsultationPropositionBox = React.createClass({
 
   render() {
     const { step } = this.props;
-    const renderSectionRecursiveList = ({
-      error,
-      props,
-    }: {
-      error: ?string,
-      props: { consultations: Array<{ sections: Array<Object> }> },
-    }) => {
-      if (error) {
-        console.log(error); // eslint-disable-line no-console
-        return graphqlError;
-      }
-      if (props) {
-        // eslint-disable-next-line react/prop-types
-        if (props.consultations[0].sections) {
-          return (
-            <SectionRecursiveList
-              consultation={step}
-              // eslint-disable-next-line react/prop-types
-              sections={props.consultations[0].sections}
-            />
-          );
-        }
-        return graphqlError;
-      }
-      return <Loader />;
-    };
     return (
       <div>
         {/* <Panel>
@@ -58,18 +32,35 @@ export const ConsultationPropositionBox = React.createClass({
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ConsultationPropositionBoxQuery($consultationId: ID!) {
-              consultations(id: $consultationId) {
-                sections {
-                  ...SectionRecursiveList_sections
-                }
+          query ConsultationPropositionBoxQuery($consultationId: ID!) {
+            consultations(id: $consultationId) {
+              sections {
+                ...SectionRecursiveList_sections
               }
             }
+          }
           `}
           variables={{
             consultationId: step.id,
           }}
-          render={renderSectionRecursiveList}
+          render={({ error, props }) => {
+            if (error) {
+              console.log(error); // eslint-disable-line no-console
+              return graphqlError;
+            }
+            if (props) {
+              if (props.consultations[0].sections) {
+                return (
+                  <SectionRecursiveList
+                    consultation={step}
+                    sections={props.consultations[0].sections}
+                  />
+                );
+              }
+              return graphqlError;
+            }
+            return <Loader />;
+          }}
         />
       </div>
     );

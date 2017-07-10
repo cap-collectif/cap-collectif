@@ -628,7 +628,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
   <Alert
     bsClass="alert"
     bsStyle="warning"
-    closeLabel="Close alert"
+    closeLabel="Close Alert"
   >
     Tous les champs sont obligatoires
   </Alert>

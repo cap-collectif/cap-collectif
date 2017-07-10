@@ -10,9 +10,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
   />
   <Input
     addonAfter={
-      <Glyphicon
-        bsClass="glyphicon"
-        glyph="refresh"
+      <span
+        className="glyphicon glyphicon-refresh"
       />
     }
     autoComplete="off"
@@ -31,7 +30,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
-    mountOnEnter={false}
     timeout={300}
     transitionAppear={false}
     unmountOnExit={false}
@@ -63,6 +61,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         bsClass="btn"
         bsStyle="default"
         disabled={false}
+        navDropdown={false}
+        navItem={false}
         onClick={[Function]}
       >
         Fermer
@@ -218,9 +218,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
   />
   <Input
     addonAfter={
-      <Glyphicon
-        bsClass="glyphicon"
-        glyph="refresh"
+      <span
+        className="glyphicon glyphicon-refresh"
       />
     }
     autoComplete="off"
@@ -239,7 +238,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
-    mountOnEnter={false}
     timeout={300}
     transitionAppear={false}
     unmountOnExit={false}
@@ -271,6 +269,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         bsClass="btn"
         bsStyle="default"
         disabled={false}
+        navDropdown={false}
+        navItem={false}
         onClick={[Function]}
       >
         Fermer

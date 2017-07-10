@@ -18,6 +18,8 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
     bsClass="btn"
     bsStyle="default"
     disabled={false}
+    navDropdown={false}
+    navItem={false}
     onClick={[Function]}
     style={
       Object {
@@ -38,6 +40,8 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
     bsClass="btn"
     bsStyle="default"
     disabled={false}
+    navDropdown={false}
+    navItem={false}
     onClick={[Function]}
     style={
       Object {
@@ -73,6 +77,8 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
     bsClass="btn"
     bsStyle="default"
     disabled={false}
+    navDropdown={false}
+    navItem={false}
     onClick={[Function]}
     style={
       Object {
@@ -93,6 +99,8 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
     bsClass="btn"
     bsStyle="default"
     disabled={false}
+    navDropdown={false}
+    navItem={false}
     onClick={[Function]}
     style={
       Object {

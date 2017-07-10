@@ -1,5 +1,6 @@
 // @flow
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 import {
   UPDATE_OPINION_SUCCESS,
   UPDATE_OPINION_FAILURE,
@@ -18,14 +19,6 @@ import type {
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
-
-type ShowArgumentEditModalAction = {
-  type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
-  id: Uuid,
-};
-type HideArgumentEditModalAction = {
-  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
-};
 type StartEditOpinionVersionAction = {
   type: 'opinion/START_EDIT_OPINION_VERSION',
 };
@@ -95,8 +88,6 @@ export type OpinionAction =
       opinionId: Uuid,
     }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
-  | HideArgumentEditModalAction
-  | ShowArgumentEditModalAction
   | StartEditOpinionVersionAction
   | CancelEditOpinionVersionAction
   | ShowOpinionVersionEditModalAction
@@ -132,12 +123,9 @@ export type State = {
   +isEditingOpinionVersion: boolean,
   +showOpinionCreateModal: ?Uuid,
   +showOpinionEditModal: ?Uuid,
-  +showArgumentEditModal: ?Uuid,
   +showOpinionVersionEditModal: boolean,
   +isCreatingOpinionVersion: boolean,
   +showOpinionVersionCreateModal: boolean,
-  +showSourceCreateModal: boolean,
-  +showSourceEditModal: ?Uuid,
 };
 
 const VOTES_PREVIEW_COUNT = 8;
@@ -159,41 +147,12 @@ const initialState: State = {
   currentVersionId: null,
   versionsById: {},
   isEditingOpinionVersion: false,
-  showArgumentEditModal: null,
   showOpinionCreateModal: null,
   showOpinionEditModal: null,
   showOpinionVersionEditModal: false,
   isCreatingOpinionVersion: false,
   showOpinionVersionCreateModal: false,
-  showSourceCreateModal: false,
-  showSourceEditModal: null,
 };
-
-export const openArgumentEditModal = (
-  id: Uuid,
-): ShowArgumentEditModalAction => ({
-  type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
-  id,
-});
-
-export const showSourceEditModal = (id: Uuid) => ({
-  type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
-  id,
-});
-export const hideSourceEditModal = () => ({
-  type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
-});
-
-export const showSourceCreateModal = () => ({
-  type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
-});
-export const hideSourceCreateModal = () => ({
-  type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
-});
-
-export const closeArgumentEditModal = (): HideArgumentEditModalAction => ({
-  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
-});
 
 const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({
   type: 'opinion/START_CREATE_OPINION_VERSION',
@@ -291,10 +250,8 @@ export function* fetchAllOpinionVotes(
     const { opinionId, versionId } = action;
     while (hasMore) {
       const votesUrl = versionId
-        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount *
-            votesPerIteration}&limit=${votesPerIteration}`
-        : `/opinions/${opinionId}/votes?offset=${iterationCount *
-            votesPerIteration}&limit=${votesPerIteration}`;
+        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        : `/opinions/${opinionId}/votes?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`;
       const result: { votes: OpinionVotes, hasMore: boolean } = yield call(
         Fetcher.get,
         votesUrl,
@@ -465,9 +422,7 @@ const appendVote = (
   const previousVote = object.votes.find(
     v => v.user.uniqueId === newVote.user.uniqueId,
   );
-  const voteCountIncreasing = `votesCount${getVoteStringByValue(
-    newVote.value,
-  )}`;
+  const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
   if (typeof previousVote === 'undefined') {
     // first vote
     const contribution = {
@@ -486,9 +441,7 @@ const appendVote = (
     v => v.user.uniqueId === newVote.user.uniqueId,
   );
   object.votes.splice(indexOfCurrentUserVote, 1);
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(
-    previousVote.value,
-  )}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
   const contribution = {
     ...object,
     votes: [...object.votes, newVote],
@@ -510,9 +463,7 @@ const removeVote = (
   const indexToRemove = object.votes.findIndex(
     v => v.user && v.user.uniqueId === oldVote.user.uniqueId,
   );
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(
-    oldVote.value,
-  )}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
   const lol = {
     ...object,
     votes: [
@@ -534,26 +485,6 @@ export const reducer = (
   action: Action,
 ): Exact<State> => {
   switch (action.type) {
-    case '@@INIT':
-      return { ...initialState, ...state };
-    case 'opinion/SHOW_SOURCE_EDIT_MODAL': {
-      return { ...state, showSourceEditModal: action.id };
-    }
-    case 'opinion/HIDE_SOURCE_EDIT_MODAL': {
-      return { ...state, showSourceEditModal: null };
-    }
-    case 'opinion/SHOW_SOURCE_CREATE_MODAL': {
-      return { ...state, showSourceCreateModal: true };
-    }
-    case 'opinion/HIDE_SOURCE_CREATE_MODAL': {
-      return { ...state, showSourceCreateModal: false };
-    }
-    case 'opinion/SHOW_ARGUMENT_EDIT_MODAL': {
-      return { ...state, showArgumentEditModal: action.id };
-    }
-    case 'opinion/HIDE_ARGUMENT_EDIT_MODAL': {
-      return { ...state, showArgumentEditModal: null };
-    }
     case 'opinion/START_CREATE_OPINION_VERSION': {
       return { ...state, isCreatingOpinionVersion: true };
     }

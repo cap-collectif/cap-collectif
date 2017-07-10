@@ -4,9 +4,6 @@ import std;
 backend default {
   .host = "localhost";
   .port = "8080";
-  .connect_timeout = 1s; # Timeout for backend connection (Apache, Nginx, etc...)
-  .first_byte_timeout = 10s; # Timeout for the first byte to come from your backend
-  .between_bytes_timeout = 2s; # Timeout between each bytes sent
 }
 
 # Called at the beginning of a request, after the complete request has been received and parsed.

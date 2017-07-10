@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
 import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
+import { Button, Collapse, Panel } from 'react-bootstrap';
 import { debounce } from 'lodash';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -325,7 +323,6 @@ export const ProposalForm = React.createClass({
         {optional}
       </span>
     );
-    // eslint-disable-next-line react/prop-types
     const autocompleteItem = ({ formattedSuggestion }) =>
       <div>
         <i className="cap cap-map-location" />{' '}
@@ -348,8 +345,8 @@ export const ProposalForm = React.createClass({
           errors={this.renderFormErrors('title')}
           addonAfter={
             this.state.isLoadingSuggestions
-              ? <Glyphicon glyph="refresh" className="glyphicon-spin" />
-              : <Glyphicon glyph="refresh" />
+              ? <span className="glyphicon glyphicon-refresh glyphicon-spin" />
+              : <span className="glyphicon glyphicon-refresh" />
           }
         />
         <Collapse in={this.state.suggestions.length > 0}>
@@ -444,9 +441,7 @@ export const ProposalForm = React.createClass({
               {this.getIntlMessage('proposal.map.form.field')}
             </label>
             {form.addressHelpText &&
-              <span className="help-block">
-                {form.addressHelpText}
-              </span>}
+              <span className="help-block">{form.addressHelpText}</span>}
             <PlacesAutocomplete
               inputProps={{
                 onChange: address => {

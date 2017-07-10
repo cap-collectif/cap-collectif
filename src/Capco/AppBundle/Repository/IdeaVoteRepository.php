@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -11,8 +10,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class IdeaVoteRepository extends EntityRepository
 {
-    use AnonymousVoteRepositoryTrait;
-
     public function findAllByIdea(Idea $idea)
     {
         return $this->createQueryBuilder('v')

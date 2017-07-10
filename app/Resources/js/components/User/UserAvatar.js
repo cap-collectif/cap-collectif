@@ -33,14 +33,7 @@ const UserAvatar = React.createClass({
     const { user } = this.props;
     const size = `${this.props.size}px`;
     if (user && user.media) {
-      return (
-        <img
-          src={user.media.url}
-          alt=""
-          className="img-circle"
-          style={{ width: size, height: size }}
-        />
-      );
+      return <img src={user.media.url} alt="" role="presentation" className="img-circle" style={{ width: size, height: size }} />;
     }
     return <DefaultAvatar size={this.props.size} />;
   },
@@ -64,22 +57,19 @@ const UserAvatar = React.createClass({
     };
     if (user && user._links && user._links.profile && anchor) {
       return (
-        <a
-          {...funcProps}
-          className={className}
-          style={style}
-          href={user._links.profile}>
-          {this.renderAvatar()}
+        <a {...funcProps} className={className} style={style} href={user._links.profile}>
+          { this.renderAvatar() }
         </a>
       );
     }
 
     return (
-      <span {...funcProps} className={className} style={style}>
-        {this.renderAvatar()}
+      <span {...funcProps} className={className} style={style} >
+        { this.renderAvatar() }
       </span>
     );
   },
+
 });
 
 export default UserAvatar;

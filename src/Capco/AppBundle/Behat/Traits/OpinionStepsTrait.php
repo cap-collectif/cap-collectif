@@ -491,6 +491,8 @@ trait OpinionStepsTrait
     }
 
     /**
+     * The create source button should be disabled.
+     *
      * @Then the create source button should be disabled
      */
     public function theCreateSourceButtonShouldBeDisabled()
@@ -501,16 +503,8 @@ trait OpinionStepsTrait
     }
 
     /**
-     * @Then the create opinion button should be disabled
-     */
-    public function theCreateOpinionButtonShouldBeDisabled()
-    {
-        $page = $this->getCurrentPage();
-        $button = $page->find('css', 'btn-add--les-causes');
-        \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
-    }
-
-    /**
+     * I edit my source.
+     *
      * @When I edit my source
      */
     public function iEditMySource()
@@ -523,7 +517,7 @@ trait OpinionStepsTrait
         $page->fillSourceBodyField();
         $page->checkSourceConfirmCheckbox();
         $page->submitSourceEditForm();
-        $this->iWait(2);
+        $this->iWait(1);
     }
 
     /**
@@ -540,7 +534,7 @@ trait OpinionStepsTrait
         $this->iWait(1);
         $page->fillSourceBodyField();
         $page->submitSourceEditForm();
-        $this->iWait(2);
+        $this->iWait(1);
     }
 
     /**
