@@ -58,7 +58,7 @@ RUN set -ex \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
   done
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.11.0
+ENV NODE_VERSION 8.1.3
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
@@ -76,7 +76,7 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 USER capco
 
 # Install yarn
-RUN npm install -g yarn@0.27.5
+RUN npm install -g yarn@0.25.2
 
 # Install bower
 RUN npm install --global bower@1.8.0

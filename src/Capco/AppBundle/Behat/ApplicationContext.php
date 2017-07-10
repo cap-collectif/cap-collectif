@@ -61,6 +61,13 @@ class ApplicationContext extends UserContext
         if ($scenario->hasTag('elasticsearch')) {
             $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console fos:elastica:populate -e test -n');
         }
+        // This tag is useful when you analyze the medias folder (e.g: counting number of files)
+        // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
+        // It launch a complete reinit. Use it carefully !
+        if ($scenario->hasTag('media')) {
+            $jobs[] = new Process('rm -rf web/media/*');
+            $jobs[] = new Process('php -d memory_limit=-1 bin/console --force');
+        }
         foreach ($jobs as $job) {
             $job->mustRun();
         }

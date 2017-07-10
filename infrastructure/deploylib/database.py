@@ -5,6 +5,7 @@ from fabric.api import env
 @task(environments=['local', 'testing'])
 def generate(populate='true', migrate='false'):
     "Generate database"
+    env.service_command('rm -rf web/media/*', 'application')
     env.service_command('php bin/console capco:reinit --force ' + ('', ' --migrate')[migrate == 'true'] + ('', ' --no-es-populate')[populate != 'true'], 'application', env.www_app)
 
 
