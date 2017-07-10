@@ -146,8 +146,6 @@ const ImageUpload = React.createClass({
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
-            // $FlowFixMe
-            inputProps={{ id: `${id}_field` }}
             disablePreview={disablePreview}
             className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
