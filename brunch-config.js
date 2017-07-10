@@ -23,9 +23,10 @@ exports.config = {
   conventions: {
     assets: /^app\/Resources\/assets/,
     ignored: [
-      /^__generated__/,
-      /[\\/]_/,
+      /^app\/Resources\/scss\/(modules|base)/,
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.js',
+      'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+      'bower_components/compass-mixins/lib/_compass.scss',
       'app/Resources/js-server/registration.js',
       /-test.js$/,
       /.snap$/,
