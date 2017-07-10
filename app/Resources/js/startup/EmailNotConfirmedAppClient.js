@@ -2,16 +2,20 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
+import { IntlProvider } from 'react-intl-redux';
 import EmailNotConfirmedAlert from '../components/User/EmailNotConfirmedAlert';
 import NewEmailNotConfirmedAlert from '../components/User/NewEmailNotConfirmedAlert';
 
 export default (props: Object) =>
   <span>
     <Provider store={ReactOnRails.getStore('appStore')}>
-      <EmailNotConfirmedAlert {...props} />
+      <IntlProvider>
+        <EmailNotConfirmedAlert {...props} />
+      </IntlProvider>
     </Provider>
     <Provider store={ReactOnRails.getStore('appStore')}>
-      <NewEmailNotConfirmedAlert {...props} />
+      <IntlProvider>
+        <NewEmailNotConfirmedAlert {...props} />
+      </IntlProvider>
     </Provider>
-  </span>
-;
+  </span>;
