@@ -76,7 +76,7 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 USER capco
 
 # Install yarn
-RUN npm install -g yarn@0.25.2
+RUN npm install -g yarn@0.27.5
 
 # Install bower
 RUN npm install --global bower@1.8.0
