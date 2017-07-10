@@ -53,6 +53,7 @@ chrome:
       TZ: "Europe/Paris"
    volumes:
       - /dev/shm:/dev/shm
+      - ../../:/var/www
    links:
      - seleniumhub:hub
      - application:capco.test

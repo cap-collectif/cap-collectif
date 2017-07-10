@@ -13,6 +13,9 @@ use PHPUnit_Framework_Assert as PHPUnit;
 
 class ApiContext extends ApplicationContext
 {
+    /**
+     * @var Client
+     */
     public $client;
     public $token;
     public $response;
@@ -295,6 +298,54 @@ EOF;
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
+        ]);
+    }
+
+    /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a document and an illustration$/
+     *
+     * @param mixed $method
+     * @param mixed $url
+     */
+    public function iSendARequestWithDocumentAndIllustration($method, $url)
+    {
+        $json = <<< 'EOF'
+        {
+            "title": "Acheter un sauna pour Capco",
+            "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
+            "theme": 1,
+            "district": "1",
+            "category": 1,
+            "location": "[{\"address_components\":[{\"long_name\":\"18\",\"short_name\":\"18\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Parmentier\",\"short_name\":\"Avenue Parmentier\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"\u00CEle-de-France\",\"short_name\":\"\u00CEle-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75011\",\"short_name\":\"75011\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"18 Avenue Parmentier, 75011 Paris, France\",\"geometry\":{\"location\":{\"lat\":48.8599104,\"lng\":2.3791948},\"location_type\":\"ROOFTOP\",\"viewport\":{\"northeast\":{\"lat\":48.8612593802915,\"lng\":2.380543780291502},\"southwest\":{\"lat\":48.8585614197085,\"lng\":2.377845819708498}}},\"place_id\":\"ChIJC5NyT_dt5kcRq3u4vOAhdQs\",\"types\":[\"street_address\"]}]"
+      }
+EOF;
+
+        $body = json_decode($json, true);
+
+        $body['responses.0.question'] = 1;
+        $body['responses.0.value'] = '';
+        $body['responses.1.question'] = 3;
+        $body['responses.1.value'] = 'Réponse à la question obligatoire';
+        $body['responses.2.question'] = 8;
+
+        array_walk($body, function (&$parameter, $key) {
+            $parameter = ['name' => $key, 'contents' => $parameter];
+        });
+
+        $body[] = [
+            'name' => 'responses.2.value.0',
+            'contents' => fopen('/var/www/features/files/document.pdf', 'r'),
+            'filename' => 'document.pdf',
+        ];
+        $body[] = [
+            'name' => 'media',
+            'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
+            'filename' => 'image.jpg',
+        ];
+
+        $this->response = $this->client->request($method, $url, [
+            'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
+            'multipart' => $body,
         ]);
     }
 

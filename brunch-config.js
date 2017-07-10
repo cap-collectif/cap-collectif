@@ -23,9 +23,7 @@ exports.config = {
   conventions: {
     assets: /^app\/Resources\/assets/,
     ignored: [
-      /^__generated__/,
-      /[\\/]_/,
-      'bower_components/iframe-resizer/js/iframeResizer.contentWindow.js',
+      /^app\/Resources\/scss\/(modules|base)/,
       'app/Resources/js-server/registration.js',
       /-test.js$/,
       /.snap$/,
