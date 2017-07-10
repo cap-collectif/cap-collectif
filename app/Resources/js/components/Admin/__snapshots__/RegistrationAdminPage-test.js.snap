@@ -17,6 +17,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -31,6 +32,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -52,6 +54,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -66,6 +69,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -81,6 +85,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -95,6 +100,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -113,6 +119,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -127,6 +134,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -145,6 +153,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -160,6 +169,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -175,6 +185,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -190,6 +201,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -205,6 +217,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -219,6 +232,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -234,6 +248,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -248,6 +263,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -274,8 +290,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       bsClass="btn"
       bsStyle="default"
       disabled={false}
-      navDropdown={false}
-      navItem={false}
       onClick={[Function]}
       style={
         Object {
@@ -295,21 +309,23 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
       <Toggle
-        checked={true}
-        disabled={true}
+        disabled={false}
         icons={
           Object {
             "checked": <Component />,
             "unchecked": <Component />,
           }
         }
+        onChange={[Function]}
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -340,6 +356,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -354,6 +371,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -375,6 +393,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -389,6 +408,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -404,6 +424,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -418,6 +439,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -436,6 +458,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -450,6 +473,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -468,6 +492,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -483,6 +508,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -498,6 +524,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -513,6 +540,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -528,6 +556,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -542,6 +571,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -557,6 +587,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
@@ -571,6 +602,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >
@@ -590,7 +622,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Alert
         bsClass="alert"
         bsStyle="info"
-        closeLabel="Close Alert"
+        closeLabel="Close alert"
       >
         Cette section est modifiable uniquement par votre administrateur cap-collectif.
       </Alert>
@@ -604,8 +636,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       bsClass="btn"
       bsStyle="default"
       disabled={true}
-      navDropdown={false}
-      navItem={false}
       onClick={null}
       style={
         Object {
@@ -625,11 +655,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     }
   >
     <Col
+      bsClass="col"
       componentClass="div"
       xs={1}
     >
       <Toggle
-        checked={true}
         disabled={true}
         icons={
           Object {
@@ -637,9 +667,11 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
             "unchecked": <Component />,
           }
         }
+        onChange={[Function]}
       />
     </Col>
     <Col
+      bsClass="col"
       componentClass="div"
       xs={11}
     >

@@ -1,10 +1,11 @@
 import React from 'react';
 import { IntlMixin } from 'react-intl';
-import { Button, Modal, Input } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import ElementsFinder from './../ElementsFinder';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/ReactBootstrapInput';
 
 const UpdateModal = React.createClass({
   propTypes: {
@@ -87,7 +88,7 @@ const UpdateModal = React.createClass({
     if (this.state.elements && element && element.id !== 'root') {
       expanded[element.id] = true;
       if (element) {
-        element.path.split(',').map((id) => {
+        element.path.split(',').map(id => {
           expanded[id] = true;
         });
       }
@@ -115,10 +116,7 @@ const UpdateModal = React.createClass({
   },
 
   update() {
-    const {
-      process,
-      synthesis,
-    } = this.props;
+    const { process, synthesis } = this.props;
     this.hide();
     const data = {
       parent: this.state.parentId,
@@ -156,9 +154,17 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.update.field.title')}`}
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.update.field.title',
+          )}`}
         </h2>
-        <Input type="text" id="update_element_title" name="update_element[title]" className="update-element__title" valueLink={this.linkState('title')} />
+        <Input
+          type="text"
+          id="update_element_title"
+          name="update_element[title]"
+          className="update-element__title"
+          valueLink={this.linkState('title')}
+        />
       </div>
     );
   },
@@ -167,9 +173,17 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.update.field.description')}`}
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.update.field.description',
+          )}`}
         </h2>
-        <Input type="textarea" id="update_element_description" name="update_element[description]" className="update-element__description" valueLink={this.linkState('description')} />
+        <Input
+          type="textarea"
+          id="update_element_description"
+          name="update_element[description]"
+          className="update-element__description"
+          valueLink={this.linkState('description')}
+        />
       </div>
     );
   },
@@ -178,7 +192,9 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage('synthesis.edition.action.update.field.parent')}`}
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.update.field.parent',
+          )}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -186,10 +202,7 @@ const UpdateModal = React.createClass({
   },
 
   renderParentFinder() {
-    const {
-      element,
-      synthesis,
-    } = this.props;
+    const { element, synthesis } = this.props;
     const parentId = this.state.parentId || 'root';
     return (
       <ElementsFinder
@@ -208,9 +221,15 @@ const UpdateModal = React.createClass({
   render() {
     const { show } = this.props;
     return (
-      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--update">
+      <Modal
+        show={show}
+        onHide={this.hide}
+        animation={false}
+        dialogClassName="modal--update">
         <Modal.Header closeButton>
-          <Modal.Title>{this.getIntlMessage('synthesis.edition.action.update.title')}</Modal.Title>
+          <Modal.Title>
+            {this.getIntlMessage('synthesis.edition.action.update.title')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
@@ -218,13 +237,16 @@ const UpdateModal = React.createClass({
           {this.renderParent()}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide}>{this.getIntlMessage('synthesis.edition.action.update.btn_cancel')}</Button>
-          <Button bsStyle="primary" type="submit" onClick={this.update}>{this.getIntlMessage('synthesis.edition.action.update.btn_submit')}</Button>
+          <Button type="button" onClick={this.hide}>
+            {this.getIntlMessage('synthesis.edition.action.update.btn_cancel')}
+          </Button>
+          <Button bsStyle="primary" type="submit" onClick={this.update}>
+            {this.getIntlMessage('synthesis.edition.action.update.btn_submit')}
+          </Button>
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 export default UpdateModal;

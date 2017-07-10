@@ -10,6 +10,18 @@ use Doctrine\ORM\Query;
  */
 class CommentRepository extends EntityRepository
 {
+    public function getAnonymousCount(): int
+    {
+        $qb = $this->createQueryBuilder('c')
+          ->select('count(DISTINCT c.authorEmail)')
+          ->where('c.Author IS NULL')
+      ;
+
+        return $qb->getQuery()
+          ->getSingleScalarResult()
+          ;
+    }
+
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('c')

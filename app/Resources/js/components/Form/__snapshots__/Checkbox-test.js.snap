@@ -6,7 +6,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label
@@ -29,13 +29,14 @@ exports[`<Checkbox /> should render correctly 1`] = `
         errors={null}
         id="reply-1_choice-20"
         image={null}
-        label="Athlétisme"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Athlétisme"
-      />
+      >
+        Athlétisme
+      </Input>
     </div>
     <div>
       <Input
@@ -43,13 +44,14 @@ exports[`<Checkbox /> should render correctly 1`] = `
         errors={null}
         id="reply-1_choice-21"
         image={null}
-        label="Natation"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Natation"
-      />
+      >
+        Natation
+      </Input>
     </div>
     <div>
       <Input
@@ -57,13 +59,14 @@ exports[`<Checkbox /> should render correctly 1`] = `
         errors={null}
         id="reply-1_choice-22"
         image={null}
-        label="Sports collectifs"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports collectifs"
-      />
+      >
+        Sports collectifs
+      </Input>
     </div>
     <div>
       <Input
@@ -71,13 +74,14 @@ exports[`<Checkbox /> should render correctly 1`] = `
         errors={null}
         id="reply-1_choice-23"
         image={null}
-        label="Sports individuels"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports individuels"
-      />
+      >
+        Sports individuels
+      </Input>
     </div>
   </CheckboxGroup>
 </div>
@@ -89,7 +93,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label
@@ -112,13 +116,14 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         errors={null}
         id="reply-1_choice-20"
         image={null}
-        label="Athlétisme"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Athlétisme"
-      />
+      >
+        Athlétisme
+      </Input>
     </div>
     <div>
       <Input
@@ -126,13 +131,14 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         errors={null}
         id="reply-1_choice-21"
         image={null}
-        label="Natation"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Natation"
-      />
+      >
+        Natation
+      </Input>
     </div>
     <div>
       <Input
@@ -140,13 +146,14 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         errors={null}
         id="reply-1_choice-22"
         image={null}
-        label="Sports collectifs"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports collectifs"
-      />
+      >
+        Sports collectifs
+      </Input>
     </div>
     <div>
       <Input
@@ -154,13 +161,14 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         errors={null}
         id="reply-1_choice-23"
         image={null}
-        label="Sports individuels"
         labelClassName="h5"
         medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports individuels"
-      />
+      >
+        Sports individuels
+      </Input>
     </div>
     <Other
       disabled={false}

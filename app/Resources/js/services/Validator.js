@@ -3,8 +3,12 @@ export const isEmail = (value: ?string): boolean => {
   return !!(value && re.test(value));
 };
 
-class Validator {
+export const isUrl = (value: ?string): boolean => {
+  const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+  return !value || urlPattern.test(value);
+};
 
+class Validator {
   constructor(value, rules) {
     this.value = value;
     this.rules = rules;
@@ -12,7 +16,7 @@ class Validator {
 
   getErrors() {
     const errors = [];
-    Object.keys(this.rules).map((rule) => {
+    Object.keys(this.rules).map(rule => {
       const message = {
         message: this.rules[rule].message,
         params: this.rules[rule].messageParams || [],
@@ -49,7 +53,7 @@ class Validator {
           }
           break;
         case 'isUrl':
-          if (!this.isUrl()) {
+          if (!isUrl(this.value)) {
             errors.push(message);
           }
           break;
@@ -125,11 +129,6 @@ class Validator {
     return !this.value || re.test(this.value);
   }
 
-  isUrl() {
-    const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-    return !this.value || urlPattern.test(this.value);
-  }
-
   notNull() {
     return this.value !== null;
   }
@@ -161,7 +160,6 @@ class Validator {
   equalLength(value) {
     return !this.value || this.value.length === value;
   }
-
 }
 
 export default Validator;

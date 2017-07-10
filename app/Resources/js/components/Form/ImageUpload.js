@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
@@ -7,8 +8,10 @@ import Input from './Input';
 
 const ImageUpload = React.createClass({
   propTypes: {
-    preview: PropTypes.string,
-    valueLink: PropTypes.object.isRequired,
+    preview: PropTypes.any,
+    valueLink: PropTypes.object,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
     id: PropTypes.string,
     className: PropTypes.string,
     multiple: PropTypes.bool,
@@ -16,9 +19,10 @@ const ImageUpload = React.createClass({
     maxSize: PropTypes.number,
     minSize: PropTypes.number,
     disablePreview: PropTypes.bool,
-    files: PropTypes.array,
+    files: PropTypes.array.isRequired,
   },
   mixins: [IntlMixin],
+  _deleteCheckbox: Input,
 
   getDefaultProps() {
     return {
@@ -43,16 +47,19 @@ const ImageUpload = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.valueLink.value) {
+    const value = nextProps.valueLink
+      ? nextProps.valueLink.value
+      : nextProps.value;
+    if (value) {
       this.setState({
-        preview: nextProps.valueLink.value.preview,
+        preview: value.preview,
       });
     }
   },
 
-  onDrop(files) {
-    const { valueLink, multiple } = this.props;
-    files = files.filter(file => file !== null);
+  onDrop(droppedFiles) {
+    const { valueLink, onChange, multiple } = this.props;
+    let files = droppedFiles.filter(file => file !== null);
     if (files.length > 0 && files.length <= 5 && this.state.files.length <= 5) {
       files = files.concat(this.state.files);
       this.setState(
@@ -62,7 +69,15 @@ const ImageUpload = React.createClass({
         },
         () => {
           this.uncheckDelete();
-          valueLink.requestChange(multiple ? files : files[0]);
+          const newValue = multiple ? files : files[0];
+          if (typeof newValue !== 'undefined') {
+            if (valueLink) {
+              valueLink.requestChange(newValue);
+            }
+            if (onChange && typeof onChange !== 'undefined') {
+              onChange(newValue);
+            }
+          }
         },
       );
     }
@@ -73,21 +88,25 @@ const ImageUpload = React.createClass({
   },
 
   onToggleDelete() {
-    const { valueLink } = this.props;
-    const deleteValue = this._deleteCheckbox.getChecked();
+    const { valueLink, onChange } = this.props;
+    const deleteValue = !this._deleteCheckbox.getValue();
+    if (deleteValue) {
+      if (valueLink) {
+        valueLink.requestChange(null);
+      } else if (onChange && typeof onChange !== 'undefined') {
+        onChange(null);
+      }
+    }
     this.setState({
       delete: deleteValue,
       preview: null,
     });
-    if (deleteValue) {
-      valueLink.requestChange(false);
-    }
   },
 
   uncheckDelete() {
     const ref = this._deleteCheckbox;
     if (ref) {
-      $(ref.getInputDOMNode()).prop('checked', false);
+      $(ref.getDOMNode()).prop('checked', false);
     }
   },
 
@@ -112,8 +131,10 @@ const ImageUpload = React.createClass({
     } = this.props;
     const classes = {
       'image-uploader': true,
-      [className]: true,
     };
+    if (className) {
+      classes[className] = true;
+    }
 
     return (
       <Row id={id} className={classNames(classes)}>
@@ -167,8 +188,7 @@ const ImageUpload = React.createClass({
               {this.getIntlMessage('global.image_uploader.image.preview')}
             </p>
             <div className="image-uploader__preview text-center">
-              {this.state.preview &&
-                <img alt="" role="presentation" src={this.state.preview} />}
+              {this.state.preview && <img alt="" src={this.state.preview} />}
             </div>
             {(this.state.preview || preview) &&
               <Input
@@ -176,7 +196,7 @@ const ImageUpload = React.createClass({
                 name="image-uploader__delete"
                 onChange={this.onToggleDelete}
                 ref={c => (this._deleteCheckbox = c)}
-                label={this.getIntlMessage(
+                children={this.getIntlMessage(
                   'global.image_uploader.image.delete',
                 )}
               />}

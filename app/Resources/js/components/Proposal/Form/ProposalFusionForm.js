@@ -41,31 +41,39 @@ export const ProposalFusionForm = React.createClass({
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         <br />
-        {
-          currentCollectStep &&
-            <Field
-              name="childConnections"
-              multi
-              label="Propositions"
-              placeholder="Sélectionnez les propositions à fusionner"
-              component={renderSelect}
-              filterOptions={(options, filter, currentValues) => options
+        {currentCollectStep &&
+          <Field
+            name="childConnections"
+            id="childConnections"
+            multi
+            label="Propositions"
+            placeholder="Sélectionnez les propositions à fusionner"
+            component={renderSelect}
+            filterOptions={(options, filter, currentValues) =>
+              options
                 .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps
-                .filter(o => !currentValues.includes(o))
-              }
-              loadOptions={input => Fetcher
-                .postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, { terms: input })
-                .then(res => ({ options: res.proposals.map(p => ({ value: p.id, label: p.title, stepId: currentCollectStep.id })) }))
-              }
-            />
-        }
+                .filter(o => !currentValues.includes(o))}
+            loadOptions={input =>
+              Fetcher.postToJson(
+                `/collect_steps/${currentCollectStep.id}/proposals/search`,
+                { terms: input },
+              ).then(res => ({
+                options: res.proposals.map(p => ({
+                  value: p.id,
+                  label: p.title,
+                  stepId: currentCollectStep.id,
+                })),
+              }))}
+          />}
       </form>
     );
   },
 });
 
-const getBudgetProjects = (projects: {[id: Uuid]: Object}): Array<Object> => {
-  return Object.keys(projects).map(key => projects[key]).filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
+const getBudgetProjects = (projects: { [id: Uuid]: Object }): Array<Object> => {
+  return Object.keys(projects)
+    .map(key => projects[key])
+    .filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
 };
 
 const getSelectedProjectId = (state: State): Uuid => {
@@ -81,16 +89,21 @@ const getCurrentCollectStep = (state: State): ?Object => {
   if (!project) {
     return null;
   }
-  return Object.keys(project.steps).map(k => project.steps[k]).filter(s => s.type === 'collect')[0];
+  return Object.keys(project.steps)
+    .map(k => project.steps[k])
+    .filter(s => s.type === 'collect')[0];
 };
 
-export default connect(state => ({
-  projects: getBudgetProjects(state.project.projectsById),
-  currentCollectStep: getCurrentCollectStep(state),
-}),
-{ onProjectChange: change },
-)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-  validate,
-})(ProposalFusionForm));
+export default connect(
+  state => ({
+    projects: getBudgetProjects(state.project.projectsById),
+    currentCollectStep: getCurrentCollectStep(state),
+  }),
+  { onProjectChange: change },
+)(
+  reduxForm({
+    form: formName,
+    destroyOnUnmount: false,
+    validate,
+  })(ProposalFusionForm),
+);

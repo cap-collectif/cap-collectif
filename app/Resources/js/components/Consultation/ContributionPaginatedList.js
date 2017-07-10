@@ -31,9 +31,9 @@ export const ContributionPaginatedList = React.createClass({
         </div>
         <ul className="media-list  opinion__list">
           <div>
-            {contributionConnection.edges.map((edge, index) => (
-              <Opinion key={index} opinion={edge.node} />
-            ))}
+            {contributionConnection.edges.map((edge, index) =>
+              <Opinion key={index} opinion={edge.node} />,
+            )}
           </div>
         </ul>
         {relay.hasMore() &&
@@ -41,7 +41,7 @@ export const ContributionPaginatedList = React.createClass({
             <a
               onClick={() => {
                 relay.loadMore(pageSize, e => {
-                  console.log(e);
+                  console.log(e); // eslint-disable-line
                 });
               }}
               className="text-center"
@@ -59,7 +59,8 @@ export default createPaginationContainer(
   graphql`
     fragment ContributionPaginatedList_consultation on Consultation {
       id
-      contributionConnection(first: $count, after: $cursor) @connection(key: "ContributionPaginatedList_contributionConnection") {
+      contributionConnection(first: $count, after: $cursor)
+        @connection(key: "ContributionPaginatedList_contributionConnection") {
         edges {
           cursor
           node {
@@ -80,14 +81,14 @@ export default createPaginationContainer(
       return props.consultation && props.consultation.contributionConnection;
     },
     getFragmentVariables(prevVars, totalCount) {
-      console.log('getFragmentVariables', prevVars, totalCount);
+      console.log('getFragmentVariables', prevVars, totalCount); // eslint-disable-line
       return {
         ...prevVars,
         // count: totalCount,
       };
     },
     getVariables(props, { count, cursor }, fragmentVariables) {
-      console.log('getVariables', props, count, cursor, fragmentVariables);
+      console.log('getVariables', props, count, cursor, fragmentVariables); // eslint-disable-line
       return {
         count,
         cursor,

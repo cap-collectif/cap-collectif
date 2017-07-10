@@ -26,6 +26,7 @@ exports.config = {
       /^app\/Resources\/scss\/(modules|base)/,
       'app/Resources/js-server/registration.js',
       /-test.js$/,
+      /.snap$/,
     ],
   },
   files: {
@@ -99,13 +100,6 @@ exports.config = {
     },
   },
   plugins: {
-    babel: {
-      babelrc: true,
-      plugins: [
-        // "add-module-exports",
-        ['relay'],
-      ],
-    },
     sass: {
       mode: 'native',
     },

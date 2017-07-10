@@ -19,6 +19,100 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class UserRepository extends EntityRepository
 {
+    public function getRegisteredContributorCount(): int
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $qbOpinion = $this->createQueryBuilder('userOpinion');
+        $qbOpinion->select('userOpinion.id')->innerJoin('userOpinion.opinions', 'opinion', 'WITH', 'opinion.isEnabled = 1 AND opinion.expired = 0');
+
+        $qbSource = $this->createQueryBuilder('userSource');
+        $qbSource->select('userSource.id')->innerJoin('userSource.sources', 'source', 'WITH', 'source.isEnabled = 1 AND source.expired = 0');
+
+        $qbComment = $this->createQueryBuilder('userComment');
+        $qbComment->select('userComment.id')->innerJoin('userComment.comments', 'comment', 'WITH', 'comment.isEnabled = 1 AND comment.expired = 0');
+
+        $qbVote = $this->createQueryBuilder('userVote');
+        $qbVote->select('userVote.id')->innerJoin('userVote.votes', 'vote', 'WITH', 'vote.expired = 0');
+
+        $qbArgument = $this->createQueryBuilder('userArgument');
+        $qbArgument->select('userArgument.id')->innerJoin('userArgument.arguments', 'argument', 'WITH', 'argument.isEnabled = 1 AND argument.expired = 0');
+
+        $qbOpinionVersions = $this->createQueryBuilder('userOpinionVersions');
+        $qbOpinionVersions->select('userOpinionVersions.id')->innerJoin('userOpinionVersions.opinionVersions', 'version', 'WITH', 'version.enabled = 1 AND version.expired = 0');
+
+        $qbProposal = $this->createQueryBuilder('userProposal');
+        $qbProposal->select('userProposal.id')->innerJoin('userProposal.proposals', 'proposal', 'WITH', 'proposal.enabled = 1 AND proposal.expired = 0');
+
+        $qbReply = $this->createQueryBuilder('userReply');
+        $qbReply->select('userReply.id')->innerJoin('userReply.replies', 'reply', 'WITH', 'reply.enabled = 1 AND reply.expired = 0');
+
+        $qbIdea = $this->createQueryBuilder('userIdea');
+        $qbIdea->select('userIdea.id')->innerJoin('userIdea.ideas', 'idea', 'WITH', 'idea.expired = 0');
+
+        $qb->select('count(DISTINCT u.id)')
+      ->orWhere(
+        $qb->expr()->in(
+          'u.id',
+          $qbIdea->getDQL()
+          )
+        )
+        ->orWhere(
+          $qb->expr()->in(
+            'u.id',
+            $qbReply->getDQL()
+            )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbOpinion->getDQL()
+            )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbArgument->getDQL()
+            )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbProposal->getDQL()
+            )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbOpinionVersions->getDQL()
+            )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbVote->getDQL()
+              )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbComment->getDQL()
+              )
+          )
+          ->orWhere(
+            $qb->expr()->in(
+              'u.id',
+              $qbSource->getDQL()
+              )
+          )
+      ;
+
+        return $qb
+                ->getQuery()
+                ->useQueryCache(true)
+                ->getSingleScalarResult();
+    }
+
     public function findProjectSourceContributorsWithCount(Project $project)
     {
         $em = $this->getEntityManager();

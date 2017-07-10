@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { IntlMixin } from 'react-intl';
 import IdeaStore from '../../../stores/IdeaStore';
@@ -39,12 +40,7 @@ const IdeasIndexPage = React.createClass({
   },
 
   componentWillMount() {
-    const {
-      count,
-      countTrashed,
-      ideas,
-      pagination,
-    } = this.props;
+    const { count, countTrashed, ideas, pagination } = this.props;
     IdeaStore.addChangeListener(this.onChange);
     IdeaActions.setPagination(pagination);
     IdeaActions.initCounts(count, countTrashed);
@@ -52,7 +48,7 @@ const IdeasIndexPage = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState && (prevState.currentPage !== this.state.currentPage)) {
+    if (prevState && prevState.currentPage !== this.state.currentPage) {
       this.loadIdeas();
     }
   },
@@ -88,11 +84,7 @@ const IdeasIndexPage = React.createClass({
   },
 
   render() {
-    const {
-      description,
-      themes,
-      trashUrl,
-    } = this.props;
+    const { description, themes, trashUrl } = this.props;
     const currentPage = IdeaStore.currentPage;
     const pagination = IdeaStore.pagination;
     const nbPages = Math.ceil(this.state.count / pagination);
@@ -114,11 +106,13 @@ const IdeasIndexPage = React.createClass({
             />
           </Loader>
         </div>
-        <IdeasIndexFooter trashUrl={trashUrl} countTrashed={this.state.countTrashed} />
+        <IdeasIndexFooter
+          trashUrl={trashUrl}
+          countTrashed={this.state.countTrashed}
+        />
       </div>
     );
   },
-
 });
 
 export default IdeasIndexPage;

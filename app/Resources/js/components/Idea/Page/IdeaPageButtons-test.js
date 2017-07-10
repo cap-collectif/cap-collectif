@@ -2,10 +2,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import IntlData from '../../../translations/FR';
-import IdeaPageButtons from './IdeaPageButtons';
+import { IdeaPageButtons } from './IdeaPageButtons';
 
 const props = {
-  themes: [],
+  dispatch: jest.fn(),
   idea: {
     title: 'Title',
     author: {},

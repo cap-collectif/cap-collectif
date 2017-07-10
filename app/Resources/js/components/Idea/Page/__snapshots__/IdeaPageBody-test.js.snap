@@ -26,7 +26,7 @@ exports[`<IdeaPageBody /> it should render a div with provided className 1`] = `
       }
     }
   />
-  <IdeaPageButtons
+  <Connect(IdeaPageButtons)
     idea={
       Object {
         "body": "<p>blabla</p>",
@@ -45,7 +45,6 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
     alt=""
     className="block img-responsive"
     id="idea-media"
-    role="presentation"
     src="image.png"
   />
   <div
@@ -107,7 +106,7 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
       }
     }
   />
-  <IdeaPageButtons
+  <Connect(IdeaPageButtons)
     idea={
       Object {
         "body": "<p>blabla</p>",
@@ -149,7 +148,7 @@ exports[`<IdeaPageBody /> it should show idea body, trash block and buttons 1`] 
       }
     }
   />
-  <IdeaPageButtons
+  <Connect(IdeaPageButtons)
     idea={
       Object {
         "body": "<p>blabla</p>",

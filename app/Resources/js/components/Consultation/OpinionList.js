@@ -1,16 +1,40 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
-import environment from '../../createRelayEnvironment';
+import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
+
+const renderOpinionList = ({
+  error,
+  props,
+}: {
+  error: ?string,
+  props: ?{ contributionsBySection: Array<Object> },
+}) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    return (
+      <div>
+        {// eslint-disable-next-line react/prop-types
+        props.contributionsBySection.map((opinion, index) =>
+          <Opinion key={index} opinion={opinion} />,
+        )}
+      </div>
+    );
+  }
+  return <Loader />;
+};
 
 export const OpinionList = React.createClass({
   propTypes: {
-    section: React.PropTypes.object.isRequired,
-    consultation: React.PropTypes.object.isRequired,
+    section: PropTypes.object.isRequired,
+    consultation: PropTypes.object.isRequired,
   },
   mixins: [IntlMixin],
 
@@ -31,7 +55,8 @@ export const OpinionList = React.createClass({
                   className="form-control"
                   style={{ marginRight: section.contribuable ? 15 : 0 }}
                   onChange={(event: SyntheticInputEvent) => {
-                    window.location.href = `${section.url}/${event.target.value}`;
+                    window.location.href = `${section.url}/${event.target
+                      .value}`;
                   }}>
                   <option value="positions">Tri ordonné puis aléatoire</option>
                   <option value="random">Tri aléatoire</option>
@@ -57,36 +82,17 @@ export const OpinionList = React.createClass({
             <QueryRenderer
               environment={environment}
               query={graphql`
-              query OpinionListQuery($sectionId: ID!, $limit: Int!) {
-                contributionsBySection(sectionId: $sectionId, limit: $limit) {
-                  ...Opinion_opinion
+                query OpinionListQuery($sectionId: ID!, $limit: Int!) {
+                  contributionsBySection(sectionId: $sectionId, limit: $limit) {
+                    ...Opinion_opinion
+                  }
                 }
-              }
               `}
               variables={{
                 sectionId: section.id,
                 limit: consultation.opinion_count_shown_by_section,
               }}
-              render={({ error, props }) => {
-                if (error) {
-                  console.log(error); // eslint-disable-line no-console
-                  return (
-                    <p className="text-danger">
-                      Désolé une erreur s'est produite… Réessayez plus tard.
-                    </p>
-                  );
-                }
-                if (props) {
-                  return (
-                    <div>
-                      {props.contributionsBySection.map((opinion, index) => (
-                        <Opinion key={index} opinion={opinion} />
-                      ))}
-                    </div>
-                  );
-                }
-                return <Loader />;
-              }}
+              render={renderOpinionList}
             />
           </ul>}
         {section.contributionsCount >
