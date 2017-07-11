@@ -30,7 +30,7 @@ setTimeout(function() {
       }
     }
     %}
-    {{ react_intl_component('ProposalAdminSelectionsApp', {
+    {{ react_render_component('ProposalAdminSelectionsApp', {
       'props': {
         'proposalId': admin.subject.id,
         'projectId': admin.subject.proposalForm.step.getProjectId()
