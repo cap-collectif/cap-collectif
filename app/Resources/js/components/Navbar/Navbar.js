@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { IntlMixin } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
@@ -9,6 +10,7 @@ const Navbar = React.createClass({
     logo: PropTypes.string,
     items: PropTypes.array.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -90,15 +92,14 @@ const Navbar = React.createClass({
   render() {
     const { logo } = this.props;
     const { items, moreItems } = this.state;
-    const moreItem =
-      moreItems.length > 0
-        ? {
-            id: 'see-more',
-            title: this.getIntlMessage('global.navbar.see_more'),
-            hasEnabledFeature: true,
-            children: moreItems,
-          }
-        : null;
+    const moreItem = moreItems.length > 0
+      ? {
+          id: 'see-more',
+          title: this.getIntlMessage('global.navbar.see_more'),
+          hasEnabledFeature: true,
+          children: moreItems,
+        }
+      : null;
     return (
       <Navigation
         id="main-navbar"
