@@ -1,8 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-// import { Panel } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
 // import ConsultationContributionFiltered
@@ -14,7 +12,6 @@ export const ConsultationPropositionBox = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { step } = this.props;

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm, formValueSelector, isDirty } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -16,7 +16,6 @@ export const RegistrationCommunicationForm = React.createClass({
     submitting: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { submitting, handleSubmit, useTopText, useBottomText } = this.props;
@@ -28,38 +27,23 @@ export const RegistrationCommunicationForm = React.createClass({
           label={'Afficher un message personnalisé au dessus du formulaire'}
           component={renderInput}
         />
-        {
-          useTopText &&
-            <Field
-              name="topText"
-              type="editor"
-              component={renderInput}
-            />
-        }
+        {useTopText &&
+          <Field name="topText" type="editor" component={renderInput} />}
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
           label={'Afficher un message personnalisé en dessous du formulaire'}
           component={renderInput}
         />
-        {
-          useBottomText &&
-            <Field
-              name="bottomText"
-              type="editor"
-              component={renderInput}
-            />
-        }
+        {useBottomText &&
+          <Field name="bottomText" type="editor" component={renderInput} />}
         <Button
           type="submit"
           disabled={submitting}
-          style={{ marginBottom: 15 }}
-        >
-          {
-            submitting
-            ? this.getIntlMessage('global.loading')
-            : this.getIntlMessage('global.save')
-          }
+          style={{ marginBottom: 15 }}>
+          {submitting
+            ? <FormattedMessage id="global.loading" />
+            : <FormattedMessage id="global.save" />}
         </Button>
       </form>
     );
@@ -67,8 +51,12 @@ export const RegistrationCommunicationForm = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  useTopText: isDirty(formName)(state) ? formValueSelector(formName)(state, 'topTextDisplayed') === true : state.user.registration_form.topTextDisplayed,
-  useBottomText: isDirty(formName)(state) ? formValueSelector(formName)(state, 'bottomTextDisplayed') === true : state.user.registration_form.bottomTextDisplayed,
+  useTopText: isDirty(formName)(state)
+    ? formValueSelector(formName)(state, 'topTextDisplayed') === true
+    : state.user.registration_form.topTextDisplayed,
+  useBottomText: isDirty(formName)(state)
+    ? formValueSelector(formName)(state, 'bottomTextDisplayed') === true
+    : state.user.registration_form.bottomTextDisplayed,
   initialValues: {
     topTextDisplayed: state.user.registration_form.topTextDisplayed,
     topText: state.user.registration_form.topText,
@@ -77,7 +65,9 @@ const mapStateToProps = (state: State) => ({
   },
 });
 
-export default connect(mapStateToProps)(reduxForm({
-  onSubmit,
-  form: formName,
-})(RegistrationCommunicationForm));
+export default connect(mapStateToProps)(
+  reduxForm({
+    onSubmit,
+    form: formName,
+  })(RegistrationCommunicationForm),
+);

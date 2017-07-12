@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {
-  IntlMixin,
   FormattedMessage,
   FormattedHTMLMessage,
   FormattedDate,
@@ -10,11 +9,11 @@ import moment from 'moment';
 
 export const Post = React.createClass({
   displayName: 'Post',
+
   propTypes: {
     post: PropTypes.object.isRequired,
     features: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { post, features } = this.props;
@@ -194,19 +193,21 @@ export const Post = React.createClass({
               </span>,
             )}
             <FormattedMessage
-              message={this.getIntlMessage('global.byDate')}
-              date={
-                <FormattedDate
-                  value={moment(post.publishedAt)}
-                  day="numeric"
-                  month="long"
-                  year="numeric"
-                />
-              }
+              id="global.byDate"
+              values={{
+                date: (
+                  <FormattedDate
+                    value={moment(post.publishedAt)}
+                    day="numeric"
+                    month="long"
+                    year="numeric"
+                  />
+                ),
+              }}
             />{' '}
             {post.authors.length > 0 &&
               <FormattedHTMLMessage
-                message={this.getIntlMessage('global.byAuthor')}
+                message={<FormattedMessage id="global.byAuthor" />}
                 author={
                   <span>
                     {post.authors.map((author, i) =>

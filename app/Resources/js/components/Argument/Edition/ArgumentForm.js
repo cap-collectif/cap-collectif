@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect, type Connector } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import ArgumentActions from '../../../actions/ArgumentActions';
@@ -36,7 +36,6 @@ const ArgumentForm = React.createClass({
   propTypes: {
     argument: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     return (
@@ -47,7 +46,7 @@ const ArgumentForm = React.createClass({
             component={renderComponent}
             id="argument-confirm"
             name="confirm"
-            children={this.getIntlMessage('argument.edit.confirm')}
+            children={<FormattedMessage id="argument.edit.confirm" />}
           />
         </div>
         <Field
@@ -56,7 +55,7 @@ const ArgumentForm = React.createClass({
           type="textarea"
           rows={2}
           name="body"
-          label={this.getIntlMessage('argument.edit.body')}
+          label={<FormattedMessage id="argument.edit.body" />}
         />
       </form>
     );

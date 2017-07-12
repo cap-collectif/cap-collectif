@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import UserLink from '../../User/UserLink';
 import ElementIcon from './ElementIcon';
@@ -16,23 +16,24 @@ const ElementBlock = React.createClass({
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
-    return ({
+    return {
       showBreadcrumb: true,
       showStatus: true,
       showNotation: true,
       hasLink: true,
       linkType: 'edition',
-    });
+    };
   },
 
   renderAuthor() {
     const { element } = this.props;
     if (element.author) {
       return (
-        <span><UserLink user={element.author} /> • </span>
+        <span>
+          <UserLink user={element.author} /> •{' '}
+        </span>
       );
     }
   },
@@ -40,32 +41,40 @@ const ElementBlock = React.createClass({
   renderStatus() {
     const { element } = this.props;
     if (element.division) {
-      return (
-        <i className="element__status cap icon--orange cap-scissor-1"></i>
-      );
+      return <i className="element__status cap icon--orange cap-scissor-1" />;
     }
 
     if (element.archived) {
       if (element.published) {
-        return (
-          <i className="element__status cap icon--green cap-tag-1"></i>
-        );
+        return <i className="element__status cap icon--green cap-tag-1" />;
       }
-      return (
-        <i className="element__status cap icon--red cap-delete-2"></i>
-      );
+      return <i className="element__status cap icon--red cap-delete-2" />;
     }
   },
 
   renderDate() {
     const { element } = this.props;
     if (!Modernizr.intl) {
-      return this.getIntlMessage('synthesis.common.elements.no_source_date');
+      return <FormattedMessage id="synthesis.common.elements.no_source_date" />;
     }
     if (element.linkedDataCreation) {
-      return <FormattedDate value={moment(element.linkedDataCreation)} day="numeric" month="long" year="numeric" />;
+      return (
+        <FormattedDate
+          value={moment(element.linkedDataCreation)}
+          day="numeric"
+          month="long"
+          year="numeric"
+        />
+      );
     }
-    return <FormattedDate value={moment(element.updated_at)} day="numeric" month="long" year="numeric" />;
+    return (
+      <FormattedDate
+        value={moment(element.updated_at)}
+        day="numeric"
+        month="long"
+        year="numeric"
+      />
+    );
   },
 
   render() {
@@ -83,28 +92,20 @@ const ElementBlock = React.createClass({
         <div className="element__content">
           <p className="element__metadata">
             {this.renderAuthor()} {this.renderDate()}
-            {
-              showNotation
-                ? <ElementNotation element={element} />
-                : null
-            }
+            {showNotation ? <ElementNotation element={element} /> : null}
           </p>
-          <ElementTitle element={element} linkType={linkType} hasLink={hasLink} className="element__title" />
-          {
-            showBreadcrumb
-              ? <ElementBreadcrumb element={element} />
-              : null
-          }
+          <ElementTitle
+            element={element}
+            linkType={linkType}
+            hasLink={hasLink}
+            className="element__title"
+          />
+          {showBreadcrumb ? <ElementBreadcrumb element={element} /> : null}
         </div>
-        {
-          showStatus
-            ? this.renderStatus()
-            : null
-        }
+        {showStatus ? this.renderStatus() : null}
       </div>
     );
   },
-
 });
 
 export default ElementBlock;

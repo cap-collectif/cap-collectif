@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import { Col } from 'react-bootstrap';
 import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';
@@ -11,7 +10,6 @@ const ProjectPreview = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { project } = this.props;

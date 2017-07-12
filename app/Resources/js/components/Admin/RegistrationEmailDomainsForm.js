@@ -1,48 +1,38 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IntlMixin } from 'react-intl';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, isSubmitting } from 'redux-form';
 import renderInput from '../Form/Field';
 import { setRegistrationEmailDomains as onSubmit } from '../../redux/modules/user';
 import type { State } from '../../types';
 
-const renderDomains = ({ fields }: { fields: {push: Function, map: Function, remove: Function}}) => (
+const renderDomains = ({
+  fields,
+}: {
+  fields: { push: Function, map: Function, remove: Function },
+}) =>
   <div>
     {fields.map((member, index) =>
       <Row key={index}>
         <Col xs={10}>
-          <Field
-            name={`${member}.value`}
-            type="text"
-            component={renderInput}
-          />
+          <Field name={`${member}.value`} type="text" component={renderInput} />
         </Col>
         <Col xs={2}>
-          <Button
-            onClick={() => fields.remove(index)}
-          >
-            Supprimer
-          </Button>
+          <Button onClick={() => fields.remove(index)}>Supprimer</Button>
         </Col>
       </Row>,
     )}
-    <Button
-      style={{ marginBottom: 10 }}
-      onClick={() => fields.push({})}
-    >
+    <Button style={{ marginBottom: 10 }} onClick={() => fields.push({})}>
       Ajouter
     </Button>
-  </div>
-);
+  </div>;
 
 export const RegistrationEmailDomainsForm = React.createClass({
   propTypes: {
     handleSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { handleSubmit, submitting } = this.props;
@@ -52,15 +42,9 @@ export const RegistrationEmailDomainsForm = React.createClass({
           <strong>Nom(s) de domaine</strong>
         </p>
         <form onSubmit={handleSubmit}>
-          <FieldArray
-            name="domains"
-            component={renderDomains}
-          />
-          <Button
-            type="submit"
-            disabled={submitting}
-          >
-            { submitting ? 'Chargement...' : 'Enregistrer' }
+          <FieldArray name="domains" component={renderDomains} />
+          <Button type="submit" disabled={submitting}>
+            {submitting ? 'Chargement...' : 'Enregistrer'}
           </Button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 
 const FlashMessages = React.createClass({
@@ -12,7 +12,6 @@ const FlashMessages = React.createClass({
     onDismissMessage: React.PropTypes.func,
     translate: React.PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps(): Object {
     return {
@@ -29,34 +28,33 @@ const FlashMessages = React.createClass({
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
-        return this.getIntlMessage(message);
+        return <FormattedMessage id={message} />;
       }
-      return (
-        <FormattedMessage
-          message={this.getIntlMessage(message.message)}
-          {...message.params}
-        />);
+      return <FormattedMessage id={message.message} values={message.params} />;
     }
     if (typeof message === 'string') {
       return message;
     }
   },
 
-  renderMessage(index: number, message: string, type: string): ?React$Element<> {
-    const {
-      form,
-      onDismissMessage,
-      style,
-    } = this.props;
+  renderMessage(
+    index: number,
+    message: string,
+    type: string,
+  ): ?React$Element<> {
+    const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (
         <Alert
           key={index}
           bsStyle={type}
           style={style}
-          onDismiss={onDismissMessage ? onDismissMessage.bind(null, message, type) : null}
-        >
-          <p>{this.renderText(message)}</p>
+          onDismiss={
+            onDismissMessage ? onDismissMessage.bind(null, message, type) : null
+          }>
+          <p>
+            {this.renderText(message)}
+          </p>
         </Alert>
       );
     }
@@ -68,29 +66,23 @@ const FlashMessages = React.createClass({
   },
 
   render(): ?React$Element<> {
-    const {
-      errors,
-      success,
-    } = this.props;
+    const { errors, success } = this.props;
     if ((errors && errors.length > 0) || (success && success.length > 0)) {
       return (
         <div className="flashmessages">
-          {
-            errors && errors.map((message: string, index: number) => {
+          {errors &&
+            errors.map((message: string, index: number) => {
               return this.renderMessage(index, message, 'warning');
-            })
-          }
-          {
-            success && success.map((message: string, index: number) => {
+            })}
+          {success &&
+            success.map((message: string, index: number) => {
               return this.renderMessage(index, message, 'success');
-            })
-          }
+            })}
         </div>
       );
     }
     return null;
   },
-
 });
 
 export default FlashMessages;

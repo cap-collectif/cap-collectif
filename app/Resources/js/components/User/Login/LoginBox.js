@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import LoginSocialButtons from './LoginSocialButtons';
@@ -12,30 +12,26 @@ export const LoginBox = React.createClass({
     textTop: PropTypes.string,
     textBottom: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { textTop, textBottom } = this.props;
     return (
       <div>
-        {
-          textTop &&
-            <Alert bsStyle="info" className="text-center">
-              <FormattedHTMLMessage message={textTop} />
-            </Alert>
-        }
+        {textTop &&
+          <Alert bsStyle="info" className="text-center">
+            <FormattedHTMLMessage message={textTop} />
+          </Alert>}
         <LoginSocialButtons />
         <LoginForm />
-        {
-          textBottom &&
-            <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-              <FormattedHTMLMessage message={textBottom} />
-            </div>
-        }
+        {textBottom &&
+          <div
+            className="text-center small excerpt"
+            style={{ marginTop: '15px' }}>
+            <FormattedHTMLMessage message={textBottom} />
+          </div>}
       </div>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({

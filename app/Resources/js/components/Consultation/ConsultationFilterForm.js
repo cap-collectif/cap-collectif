@@ -1,14 +1,11 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import renderComponent from '../Form/Field';
 
 export const form = 'consultation-filter-form';
 
 export const ConsultationFilterForm = React.createClass({
-  mixins: [IntlMixin],
-
   render() {
     return (
       <form className="form-inline">
@@ -20,8 +17,7 @@ export const ConsultationFilterForm = React.createClass({
           disableValidation>
           <option value="opinions">Toutes les propositions</option>
           <option value="versions">Tous les amendements</option>
-        </Field>
-        {' '}
+        </Field>{' '}
         <Field
           id="proposition_type_order"
           name="proposition_type_order"

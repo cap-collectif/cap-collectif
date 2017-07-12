@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Well } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
 
@@ -9,7 +9,6 @@ const OpinionBody = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   isVersion() {
     const { opinion } = this.props;
@@ -22,10 +21,11 @@ const OpinionBody = React.createClass({
     if (this.isVersion()) {
       return (
         <div>
-          {opinion.comment !== null && FormattedText.strip(opinion.comment).length
+          {opinion.comment !== null &&
+          FormattedText.strip(opinion.comment).length
             ? <div>
                 <p className="control-label h5">
-                  {this.getIntlMessage('opinion.version_comment')}
+                  {<FormattedMessage id="opinion.version_comment" />}
                 </p>
                 <Well bsSize="small">
                   <div>
@@ -33,8 +33,7 @@ const OpinionBody = React.createClass({
                   </div>
                 </Well>
               </div>
-            : null
-          }
+            : null}
           <div className="diff">
             <FormattedHTMLMessage message={opinion.diff} />
           </div>
@@ -44,7 +43,6 @@ const OpinionBody = React.createClass({
 
     return <OpinionBodyDiffContent opinion={opinion} />;
   },
-
 });
 
 export default OpinionBody;

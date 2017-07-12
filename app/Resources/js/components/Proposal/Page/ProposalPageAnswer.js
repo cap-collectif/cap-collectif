@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import AnswerBody from '../../Answer/AnswerBody';
 
@@ -8,7 +7,6 @@ const ProposalPageAnswer = React.createClass({
     answer: PropTypes.object,
     className: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -30,14 +28,14 @@ const ProposalPageAnswer = React.createClass({
     };
     return (
       <div className={classNames(classes)}>
-        {
-          answer.title && <h2 className="h2">{answer.title}</h2>
-        }
+        {answer.title &&
+          <h2 className="h2">
+            {answer.title}
+          </h2>}
         <AnswerBody answer={answer} />
       </div>
     );
   },
-
 });
 
 export default ProposalPageAnswer;

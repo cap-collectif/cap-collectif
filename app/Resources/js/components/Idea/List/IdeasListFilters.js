@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import IdeaActions from '../../../actions/IdeaActions';
@@ -16,7 +16,6 @@ export const IdeasListFilters = React.createClass({
     themes: PropTypes.array.isRequired,
     features: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -88,7 +87,7 @@ export const IdeasListFilters = React.createClass({
               onChange={this.handleThemeChange}
               value={this.state.theme || '0'}>
               <option value="0">
-                {this.getIntlMessage('global.select_themes')}
+                <FormattedMessage id="global.select_themes" />
               </option>
               {themes.map(theme => {
                 return (
@@ -108,7 +107,7 @@ export const IdeasListFilters = React.createClass({
             {this.orders.map(choice => {
               return (
                 <option key={choice} value={choice}>
-                  {this.getIntlMessage(`global.filter_f_${choice}`)}
+                  <FormattedMessage id={`global.filter_f_${choice}`} />
                 </option>
               );
             })}

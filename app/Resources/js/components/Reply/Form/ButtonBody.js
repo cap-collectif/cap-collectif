@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
 import Linkify from 'react-linkify';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
 const ButtonBody = React.createClass({
   propTypes: {
     body: React.PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -48,7 +47,7 @@ const ButtonBody = React.createClass({
     if (this.textShouldBeTruncated() && !this.state.expanded) {
       return (
         <button className="btn-link" onClick={this.expand.bind(this, true)}>
-          {this.getIntlMessage('global.read_more')}
+          {<FormattedMessage id="global.read_more" />}
         </button>
       );
     }
