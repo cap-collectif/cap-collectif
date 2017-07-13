@@ -42,7 +42,10 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
         componentClass="h4"
         id="contained-modal-title-lg"
       >
-        Connexion
+        <FormattedMessage
+          id="global.login"
+          values={Object {}}
+        />
       </ModalTitle>
     </ModalHeader>
     <ModalBody
@@ -68,7 +71,10 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
         id="confirm-login"
         type="submit"
       >
-        Se connecter
+        <FormattedMessage
+          id="global.login_me"
+          values={Object {}}
+        />
       </Button>
     </ModalFooter>
   </form>

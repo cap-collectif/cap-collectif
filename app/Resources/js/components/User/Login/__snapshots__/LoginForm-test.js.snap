@@ -8,7 +8,12 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     component={[Function]}
     disableValidation={true}
     id="username"
-    label="Adresse électronique"
+    label={
+      <FormattedMessage
+        id="global.email"
+        values={Object {}}
+      />
+    }
     labelClassName="h5"
     name="username"
     type="email"
@@ -19,7 +24,12 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     component={[Function]}
     disableValidation={true}
     id="password"
-    label="Mot de passe"
+    label={
+      <FormattedMessage
+        id="global.password"
+        values={Object {}}
+      />
+    }
     labelClassName="w100 h5"
     name="password"
     type="password"
@@ -28,7 +38,10 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     className="small"
     href="/resetting/request"
   >
-    Mot de passe oublié ?
+    <FormattedMessage
+      id="global.forgot_password"
+      values={Object {}}
+    />
   </a>
 </div>
 `;

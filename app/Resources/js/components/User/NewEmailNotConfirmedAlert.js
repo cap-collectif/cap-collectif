@@ -25,17 +25,15 @@ export const NewEmailNotConfirmedAlert = React.createClass({
           <div className="col-md-7" style={{ marginBottom: 5 }}>
             {sendSucceed &&
               <FormattedHTMLMessage
-                message={
-                  <FormattedMessage id="user.confirm.new_email_send_succeed" />
-                }
-                email={newEmailToConfirm}
+                id="user.confirm.new_email_send_succeed"
+                values={{ email: newEmailToConfirm }}
               />}
           </div>
           <div className="col-md-5">
             <Button
               style={{ marginRight: 15, marginBottom: 5 }}
               onClick={() => resendConfirmation()}>
-              {<FormattedMessage id="user.confirm.resend" />}
+              <FormattedMessage id="user.confirm.resend" />
             </Button>
             <Button
               bsStyle="link"

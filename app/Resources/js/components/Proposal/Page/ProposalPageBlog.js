@@ -5,8 +5,6 @@ import Post from '../../Blog/Post';
 import { fetchProposalPosts } from '../../../redux/modules/proposal';
 
 export const ProposalPageBlog = React.createClass({
-  displayName: 'ProposalPageBlog',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

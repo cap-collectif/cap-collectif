@@ -260,7 +260,7 @@ const ReplyForm = React.createClass({
               ? ' <span class="small excerpt">Facultatif</span>'
               : '';
           const labelMessage = field.question + labelAppend;
-          const label = <FormattedHTMLMessage message={labelMessage} />;
+          const label = <FormattedHTMLMessage id={labelMessage} />;
           switch (inputType) {
             case 'checkbox':
               return (

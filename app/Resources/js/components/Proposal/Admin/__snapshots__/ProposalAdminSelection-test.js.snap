@@ -21,8 +21,6 @@ exports[`<ProposalAdminSelection /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       
-       
        Aide
     </a>
     <h5

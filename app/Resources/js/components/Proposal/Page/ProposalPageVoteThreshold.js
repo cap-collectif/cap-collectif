@@ -3,8 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
 
 const ProposalPageVoteThreshold = React.createClass({
-  displayName: 'ProposalPageVoteThreshold',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,

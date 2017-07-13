@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import LoginSocialButtons from './LoginSocialButtons';
@@ -19,16 +18,16 @@ export const LoginBox = React.createClass({
       <div>
         {textTop &&
           <Alert bsStyle="info" className="text-center">
-            <FormattedHTMLMessage message={textTop} />
+            <div dangerouslySetInnerHTML={{ __html: textTop }} />
           </Alert>}
         <LoginSocialButtons />
         <LoginForm />
         {textBottom &&
           <div
             className="text-center small excerpt"
-            style={{ marginTop: '15px' }}>
-            <FormattedHTMLMessage message={textBottom} />
-          </div>}
+            style={{ marginTop: '15px' }}
+            dangerouslySetInnerHTML={{ __html: textBottom }}
+          />}
       </div>
     );
   },

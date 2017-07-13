@@ -10,7 +10,12 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
     component={[Function]}
     help={null}
     id="opinion_title"
-    label="Titre*"
+    label={
+      <FormattedMessage
+        id="opinion.title"
+        values={Object {}}
+      />
+    }
     name="title"
     type="text"
   />
@@ -19,7 +24,12 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
     component={[Function]}
     help={null}
     id="opinion_body"
-    label="Proposition*"
+    label={
+      <FormattedMessage
+        id="opinion.body"
+        values={Object {}}
+      />
+    }
     name="body"
     type="editor"
   />

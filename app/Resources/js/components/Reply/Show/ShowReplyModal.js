@@ -45,7 +45,6 @@ const ShowReplyModal = React.createClass({
                     year="numeric"
                   />
                 ),
-
                 time: (
                   <FormattedDate
                     value={moment(reply.createdAt)}

@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const CounterNavItem = React.createClass({
-  displayName: 'CounterNavItem',
   propTypes: {
     counter: React.PropTypes.number.isRequired,
     icon: React.PropTypes.string.isRequired,
@@ -15,20 +14,19 @@ const CounterNavItem = React.createClass({
     return (
       <li>
         <div className="text-center">
-          <i className={icon}></i>
-          {' '}
-          <span className="value">{`${counter} `}</span>
+          <i className={icon} /> <span className="value">{`${counter} `}</span>
           <span className="excerpt category">
             <FormattedMessage
-              message={label}
-              num={counter}
+              id={label}
+              values={{
+                num: counter,
+              }}
             />
           </span>
         </div>
       </li>
     );
   },
-
 });
 
 export default CounterNavItem;

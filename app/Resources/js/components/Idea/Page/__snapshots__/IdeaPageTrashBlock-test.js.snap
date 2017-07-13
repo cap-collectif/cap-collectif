@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPageTrashBlock /> it should render idea trash block when idea is trashed 1`] = `
+<div
+  id="idea__trash-block"
+>
+  <h2>
+    <FormattedMessage
+      id="idea.trashed.reason"
+      values={Object {}}
+    />
+  </h2>
+  <p>
+    <FormattedMessage
+      id="idea.trashed.no_reason"
+      values={Object {}}
+    />
+  </p>
+  <p
+    className="excerpt"
+  >
+    <FormattedMessage
+      id="idea.trashed.date"
+      values={
+        Object {
+          "date": <FormattedDate
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            value={"2017-07-10T16:53:58.000Z"}
+            year="numeric"
+        />,
+        }
+      }
+    />
+  </p>
+</div>
+`;
+
+exports[`<IdeaPageTrashBlock /> it should render nothing when idea is not trashed 1`] = `null`;

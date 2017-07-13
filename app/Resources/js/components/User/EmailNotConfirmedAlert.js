@@ -54,9 +54,12 @@ export const EmailNotConfirmedAlert = React.createClass({
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
             <FormattedHTMLMessage
-              message={<FormattedMessage id="user.confirm.email" />}
-              email={user.email}
-              link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+              id="user.confirm.email"
+              values={{
+                email: user.email,
+                link:
+                  'http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique',
+              }}
             />
           </div>
           <div className="col-md-5">
@@ -65,7 +68,7 @@ export const EmailNotConfirmedAlert = React.createClass({
                   style={{ marginRight: 15, marginBottom: 5 }}
                   bsStyle="primary"
                   disabled>
-                  {<FormattedMessage id="user.confirm.sent" />}
+                  <FormattedMessage id="user.confirm.sent" />
                 </Button>
               : <Button
                   style={{ marginRight: 15, marginBottom: 5 }}
@@ -76,7 +79,7 @@ export const EmailNotConfirmedAlert = React.createClass({
                     : <FormattedMessage id="user.confirm.resend" />}
                 </Button>}
             <Button style={{ marginBottom: 5 }} href={editEmailUrl}>
-              {<FormattedMessage id="user.confirm.update" />}
+              <FormattedMessage id="user.confirm.update" />
             </Button>
           </div>
         </div>
