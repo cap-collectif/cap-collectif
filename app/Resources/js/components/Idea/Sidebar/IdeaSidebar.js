@@ -36,7 +36,13 @@ const IdeaSidebar = React.createClass({
           bsStyle={idea.userHasVote || expanded ? 'danger' : 'success'}
           bsSize="large"
           onClick={onToggleExpand}>
-          {<FormattedMessage id />}
+          <FormattedMessage
+            id={
+              expanded
+                ? 'idea.vote.hide'
+                : idea.userHasVote ? 'idea.vote.delete' : 'idea.vote.add'
+            }
+          />
         </Button>
       </Col>
     );

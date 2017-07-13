@@ -161,9 +161,7 @@ const CreateModal = React.createClass({
           id="new_element_title"
           name="new_element[title]"
           className="new-element__title"
-          placeholder={
-            <FormattedMessage id="synthesis.edition.action.create.name.placeholder" />
-          }
+          placeholder="synthesis.edition.action.create.name.placeholder"
           onChange={this.setName}
         />
       </div>

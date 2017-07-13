@@ -54,7 +54,7 @@ export const AccountForm = React.createClass({
         {error &&
           <Alert bsStyle="danger">
             <p>
-              <FormattedHTMLMessage message={error} />
+              <FormattedHTMLMessage id={error} />
             </p>
           </Alert>}
         {confirmationEmailResent &&

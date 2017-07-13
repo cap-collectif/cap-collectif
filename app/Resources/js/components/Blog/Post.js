@@ -207,21 +207,23 @@ export const Post = React.createClass({
             />{' '}
             {post.authors.length > 0 &&
               <FormattedHTMLMessage
-                message={<FormattedMessage id="global.byAuthor" />}
-                author={
-                  <span>
-                    {post.authors.map((author, i) =>
-                      <span key={i}>
-                        {features.profiles
-                          ? <a href={author._links.profile}>
-                              {author.displayName}
-                            </a>
-                          : author.displayName}
-                        {post.authors.length > i + 1 && ', '}
-                      </span>,
-                    )}
-                  </span>
-                }
+                id="global.byAuthor"
+                values={{
+                  author: (
+                    <span>
+                      {post.authors.map((author, i) =>
+                        <span key={i}>
+                          {features.profiles
+                            ? <a href={author._links.profile}>
+                                {author.displayName}
+                              </a>
+                            : author.displayName}
+                          {post.authors.length > i + 1 && ', '}
+                        </span>,
+                      )}
+                    </span>
+                  ),
+                }}
               />}
           </p>
           <p className="media--news__text">

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import { changeTerm, loadProposals } from '../../../redux/modules/proposal';
@@ -34,7 +33,7 @@ const ProposalListSearch = React.createClass({
           id="proposal-search-input"
           type="text"
           ref={c => (this._input = c)}
-          placeholder={<FormattedMessage id="proposal.search" />}
+          placeholder="proposal.search"
           buttonAfter={
             <Button id="proposal-search-button" type="submit">
               <i className="cap cap-magnifier" />

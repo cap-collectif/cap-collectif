@@ -51,9 +51,7 @@ const ArgumentDeleteModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormattedHTMLMessage
-            message={<FormattedMessage id="argument.delete.modal.infos" />}
-          />
+          <FormattedHTMLMessage id="argument.delete.modal.infos" />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

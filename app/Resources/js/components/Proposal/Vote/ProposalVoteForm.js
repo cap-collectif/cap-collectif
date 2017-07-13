@@ -97,9 +97,7 @@ const ProposalVoteForm = React.createClass({
                 </span>
               </span>
             }
-            placeholder={
-              <FormattedMessage id="proposal.vote.form.comment_placeholder" />
-            }
+            placeholder="proposal.vote.form.comment_placeholder"
           />}
       </form>
     );

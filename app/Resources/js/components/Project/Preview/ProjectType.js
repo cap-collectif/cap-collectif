@@ -18,7 +18,7 @@ const ProjectType = React.createClass({
       <div
         className={divClasses}
         style={{ backgroundColor: project.projectType.color }}>
-        {<FormattedMessage id />}
+        <FormattedMessage id={project.projectType.title} />
       </div>
     );
   },

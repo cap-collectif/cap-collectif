@@ -26,7 +26,7 @@ const ProjectPreviewCounter = React.createClass({
             {value}
           </div>
           <div className="thumbnail__number__label excerpt small">
-            <FormattedMessage id={label} num={value} />
+            <FormattedMessage id={label} values={{ num: value }} />
           </div>
         </div>
       );

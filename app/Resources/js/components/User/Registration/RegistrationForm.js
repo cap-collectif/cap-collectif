@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
@@ -106,16 +106,19 @@ export const RegistrationForm = React.createClass({
             type="select"
             label={
               <span>
-                {<FormattedMessage id="registration.type" />}{' '}
+                <FormattedMessage id="registration.type" />{' '}
                 <span className="excerpt">
-                  {<FormattedMessage id="global.form.optional" />}
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }
             labelClassName="h5">
-            <option value="">
-              {<FormattedMessage id="registration.select.type" />}
-            </option>
+            <FormattedMessage id="registration.select.type">
+              {message =>
+                <option value="">
+                  {message}
+                </option>}
+            </FormattedMessage>
             {userTypes.map((type, i) =>
               <option key={i + 1} value={type.id}>
                 {type.name}
@@ -130,9 +133,9 @@ export const RegistrationForm = React.createClass({
             type="text"
             label={
               <span>
-                {<FormattedMessage id="registration.zipcode" />}{' '}
+                <FormattedMessage id="registration.zipcode" />{' '}
                 <span className="excerpt">
-                  {<FormattedMessage id="global.form.optional" />}
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }
@@ -148,9 +151,12 @@ export const RegistrationForm = React.createClass({
               </option>,
             );
             children = [
-              <option key={0} value="">
-                {<FormattedMessage id="global.select" />}
-              </option>,
+              <FormattedMessage id="global.select">
+                {message =>
+                  <option key={0} value="">
+                    {message}
+                  </option>}
+              </FormattedMessage>,
               ...choices,
             ];
           }
@@ -166,7 +172,7 @@ export const RegistrationForm = React.createClass({
                   {field.question}{' '}
                   {!field.required &&
                     <span className="excerpt">
-                      {<FormattedMessage id="global.form.optional" />}
+                      <FormattedMessage id="global.form.optional" />
                     </span>}
                 </span>
               }
@@ -181,16 +187,17 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="checkbox"
           children={
-            <FormattedHTMLMessage
-              message={<FormattedMessage id="registration.charte" />}
-              link={
-                <a className="external-link" href={cguLink}>
-                  {cguName}
-                </a>
-              }
+            <FormattedMessage
+              id="registration.charte"
+              values={{
+                link: (
+                  <a className="external-link" href={cguLink}>
+                    {cguName}
+                  </a>
+                ),
+              }}
             />
           }
-          // labelClassName="h5"
         />
         {addCaptchaField &&
           <Field

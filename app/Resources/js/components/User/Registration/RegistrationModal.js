@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Alert } from 'react-bootstrap';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
@@ -46,7 +46,7 @@ export const RegistrationModal = React.createClass({
         <Modal.Body>
           {textTop &&
             <Alert bsStyle="info" className="text-center">
-              <FormattedHTMLMessage message={textTop} />
+              <div dangerouslySetInnerHTML={{ __html: textTop }} />
             </Alert>}
           <LoginSocialButtons prefix="registration." />
           <RegistrationForm
@@ -57,9 +57,9 @@ export const RegistrationModal = React.createClass({
           {textBottom &&
             <div
               className="text-center small excerpt"
-              style={{ marginTop: '15px' }}>
-              <FormattedHTMLMessage message={textBottom} />
-            </div>}
+              style={{ marginTop: '15px' }}
+              dangerouslySetInnerHTML={{ __html: textBottom }}
+            />}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

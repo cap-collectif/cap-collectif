@@ -117,14 +117,12 @@ export const ProfileBox = React.createClass({
           </Alert>}
         {smsSentToNumber &&
           <FormattedHTMLMessage
-            message={<FormattedMessage id="phone.confirm.sent" />}
+            id="phone.confirm.sent"
             phone={smsSentToNumber}
           />}
         {!smsSentToNumber &&
           !user.phone &&
-          <FormattedHTMLMessage
-            message={<FormattedMessage id="phone.confirm.infos" />}
-          />}
+          <FormattedHTMLMessage id="phone.confirm.infos" />}
         {smsSentToNumber
           ? <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
           : <PhoneForm

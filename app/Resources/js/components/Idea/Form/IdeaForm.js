@@ -107,7 +107,7 @@ export const IdeaForm = React.createClass({
           component={renderComponent}
           label={<FormattedMessage id="idea.form.url" />}
           help={<FormattedMessage id="idea.form.url_help" />}
-          placeholder={<FormattedMessage id="idea.form.url_placeholder" />}
+          placeholder="idea.form.url_placeholder"
         />
         <Field
           id="idea_media"

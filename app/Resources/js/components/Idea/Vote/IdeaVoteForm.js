@@ -122,9 +122,7 @@ const IdeaVoteForm = React.createClass({
             name="idea-vote__comment"
             valueLink={this.linkState('form.comment')}
             label={<FormattedMessage id="idea.vote.form.comment" />}
-            placeholder={
-              <FormattedMessage id="idea.vote.form.comment_placeholder" />
-            }
+            placeholder="idea.vote.form.comment_placeholder"
             groupClassName={this.getGroupStyle('comment')}
             errors={this.renderFormErrors('comment')}
           />}

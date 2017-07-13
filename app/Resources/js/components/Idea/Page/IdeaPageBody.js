@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import IdeaPageTrashBlock from './IdeaPageTrashBlock';
 import IdeaPageButtons from './IdeaPageButtons';
@@ -35,9 +35,9 @@ const IdeaPageBody = React.createClass({
           />}
         <div className="block" id="idea-body">
           <h2 className="h2">
-            {<FormattedMessage id="idea.body" />}
+            <FormattedMessage id="idea.body" />
           </h2>
-          <FormattedHTMLMessage message={idea.body} />
+          <div dangerouslySetInnerHTML={{ __html: idea.body }} />
         </div>
 
         {idea.object
@@ -45,14 +45,14 @@ const IdeaPageBody = React.createClass({
               <h2 className="h2">
                 {<FormattedMessage id="idea.object" />}
               </h2>
-              <FormattedHTMLMessage message={idea.object} />
+              <div dangerouslySetInnerHTML={{ __html: idea.object }} />
             </div>
           : null}
 
         {idea.url
           ? <div className="block" id="idea-url">
               <h2 className="h2">
-                {<FormattedMessage id="idea.url" />}
+                <FormattedMessage id="idea.url" />
               </h2>
               <p>
                 <a className="external-link" href={idea.url}>

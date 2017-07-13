@@ -24,6 +24,7 @@ exports.config = {
     assets: /^app\/Resources\/assets/,
     ignored: [
       /^app\/Resources\/scss\/(modules|base)/,
+      /^codemod/,
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.js',
       'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
       'bower_components/compass-mixins/lib/_compass.scss',

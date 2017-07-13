@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate';
 
 const ProposalDetailLikersTooltipLabel = React.createClass({
@@ -33,7 +33,7 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
           />
           <br />
           <Truncate>
-            <FormattedHTMLMessage message={message} />
+            <div dangerouslySetInnerHTML={{ __html: message }} />
           </Truncate>
         </span>
       );

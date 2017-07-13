@@ -89,13 +89,14 @@ const ProjectListFilter = React.createClass({
           <option key="all" value="">
             Tous les types
           </option>
-          {projectTypes.map(projectType => {
-            return (
-              <option key={projectType.slug} value={projectType.slug}>
-                {<FormattedMessage id />}
-              </option>
-            );
-          })}
+          {projectTypes.map(projectType =>
+            <FormattedMessage id={projectType.title} key={projectType.slug}>
+              {message =>
+                <option value={projectType.slug}>
+                  {message}
+                </option>}
+            </FormattedMessage>,
+          )}
         </FormControl>,
       );
     }
@@ -130,7 +131,7 @@ const ProjectListFilter = React.createClass({
         <Input
           id="project-search-input"
           type="text"
-          placeholder={<FormattedMessage id="navbar.search" />}
+          placeholder="navbar.search"
           buttonAfter={
             <Button id="project-search-button" type="submit">
               <i className="cap cap-magnifier" />

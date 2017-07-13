@@ -101,7 +101,7 @@ const Other = React.createClass({
             type="text"
             bsSize="small"
             onChange={this.onType}
-            placeholder={<FormattedMessage id="reply.your_response" />}
+            placeholder="reply.your_response"
             disabled={disabled}
           />
         </Col>

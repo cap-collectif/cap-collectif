@@ -381,7 +381,7 @@ const ReplyForm = React.createClass({
                   groupClassName={this.getGroupStyle(field.id)}
                   valueLink={this.linkState(`form.${field.id}`)}
                   errors={this.renderFormErrors(field.id)}
-                  placeholder={<FormattedMessage id="reply.your_response" />}
+                  placeholder="reply.your_response"
                   label={label}
                   labelClassName="h4"
                   disabled={disabled}

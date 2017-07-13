@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
@@ -51,9 +51,9 @@ const ProposalsUserVotesPage = React.createClass({
                         </a>
                       </p>}
                   {step.votesHelpText &&
-                    <div>
-                      <FormattedHTMLMessage message={step.votesHelpText} />
-                    </div>}
+                    <div
+                      dangerouslySetInnerHTML={{ __html: step.votesHelpText }}
+                    />}
                   <h3>
                     <FormattedMessage
                       id="project.votes.nb"

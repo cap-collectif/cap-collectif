@@ -87,9 +87,7 @@ const OpinionDelete = React.createClass({
             </Modal.Header>
             <Modal.Body>
               <p>
-                <FormattedHTMLMessage
-                  message={<FormattedMessage id="opinion.delete.confirm" />}
-                />
+                <FormattedHTMLMessage id="opinion.delete.confirm" />
               </p>
             </Modal.Body>
             <Modal.Footer>

@@ -259,7 +259,7 @@ const CommentForm = React.createClass({
               valueLink={this.linkState('form.body')}
               rows="2"
               onFocus={this.expand.bind(this, true)}
-              placeholder={<FormattedMessage id="comment.write" />}
+              placeholder="comment.write"
               groupClassName={this.getGroupStyle('body')}
               errors={this.renderFormErrors('body')}
             />

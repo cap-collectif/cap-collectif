@@ -29,7 +29,7 @@ export const LoginForm = React.createClass({
         {error &&
           <Alert bsStyle="danger">
             <p>
-              {<FormattedMessage id />}
+              <FormattedMessage id={error} />
             </p>
           </Alert>}
         <Field

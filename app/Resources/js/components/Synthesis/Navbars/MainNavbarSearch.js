@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Navbar, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
@@ -39,9 +38,7 @@ const MainNavbarSearch = React.createClass({
         <form onSubmit={this.submit}>
           <Input
             type="text"
-            placeholder={
-              <FormattedMessage id="synthesis.edition.navbar.search" />
-            }
+            placeholder="synthesis.edition.navbar.search"
             buttonAfter={searchButton}
             valueLink={this.linkState('searchTerm')}
           />

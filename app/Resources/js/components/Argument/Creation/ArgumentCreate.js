@@ -56,7 +56,7 @@ const ArgumentCreate = React.createClass({
                 type="textarea"
                 rows={2}
                 label={<FormattedMessage id={`argument.${type}.add`} />}
-                placeholder={<FormattedMessage id={`argument.${type}.add`} />}
+                placeholder={`argument.${type}.add`}
                 labelClassName="sr-only"
                 disabled={disabled}
               />

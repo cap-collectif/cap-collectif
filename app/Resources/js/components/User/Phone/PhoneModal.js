@@ -104,12 +104,10 @@ const PhoneModal = React.createClass({
             </Alert>}
           {smsSentToNumber
             ? <FormattedHTMLMessage
-                message={<FormattedMessage id="phone.confirm.sent" />}
+                id="phone.confirm.sent"
                 phone={smsSentToNumber}
               />
-            : <FormattedHTMLMessage
-                message={<FormattedMessage id="phone.confirm.infos" />}
-              />}
+            : <FormattedHTMLMessage id="phone.confirm.infos" />}
           {smsSentToNumber
             ? <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
             : <PhoneForm

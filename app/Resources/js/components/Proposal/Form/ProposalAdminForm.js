@@ -80,7 +80,7 @@ export const ProposalAdminForm = React.createClass({
               </span>
             }
             component={renderSelect}
-            placeholder={<FormattedMessage id="proposal.select.category" />}
+            placeholder="proposal.select.category"
             options={proposalForm.categories.map(c => ({
               value: c.id,
               label: c.name,
@@ -91,7 +91,7 @@ export const ProposalAdminForm = React.createClass({
           <Field
             name="theme"
             id="proposal-admin-theme"
-            placeholder={<FormattedMessage id="proposal.select.theme" />}
+            placeholder="proposal.select.theme"
             options={themes.map(t => ({ value: t.id, label: t.title }))}
             component={renderSelect}
             clearable={!proposalForm.themeMandatory}
@@ -107,7 +107,7 @@ export const ProposalAdminForm = React.createClass({
           <Field
             name="district"
             id="proposal-admin-district"
-            placeholder={<FormattedMessage id="proposal.select.district" />}
+            placeholder="proposal.select.district"
             component={renderSelect}
             clearable={!proposalForm.districtMandatory}
             label={

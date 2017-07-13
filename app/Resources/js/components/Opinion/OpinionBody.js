@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Well } from 'react-bootstrap';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
 
@@ -25,18 +25,17 @@ const OpinionBody = React.createClass({
           FormattedText.strip(opinion.comment).length
             ? <div>
                 <p className="control-label h5">
-                  {<FormattedMessage id="opinion.version_comment" />}
+                  <FormattedMessage id="opinion.version_comment" />
                 </p>
                 <Well bsSize="small">
-                  <div>
-                    <FormattedHTMLMessage message={opinion.comment} />
-                  </div>
+                  <div dangerouslySetInnerHTML={{ __html: opinion.comment }} />
                 </Well>
               </div>
             : null}
-          <div className="diff">
-            <FormattedHTMLMessage message={opinion.diff} />
-          </div>
+          <div
+            className="diff"
+            dangerouslySetInnerHTML={{ __html: opinion.diff }}
+          />
         </div>
       );
     }

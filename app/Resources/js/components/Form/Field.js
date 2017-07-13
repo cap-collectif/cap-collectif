@@ -75,7 +75,7 @@ const Field = React.createClass({
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}
-        errors={check && error ? <FormattedMessage id /> : null}
+        errors={check && error ? <FormattedMessage id={error} /> : null}
         validationState={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
         autoComplete={autoComplete}

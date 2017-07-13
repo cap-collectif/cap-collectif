@@ -122,7 +122,7 @@ const ProjectStatsList = React.createClass({
         {haveData &&
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
-              <i className={icon} /> {<FormattedMessage id />}
+              <i className={icon} /> {<FormattedMessage id={label} />}
               <span
                 id={`step-stats-display-${stepId}`}
                 className="pull-right excerpt stats__buttons">
