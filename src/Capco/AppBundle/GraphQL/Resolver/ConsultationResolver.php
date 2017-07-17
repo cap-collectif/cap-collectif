@@ -101,16 +101,16 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolvePropositionUrl(Opinion $contribution): string
     {
-        $project = $contribution->getStep()->getProject();
-        if (!$project) { // TODO remove hack
-          $project = $this->project;
-        }
+        $step = $this->container->get('capco.consultation_step.repository')
+          ->getByOpinionId($contribution->getId())
+        ;
+        $project = $step->getProject();
 
         return $this->container->get('router')->generate(
             'app_consultation_show_opinion',
             [
                 'projectSlug' => $project->getSlug(),
-                'stepSlug' => $contribution->getStep()->getSlug(),
+                'stepSlug' => $step->getSlug(),
                 'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
                 'opinionSlug' => $contribution->getSlug(),
             ],
@@ -128,25 +128,22 @@ class ConsultationResolver implements ContainerAwareInterface
         $typeId = $arg->offsetGet('sectionId');
         $type = $this->container->get('capco.opinion_type.repository')->find($typeId);
 
-        // Stupid hack because no link between type and project
-        if ($type->getOpinions()->count() > 0) {
-            $step = $type->getOpinions()->first()->getStep();
-            $this->project = $step->getProject();
-        }
-
         return $this->getSectionOpinions($type, $arg);
     }
 
     public function getSectionUrl(OpinionType $type)
     {
-        if (!$this->project) { // TODO remove hack
-          return null;
+        // Stupid hack because no link between type and project
+        if ($type->getOpinions()->count() === 0) {
+            return null;
         }
+        $step = $type->getOpinions()->first()->getStep();
+        $project = $step->getProject();
 
         return $this->container->get('router')->generate(
           'app_consultation_show_opinions',
           [
-              'projectSlug' => $this->project->getSlug(),
+              'projectSlug' => $project->getSlug(),
               'stepSlug' => $step->getSlug(),
               'opinionTypeSlug' => $type->getSlug(),
           ],
