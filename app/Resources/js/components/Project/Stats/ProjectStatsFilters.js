@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Input from '../../Form/Input';
@@ -16,6 +16,7 @@ export const ProjectStatsFilters = React.createClass({
     showThemes: React.PropTypes.bool.isRequired,
     showDistricts: React.PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const {
@@ -35,8 +36,7 @@ export const ProjectStatsFilters = React.createClass({
     let filtersNumber = 0;
     const showCategoriesFilter = categories && categories.length > 0;
     const showThemesFilter = showThemes && themes && themes.length;
-    const showDistrictsFilter =
-      showDistricts && districts && districts.length > 0;
+    const showDistrictsFilter = showDistricts && districts && districts.length > 0;
 
     filtersNumber = showCategoriesFilter ? filtersNumber + 1 : filtersNumber;
     filtersNumber = showThemesFilter > 0 ? filtersNumber + 1 : filtersNumber;
@@ -52,64 +52,82 @@ export const ProjectStatsFilters = React.createClass({
     }
     return (
       <Row className="stats__filters">
-        {showThemesFilter &&
+        {
+          showThemesFilter &&
           <Col xs={12} md={colWidth}>
             <Input
               id="stats-filter-themes"
               type="select"
               ref="themes"
-              onChange={onThemeChange}>
+              onChange={onThemeChange}
+            >
               <option value="0">
-                {<FormattedMessage id="global.select_themes" />}
+                {this.getIntlMessage('global.select_themes')}
               </option>
-              {themes.map(theme =>
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
-                </option>,
-              )}
+              {
+                themes.map(theme =>
+                  <option key={theme.id} value={theme.id}>
+                    {theme.title}
+                  </option>,
+                )
+              }
             </Input>
-          </Col>}
-        {showCategoriesFilter &&
+          </Col>
+        }
+        {
+          showCategoriesFilter &&
           <Col xs={12} md={colWidth}>
             <Input
               id="stats-filter-categories"
               type="select"
-              onChange={onCategoryChange}>
+              onChange={onCategoryChange}
+            >
               <option value="0">
-                {<FormattedMessage id="global.select_categories" />}
+                {this.getIntlMessage('global.select_categories')}
               </option>
-              {categories.map(category =>
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>,
-              )}
+              {
+                categories.map(category =>
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>,
+                )
+              }
             </Input>
-          </Col>}
-        {showDistrictsFilter &&
+          </Col>
+        }
+        {
+          showDistrictsFilter &&
           <Col xs={12} md={colWidth}>
             <Input
               id="stats-filter-districts"
               type="select"
               ref="districts"
-              onChange={onDistrictChange}>
+              onChange={onDistrictChange}
+            >
               <option value="0">
-                {<FormattedMessage id="global.select_districts" />}
+                {this.getIntlMessage('global.select_districts')}
               </option>
-              {districts.map(district =>
-                <option key={district.id} value={district.id}>
-                  {district.name}
-                </option>,
-              )}
+              {
+                districts.map(district =>
+                  <option key={district.id} value={district.id}>
+                    {district.name}
+                  </option>,
+                )
+              }
             </Input>
-          </Col>}
+          </Col>
+        }
       </Row>
     );
   },
+
 });
 
-export default connect((state, props) => {
-  return {
-    showThemes: state.default.features.themes && props.showThemes,
-    showDistricts: state.default.features.districts && props.showDistricts,
-  };
-})(ProjectStatsFilters);
+export default connect(
+  (state, props) => {
+    return {
+      showThemes: state.default.features.themes && props.showThemes,
+      showDistricts: state.default.features.districts && props.showDistricts,
+    };
+  },
+)(ProjectStatsFilters);

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import { submitConfirmPasswordForm as onSubmit } from '../../redux/modules/user';
 import renderComponent from '../Form/Field';
@@ -10,6 +10,7 @@ export const ConfirmPasswordForm = React.createClass({
   propTypes: {
     handleSubmit: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { handleSubmit } = this.props;
@@ -20,7 +21,7 @@ export const ConfirmPasswordForm = React.createClass({
           component={renderComponent}
           name="password"
           id="account__password"
-          label={<FormattedMessage id="global.password" />}
+          label={this.getIntlMessage('global.password')}
         />
       </form>
     );

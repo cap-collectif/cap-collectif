@@ -11,17 +11,11 @@ exports[`<IdeaPageBody /> it should render a div with provided className 1`] = `
     <h2
       className="h2"
     >
-      <FormattedMessage
-        id="idea.body"
-        values={Object {}}
-      />
+      Description
     </h2>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<p>blabla</p>",
-        }
-      }
+    <FormattedHTMLMessage
+      message="<p>blabla</p>"
+      tagName="span"
     />
   </div>
   <IdeaPageTrashBlock
@@ -60,17 +54,11 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
     <h2
       className="h2"
     >
-      <FormattedMessage
-        id="idea.body"
-        values={Object {}}
-      />
+      Description
     </h2>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<p>blabla</p>",
-        }
-      }
+    <FormattedHTMLMessage
+      message="<p>blabla</p>"
+      tagName="span"
     />
   </div>
   <div
@@ -80,17 +68,11 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
     <h2
       className="h2"
     >
-      <FormattedMessage
-        id="idea.object"
-        values={Object {}}
-      />
+      Objectif
     </h2>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<p>blabla</p>",
-        }
-      }
+    <FormattedHTMLMessage
+      message="<p>blabla</p>"
+      tagName="span"
     />
   </div>
   <div
@@ -100,10 +82,7 @@ exports[`<IdeaPageBody /> it should render idea media, object and url when provi
     <h2
       className="h2"
     >
-      <FormattedMessage
-        id="idea.url"
-        values={Object {}}
-      />
+      Informations complémentaires
     </h2>
     <p>
       <a
@@ -154,17 +133,11 @@ exports[`<IdeaPageBody /> it should show idea body, trash block and buttons 1`] 
     <h2
       className="h2"
     >
-      <FormattedMessage
-        id="idea.body"
-        values={Object {}}
-      />
+      Description
     </h2>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<p>blabla</p>",
-        }
-      }
+    <FormattedHTMLMessage
+      message="<p>blabla</p>"
+      tagName="span"
     />
   </div>
   <IdeaPageTrashBlock

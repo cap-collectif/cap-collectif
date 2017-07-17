@@ -1,11 +1,13 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import ProjectPreviewProgressBarItem from './ProjectPreviewProgressBarItem';
 
 const ProjectPreviewProgressBar = React.createClass({
   propTypes: {
     project: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getCompletedStepsNb() {
     const { project } = this.props;
@@ -19,8 +21,9 @@ const ProjectPreviewProgressBar = React.createClass({
     const { project } = this.props;
     const completedStepsNb = this.getCompletedStepsNb();
     const total = project.steps.length;
-    const percentage =
-      completedStepsNb > 0 && total > 0 ? completedStepsNb / total * 100 : 0;
+    const percentage = completedStepsNb > 0 && total > 0
+      ? completedStepsNb / total * 100
+      : 0;
     return Math.round(percentage);
   },
 

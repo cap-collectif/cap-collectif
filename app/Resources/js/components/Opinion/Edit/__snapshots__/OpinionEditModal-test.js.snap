@@ -38,10 +38,7 @@ exports[`<OpinionEditModal /> renders correctly 1`] = `
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="global.edit"
-        values={Object {}}
-      />
+      Modifier
     </ModalTitle>
   </ModalHeader>
   <ModalBody

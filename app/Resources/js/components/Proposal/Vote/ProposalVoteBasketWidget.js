@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedNumber, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedNumber } from 'react-intl';
 import { connect } from 'react-redux';
 import { mapValues } from 'lodash';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
@@ -20,8 +20,7 @@ export const ProposalVoteBasketWidget = React.createClass({
     creditsLeftByStepId: PropTypes.object.isRequired,
     image: PropTypes.string,
   },
-
-  mixins: [DeepLinkStateMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -88,7 +87,7 @@ export const ProposalVoteBasketWidget = React.createClass({
             {votableSteps.length > 1 &&
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.step" />}
+                  {this.getIntlMessage('project.votes.widget.step')}
                 </p>
                 <span className="widget__counter__value">
                   <Input
@@ -111,7 +110,7 @@ export const ProposalVoteBasketWidget = React.createClass({
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes" />}
+                  {this.getIntlMessage('project.votes.widget.votes')}
                 </p>
                 <span className="widget__counter__value">
                   {selectedStep.votesLimit}
@@ -119,7 +118,7 @@ export const ProposalVoteBasketWidget = React.createClass({
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes_left" />}
+                  {this.getIntlMessage('project.votes.widget.votes_left')}
                 </p>
                 <span className="widget__counter__value">
                   {selectedStep.votesLimit -
@@ -128,7 +127,7 @@ export const ProposalVoteBasketWidget = React.createClass({
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes_spent" />}
+                  {this.getIntlMessage('project.votes.widget.votes_spent')}
                 </p>
                 <span className="widget__counter__value">
                   {userVotesCountByStepId[selectedStep.id]}
@@ -139,7 +138,7 @@ export const ProposalVoteBasketWidget = React.createClass({
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.budget" />}
+                  {this.getIntlMessage('project.votes.widget.budget')}
                 </p>
                 <span className="widget__counter__value">
                   {budget
@@ -149,12 +148,12 @@ export const ProposalVoteBasketWidget = React.createClass({
                         style="currency"
                         currency="EUR"
                       />
-                    : <FormattedMessage id="project.votes.widget.no_value" />}
+                    : this.getIntlMessage('project.votes.widget.no_value')}
                 </span>
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.spent" />}
+                  {this.getIntlMessage('project.votes.widget.spent')}
                 </p>
                 <span className="widget__counter__value">
                   <FormattedNumber
@@ -167,7 +166,7 @@ export const ProposalVoteBasketWidget = React.createClass({
               </li>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.left" />}
+                  {this.getIntlMessage('project.votes.widget.left')}
                 </p>
                 <span className="widget__counter__value">
                   <FormattedNumber
@@ -181,9 +180,9 @@ export const ProposalVoteBasketWidget = React.createClass({
               {selectedStep.votesLimit &&
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
-                    {
-                      <FormattedMessage id="project.votes.widget.votes_left_budget" />
-                    }
+                    {this.getIntlMessage(
+                      'project.votes.widget.votes_left_budget',
+                    )}
                   </p>
                   <span className="widget__counter__value">
                     {selectedStep.votesLimit -
@@ -196,7 +195,7 @@ export const ProposalVoteBasketWidget = React.createClass({
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
-                  {<FormattedMessage id="project.votes.widget.votes" />}
+                  {this.getIntlMessage('project.votes.widget.votes')}
                 </p>
                 <span className="widget__counter__value">
                   {userVotesCountByStepId[selectedStep.id]}
@@ -207,7 +206,7 @@ export const ProposalVoteBasketWidget = React.createClass({
             bsStyle="default"
             className="widget__button navbar-btn pull-right"
             href={votesPageUrl}>
-            {<FormattedMessage id="proposal.details" />}
+            {this.getIntlMessage('proposal.details')}
           </Button>
           {showProgressBar &&
             <Nav pullRight className="widget__progress-bar-nav hidden-xs">

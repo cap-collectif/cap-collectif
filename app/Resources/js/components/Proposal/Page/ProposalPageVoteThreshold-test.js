@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
+import IntlData from '../../../translations/FR';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 
 describe('<ProposalPageVoteThreshold />', () => {
@@ -21,22 +22,26 @@ describe('<ProposalPageVoteThreshold />', () => {
   };
 
   it('should render proposal page vote threshold', () => {
-    const wrapper = shallow(
-      <ProposalPageVoteThreshold
-        proposal={proposal}
-        step={stepWithVoteThreshold}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThreshold} {...IntlData} />);
+    const mainDiv = wrapper.find('div.proposal__page__vote_threshold');
+    expect(mainDiv).toHaveLength(1);
+    const secondDiv = mainDiv.find('div.proposal__infos');
+    expect(secondDiv).toHaveLength(1);
+
+    expect(secondDiv.find('h4').text()).toEqual('Soutenez cette proposition');
+    expect(secondDiv.find('p.proposal__page__vote_threshold__votes')).toHaveLength(1);
+    expect(secondDiv.find('p.proposal__page__vote_threshold__votes').children()).toHaveLength(3);
   });
 
   it('should render proposal page vote threshold reached', () => {
-    const wrapper = shallow(
-      <ProposalPageVoteThreshold
-        proposal={proposal}
-        step={stepWithVoteThresholdReached}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThresholdReached} {...IntlData} />);
+    const mainDiv = wrapper.find('div.proposal__page__vote_threshold');
+    expect(mainDiv).toHaveLength(1);
+    const secondDiv = mainDiv.find('div.proposal__infos');
+    expect(secondDiv).toHaveLength(1);
+
+    expect(secondDiv.find('h4').text()).toEqual('Objectif atteint');
+    expect(secondDiv.find('p.proposal__page__vote_threshold__votes')).toHaveLength(1);
+    expect(secondDiv.find('p.proposal__page__vote_threshold__votes').children()).toHaveLength(3);
   });
 });

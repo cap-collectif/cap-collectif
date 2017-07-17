@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const Filter = React.createClass({
   propTypes: {
@@ -9,6 +9,7 @@ const Filter = React.createClass({
     show: React.PropTypes.bool,
     onChange: React.PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps(): Object {
     return {
@@ -18,26 +19,34 @@ const Filter = React.createClass({
   },
 
   render(): ?React$Element<> {
-    const { onChange, show, value, values } = this.props;
+    const {
+      onChange,
+      show,
+      value,
+      values,
+    } = this.props;
     if (show) {
       return (
         <select
           className="form-control pull-right"
           value={value}
-          onChange={onChange}>
-          {values &&
-            values.map((val: number, index: number): ?React$Element<> => {
+          onChange={onChange}
+        >
+          {
+            values && values.map((val: number, index: number): ?React$Element<> => {
               return (
                 <option value={val} key={index}>
-                  <FormattedMessage id={`global.filter_${val}`} />
+                  {this.getIntlMessage(`global.filter_${val}`)}
                 </option>
               );
-            })}
+            })
+          }
         </select>
       );
     }
     return null;
   },
+
 });
 
 export default Filter;

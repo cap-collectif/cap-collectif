@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -9,12 +9,12 @@ import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 
 export const ProposalPageHeader = React.createClass({
   displayName: 'ProposalPageHeader',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     className: PropTypes.string,
     referer: PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -23,26 +23,22 @@ export const ProposalPageHeader = React.createClass({
   },
 
   render() {
-    const { proposal, className, referer } = this.props;
+    const {
+      proposal,
+      className,
+      referer,
+    } = this.props;
 
     const createdDate = (
       <FormattedDate
-        value={moment(proposal.created_at)}
-        day="numeric"
-        month="long"
-        year="numeric"
-        hour="numeric"
-        minute="numeric"
+       value={moment(proposal.created_at)}
+       day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
       />
     );
     const updatedDate = (
       <FormattedDate
         value={moment(proposal.updated_at)}
-        day="numeric"
-        month="long"
-        year="numeric"
-        hour="numeric"
-        minute="numeric"
+        day="numeric" month="long" year="numeric" hour="numeric" minute="numeric"
       />
     );
 
@@ -54,40 +50,32 @@ export const ProposalPageHeader = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div>
-          <a
-            style={{ textDecoration: 'none' }}
-            href={referer || proposal._links.index}>
-            <i className="cap cap-arrow-65-1 icon--black" />{' '}
-            {<FormattedMessage id="proposal.back" />}
+          <a style={{ textDecoration: 'none' }} href={referer || proposal._links.index}>
+            <i className="cap cap-arrow-65-1 icon--black"></i>
+            { ' ' }
+            {this.getIntlMessage('proposal.back')}
           </a>
         </div>
-        <h1 className="consultation__header__title h1">
-          {proposal.title}
-        </h1>
+        <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
             <p className="media--aligned excerpt">
               <FormattedMessage
-                id="proposal.infos.header"
-                values={{
-                  user: <UserLink user={proposal.author} />,
-                  createdDate,
-                }}
+                message={this.getIntlMessage('proposal.infos.header')}
+                user={<UserLink user={proposal.author} />}
+                createdDate={createdDate}
               />
-              {moment(proposal.updated_at).diff(
-                proposal.created_at,
-                'seconds',
-              ) > 1 &&
-                <span>
-                  {' • '}
-                  <FormattedMessage
-                    id="global.edited_on"
-                    values={{
-                      updated: updatedDate,
-                    }}
-                  />
-                </span>}
+              {
+                (moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1)
+                  && <span>
+                    {' • '}
+                    <FormattedMessage
+                      message={this.getIntlMessage('global.edited_on')}
+                      updated={updatedDate}
+                    />
+                  </span>
+              }
               <ProposalVoteButtonWrapper
                 proposal={proposal}
                 className="visible-xs btn-lg pull-right"
@@ -98,9 +86,10 @@ export const ProposalPageHeader = React.createClass({
       </div>
     );
   },
+
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     referer: state.proposal.referer,
   };

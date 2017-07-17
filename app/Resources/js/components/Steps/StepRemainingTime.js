@@ -1,10 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const StepRemainingTime = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { step } = this.props;
@@ -15,18 +16,19 @@ const StepRemainingTime = React.createClass({
     if (counters.remainingHours) {
       return (
         <FormattedMessage
-          id="step.remaining.hours"
-          values={{ num: counters.remainingHours }}
+          message={this.getIntlMessage('step.remaining.hours')}
+          num={counters.remainingHours}
         />
       );
     }
     return (
       <FormattedMessage
-        id="step.remaining.days"
-        values={{ num: counters.remainingDays || 0 }}
+        message={this.getIntlMessage('step.remaining.days')}
+        num={counters.remainingDays || 0}
       />
     );
   },
+
 });
 
 export default StepRemainingTime;
