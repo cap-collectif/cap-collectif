@@ -320,10 +320,9 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'step', 'aut', 'm', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
+            ->addSelect('ot', 'aut', 'm', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
-            ->leftJoin('o.step', 'step')
             ->leftJoin('aut.Media', 'm')
             ->andWhere('ot.id = :opinionType')
             ->andWhere('o.isTrashed = false')

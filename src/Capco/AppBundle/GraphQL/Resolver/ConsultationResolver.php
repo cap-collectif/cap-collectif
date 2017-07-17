@@ -24,6 +24,8 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public $project = null;
+
     public function resolveContributionType($data)
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');
@@ -100,6 +102,9 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionUrl(Opinion $contribution): string
     {
         $project = $contribution->getStep()->getProject();
+        if (!$project) { // TODO remove hack
+          $project = $this->project;
+        }
 
         return $this->container->get('router')->generate(
             'app_consultation_show_opinion',
@@ -123,22 +128,25 @@ class ConsultationResolver implements ContainerAwareInterface
         $typeId = $arg->offsetGet('sectionId');
         $type = $this->container->get('capco.opinion_type.repository')->find($typeId);
 
+        // Stupid hack because no link between type and project
+        if ($type->getOpinions()->count() > 0) {
+            $step = $type->getOpinions()->first()->getStep();
+            $this->project = $step->getProject();
+        }
+
         return $this->getSectionOpinions($type, $arg);
     }
 
     public function getSectionUrl(OpinionType $type)
     {
-        // Stupid hack because no link between
-        if ($type->getOpinions()->count() === 0) {
-            return null;
+        if (!$this->project) { // TODO remove hack
+          return null;
         }
-        $step = $type->getOpinions()->first()->getStep();
-        $project = $step->getProject();
 
         return $this->container->get('router')->generate(
           'app_consultation_show_opinions',
           [
-              'projectSlug' => $project->getSlug(),
+              'projectSlug' => $this->project->getSlug(),
               'stepSlug' => $step->getSlug(),
               'opinionTypeSlug' => $type->getSlug(),
           ],
