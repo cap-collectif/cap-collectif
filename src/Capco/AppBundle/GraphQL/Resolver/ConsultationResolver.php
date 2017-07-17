@@ -66,7 +66,6 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getContributionsRelay(ConsultationStep $consultation, Arg $args)
     {
-        $this->consultation = $consultation;
         $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
@@ -101,9 +100,6 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolvePropositionUrl(Opinion $contribution): string
     {
         $project = $contribution->getStep()->getProject();
-        if (!$project) {
-            $project = $this->consultation->getProject(); // hack
-        }
 
         return $this->container->get('router')->generate(
             'app_consultation_show_opinion',
