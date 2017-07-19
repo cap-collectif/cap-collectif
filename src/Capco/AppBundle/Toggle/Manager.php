@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Toggle;
 
+use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ContextFactory;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleManager;
@@ -95,10 +96,10 @@ class Manager
         }
     }
 
-    public function isActive(string $name): bool
+    public function isActive(string $name, Context $context = null): bool
     {
         if (!isset($this->knownValues[$name])) {
-            $this->knownValues[$name] = $this->toggleManager->active($name, $this->context);
+            $this->knownValues[$name] = $this->toggleManager->active($name, $context ?: $this->context);
         }
 
         return $this->knownValues[$name];

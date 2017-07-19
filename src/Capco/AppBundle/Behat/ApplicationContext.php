@@ -254,7 +254,9 @@ class ApplicationContext extends UserContext
      */
     public function featureIsDisabled(string $feature)
     {
-        expect($this->getService('capco.toggle.manager')->isActive($feature))->toBe(false);
+        $toggleManager = $this->getService('qandidate.toggle.manager');
+        $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
+        expect($toggleManager->active($feature, $contextFactory->createContext()))->toBe(false);
     }
 
     /**
