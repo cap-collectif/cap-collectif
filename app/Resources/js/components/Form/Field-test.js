@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Field from './Field';
-import IntlData from '../../translations/FR';
 
 describe('<Field />', () => {
   const defaultProps = {
@@ -16,7 +15,6 @@ describe('<Field />', () => {
     meta: {
       touched: false,
     },
-    ...IntlData,
   };
 
   it('pass input props to children', () => {
@@ -54,8 +52,8 @@ describe('<Field />', () => {
         meta={{ touched: true, error: 'global.required' }}
       />,
     );
+    expect(wrapper).toMatchSnapshot();
     expect(wrapper.is('Input')).toEqual(true);
-    expect(wrapper.prop('errors')).toEqual('Cette valeur est requise.');
     expect(wrapper.prop('validationState')).toEqual('error');
     expect(wrapper.prop('hasFeedback')).toEqual(true);
   });

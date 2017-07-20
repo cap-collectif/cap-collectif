@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalDetailLikersLabel />', () => {
   const oneLiker = [
@@ -21,9 +20,7 @@ describe('<ProposalDetailLikersLabel />', () => {
   ];
 
   it('should render truncated liker name when only one liker', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersLabel likers={oneLiker} {...IntlData} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLiker} />);
     expect(wrapper.find('Truncate').prop('children')).toEqual(
       oneLiker[0].displayName,
     );
@@ -32,15 +29,13 @@ describe('<ProposalDetailLikersLabel />', () => {
 
   it('should render a <FormattedMessage/> when several likers', () => {
     const wrapper = shallow(
-      <ProposalDetailLikersLabel likers={severalLikers} {...IntlData} />,
+      <ProposalDetailLikersLabel likers={severalLikers} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render nothing when no likers', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersLabel likers={[]} {...IntlData} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersLabel likers={[]} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

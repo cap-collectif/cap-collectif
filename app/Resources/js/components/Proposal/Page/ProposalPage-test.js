@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { ProposalPage } from './ProposalPage';
-import IntlData from '../../../translations/FR';
+
 import {
   VOTE_TYPE_SIMPLE,
   VOTE_TYPE_DISABLED,
@@ -55,7 +55,7 @@ describe('<ProposalPage />', () => {
 
   it('should render a proposal page', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />,
+      <ProposalPage {...props} proposal={proposalNoVotes} />,
     );
     expect(wrapper).toMatchSnapshot();
 
@@ -141,7 +141,7 @@ describe('<ProposalPage />', () => {
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />,
+      <ProposalPage {...props} proposal={proposalWithVotes} />,
     );
     expect(wrapper).toMatchSnapshot();
 
@@ -170,11 +170,7 @@ describe('<ProposalPage />', () => {
 
   it('should not render a vote modal if proposal has no votabledStep', () => {
     const wrapper = shallow(
-      <ProposalPage
-        {...props}
-        proposal={proposalWithoutVotableStep}
-        {...IntlData}
-      />,
+      <ProposalPage {...props} proposal={proposalWithoutVotableStep} />,
     );
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');

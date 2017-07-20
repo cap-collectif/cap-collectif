@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import FormMixin from '../../../utils/FormMixin';
@@ -243,10 +243,10 @@ const ReplyForm = React.createClass({
     return (
       <form id="reply-form" ref="form">
         {form.description &&
-          <div style={{ color: 'black' }}>
-            <FormattedHTMLMessage message={form.description} />
-            <hr />
-          </div>}
+          <div
+            style={{ color: 'black' }}
+            dangerouslySetInnerHTML={{ __html: form.description }}
+          />}
         {strategy === 'all_required' &&
           <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>}
         {form.fields.map(field => {
@@ -260,7 +260,9 @@ const ReplyForm = React.createClass({
               ? ' <span class="small excerpt">Facultatif</span>'
               : '';
           const labelMessage = field.question + labelAppend;
-          const label = <FormattedHTMLMessage id={labelMessage} />;
+          const label = (
+            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
+          );
           switch (inputType) {
             case 'checkbox':
               return (

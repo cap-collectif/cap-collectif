@@ -3,11 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationSortableQuestion } from './RegistrationSortableQuestion';
-import IntlData from '../../translations/FR';
 
 describe('<RegistrationSortableQuestion />', () => {
   const props = {
-    ...IntlData,
     value: { type: 'select' },
     isSuperAdmin: true,
     deleteField: jest.fn(),
@@ -20,7 +18,9 @@ describe('<RegistrationSortableQuestion />', () => {
   });
 
   it('renders correctly when not a superAdmin', () => {
-    const wrapper = shallow(<RegistrationSortableQuestion {...props} isSuperAdmin={false} />);
+    const wrapper = shallow(
+      <RegistrationSortableQuestion {...props} isSuperAdmin={false} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

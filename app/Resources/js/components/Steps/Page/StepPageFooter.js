@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
 
 const StepPageFooter = React.createClass({
   propTypes: {
@@ -16,7 +15,7 @@ const StepPageFooter = React.createClass({
       <div>
         <div className="block block--bordered" style={{ marginTop: 30 }}>
           <div style={{ padding: 10 }}>
-            <FormattedHTMLMessage message={footer} />
+            <div dangerouslySetInnerHTML={{ __html: footer }} />
           </div>
         </div>
       </div>

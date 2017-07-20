@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
@@ -336,7 +336,7 @@ export const ProposalForm = React.createClass({
     return (
       <form id="proposal-form">
         {form.description &&
-          <FormattedHTMLMessage message={form.description} />}
+          <div dangerouslySetInnerHTML={{ __html: form.description }} />}
         <Input
           id="proposal_title"
           type="text"

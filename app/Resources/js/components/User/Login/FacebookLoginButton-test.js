@@ -3,12 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import FacebookLoginButton from './FacebookLoginButton';
-import IntlData from '../../../translations/FR';
 
 describe('<FacebookLoginButton />', () => {
-  const props = {
-    ...IntlData,
-  };
+  const props = {};
 
   it('renders nothing if login_facebook is not activated', () => {
     const wrapper = shallow(

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Linkify from 'react-linkify';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const ButtonBody = React.createClass({
   propTypes: {
@@ -57,7 +57,7 @@ const ButtonBody = React.createClass({
     return (
       <div className="opinion__text">
         <Linkify properties={{ className: 'external-link' }}>
-          <FormattedHTMLMessage message={this.generateText()} />
+          <div dangerouslySetInnerHTML={{ __html: this.generateText() }} />
         </Linkify>
         {this.renderReadMoreOrLess()}
       </div>

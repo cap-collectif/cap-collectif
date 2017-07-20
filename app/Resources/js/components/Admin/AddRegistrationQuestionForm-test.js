@@ -3,20 +3,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationQuestionForm } from './RegistrationQuestionForm';
-import IntlData from '../../translations/FR';
 
 describe('<AddNewQuestionForm />', () => {
-  const props = {
-    ...IntlData,
-  };
+  const props = {};
 
   it('renders correctly', () => {
-    const wrapper = shallow(<RegistrationQuestionForm showChoices={false} {...props} />);
+    const wrapper = shallow(
+      <RegistrationQuestionForm showChoices={false} {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly for multiple choices', () => {
-    const wrapper = shallow(<RegistrationQuestionForm showChoices {...props} />);
+    const wrapper = shallow(
+      <RegistrationQuestionForm showChoices {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

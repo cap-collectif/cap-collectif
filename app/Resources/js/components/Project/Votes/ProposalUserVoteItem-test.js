@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalUserVoteItem } from './ProposalUserVoteItem';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalUserVoteItem />', () => {
   const props = {
@@ -26,7 +25,6 @@ describe('<ProposalUserVoteItem />', () => {
       voteType: 2,
       open: true,
     },
-    ...IntlData,
   };
 
   it('should render a vote item', () => {

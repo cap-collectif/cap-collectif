@@ -2,11 +2,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ReportBox } from './ReportBox';
-import IntlData from '../../translations/FR';
 
 describe('<ReportBox />', () => {
   const defaultProps = {
-    ...IntlData,
     id: 'opinion-1',
     dispatch: () => {},
     showModal: false,
@@ -36,7 +34,9 @@ describe('<ReportBox />', () => {
   });
 
   it('renders nothing if reporting is not enabled', () => {
-    const wrapper = shallow(<ReportBox {...defaultProps} features={{ reporting: false }} />);
+    const wrapper = shallow(
+      <ReportBox {...defaultProps} features={{ reporting: false }} />,
+    );
     expect(wrapper.children().exists()).toEqual(false);
   });
 
@@ -47,7 +47,9 @@ describe('<ReportBox />', () => {
   });
 
   it('renders nothing if logged user is the author', () => {
-    const wrapper = shallow(<ReportBox {...defaultProps} author={defaultProps.user} />);
+    const wrapper = shallow(
+      <ReportBox {...defaultProps} author={defaultProps.user} />,
+    );
     expect(wrapper.children().exists()).toEqual(false);
   });
 });

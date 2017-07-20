@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const ResponseValue = React.createClass({
   propTypes: {
@@ -21,7 +21,7 @@ const ResponseValue = React.createClass({
     if (response.field.type === 'editor') {
       return (
         <p>
-          <FormattedHTMLMessage message={response.value} />
+          <div dangerouslySetInnerHTML={{ __html: response.value }} />
         </p>
       );
     }
@@ -37,7 +37,7 @@ const ResponseValue = React.createClass({
             })}
           </ol>
         : <p>
-            {<FormattedMessage id="reply.show.response.no_value" />}
+            <FormattedMessage id="reply.show.response.no_value" />
           </p>;
     }
     if (typeof response.value === 'object') {

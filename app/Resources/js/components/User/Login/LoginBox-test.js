@@ -3,12 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LoginBox } from './LoginBox';
-import IntlData from '../../../translations/FR';
 
 describe('<LoginBox />', () => {
-  const props = {
-    ...IntlData,
-  };
+  const props = {};
 
   const texts = {
     textTop: 'Texte du haut',

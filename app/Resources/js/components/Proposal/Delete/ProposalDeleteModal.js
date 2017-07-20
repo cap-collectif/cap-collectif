@@ -38,8 +38,10 @@ const ProposalDeleteModal = React.createClass({
           <Modal.Body>
             <p>
               <FormattedHTMLMessage
-                message={<FormattedMessage id="proposal.delete.confirm" />}
-                title={proposal.title}
+                id="proposal.delete.confirm"
+                values={{
+                  title: proposal.title,
+                }}
               />
             </p>
           </Modal.Body>

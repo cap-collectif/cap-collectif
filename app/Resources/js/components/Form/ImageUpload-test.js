@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../translations/FR';
+
 import ImageUpload from './ImageUpload';
 import Input from '../Form/Input';
 
@@ -12,7 +12,7 @@ const className = 'css-class';
 
 describe('<ImageUpload />', () => {
   it('should show the image upload field', () => {
-    const wrapper = shallow(<ImageUpload valueLink={valueLink} {...IntlData} />);
+    const wrapper = shallow(<ImageUpload valueLink={valueLink} />);
     expect(wrapper.find('Row')).toHaveLength(1);
     expect(wrapper.find('Col')).toHaveLength(2);
     const dropzone = wrapper.find('Dropzone');
@@ -26,18 +26,24 @@ describe('<ImageUpload />', () => {
   });
 
   it('should show the preview and the delete checkbox if preview is provided', () => {
-    const wrapper = shallow(<ImageUpload valueLink={valueLink} preview={preview} {...IntlData} />);
+    const wrapper = shallow(
+      <ImageUpload valueLink={valueLink} preview={preview} />,
+    );
     expect(wrapper.find('img')).toHaveLength(1);
     expect(wrapper.find(Input)).toHaveLength(1);
   });
 
   it('should show the provided id', () => {
-    const wrapper = shallow(<ImageUpload valueLink={valueLink} id={id} {...IntlData} />);
+    const wrapper = shallow(<ImageUpload valueLink={valueLink} id={id} />);
     expect(wrapper.find('Row').prop('id')).toEqual(id);
   });
 
   it('should show the provided classes', () => {
-    const wrapper = shallow(<ImageUpload valueLink={valueLink} className={className} {...IntlData} />);
-    expect(wrapper.find('Row').prop('className')).toEqual(`image-uploader ${className}`);
+    const wrapper = shallow(
+      <ImageUpload valueLink={valueLink} className={className} />,
+    );
+    expect(wrapper.find('Row').prop('className')).toEqual(
+      `image-uploader ${className}`,
+    );
   });
 });

@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import LoginButton from '../User/Login/LoginButton';
 
 export const VisibilityBox = React.createClass({
-  displayName: 'VisibilityBox',
-
   propTypes: {
     user: PropTypes.object,
     children: PropTypes.element.isRequired,
@@ -32,7 +30,7 @@ export const VisibilityBox = React.createClass({
       return (
         <Jumbotron className={{ 'p--centered': true }}>
           <p>
-            {<FormattedMessage id="proposal.private.show_login" />}
+            <FormattedMessage id="proposal.private.show_login" />
           </p>
           <p>
             <LoginButton bsStyle="primary" />
@@ -48,7 +46,9 @@ export const VisibilityBox = React.createClass({
       <div className={rootClasses}>
         <p id="privateInfo">
           <i className="glyphicon glyphicon-lock" />{' '}
-          <strong>{<FormattedMessage id="proposal.private.message" />}</strong>
+          <strong>
+            <FormattedMessage id="proposal.private.message" />
+          </strong>
         </p>
         <div className={boxClasses}>
           {children}
