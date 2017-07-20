@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import LoginOverlay from '../Utils/LoginOverlay';
 
 export const ReportButton = React.createClass({
   displayName: 'ReportButton',
+
   propTypes: {
     id: PropTypes.string.isRequired,
     reported: PropTypes.bool.isRequired,
@@ -15,7 +16,6 @@ export const ReportButton = React.createClass({
     style: PropTypes.object,
     bsSize: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -41,20 +41,15 @@ export const ReportButton = React.createClass({
           className={classNames(classes)}
           onClick={reported ? null : onClick}
           active={reported}
-          disabled={reported}
-        >
-          <i className="cap cap-flag-1"></i>
-          { ' ' }
-          {
-            reported
-              ? this.getIntlMessage('global.report.reported')
-              : this.getIntlMessage('global.report.submit')
-          }
+          disabled={reported}>
+          <i className="cap cap-flag-1" />{' '}
+          {reported
+            ? <FormattedMessage id="global.report.reported" />
+            : <FormattedMessage id="global.report.submit" />}
         </Button>
       </LoginOverlay>
     );
   },
-
 });
 
 const mapStateToProps = (state, ownProps) => {

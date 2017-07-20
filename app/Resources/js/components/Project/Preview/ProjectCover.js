@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
 
@@ -8,7 +7,6 @@ const ProjectCover = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { project } = this.props;

@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
@@ -23,7 +22,6 @@ export const ProposalFusionForm = React.createClass({
     currentCollectStep: PropTypes.object,
     onProjectChange: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { currentCollectStep, projects, onProjectChange } = this.props;

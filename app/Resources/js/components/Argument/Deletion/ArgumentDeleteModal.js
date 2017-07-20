@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
 import ArgumentStore from '../../../stores/ArgumentStore';
 import CloseButton from '../../Form/CloseButton';
@@ -14,7 +14,6 @@ const ArgumentDeleteModal = React.createClass({
     argument: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -48,13 +47,11 @@ const ArgumentDeleteModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {this.getIntlMessage('global.removeMessage')}
+            {<FormattedMessage id="global.removeMessage" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormattedHTMLMessage
-            message={this.getIntlMessage('argument.delete.modal.infos')}
-          />
+          <FormattedHTMLMessage id="argument.delete.modal.infos" />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

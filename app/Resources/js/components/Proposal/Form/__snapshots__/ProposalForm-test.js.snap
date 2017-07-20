@@ -4,11 +4,14 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
 <form
   id="proposal-form"
 >
-  <FormattedHTMLMessage
-    message="description"
-    tagName="span"
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "description",
+      }
+    }
   />
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
@@ -20,7 +23,12 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     groupClassName=""
     id="proposal_title"
     image={null}
-    label="Titre"
+    label={
+      <FormattedMessage
+        id="proposal.title"
+        values={Object {}}
+      />
+    }
     labelClassName="h5"
     medias={Array []}
     onChange={[Function]}
@@ -42,10 +50,13 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       defaultExpanded={false}
       header={
         <FormattedMessage
-          matches={0}
-          message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
-          tagName="span"
-          terms={2}
+          id="proposal.suggest_header"
+          values={
+            Object {
+              "matches": 0,
+              "terms": 2,
+            }
+          }
         />
       }
     >
@@ -65,18 +76,24 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         disabled={false}
         onClick={[Function]}
       >
-        Fermer
+        <FormattedMessage
+          id="global.close"
+          values={Object {}}
+        />
       </Button>
     </Panel>
   </Collapse>
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_theme"
     image={null}
     label={
       <span>
-        Thème
+        <FormattedMessage
+          id="proposal.theme"
+          values={Object {}}
+        />
       </span>
     }
     labelClassName="h5"
@@ -93,22 +110,28 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       disabled={true}
       value={-1}
     >
-      Sélectionnez un thème
+      <FormattedMessage
+        id="proposal.select.theme"
+        values={Object {}}
+      />
     </option>
     <option
       value={1}
     >
       theme1
     </option>
-  </Input>
-  <Input
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_category"
     image={null}
     label={
       <span>
-        Catégorie
+        <FormattedMessage
+          id="proposal.category"
+          values={Object {}}
+        />
       </span>
     }
     labelClassName="h5"
@@ -125,22 +148,28 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       disabled={true}
       value={-1}
     >
-      Sélectionnez une catégorie
+      <FormattedMessage
+        id="proposal.select.category"
+        values={Object {}}
+      />
     </option>
     <option
       value={1}
     >
       category1
     </option>
-  </Input>
-  <Input
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_district"
     image={null}
     label={
       <span>
-        Localisation
+        <FormattedMessage
+          id="proposal.district"
+          values={Object {}}
+        />
       </span>
     }
     labelClassName="h5"
@@ -156,20 +185,28 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     <option
       value=""
     >
-      Sélectionnez une localisation
+      <FormattedMessage
+        id="proposal.select.district"
+        values={Object {}}
+      />
     </option>
     <option
       value={1}
     >
       disctrict1
     </option>
-  </Input>
-  <Input
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_body"
     image={null}
-    label="Description"
+    label={
+      <FormattedMessage
+        id="proposal.body"
+        values={Object {}}
+      />
+    }
     labelClassName="h5"
     medias={Array []}
     type="editor"
@@ -180,18 +217,21 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       }
     }
   />
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_media"
     image={null}
     label={
       <span>
-        Illustration
+        <FormattedMessage
+          id="proposal.media"
+          values={Object {}}
+        />
         <span
           className="excerpt"
         >
-            (facultatif)
+           [object Object]
         </span>
       </span>
     }
@@ -212,11 +252,14 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
 <form
   id="proposal-form"
 >
-  <FormattedHTMLMessage
-    message="description"
-    tagName="span"
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "description",
+      }
+    }
   />
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
@@ -228,7 +271,12 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     groupClassName=""
     id="proposal_title"
     image={null}
-    label="Titre"
+    label={
+      <FormattedMessage
+        id="proposal.title"
+        values={Object {}}
+      />
+    }
     labelClassName="h5"
     medias={Array []}
     onChange={[Function]}
@@ -250,10 +298,13 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       defaultExpanded={false}
       header={
         <FormattedMessage
-          matches={0}
-          message="{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}"
-          tagName="span"
-          terms={2}
+          id="proposal.suggest_header"
+          values={
+            Object {
+              "matches": 0,
+              "terms": 2,
+            }
+          }
         />
       }
     >
@@ -273,18 +324,24 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         disabled={false}
         onClick={[Function]}
       >
-        Fermer
+        <FormattedMessage
+          id="global.close"
+          values={Object {}}
+        />
       </Button>
     </Panel>
   </Collapse>
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_theme"
     image={null}
     label={
       <span>
-        Thème
+        <FormattedMessage
+          id="proposal.theme"
+          values={Object {}}
+        />
       </span>
     }
     labelClassName="h5"
@@ -301,22 +358,28 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       disabled={true}
       value={-1}
     >
-      Sélectionnez un thème
+      <FormattedMessage
+        id="proposal.select.theme"
+        values={Object {}}
+      />
     </option>
     <option
       value={1}
     >
       theme1
     </option>
-  </Input>
-  <Input
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_category"
     image={null}
     label={
       <span>
-        Catégorie
+        <FormattedMessage
+          id="proposal.category"
+          values={Object {}}
+        />
       </span>
     }
     labelClassName="h5"
@@ -333,20 +396,28 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       disabled={true}
       value={-1}
     >
-      Sélectionnez une catégorie
+      <FormattedMessage
+        id="proposal.select.category"
+        values={Object {}}
+      />
     </option>
     <option
       value={1}
     >
       category1
     </option>
-  </Input>
-  <Input
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_body"
     image={null}
-    label="Description"
+    label={
+      <FormattedMessage
+        id="proposal.body"
+        values={Object {}}
+      />
+    }
     labelClassName="h5"
     medias={Array []}
     type="editor"
@@ -357,18 +428,21 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       }
     }
   />
-  <Input
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_media"
     image={null}
     label={
       <span>
-        Illustration
+        <FormattedMessage
+          id="proposal.media"
+          values={Object {}}
+        />
         <span
           className="excerpt"
         >
-            (facultatif)
+           [object Object]
         </span>
       </span>
     }

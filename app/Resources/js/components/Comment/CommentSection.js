@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -16,7 +16,6 @@ const CommentSection = React.createClass({
     uri: PropTypes.string,
     object: PropTypes.number,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -58,30 +57,33 @@ const CommentSection = React.createClass({
       messages: CommentStore.messages,
     });
     if (CommentStore.isSync) {
-      this.setState({
-        countWithAnswers: CommentStore.countWithAnswers,
-        count: CommentStore.count,
-        comments: CommentStore.comments,
-        isLoading: false,
-        isLoadingMore: false,
-      }, () => {
-        this.resetLoadMoreButton();
-      });
+      this.setState(
+        {
+          countWithAnswers: CommentStore.countWithAnswers,
+          count: CommentStore.count,
+          comments: CommentStore.comments,
+          isLoading: false,
+          isLoadingMore: false,
+        },
+        () => {
+          this.resetLoadMoreButton();
+        },
+      );
       return;
     }
 
-    this.setState({
-      isLoading: true,
-    }, () => {
-      this.loadCommentsFromServer();
-    });
+    this.setState(
+      {
+        isLoading: true,
+      },
+      () => {
+        this.loadCommentsFromServer();
+      },
+    );
   },
 
   comment(data) {
-    const {
-      object,
-      uri,
-    } = this.props;
+    const { object, uri } = this.props;
     return CommentActions.create(uri, object, data);
   },
 
@@ -94,10 +96,7 @@ const CommentSection = React.createClass({
   },
 
   loadCommentsFromServer() {
-    const {
-      object,
-      uri,
-    } = this.props;
+    const { object, uri } = this.props;
     CommentActions.loadFromServer(
       uri,
       object,
@@ -116,22 +115,39 @@ const CommentSection = React.createClass({
 
   loadMore() {
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
-    this.setState({
-      isLoadingMore: true,
-      limit: this.state.limit + MessagePagination,
-    }, () => {
-      this.loadCommentsFromServer();
-    });
+    this.setState(
+      {
+        isLoadingMore: true,
+        limit: this.state.limit + MessagePagination,
+      },
+      () => {
+        this.loadCommentsFromServer();
+      },
+    );
   },
 
   renderFilter() {
     if (this.state.count > 1) {
       return (
-        <Col xsOffset={2} sm={4} className="hidden-xs" style={{ marginTop: '30px', marginBottom: '20px' }}>
-          <select ref="filter" className="form-control" value={this.state.filter} onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{this.getIntlMessage('global.filter_popular')}</option>
-            <option value="last">{this.getIntlMessage('global.filter_last')}</option>
-            <option value="old">{this.getIntlMessage('global.filter_old')}</option>
+        <Col
+          xsOffset={2}
+          sm={4}
+          className="hidden-xs"
+          style={{ marginTop: '30px', marginBottom: '20px' }}>
+          <select
+            ref="filter"
+            className="form-control"
+            value={this.state.filter}
+            onChange={() => this.updateSelectedValue()}>
+            <option value="popular">
+              {<FormattedMessage id="global.filter_popular" />}
+            </option>
+            <option value="last">
+              {<FormattedMessage id="global.filter_last" />}
+            </option>
+            <option value="old">
+              {<FormattedMessage id="global.filter_old" />}
+            </option>
           </select>
         </Col>
       );
@@ -139,10 +155,17 @@ const CommentSection = React.createClass({
   },
 
   renderLoadMore() {
-    if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
+    if (
+      !this.state.isLoading &&
+      (this.state.limit < this.state.count || this.state.isLoadingMore)
+    ) {
       return (
-        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('global.loading')} onClick={this.loadMore}>
-          { this.getIntlMessage('comment.more') }
+        <button
+          className="btn btn-block btn-dark-grey"
+          ref="loadMore"
+          data-loading-text={<FormattedMessage id="global.loading" />}
+          onClick={this.loadMore}>
+          {<FormattedMessage id="comment.more" />}
         </button>
       );
     }
@@ -152,28 +175,33 @@ const CommentSection = React.createClass({
   render() {
     return (
       <div className="comments__section">
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
+        <FlashMessages
+          errors={this.state.messages.errors}
+          success={this.state.messages.success}
+        />
         <Row>
           <Col componentClass="h2" sm={6}>
             <FormattedMessage
-              message={this.getIntlMessage('comment.list')}
-              num={this.state.countWithAnswers}
+              id="comment.list"
+              values={{
+                num: this.state.countWithAnswers,
+              }}
             />
           </Col>
-          { this.renderFilter() }
+          {this.renderFilter()}
         </Row>
         <Loader show={this.state.isLoading} />
         <CommentForm comment={this.comment} focus={false} />
-        <CommentList {...this.props}
+        <CommentList
+          {...this.props}
           comments={this.state.comments}
           root
           onVote={this.loadCommentsFromServer}
         />
-        { this.renderLoadMore() }
+        {this.renderLoadMore()}
       </div>
     );
   },
-
 });
 
 export default CommentSection;

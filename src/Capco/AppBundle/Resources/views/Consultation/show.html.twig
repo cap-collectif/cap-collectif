@@ -35,7 +35,7 @@
 
     {% block content %}
         <h2 class="h2">{{ currentStep.title }}</h2>
-        {{ react_intl_component('ConsultationPageApp', { 'props': stepProps }) }}
+        {{ react_render_component('ConsultationPageApp', { 'props': stepProps }) }}
     {% endblock %}
 {% endblock %}
 

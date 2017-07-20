@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
@@ -12,7 +12,6 @@ const NavbarRight = React.createClass({
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -24,7 +23,8 @@ const NavbarRight = React.createClass({
     // suppress jwt
     LoginActions.logoutUser();
     // We redirect to /logout page to invalidate session on the server
-    window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
+    window.location.href = `${window.location.protocol}//${window.location
+      .host}/logout`;
   },
 
   render() {
@@ -33,10 +33,11 @@ const NavbarRight = React.createClass({
       <Nav pullRight style={{ marginRight: 0 }}>
         {features.search &&
           <NavItem eventKey={1} className="navbar__search" href="/search">
-            <i className="cap cap-magnifier" /> <span
+            <i className="cap cap-magnifier" />{' '}
+            <span
               className="visible-xs-inline"
               style={{ whiteSpace: 'nowrap' }}>
-              {this.getIntlMessage('navbar.search')}
+              {<FormattedMessage id="navbar.search" />}
             </span>
           </NavItem>}
         {user
@@ -59,17 +60,19 @@ const NavbarRight = React.createClass({
               id="navbar-username">
               {user.isAdmin &&
                 <MenuItem key={3.1} eventKey={3.1} href="/admin">
-                  {this.getIntlMessage('navbar.admin')}
+                  {<FormattedMessage id="navbar.admin" />}
                 </MenuItem>}
               {features.profiles &&
                 <MenuItem key={3.2} eventKey={3.2} href="/profile">
-                  {this.getIntlMessage('navbar.profile')}
+                  {<FormattedMessage id="navbar.profile" />}
                 </MenuItem>}
               <MenuItem
                 key={3.3}
                 eventKey={3.3}
-                href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
-                {this.getIntlMessage('navbar.user_settings')}
+                href={`/profile/${features.profiles
+                  ? 'edit-profile'
+                  : 'edit-account'}`}>
+                {<FormattedMessage id="navbar.user_settings" />}
               </MenuItem>
               <MenuItem key={3.4} divider />
               <MenuItem
@@ -77,12 +80,11 @@ const NavbarRight = React.createClass({
                 eventKey={3.5}
                 id="logout-button"
                 onClick={this.logout}>
-                {this.getIntlMessage('global.logout')}
+                {<FormattedMessage id="global.logout" />}
               </MenuItem>
             </NavDropdown>
           : <li style={{ paddingLeft: 15, paddingRight: 15 }}>
-              <RegistrationButton className="navbar-btn" />
-              {' '}
+              <RegistrationButton className="navbar-btn" />{' '}
               <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
             </li>}
       </Nav>

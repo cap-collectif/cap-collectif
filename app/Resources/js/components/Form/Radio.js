@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { IntlMixin } from 'react-intl';
 import RadioGroup from 'react-radio';
 import classNames from 'classnames';
 import Input from './Input';
@@ -17,7 +16,6 @@ const Radio = React.createClass({
     label: PropTypes.any.isRequired,
     labelClassName: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

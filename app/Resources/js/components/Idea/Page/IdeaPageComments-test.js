@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import IdeaPageComments from './IdeaPageComments';
 
 const props = {
@@ -10,13 +10,13 @@ const props = {
 
 describe('<IdeaPageComments />', () => {
   it('it should render a comment section in a div', () => {
-    const wrapper = shallow(<IdeaPageComments {...props} {...IntlData} />);
+    const wrapper = shallow(<IdeaPageComments {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should a div with provided class name', () => {
     const wrapper = shallow(
-      <IdeaPageComments {...props} className="css-class" {...IntlData} />,
+      <IdeaPageComments {...props} className="css-class" />,
     );
     expect(wrapper).toMatchSnapshot();
   });

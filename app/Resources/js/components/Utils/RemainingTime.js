@@ -1,12 +1,11 @@
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const RemainingTime = React.createClass({
   propTypes: {
     days: React.PropTypes.number,
     hours: React.PropTypes.number,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -20,19 +19,22 @@ const RemainingTime = React.createClass({
     if (hours > 0) {
       return (
         <FormattedMessage
-          message={this.getIntlMessage('global.remaining.hours')}
-          num={hours}
+          id="global.remaining.hours"
+          values={{
+            num: hours,
+          }}
         />
       );
     }
     return (
       <FormattedMessage
-        message={this.getIntlMessage('global.remaining.days')}
-        num={days}
+        id="global.remaining.days"
+        values={{
+          num: days,
+        }}
       />
     );
   },
-
 });
 
 export default RemainingTime;

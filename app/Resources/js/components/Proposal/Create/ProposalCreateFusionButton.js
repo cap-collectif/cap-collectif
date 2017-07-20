@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
@@ -25,7 +25,6 @@ export const ProposalCreateFusionButton = React.createClass({
     submit: PropTypes.func.isRequired,
     proposalFormId: PropTypes.number,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return { proposalForm: null };
@@ -40,16 +39,21 @@ export const ProposalCreateFusionButton = React.createClass({
   loadProposalForm() {
     const { proposalFormId } = this.props;
     if (proposalFormId) {
-      Fetcher
-      .get(`/proposal_forms/${proposalFormId}`)
-      .then((proposalForm) => {
+      Fetcher.get(`/proposal_forms/${proposalFormId}`).then(proposalForm => {
         this.setState({ proposalForm });
       });
     }
   },
 
   render() {
-    const { proposalFormId, showModal, isSubmitting, open, close, submit } = this.props;
+    const {
+      proposalFormId,
+      showModal,
+      isSubmitting,
+      open,
+      close,
+      submit,
+    } = this.props;
     const { proposalForm } = this.state;
     return (
       <div>
@@ -57,32 +61,28 @@ export const ProposalCreateFusionButton = React.createClass({
           id="add-proposal-fusion"
           bsStyle="default"
           style={{ marginTop: 10 }}
-          onClick={() => open()}
-        >
-          { ` ${this.getIntlMessage('proposal.add_fusion')}`}
+          onClick={() => open()}>
+          <FormattedMessage id="proposal.add_fusion" />
         </Button>
         <Modal
           animation={false}
           show={showModal}
           onHide={() => close()}
           bsSize="large"
-          aria-labelledby="contained-modal-title-lg"
-        >
+          aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('proposal.add_fusion') }
+              <FormattedMessage id="proposal.add_fusion" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h3>Propositions fusionnées</h3>
             <ProposalFusionForm />
-            {
-              proposalForm &&
-                <div>
-                  <h3>Nouvelle proposition issue de la fusion</h3>
-                  <ProposalAdminForm proposalForm={proposalForm} />
-                </div>
-            }
+            {proposalForm &&
+              <div>
+                <h3>Nouvelle proposition issue de la fusion</h3>
+                <ProposalAdminForm proposalForm={proposalForm} />
+              </div>}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => close()} />
@@ -96,25 +96,25 @@ export const ProposalCreateFusionButton = React.createClass({
       </div>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => {
   const selectedProjectId: Uuid = formValueSelector(formName)(state, 'project');
   const project = state.project.projectsById[selectedProjectId];
-  const currentCollectStep = project ? project.steps.filter(s => s.type === 'collect')[0] : null;
+  const currentCollectStep = project
+    ? project.steps.filter(s => s.type === 'collect')[0]
+    : null;
   return {
     showModal: state.proposal.isCreatingFusion,
     isSubmitting: state.proposal.isSubmittingFusion,
-    proposalFormId: currentCollectStep ? currentCollectStep.proposalFormId : null,
+    proposalFormId: currentCollectStep
+      ? currentCollectStep.proposalFormId
+      : null,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    close: closeCreateFusionModal,
-    open: openCreateFusionModal,
-    submit: submitFusionForm,
-  },
-)(ProposalCreateFusionButton);
+export default connect(mapStateToProps, {
+  close: closeCreateFusionModal,
+  open: openCreateFusionModal,
+  submit: submitFusionForm,
+})(ProposalCreateFusionButton);

@@ -24,8 +24,6 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public $project = null;
-
     public function resolveContributionType($data)
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');
@@ -101,16 +99,11 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolvePropositionUrl(Opinion $contribution): string
     {
-        $step = $this->container->get('capco.consultation_step.repository')
-          ->getByOpinionId($contribution->getId())
-        ;
-        $project = $step->getProject();
-
         return $this->container->get('router')->generate(
             'app_consultation_show_opinion',
             [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
+                'projectSlug' => $contribution->getStep()->getProject()->getSlug(),
+                'stepSlug' => $contribution->getStep()->getSlug(),
                 'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
                 'opinionSlug' => $contribution->getSlug(),
             ],
@@ -133,7 +126,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getSectionUrl(OpinionType $type)
     {
-        // Stupid hack because no link between type and project
+        // Stupid hack because no link between
         if ($type->getOpinions()->count() === 0) {
             return null;
         }

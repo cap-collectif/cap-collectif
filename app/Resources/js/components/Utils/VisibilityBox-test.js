@@ -3,12 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { VisibilityBox } from './VisibilityBox';
-import IntlData from '../../translations/FR';
 
 describe('<VisibilityBox />', () => {
-  const props = {
-    ...IntlData,
-  };
+  const props = {};
 
   it('renders children if not enabled', () => {
     const wrapper = shallow(
@@ -16,7 +13,7 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>,
     );
-    expect(wrapper.html()).toEqual('<div class="foo"></div>');
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders children if user is logged', () => {
@@ -25,9 +22,7 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>,
     );
-    expect(wrapper.find('.foo').html()).toEqual('<div class="foo"></div>');
-    expect(wrapper.find('#privateInfo')).toHaveLength(1);
-    expect(wrapper.find('#privateInfo').text().trim()).toEqual(IntlData.messages.proposal.private.message);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('renders jumbotron if user is not logged', () => {
@@ -36,7 +31,6 @@ describe('<VisibilityBox />', () => {
         <div className="foo" />
       </VisibilityBox>,
     );
-    expect(wrapper.find('Jumbotron')).toHaveLength(1);
-    expect(wrapper.children().find('Connect(LoginButton)')).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
   });
 });

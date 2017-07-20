@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import { submit, isValid } from 'redux-form';
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import { closeVoteModal } from '../../../redux/modules/proposal';
 
 const ProposalVoteModal = React.createClass({
   displayName: 'ProposalVoteModal',
+
   propTypes: {
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
@@ -22,7 +23,6 @@ const ProposalVoteModal = React.createClass({
     user: PropTypes.object,
     voteWithoutAccount: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,11 +32,7 @@ const ProposalVoteModal = React.createClass({
   },
 
   userHasEnoughCredits() {
-    const {
-      creditsLeft,
-      proposal,
-      user,
-    } = this.props;
+    const { creditsLeft, proposal, user } = this.props;
     if (user && creditsLeft !== null && proposal.estimation !== null) {
       return creditsLeft >= proposal.estimation;
     }
@@ -44,11 +40,14 @@ const ProposalVoteModal = React.createClass({
   },
 
   disableSubmitButton() {
-    const {
-      step,
-      user,
-    } = this.props;
-    return !step || !step.open || (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits());
+    const { step, user } = this.props;
+    return (
+      !step ||
+      !step.open ||
+      (user &&
+        step.voteType === VOTE_TYPE_BUDGET &&
+        !this.userHasEnoughCredits())
+    );
   },
 
   render() {
@@ -71,11 +70,10 @@ const ProposalVoteModal = React.createClass({
           dispatch(closeVoteModal());
         }}
         bsSize="small"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            { this.getIntlMessage('proposal.vote.modal.title') }
+            {<FormattedMessage id="proposal.vote.modal.title" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -94,35 +92,39 @@ const ProposalVoteModal = React.createClass({
               dispatch(closeVoteModal());
             }}
           />
-          {
-            (voteWithoutAccount || user) &&
-              <SubmitButton
-                id="confirm-proposal-vote"
-                onSubmit={() => {
-                  dispatch(submit('proposalVote'));
-                }}
-                label="proposal.vote.confirm"
-                isSubmitting={valid && isSubmitting}
-                bsStyle={(!proposal.userHasVote || isSubmitting) ? 'success' : 'danger'}
-                style={{ marginLeft: '10px' }}
-                disabled={this.disableSubmitButton()}
-                loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
-              />
-          }
+          {(voteWithoutAccount || user) &&
+            <SubmitButton
+              id="confirm-proposal-vote"
+              onSubmit={() => {
+                dispatch(submit('proposalVote'));
+              }}
+              label="proposal.vote.confirm"
+              isSubmitting={valid && isSubmitting}
+              bsStyle={
+                !proposal.userHasVote || isSubmitting ? 'success' : 'danger'
+              }
+              style={{ marginLeft: '10px' }}
+              disabled={this.disableSubmitButton()}
+              loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
+            />}
         </Modal.Footer>
       </Modal>
     );
   },
-
 });
 
 const mapStateToProps = (state, props) => {
   const steps = state.project.currentProjectById
-    ? state.project.projectsById[state.project.currentProjectById].steps.filter(s => s.id === props.proposal.votableStepId)
+    ? state.project.projectsById[state.project.currentProjectById].steps.filter(
+        s => s.id === props.proposal.votableStepId,
+      )
     : [];
   return {
     user: state.user.user,
-    showModal: !!(state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id),
+    showModal: !!(
+      state.proposal.currentVoteModal &&
+      state.proposal.currentVoteModal === props.proposal.id
+    ),
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),
     step: steps.length === 1 ? steps[0] : null,

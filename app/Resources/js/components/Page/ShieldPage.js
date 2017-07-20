@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { submit, isSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -13,7 +13,7 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 type Props = {
   showRegistration: boolean,
   submitting: boolean,
-  onSubmit: (e: Event) => void
+  onSubmit: (e: Event) => void,
 };
 export const ShieldPage = React.createClass({
   propTypes: {
@@ -21,13 +21,14 @@ export const ShieldPage = React.createClass({
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { showRegistration, submitting, onSubmit }: Props = this.props;
     if (showRegistration) {
       return (
-        <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+        <div
+          style={{ background: 'white' }}
+          className="col-md-4 col-md-offset-4 panel panel-default">
           <div className="panel-body">
             <LoginButton className="btn--connection btn-block" />
             <div style={{ marginTop: 10 }} />
@@ -37,7 +38,9 @@ export const ShieldPage = React.createClass({
       );
     }
     return (
-      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+      <div
+        style={{ background: 'white' }}
+        className="col-md-4 col-md-offset-4 panel panel-default">
         <div className="panel-body">
           <form id="login-form" onSubmit={onSubmit}>
             <LoginBox />
@@ -47,20 +50,16 @@ export const ShieldPage = React.createClass({
               style={{ marginTop: 10 }}
               className="btn-block btn-success"
               disabled={submitting}
-              bsStyle="primary"
-            >
-              {
-                submitting
-                ? this.getIntlMessage('global.loading')
-                : this.getIntlMessage('global.login_me')
-              }
+              bsStyle="primary">
+              {submitting
+                ? <FormattedMessage id="global.loading" />
+                : <FormattedMessage id="global.login_me" />}
             </Button>
           </form>
         </div>
       </div>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({
@@ -73,5 +72,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(submit('login'));
   },
 });
-const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<{}, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 export default connector(ShieldPage);

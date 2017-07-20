@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
@@ -52,7 +52,6 @@ export const RegistrationForm = React.createClass({
     handleSubmit: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const {
@@ -72,7 +71,7 @@ export const RegistrationForm = React.createClass({
           id="username"
           component={renderComponent}
           type="text"
-          label={this.getIntlMessage('registration.username')}
+          label={<FormattedMessage id="registration.username" />}
           labelClassName="h5"
         />
         <Field
@@ -80,11 +79,11 @@ export const RegistrationForm = React.createClass({
           id="email"
           component={renderComponent}
           type="email"
-          label={this.getIntlMessage('global.email')}
+          label={<FormattedMessage id="global.email" />}
           labelClassName="h5"
           popover={{
             id: 'registration-email-tooltip',
-            message: this.getIntlMessage('registration.tooltip.email'),
+            message: <FormattedMessage id="registration.tooltip.email" />,
           }}
         />
         <Field
@@ -92,11 +91,11 @@ export const RegistrationForm = React.createClass({
           id="password"
           component={renderComponent}
           type="password"
-          label={this.getIntlMessage('registration.password')}
+          label={<FormattedMessage id="registration.password" />}
           labelClassName="h5"
           popover={{
             id: 'registration-password-tooltip',
-            message: this.getIntlMessage('registration.tooltip.password'),
+            message: <FormattedMessage id="registration.tooltip.password" />,
           }}
         />
         {addUserTypeField &&
@@ -107,16 +106,19 @@ export const RegistrationForm = React.createClass({
             type="select"
             label={
               <span>
-                {this.getIntlMessage('registration.type')}{' '}
+                <FormattedMessage id="registration.type" />{' '}
                 <span className="excerpt">
-                  {this.getIntlMessage('global.form.optional')}
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }
             labelClassName="h5">
-            <option value="">
-              {this.getIntlMessage('registration.select.type')}
-            </option>
+            <FormattedMessage id="registration.select.type">
+              {message =>
+                <option value="">
+                  {message}
+                </option>}
+            </FormattedMessage>
             {userTypes.map((type, i) =>
               <option key={i + 1} value={type.id}>
                 {type.name}
@@ -131,9 +133,9 @@ export const RegistrationForm = React.createClass({
             type="text"
             label={
               <span>
-                {this.getIntlMessage('registration.zipcode')}{' '}
+                <FormattedMessage id="registration.zipcode" />{' '}
                 <span className="excerpt">
-                  {this.getIntlMessage('global.form.optional')}
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }
@@ -149,9 +151,12 @@ export const RegistrationForm = React.createClass({
               </option>,
             );
             children = [
-              <option key={0} value="">
-                {this.getIntlMessage('global.select')}
-              </option>,
+              <FormattedMessage id="global.select">
+                {message =>
+                  <option key={0} value="">
+                    {message}
+                  </option>}
+              </FormattedMessage>,
               ...choices,
             ];
           }
@@ -167,7 +172,7 @@ export const RegistrationForm = React.createClass({
                   {field.question}{' '}
                   {!field.required &&
                     <span className="excerpt">
-                      {this.getIntlMessage('global.form.optional')}
+                      <FormattedMessage id="global.form.optional" />
                     </span>}
                 </span>
               }
@@ -182,16 +187,17 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="checkbox"
           children={
-            <FormattedHTMLMessage
-              message={this.getIntlMessage('registration.charte')}
-              link={
-                <a className="external-link" href={cguLink}>
-                  {cguName}
-                </a>
-              }
+            <FormattedMessage
+              id="registration.charte"
+              values={{
+                link: (
+                  <a className="external-link" href={cguLink}>
+                    {cguName}
+                  </a>
+                ),
+              }}
             />
           }
-          // labelClassName="h5"
         />
         {addCaptchaField &&
           <Field

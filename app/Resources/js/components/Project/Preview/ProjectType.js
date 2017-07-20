@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 const ProjectType = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { project } = this.props;
@@ -19,7 +18,7 @@ const ProjectType = React.createClass({
       <div
         className={divClasses}
         style={{ backgroundColor: project.projectType.color }}>
-        {this.getIntlMessage(project.projectType.title)}
+        <FormattedMessage id={project.projectType.title} />
       </div>
     );
   },

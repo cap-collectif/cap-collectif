@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
+<div>
+  <ReplyCreateForm
+    disabled={true}
+    form={
+      Object {
+        "contribuable": false,
+      }
+    }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
+</div>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and doesn't allow multiple votes and user has already votes 1`] = `
+<div>
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    closeLabel="Close alert"
+  >
+    <strong>
+      <FormattedMessage
+        id="reply.user_has_reply.reason"
+        values={Object {}}
+      />
+    </strong>
+    <p>
+      <FormattedMessage
+        id="reply.user_has_reply.error"
+        values={Object {}}
+      />
+    </p>
+  </Alert>
+  <ReplyCreateForm
+    disabled={true}
+    form={
+      Object {
+        "contribuable": true,
+        "multipleRepliesAllowed": false,
+      }
+    }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
+</div>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and user is not logged in 1`] = `
+<div>
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    className="text-center"
+    closeLabel="Close alert"
+  >
+    <strong>
+      <FormattedMessage
+        id="reply.not_logged_in.error"
+        values={Object {}}
+      />
+    </strong>
+    <Connect(RegistrationButton)
+      bsStyle="primary"
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }
+    />
+    <Connect(LoginButton)
+      style={
+        Object {
+          "marginLeft": 5,
+        }
+      }
+    />
+  </Alert>
+  <ReplyCreateForm
+    disabled={true}
+    form={
+      Object {
+        "contribuable": true,
+        "multipleRepliesAllowed": true,
+      }
+    }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
+</div>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
+<div>
+  <ReplyCreateForm
+    disabled={false}
+    form={
+      Object {
+        "contribuable": true,
+        "multipleRepliesAllowed": true,
+      }
+    }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
+</div>
+`;

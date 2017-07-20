@@ -59,12 +59,7 @@
             </p>
         </div>
     {% else %}
-        {{ react_intl_component('ProposalStepPageApp', { 'props': props }) }}
+        {{ react_render_component('ProposalStepPageApp', { 'props': props }) }}
     {% endif %}
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
 {% endblock %}

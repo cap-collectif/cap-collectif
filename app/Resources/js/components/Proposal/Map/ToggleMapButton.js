@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
@@ -10,7 +10,6 @@ export const ToggleMapButton = React.createClass({
     onChange: PropTypes.func.isRequired,
     mode: PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
 
   handleClick(chooseMode) {
     const { onChange, mode } = this.props;
@@ -37,9 +36,8 @@ export const ToggleMapButton = React.createClass({
           <i
             className="cap cap-th-large"
             onClick={this.handleClick.bind(this, 'mosaic')}
-          />
-          {' '}
-          {this.getIntlMessage('proposal.map.mosaic')}
+          />{' '}
+          {<FormattedMessage id="proposal.map.mosaic" />}
         </Button>
         <Button
           bsStyle="default"
@@ -49,9 +47,8 @@ export const ToggleMapButton = React.createClass({
           <i
             className="cap cap-map-location"
             onClick={this.handleClick.bind(this, 'map')}
-          />
-          {' '}
-          {this.getIntlMessage('proposal.map.map')}
+          />{' '}
+          {<FormattedMessage id="proposal.map.map" />}
         </Button>
       </div>
     );

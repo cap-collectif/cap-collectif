@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import IdeaPageTrashBlock from './IdeaPageTrashBlock';
 import IdeaPageButtons from './IdeaPageButtons';
@@ -9,7 +9,6 @@ const IdeaPageBody = React.createClass({
     idea: PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -36,24 +35,24 @@ const IdeaPageBody = React.createClass({
           />}
         <div className="block" id="idea-body">
           <h2 className="h2">
-            {this.getIntlMessage('idea.body')}
+            <FormattedMessage id="idea.body" />
           </h2>
-          <FormattedHTMLMessage message={idea.body} />
+          <div dangerouslySetInnerHTML={{ __html: idea.body }} />
         </div>
 
         {idea.object
           ? <div className="block" id="idea-object">
               <h2 className="h2">
-                {this.getIntlMessage('idea.object')}
+                {<FormattedMessage id="idea.object" />}
               </h2>
-              <FormattedHTMLMessage message={idea.object} />
+              <div dangerouslySetInnerHTML={{ __html: idea.object }} />
             </div>
           : null}
 
         {idea.url
           ? <div className="block" id="idea-url">
               <h2 className="h2">
-                {this.getIntlMessage('idea.url')}
+                <FormattedMessage id="idea.url" />
               </h2>
               <p>
                 <a className="external-link" href={idea.url}>
