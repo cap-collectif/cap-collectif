@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
@@ -8,7 +8,7 @@ import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 const grey = '#d9d9d9';
 const green = '#5cb85c';
 
-const consideredCurrentProgressStep = progressSteps => {
+const consideredCurrentProgressStep = (progressSteps) => {
   let lastStarting = null;
   for (const step of progressSteps) {
     if (moment(step.startAt) < moment()) {
@@ -20,11 +20,7 @@ const consideredCurrentProgressStep = progressSteps => {
     if (isPastLastStarting) {
       return step;
     }
-    if (
-      step.endAt &&
-      moment(step.startAt) < moment() &&
-      moment(step.endAt) > moment()
-    ) {
+    if (step.endAt && moment(step.startAt) < moment() && moment(step.endAt) > moment()) {
       return step;
     }
     if (lastStarting && lastStarting.title === step.title) {
@@ -33,7 +29,7 @@ const consideredCurrentProgressStep = progressSteps => {
   }
   return progressSteps[progressSteps.length - 1];
 };
-const generateProgressStepsWithColorAndStatus = progressSteps => {
+const generateProgressStepsWithColorAndStatus = (progressSteps) => {
   if (progressSteps.length < 1) {
     return [];
   }
@@ -51,11 +47,8 @@ const generateProgressStepsWithColorAndStatus = progressSteps => {
     if (progressStep.title === stepConsideredCurrent.title) {
       const currentTime = moment();
 
-      if (
-        progressStep.startAt &&
-        progressStep.endAt &&
-        moment(progressStep.startAt) <= currentTime &&
-        moment(progressStep.endAt) >= currentTime
+      if (progressStep.startAt && progressStep.endAt
+        && moment(progressStep.startAt) <= currentTime && moment(progressStep.endAt) >= currentTime
       ) {
         props.status = { name: 'En cours', color: 'warning' };
         props.roundColor = bootstrapToHex('warning');
@@ -88,17 +81,18 @@ const generateProgressStepsWithColorAndStatus = progressSteps => {
 
 export const ProposalDetailAdvancement = React.createClass({
   displayName: 'ProposalDetailAdvancement',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getStatus(step) {
     const { proposal } = this.props;
     return step.type === 'collect'
       ? proposal.status || null
-      : this.getSelectionStatus(step);
+      : this.getSelectionStatus(step)
+    ;
   },
 
   getSelectionStatus(step) {
@@ -113,17 +107,11 @@ export const ProposalDetailAdvancement = React.createClass({
 
   render() {
     const { proposal, project } = this.props;
-    const progressSteps = generateProgressStepsWithColorAndStatus(
-      proposal.progressSteps,
-    );
+    const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const steps = project.steps.sort((a, b) => a.position - b.position);
-    const selections = proposal.selections.sort(
-      (a, b) => a.step.position - b.step.position,
-    );
+    const selections = proposal.selections.sort((a, b) => a.step.position - b.step.position);
     for (const step of steps) {
-      step.isSelected =
-        step.type === 'collect' ||
-        selections.map(selection => selection.step.id).includes(step.id);
+      step.isSelected = step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
     }
     let consideredCurrent = steps[0];
     for (const step of steps) {
@@ -136,79 +124,57 @@ export const ProposalDetailAdvancement = React.createClass({
       step.isPast = step.position < consideredCurrent.position;
       step.isFuture = step.position > consideredCurrent.position;
     }
-    const displayedSteps = steps.filter(
-      step => step.isSelected || step.isFuture,
-    );
+    const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
     return (
       <div style={{ marginLeft: '10px', marginTop: '-15px' }}>
-        <h4>
-          {<FormattedMessage id="proposal.detail.advancement" />}
-        </h4>
+        <h4>{this.getIntlMessage('proposal.detail.advancement')}</h4>
         <br />
-        {displayedSteps.map((step, index) => {
-          let roundColor = grey;
-          if (step.isCurrent) {
-            roundColor = this.getStatus(step)
-              ? bootstrapToHex(this.getStatus(step).color)
-              : green;
-          } else if (step.isPast) {
-            roundColor = green;
-          }
-          return (
-            <ProposalDetailAdvancementStep
-              key={index}
-              step={{
-                title: step.title,
-                startAt: step.startAt,
-                endAt: step.endAt,
-                progressStep: false,
-                timeless: step.timeless,
-              }}
-              status={step.isCurrent ? this.getStatus(step) : null}
-              roundColor={roundColor}
-              borderColor={
-                index + 1 === displayedSteps.length
-                  ? null
-                  : displayedSteps[index + 1].isCurrent ||
-                    displayedSteps[index + 1].isPast
-                    ? green
-                    : grey
-              }
-              children={
-                step.isCurrent &&
-                step.showProgressSteps &&
-                <div style={{ marginLeft: 30 }}>
-                  {progressSteps.map((progressStep, i) =>
-                    <ProposalDetailAdvancementStep
-                      key={i}
-                      step={{
-                        title: progressStep.title,
-                        startAt: moment(progressStep.startAt).format('ll'),
-                        endAt: progressStep.endAt
-                          ? moment(progressStep.endAt).format('ll')
-                          : null,
-                        progressStep: true,
-                      }}
-                      status={progressStep.status}
-                      roundColor={progressStep.roundColor}
-                      borderColor={
-                        i + 1 === progressSteps.length
-                          ? null
-                          : progressStep.borderColor
+        {
+          displayedSteps.map((step, index) => {
+            let roundColor = grey;
+            if (step.isCurrent) {
+              roundColor = this.getStatus(step) ? bootstrapToHex(this.getStatus(step).color) : green;
+            } else if (step.isPast) {
+              roundColor = green;
+            }
+            return (
+              <ProposalDetailAdvancementStep
+                key={index}
+                step={{ title: step.title, startAt: step.startAt, endAt: step.endAt, progressStep: false, timeless: step.timeless }}
+                status={step.isCurrent ? this.getStatus(step) : null}
+                roundColor={roundColor}
+                borderColor={index + 1 === displayedSteps.length ? null : (displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast ? green : grey)}
+                children={
+                  step.isCurrent && step.showProgressSteps &&
+                    <div style={{ marginLeft: 30 }}>
+                      {
+                        progressSteps.map((progressStep, i) =>
+                          <ProposalDetailAdvancementStep
+                            key={i}
+                            step={{
+                              title: progressStep.title,
+                              startAt: moment(progressStep.startAt).format('ll'),
+                              endAt: progressStep.endAt ? moment(progressStep.endAt).format('ll') : null,
+                              progressStep: true,
+                            }}
+                            status={progressStep.status}
+                            roundColor={progressStep.roundColor}
+                            borderColor={i + 1 === progressSteps.length ? null : progressStep.borderColor}
+                          />,
+                        )
                       }
-                    />,
-                  )}
-                </div>
-              }
-            />
-          );
-        })}
+                    </div>
+                }
+              />
+            );
+          })
+        }
       </div>
     );
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     project: state.project.projectsById[state.project.currentProjectById],
   };

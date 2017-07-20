@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
@@ -55,6 +55,7 @@ export const OpinionEditForm = React.createClass({
     step: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { opinion, step, handleSubmit } = this.props;
@@ -62,7 +63,7 @@ export const OpinionEditForm = React.createClass({
       <form id={formName} onSubmit={handleSubmit}>
         <Field
           name="check"
-          children={<FormattedMessage id="opinion.edit_check" />}
+          children={this.getIntlMessage('opinion.edit_check')}
           type="checkbox"
           component={renderInput}
           id="opinion_check"
@@ -75,7 +76,7 @@ export const OpinionEditForm = React.createClass({
           component={renderInput}
           help={step.titleHelpText}
           autoFocus
-          label={<FormattedMessage id="opinion.title" />}
+          label={this.getIntlMessage('opinion.title')}
         />
         <Field
           name="body"
@@ -84,7 +85,7 @@ export const OpinionEditForm = React.createClass({
           component={renderInput}
           help={step.descriptionHelpText}
           autoFocus
-          label={<FormattedMessage id="opinion.body" />}
+          label={this.getIntlMessage('opinion.body')}
         />
         {opinion.appendices.map((field, index) =>
           <Field

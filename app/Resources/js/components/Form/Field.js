@@ -1,11 +1,10 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import Input from './Input';
 
 const Field = React.createClass({
   displayName: 'Field',
-
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
@@ -43,6 +42,7 @@ const Field = React.createClass({
       value: PropTypes.any,
     }).isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { touched, error } = this.props.meta;
@@ -75,7 +75,7 @@ const Field = React.createClass({
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}
-        errors={check && error ? <FormattedMessage id={error} /> : null}
+        errors={check && error ? this.getIntlMessage(error) : null}
         validationState={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
         autoComplete={autoComplete}

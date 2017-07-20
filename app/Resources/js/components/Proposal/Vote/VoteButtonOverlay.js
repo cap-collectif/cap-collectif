@@ -1,5 +1,5 @@
 import React, { PropTypes, cloneElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 const VoteButtonOverlay = React.createClass({
@@ -11,6 +11,7 @@ const VoteButtonOverlay = React.createClass({
     hasUserEnoughCredits: PropTypes.bool,
     limit: PropTypes.number,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -35,43 +36,27 @@ const VoteButtonOverlay = React.createClass({
     let content = '';
     let help = '';
     if (!hasUserEnoughCredits && hasReachedLimit) {
-      title = (
-        <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_title" />
-      );
+      title = this.getIntlMessage('proposal.vote.popover.limit_reached_and_not_enough_credits_title');
       content = (
         <FormattedMessage
-          id="proposal.vote.popover.limit_reached_and_not_enough_credits_text"
-          values={{
-            num: limit,
-          }}
+          message={this.getIntlMessage('proposal.vote.popover.limit_reached_and_not_enough_credits_text')}
+          num={limit}
         />
       );
-      help = (
-        <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_help" />
-      );
+      help = this.getIntlMessage('proposal.vote.popover.limit_reached_and_not_enough_credits_help');
     } else if (!hasUserEnoughCredits) {
-      title = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_title" />
-      );
-      content = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_text" />
-      );
-      help = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_help" />
-      );
+      title = this.getIntlMessage('proposal.vote.popover.not_enough_credits_title');
+      content = this.getIntlMessage('proposal.vote.popover.not_enough_credits_text');
+      help = this.getIntlMessage('proposal.vote.popover.not_enough_credits_help');
     } else if (hasReachedLimit) {
-      title = (
-        <FormattedMessage id="proposal.vote.popover.limit_reached_title" />
-      );
+      title = this.getIntlMessage('proposal.vote.popover.limit_reached_title');
       content = (
         <FormattedMessage
-          id="proposal.vote.popover.limit_reached_text"
-          values={{
-            num: limit,
-          }}
+          message={this.getIntlMessage('proposal.vote.popover.limit_reached_text')}
+          num={limit}
         />
       );
-      help = <FormattedMessage id="proposal.vote.popover.limit_reached_help" />;
+      help = this.getIntlMessage('proposal.vote.popover.limit_reached_help');
     }
     const overlay = (
       <Popover id={popoverId} title={title}>
@@ -82,16 +67,17 @@ const VoteButtonOverlay = React.createClass({
       </Popover>
     );
     return (
-      <OverlayTrigger placement="top" overlay={overlay}>
+      <OverlayTrigger
+        placement="top"
+        overlay={overlay}
+      >
         <span style={{ cursor: 'not-allowed' }}>
-          {cloneElement(children, {
-            disabled: true,
-            style: { ...children.props.style, pointerEvents: 'none' },
-          })}
+          { cloneElement(children, { disabled: true, style: { ...children.props.style, pointerEvents: 'none' } }) }
         </span>
       </OverlayTrigger>
     );
   },
+
 });
 
 export default VoteButtonOverlay;

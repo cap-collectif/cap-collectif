@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { Dispatch } from '../../../types';
@@ -48,6 +48,7 @@ export const OpinionCreateForm = React.createClass({
     step: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { opinionType, step, handleSubmit } = this.props;
@@ -61,7 +62,7 @@ export const OpinionCreateForm = React.createClass({
           component={renderInput}
           help={step.titleHelpText}
           autoFocus
-          label={<FormattedMessage id="opinion.title" />}
+          label={this.getIntlMessage('opinion.title')}
         />
         <Field
           name="body"
@@ -70,9 +71,9 @@ export const OpinionCreateForm = React.createClass({
           component={renderInput}
           help={step.descriptionHelpText}
           autoFocus
-          label={<FormattedMessage id="opinion.body" />}
+          label={this.getIntlMessage('opinion.body')}
         />
-        {opinionType.appendixTypes.map((field, index) =>
+        {opinionType.appendixTypes.map((field, index) => (
           <Field
             key={index}
             component={renderInput}
@@ -80,8 +81,8 @@ export const OpinionCreateForm = React.createClass({
             label={field.title}
             type="editor"
             id={`appendix_${index}`}
-          />,
-        )}
+          />
+        ))}
       </form>
     );
   },

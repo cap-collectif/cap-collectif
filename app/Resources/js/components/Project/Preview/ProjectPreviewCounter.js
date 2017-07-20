@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const ProjectPreviewCounter = React.createClass({
   propTypes: {
@@ -9,6 +9,7 @@ const ProjectPreviewCounter = React.createClass({
     style: React.PropTypes.object,
     showZero: React.PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -26,7 +27,10 @@ const ProjectPreviewCounter = React.createClass({
             {value}
           </div>
           <div className="thumbnail__number__label excerpt small">
-            <FormattedMessage id={label} values={{ num: value }} />
+            <FormattedMessage
+              message={this.getIntlMessage(label)}
+              num={value}
+            />
           </div>
         </div>
       );

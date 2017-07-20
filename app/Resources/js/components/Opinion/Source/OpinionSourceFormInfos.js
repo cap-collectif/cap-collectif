@@ -1,11 +1,12 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 
 const OpinionSourceFormInfos = React.createClass({
   propTypes: {
     action: PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { action } = this.props;
@@ -16,7 +17,7 @@ const OpinionSourceFormInfos = React.createClass({
     return (
       <div className="modal-top bg-info">
         <p>
-          {<FormattedMessage id="source.add_infos" />}
+          {this.getIntlMessage('source.add_infos')}
         </p>
       </div>
     );

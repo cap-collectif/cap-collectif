@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
@@ -7,13 +8,13 @@ import IdeaDeleteVoteForm from './IdeaDeleteVoteForm';
 
 export const IdeaVoteBox = React.createClass({
   displayName: 'IdeaVoteBox',
-
   propTypes: {
     idea: PropTypes.object.isRequired,
     className: PropTypes.string,
     formWrapperClassName: PropTypes.string,
     user: PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -47,7 +48,10 @@ export const IdeaVoteBox = React.createClass({
   },
 
   userHasVote() {
-    const { idea, user } = this.props;
+    const {
+      idea,
+      user,
+    } = this.props;
     return user && idea.userHasVote;
   },
 
@@ -56,43 +60,48 @@ export const IdeaVoteBox = React.createClass({
     const { isSubmitting } = this.state;
     return (
       <div className={className}>
-        {user &&
-          <UserPreview
-            user={user}
-            style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
-          />}
+        {
+          user &&
+            <UserPreview
+              user={user}
+              style={{ padding: '0', marginBottom: '0', fontSize: '18px' }}
+            />
+        }
         <div className={formWrapperClassName}>
-          {this.userHasVote()
+          {
+            this.userHasVote()
             ? <IdeaDeleteVoteForm
-                idea={idea}
-                isSubmitting={isSubmitting}
-                onSubmitSuccess={this.handleSubmitSuccess}
-                onFailure={this.handleFailure}
-                anonymous={!user}
-              />
+              idea={idea}
+              isSubmitting={isSubmitting}
+              onSubmitSuccess={this.handleSubmitSuccess}
+              onFailure={this.handleFailure}
+              anonymous={!user}
+            />
             : <IdeaCreateVoteForm
-                idea={idea}
-                isSubmitting={isSubmitting}
-                onSubmitSuccess={this.handleSubmitSuccess}
-                onFailure={this.handleFailure}
-                anonymous={!user}
-              />}
+              idea={idea}
+              isSubmitting={isSubmitting}
+              onSubmitSuccess={this.handleSubmitSuccess}
+              onFailure={this.handleFailure}
+              anonymous={!user}
+            />
+          }
         </div>
         <SubmitButton
           id="idea-vote-button"
           isSubmitting={isSubmitting}
           onSubmit={this.handleSubmit}
           label={this.userHasVote() ? 'idea.vote.delete' : 'idea.vote.add'}
-          bsStyle={!this.userHasVote() || isSubmitting ? 'success' : 'danger'}
+          bsStyle={(!this.userHasVote() || isSubmitting) ? 'success' : 'danger'}
           className="btn-block"
           style={{ marginTop: '10px' }}
         />
       </div>
     );
   },
+
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user.user,
   };

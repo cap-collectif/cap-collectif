@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
@@ -32,8 +32,7 @@ export const ProposalForm = React.createClass({
     mode: PropTypes.string,
     proposal: PropTypes.object,
   },
-
-  mixins: [DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -298,31 +297,31 @@ export const ProposalForm = React.createClass({
       proposal,
     } = this.props;
     const optional = (
-      <span className="excerpt">{` ${(
-        <FormattedMessage id="global.form.optional" />
+      <span className="excerpt">{` ${this.getIntlMessage(
+        'global.form.optional',
       )}`}</span>
     );
     const themeLabel = (
       <span>
-        {<FormattedMessage id="proposal.theme" />}
+        {this.getIntlMessage('proposal.theme')}
         {!form.themeMandatory && optional}
       </span>
     );
     const categoryLabel = (
       <span>
-        {<FormattedMessage id="proposal.category" />}
+        {this.getIntlMessage('proposal.category')}
         {!form.categoryMandatory && optional}
       </span>
     );
     const districtLabel = (
       <span>
-        {<FormattedMessage id="proposal.district" />}
+        {this.getIntlMessage('proposal.district')}
         {!form.districtMandatory && optional}
       </span>
     );
     const illustration = (
       <span>
-        {<FormattedMessage id="proposal.media" />}
+        {this.getIntlMessage('proposal.media')}
         {optional}
       </span>
     );
@@ -336,7 +335,7 @@ export const ProposalForm = React.createClass({
     return (
       <form id="proposal-form">
         {form.description &&
-          <div dangerouslySetInnerHTML={{ __html: form.description }} />}
+          <FormattedHTMLMessage message={form.description} />}
         <Input
           id="proposal_title"
           type="text"
@@ -344,7 +343,7 @@ export const ProposalForm = React.createClass({
           value={this.state.form.title}
           help={form.titleHelpText}
           onChange={this.handleTitleChange}
-          label={<FormattedMessage id="proposal.title" />}
+          label={this.getIntlMessage('proposal.title')}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
           addonAfter={
@@ -357,11 +356,9 @@ export const ProposalForm = React.createClass({
           <Panel
             header={
               <FormattedMessage
-                id="proposal.suggest_header"
-                values={{
-                  matches: this.state.suggestions.length,
-                  terms: this.state.form.title.split(' ').length,
-                }}
+                message={this.getIntlMessage('proposal.suggest_header')}
+                matches={this.state.suggestions.length}
+                terms={this.state.form.title.split(' ').length}
               />
             }>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
@@ -377,7 +374,7 @@ export const ProposalForm = React.createClass({
               onClick={() => {
                 this.setState({ suggestions: [] });
               }}>
-              {<FormattedMessage id="global.close" />}
+              {this.getIntlMessage('global.close')}
             </Button>
           </Panel>
         </Collapse>
@@ -392,7 +389,7 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('theme')}
             help={form.themeHelpText}>
             <option value={-1} disabled>
-              {<FormattedMessage id="proposal.select.theme" />}
+              {this.getIntlMessage('proposal.select.theme')}
             </option>
             {themes.map(theme =>
               <option key={theme.id} value={theme.id}>
@@ -411,7 +408,7 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('category')}
             help={form.categoryHelpText}>
             <option value={-1} disabled>
-              {<FormattedMessage id="proposal.select.category" />}
+              {this.getIntlMessage('proposal.select.category')}
             </option>
             {categories.map(category => {
               return (
@@ -433,7 +430,7 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('district')}
             help={form.districtHelpText}>
             <option value="">
-              {<FormattedMessage id="proposal.select.district" />}
+              {this.getIntlMessage('proposal.select.district')}
             </option>
             {districts.map(district =>
               <option key={district.id} value={district.id}>
@@ -444,7 +441,7 @@ export const ProposalForm = React.createClass({
         {form.usingAddress &&
           <div className="form-group">
             <label className="control-label h5" htmlFor="proposal_address">
-              {<FormattedMessage id="proposal.map.form.field" />}
+              {this.getIntlMessage('proposal.map.form.field')}
             </label>
             {form.addressHelpText &&
               <span className="help-block">
@@ -455,8 +452,8 @@ export const ProposalForm = React.createClass({
                 onChange: address => {
                   this.setState(prevState => ({ ...prevState, address }));
                 },
-                placeholder: (
-                  <FormattedMessage id="proposal.map.form.placeholder" />
+                placeholder: this.getIntlMessage(
+                  'proposal.map.form.placeholder',
                 ),
                 value: this.state.address,
                 type: 'text',
@@ -493,7 +490,7 @@ export const ProposalForm = React.createClass({
         <Input
           id="proposal_body"
           type="editor"
-          label={<FormattedMessage id="proposal.body" />}
+          label={this.getIntlMessage('proposal.body')}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
           valueLink={this.linkState('form.body')}

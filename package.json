@@ -104,8 +104,7 @@
     "react-dropzone": "^3.3.4",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",
-    "react-intl": "^2.3.0",
-    "react-intl-redux": "^0.6.0",
+    "react-intl": "1.2.0",
     "react-linkify": "^0.2.1",
     "react-nl2br": "^0.2.0",
     "react-on-rails": "^8.0.3",
@@ -134,7 +133,6 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-plugin-react-intl": "^2.3.1",
     "enzyme": "^2.8.2",
     "eslint": "^4.1.1",
     "eslint-brunch": "^3.12.0",

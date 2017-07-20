@@ -30,7 +30,7 @@ exports[`<Radio /> should render correctly 1`] = `
     name="choices-for-field-12"
     onChange={[Function]}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-24"
@@ -42,8 +42,8 @@ exports[`<Radio /> should render correctly 1`] = `
       value="Maxime Arrouard"
     >
       Maxime Arrouard
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-25"
@@ -55,8 +55,8 @@ exports[`<Radio /> should render correctly 1`] = `
       value="Spylou Super Sayen"
     >
       Spylou Super Sayen
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-26"
@@ -68,8 +68,8 @@ exports[`<Radio /> should render correctly 1`] = `
       value="Cyril Lage"
     >
       Cyril Lage
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-27"
@@ -81,7 +81,7 @@ exports[`<Radio /> should render correctly 1`] = `
       value="Superman"
     >
       Superman
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
   </ReactRadioGroup>
 </div>
 `;
@@ -116,7 +116,7 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
     name="choices-for-field-12"
     onChange={[Function]}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-24"
@@ -128,8 +128,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
       value="Maxime Arrouard"
     >
       Maxime Arrouard
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-25"
@@ -141,8 +141,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
       value="Spylou Super Sayen"
     >
       Spylou Super Sayen
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-26"
@@ -154,8 +154,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
       value="Cyril Lage"
     >
       Cyril Lage
-    </InjectIntl(ReactBootstrapInput)>
-    <InjectIntl(ReactBootstrapInput)
+    </Input>
+    <Input
       disabled={false}
       errors={null}
       id="reply-1_choice-27"
@@ -167,7 +167,7 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
       value="Superman"
     >
       Superman
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
     <Other
       disabled={false}
       field={

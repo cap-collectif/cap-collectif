@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
 
 const Ranking = React.createClass({
   displayName: 'Ranking',
-
   propTypes: {
     id: PropTypes.string.isRequired,
     field: PropTypes.object.isRequired,
@@ -15,6 +15,7 @@ const Ranking = React.createClass({
     label: PropTypes.any.isRequired,
     labelClassName: PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -28,11 +29,15 @@ const Ranking = React.createClass({
     this.rankingBlock
       .getDecoratedComponentInstance()
       .getDecoratedComponentInstance()
-      .reset();
+      .reset()
+    ;
   },
 
   handleRankingChange(ranking) {
-    const { field, onChange } = this.props;
+    const {
+      field,
+      onChange,
+    } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
     onChange(field, values);
@@ -53,17 +58,22 @@ const Ranking = React.createClass({
       [labelClassName]: true,
     });
     return (
-      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
+      <div
+        className={`form-group ${getGroupStyle(field.id)}`}
+        id={id}
+      >
         <label htmlFor={id} className={labelClasses}>
-          {label}
+          { label }
         </label>
-        {field.helpText
+        {
+          field.helpText
           ? <span className="help-block">
-              {field.helpText}
-            </span>
-          : null}
+            {field.helpText}
+          </span>
+          : null
+        }
         <RankingBlock
-          ref={c => (this.rankingBlock = c)}
+          ref={c => this.rankingBlock = c}
           field={field}
           disabled={disabled}
           onRankingChange={this.handleRankingChange}
@@ -72,6 +82,7 @@ const Ranking = React.createClass({
       </div>
     );
   },
+
 });
 
 export default Ranking;

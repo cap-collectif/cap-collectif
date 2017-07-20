@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import CheckboxGroup from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
@@ -16,7 +17,7 @@ const Checkbox = React.createClass({
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
   },
-
+  mixins: [IntlMixin],
   other: Other,
 
   getDefaultProps() {

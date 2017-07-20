@@ -1,9 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/fr';
 import ReactOnRails from 'react-on-rails';
-import { addLocaleData } from 'react-intl';
-import frLocaleData from 'react-intl/locale-data/fr';
-
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
 import NavbarApp from './startup/NavbarAppClient';
@@ -30,20 +27,14 @@ import IdeasListApp from './startup/IdeasListApp';
 import IdeaPageApp from './startup/IdeaPageApp';
 import IdeaCreateApp from './startup/IdeaCreateApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
-import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
+import ProposalCreateFusionButtonApp
+  from './startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminSelectionsApp from './startup/ProposalAdminSelectionsApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
 import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
 import appStore from '../js/stores/AppStore';
-
-addLocaleData(frLocaleData);
-if ('ReactIntlLocaleData' in window) {
-  Object.keys(ReactIntlLocaleData).forEach(lang => {
-    addLocaleData(ReactIntlLocaleData[lang]);
-  });
-}
 
 moment.locale('fr');
 window.__SERVER__ = false;

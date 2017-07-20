@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import Comment from './Comment';
 
@@ -8,11 +9,16 @@ const CommentList = React.createClass({
     comments: PropTypes.array.isRequired,
     onVote: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
-    const { comments, onVote, root } = this.props;
+    const {
+      comments,
+      onVote,
+      root,
+    } = this.props;
     if (comments.length === 0) {
-      return <ul />;
+      return <ul></ul>;
     }
 
     const classes = classNames({
@@ -23,20 +29,23 @@ const CommentList = React.createClass({
 
     return (
       <ul id="comments" className={classes}>
-        {comments.map(comment => {
-          return (
-            <Comment
-              {...this.props}
-              key={comment.id}
-              comment={comment}
-              root={root}
-              onVote={onVote}
-            />
-          );
-        })}
+        {
+          comments.map((comment) => {
+            return (
+              <Comment
+                {...this.props}
+                key={comment.id}
+                comment={comment}
+                root={root}
+                onVote={onVote}
+              />
+            );
+          })
+        }
       </ul>
     );
   },
+
 });
 
 export default CommentList;

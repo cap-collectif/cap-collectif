@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import { Row, Col, Button } from 'react-bootstrap';
@@ -20,8 +20,7 @@ const CommentForm = React.createClass({
     comment: PropTypes.func,
     user: PropTypes.object,
   },
-
-  mixins: [DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -48,7 +47,10 @@ const CommentForm = React.createClass({
   },
 
   componentDidMount() {
-    const { focus, user } = this.props;
+    const {
+      focus,
+      user,
+    } = this.props;
     if (focus) {
       ReactDOM.findDOMNode(this.refs.body).focus();
     }
@@ -101,14 +103,7 @@ const CommentForm = React.createClass({
   expand(newState) {
     if (!newState) {
       const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
-      if (
-        // eslint-disable-next-line no-undef
-        event.relatedTarget &&
-        // eslint-disable-next-line no-undef
-        ($(event.relatedTarget).is($block) ||
-          // eslint-disable-next-line no-undef
-          $block.has($(event.relatedTarget)).length)
-      ) {
+      if (event.relatedTarget && ($(event.relatedTarget).is($block) || $block.has($(event.relatedTarget)).length)) { // eslint-disable-line no-undef
         return; // clicked on an element inside comment block
       }
       if (this.state.form.body.length === 0) {
@@ -120,7 +115,10 @@ const CommentForm = React.createClass({
   },
 
   create() {
-    const { comment, user } = this.props;
+    const {
+      comment,
+      user,
+    } = this.props;
     this.setState({ submitted: true }, () => {
       if (!this.isValid()) {
         return;
@@ -134,13 +132,13 @@ const CommentForm = React.createClass({
       }
 
       comment(data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
-        })
-        .catch(() => {
-          this.setState({ isSubmitting: false, submitted: false });
-        });
+      .then(() => {
+        this.setState(this.getInitialState());
+        autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
+      })
+      .catch(() => {
+        this.setState({ isSubmitting: false, submitted: false });
+      });
     });
   },
 
@@ -159,58 +157,58 @@ const CommentForm = React.createClass({
         <div>
           <Row>
             <Col sm={12} md={6}>
-              <p>{<FormattedMessage id="comment.with_my_account" />}</p>
-              <RegistrationButton />{' '}
+              <p>{ this.getIntlMessage('comment.with_my_account') }</p>
+              <RegistrationButton />
+              { ' ' }
               <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-              <h5>{<FormattedMessage id="comment.why_create_account" />}</h5>
+              <h5>{ this.getIntlMessage('comment.why_create_account') }</h5>
               <ul className="excerpt small">
                 <li>
-                  {<FormattedMessage id="comment.create_account_reason_1" />}
+                  { this.getIntlMessage('comment.create_account_reason_1') }
                 </li>
                 <li>
-                  {<FormattedMessage id="comment.create_account_reason_2" />}
+                  { this.getIntlMessage('comment.create_account_reason_2') }
                 </li>
                 <li>
-                  {<FormattedMessage id="comment.create_account_reason_3" />}
+                  { this.getIntlMessage('comment.create_account_reason_3') }
                 </li>
               </ul>
             </Col>
-            <Col sm={12} md={6}>
-              <p>
-                {<FormattedMessage id="comment.without_account" />}
-              </p>
-              <Input
-                type="text"
-                ref="authorName"
-                id="authorName"
-                name="authorName"
-                valueLink={this.linkState('form.authorName')}
-                label={<FormattedMessage id="global.fullname" />}
-                help={<FormattedMessage id="comment.public_name" />}
-                groupClassName={this.getGroupStyle('authorName')}
-                errors={this.renderFormErrors('authorName')}
-              />
-              <Input
-                type="email"
-                ref="authorEmail"
-                id="authorEmail"
-                name="authorEmail"
-                valueLink={this.linkState('form.authorEmail')}
-                label={<FormattedMessage id="global.hidden_email" />}
-                help={<FormattedMessage id="comment.email_info" />}
-                groupClassName={this.getGroupStyle('authorEmail')}
-                errors={this.renderFormErrors('authorEmail')}
-              />
-              <Button
-                ref="anonymousComment"
-                disabled={this.state.isSubmitting}
-                onClick={this.state.isSubmitting ? null : this.create}
-                bsStyle="primary">
-                {this.state.isSubmitting
-                  ? <FormattedMessage id="global.loading" />
-                  : <FormattedMessage id="comment.submit" />}
-              </Button>
-            </Col>
+              <Col sm={12} md={6}>
+                <p>{ this.getIntlMessage('comment.without_account') }</p>
+                <Input
+                  type="text"
+                  ref="authorName"
+                  id="authorName"
+                  name="authorName"
+                  valueLink={this.linkState('form.authorName')}
+                  label={this.getIntlMessage('global.fullname')}
+                  help={this.getIntlMessage('comment.public_name')}
+                  groupClassName={this.getGroupStyle('authorName')}
+                  errors={this.renderFormErrors('authorName')}
+                />
+                <Input
+                  type="email"
+                  ref="authorEmail"
+                  id="authorEmail"
+                  name="authorEmail"
+                  valueLink={this.linkState('form.authorEmail')}
+                  label={this.getIntlMessage('global.hidden_email')}
+                  help={this.getIntlMessage('comment.email_info')}
+                  groupClassName={this.getGroupStyle('authorEmail')}
+                  errors={this.renderFormErrors('authorEmail')}
+                />
+                <Button ref="anonymousComment"
+                  disabled={this.state.isSubmitting}
+                  onClick={this.state.isSubmitting ? null : this.create}
+                  bsStyle="primary"
+                >
+                  {this.state.isSubmitting
+                    ? this.getIntlMessage('global.loading')
+                    : this.getIntlMessage('comment.submit')
+                  }
+                </Button>
+              </Col>
           </Row>
         </div>
       );
@@ -222,28 +220,28 @@ const CommentForm = React.createClass({
     if (this.state.expanded || this.state.form.body.length >= 1) {
       if (user) {
         return (
-          <Button
-            ref="loggedInComment"
+          <Button ref="loggedInComment"
             disabled={this.state.isSubmitting}
             onClick={this.state.isSubmitting ? null : this.create}
-            bsStyle="primary">
+            bsStyle="primary"
+          >
             {this.state.isSubmitting
-              ? <FormattedMessage id="global.loading" />
-              : <FormattedMessage id="comment.submit" />}
+              ? this.getIntlMessage('global.loading')
+              : this.getIntlMessage('comment.submit')
+            }
           </Button>
         );
       }
 
-      return (
-        <div>
-          {this.renderAnonymous()}
-        </div>
-      );
+      return <div>{ this.renderAnonymous() }</div>;
     }
   },
 
   render() {
-    const { isAnswer, user } = this.props;
+    const {
+      isAnswer,
+      user,
+    } = this.props;
     const classes = classNames({
       'comment-answer-form': isAnswer,
     });
@@ -251,7 +249,7 @@ const CommentForm = React.createClass({
       <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
-          <form ref={c => (this.form = c)}>
+          <form ref={c => this.form = c}>
             <Input
               type="textarea"
               name="body"
@@ -259,19 +257,20 @@ const CommentForm = React.createClass({
               valueLink={this.linkState('form.body')}
               rows="2"
               onFocus={this.expand.bind(this, true)}
-              placeholder="comment.write"
+              placeholder={this.getIntlMessage('comment.write')}
               groupClassName={this.getGroupStyle('body')}
               errors={this.renderFormErrors('body')}
             />
-            {this.renderCommentButton()}
+            { this.renderCommentButton() }
           </form>
         </div>
       </div>
     );
   },
+
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { user: state.user.user };
 };
 

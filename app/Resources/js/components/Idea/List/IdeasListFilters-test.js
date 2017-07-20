@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../../translations/FR';
 import { IdeasListFilters } from './IdeasListFilters';
 
 const props = {
@@ -27,21 +27,29 @@ const featuresDisabled = {
 describe('<IdeasListFilters />', () => {
   it('it should render a row containing sorting input and ideas search but no themes nor create button', () => {
     const wrapper = shallow(
-      <IdeasListFilters features={featuresDisabled} {...props} />,
+      <IdeasListFilters features={featuresDisabled} {...props} {...IntlData} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render the themes filter when feature is enabled', () => {
     const wrapper = shallow(
-      <IdeasListFilters {...props} features={featuresThemesEnabled} />,
+      <IdeasListFilters
+        {...props}
+        features={featuresThemesEnabled}
+        {...IntlData}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render the idea create when feature is enabled', () => {
     const wrapper = shallow(
-      <IdeasListFilters {...props} features={featuresIdeaCreationEnabled} />,
+      <IdeasListFilters
+        {...props}
+        features={featuresIdeaCreationEnabled}
+        {...IntlData}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

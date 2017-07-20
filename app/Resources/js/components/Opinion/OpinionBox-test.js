@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../translations/FR';
 import { OpinionBox } from './OpinionBox';
 
 describe('<OpinionBox />', () => {
@@ -13,10 +13,15 @@ describe('<OpinionBox />', () => {
     },
     rankingThreshold: 0,
     opinionTerm: 0,
+    ...IntlData,
   };
 
   it('should render correctly', () => {
-    const wrapper = shallow(<OpinionBox {...props} />);
+    const wrapper = shallow(
+      <OpinionBox
+        {...props}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

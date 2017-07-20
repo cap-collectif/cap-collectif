@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import Input from '../../Form/ReactBootstrapInput';
 import ElementsFinder from './../ElementsFinder';
@@ -15,8 +15,7 @@ const CreateModal = React.createClass({
     toggle: React.PropTypes.func,
     process: React.PropTypes.func,
   },
-
-  mixins: [DeepLinkStateMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -152,8 +151,8 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.name.label" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.create.name.label',
           )}`}
         </h2>
         <Input
@@ -161,7 +160,9 @@ const CreateModal = React.createClass({
           id="new_element_title"
           name="new_element[title]"
           className="new-element__title"
-          placeholder="synthesis.edition.action.create.name.placeholder"
+          placeholder={this.getIntlMessage(
+            'synthesis.edition.action.create.name.placeholder',
+          )}
           onChange={this.setName}
         />
       </div>
@@ -172,8 +173,8 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.description.label" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.create.description.label',
           )}`}
         </h2>
         <Input
@@ -191,11 +192,11 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.parent.label" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.create.parent.label',
           )}`}
-          <span className="small excerpt action__title-right">{`\t${(
-            <FormattedMessage id="synthesis.edition.action.create.optional" />
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.create.optional',
           )}`}</span>
         </h2>
         {this.renderParentFinder()}
@@ -251,7 +252,7 @@ const CreateModal = React.createClass({
         dialogClassName="modal--create">
         <Modal.Header closeButton>
           <Modal.Title>
-            {<FormattedMessage id="synthesis.edition.action.create.title" />}
+            {this.getIntlMessage('synthesis.edition.action.create.title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -262,17 +263,13 @@ const CreateModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide.bind(null, this)}>
-            {
-              <FormattedMessage id="synthesis.edition.action.create.btn_cancel" />
-            }
+            {this.getIntlMessage('synthesis.edition.action.create.btn_cancel')}
           </Button>
           <Button
             type="submit"
             bsStyle="primary"
             onClick={this.create.bind(null, this)}>
-            {
-              <FormattedMessage id="synthesis.edition.action.create.btn_submit" />
-            }
+            {this.getIntlMessage('synthesis.edition.action.create.btn_submit')}
           </Button>
         </Modal.Footer>
       </Modal>

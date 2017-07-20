@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
@@ -302,9 +301,8 @@ class OpinionRepository extends EntityRepository
     }
 
     /**
-     * Get opinions by opinionType and consultation step.
+     * Get opinions by opinionType.
      *
-     * @param ConsultationStep $step
      * @param $opinionTypeId
      * @param int    $nbByPage
      * @param int    $page
