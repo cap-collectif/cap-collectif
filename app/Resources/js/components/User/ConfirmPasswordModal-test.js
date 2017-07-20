@@ -2,15 +2,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ConfirmPasswordModal } from './ConfirmPasswordModal';
-import IntlData from '../../translations/FR';
 
 describe('<ConfirmPasswordModal />', () => {
   it('should render an visible modal', () => {
-    const wrapper = shallow(<ConfirmPasswordModal {...IntlData} show dispatch={() => {}} />);
+    const wrapper = shallow(<ConfirmPasswordModal show dispatch={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {
-    const wrapper = shallow(<ConfirmPasswordModal {...IntlData} show={false} dispatch={() => {}} />);
+    const wrapper = shallow(
+      <ConfirmPasswordModal show={false} dispatch={() => {}} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Row } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import Pagination from '../../Utils/Pagination';
 import ProjectList from './../List/ProjectsList';
@@ -17,7 +16,6 @@ export const ProjectListPage = React.createClass({
     project: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   componentDidMount() {
     this.props.dispatch(fetchProjects());
@@ -33,7 +31,8 @@ export const ProjectListPage = React.createClass({
         <Row>
           <ProjectListFilter projectTypes={project.projectTypes || []} />
         </Row>
-        <br /><br />
+        <br />
+        <br />
         <Loader show={project.isLoading}>
           <ProjectList projects={projects} />
           {features.projects_form &&

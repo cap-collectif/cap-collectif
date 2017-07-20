@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
 import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
@@ -13,7 +13,7 @@ const ArgumentList = React.createClass({
     opinion: React.PropTypes.object.isRequired,
     type: React.PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
@@ -78,7 +78,7 @@ const ArgumentList = React.createClass({
         <Col xs={12} sm={6} md={6} className="block--first-mobile">
           <label htmlFor={htmlFor}>
             <span className="sr-only">
-              {this.getIntlMessage(`argument.filter.${type}`)}
+              <FormattedMessage id={`argument.filter.${type}`} />
             </span>
           </label>
           <select
@@ -87,15 +87,24 @@ const ArgumentList = React.createClass({
             className="form-control pull-right"
             value={order}
             onChange={() => this.updateSelectedValue()}>
-            <option value="last">
-              {this.getIntlMessage('global.filter_last')}
-            </option>
-            <option value="old">
-              {this.getIntlMessage('global.filter_old')}
-            </option>
-            <option value="popular">
-              {this.getIntlMessage('global.filter_popular')}
-            </option>
+            <FormattedMessage id="global.filter_last">
+              {message =>
+                <option value="last">
+                  {message}
+                </option>}
+            </FormattedMessage>
+            <FormattedMessage id="global.filter_old">
+              {message =>
+                <option value="old">
+                  {message}
+                </option>}
+            </FormattedMessage>
+            <FormattedMessage id="global.filter_popular">
+              {message =>
+                <option value="popular">
+                  {message}
+                </option>}
+            </FormattedMessage>
           </select>
         </Col>
       );
@@ -114,17 +123,17 @@ const ArgumentList = React.createClass({
             <h4 className="opinion__header__title">
               {type === 'simple'
                 ? <FormattedMessage
-                    message={this.getIntlMessage('argument.simple.list')}
-                    num={count}
+                    id="argument.simple.list"
+                    values={{ num: count }}
                   />
                 : type === 'yes'
                   ? <FormattedMessage
-                      message={this.getIntlMessage('argument.yes.list')}
-                      num={count}
+                      id="argument.yes.list"
+                      values={{ num: count }}
                     />
                   : <FormattedMessage
-                      message={this.getIntlMessage('argument.no.list')}
-                      num={count}
+                      id="argument.no.list"
+                      values={{ num: count }}
                     />}
             </h4>
           </Col>

@@ -32,7 +32,10 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
         }
         type="submit"
       >
-        Se connecter
+        <FormattedMessage
+          id="global.login_me"
+          values={Object {}}
+        />
       </Button>
     </form>
   </div>

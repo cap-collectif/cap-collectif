@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import IdeaPreview from './IdeaPreview';
 import IdeaPreviewHeader from './IdeaPreviewHeader';
 import IdeaPreviewBody from './IdeaPreviewBody';
@@ -21,7 +21,7 @@ const ideaVip = {
 
 describe('<IdeaPreview />', () => {
   it('it should render idea preview', () => {
-    const wrapper = shallow(<IdeaPreview idea={idea} {...IntlData} />);
+    const wrapper = shallow(<IdeaPreview idea={idea} />);
     expect(wrapper.find('.idea__preview')).toHaveLength(1);
     expect(wrapper.find('.idea__preview.bg-vip')).toHaveLength(0);
     expect(wrapper.find(IdeaPreviewHeader)).toHaveLength(1);
@@ -30,7 +30,7 @@ describe('<IdeaPreview />', () => {
   });
 
   it('should render vip background when idea author is vip', () => {
-    const wrapper = shallow(<IdeaPreview idea={ideaVip} {...IntlData} />);
+    const wrapper = shallow(<IdeaPreview idea={ideaVip} />);
     expect(wrapper.find('.idea__preview.bg-vip')).toHaveLength(1);
   });
 });

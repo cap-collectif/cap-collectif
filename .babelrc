@@ -1,17 +1,20 @@
 {
   "presets": ["react", "flow", "latest", "stage-0"],
-  /*"env": {
-    "production": {
+  "env": {
+    /*"production": {
       "presets": [[ // Waiting resolution of https://github.com/babel/babili/issues/556
         "babili", { // https://github.com/babel/babili/tree/master/packages/babel-preset-babili#options
         "evaluate": false,
         "mangle": true,
         "removeConsole": false
       }]]
-    }
-  },*/
+    }*/
+  },
   "plugins": [
     "relay",
-    "transform-class-properties"
+    "transform-class-properties",
+    ["react-intl", {
+        "messagesDir": "./intl/react/",
+    }]
   ],
 }

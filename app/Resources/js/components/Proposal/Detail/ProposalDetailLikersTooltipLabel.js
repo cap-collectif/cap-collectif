@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate';
 
 const ProposalDetailLikersTooltipLabel = React.createClass({
   propTypes: {
     likers: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { likers } = this.props;
@@ -14,8 +13,10 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
       return (
         <Truncate>
           <FormattedMessage
-            message={this.getIntlMessage('proposal.likers.label')}
-            user={likers[0].displayName}
+            id="proposal.likers.label"
+            values={{
+              user: likers[0].displayName,
+            }}
           />
         </Truncate>
       );
@@ -25,12 +26,14 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
       return (
         <span>
           <FormattedMessage
-            message={this.getIntlMessage('proposal.likers.count')}
-            num={likers.length}
+            id="proposal.likers.count"
+            values={{
+              num: likers.length,
+            }}
           />
           <br />
           <Truncate>
-            <FormattedHTMLMessage message={message} />
+            <div dangerouslySetInnerHTML={{ __html: message }} />
           </Truncate>
         </span>
       );

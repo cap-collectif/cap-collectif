@@ -30,7 +30,10 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
       onClick={[Function]}
     />
      
-    Mosaïque
+    <FormattedMessage
+      id="proposal.map.mosaic"
+      values={Object {}}
+    />
   </Button>
   <Button
     active={true}
@@ -50,7 +53,10 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
       onClick={[Function]}
     />
      
-    Carte
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
   </Button>
 </div>
 `;
@@ -85,7 +91,10 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
       onClick={[Function]}
     />
      
-    Mosaïque
+    <FormattedMessage
+      id="proposal.map.mosaic"
+      values={Object {}}
+    />
   </Button>
   <Button
     active={false}
@@ -105,7 +114,10 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
       onClick={[Function]}
     />
      
-    Carte
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
   </Button>
 </div>
 `;

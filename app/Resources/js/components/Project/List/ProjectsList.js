@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { Row } from 'react-bootstrap';
 import ProjectPreview from '../Preview/ProjectPreview';
 
@@ -8,7 +7,6 @@ const ProjectsList = React.createClass({
   propTypes: {
     projects: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { projects } = this.props;

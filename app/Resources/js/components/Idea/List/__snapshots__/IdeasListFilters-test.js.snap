@@ -12,7 +12,7 @@ exports[`<IdeasListFilters /> it should render a row containing sorting input an
     sm={3}
     xs={12}
   >
-    <Input
+    <InjectIntl(ReactBootstrapInput)
       errors={null}
       id="idea-sorting"
       image={null}
@@ -22,27 +22,23 @@ exports[`<IdeasListFilters /> it should render a row containing sorting input an
       type="select"
       value="last"
     >
-      <option
-        value="last"
-      >
-        Les plus récentes
-      </option>
-      <option
-        value="old"
-      >
-        Les plus anciennes
-      </option>
-      <option
-        value="comments"
-      >
-        Les plus commentées
-      </option>
-      <option
-        value="popular"
-      >
-        Les plus populaires
-      </option>
-    </Input>
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
   </Col>
   <Col
     bsClass="col"
@@ -82,7 +78,7 @@ exports[`<IdeasListFilters /> it should render the idea create when feature is e
     sm={3}
     xs={12}
   >
-    <Input
+    <InjectIntl(ReactBootstrapInput)
       errors={null}
       id="idea-sorting"
       image={null}
@@ -92,27 +88,23 @@ exports[`<IdeasListFilters /> it should render the idea create when feature is e
       type="select"
       value="last"
     >
-      <option
-        value="last"
-      >
-        Les plus récentes
-      </option>
-      <option
-        value="old"
-      >
-        Les plus anciennes
-      </option>
-      <option
-        value="comments"
-      >
-        Les plus commentées
-      </option>
-      <option
-        value="popular"
-      >
-        Les plus populaires
-      </option>
-    </Input>
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
   </Col>
   <Col
     bsClass="col"
@@ -140,7 +132,7 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
     sm={3}
     xs={12}
   >
-    <Input
+    <InjectIntl(ReactBootstrapInput)
       errors={null}
       id="idea-filter-theme"
       image={null}
@@ -150,12 +142,11 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
       type="select"
       value="0"
     >
-      <option
-        value="0"
-      >
-        Tous les thèmes
-      </option>
-    </Input>
+      <FormattedMessage
+        id="global.select_themes"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
   </Col>
   <Col
     bsClass="col"
@@ -163,7 +154,7 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
     sm={3}
     xs={12}
   >
-    <Input
+    <InjectIntl(ReactBootstrapInput)
       errors={null}
       id="idea-sorting"
       image={null}
@@ -173,27 +164,23 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
       type="select"
       value="last"
     >
-      <option
-        value="last"
-      >
-        Les plus récentes
-      </option>
-      <option
-        value="old"
-      >
-        Les plus anciennes
-      </option>
-      <option
-        value="comments"
-      >
-        Les plus commentées
-      </option>
-      <option
-        value="popular"
-      >
-        Les plus populaires
-      </option>
-    </Input>
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
   </Col>
   <Col
     bsClass="col"

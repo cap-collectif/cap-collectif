@@ -345,8 +345,7 @@ exports[`<ProposalAdminStepSelector /> render correctly when edited and notified
           <i
             className="fa fa-check-circle-o"
           />
-           
-          L'email a bien été envoyé.
+           L'email a bien été envoyé.
         </div>
       </Col>
     </Well>

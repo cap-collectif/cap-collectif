@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../Utils/LoginOverlay';
@@ -16,7 +15,6 @@ const NewOpinionButton = React.createClass({
     disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const {
@@ -38,7 +36,9 @@ const NewOpinionButton = React.createClass({
               dispatch(openOpinionCreateModal(opinionType.id));
             }}>
             <i className="cap cap-add-1" />
-            <span className="hidden-xs">{label}</span>
+            <span className="hidden-xs">
+              {label}
+            </span>
           </Button>
         </LoginOverlay>
         <OpinionCreateModal

@@ -3,11 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Opinion } from './Opinion';
-import IntlData from '../../translations/FR';
 
 describe('<Opinion />', () => {
   const props = {
-    ...IntlData,
     opinion: { id: 'opinionId' },
   };
 

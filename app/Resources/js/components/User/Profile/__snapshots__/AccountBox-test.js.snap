@@ -16,10 +16,18 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       id="edit-account-profile-button"
       onClick={[Function]}
     >
-      Enregistrer les modifications
+      <FormattedMessage
+        id="global.save_modifications"
+        values={Object {}}
+      />
     </Button>
   }
-  header="Mon compte"
+  header={
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  }
 >
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
@@ -42,10 +50,18 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       id="edit-account-profile-button"
       onClick={[Function]}
     >
-      Chargement...
+      <FormattedMessage
+        id="global.loading"
+        values={Object {}}
+      />
     </Button>
   }
-  header="Mon compte"
+  header={
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  }
 >
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
@@ -68,10 +84,18 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       id="edit-account-profile-button"
       onClick={[Function]}
     >
-      Enregistrer les modifications
+      <FormattedMessage
+        id="global.save_modifications"
+        values={Object {}}
+      />
     </Button>
   }
-  header="Mon compte"
+  header={
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  }
 >
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />

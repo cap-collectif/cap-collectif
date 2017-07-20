@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalForm } from './ProposalForm';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalForm />', () => {
   const props = {
@@ -34,7 +33,6 @@ describe('<ProposalForm />', () => {
     },
     mode: 'create',
     proposal: { title: 'proposal title' },
-    ...IntlData,
   };
 
   it('should render a simple form without custom field', () => {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import ProjectStatsList from './ProjectStatsList';
 
@@ -12,7 +12,6 @@ export const ProjectStatsPage = React.createClass({
     districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -35,81 +34,69 @@ export const ProjectStatsPage = React.createClass({
   },
 
   render() {
-    const {
-      districts,
-      steps,
-      themes,
-      categories,
-    } = this.props;
+    const { districts, steps, themes, categories } = this.props;
     const icons = this.listIcons;
     const selectedStep = steps[this.state.selectedStepIndex];
     return (
       <div>
-        <h2>{this.getIntlMessage('project.stats.title')}</h2>
-        {
-          steps.length > 1
-            ? <Nav
+        <h2>
+          {<FormattedMessage id="project.stats.title" />}
+        </h2>
+        {steps.length > 1
+          ? <Nav
               bsStyle="pills"
               justified
               activeKey={this.state.selectedStepIndex}
               onSelect={this.selectStep}
-              className="block"
-            >
-              {
-                steps.map((step, index) => {
-                  return (
-                    <NavItem key={step.id} eventKey={index}>
-                      {step.title}
-                    </NavItem>
-                  );
-                })
-              }
+              className="block">
+              {steps.map((step, index) => {
+                return (
+                  <NavItem key={step.id} eventKey={index}>
+                    {step.title}
+                  </NavItem>
+                );
+              })}
             </Nav>
-          : null
-        }
-        {
-          selectedStep
-            ? <div className="block stats__step-details">
-              {
-                Object.keys(selectedStep.stats).map((key) => {
-                  return (
-                    <ProjectStatsList
-                      key={key}
-                      type={key}
-                      stepId={selectedStep.id}
-                      data={selectedStep.stats[key]}
-                      label={`project.stats.list.${key}`}
-                      icon={icons[key]}
-                      isCurrency={key === 'costs'}
-                      showFilters={key === 'votes'}
-                      step={selectedStep}
-                      themes={themes}
-                      districts={districts}
-                      categories={categories}
-                    />
-                  );
-                })
-              }
-          </div>
+          : null}
+        {selectedStep
+          ? <div className="block stats__step-details">
+              {Object.keys(selectedStep.stats).map(key => {
+                return (
+                  <ProjectStatsList
+                    key={key}
+                    type={key}
+                    stepId={selectedStep.id}
+                    data={selectedStep.stats[key]}
+                    label={`project.stats.list.${key}`}
+                    icon={icons[key]}
+                    isCurrency={key === 'costs'}
+                    showFilters={key === 'votes'}
+                    step={selectedStep}
+                    themes={themes}
+                    districts={districts}
+                    categories={categories}
+                  />
+                );
+              })}
+            </div>
           : <p className="project-stats__empty">
-            {this.getIntlMessage('project.stats.no_data')}
-          </p>
-        }
+              {<FormattedMessage id="project.stats.no_data" />}
+            </p>}
       </div>
     );
   },
-
 });
 
-export default connect(
-  (state, props) => {
-    const collectSteps = props.steps.filter(step => step.type === 'collect');
-    return {
-      themes: state.default.themes,
-      districts: state.default.districts,
-      categories: collectSteps.length > 0 && collectSteps[0].stats && collectSteps[0].stats.categories
+export default connect((state, props) => {
+  const collectSteps = props.steps.filter(step => step.type === 'collect');
+  return {
+    themes: state.default.themes,
+    districts: state.default.districts,
+    categories:
+      collectSteps.length > 0 &&
+      collectSteps[0].stats &&
+      collectSteps[0].stats.categories
         ? collectSteps[0].stats.categories.values || []
         : [],
-    };
-  },
-)(ProjectStatsPage);
+  };
+})(ProjectStatsPage);

@@ -19,9 +19,12 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
       }
     >
       <FormattedHTMLMessage
-        email="new-email@test.com"
-        message="Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre email ne sera pas modifié tant que vous n'aurez pas confirmé votre nouvelle adresse email."
-        tagName="span"
+        id="user.confirm.new_email_send_succeed"
+        values={
+          Object {
+            "email": "new-email@test.com",
+          }
+        }
       />
     </div>
     <div
@@ -41,7 +44,10 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
           }
         }
       >
-        Renvoyer la confirmation
+        <FormattedMessage
+          id="user.confirm.resend"
+          values={Object {}}
+        />
       </Button>
       <Button
         active={false}
@@ -56,7 +62,10 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
           }
         }
       >
-        Mettre à jour cette adresse email
+        <FormattedMessage
+          id="user.confirm.new_email_send_succeed_cancel_or_update"
+          values={Object {}}
+        />
       </Button>
     </div>
   </div>

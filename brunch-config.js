@@ -24,6 +24,8 @@ exports.config = {
     assets: /^app\/Resources\/assets/,
     ignored: [
       /^app\/Resources\/scss\/(modules|base)/,
+      /^codemod/,
+      'bower_components/iframe-resizer/js/iframeResizer.contentWindow.js',
       'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
       'bower_components/compass-mixins/lib/_compass.scss',
       'app/Resources/js-server/registration.js',
@@ -56,6 +58,10 @@ exports.config = {
           'bower_components/intl/Intl.js',
           'bower_components/intl/locale-data/jsonp/fr.js',
           // end
+
+          'bower_components/iframe-resizer/index.js',
+          'bower_components/iframe-resizer/js/iframeResizer.js',
+
           /^node_modules/,
 
           'bower_components/fetch/fetch.js',

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import { IdeaReportButton } from './IdeaReportButton';
 
 const props = {
@@ -17,7 +17,7 @@ const props = {
 
 describe('<IdeaReportButton />', () => {
   it('should render a report box', () => {
-    const wrapper = shallow(<IdeaReportButton {...props} {...IntlData} />);
+    const wrapper = shallow(<IdeaReportButton {...props} />);
     const reportBox = wrapper.find('Connect(ReportBox)');
     expect(reportBox).toHaveLength(1);
     expect(reportBox.prop('reported')).toEqual(props.idea.userHasReport);

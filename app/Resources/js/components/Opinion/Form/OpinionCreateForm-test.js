@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateForm } from './OpinionCreateForm';
-import IntlData from '../../../translations/FR';
 
 describe('<OpinionCreateForm />', () => {
   const props = {
@@ -23,7 +22,6 @@ describe('<OpinionCreateForm />', () => {
         },
       ],
     },
-    ...IntlData,
   };
 
   it('renders correctly', () => {

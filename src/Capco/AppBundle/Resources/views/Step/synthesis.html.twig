@@ -34,7 +34,7 @@
     {% endif %}
 
     {% if currentStep.synthesis != null and (currentStep.synthesis.enabled or ( app.user and app.user.vip))  %}
-        {{ react_intl_component('SynthesisViewBoxApp', {
+        {{ react_render_component('SynthesisViewBoxApp', {
             'props': props,
             'rendering': 'client_side'
         }) }}

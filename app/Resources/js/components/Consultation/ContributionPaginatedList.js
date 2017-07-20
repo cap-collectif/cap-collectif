@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { graphql, createPaginationContainer } from 'react-relay';
-import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 import { graphqlError } from '../../createRelayEnvironment';
 
@@ -12,7 +11,6 @@ export const ContributionPaginatedList = React.createClass({
     consultation: PropTypes.object.isRequired,
     relay: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { relay, consultation } = this.props;

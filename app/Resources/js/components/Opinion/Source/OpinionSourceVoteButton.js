@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
@@ -13,7 +13,6 @@ const OpinionSourceVoteButton = React.createClass({
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,11 +31,12 @@ const OpinionSourceVoteButton = React.createClass({
           bsSize="xsmall"
           onClick={user ? onClick : null}>
           {hasVoted
-            ? <span>{this.getIntlMessage('vote.cancel')}</span>
+            ? <span>
+                {<FormattedMessage id="vote.cancel" />}
+              </span>
             : <span>
-                <i className="cap cap-hand-like-2" />
-                {' '}
-                {this.getIntlMessage('vote.ok')}
+                <i className="cap cap-hand-like-2" />{' '}
+                {<FormattedMessage id="vote.ok" />}
               </span>}
         </Button>
       </LoginOverlay>
