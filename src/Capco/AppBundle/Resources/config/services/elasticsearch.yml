@@ -1,0 +1,30 @@
+services:
+    capco.elasticsearch.client:
+        class: Elastica\Client
+        arguments:
+            -
+                connections:
+                    - { host: '%elasticsearch_host%', port: '9200' }
+            - ~
+            - "@monolog.logger"
+
+    capco.elasticsearch.index_builder:
+        class: Capco\AppBundle\Elasticsearch\IndexBuilder
+        arguments:
+            - '@capco.elasticsearch.client'
+
+    capco.elasticsearch.index:
+        class: Elastica\Index
+        factory: ['@capco.elasticsearch.index_builder', getLiveSearchIndex]
+
+    # Keep for Backward compatibility
+    fos_elastica.index.app.proposal:
+        class: Elastica\Type
+        arguments: ['@capco.elasticsearch.index', 'proposal']
+
+    fos_elastica.index:
+        alias: 'capco.elasticsearch.index'
+
+    fos_elastica.elastica_to_model_transformer.collection.app:
+        alias: 'capco.elasticsearch.index'
+        #todo

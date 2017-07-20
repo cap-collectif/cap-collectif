@@ -30,9 +30,7 @@ builder:
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 elasticsearch:
-    image: elasticsearch:1.7.3
-    volumes:
-        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
+    build: ../services/local/elasticsearch
     ports:
         - "9200:9200"
 
