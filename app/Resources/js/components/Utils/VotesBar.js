@@ -12,13 +12,14 @@ const VotesBar = React.createClass({
 
   renderBar() {
     const { helpText, max, value } = this.props;
+    const percent = Math.ceil(value / max * 100);
     const bar = (
       <ProgressBar
         style={{ marginBottom: '5px' }}
         bsStyle="success"
         max={max}
         now={value}
-        label="%(percent)s%"
+        label={`${percent}%`}
       />
     );
     if (helpText) {
