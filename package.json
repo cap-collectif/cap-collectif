@@ -62,6 +62,7 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^6.3.2",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-react-intl": "^2.3.1",
     "babel-plugin-relay": "^1.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -134,7 +135,6 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-plugin-react-intl": "^2.3.1",
     "enzyme": "^2.8.2",
     "eslint": "^4.1.1",
     "eslint-brunch": "^3.12.0",
