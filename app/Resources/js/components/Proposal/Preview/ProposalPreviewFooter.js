@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 
 const ProposalPreviewFooter = React.createClass({
   propTypes: {
@@ -8,6 +8,7 @@ const ProposalPreviewFooter = React.createClass({
     stepId: PropTypes.string.isRequired,
     showVotes: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -31,10 +32,8 @@ const ProposalPreviewFooter = React.createClass({
             </div>
             <div className="proposal__counter__label">
               <FormattedMessage
-                id="comment.count_no_nb"
-                values={{
-                  count: proposal.comments_count,
-                }}
+                message={this.getIntlMessage('comment.count_no_nb')}
+                count={proposal.comments_count}
               />
             </div>
           </div>
@@ -47,10 +46,8 @@ const ProposalPreviewFooter = React.createClass({
               </div>
               <div className="proposal__counter__label">
                 <FormattedMessage
-                  id="proposal.vote.count_no_nb"
-                  values={{
-                    count: votesCount,
-                  }}
+                  message={this.getIntlMessage('proposal.vote.count_no_nb')}
+                  count={votesCount}
                 />
               </div>
             </div>}

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import renderComponent from '../../Form/Field';
@@ -40,6 +40,7 @@ export const IdeaForm = React.createClass({
     idea: PropTypes.object,
     showThemes: PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -58,7 +59,7 @@ export const IdeaForm = React.createClass({
               component={renderComponent}
               id="idea_confirm"
               name="confirm"
-              children={<FormattedMessage id="idea.confirm" />}
+              children={this.getIntlMessage('idea.confirm')}
             />
           </div>}
         <Field
@@ -66,7 +67,7 @@ export const IdeaForm = React.createClass({
           type="text"
           component={renderComponent}
           name="title"
-          label={<FormattedMessage id="idea.form.title" />}
+          label={`${this.getIntlMessage('idea.form.title')} *`}
         />
         {showThemes &&
           <Field
@@ -74,9 +75,9 @@ export const IdeaForm = React.createClass({
             type="select"
             component={renderComponent}
             name="theme"
-            label={<FormattedMessage id="idea.form.theme" />}>
+            label={`${this.getIntlMessage('idea.form.theme')} *`}>
             <option value={-1} disabled>
-              {<FormattedMessage id="idea.form.select_theme" />}
+              {this.getIntlMessage('idea.form.select_theme')}
             </option>
             {themes.map(theme => {
               return (
@@ -91,23 +92,23 @@ export const IdeaForm = React.createClass({
           type="editor"
           name="body"
           component={renderComponent}
-          label={<FormattedMessage id="idea.form.body" />}
+          label={`${this.getIntlMessage('idea.form.body')} *`}
         />
         <Field
           id="idea_object"
           type="editor"
           name="object"
           component={renderComponent}
-          label={<FormattedMessage id="idea.form.object" />}
+          label={`${this.getIntlMessage('idea.form.object')} *`}
         />
         <Field
           id="idea_url"
           type="text"
           name="url"
           component={renderComponent}
-          label={<FormattedMessage id="idea.form.url" />}
-          help={<FormattedMessage id="idea.form.url_help" />}
-          placeholder="idea.form.url_placeholder"
+          label={this.getIntlMessage('idea.form.url')}
+          help={this.getIntlMessage('idea.form.url_help')}
+          placeholder={this.getIntlMessage('idea.form.url_placeholder')}
         />
         <Field
           id="idea_media"
@@ -115,7 +116,7 @@ export const IdeaForm = React.createClass({
           name="media"
           component={renderComponent}
           image={idea && idea.media ? idea.media.url : null}
-          label={<FormattedMessage id="idea.form.media" />}
+          label={this.getIntlMessage('idea.form.media')}
         />
       </form>
     );

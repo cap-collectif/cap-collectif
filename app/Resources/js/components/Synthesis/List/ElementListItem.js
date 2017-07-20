@@ -1,4 +1,5 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import ElementBlock from './../Element/ElementBlock';
 
@@ -11,15 +12,16 @@ const ElementListItem = React.createClass({
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
-    return {
+    return ({
       showBreadcrumb: true,
       showStatus: true,
       showNotation: true,
       hasLink: true,
       linkType: 'edition',
-    };
+    });
   },
 
   render() {
@@ -49,6 +51,7 @@ const ElementListItem = React.createClass({
       </li>
     );
   },
+
 });
 
 export default ElementListItem;

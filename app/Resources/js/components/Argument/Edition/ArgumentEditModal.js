@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import ArgumentForm, { formName } from './ArgumentForm';
@@ -16,6 +16,7 @@ const ArgumentEditModal = React.createClass({
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { argument, show, dispatch, submitting } = this.props;
@@ -30,7 +31,7 @@ const ArgumentEditModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="argument.update" />}
+            {this.getIntlMessage('argument.update')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

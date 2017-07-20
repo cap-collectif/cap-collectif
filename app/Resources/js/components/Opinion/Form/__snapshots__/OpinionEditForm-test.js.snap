@@ -12,21 +12,13 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
     name="check"
     type="checkbox"
   >
-    <FormattedMessage
-      id="opinion.edit_check"
-      values={Object {}}
-    />
+    En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés.
   </Field>
   <Field
     autoFocus={true}
     component={[Function]}
     id="opinion_title"
-    label={
-      <FormattedMessage
-        id="opinion.title"
-        values={Object {}}
-      />
-    }
+    label="Titre*"
     name="title"
     type="text"
   />
@@ -34,12 +26,7 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
     autoFocus={true}
     component={[Function]}
     id="opinion_body"
-    label={
-      <FormattedMessage
-        id="opinion.body"
-        values={Object {}}
-      />
-    }
+    label="Proposition*"
     name="body"
     type="editor"
   />

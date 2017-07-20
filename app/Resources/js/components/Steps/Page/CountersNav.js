@@ -1,15 +1,16 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 // import { Nav } from 'react-bootstrap';
 // import CounterNavItem from './CounterNavItem';
 // import classNames from 'classnames';
 
 const CountersNav = React.createClass({
   displayName: 'CountersNav',
-
   propTypes: {
     counters: React.PropTypes.object,
     bordered: React.PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -81,6 +82,7 @@ const CountersNav = React.createClass({
     // }
     return null;
   },
+
 });
 
 export default CountersNav;

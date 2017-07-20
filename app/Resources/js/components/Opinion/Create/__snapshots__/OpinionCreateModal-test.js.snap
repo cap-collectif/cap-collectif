@@ -38,10 +38,7 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      <FormattedMessage
-        id="opinion.add_new"
-        values={Object {}}
-      />
+      Proposer
     </ModalTitle>
   </ModalHeader>
   <ModalBody
@@ -52,10 +49,7 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       className="modal-top bg-info"
     >
       <p>
-        <FormattedMessage
-          id="opinion.add_new_infos"
-          values={Object {}}
-        />
+        Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !
       </p>
     </div>
     <ReduxForm

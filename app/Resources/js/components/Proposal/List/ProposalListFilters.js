@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { State } from '../../../types';
@@ -29,6 +29,7 @@ export const ProposalListFilters = React.createClass({
     showDistrictFilter: PropTypes.bool.isRequired,
     showToggleMapButton: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -86,11 +87,12 @@ export const ProposalListFilters = React.createClass({
                 dispatch(loadProposals());
               }}
               value={order}>
-              {displayedOrders.map(choice =>
+              {displayedOrders.map(choice => (
                 <option key={choice} value={choice}>
-                  <FormattedMessage id={`global.filter_f_${choice}`} />
-                </option>,
-              )}) }
+                  {this.getIntlMessage(`global.filter_f_${choice}`)}
+                </option>
+              ))})
+              }
             </Input>
           </Col>
           <Col xs={12} md={colWidth}>
@@ -106,7 +108,7 @@ export const ProposalListFilters = React.createClass({
             </Col>}
         </Row>
         <Row>
-          {displayedFilters.map((filterName, index) =>
+          {displayedFilters.map((filterName, index) => (
             <Col xs={12} md={colWidth} key={index}>
               <Input
                 type="select"
@@ -117,7 +119,7 @@ export const ProposalListFilters = React.createClass({
                 }}
                 value={filters[filterName] || 0}>
                 <option value="0">
-                  <FormattedMessage id={`global.select_${filterName}`} />
+                  {this.getIntlMessage(`global.select_${filterName}`)}
                 </option>
                 {this.props[filterName].map(choice => {
                   return (
@@ -127,8 +129,8 @@ export const ProposalListFilters = React.createClass({
                   );
                 })}
               </Input>
-            </Col>,
-          )}
+            </Col>
+          ))}
         </Row>
       </div>
     );

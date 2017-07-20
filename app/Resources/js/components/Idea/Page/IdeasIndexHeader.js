@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
 
 const IdeasIndexHeader = React.createClass({
   propTypes: {
@@ -12,8 +13,7 @@ const IdeasIndexHeader = React.createClass({
       <div
         className="container container--custom"
         style={{ display: description ? 'block' : 'none' }}>
-        {description &&
-          <div dangerouslySetInnerHTML={{ __html: description }} />}
+        {description && <FormattedHTMLMessage message={description} />}
       </div>
     );
   },

@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submitOpinionReport } from '../../redux/modules/report';
 import ReportBox from '../Report/ReportBox';
@@ -9,6 +10,7 @@ const OpinionReportButton = React.createClass({
     dispatch: PropTypes.func.isRequired,
     opinion: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   handleReport(data) {
     const { opinion, dispatch } = this.props;
@@ -27,6 +29,7 @@ const OpinionReportButton = React.createClass({
       />
     );
   },
+
 });
 
 export default connect()(OpinionReportButton);

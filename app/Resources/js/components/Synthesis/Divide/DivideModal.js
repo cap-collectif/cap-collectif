@@ -1,15 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
-import {
-  Modal,
-  Button,
-  Grid,
-  Row,
-  Col,
-  OverlayTrigger,
-  Popover,
-} from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
+import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import autosize from 'autosize';
 import classNames from 'classnames';
 import { hashHistory } from 'react-router';
@@ -33,6 +25,7 @@ const DivideModal = React.createClass({
     show: React.PropTypes.bool,
     toggle: React.PropTypes.func,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     const { element } = this.props;
@@ -63,7 +56,6 @@ const DivideModal = React.createClass({
     }
     return null;
   },
-
   show() {
     const { toggle } = this.props;
     toggle(true);
@@ -82,9 +74,7 @@ const DivideModal = React.createClass({
   },
 
   selectText() {
-    const selectedText = this.getSelectedText(
-      ReactDOM.findDOMNode(this.refs.originalText),
-    );
+    const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
     this.setState({
       selectedText,
     });
@@ -122,18 +112,17 @@ const DivideModal = React.createClass({
 
   removeElement(element) {
     let newElements = this.state.newElements;
-    newElements = ArrayHelper.removeElementFromArray(
-      newElements,
-      element,
-      'body',
-    );
+    newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
       newElements,
     });
   },
 
   divide() {
-    const { element, synthesis } = this.props;
+    const {
+      element,
+      synthesis,
+    } = this.props;
     this.hide();
     const data = {
       archived: true,
@@ -146,26 +135,15 @@ const DivideModal = React.createClass({
     hashHistory.push('inbox', { type: 'new' });
   },
 
+
   renderOriginalElementPanel() {
     const element = this.props.element;
     if (element.body) {
       return (
-        <Col
-          ref="originalElementPanel"
-          xs={12}
-          sm={6}
-          className="col-height modal__panel panel--original-element">
+        <Col ref="originalElementPanel" xs={12} sm={6} className="col-height modal__panel panel--original-element">
           <div className="inside inside-full-height box">
-            <h2 className="h4 element__title">
-              <ElementTitle element={element} link={false} />
-            </h2>
-            <textarea
-              ref="originalText"
-              readOnly
-              onSelect={this.selectText.bind(null, this)}
-              className="element__body selectable"
-              value={FormattedText.strip(element.body)}
-            />
+            <h2 className="h4 element__title"><ElementTitle element={element} link={false} /></h2>
+            <textarea ref="originalText" readOnly onSelect={this.selectText.bind(null, this)} className="element__body selectable" value={FormattedText.strip(element.body)} ></textarea>
           </div>
         </Col>
       );
@@ -174,38 +152,11 @@ const DivideModal = React.createClass({
 
   renderCreateButton() {
     if (this.state.selectedText) {
-      return (
-        <Button
-          bsStyle="success"
-          className="division__create-element"
-          onClick={this.createFromSelection}>
-          {
-            <FormattedMessage id="synthesis.edition.action.divide.create_button" />
-          }
-        </Button>
-      );
+      return <Button bsStyle="success" className="division__create-element" onClick={this.createFromSelection}>{this.getIntlMessage('synthesis.edition.action.divide.create_button')}</Button>;
     }
     return (
-      <OverlayTrigger
-        trigger="click"
-        rootClose
-        placement="bottom"
-        overlay={
-          <Popover
-            id="divide-modal-help-popover"
-            title={
-              <FormattedMessage id="synthesis.edition.action.divide.help.title" />
-            }>
-            {
-              <FormattedMessage id="synthesis.edition.action.divide.help.message" />
-            }
-          </Popover>
-        }>
-        <Button bsStyle="success" className="division__create-element">
-          {
-            <FormattedMessage id="synthesis.edition.action.divide.create_button" />
-          }
-        </Button>
+      <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={<Popover id="divide-modal-help-popover" title={this.getIntlMessage('synthesis.edition.action.divide.help.title')}>{this.getIntlMessage('synthesis.edition.action.divide.help.message')}</Popover>}>
+        <Button bsStyle="success" className="division__create-element">{this.getIntlMessage('synthesis.edition.action.divide.create_button')}</Button>
       </OverlayTrigger>
     );
   },
@@ -215,9 +166,11 @@ const DivideModal = React.createClass({
     if (elements.length) {
       return (
         <ul className="division__elements-list">
-          {elements.map((element, index) => {
-            return this.renderElement(element, index);
-          })}
+          {
+            elements.map((element, index) => {
+              return this.renderElement(element, index);
+            })
+          }
         </ul>
       );
     }
@@ -227,20 +180,13 @@ const DivideModal = React.createClass({
     if (element) {
       return (
         <li key={index} className="division__element">
-          <ElementTitle
-            hasLink={false}
-            className="element__title"
-            element={element}
-          />
+          <ElementTitle hasLink={false} className="element__title" element={element} />
           <div className="element__body">
             {FormattedText.strip(element.body)}
           </div>
           <ElementBreadcrumb element={element} />
           <div className="element__actions">
-            <PublishButton
-              element={element}
-              onModal={this.togglePublishModal}
-            />
+            <PublishButton element={element} onModal={this.togglePublishModal} />
             <RemoveButton element={element} onRemove={this.removeElement} />
           </div>
         </li>
@@ -250,11 +196,7 @@ const DivideModal = React.createClass({
 
   renderNewElementsPanel() {
     return (
-      <Col
-        ref="newElementsPanel"
-        xs={12}
-        sm={6}
-        className="col-height modal__panel panel--new-elements">
+      <Col ref="newElementsPanel" xs={12} sm={6} className="col-height modal__panel panel--new-elements">
         <div className="inside inside-full-height box">
           {this.renderCreateButton()}
           {this.renderNewElements()}
@@ -300,40 +242,23 @@ const DivideModal = React.createClass({
     });
     return (
       <div>
-        <Modal
-          bsSize="large"
-          show={show}
-          onHide={this.hide}
-          animation={false}
-          dialogClassName={modalClasses}>
+        <Modal bsSize="large" show={show} onHide={this.hide} animation={false} dialogClassName={modalClasses}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {<FormattedMessage id="synthesis.edition.action.divide.title" />}
-            </Modal.Title>
+            <Modal.Title>{this.getIntlMessage('synthesis.edition.action.divide.title')}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {this.renderContent()}
           </Modal.Body>
           <Modal.Footer>
-            <Button type="button" onClick={this.hide}>
-              {
-                <FormattedMessage id="synthesis.edition.action.divide.btn_cancel" />
-              }
-            </Button>
-            <Button
-              bsStyle="primary"
-              type="submit"
-              onClick={this.divide.bind(null, this)}>
-              {
-                <FormattedMessage id="synthesis.edition.action.divide.btn_submit" />
-              }
-            </Button>
+            <Button type="button" onClick={this.hide}>{this.getIntlMessage('synthesis.edition.action.divide.btn_cancel')}</Button>
+            <Button bsStyle="primary" type="submit" onClick={this.divide.bind(null, this)}>{this.getIntlMessage('synthesis.edition.action.divide.btn_submit')}</Button>
           </Modal.Footer>
         </Modal>
         {this.renderPublishModal()}
       </div>
     );
   },
+
 });
 
 export default DivideModal;
