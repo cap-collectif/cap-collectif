@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import ProposalVoteForm from './ProposalVoteForm';
@@ -19,7 +19,6 @@ const ProposalVoteBox = React.createClass({
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -44,11 +43,11 @@ const ProposalVoteBox = React.createClass({
   },
 
   displayForm() {
-    const {
-      step,
-      user,
-    } = this.props;
-    return step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits());
+    const { step, user } = this.props;
+    return (
+      step.voteType === VOTE_TYPE_SIMPLE ||
+      (user && this.userHasEnoughCredits())
+    );
   },
 
   render() {
@@ -63,51 +62,43 @@ const ProposalVoteBox = React.createClass({
     } = this.props;
     return (
       <div className={className}>
-        {
-          !user && step.open
-            && <div>
-              <p className="text-center small" style={{ fontWeight: 'bold' }}>
-                {
-                  features.vote_without_account
-                  ? this.getIntlMessage('proposal.vote.authenticated')
-                  : 'Veuillez vous authentifier pour voter'
-                }
-              </p>
-              <Row>
-                <Col xs={12} sm={6}>
-                  <RegistrationButton
-                    className="btn-block"
-                    buttonStyle={{ margin: '0' }}
-                  />
-                </Col>
-                <Col xs={12} sm={6}>
-                  <LoginButton
-                    className="btn-darkest-gray btn-block btn--connection"
-                  />
-                </Col>
-              </Row>
-              {
-                features.vote_without_account &&
-                  <p className="excerpt p--lined">
-                    <span>{this.getIntlMessage('global.or')}</span>
-                  </p>
-              }
-            </div>
-        }
-        {
-          !user && features.vote_without_account &&
-          <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
-            {this.getIntlMessage('proposal.vote.non_authenticated')}
-          </p>
-        }
+        {!user &&
+          step.open &&
+          <div>
+            <p className="text-center small" style={{ fontWeight: 'bold' }}>
+              {features.vote_without_account
+                ? <FormattedMessage id="proposal.vote.authenticated" />
+                : 'Veuillez vous authentifier pour voter'}
+            </p>
+            <Row>
+              <Col xs={12} sm={6}>
+                <RegistrationButton
+                  className="btn-block"
+                  buttonStyle={{ margin: '0' }}
+                />
+              </Col>
+              <Col xs={12} sm={6}>
+                <LoginButton className="btn-darkest-gray btn-block btn--connection" />
+              </Col>
+            </Row>
+            {features.vote_without_account &&
+              <p className="excerpt p--lined">
+                <span>
+                  {<FormattedMessage id="global.or" />}
+                </span>
+              </p>}
+          </div>}
+        {!user &&
+          features.vote_without_account &&
+          <p
+            className="text-center small"
+            style={{ marginBottom: '0', fontWeight: 'bold' }}>
+            {<FormattedMessage id="proposal.vote.non_authenticated" />}
+          </p>}
         <div className={formWrapperClassName}>
-          {
-            (user || features.vote_without_account) && this.displayForm() &&
-              <ProposalVoteForm
-                proposal={proposal}
-                step={step}
-              />
-          }
+          {(user || features.vote_without_account) &&
+            this.displayForm() &&
+            <ProposalVoteForm proposal={proposal} step={step} />}
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
             submitting={isSubmitting}
@@ -117,7 +108,6 @@ const ProposalVoteBox = React.createClass({
       </div>
     );
   },
-
 });
 
 const mapStateToProps = state => ({ features: state.default.features });

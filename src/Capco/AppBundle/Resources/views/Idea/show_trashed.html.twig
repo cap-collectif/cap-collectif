@@ -44,7 +44,7 @@
     <div class="container">
 
         {% if trashedIdeasNb > 0 %}
-            {{ react_intl_component('IdeasListApp', {'props': props}) }}
+            {{ react_render_component('IdeasListApp', {'props': props}) }}
         {% else %}
             <p>
                 {{ 'idea.trashed.none'|trans({}, 'CapcoAppBundle') }}

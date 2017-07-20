@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 
 import UserAvatar from '../../User/UserAvatar';
@@ -14,7 +13,6 @@ const OpinionSource = React.createClass({
   propTypes: {
     source: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { source } = this.props;

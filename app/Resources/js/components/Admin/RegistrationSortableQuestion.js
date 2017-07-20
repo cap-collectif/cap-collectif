@@ -2,10 +2,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, ListGroupItem } from 'react-bootstrap';
 import { SortableElement } from 'react-sortable-hoc';
-import { updateRegistrationFieldModal, deleteRegistrationField } from '../../redux/modules/default';
+import {
+  updateRegistrationFieldModal,
+  deleteRegistrationField,
+} from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
 import DragHandle from './DragHandle';
 
@@ -14,7 +17,7 @@ type Props = {
   isSuperAdmin: boolean,
   value: Object,
   deleteField: () => void,
-  updateField: () => void
+  updateField: () => void,
 };
 
 export const RegistrationSortableQuestion = React.createClass({
@@ -24,7 +27,6 @@ export const RegistrationSortableQuestion = React.createClass({
     deleteField: PropTypes.func.isRequired,
     updateField: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { value, isSuperAdmin, deleteField, updateField } = this.props;
@@ -34,25 +36,25 @@ export const RegistrationSortableQuestion = React.createClass({
           <DragHandle />
         </div>
         <div className="col-xs-8">
-          <strong>{value.question}</strong>
+          <strong>
+            {value.question}
+          </strong>
           <div>
-            {this.getIntlMessage(`global.question.types.${value.type}`)}
+            <FormattedMessage id={`global.question.types.${value.type}`} />
           </div>
         </div>
         <div className="col-xs-3">
           <Button
             className="pull-right"
             disabled={!isSuperAdmin}
-            onClick={!isSuperAdmin ? null : () => deleteField()}
-          >
+            onClick={!isSuperAdmin ? null : () => deleteField()}>
             Supprimer
           </Button>
           <Button
             disabled={!isSuperAdmin}
             style={{ marginRight: 5 }}
             className="pull-right"
-            onClick={!isSuperAdmin ? null : () => updateField()}
-          >
+            onClick={!isSuperAdmin ? null : () => updateField()}>
             Modifier
           </Button>
         </div>
@@ -62,11 +64,20 @@ export const RegistrationSortableQuestion = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isSuperAdmin: !!(
+    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
+  ),
 });
 const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
-  updateField: () => { dispatch(updateRegistrationFieldModal(props.value.id)); },
-  deleteField: () => { deleteRegistrationField(props.value.id, dispatch); },
+  updateField: () => {
+    dispatch(updateRegistrationFieldModal(props.value.id));
+  },
+  deleteField: () => {
+    deleteRegistrationField(props.value.id, dispatch);
+  },
 });
-const connector: Connector<ParentProps, Props> = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<ParentProps, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 export default SortableElement(connector(RegistrationSortableQuestion));

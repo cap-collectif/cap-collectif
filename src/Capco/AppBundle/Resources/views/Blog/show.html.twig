@@ -50,7 +50,7 @@
             </div>
         {% endif %}
 
-        {{ react_intl_component('ShareButtonDropdownApp', {
+        {{ react_render_component('ShareButtonDropdownApp', {
                 'props': {
                     'url': url('app_blog_show', {'slug': post.slug}),
                     'title': post.title,
@@ -64,7 +64,7 @@
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
         <div class="container  container--custom  container--thinner">
             {% if capco_comment_can_show(post) %}
-                {{ react_intl_component('CommentSectionApp', { 'props': props }) }}
+                {{ react_render_component('CommentSectionApp', { 'props': props }) }}
             {% endif %}
         </div>
     {% endif %}

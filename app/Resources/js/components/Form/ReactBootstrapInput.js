@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
@@ -44,8 +45,7 @@ const acceptedMimeTypes = [
   'application/xml',
 ];
 
-export default class ReactBootstrapInput extends Component {
-  // $FlowFixMe
+class ReactBootstrapInput extends Component {
   constructor(props, context) {
     super(props, context);
     this.refFormControl = null;
@@ -115,8 +115,16 @@ export default class ReactBootstrapInput extends Component {
     errors,
     image,
     medias,
+    intl,
     ...props
   }: Object) {
+    if (
+      typeof props.placeholder === 'string' ||
+      props.placeholder instanceof String
+    ) {
+      props.placeholder = intl.formatMessage({ id: props.placeholder });
+    }
+
     if (type === 'editor') {
       return <Editor value={value} {...props} />;
     }
@@ -267,6 +275,7 @@ export default class ReactBootstrapInput extends Component {
 }
 
 ReactBootstrapInput.propTypes = {
+  intl: intlShape.isRequired,
   name: PropTypes.string,
   id: PropTypes.string,
   children: PropTypes.any,
@@ -285,3 +294,5 @@ ReactBootstrapInput.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   type: PropTypes.string,
 };
+
+export default injectIntl(ReactBootstrapInput);

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import IdeasList from '../List/IdeasList';
 import Pagination from '../../Utils/Pagination';
 
@@ -10,7 +10,6 @@ const IdeasPaginatedList = React.createClass({
     nbPages: PropTypes.number.isRequired,
     onChangePage: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { currentPage, nbPages, ideas, onChangePage } = this.props;
@@ -18,26 +17,21 @@ const IdeasPaginatedList = React.createClass({
     return (
       <div>
         <IdeasList ideas={ideas} />
-        {
-          ideas.length === 0
-            ? <p className="block text-center">
-            {this.getIntlMessage('idea.no_result')}
-          </p>
-            : null
-        }
-        {
-          showPagination
+        {ideas.length === 0
+          ? <p className="block text-center">
+              {<FormattedMessage id="idea.no_result" />}
+            </p>
+          : null}
+        {showPagination
           ? <Pagination
               current={currentPage}
               nbPages={nbPages}
               onChange={onChangePage}
-          />
-          : null
-        }
+            />
+          : null}
       </div>
     );
   },
-
 });
 
 export default IdeasPaginatedList;

@@ -2,7 +2,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
-import { IntlMixin } from 'react-intl';
 import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { arrayMove } from 'react-sortable-hoc';
@@ -36,7 +35,6 @@ export const RegistrationAdminPage = React.createClass({
     reorder: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const {

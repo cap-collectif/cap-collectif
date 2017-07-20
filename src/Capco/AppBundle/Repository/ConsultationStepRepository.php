@@ -4,24 +4,11 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * ConsultationStepRepository.
+ */
 class ConsultationStepRepository extends EntityRepository
 {
-    public function getByOpinionId(string $opinionId)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-          ->addSelect('p', 'pas')
-          ->leftJoin('cs.projectAbstractStep', 'pas')
-          ->leftJoin('pas.project', 'p')
-          ->innerJoin('cs.opinions', 'opinions')
-          ->andWhere('opinions.id = :opinionId')
-          ->setParameter('opinionId', $opinionId)
-      ;
-
-        return $qb
-          ->getQuery()
-          ->getOneOrNullResult();
-    }
-
     /**
      * Get last open project steps.
      *

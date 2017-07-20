@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
@@ -11,7 +10,6 @@ const OpinionSourceAdd = React.createClass({
     disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

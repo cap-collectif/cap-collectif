@@ -1,13 +1,12 @@
 import React from 'react';
 import Linkify from 'react-linkify';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
 
 const CommentBody = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -46,7 +45,11 @@ const CommentBody = React.createClass({
 
   renderReadMoreOrLess() {
     if (this.textShouldBeTruncated() && !this.state.expanded) {
-      return <button className="btn-link" onClick={this.expand.bind(this, true)}>{this.getIntlMessage('global.read_more')}</button>;
+      return (
+        <button className="btn-link" onClick={this.expand.bind(this, true)}>
+          {<FormattedMessage id="global.read_more" />}
+        </button>
+      );
     }
   },
 
@@ -55,7 +58,7 @@ const CommentBody = React.createClass({
     if (comment.isTrashed) {
       return (
         <span className="label label-default">
-          { this.getIntlMessage('comment.trashed.label') }
+          {<FormattedMessage id="comment.trashed.label" />}
         </span>
       );
     }
@@ -65,13 +68,14 @@ const CommentBody = React.createClass({
   render() {
     return (
       <div className="opinion__text">
-        { this.renderTrashedLabel() }
-        <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
-        { this.renderReadMoreOrLess() }
+        {this.renderTrashedLabel()}
+        <Linkify properties={{ className: 'external-link' }}>
+          {nl2br(this.generateText())}
+        </Linkify>
+        {this.renderReadMoreOrLess()}
       </div>
     );
   },
-
 });
 
 export default CommentBody;

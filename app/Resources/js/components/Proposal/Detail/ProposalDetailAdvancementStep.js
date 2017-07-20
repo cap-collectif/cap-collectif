@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Label } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const ProposalDetailAdvancementStep = React.createClass({
   displayName: 'ProposalDetailAdvancementStep',
+
   propTypes: {
     step: PropTypes.object.isRequired,
     roundColor: PropTypes.string.isRequired,
@@ -11,13 +12,12 @@ const ProposalDetailAdvancementStep = React.createClass({
     borderColor: PropTypes.string,
     children: PropTypes.node,
   },
-  mixins: [IntlMixin],
 
   renderDate() {
     const { step } = this.props;
 
     if (step.timeless && !step.endAt && !step.startAt) {
-      return this.getIntlMessage('proposal.detail.intervals.continuously');
+      return <FormattedMessage id="proposal.detail.intervals.continuously" />;
     }
 
     if (!step.endAt) {
@@ -29,24 +29,23 @@ const ProposalDetailAdvancementStep = React.createClass({
   render() {
     const { borderColor, roundColor, step, status, children } = this.props;
     return (
-        <span>
+      <span>
         <div
           style={
             borderColor
-            ? {
-              paddingTop: '10px',
-              paddingBottom: '10px',
-              borderLeftStyle: 'solid',
-              borderLeftColor: borderColor,
-              borderLeftWidth: '3px',
-              paddingLeft: '10px',
-            }
-            : {
-              paddingTop: '10px',
-              paddingLeft: '13px',
-            }
-          }
-        >
+              ? {
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  borderLeftStyle: 'solid',
+                  borderLeftColor: borderColor,
+                  borderLeftWidth: '3px',
+                  paddingLeft: '10px',
+                }
+              : {
+                  paddingTop: '10px',
+                  paddingLeft: '13px',
+                }
+          }>
           <div
             style={{
               float: 'left',
@@ -62,26 +61,27 @@ const ProposalDetailAdvancementStep = React.createClass({
             }}
           />
           <div style={{ marginTop: '-15px' }}>
-            <div>{ step.title }</div>
-            <div className="excerpt small">
-                <span>{ this.renderDate() }</span>
+            <div>
+              {step.title}
             </div>
-            {
-              status &&
-                <Label bsStyle={status.color} style={{ marginTop: '5px' }}>
-                  {
-                    status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name
-                  }
-                </Label>
-            }
+            <div className="excerpt small">
+              <span>
+                {this.renderDate()}
+              </span>
+            </div>
+            {status &&
+              <Label bsStyle={status.color} style={{ marginTop: '5px' }}>
+                {status.name.length > 25
+                  ? `${status.name.substr(0, 25)}...`
+                  : status.name}
+              </Label>}
           </div>
           <br />
         </div>
-          { children }
-        </span>
+        {children}
+      </span>
     );
   },
-
 });
 
 export default ProposalDetailAdvancementStep;

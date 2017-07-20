@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import FlashMessages from '../../Utils/FlashMessages';
 import UserActions from '../../../actions/UserActions';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
@@ -14,7 +14,8 @@ const PhoneForm = React.createClass({
     onSubmitFailure: PropTypes.func.isRequired,
     initialValue: PropTypes.string,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
+
+  mixins: [DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -35,24 +36,21 @@ const PhoneForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const {
-      onSubmitFailure,
-      onSubmitSuccess,
-    } = this.props;
+    const { onSubmitFailure, onSubmitSuccess } = this.props;
     if (nextProps.isSubmitting) {
       const form = JSON.parse(JSON.stringify(this.state.form));
       form.phone = form.phone.replace(/((?![0-9]).)/g, '');
-      form.phone = `+33${form.phone.charAt(0) === '0' ? form.phone.substring(1) : form.phone}`;
-      UserActions
-        .update(form)
+      form.phone = `+33${form.phone.charAt(0) === '0'
+        ? form.phone.substring(1)
+        : form.phone}`;
+      UserActions.update(form)
         .then(() => {
-          UserActions
-            .sendConfirmSms()
+          UserActions.sendConfirmSms()
             .then(() => {
               onSubmitSuccess(form.phone);
               this.setState(this.getInitialState());
             })
-            .catch((err) => {
+            .catch(err => {
               const errors = this.state.errors;
               if (err.response.message === 'sms_failed_to_send') {
                 errors.phone = ['phone.confirm.alert.failed_to_send'];
@@ -66,12 +64,18 @@ const PhoneForm = React.createClass({
               onSubmitFailure();
             });
         })
-        .catch((error) => {
+        .catch(error => {
           const response = error.response;
           if (response.errors) {
             const errors = this.state.errors;
-            if (response.errors.children.phone.errors && response.errors.children.phone.errors.length > 0) {
-              if (response.errors.children.phone.errors[0] === 'already_used_phone') {
+            if (
+              response.errors.children.phone.errors &&
+              response.errors.children.phone.errors.length > 0
+            ) {
+              if (
+                response.errors.children.phone.errors[0] ===
+                'already_used_phone'
+              ) {
                 errors.phone = ['profile.constraints.phone.already_used'];
               } else {
                 errors.phone = ['profile.constraints.phone.invalid'];
@@ -99,12 +103,14 @@ const PhoneForm = React.createClass({
   },
 
   render() {
-    const {
-      initialValue,
-      onSubmit,
-    } = this.props;
+    const { initialValue, onSubmit } = this.props;
     return (
-      <form style={{ maxWidth: '350px' }} onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
+      <form
+        style={{ maxWidth: '350px' }}
+        onSubmit={e => {
+          e.preventDefault();
+          onSubmit();
+        }}>
         <Input
           type="text"
           addonBefore="+33"
@@ -112,14 +118,13 @@ const PhoneForm = React.createClass({
           valueLink={this.linkState('form.phone')}
           id="_phone"
           disabled={this.state.form.phone === initialValue}
-          label={this.getIntlMessage('global.phone')}
+          label={<FormattedMessage id="global.phone" />}
           groupClassName={this.getGroupStyle('phone')}
           errors={this.renderFormErrors('phone')}
         />
       </form>
     );
   },
-
 });
 
 export default PhoneForm;

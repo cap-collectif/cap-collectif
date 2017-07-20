@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { isInvalid } from 'redux-form';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import { confirmPassword } from '../../../redux/modules/user';
@@ -16,7 +16,6 @@ export const AccountBox = React.createClass({
     invalid: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { invalid, submitting, dispatch } = this.props;
@@ -26,26 +25,21 @@ export const AccountBox = React.createClass({
         onClick={() => dispatch(confirmPassword())}
         disabled={invalid || submitting}
         bsStyle="primary"
-        className="col-sm-offset-4"
-      >
-        {
-          submitting
-          ? this.getIntlMessage('global.loading')
-          : this.getIntlMessage('global.save_modifications')
-        }
+        className="col-sm-offset-4">
+        {submitting
+          ? <FormattedMessage id="global.loading" />
+          : <FormattedMessage id="global.save_modifications" />}
       </Button>
     );
     return (
       <Panel
-        header={this.getIntlMessage('profile.account.title')}
-        footer={footer}
-      >
+        header={<FormattedMessage id="profile.account.title" />}
+        footer={footer}>
         <AccountForm />
         <ConfirmPasswordModal />
       </Panel>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({

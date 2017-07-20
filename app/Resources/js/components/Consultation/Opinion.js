@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { IntlMixin } from 'react-intl';
 import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
 import OpinionInfos from '../Opinion/OpinionInfos';
 import UserAvatar from '../User/UserAvatar';
@@ -12,7 +11,6 @@ export const Opinion = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { opinion } = this.props;
@@ -75,7 +73,7 @@ export default createFragmentContainer(
         vip
         displayName
         media {
-            url
+          url
         }
         url
       }
