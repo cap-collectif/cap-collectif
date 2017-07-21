@@ -46,7 +46,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
         <p
           className="widget__counter__label"
         >
-          Votes
+          <FormattedMessage
+            id="project.votes.widget.votes"
+            values={Object {}}
+          />
         </p>
         <span
           className="widget__counter__value"
@@ -64,7 +67,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       disabled={false}
       href="http//capco.dev/votes"
     >
-      Mes votes
+      <FormattedMessage
+        id="proposal.details"
+        values={Object {}}
+      />
     </Button>
   </NavbarCollapse>
 </Uncontrolled(Navbar)>
@@ -132,7 +138,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <p
           className="widget__counter__label"
         >
-          Votes
+          <FormattedMessage
+            id="project.votes.widget.votes"
+            values={Object {}}
+          />
         </p>
         <span
           className="widget__counter__value"
@@ -146,7 +155,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <p
           className="widget__counter__label"
         >
-          Restants
+          <FormattedMessage
+            id="project.votes.widget.votes_left"
+            values={Object {}}
+          />
         </p>
         <span
           className="widget__counter__value"
@@ -160,7 +172,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <p
           className="widget__counter__label"
         >
-          Dépensés
+          <FormattedMessage
+            id="project.votes.widget.votes_spent"
+            values={Object {}}
+          />
         </p>
         <span
           className="widget__counter__value"
@@ -178,7 +193,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       disabled={false}
       href="http//capco.dev/votes"
     >
-      Mes votes
+      <FormattedMessage
+        id="proposal.details"
+        values={Object {}}
+      />
     </Button>
     <Nav
       bsClass="nav"
@@ -255,7 +273,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <p
           className="widget__counter__label"
         >
-          Votes
+          <FormattedMessage
+            id="project.votes.widget.votes"
+            values={Object {}}
+          />
         </p>
         <span
           className="widget__counter__value"
@@ -273,7 +294,10 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       disabled={false}
       href="http//capco.dev/votes"
     >
-      Mes votes
+      <FormattedMessage
+        id="proposal.details"
+        values={Object {}}
+      />
     </Button>
   </NavbarCollapse>
 </Uncontrolled(Navbar)>

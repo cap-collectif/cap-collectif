@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import renderInput from '../Form/Field';
 
@@ -20,7 +20,6 @@ const ReportForm = React.createClass({
   propTypes: {
     handleSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { handleSubmit } = this.props;
@@ -30,30 +29,32 @@ const ReportForm = React.createClass({
           id="reportType"
           name="status"
           component={renderInput}
-          label={this.getIntlMessage('global.modal.report.form.status')}
+          label={<FormattedMessage id="global.modal.report.form.status" />}
           type="select"
           clearable={false}
           inputClassName={null}
           labelClassName={null}>
-          <option value={-1}>{this.getIntlMessage('global.select')}</option>
+          <option value={-1}>
+            {<FormattedMessage id="global.select" />}
+          </option>
           <option value={1}>
-            {this.getIntlMessage('reporting.status.offending')}
+            {<FormattedMessage id="reporting.status.offending" />}
           </option>
           <option value={2}>
-            {this.getIntlMessage('reporting.status.spam')}
+            {<FormattedMessage id="reporting.status.spam" />}
           </option>
           <option value={3}>
-            {this.getIntlMessage('reporting.status.error')}
+            {<FormattedMessage id="reporting.status.error" />}
           </option>
           <option value={4}>
-            {this.getIntlMessage('reporting.status.off_topic')}
+            {<FormattedMessage id="reporting.status.off_topic" />}
           </option>
         </Field>
         <Field
           id="reportBody"
           name="body"
           component={renderInput}
-          label={this.getIntlMessage('global.modal.report.form.body')}
+          label={<FormattedMessage id="global.modal.report.form.body" />}
           type="textarea"
         />
       </form>

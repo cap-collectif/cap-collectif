@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import ProposalAdminStepSelector from './ProposalAdminStepSelector';
@@ -15,7 +14,6 @@ export const ProposalAdminSelections = React.createClass({
     projectId: PropTypes.string.isRequired,
     proposalId: PropTypes.number.isRequired,
   },
-  mixins: [IntlMixin],
 
   componentDidMount() {
     const { dispatch, proposalId } = this.props;
@@ -33,19 +31,19 @@ export const ProposalAdminSelections = React.createClass({
             target="_blank"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/115-section-avancement">
-            <i className="fa fa-info-circle" /> {' '} Aide
+            <i className="fa fa-info-circle" /> Aide
           </a>
           <h5 style={{ marginBottom: 0, fontWeight: 'bold' }}>Etapes</h5>
         </div>
         <Loader show={steps.length === 0}>
           <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
-            {steps.map((step, index) => (
+            {steps.map((step, index) =>
               <ProposalAdminStepSelector
                 step={step}
                 key={index}
                 proposalId={proposalId}
-              />
-            ))}
+              />,
+            )}
           </ListGroup>
         </Loader>
       </div>

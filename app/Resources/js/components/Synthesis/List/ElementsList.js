@@ -1,5 +1,4 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import { Nav } from 'react-bootstrap';
 import ElementListItem from './ElementListItem';
 
@@ -12,16 +11,15 @@ const ElementsList = React.createClass({
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
-    return ({
+    return {
       showBreadcrumb: true,
       showStatus: true,
       showNotation: true,
       hasLink: true,
       linkType: 'edition',
-    });
+    };
   },
 
   render() {
@@ -39,25 +37,22 @@ const ElementsList = React.createClass({
 
     return (
       <Nav stacked className="synthesis__list">
-        {
-          elements.map((element) => {
-            return (
-              <ElementListItem
-                key={element.id}
-                element={element}
-                showBreadcrumb={showBreadcrumb}
-                showStatus={showStatus}
-                showNotation={showNotation}
-                hasLink={hasLink}
-                linkType={linkType}
-              />
-            );
-          })
-        }
+        {elements.map(element => {
+          return (
+            <ElementListItem
+              key={element.id}
+              element={element}
+              showBreadcrumb={showBreadcrumb}
+              showStatus={showStatus}
+              showNotation={showNotation}
+              hasLink={hasLink}
+              linkType={linkType}
+            />
+          );
+        })}
       </Nav>
     );
   },
-
 });
 
 export default ElementsList;

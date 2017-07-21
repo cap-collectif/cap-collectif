@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
 import Linkify from 'react-linkify';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const ButtonBody = React.createClass({
   propTypes: {
     body: React.PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -48,7 +47,7 @@ const ButtonBody = React.createClass({
     if (this.textShouldBeTruncated() && !this.state.expanded) {
       return (
         <button className="btn-link" onClick={this.expand.bind(this, true)}>
-          {this.getIntlMessage('global.read_more')}
+          {<FormattedMessage id="global.read_more" />}
         </button>
       );
     }
@@ -58,7 +57,7 @@ const ButtonBody = React.createClass({
     return (
       <div className="opinion__text">
         <Linkify properties={{ className: 'external-link' }}>
-          <FormattedHTMLMessage message={this.generateText()} />
+          <div dangerouslySetInnerHTML={{ __html: this.generateText() }} />
         </Linkify>
         {this.renderReadMoreOrLess()}
       </div>

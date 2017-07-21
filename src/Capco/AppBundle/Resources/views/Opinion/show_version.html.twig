@@ -58,5 +58,5 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_intl_component('OpinionPageApp', {'props': {'opinionId': opinion.id, 'versionId': version.id} }) }}
+    {{ react_render_component('OpinionPageApp', {'props': {'opinionId': opinion.id, 'versionId': version.id} }) }}
 {% endblock %}

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Col, Row, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
@@ -22,7 +22,6 @@ const ProjectListFilter = React.createClass({
     orderBy: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -90,13 +89,14 @@ const ProjectListFilter = React.createClass({
           <option key="all" value="">
             Tous les types
           </option>
-          {projectTypes.map(projectType => {
-            return (
-              <option key={projectType.slug} value={projectType.slug}>
-                {this.getIntlMessage(projectType.title)}
-              </option>
-            );
-          })}
+          {projectTypes.map(projectType =>
+            <FormattedMessage id={projectType.title} key={projectType.slug}>
+              {message =>
+                <option value={projectType.slug}>
+                  {message}
+                </option>}
+            </FormattedMessage>,
+          )}
         </FormControl>,
       );
     }
@@ -131,7 +131,7 @@ const ProjectListFilter = React.createClass({
         <Input
           id="project-search-input"
           type="text"
-          placeholder={this.getIntlMessage('navbar.search')}
+          placeholder="navbar.search"
           buttonAfter={
             <Button id="project-search-button" type="submit">
               <i className="cap cap-magnifier" />

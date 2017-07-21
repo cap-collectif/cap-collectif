@@ -141,7 +141,7 @@ export function* fetchAllVotes(
 }
 
 export function* saga(): Generator<IOEffect, *, *> {
-  yield takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
+  yield* takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
 }
 
 export const reducer = (

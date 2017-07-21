@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UserLink from '../User/UserLink';
@@ -8,7 +8,6 @@ const CommentInfos = React.createClass({
   propTypes: {
     comment: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   renderDate() {
     const { comment } = this.props;
@@ -43,8 +42,7 @@ const CommentInfos = React.createClass({
     return (
       <span className="excerpt">
         {' - '}
-        {this.getIntlMessage('comment.edited')}
-        {' '}
+        {<FormattedMessage id="comment.edited" />}{' '}
         <FormattedDate
           value={moment(comment.updated_at)}
           day="numeric"
@@ -63,7 +61,11 @@ const CommentInfos = React.createClass({
       return <UserLink user={comment.author} />;
     }
 
-    return <span>{comment.author_name}</span>;
+    return (
+      <span>
+        {comment.author_name}
+      </span>
+    );
   },
 
   render() {

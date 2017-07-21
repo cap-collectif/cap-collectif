@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
@@ -30,7 +30,6 @@ const OpinionVersionCreateForm = React.createClass({
   propTypes: {
     opinionId: PropTypes.string.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     return (
@@ -39,21 +38,21 @@ const OpinionVersionCreateForm = React.createClass({
           name="title"
           type="text"
           component={renderInput}
-          label={this.getIntlMessage('opinion.version.title')}
+          label={<FormattedMessage id="opinion.version.title" />}
         />
         <Field
           name="body"
           type="editor"
           component={renderInput}
-          label={this.getIntlMessage('opinion.version.body')}
-          help={this.getIntlMessage('opinion.version.body_helper')}
+          label={<FormattedMessage id="opinion.version.body" />}
+          help={<FormattedMessage id="opinion.version.body_helper" />}
         />
         <Field
           name="comment"
           type="editor"
           component={renderInput}
-          label={this.getIntlMessage('opinion.version.comment')}
-          help={this.getIntlMessage('opinion.version.comment_helper')}
+          label={<FormattedMessage id="opinion.version.comment" />}
+          help={<FormattedMessage id="opinion.version.comment_helper" />}
         />
       </form>
     );
@@ -63,7 +62,8 @@ const OpinionVersionCreateForm = React.createClass({
 export default connect((state: State) => ({
   initialValues: {
     title: '',
-    body: state.opinion.currentOpinionId &&
+    body:
+      state.opinion.currentOpinionId &&
       state.opinion.opinionsById[state.opinion.currentOpinionId].body,
     comment: '',
   },

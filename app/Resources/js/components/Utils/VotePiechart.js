@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const VotePiechart = React.createClass({
   propTypes: {
@@ -11,7 +11,6 @@ const VotePiechart = React.createClass({
     top: PropTypes.number,
     left: PropTypes.number,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -35,9 +34,9 @@ const VotePiechart = React.createClass({
             chartType="PieChart"
             data={[
               [{ type: 'string' }, { type: 'number' }],
-              [this.getIntlMessage('vote.ok'), ok],
-              [this.getIntlMessage('vote.mitige'), mitige],
-              [this.getIntlMessage('vote.nok'), nok],
+              [<FormattedMessage id="vote.ok" />, ok],
+              [<FormattedMessage id="vote.mitige" />, mitige],
+              [<FormattedMessage id="vote.nok" />, nok],
             ]}
             height={height}
             width={width}

@@ -17,6 +17,7 @@ module.exports = {
     Modernizr: true,
     jQuery: true,
     __SERVER__: true,
+    ReactIntlLocaleData: true,
     // Flow vars
     HTMLInputElement: true,
     Element: true,

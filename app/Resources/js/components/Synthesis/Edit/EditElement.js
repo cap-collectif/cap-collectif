@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedDate } from 'react-intl';
+import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
@@ -19,7 +19,6 @@ const EditElement = React.createClass({
     synthesis: React.PropTypes.object,
     params: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -41,11 +40,14 @@ const EditElement = React.createClass({
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
     if (nextProps.params.element_id !== params.element_id) {
-      this.setState({
-        isLoading: true,
-      }, () => {
-        this.loadElementFromServer(nextProps.params.element_id);
-      });
+      this.setState(
+        {
+          isLoading: true,
+        },
+        () => {
+          this.loadElementFromServer(nextProps.params.element_id);
+        },
+      );
     }
   },
 
@@ -78,10 +80,7 @@ const EditElement = React.createClass({
 
   loadElementFromServer(id = this.props.params.element_id) {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementFromServer(
-      synthesis.id,
-      id,
-    );
+    SynthesisElementActions.loadElementFromServer(synthesis.id, id);
   },
 
   renderDescription() {
@@ -111,7 +110,10 @@ const EditElement = React.createClass({
                 <ElementBlock element={element} />
               </div>
               {this.renderDescription()}
-              <div className="element__description box has-chart" dangerouslySetInnerHTML={{ __html: element.body }} />
+              <div
+                className="element__description box has-chart"
+                dangerouslySetInnerHTML={{ __html: element.body }}
+              />
               {this.renderElementButtons()}
             </div>
           </div>
@@ -124,8 +126,14 @@ const EditElement = React.createClass({
     const { synthesis } = this.props;
     return (
       <div className="element__actions box text-center">
-        <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
-        <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
+        <PublishButton
+          element={this.state.element}
+          onModal={this.togglePublishModal}
+        />
+        <DivideButton
+          element={this.state.element}
+          onModal={this.toggleDivideModal}
+        />
         <IgnoreButton synthesis={synthesis} element={this.state.element} />
       </div>
     );
@@ -136,13 +144,11 @@ const EditElement = React.createClass({
     if (!this.state.isLoading && element && element.logs.length > 0) {
       return (
         <ul className="element__history">
-          {
-            element.logs.map((log) => {
-              return log.sentences.map((sentence) => {
-                return this.renderLogSentence(sentence, log.logged_at);
-              });
-            })
-          }
+          {element.logs.map(log => {
+            return log.sentences.map(sentence => {
+              return this.renderLogSentence(sentence, log.logged_at);
+            });
+          })}
         </ul>
       );
     }
@@ -153,7 +159,14 @@ const EditElement = React.createClass({
       <li className="element__history__log">
         {sentence}
         <span className="excerpt small pull-right">
-          <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
+          <FormattedDate
+            value={moment(date)}
+            day="numeric"
+            month="long"
+            year="numeric"
+            hour="numeric"
+            minute="numeric"
+          />
         </span>
       </li>
     );
@@ -164,7 +177,12 @@ const EditElement = React.createClass({
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
-        <PublishModal synthesis={synthesis} element={element} show={this.state.showPublishModal} toggle={this.togglePublishModal} />
+        <PublishModal
+          synthesis={synthesis}
+          element={element}
+          show={this.state.showPublishModal}
+          toggle={this.togglePublishModal}
+        />
       );
     }
   },
@@ -174,7 +192,12 @@ const EditElement = React.createClass({
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
-        <DivideModal synthesis={synthesis} element={element} show={this.state.showDivideModal} toggle={this.toggleDivideModal} />
+        <DivideModal
+          synthesis={synthesis}
+          element={element}
+          show={this.state.showDivideModal}
+          toggle={this.toggleDivideModal}
+        />
       );
     }
   },
@@ -185,16 +208,17 @@ const EditElement = React.createClass({
         <Loader show={this.state.isLoading} />
         {this.renderElementPanel()}
         {!this.state.isLoading && this.state.element
-          ? <ElementsList elements={this.state.element.children} showBreadcrumb={false} />
-          : null
-        }
+          ? <ElementsList
+              elements={this.state.element.children}
+              showBreadcrumb={false}
+            />
+          : null}
         {this.renderHistory()}
         {this.renderPublishModal()}
         {this.renderDivideModal()}
       </div>
     );
   },
-
 });
 
 export default EditElement;

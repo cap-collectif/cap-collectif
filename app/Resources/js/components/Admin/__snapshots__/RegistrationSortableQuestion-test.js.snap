@@ -22,7 +22,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly 1`] = `
   >
     <strong />
     <div>
-      Liste déroulante (une seule réponse possible)
+      <FormattedMessage
+        id="global.question.types.select"
+        values={Object {}}
+      />
     </div>
   </div>
   <div
@@ -81,7 +84,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly when not a superAdmi
   >
     <strong />
     <div>
-      Liste déroulante (une seule réponse possible)
+      <FormattedMessage
+        id="global.question.types.select"
+        values={Object {}}
+      />
     </div>
   </div>
   <div

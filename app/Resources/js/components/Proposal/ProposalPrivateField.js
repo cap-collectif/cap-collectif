@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const ProposalPrivateField = React.createClass({
   propTypes: {
@@ -7,7 +7,6 @@ const ProposalPrivateField = React.createClass({
     children: PropTypes.node,
     divClassName: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -23,10 +22,11 @@ const ProposalPrivateField = React.createClass({
       return (
         <div>
           <p className="excerpt small">
-            <i className="cap cap-lock-2"></i>
-            {this.getIntlMessage('global.form.private')}
+            <i className="cap cap-lock-2" />
+            {<FormattedMessage id="global.form.private" />}
           </p>
-          <div className={`well well-form proposal__private-field ${divClassName}`}>
+          <div
+            className={`well well-form proposal__private-field ${divClassName}`}>
             {children}
           </div>
         </div>
@@ -43,7 +43,6 @@ const ProposalPrivateField = React.createClass({
 
     return children;
   },
-
 });
 
 export default ProposalPrivateField;

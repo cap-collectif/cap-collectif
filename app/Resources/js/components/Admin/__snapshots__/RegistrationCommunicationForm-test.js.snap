@@ -39,7 +39,10 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
     }
     type="submit"
   >
-    Enregistrer
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
   </Button>
 </form>
 `;

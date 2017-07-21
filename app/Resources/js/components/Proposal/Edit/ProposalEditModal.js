@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import { editProposalForm, closeEditProposalModal } from '../../../redux/modules/proposal';
+import {
+  editProposalForm,
+  closeEditProposalModal,
+} from '../../../redux/modules/proposal';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
@@ -16,7 +19,6 @@ const ProposalEditModal = React.createClass({
     isSubmitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const {
@@ -33,16 +35,20 @@ const ProposalEditModal = React.createClass({
           animation={false}
           show={show}
           onHide={() => {
-            if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
+            if (
+              // eslint-disable-next-line no-alert
+              window.confirm(
+                <FormattedMessage id="proposal.confirm_close_modal" />,
+              )
+            ) {
               dispatch(closeEditProposalModal());
             }
           }}
           bsSize="large"
-          aria-labelledby="contained-modal-title-lg"
-        >
+          aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              { this.getIntlMessage('global.edit') }
+              {<FormattedMessage id="global.edit" />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -56,22 +62,25 @@ const ProposalEditModal = React.createClass({
           </Modal.Body>
           <Modal.Footer>
             <CloseButton
-              onClose={() => { dispatch(closeEditProposalModal()); }}
+              onClose={() => {
+                dispatch(closeEditProposalModal());
+              }}
             />
             <SubmitButton
               id="confirm-proposal-edit"
               isSubmitting={isSubmitting}
-              onSubmit={() => { dispatch(editProposalForm()); }}
+              onSubmit={() => {
+                dispatch(editProposalForm());
+              }}
             />
           </Modal.Footer>
         </Modal>
       </div>
     );
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     show: state.proposal.showEditModal,
     isSubmitting: state.proposal.isEditing,

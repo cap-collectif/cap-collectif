@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
@@ -8,7 +8,6 @@ const ProposalCreateButton = React.createClass({
     handleClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { disabled, handleClick } = this.props;
@@ -18,15 +17,13 @@ const ProposalCreateButton = React.createClass({
           id="add-proposal"
           disabled={disabled}
           bsStyle="primary"
-          onClick={disabled ? null : handleClick}
-        >
-          <i className="cap cap-add-1"></i>
-          { ` ${this.getIntlMessage('proposal.add')}`}
+          onClick={disabled ? null : handleClick}>
+          <i className="cap cap-add-1" />
+          <FormattedMessage id="proposal.add" />
         </Button>
       </LoginOverlay>
     );
   },
-
 });
 
 export default ProposalCreateButton;

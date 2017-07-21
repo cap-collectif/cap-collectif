@@ -1,12 +1,10 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import TreeView from '../TreeView';
 
 const Preview = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -22,7 +20,6 @@ const Preview = React.createClass({
       </div>
     );
   },
-
 });
 
 export default Preview;

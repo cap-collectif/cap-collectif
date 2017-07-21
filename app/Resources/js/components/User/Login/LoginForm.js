@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import renderInput from '../../Form/Field';
@@ -8,7 +8,7 @@ import { login as onSubmit } from '../../../redux/modules/user';
 
 type LoginValues = {
   username: string,
-  password: string
+  password: string,
 };
 const formName = 'login';
 
@@ -21,18 +21,17 @@ export const LoginForm = React.createClass({
   propTypes: {
     error: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { error } = this.props;
     return (
       <div>
-        {
-          error &&
-            <Alert bsStyle="danger">
-              <p>{this.getIntlMessage(error)}</p>
-            </Alert>
-        }
+        {error &&
+          <Alert bsStyle="danger">
+            <p>
+              <FormattedMessage id={error} />
+            </p>
+          </Alert>}
         <Field
           name="username"
           type="email"
@@ -40,7 +39,7 @@ export const LoginForm = React.createClass({
           disableValidation
           id="username"
           labelClassName="h5"
-          label={this.getIntlMessage('global.email')}
+          label={<FormattedMessage id="global.email" />}
           autoComplete="email"
           component={renderInput}
         />
@@ -50,16 +49,17 @@ export const LoginForm = React.createClass({
           autoFocus
           disableValidation
           id="password"
-          label={this.getIntlMessage('global.password')}
+          label={<FormattedMessage id="global.password" />}
           labelClassName="w100 h5"
           autoComplete="current-password"
           component={renderInput}
         />
-        <a className="small" href="/resetting/request">{this.getIntlMessage('global.forgot_password')}</a>
+        <a className="small" href="/resetting/request">
+          {<FormattedMessage id="global.forgot_password" />}
+        </a>
       </div>
     );
   },
-
 });
 
 export default reduxForm({

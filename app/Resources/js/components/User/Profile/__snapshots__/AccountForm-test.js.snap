@@ -8,7 +8,12 @@ exports[`<AccountForm /> should render a form 1`] = `
   <Field
     component={[Function]}
     id="account__email"
-    label="Adresse électronique"
+    label={
+      <FormattedMessage
+        id="proposal.vote.form.email"
+        values={Object {}}
+      />
+    }
     labelClassName="col-sm-4"
     name="email"
     type="email"
@@ -34,15 +39,20 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
   >
     <p>
       <FormattedHTMLMessage
-        message="<strong>Mot de passe incorrect.</strong> Entrez votre mot de passe actuel pour modifier votre adresse email."
-        tagName="span"
+        id="user.confirm.wrong_password"
+        values={Object {}}
       />
     </p>
   </Alert>
   <Field
     component={[Function]}
     id="account__email"
-    label="Adresse électronique"
+    label={
+      <FormattedMessage
+        id="proposal.vote.form.email"
+        values={Object {}}
+      />
+    }
     labelClassName="col-sm-4"
     name="email"
     type="email"
@@ -73,7 +83,12 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
   <Field
     component={[Function]}
     id="account__email"
-    label="Adresse électronique"
+    label={
+      <FormattedMessage
+        id="proposal.vote.form.email"
+        values={Object {}}
+      />
+    }
     labelClassName="col-sm-4"
     name="email"
     type="email"
@@ -91,9 +106,12 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
       className="small excerpt"
     >
       <FormattedHTMLMessage
-        email="new-email@test.com"
-        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle."
-        tagName="span"
+        id="user.confirm.profile_help"
+        values={
+          Object {
+            "email": "new-email@test.com",
+          }
+        }
       />
     </p>
     <p
@@ -103,14 +121,20 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
         href="#resend"
         onClick={[Function]}
       >
-        Renvoyer la confirmation
+        <FormattedMessage
+          id="user.confirm.resend"
+          values={Object {}}
+        />
       </a>
        · 
       <a
         href="#cancel"
         onClick={[Function]}
       >
-        Annuler cette modification
+        <FormattedMessage
+          id="user.confirm.cancel"
+          values={Object {}}
+        />
       </a>
     </p>
   </div>
@@ -125,7 +149,12 @@ exports[`<AccountForm /> should render a form with information about new email 1
   <Field
     component={[Function]}
     id="account__email"
-    label="Adresse électronique"
+    label={
+      <FormattedMessage
+        id="proposal.vote.form.email"
+        values={Object {}}
+      />
+    }
     labelClassName="col-sm-4"
     name="email"
     type="email"
@@ -143,9 +172,12 @@ exports[`<AccountForm /> should render a form with information about new email 1
       className="small excerpt"
     >
       <FormattedHTMLMessage
-        email="new-email@test.com"
-        message="Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle."
-        tagName="span"
+        id="user.confirm.profile_help"
+        values={
+          Object {
+            "email": "new-email@test.com",
+          }
+        }
       />
     </p>
     <p
@@ -155,14 +187,20 @@ exports[`<AccountForm /> should render a form with information about new email 1
         href="#resend"
         onClick={[Function]}
       >
-        Renvoyer la confirmation
+        <FormattedMessage
+          id="user.confirm.resend"
+          values={Object {}}
+        />
       </a>
        · 
       <a
         href="#cancel"
         onClick={[Function]}
       >
-        Annuler cette modification
+        <FormattedMessage
+          id="user.confirm.cancel"
+          values={Object {}}
+        />
       </a>
     </p>
   </div>

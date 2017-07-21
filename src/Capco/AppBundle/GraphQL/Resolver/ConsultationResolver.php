@@ -137,7 +137,7 @@ class ConsultationResolver implements ContainerAwareInterface
         if ($type->getOpinions()->count() === 0) {
             return null;
         }
-        $step = $type->getOpinions()->last()->getStep();
+        $step = $type->getOpinions()->first()->getStep();
         $project = $step->getProject();
 
         return $this->container->get('router')->generate(

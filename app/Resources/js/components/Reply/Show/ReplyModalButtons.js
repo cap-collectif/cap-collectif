@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
 import DeleteButton from '../../Form/DeleteButton';
 
@@ -9,7 +8,6 @@ const ReplyModalButtons = React.createClass({
     form: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -30,18 +28,17 @@ const ReplyModalButtons = React.createClass({
     const { reply, form, onChange } = this.props;
     return (
       <span className="pull-left reply__buttons">
-        {
-          form.contribuable && <DeleteButton
+        {form.contribuable &&
+          <DeleteButton
             id={`reply-delete-button${reply.id}`}
             className="reply__delete-btn"
             author={reply.author}
             onClick={this.toggleDeleteModal.bind(null, true)}
             style={{ marginLeft: '15px' }}
             deletable={form.isContribuable}
-          />
-        }
-        {
-          form.contribuable && <div>
+          />}
+        {form.contribuable &&
+          <div>
             <ReplyDeleteModal
               reply={reply}
               form={form}
@@ -49,12 +46,10 @@ const ReplyModalButtons = React.createClass({
               onToggleModal={this.toggleDeleteModal}
               onDelete={onChange}
             />
-          </div>
-        }
+          </div>}
       </span>
     );
   },
-
 });
 
 export default ReplyModalButtons;

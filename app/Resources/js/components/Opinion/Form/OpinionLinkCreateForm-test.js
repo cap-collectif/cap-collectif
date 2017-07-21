@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionLinkCreateForm } from './OpinionLinkCreateForm';
-import IntlData from '../../../translations/FR';
 
 describe('<OpinionLinkCreateForm />', () => {
   const availableTypes = [
@@ -14,7 +13,6 @@ describe('<OpinionLinkCreateForm />', () => {
     currentType: availableTypes[0],
     handleSubmit: jest.fn(),
     opinion: {},
-    ...IntlData,
   };
 
   it('renders correctly', () => {

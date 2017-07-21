@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectStatsFilters } from './ProjectStatsFilters';
-import IntlData from '../../../translations/FR';
 
 describe('<ProjectStatsFilters />', () => {
   const props = {
@@ -15,7 +14,6 @@ describe('<ProjectStatsFilters />', () => {
     onCategoryChange: () => {},
     showThemes: true,
     showDistricts: true,
-    ...IntlData,
   };
 
   const propsWithoutDistrictsAndThemes = {
@@ -28,9 +26,7 @@ describe('<ProjectStatsFilters />', () => {
     onCategoryChange: () => {},
     showThemes: false,
     showDistricts: false,
-    ...IntlData,
   };
-
 
   it('should render 3 filters', () => {
     const wrapper = shallow(<ProjectStatsFilters {...props} />);
@@ -38,7 +34,9 @@ describe('<ProjectStatsFilters />', () => {
   });
 
   it('should render only categories filter', () => {
-    const wrapper = shallow(<ProjectStatsFilters {...propsWithoutDistrictsAndThemes} />);
+    const wrapper = shallow(
+      <ProjectStatsFilters {...propsWithoutDistrictsAndThemes} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,6 @@ const EditButton = React.createClass({
     id: PropTypes.string,
     user: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,10 +31,7 @@ const EditButton = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    const {
-      author,
-      user,
-    } = this.props;
+    const { author, user } = this.props;
     if (author === null || !user) {
       return false;
     }
@@ -43,12 +39,7 @@ const EditButton = React.createClass({
   },
 
   render() {
-    const {
-      className,
-      id,
-      onClick,
-      style,
-    } = this.props;
+    const { className, id, onClick, style } = this.props;
     if (this.isEditable()) {
       const classes = {
         btn: true,
@@ -61,19 +52,17 @@ const EditButton = React.createClass({
           id={id}
           style={style}
           className={classNames(classes, className)}
-          onClick={() => onClick()}
-        >
-            <i className="cap cap-pencil-1"></i>
-          { ` ${this.getIntlMessage('global.edit')}`}
-          </button>
+          onClick={() => onClick()}>
+          <i className="cap cap-pencil-1" />
+          <FormattedMessage id="global.edit" />
+        </button>
       );
     }
     return null;
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

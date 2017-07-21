@@ -11,7 +11,7 @@
         {% if null != section.body %}
             <p>{{ section.body | raw }}</p>
         {% endif %}
-        {{ react_intl_component('IdeasListApp', {'props': props}) }}
+        {{ react_render_component('IdeasListApp', {'props': props}) }}
         <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
     </div>
 {% endif %}

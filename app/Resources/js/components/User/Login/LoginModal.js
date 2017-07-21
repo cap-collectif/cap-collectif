@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
@@ -16,15 +16,9 @@ export const LoginModal = React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
-    const {
-      submitting,
-      show,
-      onClose,
-      onSubmit,
-    } = this.props;
+    const { submitting, show, onClose, onSubmit } = this.props;
     return (
       <Modal
         animation={false}
@@ -32,12 +26,11 @@ export const LoginModal = React.createClass({
         onHide={onClose}
         autoFocus
         bsSize="small"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <form id="login-form" onSubmit={onSubmit}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('global.login')}
+              {<FormattedMessage id="global.login" />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -49,13 +42,10 @@ export const LoginModal = React.createClass({
               id="confirm-login"
               type="submit"
               disabled={submitting}
-              bsStyle="primary"
-            >
-              {
-                submitting
-                ? this.getIntlMessage('global.loading')
-                : this.getIntlMessage('global.login_me')
-              }
+              bsStyle="primary">
+              {submitting
+                ? <FormattedMessage id="global.loading" />
+                : <FormattedMessage id="global.login_me" />}
             </Button>
           </Modal.Footer>
         </form>
@@ -73,7 +63,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     e.preventDefault();
     dispatch(submit('login'));
   },
-  onClose: () => { dispatch(closeLoginModal()); },
+  onClose: () => {
+    dispatch(closeLoginModal());
+  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

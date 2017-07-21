@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
@@ -15,7 +15,8 @@ const UpdateModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+
+  mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -154,8 +155,8 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage(
-            'synthesis.edition.action.update.field.title',
+          {` ${(
+            <FormattedMessage id="synthesis.edition.action.update.field.title" />
           )}`}
         </h2>
         <Input
@@ -173,8 +174,8 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage(
-            'synthesis.edition.action.update.field.description',
+          {` ${(
+            <FormattedMessage id="synthesis.edition.action.update.field.description" />
           )}`}
         </h2>
         <Input
@@ -192,8 +193,8 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${this.getIntlMessage(
-            'synthesis.edition.action.update.field.parent',
+          {` ${(
+            <FormattedMessage id="synthesis.edition.action.update.field.parent" />
           )}`}
         </h2>
         {this.renderParentFinder()}
@@ -228,7 +229,7 @@ const UpdateModal = React.createClass({
         dialogClassName="modal--update">
         <Modal.Header closeButton>
           <Modal.Title>
-            {this.getIntlMessage('synthesis.edition.action.update.title')}
+            {<FormattedMessage id="synthesis.edition.action.update.title" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -238,10 +239,14 @@ const UpdateModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            {this.getIntlMessage('synthesis.edition.action.update.btn_cancel')}
+            {
+              <FormattedMessage id="synthesis.edition.action.update.btn_cancel" />
+            }
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.update}>
-            {this.getIntlMessage('synthesis.edition.action.update.btn_submit')}
+            {
+              <FormattedMessage id="synthesis.edition.action.update.btn_submit" />
+            }
           </Button>
         </Modal.Footer>
       </Modal>

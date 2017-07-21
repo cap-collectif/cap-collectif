@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { State } from '../../../types';
@@ -29,7 +29,6 @@ export const ProposalListFilters = React.createClass({
     showDistrictFilter: PropTypes.bool.isRequired,
     showToggleMapButton: PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -87,12 +86,14 @@ export const ProposalListFilters = React.createClass({
                 dispatch(loadProposals());
               }}
               value={order}>
-              {displayedOrders.map(choice => (
-                <option key={choice} value={choice}>
-                  {this.getIntlMessage(`global.filter_f_${choice}`)}
-                </option>
-              ))})
-              }
+              {displayedOrders.map(choice =>
+                <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
+                  {message =>
+                    <option value={choice}>
+                      {message}
+                    </option>}
+                </FormattedMessage>,
+              )}) }
             </Input>
           </Col>
           <Col xs={12} md={colWidth}>
@@ -108,7 +109,7 @@ export const ProposalListFilters = React.createClass({
             </Col>}
         </Row>
         <Row>
-          {displayedFilters.map((filterName, index) => (
+          {displayedFilters.map((filterName, index) =>
             <Col xs={12} md={colWidth} key={index}>
               <Input
                 type="select"
@@ -118,9 +119,12 @@ export const ProposalListFilters = React.createClass({
                   dispatch(loadProposals());
                 }}
                 value={filters[filterName] || 0}>
-                <option value="0">
-                  {this.getIntlMessage(`global.select_${filterName}`)}
-                </option>
+                <FormattedMessage id={`global.select_${filterName}`}>
+                  {message =>
+                    <option value="0">
+                      {message}
+                    </option>}
+                </FormattedMessage>
                 {this.props[filterName].map(choice => {
                   return (
                     <option key={choice.id} value={choice.id}>
@@ -129,8 +133,8 @@ export const ProposalListFilters = React.createClass({
                   );
                 })}
               </Input>
-            </Col>
-          ))}
+            </Col>,
+          )}
         </Row>
       </div>
     );

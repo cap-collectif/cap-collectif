@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
@@ -42,7 +42,6 @@ export const RegistrationQuestionForm = React.createClass({
   propTypes: {
     showChoices: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { showChoices } = this.props;
@@ -51,7 +50,7 @@ export const RegistrationQuestionForm = React.createClass({
         <Field
           name="question"
           type="text"
-          label={this.getIntlMessage('global.title')}
+          label={<FormattedMessage id="global.title" />}
           component={renderInput}
         />
         <Field
@@ -62,16 +61,16 @@ export const RegistrationQuestionForm = React.createClass({
         />
         <Field name="type" type="select" label={'Type'} component={renderInput}>
           <option value="" disabled>
-            {this.getIntlMessage('global.select')}
+            {<FormattedMessage id="global.select" />}
           </option>
           <option value={0}>
-            {this.getIntlMessage('global.question.types.text')}
+            {<FormattedMessage id="global.question.types.text" />}
           </option>
           {/* <option value={1}>{this.getIntlMessage('global.question.types.textarea')}</option> */}
           {/* <option value={2}>{this.getIntlMessage('global.question.types.editor')}</option> */}
           {/* <option value={3}>{this.getIntlMessage('global.question.types.radio')}</option> */}
           <option value={4}>
-            {this.getIntlMessage('global.question.types.select')}
+            {<FormattedMessage id="global.question.types.select" />}
           </option>
           {/* <option value={5}>{this.getIntlMessage('global.question.types.checkbox')}</option> */}
           {/* <option value={6}>{this.getIntlMessage('global.question.types.ranking')}</option> */}

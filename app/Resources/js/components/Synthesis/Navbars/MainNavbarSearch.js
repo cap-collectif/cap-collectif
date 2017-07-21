@@ -1,16 +1,17 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { Navbar, Button } from 'react-bootstrap';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
 
 const MainNavbarSearch = React.createClass({
   displayName: 'MainNavbarSearch',
+
   contextTypes: {
     router: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+
+  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
@@ -37,7 +38,7 @@ const MainNavbarSearch = React.createClass({
         <form onSubmit={this.submit}>
           <Input
             type="text"
-            placeholder={this.getIntlMessage('synthesis.edition.navbar.search')}
+            placeholder="synthesis.edition.navbar.search"
             buttonAfter={searchButton}
             valueLink={this.linkState('searchTerm')}
           />

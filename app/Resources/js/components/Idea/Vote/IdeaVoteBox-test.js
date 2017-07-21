@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import { IdeaVoteBox } from './IdeaVoteBox';
 import SubmitButton from '../../Form/SubmitButton';
 
@@ -19,7 +19,7 @@ const user = {};
 
 describe('<IdeaVoteBox />', () => {
   it('should render the create idea vote form with no user avatar when user is not logged in', () => {
-    const wrapper = shallow(<IdeaVoteBox {...props} user={null} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteBox {...props} user={null} />);
     expect(wrapper.find('UserPreview')).toHaveLength(0);
     const form = wrapper.find('Connect(IdeaCreateVoteForm)');
     expect(form).toHaveLength(1);
@@ -39,14 +39,14 @@ describe('<IdeaVoteBox />', () => {
   });
 
   it('should render the create idea vote form with user avatar when user is logged in', () => {
-    const wrapper = shallow(<IdeaVoteBox {...props} user={user} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteBox {...props} user={user} />);
     expect(wrapper.find('UserPreview')).toHaveLength(1);
     expect(wrapper.find('Connect(IdeaCreateVoteForm)')).toHaveLength(1);
     expect(wrapper.find(SubmitButton)).toHaveLength(1);
   });
 
   it('should render the delete idea vote form with user avatar when user is logged in and has voted', () => {
-    const wrapper = shallow(<IdeaVoteBox {...propsWithVote} user={user} {...IntlData} />);
+    const wrapper = shallow(<IdeaVoteBox {...propsWithVote} user={user} />);
     expect(wrapper.find('UserPreview')).toHaveLength(1);
     expect(wrapper.find('Connect(IdeaDeleteVoteForm)')).toHaveLength(1);
     expect(wrapper.find(SubmitButton)).toHaveLength(1);

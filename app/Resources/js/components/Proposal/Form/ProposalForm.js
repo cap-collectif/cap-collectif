@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
@@ -32,7 +32,8 @@ export const ProposalForm = React.createClass({
     mode: PropTypes.string,
     proposal: PropTypes.object,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
+
+  mixins: [DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -297,31 +298,31 @@ export const ProposalForm = React.createClass({
       proposal,
     } = this.props;
     const optional = (
-      <span className="excerpt">{` ${this.getIntlMessage(
-        'global.form.optional',
-      )}`}</span>
+      <span className="excerpt">
+        <FormattedMessage id="global.form.optional" />
+      </span>
     );
     const themeLabel = (
       <span>
-        {this.getIntlMessage('proposal.theme')}
+        <FormattedMessage id="proposal.theme" />
         {!form.themeMandatory && optional}
       </span>
     );
     const categoryLabel = (
       <span>
-        {this.getIntlMessage('proposal.category')}
+        <FormattedMessage id="proposal.category" />
         {!form.categoryMandatory && optional}
       </span>
     );
     const districtLabel = (
       <span>
-        {this.getIntlMessage('proposal.district')}
+        <FormattedMessage id="proposal.district" />
         {!form.districtMandatory && optional}
       </span>
     );
     const illustration = (
       <span>
-        {this.getIntlMessage('proposal.media')}
+        <FormattedMessage id="proposal.media" />
         {optional}
       </span>
     );
@@ -335,7 +336,7 @@ export const ProposalForm = React.createClass({
     return (
       <form id="proposal-form">
         {form.description &&
-          <FormattedHTMLMessage message={form.description} />}
+          <div dangerouslySetInnerHTML={{ __html: form.description }} />}
         <Input
           id="proposal_title"
           type="text"
@@ -343,7 +344,7 @@ export const ProposalForm = React.createClass({
           value={this.state.form.title}
           help={form.titleHelpText}
           onChange={this.handleTitleChange}
-          label={this.getIntlMessage('proposal.title')}
+          label={<FormattedMessage id="proposal.title" />}
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
           addonAfter={
@@ -356,9 +357,11 @@ export const ProposalForm = React.createClass({
           <Panel
             header={
               <FormattedMessage
-                message={this.getIntlMessage('proposal.suggest_header')}
-                matches={this.state.suggestions.length}
-                terms={this.state.form.title.split(' ').length}
+                id="proposal.suggest_header"
+                values={{
+                  matches: this.state.suggestions.length,
+                  terms: this.state.form.title.split(' ').length,
+                }}
               />
             }>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
@@ -374,7 +377,7 @@ export const ProposalForm = React.createClass({
               onClick={() => {
                 this.setState({ suggestions: [] });
               }}>
-              {this.getIntlMessage('global.close')}
+              <FormattedMessage id="global.close" />
             </Button>
           </Panel>
         </Collapse>
@@ -388,9 +391,12 @@ export const ProposalForm = React.createClass({
             groupClassName={this.getGroupStyle('theme')}
             errors={this.renderFormErrors('theme')}
             help={form.themeHelpText}>
-            <option value={-1} disabled>
-              {this.getIntlMessage('proposal.select.theme')}
-            </option>
+            <FormattedMessage id="proposal.select.theme">
+              {message =>
+                <option value={-1} disabled>
+                  {message}
+                </option>}
+            </FormattedMessage>
             {themes.map(theme =>
               <option key={theme.id} value={theme.id}>
                 {theme.title}
@@ -407,9 +413,12 @@ export const ProposalForm = React.createClass({
             groupClassName={this.getGroupStyle('category')}
             errors={this.renderFormErrors('category')}
             help={form.categoryHelpText}>
-            <option value={-1} disabled>
-              {this.getIntlMessage('proposal.select.category')}
-            </option>
+            <FormattedMessage id="proposal.select.category">
+              {message =>
+                <option value={-1} disabled>
+                  {message}
+                </option>}
+            </FormattedMessage>
             {categories.map(category => {
               return (
                 <option key={category.id} value={category.id}>
@@ -429,9 +438,12 @@ export const ProposalForm = React.createClass({
             groupClassName={this.getGroupStyle('district')}
             errors={this.renderFormErrors('district')}
             help={form.districtHelpText}>
-            <option value="">
-              {this.getIntlMessage('proposal.select.district')}
-            </option>
+            <FormattedMessage id="proposal.select.district">
+              {message =>
+                <option value="">
+                  {message}
+                </option>}
+            </FormattedMessage>
             {districts.map(district =>
               <option key={district.id} value={district.id}>
                 {district.name}
@@ -441,7 +453,7 @@ export const ProposalForm = React.createClass({
         {form.usingAddress &&
           <div className="form-group">
             <label className="control-label h5" htmlFor="proposal_address">
-              {this.getIntlMessage('proposal.map.form.field')}
+              {<FormattedMessage id="proposal.map.form.field" />}
             </label>
             {form.addressHelpText &&
               <span className="help-block">
@@ -452,9 +464,7 @@ export const ProposalForm = React.createClass({
                 onChange: address => {
                   this.setState(prevState => ({ ...prevState, address }));
                 },
-                placeholder: this.getIntlMessage(
-                  'proposal.map.form.placeholder',
-                ),
+                placeholder: 'proposal.map.form.placeholder',
                 value: this.state.address,
                 type: 'text',
                 id: 'proposal_address',
@@ -490,7 +500,7 @@ export const ProposalForm = React.createClass({
         <Input
           id="proposal_body"
           type="editor"
-          label={this.getIntlMessage('proposal.body')}
+          label={<FormattedMessage id="proposal.body" />}
           groupClassName={this.getGroupStyle('body')}
           errors={this.renderFormErrors('body')}
           valueLink={this.linkState('form.body')}

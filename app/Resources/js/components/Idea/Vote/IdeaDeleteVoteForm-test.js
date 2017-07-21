@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import { IdeaDeleteVoteForm } from './IdeaDeleteVoteForm';
 
 const props = {
@@ -15,7 +15,7 @@ const props = {
 
 describe('<IdeaDeleteVoteForm />', () => {
   it('should render the idea vote form', () => {
-    const wrapper = shallow(<IdeaDeleteVoteForm {...props} {...IntlData} />);
+    const wrapper = shallow(<IdeaDeleteVoteForm {...props} />);
     const form = wrapper.find('IdeaVoteForm');
     expect(form).toHaveLength(1);
     expect(form.prop('idea')).toEqual(props.idea);

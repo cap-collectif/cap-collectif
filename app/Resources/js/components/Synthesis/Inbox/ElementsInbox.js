@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
 import Loader from '../../Utils/Loader';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
@@ -14,7 +14,6 @@ const ElementsInbox = React.createClass({
     params: React.PropTypes.object,
     searchTerm: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -45,12 +44,15 @@ const ElementsInbox = React.createClass({
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
     if (nextProps.params.type !== params.type) {
-      this.setState({
-        isLoading: true,
-        limit: Pagination,
-      }, () => {
-        this.loadElementsByTypeFromServer(nextProps.params.type);
-      });
+      this.setState(
+        {
+          isLoading: true,
+          limit: Pagination,
+        },
+        () => {
+          this.loadElementsByTypeFromServer(nextProps.params.type);
+        },
+      );
     }
   },
 
@@ -87,40 +89,47 @@ const ElementsInbox = React.createClass({
 
   loadMore() {
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
-    this.setState({
-      isLoadingMore: true,
-      limit: this.state.limit + Pagination,
-    }, () => {
-      this.loadElementsByTypeFromServer()
-        .then(() => {
+    this.setState(
+      {
+        isLoadingMore: true,
+        limit: this.state.limit + Pagination,
+      },
+      () => {
+        this.loadElementsByTypeFromServer().then(() => {
           this.resetLoadMoreButton();
-        })
-      ;
-    });
+        });
+      },
+    );
   },
-
 
   renderList() {
     if (!this.state.isLoading) {
       if (this.state.elements.length > 0) {
-        return (
-          <ElementsList elements={this.state.elements} />
-        );
+        return <ElementsList elements={this.state.elements} />;
       }
       return (
         <div className="synthesis__list--empty  text-center">
-          <p className="icon  cap-bubble-attention-6"></p>
-          <p>{this.getIntlMessage('synthesis.edition.list.none')}</p>
+          <p className="icon  cap-bubble-attention-6" />
+          <p>
+            {<FormattedMessage id="synthesis.edition.list.none" />}
+          </p>
         </div>
       );
     }
   },
 
   renderLoadMore() {
-    if (!this.state.isLoading && (this.state.limit < this.state.count || this.state.isLoadingMore)) {
+    if (
+      !this.state.isLoading &&
+      (this.state.limit < this.state.count || this.state.isLoadingMore)
+    ) {
       return (
-        <button className="btn btn-block btn-dark-grey" ref="loadMore" data-loading-text={this.getIntlMessage('synthesis.common.loading')} onClick={this.loadMore.bind(this)}>
-          { this.getIntlMessage('synthesis.common.elements.more') }
+        <button
+          className="btn btn-block btn-dark-grey"
+          ref="loadMore"
+          data-loading-text={<FormattedMessage id="synthesis.common.loading" />}
+          onClick={this.loadMore.bind(this)}>
+          {<FormattedMessage id="synthesis.common.elements.more" />}
         </button>
       );
     }
@@ -135,7 +144,6 @@ const ElementsInbox = React.createClass({
       </div>
     );
   },
-
 });
 
 export default ElementsInbox;

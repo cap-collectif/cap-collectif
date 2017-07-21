@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Alert } from 'react-bootstrap';
-import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
@@ -19,7 +19,6 @@ export const RegistrationModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const {
@@ -38,34 +37,29 @@ export const RegistrationModal = React.createClass({
         onHide={onClose}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
-        enforceFocus={false}
-      >
+        enforceFocus={false}>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {this.getIntlMessage('global.register')}
+            {<FormattedMessage id="global.register" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {
-            textTop &&
-              <Alert bsStyle="info" className="text-center">
-                <FormattedHTMLMessage message={textTop} />
-              </Alert>
-          }
-          <LoginSocialButtons
-            prefix="registration."
-          />
+          {textTop &&
+            <Alert bsStyle="info" className="text-center">
+              <div dangerouslySetInnerHTML={{ __html: textTop }} />
+            </Alert>}
+          <LoginSocialButtons prefix="registration." />
           <RegistrationForm
-            ref={c => this.form = c}
+            ref={c => (this.form = c)}
             onSubmitFail={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
           />
-          {
-            textBottom &&
-              <div className="text-center small excerpt" style={{ marginTop: '15px' }}>
-                <FormattedHTMLMessage message={textBottom} />
-              </div>
-          }
+          {textBottom &&
+            <div
+              className="text-center small excerpt"
+              style={{ marginTop: '15px' }}
+              dangerouslySetInnerHTML={{ __html: textBottom }}
+            />}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -79,19 +73,26 @@ export const RegistrationModal = React.createClass({
       </Modal>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({
-  textTop: state.user.registration_form.topTextDisplayed && state.user.registration_form.topText,
-  textBottom: state.user.registration_form.bottomTextDisplayed && state.user.registration_form.bottomText,
+  textTop:
+    state.user.registration_form.topTextDisplayed &&
+    state.user.registration_form.topText,
+  textBottom:
+    state.user.registration_form.bottomTextDisplayed &&
+    state.user.registration_form.bottomText,
   show: state.user.showRegistrationModal,
   submitting: isSubmitting(form)(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onClose: () => { dispatch(closeRegistrationModal()); },
-  onSubmit: () => { dispatch(submit(form)); },
+  onClose: () => {
+    dispatch(closeRegistrationModal());
+  },
+  onSubmit: () => {
+    dispatch(submit(form));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);

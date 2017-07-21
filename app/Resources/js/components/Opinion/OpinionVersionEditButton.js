@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { showOpinionVersionEditModal } from '../../redux/modules/opinion';
 
@@ -11,7 +11,6 @@ const OpinionVersionEditButton = React.createClass({
     style: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -29,14 +28,15 @@ const OpinionVersionEditButton = React.createClass({
       <div className={className} style={style}>
         <Button
           className="opinion__action--edit pull-right btn--outline btn-dark-gray"
-          onClick={() => { dispatch(showOpinionVersionEditModal()); }}
-        >
-          <i className="cap cap-pencil-1"></i> {this.getIntlMessage('global.edit')}
+          onClick={() => {
+            dispatch(showOpinionVersionEditModal());
+          }}>
+          <i className="cap cap-pencil-1" />{' '}
+          {<FormattedMessage id="global.edit" />}
         </Button>
       </div>
     );
   },
 });
-
 
 export default connect()(OpinionVersionEditButton);

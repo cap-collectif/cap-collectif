@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../../translations/FR';
+
 import IdeaPageBody from './IdeaPageBody';
 
 const props = {
@@ -28,25 +28,19 @@ const ideaWithMediaObjectAndUrl = {
 describe('<IdeaPageBody />', () => {
   it('it should render a div with provided className', () => {
     const wrapper = shallow(
-      <IdeaPageBody {...props} idea={idea} className={classes} {...IntlData} />,
+      <IdeaPageBody {...props} idea={idea} className={classes} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should show idea body, trash block and buttons', () => {
-    const wrapper = shallow(
-      <IdeaPageBody {...props} idea={idea} {...IntlData} />,
-    );
+    const wrapper = shallow(<IdeaPageBody {...props} idea={idea} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render idea media, object and url when provided', () => {
     const wrapper = shallow(
-      <IdeaPageBody
-        {...props}
-        idea={ideaWithMediaObjectAndUrl}
-        {...IntlData}
-      />,
+      <IdeaPageBody {...props} idea={ideaWithMediaObjectAndUrl} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

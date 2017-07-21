@@ -9,14 +9,22 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
     autoFocus={true}
     component={[Function]}
     disableValidation={true}
-    label="Section"
+    label={
+      <FormattedMessage
+        id="opinion.link.select_type"
+        values={Object {}}
+      />
+    }
     name="opinionType"
     type="select"
   >
     <option
       disabled={true}
     >
-      Choisir une valeur
+      <FormattedMessage
+        id="global.select"
+        values={Object {}}
+      />
     </option>
     <option
       value="1337"
@@ -26,7 +34,12 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
     autoFocus={true}
     component={[Function]}
     id="opinion_title"
-    label="Titre*"
+    label={
+      <FormattedMessage
+        id="opinion.title"
+        values={Object {}}
+      />
+    }
     name="title"
     type="text"
   />
@@ -34,7 +47,12 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
     autoFocus={true}
     component={[Function]}
     id="opinion_body"
-    label="Proposition*"
+    label={
+      <FormattedMessage
+        id="opinion.body"
+        values={Object {}}
+      />
+    }
     name="body"
     type="editor"
   />

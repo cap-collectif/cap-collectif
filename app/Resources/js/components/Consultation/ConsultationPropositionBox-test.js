@@ -3,11 +3,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ConsultationPropositionBox } from './ConsultationPropositionBox';
-import IntlData from '../../translations/FR';
 
 describe('<ConsultationPropositionBox />', () => {
   const props = {
-    ...IntlData,
     step: { id: 'stepId' },
   };
 

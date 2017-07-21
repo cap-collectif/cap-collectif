@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
 
 const OpinionSourceList = React.createClass({
   propTypes: {
     sources: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { sources } = this.props;
@@ -16,7 +15,7 @@ const OpinionSourceList = React.createClass({
         <p className="text-center">
           <i className="cap-32 cap-baloon-1" />
           <br />
-          {this.getIntlMessage('opinion.no_new_source')}
+          {<FormattedMessage id="opinion.no_new_source" />}
         </p>
       );
     }

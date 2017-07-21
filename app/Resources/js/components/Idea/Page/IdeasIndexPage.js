@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import IdeaStore from '../../../stores/IdeaStore';
 import IdeaActions from '../../../actions/IdeaActions';
 import { DEFAULT_IDEAS_PAGINATION } from '../../../constants/IdeaConstants';
@@ -20,7 +19,6 @@ const IdeasIndexPage = React.createClass({
     trashUrl: React.PropTypes.string,
     description: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

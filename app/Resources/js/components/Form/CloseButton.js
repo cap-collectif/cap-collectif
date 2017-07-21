@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const CloseButton = React.createClass({
   propTypes: {
     onClose: React.PropTypes.func.isRequired,
     label: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -16,17 +15,13 @@ const CloseButton = React.createClass({
   },
 
   render() {
-    const {
-      label,
-      onClose,
-    } = this.props;
+    const { label, onClose } = this.props;
     return (
       <Button onClick={onClose}>
-        { this.getIntlMessage(label) }
+        {<FormattedMessage id={label} />}
       </Button>
     );
   },
-
 });
 
 export default CloseButton;

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
 
 const OpinionAppendix = React.createClass({
@@ -8,7 +8,6 @@ const OpinionAppendix = React.createClass({
     appendix: React.PropTypes.object.isRequired,
     expanded: React.PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     const { expanded } = this.props;
@@ -63,12 +62,16 @@ const OpinionAppendix = React.createClass({
           title={
             this.state.expanded
               ? <FormattedMessage
-                  message={this.getIntlMessage('opinion.appendices.hide')}
-                  title={this.props.appendix.type.title}
+                  id="opinion.appendices.hide"
+                  values={{
+                    title: this.props.appendix.type.title,
+                  }}
                 />
               : <FormattedMessage
-                  message={this.getIntlMessage('opinion.appendices.show')}
-                  title={this.props.appendix.type.title}
+                  id="opinion.appendices.show"
+                  values={{
+                    title: this.props.appendix.type.title,
+                  }}
                 />
           }>
           {this.renderCaret()}

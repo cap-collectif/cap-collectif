@@ -126,7 +126,7 @@
 
         <div style="margin-top: 15px" class="share-button-wrapper">
 
-            {{ react_intl_component('ShareButtonDropdownApp', {
+            {{ react_render_component('ShareButtonDropdownApp', {
                 'props': {
                     'url': project | capco_first_step_link(true),
                     'title': project.title,

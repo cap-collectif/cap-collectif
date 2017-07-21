@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
@@ -17,7 +17,6 @@ export const IdeaEditModal = React.createClass({
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { idea, show, dispatch, submitting } = this.props;
@@ -33,7 +32,7 @@ export const IdeaEditModal = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {this.getIntlMessage('global.edit')}
+              {<FormattedMessage id="global.edit" />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

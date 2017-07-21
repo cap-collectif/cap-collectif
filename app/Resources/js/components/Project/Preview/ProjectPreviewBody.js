@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
@@ -10,7 +9,6 @@ const ProjectPreviewBody = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   shouldRenderProgressBar() {
     const { project } = this.props;
@@ -47,7 +45,9 @@ const ProjectPreviewBody = React.createClass({
     }
     const link = externalLink || project._links.show;
     const tooltip = (
-      <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>
+      <Tooltip id={`project-${project.id}-tooltip`}>
+        {project.title}
+      </Tooltip>
     );
 
     return (
@@ -60,7 +60,9 @@ const ProjectPreviewBody = React.createClass({
             <OverlayTrigger placement="top" overlay={tooltip}>
               <a href={link}>
                 <div style={{ width: '98%' }}>
-                  <Truncate lines={3}>{project.title}</Truncate>
+                  <Truncate lines={3}>
+                    {project.title}
+                  </Truncate>
                   {externalLink &&
                     <svg
                       style={{

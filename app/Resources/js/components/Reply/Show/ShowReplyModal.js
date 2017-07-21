@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IntlMixin, FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import ResponseValue from './ResponseValue';
 import ReplyModalButtons from './ReplyModalButtons';
@@ -14,13 +14,9 @@ const ShowReplyModal = React.createClass({
     form: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   onChange() {
-    const {
-      form,
-      onClose,
-    } = this.props;
+    const { form, onClose } = this.props;
     onClose();
     ReplyActions.loadUserReplies(form.id);
   },
@@ -35,38 +31,40 @@ const ShowReplyModal = React.createClass({
         onHide={onClose}
         show={show}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg"
-      >
+        aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage
-                message={this.getIntlMessage('reply.show.link')}
-                date={
+              id="reply.show.link"
+              values={{
+                date: (
                   <FormattedDate
                     value={moment(reply.createdAt)}
-                    day="numeric" month="long" year="numeric"
+                    day="numeric"
+                    month="long"
+                    year="numeric"
                   />
-                }
-                time={
+                ),
+                time: (
                   <FormattedDate
                     value={moment(reply.createdAt)}
-                    hour="numeric" minute="numeric"
+                    hour="numeric"
+                    minute="numeric"
                   />
-                }
+                ),
+              }}
             />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {
-            reply.responses.map((response, index) => {
-              return (
-                <div key={index}>
-                  {response.field.question}
-                  <ResponseValue response={response} />
-                </div>
-              );
-            })
-          }
+          {reply.responses.map((response, index) => {
+            return (
+              <div key={index}>
+                {response.field.question}
+                <ResponseValue response={response} />
+              </div>
+            );
+          })}
         </Modal.Body>
         <Modal.Footer>
           <ReplyModalButtons
@@ -80,7 +78,6 @@ const ShowReplyModal = React.createClass({
       </Modal>
     );
   },
-
 });
 
 export default ShowReplyModal;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import ElementTitle from './ElementTitle';
 
 const ElementBreadcrumb = React.createClass({
@@ -7,7 +6,6 @@ const ElementBreadcrumb = React.createClass({
     element: React.PropTypes.object,
     link: React.PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -18,10 +16,12 @@ const ElementBreadcrumb = React.createClass({
   getElementBreadcrumbItems(element) {
     const items = [];
     if (element.path) {
-      element.path.split('|').map((data) => {
+      element.path.split('|').map(data => {
         const splitted = data.split('-');
         const title = splitted.slice(0, splitted.length - 5).join('-');
-        const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
+        const id = splitted
+          .slice(splitted.length - 5, splitted.length)
+          .join('-');
         const item = {
           title: title || null,
           id,
@@ -56,17 +56,13 @@ const ElementBreadcrumb = React.createClass({
     const items = this.getElementBreadcrumbItems(element);
     return (
       <p className="element__breadcrumb">
-        <i className="cap cap-folder-2"></i>
-        {
-          items.map((item, index) => {
-            return this.renderBreadCrumbItem(item, index);
-          })
-          }
+        <i className="cap cap-folder-2" />
+        {items.map((item, index) => {
+          return this.renderBreadCrumbItem(item, index);
+        })}
       </p>
     );
   },
-
-
 });
 
 export default ElementBreadcrumb;

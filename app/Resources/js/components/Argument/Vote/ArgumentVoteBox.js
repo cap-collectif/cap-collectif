@@ -1,5 +1,4 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentVoteButton from './ArgumentVoteButton';
 
@@ -7,7 +6,6 @@ const ArgumentVoteBox = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     const { argument } = this.props;
@@ -31,8 +29,8 @@ const ArgumentVoteBox = React.createClass({
   render() {
     const { hasVoted } = this.state;
     const { argument } = this.props;
-    const hasVotedSince = (hasVoted && !argument.hasUserVoted);
-    const hasUnVotedSince = (!hasVoted && argument.hasUserVoted);
+    const hasVotedSince = hasVoted && !argument.hasUserVoted;
+    const hasUnVotedSince = !hasVoted && argument.hasUserVoted;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
@@ -42,15 +40,15 @@ const ArgumentVoteBox = React.createClass({
             hasVoted={showVoted}
             onClick={showVoted ? this.deleteVote : this.vote}
           />
-        </form>
-        { ' ' }
+        </form>{' '}
         <span className="opinion__votes-nb">
-          { argument.votesCount + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
+          {argument.votesCount +
+            (hasVotedSince ? 1 : 0) +
+            (hasUnVotedSince ? -1 : 0)}
         </span>
       </span>
     );
   },
-
 });
 
 export default ArgumentVoteBox;

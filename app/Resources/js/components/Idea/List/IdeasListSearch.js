@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
 import IdeaActions from '../../../actions/IdeaActions';
@@ -10,7 +9,8 @@ const IdeasListSearch = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin],
+
+  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
@@ -21,7 +21,7 @@ const IdeasListSearch = React.createClass({
   handleSubmit(e) {
     const { onChange } = this.props;
     e.preventDefault();
-    let value = this._input.getValue();
+    let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
     IdeaActions.changeSearchTerms(value);
     this.reload();
@@ -45,7 +45,7 @@ const IdeasListSearch = React.createClass({
           type="text"
           // $FlowFixMe
           ref={c => (this._input = c)}
-          placeholder={this.getIntlMessage('idea.search')}
+          placeholder="idea.search"
           buttonAfter={button}
           valueLink={this.linkState('value')}
           groupClassName="idea-search-group pull-right"

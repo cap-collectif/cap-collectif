@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
@@ -16,7 +15,6 @@ const ArgumentButtons = React.createClass({
     argument: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {

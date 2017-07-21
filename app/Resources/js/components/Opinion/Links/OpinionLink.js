@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import OpinionPreview from '../OpinionPreview';
@@ -9,7 +8,6 @@ const OpinionLink = React.createClass({
   propTypes: {
     link: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { link } = this.props;

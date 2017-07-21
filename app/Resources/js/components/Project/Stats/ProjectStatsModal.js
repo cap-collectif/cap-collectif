@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Modal, ListGroup } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import ProjectStatsListItem from './ProjectStatsListItem';
@@ -18,7 +18,6 @@ const ProjectStatsModal = React.createClass({
     theme: React.PropTypes.number.isRequired,
     district: React.PropTypes.number.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     const { data } = this.props;
@@ -85,7 +84,7 @@ const ProjectStatsModal = React.createClass({
           disabled={this.state.showModal}
           bsStyle="primary"
           className="btn--outline stats__all-button">
-          {this.getIntlMessage('project.stats.display.all')}
+          {<FormattedMessage id="project.stats.display.all" />}
         </Button>
         <Modal
           id={`stats-modal-${stepId}-${type}`}
@@ -95,7 +94,7 @@ const ProjectStatsModal = React.createClass({
           aria-labelledby={`${id}-title`}>
           <Modal.Header closeButton>
             <Modal.Title id={`${id}-title`}>
-              <i className={icon} /> {this.getIntlMessage(label)}
+              <i className={icon} /> {<FormattedMessage id={label} />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

@@ -1,13 +1,10 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationForm } from './RegistrationForm';
-import IntlData from '../../../translations/FR';
 
 describe('<RegistrationForm />', () => {
   const props = {
-    ...IntlData,
     addUserTypeField: false,
     addZipcodeField: false,
     addCaptchaField: true,

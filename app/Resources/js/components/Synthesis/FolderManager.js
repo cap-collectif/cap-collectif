@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
@@ -14,7 +14,6 @@ const FolderManager = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -48,7 +47,11 @@ const FolderManager = React.createClass({
   toggleExpand(element) {
     const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored', element.id);
+      SynthesisElementActions.loadElementsTreeFromServer(
+        synthesis.id,
+        'notIgnored',
+        element.id,
+      );
     }
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
@@ -86,7 +89,10 @@ const FolderManager = React.createClass({
     });
     if (element.childrenCount > 0) {
       return (
-        <i className={classes} onClick={this.toggleExpand.bind(this, element)}></i>
+        <i
+          className={classes}
+          onClick={this.toggleExpand.bind(this, element)}
+        />
       );
     }
   },
@@ -95,19 +101,16 @@ const FolderManager = React.createClass({
     if (elements) {
       return (
         <ul className={`tree__list tree--level-${level}`}>
-          {
-            elements.map((element, index) => {
-              return (
-                <li className="tree__item" key={index}>
-                  {this.renderTreeItemContent(element)}
-                  {this.state.expanded[element.id]
-                    ? this.renderTreeItems(element.children, level + 1)
-                    : null
-                  }
-                </li>
-              );
-            })
-          }
+          {elements.map((element, index) => {
+            return (
+              <li className="tree__item" key={index}>
+                {this.renderTreeItemContent(element)}
+                {this.state.expanded[element.id]
+                  ? this.renderTreeItems(element.children, level + 1)
+                  : null}
+              </li>
+            );
+          })}
         </ul>
       );
     }
@@ -123,8 +126,10 @@ const FolderManager = React.createClass({
         <br />
         <span className="small excerpt">
           <FormattedMessage
-            message={this.getIntlMessage('synthesis.common.elements.nb')}
-            num={element.childrenCount}
+            id="synthesis.common.elements.nb"
+            values={{
+              num: element.childrenCount,
+            }}
           />
         </span>
       </div>
@@ -139,7 +144,6 @@ const FolderManager = React.createClass({
       </div>
     );
   },
-
 });
 
 export default FolderManager;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedNumber } from 'react-intl';
+import { FormattedNumber } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 
 const ProjectStatsListItem = React.createClass({
@@ -8,14 +8,9 @@ const ProjectStatsListItem = React.createClass({
     showPercentage: React.PropTypes.bool.isRequired,
     isCurrency: React.PropTypes.bool.isRequired,
   },
-  mixins: [IntlMixin],
 
   getFormattedValue() {
-    const {
-      isCurrency,
-      item,
-      showPercentage,
-    } = this.props;
+    const { isCurrency, item, showPercentage } = this.props;
     if (showPercentage) {
       return `${item.percentage}%`;
     }
@@ -37,7 +32,10 @@ const ProjectStatsListItem = React.createClass({
     const { item } = this.props;
     return (
       <ListGroupItem className="stats__list__row">
-        <span className="stats__list__bar" style={{ width: `${item.percentage}%` }} />
+        <span
+          className="stats__list__bar"
+          style={{ width: `${item.percentage}%` }}
+        />
         <div className="stats__list__value">
           <span className="badge badge-primary pull-right">
             {this.getFormattedValue()}
@@ -47,7 +45,6 @@ const ProjectStatsListItem = React.createClass({
       </ListGroupItem>
     );
   },
-
 });
 
 export default ProjectStatsListItem;

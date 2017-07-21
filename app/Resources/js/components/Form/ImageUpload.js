@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Button, Label } from 'react-bootstrap';
@@ -21,7 +21,7 @@ const ImageUpload = React.createClass({
     disablePreview: PropTypes.bool,
     files: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
+
   _deleteCheckbox: Input,
 
   getDefaultProps() {
@@ -89,7 +89,7 @@ const ImageUpload = React.createClass({
 
   onToggleDelete() {
     const { valueLink, onChange } = this.props;
-    const deleteValue = !this._deleteCheckbox.getValue();
+    const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
       if (valueLink) {
         valueLink.requestChange(null);
@@ -152,13 +152,13 @@ const ImageUpload = React.createClass({
             className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
               {multiple
-                ? this.getIntlMessage('global.image_uploader.file.dropzone')
-                : this.getIntlMessage('global.image_uploader.image.dropzone')}
+                ? <FormattedMessage id="global.image_uploader.file.dropzone" />
+                : <FormattedMessage id="global.image_uploader.image.dropzone" />}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn" bsStyle="primary">
                   {multiple
-                    ? this.getIntlMessage('global.image_uploader.file.btn')
-                    : this.getIntlMessage('global.image_uploader.image.btn')}
+                    ? <FormattedMessage id="global.image_uploader.file.btn" />
+                    : <FormattedMessage id="global.image_uploader.image.btn" />}
                 </Button>
               </p>
             </div>
@@ -186,7 +186,7 @@ const ImageUpload = React.createClass({
         {!disablePreview &&
           <Col xs={12} sm={12}>
             <p className="h5 text-center">
-              {this.getIntlMessage('global.image_uploader.image.preview')}
+              {<FormattedMessage id="global.image_uploader.image.preview" />}
             </p>
             <div className="image-uploader__preview text-center">
               {this.state.preview && <img alt="" src={this.state.preview} />}
@@ -197,9 +197,9 @@ const ImageUpload = React.createClass({
                 name="image-uploader__delete"
                 onChange={this.onToggleDelete}
                 ref={c => (this._deleteCheckbox = c)}
-                children={this.getIntlMessage(
-                  'global.image_uploader.image.delete',
-                )}
+                children={
+                  <FormattedMessage id="global.image_uploader.image.delete" />
+                }
               />}
           </Col>}
       </Row>

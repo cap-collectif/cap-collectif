@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 
 const Loader = React.createClass({
   propTypes: {
@@ -10,7 +9,6 @@ const Loader = React.createClass({
       PropTypes.arrayOf(PropTypes.node),
     ]),
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -25,17 +23,17 @@ const Loader = React.createClass({
       return (
         <div className="row">
           <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-            <div className="spinner-loader"></div>
+            <div className="spinner-loader" />
           </div>
         </div>
       );
     }
     return Array.isArray(children)
-      ? <div>{children}</div>
-      : children
-    ;
+      ? <div>
+          {children}
+        </div>
+      : children;
   },
-
 });
 
 export default Loader;

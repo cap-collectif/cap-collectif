@@ -1,13 +1,10 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LoginOverlay } from './LoginOverlay';
-import IntlData from '../../translations/FR';
 
 describe('<LoginOverlay />', () => {
   const props = {
-    ...IntlData,
     openLoginModal: jest.fn(),
     isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,

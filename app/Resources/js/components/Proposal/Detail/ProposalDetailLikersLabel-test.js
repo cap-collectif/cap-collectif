@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalDetailLikersLabel />', () => {
   const oneLiker = [
@@ -21,18 +20,22 @@ describe('<ProposalDetailLikersLabel />', () => {
   ];
 
   it('should render truncated liker name when only one liker', () => {
-    const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLiker} {...IntlData} />);
-    expect(wrapper.find('Truncate').prop('children')).toEqual(oneLiker[0].displayName);
+    const wrapper = shallow(<ProposalDetailLikersLabel likers={oneLiker} />);
+    expect(wrapper.find('Truncate').prop('children')).toEqual(
+      oneLiker[0].displayName,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a <FormattedMessage/> when several likers', () => {
-    const wrapper = shallow(<ProposalDetailLikersLabel likers={severalLikers} {...IntlData} />);
-    expect(wrapper.find('FormattedMessage')).toHaveLength(1);
-    expect(wrapper.find('FormattedMessage').prop('num')).toEqual(2);
+    const wrapper = shallow(
+      <ProposalDetailLikersLabel likers={severalLikers} />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render nothing when no likers', () => {
-    const wrapper = shallow(<ProposalDetailLikersLabel likers={[]} {...IntlData} />);
-    expect(wrapper.children()).toHaveLength(0);
+    const wrapper = shallow(<ProposalDetailLikersLabel likers={[]} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });

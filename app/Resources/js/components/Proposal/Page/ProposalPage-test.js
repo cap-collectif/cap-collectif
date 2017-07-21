@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { ProposalPage } from './ProposalPage';
-import IntlData from '../../../translations/FR';
+
 import {
   VOTE_TYPE_SIMPLE,
   VOTE_TYPE_DISABLED,
@@ -55,8 +55,9 @@ describe('<ProposalPage />', () => {
 
   it('should render a proposal page', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalNoVotes} {...IntlData} />,
+      <ProposalPage {...props} proposal={proposalNoVotes} />,
     );
+    expect(wrapper).toMatchSnapshot();
 
     const alert = wrapper.find('ProposalPageAlert');
     expect(alert).toHaveLength(1);
@@ -87,13 +88,12 @@ describe('<ProposalPage />', () => {
     const contentItem = navItems.first();
     expect(contentItem.prop('eventKey')).toEqual('content');
     expect(contentItem.prop('className')).toEqual('tabs__pill');
-    expect(contentItem.children().first().text()).toEqual('Présentation');
     const commentsItem = navItems.at(1);
     expect(commentsItem.prop('eventKey')).toEqual('comments');
     expect(commentsItem.prop('className')).toEqual('tabs__pill');
-    expect(commentsItem.children().first().text()).toEqual('Discussions');
-    expect(commentsItem.find('.badge').text())
-      .toEqual(`${proposalNoVotes.comments_count}`);
+    expect(commentsItem.find('.badge').text()).toEqual(
+      `${proposalNoVotes.comments_count}`,
+    );
     const voteButtonWrapper = tabsPills.find(
       'Connect(ProposalVoteButtonWrapper)',
     );
@@ -141,8 +141,10 @@ describe('<ProposalPage />', () => {
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={proposalWithVotes} {...IntlData} />,
+      <ProposalPage {...props} proposal={proposalWithVotes} />,
     );
+    expect(wrapper).toMatchSnapshot();
+
     const tabContainer = wrapper.find(Tab.Container);
     const tabsPills = tabContainer.find('div.tabs__pills');
     const nav = tabsPills.find(Nav);
@@ -151,9 +153,9 @@ describe('<ProposalPage />', () => {
     const votesItem = navItems.at(2);
     expect(votesItem.prop('eventKey')).toEqual('votes');
     expect(votesItem.prop('className')).toEqual('tabs__pill');
-    expect(votesItem.children().first().text()).toEqual('Votes');
-    expect(votesItem.find('.badge').text())
-      .toEqual(`${proposalWithVotes.votesCountByStepId[2]}`);
+    expect(votesItem.find('.badge').text()).toEqual(
+      `${proposalWithVotes.votesCountByStepId[2]}`,
+    );
     const tabContent = tabContainer.find(Tab.Content);
     const tabPanes = tabContent.find(Tab.Pane);
     expect(tabPanes).toHaveLength(4);
@@ -168,11 +170,7 @@ describe('<ProposalPage />', () => {
 
   it('should not render a vote modal if proposal has no votabledStep', () => {
     const wrapper = shallow(
-      <ProposalPage
-        {...props}
-        proposal={proposalWithoutVotableStep}
-        {...IntlData}
-      />,
+      <ProposalPage {...props} proposal={proposalWithoutVotableStep} />,
     );
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');

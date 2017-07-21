@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntlData from '../../translations/FR';
+
 import Radio from './Radio';
 
 describe('<Radio />', () => {
@@ -25,25 +25,16 @@ describe('<Radio />', () => {
     onChange: jest.fn(),
     getGroupStyle: jest.fn(),
     renderFormErrors: jest.fn(),
-    ...IntlData,
   };
 
   it('should render correctly', () => {
-    const wrapper = shallow(
-      <Radio
-        field={field}
-        {...props}
-      />,
-    );
+    const wrapper = shallow(<Radio field={field} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with other allowed', () => {
     const wrapper = shallow(
-      <Radio
-        field={{ ...field, isOtherAllowed: true }}
-        {...props}
-      />,
+      <Radio field={{ ...field, isOtherAllowed: true }} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

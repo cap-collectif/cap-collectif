@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalVoteBasketWidget } from './ProposalVoteBasketWidget';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalVoteBasketWidget />', () => {
   const simpleWithoutLimitProps = {
@@ -18,7 +17,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     userVotesCountByStepId: { '1': 12 },
     creditsLeftByStepId: {},
     image: 'http://capco.dev/images.png',
-    ...IntlData,
   };
 
   const simpleWithLimitProps = {
@@ -35,7 +33,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     userVotesCountByStepId: { '1': 1 },
     creditsLeftByStepId: {},
     image: 'http://capco.dev/images.png',
-    ...IntlData,
   };
 
   const budgetProps = {
@@ -51,7 +48,6 @@ describe('<ProposalVoteBasketWidget />', () => {
     userVotesCountByStepId: { '1': 12 },
     creditsLeftByStepId: { '1': 120000 },
     image: 'http://capco.dev/images.png',
-    ...IntlData,
   };
 
   it('should render a vote widget for a simple vote without limit', () => {

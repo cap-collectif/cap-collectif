@@ -2,22 +2,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AccountForm } from './AccountForm';
-import IntlData from '../../../translations/FR';
 
 describe('<AccountForm />', () => {
   const props = {
     dispatch: () => {},
     handleSubmit: () => {},
     initialValues: { email: 'initial-email@gmail.fr' },
-    ...IntlData,
   };
 
   it('should render a form', () => {
     const wrapper = shallow(
-      <AccountForm
-        {...props}
-        confirmationEmailResent={false}
-      />,
+      <AccountForm {...props} confirmationEmailResent={false} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

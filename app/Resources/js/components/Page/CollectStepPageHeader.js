@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ProposalCreate from '../Proposal/Create/ProposalCreate';
 
 const CollectStepPageHeader = React.createClass({
@@ -11,47 +11,42 @@ const CollectStepPageHeader = React.createClass({
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
-    const {
-      categories,
-      queryCount,
-      total,
-      countFusions,
-      form,
-    } = this.props;
+    const { categories, queryCount, total, countFusions, form } = this.props;
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
-        {
-          typeof queryCount !== 'undefined' && total !== queryCount
-            ? <FormattedMessage
-              message={this.getIntlMessage('proposal.count_with_total')}
-              num={queryCount}
-              total={total}
-              />
-          : <FormattedMessage
-            message={this.getIntlMessage('proposal.count')}
-            num={total}
+        {typeof queryCount !== 'undefined' && total !== queryCount
+          ? <FormattedMessage
+              id="proposal.count_with_total"
+              values={{
+                num: queryCount,
+                total,
+              }}
             />
-        }
-        { ' ' }
-        <span style={{ color: '#999', fontWeight: 300 }}>
-          <FormattedMessage
-            message={this.getIntlMessage('proposal.count_fusions')}
-            num={countFusions}
-          />
-        </span>
+          : <FormattedMessage
+              id="proposal.count"
+              values={{
+                num: total,
+              }}
+            />}{' '}
+        {countFusions > 0 &&
+          <span style={{ color: '#999', fontWeight: 300 }}>
+            <FormattedMessage
+              id="proposal.count_fusions"
+              values={{
+                num: countFusions,
+              }}
+            />
+          </span>}
         <span className="pull-right">
-          <ProposalCreate
-            form={form}
-            categories={categories}
-          />
+          <ProposalCreate form={form} categories={categories} />
         </span>
       </h3>
     );
   },
-
 });
 
-export default connect(state => ({ queryCount: state.proposal.queryCount }))(CollectStepPageHeader);
+export default connect(state => ({ queryCount: state.proposal.queryCount }))(
+  CollectStepPageHeader,
+);

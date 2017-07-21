@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 
 const SubmitButton = React.createClass({
   displayName: 'SubmitButton',
+
   propTypes: {
     id: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
@@ -18,7 +19,6 @@ const SubmitButton = React.createClass({
     loginOverlay: PropTypes.bool,
     user: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,12 +32,7 @@ const SubmitButton = React.createClass({
   },
 
   onClick() {
-    const {
-      isSubmitting,
-      loginOverlay,
-      onSubmit,
-      user,
-    } = this.props;
+    const { isSubmitting, loginOverlay, onSubmit, user } = this.props;
     if ((loginOverlay && !user) || isSubmitting) {
       return null;
     }
@@ -64,20 +59,17 @@ const SubmitButton = React.createClass({
           onClick={this.onClick}
           bsStyle={bsStyle}
           className={className}
-          style={style}
-        >
+          style={style}>
           {isSubmitting
-            ? this.getIntlMessage('global.loading')
-            : this.getIntlMessage(label)
-          }
+            ? <FormattedMessage id="global.loading" />
+            : <FormattedMessage id={label} />}
         </Button>
       </LoginOverlay>
     );
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

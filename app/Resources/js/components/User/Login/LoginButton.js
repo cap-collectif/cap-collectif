@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
@@ -14,7 +14,6 @@ export const LoginButton = React.createClass({
     className: PropTypes.string,
     style: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -28,22 +27,19 @@ export const LoginButton = React.createClass({
     const { onClick, style, bsStyle, className } = this.props;
     return (
       <span style={style}>
-        <Button
-          bsStyle={bsStyle}
-          onClick={onClick}
-          className={className}
-        >
-          { this.getIntlMessage('global.login') }
+        <Button bsStyle={bsStyle} onClick={onClick} className={className}>
+          {<FormattedMessage id="global.login" />}
         </Button>
         <LoginModal />
       </span>
     );
   },
-
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onClick: () => { dispatch(showLoginModal()); },
+  onClick: () => {
+    dispatch(showLoginModal());
+  },
 });
 const connector = connect(null, mapDispatchToProps);
 export default connector(LoginButton);

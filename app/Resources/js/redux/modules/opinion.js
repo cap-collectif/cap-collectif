@@ -313,7 +313,7 @@ export function* fetchAllOpinionVotes(
 }
 
 export function* saga(): Generator<*, *, *> {
-  yield takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
+  yield* takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
 export const fetchOpinionVotes = (
@@ -630,8 +630,7 @@ export const reducer = (
       );
     }
     case OPINION_VOTES_FETCH_FAILED: {
-      // eslint-disable-next-line no-console
-      console.log(OPINION_VOTES_FETCH_FAILED, action.error);
+      console.log(OPINION_VOTES_FETCH_FAILED, action.error); // eslint-disable-line no-console
       return state;
     }
     default:

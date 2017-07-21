@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalList /> should not render list if proposal is not provided 1`] = `
+<p
+  className="p--centered"
+  style={
+    Object {
+      "margin-bottom": "40px",
+    }
+  }
+>
+  <FormattedMessage
+    id="proposal.private.empty"
+    values={Object {}}
+  />
+</p>
+`;
+
+exports[`<ProposalList /> should render a proposal list 1`] = `
+<div>
+  <Row
+    bsClass="row"
+    className="media-list opinion__list"
+    componentClass="ul"
+  >
+    <ProposalPreview
+      proposal={
+        Object {
+          "body": "test1",
+          "id": 1,
+        }
+      }
+      showThemes={false}
+      step={
+        Object {
+          "id": 1,
+          "open": "false",
+          "title": "Step 1",
+        }
+      }
+    />
+    <ProposalPreview
+      proposal={
+        Object {
+          "body": "test2",
+          "id": 2,
+        }
+      }
+      showThemes={false}
+      step={
+        Object {
+          "id": 1,
+          "open": "false",
+          "title": "Step 1",
+        }
+      }
+    />
+  </Row>
+</div>
+`;

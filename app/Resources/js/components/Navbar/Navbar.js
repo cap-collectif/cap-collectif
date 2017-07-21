@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
@@ -10,7 +10,6 @@ const Navbar = React.createClass({
     logo: PropTypes.string,
     items: PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -92,14 +91,15 @@ const Navbar = React.createClass({
   render() {
     const { logo } = this.props;
     const { items, moreItems } = this.state;
-    const moreItem = moreItems.length > 0
-      ? {
-          id: 'see-more',
-          title: this.getIntlMessage('global.navbar.see_more'),
-          hasEnabledFeature: true,
-          children: moreItems,
-        }
-      : null;
+    const moreItem =
+      moreItems.length > 0
+        ? {
+            id: 'see-more',
+            title: <FormattedMessage id="global.navbar.see_more" />,
+            hasEnabledFeature: true,
+            children: moreItems,
+          }
+        : null;
     return (
       <Navigation
         id="main-navbar"
@@ -110,12 +110,12 @@ const Navbar = React.createClass({
               <ul className="skip-links-list clearfix">
                 <li>
                   <a href="#navbar">
-                    {this.getIntlMessage('navbar.skip_links.menu')}
+                    <FormattedMessage id="navbar.skip_links.menu" />
                   </a>
                 </li>
                 <li>
                   <a href="#main">
-                    {this.getIntlMessage('navbar.skip_links.content')}
+                    <FormattedMessage id="navbar.skip_links.content" />
                   </a>
                 </li>
               </ul>
@@ -128,8 +128,8 @@ const Navbar = React.createClass({
               <a href="/">
                 <img
                   src={logo}
-                  title={this.getIntlMessage('navbar.homepage')}
-                  alt={this.getIntlMessage('navbar.homepage')}
+                  title={<FormattedMessage id="navbar.homepage" />}
+                  alt={<FormattedMessage id="navbar.homepage" />}
                 />
               </a>
             </Navigation.Brand>

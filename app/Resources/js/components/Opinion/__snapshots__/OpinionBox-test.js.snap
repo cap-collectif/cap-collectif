@@ -25,7 +25,10 @@ exports[`<OpinionBox /> should render correctly 1`] = `
           className="hidden-xs hidden-sm"
         >
            
-          Retour
+          <FormattedMessage
+            id="opinion.header.back"
+            values={Object {}}
+          />
         </span>
       </a>
       <div
@@ -35,8 +38,8 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         className="h4 opinion__header__title"
       >
         <FormattedMessage
-          message="Proposition"
-          tagName="span"
+          id="opinion.header.opinion"
+          values={Object {}}
         />
         <p
           className="small excerpt"
@@ -105,7 +108,12 @@ exports[`<OpinionBox /> should render correctly 1`] = `
       }
     />
     <div
-      aria-label="Formulaire de vote"
+      aria-label={
+        <FormattedMessage
+          id="vote.form"
+          values={Object {}}
+        />
+      }
       className="opinion__buttons"
       style={
         Object {

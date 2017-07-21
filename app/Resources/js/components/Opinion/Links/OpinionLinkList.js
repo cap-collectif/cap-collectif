@@ -1,13 +1,12 @@
 // @flow
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import OpinionLink from './OpinionLink';
 
 const OpinionLinkList = React.createClass({
   propTypes: {
     links: React.PropTypes.array.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { links } = this.props;
@@ -16,7 +15,7 @@ const OpinionLinkList = React.createClass({
         <p className="text-center">
           <i className="cap-32 cap-baloon-1" />
           <br />
-          {this.getIntlMessage('opinion.no_new_link')}
+          {<FormattedMessage id="opinion.no_new_link" />}
         </p>
       );
     }

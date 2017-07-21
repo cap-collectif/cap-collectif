@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import CommentList from './CommentList';
 
 const CommentAnswers = React.createClass({
@@ -7,13 +6,9 @@ const CommentAnswers = React.createClass({
     comments: PropTypes.array,
     onVote: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
-    const {
-      comments,
-      onVote,
-    } = this.props;
+    const { comments, onVote } = this.props;
     if (comments) {
       return (
         <div>
@@ -23,7 +18,6 @@ const CommentAnswers = React.createClass({
     }
     return null;
   },
-
 });
 
 export default CommentAnswers;

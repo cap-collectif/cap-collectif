@@ -3,7 +3,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionEditForm } from './OpinionEditForm';
-import IntlData from '../../../translations/FR';
 
 describe('<OpinionEditForm />', () => {
   const props = {
@@ -14,7 +13,6 @@ describe('<OpinionEditForm />', () => {
       body: 'body',
     },
     step: {},
-    ...IntlData,
   };
 
   it('renders a form', () => {

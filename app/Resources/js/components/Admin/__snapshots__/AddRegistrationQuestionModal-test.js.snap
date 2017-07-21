@@ -65,7 +65,10 @@ exports[`<AddRegistrationQuestionModal /> renders correctly 1`] = `
       onClick={[Function]}
       type="submit"
     >
-      Enregistrer
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
     </Button>
   </ModalFooter>
 </Modal>
