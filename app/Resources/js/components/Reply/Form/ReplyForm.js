@@ -398,7 +398,7 @@ const ReplyForm = React.createClass({
               type="checkbox"
               name="reply-private"
               checkedLink={this.linkState('private')}
-              label={<FormattedMessage id="reply.form.private" />}
+              children={<FormattedMessage id="reply.form.private" />}
               disabled={disabled}
             />
           </div>}

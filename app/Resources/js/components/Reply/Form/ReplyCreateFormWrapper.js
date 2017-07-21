@@ -45,7 +45,7 @@ export const ReplyCreateFormWrapper = React.createClass({
         {form.contribuable && !user
           ? <Alert bsStyle="warning" className="text-center">
               <strong>
-                {<FormattedMessage id="reply.not_logged_in.error" />}
+                <FormattedMessage id="reply.not_logged_in.error" />
               </strong>
               <RegistrationButton
                 bsStyle="primary"
@@ -55,27 +55,26 @@ export const ReplyCreateFormWrapper = React.createClass({
             </Alert>
           : form.contribuable &&
             userReplies.length > 0 &&
-            !form.multipleRepliesAllowed
-            ? <Alert bsStyle="warning">
-                <strong>
-                  {<FormattedMessage id="reply.user_has_reply.reason" />}
-                </strong>
-                <p>
-                  {<FormattedMessage id="reply.user_has_reply.error" />}
-                </p>
-              </Alert>
-            : null}
+            !form.multipleRepliesAllowed &&
+            <Alert bsStyle="warning">
+              <strong>
+                <FormattedMessage id="reply.user_has_reply.reason" />
+              </strong>
+              <p>
+                <FormattedMessage id="reply.user_has_reply.error" />
+              </p>
+            </Alert>}
         {form.contribuable &&
           form.phoneConfirmationRequired &&
           user &&
           !user.isPhoneConfirmed &&
           <Alert bsStyle="warning">
             <strong>
-              {<FormattedMessage id="phone.please_verify" />}
+              <FormattedMessage id="phone.please_verify" />
             </strong>
             <span style={{ marginLeft: '10px' }}>
               <Button onClick={this.openPhoneModal}>
-                {<FormattedMessage id="phone.check" />}
+                <FormattedMessage id="phone.check" />
               </Button>
             </span>
           </Alert>}
