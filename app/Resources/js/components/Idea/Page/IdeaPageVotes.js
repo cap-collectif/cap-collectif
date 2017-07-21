@@ -2,8 +2,11 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { IntlMixin, FormattedMessage } from 'react-intl';
-import { fetchIdeaVotes, VOTES_PREVIEW_COUNT } from '../../../redux/modules/idea';
+import { FormattedMessage } from 'react-intl';
+import {
+  fetchIdeaVotes,
+  VOTES_PREVIEW_COUNT,
+} from '../../../redux/modules/idea';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 
@@ -13,7 +16,6 @@ export const IdeaPageVotes = React.createClass({
     idea: PropTypes.object.isRequired,
     className: PropTypes.string,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -60,27 +62,31 @@ export const IdeaPageVotes = React.createClass({
       <div id="votes" className={classNames(classes)}>
         <h2>
           <FormattedMessage
-            message={this.getIntlMessage('idea.vote.count')}
-            num={idea.votesCount}
+            id="idea.vote.count"
+            values={{
+              num: idea.votesCount,
+            }}
           />
         </h2>
         <Row>
-          {
-            votesToDisplay.map((vote, index) => {
-              return <UserBox key={index} user={vote.user} username={vote.username} className="idea__vote" />;
-            })
-          }
+          {votesToDisplay.map((vote, index) => {
+            return (
+              <UserBox
+                key={index}
+                user={vote.user}
+                username={vote.username}
+                className="idea__vote"
+              />
+            );
+          })}
         </Row>
-        {
-          hasMoreVotes &&
+        {hasMoreVotes &&
           <Button
-              bsStyle="primary"
-              onClick={this.showModal}
-              className="btn--outline idea__votes__show-more"
-          >
-            {this.getIntlMessage('idea.vote.show_more')}
-          </Button>
-        }
+            bsStyle="primary"
+            onClick={this.showModal}
+            className="btn--outline idea__votes__show-more">
+            {<FormattedMessage id="idea.vote.show_more" />}
+          </Button>}
         <AllVotesModal
           votes={idea.votes}
           onToggleModal={this.toggleModal}
@@ -89,10 +95,9 @@ export const IdeaPageVotes = React.createClass({
       </div>
     );
   },
-
 });
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchIdeaVotes: ideaId => dispatch(fetchIdeaVotes(ideaId)),
   };

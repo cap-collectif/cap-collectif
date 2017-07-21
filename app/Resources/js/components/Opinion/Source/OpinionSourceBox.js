@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 
 import OpinionSourceList from './OpinionSourceList';
 import OpinionSourceAdd from './OpinionSourceAdd';
@@ -15,7 +14,6 @@ const OpinionSourceBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {

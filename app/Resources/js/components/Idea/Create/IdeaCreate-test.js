@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IdeaCreate } from './IdeaCreate';
-import IntlData from '../../../translations/FR';
 
 describe('<IdeaCreate />', () => {
   it('should render a div with correct classes, an idea create button and a modal with an idea form', () => {
@@ -13,7 +12,6 @@ describe('<IdeaCreate />', () => {
         submitting={false}
         className="css-class"
         themes={[]}
-        {...IntlData}
       />,
     );
     expect(wrapper).toMatchSnapshot();

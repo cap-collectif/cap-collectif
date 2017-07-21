@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const RankingArrow = React.createClass({
   displayName: 'RankingArrow',
+
   propTypes: {
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -32,19 +32,15 @@ const RankingArrow = React.createClass({
       <Button
         disabled={disabled}
         onClick={disabled ? null : onClick}
-        className={`ranking__item__arrow ranking__item__arrow--${type}`}
-      >
-        {
-          type === 'right' &&
+        className={`ranking__item__arrow ranking__item__arrow--${type}`}>
+        {type === 'right' &&
           <span className="hidden-xs" style={{ marginRight: '10px' }}>
-              {this.getIntlMessage('global.form.ranking.select')}
-            </span>
-        }
-        <i className={classes}></i>
+            {<FormattedMessage id="global.form.ranking.select" />}
+          </span>}
+        <i className={classes} />
       </Button>
     );
   },
-
 });
 
 export default RankingArrow;

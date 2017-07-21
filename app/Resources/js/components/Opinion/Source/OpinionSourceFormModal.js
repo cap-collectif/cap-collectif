@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
@@ -23,7 +22,6 @@ const OpinionSourceFormModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { submitting, source, show, dispatch } = this.props;

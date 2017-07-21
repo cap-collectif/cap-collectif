@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
 
@@ -17,7 +17,6 @@ const ViewTree = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -52,13 +51,25 @@ const ViewTree = React.createClass({
     if (element.childrenCount !== element.children.length) {
       this.loadElementsTreeFromServer(element.id);
     }
-    SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
+    SynthesisElementActions.expandTreeItem(
+      'view',
+      element.id,
+      !this.state.expanded[element.id],
+    );
   },
 
   loadElementsTreeFromServer(parent = null) {
     const { synthesis } = this.props;
-    const depth = synthesis.displayRules && synthesis.displayRules.level ? parseInt(synthesis.displayRules.level, 10) : 0;
-    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent, depth > 2 ? depth : depth + NAV_DEPTH);
+    const depth =
+      synthesis.displayRules && synthesis.displayRules.level
+        ? parseInt(synthesis.displayRules.level, 10)
+        : 0;
+    SynthesisElementActions.loadElementsTreeFromServer(
+      synthesis.id,
+      'published',
+      parent,
+      depth > 2 ? depth : depth + NAV_DEPTH,
+    );
   },
 
   isElementExpanded(element) {
@@ -67,16 +78,40 @@ const ViewTree = React.createClass({
       return true;
     }
     const displayRules = synthesis.displayRules || {};
-    return SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded', displayRules) || this.state.expanded[element.id];
+    return (
+      SynthesisDisplayRules.getValueForRuleAndElement(
+        element,
+        this.state.settings,
+        'display',
+        'expanded',
+        displayRules,
+      ) || this.state.expanded[element.id]
+    );
   },
 
   renderCaret(element) {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
-    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'childrenInModal', displayRules)) {
+    if (
+      SynthesisDisplayRules.getValueForRuleAndElement(
+        element,
+        this.state.settings,
+        'display',
+        'childrenInModal',
+        displayRules,
+      )
+    ) {
       return null;
     }
-    if (SynthesisDisplayRules.getValueForRuleAndElement(element, this.state.settings, 'display', 'expanded', displayRules)) {
+    if (
+      SynthesisDisplayRules.getValueForRuleAndElement(
+        element,
+        this.state.settings,
+        'display',
+        'expanded',
+        displayRules,
+      )
+    ) {
       return null;
     }
     const expanded = this.state.expanded[element.id] || false;
@@ -86,21 +121,25 @@ const ViewTree = React.createClass({
         'cap-arrow-66': !expanded,
       });
       return (
-        <div className="synthesis__element__readmore" onClick={this.toggleExpand.bind(null, element)}>
+        <div
+          className="synthesis__element__readmore"
+          onClick={this.toggleExpand.bind(null, element)}>
           <span>
-            {
-              expanded
-                ? <FormattedMessage
-                  message={this.getIntlMessage('synthesis.readmore.hide')}
-                  title={element.title}
-                  />
-              : <FormattedMessage
-                message={this.getIntlMessage('synthesis.readmore.show')}
-                title={element.title}
+            {expanded
+              ? <FormattedMessage
+                  id="synthesis.readmore.hide"
+                  values={{
+                    title: element.title,
+                  }}
                 />
-            }
+              : <FormattedMessage
+                  id="synthesis.readmore.show"
+                  values={{
+                    title: element.title,
+                  }}
+                />}
           </span>
-          <i style={{ marginLeft: '5px' }} className={classes}></i>
+          <i style={{ marginLeft: '5px' }} className={classes} />
         </div>
       );
     }
@@ -110,31 +149,52 @@ const ViewTree = React.createClass({
   renderTreeItems(elements, parent = null) {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
-    if (this.isElementExpanded(parent) && elements && !SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'childrenInModal', displayRules)) {
-      const orderedElements =
-        SynthesisDisplayRules.getValueForRuleAndElement(parent, this.state.settings, 'display', 'foldersOrderedByCount', displayRules)
-          ? ArrayHelper.sortArrayByField(elements, 'childrenElementsNb', false, 'DESC')
-          : ArrayHelper.sortArrayByField(elements, 'title', true)
-      ;
+    if (
+      this.isElementExpanded(parent) &&
+      elements &&
+      !SynthesisDisplayRules.getValueForRuleAndElement(
+        parent,
+        this.state.settings,
+        'display',
+        'childrenInModal',
+        displayRules,
+      )
+    ) {
+      const orderedElements = SynthesisDisplayRules.getValueForRuleAndElement(
+        parent,
+        this.state.settings,
+        'display',
+        'foldersOrderedByCount',
+        displayRules,
+      )
+        ? ArrayHelper.sortArrayByField(
+            elements,
+            'childrenElementsNb',
+            false,
+            'DESC',
+          )
+        : ArrayHelper.sortArrayByField(elements, 'title', true);
       return (
         <ul className="synthesis__elements">
-          {
-            orderedElements.map((element) => {
-              return (
-                <li key={element.id}>
-                  <ViewElement
-                    key={element.id}
-                    element={element}
-                    parent={parent}
-                    settings={SynthesisDisplayRules.getMatchingSettingsForElement(element, this.state.settings, displayRules)}
-                    onExpandElement={() => this.toggleExpand(element)}
-                  />
-                  {this.renderTreeItems(element.children, element)}
-                  {this.renderCaret(element)}
-                </li>
-              );
-            })
-          }
+          {orderedElements.map(element => {
+            return (
+              <li key={element.id}>
+                <ViewElement
+                  key={element.id}
+                  element={element}
+                  parent={parent}
+                  settings={SynthesisDisplayRules.getMatchingSettingsForElement(
+                    element,
+                    this.state.settings,
+                    displayRules,
+                  )}
+                  onExpandElement={() => this.toggleExpand(element)}
+                />
+                {this.renderTreeItems(element.children, element)}
+                {this.renderCaret(element)}
+              </li>
+            );
+          })}
         </ul>
       );
     }
@@ -143,15 +203,12 @@ const ViewTree = React.createClass({
   render() {
     return (
       <Loader show={this.state.isLoading}>
-        {
-          this.state.elements.length > 0
+        {this.state.elements.length > 0
           ? this.renderTreeItems(this.state.elements, null)
-          : null
-        }
+          : null}
       </Loader>
     );
   },
-
 });
 
 export default ViewTree;

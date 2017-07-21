@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -16,7 +15,6 @@ const OpinionButtons = React.createClass({
     opinion: PropTypes.object.isRequired,
     user: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -35,10 +33,7 @@ const OpinionButtons = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    const {
-      opinion,
-      user,
-    } = this.props;
+    const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
@@ -60,8 +55,8 @@ const OpinionButtons = React.createClass({
       }
       return (
         <OpinionEditButton
-            className="opinion__action--edit pull-right btn--outline btn-dark-gray"
-            opinion={opinion}
+          className="opinion__action--edit pull-right btn--outline btn-dark-gray"
+          opinion={opinion}
         />
       );
     }
@@ -84,7 +79,6 @@ const OpinionButtons = React.createClass({
       </ButtonToolbar>
     );
   },
-
 });
 
 const mapStateToProps = (state: State) => ({

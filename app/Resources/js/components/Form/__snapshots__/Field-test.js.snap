@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Field /> pass input props to children 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  errors={null}
+  hasFeedback={false}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  medias={Array []}
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState={null}
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders a default <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  errors={null}
+  hasFeedback={false}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  medias={Array []}
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState={null}
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders a div around <Input /> element 1`] = `
+<div
+  className="myclassName"
+>
+  <InjectIntl(ReactBootstrapInput)
+    autoFocus={false}
+    disableValidation={true}
+    errors={null}
+    hasFeedback={false}
+    id="id"
+    image={null}
+    label="label"
+    labelClassName=""
+    medias={Array []}
+    name="name"
+    placeholder={null}
+    type="text"
+    validationState={null}
+    wrapperClassName=""
+  />
+</div>
+`;
+
+exports[`<Field /> renders a validated <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  errors={null}
+  hasFeedback={true}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  medias={Array []}
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState="success"
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  disableValidation={true}
+  errors={null}
+  hasFeedback={false}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  medias={Array []}
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState={null}
+  wrapperClassName=""
+/>
+`;
+
+exports[`<Field /> renders an errored <Input /> element 1`] = `
+<InjectIntl(ReactBootstrapInput)
+  autoFocus={false}
+  errors={
+    <FormattedMessage
+      id="global.required"
+      values={Object {}}
+    />
+  }
+  hasFeedback={true}
+  id="id"
+  image={null}
+  label="label"
+  labelClassName=""
+  medias={Array []}
+  name="name"
+  placeholder={null}
+  type="text"
+  validationState="error"
+  wrapperClassName=""
+/>
+`;

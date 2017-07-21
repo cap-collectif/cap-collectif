@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import CloseButton from '../../Form/CloseButton';
@@ -14,7 +14,6 @@ const OpinionSourceDeleteModal = React.createClass({
     source: PropTypes.object.isRequired,
     onClose: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -48,15 +47,15 @@ const OpinionSourceDeleteModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {this.getIntlMessage('source.delete_modal.title')}
+            {<FormattedMessage id="source.delete_modal.title" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p className="h4">
-            {this.getIntlMessage('source.delete_modal.bold')}
+            {<FormattedMessage id="source.delete_modal.bold" />}
           </p>
           <div>
-            {this.getIntlMessage('source.delete_modal.infos')}
+            {<FormattedMessage id="source.delete_modal.infos" />}
           </div>
         </Modal.Body>
         <Modal.Footer>

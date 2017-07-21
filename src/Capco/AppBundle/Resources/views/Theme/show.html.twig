@@ -54,7 +54,7 @@
         <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
         {% set projectsCount = theme.projects | length %}
         {% if projectsCount > 0 %}
-            {{ react_intl_component('ProjectsListApp', {'props': projectProps }) }}
+            {{ react_render_component('ProjectsListApp', {'props': projectProps }) }}
             {% if projectsCount > maxProjectsDisplayed %}
                 <a href="{{ path('app_project_search', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
@@ -71,7 +71,7 @@
                         style="display: inline-block"
                         class="pull-right"
                     >
-                        {{ react_intl_component('IdeaCreateApp', {'props': ideaCreationProps}) }}
+                        {{ react_render_component('IdeaCreateApp', {'props': ideaCreationProps}) }}
                     </div>
                 {% endif %}
             </h2>

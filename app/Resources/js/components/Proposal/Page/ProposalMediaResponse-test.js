@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalMediaResponse } from './ProposalMediaResponse';
-import IntlData from '../../../translations/FR';
 
 describe('<ProposalMediaResponse />', () => {
   const props = {
@@ -13,7 +12,7 @@ describe('<ProposalMediaResponse />', () => {
   };
 
   it('should render a list of files', () => {
-    const wrapper = shallow(<ProposalMediaResponse {...props} {...IntlData} />);
+    const wrapper = shallow(<ProposalMediaResponse {...props} />);
     expect(wrapper.find('Row')).toHaveLength(1);
     expect(wrapper.find('Col')).toHaveLength(2);
     const link1 = wrapper.find('Col').at(0).find('a');
@@ -25,7 +24,7 @@ describe('<ProposalMediaResponse />', () => {
   });
 
   it('should render nothin when no media', () => {
-    const wrapper = shallow(<ProposalMediaResponse medias={[]} {...IntlData} />);
+    const wrapper = shallow(<ProposalMediaResponse medias={[]} />);
     expect(wrapper.html()).toEqual(null);
   });
 });

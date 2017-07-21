@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
@@ -19,7 +19,6 @@ const Comment = React.createClass({
     root: PropTypes.bool,
     onVote: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     const { comment } = this.props;
@@ -43,20 +42,13 @@ const Comment = React.createClass({
   },
 
   comment(data) {
-    const {
-      comment,
-      object,
-      uri,
-    } = this.props;
+    const { comment, object, uri } = this.props;
     data.parent = comment.id;
     return CommentActions.create(uri, object, data);
   },
 
   render() {
-    const {
-      onVote,
-      root,
-    } = this.props;
+    const { onVote, root } = this.props;
     const comment = this.props.comment;
     const classes = classNames({
       opinion: true,
@@ -67,7 +59,7 @@ const Comment = React.createClass({
       opinion__content: true,
     });
     return (
-      <li className={classes} >
+      <li className={classes}>
         <div className="opinion__body">
           <div className={contentClasses}>
             <UserAvatar user={comment.author} className="pull-left" />
@@ -76,38 +68,35 @@ const Comment = React.createClass({
             </div>
             <CommentBody comment={comment} />
             <div className="comment__buttons">
-              <CommentVoteButton comment={comment} onVote={onVote} />
-              {' '}
+              <CommentVoteButton comment={comment} onVote={onVote} />{' '}
               {root
-                ? <a onClick={this.answer} className="btn btn-xs btn-dark-gray btn--outline">
-                    <i className="cap-reply-mail-2"></i>
-                    { ' ' }
-                    { this.getIntlMessage('global.answer') }
+                ? <a
+                    onClick={this.answer}
+                    className="btn btn-xs btn-dark-gray btn--outline">
+                    <i className="cap-reply-mail-2" />{' '}
+                    {<FormattedMessage id="global.answer" />}
                   </a>
-                : null
-              }
-              {' '}
-              <CommentReportButton comment={comment} />
-              {' '}
-              <CommentEdit comment={comment} />
-              {' '}
+                : null}{' '}
+              <CommentReportButton comment={comment} />{' '}
+              <CommentEdit comment={comment} />{' '}
             </div>
           </div>
           <div className="comment-answers-block">
             {root
               ? <CommentAnswers onVote={onVote} comments={comment.answers} />
-              : null
-            }
+              : null}
             {this.state.answerFormShown
-              ? <CommentForm comment={this.comment} focus={this.state.answerFormFocus} isAnswer />
-              : null
-            }
+              ? <CommentForm
+                  comment={this.comment}
+                  focus={this.state.answerFormFocus}
+                  isAnswer
+                />
+              : null}
           </div>
         </div>
       </li>
     );
   },
-
 });
 
 export default Comment;

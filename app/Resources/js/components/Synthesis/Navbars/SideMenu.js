@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -14,10 +14,10 @@ const SideMenu = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
   },
+
   contextTypes: {
     router: React.PropTypes.object.isRequired,
   },
-  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -54,7 +54,11 @@ const SideMenu = React.createClass({
   },
 
   toggleExpand(element) {
-    SynthesisElementActions.expandTreeItem('nav', element.id, !this.state.expanded[element.id]);
+    SynthesisElementActions.expandTreeItem(
+      'nav',
+      element.id,
+      !this.state.expanded[element.id],
+    );
   },
 
   selectItem(element) {
@@ -90,7 +94,8 @@ const SideMenu = React.createClass({
     return (
       <LinkContainer to="/folder_manager">
         <NavItem className="menu__link" bsStyle="link">
-          <i className="cap cap-baloon"></i> {this.getIntlMessage('synthesis.edition.sideMenu.contributions')}
+          <i className="cap cap-baloon" />{' '}
+          {<FormattedMessage id="synthesis.edition.sideMenu.contributions" />}
         </NavItem>
       </LinkContainer>
     );
@@ -117,8 +122,11 @@ const SideMenu = React.createClass({
 
   renderCreateButton() {
     return (
-      <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
-          <i className="cap cap-folder-add"></i> {this.getIntlMessage('synthesis.edition.action.create.label')}
+      <NavItem
+        className="menu__link menu__action"
+        onClick={this.showCreateModal.bind(null, this)}>
+        <i className="cap cap-folder-add" />{' '}
+        {<FormattedMessage id="synthesis.edition.action.create.label" />}
       </NavItem>
     );
   },
@@ -127,7 +135,8 @@ const SideMenu = React.createClass({
     return (
       <LinkContainer to="/folder-manager">
         <NavItem className="menu__link menu__action">
-          <i className="cap cap-folder-edit"></i> {this.getIntlMessage('synthesis.edition.action.manage.label')}
+          <i className="cap cap-folder-edit" />{' '}
+          {<FormattedMessage id="synthesis.edition.action.manage.label" />}
         </NavItem>
       </LinkContainer>
     );
@@ -144,11 +153,16 @@ const SideMenu = React.createClass({
           {this.renderCreateButton()}
           {this.renderManageButton()}
         </Nav>
-        <CreateModal synthesis={synthesis} show={this.state.showCreateModal} toggle={this.toggleCreateModal} elements={this.state.navItems} selectedId={this.state.selectedId} />
+        <CreateModal
+          synthesis={synthesis}
+          show={this.state.showCreateModal}
+          toggle={this.toggleCreateModal}
+          elements={this.state.navItems}
+          selectedId={this.state.selectedId}
+        />
       </div>
     );
   },
-
 });
 
 export default SideMenu;

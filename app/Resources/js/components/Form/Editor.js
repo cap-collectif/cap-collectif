@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
@@ -15,7 +15,6 @@ const Editor = React.createClass({
     className: PropTypes.string,
     disabled: PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -26,13 +25,7 @@ const Editor = React.createClass({
   },
 
   componentDidMount() {
-    const {
-      disabled,
-      onBlur,
-      onChange,
-      value,
-      valueLink,
-    } = this.props;
+    const { disabled, onBlur, onChange, value, valueLink } = this.props;
     if (!disabled) {
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
@@ -43,20 +36,32 @@ const Editor = React.createClass({
             template: `
               <input class="input" type="textbox">
               <div class="preview">
-                <span>${this.getIntlMessage('global.preview')}</span>
+                <span>${<FormattedMessage id="global.preview" />}</span>
               </div>
-              <a href="javascript:;" class="cancel">${this.getIntlMessage('global.cancel')}</a>
-              <a href="javascript:;" class="insert">${this.getIntlMessage('global.insert')}</a>`,
+              <a href="javascript:;" class="cancel">${(
+                <FormattedMessage id="global.cancel" />
+              )}</a>
+              <a href="javascript:;" class="insert">${(
+                <FormattedMessage id="global.insert" />
+              )}</a>`,
           },
           'link-tooltip': {
             template: `
-              <span class="title">${this.getIntlMessage('editor.url')}:&nbsp;</span>
+              <span class="title">${(
+                <FormattedMessage id="editor.url" />
+              )}:&nbsp;</span>
               <a href="#" class="url" target="_blank" href="about:blank"></a>
               <input class="input" type="text">
               <span>&nbsp;&#45;&nbsp;</span>
-              <a href="javascript:;" class="change">${this.getIntlMessage('global.change')}</a>
-              <a href="javascript:;" class="remove">${this.getIntlMessage('global.remove')}</a>
-              <a href="javascript:;" class="done">${this.getIntlMessage('global.done')}</a>`,
+              <a href="javascript:;" class="change">${(
+                <FormattedMessage id="global.change" />
+              )}</a>
+              <a href="javascript:;" class="remove">${(
+                <FormattedMessage id="global.remove" />
+              )}</a>
+              <a href="javascript:;" class="done">${(
+                <FormattedMessage id="global.done" />
+              )}</a>`,
           },
         },
         styles: false,
@@ -65,7 +70,10 @@ const Editor = React.createClass({
       this._editor.getModule('keyboard').removeHotkeys(9);
 
       if (valueLink) {
-        console.warn('This is deprecated please use redux-form instead of valueLink.'); // eslint-disable-line no-console
+        // eslint-disable-next-line no-console
+        console.warn(
+          'This is deprecated please use redux-form instead of valueLink.',
+        );
         const defaultValue = valueLink.value;
         if (defaultValue) {
           this._editor.setHTML(defaultValue);
@@ -78,7 +86,7 @@ const Editor = React.createClass({
         if (defaultValue) {
           this._editor.setHTML(defaultValue);
         }
-        this._editor.on('selection-change', (range) => {
+        this._editor.on('selection-change', range => {
           if (!range) {
             onBlur(this._editor.getHTML());
           }
@@ -97,25 +105,14 @@ const Editor = React.createClass({
   },
 
   render() {
-    const {
-      className,
-      disabled,
-      id,
-    } = this.props;
+    const { className, disabled, id } = this.props;
     const classes = {
       editor: !disabled,
       'form-control': disabled,
       [className]: true,
     };
     if (disabled) {
-      return (
-        <textarea
-          id={id}
-          className={classNames(classes)}
-          disabled
-        >
-        </textarea>
-      );
+      return <textarea id={id} className={classNames(classes)} disabled />;
     }
     return (
       <div id={id} className={classNames(classes)}>

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VisibilityBox /> renders children if not enabled 1`] = `
+<div
+  className="foo"
+/>
+`;
+
+exports[`<VisibilityBox /> renders children if user is logged 1`] = `
+<div
+  className="PrivateList"
+>
+  <p
+    id="privateInfo"
+  >
+    <i
+      className="glyphicon glyphicon-lock"
+    />
+     
+    <strong>
+      <FormattedMessage
+        id="proposal.private.message"
+        values={Object {}}
+      />
+    </strong>
+  </p>
+  <div
+    className="PrivateList__box"
+  >
+    <div
+      className="foo"
+    />
+  </div>
+</div>
+`;
+
+exports[`<VisibilityBox /> renders jumbotron if user is not logged 1`] = `
+<Jumbotron
+  bsClass="jumbotron"
+  className={
+    Object {
+      "p--centered": true,
+    }
+  }
+  componentClass="div"
+>
+  <p>
+    <FormattedMessage
+      id="proposal.private.show_login"
+      values={Object {}}
+    />
+  </p>
+  <p>
+    <Connect(LoginButton)
+      bsStyle="primary"
+    />
+  </p>
+</Jumbotron>
+`;

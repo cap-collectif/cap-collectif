@@ -2,7 +2,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IdeaEditModal } from './IdeaEditModal';
-import IntlData from '../../../translations/FR';
 
 const props = {
   idea: {},
@@ -14,7 +13,7 @@ const props = {
 
 describe('<IdeaEditModal />', () => {
   it('should render a modal with an idea form', () => {
-    const wrapper = shallow(<IdeaEditModal {...props} {...IntlData} />);
+    const wrapper = shallow(<IdeaEditModal {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

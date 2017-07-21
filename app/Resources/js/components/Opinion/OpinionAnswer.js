@@ -1,6 +1,5 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import AnswerBody from '../Answer/AnswerBody';
 
@@ -8,7 +7,6 @@ const OpinionAnswer = React.createClass({
   propTypes: {
     answer: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   render() {
     const answer = this.props.answer;

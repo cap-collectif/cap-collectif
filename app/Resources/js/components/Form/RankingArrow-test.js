@@ -2,13 +2,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import RankingArrow from './RankingArrow';
-import IntlData from '../../translations/FR';
 
 const onClick = () => {};
 
 describe('<RankingArrow />', () => {
   it('should render a left disabled button when required', () => {
-    const wrapper = shallow(<RankingArrow type="left" onClick={onClick} disabled {...IntlData} />);
+    const wrapper = shallow(
+      <RankingArrow type="left" onClick={onClick} disabled />,
+    );
     const button = wrapper.find('Button');
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toEqual(true);
@@ -19,7 +20,7 @@ describe('<RankingArrow />', () => {
   });
 
   it('should render a right enabled button and a label when required', () => {
-    const wrapper = shallow(<RankingArrow type="right" onClick={onClick} {...IntlData} />);
+    const wrapper = shallow(<RankingArrow type="right" onClick={onClick} />);
     const button = wrapper.find('Button');
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toEqual(false);
@@ -29,7 +30,7 @@ describe('<RankingArrow />', () => {
   });
 
   it('should render an up button when required', () => {
-    const wrapper = shallow(<RankingArrow type="up" onClick={onClick} {...IntlData} />);
+    const wrapper = shallow(<RankingArrow type="up" onClick={onClick} />);
     const button = wrapper.find('Button');
     expect(button).toHaveLength(1);
     const icon = button.find('i');
@@ -37,7 +38,7 @@ describe('<RankingArrow />', () => {
   });
 
   it('should render a down button when required', () => {
-    const wrapper = shallow(<RankingArrow type="down" onClick={onClick} {...IntlData} />);
+    const wrapper = shallow(<RankingArrow type="down" onClick={onClick} />);
     const button = wrapper.find('Button');
     expect(button).toHaveLength(1);
     const icon = button.find('i');

@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_intl_component('OpinionPageApp', {
+    {{ react_render_component('OpinionPageApp', {
         'props': {'opinionId': opinion.id},
       })
     }}

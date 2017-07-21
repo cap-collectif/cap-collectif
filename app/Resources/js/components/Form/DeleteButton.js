@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
@@ -12,7 +12,6 @@ const DeleteButton = React.createClass({
     id: PropTypes.string,
     user: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -29,10 +28,7 @@ const DeleteButton = React.createClass({
   },
 
   isTheUserTheAuthor() {
-    const {
-      author,
-      user,
-    } = this.props;
+    const { author, user } = this.props;
     if (author === null || !user) {
       return false;
     }
@@ -40,12 +36,7 @@ const DeleteButton = React.createClass({
   },
 
   render() {
-    const {
-      className,
-      id,
-      onClick,
-      style,
-    } = this.props;
+    const { className, id, onClick, style } = this.props;
     if (this.isDeletable()) {
       const classes = {
         btn: true,
@@ -57,20 +48,19 @@ const DeleteButton = React.createClass({
       return (
         <button
           id={id}
-          style={style} className={classNames(classes)}
-          onClick={() => onClick()}
-        >
-            <i className="cap cap-bin-2"></i>
-          { ` ${this.getIntlMessage('global.remove')}`}
-          </button>
+          style={style}
+          className={classNames(classes)}
+          onClick={() => onClick()}>
+          <i className="cap cap-bin-2" />
+          <FormattedMessage id="global.remove" />
+        </button>
       );
     }
     return null;
   },
-
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

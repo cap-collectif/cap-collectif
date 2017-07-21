@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import OpinionSourceActions from '../../../actions/OpinionSourceActions';
@@ -63,7 +63,6 @@ const OpinionSourceForm = React.createClass({
     opinion: PropTypes.object.isRequired,
     source: PropTypes.object,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { source } = this.props;
@@ -76,7 +75,7 @@ const OpinionSourceForm = React.createClass({
               name="check"
               id="sourceEditCheck"
               component={renderComponent}
-              children={this.getIntlMessage('source.check')}
+              children={<FormattedMessage id="source.check" />}
             />
           </div>}
         <Field
@@ -84,11 +83,11 @@ const OpinionSourceForm = React.createClass({
           name="category"
           id="sourceCategory"
           component={renderComponent}
-          label={this.getIntlMessage('source.type')}>
+          label={<FormattedMessage id="source.type" />}>
           {source
             ? null
             : <option value="" disabled>
-                {this.getIntlMessage('global.select')}
+                {<FormattedMessage id="global.select" />}
               </option>}
           {CategoriesStore.categories.map(category => {
             return (
@@ -103,7 +102,7 @@ const OpinionSourceForm = React.createClass({
           name="link"
           component={renderComponent}
           type="text"
-          label={this.getIntlMessage('source.link')}
+          label={<FormattedMessage id="source.link" />}
           placeholder="http://"
         />
         <Field
@@ -111,14 +110,14 @@ const OpinionSourceForm = React.createClass({
           type="text"
           name="title"
           component={renderComponent}
-          label={this.getIntlMessage('source.title')}
+          label={<FormattedMessage id="source.title" />}
         />
         <Field
           id="sourceBody"
           type="editor"
           component={renderComponent}
           name="body"
-          label={this.getIntlMessage('source.body')}
+          label={<FormattedMessage id="source.body" />}
         />
       </form>
     );

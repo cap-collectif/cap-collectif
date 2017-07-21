@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import Input from '../../Form/Input';
 import SynthesisActions from '../../../actions/SynthesisActions';
@@ -11,7 +11,8 @@ const DisplaySettings = React.createClass({
   propTypes: {
     synthesis: PropTypes.object,
   },
-  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
+
+  mixins: [DeepLinkStateMixin, FormMixin],
 
   getInitialState() {
     const { synthesis } = this.props;
@@ -28,8 +29,14 @@ const DisplaySettings = React.createClass({
 
   formValidationRules: {
     level: {
-      minValue: { value: 0, message: 'synthesis.settings.display.level_constraints' },
-      maxValue: { value: 5, message: 'synthesis.settings.display.level_constraints' },
+      minValue: {
+        value: 0,
+        message: 'synthesis.settings.display.level_constraints',
+      },
+      maxValue: {
+        value: 5,
+        message: 'synthesis.settings.display.level_constraints',
+      },
     },
   },
 
@@ -39,10 +46,9 @@ const DisplaySettings = React.createClass({
       this.setState({
         isSaving: true,
       });
-      SynthesisActions.updateDisplaySettings(
-        synthesis.id,
-        { rules: this.state.form },
-      ).then(() => {
+      SynthesisActions.updateDisplaySettings(synthesis.id, {
+        rules: this.state.form,
+      }).then(() => {
         SynthesisActions.load(synthesis.id);
         this.setState({
           isSaving: false,
@@ -66,26 +72,25 @@ const DisplaySettings = React.createClass({
         <form>
           <Input
             type="number"
-            label={this.getIntlMessage('synthesis.settings.display.level')}
+            label={<FormattedMessage id="synthesis.settings.display.level" />}
             valueLink={this.linkState('form.level')}
             min="1"
             max="5"
             groupClassName={this.getGroupStyle('level')}
             errors={this.renderFormErrors('level')}
-            help={this.getIntlMessage('synthesis.settings.display.level_help')}
+            help={
+              <FormattedMessage id="synthesis.settings.display.level_help" />
+            }
           />
           <Button type="button" onClick={() => this.updateSettings()}>
-            {
-              this.state.isSaving
-                ? this.getIntlMessage('global.loading')
-                : this.getIntlMessage('global.save')
-            }
+            {this.state.isSaving
+              ? <FormattedMessage id="global.loading" />
+              : <FormattedMessage id="global.save" />}
           </Button>
         </form>
       </div>
     );
   },
-
 });
 
 export default DisplaySettings;

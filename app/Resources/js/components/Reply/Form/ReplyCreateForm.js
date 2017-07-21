@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
 import ReplyForm from './ReplyForm';
 import SubmitButton from '../../Form/SubmitButton';
 import ReplyActions from '../../../actions/ReplyActions';
 
 const ReplyCreateForm = React.createClass({
   displayName: 'ReplyCreateForm',
+
   propTypes: {
     form: PropTypes.object.isRequired,
     disabled: PropTypes.bool,
   },
-  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -48,14 +47,11 @@ const ReplyCreateForm = React.createClass({
   },
 
   render() {
-    const {
-      form,
-      disabled,
-    } = this.props;
+    const { form, disabled } = this.props;
     return (
       <div id="create-reply-form">
         <ReplyForm
-          ref={c => this.replyForm = c}
+          ref={c => (this.replyForm = c)}
           form={form}
           isSubmitting={this.state.isSubmitting}
           onSubmitSuccess={this.handleSubmitSuccess}
@@ -69,7 +65,7 @@ const ReplyCreateForm = React.createClass({
           onSubmit={this.handleSubmit}
           disabled={disabled}
         />
-    </div>
+      </div>
     );
   },
 });

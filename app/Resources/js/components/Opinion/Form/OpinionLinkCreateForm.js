@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { IntlMixin } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
@@ -42,7 +42,6 @@ export const OpinionLinkCreateForm = React.createClass({
     opinion: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
-  mixins: [IntlMixin],
 
   render() {
     const { currentType, availableTypes, handleSubmit } = this.props;
@@ -50,15 +49,19 @@ export const OpinionLinkCreateForm = React.createClass({
       <form id={formName} onSubmit={handleSubmit}>
         <Field
           autoFocus
-          label={this.getIntlMessage('opinion.link.select_type')}
+          label={<FormattedMessage id="opinion.link.select_type" />}
           name="opinionType"
           type="select"
           component={renderInput}
           disableValidation>
-          <option disabled>{this.getIntlMessage('global.select')}</option>
-          {availableTypes.map((type, i) => (
-            <option key={i} value={type.id}>{type.title}</option>
-          ))}
+          <option disabled>
+            {<FormattedMessage id="global.select" />}
+          </option>
+          {availableTypes.map((type, i) =>
+            <option key={i} value={type.id}>
+              {type.title}
+            </option>,
+          )}
         </Field>
         <Field
           name="title"
@@ -66,7 +69,7 @@ export const OpinionLinkCreateForm = React.createClass({
           id="opinion_title"
           component={renderInput}
           autoFocus
-          label={this.getIntlMessage('opinion.title')}
+          label={<FormattedMessage id="opinion.title" />}
         />
         <Field
           name="body"
@@ -74,9 +77,9 @@ export const OpinionLinkCreateForm = React.createClass({
           id="opinion_body"
           component={renderInput}
           autoFocus
-          label={this.getIntlMessage('opinion.body')}
+          label={<FormattedMessage id="opinion.body" />}
         />
-        {currentType.appendixTypes.map((field, index) => (
+        {currentType.appendixTypes.map((field, index) =>
           <Field
             key={index}
             component={renderInput}
@@ -84,8 +87,8 @@ export const OpinionLinkCreateForm = React.createClass({
             label={field.title}
             type="editor"
             id={`opinion_appendix-${index + 1}`}
-          />
-        ))}
+          />,
+        )}
       </form>
     );
   },

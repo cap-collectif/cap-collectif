@@ -2,12 +2,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EmailNotConfirmedAlert } from './EmailNotConfirmedAlert';
-import IntlData from '../../translations/FR';
 
 describe('<EmailNotConfirmedAlert />', () => {
-  const props = {
-    ...IntlData,
-  };
+  const props = {};
   const userWithConfirmedEmail = {
     isEmailConfirmed: true,
   };
@@ -21,23 +18,31 @@ describe('<EmailNotConfirmedAlert />', () => {
   });
 
   it('renders nothing if logged user has confirmed his email', () => {
-    const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithConfirmedEmail} />);
+    const wrapper = shallow(
+      <EmailNotConfirmedAlert {...props} user={userWithConfirmedEmail} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a button to resend confirmation & an alert if user is logged and has not confirmed his email', () => {
-    const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
+    const wrapper = shallow(
+      <EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a disabled button when resending', () => {
-    const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
+    const wrapper = shallow(
+      <EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />,
+    );
     wrapper.setState({ resendingConfirmation: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a disabled button when resending is done', () => {
-    const wrapper = shallow(<EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />);
+    const wrapper = shallow(
+      <EmailNotConfirmedAlert {...props} user={userWithNotConfirmedEmail} />,
+    );
     wrapper.setState({ confirmationSent: true });
     expect(wrapper).toMatchSnapshot();
   });
