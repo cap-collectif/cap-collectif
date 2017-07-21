@@ -1,13 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import autosize from 'autosize';
 import { FormControl } from 'react-bootstrap';
 
 const AutosizedTextarea = React.createClass({
-  propTypes: {
-    value: PropTypes.any,
-    onChange: PropTypes.func.isRequired,
-  },
   refFormControl: Element,
 
   componentDidMount() {
