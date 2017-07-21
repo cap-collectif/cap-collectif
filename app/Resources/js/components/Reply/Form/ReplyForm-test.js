@@ -1,17 +1,15 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../../translations/FR';
 import ReplyForm from './ReplyForm';
 
 describe('<ReplyForm />', () => {
   const requiredText = {
     id: 10,
     type: 'text',
-    slug:
-      'etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024',
-    question:
-      "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+    slug: 'etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024',
+    question: 'Êtes-vous satisfait que la ville de Paris soit candidate à l\'organisation des JO de 2024 ?',
     helpText: '',
     required: true,
   };
@@ -20,7 +18,7 @@ describe('<ReplyForm />', () => {
     id: 11,
     type: 'checkbox',
     slug: 'pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places',
-    question: "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+    question: 'Pour quel type d\'épreuve êtes vous prêt à acheter des places',
     helpText: 'Plusieurs choix sont possibles',
     required: false,
     isOtherAllowed: true,
@@ -81,19 +79,13 @@ describe('<ReplyForm />', () => {
     onSubmitSuccess: jest.fn(),
     onSubmitFailure: jest.fn(),
     onValidationFailure: jest.fn(),
+    ...IntlData,
   };
 
   it('should render correctly with equal required and facultative fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [
-            requiredText,
-            requiredRadio,
-            facultativeSelect,
-            facultativeRanking,
-          ],
-        }}
+        form={{ fields: [requiredText, requiredRadio, facultativeSelect, facultativeRanking] }}
         {...props}
       />,
     );
@@ -103,15 +95,7 @@ describe('<ReplyForm />', () => {
   it('should render correctly with minority of required fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [
-            requiredText,
-            facultativeCheckbox,
-            requiredRadio,
-            facultativeSelect,
-            facultativeRanking,
-          ],
-        }}
+        form={{ fields: [requiredText, facultativeCheckbox, requiredRadio, facultativeSelect, facultativeRanking] }}
         {...props}
       />,
     );
@@ -130,7 +114,10 @@ describe('<ReplyForm />', () => {
 
   it('should render correctly with only required fields', () => {
     const wrapper = shallow(
-      <ReplyForm form={{ fields: [requiredText, requiredRadio] }} {...props} />,
+      <ReplyForm
+        form={{ fields: [requiredText, requiredRadio] }}
+        {...props}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -138,9 +125,7 @@ describe('<ReplyForm />', () => {
   it('should render correctly with only facultatives fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [facultativeCheckbox, facultativeSelect, facultativeRanking],
-        }}
+        form={{ fields: [facultativeCheckbox, facultativeSelect, facultativeRanking] }}
         {...props}
       />,
     );

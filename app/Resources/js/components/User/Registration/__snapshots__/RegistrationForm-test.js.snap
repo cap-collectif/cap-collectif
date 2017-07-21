@@ -7,12 +7,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="username"
-    label={
-      <FormattedMessage
-        id="registration.username"
-        values={Object {}}
-      />
-    }
+    label="Nom ou pseudonyme"
     labelClassName="h5"
     name="username"
     type="text"
@@ -20,21 +15,13 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
+    label="Adresse électronique"
     labelClassName="h5"
     name="email"
     popover={
       Object {
         "id": "registration-email-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.email"
-          values={Object {}}
-      />,
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
       }
     }
     type="email"
@@ -42,21 +29,13 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="password"
-    label={
-      <FormattedMessage
-        id="registration.password"
-        values={Object {}}
-      />
-    }
+    label="Créez un mot de passe"
     labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
         "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-      />,
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
       }
     }
     type="password"
@@ -80,18 +59,17 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
+    <FormattedHTMLMessage
+      link={
+        <a
+          className="external-link"
+          href="/charte"
         >
-            la charte
-        </a>,
-        }
+          la charte
+        </a>
       }
+      message="J'ai lu et j'accepte {link}."
+      tagName="span"
     />
   </Field>
   <Field
@@ -110,12 +88,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="username"
-    label={
-      <FormattedMessage
-        id="registration.username"
-        values={Object {}}
-      />
-    }
+    label="Nom ou pseudonyme"
     labelClassName="h5"
     name="username"
     type="text"
@@ -123,21 +96,13 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
+    label="Adresse électronique"
     labelClassName="h5"
     name="email"
     popover={
       Object {
         "id": "registration-email-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.email"
-          values={Object {}}
-      />,
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
       }
     }
     type="email"
@@ -145,21 +110,13 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="password"
-    label={
-      <FormattedMessage
-        id="registration.password"
-        values={Object {}}
-      />
-    }
+    label="Créez un mot de passe"
     labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
         "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-      />,
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
       }
     }
     type="password"
@@ -170,18 +127,17 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
+    <FormattedHTMLMessage
+      link={
+        <a
+          className="external-link"
+          href="/charte"
         >
-            la charte
-        </a>,
-        }
+          la charte
+        </a>
       }
+      message="J'ai lu et j'accepte {link}."
+      tagName="span"
     />
   </Field>
   <Field
@@ -200,12 +156,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="username"
-    label={
-      <FormattedMessage
-        id="registration.username"
-        values={Object {}}
-      />
-    }
+    label="Nom ou pseudonyme"
     labelClassName="h5"
     name="username"
     type="text"
@@ -213,21 +164,13 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
+    label="Adresse électronique"
     labelClassName="h5"
     name="email"
     popover={
       Object {
         "id": "registration-email-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.email"
-          values={Object {}}
-      />,
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
       }
     }
     type="email"
@@ -235,21 +178,13 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="password"
-    label={
-      <FormattedMessage
-        id="registration.password"
-        values={Object {}}
-      />
-    }
+    label="Créez un mot de passe"
     labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
         "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-      />,
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
       }
     }
     type="password"
@@ -259,18 +194,12 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     id="user_type"
     label={
       <span>
-        <FormattedMessage
-          id="registration.type"
-          values={Object {}}
-        />
+        Statut
          
         <span
           className="excerpt"
         >
-          <FormattedMessage
-            id="global.form.optional"
-            values={Object {}}
-          />
+           (facultatif)
         </span>
       </span>
     }
@@ -278,10 +207,11 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     name="userType"
     type="select"
   >
-    <FormattedMessage
-      id="registration.select.type"
-      values={Object {}}
-    />
+    <option
+      value=""
+    >
+      Je suis...
+    </option>
     <option
       value={1}
     >
@@ -294,18 +224,17 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
+    <FormattedHTMLMessage
+      link={
+        <a
+          className="external-link"
+          href="/charte"
         >
-            la charte
-        </a>,
-        }
+          la charte
+        </a>
       }
+      message="J'ai lu et j'accepte {link}."
+      tagName="span"
     />
   </Field>
   <Field
@@ -324,12 +253,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <Field
     component={[Function]}
     id="username"
-    label={
-      <FormattedMessage
-        id="registration.username"
-        values={Object {}}
-      />
-    }
+    label="Nom ou pseudonyme"
     labelClassName="h5"
     name="username"
     type="text"
@@ -337,21 +261,13 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <Field
     component={[Function]}
     id="email"
-    label={
-      <FormattedMessage
-        id="global.email"
-        values={Object {}}
-      />
-    }
+    label="Adresse électronique"
     labelClassName="h5"
     name="email"
     popover={
       Object {
         "id": "registration-email-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.email"
-          values={Object {}}
-      />,
+        "message": "Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.",
       }
     }
     type="email"
@@ -359,21 +275,13 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <Field
     component={[Function]}
     id="password"
-    label={
-      <FormattedMessage
-        id="registration.password"
-        values={Object {}}
-      />
-    }
+    label="Créez un mot de passe"
     labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
         "id": "registration-password-tooltip",
-        "message": <FormattedMessage
-          id="registration.tooltip.password"
-          values={Object {}}
-      />,
+        "message": "Le mot de passe doit comporter au moins huit caractères.",
       }
     }
     type="password"
@@ -384,18 +292,12 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     id="zipcode"
     label={
       <span>
-        <FormattedMessage
-          id="registration.zipcode"
-          values={Object {}}
-        />
+        Code postal
          
         <span
           className="excerpt"
         >
-          <FormattedMessage
-            id="global.form.optional"
-            values={Object {}}
-          />
+           (facultatif)
         </span>
       </span>
     }
@@ -409,18 +311,17 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
+    <FormattedHTMLMessage
+      link={
+        <a
+          className="external-link"
+          href="/charte"
         >
-            la charte
-        </a>,
-        }
+          la charte
+        </a>
       }
+      message="J'ai lu et j'accepte {link}."
+      tagName="span"
     />
   </Field>
   <Field

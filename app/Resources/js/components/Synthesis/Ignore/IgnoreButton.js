@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
@@ -9,6 +9,7 @@ const IgnoreButton = React.createClass({
     synthesis: React.PropTypes.object,
     element: React.PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -33,7 +34,10 @@ const IgnoreButton = React.createClass({
   },
 
   ignore() {
-    const { element, synthesis } = this.props;
+    const {
+      element,
+      synthesis,
+    } = this.props;
     this.hideConfirmModal();
     const data = {
       archived: true,
@@ -45,12 +49,8 @@ const IgnoreButton = React.createClass({
 
   renderConfirmButton() {
     return (
-      <Button
-        bsSize="large"
-        type="button"
-        className="element__action-ignore"
-        onClick={this.showConfirmModal}>
-        <i className="cap cap-delete-2" />
+      <Button bsSize="large" type="button" className="element__action-ignore" onClick={this.showConfirmModal}>
+        <i className="cap cap-delete-2"></i>
       </Button>
     );
   },
@@ -58,44 +58,18 @@ const IgnoreButton = React.createClass({
   renderConfirmModal() {
     const { element } = this.props;
     return (
-      <Modal
-        show={this.state.showConfirmModal}
-        onHide={this.hideConfirmModal}
-        animation={false}
-        dialogClassName="modal--confirm">
+      <Modal show={this.state.showConfirmModal} onHide={this.hideConfirmModal} animation={false} dialogClassName="modal--confirm">
         <Modal.Header closeButton>
           <Modal.Title>
-            <FormattedMessage
-              id="synthesis.edition.action.confirm_ignore.title"
-              values={{
-                name: element.title,
-              }}
-            />
+          <FormattedMessage message={this.getIntlMessage('synthesis.edition.action.confirm_ignore.title')} name={element.title} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {
-            <FormattedMessage id="synthesis.edition.action.confirm_ignore.body" />
-          }
+          {this.getIntlMessage('synthesis.edition.action.confirm_ignore.body')}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            type="button"
-            className="modal--confirm__cancel"
-            onClick={this.hideConfirmModal}>
-            {
-              <FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_cancel" />
-            }
-          </Button>
-          <Button
-            className="modal--confirm__submit"
-            bsStyle="primary"
-            type="submit"
-            onClick={this.ignore}>
-            {
-              <FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_submit" />
-            }
-          </Button>
+          <Button type="button" className="modal--confirm__cancel" onClick={this.hideConfirmModal}>{this.getIntlMessage('synthesis.edition.action.confirm_ignore.btn_cancel')}</Button>
+          <Button className="modal--confirm__submit" bsStyle="primary" type="submit" onClick={this.ignore}>{this.getIntlMessage('synthesis.edition.action.confirm_ignore.btn_submit')}</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -109,6 +83,7 @@ const IgnoreButton = React.createClass({
       </div>
     );
   },
+
 });
 
 export default IgnoreButton;

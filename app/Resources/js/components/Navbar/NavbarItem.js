@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
 const NavbarItem = React.createClass({
@@ -9,6 +10,7 @@ const NavbarItem = React.createClass({
     className: PropTypes.string,
     onKeyDown: PropTypes.func,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -31,19 +33,22 @@ const NavbarItem = React.createClass({
                 header
                 key={item.id}
                 className={className}
-                onKeyDown={onKeyDown}>
+                onKeyDown={onKeyDown}
+              >
                 {item.title}
               </MenuItem>
-              {item.children.map(child => {
-                return (
-                  <NavbarItem
-                    item={child}
-                    key={child.id}
-                    isChild
-                    onKeyDown={onKeyDown}
-                  />
-                );
-              })}
+              {
+                item.children.map((child) => {
+                  return (
+                    <NavbarItem
+                      item={child}
+                      key={child.id}
+                      isChild
+                      onKeyDown={onKeyDown}
+                    />
+                  );
+                })
+              }
             </span>
           );
         }
@@ -53,17 +58,20 @@ const NavbarItem = React.createClass({
             title={item.title}
             ref={refCallback}
             className={className}
-            onKeyDown={onKeyDown}>
-            {item.children.map((child, childIndex) => {
-              return (
-                <NavbarItem
-                  item={child}
-                  isChild
-                  key={childIndex}
-                  onKeyDown={onKeyDown}
-                />
-              );
-            })}
+            onKeyDown={onKeyDown}
+          >
+            {
+              item.children.map((child, childIndex) => {
+                return (
+                  <NavbarItem
+                    item={child}
+                    isChild
+                    key={childIndex}
+                    onKeyDown={onKeyDown}
+                  />
+                );
+              })
+            }
           </NavDropdown>
         );
       }
@@ -74,7 +82,8 @@ const NavbarItem = React.createClass({
             active={item.active}
             ref={refCallback}
             className={className}
-            onKeyDown={onKeyDown}>
+            onKeyDown={onKeyDown}
+          >
             {item.title}
           </MenuItem>
         );
@@ -85,13 +94,15 @@ const NavbarItem = React.createClass({
           active={item.active}
           ref={refCallback}
           className={className}
-          onKeyDown={onKeyDown}>
+          onKeyDown={onKeyDown}
+        >
           {item.title}
         </NavItem>
       );
     }
     return null;
   },
+
 });
 
 export default NavbarItem;

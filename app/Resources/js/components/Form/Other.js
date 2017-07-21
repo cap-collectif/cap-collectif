@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import Input from './Input';
 
@@ -11,6 +11,7 @@ const Other = React.createClass({
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -20,7 +21,6 @@ const Other = React.createClass({
   },
 
   componentDidUpdate() {
-    // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       input.addEventListener(
@@ -47,7 +47,6 @@ const Other = React.createClass({
   },
 
   onCheckUncheck(e) {
-    // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       if (e.target.checked) {
@@ -69,7 +68,6 @@ const Other = React.createClass({
       value: '',
       checked: false,
     });
-    // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       input.value = '';
@@ -90,7 +88,7 @@ const Other = React.createClass({
             checked={this.state.checked}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
-            {<FormattedMessage id="reply.other" />}
+            {this.getIntlMessage('reply.other')}
           </Input>
         </Col>
         <Col xs={10} md={11}>
@@ -101,7 +99,7 @@ const Other = React.createClass({
             type="text"
             bsSize="small"
             onChange={this.onType}
-            placeholder="reply.your_response"
+            placeholder={this.getIntlMessage('reply.your_response')}
             disabled={disabled}
           />
         </Col>

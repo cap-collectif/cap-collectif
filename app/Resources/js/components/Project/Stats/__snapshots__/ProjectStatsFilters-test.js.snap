@@ -12,7 +12,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       errors={null}
       id="stats-filter-themes"
       image={null}
@@ -24,17 +24,14 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       <option
         value="0"
       >
-        <FormattedMessage
-          id="global.select_themes"
-          values={Object {}}
-        />
+        Tous les thèmes
       </option>
       <option
         value={1}
       >
         theme-1
       </option>
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
   </Col>
   <Col
     bsClass="col"
@@ -42,7 +39,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       errors={null}
       id="stats-filter-categories"
       image={null}
@@ -54,15 +51,12 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       <option
         value="0"
       >
-        <FormattedMessage
-          id="global.select_categories"
-          values={Object {}}
-        />
+        Toutes les catégories
       </option>
       <option
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
   </Col>
   <Col
     bsClass="col"
@@ -70,7 +64,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     md={4}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       errors={null}
       id="stats-filter-districts"
       image={null}
@@ -82,15 +76,12 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       <option
         value="0"
       >
-        <FormattedMessage
-          id="global.select_districts"
-          values={Object {}}
-        />
+        Toutes les localisations
       </option>
       <option
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
   </Col>
 </Row>
 `;
@@ -107,7 +98,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
     md={12}
     xs={12}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       errors={null}
       id="stats-filter-categories"
       image={null}
@@ -119,15 +110,12 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
       <option
         value="0"
       >
-        <FormattedMessage
-          id="global.select_categories"
-          values={Object {}}
-        />
+        Toutes les catégories
       </option>
       <option
         value={1}
       />
-    </InjectIntl(ReactBootstrapInput)>
+    </Input>
   </Col>
 </Row>
 `;

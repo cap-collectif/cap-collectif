@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import { DropTarget, DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -13,13 +13,13 @@ const itemTarget = {
 
 const RankingBlock = React.createClass({
   displayName: 'RankingBlock',
-
   propTypes: {
     field: PropTypes.object.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     onRankingChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -48,15 +48,12 @@ const RankingBlock = React.createClass({
     const items = JSON.parse(JSON.stringify(this.state.items));
     items[list].splice(index, 1);
     items[atList].splice(atIndex, 0, item);
-    this.setState(
-      {
-        items,
-      },
-      () => {
-        onRankingChange(this.state.items.choiceBox);
-        this.recalculateChoicesHeight();
-      },
-    );
+    this.setState({
+      items,
+    }, () => {
+      onRankingChange(this.state.items.choiceBox);
+      this.recalculateChoicesHeight();
+    });
   },
 
   recalculateChoicesHeight() {
@@ -71,7 +68,7 @@ const RankingBlock = React.createClass({
     let itemList = null;
     let item = null;
     let itemIndex = null;
-    Object.keys(items).map(listKey => {
+    Object.keys(items).map((listKey) => {
       items[listKey].map((i, iKey) => {
         if (i.id === id) {
           itemList = listKey;
@@ -103,11 +100,11 @@ const RankingBlock = React.createClass({
         <Row>
           <Col xs={6}>
             <h5 className="h5">
-              {<FormattedMessage id="global.form.ranking.pickBox.title" />}
+              {this.getIntlMessage('global.form.ranking.pickBox.title')}
             </h5>
             <ListGroup className="ranking__pick-box">
               <RankingBox
-                ref={c => (this.pickBox = c)}
+                ref={c => this.pickBox = c}
                 items={items.pickBox}
                 spotsNb={spotsNb}
                 listType="pickBox"
@@ -119,13 +116,14 @@ const RankingBlock = React.createClass({
           </Col>
           <Col xs={6}>
             <h5 className="h5">
-              {<FormattedMessage id="global.form.ranking.choiceBox.title" />}
+              {this.getIntlMessage('global.form.ranking.choiceBox.title')}
             </h5>
             <ListGroup
               className="ranking__choice-box"
-              style={{ height: choicesHeight }}>
+              style={{ height: choicesHeight }}
+            >
               <RankingBox
-                ref={c => (this.choiceBox = c)}
+                ref={c => this.choiceBox = c}
                 items={items.choiceBox}
                 spotsNb={spotsNb}
                 listType="choiceBox"
@@ -133,28 +131,25 @@ const RankingBlock = React.createClass({
                 moveItem={this.moveItem}
                 disabled={disabled}
               />
-              {items.choiceBox.length === 0
-                ? <div
+              {
+                items.choiceBox.length === 0
+                  ? <div
                     className="hidden-xs ranking__choice-box__placeholder"
-                    style={{ height: `${spotsNb * 45}px` }}>
-                    <span>
-                      {
-                        <FormattedMessage id="global.form.ranking.choiceBox.placeholder" />
-                      }
-                    </span>
+                    style={{ height: `${spotsNb * 45}px` }}
+                  >
+                    <span>{this.getIntlMessage('global.form.ranking.choiceBox.placeholder')}</span>
                   </div>
-                : null}
+                  : null
+              }
             </ListGroup>
           </Col>
         </Row>
       </div>,
     );
   },
+
 });
 
-export default DragDropContext(HTML5Backend)(
-  DropTarget(ITEM_TYPE, itemTarget, connect => ({
-    // eslint-disable-line new-cap
-    connectDropTarget: connect.dropTarget(),
-  }))(RankingBlock),
-);
+export default DragDropContext(HTML5Backend)(DropTarget(ITEM_TYPE, itemTarget, connect => ({ // eslint-disable-line new-cap
+  connectDropTarget: connect.dropTarget(),
+}))(RankingBlock));

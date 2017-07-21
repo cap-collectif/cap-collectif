@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
@@ -12,6 +13,7 @@ const OpinionLinksBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     const { opinion } = this.props;

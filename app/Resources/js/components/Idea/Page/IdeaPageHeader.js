@@ -1,4 +1,5 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../../User/UserAvatar';
 import IdeaPageHeaderInfos from './IdeaPageHeaderInfos';
@@ -8,6 +9,7 @@ const IdeaPageHeader = React.createClass({
     idea: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -16,7 +18,10 @@ const IdeaPageHeader = React.createClass({
   },
 
   render() {
-    const { idea, className } = this.props;
+    const {
+      idea,
+      className,
+    } = this.props;
 
     const classes = {
       idea__header: true,
@@ -37,6 +42,7 @@ const IdeaPageHeader = React.createClass({
       </div>
     );
   },
+
 });
 
 export default IdeaPageHeader;

@@ -1,15 +1,16 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import CommentSection from '../../Comment/CommentSection';
 
 const ProposalPageComments = React.createClass({
   displayName: 'ProposalPageComments',
-
   propTypes: {
     id: React.PropTypes.number.isRequired,
     form: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -18,7 +19,11 @@ const ProposalPageComments = React.createClass({
   },
 
   render() {
-    const { className, form, id } = this.props;
+    const {
+      className,
+      form,
+      id,
+    } = this.props;
     const classes = {
       proposal__comments: true,
       [className]: true,
@@ -32,6 +37,7 @@ const ProposalPageComments = React.createClass({
       </div>
     );
   },
+
 });
 
 export default ProposalPageComments;

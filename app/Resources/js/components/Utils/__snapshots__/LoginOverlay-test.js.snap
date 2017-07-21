@@ -21,18 +21,10 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
         bsClass="popover"
         id="login-popover"
         placement="right"
-        title={
-          <FormattedMessage
-            id="vote.popover.title"
-            values={Object {}}
-          />
-        }
+        title="Connectez-vous pour contribuer"
       >
         <p>
-          <FormattedMessage
-            id="vote.popover.body"
-            values={Object {}}
-          />
+          Vous devez être connecté pour réaliser cette action.
         </p>
         <p>
           <Button
@@ -44,10 +36,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
             disabled={false}
             onClick={[Function]}
           >
-            <FormattedMessage
-              id="global.login"
-              values={Object {}}
-            />
+            Connexion
           </Button>
         </p>
       </Popover>

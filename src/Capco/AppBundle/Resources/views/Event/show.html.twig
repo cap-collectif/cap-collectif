@@ -107,7 +107,7 @@
                         <a class="btn  btn-primary  external-link" href="{{ event.link }}" class="external-link">{{ 'event.link_button'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
 
-                    {{ react_render_component('ShareButtonDropdownApp', {
+                    {{ react_intl_component('ShareButtonDropdownApp', {
                         'props': {
                             'url': url('app_event_show', {'slug': event.slug}),
                             'title': event.title,
@@ -134,7 +134,7 @@
                 {% if capco_comment_can_add(event) or (capco_comment_can_show(event) and event.commentsCount > 0) %}
                     <div class="container  container--thinner  container--custom">
                         {% if capco_comment_can_show(event) %}
-                            {{ react_render_component('CommentSectionApp', {'props': props}) }}
+                            {{ react_intl_component('CommentSectionApp', {'props': props}) }}
                         {% endif %}
                     </div>
                 {% endif %}

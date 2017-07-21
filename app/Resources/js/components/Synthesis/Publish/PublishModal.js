@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
@@ -17,8 +17,7 @@ const PublishModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
-
-  mixins: [DeepLinkStateMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -180,8 +179,8 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.title" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.title',
           )}`}
         </h2>
         <Input
@@ -199,8 +198,8 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.parent" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.parent',
           )}`}
         </h2>
         {this.renderParentFinder()}
@@ -251,11 +250,11 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.notation" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.notation',
           )}`}
-          <span className="small excerpt action__title-right">{`\t${(
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
           )}`}</span>
         </h2>
         <NotationButtons
@@ -264,9 +263,9 @@ const PublishModal = React.createClass({
           block
         />
         <p className="small excerpt action__help">
-          {
-            <FormattedMessage id="synthesis.edition.action.publish.help.notation" />
-          }
+          {this.getIntlMessage(
+            'synthesis.edition.action.publish.help.notation',
+          )}
         </p>
       </div>
     );
@@ -276,11 +275,11 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.comment" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.comment',
           )}`}
-          <span className="small excerpt action__title-right">{`\t${(
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
           )}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
@@ -300,11 +299,11 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.description" />
+          {` ${this.getIntlMessage(
+            'synthesis.edition.action.publish.field.description',
           )}`}
-          <span className="small excerpt action__title-right">{`\t${(
-            <FormattedMessage id="synthesis.edition.action.publish.optional" />
+          <span className="small excerpt action__title-right">{`\t${this.getIntlMessage(
+            'synthesis.edition.action.publish.optional',
           )}`}</span>
         </h2>
         <form id="publish_element" name="publish_element">
@@ -330,7 +329,7 @@ const PublishModal = React.createClass({
         dialogClassName="modal--publish">
         <Modal.Header closeButton>
           <Modal.Title>
-            {<FormattedMessage id="synthesis.edition.action.publish.title" />}
+            {this.getIntlMessage('synthesis.edition.action.publish.title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -345,14 +344,10 @@ const PublishModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            {
-              <FormattedMessage id="synthesis.edition.action.publish.btn_cancel" />
-            }
+            {this.getIntlMessage('synthesis.edition.action.publish.btn_cancel')}
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.publish}>
-            {
-              <FormattedMessage id="synthesis.edition.action.publish.btn_submit" />
-            }
+            {this.getIntlMessage('synthesis.edition.action.publish.btn_submit')}
           </Button>
         </Modal.Footer>
       </Modal>

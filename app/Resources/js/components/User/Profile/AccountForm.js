@@ -1,14 +1,10 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
-import {
-  submitAccountForm as onSubmit,
-  resendConfirmation,
-  cancelEmailChange,
-} from '../../../redux/modules/user';
+import { submitAccountForm as onSubmit, resendConfirmation, cancelEmailChange } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
 import type { State } from '../../../types';
@@ -16,7 +12,7 @@ import type { State } from '../../../types';
 export const form = 'account';
 const validate = (
   values: { email: ?string },
-  props: { initialValues: { email: string } },
+  props: { initialValues: { email: string }},
 ): { email: ?string } => {
   const errors = {};
   if (!values.email) {
@@ -39,30 +35,26 @@ export const AccountForm = React.createClass({
     dispatch: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
-    const {
-      initialValues,
-      dispatch,
-      handleSubmit,
-      confirmationEmailResent,
-      error,
-      newEmailToConfirm,
-    } = this.props;
+    const { initialValues, dispatch, handleSubmit, confirmationEmailResent, error, newEmailToConfirm } = this.props;
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
-        {error &&
-          <Alert bsStyle="danger">
-            <p>
-              <FormattedHTMLMessage id={error} />
-            </p>
-          </Alert>}
-        {confirmationEmailResent &&
-          <Alert bsStyle="warning">
-            <p>
-              {'Un email de confirmation vous a été envoyé.'}
-            </p>
-          </Alert>}
+        {
+          error &&
+            <Alert bsStyle="danger">
+              <p>
+                <FormattedHTMLMessage message={this.getIntlMessage(error)} />
+              </p>
+            </Alert>
+        }
+        {
+          confirmationEmailResent &&
+            <Alert bsStyle="warning">
+              <p>{ 'Un email de confirmation vous a été envoyé.'}</p>
+            </Alert>
+        }
         <Field
           type="email"
           component={renderComponent}
@@ -70,32 +62,31 @@ export const AccountForm = React.createClass({
           id="account__email"
           labelClassName="col-sm-4"
           wrapperClassName="col-sm-6"
-          label={<FormattedMessage id="proposal.vote.form.email" />}
+          label={this.getIntlMessage('proposal.vote.form.email')}
         />
         <p className="small excerpt col-sm-6 col-sm-offset-4">
           Votre adresse électronique ne sera pas rendue publique.
         </p>
-        {newEmailToConfirm &&
-          <div className="col-sm-6 col-sm-offset-4">
-            <p className="small excerpt">
-              <FormattedHTMLMessage
-                id="user.confirm.profile_help"
-                values={{ email: newEmailToConfirm }}
-              />
-            </p>
-            <p className="small excerpt">
-              <a href="#resend" onClick={() => resendConfirmation()}>
-                <FormattedMessage id="user.confirm.resend" />
-              </a>
-              {' · '}
-              <a
-                href="#cancel"
-                onClick={() =>
-                  cancelEmailChange(dispatch, initialValues.email)}>
-                <FormattedMessage id="user.confirm.cancel" />
-              </a>
-            </p>
-          </div>}
+        {
+          newEmailToConfirm &&
+            <div className="col-sm-6 col-sm-offset-4">
+              <p className="small excerpt">
+                <FormattedHTMLMessage
+                  message={this.getIntlMessage('user.confirm.profile_help')}
+                  email={newEmailToConfirm}
+                />
+              </p>
+              <p className="small excerpt">
+                <a href="#resend" onClick={() => resendConfirmation()}>
+                  {this.getIntlMessage('user.confirm.resend')}
+                </a>
+                { ' · ' }
+                <a href="#cancel" onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
+                  {this.getIntlMessage('user.confirm.cancel')}
+                </a>
+              </p>
+            </div>
+        }
       </form>
     );
   },
@@ -109,10 +100,8 @@ const mapStateToProps = (state: State) => ({
   },
 });
 
-export default connect(mapStateToProps)(
-  reduxForm({
-    form,
-    validate,
-    onSubmit,
-  })(AccountForm),
-);
+export default connect(mapStateToProps)(reduxForm({
+  form,
+  validate,
+  onSubmit,
+})(AccountForm));

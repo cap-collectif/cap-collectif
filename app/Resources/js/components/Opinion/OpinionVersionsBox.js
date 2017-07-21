@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
 import Loader from '../Utils/Loader';
@@ -14,6 +14,7 @@ const OpinionVersionsBox = React.createClass({
     opinionId: React.PropTypes.string.isRequired,
     opinionBody: React.PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -70,7 +71,7 @@ const OpinionVersionsBox = React.createClass({
           <label
             htmlFor="filter-opinion-version"
             className="control-label h5 sr-only">
-            <FormattedMessage id="opinion.version.filter" />
+            {this.getIntlMessage('opinion.version.filter')}
           </label>
           <select
             id="filter-opinion-version"
@@ -78,42 +79,24 @@ const OpinionVersionsBox = React.createClass({
             className="form-control pull-right"
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
-            <FormattedMessage id="global.filter_random">
-              {message =>
-                <option value="random">
-                  {message}
-                </option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_last">
-              {message =>
-                <option value="last">
-                  {message}
-                </option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_old">
-              {message =>
-                <option value="old">
-                  {message}
-                </option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_favorable">
-              {message =>
-                <option value="favorable">
-                  {message}
-                </option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_votes">
-              {message =>
-                <option value="votes">
-                  {message}
-                </option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_comments">
-              {message =>
-                <option value="comments">
-                  {message}
-                </option>}
-            </FormattedMessage>
+            <option value="random">
+              {this.getIntlMessage('global.filter_random')}
+            </option>
+            <option value="last">
+              {this.getIntlMessage('global.filter_last')}
+            </option>
+            <option value="old">
+              {this.getIntlMessage('global.filter_old')}
+            </option>
+            <option value="favorable">
+              {this.getIntlMessage('global.filter_favorable')}
+            </option>
+            <option value="votes">
+              {this.getIntlMessage('global.filter_votes')}
+            </option>
+            <option value="comments">
+              {this.getIntlMessage('global.filter_comments')}
+            </option>
           </select>
         </form>
       );

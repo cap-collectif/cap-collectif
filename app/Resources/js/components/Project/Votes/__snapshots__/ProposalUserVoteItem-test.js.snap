@@ -95,10 +95,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       disabled={false}
       onClick={[Function]}
     >
-      <FormattedMessage
-        id="project.votes.delete"
-        values={Object {}}
-      />
+      Retirer
     </Button>
   </Col>
 </Row>

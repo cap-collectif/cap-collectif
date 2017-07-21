@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Modal, Row } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import UserBox from '../User/UserBox';
 
@@ -10,6 +10,7 @@ const AllVotesModal = React.createClass({
     showModal: PropTypes.bool.isRequired,
     onToggleModal: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   close() {
     const { onToggleModal } = this.props;
@@ -17,37 +18,43 @@ const AllVotesModal = React.createClass({
   },
 
   render() {
-    const { showModal, votes } = this.props;
+    const {
+      showModal,
+      votes,
+    } = this.props;
     return (
       <Modal
         animation={false}
         show={showModal}
         onHide={this.close}
         bsSize="large"
-        aria-labelledby="contained-modal-title-lg">
+        aria-labelledby="contained-modal-title-lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage
-              id="vote.count"
-              values={{
-                count: votes.length,
-              }}
+              message={this.getIntlMessage('vote.count')}
+              count={votes.length}
             />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
-            {votes.map((vote, key) =>
-              <UserBox key={key} user={vote.user} username={vote.username} />,
-            )}
+            {
+              votes.map((vote, key) => <UserBox key={key} user={vote.user} username={vote.username} />)
+            }
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={this.close} label="global.close" />
+          <CloseButton
+            onClose={this.close}
+            label="global.close"
+          />
         </Modal.Footer>
       </Modal>
     );
   },
+
 });
 
 export default AllVotesModal;

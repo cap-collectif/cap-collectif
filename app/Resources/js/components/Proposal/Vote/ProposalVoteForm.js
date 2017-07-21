@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { reduxForm, formValueSelector, Field } from 'redux-form';
@@ -36,72 +36,70 @@ const ProposalVoteForm = React.createClass({
     error: PropTypes.string,
     voteWithoutAccount: PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
-    const {
-      error,
-      handleSubmit,
-      comment,
-      isPrivate,
-      anonymous,
-      voteWithoutAccount,
-    } = this.props;
+    const { error, handleSubmit, comment, isPrivate, anonymous, voteWithoutAccount } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        {error &&
-          <Alert bsStyle="danger">
-            <p>
-              {error}
-            </p>
-          </Alert>}
-        {anonymous &&
-          voteWithoutAccount &&
-          <Field
-            type="text"
-            component={renderComponent}
-            name="username"
-            id="proposal-vote__username"
-            label={<FormattedMessage id="proposal.vote.form.username" />}
-          />}
-        {anonymous &&
-          voteWithoutAccount &&
-          <Field
-            type="email"
-            component={renderComponent}
-            name="email"
-            id="proposal-vote__email"
-            label={<FormattedMessage id="proposal.vote.form.email" />}
-          />}
-        {comment.length > 0 && (voteWithoutAccount || !anonymous)
-          ? null
-          : <Field
+        {
+          error &&
+            <Alert bsStyle="danger">
+              <p>{error}</p>
+            </Alert>
+        }
+        {
+          anonymous && voteWithoutAccount &&
+            <Field
+              type="text"
+              component={renderComponent}
+              name="username"
+              id="proposal-vote__username"
+              label={this.getIntlMessage('proposal.vote.form.username')}
+            />
+        }
+        {
+          anonymous && voteWithoutAccount &&
+            <Field
+              type="email"
+              component={renderComponent}
+              name="email"
+              id="proposal-vote__email"
+              label={this.getIntlMessage('proposal.vote.form.email')}
+            />
+        }
+        {
+          comment.length > 0 && (voteWithoutAccount || !anonymous)
+            ? null
+            : <Field
               type="checkbox"
               component={renderComponent}
               name="private"
               id="proposal-vote__private"
               disableValidation
-              label={<FormattedMessage id="proposal.vote.form.private" />}
-            />}
-        {!isPrivate &&
-          (!voteWithoutAccount || anonymous) &&
-          <Field
-            type="textarea"
-            component={renderComponent}
-            name="comment"
-            id="proposal-vote__comment"
-            label={
-              <span style={{ fontWeight: 'normal' }}>
-                {<FormattedMessage id="proposal.vote.form.comment" />}
-                <span className="excerpt">
-                  {<FormattedMessage id="global.form.optional" />}
+              label={this.getIntlMessage('proposal.vote.form.private')}
+            />
+        }
+        {
+          !isPrivate && (!voteWithoutAccount || anonymous) &&
+            <Field
+              type="textarea"
+              component={renderComponent}
+              name="comment"
+              id="proposal-vote__comment"
+              label={
+                <span style={{ fontWeight: 'normal' }}>
+                  {this.getIntlMessage('proposal.vote.form.comment')}
+                  <span className="excerpt">{this.getIntlMessage('global.form.optional')}</span>
                 </span>
-              </span>
-            }
-            placeholder="proposal.vote.form.comment_placeholder"
-          />}
+              }
+              placeholder={this.getIntlMessage('proposal.vote.form.comment_placeholder')}
+            />
+        }
       </form>
     );
   },
+
 });
 
 const mapStateToProps = state => ({
@@ -111,11 +109,8 @@ const mapStateToProps = state => ({
   voteWithoutAccount: state.default.features.vote_without_account,
 });
 
-export default connect(mapStateToProps)(
-  reduxForm({
-    form,
-    validate,
-    onSubmit: (values, dispatch, { proposal, step }) =>
-      vote(dispatch, step, proposal, values),
-  })(ProposalVoteForm),
-);
+export default connect(mapStateToProps)(reduxForm({
+  form,
+  validate,
+  onSubmit: (values, dispatch, { proposal, step }) => (vote(dispatch, step, proposal, values)),
+})(ProposalVoteForm));

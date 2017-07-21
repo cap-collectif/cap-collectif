@@ -20,12 +20,9 @@ exports[`<IdeasIndexHeader /> should render ideas index description when provide
     }
   }
 >
-  <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<p>blabla</p>",
-      }
-    }
+  <FormattedHTMLMessage
+    message="<p>blabla</p>"
+    tagName="span"
   />
 </div>
 `;

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../translations/FR';
 import Checkbox from './Checkbox';
 
 describe('<Checkbox />', () => {
@@ -22,7 +22,7 @@ describe('<Checkbox />', () => {
   const props = {
     label: 'label',
     id: 'reply-1',
-
+    ...IntlData,
     disabled: false,
     onChange: jest.fn(),
     getGroupStyle: jest.fn(),
@@ -30,13 +30,20 @@ describe('<Checkbox />', () => {
   };
 
   it('should render correctly', () => {
-    const wrapper = shallow(<Checkbox field={field} {...props} />);
+    const wrapper = shallow(
+      <Checkbox
+        field={field}
+        {...props}
+      />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render with an other field', () => {
     const wrapper = shallow(
-      <Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />,
+      <Checkbox
+        field={{ ...field, isOtherAllowed: true }}
+        {...props}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

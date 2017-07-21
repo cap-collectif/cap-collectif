@@ -24,7 +24,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     value={Array []}
   >
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-20"
@@ -36,10 +36,10 @@ exports[`<Checkbox /> should render correctly 1`] = `
         value="Athlétisme"
       >
         Athlétisme
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-21"
@@ -51,10 +51,10 @@ exports[`<Checkbox /> should render correctly 1`] = `
         value="Natation"
       >
         Natation
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-22"
@@ -66,10 +66,10 @@ exports[`<Checkbox /> should render correctly 1`] = `
         value="Sports collectifs"
       >
         Sports collectifs
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-23"
@@ -81,7 +81,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
         value="Sports individuels"
       >
         Sports individuels
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
   </CheckboxGroup>
 </div>
@@ -111,7 +111,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     value={Array []}
   >
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-20"
@@ -123,10 +123,10 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         value="Athlétisme"
       >
         Athlétisme
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-21"
@@ -138,10 +138,10 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         value="Natation"
       >
         Natation
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-22"
@@ -153,10 +153,10 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         value="Sports collectifs"
       >
         Sports collectifs
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <div>
-      <InjectIntl(ReactBootstrapInput)
+      <Input
         disabled={false}
         errors={null}
         id="reply-1_choice-23"
@@ -168,7 +168,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         value="Sports individuels"
       >
         Sports individuels
-      </InjectIntl(ReactBootstrapInput)>
+      </Input>
     </div>
     <Other
       disabled={false}

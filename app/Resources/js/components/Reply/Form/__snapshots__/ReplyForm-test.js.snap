@@ -4,7 +4,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
 <form
   id="reply-form"
 >
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     disabled={false}
     errors={null}
     groupClassName=""
@@ -12,17 +12,14 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     id="reply-10"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?"
+        tagName="span"
       />
     }
     labelClassName="h4"
     medias={Array []}
-    placeholder="reply.your_response"
+    placeholder="Votre réponse"
     type="text"
     valueLink={
       Object {
@@ -65,19 +62,16 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     getGroupStyle={[Function]}
     id="reply-12"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ?"
+        tagName="span"
       />
     }
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     defaultValue=""
     disabled={false}
     errors={null}
@@ -86,12 +80,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     id="reply-13"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -108,10 +99,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       disabled={true}
       value=""
     >
-      <FormattedMessage
-        id="global.select"
-        values={Object {}}
-      />
+      Choisir une valeur
     </option>
     <option
       value="Pas assez fort (Mon sonotone est en panne)"
@@ -128,7 +116,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     >
       Trop fort (Mon sonotone est tout neuf)
     </option>
-  </InjectIntl(ReactBootstrapInput)>
+  </Input>
   <Ranking
     disabled={false}
     field={
@@ -158,12 +146,9 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     getGroupStyle={[Function]}
     id="reply-14"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -177,7 +162,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
 <form
   id="reply-form"
 >
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     disabled={false}
     errors={null}
     groupClassName=""
@@ -185,17 +170,14 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     id="reply-10"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?"
+        tagName="span"
       />
     }
     labelClassName="h4"
     medias={Array []}
-    placeholder="reply.your_response"
+    placeholder="Votre réponse"
     type="text"
     valueLink={
       Object {
@@ -238,12 +220,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     getGroupStyle={[Function]}
     id="reply-12"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ?"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -279,12 +258,9 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     getGroupStyle={[Function]}
     id="reply-14"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il: <span class=\\"small excerpt\\">Facultatif</span>"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -298,7 +274,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
 <form
   id="reply-form"
 >
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     disabled={false}
     errors={null}
     groupClassName=""
@@ -306,17 +282,14 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     id="reply-10"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ? <span class=\\"small warning\\">Obligatoire</span>",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ? <span class=\\"small warning\\">Obligatoire</span>"
+        tagName="span"
       />
     }
     labelClassName="h4"
     medias={Array []}
-    placeholder="reply.your_response"
+    placeholder="Votre réponse"
     type="text"
     valueLink={
       Object {
@@ -359,12 +332,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     getGroupStyle={[Function]}
     id="reply-11"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Pour quel type d'épreuve êtes vous prêt à acheter des places"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -414,19 +384,16 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     getGroupStyle={[Function]}
     id="reply-12"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ? <span class=\\"small warning\\">Obligatoire</span>",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ? <span class=\\"small warning\\">Obligatoire</span>"
+        tagName="span"
       />
     }
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     defaultValue=""
     disabled={false}
     errors={null}
@@ -435,12 +402,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     id="reply-13"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il:",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -457,10 +421,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       disabled={true}
       value=""
     >
-      <FormattedMessage
-        id="global.select"
-        values={Object {}}
-      />
+      Choisir une valeur
     </option>
     <option
       value="Pas assez fort (Mon sonotone est en panne)"
@@ -477,7 +438,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     >
       Trop fort (Mon sonotone est tout neuf)
     </option>
-  </InjectIntl(ReactBootstrapInput)>
+  </Input>
   <Ranking
     disabled={false}
     field={
@@ -507,12 +468,9 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     getGroupStyle={[Function]}
     id="reply-14"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il:",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -560,12 +518,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     getGroupStyle={[Function]}
     id="reply-11"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Pour quel type d'épreuve êtes vous prêt à acheter des places"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -579,7 +534,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       }
     }
   />
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     defaultValue=""
     disabled={false}
     errors={null}
@@ -588,12 +543,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     id="reply-13"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il:",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -610,10 +562,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       disabled={true}
       value=""
     >
-      <FormattedMessage
-        id="global.select"
-        values={Object {}}
-      />
+      Choisir une valeur
     </option>
     <option
       value="Pas assez fort (Mon sonotone est en panne)"
@@ -630,7 +579,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     >
       Trop fort (Mon sonotone est tout neuf)
     </option>
-  </InjectIntl(ReactBootstrapInput)>
+  </Input>
   <Ranking
     disabled={false}
     field={
@@ -660,12 +609,9 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     getGroupStyle={[Function]}
     id="reply-14"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Nelson Monfort parle-t-il:",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Nelson Monfort parle-t-il:"
+        tagName="span"
       />
     }
     labelClassName="h4"
@@ -686,7 +632,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
   >
     Tous les champs sont obligatoires
   </Alert>
-  <InjectIntl(ReactBootstrapInput)
+  <Input
     disabled={false}
     errors={null}
     groupClassName=""
@@ -694,17 +640,14 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
     id="reply-10"
     image={null}
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?"
+        tagName="span"
       />
     }
     labelClassName="h4"
     medias={Array []}
-    placeholder="reply.your_response"
+    placeholder="Votre réponse"
     type="text"
     valueLink={
       Object {
@@ -747,12 +690,9 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
     getGroupStyle={[Function]}
     id="reply-12"
     label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ?",
-          }
-        }
+      <FormattedHTMLMessage
+        message="Quel est ton athlète favori ?"
+        tagName="span"
       />
     }
     labelClassName="h4"

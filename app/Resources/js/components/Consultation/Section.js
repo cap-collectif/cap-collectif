@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { IntlMixin } from 'react-intl';
 import OpinionList from './OpinionList';
 
 export const Section = React.createClass({
@@ -9,6 +10,7 @@ export const Section = React.createClass({
     consultation: React.PropTypes.object.isRequired,
     level: React.PropTypes.number.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { consultation, section, level } = this.props;

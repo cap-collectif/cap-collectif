@@ -9,7 +9,7 @@ exports[`<MainNavbarSearch /> should render a search form 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <InjectIntl(ReactBootstrapInput)
+    <Input
       buttonAfter={
         <Button
           active={false}
@@ -34,7 +34,7 @@ exports[`<MainNavbarSearch /> should render a search form 1`] = `
       image={null}
       labelClassName="h5"
       medias={Array []}
-      placeholder="synthesis.edition.navbar.search"
+      placeholder="Rechercher"
       type="text"
       valueLink={
         Object {

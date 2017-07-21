@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectStatsPage } from './ProjectStatsPage';
+import IntlData from '../../../translations/FR';
 
 describe('<ProjectStatsPage />', () => {
   const steps = [
@@ -27,6 +28,7 @@ describe('<ProjectStatsPage />', () => {
     themes: [],
     districts: [],
     categories: [],
+    ...IntlData,
   };
 
   it('should render only one block', () => {

@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { showOpinionVersionCreateModal } from '../../redux/modules/opinion';
@@ -13,6 +13,7 @@ const OpinionVersionCreateButton = React.createClass({
     isContribuable: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -29,20 +30,19 @@ const OpinionVersionCreateButton = React.createClass({
     }
     return (
       <div className={className} style={style}>
-        {isContribuable &&
-          <LoginOverlay>
-            <Button
-              bsStyle="primary"
-              onClick={() => {
-                dispatch(showOpinionVersionCreateModal());
-              }}>
-              <i className="cap cap-add-1" />
-              <FormattedMessage id="opinion.add_new_version" />
-            </Button>
-          </LoginOverlay>}
+        {
+          isContribuable &&
+            <LoginOverlay>
+              <Button bsStyle="primary" onClick={() => { dispatch(showOpinionVersionCreateModal()); }}>
+                <i className="cap cap-add-1"></i>
+                { ` ${this.getIntlMessage('opinion.add_new_version')}`}
+              </Button>
+            </LoginOverlay>
+        }
       </div>
     );
   },
+
 });
 
 export default connect()(OpinionVersionCreateButton);

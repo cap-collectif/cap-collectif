@@ -12,10 +12,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
       id="pinned-label"
       placement="top"
     >
-      <FormattedMessage
-        id="global.pinned.tooltip.comment"
-        values={Object {}}
-      />
+      Ce commentaire a été épinglé par l'administrateur.
     </Tooltip>
   }
   placement="top"
@@ -33,10 +30,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
       className="cap cap-pin-1"
     />
      
-    <FormattedMessage
-      id="global.pinned.label"
-      values={Object {}}
-    />
+    Épinglé
   </span>
 </OverlayTrigger>
 `;
@@ -51,10 +45,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
       id="pinned-label"
       placement="top"
     >
-      <FormattedMessage
-        id="global.pinned.tooltip.opinion"
-        values={Object {}}
-      />
+      Cette proposition a été épinglée par l'administrateur.
     </Tooltip>
   }
   placement="top"
@@ -72,10 +63,7 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
       className="cap cap-pin-1"
     />
      
-    <FormattedMessage
-      id="global.pinned.label"
-      values={Object {}}
-    />
+    Épinglé
   </span>
 </OverlayTrigger>
 `;

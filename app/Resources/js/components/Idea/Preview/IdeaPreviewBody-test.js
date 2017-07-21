@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../../translations/FR';
 import IdeaPreviewBody from './IdeaPreviewBody';
 
 const idea = {
@@ -24,7 +24,7 @@ const ideaTrashed = {
 
 describe('<IdeaPreviewBody />', () => {
   it('it should render idea preview body', () => {
-    const wrapper = shallow(<IdeaPreviewBody idea={idea} />);
+    const wrapper = shallow(<IdeaPreviewBody idea={idea} {...IntlData} />);
     expect(wrapper.find('.idea__preview__body')).toHaveLength(1);
     expect(wrapper.find('h2.h4.idea__title.smart-fade')).toHaveLength(1);
     expect(wrapper.find('.idea__label')).toHaveLength(0);
@@ -34,7 +34,7 @@ describe('<IdeaPreviewBody />', () => {
   });
 
   it('should render trashed label when idea is trashed', () => {
-    const wrapper = shallow(<IdeaPreviewBody idea={ideaTrashed} />);
+    const wrapper = shallow(<IdeaPreviewBody idea={ideaTrashed} {...IntlData} />);
     expect(wrapper.find('.idea__label')).toHaveLength(1);
   });
 });

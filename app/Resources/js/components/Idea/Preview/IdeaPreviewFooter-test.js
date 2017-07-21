@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
+import IntlData from '../../../translations/FR';
 import IdeaPreviewFooter from './IdeaPreviewFooter';
 
 const idea = {
@@ -20,13 +21,18 @@ const ideaCommentable = {
 
 describe('<IdeaPreviewFooter />', () => {
   it('should render idea preview footer with votes counter', () => {
-    const wrapper = shallow(<IdeaPreviewFooter idea={idea} />);
+    const wrapper = shallow(<IdeaPreviewFooter idea={idea} {...IntlData} />);
     expect(wrapper.find('.idea__preview__footer')).toHaveLength(1);
-    expect(wrapper).toMatchSnapshot();
+    const messages = wrapper.find('FormattedMessage');
+    expect(messages).toHaveLength(1);
+    expect(messages.find({ num: idea.votesCount })).toHaveLength(1);
+    expect(messages.find({ num: idea.commentsCount })).toHaveLength(0);
   });
 
   it('should render comment counter when idea is commentable', () => {
-    const wrapper = shallow(<IdeaPreviewFooter idea={ideaCommentable} />);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<IdeaPreviewFooter idea={ideaCommentable} {...IntlData} />);
+    const messages = wrapper.find('FormattedMessage');
+    expect(messages).toHaveLength(2);
+    expect(messages.find({ num: ideaCommentable.commentsCount })).toHaveLength(1);
   });
 });

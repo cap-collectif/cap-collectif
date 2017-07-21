@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import renderInput from '../../Form/Field';
@@ -24,13 +24,14 @@ export const ProposalAdminForm = React.createClass({
     themes: PropTypes.array.isRequired,
     features: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { districts, themes, features, user, proposalForm } = this.props;
     const optional = (
-      <span className="excerpt">
-        {' '}<FormattedMessage id="global.form.optional" />
-      </span>
+      <span className="excerpt">{` ${this.getIntlMessage(
+        'global.form.optional',
+      )}`}</span>
     );
     return (
       <form className="form-horizontal">
@@ -63,7 +64,7 @@ export const ProposalAdminForm = React.createClass({
           id="proposal-admin-body"
           type="editor"
           component={renderInput}
-          label={<FormattedMessage id="proposal.body" />}
+          label={this.getIntlMessage('proposal.body')}
           labelClassName="col-sm-2"
           wrapperClassName="col-sm-10"
         />
@@ -75,12 +76,12 @@ export const ProposalAdminForm = React.createClass({
             clearable={!proposalForm.categoryMandatory}
             label={
               <span>
-                {<FormattedMessage id="proposal.category" />}
+                {this.getIntlMessage('proposal.category')}
                 {!proposalForm.categoryMandatory && optional}
               </span>
             }
             component={renderSelect}
-            placeholder="proposal.select.category"
+            placeholder={this.getIntlMessage('proposal.select.category')}
             options={proposalForm.categories.map(c => ({
               value: c.id,
               label: c.name,
@@ -91,13 +92,13 @@ export const ProposalAdminForm = React.createClass({
           <Field
             name="theme"
             id="proposal-admin-theme"
-            placeholder="proposal.select.theme"
+            placeholder={this.getIntlMessage('proposal.select.theme')}
             options={themes.map(t => ({ value: t.id, label: t.title }))}
             component={renderSelect}
             clearable={!proposalForm.themeMandatory}
             label={
               <span>
-                {<FormattedMessage id="proposal.theme" />}
+                {this.getIntlMessage('proposal.theme')}
                 {!proposalForm.themeMandatory && optional}
               </span>
             }
@@ -107,12 +108,12 @@ export const ProposalAdminForm = React.createClass({
           <Field
             name="district"
             id="proposal-admin-district"
-            placeholder="proposal.select.district"
+            placeholder={this.getIntlMessage('proposal.select.district')}
             component={renderSelect}
             clearable={!proposalForm.districtMandatory}
             label={
               <span>
-                {<FormattedMessage id="proposal.district" />}
+                {this.getIntlMessage('proposal.district')}
                 {!proposalForm.districtMandatory && optional}
               </span>
             }
@@ -144,7 +145,7 @@ export const ProposalAdminForm = React.createClass({
           wrapperClassName="col-sm-10"
           label={
             <span>
-              {<FormattedMessage id="proposal.media" />}
+              {this.getIntlMessage('proposal.media')}
               {optional}
             </span>
           }

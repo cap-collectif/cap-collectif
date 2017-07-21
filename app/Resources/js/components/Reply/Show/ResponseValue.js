@@ -1,44 +1,31 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 
 const ResponseValue = React.createClass({
   propTypes: {
     response: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { response } = this.props;
-    if (
-      !response.value ||
-      (Array.isArray(response.value) && !response.value.length)
-    ) {
-      return (
-        <p>
-          {<FormattedMessage id="reply.show.response.no_value" />}
-        </p>
-      );
+    if (!response.value || (Array.isArray(response.value) && !response.value.length)) {
+      return <p>{this.getIntlMessage('reply.show.response.no_value')}</p>;
     }
     if (response.field.type === 'editor') {
-      return (
-        <p>
-          <div dangerouslySetInnerHTML={{ __html: response.value }} />
-        </p>
-      );
+      return <p><FormattedHTMLMessage message={response.value} /></p>;
     }
     if (response.field.type === 'ranking') {
       return response.value.labels.length > 0
         ? <ol>
-            {response.value.labels.map((label, index) => {
-              return (
-                <li key={index}>
-                  {label}
-                </li>
-              );
-            })}
-          </ol>
-        : <p>
-            <FormattedMessage id="reply.show.response.no_value" />
-          </p>;
+          {
+            response.value.labels.map((label, index) => {
+              return <li key={index}>{label}</li>;
+            })
+          }
+        </ol>
+        : <p>{this.getIntlMessage('reply.show.response.no_value')}</p>
+      ;
     }
     if (typeof response.value === 'object') {
       const labels = response.value.labels;
@@ -46,19 +33,13 @@ const ResponseValue = React.createClass({
         labels.push(response.value.other);
       }
       return labels.length > 0
-        ? <p>
-            {labels.join(', ')}
-          </p>
-        : <p>
-            {<FormattedMessage id="reply.show.response.no_value" />}
-          </p>;
+        ? <p>{labels.join(', ')}</p>
+        : <p>{this.getIntlMessage('reply.show.response.no_value')}</p>
+      ;
     }
-    return (
-      <p>
-        {response.value}
-      </p>
-    );
+    return <p>{response.value}</p>;
   },
+
 });
 
 export default ResponseValue;

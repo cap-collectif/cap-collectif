@@ -1,16 +1,12 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import {
-  submitProposalForm,
-  openCreateModal,
-  closeCreateModal,
-} from '../../../redux/modules/proposal';
+import { submitProposalForm, openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
 
 const ProposalCreate = React.createClass({
   propTypes: {
@@ -20,9 +16,16 @@ const ProposalCreate = React.createClass({
     isSubmitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
-    const { categories, form, showModal, isSubmitting, dispatch } = this.props;
+    const {
+      categories,
+      form,
+      showModal,
+      isSubmitting,
+      dispatch,
+    } = this.props;
     return (
       <div>
         <ProposalCreateButton
@@ -33,20 +36,16 @@ const ProposalCreate = React.createClass({
           animation={false}
           show={showModal}
           onHide={() => {
-            if (
-              // eslint-disable-next-line no-alert
-              window.confirm(
-                <FormattedMessage id="proposal.confirm_close_modal" />,
-              )
-            ) {
+            if (window.confirm(this.getIntlMessage('proposal.confirm_close_modal'))) { // eslint-disable-line no-alert
               dispatch(closeCreateModal());
             }
           }}
           bsSize="large"
-          aria-labelledby="contained-modal-title-lg">
+          aria-labelledby="contained-modal-title-lg"
+        >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="proposal.add" />}
+              { this.getIntlMessage('proposal.add') }
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -57,7 +56,9 @@ const ProposalCreate = React.createClass({
             />
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={() => dispatch(closeCreateModal())} />
+            <CloseButton
+              onClose={() => dispatch(closeCreateModal())}
+            />
             <SubmitButton
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
@@ -68,6 +69,7 @@ const ProposalCreate = React.createClass({
       </div>
     );
   },
+
 });
 
 const mapStateToProps = state => ({

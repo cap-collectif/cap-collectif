@@ -1,6 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -35,6 +36,7 @@ export const OpinionList = React.createClass({
     section: PropTypes.object.isRequired,
     consultation: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { section, consultation } = this.props;

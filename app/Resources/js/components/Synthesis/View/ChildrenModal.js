@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ElementsList from './../List/ElementsList';
 import Loader from '../../Utils/Loader';
 
@@ -10,6 +10,7 @@ const ChildrenModal = React.createClass({
     show: React.PropTypes.bool.isRequired,
     toggle: React.PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     const { elements } = this.props;
@@ -35,34 +36,34 @@ const ChildrenModal = React.createClass({
   },
 
   render() {
-    const { elements, show } = this.props;
+    const {
+      elements,
+      show,
+    } = this.props;
     return (
-      <Modal show={show} onHide={this.hide} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {<FormattedMessage id="synthesis.view.childrenModal.title" />}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Loader show={this.state.isLoading}>
-            <ElementsList
-              elements={elements}
-              showBreadcrumb={false}
-              showStatus={false}
-              showNotation={false}
-              hasLink
-              linkType="original"
-            />
-          </Loader>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button type="button" bsStyle="primary" onClick={this.hide}>
-            {<FormattedMessage id="synthesis.view.childrenModal.close" />}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+    <Modal show={show} onHide={this.hide} animation={false}>
+      <Modal.Header closeButton>
+        <Modal.Title>{this.getIntlMessage('synthesis.view.childrenModal.title')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Loader show={this.state.isLoading}>
+          <ElementsList
+            elements={elements}
+            showBreadcrumb={false}
+            showStatus={false}
+            showNotation={false}
+            hasLink
+            linkType="original"
+          />
+        </Loader>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button type="button" bsStyle="primary" onClick={this.hide}>{this.getIntlMessage('synthesis.view.childrenModal.close')}</Button>
+      </Modal.Footer>
+    </Modal>
     );
   },
+
 });
 
 export default ChildrenModal;

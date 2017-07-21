@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
@@ -6,12 +7,14 @@ import ReplyStore from '../../stores/ReplyStore';
 import ReplyActions from '../../actions/ReplyActions';
 import UserReplies from '../Reply/UserReplies';
 
+
 const QuestionnaireStepPage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
     userReplies: PropTypes.array.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -39,11 +42,17 @@ const QuestionnaireStepPage = React.createClass({
   },
 
   render() {
-    const { form, step } = this.props;
+    const {
+      form,
+      step,
+    } = this.props;
     return (
       <div>
         <StepPageHeader step={step} />
-        <UserReplies replies={this.state.userReplies} form={form} />
+        <UserReplies
+          replies={this.state.userReplies}
+          form={form}
+        />
         <ReplyCreateFormWrapper
           form={form}
           userReplies={this.state.userReplies}
@@ -52,6 +61,7 @@ const QuestionnaireStepPage = React.createClass({
       </div>
     );
   },
+
 });
 
 export default QuestionnaireStepPage;

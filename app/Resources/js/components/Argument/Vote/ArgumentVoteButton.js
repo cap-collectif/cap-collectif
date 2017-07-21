@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
@@ -11,6 +11,7 @@ const ArgumentVoteButton = React.createClass({
     argument: PropTypes.object.isRequired,
     user: PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   isTheUserTheAuthor() {
     const { argument, user } = this.props;
@@ -29,22 +30,24 @@ const ArgumentVoteButton = React.createClass({
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={`argument__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
-          onClick={onClick}>
+          onClick={onClick}
+        >
           {hasVoted
-            ? <span>
-                {<FormattedMessage id="vote.cancel" />}
-              </span>
+            ? <span>{this.getIntlMessage('vote.cancel')}</span>
             : <span>
-                <i className="cap cap-hand-like-2" />{' '}
-                {<FormattedMessage id="vote.ok" />}
-              </span>}
+                <i className="cap cap-hand-like-2"></i>
+                {' '}
+                {this.getIntlMessage('vote.ok')}
+            </span>
+          }
         </Button>
       </LoginOverlay>
     );
   },
+
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user.user,
   };

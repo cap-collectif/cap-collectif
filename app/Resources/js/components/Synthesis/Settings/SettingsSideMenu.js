@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -7,6 +7,7 @@ const SettingsSideMenu = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     return (
@@ -17,11 +18,9 @@ const SettingsSideMenu = React.createClass({
               <LinkContainer to={'/settings/display'}>
                 <ListGroupItem className="tree__item">
                   <div className="tree__item__content">
-                    <i className="cap cap-book-1 tree__item__icon" />
+                    <i className="cap cap-book-1 tree__item__icon"></i>
                     <span className="tree__item__title">
-                      {
-                        <FormattedMessage id="synthesis.settings.menu.display" />
-                      }
+                      {this.getIntlMessage('synthesis.settings.menu.display')}
                     </span>
                   </div>
                 </ListGroupItem>
@@ -32,6 +31,7 @@ const SettingsSideMenu = React.createClass({
       </div>
     );
   },
+
 });
 
 export default SettingsSideMenu;

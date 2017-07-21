@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
+import { IntlMixin } from 'react-intl';
 import IdeaSidebar from '../Sidebar/IdeaSidebar';
 import IdeaPageHeader from './IdeaPageHeader';
 import IdeaPageBody from './IdeaPageBody';
@@ -12,6 +13,7 @@ export const IdeaPage = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -47,27 +49,44 @@ export const IdeaPage = React.createClass({
         <div id="sidebar-container" className={wrapperClassName}>
           <Row>
             <Col xs={12} sm={showSidebar ? 9 : 12}>
-              <IdeaPageHeader idea={idea} className={containersClassName} />
-              <IdeaPageBody idea={idea} className={containersClassName} />
-              <IdeaPageVotes idea={idea} className={containersClassName} />
-              <IdeaPageComments id={idea.id} className={containersClassName} />
-            </Col>
-            {showSidebar &&
-              <div id="sidebar-overlay" className={overlayClassName} />}
-            {showSidebar &&
-              <IdeaSidebar
+              <IdeaPageHeader
                 idea={idea}
-                expanded={expandSidebar}
-                onToggleExpand={this.toggleSidebarExpand}
-              />}
+                className={containersClassName}
+              />
+              <IdeaPageBody
+                idea={idea}
+                className={containersClassName}
+              />
+              <IdeaPageVotes
+                idea={idea}
+                className={containersClassName}
+              />
+              <IdeaPageComments
+                id={idea.id}
+                className={containersClassName}
+              />
+            </Col>
+            {
+              showSidebar &&
+                 <div id="sidebar-overlay" className={overlayClassName} />
+            }
+            {
+              showSidebar &&
+                <IdeaSidebar
+                    idea={idea}
+                    expanded={expandSidebar}
+                    onToggleExpand={this.toggleSidebarExpand}
+                />
+            }
           </Row>
         </div>
       </div>
     );
   },
+
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     idea: state.idea.ideas[state.idea.currentIdeaById],
   };

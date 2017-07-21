@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
 import { showRegistrationModal } from '../../../redux/modules/user';
@@ -16,6 +16,7 @@ export const RegistrationButton = React.createClass({
     buttonStyle: PropTypes.object,
     openRegistrationModal: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -46,13 +47,15 @@ export const RegistrationButton = React.createClass({
           style={buttonStyle}
           onClick={openRegistrationModal}
           bsStyle={bsStyle}
-          className={`btn--registration ${className}`}>
-          {<FormattedMessage id="global.registration" />}
+          className={`btn--registration ${className}`}
+        >
+          { this.getIntlMessage('global.registration') }
         </Button>
         <RegistrationModal />
       </span>
     );
   },
+
 });
 
 const mapStateToProps = (state: State) => ({
@@ -60,9 +63,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  openRegistrationModal: () => {
-    dispatch(showRegistrationModal());
-  },
+  openRegistrationModal: () => { dispatch(showRegistrationModal()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationButton);

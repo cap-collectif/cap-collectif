@@ -6,37 +6,3 @@ exports[`<LoginBox /> renders 1`] = `
   <ReduxForm />
 </div>
 `;
-
-exports[`<LoginBox /> renders a top text and a bottom text if specified 1`] = `
-<div>
-  <Alert
-    bsClass="alert"
-    bsStyle="info"
-    className="text-center"
-    closeLabel="Close alert"
-  >
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Texte du haut",
-        }
-      }
-    />
-  </Alert>
-  <Connect(LoginSocialButtons) />
-  <ReduxForm />
-  <div
-    className="text-center small excerpt"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "Texte du bas",
-      }
-    }
-    style={
-      Object {
-        "marginTop": "15px",
-      }
-    }
-  />
-</div>
-`;

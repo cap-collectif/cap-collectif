@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ReactDOM from 'react-dom';
 
 const VoteLinechart = React.createClass({
@@ -8,6 +8,7 @@ const VoteLinechart = React.createClass({
     height: React.PropTypes.number,
     width: React.PropTypes.number,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -27,23 +28,19 @@ const VoteLinechart = React.createClass({
   },
 
   initChart() {
-    const { height, history, width } = this.props;
+    const {
+      height,
+      history,
+      width,
+    } = this.props;
     const AreaChart = google.visualization.AreaChart;
     const DataTable = google.visualization.arrayToDataTable;
-    const lines = [
-      [
-        {
-          type: 'datetime',
-          label: <FormattedMessage id="vote.evolution.date" />,
-        },
-        { type: 'number', label: <FormattedMessage id="vote.evolution.nok" /> },
-        {
-          type: 'number',
-          label: <FormattedMessage id="vote.evolution.mitige" />,
-        },
-        { type: 'number', label: <FormattedMessage id="vote.evolution.ok" /> },
-      ],
-    ];
+    const lines = [[
+      { type: 'datetime', label: this.getIntlMessage('vote.evolution.date') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.nok') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.mitige') },
+      { type: 'number', label: this.getIntlMessage('vote.evolution.ok') },
+    ]];
 
     $.each(history, (i, row) => {
       lines.push([
@@ -56,10 +53,7 @@ const VoteLinechart = React.createClass({
 
     const options = {
       hAxis: { titleTextStyle: { color: '#333' } },
-      vAxis: {
-        title: <FormattedMessage id="vote.evolution.vaxis" />,
-        minValue: 0,
-      },
+      vAxis: { title: this.getIntlMessage('vote.evolution.vaxis'), minValue: 0 },
       isStacked: true,
       colors: ['#d9534f', '#f0ad4e', '#5cb85c'],
       height,
@@ -68,15 +62,16 @@ const VoteLinechart = React.createClass({
       theme: 'maximized',
     };
 
-    new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)).draw(
-      new DataTable(lines),
-      options,
-    );
+    (new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)))
+      .draw(new DataTable(lines), options);
   },
 
   render() {
-    return <div className="opinion__history_chart" ref="linechart" />;
+    return (
+      <div className="opinion__history_chart" ref="linechart"></div>
+    );
   },
+
 });
 
 export default VoteLinechart;

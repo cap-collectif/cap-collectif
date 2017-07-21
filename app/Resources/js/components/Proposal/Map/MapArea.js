@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import GoogleMapReact from 'google-map-react';
 import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -20,6 +21,7 @@ export const MapArea = React.createClass({
     zoom: PropTypes.number,
     visible: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

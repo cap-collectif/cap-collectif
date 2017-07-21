@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import moment from 'moment';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
 
@@ -14,6 +14,7 @@ const OpinionInfos = React.createClass({
     ]),
     opinionTerm: PropTypes.number,
   },
+  mixins: [IntlMixin],
 
   isVersion() {
     const { opinion } = this.props;
@@ -52,7 +53,7 @@ const OpinionInfos = React.createClass({
     return (
       <span className="excerpt">
         {' - '}
-        {<FormattedMessage id="global.edited" />}{' '}
+        {this.getIntlMessage('global.edited')}{' '}
         <FormattedDate
           value={moment(opinion.updatedAt)}
           day="numeric"
@@ -91,23 +92,17 @@ const OpinionInfos = React.createClass({
           <i className="cap cap-trophy" />
           {this.isVersion()
             ? <FormattedMessage
-                id="opinion.ranking.versions"
-                values={{
-                  max: rankingThreshold,
-                }}
+                message={this.getIntlMessage('opinion.ranking.versions')}
+                max={rankingThreshold}
               />
             : opinionTerm === 0
               ? <FormattedMessage
-                  id="opinion.ranking.opinions"
-                  values={{
-                    max: rankingThreshold,
-                  }}
+                  message={this.getIntlMessage('opinion.ranking.opinions')}
+                  max={rankingThreshold}
                 />
               : <FormattedMessage
-                  id="opinion.ranking.articles"
-                  values={{
-                    max: rankingThreshold,
-                  }}
+                  message={this.getIntlMessage('opinion.ranking.articles')}
+                  max={rankingThreshold}
                 />}
         </span>
       );

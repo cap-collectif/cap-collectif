@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
 import type { State } from '../../types';
@@ -14,6 +14,7 @@ export const ConfirmPasswordModal = React.createClass({
     show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { show, dispatch } = this.props;
@@ -23,26 +24,28 @@ export const ConfirmPasswordModal = React.createClass({
         show={show}
         onHide={() => dispatch(closeConfirmPasswordModal())}
         bsSize="small"
-        aria-labelledby="contained-modal-title-lg">
+        aria-labelledby="contained-modal-title-lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="confirm_password.title" />}
+            {this.getIntlMessage('confirm_password.title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {<FormattedMessage id="confirm_password.help" />}
+          {this.getIntlMessage('confirm_password.help')}
           <ConfirmPasswordForm />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={() => dispatch(closeConfirmPasswordModal())} />
+          <CloseButton
+            onClose={() => dispatch(closeConfirmPasswordModal())}
+          />
           <Button
             id="confirm-password-form-submit"
             type="submit"
-            onClick={() => {
-              dispatch(submit('password'));
-            }}
-            bsStyle="primary">
-            {<FormattedMessage id="global.confirm" />}
+            onClick={() => { dispatch(submit('password')); }}
+            bsStyle="primary"
+          >
+            { this.getIntlMessage('global.confirm') }
           </Button>
         </Modal.Footer>
       </Modal>

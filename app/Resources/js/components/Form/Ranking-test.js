@@ -1,13 +1,13 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../translations/FR';
 import Ranking from './Ranking';
 
 describe('<Ranking />', () => {
   const field = {
     id: 12,
-    helpText: "Texte d'aide",
+    helpText: 'Texte d\'aide',
     required: false,
     choices: [
       { id: 24, label: 'Maxime Arrouard' },
@@ -24,6 +24,7 @@ describe('<Ranking />', () => {
     getGroupStyle: jest.fn(),
     renderFormErrors: jest.fn(),
     onChange: jest.fn(),
+    ...IntlData,
   };
 
   it('should render correctly', () => {

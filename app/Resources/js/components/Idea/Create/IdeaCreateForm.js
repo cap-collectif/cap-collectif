@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaForm from '../Form/IdeaForm';
@@ -39,6 +40,7 @@ const IdeaCreateForm = React.createClass({
     idea: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {

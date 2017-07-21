@@ -1,9 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import AlertStore from '../../stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
 
 const AlertBox = React.createClass({
+  mixins: [IntlMixin],
+
   getInitialState() {
     return {
       alert: null,
@@ -37,15 +39,12 @@ const AlertBox = React.createClass({
     }
 
     return (
-      <AlertAutoDismissable
-        onDismiss={this.handleDismiss}
-        bsStyle={alert.bsStyle}>
-        <span>
-          <FormattedMessage id={alert.content} />
-        </span>
+      <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
+        <span>{this.getIntlMessage(alert.content)}</span>
       </AlertAutoDismissable>
     );
   },
+
 });
 
 export default AlertBox;

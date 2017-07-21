@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import IntlData from '../../../translations/FR';
 import { IdeaPage } from './IdeaPage';
 
 const contribuableIdea = {
@@ -20,17 +20,19 @@ const idea = {
 
 describe('<IdeaPage />', () => {
   it('it should render the idea page with header, body, and votes and comments sections', () => {
-    const wrapper = shallow(<IdeaPage idea={idea} />);
+    const wrapper = shallow(<IdeaPage idea={idea} {...IntlData} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should show the sidebar when idea is contribuable', () => {
-    const wrapper = shallow(<IdeaPage idea={contribuableIdea} />);
+    const wrapper = shallow(<IdeaPage idea={contribuableIdea} {...IntlData} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should not show the sidebar when idea is not contribuable', () => {
-    const wrapper = shallow(<IdeaPage idea={uncontribuableIdea} />);
+    const wrapper = shallow(
+      <IdeaPage idea={uncontribuableIdea} {...IntlData} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

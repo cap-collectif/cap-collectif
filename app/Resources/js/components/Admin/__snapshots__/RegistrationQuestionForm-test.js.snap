@@ -4,12 +4,7 @@ exports[`<RegistrationQuestionForm /> renders correctly 1`] = `
 <form>
   <Field
     component={[Function]}
-    label={
-      <FormattedMessage
-        id="global.title"
-        values={Object {}}
-      />
-    }
+    label="Titre"
     name="question"
     type="text"
   />
@@ -29,26 +24,17 @@ exports[`<RegistrationQuestionForm /> renders correctly 1`] = `
       disabled={true}
       value=""
     >
-      <FormattedMessage
-        id="global.select"
-        values={Object {}}
-      />
+      Choisir une valeur
     </option>
     <option
       value={0}
     >
-      <FormattedMessage
-        id="global.question.types.text"
-        values={Object {}}
-      />
+      Réponse courte
     </option>
     <option
       value={4}
     >
-      <FormattedMessage
-        id="global.question.types.select"
-        values={Object {}}
-      />
+      Liste déroulante (une seule réponse possible)
     </option>
   </Field>
 </form>

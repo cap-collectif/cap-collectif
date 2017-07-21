@@ -39,10 +39,7 @@ exports[`<IdeaEditModal /> should render a modal with an idea form 1`] = `
         componentClass="h4"
         id="contained-modal-title-lg"
       >
-        <FormattedMessage
-          id="global.edit"
-          values={Object {}}
-        />
+        Modifier
       </ModalTitle>
     </ModalHeader>
     <ModalBody

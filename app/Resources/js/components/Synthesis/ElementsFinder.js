@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementTitle from './Element/ElementTitle';
@@ -16,6 +16,7 @@ const ElementsFinder = React.createClass({
     onExpand: React.PropTypes.func,
     hiddenElementId: React.PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -33,25 +34,23 @@ const ElementsFinder = React.createClass({
 
   getRootElement() {
     const { elements } = this.props;
-    return [
-      {
-        id: 'root',
-        title: <FormattedMessage id="synthesis.edition.finder.root" />,
-        displayType: 'root',
-        children: elements,
-      },
-    ];
+    return [{
+      id: 'root',
+      title: this.getIntlMessage('synthesis.edition.finder.root'),
+      displayType: 'root',
+      children: elements,
+    }];
   },
 
   toggleExpand(event, element) {
-    const { onExpand, synthesis, type } = this.props;
+    const {
+      onExpand,
+      synthesis,
+      type,
+    } = this.props;
     event.stopPropagation();
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(
-        synthesis.id,
-        type,
-        element.id,
-      );
+      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, type, element.id);
     }
     if (typeof onExpand === 'function') {
       onExpand(element);
@@ -67,29 +66,29 @@ const ElementsFinder = React.createClass({
   },
 
   renderTreeItems(elements, level, expand = false, parent = null) {
-    const { expanded, hiddenElementId } = this.props;
+    const {
+      expanded,
+      hiddenElementId,
+    } = this.props;
     if (expand && elements) {
       return (
         <ul className={`tree__list tree--level-${level}`}>
-          {elements.map(element => {
-            const classes = classNames({
-              tree__item: true,
-              published: element.published,
-            });
-            if (!hiddenElementId || element.id !== hiddenElementId) {
-              return (
-                <li key={element.id} className={classes}>
-                  {this.renderTreeItemContent(element, parent)}
-                  {this.renderTreeItems(
-                    element.children,
-                    level + 1,
-                    expanded[element.id],
-                    element,
-                  )}
-                </li>
-              );
-            }
-          })}
+          {
+            elements.map((element) => {
+              const classes = classNames({
+                tree__item: true,
+                published: element.published,
+              });
+              if (!hiddenElementId || element.id !== hiddenElementId) {
+                return (
+                  <li key={element.id} className={classes} >
+                    {this.renderTreeItemContent(element, parent)}
+                    {this.renderTreeItems(element.children, level + 1, expanded[element.id], element)}
+                  </li>
+                );
+              }
+            })
+          }
         </ul>
       );
     }
@@ -102,20 +101,13 @@ const ElementsFinder = React.createClass({
       selected: selectedId === element.id,
     });
     return (
-      <div
-        id={`element-${element.id}`}
-        className={classes}
-        onClick={() => this.select(element)}>
+      <div id={`element-${element.id}`} className={classes} onClick={() => this.select(element)}>
         {this.renderItemCaret(element)}
         {element.id === 'root'
           ? <ElementIcon className="tree__item__icon" element={element} />
-          : null}
-        <ElementTitle
-          element={element}
-          parent={parent}
-          className="tree__item__title"
-          hasLink={false}
-        />
+          : null
+        }
+        <ElementTitle element={element} parent={parent} className="tree__item__title" hasLink={false} />
       </div>
     );
   },
@@ -129,7 +121,7 @@ const ElementsFinder = React.createClass({
     });
     if (element.childrenCount > 0) {
       return (
-        <i className={classes} onClick={ev => this.toggleExpand(ev, element)} />
+        <i className={classes} onClick={ev => this.toggleExpand(ev, element)}></i>
       );
     }
   },
@@ -145,6 +137,7 @@ const ElementsFinder = React.createClass({
       </div>
     );
   },
+
 });
 
 export default ElementsFinder;

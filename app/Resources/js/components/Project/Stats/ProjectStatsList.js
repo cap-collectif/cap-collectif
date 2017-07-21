@@ -1,11 +1,13 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsModal from './ProjectStatsModal';
 import ProjectStatsFilters from './ProjectStatsFilters';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
-import { DEFAULT_STATS_PAGINATION } from '../../../constants/ProjectStatsConstants';
+import {
+  DEFAULT_STATS_PAGINATION,
+} from '../../../constants/ProjectStatsConstants';
 
 const ProjectStatsList = React.createClass({
   propTypes: {
@@ -21,6 +23,7 @@ const ProjectStatsList = React.createClass({
     categories: React.PropTypes.array.isRequired,
     showFilters: React.PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     const { data } = this.props;
@@ -122,7 +125,7 @@ const ProjectStatsList = React.createClass({
         {haveData &&
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
-              <i className={icon} /> {<FormattedMessage id={label} />}
+              <i className={icon} /> {this.getIntlMessage(label)}
               <span
                 id={`step-stats-display-${stepId}`}
                 className="pull-right excerpt stats__buttons">
@@ -131,7 +134,7 @@ const ProjectStatsList = React.createClass({
                   id={`step-stats-display-${stepId}-number`}
                   active={!this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, false)}>
-                  {<FormattedMessage id="project.stats.display.number" />}
+                  {this.getIntlMessage('project.stats.display.number')}
                 </Button>
                 <span>/</span>
                 <Button
@@ -139,7 +142,7 @@ const ProjectStatsList = React.createClass({
                   id={`step-stats-display-${stepId}-percentage`}
                   active={this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, true)}>
-                  {<FormattedMessage id="project.stats.display.percentage" />}
+                  {this.getIntlMessage('project.stats.display.percentage')}
                 </Button>
               </span>
             </ListGroupItem>
@@ -155,7 +158,7 @@ const ProjectStatsList = React.createClass({
                   );
                 })
               : <ListGroupItem className="excerpt text-center">
-                  {<FormattedMessage id="project.stats.no_values" />}
+                  {this.getIntlMessage('project.stats.no_values')}
                 </ListGroupItem>}
           </ListGroup>}
         {haveData &&

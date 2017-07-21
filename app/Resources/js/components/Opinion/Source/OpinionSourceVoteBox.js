@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
@@ -9,6 +10,7 @@ const OpinionSourceVoteBox = React.createClass({
     source: PropTypes.object.isRequired,
     user: PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -57,7 +59,8 @@ const OpinionSourceVoteBox = React.createClass({
             hasVoted={showVoted}
             onClick={showVoted ? this.deleteVote : this.vote}
           />
-        </form>{' '}
+        </form>
+        {' '}
         <span className="opinion__votes-nb">
           {source.votes_count +
             (hasVotedSince ? 1 : 0) +

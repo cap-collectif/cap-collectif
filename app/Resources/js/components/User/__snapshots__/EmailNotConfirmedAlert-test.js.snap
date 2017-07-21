@@ -19,13 +19,9 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
-        values={
-          Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
-          }
-        }
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l'accès à votre compte. <a target=\\"_blank\\" href=\\"{link}\\">En savoir plus</a>"
+        tagName="span"
       />
     </div>
     <div
@@ -45,10 +41,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.resend"
-          values={Object {}}
-        />
+        Renvoyer la confirmation
       </Button>
       <Button
         active={false}
@@ -63,10 +56,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.update"
-          values={Object {}}
-        />
+        Mettre à jour l'adresse email
       </Button>
     </div>
   </div>
@@ -92,13 +82,9 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
-        values={
-          Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
-          }
-        }
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l'accès à votre compte. <a target=\\"_blank\\" href=\\"{link}\\">En savoir plus</a>"
+        tagName="span"
       />
     </div>
     <div
@@ -118,10 +104,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.sending"
-          values={Object {}}
-        />
+        Envoi en cours...
       </Button>
       <Button
         active={false}
@@ -136,10 +119,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.update"
-          values={Object {}}
-        />
+        Mettre à jour l'adresse email
       </Button>
     </div>
   </div>
@@ -165,13 +145,9 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
-        values={
-          Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
-          }
-        }
+        link="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        message="Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l'accès à votre compte. <a target=\\"_blank\\" href=\\"{link}\\">En savoir plus</a>"
+        tagName="span"
       />
     </div>
     <div
@@ -190,10 +166,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.sent"
-          values={Object {}}
-        />
+        Un nouvel email de confirmation a été envoyé.
       </Button>
       <Button
         active={false}
@@ -208,10 +181,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
           }
         }
       >
-        <FormattedMessage
-          id="user.confirm.update"
-          values={Object {}}
-        />
+        Mettre à jour l'adresse email
       </Button>
     </div>
   </div>

@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
 import {
   COMMENT_SYSTEM_SIMPLE,
@@ -19,6 +19,7 @@ const OpinionTabs = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     const { opinion } = this.props;
@@ -39,6 +40,7 @@ const OpinionTabs = React.createClass({
 
   componentWillUnmount() {
     ArgumentStore.removeChangeListener(this.onArgumentChange);
+    OpinionSourceStore.removeChangeListener(this.onChange);
   },
 
   onSourceChange() {
@@ -79,8 +81,8 @@ const OpinionTabs = React.createClass({
 
   getArgumentsTrad() {
     return this.getCommentSystem() === COMMENT_SYSTEM_BOTH
-      ? 'global.arguments'
-      : 'global.simple_arguments';
+      ? this.getIntlMessage('global.arguments')
+      : this.getIntlMessage('global.simple_arguments');
   },
 
   getDefaultKey() {
@@ -177,33 +179,35 @@ const OpinionTabs = React.createClass({
               {this.isVersionable() &&
                 <NavItem eventKey="versions" className="opinion-tabs">
                   <FormattedMessage
-                    id="global.versions"
-                    values={{ num: opinion.versionsCount }}
+                    message={this.getIntlMessage('global.versions')}
+                    num={opinion.versionsCount}
                   />
                 </NavItem>}
               {this.isCommentable() &&
                 <NavItem className="opinion-tabs" eventKey="arguments">
                   <FormattedMessage
-                    id={this.getArgumentsTrad()}
-                    values={{ num: this.state.argumentsCount }}
+                    message={this.getArgumentsTrad()}
+                    num={this.state.argumentsCount}
                   />
                 </NavItem>}
               {this.isSourceable() &&
                 <NavItem className="opinion-tabs" eventKey="sources">
                   <FormattedMessage
-                    id="global.sources"
-                    values={{ num: this.state.sourcesCount }}
+                    message={this.getIntlMessage('global.sources')}
+                    num={this.state.sourcesCount}
                   />
                 </NavItem>}
               {this.hasStatistics() &&
                 <NavItem className="opinion-tabs" eventKey="votesevolution">
-                  <FormattedMessage id="vote.evolution.tab" />
+                  <FormattedMessage
+                    message={this.getIntlMessage('vote.evolution.tab')}
+                  />
                 </NavItem>}
               {this.isLinkable() &&
                 <NavItem className="opinion-tabs" eventKey="links">
                   <FormattedMessage
-                    id="global.links"
-                    values={{ num: opinion.connectionsCount }}
+                    message={this.getIntlMessage('global.links')}
+                    num={opinion.connectionsCount}
                   />
                 </NavItem>}
             </Nav>

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   VOTE_TYPE_DISABLED,
@@ -35,6 +35,7 @@ export const ProposalStepPage = React.createClass({
     selectedViewByStep: PropTypes.string.isRequired,
     markers: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   componentDidMount() {
     this.props.dispatch(loadProposals());
@@ -94,7 +95,7 @@ export const ProposalStepPage = React.createClass({
                 ? <p
                     className={{ 'p--centered': true }}
                     style={{ marginBottom: '40px' }}>
-                    {<FormattedMessage id="proposal.empty" />}
+                    {this.getIntlMessage('proposal.empty')}
                   </p>
                 : <VisibilityBox enabled={step.isPrivate}>
                     <ProposalList

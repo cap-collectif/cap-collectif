@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { LoginModal } from './LoginModal';
+import IntlData from '../../../translations/FR';
 
 describe('<LoginModal />', () => {
   const props = {
+    ...IntlData,
     submitting: false,
     onClose: jest.fn(),
     onSubmit: jest.fn(),

@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { reduxForm, Field, submit } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
@@ -40,6 +40,7 @@ const ArgumentCreate = React.createClass({
     form: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { user, opinion, type, dispatch, form, submitting } = this.props;
@@ -55,8 +56,8 @@ const ArgumentCreate = React.createClass({
                 id={`arguments-body-${type}`}
                 type="textarea"
                 rows={2}
-                label={<FormattedMessage id={`argument.${type}.add`} />}
-                placeholder={`argument.${type}.add`}
+                label={this.getIntlMessage(`argument.${type}.add`)}
+                placeholder={this.getIntlMessage(`argument.${type}.add`)}
                 labelClassName="sr-only"
                 disabled={disabled}
               />
@@ -72,9 +73,9 @@ const ArgumentCreate = React.createClass({
                       }
                 }
                 bsStyle="primary">
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.publish'}
-                />
+                {submitting
+                  ? this.getIntlMessage('global.loading')
+                  : this.getIntlMessage('global.publish')}
               </Button>}
           </form>
         </div>

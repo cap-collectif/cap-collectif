@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 
 const ProjectPreviewThemes = React.createClass({
@@ -7,6 +8,7 @@ const ProjectPreviewThemes = React.createClass({
     project: PropTypes.object.isRequired,
     features: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { project, features } = this.props;

@@ -2,9 +2,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Post } from './Post';
+import IntlData from '../../translations/FR';
 
 describe('<Post />', () => {
   const props = {
+    ...IntlData,
     features: { profiles: true },
   };
 

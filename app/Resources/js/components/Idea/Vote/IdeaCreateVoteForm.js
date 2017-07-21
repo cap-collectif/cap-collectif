@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { IntlMixin } from 'react-intl';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaVoteForm from './IdeaVoteForm';
 import { voteSuccess } from '../../../redux/modules/idea';
 
 export const IdeaCreateVoteForm = React.createClass({
   displayName: 'IdeaCreateVoteForm',
-
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
@@ -15,6 +15,7 @@ export const IdeaCreateVoteForm = React.createClass({
     onFailure: PropTypes.func.isRequired,
     anonymous: PropTypes.bool.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -42,17 +43,19 @@ export const IdeaCreateVoteForm = React.createClass({
         if (!idea.commentable) {
           delete data.comment;
         }
-        IdeaActions.vote(idea.id, data)
-          .then(vote => {
+        IdeaActions
+          .vote(idea.id, data)
+          .then((vote) => {
             dispatch(voteSuccess(idea.id, vote));
             onSubmitSuccess();
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.response) {
               this.setServerErrors(error.response);
             }
             onFailure();
-          });
+          })
+        ;
         return;
       }
 
@@ -68,16 +71,20 @@ export const IdeaCreateVoteForm = React.createClass({
   },
 
   render() {
-    const { anonymous, idea } = this.props;
+    const {
+      anonymous,
+      idea,
+    } = this.props;
     return (
       <IdeaVoteForm
-        ref={c => (this.ideaVoteForm = c)}
+        ref={c => this.ideaVoteForm = c}
         idea={idea}
         serverErrors={this.state.serverErrors}
         anonymous={anonymous}
       />
     );
   },
+
 });
 
 export default connect()(IdeaCreateVoteForm);

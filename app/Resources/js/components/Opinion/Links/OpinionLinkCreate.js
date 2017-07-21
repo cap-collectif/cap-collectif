@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
@@ -19,6 +19,7 @@ const OpinionLinkCreate = React.createClass({
     opinion: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -67,7 +68,7 @@ const OpinionLinkCreate = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="opinion.link.add_new" />}
+              {this.getIntlMessage('opinion.link.add_new')}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

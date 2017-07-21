@@ -44,10 +44,7 @@ exports[`<IdeaCreate /> should render a div with correct classes, an idea create
         componentClass="h4"
         id="contained-modal-title-lg"
       >
-        <FormattedMessage
-          id="idea.add"
-          values={Object {}}
-        />
+        Proposer une idée
       </ModalTitle>
     </ModalHeader>
     <ModalBody

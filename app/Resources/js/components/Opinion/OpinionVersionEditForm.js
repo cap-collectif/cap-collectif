@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
@@ -35,6 +35,7 @@ const OpinionVersionEditForm = React.createClass({
   propTypes: {
     versionId: PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     return (
@@ -44,28 +45,28 @@ const OpinionVersionEditForm = React.createClass({
             name="confirm"
             type="checkbox"
             component={renderInput}
-            label={<FormattedMessage id="opinion.version.confirm" />}
+            label={this.getIntlMessage('opinion.version.confirm')}
           />
         </div>
         <Field
           name="title"
           type="text"
           component={renderInput}
-          label={<FormattedMessage id="opinion.version.title" />}
+          label={this.getIntlMessage('opinion.version.title')}
         />
         <Field
           name="body"
           type="editor"
           component={renderInput}
-          label={<FormattedMessage id="opinion.version.body" />}
-          help={<FormattedMessage id="opinion.version.body_helper" />}
+          label={this.getIntlMessage('opinion.version.body')}
+          help={this.getIntlMessage('opinion.version.body_helper')}
         />
         <Field
           name="comment"
           type="editor"
           component={renderInput}
-          label={<FormattedMessage id="opinion.version.comment" />}
-          help={<FormattedMessage id="opinion.version.comment_helper" />}
+          label={this.getIntlMessage('opinion.version.comment')}
+          help={this.getIntlMessage('opinion.version.comment_helper')}
         />
       </form>
     );
@@ -74,18 +75,14 @@ const OpinionVersionEditForm = React.createClass({
 
 export default connect((state: State) => ({
   initialValues: {
-    title:
-      state.opinion.currentVersionId &&
+    title: state.opinion.currentVersionId &&
       state.opinion.versionsById[state.opinion.currentVersionId].title,
-    body:
-      state.opinion.currentVersionId &&
+    body: state.opinion.currentVersionId &&
       state.opinion.versionsById[state.opinion.currentVersionId].body,
-    comment:
-      state.opinion.currentVersionId &&
+    comment: state.opinion.currentVersionId &&
       state.opinion.versionsById[state.opinion.currentVersionId].comment,
   },
-  opinionId:
-    state.opinion.currentVersionId &&
+  opinionId: state.opinion.currentVersionId &&
     state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
   versionId: state.opinion.currentVersionId,
 }))(

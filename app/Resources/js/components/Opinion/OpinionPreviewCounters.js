@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
 
@@ -8,6 +8,7 @@ const OpinionPreviewCounters = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getType() {
     const opinion = this.props.opinion;
@@ -27,50 +28,40 @@ const OpinionPreviewCounters = React.createClass({
     if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
       counters.push(
         <FormattedMessage
-          id="global.votes"
-          values={{
-            num: opinion.votesCount,
-          }}
+          message={this.getIntlMessage('global.votes')}
+          num={opinion.votesCount}
         />,
       );
     }
     if (!opinion.parent && type.versionable) {
       counters.push(
         <FormattedMessage
-          id="global.versions"
-          values={{
-            num: opinion.versionsCount,
-          }}
+          message={this.getIntlMessage('global.versions')}
+          num={opinion.versionsCount}
         />,
       );
     }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
       counters.push(
         <FormattedMessage
-          id="global.arguments"
-          values={{
-            num: opinion.argumentsCount,
-          }}
+          message={this.getIntlMessage('global.arguments')}
+          num={opinion.argumentsCount}
         />,
       );
     }
     if (type.sourceable) {
       counters.push(
         <FormattedMessage
-          id="global.sources"
-          values={{
-            num: opinion.sourcesCount,
-          }}
+          message={this.getIntlMessage('global.sources')}
+          num={opinion.sourcesCount}
         />,
       );
     }
     if (!opinion.parent && type.linkable) {
       counters.push(
         <FormattedMessage
-          id="global.links"
-          values={{
-            num: opinion.connectionsCount,
-          }}
+          message={this.getIntlMessage('global.links')}
+          num={opinion.connectionsCount}
         />,
       );
     }
@@ -78,18 +69,9 @@ const OpinionPreviewCounters = React.createClass({
       <p className="opinion__votes excerpt small">
         {counters.map((counter, index) => {
           if (index < counters.length - 1) {
-            return (
-              <span key={index}>
-                {counter}
-                <span> • </span>
-              </span>
-            );
+            return <span key={index}>{counter}<span> • </span></span>;
           }
-          return (
-            <span key={index}>
-              {counter}
-            </span>
-          );
+          return <span key={index}>{counter}</span>;
         })}
       </p>
     );

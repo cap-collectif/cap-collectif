@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -7,14 +7,12 @@ import Input from '../../Form/Input';
 
 const IdeaVoteForm = React.createClass({
   displayName: 'IdeaVoteForm',
-
   propTypes: {
     idea: PropTypes.object.isRequired,
     serverErrors: PropTypes.array,
     anonymous: PropTypes.bool.isRequired,
   },
-
-  mixins: [DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -70,7 +68,10 @@ const IdeaVoteForm = React.createClass({
   formValidationRules: {},
 
   userHasVote() {
-    const { anonymous, idea } = this.props;
+    const {
+      anonymous,
+      idea,
+    } = this.props;
     return !anonymous && idea.userHasVote;
   },
 
@@ -87,61 +88,69 @@ const IdeaVoteForm = React.createClass({
     const { form } = this.state;
 
     return (
-      <form ref={c => (this.form = c)}>
+      <form ref={c => this.form = c}>
+
         <FlashMessages errors={serverErrors} translate={false} />
 
-        {anonymous &&
+        {
+          anonymous &&
           <Input
             id="idea-vote-username"
             type="text"
             name="idea-vote__username"
             valueLink={this.linkState('form.username')}
-            label={`${<FormattedMessage id="idea.vote.form.username" />} *`}
+            label={`${this.getIntlMessage('idea.vote.form.username')} *`}
             groupClassName={this.getGroupStyle('username')}
             errors={this.renderFormErrors('username')}
-          />}
+          />
+        }
 
-        {anonymous
-          ? <Input
+        {
+          anonymous
+            ? <Input
               id="idea-vote-email"
               type="text"
               name="idea-vote__email"
               valueLink={this.linkState('form.email')}
-              label={`${<FormattedMessage id="idea.vote.form.email" />} *`}
+              label={`${this.getIntlMessage('idea.vote.form.email')} *`}
               groupClassName={this.getGroupStyle('email')}
               errors={this.renderFormErrors('email')}
             />
-          : null}
+            : null
+        }
 
-        {idea.commentable &&
-          !form.private &&
-          (anonymous || !this.userHasVote()) &&
-          <Input
-            id="idea-vote-comment"
-            type="textarea"
-            name="idea-vote__comment"
-            valueLink={this.linkState('form.comment')}
-            label={<FormattedMessage id="idea.vote.form.comment" />}
-            placeholder="idea.vote.form.comment_placeholder"
-            groupClassName={this.getGroupStyle('comment')}
-            errors={this.renderFormErrors('comment')}
-          />}
+        {
+          idea.commentable && !form.private && (anonymous || !this.userHasVote()) &&
+            <Input
+              id="idea-vote-comment"
+              type="textarea"
+              name="idea-vote__comment"
+              valueLink={this.linkState('form.comment')}
+              label={this.getIntlMessage('idea.vote.form.comment')}
+              placeholder={this.getIntlMessage('idea.vote.form.comment_placeholder')}
+              groupClassName={this.getGroupStyle('comment')}
+              errors={this.renderFormErrors('comment')}
+            />
+        }
 
-        {(form.comment && form.comment.length > 0) ||
-        (!anonymous && this.userHasVote())
-          ? null
-          : <Input
+        {
+          ((form.comment && form.comment.length > 0) || (!anonymous && this.userHasVote()))
+            ? null
+            : <Input
               id="idea-vote-private"
               type="checkbox"
               name="idea-vote__private"
               checkedLink={this.linkState('form.private')}
-              label={<FormattedMessage id="idea.vote.form.private" />}
+              label={this.getIntlMessage('idea.vote.form.private')}
               groupClassName={this.getGroupStyle('private')}
               errors={this.renderFormErrors('private')}
-            />}
+            />
+        }
+
       </form>
     );
   },
+
 });
 
 export default IdeaVoteForm;

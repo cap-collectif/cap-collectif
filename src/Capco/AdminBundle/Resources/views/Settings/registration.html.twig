@@ -11,14 +11,14 @@ setTimeout(function() {
 
 {% block content %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-    {{ react_render_component('AdminModalsApp') }}
+    {{ react_intl_component('AdminModalsApp') }}
     <div class="col-xs-12 col-md-12">
         <div class="box box-primary">
             <div class="box-header">
                 <h1>{{ 'admin.label.pages.registration' | trans({}, 'SonataAdminBundle') }}</h1>
             </div>
             {{
-              react_render_component(
+              react_intl_component(
                 'RegistrationAdminApp',
                 {
                   'props': {},

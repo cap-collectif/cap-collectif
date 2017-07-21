@@ -1,11 +1,13 @@
 // @flow
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 
 const ProjectPreviewCounters = React.createClass({
   propTypes: {
     project: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getNbCounters() {
     const { project } = this.props;

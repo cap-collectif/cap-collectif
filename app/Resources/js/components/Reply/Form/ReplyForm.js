@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import FormMixin from '../../../utils/FormMixin';
@@ -47,8 +47,7 @@ const ReplyForm = React.createClass({
     reply: PropTypes.object,
     disabled: PropTypes.bool,
   },
-
-  mixins: [DeepLinkStateMixin, FormMixin],
+  mixins: [IntlMixin, DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
@@ -210,8 +209,9 @@ const ReplyForm = React.createClass({
   emptyForm() {
     const form = {};
     this.props.form.fields.forEach(field => {
-      form[field.id] =
-        field.type === 'checkbox' || field.type === 'ranking' ? [] : '';
+      form[field.id] = field.type === 'checkbox' || field.type === 'ranking'
+        ? []
+        : '';
       if (
         field.type === 'checkbox' ||
         field.type === 'radio' ||
@@ -243,10 +243,10 @@ const ReplyForm = React.createClass({
     return (
       <form id="reply-form" ref="form">
         {form.description &&
-          <div
-            style={{ color: 'black' }}
-            dangerouslySetInnerHTML={{ __html: form.description }}
-          />}
+          <div style={{ color: 'black' }}>
+            <FormattedHTMLMessage message={form.description} />
+            <hr />
+          </div>}
         {strategy === 'all_required' &&
           <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>}
         {form.fields.map(field => {
@@ -254,15 +254,13 @@ const ReplyForm = React.createClass({
           const inputType = field.type || 'text';
           const labelAppend = field.required
             ? strategy === 'minority_required'
-              ? ' <span class="small warning">Obligatoire</span>'
-              : ''
+                ? ' <span class="small warning">Obligatoire</span>'
+                : ''
             : strategy === 'majority_required' || strategy === 'half_required'
-              ? ' <span class="small excerpt">Facultatif</span>'
-              : '';
+                ? ' <span class="small excerpt">Facultatif</span>'
+                : '';
           const labelMessage = field.question + labelAppend;
-          const label = (
-            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
-          );
+          const label = <FormattedHTMLMessage message={labelMessage} />;
           switch (inputType) {
             case 'checkbox':
               return (
@@ -311,13 +309,13 @@ const ReplyForm = React.createClass({
                   labelClassName="h4"
                   disabled={disabled}>
                   <option value="" disabled>
-                    {<FormattedMessage id="global.select" />}
+                    {this.getIntlMessage('global.select')}
                   </option>
-                  {field.choices.map(choice =>
+                  {field.choices.map(choice => (
                     <option key={choice.id} value={choice.label}>
                       {choice.label}
-                    </option>,
-                  )}
+                    </option>
+                  ))}
                 </Input>
               );
             case 'ranking':
@@ -360,15 +358,15 @@ const ReplyForm = React.createClass({
                       this.onChange(field, value);
                     }}
                     value={field.choices[0].label}>
-                    {field.choices.map(choice =>
+                    {field.choices.map(choice => (
                       <RadioButton
                         key={choice.id}
                         value={choice.label}
                         iconSize={20}
                         pointColor={choice.color}>
                         {choice.label}
-                      </RadioButton>,
-                    )}
+                      </RadioButton>
+                    ))}
                   </RadioGroup>
                 </div>
               );
@@ -383,7 +381,7 @@ const ReplyForm = React.createClass({
                   groupClassName={this.getGroupStyle(field.id)}
                   valueLink={this.linkState(`form.${field.id}`)}
                   errors={this.renderFormErrors(field.id)}
-                  placeholder="reply.your_response"
+                  placeholder={this.getIntlMessage('reply.your_response')}
                   label={label}
                   labelClassName="h4"
                   disabled={disabled}
@@ -398,7 +396,7 @@ const ReplyForm = React.createClass({
               type="checkbox"
               name="reply-private"
               checkedLink={this.linkState('private')}
-              children={<FormattedMessage id="reply.form.private" />}
+              label={this.getIntlMessage('reply.form.private')}
               disabled={disabled}
             />
           </div>}

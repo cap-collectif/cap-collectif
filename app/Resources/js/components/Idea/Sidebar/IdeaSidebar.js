@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Col, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import IdeaVoteBox from '../Vote/IdeaVoteBox';
@@ -10,9 +10,14 @@ const IdeaSidebar = React.createClass({
     expanded: React.PropTypes.bool.isRequired,
     onToggleExpand: React.PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
-    const { idea, expanded, onToggleExpand } = this.props;
+    const {
+      idea,
+      expanded,
+      onToggleExpand,
+    } = this.props;
     if (!idea.canContribute) {
       return null;
     }
@@ -35,18 +40,22 @@ const IdeaSidebar = React.createClass({
           className="sidebar-toggle sidebar-hideable sidebar-hidden-large btn--no-radius"
           bsStyle={idea.userHasVote || expanded ? 'danger' : 'success'}
           bsSize="large"
-          onClick={onToggleExpand}>
-          <FormattedMessage
-            id={
+          onClick={onToggleExpand}
+        >
+          {
+            this.getIntlMessage(
               expanded
                 ? 'idea.vote.hide'
-                : idea.userHasVote ? 'idea.vote.delete' : 'idea.vote.add'
-            }
-          />
+                : idea.userHasVote
+                  ? 'idea.vote.delete'
+                  : 'idea.vote.add',
+            )
+          }
         </Button>
       </Col>
     );
   },
+
 });
 
 export default IdeaSidebar;

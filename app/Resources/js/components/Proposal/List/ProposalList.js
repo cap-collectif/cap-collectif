@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import ProposalPreview from '../Preview/ProposalPreview';
@@ -11,6 +11,7 @@ export const ProposalList = React.createClass({
     step: PropTypes.object.isRequired,
     showThemes: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -19,7 +20,10 @@ export const ProposalList = React.createClass({
   },
 
   render() {
-    const { step, showThemes } = this.props;
+    const {
+      step,
+      showThemes,
+    } = this.props;
 
     let { proposals } = this.props;
 
@@ -28,13 +32,7 @@ export const ProposalList = React.createClass({
     }
 
     if (proposals.length === 0) {
-      return (
-        <p
-          className={classNames({ 'p--centered': true })}
-          style={{ 'margin-bottom': '40px' }}>
-          {<FormattedMessage id="proposal.private.empty" />}
-        </p>
-      );
+      return (<p className={classNames({ 'p--centered': true })} style={{ 'margin-bottom': '40px' }}>{ this.getIntlMessage('proposal.private.empty') }</p>);
     }
 
     const classes = classNames({
@@ -52,30 +50,38 @@ export const ProposalList = React.createClass({
 
     return (
       <div>
-        {publicProposals.length > 0 &&
-          <Row componentClass="ul" className={classes}>
-            {publicProposals.map(proposal =>
-              <ProposalPreview
-                key={proposal.id}
-                proposal={proposal}
-                step={step}
-                showThemes={showThemes}
-              />,
-            )}
-          </Row>}
-        {privateProposals.length > 0 &&
-          <VisibilityBox enabled>
+        {
+          publicProposals.length > 0 &&
             <Row componentClass="ul" className={classes}>
-              {privateProposals.map(proposal =>
-                <ProposalPreview
-                  key={proposal.id}
-                  proposal={proposal}
-                  step={step}
-                  showThemes={showThemes}
-                />,
-              )}
+              {
+                publicProposals.map(proposal =>
+                  <ProposalPreview
+                    key={proposal.id}
+                    proposal={proposal}
+                    step={step}
+                    showThemes={showThemes}
+                  />,
+                )
+              }
             </Row>
-          </VisibilityBox>}
+        }
+        {
+          privateProposals.length > 0 &&
+            <VisibilityBox enabled>
+              <Row componentClass="ul" className={classes}>
+                {
+                  privateProposals.map(proposal =>
+                    <ProposalPreview
+                      key={proposal.id}
+                      proposal={proposal}
+                      step={step}
+                      showThemes={showThemes}
+                    />,
+                  )
+                }
+              </Row>
+            </VisibilityBox>
+        }
       </div>
     );
   },

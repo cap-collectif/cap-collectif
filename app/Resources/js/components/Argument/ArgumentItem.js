@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedDate } from 'react-intl';
+import { IntlMixin, FormattedDate } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
@@ -11,6 +11,7 @@ const ArgumentItem = React.createClass({
   propTypes: {
     argument: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   renderDate() {
     const argument = this.props.argument;
@@ -21,11 +22,8 @@ const ArgumentItem = React.createClass({
       <p className="excerpt opinion__date">
         <FormattedDate
           value={moment(argument.created_at)}
-          day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
+          day="numeric" month="long" year="numeric"
+          hour="numeric" minute="numeric"
         />
       </p>
     );
@@ -48,23 +46,17 @@ const ArgumentItem = React.createClass({
             </p>
             {this.renderDate()}
           </div>
-          <p
-            className="opinion__text"
-            style={{
-              overflow: 'hidden',
-              float: 'left',
-              width: '100%',
-              wordWrap: 'break-word',
-            }}>
-            <Linkify properties={{ className: 'external-link' }}>
-              {argument.body}
-            </Linkify>
+          <p className="opinion__text" style={{ overflow: 'hidden', float: 'left', width: '100%', wordWrap: 'break-word' }}>
+            <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
           </p>
-          <ArgumentButtons argument={argument} />
+          <ArgumentButtons
+            argument={argument}
+          />
         </div>
       </li>
     );
   },
+
 });
 
 export default ArgumentItem;

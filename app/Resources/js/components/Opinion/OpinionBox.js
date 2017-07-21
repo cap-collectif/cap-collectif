@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -16,6 +16,7 @@ export const OpinionBox = React.createClass({
     rankingThreshold: PropTypes.number,
     opinionTerm: PropTypes.number,
   },
+  mixins: [IntlMixin],
 
   getMaxVotesValue() {
     return this.getOpinionType().votesThreshold;
@@ -59,12 +60,12 @@ export const OpinionBox = React.createClass({
               href={opinion.backLink}>
               <i className="cap cap-arrow-1-1" />
               <span className="hidden-xs hidden-sm">
-                {' '}{<FormattedMessage id="opinion.header.back" />}
+                {' '}{this.getIntlMessage('opinion.header.back')}
               </span>
             </a>
             <div className="opinion__header__title" />
             <h2 className="h4 opinion__header__title">
-              <FormattedMessage id={headerTitle} />
+              <FormattedMessage message={this.getIntlMessage(headerTitle)} />
               <p className="small excerpt" style={{ marginTop: '5px' }}>
                 {parentTitle}
               </p>
@@ -86,7 +87,7 @@ export const OpinionBox = React.createClass({
           <div
             className="opinion__buttons"
             style={{ marginTop: '15px', marginBottom: '15px' }}
-            aria-label={<FormattedMessage id="vote.form" />}>
+            aria-label={this.getIntlMessage('vote.form')}>
             <OpinionButtons opinion={opinion} />
           </div>
           <OpinionVotesBox opinion={opinion} />

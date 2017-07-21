@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
@@ -20,6 +20,7 @@ export const OpinionCreateModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const {
@@ -37,10 +38,7 @@ export const OpinionCreateModal = React.createClass({
         show={show}
         onHide={() => {
           if (
-            // eslint-disable-next-line no-alert
-            window.confirm(
-              <FormattedMessage id="proposal.confirm_close_modal" />,
-            )
+            window.confirm(this.getIntlMessage('proposal.confirm_close_modal')) // eslint-disable-line no-alert
           ) {
             dispatch(closeOpinionCreateModal());
           }
@@ -49,13 +47,13 @@ export const OpinionCreateModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="opinion.add_new" />}
+            {this.getIntlMessage('opinion.add_new')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="modal-top bg-info">
             <p>
-              {<FormattedMessage id="opinion.add_new_infos" />}
+              {this.getIntlMessage('opinion.add_new_infos')}
             </p>
           </div>
           <OpinionCreateForm

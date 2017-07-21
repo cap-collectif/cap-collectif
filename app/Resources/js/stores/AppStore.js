@@ -2,7 +2,6 @@
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
-import { intlReducer } from 'react-intl-redux';
 import LocalStorageService from '../services/LocalStorageService';
 import { reducer as reportReducer } from '../redux/modules/report';
 import {
@@ -55,7 +54,6 @@ export default function configureStore(initialState: Object): Store {
   const sagaMiddleware = createSagaMiddleware();
 
   const reducers = {
-    intl: intlReducer,
     default: defaultReducer,
     idea: ideaReducer,
     proposal: proposalReducer,

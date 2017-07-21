@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate';
 
 const ProposalDetailLikersLabel = React.createClass({
@@ -10,6 +10,7 @@ const ProposalDetailLikersLabel = React.createClass({
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -28,10 +29,8 @@ const ProposalDetailLikersLabel = React.createClass({
     if (likers.length > 1) {
       return (
         <FormattedMessage
-          id="proposal.likers.count"
-          values={{
-            num: likers.length,
-          }}
+          message={this.getIntlMessage('proposal.likers.count')}
+          num={likers.length}
         />
       );
     }
@@ -39,7 +38,13 @@ const ProposalDetailLikersLabel = React.createClass({
   },
 
   render() {
-    const { likers, onBlur, onFocus, onMouseOut, onMouseOver } = this.props;
+    const {
+      likers,
+      onBlur,
+      onFocus,
+      onMouseOut,
+      onMouseOver,
+    } = this.props;
     const funcProps = {
       onFocus,
       onBlur,
@@ -50,10 +55,8 @@ const ProposalDetailLikersLabel = React.createClass({
     if (likers.length > 0) {
       return (
         <span {...funcProps}>
-          <i className="cap cap-heart-1 icon--red" />
-          <Truncate>
-            {this.getLabelText()}
-          </Truncate>
+          <i className="cap cap-heart-1 icon--red"></i>
+          <Truncate>{this.getLabelText()}</Truncate>
         </span>
       );
     }

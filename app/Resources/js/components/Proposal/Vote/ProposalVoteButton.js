@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -19,6 +19,7 @@ const ProposalVoteButton = React.createClass({
     isDeleting: PropTypes.bool.isRequired,
     className: PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -46,38 +47,40 @@ const ProposalVoteButton = React.createClass({
     const bsStyle = user && userHasVote ? 'danger' : 'success';
     let classes = classNames({ disabled });
     classes += ` ${className}`;
-    const action =
-      user && userHasVote
-        ? () => {
-            deleteVote(dispatch, step, proposal);
-          }
-        : () => {
-            dispatch(openVoteModal(proposal.id));
-          };
+    const action = user && userHasVote
+      ? () => {
+        deleteVote(dispatch, step, proposal);
+      }
+      : () => {
+        dispatch(openVoteModal(proposal.id));
+      };
     return (
-      <Button
-        id={id}
-        bsStyle={bsStyle}
-        className={classes}
-        style={style}
-        onClick={disabled ? null : action}
-        active={userHasVote}
-        disabled={disabled || isDeleting}>
-        {isDeleting
-          ? <FormattedMessage id="proposal.vote.deleting" />
-          : user && userHasVote
-            ? <FormattedMessage id="proposal.vote.delete" />
-            : <FormattedMessage id="proposal.vote.add" />}
-      </Button>
+        <Button
+          id={id}
+          bsStyle={bsStyle}
+          className={classes}
+          style={style}
+          onClick={disabled ? null : action}
+          active={userHasVote}
+          disabled={disabled || isDeleting}
+        >
+          {
+            isDeleting
+            ? this.getIntlMessage('proposal.vote.deleting')
+            : (user && userHasVote
+              ? this.getIntlMessage('proposal.vote.delete')
+              : this.getIntlMessage('proposal.vote.add')
+            )
+          }
+        </Button>
     );
   },
+
 });
 
 const mapStateToProps = (state, props) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
-  userHasVote:
-    props.step &&
-    state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
+  userHasVote: props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
 });
 
 export default connect(mapStateToProps)(ProposalVoteButton);
