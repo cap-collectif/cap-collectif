@@ -32,6 +32,15 @@ services:
         calls:
             - ['setPropertyAccessor', ['@property_accessor']]
 
+    # to complete
+    capco.elasticsearch.listener:
+        class: Capco\AppBundle\Elasticsearch\DoctrineUpdateListener
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+
     # Kept for Backward compatibility
     fos_elastica.index.app.proposal:
         class: Elastica\Type
@@ -43,13 +52,4 @@ services:
     fos_elastica.elastica_to_model_transformer.collection.app:
         alias: 'capco.elasticsearch.elastica_to_doctrine_transformer'
 
-# todo!!!!
-#  capco.elastica.listener:
-#    class: Capco\AppBundle\EventListener\ElasticaListener
-#    arguments:
-#      - '@fos_elastica.object_persister.app.proposal'
-#      - '@fos_elastica.object_persister.app.selection'
-#    calls:
-#      - [ setContainer, [ "@service_container" ] ]
-#    tags:
-#       - { name: doctrine.event_subscriber, connection: default }
+

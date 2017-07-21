@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Entity\Status;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
@@ -68,6 +71,9 @@ class Indexer
         $this->serializer = $serializer;
     }
 
+    /**
+     * Fetch ALL the indexable entities and send them to bulks.
+     */
     public function indexAll()
     {
         $classes = $this->getClassesToIndex();
@@ -83,11 +89,7 @@ class Indexer
                 $object = $row[0];
 
                 if ($object->isIndexable()) {
-                    $context = SerializationContext::create();
-                    $context->setGroups($object->getElasticsearchSerializationGroups());
-                    $json = $this->serializer->serialize($object, 'json', $context);
-
-                    $document = new Document($object->getId(), $json, $object->getElasticsearchTypeName());
+                    $document = $this->buildDocument($object);
                     $this->addToBulk($document);
                 } else {
                     // Empty mean DELETE
@@ -100,37 +102,53 @@ class Indexer
     }
 
     /**
-     * All the Doctrine classes implementing IndexableInterface
-     * @return array
+     * @param IndexableInterface $object
+     * @return Document
      */
-    public function getClassesToIndex()
+    protected function buildDocument(IndexableInterface $object)
     {
-        if (!empty($this->classes)) {
-            return $this->classes;
-        }
+        $context = SerializationContext::create();
+        $context->setGroups($object->getElasticsearchSerializationGroups());
+        $json = $this->serializer->serialize($object, 'json', $context);
 
-        $this->classes = array();
-        $metas = $this->em->getMetadataFactory()->getAllMetadata();
-        foreach ($metas as $meta) {
-            $interfaces = class_implements($meta->getName());
-            if($interfaces && in_array(IndexableInterface::class, $interfaces)) {
-                $type = call_user_func($meta->getName() .'::getElasticsearchTypeName');
-                $this->classes[$type] = $meta->getName();
-            }
-        }
-
-        return $this->classes;
+        return new Document($object->getId(), $json, $object->getElasticsearchTypeName());
     }
 
+    /**
+     * Reindex a specific entity.
+     * You HAVE to call self::finishBulk after!
+     *
+     * @param $entityFQN
+     * @param $identifier
+     */
     public function index($entityFQN, $identifier)
     {
-        // @todo check type=false
+        $repository = $this->em->getRepository($entityFQN);
+        $object = $repository->findOneBy(['id' => $identifier]);
 
+        if ($object instanceof IndexableInterface) {
+            $document = $this->buildDocument($object);
+            $this->addToBulk($document);
+
+            $this->indexDemoralizedChildren($object);
+        } else {
+            $this->remove($entityFQN, $identifier);
+        }
     }
 
+    /**
+     * Remove / Delete from the index.
+     * You HAVE to call self::finishBulk after!
+     *
+     * @param $entityFQN
+     * @param $identifier
+     */
     public function remove($entityFQN, $identifier)
     {
+        $classes = $this->getClassesToIndex();
+        $type = array_search($entityFQN, $classes, true);
 
+        $this->addToBulk(new Document($identifier, [], $type));
     }
 
     /**
@@ -186,5 +204,60 @@ class Indexer
 
         $this->currentInsertBulk = [];
         $this->currentDeleteBulk = [];
+    }
+
+    /**
+     * All the Doctrine classes implementing IndexableInterface.
+     *
+     * @return array
+     */
+    public function getClassesToIndex()
+    {
+        if (!empty($this->classes)) {
+            return $this->classes;
+        }
+
+        $this->classes = array();
+        $metas = $this->em->getMetadataFactory()->getAllMetadata();
+        foreach ($metas as $meta) {
+            $interfaces = class_implements($meta->getName());
+            if($interfaces && in_array(IndexableInterface::class, $interfaces)) {
+                $type = call_user_func($meta->getName() .'::getElasticsearchTypeName');
+                $this->classes[$type] = $meta->getName();
+            }
+        }
+
+        return $this->classes;
+    }
+
+    /**
+     * Index child of demormalized entities.
+     *
+     * @todo COMPLETE ME
+     * @param IndexableInterface $object
+     */
+    private function indexDemoralizedChildren(IndexableInterface $object)
+    {
+        if ($object instanceof Status) {
+            foreach ($object->getProposals() as $proposal) {
+                $this->addToBulk($this->buildDocument($proposal));
+            }
+
+            $selections = $this->em->getRepository(Selection::class)->findBy(['status' => $object]);
+            foreach ($selections as $selection) {
+                $this->addToBulk($this->buildDocument($selection));
+                $this->addToBulk($this->buildDocument($selection->getProposal()));
+            }
+        }
+
+        if ($object instanceof District) {
+            foreach ($object->getProposals() as $proposal) {
+                $this->addToBulk($this->buildDocument($proposal));
+            }
+        }
+
+        if ($object instanceof Selection) {
+            $this->addToBulk($this->buildDocument($object->getProposal()));
+        }
     }
 }
