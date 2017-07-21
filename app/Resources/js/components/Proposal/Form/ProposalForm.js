@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
@@ -21,6 +21,7 @@ import { loadSuggestions } from '../../../actions/ProposalActions';
 
 export const ProposalForm = React.createClass({
   propTypes: {
+    intl: intlShape,
     currentStepId: PropTypes.string.isRequired,
     form: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,
@@ -291,6 +292,7 @@ export const ProposalForm = React.createClass({
   render() {
     const {
       form,
+      intl,
       features,
       themes,
       districts,
@@ -453,7 +455,7 @@ export const ProposalForm = React.createClass({
         {form.usingAddress &&
           <div className="form-group">
             <label className="control-label h5" htmlFor="proposal_address">
-              {<FormattedMessage id="proposal.map.form.field" />}
+              <FormattedMessage id="proposal.map.form.field" />
             </label>
             {form.addressHelpText &&
               <span className="help-block">
@@ -464,7 +466,9 @@ export const ProposalForm = React.createClass({
                 onChange: address => {
                   this.setState(prevState => ({ ...prevState, address }));
                 },
-                placeholder: 'proposal.map.form.placeholder',
+                placeholder: intl.formatMessage({
+                  id: 'proposal.map.form.placeholder',
+                }),
                 value: this.state.address,
                 type: 'text',
                 id: 'proposal_address',
@@ -549,4 +553,4 @@ const mapStateToProps = state => ({
   currentStepId: state.project.currentProjectStepById,
 });
 
-export default connect(mapStateToProps)(ProposalForm);
+export default connect(mapStateToProps)(injectIntl(ProposalForm));
