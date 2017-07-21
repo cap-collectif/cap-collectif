@@ -3,7 +3,7 @@ Feature: Opinions Versions
 
 ## List
 
-  @parallel-scenario
+  @parallel-scenario @test
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/opinion57/versions"
     Then the JSON response status code should be 200
@@ -46,8 +46,8 @@ Feature: Opinions Versions
           "arguments_yes_count": @integer@,
           "arguments_no_count": @integer@,
 
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
+          "createdAt": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
 
           "ranking": "expr(value === null || value > 0)",
 
@@ -73,7 +73,7 @@ Feature: Opinions Versions
 
 ## Get
 
-  @parallel-scenario
+  @parallel-scenario @test
   Scenario: API client wants to get an opinion version
     When I send a GET request to "/api/opinions/opinion57/versions/version1"
     Then the JSON response status code should be 200
@@ -85,8 +85,8 @@ Feature: Opinions Versions
         "title": @string@,
         "body": @string@,
         "comment": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "is_trashed": @boolean@,
         "isContribuable": @boolean@,
 

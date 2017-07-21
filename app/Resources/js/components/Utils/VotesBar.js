@@ -19,7 +19,7 @@ const VotesBar = React.createClass({
         bsStyle="success"
         max={max}
         now={value}
-        label={`${percent}%`}
+        label={`${value}%`}
       />
     );
     if (helpText) {

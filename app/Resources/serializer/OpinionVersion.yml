@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         createdAt:
             expose: true
             type: DateTime
-            # serialized_name: createdAt
+            serialized_name: createdAt
             groups: [OpinionVersions, OpinionVersionPreviews]
         answer:
             expose: true
@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         updatedAt:
             expose: true
             type: DateTime
-            # serialized_name: updatedAt
+            serialized_name: updatedAt
             groups: [OpinionVersions, OpinionVersionPreviews]
         votesCountNok:
             expose: true
