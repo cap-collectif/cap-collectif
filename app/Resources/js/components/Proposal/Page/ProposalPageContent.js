@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import GoogleMapReact from 'google-map-react';
@@ -26,7 +26,6 @@ const SmallMarker = () =>
 
 const ProposalPageContent = React.createClass({
   displayName: 'ProposalPageContent',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
@@ -34,6 +33,7 @@ const ProposalPageContent = React.createClass({
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -59,7 +59,7 @@ const ProposalPageContent = React.createClass({
           />}
         <div className="block">
           <h3 className="h3">
-            {<FormattedMessage id="proposal.description" />}
+            {this.getIntlMessage('proposal.description')}
           </h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>

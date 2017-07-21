@@ -1,6 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
+import { IntlMixin } from 'react-intl';
 import ContributionPaginatedList, {
   pageSize,
 } from './ContributionPaginatedList';
@@ -37,6 +38,7 @@ export const ConsultationContributionFiltered = React.createClass({
   propTypes: {
     consultationId: PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { consultationId } = this.props;

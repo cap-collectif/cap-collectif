@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ShieldPage } from './ShieldPage';
+import IntlData from '../../translations/FR';
 
 describe('<ShieldPage />', () => {
   const props = {
+    ...IntlData,
     onSubmit: jest.fn(),
     submitting: false,
   };

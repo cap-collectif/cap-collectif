@@ -1,7 +1,9 @@
 import React from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 
 const StepText = React.createClass({
+  displayName: 'StepText',
   propTypes: {
     text: React.PropTypes.string,
   },
@@ -36,15 +38,12 @@ const StepText = React.createClass({
       visibility: this.state.hideText ? 'hidden' : 'visible',
     };
     return (
-      <div className="step__intro">
+      <div className="step__intro" >
         <div style={{ fontSize: 15 }}>
           <div className="box">
-            <div
-              ref="content"
-              className="step__intro__content"
-              style={style}
-              dangerouslySetInnerHTML={{ __html: text }}
-            />
+            <div ref="content" className="step__intro__content" style={style}>
+              <FormattedHTMLMessage message={text} />
+            </div>
           </div>
           <div className="text-center">
             <ReadMoreLink
@@ -57,6 +56,7 @@ const StepText = React.createClass({
       </div>
     );
   },
+
 });
 
 export default StepText;

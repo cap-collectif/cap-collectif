@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
@@ -18,6 +18,7 @@ export const OpinionEditModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { dispatch, submitting, show, opinion, step } = this.props;
@@ -27,10 +28,7 @@ export const OpinionEditModal = React.createClass({
         show={show}
         onHide={() => {
           if (
-            // eslint-disable-next-line no-alert
-            window.confirm(
-              <FormattedMessage id="proposal.confirm_close_modal" />,
-            )
+            window.confirm(this.getIntlMessage('proposal.confirm_close_modal')) // eslint-disable-line no-alert
           ) {
             dispatch(closeOpinionEditModal());
           }
@@ -39,7 +37,7 @@ export const OpinionEditModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="global.edit" />}
+            {this.getIntlMessage('global.edit')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -68,8 +66,7 @@ export const OpinionEditModal = React.createClass({
 const mapStateToProps = (state: State, props: Object) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
-  step:
-    state.project.currentProjectById &&
+  step: state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].steps.filter(
       step => step.type === 'consultation',
     )[0],

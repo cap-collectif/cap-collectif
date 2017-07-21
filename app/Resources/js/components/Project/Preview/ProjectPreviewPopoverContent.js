@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import DatesInterval from './../../Utils/DatesInterval';
 import RemainingTime from '../../Utils/RemainingTime';
 
@@ -8,20 +8,17 @@ const ProjectPreviewPopoverContent = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { step } = this.props;
     return (
       <div>
-        <p className="h5">
-          {step.title}
-        </p>
-        <p>
-          <DatesInterval startAt={step.startAt} endAt={step.endAt} />
-        </p>
+        <p className="h5">{step.title}</p>
+        <p><DatesInterval startAt={step.startAt} endAt={step.endAt} /></p>
         {step.status
           ? <p className="label label-default">
-              <FormattedMessage id={`step.status.${step.status}`} />
+              {this.getIntlMessage(`step.status.${step.status}`)}
             </p>
           : null}
         {step.open && step.counters

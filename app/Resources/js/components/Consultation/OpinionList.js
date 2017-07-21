@@ -1,6 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import { IntlMixin } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -35,6 +36,7 @@ export const OpinionList = React.createClass({
     section: PropTypes.object.isRequired,
     consultation: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { section, consultation } = this.props;
@@ -45,7 +47,7 @@ export const OpinionList = React.createClass({
         <div className={`opinion  opinion--${section.color} opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
             <h2 className="pull-left  h4  opinion__header__title">
-              {section.contributionsCount} propositions
+              {section.contributionsCount} proposition{section.contributionsCount > 1 && 's'}
             </h2>
             <div className="pull-right  opinion__header__filter">
               {section.contributionsCount > 1 &&

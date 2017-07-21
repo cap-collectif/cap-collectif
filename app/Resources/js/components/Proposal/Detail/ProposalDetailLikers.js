@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
 
 const ProposalDetailLikers = React.createClass({
   displayName: 'ProposalDetailLikers',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     componentClass: PropTypes.oneOf(['div', 'span']),
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -20,13 +21,12 @@ const ProposalDetailLikers = React.createClass({
   renderContent() {
     const { proposal } = this.props;
     return (
-      <OverlayTrigger
-        placement="top"
-        overlay={
-          <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
-            <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
-          </Tooltip>
-        }>
+      <OverlayTrigger placement="top" overlay={
+        <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
+          <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
+        </Tooltip>
+      }
+      >
         <ProposalDetailLikersLabel likers={proposal.likers} />
       </OverlayTrigger>
     );

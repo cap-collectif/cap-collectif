@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationAdminPage } from './RegistrationAdminPage';
+import IntlData from '../../translations/FR';
 
 describe('<RegistrationAdminPage />', () => {
   const props = {
+    ...IntlData,
     isSuperAdmin: true,
     features: {},
     onToggle: jest.fn(),
@@ -20,9 +22,7 @@ describe('<RegistrationAdminPage />', () => {
   });
 
   it('renders correctly when not super admin', () => {
-    const wrapper = shallow(
-      <RegistrationAdminPage {...props} isSuperAdmin={false} />,
-    );
+    const wrapper = shallow(<RegistrationAdminPage {...props} isSuperAdmin={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

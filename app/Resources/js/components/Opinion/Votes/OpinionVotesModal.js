@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import OpinionActions from '../../../actions/OpinionActions';
@@ -11,6 +11,7 @@ const OpinionVotesModal = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -64,7 +65,7 @@ const OpinionVotesModal = React.createClass({
           aria-labelledby="opinion-votes-more-title">
           <Modal.Header closeButton>
             <Modal.Title id="opinion-votes-more-title">
-              {<FormattedMessage id="opinion.votes.modal.title" />}
+              {this.getIntlMessage('opinion.votes.modal.title')}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

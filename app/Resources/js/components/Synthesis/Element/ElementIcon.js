@@ -1,4 +1,5 @@
 import React from 'react';
+import { IntlMixin } from 'react-intl';
 import classNames from 'classnames';
 
 const ElementIcon = React.createClass({
@@ -7,16 +8,21 @@ const ElementIcon = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
-    return {
+    return ({
       className: '',
       style: {},
-    };
+    });
   },
 
   render() {
-    const { className, element, style } = this.props;
+    const {
+      className,
+      element,
+      style,
+    } = this.props;
     if (element.displayType) {
       const classes = `${classNames({
         cap: true,
@@ -25,10 +31,13 @@ const ElementIcon = React.createClass({
         'cap-bubble-conversation-5': element.displayType === 'grouping',
         'cap-book-1': element.displayType === 'root',
       })} ${className}`;
-      return <i className={classes} style={style} />;
+      return (
+        <i className={classes} style={style}></i>
+      );
     }
     return null;
   },
+
 });
 
 export default ElementIcon;

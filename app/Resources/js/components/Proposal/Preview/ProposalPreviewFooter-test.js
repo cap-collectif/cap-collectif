@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
+import IntlData from '../../../translations/FR';
 
 describe('<ProposalPreviewFooter />', () => {
   const proposal = {
@@ -15,6 +16,7 @@ describe('<ProposalPreviewFooter />', () => {
   const props = {
     proposal,
     stepId: '1',
+    ...IntlData,
   };
 
   it('should render a footer with comment counter', () => {

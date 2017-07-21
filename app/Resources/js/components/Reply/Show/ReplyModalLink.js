@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { IntlMixin, FormattedMessage, FormattedDate } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import ShowReplyModal from './ShowReplyModal';
@@ -9,6 +9,7 @@ const ReplyModalLink = React.createClass({
     reply: React.PropTypes.object.isRequired,
     form: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getInitialState() {
     return {
@@ -32,35 +33,26 @@ const ReplyModalLink = React.createClass({
     const { reply, form } = this.props;
 
     return (
-      <ListGroupItem
-        className="reply"
-        id={`reply-link-${reply.id}`}
-        onClick={this.showModal}>
+      <ListGroupItem className="reply" id={`reply-link-${reply.id}`} onClick={this.showModal}>
         <FormattedMessage
-          id="reply.show.link"
-          values={{
-            date: (
-              <FormattedDate
-                value={moment(reply.createdAt)}
-                day="numeric"
-                month="long"
-                year="numeric"
-              />
-            ),
-
-            time: (
-              <FormattedDate
-                value={moment(reply.createdAt)}
-                hour="numeric"
-                minute="numeric"
-              />
-            ),
-          }}
+          message={this.getIntlMessage('reply.show.link')}
+          date={
+            <FormattedDate
+              value={moment(reply.createdAt)}
+              day="numeric" month="long" year="numeric"
+            />
+          }
+          time={
+            <FormattedDate
+              value={moment(reply.createdAt)}
+              hour="numeric" minute="numeric"
+            />
+          }
         />
-        {reply.private &&
-          <span>
-            <FormattedMessage id="reply.private" />
-          </span>}
+        {
+          reply.private &&
+          <span>{` ${this.getIntlMessage('reply.private')}`}</span>
+        }
         <ShowReplyModal
           show={this.state.showModal}
           onClose={this.hideModal}
@@ -70,6 +62,7 @@ const ReplyModalLink = React.createClass({
       </ListGroupItem>
     );
   },
+
 });
 
 export default ReplyModalLink;

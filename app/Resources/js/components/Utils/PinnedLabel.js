@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const PinnedLabel = React.createClass({
@@ -7,6 +7,7 @@ const PinnedLabel = React.createClass({
     show: React.PropTypes.bool.isRequired,
     type: React.PropTypes.string.isRequired,
   },
+  mixins: [IntlMixin],
 
   render() {
     const { show, type } = this.props;
@@ -16,12 +17,13 @@ const PinnedLabel = React.createClass({
           placement="top"
           overlay={
             <Tooltip placement="top" className="in" id="pinned-label">
-              <FormattedMessage id={`global.pinned.tooltip.${type}`} />
+              {this.getIntlMessage(`global.pinned.tooltip.${type}`)}
             </Tooltip>
           }>
           <span className="opinion__label opinion__label--blue">
-            <i className="cap cap-pin-1" />{' '}
-            <FormattedMessage id={`global.pinned.label`} />
+            <i className="cap cap-pin-1" />
+            {' '}
+            {this.getIntlMessage('global.pinned.label')}
           </span>
         </OverlayTrigger>
       );

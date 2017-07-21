@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { ListGroupItem, Well, Col, Button, FormControl } from 'react-bootstrap';
 import Toggle from 'react-toggle';
@@ -20,6 +21,7 @@ export const ProposalAdminStepSelector = React.createClass({
     lastEditedStepId: PropTypes.string,
     lastNotifiedStepId: PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   render() {
     const {
@@ -34,9 +36,7 @@ export const ProposalAdminStepSelector = React.createClass({
         className="row"
         style={{ padding: '10px 0', marginLeft: 0, marginRight: 0 }}>
         <Col xs={10}>
-          <strong>
-            {step.title}
-          </strong>
+          <strong>{step.title}</strong>
           <div>
             {step.type === 'collect' ? 'Etape de dépôt' : 'Etape de sélection'}
           </div>
@@ -77,11 +77,11 @@ export const ProposalAdminStepSelector = React.createClass({
                     );
                   }}>
                   <option value={-1}>Aucun statut</option>
-                  {step.statuses.map(status =>
+                  {step.statuses.map(status => (
                     <option key={status.id} value={status.id}>
                       {status.name}
-                    </option>,
-                  )}
+                    </option>
+                  ))}
                 </FormControl>
               </Col>
               {(step.type === 'collect' || step.type === 'selection') &&
@@ -94,19 +94,20 @@ export const ProposalAdminStepSelector = React.createClass({
                       className="pull-right"
                       style={{
                         fontSize: 14,
-                        visibility:
-                          lastEditedStepId === step.id ? 'visible' : 'hidden',
+                        visibility: lastEditedStepId === step.id
+                          ? 'visible'
+                          : 'hidden',
                       }}>
-                      Souhaitez-vous notifier l'auteur du changement de statut
-                      par email ?
+                      Souhaitez-vous notifier l'auteur du changement de statut par email ?
                     </div>
                   </Col>
                   <Col md={2}>
                     <div
                       className="pull-right"
                       style={{
-                        visibility:
-                          lastEditedStepId === step.id ? 'visible' : 'hidden',
+                        visibility: lastEditedStepId === step.id
+                          ? 'visible'
+                          : 'hidden',
                       }}>
                       <Button
                         bsStyle={
@@ -138,8 +139,9 @@ export const ProposalAdminStepSelector = React.createClass({
                   <div
                     className="pull-right"
                     style={{ color: '#08af0d', fontSize: 16 }}>
-                    <i className="fa fa-check-circle-o" /> L'email a bien été
-                    envoyé.
+                    <i className="fa fa-check-circle-o" />
+                    {' '}
+                    L'email a bien été envoyé.
                   </div>
                 </Col>}
             </Well>

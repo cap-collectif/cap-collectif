@@ -1,19 +1,11 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import {
-  VOTE_WIDGET_SIMPLE,
-  VOTE_WIDGET_BOTH,
-} from '../../../constants/VoteConstants';
-import {
-  deleteVoteVersion,
-  deleteVoteOpinion,
-  voteOpinion,
-  voteVersion,
-} from '../../../redux/modules/opinion';
+import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
+import { deleteVoteVersion, deleteVoteOpinion, voteOpinion, voteVersion } from '../../../redux/modules/opinion';
 import type { VoteValue, OpinionAndVersion, State } from '../../../types';
 
 const valueToObject = (value: VoteValue): Object => {
@@ -49,6 +41,7 @@ export const OpinionVotesButton = React.createClass({
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -81,7 +74,11 @@ export const OpinionVotesButton = React.createClass({
   },
 
   voteAction() {
-    const { disabled, user, active } = this.props;
+    const {
+      disabled,
+      user,
+      active,
+    } = this.props;
     if (!user || disabled) {
       return null;
     }
@@ -89,10 +86,11 @@ export const OpinionVotesButton = React.createClass({
   },
 
   voteIsEnabled() {
-    const { opinion, value } = this.props;
-    const voteType = this.isVersion()
-      ? opinion.parent.type.voteWidgetType
-      : opinion.type.voteWidgetType;
+    const {
+      opinion,
+      value,
+    } = this.props;
+    const voteType = this.isVersion() ? opinion.parent.type.voteWidgetType : opinion.type.voteWidgetType;
     if (voteType === VOTE_WIDGET_BOTH) {
       return true;
     }
@@ -106,7 +104,12 @@ export const OpinionVotesButton = React.createClass({
     if (!this.voteIsEnabled()) {
       return null;
     }
-    const { disabled, style, value, active } = this.props;
+    const {
+      disabled,
+      style,
+      value,
+      active,
+    } = this.props;
     const data = valueToObject(value);
     return (
       <LoginOverlay>
@@ -117,27 +120,22 @@ export const OpinionVotesButton = React.createClass({
           onClick={this.voteAction}
           active={active}
           aria-label={
-            <FormattedMessage
-              id={
-                active
-                  ? `vote.aria_label_active.${data.str}`
-                  : `vote.aria_label.${data.str}`
-              }
-            />
+            active
+            ? this.getIntlMessage(`vote.aria_label_active.${data.str}`)
+            : this.getIntlMessage(`vote.aria_label.${data.str}`)
           }
-          disabled={disabled}>
-          <i className={data.icon} />{' '}
-          <FormattedMessage id={`vote.${data.str}`} />
+          disabled={disabled}
+        >
+          <i className={data.icon}></i>
+          { ` ${this.getIntlMessage(`vote.${data.str}`)}` }
         </Button>
       </LoginOverlay>
     );
   },
+
 });
 
-const mapStateToProps = (
-  state: State,
-  { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion },
-) => {
+const mapStateToProps = (state: State, { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion}) => {
   const vote = opinion.parent
     ? state.opinion.versionsById[opinion.id].user_vote
     : state.opinion.opinionsById[opinion.id].user_vote;

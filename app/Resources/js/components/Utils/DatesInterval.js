@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 const DatesInterval = React.createClass({
@@ -8,6 +8,7 @@ const DatesInterval = React.createClass({
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps(): Object {
     return {
@@ -31,59 +32,55 @@ const DatesInterval = React.createClass({
     const startDay = (
       <FormattedDate
         value={moment(startAt)}
-        day="numeric"
-        month="long"
-        year="numeric"
+        day="numeric" month="long" year="numeric"
       />
     );
     const startTime = (
-      <FormattedDate value={moment(startAt)} hour="numeric" minute="numeric" />
+      <FormattedDate
+        value={moment(startAt)}
+        hour="numeric" minute="numeric"
+      />
     );
 
     if (!endAt) {
       return (
         <FormattedMessage
-          id="global.dates.full_day"
-          values={{
-            date: startDay,
-            time: startTime,
-          }}
+          message={this.getIntlMessage('global.dates.full_day')}
+          date={startDay}
+          time={startTime}
         />
       );
     }
 
     const endTime = (
-      <FormattedDate value={moment(endAt)} hour="numeric" minute="numeric" />
+      <FormattedDate
+        value={moment(endAt)}
+        hour="numeric" minute="numeric"
+      />
     );
     const endDay = (
       <FormattedDate
         value={moment(endAt)}
-        day="numeric"
-        month="long"
-        year="numeric"
+        day="numeric" month="long" year="numeric"
       />
     );
 
     if (this.lastOneDay()) {
       return (
         <FormattedMessage
-          id="global.dates.part_day"
-          values={{
-            date: startDay,
-            startTime,
-            endTime,
-          }}
+          message={this.getIntlMessage('global.dates.part_day')}
+          date={startDay}
+          startTime={startTime}
+          endTime={endTime}
         />
       );
     }
 
     return (
       <FormattedMessage
-        id="global.dates.between"
-        values={{
-          start: startDay,
-          end: endDay,
-        }}
+        message={this.getIntlMessage('global.dates.between')}
+        start={startDay}
+        end={endDay}
       />
     );
   },

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { IntlMixin } from 'react-intl';
 import ViewBox from './ViewBox';
 import EditBox from './EditBox';
 import FlashMessages from '../Utils/FlashMessages';
@@ -15,6 +15,7 @@ const SynthesisBox = React.createClass({
     children: PropTypes.object,
     sideMenu: PropTypes.bool,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -64,10 +65,16 @@ const SynthesisBox = React.createClass({
   },
 
   renderBoxMode() {
-    const { children, mode, sideMenu } = this.props;
+    const {
+      children,
+      mode,
+      sideMenu,
+    } = this.props;
     if (this.state.synthesis !== null) {
       if (mode === 'view') {
-        return <ViewBox synthesis={this.state.synthesis} />;
+        return (
+          <ViewBox synthesis={this.state.synthesis} />
+        );
       }
       if (mode === 'edit') {
         return (
@@ -77,25 +84,24 @@ const SynthesisBox = React.createClass({
         );
       }
       return (
-        <p>
-          {<FormattedMessage id="synthesis.common.errors.incorrect_mode" />}
-        </p>
+        <p>{this.getIntlMessage('synthesis.common.errors.incorrect_mode')}</p>
       );
     }
   },
 
   render() {
     return (
-      <div className="synthesis__box">
+      <div className="synthesis__box" >
         <FlashMessages
           errors={this.state.messages.errors}
           success={this.state.messages.success}
           onDismissMessage={this.dismissMessage}
         />
-        {this.renderBoxMode()}
+        { this.renderBoxMode() }
       </div>
     );
   },
+
 });
 
 export default SynthesisBox;

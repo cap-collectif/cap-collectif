@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateModal } from './OpinionCreateModal';
+import IntlData from '../../../translations/FR';
 
 describe('<OpinionCreateModal />', () => {
   const props = {
+    ...IntlData,
     show: true,
     projectId: 'projectId',
     stepId: '1',

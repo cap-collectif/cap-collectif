@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { IntlMixin } from 'react-intl';
 import {
   COMMENT_SYSTEM_SIMPLE,
   COMMENT_SYSTEM_BOTH,
@@ -11,6 +12,7 @@ const ArgumentsBox = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
   },
+  mixins: [IntlMixin],
 
   getCommentSystem() {
     const { opinion } = this.props;

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { IntlMixin, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import OpinionActions from '../../../actions/OpinionActions';
@@ -12,6 +12,7 @@ const OpinionDelete = React.createClass({
     opinion: PropTypes.object.isRequired,
     user: PropTypes.object,
   },
+  mixins: [IntlMixin],
 
   getDefaultProps() {
     return {
@@ -71,8 +72,9 @@ const OpinionDelete = React.createClass({
             className="pull-right btn--outline btn-danger"
             onClick={this.showModal}
             style={{ marginLeft: '5px' }}>
-            <i className="cap cap-bin-2" />{' '}
-            {<FormattedMessage id="global.remove" />}
+            <i className="cap cap-bin-2" />
+            {' '}
+            {this.getIntlMessage('global.remove')}
           </Button>
           <Modal
             animation={false}
@@ -82,12 +84,14 @@ const OpinionDelete = React.createClass({
             aria-labelledby="contained-modal-title-lg">
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-lg">
-                {<FormattedMessage id="global.removeMessage" />}
+                {this.getIntlMessage('global.removeMessage')}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <p>
-                <FormattedHTMLMessage id="opinion.delete.confirm" />
+                <FormattedHTMLMessage
+                  message={this.getIntlMessage('opinion.delete.confirm')}
+                />
               </p>
             </Modal.Body>
             <Modal.Footer>
