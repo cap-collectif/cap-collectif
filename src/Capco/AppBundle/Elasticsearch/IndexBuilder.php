@@ -8,7 +8,6 @@ use Elastica\Request;
 use Elasticsearch\Endpoints\Indices\Aliases\Get;
 use Symfony\Component\Yaml\Yaml;
 
-
 /**
  * Handle index creation and manipulation.
  */

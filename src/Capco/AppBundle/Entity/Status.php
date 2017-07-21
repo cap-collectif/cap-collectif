@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\ColorableTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Status
+class Status implements IndexableInterface
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -151,5 +152,29 @@ class Status
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName()
+    {
+        return 'status';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getElasticsearchSerializationGroups()
+    {
+        return ['Statuses'];
     }
 }

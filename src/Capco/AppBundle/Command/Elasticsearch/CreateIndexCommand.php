@@ -14,7 +14,7 @@ class CreateIndexCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:es:create-index')
+            ->setName('capco:es:create')
             ->setDescription('Create the Elasticsearch Indexes.')
         ;
     }

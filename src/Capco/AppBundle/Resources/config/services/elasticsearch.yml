@@ -13,11 +13,26 @@ services:
         arguments:
             - '@capco.elasticsearch.client'
 
+    capco.elasticsearch.indexer:
+        class: Capco\AppBundle\Elasticsearch\Indexer
+        arguments:
+            - '@doctrine'
+            - '@serializer'
+            - '@capco.elasticsearch.index'
+
     capco.elasticsearch.index:
         class: Elastica\Index
         factory: ['@capco.elasticsearch.index_builder', getLiveSearchIndex]
 
-    # Keep for Backward compatibility
+    capco.elasticsearch.elastica_to_doctrine_transformer:
+        class: Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer
+        arguments:
+            - '@doctrine'
+            - '@capco.elasticsearch.indexer'
+        calls:
+            - ['setPropertyAccessor', ['@property_accessor']]
+
+    # Kept for Backward compatibility
     fos_elastica.index.app.proposal:
         class: Elastica\Type
         arguments: ['@capco.elasticsearch.index', 'proposal']
@@ -26,5 +41,15 @@ services:
         alias: 'capco.elasticsearch.index'
 
     fos_elastica.elastica_to_model_transformer.collection.app:
-        alias: 'capco.elasticsearch.index'
-        #todo
+        alias: 'capco.elasticsearch.elastica_to_doctrine_transformer'
+
+# todo!!!!
+#  capco.elastica.listener:
+#    class: Capco\AppBundle\EventListener\ElasticaListener
+#    arguments:
+#      - '@fos_elastica.object_persister.app.proposal'
+#      - '@fos_elastica.object_persister.app.selection'
+#    calls:
+#      - [ setContainer, [ "@service_container" ] ]
+#    tags:
+#       - { name: doctrine.event_subscriber, connection: default }

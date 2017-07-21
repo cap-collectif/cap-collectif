@@ -67,7 +67,8 @@ class ApplicationContext extends UserContext
             $this->purgeRabbitMqQueues();
         }
         if ($scenario->hasTag('elasticsearch')) {
-            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console fos:elastica:populate -e test -n');
+            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console capco:es:create -e test -n');
+            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console capco:es:populate -e test -n');
         }
         // This tag is useful when you analyze the medias folder (e.g: counting number of files)
         // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.

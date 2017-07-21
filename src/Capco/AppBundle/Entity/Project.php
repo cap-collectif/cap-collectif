@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -229,11 +229,6 @@ class Project implements IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New project';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
     }
 
     /**
@@ -925,5 +920,29 @@ class Project implements IndexableInterface
                 $theme->removeProject($this);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName()
+    {
+        return 'project';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getElasticsearchSerializationGroups()
+    {
+        return ['Opinions', 'OpinionVersions'];
     }
 }

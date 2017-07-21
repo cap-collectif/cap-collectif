@@ -144,6 +144,8 @@ mappings:
                     std: { type: text, analyzer: standard }
             updatedAt: { type: date }
             deletedAt: { type: date }
+            isTrashed: { type: boolean }
+            enabled: { type: boolean }
             location: { type: keyword }
             district:
                 type: object
@@ -155,6 +157,10 @@ mappings:
                 properties:
                     id: { type: keyword }
                     name: { type: keyword }
+            proposalForm:
+                type: object
+                properties:
+                    id: { type: keyword }
             category:
                 type: object
                 properties:

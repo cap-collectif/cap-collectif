@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -127,11 +127,6 @@ class Post implements CommentableInterface, IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New post';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsPublished();
     }
 
     /**
@@ -547,5 +542,29 @@ class Post implements CommentableInterface, IndexableInterface
                 $project->removePost($this);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable()
+    {
+        return $this->getIsPublished();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName()
+    {
+        return 'post';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getElasticsearchSerializationGroups()
+    {
+        return ['Posts'];
     }
 }

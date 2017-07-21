@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements Contribution
+class Reply implements VoteContribution
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -73,11 +74,6 @@ class Reply implements Contribution
     public function getRelated()
     {
         return null;
-    }
-
-    public function isIndexable()
-    {
-        return false;
     }
 
     /**

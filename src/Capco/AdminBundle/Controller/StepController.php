@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
@@ -35,8 +36,8 @@ class StepController extends CRUDController
         ]));
 
         $query = new Query($boolQuery);
-        $query->setFields(['id', 'title']);
-        $results = $this->get('fos_elastica.index.app.proposal')->search($query);
+        $query->setSource(['id', 'title']);
+        $results = $this->get('capco.elasticsearch.index')->getType(Proposal::getElasticsearchTypeName())->search($query);
 
         $items = array_map(function ($result) {
             return ['id' => $result->getData()['id'], 'label' => $result->getData()['title']];
