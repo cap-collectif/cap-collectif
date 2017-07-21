@@ -52,6 +52,15 @@ ajv@^4.7.0, ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
+ajv@^5.2.0:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.2.tgz#47c68d69e86f5d953103b0074a9430dc63da5e39"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    json-schema-traverse "^0.3.0"
+    json-stable-stringify "^1.0.1"
+
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/align-text/-/align-text-0.1.4.tgz#0cd90a561093f35d0a99256c22b7069433fad117"
@@ -2441,9 +2450,9 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@^2.34.1:
-  version "2.34.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.34.1.tgz#ea109175645b05d37baeac53b9b65066d79b9446"
+eslint-plugin-flowtype@^2.35.0:
+  version "2.35.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.35.0.tgz#d17494f0ae8b727c632d8b9d4b4a848e7e0c04af"
   dependencies:
     lodash "^4.15.0"
 
@@ -2533,10 +2542,11 @@ eslint@^3.0:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
-eslint@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.1.1.tgz#facbdfcfe3e0facd3a8b80dc98c4e6c13ae582df"
+eslint@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.2.0.tgz#a2b3184111b198e02e9c7f3cca625a5e01c56b3d"
   dependencies:
+    ajv "^5.2.0"
     babel-code-frame "^6.22.0"
     chalk "^1.1.3"
     concat-stream "^1.6.0"
@@ -2553,7 +2563,6 @@ eslint@^4.1.1:
     ignore "^3.3.3"
     imurmurhash "^0.1.4"
     inquirer "^3.0.6"
-    is-my-json-valid "^2.16.0"
     is-resolvable "^1.0.0"
     js-yaml "^3.8.4"
     json-stable-stringify "^1.0.1"
@@ -2746,6 +2755,10 @@ fancybox@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fancybox/-/fancybox-3.0.0.tgz#8c21af8142c621bed7d551ba69c4c38eaecd2e04"
 
+fast-deep-equal@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
+
 fast-levenshtein@^1.1.3:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-1.1.4.tgz#e6a754cc8f15e58987aa9cbd27af66fd6f4e5af9"
@@ -2890,9 +2903,9 @@ flat@^2.0.1:
   dependencies:
     is-buffer "~1.1.2"
 
-flow-bin@^0.49.1:
-  version "0.49.1"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.49.1.tgz#c9e456b3173a7535a4ffaf28956352c63bb8e3e9"
+flow-bin@^0.50.0:
+  version "0.50.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.50.0.tgz#d4cdb2430dee1a3599f0eb6fe551146e3027256a"
 
 flow-coverage-report@^0.3.0:
   version "0.3.0"
@@ -3569,7 +3582,7 @@ is-glob@^2.0.0, is-glob@^2.0.1:
   dependencies:
     is-extglob "^1.0.0"
 
-is-my-json-valid@^2.10.0, is-my-json-valid@^2.16.0:
+is-my-json-valid@^2.10.0:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.16.0.tgz#f079dd9bfdae65ee2038aae8acbc86ab109e3693"
   dependencies:
@@ -4034,6 +4047,10 @@ json-brunch@^1.5.4:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/json-brunch/-/json-brunch-1.5.4.tgz#255da6f0cb0b5683ffe91521d9512a8f9b2ddcae"
 
+json-schema-traverse@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.3.1.tgz#349a6d44c53a51de89b40805c5d5e59b417d3340"
+
 json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
@@ -4116,9 +4133,9 @@ linkify-it@^1.2.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lint-staged@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-4.0.1.tgz#05365469898439dbade8a455893cf11e24d12b0f"
+lint-staged@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-4.0.2.tgz#8e83e11e9e1656c09b6117f6db0d55fd4960a1c0"
   dependencies:
     app-root-path "^2.0.0"
     cosmiconfig "^1.1.0"
@@ -5153,9 +5170,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.2.tgz#7ea0751da27b93bfb6cecfcec509994f52d83bb3"
+prettier@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
 
 pretty-format@^20.0.3:
   version "20.0.3"

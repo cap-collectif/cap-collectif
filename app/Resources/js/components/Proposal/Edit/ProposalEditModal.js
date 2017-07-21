@@ -36,11 +36,11 @@ const ProposalEditModal = React.createClass({
           show={show}
           onHide={() => {
             if (
+              // eslint-disable-next-line no-alert
               window.confirm(
                 <FormattedMessage id="proposal.confirm_close_modal" />,
               )
             ) {
-              // eslint-disable-line no-alert
               dispatch(closeEditProposalModal());
             }
           }}
