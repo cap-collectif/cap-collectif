@@ -87,9 +87,12 @@ export const ProposalListFilters = React.createClass({
               }}
               value={order}>
               {displayedOrders.map(choice =>
-                <option key={choice} value={choice}>
-                  <FormattedMessage id={`global.filter_f_${choice}`} />
-                </option>,
+                <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
+                  {message =>
+                    <option value={choice}>
+                      {message}
+                    </option>}
+                </FormattedMessage>,
               )}) }
             </Input>
           </Col>
@@ -116,9 +119,12 @@ export const ProposalListFilters = React.createClass({
                   dispatch(loadProposals());
                 }}
                 value={filters[filterName] || 0}>
-                <option value="0">
-                  <FormattedMessage id={`global.select_${filterName}`} />
-                </option>
+                <FormattedMessage id={`global.select_${filterName}`}>
+                  {message =>
+                    <option value="0">
+                      {message}
+                    </option>}
+                </FormattedMessage>
                 {this.props[filterName].map(choice => {
                   return (
                     <option key={choice.id} value={choice.id}>

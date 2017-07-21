@@ -58,7 +58,9 @@ const ReplyModalLink = React.createClass({
           }}
         />
         {reply.private &&
-          <span>{` ${<FormattedMessage id="reply.private" />}`}</span>}
+          <span>
+            <FormattedMessage id="reply.private" />
+          </span>}
         <ShowReplyModal
           show={this.state.showModal}
           onClose={this.hideModal}

@@ -18,7 +18,7 @@ export const IdeaCreateButton = React.createClass({
           onClick={handleClick}
           className="form-control">
           <i className="cap cap-add-1" />
-          {` ${<FormattedMessage id="idea.add" />}`}
+          <FormattedMessage id="idea.add" />
         </Button>
       </LoginOverlay>
     );

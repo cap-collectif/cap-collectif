@@ -19,7 +19,7 @@ const ProposalCreateButton = React.createClass({
           bsStyle="primary"
           onClick={disabled ? null : handleClick}>
           <i className="cap cap-add-1" />
-          {` ${<FormattedMessage id="proposal.add" />}`}
+          <FormattedMessage id="proposal.add" />
         </Button>
       </LoginOverlay>
     );

@@ -30,14 +30,15 @@ const CollectStepPageHeader = React.createClass({
                 num: total,
               }}
             />}{' '}
-        <span style={{ color: '#999', fontWeight: 300 }}>
-          <FormattedMessage
-            id="proposal.count_fusions"
-            values={{
-              num: countFusions,
-            }}
-          />
-        </span>
+        {countFusions > 0 &&
+          <span style={{ color: '#999', fontWeight: 300 }}>
+            <FormattedMessage
+              id="proposal.count_fusions"
+              values={{
+                num: countFusions,
+              }}
+            />
+          </span>}
         <span className="pull-right">
           <ProposalCreate form={form} categories={categories} />
         </span>

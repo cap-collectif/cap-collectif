@@ -89,7 +89,7 @@ const ImageUpload = React.createClass({
 
   onToggleDelete() {
     const { valueLink, onChange } = this.props;
-    const deleteValue = !this._deleteCheckbox.getValue();
+    const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
       if (valueLink) {
         valueLink.requestChange(null);

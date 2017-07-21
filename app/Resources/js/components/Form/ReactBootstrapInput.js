@@ -300,4 +300,4 @@ ReactBootstrapInput.propTypes = {
   type: PropTypes.string,
 };
 
-export default injectIntl(ReactBootstrapInput);
+export default injectIntl(ReactBootstrapInput, { withRef: true });

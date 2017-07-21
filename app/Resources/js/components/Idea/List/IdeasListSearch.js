@@ -21,7 +21,7 @@ const IdeasListSearch = React.createClass({
   handleSubmit(e) {
     const { onChange } = this.props;
     e.preventDefault();
-    let value = this._input.getValue();
+    let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
     IdeaActions.changeSearchTerms(value);
     this.reload();
