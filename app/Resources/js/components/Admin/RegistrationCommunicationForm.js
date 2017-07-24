@@ -24,7 +24,7 @@ export const RegistrationCommunicationForm = React.createClass({
         <Field
           name="topTextDisplayed"
           type="checkbox"
-          children={'Afficher un message personnalisé au dessus du formulaire'}
+          children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
         />
         {useTopText &&
@@ -32,7 +32,7 @@ export const RegistrationCommunicationForm = React.createClass({
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
-          children={'Afficher un message personnalisé en dessous du formulaire'}
+          children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
         />
         {useBottomText &&

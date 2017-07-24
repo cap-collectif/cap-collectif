@@ -56,7 +56,7 @@ export const RegistrationQuestionForm = React.createClass({
         <Field
           name="required"
           type="checkbox"
-          children={'Saisie obligatoire'}
+          children={<FormattedMessage id="global.admin.required" />}
           component={renderInput}
         />
         <Field name="type" type="select" label={'Type'} component={renderInput}>

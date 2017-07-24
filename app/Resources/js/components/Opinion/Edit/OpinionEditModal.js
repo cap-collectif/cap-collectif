@@ -28,8 +28,9 @@ export const OpinionEditModal = React.createClass({
         show={show}
         onHide={() => {
           if (
-            // $FlowFixMe eslint-disable-next-line no-alert
+            // eslint-disable-next-line no-alert
             window.confirm(
+              // $FlowFixMe
               intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
             )
           ) {
