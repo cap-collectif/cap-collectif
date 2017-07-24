@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
 
 const Navbar = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     logo: PropTypes.string,
     items: PropTypes.array.isRequired,
   },
@@ -89,13 +90,13 @@ const Navbar = React.createClass({
   },
 
   render() {
-    const { logo } = this.props;
+    const { logo, intl } = this.props;
     const { items, moreItems } = this.state;
     const moreItem =
       moreItems.length > 0
         ? {
             id: 'see-more',
-            title: <FormattedMessage id="global.navbar.see_more" />,
+            title: intl.formatMessage({ id: 'global.navbar.see_more' }),
             hasEnabledFeature: true,
             children: moreItems,
           }
@@ -128,8 +129,8 @@ const Navbar = React.createClass({
               <a href="/">
                 <img
                   src={logo}
-                  title={<FormattedMessage id="navbar.homepage" />}
-                  alt={<FormattedMessage id="navbar.homepage" />}
+                  title={intl.formatMessage({ id: 'navbar.homepage' })}
+                  alt={intl.formatMessage({ id: 'navbar.homepage' })}
                 />
               </a>
             </Navigation.Brand>
@@ -162,4 +163,4 @@ const Navbar = React.createClass({
   },
 });
 
-export default Navbar;
+export default injectIntl(Navbar);
