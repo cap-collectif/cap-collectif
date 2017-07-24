@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
@@ -12,6 +12,7 @@ import type { State } from '../../../types';
 
 export const OpinionCreateModal = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     show: PropTypes.bool.isRequired,
     projectId: PropTypes.string.isRequired,
     stepId: PropTypes.string.isRequired,
@@ -30,6 +31,7 @@ export const OpinionCreateModal = React.createClass({
       stepId,
       projectId,
       step,
+      intl,
     } = this.props;
     return (
       <Modal
@@ -37,10 +39,8 @@ export const OpinionCreateModal = React.createClass({
         show={show}
         onHide={() => {
           if (
-            // eslint-disable-next-line no-alert
-            window.confirm(
-              <FormattedMessage id="proposal.confirm_close_modal" />,
-            )
+            // eslint-disable-next-line no-alert $FlowFixMe
+            window.confirm(intl.format({ id: 'proposal.confirm_close_modal' }))
           ) {
             dispatch(closeOpinionCreateModal());
           }
@@ -49,13 +49,13 @@ export const OpinionCreateModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="opinion.add_new" />}
+            <FormattedMessage id="opinion.add_new" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="modal-top bg-info">
             <p>
-              {<FormattedMessage id="opinion.add_new_infos" />}
+              <FormattedMessage id="opinion.add_new_infos" />
             </p>
           </div>
           <OpinionCreateForm
@@ -91,4 +91,4 @@ export default connect((state: State, props: Object) => {
     submitting: isSubmitting(formName)(state),
     step: state.project.projectsById[props.projectId].stepsById[props.stepId],
   };
-})(OpinionCreateModal);
+})(injectIntl(OpinionCreateModal));

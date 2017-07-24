@@ -108,7 +108,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         bsClass="progress-bar"
         bsStyle="success"
         isChild={false}
-        label="50%"
+        label="%(percent)s%"
         max={100}
         min={0}
         now={50}
@@ -214,7 +214,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
           bsClass="progress-bar"
           bsStyle="success"
           isChild={false}
-          label="50%"
+          label="%(percent)s%"
           max={100}
           min={0}
           now={50}

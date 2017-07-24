@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import ProposalCreateButton from './ProposalCreateButton';
@@ -14,6 +14,7 @@ import {
 
 const ProposalCreate = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     showModal: PropTypes.bool.isRequired,
@@ -22,7 +23,14 @@ const ProposalCreate = React.createClass({
   },
 
   render() {
-    const { categories, form, showModal, isSubmitting, dispatch } = this.props;
+    const {
+      intl,
+      categories,
+      form,
+      showModal,
+      isSubmitting,
+      dispatch,
+    } = this.props;
     return (
       <div>
         <ProposalCreateButton
@@ -36,7 +44,7 @@ const ProposalCreate = React.createClass({
             if (
               // eslint-disable-next-line no-alert
               window.confirm(
-                <FormattedMessage id="proposal.confirm_close_modal" />,
+                intl.format({ id: 'proposal.confirm_close_modal' }),
               )
             ) {
               dispatch(closeCreateModal());
@@ -75,4 +83,4 @@ const mapStateToProps = state => ({
   showModal: state.proposal.showCreateModal,
 });
 
-export default connect(mapStateToProps)(ProposalCreate);
+export default connect(mapStateToProps)(injectIntl(ProposalCreate));

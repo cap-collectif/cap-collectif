@@ -21,7 +21,7 @@ import { loadSuggestions } from '../../../actions/ProposalActions';
 
 export const ProposalForm = React.createClass({
   propTypes: {
-    intl: intlShape,
+    intl: intlShape.isRequired,
     currentStepId: PropTypes.string.isRequired,
     form: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,

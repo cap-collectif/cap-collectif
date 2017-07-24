@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
@@ -12,6 +12,7 @@ import {
 
 const ProposalEditModal = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     proposal: PropTypes.object.isRequired,
@@ -28,6 +29,7 @@ const ProposalEditModal = React.createClass({
       show,
       isSubmitting,
       dispatch,
+      intl,
     } = this.props;
     return (
       <div>
@@ -38,7 +40,7 @@ const ProposalEditModal = React.createClass({
             if (
               // eslint-disable-next-line no-alert
               window.confirm(
-                <FormattedMessage id="proposal.confirm_close_modal" />,
+                intl.format({ id: 'proposal.confirm_close_modal' }),
               )
             ) {
               dispatch(closeEditProposalModal());
@@ -86,4 +88,4 @@ const mapStateToProps = state => {
     isSubmitting: state.proposal.isEditing,
   };
 };
-export default connect(mapStateToProps)(ProposalEditModal);
+export default connect(mapStateToProps)(injectIntl(ProposalEditModal));

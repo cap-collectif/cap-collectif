@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
@@ -12,6 +12,7 @@ import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 
 export const OpinionEditModal = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     show: PropTypes.bool.isRequired,
     opinion: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
@@ -20,17 +21,15 @@ export const OpinionEditModal = React.createClass({
   },
 
   render() {
-    const { dispatch, submitting, show, opinion, step } = this.props;
+    const { dispatch, submitting, show, opinion, step, intl } = this.props;
     return (
       <Modal
         animation={false}
         show={show}
         onHide={() => {
           if (
-            // eslint-disable-next-line no-alert
-            window.confirm(
-              <FormattedMessage id="proposal.confirm_close_modal" />,
-            )
+            // $FlowFixMe eslint-disable-next-line no-alert
+            window.confirm(intl.format({ id: 'proposal.confirm_close_modal' }))
           ) {
             dispatch(closeOpinionEditModal());
           }
@@ -39,7 +38,7 @@ export const OpinionEditModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="global.edit" />}
+            <FormattedMessage id="global.edit" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -75,4 +74,4 @@ const mapStateToProps = (state: State, props: Object) => ({
     )[0],
 });
 
-export default connect(mapStateToProps)(OpinionEditModal);
+export default connect(mapStateToProps)(injectIntl(OpinionEditModal));

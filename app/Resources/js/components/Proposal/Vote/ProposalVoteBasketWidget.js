@@ -79,7 +79,7 @@ export const ProposalVoteBasketWidget = React.createClass({
                 <ProgressBar
                   bsStyle="success"
                   now={percentage}
-                  label={`${percentage}%`}
+                  label="%(percent)s%"
                 />
               </li>}
           </Navbar.Header>}
@@ -215,7 +215,7 @@ export const ProposalVoteBasketWidget = React.createClass({
                 <ProgressBar
                   bsStyle="success"
                   now={percentage}
-                  label={`${percentage}%`}
+                  label="%(percent)s%"
                 />
               </li>
             </Nav>}
