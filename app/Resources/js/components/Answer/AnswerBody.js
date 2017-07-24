@@ -5,8 +5,6 @@ import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 
 const AnswerBody = React.createClass({
-  displayName: 'AnswerBody',
-
   propTypes: {
     answer: PropTypes.object.isRequired,
   },

@@ -80,23 +80,23 @@ export const ProposalPage = React.createClass({
               <div className="container">
                 <Nav bsStyle="pills" style={{ display: 'inline-block' }}>
                   <NavItem eventKey="content" className="tabs__pill">
-                    {<FormattedMessage id="proposal.tabs.content" />}
+                    <FormattedMessage id="proposal.tabs.content" />
                   </NavItem>
                   <NavItem eventKey="comments" className="tabs__pill">
-                    {<FormattedMessage id="proposal.tabs.comments" />}
+                    <FormattedMessage id="proposal.tabs.comments" />
                     <span className="badge">
                       {proposal.comments_count}
                     </span>
                   </NavItem>
                   {showVotesTab &&
                     <NavItem eventKey="votes" className="tabs__pill">
-                      {<FormattedMessage id="proposal.tabs.votes" />}
+                      <FormattedMessage id="proposal.tabs.votes" />
                       <span className="badge">
                         {votesCount}
                       </span>
                     </NavItem>}
                   <NavItem eventKey="blog" className="tabs__pill">
-                    {<FormattedMessage id="proposal.tabs.blog" />}
+                    <FormattedMessage id="proposal.tabs.blog" />
                     <span className="badge">
                       {proposal.postsCount}
                     </span>

@@ -21,7 +21,7 @@ export const ProposalPageBlog = React.createClass({
     if (!posts || posts.length === 0) {
       return (
         <p>
-          {<FormattedMessage id="proposal.no_posts" />}
+          <FormattedMessage id="proposal.no_posts" />
         </p>
       );
     }

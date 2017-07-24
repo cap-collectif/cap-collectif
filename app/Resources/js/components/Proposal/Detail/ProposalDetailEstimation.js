@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { FormattedNumber } from 'react-intl';
 
 const ProposalDetailEstimation = React.createClass({
-  displayName: 'ProposalDetailEstimation',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     showNullEstimation: PropTypes.bool.isRequired,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
 import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 
@@ -38,7 +37,7 @@ const ProposalResponse = React.createClass({
             {response.field.question}
           </h4>
           {this.isHTML()
-            ? <FormattedHTMLMessage message={response.value} />
+            ? <div dangerouslySetInnerHTML={{ __html: response.value }} />
             : <p>
                 {response.value}
               </p>}

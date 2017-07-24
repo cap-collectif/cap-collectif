@@ -13,8 +13,6 @@ import {
 } from '../../../redux/modules/proposal';
 
 const ProposalPageVotes = React.createClass({
-  displayName: 'ProposalPageVotes',
-
   propTypes: {
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.string.isRequired,
@@ -37,7 +35,7 @@ const ProposalPageVotes = React.createClass({
     if (votesCount === 0) {
       return (
         <p>
-          {<FormattedMessage id="proposal.vote.none" />}
+          <FormattedMessage id="proposal.vote.none" />
         </p>
       );
     }
@@ -69,7 +67,7 @@ const ProposalPageVotes = React.createClass({
               dispatch(openVotesModal(stepId));
             }}
             className="btn--outline">
-            {<FormattedMessage id="proposal.vote.show_more" />}
+            <FormattedMessage id="proposal.vote.show_more" />
           </Button>}
         <AllVotesModal
           votes={votes}

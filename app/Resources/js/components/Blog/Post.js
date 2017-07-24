@@ -8,8 +8,6 @@ import {
 import moment from 'moment';
 
 export const Post = React.createClass({
-  displayName: 'Post',
-
   propTypes: {
     post: PropTypes.object.isRequired,
     features: PropTypes.object.isRequired,
