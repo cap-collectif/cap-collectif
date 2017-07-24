@@ -18,7 +18,10 @@ exports[`<AddNewQuestionForm /> renders correctly 1`] = `
     name="required"
     type="checkbox"
   >
-    Saisie obligatoire
+    <FormattedMessage
+      id="global.admin.required"
+      values={Object {}}
+    />
   </Field>
   <Field
     component={[Function]}
@@ -73,7 +76,10 @@ exports[`<AddNewQuestionForm /> renders correctly for multiple choices 1`] = `
     name="required"
     type="checkbox"
   >
-    Saisie obligatoire
+    <FormattedMessage
+      id="global.admin.required"
+      values={Object {}}
+    />
   </Field>
   <Field
     component={[Function]}

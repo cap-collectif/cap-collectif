@@ -9,7 +9,10 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
     name="topTextDisplayed"
     type="checkbox"
   >
-    Afficher un message personnalisé au dessus du formulaire
+    <FormattedMessage
+      id="registration.admin.topText"
+      values={Object {}}
+    />
   </Field>
   <Field
     component={[Function]}
@@ -21,7 +24,10 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
     name="bottomTextDisplayed"
     type="checkbox"
   >
-    Afficher un message personnalisé en dessous du formulaire
+    <FormattedMessage
+      id="registration.admin.bottomText"
+      values={Object {}}
+    />
   </Field>
   <Field
     component={[Function]}
