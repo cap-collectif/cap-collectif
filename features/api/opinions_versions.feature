@@ -46,8 +46,8 @@ Feature: Opinions Versions
           "arguments_yes_count": @integer@,
           "arguments_no_count": @integer@,
 
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
+          "createdAt": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
 
           "ranking": "expr(value === null || value > 0)",
 
@@ -85,8 +85,8 @@ Feature: Opinions Versions
         "title": @string@,
         "body": @string@,
         "comment": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "is_trashed": @boolean@,
         "isContribuable": @boolean@,
 
