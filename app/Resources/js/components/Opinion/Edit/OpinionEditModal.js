@@ -29,7 +29,9 @@ export const OpinionEditModal = React.createClass({
         onHide={() => {
           if (
             // $FlowFixMe eslint-disable-next-line no-alert
-            window.confirm(intl.format({ id: 'proposal.confirm_close_modal' }))
+            window.confirm(
+              intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
+            )
           ) {
             dispatch(closeOpinionEditModal());
           }

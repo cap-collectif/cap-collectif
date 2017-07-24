@@ -5,6 +5,7 @@ import { ProposalForm } from './ProposalForm';
 
 describe('<ProposalForm />', () => {
   const props = {
+    intl: global.intlMock,
     currentStepId: '1',
     form: {
       title: 'proposal form',

@@ -6,6 +6,7 @@ import { OpinionEditModal } from './OpinionEditModal';
 
 describe('<OpinionEditModal />', () => {
   const props = {
+    intl: global.intlMock,
     show: true,
     opinion: {},
     step: {},

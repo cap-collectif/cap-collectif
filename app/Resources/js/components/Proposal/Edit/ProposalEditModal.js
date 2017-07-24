@@ -40,7 +40,7 @@ const ProposalEditModal = React.createClass({
             if (
               // eslint-disable-next-line no-alert
               window.confirm(
-                intl.format({ id: 'proposal.confirm_close_modal' }),
+                intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
               )
             ) {
               dispatch(closeEditProposalModal());

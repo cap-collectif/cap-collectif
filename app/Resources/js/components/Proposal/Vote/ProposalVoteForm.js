@@ -80,7 +80,7 @@ const ProposalVoteForm = React.createClass({
               name="private"
               id="proposal-vote__private"
               disableValidation
-              label={<FormattedMessage id="proposal.vote.form.private" />}
+              children={<FormattedMessage id="proposal.vote.form.private" />}
             />}
         {!isPrivate &&
           (!voteWithoutAccount || anonymous) &&

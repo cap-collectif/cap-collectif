@@ -44,7 +44,7 @@ const OpinionVersionEditForm = React.createClass({
             name="confirm"
             type="checkbox"
             component={renderInput}
-            label={<FormattedMessage id="opinion.version.confirm" />}
+            children={<FormattedMessage id="opinion.version.confirm" />}
           />
         </div>
         <Field

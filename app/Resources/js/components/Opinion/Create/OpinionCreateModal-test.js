@@ -6,6 +6,7 @@ import { OpinionCreateModal } from './OpinionCreateModal';
 
 describe('<OpinionCreateModal />', () => {
   const props = {
+    intl: global.intlMock,
     show: true,
     projectId: 'projectId',
     stepId: '1',

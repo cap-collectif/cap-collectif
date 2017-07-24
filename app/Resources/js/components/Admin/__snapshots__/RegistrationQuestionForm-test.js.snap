@@ -15,10 +15,11 @@ exports[`<RegistrationQuestionForm /> renders correctly 1`] = `
   />
   <Field
     component={[Function]}
-    label="Saisie obligatoire"
     name="required"
     type="checkbox"
-  />
+  >
+    Saisie obligatoire
+  </Field>
   <Field
     component={[Function]}
     label="Type"

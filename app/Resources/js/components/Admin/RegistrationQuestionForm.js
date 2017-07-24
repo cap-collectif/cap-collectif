@@ -56,21 +56,21 @@ export const RegistrationQuestionForm = React.createClass({
         <Field
           name="required"
           type="checkbox"
-          label={'Saisie obligatoire'}
+          children={'Saisie obligatoire'}
           component={renderInput}
         />
         <Field name="type" type="select" label={'Type'} component={renderInput}>
           <option value="" disabled>
-            {<FormattedMessage id="global.select" />}
+            <FormattedMessage id="global.select" />
           </option>
           <option value={0}>
-            {<FormattedMessage id="global.question.types.text" />}
+            <FormattedMessage id="global.question.types.text" />
           </option>
           {/* <option value={1}>{this.getIntlMessage('global.question.types.textarea')}</option> */}
           {/* <option value={2}>{this.getIntlMessage('global.question.types.editor')}</option> */}
           {/* <option value={3}>{this.getIntlMessage('global.question.types.radio')}</option> */}
           <option value={4}>
-            {<FormattedMessage id="global.question.types.select" />}
+            <FormattedMessage id="global.question.types.select" />
           </option>
           {/* <option value={5}>{this.getIntlMessage('global.question.types.checkbox')}</option> */}
           {/* <option value={6}>{this.getIntlMessage('global.question.types.ranking')}</option> */}
