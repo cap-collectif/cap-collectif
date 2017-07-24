@@ -3,7 +3,7 @@ Feature: Opinions Versions
 
 ## List
 
-  @parallel-scenario @test
+  @parallel-scenario
   Scenario: API client wants to list versions of an opinion
     When I send a GET request to "/api/opinions/opinion57/versions"
     Then the JSON response status code should be 200
@@ -73,7 +73,7 @@ Feature: Opinions Versions
 
 ## Get
 
-  @parallel-scenario @test
+  @parallel-scenario
   Scenario: API client wants to get an opinion version
     When I send a GET request to "/api/opinions/opinion57/versions/version1"
     Then the JSON response status code should be 200
