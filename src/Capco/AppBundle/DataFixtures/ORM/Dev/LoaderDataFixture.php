@@ -34,7 +34,6 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/IdeaComment.yml',
             __DIR__ . '/IdeaVote.yml',
 
-            __DIR__ . '/ConsultationStepType.yml',
             __DIR__ . '/OpinionType.yml',
             __DIR__ . '/AppendixType.yml',
             __DIR__ . '/OpinionTypeAppendixType.yml',
@@ -42,6 +41,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/Project.yml',
 
             __DIR__ . '/ConsultationStep.yml',
+            __DIR__ . '/ConsultationStepType.yml',
             __DIR__ . '/PresentationStep.yml',
             __DIR__ . '/RankingStep.yml',
             __DIR__ . '/OtherStep.yml',
