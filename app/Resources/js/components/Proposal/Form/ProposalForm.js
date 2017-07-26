@@ -206,8 +206,8 @@ export const ProposalForm = React.createClass({
     this.handleTitleChangeDebounced(title);
   },
 
-  handleLocationChange(location) {
-    geocodeByAddress(location)
+  handleAddressChange(address) {
+    geocodeByAddress(address)
       .then(results => {
         this.setState(prevState => ({
           form: { ...prevState.form, address: JSON.stringify(results) },
@@ -219,19 +219,23 @@ export const ProposalForm = React.createClass({
         }));
       })
       .catch(error => {
-        this.setState(prevState => ({
-          form: { ...prevState.form, address: '' },
-        }));
-        this.setState(prevState => ({
-          ...prevState,
-          address: '',
-          errors: {
-            ...prevState.errors,
-            address: [{ message: 'proposal.constraints.address' }],
-          },
-        }));
+        this.resetAddressField();
         console.error('Google places error!', error); // eslint-disable-line
       });
+  },
+
+  resetAddressField() {
+    this.setState(prevState => ({
+      form: { ...prevState.form, address: '' },
+    }));
+    this.setState(prevState => ({
+      ...prevState,
+      address: '',
+      errors: {
+        ...prevState.errors,
+        address: [{ message: 'proposal.constraints.address' }],
+      },
+    }));
   },
 
   handleTitleChangeDebounced(title) {
@@ -506,8 +510,11 @@ export const ProposalForm = React.createClass({
                 id: 'proposal_address',
               }}
               autocompleteItem={autocompleteItem}
-              onEnterKeyDown={this.handleLocationChange}
-              onSelect={this.handleLocationChange}
+              onEnterKeyDown={this.handleAddressChange}
+              onSelect={this.handleAddressChange}
+              onError={() => {
+                this.resetAddressField();
+              }}
               classNames={{
                 root: `${this.state.errors.address.length > 0
                   ? 'form-control-warning'
@@ -535,15 +542,7 @@ export const ProposalForm = React.createClass({
               }}
             />
             {this.state.errors.address.length > 0 &&
-              <div className="flashmessages">
-                <p className="error-block">
-                  <span>
-                    {intl.formatMessage({
-                      id: this.state.errors.address[0].message,
-                    })}
-                  </span>
-                </p>
-              </div>}
+              this.renderFormErrors('address')}
           </div>}
         <Input
           id="proposal_body"
