@@ -155,7 +155,6 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.project.consultation_step_type',
                     'required' => true,
                     'btn_add' => false,
-                    // 'by_reference' => false,
                     'query' => $this->createQueryForConsultationStepType(),
                 ])
                 ->add('opinionCountShownBySection', null, [
