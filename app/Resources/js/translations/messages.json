@@ -430,6 +430,7 @@
   "proposal.constraints.category": "Merci de sélectionner une catégorie.",
   "proposal.constraints.district": "Merci de sélectionner une localisation.",
   "proposal.constraints.field_mandatory": "Ce champ est obligatoire.",
+  "proposal.constraints.address": "Merci de sélectionner un lieu ou une adresse.",
   "proposal.constraints.theme": "Merci de sélectionner un thème.",
   "proposal.constraints.title": "Le titre de la proposition doit faire au moins 2 caractères.",
   "proposal.constraints.media": "Vous avez sélectionné un nombre trop important d'image.",

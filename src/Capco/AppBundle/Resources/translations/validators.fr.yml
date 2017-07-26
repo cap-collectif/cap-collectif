@@ -40,7 +40,7 @@ global:
   no_category_when_mandatory: "Vous devez spécifier une catégorie."
   no_theme_when_activated: "Vous devez choisir un thème."
   no_theme_when_mandatory: "Vous devez spécifier un thème."
-  no_location_when_mandatory: "Vous devez spécifier une adresse valide."
+  no_address_when_mandatory: "Vous devez spécifier une adresse valide."
   only_one_realisation_step: "Il ne peut y avoir seulement une étape de sélection autorisant les étapes d'avancement."
 
 idea:

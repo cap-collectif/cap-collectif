@@ -89,13 +89,6 @@ class OpinionTypeAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.opinion_type.title',
             ])
-            ->add('slug', null, [
-                'label' => 'admin.fields.page.slug',
-                'attr' => [
-                  'readonly' => true,
-                  'disabled' => true,
-                ],
-            ])
             ->add('subtitle', null, [
                 'label' => 'admin.fields.opinion_type.subtitle',
             ])

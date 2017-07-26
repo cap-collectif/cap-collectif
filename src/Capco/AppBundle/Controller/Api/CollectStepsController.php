@@ -212,7 +212,7 @@ class CollectStepsController extends FOSRestController
         $router = $this->get('router');
 
         return array_map(function ($proposal) use ($step, $router) {
-            $location = is_array($proposal['location']) ?: \GuzzleHttp\json_decode($proposal['location'], true);
+            $location = is_array($proposal['address']) ?: \GuzzleHttp\json_decode($proposal['address'], true);
 
             return [
                 'id' => $proposal['id'],
@@ -230,7 +230,7 @@ class CollectStepsController extends FOSRestController
                 ],
             ];
         }, array_filter($results, function ($proposal) {
-            return $proposal['location'] !== null;
+            return $proposal['address'] !== null;
         }));
     }
 }

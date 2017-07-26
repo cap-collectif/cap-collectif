@@ -66,7 +66,7 @@ export const ProposalForm = React.createClass({
         district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : -1,
         media: null,
-        location: proposal.location ? proposal.location : '',
+        address: proposal.address ? proposal.address : '',
       },
       custom: this.getInitialFormAnswers(),
       errors: {
@@ -76,10 +76,11 @@ export const ProposalForm = React.createClass({
         district: [],
         category: [],
         media: [],
+        address: [],
       },
       suggestions: [],
-      address: proposal.location
-        ? JSON.parse(proposal.location)[0].formatted_address
+      address: proposal.address
+        ? JSON.parse(proposal.address)[0].formatted_address
         : '',
     };
   },
@@ -104,6 +105,7 @@ export const ProposalForm = React.createClass({
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
+    this.updateAddressConstraint();
   },
 
   componentWillReceiveProps(nextProps) {
@@ -118,6 +120,7 @@ export const ProposalForm = React.createClass({
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
+    this.updateAddressConstraint();
     if (!isSubmitting && nextProps.isSubmitting) {
       if (this.isValid()) {
         const form = this.state.form;
@@ -143,8 +146,8 @@ export const ProposalForm = React.createClass({
         ) {
           delete form.theme;
         }
-        if (!form.usingAddress && form.location.length === 0) {
-          delete form.location;
+        if (!form.usingAddress && form.address.length === 0) {
+          delete form.address;
         }
         if (
           !features.districts ||
@@ -207,14 +210,26 @@ export const ProposalForm = React.createClass({
     geocodeByAddress(location)
       .then(results => {
         this.setState(prevState => ({
-          form: { ...prevState.form, location: JSON.stringify(results) },
+          form: { ...prevState.form, address: JSON.stringify(results) },
         }));
         this.setState(prevState => ({
           ...prevState,
           address: results[0].formatted_address,
+          errors: { ...prevState.errors, address: [] },
         }));
       })
       .catch(error => {
+        this.setState(prevState => ({
+          form: { ...prevState.form, address: '' },
+        }));
+        this.setState(prevState => ({
+          ...prevState,
+          address: '',
+          errors: {
+            ...prevState.errors,
+            address: [{ message: 'proposal.constraints.address' }],
+          },
+        }));
         console.error('Google places error!', error); // eslint-disable-line
       });
   },
@@ -248,6 +263,17 @@ export const ProposalForm = React.createClass({
     this.formValidationRules.theme = {};
   },
 
+  updateAddressConstraint() {
+    const { form } = this.props;
+    if (form.usingAddress) {
+      this.formValidationRules.address = {
+        notBlank: { message: 'proposal.constraints.address' },
+      };
+      return;
+    }
+    this.formValidationRules.address = {};
+  },
+
   updateDistrictConstraint() {
     const { features, form } = this.props;
     if (features.districts && form.usingDistrict && form.districtMandatory) {
@@ -278,6 +304,9 @@ export const ProposalForm = React.createClass({
     body: {
       min: { value: 2, message: 'proposal.constraints.body' },
       notBlankHtml: { message: 'proposal.constraints.body' },
+    },
+    address: {
+      notBlank: { message: 'proposal.constraints.address' },
     },
   },
 
@@ -453,7 +482,10 @@ export const ProposalForm = React.createClass({
             )}
           </Input>}
         {form.usingAddress &&
-          <div className="form-group">
+          <div
+            className={`form-group${this.state.errors.address.length > 0
+              ? ' has-warning'
+              : ''}`}>
             <label className="control-label h5" htmlFor="proposal_address">
               <FormattedMessage id="proposal.map.form.field" />
             </label>
@@ -477,7 +509,9 @@ export const ProposalForm = React.createClass({
               onEnterKeyDown={this.handleLocationChange}
               onSelect={this.handleLocationChange}
               classNames={{
-                root: 'form-group',
+                root: `${this.state.errors.address.length > 0
+                  ? 'form-control-warning'
+                  : ''}`,
                 input: 'form-control',
                 autocompleteContainer: {
                   zIndex: 9999,
@@ -500,6 +534,16 @@ export const ProposalForm = React.createClass({
                 },
               }}
             />
+            {this.state.errors.address.length > 0 &&
+              <div className="flashmessages">
+                <p className="error-block">
+                  <span>
+                    {intl.formatMessage({
+                      id: this.state.errors.address[0].message,
+                    })}
+                  </span>
+                </p>
+              </div>}
           </div>}
         <Input
           id="proposal_body"

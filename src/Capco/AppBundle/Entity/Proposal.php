@@ -35,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasThemeIfMandatory()
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
- * @CapcoAssert\HasLocationIfMandatory()
+ * @CapcoAssert\HasAddressIfMandatory()
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
@@ -91,9 +91,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     protected $likers;
 
     /**
-     * @ORM\Column(name="location", type="json", nullable=true)
+     * @ORM\Column(name="address", type="json", nullable=true)
      */
-    private $location;
+    private $address;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
@@ -820,28 +820,28 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    public function getLocation()
+    public function getAddress()
     {
-        return $this->location;
+        return $this->address;
     }
 
-    public function setLocation($location = null)
+    public function setAddress($address = null)
     {
-        $this->location = $location;
+        $this->address = $address;
 
         return $this;
     }
 
     public function getFiledAddress(): string
     {
-        if (!$this->getLocation()) {
+        if (!$this->getAddress()) {
             return '';
         }
 
-        if (!is_array($this->getLocation())) {
-            return \GuzzleHttp\json_decode($this->getLocation(), true)[0]['formatted_address'];
+        if (!is_array($this->getAddress())) {
+            return \GuzzleHttp\json_decode($this->getAddress(), true)[0]['formatted_address'];
         }
 
-        return $this->getLocation()[0]['formatted_address'];
+        return $this->getAddress()[0]['formatted_address'];
     }
 }

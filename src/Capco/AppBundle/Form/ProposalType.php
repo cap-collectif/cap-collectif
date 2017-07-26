@@ -54,7 +54,7 @@ class ProposalType extends AbstractType
         }
 
         if ($form->getUsingAddress()) {
-            $builder->add('location', TextType::class);
+            $builder->add('address', TextType::class);
         }
 
         $builder

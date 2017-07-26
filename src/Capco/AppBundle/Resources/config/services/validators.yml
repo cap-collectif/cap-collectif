@@ -79,7 +79,7 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: has_district_if_mandatory.validator }
 
-  capco.has_location_if_mandatory.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasLocationIfMandatoryValidator
+  capco.has_address_if_mandatory.validator:
+    class: Capco\AppBundle\Validator\Constraints\HasAddressIfMandatoryValidator
     tags:
-      - { name: validator.constraint_validator, alias: has_location_if_mandatory.validator }
+      - { name: validator.constraint_validator, alias: has_address_if_mandatory.validator }

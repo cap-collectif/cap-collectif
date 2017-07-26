@@ -845,6 +845,7 @@ input[type="time"],
 input[type="url"],
 input[type="week"],
 select:focus,
+select.form-control,
 textarea {
     font-size: 16px;
 }

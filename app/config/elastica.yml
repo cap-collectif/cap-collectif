@@ -310,7 +310,7 @@ fos_elastica:
               type: date
             deletedAt:
               type: date
-            location:
+            address:
               type: string
               index: not_analyzed
             district:

@@ -47,7 +47,7 @@ const ProposalPageContent = React.createClass({
       proposal__content: true,
       [className]: true,
     };
-    const address = proposal.location ? JSON.parse(proposal.location) : null;
+    const address = proposal.address ? JSON.parse(proposal.address) : null;
     return (
       <div className={classNames(classes)}>
         {proposal.media &&

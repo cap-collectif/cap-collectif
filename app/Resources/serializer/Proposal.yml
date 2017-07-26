@@ -82,7 +82,7 @@ Capco\AppBundle\Entity\Proposal:
     likers:
       expose: true
       groups: [Proposals]
-    location:
+    address:
       expose: true
       groups: [Proposals]
   virtual_properties:
