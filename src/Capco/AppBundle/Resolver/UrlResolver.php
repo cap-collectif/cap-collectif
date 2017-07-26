@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
@@ -259,6 +260,11 @@ class UrlResolver
         }
 
         return '';
+    }
+
+    public function getReportedUrl(Reporting $reporting, bool $absolute = false): string
+    {
+        return $this->router->generate('admin_capco_app_reporting_show', ['id' => $reporting->getId()], $absolute);
     }
 
     private function getImageFormat()
