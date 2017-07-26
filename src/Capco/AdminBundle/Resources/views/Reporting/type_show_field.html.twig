@@ -14,6 +14,8 @@
             <span>{{ 'admin.fields.reporting.idea'|trans({}, 'SonataAdminBundle') }}</span>
         {% elseif (object.Comment is not null) %}
             <span>{{ 'admin.fields.reporting.comment'|trans({}, 'SonataAdminBundle') }}</span>
+        {% elseif (object.Proposal is not null) %}
+            <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'SonataAdminBundle') }}</span>
         {% endif %}
     </div>
 {% endblock %}

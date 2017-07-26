@@ -669,8 +669,8 @@ admin:
       idea: Idée
       is_archived: Traité
       object: Contribution
-      opinion: Proposition (budget)
-      proposal: Proposition (consultation)
+      opinion: Proposition (consultation)
+      proposal: Proposition (budget)
       reporter: Auteur
       source: Source
       status: Type de problème
