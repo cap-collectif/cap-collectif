@@ -183,11 +183,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this->getParent();
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled() && !$this->isExpired();
-    }
-
     /**
      * Get title.
      *
@@ -605,5 +600,29 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         if ($this->opinionVersion !== null) {
             $this->opinionVersion->removeSource($this);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled() && !$this->isExpired();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'source';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Opinions'];
     }
 }

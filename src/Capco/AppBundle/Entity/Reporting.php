@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -51,43 +52,43 @@ class Reporting implements CreatableInterface
     private $Reporter;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports")
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Opinion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="Reports")
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Source;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports")
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Argument;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports")
      * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Idea;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports")
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports")
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $Comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports")
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
@@ -134,35 +135,23 @@ class Reporting implements CreatableInterface
         return $this->createdAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getReporter()
+    public function getReporter(): ?User
     {
         return $this->Reporter;
     }
 
-    /**
-     * @param mixed $reporter
-     */
-    public function setReporter($reporter)
+    public function setReporter(User $reporter): self
     {
         $this->Reporter = $reporter;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getOpinion()
     {
         return $this->Opinion;
     }
 
-    /**
-     * @param mixed $Opinion
-     */
     public function setOpinion($Opinion)
     {
         $this->Opinion = $Opinion;
@@ -242,18 +231,12 @@ class Reporting implements CreatableInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getComment()
+    public function getComment(): ?Comment
     {
         return $this->Comment;
     }
 
-    /**
-     * @param mixed $Comment
-     */
-    public function setComment($Comment)
+    public function setComment(Comment $Comment): self
     {
         $this->Comment = $Comment;
         $this->Comment->addReport($this);
@@ -280,18 +263,12 @@ class Reporting implements CreatableInterface
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getIsArchived()
+    public function getIsArchived(): bool
     {
         return $this->isArchived;
     }
 
-    /**
-     * @param bool $isArchived
-     */
-    public function setIsArchived($isArchived)
+    public function setIsArchived(bool $isArchived): self
     {
         $this->isArchived = $isArchived;
 
@@ -302,19 +279,45 @@ class Reporting implements CreatableInterface
 
     public function getRelatedObject()
     {
-        if ($this->Opinion !== null) {
+        if (null !== $this->Opinion) {
             return $this->Opinion;
-        } elseif ($this->Source !== null) {
+<<<<<<< HEAD
+        } elseif (null !== $this->Source) {
             return $this->Source;
-        } elseif ($this->Argument !== null) {
+        } elseif (null !== $this->Argument) {
             return $this->Argument;
-        } elseif ($this->Idea !== null) {
+        } elseif (null !== $this->Idea) {
             return $this->Idea;
-        } elseif ($this->Comment !== null) {
+        } elseif (null !== $this->Comment) {
             return $this->Comment;
-        } elseif ($this->opinionVersion !== null) {
+        } elseif (null !== $this->opinionVersion) {
             return $this->opinionVersion;
-        } elseif ($this->proposal !== null) {
+        } elseif (null !== $this->proposal) {
+=======
+        }
+
+        if ($this->Source !== null) {
+            return $this->Source;
+        }
+
+        if ($this->Argument !== null) {
+            return $this->Argument;
+        }
+
+        if ($this->Idea !== null) {
+            return $this->Idea;
+        }
+
+        if ($this->Comment !== null) {
+            return $this->Comment;
+        }
+
+        if ($this->opinionVersion !== null) {
+            return $this->opinionVersion;
+        }
+
+        if ($this->proposal !== null) {
+>>>>>>> Update codebase
             return $this->proposal;
         }
     }
@@ -326,27 +329,27 @@ class Reporting implements CreatableInterface
      */
     public function deleteReport()
     {
-        if ($this->Opinion !== null) {
+        if (null !== $this->Opinion) {
             $this->Opinion->removeReport($this);
         }
 
-        if ($this->Source !== null) {
+        if (null !== $this->Source) {
             $this->Source->removeReport($this);
         }
 
-        if ($this->Argument !== null) {
+        if (null !== $this->Argument) {
             $this->Argument->removeReport($this);
         }
 
-        if ($this->Idea !== null) {
+        if (null !== $this->Idea) {
             $this->Idea->removeReport($this);
         }
 
-        if ($this->Comment !== null) {
+        if (null !== $this->Comment) {
             $this->Comment->removeReport($this);
         }
 
-        if ($this->proposal !== null) {
+        if (null !== $this->proposal) {
             $this->proposal->removeReport($this);
         }
     }

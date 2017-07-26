@@ -1,13 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for closed step 1`] = `
-<div
-  className="thumbnail__steps-bar"
->
+<Progress>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
-    className="progress_closed-step"
+    className="progress-bar_grey"
     isChild={false}
     label={
       <FormattedMessage
@@ -21,13 +19,11 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     srOnly={false}
     striped={false}
   />
-</div>
+</Progress>
 `;
 
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for closed step which remains a current step 1`] = `
-<div
-  className="thumbnail__steps-bar"
->
+<Progress>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
@@ -45,17 +41,15 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     srOnly={false}
     striped={false}
   />
-</div>
+</Progress>
 `;
 
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for future step 1`] = `
-<div
-  className="thumbnail__steps-bar"
->
+<Progress>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
-    className="progress_future-step"
+    className="progress-bar_empty"
     isChild={false}
     label={
       <FormattedMessage
@@ -69,13 +63,11 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     srOnly={false}
     striped={false}
   />
-</div>
+</Progress>
 `;
 
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for open & timeless step 1`] = `
-<div
-  className="thumbnail__steps-bar"
->
+<Progress>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
@@ -93,13 +85,11 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     srOnly={false}
     striped={false}
   />
-</div>
+</Progress>
 `;
 
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for open step 1`] = `
-<div
-  className="thumbnail__steps-bar"
->
+<Progress>
   <ProgressBar
     active={false}
     bsClass="progress-bar"
@@ -117,5 +107,5 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
     srOnly={false}
     striped={false}
   />
-</div>
+</Progress>
 `;

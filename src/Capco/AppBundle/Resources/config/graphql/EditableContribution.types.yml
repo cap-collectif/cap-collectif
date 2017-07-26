@@ -5,5 +5,5 @@ EditableContribution:
         resolveType: "@=resolver('contribution_type', [value])"
         fields:
             updatedAt:
-                type: "String!"
+                type: "DateTime"
                 description: "Identifies the date and time when the object was last updated."

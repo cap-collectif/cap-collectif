@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
@@ -18,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, IndexableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -404,11 +405,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->newEmailConfirmationToken = $token;
 
         return $this;
-    }
-
-    public function isIndexable()
-    {
-        return $this->isEnabled();
     }
 
     // for EncoderAwareInterface
@@ -1356,87 +1352,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->profilePageIndexed = !$profilePageIndexed;
     }
 
-    /**
-     * @return UserNotificationsConfiguration
-     */
-    public function getNotificationsConfiguration(): UserNotificationsConfiguration
+    public function isIndexable(): bool
     {
         return $this->notificationsConfiguration;
     }
 
-    /**
-     * @param UserNotificationsConfiguration $notificationsConfiguration
-     */
-    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration)
+    public static function getElasticsearchTypeName(): string
     {
-        $this->notificationsConfiguration = $notificationsConfiguration;
+        return 'user';
     }
 
-    public function isConsentExternalCommunication(): bool
+    public static function getElasticsearchSerializationGroups(): array
     {
-        return $this->consentExternalCommunication;
-    }
-
-    public function setConsentExternalCommunication(bool $consentExternalCommunication): self
-    {
-        $this->consentExternalCommunication = $consentExternalCommunication;
-
-        return $this;
-    }
-
-    public function getUserGroups(): ArrayCollection
-    {
-        return $this->userGroups;
-    }
-
-    public function setUserGroups(ArrayCollection $userGroups): self
-    {
-        $this->userGroups = $userGroups;
-
-        return $this;
-    }
-
-    public function addUserGroup(UserGroup $userGroup): self
-    {
-        if (!$this->userGroups->contains($userGroup)) {
-            $this->userGroups->add($userGroup);
-        }
-
-        return $this;
-    }
-
-    public function removeUserGroup(UserGroup $userGroup): self
-    {
-        $this->userGroups->removeElement($userGroup);
-
-        return $this;
-    }
-
-    public function getFollowingProposals(): Collection
-    {
-        return $this->followingProposals;
-    }
-
-    public function addFollowingProposal(Follower $followingProposal): self
-    {
-        if (!$this->followingProposals->contains($followingProposal)) {
-            $this->followingProposals->add($followingProposal);
-        }
-
-        return $this;
-    }
-
-    public function removeFollowingProposal(Follower $followingProposal): self
-    {
-        $this->followingProposals->removeElement($followingProposal);
-
-        return $this;
-    }
-
-    public function setFollowingProposals(Collection $followingProposals): self
-    {
-        $this->followingProposals = $followingProposals;
-
-        return $this;
+        return ['UsersInfos'];
     }
 }

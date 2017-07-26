@@ -181,6 +181,7 @@ Scenario: Author of a proposal wants to update it
   And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
   And I wait 3 seconds
   And I submit the edit proposal form
+  And I wait 1 seconds
   Then the proposal title should have changed
 
 @javascript
@@ -214,14 +215,14 @@ Scenario: Author of a proposal should be notified when someone comment if he has
   Given I go to a proposal made by msantostefano@jolicode.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"commentId": "@string@"} |
 
 @javascript @database @rabbitmq
 Scenario: Author of a proposal should not be notified when someone comment if he has turned off comments notifications
   Given I go to a proposal made by user@test.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"commentId": "@string@"} |
 
 @javascript
 Scenario: Non author of a proposal wants to delete it

@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -159,13 +159,32 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
         return true;
     }
 
+    public function isParticipative(): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    public function isParticipative(): bool
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName(): string
     {
-        return true;
+        return 'collectStep';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['CollectSteps'];
     }
 }

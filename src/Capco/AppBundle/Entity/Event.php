@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
@@ -187,11 +187,6 @@ class Event implements CommentableInterface, IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New event';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
     }
 
     /**
@@ -708,5 +703,29 @@ class Event implements CommentableInterface, IndexableInterface
                 $project->removeEvent($this);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'event';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Events'];
     }
 }

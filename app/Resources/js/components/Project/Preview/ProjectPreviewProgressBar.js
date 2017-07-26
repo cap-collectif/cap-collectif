@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { Progress } from '../../Ui/Progress';
 
 type Props = {
   project: Object,
@@ -22,10 +23,10 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     const { isCurrentStep } = this.props;
 
     if (stepStatus === 'future') {
-      return 'progress_future-step';
+      return 'progress-bar_empty';
     }
     if (stepStatus === 'closed' && !isCurrentStep) {
-      return 'progress_closed-step';
+      return 'progress-bar_grey';
     }
   };
 
@@ -69,14 +70,14 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
 
     if (nbSteps > 0) {
       return (
-        <div className="thumbnail__steps-bar">
+        <Progress>
           <ProgressBar
             className={this.getClass(actualStep.status)}
             bsStyle={this.getStyle(actualStep.status)}
             now={this.getWidth(actualStep)}
             label={this.getLabel(actualStep)}
           />
-        </div>
+        </Progress>
       );
     }
     return null;

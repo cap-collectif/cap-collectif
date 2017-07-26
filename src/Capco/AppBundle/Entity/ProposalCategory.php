@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="proposal_category")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCategoryRepository")
  */
-class ProposalCategory
+class ProposalCategory implements IndexableInterface
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -113,5 +114,41 @@ class ProposalCategory
         $this->proposals->removeElement($proposal);
 
         return $this;
+    }
+
+<<<<<<< HEAD
+    public function isIndexable()
+=======
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndexable(): bool
+>>>>>>> Update codebase
+    {
+        return true;
+    }
+
+<<<<<<< HEAD
+    public static function getElasticsearchTypeName()
+=======
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchTypeName(): string
+>>>>>>> Update codebase
+    {
+        return 'category';
+    }
+
+<<<<<<< HEAD
+    public function getElasticsearchSerializationGroups()
+=======
+    /**
+     * {@inheritdoc}
+     */
+    public static function getElasticsearchSerializationGroups(): array
+>>>>>>> Update codebase
+    {
+        return ['ProposalCategories'];
     }
 }
