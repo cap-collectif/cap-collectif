@@ -193,6 +193,11 @@ class OpinionType
         return $this->getId() ? $this->getTitle() : 'New opinion type';
     }
 
+    public function getStep()
+    {
+        return $this->getConsultationStepType() ? $this->getConsultationStepType()->getStep() : null;
+    }
+
     /**
      * @param int $id
      */
