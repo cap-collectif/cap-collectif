@@ -4,5 +4,4 @@ ContributionConnection:
         nodeType: Opinion
         connectionFields:
             totalCount:
-                type: Int
-                resolve: '@=resolver("consultation_totalContributions")'
+                type: Int!

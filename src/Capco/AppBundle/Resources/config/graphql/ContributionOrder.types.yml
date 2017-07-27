@@ -5,5 +5,7 @@ ContributionOrder:
         fields:
             field:
                 type: "ContributionOrderField!"
+                defaultValue: "POSITION"
             direction:
                 type: "OrderDirection!"
+                defaultValue: "DESC"

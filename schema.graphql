@@ -110,8 +110,8 @@ type ContributionEdge {
 
 # Ways in which lists of contributions can be ordered upon return.
 input ContributionOrder {
-  field: ContributionOrderField!
-  direction: OrderDirection!
+  field: ContributionOrderField! = POSITION
+  direction: OrderDirection! = DESC
 }
 
 # Ordering options for contributions connections.

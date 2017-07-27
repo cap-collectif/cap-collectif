@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Model\CreatableInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -58,30 +59,26 @@ class ConsultationResolver implements ContainerAwareInterface
         return $type->getAppendixTypeTitle();
     }
 
-    public function getConsultationTotalContributions(Arg $args): int
-    {
-        $repo = $this->container->get('capco.consultation_step.repository');
-        $consultation = $repo->find($args->offsetGet('consultation'));
-
-        return $consultation->getOpinionCount();
-    }
-
-    public function getContributionsRelay(ConsultationStep $consultation, Arg $args)
+    public function getContributionsRelay(ConsultationStep $consultation, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
               'step' => $consultation->getId(),
-              'isEnabled' => true,
-              'expired' => false,
-              'isTrashed' => false,
+              'trashed' => false,
             ];
-            $orderBy = [];
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
 
-            return $repo->findBy($criteria, $orderBy, null, $offset);
+            $orderBy = [$field => $direction];
+
+            return $repo->getByStepOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
         });
 
-        return $paginator->forward($args);
+        $connection = $paginator->forward($args);
+        $connection->totalCount = $consultation->getOpinionCount();
+
+        return $connection;
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool

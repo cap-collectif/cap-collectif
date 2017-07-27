@@ -9,7 +9,6 @@ services:
       tags:
           - { name: overblog_graphql.resolver, alias: "sectionappendixtype_id", method: "getSectionAppendixId" }
           - { name: overblog_graphql.resolver, alias: "sectionappendixtype_title", method: "getSectionAppendixTitle" }
-          - { name: overblog_graphql.resolver, alias: "consultation_totalContributions", method: "getConsultationTotalContributions" }
           - { name: overblog_graphql.resolver, alias: "contributionsRelay", method: "getContributionsRelay" }
           - { name: overblog_graphql.resolver, alias: "section_url", method: "getSectionUrl" }
           - { name: overblog_graphql.resolver, alias: "contributionsBySection", method: "getContributionsBySection" }
