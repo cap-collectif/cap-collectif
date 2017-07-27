@@ -29,7 +29,7 @@ applicationdata:
         - /var/www/var/logs
 
 database:
-    build: ../services/databasefixtures
+    image: capco/fixtures:latest
 
 redis:
     build: ../services/redis

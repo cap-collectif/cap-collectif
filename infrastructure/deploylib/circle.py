@@ -26,18 +26,6 @@ def load_cache():
                 ))
 
 
-@task(environments=['local', 'ci'])
-def save_fixtures_image(tag='latest'):
-    "Publish a new fixtures image"
-    env.service_command('php bin/console capco:reinit --force', 'application', env.www_app)
-    env.service_command('mysqldump -h database -uroot --opt symfony > infrastructure/services/databasefixtures/dump.sql', 'application', env.www_app, 'root')
-    env.compose('build databasefixtures')
-    image_id = local('docker images | grep capco_databasefixtures | awk \'{print $3}\'', capture=True)
-    local('docker tag -f ' + image_id + ' spyl94/capco-fixtures:' + tag)
-    local('docker login --username=spyl94')
-    local('docker push spyl94/capco-fixtures')
-
-
 @task(environments=['ci'])
 def save_cache():
     "Rebuild infrastructure and save cache"
@@ -57,7 +45,6 @@ def get_images():
         'builder': ['builder'],
         'elasticsearch': ['elasticsearch'],
         'redis': ['redis'],
-        'database': ['database'],
         'seleniumhub': ['seleniumhub'],
         'chrome': ['chrome'],
         'mailcatcher': ['mailcatcher']
