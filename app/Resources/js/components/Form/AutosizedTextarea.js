@@ -4,8 +4,6 @@ import autosize from 'autosize';
 import { FormControl } from 'react-bootstrap';
 
 const AutosizedTextarea = React.createClass({
-  refFormControl: Element,
-
   componentDidMount() {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize(input);
