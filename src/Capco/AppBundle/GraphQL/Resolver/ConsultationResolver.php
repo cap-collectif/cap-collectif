@@ -59,7 +59,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $type->getAppendixTypeTitle();
     }
 
-    public function getContributionsRelay(ConsultationStep $consultation, Arg $args): Connection
+    public function getConsultationContributionsRelay(ConsultationStep $consultation, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
@@ -72,7 +72,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
             $orderBy = [$field => $direction];
 
-            return $repo->getByStepOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
+            return $repo->getByCriteriaOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
         });
 
         $connection = $paginator->forward($args);

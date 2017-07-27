@@ -90,7 +90,7 @@ interface Contribution {
 
 # A connection to a list of items.
 type ContributionConnection {
-  totalCount: Int
+  totalCount: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!

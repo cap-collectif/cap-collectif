@@ -300,7 +300,7 @@ class OpinionRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByStepOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0)
+    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm')
@@ -389,12 +389,10 @@ class OpinionRepository extends EntityRepository
     /**
      * Get opinions by opinionType.
      *
-     * @param $opinionTypeId
-     * @param int    $nbByPage
-     * @param int    $page
-     * @param string $opinionsSort
-     *
-     * @return Paginator
+     * @param mixed $opinionTypeId
+     * @param mixed $nbByPage
+     * @param mixed $page
+     * @param mixed $opinionsSort
      */
     public function getByOpinionTypeOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
@@ -470,32 +468,6 @@ class OpinionRepository extends EntityRepository
         // $query->useResultCache(true, 60);
 
         return new Paginator($query);
-    }
-
-    /**
-     * Get enabled opinions by consultation step.
-     *
-     * @param $step
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
-    public function getEnabledByConsultationStep($step, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('ot', 'aut', 'ut', 'app', 'apptype', 'args')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('o.appendices', 'app')
-            ->leftJoin('app.appendixType', 'apptype')
-            ->leftJoin('o.arguments', 'args')
-            ->andWhere('o.step = :step')
-            ->setParameter('step', $step)
-            ->addOrderBy('o.updatedAt', 'DESC')
-        ;
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**

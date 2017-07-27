@@ -42,4 +42,4 @@ Consultation:
                     last:
                       type: "Int"
                       description: "Returns the last n elements from the list."
-                resolve: '@=resolver("contributionsRelay", [value, args])'
+                resolve: '@=resolver("consultationContributionsRelay", [value, args])'
