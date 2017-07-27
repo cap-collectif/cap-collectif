@@ -21,6 +21,6 @@ builder:
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 elasticsearch:
-    image: elasticsearch:1.7.3
+    build: ../services/elasticsearch
     volumes:
         - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
