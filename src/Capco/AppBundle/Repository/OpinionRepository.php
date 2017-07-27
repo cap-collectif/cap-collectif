@@ -300,7 +300,7 @@ class OpinionRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0)
+    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0): Paginator
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm')
