@@ -309,14 +309,21 @@ class OpinionRepository extends EntityRepository
             ->addOrderBy('o.pinned', 'DESC') // Pinned always come first
         ;
 
-        if ($criteria['step']) {
+        if (isset($criteria['section'])) {
+            $qb
+              ->andWhere('o.OpinionType = :section')
+              ->setParameter('section', $criteria['section'])
+            ;
+        }
+
+        if (isset($criteria['step'])) {
             $qb
               ->andWhere('o.step = :step')
               ->setParameter('step', $criteria['step'])
             ;
         }
 
-        if ($criteria['trashed']) {
+        if (isset($criteria['trashed'])) {
             $qb
                 ->andWhere('o.isTrashed = :trashed')
                 ->setParameter('trashed', $criteria['trashed'])

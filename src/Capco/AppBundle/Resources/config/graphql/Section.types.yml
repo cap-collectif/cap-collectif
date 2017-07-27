@@ -21,14 +21,26 @@ Section:
             contributionsCount:
                 type: "Int!"
                 resolve: "@=resolver('section_contributionsCount', [value])"
-            # contributions:
-            #     type: "[Opinion]"
-            #     description: "List of contributions from this section."
-            #     args:
-            #         limit:
-            #             description: "Max depth."
-            #             type: "Int!"
-            #     resolve: "@=resolver('section_contributions', [value, args])"
+            contributionConnection:
+                type: "ContributionConnection"
+                args:
+                    orderBy:
+                      type: "ContributionOrder"
+                      description: "Ordering options for contributions returned from the connection."
+                    after:
+                      type: "String"
+                      description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                      type: "Int"
+                      defaultValue: 10
+                      description: "Returns the first n elements from the list."
+                    before:
+                      type: "String"
+                      description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                      type: "Int"
+                      description: "Returns the last n elements from the list."
+                resolve: '@=resolver("sectionContributionsRelay", [value, args])'
             appendixTypes:
                 type: "[SectionAppendixType]"
                 description: "Array of appendix types (possibly empty)."
