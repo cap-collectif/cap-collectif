@@ -3,19 +3,6 @@ from fabric.operations import local, run, settings
 from fabric.api import env
 import re
 import os
-import yaml
-
-#
-# @task(environments=['local', 'ci'])
-# def fix_environment_variables_with_lxc():
-#     with open('app/config/parameters.yml', 'w') as yaml_file:
-#         yaml_file.write(yaml.dump({
-#             'parameters': {
-#                 'database_host': 'database',
-#                 'elasticsearch_host': 'elasticsearch',
-#                 'redis_host': 'redis',
-#             }
-#         }, default_flow_style=False))
 
 
 @task(environments=['ci'])
@@ -29,6 +16,13 @@ def load_cache():
                 image,
                 image
             ))
+
+            for tag in tags:
+                local('/bin/bash -c "if [[ -e ~/.docker-images/capco_%s.tar ]]; then docker tag capco_%s capco_%s; fi"' % (
+                    image,
+                    first_image,
+                    tag
+                ))
 
 
 @task(environments=['local', 'ci'])
@@ -54,14 +48,6 @@ def save_cache():
         for image, tags in get_images().iteritems():
             local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
 
-    # if create_fresh_cache:
-    #     print 'Creating a fresh docker cache !'
-    #
-    # if change_in_infrastructure:
-    #     print 'Changes detected in infrastructure, creating an updated cache !'
-    #
-    # if change_in_infrastructure or create_fresh_cache:
-    #     env.compose('build')
     #     local('docker pull elasticsearch:1.7.3')
     #     local('docker pull redis:3')
     #     local('docker pull selenium/hub:2.53.1-beryllium')
