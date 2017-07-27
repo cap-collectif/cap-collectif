@@ -29,7 +29,7 @@ applicationdata:
         - /var/www/var/logs
 
 database:
-    build: infrastructure/services/databasefixtures
+    build: ../services/databasefixtures
 
 redis:
     build: ../services/redis
