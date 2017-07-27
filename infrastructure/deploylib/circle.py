@@ -40,13 +40,13 @@ def save_fixtures_image(tag='latest'):
 @task(environments=['ci'])
 def save_cache():
     "Rebuild infrastructure and save cache"
-        commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
+    commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
 
-        if re.search('\[force-rebuild\]', commit_message) or change_detected():
-            build()
+    if re.search('\[force-rebuild\]', commit_message) or change_detected():
+        build()
 
-        for image, tags in get_images().iteritems():
-            local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
+    for image, tags in get_images().iteritems():
+        local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
 
     #     local('docker pull elasticsearch:1.7.3')
     #     local('docker pull redis:3')
