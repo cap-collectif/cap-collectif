@@ -95,8 +95,8 @@ query OpinionListQuery {
      "data":{
         "contributionsBySection":[
            {
-              "id": "51",
-              "url": "http:\/\/capco.test\/consultations\/strategie-technologique-de-l-etat-et-services-publics\/consultation\/collecte-des-avis-pour-une-meilleur-strategie\/opinions\/les-causes-2\/opinion-51",
+              "id": "opinion51",
+              "url": "http://capco.test/consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51",
               "title": "Opinion 51",
               "createdAt": @string@,
               "updatedAt": @string@,
@@ -128,3 +128,52 @@ query OpinionListQuery {
      }
   }
       """
+
+      Scenario: GraphQL client wants to list contributions in a consultation
+        When I send a GraphQL request:
+        """
+query {
+  consultations(id: "cstep5") {
+    	id
+    	title
+  	  contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
+      	totalCount
+        edges {
+          cursor
+					node {
+            title
+            pinned
+            votesCount
+        }
+      }
+  	}
+  }
+}
+        """
+        Then the JSON response should match:
+        """
+{
+  "data": {
+    "consultations": [
+      {
+        "id": "cstep5",
+        "title": "Elaboration de la Loi",
+        "contributionConnection": {
+          "totalCount": 6,
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "title": @string@,
+                "pinned": @boolean@,
+                "votesCount": @integer@
+              }
+            },
+            @...@
+          ]
+        }
+      }
+    ]
+  }
+}
+        """
