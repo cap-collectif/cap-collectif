@@ -1,0 +1,1 @@
+FROM jderusse/mailcatcher:latest

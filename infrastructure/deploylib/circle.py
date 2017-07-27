@@ -49,32 +49,18 @@ def save_cache():
     for image, tags in get_images().iteritems():
         local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
 
-    #     local('docker pull elasticsearch:1.7.3')
-    #     local('docker pull redis:3')
-    #     local('docker pull selenium/hub:2.53.1-beryllium')
-    #     local('docker pull selenium/node-chrome-debug:2.53.1-beryllium')
-    #     local('docker pull jderusse/mailcatcher:latest')
-    #     local('docker save capcotest_application > ~/.docker-images/capcotest_application.tar')
-    #     local('docker save capcotest_applicationdata > ~/.docker-images/capcotest_applicationdata.tar')
-    #     local('docker save capcotest_builder > ~/.docker-images/capcotest_builder.tar')
-    #     local('docker save elasticsearch > ~/.docker-images/capcotest_elasticsearch.tar')
-    #     local('docker save redis > ~/.docker-images/capcotest_redis.tar')
-    #     local('docker save selenium/hub > ~/.docker-images/capcotest_seleniumhub.tar')
-    #     local('docker save selenium/node-chrome-debug > ~/.docker-images/capcotest_chrome.tar')
-    #     local('docker save jderusse/mailcatcher > ~/.docker-images/capcotest_mailcacher.tar')
-
 
 def get_images():
     return {
         'application': ['application'],
         'applicationdata': ['applicationdata'],
         'builder': ['builder'],
-        # 'elasticsearch': ['elasticsearch'],
-        # 'redis': ['redis'],
-        # 'database': ['database'],
-        # 'selenium/hub': ['selenium/hub'],
-        # 'selenium/node-chrome-debug': ['selenium/node-chrome-debug'],
-        # 'jderusse/mailcatcher': ['jderusse/mailcatcher']
+        'elasticsearch': ['elasticsearch'],
+        'redis': ['redis'],
+        'database': ['database'],
+        'seleniumhub': ['seleniumhub'],
+        'chrome': ['chrome'],
+        'mailcatcher': ['mailcatcher']
     }
 
 

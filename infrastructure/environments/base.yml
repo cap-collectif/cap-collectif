@@ -32,21 +32,21 @@ database:
     image: capco/fixtures:latest
 
 redis:
-    image: redis:3
+    build: ../services/redis
 
 seleniumhub:
-  image: selenium/hub:2.53.1-beryllium
+  build: ../services/seleniumhub
   ports:
     - "4444:4444"
 
 mailcatcher:
-  image: jderusse/mailcatcher:latest
+  build: ../services/mailcatcher
   ports:
     - "25:25"
     - "1080:80"
 
 chrome:
-   image: selenium/node-chrome-debug:2.53.1-beryllium
+   build: ../services/chrome
    environment:
       SCREEN_WIDTH: 1920
       SCREEN_HEIGHT: 1080

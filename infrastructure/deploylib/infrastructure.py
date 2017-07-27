@@ -20,7 +20,7 @@ def up(force_recreate='false'):
     ensure_vm_is_up()
     if env.build_at_up:
         env.compose('build')
-    env.compose('up -d' + ('', ' --force-recreate')[force_recreate == 'true'])
+    env.compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
 
 
 @task
@@ -39,7 +39,8 @@ def reboot():
 @task
 def clean():
     "Clean the infrastructure, will also remove all data"
-    env.compose('rm -f -v')
+    ensure_vm_is_up()
+    env.compose('down --remove-orphans -v')
     if env.dinghy:
         local('dinghy ssh docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc')
 
