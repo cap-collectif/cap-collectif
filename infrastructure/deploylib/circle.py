@@ -21,14 +21,14 @@ import yaml
 @task(environments=['ci'])
 def load_cache():
     "Load cache"
-    local('docker load -i ~/docker/capcotest_application.tar || true')
-    local('docker load -i ~/docker/capcotest_applicationdata.tar || true')
-    local('docker load -i ~/docker/capcotest_builder.tar || true')
-    local('docker load -i ~/docker/capcotest_seleniumhub.tar || true')
-    local('docker load -i ~/docker/capcotest_chrome.tar || true')
-    local('docker load -i ~/docker/capcotest_mailcacher.tar || true')
-    local('docker load -i ~/docker/capcotest_elasticsearch.tar || true')
-    local('docker load -i ~/docker/capcotest_redis.tar || true')
+    with settings(warn_only=True):
+        for image, tags in get_images().iteritems():
+            first_image = tags.pop(0)
+
+            local('/bin/bash -c "if [[ -e ~/.docker-images/capco_%s.tar ]]; then docker load -i ~/.docker-images/capco_%s.tar; fi"' % (
+                image,
+                image
+            ))
 
 
 @task(environments=['local', 'ci'])
