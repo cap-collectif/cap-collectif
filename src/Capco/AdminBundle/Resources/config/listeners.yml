@@ -12,7 +12,7 @@ services:
           - { name: overblog_graphql.resolver, alias: "consultationContributionsRelay", method: "getConsultationContributionsConnection" }
           - { name: overblog_graphql.resolver, alias: "sectionContributionsRelay", method: "getSectionContributionsConnection" }
           - { name: overblog_graphql.resolver, alias: "section_url", method: "getSectionUrl" }
-          - { name: overblog_graphql.resolver, alias: "querySection", method: "getSection" }
+          - { name: overblog_graphql.resolver, alias: "query_section", method: "getSection" }
           - { name: overblog_graphql.resolver, alias: "contributionsBySection", method: "getContributionsBySection" }
           - { name: overblog_graphql.resolver, alias: "section_contributionsCount", method: "getSectionOpinionsCount" }
           - { name: overblog_graphql.resolver, alias: "section_contributions", method: "getSectionOpinions" }

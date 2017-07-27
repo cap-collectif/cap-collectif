@@ -394,6 +394,7 @@ type Query {
     # Max depth.
     limit: Int!
   ): [Opinion]
+  section(id: ID!): Section
 }
 
 # A report
@@ -454,7 +455,7 @@ type Section {
     after: String
 
     # Returns the first n elements from the list.
-    first: Int
+    first: Int = 10
 
     # Returns the elements in the list that come before the specified global ID.
     before: String

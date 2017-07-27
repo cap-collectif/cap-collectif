@@ -41,6 +41,6 @@ Query:
             section:
                 type: "Section"
                 args:
-                    sectionId:
+                    id:
                         type: "ID!"
                 resolve: "@=resolver('query_section', [args])"

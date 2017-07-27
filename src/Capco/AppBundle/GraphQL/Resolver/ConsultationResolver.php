@@ -117,7 +117,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
-    public function getSection(Arg $args): Section
+    public function getSection(Arg $args): OpinionType
     {
         $repo = $this->container->get('capco.opinion_type.repository');
 
