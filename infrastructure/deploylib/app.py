@@ -10,7 +10,7 @@ def deploy(environment='dev', user='capco'):
     "Deploy"
     if os.environ.get('CI') == 'true':
         env.compose('run -u root builder chown capco:capco -R /var/www/web /home/capco/.composer /home/capco/.cache/yarn /home/capco/.cache/bower')
-        local('chmod -R 777 .')
+        local('sudo chmod -R 777 .')
     env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
     env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
