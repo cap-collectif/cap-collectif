@@ -33,9 +33,8 @@ def save_cache():
 
     if re.search('\[force-rebuild\]', commit_message) or change_detected():
         build()
-
-    for image, tags in get_images().iteritems():
-        local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
+        for image, tags in get_images().iteritems():
+            local('docker save capco_%s > ~/.docker-images/capco_%s.tar' % (tags[0], image))
 
 
 def get_images():
