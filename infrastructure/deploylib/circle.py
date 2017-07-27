@@ -6,7 +6,7 @@ import os
 import yaml
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def fix_environment_variables_with_lxc():
     with open('app/config/parameters.yml', 'w') as yaml_file:
         yaml_file.write(yaml.dump({
@@ -18,7 +18,7 @@ def fix_environment_variables_with_lxc():
         }, default_flow_style=False))
 
 
-@task(environments=['testing'])
+@task(environments=['ci'])
 def clean_cache():
     "Clean cache of docker images"
     commit_message = local('git log --format=%B --no-merges -n 1', capture=True)
@@ -29,7 +29,7 @@ def clean_cache():
         local('rm -rf node_modules')
 
 
-@task(environments=['testing'])
+@task(environments=['ci'])
 def load_cache():
     "Load cache"
     local('docker load -i ~/docker/capcotest_application.tar || true')
@@ -42,7 +42,7 @@ def load_cache():
     local('docker load -i ~/docker/capcotest_redis.tar || true')
 
 
-@task(environments=['testing'])
+@task(environments=['ci'])
 def save_logs():
     "Save logs"
     local('docker logs capcotest_application_1 > $CIRCLE_TEST_REPORTS/application.log')
@@ -62,7 +62,7 @@ def save_fixtures_image(tag='latest'):
     local('docker push spyl94/capco-fixtures')
 
 
-@task(environments=['testing'])
+@task(environments=['ci'])
 def save_cache():
     "Rebuild infrastructure and save cache"
     commit_message = local('git log --format=%B --no-merges -n 1', capture=True)

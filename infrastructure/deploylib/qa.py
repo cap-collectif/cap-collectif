@@ -10,14 +10,14 @@ capcobot = {
 }
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def check_dependencies():
     "Check dependencies"
     env.compose_run('composer validate', 'builder', '.', no_deps=True)
     env.service_command('bin/console security:check', 'application', env.www_app)
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def check_codestyle():
     "Check code style"
     env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
@@ -34,7 +34,7 @@ def lint():
     env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def static_analysis():
     "Run static analysis tools"
     local('yarn run typecheck')
@@ -42,19 +42,19 @@ def static_analysis():
     env.service_command('php bin/phpstan analyse src || true', 'application', env.www_app)
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def phpspec():
     "Run PHP Unit Tests"
     env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def jest():
     "Run JS Unit Tests"
     env.compose('run -e CI=True builder yarn test')
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
@@ -84,7 +84,7 @@ def kill_database_container():
         local('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}')
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def save_fixtures_image(tag='latest', publish='false'):
     "Publish a new fixtures image"
     env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)

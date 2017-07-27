@@ -2,7 +2,7 @@ from task import task
 from fabric.api import env
 
 
-@task(environments=['local', 'testing'])
+@task(environments=['local', 'ci'])
 def generate(populate='true', migrate='false'):
     "Generate database"
     env.service_command('rm -rf web/media/*', 'application')

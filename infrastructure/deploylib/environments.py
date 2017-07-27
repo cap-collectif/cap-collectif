@@ -19,29 +19,14 @@ def environnment(config):
 
 
 @environnment
-def testing():
-    if os.environ.get('CIRCLECI'):
-        circleci()
-    elif os.environ.get('TRAVISCI'):
-        travisci()
-    else:
-        env.host_string = 'docker@localhost'
+def ci():
+    env.host_string = 'docker@localhost'
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
     env.run = lrun
     env.local = True
     env.project_name = 'capcotest'
     env.build_at_up = False
     env.directory = env.root_dir
-
-
-def circleci():
-    env.lxc = True
-    env.host_string = 'docker@circleci'
-    env.ci = True
-
-
-def travisci():
-    env.host_string = 'docker@localhost'
     env.ci = True
 
 
