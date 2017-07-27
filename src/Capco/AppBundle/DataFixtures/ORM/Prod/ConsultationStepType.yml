@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Steps\ConsultationStepType:
+    defaultType:
+        title: Résolution de problèmes
+    pjlType:
+        title: Projet de loi

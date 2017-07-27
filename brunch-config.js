@@ -14,6 +14,8 @@ exports.config = {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
       'react-select': ['dist/react-select.css'],
       'react-toggle': ['style.css'],
+      'leaflet': ['dist/leaflet.css'],
+      'react-leaflet-markercluster': ['dist/style.css'],
     },
   },
   paths: {

@@ -101,9 +101,10 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     private $opinions;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", mappedBy="step")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType")
+     * @ORM\JoinColumn(name="consultation_step_type_id", onDelete="SET NULL", nullable=true)
      */
-    private $consultationStepType = null;
+    private $consultationStepType;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
@@ -356,12 +357,18 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getConsultationStepType()
     {
         return $this->consultationStepType;
     }
 
-    public function setConsultationStepType(ConsultationStepType $consultationStepType = null)
+    /**
+     * @param mixed $consultationStepType
+     */
+    public function setConsultationStepType($consultationStepType)
     {
         $this->consultationStepType = $consultationStepType;
     }

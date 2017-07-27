@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import GoogleMapReact from 'google-map-react';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -11,18 +11,12 @@ import DeleteButton from '../../Form/DeleteButton';
 import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import config from '../../../config';
 import {
   openDeleteProposalModal,
   openEditProposalModal,
 } from '../../../redux/modules/proposal';
-
-const SmallMarker = () =>
-  <img
-    src="/svg/marker.svg"
-    className="proposal__map--marker"
-    alt="starting point"
-  />;
+import { blueMarker } from '../../Proposal/Map/LeafletMap';
+import config from '../../../config';
 
 const ProposalPageContent = React.createClass({
   displayName: 'ProposalPageContent',
@@ -69,35 +63,28 @@ const ProposalPageContent = React.createClass({
             <p>
               {address[0].formatted_address}
             </p>
-            <GoogleMapReact
-              style={{
-                height: 175,
-              }}
-              defaultCenter={{
+            <Map
+              center={{
                 lat: address[0].geometry.location.lat,
                 lng: address[0].geometry.location.lng,
               }}
-              bootstrapURLKeys={{
-                key: config.mapsAPIKey,
-                language: 'fr',
-              }}
-              defaultZoom={13}
-              resetBoundsOnResize
-              options={maps => ({
-                zoomControlOptions: {
-                  position: maps.ControlPosition.RIGHT_TOP,
-                  style: maps.ZoomControlStyle.SMALL,
-                },
-                mapTypeControlOptions: {
-                  position: maps.ControlPosition.TOP_RIGHT,
-                },
-                mapTypeControl: true,
-              })}>
-              <SmallMarker
-                lat={address[0].geometry.location.lat}
-                lng={address[0].geometry.location.lng}
+              zoom={13}
+              maxZoom={18}
+              style={{
+                width: '100%',
+                height: 175,
+              }}>
+              <TileLayer
+                url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${config.mapboxApiKey}`}
               />
-            </GoogleMapReact>
+              <Marker
+                position={[
+                  address[0].geometry.location.lat,
+                  address[0].geometry.location.lng,
+                ]}
+                icon={blueMarker}
+              />
+            </Map>
           </div>}
         {proposal.responses.map((response, index) =>
           <ProposalResponse key={index} response={response} />,

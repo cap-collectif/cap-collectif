@@ -15,7 +15,7 @@ import SelectionStepPageHeader from './SelectionStepPageHeader';
 import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
-import MapArea from '../Proposal/Map/MapArea';
+import LeafletMap from '../Proposal/Map/LeafletMap';
 import { loadProposals, changePage } from '../../redux/modules/proposal';
 
 export const ProposalStepPage = React.createClass({
@@ -33,7 +33,6 @@ export const ProposalStepPage = React.createClass({
     isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     selectedViewByStep: PropTypes.string.isRequired,
-    markers: PropTypes.object.isRequired,
   },
 
   componentDidMount() {
@@ -81,7 +80,7 @@ export const ProposalStepPage = React.createClass({
         />
         <br />
         <Loader show={isLoading}>
-          <MapArea
+          <LeafletMap
             defaultMapOptions={{
               center: { lat: form.latMap, lng: form.lngMap },
               zoom: form.zoomMap,

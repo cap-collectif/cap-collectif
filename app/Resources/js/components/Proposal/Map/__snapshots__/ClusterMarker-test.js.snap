@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<ClusterMarker /> should render a cluster marker 1`] = `
-<div
-  className="proposal__map--cluster"
->
-  2
-</div>
-`;

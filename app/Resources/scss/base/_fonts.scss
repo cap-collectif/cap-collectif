@@ -717,3 +717,9 @@
 .cap-map-location:before {
     content: "\e048";
 }
+
+.cap-map-target-1:before {
+    content: "\e049";
+    font-size: 16px;
+    line-height: 32px;
+}

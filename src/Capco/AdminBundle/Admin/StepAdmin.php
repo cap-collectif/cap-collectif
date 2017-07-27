@@ -155,7 +155,6 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.project.consultation_step_type',
                     'required' => true,
                     'btn_add' => false,
-                    'query' => $this->createQueryForConsultationStepType(),
                 ])
                 ->add('opinionCountShownBySection', null, [
                   'label' => 'admin.fields.step.opinionCountShownBySection',
@@ -368,22 +367,6 @@ class StepAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
-    }
-
-    private function createQueryForConsultationStepType()
-    {
-        $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-
-        return $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
-            ->createQueryBuilder('f')
-            ->where('f.step IS NULL OR f.step = :step')
-            ->setParameter('step', $subject)
-            ->getQuery()
-        ;
     }
 
     private function createQueryForProposalForms()

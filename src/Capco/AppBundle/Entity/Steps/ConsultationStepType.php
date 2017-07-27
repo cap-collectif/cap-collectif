@@ -46,11 +46,6 @@ class ConsultationStepType
     private $opinionTypes;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultationStepType")
-     */
-    private $step;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -66,11 +61,6 @@ class ConsultationStepType
         }
 
         return 'New consultation step type';
-    }
-
-    public function getStep()
-    {
-        return $this->step;
     }
 
     /**

@@ -21,6 +21,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/FooterSocialNetwork.yml',
             __DIR__ . '/Page.yml',
             __DIR__ . '/Category.yml',
+            __DIR__ . '/ConsultationStepType.yml',
             __DIR__ . '/SiteImage.yml',
             __DIR__ . '/SiteColor.yml',
             __DIR__ . '/Section.yml',
