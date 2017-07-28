@@ -2,5 +2,3 @@ parameters:
     excludes_analyse:
         - src/Capco/UserBundle/Security/DrupalEncoder.php
         - src/Capco/AppBundle/DataFixtures/ORM/*
-    ignoreErrors:
-        - #Call to an undefined method Symfony\Component\Security\Core\User\UserInterface::setSamlAttributes()#
