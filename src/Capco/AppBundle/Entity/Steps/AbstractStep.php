@@ -142,8 +142,9 @@ abstract class AbstractStep
     {
         if ($this->getId()) {
             if ($this->getProject()) {
-              return $this->getProject()->getTitle() . ' - ' . $this->getTitle();
+                return $this->getProject()->getTitle() . ' - ' . $this->getTitle();
             }
+
             return $this->getTitle();
         }
 

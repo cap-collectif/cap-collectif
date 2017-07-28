@@ -37,8 +37,8 @@ def lint():
 @task(environments=['local', 'ci'])
 def static_analysis():
     "Run static analysis tools"
-    env.service_command('yarn run typecheck', 'builder', '.')
-    env.service_command('yarn run typecheck:coverage', 'builder', '.')
+    env.compose_run('yarn run typecheck', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run typecheck:coverage', 'builder', '.', no_deps=True)
     env.service_command('php bin/phpstan analyse src', 'application', env.www_app)
 
 
