@@ -12,8 +12,8 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     id: selectionstep2
     title: Vainqueur
     isEnabled: true
-    startAt: <dateTimeBetween('-10 days', 'now')>
-    endAt: <dateTimeBetween('now', '+10 days')>
+    startAt: <dateTimeBetween('-10 days', '-8 days')>
+    endAt: <dateTimeBetween('+2 days', '+10 days')>
     body: <p><text(1000)></p>
     voteType: 0
   selectionstep3:
