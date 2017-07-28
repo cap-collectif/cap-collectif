@@ -7,14 +7,14 @@ from fabric.colors import red
 from fabric.utils import abort
 
 
-@task
+@task(environments=['local', 'ci'])
 def build(use_cache='true'):
     "Build services for infrastructure"
     ensure_vm_is_up()
     env.compose('build' + ('', '  --no-cache')[use_cache == 'false'])
 
 
-@task
+@task(environments=['local', 'ci'])
 def up(force_recreate='false'):
     "Ensure infrastructure is sync and running"
     ensure_vm_is_up()
@@ -23,20 +23,20 @@ def up(force_recreate='false'):
     env.compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
 
 
-@task
+@task(environments=['local'])
 def stop():
     "Stop the infrastructure"
     env.compose('stop')
 
 
-@task
+@task(environments=['local'])
 def reboot():
     stop()
     time.sleep(5)
     up()
 
 
-@task
+@task(environments=['local'])
 def clean():
     "Clean the infrastructure, will also remove all data"
     ensure_vm_is_up()
@@ -45,13 +45,13 @@ def clean():
         local('dinghy ssh docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc')
 
 
-@task
+@task(environments=['local'])
 def ps():
     "Show infrastructure status"
     env.compose('ps')
 
 
-@task
+@task(environments=['local'])
 def logs(containers=''):
     "Show infrastructure logs"
     env.compose('logs ' + containers)

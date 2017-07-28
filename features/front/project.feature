@@ -126,7 +126,7 @@ Feature: Project
     Given I visited "consultation page" with:
       | projectSlug | croissance-innovation-disruption |
       | stepSlug    | collecte-des-avis                |
-    Then I should see "21 participants"
+    Then I should see "18 participants"
 
   Scenario: Can not have access to download if export is disabled
     Given I visited "consultation page" with:
