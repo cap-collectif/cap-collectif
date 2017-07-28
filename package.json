@@ -5,7 +5,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "typecheck": "flow check",
-    "typecheck:coverage": "flow-coverage-report -i 'app/Resources/js/**/*.js'",
+    "typecheck:coverage": "flow-coverage-report --threshold 70 -i 'app/Resources/js/**/*.js'",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
