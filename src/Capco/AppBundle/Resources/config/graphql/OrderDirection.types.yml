@@ -4,8 +4,8 @@ OrderDirection:
         description: "Possible directions in which to order a list of items when provided an orderBy argument."
         values:
             ASC:
-                value: "ASC"
+                value: 0
                 description: "Specifies an ascending order for a given orderBy argument."
             DESC:
-                value: "DESC"
+                value: 1
                 description: "Specifies a descending order for a given orderBy argument."

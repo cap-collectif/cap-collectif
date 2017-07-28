@@ -38,9 +38,3 @@ Query:
                         description: "Max depth."
                         type: "Int!"
                 resolve: "@=resolver('contributionsBySection', [args])"
-            section:
-                type: "Section"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_section', [args])"

@@ -300,106 +300,15 @@ class OpinionRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0): Paginator
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'm')
-            ->leftJoin('o.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
-            ->addOrderBy('o.pinned', 'DESC') // Pinned always come first
-        ;
-
-        if (isset($criteria['section'])) {
-            $qb
-              ->andWhere('o.OpinionType = :section')
-              ->setParameter('section', $criteria['section'])
-            ;
-        }
-
-        if (isset($criteria['step'])) {
-            $qb
-              ->andWhere('o.step = :step')
-              ->setParameter('step', $criteria['step'])
-            ;
-        }
-
-        if (isset($criteria['trashed'])) {
-            $qb
-                ->andWhere('o.isTrashed = :trashed')
-                ->setParameter('trashed', $criteria['trashed'])
-            ;
-        }
-
-        $sortField = array_keys($orderBy)[0];
-        $direction = $orderBy[$sortField];
-
-        if ($sortField === 'CREATED_AT') {
-            $qb
-                    ->addOrderBy('o.createdAt', $direction)
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
-        }
-        if ($sortField === 'POPULAR') {
-            if ($direction === 'DESC') {
-                $qb
-                      ->addOrderBy('o.votesCountOk', 'DESC')
-                      ->addOrderBy('o.votesCountNok', 'ASC')
-                    ;
-            }
-            if ($direction === 'ASC') {
-                $qb
-                       ->addOrderBy('o.votesCountNok', 'DESC')
-                       ->addOrderBy('o.votesCountOk', 'ASC')
-                     ;
-            }
-            $qb->addOrderBy('o.createdAt', 'DESC');
-        }
-        if ($sortField === 'VOTE_COUNT') {
-            $qb
-                    ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
-                    ->addOrderBy('vnb', $direction)
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
-        }
-        if ($sortField === 'COMMENT_COUNT') {
-            $qb
-                    ->addOrderBy('o.argumentsCount', $direction)
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
-        }
-        if ($sortField === 'POSITION') {
-            $qb
-                    // trick in DQL to order NULL values last
-                    ->addSelect('-o.position as HIDDEN inversePosition')
-                    ->addOrderBy('inversePosition', $direction)
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
-        }
-        if ($sortField === 'RANDOM') {
-            $qb
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
-        }
-
-        $query = $qb->getQuery()
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->useQueryCache(true)
-                    // ->useResultCache(true, 60)
-        ;
-
-        return new Paginator($query);
-    }
-
     /**
      * Get opinions by opinionType.
      *
-     * @param mixed $opinionTypeId
-     * @param mixed $nbByPage
-     * @param mixed $page
-     * @param mixed $opinionsSort
+     * @param $opinionTypeId
+     * @param int    $nbByPage
+     * @param int    $page
+     * @param string $opinionsSort
+     *
+     * @return Paginator
      */
     public function getByOpinionTypeOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
     {
@@ -475,6 +384,32 @@ class OpinionRepository extends EntityRepository
         // $query->useResultCache(true, 60);
 
         return new Paginator($query);
+    }
+
+    /**
+     * Get enabled opinions by consultation step.
+     *
+     * @param $step
+     * @param mixed $asArray
+     *
+     * @return mixed
+     */
+    public function getEnabledByConsultationStep($step, $asArray = false)
+    {
+        $qb = $this->getIsEnabledQueryBuilder('o')
+            ->addSelect('ot', 'aut', 'ut', 'app', 'apptype', 'args')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.userType', 'ut')
+            ->leftJoin('o.appendices', 'app')
+            ->leftJoin('app.appendixType', 'apptype')
+            ->leftJoin('o.arguments', 'args')
+            ->andWhere('o.step = :step')
+            ->setParameter('step', $step)
+            ->addOrderBy('o.updatedAt', 'DESC')
+        ;
+
+        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     /**

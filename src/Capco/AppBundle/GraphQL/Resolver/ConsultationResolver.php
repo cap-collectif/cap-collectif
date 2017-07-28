@@ -15,7 +15,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Model\CreatableInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -59,47 +58,30 @@ class ConsultationResolver implements ContainerAwareInterface
         return $type->getAppendixTypeTitle();
     }
 
-    public function getConsultationContributionsConnection(ConsultationStep $consultation, Arg $args): Connection
+    public function getConsultationTotalContributions(Arg $args): int
+    {
+        $repo = $this->container->get('capco.consultation_step.repository');
+        $consultation = $repo->find($args->offsetGet('consultation'));
+
+        return $consultation->getOpinionCount();
+    }
+
+    public function getContributionsRelay(ConsultationStep $consultation, Arg $args)
     {
         $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
-              'step' => $consultation,
-              'trashed' => false,
+              'step' => $consultation->getId(),
+              'isEnabled' => true,
+              'expired' => false,
+              'isTrashed' => false,
             ];
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
+            $orderBy = [];
 
-            $orderBy = [$field => $direction];
-
-            return $repo->getByCriteriaOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
+            return $repo->findBy($criteria, $orderBy, null, $offset);
         });
 
-        $connection = $paginator->forward($args);
-        $connection->totalCount = $consultation->getOpinionCount();
-
-        return $connection;
-    }
-
-    public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
-    {
-        $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
-            $repo = $this->container->get('capco.opinion.repository');
-            $criteria = [
-              'section' => $section,
-              'trashed' => false,
-            ];
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
-            $orderBy = [$field => $direction];
-
-            return $repo->getByCriteriaOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
-        });
-
-        $connection = $paginator->forward($args);
-        $connection->totalCount = $section->getOpinions()->count();
-
-        return $connection;
+        return $paginator->forward($args);
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
@@ -115,13 +97,6 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         return $repo->findAll();
-    }
-
-    public function getSection(Arg $args): OpinionType
-    {
-        $repo = $this->container->get('capco.opinion_type.repository');
-
-        return $repo->find($args['id']);
     }
 
     public function resolvePropositionUrl(Opinion $contribution): string
