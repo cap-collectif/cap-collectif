@@ -57,15 +57,13 @@ class OpinionTypeAdmin extends Admin
     {
         if (!$type->getConsultationStepType()) {
             $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
-            if ($consultationStepTypeId !== null) {
-                $consultationStepType = $this->getConfigurationPool()
+            $consultationStepType = $this->getConfigurationPool()
                     ->getContainer()
                     ->get('doctrine')
                     ->getManager()
                     ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
                     ->find($consultationStepTypeId);
-                $type->setConsultationStepType($consultationStepType);
-            }
+            $type->setConsultationStepType($consultationStepType);
         }
     }
 

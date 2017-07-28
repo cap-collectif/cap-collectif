@@ -81,16 +81,18 @@ class ConsultationStepTypeAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.consultation_step_type.title',
             ])
-            ->add('opinionTypes', 'sonata_type_model', [
-                'label' => 'admin.fields.consultation_step_type.opinion_types',
-                'query' => $this->createQueryForOpinionTypes(),
-                'by_reference' => false,
-                'multiple' => true,
-                'expanded' => true,
-                'required' => true,
-                'tree' => true,
-            ])
         ;
+        if ($this->getSubject()->getId()) {
+            $formMapper->add('opinionTypes', 'sonata_type_model', [
+              'label' => 'admin.fields.consultation_step_type.opinion_types',
+              'query' => $this->createQueryForOpinionTypes(),
+              'by_reference' => false,
+              'multiple' => true,
+              'expanded' => true,
+              'required' => true,
+              'tree' => true,
+            ]);
+        }
     }
 
     /**

@@ -8,9 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OpinionTypeController extends Controller
 {
-    protected function redirectTo($object, Request $request = null)
+    protected function redirectTo($object)
     {
         $url = false;
+        $request = $this->get('request')->request;
 
         $consultationStepTypeId = $object->getConsultationStepType() ? $object->getConsultationStepType()->getId() : $request->get('consultation_step_type_id');
 
