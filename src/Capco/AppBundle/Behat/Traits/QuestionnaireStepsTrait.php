@@ -217,7 +217,7 @@ trait QuestionnaireStepsTrait
      */
     public function iEditMyReply()
     {
-        $this->fillQuestionnaireForm(false, true);
+        $this->fillQuestionnaireForm(false);
     }
 
     /**

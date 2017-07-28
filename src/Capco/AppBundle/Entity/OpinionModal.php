@@ -19,6 +19,7 @@ class OpinionModal implements HasDiffInterface
     use TimestampableTrait;
     use SluggableTitleTrait;
     use DiffableTrait;
+    public $updatedAt;
 
     /**
      * @ORM\Column(name="modal_key", type="text", nullable=false)

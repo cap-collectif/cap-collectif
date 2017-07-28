@@ -34,7 +34,7 @@ class FeaturesCategoryExtension extends \Twig_Extension
     }
 
     /**
-     * @param AdminInterface $admin
+     * @param mixed $admin
      *
      * @return bool
      */

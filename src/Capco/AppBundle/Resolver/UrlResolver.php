@@ -17,6 +17,7 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver

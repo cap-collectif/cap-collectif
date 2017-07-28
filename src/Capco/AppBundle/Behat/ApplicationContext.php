@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
@@ -17,10 +18,6 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
-use Docker\Container;
-use Docker\Docker;
-use Docker\Exception\UnexpectedStatusCodeException;
-use Docker\Http\Client;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Process\Process;
@@ -86,29 +83,29 @@ class ApplicationContext extends UserContext
         }
     }
 
-    public function resetUsingDocker()
-    {
+    // public function resetUsingDocker()
+    // {
         // This is the real docker way, but not that easy
         // We need to use something like https://github.com/jwilder/nginx-proxy
         // To reload containers, because we can't do reload on runtime with links
         // So we have to make sure it's supported on Circle-CI...
-        $docker = new Docker(new Client('unix:///run/docker.sock'));
-        $manager = $docker->getContainerManager();
-
-        if (null !== $this->dbContainer && $this->dbContainer->exists()) {
-            try {
-                $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
-            } catch (UnexpectedStatusCodeException $e) {
-                if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
-                    throw $e;
-                }
-                // We don't care about this error that happen only because of Circle-CI bad support of Docker
-            }
-        }
-
-        $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
-        $manager->create($this->dbContainer)->start($this->dbContainer);
-    }
+        // $docker = new Docker(new Client('unix:///run/docker.sock'));
+        // $manager = $docker->getContainerManager();
+        //
+        // if (null !== $this->dbContainer && $this->dbContainer->exists()) {
+        //     try {
+        //         $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
+        //     } catch (UnexpectedStatusCodeException $e) {
+        //         if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
+        //             throw $e;
+        //         }
+        //         // We don't care about this error that happen only because of Circle-CI bad support of Docker
+        //     }
+        // }
+        //
+        // $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
+        // $manager->create($this->dbContainer)->start($this->dbContainer);
+    // }
 
      /**
       * @BeforeScenario @javascript

@@ -13,6 +13,7 @@ class ReCaptchaValidator extends ConstraintValidator
     protected $request;
     protected $recaptcha;
     protected $enabled;
+    protected $toggle;
 
     public function __construct(RequestStack $requestStack, string $privateKey, Manager $toggle, bool $enabled = true)
     {

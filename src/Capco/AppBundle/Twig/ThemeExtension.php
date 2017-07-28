@@ -15,6 +15,7 @@ class ThemeExtension extends \Twig_Extension
     protected $themeRepo;
     protected $projectRepo;
     protected $twig;
+    protected $stepHelper;
     private $serializer;
     private $router;
 

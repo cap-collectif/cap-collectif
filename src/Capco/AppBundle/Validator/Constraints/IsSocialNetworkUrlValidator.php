@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
