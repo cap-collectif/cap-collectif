@@ -506,7 +506,7 @@ trait OpinionStepsTrait
     public function theCreateOpinionButtonShouldBeDisabled()
     {
         $page = $this->getCurrentPage();
-        $button = $page->find('css', 'btn-add--les-causes');
+        $button = $page->find('css', '#btn-add--les-causes');
         \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
