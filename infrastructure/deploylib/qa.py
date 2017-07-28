@@ -84,7 +84,7 @@ def kill_database_container():
         local('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}')
 
 
-@task(environments=['local', 'ci'])
+@task(environments=['local'])
 def save_fixtures_image(tag='latest', publish='false'):
     "Publish a new fixtures image"
     env.service_command('php bin/console capco:reinit --force --no-toggles', 'application', env.www_app)
