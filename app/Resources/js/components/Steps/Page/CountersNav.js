@@ -58,7 +58,7 @@ const CountersNav = React.createClass({
     /* const classes = classNames({
       'counters-nav': true,
       'counters-nav--bordered': this.props.bordered,
-    });*/
+    }); */
     // if (Object.keys(counters).length > 0) {
     //   return (
     //     <Nav className={classes} bsStyle="pills" justified>
