@@ -15,7 +15,7 @@ exports[`<RegistrationSortableQuestion /> renders correctly 1`] = `
   <div
     className="col-xs-1"
   >
-    <sortableHandle(DragHandle) />
+    <sortableHandle />
   </div>
   <div
     className="col-xs-8"
@@ -77,7 +77,7 @@ exports[`<RegistrationSortableQuestion /> renders correctly when not a superAdmi
   <div
     className="col-xs-1"
   >
-    <sortableHandle(DragHandle) />
+    <sortableHandle />
   </div>
   <div
     className="col-xs-8"
