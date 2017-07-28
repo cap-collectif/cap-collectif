@@ -29,6 +29,7 @@ Scenario: Anonymous API client wants to get a step
     "budget": @null@,
     "counters": {
       "proposals": @integer@,
+      "remainingHours": @integer@,
       "remainingDays": @integer@
     },
     "_links": {
