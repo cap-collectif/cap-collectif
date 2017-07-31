@@ -30,8 +30,7 @@ import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp
   from '../js/startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
-import ProposalAdminSelectionsApp
-  from '../js/startup/ProposalAdminSelectionsApp';
+import ProposalAdminPageApp from '../js/startup/ProposalAdminPageApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
@@ -51,7 +50,7 @@ ReactOnRails.register({
   ShieldApp,
   ProjectListPageApp,
   ProposalCreateFusionButtonApp,
-  ProposalAdminSelectionsApp,
+  ProposalAdminPageApp,
   ProjectsListApp,
   ProposalStepPageApp,
   NavbarApp,
