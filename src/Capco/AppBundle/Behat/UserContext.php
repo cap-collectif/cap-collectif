@@ -172,6 +172,15 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @When I close current alert
+     */
+    public function iCloseCurrentAlert()
+    {
+        $alertCloseButton = $this->getSession()->getPage()->find('css', '#current-alert .close');
+        $alertCloseButton->click();
+    }
+
+    /**
      * @Then :username should not be sms confirmed
      *
      * @param mixed $username

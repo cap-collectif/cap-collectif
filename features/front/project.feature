@@ -119,7 +119,7 @@ Feature: Project
     And I hover over the "#contributions-counter-pill" element
     And I wait 1 seconds
     And I should see "32 propositions"
-    And I should see "93 arguments"
+    And I should see "92 arguments"
     And I should see "32 sources"
 
   Scenario: Project header should display correct number of participants

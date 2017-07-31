@@ -96,7 +96,7 @@ const IdeaVoteForm = React.createClass({
             type="text"
             name="idea-vote__username"
             valueLink={this.linkState('form.username')}
-            label={`${<FormattedMessage id="idea.vote.form.username" />} *`}
+            label={<FormattedMessage id="idea.vote.form.username" />}
             groupClassName={this.getGroupStyle('username')}
             errors={this.renderFormErrors('username')}
           />}
@@ -107,7 +107,7 @@ const IdeaVoteForm = React.createClass({
               type="text"
               name="idea-vote__email"
               valueLink={this.linkState('form.email')}
-              label={`${<FormattedMessage id="idea.vote.form.email" />} *`}
+              label={<FormattedMessage id="idea.vote.form.email" />}
               groupClassName={this.getGroupStyle('email')}
               errors={this.renderFormErrors('email')}
             />

@@ -270,10 +270,10 @@ Feature: Ideas
     When I add an idea vote comment
     And I submit the idea vote form
     And I should see "Merci ! Votre vote a bien été pris en compte."
+    And I close current alert
     Then the idea should have 3 votes
     And I should see my comment in the idea comments list
     And I should see my vote in the idea votes list
-    And I wait 12 seconds
     And I submit the idea vote form
     And I should see "Votre vote a bien été supprimé."
     Then the idea should have 2 votes

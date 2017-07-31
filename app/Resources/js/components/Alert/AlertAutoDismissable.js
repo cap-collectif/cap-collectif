@@ -8,14 +8,20 @@ const AlertAutoDismissable = React.createClass({
     bsStyle: PropTypes.string.isRequired,
   },
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.onDismiss();
+    }, 10000);
+  },
+
   render() {
     const { bsStyle, children, onDismiss } = this.props;
     return (
       <Alert
         className="text-center"
+        id="current-alert"
         bsStyle={bsStyle}
-        onDismiss={onDismiss}
-        dismissAfter={10000}>
+        onDismiss={onDismiss}>
         {children}
       </Alert>
     );
