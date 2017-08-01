@@ -1,7 +1,9 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
 {% block stylesheets %}
+    {# Sonata css #}
     {{ parent() }}
+
     <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}
@@ -13,7 +15,9 @@
     <script>
     var App = require('Resources/js/app').default;
     </script>
-    {{ parent() }}
+
+    {# Sonata javascript #}
+
     <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/jquery.minicolors.js') }}"></script>
     <script type="text/javascript">

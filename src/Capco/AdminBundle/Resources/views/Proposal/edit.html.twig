@@ -1,40 +1,47 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{% block javascripts %}
-{{ parent() }}
-<script>
-setTimeout(function() {
-  jQuery("input[type='checkbox']").iCheck('destroy');
-  jQuery(".status-selector").select2('destroy');
-}, 1000);
-</script>
+{% block sonata_header %}
 {% endblock %}
 
+{% block sonata_wrapper %}
 {% block form %}
-    {% include '@CapcoApp/redux_store.html.twig' with {
-      'project': admin.subject.proposalForm.step.getProject(),
-      'data' : {
-        'proposal': {
-          'proposalsById': {
-            (admin.subject.id) : {
-              'selections': [],
-              'status': admin.subject.status
-              ? {
-                  'id': admin.subject.status.id,
-                  'name': admin.subject.status.name
-                }
-             : null
+{% include '@CapcoApp/redux_store.html.twig' with {
+  'project': admin.subject.proposalForm.step.getProject(),
+  'data' : {
+    'proposal': {
+      'proposalsById': {
+        (admin.subject.id) : {
+          'selections': [],
+          'status': admin.subject.status
+          ? {
+              'id': admin.subject.status.id,
+              'name': admin.subject.status.name
             }
-          },
+         : null
         }
-      }
-    }
-    %}
-    {{ react_render_component('ProposalAdminPageApp', {
-      'props': {
-        'proposalId': admin.subject.id,
-        'projectId': admin.subject.proposalForm.step.getProjectId()
       },
-      'rendering': 'client_side'
-    }) }}
+    }
+  }
+}
+%}
+{{ react_render_component('ProposalAdminPageApp', {
+  'props': {
+    'proposalId': admin.subject.id,
+  },
+  'rendering': 'client_side'
+}) }}
+{% endblock %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/vendor.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script>
+var App = require('Resources/js/app').default;
+</script>
 {% endblock %}

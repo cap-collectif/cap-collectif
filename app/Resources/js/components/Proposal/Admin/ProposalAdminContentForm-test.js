@@ -1,13 +1,13 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProposalAdminPage from './ProposalAdminPage';
+import ProposalAdminContentForm from './ProposalAdminContentForm';
 
-describe('<ProposalAdminPage />', () => {
+describe('<ProposalAdminContentForm />', () => {
   const props = {};
 
   it('render correctly', () => {
-    const wrapper = shallow(<ProposalAdminPage {...props} />);
+    const wrapper = shallow(<ProposalAdminContentForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

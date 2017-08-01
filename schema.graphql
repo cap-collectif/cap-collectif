@@ -42,6 +42,27 @@ enum ArgumentValue {
   FOR
 }
 
+input ChangeProposalContentInput {
+  # The new proposal title
+  title: String
+
+  # The new proposal body
+  body: HTML
+
+  # The proposal id
+  id: ID!
+  clientMutationId: String
+}
+
+input ChangeProposalPublicationStatusInput {
+  # The new publication status
+  publicationStatus: PublicationStatus!
+
+  # The proposal id
+  id: ID!
+  clientMutationId: String
+}
+
 # A consultation
 type Consultation {
   # The id of the consultation.
@@ -147,6 +168,11 @@ type Media {
 
   # The url of the media.
   url: String!
+}
+
+type Mutation {
+  changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ProposalPayload
+  changeProposalContent(input: ChangeProposalContentInput!): ProposalPayload
 }
 
 # A contribution
@@ -354,6 +380,35 @@ type PageInfo {
   endCursor: String
 }
 
+# A budget contribution
+type Proposal {
+  # The author of the contribution.
+  author: User!
+
+  # The delete date.
+  deletedAt: String
+
+  # The publication status.
+  publicationStatus: PublicationStatus!
+
+  # The content of the contribution.
+  id: ID!
+
+  # Identifies the contribution title.
+  title: String!
+
+  # Identifies the body of the contribution.
+  body: HTML!
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String!
+}
+
+type ProposalPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
   id: ID!
 
@@ -372,6 +427,23 @@ type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithA
 
   # Returns 'vote'.
   kind: String!
+}
+
+enum PublicationStatus {
+  # Was pubicly visible, but has expired.
+  EXPIRED
+
+  # Normal status, publicly visible
+  PUBLISHED
+
+  # Pubicly visible in the trash bin
+  TRASHED
+
+  # Not pubicly visible, deleted by author
+  DELETED
+
+  # Visible only by the author, he is not yet confirmed !
+  NOT_ACCOUNTED
 }
 
 type Query {
@@ -395,6 +467,7 @@ type Query {
     limit: Int!
   ): [Opinion]
   section(id: ID!): Section
+  proposal(id: ID!): Proposal
 }
 
 # A report
@@ -569,6 +642,7 @@ type User {
   enabled: Boolean!
   locked: Boolean!
   phoneConfirmed: Boolean!
+  expiresAt: String
   phoneConfirmationSentAt: String
   gender: String
   firstname: String

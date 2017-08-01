@@ -1,31 +1,48 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+// import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import ProposalAdminStepSelector from './ProposalAdminStepSelector';
 import Loader from '../../Utils/Loader';
-import { loadSelections } from '../../../redux/modules/proposal';
-import type { State, Uuid } from '../../../types';
+import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
 
-export const ProposalAdminSelections = React.createClass({
-  propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    steps: PropTypes.array.isRequired,
-    projectId: PropTypes.string.isRequired,
-    proposalId: PropTypes.number.isRequired,
-  },
+// import { loadSelections } from '../../../redux/modules/proposal';
+// import type { Dispatch /* , State, Uuid */ } from '../../../types';
 
-  componentDidMount() {
-    const { dispatch, proposalId } = this.props;
-    dispatch(loadSelections(proposalId));
-  },
+// propTypes: {
+//   dispatch: PropTypes.func.isRequired,
+//   steps: PropTypes.array.isRequired,
+//   projectId: PropTypes.string.isRequired,
+//   proposalId: PropTypes.number.isRequired,
+// },
+// type PassedProps = {
+//   projectId: Uuid,
+//   proposalId: number,
+// };
+type Props = {
+  proposal: ProposalAdminSelections_proposal,
+  // dispatch: Dispatch,
+};
+type DefaultProps = void;
+
+export class ProposalAdminSelections extends Component<
+  DefaultProps,
+  Props,
+  void,
+> {
+  // componentDidMount() {
+  //   const { dispatch, proposalId } = this.props;
+  //   dispatch(loadSelections(proposalId));
+  // }
 
   render() {
-    const { steps, proposalId } = this.props;
+    const { proposal } = this.props;
+    const steps = [];
     return (
       <div className="box box-primary">
         <div className="box-header">
-          <h4 className="box-title">Avancement</h4>
+          <h4 className="box-title">Etapes</h4>
           <a
             className="pull-right link"
             target="_blank"
@@ -41,40 +58,44 @@ export const ProposalAdminSelections = React.createClass({
               <ProposalAdminStepSelector
                 step={step}
                 key={index}
-                proposalId={proposalId}
+                proposalId={proposal.id}
               />,
             )}
           </ListGroup>
         </Loader>
       </div>
     );
-  },
-});
+  }
+}
 
-type PassedProps = {
-  projectId: Uuid,
-  proposalId: number,
-};
+export default createFragmentContainer(
+  ProposalAdminSelections,
+  graphql`
+    fragment ProposalAdminSelections_proposal on Proposal {
+      id
+    }
+  `,
+);
 
-export default connect((state: State, props: PassedProps) => {
-  const stepsById = state.project.projectsById[props.projectId].stepsById;
-  const proposal = state.proposal.proposalsById[props.proposalId];
-  return {
-    steps: Object.keys(stepsById)
-      .map(i => stepsById[i])
-      .filter(step => step.type === 'collect' || step.type === 'selection')
-      .map(s => {
-        const step = { ...s };
-        const selectionAsArray = proposal.selections.filter(
-          selection => selection.step.id === step.id,
-        );
-        step.selected = step.type === 'collect' || selectionAsArray.length > 0;
-        if (step.type === 'collect') {
-          step.status = proposal.status;
-        } else {
-          step.status = step.selected ? selectionAsArray[0].status : null;
-        }
-        return step;
-      }),
-  };
-})(ProposalAdminSelections);
+// export default connect((state: State, props: PassedProps) => {
+//   const stepsById = state.project.projectsById[props.projectId].stepsById;
+//   const proposal = state.proposal.proposalsById[props.proposalId];
+//   return {
+//     steps: Object.keys(stepsById)
+//       .map(i => stepsById[i])
+//       .filter(step => step.type === 'collect' || step.type === 'selection')
+//       .map(s => {
+//         const step = { ...s };
+//         const selectionAsArray = proposal.selections.filter(
+//           selection => selection.step.id === step.id,
+//         );
+//         step.selected = step.type === 'collect' || selectionAsArray.length > 0;
+//         if (step.type === 'collect') {
+//           step.status = proposal.status;
+//         } else {
+//           step.status = step.selected ? selectionAsArray[0].status : null;
+//         }
+//         return step;
+//       }),
+//   };
+// })(ProposalAdminSelections);

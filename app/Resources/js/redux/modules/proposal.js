@@ -220,6 +220,7 @@ export const loadSelectionsSucess = (
   type: 'proposal/LOAD_SELECTIONS_SUCCEEDED',
   proposalId,
 });
+
 export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
   type: 'proposal/CLOSE_CREATE_FUSION_MODAL',
 });

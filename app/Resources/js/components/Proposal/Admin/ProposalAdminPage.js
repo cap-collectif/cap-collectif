@@ -1,15 +1,59 @@
 // @flow
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
+import { QueryRenderer, graphql } from 'react-relay';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminSelections from './ProposalAdminSelections';
-import type { Uuid } from '../../../types';
+import ProposalAdminStatusForm from './ProposalAdminStatusForm';
+import ProposalAdminContentForm from './ProposalAdminContentForm';
+import Loader from '../../Utils/Loader';
+// import type { ProposalAdminPageQueryResponse } from './__generated__/ProposalAdminPageQuery.graphql';
 
 type DefaultProps = void;
-type Props = {
-  projectId: Uuid,
-  proposalId: number,
-};
+type Props = { proposalId: number };
 type State = void;
+
+const renderProposalAdminPage = ({
+  error,
+  props,
+}: {
+  error: ?string,
+  props: any, // ProposalAdminPageQueryResponse
+}) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    // eslint-disable-next-line
+    if (props.proposal) {
+      return (
+        <Tabs defaultActiveKey={2} id="proposal-admin-page-tabs">
+          <Tab eventKey={1} title="Activité" disabled>
+            Activité
+          </Tab>
+          <Tab eventKey={2} title="Contenu">
+            <ProposalAdminContentForm {...props} />
+          </Tab>
+          <Tab eventKey={3} title="Suivi">
+            Suivi
+          </Tab>
+          <Tab eventKey={4} title="Evalutation">
+            Evalutation
+          </Tab>
+          <Tab eventKey={5} title="Avancement">
+            <ProposalAdminSelections {...props} />
+          </Tab>
+          <Tab eventKey={6} title="Publication">
+            <ProposalAdminStatusForm {...props} />
+          </Tab>
+        </Tabs>
+      );
+    }
+    return graphqlError;
+  }
+  return <Loader />;
+};
 
 export default class ProposalAdminPage extends Component<
   DefaultProps,
@@ -18,16 +62,22 @@ export default class ProposalAdminPage extends Component<
 > {
   render() {
     return (
-      <Nav bsStyle="tabs" justified activeKey={2}>
-        <NavItem eventKey={1} title="Activité" disabled />
-        <NavItem eventKey={2} title="Contenu" />
-        <NavItem eventKey={3} title="Suivi" />
-        <NavItem eventKey={4} title="Evalutation" />
-        <NavItem eventKey={5} title="Avancement">
-          <ProposalAdminSelections {...this.props} />
-        </NavItem>
-        <NavItem eventKey={6} title="Publication" />
-      </Nav>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ProposalAdminPageQuery($id: ID!) {
+            proposal(id: $id) {
+              ...ProposalAdminStatusForm_proposal
+              ...ProposalAdminSelections_proposal
+              ...ProposalAdminContentForm_proposal
+            }
+          }
+        `}
+        variables={{
+          id: this.props.proposalId,
+        }}
+        render={renderProposalAdminPage}
+      />
     );
   }
 }

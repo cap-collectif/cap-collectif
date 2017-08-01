@@ -385,7 +385,7 @@ overblog_graphql:
         config_validation: %kernel.debug%
         schema:
             query: Query
-            mutation: ~
+            mutation: Mutation
 
 limenius_react:
   default_rendering: "both"

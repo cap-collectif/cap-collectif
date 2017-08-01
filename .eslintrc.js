@@ -25,6 +25,7 @@ module.exports = {
     intlMock: true
   },
   rules: {
+    'camelcase': 'off',
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
@@ -32,7 +33,7 @@ module.exports = {
     'flowtype/define-flow-type': 1,
     'flowtype/generic-spacing': ['off'],
     'flowtype/no-primitive-constructor-types': 'error',
-    'flowtype/no-weak-types': ['error', { Object: false, Function: false }],
+    'flowtype/no-weak-types': ['off'],
     'flowtype/object-type-delimiter': ['error', 'comma'],
     'flowtype/require-parameter-type': ['off'],
     'flowtype/require-return-type': [

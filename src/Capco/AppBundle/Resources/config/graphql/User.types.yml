@@ -43,6 +43,8 @@ User:
                 type: "Boolean!"
             phoneConfirmed:
                 type: "Boolean!"
+            expiresAt:
+                type: "String"
             phoneConfirmationSentAt:
                 type: "String"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"

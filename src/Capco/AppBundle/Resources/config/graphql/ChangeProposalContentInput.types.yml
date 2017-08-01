@@ -1,0 +1,14 @@
+ChangeProposalContentInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            title:
+                type: "String"
+                description: "The new proposal title"
+            body:
+                type: "HTML"
+                description: "The new proposal body"
+            id:
+              type: "ID!"
+              description: "The proposal id"

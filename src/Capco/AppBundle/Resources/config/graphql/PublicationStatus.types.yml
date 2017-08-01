@@ -1,0 +1,19 @@
+PublicationStatus:
+    type: enum
+    config:
+        values:
+            EXPIRED: # TODO KILL THIS
+                value: "EXPIRED"
+                description: "Was pubicly visible, but has expired."
+            PUBLISHED:
+                value: "PUBLISHED"
+                description: "Normal status, publicly visible"
+            TRASHED:
+                value: "TRASHED"
+                description: "Pubicly visible in the trash bin"
+            DELETED:
+                value: "DELETED"
+                description: "Not pubicly visible, deleted by author"
+            NOT_ACCOUNTED: ## TODO MAKE THIS WORK
+                value: "NOT_ACCOUNTED"
+                description: "Visible only by the author, he is not yet confirmed !"

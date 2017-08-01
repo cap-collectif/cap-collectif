@@ -45,6 +45,30 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When /^I send a GraphQL POST request:$/
+     */
+    public function iSendAraphQLPostRequest(PyStringNode $string)
+    {
+        $string = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $string->getRaw());
+        $response = $this->client->request(
+            'POST',
+            '/graphql/',
+            [
+              'json' => json_decode($string, true),
+              'exceptions' => false,
+              'headers' => [
+                  // 'Authorization' => sprintf('Bearer %s', $this->token),
+                  'Content-Type' => 'application/json',
+              ],
+            ]
+        );
+        // PHPUnit::assertSame(200, (int) $response->getStatusCode());
+        $this->response = (string) $response->getBody();
+        var_dump($this->response);
+        PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
+    }
+
+    /**
      * @Then /^the JSON response should match:$/
      */
     public function theJsonResponseShouldMatch(PyStringNode $pattern)

@@ -1,0 +1,16 @@
+Mutation:
+    type: object
+    config:
+        fields:
+          changeProposalPublicationStatus:
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeProposalPublicationStatusInput
+                    payloadType: ProposalPayload
+                    mutateAndGetPayload: "@=mutation('changeProposalPublicationStatus', [value])"
+          changeProposalContent:
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeProposalContentInput
+                    payloadType: ProposalPayload
+                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value])"

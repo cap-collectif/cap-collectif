@@ -8,22 +8,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait TrashableTrait
 {
     /**
-     * @var bool
-     *
      * @ORM\Column(name="trashed", type="boolean")
      */
     private $isTrashed = false;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
     private $trashedAt = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason = null;
@@ -39,6 +34,17 @@ trait TrashableTrait
     public function isTrashed()
     {
         return $this->isTrashed;
+    }
+
+    public function setTrashed($isTrashed)
+    {
+        if (!$isTrashed) {
+            $this->trashedReason = null;
+            $this->trashedAt = null;
+        }
+        $this->isTrashed = $isTrashed;
+
+        return $this;
     }
 
     /**

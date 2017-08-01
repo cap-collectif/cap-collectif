@@ -1,0 +1,11 @@
+ChangeProposalPublicationStatusInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            publicationStatus:
+                type: "PublicationStatus!"
+                description: "The new publication status"
+            id:
+              type: "ID!"
+              description: "The proposal id"
