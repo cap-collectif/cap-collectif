@@ -307,6 +307,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'proposalForm')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('proposalForm.step = :step')
+            ->andWhere('proposal.address IS NOT NULL')
+            ->andWhere('proposal.address != \'\'')
             ->setParameter('step', $step);
 
         return $qb->getQuery()->getArrayResult();
@@ -319,6 +321,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('selections.selectionStep = :step')
+            ->andWhere('proposal.address IS NOT NULL')
+            ->andWhere('proposal.address != \'\'')
             ->setParameter('step', $step);
 
         return $qb->getQuery()->getArrayResult();
