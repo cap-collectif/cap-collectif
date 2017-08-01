@@ -11,4 +11,10 @@ export default {
   mapsAPIKey: '***REMOVED***',
   mapboxApiKey:
     '***REMOVED***',
+  // https://github.com/elementalui/elemental/blob/master/src/constants.js
+  canUseDOM: !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  ),
 };

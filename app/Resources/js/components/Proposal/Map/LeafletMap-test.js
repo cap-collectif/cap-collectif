@@ -46,6 +46,7 @@ describe('<LeafletMap />', () => {
         dispatch={() => {}}
       />,
     );
+    wrapper.setState({ loaded: true });
     expect(wrapper).toMatchSnapshot();
   });
 
