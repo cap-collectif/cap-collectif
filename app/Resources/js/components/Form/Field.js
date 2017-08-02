@@ -4,8 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 
 const Field = React.createClass({
-  displayName: 'Field',
-
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,

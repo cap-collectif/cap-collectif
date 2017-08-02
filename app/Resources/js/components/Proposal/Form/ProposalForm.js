@@ -547,10 +547,8 @@ export const ProposalForm = React.createClass({
         <Input
           id="proposal_body"
           type="editor"
+          name="body"
           label={<FormattedMessage id="proposal.body" />}
-          groupClassName={this.getGroupStyle('body')}
-          errors={this.renderFormErrors('body')}
-          valueLink={this.linkState('form.body')}
           help={form.descriptionHelpText}
         />
         {form.fields.map(field => {

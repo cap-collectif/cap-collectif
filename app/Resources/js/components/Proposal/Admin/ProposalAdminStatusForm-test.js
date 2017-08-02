@@ -16,7 +16,11 @@ describe('<ProposalAdminStatusForm />', () => {
       publicationStatus: 'PUBLISHED',
     };
     const wrapper = shallow(
-      <ProposalAdminStatusForm relay={{}} proposal={proposalToBeExpired} />,
+      <ProposalAdminStatusForm
+        publicationStatus="PUBLISHED"
+        relay={{}}
+        proposal={proposalToBeExpired}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -32,7 +36,11 @@ describe('<ProposalAdminStatusForm />', () => {
       deletedAt: null,
     };
     const wrapper = shallow(
-      <ProposalAdminStatusForm relay={{}} proposal={proposalExpired} />,
+      <ProposalAdminStatusForm
+        publicationStatus="EXPIRED"
+        relay={{}}
+        proposal={proposalExpired}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -48,7 +56,11 @@ describe('<ProposalAdminStatusForm />', () => {
       publicationStatus: 'PUBLISHED',
     };
     const wrapper = shallow(
-      <ProposalAdminStatusForm relay={{}} proposal={proposalConfirmed} />,
+      <ProposalAdminStatusForm
+        publicationStatus="PUBLISHED"
+        relay={{}}
+        proposal={proposalConfirmed}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

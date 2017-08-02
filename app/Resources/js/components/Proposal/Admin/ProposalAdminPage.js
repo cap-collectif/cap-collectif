@@ -36,10 +36,10 @@ const renderProposalAdminPage = ({
             <ProposalAdminContentForm {...props} />
           </Tab>
           <Tab eventKey={3} title="Suivi">
-            Suivi
+            <ProposalAdminSelections {...props} />
           </Tab>
           <Tab eventKey={4} title="Evalutation">
-            Evalutation
+            <ProposalAdminSelections {...props} />
           </Tab>
           <Tab eventKey={5} title="Avancement">
             <ProposalAdminSelections {...props} />
@@ -62,22 +62,24 @@ export default class ProposalAdminPage extends Component<
 > {
   render() {
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ProposalAdminPageQuery($id: ID!) {
-            proposal(id: $id) {
-              ...ProposalAdminStatusForm_proposal
-              ...ProposalAdminSelections_proposal
-              ...ProposalAdminContentForm_proposal
+      <div className="container">
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ProposalAdminPageQuery($id: ID!) {
+              proposal(id: $id) {
+                ...ProposalAdminStatusForm_proposal
+                ...ProposalAdminSelections_proposal
+                ...ProposalAdminContentForm_proposal
+              }
             }
-          }
-        `}
-        variables={{
-          id: this.props.proposalId,
-        }}
-        render={renderProposalAdminPage}
-      />
+          `}
+          variables={{
+            id: this.props.proposalId,
+          }}
+          render={renderProposalAdminPage}
+        />
+      </div>
     );
   }
 }

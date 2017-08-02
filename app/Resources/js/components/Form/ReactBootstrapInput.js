@@ -16,6 +16,7 @@ import {
   Radio,
 } from 'react-bootstrap';
 import Editor from './Editor';
+import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import EmailInput from './EmailInput';
@@ -57,31 +58,12 @@ class ReactBootstrapInput extends Component {
   getValue = () => {
     const inputNode = this.getDOMNode();
 
-    // if (this.props.type === 'select' && inputNode.multiple) {
-    //   return this.getMultipleSelectValues(inputNode);
-    // }
-
     if (inputNode instanceof HTMLInputElement) {
       return inputNode.value;
     }
   };
 
   refFormControl: ?Element;
-
-  // getMultipleSelectValues(selectNode) {
-  //   const values = [];
-  //   const options = selectNode.options;
-  //
-  //   for (let i = 0; i < options.length; i++) {
-  //     const opt = options[i];
-  //
-  //     if (opt.selected) {
-  //       values.push(opt.value || opt.text);
-  //     }
-  //   }
-  //
-  //   return values;
-  // }
 
   renderAddon(addon: ?string) {
     return (
@@ -197,6 +179,14 @@ class ReactBootstrapInput extends Component {
       );
     }
 
+    if (type === 'radio-buttons') {
+      formControl = (
+        <ButtonGroup type="radio" value={value} {...props}>
+          {children}
+        </ButtonGroup>
+      );
+    }
+
     if (type === 'email') {
       formControl = <EmailInput value={value} {...props} />;
     }
@@ -256,7 +246,6 @@ class ReactBootstrapInput extends Component {
 
     return (
       <FormGroup
-        // controlId={id}
         bsSize={bsSize}
         className={props.wrapperClassName}
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
