@@ -23,7 +23,7 @@ class Version20170802100000 extends AbstractMigration
 
         foreach ($proposals as $proposal) {
             if (0 === strpos($proposal['address'], '"')) {
-                $newAddressField = trim($proposal['address'], '"');
+                $newAddressField = stripslashes(trim($proposal['address'], '"'));
                 $query = $this->connection
                     ->prepare('UPDATE proposal SET address = ? WHERE id = ?');
                 $query->bindParam(1, $newAddressField);
