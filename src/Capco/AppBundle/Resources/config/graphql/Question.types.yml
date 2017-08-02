@@ -1,0 +1,16 @@
+Question:
+    type: object
+    config:
+        description: "A question"
+        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        fields:
+            inputType:
+                type: "String!"
+            position:
+                type: "Int!"
+            private:
+                type: "Boolean!"
+            required:
+                type: "Boolean!"
+            helpText:
+                type: "String!"

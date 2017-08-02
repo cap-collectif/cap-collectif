@@ -359,6 +359,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
+    public function getForm(): ProposalForm
+    {
+        return $this->proposalForm;
+    }
+
     public function getProposalForm()
     {
         return $this->proposalForm;

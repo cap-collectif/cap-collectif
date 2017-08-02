@@ -4,27 +4,24 @@ Proposal:
         description: "A budget contribution"
         # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
-            # createdAt:
-            #     type: "String!"
-            #     description: "Identifies the date and time when the object was created."
-            #     resolve: "@=resolver('proposition_createdAt', [value])"
-            # updatedAt:
-            #     type: "String!"
-            #     description: "Identifies the date and time when the object was last updated."
-            #     resolve: "@=resolver('proposition_updatedAt', [value])"
             # url:
             #     type: "URI!"
             #     description: "The HTTP url for this contribution."
             #     resolve: "@=resolver('proposition_url', [value])"
+            theme:
+                type: "Theme"
+            category:
+                type: "ProposalCategory"
+            district:
+                type: "District"
+            address:
+                type: "String"
             author:
                 type: "User!"
                 description: "The author of the contribution."
             deletedAt:
                 type: "String"
                 description: "The delete date."
-            # project:
-            #     type: "Project!"
-            #     description: "The content of the contribution."
             publicationStatus:
                 type: "PublicationStatus!"
                 description: "The publication status."
@@ -41,3 +38,6 @@ Proposal:
             bodyText:
                 type: "String!"
                 description: "Identifies the body of the contribution rendered to text."
+            form:
+                type: "ProposalForm!"
+                description: "Identifies the form where the contribution was submitted."

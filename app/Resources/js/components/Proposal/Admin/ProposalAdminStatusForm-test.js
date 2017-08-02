@@ -20,6 +20,7 @@ describe('<ProposalAdminStatusForm />', () => {
         publicationStatus="PUBLISHED"
         relay={{}}
         proposal={proposalToBeExpired}
+        handleSubmit={jest.fn()}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -40,6 +41,7 @@ describe('<ProposalAdminStatusForm />', () => {
         publicationStatus="EXPIRED"
         relay={{}}
         proposal={proposalExpired}
+        handleSubmit={jest.fn()}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -60,6 +62,7 @@ describe('<ProposalAdminStatusForm />', () => {
         publicationStatus="PUBLISHED"
         relay={{}}
         proposal={proposalConfirmed}
+        handleSubmit={jest.fn()}
       />,
     );
     expect(wrapper).toMatchSnapshot();

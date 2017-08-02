@@ -1,0 +1,9 @@
+ProposalCategory:
+    type: object
+    config:
+        description: "A proposal category"
+        fields:
+            id:
+                type: "String!"
+            name:
+                type: "String!"

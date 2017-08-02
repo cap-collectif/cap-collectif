@@ -1,0 +1,35 @@
+ProposalForm:
+    type: object
+    config:
+        description: "A budget form"
+        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        fields:
+            categories:
+                type: "[ProposalCategory!]!"
+            usingThemes:
+                type: "Boolean!"
+            themeMandatory:
+                type: "Boolean!"
+            themeHelpText:
+                type: "String!"
+            usingDistrict:
+                type: "Boolean!"
+            districtMandatory:
+                type: "Boolean!"
+            districtHelpText:
+                type: "String!"
+            usingCategories:
+                type: "Boolean!"
+            categoryMandatory:
+                type: "Boolean!"
+            categoryHelpText:
+                type: "String!"
+            usingAddress:
+                type: "Boolean!"
+            titleHelpText:
+                type: "String!"
+            descriptionHelpText:
+                type: "String!"
+            customFields:
+                type: "[Question]"
+                resolve: "@=resolver('proposalform_questions', [value])"

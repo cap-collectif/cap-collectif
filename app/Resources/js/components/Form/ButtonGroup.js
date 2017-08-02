@@ -1,34 +1,36 @@
-import React, { PropTypes } from 'react';
-import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { ToggleButtonGroup } from 'react-bootstrap';
 
-const ButtonGroup = React.createClass({
-  propTypes: {
-    id: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-  },
+type Props = {
+  type: 'radio' | 'checkbox',
+  disabled: Boolean,
+  onChange: Function,
+  value: any,
+  name: String,
+  children: any,
+};
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-      labelClassName: '',
-    };
-  },
+class ButtonGroup extends Component<void, Props, void> {
+  static defaultProps: {
+    disabled: false,
+  };
 
   render() {
-    const { disabled, onChange, value } = this.props;
+    const { type, disabled, onChange, value, name, children } = this.props;
     return (
       <ToggleButtonGroup
-        type="radio"
+        type={type}
+        name={name}
         value={value}
-        onChange={onChange}
+        onChange={val => {
+          console.log(val);
+          onChange(val);
+        }}
         disabled={disabled}>
-        <ToggleButton value={1}>Checkbox 1 (pre-checked)</ToggleButton>
-        <ToggleButton value={2}>Checkbox 2</ToggleButton>
-        <ToggleButton value={3}>Checkbox 3 (pre-checked)</ToggleButton>
+        {children}
       </ToggleButtonGroup>
     );
-  },
-});
+  }
+}
 
 export default ButtonGroup;

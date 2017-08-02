@@ -4,6 +4,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
@@ -15,25 +16,26 @@ type Props = {
   themes: Array<Object>,
   districts: Array<Object>,
   features: FeatureToggles,
+  handleSubmit: () => void,
 };
 type State = void;
+
+const onSubmit = (values, dispatch, props) => {
+  const variables = {
+    input: { title: '', body: '', id: props.proposal.id },
+  };
+  ChangeProposalContentMutation.commit(variables);
+};
 
 export class ProposalAdminContentForm extends Component<
   DefaultProps,
   Props,
   State,
 > {
-  _handleCompleteChange = () => {
-    const variables = {
-      input: { title: '', body: '', id: this.props.proposal.id },
-    };
-    ChangeProposalContentMutation.commit(variables);
-  };
-
   render() {
-    const { features, districts, themes /* , handleSubmit */ } = this.props;
-    const categories = [];
-    const form = {};
+    const { proposal, features, districts, themes, handleSubmit } = this.props;
+    const form = proposal.form;
+    const categories = proposal.form.categories;
     const optional = (
       <span className="excerpt">
         <FormattedMessage id="global.form.optional" />
@@ -64,14 +66,14 @@ export class ProposalAdminContentForm extends Component<
     //   </span>
     // );
     return (
-      <div>
-        <form>
-          <h4 className="box-title">Aperçu</h4>
+      <div className="box box-primary container">
+        <form onSubmit={handleSubmit}>
+          <h4 className="h4">Aperçu</h4>
           <a
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/115-section-avancement">
+            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
             <i className="fa fa-info-circle" /> Aide
           </a>
           <div>
@@ -79,11 +81,10 @@ export class ProposalAdminContentForm extends Component<
               name="title"
               component={component}
               type="text"
-              placeholder="First Name"
               id="proposal_title"
-              help={form.titleHelpText}
               label={<FormattedMessage id="proposal.title" />}
             />
+            <h4 className="h4">Métadonnées</h4>
             {features.themes &&
               form.usingThemes &&
               <Field
@@ -91,11 +92,10 @@ export class ProposalAdminContentForm extends Component<
                 id="proposal_theme"
                 type="select"
                 component={component}
-                label={themeLabel}
-                help={form.themeHelpText}>
+                label={themeLabel}>
                 <FormattedMessage id="proposal.select.theme">
                   {message =>
-                    <option value={-1} disabled>
+                    <option value="">
                       {message}
                     </option>}
                 </FormattedMessage>
@@ -112,11 +112,10 @@ export class ProposalAdminContentForm extends Component<
                 type="select"
                 name="category"
                 component={component}
-                label={categoryLabel}
-                help={form.categoryHelpText}>
+                label={categoryLabel}>
                 <FormattedMessage id="proposal.select.category">
                   {message =>
-                    <option value={-1} disabled>
+                    <option value="">
                       {message}
                     </option>}
                 </FormattedMessage>
@@ -136,8 +135,7 @@ export class ProposalAdminContentForm extends Component<
                 type="select"
                 name="district"
                 component={component}
-                label={districtLabel}
-                help={form.districtHelpText}>
+                label={districtLabel}>
                 <FormattedMessage id="proposal.select.district">
                   {message =>
                     <option value="">
@@ -150,13 +148,13 @@ export class ProposalAdminContentForm extends Component<
                   </option>,
                 )}
               </Field>}
+            <h4 className="h4">Présentation</h4>
             <Field
               id="proposal_body"
               type="editor"
               name="body"
               component={component}
               label={<FormattedMessage id="proposal.body" />}
-              help={form.descriptionHelpText}
             />
             {/* <Field
                 id="proposal_media"
@@ -166,6 +164,14 @@ export class ProposalAdminContentForm extends Component<
                 image={proposal && proposal.media ? proposal.media.url : null}
                 label={illustration}
               /> */}
+            <ButtonToolbar>
+              <Button type="submit">
+                <FormattedMessage id="global.save" />
+              </Button>
+              {/* <Button type="submit">
+                <FormattedMessage id="global.save_and_close"/>
+              </Button> */}
+            </ButtonToolbar>
           </div>
         </form>
       </div>
@@ -174,7 +180,7 @@ export class ProposalAdminContentForm extends Component<
 }
 
 const form = reduxForm({
-  // onSubmit,
+  onSubmit,
   // validate,
   form: 'proposal-admin-edit',
 })(ProposalAdminContentForm);
@@ -198,21 +204,36 @@ export default createFragmentContainer(
       id
       title
       body
-      # author {
-      #   id
-      # }
-      # theme {
-      #   id
-      # }
-      # category {
-      #   id
-      # }
-      # address
-      # district {
-      #   id
-      # }
-      # description
-      # phone
+      form {
+        categories {
+          id
+          name
+        }
+        usingDistrict
+        districtMandatory
+        districtHelpText
+        usingThemes
+        themeMandatory
+        usingCategories
+        categoryMandatory
+        categoryHelpText
+        usingAddress
+        titleHelpText
+        descriptionHelpText
+      }
+      author {
+        id
+      }
+      theme {
+        id
+      }
+      category {
+        id
+      }
+      address
+      district {
+        id
+      }
     }
   `,
 );

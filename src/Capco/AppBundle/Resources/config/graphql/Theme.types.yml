@@ -1,0 +1,9 @@
+Theme:
+    type: object
+    config:
+        description: "A theme"
+        fields:
+            id:
+                type: "String!"
+            name:
+                type: "String!"

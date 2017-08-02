@@ -1,9 +1,11 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{% block sonata_header %}
-{% endblock %}
+{# {% block sonata_header %}
+{% endblock %} #}
 
-{% block sonata_wrapper %}
+{# {% block sonata_left_side %}
+{% endblock %} #}
+
 {% block form %}
 {% include '@CapcoApp/redux_store.html.twig' with {
   'project': admin.subject.proposalForm.step.getProject(),
@@ -31,17 +33,18 @@
   'rendering': 'client_side'
 }) }}
 {% endblock %}
-{% endblock %}
 
+{#
 {% block stylesheets %}
     <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 {% endblock %}
+#}
 
-{% block javascripts %}
+{# {% block javascripts %}
 <script src="{{ asset('js/vendor.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
 var App = require('Resources/js/app').default;
 </script>
-{% endblock %}
+{% endblock %} #}

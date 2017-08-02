@@ -11,6 +11,9 @@ PublicationStatus:
             TRASHED:
                 value: "TRASHED"
                 description: "Pubicly visible in the trash bin"
+            TRASHED_NOT_VISIBLE:
+                value: "TRASHED_NOT_VISIBLE"
+                description: "In the trash bin, content not visible"
             DELETED:
                 value: "DELETED"
                 description: "Not pubicly visible, deleted by author"

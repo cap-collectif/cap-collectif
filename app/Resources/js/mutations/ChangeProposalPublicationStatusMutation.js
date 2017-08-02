@@ -1,4 +1,6 @@
 import { commitMutation, graphql } from 'react-relay';
+import environment from '../createRelayEnvironment';
+import type { ChangeProposalPublicationStatusMutationVariables } from './__generated__/ChangeProposalContentMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalPublicationStatusMutation(
@@ -22,12 +24,10 @@ const mutation = graphql`
 //   };
 // }
 
-function commit(environment, publicationStatus, id) {
+function commit(variables: ChangeProposalPublicationStatusMutationVariables) {
   return commitMutation(environment, {
     mutation,
-    variables: {
-      input: { publicationStatus, id },
-    },
+    variables,
     onCompleted: () => {
       console.log('Success!');
     },

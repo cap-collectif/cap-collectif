@@ -24,6 +24,7 @@ const Field = React.createClass({
       'password',
       'captcha',
       'email',
+      'radio-buttons',
       'image',
       'medias',
     ]).isRequired,

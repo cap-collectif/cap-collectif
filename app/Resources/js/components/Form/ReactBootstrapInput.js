@@ -180,7 +180,7 @@ class ReactBootstrapInput extends Component {
     }
 
     if (type === 'radio-buttons') {
-      formControl = (
+      return (
         <ButtonGroup type="radio" value={value} {...props}>
           {children}
         </ButtonGroup>

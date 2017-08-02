@@ -153,6 +153,12 @@ interface ContributionWithAuthor {
 
 scalar DateTime
 
+# A theme
+type District {
+  id: String!
+  name: String!
+}
+
 # A contribution with an author
 interface EditableContribution {
   # Identifies the date and time when the object was last updated.
@@ -382,6 +388,11 @@ type PageInfo {
 
 # A budget contribution
 type Proposal {
+  theme: Theme
+  category: ProposalCategory
+  district: District
+  address: String
+
   # The author of the contribution.
   author: User!
 
@@ -402,6 +413,33 @@ type Proposal {
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
+
+  # Identifies the form where the contribution was submitted.
+  form: ProposalForm!
+}
+
+# A proposal category
+type ProposalCategory {
+  id: String!
+  name: String!
+}
+
+# A budget form
+type ProposalForm {
+  categories: [ProposalCategory!]!
+  usingThemes: Boolean!
+  themeMandatory: Boolean!
+  themeHelpText: String!
+  usingDistrict: Boolean!
+  districtMandatory: Boolean!
+  districtHelpText: String!
+  usingCategories: Boolean!
+  categoryMandatory: Boolean!
+  categoryHelpText: String!
+  usingAddress: Boolean!
+  titleHelpText: String!
+  descriptionHelpText: String!
+  customFields: [Question]
 }
 
 type ProposalPayload {
@@ -439,6 +477,9 @@ enum PublicationStatus {
   # Pubicly visible in the trash bin
   TRASHED
 
+  # In the trash bin, content not visible
+  TRASHED_NOT_VISIBLE
+
   # Not pubicly visible, deleted by author
   DELETED
 
@@ -468,6 +509,15 @@ type Query {
   ): [Opinion]
   section(id: ID!): Section
   proposal(id: ID!): Proposal
+}
+
+# A question
+type Question {
+  inputType: String!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String!
 }
 
 # A report
@@ -595,6 +645,12 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 
   # Returns 'source'.
   kind: String!
+}
+
+# A theme
+type Theme {
+  id: String!
+  name: String!
 }
 
 # A trashable contribution

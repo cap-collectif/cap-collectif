@@ -41,21 +41,21 @@ class ProposalType extends AbstractType
             ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
 
-        // if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
-        //     $builder->add('theme');
-        // }
-        //
-        // if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
-        //     $builder->add('district');
-        // }
-        //
-        // if ($form->isUsingCategories() && $form->getCategories()->count() > 0) {
-        //     $builder->add('category');
-        // }
-        //
-        // if ($form->getUsingAddress()) {
-        //     $builder->add('address', TextType::class);
-        // }
+        if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
+            $builder->add('theme');
+        }
+
+        if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
+            $builder->add('district');
+        }
+
+        if ($form->isUsingCategories() && $form->getCategories()->count() > 0) {
+            $builder->add('category');
+        }
+
+        if ($form->getUsingAddress()) {
+            $builder->add('address', TextType::class);
+        }
 
         // $builder
         //     ->add('responses', PolyCollectionType::class, [

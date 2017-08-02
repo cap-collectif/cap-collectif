@@ -5,6 +5,13 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
+
+  capco.resolver.proposalForm:
+      class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
+      tags:
+          - { name: overblog_graphql.resolver, alias: "proposalform_questions", method: "getQuestions" }
+
+
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
       tags:
