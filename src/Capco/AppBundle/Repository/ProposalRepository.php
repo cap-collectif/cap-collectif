@@ -307,9 +307,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'proposalForm')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('proposalForm.step = :step')
-            ->andWhere('proposal.address IS NOT NULL')
-            ->andWhere('proposal.address != \'\'')
             ->setParameter('step', $step);
+        $qb = $this->getWithFilledAddressQueryBuilder($qb);
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -321,9 +320,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('selections.selectionStep = :step')
-            ->andWhere('proposal.address IS NOT NULL')
-            ->andWhere('proposal.address != \'\'')
             ->setParameter('step', $step);
+        $qb = $this->getWithFilledAddressQueryBuilder($qb);
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -442,6 +440,12 @@ class ProposalRepository extends EntityRepository
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getWithFilledAddressQueryBuilder(QueryBuilder $queryBuilder, string $alias = 'proposal'): QueryBuilder
+    {
+        return $queryBuilder
+            ->andWhere($alias . '.address IS NOT NULL');
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
