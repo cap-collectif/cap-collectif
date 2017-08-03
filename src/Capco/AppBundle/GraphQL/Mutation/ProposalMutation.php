@@ -53,18 +53,19 @@ class ProposalMutation implements ContainerAwareInterface
       //     throw new UserError('You can not update');
       // }
 
-      $form = $formFactory->create(ProposalType::class, $proposal, [
-          'proposalForm' => $proposal->getProposalForm(),
-      ]);
+       $form = $formFactory->create(ProposalType::class, $proposal, [
+           'proposalForm' => $proposal->getProposalForm(),
+       ]);
 
         $logger = $this->container->get('logger');
         $values = $input->getRawArguments();
         unset($values['id']);
+
         $logger->info(json_encode($values));
 
         $form->submit($values);
         if (!$form->isValid()) {
-            throw new UserError('Input not valid');
+            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
 
         $em->persist($proposal);

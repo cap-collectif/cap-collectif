@@ -21,6 +21,7 @@ import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
 import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
+import Address from './Address';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -177,6 +178,10 @@ class ReactBootstrapInput extends Component {
           {children}
         </Radio>
       );
+    }
+
+    if (type === 'address') {
+      return <Address value={value} {...props} />;
     }
 
     if (type === 'radio-buttons') {

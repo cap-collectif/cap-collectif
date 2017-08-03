@@ -17,12 +17,14 @@ type Props = {
   districts: Array<Object>,
   features: FeatureToggles,
   handleSubmit: () => void,
+  intl: Object,
 };
 type State = void;
 
 const onSubmit = (values, dispatch, props) => {
+  console.log(values);
   const variables = {
-    input: { title: '', body: '', id: props.proposal.id },
+    input: { ...values, id: props.proposal.id },
   };
   ChangeProposalContentMutation.commit(variables);
 };
@@ -33,7 +35,14 @@ export class ProposalAdminContentForm extends Component<
   State,
 > {
   render() {
-    const { proposal, features, districts, themes, handleSubmit } = this.props;
+    const {
+      intl,
+      proposal,
+      features,
+      districts,
+      themes,
+      handleSubmit,
+    } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
     const optional = (
@@ -148,6 +157,17 @@ export class ProposalAdminContentForm extends Component<
                   </option>,
                 )}
               </Field>}
+            {form.usingAddress &&
+              <Field
+                id="proposal_address"
+                component={component}
+                type="address"
+                name="address"
+                label={<FormattedMessage id="proposal.map.form.field" />}
+                placeholder={intl.formatMessage({
+                  id: 'proposal.map.form.placeholder',
+                })}
+              />}
             <h4 className="h4">Présentation</h4>
             <Field
               id="proposal_body"
@@ -192,6 +212,10 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     title: props.proposal.title,
     body: props.proposal.body,
+    theme: props.proposal.theme.id,
+    category: props.proposal.category.id,
+    district: props.proposal.district.id,
+    address: props.proposal.address,
   },
 });
 

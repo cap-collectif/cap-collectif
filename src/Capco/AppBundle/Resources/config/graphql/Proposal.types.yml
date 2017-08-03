@@ -27,7 +27,7 @@ Proposal:
                 description: "The publication status."
                 resolve: "@=resolver('proposal_publicationStatus', [value])"
             id:
-                type: "ID!"
+                type: "String!"
                 description: "The content of the contribution."
             title:
                 type: "String!"

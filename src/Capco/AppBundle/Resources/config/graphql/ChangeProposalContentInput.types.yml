@@ -3,12 +3,21 @@ ChangeProposalContentInput:
     config:
         description: ""
         fields:
+            id:
+                type: "ID!"
+                description: "The proposal id"
             title:
                 type: "String"
                 description: "The new proposal title"
             body:
                 type: "HTML"
                 description: "The new proposal body"
-            id:
-              type: "ID!"
-              description: "The proposal id"
+            theme:
+              type: "String"
+              description: "The theme id"
+            category:
+              type: "String"
+              description: "The category id"
+            district:
+              type: "String"
+              description: "The district id"

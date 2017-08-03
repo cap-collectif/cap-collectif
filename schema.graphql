@@ -43,14 +43,23 @@ enum ArgumentValue {
 }
 
 input ChangeProposalContentInput {
+  # The proposal id
+  id: ID!
+
   # The new proposal title
   title: String
 
   # The new proposal body
   body: HTML
 
-  # The proposal id
-  id: ID!
+  # The theme id
+  theme: String
+
+  # The category id
+  category: String
+
+  # The district id
+  district: String
   clientMutationId: String
 }
 
@@ -403,7 +412,7 @@ type Proposal {
   publicationStatus: PublicationStatus!
 
   # The content of the contribution.
-  id: ID!
+  id: String!
 
   # Identifies the contribution title.
   title: String!

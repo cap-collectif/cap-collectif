@@ -16,6 +16,7 @@ const Field = React.createClass({
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
     type: PropTypes.oneOf([
+      'address',
       'text',
       'textarea',
       'editor',
