@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
+import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { FeatureToggles } from '../../../types';
 
@@ -47,21 +48,6 @@ const onSubmit = (values, dispatch, props) => {
   };
   ChangeProposalContentMutation.commit(variables, uploadables);
 };
-
-// eslint-disable-next-line react/prop-types
-const renderCustomFields = ({ fields }) =>
-  <div>
-    {fields.map((question, index) =>
-      <Field
-        key={question.id}
-        id={question.id}
-        name={`responses.${index}.value`}
-        type={question.inputType}
-        component={component}
-        label={question.title}
-      />,
-    )}
-  </div>;
 
 export class ProposalAdminContentForm extends Component<
   DefaultProps,
@@ -204,7 +190,30 @@ export class ProposalAdminContentForm extends Component<
             />
             <FieldArray
               name="responses"
-              component={renderCustomFields}
+              component={({ fields }) =>
+                <div>
+                  {fields.map((field, index) => {
+                    const response = this.props.proposal.responses.filter(
+                      res => res && res.question.id === field.id,
+                    )[0];
+                    return (
+                      <div>
+                        <Field
+                          key={field.id}
+                          id={field.id}
+                          name={`responses.${index}.value`}
+                          type={field.inputType}
+                          component={component}
+                          label={field.title}
+                        />
+                        {response &&
+                          response.medias &&
+                          response.medias.length &&
+                          <ProposalMediaResponse medias={response.medias} />}
+                      </div>
+                    );
+                  })}
+                </div>}
               fields={form.customFields}
             />
             <Field
@@ -285,6 +294,8 @@ export default createFragmentContainer(
         ... on MediaResponse {
           medias {
             id
+            name
+            size
             url
           }
         }

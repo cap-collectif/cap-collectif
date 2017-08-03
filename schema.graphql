@@ -192,6 +192,8 @@ type Media {
 
   # The url of the media.
   url: String!
+  name: String!
+  size: String!
 }
 
 # A response
@@ -199,7 +201,7 @@ type MediaResponse implements Response {
   question: Question!
 
   # Medias
-  medias: [Media]
+  medias: [Media]!
 }
 
 type Mutation {

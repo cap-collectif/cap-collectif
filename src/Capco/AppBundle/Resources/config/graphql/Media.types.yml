@@ -10,3 +10,7 @@ Media:
                 type: "String!"
                 description: "The url of the media."
                 resolve: "@=resolver('media_url', [value])"
+            name:
+              type: "String!"
+            size:
+              type: "String!"
