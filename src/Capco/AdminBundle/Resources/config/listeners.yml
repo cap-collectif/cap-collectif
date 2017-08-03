@@ -15,6 +15,7 @@ services:
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
       tags:
+          - { name: overblog_graphql.resolver, alias: "response_type", method: "resolveResponseType" }
           - { name: overblog_graphql.resolver, alias: "query_proposal", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_publicationStatus", method: "resolveProposalPublicationStatus" }
 

@@ -63,6 +63,12 @@ input ChangeProposalContentInput {
 
   # The address geocoded by google
   address: String
+
+  # The custom fields responses
+  responses: [ResponseInput]
+
+  # Set this to true to delete the current media
+  deleteCurrentMedia: Boolean
   clientMutationId: String
 }
 
@@ -186,6 +192,17 @@ type Media {
 
   # The url of the media.
   url: String!
+}
+
+# A response
+type MediaResponse implements Response {
+  question: Question!
+
+  # The value
+  value: String
+
+  # Medias
+  medias: [Media]
 }
 
 type Mutation {
@@ -400,6 +417,8 @@ type PageInfo {
 
 # A budget contribution
 type Proposal {
+  responses: [Response]!
+  media: Media
   theme: Theme
   category: ProposalCategory
   district: District
@@ -565,6 +584,20 @@ enum ReportingType {
   SPAM
   ERROR
   OFF_TOPIC
+}
+
+# A contribution with an author
+interface Response {
+  question: Question!
+}
+
+# A response
+input ResponseInput {
+  # The value
+  value: String
+
+  # The question id
+  question: Int!
 }
 
 # A section
@@ -754,6 +787,14 @@ type User {
 type UserType {
   # The name of the type.
   name: String!
+}
+
+# A response
+type ValueResponse implements Response {
+  question: Question!
+
+  # The value
+  value: String
 }
 
 # A version of contribution

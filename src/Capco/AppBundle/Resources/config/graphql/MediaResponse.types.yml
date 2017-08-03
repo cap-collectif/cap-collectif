@@ -1,0 +1,14 @@
+MediaResponse:
+    type: object
+    config:
+        interfaces: [Response]
+        description: "A response"
+        fields:
+            question:
+              type: "Question!"
+            value:
+              type: "String"
+              description: "The value"
+            medias:
+              type: "[Media]"
+              description: "Medias"

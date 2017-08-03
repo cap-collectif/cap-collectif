@@ -8,6 +8,10 @@ Proposal:
             #     type: "URI!"
             #     description: "The HTTP url for this contribution."
             #     resolve: "@=resolver('proposition_url', [value])"
+            responses:
+                type: "[Response]!"
+            media:
+                type: "Media"
             theme:
                 type: "Theme"
             category:

@@ -24,12 +24,28 @@ type State = void;
 const formName = 'proposal-admin-edit';
 
 const onSubmit = (values, dispatch, props) => {
-  console.log(values);
+  console.log('onSubmit', values);
+  // Only used for the user view
   delete values.addressText;
+
+  // We must remove Files to upload from variables and put them in uploadables
+  const uploadables = {};
+  if (values.media instanceof File) {
+    uploadables.media = values.media;
+    delete values.media;
+  }
+  values.responses = values.responses.filter(res => {
+    if (res.value && res.value[0] instanceof File) {
+      uploadables[`responses.${res.question}`] = res.value[0];
+      return false;
+    }
+    return true;
+  });
+
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalContentMutation.commit(variables);
+  ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
 // eslint-disable-next-line react/prop-types
@@ -79,12 +95,12 @@ export class ProposalAdminContentForm extends Component<
         {!form.districtMandatory && optional}
       </span>
     );
-    // const illustration = (
-    //   <span>
-    //     <FormattedMessage id="proposal.media" />
-    //     {optional}
-    //   </span>
-    // );
+    const illustration = (
+      <span>
+        <FormattedMessage id="proposal.media" />
+        {optional}
+      </span>
+    );
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -191,14 +207,14 @@ export class ProposalAdminContentForm extends Component<
               component={renderCustomFields}
               fields={form.customFields}
             />
-            {/* <Field
-                id="proposal_media"
-                name="media"
-                component={component}
-                type="image"
-                image={proposal && proposal.media ? proposal.media.url : null}
-                label={illustration}
-              /> */}
+            <Field
+              id="proposal_media"
+              name="media"
+              component={component}
+              type="image"
+              image={proposal && proposal.media ? proposal.media.url : null}
+              label={illustration}
+            />
             <ButtonToolbar>
               <Button type="submit">
                 <FormattedMessage id="global.save" />
@@ -231,11 +247,19 @@ const mapStateToProps = (state, props) => ({
     category: props.proposal.category.id,
     district: props.proposal.district.id,
     address: props.proposal.address,
-    responses: props.proposal.form.customFields.map(field => ({
-      question: field.id,
-      value: null,
-      // value: props.proposal.responses
-    })),
+    media: null,
+    responses: props.proposal.form.customFields.map(field => {
+      const response = props.proposal.responses.filter(
+        res => res.question.id === field.id,
+      )[0];
+      if (response) {
+        return {
+          question: parseInt(field.id, 10),
+          value: response.value,
+        };
+      }
+      return { question: parseInt(field.id, 10) };
+    }),
     addressText:
       props.proposal.address &&
       JSON.parse(props.proposal.address)[0].formatted_address,
@@ -251,6 +275,24 @@ export default createFragmentContainer(
       id
       title
       body
+      responses {
+        question {
+          id
+        }
+        ... on ValueResponse {
+          value
+        }
+        ... on MediaResponse {
+          medias {
+            id
+            url
+          }
+        }
+      }
+      media {
+        id
+        url
+      }
       form {
         categories {
           id

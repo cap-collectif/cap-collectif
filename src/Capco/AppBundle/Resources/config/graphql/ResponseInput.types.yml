@@ -1,0 +1,11 @@
+ResponseInput:
+    type: input-object
+    config:
+        description: "A response"
+        fields:
+            value:
+              type: "String"
+              description: "The value"
+            question:
+              type: "Int!"
+              description: "The question id"

@@ -70,15 +70,15 @@ class ProposalType extends AbstractType
             ])
         ;
 
-        $builder->add('media', MediaType::class, [
-            'required' => false,
-            'provider' => 'sonata.media.provider.image',
-            'context' => 'default',
-        ])
-        ->add('delete_media', CheckboxType::class, [
-            'required' => false,
-            'mapped' => false,
-        ]);
+        // $builder->add('media', MediaType::class, [
+        //     'required' => false,
+        //     'provider' => 'sonata.media.provider.image',
+        //     'context' => 'default',
+        // ])
+        // ->add('delete_media', CheckboxType::class, [
+        //     'required' => false,
+        //     'mapped' => false,
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -16,9 +16,13 @@ const mutation = graphql`
   }
 `;
 
-function commit(variables: ChangeProposalContentMutationVariables) {
+function commit(
+  variables: ChangeProposalContentMutationVariables,
+  uploadables: any = undefined,
+) {
   return commitMutation(environment, {
     mutation,
+    uploadables,
     variables,
     onCompleted: (response: ChangeProposalContentMutationResponse) => {
       console.log('Success!', response);

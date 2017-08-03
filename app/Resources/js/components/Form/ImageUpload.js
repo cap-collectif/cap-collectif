@@ -75,6 +75,7 @@ const ImageUpload = React.createClass({
               valueLink.requestChange(newValue);
             }
             if (onChange && typeof onChange !== 'undefined') {
+              console.log(newValue);
               onChange(newValue);
             }
           }

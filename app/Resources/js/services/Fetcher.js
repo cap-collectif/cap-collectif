@@ -29,7 +29,7 @@ export const createHeaders = (): { [string]: string } => {
   return headers;
 };
 
-const createFormDataHeaders = () => {
+export const createFormDataHeaders = () => {
   const headers = {};
 
   if (LocalStorageService.isValid('jwt')) {

@@ -8,6 +8,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProposalMutation implements ContainerAwareInterface
@@ -39,53 +40,73 @@ class ProposalMutation implements ContainerAwareInterface
     public function changeContent(Argument $input, Request $request)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
+        $mediaManager = $this->container->get('capco.media.manager');
 
-        $proposal = $em->find('CapcoAppBundle:Proposal', $input['id']);
+        $values = $input->getRawArguments();
+        $proposal = $em->find('CapcoAppBundle:Proposal', $values['id']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $input['id']));
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
+        }
+        // if (!$proposal->canContribute()) {
+        //     throw new UserError('This proposal is no longer editable.');
+        // }
+
+        // if ($this->getUser() !== $proposal->getAuthor()) {
+        //     throw new UserError('You can not update');
+        // }
+
+        unset($values['id']); // This only usefull to retrieve the proposal
+
+        // Handle media deletion
+        if ($values['deleteCurrentMedia'] === true) {
+            if ($proposal->getMedia()) {
+                $em->remove($proposal->getMedia());
+                $proposal->setMedia(null);
+            }
+        }
+        unset($values['deleteCurrentMedia']);
+
+        // Handle File upload for key `media`
+        $uploadedMedia = $request->files->get('media');
+        if ($uploadedMedia instanceof UploadedFile) {
+            $logger->info('UploadedMedia:' . $uploadedMedia->getClientOriginalName());
+            if ($proposal->getMedia()) {
+                $em->remove($proposal->getMedia());
+            }
+            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
+            $proposal->setMedia($media);
+            // $em->flush();
+            $request->files->remove('media');
         }
 
-        // if ($uploadedMedia = $request->files->get('media')) {
-        //     $media = $this->container->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
-        //     $proposal->setMedia($media);
-        //     $request->files->remove('media');
-        // }
-        //
-        // $request->files->remove('media');
-        // $request->request->remove('media');
-        // $request->request->remove('delete_media');
-        //
-        // if (count($request->files->all()) > 0) {
-        //     $this->container->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
-        //     $em->persist($proposal);
-        //     $em->flush();
-        // }
+        // Now we handle file uploads for every responses
+        foreach ($request->files->all() as $key => $file) {
+            $questionId = str_replace('responses.', '', $key);
+            $response = $proposal->getResponses()->filter(
+                  function (AbstractResponse $element) use ($questionId) {
+                      return (int) $element->getQuestion()->getId() === (int) $questionId;
+                  }
+              )->first();
+            if (!$response) {
+                throw new UserError(sprintf('Unknown response for question with id "%d"', $questionId));
+            }
+            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
+            $response->addMedia($media);
+        }
 
-      // if (!$proposal->canContribute()) {
-      //     throw new UserError('This proposal is no longer editable.');
-      // }
-
-      // if ($this->getUser() !== $proposal->getAuthor()) {
-      //     throw new UserError('You can not update');
-      // }
-
+       // Now we can submit the form without anything related to file uploads
        $form = $formFactory->create(ProposalType::class, $proposal, [
            'proposalForm' => $proposal->getProposalForm(),
        ]);
-
-        $logger = $this->container->get('logger');
-        $values = $input->getRawArguments();
-        unset($values['id']);
-
-        $logger->info(json_encode($values));
 
         $form->submit($values);
         if (!$form->isValid()) {
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
 
-        $em->persist($proposal);
+        // $em->persist($proposal);
         $em->flush();
 
         return ['proposal' => $proposal];

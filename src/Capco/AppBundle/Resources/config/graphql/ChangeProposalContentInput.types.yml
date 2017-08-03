@@ -1,7 +1,7 @@
 ChangeProposalContentInput:
     type: relay-mutation-input
     config:
-        description: ""
+        description: "Can provide a file `media` or `responses.x` where x is the question id"
         fields:
             id:
                 type: "ID!"
@@ -24,3 +24,9 @@ ChangeProposalContentInput:
             address:
               type: "String"
               description: "The address geocoded by google"
+            responses:
+              type: "[ResponseInput]"
+              description: "The custom fields responses"
+            deleteCurrentMedia:
+              type: "Boolean"
+              description: "Set this to true to delete the current media"
