@@ -6,6 +6,8 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminSelections from './ProposalAdminSelections';
 import ProposalAdminStatusForm from './ProposalAdminStatusForm';
 import ProposalAdminContentForm from './ProposalAdminContentForm';
+import ProposalAdminNotationForm from './ProposalAdminNotationForm';
+import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import Loader from '../../Utils/Loader';
 // import type { ProposalAdminPageQueryResponse } from './__generated__/ProposalAdminPageQuery.graphql';
 
@@ -35,14 +37,14 @@ const renderProposalAdminPage = ({
           <Tab eventKey={2} title="Contenu">
             <ProposalAdminContentForm {...props} />
           </Tab>
-          <Tab eventKey={3} title="Suivi">
-            <ProposalAdminSelections {...props} />
-          </Tab>
-          <Tab eventKey={4} title="Evalutation">
-            <ProposalAdminSelections {...props} />
-          </Tab>
           <Tab eventKey={5} title="Avancement">
             <ProposalAdminSelections {...props} />
+          </Tab>
+          <Tab eventKey={3} title="Actualité">
+            <ProposalAdminNewsForm {...props} />
+          </Tab>
+          <Tab eventKey={4} title="Evalutation">
+            <ProposalAdminNotationForm {...props} />
           </Tab>
           <Tab eventKey={6} title="Publication">
             <ProposalAdminStatusForm {...props} />
@@ -71,6 +73,7 @@ export default class ProposalAdminPage extends Component<
                 ...ProposalAdminStatusForm_proposal
                 ...ProposalAdminSelections_proposal
                 ...ProposalAdminContentForm_proposal
+                ...ProposalAdminNotationForm_proposal
               }
             }
           `}

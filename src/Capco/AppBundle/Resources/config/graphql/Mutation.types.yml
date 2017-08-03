@@ -14,3 +14,9 @@ Mutation:
                     inputType: ChangeProposalContentInput
                     payloadType: ProposalPayload
                     mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"
+          changeProposalNotation:
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeProposalNotationInput
+                    payloadType: ProposalPayload
+                    mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"

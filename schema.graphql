@@ -72,6 +72,12 @@ input ChangeProposalContentInput {
   clientMutationId: String
 }
 
+input ChangeProposalNotationInput {
+  # The proposal id
+  id: ID!
+  clientMutationId: String
+}
+
 input ChangeProposalPublicationStatusInput {
   # The new publication status
   publicationStatus: PublicationStatus!
@@ -207,6 +213,7 @@ type MediaResponse implements Response {
 type Mutation {
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ProposalPayload
   changeProposalContent(input: ChangeProposalContentInput!): ProposalPayload
+  changeProposalNotation(input: ChangeProposalNotationInput!): ProposalPayload
 }
 
 # A contribution
