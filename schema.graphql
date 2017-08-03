@@ -60,6 +60,9 @@ input ChangeProposalContentInput {
 
   # The district id
   district: String
+
+  # The address geocoded by google
+  address: String
   clientMutationId: String
 }
 
@@ -448,7 +451,7 @@ type ProposalForm {
   usingAddress: Boolean!
   titleHelpText: String!
   descriptionHelpText: String!
-  customFields: [Question]
+  customFields: [Question!]!
 }
 
 type ProposalPayload {
@@ -522,6 +525,8 @@ type Query {
 
 # A question
 type Question {
+  id: String!
+  title: String!
   inputType: String!
   position: Int!
   private: Boolean!

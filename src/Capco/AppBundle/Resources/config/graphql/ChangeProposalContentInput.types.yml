@@ -21,3 +21,6 @@ ChangeProposalContentInput:
             district:
               type: "String"
               description: "The district id"
+            address:
+              type: "String"
+              description: "The address geocoded by google"

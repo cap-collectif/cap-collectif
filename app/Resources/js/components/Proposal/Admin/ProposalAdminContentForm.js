@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
@@ -21,13 +21,31 @@ type Props = {
 };
 type State = void;
 
+const formName = 'proposal-admin-edit';
+
 const onSubmit = (values, dispatch, props) => {
   console.log(values);
+  delete values.addressText;
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
   ChangeProposalContentMutation.commit(variables);
 };
+
+// eslint-disable-next-line react/prop-types
+const renderCustomFields = ({ fields }) =>
+  <div>
+    {fields.map((question, index) =>
+      <Field
+        key={question.id}
+        id={question.id}
+        name={`responses.${index}.value`}
+        type={question.inputType}
+        component={component}
+        label={question.title}
+      />,
+    )}
+  </div>;
 
 export class ProposalAdminContentForm extends Component<
   DefaultProps,
@@ -35,14 +53,7 @@ export class ProposalAdminContentForm extends Component<
   State,
 > {
   render() {
-    const {
-      intl,
-      proposal,
-      features,
-      districts,
-      themes,
-      handleSubmit,
-    } = this.props;
+    const { proposal, features, districts, themes, handleSubmit } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
     const optional = (
@@ -162,11 +173,10 @@ export class ProposalAdminContentForm extends Component<
                 id="proposal_address"
                 component={component}
                 type="address"
-                name="address"
+                name="addressText"
+                formName={formName}
                 label={<FormattedMessage id="proposal.map.form.field" />}
-                placeholder={intl.formatMessage({
-                  id: 'proposal.map.form.placeholder',
-                })}
+                placeholder="proposal.map.form.placeholder"
               />}
             <h4 className="h4">Présentation</h4>
             <Field
@@ -175,6 +185,11 @@ export class ProposalAdminContentForm extends Component<
               name="body"
               component={component}
               label={<FormattedMessage id="proposal.body" />}
+            />
+            <FieldArray
+              name="responses"
+              component={renderCustomFields}
+              fields={form.customFields}
             />
             {/* <Field
                 id="proposal_media"
@@ -202,7 +217,7 @@ export class ProposalAdminContentForm extends Component<
 const form = reduxForm({
   onSubmit,
   // validate,
-  form: 'proposal-admin-edit',
+  form: formName,
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state, props) => ({
@@ -216,6 +231,14 @@ const mapStateToProps = (state, props) => ({
     category: props.proposal.category.id,
     district: props.proposal.district.id,
     address: props.proposal.address,
+    responses: props.proposal.form.customFields.map(field => ({
+      question: field.id,
+      value: null,
+      // value: props.proposal.responses
+    })),
+    addressText:
+      props.proposal.address &&
+      JSON.parse(props.proposal.address)[0].formatted_address,
   },
 });
 
@@ -232,6 +255,14 @@ export default createFragmentContainer(
         categories {
           id
           name
+        }
+        customFields {
+          id
+          title
+          inputType
+          position
+          private
+          required
         }
         usingDistrict
         districtMandatory

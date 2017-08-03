@@ -9,7 +9,7 @@ services:
   capco.resolver.proposalForm:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
-          - { name: overblog_graphql.resolver, alias: "proposalform_questions", method: "getQuestions" }
+          - { name: overblog_graphql.resolver, alias: "proposalform_questions", method: "resolveQuestions" }
 
 
   capco.resolver.proposals:

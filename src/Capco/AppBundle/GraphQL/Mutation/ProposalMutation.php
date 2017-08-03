@@ -8,6 +8,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -35,7 +36,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input)
+    public function changeContent(Argument $input, Request $request)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
@@ -44,6 +45,22 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $input['id']));
         }
+
+        // if ($uploadedMedia = $request->files->get('media')) {
+        //     $media = $this->container->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
+        //     $proposal->setMedia($media);
+        //     $request->files->remove('media');
+        // }
+        //
+        // $request->files->remove('media');
+        // $request->request->remove('media');
+        // $request->request->remove('delete_media');
+        //
+        // if (count($request->files->all()) > 0) {
+        //     $this->container->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
+        //     $em->persist($proposal);
+        //     $em->flush();
+        // }
 
       // if (!$proposal->canContribute()) {
       //     throw new UserError('This proposal is no longer editable.');

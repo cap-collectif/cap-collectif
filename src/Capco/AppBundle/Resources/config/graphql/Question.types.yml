@@ -4,6 +4,10 @@ Question:
         description: "A question"
         # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
+            id:
+                type: "String!"
+            title:
+                type: "String!"
             inputType:
                 type: "String!"
             position:

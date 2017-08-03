@@ -31,5 +31,5 @@ ProposalForm:
             descriptionHelpText:
                 type: "String!"
             customFields:
-                type: "[Question]"
+                type: "[Question!]!"
                 resolve: "@=resolver('proposalform_questions', [value])"

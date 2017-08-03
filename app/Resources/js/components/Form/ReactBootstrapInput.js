@@ -96,6 +96,7 @@ class ReactBootstrapInput extends Component {
     children,
     value,
     type,
+    formName,
     errors,
     image,
     medias,
@@ -181,7 +182,7 @@ class ReactBootstrapInput extends Component {
     }
 
     if (type === 'address') {
-      return <Address value={value} {...props} />;
+      return <Address formName={formName} value={value} {...props} />;
     }
 
     if (type === 'radio-buttons') {

@@ -13,6 +13,7 @@ const Field = React.createClass({
     divClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     help: PropTypes.string,
+    formName: PropTypes.string,
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
     type: PropTypes.oneOf([
@@ -60,6 +61,7 @@ const Field = React.createClass({
       labelClassName,
       disabled,
       help,
+      formName,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -69,6 +71,7 @@ const Field = React.createClass({
         type={type}
         name={name}
         help={help}
+        formName={formName}
         disabled={disabled}
         popover={popover}
         wrapperClassName={wrapperClassName || ''}

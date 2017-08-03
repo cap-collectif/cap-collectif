@@ -13,4 +13,4 @@ Mutation:
                 builderConfig:
                     inputType: ChangeProposalContentInput
                     payloadType: ProposalPayload
-                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value])"
+                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"

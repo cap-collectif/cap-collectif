@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { change } from 'redux-form';
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from 'react-places-autocomplete';
@@ -10,6 +12,8 @@ type Props = {
   name: String,
   id: String,
   placeholder: String,
+  formName: String,
+  updateAddressValue: Function,
 };
 
 // eslint-disable-next-line react/prop-types
@@ -25,40 +29,32 @@ class Address extends Component<void, Props, void> {
     disabled: false,
   };
 
-  resetAddressField() {
-    // this.setState(prevState => ({
-    //   form: { ...prevState.form, address: '' },
-    // }));
-    // this.setState(prevState => ({
-    //   ...prevState,
-    //   address: '',
-    //   errors: {
-    //     ...prevState.errors,
-    //     address: [{ message: 'proposal.constraints.address' }],
-    //   },
-    // }));
-  }
+  resetAddressField = () => {
+    this.props.onChange(null);
+    this.props.updateAddressValue(null);
+  };
 
-  handleAddressChange(address) {
+  handleAddressChange = address => {
     geocodeByAddress(address)
       .then(results => {
         const addressToSend = JSON.stringify(results);
         const addressText = results[0].formatted_address;
-        console.log(address, addressToSend, addressText);
+        this.props.onChange(addressText);
+        this.props.updateAddressValue(addressToSend);
       })
       .catch(error => {
-        // this.resetAddressField();
+        this.resetAddressField();
         console.error('Google places error!', error); // eslint-disable-line
       });
-  }
+  };
 
   render() {
-    const { placeholder, value, id } = this.props;
+    const { placeholder, value, id, onChange } = this.props;
     return (
       <PlacesAutocomplete
         inputProps={{
           onChange: address => {
-            console.log(address);
+            onChange(address);
           },
           placeholder,
           value,
@@ -76,29 +72,16 @@ class Address extends Component<void, Props, void> {
           //   ? 'form-control-warning'
           //   : ''}`,
           input: 'form-control',
-          autocompleteContainer: {
-            zIndex: 9999,
-            position: 'absolute',
-            top: '100%',
-            backgroundColor: 'white',
-            border: '1px solid #555555',
-            width: '100%',
-          },
-          autocompleteItem: {
-            zIndex: 9999,
-            backgroundColor: '#ffffff',
-            padding: '10px',
-            color: '#555555',
-            cursor: 'pointer',
-          },
-          autocompleteItemActive: {
-            zIndex: 9999,
-            backgroundColor: '#fafafa',
-          },
         }}
       />
     );
   }
 }
 
-export default Address;
+const mapDispatchToProps = (dispatch, props) => ({
+  updateAddressValue: value => {
+    dispatch(change(props.formName, 'address', value));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Address);
