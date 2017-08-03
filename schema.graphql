@@ -198,9 +198,6 @@ type Media {
 type MediaResponse implements Response {
   question: Question!
 
-  # The value
-  value: String
-
   # Medias
   medias: [Media]
 }
