@@ -45,7 +45,7 @@ Query:
                         type: "ID!"
                 resolve: "@=resolver('query_section', [args])"
             proposal:
-                type: "Proposal"
+                type: "Proposal!"
                 args:
                     id:
                         type: "ID!"

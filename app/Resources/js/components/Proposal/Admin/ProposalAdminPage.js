@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
+import { injectIntl } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminSelections from './ProposalAdminSelections';
@@ -9,7 +10,6 @@ import ProposalAdminContentForm from './ProposalAdminContentForm';
 import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import Loader from '../../Utils/Loader';
-// import type { ProposalAdminPageQueryResponse } from './__generated__/ProposalAdminPageQuery.graphql';
 
 type DefaultProps = void;
 type Props = { proposalId: number };
@@ -18,9 +18,11 @@ type State = void;
 const renderProposalAdminPage = ({
   error,
   props,
+  intl,
 }: {
   error: ?string,
-  props: any, // ProposalAdminPageQueryResponse
+  intl: any,
+  props: any,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -28,25 +30,37 @@ const renderProposalAdminPage = ({
   }
   if (props) {
     // eslint-disable-next-line
-    if (props.proposal) {
+    if (props.proposal !== null) {
       return (
         <Tabs defaultActiveKey={2} id="proposal-admin-page-tabs">
-          <Tab eventKey={1} title="Activité" disabled>
-            Activité
-          </Tab>
-          <Tab eventKey={2} title="Contenu">
+          <Tab
+            eventKey={1}
+            title={intl.formatMessage({ id: 'proposal.admin.activity' })}
+            disabled
+          />
+          <Tab
+            eventKey={2}
+            title={intl.formatMessage({ id: 'proposal.admin.content' })}>
             <ProposalAdminContentForm {...props} />
           </Tab>
-          <Tab eventKey={5} title="Avancement">
+          <Tab
+            eventKey={3}
+            title={intl.formatMessage({ id: 'proposal.admin.advancement' })}>
             <ProposalAdminSelections {...props} />
           </Tab>
-          <Tab eventKey={3} title="Actualité">
+          <Tab
+            eventKey={4}
+            title={intl.formatMessage({ id: 'proposal.admin.news' })}>
             <ProposalAdminNewsForm {...props} />
           </Tab>
-          <Tab eventKey={4} title="Evalutation">
+          <Tab
+            eventKey={5}
+            title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
             <ProposalAdminNotationForm {...props} />
           </Tab>
-          <Tab eventKey={6} title="Publication">
+          <Tab
+            eventKey={6}
+            title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
             <ProposalAdminStatusForm {...props} />
           </Tab>
         </Tabs>
@@ -56,6 +70,8 @@ const renderProposalAdminPage = ({
   }
   return <Loader />;
 };
+
+const render = injectIntl(renderProposalAdminPage);
 
 export default class ProposalAdminPage extends Component<
   DefaultProps,
@@ -74,13 +90,14 @@ export default class ProposalAdminPage extends Component<
                 ...ProposalAdminSelections_proposal
                 ...ProposalAdminContentForm_proposal
                 ...ProposalAdminNotationForm_proposal
+                ...ProposalAdminNewsForm_proposal
               }
             }
           `}
           variables={{
             id: this.props.proposalId,
           }}
-          render={renderProposalAdminPage}
+          render={render}
         />
       </div>
     );

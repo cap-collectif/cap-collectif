@@ -569,7 +569,7 @@ type Query {
     limit: Int!
   ): [Opinion]
   section(id: ID!): Section
-  proposal(id: ID!): Proposal
+  proposal(id: ID!): Proposal!
 }
 
 # A question

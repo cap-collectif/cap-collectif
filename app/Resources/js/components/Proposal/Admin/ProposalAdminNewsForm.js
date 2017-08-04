@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdminNewsForm_proposal.graphql';
@@ -21,13 +21,16 @@ export class ProposalAdminNewsForm extends Component<
     return (
       <div className="box box-primary">
         <div className="box-header">
-          <h4 className="box-title">Actualité</h4>
+          <h4 className="box-title">
+            <FormattedMessage id="proposal.admin.news" />
+          </h4>
           <a
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite">
-            <i className="fa fa-info-circle" /> Aide
+            <i className="fa fa-info-circle" />{' '}
+            <FormattedMessage id="global.help" />
           </a>
         </div>
         <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
