@@ -2,8 +2,14 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import {
+  ButtonToolbar,
+  Button,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
 import type { State } from '../../../types';
 import component from '../../Form/Field';
@@ -21,7 +27,7 @@ type PassedProps = {
 };
 type Props = {
   proposal: ProposalAdminSelections_proposal,
-  advancement: Array<Object>,
+  handleSubmit: Function,
 };
 type DefaultProps = void;
 
@@ -36,7 +42,7 @@ export class ProposalAdminSelections extends Component<
 > {
   render() {
     console.log('ProposalAdminSelections', this.props);
-    const { proposal } = this.props;
+    const { proposal, handleSubmit } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
@@ -48,18 +54,19 @@ export class ProposalAdminSelections extends Component<
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/115-section-avancement">
+            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#avancement">
             <i className="fa fa-info-circle" /> Aide
           </a>
           <h5 style={{ marginBottom: 0, fontWeight: 'bold' }}>Etapes</h5>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
             <ListGroupItem>
               <div>
                 <strong>{collectStep.title}</strong> -{' '}
                 <span>Etape de dépôt</span>
               </div>
+              <br />
               <Field
                 label="Publié dans cette étape"
                 name={`sdqsdqsd`}
@@ -88,6 +95,7 @@ export class ProposalAdminSelections extends Component<
                   <strong>{step.title}</strong> -{' '}
                   <span>Etape de sélection</span>
                 </div>
+                <br />
                 <Field
                   label="Publié dans cette étape"
                   name={`selections.${index}.selected`}
@@ -115,6 +123,11 @@ export class ProposalAdminSelections extends Component<
               </ListGroupItem>,
             )}
           </ListGroup>
+          <ButtonToolbar>
+            <Button type="submit">
+              <FormattedMessage id="global.save" />
+            </Button>
+          </ButtonToolbar>
         </form>
       </div>
     );

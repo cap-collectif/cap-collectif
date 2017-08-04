@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -25,6 +26,18 @@ class ProposalResolver implements ContainerAwareInterface
     public function resolveProjectSteps(Project $project)
     {
         return $project->getRealSteps();
+    }
+
+    public function resolvePostAbstract(Post $post): string
+    {
+        return $post->getAbstractOrBeginningOfTheText();
+    }
+
+    public function resolveNews(Proposal $proposal)
+    {
+        $postRepo = $this->container->get('capco.blog.post.repository');
+
+        return $postRepo->getPublishedPostsByProposal($proposal);
     }
 
     public function resolveStepType(AbstractStep $step)

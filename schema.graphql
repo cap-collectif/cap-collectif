@@ -428,6 +428,12 @@ type PageInfo {
   endCursor: String
 }
 
+type Post {
+  id: String!
+  title: String!
+  abstract: String!
+}
+
 # A budget contribution
 type Project {
   steps: [Step!]!
@@ -435,6 +441,7 @@ type Project {
 
 # A budget contribution
 type Proposal {
+  news: [Post!]!
   project: Project!
   status: Status
   selections: [Selection!]!

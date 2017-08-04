@@ -8,6 +8,9 @@ Proposal:
             #     type: "URI!"
             #     description: "The HTTP url for this contribution."
             #     resolve: "@=resolver('proposition_url', [value])"
+            news:
+              type: "[Post!]!"
+              resolve: "@=resolver('proposal_news', [value])"
             project:
               type: "Project!"
             status:
