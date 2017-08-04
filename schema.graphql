@@ -87,6 +87,13 @@ input ChangeProposalPublicationStatusInput {
   clientMutationId: String
 }
 
+type CollectStep implements Step {
+  id: ID!
+  kind: String!
+  title: String!
+  statuses: [Status!]!
+}
+
 # A consultation
 type Consultation {
   # The id of the consultation.
@@ -422,7 +429,17 @@ type PageInfo {
 }
 
 # A budget contribution
+type Project {
+  steps: [Step!]!
+}
+
+# A budget contribution
 type Proposal {
+  project: Project!
+  status: Status
+  selections: [Selection!]!
+  likers: [User!]!
+  estimation: Int
   responses: [Response]!
   media: Media
   theme: Theme
@@ -663,6 +680,20 @@ type SectionAppendixType {
   title: String
 }
 
+# A budget contribution
+type Selection {
+  step: SelectionStep!
+  status: Status
+}
+
+# A budget contribution
+type SelectionStep implements Step {
+  id: ID!
+  kind: String!
+  title: String!
+  statuses: [Status!]!
+}
+
 # A source
 type Source implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
@@ -698,6 +729,18 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 
   # Returns 'source'.
   kind: String!
+}
+
+type Status {
+  id: String!
+  name: String!
+}
+
+# A step in a project
+interface Step {
+  id: ID!
+  kind: String!
+  title: String!
 }
 
 # A theme

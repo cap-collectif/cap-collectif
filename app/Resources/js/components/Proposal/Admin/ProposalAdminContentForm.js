@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
+import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { FeatureToggles } from '../../../types';
@@ -63,30 +64,6 @@ export class ProposalAdminContentForm extends Component<
         <FormattedMessage id="global.form.optional" />
       </span>
     );
-    const themeLabel = (
-      <span>
-        <FormattedMessage id="proposal.theme" />
-        {!form.themeMandatory && optional}
-      </span>
-    );
-    const categoryLabel = (
-      <span>
-        <FormattedMessage id="proposal.category" />
-        {!form.categoryMandatory && optional}
-      </span>
-    );
-    const districtLabel = (
-      <span>
-        <FormattedMessage id="proposal.district" />
-        {!form.districtMandatory && optional}
-      </span>
-    );
-    const illustration = (
-      <span>
-        <FormattedMessage id="proposal.media" />
-        {optional}
-      </span>
-    );
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -107,6 +84,32 @@ export class ProposalAdminContentForm extends Component<
               label={<FormattedMessage id="proposal.title" />}
             />
             <h4 className="h4">Métadonnées</h4>
+            <Field
+              name="author"
+              label="Auteur"
+              id="proposal-admin-author"
+              labelClassName="control-label"
+              inputClassName="qdnsqdnqsldnqsldn"
+              options={[
+                {
+                  label: proposal.author.displayName,
+                  value: proposal.author.id,
+                },
+              ]}
+              component={select}
+              clearable={false}
+              autoload={false}
+              cache={false}
+              loadOptions={() =>
+                Promise.resolve({
+                  options: [
+                    {
+                      label: proposal.author.displayName,
+                      value: proposal.author.id,
+                    },
+                  ],
+                })}
+            />
             {features.themes &&
               form.usingThemes &&
               <Field
@@ -114,7 +117,12 @@ export class ProposalAdminContentForm extends Component<
                 id="proposal_theme"
                 type="select"
                 component={component}
-                label={themeLabel}>
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.theme" />
+                    {!form.themeMandatory && optional}
+                  </span>
+                }>
                 <FormattedMessage id="proposal.select.theme">
                   {message =>
                     <option value="">
@@ -134,20 +142,23 @@ export class ProposalAdminContentForm extends Component<
                 type="select"
                 name="category"
                 component={component}
-                label={categoryLabel}>
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.category" />
+                    {!form.categoryMandatory && optional}
+                  </span>
+                }>
                 <FormattedMessage id="proposal.select.category">
                   {message =>
                     <option value="">
                       {message}
                     </option>}
                 </FormattedMessage>
-                {categories.map(category => {
-                  return (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  );
-                })}
+                {categories.map(category =>
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>,
+                )}
               </Field>}
             {features.districts &&
               form.usingDistrict &&
@@ -157,7 +168,12 @@ export class ProposalAdminContentForm extends Component<
                 type="select"
                 name="district"
                 component={component}
-                label={districtLabel}>
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.district" />
+                    {!form.districtMandatory && optional}
+                  </span>
+                }>
                 <FormattedMessage id="proposal.select.district">
                   {message =>
                     <option value="">
@@ -222,7 +238,12 @@ export class ProposalAdminContentForm extends Component<
               component={component}
               type="image"
               image={proposal && proposal.media ? proposal.media.url : null}
-              label={illustration}
+              label={
+                <span>
+                  <FormattedMessage id="proposal.media" />
+                  {optional}
+                </span>
+              }
             />
             <ButtonToolbar>
               <Button type="submit">
@@ -252,6 +273,7 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     title: props.proposal.title,
     body: props.proposal.body,
+    author: props.proposal.author.id,
     theme: props.proposal.theme.id,
     category: props.proposal.category.id,
     district: props.proposal.district.id,
@@ -331,6 +353,7 @@ export default createFragmentContainer(
       }
       author {
         id
+        displayName
       }
       theme {
         id

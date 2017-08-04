@@ -1,0 +1,14 @@
+CollectStep:
+    type: object
+    config:
+        interfaces: [Step]
+        fields:
+            id:
+              type: "ID!"
+            kind:
+               type: "String!"
+               resolve: "collect"
+            title:
+               type: "String!"
+            statuses:
+                type: "[Status!]!"

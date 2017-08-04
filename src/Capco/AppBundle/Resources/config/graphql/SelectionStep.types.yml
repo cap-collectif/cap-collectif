@@ -1,0 +1,15 @@
+SelectionStep:
+    type: object
+    config:
+        interfaces: [Step]
+        description: "A budget contribution"
+        fields:
+            id:
+              type: "ID!"
+            kind:
+               type: "String!"
+               resolve: "selection"
+            title:
+               type: "String!"
+            statuses:
+                type: "[Status!]!"

@@ -2,10 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -14,6 +21,33 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ProposalResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+
+    public function resolveProjectSteps(Project $project)
+    {
+        return $project->getRealSteps();
+    }
+
+    public function resolveStepType(AbstractStep $step)
+    {
+        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
+        if ($step instanceof SelectionStep) {
+            return $typeResolver->resolve('SelectionStep');
+        }
+        if ($step instanceof CollectStep) {
+            return $typeResolver->resolve('CollectStep');
+        }
+        if ($step instanceof PresentationStep) {
+            return $typeResolver->resolve('PresentationStep');
+        }
+        if ($step instanceof QuestionnaireStep) {
+            return $typeResolver->resolve('QuestionnaireStep');
+        }
+        if ($step instanceof ConsultationStep) {
+            return $typeResolver->resolve('Consultation');
+        }
+
+        throw new UserError('Could not resolve type of Step.');
+    }
 
     public function resolveResponseType(AbstractResponse $response)
     {

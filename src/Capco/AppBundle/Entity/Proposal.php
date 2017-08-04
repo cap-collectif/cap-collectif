@@ -553,6 +553,13 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $steps;
     }
 
+    public function getProject()
+    {
+        if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
+            return $this->getProposalForm()->getStep()->getProject();
+        }
+    }
+
     public function getProjectId()
     {
         if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {

@@ -76,3 +76,5 @@ export const renderSelect = React.createClass({
     );
   },
 });
+
+export default renderSelect;

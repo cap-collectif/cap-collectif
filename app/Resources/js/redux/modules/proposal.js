@@ -46,10 +46,6 @@ type LoadMarkersSuccessAction = {
   type: 'proposal/LOAD_MARKERS_SUCCEEDED',
   markers: Object,
 };
-type LoadSelectionsSucessAction = {
-  type: 'proposal/LOAD_SELECTIONS_SUCCEEDED',
-  proposalId: number,
-};
 type CloseCreateFusionModalAction = {
   type: 'proposal/CLOSE_CREATE_FUSION_MODAL',
 };
@@ -108,15 +104,6 @@ type RequestLoadProposalsAction = {
 };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
-type SendProposalNotificationSuceedAction = {
-  type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED',
-  proposalId: number,
-  stepId: Uuid,
-};
-type SendProposalNotificationFailedAction = {
-  type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR',
-  error: string,
-};
 type ChangeProposalListViewAction = {
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode: string,
@@ -208,17 +195,6 @@ export const loadMarkersSuccess = (
 ): LoadMarkersSuccessAction => ({
   type: 'proposal/LOAD_MARKERS_SUCCEEDED',
   markers,
-});
-
-export const loadSelections = (proposalId: number): LoadSelectionsAction => ({
-  type: 'proposal/LOAD_SELECTIONS_REQUEST',
-  proposalId,
-});
-export const loadSelectionsSucess = (
-  proposalId: number,
-): LoadSelectionsSucessAction => ({
-  type: 'proposal/LOAD_SELECTIONS_SUCCEEDED',
-  proposalId,
 });
 
 export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
@@ -382,185 +358,6 @@ export const startVoting = (): RequestVotingAction => ({
 export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
-
-type SelectStepSucceedAction = {
-  type: 'proposal/SELECT_SUCCEED',
-  stepId: Uuid,
-  proposalId: number,
-};
-type UnSelectStepSucceedAction = {
-  type: 'proposal/UNSELECT_SUCCEED',
-  stepId: Uuid,
-  proposalId: number,
-};
-
-const unSelectStepSucceed = (
-  stepId,
-  proposalId,
-): UnSelectStepSucceedAction => ({
-  type: 'proposal/UNSELECT_SUCCEED',
-  stepId,
-  proposalId,
-});
-const selectStepSucceed = (
-  stepId: Uuid,
-  proposalId: number,
-): SelectStepSucceedAction => ({
-  type: 'proposal/SELECT_SUCCEED',
-  stepId,
-  proposalId,
-});
-
-type UpdateSelectionStatusSucceedAction = {
-  type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED',
-  stepId: Uuid,
-  proposalId: number,
-  status: ?Status,
-};
-const updateSelectionStatusSucceed = (
-  stepId: Uuid,
-  proposalId: number,
-  status: ?Status,
-): UpdateSelectionStatusSucceedAction => ({
-  type: 'proposal/UPDATE_SELECTION_STATUS_SUCCEED',
-  stepId,
-  proposalId,
-  status,
-});
-
-type UpdateProposalCollectStatusSucceedAction = {
-  type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED',
-  proposalId: number,
-  stepId: Uuid,
-  status: ?Status,
-};
-const updateProposalCollectStatusSucceed = (
-  proposalId: number,
-  stepId: Uuid,
-  status: ?Status,
-): UpdateProposalCollectStatusSucceedAction => ({
-  type: 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED',
-  proposalId,
-  stepId,
-  status,
-});
-
-export const sendProposalNotificationSucceed = (
-  proposalId: number,
-  stepId: Uuid,
-): SendProposalNotificationSuceedAction => ({
-  type: 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED',
-  proposalId,
-  stepId,
-});
-const sendProposalNotificationError = (
-  error: string,
-): SendProposalNotificationFailedAction => ({
-  type: 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR',
-  error,
-});
-
-export const sendProposalNotification = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-): void => {
-  Fetcher.post(`/proposals/${proposalId}/notify-status-changed`)
-    .then(() => {
-      dispatch(sendProposalNotificationSucceed(proposalId, stepId));
-    })
-    .catch(error => {
-      dispatch(sendProposalNotificationError(error));
-    });
-};
-
-export const sendSelectionNotification = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-): void => {
-  Fetcher.post(
-    `/selection_step/${stepId}/proposals/${proposalId}/notify-status-changed`,
-    { proposalId, stepId },
-  )
-    .then(() => {
-      dispatch(sendProposalNotificationSucceed(proposalId, stepId));
-    })
-    .catch(error => {
-      dispatch(sendProposalNotificationError(error));
-    });
-};
-
-export const updateProposalStatus = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-  value: string,
-) => {
-  Fetcher.patch(`/proposals/${proposalId}`, { status: value })
-    .then(json)
-    .then(status => {
-      dispatch(updateProposalCollectStatusSucceed(proposalId, stepId, status));
-    })
-    .catch(e => {
-      console.log(e); // eslint-disable-line
-      dispatch(updateProposalCollectStatusSucceed(proposalId, stepId));
-    });
-};
-
-export const updateSelectionStatus = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-  value: string,
-) => {
-  Fetcher.patch(`/selection_steps/${stepId}/selections/${proposalId}`, {
-    status: value,
-  })
-    .then(json)
-    .then(status => {
-      dispatch(updateSelectionStatusSucceed(stepId, proposalId, status));
-    })
-    .catch(() => {
-      dispatch(updateSelectionStatusSucceed(stepId, proposalId, null));
-    });
-};
-export const updateStepStatus = (
-  dispatch: Dispatch,
-  proposalId: number,
-  step: Object,
-  value: string,
-) => {
-  if (step.type === 'selection') {
-    updateSelectionStatus(dispatch, proposalId, step.id, value);
-    return;
-  }
-
-  updateProposalStatus(dispatch, proposalId, step.id, value);
-};
-
-export const unSelectStep = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-) => {
-  Fetcher.delete(
-    `/selection_steps/${stepId}/selections/${proposalId}`,
-  ).then(() => {
-    dispatch(unSelectStepSucceed(stepId, proposalId));
-  });
-};
-export const selectStep = (
-  dispatch: Dispatch,
-  proposalId: number,
-  stepId: Uuid,
-) => {
-  Fetcher.post(`/selection_steps/${stepId}/selections`, {
-    proposal: proposalId,
-  }).then(() => {
-    dispatch(selectStepSucceed(stepId, proposalId));
-  });
-};
 
 export const vote = (
   dispatch: Dispatch,
@@ -911,8 +708,6 @@ export function* storeOrderInLocalStorage(
 }
 
 export type ProposalAction =
-  | SendProposalNotificationSuceedAction
-  | SendProposalNotificationFailedAction
   | FetchVotesRequestedAction
   | SubmitFusionFormAction
   | ChangeFilterAction
@@ -936,10 +731,6 @@ export type ProposalAction =
   | RequestDeleteProposalVoteAction
   | CloseVoteModalAction
   | VoteSuccessAction
-  | SelectStepSucceedAction
-  | UnSelectStepSucceedAction
-  | UpdateSelectionStatusSucceedAction
-  | UpdateProposalCollectStatusSucceedAction
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
   | ChangeProposalListViewAction
@@ -951,7 +742,6 @@ export function* saga(): Generator<*, *, *> {
     takeEvery('proposal/VOTES_FETCH_REQUESTED', fetchVotesByStep),
     takeEvery('proposal/FETCH_REQUESTED', fetchProposals),
     takeEvery('proposal/SUBMIT_FUSION_FORM', submitFusionFormData),
-    takeEvery('proposal/LOAD_SELECTIONS_REQUEST', fetchSelections),
     takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
@@ -1032,56 +822,6 @@ const deleteVoteReducer = (state: State, action): Exact<State> => {
   };
 };
 
-const updateSelectionStatusSucceedReducer = (
-  state: State,
-  action,
-): Exact<State> => {
-  const proposalsById = state.proposalsById;
-  const proposal = proposalsById[action.proposalId];
-  const selections = proposal.selections.map(s => {
-    if (s.step.id === action.stepId) {
-      s.status = action.status;
-    }
-    return s;
-  });
-  proposalsById[action.proposalId] = { ...proposal, selections };
-  const lastEditedStepId = action.status === -1 ? null : action.stepId;
-  return {
-    ...state,
-    proposalsById,
-    lastEditedStepId,
-    lastNotifiedStepId: null,
-  };
-};
-
-const updateProposalStatusReducer = (state: State, action): Exact<State> => {
-  const proposalsById = state.proposalsById;
-  const proposal = proposalsById[action.proposalId];
-  proposalsById[action.proposalId] = { ...proposal, status: action.status };
-  const lastEditedStepId = action.status === -1 ? null : action.stepId;
-  return {
-    ...state,
-    proposalsById,
-    lastEditedStepId,
-    lastNotifiedStepId: null,
-  };
-};
-
-const unselectReducer = (state: State, action): Exact<State> => {
-  const proposalsById = state.proposalsById;
-  const proposal = proposalsById[action.proposalId];
-  const selections = proposal.selections.filter(
-    s => s.step.id !== action.stepId,
-  );
-  proposalsById[action.proposalId] = { ...proposal, selections };
-  return {
-    ...state,
-    proposalsById,
-    lastEditedStepId: null,
-    lastNotifiedStepId: null,
-  };
-};
-
 const fetchSucceededReducer = (state: State, action): Exact<State> => {
   const proposalsById = action.proposals.reduce((map, obj) => {
     map[obj.id] = obj;
@@ -1095,17 +835,6 @@ const fetchSucceededReducer = (state: State, action): Exact<State> => {
     isLoading: false,
     queryCount: action.count,
   };
-};
-
-const selectSucceededReducer = (state: State, action): Exact<State> => {
-  const proposalsById = state.proposalsById;
-  const proposal = proposalsById[action.proposalId];
-  const selections = [
-    ...proposal.selections,
-    { step: { id: action.stepId }, status: null },
-  ];
-  proposalsById[action.proposalId] = { ...proposal, selections };
-  return { ...state, proposalsById };
 };
 
 const fetchVotesSucceedReducer = (
@@ -1181,14 +910,6 @@ export const reducer = (
       return { ...state, isVoting: true };
     case 'proposal/VOTE_FAILED':
       return { ...state, isVoting: false };
-    case 'proposal/SELECT_SUCCEED':
-      return selectSucceededReducer(state, action);
-    case 'proposal/UNSELECT_SUCCEED':
-      return unselectReducer(state, action);
-    case 'proposal/UPDATE_PROPOSAL_STATUS_SUCCEED':
-      return updateProposalStatusReducer(state, action);
-    case 'proposal/UPDATE_SELECTION_STATUS_SUCCEED':
-      return updateSelectionStatusSucceedReducer(state, action);
     case 'proposal/DELETE_VOTE_REQUESTED':
       return { ...state, currentDeletingVote: action.proposalId };
     case 'proposal/VOTE_SUCCEEDED':
@@ -1201,14 +922,6 @@ export const reducer = (
       return { ...state, isLoading: true };
     case 'proposal/FETCH_SUCCEEDED':
       return fetchSucceededReducer(state, action);
-    case 'proposal/LOAD_SELECTIONS_SUCCEEDED': {
-      const proposalsById = state.proposalsById;
-      proposalsById[action.proposalId] = {
-        ...state.proposalsById[action.proposalId],
-        selections: action.selections,
-      };
-      return { ...state, proposalsById };
-    }
     case 'proposal/LOAD_MARKERS_SUCCEEDED': {
       return { ...state, markers: action.markers };
     }

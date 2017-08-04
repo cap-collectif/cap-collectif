@@ -1,0 +1,9 @@
+Selection:
+    type: object
+    config:
+        description: "A budget contribution"
+        fields:
+            step:
+              type: "SelectionStep!"
+            status:
+              type: "Status"

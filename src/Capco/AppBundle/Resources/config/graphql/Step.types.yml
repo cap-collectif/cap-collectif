@@ -1,0 +1,12 @@
+Step:
+    type: interface
+    config:
+        description: "A step in a project"
+        resolveType: "@=resolver('step_type', [value])"
+        fields:
+            id:
+              type: "ID!"
+            kind:
+              type: "String!"
+            title:
+              type: "String!"

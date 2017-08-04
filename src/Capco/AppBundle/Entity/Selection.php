@@ -45,6 +45,11 @@ class Selection
        ];
     }
 
+    public function getStep(): SelectionStep
+    {
+        return $this->selectionStep;
+    }
+
     public function getSelectionStep()
     {
         return $this->selectionStep;

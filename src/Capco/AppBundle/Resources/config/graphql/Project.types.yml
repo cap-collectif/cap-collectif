@@ -1,0 +1,8 @@
+Project:
+    type: object
+    config:
+        description: "A budget contribution"
+        fields:
+            steps:
+              type: "[Step!]!"
+              resolve: "@=resolver('project_steps', [value])"

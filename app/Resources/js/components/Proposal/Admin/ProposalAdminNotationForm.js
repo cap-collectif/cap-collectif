@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import component from '../../Form/Field';
+import select from '../../Form/Select';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { FeatureToggles } from '../../../types';
 
@@ -37,7 +38,7 @@ export class ProposalAdminNotationForm extends Component<
   State,
 > {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, proposal } = this.props;
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -51,11 +52,28 @@ export class ProposalAdminNotationForm extends Component<
           </a>
           <div>
             <Field
-              name="title"
+              name="estimation"
               component={component}
-              type="text"
-              id="proposal_title"
-              label={<FormattedMessage id="proposal.title" />}
+              type="number"
+              id="proposal_estimation"
+              label={<FormattedMessage id="proposal.estimation" />}
+            />
+            <Field
+              name="likers"
+              id="likers"
+              label="likers"
+              labelClassName="control-label"
+              inputClassName="qdnsqdnqsldnqsldn"
+              multi
+              placeholder="Sélectionnez un coup de coeur"
+              // isLoading={users.length === 0}
+              component={select}
+              clearable={false}
+              // onChange={() => onProjectChange(formName, 'childConnections', [])}
+              options={proposal.likers.map(u => ({
+                value: u.id,
+                label: u.displayName,
+              }))}
             />
             <ButtonToolbar>
               <Button type="submit">
@@ -75,8 +93,10 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminNotationForm);
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state, props) => ({
   initialValues: {
+    estimation: props.proposal.estimation,
+    likers: props.proposal.likers.map(u => u.id),
     // title: props.proposal.title,
     // body: props.proposal.body,
   },
@@ -89,6 +109,11 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalAdminNotationForm_proposal on Proposal {
       id
+      estimation
+      likers {
+        id
+        displayName
+      }
     }
   `,
 );
