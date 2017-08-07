@@ -101,7 +101,7 @@ export type Action =
   | ReportAction
   | DefaultAction;
 
-export type State = {
+export type GlobalState = {
   form: Object,
   default: DefaultState,
   idea: IdeaState,
@@ -111,6 +111,7 @@ export type State = {
   user: UserState,
   opinion: OpinionState,
 };
+export type State = GlobalState;
 
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;

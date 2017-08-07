@@ -435,12 +435,21 @@ type Post {
 }
 
 # A budget contribution
+type ProgressStep {
+  id: String!
+  title: String!
+  startAt: DateTime!
+  endAt: DateTime
+}
+
+# A budget contribution
 type Project {
   steps: [Step!]!
 }
 
 # A budget contribution
 type Proposal {
+  progressSteps: [ProgressStep!]!
   news: [Post!]!
   project: Project!
   status: Status
@@ -699,6 +708,9 @@ type SelectionStep implements Step {
   kind: String!
   title: String!
   statuses: [Status!]!
+
+  # Only one selection step inside a project can have realisation steps, true if this one
+  allowingProgressSteps: Boolean!
 }
 
 # A source

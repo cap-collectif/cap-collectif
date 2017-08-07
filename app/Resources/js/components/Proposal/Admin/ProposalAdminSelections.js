@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import {
   ButtonToolbar,
   Button,
@@ -14,14 +14,9 @@ import type { ProposalAdminSelections_proposal } from './__generated__/ProposalA
 import type { State } from '../../../types';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
+import ProposalAdminProgessSteps from './ProposalAdminProgessSteps';
 
-// propTypes: {
-//   dispatch: PropTypes.func.isRequired,
-//   steps: PropTypes.array.isRequired,
-//   projectId: PropTypes.string.isRequired,
-//   proposalId: PropTypes.number.isRequired,
-// },
-const formName = 'proposal-admin-selections';
+export const formName = 'proposal-admin-selections';
 type PassedProps = {
   proposal: ProposalAdminSelections_proposal,
 };
@@ -98,7 +93,7 @@ export class ProposalAdminSelections extends Component<
                 <br />
                 <Field
                   label="Publié dans cette étape"
-                  name={`selections.${index}.selected`}
+                  name={`selections[${index}].selected`}
                   component={toggle}
                 />
                 {
@@ -110,7 +105,7 @@ export class ProposalAdminSelections extends Component<
                 <Field
                   type="select"
                   label="Statut"
-                  name={`selections.${index}.status`}
+                  name={`selections[${index}].status`}
                   component={component}>
                   <option value={-1}>Aucun statut</option>
                   {step.statuses &&
@@ -120,6 +115,11 @@ export class ProposalAdminSelections extends Component<
                       </option>,
                     )}
                 </Field>
+                {step.allowingProgressSteps &&
+                  <FieldArray
+                    name="progressSteps"
+                    component={ProposalAdminProgessSteps}
+                  />}
               </ListGroupItem>,
             )}
           </ListGroup>
@@ -145,6 +145,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {
     initialValues: {
+      progressSteps: props.proposal.progressSteps,
       collectStatus: props.proposal.status ? props.proposal.status.id : null,
       selections: selectionSteps.map(step => {
         const selectionAsArray = props.proposal.selections.filter(
@@ -172,6 +173,12 @@ export default createFragmentContainer(
       status {
         id
       }
+      progressSteps {
+        id
+        title
+        startAt
+        endAt
+      }
       selections {
         step {
           id
@@ -186,6 +193,7 @@ export default createFragmentContainer(
           title
           kind
           ... on SelectionStep {
+            allowingProgressSteps
             statuses {
               id
               name

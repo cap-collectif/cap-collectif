@@ -1,0 +1,13 @@
+ProgressStep:
+    type: object
+    config:
+        description: "A budget contribution"
+        fields:
+            id:
+              type: "String!"
+            title:
+              type: "String!"
+            startAt:
+                type: "DateTime!"
+            endAt:
+                type: "DateTime"

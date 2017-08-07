@@ -19,6 +19,7 @@ const Field = React.createClass({
     type: PropTypes.oneOf([
       'address',
       'text',
+      'datetime',
       'textarea',
       'editor',
       'select',

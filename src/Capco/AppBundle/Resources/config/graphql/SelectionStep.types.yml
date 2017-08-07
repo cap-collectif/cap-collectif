@@ -13,3 +13,6 @@ SelectionStep:
                type: "String!"
             statuses:
                 type: "[Status!]!"
+            allowingProgressSteps:
+                type: "Boolean!"
+                description: "Only one selection step inside a project can have realisation steps, true if this one"

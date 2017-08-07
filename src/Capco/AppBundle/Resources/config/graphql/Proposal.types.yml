@@ -8,6 +8,8 @@ Proposal:
             #     type: "URI!"
             #     description: "The HTTP url for this contribution."
             #     resolve: "@=resolver('proposition_url', [value])"
+            progressSteps:
+              type: "[ProgressStep!]!"
             news:
               type: "[Post!]!"
               resolve: "@=resolver('proposal_news', [value])"

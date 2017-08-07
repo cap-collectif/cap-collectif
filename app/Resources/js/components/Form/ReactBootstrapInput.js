@@ -15,6 +15,7 @@ import {
   Popover,
   Radio,
 } from 'react-bootstrap';
+import DateTime from './DateTime';
 import Editor from './Editor';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
@@ -164,6 +165,10 @@ class ReactBootstrapInput extends Component {
         {children}
       </FormControl>
     );
+
+    if (type === 'datetime') {
+      formControl = <DateTime value={value} {...props} />;
+    }
 
     if (type === 'checkbox') {
       formControl = (
