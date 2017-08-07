@@ -326,21 +326,6 @@ class ProposalsController extends FOSRestController
      }
 
     /**
-     * @Post("/proposals/{proposal}/notify-status-changed")
-     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200)
-     */
-    public function notifyProposalStatusChangeInCollectAction(Proposal $proposal)
-    {
-        if (!$proposal->getStatus()) {
-            throw new BadRequestHttpException('Proposal should have a status');
-        }
-
-        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
-    }
-
-    /**
      * Update a proposal.
      *
      * @ApiDoc(

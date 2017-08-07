@@ -647,23 +647,6 @@ export function* fetchPosts(
     yield put({ type: 'proposal/POSTS_FETCH_FAILED', error: e });
   }
 }
-export function* fetchSelections(
-  action: LoadSelectionsAction,
-): Generator<*, *, *> {
-  try {
-    const selections = yield call(
-      Fetcher.get,
-      `/proposals/${action.proposalId}/selections`,
-    );
-    yield put({
-      type: 'proposal/LOAD_SELECTIONS_SUCCEEDED',
-      selections,
-      proposalId: action.proposalId,
-    });
-  } catch (e) {
-    console.log(e); // eslint-disable-line
-  }
-}
 
 export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   try {

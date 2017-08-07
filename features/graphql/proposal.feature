@@ -68,3 +68,12 @@ Feature: Proposals
         }
       }
       """
+
+      # @database
+      # Scenario: Admin API client wants to notify that a proposal's status changed
+      #   Given I am logged in to api as admin
+      #   When I send a POST request to "/api/proposals/2/notify-status-changed"
+      #   Then the JSON response status code should be 204
+      #   And 1 mail should be sent
+      #   And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
+      #   Then I should see "<li><strong>Nouveau statut :</strong> Approuvé</li>" in mail

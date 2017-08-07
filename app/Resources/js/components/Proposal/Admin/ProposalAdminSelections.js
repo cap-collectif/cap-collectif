@@ -14,6 +14,9 @@ import type { ProposalAdminSelections_proposal } from './__generated__/ProposalA
 import type { State } from '../../../types';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
+import SelectProposalMutation from '../../../mutations/SelectProposalMutation';
+import UpdateSelectionStatusMutation from '../../../mutations/UpdateSelectionStatusMutation';
+import UnselectProposalMutation from '../../../mutations/UnselectProposalMutation';
 import ProposalAdminProgessSteps from './ProposalAdminProgessSteps';
 
 export const formName = 'proposal-admin-selections';
@@ -26,8 +29,36 @@ type Props = {
 };
 type DefaultProps = void;
 
-const onSubmit = values => {
-  console.log(values);
+const validate = () => {
+  const errors = {};
+  return errors;
+};
+
+const onSubmit = (values, dispatch, props: Props) => {
+  const { proposal } = props;
+  for (const selection of values.selections) {
+    SelectProposalMutation.commit({
+      input: {
+        stepId: selection.step,
+        proposalId: proposal.id,
+      },
+    });
+
+    UpdateSelectionStatusMutation.commit({
+      input: {
+        stepId: selection.step,
+        proposalId: proposal.id,
+        statusId: selection.status,
+      },
+    });
+
+    UnselectProposalMutation.commit({
+      input: {
+        stepId: selection.step,
+        proposalId: proposal.id,
+      },
+    });
+  }
 };
 
 export class ProposalAdminSelections extends Component<
@@ -36,7 +67,6 @@ export class ProposalAdminSelections extends Component<
   void,
 > {
   render() {
-    console.log('ProposalAdminSelections', this.props);
     const { proposal, handleSubmit } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
@@ -64,8 +94,9 @@ export class ProposalAdminSelections extends Component<
               <br />
               <Field
                 label="Publié dans cette étape"
-                name={`sdqsdqsd`}
+                name={`collectPublished`}
                 disabled
+                readOnly
                 component={toggle}
               />
               <div>
@@ -136,7 +167,7 @@ export class ProposalAdminSelections extends Component<
 
 const form = reduxForm({
   onSubmit,
-  // validate,
+  validate,
   form: formName,
 })(ProposalAdminSelections);
 
@@ -145,6 +176,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {
     initialValues: {
+      collectPublished: true,
       progressSteps: props.proposal.progressSteps,
       collectStatus: props.proposal.status ? props.proposal.status.id : null,
       selections: selectionSteps.map(step => {

@@ -80,69 +80,42 @@ class SelectionStepsController extends FOSRestController
 
     /**
      * @Post("/selection_steps/{selectionStepId}/selections")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function selectProposalAction(Request $request, SelectionStep $selectionStep)
+    public function selectProposalAction(Request $request, string $selectionStepId)
     {
-        $em = $this->getDoctrine()->getManager();
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($request->request->get('proposal'));
-
-        $selection = new Selection();
-        $selection->setSelectionStep($selectionStep);
-        $proposal->addSelection($selection);
-        $em->persist($selection);
-        $em->flush();
+        $this->get('capco.mutation.proposal')->selectProposal(
+          $request->request->get('proposal'),
+          $selectionStepId
+        );
     }
 
     /**
      * @Delete("/selection_steps/{selectionStepId}/selections/{proposalId}")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=204, serializerGroups={})
      */
-    public function unselectProposalAction(SelectionStep $selectionStep, Proposal $proposal)
+    public function unselectProposalAction(string $selectionStepId, string $proposalId)
     {
-        $em = $this->getDoctrine()->getManager();
-        $selection = $em->getRepository('CapcoAppBundle:Selection')
-                        ->findOneBy(['proposal' => $proposal, 'selectionStep' => $selectionStep]);
-        if (!$selection) {
-            throw new \InvalidArgumentException('Error Processing Request', 1);
-        }
-
-        $em->remove($selection);
-        $em->flush();
+        $this->get('capco.mutation.proposal')->unselectProposal(
+          $proposalId,
+          $selectionStepId
+        );
     }
 
     /**
      * @Patch("/selection_steps/{selectionStepId}/selections/{proposalId}")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200, serializerGroups={"Statuses"})
+     * @View(statusCode=200, serializerGroups={})
      */
-    public function updateSelectionStatusAction(Request $request, SelectionStep $selectionStep, Proposal $proposal)
+    public function updateSelectionStatusAction(Request $request, string $selectionStepId, string $proposalId)
     {
-        $em = $this->getDoctrine()->getManager();
-        $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'proposal' => $proposal,
-          'selectionStep' => $selectionStep,
-        ]);
-        if (!$selection) {
-            throw new \InvalidArgumentException('Error Processing Request', 1);
-        }
-
-        $status = null;
-        if ($request->request->get('status')) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
-        }
-
-        $selection->setStatus($status);
-        $em->flush();
-
-        return $status;
+        $this->get('capco.mutation.proposal')->updateSelectionStatus(
+          $proposalId,
+          $selectionStepId,
+          $request->request->get('status')
+        );
     }
 
     /**
@@ -276,30 +249,6 @@ class SelectionStepsController extends FOSRestController
         ;
 
         return $vote;
-    }
-
-    /**
-     * @Post("/selection_step/{selectionStepId}/proposals/{proposal_id}/notify-status-changed")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200)
-     */
-    public function notifyProposalStatusChangeInSelectionAction(SelectionStep $selectionStep, Proposal $proposal)
-    {
-        $selection = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Selection')
-            ->findOneBy([
-                'proposal' => $proposal,
-                'selectionStep' => $selectionStep,
-            ]);
-
-        if (!$selection || !$selection->getStatus()) {
-            throw new BadRequestHttpException('Proposal should have a status');
-        }
-
-        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
     }
 
     /**

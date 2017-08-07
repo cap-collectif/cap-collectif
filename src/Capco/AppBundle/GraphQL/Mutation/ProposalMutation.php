@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -14,6 +16,73 @@ use Symfony\Component\HttpFoundation\Request;
 class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+
+    // $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
+
+    public function updateSelectionStatus(string $proposalId, string $stepId, $statusId = null): Selection
+    {
+        $em = $this->getDoctrine()->getManager();
+        $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
+        'proposal' => $proposalId,
+        'selectionStep' => $stepId,
+      ]);
+
+        if (!$selection) {
+            throw new UserError('Cant find the selection');
+        }
+
+        $status = null;
+        if ($statusId) {
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+        }
+
+        $selection->setStatus($status);
+        $em->flush();
+
+        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
+
+        return $selection;
+    }
+
+    public function unselectProposal(string $proposalId, string $stepId): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $selection = $em->getRepository('CapcoAppBundle:Selection')
+                      ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+
+        if (!$selection) {
+            throw new UserError('Cant find the selection');
+        }
+        $em->remove($selection);
+        $em->flush();
+
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+
+        return ['proposal' => $proposal];
+    }
+
+    public function selectProposal(string $proposalId, string $stepId): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+        $selection = $em->getRepository('CapcoAppBundle:Selection')
+                      ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+        if ($selection) {
+            throw new UserError('Already selected');
+        }
+
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        $step = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($stepId);
+
+        $selection = new Selection();
+        $selection->setSelectionStep($step);
+        $proposal->addSelection($selection);
+
+        $em->persist($selection);
+        $em->flush();
+
+        return ['proposal' => $proposal];
+    }
 
     public function changePublicationStatus(Argument $values)
     {

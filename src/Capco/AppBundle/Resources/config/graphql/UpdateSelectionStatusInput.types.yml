@@ -1,0 +1,11 @@
+UpdateSelectionStatusInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            stepId:
+                type: "String!"
+            proposalId:
+                type: "ID!"
+            statusId:
+                type: "String"

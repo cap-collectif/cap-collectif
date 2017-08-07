@@ -221,6 +221,9 @@ type Mutation {
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ProposalPayload
   changeProposalContent(input: ChangeProposalContentInput!): ProposalPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ProposalPayload
+  selectProposal(input: SelectProposalInput!): ProposalPayload
+  unselectProposal(input: UnselectProposalInput!): ProposalPayload
+  updateSelectionStatus(input: UpdateSelectionStatusInput!): Selection
 }
 
 # A contribution
@@ -696,6 +699,15 @@ type SectionAppendixType {
   title: String
 }
 
+input SelectProposalInput {
+  # The step where the proposal is selected
+  stepId: String!
+
+  # The proposal ID to select.
+  proposalId: ID!
+  clientMutationId: String
+}
+
 # A budget contribution
 type Selection {
   step: SelectionStep!
@@ -780,6 +792,22 @@ interface TrashableContribution {
 }
 
 scalar URI
+
+input UnselectProposalInput {
+  # The step where the proposal is selected
+  stepId: String!
+
+  # The proposal ID to remove from step.
+  proposalId: ID!
+  clientMutationId: String
+}
+
+input UpdateSelectionStatusInput {
+  stepId: String!
+  proposalId: ID!
+  statusId: String
+  clientMutationId: String
+}
 
 # An user
 type User {

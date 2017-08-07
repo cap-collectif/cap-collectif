@@ -20,3 +20,21 @@ Mutation:
                     inputType: ChangeProposalNotationInput
                     payloadType: ProposalPayload
                     mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"
+          selectProposal:
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: SelectProposalInput
+                    payloadType: ProposalPayload
+                    mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId']])"
+          unselectProposal:
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: UnselectProposalInput
+                  payloadType: ProposalPayload
+                  mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
+          updateSelectionStatus:
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: UpdateSelectionStatusInput
+                  payloadType: Selection
+                  mutateAndGetPayload: "@=mutation('updateSelectionStatus', [value['proposalId'], value['stepId'], value['statusId'] ])"

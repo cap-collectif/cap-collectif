@@ -236,6 +236,9 @@ Scenario: Anonymous API client wants to get a step
       """
       Then the JSON response status code should be 200
       And selection "selectionstep1" 3 should have status 1
+      And 1 mail should be sent
+      And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
+      Then I should see "<li><strong>Nouveau statut :</strong> Vote gagné</li>" in mail
       When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/3" with json:
       """
       {
@@ -244,12 +247,3 @@ Scenario: Anonymous API client wants to get a step
       """
       Then the JSON response status code should be 204
       And selection "selectionstep1" 3 should have no status
-
-  @database
-  Scenario: Admin API client wants to notify that a proposal's status changed
-      Given I am logged in to api as admin
-      When I send a POST request to "/api/selection_step/selectionstep1/proposals/2/notify-status-changed"
-      Then the JSON response status code should be 204
-      And 1 mail should be sent
-      And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
-      Then I should see "<li><strong>Nouveau statut :</strong> Vote gagné</li>" in mail
