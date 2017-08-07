@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
@@ -17,6 +18,7 @@ use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -185,9 +187,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     }
 
     /**
-     * Get position.
-     *
-     * @return int
+     * @return null|int
      */
     public function getPosition()
     {
@@ -204,12 +204,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
@@ -268,31 +263,28 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     /**
      * @param int $sourcesCount
      */
-    public function setSourcesCount($sourcesCount)
+    public function setSourcesCount($sourcesCount): self
     {
         $this->sourcesCount = $sourcesCount;
 
         return $this;
     }
 
-    public function incrementSourcesCount()
+    public function incrementSourcesCount(): self
     {
         ++$this->sourcesCount;
 
         return $this;
     }
 
-    public function decrementSourcesCount()
+    public function decrementSourcesCount(): self
     {
         --$this->sourcesCount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getArgumentsCount()
+    public function getArgumentsCount(): int
     {
         return $this->argumentsCount;
     }
@@ -326,17 +318,14 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     }
 
     /**
-     * @return mixed
+     * @return null|OpinionType
      */
     public function getOpinionType()
     {
         return $this->OpinionType;
     }
 
-    /**
-     * @param mixed $OpinionType
-     */
-    public function setOpinionType(OpinionType $OpinionType)
+    public function setOpinionType(OpinionType $OpinionType): self
     {
         $this->OpinionType = $OpinionType;
 
@@ -344,7 +333,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     }
 
     /**
-     * @return mixed
+     * @return AbstractStep
      */
     public function getStep()
     {
@@ -397,12 +386,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * Get arguments.
-     *
-     * @return ArrayCollection
-     */
-    public function getArguments()
+    public function getArguments(): Collection
     {
         return $this->arguments;
     }
@@ -488,7 +472,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
      *
      * @return $this
      */
-    public function removeReport(Reporting $report)
+    public function removeReport(Reporting $report): self
     {
         $this->Reports->removeElement($report);
 
@@ -500,7 +484,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->versions;
     }
 
-    public function addVersion(OpinionVersion $version)
+    public function addVersion(OpinionVersion $version): self
     {
         if (!$this->versions->contains($version)) {
             $this->versions->add($version);
@@ -509,7 +493,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    public function removeVersion(OpinionVersion $version)
+    public function removeVersion(OpinionVersion $version): self
     {
         $this->versions->removeElement($version);
 
@@ -521,7 +505,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->appendices;
     }
 
-    public function setAppendices(ArrayCollection $appendices)
+    public function setAppendices(ArrayCollection $appendices): self
     {
         $this->appendices = $appendices;
 
@@ -565,7 +549,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
 
     // ******************************* Custom methods **************************************
 
-    public function userHasReport(User $user)
+    public function userHasReport(User $user): bool
     {
         foreach ($this->Reports as $report) {
             if ($report->getReporter() === $user) {
@@ -576,7 +560,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return false;
     }
 
-    public function getArgumentForCount()
+    public function getArgumentForCount(): int
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
@@ -588,7 +572,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $i;
     }
 
-    public function getArgumentAgainstCount()
+    public function getArgumentAgainstCount(): int
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
@@ -600,12 +584,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $i;
     }
 
-    /**
-     * @param $type
-     *
-     * @return int
-     */
-    public function getArgumentsCountByType($type)
+    public function getArgumentsCountByType($type): int
     {
         $count = 0;
         foreach ($this->arguments as $arg) {
@@ -617,26 +596,27 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $count;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
-        return $this->isEnabled && $this->step && $this->step->canDisplay();
+        return $this->getIsEnabled() && $this->getStep() && $this->getStep()->canDisplay();
     }
 
-    /**
-     * @return bool
-     */
     public function canContribute(): bool
     {
-        return $this->isEnabled && !$this->isTrashed && $this->step->canContribute();
+        return $this->isActive() && $this->getStep()->canContribute();
     }
 
-    /**
-     * @return bool
-     */
-    public function isPublished()
+    public function isActive(): bool
+    {
+        return $this->getIsEnabled() && !$this->isTrashed();
+    }
+
+    public function canBeDeleted(): bool
+    {
+        return $this->isActive() && $this->getStep()->isActive();
+    }
+
+    public function isPublished(): bool
     {
         return $this->isEnabled && !$this->isTrashed;
     }
@@ -687,21 +667,21 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         }
     }
 
-    public function canAddComments()
+    public function canAddComments(): bool
     {
         $cs = $this->getCommentSystem();
 
         return $cs === 1 || $cs === 2;
     }
 
-    public function increaseArgumentsCount()
+    public function increaseArgumentsCount(): self
     {
         ++$this->argumentsCount;
 
         return $this;
     }
 
-    public function decreaseArgumentsCount()
+    public function decreaseArgumentsCount(): self
     {
         --$this->argumentsCount;
 

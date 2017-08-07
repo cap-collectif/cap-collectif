@@ -353,50 +353,52 @@ abstract class AbstractStep
         return $this->isEnabled && $this->getProject()->canDisplay();
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
-        return $this->getProject() && $this->getProject()->canContribute() && $this->isEnabled && $this->isOpen();
+        return $this->isActive() && $this->isOpen();
     }
 
-    public function isConsultationStep()
+    public function isActive(): bool
     {
-        return false;
+        return $this->getProject() && $this->getProject()->canContribute() && $this->getIsEnabled();
     }
 
-    public function isPresentationStep()
+    public function isConsultationStep(): bool
     {
         return false;
     }
 
-    public function isOtherStep()
+    public function isPresentationStep(): bool
     {
         return false;
     }
 
-    public function isSynthesisStep()
+    public function isOtherStep(): bool
     {
         return false;
     }
 
-    public function isRankingStep()
+    public function isSynthesisStep(): bool
     {
         return false;
     }
 
-    public function isCollectStep()
+    public function isRankingStep(): bool
     {
         return false;
     }
 
-    public function isQuestionnaireStep()
+    public function isCollectStep(): bool
     {
         return false;
     }
 
-    public function isSelectionStep()
+    public function isQuestionnaireStep(): bool
+    {
+        return false;
+    }
+
+    public function isSelectionStep(): bool
     {
         return false;
     }

@@ -54,8 +54,7 @@ class ArgumentsController extends FOSRestController
         $type = $paramFetcher->get('type');
         $order = $paramFetcher->get('order');
 
-        $arguments = $this->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:Argument')
+        $arguments = $this->get('capco.argument.repository')
             ->getByTypeAndOpinionOrderedJoinUserReports($opinion, $type, $order, $this->getUser());
 
         return [
@@ -92,8 +91,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException('Not a child');
         }
 
-        $arguments = $this->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:Argument')
+        $arguments = $this->get('capco.argument.repository')
             ->getByTypeAndOpinionVersionOrderedJoinUserReports($version, $type, $filter, $this->getUser());
 
         return [
@@ -144,8 +142,9 @@ class ArgumentsController extends FOSRestController
 
         $opinion->increaseArgumentsCount();
 
-        $this->get('doctrine.orm.entity_manager')->persist($argument);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($argument);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $argument;
@@ -198,8 +197,9 @@ class ArgumentsController extends FOSRestController
 
         $version->increaseArgumentsCount();
 
-        $this->get('doctrine.orm.entity_manager')->persist($argument);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($argument);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $argument;
@@ -236,8 +236,9 @@ class ArgumentsController extends FOSRestController
         $argument->setValidated(false);
         $argument->resetVotes();
 
-        $this->get('doctrine.orm.entity_manager')->persist($argument);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($argument);
+        $em->flush();
 
         return $argument;
     }
@@ -253,7 +254,7 @@ class ArgumentsController extends FOSRestController
     public function putOpinionVersionArgumentAction(Request $request, Opinion $opinion, OpinionVersion $version, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedHttpException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($argument->getOpinionVersion() !== $version) {
@@ -278,8 +279,9 @@ class ArgumentsController extends FOSRestController
         $argument->setValidated(false);
         $argument->resetVotes();
 
-        $this->get('doctrine.orm.entity_manager')->persist($argument);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($argument);
+        $em->flush();
 
         return $argument;
     }
@@ -294,19 +296,19 @@ class ArgumentsController extends FOSRestController
     public function deleteOpinionArgumentAction(Opinion $opinion, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedHttpException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($argument->getOpinion() !== $opinion) {
             throw new BadRequestHttpException('Not a child.');
         }
 
-        if (!$argument->canContribute()) {
+        if (!$argument->canBeDeleted()) {
             throw new BadRequestHttpException('Uncontributable argument.');
         }
 
         $opinion->decreaseArgumentsCount();
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $em->remove($argument);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -323,7 +325,7 @@ class ArgumentsController extends FOSRestController
     public function deleteOpinionVersionArgumentAction(Opinion $opinion, OpinionVersion $version, Argument $argument)
     {
         if ($this->getUser() !== $argument->getAuthor()) {
-            throw new AccessDeniedHttpException();
+            throw $this->createAccessDeniedException();
         }
 
         if ($argument->getOpinionVersion() !== $version) {
@@ -339,7 +341,8 @@ class ArgumentsController extends FOSRestController
         }
 
         $version->decreaseArgumentsCount();
-        $em = $this->get('doctrine.orm.entity_manager');
+
+        $em = $this->getDoctrine()->getManager();
         $em->remove($argument);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
@@ -359,8 +362,7 @@ class ArgumentsController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $previousVote = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:ArgumentVote')
+        $previousVote = $this->get('capco.argument_vote.repository')
                     ->findOneBy(['user' => $user, 'argument' => $argument]);
 
         if ($previousVote) {
@@ -377,9 +379,10 @@ class ArgumentsController extends FOSRestController
         ;
 
         $argument->incrementVotesCount();
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->persist($argument);
-        $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($vote);
+        $em->persist($argument);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
@@ -394,8 +397,7 @@ class ArgumentsController extends FOSRestController
         if (!$argument->getLinkedOpinion()->canContribute()) {
             throw new BadRequestHttpException('Uncontributable opinion.');
         }
-        $vote = $this->getDoctrine()->getManager()
-                     ->getRepository('CapcoAppBundle:ArgumentVote')
+        $vote = $this->get('capco.argument_vote.repository')
                      ->findOneBy(['user' => $this->getUser(), 'argument' => $argument]);
 
         if (!$vote) {
@@ -403,8 +405,9 @@ class ArgumentsController extends FOSRestController
         }
 
         $argument->decrementVotesCount();
-        $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($vote);
+        $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
     }
 
@@ -467,8 +470,9 @@ class ArgumentsController extends FOSRestController
             return $form;
         }
 
-        $this->get('doctrine.orm.entity_manager')->persist($report);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($report);
+        $em->flush();
         $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;

@@ -41,7 +41,6 @@ class OpinionLinksController extends FOSRestController
     {
         $type = $opinion->getOpinionType();
         $step = $opinion->getStep();
-        $project = $step->getProject();
 
         if (!$step->canContribute()) {
             throw new BadRequestHttpException('This step is not contribuable.');
@@ -73,7 +72,7 @@ class OpinionLinksController extends FOSRestController
             return $form;
         }
 
-        $em = $this->get('doctrine.orm.entity_manager');
+        $em = $this->getDoctrine()->getManager();
         $em->persist($link);
         $em->flush();
 
