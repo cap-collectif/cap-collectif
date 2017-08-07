@@ -19,7 +19,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
         $this->tokenStorage = $tokenStorage;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -76,12 +76,7 @@ class ArgumentSerializationListener extends AbstractSerializationListener
                     ) . '#arg-' . $argument->getId();
             }
 
-            $event->getVisitor()->addData(
-                '_links',
-                [
-                    'show' => $showUrl,
-                ]
-            );
+            $event->getVisitor()->addData('_links', ['show' => $showUrl]);
         }
 
         $event->getVisitor()->addData(

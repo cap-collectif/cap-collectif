@@ -181,10 +181,10 @@ class CollectStepsController extends FOSRestController
         $em->persist($vote);
         $em->flush();
 
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->get('fos_elastica.index');
+        $indexer = $this->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($vote), $vote->getId());
+
+        $index = $this->get('capco.elasticsearch.index');
         $index->refresh();
 
         return $vote;

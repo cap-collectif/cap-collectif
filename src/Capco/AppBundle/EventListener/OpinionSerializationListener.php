@@ -23,7 +23,7 @@ class OpinionSerializationListener extends AbstractSerializationListener
         $this->voteRepository = $voteRepository;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [

@@ -17,7 +17,7 @@ class UserSerializationListener extends AbstractSerializationListener
         $this->manager = $manager;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\UserBundle\Entity\User', 'method' => 'onPostUserSerialize'],

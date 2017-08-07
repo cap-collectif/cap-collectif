@@ -14,7 +14,7 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
         $this->stepHelper = $stepHelper;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [

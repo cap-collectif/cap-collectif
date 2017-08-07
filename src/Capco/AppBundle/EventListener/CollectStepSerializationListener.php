@@ -7,7 +7,7 @@ use JMS\Serializer\Serializer;
 
 class CollectStepSerializationListener extends AbstractSerializationListener
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [

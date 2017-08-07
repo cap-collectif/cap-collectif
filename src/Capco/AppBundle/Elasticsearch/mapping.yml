@@ -146,7 +146,7 @@ mappings:
             deletedAt: { type: date }
             isTrashed: { type: boolean }
             enabled: { type: boolean }
-            location: { type: keyword }
+            address: { type: keyword }
             district:
                 type: object
                 properties:

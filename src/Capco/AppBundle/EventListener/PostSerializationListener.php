@@ -14,7 +14,7 @@ class PostSerializationListener extends AbstractSerializationListener
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\Post', 'method' => 'onPostSerialize'],

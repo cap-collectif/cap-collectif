@@ -6,7 +6,7 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 
 abstract class AbstractSerializationListener implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
         ];
@@ -21,12 +21,12 @@ abstract class AbstractSerializationListener implements EventSubscriberInterface
         if (get_class($exclusionStrategy) === 'JMS\Serializer\Exclusion\DisjunctExclusionStrategy') {
             $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\DisjunctExclusionStrategy');
             $reflectionProperty = $reflectionClass->getProperty('delegates');
-            $reflectionProperty->setAccessible(true);
             $exclusionStrategy = $reflectionProperty->getValue($exclusionStrategy)->get(1);
+        } else {
+            $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
+            $reflectionProperty = $reflectionClass->getProperty('groups');
         }
 
-        $reflectionClass = new \ReflectionClass('JMS\Serializer\Exclusion\GroupsExclusionStrategy');
-        $reflectionProperty = $reflectionClass->getProperty('groups');
         $reflectionProperty->setAccessible(true);
 
         return $reflectionProperty->getValue($exclusionStrategy);

@@ -3,21 +3,18 @@
 namespace Capco\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SourceSerializationListener extends AbstractSerializationListener
 {
-    private $router;
     private $tokenStorage;
 
-    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
+    public function __construct(TokenStorageInterface $tokenStorage)
     {
-        $this->router = $router;
         $this->tokenStorage = $tokenStorage;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
@@ -31,8 +28,6 @@ class SourceSerializationListener extends AbstractSerializationListener
     public function onPostSource(ObjectEvent $event)
     {
         $source = $event->getObject();
-        $opinion = $source->getLinkedOpinion();
-        $opinionType = $opinion->getOpinionType();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
 
