@@ -17,15 +17,36 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    // $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
-
-    public function updateSelectionStatus(string $proposalId, string $stepId, $statusId = null): Selection
+    public function updateCollectStatus(string $proposalId, $statusId = null): array
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        if (!$proposal) {
+            throw new UserError('Cant find the proposal');
+        }
+
+        $status = null;
+        if ($statusId) {
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+        }
+
+        $proposal->setStatus($status);
+        $em->flush();
+
+        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
+
+        return ['proposal' => $proposal];
+    }
+
+    public function updateSelectionStatus(string $proposalId, string $stepId, $statusId = null): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
         $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
-        'proposal' => $proposalId,
-        'selectionStep' => $stepId,
-      ]);
+          'proposal' => $proposalId,
+          'selectionStep' => $stepId,
+        ]);
 
         if (!$selection) {
             throw new UserError('Cant find the selection');
@@ -41,7 +62,9 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
 
-        return $selection;
+        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+
+        return ['proposal' => $proposal];
     }
 
     public function unselectProposal(string $proposalId, string $stepId): array
@@ -84,7 +107,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changePublicationStatus(Argument $values)
+    public function changePublicationStatus(Argument $values): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -106,7 +129,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, Request $request)
+    public function changeContent(Argument $input, Request $request): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');

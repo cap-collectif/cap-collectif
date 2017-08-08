@@ -26,6 +26,8 @@ type PassedProps = {
 type Props = {
   proposal: ProposalAdminSelections_proposal,
   handleSubmit: Function,
+  pristine: boolean,
+  invalid: boolean,
 };
 type DefaultProps = void;
 
@@ -37,28 +39,37 @@ const validate = () => {
 const onSubmit = (values, dispatch, props: Props) => {
   const { proposal } = props;
   for (const selection of values.selections) {
-    SelectProposalMutation.commit({
-      input: {
-        stepId: selection.step,
-        proposalId: proposal.id,
-      },
-    });
-
-    UpdateSelectionStatusMutation.commit({
-      input: {
-        stepId: selection.step,
-        proposalId: proposal.id,
-        statusId: selection.status,
-      },
-    });
-
-    UnselectProposalMutation.commit({
-      input: {
-        stepId: selection.step,
-        proposalId: proposal.id,
-      },
-    });
+    const wasSelected =
+      proposal.selections.filter(s => s.step.id === selection.step).length ===
+      1;
+    if (selection.selected && !wasSelected) {
+      SelectProposalMutation.commit({
+        input: {
+          stepId: selection.step,
+          proposalId: proposal.id,
+          statusId: selection.status,
+        },
+      });
+    }
+    if (selection.selected && wasSelected) {
+      UpdateSelectionStatusMutation.commit({
+        input: {
+          stepId: selection.step,
+          proposalId: proposal.id,
+          statusId: selection.status,
+        },
+      });
+    }
+    if (!selection.selected && wasSelected) {
+      UnselectProposalMutation.commit({
+        input: {
+          stepId: selection.step,
+          proposalId: proposal.id,
+        },
+      });
+    }
   }
+  console.log(values.progressSteps);
 };
 
 export class ProposalAdminSelections extends Component<
@@ -67,7 +78,7 @@ export class ProposalAdminSelections extends Component<
   void,
 > {
   render() {
-    const { proposal, handleSubmit } = this.props;
+    const { proposal, handleSubmit, pristine, invalid } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
@@ -155,7 +166,7 @@ export class ProposalAdminSelections extends Component<
             )}
           </ListGroup>
           <ButtonToolbar>
-            <Button type="submit">
+            <Button type="submit" disabled={pristine || invalid}>
               <FormattedMessage id="global.save" />
             </Button>
           </ButtonToolbar>
@@ -188,7 +199,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
         return {
           step: step.id,
           selected,
-          status: selection ? selection.status : null,
+          status: selection && selection.status ? selection.status.id : null,
         };
       }),
     },

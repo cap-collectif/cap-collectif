@@ -9,19 +9,12 @@ export const Toggle = React.createClass({
     label: PropTypes.any.isRequired,
     disabled: PropTypes.bool.isRequired,
     error: PropTypes.any,
-    onChange: PropTypes.func.isRequired,
     labelClassName: PropTypes.string,
     inputClassName: PropTypes.string,
   },
 
   render() {
-    const {
-      onChange,
-      input,
-      label,
-      disabled,
-      meta: { touched, error },
-    } = this.props;
+    const { input, label, disabled, meta: { touched, error } } = this.props;
     return (
       <div className="form-group">
         <label>
@@ -29,7 +22,7 @@ export const Toggle = React.createClass({
             // id={id}
             disabled={disabled}
             checked={input.value}
-            onChange={onChange}
+            onChange={input.onChange}
           />
           <span>
             {label}

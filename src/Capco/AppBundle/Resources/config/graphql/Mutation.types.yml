@@ -6,35 +6,41 @@ Mutation:
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalPublicationStatusInput
-                    payloadType: ProposalPayload
+                    payloadType: ChangeProposalPublicationStatusPayload
                     mutateAndGetPayload: "@=mutation('changeProposalPublicationStatus', [value])"
           changeProposalContent:
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalContentInput
-                    payloadType: ProposalPayload
+                    payloadType: ChangeProposalContentPayload
                     mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"
           changeProposalNotation:
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalNotationInput
-                    payloadType: ProposalPayload
+                    payloadType: ChangeProposalNotationPayload
                     mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"
           selectProposal:
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: SelectProposalInput
-                    payloadType: ProposalPayload
+                    payloadType: SelectProposalPayload
                     mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId']])"
           unselectProposal:
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: UnselectProposalInput
-                  payloadType: ProposalPayload
+                  payloadType: UnselectProposalPayload
                   mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
           updateSelectionStatus:
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: UpdateSelectionStatusInput
-                  payloadType: Selection
+                  payloadType: UpdateSelectionStatusPayload
                   mutateAndGetPayload: "@=mutation('updateSelectionStatus', [value['proposalId'], value['stepId'], value['statusId'] ])"
+          updateCollectStatus:
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: UpdateCollectStatusInput
+                  payloadType: UpdateCollectStatusPayload
+                  mutateAndGetPayload: "@=mutation('updateCollectStatus', [value['proposalId'], value['statusId'] ])"

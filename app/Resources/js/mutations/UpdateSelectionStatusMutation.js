@@ -9,7 +9,7 @@ import type {
 const mutation = graphql`
   mutation UpdateSelectionStatusMutation($input: UpdateSelectionStatusInput!) {
     updateSelectionStatus(input: $input) {
-      status {
+      proposal {
         id
       }
     }

@@ -1,4 +1,4 @@
-ChangeProposalPublicationStatusPayload:
+UnselectProposalPayload:
     type: relay-mutation-payload
     config:
         fields:

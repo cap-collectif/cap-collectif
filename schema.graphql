@@ -72,9 +72,28 @@ input ChangeProposalContentInput {
   clientMutationId: String
 }
 
+type ChangeProposalContentPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 input ChangeProposalNotationInput {
   # The proposal id
   id: ID!
+  clientMutationId: String
+}
+
+type ChangeProposalNotationPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalProgressStepsInput {
+  clientMutationId: String
+}
+
+type ChangeProposalProgressStepsPayload {
+  proposal: Proposal!
   clientMutationId: String
 }
 
@@ -84,6 +103,11 @@ input ChangeProposalPublicationStatusInput {
 
   # The proposal id
   id: ID!
+  clientMutationId: String
+}
+
+type ChangeProposalPublicationStatusPayload {
+  proposal: Proposal!
   clientMutationId: String
 }
 
@@ -218,12 +242,13 @@ type MediaResponse implements Response {
 }
 
 type Mutation {
-  changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ProposalPayload
-  changeProposalContent(input: ChangeProposalContentInput!): ProposalPayload
-  changeProposalNotation(input: ChangeProposalNotationInput!): ProposalPayload
-  selectProposal(input: SelectProposalInput!): ProposalPayload
-  unselectProposal(input: UnselectProposalInput!): ProposalPayload
-  updateSelectionStatus(input: UpdateSelectionStatusInput!): Selection
+  changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
+  changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
+  changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
+  selectProposal(input: SelectProposalInput!): SelectProposalPayload
+  unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
+  updateSelectionStatus(input: UpdateSelectionStatusInput!): UpdateSelectionStatusPayload
+  updateCollectStatus(input: UpdateCollectStatusInput!): UpdateCollectStatusPayload
 }
 
 # A contribution
@@ -515,11 +540,6 @@ type ProposalForm {
   customFields: [Question!]!
 }
 
-type ProposalPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
   id: ID!
 
@@ -705,6 +725,14 @@ input SelectProposalInput {
 
   # The proposal ID to select.
   proposalId: ID!
+
+  # The selection status.
+  statusId: String
+  clientMutationId: String
+}
+
+type SelectProposalPayload {
+  proposal: Proposal!
   clientMutationId: String
 }
 
@@ -802,10 +830,33 @@ input UnselectProposalInput {
   clientMutationId: String
 }
 
+type UnselectProposalPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateCollectStatusInput {
+  statusId: String
+
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type UpdateCollectStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 input UpdateSelectionStatusInput {
   stepId: String!
   proposalId: ID!
   statusId: String
+  clientMutationId: String
+}
+
+type UpdateSelectionStatusPayload {
+  proposal: Proposal!
   clientMutationId: String
 }
 

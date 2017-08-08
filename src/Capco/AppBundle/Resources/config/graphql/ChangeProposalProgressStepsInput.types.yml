@@ -1,0 +1,6 @@
+ChangeProposalProgressStepsInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            # progressSteps:
+            #     type: "[ProgressStepInput!]!"

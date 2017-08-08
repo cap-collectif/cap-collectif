@@ -9,3 +9,6 @@ SelectProposalInput:
             proposalId:
                 type: "ID!"
                 description: "The proposal ID to select."
+            statusId:
+                type: "String"
+                description: "The selection status."

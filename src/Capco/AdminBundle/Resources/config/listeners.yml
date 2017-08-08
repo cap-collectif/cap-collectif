@@ -26,6 +26,8 @@ services:
   capco.mutation.proposal:
         class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
         tags:
+            - { name: overblog_graphql.mutation, alias: "updateCollectStatus", method: "updateCollectStatus" }
+            - { name: overblog_graphql.mutation, alias: "updateSelectionStatus", method: "updateSelectionStatus" }
             - { name: overblog_graphql.mutation, alias: "unselectProposal", method: "unselectProposal" }
             - { name: overblog_graphql.mutation, alias: "selectProposal", method: "selectProposal" }
             - { name: overblog_graphql.mutation, alias: "changeProposalPublicationStatus", method: "changePublicationStatus" }
