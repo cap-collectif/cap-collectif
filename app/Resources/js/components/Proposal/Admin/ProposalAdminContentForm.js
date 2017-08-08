@@ -10,9 +10,12 @@ import component from '../../Form/Field';
 import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
-import type { FeatureToggles } from '../../../types';
+import type { GlobalState, FeatureToggles } from '../../../types';
 
 type DefaultProps = void;
+type PassedProps = {
+  proposal: ProposalAdminContentForm_proposal,
+};
 type Props = {
   proposal: ProposalAdminContentForm_proposal,
   themes: Array<Object>,
@@ -25,8 +28,7 @@ type State = void;
 
 const formName = 'proposal-admin-edit';
 
-const onSubmit = (values, dispatch, props) => {
-  console.log('onSubmit', values);
+const onSubmit = (values, dispatch, props: Props) => {
   // Only used for the user view
   delete values.addressText;
 
@@ -48,6 +50,11 @@ const onSubmit = (values, dispatch, props) => {
     input: { ...values, id: props.proposal.id },
   };
   ChangeProposalContentMutation.commit(variables, uploadables);
+};
+
+const validate = () => {
+  const errors = {};
+  return errors;
 };
 
 export class ProposalAdminContentForm extends Component<
@@ -259,26 +266,26 @@ export class ProposalAdminContentForm extends Component<
 
 const form = reduxForm({
   onSubmit,
-  // validate,
+  validate,
   form: formName,
 })(ProposalAdminContentForm);
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
   initialValues: {
-    title: props.proposal.title,
-    body: props.proposal.body,
-    author: props.proposal.author.id,
-    theme: props.proposal.theme.id,
-    category: props.proposal.category.id,
-    district: props.proposal.district.id,
-    address: props.proposal.address,
+    title: proposal.title,
+    body: proposal.body,
+    author: proposal.author.id,
+    theme: proposal.theme ? proposal.theme.id : null,
+    category: proposal.category ? proposal.category.id : null,
+    district: proposal.district ? proposal.district.id : null,
+    address: proposal.address,
     media: null,
-    responses: props.proposal.form.customFields.map(field => {
-      const response = props.proposal.responses.filter(
-        res => res.question.id === field.id,
+    responses: proposal.form.customFields.map(field => {
+      const response = proposal.responses.filter(
+        res => res && res.question.id === field.id,
       )[0];
       if (response) {
         return {
@@ -289,13 +296,11 @@ const mapStateToProps = (state, props) => ({
       return { question: parseInt(field.id, 10) };
     }),
     addressText:
-      props.proposal.address &&
-      JSON.parse(props.proposal.address)[0].formatted_address,
+      proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
-
 export default createFragmentContainer(
   container,
   graphql`

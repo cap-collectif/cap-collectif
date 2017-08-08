@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import {
   ListGroup,
@@ -55,32 +55,36 @@ export class ProposalAdminProgessSteps extends Component<
                 show={index === editIndex}
               />
               <Row>
-                <Col xs={10}>
+                <Col xs={8}>
                   <div>
                     <strong>
                       {progressSteps[index].title}
                     </strong>
                   </div>
-                  <div className="excerpt">
-                    {progressSteps[index].endAt
-                      ? <p>
-                          Du {moment(progressSteps[index].startAt).format(
-                            'll',
-                          )}{' '}
-                          au {moment(progressSteps[index].endAt).format('ll')}
-                        </p>
-                      : moment(progressSteps[index].startAt).format('ll')}
-                  </div>
+                  {progressSteps[index].startAt &&
+                    <div className="excerpt small">
+                      {progressSteps[index].endAt
+                        ? <p>
+                            Du{' '}
+                            {moment(progressSteps[index].startAt).format(
+                              'll',
+                            )}{' '}
+                            au {moment(progressSteps[index].endAt).format('ll')}
+                          </p>
+                        : moment(progressSteps[index].startAt).format('ll')}
+                    </div>}
                 </Col>
-                <Col xs={2}>
-                  <ButtonToolbar>
+                <Col xs={4}>
+                  <ButtonToolbar className="pull-right">
                     <Button
+                      bsStyle="warning"
                       onClick={() => {
                         this.setState({ editIndex: index });
                       }}>
-                      Editer
+                      <FormattedMessage id="global.edit" />
                     </Button>
                     <Button
+                      bsStyle="danger"
                       onClick={() => {
                         // eslint-disable-next-line no-confirm
                         if (
@@ -92,7 +96,7 @@ export class ProposalAdminProgessSteps extends Component<
                           fields.remove(index);
                         }
                       }}>
-                      Supprimer
+                      <FormattedMessage id="global.remove" />
                     </Button>
                   </ButtonToolbar>
                 </Col>
@@ -106,7 +110,7 @@ export class ProposalAdminProgessSteps extends Component<
             dispatch(arrayPush(formName, 'progressSteps', {}));
             this.setState({ editIndex: fields.length });
           }}>
-          Ajouter
+          <FormattedMessage id="global.add" />
         </Button>
       </div>
     );
