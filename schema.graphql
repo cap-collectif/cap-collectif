@@ -102,6 +102,7 @@ type ChangeProposalNotationPayload {
 }
 
 input ChangeProposalProgressStepsInput {
+  progressSteps: [ProgressStepInput!]!
   clientMutationId: String
 }
 
@@ -491,6 +492,12 @@ type Post {
 # A budget contribution
 type ProgressStep {
   id: String!
+  title: String!
+  startAt: DateTime!
+  endAt: DateTime
+}
+
+input ProgressStepInput {
   title: String!
   startAt: DateTime!
   endAt: DateTime

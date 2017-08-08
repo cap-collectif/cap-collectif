@@ -18,7 +18,7 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function updateProgressSteps(Argument $values): array
+    public function changeProgressSteps(Argument $values): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
@@ -42,7 +42,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function updateCollectStatus(string $proposalId, $statusId = null): array
+    public function changeCollectStatus(string $proposalId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -64,7 +64,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function updateSelectionStatus(string $proposalId, string $stepId, $statusId = null): array
+    public function changeSelectionStatus(string $proposalId, string $stepId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 

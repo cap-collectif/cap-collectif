@@ -2,7 +2,15 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import {
+  ButtonToolbar,
+  Button,
+  Row,
+  Col,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap';
+import { baseUrl } from '../../../config';
 import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdminNewsForm_proposal.graphql';
 
 type DefaultProps = void;
@@ -19,7 +27,7 @@ export class ProposalAdminNewsForm extends Component<
   render() {
     const { proposal } = this.props;
     return (
-      <div className="box box-primary">
+      <div className="box box-primary container">
         <div className="box-header">
           <h4 className="box-title">
             <FormattedMessage id="proposal.admin.news" />
@@ -36,12 +44,35 @@ export class ProposalAdminNewsForm extends Component<
         <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
           {proposal.news.map((news, index) =>
             <ListGroupItem key={index}>
-              <div>
-                {news.title}
-              </div>
+              <Row>
+                <Col xs={6}>
+                  {news.title}
+                </Col>
+                <Col xs={6}>
+                  <ButtonToolbar className="pull-right">
+                    <Button
+                      bsStyle="warning"
+                      href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
+                      <FormattedMessage id="global.edit" />
+                    </Button>
+                    <Button
+                      bsStyle="danger"
+                      href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
+                      <FormattedMessage id="global.delete" />
+                    </Button>
+                  </ButtonToolbar>
+                </Col>
+              </Row>
             </ListGroupItem>,
           )}
         </ListGroup>
+        <ButtonToolbar style={{ marginBottom: 10 }}>
+          <Button
+            bsStyle="primary"
+            href={`${baseUrl}/admin/capco/app/post/create`}>
+            <FormattedMessage id="global.add" />
+          </Button>
+        </ButtonToolbar>
       </div>
     );
   }
@@ -53,6 +84,7 @@ export default createFragmentContainer(
     fragment ProposalAdminNewsForm_proposal on Proposal {
       id
       news {
+        id
         title
       }
     }

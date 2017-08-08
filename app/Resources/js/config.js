@@ -1,5 +1,5 @@
 // @flow
-const baseUrl = `${typeof window !== 'undefined'
+export const baseUrl = `${typeof window !== 'undefined'
   ? window.location.protocol
   : 'http'}//${typeof window !== 'undefined'
   ? window.location.host
