@@ -423,12 +423,6 @@ services:
       calls:
         - [ setTranslationDomain, [SonataAdminBundle]]
 
-  capco_admin.admin.progress_step:
-      class: Capco\AdminBundle\Admin\ProgressStepAdmin
-      arguments: [~, Capco\AppBundle\Entity\ProgressStep, SonataAdminBundle:CRUD]
-      tags:
-        - {name: sonata.admin, manager_type: orm, label: admin.label.progress_step}
-
   capco_admin.admin.proposal_form.notification:
       class: Capco\AdminBundle\Admin\ProposalFormNotificationConfigurationAdmin
       arguments: [~, Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration, SonataAdminBundle:CRUD]
