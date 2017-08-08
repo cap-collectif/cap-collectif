@@ -14,8 +14,9 @@ class ProposalProgressStepType extends AbstractType
         $builder
             ->add('progressSteps',
                 CollectionType::class, [
-                'type' => new ProgressStepType(),
-                'required' => false,
+                'entry_type' => ProgessStepType::class,
+                'required' => true,
+                'delete_empty' => true,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

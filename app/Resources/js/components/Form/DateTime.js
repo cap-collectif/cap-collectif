@@ -15,7 +15,7 @@ const DateTime = React.createClass({
         {...this.props}
         onChange={value => {
           if (value._isAMomentObject) {
-            onChange(value.format('MM/DD/YYYY hh:mm A'));
+            onChange(value.format('YYYY-MM-DD HH:mm:ss'));
           }
         }}
       />

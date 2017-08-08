@@ -44,7 +44,7 @@ class ProgressStep
         return $this->title ?? '';
     }
 
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -56,7 +56,7 @@ class ProgressStep
         return $this->startAt;
     }
 
-    public function setStartAt($startAt): self
+    public function setStartAt(\DateTime $startAt): self
     {
         $this->startAt = $startAt;
 

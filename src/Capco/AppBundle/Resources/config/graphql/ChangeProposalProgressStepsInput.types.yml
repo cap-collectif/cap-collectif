@@ -4,3 +4,5 @@ ChangeProposalProgressStepsInput:
         fields:
             progressSteps:
                 type: "[ProgressStepInput!]!"
+            proposalId:
+                type: "String!"

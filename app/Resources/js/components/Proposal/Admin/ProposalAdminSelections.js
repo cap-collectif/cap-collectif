@@ -77,7 +77,11 @@ const onSubmit = (values, dispatch, props: Props) => {
   ChangeProposalProgressStepsMutation.commit({
     input: {
       proposalId: proposal.id,
-      progressSteps: values.progressSteps,
+      progressSteps: values.progressSteps.map(v => ({
+        title: v.title,
+        startAt: v.startAt,
+        endAt: v.endAt,
+      })),
     },
   });
   ChangeCollectStatusMutation.commit({

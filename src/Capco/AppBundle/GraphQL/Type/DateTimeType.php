@@ -11,11 +11,16 @@ class DateTimeType
 
     public static function parseValue(string $value = null)
     {
-        return new \DateTime($value);
+        if (!$value) {
+            return null;
+        }
+
+        return $value; // For now we return a string... Because Symfony forms doesn't recognize DateTime wtf
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
     }
 
     public static function parseLiteral($valueNode): \DateTime
     {
-        return new \DateTime($valueNode->value);
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $valueNode->value);
     }
 }

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +17,16 @@ class ProgessStepType extends AbstractType
                 PurifiedTextType::class, [
                 'required' => true,
             ])
-            ->add('startAt', 'datetime', ['required' => true])
-            ->add('endAt', 'datetime', ['required' => false])
+            ->add('startAt', DateTimeType::class, [
+              'widget' => 'single_text',
+              'format' => 'Y-m-d H:i:s',
+              // 'required' => true
+            ])
+            ->add('endAt', DateTimeType::class, [
+              'widget' => 'single_text',
+              'format' => 'Y-m-d H:i:s',
+              // 'required' => false
+            ])
         ;
     }
 
