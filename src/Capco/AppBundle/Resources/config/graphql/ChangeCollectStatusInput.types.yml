@@ -1,4 +1,4 @@
-UpdateCollectStatusInput:
+ChangeCollectStatusInput:
     type: relay-mutation-input
     config:
         description: ""

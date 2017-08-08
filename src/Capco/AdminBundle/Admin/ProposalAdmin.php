@@ -19,23 +19,23 @@ class ProposalAdmin extends Admin
         'cascade_validation' => true,
     ];
 
-    public function getPersistentParameters()
-    {
-        $subject = $this->getSubject();
-        $projectId = null;
-
-        if ($subject && $subject->getId()) {
-            if ($subject->getProjectId()) {
-                $projectId = $subject->getProjectId();
-            }
-        } else {
-            $projectId = $this->getRequest()->get('projectId');
-        }
-
-        return [
-            'projectId' => $projectId,
-        ];
-    }
+    // public function getPersistentParameters()
+    // {
+    //     $subject = $this->getSubject();
+    //     $projectId = null;
+    //
+    //     if ($subject && $subject->getId()) {
+    //         if ($subject->getProjectId()) {
+    //             $projectId = $subject->getProjectId();
+    //         }
+    //     } else {
+    //         $projectId = $this->getRequest()->get('projectId');
+    //     }
+    //
+    //     return [
+    //         'projectId' => $projectId,
+    //     ];
+    // }
 
     public function getList()
     {

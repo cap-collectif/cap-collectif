@@ -47,10 +47,17 @@ export class ProposalAdminStatusForm extends Component<
     const { proposal, handleSubmit, publicationStatus } = this.props;
     return (
       <div className="box box-primary container">
-        <form onSubmit={handleSubmit}>
-          <a href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication">
-            Aide
+        <div className="box-header">
+          <h4 className="box-title">Etat</h4>
+          <a
+            className="pull-right link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication">
+            <i className="fa fa-info-circle" /> Aide
           </a>
+        </div>
+        <form onSubmit={handleSubmit}>
           {proposal.author.expiresAt &&
             <p>
               Adresse email de l'auteur en attente de confirmation:{' '}
@@ -81,13 +88,10 @@ export class ProposalAdminStatusForm extends Component<
                 component={component}
               />
             </div>}
-          <ButtonToolbar>
-            <Button type="submit">
+          <ButtonToolbar style={{ marginBottom: 10 }}>
+            <Button type="submit" bsStyle="primary">
               <FormattedMessage id="global.save" />
             </Button>
-            {/* <Button type="submit">
-                <FormattedMessage id="global.save_and_close"/>
-              </Button> */}
             <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
               <FormattedMessage id="global.delete" />
             </Button>

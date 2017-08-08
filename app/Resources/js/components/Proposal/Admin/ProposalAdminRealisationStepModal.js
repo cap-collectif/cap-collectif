@@ -40,6 +40,7 @@ const ProposalAdminRealisationStepModal = React.createClass({
         <Modal.Body>
           <Field
             label="Titre"
+            id={`${member}.title`}
             name={`${member}.title`}
             type="text"
             component={component}
@@ -47,6 +48,7 @@ const ProposalAdminRealisationStepModal = React.createClass({
           <Field
             timeFormat={false}
             label="Date de début"
+            id={`${member}.startAt`}
             name={`${member}.startAt`}
             type="datetime"
             component={component}
@@ -54,6 +56,7 @@ const ProposalAdminRealisationStepModal = React.createClass({
           <Field
             timeFormat={false}
             label="Date de fin (facultatif)"
+            id={`${member}.endAt`}
             name={`${member}.endAt`}
             type="datetime"
             component={component}

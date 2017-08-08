@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import {
   ButtonToolbar,
   Button,
@@ -15,16 +15,21 @@ import type { State } from '../../../types';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import SelectProposalMutation from '../../../mutations/SelectProposalMutation';
-import UpdateSelectionStatusMutation from '../../../mutations/UpdateSelectionStatusMutation';
+import ChangeSelectionStatusMutation from '../../../mutations/ChangeSelectionStatusMutation';
+import ChangeCollectStatusMutation from '../../../mutations/ChangeCollectStatusMutation';
+import ChangeProposalProgressStepsMutation from '../../../mutations/ChangeProposalProgressStepsMutation';
 import UnselectProposalMutation from '../../../mutations/UnselectProposalMutation';
 import ProposalAdminProgessSteps from './ProposalAdminProgessSteps';
 
 export const formName = 'proposal-admin-selections';
+const selector = formValueSelector(formName);
+
 type PassedProps = {
   proposal: ProposalAdminSelections_proposal,
 };
 type Props = {
   proposal: ProposalAdminSelections_proposal,
+  selectionValues: Array<Object>,
   handleSubmit: Function,
   pristine: boolean,
   invalid: boolean,
@@ -52,7 +57,7 @@ const onSubmit = (values, dispatch, props: Props) => {
       });
     }
     if (selection.selected && wasSelected) {
-      UpdateSelectionStatusMutation.commit({
+      ChangeSelectionStatusMutation.commit({
         input: {
           stepId: selection.step,
           proposalId: proposal.id,
@@ -69,7 +74,18 @@ const onSubmit = (values, dispatch, props: Props) => {
       });
     }
   }
-  console.log(values.progressSteps);
+  ChangeProposalProgressStepsMutation.commit({
+    input: {
+      proposalId: proposal.id,
+      progressSteps: values.progressSteps,
+    },
+  });
+  ChangeCollectStatusMutation.commit({
+    input: {
+      proposalId: proposal.id,
+      statusId: values.collectStatus,
+    },
+  });
 };
 
 export class ProposalAdminSelections extends Component<
@@ -78,12 +94,18 @@ export class ProposalAdminSelections extends Component<
   void,
 > {
   render() {
-    const { proposal, handleSubmit, pristine, invalid } = this.props;
+    const {
+      selectionValues,
+      proposal,
+      handleSubmit,
+      pristine,
+      invalid,
+    } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
     return (
-      <div className="box box-primary">
+      <div className="box box-primary container">
         <div className="box-header">
           <h4 className="box-title">Etapes</h4>
           <a
@@ -106,6 +128,7 @@ export class ProposalAdminSelections extends Component<
               <Field
                 label="Publié dans cette étape"
                 name={`collectPublished`}
+                id="collectPublished"
                 disabled
                 readOnly
                 component={toggle}
@@ -115,8 +138,9 @@ export class ProposalAdminSelections extends Component<
                   type="select"
                   label="Statut"
                   name="collectStatus"
+                  id="collectStatus"
                   component={component}>
-                  <option value={-1}>Aucun statut</option>
+                  <option value="">Aucun statut</option>
                   {collectStep.statuses &&
                     collectStep.statuses.map(status =>
                       <option key={status.id} value={status.id}>
@@ -127,7 +151,7 @@ export class ProposalAdminSelections extends Component<
               </div>
             </ListGroupItem>
             {selectionSteps.map((step, index) =>
-              <ListGroupItem>
+              <ListGroupItem key={index}>
                 <div>
                   <strong>{step.title}</strong> -{' '}
                   <span>Etape de sélection</span>
@@ -135,38 +159,46 @@ export class ProposalAdminSelections extends Component<
                 <br />
                 <Field
                   label="Publié dans cette étape"
+                  id={`selections[${index}].selected`}
                   name={`selections[${index}].selected`}
                   component={toggle}
+                  normalize={val => !!val}
                 />
-                {
+                {selectionValues[index] &&
+                  selectionValues[index].selected &&
                   <div>
-                    L'auteur de la proposition sera notifié du changement de
-                    statut
-                  </div>
-                }
-                <Field
-                  type="select"
-                  label="Statut"
-                  name={`selections[${index}].status`}
-                  component={component}>
-                  <option value={-1}>Aucun statut</option>
-                  {step.statuses &&
-                    step.statuses.map(status =>
-                      <option key={status.id} value={status.id}>
-                        {status.name}
-                      </option>,
-                    )}
-                </Field>
-                {step.allowingProgressSteps &&
-                  <FieldArray
-                    name="progressSteps"
-                    component={ProposalAdminProgessSteps}
-                  />}
+                    <div>
+                      L'auteur de la proposition sera notifié du changement de
+                      statut
+                    </div>
+                    <Field
+                      type="select"
+                      label="Statut"
+                      id={`selections[${index}].status`}
+                      name={`selections[${index}].status`}
+                      component={component}>
+                      <option value={-1}>Aucun statut</option>
+                      {step.statuses &&
+                        step.statuses.map(status =>
+                          <option key={status.id} value={status.id}>
+                            {status.name}
+                          </option>,
+                        )}
+                    </Field>
+                    {step.allowingProgressSteps &&
+                      <FieldArray
+                        name="progressSteps"
+                        component={ProposalAdminProgessSteps}
+                      />}
+                  </div>}
               </ListGroupItem>,
             )}
           </ListGroup>
-          <ButtonToolbar>
-            <Button type="submit" disabled={pristine || invalid}>
+          <ButtonToolbar style={{ marginBottom: 10 }}>
+            <Button
+              type="submit"
+              bsStyle="primary"
+              disabled={pristine || invalid}>
               <FormattedMessage id="global.save" />
             </Button>
           </ButtonToolbar>
@@ -186,6 +218,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
   const steps = props.proposal.project.steps;
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {
+    selectionValues: selector(state, 'selections') || [],
     initialValues: {
       collectPublished: true,
       progressSteps: props.proposal.progressSteps,

@@ -1,11 +1,5 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{# {% block sonata_header %}
-{% endblock %} #}
-
-{# {% block sonata_left_side %}
-{% endblock %} #}
-
 {% block form %}
 {% include '@CapcoApp/redux_store.html.twig' with {
   'project': admin.subject.proposalForm.step.getProject(),
@@ -33,13 +27,6 @@
   'rendering': 'client_side'
 }) }}
 {% endblock %}
-
-{#
-{% block stylesheets %}
-    <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-{% endblock %}
-#}
 
 {% block javascripts %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>

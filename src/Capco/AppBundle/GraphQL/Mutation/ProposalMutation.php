@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\Form\ProposalType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -17,11 +18,35 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public function updateProgressSteps(Argument $values): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $formFactory = $this->container->get('form.factory');
+
+        $values = $input->getRawArguments();
+        $proposal = $em->find('CapcoAppBundle:Proposal', $values['id']);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
+        }
+        unset($values['id']); // This only usefull to retrieve the proposal
+
+      $form = $formFactory->create(ProposalProgressStepType::class, $proposal);
+        $form->submit($values);
+
+        if (!$form->isValid()) {
+            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+        }
+
+        $em->flush();
+
+        return ['proposal' => $proposal];
+    }
+
     public function updateCollectStatus(string $proposalId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
         if (!$proposal) {
             throw new UserError('Cant find the proposal');
         }
@@ -62,7 +87,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
 
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
 
         return ['proposal' => $proposal];
     }
@@ -79,7 +104,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->remove($selection);
         $em->flush();
 
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
+        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
 
         return ['proposal' => $proposal];
     }

@@ -1,6 +1,6 @@
 fos_elastica:
   clients:
-    default: { host: '%elasticsearch_host%', port: 9200 }
+    default: { host: '%elasticsearch_host%', port: 9200, retryOnConflict: 5 }
   serializer: ~
   indexes:
     app:

@@ -13,6 +13,10 @@ export const Toggle = React.createClass({
     inputClassName: PropTypes.string,
   },
 
+  getDefaultProps() {
+    return { disabled: false };
+  },
+
   render() {
     const { input, label, disabled, meta: { touched, error } } = this.props;
     return (

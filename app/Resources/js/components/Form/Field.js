@@ -19,6 +19,7 @@ const Field = React.createClass({
     type: PropTypes.oneOf([
       'address',
       'text',
+      'number',
       'datetime',
       'textarea',
       'editor',
@@ -31,6 +32,8 @@ const Field = React.createClass({
       'image',
       'medias',
     ]).isRequired,
+    addonAfter: PropTypes.any,
+    addonBefore: PropTypes.any,
     label: PropTypes.any,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
@@ -63,6 +66,8 @@ const Field = React.createClass({
       disabled,
       help,
       formName,
+      addonAfter,
+      addonBefore,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -75,6 +80,8 @@ const Field = React.createClass({
         formName={formName}
         disabled={disabled}
         popover={popover}
+        addonAfter={addonAfter}
+        addonBefore={addonBefore}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}

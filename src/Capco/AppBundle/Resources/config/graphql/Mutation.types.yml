@@ -32,15 +32,21 @@ Mutation:
                   inputType: UnselectProposalInput
                   payloadType: UnselectProposalPayload
                   mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
-          updateSelectionStatus:
+          changeSelectionStatus:
               builder: "Relay::Mutation"
               builderConfig:
-                  inputType: UpdateSelectionStatusInput
-                  payloadType: UpdateSelectionStatusPayload
-                  mutateAndGetPayload: "@=mutation('updateSelectionStatus', [value['proposalId'], value['stepId'], value['statusId'] ])"
-          updateCollectStatus:
+                  inputType: ChangeSelectionStatusInput
+                  payloadType: ChangeSelectionStatusPayload
+                  mutateAndGetPayload: "@=mutation('updateSelectionStatus', [ value['proposalId'], value['stepId'], value['statusId'] ])"
+          changeCollectStatus:
               builder: "Relay::Mutation"
               builderConfig:
-                  inputType: UpdateCollectStatusInput
-                  payloadType: UpdateCollectStatusPayload
+                  inputType: ChangeCollectStatusInput
+                  payloadType: ChangeCollectStatusPayload
                   mutateAndGetPayload: "@=mutation('updateCollectStatus', [value['proposalId'], value['statusId'] ])"
+          changeProposalProgressSteps:
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: ChangeProposalProgressStepsInput
+                  payloadType: ChangeProposalProgressStepsPayload
+                  mutateAndGetPayload: "@=mutation('updateProgressSteps', [value])"

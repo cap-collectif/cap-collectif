@@ -1,4 +1,4 @@
-UpdateSelectionStatusPayload:
+ChangeCollectStatusPayload:
     type: relay-mutation-payload
     config:
         fields:

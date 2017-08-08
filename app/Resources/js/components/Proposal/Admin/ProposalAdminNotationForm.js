@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
@@ -41,8 +41,8 @@ export class ProposalAdminNotationForm extends Component<
     const { handleSubmit, proposal } = this.props;
     return (
       <div className="box box-primary container">
-        <form onSubmit={handleSubmit}>
-          <h4 className="h4">Général</h4>
+        <div className="box-header">
+          <h4 className="box-title">Général</h4>
           <a
             className="pull-right link"
             target="_blank"
@@ -50,12 +50,15 @@ export class ProposalAdminNotationForm extends Component<
             href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
             <i className="fa fa-info-circle" /> Aide
           </a>
+        </div>
+        <form onSubmit={handleSubmit}>
           <div>
             <Field
               name="estimation"
               component={component}
               type="number"
               id="proposal_estimation"
+              addonAfter={<Glyphicon glyph="euro" />}
               label={<FormattedMessage id="proposal.estimation" />}
             />
             <Field
@@ -75,8 +78,8 @@ export class ProposalAdminNotationForm extends Component<
                 label: u.displayName,
               }))}
             />
-            <ButtonToolbar>
-              <Button type="submit">
+            <ButtonToolbar style={{ marginBottom: 10 }}>
+              <Button type="submit" bsStyle="primary">
                 <FormattedMessage id="global.save" />
               </Button>
             </ButtonToolbar>

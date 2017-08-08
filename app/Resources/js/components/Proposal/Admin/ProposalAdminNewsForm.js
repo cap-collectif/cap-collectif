@@ -34,8 +34,8 @@ export class ProposalAdminNewsForm extends Component<
           </a>
         </div>
         <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
-          {proposal.news.map(news =>
-            <ListGroupItem>
+          {proposal.news.map((news, index) =>
+            <ListGroupItem key={index}>
               <div>
                 {news.title}
               </div>

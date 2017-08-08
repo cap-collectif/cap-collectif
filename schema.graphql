@@ -42,6 +42,19 @@ enum ArgumentValue {
   FOR
 }
 
+input ChangeCollectStatusInput {
+  statusId: String
+
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type ChangeCollectStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -107,6 +120,18 @@ input ChangeProposalPublicationStatusInput {
 }
 
 type ChangeProposalPublicationStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeSelectionStatusInput {
+  stepId: String!
+  proposalId: ID!
+  statusId: String
+  clientMutationId: String
+}
+
+type ChangeSelectionStatusPayload {
   proposal: Proposal!
   clientMutationId: String
 }
@@ -247,8 +272,9 @@ type Mutation {
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
-  updateSelectionStatus(input: UpdateSelectionStatusInput!): UpdateSelectionStatusPayload
-  updateCollectStatus(input: UpdateCollectStatusInput!): UpdateCollectStatusPayload
+  changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
+  changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
+  changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
 }
 
 # A contribution
@@ -831,31 +857,6 @@ input UnselectProposalInput {
 }
 
 type UnselectProposalPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
-input UpdateCollectStatusInput {
-  statusId: String
-
-  # The proposal id
-  proposalId: ID!
-  clientMutationId: String
-}
-
-type UpdateCollectStatusPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
-input UpdateSelectionStatusInput {
-  stepId: String!
-  proposalId: ID!
-  statusId: String
-  clientMutationId: String
-}
-
-type UpdateSelectionStatusPayload {
   proposal: Proposal!
   clientMutationId: String
 }

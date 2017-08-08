@@ -213,7 +213,7 @@ export class ProposalAdminContentForm extends Component<
                       res => res && res.question.id === field.id,
                     )[0];
                     return (
-                      <div>
+                      <div key={index}>
                         <Field
                           key={field.id}
                           id={field.id}
@@ -245,13 +245,10 @@ export class ProposalAdminContentForm extends Component<
                 </span>
               }
             />
-            <ButtonToolbar>
-              <Button type="submit">
+            <ButtonToolbar style={{ marginBottom: 10 }}>
+              <Button type="submit" bsStyle="primary">
                 <FormattedMessage id="global.save" />
               </Button>
-              {/* <Button type="submit">
-                <FormattedMessage id="global.save_and_close"/>
-              </Button> */}
             </ButtonToolbar>
           </div>
         </form>
