@@ -7,6 +7,7 @@ import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
+import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
 import type { ProposalAdminStatusForm_proposal } from './__generated__/ProposalAdminStatusForm_proposal.graphql';
 
 type DefaultProps = void;
@@ -19,23 +20,20 @@ type State = void;
 
 const formName = 'proposal-admin-status';
 const onSubmit = (values, dispatch, props) => {
-  const variables = {
+  ChangeProposalPublicationStatusMutation.commit({
     input: {
       publicationStatus: values.publicationStatus,
       id: props.proposal.id,
     },
-  };
-  ChangeProposalPublicationStatusMutation.commit(variables);
+  }).then(location.reload());
 };
 
-const onDelete = id => {
-  const variables = {
+const onDelete = proposalId => {
+  DeleteProposalMutation.commit({
     input: {
-      publicationStatus: 'DELETED',
-      id,
+      proposalId,
     },
-  };
-  ChangeProposalPublicationStatusMutation.commit(variables);
+  }).then(location.reload());
 };
 
 export class ProposalAdminStatusForm extends Component<

@@ -3,50 +3,65 @@ Mutation:
     config:
         fields:
           changeProposalPublicationStatus:
+                access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalPublicationStatusInput
                     payloadType: ChangeProposalPublicationStatusPayload
                     mutateAndGetPayload: "@=mutation('changeProposalPublicationStatus', [value])"
           changeProposalContent:
+                access: "@=hasRole('ROLE_ADMIN')" # For now only used in back office
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalContentInput
                     payloadType: ChangeProposalContentPayload
                     mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"
           changeProposalNotation:
+                access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalNotationInput
                     payloadType: ChangeProposalNotationPayload
                     mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"
           selectProposal:
+                access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: SelectProposalInput
                     payloadType: SelectProposalPayload
                     mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId']])"
           unselectProposal:
+              access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: UnselectProposalInput
                   payloadType: UnselectProposalPayload
                   mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
           changeSelectionStatus:
+              access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: ChangeSelectionStatusInput
                   payloadType: ChangeSelectionStatusPayload
                   mutateAndGetPayload: "@=mutation('changeSelectionStatus', [ value['proposalId'], value['stepId'], value['statusId'] ])"
           changeCollectStatus:
+              access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: ChangeCollectStatusInput
                   payloadType: ChangeCollectStatusPayload
                   mutateAndGetPayload: "@=mutation('changeCollectStatus', [value['proposalId'], value['statusId'] ])"
           changeProposalProgressSteps:
+              access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: ChangeProposalProgressStepsInput
                   payloadType: ChangeProposalProgressStepsPayload
                   mutateAndGetPayload: "@=mutation('changeProgressSteps', [value])"
+          deleteProposal:
+              access: "@=hasRole('ROLE_SUPER_ADMIN')"
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: DeleteProposalInput
+                  payloadType: DeleteProposalPayload
+                  mutateAndGetPayload: "@=mutation('deleteProposal', [value])"

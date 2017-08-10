@@ -240,6 +240,17 @@ interface ContributionWithAuthor {
 
 scalar DateTime
 
+input DeleteProposalInput {
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type DeleteProposalPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 # A theme
 type District {
   id: String!
@@ -282,6 +293,7 @@ type Mutation {
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
+  deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
 }
 
 # A contribution

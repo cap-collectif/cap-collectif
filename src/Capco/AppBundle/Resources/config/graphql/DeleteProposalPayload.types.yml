@@ -1,0 +1,6 @@
+DeleteProposalPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            proposal:
+                type: "Proposal!"

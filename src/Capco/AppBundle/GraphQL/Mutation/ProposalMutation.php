@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
-use Capco\AppBundle\Form\ProposalType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -20,12 +20,18 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function delete()
+    public function delete(string $proposalId): array
     {
-        // if ($entity instanceof Proposal) {
-      //     $args->getObjectManager()->remove($entity->getSelections());
-      //     $args->getObjectManager()->flush();
-      // }
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
+        }
+        $em->remove($entity->getSelections());
+        $em->remove($proposal);
+        $em->flush();
+
+        return ['proposal' => $proposal];
     }
 
     public function changeNotation(Argument $input)
@@ -37,7 +43,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
         unset($values['proposalId']); // This only usefull to retrieve the proposal
 
-      $form = $formFactory->create(ProposalNotationType::class, $proposal);
+        $form = $formFactory->create(ProposalNotationType::class, $proposal);
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -194,6 +200,7 @@ class ProposalMutation implements ContainerAwareInterface
         $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
         $mediaManager = $this->container->get('capco.media.manager');
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $values = $input->getRawArguments();
         $values['responses'] = array_map(function ($value) {
@@ -263,7 +270,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
        // Now we can submit the form without anything related to file uploads
-       $form = $formFactory->create(ProposalType::class, $proposal, [
+       $form = $formFactory->create(ProposalAdminType::class, $proposal, [
            'proposalForm' => $proposal->getProposalForm(),
        ]);
 
@@ -272,17 +279,7 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
 
-        // if (
-        //     $this->container->get('security.token_storage')->getToken()
-        //     && $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
-        // ) {
-        //     $entity->setUpdateAuthor($this->container->get('security.token_storage')->getToken()->getUser());
-        // }
-        //
-        // if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
-        //     $notifier->notifyProposalAnswer($entity);
-        // }
-
+        $proposal->setUpdateAuthor($user);
         $em->flush();
 
         return ['proposal' => $proposal];

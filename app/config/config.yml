@@ -379,6 +379,9 @@ hslavich_simplesamlphp:
     sp: "%saml_sp%"
 
 overblog_graphql:
+    security:
+        query_max_depth: false
+        query_max_complexity: false
     definitions:
         show_debug_info: %kernel.debug%
         internal_error_message: "An error occurred, please retry later or contact us!"

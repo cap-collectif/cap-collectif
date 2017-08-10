@@ -1,3 +1,4 @@
+// @flow
 import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';

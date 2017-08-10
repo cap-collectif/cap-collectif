@@ -134,6 +134,8 @@ class ProposalsController extends FOSRestController
                 ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
         }
 
+        unset($unflattenRequest['delete_media'], $unflattenRequest['media']);
+
         $form->submit($unflattenRequest, false);
 
         if (!$form->isValid()) {
@@ -345,6 +347,7 @@ class ProposalsController extends FOSRestController
      */
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {
+        $user = $this->getUser();
         if (!$proposal->canContribute()) {
             throw new BadRequestHttpException('This proposal is no longer editable.');
         }
@@ -391,6 +394,8 @@ class ProposalsController extends FOSRestController
         $form->submit($unflattenRequest, false);
 
         if ($form->isValid()) {
+            $proposal->setUpdateAuthor($user);
+
             $em->persist($proposal);
             $em->flush();
 

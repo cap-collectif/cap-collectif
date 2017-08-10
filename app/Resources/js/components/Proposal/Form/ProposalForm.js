@@ -550,6 +550,9 @@ export const ProposalForm = React.createClass({
           name="body"
           label={<FormattedMessage id="proposal.body" />}
           help={form.descriptionHelpText}
+          groupClassName={this.getGroupStyle('body')}
+          errors={this.renderFormErrors('body')}
+          valueLink={this.linkState('form.body')}
         />
         {form.fields.map(field => {
           const key = `custom-${field.id}`;

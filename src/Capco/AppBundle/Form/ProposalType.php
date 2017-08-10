@@ -8,9 +8,7 @@ use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
-use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,9 +35,6 @@ class ProposalType extends AbstractType
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
-
-        // ADMIN ONLY
-        $builder->add('author');
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
             $builder->add('theme');
@@ -69,16 +64,6 @@ class ProposalType extends AbstractType
                 'required' => false,
             ])
         ;
-
-        // $builder->add('media', MediaType::class, [
-        //     'required' => false,
-        //     'provider' => 'sonata.media.provider.image',
-        //     'context' => 'default',
-        // ])
-        // ->add('delete_media', CheckboxType::class, [
-        //     'required' => false,
-        //     'mapped' => false,
-        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
