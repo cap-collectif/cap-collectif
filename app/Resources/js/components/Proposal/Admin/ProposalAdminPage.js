@@ -40,11 +40,7 @@ export class ProposalAdminPage extends Component<DefaultProps, Props, State> {
           query={graphql`
             query ProposalAdminPageQuery($id: ID!) {
               proposal(id: $id) {
-                ...ProposalAdminStatusForm_proposal
-                ...ProposalAdminSelections_proposal
-                ...ProposalAdminContentForm_proposal
-                ...ProposalAdminNotationForm_proposal
-                ...ProposalAdminNewsForm_proposal
+                ...ProposalAdminPageTabs_proposal
               }
             }
           `}

@@ -65,16 +65,16 @@ input ChangeProposalContentInput {
   # The new proposal body
   body: HTML
 
-  # The theme id
+  # The author id (ROLE_SUPER_ADMIN only)
   author: String
 
-  # The theme id
+  # The theme id (feature themes enabled)
   theme: String
 
   # The category id
   category: String
 
-  # The district id
+  # The district id (feature districts enabled)
   district: String
 
   # The address geocoded by google
@@ -120,6 +120,9 @@ type ChangeProposalProgressStepsPayload {
 input ChangeProposalPublicationStatusInput {
   # The new publication status
   publicationStatus: PublicationStatus!
+
+  # Added if you set publicationStatus to TRASHED
+  trashedReason: String
 
   # The proposal id
   id: ID!

@@ -7,6 +7,8 @@ import { ProposalAdminNotationForm } from './ProposalAdminNotationForm';
 describe('<ProposalAdminNotationForm />', () => {
   const props = {
     handleSubmit: jest.fn(),
+    invalid: false,
+    pristine: false,
     proposal: {
       id: '1',
       estimation: 1000,

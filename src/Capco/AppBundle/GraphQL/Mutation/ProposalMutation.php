@@ -186,12 +186,21 @@ class ProposalMutation implements ContainerAwareInterface
               $proposal->setEnabled(true);
               $proposal->setTrashed(true);
               $proposal->setTrashedReason($values['trashedReason']);
+              $proposal->setDeletedAt(null);
               break;
           case 'PUBLISHED':
               $proposal->setExpired(false);
               $proposal->setEnabled(true);
               $proposal->setTrashed(false);
+              $proposal->setDeletedAt(null);
               break;
+          case 'TRASHED_NOT_VISIBLE':
+            $proposal->setExpired(false);
+            $proposal->setEnabled(false);
+            $proposal->setTrashed(true);
+            $proposal->setTrashedReason($values['trashedReason']);
+            $proposal->setDeletedAt(null);
+            break;
           default:
             break;
         }

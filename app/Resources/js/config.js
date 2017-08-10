@@ -5,8 +5,8 @@ export const baseUrl = `${typeof window !== 'undefined'
   ? window.location.host
   : 'capco.test/'}`;
 
-export const graphQLUrl = `${baseUrl}/graphql/`;
 export default {
+  graphql: `${baseUrl}/graphql/`,
   api: `${baseUrl}/api`,
   mapsAPIKey: '***REMOVED***',
   mapboxApiKey:

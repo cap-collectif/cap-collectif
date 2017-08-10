@@ -60,6 +60,32 @@ class Fetcher {
     });
   }
 
+  graphqlFormData(body: FormData): Promise<*> {
+    return AuthService.login().then(() => {
+      return fetch(config.graphql, {
+        method: 'POST',
+        headers: createFormDataHeaders(),
+        beforeSend: addAuthorization,
+        body,
+      })
+        .then(status)
+        .then(json);
+    });
+  }
+
+  graphql(body: Object) {
+    return AuthService.login().then(() => {
+      return fetch(config.graphql, {
+        method: 'POST',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      })
+        .then(status)
+        .then(json);
+    });
+  }
+
   postFormData(uri: string, body: FormData): Promise<*> {
     return AuthService.login().then(() => {
       return fetch(config.api + uri, {

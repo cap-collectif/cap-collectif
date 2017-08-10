@@ -87,7 +87,11 @@ class ProposalResolver implements ContainerAwareInterface
             return 'EXPIRED';
         }
         if ($proposal->isTrashed()) {
-            return 'TRASHED';
+            if ($proposal->isEnabled()) {
+                return 'TRASHED';
+            }
+
+            return 'TRASHED_NOT_VISIBLE';
         }
 
         return 'PUBLISHED';
@@ -101,7 +105,7 @@ class ProposalResolver implements ContainerAwareInterface
             return '';
         }
 
-        return $this->router->generate('app_project_show_proposal',
+        return $this->container->get('router')->generate('app_project_show_proposal',
           [
             'proposalSlug' => $proposal->getSlug(),
             'projectSlug' => $project->getSlug(),

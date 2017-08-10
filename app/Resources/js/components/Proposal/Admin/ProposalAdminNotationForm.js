@@ -9,31 +9,37 @@ import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNot
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
+import type { State, Dispatch } from '../../../types';
 
 type DefaultProps = void;
-type Props = {
-  proposal: ProposalAdminNotationForm_proposal,
+type FormValues = Object;
+type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
+type Props = RelayProps & {
   handleSubmit: () => void,
+  invalid: boolean,
+  pristine: boolean,
 };
-type State = void;
 
 const formName = 'proposal-admin-notation';
+const validate = () => {
+  const errors = {};
+  return errors;
+};
 
-const onSubmit = (values, dispatch, props) => {
-  console.log('onSubmit', values);
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalNotationMutation.commit(variables);
+  ChangeProposalNotationMutation.commit(variables).then(location.reload());
 };
 
 export class ProposalAdminNotationForm extends Component<
   DefaultProps,
   Props,
-  State,
+  void,
 > {
   render() {
-    const { handleSubmit, proposal } = this.props;
+    const { invalid, pristine, handleSubmit, proposal } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -72,7 +78,10 @@ export class ProposalAdminNotationForm extends Component<
               }))}
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
-              <Button type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine}
+                type="submit"
+                bsStyle="primary">
                 <FormattedMessage id="global.save" />
               </Button>
             </ButtonToolbar>
@@ -85,11 +94,11 @@ export class ProposalAdminNotationForm extends Component<
 
 const form = reduxForm({
   onSubmit,
-  // validate,
+  validate,
   form: formName,
 })(ProposalAdminNotationForm);
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     estimation: props.proposal.estimation,
     likers: props.proposal.likers.map(u => u.id),

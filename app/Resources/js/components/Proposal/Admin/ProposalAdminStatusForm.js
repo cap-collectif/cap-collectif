@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import moment from 'moment';
 import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
 import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
@@ -17,10 +18,12 @@ type Props = RelayProps & {
   isSuperAdmin: boolean,
   publicationStatus: string,
   isSuperAdmin: boolean,
+  pristine: boolean,
+  invalid: boolean,
   handleSubmit: () => void,
 };
 type FormValues = {
-  publicationStatus: 'PUBLISHED' | 'TRASHED',
+  publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE',
   trashedReason: ?string,
 };
 
@@ -51,6 +54,8 @@ export class ProposalAdminStatusForm extends Component<
     const {
       isSuperAdmin,
       proposal,
+      pristine,
+      invalid,
       handleSubmit,
       publicationStatus,
     } = this.props;
@@ -78,16 +83,22 @@ export class ProposalAdminStatusForm extends Component<
             name="publicationStatus"
             component={component}
             disabled={
-              publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED'
+              !isSuperAdmin &&
+              (publicationStatus === 'DELETED' ||
+                publicationStatus === 'EXPIRED')
             }>
             <ToggleButton value="PUBLISHED">Publié</ToggleButton>
             <ToggleButton value="TRASHED">Corbeille</ToggleButton>
+            <ToggleButton value="TRASHED_NOT_VISIBLE">
+              Corbeille (Masqué)
+            </ToggleButton>
             {publicationStatus === 'EXPIRED' &&
               <ToggleButton value="EXPIRED">Expiré</ToggleButton>}
             {publicationStatus === 'DELETED' &&
               <ToggleButton value="DELETED">Supprimé</ToggleButton>}
           </Field>
-          {publicationStatus === 'TRASHED' &&
+          {(publicationStatus === 'TRASHED' ||
+            publicationStatus === 'TRASHED_NOT_VISIBLE') &&
             <div>
               <Field
                 id="trashedReason"
@@ -97,16 +108,21 @@ export class ProposalAdminStatusForm extends Component<
                 component={component}
               />
             </div>}
+          {proposal.deletedAt &&
+            <p>
+              Supprimé le {moment(proposal.deletedAt).format('ll')}
+            </p>}
           <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button type="submit" bsStyle="primary">
+            <Button
+              disabled={pristine || invalid}
+              type="submit"
+              bsStyle="primary">
               <FormattedMessage id="global.save" />
             </Button>
-            <Button
-              bsStyle="danger"
-              disabled={!isSuperAdmin}
-              onClick={() => onDelete(proposal.id)}>
-              <FormattedMessage id="global.delete" />
-            </Button>
+            {isSuperAdmin &&
+              <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
+                <FormattedMessage id="global.delete" />
+              </Button>}
           </ButtonToolbar>
         </form>
       </div>

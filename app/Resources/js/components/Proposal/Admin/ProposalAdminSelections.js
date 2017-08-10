@@ -200,10 +200,10 @@ export class ProposalAdminSelections extends Component<
                 {selectionValues[index] &&
                   selectionValues[index].selected &&
                   <div>
-                    <div>
+                    <p className="has-warning">
                       L'auteur de la proposition sera notifié du changement de
                       statut
-                    </div>
+                    </p>
                     <Field
                       type="select"
                       label="Statut"

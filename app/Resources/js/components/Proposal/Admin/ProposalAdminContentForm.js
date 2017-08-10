@@ -23,6 +23,7 @@ type Props = {
   features: FeatureToggles,
   handleSubmit: () => void,
   intl: Object,
+  isSuperAdmin: boolean,
   pristine: boolean,
   invalid: boolean,
 };
@@ -55,6 +56,11 @@ const onSubmit = (values, dispatch, props: Props) => {
     return false;
   });
 
+  // Only super admin can edit author
+  if (!props.isSuperAdmin) {
+    delete values.author;
+  }
+
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
@@ -78,6 +84,7 @@ export class ProposalAdminContentForm extends Component<
       proposal,
       features,
       districts,
+      isSuperAdmin,
       themes,
       handleSubmit,
     } = this.props;
@@ -111,6 +118,7 @@ export class ProposalAdminContentForm extends Component<
             <Field
               name="author"
               label="Auteur"
+              disabled={!isSuperAdmin}
               id="proposal-admin-author"
               labelClassName="control-label"
               inputClassName="qdnsqdnqsldnqsldn"
@@ -291,6 +299,9 @@ const form = reduxForm({
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
+  isSuperAdmin: !!(
+    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
+  ),
   features: state.default.features,
   themes: state.default.themes,
   districts: state.default.districts,
