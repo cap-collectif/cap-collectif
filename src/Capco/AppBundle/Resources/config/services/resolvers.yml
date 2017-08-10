@@ -77,10 +77,6 @@ services:
     class: Capco\AppBundle\Resolver\VoteResolver
     arguments: ['@router', '@capco.url.resolver']
 
-  capco.proposal.resolver:
-    class: Capco\AppBundle\Resolver\ProposalResolver
-    arguments: ['@capco.url.resolver']
-
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalStepVotesResolver
     arguments: ['@capco.proposal_selection_vote.repository', '@capco.selection_step.repository', '@capco.proposal_collect_vote.repository', '@capco.collect_step.repository', '@capco.proposal.repository']

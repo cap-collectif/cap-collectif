@@ -30,6 +30,7 @@ Consultation:
                     orderBy:
                       type: "ContributionOrder"
                       description: "Ordering options for contributions returned from the connection."
+                      # defaultValue: { field: POSITION, direction: DESC }
                     after:
                       type: "String"
                       description: "Returns the elements in the list that come after the specified global ID."
