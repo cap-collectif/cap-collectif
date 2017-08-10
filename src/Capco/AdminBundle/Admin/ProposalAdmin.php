@@ -15,28 +15,6 @@ class ProposalAdmin extends Admin
         '_sort_by' => 'updatedAt',
     ];
 
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
-
-    // public function getPersistentParameters()
-    // {
-    //     $subject = $this->getSubject();
-    //     $projectId = null;
-    //
-    //     if ($subject && $subject->getId()) {
-    //         if ($subject->getProjectId()) {
-    //             $projectId = $subject->getProjectId();
-    //         }
-    //     } else {
-    //         $projectId = $this->getRequest()->get('projectId');
-    //     }
-    //
-    //     return [
-    //         'projectId' => $projectId,
-    //     ];
-    // }
-
     public function getList()
     {
         // Remove APC Cache for soft delete

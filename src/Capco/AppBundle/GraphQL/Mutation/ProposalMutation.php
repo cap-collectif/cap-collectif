@@ -20,6 +20,14 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public function delete()
+    {
+        // if ($entity instanceof Proposal) {
+      //     $args->getObjectManager()->remove($entity->getSelections());
+      //     $args->getObjectManager()->flush();
+      // }
+    }
+
     public function changeNotation(Argument $input)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
@@ -232,17 +240,19 @@ class ProposalMutation implements ContainerAwareInterface
                 break;
             }
             $questionId = str_replace('responses.', '', $key);
+            $question = $em->find('CapcoAppBundle:Questions\AbstractQuestion', (int) $questionId);
+            if (!$question) {
+                throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
+            }
             $response = $proposal->getResponses()->filter(
                   function (AbstractResponse $res) use ($questionId) {
                       return (int) $res->getQuestion()->getId() === (int) $questionId;
                   }
               )->first();
             if (!$response) {
-                $question = $em->find('CapcoAppBundle:Questions\AbstractQuestion', (int) $questionId);
                 $response = new MediaResponse();
                 $response->setQuestion($question);
                 $proposal->addResponse($response);
-                // throw new UserError(sprintf('Unknown response for question with id "%d"', (int) $questionId));
             }
             $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
             $response->addMedia($media);
@@ -261,6 +271,17 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$form->isValid()) {
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
+
+        // if (
+        //     $this->container->get('security.token_storage')->getToken()
+        //     && $this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
+        // ) {
+        //     $entity->setUpdateAuthor($this->container->get('security.token_storage')->getToken()->getUser());
+        // }
+        //
+        // if (array_key_exists('answer', $changeSet) && $changeSet['answer'][1] instanceof Answer) {
+        //     $notifier->notifyProposalAnswer($entity);
+        // }
 
         $em->flush();
 

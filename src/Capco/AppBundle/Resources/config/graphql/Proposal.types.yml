@@ -4,10 +4,10 @@ Proposal:
         description: "A budget contribution"
         # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
-            # url:
-            #     type: "URI!"
-            #     description: "The HTTP url for this contribution."
-            #     resolve: "@=resolver('proposition_url', [value])"
+            url:
+                type: "URI!"
+                description: "The HTTP url for this contribution."
+                resolve: "@=resolver('proposal_url', [value])"
             progressSteps:
               type: "[ProgressStep!]!"
             news:

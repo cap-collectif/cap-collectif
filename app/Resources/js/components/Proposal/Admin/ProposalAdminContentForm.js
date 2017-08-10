@@ -23,6 +23,8 @@ type Props = {
   features: FeatureToggles,
   handleSubmit: () => void,
   intl: Object,
+  pristine: boolean,
+  invalid: boolean,
 };
 type State = void;
 
@@ -70,7 +72,15 @@ export class ProposalAdminContentForm extends Component<
   State,
 > {
   render() {
-    const { proposal, features, districts, themes, handleSubmit } = this.props;
+    const {
+      pristine,
+      invalid,
+      proposal,
+      features,
+      districts,
+      themes,
+      handleSubmit,
+    } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
     const optional = (
@@ -260,7 +270,10 @@ export class ProposalAdminContentForm extends Component<
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
-              <Button type="submit" bsStyle="primary">
+              <Button
+                type="submit"
+                bsStyle="primary"
+                disabled={pristine || invalid}>
                 <FormattedMessage id="global.save" />
               </Button>
             </ButtonToolbar>

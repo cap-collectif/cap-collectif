@@ -15,6 +15,7 @@ services:
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
       tags:
+          - { name: overblog_graphql.resolver, alias: "proposal_url", method: "resolveUrl" }
           - { name: overblog_graphql.resolver, alias: "post_abstract", method: "resolvePostAbstract" }
           - { name: overblog_graphql.resolver, alias: "proposal_news", method: "resolveNews" }
           - { name: overblog_graphql.resolver, alias: "project_steps", method: "resolveProjectSteps" }

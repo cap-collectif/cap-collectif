@@ -17,7 +17,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProposalResolver implements ContainerAwareInterface
 {
@@ -94,22 +93,19 @@ class ProposalResolver implements ContainerAwareInterface
         return 'PUBLISHED';
     }
 
-    public function resolveProposalUrl(Proposal $proposal): string
+    public function resolveUrl(Proposal $proposal): string
     {
-        // $step = $this->container->get('capco.consultation_step.repository')
-        //   ->getByOpinionId($contribution->getId())
-        // ;
-        // $project = $step->getProject();
-        //
-        // return $this->container->get('router')->generate(
-        //     'app_consultation_show_opinion',
-        //     [
-        //         'projectSlug' => $project->getSlug(),
-        //         'stepSlug' => $step->getSlug(),
-        //         'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
-        //         'opinionSlug' => $contribution->getSlug(),
-        //     ],
-        //     UrlGeneratorInterface::ABSOLUTE_URL
-        // );
+        $step = $proposal->getStep();
+        $project = $step->getProject();
+        if (!$project) {
+            return '';
+        }
+
+        return $this->router->generate('app_project_show_proposal',
+          [
+            'proposalSlug' => $proposal->getSlug(),
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $step->getSlug(),
+          ], true);
     }
 }
