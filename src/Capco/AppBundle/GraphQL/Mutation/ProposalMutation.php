@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalProgressStepType;
@@ -17,6 +19,27 @@ use Symfony\Component\HttpFoundation\Request;
 class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+
+    public function changeNotation(Argument $input)
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $formFactory = $this->container->get('form.factory');
+
+        $values = $input->getRawArguments();
+        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        unset($values['proposalId']); // This only usefull to retrieve the proposal
+
+      $form = $formFactory->create(ProposalNotationType::class, $proposal);
+        $form->submit($values);
+
+        if (!$form->isValid()) {
+            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+        }
+
+        $em->flush();
+
+        return ['proposal' => $proposal];
+    }
 
     public function changeProgressSteps(Argument $input): array
     {
@@ -165,22 +188,23 @@ class ProposalMutation implements ContainerAwareInterface
         $mediaManager = $this->container->get('capco.media.manager');
 
         $values = $input->getRawArguments();
+        $values['responses'] = array_map(function ($value) {
+            $value['_type'] = 'value_response';
+
+            return $value;
+        }, $values['responses']);
+
+        $logger->info('changeContent:' . json_encode($values, true));
+
         $proposal = $em->find('CapcoAppBundle:Proposal', $values['id']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
         }
-        // if (!$proposal->canContribute()) {
-        //     throw new UserError('This proposal is no longer editable.');
-        // }
-
-        // if ($this->getUser() !== $proposal->getAuthor()) {
-        //     throw new UserError('You can not update');
-        // }
 
         unset($values['id']); // This only usefull to retrieve the proposal
 
         // Handle media deletion
-        if ($values['deleteCurrentMedia'] === true) {
+        if (isset($values['deleteCurrentMedia']) && $values['deleteCurrentMedia'] === true) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
@@ -197,23 +221,35 @@ class ProposalMutation implements ContainerAwareInterface
             }
             $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
             $proposal->setMedia($media);
-            // $em->flush();
             $request->files->remove('media');
         }
+        unset($values['media']);
 
         // Now we handle file uploads for every responses
         foreach ($request->files->all() as $key => $file) {
+            $logger->info('File: ' . $key);
+            if (strpos($key, 'responses_') === false) {
+                break;
+            }
             $questionId = str_replace('responses.', '', $key);
             $response = $proposal->getResponses()->filter(
-                  function (AbstractResponse $element) use ($questionId) {
-                      return (int) $element->getQuestion()->getId() === (int) $questionId;
+                  function (AbstractResponse $res) use ($questionId) {
+                      return (int) $res->getQuestion()->getId() === (int) $questionId;
                   }
               )->first();
             if (!$response) {
-                throw new UserError(sprintf('Unknown response for question with id "%d"', $questionId));
+                $question = $em->find('CapcoAppBundle:Questions\AbstractQuestion', (int) $questionId);
+                $response = new MediaResponse();
+                $response->setQuestion($question);
+                $proposal->addResponse($response);
+                // throw new UserError(sprintf('Unknown response for question with id "%d"', (int) $questionId));
             }
             $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
             $response->addMedia($media);
+        }
+
+        foreach ($values['responses'] as $valueResponse) {
+            $valueResponse['_type'] = 'value_response';
         }
 
        // Now we can submit the form without anything related to file uploads
@@ -226,7 +262,6 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
 
-        // $em->persist($proposal);
         $em->flush();
 
         return ['proposal' => $proposal];

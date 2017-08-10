@@ -22,6 +22,7 @@ class ValueResponseType extends AbstractType
     {
         $this->transformer->setEntityClass(AbstractQuestion::class);
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
+
         $builder
             ->add('value', null)
             ->add('question', HiddenType::class)

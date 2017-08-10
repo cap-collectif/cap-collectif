@@ -97,11 +97,19 @@ api:
                 - Alex\MailCatcher\Behat\MailCatcherContext
 
 graphql:
+    extensions:
+          Behat\Symfony2Extension: ~
+          Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+              url: http://mailcatchersmtp
+              purge_before_scenario: true
     suites:
         graphql:
             paths: [ %paths.base%/features/graphql ]
             contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\GraphQLContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
 
 back:
     extensions:

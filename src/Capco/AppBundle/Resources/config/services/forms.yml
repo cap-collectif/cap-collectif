@@ -39,7 +39,7 @@ services:
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]
+    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
     tags:
       - { name: form.type }
 

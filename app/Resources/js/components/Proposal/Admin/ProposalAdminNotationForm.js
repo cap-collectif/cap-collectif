@@ -22,7 +22,7 @@ type Props = {
 };
 type State = void;
 
-const formName = 'proposal-admin-edit';
+const formName = 'proposal-admin-notation';
 
 const onSubmit = (values, dispatch, props) => {
   console.log('onSubmit', values);

@@ -93,6 +93,8 @@ type ChangeProposalContentPayload {
 input ChangeProposalNotationInput {
   # The proposal id
   id: ID!
+  estimation: Int
+  likers: [ID!]
   clientMutationId: String
 }
 
@@ -103,6 +105,7 @@ type ChangeProposalNotationPayload {
 
 input ChangeProposalProgressStepsInput {
   progressSteps: [ProgressStepInput!]!
+  proposalId: String!
   clientMutationId: String
 }
 

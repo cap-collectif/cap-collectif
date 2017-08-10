@@ -12,6 +12,9 @@ ChangeProposalContentInput:
             body:
                 type: "HTML"
                 description: "The new proposal body"
+            author:
+              type: "String"
+              description: "The theme id"
             theme:
               type: "String"
               description: "The theme id"

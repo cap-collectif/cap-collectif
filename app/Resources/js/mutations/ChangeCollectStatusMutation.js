@@ -1,6 +1,7 @@
 // @flow
-import { commitMutation, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
+import commitMutation from './commitMutation';
 import type {
   ChangeCollectStatusMutationVariables,
   ChangeCollectStatusMutationResponse,
@@ -10,21 +11,20 @@ const mutation = graphql`
   mutation ChangeCollectStatusMutation($input: ChangeCollectStatusInput!) {
     changeCollectStatus(input: $input) {
       proposal {
-        id
+        status {
+          id
+        }
       }
     }
   }
 `;
 
-function commit(variables: ChangeCollectStatusMutationVariables) {
-  return commitMutation(environment, {
+const commit = (
+  variables: ChangeCollectStatusMutationVariables,
+): Promise<ChangeCollectStatusMutationResponse> =>
+  commitMutation(environment, {
     mutation,
     variables,
-    onCompleted: (response: ChangeCollectStatusMutationResponse) => {
-      console.log('Success!', response);
-    },
-    onError: err => console.error(err),
   });
-}
 
 export default { commit };

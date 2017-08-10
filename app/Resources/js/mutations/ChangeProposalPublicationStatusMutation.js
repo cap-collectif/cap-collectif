@@ -1,6 +1,10 @@
-import { commitMutation, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
-import type { ChangeProposalPublicationStatusMutationVariables } from './__generated__/ChangeProposalContentMutation.graphql';
+import commitMutation from './commitMutation';
+import type {
+  ChangeProposalPublicationStatusMutationVariables,
+  ChangeProposalPublicationStatusMutationResponse,
+} from './__generated__/ChangeProposalContentMutation.graphql';
 
 const mutation = graphql`
   mutation ChangeProposalPublicationStatusMutation(
@@ -14,26 +18,12 @@ const mutation = graphql`
   }
 `;
 
-// function getOptimisticResponse(publicationStatus) {
-//   return {
-//     changeProposalPublicationStatus: {
-//       proposal: {
-//         publicationStatus,
-//       }
-//     },
-//   };
-// }
-
-function commit(variables: ChangeProposalPublicationStatusMutationVariables) {
-  return commitMutation(environment, {
+const commit = (
+  variables: ChangeProposalPublicationStatusMutationVariables,
+): Promise<ChangeProposalPublicationStatusMutationResponse> =>
+  commitMutation(environment, {
     mutation,
     variables,
-    onCompleted: () => {
-      console.log('Success!');
-    },
-    onError: err => console.error(err),
-    // optimisticResponse: () => getOptimisticResponse(publicationStatus),
   });
-}
 
 export default { commit };

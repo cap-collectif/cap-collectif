@@ -30,6 +30,9 @@ export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 export type OpinionAndVersion = Opinion | Version;
 
+// Replace once Relay Modern will have flow-typed typedefs.
+export type Environment = Object;
+
 export type FeatureToggles = {
   blog: boolean,
   calendar: boolean,

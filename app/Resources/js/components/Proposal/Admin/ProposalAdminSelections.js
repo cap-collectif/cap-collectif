@@ -29,6 +29,7 @@ type PassedProps = {
 };
 type Props = {
   proposal: ProposalAdminSelections_proposal,
+  initialValues: Object,
   selectionValues: Array<Object>,
   handleSubmit: Function,
   pristine: boolean,
@@ -43,53 +44,80 @@ const validate = () => {
 
 const onSubmit = (values, dispatch, props: Props) => {
   const { proposal } = props;
+  const promises = [];
   for (const selection of values.selections) {
-    const wasSelected =
-      proposal.selections.filter(s => s.step.id === selection.step).length ===
-      1;
-    if (selection.selected && !wasSelected) {
-      SelectProposalMutation.commit({
-        input: {
-          stepId: selection.step,
-          proposalId: proposal.id,
-          statusId: selection.status,
-        },
-      });
+    const array = proposal.selections.filter(s => s.step.id === selection.step);
+    const previousSelection = array.length ? array[0] : null;
+
+    if (selection.selected && previousSelection === null) {
+      promises.push(
+        SelectProposalMutation.commit({
+          input: {
+            stepId: selection.step,
+            proposalId: proposal.id,
+            statusId: selection.status,
+          },
+        }),
+      );
     }
-    if (selection.selected && wasSelected) {
-      ChangeSelectionStatusMutation.commit({
-        input: {
-          stepId: selection.step,
-          proposalId: proposal.id,
-          statusId: selection.status,
-        },
-      });
+    if (
+      selection.selected &&
+      previousSelection &&
+      previousSelection.status !== selection.status
+    ) {
+      promises.push(
+        ChangeSelectionStatusMutation.commit({
+          input: {
+            stepId: selection.step,
+            proposalId: proposal.id,
+            statusId: selection.status,
+          },
+        }),
+      );
     }
-    if (!selection.selected && wasSelected) {
-      UnselectProposalMutation.commit({
-        input: {
-          stepId: selection.step,
-          proposalId: proposal.id,
-        },
-      });
+    if (!selection.selected && previousSelection) {
+      promises.push(
+        UnselectProposalMutation.commit({
+          input: {
+            stepId: selection.step,
+            proposalId: proposal.id,
+          },
+        }),
+      );
     }
   }
-  ChangeProposalProgressStepsMutation.commit({
-    input: {
-      proposalId: proposal.id,
-      progressSteps: values.progressSteps.map(v => ({
-        title: v.title,
-        startAt: v.startAt,
-        endAt: v.endAt,
-      })),
-    },
-  });
-  ChangeCollectStatusMutation.commit({
-    input: {
-      proposalId: proposal.id,
-      statusId: values.collectStatus,
-    },
-  });
+  if (values.progressSteps !== props.initialValues.progressSteps) {
+    promises.push(
+      ChangeProposalProgressStepsMutation.commit({
+        input: {
+          proposalId: proposal.id,
+          progressSteps: values.progressSteps.map(v => ({
+            title: v.title,
+            startAt: v.startAt,
+            endAt: v.endAt,
+          })),
+        },
+      }),
+    );
+  }
+
+  if (values.collectStatus !== props.initialValues.collectStatus) {
+    promises.push(
+      ChangeCollectStatusMutation.commit({
+        input: {
+          proposalId: proposal.id,
+          statusId: values.collectStatus,
+        },
+      }),
+    );
+  }
+  Promise.all(promises)
+    .then(() => {
+      console.log('Success');
+    })
+    .catch(reason => {
+      console.log(reason);
+    });
 };
 
 export class ProposalAdminSelections extends Component<

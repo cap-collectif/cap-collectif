@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Sonata\MediaBundle\Form\Type\MediaType;
@@ -20,13 +19,11 @@ class ProposalType extends AbstractType
 {
     protected $transformer;
     protected $toggleManager;
-    protected $questionRepository;
 
-    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager, AbstractQuestionRepository $questionRepository)
+    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager)
     {
         $this->transformer = $transformer;
         $this->toggleManager = $toggleManager;
-        $this->questionRepository = $questionRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -40,6 +37,9 @@ class ProposalType extends AbstractType
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
+
+        // ADMIN ONLY
+        $builder->add('author');
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {
             $builder->add('theme');

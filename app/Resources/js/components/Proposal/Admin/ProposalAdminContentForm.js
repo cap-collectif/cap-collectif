@@ -35,15 +35,22 @@ const onSubmit = (values, dispatch, props: Props) => {
   // We must remove Files to upload from variables and put them in uploadables
   const uploadables = {};
   if (values.media instanceof File) {
+    // User wants to upload a new media
     uploadables.media = values.media;
-    delete values.media;
   }
+  delete values.media;
+
   values.responses = values.responses.filter(res => {
-    if (res.value && res.value[0] instanceof File) {
-      uploadables[`responses.${res.question}`] = res.value[0];
-      return false;
+    if (!res.medias) {
+      // We only send value responses
+      return true;
     }
-    return true;
+    for (const media of res.medias) {
+      if (media instanceof File) {
+        uploadables[`responses_${res.question}`] = media;
+      }
+    }
+    return false;
   });
 
   const variables = {
@@ -224,7 +231,7 @@ export class ProposalAdminContentForm extends Component<
                         <Field
                           key={field.id}
                           id={field.id}
-                          name={`responses.${index}.value`}
+                          name={`responses.${index}.medias`}
                           type={field.inputType}
                           component={component}
                           label={field.title}
@@ -278,9 +285,13 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
     title: proposal.title,
     body: proposal.body,
     author: proposal.author.id,
-    theme: proposal.theme ? proposal.theme.id : null,
+    theme: state.default.features.themes
+      ? proposal.theme ? proposal.theme.id : null
+      : undefined,
     category: proposal.category ? proposal.category.id : null,
-    district: proposal.district ? proposal.district.id : null,
+    district: state.default.features.districts
+      ? proposal.district ? proposal.district.id : null
+      : undefined,
     address: proposal.address,
     media: null,
     responses: proposal.form.customFields.map(field => {
@@ -288,12 +299,21 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
         res => res && res.question.id === field.id,
       )[0];
       if (response) {
+        if (response.value) {
+          return {
+            question: parseInt(field.id, 10),
+            value: response.value,
+          };
+        }
         return {
           question: parseInt(field.id, 10),
-          value: response.value,
+          medias: response.medias,
         };
       }
-      return { question: parseInt(field.id, 10) };
+      if (field.inputType === 'medias') {
+        return { question: parseInt(field.id, 10), medias: [] };
+      }
+      return { question: parseInt(field.id, 10), value: null };
     }),
     addressText:
       proposal.address && JSON.parse(proposal.address)[0].formatted_address,

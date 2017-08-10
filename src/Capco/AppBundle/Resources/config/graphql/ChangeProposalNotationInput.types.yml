@@ -5,3 +5,7 @@ ChangeProposalNotationInput:
             id:
                 type: "ID!"
                 description: "The proposal id"
+            estimation:
+                type: "Int"
+            likers:
+                type: "[ID!]"

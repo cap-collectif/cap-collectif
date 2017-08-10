@@ -155,7 +155,7 @@ const ImageUpload = React.createClass({
                 ? <FormattedMessage id="global.image_uploader.file.dropzone" />
                 : <FormattedMessage id="global.image_uploader.image.dropzone" />}
               <p style={{ textAlign: 'center' }}>
-                <Button className="image-uploader__btn" bsStyle="primary">
+                <Button className="image-uploader__btn">
                   {multiple
                     ? <FormattedMessage id="global.image_uploader.file.btn" />
                     : <FormattedMessage id="global.image_uploader.image.btn" />}
