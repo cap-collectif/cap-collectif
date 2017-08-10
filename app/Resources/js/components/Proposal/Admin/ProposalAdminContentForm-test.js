@@ -1,11 +1,17 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminContentForm } from './ProposalAdminContentForm';
+import { features } from '../../../redux/modules/default';
 
 describe('<ProposalAdminContentForm />', () => {
   const props = {
-    features: {},
+    features,
+    handleSubmit: jest.fn(),
+    intl: global.intlMock,
+    invalid: false,
+    pristine: false,
     themes: [],
     districts: [],
     proposal: {
@@ -16,7 +22,7 @@ describe('<ProposalAdminContentForm />', () => {
         { question: { id: '1' }, value: 'value-1' },
         {
           question: { id: '2' },
-          medias: [{ id: '1', name: 'media-1', size: 0, url: '' }],
+          medias: [{ id: '1', name: 'media-1', size: '100', url: '' }],
         },
       ],
       media: { id: '1', url: '' },

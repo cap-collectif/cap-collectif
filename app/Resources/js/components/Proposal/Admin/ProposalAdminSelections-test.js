@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -6,6 +7,10 @@ import { ProposalAdminSelections } from './ProposalAdminSelections';
 describe('<ProposalAdminSelections />', () => {
   const props = {
     dispatch: jest.fn(),
+    handleSubmit: jest.fn(),
+    initialValues: {},
+    pristine: false,
+    invalid: false,
     steps: [{}],
     selectionValues: [{ step: '2', selected: true, status: null }],
     projectId: 'projectId',
