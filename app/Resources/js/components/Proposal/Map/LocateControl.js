@@ -2,7 +2,7 @@
 import { MapControl } from 'react-leaflet';
 import { intlShape, injectIntl } from 'react-intl';
 import L from 'leaflet';
-import 'leaflet.locatecontrol/dist/L.Control.Locate.min';
+import {} from 'leaflet.locatecontrol/dist/L.Control.Locate.min';
 
 export class LocateControl extends MapControl {
   componentWillMount() {

@@ -3,7 +3,8 @@
 exports[`<LeafletMap /> should not render a map with visible = false 1`] = `null`;
 
 exports[`<LeafletMap /> should render a map with markers 1`] = `
-<Decorated
+<Map
+  animate={false}
   center={
     Object {
       "lat": 48.8586047,
@@ -17,13 +18,107 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
       "width": "100%",
     }
   }
+  useFlyTo={false}
   zoom={12}
 >
-  <Decorated
+  <TileLayer
     url="https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
   />
   <r
-    markers={Array []}
+    markers={
+      Array [
+        Object {
+          "lat": 49.8397,
+          "lng": 24.0297,
+          "options": Object {
+            "icon": NewClass {
+              "_initHooksCalled": true,
+              "options": Object {
+                "iconAnchor": Array [
+                  20,
+                  40,
+                ],
+                "iconSize": Array [
+                  40,
+                  40,
+                ],
+                "iconUrl": "/svg/marker.svg",
+                "popupAnchor": Array [
+                  0,
+                  -40,
+                ],
+              },
+            },
+          },
+          "popup": "
+              <h2 class=\\"h4 proposal__title\\">
+                <a href=\\"http://test\\">test</a>
+              </h2>
+              Par : <a href=\\"http://test\\">test</a>
+            ",
+        },
+        Object {
+          "lat": 52.2297,
+          "lng": 21.0122,
+          "options": Object {
+            "icon": NewClass {
+              "_initHooksCalled": true,
+              "options": Object {
+                "iconAnchor": Array [
+                  20,
+                  40,
+                ],
+                "iconSize": Array [
+                  40,
+                  40,
+                ],
+                "iconUrl": "/svg/marker.svg",
+                "popupAnchor": Array [
+                  0,
+                  -40,
+                ],
+              },
+            },
+          },
+          "popup": "
+              <h2 class=\\"h4 proposal__title\\">
+                <a href=\\"http://test\\">test</a>
+              </h2>
+              Par : <a href=\\"http://test\\">test</a>
+            ",
+        },
+        Object {
+          "lat": 51.5074,
+          "lng": -0.0901,
+          "options": Object {
+            "icon": NewClass {
+              "_initHooksCalled": true,
+              "options": Object {
+                "iconAnchor": Array [
+                  20,
+                  40,
+                ],
+                "iconSize": Array [
+                  40,
+                  40,
+                ],
+                "iconUrl": "/svg/marker.svg",
+                "popupAnchor": Array [
+                  0,
+                  -40,
+                ],
+              },
+            },
+          },
+          "popup": "
+              <h2 class=\\"h4 proposal__title\\">
+                <a href=\\"http://test\\">test</a>
+              </h2>
+              Par : <a href=\\"http://test\\">test</a>
+            ",
+        },
+      ]
+    }
     options={
       Object {
         "maxClusterRadius": 30,
@@ -39,5 +134,5 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
   />
   <InjectIntl(LocateControl) />
-</Decorated>
+</Map>
 `;

@@ -363,6 +363,7 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
 
     public function setConsultationStepType(ConsultationStepType $consultationStepType = null)
     {
+        $consultationStepType->setStep($this);
         $this->consultationStepType = $consultationStepType;
     }
 
@@ -385,7 +386,7 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return 'consultation';
     }
 
-    public function isConsultationStep(): bool
+    public function isConsultationStep()
     {
         return true;
     }

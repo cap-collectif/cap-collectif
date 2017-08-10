@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { Map, Marker, TileLayer } from 'react-leaflet-universal';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -15,9 +15,8 @@ import {
   openDeleteProposalModal,
   openEditProposalModal,
 } from '../../../redux/modules/proposal';
+import { blueMarker } from '../../Proposal/Map/LeafletMap';
 import config from '../../../config';
-
-let L;
 
 const ProposalPageContent = React.createClass({
   displayName: 'ProposalPageContent',
@@ -42,10 +41,6 @@ const ProposalPageContent = React.createClass({
       proposal__content: true,
       [className]: true,
     };
-    if (config.canUseDOM) {
-      L = require('leaflet'); // eslint-disable-line
-    }
-
     const address = proposal.address ? JSON.parse(proposal.address) : null;
     return (
       <div className={classNames(classes)}>
@@ -63,7 +58,6 @@ const ProposalPageContent = React.createClass({
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {address &&
-          config.canUseDOM &&
           <div className="block" style={{ height: 255 }}>
             <h4 className="h4">Lieu ou adresse</h4>
             <p>
@@ -88,13 +82,7 @@ const ProposalPageContent = React.createClass({
                   address[0].geometry.location.lat,
                   address[0].geometry.location.lng,
                 ]}
-                icon={L.icon({
-                  // eslint-disable-line
-                  iconUrl: '/svg/marker.svg',
-                  iconSize: [40, 40],
-                  iconAnchor: [20, 40],
-                  popupAnchor: [0, -40],
-                })}
+                icon={blueMarker}
               />
             </Map>
           </div>}

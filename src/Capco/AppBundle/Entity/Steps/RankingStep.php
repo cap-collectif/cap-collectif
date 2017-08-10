@@ -64,7 +64,7 @@ class RankingStep extends AbstractStep
         return 'ranking';
     }
 
-    public function isRankingStep(): bool
+    public function isRankingStep()
     {
         return true;
     }

@@ -3269,10 +3269,6 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
-ignore-loader@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ignore-loader/-/ignore-loader-0.1.2.tgz#d81f240376d0ba4f0d778972c3ad25874117a463"
-
 ignore@^3.2.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.3.tgz#432352e57accd87ab3110e82d3fea0e47812156d"
@@ -5339,13 +5335,9 @@ react-intl@^2.3.0:
   version "1.1.6"
   resolved "https://github.com/cap-collectif/react-leaflet-markercluster/tarball/2d91878f0bd99af7a5352050315a50b4c4c4bf34#4817985639919a76efa614b45ca09de7f5acc57a"
 
-react-leaflet-universal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-universal/-/react-leaflet-universal-1.1.0.tgz#0efda955dcc0308a7cf79c430cb421ec84903e98"
-
-react-leaflet@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.4.1.tgz#5cc502a34c1e710809fe33fc520483a03d5e3482"
+react-leaflet@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.4.0.tgz#45b0d1ca2fe8fff91c3e023cfe4eab0783416491"
   dependencies:
     babel-runtime "^6.23.0"
     lodash "^4.0.0"

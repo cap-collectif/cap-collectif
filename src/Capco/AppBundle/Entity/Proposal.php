@@ -91,7 +91,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     protected $likers;
 
     /**
-     * @ORM\Column(name="address", type="text", nullable=true)
+     * @ORM\Column(name="address", type="json", nullable=true)
      */
     private $address;
 

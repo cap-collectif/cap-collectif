@@ -73,6 +73,18 @@ class ConsultationStepType
         return $this->step;
     }
 
+    public function setStep(ConsultationStep $step): self
+    {
+        $this->step = $step;
+
+        return $this;
+    }
+
+    public function getStep()
+    {
+        return $this->step;
+    }
+
     /**
      * Get id.
      *

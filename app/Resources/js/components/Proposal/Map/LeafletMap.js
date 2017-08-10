@@ -1,10 +1,11 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
-import { Map, TileLayer } from 'react-leaflet-universal';
+import { Map, TileLayer } from 'react-leaflet';
+import L from 'leaflet';
 import { connect, type Connector } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import LocateControl from './LocateControl';
 import { loadMarkers } from '../../../redux/modules/proposal';
+import LocateControl from './LocateControl';
 import config from '../../../config';
 import type { Dispatch, State } from '../../../types';
 
@@ -18,10 +19,6 @@ type MapOptions = {
   zoom: number,
 };
 
-type ComponentState = {
-  loaded: boolean,
-};
-
 type Props = {
   markers: ?Object,
   defaultMapOptions: MapOptions,
@@ -31,14 +28,19 @@ type Props = {
   dispatch: Dispatch,
 };
 
-type DefaultProps = {
+type ParentProps = {
   defaultMapOptions: MapOptions,
   visible: boolean,
 };
 
-let L;
+export const blueMarker = L.icon({
+  iconUrl: '/svg/marker.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -40],
+});
 
-export class LeafletMap extends Component<DefaultProps, Props, ComponentState> {
+export class LeafletMap extends Component {
   static propTypes = {
     markers: PropTypes.object,
     defaultMapOptions: PropTypes.object.isRequired,
@@ -57,7 +59,7 @@ export class LeafletMap extends Component<DefaultProps, Props, ComponentState> {
     visible: true,
   };
 
-  static getStringPopup(marker: Object): string {
+  static getStringPopup(marker: Object) {
     return `
         <h2 class="h4 proposal__title">
           <a href="${marker.url}">${marker.title}</a>
@@ -66,17 +68,7 @@ export class LeafletMap extends Component<DefaultProps, Props, ComponentState> {
       `;
   }
 
-  constructor() {
-    super();
-    this.state = { loaded: false };
-  }
-
-  state: ComponentState;
-
   componentDidMount() {
-    // This import is used to avoid SSR errors.
-    L = require('leaflet'); // eslint-disable-line
-    this.setState({ loaded: true }); // eslint-disable-line
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible) {
       dispatch(loadMarkers(stepId, stepType));
@@ -91,29 +83,22 @@ export class LeafletMap extends Component<DefaultProps, Props, ComponentState> {
     }
   }
 
+  props: Props;
+
   render() {
     const { defaultMapOptions, markers, visible } = this.props;
-
-    if (!visible || !this.state.loaded) {
+    const token = config.mapboxApiKey;
+    if (!visible) {
       return null;
     }
 
-    const token = config.mapboxApiKey;
-
     const markersList =
-      markers && markers.length > 0
-        ? markers.map(mark => ({
+      markers && markers.markers && markers.markers.length > 0
+        ? markers.markers.map(mark => ({
             lat: mark.lat,
             lng: mark.lng,
             popup: LeafletMap.getStringPopup(mark),
-            options: {
-              icon: L.icon({
-                iconUrl: '/svg/marker.svg',
-                iconSize: [40, 40],
-                iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
-              }),
-            },
+            options: { icon: blueMarker },
           }))
         : [];
 
@@ -153,6 +138,6 @@ const mapStateToProps = (state: State) => ({
       .stepsById[state.project.currentProjectStepById].type,
 });
 
-const connector: Connector<DefaultProps, Props> = connect(mapStateToProps);
+const connector: Connector<ParentProps, Props> = connect(mapStateToProps);
 
 export default connector(LeafletMap);

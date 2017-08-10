@@ -18,6 +18,11 @@ class SynthesisStep extends AbstractStep
      */
     private $synthesis = null;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * @return mixed
      */
@@ -41,7 +46,7 @@ class SynthesisStep extends AbstractStep
         return 'synthesis';
     }
 
-    public function isSynthesisStep(): bool
+    public function isSynthesisStep()
     {
         return true;
     }

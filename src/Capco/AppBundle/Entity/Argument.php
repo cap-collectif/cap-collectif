@@ -208,12 +208,17 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         $this->type = $type;
     }
 
-    public function getIsTrashed(): bool
+    /**
+     * Get isTrashed.
+     *
+     * @return bool
+     */
+    public function getIsTrashed()
     {
         return $this->isTrashed;
     }
 
-    public function isTrashed(): bool
+    public function isTrashed()
     {
         return $this->isTrashed;
     }
@@ -384,29 +389,30 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         return false;
     }
 
-    public function canDisplay(): bool
+    /**
+     * @return bool
+     */
+    public function canDisplay()
     {
-        return $this->getIsEnabled() && $this->getParent()->canDisplay();
-    }
-
-    public function canContribute(): bool
-    {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canContribute();
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->isPublished();
-    }
-
-    public function canBeDeleted(): bool
-    {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
+        return $this->isEnabled && $this->getParent()->canDisplay();
     }
 
     /**
-     * @return OpinionVersion|Opinion
+     * @return bool
      */
+    public function canContribute()
+    {
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->canContribute();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
+    }
+
     public function getParent()
     {
         if ($this->opinionVersion !== null) {

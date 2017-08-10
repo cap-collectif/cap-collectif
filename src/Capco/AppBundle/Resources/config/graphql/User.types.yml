@@ -56,13 +56,9 @@ User:
             dateOfBirth:
                 type: "String"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
-            roles:
-                type: "[String]"
-                description: "Unattended roles as array."
-            rolesText:
+            userType:
                 type: "String"
-                resolve: "@=resolver('user_rolesText', [value])"
-                description: "Array of roles converted and translated to string."
+                resolve: "@=resolver('user_userType', [value])"
             website:
                 type: "String"
             biography:
@@ -115,6 +111,6 @@ User:
                 type: "Int!"
             projectsCount:
                 type: "Int!"
-            userType:
+            type:
                 type: "UserType"
-                description: "The type of the person."
+                description: "The facultative type of the person."

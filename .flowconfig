@@ -22,5 +22,3 @@ experimental.strict_type_args=true
 module.use_strict=true
 unsafe.enable_getters_and_setters=true
 all=false
-esproposal.class_static_fields=enable
-esproposal.class_instance_fields=enable

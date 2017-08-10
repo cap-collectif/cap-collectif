@@ -212,7 +212,7 @@ class CollectStepsController extends FOSRestController
         $router = $this->get('router');
 
         return array_map(function ($proposal) use ($step, $router) {
-            $location = is_array($proposal['address']) ?: \GuzzleHttp\json_decode(stripslashes($proposal['address']), true);
+            $location = is_array($proposal['address']) ?: \GuzzleHttp\json_decode($proposal['address'], true);
 
             return [
                 'id' => $proposal['id'],
@@ -229,6 +229,8 @@ class CollectStepsController extends FOSRestController
                     'url' => $router->generate('capco_user_profile_show_all', ['slug' => $proposal['author']['slug']], true),
                 ],
             ];
-        }, $results);
+        }, array_filter($results, function ($proposal) {
+            return $proposal['address'] !== null;
+        }));
     }
 }
