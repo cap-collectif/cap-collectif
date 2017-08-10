@@ -1,20 +1,23 @@
+// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
+import type { Connector } from 'react-redux';
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from 'react-places-autocomplete';
 
-type Props = {
-  disabled: Boolean,
+type PassedProps = {
   onChange: Function,
   value: any,
-  name: String,
-  id: String,
-  placeholder: String,
-  formName: String,
-  updateAddressValue: Function,
+  name: string,
+  id: string,
+  placeholder: string,
+  formName: string,
+  disabled: boolean,
 };
+type DefaultProps = { disabled: boolean };
+type Props = PassedProps & DefaultProps & { updateAddressValue: Function };
 
 // eslint-disable-next-line react/prop-types
 const autocompleteItem = ({ formattedSuggestion }) =>
@@ -24,8 +27,8 @@ const autocompleteItem = ({ formattedSuggestion }) =>
     <small>{formattedSuggestion.secondaryText}</small>
   </div>;
 
-class Address extends Component<void, Props, void> {
-  static defaultProps: {
+class Address extends Component<DefaultProps, Props, void> {
+  static defaultProps = {
     disabled: false,
   };
 
@@ -68,9 +71,6 @@ class Address extends Component<void, Props, void> {
           this.resetAddressField();
         }}
         classNames={{
-          // root: `${this.state.errors.address.length > 0
-          //   ? 'form-control-warning'
-          //   : ''}`,
           input: 'form-control',
         }}
       />
@@ -84,4 +84,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(Address);
+const connector: Connector<PassedProps, Props> = connect(mapDispatchToProps);
+
+export default connector(Address);

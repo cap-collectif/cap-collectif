@@ -3,14 +3,14 @@ import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import type { Connector } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
+import type { Connector } from 'react-redux';
 import CloseButton from '../Form/CloseButton';
 import { hideRegistrationFieldModal } from '../../redux/modules/default';
-import type { Dispatch, State } from '../../types';
 import UpdateRegistrationQuestionForm, {
   formName,
 } from './UpdateRegistrationQuestionForm';
+import type { Dispatch, State } from '../../types';
 
 export const UpdateRegistrationQuestionModal = React.createClass({
   propTypes: {
