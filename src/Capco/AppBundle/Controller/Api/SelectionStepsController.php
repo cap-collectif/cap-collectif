@@ -105,15 +105,15 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Patch("/selection_steps/{selectionStepId}/selections/{proposalId}")
+     * @Patch("/selection_steps/{stepId}/selections/{proposalId}")
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=200, serializerGroups={})
      */
-    public function updateSelectionStatusAction(Request $request, string $selectionStepId, string $proposalId)
+    public function updateSelectionStatusAction(Request $request, string $stepId, string $proposalId)
     {
-        $this->get('capco.mutation.proposal')->updateSelectionStatus(
+        $this->get('capco.mutation.proposal')->changeSelectionStatus(
           $proposalId,
-          $selectionStepId,
+          $stepId,
           $request->request->get('status')
         );
     }
