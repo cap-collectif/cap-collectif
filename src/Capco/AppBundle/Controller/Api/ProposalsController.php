@@ -15,7 +15,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\Form\ProposalAdminType;
+use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Helper\ArrayHelper;
@@ -110,7 +110,7 @@ class ProposalsController extends FOSRestController
             $proposal->setStatus($defaultStatus);
         }
 
-        $formClass = $user->isAdmin() ? ProposalAdminType::class : ProposalType::class;
+        $formClass = $user->isAdmin() ? ProposalFusionType::class : ProposalType::class;
 
         $form = $this->createForm($formClass, $proposal, [
             'proposalForm' => $proposalForm,

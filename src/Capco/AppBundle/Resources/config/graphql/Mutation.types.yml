@@ -10,7 +10,7 @@ Mutation:
                     payloadType: ChangeProposalPublicationStatusPayload
                     mutateAndGetPayload: "@=mutation('changeProposalPublicationStatus', [value])"
           changeProposalContent:
-                access: "@=hasRole('ROLE_ADMIN')" # For now only used in back office
+                access: "@=hasRole('ROLE_ADMIN')" # For now mutation only used in BO
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeProposalContentInput
@@ -64,4 +64,4 @@ Mutation:
               builderConfig:
                   inputType: DeleteProposalInput
                   payloadType: DeleteProposalPayload
-                  mutateAndGetPayload: "@=mutation('deleteProposal', [value])"
+                  mutateAndGetPayload: "@=mutation('deleteProposal', [value['proposalId']])"

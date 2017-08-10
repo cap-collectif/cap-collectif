@@ -13,7 +13,7 @@ class GraphQLContext implements Context
 {
     public $client;
     public $response;
-    public $token = null;
+    public $token;
 
     /**
      * @BeforeScenario
@@ -25,7 +25,7 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to api as admin
+     * @When I am logged in to graphql as admin
      */
     public function iAmLoggedInToApiAsAdmin()
     {
@@ -33,7 +33,7 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @When I am logged in to api as user
+     * @When I am logged in to graphql as user
      */
     public function iAmLoggedInToApiAsUser()
     {
@@ -41,7 +41,7 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I am logged in to api as super admin
+     * @Given I am logged in to graphql as super admin
      */
     public function iAmLoggedInToApiAsSfavot()
     {
@@ -60,6 +60,7 @@ class GraphQLContext implements Context
               'exceptions' => false,
               'query' => ['query' => $query->getRaw()],
               'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/graphql',
               ],
             ]
@@ -89,7 +90,6 @@ class GraphQLContext implements Context
             ]
         );
         $this->response = (string) $response->getBody();
-        var_dump($this->response);
         PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
     }
 

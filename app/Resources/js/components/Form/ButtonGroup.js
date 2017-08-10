@@ -1,17 +1,18 @@
+// @flow
 import React, { Component } from 'react';
 import { ToggleButtonGroup } from 'react-bootstrap';
 
 type Props = {
   type: 'radio' | 'checkbox',
-  disabled: Boolean,
+  disabled: boolean,
   onChange: Function,
   value: any,
-  name: String,
+  name: string,
   children: any,
 };
 
-class ButtonGroup extends Component<void, Props, void> {
-  static defaultProps: {
+class ButtonGroup extends Component<{ disabled: boolean }, Props, void> {
+  static defaultProps = {
     disabled: false,
   };
 

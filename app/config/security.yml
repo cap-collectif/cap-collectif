@@ -29,6 +29,18 @@ security:
             stateless: true
             gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
+        graphql:
+            pattern: ^/graphql
+            provider: fos_userbundle
+            stateless: true
+            anonymous: true
+            lexik_jwt:
+                authorization_header:
+                    enabled: true
+                    prefix: Bearer
+                query_parameter:
+                    enabled: false
+
         api:
             pattern: ^/api
             provider: fos_userbundle
