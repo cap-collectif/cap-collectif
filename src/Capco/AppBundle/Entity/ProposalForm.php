@@ -96,6 +96,11 @@ class ProposalForm
     private $addressHelpText;
 
     /**
+     * @ORM\Column(name="illustration_help_text", type="string", length=255, nullable=true)
+     */
+    private $illustrationHelpText;
+
+    /**
      * @ORM\Column(name="using_themes", type="boolean")
      */
     private $usingThemes = false;
@@ -329,7 +334,7 @@ class ProposalForm
      */
     public function canContribute()
     {
-        return $this->getStep()->canContribute();
+        return $this->getStep() && $this->getSlug()->canContribute();
     }
 
     /**
@@ -635,6 +640,21 @@ class ProposalForm
     public function setLngMap(float $lngMap = null): self
     {
         $this->lngMap = $lngMap;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getIllustrationHelpText()
+    {
+        return $this->illustrationHelpText;
+    }
+
+    public function setIllustrationHelpText(string $illustrationHelpText = null): self
+    {
+        $this->illustrationHelpText = $illustrationHelpText;
 
         return $this;
     }

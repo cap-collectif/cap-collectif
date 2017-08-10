@@ -136,10 +136,6 @@ class ProposalsController extends FOSRestController
 
         unset($unflattenRequest['delete_media'], $unflattenRequest['media']);
 
-        if ('null' === $unflattenRequest['summary']) {
-            unset($unflattenRequest['summary']);
-        }
-
         $form->submit($unflattenRequest, false);
 
         if (!$form->isValid()) {
@@ -181,12 +177,6 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
-     *
-     * @param ProposalForm          $form
-     * @param Proposal              $proposal
-     * @param ParamFetcherInterface $paramFetcher
-     *
-     * @return array
      */
     public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
     {
@@ -366,7 +356,7 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
-        if ('false' === $request->request->get('media')) {
+        if ($request->request->get('media') === 'false') {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
@@ -396,10 +386,6 @@ class ProposalsController extends FOSRestController
         }
 
         $form->submit($unflattenRequest, false);
-
-        if ($unflattenRequest['summary'] && 'null' === $unflattenRequest['summary']) {
-            $proposal->setSummary(null);
-        }
 
         if ($form->isValid()) {
             $proposal->setUpdateAuthor($user);
@@ -441,9 +427,6 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=204)
-     *
-     * @param ProposalForm $proposalForm
-     * @param Proposal     $proposal
      */
     public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
