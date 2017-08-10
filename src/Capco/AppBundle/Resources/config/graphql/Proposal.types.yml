@@ -45,6 +45,8 @@ Proposal:
                 type: "PublicationStatus!"
                 description: "The publication status."
                 resolve: "@=resolver('proposal_publicationStatus', [value])"
+            trashedReason:
+                type: "String"
             id:
                 type: "String!"
                 description: "The content of the contribution."

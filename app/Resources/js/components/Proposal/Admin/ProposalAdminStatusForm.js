@@ -9,17 +9,23 @@ import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
 import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
 import type { ProposalAdminStatusForm_proposal } from './__generated__/ProposalAdminStatusForm_proposal.graphql';
+import type { Dispatch, State } from '../../../types';
 
 type DefaultProps = void;
-type Props = {
-  proposal: ProposalAdminStatusForm_proposal,
+type RelayProps = { proposal: ProposalAdminStatusForm_proposal };
+type Props = RelayProps & {
+  isSuperAdmin: boolean,
   publicationStatus: string,
+  isSuperAdmin: boolean,
   handleSubmit: () => void,
 };
-type State = void;
+type FormValues = {
+  publicationStatus: 'PUBLISHED' | 'TRASHED',
+  trashedReason: ?string,
+};
 
 const formName = 'proposal-admin-status';
-const onSubmit = (values, dispatch, props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   ChangeProposalPublicationStatusMutation.commit({
     input: {
       publicationStatus: values.publicationStatus,
@@ -39,10 +45,15 @@ const onDelete = proposalId => {
 export class ProposalAdminStatusForm extends Component<
   DefaultProps,
   Props,
-  State,
+  void,
 > {
   render() {
-    const { proposal, handleSubmit, publicationStatus } = this.props;
+    const {
+      isSuperAdmin,
+      proposal,
+      handleSubmit,
+      publicationStatus,
+    } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -90,7 +101,10 @@ export class ProposalAdminStatusForm extends Component<
             <Button type="submit" bsStyle="primary">
               <FormattedMessage id="global.save" />
             </Button>
-            <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
+            <Button
+              bsStyle="danger"
+              disabled={!isSuperAdmin}
+              onClick={() => onDelete(proposal.id)}>
               <FormattedMessage id="global.delete" />
             </Button>
           </ButtonToolbar>
@@ -104,7 +118,10 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminStatusForm);
 
-const mapStateToProps = (state, { proposal }) => ({
+const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
+  isSuperAdmin: !!(
+    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
+  ),
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
@@ -121,6 +138,7 @@ export default createFragmentContainer(
     fragment ProposalAdminStatusForm_proposal on Proposal {
       id
       publicationStatus
+      trashedReason
       deletedAt
       author {
         expiresAt

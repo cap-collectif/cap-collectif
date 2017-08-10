@@ -552,6 +552,7 @@ type Proposal {
 
   # The publication status.
   publicationStatus: PublicationStatus!
+  trashedReason: String
 
   # The content of the contribution.
   id: String!
