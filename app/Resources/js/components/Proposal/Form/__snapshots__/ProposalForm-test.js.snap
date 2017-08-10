@@ -184,6 +184,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
     errors={null}
+    groupClassName=""
     id="proposal_body"
     image={null}
     label={
@@ -196,6 +197,12 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     medias={Array []}
     name="body"
     type="editor"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
   />
   <InjectIntl(ReactBootstrapInput)
     errors={null}
@@ -382,6 +389,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
     errors={null}
+    groupClassName=""
     id="proposal_body"
     image={null}
     label={
@@ -394,6 +402,12 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     medias={Array []}
     name="body"
     type="editor"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
   />
   <InjectIntl(ReactBootstrapInput)
     errors={null}

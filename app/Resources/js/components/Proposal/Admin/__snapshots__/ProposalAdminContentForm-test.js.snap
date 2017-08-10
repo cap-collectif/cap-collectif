@@ -4,7 +4,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
 <div
   className="box box-primary container"
 >
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <h4
       className="h4"
     >
