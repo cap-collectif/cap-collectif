@@ -80,11 +80,6 @@ class ConsultationStepType
         return $this;
     }
 
-    public function getStep()
-    {
-        return $this->step;
-    }
-
     /**
      * Get id.
      *
