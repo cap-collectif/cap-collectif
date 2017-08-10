@@ -181,10 +181,3 @@ services:
     class: Capco\AppBundle\EventListener\IdeaVoteSerializationListener
     tags:
       - { name: "jms_serializer.event_subscriber" }
-
-  capco.proposal_events:
-    class: Capco\AppBundle\EventListener\ProposalListener
-    calls:
-      - [ setContainer, [ "@service_container" ] ]
-    tags:
-      - { name: doctrine.event_listener, event: preUpdate }
