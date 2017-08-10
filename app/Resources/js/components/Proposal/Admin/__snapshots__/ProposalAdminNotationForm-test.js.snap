@@ -24,7 +24,9 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
        Aide
     </a>
   </div>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <div>
       <Field
         addonAfter={

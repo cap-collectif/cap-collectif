@@ -56,7 +56,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
     render={[Function]}
     variables={
       Object {
-        "id": "1",
+        "id": 1,
       }
     }
   />
