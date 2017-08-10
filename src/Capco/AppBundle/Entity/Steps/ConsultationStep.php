@@ -363,8 +363,12 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
 
     public function setConsultationStepType(ConsultationStepType $consultationStepType = null)
     {
-        $consultationStepType->setStep($this);
-        $this->consultationStepType = $consultationStepType;
+        if ($this->consultationStepType) {
+            $this->consultationStepType->setStep(null);
+        }
+        if ($consultationStepType) {
+            $consultationStepType->setStep($this);
+        }
     }
 
     // **************************** Custom methods *******************************

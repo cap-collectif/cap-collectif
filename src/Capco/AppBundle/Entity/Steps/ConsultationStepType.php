@@ -73,7 +73,7 @@ class ConsultationStepType
         return $this->step;
     }
 
-    public function setStep(ConsultationStep $step): self
+    public function setStep(ConsultationStep $step = null): self
     {
         $this->step = $step;
 
