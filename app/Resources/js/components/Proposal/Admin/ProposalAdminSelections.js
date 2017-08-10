@@ -116,8 +116,8 @@ const onSubmit = (values, dispatch, props: Props) => {
     .then(() => {
       console.log('Success');
     })
-    .catch(reason => {
-      console.log(reason);
+    .catch(error => {
+      console.log(error);
     });
 };
 

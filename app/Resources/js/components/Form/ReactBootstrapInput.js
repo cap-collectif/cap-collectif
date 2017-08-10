@@ -228,7 +228,6 @@ class ReactBootstrapInput extends Component {
       );
     }
 
-    console.log(addonAfter);
     if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter) {
       return formControl;
     }

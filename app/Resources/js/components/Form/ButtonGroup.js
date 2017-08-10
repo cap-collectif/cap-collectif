@@ -24,7 +24,6 @@ class ButtonGroup extends Component<{ disabled: boolean }, Props, void> {
         name={name}
         value={value}
         onChange={val => {
-          console.log(val);
           onChange(val);
         }}
         disabled={disabled}>
