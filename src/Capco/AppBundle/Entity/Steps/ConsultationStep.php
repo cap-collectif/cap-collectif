@@ -390,7 +390,7 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return 'consultation';
     }
 
-    public function isConsultationStep()
+    public function isConsultationStep(): bool
     {
         return true;
     }

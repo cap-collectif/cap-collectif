@@ -76,10 +76,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return 'questionnaire';
     }
 
-    /**
-     * @return bool
-     */
-    public function isQuestionnaireStep()
+    public function isQuestionnaireStep(): bool
     {
         return true;
     }

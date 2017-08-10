@@ -331,8 +331,6 @@ class SelectionStepsController extends FOSRestController
                     'url' => $router->generate('capco_user_profile_show_all', ['slug' => $proposal['author']['slug']], true),
                 ],
             ];
-        }, array_filter($results, function ($proposal) {
-            return $proposal['address'] !== null;
-        }));
+        }, $results);
     }
 }

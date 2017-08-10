@@ -49,11 +49,12 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         createdAt
         updatedAt
         lastLogin
-        userType
+        rolesText
         enabled
         locked
         phoneConfirmed
         phoneConfirmationSentAt
+        userType { name }
         gender
         firstname
         lastname

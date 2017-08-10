@@ -78,7 +78,7 @@ class UserResolver implements ContainerAwareInterface
         return $object->getLastLogin() ? $object->getLastLogin()->format(\DateTime::ATOM) : '';
     }
 
-    public function resolveType($object): string
+    public function resolveRolesText($object): string
     {
         $convertedRoles = array_map(function ($role) {
             return str_replace(
