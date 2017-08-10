@@ -26,7 +26,7 @@ type Props = {
 type DefaultProps = void;
 type State = { editIndex: ?number };
 
-export class ProposalAdminProgessSteps extends Component<
+export class ProposalAdminProgressSteps extends Component<
   DefaultProps,
   Props,
   State,
@@ -121,4 +121,4 @@ const mapStateToProps = (state: GlobalState) => ({
   progressSteps: selector(state, 'progressSteps'),
 });
 
-export default connect(mapStateToProps)(ProposalAdminProgessSteps);
+export default connect(mapStateToProps)(ProposalAdminProgressSteps);

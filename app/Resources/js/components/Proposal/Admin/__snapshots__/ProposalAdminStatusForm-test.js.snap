@@ -1,0 +1,263 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h4
+      className="box-title"
+    >
+      Etat
+    </h4>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <Field
+      component={[Function]}
+      disabled={true}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        value="PUBLISHED"
+      >
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+      <ToggleButton
+        value="EXPIRED"
+      >
+        Expiré
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        type="submit"
+      >
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
+</div>
+`;
+
+exports[`<ProposalAdminStatusForm /> render correctly if published and user is confirmed 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h4
+      className="box-title"
+    >
+      Etat
+    </h4>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <Field
+      component={[Function]}
+      disabled={false}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        value="PUBLISHED"
+      >
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        type="submit"
+      >
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
+</div>
+`;
+
+exports[`<ProposalAdminStatusForm /> render correctly if published but user can soon expire 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h4
+      className="box-title"
+    >
+      Etat
+    </h4>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <p>
+      Adresse email de l'auteur en attente de confirmation:
+       
+      soon@yopmail.com
+    </p>
+    <Field
+      component={[Function]}
+      disabled={false}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
+    >
+      <ToggleButton
+        value="PUBLISHED"
+      >
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        type="submit"
+      >
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
+</div>
+`;

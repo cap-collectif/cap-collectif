@@ -1,0 +1,36 @@
+/* eslint-env jest */
+import React from 'react';
+import { shallow } from 'enzyme';
+import { ProposalAdminSelections } from './ProposalAdminSelections';
+
+describe('<ProposalAdminSelections />', () => {
+  const props = {
+    dispatch: jest.fn(),
+    steps: [{}],
+    selectionValues: [{ step: '2', selected: true, status: null }],
+    projectId: 'projectId',
+    proposal: {
+      id: '1',
+      status: { id: '1' },
+      progressSteps: [{ id: '1', title: 'title', startAt: null, endAt: null }],
+      selections: [{ step: { id: '2' }, status: { id: '1' } }],
+      project: {
+        steps: [
+          { id: '1', title: 'step-1', kind: 'collect', statuses: [] },
+          {
+            id: '2',
+            title: 'step-2',
+            kind: 'selection',
+            allowingProgressSteps: true,
+            statuses: [],
+          },
+        ],
+      },
+    },
+  };
+
+  it('render correctly', () => {
+    const wrapper = shallow(<ProposalAdminSelections {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+});

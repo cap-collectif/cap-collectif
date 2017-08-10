@@ -9,16 +9,11 @@ import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNot
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
-import type { FeatureToggles } from '../../../types';
 
 type DefaultProps = void;
 type Props = {
   proposal: ProposalAdminNotationForm_proposal,
-  themes: Array<Object>,
-  districts: Array<Object>,
-  features: FeatureToggles,
   handleSubmit: () => void,
-  intl: Object,
 };
 type State = void;
 
@@ -69,10 +64,8 @@ export class ProposalAdminNotationForm extends Component<
               inputClassName="qdnsqdnqsldnqsldn"
               multi
               placeholder="Sélectionnez un coup de coeur"
-              // isLoading={users.length === 0}
               component={select}
               clearable={false}
-              // onChange={() => onProjectChange(formName, 'childConnections', [])}
               options={proposal.likers.map(u => ({
                 value: u.id,
                 label: u.displayName,
@@ -100,8 +93,6 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     estimation: props.proposal.estimation,
     likers: props.proposal.likers.map(u => u.id),
-    // title: props.proposal.title,
-    // body: props.proposal.body,
   },
 });
 

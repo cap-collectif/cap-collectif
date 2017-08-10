@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminProgressSteps /> render correctly 1`] = `
+<div
+  className="form-group"
+>
+  <label>
+    Liste des phases de réalisation
+  </label>
+  <ListGroup
+    bsClass="list-group"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;

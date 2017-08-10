@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h4
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.admin.news"
+        values={Object {}}
+      />
+    </h4>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <ListGroup
+    bsClass="list-group"
+    style={
+      Object {
+        "margin": 10,
+        "paddingBottom": 10,
+      }
+    }
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      listItem={false}
+    >
+      <Row
+        bsClass="row"
+        componentClass="div"
+      >
+        <Col
+          bsClass="col"
+          componentClass="div"
+          xs={6}
+        >
+          news-1
+        </Col>
+        <Col
+          bsClass="col"
+          componentClass="div"
+          xs={6}
+        >
+          <ButtonToolbar
+            bsClass="btn-toolbar"
+            className="pull-right"
+          >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="warning"
+              disabled={false}
+              href="about:///admin/capco/app/post/1/edit"
+            >
+              <FormattedMessage
+                id="global.edit"
+                values={Object {}}
+              />
+            </Button>
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="danger"
+              disabled={false}
+              href="about:///admin/capco/app/post/1/delete"
+            >
+              <FormattedMessage
+                id="global.delete"
+                values={Object {}}
+              />
+            </Button>
+          </ButtonToolbar>
+        </Col>
+      </Row>
+    </ListGroupItem>
+  </ListGroup>
+  <ButtonToolbar
+    bsClass="btn-toolbar"
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      href="about:///admin/capco/app/post/create"
+    >
+      <FormattedMessage
+        id="global.add"
+        values={Object {}}
+      />
+    </Button>
+  </ButtonToolbar>
+</div>
+`;

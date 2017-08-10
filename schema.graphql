@@ -66,6 +66,9 @@ input ChangeProposalContentInput {
   body: HTML
 
   # The theme id
+  author: String
+
+  # The theme id
   theme: String
 
   # The category id
@@ -513,6 +516,8 @@ type Project {
 
 # A budget contribution
 type Proposal {
+  # The HTTP url for this contribution.
+  url: URI!
   progressSteps: [ProgressStep!]!
   news: [Post!]!
   project: Project!

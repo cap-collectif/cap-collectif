@@ -82,7 +82,6 @@ export default createFragmentContainer(
   ProposalAdminNewsForm,
   graphql`
     fragment ProposalAdminNewsForm_proposal on Proposal {
-      id
       news {
         id
         title

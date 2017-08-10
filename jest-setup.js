@@ -21,5 +21,5 @@ global.intlMock = {
   formatRelative: message => message,
   formatTime: message => message,
   formatDate: message => message,
-  formatMessage: message => message,
+  formatMessage: message => message.id,
 }

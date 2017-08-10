@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminContentForm /> render correctly 1`] = `
+<div
+  className="box box-primary container"
+>
+  <form>
+    <h4
+      className="h4"
+    >
+      Aperçu
+    </h4>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+    <div>
+      <Field
+        component={[Function]}
+        id="proposal_title"
+        label={
+          <FormattedMessage
+            id="proposal.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <h4
+        className="h4"
+      >
+        Métadonnées
+      </h4>
+      <Field
+        autoload={false}
+        cache={false}
+        clearable={false}
+        component={[Function]}
+        id="proposal-admin-author"
+        inputClassName="qdnsqdnqsldnqsldn"
+        label="Auteur"
+        labelClassName="control-label"
+        loadOptions={[Function]}
+        name="author"
+        options={
+          Array [
+            Object {
+              "label": "author-1",
+              "value": "1",
+            },
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        id="proposal_category"
+        label={
+          <span>
+            <FormattedMessage
+              id="proposal.category"
+              values={Object {}}
+            />
+          </span>
+        }
+        name="category"
+        type="select"
+      >
+        <FormattedMessage
+          id="proposal.select.category"
+          values={Object {}}
+        />
+        <option
+          value="1"
+        >
+          category-1
+        </option>
+        <option
+          value="2"
+        >
+          category-2
+        </option>
+      </Field>
+      <Field
+        component={[Function]}
+        formName="proposal-admin-edit"
+        id="proposal_address"
+        label={
+          <FormattedMessage
+            id="proposal.map.form.field"
+            values={Object {}}
+          />
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <h4
+        className="h4"
+      >
+        Présentation
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_body"
+        label={
+          <FormattedMessage
+            id="proposal.body"
+            values={Object {}}
+          />
+        }
+        name="body"
+        type="editor"
+      />
+      <FieldArray
+        component={[Function]}
+        fields={
+          Array [
+            Object {
+              "id": "1",
+              "inputType": "text",
+              "position": 0,
+              "private": false,
+              "required": true,
+              "title": "title",
+            },
+          ]
+        }
+        name="responses"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_media"
+        image=""
+        label={
+          <span>
+            <FormattedMessage
+              id="proposal.media"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.form.optional"
+                values={Object {}}
+              />
+            </span>
+          </span>
+        }
+        name="media"
+        type="image"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;

@@ -1,24 +1,16 @@
 /* eslint-env jest */
 import { call, put } from 'redux-saga/effects';
-import {
-  reducer,
-  sendProposalNotificationSucceed,
-  deleteVoteSucceeded,
-  fetchPosts,
-} from './proposal';
+import { reducer, deleteVoteSucceeded, fetchPosts } from './proposal';
 import Fetcher from '../../services/Fetcher';
 
 describe('Proposal Reducer', () => {
   it('Should handle POSTS_FETCH_SUCCEEDED', () => {
     const initialState = {
       proposalsById: {
-        1: { },
+        1: {},
       },
     };
-    const posts = [
-        { },
-        { },
-    ];
+    const posts = [{}, {}];
     const newState = reducer(initialState, {
       type: 'proposal/POSTS_FETCH_SUCCEEDED',
       proposalId: 1,
@@ -31,17 +23,6 @@ describe('Proposal Reducer', () => {
         },
       },
     });
-  });
-
-  it('Should handle sendProposalNotificationSucceed', () => {
-    const initialState = {
-      proposalsById: {
-        1: { },
-      },
-      lastNotifiedStepId: null,
-    };
-    const newState = reducer(initialState, sendProposalNotificationSucceed(1, 2));
-    expect(newState).toMatchSnapshot();
   });
 
   it('Should handle deleteVoteSucceeded', () => {
@@ -60,7 +41,9 @@ describe('Proposal Sagas', () => {
       proposalId: 1,
     });
     const posts = [];
-    expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/1/posts'));
+    expect(generator.next().value).toEqual(
+      call(Fetcher.get, '/proposals/1/posts'),
+    );
     expect(generator.next({ posts }).value).toEqual(
       put({
         type: 'proposal/POSTS_FETCH_SUCCEEDED',
@@ -69,6 +52,8 @@ describe('Proposal Sagas', () => {
       }),
     );
 
-    expect(generator.throw({}).value).toEqual(put({ type: 'proposal/POSTS_FETCH_FAILED', error: {} }));
+    expect(generator.throw({}).value).toEqual(
+      put({ type: 'proposal/POSTS_FETCH_FAILED', error: {} }),
+    );
   });
 });

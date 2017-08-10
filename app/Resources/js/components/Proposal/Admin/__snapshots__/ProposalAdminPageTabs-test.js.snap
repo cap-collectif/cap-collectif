@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
+<Uncontrolled(Tabs)
+  defaultActiveKey={2}
+  id="proposal-admin-page-tabs"
+>
+  <Tab
+    disabled={true}
+    eventKey={1}
+    title="proposal.admin.activity"
+  />
+  <Tab
+    eventKey={2}
+    title="proposal.admin.content"
+  >
+    <Relay(Connect(InjectIntl(ReduxForm)))
+      proposal={Object {}}
+    />
+  </Tab>
+  <Tab
+    eventKey={3}
+    title="proposal.admin.advancement"
+  >
+    <Relay(Connect(ReduxForm))
+      proposal={Object {}}
+    />
+  </Tab>
+  <Tab
+    eventKey={4}
+    title="proposal.admin.news"
+  >
+    <Relay(ProposalAdminNewsForm)
+      proposal={Object {}}
+    />
+  </Tab>
+  <Tab
+    eventKey={5}
+    title="proposal.admin.notation"
+  >
+    <Relay(Connect(ReduxForm))
+      proposal={Object {}}
+    />
+  </Tab>
+  <Tab
+    eventKey={6}
+    title="proposal.admin.publication"
+  >
+    <Relay(Connect(ReduxForm))
+      proposal={Object {}}
+    />
+  </Tab>
+</Uncontrolled(Tabs)>
+`;

@@ -19,7 +19,7 @@ import ChangeSelectionStatusMutation from '../../../mutations/ChangeSelectionSta
 import ChangeCollectStatusMutation from '../../../mutations/ChangeCollectStatusMutation';
 import ChangeProposalProgressStepsMutation from '../../../mutations/ChangeProposalProgressStepsMutation';
 import UnselectProposalMutation from '../../../mutations/UnselectProposalMutation';
-import ProposalAdminProgessSteps from './ProposalAdminProgessSteps';
+import ProposalAdminProgressSteps from './ProposalAdminProgressSteps';
 
 export const formName = 'proposal-admin-selections';
 const selector = formValueSelector(formName);
@@ -27,10 +27,11 @@ const selector = formValueSelector(formName);
 type PassedProps = {
   proposal: ProposalAdminSelections_proposal,
 };
+
 type Props = {
   proposal: ProposalAdminSelections_proposal,
   initialValues: Object,
-  selectionValues: Array<Object>,
+  selectionValues: Array<{ step: string, selected: boolean, status: ?string }>,
   handleSubmit: Function,
   pristine: boolean,
   invalid: boolean,
@@ -220,7 +221,7 @@ export class ProposalAdminSelections extends Component<
                     {step.allowingProgressSteps &&
                       <FieldArray
                         name="progressSteps"
-                        component={ProposalAdminProgessSteps}
+                        component={ProposalAdminProgressSteps}
                       />}
                   </div>}
               </ListGroupItem>,

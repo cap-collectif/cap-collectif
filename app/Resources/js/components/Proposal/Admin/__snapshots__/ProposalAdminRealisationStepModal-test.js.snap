@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="report-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="report-modal-title-lg"
+    >
+      <FormattedMessage
+        id="Créer une phase de réalisation"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="member.title"
+      label="Titre"
+      name="member.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="member.startAt"
+      label="Date de début"
+      name="member.startAt"
+      timeFormat={false}
+      type="datetime"
+    />
+    <Field
+      component={[Function]}
+      id="member.endAt"
+      label="Date de fin (facultatif)"
+      name="member.endAt"
+      timeFormat={false}
+      type="datetime"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;

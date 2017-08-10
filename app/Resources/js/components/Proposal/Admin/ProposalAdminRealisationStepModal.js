@@ -8,7 +8,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import component from '../../Form/Field';
 
-const ProposalAdminRealisationStepModal = React.createClass({
+export const ProposalAdminRealisationStepModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,

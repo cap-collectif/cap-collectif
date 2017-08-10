@@ -31,11 +31,7 @@ const component = ({
   return <Loader />;
 };
 
-export default class ProposalAdminPage extends Component<
-  DefaultProps,
-  Props,
-  State,
-> {
+export class ProposalAdminPage extends Component<DefaultProps, Props, State> {
   render() {
     return (
       <div className="container">
@@ -61,3 +57,5 @@ export default class ProposalAdminPage extends Component<
     );
   }
 }
+
+export default ProposalAdminPage;
