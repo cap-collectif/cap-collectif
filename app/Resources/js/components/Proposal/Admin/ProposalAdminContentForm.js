@@ -12,6 +12,7 @@ import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, FeatureToggles } from '../../../types';
 
+type FormValues = Object;
 type DefaultProps = void;
 type PassedProps = {
   proposal: ProposalAdminContentForm_proposal,
@@ -67,8 +68,53 @@ const onSubmit = (values, dispatch, props: Props) => {
   ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
-const validate = () => {
+const validate = (values: FormValues, { proposal, features }: Props) => {
   const errors = {};
+  const form = proposal.form;
+
+  if (!values.title || values.title.length <= 2) {
+    errors.title = 'proposal.constraints.title';
+  }
+  if (!values.body || values.body.length <= 2) {
+    errors.body = 'proposal.constraints.body';
+  }
+  if (form.usingAddress && !values.address) {
+    errors.addressText = 'proposal.constraints.address';
+  }
+  if (
+    form.categories.length &&
+    form.usingCategories &&
+    form.categoryMandatory &&
+    !values.category
+  ) {
+    errors.category = 'proposal.constraints.category';
+  }
+  if (
+    features.districts &&
+    form.usingDistrict &&
+    form.districtMandatory &&
+    !values.district
+  ) {
+    errors.theme = 'proposal.constraints.theme';
+  }
+  if (
+    features.themes &&
+    form.usingThemes &&
+    form.themeMandatory &&
+    !values.theme
+  ) {
+    errors.theme = 'proposal.constraints.theme';
+  }
+  form.customFields.map(field => {
+    if (field.required) {
+      const response = values.responses.filter(
+        res => res && res.question.id === field.id,
+      )[0];
+      if (!response) {
+        errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
+      }
+    }
+  });
   return errors;
 };
 
