@@ -95,9 +95,9 @@ type ChangeProposalContentPayload {
 
 input ChangeProposalNotationInput {
   # The proposal id
-  id: ID!
+  proposalId: ID!
   estimation: Int
-  likers: [ID!]
+  likers: [String!]
   clientMutationId: String
 }
 
@@ -930,7 +930,12 @@ type User {
   firstname: String
   lastname: String
   dateOfBirth: String
-  userType: String
+
+  # Unattended roles as array.
+  roles: [String]
+
+  # Array of roles converted and translated to string.
+  rolesText: String
   website: String
   biography: String
   address: String
@@ -958,8 +963,8 @@ type User {
   eventCommentsCount: Int!
   projectsCount: Int!
 
-  # The facultative type of the person.
-  type: UserType
+  # The type of the person.
+  userType: UserType
 }
 
 # A type of person

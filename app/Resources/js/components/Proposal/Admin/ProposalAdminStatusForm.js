@@ -37,7 +37,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }).then(location.reload());
 };
 
-const onDelete = proposalId => {
+const onDelete = (proposalId: string) => {
   DeleteProposalMutation.commit({
     input: {
       proposalId,

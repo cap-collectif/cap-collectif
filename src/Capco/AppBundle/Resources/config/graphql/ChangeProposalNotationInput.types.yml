@@ -2,10 +2,10 @@ ChangeProposalNotationInput:
     type: relay-mutation-input
     config:
         fields:
-            id:
+            proposalId:
                 type: "ID!"
                 description: "The proposal id"
             estimation:
                 type: "Int"
             likers:
-                type: "[ID!]"
+                type: "[String!]"

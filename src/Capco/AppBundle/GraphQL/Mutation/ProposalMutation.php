@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
+use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -23,11 +24,11 @@ class ProposalMutation implements ContainerAwareInterface
     public function delete(string $proposalId): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
         }
-        $em->remove($entity->getSelections());
+        // $em->remove($proposal->getSelections());
         $em->remove($proposal);
         $em->flush();
 
