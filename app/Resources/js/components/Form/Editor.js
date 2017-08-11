@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
 
 const Editor = React.createClass({
   propTypes: {
+    intl: intlShape.isRequired,
     valueLink: PropTypes.object, // deprecated way
     value: PropTypes.any, // redux-form
     onChange: PropTypes.func, // redux-form
@@ -25,7 +26,7 @@ const Editor = React.createClass({
   },
 
   componentDidMount() {
-    const { disabled, onBlur, onChange, value, valueLink } = this.props;
+    const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
     if (!disabled) {
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
@@ -36,32 +37,31 @@ const Editor = React.createClass({
             template: `
               <input class="input" type="textbox">
               <div class="preview">
-                <span>${<FormattedMessage id="global.preview" />}</span>
+                <span>${intl.formatMessage({ id: 'global.preview' })}</span>
               </div>
-              <a href="javascript:;" class="cancel">${(
-                <FormattedMessage id="global.cancel" />
-              )}</a>
-              <a href="javascript:;" class="insert">${(
-                <FormattedMessage id="global.insert" />
-              )}</a>`,
+              <a href="javascript:;" class="cancel">
+                ${intl.formatMessage({ id: 'global.cancel' })}</a>
+              <a href="javascript:;" class="insert">
+                ${intl.formatMessage({ id: 'global.insert' })}
+              </a>`,
           },
           'link-tooltip': {
             template: `
-              <span class="title">${(
-                <FormattedMessage id="editor.url" />
-              )}:&nbsp;</span>
+              <span class="title">
+                ${intl.formatMessage({ id: 'editor.url' })}&nbsp;
+              </span>
               <a href="#" class="url" target="_blank" href="about:blank"></a>
               <input class="input" type="text">
               <span>&nbsp;&#45;&nbsp;</span>
-              <a href="javascript:;" class="change">${(
-                <FormattedMessage id="global.change" />
-              )}</a>
-              <a href="javascript:;" class="remove">${(
-                <FormattedMessage id="global.remove" />
-              )}</a>
-              <a href="javascript:;" class="done">${(
-                <FormattedMessage id="global.done" />
-              )}</a>`,
+              <a href="javascript:;" class="change">
+                ${intl.formatMessage({ id: 'global.change' })}
+              </a>
+              <a href="javascript:;" class="remove">
+                ${intl.formatMessage({ id: 'global.remove' })}
+              </a>
+              <a href="javascript:;" class="done">
+                ${intl.formatMessage({ id: 'global.done' })}
+              </a>`,
           },
         },
         styles: false,
@@ -123,4 +123,4 @@ const Editor = React.createClass({
   },
 });
 
-export default Editor;
+export default injectIntl(Editor);
