@@ -32,9 +32,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   ChangeProposalPublicationStatusMutation.commit({
     input: {
       publicationStatus: values.publicationStatus,
-      id: props.proposal.id,
+      proposalId: props.proposal.id,
     },
-  }).then(location.reload());
+  }).then(() => {
+    location.reload();
+  });
 };
 
 const onDelete = (proposalId: string) => {
@@ -90,7 +92,7 @@ export class ProposalAdminStatusForm extends Component<
             <ToggleButton value="PUBLISHED">Publié</ToggleButton>
             <ToggleButton value="TRASHED">Corbeille</ToggleButton>
             <ToggleButton value="TRASHED_NOT_VISIBLE">
-              Corbeille (Masqué)
+              Corbeille (contenu masqué)
             </ToggleButton>
             {publicationStatus === 'EXPIRED' &&
               <ToggleButton value="EXPIRED">Expiré</ToggleButton>}

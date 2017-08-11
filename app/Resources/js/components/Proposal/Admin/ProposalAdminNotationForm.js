@@ -28,10 +28,13 @@ const validate = () => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  values.likers = values.likers.map(u => u.value);
   const variables = {
-    input: { ...values, id: props.proposal.id },
+    input: { ...values, proposalId: props.proposal.id },
   };
-  ChangeProposalNotationMutation.commit(variables).then(location.reload());
+  ChangeProposalNotationMutation.commit(variables).then(() => {
+    location.reload();
+  });
 };
 
 export class ProposalAdminNotationForm extends Component<
@@ -109,7 +112,10 @@ const form = reduxForm({
 const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     estimation: props.proposal.estimation,
-    likers: props.proposal.likers.map(u => u.id),
+    likers: props.proposal.likers.map(u => ({
+      value: u.id,
+      label: u.displayName,
+    })),
   },
 });
 

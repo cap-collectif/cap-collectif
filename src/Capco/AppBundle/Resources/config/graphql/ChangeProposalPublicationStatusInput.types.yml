@@ -9,6 +9,6 @@ ChangeProposalPublicationStatusInput:
             trashedReason:
                 type: "String"
                 description: "Added if you set publicationStatus to TRASHED"
-            id:
+            proposalId:
               type: "ID!"
               description: "The proposal id"

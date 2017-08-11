@@ -178,7 +178,6 @@ export class ProposalAdminContentForm extends Component<
               component={select}
               clearable={false}
               autoload={false}
-              cache={false}
               loadOptions={terms =>
                 Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
                   options: res.users.map(u => ({

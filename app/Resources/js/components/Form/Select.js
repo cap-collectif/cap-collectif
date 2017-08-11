@@ -4,14 +4,20 @@ import Select from 'react-select';
 
 export const renderSelect = React.createClass({
   propTypes: {
-    input: PropTypes.object.isRequired,
+    input: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+      onBlur: PropTypes.func.isRequired,
+      onChange: PropTypes.func.isRequired,
+      onFocus: PropTypes.func.isRequired,
+    }).isRequired,
     meta: PropTypes.object.isRequired,
     touched: PropTypes.bool,
     label: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     error: PropTypes.any,
-    options: PropTypes.array,
+    options: PropTypes.array.isRequired,
     clearable: PropTypes.bool,
     multi: PropTypes.bool,
     loadOptions: PropTypes.func,
@@ -22,6 +28,12 @@ export const renderSelect = React.createClass({
     inputClassName: PropTypes.string,
   },
 
+  getDefaultProps() {
+    return {
+      multi: false,
+    };
+  },
+
   render() {
     const {
       onChange,
@@ -29,21 +41,12 @@ export const renderSelect = React.createClass({
       label,
       labelClassName,
       inputClassName,
+      multi,
+      options,
       meta: { touched, error },
       ...custom
     } = this.props;
-    const reactSelectToReduxForm = (event: Event) => {
-      if (input.onChange) {
-        input.onChange(
-          Array.isArray(event)
-            ? event.map(e => e.value || [])
-            : (event && event.value) || null,
-        );
-      }
-      if (typeof onChange === 'function') {
-        onChange();
-      }
-    };
+    const { name, value, onBlur, onFocus } = input;
     return (
       <div className="form-group">
         {label &&
@@ -55,20 +58,45 @@ export const renderSelect = React.createClass({
         <div id={input.name} className={inputClassName || 'col-sm-10'}>
           {typeof custom.loadOptions === 'function'
             ? <Select.Async
-                {...input}
-                {...custom}
+                autoload
+                loadOptions={custom.loadOptions}
+                valueKey="value"
+                value={value}
+                name={name}
+                multi={multi}
                 noResultsText={'En attente de résultats...'}
-                onBlur={() => {
-                  input.onBlur(input.value);
+                onBlur={() => onBlur(value)}
+                onFocus={onFocus}
+                onChange={(newValue: string | Array<Object>) => {
+                  console.log('newValue=', newValue);
+                  if (typeof onChange === 'function') {
+                    onChange();
+                  }
+                  if (multi) {
+                    return input.onChange(newValue);
+                  }
+                  input.onChange(newValue ? newValue.value : '');
                 }}
-                onChange={reactSelectToReduxForm}
               />
             : <Select
-                {...input}
-                {...custom}
+                // {...custom}
+                name={name}
+                valueKey="value"
+                multi={multi}
+                value={value}
                 noResultsText={'En attente de résultats...'}
-                onBlur={() => input.onBlur(input.value)}
-                onChange={reactSelectToReduxForm}
+                onBlur={() => onBlur(value)}
+                onFocus={onFocus}
+                onChange={(newValue: string | Array<Object>) => {
+                  console.log('newValue=', newValue);
+                  if (typeof onChange === 'function') {
+                    onChange();
+                  }
+                  if (multi) {
+                    return input.onChange(newValue);
+                  }
+                  input.onChange(newValue);
+                }}
               />}
           {touched && error}
         </div>

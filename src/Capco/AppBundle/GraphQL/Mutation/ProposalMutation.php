@@ -176,9 +176,9 @@ class ProposalMutation implements ContainerAwareInterface
     public function changePublicationStatus(Argument $values): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['id']);
+        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));
         }
 
         switch ($values['publicationStatus']) {

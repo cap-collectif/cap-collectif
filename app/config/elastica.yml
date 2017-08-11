@@ -40,7 +40,7 @@ fos_elastica:
         user:
           indexable_callback: isIndexable
           serializer:
-            groups: [UsersInfos]
+            groups: [UserId, UsersInfos]
           _all: { enabled: false }
           mappings:
             id:

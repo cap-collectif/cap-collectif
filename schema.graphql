@@ -125,7 +125,7 @@ input ChangeProposalPublicationStatusInput {
   trashedReason: String
 
   # The proposal id
-  id: ID!
+  proposalId: ID!
   clientMutationId: String
 }
 

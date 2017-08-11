@@ -116,6 +116,8 @@ class SelectionStepsController extends FOSRestController
           $stepId,
           $request->request->get('status')
         );
+
+        return [];
     }
 
     /**
