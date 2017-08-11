@@ -72,9 +72,6 @@ fragment trashableInfos on TrashableContribution {
 fragment authorInfos on ContributionWithAuthor {
   author {
     id
-    type {
-      name
-    }
   }
 }
 fragment reportInfos on Reporting {

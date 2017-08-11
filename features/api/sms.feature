@@ -57,23 +57,25 @@ Feature: Sms
     }
     """
 
-  @database
-  Scenario: Logged in API client non-sms confirmed wants to receive a confirmation sms
-    Given feature "phone_confirmation" is enabled
-    And I am logged in to api as user_with_phone_not_phone_confirmed
-    When I send a POST request to "/api/send-sms-confirmation"
-    Then the JSON response status code should be 201
-    Then user_with_phone_not_phone_confirmed should have an sms code to confirm
-    When I send a POST request to "/api/send-sms-confirmation"
-    Then the JSON response status code should be 400
-    And the JSON response should match:
-    """
-    {
-      "code": 400,
-      "message": "sms_already_sent_recently",
-      "errors": null
-    }
-    """
+  # We stopped paying for Twilio, reenable when feature is needed
+  #
+  # @database
+  # Scenario: Logged in API client non-sms confirmed wants to receive a confirmation sms
+  #   Given feature "phone_confirmation" is enabled
+  #   And I am logged in to api as user_with_phone_not_phone_confirmed
+  #   When I send a POST request to "/api/send-sms-confirmation"
+  #   Then the JSON response status code should be 201
+  #   Then user_with_phone_not_phone_confirmed should have an sms code to confirm
+  #   When I send a POST request to "/api/send-sms-confirmation"
+  #   Then the JSON response status code should be 400
+  #   And the JSON response should match:
+  #   """
+  #   {
+  #     "code": 400,
+  #     "message": "sms_already_sent_recently",
+  #     "errors": null
+  #   }
+  #   """
 
 
   @database
