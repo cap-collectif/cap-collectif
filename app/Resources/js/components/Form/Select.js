@@ -68,7 +68,6 @@ export const renderSelect = React.createClass({
                 onBlur={() => onBlur(value)}
                 onFocus={onFocus}
                 onChange={(newValue: string | Array<Object>) => {
-                  console.log('newValue=', newValue);
                   if (typeof onChange === 'function') {
                     onChange();
                   }
@@ -79,7 +78,6 @@ export const renderSelect = React.createClass({
                 }}
               />
             : <Select
-                // {...custom}
                 name={name}
                 valueKey="value"
                 multi={multi}
@@ -87,15 +85,14 @@ export const renderSelect = React.createClass({
                 noResultsText={'En attente de résultats...'}
                 onBlur={() => onBlur(value)}
                 onFocus={onFocus}
-                onChange={(newValue: string | Array<Object>) => {
-                  console.log('newValue=', newValue);
+                onChange={(newValue: { value: string }) => {
                   if (typeof onChange === 'function') {
                     onChange();
                   }
                   if (multi) {
                     return input.onChange(newValue);
                   }
-                  input.onChange(newValue);
+                  input.onChange(newValue ? newValue.value : '');
                 }}
               />}
           {touched && error}
