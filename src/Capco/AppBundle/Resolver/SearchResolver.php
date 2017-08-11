@@ -120,6 +120,19 @@ class SearchResolver
         return $boolFilter;
     }
 
+    public function searchUsers(string $term = null)
+    {
+        $type = 'user';
+        $results = $this->searchAll(1, $term, $type, '_score', 'DESC', [], false);
+
+        return [
+            'users' => array_map(function (Result $result) {
+                return $result->getSource();
+            }, $results['results']),
+            'count' => $results['count'],
+        ];
+    }
+
     public function searchProposals($page, $pagination, $order, $terms, $providedFilters)
     {
         $type = 'proposal';

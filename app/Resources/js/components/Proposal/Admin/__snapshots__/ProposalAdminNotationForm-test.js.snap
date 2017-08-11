@@ -53,6 +53,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         inputClassName="qdnsqdnqsldnqsldn"
         label="likers"
         labelClassName="control-label"
+        loadOptions={[Function]}
         multi={true}
         name="likers"
         options={

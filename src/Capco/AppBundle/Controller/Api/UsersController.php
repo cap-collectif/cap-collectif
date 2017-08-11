@@ -45,6 +45,17 @@ class UsersController extends FOSRestController
       ];
   }
 
+   /**
+    * @Post("/users/search")
+    * @View(statusCode=200, serializerGroups={"UserId", "UsersInfos"})
+    */
+   public function getUsersSearchAction(Request $request)
+   {
+       $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+
+       return $this->get('capco.search.resolver')->searchUsers($terms);
+   }
+
     /**
      * @ApiDoc(
      *  resource=true,

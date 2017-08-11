@@ -108,9 +108,11 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           normalize={[Function]}
         />
         <div>
-          <div>
+          <p
+            className="has-warning"
+          >
             L'auteur de la proposition sera notifié du changement de statut
-          </div>
+          </p>
           <Field
             component={[Function]}
             id="selections[0].status"

@@ -29,7 +29,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
   >
     <Field
       component={[Function]}
-      disabled={true}
+      disabled={false}
       id="publicationStatus"
       name="publicationStatus"
       type="radio-buttons"
@@ -43,6 +43,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
         value="TRASHED"
       >
         Corbeille
+      </ToggleButton>
+      <ToggleButton
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (Masqué)
       </ToggleButton>
       <ToggleButton
         value="EXPIRED"
@@ -63,7 +68,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
         block={false}
         bsClass="btn"
         bsStyle="primary"
-        disabled={false}
+        disabled={true}
         type="submit"
       >
         <FormattedMessage
@@ -133,6 +138,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
       >
         Corbeille
       </ToggleButton>
+      <ToggleButton
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (Masqué)
+      </ToggleButton>
     </Field>
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -147,7 +157,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
         block={false}
         bsClass="btn"
         bsStyle="primary"
-        disabled={false}
+        disabled={true}
         type="submit"
       >
         <FormattedMessage
@@ -222,6 +232,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
       >
         Corbeille
       </ToggleButton>
+      <ToggleButton
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (Masqué)
+      </ToggleButton>
     </Field>
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -236,7 +251,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
         block={false}
         bsClass="btn"
         bsStyle="primary"
-        disabled={false}
+        disabled={true}
         type="submit"
       >
         <FormattedMessage

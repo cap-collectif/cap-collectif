@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
+import Fetcher from '../../../services/Fetcher';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
@@ -178,15 +179,13 @@ export class ProposalAdminContentForm extends Component<
               clearable={false}
               autoload={false}
               cache={false}
-              loadOptions={() =>
-                Promise.resolve({
-                  options: [
-                    {
-                      label: proposal.author.displayName,
-                      value: proposal.author.id,
-                    },
-                  ],
-                })}
+              loadOptions={terms =>
+                Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
+                  options: res.users.map(u => ({
+                    value: u.id,
+                    label: u.displayName,
+                  })),
+                }))}
             />
             {features.themes &&
               form.usingThemes &&

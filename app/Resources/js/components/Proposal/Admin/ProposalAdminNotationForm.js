@@ -8,6 +8,7 @@ import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
+import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { State, Dispatch } from '../../../types';
 
@@ -76,6 +77,13 @@ export class ProposalAdminNotationForm extends Component<
                 value: u.id,
                 label: u.displayName,
               }))}
+              loadOptions={terms =>
+                Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
+                  options: res.users.map(u => ({
+                    value: u.id,
+                    label: u.displayName,
+                  })),
+                }))}
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
               <Button
