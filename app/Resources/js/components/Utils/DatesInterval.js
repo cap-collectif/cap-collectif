@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl';
 import moment from 'moment';
 
 const DatesInterval = React.createClass({
@@ -28,16 +28,18 @@ const DatesInterval = React.createClass({
       return null;
     }
 
+    const startAtObject = moment(startAt);
+
     const startDay = (
       <FormattedDate
-        value={moment(startAt)}
+        value={startAtObject}
         day="numeric"
         month="long"
         year="numeric"
       />
     );
     const startTime = (
-      <FormattedDate value={moment(startAt)} hour="numeric" minute="numeric" />
+      <FormattedTime value={startAtObject} hour="numeric" minute="numeric" />
     );
 
     if (!endAt) {
@@ -52,12 +54,14 @@ const DatesInterval = React.createClass({
       );
     }
 
+    const endAtObject = moment(endAt);
+
     const endTime = (
-      <FormattedDate value={moment(endAt)} hour="numeric" minute="numeric" />
+      <FormattedTime value={endAtObject} hour="numeric" minute="numeric" />
     );
     const endDay = (
       <FormattedDate
-        value={moment(endAt)}
+        value={endAtObject}
         day="numeric"
         month="long"
         year="numeric"

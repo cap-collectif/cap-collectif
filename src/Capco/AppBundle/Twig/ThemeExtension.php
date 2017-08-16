@@ -60,13 +60,13 @@ class ThemeExtension extends \Twig_Extension
                       'name' => $status->getName(),
                     ];
                 }
-                $formater = \IntlDateFormatter::create(null, \IntlDateFormatter::MEDIUM, \IntlDateFormatter::NONE);
+
                 $stepData = [
                   'id' => $realStep->getId(),
                   'title' => $realStep->getTitle(),
                   'body' => $realStep->getBody(),
-                  'startAt' => $realStep->getStartAt() ? $formater->format($realStep->getStartAt()) : null,
-                  'endAt' => $realStep->getStartAt() ? $formater->format($realStep->getEndAt()) : null,
+                  'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
+                  'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
                   'position' => $realStep->getPosition(),
                   'type' => $realStep->getType(),
                   'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),
