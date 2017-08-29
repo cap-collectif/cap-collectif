@@ -32,11 +32,8 @@ exports[`<Radio /> should render correctly 1`] = `
   >
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-24"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Maxime Arrouard"
@@ -45,11 +42,8 @@ exports[`<Radio /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-25"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Spylou Super Sayen"
@@ -58,11 +52,8 @@ exports[`<Radio /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-26"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Cyril Lage"
@@ -71,11 +62,8 @@ exports[`<Radio /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-27"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Superman"
@@ -118,11 +106,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
   >
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-24"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Maxime Arrouard"
@@ -131,11 +116,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-25"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Spylou Super Sayen"
@@ -144,11 +126,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-26"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Cyril Lage"
@@ -157,11 +136,8 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
     </InjectIntl(ReactBootstrapInput)>
     <InjectIntl(ReactBootstrapInput)
       disabled={false}
-      errors={null}
       id="reply-1_choice-27"
       image={null}
-      labelClassName="h5"
-      medias={Array []}
       name="choices-for-field-12"
       type="radio"
       value="Superman"

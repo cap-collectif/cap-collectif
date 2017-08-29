@@ -42,7 +42,7 @@ Feature: Proposals
     Scenario: GraphQL client wants to change proposal content
       Given feature themes is enabled
       And feature districts is enabled
-      And I am logged in to graphql as admin
+      And I am logged in to graphql as super admin
       And I send a GraphQL POST request:
       """
       {

@@ -13,11 +13,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="stats-filter-themes"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
     >
@@ -43,11 +39,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="stats-filter-categories"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
     >
@@ -71,11 +63,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="stats-filter-districts"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
     >
@@ -108,11 +96,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="stats-filter-categories"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
     >

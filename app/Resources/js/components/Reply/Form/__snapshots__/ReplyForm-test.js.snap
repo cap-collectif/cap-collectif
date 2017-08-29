@@ -10,7 +10,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     groupClassName=""
     help=""
     id="reply-10"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -21,7 +20,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       />
     }
     labelClassName="h4"
-    medias={Array []}
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -84,7 +82,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     groupClassName=""
     help="Merci de répondre sincèrement"
     id="reply-13"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -95,7 +92,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       />
     }
     labelClassName="h4"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -183,7 +179,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     groupClassName=""
     help=""
     id="reply-10"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -194,7 +189,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       />
     }
     labelClassName="h4"
-    medias={Array []}
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -304,7 +298,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     groupClassName=""
     help=""
     id="reply-10"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -315,7 +308,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       />
     }
     labelClassName="h4"
-    medias={Array []}
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -433,7 +425,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     groupClassName=""
     help="Merci de répondre sincèrement"
     id="reply-13"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -444,7 +435,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       />
     }
     labelClassName="h4"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -586,7 +576,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     groupClassName=""
     help="Merci de répondre sincèrement"
     id="reply-13"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -597,7 +586,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       />
     }
     labelClassName="h4"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -692,7 +680,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
     groupClassName=""
     help=""
     id="reply-10"
-    image={null}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -703,7 +690,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       />
     }
     labelClassName="h4"
-    medias={Array []}
     placeholder="reply.your_response"
     type="text"
     valueLink={

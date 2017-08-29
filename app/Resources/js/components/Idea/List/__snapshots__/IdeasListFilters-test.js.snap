@@ -13,11 +13,7 @@ exports[`<IdeasListFilters /> it should render a row containing sorting input an
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="idea-sorting"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
       value="last"
@@ -79,11 +75,7 @@ exports[`<IdeasListFilters /> it should render the idea create when feature is e
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="idea-sorting"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
       value="last"
@@ -133,11 +125,7 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="idea-filter-theme"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
       value="0"
@@ -155,11 +143,7 @@ exports[`<IdeasListFilters /> it should render the themes filter when feature is
     xs={12}
   >
     <InjectIntl(ReactBootstrapInput)
-      errors={null}
       id="idea-sorting"
-      image={null}
-      labelClassName="h5"
-      medias={Array []}
       onChange={[Function]}
       type="select"
       value="last"

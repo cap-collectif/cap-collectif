@@ -1268,6 +1268,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->username ?: 'Utilisateur supprimé';
     }
 
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('ROLE_SUPER_ADMIN');
+    }
+
     /**
      * Tell if user has role admin or super admin.
      *

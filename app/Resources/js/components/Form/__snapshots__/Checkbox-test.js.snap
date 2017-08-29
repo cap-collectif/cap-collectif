@@ -26,11 +26,8 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-20"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Athlétisme"
@@ -41,11 +38,8 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-21"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Natation"
@@ -56,11 +50,8 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-22"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports collectifs"
@@ -71,11 +62,8 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-23"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports individuels"
@@ -113,11 +101,8 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-20"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Athlétisme"
@@ -128,11 +113,8 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-21"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Natation"
@@ -143,11 +125,8 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-22"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports collectifs"
@@ -158,11 +137,8 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <div>
       <InjectIntl(ReactBootstrapInput)
         disabled={false}
-        errors={null}
         id="reply-1_choice-23"
         image={null}
-        labelClassName="h5"
-        medias={Array []}
         name="choices-for-field-11"
         type="checkbox"
         value="Sports individuels"

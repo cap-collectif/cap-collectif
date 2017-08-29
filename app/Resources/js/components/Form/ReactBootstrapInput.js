@@ -72,7 +72,12 @@ type Props = {
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
-  static defaultProps = {};
+  static defaultProps = {
+    labelClassName: 'h5',
+    errors: null,
+    image: null,
+    medias: [],
+  };
 
   constructor(props, context) {
     super(props, context);

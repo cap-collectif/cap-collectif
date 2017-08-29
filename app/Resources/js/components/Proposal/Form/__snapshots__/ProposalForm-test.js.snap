@@ -22,15 +22,12 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     errors={null}
     groupClassName=""
     id="proposal_title"
-    image={null}
     label={
       <FormattedMessage
         id="proposal.title"
         values={Object {}}
       />
     }
-    labelClassName="h5"
-    medias={Array []}
     onChange={[Function]}
     type="text"
     value="proposal title"
@@ -87,7 +84,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     errors={null}
     groupClassName=""
     id="proposal_theme"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -96,8 +92,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -120,7 +114,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     errors={null}
     groupClassName=""
     id="proposal_category"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -129,8 +122,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -153,7 +144,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     errors={null}
     groupClassName=""
     id="proposal_district"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -162,8 +152,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -186,15 +174,12 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     errors={null}
     groupClassName=""
     id="proposal_body"
-    image={null}
     label={
       <FormattedMessage
         id="proposal.body"
         values={Object {}}
       />
     }
-    labelClassName="h5"
-    medias={Array []}
     name="body"
     type="editor"
     valueLink={
@@ -225,8 +210,6 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         </span>
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="image"
     valueLink={
       Object {
@@ -260,15 +243,12 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     errors={null}
     groupClassName=""
     id="proposal_title"
-    image={null}
     label={
       <FormattedMessage
         id="proposal.title"
         values={Object {}}
       />
     }
-    labelClassName="h5"
-    medias={Array []}
     onChange={[Function]}
     type="text"
     value="proposal title"
@@ -325,7 +305,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     errors={null}
     groupClassName=""
     id="proposal_theme"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -334,8 +313,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         />
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -358,7 +335,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     errors={null}
     groupClassName=""
     id="proposal_category"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -367,8 +343,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         />
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="select"
     valueLink={
       Object {
@@ -391,15 +365,12 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     errors={null}
     groupClassName=""
     id="proposal_body"
-    image={null}
     label={
       <FormattedMessage
         id="proposal.body"
         values={Object {}}
       />
     }
-    labelClassName="h5"
-    medias={Array []}
     name="body"
     type="editor"
     valueLink={
@@ -430,8 +401,6 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         </span>
       </span>
     }
-    labelClassName="h5"
-    medias={Array []}
     type="image"
     valueLink={
       Object {

@@ -291,7 +291,7 @@ class ProposalMutation implements ContainerAwareInterface
            'proposalForm' => $proposal->getProposalForm(),
        ]);
 
-        if (!$user->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$user->isSuperAdmin()) {
             unset($values['author']); // Only a SUPER_ADMIN can change author
         }
 
