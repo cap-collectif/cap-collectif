@@ -562,6 +562,7 @@ function* submitFusionFormData(
   if (data.responses.length === 0) {
     delete data.responses;
   }
+  data.childConnections = data.childConnections.map(u => u.value);
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => {
     formData.append(key, flattenedData[key]);

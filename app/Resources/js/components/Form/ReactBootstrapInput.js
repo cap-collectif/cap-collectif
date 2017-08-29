@@ -141,7 +141,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'editor') {
-      return <Editor value={value} {...props} />;
+      return <Editor value={value} className={wrapperClassName} {...props} />;
     }
 
     if (type === 'captcha') {
@@ -257,7 +257,13 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
-    if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter) {
+    if (
+      !addonBefore &&
+      !addonAfter &&
+      !buttonBefore &&
+      !buttonAfter &&
+      !wrapperClassName
+    ) {
       return formControl;
     }
 
@@ -287,7 +293,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     return (
       <FormGroup
         bsSize={bsSize}
-        className={props.wrapperClassName}
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label &&

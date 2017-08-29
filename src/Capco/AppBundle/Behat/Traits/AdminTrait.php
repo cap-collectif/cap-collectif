@@ -25,10 +25,16 @@ trait AdminTrait
      */
     public function iFillTheProposalMergeForm()
     {
+        $this->iWait(2);
         $this->getSession()->getPage()->find('css', '#project .Select-input input')->setValue('7');
         $this->iWait(3);
         $this->getSession()->getPage()->find('css', '#childConnections')->click();
         $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
+        $this->iWait(3);
+        $this->getSession()->getPage()->find('css', '#childConnections .Select-input input')->setValue('chère');
+        $this->iWait(2);
+        $this->getSession()->getPage()->find('css', '#childConnections')->click();
+        $this->iWait(2);
         $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
         $this->fillField('title', 'test');
         $this->fillField('proposal-admin-body', 'Description');

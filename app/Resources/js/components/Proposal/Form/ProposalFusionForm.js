@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
-import { renderSelect } from '../../Form/Select';
+import select from '../../Form/Select';
 import type { State, Uuid } from '../../../types';
 
 export const formName = 'proposal';
@@ -33,7 +33,7 @@ export const ProposalFusionForm = React.createClass({
           label="Projet lié"
           placeholder="Sélectionnez un projet"
           isLoading={projects.length === 0}
-          component={renderSelect}
+          component={select}
           clearable={false}
           onChange={() => onProjectChange(formName, 'childConnections', [])}
           options={projects.map(p => ({ value: p.id, label: p.title }))}
@@ -45,8 +45,9 @@ export const ProposalFusionForm = React.createClass({
             id="childConnections"
             multi
             label="Propositions"
+            autoload
             placeholder="Sélectionnez les propositions à fusionner"
-            component={renderSelect}
+            component={select}
             filterOptions={(options, filter, currentValues) =>
               options
                 .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps

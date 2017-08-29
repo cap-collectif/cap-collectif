@@ -38,11 +38,11 @@ export const ProposalAdminForm = React.createClass({
           name="author"
           label="Auteur"
           id="proposal-admin-author"
-          options={[{ label: user.displayName, value: user.id }]}
+          labelClassName="col-sm-2"
+          inputClassName="col-sm-10"
           component={renderSelect}
           clearable={false}
-          autoload={false}
-          cache={false}
+          autoload
           loadOptions={() =>
             Promise.resolve({
               options: [{ label: user.displayName, value: user.id }],

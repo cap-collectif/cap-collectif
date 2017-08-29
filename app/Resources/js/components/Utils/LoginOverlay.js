@@ -89,7 +89,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
   showRegistrationButton: state.default.features.registration,
   isLoginOrRegistrationModalOpen:
-    state.user.showLoginModal || state.user.showRegistrationModal,
+    state.user.showLoginModal || state.user.showRegistrationModal || false,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   openLoginModal: () => {

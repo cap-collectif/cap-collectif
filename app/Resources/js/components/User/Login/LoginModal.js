@@ -56,7 +56,7 @@ export const LoginModal = React.createClass({
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting('login')(state),
-  show: state.user.showLoginModal,
+  show: state.user.showLoginModal || false,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
