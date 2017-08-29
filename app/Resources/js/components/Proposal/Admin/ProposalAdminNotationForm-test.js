@@ -9,6 +9,7 @@ describe('<ProposalAdminNotationForm />', () => {
     handleSubmit: jest.fn(),
     invalid: false,
     pristine: false,
+    submitting: false,
     proposal: {
       id: '1',
       estimation: 1000,

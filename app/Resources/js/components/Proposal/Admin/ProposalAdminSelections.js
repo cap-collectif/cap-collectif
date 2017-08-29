@@ -35,6 +35,7 @@ type Props = {
   handleSubmit: Function,
   pristine: boolean,
   invalid: boolean,
+  submitting: boolean,
 };
 type DefaultProps = void;
 
@@ -112,9 +113,9 @@ const onSubmit = (values, dispatch, props: Props) => {
       }),
     );
   }
-  Promise.all(promises)
+  return Promise.all(promises)
     .then(() => {
-      console.log('Success');
+      window.location.reload();
     })
     .catch(error => {
       console.log(error);
@@ -133,6 +134,7 @@ export class ProposalAdminSelections extends Component<
       handleSubmit,
       pristine,
       invalid,
+      submitting,
     } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
@@ -200,9 +202,9 @@ export class ProposalAdminSelections extends Component<
                 {selectionValues[index] &&
                   selectionValues[index].selected &&
                   <div>
-                    <p className="has-warning">
-                      L'auteur de la proposition sera notifié du changement de
-                      statut
+                    <p className="text-info">
+                      L'auteur de la proposition sera notifié en cas changement
+                      de statut
                     </p>
                     <Field
                       type="select"
@@ -231,8 +233,10 @@ export class ProposalAdminSelections extends Component<
             <Button
               type="submit"
               bsStyle="primary"
-              disabled={pristine || invalid}>
-              <FormattedMessage id="global.save" />
+              disabled={pristine || invalid || submitting}>
+              <FormattedMessage
+                id={submitting ? 'global.loading' : 'global.save'}
+              />
             </Button>
           </ButtonToolbar>
         </form>

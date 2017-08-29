@@ -47,7 +47,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
       <ToggleButton
         value="TRASHED_NOT_VISIBLE"
       >
-        Corbeille (Masqué)
+        Corbeille (contenu masqué)
       </ToggleButton>
       <ToggleButton
         value="EXPIRED"
@@ -141,7 +141,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
       <ToggleButton
         value="TRASHED_NOT_VISIBLE"
       >
-        Corbeille (Masqué)
+        Corbeille (contenu masqué)
       </ToggleButton>
     </Field>
     <ButtonToolbar
@@ -235,7 +235,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
       <ToggleButton
         value="TRASHED_NOT_VISIBLE"
       >
-        Corbeille (Masqué)
+        Corbeille (contenu masqué)
       </ToggleButton>
     </Field>
     <ButtonToolbar

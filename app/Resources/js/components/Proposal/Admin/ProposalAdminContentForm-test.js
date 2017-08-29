@@ -12,6 +12,7 @@ describe('<ProposalAdminContentForm />', () => {
     intl: global.intlMock,
     invalid: false,
     pristine: false,
+    submitting: false,
     isSuperAdmin: true,
     themes: [],
     districts: [],

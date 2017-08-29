@@ -22,7 +22,9 @@ describe('<ProposalAdminStatusForm />', () => {
         isSuperAdmin
         pristine
         invalid={false}
+        submitting={false}
         relay={{}}
+        dispatch={jest.fn()}
         proposal={proposalToBeExpired}
         handleSubmit={jest.fn()}
       />,
@@ -48,6 +50,8 @@ describe('<ProposalAdminStatusForm />', () => {
         isSuperAdmin
         pristine
         invalid={false}
+        submitting={false}
+        dispatch={jest.fn()}
         proposal={proposalExpired}
         handleSubmit={jest.fn()}
       />,
@@ -73,6 +77,8 @@ describe('<ProposalAdminStatusForm />', () => {
         isSuperAdmin
         pristine
         invalid={false}
+        submitting={false}
+        dispatch={jest.fn()}
         proposal={proposalConfirmed}
         handleSubmit={jest.fn()}
       />,

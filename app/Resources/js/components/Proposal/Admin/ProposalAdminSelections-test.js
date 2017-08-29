@@ -11,6 +11,7 @@ describe('<ProposalAdminSelections />', () => {
     initialValues: {},
     pristine: false,
     invalid: false,
+    submitting: false,
     steps: [{}],
     selectionValues: [{ step: '2', selected: true, status: null }],
     projectId: 'projectId',

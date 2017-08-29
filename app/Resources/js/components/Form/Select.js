@@ -12,17 +12,16 @@ export const renderSelect = React.createClass({
       onFocus: PropTypes.func.isRequired,
     }).isRequired,
     meta: PropTypes.object.isRequired,
-    touched: PropTypes.bool,
     label: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    error: PropTypes.any,
-    options: PropTypes.array.isRequired,
+    autoload: PropTypes.bool,
     clearable: PropTypes.bool,
+    disabled: PropTypes.bool,
     multi: PropTypes.bool,
-    loadOptions: PropTypes.func,
+    options: PropTypes.array, // or loadOptions for async
+    loadOptions: PropTypes.func, // or options for sync
     filterOptions: PropTypes.func,
-    isLoading: PropTypes.bool,
     onChange: PropTypes.func,
     labelClassName: PropTypes.string,
     inputClassName: PropTypes.string,
@@ -31,6 +30,10 @@ export const renderSelect = React.createClass({
   getDefaultProps() {
     return {
       multi: false,
+      disabled: false,
+      autoload: false,
+      clearable: true,
+      loadOptions: undefined,
     };
   },
 
@@ -43,8 +46,13 @@ export const renderSelect = React.createClass({
       inputClassName,
       multi,
       options,
+      disabled,
+      autoload,
+      clearable,
+      placeholder,
+      loadOptions,
+      filterOptions,
       meta: { touched, error },
-      ...custom
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
     return (
@@ -56,15 +64,21 @@ export const renderSelect = React.createClass({
             {label}
           </label>}
         <div id={input.name} className={inputClassName || 'col-sm-10'}>
-          {typeof custom.loadOptions === 'function'
+          {typeof loadOptions === 'function'
             ? <Select.Async
-                autoload
-                loadOptions={custom.loadOptions}
+                filterOptions={filterOptions}
+                disabled={disabled}
+                autoload={autoload}
+                clearable={clearable}
+                placeholder={placeholder}
+                loadOptions={loadOptions}
                 valueKey="value"
                 value={value}
                 name={name}
                 multi={multi}
-                noResultsText={'En attente de résultats...'}
+                options={options}
+                noResultsText={'Pas de résultats…'}
+                loadingPlaceholder={'Chargement…'}
                 onBlur={() => onBlur(value)}
                 onFocus={onFocus}
                 onChange={(newValue: string | Array<Object>) => {
@@ -79,10 +93,18 @@ export const renderSelect = React.createClass({
               />
             : <Select
                 name={name}
+                disabled={disabled}
+                options={options}
+                filterOptions={filterOptions}
+                placeholder={placeholder}
+                loadOptions={loadOptions}
                 valueKey="value"
+                clearable={clearable}
+                autoload={autoload}
                 multi={multi}
                 value={value}
-                noResultsText={'En attente de résultats...'}
+                noResultsText={'Pas de résultats…'}
+                loadingPlaceholder={'Chargement…'}
                 onBlur={() => onBlur(value)}
                 onFocus={onFocus}
                 onChange={(newValue: { value: string }) => {

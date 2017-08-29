@@ -50,20 +50,12 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         clearable={false}
         component={[Function]}
         id="likers"
-        inputClassName="qdnsqdnqsldnqsldn"
+        inputClassName="fake-inputClassName"
         label="likers"
         labelClassName="control-label"
         loadOptions={[Function]}
         multi={true}
         name="likers"
-        options={
-          Array [
-            Object {
-              "label": "liker-1",
-              "value": "1",
-            },
-          ]
-        }
         placeholder="Sélectionnez un coup de coeur"
       />
       <ButtonToolbar

@@ -21,14 +21,14 @@ export const Toggle = React.createClass({
     const { input, label, disabled, meta: { touched, error } } = this.props;
     return (
       <div className="form-group">
-        <label>
+        <label style={{ display: 'flex', alignItems: 'center' }}>
           <ReactToggle
             // id={id}
             disabled={disabled}
             checked={input.value}
             onChange={input.onChange}
           />
-          <span>
+          <span style={{ marginLeft: 10 }}>
             {label}
           </span>
         </label>

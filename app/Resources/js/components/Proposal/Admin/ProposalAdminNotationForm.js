@@ -19,6 +19,7 @@ type Props = RelayProps & {
   handleSubmit: () => void,
   invalid: boolean,
   pristine: boolean,
+  submitting: boolean,
 };
 
 const formName = 'proposal-admin-notation';
@@ -32,7 +33,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, proposalId: props.proposal.id },
   };
-  ChangeProposalNotationMutation.commit(variables).then(() => {
+  return ChangeProposalNotationMutation.commit(variables).then(() => {
     location.reload();
   });
 };
@@ -43,7 +44,13 @@ export class ProposalAdminNotationForm extends Component<
   void,
 > {
   render() {
-    const { invalid, pristine, handleSubmit, proposal } = this.props;
+    const {
+      invalid,
+      pristine,
+      handleSubmit,
+      submitting,
+      proposal,
+    } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -71,29 +78,34 @@ export class ProposalAdminNotationForm extends Component<
               id="likers"
               label="likers"
               labelClassName="control-label"
-              inputClassName="qdnsqdnqsldnqsldn"
+              inputClassName="fake-inputClassName"
               multi
               placeholder="Sélectionnez un coup de coeur"
               component={select}
               clearable={false}
-              options={proposal.likers.map(u => ({
-                value: u.id,
-                label: u.displayName,
-              }))}
               loadOptions={terms =>
                 Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
-                  options: res.users.map(u => ({
-                    value: u.id,
-                    label: u.displayName,
-                  })),
+                  options: res.users
+                    .map(u => ({
+                      value: u.id,
+                      label: u.displayName,
+                    }))
+                    .concat(
+                      proposal.likers.map(u => ({
+                        value: u.id,
+                        label: u.displayName,
+                      })),
+                    ),
                 }))}
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
               <Button
-                disabled={invalid || pristine}
+                disabled={invalid || pristine || submitting}
                 type="submit"
                 bsStyle="primary">
-                <FormattedMessage id="global.save" />
+                <FormattedMessage
+                  id={submitting ? 'global.loading' : 'global.save'}
+                />
               </Button>
             </ButtonToolbar>
           </div>

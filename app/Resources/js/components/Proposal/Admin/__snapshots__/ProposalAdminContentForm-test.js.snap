@@ -42,25 +42,16 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         Métadonnées
       </h4>
       <Field
-        autoload={false}
-        cache={false}
+        autoload={true}
         clearable={false}
         component={[Function]}
         disabled={false}
         id="proposal-admin-author"
-        inputClassName="qdnsqdnqsldnqsldn"
+        inputClassName="fake-inputClassName"
         label="Auteur"
         labelClassName="control-label"
         loadOptions={[Function]}
         name="author"
-        options={
-          Array [
-            Object {
-              "label": "author-1",
-              "value": "1",
-            },
-          ]
-        }
       />
       <Field
         component={[Function]}

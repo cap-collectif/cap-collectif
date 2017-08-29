@@ -28,6 +28,7 @@ type Props = {
   isSuperAdmin: boolean,
   pristine: boolean,
   invalid: boolean,
+  submitting: boolean,
 };
 type State = void;
 
@@ -131,6 +132,7 @@ export class ProposalAdminContentForm extends Component<
       proposal,
       features,
       districts,
+      submitting,
       isSuperAdmin,
       themes,
       handleSubmit,
@@ -168,22 +170,23 @@ export class ProposalAdminContentForm extends Component<
               disabled={!isSuperAdmin}
               id="proposal-admin-author"
               labelClassName="control-label"
-              inputClassName="qdnsqdnqsldnqsldn"
-              options={[
-                {
-                  label: proposal.author.displayName,
-                  value: proposal.author.id,
-                },
-              ]}
+              inputClassName="fake-inputClassName"
               component={select}
               clearable={false}
-              autoload={false}
+              autoload
               loadOptions={terms =>
                 Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
-                  options: res.users.map(u => ({
-                    value: u.id,
-                    label: u.displayName,
-                  })),
+                  options: res.users
+                    .map(u => ({
+                      value: u.id,
+                      label: u.displayName,
+                    }))
+                    .concat([
+                      {
+                        value: proposal.author.id,
+                        label: proposal.author.displayName,
+                      },
+                    ]),
                 }))}
             />
             {features.themes &&
@@ -325,8 +328,10 @@ export class ProposalAdminContentForm extends Component<
               <Button
                 type="submit"
                 bsStyle="primary"
-                disabled={pristine || invalid}>
-                <FormattedMessage id="global.save" />
+                disabled={pristine || invalid || submitting}>
+                <FormattedMessage
+                  id={submitting ? 'global.loading' : 'global.save'}
+                />
               </Button>
             </ButtonToolbar>
           </div>
