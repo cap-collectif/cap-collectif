@@ -109,9 +109,9 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
         />
         <div>
           <p
-            className="has-warning"
+            className="text-info"
           >
-            L'auteur de la proposition sera notifié du changement de statut
+            L'auteur de la proposition sera notifié en cas changement de statut
           </p>
           <Field
             component={[Function]}

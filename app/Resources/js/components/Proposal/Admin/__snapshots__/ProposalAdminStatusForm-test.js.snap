@@ -35,21 +35,25 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
       type="radio-buttons"
     >
       <ToggleButton
+        onClick={[Function]}
         value="PUBLISHED"
       >
         Publié
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED"
       >
         Corbeille
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED_NOT_VISIBLE"
       >
         Corbeille (contenu masqué)
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="EXPIRED"
       >
         Expiré
@@ -129,16 +133,19 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
       type="radio-buttons"
     >
       <ToggleButton
+        onClick={[Function]}
         value="PUBLISHED"
       >
         Publié
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED"
       >
         Corbeille
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED_NOT_VISIBLE"
       >
         Corbeille (contenu masqué)
@@ -223,16 +230,19 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
       type="radio-buttons"
     >
       <ToggleButton
+        onClick={[Function]}
         value="PUBLISHED"
       >
         Publié
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED"
       >
         Corbeille
       </ToggleButton>
       <ToggleButton
+        onClick={[Function]}
         value="TRASHED_NOT_VISIBLE"
       >
         Corbeille (contenu masqué)

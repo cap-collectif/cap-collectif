@@ -92,11 +92,12 @@ export class ProposalAdminStatusForm extends Component<
             type="radio-buttons"
             id="publicationStatus"
             name="publicationStatus"
-            component={component}>
-            disabled={!isSuperAdmin &&
+            component={component}
+            disabled={
+              !isSuperAdmin &&
               (publicationStatus === 'DELETED' ||
-                publicationStatus === 'EXPIRED')}
-            >
+                publicationStatus === 'EXPIRED')
+            }>
             <ToggleButton
               onClick={() =>
                 dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
