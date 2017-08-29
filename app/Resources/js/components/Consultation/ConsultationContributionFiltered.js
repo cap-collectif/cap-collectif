@@ -11,7 +11,7 @@ const renderConsultationPaginated = ({
   error,
   props,
 }: {
-  error?: string,
+  error: ?Error,
   props?: ?{ consultations: Array<Object> },
 }) => {
   if (error) {

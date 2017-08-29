@@ -10,7 +10,7 @@ const renderOpinionList = ({
   error,
   props,
 }: {
-  error: ?string,
+  error: ?Error,
   props: ?{ contributionsBySection: Array<Object> },
 }) => {
   if (error) {

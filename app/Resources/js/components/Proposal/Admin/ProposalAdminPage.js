@@ -9,14 +9,7 @@ type DefaultProps = void;
 type Props = { proposalId: number };
 type State = void;
 
-const component = ({
-  error,
-  props,
-}: {
-  error: ?string,
-  intl: any,
-  props: any,
-}) => {
+const component = ({ error, props }: { error: ?Error, props: any }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

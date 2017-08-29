@@ -19,8 +19,8 @@ export const ConsultationPropositionBox = React.createClass({
       error,
       props,
     }: {
-      error: ?string,
-      props: { consultations: Array<{ sections: Array<Object> }> },
+      error: ?Error,
+      props: ?{ consultations: Array<{ sections: Array<Object> }> },
     }) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
