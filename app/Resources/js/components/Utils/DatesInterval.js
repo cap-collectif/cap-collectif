@@ -28,18 +28,18 @@ const DatesInterval = React.createClass({
       return null;
     }
 
-    const startAtObject = moment(startAt);
+    const startAtDate = moment(startAt).toDate();
 
     const startDay = (
       <FormattedDate
-        value={startAtObject}
+        value={startAtDate}
         day="numeric"
         month="long"
         year="numeric"
       />
     );
     const startTime = (
-      <FormattedTime value={startAtObject} hour="numeric" minute="numeric" />
+      <FormattedTime value={startAtDate} hour="numeric" minute="numeric" />
     );
 
     if (!endAt) {
@@ -54,14 +54,14 @@ const DatesInterval = React.createClass({
       );
     }
 
-    const endAtObject = moment(endAt);
+    const endAtDate = moment(endAt).toDate();
 
     const endTime = (
-      <FormattedTime value={endAtObject} hour="numeric" minute="numeric" />
+      <FormattedTime value={endAtDate} hour="numeric" minute="numeric" />
     );
     const endDay = (
       <FormattedDate
-        value={endAtObject}
+        value={endAtDate}
         day="numeric"
         month="long"
         year="numeric"
