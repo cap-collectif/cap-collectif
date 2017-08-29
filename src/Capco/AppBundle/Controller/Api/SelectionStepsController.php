@@ -107,7 +107,7 @@ class SelectionStepsController extends FOSRestController
     /**
      * @Patch("/selection_steps/{stepId}/selections/{proposalId}")
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200, serializerGroups={})
+     * @View(statusCode=204, serializerGroups={})
      */
     public function updateSelectionStatusAction(Request $request, string $stepId, string $proposalId)
     {
@@ -116,8 +116,6 @@ class SelectionStepsController extends FOSRestController
           $stepId,
           $request->request->get('status')
         );
-
-        return [];
     }
 
     /**

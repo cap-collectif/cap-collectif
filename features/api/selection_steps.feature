@@ -234,11 +234,11 @@ Scenario: Anonymous API client wants to get a step
         "status": 1
       }
       """
-      Then the JSON response status code should be 200
+      Then the JSON response status code should be 204
       And selection "selectionstep1" 3 should have status 1
       And 1 mail should be sent
       And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
-      Then I should see "<li><strong>Nouveau statut :</strong> Vote gagné</li>" in mail
+      Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
       When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/3" with json:
       """
       {
