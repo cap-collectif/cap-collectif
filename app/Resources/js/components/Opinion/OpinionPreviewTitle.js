@@ -1,9 +1,16 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import OpinionTypeLabel from './OpinionTypeLabel';
 
-export default class OpinionPreviewTitle extends React.Component {
+type Props = {
+  link: boolean,
+  opinion: Object,
+  showTypeLabel: boolean,
+};
+
+export default class OpinionPreviewTitle extends React.Component<Props> {
   getType() {
+    // eslint-disable-next-line react/prop-types
     const opinion = this.props.opinion;
     if (opinion.parent) {
       return opinion.parent.type;
@@ -12,6 +19,7 @@ export default class OpinionPreviewTitle extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { link, opinion, showTypeLabel } = this.props;
     let url = '';
     if (link) {
@@ -21,14 +29,12 @@ export default class OpinionPreviewTitle extends React.Component {
       <h3 className="opinion__title">
         {showTypeLabel ? <OpinionTypeLabel type={this.getType()} /> : null}
         {showTypeLabel ? ' ' : null}
-        {link ? <a href={url}>{opinion.title}</a> : opinion.title}
+        {link
+          ? <a href={url}>
+              {opinion.title}
+            </a>
+          : opinion.title}
       </h3>
     );
   }
 }
-
-OpinionPreviewTitle.propTypes = {
-  link: React.PropTypes.bool.isRequired,
-  opinion: React.PropTypes.object.isRequired,
-  showTypeLabel: React.PropTypes.bool.isRequired,
-};

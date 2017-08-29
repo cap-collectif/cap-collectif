@@ -1,7 +1,7 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-export default class DefaultProjectImage extends React.Component {
+export default class DefaultProjectImage extends React.Component<{}> {
   render() {
     return (
       <svg

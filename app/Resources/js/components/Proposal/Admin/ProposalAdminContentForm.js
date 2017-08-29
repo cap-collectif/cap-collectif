@@ -120,11 +120,8 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   return errors;
 };
 
-export class ProposalAdminContentForm extends Component<
-  DefaultProps,
-  Props,
-  State,
-> {
+export class ProposalAdminContentForm extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     const {
       pristine,

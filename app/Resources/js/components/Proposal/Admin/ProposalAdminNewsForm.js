@@ -19,11 +19,8 @@ type Props = {
 };
 type State = void;
 
-export class ProposalAdminNewsForm extends Component<
-  DefaultProps,
-  Props,
-  State,
-> {
+export class ProposalAdminNewsForm extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     const { proposal } = this.props;
     return (

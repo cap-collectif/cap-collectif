@@ -54,11 +54,8 @@ const onDelete = (proposalId: string) => {
   }).then(location.reload());
 };
 
-export class ProposalAdminStatusForm extends Component<
-  DefaultProps,
-  Props,
-  void,
-> {
+export class ProposalAdminStatusForm extends Component<Props, void> {
+  static defaultProps: DefaultProps;
   render() {
     const {
       isSuperAdmin,

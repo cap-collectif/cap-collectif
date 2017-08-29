@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import Fetcher, { json } from './services/Fetcher';
 

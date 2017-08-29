@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl';
+import * as React from 'react';
+import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 const DatesInterval = React.createClass({
@@ -21,7 +21,7 @@ const DatesInterval = React.createClass({
     return moment(endAt).diff(moment(startAt), 'days') < 1;
   },
 
-  render(): ?React$Element<> {
+  render(): ?React.Element<any> {
     const { startAt, endAt } = this.props;
 
     if (!startAt) {

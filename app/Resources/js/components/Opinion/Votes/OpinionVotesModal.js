@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';

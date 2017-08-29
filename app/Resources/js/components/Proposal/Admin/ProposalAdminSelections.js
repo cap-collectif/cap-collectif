@@ -122,11 +122,8 @@ const onSubmit = (values, dispatch, props: Props) => {
     });
 };
 
-export class ProposalAdminSelections extends Component<
-  DefaultProps,
-  Props,
-  void,
-> {
+export class ProposalAdminSelections extends Component<Props, void> {
+  static defaultProps: DefaultProps;
   render() {
     const {
       selectionValues,

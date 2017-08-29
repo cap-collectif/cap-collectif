@@ -22,7 +22,6 @@ const renderConsultationPaginated = ({
     // eslint-disable-next-line react/prop-types
     if (props.consultations && props.consultations.length) {
       return (
-        // $FlowFixMe
         <ContributionPaginatedList
           // eslint-disable-next-line react/prop-types
           consultation={props.consultations[0]}

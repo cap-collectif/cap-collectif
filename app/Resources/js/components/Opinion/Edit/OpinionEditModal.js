@@ -1,26 +1,28 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 
-export const OpinionEditModal = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    show: PropTypes.bool.isRequired,
-    opinion: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  intl: IntlShape,
+  show: boolean,
+  opinion: Object,
+  step: Object,
+  submitting: boolean,
+  dispatch: Dispatch,
+};
 
+export class OpinionEditModal extends React.Component<Props> {
   render() {
+    // eslint-disable-next-line
     const { dispatch, submitting, show, opinion, step, intl } = this.props;
     return (
       <Modal
@@ -30,7 +32,6 @@ export const OpinionEditModal = React.createClass({
           if (
             // eslint-disable-next-line no-alert
             window.confirm(
-              // $FlowFixMe
               intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
             )
           ) {
@@ -64,8 +65,8 @@ export const OpinionEditModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State, props: Object) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),

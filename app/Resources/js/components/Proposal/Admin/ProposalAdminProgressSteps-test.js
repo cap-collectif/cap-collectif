@@ -1,12 +1,12 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminProgressSteps } from './ProposalAdminProgressSteps';
 
 describe('<ProposalAdminProgressSteps />', () => {
   const props = {
-    dispatch: () => {},
+    dispatch: jest.fn(),
     fields: { length: 0, map: () => [], remove: jest.fn() },
     progressSteps: [],
   };

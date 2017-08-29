@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -13,24 +13,21 @@ import {
   Col,
 } from 'react-bootstrap';
 import ProposalAdminRealisationStepModal from './ProposalAdminRealisationStepModal';
-import type { GlobalState } from '../../../types';
+import type { GlobalState, Dispatch } from '../../../types';
 
 const formName = 'proposal-admin-selections';
 const selector = formValueSelector(formName);
 
 type Props = {
-  dispatch: Function,
+  dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   progressSteps: Array<Object>,
 };
 type DefaultProps = void;
 type State = { editIndex: ?number };
 
-export class ProposalAdminProgressSteps extends Component<
-  DefaultProps,
-  Props,
-  State,
-> {
+export class ProposalAdminProgressSteps extends React.Component<Props, State> {
+  static defaultProps: DefaultProps;
   state = {
     editIndex: null,
   };
@@ -40,6 +37,7 @@ export class ProposalAdminProgressSteps extends Component<
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { dispatch, fields, progressSteps } = this.props;
     const { editIndex } = this.state;
     return (

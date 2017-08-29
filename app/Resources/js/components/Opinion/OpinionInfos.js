@@ -28,7 +28,7 @@ const OpinionInfos = React.createClass({
     return (
       <span className="excerpt">
         <FormattedDate
-          value={moment(opinion.createdAt)}
+          value={moment(opinion.createdAt).toDate()}
           day="numeric"
           month="long"
           year="numeric"
@@ -54,7 +54,7 @@ const OpinionInfos = React.createClass({
         {' - '}
         {<FormattedMessage id="global.edited" />}{' '}
         <FormattedDate
-          value={moment(opinion.updatedAt)}
+          value={moment(opinion.updatedAt).toDate()}
           day="numeric"
           month="long"
           year="numeric"

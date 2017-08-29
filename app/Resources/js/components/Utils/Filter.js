@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const Filter = React.createClass({
@@ -17,7 +17,7 @@ const Filter = React.createClass({
     };
   },
 
-  render(): ?React$Element<> {
+  render(): ?React.Element<any> {
     const { onChange, show, value, values } = this.props;
     if (show) {
       return (
@@ -26,7 +26,7 @@ const Filter = React.createClass({
           value={value}
           onChange={onChange}>
           {values &&
-            values.map((val: number, index: number): ?React$Element<> => {
+            values.map((val: number, index: number): ?React.Element<any> => {
               return (
                 <option value={val} key={index}>
                   <FormattedMessage id={`global.filter_${val}`} />

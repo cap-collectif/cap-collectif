@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 
@@ -24,7 +24,7 @@ const FlashMessages = React.createClass({
     };
   },
 
-  renderText(message: string | Object): React$Element<> | string | void {
+  renderText(message: string | Object): React.Element<any> | string | void {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
@@ -41,7 +41,7 @@ const FlashMessages = React.createClass({
     index: number,
     message: string,
     type: string,
-  ): ?React$Element<> {
+  ): ?React.Element<any> {
     const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (
@@ -65,7 +65,7 @@ const FlashMessages = React.createClass({
     );
   },
 
-  render(): ?React$Element<> {
+  render(): ?React.Element<any> {
     const { errors, success } = this.props;
     if ((errors && errors.length > 0) || (success && success.length > 0)) {
       return (

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 
 const ProjectPreviewCounters = React.createClass({

@@ -1,6 +1,6 @@
 // @flow
 /* eslint-env jest */
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminContentForm } from './ProposalAdminContentForm';
 import { features } from '../../../redux/modules/default';

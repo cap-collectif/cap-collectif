@@ -52,7 +52,7 @@ export const OpinionList = React.createClass({
                 <select
                   className="form-control"
                   style={{ marginRight: section.contribuable ? 15 : 0 }}
-                  onChange={(event: SyntheticInputEvent) => {
+                  onChange={(event: SyntheticInputEvent<>) => {
                     window.location.href = `${section.url}/${event.target
                       .value}`;
                   }}>

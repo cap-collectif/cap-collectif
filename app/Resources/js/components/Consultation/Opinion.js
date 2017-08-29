@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
 import OpinionInfos from '../Opinion/OpinionInfos';

@@ -24,7 +24,8 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
   return <Loader />;
 };
 
-export class ProposalAdminPage extends Component<DefaultProps, Props, State> {
+export class ProposalAdminPage extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     return (
       <div className="container">

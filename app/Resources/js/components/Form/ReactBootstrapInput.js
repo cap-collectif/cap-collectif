@@ -1,6 +1,6 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
-import { injectIntl, intlShape } from 'react-intl';
+import * as React from 'react';
+import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
@@ -15,6 +15,7 @@ import {
   Popover,
   Radio,
 } from 'react-bootstrap';
+import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
 import ButtonGroup from './ButtonGroup';
@@ -49,7 +50,35 @@ const acceptedMimeTypes = [
   'application/xml',
 ];
 
-class ReactBootstrapInput extends Component {
+type Props = {
+  intl: IntlShape,
+  name: ?string,
+  id: ?string,
+  children: any,
+  help: string | any,
+  bsSize: ?string,
+  wrapperClassName: ?string,
+  groupClassName: ?string,
+  labelClassName: ?string,
+  addonBefore: any,
+  addonAfter: any,
+  buttonBefore: any,
+  buttonAfter: any,
+  standalone: ?boolean,
+  hasFeedback: ?boolean,
+  validationState: ?string,
+  label: string | any,
+  type: ?string,
+};
+
+class ReactBootstrapInput extends React.Component<Props> {
+  static defaultProps = {
+    labelClassName: 'h5',
+    errors: null,
+    image: null,
+    medias: [],
+  };
+
   constructor(props, context) {
     super(props, context);
     this.refFormControl = null;
@@ -246,12 +275,12 @@ class ReactBootstrapInput extends Component {
   render() {
     const {
       // id,
-      label,
-      bsSize,
-      groupClassName,
-      labelClassName,
-      standalone,
-      validationState,
+      label, // eslint-disable-line
+      bsSize, // eslint-disable-line
+      groupClassName, // eslint-disable-line
+      labelClassName, // eslint-disable-line
+      standalone, // eslint-disable-line
+      validationState, // eslint-disable-line
       ...props
     } = this.props;
 
@@ -278,26 +307,5 @@ class ReactBootstrapInput extends Component {
     );
   }
 }
-
-ReactBootstrapInput.propTypes = {
-  intl: intlShape.isRequired,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  children: PropTypes.any,
-  help: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  bsSize: PropTypes.string,
-  wrapperClassName: PropTypes.string,
-  groupClassName: PropTypes.string,
-  labelClassName: PropTypes.string,
-  addonBefore: PropTypes.any,
-  addonAfter: PropTypes.any,
-  buttonBefore: PropTypes.any,
-  buttonAfter: PropTypes.any,
-  standalone: PropTypes.bool,
-  hasFeedback: PropTypes.bool,
-  validationState: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  type: PropTypes.string,
-};
 
 export default injectIntl(ReactBootstrapInput, { withRef: true });

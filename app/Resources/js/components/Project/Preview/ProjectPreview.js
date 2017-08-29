@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Col } from 'react-bootstrap';
 import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';

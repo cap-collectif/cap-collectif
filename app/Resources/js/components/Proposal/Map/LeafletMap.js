@@ -38,7 +38,7 @@ type DefaultProps = {
 
 let L;
 
-export class LeafletMap extends Component<DefaultProps, Props, ComponentState> {
+export class LeafletMap extends Component<Props, ComponentState> {
   static propTypes = {
     markers: PropTypes.object,
     defaultMapOptions: PropTypes.object.isRequired,

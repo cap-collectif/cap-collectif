@@ -1,37 +1,38 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
+import type { IntlShape } from 'react-intl';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 
-export const OpinionCreateModal = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    show: PropTypes.bool.isRequired,
-    projectId: PropTypes.string.isRequired,
-    stepId: PropTypes.string.isRequired,
-    step: PropTypes.object.isRequired,
-    opinionType: PropTypes.object.isRequired,
-    submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  intl: IntlShape,
+  show: boolean,
+  projectId: string,
+  stepId: string,
+  step: Object,
+  opinionType: Object,
+  submitting: boolean,
+  dispatch: Dispatch,
+};
 
+export class OpinionCreateModal extends React.Component<Props> {
   render() {
     const {
-      opinionType,
-      submitting,
-      dispatch,
-      show,
-      stepId,
-      projectId,
-      step,
-      intl,
+      opinionType, // eslint-disable-line
+      submitting, // eslint-disable-line
+      dispatch, // eslint-disable-line
+      show, // eslint-disable-line
+      stepId, // eslint-disable-line
+      projectId, // eslint-disable-line
+      step, // eslint-disable-line
+      intl, // eslint-disable-line
     } = this.props;
     return (
       <Modal
@@ -41,7 +42,6 @@ export const OpinionCreateModal = React.createClass({
           if (
             // eslint-disable-next-line no-alert
             window.confirm(
-              // $FlowFixMe
               intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
             )
           ) {
@@ -85,8 +85,8 @@ export const OpinionCreateModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 export default connect((state: State, props: Object) => {
   return {

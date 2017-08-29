@@ -13,11 +13,8 @@ type DefaultProps = void;
 type Props = { proposal: any, intl: Object };
 type State = void;
 
-export class ProposalAdminPageTabs extends Component<
-  DefaultProps,
-  Props,
-  State,
-> {
+export class ProposalAdminPageTabs extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     const { intl, proposal } = this.props;
     return (

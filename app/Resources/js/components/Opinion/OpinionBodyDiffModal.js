@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 

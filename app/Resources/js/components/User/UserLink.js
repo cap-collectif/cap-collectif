@@ -1,11 +1,10 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 
-type DefaultProps = { className: string };
 type Props = { user: ?Object, className: string };
 type State = void;
 
-export default class UserLink extends Component<DefaultProps, Props, State> {
+export default class UserLink extends React.Component<Props, State> {
   static defaultProps = {
     className: '',
   };

@@ -81,14 +81,18 @@ export const renderSelect = React.createClass({
                 loadingPlaceholder={'Chargement…'}
                 onBlur={() => onBlur(value)}
                 onFocus={onFocus}
-                onChange={(newValue: string | Array<Object>) => {
+                onChange={(
+                  newValue: { value: string } | Array<{ value: string }>,
+                ) => {
                   if (typeof onChange === 'function') {
                     onChange();
                   }
                   if (multi) {
                     return input.onChange(newValue);
                   }
-                  input.onChange(newValue ? newValue.value : '');
+                  if (!Array.isArray(newValue)) {
+                    input.onChange(newValue ? newValue.value : '');
+                  }
                 }}
               />
             : <Select

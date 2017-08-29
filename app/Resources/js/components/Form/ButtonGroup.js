@@ -11,7 +11,7 @@ type Props = {
   children: any,
 };
 
-class ButtonGroup extends Component<{ disabled: boolean }, Props, void> {
+class ButtonGroup extends Component<Props, void> {
   static defaultProps = {
     disabled: false,
   };

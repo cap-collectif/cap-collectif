@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import IdeaStore from '../../../stores/IdeaStore';
 import IdeaActions from '../../../actions/IdeaActions';
 import { DEFAULT_IDEAS_PAGINATION } from '../../../constants/IdeaConstants';

@@ -27,7 +27,7 @@ const autocompleteItem = ({ formattedSuggestion }) =>
     <small>{formattedSuggestion.secondaryText}</small>
   </div>;
 
-class Address extends Component<DefaultProps, Props, void> {
+class Address extends Component<Props, void> {
   static defaultProps = {
     disabled: false,
   };

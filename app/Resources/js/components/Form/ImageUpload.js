@@ -89,6 +89,7 @@ const ImageUpload = React.createClass({
 
   onToggleDelete() {
     const { valueLink, onChange } = this.props;
+    // $FlowFixMe
     const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
       if (valueLink) {
@@ -106,6 +107,7 @@ const ImageUpload = React.createClass({
   uncheckDelete() {
     const ref = this._deleteCheckbox;
     if (ref) {
+      // $FlowFixMe
       $(ref.getDOMNode()).prop('checked', false);
     }
   },

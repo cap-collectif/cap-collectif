@@ -9,7 +9,7 @@ const Other = React.createClass({
   propTypes: {
     field: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
   },
 
   getInitialState() {

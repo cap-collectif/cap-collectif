@@ -38,11 +38,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   });
 };
 
-export class ProposalAdminNotationForm extends Component<
-  DefaultProps,
-  Props,
-  void,
-> {
+export class ProposalAdminNotationForm extends Component<Props, void> {
+  static defaultProps: DefaultProps;
   render() {
     const {
       invalid,
