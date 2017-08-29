@@ -14,7 +14,7 @@ ChangeProposalContentInput:
                 description: "The new proposal body"
             author:
               type: "String"
-              description: "The author id (ROLE_SUPER_ADMIN only)"
+              description: "The author id (ROLE_SUPER_ADMIN allowed only)"
             theme:
               type: "String"
               description: "The theme id (feature themes enabled)"

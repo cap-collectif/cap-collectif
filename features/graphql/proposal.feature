@@ -19,7 +19,7 @@ Feature: Proposals
         "input": {
           "publicationStatus": "TRASHED",
           "trashedReason": "POPO",
-          "id": 1
+          "proposalId": 1
         }
       }
     }

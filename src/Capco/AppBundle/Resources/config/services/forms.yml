@@ -33,7 +33,13 @@ services:
 
   capco.form.proposal_admin:
     class: Capco\AppBundle\Form\ProposalAdminType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager", "@capco.abstract_question.repository"]
+    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    tags:
+      - { name: form.type }
+
+  capco.form.proposal_fusion:
+    class: Capco\AppBundle\Form\ProposalFusionType
+    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
     tags:
       - { name: form.type }
 

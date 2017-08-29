@@ -6,7 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ProposalFustionType extends ProposalType
+class ProposalFusionType extends ProposalType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

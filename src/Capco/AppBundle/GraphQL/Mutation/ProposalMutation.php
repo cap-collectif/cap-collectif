@@ -291,6 +291,10 @@ class ProposalMutation implements ContainerAwareInterface
            'proposalForm' => $proposal->getProposalForm(),
        ]);
 
+        if (!$user->hasRole('ROLE_SUPER_ADMIN')) {
+            unset($values['author']); // Only a SUPER_ADMIN can change author
+        }
+
         $form->submit($values);
         if (!$form->isValid()) {
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
