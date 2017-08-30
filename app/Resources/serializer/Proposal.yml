@@ -9,6 +9,10 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       type: string
       groups: [Proposals, ProposalFusions]
+    summary:
+      expose: true
+      type: string
+      groups: [Proposals]
     body:
       expose: true
       type: string
@@ -91,3 +95,8 @@ Capco\AppBundle\Entity\Proposal:
       type: boolean
       groups: [PrivateProposals]
       serialized_name: visible
+    getSummaryOrBodyExcerpt:
+      expose: true
+      type: string
+      groups: [Proposals]
+      serialized_name: summaryOrBodyExcerpt

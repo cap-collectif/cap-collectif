@@ -23,6 +23,7 @@ class ProjectDownloadResolver
         'author_email',
         'user_type',
         'category',
+        'summary',
         'content',
         'theme',
         'district',
@@ -244,6 +245,7 @@ class ProjectDownloadResolver
                 'CapcoAppBundle'
             ),
             'category' => $proposal['category'] ? $proposal['category']['name'] : '',
+            'summary' => $proposal['summary'],
             'content' => $this->getProposalContent($proposal),
             'link' => $this->urlArrayResolver->getRoute($proposal),
             'created' => $this->dateToString($proposal['createdAt']),

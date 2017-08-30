@@ -290,6 +290,11 @@ fos_elastica:
               fields:
                 std: { type: string, analyzer: standard }
                 autocomplete: { type: string, analyzer: autocomplete }
+            summary:
+              analyzer: '%language_analyzer%'
+              index_options: offsets
+              fields:
+                std: { type: string, analyzer: standard }
             slug:
               index: not_analyzed
             body:

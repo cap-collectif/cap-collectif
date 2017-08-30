@@ -81,6 +81,35 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     </Panel>
   </Collapse>
   <InjectIntl(ReactBootstrapInput)
+    autoComplete="off"
+    errors={null}
+    groupClassName=""
+    id="proposal_summary"
+    label={
+      <span>
+        <FormattedMessage
+          id="proposal.summary"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
+      </span>
+    }
+    type="textarea"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
+  />
+  <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
     id="proposal_theme"
@@ -301,6 +330,35 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       </Button>
     </Panel>
   </Collapse>
+  <InjectIntl(ReactBootstrapInput)
+    autoComplete="off"
+    errors={null}
+    groupClassName=""
+    id="proposal_summary"
+    label={
+      <span>
+        <FormattedMessage
+          id="proposal.summary"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
+      </span>
+    }
+    type="textarea"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
+  />
   <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""

@@ -42,6 +42,7 @@ export const ProposalForm = React.createClass({
       proposal: {
         title: '',
         body: '',
+        summary: null,
         theme: {
           id: -1,
         },
@@ -62,6 +63,7 @@ export const ProposalForm = React.createClass({
       form: {
         title: proposal.title,
         body: proposal.body,
+        summary: proposal.summary,
         theme: proposal.theme ? proposal.theme.id : -1,
         district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : -1,
@@ -305,6 +307,9 @@ export const ProposalForm = React.createClass({
       min: { value: 2, message: 'proposal.constraints.title' },
       notBlank: { message: 'proposal.constraints.title' },
     },
+    summary: {
+      max: { value: 140, message: 'proposal.constraints.summary' },
+    },
     body: {
       min: { value: 2, message: 'proposal.constraints.body' },
       notBlankHtml: { message: 'proposal.constraints.body' },
@@ -416,6 +421,20 @@ export const ProposalForm = React.createClass({
             </Button>
           </Panel>
         </Collapse>
+        <Input
+          id="proposal_summary"
+          type="textarea"
+          autoComplete="off"
+          valueLink={this.linkState('form.summary')}
+          label={
+            <span>
+              <FormattedMessage id="proposal.summary" />
+              {optional}
+            </span>
+          }
+          groupClassName={this.getGroupStyle('summary')}
+          errors={this.renderFormErrors('summary')}
+        />
         {features.themes &&
           form.usingThemes &&
           <Input

@@ -59,6 +59,12 @@ Proposal:
             bodyText:
                 type: "String!"
                 description: "Identifies the body of the contribution rendered to text."
+            summary:
+                type: "String"
+                description: "Identifies the summary of the contribution."
+            summaryOrBodyExcerpt:
+                type: "String"
+                description: "Identifies the preview text of the contribution."
             form:
                 type: "ProposalForm!"
                 description: "Identifies the form where the contribution was submitted."

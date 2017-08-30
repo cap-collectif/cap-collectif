@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
@@ -50,6 +51,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SelfLinkableTrait;
     use SoftDeleteTrait;
     use TextableTrait;
+    use SummarizableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 

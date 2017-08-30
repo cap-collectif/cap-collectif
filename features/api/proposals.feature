@@ -11,6 +11,8 @@ Feature: Proposal Restful Api
       "proposal": {
         "id": @integer@,
         "body": @string@,
+        "summary": @null@,
+        "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "estimation": @...@,
         "theme": {
@@ -143,6 +145,8 @@ Feature: Proposal Restful Api
       "proposal": {
         "id": @integer@,
         "body": @string@,
+        "summary": @null@,
+        "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "estimation": @...@,
         "theme": {
@@ -297,6 +301,8 @@ Feature: Proposal Restful Api
       "proposal": {
         "id": @integer@,
         "body": @string@,
+        "summary": @null@,
+        "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "estimation": @...@,
         "theme": {
@@ -446,6 +452,8 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
+          "summary": @wildcard@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,
@@ -504,6 +512,8 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
+          "summary": @wildcard@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": @...@,
           "district": @...@,
@@ -571,6 +581,8 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
+          "summary": @wildcard@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,

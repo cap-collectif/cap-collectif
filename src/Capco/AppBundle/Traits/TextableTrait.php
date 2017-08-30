@@ -35,4 +35,16 @@ trait TextableTrait
 
         return $excerpt;
     }
+
+    public function getBodyTextExcerpt(int $nb = 100): string
+    {
+        $text = strip_tags($this->body);
+
+        if (strlen($text) > $nb) {
+            $text = substr($text, 0, $nb);
+            $text .= '[…]';
+        }
+
+        return $text;
+    }
 }

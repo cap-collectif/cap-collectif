@@ -19,6 +19,7 @@ describe('<ProposalAdminContentForm />', () => {
     proposal: {
       id: '1',
       title: 'title-1',
+      summary: 'summary',
       body: 'body',
       responses: [
         { question: { id: '1' }, value: 'value-1' },

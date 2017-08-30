@@ -57,6 +57,10 @@ const ProposalPageContent = React.createClass({
             className="block img-responsive"
           />}
         <div className="block">
+          {proposal.summary &&
+            <p className="excerpt" style={{ fontStyle: 'italic' }}>
+              {proposal.summary}
+            </p>}
           <h3 className="h3">
             {<FormattedMessage id="proposal.description" />}
           </h3>

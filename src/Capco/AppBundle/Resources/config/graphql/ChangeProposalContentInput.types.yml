@@ -12,6 +12,9 @@ ChangeProposalContentInput:
             body:
                 type: "HTML"
                 description: "The new proposal body"
+            summary:
+                type: "String"
+                description: "The new proposal summary"
             author:
               type: "String"
               description: "The author id (ROLE_SUPER_ADMIN allowed only)"

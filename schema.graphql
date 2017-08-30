@@ -65,7 +65,10 @@ input ChangeProposalContentInput {
   # The new proposal body
   body: HTML
 
-  # The author id (ROLE_SUPER_ADMIN only)
+  # The new proposal summary
+  summary: String
+
+  # The author id (ROLE_SUPER_ADMIN allowed only)
   author: String
 
   # The theme id (feature themes enabled)
@@ -568,6 +571,9 @@ type Proposal {
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
+
+  # Identifies the summary of the contribution.
+  summary: String
 
   # Identifies the form where the contribution was submitted.
   form: ProposalForm!

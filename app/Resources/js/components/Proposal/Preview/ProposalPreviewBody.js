@@ -24,6 +24,9 @@ const ProposalPreviewBody = React.createClass({
             </Truncate>
           </h2>
         </a>
+        <div className="excerpt">
+          {proposal.summaryOrBodyExcerpt}
+        </div>
         <div className="proposal__infos">
           {features.themes &&
             showThemes &&

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -11,7 +12,7 @@ import component from '../../Form/Field';
 import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
-import type { GlobalState, FeatureToggles } from '../../../types';
+import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 
 type FormValues = Object;
 type DefaultProps = void;
@@ -24,7 +25,7 @@ type Props = {
   districts: Array<Object>,
   features: FeatureToggles,
   handleSubmit: () => void,
-  intl: Object,
+  intl: IntlShape,
   isSuperAdmin: boolean,
   pristine: boolean,
   invalid: boolean,
@@ -34,7 +35,7 @@ type State = void;
 
 const formName = 'proposal-admin-edit';
 
-const onSubmit = (values, dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   // Only used for the user view
   delete values.addressText;
 
@@ -76,6 +77,9 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
 
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
+  }
+  if (values.summary && values.summary.length > 140) {
+    errors.summary = 'proposal.constraints.summary';
   }
   if (!values.body || values.body.length <= 2) {
     errors.body = 'proposal.constraints.body';
@@ -159,6 +163,18 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               type="text"
               id="proposal_title"
               label={<FormattedMessage id="proposal.title" />}
+            />
+            <Field
+              name="summary"
+              component={component}
+              type="textarea"
+              id="proposal_summary"
+              label={
+                <span>
+                  <FormattedMessage id="proposal.summary" />
+                  {optional}
+                </span>
+              }
             />
             <h4 className="h4">Métadonnées</h4>
             <Field
@@ -354,6 +370,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   initialValues: {
     title: proposal.title,
     body: proposal.body,
+    summary: proposal.summary,
     author: proposal.author.id,
     theme: state.default.features.themes
       ? proposal.theme ? proposal.theme.id : null
@@ -398,6 +415,7 @@ export default createFragmentContainer(
       id
       title
       body
+      summary
       responses {
         question {
           id

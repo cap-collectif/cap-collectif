@@ -38,6 +38,7 @@ Capco\AppBundle\Entity\Proposal:
   proposal3:
     id: 3
     title: Installation de bancs sur la place de la mairie
+    summary: Un beau résumé
     body: |
        <p>On va en faire un beau gymnase, promis :)</p>
     enabled: true

@@ -36,6 +36,28 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         name="title"
         type="text"
       />
+      <Field
+        component={[Function]}
+        id="proposal_summary"
+        label={
+          <span>
+            <FormattedMessage
+              id="proposal.summary"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.form.optional"
+                values={Object {}}
+              />
+            </span>
+          </span>
+        }
+        name="summary"
+        type="textarea"
+      />
       <h4
         className="h4"
       >
