@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait SummarizableTrait
 {
     /**
+     * @Assert\Length(max = 140)
      * @ORM\Column(name="summary", type="string", nullable=true)
      */
     private $summary;
