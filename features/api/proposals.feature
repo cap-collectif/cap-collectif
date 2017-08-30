@@ -452,7 +452,6 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
-          "summary": @wildcard@,
           "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
@@ -512,7 +511,6 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
-          "summary": @wildcard@,
           "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": @...@,
@@ -581,7 +579,6 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
-          "summary": @wildcard@,
           "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
@@ -622,6 +619,7 @@ Feature: Proposal Restful Api
         {
           "id": @integer@,
           "body": @string@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,
