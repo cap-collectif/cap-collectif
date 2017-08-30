@@ -53,6 +53,7 @@ Scenario: Anonymous API client wants to get a step
         {
           "id": @integer@,
           "body": @string@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,
@@ -109,6 +110,7 @@ Scenario: Anonymous API client wants to get a step
         {
           "id": @integer@,
           "body": @string@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,
@@ -168,6 +170,7 @@ Scenario: Anonymous API client wants to get a step
         {
           "id": @integer@,
           "body": @string@,
+          "summaryOrBodyExcerpt": @string@,
           "updated_at": "@string@.isDateTime()",
           "theme": {
             "id": @integer@,
