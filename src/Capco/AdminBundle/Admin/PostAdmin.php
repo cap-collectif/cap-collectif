@@ -204,6 +204,7 @@ class PostAdmin extends Admin
             ->add('proposals', 'sonata_type_model_autocomplete', [
               'property' => 'title',
               'label' => 'admin.fields.blog_post.proposals',
+              'help' => 'L\'auteur de la proposition sera notifié d\'un nouvel article',
               'required' => false,
               'multiple' => true,
               'by_reference' => false,
