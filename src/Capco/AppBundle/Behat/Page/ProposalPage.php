@@ -75,12 +75,14 @@ class ProposalPage extends Page
     public function clickVoteButton()
     {
         $button = $this->getVoteButton();
-        try {
-            $this->getVoteButton()->getParent()->getParent()->getParent()->mouseOver();
-            $button->click();
-        } catch (\Exception $e) {
-            $button->getParent()->getParent()->getParent()->click();
-        }
+        $button->click();
+        // try {
+        //     $this->getVoteButton()->getParent()->getParent()->getParent()->mouseOver();
+        //     $button->click();
+        // } catch (\Exception $e) {
+        //     // $button->getParent()->getParent()->getParent()->click();
+        //     $button->getParent()->getParent()->click();
+        // }
     }
 
     public function getVoteButtonLabel()

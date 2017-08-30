@@ -280,7 +280,6 @@ class ReactBootstrapInput extends React.Component<Props> {
 
   render() {
     const {
-      // id,
       label, // eslint-disable-line
       bsSize, // eslint-disable-line
       groupClassName, // eslint-disable-line
