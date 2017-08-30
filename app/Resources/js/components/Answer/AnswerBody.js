@@ -13,32 +13,28 @@ const AnswerBody = React.createClass({
     const answer = this.props.answer;
     return (
       <div>
-        {answer.author
-          ? <div
-              className="media media--user-thumbnail"
-              style={{ marginBottom: '10px' }}>
-              <UserAvatar
-                className="pull-left"
-                user={answer.author}
-                style={{ paddingRight: '10px' }}
-              />
-              <div className="media-body">
-                <p
-                  className="media-heading media--macro__user  small"
-                  style={{ marginBottom: '0' }}>
-                  <UserLink user={answer.author} />
-                </p>
-                <span className="small excerpt">
-                  <FormattedDate
-                    value={moment(answer.created_at)}
-                    day="numeric"
-                    month="long"
-                    year="numeric"
-                  />
-                </span>
-              </div>
+        {answer.author ? (
+          <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
+            <UserAvatar
+              className="pull-left"
+              user={answer.author}
+              style={{ paddingRight: '10px' }}
+            />
+            <div className="media-body">
+              <p className="media-heading media--macro__user  small" style={{ marginBottom: '0' }}>
+                <UserLink user={answer.author} />
+              </p>
+              <span className="small excerpt">
+                <FormattedDate
+                  value={moment(answer.created_at)}
+                  day="numeric"
+                  month="long"
+                  year="numeric"
+                />
+              </span>
             </div>
-          : null}
+          </div>
+        ) : null}
         <div dangerouslySetInnerHTML={{ __html: answer.body }} />
       </div>
     );

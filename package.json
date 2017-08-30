@@ -18,14 +18,14 @@
     "relay:watch": "yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
     "checkcs": "eslint --cache app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
-    "prettier": "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80 \"app/Resources/js/**/*.js\"",
+    "prettier": "prettier --write \"app/Resources/js/**/*.js\"",
     "precommit": "flow status && lint-staged"
   },
   "pre-commit": "precommit",
   "lint-staged": {
     "app/Resources/js/**/*.js": [
       "eslint --fix",
-      "prettier --write --bracket-spacing --single-quote --jsx-bracket-same-line --trailing-comma all --print-width 80",
+      "prettier --write",
       "git add"
     ],
     "*.php": [
@@ -39,6 +39,14 @@
     "*.twig": [
       "php bin/console lint:twig"
     ]
+  },
+  "prettier": {
+     "parser": "flow",
+     "bracketSpacing": true,
+     "singleQuote": true,
+     "jsxBracketSameLine": true,
+     "trailing-comma": "all",
+     "printWidth": 100
   },
   "jest": {
     "roots": [
@@ -156,9 +164,9 @@
     "flow-coverage-report": "^0.3.0",
     "jest": "^20.0.4",
     "jest-serializer-enzyme": "^1.0.0",
-    "lint-staged": "^4.0.2",
+    "lint-staged": "^4.0.4",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.5.3",
+    "prettier": "^1.6.1",
     "react-addons-test-utils": "15.4.2",
     "relay-compiler": "^1.1.0"
   }
