@@ -387,7 +387,8 @@ class OpinionAdmin extends Admin
         return $em
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->createQueryBuilder('cs')
-            ->where('cs.consultationStepType = :stepType')
+            ->join('cs.consultationStepType', 'type')
+            ->where('type = :stepType')
             ->setParameter('stepType', $consultationStepType)
         ;
     }
