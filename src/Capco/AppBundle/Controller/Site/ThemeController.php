@@ -91,7 +91,7 @@ class ThemeController extends Controller
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => $maxProjectsDisplayed,
+            'maxProjectsDisplayed' => 12,
             'projectProps' => $projectProps,
             'ideaCreationProps' => $ideaCreationProps,
         ];
