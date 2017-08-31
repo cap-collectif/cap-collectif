@@ -313,7 +313,6 @@ class ProjectDownloadResolver
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $na,
             'estimation' => $na,
-            'answer' => $na,
         ];
 
         if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
