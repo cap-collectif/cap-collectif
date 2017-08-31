@@ -69,7 +69,6 @@ def ensure_vm_is_up():
             if machine_running != 'Running':
                 local('docker-machine start capco')
     if env.dinghy:
-        machine_exist = local('docker-machine status dinghy')
-        if not machine_exist.succeeded:
-            print(red('[ERROR] Dinghy machine doesn\'t exist, you should launch the \'fab local.system.dinghy_install\' command to install the VM and the project.'))
-            abort('Make sure that dinghy machine has already been created.')
+        machine_running = local('dinghy status', capture=True)
+        if machine_running.splitlines()[0].strip() != 'VM: running':
+            local('dinghy up --no-proxy')
