@@ -74,14 +74,14 @@ class ThemeController extends Controller
         if (!$theme->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
         }
-        $maxProjectsDisplayed = 12;
 
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
+
         $projectProps = $serializer->serialize([
             'projects' => $em
                 ->getRepository('CapcoAppBundle:Project')
-                ->getProjectsByTheme($theme, $maxProjectsDisplayed),
+                ->getProjectsByTheme($theme),
         ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
 
         $ideaCreationProps = $serializer->serialize([
