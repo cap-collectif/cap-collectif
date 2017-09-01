@@ -25,7 +25,11 @@ class DistrictExtension extends \Twig_Extension
         $districts = $this->districtRepo->findAll();
         $list = [];
         foreach ($districts as $district) {
-            $list[] = ['id' => $district->getId(), 'name' => $district->getName()];
+            $list[] = [
+              'id' => $district->getId(),
+              'name' => $district->getName(),
+              'geojson' => $district->getGeojson(),
+            ];
         }
 
         usort($list, function ($a, $b) {

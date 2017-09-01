@@ -21,15 +21,21 @@ class District
     use UuidTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
     /**
-     * @var \DateTime
-     *
+     * @ORM\Column(name="geojson", type="json", nullable=true)
+     */
+    private $geojson;
+
+     /**
+      * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
+      */
+     private $displayOnMap = false;
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"name"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
@@ -49,6 +55,18 @@ class District
     public function __toString()
     {
         return $this->getId() ? $this->getName() : 'New district';
+    }
+
+    public function getGeojson()
+    {
+        return $this->geojson;
+    }
+
+    public function setGeojson(string $geojson = null): self
+    {
+        $this->geojson = $geojson;
+
+        return $this;
     }
 
     /**

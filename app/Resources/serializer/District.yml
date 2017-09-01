@@ -9,3 +9,7 @@ Capco\AppBundle\Entity\District:
             expose: true
             type: string
             groups: [Districts, Proposals]
+        geojson:
+            expose: true
+            type: string
+            groups: [Districts]

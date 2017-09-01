@@ -130,6 +130,11 @@ class ProposalForm
     private $usingAddress = false;
 
     /**
+     * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean")
+     */
+    private $requireProposalInAZone = false;
+
+    /**
      * @ORM\Column(name="zoom_map", nullable=true, type="integer")
      */
     private $zoomMap;
