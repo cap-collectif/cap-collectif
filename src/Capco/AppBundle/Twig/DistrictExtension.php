@@ -29,6 +29,7 @@ class DistrictExtension extends \Twig_Extension
               'id' => $district->getId(),
               'name' => $district->getName(),
               'geojson' => $district->getGeojson(),
+              'displayedOnMap' => $district->isDiplayedOnMap(),
             ];
         }
 

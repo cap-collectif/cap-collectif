@@ -82,7 +82,9 @@ export const ProposalStepPage = React.createClass({
         <br />
         <Loader show={isLoading}>
           <LeafletMap
-            geoJsons={districts.filter(d => d.geojson !== null).map(d => JSON.parse(d.geojson))}
+            geoJsons={districts
+              .filter(d => d.geojson !== null && d.displayedOnMap)
+              .map(d => JSON.parse(d.geojson))}
             defaultMapOptions={{
               center: { lat: form.latMap, lng: form.lngMap },
               zoom: form.zoomMap,

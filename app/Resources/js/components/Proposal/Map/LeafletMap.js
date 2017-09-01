@@ -134,7 +134,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
           }}
           markers={markersList}
         />
-        {geoJsons && geoJsons.map(json => <GeoJSON data={json} />)}
+        {geoJsons && geoJsons.map((json, key) => <GeoJSON key={key} data={json} />)}
         <LocateControl />
       </Map>
     );

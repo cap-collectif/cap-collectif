@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * District.
- *
  * @ORM\Table(name="district")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DistrictRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -33,7 +31,7 @@ class District
      /**
       * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
       */
-     private $displayOnMap = false;
+     private $displayedOnMap = true;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})
@@ -69,20 +67,24 @@ class District
         return $this;
     }
 
-    /**
-     * @return string
-     */
+    public function setDisplayedOnMap(bool $displayedOnMap): self
+    {
+        $this->displayedOnMap = $displayedOnMap;
+
+        return $this;
+    }
+
+    public function isDiplayedOnMap(): bool
+    {
+        return $this->displayedOnMap;
+    }
+
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -94,11 +96,6 @@ class District
         return $this->proposals;
     }
 
-    /**
-     * Add proposal.
-     *
-     * @param Proposal $proposal
-     */
     public function addProposal(Proposal $proposal)
     {
         if (!$this->proposals->contains($proposal)) {
@@ -108,11 +105,6 @@ class District
         return $this;
     }
 
-    /**
-     * Remove proposal.
-     *
-     * @param Proposal $proposal
-     */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
