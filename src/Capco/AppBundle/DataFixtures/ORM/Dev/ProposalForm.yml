@@ -16,6 +16,7 @@ Capco\AppBundle\Entity\ProposalForm:
     themeMandatory: false
     categoryMandatory: true
     usingAddress: true
+    requireProposalInAZone: true
     zoomMap: 12
     latMap: 48.1159675
     lngMap: -1.7234738

@@ -132,7 +132,7 @@ class ProposalForm
     /**
      * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean")
      */
-    private $requireProposalInAZone = false;
+    private $proposalInAZoneRequired = false;
 
     /**
      * @ORM\Column(name="zoom_map", nullable=true, type="integer")
@@ -162,6 +162,11 @@ class ProposalForm
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
+    }
+
+    public function isProposalInAZoneRequired(): bool
+    {
+        return $this->proposalInAZoneRequired;
     }
 
     /**
