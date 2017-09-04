@@ -100,8 +100,7 @@
         "ocramius/proxy-manager": "2.0.2",
         "limenius/react-bundle": "^0.13.1",
         "lexik/jwt-authentication-bundle": "^2.4",
-        "gfreeau/get-jwt-bundle": "dev-dev",
-        "cocur/slugify": "@dev"
+        "gfreeau/get-jwt-bundle": "dev-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

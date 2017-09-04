@@ -12,7 +12,6 @@ Feature: Proposal posts
         "abstract": @string@,
         "id": @integer@,
         "title": @string@,
-        "body": @string@,
         "created_at": "@string@.isDateTime()",
         "updated_at": "@string@.isDateTime()",
         "media": @null@,
@@ -29,7 +28,8 @@ Feature: Proposal posts
         "_links": {
             "show": @string@
         }
-      }
+      },
+      @...@
       ]
     }
     """

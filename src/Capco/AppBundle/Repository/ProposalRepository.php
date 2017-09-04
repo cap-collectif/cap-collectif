@@ -278,7 +278,7 @@ class ProposalRepository extends EntityRepository
     public function getEnabledByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut')
+            ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut', 'answer', 'answeraut')
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.Media', 'amedia')
@@ -291,6 +291,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selectionVotes', 'selectionVotes')
             ->leftJoin('selectionVotes.user', 'votesaut')
             ->leftJoin('votesaut.userType', 'votesautut')
+            ->leftJoin('proposal.answer', 'answer')
+            ->leftJoin('answer.author', 'answeraut')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $proposalForm)
         ;

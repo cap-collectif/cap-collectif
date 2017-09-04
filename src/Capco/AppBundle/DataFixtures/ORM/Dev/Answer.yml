@@ -7,3 +7,11 @@ Capco\AppBundle\Entity\Answer:
     title: Réponse du gouvernement à la modification
     body: <p><text(300)></p>
     author: '@user4'
+  answer3:
+    title: Réponse du gouvernement à la proposition
+    body: <p><text(300)></p>
+    author: '@user4'
+  answer4:
+    title: Réponse de la ville à la proposition
+    body: <p><text(300)></p>
+    author: '@user4'

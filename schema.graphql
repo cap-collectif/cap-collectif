@@ -575,6 +575,9 @@ type Proposal {
   # Identifies the summary of the contribution.
   summary: String
 
+  # Identifies the preview text of the contribution.
+  summaryOrBodyExcerpt: String
+
   # Identifies the form where the contribution was submitted.
   form: ProposalForm!
 }
@@ -590,16 +593,16 @@ type ProposalForm {
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!
-  themeHelpText: String!
+  themeHelpText: String
   usingDistrict: Boolean!
   districtMandatory: Boolean!
-  districtHelpText: String!
+  districtHelpText: String
   usingCategories: Boolean!
   categoryMandatory: Boolean!
-  categoryHelpText: String!
+  categoryHelpText: String
   usingAddress: Boolean!
-  titleHelpText: String!
-  descriptionHelpText: String!
+  titleHelpText: String
+  descriptionHelpText: String
   customFields: [Question!]!
 }
 

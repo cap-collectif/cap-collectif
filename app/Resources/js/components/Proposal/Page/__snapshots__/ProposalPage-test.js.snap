@@ -186,18 +186,9 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   }
                   type="Into"
                 />
-                <Connect(ProposalPageLastNews)
-                  proposal={
-                    Object {
-                      "comments_count": 5,
-                      "id": 41,
-                      "referer": "http://capco.test",
-                      "votableStepId": "2",
-                      "votesCountByStepId": Object {
-                        "2": 0,
-                      },
-                    }
-                  }
+                <ProposalPageAnswer
+                  answer={null}
+                  className=""
                 />
                 <Connect(ProposalPageContent)
                   categories={Array []}
@@ -511,17 +502,9 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
                   }
                   type="Into"
                 />
-                <Connect(ProposalPageLastNews)
-                  proposal={
-                    Object {
-                      "id": 42,
-                      "referer": "http://capco.test",
-                      "votableStepId": "2",
-                      "votesCountByStepId": Object {
-                        "2": 5,
-                      },
-                    }
-                  }
+                <ProposalPageAnswer
+                  answer={null}
+                  className=""
                 />
                 <Connect(ProposalPageContent)
                   categories={Array []}

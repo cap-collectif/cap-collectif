@@ -39,15 +39,9 @@ class PostAdmin extends Admin
         ];
     }
 
-    public function onPostPersist($object)
-    {
-        if ($object->getProposals()->count() > 0) {
-            foreach ($object->getProposals() as $proposal) {
-                $this->getContainer()->get('notifier')->notifyProposalPost($proposal, $object);
-            }
-        }
-    }
-
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -147,6 +141,9 @@ class PostAdmin extends Admin
         ;
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -207,7 +204,6 @@ class PostAdmin extends Admin
             ->add('proposals', 'sonata_type_model_autocomplete', [
               'property' => 'title',
               'label' => 'admin.fields.blog_post.proposals',
-              'help' => 'L\'auteur de la proposition sera notifié d\'un nouvel article',
               'required' => false,
               'multiple' => true,
               'by_reference' => false,
@@ -240,6 +236,9 @@ class PostAdmin extends Admin
         ;
     }
 
+    /**
+     * @param ShowMapper $showMapper
+     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
