@@ -101,8 +101,8 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD
 	  } > /etc/apt/preferences.d/mariadb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.25+maria-1~jessie \
-        mariadb-client=10.1.25+maria-1~jessie \
+        mariadb-server=10.1.26+maria-1~jessie \
+        mariadb-client=10.1.26+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -171,8 +171,9 @@ RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sou
 
 # Install varnish
 RUN apt-get update && \
-    curl -L https://packagecloud.io/varnishcache/varnish41/gpgkey | apt-key add - && \
-    echo "deb https://packagecloud.io/varnishcache/varnish41/debian/ jessie main" >> /etc/apt/sources.list.d/varnish-cache.list && \
+    apt-get install -y wget apt-transport-https && \
+    wget https://repo.varnish-cache.org/debian/GPG-key.txt -O- -q | apt-key add - && \
+    echo "deb https://repo.varnish-cache.org/debian/ jessie varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list && \
     apt-get update && \
     apt-get install -y varnish && \
     apt-get clean && \
