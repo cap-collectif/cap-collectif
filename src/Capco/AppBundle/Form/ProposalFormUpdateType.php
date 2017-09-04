@@ -42,7 +42,7 @@ class ProposalFormUpdateType extends AbstractType
 
             ->add('illustrationHelpText', TextType::class)
 
-            ->add('')
+            ->add('questions', QuestionnaireAbstractQuestionType::class)
         ;
     }
 
