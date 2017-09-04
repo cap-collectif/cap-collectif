@@ -119,11 +119,6 @@ Feature: Proposal Restful Api
         "isTrashed": @boolean@,
         "trashedReason": @...@,
         "title": @string@,
-        "answer": {
-          "title": "Réponse du gouvernement à la proposition",
-          "body": @string@,
-          "author": @...@
-        },
         "votesCountByStepId": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
@@ -267,11 +262,6 @@ Feature: Proposal Restful Api
         "isTrashed": @boolean@,
         "trashedReason": @...@,
         "title": @string@,
-        "answer": {
-          "title": "Réponse du gouvernement à la proposition",
-          "body": @string@,
-          "author": @...@
-        },
         "votesByStepId": {
           "selectionstep1": [],
           "collectstep1": []
@@ -423,11 +413,6 @@ Feature: Proposal Restful Api
         "isTrashed": @boolean@,
         "trashedReason": @...@,
         "title": @string@,
-        "answer": {
-          "title": "Réponse du gouvernement à la proposition",
-          "body": @string@,
-          "author": @...@
-        },
         "votesCountByStepId": @...@,
         "hasUserReported": @boolean@,
         "likers": @array@,
@@ -485,7 +470,6 @@ Feature: Proposal Restful Api
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
-          "answer": @...@,
           "votesCountByStepId": @...@,
           "likers": @array@,
           "_links": @...@
@@ -644,7 +628,6 @@ Feature: Proposal Restful Api
           "proposalForm": {
             "id": @integer@
           },
-          "answer": @...@,
           "comments": @...@,
           "responses": @...@,
           "selections": @...@,

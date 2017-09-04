@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
@@ -46,7 +45,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
-    use AnswerableTrait;
     use ExpirableTrait;
     use SelfLinkableTrait;
     use SoftDeleteTrait;

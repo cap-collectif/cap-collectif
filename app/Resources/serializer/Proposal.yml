@@ -57,9 +57,6 @@ Capco\AppBundle\Entity\Proposal:
     comments:
       expose: true
       groups: [Proposals]
-    answer:
-      expose: true
-      groups: [Proposals]
     isTrashed:
       expose: true
       serialized_name: isTrashed

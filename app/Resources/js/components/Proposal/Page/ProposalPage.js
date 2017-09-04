@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalPageContent from './ProposalPageContent';
-import ProposalPageAnswer from './ProposalPageAnswer';
+import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageComments from './ProposalPageComments';
@@ -117,7 +117,7 @@ export const ProposalPage = React.createClass({
                     <Col xs={12} sm={8}>
                       <ProposalFusionList proposal={proposal} type="From" />
                       <ProposalFusionList proposal={proposal} type="Into" />
-                      <ProposalPageAnswer answer={proposal.answer} />
+                      <ProposalPageLastNews proposal={proposal} />
                       <ProposalPageContent
                         proposal={proposal}
                         form={form}

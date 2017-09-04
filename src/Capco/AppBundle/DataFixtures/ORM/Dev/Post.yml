@@ -50,7 +50,18 @@ Capco\AppBundle\Entity\Post:
       projects: ['@p2']
       themes: ['@theme2']
 
-  post{11..15}:
+  post11:
+      title: Réponses officielle
+      body: Très bien tout ça je valide
+      isPublished: true
+      publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+      Authors:
+          - '@user<numberBetween(1,5)>'
+      themes: ['@theme1', '@theme2']
+      Media: null
+      proposals: ['@proposal1']
+
+  post{12..15}:
       title: Post <current()>
       abstract: <text(150)>
       body: |
@@ -65,4 +76,3 @@ Capco\AppBundle\Entity\Post:
           - '@user<numberBetween(1,5)>'
       themes: ['@theme1', '@theme2']
       Media: null
-      proposals: ['@proposal1']

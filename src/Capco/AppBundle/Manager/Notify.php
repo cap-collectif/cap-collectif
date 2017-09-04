@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
@@ -310,10 +311,7 @@ class Notify implements MailerInterface
         $this->sendEmail($selection->getProposal()->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
 
-    /**
-     * @param Proposal $proposal
-     */
-    public function notifyProposalAnswer(Proposal $proposal)
+    public function notifyProposalPost(Proposal $proposal, Post $post)
     {
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
@@ -323,11 +321,13 @@ class Notify implements MailerInterface
             '%sitename%' => $this->resolver->getValue('global.site.fullname'),
         ], 'CapcoAppBundle'
         );
+
         $template = 'CapcoAppBundle:Mail:notifyProposalAnswer.html.twig';
         $body = $this->templating->render(
             $template,
             [
                 'proposal' => $proposal,
+                'post' => $post,
             ]
         );
 

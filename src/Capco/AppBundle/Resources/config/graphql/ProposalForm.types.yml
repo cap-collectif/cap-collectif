@@ -11,25 +11,25 @@ ProposalForm:
             themeMandatory:
                 type: "Boolean!"
             themeHelpText:
-                type: "String"
+                type: "String!"
             usingDistrict:
                 type: "Boolean!"
             districtMandatory:
                 type: "Boolean!"
             districtHelpText:
-                type: "String"
+                type: "String!"
             usingCategories:
                 type: "Boolean!"
             categoryMandatory:
                 type: "Boolean!"
             categoryHelpText:
-                type: "String"
+                type: "String!"
             usingAddress:
                 type: "Boolean!"
             titleHelpText:
-                type: "String"
+                type: "String!"
             descriptionHelpText:
-                type: "String"
+                type: "String!"
             customFields:
                 type: "[Question!]!"
                 resolve: "@=resolver('proposalform_questions', [value])"

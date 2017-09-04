@@ -29,7 +29,6 @@ class ProjectDownloadResolver
         'district',
         'status',
         'estimation',
-        'answer',
         'created',
         'updated',
         'link',
@@ -263,7 +262,6 @@ class ProjectDownloadResolver
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
             'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
-            'answer' => $proposal['answer'] ? $this->getProposalAnswer($proposal['answer']) : '',
         ];
 
         if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
@@ -315,7 +313,6 @@ class ProjectDownloadResolver
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $na,
             'estimation' => $na,
-            'answer' => $na,
         ];
 
         if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
@@ -382,15 +379,6 @@ class ProjectDownloadResolver
             $body .= "\n\n" . $response['question']['title'] . ' :';
             $body .= "\n" . $this->formatText($response['value']);
         }
-
-        return $body;
-    }
-
-    private function getProposalAnswer(array $answer)
-    {
-        $body = $answer['title'];
-        $body .= "\n" . $answer['author']['username'];
-        $body .= "\n\n" . $this->formatText(html_entity_decode($answer['body']));
 
         return $body;
     }
