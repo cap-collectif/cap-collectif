@@ -74,7 +74,7 @@ class District
         return $this;
     }
 
-    public function isDiplayedOnMap(): bool
+    public function isDisplayedOnMap(): bool
     {
         return $this->displayedOnMap;
     }

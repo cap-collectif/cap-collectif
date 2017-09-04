@@ -164,6 +164,13 @@ class ProposalForm
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
     }
 
+    public function setProposalInAZoneRequired(bool $proposalInAZoneRequired): self
+    {
+        $this->proposalInAZoneRequired = $proposalInAZoneRequired;
+
+        return $this;
+    }
+
     public function isProposalInAZoneRequired(): bool
     {
         return $this->proposalInAZoneRequired;
