@@ -24,6 +24,7 @@ class Version20170905121057 extends AbstractMigration
           }
           return;
         }
+
         // We just need to se the corresponding district for the first form
         $formId = $proposalForms[0]['id'];
         foreach ($districts as $district) {
@@ -34,13 +35,23 @@ class Version20170905121057 extends AbstractMigration
         }
 
         // If there is more than one proposal forms, we link districts to each of them
-        unset($proposalsForms[0]);
+        // unset($proposalsForms[0]);
+
+        $otherForms =
         foreach ($proposalsForms as $form) {
           foreach ($districts as $district) {
-            $district['form_id' => $form['id']];
+            $district['form_id'] = $form['id'];
+            $previousDistrictId = $district['id'];
             unset($district['id']);
             $this->connection->insert('district', $district);
-            // We must update proposal district... :(
+            $newDistrictId = $this->connection->getLastInsertedId();
+            // We must update district for each proposal
+            $proposals = $this->connection->fetchAll('SELECT * from proposal');
+            foreach ($proposals as $proposal) {
+              if ($proposal['form'] === $form['id'] && $proposal['district'] === $previousDistrictId) {
+                $this->connection->update('proposal', ['district' => $newDistrictId], ['id' => $proposal['id']]);
+              }
+            }
           }
         }
     }
