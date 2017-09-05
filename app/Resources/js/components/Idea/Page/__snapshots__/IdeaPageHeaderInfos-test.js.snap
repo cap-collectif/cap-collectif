@@ -15,11 +15,11 @@ exports[`<IdeaPageHeaderInfos /> it should not render a theme when idea has one 
           month="long"
           value={"2017-07-10T16:53:58.000Z"}
           year="numeric"
-      />,
+        />,
         "user": <UserLink
           className=""
           user={Object {}}
-      />,
+        />,
       }
     }
   />
@@ -57,11 +57,11 @@ exports[`<IdeaPageHeaderInfos /> it should render a paragraph with formatted mes
           month="long"
           value={"2017-07-10T16:53:58.000Z"}
           year="numeric"
-      />,
+        />,
         "user": <UserLink
           className=""
           user={Object {}}
-      />,
+        />,
       }
     }
   />
@@ -99,16 +99,16 @@ exports[`<IdeaPageHeaderInfos /> it should render a theme when idea has one and 
           month="long"
           value={"2017-07-10T16:53:58.000Z"}
           year="numeric"
-      />,
+        />,
         "theme": <a
           href=""
-      >
+        >
           Theme
-      </a>,
+        </a>,
         "user": <UserLink
           className=""
           user={Object {}}
-      />,
+        />,
       }
     }
   />
@@ -146,11 +146,11 @@ exports[`<IdeaPageHeaderInfos /> it should render comments number when idea is c
           month="long"
           value={"2017-07-10T16:53:58.000Z"}
           year="numeric"
-      />,
+        />,
         "user": <UserLink
           className=""
           user={Object {}}
-      />,
+        />,
       }
     }
   />
@@ -204,11 +204,11 @@ exports[`<IdeaPageHeaderInfos /> it should render trashed label when idea is tra
           month="long"
           value={"2017-07-10T16:53:58.000Z"}
           year="numeric"
-      />,
+        />,
         "user": <UserLink
           className=""
           user={Object {}}
-      />,
+        />,
       }
     }
   />
