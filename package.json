@@ -28,6 +28,7 @@
       "prettier --write",
       "git add"
     ],
+    "*.yml": ["yamllint"],
     "*.php": [
       "php-cs-fixer fix --config=.php_cs --path-mode=intersection",
       "git add"

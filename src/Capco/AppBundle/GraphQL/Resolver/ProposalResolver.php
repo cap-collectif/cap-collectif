@@ -11,12 +11,9 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -59,15 +56,6 @@ class ProposalResolver implements ContainerAwareInterface
         }
         if ($step instanceof ConsultationStep) {
             return $typeResolver->resolve('Consultation');
-        }
-        if ($step instanceof OtherStep) {
-            return $typeResolver->resolve('OtherStep');
-        }
-        if ($step instanceof SynthesisStep) {
-            return $typeResolver->resolve('SynthesisStep');
-        }
-        if ($step instanceof RankingStep) {
-            return $typeResolver->resolve('RankingStep');
         }
 
         throw new UserError('Could not resolve type of Step.');

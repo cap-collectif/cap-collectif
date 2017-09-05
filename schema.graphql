@@ -271,8 +271,6 @@ interface EditableContribution {
 
 scalar HTML
 
-scalar JSON
-
 # A media
 type Media {
   # The id of the media.
@@ -494,12 +492,6 @@ enum OrderDirection {
   DESC
 }
 
-type OtherStep implements Step {
-  id: ID!
-  kind: String!
-  title: String!
-}
-
 # Information about pagination in a connection.
 type PageInfo {
   # When paginating forwards, are there more items?
@@ -556,7 +548,7 @@ type Proposal {
   theme: Theme
   category: ProposalCategory
   district: District
-  address: JSON
+  address: String
 
   # The author of the contribution.
   author: User!
@@ -687,12 +679,6 @@ type Question {
   private: Boolean!
   required: Boolean!
   helpText: String!
-}
-
-type RankingStep implements Step {
-  id: ID!
-  kind: String!
-  title: String!
 }
 
 # A report
@@ -877,12 +863,6 @@ type Status {
 
 # A step in a project
 interface Step {
-  id: ID!
-  kind: String!
-  title: String!
-}
-
-type SynthesisStep implements Step {
   id: ID!
   kind: String!
   title: String!
