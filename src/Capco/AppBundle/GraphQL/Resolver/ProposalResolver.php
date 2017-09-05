@@ -17,7 +17,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -86,11 +85,15 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
-    public function resolve(Arg $args): Proposal
+    public function resolve(int $proposalId): Proposal
     {
-        $repo = $this->container->get('capco.proposal.repository');
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
+        }
 
-        return $repo->find($args['id']);
+        return $proposal;
     }
 
     public function resolveProposalPublicationStatus(Proposal $proposal): string
