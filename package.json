@@ -28,7 +28,9 @@
       "prettier --write",
       "git add"
     ],
-    "*.yml": ["yamllint"],
+    "*.yml": [
+      "yamllint"
+    ],
     "*.php": [
       "php-cs-fixer fix --config=.php_cs --path-mode=intersection",
       "git add"
@@ -42,12 +44,12 @@
     ]
   },
   "prettier": {
-     "parser": "flow",
-     "bracketSpacing": true,
-     "singleQuote": true,
-     "jsxBracketSameLine": true,
-     "trailing-comma": "all",
-     "printWidth": 100
+    "parser": "flow",
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "trailing-comma": "all",
+    "printWidth": 100
   },
   "jest": {
     "roots": [
@@ -169,6 +171,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.6.1",
     "react-addons-test-utils": "15.4.2",
-    "relay-compiler": "^1.1.0"
+    "relay-compiler": "^1.1.0",
+    "yaml-lint": "^1.0.0"
   }
 }
