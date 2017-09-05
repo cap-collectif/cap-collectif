@@ -24,37 +24,37 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UsersController extends FOSRestController
 {
     /**
-   * @Get("/users_counters")
-   * @View()
-   */
-  public function getUsersCountersAction()
-  {
-      $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
-      $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
-      $anonymousVoters =
+     * @Get("/users_counters")
+     * @View()
+     */
+    public function getUsersCountersAction()
+    {
+        $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
+        $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
+        $anonymousVoters =
           $this->get('capco.idea_vote.repository')->getAnonymousCount()
         + $this->get('capco.proposal_collect_vote.repository')->getAnonymousCount()
         + $this->get('capco.proposal_selection_vote.repository')->getAnonymousCount()
       ;
 
-      return [
+        return [
           'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
           'registeredContributors' => $registeredContributorCount,
           'anonymousComments' => $anonymousComments,
           'anonymousVoters' => $anonymousVoters,
       ];
-  }
+    }
 
-   /**
-    * @Post("/users/search")
-    * @View(statusCode=200, serializerGroups={"UserId", "UsersInfos"})
-    */
-   public function getUsersSearchAction(Request $request)
-   {
-       $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+    /**
+     * @Post("/users/search")
+     * @View(statusCode=200, serializerGroups={"UserId", "UsersInfos"})
+     */
+    public function getUsersSearchAction(Request $request)
+    {
+        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
-       return $this->get('capco.search.resolver')->searchUsers($terms);
-   }
+        return $this->get('capco.search.resolver')->searchUsers($terms);
+    }
 
     /**
      * @ApiDoc(
@@ -279,12 +279,12 @@ class UsersController extends FOSRestController
             return $form;
         }
 
-      // If phone is updated we have to make sure it's sms confirmed again
-      if ($previousPhone !== null && $previousPhone !== $user->getPhone()) {
-          $user->setPhoneConfirmed(false);
-          // TODO: security breach user can send unlimited sms if he change his number
-          $user->setSmsConfirmationSentAt(null);
-      }
+        // If phone is updated we have to make sure it's sms confirmed again
+        if ($previousPhone !== null && $previousPhone !== $user->getPhone()) {
+            $user->setPhoneConfirmed(false);
+            // TODO: security breach user can send unlimited sms if he change his number
+            $user->setSmsConfirmationSentAt(null);
+        }
 
         $this->getDoctrine()->getManager()->flush();
     }
@@ -316,8 +316,8 @@ class UsersController extends FOSRestController
             return $form;
         }
 
-      // We generate a confirmation token to validate the new email
-      $token = $this->get('fos_user.util.token_generator')->generateToken();
+        // We generate a confirmation token to validate the new email
+        $token = $this->get('fos_user.util.token_generator')->generateToken();
 
         $user->setNewEmailConfirmationToken($token);
         $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
