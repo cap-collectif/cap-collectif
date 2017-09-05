@@ -286,8 +286,8 @@ class ProposalMutation implements ContainerAwareInterface
             $valueResponse['_type'] = 'value_response';
         }
 
-       // Now we can submit the form without anything related to file uploads
-       $form = $formFactory->create(ProposalAdminType::class, $proposal, [
+        // Now we can submit the form without anything related to file uploads
+        $form = $formFactory->create(ProposalAdminType::class, $proposal, [
            'proposalForm' => $proposal->getProposalForm(),
        ]);
 

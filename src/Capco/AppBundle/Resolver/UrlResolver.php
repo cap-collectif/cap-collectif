@@ -42,7 +42,7 @@ class UrlResolver
           );
         } catch (RouteNotFoundException $e) {
             // Avoid some SonataMedia problems
-          return '';
+            return '';
         }
     }
 

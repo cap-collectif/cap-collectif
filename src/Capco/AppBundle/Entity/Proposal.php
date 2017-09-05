@@ -58,6 +58,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
     /**
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
