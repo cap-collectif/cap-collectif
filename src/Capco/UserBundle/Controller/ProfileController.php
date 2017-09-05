@@ -19,54 +19,54 @@ use Symfony\Component\HttpFoundation\Request;
 class ProfileController extends BaseController
 {
     /**
-   * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
-   * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
-   * @Security("has_role('ROLE_USER')")
-   */
-  public function editProfileAction()
-  {
-      $user = $this->getUser();
-      if (!is_object($user) || !$user instanceof UserInterface) {
-          throw $this->createAccessDeniedException('This user does not have access to this section.');
-      }
+     * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})
+     * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editProfileAction()
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        }
 
-      $form = $this->get('sonata.user.profile.form');
-      $form->remove('email');
-      $formHandler = $this->get('sonata.user.profile.form.handler');
+        $form = $this->get('sonata.user.profile.form');
+        $form->remove('email');
+        $formHandler = $this->get('sonata.user.profile.form.handler');
 
-      $process = $formHandler->process($user);
-      if ($process) {
-          $this->setFlash('sonata_user_success', 'profile.flash.updated');
-      }
+        $process = $formHandler->process($user);
+        if ($process) {
+            $this->setFlash('sonata_user_success', 'profile.flash.updated');
+        }
 
-      return [
+        return [
           'form' => $form->createView(),
       ];
-  }
+    }
 
-  /**
-   * @Route("/edit-mobile", name="capco_profile_edit_mobile")
-   * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
-   * @Security("has_role('ROLE_USER')")
-   */
-  public function editProfileMobileAction()
-  {
-  }
+    /**
+     * @Route("/edit-mobile", name="capco_profile_edit_mobile")
+     * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editProfileMobileAction()
+    {
+    }
 
-  /**
-   * @Route("/edit-account", name="capco_profile_edit_account")
-   * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
-   * @Security("has_role('ROLE_USER')")
-   */
-  public function editAccountAction(Request $request)
-  {
-      $user = $this->getUser();
-      if (!is_object($user) || !$user instanceof UserInterface) {
-          throw $this->createAccessDeniedException('This user does not have access to this section.');
-      }
+    /**
+     * @Route("/edit-account", name="capco_profile_edit_account")
+     * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editAccountAction(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        }
 
-      return [];
-  }
+        return [];
+    }
 
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
