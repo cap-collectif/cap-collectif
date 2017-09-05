@@ -72,6 +72,7 @@ export const ProposalStepPage = React.createClass({
         <ProposalListFilters
           statuses={statuses}
           categories={categories}
+          districts={form.districts}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={form.usingThemes}
           showDistrictFilter={form.usingDistrict}
