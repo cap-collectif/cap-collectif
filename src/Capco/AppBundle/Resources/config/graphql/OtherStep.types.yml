@@ -1,0 +1,12 @@
+OtherStep:
+    type: object
+    config:
+        interfaces: [Step]
+        fields:
+            id:
+              type: "ID!"
+            kind:
+               type: "String!"
+               resolve: "other"
+            title:
+               type: "String!"
