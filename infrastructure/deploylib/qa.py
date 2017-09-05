@@ -23,7 +23,7 @@ def check_codestyle():
     env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
     env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
-    env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'builder', '.', no_deps=True)
 
 
 @task(environments=['local'])
