@@ -11,21 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 class SettingsController extends Controller
 {
     /**
-     * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
-     * @Template()
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function registrationAction(Request $request)
-    {
-        $em = $this->get('doctrine')->getManager();
-        $form = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+   * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
+   * @Template()
+   * @Security("has_role('ROLE_ADMIN')")
+   */
+  public function registrationAction(Request $request)
+  {
+      $em = $this->get('doctrine')->getManager();
+      $form = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
 
-        $adminPool = $this->get('sonata.admin.pool');
+      $adminPool = $this->get('sonata.admin.pool');
 
-        return [
-            'admin_pool' => $adminPool,
-        ];
-    }
+      return [
+          'admin_pool' => $adminPool,
+      ];
+  }
 
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")

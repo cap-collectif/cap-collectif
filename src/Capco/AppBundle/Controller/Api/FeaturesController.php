@@ -138,7 +138,7 @@ class FeaturesController extends FOSRestController
 
         if ((int) $data['type'] !== $question->getType()) {
             // type has changed we remove and create a new question
-            $this->deleteRegistrationQuestionAction($question);
+          $this->deleteRegistrationQuestionAction($question);
 
             return $this->postRegistrationQuestionAction($request);
         }

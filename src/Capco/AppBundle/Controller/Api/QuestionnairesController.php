@@ -60,9 +60,9 @@ class QuestionnairesController extends FOSRestController
                         $reply = $response->getReply();
                         if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
                             // The score is the maximum number of choices for the question
-                            // 4 replies gives 4 3 2 1 points
-                            // 2 replies with maximum 4 gives 4 3 points
-                            $score = $question->getValidationRule()
+                        // 4 replies gives 4 3 2 1 points
+                        // 2 replies with maximum 4 gives 4 3 points
+                        $score = $question->getValidationRule()
                           ? $question->getValidationRule()->getNumber()
                           : $question->getQuestionChoices()->count()
                         ;

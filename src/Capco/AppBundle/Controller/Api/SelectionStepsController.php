@@ -27,14 +27,14 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 class SelectionStepsController extends FOSRestController
 {
     /**
-     * @Get("/selection_steps/{selection_step_id}")
-     * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
-     * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps", "VoteThreshold"})
-     */
-    public function getBySelectionStepAction(SelectionStep $selectionStep)
-    {
-        return $selectionStep;
-    }
+    * @Get("/selection_steps/{selection_step_id}")
+    * @ParamConverter("selectionStep", options={"mapping": {"selection_step_id": "id"}})
+    * @View(statusCode=200, serializerGroups={"Statuses", "Steps", "SelectionSteps", "VoteThreshold"})
+    */
+   public function getBySelectionStepAction(SelectionStep $selectionStep)
+   {
+       return $selectionStep;
+   }
 
     /**
      * @Post("/selection_steps/{selectionStepId}/proposals/search")

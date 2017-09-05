@@ -124,40 +124,40 @@ EOF;
         $this->iSendARequestWithJson($method, $url, $json);
     }
 
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendOpinionRequest($method, $url)
-    {
-        $json = <<< 'EOF'
+     /**
+      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
+      *
+      * @param mixed $method
+      * @param mixed $url
+      */
+     public function iSendOpinionRequest($method, $url)
+     {
+         $json = <<< 'EOF'
        {
          "title": "Nouveau titre",
          "body": "Mes modifications blablabla"
        }
 EOF;
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
+         $this->iSendARequestWithJson($method, $url, $json);
+     }
 
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid link opinion json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendOpinionLinkRequest($method, $url)
-    {
-        $json = <<< 'EOF'
+       /**
+        * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid link opinion json$/
+        *
+        * @param mixed $method
+        * @param mixed $url
+        */
+       public function iSendOpinionLinkRequest($method, $url)
+       {
+           $json = <<< 'EOF'
          {
            "title": "Nouveau titre",
            "body": "Mes modifications blablabla",
            "OpinionType": "opinionType6"
          }
 EOF;
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
+           $this->iSendARequestWithJson($method, $url, $json);
+       }
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid report json$/

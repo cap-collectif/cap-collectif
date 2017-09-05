@@ -74,87 +74,87 @@ class OpinionsController extends FOSRestController
         ];
     }
 
-    /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Create an opinion.",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
-     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
-     * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
-     * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
-     * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postOpinionAction(Request $request, Project $project, ConsultationStep $step, OpinionType $type)
-    {
-        if (!$step->canContribute()) {
-            throw new BadRequestHttpException('This step is not contribuable.');
-        }
+     /**
+      * @ApiDoc(
+      *  resource=true,
+      *  description="Create an opinion.",
+      *  statusCodes={
+      *    201 = "Returned when successful",
+      *    404 = "Returned when opinion not found",
+      *  }
+      * )
+      *
+      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
+      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
+      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
+      * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
+      * @Security("has_role('ROLE_USER')")
+      * @View(statusCode=201, serializerGroups={})
+      */
+     public function postOpinionAction(Request $request, Project $project, ConsultationStep $step, OpinionType $type)
+     {
+         if (!$step->canContribute()) {
+             throw new BadRequestHttpException('This step is not contribuable.');
+         }
 
-        if (!$type->getIsEnabled()) {
-            throw new BadRequestHttpException('This opinionType is not enabled.');
-        }
+         if (!$type->getIsEnabled()) {
+             throw new BadRequestHttpException('This opinionType is not enabled.');
+         }
 
-        $opinion = (new Opinion())
+         $opinion = (new Opinion())
           ->setAuthor($this->getUser())
           ->setStep($step)
           ->setIsEnabled(true)
           ->setOpinionType($type)
           ;
 
-        $form = $this->createForm(OpinionForm::class, $opinion);
-        $form->submit($request->request->all(), false);
+         $form = $this->createForm(OpinionForm::class, $opinion);
+         $form->submit($request->request->all(), false);
 
-        if (!$form->isValid()) {
-            return $form;
-        }
+         if (!$form->isValid()) {
+             return $form;
+         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($opinion);
-        $em->flush();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($opinion);
+         $em->flush();
 
-        return $opinion;
-    }
+         return $opinion;
+     }
 
-    /**
-     * @Put("/opinions/{id}")
-     * @ParamConverter("opinion", options={
-     *  "mapping": {"id": "id"},
-     *  "repository_method": "getOne",
-     *  "map_method_signature" = true
-     * })
-     * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
-     */
-    public function putOpinionAction(Request $request, Opinion $opinion)
-    {
-        if ($this->getUser() !== $opinion->getAuthor()) {
-            throw new AccessDeniedHttpException();
-        }
+   /**
+    * @Put("/opinions/{id}")
+    * @ParamConverter("opinion", options={
+    *  "mapping": {"id": "id"},
+    *  "repository_method": "getOne",
+    *  "map_method_signature" = true
+    * })
+    * @Security("has_role('ROLE_USER')")
+    * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
+    */
+   public function putOpinionAction(Request $request, Opinion $opinion)
+   {
+       if ($this->getUser() !== $opinion->getAuthor()) {
+           throw new AccessDeniedHttpException();
+       }
 
-        if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException('Uncontribuable opinion.');
-        }
+       if (!$opinion->canContribute()) {
+           throw new BadRequestHttpException('Uncontribuable opinion.');
+       }
 
-        $form = $this->createForm(OpinionForm::class, $opinion);
-        $form->submit($request->request->all(), false);
+       $form = $this->createForm(OpinionForm::class, $opinion);
+       $form->submit($request->request->all(), false);
 
-        if (!$form->isValid()) {
-            return $form;
-        }
+       if (!$form->isValid()) {
+           return $form;
+       }
 
-        $opinion->resetVotes();
-        $opinion->setValidated(false);
-        $this->getDoctrine()->getManager()->flush();
+       $opinion->resetVotes();
+       $opinion->setValidated(false);
+       $this->getDoctrine()->getManager()->flush();
 
-        return $opinion;
-    }
+       return $opinion;
+   }
 
     /**
      * Delete an opinion.

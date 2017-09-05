@@ -85,77 +85,77 @@ class ApplicationContext extends UserContext
 
     // public function resetUsingDocker()
     // {
-    // This is the real docker way, but not that easy
-    // We need to use something like https://github.com/jwilder/nginx-proxy
-    // To reload containers, because we can't do reload on runtime with links
-    // So we have to make sure it's supported on Circle-CI...
-    // $docker = new Docker(new Client('unix:///run/docker.sock'));
-    // $manager = $docker->getContainerManager();
-    //
-    // if (null !== $this->dbContainer && $this->dbContainer->exists()) {
-    //     try {
-    //         $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
-    //     } catch (UnexpectedStatusCodeException $e) {
-    //         if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
-    //             throw $e;
-    //         }
-    //         // We don't care about this error that happen only because of Circle-CI bad support of Docker
-    //     }
+        // This is the real docker way, but not that easy
+        // We need to use something like https://github.com/jwilder/nginx-proxy
+        // To reload containers, because we can't do reload on runtime with links
+        // So we have to make sure it's supported on Circle-CI...
+        // $docker = new Docker(new Client('unix:///run/docker.sock'));
+        // $manager = $docker->getContainerManager();
+        //
+        // if (null !== $this->dbContainer && $this->dbContainer->exists()) {
+        //     try {
+        //         $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
+        //     } catch (UnexpectedStatusCodeException $e) {
+        //         if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
+        //             throw $e;
+        //         }
+        //         // We don't care about this error that happen only because of Circle-CI bad support of Docker
+        //     }
+        // }
+        //
+        // $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
+        // $manager->create($this->dbContainer)->start($this->dbContainer);
     // }
-    //
-    // $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
-    // $manager->create($this->dbContainer)->start($this->dbContainer);
-    // }
 
-    /**
-     * @BeforeScenario @javascript
-     */
-    public function maximizeWindow()
-    {
-        $this->getSession()->getDriver()->maximizeWindow();
-    }
+     /**
+      * @BeforeScenario @javascript
+      */
+     public function maximizeWindow()
+     {
+         $this->getSession()->getDriver()->maximizeWindow();
+     }
 
-    /**
-     * @Given I visited :pageName
-     */
-    public function iVisitedPage(string $pageName)
-    {
-        if ($this->getSession()) {
-            $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('displayCookieConsent', 'y');
-        }
-        $this->navigationContext->iVisitedPage($pageName);
-    }
+     /**
+      * @Given I visited :pageName
+      */
+     public function iVisitedPage(string $pageName)
+     {
+         if ($this->getSession()) {
+             $this->navigationContext->iVisitedPage('HomePage');
+             $this->getSession()->setCookie('displayCookieConsent', 'y');
+         }
+         $this->navigationContext->iVisitedPage($pageName);
+     }
 
-    /**
-     * @Given I should see the shield
-     */
-    public function iShouldSeeTheShield()
-    {
-        $this->assertSession()->elementExists('css', '#shield-mode');
-    }
+      /**
+       * @Given I should see the shield
+       */
+      public function iShouldSeeTheShield()
+      {
+          $this->assertSession()->elementExists('css', '#shield-mode');
+      }
 
-    /**
-     * @Given I should not see the shield
-     */
-    public function iShouldNotSeeTheShield()
-    {
-        $this->assertSession()->elementNotExists('css', '#shield-mode');
-    }
+       /**
+        * @Given I should not see the shield
+        */
+       public function iShouldNotSeeTheShield()
+       {
+           $this->assertSession()->elementNotExists('css', '#shield-mode');
+       }
 
-    /**
-     * @Given I visited :pageName with:
-     *
-     * @param mixed $pageName
-     */
-    public function iVisitedPageWith($pageName, TableNode $parameters)
-    {
-        if ($this->getSession()) {
-            $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('displayCookieConsent', 'y');
-        }
-        $this->navigationContext->iVisitedPageWith($pageName, $parameters);
-    }
+     /**
+      * @Given I visited :pageName with:
+      *
+      * @param mixed $pageName
+      */
+     public function iVisitedPageWith($pageName, TableNode $parameters)
+     {
+         if ($this->getSession()) {
+             $this->navigationContext->iVisitedPage('HomePage');
+             $this->getSession()->setCookie('displayCookieConsent', 'y');
+         }
+         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
+     }
 
     /**
      * @AfterScenario @javascript
@@ -195,17 +195,17 @@ class ApplicationContext extends UserContext
         }
     }
 
-    /**
-     * @Then I should be redirected to :url
-     *
-     * @param mixed $url
-     */
-    public function assertRedirect($url)
-    {
-        $this->getSession()->wait(1000);
+     /**
+      * @Then I should be redirected to :url
+      *
+      * @param mixed $url
+      */
+     public function assertRedirect($url)
+     {
+         $this->getSession()->wait(1000);
 
-        $this->assertPageAddress($url);
-    }
+         $this->assertPageAddress($url);
+     }
 
     /**
      * @Given all features are enabled
