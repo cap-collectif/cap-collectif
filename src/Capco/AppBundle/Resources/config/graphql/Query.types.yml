@@ -49,4 +49,4 @@ Query:
                 args:
                     id:
                         type: "ID!"
-                resolve: "@=resolver('query_proposal', [args['id']])"
+                resolve: "@=resolver('query_proposal', [args['id'], user])"

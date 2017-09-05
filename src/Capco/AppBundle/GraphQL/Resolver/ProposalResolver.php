@@ -17,6 +17,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -85,9 +86,13 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
-    public function resolve(int $proposalId): Proposal
+    public function resolve(int $proposalId, User $user = null): Proposal
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
+        if ($user->hasRole('ROLE_ADMIN')) {
+            // If user is an admin, we allow to retrieve deleted proposal
+            $em->getFilters()->disable('softdeleted');
+        }
         $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
