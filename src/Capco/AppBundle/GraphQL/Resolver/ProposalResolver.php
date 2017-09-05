@@ -93,7 +93,7 @@ class ProposalResolver implements ContainerAwareInterface
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
-        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
         }
