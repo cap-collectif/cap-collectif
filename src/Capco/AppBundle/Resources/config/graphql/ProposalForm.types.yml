@@ -14,6 +14,8 @@ ProposalForm:
                 type: "String"
             usingDistrict:
                 type: "Boolean!"
+            districts:
+                type: "[District!]!"
             districtMandatory:
                 type: "Boolean!"
             districtHelpText:

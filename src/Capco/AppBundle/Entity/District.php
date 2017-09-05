@@ -19,6 +19,12 @@ class District
     use UuidTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts", cascade={"persist"})
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    private $form;
+
+    /**
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
@@ -53,6 +59,18 @@ class District
     public function __toString()
     {
         return $this->getId() ? $this->getName() : 'New district';
+    }
+
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    public function setForm(ProposalForm $form): self
+    {
+        $this->form = $form;
+
+        return $this;
     }
 
     public function getGeojson()

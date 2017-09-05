@@ -17,7 +17,6 @@ import { loadProposals, changePage } from '../../redux/modules/proposal';
 
 export const ProposalStepPage = React.createClass({
   propTypes: {
-    districts: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
     queryCount: PropTypes.number,
@@ -52,7 +51,6 @@ export const ProposalStepPage = React.createClass({
       isLoading,
       randomOrder,
       selectedViewByStep,
-      districts,
     } = this.props;
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
@@ -82,7 +80,7 @@ export const ProposalStepPage = React.createClass({
         <br />
         <Loader show={isLoading}>
           <LeafletMap
-            geoJsons={districts
+            geoJsons={form.districts
               .filter(d => d.geojson !== null && d.displayedOnMap)
               .map(d => JSON.parse(d.geojson))}
             defaultMapOptions={{
@@ -128,7 +126,6 @@ const mapStateToProps = (state, props) => ({
   proposals: state.proposal.proposalShowedId.map(
     proposal => state.proposal.proposalsById[proposal],
   ),
-  districts: state.default.districts,
   queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,
   randomOrder: state.proposal.order === 'random',
