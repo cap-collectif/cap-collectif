@@ -2,13 +2,7 @@ Mutation:
     type: object
     config:
         fields:
-          changeDistrict:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: ChangeDistrictInput
-                    payloadType: ChangeDistrictPayload
-                    mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
+        # Proposal
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -72,3 +66,19 @@ Mutation:
                   inputType: DeleteProposalInput
                   payloadType: DeleteProposalPayload
                   mutateAndGetPayload: "@=mutation('deleteProposal', [value['proposalId']])"
+
+          # Proposal Form
+          createProposalForm:
+              access: "@=hasRole('ROLE_ADMIN')"
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: CreateProposalFormInput
+                  payloadType: CreateProposalFormPayload
+                  mutateAndGetPayload: "@=mutation('createProposalFrom', [value])"
+          changeDistrict:
+              access: "@=hasRole('ROLE_ADMIN')"
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: ChangeDistrictInput
+                  payloadType: ChangeDistrictPayload
+                  mutateAndGetPayload: "@=mutation('changeDistrict', [value])"

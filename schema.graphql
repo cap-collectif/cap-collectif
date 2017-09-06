@@ -258,6 +258,17 @@ interface ContributionWithAuthor {
   author: User!
 }
 
+input CreateProposalFormInput {
+  # The proposal form title
+  title: String!
+  clientMutationId: String
+}
+
+type CreateProposalFormPayload {
+  proposalFrom: ProposalForm!
+  clientMutationId: String
+}
+
 scalar DateTime
 
 input DeleteProposalInput {
@@ -327,6 +338,7 @@ type Mutation {
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
+  createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
 }
 
 # A contribution
@@ -629,6 +641,11 @@ type ProposalCategory {
 
 # A budget form
 type ProposalForm {
+  id: Int!
+  introduction: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  title: String
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!
@@ -644,6 +661,12 @@ type ProposalForm {
   titleHelpText: String
   descriptionHelpText: String
   customFields: [Question!]!
+  latMap: Float
+  lngMap: Float
+  zoomMap: Int
+
+  # The HTTP url for this proposal form.
+  url: URI!
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -708,6 +731,7 @@ type Query {
   ): [Opinion]
   section(id: ID!): Section
   proposal(id: ID!): Proposal!
+  proposalForm(id: Int!): ProposalForm!
 }
 
 # A question

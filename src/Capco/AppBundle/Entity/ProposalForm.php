@@ -71,6 +71,11 @@ class ProposalForm
     private $titleHelpText;
 
     /**
+     * @ORM\Column(name="summary_help_text", type="string", length=255, nullable=true)
+     */
+    private $summaryHelpText;
+
+    /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
     private $descriptionHelpText;
@@ -211,6 +216,21 @@ class ProposalForm
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSummaryHelpText()
+    {
+        return $this->summaryHelpText;
+    }
+
+    public function setSummaryHelpText(string $summaryHelpText = null): self
+    {
+        $this->summaryHelpText = $summaryHelpText;
+
+        return $this;
     }
 
     /**
