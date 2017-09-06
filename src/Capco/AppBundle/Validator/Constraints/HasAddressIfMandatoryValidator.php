@@ -19,7 +19,16 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         $address = $object->getAddress();
         if (!$address) {
             $this->context
-                ->buildViolation($constraint->message)
+                ->buildViolation($constraint->noAddressMessage)
+                ->addViolation();
+
+            return false;
+        }
+
+        $decodedAddress = json_decode($address, true);
+        if (!$decodedAddress) {
+            $this->context
+                ->buildViolation($constraint->noValidJsonAddressMessage)
                 ->addViolation();
 
             return false;
@@ -28,16 +37,16 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         if (!$form->isProposalInAZoneRequired()) {
             return true;
         }
+        $latitude = $decodedAddress[0]['geometry']['location']['lat'];
+        $longitude = $decodedAddress[0]['geometry']['location']['lng'];
+        foreach ($form->getDistricts() as $district) {
+            if ($district->getGeojson() && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson())) {
+                return true;
+            }
+        }
 
-        // foreach ($districts as $district) {
-          if (GeometryHelper::isIncluded(0, 0, '')) {
-              return true;
-          }
-        // }
-
-        // "Adresse est hors périmètre. Veuillez saisir une adresse se situant dans le périmètre du projet"
         $this->context
-              ->buildViolation($constraint->message)
+              ->buildViolation($constraint->addressNotInZoneMessage)
               ->addViolation();
 
         return false;

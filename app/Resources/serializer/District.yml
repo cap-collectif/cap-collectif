@@ -12,8 +12,8 @@ Capco\AppBundle\Entity\District:
         geojson:
             expose: true
             type: string
-            groups: [Districts, Proposals]
+            groups: [DistrictDetails]
         displayedOnMap:
             expose: true
             type: boolean
-            groups: [Districts, Proposals]
+            groups: [DistrictDetails]
