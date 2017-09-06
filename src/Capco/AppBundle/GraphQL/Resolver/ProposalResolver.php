@@ -90,7 +90,7 @@ class ProposalResolver implements ContainerAwareInterface
     public function resolve(int $proposalId, User $user = null): Proposal
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        if ($user->hasRole('ROLE_ADMIN')) {
+        if ($user && $user->hasRole('ROLE_ADMIN')) {
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
