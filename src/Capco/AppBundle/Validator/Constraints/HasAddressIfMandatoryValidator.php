@@ -25,6 +25,7 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
             return false;
         }
 
+        // TODO Security: here we should do something validate the structure, recheck with google map api...
         $decodedAddress = json_decode($address, true);
         if (!$decodedAddress) {
             $this->context
@@ -40,7 +41,8 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         $latitude = $decodedAddress[0]['geometry']['location']['lat'];
         $longitude = $decodedAddress[0]['geometry']['location']['lng'];
         foreach ($form->getDistricts() as $district) {
-            if ($district->getGeojson() && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson())) {
+            $geojson = $district->getGeojson();
+            if ($geojson && GeometryHelper::isIncluded($longitude, $latitude, $geojson)) {
                 return true;
             }
         }
