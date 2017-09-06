@@ -261,10 +261,10 @@ class StepController extends Controller
             if ($step->isPrivate() && $this->getUser()) {
                 $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
                 $searchResults = $this->get('capco.search.resolver')
-                    ->searchProposals(1, 51, null, null, $filters);
+                    ->searchProposals(1, 3, null, null, $filters);
             } else {
                 $searchResults = $this->get('capco.search.resolver')
-                    ->searchProposals(1, 51, null, null, $filters);
+                    ->searchProposals(1, 3, null, null, $filters);
             }
         }
 
@@ -280,7 +280,6 @@ class StepController extends Controller
             'stepId' => $step->getId(),
             'count' => $searchResults['count'],
             'countFusions' => $countFusions,
-            'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [
