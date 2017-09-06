@@ -218,8 +218,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
     onSubmit={[Function]}
   >
     <p>
-      Adresse email de l'auteur en attente de confirmation:
-       
+      Adresse email de l'auteur en attente de confirmation: 
       soon@yopmail.com
     </p>
     <Field
