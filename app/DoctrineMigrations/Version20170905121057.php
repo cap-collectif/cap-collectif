@@ -4,9 +4,18 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\ORM\Id\UuidGenerator;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20170905121057 extends AbstractMigration
+class Version20170905121057 extends AbstractMigration implements ContainerAwareInterface
 {
+  public function setContainer(ContainerInterface $container = null)
+  {
+    $this->em = $container->get('doctrine')->getManager();
+    $this->generator = new UuidGenerator();
+  }
+
     public function up(Schema $schema)
     {
         $this->addSql('ALTER TABLE district ADD form_id INT');
@@ -35,21 +44,20 @@ class Version20170905121057 extends AbstractMigration
         }
 
         // If there is more than one proposal forms, we link districts to each of them
-        // unset($proposalsForms[0]);
+        unset($proposalForms[0]);
 
-        $otherForms =
-        foreach ($proposalsForms as $form) {
+        foreach ($proposalForms as $proposalForm) {
           foreach ($districts as $district) {
-            $district['form_id'] = $form['id'];
+            $district['form_id'] = $proposalForm['id'];
             $previousDistrictId = $district['id'];
-            unset($district['id']);
+            $newDistrictId = $this->generator->generate($this->em, null);
+            $district['id'] = $newDistrictId;
             $this->connection->insert('district', $district);
-            $newDistrictId = $this->connection->getLastInsertedId();
             // We must update district for each proposal
             $proposals = $this->connection->fetchAll('SELECT * from proposal');
             foreach ($proposals as $proposal) {
-              if ($proposal['form'] === $form['id'] && $proposal['district'] === $previousDistrictId) {
-                $this->connection->update('proposal', ['district' => $newDistrictId], ['id' => $proposal['id']]);
+              if ($proposal['proposal_form_id'] === $proposalForm['id'] && $proposal['district_id'] === $previousDistrictId) {
+                $this->connection->update('proposal', ['district_id' => $newDistrictId], ['id' => $proposal['id']]);
               }
             }
           }
