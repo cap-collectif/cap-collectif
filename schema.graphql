@@ -562,7 +562,7 @@ type Proposal {
   author: User!
 
   # The delete date.
-  deletedAt: String
+  deletedAt: DateTime
 
   # The publication status.
   publicationStatus: PublicationStatus!

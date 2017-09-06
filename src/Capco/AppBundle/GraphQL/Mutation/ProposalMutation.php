@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -173,9 +174,13 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changePublicationStatus(Argument $values): array
+    public function changePublicationStatus(Argument $values, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
+        if ($user && $user->isSuperAdmin()) {
+            // If user is an admin, we allow to retrieve deleted proposal
+            $em->getFilters()->disable('softdeleted');
+        }
         $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));

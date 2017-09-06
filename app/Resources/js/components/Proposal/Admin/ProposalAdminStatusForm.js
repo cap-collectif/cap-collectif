@@ -80,58 +80,48 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
           </a>
         </div>
         <form onSubmit={handleSubmit}>
-          {proposal.author.expiresAt &&
-            <p>
-              Adresse email de l'auteur en attente de confirmation:{' '}
-              {proposal.author.email}
-            </p>}
+          {proposal.author.expiresAt && (
+            <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>
+          )}
           <Field
             type="radio-buttons"
             id="publicationStatus"
             name="publicationStatus"
             component={component}
             disabled={
-              !isSuperAdmin &&
-              (publicationStatus === 'DELETED' ||
-                publicationStatus === 'EXPIRED')
+              !isSuperAdmin && (publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED')
             }>
             <ToggleButton
-              onClick={() =>
-                dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
+              onClick={() => dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
               value="PUBLISHED">
               Publié
             </ToggleButton>
             <ToggleButton
-              onClick={() =>
-                dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
+              onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
               value="TRASHED">
               Corbeille
             </ToggleButton>
             <ToggleButton
-              onClick={() =>
-                dispatch(
-                  change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'),
-                )}
+              onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))}
               value="TRASHED_NOT_VISIBLE">
               Corbeille (contenu masqué)
             </ToggleButton>
-            {publicationStatus === 'EXPIRED' &&
+            {publicationStatus === 'EXPIRED' && (
               <ToggleButton
-                onClick={() =>
-                  dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
+                onClick={() => dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
                 value="EXPIRED">
                 Expiré
-              </ToggleButton>}
-            {publicationStatus === 'DELETED' &&
+              </ToggleButton>
+            )}
+            {publicationStatus === 'DELETED' && (
               <ToggleButton
-                onClick={() =>
-                  dispatch(change(formName, 'publicationStatus', 'DELETED'))}
+                onClick={() => dispatch(change(formName, 'publicationStatus', 'DELETED'))}
                 value="DELETED">
                 Supprimé
-              </ToggleButton>}
+              </ToggleButton>
+            )}
           </Field>
-          {(publicationStatus === 'TRASHED' ||
-            publicationStatus === 'TRASHED_NOT_VISIBLE') &&
+          {(publicationStatus === 'TRASHED' || publicationStatus === 'TRASHED_NOT_VISIBLE') && (
             <div>
               <Field
                 id="trashedReason"
@@ -140,24 +130,19 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
                 type="textarea"
                 component={component}
               />
-            </div>}
-          {proposal.deletedAt &&
-            <p>
-              Supprimé le {moment(proposal.deletedAt).format('ll')}
-            </p>}
+            </div>
+          )}
+          {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
           <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button
-              disabled={pristine || invalid || submitting}
-              type="submit"
-              bsStyle="primary">
-              <FormattedMessage
-                id={submitting ? 'global.loading' : 'global.save'}
-              />
+            <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
             {isSuperAdmin &&
+            !proposal.deletedAt && (
               <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
                 <FormattedMessage id="global.delete" />
-              </Button>}
+              </Button>
+            )}
           </ButtonToolbar>
         </form>
       </div>
@@ -170,9 +155,7 @@ const form = reduxForm({
 })(ProposalAdminStatusForm);
 
 const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
-  isSuperAdmin: !!(
-    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
-  ),
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
