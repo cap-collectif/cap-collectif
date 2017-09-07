@@ -7,7 +7,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import { PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
+import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
 
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
@@ -95,6 +95,7 @@ type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type RequestLoadProposalsAction = {
   type: 'proposal/FETCH_REQUESTED',
   step: ?number,
+  regenerateOrder: ?boolean,
 };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
@@ -297,9 +298,13 @@ type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
-export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({
+export const loadProposals = (
+  step: ?number,
+  regenerateOrder: ?boolean,
+): RequestLoadProposalsAction => ({
   type: 'proposal/FETCH_REQUESTED',
   step,
+  regenerateOrder,
 });
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
   dispatch(deleteRequest());
@@ -524,6 +529,8 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
+  const { regenerateOrder } = action;
+
   const globalState: GlobalState = yield select();
   if (globalState.project.currentProjectById) {
     step =
@@ -534,29 +541,54 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   }
   const state = globalState.proposal;
   let url = '';
-  switch (step.type) {
-    case 'collect':
-      url = `/collect_steps/${step.id}/proposals/search`;
-      break;
-    case 'selection':
-      url = `/selection_steps/${step.id}/proposals/search`;
-      break;
-    default:
-      console.log('Unknown step type'); // eslint-disable-line no-console
-      return false;
-  }
-  // test si localstorage exist + order random qui est appelé
-  // Si oui changer url + passer les ids dans l'url
-  // Durée de vie par défaut a 1 jour
-  url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
-  const result = yield call(Fetcher.postToJson, url, {
-    terms: state.terms,
-    filters: state.filters,
-  });
+  let body = {};
 
-  // Todo a ce niveau là stocker dans le local storage
-  // Si order == random : enregistrer dans local storage (enregistrer que les ids)
-  //
+  // If order is random & proposals are registred in Local Storage -> get last results
+  if (
+    PROPOSAL_ORDER_RANDOM === state.order &&
+    LocalStorageService.get('proposals') !== null &&
+    !regenerateOrder
+  ) {
+    switch (step.type) {
+      case 'collect':
+        url = `/collect_steps/${step.id}/proposals/search-in`;
+        break;
+      case 'selection':
+        url = `/selection_steps/${step.id}/proposals/search`;
+        break;
+      default:
+        console.log('Unknown step type'); // eslint-disable-line no-console
+        return false;
+    }
+
+    url += `?order=${state.order}`;
+    body = { ids: LocalStorageService.get('proposals') };
+  } else {
+    switch (step.type) {
+      case 'collect':
+        url = `/collect_steps/${step.id}/proposals/search`;
+        break;
+      case 'selection':
+        url = `/selection_steps/${step.id}/proposals/search`;
+        break;
+      default:
+        console.log('Unknown step type'); // eslint-disable-line no-console
+        return false;
+    }
+
+    url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
+    body = { terms: state.terms, filters: state.filters };
+  }
+
+  const result = yield call(Fetcher.postToJson, url, body);
+
+  // Save results to localStorage if selected order is random
+  if (PROPOSAL_ORDER_RANDOM === result.order) {
+    const proposals = result.proposals.map(proposal => proposal.id);
+
+    LocalStorageService.set('proposals', proposals);
+  }
+
   yield put({
     type: 'proposal/FETCH_SUCCEEDED',
     proposals: result.proposals,
