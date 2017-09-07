@@ -1,8 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import IdeaActions from '../../../actions/IdeaActions';
 import IdeaVoteForm from './IdeaVoteForm';
+import IdeaActions from '../../../actions/IdeaActions';
 import { deleteVoteSucceeded } from '../../../redux/modules/idea';
+
+const onSubmit = (values, dispatch, props) => {
+  const { idea } = props;
+  const data = values;
+  return IdeaActions.deleteVote(idea.id, data).then(deleteVote => {
+    dispatch(deleteVoteSucceeded(idea.id, deleteVote));
+  });
+};
 
 export const IdeaDeleteVoteForm = React.createClass({
   displayName: 'IdeaDeleteVoteForm',
@@ -10,44 +18,12 @@ export const IdeaDeleteVoteForm = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onFailure: PropTypes.func.isRequired,
     anonymous: PropTypes.bool.isRequired,
-  },
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      idea,
-      isSubmitting,
-      onFailure,
-      onSubmitSuccess,
-      dispatch,
-    } = this.props;
-    const ideaVoteForm = this.ideaVoteForm;
-    if (!isSubmitting && nextProps.isSubmitting) {
-      if (ideaVoteForm.isValid()) {
-        IdeaActions.deleteVote(idea.id)
-          .then(vote => {
-            dispatch(deleteVoteSucceeded(idea.id, vote));
-            onSubmitSuccess();
-          })
-          .catch(onFailure);
-        return;
-      }
-      onFailure();
-    }
   },
 
   render() {
     const { anonymous, idea } = this.props;
-    return (
-      <IdeaVoteForm
-        ref={c => (this.ideaVoteForm = c)}
-        idea={idea}
-        anonymous={anonymous}
-      />
-    );
+    return <IdeaVoteForm onSubmit={onSubmit} idea={idea} anonymous={anonymous} />;
   },
 });
 

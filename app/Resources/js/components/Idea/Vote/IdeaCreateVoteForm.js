@@ -1,8 +1,22 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import IdeaActions from '../../../actions/IdeaActions';
+import { SubmissionError } from 'redux-form';
 import IdeaVoteForm from './IdeaVoteForm';
+import IdeaActions from '../../../actions/IdeaActions';
 import { voteSuccess } from '../../../redux/modules/idea';
+
+const onSubmit = (values, dispatch, props) => {
+  const { idea } = props;
+  const data = values;
+  return IdeaActions.vote(idea.id, data)
+    .then(vote => {
+      dispatch(voteSuccess(idea.id, vote));
+    })
+    .catch(error => {
+      console.log(error.response.message);
+      throw new SubmissionError({ email: error.response.message });
+    });
+};
 
 export const IdeaCreateVoteForm = React.createClass({
   displayName: 'IdeaCreateVoteForm',
@@ -10,73 +24,12 @@ export const IdeaCreateVoteForm = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    onSubmitSuccess: PropTypes.func.isRequired,
-    onFailure: PropTypes.func.isRequired,
     anonymous: PropTypes.bool.isRequired,
-  },
-
-  getInitialState() {
-    return {
-      serverErrors: [],
-    };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    const {
-      idea,
-      anonymous,
-      isSubmitting,
-      onFailure,
-      onSubmitSuccess,
-      dispatch,
-    } = this.props;
-    const ideaVoteForm = this.ideaVoteForm;
-    if (!isSubmitting && nextProps.isSubmitting) {
-      if (ideaVoteForm.isValid()) {
-        const data = ideaVoteForm.state.form;
-        if (!anonymous) {
-          delete data.username;
-          delete data.email;
-        }
-        if (!idea.commentable) {
-          delete data.comment;
-        }
-        IdeaActions.vote(idea.id, data)
-          .then(vote => {
-            dispatch(voteSuccess(idea.id, vote));
-            onSubmitSuccess();
-          })
-          .catch(error => {
-            if (error.response) {
-              this.setServerErrors(error.response);
-            }
-            onFailure();
-          });
-        return;
-      }
-
-      onFailure();
-    }
-  },
-
-  setServerErrors(error) {
-    const errors = [error.message];
-    this.setState({
-      serverErrors: errors,
-    });
   },
 
   render() {
     const { anonymous, idea } = this.props;
-    return (
-      <IdeaVoteForm
-        ref={c => (this.ideaVoteForm = c)}
-        idea={idea}
-        serverErrors={this.state.serverErrors}
-        anonymous={anonymous}
-      />
-    );
+    return <IdeaVoteForm onSubmit={onSubmit} idea={idea} anonymous={anonymous} />;
   },
 });
 
