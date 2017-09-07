@@ -28,9 +28,6 @@
       "prettier --write",
       "git add"
     ],
-    "features/**/*.feature": [
-      "gherkin-lint"
-    ],
     "*.yml": [
       "yamllint"
     ],
