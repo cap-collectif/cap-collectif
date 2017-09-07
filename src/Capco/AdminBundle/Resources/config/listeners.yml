@@ -10,7 +10,7 @@ services:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
           - { name: overblog_graphql.resolver, alias: "proposalform_questions", method: "resolveQuestions" }
-
+          - { name: overblog_graphql.resolver, alias: "proposalform_districts", method: "resolveDistricts" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver

@@ -416,9 +416,6 @@ class ProposalForm
     public function getDistricts()
     {
         return $this->districts;
-        // return usort($this->districts->toArray(), function ($a, $b) {
-        //     return $a->getName() <=> $b->getName();
-        // });
     }
 
     public function addDistrict(District $district): self

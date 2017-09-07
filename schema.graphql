@@ -279,6 +279,12 @@ type District {
   displayedOnMap: Boolean!
 }
 
+# Ordering options for districts.
+enum DistrictOrderField {
+  ALPHABETICAL
+  CREATED_AT
+}
+
 # A contribution with an author
 interface EditableContribution {
   # Identifies the date and time when the object was last updated.
@@ -622,7 +628,7 @@ type ProposalForm {
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
-  districts: [District!]!
+  districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
   districtHelpText: String
   usingCategories: Boolean!
