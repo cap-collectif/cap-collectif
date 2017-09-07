@@ -15,6 +15,11 @@ ProposalForm:
             usingDistrict:
                 type: "Boolean!"
             districts:
+                args:
+                  order:
+                    type: "DistrictOrderField"
+                    defaultValue: "ALPHABETICAL"
+                resolve: "@=resolver('proposalform_districts', [value, args['order']])"
                 type: "[District!]!"
             districtMandatory:
                 type: "Boolean!"

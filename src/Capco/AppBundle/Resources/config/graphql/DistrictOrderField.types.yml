@@ -1,0 +1,9 @@
+DistrictOrderField:
+    type: enum
+    config:
+        description: "Ordering options for districts."
+        values:
+            ALPHABETICAL:
+                value: "ALPHABETICAL"
+            CREATED_AT:
+                value: "CREATED_AT"
