@@ -20,7 +20,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CollectStepsController extends FOSRestController
 {
@@ -66,48 +65,6 @@ class CollectStepsController extends FOSRestController
             $terms,
             $providedFilters
         );
-
-        return $results;
-    }
-
-    /**
-     * @Post("/collect_steps/{collect_step_id}/proposals/search-in")
-     * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
-     * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
-     */
-    public function getSelectProposalsByCollectStepAction(
-        Request $request,
-        CollectStep $collectStep,
-        ParamFetcherInterface $paramFetcher
-    ) {
-        $selectedIds = $request->request->get('ids');
-
-        if (null === $selectedIds) {
-            throw new HttpException(400, 'ids are not setted');
-        }
-
-        $proposalForm = $collectStep->getProposalForm();
-
-        $order = $paramFetcher->get('order');
-
-        if ($proposalForm->getStep()->isPrivate()) {
-            $user = $this->getUser();
-            if (!$user) {
-                return ['proposals' => [], 'count' => 0, 'order' => $order];
-            }
-            if (!$user->isAdmin()) {
-                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
-            }
-        }
-
-        // Filters
-        $providedFilters['proposalForm'] = $proposalForm->getId();
-        $providedFilters['step'] = $collectStep->getId();
-
-        $results = $this->get('capco.search.resolver')->searchProposalsIn($selectedIds);
-
-        $results['order'] = $order;
 
         return $results;
     }

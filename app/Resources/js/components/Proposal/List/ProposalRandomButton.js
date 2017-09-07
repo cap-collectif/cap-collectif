@@ -18,13 +18,11 @@ const ProposalRandomButton = React.createClass({
           bsStyle="primary"
           disabled={isLoading}
           onClick={() => {
-            dispatch(loadProposals(null, true));
+            dispatch(loadProposals());
           }}>
-          {isLoading ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="proposal.random_search" />
-          )}
+          {isLoading
+            ? <FormattedMessage id="global.loading" />
+            : <FormattedMessage id="proposal.random_search" />}
         </Button>
       </div>
     );

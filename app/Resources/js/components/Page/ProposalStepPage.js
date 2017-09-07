@@ -2,7 +2,10 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
+import {
+  VOTE_TYPE_DISABLED,
+  PROPOSAL_PAGINATION,
+} from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
@@ -52,25 +55,21 @@ export const ProposalStepPage = React.createClass({
       randomOrder,
       selectedViewByStep,
     } = this.props;
-
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !randomOrder;
-    const showRandomButton = randomOrder;
-
+    const showRandomButton = nbPages > 1 && randomOrder;
     return (
       <div>
         <StepPageHeader step={step} />
-        {step.type === 'collect' ? (
-          <CollectStepPageHeader
-            total={count}
-            countFusions={countFusions}
-            form={form}
-            categories={categories}
-          />
-        ) : (
-          <SelectionStepPageHeader total={count} />
-        )}
+        {step.type === 'collect'
+          ? <CollectStepPageHeader
+              total={count}
+              countFusions={countFusions}
+              form={form}
+              categories={categories}
+            />
+          : <SelectionStepPageHeader total={count} />}
         <ProposalListFilters
           statuses={statuses}
           categories={categories}
@@ -88,19 +87,23 @@ export const ProposalStepPage = React.createClass({
             }}
             visible={selectedViewByStep === 'map' && !step.isPrivate}
           />
-          {selectedViewByStep === 'mosaic' && (
+          {selectedViewByStep === 'mosaic' &&
             <div>
-              {proposals.length === 0 && !step.isPrivate ? (
-                <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
-                  {<FormattedMessage id="proposal.empty" />}
-                </p>
-              ) : (
-                <VisibilityBox enabled={step.isPrivate}>
-                  <ProposalList proposals={proposals} step={step} showThemes={form.usingThemes} />
-                </VisibilityBox>
-              )}
+              {proposals.length === 0 && !step.isPrivate
+                ? <p
+                    className={{ 'p--centered': true }}
+                    style={{ marginBottom: '40px' }}>
+                    {<FormattedMessage id="proposal.empty" />}
+                  </p>
+                : <VisibilityBox enabled={step.isPrivate}>
+                    <ProposalList
+                      proposals={proposals}
+                      step={step}
+                      showThemes={form.usingThemes}
+                    />
+                  </VisibilityBox>}
               {showPagination &&
-              selectedViewByStep === 'mosaic' && (
+                selectedViewByStep === 'mosaic' &&
                 <Pagination
                   current={currentPage}
                   nbPages={nbPages}
@@ -108,11 +111,11 @@ export const ProposalStepPage = React.createClass({
                     dispatch(changePage(newPage));
                     dispatch(loadProposals());
                   }}
-                />
-              )}
-              {showRandomButton && selectedViewByStep === 'mosaic' && <ProposalRandomButton />}
-            </div>
-          )}
+                />}
+              {showRandomButton &&
+                selectedViewByStep === 'mosaic' &&
+                <ProposalRandomButton />}
+            </div>}
         </Loader>
       </div>
     );
@@ -121,7 +124,10 @@ export const ProposalStepPage = React.createClass({
 
 const mapStateToProps = (state, props) => ({
   stepId: undefined,
-  step: state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
+  step:
+    state.project.projectsById[state.project.currentProjectById].stepsById[
+      props.stepId
+    ],
   proposals: state.proposal.proposalShowedId.map(
     proposal => state.proposal.proposalsById[proposal],
   ),
