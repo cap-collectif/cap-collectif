@@ -5,7 +5,6 @@ import { loadProposals } from '../../../redux/modules/proposal';
 
 const ProposalRandom = React.createClass({
   propTypes: {
-    isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   },
 

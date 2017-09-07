@@ -547,7 +547,9 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   if (
     PROPOSAL_ORDER_RANDOM === state.order &&
     LocalStorageService.get('proposal.last') !== null &&
-    !regenerateRandomOrder
+    !regenerateRandomOrder &&
+    state.terms === null &&
+    Object.keys(state.filters).length === 0
   ) {
     switch (step.type) {
       case 'collect':
@@ -587,7 +589,11 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   const result = yield call(Fetcher.postToJson, url, body);
 
   // Save results to localStorage if selected order is random
-  if (PROPOSAL_ORDER_RANDOM === result.order) {
+  if (
+    PROPOSAL_ORDER_RANDOM === result.order &&
+    state.terms === null &&
+    Object.keys(state.filters).length === 0
+  ) {
     const lastProposals = {};
     lastProposals[step.id] = result.proposals.map(proposal => proposal.id);
     LocalStorageService.set('proposal.last', lastProposals);

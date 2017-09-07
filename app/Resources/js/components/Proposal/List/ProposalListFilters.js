@@ -25,7 +25,6 @@ export const ProposalListFilters = React.createClass({
     orderByVotes: PropTypes.bool,
     features: PropTypes.object.isRequired,
     showThemes: PropTypes.bool.isRequired,
-    order: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     showDistrictFilter: PropTypes.bool.isRequired,
