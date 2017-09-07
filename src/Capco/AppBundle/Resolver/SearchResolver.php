@@ -224,7 +224,11 @@ class SearchResolver
         ];
     }
 
-    public function searchProposalsIn(array $selectedIds)
+    /**
+     * @param array $selectedIds
+     * @return array
+     */
+    public function searchProposalsIn(array $selectedIds): array
     {
         $type = 'proposal';
 
