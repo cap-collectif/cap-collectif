@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasAddressIfMandatoryValidator extends ConstraintValidator
 {
-    public function validate($object, Constraint $constraint): bool
+    public function validate($object, Constraint $constraint)
     {
         $form = $object->getProposalForm();
 
@@ -22,7 +22,7 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
                 ->buildViolation($constraint->noAddressMessage)
                 ->addViolation();
 
-            return false;
+            return;
         }
 
         // TODO Security: here we should do something validate the structure, recheck with google map api...
@@ -32,25 +32,23 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
                 ->buildViolation($constraint->noValidJsonAddressMessage)
                 ->addViolation();
 
-            return false;
+            return;
         }
 
         if (!$form->isProposalInAZoneRequired()) {
-            return true;
+            return;
         }
         $latitude = $decodedAddress[0]['geometry']['location']['lat'];
         $longitude = $decodedAddress[0]['geometry']['location']['lng'];
         foreach ($form->getDistricts() as $district) {
             $geojson = $district->getGeojson();
             if ($geojson && GeometryHelper::isIncluded($longitude, $latitude, $geojson)) {
-                return true;
+                return;
             }
         }
 
         $this->context
               ->buildViolation($constraint->addressNotInZoneMessage)
               ->addViolation();
-
-        return false;
     }
 }
