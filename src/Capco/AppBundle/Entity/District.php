@@ -34,10 +34,10 @@ class District
      */
     private $geojson;
 
-     /**
-      * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
-      */
-     private $displayedOnMap = true;
+    /**
+     * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
+     */
+    private $displayedOnMap = true;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})

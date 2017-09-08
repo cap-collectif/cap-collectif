@@ -34,7 +34,7 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
           return;
         }
 
-        // We just need to se the corresponding district for the first form
+        // We need to set the corresponding district for the first form
         $formId = $proposalForms[0]['id'];
         foreach ($districts as $district) {
           $this->connection->update('district', ['form_id' => $formId], ['id' => $district['id']]);
