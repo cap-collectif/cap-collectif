@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -6,7 +7,14 @@ import renderComponent from '../../Form/Field';
 import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
 
-const validate = ({ username, email }: Object, props) => {
+type Props = {
+  idea: Object,
+  anonymous: boolean,
+  hasCommentValue: boolean,
+  isPrivate: boolean,
+};
+
+const validate = ({ username, email }: Object, props: Props) => {
   const errors = {};
   const { anonymous } = props;
   if (anonymous) {
@@ -19,13 +27,6 @@ const validate = ({ username, email }: Object, props) => {
   }
 
   return errors;
-};
-
-type Props = {
-  idea: Array<string>,
-  anonymous: boolean,
-  hasCommentValue: boolean,
-  isPrivate: boolean,
 };
 
 export const formName = 'IdeaVoteForm';
@@ -76,8 +77,7 @@ class IdeaVoteForm extends React.Component<Props> {
           />
         )}
 
-        {(hasCommentValue && hasCommentValue.length > 0) ||
-        (!anonymous && this.userHasVote()) ? null : (
+        {hasCommentValue || (!anonymous && this.userHasVote()) ? null : (
           <Field
             id="idea-vote-private"
             type="checkbox"

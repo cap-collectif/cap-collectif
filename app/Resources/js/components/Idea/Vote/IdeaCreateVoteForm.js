@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
@@ -11,7 +12,14 @@ import {
 } from '../../../constants/CommentConstants';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
+type Props = {
+  dispatch: Function,
+  idea: Object,
+  anonymous: boolean,
+};
+
 const onSubmit = (values, dispatch, props) => {
+  // eslint-disable-next-line react/prop-types
   const { idea } = props;
   const data = values;
 
@@ -53,19 +61,14 @@ const onSubmit = (values, dispatch, props) => {
     });
 };
 
-export const IdeaCreateVoteForm = React.createClass({
-  displayName: 'IdeaCreateVoteForm',
-
-  propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    idea: PropTypes.object.isRequired,
-    anonymous: PropTypes.bool.isRequired,
-  },
+export class IdeaCreateVoteForm extends React.Component<Props> {
+  displayName: 'IdeaCreateVoteForm';
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { anonymous, idea } = this.props;
     return <IdeaVoteForm onSubmit={onSubmit} idea={idea} anonymous={anonymous} />;
-  },
-});
+  }
+}
 
 export default connect()(IdeaCreateVoteForm);

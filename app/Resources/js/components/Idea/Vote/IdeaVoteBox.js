@@ -1,35 +1,33 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import IdeaCreateVoteForm from './IdeaCreateVoteForm';
 import IdeaDeleteVoteForm from './IdeaDeleteVoteForm';
+import type { Dispatch } from '../../../types';
 
-export const IdeaVoteBox = React.createClass({
-  displayName: 'IdeaVoteBox',
+type Props = {
+  user: Object,
+  idea: Object,
+  className?: string,
+  formWrapperClassName?: string,
+  submitting: boolean,
+  dispatch: Dispatch,
+};
 
-  propTypes: {
-    idea: PropTypes.object.isRequired,
-    className: PropTypes.string,
-    formWrapperClassName: PropTypes.string,
-    user: PropTypes.object,
-    submitting: PropTypes.bool.isRequired,
-  },
-
-  getDefaultProps() {
-    return {
-      className: '',
-      formWrapperClassName: '',
-    };
-  },
+export class IdeaVoteBox extends React.Component<Props> {
+  displayName: 'IdeaVoteBox';
 
   userHasVote() {
+    // eslint-disable-next-line react/prop-types
     const { idea, user } = this.props;
     return user && idea.userHasVote;
-  },
+  }
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { idea, className, formWrapperClassName, user, submitting, dispatch } = this.props;
     return (
       <div className={className}>
@@ -56,8 +54,8 @@ export const IdeaVoteBox = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = state => {
   return {
