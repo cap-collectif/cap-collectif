@@ -1,6 +1,0 @@
-{
-  "no-unnamed-features": "on",
-  "indentation": "on",
-  "no-multiple-empty-lines": "on",
-  "no-restricted-tags": ["on", {"tags": ["@dev"]}]
-}
