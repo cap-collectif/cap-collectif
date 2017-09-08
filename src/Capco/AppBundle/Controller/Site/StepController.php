@@ -280,6 +280,7 @@ class StepController extends Controller
             'stepId' => $step->getId(),
             'count' => $searchResults['count'],
             'countFusions' => $countFusions,
+            'proposals' => $searchResults['proposals'],
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [
@@ -370,7 +371,7 @@ class StepController extends Controller
             ->get('capco.search.resolver')
             ->searchProposals(
                 1,
-                51,
+                50,
                 $step->getDefaultSort(),
                 null,
                 ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0]

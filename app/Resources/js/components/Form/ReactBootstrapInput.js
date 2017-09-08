@@ -69,6 +69,7 @@ type Props = {
   validationState: ?string,
   label: string | any,
   type: ?string,
+  errors: Array<string>,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -97,21 +98,11 @@ class ReactBootstrapInput extends React.Component<Props> {
   refFormControl: ?Element;
 
   renderAddon(addon: ?string) {
-    return (
-      addon &&
-      <InputGroup.Addon>
-        {addon}
-      </InputGroup.Addon>
-    );
+    return addon && <InputGroup.Addon>{addon}</InputGroup.Addon>;
   }
 
   renderButton(button: ?string) {
-    return (
-      button &&
-      <InputGroup.Button>
-        {button}
-      </InputGroup.Button>
-    );
+    return button && <InputGroup.Button>{button}</InputGroup.Button>;
   }
 
   renderInputGroup({
@@ -133,10 +124,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     intl,
     ...props
   }: Object) {
-    if (
-      typeof props.placeholder === 'string' ||
-      props.placeholder instanceof String
-    ) {
+    if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
       props.placeholder = intl.formatMessage({ id: props.placeholder });
     }
 
@@ -239,11 +227,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       return (
         <OverlayTrigger
           placement="right"
-          overlay={
-            <Popover id={popover.id}>
-              {popover.message}
-            </Popover>
-          }>
+          overlay={<Popover id={popover.id}>{popover.message}</Popover>}>
           {formControl}
         </OverlayTrigger>
       );
@@ -257,13 +241,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
-    if (
-      !addonBefore &&
-      !addonAfter &&
-      !buttonBefore &&
-      !buttonAfter &&
-      !wrapperClassName
-    ) {
+    if (!addonBefore && !addonAfter && !buttonBefore && !buttonAfter && !wrapperClassName) {
       return formControl;
     }
 
@@ -294,19 +272,12 @@ class ReactBootstrapInput extends React.Component<Props> {
         bsSize={bsSize}
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
-        {label &&
-          <ControlLabel bsClass={cx('control-label', labelClassName)}>
-            {label}
-          </ControlLabel>}
-        {props.help &&
-          <HelpBlock>
-            {props.help}
-          </HelpBlock>}
+        {label && (
+          <ControlLabel bsClass={cx('control-label', labelClassName)}>{label}</ControlLabel>
+        )}
+        {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {this.renderInputGroup(props)}
-        {props.errors &&
-          <span className="error-block">
-            {props.errors}
-          </span>}
+        {props.errors && <span className="error-block">{props.errors}</span>}
       </FormGroup>
     );
   }

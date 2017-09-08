@@ -50,13 +50,6 @@ capco_api_comments:
   defaults:
     _format: json
 
-capco_api_districts:
-  resource: "@CapcoAppBundle/Controller/Api/DistrictsController.php"
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
 capco_api_users:
   resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
   type: annotation

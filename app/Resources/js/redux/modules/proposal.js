@@ -7,9 +7,9 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
-
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
+
+const PROPOSAL_PAGINATION = 51;
 
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
@@ -95,7 +95,6 @@ type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type RequestLoadProposalsAction = {
   type: 'proposal/FETCH_REQUESTED',
   step: ?number,
-  regenerateRandomOrder: ?boolean,
 };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
@@ -298,13 +297,9 @@ type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
-export const loadProposals = (
-  step: ?number,
-  regenerateRandomOrder: ?boolean,
-): RequestLoadProposalsAction => ({
+export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({
   type: 'proposal/FETCH_REQUESTED',
   step,
-  regenerateRandomOrder,
 });
 export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
   dispatch(deleteRequest());
@@ -529,8 +524,6 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
-  const { regenerateRandomOrder } = action;
-
   const globalState: GlobalState = yield select();
   if (globalState.project.currentProjectById) {
     step =
@@ -541,64 +534,22 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   }
   const state = globalState.proposal;
   let url = '';
-  let body = {};
-  const lastProposals = LocalStorageService.get('proposal.randomResultsByStep');
-  const hasProposalsInMemory = lastProposals !== null && undefined !== lastProposals[step.id];
-
-  // If order is random & proposals are registred in Local Storage -> get last results
-  if (
-    PROPOSAL_ORDER_RANDOM === state.order &&
-    !regenerateRandomOrder &&
-    state.terms === null &&
-    Object.keys(state.filters).length === 0 &&
-    hasProposalsInMemory
-  ) {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search-in`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search-in`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-
-    const registredProposals = LocalStorageService.get('proposal.randomResultsByStep');
-    const stepId = step.id;
-
-    body = { ids: registredProposals[stepId] };
-  } else {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-
-    url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
-    body = { terms: state.terms, filters: state.filters };
+  switch (step.type) {
+    case 'collect':
+      url = `/collect_steps/${step.id}/proposals/search`;
+      break;
+    case 'selection':
+      url = `/selection_steps/${step.id}/proposals/search`;
+      break;
+    default:
+      console.log('Unknown step type'); // eslint-disable-line no-console
+      return false;
   }
-
-  const result = yield call(Fetcher.postToJson, url, body);
-
-  // Save results to localStorage if selected order is random
-  if (
-    PROPOSAL_ORDER_RANDOM === result.order &&
-    state.terms === null &&
-    Object.keys(state.filters).length === 0
-  ) {
-    const registredProposals = {};
-    registredProposals[step.id] = result.proposals.map(proposal => proposal.id);
-    LocalStorageService.set('proposal.randomResultsByStep', registredProposals);
-  }
-
+  url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
+  const result = yield call(Fetcher.postToJson, url, {
+    terms: state.terms,
+    filters: state.filters,
+  });
   yield put({
     type: 'proposal/FETCH_SUCCEEDED',
     proposals: result.proposals,
