@@ -8,7 +8,7 @@ type Config = {
   uploadables?: any,
 };
 
-const commitMutation = (environment: Environment, config: Config) =>
+const commitMutation = (environment: Environment, config: Config): Promise<any> =>
   new Promise((resolve, reject) => {
     relayCommitMutation(environment, {
       ...config,
