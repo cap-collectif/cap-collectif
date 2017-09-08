@@ -20,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CollectStepsController extends FOSRestController
 {
@@ -65,6 +66,51 @@ class CollectStepsController extends FOSRestController
             $terms,
             $providedFilters
         );
+
+        return $results;
+    }
+
+    /**
+     * @Post("/collect_steps/{collect_step_id}/proposals/search-in")
+     * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @param Request     $request
+     * @param CollectStep $collectStep
+     * @return array
+     */
+    public function getSelectProposalsByCollectStepAction(Request $request, CollectStep $collectStep) : array
+    {
+        $selectedIds = $request->request->get('ids');
+
+        if (null === $selectedIds) {
+            throw new HttpException(400, 'ids are not setted');
+        }
+
+        $proposalForm = $collectStep->getProposalForm();
+
+        if ($proposalForm->getStep()->isPrivate()) {
+            $user = $this->getUser();
+            if (!$user) {
+                return ['proposals' => [], 'count' => 0];
+            }
+            if (!$user->isAdmin()) {
+                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
+            }
+        }
+
+        $results = $this->get('capco.search.resolver')->searchProposalsIn($selectedIds);
+
+        // Reorder proposals
+        $orderedProposals = [];
+        foreach ($selectedIds as $selectedId) {
+            foreach ($results['proposals'] as $proposal) {
+                if ($selectedId === $proposal['id']) {
+                    $orderedProposals[] = $proposal;
+                }
+            }
+        }
+
+        $results['proposals'] = $orderedProposals;
 
         return $results;
     }

@@ -1,13 +1,9 @@
 District:
     type: object
     config:
-        description: "A district"
+        description: "A theme"
         fields:
             id:
                 type: "String!"
             name:
                 type: "String!"
-            geojson:
-                type: "GeoJSON"
-            displayedOnMap:
-                type: "Boolean!"

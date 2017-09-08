@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -58,12 +57,6 @@ class ProposalForm
      * @ORM\OrderBy({"name" = "ASC"})
      **/
     private $categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
-     * @ORM\OrderBy({"name" = "ASC"})
-     **/
-    private $districts;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
@@ -137,11 +130,6 @@ class ProposalForm
     private $usingAddress = false;
 
     /**
-     * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean")
-     */
-    private $proposalInAZoneRequired = false;
-
-    /**
      * @ORM\Column(name="zoom_map", nullable=true, type="integer")
      */
     private $zoomMap;
@@ -163,25 +151,12 @@ class ProposalForm
     {
         $this->questions = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->districts = new ArrayCollection();
         $this->notificationsConfiguration = new ProposalFormNotificationConfiguration();
     }
 
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
-    }
-
-    public function setProposalInAZoneRequired(bool $proposalInAZoneRequired): self
-    {
-        $this->proposalInAZoneRequired = $proposalInAZoneRequired;
-
-        return $this;
-    }
-
-    public function isProposalInAZoneRequired(): bool
-    {
-        return $this->proposalInAZoneRequired;
     }
 
     /**
@@ -360,38 +335,59 @@ class ProposalForm
         return $this->descriptionHelpText;
     }
 
-    public function setDescriptionHelpText(string $descriptionHelpText = null)
+    /**
+     * @param string $descriptionHelpText
+     *
+     * @return $this
+     */
+    public function setDescriptionHelpText($descriptionHelpText)
     {
         $this->descriptionHelpText = $descriptionHelpText;
 
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getThemeHelpText()
     {
         return $this->themeHelpText;
     }
 
-    public function setThemeHelpText(string $themeHelpText = null)
+    /**
+     * @param string $themeHelpText
+     *
+     * @return $this
+     */
+    public function setThemeHelpText($themeHelpText)
     {
         $this->themeHelpText = $themeHelpText;
 
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDistrictHelpText()
     {
         return $this->districtHelpText;
     }
 
-    public function setDistrictHelpText(string $districtHelpText = null): self
+    /**
+     * @param string $districtHelpText
+     *
+     * @return $this
+     */
+    public function setDistrictHelpText($districtHelpText)
     {
         $this->districtHelpText = $districtHelpText;
 
         return $this;
     }
 
-    public function getCategories(): Collection
+    public function getCategories()
     {
         return $this->categories;
     }
@@ -413,34 +409,20 @@ class ProposalForm
         return $this;
     }
 
-    public function getDistricts()
-    {
-        return $this->districts;
-    }
-
-    public function addDistrict(District $district): self
-    {
-        if (!$this->districts->contains($district)) {
-            $this->districts->add($district);
-            $district->setForm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDistrict(District $district): self
-    {
-        $this->districts->removeElement($district);
-
-        return $this;
-    }
-
-    public function isUsingThemes(): bool
+    /**
+     * @return bool
+     */
+    public function isUsingThemes()
     {
         return $this->usingThemes;
     }
 
-    public function setUsingThemes(bool $usingThemes): self
+    /**
+     * @param bool $usingThemes
+     *
+     * @return $this
+     */
+    public function setUsingThemes($usingThemes)
     {
         $this->usingThemes = $usingThemes;
 
