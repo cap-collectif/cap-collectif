@@ -1,7 +1,7 @@
 @district
 Feature: District
 
-  @database @dev
+  @database
   Scenario: GraphQL client wants to trash a proposal
     Given I am logged in to graphql as admin
     And I send a GraphQL POST request:
@@ -11,6 +11,7 @@ Feature: District
         changeDistrict(input: $input) {
           district {
             name
+            displayedOnMap
             geojson
           }
         }
