@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
@@ -21,22 +21,24 @@ const validate = ({ username, email }: Object, props) => {
   return errors;
 };
 
+type Props = {
+  idea: Array<string>,
+  anonymous: boolean,
+  hasCommentValue: boolean,
+  isPrivate: boolean,
+};
+
 export const formName = 'IdeaVoteForm';
 
-const IdeaVoteForm = React.createClass({
-  propTypes: {
-    idea: PropTypes.object.isRequired,
-    anonymous: PropTypes.bool.isRequired,
-    hasCommentValue: PropTypes.bool.isRequired,
-    isPrivate: PropTypes.bool.isRequired,
-  },
-
+class IdeaVoteForm extends React.Component<Props> {
   userHasVote() {
+    // eslint-disable-next-line react/prop-types
     const { anonymous, idea } = this.props;
     return !anonymous && idea.userHasVote;
-  },
+  }
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { anonymous, idea, hasCommentValue, isPrivate } = this.props;
 
     return (
@@ -86,8 +88,8 @@ const IdeaVoteForm = React.createClass({
         )}
       </form>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   hasCommentValue: formValueSelector(formName)(state, 'comment'),

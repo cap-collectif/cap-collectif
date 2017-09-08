@@ -5,39 +5,29 @@ import {
   SET_IDEAS_PAGINATION,
   INIT_IDEAS_COUNTS,
   INIT_IDEAS,
-
   CHANGE_IDEAS_PAGE,
   CHANGE_IDEAS_SEARCH_TERMS,
   CHANGE_IDEAS_ORDER,
   CHANGE_IDEAS_THEME,
-
   CREATE_IDEA_SUCCESS,
   CREATE_IDEA_FAILURE,
   UPDATE_IDEA_SUCCESS,
   UPDATE_IDEA_FAILURE,
   DELETE_IDEA_SUCCESS,
   DELETE_IDEA_FAILURE,
-
-  CREATE_IDEA_VOTE_FAILURE,
-
   RECEIVE_IDEAS,
 } from '../constants/IdeaConstants';
-import {
-  CREATE_COMMENT_SUCCESS,
-  CREATE_COMMENT_FAILURE,
-} from '../constants/CommentConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 export default {
-
-  initIdeas: (ideas) => {
+  initIdeas: ideas => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEAS,
       ideas,
     });
   },
 
-  setPagination: (pagination) => {
+  setPagination: pagination => {
     AppDispatcher.dispatch({
       actionType: SET_IDEAS_PAGINATION,
       pagination,
@@ -66,58 +56,55 @@ export default {
     data.terms = terms;
     data.theme = theme;
 
-    Fetcher
-      .post(url, data)
-      .then((response) => {
-        const promise = response.json();
-        promise.then((result) => {
-          AppDispatcher.dispatch({
-            actionType: RECEIVE_IDEAS,
-            ideas: result.ideas,
-            count: result.count,
-            countTrashed: result.countTrashed,
-          });
-          return true;
+    Fetcher.post(url, data).then(response => {
+      const promise = response.json();
+      promise.then(result => {
+        AppDispatcher.dispatch({
+          actionType: RECEIVE_IDEAS,
+          ideas: result.ideas,
+          count: result.count,
+          countTrashed: result.countTrashed,
         });
+        return true;
       });
+    });
   },
 
-  changePage: (page) => {
+  changePage: page => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_PAGE,
       page,
     });
   },
 
-  changeOrder: (order) => {
+  changeOrder: order => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_ORDER,
       order,
     });
   },
 
-  changeTheme: (theme) => {
+  changeTheme: theme => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_THEME,
       theme,
     });
   },
 
-  changeSearchTerms: (terms) => {
+  changeSearchTerms: terms => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_SEARCH_TERMS,
       terms,
     });
   },
 
-  add: (data) => {
+  add: data => {
     const formData = new FormData();
-    Object.keys(data).map((key) => {
+    Object.keys(data).map(key => {
       formData.append(key, data[key]);
     });
 
-    return Fetcher
-      .postFormData('/ideas', formData)
+    return Fetcher.postFormData('/ideas', formData)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_IDEA_SUCCESS,
@@ -137,17 +124,15 @@ export default {
           alert: { bsStyle: 'warning', content: 'alert.danger.add.idea' },
         });
         return false;
-      })
-    ;
+      });
   },
 
   update: (idea, data) => {
     const formData = new FormData();
-    Object.keys(data).map((key) => {
+    Object.keys(data).map(key => {
       formData.append(key, data[key]);
     });
-    return Fetcher
-      .postFormData(`/ideas/${idea}`, formData)
+    return Fetcher.postFormData(`/ideas/${idea}`, formData)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_IDEA_SUCCESS,
@@ -167,13 +152,11 @@ export default {
           alert: { bsStyle: 'warning', content: 'alert.danger.update.idea' },
         });
         return false;
-      })
-    ;
+      });
   },
 
-  delete: (idea) => {
-    return Fetcher
-      .delete(`/ideas/${idea}`)
+  delete: idea => {
+    return Fetcher.delete(`/ideas/${idea}`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: DELETE_IDEA_SUCCESS,
@@ -193,51 +176,13 @@ export default {
           alert: { bsStyle: 'warning', content: 'alert.danger.delete.idea' },
         });
         return false;
-      })
-    ;
-  },
-
-  vote: (idea, data = {}) => {
-    const hasComment = data.comment && data.comment.length > 0;
-    return Fetcher
-      .post(`/ideas/${idea}/votes`, data)
-      .then(json)
-      .then((vote) => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_SUCCESS,
-            message: 'comment.submit_success',
-          });
-        }
-        return vote;
-      })
-      .catch((error) => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_IDEA_VOTE_FAILURE,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'alert.danger.add.vote' },
-        });
-        if (hasComment) {
-          AppDispatcher.dispatch({
-            actionType: CREATE_COMMENT_FAILURE,
-            message: 'comment.submit_error',
-          });
-        }
-        throw error;
       });
   },
 
-  deleteVote: (idea) => {
-    return Fetcher
-      .delete(`/ideas/${idea}/votes`)
+  deleteVote: idea => {
+    return Fetcher.delete(`/ideas/${idea}/votes`)
       .then(json)
-      .then((vote) => {
+      .then(vote => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
@@ -252,5 +197,4 @@ export default {
         return false;
       });
   },
-
 };
