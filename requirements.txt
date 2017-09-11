@@ -1,0 +1,5 @@
+Fabric==1.13.1
+docker-compose==1.14.0
+ansible==2.0.0.1
+docker==2.4.2
+pyaml==16.12.2
