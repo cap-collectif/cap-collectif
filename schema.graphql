@@ -55,6 +55,20 @@ type ChangeCollectStatusPayload {
   clientMutationId: String
 }
 
+input ChangeDistrictInput {
+  # The district id
+  districtId: ID!
+  geojson: GeoJSON
+  displayedOnMap: Boolean
+  name: String
+  clientMutationId: String
+}
+
+type ChangeDistrictPayload {
+  district: District!
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -257,10 +271,18 @@ type DeleteProposalPayload {
   clientMutationId: String
 }
 
-# A theme
+# A district
 type District {
   id: String!
   name: String!
+  geojson: GeoJSON
+  displayedOnMap: Boolean!
+}
+
+# Ordering options for districts.
+enum DistrictOrderField {
+  ALPHABETICAL
+  CREATED_AT
 }
 
 # A contribution with an author
@@ -268,6 +290,8 @@ interface EditableContribution {
   # Identifies the date and time when the object was last updated.
   updatedAt: String!
 }
+
+scalar GeoJSON
 
 scalar HTML
 
@@ -293,6 +317,7 @@ type MediaResponse implements Response {
 }
 
 type Mutation {
+  changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
@@ -603,6 +628,7 @@ type ProposalForm {
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
+  districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
   districtHelpText: String
   usingCategories: Boolean!

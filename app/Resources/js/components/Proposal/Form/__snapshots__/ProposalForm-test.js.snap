@@ -422,6 +422,36 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
   <InjectIntl(ReactBootstrapInput)
     errors={null}
     groupClassName=""
+    id="proposal_district"
+    label={
+      <span>
+        <FormattedMessage
+          id="proposal.district"
+          values={Object {}}
+        />
+      </span>
+    }
+    type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.select.district"
+      values={Object {}}
+    />
+    <option
+      value={1}
+    >
+      disctrict1
+    </option>
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_body"
     label={
       <FormattedMessage
