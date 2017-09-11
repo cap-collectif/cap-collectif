@@ -11,7 +11,7 @@
                 {{ 'votes.has_voted' | trans({}, 'CapcoAppBundle') }}
                 <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
             </p>
-            <p class="excerpt  opinion__date">{{ vote.updatedAt | localizeddate('long', 'short', app.request.locale) }}</p>
+            <p class="excerpt  opinion__date">{{ vote.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
             <p>
                 {% if vote.value is not defined or vote.value == 1 %}
                     <span class="label label-success">{{ 'votes.value.agree' | trans({}, 'CapcoAppBundle') }}</span>
