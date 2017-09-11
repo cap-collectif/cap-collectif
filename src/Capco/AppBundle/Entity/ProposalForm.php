@@ -372,7 +372,7 @@ class ProposalForm
         return $this->themeHelpText;
     }
 
-    public function setThemeHelpText(string $themeHelpText = null)
+    public function setThemeHelpText(string $themeHelpText = null): self
     {
         $this->themeHelpText = $themeHelpText;
 
