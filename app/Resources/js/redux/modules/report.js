@@ -7,11 +7,10 @@ import Fetcher from '../../services/Fetcher';
 export type State = {
   +currentReportingModal: ?number,
   +isLoading: boolean,
-  +elements: Array<*>,
+  +elements: Array<*>
 };
 
-const baseUrl = (opinion: { parent: ?{ id: number } }) =>
-  opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
+const baseUrl = (opinion: { parent: ?{ id: number }}) => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
 
 const initialState: State = {
   currentReportingModal: null,
@@ -25,12 +24,7 @@ type StartReportingAction = { type: 'report/START_LOADING' };
 type StopReportingAction = { type: 'report/STOP_LOADING' };
 type AddReportedAction = { type: 'report/ADD_REPORTED' };
 
-export type ReportAction =
-  | OpenModalAction
-  | CloseModalAction
-  | StartReportingAction
-  | StopReportingAction
-  | AddReportedAction;
+export type ReportAction = OpenModalAction | CloseModalAction | StartReportingAction | StopReportingAction | AddReportedAction;
 
 export const openModal = (id: number): OpenModalAction => ({
   type: 'report/OPEN_MODAL',
@@ -53,15 +47,11 @@ const addReported = (): AddReportedAction => ({
   type: 'report/ADD_REPORTED',
 });
 
-const submitReport = (
-  url: string,
-  data: Object,
-  dispatch: Dispatch,
-  successMessage: string,
-): Promise<void> => {
+const submitReport = (url: string, data: Object, dispatch: Dispatch, successMessage: string) => {
   dispatch(startLoading());
   return new Promise((resolve, reject) => {
-    Fetcher.post(url, data)
+    Fetcher
+      .post(url, data)
       .then(() => {
         dispatch(addReported());
         dispatch(stopLoading());
@@ -80,15 +70,15 @@ const submitReport = (
 };
 
 export const submitIdeaReport = (idea: number, data: Object, dispatch: Dispatch) => {
-  return submitReport(`/ideas/${idea}/reports`, data, dispatch, 'alert.success.report.idea');
+  return submitReport(
+    `/ideas/${idea}/reports`,
+    data,
+    dispatch,
+    'alert.success.report.idea',
+  );
 };
 
-export const submitSourceReport = (
-  opinion: Object,
-  sourceId: Uuid,
-  data: Object,
-  dispatch: Dispatch,
-) => {
+export const submitSourceReport = (opinion: Object, sourceId: Uuid, data: Object, dispatch: Dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/sources/${sourceId}/reports`,
     data,
@@ -97,12 +87,7 @@ export const submitSourceReport = (
   );
 };
 
-export const submitArgumentReport = (
-  opinion: Object,
-  argument: Uuid,
-  data: Object,
-  dispatch: Dispatch,
-) => {
+export const submitArgumentReport = (opinion: Object, argument: Uuid, data: Object, dispatch: Dispatch) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,

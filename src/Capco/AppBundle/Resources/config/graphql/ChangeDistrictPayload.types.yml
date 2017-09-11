@@ -1,6 +1,0 @@
-ChangeDistrictPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            district:
-                type: "District!"
