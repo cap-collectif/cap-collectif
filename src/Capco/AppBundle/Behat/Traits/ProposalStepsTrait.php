@@ -19,11 +19,6 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-fermee',
     ];
-
-    protected static $selectionStepOpenParams = [
-        'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'selection',
-    ];
     protected static $votesDetailsPageParams = [
         'projectSlug' => 'budget-participatif-rennes',
     ];
@@ -68,9 +63,6 @@ trait ProposalStepsTrait
         'proposalSlug' => 'proposition-plus-votable',
     ];
 
-    /** @var array */
-    protected $currentCollectsStep = [];
-
     // ********************************* Proposals *********************************************
 
     /**
@@ -79,14 +71,6 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
-    }
-
-    /**
-     * @When I go to a selection step
-     */
-    public function iGoToASelectionStep()
-    {
-        $this->visitPageWithParams('selection page', self::$selectionStepOpenParams);
     }
 
     /**
@@ -563,14 +547,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I click the reload random button
-     */
-    public function iClickTheReloadRandomButton()
-    {
-        $this->clickProposalVoteButtonWithLabel('Relancer le tri aléatoire');
-    }
-
-    /**
      * @When I fill the proposal vote form
      */
     public function iFillTheProposalVoteForm()
@@ -848,57 +824,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I save current collects on step
-     */
-    public function iSaveCurrentCollectsStep()
-    {
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()->getPage()->findAll('css', '.opinion__list .proposal__title')
-        );
-
-        $this->setCurrentCollectsStep($items);
-    }
-
-    /**
-     * @When I should see same collects step
-     */
-    public function iShouldSeeSameCollectsStep()
-    {
-        $savedSteps = $this->getCurrentCollectsStep();
-        $selector = '.opinion__list .proposal__title';
-
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()->getPage()->findAll('css', $selector)
-        );
-
-        \PHPUnit_Framework_Assert::assertSame($savedSteps, $items);
-    }
-
-    /**
-     * @When I should see other collects step
-     */
-    public function iShouldSeeOtherCollectsStep()
-    {
-        $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .proposal__title span span';
-
-        $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
-            $this->getSession()->getPage()->findAll('css', $selector)
-        );
-
-        \PHPUnit_Framework_Assert::assertNotSame($savedSteps, $items);
-    }
-
-    /**
      * @Then I should have :filesNumber files in source media folder
      */
     public function iShouldHaveXFilesInSourceMediaFolder(int $filesNumber)
@@ -1065,21 +990,5 @@ trait ProposalStepsTrait
     {
         $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
         $this->assertElementNotContainsText($firstVoteSelector, $text);
-    }
-
-    /**
-     * @return array
-     */
-    public function getCurrentCollectsStep(): array
-    {
-        return $this->currentCollectsStep;
-    }
-
-    /**
-     * @param array $currentCollectsStep
-     */
-    public function setCurrentCollectsStep(array $currentCollectsStep)
-    {
-        $this->currentCollectsStep = $currentCollectsStep;
     }
 }

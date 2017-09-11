@@ -30,40 +30,6 @@ Feature: Proposals
     When I sort proposals by comments
     Then proposals should be ordered by comments
 
-  @javascript @elasticsearch @dev
-  Scenario: Anonymous user wants to see last proposals when he returns on the list of proposals
-    Given I go to an open collect step
-    Then proposals should be ordered randomly
-    When I save current collects on step
-    Then I go to an open collect step
-    When proposals should be ordered randomly
-    Then I should see same collects step
-
-  @javascript @elasticsearch @dev
-  Scenario: Anonymous user wants to see other random proposals
-    Given I go to an open collect step
-    Then proposals should be ordered randomly
-    When I save current collects on step
-    Then I click the 'a[href="#proposals-list"]' element
-    When I should see other collects step
-
-  @javascript @elasticsearch @dev
-  Scenario: Anonymous user wants to see last proposals when he returns on the selection of proposals
-    Given I go to a selection step
-    Then proposals should be ordered randomly
-    When I save current collects on step
-    Then I go to a selection step
-    When proposals should be ordered randomly
-    Then I should see same collects step
-
-  @javascript @elasticsearch @dev
-  Scenario: Anonymous user wants to see other random proposals on the selection step
-    Given I go to a selection step
-    Then proposals should be ordered randomly
-    When I save current collects on step
-    Then I click the 'a[href="#proposals-list"]' element
-    When I should see other collects step
-
   @javascript @elasticsearch
   Scenario: Anonymous user wants to see proposals in a collect step and search by term
     Given I go to an open collect step

@@ -14,4 +14,15 @@ class ProposalFormResolver implements ContainerAwareInterface
     {
         return $form->getRealQuestions();
     }
+
+    public function resolveDistricts(ProposalForm $form, string $order): array
+    {
+        if ($order === 'ALPHABETICAL') {
+            return usort($form->getDistricts()->toArray(), function ($a, $b) {
+                return $a->getName() <=> $b->getName();
+            });
+        }
+
+        return $form->getDistricts()->toArray();
+    }
 }

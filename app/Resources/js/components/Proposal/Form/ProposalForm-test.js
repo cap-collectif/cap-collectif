@@ -10,9 +10,7 @@ describe('<ProposalForm />', () => {
     form: {
       title: 'proposal form',
       body: 'body',
-      theme: -1,
-      district: null,
-      category: -1,
+      districts: [{ id: 1, name: 'disctrict1' }],
       media: null,
       themeMandatory: true,
       categoryMandatory: true,
@@ -24,7 +22,6 @@ describe('<ProposalForm />', () => {
       fields: [],
     },
     themes: [{ id: 1, title: 'theme1' }],
-    districts: [{ id: 1, name: 'disctrict1' }],
     categories: [{ id: 1, name: 'category1' }],
     isSubmitting: false,
     dispatch: () => {},

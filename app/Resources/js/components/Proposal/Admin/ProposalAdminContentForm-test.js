@@ -15,7 +15,6 @@ describe('<ProposalAdminContentForm />', () => {
     submitting: false,
     isSuperAdmin: true,
     themes: [],
-    districts: [],
     proposal: {
       id: '1',
       title: 'title-1',
@@ -30,10 +29,8 @@ describe('<ProposalAdminContentForm />', () => {
       ],
       media: { id: '1', url: '' },
       form: {
-        categories: [
-          { id: '1', name: 'category-1' },
-          { id: '2', name: 'category-2' },
-        ],
+        districts: [],
+        categories: [{ id: '1', name: 'category-1' }, { id: '2', name: 'category-2' }],
         customFields: [
           {
             id: '1',
