@@ -9,10 +9,12 @@ import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
 import EditButton from '../../Form/EditButton';
 import DeleteButton from '../../Form/DeleteButton';
 import ProposalReportButton from '../Report/ProposalReportButton';
-import ProposalPageComments from './ProposalPageComments';
 import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
+import {
+  openDeleteProposalModal,
+  openEditProposalModal,
+} from '../../../redux/modules/proposal';
 import config from '../../../config';
 
 let L;
@@ -47,28 +49,30 @@ const ProposalPageContent = React.createClass({
     const address = proposal.address ? JSON.parse(proposal.address) : null;
     return (
       <div className={classNames(classes)}>
-        {proposal.media && (
+        {proposal.media &&
           <img
             id="proposal-media"
             src={proposal.media.url}
             alt=""
             className="block img-responsive"
-          />
-        )}
+          />}
         <div className="block">
-          {proposal.summary && (
+          {proposal.summary &&
             <p className="excerpt" style={{ fontStyle: 'italic' }}>
               {proposal.summary}
-            </p>
-          )}
-          <h3 className="h3">{<FormattedMessage id="proposal.description" />}</h3>
+            </p>}
+          <h3 className="h3">
+            {<FormattedMessage id="proposal.description" />}
+          </h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {address &&
-        config.canUseDOM && (
+          config.canUseDOM &&
           <div className="block" style={{ height: 255 }}>
             <h4 className="h4">Lieu ou adresse</h4>
-            <p>{address[0].formatted_address}</p>
+            <p>
+              {address[0].formatted_address}
+            </p>
             <Map
               center={{
                 lat: address[0].geometry.location.lat,
@@ -84,7 +88,10 @@ const ProposalPageContent = React.createClass({
                 url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${config.mapboxApiKey}`}
               />
               <Marker
-                position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
+                position={[
+                  address[0].geometry.location.lat,
+                  address[0].geometry.location.lng,
+                ]}
                 icon={L.icon({
                   // eslint-disable-line
                   iconUrl: '/svg/marker.svg',
@@ -94,11 +101,10 @@ const ProposalPageContent = React.createClass({
                 })}
               />
             </Map>
-          </div>
+          </div>}
+        {proposal.responses.map((response, index) =>
+          <ProposalResponse key={index} response={response} />,
         )}
-        {proposal.responses.map((response, index) => (
-          <ProposalResponse key={index} response={response} />
-        ))}
         <div className="block proposal__buttons">
           <ProposalVoteButtonWrapper proposal={proposal} />
           <ShareButtonDropdown
@@ -128,9 +134,12 @@ const ProposalPageContent = React.createClass({
             />
           </div>
         </div>
-        <ProposalEditModal proposal={proposal} form={form} categories={categories} />
+        <ProposalEditModal
+          proposal={proposal}
+          form={form}
+          categories={categories}
+        />
         <ProposalDeleteModal proposal={proposal} form={form} />
-        <ProposalPageComments id={proposal.id} form={form} />
       </div>
     );
   },
