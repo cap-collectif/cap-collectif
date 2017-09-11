@@ -219,6 +219,7 @@ admin:
       created_at: Création
     consultation_step_type:
       title: Titre
+      step: Projet participatif
       opinion_types: Éléments de structure
       updated_at: Mise à jour
       created_at: Création

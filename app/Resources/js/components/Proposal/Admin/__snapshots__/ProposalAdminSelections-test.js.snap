@@ -54,7 +54,8 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           <strong>
             step-1
           </strong>
-           - 
+           -
+           
           <span>
             Etape de dépôt
           </span>
@@ -92,7 +93,8 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           <strong>
             step-2
           </strong>
-           - 
+           -
+           
           <span>
             Etape de sélection
           </span>

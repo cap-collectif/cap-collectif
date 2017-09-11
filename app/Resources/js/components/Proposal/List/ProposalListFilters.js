@@ -53,12 +53,18 @@ export const ProposalListFilters = React.createClass({
       displayedFilters: []
         .concat(types.length > 0 ? ['types'] : [])
         .concat(
-          features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [],
+          features.districts && districts.length > 0 && showDistrictFilter
+            ? ['districts']
+            : [],
         )
-        .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
+        .concat(
+          features.themes && showThemes && themes.length > 0 ? ['themes'] : [],
+        )
         .concat(categories.length > 0 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),
-      displayedOrders: ['random', 'last', 'old', 'comments'].concat(orderByVotes ? ['votes'] : []),
+      displayedOrders: ['random', 'last', 'old', 'comments'].concat(
+        orderByVotes ? ['votes'] : [],
+      ),
     };
   },
 
@@ -80,28 +86,30 @@ export const ProposalListFilters = React.createClass({
                 dispatch(loadProposals());
               }}
               value={order}>
-              {displayedOrders.map(choice => (
+              {displayedOrders.map(choice =>
                 <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
-                  {message => <option value={choice}>{message}</option>}
-                </FormattedMessage>
-              ))}) }
+                  {message =>
+                    <option value={choice}>
+                      {message}
+                    </option>}
+                </FormattedMessage>,
+              )}) }
             </Input>
           </Col>
           <Col xs={12} md={colWidth}>
             <ProposalListSearch />
           </Col>
-          {showToggleMapButton && (
+          {showToggleMapButton &&
             <Col xs={12} md={colWidth} xsHidden smHidden>
               <ToggleMapButton
                 onChange={mode => {
                   dispatch(changeProposalListView(mode));
                 }}
               />
-            </Col>
-          )}
+            </Col>}
         </Row>
         <Row>
-          {displayedFilters.map((filterName, index) => (
+          {displayedFilters.map((filterName, index) =>
             <Col xs={12} md={colWidth} key={index}>
               <Input
                 type="select"
@@ -112,7 +120,10 @@ export const ProposalListFilters = React.createClass({
                 }}
                 value={filters[filterName] || 0}>
                 <FormattedMessage id={`global.select_${filterName}`}>
-                  {message => <option value="0">{message}</option>}
+                  {message =>
+                    <option value="0">
+                      {message}
+                    </option>}
                 </FormattedMessage>
                 {this.props[filterName].map(choice => {
                   return (
@@ -122,8 +133,8 @@ export const ProposalListFilters = React.createClass({
                   );
                 })}
               </Input>
-            </Col>
-          ))}
+            </Col>,
+          )}
         </Row>
       </div>
     );
@@ -135,6 +146,7 @@ const mapStateToProps = (state: State) => {
     features: state.default.features,
     themes: state.default.themes,
     types: state.default.userTypes,
+    districts: state.default.districts,
     order: state.proposal.order,
     filters: state.proposal.filters || {},
   };

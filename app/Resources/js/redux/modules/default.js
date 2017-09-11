@@ -1,7 +1,13 @@
 // @flow
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
-import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
+import type {
+  Exact,
+  Action,
+  Dispatch,
+  FeatureToggle,
+  FeatureToggles,
+} from '../../types';
 import {
   addRegistrationFieldSucceeded,
   updateRegistrationFieldSucceeded,
@@ -28,6 +34,7 @@ export type DefaultAction =
   | HideUpdateFieldModalAction
   | HideNewFieldModalAction;
 export type State = {
+  +districts: Array<Object>,
   +showNewFieldModal: boolean,
   +themes: Array<Object>,
   +features: Exact<FeatureToggles>,
@@ -69,6 +76,7 @@ export const features = {
 };
 
 const initialState: State = {
+  districts: [],
   themes: [],
   showNewFieldModal: false,
   features,
@@ -91,7 +99,9 @@ export const showNewFieldModal = (): ShowNewFieldModalAction => ({
 export const hideNewFieldModal = (): HideNewFieldModalAction => ({
   type: 'default/HIDE_NEW_FIELD_MODAL',
 });
-export const updateRegistrationFieldModal = (id: number): ShowUpdateFieldModalAction => ({
+export const updateRegistrationFieldModal = (
+  id: number,
+): ShowUpdateFieldModalAction => ({
   type: 'default/SHOW_UPDATE_FIELD_MODAL',
   id,
 });
@@ -104,7 +114,10 @@ export const requestUpdateRegistrationField = (
   dispatch: Dispatch,
   { fieldId }: { fieldId: number },
 ) => {
-  return Fetcher.putToJson(`/registration_form/questions/${fieldId}`, values).then(
+  return Fetcher.putToJson(
+    `/registration_form/questions/${fieldId}`,
+    values,
+  ).then(
     (question: Object) => {
       dispatch(hideRegistrationFieldModal());
       dispatch(updateRegistrationFieldSucceeded(fieldId, question));
@@ -164,7 +177,10 @@ export const toggleFeature = (
   );
 };
 
-export const reducer = (state: State = initialState, action: Action): Exact<State> => {
+export const reducer = (
+  state: State = initialState,
+  action: Action,
+): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
