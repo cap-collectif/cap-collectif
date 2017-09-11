@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<IdeaDeleteVoteForm /> should render correctly 1`] = `
+exports[`<IdeaCreateVoteForm /> should render correctly 1`] = `
 <Connect(ReduxForm)
   anonymous={false}
   idea={Object {}}

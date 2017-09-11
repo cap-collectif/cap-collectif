@@ -6,10 +6,10 @@ import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
 import IdeaCreateVoteForm from './IdeaCreateVoteForm';
 import IdeaDeleteVoteForm from './IdeaDeleteVoteForm';
-import type { Dispatch } from '../../../types';
+import type { Dispatch, State } from '../../../types';
 
 type Props = {
-  user: Object,
+  user: ?Object,
   idea: Object,
   className?: string,
   formWrapperClassName?: string,
@@ -57,11 +57,9 @@ export class IdeaVoteBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-    submitting: isSubmitting('IdeaVoteForm')(state),
-  };
-};
+const mapStateToProps = (state: State) => ({
+  user: state.user.user,
+  submitting: isSubmitting('IdeaVoteForm')(state),
+});
 
 export default connect(mapStateToProps)(IdeaVoteBox);

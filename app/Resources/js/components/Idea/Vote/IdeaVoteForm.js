@@ -31,7 +31,7 @@ const validate = ({ username, email }: Object, props: Props) => {
 
 export const formName = 'IdeaVoteForm';
 
-class IdeaVoteForm extends React.Component<Props> {
+export class IdeaVoteForm extends React.Component<Props> {
   userHasVote() {
     // eslint-disable-next-line react/prop-types
     const { anonymous, idea } = this.props;
