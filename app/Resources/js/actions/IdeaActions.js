@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
-import Fetcher, { json } from '../services/Fetcher';
+import Fetcher from '../services/Fetcher';
 import IdeaStore from '../stores/IdeaStore';
 import {
   SET_IDEAS_PAGINATION,
@@ -174,25 +174,6 @@ export default {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'warning', content: 'alert.danger.delete.idea' },
-        });
-        return false;
-      });
-  },
-
-  deleteVote: idea => {
-    return Fetcher.delete(`/ideas/${idea}/votes`)
-      .then(json)
-      .then(vote => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
-        });
-        return vote;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'alert.danger.delete.vote' },
         });
         return false;
       });
