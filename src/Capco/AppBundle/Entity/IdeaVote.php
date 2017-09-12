@@ -6,8 +6,6 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * IdeaVote.
- *
  * @CapcoAssert\DidNotAlreadyVote(message="idea.vote.already_voted", repositoryPath="CapcoAppBundle:IdeaVote", objectPath="idea")
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="idea.vote.email_belongs_to_user")
@@ -22,19 +20,13 @@ class IdeaVote extends AbstractVote
     const ANONYMOUS = 'ANONYMOUS';
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $idea;
 
-    /**
-     * Constructor.
-     */
     public function __construct(Idea $idea = null)
     {
-        parent::__construct();
         $this->idea = $idea;
     }
 
@@ -47,15 +39,7 @@ class IdeaVote extends AbstractVote
         return 'New idea vote';
     }
 
-    /**
-     * set idea.
-     *
-     * @param $Idea
-     * @param mixed $idea
-     *
-     * @return IdeaVote
-     */
-    public function setIdea($idea)
+    public function setIdea(Idea $idea): self
     {
         $this->idea = $idea;
         $this->idea->addVote($this);
