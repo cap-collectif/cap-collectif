@@ -518,9 +518,8 @@ admin:
         evaluation: "Rappel : plafond maximal d'un projet 500 000 €"
         delay: Préciser les temps d'études et de travaux
         proposedAnswer: À destination du porteur de projet
-      id: Id
-      isTrashed: Corbeille
-      likers: Coup(s) de coeur
+      id: Réf
+      isTrashed: Dans la corbeille
       link: Lien
       media: Illustration
       no_category: Aucune catégorie
@@ -549,7 +548,6 @@ admin:
       evaluation: Évaluation financière de l'investissement proposé
       delay: Délai de mise en œuvre du projet
       proposedAnswer: Analyse synthétique de l'avis du service
-      last_status: Dernier statut
     proposal_category:
       name: Nom
     proposal_form:

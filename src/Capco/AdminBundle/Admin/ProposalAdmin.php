@@ -30,12 +30,11 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
-            ->add('id', null, [
+            ->addIdentifier('id', null, [
                 'label' => 'admin.fields.proposal.id',
             ])
-            ->add('titleInfo', null, [
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
-                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig',
             ])
             ->add('author', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.author',
@@ -50,10 +49,6 @@ class ProposalAdmin extends Admin
             ])
             ->add('district', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.district',
-            ])
-            ->add('lastStatus', null, [
-                'label' => 'admin.fields.proposal.last_status',
-                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
             ->add('enabled', null, [
                 'editable' => true,
@@ -74,6 +69,12 @@ class ProposalAdmin extends Admin
             ->add('updatedInfo', 'datetime', [
                 'label' => 'admin.fields.proposal.updated_at',
                 'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                ],
             ]);
     }
 
@@ -100,16 +101,6 @@ class ProposalAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
-            ->add('author', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.proposal.author',
-            ], null, [
-                'property' => 'username',
-            ])
-            ->add('likers', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.proposal.likers',
-            ], null, [
-                'property' => 'username',
-            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ]);
@@ -118,12 +109,14 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.deleted',
             ]);
         }
-        $datagridMapper
-            ->add('status', null, [
-                'label' => 'admin.fields.proposal.status',
-            ])
+        $datagridMapper->add('status', null, [
+            'label' => 'admin.fields.proposal.status',
+        ])
             ->add('estimation', null, [
                 'label' => 'admin.fields.proposal.estimation',
+            ])
+            ->add('proposalForm.step', null, [
+                'label' => 'admin.fields.proposal.collect_step',
             ])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',

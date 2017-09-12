@@ -863,52 +863,8 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function updatedInfo(): array
     {
         return [
-            'date' => $this->getUpdatedAt(),
+            'date' => $this->updatedAt,
             'user' => $this->getAuthor(),
         ];
-    }
-
-    /**
-     * Useful for sonata admin.
-     */
-    public function titleInfo(): array
-    {
-        return [
-            'id' => $this->getId(),
-            'title' => $this->getTitle(),
-            'summary' => $this->getSummary(),
-        ];
-    }
-
-    /**
-     * Useful for sonata admin.
-     */
-    public function lastStatus()
-    {
-        /** @var Selection[] $projectSteps */
-        $selections = $this->getSelections()->toArray();
-
-        usort($selections, function ($step, $nextStep) {
-            return  $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
-        });
-
-        $findStatus = null;
-        $loop = 0;
-
-        while ($findStatus === null && $loop < count($selections)) {
-            $selection = $selections[$loop];
-
-            if (null !== $selection->getStatus()) {
-                $findStatus = $selection->getStatus();
-            }
-
-            ++$loop;
-        }
-
-        if (null !== $findStatus) {
-            return $findStatus;
-        }
-
-        return $this->getStatus();
     }
 }
