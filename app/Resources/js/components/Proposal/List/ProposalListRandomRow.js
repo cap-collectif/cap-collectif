@@ -7,10 +7,6 @@ import ProposalListRandomMessage from './ProposalListRandomMessage';
 type Props = { orderByVotes: boolean };
 
 export class ProposalListRandomRow extends React.Component<Props> {
-  static defaultProps = {
-    orderByVotes: false,
-  };
-
   render() {
     // eslint-disable-next-line react/prop-types
     const { orderByVotes } = this.props;

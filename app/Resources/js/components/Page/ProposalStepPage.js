@@ -118,8 +118,8 @@ export const ProposalStepPage = React.createClass({
                   }}
                 />
               )}
-              {(randomOrder || randomOrder === 'undefined') &&
-              (selectedViewByStep === 'mosaic' || selectedViewByStep === 'undefined') && (
+              {randomOrder &&
+              selectedViewByStep === 'mosaic' && (
                 <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
               )}
             </div>

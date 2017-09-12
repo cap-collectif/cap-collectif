@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { State } from '../../../types';
+import type { State } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
