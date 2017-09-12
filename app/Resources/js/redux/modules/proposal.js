@@ -546,7 +546,8 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   let body = {};
   let lastProposals = {};
 
-  if (LocalStorageService.get('proposal.randomResultsByStep') !== null) {
+  // Valid 24 hours
+  if (LocalStorageService.isValid('proposal.randomResultsByStep', 86400000)) {
     lastProposals = LocalStorageService.get('proposal.randomResultsByStep');
   }
 
