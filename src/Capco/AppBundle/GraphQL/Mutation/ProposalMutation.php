@@ -216,13 +216,12 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, Request $request): array
+    public function changeContent(Argument $input, Request $request, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
         $mediaManager = $this->container->get('capco.media.manager');
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $values = $input->getRawArguments();
         $values['responses'] = array_map(function ($value) {
@@ -297,7 +296,10 @@ class ProposalMutation implements ContainerAwareInterface
        ]);
 
         if (!$user->isSuperAdmin()) {
-            unset($values['author']); // Only a SUPER_ADMIN can change author
+            if (isset($values['author'])) {
+                throw new UserError('Only a user with role ROLE_SUPER_ADMIN can update an author.');
+            }
+            $form->remove('author');
         }
 
         $form->submit($values);
