@@ -403,6 +403,16 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * Wait for debug.
+     *
+     * @Given /^I wait for debug$/
+     */
+    public function iWaitForDebug()
+    {
+        $this->iWait(1000);
+    }
+
+    /**
      * @When I try to download :path
      *
      * @param mixed $path

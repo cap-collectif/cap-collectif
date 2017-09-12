@@ -36,20 +36,6 @@ class ProposalAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
-            ->add('author', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
-            ])
-            ->add('project', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.project',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
-            ])
-            ->add('category', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.category',
-            ])
-            ->add('district', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.district',
-            ])
             ->add('enabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.enabled',
@@ -57,25 +43,26 @@ class ProposalAdmin extends Admin
             ->add('isTrashed', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.isTrashed',
+            ])
+            ->add('updateAuthor', 'sonata_type_model_autocomplete', [
+                'label' => 'admin.fields.proposal.updateAuthor',
+                'property' => 'username',
+            ])
+            ->add('updatedAt', null, [
+                'label' => 'admin.fields.proposal.updated_at',
             ]);
-
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $listMapper->add('deletedAt', null, [
                 'label' => 'admin.fields.proposal.deleted',
             ]);
         }
-
-        $listMapper
-            ->add('updatedInfo', 'datetime', [
-                'label' => 'admin.fields.proposal.updated_at',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
-            ])
-            ->add('_action', 'actions', [
+        $listMapper->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     // Fields to be shown on filter forms
@@ -106,12 +93,12 @@ class ProposalAdmin extends Admin
             ]);
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $datagridMapper->add('deletedAt', null, [
-                'label' => 'admin.fields.proposal.deleted',
-            ]);
+                    'label' => 'admin.fields.proposal.deleted',
+                ]);
         }
         $datagridMapper->add('status', null, [
-            'label' => 'admin.fields.proposal.status',
-        ])
+                'label' => 'admin.fields.proposal.status',
+            ])
             ->add('estimation', null, [
                 'label' => 'admin.fields.proposal.estimation',
             ])
@@ -121,7 +108,8 @@ class ProposalAdmin extends Admin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ->add('expired', null, ['label' => 'admin.global.expired'])
+        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
