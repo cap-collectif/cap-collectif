@@ -151,7 +151,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function selectProposal(string $proposalId, string $stepId): array
+    public function selectProposal(string $proposalId, string $stepId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -161,11 +161,21 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError('Already selected');
         }
 
+        $selectionStatus = null;
+
+        if ($statusId) {
+            $selectionStatus = $em
+            ->getRepository('CapcoAppBundle:Status')
+            ->find($statusId)
+          ;
+        }
+
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         $step = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($stepId);
 
         $selection = new Selection();
         $selection->setSelectionStep($step);
+        $selection->setStatus($selectionStatus);
         $proposal->addSelection($selection);
 
         $em->persist($selection);

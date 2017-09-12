@@ -32,7 +32,6 @@ type Props = {
   invalid: boolean,
   submitting: boolean,
 };
-type DefaultProps = void;
 
 const validate = () => {
   const errors = {};
@@ -111,9 +110,9 @@ const onSubmit = (values, dispatch, props: Props) => {
     .catch(() => {});
 };
 
-export class ProposalAdminSelections extends Component<Props, void> {
-  static defaultProps: DefaultProps;
+export class ProposalAdminSelections extends Component<Props> {
   render() {
+    // eslint-disable-next-line react/prop-types
     const { selectionValues, proposal, handleSubmit, pristine, invalid, submitting } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
