@@ -133,21 +133,15 @@ const CommentSection = React.createClass({
           xsOffset={2}
           sm={4}
           className="hidden-xs"
-          style={{ marginTop: '30px', marginBottom: '20px' }}>
+          style={{ marginTop: '10px', marginBottom: '20px' }}>
           <select
             ref="filter"
             className="form-control"
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
-            <option value="popular">
-              {<FormattedMessage id="global.filter_popular" />}
-            </option>
-            <option value="last">
-              {<FormattedMessage id="global.filter_last" />}
-            </option>
-            <option value="old">
-              {<FormattedMessage id="global.filter_old" />}
-            </option>
+            <option value="popular">{<FormattedMessage id="global.filter_popular" />}</option>
+            <option value="last">{<FormattedMessage id="global.filter_last" />}</option>
+            <option value="old">{<FormattedMessage id="global.filter_old" />}</option>
           </select>
         </Col>
       );
@@ -175,12 +169,13 @@ const CommentSection = React.createClass({
   render() {
     return (
       <div className="comments__section">
-        <FlashMessages
-          errors={this.state.messages.errors}
-          success={this.state.messages.success}
-        />
+        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
+        {/* <h3>yolooooo</h3> */}
+        <h3>
+          <FormattedMessage id="proposal.tabs.comments" />
+        </h3>
         <Row>
-          <Col componentClass="h2" sm={6}>
+          <Col componentClass="h4" sm={6}>
             <FormattedMessage
               id="comment.list"
               values={{

@@ -7,8 +7,15 @@ import Fetcher, { json } from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
-import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
-import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
+import type {
+  Exact,
+  State as GlobalState,
+  Dispatch,
+  Uuid,
+  Action,
+} from '../../types';
+
+const PROPOSAL_PAGINATION = 51;
 
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
@@ -94,7 +101,6 @@ type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type RequestLoadProposalsAction = {
   type: 'proposal/FETCH_REQUESTED',
   step: ?number,
-  regenerateRandomOrder: ?boolean,
 };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
@@ -175,13 +181,18 @@ const initialState: State = {
   markers: null,
 };
 
-export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({
+export const loadMarkers = (
+  stepId: Uuid,
+  stepType: string,
+): LoadMarkersAction => ({
   type: 'proposal/LOAD_MARKERS_REQUEST',
   stepType,
   stepId,
 });
 
-export const loadMarkersSuccess = (markers: Object): LoadMarkersSuccessAction => ({
+export const loadMarkersSuccess = (
+  markers: Object,
+): LoadMarkersSuccessAction => ({
   type: 'proposal/LOAD_MARKERS_SUCCEEDED',
   markers,
 });
@@ -192,7 +203,9 @@ export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
 export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 });
-export const submitFusionForm = (proposalForm: number): SubmitFusionFormAction => ({
+export const submitFusionForm = (
+  proposalForm: number,
+): SubmitFusionFormAction => ({
   type: 'proposal/SUBMIT_FUSION_FORM',
   proposalForm,
 });
@@ -219,7 +232,10 @@ export const voteSuccess = (
   vote,
   comment,
 });
-export const loadVotes = (stepId: Uuid, proposalId: number): RequestLoadVotesAction => ({
+export const loadVotes = (
+  stepId: Uuid,
+  proposalId: number,
+): RequestLoadVotesAction => ({
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId,
   proposalId,
@@ -234,7 +250,9 @@ export const deleteVoteSucceeded = (
   stepId,
   vote,
 });
-const deleteVoteRequested = (proposalId: number): RequestDeleteProposalVoteAction => ({
+const deleteVoteRequested = (
+  proposalId: number,
+): RequestDeleteProposalVoteAction => ({
   type: 'proposal/DELETE_VOTE_REQUESTED',
   proposalId,
 });
@@ -284,12 +302,17 @@ export const changeTerm = (terms: string): ChangeTermAction => ({
   type: 'proposal/CHANGE_TERMS',
   terms,
 });
-export const changeFilter = (filter: string, value: string): ChangeFilterAction => ({
+export const changeFilter = (
+  filter: string,
+  value: string,
+): ChangeFilterAction => ({
   type: 'proposal/CHANGE_FILTER',
   filter,
   value,
 });
-export const changeProposalListView = (mode: string): ChangeProposalListViewAction => ({
+export const changeProposalListView = (
+  mode: string,
+): ChangeProposalListViewAction => ({
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
 });
@@ -297,15 +320,15 @@ type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
-export const loadProposals = (
-  step: ?number,
-  regenerateRandomOrder: ?boolean,
-): RequestLoadProposalsAction => ({
+export const loadProposals = (step: ?number): RequestLoadProposalsAction => ({
   type: 'proposal/FETCH_REQUESTED',
   step,
-  regenerateRandomOrder,
 });
-export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
+export const deleteProposal = (
+  form: number,
+  proposal: Object,
+  dispatch: Dispatch,
+): void => {
   dispatch(deleteRequest());
   Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
     .then(() => {
@@ -336,7 +359,12 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
+export const vote = (
+  dispatch: Dispatch,
+  step: Object,
+  proposal: Object,
+  data: Object,
+) => {
   let url = '';
   switch (step.type) {
     case 'selection':
@@ -381,7 +409,11 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
     });
 };
 
-export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
+export const deleteVote = (
+  dispatch: Dispatch,
+  step: Object,
+  proposal: Object,
+) => {
   dispatch(deleteVoteRequested(proposal.id));
   let url = '';
   switch (step.type) {
@@ -419,7 +451,11 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
     });
 };
 
-export const submitProposal = (dispatch: Dispatch, form: number, data: Object): Promise<*> => {
+export const submitProposal = (
+  dispatch: Dispatch,
+  form: number,
+  data: Object,
+): Promise<*> => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => {
@@ -428,19 +464,16 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
     }
   });
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
-    .then(response => {
+    .then(() => {
+      dispatch(changeProposalListView('mosaic'));
       dispatch(closeCreateModal());
-
-      response.json().then(proposal => {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            bsStyle: 'success',
-            content: 'proposal.request.create.success',
-          },
-        });
-
-        window.location.href = proposal._links.show;
+      dispatch(loadProposals());
+      FluxDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: {
+          bsStyle: 'success',
+          content: 'proposal.request.create.success',
+        },
       });
     })
     .catch(() => {
@@ -455,11 +488,21 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
     });
 };
 
-export const updateProposal = (dispatch: Dispatch, form: number, id: number, data: Object) => {
+export const updateProposal = (
+  dispatch: Dispatch,
+  form: number,
+  id: number,
+  data: Object,
+) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
+  Object.keys(flattenedData).map(key =>
+    formData.append(key, flattenedData[key]),
+  );
+  return Fetcher.postFormData(
+    `/proposal_forms/${form}/proposals/${id}`,
+    formData,
+  )
     .then(() => {
       dispatch(closeEditProposalModal());
       location.reload();
@@ -480,7 +523,9 @@ export const updateProposal = (dispatch: Dispatch, form: number, id: number, dat
     });
 };
 
-export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<*, *, *> {
+export function* fetchVotesByStep(
+  action: FetchVotesRequestedAction,
+): Generator<*, *, *> {
   const { stepId, proposalId } = action;
   try {
     let hasMore = true;
@@ -506,7 +551,9 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
   }
 }
 
-function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, *> {
+function* submitFusionFormData(
+  action: SubmitFusionFormAction,
+): Generator<*, *, *> {
   const { proposalForm } = action;
   const globalState: GlobalState = yield select();
   const formData = new FormData();
@@ -521,7 +568,11 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
     formData.append(key, flattenedData[key]);
   });
   try {
-    yield call(Fetcher.postFormData, `/proposal_forms/${proposalForm}/proposals`, formData);
+    yield call(
+      Fetcher.postFormData,
+      `/proposal_forms/${proposalForm}/proposals`,
+      formData,
+    );
     yield put(closeCreateFusionModal());
     location.reload();
   } catch (e) {
@@ -531,77 +582,31 @@ function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, 
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
-  const { regenerateRandomOrder } = action;
-
   const globalState: GlobalState = yield select();
   if (globalState.project.currentProjectById) {
     step =
       step ||
-      globalState.project.projectsById[globalState.project.currentProjectById].stepsById[
-        globalState.project.currentProjectStepById
-      ];
+      globalState.project.projectsById[globalState.project.currentProjectById]
+        .stepsById[globalState.project.currentProjectStepById];
   }
   const state = globalState.proposal;
   let url = '';
-  let body = {};
-  let lastProposals = {};
-
-  // Valid 24 hours
-  if (LocalStorageService.isValid('proposal.randomResultsByStep', 86400000)) {
-    lastProposals = LocalStorageService.get('proposal.randomResultsByStep');
+  switch (step.type) {
+    case 'collect':
+      url = `/collect_steps/${step.id}/proposals/search`;
+      break;
+    case 'selection':
+      url = `/selection_steps/${step.id}/proposals/search`;
+      break;
+    default:
+      console.log('Unknown step type'); // eslint-disable-line no-console
+      return false;
   }
-
-  // If order is random & proposals are stored in Local Storage -> get last results
-  if (
-    (!state.order || state.order === PROPOSAL_ORDER_RANDOM) &&
-    !regenerateRandomOrder &&
-    (!state.terms || state.terms === true) &&
-    (!state.filters || Object.keys(state.filters).length === 0) &&
-    lastProposals[step.id]
-  ) {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search-in`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search-in`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-
-    body = { ids: lastProposals[step.id] };
-  } else {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-    const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
-    url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-    body = { terms: state.terms, filters: state.filters };
-  }
-
-  const result = yield call(Fetcher.postToJson, url, body);
-
-  // Save results to localStorage if selected order is random
-  if (
-    (result.order === PROPOSAL_ORDER_RANDOM || !result.order) &&
-    (!state.terms || state.terms === true) &&
-    (!state.filters || Object.keys(state.filters).length === 0)
-  ) {
-    lastProposals[step.id] = result.proposals.map(proposal => proposal.id);
-
-    LocalStorageService.set('proposal.randomResultsByStep', lastProposals);
-  }
-
+  url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${state.order}`;
+  const result = yield call(Fetcher.postToJson, url, {
+    terms: state.terms,
+    filters: state.filters,
+  });
   yield put({
     type: 'proposal/FETCH_SUCCEEDED',
     proposals: result.proposals,
@@ -619,14 +624,21 @@ type RequestFetchProposalPostsAction = {
   type: 'proposal/POSTS_FETCH_REQUESTED',
   proposalId: number,
 };
-export const fetchProposalPosts = (proposalId: number): RequestFetchProposalPostsAction => ({
+export const fetchProposalPosts = (
+  proposalId: number,
+): RequestFetchProposalPostsAction => ({
   type: 'proposal/POSTS_FETCH_REQUESTED',
   proposalId,
 });
 
-export function* fetchPosts(action: RequestFetchProposalPostsAction): Generator<*, *, *> {
+export function* fetchPosts(
+  action: RequestFetchProposalPostsAction,
+): Generator<*, *, *> {
   try {
-    const result = yield call(Fetcher.get, `/proposals/${action.proposalId}/posts`);
+    const result = yield call(
+      Fetcher.get,
+      `/proposals/${action.proposalId}/posts`,
+    );
     yield put({
       type: 'proposal/POSTS_FETCH_SUCCEEDED',
       posts: result.posts,
@@ -639,7 +651,10 @@ export function* fetchPosts(action: RequestFetchProposalPostsAction): Generator<
 
 export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   try {
-    const markers = yield call(Fetcher.get, `/${action.stepType}_step/${action.stepId}/markers`);
+    const markers = yield call(
+      Fetcher.get,
+      `/${action.stepType}_step/${action.stepId}/markers`,
+    );
     yield put({
       type: 'proposal/LOAD_MARKERS_SUCCEEDED',
       markers,
@@ -649,7 +664,9 @@ export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   }
 }
 
-export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generator<*, *, *> {
+export function* storeFiltersInLocalStorage(
+  action: ChangeFilterAction,
+): Generator<*, *, *> {
   const { filter, value } = action;
   const state: GlobalState = yield select();
   const filters = { ...state.proposal.filters, [filter]: value };
@@ -661,10 +678,13 @@ export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generat
   LocalStorageService.set('proposal.filtersByStep', filtersByStep);
 }
 
-export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
+export function* storeOrderInLocalStorage(
+  action: ChangeOrderAction,
+): Generator<*, *, *> {
   const { order } = action;
   const state: GlobalState = yield select();
-  const orderByStep: { [id: Uuid]: string } = LocalStorageService.get('proposal.orderByStep') || {};
+  const orderByStep: { [id: Uuid]: string } =
+    LocalStorageService.get('proposal.orderByStep') || {};
   if (state.project.currentProjectStepById) {
     orderByStep[state.project.currentProjectStepById] = order;
   }
@@ -813,7 +833,10 @@ const fetchVotesSucceedReducer = (
   return { ...state, proposalsById };
 };
 
-export const reducer = (state: State = initialState, action: Action): Exact<State> => {
+export const reducer = (
+  state: State = initialState,
+  action: Action,
+): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

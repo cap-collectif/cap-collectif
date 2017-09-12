@@ -102,6 +102,12 @@ services:
     tags:
       - { name: twig.extension }
 
+  capco.twig.district:
+    class: Capco\AppBundle\Twig\DistrictExtension
+    arguments: ["@capco.district.repository"]
+    tags:
+      - { name: twig.extension }
+
   capco.twig.dates:
       class: Capco\AppBundle\Twig\DateExtension
       tags:

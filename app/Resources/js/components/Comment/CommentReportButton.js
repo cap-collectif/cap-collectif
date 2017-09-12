@@ -22,8 +22,8 @@ const CommentReportButton = React.createClass({
         reported={comment.has_user_reported}
         onReport={this.handleReport}
         author={comment.author}
-        buttonBsSize="xs"
-        buttonClassName="btn btn-xs btn-dark-gray btn--outline"
+        buttonBsSize="sm"
+        buttonClassName="btn btn-sm btn-dark-gray btn--outline"
       />
     );
   },
