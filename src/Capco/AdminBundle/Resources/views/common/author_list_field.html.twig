@@ -1,0 +1,9 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% spaceless %}
+        {% if value %}
+            <a href="{{ path('admin_capco_user_user_edit', {id: value.id}) }}">{{ value.fullName }}</a>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
