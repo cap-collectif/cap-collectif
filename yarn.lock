@@ -1743,7 +1743,7 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.0.0, commander@^2.9.0, commander@~2.9:
+commander@2.9.0, commander@^2.0.0, commander@^2.9.0, commander@~2.9:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
@@ -3022,6 +3022,19 @@ getpass@^0.1.1:
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.7.tgz#5eff8e3e684d569ae4cb2b1282604e8ba62149fa"
   dependencies:
     assert-plus "^1.0.0"
+
+gherkin-lint@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/gherkin-lint/-/gherkin-lint-2.5.0.tgz#ec7c13bf167c6f25bc0fb6c0b591e48cd731fa34"
+  dependencies:
+    commander "2.9.0"
+    gherkin "4.0.0"
+    glob "7.0.5"
+    lodash "4.13.1"
+
+gherkin@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/gherkin/-/gherkin-4.0.0.tgz#79dce04d1223ea43b4862a76be5ce8f89c12c32c"
 
 glob-base@^0.3.0:
   version "0.3.0"
@@ -4359,6 +4372,10 @@ lodash.snakecase@^4.1.1:
 lodash.some@^4.4.0, lodash.some@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
+
+lodash@4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.13.1.tgz#83e4b10913f48496d4d16fec4a560af2ee744b68"
 
 lodash@^3.10.1:
   version "3.10.1"
