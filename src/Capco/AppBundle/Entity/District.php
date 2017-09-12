@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * District.
- *
  * @ORM\Table(name="district")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DistrictRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -21,15 +19,27 @@ class District
     use UuidTrait;
 
     /**
-     * @var string
-     *
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts", cascade={"persist"})
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    private $form;
+
+    /**
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
     /**
-     * @var \DateTime
-     *
+     * @ORM\Column(name="geojson", type="json", nullable=true)
+     */
+    private $geojson;
+
+    /**
+     * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
+     */
+    private $displayedOnMap = true;
+
+    /**
      * @Gedmo\Timestampable(on="change", field={"name"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
@@ -51,20 +61,48 @@ class District
         return $this->getId() ? $this->getName() : 'New district';
     }
 
-    /**
-     * @return string
-     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    public function setForm(ProposalForm $form): self
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    public function getGeojson()
+    {
+        return $this->geojson;
+    }
+
+    public function setGeojson(string $geojson = null): self
+    {
+        $this->geojson = $geojson;
+
+        return $this;
+    }
+
+    public function setDisplayedOnMap(bool $displayedOnMap): self
+    {
+        $this->displayedOnMap = $displayedOnMap;
+
+        return $this;
+    }
+
+    public function isDisplayedOnMap(): bool
+    {
+        return $this->displayedOnMap;
+    }
+
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -76,11 +114,6 @@ class District
         return $this->proposals;
     }
 
-    /**
-     * Add proposal.
-     *
-     * @param Proposal $proposal
-     */
     public function addProposal(Proposal $proposal)
     {
         if (!$this->proposals->contains($proposal)) {
@@ -90,11 +123,6 @@ class District
         return $this;
     }
 
-    /**
-     * Remove proposal.
-     *
-     * @param Proposal $proposal
-     */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);

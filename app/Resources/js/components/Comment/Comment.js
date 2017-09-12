@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
-import moment from 'moment';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
@@ -48,52 +47,6 @@ const Comment = React.createClass({
     return CommentActions.create(uri, object, data);
   },
 
-  renderDate() {
-    const { comment } = this.props;
-    if (!Modernizr.intl) {
-      return null;
-    }
-
-    return (
-      <span className="excerpt">
-        <FormattedDate
-          value={moment(comment.created_at)}
-          day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
-        />
-      </span>
-    );
-  },
-
-  renderEditionDate() {
-    const { comment } = this.props;
-    if (!Modernizr.intl) {
-      return null;
-    }
-
-    if (moment(comment.updated_at).diff(comment.created_at, 'seconds') <= 1) {
-      return null;
-    }
-
-    return (
-      <span className="excerpt">
-        {' - '}
-        {<FormattedMessage id="comment.edited" />}{' '}
-        <FormattedDate
-          value={moment(comment.updated_at)}
-          day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
-        />
-      </span>
-    );
-  },
-
   render() {
     const { onVote, root } = this.props;
     const comment = this.props.comment;
@@ -101,45 +54,44 @@ const Comment = React.createClass({
       opinion: true,
       'opinion--comment': true,
     });
-    const detailClasses = classNames({
+    const contentClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
-      comment__descript: true,
+      opinion__content: true,
     });
-
     return (
       <li className={classes}>
         <div className="opinion__body">
-          <div className="opinion__content">
-            <UserAvatar user={comment.author} />
-            <div className="comment__detail">
-              <div className={detailClasses}>
-                <div className="opinion__data">
-                  <CommentInfos comment={comment} />
-                </div>
-                <CommentBody comment={comment} />
-              </div>
-              <div className="comment__action">
-                <span className="h5 comment__date">
-                  {this.renderDate()}
-                  {this.renderEditionDate()}
-                </span>
-                <div className="comment__buttons">
-                  <CommentVoteButton comment={comment} onVote={onVote} />{' '}
-                  {root ? (
-                    <a onClick={this.answer} className="btn btn-sm btn-dark-gray btn--outline">
-                      <i className="cap-reply-mail-2" /> {<FormattedMessage id="global.answer" />}
-                    </a>
-                  ) : null}{' '}
-                  <CommentReportButton comment={comment} /> <CommentEdit comment={comment} />{' '}
-                </div>
-              </div>
+          <div className={contentClasses}>
+            <UserAvatar user={comment.author} className="pull-left" />
+            <div className="opinion__data">
+              <CommentInfos comment={comment} />
+            </div>
+            <CommentBody comment={comment} />
+            <div className="comment__buttons">
+              <CommentVoteButton comment={comment} onVote={onVote} />{' '}
+              {root
+                ? <a
+                    onClick={this.answer}
+                    className="btn btn-xs btn-dark-gray btn--outline">
+                    <i className="cap-reply-mail-2" />{' '}
+                    {<FormattedMessage id="global.answer" />}
+                  </a>
+                : null}{' '}
+              <CommentReportButton comment={comment} />{' '}
+              <CommentEdit comment={comment} />{' '}
             </div>
           </div>
           <div className="comment-answers-block">
-            {root ? <CommentAnswers onVote={onVote} comments={comment.answers} /> : null}
-            {this.state.answerFormShown ? (
-              <CommentForm comment={this.comment} focus={this.state.answerFormFocus} isAnswer />
-            ) : null}
+            {root
+              ? <CommentAnswers onVote={onVote} comments={comment.answers} />
+              : null}
+            {this.state.answerFormShown
+              ? <CommentForm
+                  comment={this.comment}
+                  focus={this.state.answerFormFocus}
+                  isAnswer
+                />
+              : null}
           </div>
         </div>
       </li>

@@ -9,6 +9,7 @@ admin.global:
   unpublish: La contribution a bien été dépubliée.
   validate: La contribution a bien été validée.
   expired: Expiré
+  by: par
 
 
 # Dashboard groups
@@ -219,6 +220,7 @@ admin:
       created_at: Création
     consultation_step_type:
       title: Titre
+      step: Projet participatif
       opinion_types: Éléments de structure
       updated_at: Mise à jour
       created_at: Création
@@ -490,7 +492,7 @@ admin:
       collect_step: Étape de dépôt
       comments: Commentaires
       created_at: Création
-      district: Localisation
+      district: Zone géographique
       enabled: Publié
       deleted: Supprimé
       deleted_at: Supprimé le
@@ -516,7 +518,7 @@ admin:
         evaluation: "Rappel : plafond maximal d'un projet 500 000 €"
         delay: Préciser les temps d'études et de travaux
         proposedAnswer: À destination du porteur de projet
-      id: Id
+      id: Réf
       isTrashed: Dans la corbeille
       likers: Coup(s) de coeur
       link: Lien

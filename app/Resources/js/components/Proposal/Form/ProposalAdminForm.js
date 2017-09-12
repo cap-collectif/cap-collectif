@@ -20,16 +20,16 @@ export const ProposalAdminForm = React.createClass({
   propTypes: {
     proposalForm: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    districts: PropTypes.array.isRequired,
     themes: PropTypes.array.isRequired,
     features: PropTypes.object.isRequired,
   },
 
   render() {
-    const { districts, themes, features, user, proposalForm } = this.props;
+    const { themes, features, user, proposalForm } = this.props;
     const optional = (
       <span className="excerpt">
-        {' '}<FormattedMessage id="global.form.optional" />
+        {' '}
+        <FormattedMessage id="global.form.optional" />
       </span>
     );
     return (
@@ -68,7 +68,7 @@ export const ProposalAdminForm = React.createClass({
           wrapperClassName="col-sm-10"
         />
         {proposalForm.usingCategories &&
-          proposalForm.categories.length > 0 &&
+        proposalForm.categories.length > 0 && (
           <Field
             name="category"
             id="proposal-admin-category"
@@ -85,9 +85,10 @@ export const ProposalAdminForm = React.createClass({
               value: c.id,
               label: c.name,
             }))}
-          />}
+          />
+        )}
         {features.themes &&
-          proposalForm.usingThemes &&
+        proposalForm.usingThemes && (
           <Field
             name="theme"
             id="proposal-admin-theme"
@@ -101,9 +102,10 @@ export const ProposalAdminForm = React.createClass({
                 {!proposalForm.themeMandatory && optional}
               </span>
             }
-          />}
+          />
+        )}
         {features.districts &&
-          proposalForm.usingDistrict &&
+        proposalForm.usingDistrict && (
           <Field
             name="district"
             id="proposal-admin-district"
@@ -116,9 +118,10 @@ export const ProposalAdminForm = React.createClass({
                 {!proposalForm.districtMandatory && optional}
               </span>
             }
-            options={districts.map(d => ({ value: d.id, label: d.name }))}
-          />}
-        {proposalForm.fields.map((field, index) =>
+            options={proposalForm.districts.map(d => ({ value: d.id, label: d.name }))}
+          />
+        )}
+        {proposalForm.fields.map((field, index) => (
           <Field
             key={index}
             id={`proposal-admin-fields-${index}`}
@@ -133,8 +136,8 @@ export const ProposalAdminForm = React.createClass({
                 {!field.required && optional}
               </span>
             }
-          />,
-        )}
+          />
+        ))}
         <Field
           name="media"
           id="proposal-admin-media"
@@ -163,7 +166,6 @@ export default connect((state, props) => ({
   user: state.user.user,
   features: state.default.features,
   themes: state.default.themes,
-  districts: state.default.districts,
 }))(
   reduxForm({
     form: formName,
