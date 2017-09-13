@@ -56,9 +56,6 @@ class ConsultationStepTypeAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.consultation_step_type.title',
             ])
-            ->add('step', null, [
-              'label' => 'admin.fields.consultation_step_type.step',
-            ])
             ->add('opinionTypes', 'sonata_type_model', [
                 'label' => 'admin.fields.consultation_step_type.opinion_types',
             ])

@@ -856,32 +856,4 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
         return $this->getAddress()[0]['formatted_address'];
     }
-
-    /**
-     * Useful for sonata admin.
-     */
-    public function updatedInfo(): array
-    {
-        return [
-            'date' => $this->getUpdatedAt(),
-            'user' => $this->getAuthor(),
-        ];
-    }
-
-    /**
-     * Useful for sonata admin.
-     */
-    public function titleInfo(): array
-    {
-        return [
-            'id' => $this->getId(),
-            'title' => $this->getTitle(),
-            'summary' => $this->getSummary(),
-        ];
-    }
-
-    public function lastStatus(): string
-    {
-        return '';
-    }
 }
