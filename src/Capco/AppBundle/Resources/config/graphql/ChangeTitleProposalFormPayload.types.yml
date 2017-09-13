@@ -1,4 +1,4 @@
-CreateProposalFormPayload:
+ChangeTitleProposalFormPayload:
     type: relay-mutation-payload
     config:
         fields:

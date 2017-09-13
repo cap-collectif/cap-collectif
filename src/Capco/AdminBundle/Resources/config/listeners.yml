@@ -49,6 +49,7 @@ services:
     tags:
       - { name: overblog_graphql.mutation, alias: "createProposalForm", method: "create" }
       - { name: overblog_graphql.mutation, alias: "updateProposalForm", method: "update" }
+      - { name: overblog_graphql.mutation, alias: "changeTitleProposalForm", method: "changeTitle" }
       - { name: overblog_graphql.mutation, alias: "updateProposalFormNotificationsConfiguration", method: "updateNotificationsConfiguration" }
 
   capco.resolver.consultations:

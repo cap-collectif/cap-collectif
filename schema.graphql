@@ -163,6 +163,17 @@ type ChangeSelectionStatusPayload {
   clientMutationId: String
 }
 
+input ChangeTitleProposalFormInput {
+  proposalFormId: Int!
+  title: String!
+  clientMutationId: String
+}
+
+type ChangeTitleProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
 type CollectStep implements Step {
   id: ID!
   kind: String!
@@ -265,7 +276,7 @@ input CreateProposalFormInput {
 }
 
 type CreateProposalFormPayload {
-  proposalFrom: ProposalForm!
+  proposalForm: ProposalForm!
   clientMutationId: String
 }
 
@@ -340,6 +351,7 @@ type Mutation {
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
+  changeTitleProposalForm(input: ChangeTitleProposalFormInput!): ChangeTitleProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
 }
 
@@ -654,7 +666,7 @@ type ProposalForm {
   description: String
   summaryHelpText: String
   illustrationHelpText: String
-  title: String
+  title: String!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!

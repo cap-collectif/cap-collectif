@@ -13,7 +13,7 @@ ProposalForm:
             illustrationHelpText:
                 type: "String"
             title:
-                type: "String"
+                type: "String!"
             categories:
                 type: "[ProposalCategory!]!"
             usingThemes:

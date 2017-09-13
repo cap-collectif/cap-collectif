@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
+import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from './__generated__/ProposalFormAdminPageTabs_proposalForm.graphql';
 
 type DefaultProps = void;
@@ -32,7 +33,9 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })} />
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
+            <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
+          </Tab>
         </Tabs>
       </div>
     );
@@ -48,6 +51,7 @@ export default createFragmentContainer(
       url
       ...ProposalFormAdminConfigurationForm_proposalForm
       ...ProposalFormAdminNotificationForm_proposalForm
+      ...ProposalFormAdminSettingsForm_proposalForm
     }
   `,
 );

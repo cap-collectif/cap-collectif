@@ -36,6 +36,30 @@ class ProposalFormMutation implements ContainerAwareInterface
         return ['proposalForm' => $proposalForm];
     }
 
+    public function changeTitle(Argument $input): array
+    {
+        $arguments = $input->getRawArguments();
+        $formFactory = $this->container->get('form.factory');
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
+
+        if (!$proposalForm) {
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
+        }
+
+        unset($arguments['proposalFormId']);
+
+        $form = $formFactory->create(ProposalFormUpdateType::class, $proposalForm);
+        $form->submit($arguments, false);
+
+        if (!$form->isValid()) {
+            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+        }
+
+        $this->container->get('doctrine.orm.default_entity_manager')->flush();
+
+        return ['proposalForm' => $proposalForm];
+    }
+
     public function update(Argument $input): array
     {
         $arguments = $input->getRawArguments();
