@@ -1,0 +1,16 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% spaceless %}
+        {% if value %}
+            {% if value.date is defined %}
+                {{ value.date|date('d M Y H:m') }}
+            {% endif %}
+            {% if value.user is defined and value.user is not null %}
+                <br>
+                {{ 'admin.global.by'|trans({}, 'SonataAdminBundle') }}
+                <a href="{{ path('admin_capco_user_user_edit', {id: value.user.id}) }}">{{ value.user.fullName }}</a>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
