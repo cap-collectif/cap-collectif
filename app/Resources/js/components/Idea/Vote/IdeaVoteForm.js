@@ -18,7 +18,7 @@ const validate = ({ username, email }: Object, props: Props) => {
   const errors = {};
   const { anonymous } = props;
   if (anonymous) {
-    if (!username || username.length <= 2) {
+    if (!username || username.length < 2) {
       errors.username = 'idea.vote.constraints.username';
     }
     if (!email || !isEmail(email)) {
