@@ -22,6 +22,7 @@ type Props = RelayProps & {
   usingAddress: boolean,
   usingCategories: boolean,
   usingThemes: boolean,
+  usingDistrict: boolean,
 };
 
 const zoomLevels = [
@@ -102,7 +103,26 @@ const headerPanelUsingAddress = (
   </div>
 );
 
-const onSubmit = (values: Object) => {
+const headerPanelUsingDistrict = (
+  <div>
+    <h4 className="pull-left">
+      <FormattedMessage id="proposal_form.districts" />
+    </h4>
+    <div className="pull-right">
+      <Field
+        id="proposal_form_using_district_field"
+        name="usingDistrict"
+        component={toggle}
+        normalize={val => !!val}
+      />
+    </div>
+    <div className="clearfix" />
+  </div>
+);
+
+const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+  values.proposalFormId = props.proposalForm.id;
+  delete values.id;
   return UpdateProposalFormMutation.commit({
     input: values,
   }).then(() => {
@@ -122,6 +142,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
       usingAddress,
       usingThemes,
       usingCategories,
+      usingDistrict,
     } = this.props;
     return (
       <div className="box box-primary container">
@@ -262,7 +283,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
             </p>
             <h5 style={{ fontWeight: 'bold', marginTop: 20 }}>Position initiale de la carte</h5>
             <Row>
-              <Col xs={1} md={4}>
+              <Col xs={12} md={4}>
                 <Field
                   name="latMap"
                   component={component}
@@ -271,7 +292,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
                   label={<FormattedMessage id="proposal_form.lat_map" />}
                 />
               </Col>
-              <Col xs={1} md={4}>
+              <Col xs={12} md={4}>
                 <Field
                   name="lngMap"
                   component={component}
@@ -280,7 +301,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
                   label={<FormattedMessage id="proposal_form.lng_map" />}
                 />
               </Col>
-              <Col xs={1} md={4}>
+              <Col xs={12} md={4}>
                 <Field
                   name="zoomMap"
                   component={component}
@@ -298,6 +319,23 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
                 </Field>
               </Col>
             </Row>
+          </Panel>
+          <Panel collapsible expanded={usingDistrict} header={headerPanelUsingDistrict}>
+            <Field
+              name="districtMandatory"
+              component={component}
+              type="checkbox"
+              id="proposal_form_district_mandatory">
+              <FormattedMessage id="proposal_form.required" />
+            </Field>
+            <Field
+              name="districtHelpText"
+              component={component}
+              type="text"
+              id="proposal_form_district_help_text"
+              label={<FormattedMessage id="proposal_form.help_text" />}
+            />
+            <h5>Liste des zones géogrpahiques</h5>
           </Panel>
           <div className="box-header">
             <h3
@@ -335,6 +373,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
+  usingDistrict: selector(state, 'usingDistrict'),
 });
 
 const container = connect(mapStateToProps)(form);
@@ -360,6 +399,9 @@ export default createFragmentContainer(
       descriptionHelpText
       summaryHelpText
       titleHelpText
+      usingDistrict
+      districtHelpText
+      districtMandatory
     }
   `,
 );

@@ -328,7 +328,6 @@ type MediaResponse implements Response {
 }
 
 type Mutation {
-  changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
@@ -339,6 +338,7 @@ type Mutation {
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
+  changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
 }
@@ -989,6 +989,7 @@ type UnselectProposalPayload {
 }
 
 input UpdateProposalFormInput {
+  proposalFormId: Int!
   description: String
   summaryHelpText: String
   illustrationHelpText: String

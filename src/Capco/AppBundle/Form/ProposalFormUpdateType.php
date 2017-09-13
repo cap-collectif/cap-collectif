@@ -26,6 +26,10 @@ class ProposalFormUpdateType extends AbstractType
             ->add('themeMandatory', CheckboxType::class)
             ->add('themeHelpText', PurifiedTextType::class)
 
+            ->add('usingDistrict', CheckboxType::class)
+            ->add('districtMandatory', CheckboxType::class)
+            ->add('districtHelpText', PurifiedTextType::class)
+
             ->add('usingCategories', CheckboxType::class)
             ->add('categoryMandatory', CheckboxType::class)
             ->add('categoryHelpText', PurifiedTextType::class)
@@ -43,7 +47,7 @@ class ProposalFormUpdateType extends AbstractType
 
             ->add('illustrationHelpText', PurifiedTextType::class)
 
-            ->add('questions', QuestionnaireAbstractQuestionType::class)
+            // ->add('questions', QuestionnaireAbstractQuestionType::class)
         ;
     }
 

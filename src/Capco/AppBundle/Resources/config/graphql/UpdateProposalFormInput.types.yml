@@ -3,6 +3,8 @@ UpdateProposalFormInput:
     config:
         description: ""
         fields:
+            proposalFormId:
+                type: "Int!"
             description:
                 type: "String"
             summaryHelpText:
