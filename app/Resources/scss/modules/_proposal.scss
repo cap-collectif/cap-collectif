@@ -352,12 +352,48 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     padding-top: 20px;
 }
 
+.proposal__tabs{
+    background-color: $lightest-gray;
+    margin-bottom: 30px;
+
+    .container {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .proposal__tab {
+            #proposal-page-tabs-tab-content {
+                border-radius: 0;
+            }
+
+            a {
+                padding: 20px;
+            }
+            
+            .badge {
+                background-color: $alt-section;
+                color: $gray-light;
+                margin-left: 10px;
+            }
+
+            &.active .badge {
+                background-color: $gray-light;
+                color: $white;
+            }
+        }
+    }
+}
+
 .proposal__private-field h2 {
     margin-top: 0;
 }
 
 .consultation__header__title {
     margin: 15px 0 15px;
+    display: inline-block;
+}
+
+#proposal-vote-btn {
+    margin-top: 15px;
 }
 
 .proposal__map {

@@ -9,9 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class HasAddressIfMandatory extends Constraint
 {
-    public $noAddressMessage = 'global.no_address_when_mandatory';
-    public $noValidJsonAddressMessage = 'global.no_valid_json_address';
-    public $addressNotInZoneMessage = 'global.address_not_in_zone';
+    public $message = 'global.no_address_when_mandatory';
 
     public function validatedBy(): string
     {

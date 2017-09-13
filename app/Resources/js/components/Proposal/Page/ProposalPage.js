@@ -8,12 +8,10 @@ import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageBlog from './ProposalPageBlog';
-import ProposalPageComments from './ProposalPageComments';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 import ProposalFusionList from './ProposalFusionList';
@@ -58,56 +56,35 @@ export const ProposalPage = React.createClass({
     const currentVotableStep = proposal.votableStepId
       ? steps.filter(s => s.id === proposal.votableStepId)[0]
       : null;
-    const votesCount = Object.values(proposal.votesCountByStepId).reduce(
-      (a, b) => a + b,
-      0,
-    );
+    const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b) => a + b, 0);
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
     return (
       <div>
         <ProposalPageAlert proposal={proposal} />
-        <ProposalPageHeader
-          proposal={proposal}
-          className="container container--custom"
-        />
+        <ProposalPageHeader proposal={proposal} className="container container--custom" />
         <Tab.Container
           id="proposal-page-tabs"
           defaultActiveKey={this.getDefaultKey()}
           className="container--custom">
           <div>
-            <div className="tabs__pills">
+            <div className="proposal__tabs">
               <div className="container">
-                <Nav bsStyle="pills" style={{ display: 'inline-block' }}>
-                  <NavItem eventKey="content" className="tabs__pill">
+                <Nav bsStyle="tabs">
+                  <NavItem eventKey="content" className="proposal__tab">
                     <FormattedMessage id="proposal.tabs.content" />
                   </NavItem>
-                  <NavItem eventKey="comments" className="tabs__pill">
-                    <FormattedMessage id="proposal.tabs.comments" />
-                    <span className="badge">
-                      {proposal.comments_count}
-                    </span>
-                  </NavItem>
-                  {showVotesTab &&
-                    <NavItem eventKey="votes" className="tabs__pill">
+                  {showVotesTab && (
+                    <NavItem eventKey="votes" className="proposal__tab">
                       <FormattedMessage id="proposal.tabs.votes" />
-                      <span className="badge">
-                        {votesCount}
-                      </span>
-                    </NavItem>}
-                  <NavItem eventKey="blog" className="tabs__pill">
+                      <span className="badge">{votesCount}</span>
+                    </NavItem>
+                  )}
+                  <NavItem eventKey="blog" className="proposal__tab">
                     <FormattedMessage id="proposal.tabs.blog" />
-                    <span className="badge">
-                      {proposal.postsCount}
-                    </span>
+                    <span className="badge">{proposal.postsCount}</span>
                   </NavItem>
                 </Nav>
-                <ProposalVoteButtonWrapper
-                  id="proposal-vote-btn"
-                  proposal={proposal}
-                  style={{ marginTop: '10px' }}
-                  className="pull-right hidden-xs btn-lg"
-                />
               </div>
             </div>
             <div className="container">
@@ -130,57 +107,48 @@ export const ProposalPage = React.createClass({
                         showDistricts={features.districts}
                         showCategories={form.usingCategories}
                         showNullEstimation={
-                          !!(
-                            currentVotableStep &&
-                            currentVotableStep.voteType === VOTE_TYPE_BUDGET
-                          )
+                          !!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)
                         }
                         showThemes={features.themes && form.usingThemes}
                       />
                       <br />
                       {currentVotableStep &&
-                        currentVotableStep.voteThreshold > 0 &&
+                      currentVotableStep.voteThreshold > 0 && (
                         <span>
                           <ProposalPageVoteThreshold
                             proposal={proposal}
                             step={currentVotableStep}
                           />
                           <br />
-                        </span>}
+                        </span>
+                      )}
                       <ProposalPageAdvancement proposal={proposal} />
                     </Col>
                   </Row>
                 </Tab.Pane>
-                <Tab.Pane eventKey="comments">
-                  <ProposalPageComments id={proposal.id} form={form} />
-                </Tab.Pane>
-                {showVotesTab &&
+                {showVotesTab && (
                   <Tab.Pane eventKey="votes">
                     <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                       <Row className="clearfix">
                         <Nav bsStyle="pills">
-                          {votableSteps.map((step, index) =>
+                          {votableSteps.map((step, index) => (
                             <NavItem key={index} eventKey={index}>
                               {step.title}{' '}
-                              <span className="badge">
-                                {proposal.votesCountByStepId[step.id]}
-                              </span>
-                            </NavItem>,
-                          )}
+                              <span className="badge">{proposal.votesCountByStepId[step.id]}</span>
+                            </NavItem>
+                          ))}
                         </Nav>
                         <Tab.Content animation={false}>
-                          {votableSteps.map((step, index) =>
+                          {votableSteps.map((step, index) => (
                             <Tab.Pane key={index} eventKey={index}>
-                              <ProposalPageVotes
-                                stepId={step.id}
-                                proposal={proposal}
-                              />
-                            </Tab.Pane>,
-                          )}
+                              <ProposalPageVotes stepId={step.id} proposal={proposal} />
+                            </Tab.Pane>
+                          ))}
                         </Tab.Content>
                       </Row>
                     </Tab.Container>
-                  </Tab.Pane>}
+                  </Tab.Pane>
+                )}
                 <Tab.Pane eventKey="blog">
                   <ProposalPageBlog />
                 </Tab.Pane>
