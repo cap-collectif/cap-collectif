@@ -220,10 +220,10 @@ Scenario: GraphQL client wants select a proposal without status
       }
     }
   """
-  And proposal "8" should be selected in selection step "selectionstep1"
 
 @database
-Scenario: GraphQL client wants select a proposal with status, then unselect    Given I am logged in to graphql as admin
+Scenario: GraphQL client wants select a proposal with status, then unselect
+  Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
@@ -273,14 +273,20 @@ Scenario: GraphQL client wants select a proposal with status, then unselect    G
     }
   }
   """
-  And proposal "8" should be selected in selection step "selectionstep1"
   When I send a GraphQL POST request:
   """
   {
     "query": "mutation ($input: UnselectProposalInput!) {
       unselectProposal(input: $input) {
         proposal {
-          id
+          selections {
+            step {
+              id
+            }
+            status {
+              id
+            }
+          }
         }
       }
     }",
@@ -298,13 +304,17 @@ Scenario: GraphQL client wants select a proposal with status, then unselect    G
     "data": {
       "unselectProposal": {
         "proposal": {
-          "id": "8"
+          "selections": [
+            {
+              "step": { "id": "selectionstep4" },
+              "status": null
+            }
+          ]
         }
       }
     }
   }
   """
-  And proposal "8" should not be selected in selection step "selectionstep1"
 
 @database
 Scenario: GraphQL client wants to update proposal status
@@ -315,7 +325,14 @@ Scenario: GraphQL client wants to update proposal status
     "query": "mutation ($input: ChangeSelectionStatusInput!) {
       changeSelectionStatus(input: $input) {
         proposal {
-          id
+          selections {
+            step {
+              id
+            }
+            status {
+              id
+            }
+          }
         }
       }
     }",
@@ -334,13 +351,16 @@ Scenario: GraphQL client wants to update proposal status
     "data": {
       "changeSelectionStatus": {
         "proposal": {
-          "id": "3"
+          "selections": [{
+            "step": { "id": "selectionstep1" },
+            "status": { "id": "1" }
+          }]
         }
       }
     }
   }
   """
-  And selection "selectionstep1" 3 should have status 1  And 1 mail should be sent
+  And 1 mail should be sent
   And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
   When I send a GraphQL POST request:
@@ -349,7 +369,14 @@ Scenario: GraphQL client wants to update proposal status
     "query": "mutation ($input: ChangeSelectionStatusInput!) {
       changeSelectionStatus(input: $input) {
         proposal {
-          id
+          selections {
+            step {
+              id
+            }
+            status {
+              id
+            }
+          }
         }
       }
     }",
@@ -368,13 +395,15 @@ Scenario: GraphQL client wants to update proposal status
     "data": {
       "changeSelectionStatus": {
         "proposal": {
-          "id": "3"
+          "selections": [{
+            "step": { "id": "selectionstep1" },
+            "status": null
+          }]
         }
       }
     }
   }
   """
-  And selection "selectionstep1" 3 should have no status
 
 @database
 Scenario: GraphQL client wants delete a proposal
