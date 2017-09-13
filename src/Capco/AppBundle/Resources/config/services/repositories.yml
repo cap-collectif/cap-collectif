@@ -197,4 +197,4 @@ services:
   capco.proposal_form.repository:
     class: Capco\AppBundle\Repository\ProposalFormRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ProposalFormRepository']
+    arguments: ['CapcoAppBundle:ProposalForm']

@@ -1,11 +1,8 @@
-ProposalForm:
-    type: object
+UpdateProposalFormInput:
+    type: relay-mutation-input
     config:
-        description: "A budget form"
-        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        description: ""
         fields:
-            id:
-                type: "String!"
             description:
                 type: "String"
             summaryHelpText:
@@ -14,8 +11,6 @@ ProposalForm:
                 type: "String"
             title:
                 type: "String"
-            categories:
-                type: "[ProposalCategory!]!"
             usingThemes:
                 type: "Boolean!"
             themeMandatory:
@@ -24,13 +19,6 @@ ProposalForm:
                 type: "String"
             usingDistrict:
                 type: "Boolean!"
-            districts:
-                args:
-                  order:
-                    type: "DistrictOrderField"
-                    defaultValue: "ALPHABETICAL"
-                resolve: "@=resolver('proposalform_districts', [value, args['order']])"
-                type: "[District!]!"
             districtMandatory:
                 type: "Boolean!"
             districtHelpText:
@@ -49,18 +37,9 @@ ProposalForm:
                 type: "String"
             addressHelpText:
                 type: "String"
-            customFields:
-                type: "[Question!]!"
-                resolve: "@=resolver('proposal_form_questions', [value])"
             latMap:
                 type: "Float"
             lngMap:
                 type: "Float"
             zoomMap:
                 type: "Int"
-            url:
-                type: "URI!"
-                description: "The HTTP url for this proposal form."
-                resolve: "@=resolver('proposal_form_url', [value])"
-            notificationsConfiguration:
-                type: "NotificationsConfiguration!"

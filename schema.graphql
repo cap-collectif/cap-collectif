@@ -339,6 +339,15 @@ type Mutation {
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
+  updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
+  updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
+}
+
+# A notifications configuration
+type NotificationsConfiguration {
+  onCreate: Boolean!
+  onUpdate: Boolean!
+  onDelete: Boolean!
 }
 
 # A contribution
@@ -641,8 +650,8 @@ type ProposalCategory {
 
 # A budget form
 type ProposalForm {
-  id: Int!
-  introduction: String
+  id: String!
+  description: String
   summaryHelpText: String
   illustrationHelpText: String
   title: String
@@ -660,6 +669,7 @@ type ProposalForm {
   usingAddress: Boolean!
   titleHelpText: String
   descriptionHelpText: String
+  addressHelpText: String
   customFields: [Question!]!
   latMap: Float
   lngMap: Float
@@ -667,6 +677,7 @@ type ProposalForm {
 
   # The HTTP url for this proposal form.
   url: URI!
+  notificationsConfiguration: NotificationsConfiguration!
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -974,6 +985,48 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateProposalFormInput {
+  description: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  title: String
+  usingThemes: Boolean!
+  themeMandatory: Boolean!
+  themeHelpText: String
+  usingDistrict: Boolean!
+  districtMandatory: Boolean!
+  districtHelpText: String
+  usingCategories: Boolean!
+  categoryMandatory: Boolean!
+  categoryHelpText: String
+  usingAddress: Boolean!
+  titleHelpText: String
+  descriptionHelpText: String
+  addressHelpText: String
+  latMap: Float
+  lngMap: Float
+  zoomMap: Int
+  clientMutationId: String
+}
+
+input UpdateProposalFormNotificationsConfigurationInput {
+  proposalFormId: Int!
+  onCreate: Boolean!
+  onUpdate: Boolean!
+  onDelete: Boolean!
+  clientMutationId: String
+}
+
+type UpdateProposalFormNotificationsConfigurationPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+type UpdateProposalFormPayload {
+  proposalForm: ProposalForm!
   clientMutationId: String
 }
 

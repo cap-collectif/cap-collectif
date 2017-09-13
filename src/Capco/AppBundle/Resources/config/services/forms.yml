@@ -131,3 +131,8 @@ services:
     class: Capco\AppBundle\Form\QuestionnaireAbstractQuestionType
     tags:
       - { name: form.type }
+
+  capco.form.proposal_form.notifications_configuration:
+    class: Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType
+    tags:
+      - { name: form.type }

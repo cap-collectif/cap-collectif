@@ -48,6 +48,8 @@ services:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation
     tags:
       - { name: overblog_graphql.mutation, alias: "createProposalForm", method: "create" }
+      - { name: overblog_graphql.mutation, alias: "updateProposalForm", method: "update" }
+      - { name: overblog_graphql.mutation, alias: "updateProposalFormNotificationsConfiguration", method: "updateNotificationsConfiguration" }
 
   capco.resolver.consultations:
       class: Capco\AppBundle\GraphQL\Resolver\ConsultationResolver
