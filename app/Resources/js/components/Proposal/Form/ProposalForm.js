@@ -331,8 +331,8 @@ export const ProposalForm = React.createClass({
         {optional}
       </span>
     );
-    // eslint-disable-next-line react/prop-types
-    const autocompleteItem = ({ formattedSuggestion }) => (
+
+    const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
       <div>
         <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
         <small>{formattedSuggestion.secondaryText}</small>
