@@ -518,8 +518,9 @@ admin:
         evaluation: "Rappel : plafond maximal d'un projet 500 000 €"
         delay: Préciser les temps d'études et de travaux
         proposedAnswer: À destination du porteur de projet
-      id: Réf
-      isTrashed: Dans la corbeille
+      id: Id
+      isTrashed: Corbeille
+      likers: Coup(s) de coeur
       link: Lien
       media: Illustration
       no_category: Aucune catégorie

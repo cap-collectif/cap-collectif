@@ -863,8 +863,25 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function updatedInfo(): array
     {
         return [
-            'date' => $this->updatedAt,
+            'date' => $this->getUpdatedAt(),
             'user' => $this->getAuthor(),
         ];
+    }
+
+    /**
+     * Useful for sonata admin.
+     */
+    public function titleInfo(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'summary' => $this->getSummary(),
+        ];
+    }
+
+    public function lastStatus(): string
+    {
+        return '';
     }
 }
