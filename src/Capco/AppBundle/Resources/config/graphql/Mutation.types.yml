@@ -2,6 +2,13 @@ Mutation:
     type: object
     config:
         fields:
+          changeDistrict:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeDistrictInput
+                    payloadType: ChangeDistrictPayload
+                    mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

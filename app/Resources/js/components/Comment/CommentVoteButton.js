@@ -36,8 +36,9 @@ const CommentVoteButton = React.createClass({
   renderFormOrDisabled() {
     if (this.userIsAuthor()) {
       return (
-        <button disabled="disabled" className="btn btn-dark-gray btn-sm">
-          <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
+        <button disabled="disabled" className="btn btn-dark-gray btn-xs">
+          <i className="cap-hand-like-2" />{' '}
+          {<FormattedMessage id="comment.vote.submit" />}
         </button>
       );
     }
@@ -50,7 +51,7 @@ const CommentVoteButton = React.createClass({
 
     if (comment.has_user_voted) {
       return (
-        <button className="btn btn-danger btn-sm" onClick={this.deleteVote}>
+        <button className="btn btn-danger btn-xs" onClick={this.deleteVote}>
           {<FormattedMessage id="comment.vote.remove" />}
         </button>
       );
@@ -58,8 +59,11 @@ const CommentVoteButton = React.createClass({
 
     return (
       <LoginOverlay>
-        <button className="btn btn-success btn--outline btn-sm" onClick={this.vote}>
-          <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
+        <button
+          className="btn btn-success btn--outline btn-xs"
+          onClick={this.vote}>
+          <i className="cap-hand-like-2" />{' '}
+          {<FormattedMessage id="comment.vote.submit" />}
         </button>
       </LoginOverlay>
     );
@@ -68,7 +72,7 @@ const CommentVoteButton = React.createClass({
   render() {
     const { comment } = this.props;
     return (
-      <span className="comment__agree">
+      <span>
         {this.renderFormOrDisabled()}{' '}
         <span className="opinion__votes-nb">{comment.votes_count}</span>
       </span>

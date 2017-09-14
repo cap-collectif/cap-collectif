@@ -28,6 +28,13 @@ Feature: ProposalForm Restful Api
   "zoomMap": @integer@,
   "latMap": @number@,
   "lngMap": @number@,
+  "districts": [
+    {
+      "name": @string@,
+      "id": @string@
+    },
+     @...@
+  ],
   "categories":[
     {
       "name": "Aménagement",

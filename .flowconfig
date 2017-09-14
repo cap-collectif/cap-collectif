@@ -15,7 +15,7 @@ all=warn
 .*/app/Resources/assets/js/ckeditor/*
 
 [libs]
-flow-typed/
+flow-typed
 
 [options]
 emoji=true

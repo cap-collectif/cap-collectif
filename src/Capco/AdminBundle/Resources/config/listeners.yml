@@ -10,7 +10,7 @@ services:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
           - { name: overblog_graphql.resolver, alias: "proposalform_questions", method: "resolveQuestions" }
-
+          - { name: overblog_graphql.resolver, alias: "proposalform_districts", method: "resolveDistricts" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
@@ -23,6 +23,11 @@ services:
           - { name: overblog_graphql.resolver, alias: "response_type", method: "resolveResponseType" }
           - { name: overblog_graphql.resolver, alias: "query_proposal", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_publicationStatus", method: "resolveProposalPublicationStatus" }
+
+  capco.mutation.district:
+        class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
+        tags:
+            - { name: overblog_graphql.mutation, alias: "changeDistrict", method: "change" }
 
   capco.mutation.proposal:
         class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation

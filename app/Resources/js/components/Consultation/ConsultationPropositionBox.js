@@ -30,11 +30,7 @@ export const ConsultationPropositionBox = React.createClass({
         // eslint-disable-next-line react/prop-types
         if (props.consultations[0].sections) {
           return (
-            <SectionRecursiveList
-              consultation={step}
-              // eslint-disable-next-line react/prop-types
-              sections={props.consultations[0].sections}
-            />
+            <SectionRecursiveList consultation={step} sections={props.consultations[0].sections} />
           );
         }
         return graphqlError;

@@ -3,9 +3,7 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -25,7 +23,6 @@ export const ProposalForm = React.createClass({
     currentStepId: PropTypes.string.isRequired,
     form: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,
-    districts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -81,17 +78,12 @@ export const ProposalForm = React.createClass({
         address: [],
       },
       suggestions: [],
-      address: proposal.address
-        ? JSON.parse(proposal.address)[0].formatted_address
-        : '',
+      address: proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
     };
   },
 
   componentWillMount() {
-    this.handleTitleChangeDebounced = debounce(
-      this.handleTitleChangeDebounced,
-      500,
-    );
+    this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 500);
   },
 
   componentDidMount() {
@@ -111,14 +103,7 @@ export const ProposalForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const {
-      categories,
-      features,
-      isSubmitting,
-      mode,
-      proposal,
-      dispatch,
-    } = this.props;
+    const { categories, features, isSubmitting, mode, proposal, dispatch } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
@@ -141,28 +126,16 @@ export const ProposalForm = React.createClass({
         if (responses.length === 0) {
           delete form.responses;
         }
-        if (
-          !features.themes ||
-          !this.props.form.usingThemes ||
-          form.theme === -1
-        ) {
+        if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
           delete form.theme;
         }
         if (!form.usingAddress && form.address.length === 0) {
           delete form.address;
         }
-        if (
-          !features.districts ||
-          !form.district ||
-          !this.props.form.usingDistrict
-        ) {
+        if (!features.districts || !form.district || !this.props.form.usingDistrict) {
           delete form.district;
         }
-        if (
-          categories.length === 0 ||
-          !this.props.form.usingCategories ||
-          form.category === -1
-        ) {
+        if (categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
           delete form.category;
         }
         if (mode === 'edit') {
@@ -328,15 +301,7 @@ export const ProposalForm = React.createClass({
   },
 
   render() {
-    const {
-      form,
-      intl,
-      features,
-      themes,
-      districts,
-      categories,
-      proposal,
-    } = this.props;
+    const { form, intl, features, themes, categories, proposal } = this.props;
     const optional = (
       <span className="excerpt">
         <FormattedMessage id="global.form.optional" />
@@ -366,17 +331,16 @@ export const ProposalForm = React.createClass({
         {optional}
       </span>
     );
-    // eslint-disable-next-line react/prop-types
-    const autocompleteItem = ({ formattedSuggestion }) =>
+
+    const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
       <div>
-        <i className="cap cap-map-location" />{' '}
-        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
         <small>{formattedSuggestion.secondaryText}</small>
-      </div>;
+      </div>
+    );
     return (
       <form id="proposal-form">
-        {form.description &&
-          <div dangerouslySetInnerHTML={{ __html: form.description }} />}
+        {form.description && <div dangerouslySetInnerHTML={{ __html: form.description }} />}
         <Input
           id="proposal_title"
           type="text"
@@ -388,9 +352,11 @@ export const ProposalForm = React.createClass({
           groupClassName={this.getGroupStyle('title')}
           errors={this.renderFormErrors('title')}
           addonAfter={
-            this.state.isLoadingSuggestions
-              ? <Glyphicon glyph="refresh" className="glyphicon-spin" />
-              : <Glyphicon glyph="refresh" />
+            this.state.isLoadingSuggestions ? (
+              <Glyphicon glyph="refresh" className="glyphicon-spin" />
+            ) : (
+              <Glyphicon glyph="refresh" />
+            )
           }
         />
         <Collapse in={this.state.suggestions.length > 0}>
@@ -405,13 +371,13 @@ export const ProposalForm = React.createClass({
               />
             }>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
-              {this.state.suggestions.slice(0, 5).map(suggest =>
+              {this.state.suggestions.slice(0, 5).map(suggest => (
                 <li>
                   <a href={suggest._links.show} className="external-link">
                     {suggest.title}
                   </a>
-                </li>,
-              )}
+                </li>
+              ))}
             </ul>
             <Button
               onClick={() => {
@@ -436,7 +402,7 @@ export const ProposalForm = React.createClass({
           errors={this.renderFormErrors('summary')}
         />
         {features.themes &&
-          form.usingThemes &&
+        form.usingThemes && (
           <Input
             id="proposal_theme"
             type="select"
@@ -446,19 +412,21 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('theme')}
             help={form.themeHelpText}>
             <FormattedMessage id="proposal.select.theme">
-              {message =>
+              {message => (
                 <option value={-1} disabled>
                   {message}
-                </option>}
+                </option>
+              )}
             </FormattedMessage>
-            {themes.map(theme =>
+            {themes.map(theme => (
               <option key={theme.id} value={theme.id}>
                 {theme.title}
-              </option>,
-            )}
-          </Input>}
+              </option>
+            ))}
+          </Input>
+        )}
         {categories.length > 0 &&
-          form.usingCategories &&
+        form.usingCategories && (
           <Input
             id="proposal_category"
             type="select"
@@ -468,10 +436,11 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('category')}
             help={form.categoryHelpText}>
             <FormattedMessage id="proposal.select.category">
-              {message =>
+              {message => (
                 <option value={-1} disabled>
                   {message}
-                </option>}
+                </option>
+              )}
             </FormattedMessage>
             {categories.map(category => {
               return (
@@ -480,10 +449,11 @@ export const ProposalForm = React.createClass({
                 </option>
               );
             })}
-          </Input>}
+          </Input>
+        )}
         {features.districts &&
-          form.usingDistrict &&
-          districts.length > 0 &&
+        form.usingDistrict &&
+        form.districts.length > 0 && (
           <Input
             id="proposal_district"
             type="select"
@@ -493,29 +463,22 @@ export const ProposalForm = React.createClass({
             errors={this.renderFormErrors('district')}
             help={form.districtHelpText}>
             <FormattedMessage id="proposal.select.district">
-              {message =>
-                <option value="">
-                  {message}
-                </option>}
+              {message => <option value="">{message}</option>}
             </FormattedMessage>
-            {districts.map(district =>
+            {form.districts.map(district => (
               <option key={district.id} value={district.id}>
                 {district.name}
-              </option>,
-            )}
-          </Input>}
-        {form.usingAddress &&
+              </option>
+            ))}
+          </Input>
+        )}
+        {form.usingAddress && (
           <div
-            className={`form-group${this.state.errors.address.length > 0
-              ? ' has-warning'
-              : ''}`}>
+            className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>
             <label className="control-label h5" htmlFor="proposal_address">
               <FormattedMessage id="proposal.map.form.field" />
             </label>
-            {form.addressHelpText &&
-              <span className="help-block">
-                {form.addressHelpText}
-              </span>}
+            {form.addressHelpText && <span className="help-block">{form.addressHelpText}</span>}
             <PlacesAutocomplete
               inputProps={{
                 onChange: address => {
@@ -535,9 +498,7 @@ export const ProposalForm = React.createClass({
                 this.resetAddressField();
               }}
               classNames={{
-                root: `${this.state.errors.address.length > 0
-                  ? 'form-control-warning'
-                  : ''}`,
+                root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
                 input: 'form-control',
                 autocompleteContainer: {
                   zIndex: 9999,
@@ -560,9 +521,9 @@ export const ProposalForm = React.createClass({
                 },
               }}
             />
-            {this.state.errors.address.length > 0 &&
-              this.renderFormErrors('address')}
-          </div>}
+            {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
+          </div>
+        )}
         <Input
           id="proposal_body"
           type="editor"
@@ -612,7 +573,6 @@ export const ProposalForm = React.createClass({
 const mapStateToProps = state => ({
   features: state.default.features,
   themes: state.default.themes,
-  districts: state.default.districts,
   currentStepId: state.project.currentProjectStepById,
 });
 
