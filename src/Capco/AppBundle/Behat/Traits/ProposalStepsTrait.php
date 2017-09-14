@@ -19,6 +19,11 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-fermee',
     ];
+
+    protected static $selectionStepOpenParams = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'selection',
+    ];
     protected static $votesDetailsPageParams = [
         'projectSlug' => 'budget-participatif-rennes',
     ];
@@ -63,6 +68,9 @@ trait ProposalStepsTrait
         'proposalSlug' => 'proposition-plus-votable',
     ];
 
+    /** @var array */
+    protected $currentCollectsStep = [];
+
     // ********************************* Proposals *********************************************
 
     /**
@@ -71,6 +79,14 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
+    }
+
+    /**
+     * @When I go to a selection step
+     */
+    public function iGoToASelectionStep()
+    {
+        $this->visitPageWithParams('selection page', self::$selectionStepOpenParams);
     }
 
     /**
@@ -547,6 +563,14 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I click the reload random button
+     */
+    public function iClickTheReloadRandomButton()
+    {
+        $this->clickProposalVoteButtonWithLabel('Relancer le tri aléatoire');
+    }
+
+    /**
      * @When I fill the proposal vote form
      */
     public function iFillTheProposalVoteForm()
@@ -821,6 +845,57 @@ trait ProposalStepsTrait
             new FilesystemIterator('/var/www/web/media/default/0001/01', FilesystemIterator::SKIP_DOTS)
         );
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
+    }
+
+    /**
+     * @When I save current proposals
+     */
+    public function iSaveCurrentProposals()
+    {
+        $items = array_map(
+            function ($element) {
+                return $element->getText();
+            },
+            $this->getSession()->getPage()->findAll('css', '.opinion__list .proposal__title')
+        );
+
+        $this->currentCollectsStep = $items;
+    }
+
+    /**
+     * @When I should see same proposals
+     */
+    public function iShouldSeeSameProposals()
+    {
+        $savedSteps = $this->currentCollectsStep;
+        $selector = '.opinion__list .proposal__title';
+
+        $items = array_map(
+            function ($element) {
+                return $element->getText();
+            },
+            $this->getSession()->getPage()->findAll('css', $selector)
+        );
+
+        \PHPUnit_Framework_Assert::assertSame($savedSteps, $items);
+    }
+
+    /**
+     * @When I should see other proposals
+     */
+    public function iShouldSeeOtherProposals()
+    {
+        $savedSteps = $this->currentCollectsStep;
+        $selector = '.opinion__list .proposal__title span span';
+
+        $items = array_map(
+            function ($element) {
+                return $element->getText();
+            },
+            $this->getSession()->getPage()->findAll('css', $selector)
+        );
+
+        \PHPUnit_Framework_Assert::assertNotSame($savedSteps, $items);
     }
 
     /**

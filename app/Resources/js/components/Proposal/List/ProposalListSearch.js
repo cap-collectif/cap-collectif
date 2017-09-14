@@ -1,29 +1,35 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import { changeTerm, loadProposals } from '../../../redux/modules/proposal';
+import { changeTerm, loadProposals, changeFilter } from '../../../redux/modules/proposal';
 import Input from '../../Form/Input';
+import type { State } from '../../../types';
 
 const ProposalListSearch = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
+    terms: PropTypes.string.isRequired,
   },
-
-  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
-      value: '',
+      terms: this.props.terms,
     };
   },
 
   handleSubmit(e) {
+    const { dispatch } = this.props;
+
     e.preventDefault();
     let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
-    this.props.dispatch(changeTerm(value));
-    this.props.dispatch(loadProposals());
+    dispatch(changeTerm(value));
+    dispatch(changeFilter('terms', value));
+    dispatch(loadProposals(null, true));
+  },
+
+  handleChange(event) {
+    this.setState({ terms: event.target.value });
   },
 
   render() {
@@ -39,12 +45,20 @@ const ProposalListSearch = React.createClass({
               <i className="cap cap-magnifier" />
             </Button>
           }
-          valueLink={this.linkState('value')}
           groupClassName="proposal-search-group pull-right"
+          value={this.state.terms}
+          onChange={this.handleChange}
         />
       </form>
     );
   },
 });
 
-export default connect()(ProposalListSearch);
+const mapStateToProps = (state: State) => {
+  return {
+    terms:
+      state.proposal.filters && state.proposal.filters.terms ? state.proposal.filters.terms : '',
+  };
+};
+
+export default connect(mapStateToProps)(ProposalListSearch);
