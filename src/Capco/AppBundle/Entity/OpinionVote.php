@@ -3,9 +3,10 @@
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * OpinionVote.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -46,37 +47,30 @@ class OpinionVote extends AbstractVote
     ];
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="value", type="integer")
      */
     private $value;
 
     /**
-     * @Gedmo\Timestampable(on="update", field={"value"})
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
-
-    /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="votes", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
-
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime();
-    }
 
     public function getRelated()
     {
         return $this->opinion;
     }
 
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
+    /**
+     * Get value.
+     *
+     * @return int
+     */
     public function getValue()
     {
         return $this->value;
@@ -89,14 +83,20 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getOpinion()
     {
         return $this->opinion;
     }
 
-    public function setOpinion($opinion)
+    /**
+     * @param mixed $Opinion
+     */
+    public function setOpinion($Opinion)
     {
-        $this->opinion = $opinion;
+        $this->opinion = $Opinion;
         $this->opinion->addVote($this);
 
         return $this;

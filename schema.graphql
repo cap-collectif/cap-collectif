@@ -83,7 +83,7 @@ input ChangeProposalContentInput {
   summary: String
 
   # The author id (ROLE_SUPER_ADMIN allowed only)
-  author: ID
+  author: String
 
   # The theme id (feature themes enabled)
   theme: String
