@@ -259,6 +259,8 @@
   "idea.vote.count_no_nb": "{count, plural, =0{vote} one{vote} other{votes}}",
   "idea.vote.delete": "Annuler mon vote",
   "idea.vote.form.comment": "Commentaire",
+  "idea.vote.form.already.voted": "Vous avez déjà voté pour cette idée.",
+  "idea.vote.form.email.has_account": "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.",
   "idea.vote.form.comment_placeholder": "Pourquoi soutenez-vous cette idée ? (optionnel)",
   "idea.vote.form.email": "Adresse électronique",
   "idea.vote.form.private": "Voter de manière anonyme",

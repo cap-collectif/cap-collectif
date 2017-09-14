@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -5,19 +6,14 @@ import { shallow } from 'enzyme';
 import { IdeaDeleteVoteForm } from './IdeaDeleteVoteForm';
 
 const props = {
-  dispatch: () => {},
+  dispatch: jest.fn(),
   idea: {},
-  isSubmitting: false,
-  onSubmitSuccess: () => {},
-  onFailure: () => {},
   anonymous: false,
 };
 
 describe('<IdeaDeleteVoteForm />', () => {
-  it('should render the idea vote form', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<IdeaDeleteVoteForm {...props} />);
-    const form = wrapper.find('IdeaVoteForm');
-    expect(form).toHaveLength(1);
-    expect(form.prop('idea')).toEqual(props.idea);
+    expect(wrapper).toMatchSnapshot();
   });
 });

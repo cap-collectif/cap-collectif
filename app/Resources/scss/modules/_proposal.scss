@@ -4,6 +4,29 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     @include ellipsis();
 }
 
+.proposal__header {
+    .media {
+        display: flex;
+        align-items: baseline;
+        margin-top: 5px;
+    }
+
+    .proposal__header__row {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: $screen-xs-max) {
+            display: block;
+
+            #proposal-vote-btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    }
+}
+
+
  .proposal__author {
      overflow: hidden;
      height: 60px;
@@ -357,10 +380,6 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     display: inline-block;
 }
 
-#proposal-vote-btn {
-    margin-top: 15px;
-}
-
 .proposal__map {
     &--marker {
         $marker-width: 38px !default;
@@ -401,4 +420,24 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         align-items: center;
         justify-content: center;
     }
+}
+
+.proposal__comments {
+    padding-top: 20px;
+}
+
+.proposal__last__news__title {
+    margin-top: 0;
+}
+
+#proposal-page-tabs-pane-content {
+    .block + .proposal__content {
+        .block:first-child > h3 {
+            margin-top: 20px;
+        }
+    }
+}
+
+.proposal__content .block:first-child > h3  {
+    margin-top: 0;
 }

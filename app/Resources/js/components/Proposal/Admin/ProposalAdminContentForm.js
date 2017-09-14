@@ -291,7 +291,9 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                         <Field
                           key={field.id}
                           id={field.id}
-                          name={`responses.${index}.medias`}
+                          name={`responses.${index}.${field.inputType !== 'medias'
+                            ? 'value'
+                            : 'medias'}`}
                           type={field.inputType}
                           component={component}
                           label={field.title}
