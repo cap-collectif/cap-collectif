@@ -51,14 +51,13 @@ class ProposalAdmin extends Admin
             ->add('district', 'sonata_type_model', [
                 'label' => 'admin.fields.proposal.district',
             ])
+            ->add('lastStatus', null, [
+                'label' => 'admin.fields.proposal.last_status',
+                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
+            ])
             ->add('enabled', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.enabled',
-            ])
-            ->add('lastStatus', null, [
-                'editable' => true,
-                'label' => 'admin.fields.proposal.last_status',
-                ' template' => 'CapcoAdminBundle:Proposal:last_status_field.html.twig',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,

@@ -3,7 +3,7 @@
 {% block field %}
     {% spaceless %}
         {% if value %}
-            {#{{ dump(value) }}#}
+            <span class="label label-{{ value.color }}">{{ value.name }}</span>
         {% endif %}
     {% endspaceless %}
 {% endblock %}

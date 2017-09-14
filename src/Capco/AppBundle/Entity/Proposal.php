@@ -880,8 +880,35 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         ];
     }
 
-    public function lastStatus(): string
+    /**
+     * Useful for sonata admin.
+     */
+    public function lastStatus()
     {
-        return '';
+        /** @var Selection[] $projectSteps */
+        $selections = $this->getSelections()->toArray();
+
+        usort($selections, function ($step, $nextStep) {
+            return  $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
+        });
+
+        $findStatus = null;
+        $loop = 0;
+
+        while ($findStatus === null && $loop < count($selections)) {
+            $selection = $selections[$loop];
+
+            if (null !== $selection->getStatus()) {
+                $findStatus = $selection->getStatus();
+            }
+
+            ++$loop;
+        }
+
+        if (null !== $findStatus) {
+            return $findStatus;
+        }
+
+        return $this->getStatus();
     }
 }

@@ -549,6 +549,7 @@ admin:
       evaluation: Évaluation financière de l'investissement proposé
       delay: Délai de mise en œuvre du projet
       proposedAnswer: Analyse synthétique de l'avis du service
+      last_status: Dernier statut
     proposal_category:
       name: Nom
     proposal_form:
