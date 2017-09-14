@@ -28,7 +28,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
         "name": @string@
       },
       "status": {
-        "id": @integer@,
+        "id": @string@,
         "name": @string@,
         "color": @string@
       },
@@ -105,7 +105,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
             "timeless": @boolean@
           },
           "status": {
-            "id": @integer@,
+            "id": @string@,
             "color": @string@,
             "name": @string@
           },
@@ -158,7 +158,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
       },
       "address": @string@,
       "status": {
-        "id": @integer@,
+        "id": @string@,
         "name": @string@,
         "color": @string@
       },
@@ -249,7 +249,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
             "timeless": @boolean@
           },
           "status": {
-            "id": @integer@,
+            "id": @string@,
             "color": @string@,
             "name": @string@
           },
@@ -310,7 +310,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
       },
       "address": @string@,
       "status": {
-        "id": @integer@,
+        "id": @string@,
         "name": @string@,
         "color": @string@
       },
@@ -401,7 +401,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
             "timeless": @boolean@
           },
           "status": {
-            "id": @integer@,
+            "id": @string@,
             "color": @string@,
             "name": @string@
           },
@@ -452,7 +452,7 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
           "name": @string@
         },
         "status": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@,
           "color": @string@
         },
@@ -580,7 +580,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
           "name": @string@
         },
         "status": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@,
           "color": @string@
         },
@@ -1059,11 +1059,11 @@ Scenario: Admin API client wants to update proposal status
   When I send a PATCH request to "/api/proposals/proposal12" with json:
   """
   {
-    "status": 1
+    "status": "status1"
   }
   """
   Then the JSON response status code should be 200
-  And proposal "proposal12" should have status 1
+  And proposal "proposal12" should have status "status1"
   When I send a PATCH request to "/api/proposals/proposal12" with json:
   """
   {
@@ -1280,7 +1280,7 @@ Scenario: Anonymous API client wants to get selections of a proposal
         "status": {
           "color": @string@,
           "name": "Soumis au vote",
-          "id": 4
+          "id": "status4"
         }
       }
     ]

@@ -49,7 +49,6 @@ exports[`<ProposalPageMetadata /> should not render category if proposal has non
         Reference
       </div>
     </div>
-    )}
   </div>
 </div>
 `;
@@ -109,7 +108,6 @@ exports[`<ProposalPageMetadata /> should not render category if specified not to
         Reference
       </div>
     </div>
-    )}
   </div>
 </div>
 `;
@@ -163,7 +161,6 @@ exports[`<ProposalPageMetadata /> should not render district if proposal has non
         Reference
       </div>
     </div>
-    )}
   </div>
 </div>
 `;
@@ -223,7 +220,6 @@ exports[`<ProposalPageMetadata /> should not render district if specified not to
         Reference
       </div>
     </div>
-    )}
   </div>
 </div>
 `;
@@ -291,7 +287,6 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         Reference
       </div>
     </div>
-    )}
   </div>
 </div>
 `;

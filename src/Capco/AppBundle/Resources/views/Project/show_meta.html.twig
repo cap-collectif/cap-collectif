@@ -74,7 +74,7 @@
                     </li>
                 {% endif %}
                 {% if showTrash %}
-                    <li class="trash__step{% if currentStep == 'trash_step' %} active{% endif %}">
+                    <li {% if currentStep == 'trash_step' %} class="active" {% endif %}>
                         {{ react_render_component('ProjectTrashButtonApp', {'props': {
                             'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
                             'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
