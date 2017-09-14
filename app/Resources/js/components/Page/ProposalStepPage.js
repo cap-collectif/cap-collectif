@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
-import ProposalListRandomRow from '../Proposal/List/ProposalListRandomRow';
 import ProposalList from '../Proposal/List/ProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
 import SelectionStepPageHeader from './SelectionStepPageHeader';
+import ProposalRandomButton from '../Proposal/List/ProposalRandomButton';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
 import LeafletMap from '../Proposal/Map/LeafletMap';
@@ -52,11 +52,10 @@ export const ProposalStepPage = React.createClass({
       randomOrder,
       selectedViewByStep,
     } = this.props;
-
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !randomOrder;
-
+    const showRandomButton = nbPages > 1 && randomOrder;
     return (
       <div>
         <StepPageHeader step={step} />
@@ -99,12 +98,7 @@ export const ProposalStepPage = React.createClass({
                 </p>
               ) : (
                 <VisibilityBox enabled={step.isPrivate}>
-                  <ProposalList
-                    proposals={proposals}
-                    step={step}
-                    showThemes={form.usingThemes}
-                    id="proposals-list"
-                  />
+                  <ProposalList proposals={proposals} step={step} showThemes={form.usingThemes} />
                 </VisibilityBox>
               )}
               {showPagination &&
@@ -118,10 +112,7 @@ export const ProposalStepPage = React.createClass({
                   }}
                 />
               )}
-              {randomOrder &&
-              selectedViewByStep === 'mosaic' && (
-                <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
-              )}
+              {showRandomButton && selectedViewByStep === 'mosaic' && <ProposalRandomButton />}
             </div>
           )}
         </Loader>

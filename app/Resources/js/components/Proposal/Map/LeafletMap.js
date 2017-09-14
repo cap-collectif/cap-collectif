@@ -69,7 +69,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
     // This import is used to avoid SSR errors.
     L = require('leaflet'); // eslint-disable-line
     this.setState({ loaded: true }); // eslint-disable-line
-    // eslint-disable-next-line react/prop-types
+
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible) {
       dispatch(loadMarkers(stepId, stepType));
@@ -78,7 +78,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
   // $FlowFixMe
   componentDidUpdate(prevProps) {
-    // eslint-disable-next-line react/prop-types
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible && prevProps.visible !== visible) {
       dispatch(loadMarkers(stepId, stepType));
@@ -86,7 +85,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { geoJsons, defaultMapOptions, markers, visible } = this.props;
 
     if (!visible || !this.state.loaded) {

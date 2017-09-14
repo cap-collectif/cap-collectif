@@ -45,21 +45,11 @@ class SearchResolver
      *
      * @return array
      */
-    public function searchAll(
-        $page = 1,
-        $term = '',
-        $type = 'all',
-        $sortField = '_score',
-        $sortOrder = 'DESC',
-        $filters = [],
-        $useTransformation = true,
-        $resultsPerPage = self::RESULTS_PER_PAGE,
-        $random = false
-    ) {
+    public function searchAll($page = 1, $term = '', $type = 'all', $sortField = '_score', $sortOrder = 'DESC', $filters = [], $useTransformation = true, $resultsPerPage = self::RESULTS_PER_PAGE, $random = false)
+    {
         $from = ($page - 1) * $resultsPerPage;
 
         $multiMatchQuery = empty(trim($term)) ? new Query\MatchAll() : $this->getMultiMatchQuery($term);
-
         $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
 
         if ($multiMatchQuery && $boolFilter) {
@@ -91,7 +81,8 @@ class SearchResolver
 
         $results = $useTransformation
             ? $this->transformer->hybridTransform($resultSet->getResults())
-            : $resultSet->getResults();
+            : $resultSet->getResults()
+        ;
 
         return [
             'count' => $count,
@@ -220,38 +211,6 @@ class SearchResolver
             }, $results['results']),
             'count' => $results['count'],
             'order' => $order,
-        ];
-    }
-
-    public function searchProposalsIn(array $selectedIds, string $selectedStepId = null): array
-    {
-        $type = 'proposal';
-
-        $termsQuery = new Query\Terms('id', $selectedIds);
-
-        $abstractQuery = new Query\BoolQuery();
-        $abstractQuery
-            ->addMust($termsQuery);
-
-        if (null !== $selectedStepId) {
-            $matchQuery = new Query\Match('selections.step.id', $selectedStepId);
-            $abstractQuery->addMust($matchQuery);
-        }
-
-        $query = new Query($abstractQuery);
-        $query->setSize(count($selectedIds));
-
-        $search = $this->index->getType($type)->search($query);
-
-        $results = $search->getResults();
-
-        $proposals = array_map(function (Result $result) {
-            return $result->getSource();
-        }, $results);
-
-        return [
-            'proposals' => $proposals,
-            'count' => count($results),
         ];
     }
 

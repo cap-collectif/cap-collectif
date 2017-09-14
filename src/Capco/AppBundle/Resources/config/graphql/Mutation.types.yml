@@ -22,7 +22,7 @@ Mutation:
                 builderConfig:
                     inputType: ChangeProposalContentInput
                     payloadType: ChangeProposalContentPayload
-                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"
+                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request, user])"
           changeProposalNotation:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -36,7 +36,7 @@ Mutation:
                 builderConfig:
                     inputType: SelectProposalInput
                     payloadType: SelectProposalPayload
-                    mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId']])"
+                    mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], value['statusId']])"
           unselectProposal:
               access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"

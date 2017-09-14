@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import type { Connector } from 'react-redux';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 
 type PassedProps = {
   onChange: Function,
@@ -19,13 +17,12 @@ type PassedProps = {
 type DefaultProps = { disabled: boolean };
 type Props = PassedProps & DefaultProps & { updateAddressValue: Function };
 
-// eslint-disable-next-line react/prop-types
-const autocompleteItem = ({ formattedSuggestion }) =>
+const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
   <div>
-    <i className="cap cap-map-location" />{' '}
-    <strong>{formattedSuggestion.mainText}</strong>{' '}
+    <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
     <small>{formattedSuggestion.secondaryText}</small>
-  </div>;
+  </div>
+);
 
 class Address extends Component<Props, void> {
   static defaultProps = {
