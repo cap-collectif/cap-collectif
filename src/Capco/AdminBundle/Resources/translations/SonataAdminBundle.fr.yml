@@ -519,6 +519,7 @@ admin:
         proposedAnswer: À destination du porteur de projet
       id: Id
       isTrashed: Dans la corbeille
+      likers: Coup(s) de coeur
       link: Lien
       media: Illustration
       no_category: Aucune catégorie
