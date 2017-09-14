@@ -219,6 +219,7 @@ admin:
       created_at: Création
     consultation_step_type:
       title: Titre
+      step: Projet participatif
       opinion_types: Éléments de structure
       updated_at: Mise à jour
       created_at: Création
@@ -518,7 +519,6 @@ admin:
         proposedAnswer: À destination du porteur de projet
       id: Id
       isTrashed: Dans la corbeille
-      likers: Coup(s) de coeur
       link: Lien
       media: Illustration
       no_category: Aucune catégorie

@@ -10,7 +10,9 @@ const CommentEdit = React.createClass({
     const { comment } = this.props;
     if (comment.can_edit) {
       return (
-        <a href={comment._links.edit} className="btn btn-dark-gray btn--outline btn-sm">
+        <a
+          href={comment._links.edit}
+          className="btn btn-dark-gray btn--outline btn-xs">
           <i className="cap cap-pencil-1" />
           {<FormattedMessage id="comment.update.button" />}
         </a>

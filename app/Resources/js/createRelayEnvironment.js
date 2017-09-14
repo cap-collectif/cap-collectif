@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import Fetcher, { json } from './services/Fetcher';
+import Fetcher from './services/Fetcher';
 
 function fetchQuery(operation, variables, cacheConfig, uploadables) {
   if (uploadables) {
@@ -19,7 +19,7 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
       }
     });
 
-    return Fetcher.graphqlFormData(formData).then(json);
+    return Fetcher.graphqlFormData(formData);
   }
 
   return Fetcher.graphql({
@@ -30,9 +30,7 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
 }
 
 export const graphqlError = (
-  <p className="text-danger">
-    Désolé une erreur s'est produite… Réessayez plus tard.
-  </p>
+  <p className="text-danger">Désolé une erreur s'est produite… Réessayez plus tard.</p>
 );
 
 export default new Environment({

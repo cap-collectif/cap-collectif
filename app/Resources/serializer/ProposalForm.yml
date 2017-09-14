@@ -81,6 +81,9 @@ Capco\AppBundle\Entity\ProposalForm:
         categories:
           expose: true
           groups: [ProposalForms]
+        districts:
+          expose: true
+          groups: [ProposalForms]
         zoomMap:
           expose: true
           type: integer

@@ -22,7 +22,6 @@ type PassedProps = {
 type Props = {
   proposal: ProposalAdminContentForm_proposal,
   themes: Array<Object>,
-  districts: Array<Object>,
   features: FeatureToggles,
   handleSubmit: () => void,
   intl: IntlShape,
@@ -68,7 +67,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalContentMutation.commit(variables, uploadables);
+  ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
+    window.location.reload();
+  });
 };
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
@@ -95,27 +96,15 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   ) {
     errors.category = 'proposal.constraints.category';
   }
-  if (
-    features.districts &&
-    form.usingDistrict &&
-    form.districtMandatory &&
-    !values.district
-  ) {
+  if (features.districts && form.usingDistrict && form.districtMandatory && !values.district) {
     errors.theme = 'proposal.constraints.theme';
   }
-  if (
-    features.themes &&
-    form.usingThemes &&
-    form.themeMandatory &&
-    !values.theme
-  ) {
+  if (features.themes && form.usingThemes && form.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
   form.customFields.map(field => {
     if (field.required) {
-      const response = values.responses.filter(
-        res => res && res.question.id === field.id,
-      )[0];
+      const response = values.responses.filter(res => res && res.question.id === field.id)[0];
       if (!response) {
         errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
       }
@@ -132,7 +121,6 @@ export class ProposalAdminContentForm extends Component<Props, State> {
       invalid,
       proposal,
       features,
-      districts,
       submitting,
       isSuperAdmin,
       themes,
@@ -176,7 +164,6 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 </span>
               }
             />
-            <h4 className="h4">Métadonnées</h4>
             <Field
               name="author"
               label="Auteur"
@@ -203,7 +190,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 }))}
             />
             {features.themes &&
-              form.usingThemes &&
+            form.usingThemes && (
               <Field
                 name="theme"
                 id="proposal_theme"
@@ -216,19 +203,17 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.theme">
-                  {message =>
-                    <option value="">
-                      {message}
-                    </option>}
+                  {message => <option value="">{message}</option>}
                 </FormattedMessage>
-                {themes.map(theme =>
+                {themes.map(theme => (
                   <option key={theme.id} value={theme.id}>
                     {theme.title}
-                  </option>,
-                )}
-              </Field>}
+                  </option>
+                ))}
+              </Field>
+            )}
             {categories.length > 0 &&
-              form.usingCategories &&
+            form.usingCategories && (
               <Field
                 id="proposal_category"
                 type="select"
@@ -241,20 +226,18 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.category">
-                  {message =>
-                    <option value="">
-                      {message}
-                    </option>}
+                  {message => <option value="">{message}</option>}
                 </FormattedMessage>
-                {categories.map(category =>
+                {categories.map(category => (
                   <option key={category.id} value={category.id}>
                     {category.name}
-                  </option>,
-                )}
-              </Field>}
+                  </option>
+                ))}
+              </Field>
+            )}
             {features.districts &&
-              form.usingDistrict &&
-              districts.length > 0 &&
+            form.usingDistrict &&
+            form.districts.length > 0 && (
               <Field
                 id="proposal_district"
                 type="select"
@@ -267,18 +250,16 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.district">
-                  {message =>
-                    <option value="">
-                      {message}
-                    </option>}
+                  {message => <option value="">{message}</option>}
                 </FormattedMessage>
-                {districts.map(district =>
+                {form.districts.map(district => (
                   <option key={district.id} value={district.id}>
                     {district.name}
-                  </option>,
-                )}
-              </Field>}
-            {form.usingAddress &&
+                  </option>
+                ))}
+              </Field>
+            )}
+            {form.usingAddress && (
               <Field
                 id="proposal_address"
                 component={component}
@@ -287,7 +268,8 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 formName={formName}
                 label={<FormattedMessage id="proposal.map.form.field" />}
                 placeholder="proposal.map.form.placeholder"
-              />}
+              />
+            )}
             <h4 className="h4">Présentation</h4>
             <Field
               id="proposal_body"
@@ -298,7 +280,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
             />
             <FieldArray
               name="responses"
-              component={({ fields }) =>
+              component={({ fields }) => (
                 <div>
                   {fields.map((field, index) => {
                     const response = this.props.proposal.responses.filter(
@@ -315,13 +297,15 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                           label={field.title}
                         />
                         {response &&
-                          response.medias &&
-                          response.medias.length &&
-                          <ProposalMediaResponse medias={response.medias} />}
+                        response.medias &&
+                        response.medias.length && (
+                          <ProposalMediaResponse medias={response.medias} />
+                        )}
                       </div>
                     );
                   })}
-                </div>}
+                </div>
+              )}
               fields={form.customFields}
             />
             <Field
@@ -338,13 +322,8 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
-              <Button
-                type="submit"
-                bsStyle="primary"
-                disabled={pristine || invalid || submitting}>
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.save'}
-                />
+              <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
             </ButtonToolbar>
           </div>
@@ -361,20 +340,15 @@ const form = reduxForm({
 })(ProposalAdminContentForm);
 
 const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
-  isSuperAdmin: !!(
-    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
-  ),
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
   themes: state.default.themes,
-  districts: state.default.districts,
   initialValues: {
     title: proposal.title,
     body: proposal.body,
     summary: proposal.summary,
     author: proposal.author.id,
-    theme: state.default.features.themes
-      ? proposal.theme ? proposal.theme.id : null
-      : undefined,
+    theme: state.default.features.themes ? (proposal.theme ? proposal.theme.id : null) : undefined,
     category: proposal.category ? proposal.category.id : null,
     district: state.default.features.districts
       ? proposal.district ? proposal.district.id : null
@@ -382,9 +356,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
     address: proposal.address,
     media: null,
     responses: proposal.form.customFields.map(field => {
-      const response = proposal.responses.filter(
-        res => res && res.question.id === field.id,
-      )[0];
+      const response = proposal.responses.filter(res => res && res.question.id === field.id)[0];
       if (response) {
         if (response.value) {
           return {
@@ -402,8 +374,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       }
       return { question: parseInt(field.id, 10), value: null };
     }),
-    addressText:
-      proposal.address && JSON.parse(proposal.address)[0].formatted_address,
+    addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
 });
 
@@ -437,6 +408,10 @@ export default createFragmentContainer(
         url
       }
       form {
+        districts {
+          id
+          name
+        }
         categories {
           id
           name
