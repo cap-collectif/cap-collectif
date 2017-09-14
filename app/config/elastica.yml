@@ -592,6 +592,8 @@ fos_elastica:
             groups: [Statuses]
           _all: { enabled: false }
           mappings:
+            id:
+              index: not_analyzed
             name:
               index: not_analyzed
             color:
