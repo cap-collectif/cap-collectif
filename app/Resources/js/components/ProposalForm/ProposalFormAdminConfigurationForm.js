@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field } from 'redux-form';
+import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
+import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import { baseUrl } from '../../config';
@@ -268,7 +269,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
               id="proposal_form_category_help_text"
               label={<FormattedMessage id="proposal_form.help_text" />}
             />
-            <h5>Liste des catégories</h5>
+            <FieldArray name="categories" component={ProposalFormAdminCategories} />
           </Panel>
           <Panel collapsible expanded={usingAddress} header={headerPanelUsingAddress}>
             <Field
@@ -402,6 +403,10 @@ export default createFragmentContainer(
       usingDistrict
       districtHelpText
       districtMandatory
+      categories {
+        id
+        name
+      }
     }
   `,
 );
