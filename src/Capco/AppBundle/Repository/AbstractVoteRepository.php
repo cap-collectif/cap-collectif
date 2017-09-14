@@ -4,9 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-/**
- * AbstractVoteRepository.
- */
 class AbstractVoteRepository extends EntityRepository
 {
     /**
@@ -20,10 +17,13 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
             ->andWhere('v.expired = false')
-            ->addOrderBy('v.updatedAt', 'ASC');
+            ->addOrderBy('v.createdAt', 'ASC')
+        ;
 
         if (in_array($objectType, ['opinion', 'opinionVersion'], true)) {
-            $qb->addSelect('v.updatedAt', 'v.value')
+            $qb
+                ->addOrderBy('v.updatedAt', 'ASC')
+                ->addSelect('v.updatedAt', 'v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->setParameter('object', $object)
             ;
@@ -41,7 +41,7 @@ class AbstractVoteRepository extends EntityRepository
         foreach ($votes as $i => $vote) {
             if (isset($counts[$vote['value']])) {
                 ++$counts[$vote['value']];
-                $counts['date'] = (new \DateTime($vote['updatedAt']))->getTimestamp();
+                $counts['date'] = (new \DateTime(isset($vote['updatedAt']) ? $vote['updatedAt'] : $vote['createdAt']))->getTimestamp();
                 $result[] = array_values($counts);
             }
         }
@@ -87,7 +87,7 @@ class AbstractVoteRepository extends EntityRepository
             ->leftJoin('u.Media', 'm')
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
-            ->orderBy('v.updatedAt', 'ASC');
+            ->orderBy('v.createdAt', 'ASC');
 
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
