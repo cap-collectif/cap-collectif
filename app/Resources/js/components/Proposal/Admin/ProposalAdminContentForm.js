@@ -67,9 +67,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
-    window.location.reload();
-  });
+  ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
@@ -164,6 +162,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 </span>
               }
             />
+            <h4 className="h4">Métadonnées</h4>
             <Field
               name="author"
               label="Auteur"

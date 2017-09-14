@@ -13,6 +13,7 @@ export class ProposalPageLastNews extends React.Component<{
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { proposal, className } = this.props;
     const { posts } = proposal;
     if (!posts || posts.length === 0) {
@@ -30,7 +31,10 @@ export class ProposalPageLastNews extends React.Component<{
     }
     return (
       <div className={classNames(classes)}>
-        {answer.title && <h2 className="h2">{answer.title}</h2>}
+        {answer.title &&
+          <h2 className="h2">
+            {answer.title}
+          </h2>}
         <AnswerBody answer={answer} />
       </div>
     );

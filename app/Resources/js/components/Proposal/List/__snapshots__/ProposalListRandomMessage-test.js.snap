@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalListRandomMessage /> should render the random message 1`] = `
+<div>
+  <p>
+    <a
+      href="#proposals-list"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="proposal.random_search"
+        values={Object {}}
+      />
+    </a>
+    <FormattedMessage
+      id="proposal.change_filter"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;

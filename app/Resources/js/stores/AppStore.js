@@ -5,22 +5,14 @@ import { reducer as formReducer } from 'redux-form';
 import { intlReducer } from 'react-intl-redux';
 import LocalStorageService from '../services/LocalStorageService';
 import { reducer as reportReducer } from '../redux/modules/report';
-import {
-  reducer as projectReducer,
-  saga as projectSaga,
-} from '../redux/modules/project';
-import {
-  reducer as ideaReducer,
-  saga as ideaSaga,
-} from '../redux/modules/idea';
+import { reducer as projectReducer, saga as projectSaga } from '../redux/modules/project';
+import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea';
 import {
   reducer as proposalReducer,
   saga as proposalSaga,
+  initialState as proposalInitialState,
 } from '../redux/modules/proposal';
-import {
-  reducer as opinionReducer,
-  saga as opinionSaga,
-} from '../redux/modules/opinion';
+import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
 import { reducer as defaultReducer } from '../redux/modules/default';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
@@ -36,10 +28,10 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.filtersByStep')
   ) {
-    const filtersByStep =
-      LocalStorageService.get('proposal.filtersByStep') || {};
-    initialState.proposal.filters =
-      filtersByStep[initialState.project.currentProjectStepById];
+    const filtersByStep = LocalStorageService.get('proposal.filtersByStep');
+    if (filtersByStep) {
+      initialState.proposal.filters = filtersByStep[initialState.project.currentProjectStepById];
+    }
   }
   if (
     initialState.project &&
@@ -47,9 +39,10 @@ export default function configureStore(initialState: Object): Store {
     initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.orderByStep')
   ) {
-    const orderByStep = LocalStorageService.get('proposal.orderByStep') || {};
-    initialState.proposal.order =
-      orderByStep[initialState.project.currentProjectStepById];
+    const orderByStep = LocalStorageService.get('proposal.orderByStep');
+    if (orderByStep) {
+      initialState.proposal.order = orderByStep[initialState.project.currentProjectStepById];
+    }
   }
 
   const sagaMiddleware = createSagaMiddleware();
@@ -78,14 +71,15 @@ export default function configureStore(initialState: Object): Store {
     }),
   };
 
+  initialState.proposal = { ...proposalInitialState, ...initialState.proposal };
+
   const reducer = combineReducers(reducers);
   const store = createStore(
     reducer,
     initialState,
     compose(
       applyMiddleware(sagaMiddleware),
-      typeof window === 'object' &&
-      typeof window.devToolsExtension !== 'undefined'
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
         ? window.devToolsExtension()
         : f => f,
     ),
