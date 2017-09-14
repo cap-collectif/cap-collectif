@@ -2,13 +2,6 @@ Mutation:
     type: object
     config:
         fields:
-          changeDistrict:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: ChangeDistrictInput
-                    payloadType: ChangeDistrictPayload
-                    mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -22,7 +15,7 @@ Mutation:
                 builderConfig:
                     inputType: ChangeProposalContentInput
                     payloadType: ChangeProposalContentPayload
-                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request, user])"
+                    mutateAndGetPayload: "@=mutation('changeProposalContent', [value, request])"
           changeProposalNotation:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -36,7 +29,7 @@ Mutation:
                 builderConfig:
                     inputType: SelectProposalInput
                     payloadType: SelectProposalPayload
-                    mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], value['statusId']])"
+                    mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId']])"
           unselectProposal:
               access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"

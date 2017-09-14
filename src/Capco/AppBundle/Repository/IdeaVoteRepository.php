@@ -33,7 +33,7 @@ class IdeaVoteRepository extends EntityRepository
             ->andWhere('v.idea = :idea')
             ->andWhere('v.username IS NOT NULL')
             ->setParameter('idea', $idea)
-            ->addOrderBy('v.createdAt', 'DESC')
+            ->addOrderBy('v.updatedAt', 'DESC')
             ->getQuery()
             ->getArrayResult();
     }
@@ -46,7 +46,7 @@ class IdeaVoteRepository extends EntityRepository
             ->leftJoin('v.user', 'u')
             ->andWhere('v.user IS NOT NULL')
             ->setParameter('idea', $idea)
-            ->addOrderBy('v.createdAt', 'DESC')
+            ->addOrderBy('v.updatedAt', 'DESC')
             ->getQuery()
             ->getArrayResult();
     }

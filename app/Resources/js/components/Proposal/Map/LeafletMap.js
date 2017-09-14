@@ -1,6 +1,6 @@
 // @flow
-import React, { Component } from 'react';
-import { Map, TileLayer, GeoJSON } from 'react-leaflet-universal';
+import React, { Component, PropTypes } from 'react';
+import { Map, TileLayer } from 'react-leaflet-universal';
 import { connect, type Connector } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
@@ -24,7 +24,6 @@ type ComponentState = {
 
 type Props = {
   markers: ?Object,
-  geoJsons?: Array<string>,
   defaultMapOptions: MapOptions,
   visible: boolean,
   stepId: string,
@@ -40,6 +39,15 @@ type DefaultProps = {
 let L;
 
 export class LeafletMap extends Component<Props, ComponentState> {
+  static propTypes = {
+    markers: PropTypes.object,
+    defaultMapOptions: PropTypes.object.isRequired,
+    visible: PropTypes.bool,
+    stepId: PropTypes.string.isRequired,
+    stepType: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
   static defaultProps = {
     markers: null,
     defaultMapOptions: {
@@ -69,7 +77,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
     // This import is used to avoid SSR errors.
     L = require('leaflet'); // eslint-disable-line
     this.setState({ loaded: true }); // eslint-disable-line
-
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible) {
       dispatch(loadMarkers(stepId, stepType));
@@ -85,7 +92,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 
   render() {
-    const { geoJsons, defaultMapOptions, markers, visible } = this.props;
+    const { defaultMapOptions, markers, visible } = this.props;
 
     if (!visible || !this.state.loaded) {
       return null;
@@ -132,7 +139,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
           }}
           markers={markersList}
         />
-        {geoJsons && geoJsons.map((json, key) => <GeoJSON key={key} data={json} />)}
         <LocateControl />
       </Map>
     );
@@ -143,9 +149,8 @@ const mapStateToProps = (state: State) => ({
   markers: state.proposal.markers || {},
   stepId: state.project.currentProjectStepById || '',
   stepType:
-    state.project.projectsById[state.project.currentProjectById || ''].stepsById[
-      state.project.currentProjectStepById
-    ].type,
+    state.project.projectsById[state.project.currentProjectById || '']
+      .stepsById[state.project.currentProjectStepById].type,
 });
 
 const connector: Connector<DefaultProps, Props> = connect(mapStateToProps);

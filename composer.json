@@ -101,8 +101,7 @@
         "limenius/react-bundle": "^0.13.1",
         "lexik/jwt-authentication-bundle": "^2.4",
         "gfreeau/get-jwt-bundle": "dev-dev",
-        "cocur/slugify": "@dev",
-        "phayes/geophp": "^1.2"
+        "cocur/slugify": "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

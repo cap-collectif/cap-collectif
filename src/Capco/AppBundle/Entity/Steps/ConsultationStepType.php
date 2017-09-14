@@ -47,7 +47,6 @@ class ConsultationStepType
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultationStepType")
-     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;
 
