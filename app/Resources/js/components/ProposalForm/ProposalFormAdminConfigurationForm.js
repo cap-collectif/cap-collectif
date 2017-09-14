@@ -11,7 +11,7 @@ import toggle from '../Form/Toggle';
 import { baseUrl } from '../../config';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
-import type { State } from '../../types';
+import type { State, FeatureToggles } from '../../types';
 
 type DefaultProps = void;
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
@@ -24,6 +24,7 @@ type Props = RelayProps & {
   usingCategories: boolean,
   usingThemes: boolean,
   usingDistrict: boolean,
+  features: FeatureToggles,
 };
 
 const zoomLevels = [
@@ -144,6 +145,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
       usingThemes,
       usingCategories,
       usingDistrict,
+      features,
     } = this.props;
     return (
       <div className="box box-primary container">
@@ -238,22 +240,24 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
               Champs optionnels
             </h3>
           </div>
-          <Panel collapsible expanded={usingThemes} header={headerPanelUsingThemes}>
-            <Field
-              name="themeMandatory"
-              component={component}
-              type="checkbox"
-              id="proposal_form_theme_mandatory">
-              <FormattedMessage id="proposal_form.required" />
-            </Field>
-            <Field
-              name="themeHelpText"
-              component={component}
-              type="text"
-              id="proposal_form_theme_help_text"
-              label={<FormattedMessage id="proposal_form.help_text" />}
-            />
-          </Panel>
+          {features.themes && (
+            <Panel collapsible expanded={usingThemes} header={headerPanelUsingThemes}>
+              <Field
+                name="themeMandatory"
+                component={component}
+                type="checkbox"
+                id="proposal_form_theme_mandatory">
+                <FormattedMessage id="proposal_form.required" />
+              </Field>
+              <Field
+                name="themeHelpText"
+                component={component}
+                type="text"
+                id="proposal_form_theme_help_text"
+                label={<FormattedMessage id="proposal_form.help_text" />}
+              />
+            </Panel>
+          )}
           <Panel collapsible expanded={usingCategories} header={headerPanelUsingCategories}>
             <Field
               name="categoryMandatory"
@@ -321,23 +325,25 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
               </Col>
             </Row>
           </Panel>
-          <Panel collapsible expanded={usingDistrict} header={headerPanelUsingDistrict}>
-            <Field
-              name="districtMandatory"
-              component={component}
-              type="checkbox"
-              id="proposal_form_district_mandatory">
-              <FormattedMessage id="proposal_form.required" />
-            </Field>
-            <Field
-              name="districtHelpText"
-              component={component}
-              type="text"
-              id="proposal_form_district_help_text"
-              label={<FormattedMessage id="proposal_form.help_text" />}
-            />
-            <h5>Liste des zones géogrpahiques</h5>
-          </Panel>
+          {features.districts && (
+            <Panel collapsible expanded={usingDistrict} header={headerPanelUsingDistrict}>
+              <Field
+                name="districtMandatory"
+                component={component}
+                type="checkbox"
+                id="proposal_form_district_mandatory">
+                <FormattedMessage id="proposal_form.required" />
+              </Field>
+              <Field
+                name="districtHelpText"
+                component={component}
+                type="text"
+                id="proposal_form_district_help_text"
+                label={<FormattedMessage id="proposal_form.help_text" />}
+              />
+              <h5>Liste des zones géographiques</h5>
+            </Panel>
+          )}
           <div className="box-header">
             <h3
               style={{ fontSize: 22, padding: 0, paddingTop: 30, paddingBottom: 30 }}
@@ -375,6 +381,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
   usingDistrict: selector(state, 'usingDistrict'),
+  features: state.default.features,
 });
 
 const container = connect(mapStateToProps)(form);

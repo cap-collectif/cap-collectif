@@ -56,6 +56,7 @@ class ProposalFormUpdateType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => ProposalForm::class,
+            'cascade_validation' => true,
         ]);
     }
 }
