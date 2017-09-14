@@ -1,9 +1,0 @@
-{% extends admin.getTemplate('base_list_field') %}
-
-{% block field %}
-    {% spaceless %}
-        {% if value %}
-            <span class="label label-{{ value.color }}">{{ value.name }}</span>
-        {% endif %}
-    {% endspaceless %}
-{% endblock %}
