@@ -18,12 +18,14 @@ const ProposalListSearch = React.createClass({
   },
 
   handleSubmit(e) {
+    const { dispatch } = this.props;
+
     e.preventDefault();
     let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
-    this.props.dispatch(changeTerm(value));
-    this.props.dispatch(changeFilter('terms', value));
-    this.props.dispatch(loadProposals(null, true));
+    dispatch(changeTerm(value));
+    dispatch(changeFilter('terms', value));
+    dispatch(loadProposals(null, true));
   },
 
   handleChange(event) {
