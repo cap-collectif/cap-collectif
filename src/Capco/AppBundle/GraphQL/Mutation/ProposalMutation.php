@@ -25,7 +25,7 @@ class ProposalMutation implements ContainerAwareInterface
     public function delete(string $proposalId): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
         }
@@ -42,7 +42,7 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         unset($values['proposalId']); // This only usefull to retrieve the proposal
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
@@ -64,13 +64,13 @@ class ProposalMutation implements ContainerAwareInterface
         $logger = $this->container->get('logger');
 
         $values = $input->getRawArguments();
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));
         }
         unset($values['proposalId']); // This only usefull to retrieve the proposal
 
-        $logger->info('changeProgressSteps:' . json_encode($values, true));
+        // $logger->info('changeProgressSteps:' . json_encode($values, true));
 
         $form = $formFactory->create(ProposalProgressStepType::class, $proposal);
         $form->submit($values);
@@ -88,14 +88,14 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
         if (!$proposal) {
             throw new UserError('Cant find the proposal');
         }
 
         $status = null;
         if ($statusId) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+            $status = $this->container->get('capco.status.repository')->find($statusId);
         }
 
         $proposal->setStatus($status);
@@ -110,7 +110,7 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $selection = $em->getRepository('CapcoAppBundle:Selection')->findOneBy([
+        $selection = $this->container->get('capco.selection.repository')->findOneBy([
           'proposal' => $proposalId,
           'selectionStep' => $stepId,
         ]);
@@ -121,7 +121,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $status = null;
         if ($statusId) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($statusId);
+            $status = $this->container->get('capco.status.repository')->find($statusId);
         }
 
         $selection->setStatus($status);
@@ -129,7 +129,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
 
-        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
 
         return ['proposal' => $proposal];
     }
@@ -137,7 +137,7 @@ class ProposalMutation implements ContainerAwareInterface
     public function unselectProposal(string $proposalId, string $stepId): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $selection = $em->getRepository('CapcoAppBundle:Selection')
+        $selection = $this->container->get('capco.selection.repository')
                       ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
 
         if (!$selection) {
@@ -146,7 +146,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->remove($selection);
         $em->flush();
 
-        $proposal = $em->find('CapcoAppBundle:Proposal', $proposalId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
 
         return ['proposal' => $proposal];
     }
@@ -155,7 +155,7 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $selection = $em->getRepository('CapcoAppBundle:Selection')
+        $selection = $this->container->get('capco.selection.repository')
                       ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
         if ($selection) {
             throw new UserError('Already selected');
@@ -164,14 +164,13 @@ class ProposalMutation implements ContainerAwareInterface
         $selectionStatus = null;
 
         if ($statusId) {
-            $selectionStatus = $em
-            ->getRepository('CapcoAppBundle:Status')
+            $selectionStatus = $this->container->get('capco.status.repository')
             ->find($statusId)
           ;
         }
 
-        $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-        $step = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->find($stepId);
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
+        $step = $this->container->get('capco.selection_step.repository')->find($stepId);
 
         $selection = new Selection();
         $selection->setSelectionStep($step);
@@ -191,7 +190,7 @@ class ProposalMutation implements ContainerAwareInterface
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['proposalId']);
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));
         }
@@ -242,7 +241,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $logger->info('changeContent:' . json_encode($values, true));
 
-        $proposal = $em->find('CapcoAppBundle:Proposal', $values['id']);
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['id']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
         }
@@ -278,7 +277,7 @@ class ProposalMutation implements ContainerAwareInterface
                 break;
             }
             $questionId = str_replace('responses.', '', $key);
-            $question = $em->find('CapcoAppBundle:Questions\AbstractQuestion', (int) $questionId);
+            $question = $this->container->get('capco.abstract_question.repository')->find((int) $questionId);
             if (!$question) {
                 throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
             }

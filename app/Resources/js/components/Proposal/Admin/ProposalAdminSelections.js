@@ -112,7 +112,6 @@ const onSubmit = (values, dispatch, props: Props) => {
 
 export class ProposalAdminSelections extends Component<Props> {
   render() {
-    // eslint-disable-next-line react/prop-types
     const { selectionValues, proposal, handleSubmit, pristine, invalid, submitting } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
