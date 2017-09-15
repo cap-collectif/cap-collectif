@@ -4,9 +4,9 @@
         <div class="opinion__data">
             <p>
                 {% if is_feature_enabled('profiles') %}
-                <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
+                    <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
                 {% else %}
-                {{ vote.user.username }}
+                    {{ vote.user.username }}
                 {% endif %}
 
                 {% if (vote.value is defined and vote.value == 1) or vote.comment is defined %}
@@ -31,7 +31,7 @@
                     {{ 'votes.type.propositionVote' | trans({}, 'CapcoAppBundle') }}
                 {% endif %}
 
-                <span class="excerpt  opinion__date">{{ vote.updatedAt | localizeddate('long', 'short', app.request.locale) }}</span>
+                <span class="excerpt  opinion__date">{{ (vote.updatedAt is defined ? vote.updatedAt : vote.createdAt) | localizeddate('long', 'short', app.request.locale) }}</span>
             </p>
             <p>
                 <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
