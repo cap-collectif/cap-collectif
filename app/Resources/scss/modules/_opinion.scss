@@ -162,7 +162,7 @@
         .opinion__votes-nb {
             display: inline-block;
             vertical-align: middle;
-            padding: 1px 5px;
+            padding: 5px 6px;
             border: 1px solid $gray-primary;
             font-size: 12px;
             line-height: 1.5;
@@ -331,10 +331,6 @@
 
         .opinion__text {
             word-break: break-word;
-        }
-
-        &:first-child {
-            padding-top: 15px;
         }
 
         &:last-child {

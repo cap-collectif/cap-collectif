@@ -54,16 +54,24 @@ export const ProposalPageHeader = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div>
-          <a
-            style={{ textDecoration: 'none' }}
-            href={referer || proposal._links.index}>
+          <a style={{ textDecoration: 'none' }} href={referer || proposal._links.index}>
             <i className="cap cap-arrow-65-1 icon--black" />{' '}
             {<FormattedMessage id="proposal.back" />}
           </a>
         </div>
-        <h1 className="consultation__header__title h1">
-          {proposal.title}
-        </h1>
+        <div className="row proposal__header__row">
+          <div className="col-sm-10 col-xs-12">
+            <h1 className="consultation__header__title h1">{proposal.title}</h1>
+          </div>
+          <div className="col-sm-2 col-xs-12">
+            <ProposalVoteButtonWrapper
+              id="proposal-vote-btn"
+              proposal={proposal}
+              className="pull-right btn-lg"
+            />
+          </div>
+        </div>
+
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
@@ -75,10 +83,7 @@ export const ProposalPageHeader = React.createClass({
                   createdDate,
                 }}
               />
-              {moment(proposal.updated_at).diff(
-                proposal.created_at,
-                'seconds',
-              ) > 1 &&
+              {moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1 && (
                 <span>
                   {' • '}
                   <FormattedMessage
@@ -87,11 +92,8 @@ export const ProposalPageHeader = React.createClass({
                       updated: updatedDate,
                     }}
                   />
-                </span>}
-              <ProposalVoteButtonWrapper
-                proposal={proposal}
-                className="visible-xs btn-lg pull-right"
-              />
+                </span>
+              )}
             </p>
           </div>
         </div>

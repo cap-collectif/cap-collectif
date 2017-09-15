@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import SelectProposalMutation from '../../../mutations/SelectProposalMutation';
@@ -19,27 +19,27 @@ import ProposalAdminProgressSteps from './ProposalAdminProgressSteps';
 export const formName = 'proposal-admin-selections';
 const selector = formValueSelector(formName);
 
+type FormValues = Object;
 type PassedProps = {
   proposal: ProposalAdminSelections_proposal,
 };
 
-type Props = {
-  proposal: ProposalAdminSelections_proposal,
-  initialValues: Object,
+type Props = PassedProps & {
+  initialValues: FormValues,
+  intl: IntlShape,
   selectionValues: Array<{ step: string, selected: boolean, status: ?string }>,
   handleSubmit: Function,
   pristine: boolean,
   invalid: boolean,
   submitting: boolean,
 };
-type DefaultProps = void;
 
 const validate = () => {
   const errors = {};
   return errors;
 };
 
-const onSubmit = (values, dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposal } = props;
   const promises = [];
   for (const selection of values.selections) {
@@ -111,10 +111,18 @@ const onSubmit = (values, dispatch, props: Props) => {
     .catch(() => {});
 };
 
-export class ProposalAdminSelections extends Component<Props, void> {
-  static defaultProps: DefaultProps;
+export class ProposalAdminSelections extends Component<Props> {
   render() {
-    const { selectionValues, proposal, handleSubmit, pristine, invalid, submitting } = this.props;
+    const {
+      intl,
+      initialValues,
+      selectionValues,
+      proposal,
+      handleSubmit,
+      pristine,
+      invalid,
+      submitting,
+    } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
@@ -152,8 +160,9 @@ export class ProposalAdminSelections extends Component<Props, void> {
                   label="Statut"
                   name="collectStatus"
                   id="collectStatus"
+                  normalize={val => (val === '-1' ? null : val)}
                   component={component}>
-                  <option value="">Aucun statut</option>
+                  <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
                   {collectStep.statuses &&
                     collectStep.statuses.map(status => (
                       <option key={status.id} value={status.id}>
@@ -179,16 +188,20 @@ export class ProposalAdminSelections extends Component<Props, void> {
                 {selectionValues[index] &&
                 selectionValues[index].selected && (
                   <div>
-                    <p className="text-info">
-                      L'auteur de la proposition sera notifié en cas changement de statut
-                    </p>
+                    {initialValues.selections[index].status !== selectionValues[index].status && (
+                      <p className="text-info">
+                        <i className="fa fa-exclamation-triangle" /> L'auteur de la proposition sera
+                        notifié du changement de statut
+                      </p>
+                    )}
                     <Field
                       type="select"
                       label="Statut"
                       id={`selections[${index}].status`}
                       name={`selections[${index}].status`}
+                      normalize={val => (val === '-1' ? null : val)}
                       component={component}>
-                      <option value={-1}>Aucun statut</option>
+                      <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
                       {step.statuses &&
                         step.statuses.map(status => (
                           <option key={status.id} value={status.id}>
@@ -246,7 +259,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
   };
 };
 
-const container = connect(mapStateToProps)(form);
+const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(
   container,

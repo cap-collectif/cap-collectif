@@ -8,7 +8,8 @@ describe('<ProposalAdminSelections />', () => {
   const props = {
     dispatch: jest.fn(),
     handleSubmit: jest.fn(),
-    initialValues: {},
+    intl: global.intlMock,
+    initialValues: { selections: [{ step: '2', selected: true, status: null }] },
     pristine: false,
     invalid: false,
     submitting: false,

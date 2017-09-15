@@ -58,11 +58,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         name="summary"
         type="textarea"
       />
-      <h4
-        className="h4"
-      >
-        Métadonnées
-      </h4>
       <Field
         autoload={true}
         clearable={false}

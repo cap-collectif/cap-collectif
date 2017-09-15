@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
+<div
+  className="proposal__content "
+>
+  <div
+    className="block"
+  >
+    <h3
+      className="h3"
+    >
+      <FormattedMessage
+        id="proposal.description"
+        values={Object {}}
+      />
+    </h3>
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": undefined,
+        }
+      }
+    />
+  </div>
+  <div
+    className="block proposal__buttons"
+  >
+    <Connect(ProposalVoteButtonWrapper)
+      proposal={
+        Object {
+          "_links": Object {
+            "show": "http://capco.test",
+          },
+          "author": Object {},
+          "id": 3,
+          "referer": "http://capco.test",
+          "responses": Array [],
+          "title": "Titre proposition",
+        }
+      }
+    />
+    <Connect(ShareButtonDropdown)
+      id="proposal-share-button"
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+      title="Titre proposition"
+      url="http://capco.test"
+    />
+    <Connect(ProposalReportButton)
+      proposal={
+        Object {
+          "_links": Object {
+            "show": "http://capco.test",
+          },
+          "author": Object {},
+          "id": 3,
+          "referer": "http://capco.test",
+          "responses": Array [],
+          "title": "Titre proposition",
+        }
+      }
+    />
+    <div
+      className="pull-right"
+    >
+      <Connect(EditButton)
+        author={Object {}}
+        id="proposal-edit-button"
+        onClick={[Function]}
+      />
+      <Connect(DeleteButton)
+        author={Object {}}
+        id="proposal-delete-button"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": "15px",
+          }
+        }
+      />
+    </div>
+  </div>
+  <Connect(InjectIntl(ProposalEditModal))
+    categories={Array []}
+    form={
+      Object {
+        "usingCategories": false,
+        "usingThemes": true,
+      }
+    }
+    proposal={
+      Object {
+        "_links": Object {
+          "show": "http://capco.test",
+        },
+        "author": Object {},
+        "id": 3,
+        "referer": "http://capco.test",
+        "responses": Array [],
+        "title": "Titre proposition",
+      }
+    }
+  />
+  <Connect(ProposalDeleteModal)
+    form={
+      Object {
+        "usingCategories": false,
+        "usingThemes": true,
+      }
+    }
+    proposal={
+      Object {
+        "_links": Object {
+          "show": "http://capco.test",
+        },
+        "author": Object {},
+        "id": 3,
+        "referer": "http://capco.test",
+        "responses": Array [],
+        "title": "Titre proposition",
+      }
+    }
+  />
+  <ProposalPageComments
+    className=""
+    form={
+      Object {
+        "usingCategories": false,
+        "usingThemes": true,
+      }
+    }
+    id={3}
+  />
+</div>
+`;
