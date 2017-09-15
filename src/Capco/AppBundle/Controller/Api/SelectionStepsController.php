@@ -22,7 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class SelectionStepsController extends FOSRestController
@@ -45,7 +44,7 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
-    public function postProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
+    public function getProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
         $page = (int) $paramFetcher->get('page');
         $pagination = (int) $paramFetcher->get('pagination');
@@ -80,36 +79,6 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
-     * @Post("/selection_steps/{selectionStepId}/proposals/search-in")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
-     */
-    public function postSelectProposalsByCollectStepAction(Request $request, SelectionStep $selectionStep): array
-    {
-        $selectedIds = $request->request->get('ids');
-
-        if (null === $selectedIds || !is_array($selectedIds)) {
-            throw new HttpException(400, 'ids are not setted');
-        }
-
-        $results = $this->get('capco.search.resolver')->searchProposalsIn($selectedIds, $selectionStep->getId());
-
-        // Reorder proposals
-        $orderedProposals = [];
-        foreach ($selectedIds as $selectedId) {
-            foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal['id']) {
-                    $orderedProposals[] = $proposal;
-                }
-            }
-        }
-
-        $results['proposals'] = $orderedProposals;
-
-        return $results;
-    }
-
-    /**
      * @Post("/selection_steps/{selectionStepId}/selections")
      * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=201, serializerGroups={})
@@ -117,8 +86,8 @@ class SelectionStepsController extends FOSRestController
     public function selectProposalAction(Request $request, string $selectionStepId)
     {
         $this->get('capco.mutation.proposal')->selectProposal(
-            $request->request->get('proposal'),
-            $selectionStepId
+          $request->request->get('proposal'),
+          $selectionStepId
         );
     }
 
@@ -130,8 +99,8 @@ class SelectionStepsController extends FOSRestController
     public function unselectProposalAction(string $selectionStepId, string $proposalId)
     {
         $this->get('capco.mutation.proposal')->unselectProposal(
-            $proposalId,
-            $selectionStepId
+          $proposalId,
+          $selectionStepId
         );
     }
 
@@ -143,9 +112,9 @@ class SelectionStepsController extends FOSRestController
     public function updateSelectionStatusAction(Request $request, string $stepId, string $proposalId)
     {
         $this->get('capco.mutation.proposal')->changeSelectionStatus(
-            $proposalId,
-            $stepId,
-            $request->request->get('status')
+          $proposalId,
+          $stepId,
+          $request->request->get('status')
         );
     }
 
@@ -184,7 +153,8 @@ class SelectionStepsController extends FOSRestController
         if ($selectionStep->isNumberOfVotesLimitted()) {
             $countUserVotes = $em
                 ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->countVotesByStepAndUser($selectionStep, $user);
+                ->countVotesByStepAndUser($selectionStep, $user)
+            ;
             if ($countUserVotes >= $selectionStep->getVotesLimit()) {
                 throw new BadRequestHttpException('You have reached the limit of votes.');
             }
@@ -199,7 +169,8 @@ class SelectionStepsController extends FOSRestController
             ->setIpAddress($request->getClientIp())
             ->setUser($user)
             ->setProposal($proposal)
-            ->setSelectionStep($selectionStep);
+            ->setSelectionStep($selectionStep)
+        ;
 
         $form = $this->createForm(ProposalSelectionVoteType::class, $vote);
         $form->submit($request->request->all());
@@ -215,7 +186,8 @@ class SelectionStepsController extends FOSRestController
                 ->setAuthorName($vote->getUsername())
                 ->setAuthorEmail($vote->getEmail())
                 ->setBody($content)
-                ->setProposal($proposal);
+                ->setProposal($proposal)
+            ;
 
             $em->persist($comment);
             $this->get('event_dispatcher')->dispatch(
@@ -228,8 +200,9 @@ class SelectionStepsController extends FOSRestController
         $em->flush();
 
         $this
-            ->get('fos_elastica.object_persister.app.proposal')
-            ->insertOne($proposal);
+          ->get('fos_elastica.object_persister.app.proposal')
+          ->insertOne($proposal)
+        ;
 
         return $vote;
     }
@@ -271,8 +244,9 @@ class SelectionStepsController extends FOSRestController
         $em->flush();
 
         $this
-            ->get('fos_elastica.object_persister.app.proposal')
-            ->insertOne($proposal);
+          ->get('fos_elastica.object_persister.app.proposal')
+          ->insertOne($proposal)
+        ;
 
         return $vote;
     }
