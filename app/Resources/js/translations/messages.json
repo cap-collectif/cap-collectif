@@ -59,7 +59,7 @@
   "comment.create_account_reason_3": "lier vos commentaires à votre profil",
   "comment.edited": "modifié le",
   "comment.email_info": "Pour valider que vous n'êtes pas un robot.",
-  "comment.list": "{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}",
+  "comment.list": "{num, plural, =0{<span id='proposal-page-comments-counter'>0</span> commentaire} one{<span id='proposal-page-comments-counter'>#</span> commentaire} other{<span id='proposal-page-comments-counter'>#</span> commentaires}}",
   "comment.more": "Voir plus de commentaires",
   "comment.public_name": "Votre nom sera rendu public sur la plateforme.",
   "comment.publish": "Publier un commentaire",
