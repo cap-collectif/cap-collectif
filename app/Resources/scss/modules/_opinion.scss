@@ -98,6 +98,10 @@
 
         .opinion__data {
             overflow: hidden;
+
+            p {
+                margin-bottom: 5px;
+            }
         }
 
         .opinion__user {
@@ -331,6 +335,10 @@
 
         .opinion__text {
             word-break: break-word;
+        }
+
+        &:first-child {
+            padding-top: 15px;
         }
 
         &:last-child {
