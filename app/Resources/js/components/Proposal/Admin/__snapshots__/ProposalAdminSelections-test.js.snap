@@ -74,13 +74,12 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
             id="collectStatus"
             label="Statut"
             name="collectStatus"
-            normalize={[Function]}
             type="select"
           >
             <option
-              value="-1"
+              value=""
             >
-              proposal.no_status
+              Aucun statut
             </option>
           </Field>
         </div>
@@ -107,18 +106,22 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           normalize={[Function]}
         />
         <div>
+          <p
+            className="text-info"
+          >
+            L'auteur de la proposition sera notifié en cas changement de statut
+          </p>
           <Field
             component={[Function]}
             id="selections[0].status"
             label="Statut"
             name="selections[0].status"
-            normalize={[Function]}
             type="select"
           >
             <option
-              value="-1"
+              value={-1}
             >
-              proposal.no_status
+              Aucun statut
             </option>
           </Field>
           <FieldArray

@@ -37,6 +37,17 @@ export default function configureStore(initialState: Object): Store {
     initialState.project &&
     initialState.proposal &&
     initialState.project.currentProjectStepById &&
+    LocalStorageService.isValid('proposal.termsByStep')
+  ) {
+    const termsByStep = LocalStorageService.get('proposal.termsByStep');
+    if (termsByStep) {
+      initialState.proposal.terms = termsByStep[initialState.project.currentProjectStepById];
+    }
+  }
+  if (
+    initialState.project &&
+    initialState.proposal &&
+    initialState.project.currentProjectStepById &&
     LocalStorageService.isValid('proposal.orderByStep')
   ) {
     const orderByStep = LocalStorageService.get('proposal.orderByStep');

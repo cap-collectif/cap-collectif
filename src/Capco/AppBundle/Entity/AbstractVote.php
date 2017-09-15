@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class AbstractVote.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
  * @ORM\Table(name="votes",indexes={})
  * @ORM\HasLifecycleCallbacks()
@@ -32,16 +34,32 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     use IdTrait;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+    }
 
     public function getKind(): string
     {
@@ -66,6 +84,16 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**

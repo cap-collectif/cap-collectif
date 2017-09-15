@@ -16,10 +16,10 @@ class ProposalPage extends Page
 
     protected $elements = [
         'proposal votes counter' => '#proposal-page-tabs-tab-votes .badge',
-        'proposal comments counter' => '#proposal-page-comments-counter',
+        'proposal comments counter' => '#proposal-page-tabs-tab-comments .badge',
         'comments list' => '.proposal__comments',
         'first vote' => '.proposal__vote:nth-child(1)',
-        'proposal vote button' => '#proposal-vote-btn',
+        'proposal vote button' => 'button#proposal-vote-btn',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
