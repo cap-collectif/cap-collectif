@@ -1200,7 +1200,7 @@ project_download:
 votes:
   none: Il n'y a pas de votes.
   has_voted: a voté sur
-  a: a
+  has: a
   is: est
   isNot: n'est
   value:
