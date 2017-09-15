@@ -9,6 +9,7 @@ admin.global:
   unpublish: La contribution a bien été dépubliée.
   validate: La contribution a bien été validée.
   expired: Expiré
+  by: par
 
 
 # Dashboard groups
@@ -491,7 +492,7 @@ admin:
       collect_step: Étape de dépôt
       comments: Commentaires
       created_at: Création
-      district: Localisation
+      district: Zone géographique
       enabled: Publié
       deleted: Supprimé
       deleted_at: Supprimé le
@@ -518,7 +519,8 @@ admin:
         delay: Préciser les temps d'études et de travaux
         proposedAnswer: À destination du porteur de projet
       id: Id
-      isTrashed: Dans la corbeille
+      isTrashed: Corbeille
+      likers: Coup(s) de coeur
       link: Lien
       media: Illustration
       no_category: Aucune catégorie
@@ -547,6 +549,7 @@ admin:
       evaluation: Évaluation financière de l'investissement proposé
       delay: Délai de mise en œuvre du projet
       proposedAnswer: Analyse synthétique de l'avis du service
+      last_status: Dernier statut
     proposal_category:
       name: Nom
     proposal_form:
