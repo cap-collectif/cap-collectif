@@ -86,7 +86,7 @@ Scenario: GraphQL client wants to change proposal content
         "body": "NewBody",
         "theme": "1",
         "author": "userAdmin",
-        "district": "2",
+        "district": "district2",
         "category": "2",
         "responses": [
           {
@@ -114,7 +114,7 @@ Scenario: GraphQL client wants to change proposal content
           "body": "NewBody",
           "author": { "id": "userAdmin" },
           "theme": { "id": "1" },
-          "district": { "id": "2" },
+          "district": { "id": "district2" },
           "category": { "id": "2" },
           "address": @string@,
           "responses": [
