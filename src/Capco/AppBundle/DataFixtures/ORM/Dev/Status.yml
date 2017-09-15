@@ -1,35 +1,42 @@
 Capco\AppBundle\Entity\Status:
   status1:
+    id: '1'
     name: En cours
     position: 0
     step: '@collectstep1'
     color: info
   status2:
+    id: '2'
     name: Approuvé
     position: 1
     step: '@collectstep1'
     color: success
   status3:
+    id: '3'
     name: Rejeté
     position: 2
     step: '@collectstep1'
     color: danger
   status4:
+    id: '4'
     name: Soumis au vote
     position: 1
     step: '@selectionstep1'
     color: info
   status5:
+    id: '5'
     name: Vote gagné
     position: 2
     step: '@selectionstep1'
     color: success
   status6:
+    id: '6'
     name: Vainqueur
     position: 1
     step: '@selectionstep2'
     color: success
   status7:
+    id: '7'
     name: En cours
     position: 0
     step: '@collectstep4'
