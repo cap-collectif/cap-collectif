@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import type { State } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
+import ProposalListOrderSorting from './ProposalListOrderSorting';
+import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
+
 import {
   changeFilter,
-  changeOrder,
   loadProposals,
   changeProposalListView,
 } from '../../../redux/modules/proposal';
@@ -23,7 +25,6 @@ export const ProposalListFilters = React.createClass({
     orderByVotes: PropTypes.bool,
     features: PropTypes.object.isRequired,
     showThemes: PropTypes.bool.isRequired,
-    order: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     showDistrictFilter: PropTypes.bool.isRequired,
@@ -43,12 +44,13 @@ export const ProposalListFilters = React.createClass({
       features,
       showThemes,
       orderByVotes,
-      districts,
       statuses,
+      districts,
       themes,
       types,
       showDistrictFilter,
     } = this.props;
+
     return {
       displayedFilters: []
         .concat(types.length > 0 ? ['types'] : [])
@@ -58,34 +60,20 @@ export const ProposalListFilters = React.createClass({
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(categories.length > 0 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),
-      displayedOrders: ['random', 'last', 'old', 'comments'].concat(orderByVotes ? ['votes'] : []),
+      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(orderByVotes ? ['votes'] : []),
     };
   },
 
   render() {
-    const { order, dispatch, filters, showToggleMapButton } = this.props;
-    const { displayedFilters, displayedOrders } = this.state;
-
+    const { dispatch, filters, showToggleMapButton } = this.props;
+    const { displayedFilters, orderByVotes } = this.state;
     const colWidth = showToggleMapButton ? 4 : 6;
 
     return (
       <div>
         <Row>
           <Col xs={12} md={colWidth}>
-            <Input
-              id="proposal-sorting"
-              type="select"
-              onChange={e => {
-                dispatch(changeOrder(e.target.value));
-                dispatch(loadProposals());
-              }}
-              value={order}>
-              {displayedOrders.map(choice => (
-                <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
-                  {message => <option value={choice}>{message}</option>}
-                </FormattedMessage>
-              ))}) }
-            </Input>
+            <ProposalListOrderSorting orderByVotes={orderByVotes} />
           </Col>
           <Col xs={12} md={colWidth}>
             <ProposalListSearch />
@@ -108,7 +96,7 @@ export const ProposalListFilters = React.createClass({
                 id={`proposal-filter-${filterName}`}
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
-                  dispatch(loadProposals());
+                  dispatch(loadProposals(null, true));
                 }}
                 value={filters[filterName] || 0}>
                 <FormattedMessage id={`global.select_${filterName}`}>
@@ -135,7 +123,6 @@ const mapStateToProps = (state: State) => {
     features: state.default.features,
     themes: state.default.themes,
     types: state.default.userTypes,
-    order: state.proposal.order,
     filters: state.proposal.filters || {},
   };
 };

@@ -124,16 +124,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
-  capco.status.repository:
-    class: Capco\AppBundle\Repository\StatusRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Status']
-
-  capco.selection.repository:
-    class: Capco\AppBundle\Repository\SelectionRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Selection']
-
   capco.site_color.repository:
     class: Capco\AppBundle\Repository\SiteColorRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

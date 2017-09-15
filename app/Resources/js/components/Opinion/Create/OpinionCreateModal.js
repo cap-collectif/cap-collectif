@@ -24,7 +24,16 @@ type Props = {
 
 export class OpinionCreateModal extends React.Component<Props> {
   render() {
-    const { opinionType, submitting, dispatch, show, stepId, projectId, step, intl } = this.props;
+    const {
+      opinionType, // eslint-disable-line
+      submitting, // eslint-disable-line
+      dispatch, // eslint-disable-line
+      show, // eslint-disable-line
+      stepId, // eslint-disable-line
+      projectId, // eslint-disable-line
+      step, // eslint-disable-line
+      intl, // eslint-disable-line
+    } = this.props;
     return (
       <Modal
         animation={false}
@@ -32,7 +41,9 @@ export class OpinionCreateModal extends React.Component<Props> {
         onHide={() => {
           if (
             // eslint-disable-next-line no-alert
-            window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+            window.confirm(
+              intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
+            )
           ) {
             dispatch(closeOpinionCreateModal());
           }

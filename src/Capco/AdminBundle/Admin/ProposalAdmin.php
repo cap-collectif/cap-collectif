@@ -30,47 +30,39 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
-            ->add('id', null, [
+            ->addIdentifier('id', null, [
                 'label' => 'admin.fields.proposal.id',
             ])
-            ->add('titleInfo', null, [
+            ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal.title',
-                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig',
             ])
-            ->add('author', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
-            ])
-            ->add('project', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.project',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
-            ])
-            ->add('category', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.category',
-            ])
-            ->add('district', 'sonata_type_model', [
-                'label' => 'admin.fields.proposal.district',
-            ])
-            ->add('lastStatus', null, [
-                'label' => 'admin.fields.proposal.last_status',
-                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
+            ->add('enabled', null, [
+                'editable' => true,
+                'label' => 'admin.fields.proposal.enabled',
             ])
             ->add('isTrashed', null, [
                 'editable' => true,
                 'label' => 'admin.fields.proposal.isTrashed',
+            ])
+            ->add('updateAuthor', 'sonata_type_model_autocomplete', [
+                'label' => 'admin.fields.proposal.updateAuthor',
+                'property' => 'username',
+            ])
+            ->add('updatedAt', null, [
+                'label' => 'admin.fields.proposal.updated_at',
             ]);
-
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $listMapper->add('deletedAt', null, [
                 'label' => 'admin.fields.proposal.deleted',
             ]);
         }
-
-        $listMapper
-            ->add('updatedInfo', 'datetime', [
-                'label' => 'admin.fields.proposal.updated_at',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
-            ]);
+        $listMapper->add('_action', 'actions', [
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                ],
+            ])
+        ;
     }
 
     // Fields to be shown on filter forms
@@ -96,35 +88,28 @@ class ProposalAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
-            ->add('author', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.proposal.author',
-            ], null, [
-                'property' => 'username',
-            ])
-            ->add('likers', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.proposal.likers',
-            ], null, [
-                'property' => 'username',
-            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal.updated_at',
             ]);
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $datagridMapper->add('deletedAt', null, [
-                'label' => 'admin.fields.proposal.deleted',
-            ]);
+                    'label' => 'admin.fields.proposal.deleted',
+                ]);
         }
-        $datagridMapper
-            ->add('status', null, [
+        $datagridMapper->add('status', null, [
                 'label' => 'admin.fields.proposal.status',
             ])
             ->add('estimation', null, [
                 'label' => 'admin.fields.proposal.estimation',
             ])
+            ->add('proposalForm.step', null, [
+                'label' => 'admin.fields.proposal.collect_step',
+            ])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ->add('expired', null, ['label' => 'admin.global.expired'])
+        ;
     }
 
     protected function configureRoutes(RouteCollection $collection)
