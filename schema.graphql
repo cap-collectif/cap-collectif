@@ -546,6 +546,12 @@ type Post {
   abstract: String!
 }
 
+type PresentationStep implements Step {
+  id: ID!
+  kind: String!
+  title: String!
+}
+
 # A budget contribution
 type ProgressStep {
   id: String!

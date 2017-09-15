@@ -270,7 +270,7 @@ class IdeasController extends FOSRestController
 
         $idea->incrementVotesCount();
 
-        if ($request->request->has('comment') && null !== ($content = $form->get('comment')->getData())) {
+        if ($form->has('comment') && null !== ($content = $form->get('comment')->getData())) {
             $comment = (new IdeaComment())
                 ->setIdea($idea)
                 ->setAuthor($vote->getUser())
