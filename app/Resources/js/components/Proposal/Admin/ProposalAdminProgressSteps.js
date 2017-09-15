@@ -1,17 +1,11 @@
 // @flow
+/* eslint-disable no-alert */
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import {
-  ListGroup,
-  ListGroupItem,
-  ButtonToolbar,
-  Button,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalAdminRealisationStepModal from './ProposalAdminRealisationStepModal';
 import type { GlobalState, Dispatch } from '../../../types';
 
@@ -37,14 +31,13 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { dispatch, fields, progressSteps } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group">
         <label>Liste des phases de réalisation</label>
         <ListGroup>
-          {fields.map((member, index) =>
+          {fields.map((member, index) => (
             <ListGroupItem key={index}>
               <ProposalAdminRealisationStepModal
                 isCreating={!!progressSteps[index].id}
@@ -55,22 +48,20 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
               <Row>
                 <Col xs={8}>
                   <div>
-                    <strong>
-                      {progressSteps[index].title}
-                    </strong>
+                    <strong>{progressSteps[index].title}</strong>
                   </div>
-                  {progressSteps[index].startAt &&
+                  {progressSteps[index].startAt && (
                     <div className="excerpt small">
-                      {progressSteps[index].endAt
-                        ? <p>
-                            Du{' '}
-                            {moment(progressSteps[index].startAt).format(
-                              'll',
-                            )}{' '}
-                            au {moment(progressSteps[index].endAt).format('ll')}
-                          </p>
-                        : moment(progressSteps[index].startAt).format('ll')}
-                    </div>}
+                      {progressSteps[index].endAt ? (
+                        <p>
+                          Du {moment(progressSteps[index].startAt).format('ll')} au{' '}
+                          {moment(progressSteps[index].endAt).format('ll')}
+                        </p>
+                      ) : (
+                        moment(progressSteps[index].startAt).format('ll')
+                      )}
+                    </div>
+                  )}
                 </Col>
                 <Col xs={4}>
                   <ButtonToolbar className="pull-right">
@@ -84,7 +75,6 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                     <Button
                       bsStyle="danger"
                       onClick={() => {
-                        // eslint-disable-next-line no-confirm
                         if (
                           window.confirm(
                             'Êtes-vous sûr de vouloir supprimer cette phase de réalisation ?',
@@ -99,8 +89,8 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                   </ButtonToolbar>
                 </Col>
               </Row>
-            </ListGroupItem>,
-          )}
+            </ListGroupItem>
+          ))}
         </ListGroup>
         <Button
           style={{ marginBottom: 10 }}

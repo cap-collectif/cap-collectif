@@ -83,7 +83,7 @@ input ChangeProposalContentInput {
   summary: String
 
   # The author id (ROLE_SUPER_ADMIN allowed only)
-  author: String
+  author: ID
 
   # The theme id (feature themes enabled)
   theme: String
@@ -544,6 +544,12 @@ type Post {
   id: String!
   title: String!
   abstract: String!
+}
+
+type PresentationStep implements Step {
+  id: ID!
+  kind: String!
+  title: String!
 }
 
 # A budget contribution

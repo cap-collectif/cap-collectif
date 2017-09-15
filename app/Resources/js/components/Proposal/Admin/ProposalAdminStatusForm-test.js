@@ -10,6 +10,7 @@ describe('<ProposalAdminStatusForm />', () => {
       id: '1',
       trashedReason: null,
       author: {
+        id: 'author1',
         expiresAt: 'Soon',
         email: 'soon@yopmail.com',
       },
@@ -20,6 +21,7 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="PUBLISHED"
         isSuperAdmin
+        isAuthor={false}
         pristine
         invalid={false}
         submitting={false}
@@ -38,6 +40,7 @@ describe('<ProposalAdminStatusForm />', () => {
       trashedReason: null,
       publicationStatus: 'EXPIRED',
       author: {
+        id: 'author1',
         expiresAt: null,
         email: 'osef@yopmail.com',
       },
@@ -48,6 +51,7 @@ describe('<ProposalAdminStatusForm />', () => {
         publicationStatus="EXPIRED"
         relay={{}}
         isSuperAdmin
+        isAuthor={false}
         pristine
         invalid={false}
         submitting={false}
@@ -63,6 +67,7 @@ describe('<ProposalAdminStatusForm />', () => {
     const proposalConfirmed = {
       id: '1',
       author: {
+        id: 'author1',
         expiresAt: null,
         email: 'soon@yopmail.com',
       },
@@ -75,6 +80,7 @@ describe('<ProposalAdminStatusForm />', () => {
         publicationStatus="PUBLISHED"
         relay={{}}
         isSuperAdmin
+        isAuthor={false}
         pristine
         invalid={false}
         submitting={false}
