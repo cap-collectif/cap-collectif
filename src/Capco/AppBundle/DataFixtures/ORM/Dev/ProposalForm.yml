@@ -20,11 +20,13 @@ Capco\AppBundle\Entity\ProposalForm:
     zoomMap: 12
     latMap: 48.1159675
     lngMap: -1.7234738
+    reference: 1
   proposalform2:
     id: proposalForm2
     title: Formulaire de la collecte 2
     description: <text(100)>
     step: "@collectstep2"
+    reference: 2
   proposalform3:
     id: proposalForm3
     title: Formulaire de la collecte 3
@@ -33,23 +35,28 @@ Capco\AppBundle\Entity\ProposalForm:
     usingCategories: true
     usingThemes: true
     usingDistrict: true
+    reference: 3
   proposalform4:
     id: proposalForm4
     title: Formulaire de la collecte 4
     description: <text(100)>
     step: "@collectstep4"
+    reference: 4
   proposalform5:
     id: proposalForm5
     title: Formulaire de la collecte 5
     description: <text(100)>
     step: "@collectstep5"
+    reference: 5
   proposalform6:
     id: proposalForm6
     title: Formulaire du dépôt fermé
     description: <text(100)>
     step: "@collectstep6"
+    reference: 6
   proposalform7:
     id: proposalForm7
     title: Formulaire de la collecte 7
     description: <text(100)>
     step: "@collectstep7"
+    reference: 7

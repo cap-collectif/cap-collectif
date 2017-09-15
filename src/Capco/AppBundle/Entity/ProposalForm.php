@@ -19,7 +19,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ProposalForm
 {
+<<<<<<< HEAD
     use UuidTrait;
+=======
+    use IdTrait;
+    use ReferenceTrait;
+>>>>>>> Reference to proposal and proposal form #4289
     use TimestampableTrait;
     use SluggableTitleTrait;
 
@@ -172,6 +177,7 @@ class ProposalForm
         $this->questions = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->districts = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
         $this->notificationsConfiguration = new ProposalFormNotificationConfiguration();
     }
 
@@ -232,7 +238,7 @@ class ProposalForm
     }
 
     /**
-     * @return mixed
+     * @return Proposal[]|ArrayCollection
      */
     public function getProposals()
     {

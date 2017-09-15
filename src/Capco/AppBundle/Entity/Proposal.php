@@ -9,6 +9,11 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+<<<<<<< HEAD
+=======
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\ReferenceTrait;
+>>>>>>> Reference to proposal and proposal form #4289
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
@@ -39,7 +44,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
+<<<<<<< HEAD
     use UuidTrait;
+=======
+    use IdTrait;
+    use ReferenceTrait;
+>>>>>>> Reference to proposal and proposal form #4289
     use CommentableTrait;
     use TimestampableTrait;
     use EnableTrait;
@@ -364,7 +374,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalForm;
     }
 
-    public function getProposalForm()
+    public function getProposalForm(): ProposalForm
     {
         return $this->proposalForm;
     }
@@ -855,6 +865,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         }
 
         return $this->getAddress()[0]['formatted_address'];
+    }
+
+    public function getFullReference()
+    {
+        return $this->getProposalForm()->getReference() . '-' . $this->getReference();
     }
 
     /**
