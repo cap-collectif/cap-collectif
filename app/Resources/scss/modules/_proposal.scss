@@ -348,17 +348,16 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 }
 
+#proposal-page-tabs > .container {
+    padding-top: 20px;
+}
+
 .proposal__private-field h2 {
     margin-top: 0;
 }
 
 .consultation__header__title {
     margin: 15px 0 15px;
-    display: inline-block;
-}
-
-#proposal-vote-btn {
-    margin-top: 15px;
 }
 
 .proposal__map {

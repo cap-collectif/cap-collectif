@@ -1,7 +1,9 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import ContributionPaginatedList, { pageSize } from './ContributionPaginatedList';
+import ContributionPaginatedList, {
+  pageSize,
+} from './ContributionPaginatedList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
 
@@ -19,7 +21,12 @@ const renderConsultationPaginated = ({
   if (props) {
     // eslint-disable-next-line react/prop-types
     if (props.consultations && props.consultations.length) {
-      return <ContributionPaginatedList consultation={props.consultations[0]} />;
+      return (
+        <ContributionPaginatedList
+          // eslint-disable-next-line react/prop-types
+          consultation={props.consultations[0]}
+        />
+      );
     }
     return graphqlError;
   }

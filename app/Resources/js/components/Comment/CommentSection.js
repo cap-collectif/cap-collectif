@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -133,15 +133,21 @@ const CommentSection = React.createClass({
           xsOffset={2}
           sm={4}
           className="hidden-xs"
-          style={{ marginTop: '10px', marginBottom: '20px' }}>
+          style={{ marginTop: '30px', marginBottom: '20px' }}>
           <select
             ref="filter"
             className="form-control"
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{<FormattedMessage id="global.filter_popular" />}</option>
-            <option value="last">{<FormattedMessage id="global.filter_last" />}</option>
-            <option value="old">{<FormattedMessage id="global.filter_old" />}</option>
+            <option value="popular">
+              {<FormattedMessage id="global.filter_popular" />}
+            </option>
+            <option value="last">
+              {<FormattedMessage id="global.filter_last" />}
+            </option>
+            <option value="old">
+              {<FormattedMessage id="global.filter_old" />}
+            </option>
           </select>
         </Col>
       );
@@ -169,13 +175,13 @@ const CommentSection = React.createClass({
   render() {
     return (
       <div className="comments__section">
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
-        <h3>
-          <FormattedMessage id="proposal.tabs.comments" />
-        </h3>
+        <FlashMessages
+          errors={this.state.messages.errors}
+          success={this.state.messages.success}
+        />
         <Row>
-          <Col componentClass="h4" sm={6}>
-            <FormattedHTMLMessage
+          <Col componentClass="h2" sm={6}>
+            <FormattedMessage
               id="comment.list"
               values={{
                 num: this.state.countWithAnswers,

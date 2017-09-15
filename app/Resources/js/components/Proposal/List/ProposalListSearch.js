@@ -56,8 +56,7 @@ const ProposalListSearch = React.createClass({
 
 const mapStateToProps = (state: State) => {
   return {
-    terms:
-      state.proposal.filters && state.proposal.filters.terms ? state.proposal.filters.terms : '',
+    terms: state.proposal.terms ? state.proposal.terms : '',
   };
 };
 

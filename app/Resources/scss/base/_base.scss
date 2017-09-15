@@ -91,6 +91,7 @@ body {
 
         &:after {
             background-color: $alt-section;
+            border-bottom: 1px solid $border-color;
             border-top: 1px solid $border-color;
         }
     }
@@ -816,40 +817,9 @@ svg.avatar {
     }
 }
 
-.tabs__container {
-    > .container {
-        padding-top: 20px;
-    }
-
-    .tabs{
-        background-color: $light-gray;
-        margin-bottom: 30px;
-
-        .container {
-            padding-top: 0;
-            padding-bottom: 0;
-
-            .tab {
-                a {
-                    padding: 15px 20px;
-                }
-
-                .badge {
-                    background-color: $alt-section;
-                    color: $gray-light;
-                    margin-left: 10px;
-                }
-
-                &.active .badge {
-                    background-color: $gray-light;
-                    color: $white;
-                }
-            }
-        }
-    }
-}
-
 .PrivateList {
+    margin-bottom: 30px;
+
     &__box {
         padding: 30px 25px 0;
         border: 1px #d3d3d3 solid;

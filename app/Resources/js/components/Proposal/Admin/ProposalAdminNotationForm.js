@@ -12,6 +12,7 @@ import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { State, Dispatch } from '../../../types';
 
+type DefaultProps = void;
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
 type Props = RelayProps & {
@@ -37,9 +38,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   });
 };
 
-export class ProposalAdminNotationForm extends Component<Props> {
+export class ProposalAdminNotationForm extends Component<Props, void> {
+  static defaultProps: DefaultProps;
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
+    const {
+      invalid,
+      pristine,
+      handleSubmit,
+      submitting,
+      proposal,
+    } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -65,7 +73,7 @@ export class ProposalAdminNotationForm extends Component<Props> {
             <Field
               name="likers"
               id="likers"
-              label="Coup(s) de coeur"
+              label="likers"
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               multi
@@ -88,8 +96,13 @@ export class ProposalAdminNotationForm extends Component<Props> {
                 }))}
             />
             <ButtonToolbar style={{ marginBottom: 10 }}>
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+              <Button
+                disabled={invalid || pristine || submitting}
+                type="submit"
+                bsStyle="primary">
+                <FormattedMessage
+                  id={submitting ? 'global.loading' : 'global.save'}
+                />
               </Button>
             </ButtonToolbar>
           </div>

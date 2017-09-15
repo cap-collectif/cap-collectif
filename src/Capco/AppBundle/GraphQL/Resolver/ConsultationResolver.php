@@ -145,14 +145,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function getSectionChildren(OpinionType $type, Arg $argument)
     {
-        $iterator = $type->getChildren()->getIterator();
-
-        // define ordering closure, using preferred comparison method/field
-        $iterator->uasort(function ($first, $second) {
-            return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
-        });
-
-        return $iterator;
+        return $type->getChildren();
     }
 
     public function getContributionsBySection(Arg $arg)
