@@ -117,7 +117,7 @@ class ApiContext extends ApplicationContext
             "link": "http://google.com",
             "title": "Je suis une source",
             "body": "<div>Jai un corps mais pas de bras :'(</div>",
-            "Category": 2
+            "Category": "category2"
         }
 EOF;
 
