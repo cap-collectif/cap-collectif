@@ -113,7 +113,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 2999999
     category: '@pCategory3'
-    reference: 7
+    reference: 1
   proposal8:
     id: proposal8
     title: Proposition pas chère
@@ -129,7 +129,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     category: '@pCategory3'
-    reference: 8
+    reference: 2
   proposal9:
     id: proposal9
     title: Proposition gratuite
@@ -144,7 +144,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     category: '@pCategory4'
-    reference: 9
+    reference: 3
   proposal10:
     id: proposal10
     title: Proposition pas encore votable
@@ -159,7 +159,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    reference: 10
+    reference: 7
   proposal11:
     id: proposal11
     title: Proposition plus votable
@@ -174,7 +174,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    reference: 11
+    reference: 8
   proposal12:
     id: proposal12
     title: Proposition plus votable
@@ -189,7 +189,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status7'
     estimation: 100
-    reference: 12
+    reference: 1
   proposal13:
     id: proposal13
     title: Proposition plus votable
@@ -204,7 +204,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    reference: 13
+    reference: 2
   proposal14:
     id: proposal14
     title: Mon super projet
@@ -218,7 +218,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district3'
     status: '@status1'
     estimation: 100
-    reference: 14
+    reference: 1
   proposal15:
     id: proposal15
     title: Proposition 15
@@ -227,7 +227,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform6'
-    reference: 15
+    reference: 1
   proposal16:
     id: proposal16
     title: Proposition 16
@@ -236,7 +236,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform6'
-    reference: 16
+    reference: 2
   proposal17:
     id: proposal17
     title: Proposition 17
@@ -245,7 +245,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform7'
-    reference: 17
+    reference: 1
   proposal18:
     id: proposal18
     title: Proposition 18
@@ -254,4 +254,4 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform7'
-    reference: 18
+    reference: 2
