@@ -89,11 +89,6 @@
                                     <a class="search-result__link" href="{{ result.transformed | capco_url }}">
                                         {{ title | raw }}
                                     </a>
-                                    {% if entity.createdAt is defined %}
-                                        <span class="small excerpt search-result__date">
-                                            {{ entity.createdAt | localizeddate('medium', 'none', app.request.locale) }}
-                                        </span>
-                                    {% endif %}
                                 </h4>
                                 <span class="small">
                                     {#{{ dump(entity) }}#}
