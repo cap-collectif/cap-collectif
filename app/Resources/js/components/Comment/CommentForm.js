@@ -164,21 +164,13 @@ const CommentForm = React.createClass({
               <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
               <h5>{<FormattedMessage id="comment.why_create_account" />}</h5>
               <ul className="excerpt small">
-                <li>
-                  {<FormattedMessage id="comment.create_account_reason_1" />}
-                </li>
-                <li>
-                  {<FormattedMessage id="comment.create_account_reason_2" />}
-                </li>
-                <li>
-                  {<FormattedMessage id="comment.create_account_reason_3" />}
-                </li>
+                <li>{<FormattedMessage id="comment.create_account_reason_1" />}</li>
+                <li>{<FormattedMessage id="comment.create_account_reason_2" />}</li>
+                <li>{<FormattedMessage id="comment.create_account_reason_3" />}</li>
               </ul>
             </Col>
             <Col sm={12} md={6}>
-              <p>
-                {<FormattedMessage id="comment.without_account" />}
-              </p>
+              <p>{<FormattedMessage id="comment.without_account" />}</p>
               <Input
                 type="text"
                 ref="authorName"
@@ -205,10 +197,13 @@ const CommentForm = React.createClass({
                 ref="anonymousComment"
                 disabled={this.state.isSubmitting}
                 onClick={this.state.isSubmitting ? null : this.create}
-                bsStyle="primary">
-                {this.state.isSubmitting
-                  ? <FormattedMessage id="global.loading" />
-                  : <FormattedMessage id="comment.submit" />}
+                bsStyle="primary"
+                className="btn--comment">
+                {this.state.isSubmitting ? (
+                  <FormattedMessage id="global.loading" />
+                ) : (
+                  <FormattedMessage id="comment.submit" />
+                )}
               </Button>
             </Col>
           </Row>
@@ -226,19 +221,18 @@ const CommentForm = React.createClass({
             ref="loggedInComment"
             disabled={this.state.isSubmitting}
             onClick={this.state.isSubmitting ? null : this.create}
-            bsStyle="primary">
-            {this.state.isSubmitting
-              ? <FormattedMessage id="global.loading" />
-              : <FormattedMessage id="comment.submit" />}
+            bsStyle="primary"
+            className="btn--comment">
+            {this.state.isSubmitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="comment.submit" />
+            )}
           </Button>
         );
       }
 
-      return (
-        <div>
-          {this.renderAnonymous()}
-        </div>
-      );
+      return <div>{this.renderAnonymous()}</div>;
     }
   },
 
