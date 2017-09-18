@@ -34,35 +34,20 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
      white-space: nowrap;
  }
 
- .proposal__preview {
-     display: flex;
-     flex-direction: column;
-     width: 100%;
-
-     .box {
-         flex: 1 0 auto;
-         display: flex;
-         flex-direction: column;
-
-         .proposal__body {
-             flex: 1 0 auto;
-             padding-top: 10px;
-             margin-bottom: 20px;
-
-             .proposal__infos {
-                 font-size: 85%;
-                 margin-top: 5px;
-             }
-         }
-     }
+ .proposal__body {
+     clear: both;
+     padding-top: 10px;
+     height: 200px;
+     margin-bottom: 20px;
  }
-
 
  .proposal__title  {
      margin: 0 auto 10px;
  }
 
-
+ .proposal__infos {
+     font-size: 85%;
+ }
 
  .proposal__info {
      padding-top: 5px;
