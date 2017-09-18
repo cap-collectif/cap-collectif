@@ -12,8 +12,6 @@ const throwError = (warning) => {
 console.error = throwError; // eslint-disable-line no-console
 console.warn = throwError; // eslint-disable-line no-console
 
-Date.now = jest.fn(() => new Date(Date.UTC(2017, 0, 1)).valueOf());
-
 global.intlMock = {
   now: () => null,
   formatHTMLMessage: message => message,
