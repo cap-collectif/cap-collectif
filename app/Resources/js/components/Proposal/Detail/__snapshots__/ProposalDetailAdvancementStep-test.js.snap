@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalDetailAdvancementStep /> can render a step with status 1`] = `
+<span>
+  <div
+    style={
+      Object {
+        "paddingLeft": "13px",
+        "paddingTop": "10px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "backgroundColor": "#hexCode",
+          "borderRadius": "50%",
+          "color": "#767676",
+          "float": "left",
+          "height": "12px",
+          "lineHeight": "28px",
+          "marginLeft": "-18px",
+          "marginTop": "-10px",
+          "textAlign": "center",
+          "width": "12px",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "marginTop": "-15px",
+        }
+      }
+    >
+      <div>
+        Step title
+      </div>
+      <div
+        className="excerpt small"
+      >
+        <span>
+          Sep 5, 2017 - Sep 17, 2017
+        </span>
+      </div>
+      <Label
+        bsClass="label"
+        bsStyle="success"
+        style={
+          Object {
+            "marginTop": "5px",
+          }
+        }
+      >
+        Salut
+      </Label>
+    </div>
+    <br />
+  </div>
+</span>
+`;
+
+exports[`<ProposalDetailAdvancementStep /> can render a step without status 1`] = `
+<span>
+  <div
+    style={
+      Object {
+        "paddingLeft": "13px",
+        "paddingTop": "10px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "backgroundColor": "#hexCode",
+          "borderRadius": "50%",
+          "color": "#767676",
+          "float": "left",
+          "height": "12px",
+          "lineHeight": "28px",
+          "marginLeft": "-18px",
+          "marginTop": "-10px",
+          "textAlign": "center",
+          "width": "12px",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "marginTop": "-15px",
+        }
+      }
+    >
+      <div>
+        Step title
+      </div>
+      <div
+        className="excerpt small"
+      >
+        <span>
+          Sep 5, 2017 - Sep 17, 2017
+        </span>
+      </div>
+    </div>
+    <br />
+  </div>
+</span>
+`;

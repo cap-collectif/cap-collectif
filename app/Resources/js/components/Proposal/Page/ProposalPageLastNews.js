@@ -30,7 +30,7 @@ export class ProposalPageLastNews extends React.Component<{
     }
     return (
       <div className={classNames(classes)}>
-        {answer.title && <h2 className="h2 proposal__last__news__title">{answer.title}</h2>}
+        {answer.title && <h2 className="h2">{answer.title}</h2>}
         <AnswerBody answer={answer} />
       </div>
     );
