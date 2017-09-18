@@ -29,7 +29,6 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
         }
-        // $em->remove($proposal->getSelections());
         $em->remove($proposal);
         $em->flush();
 

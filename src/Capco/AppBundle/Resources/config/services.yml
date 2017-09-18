@@ -48,6 +48,10 @@ services:
     class: Capco\AppBundle\Toggle\Manager
     arguments: ["@qandidate.toggle.manager", "@qandidate.toggle.user_context_factory" ]
 
+  capco.proposal.helper:
+    class: Capco\AppBundle\Helper\ProposalHelper
+    arguments: ["@capco.proposal.repository"]
+
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper
 

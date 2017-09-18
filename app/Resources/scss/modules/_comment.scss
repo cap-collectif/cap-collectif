@@ -25,6 +25,10 @@
 
     .opinion__data {
         overflow: hidden;
+
+        .btn--comment {
+            margin-bottom: 10px;
+        }
     }
 }
 
@@ -84,10 +88,6 @@
     margin-left: 55px;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.comments__section > .opinion__list > .opinion--comment:first-child {
-    margin-top: 20px;
 }
 
 .opinion__list {

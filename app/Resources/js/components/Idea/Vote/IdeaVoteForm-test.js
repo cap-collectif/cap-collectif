@@ -1,10 +1,11 @@
+// @flow
 /* eslint-env jest */
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import IdeaVoteForm from './IdeaVoteForm';
-import FlashMessages from '../../Utils/FlashMessages';
+import { IdeaVoteForm } from './IdeaVoteForm';
 
+// eslint-disable-next-line react/prop-types
 const idea = {
   userHasVote: false,
   commentable: true,
@@ -22,76 +23,54 @@ const ideaNotCommentable = {
 
 describe('<IdeaVoteForm />', () => {
   it('should render the form with username, email, comment and private when user is not logged in', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} />);
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(1);
+    const wrapper = shallow(
+      <IdeaVoteForm anonymous idea={idea} hasCommentValue={false} isPrivate={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render the form with only comment and private when user is not logged in', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous={false} idea={idea} />);
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(1);
+  it('should render the form with only comment and private when user is logged in', () => {
+    const wrapper = shallow(
+      <IdeaVoteForm anonymous={false} idea={idea} hasCommentValue={false} isPrivate={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show comment field when private is checked', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} />);
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    const state = wrapper.state();
-    const form = state.form;
-    form.private = true;
-    state.form = form;
-    wrapper.setState(form);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(0);
+    const wrapper = shallow(
+      <IdeaVoteForm anonymous idea={idea} isPrivate hasCommentValue={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show private checkbox when comment is filled', () => {
-    const wrapper = shallow(<IdeaVoteForm anonymous idea={idea} />);
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    const state = wrapper.state();
-    const form = state.form;
-    form.comment = 'hello';
-    state.form = form;
-    wrapper.setState(form);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(1);
+    const wrapper = shallow(
+      <IdeaVoteForm anonymous idea={idea} hasCommentValue isPrivate={false} />,
+    );
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should not show comment field nor private checkbox when user has vote', () => {
+  it('should not show comment field or private checkbox when user has vote', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous={false} idea={ideaWithVote} />,
+      <IdeaVoteForm
+        anonymous={false}
+        idea={ideaWithVote}
+        hasCommentValue={false}
+        isPrivate={false}
+      />,
     );
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(0);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(0);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show comment field when idea is not commentable', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous idea={ideaNotCommentable} />,
+      <IdeaVoteForm
+        anonymous
+        idea={ideaNotCommentable}
+        hasCommentValue={false}
+        isPrivate={false}
+      />,
     );
-    expect(wrapper.find(FlashMessages)).toHaveLength(1);
-    expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-username')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-email')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-private')).toHaveLength(1);
-    expect(wrapper.find('#idea-vote-comment')).toHaveLength(0);
+    expect(wrapper).toMatchSnapshot();
   });
 });
