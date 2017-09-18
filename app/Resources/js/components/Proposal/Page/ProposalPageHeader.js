@@ -59,19 +59,12 @@ export const ProposalPageHeader = React.createClass({
             {<FormattedMessage id="proposal.back" />}
           </a>
         </div>
-        <div className="row proposal__header__row">
-          <div className="col-sm-10 col-xs-12">
-            <h1 className="consultation__header__title h1">{proposal.title}</h1>
-          </div>
-          <div className="col-sm-2 col-xs-12">
-            <ProposalVoteButtonWrapper
-              id="proposal-vote-btn"
-              proposal={proposal}
-              className="pull-right btn-lg"
-            />
-          </div>
-        </div>
-
+        <h1 className="consultation__header__title h1">{proposal.title}</h1>
+        <ProposalVoteButtonWrapper
+          id="proposal-vote-btn"
+          proposal={proposal}
+          className="pull-right btn-lg"
+        />
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
