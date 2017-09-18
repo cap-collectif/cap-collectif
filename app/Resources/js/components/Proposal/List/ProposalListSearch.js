@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { changeTerm, loadProposals } from '../../../redux/modules/proposal';
+import { changeTerm, loadProposals, changeFilter } from '../../../redux/modules/proposal';
 import Input from '../../Form/Input';
 import type { State } from '../../../types';
 
@@ -24,6 +24,7 @@ const ProposalListSearch = React.createClass({
     let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
     dispatch(changeTerm(value));
+    dispatch(changeFilter('terms', value));
     dispatch(loadProposals(null, true));
   },
 
@@ -55,7 +56,8 @@ const ProposalListSearch = React.createClass({
 
 const mapStateToProps = (state: State) => {
   return {
-    terms: state.proposal.terms ? state.proposal.terms : '',
+    terms:
+      state.proposal.filters && state.proposal.filters.terms ? state.proposal.filters.terms : '',
   };
 };
 
