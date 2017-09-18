@@ -50,10 +50,14 @@ const ProposalPageMetadata = React.createClass({
                   showNullEstimation={showNullEstimation}
                 />
                 <ProposalDetailLikers proposal={proposal} componentClass="div" />
-              </div>
+                <div className="proposal__info ellipsis">
+                  <i className="cap cap-tag-1-1 icon--blue" />
+                  {proposal.reference}
+                </div>
             </div>
           )}
-      </div>
+      </div>)}
+    </div>
     );
   },
 });

@@ -46,6 +46,12 @@
 
 .search-result__title {
     line-height: normal;
+    margin-bottom: 0px;
+    font-size: 16px;
+
+    a {
+        vertical-align: middle;
+    }
 }
 
 .search-result__type {

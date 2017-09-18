@@ -272,6 +272,7 @@ class SearchResolver
         $shouldQuery->setType('phrase_prefix');
         $shouldQuery->setFields([
             'title', 'title.std',
+            'reference', 'reference.std',
             'body', 'body.std',
             'object', 'object.std',
             'teaser', 'teaser.std',

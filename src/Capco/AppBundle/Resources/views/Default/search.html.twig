@@ -4,13 +4,13 @@
 
 {% block metaTags %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title': 'search.title' | trans({}, 'CapcoAppBundle'),
-        'url':   url('app_search')
+    'title': 'search.title' | trans({}, 'CapcoAppBundle'),
+    'url':   url('app_search')
     } only %}
 {% endblock %}
 
 {% block title %}
-        {{ parent() }} - {{ 'search.title' | trans({}, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'search.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
@@ -37,13 +37,14 @@
             </div>
         </div>
 
-        <div class="container  container--custom">
+        <div class="container container--custom">
 
             <div class="row">
 
                 <div class="col-xs-12 col-sm-3 block--mobile">
 
-                    <h2 class="h5 excerpt" style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
+                    <h2 class="h5 excerpt"
+                        style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
 
                     {# Type #}
                     <div class="panel panel-default">
@@ -59,7 +60,8 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <h2 class="h2 search__results-nb" style="margin-top: 0;">
-                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}search.results.title{% endtranschoice %}
+                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
+                        search.results.title{% endtranschoice %}
                         <span class="pull-right">
                             {{ form_widget(form.sort) }}
                         </span>
@@ -69,6 +71,7 @@
 
                     <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
                         {% for result in results %}
+                            {% set entity = result.transformed %}
                             {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
                             {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
 
@@ -79,19 +82,30 @@
                             {% endif %}
                             <li>
                                 <h4 class="h4 search-result__title">
-                                        <span class="label label-default search-result__type">{{ type_label | trans({}, 'CapcoAppBundle') }}</span>
-                                        {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed == true %}
-                                            <span class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
-                                        {% endif %}
-                                        <a class="search-result__link" href="{{ result.transformed | capco_url }}">
-                                            {{ title | raw }}
-                                        </a>
-                                        {% if result.result.hit['_source']['created_at'] is defined %}
-                                            <span class="small excerpt search-result__date">
-                                                {{ result.result.hit['_source']['created_at'] | localizeddate('medium', 'none', app.request.locale) }}
-                                            </span>
-                                        {% endif %}
+                                    {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed == true %}
+                                        <span
+                                            class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
+                                    {% endif %}
+                                    <a class="search-result__link" href="{{ result.transformed | capco_url }}">
+                                        {{ title | raw }}
+                                    </a>
+                                    {% if entity.createdAt is defined %}
+                                        <span class="small excerpt search-result__date">
+                                            {{ entity.createdAt | localizeddate('medium', 'none', app.request.locale) }}
+                                        </span>
+                                    {% endif %}
                                 </h4>
+                                <span class="small">
+                                    {#{{ dump(entity) }}#}
+                                    {{ type_label | trans({}, 'CapcoAppBundle') }}
+                                    {% if entity.proposalForm is defined %}
+                                        • {{ entity.proposalForm.step.project.title }}
+                                    {% endif %}
+                                    {{ entity.proposalForm is defined and entity.fullReference is defined ? '•' }}
+                                    {% if entity.fullReference is defined %}
+                                        {{ ('global.reference'|trans({}, 'CapcoAppBundle'))~' '~entity.fullReference }}
+                                    {% endif %}
+                                </span>
                                 {% if result.result.hit['highlight'] is defined %}
                                     {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
                                         <p class="excerpt small search-result__preview">
@@ -101,9 +115,9 @@
                                         </p>
                                     {% endfor %}
                                 {% else %}
-                                    {% for key in ['biography', 'body'] if attribute(result.transformed, key) is defined %}
+                                    {% for key in ['biography', 'body'] if attribute(entity, key) is defined %}
                                         <p class="excerpt small search-result__preview">
-                                            {{ attribute(result.transformed, key)|striptags|truncate(175) }}
+                                            {{ attribute(entity, key)|striptags|truncate(175) }}
                                         </p>
                                     {% endfor %}
                                 {% endif %}
@@ -111,7 +125,7 @@
                         {% endfor %}
                     </ul>
 
-                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only  %}
+                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only %}
                 </div>
 
             </div>
@@ -124,7 +138,7 @@
     {{ parent() }}
     <script type="text/javascript">
         $(".radio input:checked").parent().addClass('active');
-        $(".search__choice-panel > div").on('change', function() {
+        $(".search__choice-panel > div").on('change', function () {
             $(".search__choice-panel .radio input").parent().removeClass('active');
             $(".search__choice-panel .radio input:checked").parent().addClass('active');
             $("#capco_app_search").submit();

@@ -24,6 +24,7 @@ global:
     typo: Vouliez-vous dire
   email:
     footer: Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.
+  reference: Réf.
 
 
 sms:

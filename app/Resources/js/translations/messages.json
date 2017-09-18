@@ -490,7 +490,7 @@
   "proposal.request.vote.failure": "Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.",
   "proposal.request.vote.success": "Merci, votre vote a bien été pris en compte.",
   "proposal.suggest_header": "{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}",
-  "proposal.search": "Rechercher une proposition",
+  "proposal.search": "Mots-clés ou référence",
   "proposal.summary": "Résumé",
   "proposal.select.category": "Sélectionnez une catégorie",
   "proposal.select.district": "Sélectionnez une localisation",
