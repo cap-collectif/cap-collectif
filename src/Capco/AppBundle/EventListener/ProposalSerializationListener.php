@@ -163,5 +163,9 @@ class ProposalSerializationListener extends AbstractSerializationListener
                 'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
             );
         }
+
+        if (isset($this->getIncludedGroups($event)['Proposals'])) {
+            $event->getVisitor()->addData('reference', $proposal->getFullReference());
+        }
     }
 }
