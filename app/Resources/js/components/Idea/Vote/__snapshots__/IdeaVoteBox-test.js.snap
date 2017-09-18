@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaVoteBox /> should render the create idea vote form with no user avatar when user is not logged in 1`] = `
+<div>
+  <div>
+    <Connect(IdeaCreateVoteForm)
+      anonymous={true}
+      idea={Object {}}
+    />
+  </div>
+  <Connect(SubmitButton)
+    bsStyle="success"
+    className="btn-block"
+    id="idea-vote-button"
+    isSubmitting={false}
+    label="idea.vote.add"
+    onSubmit={[Function]}
+    style={
+      Object {
+        "marginTop": "10px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<IdeaVoteBox /> should render the create idea vote form with user avatar when user is logged in 1`] = `
+<div>
+  <UserPreview
+    className=""
+    style={
+      Object {
+        "fontSize": "18px",
+        "marginBottom": "0",
+        "padding": "0",
+      }
+    }
+    user={Object {}}
+    username={null}
+  />
+  <div>
+    <Connect(IdeaCreateVoteForm)
+      anonymous={false}
+      idea={Object {}}
+    />
+  </div>
+  <Connect(SubmitButton)
+    bsStyle="success"
+    className="btn-block"
+    id="idea-vote-button"
+    isSubmitting={false}
+    label="idea.vote.add"
+    onSubmit={[Function]}
+    style={
+      Object {
+        "marginTop": "10px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<IdeaVoteBox /> should render the delete idea vote form with user avatar when user is logged in and has voted 1`] = `
+<div>
+  <UserPreview
+    className=""
+    style={
+      Object {
+        "fontSize": "18px",
+        "marginBottom": "0",
+        "padding": "0",
+      }
+    }
+    user={Object {}}
+    username={null}
+  />
+  <div>
+    <Connect(IdeaDeleteVoteForm)
+      anonymous={false}
+      idea={
+        Object {
+          "userHasVote": true,
+        }
+      }
+    />
+  </div>
+  <Connect(SubmitButton)
+    bsStyle="danger"
+    className="btn-block"
+    id="idea-vote-button"
+    isSubmitting={false}
+    label="idea.vote.delete"
+    onSubmit={[Function]}
+    style={
+      Object {
+        "marginTop": "10px",
+      }
+    }
+  />
+</div>
+`;

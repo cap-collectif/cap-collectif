@@ -95,9 +95,6 @@ class AbstractVoteRepository extends EntityRepository
             if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
                 $publicVotes[] = $vote;
             }
-            if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {
-                $publicVotes[] = $vote;
-            }
         }
 
         return $publicVotes;

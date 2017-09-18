@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaVoteForm /> should not show comment field or private checkbox when user has vote 1`] = `<form />`;
+
+exports[`<IdeaVoteForm /> should not show comment field when idea is not commentable 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="idea-vote-username"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.username"
+        values={Object {}}
+      />
+    }
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-email"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.email"
+        values={Object {}}
+      />
+    }
+    name="email"
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-private"
+    name="private"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="idea.vote.form.private"
+      values={Object {}}
+    />
+  </Field>
+</form>
+`;
+
+exports[`<IdeaVoteForm /> should not show comment field when private is checked 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="idea-vote-username"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.username"
+        values={Object {}}
+      />
+    }
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-email"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.email"
+        values={Object {}}
+      />
+    }
+    name="email"
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-private"
+    name="private"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="idea.vote.form.private"
+      values={Object {}}
+    />
+  </Field>
+</form>
+`;
+
+exports[`<IdeaVoteForm /> should not show private checkbox when comment is filled 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="idea-vote-username"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.username"
+        values={Object {}}
+      />
+    }
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-email"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.email"
+        values={Object {}}
+      />
+    }
+    name="email"
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-comment"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.comment"
+        values={Object {}}
+      />
+    }
+    name="comment"
+    placeholder="idea.vote.form.comment_placeholder"
+    type="textarea"
+  />
+</form>
+`;
+
+exports[`<IdeaVoteForm /> should render the form with only comment and private when user is logged in 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="idea-vote-comment"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.comment"
+        values={Object {}}
+      />
+    }
+    name="comment"
+    placeholder="idea.vote.form.comment_placeholder"
+    type="textarea"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-private"
+    name="private"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="idea.vote.form.private"
+      values={Object {}}
+    />
+  </Field>
+</form>
+`;
+
+exports[`<IdeaVoteForm /> should render the form with username, email, comment and private when user is not logged in 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="idea-vote-username"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.username"
+        values={Object {}}
+      />
+    }
+    name="username"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-email"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.email"
+        values={Object {}}
+      />
+    }
+    name="email"
+    type="email"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-comment"
+    label={
+      <FormattedMessage
+        id="idea.vote.form.comment"
+        values={Object {}}
+      />
+    }
+    name="comment"
+    placeholder="idea.vote.form.comment_placeholder"
+    type="textarea"
+  />
+  <Field
+    component={[Function]}
+    id="idea-vote-private"
+    name="private"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="idea.vote.form.private"
+      values={Object {}}
+    />
+  </Field>
+</form>
+`;

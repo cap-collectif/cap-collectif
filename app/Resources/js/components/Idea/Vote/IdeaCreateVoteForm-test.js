@@ -1,24 +1,21 @@
+// @flow
 /* eslint-env jest */
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { IdeaCreateVoteForm } from './IdeaCreateVoteForm';
 
+// eslint-disable-next-line react/prop-types
 const props = {
-  dispatch: () => {},
+  dispatch: jest.fn(),
   idea: {},
   isSubmitting: false,
-  onSubmitSuccess: () => {},
-  onFailure: () => {},
   anonymous: false,
 };
 
 describe('<IdeaCreateVoteForm />', () => {
-  it('should render the idea vote form', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<IdeaCreateVoteForm {...props} />);
-    const form = wrapper.find('IdeaVoteForm');
-    expect(form).toHaveLength(1);
-    expect(form.prop('idea')).toEqual(props.idea);
-    expect(form.prop('serverErrors')).toEqual(wrapper.state('serverErrors'));
+    expect(wrapper).toMatchSnapshot();
   });
 });

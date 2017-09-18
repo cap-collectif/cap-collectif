@@ -15,9 +15,9 @@ import type { Dispatch, State } from '../../../types';
 type DefaultProps = void;
 type RelayProps = { proposal: ProposalAdminStatusForm_proposal };
 type Props = RelayProps & {
-  isSuperAdmin: boolean,
   publicationStatus: string,
   isSuperAdmin: boolean,
+  isAuthor: boolean,
   pristine: boolean,
   invalid: boolean,
   submitting: boolean,
@@ -59,6 +59,7 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
   render() {
     const {
       isSuperAdmin,
+      isAuthor,
       proposal,
       pristine,
       invalid,
@@ -137,7 +138,7 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
             <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
-            {isSuperAdmin &&
+            {(isSuperAdmin || isAuthor) &&
             !proposal.deletedAt && (
               <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
                 <FormattedMessage id="global.delete" />
@@ -156,6 +157,7 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  isAuthor: !!(state.user.user && state.user.user.id === proposal.author.id),
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
@@ -175,6 +177,7 @@ export default createFragmentContainer(
       trashedReason
       deletedAt
       author {
+        id
         expiresAt
         email
       }
