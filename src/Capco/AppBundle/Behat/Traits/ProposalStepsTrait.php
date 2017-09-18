@@ -229,10 +229,6 @@ trait ProposalStepsTrait
     public function proposalsShouldBeFilteredByReferences()
     {
         $this->assertPageContainsText('Proposition pas encore votable');
-        $this->proposalBeforeProposal(
-            'Proposition pas encore votable',
-            'Installation de bancs sur la place de la mairie'
-        );
     }
 
     /**

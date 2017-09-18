@@ -63,6 +63,14 @@ Scenario: Anonymous user wants to see proposals in a collect step and search by 
   Then proposals should be filtered by terms
 
 @javascript @elasticsearch
+Scenario: Anonymous user wants to see proposals in a collect step and search by reference
+  Given I go to an open collect step
+  Then there should be 6 proposals
+  When I search for proposals with terms "1-7"
+  Then there should be 1 proposals
+  Then proposals should be filtered by references
+
+@javascript @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term but find no ones
   Given I go to an open collect step
   Then there should be 6 proposals
