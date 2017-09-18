@@ -66,7 +66,7 @@ Mutation:
                   payloadType: ChangeProposalProgressStepsPayload
                   mutateAndGetPayload: "@=mutation('changeProgressSteps', [value])"
           deleteProposal:
-              access: "@=hasRole('ROLE_SUPER_ADMIN')"
+              access: "@=hasRole('ROLE_SUPER_ADMIN') or service('capco.proposal.helper').isAuthor(args['input']['proposalId'], user)"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: DeleteProposalInput

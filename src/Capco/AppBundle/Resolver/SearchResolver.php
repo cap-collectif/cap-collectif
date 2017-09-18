@@ -270,7 +270,6 @@ class SearchResolver
 
         $shouldQuery = new MultiMatch();
         $shouldQuery->setQuery($term);
-        $shouldQuery->setType('phrase_prefix');
         $shouldQuery->setFields([
             'title', 'title.std',
             'body', 'body.std',
