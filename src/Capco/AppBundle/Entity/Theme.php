@@ -3,21 +3,19 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Theme.
- *
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
 class Theme implements IndexableInterface
 {
-    use IdTrait;
+    use UuidTrait;
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;
