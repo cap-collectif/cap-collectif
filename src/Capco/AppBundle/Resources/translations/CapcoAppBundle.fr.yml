@@ -335,9 +335,9 @@ project:
     opinion: Générique (proposition)
     article: Texte juridique (article)
   ranking:
-    articles: "]-Inf, 1] Classement des articles | ]1,Inf[ Classement des %count% articles"
-    opinions: "]-Inf, 1] Classement des propositions | ]1,Inf[ Classement des %count% propositions"
-    versions: "]-Inf, 1] Classement des modifications | ]1,Inf[ Classement des %count% modifications"
+    articles: ]-Inf, 1] Classement des articles | ]1,Inf[ Classement des %count% articles
+    opinions: ]-Inf, 1] Classement des propositions | ]1,Inf[ Classement des %count% propositions
+    versions: ]-Inf, 1] Classement des modifications | ]1,Inf[ Classement des %count% modifications
   searchform:
     all_themes: Tous les thèmes
     no_result:  Aucun projet ne correspond à ces critères de recherche.
@@ -1038,7 +1038,7 @@ event_registration:
     unsubscribe: Se désinscrire
     cancel: Annuler
   listing:
-    count: "]-Inf, 0] 0 participant | {1} 1 participant | ]1,Inf[ %count% participants"
+    count: ]-Inf, 0] 0 participant | {1} 1 participant | ]1,Inf[ %count% participants
     title: Participants
     see_all: Voir tous les participants
     title_all: Liste des participants
@@ -1200,18 +1200,10 @@ project_download:
 votes:
   none: Il n'y a pas de votes.
   has_voted: a voté sur
-  has: a
-  is: est
-  isNot: n'est
   value:
     agree: D'accord
     mitigated: Mitigé
     disagree: Pas d'accord
-    voteFor: Voté pour
-  type:
-    proposition: avec cette proposition
-    propositionVote: cette proposition
-    commentary: avec ce commentaire
 
 idea_vote:
     toggle:

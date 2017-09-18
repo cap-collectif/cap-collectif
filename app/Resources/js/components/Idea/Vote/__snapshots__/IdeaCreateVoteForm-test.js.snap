@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaCreateVoteForm /> should render correctly 1`] = `
+<Connect(ReduxForm)
+  anonymous={false}
+  idea={Object {}}
+  onSubmit={[Function]}
+/>
+`;

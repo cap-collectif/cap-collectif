@@ -376,8 +376,8 @@ trait IdeaStepsTrait
     public function iFillTheIdeaVoteForm()
     {
         $tableNode = new TableNode([
-            ['idea-vote__username', 'test'],
-            ['idea-vote__email', 'test@coucou.fr'],
+            ['idea-vote-username', 'test'],
+            ['idea-vote-email', 'test@coucou.fr'],
         ]);
         $this->fillFields($tableNode);
     }
@@ -390,8 +390,8 @@ trait IdeaStepsTrait
     public function iFillTheIdeaVoteFormWithAlreadyUsedEmail()
     {
         $tableNode = new TableNode([
-            ['idea-vote__username', 'test'],
-            ['idea-vote__email', 'cheater@test.com'],
+            ['idea-vote-username', 'test'],
+            ['idea-vote-email', 'cheater@test.com'],
         ]);
         $this->fillFields($tableNode);
     }
@@ -404,8 +404,8 @@ trait IdeaStepsTrait
     public function iFillTheIdeaVoteFormWithARegisteredEmail()
     {
         $tableNode = new TableNode([
-            ['idea-vote__username', 'test'],
-            ['idea-vote__email', 'user@test.com'],
+            ['idea-vote-username', 'test'],
+            ['idea-vote-email', 'user@test.com'],
         ]);
         $this->fillFields($tableNode);
     }
@@ -417,7 +417,7 @@ trait IdeaStepsTrait
      */
     public function iAddAnIdeaVoteComment()
     {
-        $this->fillField('idea-vote__comment', 'Coucou !');
+        $this->fillField('idea-vote-comment', 'Coucou !');
     }
 
     /**
@@ -427,7 +427,7 @@ trait IdeaStepsTrait
      */
     public function iCheckTheIdeaVotePrivateCheckbox()
     {
-        $this->checkOption('idea-vote__private');
+        $this->checkOption('idea-vote-private');
     }
 
     /**

@@ -2,39 +2,24 @@
     <div class="opinion__body">
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
         <div class="opinion__data">
-            <p>
+            <p class="opinion__user h5">
                 {% if is_feature_enabled('profiles') %}
                     <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
                 {% else %}
                     {{ vote.user.username }}
                 {% endif %}
-
-                {% if (vote.value is defined and vote.value == 1) or vote.comment is defined %}
-                    {{ 'votes.is' | trans({}, 'CapcoAppBundle') }}
+                {{ 'votes.has_voted' | trans({}, 'CapcoAppBundle') }}
+                <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
+            </p>
+            <p class="excerpt  opinion__date">{{ (vote.updatedAt is defined ? vote.updatedAt : vote.createdAt) | localizeddate('long', 'short', app.request.locale) }}</p>
+            <p>
+                {% if vote.value is not defined or vote.value == 1 %}
                     <span class="label label-success">{{ 'votes.value.agree' | trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif vote.value is defined and vote.value == -1 %}
-                    {{ 'votes.isNot' | trans({}, 'CapcoAppBundle') }}
-                    <span class="label label-danger">{{ 'votes.value.disagree' | trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif vote.value is defined and vote.value == 0 %}
-                    {{ 'votes.is' | trans({}, 'CapcoAppBundle') }}
+                {% elseif vote.value == 0 %}
                     <span class="label label-warning">{{ 'votes.value.mitigated' | trans({}, 'CapcoAppBundle') }}</span>
                 {% else %}
-                    {{ 'votes.has' | trans({}, 'CapcoAppBundle') }}
-                    <span class="label label-success">{{ 'votes.value.voteFor' | trans({}, 'CapcoAppBundle') }}</span>
+                    <span class="label label-danger">{{ 'votes.value.disagree' | trans({}, 'CapcoAppBundle') }}</span>
                 {% endif %}
-
-                {% if vote.comment is defined %}
-                    {{ 'votes.type.commentary' | trans({}, 'CapcoAppBundle') }}
-                {% elseif vote.value is defined %}
-                    {{ 'votes.type.proposition' | trans({}, 'CapcoAppBundle') }}
-                {% else %}
-                    {{ 'votes.type.propositionVote' | trans({}, 'CapcoAppBundle') }}
-                {% endif %}
-
-                <span class="excerpt  opinion__date">{{ (vote.updatedAt is defined ? vote.updatedAt : vote.createdAt) | localizeddate('long', 'short', app.request.locale) }}</span>
-            </p>
-            <p>
-                <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>
             </p>
         </div>
     </div>
