@@ -46,4 +46,4 @@ UpdateProposalFormInput:
             zoomMap:
                 type: "Int"
             categories:
-                type: "[ProposalCategory!]"
+                type: "[ProposalCategoryInput!]"

@@ -660,6 +660,11 @@ type ProposalCategory {
   name: String!
 }
 
+input ProposalCategoryInput {
+  id: Int
+  name: String!
+}
+
 # A budget form
 type ProposalForm {
   id: String!
@@ -1022,6 +1027,7 @@ input UpdateProposalFormInput {
   latMap: Float
   lngMap: Float
   zoomMap: Int
+  categories: [ProposalCategoryInput!]
   clientMutationId: String
 }
 
