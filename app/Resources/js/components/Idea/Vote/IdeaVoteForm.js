@@ -1,104 +1,147 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
-import renderComponent from '../../Form/Field';
-import { isEmail } from '../../../services/Validator';
-import type { State } from '../../../types';
+import FormMixin from '../../../utils/FormMixin';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import FlashMessages from '../../Utils/FlashMessages';
+import Input from '../../Form/Input';
 
-type Props = {
-  idea: Object,
-  anonymous: boolean,
-  hasCommentValue: boolean,
-  isPrivate: boolean,
-};
+const IdeaVoteForm = React.createClass({
+  displayName: 'IdeaVoteForm',
 
-const validate = ({ username, email }: Object, props: Props) => {
-  const errors = {};
-  const { anonymous } = props;
-  if (anonymous) {
-    if (!username || username.length < 2) {
-      errors.username = 'idea.vote.constraints.username';
+  propTypes: {
+    idea: PropTypes.object.isRequired,
+    serverErrors: PropTypes.array,
+    anonymous: PropTypes.bool.isRequired,
+  },
+
+  mixins: [DeepLinkStateMixin, FormMixin],
+
+  getDefaultProps() {
+    return {
+      serverErrors: [],
+    };
+  },
+
+  getInitialState() {
+    return {
+      form: {
+        username: '',
+        email: '',
+        comment: '',
+        private: false,
+      },
+      errors: {
+        username: [],
+        email: [],
+        comment: [],
+        private: [],
+      },
+    };
+  },
+
+  componentDidMount() {
+    const { anonymous } = this.props;
+    this.updateAnonymousConstraints(anonymous);
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const { anonymous } = this.props;
+    if (nextProps.anonymous !== anonymous) {
+      this.updateAnonymousConstraints(nextProps.anonymous);
     }
-    if (!email || !isEmail(email)) {
-      errors.email = 'idea.vote.constraints.email';
+  },
+
+  updateAnonymousConstraints(anonymous) {
+    this.formValidationRules = {};
+    if (anonymous) {
+      this.formValidationRules = {
+        username: {
+          min: { value: 2, message: 'idea.vote.constraints.username' },
+          notBlank: { message: 'idea.vote.constraints.username' },
+        },
+        email: {
+          notBlank: { message: 'idea.vote.constraints.email' },
+          isEmail: { message: 'idea.vote.constraints.email' },
+        },
+      };
     }
-  }
+  },
 
-  return errors;
-};
+  formValidationRules: {},
 
-export const formName = 'IdeaVoteForm';
-
-export class IdeaVoteForm extends React.Component<Props> {
   userHasVote() {
-    // eslint-disable-next-line react/prop-types
     const { anonymous, idea } = this.props;
     return !anonymous && idea.userHasVote;
-  }
+  },
+
+  renderFormErrors(field) {
+    const errors = this.getErrorsMessages(field);
+    if (errors.length === 0) {
+      return null;
+    }
+    return <FlashMessages errors={errors} form />;
+  },
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const { anonymous, idea, hasCommentValue, isPrivate } = this.props;
+    const { anonymous, serverErrors, idea } = this.props;
+    const { form } = this.state;
 
     return (
-      <form>
-        {anonymous && (
-          <Field
+      <form ref={c => (this.form = c)}>
+        <FlashMessages errors={serverErrors} translate={false} />
+
+        {anonymous &&
+          <Input
             id="idea-vote-username"
             type="text"
-            name="username"
-            component={renderComponent}
+            name="idea-vote__username"
+            valueLink={this.linkState('form.username')}
             label={<FormattedMessage id="idea.vote.form.username" />}
-          />
-        )}
+            groupClassName={this.getGroupStyle('username')}
+            errors={this.renderFormErrors('username')}
+          />}
 
-        {anonymous ? (
-          <Field
-            id="idea-vote-email"
-            type="email"
-            name="email"
-            component={renderComponent}
-            label={<FormattedMessage id="idea.vote.form.email" />}
-          />
-        ) : null}
+        {anonymous
+          ? <Input
+              id="idea-vote-email"
+              type="text"
+              name="idea-vote__email"
+              valueLink={this.linkState('form.email')}
+              label={<FormattedMessage id="idea.vote.form.email" />}
+              groupClassName={this.getGroupStyle('email')}
+              errors={this.renderFormErrors('email')}
+            />
+          : null}
 
         {idea.commentable &&
-        !isPrivate &&
-        (anonymous || !this.userHasVote()) && (
-          <Field
+          !form.private &&
+          (anonymous || !this.userHasVote()) &&
+          <Input
             id="idea-vote-comment"
             type="textarea"
-            name="comment"
-            component={renderComponent}
+            name="idea-vote__comment"
+            valueLink={this.linkState('form.comment')}
             label={<FormattedMessage id="idea.vote.form.comment" />}
             placeholder="idea.vote.form.comment_placeholder"
-          />
-        )}
+            groupClassName={this.getGroupStyle('comment')}
+            errors={this.renderFormErrors('comment')}
+          />}
 
-        {hasCommentValue || (!anonymous && this.userHasVote()) ? null : (
-          <Field
-            id="idea-vote-private"
-            type="checkbox"
-            name="private"
-            component={renderComponent}
-            children={<FormattedMessage id="idea.vote.form.private" />}
-          />
-        )}
+        {(form.comment && form.comment.length > 0) ||
+        (!anonymous && this.userHasVote())
+          ? null
+          : <Input
+              id="idea-vote-private"
+              type="checkbox"
+              name="idea-vote__private"
+              checkedLink={this.linkState('form.private')}
+              children={<FormattedMessage id="idea.vote.form.private" />}
+              groupClassName={this.getGroupStyle('private')}
+              errors={this.renderFormErrors('private')}
+            />}
       </form>
     );
-  }
-}
-
-const mapStateToProps = (state: State) => ({
-  hasCommentValue: formValueSelector(formName)(state, 'comment'),
-  isPrivate: formValueSelector(formName)(state, 'private'),
+  },
 });
 
-export default connect(mapStateToProps)(
-  reduxForm({
-    validate,
-    form: formName,
-  })(IdeaVoteForm),
-);
+export default IdeaVoteForm;
