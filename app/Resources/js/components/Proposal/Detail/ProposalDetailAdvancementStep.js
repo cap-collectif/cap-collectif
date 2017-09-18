@@ -32,21 +32,19 @@ const ProposalDetailAdvancementStep = React.createClass({
       <span>
         <div
           style={
-            borderColor ? (
-              {
-                paddingTop: '10px',
-                paddingBottom: '10px',
-                borderLeftStyle: 'solid',
-                borderLeftColor: borderColor,
-                borderLeftWidth: '3px',
-                paddingLeft: '10px',
-              }
-            ) : (
-              {
-                paddingTop: '10px',
-                paddingLeft: '13px',
-              }
-            )
+            borderColor
+              ? {
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  borderLeftStyle: 'solid',
+                  borderLeftColor: borderColor,
+                  borderLeftWidth: '3px',
+                  paddingLeft: '10px',
+                }
+              : {
+                  paddingTop: '10px',
+                  paddingLeft: '13px',
+                }
           }>
           <div
             style={{
@@ -63,15 +61,20 @@ const ProposalDetailAdvancementStep = React.createClass({
             }}
           />
           <div style={{ marginTop: '-15px' }}>
-            <div>{step.title}</div>
-            <div className="excerpt small">
-              <span>{this.renderDate()}</span>
+            <div>
+              {step.title}
             </div>
-            {status && (
+            <div className="excerpt small">
+              <span>
+                {this.renderDate()}
+              </span>
+            </div>
+            {status &&
               <Label bsStyle={status.color} style={{ marginTop: '5px' }}>
-                {status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name}
-              </Label>
-            )}
+                {status.name.length > 25
+                  ? `${status.name.substr(0, 25)}...`
+                  : status.name}
+              </Label>}
           </div>
           <br />
         </div>
