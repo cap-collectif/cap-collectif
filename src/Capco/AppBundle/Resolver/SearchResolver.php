@@ -194,7 +194,7 @@ class SearchResolver
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
             $filters['author.user_type.id'] = $providedFilters['types'];
         }
-        if (array_key_exists('categories', $providedFilters) && $this->validator->validate($providedFilters['categories'], new Uuid())->count() === 0) {
+        if (array_key_exists('categories', $providedFilters) && $providedFilters['categories'] > 0) {
             $filters['category.id'] = $providedFilters['categories'];
         }
         if (array_key_exists('authorUniqueId', $providedFilters)) {
