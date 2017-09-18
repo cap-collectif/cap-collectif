@@ -30,7 +30,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     }
     onChange={[Function]}
     type="text"
-    value="proposal title"
+    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -136,7 +136,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     <option
       value={1}
     >
-      theme1
+      Theme 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
@@ -155,7 +155,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     valueLink={
       Object {
         "requestChange": [Function],
-        "value": -1,
+        "value": null,
       }
     }
   >
@@ -164,9 +164,9 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       values={Object {}}
     />
     <option
-      value={1}
+      value="category1"
     >
-      category1
+      Category 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
@@ -194,9 +194,9 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       values={Object {}}
     />
     <option
-      value={1}
+      value="district1"
     >
-      disctrict1
+      Disctrict 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
@@ -280,7 +280,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     }
     onChange={[Function]}
     type="text"
-    value="proposal title"
+    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -386,7 +386,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     <option
       value={1}
     >
-      theme1
+      Theme 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
@@ -405,7 +405,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     valueLink={
       Object {
         "requestChange": [Function],
-        "value": -1,
+        "value": null,
       }
     }
   >
@@ -414,9 +414,9 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       values={Object {}}
     />
     <option
-      value={1}
+      value="category1"
     >
-      category1
+      Category 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
@@ -444,9 +444,9 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       values={Object {}}
     />
     <option
-      value={1}
+      value="district1"
     >
-      disctrict1
+      Disctrict 1
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
