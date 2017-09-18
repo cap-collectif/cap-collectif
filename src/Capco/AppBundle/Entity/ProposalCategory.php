@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,10 +13,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ProposalCategory
 {
-    use UuidTrait;
+    use IdTrait;
     use TimestampableTrait;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"name"})
      * @ORM\Column(name="updated_at", type="datetime")
      */

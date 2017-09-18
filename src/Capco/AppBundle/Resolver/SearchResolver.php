@@ -13,6 +13,7 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\MultiMatch;
 use Elastica\Result;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
+use Symfony\Component\Validator\Constraints\Uuid;
 
 class SearchResolver
 {
@@ -184,7 +185,7 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (isset($providedFilters['districts'])) {
+        if (isset($providedFilters['districts']) && $this->validator->validate($providedFilters['districts'], new Uuid())->count() === 0) {
             $filters['district.id'] = $providedFilters['districts'];
         }
         if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {
@@ -193,7 +194,7 @@ class SearchResolver
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
             $filters['author.user_type.id'] = $providedFilters['types'];
         }
-        if (isset($providedFilters['categories'])) {
+        if (array_key_exists('categories', $providedFilters) && $providedFilters['categories'] > 0) {
             $filters['category.id'] = $providedFilters['categories'];
         }
         if (array_key_exists('authorUniqueId', $providedFilters)) {

@@ -324,7 +324,7 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: string
+                  type: long
                   index: not_analyzed
                 name:
                   type: string

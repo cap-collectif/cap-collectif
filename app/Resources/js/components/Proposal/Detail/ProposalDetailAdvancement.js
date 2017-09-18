@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
@@ -20,11 +20,7 @@ const consideredCurrentProgressStep = progressSteps => {
     if (isPastLastStarting) {
       return step;
     }
-    if (
-      step.endAt &&
-      moment(step.startAt) < moment() &&
-      moment(step.endAt) > moment()
-    ) {
+    if (step.endAt && moment(step.startAt) < moment() && moment(step.endAt) > moment()) {
       return step;
     }
     if (lastStarting && lastStarting.title === step.title) {
@@ -96,9 +92,7 @@ export const ProposalDetailAdvancement = React.createClass({
 
   getStatus(step) {
     const { proposal } = this.props;
-    return step.type === 'collect'
-      ? proposal.status || null
-      : this.getSelectionStatus(step);
+    return step.type === 'collect' ? proposal.status || null : this.getSelectionStatus(step);
   },
 
   getSelectionStatus(step) {
@@ -113,17 +107,12 @@ export const ProposalDetailAdvancement = React.createClass({
 
   render() {
     const { proposal, project } = this.props;
-    const progressSteps = generateProgressStepsWithColorAndStatus(
-      proposal.progressSteps,
-    );
+    const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const steps = project.steps.sort((a, b) => a.position - b.position);
-    const selections = proposal.selections.sort(
-      (a, b) => a.step.position - b.step.position,
-    );
+    const selections = proposal.selections.sort((a, b) => a.step.position - b.step.position);
     for (const step of steps) {
       step.isSelected =
-        step.type === 'collect' ||
-        selections.map(selection => selection.step.id).includes(step.id);
+        step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
     }
     let consideredCurrent = steps[0];
     for (const step of steps) {
@@ -136,21 +125,15 @@ export const ProposalDetailAdvancement = React.createClass({
       step.isPast = step.position < consideredCurrent.position;
       step.isFuture = step.position > consideredCurrent.position;
     }
-    const displayedSteps = steps.filter(
-      step => step.isSelected || step.isFuture,
-    );
+    const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
     return (
       <div style={{ marginLeft: '10px', marginTop: '-15px' }}>
-        <h4>
-          {<FormattedMessage id="proposal.detail.advancement" />}
-        </h4>
+        <h4>{<FormattedMessage id="proposal.detail.advancement" />}</h4>
         <br />
         {displayedSteps.map((step, index) => {
           let roundColor = grey;
           if (step.isCurrent) {
-            roundColor = this.getStatus(step)
-              ? bootstrapToHex(this.getStatus(step).color)
-              : green;
+            roundColor = this.getStatus(step) ? bootstrapToHex(this.getStatus(step).color) : green;
           } else if (step.isPast) {
             roundColor = green;
           }
@@ -167,38 +150,37 @@ export const ProposalDetailAdvancement = React.createClass({
               status={step.isCurrent ? this.getStatus(step) : null}
               roundColor={roundColor}
               borderColor={
-                index + 1 === displayedSteps.length
-                  ? null
-                  : displayedSteps[index + 1].isCurrent ||
-                    displayedSteps[index + 1].isPast
-                    ? green
-                    : grey
+                index + 1 === displayedSteps.length ? null : displayedSteps[index + 1].isCurrent ||
+                displayedSteps[index + 1].isPast ? (
+                  green
+                ) : (
+                  grey
+                )
               }
               children={
                 step.isCurrent &&
-                step.showProgressSteps &&
-                <div style={{ marginLeft: 30 }}>
-                  {progressSteps.map((progressStep, i) =>
-                    <ProposalDetailAdvancementStep
-                      key={i}
-                      step={{
-                        title: progressStep.title,
-                        startAt: moment(progressStep.startAt).format('ll'),
-                        endAt: progressStep.endAt
-                          ? moment(progressStep.endAt).format('ll')
-                          : null,
-                        progressStep: true,
-                      }}
-                      status={progressStep.status}
-                      roundColor={progressStep.roundColor}
-                      borderColor={
-                        i + 1 === progressSteps.length
-                          ? null
-                          : progressStep.borderColor
-                      }
-                    />,
-                  )}
-                </div>
+                step.showProgressSteps && (
+                  <div style={{ marginLeft: 30 }}>
+                    {progressSteps.map((progressStep, i) => (
+                      <ProposalDetailAdvancementStep
+                        key={i}
+                        step={{
+                          title: progressStep.title,
+                          startAt: moment(progressStep.startAt).format('ll'),
+                          endAt: progressStep.endAt
+                            ? moment(progressStep.endAt).format('ll')
+                            : null,
+                          progressStep: true,
+                        }}
+                        status={progressStep.status}
+                        roundColor={progressStep.roundColor}
+                        borderColor={
+                          i + 1 === progressSteps.length ? null : progressStep.borderColor
+                        }
+                      />
+                    ))}
+                  </div>
+                )
               }
             />
           );
