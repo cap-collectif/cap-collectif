@@ -51,9 +51,17 @@ Scenario: Anonymous user wants to see other random proposals
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
   Given I go to an open collect step
   Then there should be 6 proposals
-  When I search for proposals with terms "gymnase banc"
+  When I search for proposals with terms "proposition"
   Then there should be 2 proposals
   Then proposals should be filtered by terms
+
+@javascript @elasticsearch
+Scenario: Anonymous user wants to see proposals in a collect step and search by term but find no ones
+  Given I go to an open collect step
+  Then there should be 6 proposals
+  When I search for proposals with terms "toto"
+  Then there should be 0 proposals
+  Then proposals should have no results
 
 @javascript @elasticsearch
 Scenario: Anonymous user combine search, filters and sorting on proposals in a collect step
@@ -62,7 +70,7 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   And I go to an open collect step
   Then there should be 6 proposals
   When I sort proposals by comments
-  And I search for proposals with terms "bibliothèque banc"
+  And I search for proposals with terms "proposition"
   And I change the proposals theme filter
   Then there should be 2 proposals
   Then proposals should be filtered by theme and terms and sorted by comments

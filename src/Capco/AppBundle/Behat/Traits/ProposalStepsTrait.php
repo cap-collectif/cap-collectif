@@ -219,8 +219,8 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeFilteredByTerms()
     {
-        $this->assertPageContainsText('Rénovation du gymnase');
-        $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
+        $this->assertPageContainsText('Proposition pas encore votable');
+        $this->assertPageContainsText('Proposition plus votable');
     }
 
     /**
@@ -230,12 +230,21 @@ trait ProposalStepsTrait
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
         \PHPUnit_Framework_Assert::assertEquals('comments', $option);
-        $this->assertPageContainsText('Ravalement de la façade de la bibliothèque municipale');
-        $this->assertPageContainsText('Installation de bancs sur la place de la mairie');
+        $this->assertPageContainsText('Proposition pas encore votable');
+        $this->assertPageContainsText('Proposition plus votable');
         $this->proposalBeforeProposal(
-            'Ravalement de la façade de la bibliothèque municipale',
-            'Installation de bancs sur la place de la mairie'
+            'Proposition pas encore votable',
+            'Proposition plus votable'
         );
+    }
+
+    /**
+     * @Then proposals should have no results
+     */
+    public function proposalsShouldHaveNoResults()
+    {
+        $this->assertPageContainsText('Aucune proposition');
+        $this->assertPageNotContainsText('Relancer le tri aléatoire');
     }
 
     /**
