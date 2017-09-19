@@ -722,7 +722,8 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "collectstep1": @array@
           },
           "responses": @array@,
-          "votableStepId": @string@
+          "votableStepId": @string@,
+          "reference": "@string@"
       },
       {
           "summaryOrBodyExcerpt": @string@,
@@ -794,7 +795,8 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "collectstep1": @array@
           },
           "responses": @array@,
-          "votableStepId": @string@
+          "votableStepId": @string@,
+          "reference": "@string@"
       }
     ],
     "count": 2
@@ -859,7 +861,8 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@
+        "votableStepId": @string@,
+        "reference": "@string@"
       },
       {
         "summaryOrBodyExcerpt": @string@,
@@ -886,7 +889,8 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@
+        "votableStepId": @string@,
+        "reference": "@string@"
       }
     ],
     "count": 2

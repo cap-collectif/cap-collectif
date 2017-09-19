@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 
-const ProposalPageMetadata = React.createClass({
+export const ProposalPageMetadata = React.createClass({
   displayName: 'ProposalPageMetadata',
 
   propTypes: {
@@ -50,7 +50,7 @@ const ProposalPageMetadata = React.createClass({
                   showNullEstimation={showNullEstimation}
                 />
                 <ProposalDetailLikers proposal={proposal} componentClass="div" />
-                <div className="proposal__info ellipsis">
+                <div className="proposal__info proposal__info--reference ellipsis">
                   <i className="cap cap-tag-1-1 icon--blue" />
                   {proposal.reference}
                 </div>
