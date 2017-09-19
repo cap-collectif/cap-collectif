@@ -29,7 +29,22 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       usingDistrict: true,
       districtHelpText: '',
       districtMandatory: true,
-      categories: [],
+      categories: [
+        {
+          id: 'category1',
+          name: 'Category 1',
+        },
+      ],
+      customFields: [
+        {
+          id: 'field-1',
+          title: 'Titre 1',
+          required: false,
+          helpText: null,
+          inputType: 'text',
+          private: false,
+        },
+      ],
     },
     handleSubmit: jest.fn(),
     invalid: false,

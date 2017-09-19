@@ -417,8 +417,8 @@ export default createFragmentContainer(
       customFields {
         id
         title
+        helpText
         inputType
-        position
         private
         required
       }

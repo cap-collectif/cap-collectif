@@ -12,7 +12,7 @@ import {
   Col,
   Glyphicon,
 } from 'react-bootstrap';
-// import ProposalFormAdminQuestionsStepModal from './ProposalFormAdminQuestionsStepModal';
+import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
 
 const formName = 'proposal-form-admin-configuration';
@@ -44,14 +44,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 
   render() {
     const { dispatch, fields, questions } = this.props;
-    // const { editIndex } = this.state;
+    const { editIndex } = this.state;
     return (
       <div className="form-group">
         <label style={{ marginBottom: 15, marginTop: 15 }}>Liste des autres champs</label>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>
-              {/* <ProposalFormAdminQuestionsStepModal
+              <ProposalFormAdminQuestionModal
                 isCreating={!!questions[index].id}
                 onClose={() => {
                   this.handleClose(index);
@@ -59,11 +59,12 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                 onSubmit={this.handleSubmit}
                 member={member}
                 show={index === editIndex}
-              /> */}
+              />
               <Row>
                 <Col xs={8}>
                   <div>
                     <strong>{questions[index].name}</strong>
+                    <p>{questions[index].inputType}</p>
                   </div>
                 </Col>
                 <Col xs={4}>
@@ -100,7 +101,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           style={{ marginBottom: 10 }}
           bsStyle="primary"
           onClick={() => {
-            dispatch(arrayPush(formName, 'questions', {}));
+            dispatch(arrayPush(formName, 'customFields', {}));
             this.setState({ editIndex: fields.length });
           }}>
           <Glyphicon glyph="plus" /> <FormattedMessage id="global.add" />
@@ -111,7 +112,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  questions: selector(state, 'questions'),
+  questions: selector(state, 'customFields'),
 });
 
 export default connect(mapStateToProps)(ProposalFormAdminQuestions);

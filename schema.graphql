@@ -770,7 +770,7 @@ type Question {
   position: Int!
   private: Boolean!
   required: Boolean!
-  helpText: String!
+  helpText: String
 }
 
 type RankingStep implements Step {
