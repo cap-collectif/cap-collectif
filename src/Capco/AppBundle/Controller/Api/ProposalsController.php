@@ -129,16 +129,16 @@ class ProposalsController extends FOSRestController
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
         $unflattenFile = ArrayHelper::unflatten($request->files->all());
 
-        if ('null' === $unflattenRequest['summary']) {
-            $unflattenRequest['summary'] = null;
-        }
-
         if (isset($unflattenRequest['responses']) && is_array($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
         }
 
         unset($unflattenRequest['delete_media'], $unflattenRequest['media']);
+
+        if ('null' === $unflattenRequest['summary']) {
+            unset($unflattenRequest['summary']);
+        }
 
         $form->submit($unflattenRequest, false);
 
@@ -396,6 +396,10 @@ class ProposalsController extends FOSRestController
         }
 
         $form->submit($unflattenRequest, false);
+
+        if ($unflattenRequest['summary'] && 'null' === $unflattenRequest['summary']) {
+            $proposal->setSummary(null);
+        }
 
         if ($form->isValid()) {
             $proposal->setUpdateAuthor($user);
