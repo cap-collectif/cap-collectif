@@ -6,11 +6,11 @@ import { ProposalForm } from './ProposalForm';
 describe('<ProposalForm />', () => {
   const props = {
     intl: global.intlMock,
-    currentStepId: '1',
+    currentStepId: 'step1',
     form: {
       title: 'proposal form',
       body: 'body',
-      districts: [{ id: 1, name: 'disctrict1' }],
+      districts: [{ id: 'district1', name: 'Disctrict 1' }],
       media: null,
       themeMandatory: true,
       categoryMandatory: true,
@@ -21,8 +21,8 @@ describe('<ProposalForm />', () => {
       description: 'description',
       fields: [],
     },
-    themes: [{ id: 1, title: 'theme1' }],
-    categories: [{ id: 1, name: 'category1' }],
+    themes: [{ id: 1, title: 'Theme 1' }],
+    categories: [{ id: 'category1', name: 'Category 1' }],
     isSubmitting: false,
     dispatch: () => {},
     features: {
@@ -30,7 +30,7 @@ describe('<ProposalForm />', () => {
       districts: true,
     },
     mode: 'create',
-    proposal: { title: 'proposal title' },
+    proposal: { title: 'Proposal title' },
   };
 
   it('should render a simple form without custom field', () => {
