@@ -653,6 +653,16 @@ export function* storeFiltersInLocalStorage(action: ChangeFilterAction): Generat
   LocalStorageService.set('proposal.filtersByStep', filtersByStep);
 }
 
+export function* storeTermsInLocalStorage(action: ChangeTermAction): Generator<*, *, *> {
+  const { terms } = action;
+  const state: GlobalState = yield select();
+  const termsByStep: { [id: Uuid]: string } = LocalStorageService.get('proposal.termsByStep') || {};
+  if (state.project.currentProjectStepById) {
+    termsByStep[state.project.currentProjectStepById] = terms;
+  }
+  LocalStorageService.set('proposal.termsByStep', termsByStep);
+}
+
 export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<*, *, *> {
   const { order } = action;
   const state: GlobalState = yield select();
@@ -700,6 +710,7 @@ export function* saga(): Generator<*, *, *> {
     takeEvery('proposal/SUBMIT_FUSION_FORM', submitFusionFormData),
     takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
+    takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),
     takeEvery('proposal/CHANGE_ORDER', storeOrderInLocalStorage),
   ];
 }

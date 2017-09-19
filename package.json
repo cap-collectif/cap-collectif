@@ -26,6 +26,7 @@
     "app/Resources/js/**/*.js": [
       "eslint --fix",
       "prettier --write",
+      "jest --findRelatedTests",
       "git add"
     ],
     "features/**/*.feature": [
