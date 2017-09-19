@@ -2,9 +2,13 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Status;
 use Capco\UserBundle\Entity\User;
+use GuzzleHttp\Client;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -56,6 +60,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $om = $this->getContainer()->get('doctrine')->getManager();
 
+        /** @var ProposalForm $proposalForm */
         $proposalForm = $om->getRepository(ProposalForm::class)->find($proposalFormId);
 
         if ($proposalForm === null) {
@@ -95,32 +100,72 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal = new Proposal();
                 $proposal->setTitle($this->escapeHtml($row[0]));
 
+                /** @var User $author */
                 $author = $om->getRepository(User::class)->findOneBy([
                     'email' => $row[1],
                 ]);
 
-                var_dump($author);
-                exit;
-                if (null === $author) {
+                $district = $om->getRepository(District::class)->findOneBy([
+                    'name' => $row[2],
+                ]);
+
+                $status = $om->getRepository(Status::class)->findOneBy([
+                    'name' => $row[4],
+                    'step' => $proposalForm->getStep(),
+                ]);
+
+                if (null === $author || null === $district || null === $status) {
                     $this->generateContentException($output);
                 }
 
-                var_dump($row);
+                $proposal->setAuthor($author);
+                $proposal->setProposalForm($proposalForm);
+                $proposal->setDistrict($district);
+                $proposal->setStatus($status);
+                $proposal->setAddress($this->getFormattedAddress($row[3]));
+
+                if ($row[5] !== '') {
+                    $proposal->setEstimation((float) $row[5]);
+                }
+
+                if ($row[6] !== '') {
+                    $proposalCategory = $om->getRepository(ProposalCategory::class)->findOneBy([
+                        'name' => $row[6],
+                        'form' => $proposalForm,
+                    ]);
+
+                    if (null !== $proposalCategory) {
+                        $proposal->setCategory($proposalCategory);
+                    }
+                }
+
+                if ($row[7] !== '') {
+                    $proposal->setSummary($this->escapeHtml($row[7]));
+                }
+
+                $proposal->setBody($row[8]);
+
+                $om->persist($proposal);
             }
 
             ++$loop;
         }
 
-        error_log('yeah');
-        die('aaa');
+        try {
+            $om->flush();
+        } catch (\Exception $e) {
+            $output->writeln(
+                '<error>Error when flushing proposals : ' . $e->getMessage() . '</error>');
+            $output->writeln('<error>Import cancelled. No proposal was created.</error>');
+            exit;
+        }
 
-        $em->flush();
         $progress->finish();
 
         $output->writeln(
             '<info>'
-            . count($opinions) .
-            ' opinions successfully created.</info>'
+            . count($proposals) - 1 .
+            ' proposals successfully created.</info>'
         );
 
         return 0;
@@ -173,9 +218,28 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function generateContentException($output)
     {
         $output->writeln(
-            '<error>Your content of your file is not valid.</error>');
+            '<error>Content of your file is not valid.</error>');
         $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
         exit;
+    }
+
+    protected function getFormattedAddress($address)
+    {
+        $apiKey = $this->getContainer()->getParameter('google_maps_key');
+        $updatedAddress = null;
+
+        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=$apiKey";
+
+        $client = new Client();
+        $res = $client->request('GET', $endpoint);
+
+        $content = json_decode($res->getBody()->getContents(), true);
+
+        if ($content['status'] === 'OK') {
+            // todo when api work ..
+        }
+
+        return $updatedAddress;
     }
 }
