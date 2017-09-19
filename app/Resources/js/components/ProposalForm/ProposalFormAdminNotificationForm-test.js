@@ -7,7 +7,18 @@ import { ProposalFormAdminNotificationForm } from './ProposalFormAdminNotificati
 describe('<ProposalFormAdminNotificationForm />', () => {
   const props = {
     intl: global.intlMock,
-    proposalForm: {},
+    submitting: false,
+    pristine: false,
+    handleSubmit: jest.fn(),
+    invalid: false,
+    proposalForm: {
+      id: 'proposalFormId',
+      notificationsConfiguration: {
+        onCreate: true,
+        onUpdate: true,
+        onDelete: true,
+      },
+    },
   };
 
   it('render correctly', () => {

@@ -6,6 +6,7 @@ import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
+import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import { baseUrl } from '../../config';
@@ -13,7 +14,7 @@ import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutati
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
-type DefaultProps = void;
+type FormValues = ProposalFormAdminConfigurationForm_proposalForm;
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
 type Props = RelayProps & {
   handleSubmit: () => void,
@@ -50,6 +51,7 @@ const zoomLevels = [
   { id: 20, name: '20 - Immeubles' },
 ];
 const formName = 'proposal-form-admin-configuration';
+
 const validate = () => {
   return {};
 };
@@ -122,18 +124,15 @@ const headerPanelUsingDistrict = (
   </div>
 );
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  values.proposalFormId = props.proposalForm.id;
-  delete values.id;
-  return UpdateProposalFormMutation.commit({
-    input: values,
-  }).then(() => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const input = { ...values, proposalFormId: props.proposalForm.id };
+  delete input.id;
+  return UpdateProposalFormMutation.commit({ input }).then(() => {
     location.reload();
   });
 };
 
-export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
-  static defaultProps: DefaultProps;
+export class ProposalFormAdminConfigurationForm extends Component<Props> {
   render() {
     const {
       invalid,
@@ -350,6 +349,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props, void> {
               className="box-title">
               Champs personnalisés
             </h3>
+            <FieldArray name="customFields" component={ProposalFormAdminQuestions} />
           </div>
           <ButtonToolbar style={{ marginBottom: 10 }}>
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
@@ -413,6 +413,14 @@ export default createFragmentContainer(
       categories {
         id
         name
+      }
+      customFields {
+        id
+        title
+        inputType
+        position
+        private
+        required
       }
     }
   `,

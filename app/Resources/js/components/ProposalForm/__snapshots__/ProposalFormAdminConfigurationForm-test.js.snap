@@ -31,7 +31,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
        Aide
     </a>
   </div>
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <Field
       component={[Function]}
       id="proposal_form_description"
@@ -215,6 +217,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       bsStyle="default"
       collapsible={true}
       defaultExpanded={false}
+      expanded={true}
       header={
         <div>
           <h4
@@ -274,6 +277,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       bsStyle="default"
       collapsible={true}
       defaultExpanded={false}
+      expanded={true}
       header={
         <div>
           <h4
@@ -515,6 +519,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       >
         Champs personnalisés
       </h3>
+      <FieldArray
+        component={[Function]}
+        name="customFields"
+      />
     </div>
     <ButtonToolbar
       bsClass="btn-toolbar"
@@ -543,7 +551,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         bsClass="btn"
         bsStyle="danger"
         disabled={false}
-        href="about:///admin/capco/app/proposalfrom/undefined/delete"
+        href="about:///admin/capco/app/proposalfrom/proposalFormId/delete"
       >
         <FormattedMessage
           id="global.delete"

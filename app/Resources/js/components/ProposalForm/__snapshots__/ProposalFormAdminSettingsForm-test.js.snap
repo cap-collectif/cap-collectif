@@ -73,7 +73,7 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         bsClass="btn"
         bsStyle="danger"
         disabled={false}
-        href="about:///admin/capco/app/proposalfrom/undefined/delete"
+        href="about:///admin/capco/app/proposalfrom/proposalFormId/delete"
       >
         <FormattedMessage
           id="global.delete"

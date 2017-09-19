@@ -11,7 +11,10 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     invalid: false,
     pristine: false,
     submitting: false,
-    proposalForm: {},
+    proposalForm: {
+      id: 'proposalFormId',
+      title: 'title',
+    },
   };
 
   it('render correctly', () => {
