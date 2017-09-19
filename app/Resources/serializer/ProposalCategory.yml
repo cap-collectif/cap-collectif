@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\ProposalCategory:
     properties:
         id:
             expose: true
-            type: string
+            type: integer
             groups: [ProposalForms, ProposalCategories, Proposals]
         name:
             expose: true

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,9 +13,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Category
 {
-    use UuidTrait;
+    use IdTrait;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;

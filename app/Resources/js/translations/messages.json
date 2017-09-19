@@ -440,6 +440,7 @@
   "proposal.fusionnedInto": "Cette proposition a été fusionnée dans une nouvelle proposition",
   "proposal.fusionnedFrom": "Cette proposition est issue d'une fusion de {num, plural, one{# propositions similaire} other{# propositions similaires}}",
   "proposal.constraints.body": "La description de la proposition doit faire au moins 2 caractères.",
+  "proposal.constraints.summary": "Le résumé de la proposition est limité à 140 caractères.",
   "proposal.constraints.category": "Merci de sélectionner une catégorie.",
   "proposal.constraints.district": "Merci de sélectionner une localisation.",
   "proposal.constraints.field_mandatory": "Ce champ est obligatoire.",

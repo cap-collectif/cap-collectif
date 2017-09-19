@@ -63,7 +63,7 @@ export const ProposalForm = React.createClass({
         summary: proposal.summary,
         theme: proposal.theme ? proposal.theme.id : -1,
         district: proposal.district ? proposal.district.id : null,
-        category: proposal.category ? proposal.category.id : null,
+        category: proposal.category ? proposal.category.id : -1,
         media: null,
         address: proposal.address ? proposal.address : '',
       },
@@ -135,7 +135,7 @@ export const ProposalForm = React.createClass({
         if (!features.districts || !form.district || !this.props.form.usingDistrict) {
           delete form.district;
         }
-        if (categories.length === 0 || !this.props.form.usingCategories) {
+        if (categories.length === 0 || !this.props.form.usingCategories || form.category === -1) {
           delete form.category;
         }
         if (mode === 'edit') {
@@ -268,7 +268,7 @@ export const ProposalForm = React.createClass({
     const { categories, form } = this.props;
     if (categories.length && form.usingCategories && form.categoryMandatory) {
       this.formValidationRules.category = {
-        notBlank: { message: 'proposal.constraints.category' },
+        minValue: { value: 0, message: 'proposal.constraints.category' },
       };
       return;
     }

@@ -177,6 +177,12 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
+     *
+     * @param ProposalForm          $form
+     * @param Proposal              $proposal
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @return array
      */
     public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
     {
@@ -427,6 +433,9 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=204)
+     *
+     * @param ProposalForm $proposalForm
+     * @param Proposal     $proposal
      */
     public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
     {
