@@ -18,7 +18,7 @@ export class ProposalPageLastNews extends React.Component<{
     if (!posts || posts.length === 0) {
       return null;
     }
-    const post = posts[0];
+    const post = posts[posts.length - 1];
     const answer = { ...post, author: post.authors[0] };
     const classes = {
       'bg-vip': answer.author && answer.author.vip,
@@ -28,10 +28,9 @@ export class ProposalPageLastNews extends React.Component<{
     if (className) {
       classes[className] = true;
     }
-
     return (
       <div className={classNames(classes)}>
-        {answer.title && <h3 className="h3 proposal__last__news__title">{answer.title}</h3>}
+        {answer.title && <h2 className="h2 proposal__last__news__title">{answer.title}</h2>}
         <AnswerBody answer={answer} />
       </div>
     );

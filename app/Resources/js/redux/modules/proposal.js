@@ -424,9 +424,10 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => {
     if (flattenedData[key] !== -1) {
-      formData.append(key, flattenedData[key]);
+      formData.append(key, JSON.stringify(flattenedData[key]));
     }
   });
+
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
     .then(response => {
       dispatch(closeCreateModal());
@@ -458,7 +459,7 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
 export const updateProposal = (dispatch: Dispatch, form: number, id: number, data: Object) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
+  Object.keys(flattenedData).map(key => formData.append(key, JSON.stringify(flattenedData[key])));
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
     .then(() => {
       dispatch(closeEditProposalModal());

@@ -4,6 +4,6 @@ ProposalCategory:
         description: "A proposal category"
         fields:
             id:
-                type: "ID!"
+                type: "String!"
             name:
                 type: "String!"
