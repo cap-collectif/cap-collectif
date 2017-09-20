@@ -393,10 +393,6 @@ class ProposalsController extends FOSRestController
 
         $form->submit($unflattenRequest, false);
 
-        if ($unflattenRequest['summary'] && 'null' === $unflattenRequest['summary']) {
-            $proposal->setSummary(null);
-        }
-
         if ($form->isValid()) {
             $proposal->setUpdateAuthor($user);
 
