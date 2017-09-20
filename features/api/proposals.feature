@@ -702,7 +702,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           },
           "status": {
               "name": @string@,
-              "id": @integer@,
+              "id": @string@,
               "color": @string@
           },
           "comments": @array@,
@@ -773,7 +773,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           },
           "status": {
               "name": @string@,
-              "id": @integer@,
+              "id": @string@,
               "color": @string@
           },
           "category": {
@@ -846,9 +846,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "reference": @string@,
         "updated_at": "@string@.isDateTime()",
         "author": @wildcard@,
-        "proposalForm": {
-          "id": @string@
-        },
+        "proposalForm": @wildcard@,
         "likers": @array@,
         "address": @string@,
         "theme": @wildcard@,
