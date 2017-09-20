@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -30,5 +31,16 @@ class ProposalFormRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getLastProposalReference(int $formId): array
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('MAX(p.reference) AS last_reference')
+            ->leftJoin('f.proposals', 'p')
+            ->where('f.id = :form_id')
+            ->setParameter('form_id', $formId);
+
+        return $qb->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_ARRAY);
     }
 }

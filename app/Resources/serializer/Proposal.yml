@@ -97,3 +97,8 @@ Capco\AppBundle\Entity\Proposal:
       type: string
       groups: [Proposals]
       serialized_name: summaryOrBodyExcerpt
+    getFullReference:
+      expose: true
+      type: string
+      groups: [Proposals]
+      serialized_name: reference

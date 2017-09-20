@@ -867,7 +867,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->getAddress()[0]['formatted_address'];
     }
 
-    public function getFullReference()
+    public function getFullReference(): string
     {
         return $this->getProposalForm()->getReference() . '-' . $this->getReference();
     }

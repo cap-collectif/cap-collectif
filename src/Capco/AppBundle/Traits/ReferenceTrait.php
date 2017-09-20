@@ -11,7 +11,7 @@ trait ReferenceTrait
      */
     protected $reference;
 
-    public function getReference()
+    public function getReference(): int
     {
         return $this->reference;
     }
@@ -19,8 +19,10 @@ trait ReferenceTrait
     /**
      * Used by the event listener, please don't use this method yourself.
      */
-    public function setReference(int $reference)
+    public function setReference(int $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
     }
 }

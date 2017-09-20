@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -21,9 +22,7 @@ class ReferenceEventListener
             return;
         }
 
-        if ($entity->getReference() === null) {
-            $this->updateReferenceIsNecessary($om, $entity);
-        }
+        $this->updateReferenceIsNecessary($om, $entity);
     }
 
     private function updateReferenceIsNecessary(EntityManager $om, $entity)
@@ -31,23 +30,24 @@ class ReferenceEventListener
         if ($entity instanceof Proposal) {
             $proposalForm = $entity->getProposalForm();
 
-            $lastReference = 0;
-            foreach ($proposalForm->getProposals() as $proposal) {
-                if ($proposal->getReference() > $lastReference) {
-                    $lastReference = $proposal->getReference();
-                }
+            $proposalFormRep = $om->getRepository(ProposalForm::class);
+
+            $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId())['last_reference'];
+
+            if (null === $lastReference) {
+                $entity->setReference(1);
+            } else {
+                $entity->setReference($lastReference + 1);
+            }
+        } else {
+            $lastEntity = $om->getRepository(get_class($entity))->findOneBy([], ['reference' => 'DESC']);
+
+            if (null === $lastEntity) {
+                $entity->setReference(1);
             }
 
-            $entity->setReference($lastReference + 1);
+            $entity->setReference($lastEntity->getReference() + 1);
         }
-
-        $lastEntity = $om->getRepository(get_class($entity))->findOneBy([], ['reference' => 'DESC']);
-
-        if (null === $lastEntity) {
-            $entity->setReference(1);
-        }
-
-        $entity->setReference($lastEntity->getReference() + 1);
     }
 
     private function hasTrait(\ReflectionClass $reflectionClass): bool
