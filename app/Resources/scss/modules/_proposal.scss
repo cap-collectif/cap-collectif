@@ -27,86 +27,35 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 
-.proposal__preview {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    font-size: 14px;
-    border-radius: 5px;
+ .proposal__author {
+     overflow: hidden;
+     height: 60px;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
 
-    .box {
-        flex: 1 0 auto;
-        display: flex;
-        flex-direction: column;
-        border-radius: 5px 5px 0 0;
+ .proposal__body {
+     clear: both;
+     padding-top: 10px;
+     height: 200px;
+     margin-bottom: 20px;
+ }
 
-        .proposal__avatar {
-            margin-right: 10px;
-        }
+ .proposal__title  {
+     margin: 0 auto 10px;
+ }
 
-        .proposal__author {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+ .proposal__infos {
+     font-size: 85%;
+ }
 
-            .proposal__date {
-                margin-bottom: 0;
-            }
-        }
+ .proposal__info {
+     padding-top: 5px;
+     padding-left: 5px;
 
-        .proposal__body {
-             flex: 1 0 auto;
-
-             .proposal__title  {
-                 margin: 13px auto 10px;
-                 font-size: 18px;
-             }
-
-             .proposal__infos {
-                 margin-top: 5px;
-
-                 .proposal__info {
-                     padding-top: 5px;
-                     padding-left: 5px;
-                     display: block;
-
-                     .cap {
-                         padding-right: 5px;
-                     }
-                 }
-             }
-         }
-
-        .proposal__buttons {
-            margin-top: 15px;
-        }
+     .cap {
+         padding-right: 5px;
      }
-
-    .proposal__footer {
-        .proposal__counters {
-            padding: 5px;
-            background-color: $lightest-gray;
-            border-top: 1px solid $border-color;
-
-            .proposal__counter {
-                display: inline-block;
-                width: 100%;
-                text-align: center;
-
-                .proposal__counter__value {
-                    font-size: 18px;
-                }
-            }
-        }
-    }
-
-    .proposal__status {
-        border-radius: 0 0 5px 5px;
-        min-height: 25px;
-        display: block;
-        padding: 5px 0;
-        margin: 10px 0;
-    }
  }
 
  .proposal__page__metadata .proposal__infos {
@@ -181,9 +130,16 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
      }
  }
 
+ .proposal__status {
+     display: block;
+     padding: 5px 0;
+     margin: 10px 0;
+ }
+
  .proposal__preview .proposal__status {
      overflow: hidden;
-     padding: 3px;
+     height: 32px;
+     padding: 5px;
      margin: 0;
      color: $white;
      text-align: center;
@@ -200,6 +156,38 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
              color: $color;
          }
      }
+ }
+
+ .proposal__counters {
+     padding: 5px;
+     background-color: $lightest-gray;
+     border-top: 1px solid $border-color;
+ }
+
+ .proposal__counter {
+     display: inline-block;
+     width: 100%;
+     text-align: center;
+ }
+
+ .proposal__counter__value {
+     font-size: 18px;
+ }
+
+ .proposal__counter__label {
+     font-size: 12px;
+ }
+
+ .proposal__avatar {
+     margin-right: 10px;
+ }
+
+ .proposal__author .proposal__date {
+     margin-bottom: 0;
+ }
+
+ .proposal__preview .proposal__info {
+     display: block;
  }
 
  .proposal-search-group {

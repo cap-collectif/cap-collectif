@@ -2,7 +2,13 @@ Mutation:
     type: object
     config:
         fields:
-        # Proposal
+          changeDistrict:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeDistrictInput
+                    payloadType: ChangeDistrictPayload
+                    mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -66,40 +72,3 @@ Mutation:
                   inputType: DeleteProposalInput
                   payloadType: DeleteProposalPayload
                   mutateAndGetPayload: "@=mutation('deleteProposal', [value['proposalId']])"
-
-          # Proposal Form
-          createProposalForm:
-              access: "@=hasRole('ROLE_ADMIN')"
-              builder: "Relay::Mutation"
-              builderConfig:
-                  inputType: CreateProposalFormInput
-                  payloadType: CreateProposalFormPayload
-                  mutateAndGetPayload: "@=mutation('createProposalFrom', [value])"
-          changeDistrict:
-              access: "@=hasRole('ROLE_ADMIN')"
-              builder: "Relay::Mutation"
-              builderConfig:
-                  inputType: ChangeDistrictInput
-                  payloadType: ChangeDistrictPayload
-                  mutateAndGetPayload: "@=mutation('changeDistrict', [value])"
-          updateProposalForm:
-              access: "@=hasRole('ROLE_ADMIN')"
-              builder: "Relay::Mutation"
-              builderConfig:
-                  inputType: UpdateProposalFormInput
-                  payloadType: UpdateProposalFormPayload
-                  mutateAndGetPayload: "@=mutation('updateProposalForm', [value])"
-          changeTitleProposalForm:
-            access: "@=hasRole('ROLE_ADMIN')"
-            builder: "Relay::Mutation"
-            builderConfig:
-                inputType: ChangeTitleProposalFormInput
-                payloadType: ChangeTitleProposalFormPayload
-                mutateAndGetPayload: "@=mutation('changeTitleProposalForm', [value])"
-          updateProposalFormNotificationsConfiguration:
-              access: "@=hasRole('ROLE_ADMIN')"
-              builder: "Relay::Mutation"
-              builderConfig:
-                  inputType: UpdateProposalFormNotificationsConfigurationInput
-                  payloadType: UpdateProposalFormNotificationsConfigurationPayload
-                  mutateAndGetPayload: "@=mutation('updateProposalFormNotificationsConfiguration', [value])"

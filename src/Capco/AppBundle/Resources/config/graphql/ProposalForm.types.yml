@@ -4,16 +4,6 @@ ProposalForm:
         description: "A budget form"
         # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
-            id:
-                type: "String!"
-            description:
-                type: "String"
-            summaryHelpText:
-                type: "String"
-            illustrationHelpText:
-                type: "String"
-            title:
-                type: "String!"
             categories:
                 type: "[ProposalCategory!]!"
             usingThemes:
@@ -47,20 +37,6 @@ ProposalForm:
                 type: "String"
             descriptionHelpText:
                 type: "String"
-            addressHelpText:
-                type: "String"
             customFields:
                 type: "[Question!]!"
-                resolve: "@=resolver('proposal_form_questions', [value])"
-            latMap:
-                type: "Float"
-            lngMap:
-                type: "Float"
-            zoomMap:
-                type: "Int"
-            url:
-                type: "URI!"
-                description: "The HTTP url for this proposal form."
-                resolve: "@=resolver('proposal_form_url', [value])"
-            notificationsConfiguration:
-                type: "NotificationsConfiguration!"
+                resolve: "@=resolver('proposalform_questions', [value])"

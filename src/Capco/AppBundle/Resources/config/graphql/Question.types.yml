@@ -17,4 +17,4 @@ Question:
             required:
                 type: "Boolean!"
             helpText:
-                type: "String"
+                type: "String!"
