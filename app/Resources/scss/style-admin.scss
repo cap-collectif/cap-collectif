@@ -4,20 +4,13 @@
 
 @import "bower_components/compass-mixins/lib/compass";
 
-
 @import
   "base/tools",
   "base/fonts",
-  //"base/variables",
-  //"base/base",
   "modules/social-block",
   "modules/sonata",
   "modules/editor"
 ;
-
-body {
-    font-family: "OpenSans";
-}
 
 .draghandle {
   display: block;
@@ -29,9 +22,4 @@ body {
   opacity: .25;
   margin-right: 20px;
   cursor: row-resize;
-}
-
-.excerpt {
-    color: #999;
-    font-weight: normal;
 }

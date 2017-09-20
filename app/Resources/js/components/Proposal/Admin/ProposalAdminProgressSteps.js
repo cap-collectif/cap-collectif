@@ -51,12 +51,12 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                     <strong>{progressSteps[index].title}</strong>
                   </div>
                   {progressSteps[index].startAt && (
-                    <div className="excerpt">
+                    <div className="excerpt small">
                       {progressSteps[index].endAt ? (
-                        <span>
+                        <p>
                           Du {moment(progressSteps[index].startAt).format('ll')} au{' '}
                           {moment(progressSteps[index].endAt).format('ll')}
-                        </span>
+                        </p>
                       ) : (
                         moment(progressSteps[index].startAt).format('ll')
                       )}
