@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait SummarizableTrait
 {
     /**
-     * @Assert\Length(max = 140, min = 2)
+     * @Assert\Length(max = 140)
      * @ORM\Column(name="summary", type="string", nullable=true)
      */
     private $summary;
