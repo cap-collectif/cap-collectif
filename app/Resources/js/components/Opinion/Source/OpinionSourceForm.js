@@ -7,7 +7,10 @@ import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 import renderComponent from '../../Form/Field';
 import CategoriesStore from '../../../stores/CategoriesStore';
 import { isUrl } from '../../../services/Validator';
-import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
+import {
+  hideSourceCreateModal,
+  hideSourceEditModal,
+} from '../../../redux/modules/opinion';
 
 const validate = ({ title, body, category, link, check }: Object) => {
   const errors = {};
@@ -32,7 +35,7 @@ const validate = ({ title, body, category, link, check }: Object) => {
 const onSubmit = (values, dispatch, props) => {
   const { opinion, source } = props;
   const tmpFixData: Object = values;
-  tmpFixData.Category = tmpFixData.category;
+  tmpFixData.Category = parseInt(tmpFixData.category, 10);
   delete tmpFixData.category;
   delete tmpFixData.check;
 
@@ -43,7 +46,11 @@ const onSubmit = (values, dispatch, props) => {
     });
   }
 
-  return OpinionSourceActions.update(opinion, source.id, tmpFixData).then(() => {
+  return OpinionSourceActions.update(
+    opinion,
+    source.id,
+    tmpFixData,
+  ).then(() => {
     dispatch(hideSourceEditModal());
     OpinionSourceActions.load(opinion, 'last');
   });
@@ -61,7 +68,7 @@ const OpinionSourceForm = React.createClass({
     const { source } = this.props;
     return (
       <form id="source-form">
-        {source && (
+        {source &&
           <div className="alert alert-warning edit-confirm-alert">
             <Field
               type="checkbox"
@@ -70,19 +77,18 @@ const OpinionSourceForm = React.createClass({
               component={renderComponent}
               children={<FormattedMessage id="source.check" />}
             />
-          </div>
-        )}
+          </div>}
         <Field
           type="select"
           name="category"
           id="sourceCategory"
           component={renderComponent}
           label={<FormattedMessage id="source.type" />}>
-          {source ? null : (
-            <option value="" disabled>
-              {<FormattedMessage id="global.select" />}
-            </option>
-          )}
+          {source
+            ? null
+            : <option value="" disabled>
+                {<FormattedMessage id="global.select" />}
+              </option>}
           {CategoriesStore.categories.map(category => {
             return (
               <option key={category.id} value={category.id}>

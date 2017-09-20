@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Category:
     properties:
         id:
             expose: true
-            type: string
+            type: integer
             groups: [Categories]
         title:
             expose: true
