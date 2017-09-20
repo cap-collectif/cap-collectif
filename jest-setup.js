@@ -1,4 +1,8 @@
 import 'babel-polyfill';
+import moment from 'moment-timezone';
+import 'moment/locale/fr';
+moment.locale('fr');
+moment.tz.setDefault("Europe/Paris");
 
 global.$ = require('jquery')(window);
 
@@ -11,7 +15,6 @@ const throwError = (warning) => {
 };
 console.error = throwError; // eslint-disable-line no-console
 console.warn = throwError; // eslint-disable-line no-console
-
 
 global.intlMock = {
   now: () => null,

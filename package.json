@@ -108,6 +108,7 @@
     "lodash": "^4.17.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
+    "moment-timezone": "^0.5.13",
     "points-cluster": "^0.1.4",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
