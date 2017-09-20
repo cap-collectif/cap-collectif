@@ -116,23 +116,3 @@ services:
     arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
-
-  capco.form.proposal_form.create:
-    class: Capco\AppBundle\Form\ProposalFormCreateType
-    tags:
-      - { name: form.type }
-
-  capco.form.proposal_form.update:
-    class: Capco\AppBundle\Form\ProposalFormUpdateType
-    tags:
-      - { name: form.type }
-
-  capco.form.questionnaire_abstract_questionnaire:
-    class: Capco\AppBundle\Form\QuestionnaireAbstractQuestionType
-    tags:
-      - { name: form.type }
-
-  capco.form.proposal_form.notifications_configuration:
-    class: Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType
-    tags:
-      - { name: form.type }

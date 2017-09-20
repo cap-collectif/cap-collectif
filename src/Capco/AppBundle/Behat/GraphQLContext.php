@@ -67,7 +67,7 @@ class GraphQLContext implements Context
         );
         PHPUnit::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
-        var_dump($this->response);
+        // var_dump($this->response);
         PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
     }
 

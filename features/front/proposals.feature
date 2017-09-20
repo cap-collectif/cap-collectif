@@ -40,6 +40,13 @@ Scenario: Anonymous user wants to see last proposals when he returns on the list
   Then I should see same proposals
 
 @javascript @elasticsearch
+Scenario: Anonymous user wants to search a proposal with the random filter
+  Given I go to an open collect step
+  Then proposals should be ordered randomly
+  When I search for proposals with terms "plantation"
+  Then I should not see random row
+
+@javascript @elasticsearch
 Scenario: Anonymous user wants to see other random proposals
   Given I go to an open collect step
   Then proposals should be ordered randomly
@@ -239,11 +246,3 @@ Scenario: Anonymous user wants to see saved proposals when he returns on the sel
   Then I go to a selection step
   When proposals should be ordered randomly
   Then I should see same proposals
-
-@javascript @elasticsearch
-Scenario: Anonymous user wants to see other random proposals on the selection step
-  Given I go to a selection step
-  Then proposals should be ordered randomly
-  When I save current proposals
-  Then I click the 'a[href="#proposals-list"]' element
-  When I should see other proposals

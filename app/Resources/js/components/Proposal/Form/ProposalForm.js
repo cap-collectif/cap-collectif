@@ -564,7 +564,6 @@ export const ProposalForm = React.createClass({
           groupClassName={this.getGroupStyle('media')}
           errors={this.renderFormErrors('media')}
           valueLink={this.linkState('form.media')}
-          help={form.descriptionHelpText}
         />
       </form>
     );
