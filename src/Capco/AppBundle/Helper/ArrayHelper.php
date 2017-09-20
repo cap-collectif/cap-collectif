@@ -10,7 +10,7 @@ class ArrayHelper
         foreach ($flat as $key => $value) {
             $path = explode($delimiter, $key);
             if (count($path) === 1) {
-                $unflat[$key] = json_decode($value);
+                $unflat[$key] = $value;
                 continue;
             }
             $pointer = &$unflat;
@@ -27,7 +27,7 @@ class ArrayHelper
 
                 if (count($path) === 1) {
                     $lastKey = array_shift($path);
-                    $pointer[$lastKey] = json_decode($value);
+                    $pointer[$lastKey] = $value;
                 }
             } while (count($path));
         }
