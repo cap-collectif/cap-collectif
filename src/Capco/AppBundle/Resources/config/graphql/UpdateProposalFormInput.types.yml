@@ -1,0 +1,49 @@
+UpdateProposalFormInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            proposalFormId:
+                type: "Int!"
+            description:
+                type: "String"
+            summaryHelpText:
+                type: "String"
+            illustrationHelpText:
+                type: "String"
+            usingThemes:
+                type: "Boolean!"
+            themeMandatory:
+                type: "Boolean!"
+            themeHelpText:
+                type: "String"
+            usingDistrict:
+                type: "Boolean!"
+            districtMandatory:
+                type: "Boolean!"
+            districtHelpText:
+                type: "String"
+            usingCategories:
+                type: "Boolean!"
+            categoryMandatory:
+                type: "Boolean!"
+            categoryHelpText:
+                type: "String"
+            usingAddress:
+                type: "Boolean!"
+            titleHelpText:
+                type: "String"
+            descriptionHelpText:
+                type: "String"
+            addressHelpText:
+                type: "String"
+            latMap:
+                type: "Float"
+            lngMap:
+                type: "Float"
+            zoomMap:
+                type: "Int"
+            categories:
+                type: "[ProposalCategoryInput!]"
+            districts:
+                type: "[ProposalCategoryInput!]"

@@ -1,0 +1,8 @@
+ProposalCategoryInput:
+    type: input-object
+    config:
+        fields:
+            id:
+                type: "String"
+            name:
+                type: "String!"

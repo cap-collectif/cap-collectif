@@ -1,0 +1,8 @@
+CreateProposalFormInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            title:
+              type: "String!"
+              description: "The proposal form title"

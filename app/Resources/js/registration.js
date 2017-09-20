@@ -33,6 +33,7 @@ import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminPageApp from './startup/ProposalAdminPageApp';
+import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
 import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
@@ -83,4 +84,5 @@ ReactOnRails.register({
   IdeaPageApp,
   IdeaCreateApp,
   ShareButtonDropdownApp,
+  ProposalFormAdminPageApp,
 });

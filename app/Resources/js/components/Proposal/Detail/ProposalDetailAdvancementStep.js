@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import moment from 'moment';
 import { Label } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,9 +21,9 @@ const ProposalDetailAdvancementStep = React.createClass({
     }
 
     if (!step.endAt) {
-      return moment(step.startAt).format('ll');
+      return step.startAt;
     }
-    return `${moment(step.startAt).format('ll')} - ${moment(step.endAt).format('ll')}`;
+    return `${step.startAt} - ${step.endAt}`;
   },
 
   render() {

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    style={
+      Object {
+        "marginBottom": 15,
+        "marginTop": 15,
+      }
+    }
+  >
+    Liste des catégories
+  </label>
+  <ListGroup
+    bsClass="list-group"
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  >
+    <Glyphicon
+      bsClass="glyphicon"
+      glyph="plus"
+    />
+     
+    <FormattedMessage
+      id="global.add"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
