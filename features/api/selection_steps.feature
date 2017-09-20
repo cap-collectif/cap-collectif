@@ -72,7 +72,7 @@ Scenario: Logged in API client wants to get all proposals from a selection step
           "color": @string@
         },
         "category": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "author": @...@,
@@ -130,7 +130,7 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
           "color": @string@
         },
         "category": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "author": @...@,
@@ -190,7 +190,7 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
           "color": @string@
         },
         "category": {
-          "id": @integer@,
+          "id": @string@,
           "name": @string@
         },
         "author": @...@,
