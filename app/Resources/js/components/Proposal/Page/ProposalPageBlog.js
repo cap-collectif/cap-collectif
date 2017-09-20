@@ -26,9 +26,7 @@ export const ProposalPageBlog = React.createClass({
       );
     }
     return (
-      <ul className="media-list" style={{ marginTop: 30 }}>
-        {posts.map((post, index) => <Post post={post} key={index} />)}
-      </ul>
+      <ul className="media-list">{posts.map((post, index) => <Post post={post} key={index} />)}</ul>
     );
   },
 });
