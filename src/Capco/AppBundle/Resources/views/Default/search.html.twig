@@ -91,7 +91,6 @@
                                     </a>
                                 </h4>
                                 <span class="small">
-                                    {#{{ dump(entity) }}#}
                                     {{ type_label | trans({}, 'CapcoAppBundle') }}
                                     {% if entity.proposalForm is defined %}
                                         • {{ entity.proposalForm.step.project.title }}
