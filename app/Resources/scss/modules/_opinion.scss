@@ -91,6 +91,7 @@
 
     // Body of opinion blocks
     .opinion__body {
+        width: 100%;
 
         img {
             margin-right: 15px;
@@ -328,6 +329,7 @@
 
     .opinion {
         border-top: 1px solid $border-color;
+        width: 100%;
     }
 
     .opinion:first-child {
