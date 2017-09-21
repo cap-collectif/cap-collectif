@@ -52,11 +52,12 @@ Scenario: Logged in API client wants to get all proposals from a selection step
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "theme": {
-          "id": @string@,
+          "id": @integer@,
           "title": @string@,
           "enabled": @boolean@,
           "_links": @...@
@@ -109,11 +110,12 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "theme": {
-          "id": @string@,
+          "id": @integer@,
           "title": @string@,
           "enabled": @boolean@,
           "_links": @...@
@@ -157,23 +159,24 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
 Scenario: Anonymous API client wants to get all proposals in a theme from a selection step filtered by theme
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search" with json:
   """
-    {
-      "filters": {
-        "themes": "theme2"
-      }
+  {
+    "filters": {
+      "themes": 2
     }
-    """
+  }
+  """
   Then the JSON response should match:
   """
   {
     "proposals": [
       {
         "id": @integer@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "theme": {
-          "id": @string@,
+          "id": @integer@,
           "title": @string@,
           "enabled": @boolean@,
           "_links": @...@
