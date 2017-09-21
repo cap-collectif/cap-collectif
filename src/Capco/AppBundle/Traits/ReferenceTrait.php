@@ -11,7 +11,10 @@ trait ReferenceTrait
      */
     protected $reference;
 
-    public function getReference(): int
+    /**
+     * Don't put type hint "int" to this function (used by the event listener) waiting for php7.1.
+     */
+    public function getReference()
     {
         return $this->reference;
     }

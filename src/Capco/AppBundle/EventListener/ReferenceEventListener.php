@@ -22,6 +22,10 @@ class ReferenceEventListener
             return;
         }
 
+        if ($entity->getReference()) { // Used for fixtures
+            return;
+        }
+
         $this->updateReferenceIsNecessary($om, $entity);
     }
 
@@ -39,13 +43,15 @@ class ReferenceEventListener
             } else {
                 $entity->setReference($lastReference + 1);
             }
+
+            return;
+        }
+
+        $lastEntity = $om->getRepository(get_class($entity))->findOneBy([], ['reference' => 'DESC']);
+
+        if (null === $lastEntity) {
+            $entity->setReference(1);
         } else {
-            $lastEntity = $om->getRepository(get_class($entity))->findOneBy([], ['reference' => 'DESC']);
-
-            if (null === $lastEntity) {
-                $entity->setReference(1);
-            }
-
             $entity->setReference($lastEntity->getReference() + 1);
         }
     }

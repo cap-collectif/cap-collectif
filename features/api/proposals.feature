@@ -9,6 +9,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
   {
     "proposal": {
       "id": @string@,
+      "reference": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -138,6 +139,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
   {
     "proposal": {
       "id": @string@,
+      "reference": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -289,6 +291,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
   {
     "proposal": {
       "id": @string@,
+      "reference": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -435,6 +438,7 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -493,6 +497,7 @@ Scenario: Logged in API client wants to get all proposals from a private collect
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -561,6 +566,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -661,6 +667,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
     "proposals": [
       {
           "summaryOrBodyExcerpt": @string@,
+          "reference": @string@,
           "updated_at": "@string@.isDateTime()",
           "author": {
               "username": @string@,
@@ -727,6 +734,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
       },
       {
           "summaryOrBodyExcerpt": @string@,
+          "reference": @string@,
           "updated_at": "@string@.isDateTime()",
           "author": {
               "username": @string@,
@@ -835,6 +843,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
     "proposals": [
       {
         "summaryOrBodyExcerpt": @string@,
+        "reference": @string@,
         "updated_at": "@string@.isDateTime()",
         "author": @wildcard@,
         "proposalForm": {
@@ -866,6 +875,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
       },
       {
         "summaryOrBodyExcerpt": @string@,
+        "reference": @string@,
         "updated_at": "@string@.isDateTime()",
         "author": @wildcard@,
         "proposalForm": @wildcard@,
