@@ -524,11 +524,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     public function getAbstractOrBeginningOfTheText()
     {
-        if ($this->abstract) {
-            return $this->abstract;
-        }
-
-        return strlen($this->getBodyText()) > 300 ? substr($this->getBodyText(), 0, 300) . '[&hellip;]' : $this->getBodyText();
+        return $this->abstract ?? substr(strip_tags($this->getBody()), 0, 300) . '[&hellip;]';
     }
 
     // ************************** Lifecycle **************************************

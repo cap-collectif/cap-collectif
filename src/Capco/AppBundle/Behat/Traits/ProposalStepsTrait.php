@@ -908,14 +908,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I should not see random row
-     */
-    public function isShouldNotSeeRandomRow()
-    {
-        $this->assertPageNotContainsText('Relancer le tri aléatoire');
-    }
-
-    /**
      * @Then I should have :filesNumber files in source media folder
      */
     public function iShouldHaveXFilesInSourceMediaFolder(int $filesNumber)

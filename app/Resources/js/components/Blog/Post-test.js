@@ -10,11 +10,7 @@ describe('<Post />', () => {
 
   const post = {
     title: 'title',
-    publishedAt: '2017-09-20T08:21:25.854Z',
-    media: {
-      url:
-        'https://www.google.fr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwigzMDxqLPWAhXLVxoKHZ-rAUsQjRwIBw&url=https%3A%2F%2Fcap-collectif.com%2F&psig=AFQjCNGj5wO9iFHHNqsdr61VAbCYQaAslw&ust=1505981622786991',
-    },
+    media: { url: '' },
     abstract: 'azazazaz',
     authors: [{ _links: { profile: '' }, displayName: '' }],
     themes: [{ _links: { show: '' }, title: '' }],
@@ -29,6 +25,6 @@ describe('<Post />', () => {
       className: 'media media--news block block--bordered box',
     });
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('.media--news__text').text()).toEqual(post.abstract);
   });
 });

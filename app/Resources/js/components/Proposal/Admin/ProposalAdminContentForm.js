@@ -79,7 +79,7 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
   }
-  if (values.summary && (values.summary.length > 140 || values.summary.length < 2)) {
+  if (values.summary && values.summary.length > 140) {
     errors.summary = 'proposal.constraints.summary';
   }
   if (!values.body || values.body.length <= 2) {

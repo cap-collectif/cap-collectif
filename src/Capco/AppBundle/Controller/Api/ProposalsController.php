@@ -356,7 +356,7 @@ class ProposalsController extends FOSRestController
             'proposalForm' => $proposalForm,
         ]);
 
-        if ('false' === $request->request->get('media')) {
+        if ($request->request->get('media') === 'false') {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
