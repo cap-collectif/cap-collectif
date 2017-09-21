@@ -23,12 +23,9 @@ type Props = {
   fields: { length: number, map: Function, remove: Function },
   categories: Array<Object>,
 };
-type DefaultProps = void;
 type State = { editIndex: ?number };
 
 export class ProposalFormAdminCategories extends React.Component<Props, State> {
-  static defaultProps: DefaultProps;
-
   state = {
     editIndex: null,
   };
@@ -47,7 +44,6 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { dispatch, fields, categories } = this.props;
     const { editIndex } = this.state;
     return (
@@ -83,7 +79,6 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
                     <Button
                       bsStyle="danger"
                       onClick={() => {
-                        // eslint-disable-next-line no-confirm
                         if (
                           window.confirm(
                             'Êtes-vous sûr de vouloir supprimer cette catégorie ?',

@@ -6,12 +6,10 @@ import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
-import { baseUrl } from '../../config';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from './__generated__/ProposalFormAdminNotificationForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type DefaultProps = void;
 type RelayProps = { proposalForm: ProposalFormAdminNotificationForm_proposalForm };
 type Props = RelayProps & {
   handleSubmit: () => void,
@@ -36,10 +34,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   });
 };
 
-export class ProposalFormAdminNotificationForm extends Component<Props, void> {
-  static defaultProps: DefaultProps;
+export class ProposalFormAdminNotificationForm extends Component<Props> {
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposalForm } = this.props;
+    const { invalid, pristine, handleSubmit, submitting } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -84,9 +81,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props, void> {
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
-            <Button
-              bsStyle="danger"
-              href={`${baseUrl}/admin/capco/app/proposalfrom/${proposalForm.id}/delete`}>
+            <Button bsStyle="danger" disabled>
               <FormattedMessage id="global.delete" />
             </Button>
           </ButtonToolbar>

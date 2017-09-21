@@ -6,9 +6,7 @@ import ProposalFormAdminPageTabs from './ProposalFormAdminPageTabs';
 import Loader from '../Utils/Loader';
 import type { ProposalFormAdminPageQueryResponse } from './__generated__/ProposalFormAdminPageQuery.graphql';
 
-type DefaultProps = void;
 type Props = { proposalFormId: number };
-type State = void;
 
 const component = ({
   error,
@@ -31,8 +29,7 @@ const component = ({
   return <Loader />;
 };
 
-export class ProposalFormAdminPage extends Component<Props, State> {
-  static defaultProps: DefaultProps;
+export class ProposalFormAdminPage extends Component<Props> {
   render() {
     return (
       <div className="container">

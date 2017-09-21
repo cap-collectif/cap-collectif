@@ -10,7 +10,6 @@ import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
-import { baseUrl } from '../../config';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
@@ -146,7 +145,6 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
       pristine,
       handleSubmit,
       submitting,
-      proposalForm,
       usingAddress,
       usingThemes,
       usingCategories,
@@ -362,9 +360,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
-            <Button
-              bsStyle="danger"
-              href={`${baseUrl}/admin/capco/app/proposalfrom/${proposalForm.id}/delete`}>
+            <Button bsStyle="danger" disabled>
               <FormattedMessage id="global.delete" />
             </Button>
           </ButtonToolbar>
