@@ -226,7 +226,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
     protected function getFormattedAddress($address)
     {
-        $apiKey = $this->getContainer()->getParameter('google_maps_key');
+        $apiKey = $this->getContainer()->getParameter('google_maps_key_server');
         $updatedAddress = null;
 
         $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=$apiKey";
@@ -237,7 +237,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $content = json_decode($res->getBody()->getContents(), true);
 
         if ($content['status'] === 'OK') {
-            // todo when api work ..
+            $updatedAddress = json_encode([$content['results'][0]]);
         }
 
         return $updatedAddress;
