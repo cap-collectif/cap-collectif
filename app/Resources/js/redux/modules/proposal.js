@@ -427,6 +427,7 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
       formData.append(key, flattenedData[key]);
     }
   });
+
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
     .then(response => {
       dispatch(closeCreateModal());

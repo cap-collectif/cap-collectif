@@ -10,7 +10,7 @@ class ArrayHelper
         foreach ($flat as $key => $value) {
             $path = explode($delimiter, $key);
             if (count($path) === 1) {
-                $unflat[$key] = $value;
+                $unflat[$key] = $value === 'null' ? null : $value;
                 continue;
             }
             $pointer = &$unflat;
@@ -27,7 +27,7 @@ class ArrayHelper
 
                 if (count($path) === 1) {
                     $lastKey = array_shift($path);
-                    $pointer[$lastKey] = $value;
+                    $pointer[$lastKey] = $value === 'null' ? null : $value;
                 }
             } while (count($path));
         }
