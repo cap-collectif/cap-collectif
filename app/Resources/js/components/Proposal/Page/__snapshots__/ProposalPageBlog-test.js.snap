@@ -3,6 +3,11 @@
 exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
 <ul
   className="media-list"
+  style={
+    Object {
+      "marginTop": 30,
+    }
+  }
 >
   <Connect(Post)
     post={Object {}}

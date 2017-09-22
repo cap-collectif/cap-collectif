@@ -70,7 +70,7 @@ export const ProposalListFilters = React.createClass({
     const colWidth = showToggleMapButton ? 4 : 6;
 
     return (
-      <div className="mb-15">
+      <div>
         <Row>
           <Col xs={12} md={colWidth}>
             <ProposalListOrderSorting orderByVotes={orderByVotes} />

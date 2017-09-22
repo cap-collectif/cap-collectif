@@ -6,8 +6,8 @@ Feature: ProposalForm Restful Api
 Scenario: Anonymous API client wants to get one proposal form
   When I send a GET request to "/api/proposal_forms/1"
   Then the JSON response should match:
-"""
-{
+  """
+  {
   "id": @integer@,
   "title": @string@,
   "titleHelpText": @string@,
@@ -46,42 +46,42 @@ Scenario: Anonymous API client wants to get one proposal form
     }
   ],
   "fields": [
-    {
-      "id": @integer@,
-      "type": @string@,
-      "helpText": @string@,
-      "required": @boolean@,
-      "private": @boolean@,
-      "question": @string@,
-      "slug": @string@
-    },
-    {
-      "id": @integer@,
-      "type": @string@,
-      "helpText": @string@,
-      "required": true,
-      "private": @boolean@,
-      "question": @string@,
-      "slug": @string@
-    },
-    {
-      "id": @integer@,
-      "type": @string@,
-      "helpText": @string@,
-      "required": false,
-      "private": @boolean@,
-      "question": @string@,
-      "slug": @string@
-    },
-    {
-      "id": @integer@,
-      "type": @string@,
-      "helpText": @string@,
-      "required": false,
-      "private": @boolean@,
-      "question": @string@,
-      "slug": @string@
-    }
+      {
+          "id": @integer@,
+          "type": @string@,
+          "helpText": @string@,
+          "required": @boolean@,
+          "private": @boolean@,
+          "question": @string@,
+          "slug": @string@
+        },
+        {
+          "id": @integer@,
+          "type": @string@,
+          "helpText": @string@,
+          "required": true,
+          "private": @boolean@,
+          "question": @string@,
+          "slug": @string@
+        },
+        {
+          "id": @integer@,
+          "type": @string@,
+          "helpText": @string@,
+          "required": false,
+          "private": @boolean@,
+          "question": @string@,
+          "slug": @string@
+        },
+        {
+          "id": @integer@,
+          "type": @string@,
+          "helpText": @string@,
+          "required": false,
+          "private": @boolean@,
+          "question": @string@,
+          "slug": @string@
+        }
   ]
-}
-"""
+  }
+  """

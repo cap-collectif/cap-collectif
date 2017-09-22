@@ -39,6 +39,13 @@
     </li>
   </ul>
   {% endif %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.subject is sameas(false) %}
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+        {{ react_render_component('ProposalFormCreateButtonApp') }}
+    </li>
+  </ul>
+  {% endif %}
     {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
         <ul class="nav navbar-nav navbar-right">
         {% if _actions|split('</a>')|length > 2 %}

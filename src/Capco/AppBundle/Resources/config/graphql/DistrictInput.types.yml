@@ -1,0 +1,10 @@
+DistrictInput:
+    type: input-object
+    config:
+        fields:
+            name:
+                type: "String!"
+            geojson:
+                type: "GeoJSON"
+            displayedOnMap:
+                type: "Boolean!"

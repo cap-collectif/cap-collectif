@@ -6,8 +6,6 @@ import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
-import DeleteModal from '../../Modal/DeleteModal';
-
 import ProposalAdminRealisationStepModal from './ProposalAdminRealisationStepModal';
 import type { GlobalState, Dispatch } from '../../../types';
 
@@ -20,27 +18,21 @@ type Props = {
   progressSteps: Array<Object>,
 };
 type DefaultProps = void;
-type State = { editIndex: ?number, showModal: ?number };
+type State = { editIndex: ?number };
 
 export class ProposalAdminProgressSteps extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
   state = {
     editIndex: null,
-    showModal: null,
   };
 
   handleClose = () => {
     this.setState({ editIndex: null });
   };
 
-  cancelClose = () => {
-    this.setState({ showModal: null });
-  };
-
   render() {
     const { dispatch, fields, progressSteps } = this.props;
-    const { editIndex, showModal } = this.state;
-
+    const { editIndex } = this.state;
     return (
       <div className="form-group">
         <label>Liste des phases de réalisation</label>
@@ -53,27 +45,18 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                 member={member}
                 show={index === editIndex}
               />
-              <DeleteModal
-                closeDeleteModal={this.cancelClose}
-                showDeleteModal={index === showModal}
-                deleteElement={() => {
-                  fields.remove(index);
-                }}
-                deleteModalTitle={'proposal.admin.realisationStep.modal.delete'}
-                deleteModalContent={'proposal.admin.realisationStep.modal.content'}
-              />
               <Row>
                 <Col xs={8}>
                   <div>
                     <strong>{progressSteps[index].title}</strong>
                   </div>
                   {progressSteps[index].startAt && (
-                    <div className="excerpt">
+                    <div className="excerpt small">
                       {progressSteps[index].endAt ? (
-                        <span>
+                        <p>
                           Du {moment(progressSteps[index].startAt).format('ll')} au{' '}
                           {moment(progressSteps[index].endAt).format('ll')}
-                        </span>
+                        </p>
                       ) : (
                         moment(progressSteps[index].startAt).format('ll')
                       )}
@@ -89,11 +72,17 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                       }}>
                       <FormattedMessage id="global.edit" />
                     </Button>
-
                     <Button
                       bsStyle="danger"
                       onClick={() => {
-                        this.setState({ showModal: index });
+                        if (
+                          window.confirm(
+                            'Êtes-vous sûr de vouloir supprimer cette phase de réalisation ?',
+                            'Cette action est irréversible',
+                          )
+                        ) {
+                          fields.remove(index);
+                        }
                       }}>
                       <FormattedMessage id="global.remove" />
                     </Button>

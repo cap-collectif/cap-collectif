@@ -50,3 +50,9 @@ Query:
                     id:
                         type: "ID!"
                 resolve: "@=resolver('query_proposal', [args['id'], user])"
+            proposalForm:
+                type: "ProposalForm!"
+                args:
+                    id:
+                        type: "Int!"
+                resolve: "@=resolver('query_proposalForm', [args])"

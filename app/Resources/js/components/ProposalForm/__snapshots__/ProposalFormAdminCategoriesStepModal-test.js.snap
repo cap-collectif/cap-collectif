@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
+exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
 <Modal
   animation={true}
-  aria-labelledby="delete-modal-title-lg"
+  aria-labelledby="report-modal-title-lg"
   autoFocus={true}
   backdrop={true}
   bsClass="modal"
@@ -35,10 +35,10 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
     <ModalTitle
       bsClass="modal-title"
       componentClass="h4"
-      id="contained-modal-title-lg"
+      id="report-modal-title-lg"
     >
       <FormattedMessage
-        id="titre.de.la.modal.de.suppression"
+        id="Modifier la catégorie"
         values={Object {}}
       />
     </ModalTitle>
@@ -47,9 +47,12 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <FormattedMessage
-      id="contenu.de.la.modal.de.suppression"
-      values={Object {}}
+    <Field
+      component={[Function]}
+      id="member.name"
+      label="Titre"
+      name="member.name"
+      type="text"
     />
   </ModalBody>
   <ModalFooter
@@ -60,19 +63,11 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
       label="global.cancel"
       onClose={[Function]}
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.delete"
-        values={Object {}}
-      />
-    </Button>
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[Function]}
+    />
   </ModalFooter>
 </Modal>
 `;
