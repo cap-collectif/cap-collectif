@@ -17,3 +17,4 @@ Capco\AppBundle\Entity\District:
             expose: true
             type: boolean
             groups: [DistrictDetails]
+            serialized_name: displayedOnMap
