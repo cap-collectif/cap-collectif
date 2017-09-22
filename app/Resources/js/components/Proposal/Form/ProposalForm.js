@@ -103,7 +103,15 @@ export const ProposalForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const { categories, features, isSubmitting, mode, proposal, dispatch } = this.props;
+    const {
+      categories,
+      features,
+      isSubmitting,
+      mode,
+      proposal,
+      dispatch,
+      currentStepId,
+    } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
@@ -138,10 +146,13 @@ export const ProposalForm = React.createClass({
         if (categories.length === 0 || !this.props.form.usingCategories) {
           delete form.category;
         }
+        if (form.summary !== null && form.summary.length === 0) {
+          form.summary = null;
+        }
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
-          submitProposal(dispatch, this.props.form.id, form);
+          submitProposal(dispatch, this.props.form.id, form, currentStepId);
         }
       } else {
         dispatch(cancelSubmitProposal());
@@ -281,6 +292,7 @@ export const ProposalForm = React.createClass({
       notBlank: { message: 'proposal.constraints.title' },
     },
     summary: {
+      min: { value: 2, message: 'proposal.constraints.summary' },
       max: { value: 140, message: 'proposal.constraints.summary' },
     },
     body: {

@@ -12,10 +12,6 @@
   "modules/editor"
 ;
 
-body {
-    font-family: "OpenSans";
-}
-
 .draghandle {
   display: block;
   width: 18px;
@@ -26,9 +22,4 @@ body {
   opacity: .25;
   margin-right: 20px;
   cursor: row-resize;
-}
-
-.excerpt {
-    color: #999;
-    font-weight: normal;
 }
