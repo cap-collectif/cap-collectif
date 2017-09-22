@@ -31,8 +31,10 @@ import IdeaPageApp from './startup/IdeaPageApp';
 import IdeaCreateApp from './startup/IdeaCreateApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
+import ProposalFormCreateButtonApp from './startup/ProposalFormCreateButtonApp';
 import ProjectListPageApp from './startup/ProjectListPageApp';
 import ProposalAdminPageApp from './startup/ProposalAdminPageApp';
+import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
 import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
@@ -55,6 +57,7 @@ ReactOnRails.register({
   RegistrationAdminApp,
   ShieldApp,
   ProjectListPageApp,
+  ProposalFormCreateButtonApp,
   ProjectsListApp,
   ProposalAdminPageApp,
   ProposalCreateFusionButtonApp,
@@ -83,4 +86,5 @@ ReactOnRails.register({
   IdeaPageApp,
   IdeaCreateApp,
   ShareButtonDropdownApp,
+  ProposalFormAdminPageApp,
 });

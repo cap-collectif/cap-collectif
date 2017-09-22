@@ -79,6 +79,7 @@ export const ProposalStepPage = React.createClass({
           showDistrictFilter={form.usingDistrict}
           showToggleMapButton={form.usingAddress && !step.isPrivate}
         />
+        <br />
         <Loader show={isLoading}>
           <LeafletMap
             geoJsons={form.districts
@@ -118,7 +119,7 @@ export const ProposalStepPage = React.createClass({
                 />
               )}
               {randomOrder &&
-              proposals.length > 3 &&
+              proposals.length > 0 &&
               selectedViewByStep === 'mosaic' && (
                 <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
               )}

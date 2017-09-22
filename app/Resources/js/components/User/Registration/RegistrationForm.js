@@ -98,7 +98,7 @@ export const RegistrationForm = React.createClass({
             message: <FormattedMessage id="registration.tooltip.password" />,
           }}
         />
-        {addUserTypeField && (
+        {addUserTypeField &&
           <Field
             id="user_type"
             name="userType"
@@ -114,16 +114,18 @@ export const RegistrationForm = React.createClass({
             }
             labelClassName="h5">
             <FormattedMessage id="registration.select.type">
-              {message => <option value="">{message}</option>}
+              {message =>
+                <option value="">
+                  {message}
+                </option>}
             </FormattedMessage>
-            {userTypes.map((type, i) => (
+            {userTypes.map((type, i) =>
               <option key={i + 1} value={type.id}>
                 {type.name}
-              </option>
-            ))}
-          </Field>
-        )}
-        {addZipcodeField && (
+              </option>,
+            )}
+          </Field>}
+        {addZipcodeField &&
           <Field
             id="zipcode"
             name="zipcode"
@@ -139,23 +141,21 @@ export const RegistrationForm = React.createClass({
             }
             labelClassName="h5"
             autoComplete="postal-code"
-          />
-        )}
+          />}
         {dynamicFields.map((field, key) => {
           let children;
           if (field.choices) {
-            const choices = field.choices.map((choice, i) => (
+            const choices = field.choices.map((choice, i) =>
               <option key={i + 1} value={choice.label}>
                 {choice.label}
-              </option>
-            ));
+              </option>,
+            );
             children = [
               <FormattedMessage id="global.select">
-                {message => (
+                {message =>
                   <option key={0} value="">
                     {message}
-                  </option>
-                )}
+                  </option>}
               </FormattedMessage>,
               ...choices,
             ];
@@ -170,11 +170,10 @@ export const RegistrationForm = React.createClass({
               label={
                 <span>
                   {field.question}{' '}
-                  {!field.required && (
+                  {!field.required &&
                     <span className="excerpt">
                       <FormattedMessage id="global.form.optional" />
-                    </span>
-                  )}
+                    </span>}
                 </span>
               }
               labelClassName="h5"
@@ -200,9 +199,13 @@ export const RegistrationForm = React.createClass({
             />
           }
         />
-        {addCaptchaField && (
-          <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
-        )}
+        {addCaptchaField &&
+          <Field
+            id="captcha"
+            component={renderComponent}
+            name="captcha"
+            type="captcha"
+          />}
       </form>
     );
   },
