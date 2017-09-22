@@ -25,6 +25,8 @@ class ProposalFormUpdateType extends AbstractType
             ->add('summaryHelpText', PurifiedTextType::class)
             ->add('illustrationHelpText', PurifiedTextType::class)
 
+            ->add('proposalInAZoneRequired', CheckboxType::class)
+
             ->add('usingThemes', CheckboxType::class)
             ->add('themeMandatory', CheckboxType::class)
             ->add('themeHelpText', PurifiedTextType::class)

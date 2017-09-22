@@ -290,6 +290,13 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
             <p className="link">
               <Glyphicon glyph="info-sign" /> Les propositions seront affichées sur une carte
             </p>
+            <Field
+              name="proposalInAZoneRequired"
+              component={component}
+              type="checkbox"
+              id="proposal_form_district_proposalInAZoneRequired">
+              <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
+            </Field>
             <h5 style={{ fontWeight: 'bold', marginTop: 20 }}>Position initiale de la carte</h5>
             <Row>
               <Col xs={12} md={4}>
@@ -403,6 +410,7 @@ export default createFragmentContainer(
       latMap
       lngMap
       zoomMap
+      proposalInAZoneRequired
       illustrationHelpText
       addressHelpText
       themeHelpText

@@ -325,6 +325,17 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         />
          Les propositions seront affichées sur une carte
       </p>
+      <Field
+        component={[Function]}
+        id="proposal_form_district_proposalInAZoneRequired"
+        name="proposalInAZoneRequired"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.proposalInAZoneRequired"
+          values={Object {}}
+        />
+      </Field>
       <h5
         style={
           Object {

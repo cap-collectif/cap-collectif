@@ -25,6 +25,8 @@ ProposalForm:
                 type: "String"
             usingDistrict:
                 type: "Boolean!"
+            proposalInAZoneRequired:
+                type: "Boolean!"
             districts:
                 args:
                   order:

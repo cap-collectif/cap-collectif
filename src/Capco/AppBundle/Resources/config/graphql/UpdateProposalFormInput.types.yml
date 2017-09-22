@@ -31,6 +31,8 @@ UpdateProposalFormInput:
                 type: "String"
             usingAddress:
                 type: "Boolean!"
+            proposalInAZoneRequired:
+                type: "Boolean!"
             titleHelpText:
                 type: "String"
             descriptionHelpText:

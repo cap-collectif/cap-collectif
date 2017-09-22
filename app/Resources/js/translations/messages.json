@@ -542,6 +542,7 @@
   "proposal.map.form.control.popup": "Vous êtes à moins de \\{distance\\} \\{unit\\} de ce point",
   "proposal.map.form.control.outsideMapBoundsMsg": "Vous semblez situé en dehors des limites de la carte",
   "proposal_form.title": "Titre",
+  "proposal_form.proposalInAZoneRequired": "Limiter le dépôt des propositions aux zones géographiques",
   "proposal_form.summary": "Résumé",
   "proposal_form.illustration": "Illustration",
   "proposal_form.description": "Description",

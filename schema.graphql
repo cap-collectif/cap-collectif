@@ -682,6 +682,7 @@ type ProposalForm {
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
+  proposalInAZoneRequired: Boolean!
   districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
   districtHelpText: String
@@ -1025,6 +1026,7 @@ input UpdateProposalFormInput {
   categoryMandatory: Boolean!
   categoryHelpText: String
   usingAddress: Boolean!
+  proposalInAZoneRequired: Boolean!
   titleHelpText: String
   descriptionHelpText: String
   addressHelpText: String

@@ -24,6 +24,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       themeHelpText: '',
       categoryHelpText: '',
       descriptionHelpText: '',
+      proposalInAZoneRequired: true,
       summaryHelpText: '',
       titleHelpText: '',
       usingDistrict: true,
