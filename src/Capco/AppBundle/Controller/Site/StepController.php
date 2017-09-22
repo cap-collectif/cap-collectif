@@ -107,13 +107,13 @@ class StepController extends Controller
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
-        $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() !== null ? $step->getNbOpinionsToDisplay() : 10;
+        $nbOpinionsToDisplay = null !== $step->getNbOpinionsToDisplay() ? $step->getNbOpinionsToDisplay() : 10;
         $opinions = $em
             ->getRepository('CapcoAppBundle:Opinion')
             ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay)
         ;
 
-        $nbVersionsToDisplay = $step->getNbVersionsToDisplay() !== null ? $step->getNbVersionsToDisplay() : 10;
+        $nbVersionsToDisplay = null !== $step->getNbVersionsToDisplay() ? $step->getNbVersionsToDisplay() : 10;
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
             ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay)
@@ -280,7 +280,7 @@ class StepController extends Controller
             'stepId' => $step->getId(),
             'count' => $searchResults['count'],
             'countFusions' => $countFusions,
-        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
+        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'DistrictDetails', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [
             'project' => $project,

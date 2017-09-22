@@ -71,6 +71,11 @@ class ProposalForm
     private $titleHelpText;
 
     /**
+     * @ORM\Column(name="summary_help_text", type="string", length=255, nullable=true)
+     */
+    private $summaryHelpText;
+
+    /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
     private $descriptionHelpText;
@@ -94,6 +99,11 @@ class ProposalForm
      * @ORM\Column(name="address_help_text", type="string", length=255, nullable=true)
      */
     private $addressHelpText;
+
+    /**
+     * @ORM\Column(name="illustration_help_text", type="string", length=255, nullable=true)
+     */
+    private $illustrationHelpText;
 
     /**
      * @ORM\Column(name="using_themes", type="boolean")
@@ -206,6 +216,21 @@ class ProposalForm
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSummaryHelpText()
+    {
+        return $this->summaryHelpText;
+    }
+
+    public function setSummaryHelpText(string $summaryHelpText = null): self
+    {
+        $this->summaryHelpText = $summaryHelpText;
+
+        return $this;
     }
 
     /**
@@ -324,12 +349,9 @@ class ProposalForm
         return $this->getStep()->canDisplay();
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
-        return $this->getStep()->canContribute();
+        return $this->getStep() && $this->getStep()->canContribute();
     }
 
     /**
@@ -635,6 +657,21 @@ class ProposalForm
     public function setLngMap(float $lngMap = null): self
     {
         $this->lngMap = $lngMap;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getIllustrationHelpText()
+    {
+        return $this->illustrationHelpText;
+    }
+
+    public function setIllustrationHelpText(string $illustrationHelpText = null): self
+    {
+        $this->illustrationHelpText = $illustrationHelpText;
 
         return $this;
     }

@@ -103,15 +103,7 @@ export const ProposalForm = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const {
-      categories,
-      features,
-      isSubmitting,
-      mode,
-      proposal,
-      dispatch,
-      currentStepId,
-    } = this.props;
+    const { categories, features, isSubmitting, mode, proposal, dispatch } = this.props;
     this.updateThemeConstraint();
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
@@ -152,7 +144,7 @@ export const ProposalForm = React.createClass({
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
-          submitProposal(dispatch, this.props.form.id, form, currentStepId);
+          submitProposal(dispatch, this.props.form.id, form);
         }
       } else {
         dispatch(cancelSubmitProposal());
@@ -576,6 +568,7 @@ export const ProposalForm = React.createClass({
           groupClassName={this.getGroupStyle('media')}
           errors={this.renderFormErrors('media')}
           valueLink={this.linkState('form.media')}
+          help={form.descriptionHelpText}
         />
       </form>
     );
