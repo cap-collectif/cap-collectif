@@ -29,9 +29,7 @@ export const ProposalList = React.createClass({
 
     if (proposals.length === 0) {
       return (
-        <p
-          className={classNames({ 'p--centered': true })}
-          style={{ 'margin-bottom': '40px' }}>
+        <p className={classNames({ 'p--centered': true })} style={{ 'margin-bottom': '40px' }}>
           {<FormattedMessage id="proposal.private.empty" />}
         </p>
       );
@@ -39,6 +37,7 @@ export const ProposalList = React.createClass({
 
     const classes = classNames({
       'media-list': true,
+      'proposal-preview-list': true,
       opinion__list: true,
     });
 
@@ -52,30 +51,32 @@ export const ProposalList = React.createClass({
 
     return (
       <div>
-        {publicProposals.length > 0 &&
+        {publicProposals.length > 0 && (
           <Row componentClass="ul" className={classes}>
-            {publicProposals.map(proposal =>
+            {publicProposals.map(proposal => (
               <ProposalPreview
                 key={proposal.id}
                 proposal={proposal}
                 step={step}
                 showThemes={showThemes}
-              />,
-            )}
-          </Row>}
-        {privateProposals.length > 0 &&
+              />
+            ))}
+          </Row>
+        )}
+        {privateProposals.length > 0 && (
           <VisibilityBox enabled>
             <Row componentClass="ul" className={classes}>
-              {privateProposals.map(proposal =>
+              {privateProposals.map(proposal => (
                 <ProposalPreview
                   key={proposal.id}
                   proposal={proposal}
                   step={step}
                   showThemes={showThemes}
-                />,
-              )}
+                />
+              ))}
             </Row>
-          </VisibilityBox>}
+          </VisibilityBox>
+        )}
       </div>
     );
   },

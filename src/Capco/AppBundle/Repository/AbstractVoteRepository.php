@@ -92,11 +92,10 @@ class AbstractVoteRepository extends EntityRepository
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
         foreach ($votes as $vote) {
-            if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
-                $publicVotes[] = $vote;
-            }
             if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {
-                $publicVotes[] = $vote;
+                if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
+                    $publicVotes[] = $vote;
+                }
             }
         }
 

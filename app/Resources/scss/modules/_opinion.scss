@@ -91,7 +91,6 @@
 
     // Body of opinion blocks
     .opinion__body {
-
         img {
             margin-right: 15px;
         }
@@ -319,12 +318,6 @@
 // List of opinions
 .opinion__list {
     margin-bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
-
-    > li {
-        display: flex;
-    }
 
     .opinion {
         border-top: 1px solid $border-color;
