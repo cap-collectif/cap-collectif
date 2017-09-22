@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
-use GuzzleHttp\Client;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -57,6 +57,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     {
         $this->filePath = $input->getArgument('filePath');
         $proposalFormId = $input->getArgument('proposal-form');
+        $map = $this->getContainer()->get('capco.utils.map');
 
         $om = $this->getContainer()->get('doctrine')->getManager();
 
@@ -69,20 +70,24 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 . $proposalFormId .
                 ' was not found in your database. Please create it or change the id.</error>');
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
+
+            return 1;
         }
 
         $proposals = $this->getProposals();
 
-        if (!$proposals || count($proposals) === 0) {
+        if (count($proposals) === 0) {
             $output->writeln(
                 '<error>Your file with path '
                 . $this->filePath .
                 ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>');
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
+
+            return 1;
         }
 
         $count = count($proposals);
-        $progress = new ProgressBar($output, $count);
+        $progress = new ProgressBar($output, $count - 1);
         $progress->start();
 
         $loop = 1;
@@ -98,7 +103,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 $proposal = new Proposal();
-                $proposal->setTitle($this->escapeHtml($row[0]));
+                $proposal->setTitle(Text::escapeHtml($row[0]));
 
                 /** @var User $author */
                 $author = $om->getRepository(User::class)->findOneBy([
@@ -122,7 +127,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal->setProposalForm($proposalForm);
                 $proposal->setDistrict($district);
                 $proposal->setStatus($status);
-                $proposal->setAddress($this->getFormattedAddress($row[3]));
+                $proposal->setAddress($map->getFormattedAddress($row[3]));
 
                 if ($row[5] !== '') {
                     $proposal->setEstimation((float) $row[5]);
@@ -140,7 +145,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 if ($row[7] !== '') {
-                    $proposal->setSummary($this->escapeHtml($row[7]));
+                    $proposal->setSummary(Text::escapeHtml($row[7]));
                 }
 
                 $proposal->setBody($row[8]);
@@ -157,14 +162,15 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             $output->writeln(
                 '<error>Error when flushing proposals : ' . $e->getMessage() . '</error>');
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
-            exit;
+
+            return 1;
         }
 
         $progress->finish();
 
         $output->writeln(
             '<info>'
-            . count($proposals) - 1 .
+            . (count($proposals) - 1) .
             ' proposals successfully created.</info>'
         );
 
@@ -210,11 +216,6 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         }
     }
 
-    protected function escapeHtml($str): string
-    {
-        return htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE);
-    }
-
     protected function generateContentException($output)
     {
         $output->writeln(
@@ -222,24 +223,5 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
         exit;
-    }
-
-    protected function getFormattedAddress($address)
-    {
-        $apiKey = $this->getContainer()->getParameter('google_maps_key_server');
-        $updatedAddress = null;
-
-        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=$apiKey";
-
-        $client = new Client();
-        $res = $client->request('GET', $endpoint);
-
-        $content = json_decode($res->getBody()->getContents(), true);
-
-        if ($content['status'] === 'OK') {
-            $updatedAddress = json_encode([$content['results'][0]]);
-        }
-
-        return $updatedAddress;
     }
 }
