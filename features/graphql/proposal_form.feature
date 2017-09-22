@@ -165,16 +165,7 @@ Scenario: GraphQL client wants to update a proposal form
               "name": "Politique"
             }
           ],
-          "districts": [
-            {
-              "id": "district1",
-              "name": "Beauregard"
-            },
-            {
-              "id": @string@,
-              "name": "Other district"
-            }
-          ]
+          "districts": @wildcard@
         }
       }
     }
