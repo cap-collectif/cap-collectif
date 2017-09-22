@@ -1,9 +1,0 @@
-ChangeTitleProposalFormInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            proposalFormId:
-                type: "Int!"
-            title:
-                type: "String!"

@@ -5,9 +5,9 @@ import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 
 describe('<ProposalDetailAdvancementStep />', () => {
   const step = {
-    title: 'sdqsdsqd',
-    startAt: 'startAt',
-    endAt: 'endAt',
+    title: 'Step title',
+    startAt: '2017-09-05T15:48:55+0200',
+    endAt: '2017-09-17T01:08:01+0200',
   };
   const status = {
     color: 'success',
@@ -16,25 +16,14 @@ describe('<ProposalDetailAdvancementStep />', () => {
   const roundColor = '#hexCode';
 
   it('can render a step without status', () => {
-    const wrapper = shallow(
-      <ProposalDetailAdvancementStep
-        step={step}
-        roundColor={roundColor}
-      />,
-    );
-    const label = wrapper.find('Label');
-    expect(label.length).toEqual(0);
+    const wrapper = shallow(<ProposalDetailAdvancementStep step={step} roundColor={roundColor} />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('can render a step with status', () => {
     const wrapper = shallow(
-      <ProposalDetailAdvancementStep
-        step={step}
-        roundColor={roundColor}
-        status={status}
-      />,
+      <ProposalDetailAdvancementStep step={step} roundColor={roundColor} status={status} />,
     );
-    const label = wrapper.find('Label');
-    expect(label.prop('bsStyle')).toEqual('success');
+    expect(wrapper).toMatchSnapshot();
   });
 });

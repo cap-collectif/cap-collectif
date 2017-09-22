@@ -1,6 +1,0 @@
-CreateProposalFormPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            proposalForm:
-                type: "ProposalForm!"
