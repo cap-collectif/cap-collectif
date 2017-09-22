@@ -67,6 +67,7 @@ class GraphQLContext implements Context
         );
         PHPUnit::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
+        // var_dump($this->response);
         PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
     }
 
@@ -75,8 +76,7 @@ class GraphQLContext implements Context
      */
     public function iSendAraphQLPostRequest(PyStringNode $string)
     {
-        // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
-        $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
+        $string = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $string->getRaw());
         $response = $this->client->request(
             'POST',
             '/graphql/',

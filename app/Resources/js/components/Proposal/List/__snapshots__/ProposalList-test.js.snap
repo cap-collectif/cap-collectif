@@ -20,7 +20,7 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
 <div>
   <Row
     bsClass="row"
-    className="media-list proposal-preview-list opinion__list"
+    className="media-list opinion__list"
     componentClass="ul"
   >
     <ProposalPreview

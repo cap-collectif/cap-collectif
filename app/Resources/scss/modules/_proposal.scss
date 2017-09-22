@@ -4,15 +4,6 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     @include ellipsis();
 }
 
-.proposal-preview-list {
-    display: flex;
-    flex-wrap: wrap;
-
-    > li {
-        display: flex;
-    }
-}
-
 .proposal__header {
     .media {
         display: flex;

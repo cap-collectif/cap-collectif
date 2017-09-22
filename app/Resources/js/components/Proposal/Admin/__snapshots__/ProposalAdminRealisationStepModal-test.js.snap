@@ -65,7 +65,23 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="member.endAt"
-      label="Date de fin (facultatif)"
+      label={
+        <span>
+          <FormattedMessage
+            id="global.endDate"
+            values={Object {}}
+          />
+           
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
       name="member.endAt"
       timeFormat={false}
       type="datetime"

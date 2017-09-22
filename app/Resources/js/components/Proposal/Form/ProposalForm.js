@@ -138,9 +138,6 @@ export const ProposalForm = React.createClass({
         if (categories.length === 0 || !this.props.form.usingCategories) {
           delete form.category;
         }
-        if (form.summary !== null && form.summary.length === 0) {
-          form.summary = null;
-        }
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
@@ -284,7 +281,6 @@ export const ProposalForm = React.createClass({
       notBlank: { message: 'proposal.constraints.title' },
     },
     summary: {
-      min: { value: 2, message: 'proposal.constraints.summary' },
       max: { value: 140, message: 'proposal.constraints.summary' },
     },
     body: {
@@ -568,7 +564,6 @@ export const ProposalForm = React.createClass({
           groupClassName={this.getGroupStyle('media')}
           errors={this.renderFormErrors('media')}
           valueLink={this.linkState('form.media')}
-          help={form.descriptionHelpText}
         />
       </form>
     );
