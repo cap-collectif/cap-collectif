@@ -182,7 +182,9 @@ type CollectStep implements Step {
 }
 
 # A consultation
-type Consultation {
+type Consultation implements Step {
+  kind: String!
+
   # The id of the consultation.
   id: ID!
 
@@ -672,7 +674,7 @@ input ProposalCategoryInput {
 
 # A budget form
 type ProposalForm {
-  id: String!
+  id: ID!
   description: String
   summaryHelpText: String
   illustrationHelpText: String
@@ -693,7 +695,7 @@ type ProposalForm {
   titleHelpText: String
   descriptionHelpText: String
   addressHelpText: String
-  customFields: [Question!]!
+  questions: [Question!]!
   latMap: Float
   lngMap: Float
   zoomMap: Int
@@ -765,18 +767,46 @@ type Query {
   ): [Opinion]
   section(id: ID!): Section
   proposal(id: ID!): Proposal!
-  proposalForm(id: Int!): ProposalForm!
+  proposalForm(id: ID!): ProposalForm!
+  question(id: Int!): Question!
 }
 
 # A question
 type Question {
   id: String!
   title: String!
-  inputType: String!
+  type: QuestionTypeValue!
   position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
+}
+
+input QuestionInput {
+  title: String!
+  type: String!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+}
+
+# Value of type of question
+enum QuestionTypeValue {
+  text
+  textarea
+  editor
+  medias
+}
+
+type QuestionnaireAbstractQuestion {
+  id: Int!
+  position: Int
+  question: Question
+}
+
+input QuestionnaireAbstractQuestionInput {
+  question: QuestionInput!
+  position: Int!
 }
 
 type RankingStep implements Step {
@@ -1035,6 +1065,7 @@ input UpdateProposalFormInput {
   zoomMap: Int
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
+  questions: [QuestionnaireAbstractQuestionInput!]
   clientMutationId: String
 }
 

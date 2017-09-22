@@ -87,7 +87,7 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
-    public function resolve(string $proposalId, User $user = null): Proposal
+    public function resolve(int $proposalId, User $user = null): Proposal
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user && $user->isAdmin()) {

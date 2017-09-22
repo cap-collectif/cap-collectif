@@ -49,3 +49,5 @@ UpdateProposalFormInput:
                 type: "[ProposalCategoryInput!]"
             districts:
                 type: "[DistrictInput!]"
+            questions:
+                type: "[QuestionnaireAbstractQuestionInput!]"

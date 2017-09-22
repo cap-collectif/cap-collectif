@@ -76,22 +76,22 @@ Scenario: Anonymous user wants to vote on a selection step that is not open yet
   Given feature "vote_without_account" is enabled
   When I go to a selection step not yet open
   Then the proposal should have 0 votes
-  And the proposal vote button with id "proposal10" must not be present
+  And the proposal vote button with id 10 must not be present
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote on a selection step that is closed
   Given feature "vote_without_account" is enabled
   When I go to a closed selection step
   Then the proposal should have 1 votes
-  And the proposal vote button with id "proposal11" must not be present
+  And the proposal vote button with id 11 must not be present
 
 @javascript @security @elasticsearch @votes_from_selection_step @current
 Scenario: Logged in user wants to vote when he has reached limit in a selection step
   Given I am logged in as user
-  And "user" has voted for proposal "proposal17" in selection step "selection-avec-vote-budget-limite"
+  And "user" has voted for proposal 17 in selection step "selection-avec-vote-budget-limite"
   When I go to a selection step with budget vote limited enabled
-  And the proposal "proposal18" vote button must be disabled
-  When I click the proposal "proposal18" vote button
+  And the proposal 18 vote button must be disabled
+  When I click the proposal 18 vote button
   And I should see the proposal vote limited tooltip
 
 # Votes from proposal page

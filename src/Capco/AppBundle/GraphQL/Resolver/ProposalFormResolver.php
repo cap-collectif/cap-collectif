@@ -52,6 +52,11 @@ class ProposalFormResolver implements ContainerAwareInterface
     public function resolveUrl(ProposalForm $proposalForm): string
     {
         $step = $proposalForm->getStep();
+
+        if (!$step) {
+            return '';
+        }
+
         $project = $step->getProject();
         if (!$project) {
             return '';

@@ -499,30 +499,34 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then proposal :id should be fusioned to the last inserted proposal
+     * @Then proposal :id should be fusioned to proposal :lastId
      */
-    public function proposalShouldBeFusioned(string $id)
+    public function proposalShouldBeFusioned(int $id, int $lastId)
     {
-        $last = $this->getRepository('CapcoAppBundle:Proposal')->findOneBy([], ['createdAt' => 'DESC']);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
         expect($proposal->getParentConnections()->count())->toBe(1);
-        expect($proposal->getParentConnections()->first()->getId())->toBe($last->getId());
+        expect($proposal->getParentConnections()->first()->getId())->toBe($lastId);
     }
 
     /**
-     * @Then the last inserted proposal should have author :username
+     * @Then proposal :id should have author :username
+     *
+     * @param mixed $id
+     * @param mixed $username
      */
-    public function proposalShouldHaveAuthor(string $username)
+    public function proposalShouldHaveAuthor($id, $username)
     {
-        $lastProposal = $this->getRepository('CapcoAppBundle:Proposal')->findOneBy([], ['createdAt' => 'DESC']);
-        expect($lastProposal->getAuthor()->getUsername())->toBe($username);
+        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
+        expect($proposal->getAuthor()->getUsername())->toBe($username);
     }
 
     /**
      * @Given the proposal has :nb votes
      * @Then the proposal should have :nb votes
+     *
+     * @param mixed $nb
      */
-    public function theProposalShouldHaveNbVotes(int $nb)
+    public function theProposalShouldHaveNbVotes($nb)
     {
         $this->iWait(2);
         $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
@@ -532,8 +536,10 @@ trait ProposalStepsTrait
     /**
      * @Given the proposal has :nb comments
      * @Then the proposal should have :nb comments
+     *
+     * @param mixed $nb
      */
-    public function theProposalShouldHaveNbComments(int $nb)
+    public function theProposalShouldHaveNbComments($nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount($this->getProposalId());
         \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number ' . $commentsCount . ' for proposal.');
@@ -552,7 +558,7 @@ trait ProposalStepsTrait
      * @When I click the proposal vote button
      * @When I click the proposal :id vote button
      */
-    public function iClickTheProposalVoteButton(string $id = null)
+    public function iClickTheProposalVoteButton(int $id = null)
     {
         $this->clickProposalVoteButtonWithLabel('Voter pour', $id);
     }
@@ -612,7 +618,7 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have status :statusId
      */
-    public function proposalSelectionShouldHaveStatus(string $selectionStepId, string $proposalId, int $statusId)
+    public function proposalSelectionShouldHaveStatus(string $selectionStepId, int $proposalId, int $statusId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'selectionStep' => $selectionStepId,
@@ -625,7 +631,7 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have no status
      */
-    public function proposalSelectionShouldHaveNoStatus(string $selectionStepId, string $proposalId)
+    public function proposalSelectionShouldHaveNoStatus(string $selectionStepId, int $proposalId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'selectionStep' => $selectionStepId,
@@ -638,7 +644,7 @@ trait ProposalStepsTrait
     /**
      * @Then proposal :proposalId should have status :statusId
      */
-    public function proposalShouldHaveStatus(string $proposalId, int $statusId)
+    public function proposalShouldHaveStatus(int $proposalId, int $statusId)
     {
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         expect($proposal->getStatus()->getId())->toBe($statusId);
@@ -648,7 +654,7 @@ trait ProposalStepsTrait
     /**
      * @Then proposal :proposalId should not have a status
      */
-    public function proposalShouldHaveNoStatus(string $proposalId)
+    public function proposalShouldHaveNoStatus(int $proposalId)
     {
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         expect($proposal->getStatus())->toBe(null);
@@ -658,7 +664,7 @@ trait ProposalStepsTrait
     /**
      * @Then proposal :proposalId should be selected in selection step :stepId
      */
-    public function proposalShouldBeSelected(string $proposalId, string $selectionStepId)
+    public function proposalShouldBeSelected(int $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
@@ -671,7 +677,7 @@ trait ProposalStepsTrait
     /**
      * @Then proposal :proposalId should not be selected in selection step :stepId
      */
-    public function proposalShouldNotBeSelected(string $proposalId, string $selectionStepId)
+    public function proposalShouldNotBeSelected(int $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
@@ -709,7 +715,7 @@ trait ProposalStepsTrait
     /**
      * @Given :userSlug has voted for proposal :proposalId in selection step :stepSlug
      */
-    public function userHasVotedForProposalForStep(string $userSlug, string $proposalId, string $stepSlug)
+    public function userHasVotedForProposalForStep(string $userSlug, int $proposalId, string $stepSlug)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
@@ -724,7 +730,7 @@ trait ProposalStepsTrait
      * @Then the proposal vote button must be disabled
      * @Then the proposal :id vote button must be disabled
      */
-    public function theProposalVoteButtonMustBeDisabled(string $id = null)
+    public function theProposalVoteButtonMustBeDisabled(int $id = null)
     {
         $id = $id ?: $this->getProposalId();
         $button = $this->getCurrentPage()->getVoteButton($id);
@@ -738,9 +744,9 @@ trait ProposalStepsTrait
      * @Then the proposal vote button with id :id must not be present
      * @Then the proposal vote button must not be present
      */
-    public function theProposalVoteButtonWithIdMustNotBePresent(string $id = null)
+    public function theProposalVoteButtonWithIdMustNotBePresent(int $id = 0)
     {
-        $execpetionMessage = $id
+        $execpetionMessage = $id > 0
             ? '"proposal vote button ' . $id . '" element is not present on the page'
             : '"proposal vote button" element is not present on the page';
 
@@ -974,7 +980,7 @@ trait ProposalStepsTrait
             ['proposal_custom-1', 'Réponse à la question 1'],
             ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
         ]);
-        if (false !== $requiredResponse) {
+        if ($requiredResponse !== false) {
             $this->fillField('proposal_custom-3', $requiredResponse);
         }
         $this->fillFields($tableNode);
@@ -1032,25 +1038,25 @@ trait ProposalStepsTrait
         return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithBudgetVoteParams);
     }
 
-    protected function getProposalId(): string
+    protected function getProposalId(): int
     {
         if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
-            return 'proposal2';
+            return 2;
         }
         if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
-            return 'proposal8';
+            return 8;
         }
         if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
-            return 'proposal10';
+            return 10;
         }
         if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
-            return 'proposal11';
+            return 11;
         }
 
         throw new \Exception('Unknown proposalId');
     }
 
-    protected function clickProposalVoteButtonWithLabel(string $label, string $id = null)
+    protected function clickProposalVoteButtonWithLabel(string $label, int $id = null)
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();

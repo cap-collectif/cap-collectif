@@ -1,0 +1,10 @@
+QuestionnaireAbstractQuestion:
+    type: object
+    config:
+        fields:
+            id:
+                type: "Int!"
+            position:
+                type: "Int"
+            question:
+                type: "Question"
