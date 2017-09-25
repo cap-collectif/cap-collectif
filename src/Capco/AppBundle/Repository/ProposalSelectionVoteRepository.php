@@ -79,12 +79,12 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function getCountsByProposalGroupedBySteps(Proposal $proposal): array
     {
-        $ids = array_map(function ($value) {
-            return $value->getId();
+        $titles = array_map(function ($value) {
+            return $value->getTitle();
         }, $proposal->getSelectionSteps());
 
         $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id) as votesCount', 'ss.id as selectionStep')
+            ->select('COUNT(pv.id) as votesCount', 'ss.title as selectionStep')
             ->leftJoin('pv.selectionStep', 'ss')
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.expired = false')
@@ -98,9 +98,9 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $votesBySteps[$result['selectionStep']] = (int) $result['votesCount'];
         }
 
-        foreach ($ids as $id) {
-            if (!array_key_exists($id, $votesBySteps)) {
-                $votesBySteps[$id] = 0;
+        foreach ($titles as $title) {
+            if (!array_key_exists($title, $votesBySteps)) {
+                $votesBySteps[$title] = 0;
             }
         }
 

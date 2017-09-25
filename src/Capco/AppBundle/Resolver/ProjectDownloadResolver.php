@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
 use Liuggio\ExcelBundle\Factory;
+use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -16,6 +17,7 @@ class ProjectDownloadResolver
     protected static $collectHeaders = [
         'id',
         'title',
+        'summary',
         'votesCountByStepId',
         'content_type',
         'author',
@@ -23,14 +25,15 @@ class ProjectDownloadResolver
         'author_email',
         'user_type',
         'category',
-        'summary',
         'content',
         'theme',
+        'address',
         'district',
         'status',
         'estimation',
         'created',
         'updated',
+        'media',
         'link',
         'trashed',
         'trashed_date',
@@ -45,13 +48,16 @@ class ProjectDownloadResolver
     protected $data;
     protected $instanceName;
     protected $withVote;
+    protected $mediaExtension;
 
     public function __construct(
         EntityManager $em,
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
-        Factory $phpexcel
-    ) {
+        Factory $phpexcel,
+        MediaExtension $mediaExtension
+    )
+    {
         $this->em = $em;
         $this->translator = $translator;
         $this->urlArrayResolver = $urlArrayResolver;
@@ -59,6 +65,7 @@ class ProjectDownloadResolver
         $this->headers = [];
         $this->data = [];
         $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        $this->mediaExtension = $mediaExtension;
     }
 
     public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
@@ -150,8 +157,7 @@ class ProjectDownloadResolver
             $proposal['entity_type'] = 'proposal';
             $entity = $this->em
                 ->getRepository('CapcoAppBundle:Proposal')
-                ->find($proposal['id'])
-            ;
+                ->find($proposal['id']);
             $selectionVotesCount = $this->em
                 ->getRepository('CapcoAppBundle:ProposalSelectionVote')
                 ->getCountsByProposalGroupedBySteps($entity);
@@ -233,32 +239,35 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
+        $media = isset($proposal['media'] ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
 
         $item = [
             'id' => $proposal['id'],
             'title' => $proposal['title'],
+            'summary' => $proposal['summary'] ? $proposal['summary'] : '',
             'votesCountByStepId' => $proposal['votesCountByStepId'],
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.proposal',
                 [],
                 'CapcoAppBundle'
             ),
+            'author' => $authorName,
+            'author_id' => $authorId,
+            'author_email' => $authorEmail,
+            'user_type' => $authorType,
             'category' => $proposal['category'] ? $proposal['category']['name'] : '',
-            'summary' => $proposal['summary'],
             'content' => $this->getProposalContent($proposal),
             'link' => $this->urlArrayResolver->getRoute($proposal),
             'created' => $this->dateToString($proposal['createdAt']),
             'updated' => $proposal['updatedAt'] !== $proposal['createdAt'] ? $this->dateToString(
                 $proposal['updatedAt']
             ) : null,
-            'author' => $authorName,
-            'author_id' => $authorId,
-            'author_email' => $authorEmail,
-            'user_type' => $authorType,
+            'media' => $media,
             'trashed' => $this->booleanToString(!$proposal['enabled'] || $proposal['isTrashed']),
             'trashed_date' => $this->dateToString($proposal['trashedAt']),
             'trashed_reason' => $proposal['trashedReason'],
             'theme' => $proposal['theme'] ? $proposal['theme']['title'] : '',
+            'address' => $proposal['address'] ? $this->getFiledAddress($proposal['address']) : '',
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $proposal['status'] ? $proposal['status']['name'] : '',
             'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
@@ -287,10 +296,12 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $vote['email'];
+        $media = isset($proposal['media'] ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
 
         $item = [
             'id' => $vote['id'],
             'title' => $proposal['title'],
+            'summary' => $proposal['summary'] ? $proposal['summary'] : '',
             'votesCountByStepId' => '',
             'content_type' => $this->translator->trans(
                 'project_download.values.content_type.vote',
@@ -302,6 +313,7 @@ class ProjectDownloadResolver
             'link' => $na,
             'created' => $this->dateToString($vote['createdAt']),
             'updated' => $na,
+            'media' => $media,
             'author' => $authorName,
             'author_id' => $authorId,
             'author_email' => $authorEmail,
@@ -310,6 +322,7 @@ class ProjectDownloadResolver
             'trashed_date' => $na,
             'trashed_reason' => $na,
             'theme' => $proposal['theme'] ? $proposal['theme']['title'] : '',
+            'address' => $proposal['address'] ? $this->getFiledAddress($proposal['address']) : '',
             'district' => $proposal['district'] ? $proposal['district']['name'] : '',
             'status' => $na,
             'estimation' => $na,
@@ -338,7 +351,7 @@ class ProjectDownloadResolver
             'author' => $reply['author']['username'],
             'author_id' => $reply['author']['id'],
             'author_email' => $reply['author']['email'],
-            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
+            'phone' => $reply['author']['phone'] ? (string)$reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
         ];
@@ -445,6 +458,7 @@ class ProjectDownloadResolver
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
                 $headerKey = is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
+
                 $sheet->setCellValue($currentColumn . $currentRow, $row[$headerKey]);
                 ++$currentColumn;
             }
@@ -453,5 +467,20 @@ class ProjectDownloadResolver
 
         // create the writer
         return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
+    }
+
+
+    // TODO move this function when we have Map util class
+    private function getFiledAddress($address): string
+    {
+        if (!$address) {
+            return '';
+        }
+
+        if (!is_array($address)) {
+            return \GuzzleHttp\json_decode($address, true)[0]['formatted_address'];
+        }
+
+        return $address[0]['formatted_address'];
     }
 }
