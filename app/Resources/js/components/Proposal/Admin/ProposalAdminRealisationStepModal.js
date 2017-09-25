@@ -19,19 +19,14 @@ export const ProposalAdminRealisationStepModal = React.createClass({
   render() {
     const { member, show, isCreating, onClose } = this.props;
     return (
-      <Modal
-        show={show}
-        onHide={onClose}
-        aria-labelledby="report-modal-title-lg">
+      <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
             children={
               <FormattedMessage
                 id={
-                  isCreating
-                    ? 'Créer une phase de réalisation'
-                    : 'Modifier la phase de réalisation'
+                  isCreating ? 'Créer une phase de réalisation' : 'Modifier la phase de réalisation'
                 }
               />
             }
@@ -55,7 +50,14 @@ export const ProposalAdminRealisationStepModal = React.createClass({
           />
           <Field
             timeFormat={false}
-            label="Date de fin (facultatif)"
+            label={
+              <span>
+                <FormattedMessage id="global.endDate" />{' '}
+                <span className="excerpt">
+                  <FormattedMessage id="global.form.optional" />
+                </span>
+              </span>
+            }
             id={`${member}.endAt`}
             name={`${member}.endAt`}
             type="datetime"
@@ -64,11 +66,7 @@ export const ProposalAdminRealisationStepModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-          <SubmitButton
-            label="global.validate"
-            isSubmitting={false}
-            onSubmit={onClose}
-          />
+          <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onClose} />
         </Modal.Footer>
       </Modal>
     );
