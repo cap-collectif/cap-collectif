@@ -599,9 +599,6 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "likers": @array@,
         "_links": @...@
       },
-<<<<<<< HEAD
-      @...@
-=======
       {
         "id": @integer@,
         "body": @string@,
@@ -623,8 +620,8 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
           "color": @string@
         },
         "category": {
-          "id": @integer@,
-          "name": @string@
+          "id": "pCategory2",
+          "name": "Politique"
         },
         "author": @...@,
         "proposalForm": {
@@ -641,8 +638,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
-      }
->>>>>>> Fix theme ids
+      },
     ],
     "count": 2,
     "order": "last"
