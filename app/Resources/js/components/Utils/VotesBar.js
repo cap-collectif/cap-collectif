@@ -95,11 +95,7 @@ const VotesBar = React.createClass({
       <OverlayTrigger
         rootClose
         placement="top"
-        overlay={
-          <Tooltip id="votes-bar-tooltip">
-            {helpText}
-          </Tooltip>
-        }>
+        overlay={<Tooltip id="votes-bar-tooltip">{helpText}</Tooltip>}>
         {children}
       </OverlayTrigger>
     );

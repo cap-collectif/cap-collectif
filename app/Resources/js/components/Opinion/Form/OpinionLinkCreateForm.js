@@ -54,14 +54,12 @@ export const OpinionLinkCreateForm = React.createClass({
           type="select"
           component={renderInput}
           disableValidation>
-          <option disabled>
-            {<FormattedMessage id="global.select" />}
-          </option>
-          {availableTypes.map((type, i) =>
+          <option disabled>{<FormattedMessage id="global.select" />}</option>
+          {availableTypes.map((type, i) => (
             <option key={i} value={type.id}>
               {type.title}
-            </option>,
-          )}
+            </option>
+          ))}
         </Field>
         <Field
           name="title"
@@ -79,7 +77,7 @@ export const OpinionLinkCreateForm = React.createClass({
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
-        {currentType.appendixTypes.map((field, index) =>
+        {currentType.appendixTypes.map((field, index) => (
           <Field
             key={index}
             component={renderInput}
@@ -87,8 +85,8 @@ export const OpinionLinkCreateForm = React.createClass({
             label={field.title}
             type="editor"
             id={`opinion_appendix-${index + 1}`}
-          />,
-        )}
+          />
+        ))}
       </form>
     );
   },

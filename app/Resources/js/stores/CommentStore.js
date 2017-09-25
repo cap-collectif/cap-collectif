@@ -1,8 +1,11 @@
-import { RECEIVE_COMMENTS, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE } from '../constants/CommentConstants';
+import {
+  RECEIVE_COMMENTS,
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_FAILURE,
+} from '../constants/CommentConstants';
 import BaseStore from './BaseStore';
 
 class CommentStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -68,7 +71,6 @@ class CommentStore extends BaseStore {
     this._messages.errors = [];
     this._messages.success = [];
   }
-
 }
 
 export default new CommentStore();

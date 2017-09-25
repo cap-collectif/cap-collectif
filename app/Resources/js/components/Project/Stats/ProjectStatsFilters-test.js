@@ -34,9 +34,7 @@ describe('<ProjectStatsFilters />', () => {
   });
 
   it('should render only categories filter', () => {
-    const wrapper = shallow(
-      <ProjectStatsFilters {...propsWithoutDistrictsAndThemes} />,
-    );
+    const wrapper = shallow(<ProjectStatsFilters {...propsWithoutDistrictsAndThemes} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -47,9 +47,7 @@ const ImageUpload = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    const value = nextProps.valueLink
-      ? nextProps.valueLink.value
-      : nextProps.value;
+    const value = nextProps.valueLink ? nextProps.valueLink.value : nextProps.value;
     if (value) {
       this.setState({
         preview: value.preview,
@@ -153,20 +151,24 @@ const ImageUpload = React.createClass({
             disablePreview={disablePreview}
             className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
-              {multiple
-                ? <FormattedMessage id="global.image_uploader.file.dropzone" />
-                : <FormattedMessage id="global.image_uploader.image.dropzone" />}
+              {multiple ? (
+                <FormattedMessage id="global.image_uploader.file.dropzone" />
+              ) : (
+                <FormattedMessage id="global.image_uploader.image.dropzone" />
+              )}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn">
-                  {multiple
-                    ? <FormattedMessage id="global.image_uploader.file.btn" />
-                    : <FormattedMessage id="global.image_uploader.image.btn" />}
+                  {multiple ? (
+                    <FormattedMessage id="global.image_uploader.file.btn" />
+                  ) : (
+                    <FormattedMessage id="global.image_uploader.image.btn" />
+                  )}
                 </Button>
               </p>
             </div>
           </Dropzone>
         </Col>
-        {disablePreview &&
+        {disablePreview && (
           <Col xs={12} sm={12}>
             <Row>
               {this.state.files.map(file => {
@@ -184,8 +186,9 @@ const ImageUpload = React.createClass({
                 );
               })}
             </Row>
-          </Col>}
-        {!disablePreview &&
+          </Col>
+        )}
+        {!disablePreview && (
           <Col xs={12} sm={12}>
             <p className="h5 text-center">
               {<FormattedMessage id="global.image_uploader.image.preview" />}
@@ -193,17 +196,17 @@ const ImageUpload = React.createClass({
             <div className="image-uploader__preview text-center">
               {this.state.preview && <img alt="" src={this.state.preview} />}
             </div>
-            {(this.state.preview || preview) &&
-              <Input
-                type="checkbox"
-                name="image-uploader__delete"
-                onChange={this.onToggleDelete}
-                ref={c => (this._deleteCheckbox = c)}
-                children={
-                  <FormattedMessage id="global.image_uploader.image.delete" />
-                }
-              />}
-          </Col>}
+            {(this.state.preview || preview) && (
+                <Input
+                  type="checkbox"
+                  name="image-uploader__delete"
+                  onChange={this.onToggleDelete}
+                  ref={c => (this._deleteCheckbox = c)}
+                  children={<FormattedMessage id="global.image_uploader.image.delete" />}
+                />
+              )}
+          </Col>
+        )}
       </Row>
     );
   },

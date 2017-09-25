@@ -28,9 +28,7 @@ export const Toggle = React.createClass({
             checked={input.value}
             onChange={input.onChange}
           />
-          <span style={{ marginLeft: 10 }}>
-            {label}
-          </span>
+          <span style={{ marginLeft: 10 }}>{label}</span>
         </label>
         {touched && error}
       </div>

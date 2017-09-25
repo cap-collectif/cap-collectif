@@ -71,9 +71,7 @@ const Editor = React.createClass({
 
       if (valueLink) {
         // eslint-disable-next-line no-console
-        console.warn(
-          'This is deprecated please use redux-form instead of valueLink.',
-        );
+        console.warn('This is deprecated please use redux-form instead of valueLink.');
         const defaultValue = valueLink.value;
         if (defaultValue) {
           this._editor.setHTML(defaultValue);

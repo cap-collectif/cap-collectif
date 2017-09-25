@@ -17,10 +17,7 @@ export const ProposalMediaResponse = React.createClass({
           return (
             <Col xs={12} md={12} lg={12} key={key}>
               <i className="capco cap-file-1-1" />&nbsp;
-              <a
-                className="external-link"
-                href={media.url}
-                rel="noopener noreferrer">
+              <a className="external-link" href={media.url} rel="noopener noreferrer">
                 {media.name} ({media.size})
               </a>
             </Col>

@@ -38,9 +38,7 @@ export const ShieldPage = React.createClass({
       );
     }
     return (
-      <div
-        style={{ background: 'white' }}
-        className="col-md-4 col-md-offset-4 panel panel-default">
+      <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
         <div className="panel-body">
           <form id="login-form" onSubmit={onSubmit}>
             <LoginBox />
@@ -51,9 +49,11 @@ export const ShieldPage = React.createClass({
               className="btn-block btn-success"
               disabled={submitting}
               bsStyle="primary">
-              {submitting
-                ? <FormattedMessage id="global.loading" />
-                : <FormattedMessage id="global.login_me" />}
+              {submitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="global.login_me" />
+              )}
             </Button>
           </form>
         </div>
@@ -72,8 +72,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(submit('login'));
   },
 });
-const connector: Connector<{}, Props> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default connector(ShieldPage);

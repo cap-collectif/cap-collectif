@@ -37,9 +37,9 @@ const AllVotesModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <Row>
-            {votes.map((vote, key) =>
-              <UserBox key={key} user={vote.user} username={vote.username} />,
-            )}
+            {votes.map((vote, key) => (
+              <UserBox key={key} user={vote.user} username={vote.username} />
+            ))}
           </Row>
         </Modal.Body>
         <Modal.Footer>

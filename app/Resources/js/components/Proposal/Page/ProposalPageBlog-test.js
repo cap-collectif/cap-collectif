@@ -9,16 +9,12 @@ describe('<ProposalPageBlog />', () => {
   };
 
   it('should render a list of posts', () => {
-    const wrapper = shallow(
-      <ProposalPageBlog dispatch={() => {}} proposal={proposal} />,
-    );
+    const wrapper = shallow(<ProposalPageBlog dispatch={() => {}} proposal={proposal} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a text if no posts', () => {
-    const wrapper = shallow(
-      <ProposalPageBlog dispatch={() => {}} proposal={{ posts: [] }} />,
-    );
+    const wrapper = shallow(<ProposalPageBlog dispatch={() => {}} proposal={{ posts: [] }} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

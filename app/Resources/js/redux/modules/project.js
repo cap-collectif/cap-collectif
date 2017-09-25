@@ -103,10 +103,7 @@ export function* fetchProjectsSaga(): Generator<*, *, *> {
       theme: state.theme || undefined,
       page: state.page || undefined,
     };
-    const result: Object = yield call(
-      Fetcher.get,
-      `/projects?${stringify(queryStrings)}`,
-    );
+    const result: Object = yield call(Fetcher.get, `/projects?${stringify(queryStrings)}`);
     const succeedAction: ReceivedProjectSucceedAction = {
       type: 'project/PROJECTS_FETCH_SUCCEEDED',
       project: result,
@@ -121,10 +118,7 @@ export function* saga(): Generator<*, *, *> {
   yield [takeEvery('project/PROJECTS_FETCH_REQUESTED', fetchProjectsSaga)];
 }
 
-export const reducer = (
-  state: State = initialState,
-  action: Action,
-): Exact<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };

@@ -38,8 +38,12 @@ class CustomDiff extends Diff {
   pDiff(oldValue, newValue) {
     let prettyDiff = '';
     // Compute diff
-    const oldV = $('<div/>').text(oldValue).html();
-    const newV = $('<div/>').text(newValue).html();
+    const oldV = $('<div/>')
+      .text(oldValue)
+      .html();
+    const newV = $('<div/>')
+      .text(newValue)
+      .html();
     const diff = this.diff(oldV, newV);
     // All text has been replaced
     if (everythingHasChanged(diff)) {
@@ -52,10 +56,7 @@ class CustomDiff extends Diff {
       const htmlTag = part.removed ? 'del' : part.added ? 'ins' : 'span';
       const open = `<${htmlTag} style="color: ${diffColor}; text-decoration: ${decoration}">`;
       const close = `</${htmlTag}>`;
-      const content = part.value.replace(
-        /<parend>/g,
-        `${close}<parend>${open}`,
-      );
+      const content = part.value.replace(/<parend>/g, `${close}<parend>${open}`);
       const styledPart = open + content + close;
       prettyDiff += styledPart;
     });

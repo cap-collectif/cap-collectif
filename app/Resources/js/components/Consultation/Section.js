@@ -18,14 +18,12 @@ export const Section = React.createClass({
         className={`anchor-offset text-center opinion-type__title level--${level}`}>
         {section.title}
         <br />
-        {section.subtitle &&
-          <span className="small excerpt">
-            {section.subtitle}
-          </span>}
-        {(section.contributionsCount > 0 || section.contribuable) &&
-          <div style={{ marginTop: 15 }}>
-            <OpinionList consultation={consultation} section={section} />
-          </div>}
+        {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
+        {(section.contributionsCount > 0 || section.contribuable) && (
+            <div style={{ marginTop: 15 }}>
+              <OpinionList consultation={consultation} section={section} />
+            </div>
+          )}
       </div>
     );
   },

@@ -33,8 +33,7 @@ export const IdeasListFilters = React.createClass({
     const { onChange } = this.props;
     if (
       prevState &&
-      (prevState.order !== this.state.order ||
-        prevState.theme !== this.state.theme)
+      (prevState.order !== this.state.order || prevState.theme !== this.state.theme)
     ) {
       this.reload();
       onChange();
@@ -75,11 +74,12 @@ export const IdeasListFilters = React.createClass({
     const { features, onChange, themes } = this.props;
     return (
       <Row className="filter">
-        {features.idea_creation &&
+        {features.idea_creation && (
           <Col xs={12} sm={3} lg={2}>
             <IdeaCreate themes={themes} className="form-group" />
-          </Col>}
-        {features.themes &&
+          </Col>
+        )}
+        {features.themes && (
           <Col xs={12} sm={3}>
             <Input
               type="select"
@@ -87,10 +87,7 @@ export const IdeasListFilters = React.createClass({
               onChange={this.handleThemeChange}
               value={this.state.theme || '0'}>
               <FormattedMessage id="global.select_themes">
-                {message =>
-                  <option value="0">
-                    {message}
-                  </option>}
+                {message => <option value="0">{message}</option>}
               </FormattedMessage>
               {themes.map(theme => {
                 return (
@@ -100,7 +97,8 @@ export const IdeasListFilters = React.createClass({
                 );
               })}
             </Input>
-          </Col>}
+          </Col>
+        )}
         <Col xs={12} sm={3}>
           <Input
             id="idea-sorting"
@@ -110,10 +108,7 @@ export const IdeasListFilters = React.createClass({
             {this.orders.map(choice => {
               return (
                 <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
-                  {message =>
-                    <option value={choice}>
-                      {message}
-                    </option>}
+                  {message => <option value={choice}>{message}</option>}
                 </FormattedMessage>
               );
             })}

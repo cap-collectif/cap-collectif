@@ -44,10 +44,7 @@ const QuestionnaireStepPage = React.createClass({
       <div>
         <StepPageHeader step={step} />
         <UserReplies replies={this.state.userReplies} form={form} />
-        <ReplyCreateFormWrapper
-          form={form}
-          userReplies={this.state.userReplies}
-        />
+        <ReplyCreateFormWrapper form={form} userReplies={this.state.userReplies} />
         <StepPageFooter step={step} />
       </div>
     );

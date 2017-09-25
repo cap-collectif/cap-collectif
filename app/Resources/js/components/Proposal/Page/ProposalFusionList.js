@@ -17,18 +17,13 @@ export const ProposalFusionList = React.createClass({
     return (
       <Panel
         header={
-          <FormattedMessage
-            id={`proposal.fusionned${type}`}
-            values={{ num: list.length }}
-          />
+          <FormattedMessage id={`proposal.fusionned${type}`} values={{ num: list.length }} />
         }>
-        {list.map(p =>
+        {list.map(p => (
           <div>
-            <a href={p.url}>
-              {p.title}
-            </a>
-          </div>,
-        )}
+            <a href={p.url}>{p.title}</a>
+          </div>
+        ))}
       </Panel>
     );
   },

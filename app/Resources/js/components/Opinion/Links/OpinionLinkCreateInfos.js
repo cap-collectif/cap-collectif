@@ -12,9 +12,7 @@ const OpinionLinkCreateInfos = React.createClass({
     return (
       <div>
         <div className="modal-top bg-info">
-          <p>
-            {<FormattedMessage id="opinion.link.infos" />}
-          </p>
+          <p>{<FormattedMessage id="opinion.link.infos" />}</p>
         </div>
         <p>
           {<FormattedMessage id="opinion.link.info" />}{' '}

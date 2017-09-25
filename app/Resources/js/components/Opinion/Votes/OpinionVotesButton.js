@@ -4,10 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import {
-  VOTE_WIDGET_SIMPLE,
-  VOTE_WIDGET_BOTH,
-} from '../../../constants/VoteConstants';
+import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import {
   deleteVoteVersion,
   deleteVoteOpinion,
@@ -118,16 +115,11 @@ export const OpinionVotesButton = React.createClass({
           active={active}
           aria-label={
             <FormattedMessage
-              id={
-                active
-                  ? `vote.aria_label_active.${data.str}`
-                  : `vote.aria_label.${data.str}`
-              }
+              id={active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`}
             />
           }
           disabled={disabled}>
-          <i className={data.icon} />{' '}
-          <FormattedMessage id={`vote.${data.str}`} />
+          <i className={data.icon} /> <FormattedMessage id={`vote.${data.str}`} />
         </Button>
       </LoginOverlay>
     );

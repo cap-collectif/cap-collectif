@@ -414,76 +414,76 @@ export const ProposalForm = React.createClass({
           errors={this.renderFormErrors('summary')}
         />
         {features.themes &&
-        form.usingThemes && (
-          <Input
-            id="proposal_theme"
-            type="select"
-            valueLink={this.linkState('form.theme')}
-            label={themeLabel}
-            groupClassName={this.getGroupStyle('theme')}
-            errors={this.renderFormErrors('theme')}
-            help={form.themeHelpText}>
-            <FormattedMessage id="proposal.select.theme">
-              {message => (
-                <option value={-1} disabled>
-                  {message}
+          form.usingThemes && (
+            <Input
+              id="proposal_theme"
+              type="select"
+              valueLink={this.linkState('form.theme')}
+              label={themeLabel}
+              groupClassName={this.getGroupStyle('theme')}
+              errors={this.renderFormErrors('theme')}
+              help={form.themeHelpText}>
+              <FormattedMessage id="proposal.select.theme">
+                {message => (
+                  <option value={-1} disabled>
+                    {message}
+                  </option>
+                )}
+              </FormattedMessage>
+              {themes.map(theme => (
+                <option key={theme.id} value={theme.id}>
+                  {theme.title}
                 </option>
-              )}
-            </FormattedMessage>
-            {themes.map(theme => (
-              <option key={theme.id} value={theme.id}>
-                {theme.title}
-              </option>
-            ))}
-          </Input>
-        )}
+              ))}
+            </Input>
+          )}
         {categories.length > 0 &&
-        form.usingCategories && (
-          <Input
-            id="proposal_category"
-            type="select"
-            valueLink={this.linkState('form.category')}
-            label={categoryLabel}
-            groupClassName={this.getGroupStyle('category')}
-            errors={this.renderFormErrors('category')}
-            help={form.categoryHelpText}>
-            <FormattedMessage id="proposal.select.category">
-              {message => (
-                <option value={-1} disabled>
-                  {message}
-                </option>
-              )}
-            </FormattedMessage>
-            {categories.map(category => {
-              return (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              );
-            })}
-          </Input>
-        )}
+          form.usingCategories && (
+            <Input
+              id="proposal_category"
+              type="select"
+              valueLink={this.linkState('form.category')}
+              label={categoryLabel}
+              groupClassName={this.getGroupStyle('category')}
+              errors={this.renderFormErrors('category')}
+              help={form.categoryHelpText}>
+              <FormattedMessage id="proposal.select.category">
+                {message => (
+                  <option value={-1} disabled>
+                    {message}
+                  </option>
+                )}
+              </FormattedMessage>
+              {categories.map(category => {
+                return (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })}
+            </Input>
+          )}
         {features.districts &&
-        form.usingDistrict &&
-        form.districts.length > 0 && (
-          <Input
-            id="proposal_district"
-            type="select"
-            valueLink={this.linkState('form.district')}
-            label={districtLabel}
-            groupClassName={this.getGroupStyle('district')}
-            errors={this.renderFormErrors('district')}
-            help={form.districtHelpText}>
-            <FormattedMessage id="proposal.select.district">
-              {message => <option value="">{message}</option>}
-            </FormattedMessage>
-            {form.districts.map(district => (
-              <option key={district.id} value={district.id}>
-                {district.name}
-              </option>
-            ))}
-          </Input>
-        )}
+          form.usingDistrict &&
+          form.districts.length > 0 && (
+            <Input
+              id="proposal_district"
+              type="select"
+              valueLink={this.linkState('form.district')}
+              label={districtLabel}
+              groupClassName={this.getGroupStyle('district')}
+              errors={this.renderFormErrors('district')}
+              help={form.districtHelpText}>
+              <FormattedMessage id="proposal.select.district">
+                {message => <option value="">{message}</option>}
+              </FormattedMessage>
+              {form.districts.map(district => (
+                <option key={district.id} value={district.id}>
+                  {district.name}
+                </option>
+              ))}
+            </Input>
+          )}
         {form.usingAddress && (
           <div
             className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>

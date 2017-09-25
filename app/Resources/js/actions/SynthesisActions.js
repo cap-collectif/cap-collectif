@@ -4,21 +4,16 @@ import * as Actions from '../constants/SynthesisActionsConstants';
 
 export default {
   updateDisplaySettings: (synthesis, settings) => {
-    return Fetcher
-      .put(`/syntheses/${synthesis}/display`, settings)
-    ;
+    return Fetcher.put(`/syntheses/${synthesis}/display`, settings);
   },
 
-  load: (synthesis) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: Actions.RECEIVE_SYNTHESIS,
-          synthesis: data,
-        });
-        return true;
-      })
-    ;
+  load: synthesis => {
+    Fetcher.get(`/syntheses/${synthesis}`).then(data => {
+      AppDispatcher.dispatch({
+        actionType: Actions.RECEIVE_SYNTHESIS,
+        synthesis: data,
+      });
+      return true;
+    });
   },
 };

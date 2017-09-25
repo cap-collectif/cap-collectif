@@ -48,18 +48,15 @@ const ElementTitle = React.createClass({
         <span style={style} className={className} onClick={onClick}>
           {this.renderTitle()}
           {this.props.className === '' &&
-            element.childrenCount > 0 &&
-            <span
-              style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>}
+            element.childrenCount > 0 && (
+              <span style={{ color: 'black' }}>{` (${element.childrenCount})`}</span>
+            )}
         </span>
       );
     }
     if (linkType === 'edition') {
       return (
-        <Link
-          style={style}
-          to={`/element/${element.id}`}
-          className={this.props.className}>
+        <Link style={style} to={`/element/${element.id}`} className={this.props.className}>
           {this.renderTitle()}
         </Link>
       );

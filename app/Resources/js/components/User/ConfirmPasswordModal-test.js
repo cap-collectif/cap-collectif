@@ -9,9 +9,7 @@ describe('<ConfirmPasswordModal />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {
-    const wrapper = shallow(
-      <ConfirmPasswordModal show={false} dispatch={() => {}} />,
-    );
+    const wrapper = shallow(<ConfirmPasswordModal show={false} dispatch={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

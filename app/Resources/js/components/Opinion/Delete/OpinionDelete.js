@@ -71,8 +71,7 @@ const OpinionDelete = React.createClass({
             className="pull-right btn--outline btn-danger"
             onClick={this.showModal}
             style={{ marginLeft: '5px' }}>
-            <i className="cap cap-bin-2" />{' '}
-            {<FormattedMessage id="global.remove" />}
+            <i className="cap cap-bin-2" /> {<FormattedMessage id="global.remove" />}
           </Button>
           <Modal
             animation={false}

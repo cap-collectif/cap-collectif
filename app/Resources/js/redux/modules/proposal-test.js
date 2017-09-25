@@ -41,9 +41,7 @@ describe('Proposal Sagas', () => {
       proposalId: 1,
     });
     const posts = [];
-    expect(generator.next().value).toEqual(
-      call(Fetcher.get, '/proposals/1/posts'),
-    );
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/1/posts'));
     expect(generator.next({ posts }).value).toEqual(
       put({
         type: 'proposal/POSTS_FETCH_SUCCEEDED',

@@ -22,11 +22,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders a form with user_type select if enabled', () => {
     const wrapper = shallow(
-      <RegistrationForm
-        {...props}
-        userTypes={[{ id: 1, name: 'type_1' }]}
-        addUserTypeField
-      />,
+      <RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} addUserTypeField />,
     );
     expect(wrapper).toMatchSnapshot();
   });

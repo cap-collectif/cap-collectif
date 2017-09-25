@@ -51,8 +51,7 @@ const OpinionVersionsBox = React.createClass({
     this.setState({ isLoading: true });
 
     Fetcher.get(
-      `/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this
-        .state.filter}`,
+      `/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`,
     ).then(data => {
       this.setState({
         isLoading: false,
@@ -67,9 +66,7 @@ const OpinionVersionsBox = React.createClass({
     if (this.state.versions.length > 1) {
       return (
         <form>
-          <label
-            htmlFor="filter-opinion-version"
-            className="control-label h5 sr-only">
+          <label htmlFor="filter-opinion-version" className="control-label h5 sr-only">
             <FormattedMessage id="opinion.version.filter" />
           </label>
           <select
@@ -79,40 +76,22 @@ const OpinionVersionsBox = React.createClass({
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
-              {message =>
-                <option value="random">
-                  {message}
-                </option>}
+              {message => <option value="random">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_last">
-              {message =>
-                <option value="last">
-                  {message}
-                </option>}
+              {message => <option value="last">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_old">
-              {message =>
-                <option value="old">
-                  {message}
-                </option>}
+              {message => <option value="old">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_favorable">
-              {message =>
-                <option value="favorable">
-                  {message}
-                </option>}
+              {message => <option value="favorable">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_votes">
-              {message =>
-                <option value="votes">
-                  {message}
-                </option>}
+              {message => <option value="votes">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_comments">
-              {message =>
-                <option value="comments">
-                  {message}
-                </option>}
+              {message => <option value="comments">{message}</option>}
             </FormattedMessage>
           </select>
         </form>
@@ -132,12 +111,14 @@ const OpinionVersionsBox = React.createClass({
             {this.renderFilter()}
           </Col>
         </Row>
-        {!this.state.isLoading
-          ? <OpinionVersionList
-              versions={this.state.versions}
-              rankingThreshold={this.state.rankingThreshold}
-            />
-          : <Loader />}
+        {!this.state.isLoading ? (
+          <OpinionVersionList
+            versions={this.state.versions}
+            rankingThreshold={this.state.rankingThreshold}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   },

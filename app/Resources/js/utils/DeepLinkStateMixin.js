@@ -29,7 +29,7 @@ const DeepLinkStateMixin = {
   linkState(path) {
     return {
       value: getPath(this.state, path),
-      requestChange: (newValue) => {
+      requestChange: newValue => {
         setPath(this.state, path, newValue);
         this.forceUpdate();
       },

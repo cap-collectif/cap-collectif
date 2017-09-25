@@ -37,11 +37,7 @@ const FlashMessages = React.createClass({
     }
   },
 
-  renderMessage(
-    index: number,
-    message: string,
-    type: string,
-  ): ?React.Element<any> {
+  renderMessage(index: number, message: string, type: string): ?React.Element<any> {
     const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (
@@ -49,12 +45,8 @@ const FlashMessages = React.createClass({
           key={index}
           bsStyle={type}
           style={style}
-          onDismiss={
-            onDismissMessage ? onDismissMessage.bind(null, message, type) : null
-          }>
-          <p>
-            {this.renderText(message)}
-          </p>
+          onDismiss={onDismissMessage ? onDismissMessage.bind(null, message, type) : null}>
+          <p>{this.renderText(message)}</p>
         </Alert>
       );
     }

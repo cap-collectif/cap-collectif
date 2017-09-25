@@ -19,8 +19,7 @@ const ProjectPreviewProgressBar = React.createClass({
     const { project } = this.props;
     const completedStepsNb = this.getCompletedStepsNb();
     const total = project.steps.length;
-    const percentage =
-      completedStepsNb > 0 && total > 0 ? completedStepsNb / total * 100 : 0;
+    const percentage = completedStepsNb > 0 && total > 0 ? completedStepsNb / total * 100 : 0;
     return Math.round(percentage);
   },
 
@@ -31,17 +30,9 @@ const ProjectPreviewProgressBar = React.createClass({
       const width = `${100 / nbSteps}%`;
       return (
         <div className="thumbnail__steps-bar">
-          {project.steps
-            .sort((a, b) => a.position - b.position)
-            .map((step, index) => {
-              return (
-                <ProjectPreviewProgressBarItem
-                  key={index}
-                  step={step}
-                  style={{ width }}
-                />
-              );
-            })}
+          {project.steps.sort((a, b) => a.position - b.position).map((step, index) => {
+            return <ProjectPreviewProgressBarItem key={index} step={step} style={{ width }} />;
+          })}
           <span className="thumbnail__steps-bar__percentage">
             {`${this.getCompletedStepsPercentage()}%`}
           </span>

@@ -2,7 +2,6 @@ import BaseStore from './BaseStore';
 import { RECEIVE_CATEGORIES } from '../constants/CategoriesConstants';
 
 class CategoriesStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -23,7 +22,6 @@ class CategoriesStore extends BaseStore {
   get categories() {
     return this._categories;
   }
-
 }
 
 export default new CategoriesStore();

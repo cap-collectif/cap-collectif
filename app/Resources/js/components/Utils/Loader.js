@@ -4,10 +4,7 @@ import React, { PropTypes } from 'react';
 const Loader = React.createClass({
   propTypes: {
     show: PropTypes.bool,
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.arrayOf(PropTypes.node),
-    ]),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   },
 
   getDefaultProps() {
@@ -28,11 +25,7 @@ const Loader = React.createClass({
         </div>
       );
     }
-    return Array.isArray(children)
-      ? <div>
-          {children}
-        </div>
-      : children;
+    return Array.isArray(children) ? <div>{children}</div> : children;
   },
 });
 

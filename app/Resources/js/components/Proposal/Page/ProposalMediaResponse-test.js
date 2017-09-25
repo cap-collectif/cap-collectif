@@ -15,8 +15,14 @@ describe('<ProposalMediaResponse />', () => {
     const wrapper = shallow(<ProposalMediaResponse {...props} />);
     expect(wrapper.find('Row')).toHaveLength(1);
     expect(wrapper.find('Col')).toHaveLength(2);
-    const link1 = wrapper.find('Col').at(0).find('a');
-    const link2 = wrapper.find('Col').at(1).find('a');
+    const link1 = wrapper
+      .find('Col')
+      .at(0)
+      .find('a');
+    const link2 = wrapper
+      .find('Col')
+      .at(1)
+      .find('a');
     expect(link1.text()).toEqual('Media1 (2 Mo)');
     expect(link2.text()).toEqual('Media2 (2 Mo)');
     expect(link1.props().href).toEqual('/media/1.jpg');

@@ -33,8 +33,7 @@ const OpinionSourceButtons = React.createClass({
     const { source, dispatch } = this.props;
     return (
       <div>
-        <OpinionSourceVoteBox source={source} />{' '}
-        <OpinionSourceReportButton source={source} />
+        <OpinionSourceVoteBox source={source} /> <OpinionSourceReportButton source={source} />
         <EditButton
           onClick={() => {
             dispatch(showSourceEditModal(source.id));

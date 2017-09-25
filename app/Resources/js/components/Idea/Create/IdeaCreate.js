@@ -8,10 +8,7 @@ import IdeaCreateButton from './IdeaCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import IdeaCreateForm, { formName } from './IdeaCreateForm';
-import {
-  showIdeaCreateModal,
-  hideIdeaCreateModal,
-} from '../../../redux/modules/idea';
+import { showIdeaCreateModal, hideIdeaCreateModal } from '../../../redux/modules/idea';
 import type { State } from '../../../types';
 
 export const IdeaCreate = React.createClass({
@@ -32,14 +29,7 @@ export const IdeaCreate = React.createClass({
   },
 
   render() {
-    const {
-      className,
-      themeId,
-      themes,
-      dispatch,
-      submitting,
-      show,
-    } = this.props;
+    const { className, themeId, themes, dispatch, submitting, show } = this.props;
     return (
       <div className={className}>
         <IdeaCreateButton

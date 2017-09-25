@@ -50,19 +50,11 @@ const VoteButtonOverlay = React.createClass({
         <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_help" />
       );
     } else if (!hasUserEnoughCredits) {
-      title = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_title" />
-      );
-      content = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_text" />
-      );
-      help = (
-        <FormattedMessage id="proposal.vote.popover.not_enough_credits_help" />
-      );
+      title = <FormattedMessage id="proposal.vote.popover.not_enough_credits_title" />;
+      content = <FormattedMessage id="proposal.vote.popover.not_enough_credits_text" />;
+      help = <FormattedMessage id="proposal.vote.popover.not_enough_credits_help" />;
     } else if (hasReachedLimit) {
-      title = (
-        <FormattedMessage id="proposal.vote.popover.limit_reached_title" />
-      );
+      title = <FormattedMessage id="proposal.vote.popover.limit_reached_title" />;
       content = (
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_text"

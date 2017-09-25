@@ -63,11 +63,13 @@ const ProposalVoteButton = React.createClass({
         onClick={disabled ? null : action}
         active={userHasVote}
         disabled={disabled || isDeleting}>
-        {isDeleting
-          ? <FormattedMessage id="proposal.vote.deleting" />
-          : user && userHasVote
-            ? <FormattedMessage id="proposal.vote.delete" />
-            : <FormattedMessage id="proposal.vote.add" />}
+        {isDeleting ? (
+          <FormattedMessage id="proposal.vote.deleting" />
+        ) : user && userHasVote ? (
+          <FormattedMessage id="proposal.vote.delete" />
+        ) : (
+          <FormattedMessage id="proposal.vote.add" />
+        )}
       </Button>
     );
   },
@@ -76,8 +78,7 @@ const ProposalVoteButton = React.createClass({
 const mapStateToProps = (state, props) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
   userHasVote:
-    props.step &&
-    state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
+    props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
 });
 
 export default connect(mapStateToProps)(ProposalVoteButton);

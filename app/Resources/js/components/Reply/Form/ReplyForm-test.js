@@ -87,12 +87,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         form={{
-          fields: [
-            requiredText,
-            requiredRadio,
-            facultativeSelect,
-            facultativeRanking,
-          ],
+          fields: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
         }}
         {...props}
       />,
@@ -120,10 +115,7 @@ describe('<ReplyForm />', () => {
 
   it('should render correctly with majority of required fields', () => {
     const wrapper = shallow(
-      <ReplyForm
-        form={{ fields: [requiredText, requiredRadio, facultativeRanking] }}
-        {...props}
-      />,
+      <ReplyForm form={{ fields: [requiredText, requiredRadio, facultativeRanking] }} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

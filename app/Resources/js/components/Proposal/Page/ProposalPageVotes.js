@@ -6,11 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 import { PROPOSAL_VOTES_TO_SHOW } from '../../../constants/ProposalConstants';
-import {
-  loadVotes,
-  openVotesModal,
-  closeVotesModal,
-} from '../../../redux/modules/proposal';
+import { loadVotes, openVotesModal, closeVotesModal } from '../../../redux/modules/proposal';
 
 const ProposalPageVotes = React.createClass({
   propTypes: {
@@ -51,16 +47,16 @@ const ProposalPageVotes = React.createClass({
           />
         </h2>
         <Row>
-          {votesToDisplay.map((vote, key) =>
+          {votesToDisplay.map((vote, key) => (
             <UserBox
               key={key}
               user={vote.user}
               username={vote.username}
               className="proposal__vote"
-            />,
-          )}
+            />
+          ))}
         </Row>
-        {moreVotes &&
+        {moreVotes && (
           <Button
             bsStyle="primary"
             onClick={() => {
@@ -68,7 +64,8 @@ const ProposalPageVotes = React.createClass({
             }}
             className="btn--outline">
             <FormattedMessage id="proposal.vote.show_more" />
-          </Button>}
+          </Button>
+        )}
         <AllVotesModal
           votes={votes}
           onToggleModal={() => {

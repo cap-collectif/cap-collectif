@@ -1,4 +1,4 @@
-export const bootstrapToHex = (key) => {
+export const bootstrapToHex = key => {
   switch (key) {
     case 'warning':
       return '#f0ad4e';

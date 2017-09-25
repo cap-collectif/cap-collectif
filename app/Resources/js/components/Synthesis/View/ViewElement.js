@@ -49,13 +49,8 @@ const ViewElement = React.createClass({
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'author')) {
       return (
         <div className="synthesis__element__author">
-          <UserAvatar
-            className="pull-left"
-            style={{ marginRight: '15px', marginTop: '15px' }}
-          />
-          <span>
-            {element.authorName}
-          </span>
+          <UserAvatar className="pull-left" style={{ marginRight: '15px', marginTop: '15px' }} />
+          <span>{element.authorName}</span>
         </div>
       );
     }
@@ -65,9 +60,7 @@ const ViewElement = React.createClass({
   renderPieChart() {
     const { element, settings } = this.props;
     const votes = element.votes;
-    if (
-      SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')
-    ) {
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')) {
       return (
         <div className="synthesis__element__votes">
           <VotePiechart
@@ -94,23 +87,21 @@ const ViewElement = React.createClass({
 
   renderCounters() {
     const { element, settings } = this.props;
-    if (
-      SynthesisDisplayRules.getValueForRule(settings, 'display', 'counters')
-    ) {
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'counters')) {
       return (
         <div className="synthesis__element__counters">
           <FormattedMessage
             id="synthesis.counter.contributions"
             values={{ nb: element.publishedChildrenCount }}
           />
-          {element.linkedDataUrl
-            ? <a
-                style={{ marginLeft: '15px' }}
-                href={element.linkedDataUrl}
-                onClick={this.openOriginalContribution}>
-                <FormattedMessage id="synthesis.counter.link" />
-              </a>
-            : null}
+          {element.linkedDataUrl ? (
+            <a
+              style={{ marginLeft: '15px' }}
+              href={element.linkedDataUrl}
+              onClick={this.openOriginalContribution}>
+              <FormattedMessage id="synthesis.counter.link" />
+            </a>
+          ) : null}
         </div>
       );
     }
@@ -123,39 +114,23 @@ const ViewElement = React.createClass({
       SynthesisDisplayRules.getValueForRule(settings, 'display', 'subtitle') &&
       element.subtitle
     ) {
-      return (
-        <p className="small excerpt">
-          {element.subtitle}
-        </p>
-      );
+      return <p className="small excerpt">{element.subtitle}</p>;
     }
     return null;
   },
 
   renderPercentage() {
     const { element, parent, settings } = this.props;
-    if (
-      SynthesisDisplayRules.getValueForRule(
-        settings,
-        'display',
-        'percentage',
-      ) &&
-      parent
-    ) {
+    if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
       return (
         <OverlayTrigger
           placement="top"
           overlay={
             <Tooltip>
-              <SynthesisPourcentageTooltipLabel
-                element={element}
-                parent={parent}
-              />
+              <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
             </Tooltip>
           }>
-          <span className="small excerpt pull-right">
-            {calculPourcentage(element, parent)}%
-          </span>
+          <span className="small excerpt pull-right">{calculPourcentage(element, parent)}%</span>
         </OverlayTrigger>
       );
     }
@@ -165,11 +140,7 @@ const ViewElement = React.createClass({
   renderDescription() {
     const { element } = this.props;
     if (element.description) {
-      return (
-        <p className="synthesis__element__description">
-          {element.description}
-        </p>
-      );
+      return <p className="synthesis__element__description">{element.description}</p>;
     }
   },
 
@@ -186,9 +157,7 @@ const ViewElement = React.createClass({
         element={element}
         hasLink={false}
         style={SynthesisDisplayRules.buildStyle(settings)}
-        onClick={
-          childrenModal ? this.toggleChildrenModal.bind(null, true) : null
-        }
+        onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
     );
   },
@@ -202,10 +171,7 @@ const ViewElement = React.createClass({
             placement="top"
             overlay={
               <Tooltip>
-                <SynthesisPourcentageTooltipLabel
-                  element={element}
-                  parent={parent}
-                />
+                <SynthesisPourcentageTooltipLabel element={element} parent={parent} />
               </Tooltip>
             }>
             <div className="synthesis__element__bar">
@@ -230,16 +196,14 @@ const ViewElement = React.createClass({
         style={SynthesisDisplayRules.buildStyle(settings, 'containerStyle')}>
         {this.renderAuthor()}
         <div style={SynthesisDisplayRules.buildStyle(settings)}>
-          {SynthesisDisplayRules.getValueForRule(
-            settings,
-            'display',
-            'asProgressBar',
-          )
-            ? this.renderAsProgressBar()
-            : <p>
-                {this.renderTitle()}
-                {this.renderPercentage()}
-              </p>}
+          {SynthesisDisplayRules.getValueForRule(settings, 'display', 'asProgressBar') ? (
+            this.renderAsProgressBar()
+          ) : (
+            <p>
+              {this.renderTitle()}
+              {this.renderPercentage()}
+            </p>
+          )}
           {this.renderSubtitle()}
         </div>
         {this.renderCounters()}

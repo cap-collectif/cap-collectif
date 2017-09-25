@@ -17,17 +17,17 @@ const IdeaPreviewFooter = React.createClass({
               num: idea.votesCount,
             }}
           />
-          {idea.commentable
-            ? <span>
-                {' • '}
-                <FormattedMessage
-                  id="idea.preview.counters.comments"
-                  values={{
-                    num: idea.commentsCount,
-                  }}
-                />
-              </span>
-            : null}
+          {idea.commentable ? (
+            <span>
+              {' • '}
+              <FormattedMessage
+                id="idea.preview.counters.comments"
+                values={{
+                  num: idea.commentsCount,
+                }}
+              />
+            </span>
+          ) : null}
         </span>
       </div>
     );

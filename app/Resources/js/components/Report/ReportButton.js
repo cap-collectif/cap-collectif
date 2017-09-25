@@ -43,9 +43,11 @@ export const ReportButton = React.createClass({
           active={reported}
           disabled={reported}>
           <i className="cap cap-flag-1" />{' '}
-          {reported
-            ? <FormattedMessage id="global.report.reported" />
-            : <FormattedMessage id="global.report.submit" />}
+          {reported ? (
+            <FormattedMessage id="global.report.reported" />
+          ) : (
+            <FormattedMessage id="global.report.submit" />
+          )}
         </Button>
       </LoginOverlay>
     );

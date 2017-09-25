@@ -18,25 +18,16 @@ const UserBox = React.createClass({
   },
 
   render() {
-    const {
-      user,
-      username,
-      className,
-    } = this.props;
+    const { user, username, className } = this.props;
     if (!user && !username) {
       return null;
     }
     return (
       <Col xs={12} sm={6} md={4} lg={3} className={className}>
-        <UserPreview
-          className="block block--bordered"
-          user={user}
-          username={username}
-        />
+        <UserPreview className="block block--bordered" user={user} username={username} />
       </Col>
     );
   },
-
 });
 
 export default UserBox;

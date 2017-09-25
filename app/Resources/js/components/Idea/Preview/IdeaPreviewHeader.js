@@ -16,18 +16,20 @@ const IdeaPreviewHeader = React.createClass({
         <UserAvatar user={idea.author} className="pull-left idea__avatar" />
         <div className="idea__author">
           <UserLink user={idea.author} className="small" />
-          <p className="excerpt small idea__date" >
+          <p className="excerpt small idea__date">
             <FormattedDate
               value={moment(idea.createdAt)}
-              day="numeric" month="long" year="numeric"
-              hour="numeric" minute="numeric"
+              day="numeric"
+              month="long"
+              year="numeric"
+              hour="numeric"
+              minute="numeric"
             />
           </p>
         </div>
       </div>
     );
   },
-
 });
 
 export default IdeaPreviewHeader;

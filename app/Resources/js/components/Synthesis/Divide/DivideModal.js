@@ -1,15 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-import {
-  Modal,
-  Button,
-  Grid,
-  Row,
-  Col,
-  OverlayTrigger,
-  Popover,
-} from 'react-bootstrap';
+import { Modal, Button, Grid, Row, Col, OverlayTrigger, Popover } from 'react-bootstrap';
 import autosize from 'autosize';
 import classNames from 'classnames';
 import { hashHistory } from 'react-router';
@@ -82,9 +74,7 @@ const DivideModal = React.createClass({
   },
 
   selectText() {
-    const selectedText = this.getSelectedText(
-      ReactDOM.findDOMNode(this.refs.originalText),
-    );
+    const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
     this.setState({
       selectedText,
     });
@@ -122,11 +112,7 @@ const DivideModal = React.createClass({
 
   removeElement(element) {
     let newElements = this.state.newElements;
-    newElements = ArrayHelper.removeElementFromArray(
-      newElements,
-      element,
-      'body',
-    );
+    newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
       newElements,
     });
@@ -179,9 +165,7 @@ const DivideModal = React.createClass({
           bsStyle="success"
           className="division__create-element"
           onClick={this.createFromSelection}>
-          {
-            <FormattedMessage id="synthesis.edition.action.divide.create_button" />
-          }
+          {<FormattedMessage id="synthesis.edition.action.divide.create_button" />}
         </Button>
       );
     }
@@ -193,18 +177,12 @@ const DivideModal = React.createClass({
         overlay={
           <Popover
             id="divide-modal-help-popover"
-            title={
-              <FormattedMessage id="synthesis.edition.action.divide.help.title" />
-            }>
-            {
-              <FormattedMessage id="synthesis.edition.action.divide.help.message" />
-            }
+            title={<FormattedMessage id="synthesis.edition.action.divide.help.title" />}>
+            {<FormattedMessage id="synthesis.edition.action.divide.help.message" />}
           </Popover>
         }>
         <Button bsStyle="success" className="division__create-element">
-          {
-            <FormattedMessage id="synthesis.edition.action.divide.create_button" />
-          }
+          {<FormattedMessage id="synthesis.edition.action.divide.create_button" />}
         </Button>
       </OverlayTrigger>
     );
@@ -227,20 +205,11 @@ const DivideModal = React.createClass({
     if (element) {
       return (
         <li key={index} className="division__element">
-          <ElementTitle
-            hasLink={false}
-            className="element__title"
-            element={element}
-          />
-          <div className="element__body">
-            {FormattedText.strip(element.body)}
-          </div>
+          <ElementTitle hasLink={false} className="element__title" element={element} />
+          <div className="element__body">{FormattedText.strip(element.body)}</div>
           <ElementBreadcrumb element={element} />
           <div className="element__actions">
-            <PublishButton
-              element={element}
-              onModal={this.togglePublishModal}
-            />
+            <PublishButton element={element} onModal={this.togglePublishModal} />
             <RemoveButton element={element} onRemove={this.removeElement} />
           </div>
         </li>
@@ -311,22 +280,13 @@ const DivideModal = React.createClass({
               {<FormattedMessage id="synthesis.edition.action.divide.title" />}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            {this.renderContent()}
-          </Modal.Body>
+          <Modal.Body>{this.renderContent()}</Modal.Body>
           <Modal.Footer>
             <Button type="button" onClick={this.hide}>
-              {
-                <FormattedMessage id="synthesis.edition.action.divide.btn_cancel" />
-              }
+              {<FormattedMessage id="synthesis.edition.action.divide.btn_cancel" />}
             </Button>
-            <Button
-              bsStyle="primary"
-              type="submit"
-              onClick={this.divide.bind(null, this)}>
-              {
-                <FormattedMessage id="synthesis.edition.action.divide.btn_submit" />
-              }
+            <Button bsStyle="primary" type="submit" onClick={this.divide.bind(null, this)}>
+              {<FormattedMessage id="synthesis.edition.action.divide.btn_submit" />}
             </Button>
           </Modal.Footer>
         </Modal>

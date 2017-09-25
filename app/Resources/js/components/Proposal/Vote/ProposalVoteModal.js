@@ -44,9 +44,7 @@ const ProposalVoteModal = React.createClass({
     return (
       !step ||
       !step.open ||
-      (user &&
-        step.voteType === VOTE_TYPE_BUDGET &&
-        !this.userHasEnoughCredits())
+      (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits())
     );
   },
 
@@ -92,21 +90,20 @@ const ProposalVoteModal = React.createClass({
               dispatch(closeVoteModal());
             }}
           />
-          {(voteWithoutAccount || user) &&
-            <SubmitButton
-              id="confirm-proposal-vote"
-              onSubmit={() => {
-                dispatch(submit('proposalVote'));
-              }}
-              label="proposal.vote.confirm"
-              isSubmitting={valid && isSubmitting}
-              bsStyle={
-                !proposal.userHasVote || isSubmitting ? 'success' : 'danger'
-              }
-              style={{ marginLeft: '10px' }}
-              disabled={this.disableSubmitButton()}
-              loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
-            />}
+          {(voteWithoutAccount || user) && (
+              <SubmitButton
+                id="confirm-proposal-vote"
+                onSubmit={() => {
+                  dispatch(submit('proposalVote'));
+                }}
+                label="proposal.vote.confirm"
+                isSubmitting={valid && isSubmitting}
+                bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
+                style={{ marginLeft: '10px' }}
+                disabled={this.disableSubmitButton()}
+                loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
+              />
+            )}
         </Modal.Footer>
       </Modal>
     );
@@ -122,8 +119,7 @@ const mapStateToProps = (state, props) => {
   return {
     user: state.user.user,
     showModal: !!(
-      state.proposal.currentVoteModal &&
-      state.proposal.currentVoteModal === props.proposal.id
+      state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
     ),
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),

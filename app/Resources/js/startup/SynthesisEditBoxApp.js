@@ -47,15 +47,9 @@ export default props => {
       <IntlProvider>
         <Router history={hashHistory}>
           <Route path="/" component={SynthesisBoxWrapper}>
-            <IndexRoute
-              component={SynthesisBoxWrapper}
-              onEnter={redirectToDefaultInbox}
-            />
+            <IndexRoute component={SynthesisBoxWrapper} onEnter={redirectToDefaultInbox} />
             <Route path="inbox">
-              <IndexRoute
-                component={ElementsInbox}
-                onEnter={redirectToDefaultInbox}
-              />
+              <IndexRoute component={ElementsInbox} onEnter={redirectToDefaultInbox} />
               <Route path=":type" component={ElementsInbox} />
             </Route>
             <Route path="search/:term" component={ElementsSearch} />
@@ -63,10 +57,7 @@ export default props => {
             <Route path="element/:element_id" component={EditElement} />
             <Route path="preview" component={Preview} />
             <Route path="settings" component={Settings}>
-              <IndexRoute
-                component={Settings}
-                onEnter={redirectToFirstSettings}
-              />
+              <IndexRoute component={Settings} onEnter={redirectToFirstSettings} />
               <Route path="display" component={DisplaySettings} />
             </Route>
           </Route>

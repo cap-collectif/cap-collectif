@@ -90,10 +90,7 @@ const IdeasIndexPage = React.createClass({
       <div>
         <IdeasIndexHeader description={description} />
         <div className="container container--custom">
-          <IdeasListFilters
-            themes={themes}
-            onChange={this.handleThemeOrOrderChange}
-          />
+          <IdeasListFilters themes={themes} onChange={this.handleThemeOrOrderChange} />
           <br />
           <Loader show={this.state.isLoading}>
             <IdeasPaginatedList
@@ -104,10 +101,7 @@ const IdeasIndexPage = React.createClass({
             />
           </Loader>
         </div>
-        <IdeasIndexFooter
-          trashUrl={trashUrl}
-          countTrashed={this.state.countTrashed}
-        />
+        <IdeasIndexFooter trashUrl={trashUrl} countTrashed={this.state.countTrashed} />
       </div>
     );
   },

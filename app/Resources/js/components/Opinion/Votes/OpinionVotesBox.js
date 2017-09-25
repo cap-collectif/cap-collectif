@@ -1,10 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import {
-  VOTE_WIDGET_DISABLED,
-  VOTE_WIDGET_BOTH,
-} from '../../../constants/VoteConstants';
+import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
@@ -49,20 +46,17 @@ const OpinionVotesBox = React.createClass({
 
     return (
       <div className="opinion__votes__box">
-        {helpText &&
+        {helpText && (
           <p className="h4" style={{ marginBottom: '0' }}>
             {helpText}
-          </p>}
+          </p>
+        )}
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            <OpinionVotesButtons
-              show
-              disabled={!this.isContribuable()}
-              opinion={opinion}
-            />
+            <OpinionVotesButtons show disabled={!this.isContribuable()} opinion={opinion} />
             <OpinionVotesBar opinion={opinion} />
           </Col>
-          {this.showPiechart() &&
+          {this.showPiechart() && (
             <Col sm={12} md={4}>
               <VotePiechart
                 top={20}
@@ -72,7 +66,8 @@ const OpinionVotesBox = React.createClass({
                 nok={opinion.votesCountNok}
                 mitige={opinion.votesCountMitige}
               />
-            </Col>}
+            </Col>
+          )}
         </Row>
       </div>
     );

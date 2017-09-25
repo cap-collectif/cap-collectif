@@ -55,17 +55,12 @@ export const ReportBox = React.createClass({
             style={buttonStyle}
             className={buttonClassName}
           />
-          <ReportModal
-            id={id}
-            show={showModal}
-            onSubmit={onReport}
-          />
+          <ReportModal id={id} show={showModal} onSubmit={onReport} />
         </span>
       );
     }
     return null;
   },
-
 });
 
 const mapStateToProps = (state, ownProps) => {

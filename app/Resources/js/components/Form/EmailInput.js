@@ -42,7 +42,7 @@ const EmailInput = React.createClass({
     return (
       <div>
         <FormControl type="email" {...this.props} />
-        {suggestion &&
+        {suggestion && (
           <p className="registration__help">
             Vouliez vous dire{' '}
             <a
@@ -54,7 +54,8 @@ const EmailInput = React.createClass({
               {this.state.suggestion}
             </a>{' '}
             ?
-          </p>}
+          </p>
+        )}
       </div>
     );
   },

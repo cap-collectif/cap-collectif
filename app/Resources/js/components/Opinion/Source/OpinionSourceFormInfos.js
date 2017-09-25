@@ -15,9 +15,7 @@ const OpinionSourceFormInfos = React.createClass({
 
     return (
       <div className="modal-top bg-info">
-        <p>
-          {<FormattedMessage id="source.add_infos" />}
-        </p>
+        <p>{<FormattedMessage id="source.add_infos" />}</p>
       </div>
     );
   },

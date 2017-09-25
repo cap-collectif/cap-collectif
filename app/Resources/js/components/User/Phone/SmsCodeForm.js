@@ -75,9 +75,11 @@ const SmsCodeForm = React.createClass({
               bsStyle="primary"
               style={{ padding: '6px 12px 7px' }}
               disabled={this.state.isSubmitting}>
-              {this.state.isSubmitting
-                ? <FormattedMessage id="global.loading" />
-                : <FormattedMessage id="phone.confirm.validate" />}
+              {this.state.isSubmitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="phone.confirm.validate" />
+              )}
             </Button>
           }
           autoFocus

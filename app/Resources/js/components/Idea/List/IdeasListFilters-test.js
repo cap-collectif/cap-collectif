@@ -26,23 +26,17 @@ const featuresDisabled = {
 
 describe('<IdeasListFilters />', () => {
   it('it should render a row containing sorting input and ideas search but no themes nor create button', () => {
-    const wrapper = shallow(
-      <IdeasListFilters features={featuresDisabled} {...props} />,
-    );
+    const wrapper = shallow(<IdeasListFilters features={featuresDisabled} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render the themes filter when feature is enabled', () => {
-    const wrapper = shallow(
-      <IdeasListFilters {...props} features={featuresThemesEnabled} />,
-    );
+    const wrapper = shallow(<IdeasListFilters {...props} features={featuresThemesEnabled} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render the idea create when feature is enabled', () => {
-    const wrapper = shallow(
-      <IdeasListFilters {...props} features={featuresIdeaCreationEnabled} />,
-    );
+    const wrapper = shallow(<IdeasListFilters {...props} features={featuresIdeaCreationEnabled} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

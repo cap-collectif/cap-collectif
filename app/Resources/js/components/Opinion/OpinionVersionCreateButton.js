@@ -29,7 +29,7 @@ const OpinionVersionCreateButton = React.createClass({
     }
     return (
       <div className={className} style={style}>
-        {isContribuable &&
+        {isContribuable && (
           <LoginOverlay>
             <Button
               bsStyle="primary"
@@ -39,7 +39,8 @@ const OpinionVersionCreateButton = React.createClass({
               <i className="cap cap-add-1" />
               <FormattedMessage id="opinion.add_new_version" />
             </Button>
-          </LoginOverlay>}
+          </LoginOverlay>
+        )}
       </div>
     );
   },

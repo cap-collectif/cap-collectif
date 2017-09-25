@@ -5,10 +5,7 @@ import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Button, ListGroupItem } from 'react-bootstrap';
 import { SortableElement } from 'react-sortable-hoc';
-import {
-  updateRegistrationFieldModal,
-  deleteRegistrationField,
-} from '../../redux/modules/default';
+import { updateRegistrationFieldModal, deleteRegistrationField } from '../../redux/modules/default';
 import type { State, Dispatch } from '../../types';
 import DragHandle from './DragHandle';
 
@@ -36,9 +33,7 @@ export const RegistrationSortableQuestion = React.createClass({
           <DragHandle />
         </div>
         <div className="col-xs-8">
-          <strong>
-            {value.question}
-          </strong>
+          <strong>{value.question}</strong>
           <div>
             <FormattedMessage id={`global.question.types.${value.type}`} />
           </div>
@@ -64,9 +59,7 @@ export const RegistrationSortableQuestion = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  isSuperAdmin: !!(
-    state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')
-  ),
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
   updateField: () => {
@@ -76,8 +69,5 @@ const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
     deleteRegistrationField(props.value.id, dispatch);
   },
 });
-const connector: Connector<ParentProps, Props> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector: Connector<ParentProps, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default SortableElement(connector(RegistrationSortableQuestion));

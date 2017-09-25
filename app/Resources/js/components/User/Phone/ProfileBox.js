@@ -58,9 +58,7 @@ export const ProfileBox = React.createClass({
           message = <FormattedMessage id="phone.confirm.alert.wait_for_new" />;
         }
         if (message === 'sms_failed_to_send') {
-          message = (
-            <FormattedMessage id="phone.confirm.alert.failed_to_send" />
-          );
+          message = <FormattedMessage id="phone.confirm.alert.failed_to_send" />;
         }
         this.setState({
           alert: { type: 'danger', message },
@@ -92,64 +90,58 @@ export const ProfileBox = React.createClass({
   render() {
     const { user } = this.props;
     const { isSubmitting, isUpdating, smsSentToNumber, alert } = this.state;
-    const header = smsSentToNumber
-      ? <FormattedMessage id="phone.confirm.check_your_phone" />
-      : <FormattedMessage id="phone.confirm.phone" />;
-    const footer =
-      !smsSentToNumber &&
+    const header = smsSentToNumber ? (
+      <FormattedMessage id="phone.confirm.check_your_phone" />
+    ) : (
+      <FormattedMessage id="phone.confirm.phone" />
+    );
+    const footer = !smsSentToNumber && (
       <Button
         id="confirm-continue"
         onClick={this.handleSubmit}
         disabled={isSubmitting || (user.isPhoneConfirmed && !isUpdating)}
         bsStyle="primary">
-        {isSubmitting
-          ? <FormattedMessage id="global.loading" />
-          : <FormattedMessage id="global.continue" />}
-      </Button>;
+        {isSubmitting ? (
+          <FormattedMessage id="global.loading" />
+        ) : (
+          <FormattedMessage id="global.continue" />
+        )}
+      </Button>
+    );
     return (
       <Panel header={header} footer={footer}>
-        {alert &&
-          <Alert
-            bsStyle={alert.type}
-            onDismiss={this.handleAlertDismiss}
-            dismissAfter={2000}>
+        {alert && (
+          <Alert bsStyle={alert.type} onDismiss={this.handleAlertDismiss} dismissAfter={2000}>
             {alert.message}
-          </Alert>}
-        {smsSentToNumber &&
-          <FormattedHTMLMessage
-            id="phone.confirm.sent"
-            phone={smsSentToNumber}
-          />}
-        {!smsSentToNumber &&
-          !user.phone &&
-          <FormattedHTMLMessage id="phone.confirm.infos" />}
-        {smsSentToNumber
-          ? <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
-          : <PhoneForm
-              ref={c => (this.form = c)}
-              isSubmitting={isSubmitting}
-              onSubmit={this.handleSubmit}
-              onSubmitFailure={this.stopSubmit}
-              onSubmitSuccess={this.onSubmitSuccess}
-              initialValue={
-                user.isPhoneConfirmed
-                  ? user.phone.slice(3, user.phone.length)
-                  : null
-              }
-            />}
+          </Alert>
+        )}
+        {smsSentToNumber && (
+          <FormattedHTMLMessage id="phone.confirm.sent" phone={smsSentToNumber} />
+        )}
+        {!smsSentToNumber && !user.phone && <FormattedHTMLMessage id="phone.confirm.infos" />}
+        {smsSentToNumber ? (
+          <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
+        ) : (
+          <PhoneForm
+            ref={c => (this.form = c)}
+            isSubmitting={isSubmitting}
+            onSubmit={this.handleSubmit}
+            onSubmitFailure={this.stopSubmit}
+            onSubmitSuccess={this.onSubmitSuccess}
+            initialValue={user.isPhoneConfirmed ? user.phone.slice(3, user.phone.length) : null}
+          />
+        )}
         {user.isPhoneConfirmed &&
-          !isUpdating &&
-          <span style={{ color: '#57AD68' }}>
-            {<FormattedMessage id="phone.confirm.ok" />}
-            {' - '}
-            <Button
-              style={{ paddingLeft: 0 }}
-              onClick={this.deletePhone}
-              bsStyle="link">
-              {<FormattedMessage id="phone.ask_delete" />}
-            </Button>
-          </span>}
-        {smsSentToNumber &&
+          !isUpdating && (
+            <span style={{ color: '#57AD68' }}>
+              {<FormattedMessage id="phone.confirm.ok" />}
+              {' - '}
+              <Button style={{ paddingLeft: 0 }} onClick={this.deletePhone} bsStyle="link">
+                {<FormattedMessage id="phone.ask_delete" />}
+              </Button>
+            </span>
+          )}
+        {smsSentToNumber && (
           <span>
             <Button
               style={{ paddingLeft: 0, paddingRight: 0 }}
@@ -158,13 +150,11 @@ export const ProfileBox = React.createClass({
               {<FormattedMessage id="phone.confirm.ask_new" />}
             </Button>
             {' • '}
-            <Button
-              style={{ paddingLeft: 0 }}
-              onClick={this.askChangeNumber}
-              bsStyle="link">
+            <Button style={{ paddingLeft: 0 }} onClick={this.askChangeNumber} bsStyle="link">
               {<FormattedMessage id="phone.confirm.ask_change_number" />}
             </Button>
-          </span>}
+          </span>
+        )}
       </Panel>
     );
   },

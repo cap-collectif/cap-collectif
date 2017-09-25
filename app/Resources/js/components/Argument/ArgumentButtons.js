@@ -34,8 +34,7 @@ const ArgumentButtons = React.createClass({
     const { argument, dispatch } = this.props;
     return (
       <div>
-        <ArgumentVoteBox argument={argument} />{' '}
-        <ArgumentReportButton argument={argument} />{' '}
+        <ArgumentVoteBox argument={argument} /> <ArgumentReportButton argument={argument} />{' '}
         <EditButton
           onClick={() => {
             dispatch(openArgumentEditModal(argument.id));

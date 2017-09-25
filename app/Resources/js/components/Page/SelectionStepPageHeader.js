@@ -12,20 +12,22 @@ const SelectionStepPageHeader = React.createClass({
     const { queryCount, total } = this.props;
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
-        {typeof queryCount !== 'undefined' && total !== queryCount
-          ? <FormattedMessage
-              id="proposal.count_with_total"
-              values={{
-                num: queryCount,
-                total,
-              }}
-            />
-          : <FormattedMessage
-              id="proposal.count"
-              values={{
-                num: total,
-              }}
-            />}
+        {typeof queryCount !== 'undefined' && total !== queryCount ? (
+          <FormattedMessage
+            id="proposal.count_with_total"
+            values={{
+              num: queryCount,
+              total,
+            }}
+          />
+        ) : (
+          <FormattedMessage
+            id="proposal.count"
+            values={{
+              num: total,
+            }}
+          />
+        )}
       </h3>
     );
   },

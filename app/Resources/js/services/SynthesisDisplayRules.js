@@ -1,16 +1,18 @@
 import { ALLOWED_RULES } from '../constants/SynthesisDisplayConstants';
 
 class SynthesisDisplayRules {
-
   getMatchingSettingsForElement(element, settings, synthesisRules) {
-    const matching = settings.filter((setting) => {
-      return this.isElementMatchingConditions(setting.conditions, element, synthesisRules) && this.areRulesAllowed(setting.rules);
+    const matching = settings.filter(setting => {
+      return (
+        this.isElementMatchingConditions(setting.conditions, element, synthesisRules) &&
+        this.areRulesAllowed(setting.rules)
+      );
     });
     return matching;
   }
 
   isElementMatchingConditions(conditions, element, synthesisRules) {
-    return conditions.every((condition) => {
+    return conditions.every(condition => {
       return this.isElementMatchingCondition(condition, element, synthesisRules);
     });
   }
@@ -18,15 +20,19 @@ class SynthesisDisplayRules {
   isElementMatchingCondition(condition, element, synthesisRules) {
     const contributionsLevel = parseInt(synthesisRules.level, 10) || 0;
     switch (condition.type) {
-      case 'contributions_level_delta': return element.level === contributionsLevel + condition.value;
-      case 'level': return element.level === condition.value;
-      case 'display_type': return element.displayType === condition.value;
-      default: return false;
+      case 'contributions_level_delta':
+        return element.level === contributionsLevel + condition.value;
+      case 'level':
+        return element.level === condition.value;
+      case 'display_type':
+        return element.displayType === condition.value;
+      default:
+        return false;
     }
   }
 
   areRulesAllowed(rules) {
-    return rules.every((rule) => {
+    return rules.every(rule => {
       return this.isRuleAllowed(rule);
     });
   }
@@ -36,15 +42,15 @@ class SynthesisDisplayRules {
     const name = rule.name;
     const allowed = ALLOWED_RULES[category].indexOf(name) > -1;
     if (!allowed) {
-//      console.warn(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
+      //      console.warn(name + ' rule is not allow in category ' + category + '. Allowed rules are :', ALLOWED_RULES[category]);
     }
     return allowed;
   }
 
   buildStyle(settings, category = 'style') {
     const style = {};
-    settings.map((setting) => {
-      setting.rules.map((rule) => {
+    settings.map(setting => {
+      setting.rules.map(rule => {
         if (rule.category === category) {
           style[rule.name] = rule.value;
         }
@@ -54,8 +60,8 @@ class SynthesisDisplayRules {
   }
 
   getValueForRule(settings, category, name) {
-    return settings.some((setting) => {
-      return setting.rules.some((rule) => {
+    return settings.some(setting => {
+      return setting.rules.some(rule => {
         if (rule.category === category && rule.name === name) {
           return rule.value;
         }
@@ -69,8 +75,8 @@ class SynthesisDisplayRules {
       return false;
     }
     const settings = this.getMatchingSettingsForElement(element, allSettings, synthesisRules);
-    return settings.some((setting) => {
-      return setting.rules.some((rule) => {
+    return settings.some(setting => {
+      return setting.rules.some(rule => {
         if (rule.category === category && rule.name === name) {
           return rule.value;
         }
@@ -78,7 +84,6 @@ class SynthesisDisplayRules {
       });
     });
   }
-
 }
 
 export default new SynthesisDisplayRules();

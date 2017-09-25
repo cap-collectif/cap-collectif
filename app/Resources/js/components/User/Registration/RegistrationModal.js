@@ -21,14 +21,7 @@ export const RegistrationModal = React.createClass({
   },
 
   render() {
-    const {
-      submitting,
-      onSubmit,
-      onClose,
-      show,
-      textTop,
-      textBottom,
-    } = this.props;
+    const { submitting, onSubmit, onClose, show, textTop, textBottom } = this.props;
     return (
       <Modal
         animation={false}
@@ -44,22 +37,24 @@ export const RegistrationModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {textTop &&
+          {textTop && (
             <Alert bsStyle="info" className="text-center">
               <div dangerouslySetInnerHTML={{ __html: textTop }} />
-            </Alert>}
+            </Alert>
+          )}
           <LoginSocialButtons prefix="registration." />
           <RegistrationForm
             ref={c => (this.form = c)}
             onSubmitFail={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
           />
-          {textBottom &&
+          {textBottom && (
             <div
               className="text-center small excerpt"
               style={{ marginTop: '15px' }}
               dangerouslySetInnerHTML={{ __html: textBottom }}
-            />}
+            />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -76,12 +71,9 @@ export const RegistrationModal = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  textTop:
-    state.user.registration_form.topTextDisplayed &&
-    state.user.registration_form.topText,
+  textTop: state.user.registration_form.topTextDisplayed && state.user.registration_form.topText,
   textBottom:
-    state.user.registration_form.bottomTextDisplayed &&
-    state.user.registration_form.bottomText,
+    state.user.registration_form.bottomTextDisplayed && state.user.registration_form.bottomText,
   show: state.user.showRegistrationModal,
   submitting: isSubmitting(form)(state),
 });

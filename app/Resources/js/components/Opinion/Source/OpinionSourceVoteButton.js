@@ -30,14 +30,13 @@ const OpinionSourceVoteButton = React.createClass({
           className={`source__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
           onClick={user ? onClick : null}>
-          {hasVoted
-            ? <span>
-                {<FormattedMessage id="vote.cancel" />}
-              </span>
-            : <span>
-                <i className="cap cap-hand-like-2" />{' '}
-                {<FormattedMessage id="vote.ok" />}
-              </span>}
+          {hasVoted ? (
+            <span>{<FormattedMessage id="vote.cancel" />}</span>
+          ) : (
+            <span>
+              <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
+            </span>
+          )}
         </Button>
       </LoginOverlay>
     );

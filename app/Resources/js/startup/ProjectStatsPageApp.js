@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import ProjectStatsPage from '../components/Project/Stats/ProjectStatsPage';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ProjectStatsPage {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

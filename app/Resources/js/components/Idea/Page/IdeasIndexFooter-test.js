@@ -18,16 +18,12 @@ const featuresIdeaTrashDisabled = {
 
 describe('<IdeasIndexFooter />', () => {
   it('it should render nothing when idea trash feature is not enabled', () => {
-    const wrapper = shallow(
-      <IdeasIndexFooter features={featuresIdeaTrashDisabled} {...props} />,
-    );
+    const wrapper = shallow(<IdeasIndexFooter features={featuresIdeaTrashDisabled} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render ideas index footer when trash url is provided and ideas trash feature is enabled', () => {
-    const wrapper = shallow(
-      <IdeasIndexFooter features={featuresIdeaTrashEnabled} {...props} />,
-    );
+    const wrapper = shallow(<IdeasIndexFooter features={featuresIdeaTrashEnabled} {...props} />);
     expect(wrapper.find('.appendices__container')).toHaveLength(1);
     expect(wrapper.find('Row')).toHaveLength(1);
     expect(wrapper.find('Col')).toHaveLength(1);

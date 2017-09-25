@@ -57,11 +57,7 @@ const Ranking = React.createClass({
         <label htmlFor={id} className={labelClasses}>
           {label}
         </label>
-        {field.helpText
-          ? <span className="help-block">
-              {field.helpText}
-            </span>
-          : null}
+        {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
         <RankingBlock
           ref={c => (this.rankingBlock = c)}
           field={field}

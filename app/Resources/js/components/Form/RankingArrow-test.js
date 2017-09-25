@@ -7,9 +7,7 @@ const onClick = () => {};
 
 describe('<RankingArrow />', () => {
   it('should render a left disabled button when required', () => {
-    const wrapper = shallow(
-      <RankingArrow type="left" onClick={onClick} disabled />,
-    );
+    const wrapper = shallow(<RankingArrow type="left" onClick={onClick} disabled />);
     const button = wrapper.find('Button');
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toEqual(true);

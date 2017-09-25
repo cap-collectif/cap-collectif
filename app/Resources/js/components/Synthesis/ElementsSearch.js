@@ -107,9 +107,7 @@ const ElementsSearch = React.createClass({
       return (
         <div className="synthesis__list--empty  text-center">
           <p className="icon  cap-bubble-attention-6" />
-          <p>
-            {<FormattedMessage id="synthesis.edition.list.none" />}
-          </p>
+          <p>{<FormattedMessage id="synthesis.edition.list.none" />}</p>
         </div>
       );
     }

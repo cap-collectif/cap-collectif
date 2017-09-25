@@ -9,7 +9,6 @@ import {
 import ArrayHelper from '../services/ArrayHelper';
 
 class OpinionSourceStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -41,7 +40,8 @@ class OpinionSourceStore extends BaseStore {
         break;
       case UPDATE_SOURCE_FAILURE:
         break;
-      default: break;
+      default:
+        break;
     }
   }
 
@@ -60,7 +60,6 @@ class OpinionSourceStore extends BaseStore {
   get filter() {
     return this._filter;
   }
-
 }
 
 export default new OpinionSourceStore();

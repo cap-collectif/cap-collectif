@@ -8,10 +8,7 @@ import PinnedLabel from '../Utils/PinnedLabel';
 const OpinionInfos = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.oneOfType([
-      PropTypes.oneOf([null]),
-      PropTypes.number,
-    ]),
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
     opinionTerm: PropTypes.number,
   },
 
@@ -71,11 +68,7 @@ const OpinionInfos = React.createClass({
       return <UserLink user={opinion.author} />;
     }
 
-    return (
-      <span>
-        {opinion.author_name}
-      </span>
-    );
+    return <span>{opinion.author_name}</span>;
   },
 
   renderRankingLabel() {
@@ -89,26 +82,28 @@ const OpinionInfos = React.createClass({
       return (
         <span className="opinion__label opinion__label--green">
           <i className="cap cap-trophy" />
-          {this.isVersion()
-            ? <FormattedMessage
-                id="opinion.ranking.versions"
-                values={{
-                  max: rankingThreshold,
-                }}
-              />
-            : opinionTerm === 0
-              ? <FormattedMessage
-                  id="opinion.ranking.opinions"
-                  values={{
-                    max: rankingThreshold,
-                  }}
-                />
-              : <FormattedMessage
-                  id="opinion.ranking.articles"
-                  values={{
-                    max: rankingThreshold,
-                  }}
-                />}
+          {this.isVersion() ? (
+            <FormattedMessage
+              id="opinion.ranking.versions"
+              values={{
+                max: rankingThreshold,
+              }}
+            />
+          ) : opinionTerm === 0 ? (
+            <FormattedMessage
+              id="opinion.ranking.opinions"
+              values={{
+                max: rankingThreshold,
+              }}
+            />
+          ) : (
+            <FormattedMessage
+              id="opinion.ranking.articles"
+              values={{
+                max: rankingThreshold,
+              }}
+            />
+          )}
         </span>
       );
     }

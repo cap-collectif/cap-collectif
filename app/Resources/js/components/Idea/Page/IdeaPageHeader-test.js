@@ -22,9 +22,7 @@ describe('<IdeaPageHeader />', () => {
   });
 
   it('it should render a div with provided class name', () => {
-    const wrapper = shallow(
-      <IdeaPageHeader {...props} className="css-class" />,
-    );
+    const wrapper = shallow(<IdeaPageHeader {...props} className="css-class" />);
     expect(wrapper.find('div.idea__header.css-class')).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });

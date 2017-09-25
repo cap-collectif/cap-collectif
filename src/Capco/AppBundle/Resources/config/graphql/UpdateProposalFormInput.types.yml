@@ -12,27 +12,27 @@ UpdateProposalFormInput:
             illustrationHelpText:
                 type: "String"
             usingThemes:
-                type: "Boolean!"
+                type: "Boolean"
             themeMandatory:
-                type: "Boolean!"
+                type: "Boolean"
             themeHelpText:
                 type: "String"
             usingDistrict:
-                type: "Boolean!"
+                type: "Boolean"
             districtMandatory:
-                type: "Boolean!"
+                type: "Boolean"
             districtHelpText:
                 type: "String"
             usingCategories:
-                type: "Boolean!"
+                type: "Boolean"
             categoryMandatory:
-                type: "Boolean!"
+                type: "Boolean"
             categoryHelpText:
                 type: "String"
             usingAddress:
-                type: "Boolean!"
+                type: "Boolean"
             proposalInAZoneRequired:
-                type: "Boolean!"
+                type: "Boolean"
             titleHelpText:
                 type: "String"
             descriptionHelpText:

@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import ShareButtonDropdown from '../components/Utils/ShareButtonDropdown';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ShareButtonDropdown {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

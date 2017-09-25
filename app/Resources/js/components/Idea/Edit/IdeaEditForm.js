@@ -46,12 +46,7 @@ const IdeaEditForm = React.createClass({
   render() {
     const { features } = this.props;
     return (
-      <IdeaForm
-        {...this.props}
-        showThemes={features.themes}
-        onSubmit={onSubmit}
-        form={formName}
-      />
+      <IdeaForm {...this.props} showThemes={features.themes} onSubmit={onSubmit} form={formName} />
     );
   },
 });

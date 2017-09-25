@@ -17,17 +17,16 @@ const ProposalReportButton = React.createClass({
   render() {
     const { proposal } = this.props;
     return (
-        <ReportBox
-          id={`proposal-${proposal.id}`}
-          buttonStyle={{ marginLeft: '15px' }}
-          reported={proposal.hasUserReported}
-          onReport={this.handleReport}
-          author={proposal.author}
-          buttonClassName="proposal__btn--report"
-        />
+      <ReportBox
+        id={`proposal-${proposal.id}`}
+        buttonStyle={{ marginLeft: '15px' }}
+        reported={proposal.hasUserReported}
+        onReport={this.handleReport}
+        author={proposal.author}
+        buttonClassName="proposal__btn--report"
+      />
     );
   },
-
 });
 
 export default connect()(ProposalReportButton);

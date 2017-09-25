@@ -40,10 +40,7 @@ const CreateModal = React.createClass({
     const { selectedId } = this.props;
     if (nextProps.selectedId !== selectedId) {
       this.setState({
-        parent: this.getElementInTreeById(
-          nextProps.elements,
-          nextProps.selectedId,
-        ),
+        parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
         expanded: this.getExpandedBasedOnSelectedId(),
       });
     }
@@ -152,9 +149,7 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.name.label" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.create.name.label" />}`}
         </h2>
         <Input
           type="text"
@@ -172,9 +167,7 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.description.label" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.create.description.label" />}`}
         </h2>
         <Input
           type="textarea"
@@ -191,9 +184,7 @@ const CreateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.create.parent.label" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.create.parent.label" />}`}
           <span className="small excerpt action__title-right">{`\t${(
             <FormattedMessage id="synthesis.edition.action.create.optional" />
           )}`}</span>
@@ -244,11 +235,7 @@ const CreateModal = React.createClass({
   render() {
     const { show } = this.props;
     return (
-      <Modal
-        show={show}
-        onHide={this.hide}
-        animation={false}
-        dialogClassName="modal--create">
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--create">
         <Modal.Header closeButton>
           <Modal.Title>
             {<FormattedMessage id="synthesis.edition.action.create.title" />}
@@ -262,17 +249,10 @@ const CreateModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide.bind(null, this)}>
-            {
-              <FormattedMessage id="synthesis.edition.action.create.btn_cancel" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.create.btn_cancel" />}
           </Button>
-          <Button
-            type="submit"
-            bsStyle="primary"
-            onClick={this.create.bind(null, this)}>
-            {
-              <FormattedMessage id="synthesis.edition.action.create.btn_submit" />
-            }
+          <Button type="submit" bsStyle="primary" onClick={this.create.bind(null, this)}>
+            {<FormattedMessage id="synthesis.edition.action.create.btn_submit" />}
           </Button>
         </Modal.Footer>
       </Modal>

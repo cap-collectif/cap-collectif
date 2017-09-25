@@ -6,7 +6,7 @@ import { IntlProvider } from 'react-intl-redux';
 import EmailNotConfirmedAlert from '../components/User/EmailNotConfirmedAlert';
 import NewEmailNotConfirmedAlert from '../components/User/NewEmailNotConfirmedAlert';
 
-export default (props: Object) =>
+export default (props: Object) => (
   <span>
     <Provider store={ReactOnRails.getStore('appStore')}>
       <IntlProvider>
@@ -18,4 +18,5 @@ export default (props: Object) =>
         <NewEmailNotConfirmedAlert {...props} />
       </IntlProvider>
     </Provider>
-  </span>;
+  </span>
+);

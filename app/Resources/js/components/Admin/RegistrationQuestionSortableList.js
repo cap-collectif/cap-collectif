@@ -6,15 +6,12 @@ import RegistrationSortableQuestion from './RegistrationSortableQuestion';
 
 export const RegistrationQuestionSortableList = (
   { items }: { items: Array<Object> }, // eslint-disable-line
-) =>
+) => (
   <ListGroup>
-    {items.map((value, index) =>
-      <RegistrationSortableQuestion
-        key={`item-${index}`}
-        index={index}
-        value={value}
-      />,
-    )}
-  </ListGroup>;
+    {items.map((value, index) => (
+      <RegistrationSortableQuestion key={`item-${index}`} index={index} value={value} />
+    ))}
+  </ListGroup>
+);
 
 export default SortableContainer(RegistrationQuestionSortableList);

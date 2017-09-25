@@ -63,19 +63,15 @@ const RankingItem = React.createClass({
             </span>
           </div>
         </div>
-        {item.description &&
-          <p className="excerpt small ranking__item__description">
-            {item.description}
-          </p>}
-        {item.image &&
+        {item.description && (
+          <p className="excerpt small ranking__item__description">{item.description}</p>
+        )}
+        {item.image && (
           <div>
             <img className="ranking__item__image" alt="" src={item.image.url} />
-          </div>}
-        <RankingArrows
-          item={item}
-          arrowFunctions={arrowFunctions}
-          disabled={disabled}
-        />
+          </div>
+        )}
+        <RankingArrows item={item} arrowFunctions={arrowFunctions} disabled={disabled} />
       </div>,
     );
   },

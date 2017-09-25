@@ -42,24 +42,19 @@ export const OpinionBox = React.createClass({
     const { opinionTerm, rankingThreshold } = this.props;
     const opinion = this.props.opinion;
     const color = this.getOpinionType().color;
-    const parentTitle = this.isVersion()
-      ? opinion.parent.title
-      : this.getOpinionType().title;
+    const parentTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
     const headerTitle = this.getBoxLabel();
 
     const colorClass = `opinion opinion--${color} opinion--current`;
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>
-          <div
-            className="opinion__header opinion__header--centered"
-            style={{ height: 'auto' }}>
-            <a
-              className="pull-left btn btn-default opinion__header__back"
-              href={opinion.backLink}>
+          <div className="opinion__header opinion__header--centered" style={{ height: 'auto' }}>
+            <a className="pull-left btn btn-default opinion__header__back" href={opinion.backLink}>
               <i className="cap cap-arrow-1-1" />
               <span className="hidden-xs hidden-sm">
-                {' '}{<FormattedMessage id="opinion.header.back" />}
+                {' '}
+                {<FormattedMessage id="opinion.header.back" />}
               </span>
             </a>
             <div className="opinion__header__title" />
@@ -97,10 +92,7 @@ export const OpinionBox = React.createClass({
   },
 });
 
-const mapStateToProps = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
+const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
   opinion: {
     ...props.opinion,
     ...(Object.keys(state.opinion.opinionsById).length

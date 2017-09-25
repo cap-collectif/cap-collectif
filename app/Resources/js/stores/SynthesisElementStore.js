@@ -4,7 +4,6 @@ import { DISMISS_MESSAGE } from '../constants/MessageConstants';
 import ArrayHelper from '../services/ArrayHelper';
 
 class SynthesisElementStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -49,7 +48,10 @@ class SynthesisElementStore extends BaseStore {
 
   _registerToActions(action) {
     let element = null;
-    const parentId = typeof action.parent === 'object' && action.parent !== null ? action.parent.id : action.parent;
+    const parentId =
+      typeof action.parent === 'object' && action.parent !== null
+        ? action.parent.id
+        : action.parent;
     switch (action.actionType) {
       case Actions.RECEIVE_COUNT:
         this._counts[action.type] = action.count;
@@ -89,23 +91,29 @@ class SynthesisElementStore extends BaseStore {
         break;
       case Actions.ARCHIVE_ELEMENT:
         this._resetMessages();
-        element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
-      // Update data
-      // If we ignored an element, lists are not synced anymore
+        element =
+          this._element && action.elementId === this._element.id
+            ? this._element
+            : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId);
+        // Update data
+        // If we ignored an element, lists are not synced anymore
         if (action.published && element) {
           this._elements.new = ArrayHelper.removeElementFromArray(this._elements.new, element);
           this._counts.new = this._elements.new.length;
           this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
-          this._elements.published = ArrayHelper.addElementToArray(this._elements.published, element);
-          this._elements.unpublished = ArrayHelper.removeElementFromArray(this._elements.unpublished, element);
+          this._elements.published = ArrayHelper.addElementToArray(
+            this._elements.published,
+            element,
+          );
+          this._elements.unpublished = ArrayHelper.removeElementFromArray(
+            this._elements.unpublished,
+            element,
+          );
         } else if (element) {
           this.removeElementFromTree(element);
         }
         if (this._element && action.elementId === this._element.id) {
-        // Apply changes to element
+          // Apply changes to element
           this._element.archived = action.archived;
           this._element.published = action.published;
         }
@@ -122,10 +130,10 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case Actions.DESCRIBE_ELEMENT:
-        element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
+        element =
+          this._element && action.elementId === this._element.id
+            ? this._element
+            : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId);
         if (element) {
           element.description = action.description;
         }
@@ -133,10 +141,10 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case Actions.NAME_ELEMENT:
-        element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
+        element =
+          this._element && action.elementId === this._element.id
+            ? this._element
+            : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId);
         if (element) {
           element.title = action.title;
         }
@@ -150,13 +158,13 @@ class SynthesisElementStore extends BaseStore {
         break;
       case Actions.DIVIDE_ELEMENT:
         this._element.division = action.division;
-        action.division.elements.map((newElement) => {
+        action.division.elements.map(newElement => {
           this.addElementInTree(newElement);
         });
-        element = this._element && action.elementId === this._element.id
-        ? this._element
-        : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId)
-      ;
+        element =
+          this._element && action.elementId === this._element.id
+            ? this._element
+            : this.getElementInTreeById(this._elements.notIgnoredTree, action.elementId);
         if (element) {
           this.removeElementFromTree(element);
         }
@@ -185,12 +193,13 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case DISMISS_MESSAGE:
-        this._messages[action.type] = this._messages[action.type].filter((message) => {
+        this._messages[action.type] = this._messages[action.type].filter(message => {
           return message !== action.message;
         });
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 
@@ -229,7 +238,7 @@ class SynthesisElementStore extends BaseStore {
     expanded[selected] = true;
     const element = this.getElementInTreeById(this._elements.notIgnoredTree, selected);
     if (element) {
-      this.getParentItems(element).map((parent) => {
+      this.getParentItems(element).map(parent => {
         expanded[parent.id] = true;
       });
     }
@@ -237,10 +246,10 @@ class SynthesisElementStore extends BaseStore {
   }
 
   changeElementParent(parentId, elementId) {
-    const element = this._element && elementId === this._element.id
-      ? this._element
-      : this.getElementInTreeById(this._elements.notIgnoredTree, elementId)
-    ;
+    const element =
+      this._element && elementId === this._element.id
+        ? this._element
+        : this.getElementInTreeById(this._elements.notIgnoredTree, elementId);
     const prevParentId = element.parent ? element.parent.id : this.getDirectParentId(element);
     let tree = this._elements.notIgnoredTree;
     // Remove element from previous parent in tree
@@ -283,7 +292,7 @@ class SynthesisElementStore extends BaseStore {
 
   getParentItems(element) {
     const items = [];
-    element.path.split('|').map((data) => {
+    element.path.split('|').map(data => {
       const splitted = data.split('-');
       const title = splitted.slice(0, splitted.length - 5).join('-');
       const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
@@ -349,7 +358,6 @@ class SynthesisElementStore extends BaseStore {
       }
     }
   }
-
 }
 
 export default new SynthesisElementStore();

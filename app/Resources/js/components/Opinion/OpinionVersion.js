@@ -28,13 +28,19 @@ const OpinionVersion = React.createClass({
             <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
           </Col>
           <Col sm={4} md={3} lg={2} className="hidden-xs">
-            <VotePiechart top={10} height={'90px'} width={'145px'} ok={version.votes_ok} nok={version.votes_nok} mitige={version.votes_mitige} />
+            <VotePiechart
+              top={10}
+              height={'90px'}
+              width={'145px'}
+              ok={version.votes_ok}
+              nok={version.votes_nok}
+              mitige={version.votes_mitige}
+            />
           </Col>
         </Row>
       </li>
     );
   },
-
 });
 
 export default OpinionVersion;

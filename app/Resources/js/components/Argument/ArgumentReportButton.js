@@ -18,17 +18,16 @@ const ArgumentReportButton = React.createClass({
   render() {
     const { argument } = this.props;
     return (
-        <ReportBox
-          id={`argument-${argument.id}`}
-          reported={argument.hasUserReported}
-          onReport={this.handleReport}
-          author={argument.author}
-          buttonBsSize="xs"
-          buttonClassName="argument__btn--report"
-        />
+      <ReportBox
+        id={`argument-${argument.id}`}
+        reported={argument.hasUserReported}
+        onReport={this.handleReport}
+        author={argument.author}
+        buttonBsSize="xs"
+        buttonClassName="argument__btn--report"
+      />
     );
   },
-
 });
 
 export default connect()(ArgumentReportButton);

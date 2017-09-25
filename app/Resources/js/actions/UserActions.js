@@ -1,8 +1,7 @@
 import Fetcher from '../services/Fetcher';
 
 export default {
-
-  update: (data) => {
+  update: data => {
     return Fetcher.put('/users/me', data);
   },
 
@@ -10,8 +9,7 @@ export default {
     return Fetcher.post('/send-sms-confirmation');
   },
 
-  sendSmsCode: (data) => {
+  sendSmsCode: data => {
     return Fetcher.post('/sms-confirmation', data);
   },
-
 };

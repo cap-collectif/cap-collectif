@@ -51,7 +51,9 @@ describe('<ProposalDetailLikers />', () => {
   });
 
   it('should render a div with class proposal__info when specified', () => {
-    const wrapper = shallow(<ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />);
+    const wrapper = shallow(
+      <ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />,
+    );
     expect(wrapper.find('div.proposal__info')).toHaveLength(1);
   });
 });

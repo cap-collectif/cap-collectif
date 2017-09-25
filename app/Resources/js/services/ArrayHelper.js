@@ -1,19 +1,22 @@
 class ArrayHelper {
-
   getElementIndexFromArray(els, el, uniqueField = 'id', secondUniqueField = null) {
     let index = -1;
     const valueToCheck = secondUniqueField ? el[uniqueField][secondUniqueField] : el[uniqueField];
-    index = els.map((e) => {
-      return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
-    }).indexOf(valueToCheck);
+    index = els
+      .map(e => {
+        return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
+      })
+      .indexOf(valueToCheck);
     return index;
   }
 
   getElementFromArray(els, value, uniqueField = 'id', secondUniqueField = null) {
     let index = -1;
-    index = els.map((e) => {
-      return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
-    }).indexOf(value);
+    index = els
+      .map(e => {
+        return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
+      })
+      .indexOf(value);
     return els[index];
   }
 
@@ -45,16 +48,20 @@ class ArrayHelper {
         return 1;
       }
       // We never do want to sort contributions by children number
-      if (field === 'childrenElementsNb' && (el1.displayType === 'contribution')) {
+      if (field === 'childrenElementsNb' && el1.displayType === 'contribution') {
         field = 'title';
         order = 'ASC';
         nsort = true;
       }
       if (order === 'ASC') {
-        return nsort ? this.naturalComparison(el1[field], el2[field]) : el1[field] > el2[field] ? 1 : -1;
+        return nsort
+          ? this.naturalComparison(el1[field], el2[field])
+          : el1[field] > el2[field] ? 1 : -1;
       }
       if (order === 'DESC') {
-        return nsort ? this.naturalComparison(el2[field], el1[field]) : el1[field] < el2[field] ? 1 : -1;
+        return nsort
+          ? this.naturalComparison(el2[field], el1[field])
+          : el1[field] < el2[field] ? 1 : -1;
       }
       return 0;
     });
@@ -63,8 +70,12 @@ class ArrayHelper {
   naturalComparison(as, bs) {
     const rx = /(\d+)|(\D+)/g;
     const rd = /\d+/;
-    const a = String(as).toLowerCase().match(rx);
-    const b = String(bs).toLowerCase().match(rx);
+    const a = String(as)
+      .toLowerCase()
+      .match(rx);
+    const b = String(bs)
+      .toLowerCase()
+      .match(rx);
     while (a.length && b.length) {
       const a1 = a.shift();
       const b1 = b.shift();

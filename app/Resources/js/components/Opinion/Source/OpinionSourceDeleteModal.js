@@ -51,12 +51,8 @@ const OpinionSourceDeleteModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="h4">
-            {<FormattedMessage id="source.delete_modal.bold" />}
-          </p>
-          <div>
-            {<FormattedMessage id="source.delete_modal.infos" />}
-          </div>
+          <p className="h4">{<FormattedMessage id="source.delete_modal.bold" />}</p>
+          <div>{<FormattedMessage id="source.delete_modal.infos" />}</div>
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />

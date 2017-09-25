@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import {
-  deleteProposal,
-  closeDeleteProposalModal,
-} from '../../../redux/modules/proposal';
+import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal';
 
 const ProposalDeleteModal = React.createClass({
   propTypes: {

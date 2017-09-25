@@ -7,15 +7,11 @@ const QuillToolbar = React.createClass({
       <div style={{ borderBottom: '1px solid #ddd', padding: '5px 12px' }}>
         <span className="ql-format-group">
           <select title="Size" className="ql-size">
-            <option value="10px">
-              {<FormattedMessage id="editor.size.small" />}
-            </option>
+            <option value="10px">{<FormattedMessage id="editor.size.small" />}</option>
             <option value="13px" selected>
               {<FormattedMessage id="editor.size.normal" />}
             </option>
-            <option value="18px">
-              {<FormattedMessage id="editor.size.large" />}
-            </option>
+            <option value="18px">{<FormattedMessage id="editor.size.large" />}</option>
           </select>
         </span>
         <span className="ql-format-group">
@@ -36,26 +32,11 @@ const QuillToolbar = React.createClass({
             className="ql-format-button ql-bullet"
           />
           <span className="ql-format-separator" />
-          <select
-            title={<FormattedMessage id="editor.align.title" />}
-            className="ql-align">
-            <option
-              value="left"
-              label={<FormattedMessage id="editor.align.left" />}
-              selected
-            />
-            <option
-              value="center"
-              label={<FormattedMessage id="editor.align.center" />}
-            />
-            <option
-              value="right"
-              label={<FormattedMessage id="editor.align.right" />}
-            />
-            <option
-              value="justify"
-              label={<FormattedMessage id="editor.align.justify" />}
-            />
+          <select title={<FormattedMessage id="editor.align.title" />} className="ql-align">
+            <option value="left" label={<FormattedMessage id="editor.align.left" />} selected />
+            <option value="center" label={<FormattedMessage id="editor.align.center" />} />
+            <option value="right" label={<FormattedMessage id="editor.align.right" />} />
+            <option value="justify" label={<FormattedMessage id="editor.align.justify" />} />
           </select>
         </span>
         <span className="ql-format-group">

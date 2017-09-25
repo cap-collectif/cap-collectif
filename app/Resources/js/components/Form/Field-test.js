@@ -28,18 +28,13 @@ describe('<Field />', () => {
   });
 
   it('renders a validated <Input /> element', () => {
-    const wrapper = shallow(
-      <Field {...defaultProps} meta={{ touched: true }} />,
-    );
+    const wrapper = shallow(<Field {...defaultProps} meta={{ touched: true }} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders an errored <Input /> element', () => {
     const wrapper = shallow(
-      <Field
-        {...defaultProps}
-        meta={{ touched: true, error: 'global.required' }}
-      />,
+      <Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -55,9 +50,7 @@ describe('<Field />', () => {
   });
 
   it('renders a div around <Input /> element', () => {
-    const wrapper = shallow(
-      <Field {...defaultProps} divClassName="myclassName" />,
-    );
+    const wrapper = shallow(<Field {...defaultProps} divClassName="myclassName" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

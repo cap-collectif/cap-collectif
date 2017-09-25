@@ -26,12 +26,13 @@ export const LoginForm = React.createClass({
     const { error } = this.props;
     return (
       <div>
-        {error &&
+        {error && (
           <Alert bsStyle="danger">
             <p>
               <FormattedMessage id={error} />
             </p>
-          </Alert>}
+          </Alert>
+        )}
         <Field
           name="username"
           type="email"

@@ -15,9 +15,7 @@ const OpinionAppendices = React.createClass({
 
   hasAppendices() {
     const { opinion } = this.props;
-    const appendices = this.isVersion()
-      ? opinion.parent.appendices
-      : opinion.appendices;
+    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
     if (!appendices) {
       return false;
     }
@@ -31,29 +29,19 @@ const OpinionAppendices = React.createClass({
       return null;
     }
     const opinion = this.props.opinion;
-    const appendices = this.isVersion()
-      ? opinion.parent.appendices
-      : opinion.appendices;
+    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
 
     return (
       <div className="opinion__description">
-        {this.isVersion()
-          ? <p>
-              {<FormattedMessage id="opinion.version_parent" />}
-              <a href={opinion.parent._links.show}>
-                {opinion.parent.title}
-              </a>
-            </p>
-          : null}
+        {this.isVersion() ? (
+          <p>
+            {<FormattedMessage id="opinion.version_parent" />}
+            <a href={opinion.parent._links.show}>{opinion.parent.title}</a>
+          </p>
+        ) : null}
         {appendices.map((appendix, index) => {
           if (appendix.body) {
-            return (
-              <OpinionAppendix
-                key={index}
-                appendix={appendix}
-                expanded={index === 0}
-              />
-            );
+            return <OpinionAppendix key={index} appendix={appendix} expanded={index === 0} />;
           }
         })}
       </div>

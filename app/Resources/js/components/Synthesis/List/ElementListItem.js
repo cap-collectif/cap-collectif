@@ -23,14 +23,7 @@ const ElementListItem = React.createClass({
   },
 
   render() {
-    const {
-      element,
-      hasLink,
-      linkType,
-      showBreadcrumb,
-      showNotation,
-      showStatus,
-    } = this.props;
+    const { element, hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
     const classes = classNames({
       'synthesis__list-item': true,
       box: true,

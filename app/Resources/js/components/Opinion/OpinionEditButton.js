@@ -21,8 +21,7 @@ export const OpinionEditButton = React.createClass({
           onClick={() => {
             dispatch(openOpinionEditModal(opinion.id));
           }}>
-          <i className="cap cap-pencil-1" />{' '}
-          {<FormattedMessage id="global.edit" />}
+          <i className="cap cap-pencil-1" /> {<FormattedMessage id="global.edit" />}
         </Button>{' '}
         <OpinionEditModal opinion={opinion} />
       </span>

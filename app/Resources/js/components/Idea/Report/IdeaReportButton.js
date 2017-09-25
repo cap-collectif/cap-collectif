@@ -27,7 +27,6 @@ export const IdeaReportButton = React.createClass({
       />
     );
   },
-
 });
 
 export default connect()(IdeaReportButton);

@@ -33,21 +33,19 @@ const ProposalDetailAdvancementStep = React.createClass({
       <span>
         <div
           style={
-            borderColor ? (
-              {
-                paddingTop: '10px',
-                paddingBottom: '10px',
-                borderLeftStyle: 'solid',
-                borderLeftColor: borderColor,
-                borderLeftWidth: '3px',
-                paddingLeft: '10px',
-              }
-            ) : (
-              {
-                paddingTop: '10px',
-                paddingLeft: '13px',
-              }
-            )
+            borderColor
+              ? {
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  borderLeftStyle: 'solid',
+                  borderLeftColor: borderColor,
+                  borderLeftWidth: '3px',
+                  paddingLeft: '10px',
+                }
+              : {
+                  paddingTop: '10px',
+                  paddingLeft: '13px',
+                }
           }>
           <div
             style={{

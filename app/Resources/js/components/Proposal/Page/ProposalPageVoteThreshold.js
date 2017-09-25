@@ -17,9 +17,11 @@ const ProposalPageVoteThreshold = React.createClass({
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>
           <h4>
-            {votesPercentage >= 100
-              ? <FormattedMessage id="proposal.vote.threshold.reached" />
-              : <FormattedMessage id="proposal.vote.threshold.title" />}
+            {votesPercentage >= 100 ? (
+              <FormattedMessage id="proposal.vote.threshold.reached" />
+            ) : (
+              <FormattedMessage id="proposal.vote.threshold.title" />
+            )}
           </h4>
           <p className="proposal__page__vote_threshold__votes">
             <i className="cap cap-hand-like-2-1" />{' '}
@@ -38,22 +40,24 @@ const ProposalPageVoteThreshold = React.createClass({
             bsStyle="success"
           />
           <div>
-            {votesPercentage >= 100 &&
+            {votesPercentage >= 100 && (
               <FormattedMessage
                 id="proposal.vote.threshold.progress_reached"
                 values={{
                   num: votesCount,
                   max: step.voteThreshold,
                 }}
-              />}
-            {votesPercentage < 100 &&
+              />
+            )}
+            {votesPercentage < 100 && (
               <FormattedMessage
                 id="proposal.vote.threshold.progress"
                 values={{
                   num: votesRemaining,
                   max: step.voteThreshold,
                 }}
-              />}
+              />
+            )}
           </div>
         </div>
       </div>

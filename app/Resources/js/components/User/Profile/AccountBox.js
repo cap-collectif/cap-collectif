@@ -26,15 +26,15 @@ export const AccountBox = React.createClass({
         disabled={invalid || submitting}
         bsStyle="primary"
         className="col-sm-offset-4">
-        {submitting
-          ? <FormattedMessage id="global.loading" />
-          : <FormattedMessage id="global.save_modifications" />}
+        {submitting ? (
+          <FormattedMessage id="global.loading" />
+        ) : (
+          <FormattedMessage id="global.save_modifications" />
+        )}
       </Button>
     );
     return (
-      <Panel
-        header={<FormattedMessage id="profile.account.title" />}
-        footer={footer}>
+      <Panel header={<FormattedMessage id="profile.account.title" />} footer={footer}>
         <AccountForm />
         <ConfirmPasswordModal />
       </Panel>

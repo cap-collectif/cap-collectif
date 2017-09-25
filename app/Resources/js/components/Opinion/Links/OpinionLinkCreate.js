@@ -8,9 +8,7 @@ import OpinionLinkCreateButton from './OpinionLinkCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
-import OpinionLinkCreateForm, {
-  formName,
-} from './../Form/OpinionLinkCreateForm';
+import OpinionLinkCreateForm, { formName } from './../Form/OpinionLinkCreateForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
 
 const OpinionLinkCreate = React.createClass({
@@ -29,9 +27,7 @@ const OpinionLinkCreate = React.createClass({
 
   componentDidMount() {
     const { opinion } = this.props;
-    OpinionTypeActions.getAvailableTypes(
-      opinion.type.id,
-    ).then(availableTypes => {
+    OpinionTypeActions.getAvailableTypes(opinion.type.id).then(availableTypes => {
       this.setState({ availableTypes });
     });
   },
@@ -72,11 +68,9 @@ const OpinionLinkCreate = React.createClass({
           </Modal.Header>
           <Modal.Body>
             <OpinionLinkCreateInfos opinion={opinion} />
-            {this.state.availableTypes.length > 0 &&
-              <OpinionLinkCreateForm
-                opinion={opinion}
-                availableTypes={this.state.availableTypes}
-              />}
+            {this.state.availableTypes.length > 0 && (
+              <OpinionLinkCreateForm opinion={opinion} availableTypes={this.state.availableTypes} />
+            )}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={this.close} />

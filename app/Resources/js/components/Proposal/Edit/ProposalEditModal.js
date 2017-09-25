@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import {
-  editProposalForm,
-  closeEditProposalModal,
-} from '../../../redux/modules/proposal';
+import { editProposalForm, closeEditProposalModal } from '../../../redux/modules/proposal';
 
 const ProposalEditModal = React.createClass({
   propTypes: {
@@ -22,15 +19,7 @@ const ProposalEditModal = React.createClass({
   },
 
   render() {
-    const {
-      categories,
-      form,
-      proposal,
-      show,
-      isSubmitting,
-      dispatch,
-      intl,
-    } = this.props;
+    const { categories, form, proposal, show, isSubmitting, dispatch, intl } = this.props;
     return (
       <div>
         <Modal
@@ -39,9 +28,7 @@ const ProposalEditModal = React.createClass({
           onHide={() => {
             if (
               // eslint-disable-next-line no-alert
-              window.confirm(
-                intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
-              )
+              window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
             ) {
               dispatch(closeEditProposalModal());
             }

@@ -7,21 +7,13 @@ const SecondNavbar = React.createClass({
   render() {
     return (
       <Navbar fixedTop fluid className="synthesis__second-navbar">
-        <NavbarBrand>
-          {<FormattedMessage id="synthesis.edition.navbar.second.brand" />}
-        </NavbarBrand>
+        <NavbarBrand>{<FormattedMessage id="synthesis.edition.navbar.second.brand" />}</NavbarBrand>
         <Nav pullRight>
           <LinkContainer to={'/inbox'}>
-            <NavItem>
-              {<FormattedMessage id="synthesis.edition.navbar.second.inbox" />}
-            </NavItem>
+            <NavItem>{<FormattedMessage id="synthesis.edition.navbar.second.inbox" />}</NavItem>
           </LinkContainer>
           <LinkContainer to={'/preview'}>
-            <NavItem>
-              {
-                <FormattedMessage id="synthesis.edition.navbar.second.preview" />
-              }
-            </NavItem>
+            <NavItem>{<FormattedMessage id="synthesis.edition.navbar.second.preview" />}</NavItem>
           </LinkContainer>
           <LinkContainer to={'/settings'}>
             <NavItem>

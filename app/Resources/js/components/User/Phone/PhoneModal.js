@@ -63,9 +63,7 @@ const PhoneModal = React.createClass({
           message = <FormattedMessage id="phone.confirm.alert.wait_for_new" />;
         }
         if (message === 'sms_failed_to_send') {
-          message = (
-            <FormattedMessage id="phone.confirm.alert.failed_to_send" />
-          );
+          message = <FormattedMessage id="phone.confirm.alert.failed_to_send" />;
         }
         this.setState({
           isResending: false,
@@ -89,34 +87,35 @@ const PhoneModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {smsSentToNumber
-              ? <FormattedMessage id="phone.confirm.check_your_phone" />
-              : <FormattedMessage id="phone.confirm.phone" />}
+            {smsSentToNumber ? (
+              <FormattedMessage id="phone.confirm.check_your_phone" />
+            ) : (
+              <FormattedMessage id="phone.confirm.phone" />
+            )}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {alert &&
-            <Alert
-              bsStyle={alert.type}
-              onDismiss={this.handleAlertDismiss}
-              dismissAfter={2000}>
+          {alert && (
+            <Alert bsStyle={alert.type} onDismiss={this.handleAlertDismiss} dismissAfter={2000}>
               {alert.message}
-            </Alert>}
-          {smsSentToNumber
-            ? <FormattedHTMLMessage
-                id="phone.confirm.sent"
-                phone={smsSentToNumber}
-              />
-            : <FormattedHTMLMessage id="phone.confirm.infos" />}
-          {smsSentToNumber
-            ? <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
-            : <PhoneForm
-                isSubmitting={isSubmitting}
-                onSubmit={this.handleSubmit}
-                onSubmitFailure={this.stopSubmit}
-                onSubmitSuccess={this.onSubmitSuccess}
-              />}
-          {smsSentToNumber &&
+            </Alert>
+          )}
+          {smsSentToNumber ? (
+            <FormattedHTMLMessage id="phone.confirm.sent" phone={smsSentToNumber} />
+          ) : (
+            <FormattedHTMLMessage id="phone.confirm.infos" />
+          )}
+          {smsSentToNumber ? (
+            <SmsCodeForm onSubmitSuccess={this.onCodeSuccess} />
+          ) : (
+            <PhoneForm
+              isSubmitting={isSubmitting}
+              onSubmit={this.handleSubmit}
+              onSubmitFailure={this.stopSubmit}
+              onSubmitSuccess={this.onSubmitSuccess}
+            />
+          )}
+          {smsSentToNumber && (
             <div>
               <Button
                 style={{ paddingLeft: 0, paddingRight: 0 }}
@@ -126,26 +125,27 @@ const PhoneModal = React.createClass({
                 {<FormattedMessage id="phone.confirm.ask_new" />}
               </Button>
               {' • '}
-              <Button
-                style={{ paddingLeft: 0 }}
-                onClick={this.askChangeNumber}
-                bsStyle="link">
+              <Button style={{ paddingLeft: 0 }} onClick={this.askChangeNumber} bsStyle="link">
                 {<FormattedMessage id="phone.confirm.ask_change_number" />}
               </Button>
-            </div>}
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-          {!smsSentToNumber &&
+          {!smsSentToNumber && (
             <Button
               id="confirm-continue"
               onClick={this.handleSubmit}
               disabled={isSubmitting}
               bsStyle="primary">
-              {isSubmitting
-                ? <FormattedMessage id="global.loading" />
-                : <FormattedMessage id="global.continue" />}
-            </Button>}
+              {isSubmitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="global.continue" />
+              )}
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     );

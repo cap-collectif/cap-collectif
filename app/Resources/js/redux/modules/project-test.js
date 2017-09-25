@@ -1,9 +1,6 @@
 /* eslint-env jest */
 import { put, select, call } from 'redux-saga/effects';
-import {
-  reducer,
-  fetchProjectsSaga,
-} from './project';
+import { reducer, fetchProjectsSaga } from './project';
 import Fetcher from '../../services/Fetcher';
 
 describe('Project Reducer', () => {
@@ -13,10 +10,7 @@ describe('Project Reducer', () => {
       visibleProjects: [],
     };
     const result = {
-      projects: [
-        { id: '1' },
-        { id: '2' },
-      ],
+      projects: [{ id: '1' }, { id: '2' }],
       count: 2,
       page: 1,
       pages: 1,
@@ -52,6 +46,8 @@ describe('Project Sagas', () => {
       }),
     );
 
-    expect(generator.throw({}).value).toEqual(put({ type: 'project/PROJECTS_FETCH_FAILED', error: {} }));
+    expect(generator.throw({}).value).toEqual(
+      put({ type: 'project/PROJECTS_FETCH_FAILED', error: {} }),
+    );
   });
 });

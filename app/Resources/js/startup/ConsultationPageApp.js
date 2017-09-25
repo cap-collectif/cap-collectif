@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl-redux';
 import StepInfos from '../components/Steps/Page/StepInfos';
 import ConsultationPropositionBox from '../components/Consultation/ConsultationPropositionBox';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <div>
@@ -13,4 +13,5 @@ export default props =>
         <ConsultationPropositionBox {...props} />
       </div>
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

@@ -63,14 +63,7 @@ const Checkbox = React.createClass({
   },
 
   render() {
-    const {
-      disabled,
-      getGroupStyle,
-      id,
-      labelClassName,
-      label,
-      renderFormErrors,
-    } = this.props;
+    const { disabled, getGroupStyle, id, labelClassName, label, renderFormErrors } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -86,9 +79,7 @@ const Checkbox = React.createClass({
         <label htmlFor={fieldName} className={classNames(labelClasses)}>
           {label}
         </label>
-        <span className="help-block">
-          {field.helpText}
-        </span>
+        <span className="help-block">{field.helpText}</span>
         <CheckboxGroup
           id={fieldName}
           ref={'choices'}
@@ -113,14 +104,14 @@ const Checkbox = React.createClass({
               </div>
             );
           })}
-          {this.props.field.isOtherAllowed
-            ? <Other
-                ref={c => (this.other = c)}
-                field={this.props.field}
-                onChange={this.onChange}
-                disabled={disabled}
-              />
-            : null}
+          {this.props.field.isOtherAllowed ? (
+            <Other
+              ref={c => (this.other = c)}
+              field={this.props.field}
+              onChange={this.onChange}
+              disabled={disabled}
+            />
+          ) : null}
         </CheckboxGroup>
         {renderFormErrors(field.id)}
       </div>

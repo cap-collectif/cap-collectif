@@ -25,9 +25,11 @@ const ReadMoreLink = React.createClass({
     }
     return (
       <Button bsStyle="link" className="btn-block" onClick={onClick}>
-        {expanded
-          ? <FormattedMessage id="global.read_less" />
-          : <FormattedMessage id="global.read_more" />}
+        {expanded ? (
+          <FormattedMessage id="global.read_less" />
+        ) : (
+          <FormattedMessage id="global.read_more" />
+        )}
       </Button>
     );
   },

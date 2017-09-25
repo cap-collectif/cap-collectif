@@ -52,9 +52,7 @@ const ReportModal = React.createClass({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoading:
-      state.report.currentReportingModal === ownProps.id &&
-      isSubmitting(formName)(state),
+    isLoading: state.report.currentReportingModal === ownProps.id && isSubmitting(formName)(state),
   };
 };
 

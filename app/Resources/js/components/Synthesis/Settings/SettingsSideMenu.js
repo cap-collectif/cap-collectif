@@ -19,9 +19,7 @@ const SettingsSideMenu = React.createClass({
                   <div className="tree__item__content">
                     <i className="cap cap-book-1 tree__item__icon" />
                     <span className="tree__item__title">
-                      {
-                        <FormattedMessage id="synthesis.settings.menu.display" />
-                      }
+                      {<FormattedMessage id="synthesis.settings.menu.display" />}
                     </span>
                   </div>
                 </ListGroupItem>

@@ -20,9 +20,7 @@ describe('<RegistrationAdminPage />', () => {
   });
 
   it('renders correctly when not super admin', () => {
-    const wrapper = shallow(
-      <RegistrationAdminPage {...props} isSuperAdmin={false} />,
-    );
+    const wrapper = shallow(<RegistrationAdminPage {...props} isSuperAdmin={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

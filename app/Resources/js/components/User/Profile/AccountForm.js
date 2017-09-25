@@ -51,18 +51,18 @@ export const AccountForm = React.createClass({
     } = this.props;
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
-        {error &&
+        {error && (
           <Alert bsStyle="danger">
             <p>
               <FormattedHTMLMessage id={error} />
             </p>
-          </Alert>}
-        {confirmationEmailResent &&
+          </Alert>
+        )}
+        {confirmationEmailResent && (
           <Alert bsStyle="warning">
-            <p>
-              {'Un email de confirmation vous a été envoyé.'}
-            </p>
-          </Alert>}
+            <p>{'Un email de confirmation vous a été envoyé.'}</p>
+          </Alert>
+        )}
         <Field
           type="email"
           component={renderComponent}
@@ -75,7 +75,7 @@ export const AccountForm = React.createClass({
         <p className="small excerpt col-sm-6 col-sm-offset-4">
           Votre adresse électronique ne sera pas rendue publique.
         </p>
-        {newEmailToConfirm &&
+        {newEmailToConfirm && (
           <div className="col-sm-6 col-sm-offset-4">
             <p className="small excerpt">
               <FormattedHTMLMessage
@@ -88,14 +88,12 @@ export const AccountForm = React.createClass({
                 <FormattedMessage id="user.confirm.resend" />
               </a>
               {' · '}
-              <a
-                href="#cancel"
-                onClick={() =>
-                  cancelEmailChange(dispatch, initialValues.email)}>
+              <a href="#cancel" onClick={() => cancelEmailChange(dispatch, initialValues.email)}>
                 <FormattedMessage id="user.confirm.cancel" />
               </a>
             </p>
-          </div>}
+          </div>
+        )}
       </form>
     );
   },

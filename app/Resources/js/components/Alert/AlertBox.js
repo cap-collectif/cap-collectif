@@ -37,9 +37,7 @@ const AlertBox = React.createClass({
     }
 
     return (
-      <AlertAutoDismissable
-        onDismiss={this.handleDismiss}
-        bsStyle={alert.bsStyle}>
+      <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
         <FormattedMessage id={alert.content} />
       </AlertAutoDismissable>
     );

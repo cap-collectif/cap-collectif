@@ -21,14 +21,9 @@ const OpinionSourceList = React.createClass({
     }
 
     return (
-      <ul
-        id="sources-list"
-        className="media-list"
-        style={{ marginTop: '20px' }}>
+      <ul id="sources-list" className="media-list" style={{ marginTop: '20px' }}>
         {sources.map(source => {
-          return (
-            <OpinionSource {...this.props} key={source.id} source={source} />
-          );
+          return <OpinionSource {...this.props} key={source.id} source={source} />;
         })}
       </ul>
     );

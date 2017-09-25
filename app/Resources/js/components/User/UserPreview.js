@@ -27,9 +27,11 @@ const UserPreview = React.createClass({
     const { className, style } = this.props;
     const user = this.props.user;
     const username =
-      this.props.username === 'ANONYMOUS'
-        ? <FormattedMessage id="global.anonymous" />
-        : this.props.username;
+      this.props.username === 'ANONYMOUS' ? (
+        <FormattedMessage id="global.anonymous" />
+      ) : (
+        this.props.username
+      );
     if (!user && !username) {
       return null;
     }
@@ -45,11 +47,7 @@ const UserPreview = React.createClass({
         <UserAvatar user={user} className="pull-left" />
         <div className="media-body">
           <p className="media--macro__user  small">
-            {user
-              ? <UserLink user={user} />
-              : <span>
-                  {username}
-                </span>}
+            {user ? <UserLink user={user} /> : <span>{username}</span>}
           </p>
         </div>
       </div>

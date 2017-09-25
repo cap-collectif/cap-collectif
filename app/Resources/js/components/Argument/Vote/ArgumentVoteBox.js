@@ -42,9 +42,7 @@ const ArgumentVoteBox = React.createClass({
           />
         </form>{' '}
         <span className="opinion__votes-nb">
-          {argument.votesCount +
-            (hasVotedSince ? 1 : 0) +
-            (hasUnVotedSince ? -1 : 0)}
+          {argument.votesCount + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
         </span>
       </span>
     );

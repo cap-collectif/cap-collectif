@@ -50,14 +50,10 @@ const Navbar = React.createClass({
     if (window.innerWidth >= 768) {
       // Only applied to window from sm size (otherwise menu is collapsed)
       const containerWidth = this.getPixelsWidth(this.container) - 30; // Minus padding
-      const seeMoreDropdownWidth =
-        this.getPixelsWidth(this.seeMoreDropdown) || 75; // Approximate size of menu item
+      const seeMoreDropdownWidth = this.getPixelsWidth(this.seeMoreDropdown) || 75; // Approximate size of menu item
       const headerWidth = this.getPixelsWidth(this.header);
-      const navrightWidth = this.getPixelsWidth(
-        this.navright.getWrappedInstance(),
-      );
-      const occupiedWidth =
-        headerWidth + navrightWidth + seeMoreDropdownWidth + 30; // + 30px just in case
+      const navrightWidth = this.getPixelsWidth(this.navright.getWrappedInstance());
+      const occupiedWidth = headerWidth + navrightWidth + seeMoreDropdownWidth + 30; // + 30px just in case
       const maxWidth = containerWidth - occupiedWidth;
       let width = 0;
       tempItems.map(item => {
@@ -78,10 +74,7 @@ const Navbar = React.createClass({
         moreItems,
       },
       () => {
-        if (
-          window.innerWidth >= 768 &&
-          ReactDOM.findDOMNode(this.container).clientHeight > 53
-        ) {
+        if (window.innerWidth >= 768 && ReactDOM.findDOMNode(this.container).clientHeight > 53) {
           // 53 => 50px (navbar height) + 3px margin (just in case)
           this.autocollapseNavbar();
         }
@@ -102,9 +95,7 @@ const Navbar = React.createClass({
           }
         : null;
     return (
-      <Navigation
-        id="main-navbar"
-        className="navbar navbar-default navbar-fixed-top">
+      <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
             <div className="container">
@@ -148,12 +139,13 @@ const Navbar = React.createClass({
                   />
                 );
               })}
-              {moreItem &&
+              {moreItem && (
                 <NavbarItem
                   item={moreItem}
                   ref={c => (this.seeMoreDropdown = c)}
                   className="navbar-dropdown-more"
-                />}
+                />
+              )}
             </Nav>
             <NavbarRight ref={c => (this.navright = c)} />
           </Navigation.Collapse>

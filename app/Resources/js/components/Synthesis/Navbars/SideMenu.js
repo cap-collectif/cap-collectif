@@ -54,11 +54,7 @@ const SideMenu = React.createClass({
   },
 
   toggleExpand(element) {
-    SynthesisElementActions.expandTreeItem(
-      'nav',
-      element.id,
-      !this.state.expanded[element.id],
-    );
+    SynthesisElementActions.expandTreeItem('nav', element.id, !this.state.expanded[element.id]);
   },
 
   selectItem(element) {
@@ -84,10 +80,7 @@ const SideMenu = React.createClass({
 
   loadElementsTreeFromServer() {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementsTreeFromServer(
-      synthesis.id,
-      'notIgnored',
-    );
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
   },
 
   renderContributionsButton() {
@@ -122,9 +115,7 @@ const SideMenu = React.createClass({
 
   renderCreateButton() {
     return (
-      <NavItem
-        className="menu__link menu__action"
-        onClick={this.showCreateModal.bind(null, this)}>
+      <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
         <i className="cap cap-folder-add" />{' '}
         {<FormattedMessage id="synthesis.edition.action.create.label" />}
       </NavItem>
@@ -146,9 +137,7 @@ const SideMenu = React.createClass({
     const { synthesis } = this.props;
     return (
       <div className="synthesis__side-menu">
-        <div className="menu__tree">
-          {this.renderTree()}
-        </div>
+        <div className="menu__tree">{this.renderTree()}</div>
         <Nav stacked className="menu__actions menu--fixed">
           {this.renderCreateButton()}
           {this.renderManageButton()}

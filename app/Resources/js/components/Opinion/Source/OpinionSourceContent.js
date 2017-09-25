@@ -2,9 +2,7 @@
 import React, { PropTypes } from 'react';
 
 const OpinionSourceContent = ({ source }: Object) => {
-  return (
-    <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />
-  );
+  return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
 };
 
 OpinionSourceContent.propTypes = {

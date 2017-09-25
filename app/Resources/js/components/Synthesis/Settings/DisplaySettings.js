@@ -78,14 +78,14 @@ const DisplaySettings = React.createClass({
             max="5"
             groupClassName={this.getGroupStyle('level')}
             errors={this.renderFormErrors('level')}
-            help={
-              <FormattedMessage id="synthesis.settings.display.level_help" />
-            }
+            help={<FormattedMessage id="synthesis.settings.display.level_help" />}
           />
           <Button type="button" onClick={() => this.updateSettings()}>
-            {this.state.isSaving
-              ? <FormattedMessage id="global.loading" />
-              : <FormattedMessage id="global.save" />}
+            {this.state.isSaving ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save" />
+            )}
           </Button>
         </form>
       </div>

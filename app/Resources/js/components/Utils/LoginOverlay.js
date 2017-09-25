@@ -3,10 +3,7 @@ import React, { PropTypes, cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import {
-  showLoginModal,
-  showRegistrationModal,
-} from '../../redux/modules/user';
+import { showLoginModal, showRegistrationModal } from '../../redux/modules/user';
 import type { State, Dispatch } from '../../types';
 
 export const LoginOverlay = React.createClass({
@@ -46,25 +43,17 @@ export const LoginOverlay = React.createClass({
     }
 
     const popover = (
-      <Popover
-        id="login-popover"
-        title={<FormattedMessage id="vote.popover.title" />}>
-        <p>
-          {<FormattedMessage id="vote.popover.body" />}
-        </p>
-        {showRegistrationButton &&
+      <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
+        <p>{<FormattedMessage id="vote.popover.body" />}</p>
+        {showRegistrationButton && (
           <p>
-            <Button
-              onClick={openRegistrationModal}
-              className="center-block btn-block">
+            <Button onClick={openRegistrationModal} className="center-block btn-block">
               {<FormattedMessage id="global.registration" />}
             </Button>
-          </p>}
+          </p>
+        )}
         <p>
-          <Button
-            onClick={openLoginModal}
-            bsStyle="success"
-            className="center-block btn-block">
+          <Button onClick={openLoginModal} bsStyle="success" className="center-block btn-block">
             {<FormattedMessage id="global.login" />}
           </Button>
         </p>

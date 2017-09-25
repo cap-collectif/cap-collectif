@@ -52,14 +52,14 @@ export const IdeaPage = React.createClass({
               <IdeaPageVotes idea={idea} className={containersClassName} />
               <IdeaPageComments id={idea.id} className={containersClassName} />
             </Col>
-            {showSidebar &&
-              <div id="sidebar-overlay" className={overlayClassName} />}
-            {showSidebar &&
+            {showSidebar && <div id="sidebar-overlay" className={overlayClassName} />}
+            {showSidebar && (
               <IdeaSidebar
                 idea={idea}
                 expanded={expandSidebar}
                 onToggleExpand={this.toggleSidebarExpand}
-              />}
+              />
+            )}
           </Row>
         </div>
       </div>

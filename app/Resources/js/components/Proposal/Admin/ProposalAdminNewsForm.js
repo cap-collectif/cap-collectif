@@ -2,14 +2,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import {
-  ButtonToolbar,
-  Button,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-} from 'react-bootstrap';
+import { ButtonToolbar, Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
 import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdminNewsForm_proposal.graphql';
 
@@ -34,17 +27,14 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             target="_blank"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite">
-            <i className="fa fa-info-circle" />{' '}
-            <FormattedMessage id="global.help" />
+            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
         <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
-          {proposal.news.map((news, index) =>
+          {proposal.news.map((news, index) => (
             <ListGroupItem key={index}>
               <Row>
-                <Col xs={6}>
-                  {news.title}
-                </Col>
+                <Col xs={6}>{news.title}</Col>
                 <Col xs={6}>
                   <ButtonToolbar className="pull-right">
                     <Button
@@ -60,13 +50,11 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
                   </ButtonToolbar>
                 </Col>
               </Row>
-            </ListGroupItem>,
-          )}
+            </ListGroupItem>
+          ))}
         </ListGroup>
         <ButtonToolbar style={{ marginBottom: 10 }}>
-          <Button
-            bsStyle="primary"
-            href={`${baseUrl}/admin/capco/app/post/create`}>
+          <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
             <FormattedMessage id="global.add" />
           </Button>
         </ButtonToolbar>

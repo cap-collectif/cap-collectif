@@ -57,70 +57,69 @@ export const renderSelect = React.createClass({
     const { name, value, onBlur, onFocus } = input;
     return (
       <div className="form-group">
-        {label &&
-          <label
-            htmlFor={input.name}
-            className={labelClassName || 'col-sm-2 control-label'}>
+        {label && (
+          <label htmlFor={input.name} className={labelClassName || 'col-sm-2 control-label'}>
             {label}
-          </label>}
+          </label>
+        )}
         <div id={input.name} className={inputClassName || 'col-sm-10'}>
-          {typeof loadOptions === 'function'
-            ? <Select.Async
-                filterOptions={filterOptions}
-                disabled={disabled}
-                autoload={autoload}
-                clearable={clearable}
-                placeholder={placeholder}
-                loadOptions={loadOptions}
-                valueKey="value"
-                value={value}
-                name={name}
-                multi={multi}
-                options={options}
-                noResultsText={'Pas de résultats…'}
-                loadingPlaceholder={'Chargement…'}
-                onBlur={() => onBlur(value)}
-                onFocus={onFocus}
-                onChange={(
-                  newValue: { value: string } | Array<{ value: string }>,
-                ) => {
-                  if (typeof onChange === 'function') {
-                    onChange();
-                  }
-                  if (multi) {
-                    return input.onChange(newValue);
-                  }
-                  if (!Array.isArray(newValue)) {
-                    input.onChange(newValue ? newValue.value : '');
-                  }
-                }}
-              />
-            : <Select
-                name={name}
-                disabled={disabled}
-                options={options}
-                filterOptions={filterOptions}
-                placeholder={placeholder}
-                loadOptions={loadOptions}
-                valueKey="value"
-                clearable={clearable}
-                autoload={autoload}
-                multi={multi}
-                value={value}
-                noResultsText={'Pas de résultats…'}
-                loadingPlaceholder={'Chargement…'}
-                onBlur={() => onBlur(value)}
-                onFocus={onFocus}
-                onChange={(newValue: { value: string }) => {
-                  if (typeof onChange === 'function') {
-                    onChange();
-                  }
-                  if (multi) {
-                    return input.onChange(newValue);
-                  }
+          {typeof loadOptions === 'function' ? (
+            <Select.Async
+              filterOptions={filterOptions}
+              disabled={disabled}
+              autoload={autoload}
+              clearable={clearable}
+              placeholder={placeholder}
+              loadOptions={loadOptions}
+              valueKey="value"
+              value={value}
+              name={name}
+              multi={multi}
+              options={options}
+              noResultsText={'Pas de résultats…'}
+              loadingPlaceholder={'Chargement…'}
+              onBlur={() => onBlur(value)}
+              onFocus={onFocus}
+              onChange={(newValue: { value: string } | Array<{ value: string }>) => {
+                if (typeof onChange === 'function') {
+                  onChange();
+                }
+                if (multi) {
+                  return input.onChange(newValue);
+                }
+                if (!Array.isArray(newValue)) {
                   input.onChange(newValue ? newValue.value : '');
-                }}
-              />}
+                }
+              }}
+            />
+          ) : (
+            <Select
+              name={name}
+              disabled={disabled}
+              options={options}
+              filterOptions={filterOptions}
+              placeholder={placeholder}
+              loadOptions={loadOptions}
+              valueKey="value"
+              clearable={clearable}
+              autoload={autoload}
+              multi={multi}
+              value={value}
+              noResultsText={'Pas de résultats…'}
+              loadingPlaceholder={'Chargement…'}
+              onBlur={() => onBlur(value)}
+              onFocus={onFocus}
+              onChange={(newValue: { value: string }) => {
+                if (typeof onChange === 'function') {
+                  onChange();
+                }
+                if (multi) {
+                  return input.onChange(newValue);
+                }
+                input.onChange(newValue ? newValue.value : '');
+              }}
+            />
+          )}
           {touched && error}
         </div>
       </div>

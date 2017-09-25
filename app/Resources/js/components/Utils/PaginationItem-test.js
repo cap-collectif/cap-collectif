@@ -43,9 +43,7 @@ describe('<PaginationItem />', () => {
   });
 
   it('should render a pagination with specified aria label even when label is specified', () => {
-    const wrapper = shallow(
-      <PaginationItem {...props} ariaLabel="test" label="test2" />,
-    );
+    const wrapper = shallow(<PaginationItem {...props} ariaLabel="test" label="test2" />);
     const itemWrapper = wrapper.find('.page-item__wrapper');
     expect(itemWrapper.prop('aria-label')).toEqual('test');
     const itemLabel = wrapper.find('.page-item__label');

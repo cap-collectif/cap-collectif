@@ -1,7 +1,6 @@
 import BaseStore from './BaseStore';
 
 class MessageStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -13,7 +12,8 @@ class MessageStore extends BaseStore {
 
   _registerToActions(action) {
     switch (action.actionType) {
-      default: break;
+      default:
+        break;
     }
   }
 

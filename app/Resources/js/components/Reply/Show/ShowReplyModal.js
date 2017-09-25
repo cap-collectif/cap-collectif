@@ -46,11 +46,7 @@ const ShowReplyModal = React.createClass({
                   />
                 ),
                 time: (
-                  <FormattedDate
-                    value={moment(reply.createdAt)}
-                    hour="numeric"
-                    minute="numeric"
-                  />
+                  <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
                 ),
               }}
             />
@@ -67,12 +63,7 @@ const ShowReplyModal = React.createClass({
           })}
         </Modal.Body>
         <Modal.Footer>
-          <ReplyModalButtons
-            reply={reply}
-            form={form}
-            onChange={this.onChange}
-            onClose={onClose}
-          />
+          <ReplyModalButtons reply={reply} form={form} onChange={this.onChange} onClose={onClose} />
           <CloseButton onClose={onClose} />
         </Modal.Footer>
       </Modal>

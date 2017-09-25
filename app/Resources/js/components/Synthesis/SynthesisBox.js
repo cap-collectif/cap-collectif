@@ -76,11 +76,7 @@ const SynthesisBox = React.createClass({
           </EditBox>
         );
       }
-      return (
-        <p>
-          {<FormattedMessage id="synthesis.common.errors.incorrect_mode" />}
-        </p>
-      );
+      return <p>{<FormattedMessage id="synthesis.common.errors.incorrect_mode" />}</p>;
     }
   },
 

@@ -21,11 +21,7 @@ export const LoginSocialButtons = React.createClass({
 
   render() {
     const { features } = this.props;
-    if (
-      !features.login_facebook &&
-      !features.login_gplus &&
-      !features.login_saml
-    ) {
+    if (!features.login_facebook && !features.login_gplus && !features.login_saml) {
       return null;
     }
     return (
@@ -34,9 +30,7 @@ export const LoginSocialButtons = React.createClass({
         <GoogleLoginButton {...this.props} />
         <SamlLoginButton {...this.props} />
         <p className="p--centered">
-          <span>
-            {<FormattedMessage id="login.or" />}
-          </span>
+          <span>{<FormattedMessage id="login.or" />}</span>
         </p>
       </div>
     );

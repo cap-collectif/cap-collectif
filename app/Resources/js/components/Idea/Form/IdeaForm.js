@@ -7,10 +7,7 @@ import renderComponent from '../../Form/Field';
 import { isUrl } from '../../../services/Validator';
 import type { State } from '../../../types';
 
-const validate = (
-  { title, body, object, url, confirm, theme }: Object,
-  { showThemes }: Object,
-) => {
+const validate = ({ title, body, object, url, confirm, theme }: Object, { showThemes }: Object) => {
   const errors = {};
   if (!title || title.length <= 2) {
     errors.title = 'idea.constraints.title';
@@ -51,7 +48,7 @@ export const IdeaForm = React.createClass({
     const { idea, showThemes, themes } = this.props;
     return (
       <form id="idea-form">
-        {idea &&
+        {idea && (
           <div className="alert alert-warning edit-confirm-alert">
             <Field
               type="checkbox"
@@ -60,7 +57,8 @@ export const IdeaForm = React.createClass({
               name="confirm"
               children={<FormattedMessage id="idea.confirm" />}
             />
-          </div>}
+          </div>
+        )}
         <Field
           id="idea_title"
           type="text"
@@ -68,7 +66,7 @@ export const IdeaForm = React.createClass({
           name="title"
           label={<FormattedMessage id="idea.form.title" />}
         />
-        {showThemes &&
+        {showThemes && (
           <Field
             id="idea_theme"
             type="select"
@@ -85,7 +83,8 @@ export const IdeaForm = React.createClass({
                 </option>
               );
             })}
-          </Field>}
+          </Field>
+        )}
         <Field
           id="idea_body"
           type="editor"

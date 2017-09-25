@@ -46,14 +46,7 @@ export const ProposalCreateFusionButton = React.createClass({
   },
 
   render() {
-    const {
-      proposalFormId,
-      showModal,
-      isSubmitting,
-      open,
-      close,
-      submit,
-    } = this.props;
+    const { proposalFormId, showModal, isSubmitting, open, close, submit } = this.props;
     const { proposalForm } = this.state;
     return (
       <div>
@@ -78,11 +71,12 @@ export const ProposalCreateFusionButton = React.createClass({
           <Modal.Body>
             <h3>Propositions fusionnées</h3>
             <ProposalFusionForm />
-            {proposalForm &&
+            {proposalForm && (
               <div>
                 <h3>Nouvelle proposition issue de la fusion</h3>
                 <ProposalAdminForm proposalForm={proposalForm} />
-              </div>}
+              </div>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => close()} />
@@ -101,15 +95,11 @@ export const ProposalCreateFusionButton = React.createClass({
 const mapStateToProps = (state: State) => {
   const selectedProjectId: Uuid = formValueSelector(formName)(state, 'project');
   const project = state.project.projectsById[selectedProjectId];
-  const currentCollectStep = project
-    ? project.steps.filter(s => s.type === 'collect')[0]
-    : null;
+  const currentCollectStep = project ? project.steps.filter(s => s.type === 'collect')[0] : null;
   return {
     showModal: state.proposal.isCreatingFusion,
     isSubmitting: state.proposal.isSubmittingFusion,
-    proposalFormId: currentCollectStep
-      ? currentCollectStep.proposalFormId
-      : null,
+    proposalFormId: currentCollectStep ? currentCollectStep.proposalFormId : null,
   };
 };
 

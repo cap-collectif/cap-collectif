@@ -76,11 +76,7 @@ const OpinionSourceBox = React.createClass({
             <OpinionSourceAdd disabled={!opinion.isContribuable} />
           </Col>
           <Col xs={12} sm={6} md={6}>
-            <Filter
-              show={sources.length > 1}
-              value={filter}
-              onChange={this.handleFilterChange}
-            />
+            <Filter show={sources.length > 1} value={filter} onChange={this.handleFilterChange} />
           </Col>
         </Row>
         <Loader show={isLoading}>

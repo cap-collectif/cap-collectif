@@ -21,10 +21,7 @@ const Filter = React.createClass({
     const { onChange, show, value, values } = this.props;
     if (show) {
       return (
-        <select
-          className="form-control pull-right"
-          value={value}
-          onChange={onChange}>
+        <select className="form-control pull-right" value={value} onChange={onChange}>
           {values &&
             values.map((val: number, index: number): ?React.Element<any> => {
               return (

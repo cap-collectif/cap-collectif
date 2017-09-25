@@ -8,9 +8,7 @@ import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import { hideNewFieldModal } from '../../redux/modules/default';
 import type { Dispatch, State } from '../../types';
-import AddRegistrationQuestionForm, {
-  formName,
-} from './AddRegistrationQuestionForm';
+import AddRegistrationQuestionForm, { formName } from './AddRegistrationQuestionForm';
 
 export const AddRegistrationQuestionModal = React.createClass({
   propTypes: {
@@ -31,9 +29,7 @@ export const AddRegistrationQuestionModal = React.createClass({
         bsSize="large"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            Ajouter un champ supplémentaire
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-lg">Ajouter un champ supplémentaire</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <AddRegistrationQuestionForm />
@@ -46,9 +42,11 @@ export const AddRegistrationQuestionModal = React.createClass({
             disabled={submitting}
             onClick={onSubmit}
             bsStyle="primary">
-            {submitting
-              ? <FormattedMessage id="global.loading" />
-              : <FormattedMessage id="global.save" />}
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save" />
+            )}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -77,8 +75,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector: Connector<{}, Props> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default connector(AddRegistrationQuestionModal);

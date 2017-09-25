@@ -61,9 +61,7 @@ const ReplyDeleteModal = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>
-              {<FormattedMessage id="reply.delete.confirm" />}
-            </p>
+            <p>{<FormattedMessage id="reply.delete.confirm" />}</p>
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={this.close} />

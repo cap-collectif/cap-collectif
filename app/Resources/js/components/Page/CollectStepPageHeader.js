@@ -16,21 +16,23 @@ const CollectStepPageHeader = React.createClass({
     const { categories, queryCount, total, countFusions, form } = this.props;
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
-        {typeof queryCount !== 'undefined' && total !== queryCount
-          ? <FormattedMessage
-              id="proposal.count_with_total"
-              values={{
-                num: queryCount,
-                total,
-              }}
-            />
-          : <FormattedMessage
-              id="proposal.count"
-              values={{
-                num: total,
-              }}
-            />}{' '}
-        {countFusions > 0 &&
+        {typeof queryCount !== 'undefined' && total !== queryCount ? (
+          <FormattedMessage
+            id="proposal.count_with_total"
+            values={{
+              num: queryCount,
+              total,
+            }}
+          />
+        ) : (
+          <FormattedMessage
+            id="proposal.count"
+            values={{
+              num: total,
+            }}
+          />
+        )}{' '}
+        {countFusions > 0 && (
           <span style={{ color: '#999', fontWeight: 300 }}>
             <FormattedMessage
               id="proposal.count_fusions"
@@ -38,7 +40,8 @@ const CollectStepPageHeader = React.createClass({
                 num: countFusions,
               }}
             />
-          </span>}
+          </span>
+        )}
         <span className="pull-right">
           <ProposalCreate form={form} categories={categories} />
         </span>
@@ -47,6 +50,4 @@ const CollectStepPageHeader = React.createClass({
   },
 });
 
-export default connect(state => ({ queryCount: state.proposal.queryCount }))(
-  CollectStepPageHeader,
-);
+export default connect(state => ({ queryCount: state.proposal.queryCount }))(CollectStepPageHeader);

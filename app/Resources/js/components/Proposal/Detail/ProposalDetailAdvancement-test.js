@@ -49,9 +49,7 @@ describe('<ProposalDetailAdvancement />', () => {
   };
 
   it('should render steps with according colors', () => {
-    const wrapper = shallow(
-      <ProposalDetailAdvancement proposal={proposal} project={project} />,
-    );
+    const wrapper = shallow(<ProposalDetailAdvancement proposal={proposal} project={project} />);
     expect(wrapper.find('ProposalDetailAdvancementStep')).toHaveLength(3);
     const step1 = wrapper.find('ProposalDetailAdvancementStep').at(0);
     expect(step1.prop('status')).toEqual(null);

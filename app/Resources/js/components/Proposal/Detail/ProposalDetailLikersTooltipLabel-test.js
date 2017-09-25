@@ -20,16 +20,12 @@ describe('<ProposalDetailLikersTooltipLabel />', () => {
   ];
 
   it('should render a formatted message when one liker', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersTooltipLabel likers={oneLiker} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersTooltipLabel likers={oneLiker} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render two formatted message when several likers', () => {
-    const wrapper = shallow(
-      <ProposalDetailLikersTooltipLabel likers={severalLikers} />,
-    );
+    const wrapper = shallow(<ProposalDetailLikersTooltipLabel likers={severalLikers} />);
     expect(wrapper).toMatchSnapshot();
   });
 

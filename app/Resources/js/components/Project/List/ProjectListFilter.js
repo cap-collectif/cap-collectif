@@ -36,21 +36,13 @@ const ProjectListFilter = React.createClass({
   handleSubmit(e) {
     const { dispatch } = this.props;
     e.preventDefault();
-    const value =
-      this.state.termInputValue.length > 0 ? this.state.termInputValue : null;
+    const value = this.state.termInputValue.length > 0 ? this.state.termInputValue : null;
     dispatch(changeTerm(value));
     dispatch(fetchProjects());
   },
 
   render() {
-    const {
-      projectTypes,
-      features,
-      themes,
-      dispatch,
-      orderBy,
-      type,
-    } = this.props;
+    const { projectTypes, features, themes, dispatch, orderBy, type } = this.props;
 
     const filters = [];
 
@@ -89,14 +81,11 @@ const ProjectListFilter = React.createClass({
           <option key="all" value="">
             Tous les types
           </option>
-          {projectTypes.map(projectType =>
+          {projectTypes.map(projectType => (
             <FormattedMessage id={projectType.title} key={projectType.slug}>
-              {message =>
-                <option value={projectType.slug}>
-                  {message}
-                </option>}
-            </FormattedMessage>,
-          )}
+              {message => <option value={projectType.slug}>{message}</option>}
+            </FormattedMessage>
+          ))}
         </FormControl>,
       );
     }

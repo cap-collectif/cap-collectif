@@ -15,9 +15,7 @@ describe('<IdeaPageComments />', () => {
   });
 
   it('it should a div with provided class name', () => {
-    const wrapper = shallow(
-      <IdeaPageComments {...props} className="css-class" />,
-    );
+    const wrapper = shallow(<IdeaPageComments {...props} className="css-class" />);
     expect(wrapper).toMatchSnapshot();
   });
 });

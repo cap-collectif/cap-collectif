@@ -1,20 +1,9 @@
 // @flow
 import { takeEvery, call, put } from 'redux-saga/effects';
-import {
-  UPDATE_OPINION_SUCCESS,
-  UPDATE_OPINION_FAILURE,
-} from '../../constants/OpinionConstants';
+import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
-import type {
-  Exact,
-  Version,
-  Opinion,
-  VoteValue,
-  Uuid,
-  Dispatch,
-  Action,
-} from '../../types';
+import type { Exact, Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../types';
 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
@@ -143,14 +132,10 @@ export type State = {
 const VOTES_PREVIEW_COUNT = 8;
 export const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
 export const VERSION_VOTE_SUCCEEDED = 'opinion/VERSION_VOTE_SUCCEEDED';
-export const DELETE_OPINION_VOTE_SUCCEEDED =
-  'opinion/DELETE_OPINION_VOTE_SUCCEEDED';
-export const DELETE_VERSION_VOTE_SUCCEEDED =
-  'opinion/DELETE_VERSION_VOTE_SUCCEEDED';
-export const OPINION_VOTES_FETCH_REQUESTED =
-  'opinion/OPINION_VOTES_FETCH_REQUESTED';
-export const OPINION_VOTES_FETCH_SUCCEEDED =
-  'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
+export const DELETE_OPINION_VOTE_SUCCEEDED = 'opinion/DELETE_OPINION_VOTE_SUCCEEDED';
+export const DELETE_VERSION_VOTE_SUCCEEDED = 'opinion/DELETE_VERSION_VOTE_SUCCEEDED';
+export const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUESTED';
+export const OPINION_VOTES_FETCH_SUCCEEDED = 'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
 export const OPINION_VOTES_FETCH_FAILED = 'opinion/OPINION_VOTES_FETCH_FAILED';
 
 const initialState: State = {
@@ -169,9 +154,7 @@ const initialState: State = {
   showSourceEditModal: null,
 };
 
-export const openArgumentEditModal = (
-  id: Uuid,
-): ShowArgumentEditModalAction => ({
+export const openArgumentEditModal = (id: Uuid): ShowArgumentEditModalAction => ({
   type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
   id,
 });
@@ -220,18 +203,14 @@ export const showOpinionVersionCreateModal = (): ShowOpinionVersionCreateModalAc
   type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL',
 });
 
-export const openOpinionCreateModal = (
-  opinionTypeId: Uuid,
-): ShowOpinionCreateModalAction => ({
+export const openOpinionCreateModal = (opinionTypeId: Uuid): ShowOpinionCreateModalAction => ({
   type: 'opinion/SHOW_OPINION_CREATE_MODAL',
   opinionTypeId,
 });
 export const closeOpinionCreateModal = (): CloseOpinionCreateModalAction => ({
   type: 'opinion/CLOSE_OPINION_CREATE_MODAL',
 });
-export const openOpinionEditModal = (
-  opinionId: Uuid,
-): ShowOpinionEditModalAction => ({
+export const openOpinionEditModal = (opinionId: Uuid): ShowOpinionEditModalAction => ({
   type: 'opinion/SHOW_OPINION_EDIT_MODAL',
   opinionId,
 });
@@ -267,10 +246,7 @@ export const editOpinionVersion = (
     body: data.body,
     comment: data.comment,
   };
-  return Fetcher.put(
-    `/opinions/${opinionId}/versions/${versionId}`,
-    apiData,
-  ).then(
+  return Fetcher.put(`/opinions/${opinionId}/versions/${versionId}`, apiData).then(
     () => {
       dispatch(closeOpinionVersionEditModal());
       location.reload(); // TODO when enough time
@@ -281,9 +257,7 @@ export const editOpinionVersion = (
   );
 };
 
-export function* fetchAllOpinionVotes(
-  action: FetchOpinionVotesAction,
-): Generator<*, *, *> {
+export function* fetchAllOpinionVotes(action: FetchOpinionVotesAction): Generator<*, *, *> {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -295,10 +269,7 @@ export function* fetchAllOpinionVotes(
             votesPerIteration}&limit=${votesPerIteration}`
         : `/opinions/${opinionId}/votes?offset=${iterationCount *
             votesPerIteration}&limit=${votesPerIteration}`;
-      const result: { votes: OpinionVotes, hasMore: boolean } = yield call(
-        Fetcher.get,
-        votesUrl,
-      );
+      const result: { votes: OpinionVotes, hasMore: boolean } = yield call(Fetcher.get, votesUrl);
       hasMore = result.hasMore;
       iterationCount++;
       yield put({
@@ -316,46 +287,31 @@ export function* saga(): Generator<*, *, *> {
   yield takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
 }
 
-export const fetchOpinionVotes = (
-  opinionId: Uuid,
-  versionId: ?Uuid,
-): FetchOpinionVotesAction => ({
+export const fetchOpinionVotes = (opinionId: Uuid, versionId: ?Uuid): FetchOpinionVotesAction => ({
   type: OPINION_VOTES_FETCH_REQUESTED,
   opinionId,
   versionId,
 });
 
-export const versionVoteSuccess = (
-  versionId: Uuid,
-  vote: OpinionVote,
-): Action => ({
+export const versionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
 });
 
-export const opinionVoteSuccess = (
-  opinionId: Uuid,
-  vote: OpinionVote,
-): Action => ({
+export const opinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-export const deleteOpinionVoteSuccess = (
-  opinionId: Uuid,
-  vote: OpinionVote,
-): Action => ({
+export const deleteOpinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_OPINION_VOTE_SUCCEEDED,
   opinionId,
   vote,
 });
 
-export const deleteVersionVoteSuccess = (
-  versionId: Uuid,
-  vote: OpinionVote,
-): Action => ({
+export const deleteVersionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_VERSION_VOTE_SUCCEEDED,
   versionId,
   vote,
@@ -387,12 +343,7 @@ const deleteVote = (opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
     });
 };
 
-const vote = (
-  value: VoteValue,
-  opinion: Uuid,
-  parent: ?Uuid,
-  dispatch: Dispatch,
-): void => {
+const vote = (value: VoteValue, opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
   const url = parent
     ? `/opinions/${parent}/versions/${opinion}/votes`
     : `/opinions/${opinion}/votes`;
@@ -421,17 +372,11 @@ const vote = (
 export const deleteVoteOpinion = (opinion: Uuid, dispatch: Dispatch): void =>
   deleteVote(opinion, null, dispatch);
 
-export const deleteVoteVersion = (
-  version: Uuid,
-  opinion: Uuid,
-  dispatch: Dispatch,
-): void => deleteVote(version, opinion, dispatch);
+export const deleteVoteVersion = (version: Uuid, opinion: Uuid, dispatch: Dispatch): void =>
+  deleteVote(version, opinion, dispatch);
 
-export const voteOpinion = (
-  value: VoteValue,
-  opinion: Uuid,
-  dispatch: Dispatch,
-): void => vote(value, opinion, null, dispatch);
+export const voteOpinion = (value: VoteValue, opinion: Uuid, dispatch: Dispatch): void =>
+  vote(value, opinion, null, dispatch);
 
 export const voteVersion = (
   value: VoteValue,
@@ -456,18 +401,9 @@ const getVoteStringByValue = (value: VoteValue): string => {
   return 'Mitige';
 };
 
-const appendVote = (
-  state: State,
-  newVote: Object,
-  object: Object,
-  type: string,
-): Exact<State> => {
-  const previousVote = object.votes.find(
-    v => v.user.uniqueId === newVote.user.uniqueId,
-  );
-  const voteCountIncreasing = `votesCount${getVoteStringByValue(
-    newVote.value,
-  )}`;
+const appendVote = (state: State, newVote: Object, object: Object, type: string): Exact<State> => {
+  const previousVote = object.votes.find(v => v.user.uniqueId === newVote.user.uniqueId);
+  const voteCountIncreasing = `votesCount${getVoteStringByValue(newVote.value)}`;
   if (typeof previousVote === 'undefined') {
     // first vote
     const contribution = {
@@ -486,9 +422,7 @@ const appendVote = (
     v => v.user.uniqueId === newVote.user.uniqueId,
   );
   object.votes.splice(indexOfCurrentUserVote, 1);
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(
-    previousVote.value,
-  )}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
   const contribution = {
     ...object,
     votes: [...object.votes, newVote],
@@ -501,38 +435,23 @@ const appendVote = (
     : updateOpinion(state, contribution);
 };
 
-const removeVote = (
-  state: State,
-  oldVote: Object,
-  object: Object,
-  type: string,
-): Exact<State> => {
+const removeVote = (state: State, oldVote: Object, object: Object, type: string): Exact<State> => {
   const indexToRemove = object.votes.findIndex(
     v => v.user && v.user.uniqueId === oldVote.user.uniqueId,
   );
-  const voteCountDecreasing = `votesCount${getVoteStringByValue(
-    oldVote.value,
-  )}`;
+  const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
   const lol = {
     ...object,
-    votes: [
-      ...object.votes.slice(0, indexToRemove),
-      ...object.votes.slice(indexToRemove + 1),
-    ],
+    votes: [...object.votes.slice(0, indexToRemove), ...object.votes.slice(indexToRemove + 1)],
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
     user_vote: null,
     userHasVote: false,
     votesCount: object.votesCount - 1,
   };
-  return type === 'version'
-    ? updateVersion(state, lol)
-    : updateOpinion(state, lol);
+  return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
 };
 
-export const reducer = (
-  state: State = initialState,
-  action: Action,
-): Exact<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
@@ -598,36 +517,16 @@ export const reducer = (
       });
     }
     case OPINION_VOTE_SUCCEEDED: {
-      return appendVote(
-        state,
-        action.vote,
-        state.opinionsById[action.opinionId],
-        'opinion',
-      );
+      return appendVote(state, action.vote, state.opinionsById[action.opinionId], 'opinion');
     }
     case DELETE_OPINION_VOTE_SUCCEEDED: {
-      return removeVote(
-        state,
-        action.vote,
-        state.opinionsById[action.opinionId],
-        'opinion',
-      );
+      return removeVote(state, action.vote, state.opinionsById[action.opinionId], 'opinion');
     }
     case VERSION_VOTE_SUCCEEDED: {
-      return appendVote(
-        state,
-        action.vote,
-        state.versionsById[action.versionId],
-        'version',
-      );
+      return appendVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case DELETE_VERSION_VOTE_SUCCEEDED: {
-      return removeVote(
-        state,
-        action.vote,
-        state.versionsById[action.versionId],
-        'version',
-      );
+      return removeVote(state, action.vote, state.versionsById[action.versionId], 'version');
     }
     case OPINION_VOTES_FETCH_FAILED: {
       // eslint-disable-next-line no-console

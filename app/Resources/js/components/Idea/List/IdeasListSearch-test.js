@@ -22,8 +22,6 @@ describe('<IdeasListSearch />', () => {
     expect(input).toHaveLength(1);
     expect(input.prop('id')).toEqual('idea-search-input');
     expect(input.prop('type')).toEqual('text');
-    expect(input.prop('groupClassName')).toEqual(
-      'idea-search-group pull-right',
-    );
+    expect(input.prop('groupClassName')).toEqual('idea-search-group pull-right');
   });
 });

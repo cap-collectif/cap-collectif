@@ -46,11 +46,7 @@ const DeleteButton = React.createClass({
       classes[className] = true;
 
       return (
-        <button
-          id={id}
-          style={style}
-          className={classNames(classes)}
-          onClick={() => onClick()}>
+        <button id={id} style={style} className={classNames(classes)} onClick={() => onClick()}>
           <i className="cap cap-bin-2" />
           <FormattedMessage id="global.remove" />
         </button>

@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import ProposalVoteBasketWidget from '../components/Proposal/Vote/ProposalVoteBasketWidget';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ProposalVoteBasketWidget {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

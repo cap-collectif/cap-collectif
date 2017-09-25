@@ -41,13 +41,7 @@ const ProjectStatsModal = React.createClass({
 
   loadData() {
     const { district, stepId, theme, type } = this.props;
-    ProjectStatsActions.load(
-      stepId,
-      type,
-      null,
-      theme,
-      district,
-    ).then(response => {
+    ProjectStatsActions.load(stepId, type, null, theme, district).then(response => {
       this.setState({
         data: response.data,
         isLoading: false,
@@ -68,14 +62,7 @@ const ProjectStatsModal = React.createClass({
   },
 
   render() {
-    const {
-      icon,
-      isCurrency,
-      label,
-      showPercentage,
-      stepId,
-      type,
-    } = this.props;
+    const { icon, isCurrency, label, showPercentage, stepId, type } = this.props;
     const id = `project-stats-modal-${stepId}-${type}`;
     return (
       <div>
@@ -114,10 +101,7 @@ const ProjectStatsModal = React.createClass({
             </Loader>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton
-              onClose={this.hideModal}
-              label="project.stats.modal.close"
-            />
+            <CloseButton onClose={this.hideModal} label="project.stats.modal.close" />
           </Modal.Footer>
         </Modal>
       </div>

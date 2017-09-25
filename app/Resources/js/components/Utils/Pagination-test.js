@@ -58,52 +58,40 @@ describe('<Pagination />', () => {
   });
 
   it('should render specified number of items when there is enough pages', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} displayedPages={10} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} displayedPages={10} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(14);
   });
 
   it('should not render more pages than max even if specified otherwise', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} displayedPages={100} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} displayedPages={100} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(14);
   });
 
   it('should not render first page item if specified', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} showFirst={false} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} showFirst={false} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(6);
     expect(items.find({ id: 'first-page-item' })).toHaveLength(0);
   });
 
   it('should not render previous page item if specified', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} showPrev={false} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} showPrev={false} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(6);
     expect(items.find({ id: 'prev-page-item' })).toHaveLength(0);
   });
 
   it('should not render next page item if specified', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} showNext={false} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} showNext={false} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(6);
     expect(items.find({ id: 'next-page-item' })).toHaveLength(0);
   });
 
   it('should not render last page item if specified', () => {
-    const wrapper = shallow(
-      <Pagination {...props} current={5} showLast={false} />,
-    );
+    const wrapper = shallow(<Pagination {...props} current={5} showLast={false} />);
     const items = wrapper.find('PaginationItem');
     expect(items).toHaveLength(6);
     expect(items.find({ id: 'last-page-item' })).toHaveLength(0);

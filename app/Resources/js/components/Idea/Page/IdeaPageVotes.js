@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import {
-  fetchIdeaVotes,
-  VOTES_PREVIEW_COUNT,
-} from '../../../redux/modules/idea';
+import { fetchIdeaVotes, VOTES_PREVIEW_COUNT } from '../../../redux/modules/idea';
 import UserBox from '../../User/UserBox';
 import AllVotesModal from '../../Votes/AllVotesModal';
 
@@ -80,18 +77,15 @@ export const IdeaPageVotes = React.createClass({
             );
           })}
         </Row>
-        {hasMoreVotes &&
+        {hasMoreVotes && (
           <Button
             bsStyle="primary"
             onClick={this.showModal}
             className="btn--outline idea__votes__show-more">
             {<FormattedMessage id="idea.vote.show_more" />}
-          </Button>}
-        <AllVotesModal
-          votes={idea.votes}
-          onToggleModal={this.toggleModal}
-          showModal={showModal}
-        />
+          </Button>
+        )}
+        <AllVotesModal votes={idea.votes} onToggleModal={this.toggleModal} showModal={showModal} />
       </div>
     );
   },

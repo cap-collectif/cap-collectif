@@ -10,7 +10,6 @@ import {
 } from '../constants/ArgumentConstants';
 
 class ArgumentStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -54,7 +53,8 @@ class ArgumentStore extends BaseStore {
         break;
       case UPDATE_ARGUMENT_FAILURE:
         break;
-      default: break;
+      default:
+        break;
     }
   }
 
@@ -77,7 +77,6 @@ class ArgumentStore extends BaseStore {
   get opinion() {
     return this._opinion;
   }
-
 }
 
 export default new ArgumentStore();

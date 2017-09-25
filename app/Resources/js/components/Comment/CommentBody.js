@@ -69,9 +69,7 @@ const CommentBody = React.createClass({
     return (
       <div className="opinion__text">
         {this.renderTrashedLabel()}
-        <Linkify properties={{ className: 'external-link' }}>
-          {nl2br(this.generateText())}
-        </Linkify>
+        <Linkify properties={{ className: 'external-link' }}>{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}
       </div>
     );

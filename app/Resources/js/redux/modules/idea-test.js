@@ -1,9 +1,6 @@
 /* eslint-env jest */
 import { call, put } from 'redux-saga/effects';
-import {
-  reducer,
-  fetchAllVotes,
- } from './idea';
+import { reducer, fetchAllVotes } from './idea';
 import Fetcher from '../../services/Fetcher';
 
 describe('Idea Reducer', () => {
@@ -13,10 +10,7 @@ describe('Idea Reducer', () => {
         1: { votes: [] },
       },
     };
-    const votes = [
-        { username: 'paul' },
-        { username: 'popo' },
-    ];
+    const votes = [{ username: 'paul' }, { username: 'popo' }];
     const newState = reducer(initialState, {
       type: 'idea/VOTES_FETCH_SUCCEEDED',
       ideaId: 1,
@@ -56,10 +50,7 @@ describe('Idea Reducer', () => {
       ideas: {
         1: {
           votesCount: 2,
-          votes: [
-            { user: { unidId: 'user' }, private: false },
-            { private: true },
-          ],
+          votes: [{ user: { unidId: 'user' }, private: false }, { private: true }],
         },
       },
     };
@@ -102,10 +93,12 @@ describe('Idea Sagas', () => {
 
     const votes = [];
     expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=0&limit=50'));
-    expect(generator.next({
-      hasMore: true,
-      votes,
-    }).value).toEqual(
+    expect(
+      generator.next({
+        hasMore: true,
+        votes,
+      }).value,
+    ).toEqual(
       put({
         type: 'idea/VOTES_FETCH_SUCCEEDED',
         ideaId: 1,

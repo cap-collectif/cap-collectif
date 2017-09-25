@@ -63,21 +63,22 @@ export const EmailNotConfirmedAlert = React.createClass({
             />
           </div>
           <div className="col-md-5">
-            {confirmationSent
-              ? <Button
-                  style={{ marginRight: 15, marginBottom: 5 }}
-                  bsStyle="primary"
-                  disabled>
-                  <FormattedMessage id="user.confirm.sent" />
-                </Button>
-              : <Button
-                  style={{ marginRight: 15, marginBottom: 5 }}
-                  disabled={resendingConfirmation}
-                  onClick={resendingConfirmation ? null : this.handleResend}>
-                  {resendingConfirmation
-                    ? <FormattedMessage id="user.confirm.sending" />
-                    : <FormattedMessage id="user.confirm.resend" />}
-                </Button>}
+            {confirmationSent ? (
+              <Button style={{ marginRight: 15, marginBottom: 5 }} bsStyle="primary" disabled>
+                <FormattedMessage id="user.confirm.sent" />
+              </Button>
+            ) : (
+              <Button
+                style={{ marginRight: 15, marginBottom: 5 }}
+                disabled={resendingConfirmation}
+                onClick={resendingConfirmation ? null : this.handleResend}>
+                {resendingConfirmation ? (
+                  <FormattedMessage id="user.confirm.sending" />
+                ) : (
+                  <FormattedMessage id="user.confirm.resend" />
+                )}
+              </Button>
+            )}
             <Button style={{ marginBottom: 5 }} href={editEmailUrl}>
               <FormattedMessage id="user.confirm.update" />
             </Button>

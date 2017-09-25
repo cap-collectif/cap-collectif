@@ -35,14 +35,7 @@ const NavbarItem = React.createClass({
                 {item.title}
               </MenuItem>
               {item.children.map(child => {
-                return (
-                  <NavbarItem
-                    item={child}
-                    key={child.id}
-                    isChild
-                    onKeyDown={onKeyDown}
-                  />
-                );
+                return <NavbarItem item={child} key={child.id} isChild onKeyDown={onKeyDown} />;
               })}
             </span>
           );
@@ -55,14 +48,7 @@ const NavbarItem = React.createClass({
             className={className}
             onKeyDown={onKeyDown}>
             {item.children.map((child, childIndex) => {
-              return (
-                <NavbarItem
-                  item={child}
-                  isChild
-                  key={childIndex}
-                  onKeyDown={onKeyDown}
-                />
-              );
+              return <NavbarItem item={child} isChild key={childIndex} onKeyDown={onKeyDown} />;
             })}
           </NavDropdown>
         );

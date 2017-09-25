@@ -16,21 +16,14 @@ export const Opinion = React.createClass({
     const { opinion } = this.props;
     const author = opinion.author;
     return (
-      <li
-        className={`opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
+      <li className={`opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
         <div className="row">
           <div className="col-xs-12  col-sm-8  col-md-9  col-lg-10">
-            <div
-              className="opinion__body box excerpt"
-              style={{ textAlign: 'left' }}>
+            <div className="opinion__body box excerpt" style={{ textAlign: 'left' }}>
               <UserAvatar user={author} className="pull-left" />
               <div className="opinion__data">
                 <OpinionInfos rankingThreshold={0} opinion={opinion} />
-                <OpinionPreviewTitle
-                  showTypeLabel={false}
-                  link
-                  opinion={opinion}
-                />
+                <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
                 <OpinionPreviewCounters opinion={opinion} />
               </div>
             </div>

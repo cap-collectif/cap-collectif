@@ -1,7 +1,18 @@
 export const ALLOWED_RULES = {
   style: ['fontSize', 'color', 'textAlign', 'fontWeight'],
   containerStyle: ['borderTop', 'paddingTop'],
-  display: ['author', 'piechart', 'counters', 'asProgressBar', 'childrenInModal', 'subtitle', 'percentage', 'expanded', 'foldersOrderedByCount', 'noChildrenSorting'],
+  display: [
+    'author',
+    'piechart',
+    'counters',
+    'asProgressBar',
+    'childrenInModal',
+    'subtitle',
+    'percentage',
+    'expanded',
+    'foldersOrderedByCount',
+    'noChildrenSorting',
+  ],
 };
 
 export const DISPLAY_SETTINGS = [

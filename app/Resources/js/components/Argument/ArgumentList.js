@@ -88,22 +88,13 @@ const ArgumentList = React.createClass({
             value={order}
             onChange={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_last">
-              {message =>
-                <option value="last">
-                  {message}
-                </option>}
+              {message => <option value="last">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_old">
-              {message =>
-                <option value="old">
-                  {message}
-                </option>}
+              {message => <option value="old">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_popular">
-              {message =>
-                <option value="popular">
-                  {message}
-                </option>}
+              {message => <option value="popular">{message}</option>}
             </FormattedMessage>
           </select>
         </Col>
@@ -115,45 +106,35 @@ const ArgumentList = React.createClass({
     const { type } = this.props;
     const { count, isLoading } = this.state;
     return (
-      <div
-        id={`opinion__arguments--${type}`}
-        className="block--tablet block--bordered">
+      <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
           <Col xs={12} sm={6} md={6}>
             <h4 className="opinion__header__title">
-              {type === 'simple'
-                ? <FormattedMessage
-                    id="argument.simple.list"
-                    values={{ num: count }}
-                  />
-                : type === 'yes'
-                  ? <FormattedMessage
-                      id="argument.yes.list"
-                      values={{ num: count }}
-                    />
-                  : <FormattedMessage
-                      id="argument.no.list"
-                      values={{ num: count }}
-                    />}
+              {type === 'simple' ? (
+                <FormattedMessage id="argument.simple.list" values={{ num: count }} />
+              ) : type === 'yes' ? (
+                <FormattedMessage id="argument.yes.list" values={{ num: count }} />
+              ) : (
+                <FormattedMessage id="argument.no.list" values={{ num: count }} />
+              )}
             </h4>
           </Col>
           {this.renderFilter()}
         </Row>
-        {!isLoading
-          ? <ul className="media-list opinion__list">
-              {this.state.arguments.map(argument => {
-                if (
-                  (type === 'yes' || type === 'simple') &&
-                  argument.type === 1
-                ) {
-                  return <ArgumentItem key={argument.id} argument={argument} />;
-                }
-                if (type === 'no' && argument.type === 0) {
-                  return <ArgumentItem key={argument.id} argument={argument} />;
-                }
-              })}
-            </ul>
-          : <Loader />}
+        {!isLoading ? (
+          <ul className="media-list opinion__list">
+            {this.state.arguments.map(argument => {
+              if ((type === 'yes' || type === 'simple') && argument.type === 1) {
+                return <ArgumentItem key={argument.id} argument={argument} />;
+              }
+              if (type === 'no' && argument.type === 0) {
+                return <ArgumentItem key={argument.id} argument={argument} />;
+              }
+            })}
+          </ul>
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   },

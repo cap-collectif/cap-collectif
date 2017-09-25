@@ -32,27 +32,16 @@ const OpinionBodyDiffModal = React.createClass({
               {<FormattedMessage id="opinion.diff.tooltip" />}
             </Tooltip>
           }>
-          <a onClick={() => this.open()}>
-            {link}
-          </a>
+          <a onClick={() => this.open()}>{link}</a>
         </OverlayTrigger>
         <Modal show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {modal.title}
-            </Modal.Title>
+            <Modal.Title>{modal.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <b>
-              {<FormattedMessage id="opinion.diff.title" />}
-            </b>
-            <p className="small excerpt">
-              {<FormattedMessage id="opinion.diff.infos" />}
-            </p>
-            <div
-              className="diff"
-              dangerouslySetInnerHTML={{ __html: modal.diff }}
-            />
+            <b>{<FormattedMessage id="opinion.diff.title" />}</b>
+            <p className="small excerpt">{<FormattedMessage id="opinion.diff.infos" />}</p>
+            <div className="diff" dangerouslySetInnerHTML={{ __html: modal.diff }} />
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" onClick={() => this.close()}>

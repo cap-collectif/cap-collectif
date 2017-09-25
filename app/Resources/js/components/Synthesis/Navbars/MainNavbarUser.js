@@ -23,15 +23,8 @@ export const MainNavbarUser = React.createClass({
     if (user) {
       const dropdownTitle = (
         <span>
-          <UserAvatar
-            user={user}
-            size={34}
-            style={{ marginRight: '10px' }}
-            anchor={false}
-          />
-          <span className="hidden-xs">
-            {user.displayName}
-          </span>
+          <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />
+          <span className="hidden-xs">{user.displayName}</span>
         </span>
       );
       return (
@@ -41,25 +34,19 @@ export const MainNavbarUser = React.createClass({
             eventKey={2}
             title={dropdownTitle}
             className="navbar__dropdown">
-            {user.isAdmin
-              ? <MenuItem eventKey="1" href="/admin">
-                  {
-                    <FormattedMessage id="synthesis.edition.navbar.user.admin" />
-                  }
-                </MenuItem>
-              : null}
-            {features.profiles
-              ? <MenuItem eventKey="2" href="/profile">
-                  {
-                    <FormattedMessage id="synthesis.edition.navbar.user.profile" />
-                  }
-                </MenuItem>
-              : null}
+            {user.isAdmin ? (
+              <MenuItem eventKey="1" href="/admin">
+                {<FormattedMessage id="synthesis.edition.navbar.user.admin" />}
+              </MenuItem>
+            ) : null}
+            {features.profiles ? (
+              <MenuItem eventKey="2" href="/profile">
+                {<FormattedMessage id="synthesis.edition.navbar.user.profile" />}
+              </MenuItem>
+            ) : null}
             <MenuItem
               eventKey="3"
-              href={`/profile/${features.profiles
-                ? 'edit-profile'
-                : 'edit-account'}`}>
+              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
               {<FormattedMessage id="synthesis.edition.navbar.user.settings" />}
             </MenuItem>
             <MenuItem divider />

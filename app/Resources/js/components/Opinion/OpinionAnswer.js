@@ -19,11 +19,11 @@ const OpinionAnswer = React.createClass({
     });
     return (
       <div className={classes} id="answer">
-        {answer.title
-          ? <p className="h4" style={{ marginTop: '0' }}>
-              {answer.title}
-            </p>
-          : null}
+        {answer.title ? (
+          <p className="h4" style={{ marginTop: '0' }}>
+            {answer.title}
+          </p>
+        ) : null}
         <AnswerBody answer={answer} />
       </div>
     );

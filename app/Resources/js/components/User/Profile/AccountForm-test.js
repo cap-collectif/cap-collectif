@@ -11,9 +11,7 @@ describe('<AccountForm />', () => {
   };
 
   it('should render a form', () => {
-    const wrapper = shallow(
-      <AccountForm {...props} confirmationEmailResent={false} />,
-    );
+    const wrapper = shallow(<AccountForm {...props} confirmationEmailResent={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -41,11 +39,7 @@ describe('<AccountForm />', () => {
 
   it('should render a form with an info if a confirmation email has been resent', () => {
     const wrapper = shallow(
-      <AccountForm
-        {...props}
-        confirmationEmailResent
-        newEmailToConfirm="new-email@test.com"
-      />,
+      <AccountForm {...props} confirmationEmailResent newEmailToConfirm="new-email@test.com" />,
     );
     expect(wrapper).toMatchSnapshot();
   });

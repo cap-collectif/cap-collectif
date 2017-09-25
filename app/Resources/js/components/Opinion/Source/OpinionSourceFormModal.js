@@ -9,10 +9,7 @@ import OpinionSourceFormModalTitle from './OpinionSourceFormModalTitle';
 import OpinionSourceForm, { formName } from './OpinionSourceForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import {
-  hideSourceCreateModal,
-  hideSourceEditModal,
-} from '../../../redux/modules/opinion';
+import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
 const OpinionSourceFormModal = React.createClass({
@@ -44,10 +41,7 @@ const OpinionSourceFormModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <OpinionSourceFormInfos action={action} />
-          <OpinionSourceForm
-            opinion={OpinionSourceStore.opinion}
-            source={source}
-          />
+          <OpinionSourceForm opinion={OpinionSourceStore.opinion} source={source} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton

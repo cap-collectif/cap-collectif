@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import QuestionnaireStepPage from '../components/Page/QuestionnaireStepPage';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QuestionnaireStepPage {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

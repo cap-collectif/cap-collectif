@@ -96,11 +96,7 @@ const Field = React.createClass({
       </Input>
     );
     if (divClassName) {
-      return (
-        <div className={divClassName}>
-          {input}
-        </div>
-      );
+      return <div className={divClassName}>{input}</div>;
     }
     return input;
   },

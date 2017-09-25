@@ -1,21 +1,15 @@
 import Fetcher from '../services/Fetcher';
 
 export default {
-
-  addVote: (source) => {
-    return Fetcher
-    .post(`/sources/${source}/votes`, {})
-    .then(() => {
+  addVote: source => {
+    return Fetcher.post(`/sources/${source}/votes`, {}).then(() => {
       return true;
     });
   },
 
-  deleteVote: (source) => {
-    return Fetcher
-    .delete(`/sources/${source}/votes`)
-    .then(() => {
+  deleteVote: source => {
+    return Fetcher.delete(`/sources/${source}/votes`).then(() => {
       return true;
     });
   },
-
 };

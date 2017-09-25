@@ -10,14 +10,11 @@ import type { State } from '../../types';
 
 const renderDynamicFields = (
   { fields, meta: { error } }, // eslint-disable-line
-) =>
+) => (
   <div>
     <p>Options</p>
-    {error &&
-      <Alert bsStyle="danger">
-        {error}
-      </Alert>}
-    {fields.map((field, index) =>
+    {error && <Alert bsStyle="danger">{error}</Alert>}
+    {fields.map((field, index) => (
       <div key={index} className="row" style={{ marginBottom: 10 }}>
         <Field
           name={`${field}.label`}
@@ -28,12 +25,13 @@ const renderDynamicFields = (
         <div className="col-sm-2" style={{ marginTop: -15 }}>
           <Button onClick={() => fields.remove(index)}>Retirer</Button>
         </div>
-      </div>,
-    )}
+      </div>
+    ))}
     <div>
       <Button onClick={() => fields.push({})}>Ajouter</Button>
     </div>
-  </div>;
+  </div>
+);
 
 type Props = {
   showChoices: boolean,
@@ -75,8 +73,7 @@ export const RegistrationQuestionForm = React.createClass({
           {/* <option value={5}>{this.getIntlMessage('global.question.types.checkbox')}</option> */}
           {/* <option value={6}>{this.getIntlMessage('global.question.types.ranking')}</option> */}
         </Field>
-        {showChoices &&
-          <FieldArray name="choices" component={renderDynamicFields} />}
+        {showChoices && <FieldArray name="choices" component={renderDynamicFields} />}
       </form>
     );
   },

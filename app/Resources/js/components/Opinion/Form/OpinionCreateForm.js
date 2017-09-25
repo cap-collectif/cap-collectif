@@ -72,7 +72,7 @@ export const OpinionCreateForm = React.createClass({
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
-        {opinionType.appendixTypes.map((field, index) =>
+        {opinionType.appendixTypes.map((field, index) => (
           <Field
             key={index}
             component={renderInput}
@@ -80,8 +80,8 @@ export const OpinionCreateForm = React.createClass({
             label={field.title}
             type="editor"
             id={`appendix_${index}`}
-          />,
-        )}
+          />
+        ))}
       </form>
     );
   },

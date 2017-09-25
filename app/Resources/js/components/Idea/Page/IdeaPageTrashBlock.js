@@ -16,16 +16,12 @@ const IdeaPageTrashBlock = React.createClass({
 
     return (
       <div id="idea__trash-block">
-        <h2>
-          {<FormattedMessage id="idea.trashed.reason" />}
-        </h2>
-        {idea.trashedReason
-          ? <p>
-              {idea.trashedReason}
-            </p>
-          : <p>
-              {<FormattedMessage id="idea.trashed.no_reason" />}
-            </p>}
+        <h2>{<FormattedMessage id="idea.trashed.reason" />}</h2>
+        {idea.trashedReason ? (
+          <p>{idea.trashedReason}</p>
+        ) : (
+          <p>{<FormattedMessage id="idea.trashed.no_reason" />}</p>
+        )}
         <p className="excerpt">
           <FormattedMessage
             id="idea.trashed.date"

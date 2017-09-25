@@ -38,14 +38,12 @@ export const LoginModal = React.createClass({
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={onClose} />
-            <Button
-              id="confirm-login"
-              type="submit"
-              disabled={submitting}
-              bsStyle="primary">
-              {submitting
-                ? <FormattedMessage id="global.loading" />
-                : <FormattedMessage id="global.login_me" />}
+            <Button id="confirm-login" type="submit" disabled={submitting} bsStyle="primary">
+              {submitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="global.login_me" />
+              )}
             </Button>
           </Modal.Footer>
         </form>

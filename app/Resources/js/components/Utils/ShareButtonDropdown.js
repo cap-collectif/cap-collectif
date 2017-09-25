@@ -91,18 +91,11 @@ const ShareButtonDropdown = React.createClass({
         animation={false}
         dialogClassName="modal--custom modal--share-link">
         <Modal.Header closeButton>
-          <Modal.Title>
-            {<FormattedMessage id="share.link" />}
-          </Modal.Title>
+          <Modal.Title>{<FormattedMessage id="share.link" />}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="excerpt">
-            {title}
-          </p>
-          <textarea
-            title={<FormattedMessage id="share.link" />}
-            readOnly
-            rows="3">
+          <p className="excerpt">{title}</p>
+          <textarea title={<FormattedMessage id="share.link" />} readOnly rows="3">
             {url}
           </textarea>
         </Modal.Body>
@@ -124,29 +117,23 @@ const ShareButtonDropdown = React.createClass({
           style={style}
           title={
             <span>
-              <i className="cap cap-link" />{' '}
-              {<FormattedMessage id="global.share" />}
+              <i className="cap cap-link" /> {<FormattedMessage id="global.share" />}
             </span>
           }>
           <MenuItem eventKey="1" onSelect={this.facebook}>
-            <i className="cap cap-facebook" />{' '}
-            {<FormattedMessage id="share.facebook" />}
+            <i className="cap cap-facebook" /> {<FormattedMessage id="share.facebook" />}
           </MenuItem>
           <MenuItem eventKey="2" onSelect={this.twitter}>
-            <i className="cap cap-twitter" />{' '}
-            {<FormattedMessage id="share.twitter" />}
+            <i className="cap cap-twitter" /> {<FormattedMessage id="share.twitter" />}
           </MenuItem>
           <MenuItem eventKey="3" onSelect={this.googleplus}>
-            <i className="cap cap-gplus" />{' '}
-            {<FormattedMessage id="share.googleplus" />}
+            <i className="cap cap-gplus" /> {<FormattedMessage id="share.googleplus" />}
           </MenuItem>
           <MenuItem eventKey="4" href={`mailto:?subject=${title}&body=${url}`}>
-            <i className="cap cap-mail-2-1" />{' '}
-            {<FormattedMessage id="share.mail" />}
+            <i className="cap cap-mail-2-1" /> {<FormattedMessage id="share.mail" />}
           </MenuItem>
           <MenuItem eventKey="4" onSelect={this.showModal}>
-            <i className="cap cap-link-1" />{' '}
-            {<FormattedMessage id="share.link" />}
+            <i className="cap cap-link-1" /> {<FormattedMessage id="share.link" />}
           </MenuItem>
         </DropdownButton>
         {this.renderModal()}

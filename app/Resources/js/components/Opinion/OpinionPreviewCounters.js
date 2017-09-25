@@ -85,11 +85,7 @@ const OpinionPreviewCounters = React.createClass({
               </span>
             );
           }
-          return (
-            <span key={index}>
-              {counter}
-            </span>
-          );
+          return <span key={index}>{counter}</span>;
         })}
       </p>
     );

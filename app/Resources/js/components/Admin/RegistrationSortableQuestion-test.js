@@ -18,9 +18,7 @@ describe('<RegistrationSortableQuestion />', () => {
   });
 
   it('renders correctly when not a superAdmin', () => {
-    const wrapper = shallow(
-      <RegistrationSortableQuestion {...props} isSuperAdmin={false} />,
-    );
+    const wrapper = shallow(<RegistrationSortableQuestion {...props} isSuperAdmin={false} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

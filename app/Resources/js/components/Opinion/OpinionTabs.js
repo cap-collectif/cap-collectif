@@ -3,10 +3,7 @@ import React, { PropTypes } from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
-import {
-  COMMENT_SYSTEM_SIMPLE,
-  COMMENT_SYSTEM_BOTH,
-} from '../../constants/ArgumentConstants';
+import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
@@ -72,9 +69,7 @@ const OpinionTabs = React.createClass({
 
   getCommentSystem() {
     const opinion = this.props.opinion;
-    return opinion.parent
-      ? opinion.parent.type.commentSystem
-      : opinion.type.commentSystem;
+    return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
   },
 
   getArgumentsTrad() {
@@ -91,9 +86,7 @@ const OpinionTabs = React.createClass({
 
     return this.isVersionable()
       ? 'versions'
-      : this.isCommentable()
-        ? 'arguments'
-        : this.isSourceable() ? 'sources' : null;
+      : this.isCommentable() ? 'arguments' : this.isSourceable() ? 'sources' : null;
   },
 
   getType() {
@@ -120,11 +113,7 @@ const OpinionTabs = React.createClass({
 
   isVersionable() {
     const opinion = this.props.opinion;
-    return (
-      !this.isVersion() &&
-      opinion.type !== 'undefined' &&
-      opinion.type.versionable
-    );
+    return !this.isVersion() && opinion.type !== 'undefined' && opinion.type.versionable;
   },
 
   isVersion() {
@@ -169,58 +158,55 @@ const OpinionTabs = React.createClass({
       const marginTop = { marginTop: '20px' };
 
       return (
-        <Tab.Container
-          id="opinion-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}>
+        <Tab.Container id="opinion-page-tabs" defaultActiveKey={this.getDefaultKey()}>
           <div>
             <Nav bsStyle="tabs">
-              {this.isVersionable() &&
+              {this.isVersionable() && (
                 <NavItem eventKey="versions" className="opinion-tabs">
-                  <FormattedMessage
-                    id="global.versions"
-                    values={{ num: opinion.versionsCount }}
-                  />
-                </NavItem>}
-              {this.isCommentable() &&
+                  <FormattedMessage id="global.versions" values={{ num: opinion.versionsCount }} />
+                </NavItem>
+              )}
+              {this.isCommentable() && (
                 <NavItem className="opinion-tabs" eventKey="arguments">
                   <FormattedMessage
                     id={this.getArgumentsTrad()}
                     values={{ num: this.state.argumentsCount }}
                   />
-                </NavItem>}
-              {this.isSourceable() &&
+                </NavItem>
+              )}
+              {this.isSourceable() && (
                 <NavItem className="opinion-tabs" eventKey="sources">
-                  <FormattedMessage
-                    id="global.sources"
-                    values={{ num: this.state.sourcesCount }}
-                  />
-                </NavItem>}
-              {this.hasStatistics() &&
+                  <FormattedMessage id="global.sources" values={{ num: this.state.sourcesCount }} />
+                </NavItem>
+              )}
+              {this.hasStatistics() && (
                 <NavItem className="opinion-tabs" eventKey="votesevolution">
                   <FormattedMessage id="vote.evolution.tab" />
-                </NavItem>}
-              {this.isLinkable() &&
+                </NavItem>
+              )}
+              {this.isLinkable() && (
                 <NavItem className="opinion-tabs" eventKey="links">
-                  <FormattedMessage
-                    id="global.links"
-                    values={{ num: opinion.connectionsCount }}
-                  />
-                </NavItem>}
+                  <FormattedMessage id="global.links" values={{ num: opinion.connectionsCount }} />
+                </NavItem>
+              )}
             </Nav>
             <Tab.Content animation={false}>
-              {this.isVersionable() &&
+              {this.isVersionable() && (
                 <Tab.Pane eventKey="versions" style={marginTop}>
                   {this.renderVersionsContent()}
-                </Tab.Pane>}
-              {this.isCommentable() &&
+                </Tab.Pane>
+              )}
+              {this.isCommentable() && (
                 <Tab.Pane eventKey="arguments" style={marginTop}>
                   <ArgumentsBox {...this.props} />
-                </Tab.Pane>}
-              {this.isSourceable() &&
+                </Tab.Pane>
+              )}
+              {this.isSourceable() && (
                 <Tab.Pane eventKey="sources" style={marginTop}>
                   <OpinionSourceBox {...this.props} />
-                </Tab.Pane>}
-              {this.hasStatistics() &&
+                </Tab.Pane>
+              )}
+              {this.hasStatistics() && (
                 <Tab.Pane eventKey="votesevolution" style={marginTop}>
                   <VoteLinechart
                     top={20}
@@ -228,11 +214,13 @@ const OpinionTabs = React.createClass({
                     width={847}
                     history={opinion.history.votes}
                   />
-                </Tab.Pane>}
-              {this.isLinkable() &&
+                </Tab.Pane>
+              )}
+              {this.isLinkable() && (
                 <Tab.Pane eventKey="links" style={{ marginTop: '20px' }}>
                   <OpinionLinksBox {...this.props} />
-                </Tab.Pane>}
+                </Tab.Pane>
+              )}
             </Tab.Content>
           </div>
         </Tab.Container>
@@ -249,14 +237,7 @@ const OpinionTabs = React.createClass({
       return <ArgumentsBox {...this.props} />;
     }
     if (this.hasStatistics()) {
-      return (
-        <VoteLinechart
-          top={20}
-          height={300}
-          width={847}
-          history={opinion.history.votes}
-        />
-      );
+      return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
     }
 
     if (this.isLinkable()) {

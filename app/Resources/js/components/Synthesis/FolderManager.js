@@ -47,11 +47,7 @@ const FolderManager = React.createClass({
   toggleExpand(element) {
     const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(
-        synthesis.id,
-        'notIgnored',
-        element.id,
-      );
+      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored', element.id);
     }
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
@@ -62,10 +58,7 @@ const FolderManager = React.createClass({
 
   loadElementsTreeFromServer() {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementsTreeFromServer(
-      synthesis.id,
-      'notIgnored',
-    );
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
   },
 
   renderButtons(element) {
@@ -88,12 +81,7 @@ const FolderManager = React.createClass({
       'cap-arrow-66': !this.state.expanded[element.id],
     });
     if (element.childrenCount > 0) {
-      return (
-        <i
-          className={classes}
-          onClick={this.toggleExpand.bind(this, element)}
-        />
-      );
+      return <i className={classes} onClick={this.toggleExpand.bind(this, element)} />;
     }
   },
 

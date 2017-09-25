@@ -17,18 +17,12 @@ const IdeasPaginatedList = React.createClass({
     return (
       <div>
         <IdeasList ideas={ideas} />
-        {ideas.length === 0
-          ? <p className="block text-center">
-              {<FormattedMessage id="idea.no_result" />}
-            </p>
-          : null}
-        {showPagination
-          ? <Pagination
-              current={currentPage}
-              nbPages={nbPages}
-              onChange={onChangePage}
-            />
-          : null}
+        {ideas.length === 0 ? (
+          <p className="block text-center">{<FormattedMessage id="idea.no_result" />}</p>
+        ) : null}
+        {showPagination ? (
+          <Pagination current={currentPage} nbPages={nbPages} onChange={onChangePage} />
+        ) : null}
       </div>
     );
   },

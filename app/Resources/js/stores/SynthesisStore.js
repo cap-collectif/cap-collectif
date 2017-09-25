@@ -3,7 +3,6 @@ import BaseStore from './BaseStore';
 import * as Actions from '../constants/SynthesisActionsConstants';
 
 class SynthesisStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -17,7 +16,8 @@ class SynthesisStore extends BaseStore {
         this._synthesis = action.synthesis;
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 

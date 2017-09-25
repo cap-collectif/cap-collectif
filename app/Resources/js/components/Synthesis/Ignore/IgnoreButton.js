@@ -74,27 +74,18 @@ const IgnoreButton = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {
-            <FormattedMessage id="synthesis.edition.action.confirm_ignore.body" />
-          }
+          {<FormattedMessage id="synthesis.edition.action.confirm_ignore.body" />}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            type="button"
-            className="modal--confirm__cancel"
-            onClick={this.hideConfirmModal}>
-            {
-              <FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_cancel" />
-            }
+          <Button type="button" className="modal--confirm__cancel" onClick={this.hideConfirmModal}>
+            {<FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_cancel" />}
           </Button>
           <Button
             className="modal--confirm__submit"
             bsStyle="primary"
             type="submit"
             onClick={this.ignore}>
-            {
-              <FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_submit" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.confirm_ignore.btn_submit" />}
           </Button>
         </Modal.Footer>
       </Modal>

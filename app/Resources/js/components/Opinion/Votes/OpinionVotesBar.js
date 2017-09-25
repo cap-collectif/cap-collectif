@@ -21,21 +21,16 @@ const OpinionVotesBar = React.createClass({
     const { opinion } = this.props;
     return (
       <div>
-        {this.getOpinionType().votesThreshold &&
+        {this.getOpinionType().votesThreshold && (
           <VotesBar
             max={this.getOpinionType().votesThreshold}
             value={opinion.votesCountOk}
             helpText={this.getOpinionType().votesThresholdHelpText}
-          />}
+          />
+        )}
         <div style={{ paddingTop: '20px' }}>
           {opinion.votes.slice(0, 5).map((vote, index) => {
-            return (
-              <OpinionUserVote
-                key={index}
-                vote={vote}
-                style={{ marginRight: 5 }}
-              />
-            );
+            return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
           })}
           <OpinionVotesModal opinion={opinion} />
         </div>
@@ -52,10 +47,7 @@ const OpinionVotesBar = React.createClass({
   },
 });
 
-const mapStateToProps = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
+const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
   opinion: {
     ...props.opinion,
     ...(Object.keys(state.opinion.opinionsById).length

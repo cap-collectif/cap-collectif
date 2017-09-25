@@ -46,16 +46,7 @@ const UserAvatar = React.createClass({
   },
 
   render() {
-    const {
-      anchor,
-      className,
-      onBlur,
-      onFocus,
-      onMouseOut,
-      onMouseOver,
-      style,
-      user,
-    } = this.props;
+    const { anchor, className, onBlur, onFocus, onMouseOut, onMouseOver, style, user } = this.props;
     const funcProps = {
       onBlur,
       onFocus,
@@ -64,11 +55,7 @@ const UserAvatar = React.createClass({
     };
     if (user && user._links && user._links.profile && anchor) {
       return (
-        <a
-          {...funcProps}
-          className={className}
-          style={style}
-          href={user._links.profile}>
+        <a {...funcProps} className={className} style={style} href={user._links.profile}>
           {this.renderAvatar()}
         </a>
       );

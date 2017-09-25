@@ -61,7 +61,7 @@ const ArgumentCreate = React.createClass({
                 disabled={disabled}
               />
             </LoginOverlay>
-            {user &&
+            {user && (
               <Button
                 disabled={submitting || disabled}
                 onClick={
@@ -72,10 +72,9 @@ const ArgumentCreate = React.createClass({
                       }
                 }
                 bsStyle="primary">
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.publish'}
-                />
-              </Button>}
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />
+              </Button>
+            )}
           </form>
         </div>
       </div>

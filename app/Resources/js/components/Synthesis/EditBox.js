@@ -19,19 +19,21 @@ const EditBox = React.createClass({
           <MainNavbar />
           <SecondNavbar />
           <div className="synthesis__container container-fluid">
-            {sideMenu
-              ? <div className="row">
-                  <div className="col--left col--scrollable col-xs-12 block--mobile">
-                    <SideMenu synthesis={synthesis} />
-                  </div>
-                  <div className="col--right col-xs-12 block--mobile">
-                    <TopMenu synthesis={synthesis} />
-                    <div className="synthesis__content">
-                      {React.cloneElement(children, { synthesis })}
-                    </div>
+            {sideMenu ? (
+              <div className="row">
+                <div className="col--left col--scrollable col-xs-12 block--mobile">
+                  <SideMenu synthesis={synthesis} />
+                </div>
+                <div className="col--right col-xs-12 block--mobile">
+                  <TopMenu synthesis={synthesis} />
+                  <div className="synthesis__content">
+                    {React.cloneElement(children, { synthesis })}
                   </div>
                 </div>
-              : React.cloneElement(children, { synthesis })}
+              </div>
+            ) : (
+              React.cloneElement(children, { synthesis })
+            )}
           </div>
         </div>
       );

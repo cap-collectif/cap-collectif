@@ -33,10 +33,11 @@ const RankingArrow = React.createClass({
         disabled={disabled}
         onClick={disabled ? null : onClick}
         className={`ranking__item__arrow ranking__item__arrow--${type}`}>
-        {type === 'right' &&
+        {type === 'right' && (
           <span className="hidden-xs" style={{ marginRight: '10px' }}>
             {<FormattedMessage id="global.form.ranking.select" />}
-          </span>}
+          </span>
+        )}
         <i className={classes} />
       </Button>
     );

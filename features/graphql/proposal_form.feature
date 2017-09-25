@@ -62,6 +62,7 @@ Scenario: GraphQL client wants to update a proposal form
           categoryHelpText
           usingAddress
           addressHelpText
+          proposalInAZoneRequired
           latMap
           lngMap
           zoomMap
@@ -92,6 +93,7 @@ Scenario: GraphQL client wants to update a proposal form
         "districtHelpText": "District Help",
         "usingCategories": true,
         "categoryMandatory": true,
+        "proposalInAZoneRequired": true,
         "categoryHelpText": "Category Help",
         "usingAddress": true,
         "addressHelpText": "Address help",
@@ -145,6 +147,7 @@ Scenario: GraphQL client wants to update a proposal form
           "districtHelpText": "District Help",
           "usingCategories": true,
           "categoryMandatory": true,
+          "proposalInAZoneRequired": true,
           "categoryHelpText": "Category Help",
           "usingAddress": true,
           "addressHelpText": "Address help",

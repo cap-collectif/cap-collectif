@@ -34,21 +34,11 @@ const ReportForm = React.createClass({
           clearable={false}
           inputClassName={null}
           labelClassName={null}>
-          <option value={-1}>
-            {<FormattedMessage id="global.select" />}
-          </option>
-          <option value={1}>
-            {<FormattedMessage id="reporting.status.offending" />}
-          </option>
-          <option value={2}>
-            {<FormattedMessage id="reporting.status.spam" />}
-          </option>
-          <option value={3}>
-            {<FormattedMessage id="reporting.status.error" />}
-          </option>
-          <option value={4}>
-            {<FormattedMessage id="reporting.status.off_topic" />}
-          </option>
+          <option value={-1}>{<FormattedMessage id="global.select" />}</option>
+          <option value={1}>{<FormattedMessage id="reporting.status.offending" />}</option>
+          <option value={2}>{<FormattedMessage id="reporting.status.spam" />}</option>
+          <option value={3}>{<FormattedMessage id="reporting.status.error" />}</option>
+          <option value={4}>{<FormattedMessage id="reporting.status.off_topic" />}</option>
         </Field>
         <Field
           id="reportBody"

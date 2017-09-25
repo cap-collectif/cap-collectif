@@ -59,9 +59,7 @@ const OpinionSourceVoteBox = React.createClass({
           />
         </form>{' '}
         <span className="opinion__votes-nb">
-          {source.votes_count +
-            (hasVotedSince ? 1 : 0) +
-            (hasUnVotedSince ? -1 : 0)}
+          {source.votes_count + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
         </span>
       </span>
     );

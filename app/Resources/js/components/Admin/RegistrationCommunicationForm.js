@@ -27,23 +27,20 @@ export const RegistrationCommunicationForm = React.createClass({
           children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
         />
-        {useTopText &&
-          <Field name="topText" type="editor" component={renderInput} />}
+        {useTopText && <Field name="topText" type="editor" component={renderInput} />}
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
           children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
         />
-        {useBottomText &&
-          <Field name="bottomText" type="editor" component={renderInput} />}
-        <Button
-          type="submit"
-          disabled={submitting}
-          style={{ marginBottom: 15 }}>
-          {submitting
-            ? <FormattedMessage id="global.loading" />
-            : <FormattedMessage id="global.save" />}
+        {useBottomText && <Field name="bottomText" type="editor" component={renderInput} />}
+        <Button type="submit" disabled={submitting} style={{ marginBottom: 15 }}>
+          {submitting ? (
+            <FormattedMessage id="global.loading" />
+          ) : (
+            <FormattedMessage id="global.save" />
+          )}
         </Button>
       </form>
     );

@@ -10,11 +10,7 @@ const IdeasList = React.createClass({
   render() {
     const { ideas } = this.props;
     if (ideas.length > 0) {
-      return (
-        <Row>
-          {ideas.map(idea => <IdeaListItem key={idea.id} idea={idea} />)}
-        </Row>
-      );
+      return <Row>{ideas.map(idea => <IdeaListItem key={idea.id} idea={idea} />)}</Row>;
     }
     return null;
   },

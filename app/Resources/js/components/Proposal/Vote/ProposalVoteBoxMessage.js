@@ -24,11 +24,7 @@ const ProposalVoteBoxMessage = React.createClass({
 
   render() {
     const message = this.getMessage();
-    return message
-      ? <p style={{ marginBottom: '15px' }}>
-          {message}
-        </p>
-      : null;
+    return message ? <p style={{ marginBottom: '15px' }}>{message}</p> : null;
   },
 });
 

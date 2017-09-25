@@ -15,7 +15,6 @@ const IdeaListItem = React.createClass({
       </Col>
     );
   },
-
 });
 
 export default IdeaListItem;

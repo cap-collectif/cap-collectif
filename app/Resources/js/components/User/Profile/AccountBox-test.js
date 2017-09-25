@@ -15,12 +15,7 @@ describe('<AccountBox />', () => {
   });
   it('should render and enabled button when the form is valid', () => {
     const wrapper = shallow(
-      <AccountBox
-        dispatch={dispatch}
-        invalid={false}
-        submitting={false}
-        user={user}
-      />,
+      <AccountBox dispatch={dispatch} invalid={false} submitting={false} user={user} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

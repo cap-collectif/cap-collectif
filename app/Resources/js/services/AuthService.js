@@ -13,7 +13,6 @@ function json(response) {
 }
 
 class AuthService {
-
   constructor() {
     this.hasRequestedToken = false;
   }
@@ -38,21 +37,17 @@ class AuthService {
         'Content-Type': 'application/json',
       },
     })
-    .then(status)
-    .then(json)
-    .then((data) => {
-      this.hasRequestedToken = true;
-      return data.token
-        ? LoginActions.loginUser(data.token)
-        : this.logout()
-      ;
-    });
+      .then(status)
+      .then(json)
+      .then(data => {
+        this.hasRequestedToken = true;
+        return data.token ? LoginActions.loginUser(data.token) : this.logout();
+      });
   }
 
   logout() {
     LoginActions.logoutUser();
   }
-
 }
 
 export default new AuthService();

@@ -12,7 +12,6 @@ import {
 } from '../constants/OpinionConstants';
 
 class OpinionStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -70,7 +69,8 @@ class OpinionStore extends BaseStore {
         this._messages.success = [];
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 

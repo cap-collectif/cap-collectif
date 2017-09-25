@@ -2,7 +2,6 @@ import BaseStore from './BaseStore';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
 class AlertStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -23,7 +22,6 @@ class AlertStore extends BaseStore {
   get alert() {
     return this._alert;
   }
-
 }
 
 export default new AlertStore();

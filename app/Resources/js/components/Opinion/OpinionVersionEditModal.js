@@ -34,25 +34,23 @@ const OpinionVersionEditModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           <div className="modal-top bg-info">
-            <p>
-              {<FormattedMessage id="opinion.add_new_version_infos" />}
-            </p>
+            <p>{<FormattedMessage id="opinion.add_new_version_infos" />}</p>
           </div>
           <OpinionVersionEditForm />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onClose}>
-            {<FormattedMessage id="global.cancel" />}
-          </Button>
+          <Button onClick={onClose}>{<FormattedMessage id="global.cancel" />}</Button>
           <Button
             disabled={submitting}
             onClick={() => {
               dispatch(submit(formName));
             }}
             bsStyle="primary">
-            {submitting
-              ? <FormattedMessage id="global.loading" />
-              : <FormattedMessage id="global.edit" />}
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.edit" />
+            )}
           </Button>
         </Modal.Footer>
       </Modal>

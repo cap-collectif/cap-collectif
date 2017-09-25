@@ -40,15 +40,7 @@ const SubmitButton = React.createClass({
   },
 
   render() {
-    const {
-      loginOverlay,
-      isSubmitting,
-      bsStyle,
-      className,
-      id,
-      label,
-      style,
-    } = this.props;
+    const { loginOverlay, isSubmitting, bsStyle, className, id, label, style } = this.props;
     const disabled = isSubmitting || this.props.disabled;
     return (
       <LoginOverlay enabled={loginOverlay}>
@@ -60,9 +52,11 @@ const SubmitButton = React.createClass({
           bsStyle={bsStyle}
           className={className}
           style={style}>
-          {isSubmitting
-            ? <FormattedMessage id="global.loading" />
-            : <FormattedMessage id={label} />}
+          {isSubmitting ? (
+            <FormattedMessage id="global.loading" />
+          ) : (
+            <FormattedMessage id={label} />
+          )}
         </Button>
       </LoginOverlay>
     );

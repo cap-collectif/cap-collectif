@@ -1,9 +1,7 @@
 // @flow
 export const baseUrl = `${typeof window !== 'undefined'
   ? window.location.protocol
-  : 'http'}//${typeof window !== 'undefined'
-  ? window.location.host
-  : 'capco.test/'}`;
+  : 'http'}//${typeof window !== 'undefined' ? window.location.host : 'capco.test/'}`;
 
 export default {
   graphql: `${baseUrl}/graphql/`,
@@ -12,9 +10,5 @@ export default {
   mapboxApiKey:
     '***REMOVED***',
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
-  canUseDOM: !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  ),
+  canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
 };

@@ -16,11 +16,7 @@ const CloseButton = React.createClass({
 
   render() {
     const { label, onClose } = this.props;
-    return (
-      <Button onClick={onClose}>
-        {<FormattedMessage id={label} />}
-      </Button>
-    );
+    return <Button onClick={onClose}>{<FormattedMessage id={label} />}</Button>;
   },
 });
 

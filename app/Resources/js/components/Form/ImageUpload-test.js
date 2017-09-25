@@ -26,9 +26,7 @@ describe('<ImageUpload />', () => {
   });
 
   it('should show the preview and the delete checkbox if preview is provided', () => {
-    const wrapper = shallow(
-      <ImageUpload valueLink={valueLink} preview={preview} />,
-    );
+    const wrapper = shallow(<ImageUpload valueLink={valueLink} preview={preview} />);
     expect(wrapper.find('img')).toHaveLength(1);
     expect(wrapper.find(Input)).toHaveLength(1);
   });
@@ -39,11 +37,7 @@ describe('<ImageUpload />', () => {
   });
 
   it('should show the provided classes', () => {
-    const wrapper = shallow(
-      <ImageUpload valueLink={valueLink} className={className} />,
-    );
-    expect(wrapper.find('Row').prop('className')).toEqual(
-      `image-uploader ${className}`,
-    );
+    const wrapper = shallow(<ImageUpload valueLink={valueLink} className={className} />);
+    expect(wrapper.find('Row').prop('className')).toEqual(`image-uploader ${className}`);
   });
 });

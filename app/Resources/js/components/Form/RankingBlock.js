@@ -102,9 +102,7 @@ const RankingBlock = React.createClass({
       <div>
         <Row>
           <Col xs={6}>
-            <h5 className="h5">
-              {<FormattedMessage id="global.form.ranking.pickBox.title" />}
-            </h5>
+            <h5 className="h5">{<FormattedMessage id="global.form.ranking.pickBox.title" />}</h5>
             <ListGroup className="ranking__pick-box">
               <RankingBox
                 ref={c => (this.pickBox = c)}
@@ -118,12 +116,8 @@ const RankingBlock = React.createClass({
             </ListGroup>
           </Col>
           <Col xs={6}>
-            <h5 className="h5">
-              {<FormattedMessage id="global.form.ranking.choiceBox.title" />}
-            </h5>
-            <ListGroup
-              className="ranking__choice-box"
-              style={{ height: choicesHeight }}>
+            <h5 className="h5">{<FormattedMessage id="global.form.ranking.choiceBox.title" />}</h5>
+            <ListGroup className="ranking__choice-box" style={{ height: choicesHeight }}>
               <RankingBox
                 ref={c => (this.choiceBox = c)}
                 items={items.choiceBox}
@@ -133,17 +127,13 @@ const RankingBlock = React.createClass({
                 moveItem={this.moveItem}
                 disabled={disabled}
               />
-              {items.choiceBox.length === 0
-                ? <div
-                    className="hidden-xs ranking__choice-box__placeholder"
-                    style={{ height: `${spotsNb * 45}px` }}>
-                    <span>
-                      {
-                        <FormattedMessage id="global.form.ranking.choiceBox.placeholder" />
-                      }
-                    </span>
-                  </div>
-                : null}
+              {items.choiceBox.length === 0 ? (
+                <div
+                  className="hidden-xs ranking__choice-box__placeholder"
+                  style={{ height: `${spotsNb * 45}px` }}>
+                  <span>{<FormattedMessage id="global.form.ranking.choiceBox.placeholder" />}</span>
+                </div>
+              ) : null}
             </ListGroup>
           </Col>
         </Row>

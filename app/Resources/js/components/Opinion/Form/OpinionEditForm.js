@@ -31,8 +31,7 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     .filter(key => key !== 'title' && key !== 'body' && key !== 'check')
     .map(key => {
       return {
-        appendixType: opinion.appendices.filter(a => a.type.title === key)[0]
-          .type.id,
+        appendixType: opinion.appendices.filter(a => a.type.title === key)[0].type.id,
         body: data[key],
       };
     });
@@ -86,7 +85,7 @@ export const OpinionEditForm = React.createClass({
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
-        {opinion.appendices.map((field, index) =>
+        {opinion.appendices.map((field, index) => (
           <Field
             key={index}
             component={renderInput}
@@ -94,8 +93,8 @@ export const OpinionEditForm = React.createClass({
             label={field.type.title}
             type="editor"
             id={`opinion_appendix-${index + 1}`}
-          />,
-        )}
+          />
+        ))}
       </form>
     );
   },

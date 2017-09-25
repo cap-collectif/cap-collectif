@@ -24,14 +24,8 @@ export const IdeasIndexFooter = React.createClass({
     return (
       <div className="container  container--custom  appendices__container">
         <Row>
-          <Col
-            xs={12}
-            md={4}
-            mdOffset={4}
-            className="text-center appendices__item box">
-            <h2 className="h4">
-              {<FormattedMessage id="idea.appendices.trashed.title" />}
-            </h2>
+          <Col xs={12} md={4} mdOffset={4} className="text-center appendices__item box">
+            <h2 className="h4">{<FormattedMessage id="idea.appendices.trashed.title" />}</h2>
             <p className="excerpt">
               <FormattedMessage
                 id="idea.appendices.trashed.nb"
@@ -41,11 +35,7 @@ export const IdeasIndexFooter = React.createClass({
               />
             </p>
             <p>
-              <Button
-                id="ideas-trash"
-                href={trashUrl}
-                bsStyle="primary"
-                className="btn--outline">
+              <Button id="ideas-trash" href={trashUrl} bsStyle="primary" className="btn--outline">
                 {<FormattedMessage id="idea.appendices.trashed.button" />}
               </Button>
             </p>

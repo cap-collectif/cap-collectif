@@ -13,12 +13,7 @@ const OpinionSourceReportButton = React.createClass({
 
   handleReport(data) {
     const { source, dispatch } = this.props;
-    return submitSourceReport(
-      OpinionSourceStore.opinion,
-      source.id,
-      data,
-      dispatch,
-    );
+    return submitSourceReport(OpinionSourceStore.opinion, source.id, data, dispatch);
   },
 
   render() {

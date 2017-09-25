@@ -5,27 +5,20 @@ import ReplyForm from './ReplyForm';
 class ReplyUpdateForm extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSubmitting === true) {
-      const {
-        reply,
-        onSubmitSuccess,
-        onSubmitFailure,
-        onValidationFailure,
-      } = this.props;
+      const { reply, onSubmitSuccess, onSubmitFailure, onValidationFailure } = this.props;
 
       const state = this._replyForm.state;
       if (this._replyForm.isValid()) {
-        return ReplyActions
-          .add(reply.id, state.form)
+        return ReplyActions.add(reply.id, state.form)
           .then(onSubmitSuccess)
-          .catch(onSubmitFailure)
-          ;
+          .catch(onSubmitFailure);
       }
       onValidationFailure();
     }
   }
 
   render() {
-    return <ReplyForm ref={c => this._replyForm = c} {...this.props} />;
+    return <ReplyForm ref={c => (this._replyForm = c)} {...this.props} />;
   }
 }
 

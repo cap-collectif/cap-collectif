@@ -33,9 +33,7 @@ describe('<Radio />', () => {
   });
 
   it('should render correctly with other allowed', () => {
-    const wrapper = shallow(
-      <Radio field={{ ...field, isOtherAllowed: true }} {...props} />,
-    );
+    const wrapper = shallow(<Radio field={{ ...field, isOtherAllowed: true }} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

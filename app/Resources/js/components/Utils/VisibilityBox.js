@@ -50,9 +50,7 @@ export const VisibilityBox = React.createClass({
             <FormattedMessage id="proposal.private.message" />
           </strong>
         </p>
-        <div className={boxClasses}>
-          {children}
-        </div>
+        <div className={boxClasses}>{children}</div>
       </div>
     );
   },

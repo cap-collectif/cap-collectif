@@ -23,14 +23,7 @@ const ElementsList = React.createClass({
   },
 
   render() {
-    const {
-      elements,
-      hasLink,
-      linkType,
-      showBreadcrumb,
-      showNotation,
-      showStatus,
-    } = this.props;
+    const { elements, hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
     if (elements.length < 1) {
       return null;
     }

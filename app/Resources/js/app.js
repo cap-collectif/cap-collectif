@@ -4,8 +4,8 @@ import './registration';
 require('fancybox')($);
 
 // Our global App for symfony
-const App = (($) => {
-  const equalheight = (container) => {
+const App = ($ => {
+  const equalheight = container => {
     let currentTallest = 0;
     let currentRowStart = 0;
     const rowDivs = [];
@@ -29,7 +29,7 @@ const App = (($) => {
           rowDivs.push($el);
         } else {
           rowDivs.push($el);
-          currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+          currentTallest = currentTallest < $el.height() ? $el.height() : currentTallest;
         }
         for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
           rowDivs[currentDiv].height(currentTallest);
@@ -38,7 +38,7 @@ const App = (($) => {
     });
   };
 
-  const resized = (el) => {
+  const resized = el => {
     const $el = $(el);
 
     $(window).resize(() => {
@@ -46,14 +46,14 @@ const App = (($) => {
     });
   };
 
-  const customModal = (el) => {
+  const customModal = el => {
     const $el = $(el);
 
     $el.appendTo('body');
   };
 
   const pieChart = () => {
-    if (typeof (google) !== 'undefined') {
+    if (typeof google !== 'undefined') {
       google.load('visualization', '1', { packages: ['corechart'] });
       google.setOnLoadCallback(() => {
         $('.has-chart').googleCharts();
@@ -61,9 +61,9 @@ const App = (($) => {
     }
   };
 
-  const video = (el) => {
+  const video = el => {
     const $el = $(el);
-    $el.on('click', (e) => {
+    $el.on('click', e => {
       $.fancybox({
         href: e.currentTarget.href,
         type: $(e.currentTarget).data('type'),
@@ -79,10 +79,10 @@ const App = (($) => {
     }); // on
   };
 
-  const checkButton = (el) => {
+  const checkButton = el => {
     const $el = $(el);
 
-    $($el).on('change', (e) => {
+    $($el).on('change', e => {
       const test = $(e.currentTarget).val();
       if (test === 0) {
         $('.block_media').hide();
@@ -95,13 +95,13 @@ const App = (($) => {
   };
 
   const externalLinks = () => {
-    $(document).on('click', '.external-link', (e) => {
+    $(document).on('click', '.external-link', e => {
       window.open($(e.currentTarget).attr('href'));
       return false;
     });
   };
 
-  const showMap = (container) => {
+  const showMap = container => {
     const $mapCanvas = $(container);
     $mapCanvas.each((index, el) => {
       // Map
@@ -120,11 +120,13 @@ const App = (($) => {
     });
   };
 
-  const makeSidebar = (options) => {
+  const makeSidebar = options => {
     // Fix containers
     const containers = `${options.container} .container`;
     $(options.container).addClass('container  sidebar__container');
-    $(containers).removeClass('container  container--thinner').addClass('container--with-sidebar');
+    $(containers)
+      .removeClass('container  container--thinner')
+      .addClass('container--with-sidebar');
 
     // Handle small screens
     $(options.toggle).on('click', () => {
@@ -134,7 +136,7 @@ const App = (($) => {
   };
 
   const carousel = () => {
-    $('.carousel-sidenav li').on('click', (e) => {
+    $('.carousel-sidenav li').on('click', e => {
       e.preventDefault();
       $('.carousel-sidenav li').each((index, el) => {
         $(el).removeClass('active');

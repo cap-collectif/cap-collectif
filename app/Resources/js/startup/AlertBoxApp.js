@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import AlertBox from '../components/Alert/AlertBox';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <AlertBox {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

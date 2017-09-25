@@ -14,17 +14,11 @@ const StepRemainingTime = React.createClass({
     }
     if (counters.remainingHours) {
       return (
-        <FormattedMessage
-          id="step.remaining.hours"
-          values={{ num: counters.remainingHours }}
-        />
+        <FormattedMessage id="step.remaining.hours" values={{ num: counters.remainingHours }} />
       );
     }
     return (
-      <FormattedMessage
-        id="step.remaining.days"
-        values={{ num: counters.remainingDays || 0 }}
-      />
+      <FormattedMessage id="step.remaining.days" values={{ num: counters.remainingDays || 0 }} />
     );
   },
 });

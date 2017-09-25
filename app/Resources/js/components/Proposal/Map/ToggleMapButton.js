@@ -33,10 +33,7 @@ export const ToggleMapButton = React.createClass({
           active={mode === 'mosaic'}
           style={{ width: '50%' }}
           onClick={this.handleClick.bind(this, 'mosaic')}>
-          <i
-            className="cap cap-th-large"
-            onClick={this.handleClick.bind(this, 'mosaic')}
-          />{' '}
+          <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
           {<FormattedMessage id="proposal.map.mosaic" />}
         </Button>
         <Button
@@ -44,10 +41,7 @@ export const ToggleMapButton = React.createClass({
           active={mode === 'map'}
           style={{ width: '50%' }}
           onClick={this.handleClick.bind(this, 'map')}>
-          <i
-            className="cap cap-map-location"
-            onClick={this.handleClick.bind(this, 'map')}
-          />{' '}
+          <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
           {<FormattedMessage id="proposal.map.map" />}
         </Button>
       </div>

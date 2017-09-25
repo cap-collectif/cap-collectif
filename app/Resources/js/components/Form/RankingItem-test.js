@@ -29,7 +29,9 @@ const itemWithoutImage = {
 
 const props = {
   id: 'id',
-  connectDragSource: (cp) => { return cp; },
+  connectDragSource: cp => {
+    return cp;
+  },
   arrowFunctions,
 };
 
@@ -37,7 +39,9 @@ const OriginalComponent = RankingItem.DecoratedComponent;
 
 describe('<RankingItem />', () => {
   it('should render ranking item', () => {
-    const wrapper = shallow(<OriginalComponent {...props} item={item} disabled={false} isDragging={false} />);
+    const wrapper = shallow(
+      <OriginalComponent {...props} item={item} disabled={false} isDragging={false} />,
+    );
     const container = wrapper.find('.ranking__item');
     expect(container).toHaveLength(1);
     expect(container.prop('style').opacity).toEqual(1);
@@ -62,14 +66,18 @@ describe('<RankingItem />', () => {
   });
 
   it('should render transparent item when dragged', () => {
-    const wrapper = shallow(<OriginalComponent {...props} item={item} disabled={false} isDragging />);
+    const wrapper = shallow(
+      <OriginalComponent {...props} item={item} disabled={false} isDragging />,
+    );
     const container = wrapper.find('.ranking__item');
     expect(container).toHaveLength(1);
     expect(container.prop('style').opacity).toEqual(0.5);
   });
 
   it('should render disabled item when required', () => {
-    const wrapper = shallow(<OriginalComponent {...props} item={item} disabled isDragging={false} />);
+    const wrapper = shallow(
+      <OriginalComponent {...props} item={item} disabled isDragging={false} />,
+    );
     const container = wrapper.find('.ranking__item');
     expect(container).toHaveLength(1);
     expect(container.hasClass('disabled')).toEqual(true);
@@ -79,13 +87,22 @@ describe('<RankingItem />', () => {
   });
 
   it('should render no description when item has not', () => {
-    const wrapper = shallow(<OriginalComponent {...props} item={itemWithoutDescription} disabled={false} isDragging={false} />);
+    const wrapper = shallow(
+      <OriginalComponent
+        {...props}
+        item={itemWithoutDescription}
+        disabled={false}
+        isDragging={false}
+      />,
+    );
     const description = wrapper.find('.ranking__item__description');
     expect(description).toHaveLength(0);
   });
 
   it('should render no image when item has not', () => {
-    const wrapper = shallow(<OriginalComponent {...props} item={itemWithoutImage} disabled={false} isDragging={false} />);
+    const wrapper = shallow(
+      <OriginalComponent {...props} item={itemWithoutImage} disabled={false} isDragging={false} />,
+    );
     const image = wrapper.find('.ranking__item__image');
     expect(image).toHaveLength(0);
   });

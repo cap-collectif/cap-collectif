@@ -42,20 +42,18 @@ export const ReplyCreateFormWrapper = React.createClass({
     const { form, user, userReplies } = this.props;
     return (
       <div>
-        {form.contribuable && !user
-          ? <Alert bsStyle="warning" className="text-center">
-              <strong>
-                <FormattedMessage id="reply.not_logged_in.error" />
-              </strong>
-              <RegistrationButton
-                bsStyle="primary"
-                style={{ marginLeft: '10px' }}
-              />
-              <LoginButton style={{ marginLeft: 5 }} />
-            </Alert>
-          : form.contribuable &&
-            userReplies.length > 0 &&
-            !form.multipleRepliesAllowed &&
+        {form.contribuable && !user ? (
+          <Alert bsStyle="warning" className="text-center">
+            <strong>
+              <FormattedMessage id="reply.not_logged_in.error" />
+            </strong>
+            <RegistrationButton bsStyle="primary" style={{ marginLeft: '10px' }} />
+            <LoginButton style={{ marginLeft: 5 }} />
+          </Alert>
+        ) : (
+          form.contribuable &&
+          userReplies.length > 0 &&
+          !form.multipleRepliesAllowed && (
             <Alert bsStyle="warning">
               <strong>
                 <FormattedMessage id="reply.user_has_reply.reason" />
@@ -63,26 +61,26 @@ export const ReplyCreateFormWrapper = React.createClass({
               <p>
                 <FormattedMessage id="reply.user_has_reply.error" />
               </p>
-            </Alert>}
+            </Alert>
+          )
+        )}
         {form.contribuable &&
           form.phoneConfirmationRequired &&
           user &&
-          !user.isPhoneConfirmed &&
-          <Alert bsStyle="warning">
-            <strong>
-              <FormattedMessage id="phone.please_verify" />
-            </strong>
-            <span style={{ marginLeft: '10px' }}>
-              <Button onClick={this.openPhoneModal}>
-                <FormattedMessage id="phone.check" />
-              </Button>
-            </span>
-          </Alert>}
+          !user.isPhoneConfirmed && (
+            <Alert bsStyle="warning">
+              <strong>
+                <FormattedMessage id="phone.please_verify" />
+              </strong>
+              <span style={{ marginLeft: '10px' }}>
+                <Button onClick={this.openPhoneModal}>
+                  <FormattedMessage id="phone.check" />
+                </Button>
+              </span>
+            </Alert>
+          )}
         <ReplyCreateForm form={form} disabled={this.formIsDisabled()} />
-        <PhoneModal
-          show={this.state.showPhoneModal}
-          onClose={this.closePhoneModal}
-        />
+        <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} />
       </div>
     );
   },

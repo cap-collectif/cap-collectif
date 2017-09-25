@@ -17,11 +17,7 @@ const AlertAutoDismissable = React.createClass({
   render() {
     const { bsStyle, children, onDismiss } = this.props;
     return (
-      <Alert
-        className="text-center"
-        id="current-alert"
-        bsStyle={bsStyle}
-        onDismiss={onDismiss}>
+      <Alert className="text-center" id="current-alert" bsStyle={bsStyle} onDismiss={onDismiss}>
         {children}
       </Alert>
     );

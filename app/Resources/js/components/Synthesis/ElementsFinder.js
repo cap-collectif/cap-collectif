@@ -47,11 +47,7 @@ const ElementsFinder = React.createClass({
     const { onExpand, synthesis, type } = this.props;
     event.stopPropagation();
     if (element.childrenCount !== element.children.length) {
-      SynthesisElementActions.loadElementsTreeFromServer(
-        synthesis.id,
-        type,
-        element.id,
-      );
+      SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, type, element.id);
     }
     if (typeof onExpand === 'function') {
       onExpand(element);
@@ -80,12 +76,7 @@ const ElementsFinder = React.createClass({
               return (
                 <li key={element.id} className={classes}>
                   {this.renderTreeItemContent(element, parent)}
-                  {this.renderTreeItems(
-                    element.children,
-                    level + 1,
-                    expanded[element.id],
-                    element,
-                  )}
+                  {this.renderTreeItems(element.children, level + 1, expanded[element.id], element)}
                 </li>
               );
             }
@@ -102,14 +93,11 @@ const ElementsFinder = React.createClass({
       selected: selectedId === element.id,
     });
     return (
-      <div
-        id={`element-${element.id}`}
-        className={classes}
-        onClick={() => this.select(element)}>
+      <div id={`element-${element.id}`} className={classes} onClick={() => this.select(element)}>
         {this.renderItemCaret(element)}
-        {element.id === 'root'
-          ? <ElementIcon className="tree__item__icon" element={element} />
-          : null}
+        {element.id === 'root' ? (
+          <ElementIcon className="tree__item__icon" element={element} />
+        ) : null}
         <ElementTitle
           element={element}
           parent={parent}
@@ -128,9 +116,7 @@ const ElementsFinder = React.createClass({
       'cap-arrow-66': !expanded[element.id],
     });
     if (element.childrenCount > 0) {
-      return (
-        <i className={classes} onClick={ev => this.toggleExpand(ev, element)} />
-      );
+      return <i className={classes} onClick={ev => this.toggleExpand(ev, element)} />;
     }
   },
 
@@ -139,11 +125,7 @@ const ElementsFinder = React.createClass({
   },
 
   render() {
-    return (
-      <div className="synthesis__tree">
-        {this.renderTree()}
-      </div>
-    );
+    return <div className="synthesis__tree">{this.renderTree()}</div>;
   },
 });
 

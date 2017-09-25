@@ -60,19 +60,21 @@ const OpinionAppendix = React.createClass({
             this.toggle();
           }}
           title={
-            this.state.expanded
-              ? <FormattedMessage
-                  id="opinion.appendices.hide"
-                  values={{
-                    title: this.props.appendix.type.title,
-                  }}
-                />
-              : <FormattedMessage
-                  id="opinion.appendices.show"
-                  values={{
-                    title: this.props.appendix.type.title,
-                  }}
-                />
+            this.state.expanded ? (
+              <FormattedMessage
+                id="opinion.appendices.hide"
+                values={{
+                  title: this.props.appendix.type.title,
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                id="opinion.appendices.show"
+                values={{
+                  title: this.props.appendix.type.title,
+                }}
+              />
+            )
           }>
           {this.renderCaret()}
           {` ${appendix.type.title}`}

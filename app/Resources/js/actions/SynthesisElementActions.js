@@ -3,7 +3,7 @@ import Fetcher from '../services/Fetcher';
 import * as Actions from '../constants/SynthesisElementActionsConstants';
 import { DISMISS_MESSAGE } from '../constants/MessageConstants';
 
-const idOf = (val) => {
+const idOf = val => {
   if (val === 'root') {
     return null;
   }
@@ -16,9 +16,14 @@ const idOf = (val) => {
   return val;
 };
 
-const updateElementFromData = (synthesis, element, data, successMessage = 'synthesis.common.success.update_success', errorMessage = 'synthesis.common.errors.update_error') => {
-  return Fetcher
-    .put(`/syntheses/${synthesis}/elements/${element}`, data)
+const updateElementFromData = (
+  synthesis,
+  element,
+  data,
+  successMessage = 'synthesis.common.success.update_success',
+  errorMessage = 'synthesis.common.errors.update_error',
+) => {
+  return Fetcher.put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: Actions.UPDATE_ELEMENT_SUCCESS,
@@ -35,11 +40,15 @@ const updateElementFromData = (synthesis, element, data, successMessage = 'synth
     });
 };
 
-const createElementFromData = (synthesis, data, successMessage = 'synthesis.common.success.update_success', errorMessage = 'synthesis.common.errors.update_error') => {
-  return Fetcher
-    .post(`/syntheses/${synthesis}/elements`, data)
-    .then((response) => {
-      response.json().then((element) => {
+const createElementFromData = (
+  synthesis,
+  data,
+  successMessage = 'synthesis.common.success.update_success',
+  errorMessage = 'synthesis.common.errors.update_error',
+) => {
+  return Fetcher.post(`/syntheses/${synthesis}/elements`, data)
+    .then(response => {
+      response.json().then(element => {
         AppDispatcher.dispatch({
           actionType: Actions.CREATE_ELEMENT_SUCCESS,
           element,
@@ -59,9 +68,8 @@ const createElementFromData = (synthesis, data, successMessage = 'synthesis.comm
 };
 
 const fetchElementById = (synthesis, element) => {
-  return Fetcher
-    .get(`/syntheses/${synthesis}/elements/${element}`)
-    .then((data) => {
+  return Fetcher.get(`/syntheses/${synthesis}/elements/${element}`)
+    .then(data => {
       AppDispatcher.dispatch({
         actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
         element: data,
@@ -74,7 +82,6 @@ const fetchElementById = (synthesis, element) => {
 };
 
 export default {
-
   create: (synthesis, data) => {
     AppDispatcher.dispatch({
       actionType: Actions.CREATE_ELEMENT,
@@ -83,7 +90,12 @@ export default {
     if (data.parent) {
       data.parent = idOf(data.parent);
     }
-    createElementFromData(synthesis, data, 'synthesis.common.success.create_success', 'synthesis.common.errors.create_error');
+    createElementFromData(
+      synthesis,
+      data,
+      'synthesis.common.success.create_success',
+      'synthesis.common.errors.create_error',
+    );
   },
 
   loadElementFromServer: (synthesis, element) => {
@@ -95,34 +107,33 @@ export default {
   },
 
   loadElementsFromServer: (synthesis, type, offset, limit) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`)
-      .then((data) => {
-        data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
-        data.type = type;
-        AppDispatcher.dispatch(data);
-        return true;
-      });
+    Fetcher.get(
+      `/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`,
+    ).then(data => {
+      data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
+      data.type = type;
+      AppDispatcher.dispatch(data);
+      return true;
+    });
   },
 
   loadElementsByTermFromServer: (synthesis, term, offset, limit, type = 'all') => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`)
-      .then((data) => {
-        data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
-        data.type = 'search';
-        AppDispatcher.dispatch(data);
-        return true;
-      });
+    Fetcher.get(
+      `/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`,
+    ).then(data => {
+      data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
+      data.type = 'search';
+      AppDispatcher.dispatch(data);
+      return true;
+    });
   },
 
   loadElementsTreeFromServer: (synthesis, type, parent = null, depth = null) => {
     let url = `/syntheses/${synthesis}/elements/tree?type=${type}`;
     url += parent ? `&parent=${parent}` : '';
     url += depth ? `&depth=${depth}` : '';
-    Fetcher
-      .get(url)
-      .then((data) => {
+    Fetcher.get(url)
+      .then(data => {
         AppDispatcher.dispatch({
           actionType: Actions.RECEIVE_ELEMENTS_SUCCESS,
           type: `${type}Tree`,
@@ -137,16 +148,14 @@ export default {
   },
 
   loadElementsCountFromServer: (synthesis, type) => {
-    Fetcher
-      .get(`/syntheses/${synthesis}/elements/count?type=${type}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: Actions.RECEIVE_COUNT,
-          type,
-          count: data.count,
-        });
-        return true;
+    Fetcher.get(`/syntheses/${synthesis}/elements/count?type=${type}`).then(data => {
+      AppDispatcher.dispatch({
+        actionType: Actions.RECEIVE_COUNT,
+        type,
+        count: data.count,
       });
+      return true;
+    });
   },
 
   update: (synthesis, element, data) => {
@@ -204,7 +213,13 @@ export default {
         elementId: element,
       });
     }
-    updateElementFromData(synthesis, element, data, 'synthesis.common.success.archive_success', 'synthesis.common.errors.archive_error');
+    updateElementFromData(
+      synthesis,
+      element,
+      data,
+      'synthesis.common.success.archive_success',
+      'synthesis.common.errors.archive_error',
+    );
   },
 
   expandTreeItem(type, elementId, expanded) {
@@ -230,5 +245,4 @@ export default {
       type,
     });
   },
-
 };

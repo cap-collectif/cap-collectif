@@ -7,10 +7,7 @@ import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
-import {
-  VOTE_TYPE_DISABLED,
-  VOTE_TYPE_BUDGET,
-} from '../../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 const ProposalPreview = React.createClass({
   propTypes: {
@@ -35,9 +32,7 @@ const ProposalPreview = React.createClass({
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4}>
-        <div
-          id={`proposal-${proposal.id}`}
-          className="block block--bordered proposal__preview">
+        <div id={`proposal-${proposal.id}`} className="block block--bordered proposal__preview">
           <div className={classes}>
             <ProposalPreviewHeader proposal={proposal} />
             <ProposalPreviewBody
@@ -46,16 +41,13 @@ const ProposalPreview = React.createClass({
               showThemes={showThemes}
             />
             <div className="proposal__buttons text-center">
-              {step.id === proposal.votableStepId &&
-                <ProposalPreviewVote proposal={proposal} />}
+              {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
             </div>
-            {step.voteThreshold > 0 &&
+            {step.voteThreshold > 0 && (
               <div style={{ marginTop: '20px' }}>
-                <ProposalVoteThresholdProgressBar
-                  proposal={proposal}
-                  step={step}
-                />
-              </div>}
+                <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
+              </div>
+            )}
           </div>
           <ProposalPreviewFooter
             proposal={proposal}

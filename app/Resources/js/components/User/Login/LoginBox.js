@@ -16,18 +16,20 @@ export const LoginBox = React.createClass({
     const { textTop, textBottom } = this.props;
     return (
       <div>
-        {textTop &&
+        {textTop && (
           <Alert bsStyle="info" className="text-center">
             <div dangerouslySetInnerHTML={{ __html: textTop }} />
-          </Alert>}
+          </Alert>
+        )}
         <LoginSocialButtons />
         <LoginForm />
-        {textBottom &&
+        {textBottom && (
           <div
             className="text-center small excerpt"
             style={{ marginTop: '15px' }}
             dangerouslySetInnerHTML={{ __html: textBottom }}
-          />}
+          />
+        )}
       </div>
     );
   },

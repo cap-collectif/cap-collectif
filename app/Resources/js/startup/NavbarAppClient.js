@@ -4,9 +4,10 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import Navbar from '../components/Navbar/Navbar';
 
-export default props =>
+export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <Navbar {...props} />
     </IntlProvider>
-  </Provider>;
+  </Provider>
+);

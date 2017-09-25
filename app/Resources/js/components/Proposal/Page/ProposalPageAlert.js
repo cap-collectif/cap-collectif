@@ -13,21 +13,19 @@ const ProposalPageAlert = React.createClass({
     const proposal = this.props.proposal;
     if (proposal.isTrashed) {
       return (
-        <Alert
-          bsStyle="warning"
-          style={{ marginBottom: '0', textAlign: 'center' }}>
-          <strong>
-            {<FormattedMessage id="proposal.trashed.label" />}
-          </strong>
-          {proposal.trashedReason &&
+        <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
+          <strong>{<FormattedMessage id="proposal.trashed.label" />}</strong>
+          {proposal.trashedReason && (
             <span>
-              {' '}<FormattedMessage
+              {' '}
+              <FormattedMessage
                 id="proposal.trashed.motive"
                 values={{
                   motive: proposal.trashedReason,
                 }}
               />
-            </span>}
+            </span>
+          )}
         </Alert>
       );
     }

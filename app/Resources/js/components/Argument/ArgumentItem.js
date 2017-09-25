@@ -56,9 +56,7 @@ const ArgumentItem = React.createClass({
               width: '100%',
               wordWrap: 'break-word',
             }}>
-            <Linkify properties={{ className: 'external-link' }}>
-              {argument.body}
-            </Linkify>
+            <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
           </p>
           <ArgumentButtons argument={argument} />
         </div>

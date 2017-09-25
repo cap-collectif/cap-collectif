@@ -30,14 +30,13 @@ const ArgumentVoteButton = React.createClass({
           className={`argument__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
           onClick={onClick}>
-          {hasVoted
-            ? <span>
-                {<FormattedMessage id="vote.cancel" />}
-              </span>
-            : <span>
-                <i className="cap cap-hand-like-2" />{' '}
-                {<FormattedMessage id="vote.ok" />}
-              </span>}
+          {hasVoted ? (
+            <span>{<FormattedMessage id="vote.cancel" />}</span>
+          ) : (
+            <span>
+              <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
+            </span>
+          )}
         </Button>
       </LoginOverlay>
     );

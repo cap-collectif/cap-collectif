@@ -38,67 +38,60 @@ const ProposalVoteForm = React.createClass({
   },
 
   render() {
-    const {
-      error,
-      handleSubmit,
-      comment,
-      isPrivate,
-      anonymous,
-      voteWithoutAccount,
-    } = this.props;
+    const { error, handleSubmit, comment, isPrivate, anonymous, voteWithoutAccount } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        {error &&
+        {error && (
           <Alert bsStyle="danger">
-            <p>
-              {error}
-            </p>
-          </Alert>}
+            <p>{error}</p>
+          </Alert>
+        )}
         {anonymous &&
-          voteWithoutAccount &&
-          <Field
-            type="text"
-            component={renderComponent}
-            name="username"
-            id="proposal-vote__username"
-            label={<FormattedMessage id="proposal.vote.form.username" />}
-          />}
-        {anonymous &&
-          voteWithoutAccount &&
-          <Field
-            type="email"
-            component={renderComponent}
-            name="email"
-            id="proposal-vote__email"
-            label={<FormattedMessage id="proposal.vote.form.email" />}
-          />}
-        {comment.length > 0 && (voteWithoutAccount || !anonymous)
-          ? null
-          : <Field
-              type="checkbox"
+          voteWithoutAccount && (
+            <Field
+              type="text"
               component={renderComponent}
-              name="private"
-              id="proposal-vote__private"
-              disableValidation
-              children={<FormattedMessage id="proposal.vote.form.private" />}
-            />}
-        {!isPrivate &&
-          (!voteWithoutAccount || anonymous) &&
+              name="username"
+              id="proposal-vote__username"
+              label={<FormattedMessage id="proposal.vote.form.username" />}
+            />
+          )}
+        {anonymous &&
+          voteWithoutAccount && (
+            <Field
+              type="email"
+              component={renderComponent}
+              name="email"
+              id="proposal-vote__email"
+              label={<FormattedMessage id="proposal.vote.form.email" />}
+            />
+          )}
+        {comment.length > 0 && (voteWithoutAccount || !anonymous) ? null : (
           <Field
-            type="textarea"
+            type="checkbox"
             component={renderComponent}
-            name="comment"
-            id="proposal-vote__comment"
-            label={
-              <span style={{ fontWeight: 'normal' }}>
-                {<FormattedMessage id="proposal.vote.form.comment" />}
-                <span className="excerpt">
-                  {<FormattedMessage id="global.form.optional" />}
+            name="private"
+            id="proposal-vote__private"
+            disableValidation
+            children={<FormattedMessage id="proposal.vote.form.private" />}
+          />
+        )}
+        {!isPrivate &&
+          (!voteWithoutAccount || anonymous) && (
+            <Field
+              type="textarea"
+              component={renderComponent}
+              name="comment"
+              id="proposal-vote__comment"
+              label={
+                <span style={{ fontWeight: 'normal' }}>
+                  {<FormattedMessage id="proposal.vote.form.comment" />}
+                  <span className="excerpt">{<FormattedMessage id="global.form.optional" />}</span>
                 </span>
-              </span>
-            }
-            placeholder="proposal.vote.form.comment_placeholder"
-          />}
+              }
+              placeholder="proposal.vote.form.comment_placeholder"
+            />
+          )}
       </form>
     );
   },
@@ -115,7 +108,6 @@ export default connect(mapStateToProps)(
   reduxForm({
     form,
     validate,
-    onSubmit: (values, dispatch, { proposal, step }) =>
-      vote(dispatch, step, proposal, values),
+    onSubmit: (values, dispatch, { proposal, step }) => vote(dispatch, step, proposal, values),
   })(ProposalVoteForm),
 );

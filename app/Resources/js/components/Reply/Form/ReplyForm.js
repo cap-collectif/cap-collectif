@@ -13,13 +13,8 @@ import Ranking from '../../Form/Ranking';
 import ReplyActions from '../../../actions/ReplyActions';
 import ButtonBody from './ButtonBody';
 
-const getRequiredFieldIndicationStrategory = (
-  fields: Array<{ required: boolean }>,
-) => {
-  const numberOfRequiredFields = fields.reduce(
-    (a, b) => a + (b.required ? 1 : 0),
-    0,
-  );
+const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean }>) => {
+  const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
   if (numberOfRequiredFields === 0) {
@@ -210,8 +205,7 @@ const ReplyForm = React.createClass({
   emptyForm() {
     const form = {};
     this.props.form.fields.forEach(field => {
-      form[field.id] =
-        field.type === 'checkbox' || field.type === 'ranking' ? [] : '';
+      form[field.id] = field.type === 'checkbox' || field.type === 'ranking' ? [] : '';
       if (
         field.type === 'checkbox' ||
         field.type === 'radio' ||
@@ -242,13 +236,12 @@ const ReplyForm = React.createClass({
     const strategy = getRequiredFieldIndicationStrategory(form.fields);
     return (
       <form id="reply-form" ref="form">
-        {form.description &&
-          <div
-            style={{ color: 'black' }}
-            dangerouslySetInnerHTML={{ __html: form.description }}
-          />}
-        {strategy === 'all_required' &&
-          <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>}
+        {form.description && (
+          <div style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: form.description }} />
+        )}
+        {strategy === 'all_required' && (
+          <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>
+        )}
         {form.fields.map(field => {
           const key = field.slug;
           const inputType = field.type || 'text';
@@ -260,9 +253,7 @@ const ReplyForm = React.createClass({
               ? ' <span class="small excerpt">Facultatif</span>'
               : '';
           const labelMessage = field.question + labelAppend;
-          const label = (
-            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
-          );
+          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
           switch (inputType) {
             case 'checkbox':
               return (
@@ -313,11 +304,11 @@ const ReplyForm = React.createClass({
                   <option value="" disabled>
                     {<FormattedMessage id="global.select" />}
                   </option>
-                  {field.choices.map(choice =>
+                  {field.choices.map(choice => (
                     <option key={choice.id} value={choice.label}>
                       {choice.label}
-                    </option>,
-                  )}
+                    </option>
+                  ))}
                 </Input>
               );
             case 'ranking':
@@ -338,19 +329,19 @@ const ReplyForm = React.createClass({
             case 'button':
               return (
                 <div className="form-group" id={`reply-${field.id}`}>
-                  <label
-                    htmlFor={`reply-${field.id}`}
-                    className="control-label h4">
+                  <label htmlFor={`reply-${field.id}`} className="control-label h4">
                     {label}
                   </label>
-                  {field.helpText &&
+                  {field.helpText && (
                     <span className="help-block" key="help">
                       {field.helpText}
-                    </span>}
-                  {field.description &&
+                    </span>
+                  )}
+                  {field.description && (
                     <div style={{ paddingTop: 15, paddingBottom: 25 }}>
                       <ButtonBody body={field.description || ''} />
-                    </div>}
+                    </div>
+                  )}
                   <RadioGroup
                     key={key}
                     horizontal
@@ -360,15 +351,15 @@ const ReplyForm = React.createClass({
                       this.onChange(field, value);
                     }}
                     value={field.choices[0].label}>
-                    {field.choices.map(choice =>
+                    {field.choices.map(choice => (
                       <RadioButton
                         key={choice.id}
                         value={choice.label}
                         iconSize={20}
                         pointColor={choice.color}>
                         {choice.label}
-                      </RadioButton>,
-                    )}
+                      </RadioButton>
+                    ))}
                   </RadioGroup>
                 </div>
               );
@@ -391,7 +382,7 @@ const ReplyForm = React.createClass({
               );
           }
         })}
-        {form.anonymousAllowed &&
+        {form.anonymousAllowed && (
           <div>
             <hr style={{ marginBottom: '30px' }} />
             <Input
@@ -401,7 +392,8 @@ const ReplyForm = React.createClass({
               children={<FormattedMessage id="reply.form.private" />}
               disabled={disabled}
             />
-          </div>}
+          </div>
+        )}
       </form>
     );
   },

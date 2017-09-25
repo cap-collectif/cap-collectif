@@ -31,16 +31,9 @@ const DatesInterval = React.createClass({
     const startAtDate = moment(startAt).toDate();
 
     const startDay = (
-      <FormattedDate
-        value={startAtDate}
-        day="numeric"
-        month="long"
-        year="numeric"
-      />
+      <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
     );
-    const startTime = (
-      <FormattedTime value={startAtDate} hour="numeric" minute="numeric" />
-    );
+    const startTime = <FormattedTime value={startAtDate} hour="numeric" minute="numeric" />;
 
     if (!endAt) {
       return (
@@ -56,17 +49,8 @@ const DatesInterval = React.createClass({
 
     const endAtDate = moment(endAt).toDate();
 
-    const endTime = (
-      <FormattedTime value={endAtDate} hour="numeric" minute="numeric" />
-    );
-    const endDay = (
-      <FormattedDate
-        value={endAtDate}
-        day="numeric"
-        month="long"
-        year="numeric"
-      />
-    );
+    const endTime = <FormattedTime value={endAtDate} hour="numeric" minute="numeric" />;
+    const endDay = <FormattedDate value={endAtDate} day="numeric" month="long" year="numeric" />;
 
     if (this.lastOneDay()) {
       return (

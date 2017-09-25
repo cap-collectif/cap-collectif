@@ -46,12 +46,7 @@ const VoteLinechart = React.createClass({
     ];
 
     $.each(history, (i, row) => {
-      lines.push([
-        new Date(1000 * parseInt(row[0], 10)),
-        row[1],
-        row[2],
-        row[3],
-      ]);
+      lines.push([new Date(1000 * parseInt(row[0], 10)), row[1], row[2], row[3]]);
     });
 
     const options = {
@@ -68,10 +63,7 @@ const VoteLinechart = React.createClass({
       theme: 'maximized',
     };
 
-    new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)).draw(
-      new DataTable(lines),
-      options,
-    );
+    new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)).draw(new DataTable(lines), options);
   },
 
   render() {

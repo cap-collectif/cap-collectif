@@ -2,7 +2,6 @@ import BaseStore from './BaseStore';
 import {
   INIT_USER_REPLIES,
   RECEIVE_USER_REPLIES,
-
   CREATE_REPLY_SUCCESS,
   CREATE_REPLY_FAILURE,
   UPDATE_REPLY_SUCCESS,
@@ -12,7 +11,6 @@ import {
 } from '../constants/ReplyConstants';
 
 class ReplyStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -47,7 +45,8 @@ class ReplyStore extends BaseStore {
       case DELETE_REPLY_FAILURE:
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 

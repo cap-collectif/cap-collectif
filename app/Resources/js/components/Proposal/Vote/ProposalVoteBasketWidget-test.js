@@ -51,17 +51,13 @@ describe('<ProposalVoteBasketWidget />', () => {
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
-    const wrapper = shallow(
-      <ProposalVoteBasketWidget {...simpleWithoutLimitProps} />,
-    );
+    const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithoutLimitProps} />);
     wrapper.setState({ selectedStepId: '1' });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a vote widget for a simple vote with limit', () => {
-    const wrapper = shallow(
-      <ProposalVoteBasketWidget {...simpleWithLimitProps} />,
-    );
+    const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithLimitProps} />);
     wrapper.setState({ selectedStepId: '1' });
     expect(wrapper).toMatchSnapshot();
   });

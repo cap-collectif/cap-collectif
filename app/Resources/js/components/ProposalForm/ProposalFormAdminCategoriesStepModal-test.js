@@ -13,7 +13,6 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     isCreating: true,
   };
 
-
   it('render correctly', () => {
     const wrapper = shallow(<ProposalFormAdminCategoriesStepModal {...props} />);
     expect(wrapper).toMatchSnapshot();

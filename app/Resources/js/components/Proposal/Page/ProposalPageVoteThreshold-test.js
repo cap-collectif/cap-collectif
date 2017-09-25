@@ -22,20 +22,14 @@ describe('<ProposalPageVoteThreshold />', () => {
 
   it('should render proposal page vote threshold', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold
-        proposal={proposal}
-        step={stepWithVoteThreshold}
-      />,
+      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThreshold} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render proposal page vote threshold reached', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold
-        proposal={proposal}
-        step={stepWithVoteThresholdReached}
-      />,
+      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThresholdReached} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

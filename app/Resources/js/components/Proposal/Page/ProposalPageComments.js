@@ -25,10 +25,7 @@ const ProposalPageComments = React.createClass({
     };
     return (
       <div className={classNames(classes)}>
-        <CommentSection
-          uri={`proposal_forms/${form.id}/proposals`}
-          object={id}
-        />
+        <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />
       </div>
     );
   },

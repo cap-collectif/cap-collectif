@@ -13,14 +13,9 @@ export const SectionRecursiveList = React.createClass({
     const { sections, consultation } = this.props;
     return (
       <div>
-        {sections.map((section, index) =>
-          <SectionList
-            key={index}
-            consultation={consultation}
-            section={section}
-            level={0}
-          />,
-        )}
+        {sections.map((section, index) => (
+          <SectionList key={index} consultation={consultation} section={section} level={0} />
+        ))}
       </div>
     );
   },

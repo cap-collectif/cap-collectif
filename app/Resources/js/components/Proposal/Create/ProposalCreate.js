@@ -23,14 +23,7 @@ const ProposalCreate = React.createClass({
   },
 
   render() {
-    const {
-      intl,
-      categories,
-      form,
-      showModal,
-      isSubmitting,
-      dispatch,
-    } = this.props;
+    const { intl, categories, form, showModal, isSubmitting, dispatch } = this.props;
     return (
       <div>
         <ProposalCreateButton
@@ -43,9 +36,7 @@ const ProposalCreate = React.createClass({
           onHide={() => {
             if (
               // eslint-disable-next-line no-alert
-              window.confirm(
-                intl.formatMessage({ id: 'proposal.confirm_close_modal' }),
-              )
+              window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
             ) {
               dispatch(closeCreateModal());
             }
@@ -58,11 +49,7 @@ const ProposalCreate = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalForm
-              form={form}
-              isSubmitting={isSubmitting}
-              categories={categories}
-            />
+            <ProposalForm form={form} isSubmitting={isSubmitting} categories={categories} />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />

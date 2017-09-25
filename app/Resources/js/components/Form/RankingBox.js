@@ -20,14 +20,7 @@ const RankingBox = React.createClass({
   },
 
   render() {
-    const {
-      spotsNb,
-      items,
-      listType,
-      moveItem,
-      fieldId,
-      disabled,
-    } = this.props;
+    const { spotsNb, items, listType, moveItem, fieldId, disabled } = this.props;
     const className = classNames({
       'ranking__choice-box__choices': listType === 'choiceBox',
       'ranking__pick-box__choices': listType === 'pickBox',
@@ -43,24 +36,21 @@ const RankingBox = React.createClass({
                 }
               : {
                   up: i > 0 ? it => moveItem('choiceBox', i - 1, it) : null,
-                  down:
-                    i < items.length - 1
-                      ? it => moveItem('choiceBox', i + 1, it)
-                      : null,
+                  down: i < items.length - 1 ? it => moveItem('choiceBox', i + 1, it) : null,
                   left: it => moveItem('pickBox', spotsNb, it),
                 };
           return (
             <RankingSpot key={i} onDrop={it => moveItem(listType, i, it)}>
-              {item
-                ? <RankingItem
-                    key={item.id}
-                    item={item}
-                    id={`reply-${fieldId}_choice-${item.id}`}
-                    arrowFunctions={arrowFunctions}
-                    disabled={disabled}
-                    position={listType === 'choiceBox' ? i + 1 : null}
-                  />
-                : null}
+              {item ? (
+                <RankingItem
+                  key={item.id}
+                  item={item}
+                  id={`reply-${fieldId}_choice-${item.id}`}
+                  arrowFunctions={arrowFunctions}
+                  disabled={disabled}
+                  position={listType === 'choiceBox' ? i + 1 : null}
+                />
+              ) : null}
             </RankingSpot>
           );
         })}

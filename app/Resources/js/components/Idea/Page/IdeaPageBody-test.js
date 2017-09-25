@@ -27,9 +27,7 @@ const ideaWithMediaObjectAndUrl = {
 
 describe('<IdeaPageBody />', () => {
   it('it should render a div with provided className', () => {
-    const wrapper = shallow(
-      <IdeaPageBody {...props} idea={idea} className={classes} />,
-    );
+    const wrapper = shallow(<IdeaPageBody {...props} idea={idea} className={classes} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -39,9 +37,7 @@ describe('<IdeaPageBody />', () => {
   });
 
   it('it should render idea media, object and url when provided', () => {
-    const wrapper = shallow(
-      <IdeaPageBody {...props} idea={ideaWithMediaObjectAndUrl} />,
-    );
+    const wrapper = shallow(<IdeaPageBody {...props} idea={ideaWithMediaObjectAndUrl} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

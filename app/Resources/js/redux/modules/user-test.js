@@ -12,7 +12,7 @@ import {
 } from './user';
 import type { State } from './user';
 
-const initialState : State = {
+const initialState: State = {
   showLoginModal: false,
   showRegistrationModal: false,
   isSubmittingAccountForm: false,
@@ -42,11 +42,17 @@ describe('User Reducer', () => {
     expect(newState).toMatchSnapshot();
   });
   it('Should handle SUBMIT_ACCOUNT_FORM', () => {
-    const newState = reducer({ ...initialState, isSubmittingAccountForm: false }, startSubmittingAccountForm());
+    const newState = reducer(
+      { ...initialState, isSubmittingAccountForm: false },
+      startSubmittingAccountForm(),
+    );
     expect(newState).toMatchSnapshot();
   });
   it('Should handle STOP_SUBMIT_ACCOUNT_FORM', () => {
-    const newState = reducer({ ...initialState, isSubmittingAccountForm: true }, stopSubmittingAccountForm());
+    const newState = reducer(
+      { ...initialState, isSubmittingAccountForm: true },
+      stopSubmittingAccountForm(),
+    );
     expect(newState).toMatchSnapshot();
   });
   it('Should handle USER_REQUEST_EMAIL_CHANGE', () => {
@@ -58,11 +64,17 @@ describe('User Reducer', () => {
     expect(newState).toMatchSnapshot();
   });
   it('Should handle SHOW_CONFIRM_PASSWORD_MODAL', () => {
-    const newState = reducer({ ...initialState, showConfirmPasswordModal: false }, confirmPassword());
+    const newState = reducer(
+      { ...initialState, showConfirmPasswordModal: false },
+      confirmPassword(),
+    );
     expect(newState).toMatchSnapshot();
   });
   it('Should handle CLOSE_CONFIRM_PASSWORD_MODAL', () => {
-    const newState = reducer({ ...initialState, showConfirmPasswordModal: true }, closeConfirmPasswordModal());
+    const newState = reducer(
+      { ...initialState, showConfirmPasswordModal: true },
+      closeConfirmPasswordModal(),
+    );
     expect(newState).toMatchSnapshot();
   });
 });

@@ -17,27 +17,20 @@ const StepsList = React.createClass({
   },
 
   render() {
-    const {
-      steps,
-      style,
-      votes,
-    } = this.props;
+    const { steps, style, votes } = this.props;
     if (steps.length === 0) {
       return null;
     }
     return (
       <div className="navbar--sub" style={style}>
         <ul className="nav">
-          {
-            steps.map((step) => {
-              return <StepPreview key={step.id} step={step} votes={votes[step.id]} />;
-            })
-          }
+          {steps.map(step => {
+            return <StepPreview key={step.id} step={step} votes={votes[step.id]} />;
+          })}
         </ul>
       </div>
     );
   },
-
 });
 
 export default StepsList;

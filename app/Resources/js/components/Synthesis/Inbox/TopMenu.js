@@ -50,10 +50,7 @@ const TopMenu = React.createClass({
     return (
       <LinkContainer to={item.link} key={index}>
         <NavItem className={menuItemClass} id={menuItemId}>
-          <i
-            style={{ fontSize: '25px' }}
-            className={`cap ${item.icon} ${iconClass}`}
-          />{' '}
+          <i style={{ fontSize: '25px' }} className={`cap ${item.icon} ${iconClass}`} />{' '}
           <span className="hidden-sm">
             <FormattedMessage id={`synthesis.edition.topMenu.${item.label}`} />
           </span>

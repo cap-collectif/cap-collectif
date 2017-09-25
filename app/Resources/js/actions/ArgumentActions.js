@@ -11,24 +11,23 @@ import {
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 import ArgumentStore from '../stores/ArgumentStore';
 
-const baseUrl = opinion => opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions';
+const baseUrl = opinion => (opinion.parent ? `opinions/${opinion.parent.id}/versions` : 'opinions');
 
 export default {
-
   load: (opinion, type) => {
     const order = ArgumentStore.orderByType[type];
-    return Fetcher
-      .get(`/${baseUrl(opinion)}/${opinion.id}/arguments?type=${type}&order=${order}`)
-      .then((data) => {
-        AppDispatcher.dispatch({
-          actionType: RECEIVE_ARGUMENTS,
-          arguments: data.arguments,
-          count: data.count,
-          type,
-          opinion,
-        });
-        return true;
+    return Fetcher.get(
+      `/${baseUrl(opinion)}/${opinion.id}/arguments?type=${type}&order=${order}`,
+    ).then(data => {
+      AppDispatcher.dispatch({
+        actionType: RECEIVE_ARGUMENTS,
+        arguments: data.arguments,
+        count: data.count,
+        type,
+        opinion,
       });
+      return true;
+    });
   },
 
   changeSortOrder(type, order) {
@@ -40,9 +39,8 @@ export default {
   },
 
   add: (opinion, data) => {
-    return Fetcher
-      .post(`/${baseUrl(opinion)}/${opinion.id}/arguments`, data)
-      .then((argument) => {
+    return Fetcher.post(`/${baseUrl(opinion)}/${opinion.id}/arguments`, data)
+      .then(argument => {
         AppDispatcher.dispatch({
           actionType: CREATE_ARGUMENT_SUCCESS,
           type: data.type,
@@ -66,9 +64,8 @@ export default {
   },
 
   update: (opinion, argument, data) => {
-    return Fetcher
-      .put(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}`, data)
-      .then((updatedArgument) => {
+    return Fetcher.put(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}`, data)
+      .then(updatedArgument => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ARGUMENT_SUCCESS,
           argument: updatedArgument.json(),
@@ -88,37 +85,32 @@ export default {
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'danger', content: 'alert.danger.update.argument' },
         });
-      })
-      ;
+      });
   },
 
   delete: (opinion, argument) => {
-    return Fetcher
-      .delete(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
-        });
-      })
-      ;
+    return Fetcher.delete(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}`).then(() => {
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
+      });
+    });
   },
 
   report: (opinion, argument, data) => {
-    return Fetcher
-      .post(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
-        });
-      })
-      ;
+    return Fetcher.post(
+      `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
+      data,
+    ).then(() => {
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+      });
+    });
   },
 
-  addVote: (argument) => {
-    return Fetcher
-      .post(`/arguments/${argument}/votes`, {})
+  addVote: argument => {
+    return Fetcher.post(`/arguments/${argument}/votes`, {})
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
@@ -131,13 +123,11 @@ export default {
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' },
         });
-      })
-    ;
+      });
   },
 
-  deleteVote: (argument) => {
-    return Fetcher
-      .delete(`/arguments/${argument}/votes`)
+  deleteVote: argument => {
+    return Fetcher.delete(`/arguments/${argument}/votes`)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
@@ -150,8 +140,6 @@ export default {
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' },
         });
-      })
-    ;
+      });
   },
-
 };

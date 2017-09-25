@@ -32,9 +32,7 @@ describe('<IdeaPageVotes />', () => {
   });
 
   it('it should render as many votes as provided', () => {
-    const wrapper = shallow(
-      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={idea} />,
-    );
+    const wrapper = shallow(<IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={idea} />);
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('.idea__votes')).toHaveLength(1);
     expect(wrapper.find('h2')).toHaveLength(1);
@@ -51,10 +49,7 @@ describe('<IdeaPageVotes />', () => {
 
   it('it should render show more button when idea has too much votes', () => {
     const wrapper = shallow(
-      <IdeaPageVotes
-        fetchIdeaVotes={fetchIdeaVotes}
-        idea={ideaWithLoadsOfVotes}
-      />,
+      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={ideaWithLoadsOfVotes} />,
     );
     expect(wrapper.find('.idea__votes__show-more')).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();

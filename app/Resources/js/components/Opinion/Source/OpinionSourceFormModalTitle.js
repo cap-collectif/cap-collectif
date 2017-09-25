@@ -12,9 +12,11 @@ const OpinionSourceFormModalTitle = React.createClass({
     const { action } = this.props;
     return (
       <Modal.Title id="contained-modal-title-lg">
-        {action === 'create'
-          ? <FormattedMessage id="source.add" />
-          : <FormattedMessage id="source.update" />}
+        {action === 'create' ? (
+          <FormattedMessage id="source.add" />
+        ) : (
+          <FormattedMessage id="source.update" />
+        )}
       </Modal.Title>
     );
   },

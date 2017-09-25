@@ -25,20 +25,13 @@ const ProposalPrivateField = React.createClass({
             <i className="cap cap-lock-2" />
             {<FormattedMessage id="global.form.private" />}
           </p>
-          <div
-            className={`well well-form proposal__private-field ${divClassName}`}>
-            {children}
-          </div>
+          <div className={`well well-form proposal__private-field ${divClassName}`}>{children}</div>
         </div>
       );
     }
 
     if (divClassName.length > 0) {
-      return (
-        <div className={divClassName}>
-          {children}
-        </div>
-      );
+      return <div className={divClassName}>{children}</div>;
     }
 
     return children;

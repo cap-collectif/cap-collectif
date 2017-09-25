@@ -31,8 +31,7 @@ const OpinionVersionEditButton = React.createClass({
           onClick={() => {
             dispatch(showOpinionVersionEditModal());
           }}>
-          <i className="cap cap-pencil-1" />{' '}
-          {<FormattedMessage id="global.edit" />}
+          <i className="cap cap-pencil-1" /> {<FormattedMessage id="global.edit" />}
         </Button>
       </div>
     );

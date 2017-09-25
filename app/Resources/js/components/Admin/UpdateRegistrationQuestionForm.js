@@ -38,19 +38,23 @@ const mapStateToProps = (state: State) => {
       required: field.required,
       question: field.question,
       type: typeToEnum(field.type),
-      choices: field.choices ? field.choices.map(choice => ({
-        label: choice.label,
-      })) : undefined,
+      choices: field.choices
+        ? field.choices.map(choice => ({
+            label: choice.label,
+          }))
+        : undefined,
     },
   };
 };
 type Props = {
-  initialValues: Object
+  initialValues: Object,
 };
 const connector: Connector<{}, Props> = connect(mapStateToProps);
 
-export default connector(reduxForm({
-  onSubmit,
-  validate,
-  form: formName,
-})(RegistrationQuestionForm));
+export default connector(
+  reduxForm({
+    onSubmit,
+    validate,
+    form: formName,
+  })(RegistrationQuestionForm),
+);

@@ -14,47 +14,45 @@ const ProposalPageMetadata = React.createClass({
   },
 
   render() {
-    const {
-      proposal,
-      showCategories,
-      showDistricts,
-      showNullEstimation,
-      showThemes,
-    } = this.props;
+    const { proposal, showCategories, showDistricts, showNullEstimation, showThemes } = this.props;
     return (
       <div>
         {((showCategories && proposal.category) ||
           (showDistricts && proposal.district) ||
           (showThemes && proposal.theme) ||
           proposal.likers ||
-          (showNullEstimation && proposal.estimation)) &&
-          <div className="proposal__page__metadata">
-            <div className="proposal__infos">
-              {showThemes &&
-                proposal.theme &&
-                <div className="proposal__info proposal__info--district ellipsis">
-                  <i className="cap cap-tag-1-1 icon--blue" />
-                  {proposal.theme.title}
-                </div>}
-              {showCategories &&
-                proposal.category &&
-                <div className="proposal__info proposal__info--category ellipsis">
-                  <i className="cap cap-tag-1-1 icon--blue" />
-                  {proposal.category.name}
-                </div>}
-              {showDistricts &&
-                proposal.district &&
-                <div className="proposal__info proposal__info--district ellipsis">
-                  <i className="cap cap-marker-1-1 icon--blue" />
-                  {proposal.district.name}
-                </div>}
-              <ProposalDetailEstimation
-                proposal={proposal}
-                showNullEstimation={showNullEstimation}
-              />
-              <ProposalDetailLikers proposal={proposal} componentClass="div" />
+          (showNullEstimation && proposal.estimation)) && (
+            <div className="proposal__page__metadata">
+              <div className="proposal__infos">
+                {showThemes &&
+                  proposal.theme && (
+                    <div className="proposal__info proposal__info--district ellipsis">
+                      <i className="cap cap-tag-1-1 icon--blue" />
+                      {proposal.theme.title}
+                    </div>
+                  )}
+                {showCategories &&
+                  proposal.category && (
+                    <div className="proposal__info proposal__info--category ellipsis">
+                      <i className="cap cap-tag-1-1 icon--blue" />
+                      {proposal.category.name}
+                    </div>
+                  )}
+                {showDistricts &&
+                  proposal.district && (
+                    <div className="proposal__info proposal__info--district ellipsis">
+                      <i className="cap cap-marker-1-1 icon--blue" />
+                      {proposal.district.name}
+                    </div>
+                  )}
+                <ProposalDetailEstimation
+                  proposal={proposal}
+                  showNullEstimation={showNullEstimation}
+                />
+                <ProposalDetailLikers proposal={proposal} componentClass="div" />
+              </div>
             </div>
-          </div>}
+          )}
       </div>
     );
   },

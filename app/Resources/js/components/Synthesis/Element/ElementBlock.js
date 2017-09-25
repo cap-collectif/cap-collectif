@@ -68,23 +68,12 @@ const ElementBlock = React.createClass({
       );
     }
     return (
-      <FormattedDate
-        value={moment(element.updated_at)}
-        day="numeric"
-        month="long"
-        year="numeric"
-      />
+      <FormattedDate value={moment(element.updated_at)} day="numeric" month="long" year="numeric" />
     );
   },
 
   render() {
-    const {
-      hasLink,
-      linkType,
-      showBreadcrumb,
-      showNotation,
-      showStatus,
-    } = this.props;
+    const { hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
     const element = this.props.element;
     return (
       <div className="element">

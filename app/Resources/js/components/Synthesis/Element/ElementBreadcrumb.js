@@ -19,9 +19,7 @@ const ElementBreadcrumb = React.createClass({
       element.path.split('|').map(data => {
         const splitted = data.split('-');
         const title = splitted.slice(0, splitted.length - 5).join('-');
-        const id = splitted
-          .slice(splitted.length - 5, splitted.length)
-          .join('-');
+        const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
         const item = {
           title: title || null,
           id,

@@ -25,22 +25,19 @@ const RankingArrows = React.createClass({
     const { item, arrowFunctions, disabled } = this.props;
     return (
       <ButtonGroup className="ranking__item__arrows">
-        {
-          Object.keys(arrowFunctions).map((key) => {
-            return (
-              <RankingArrow
-                key={key}
-                onClick={arrowFunctions[key] ? () => arrowFunctions[key](item) : null}
-                type={key}
-                disabled={disabled || !arrowFunctions[key]}
-              />
-            );
-          })
-        }
+        {Object.keys(arrowFunctions).map(key => {
+          return (
+            <RankingArrow
+              key={key}
+              onClick={arrowFunctions[key] ? () => arrowFunctions[key](item) : null}
+              type={key}
+              disabled={disabled || !arrowFunctions[key]}
+            />
+          );
+        })}
       </ButtonGroup>
     );
   },
-
 });
 
 export default RankingArrows;

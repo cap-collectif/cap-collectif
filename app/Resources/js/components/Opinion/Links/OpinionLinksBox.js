@@ -60,18 +60,16 @@ const OpinionLinksBox = React.createClass({
             <OpinionLinkCreate {...this.props} />
           </Col>
           <Col xs={12} sm={6} md={6} className="block--first-mobile">
-            {this.state.links.length > 1
-              ? <Filter
-                  onChange={this.handleFilterChange}
-                  value={this.state.filter}
-                  values={['last', 'old']}
-                />
-              : null}
+            {this.state.links.length > 1 ? (
+              <Filter
+                onChange={this.handleFilterChange}
+                value={this.state.filter}
+                values={['last', 'old']}
+              />
+            ) : null}
           </Col>
         </Row>
-        {!this.state.isLoading
-          ? <OpinionLinkList links={this.state.links} />
-          : <Loader />}
+        {!this.state.isLoading ? <OpinionLinkList links={this.state.links} /> : <Loader />}
       </div>
     );
   },

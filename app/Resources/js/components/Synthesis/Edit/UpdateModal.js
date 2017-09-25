@@ -145,19 +145,14 @@ const UpdateModal = React.createClass({
 
   loadElementsTreeFromServer() {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementsTreeFromServer(
-      synthesis.id,
-      'notIgnored',
-    );
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
   },
 
   renderTitle() {
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.update.field.title" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.title" />}`}
         </h2>
         <Input
           type="text"
@@ -174,9 +169,7 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.update.field.description" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.description" />}`}
         </h2>
         <Input
           type="textarea"
@@ -193,9 +186,7 @@ const UpdateModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.update.field.parent" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.parent" />}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -222,11 +213,7 @@ const UpdateModal = React.createClass({
   render() {
     const { show } = this.props;
     return (
-      <Modal
-        show={show}
-        onHide={this.hide}
-        animation={false}
-        dialogClassName="modal--update">
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--update">
         <Modal.Header closeButton>
           <Modal.Title>
             {<FormattedMessage id="synthesis.edition.action.update.title" />}
@@ -239,14 +226,10 @@ const UpdateModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            {
-              <FormattedMessage id="synthesis.edition.action.update.btn_cancel" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.update.btn_cancel" />}
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.update}>
-            {
-              <FormattedMessage id="synthesis.edition.action.update.btn_submit" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.update.btn_submit" />}
           </Button>
         </Modal.Footer>
       </Modal>

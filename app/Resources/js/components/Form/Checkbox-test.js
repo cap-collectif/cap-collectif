@@ -35,9 +35,7 @@ describe('<Checkbox />', () => {
   });
 
   it('should render with an other field', () => {
-    const wrapper = shallow(
-      <Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />,
-    );
+    const wrapper = shallow(<Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

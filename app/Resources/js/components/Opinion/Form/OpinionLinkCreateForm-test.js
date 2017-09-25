@@ -5,9 +5,7 @@ import { shallow } from 'enzyme';
 import { OpinionLinkCreateForm } from './OpinionLinkCreateForm';
 
 describe('<OpinionLinkCreateForm />', () => {
-  const availableTypes = [
-    { id: '1337', appendixTypes: [{ id: '1', title: 'appendix-1' }] },
-  ];
+  const availableTypes = [{ id: '1337', appendixTypes: [{ id: '1', title: 'appendix-1' }] }];
   const props = {
     availableTypes,
     currentType: availableTypes[0],

@@ -170,19 +170,14 @@ const PublishModal = React.createClass({
 
   loadElementsTreeFromServer() {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementsTreeFromServer(
-      synthesis.id,
-      'notIgnored',
-    );
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
   },
 
   renderTitle() {
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.title" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.publish.field.title" />}`}
         </h2>
         <Input
           type="text"
@@ -199,9 +194,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.parent" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.publish.field.parent" />}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -251,22 +244,14 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.notation" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.publish.field.notation" />}`}
           <span className="small excerpt action__title-right">{`\t${(
             <FormattedMessage id="synthesis.edition.action.publish.optional" />
           )}`}</span>
         </h2>
-        <NotationButtons
-          notation={this.state.notation}
-          onChange={this.setNotation}
-          block
-        />
+        <NotationButtons notation={this.state.notation} onChange={this.setNotation} block />
         <p className="small excerpt action__help">
-          {
-            <FormattedMessage id="synthesis.edition.action.publish.help.notation" />
-          }
+          {<FormattedMessage id="synthesis.edition.action.publish.help.notation" />}
         </p>
       </div>
     );
@@ -276,9 +261,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.comment" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.publish.field.comment" />}`}
           <span className="small excerpt action__title-right">{`\t${(
             <FormattedMessage id="synthesis.edition.action.publish.optional" />
           )}`}</span>
@@ -300,9 +283,7 @@ const PublishModal = React.createClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          {` ${(
-            <FormattedMessage id="synthesis.edition.action.publish.field.description" />
-          )}`}
+          {` ${<FormattedMessage id="synthesis.edition.action.publish.field.description" />}`}
           <span className="small excerpt action__title-right">{`\t${(
             <FormattedMessage id="synthesis.edition.action.publish.optional" />
           )}`}</span>
@@ -323,11 +304,7 @@ const PublishModal = React.createClass({
   render() {
     const { show, element } = this.props;
     return (
-      <Modal
-        show={show}
-        onHide={this.hide}
-        animation={false}
-        dialogClassName="modal--publish">
+      <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--publish">
         <Modal.Header closeButton>
           <Modal.Title>
             {<FormattedMessage id="synthesis.edition.action.publish.title" />}
@@ -335,8 +312,7 @@ const PublishModal = React.createClass({
         </Modal.Header>
         <Modal.Body>
           {this.renderTitle()}
-          {(element.displayType === 'grouping' ||
-            element.displayType === 'folder') &&
+          {(element.displayType === 'grouping' || element.displayType === 'folder') &&
             this.renderType()}
           {this.renderDescription()}
           {this.renderParent()}
@@ -345,14 +321,10 @@ const PublishModal = React.createClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            {
-              <FormattedMessage id="synthesis.edition.action.publish.btn_cancel" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.publish.btn_cancel" />}
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.publish}>
-            {
-              <FormattedMessage id="synthesis.edition.action.publish.btn_submit" />
-            }
+            {<FormattedMessage id="synthesis.edition.action.publish.btn_submit" />}
           </Button>
         </Modal.Footer>
       </Modal>

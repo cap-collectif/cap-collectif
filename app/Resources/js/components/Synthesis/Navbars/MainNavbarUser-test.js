@@ -37,9 +37,7 @@ describe('<MainNavbarUser />', () => {
   });
 
   it('should render the dropdown with admin menu item when user is admin', () => {
-    const wrapper = shallow(
-      <MainNavbarUser user={admin} features={features} />,
-    );
+    const wrapper = shallow(<MainNavbarUser user={admin} features={features} />);
     expect(wrapper.find('Nav')).toHaveLength(1);
     expect(wrapper.find('NavDropdown')).toHaveLength(1);
     expect(wrapper.find('MenuItem')).toHaveLength(5);

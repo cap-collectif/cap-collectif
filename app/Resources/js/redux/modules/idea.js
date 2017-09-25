@@ -89,10 +89,7 @@ export const hideIdeaEditModal = (): HideIdeaEditModalAction => ({
   type: 'idea/HIDE_EDIT_MODAL',
 });
 
-export const deleteVoteSucceeded = (
-  ideaId: number,
-  vote: Vote,
-): DeleteVoteSucceedAction => ({
+export const deleteVoteSucceeded = (ideaId: number, vote: Vote): DeleteVoteSucceedAction => ({
   type: 'idea/DELETE_VOTE_SUCCEEDED',
   ideaId,
   vote,
@@ -109,9 +106,7 @@ export const voteSuccess = (ideaId: number, vote: Vote): VoteSucceedAction => ({
   vote,
 });
 
-export function* fetchAllVotes(
-  action: RequestVotesFetchAction,
-): Generator<IOEffect, *, *> {
+export function* fetchAllVotes(action: RequestVotesFetchAction): Generator<IOEffect, *, *> {
   try {
     let hasMore = true;
     let iterationCount = 0;
@@ -144,10 +139,7 @@ export function* saga(): Generator<IOEffect, *, *> {
   yield takeEvery('idea/VOTES_FETCH_REQUESTED', fetchAllVotes);
 }
 
-export const reducer = (
-  state: State = initialState,
-  action: Action,
-): Exact<State> => {
+export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'idea/SHOW_CREATE_MODAL': {
       return { ...state, showCreateModal: true };
@@ -199,10 +191,7 @@ export const reducer = (
         }
       } else if (actionVote.user != null) {
         const user = actionVote.user;
-        const vote = find(
-          idea.votes,
-          v => v.user && v.user.uniqId === user.uniqId,
-        );
+        const vote = find(idea.votes, v => v.user && v.user.uniqId === user.uniqId);
         if (vote) {
           index = idea.votes.indexOf(vote);
         }
@@ -211,10 +200,7 @@ export const reducer = (
         [action.ideaId]: {
           ...idea,
           ...{
-            votes: [
-              ...idea.votes.slice(0, index),
-              ...idea.votes.slice(index + 1),
-            ],
+            votes: [...idea.votes.slice(0, index), ...idea.votes.slice(index + 1)],
             userHasVote: false,
             votesCount: idea.votesCount - 1,
           },

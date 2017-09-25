@@ -51,9 +51,7 @@ const featuresThemesDisabled = {
 
 describe('<IdeaPageHeaderInfos />', () => {
   it('it should render a paragraph with formatted messages for user and votes', () => {
-    const wrapper = shallow(
-      <IdeaPageHeaderInfos idea={idea} features={featuresThemesDisabled} />,
-    );
+    const wrapper = shallow(<IdeaPageHeaderInfos idea={idea} features={featuresThemesDisabled} />);
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('p.media--aligned')).toHaveLength(1);
     expect(wrapper.find('#idea-votes-nb')).toHaveLength(1);
@@ -61,30 +59,21 @@ describe('<IdeaPageHeaderInfos />', () => {
 
   it('it should render a theme when idea has one and feature is activated', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos
-        features={featuresThemesEnabled}
-        idea={ideaWithTheme}
-      />,
+      <IdeaPageHeaderInfos features={featuresThemesEnabled} idea={ideaWithTheme} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should not render a theme when idea has one and feature is disabled', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos
-        features={featuresThemesDisabled}
-        idea={ideaWithTheme}
-      />,
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaWithTheme} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render comments number when idea is commentable', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos
-        features={featuresThemesDisabled}
-        idea={ideaCommentable}
-      />,
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaCommentable} />,
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('#idea-comments-nb')).toHaveLength(1);
@@ -92,10 +81,7 @@ describe('<IdeaPageHeaderInfos />', () => {
 
   it('it should render trashed label when idea is trashed', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos
-        features={featuresThemesDisabled}
-        idea={ideaTrashed}
-      />,
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaTrashed} />,
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('.label.label-default')).toHaveLength(1);

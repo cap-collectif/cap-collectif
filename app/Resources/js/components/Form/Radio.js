@@ -56,14 +56,7 @@ const Radio = React.createClass({
   },
 
   render() {
-    const {
-      disabled,
-      getGroupStyle,
-      id,
-      labelClassName,
-      label,
-      renderFormErrors,
-    } = this.props;
+    const { disabled, getGroupStyle, id, labelClassName, label, renderFormErrors } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -77,9 +70,7 @@ const Radio = React.createClass({
         <label htmlFor={id} className={classNames(labelClasses)}>
           {label}
         </label>
-        <span className="help-block">
-          {field.helpText}
-        </span>
+        <span className="help-block">{field.helpText}</span>
         <RadioGroup
           ref={c => (this.radioGroup = c)}
           name={fieldName}
@@ -100,14 +91,14 @@ const Radio = React.createClass({
               </Input>
             );
           })}
-          {this.props.field.isOtherAllowed
-            ? <Other
-                ref={c => (this.other = c)}
-                field={this.props.field}
-                onChange={this.onChange}
-                disabled={disabled}
-              />
-            : null}
+          {this.props.field.isOtherAllowed ? (
+            <Other
+              ref={c => (this.other = c)}
+              field={this.props.field}
+              onChange={this.onChange}
+              disabled={disabled}
+            />
+          ) : null}
         </RadioGroup>
         {renderFormErrors(field.id)}
       </div>

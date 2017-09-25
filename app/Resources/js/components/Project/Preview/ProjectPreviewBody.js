@@ -44,11 +44,7 @@ const ProjectPreviewBody = React.createClass({
       progress = <div style={{ height: 51 }} />;
     }
     const link = externalLink || project._links.show;
-    const tooltip = (
-      <Tooltip id={`project-${project.id}-tooltip`}>
-        {project.title}
-      </Tooltip>
-    );
+    const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     return (
       <div className="box project__preview__body">
@@ -60,10 +56,8 @@ const ProjectPreviewBody = React.createClass({
             <OverlayTrigger placement="top" overlay={tooltip}>
               <a href={link}>
                 <div style={{ width: '98%' }}>
-                  <Truncate lines={3}>
-                    {project.title}
-                  </Truncate>
-                  {externalLink &&
+                  <Truncate lines={3}>{project.title}</Truncate>
+                  {externalLink && (
                     <svg
                       style={{
                         marginLeft: 5,
@@ -85,14 +79,13 @@ const ProjectPreviewBody = React.createClass({
                             c2.3,0,4.2-1.9,4.2-4.2s-1.9-4.2-4.2-4.2h-33C5,14.8,0,19.7,0,25.9V79c0,6.1,5,11.1,11.1,11.1h53.1c6.1,0,11.1-5,11.1-11.1V46.1
                             C75.3,43.8,73.4,41.9,71.1,41.9z" />
                       </g>
-                    </svg>}
+                    </svg>
+                  )}
                 </div>
               </a>
             </OverlayTrigger>
           </h2>
-          <Truncate
-            lines={1}
-            className="project__preview__author excerpt small">
+          <Truncate lines={1} className="project__preview__author excerpt small">
             {project.author.displayName}
           </Truncate>
         </div>

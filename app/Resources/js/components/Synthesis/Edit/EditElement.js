@@ -85,11 +85,7 @@ const EditElement = React.createClass({
 
   renderDescription() {
     if (this.state.element && this.state.element.description) {
-      return (
-        <p className="element__description box">
-          {this.state.element.description}
-        </p>
-      );
+      return <p className="element__description box">{this.state.element.description}</p>;
     }
     return null;
   },
@@ -126,14 +122,8 @@ const EditElement = React.createClass({
     const { synthesis } = this.props;
     return (
       <div className="element__actions box text-center">
-        <PublishButton
-          element={this.state.element}
-          onModal={this.togglePublishModal}
-        />
-        <DivideButton
-          element={this.state.element}
-          onModal={this.toggleDivideModal}
-        />
+        <PublishButton element={this.state.element} onModal={this.togglePublishModal} />
+        <DivideButton element={this.state.element} onModal={this.toggleDivideModal} />
         <IgnoreButton synthesis={synthesis} element={this.state.element} />
       </div>
     );
@@ -207,12 +197,9 @@ const EditElement = React.createClass({
       <div className="synthesis__element">
         <Loader show={this.state.isLoading} />
         {this.renderElementPanel()}
-        {!this.state.isLoading && this.state.element
-          ? <ElementsList
-              elements={this.state.element.children}
-              showBreadcrumb={false}
-            />
-          : null}
+        {!this.state.isLoading && this.state.element ? (
+          <ElementsList elements={this.state.element.children} showBreadcrumb={false} />
+        ) : null}
         {this.renderHistory()}
         {this.renderPublishModal()}
         {this.renderDivideModal()}

@@ -2,7 +2,6 @@ import BaseStore from './BaseStore';
 import { RECEIVE_LINKS } from '../constants/OpinionConstants';
 
 class OpinionLinkStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -15,14 +14,14 @@ class OpinionLinkStore extends BaseStore {
         this._links = action.links;
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 
   get links() {
     return this._links;
   }
-
 }
 
 export default new OpinionLinkStore();

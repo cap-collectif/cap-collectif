@@ -103,8 +103,7 @@ const ProjectStatsList = React.createClass({
     } = this.props;
     const { data } = this.state;
 
-    const haveData =
-      data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
+    const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
 
     return (
       <div className="block" id={`stats-${stepId}-${type}`}>
@@ -119,7 +118,7 @@ const ProjectStatsList = React.createClass({
           showDistricts={step.usingDistricts || false}
           showThemes={step.usingThemes || false}
         />
-        {haveData &&
+        {haveData && (
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
               <i className={icon} /> {<FormattedMessage id={label} />}
@@ -143,34 +142,38 @@ const ProjectStatsList = React.createClass({
                 </Button>
               </span>
             </ListGroupItem>
-            {data.values.length > 0
-              ? data.values.map((row, index) => {
-                  return (
-                    <ProjectStatsListItem
-                      key={index}
-                      item={row}
-                      showPercentage={this.state.showPercentage}
-                      isCurrency={isCurrency}
-                    />
-                  );
-                })
-              : <ListGroupItem className="excerpt text-center">
-                  {<FormattedMessage id="project.stats.no_values" />}
-                </ListGroupItem>}
-          </ListGroup>}
+            {data.values.length > 0 ? (
+              data.values.map((row, index) => {
+                return (
+                  <ProjectStatsListItem
+                    key={index}
+                    item={row}
+                    showPercentage={this.state.showPercentage}
+                    isCurrency={isCurrency}
+                  />
+                );
+              })
+            ) : (
+              <ListGroupItem className="excerpt text-center">
+                {<FormattedMessage id="project.stats.no_values" />}
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        )}
         {haveData &&
-          data.total > data.values.length &&
-          <ProjectStatsModal
-            type={type}
-            stepId={stepId}
-            data={data}
-            label={label}
-            icon={icon}
-            showPercentage={this.state.showPercentage}
-            isCurrency={isCurrency}
-            theme={this.state.theme}
-            district={this.state.district}
-          />}
+          data.total > data.values.length && (
+            <ProjectStatsModal
+              type={type}
+              stepId={stepId}
+              data={data}
+              label={label}
+              icon={icon}
+              showPercentage={this.state.showPercentage}
+              isCurrency={isCurrency}
+              theme={this.state.theme}
+              district={this.state.district}
+            />
+          )}
       </div>
     );
   },

@@ -51,9 +51,7 @@ const ProposalDetailLikersLabel = React.createClass({
       return (
         <span {...funcProps}>
           <i className="cap cap-heart-1 icon--red" />
-          <Truncate>
-            {this.getLabelText()}
-          </Truncate>
+          <Truncate>{this.getLabelText()}</Truncate>
         </span>
       );
     }

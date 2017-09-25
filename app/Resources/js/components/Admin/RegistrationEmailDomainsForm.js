@@ -11,9 +11,9 @@ const renderDomains = ({
   fields,
 }: {
   fields: { push: Function, map: Function, remove: Function },
-}) =>
+}) => (
   <div>
-    {fields.map((member, index) =>
+    {fields.map((member, index) => (
       <Row key={index}>
         <Col xs={10}>
           <Field name={`${member}.value`} type="text" component={renderInput} />
@@ -21,12 +21,13 @@ const renderDomains = ({
         <Col xs={2}>
           <Button onClick={() => fields.remove(index)}>Supprimer</Button>
         </Col>
-      </Row>,
-    )}
+      </Row>
+    ))}
     <Button style={{ marginBottom: 10 }} onClick={() => fields.push({})}>
       Ajouter
     </Button>
-  </div>;
+  </div>
+);
 
 export const RegistrationEmailDomainsForm = React.createClass({
   propTypes: {

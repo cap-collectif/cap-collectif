@@ -51,11 +51,7 @@ const ViewTree = React.createClass({
     if (element.childrenCount !== element.children.length) {
       this.loadElementsTreeFromServer(element.id);
     }
-    SynthesisElementActions.expandTreeItem(
-      'view',
-      element.id,
-      !this.state.expanded[element.id],
-    );
+    SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
   },
 
   loadElementsTreeFromServer(parent = null) {
@@ -125,19 +121,21 @@ const ViewTree = React.createClass({
           className="synthesis__element__readmore"
           onClick={this.toggleExpand.bind(null, element)}>
           <span>
-            {expanded
-              ? <FormattedMessage
-                  id="synthesis.readmore.hide"
-                  values={{
-                    title: element.title,
-                  }}
-                />
-              : <FormattedMessage
-                  id="synthesis.readmore.show"
-                  values={{
-                    title: element.title,
-                  }}
-                />}
+            {expanded ? (
+              <FormattedMessage
+                id="synthesis.readmore.hide"
+                values={{
+                  title: element.title,
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                id="synthesis.readmore.show"
+                values={{
+                  title: element.title,
+                }}
+              />
+            )}
           </span>
           <i style={{ marginLeft: '5px' }} className={classes} />
         </div>
@@ -167,12 +165,7 @@ const ViewTree = React.createClass({
         'foldersOrderedByCount',
         displayRules,
       )
-        ? ArrayHelper.sortArrayByField(
-            elements,
-            'childrenElementsNb',
-            false,
-            'DESC',
-          )
+        ? ArrayHelper.sortArrayByField(elements, 'childrenElementsNb', false, 'DESC')
         : ArrayHelper.sortArrayByField(elements, 'title', true);
       return (
         <ul className="synthesis__elements">
@@ -203,9 +196,7 @@ const ViewTree = React.createClass({
   render() {
     return (
       <Loader show={this.state.isLoading}>
-        {this.state.elements.length > 0
-          ? this.renderTreeItems(this.state.elements, null)
-          : null}
+        {this.state.elements.length > 0 ? this.renderTreeItems(this.state.elements, null) : null}
       </Loader>
     );
   },

@@ -8,9 +8,7 @@ import type {
 } from './__generated__/ChangeProposalNotationMutation.graphql';
 
 const mutation = graphql`
-  mutation ChangeProposalNotationMutation(
-    $input: ChangeProposalNotationInput!
-  ) {
+  mutation ChangeProposalNotationMutation($input: ChangeProposalNotationInput!) {
     changeProposalNotation(input: $input) {
       proposal {
         publicationStatus

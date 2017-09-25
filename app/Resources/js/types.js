@@ -1,27 +1,12 @@
 // @flow
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
-import type {
-  State as ProposalState,
-  ProposalAction,
-} from './redux/modules/proposal';
-import type {
-  State as OpinionState,
-  OpinionAction,
-} from './redux/modules/opinion';
+import type { State as ProposalState, ProposalAction } from './redux/modules/proposal';
+import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';
 import type { State as UserState, UserAction } from './redux/modules/user';
-import type {
-  State as ProjectState,
-  ProjectAction,
-} from './redux/modules/project';
+import type { State as ProjectState, ProjectAction } from './redux/modules/project';
 import type { State as IdeaState, IdeaAction } from './redux/modules/idea';
-import type {
-  State as ReportState,
-  ReportAction,
-} from './redux/modules/report';
-import type {
-  State as DefaultState,
-  DefaultAction,
-} from './redux/modules/default';
+import type { State as ReportState, ReportAction } from './redux/modules/report';
+import type { State as DefaultState, DefaultAction } from './redux/modules/default';
 
 export type Exact<T> = T;
 export type Uuid = string;

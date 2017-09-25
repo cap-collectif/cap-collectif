@@ -28,7 +28,7 @@ const ReplyModalButtons = React.createClass({
     const { reply, form, onChange } = this.props;
     return (
       <span className="pull-left reply__buttons">
-        {form.contribuable &&
+        {form.contribuable && (
           <DeleteButton
             id={`reply-delete-button${reply.id}`}
             className="reply__delete-btn"
@@ -36,8 +36,9 @@ const ReplyModalButtons = React.createClass({
             onClick={this.toggleDeleteModal.bind(null, true)}
             style={{ marginLeft: '15px' }}
             deletable={form.isContribuable}
-          />}
-        {form.contribuable &&
+          />
+        )}
+        {form.contribuable && (
           <div>
             <ReplyDeleteModal
               reply={reply}
@@ -46,7 +47,8 @@ const ReplyModalButtons = React.createClass({
               onToggleModal={this.toggleDeleteModal}
               onDelete={onChange}
             />
-          </div>}
+          </div>
+        )}
       </span>
     );
   },

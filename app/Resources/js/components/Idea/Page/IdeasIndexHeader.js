@@ -12,8 +12,7 @@ const IdeasIndexHeader = React.createClass({
       <div
         className="container container--custom"
         style={{ display: description ? 'block' : 'none' }}>
-        {description &&
-          <div dangerouslySetInnerHTML={{ __html: description }} />}
+        {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
       </div>
     );
   },

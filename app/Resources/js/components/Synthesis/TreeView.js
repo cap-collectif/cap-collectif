@@ -9,16 +9,10 @@ import ElementIcon from './Element/ElementIcon';
 decorators.Header = (props: Object) => {
   const style = props.style;
   const title =
-    props.node.title !== null
-      ? props.node.title
-      : `${props.node.body.substr(0, 140)}...`;
+    props.node.title !== null ? props.node.title : `${props.node.body.substr(0, 140)}...`;
   let titleElement;
   if (props.node.linkedDataUrl && props.node.displayType !== 'folder') {
-    titleElement = (
-      <a href={props.node.linkedDataUrl}>
-        {title}
-      </a>
-    );
+    titleElement = <a href={props.node.linkedDataUrl}>{title}</a>;
   } else {
     titleElement = title;
   }
@@ -45,18 +39,12 @@ decorators.Header = (props: Object) => {
           {titleElement}
         </div>
       </div>
-      <div className="excerpt">
-        {props.node.subtitle}
-      </div>
+      <div className="excerpt">{props.node.subtitle}</div>
     </div>
   );
 };
 
-const updateToggle = (
-  elements: Array<Object>,
-  node: Object,
-  toggled: boolean,
-): Array<Object> => {
+const updateToggle = (elements: Array<Object>, node: Object, toggled: boolean): Array<Object> => {
   return elements.map(el => {
     if (el.id === node.id) {
       // el.active = true; // set a highlight
@@ -82,10 +70,7 @@ const cleanEmptyChildren = (elements: Array<Object>): Array<Object> => {
   });
 };
 
-const preToggleElement = (
-  elements: Array<Object>,
-  depth: number,
-): Array<Object> => {
+const preToggleElement = (elements: Array<Object>, depth: number): Array<Object> => {
   return elements.map(el => {
     if (el.level <= depth) {
       el.toggled = true;
@@ -131,11 +116,7 @@ const TreeView = React.createClass({
 
   loadElementsTreeFromServer(parent = null) {
     const { synthesis } = this.props;
-    SynthesisElementActions.loadElementsTreeFromServer(
-      synthesis.id,
-      'published',
-      parent,
-    );
+    SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent);
   },
 
   render() {
@@ -144,15 +125,12 @@ const TreeView = React.createClass({
       synthesis.displayRules && synthesis.displayRules.level
         ? parseInt(synthesis.displayRules.level, 10)
         : 0;
-    const elements = preToggleElement(
-      cleanEmptyChildren(this.state.elements),
-      depth,
-    );
+    const elements = preToggleElement(cleanEmptyChildren(this.state.elements), depth);
     const styles = theme;
     styles.tree.node.link.display = 'flex';
     return (
       <Loader show={this.state.isLoading}>
-        {elements.map(element =>
+        {elements.map(element => (
           <Treebeard
             data={element}
             decorators={decorators}
@@ -162,8 +140,8 @@ const TreeView = React.createClass({
               });
             }}
             style={styles}
-          />,
-        )}
+          />
+        ))}
       </Loader>
     );
   },

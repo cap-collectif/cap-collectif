@@ -1,5 +1,4 @@
 class LocalStorageService {
-
   constructor() {
     this.defaultCacheTime = 3600000;
   }
@@ -13,7 +12,7 @@ class LocalStorageService {
       return false;
     }
     const time = cacheTime || this.defaultCacheTime;
-    return (new Date().getTime() - cache.timestamp) < time;
+    return new Date().getTime() - cache.timestamp < time;
   }
 
   get(key) {
@@ -41,7 +40,6 @@ class LocalStorageService {
     }
     localStorage.removeItem(key);
   }
-
 }
 
 export default new LocalStorageService();

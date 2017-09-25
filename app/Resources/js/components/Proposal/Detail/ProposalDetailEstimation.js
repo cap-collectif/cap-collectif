@@ -9,20 +9,19 @@ const ProposalDetailEstimation = React.createClass({
 
   render() {
     const { showNullEstimation, proposal } = this.props;
-    const estimation =
-      !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
+    const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
-    return estimation !== null && typeof estimation !== 'undefined'
-      ? <div className="proposal__info">
-          <i className="cap cap-coins-2-1 icon--blue" />
-          <FormattedNumber
-            minimumFractionDigits={0}
-            value={estimation}
-            style="currency"
-            currency="EUR"
-          />
-        </div>
-      : null;
+    return estimation !== null && typeof estimation !== 'undefined' ? (
+      <div className="proposal__info">
+        <i className="cap cap-coins-2-1 icon--blue" />
+        <FormattedNumber
+          minimumFractionDigits={0}
+          value={estimation}
+          style="currency"
+          currency="EUR"
+        />
+      </div>
+    ) : null;
   },
 });
 

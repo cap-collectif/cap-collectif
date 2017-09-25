@@ -19,9 +19,7 @@ const itemsList = [item1, item2];
 
 describe('<RankingBox />', () => {
   it('should render ranking pick box with correct props', () => {
-    const wrapper = shallow(
-      <RankingBox {...props} items={itemsList} listType="pickBox" />,
-    );
+    const wrapper = shallow(<RankingBox {...props} items={itemsList} listType="pickBox" />);
     expect(wrapper.find('.ranking__pick-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);
     expect(spots).toHaveLength(3);
@@ -41,9 +39,7 @@ describe('<RankingBox />', () => {
   });
 
   it('should render ranking choice box with correct props', () => {
-    const wrapper = shallow(
-      <RankingBox {...props} items={itemsList} listType="choiceBox" />,
-    );
+    const wrapper = shallow(<RankingBox {...props} items={itemsList} listType="choiceBox" />);
     expect(wrapper.find('.ranking__choice-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);
     expect(spots).toHaveLength(3);

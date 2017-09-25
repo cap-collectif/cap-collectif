@@ -40,9 +40,7 @@ const OpinionBodyDiffContent = React.createClass({
         parts.push({
           before: section.slice(0, section.indexOf(foundModal.key)),
           link: foundModal.key,
-          after: section.slice(
-            section.indexOf(foundModal.key) + foundModal.key.length,
-          ),
+          after: section.slice(section.indexOf(foundModal.key) + foundModal.key.length),
           modal: foundModal,
         });
       }

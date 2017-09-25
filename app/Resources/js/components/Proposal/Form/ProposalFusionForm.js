@@ -39,7 +39,7 @@ export const ProposalFusionForm = React.createClass({
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         <br />
-        {currentCollectStep &&
+        {currentCollectStep && (
           <Field
             name="childConnections"
             id="childConnections"
@@ -53,17 +53,17 @@ export const ProposalFusionForm = React.createClass({
                 .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps
                 .filter(o => !currentValues.includes(o))}
             loadOptions={input =>
-              Fetcher.postToJson(
-                `/collect_steps/${currentCollectStep.id}/proposals/search`,
-                { terms: input },
-              ).then(res => ({
+              Fetcher.postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, {
+                terms: input,
+              }).then(res => ({
                 options: res.proposals.map(p => ({
                   value: p.id,
                   label: p.title,
                   stepId: currentCollectStep.id,
                 })),
               }))}
-          />}
+          />
+        )}
       </form>
     );
   },

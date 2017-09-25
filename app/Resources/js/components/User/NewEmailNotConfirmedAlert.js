@@ -23,11 +23,12 @@ export const NewEmailNotConfirmedAlert = React.createClass({
       <Alert bsStyle="warning" id="alert-new-email-not-confirmed">
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
-            {sendSucceed &&
+            {sendSucceed && (
               <FormattedHTMLMessage
                 id="user.confirm.new_email_send_succeed"
                 values={{ email: newEmailToConfirm }}
-              />}
+              />
+            )}
           </div>
           <div className="col-md-5">
             <Button
@@ -35,12 +36,10 @@ export const NewEmailNotConfirmedAlert = React.createClass({
               onClick={() => resendConfirmation()}>
               <FormattedMessage id="user.confirm.resend" />
             </Button>
-            <Button
-              bsStyle="link"
-              style={{ marginBottom: 5 }}
-              href={editEmailUrl}>
-              {sendSucceed &&
-                <FormattedMessage id="user.confirm.new_email_send_succeed_cancel_or_update" />}
+            <Button bsStyle="link" style={{ marginBottom: 5 }} href={editEmailUrl}>
+              {sendSucceed && (
+                <FormattedMessage id="user.confirm.new_email_send_succeed_cancel_or_update" />
+              )}
             </Button>
           </div>
         </div>

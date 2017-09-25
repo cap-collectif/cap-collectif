@@ -32,14 +32,9 @@ const ProjectStatsListItem = React.createClass({
     const { item } = this.props;
     return (
       <ListGroupItem className="stats__list__row">
-        <span
-          className="stats__list__bar"
-          style={{ width: `${item.percentage}%` }}
-        />
+        <span className="stats__list__bar" style={{ width: `${item.percentage}%` }} />
         <div className="stats__list__value">
-          <span className="badge badge-primary pull-right">
-            {this.getFormattedValue()}
-          </span>
+          <span className="badge badge-primary pull-right">{this.getFormattedValue()}</span>
           {item.name}
         </div>
       </ListGroupItem>

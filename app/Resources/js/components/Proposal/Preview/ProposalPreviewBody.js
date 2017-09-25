@@ -19,37 +19,33 @@ const ProposalPreviewBody = React.createClass({
       <div className="proposal__body">
         <a href={proposal._links.show}>
           <h2 className="h4 proposal__title">
-            <Truncate lines={3}>
-              {proposal.title}
-            </Truncate>
+            <Truncate lines={3}>{proposal.title}</Truncate>
           </h2>
         </a>
-        <div className="excerpt">
-          {proposal.summaryOrBodyExcerpt}
-        </div>
+        <div className="excerpt">{proposal.summaryOrBodyExcerpt}</div>
         <div className="proposal__infos">
           {features.themes &&
             showThemes &&
-            proposal.theme &&
-            <div className="proposal__info ellipsis">
-              <i className="cap cap-tag-1-1 icon--blue" />
-              {proposal.theme.title}
-            </div>}
-          {proposal.category &&
+            proposal.theme && (
+              <div className="proposal__info ellipsis">
+                <i className="cap cap-tag-1-1 icon--blue" />
+                {proposal.theme.title}
+              </div>
+            )}
+          {proposal.category && (
             <div className="proposal__info ellipsis">
               <i className="cap cap-tag-1-1 icon--blue" />
               {proposal.category.name}
-            </div>}
+            </div>
+          )}
           {features.districts &&
-            proposal.district &&
-            <div className="proposal__info ellipsis">
-              <i className="cap cap-marker-1-1 icon--blue" />
-              {proposal.district.name}
-            </div>}
-          <ProposalDetailEstimation
-            proposal={proposal}
-            showNullEstimation={showNullEstimation}
-          />
+            proposal.district && (
+              <div className="proposal__info ellipsis">
+                <i className="cap cap-marker-1-1 icon--blue" />
+                {proposal.district.name}
+              </div>
+            )}
+          <ProposalDetailEstimation proposal={proposal} showNullEstimation={showNullEstimation} />
           <ProposalDetailLikers proposal={proposal} />
         </div>
       </div>

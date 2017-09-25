@@ -4,17 +4,14 @@ import {
   SET_IDEAS_PAGINATION,
   INIT_IDEAS_COUNTS,
   INIT_IDEAS,
-
   CHANGE_IDEAS_PAGE,
   CHANGE_IDEAS_SEARCH_TERMS,
   CHANGE_IDEAS_ORDER,
   CHANGE_IDEAS_THEME,
-
   RECEIVE_IDEAS,
 } from '../constants/IdeaConstants';
 
 class IdeaStore extends BaseStore {
-
   constructor() {
     super();
     this.register(this._registerToActions.bind(this));
@@ -70,7 +67,8 @@ class IdeaStore extends BaseStore {
         this._currentPage = 1;
         this.emitChange();
         break;
-      default: break;
+      default:
+        break;
     }
   }
 
@@ -105,7 +103,6 @@ class IdeaStore extends BaseStore {
   get theme() {
     return this._theme;
   }
-
 }
 
 export default new IdeaStore();

@@ -16,17 +16,18 @@ const ProposalPreviewHeader = React.createClass({
         <UserAvatar user={proposal.author} className="pull-left proposal__avatar" />
         <div className="proposal__author">
           <UserLink user={proposal.author} />
-          <p className="excerpt small proposal__date" >
+          <p className="excerpt small proposal__date">
             <FormattedDate
               value={moment(proposal.created_at)}
-              day="numeric" month="long" year="numeric"
+              day="numeric"
+              month="long"
+              year="numeric"
             />
           </p>
         </div>
       </div>
     );
   },
-
 });
 
 export default ProposalPreviewHeader;

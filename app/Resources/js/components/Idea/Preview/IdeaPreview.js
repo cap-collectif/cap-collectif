@@ -26,7 +26,6 @@ const IdeaPreview = React.createClass({
       </div>
     );
   },
-
 });
 
 export default IdeaPreview;

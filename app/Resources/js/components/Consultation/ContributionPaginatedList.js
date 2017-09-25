@@ -29,12 +29,12 @@ export const ContributionPaginatedList = React.createClass({
         </div>
         <ul className="media-list  opinion__list">
           <div>
-            {contributionConnection.edges.map((edge, index) =>
-              <Opinion key={index} opinion={edge.node} />,
-            )}
+            {contributionConnection.edges.map((edge, index) => (
+              <Opinion key={index} opinion={edge.node} />
+            ))}
           </div>
         </ul>
-        {relay.hasMore() &&
+        {relay.hasMore() && (
           <div className="opinion  opinion__footer  box">
             <a
               onClick={() => {
@@ -46,7 +46,8 @@ export const ContributionPaginatedList = React.createClass({
               style={{ display: 'block' }}>
               Voir plus
             </a>
-          </div>}
+          </div>
+        )}
       </div>
     );
   },
@@ -95,11 +96,7 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query ContributionPaginatedListQuery(
-        $consultationId: ID!
-        $count: Int!
-        $cursor: String
-      ) {
+      query ContributionPaginatedListQuery($consultationId: ID!, $count: Int!, $cursor: String) {
         consultations(id: $consultationId) {
           ...ContributionPaginatedList_consultation
         }

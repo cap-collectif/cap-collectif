@@ -35,11 +35,7 @@ const ProposalStatus = React.createClass({
       statusClasses[`status--${status.color}`] = true;
     }
 
-    return (
-      <div className={classNames(statusClasses)}>
-        {status && status.name}
-      </div>
-    );
+    return <div className={classNames(statusClasses)}>{status && status.name}</div>;
   },
 });
 

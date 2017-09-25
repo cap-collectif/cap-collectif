@@ -17,14 +17,7 @@ const NewOpinionButton = React.createClass({
   },
 
   render() {
-    const {
-      dispatch,
-      label,
-      opinionType,
-      projectId,
-      stepId,
-      disabled,
-    } = this.props;
+    const { dispatch, label, opinionType, projectId, stepId, disabled } = this.props;
     return (
       <span>
         <LoginOverlay>
@@ -36,16 +29,10 @@ const NewOpinionButton = React.createClass({
               dispatch(openOpinionCreateModal(opinionType.id));
             }}>
             <i className="cap cap-add-1" />
-            <span className="hidden-xs">
-              {label}
-            </span>
+            <span className="hidden-xs">{label}</span>
           </Button>
         </LoginOverlay>
-        <OpinionCreateModal
-          opinionType={opinionType}
-          stepId={stepId}
-          projectId={projectId}
-        />
+        <OpinionCreateModal opinionType={opinionType} stepId={stepId} projectId={projectId} />
       </span>
     );
   },

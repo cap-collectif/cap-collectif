@@ -39,9 +39,7 @@ const ChildrenModal = React.createClass({
     return (
       <Modal show={show} onHide={this.hide} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {<FormattedMessage id="synthesis.view.childrenModal.title" />}
-          </Modal.Title>
+          <Modal.Title>{<FormattedMessage id="synthesis.view.childrenModal.title" />}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Loader show={this.state.isLoading}>
