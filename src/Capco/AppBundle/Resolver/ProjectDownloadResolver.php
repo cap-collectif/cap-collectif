@@ -56,8 +56,7 @@ class ProjectDownloadResolver
         UrlArrayResolver $urlArrayResolver,
         Factory $phpexcel,
         MediaExtension $mediaExtension
-    )
-    {
+    ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->urlArrayResolver = $urlArrayResolver;
@@ -239,7 +238,7 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
-        $media = isset($proposal['media'] ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
+        $media = isset($proposal['media']) ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
 
         $item = [
             'id' => $proposal['id'],
@@ -296,7 +295,7 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $vote['email'];
-        $media = isset($proposal['media'] ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
+        $media = isset($proposal['media']) ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
 
         $item = [
             'id' => $vote['id'],
@@ -351,7 +350,7 @@ class ProjectDownloadResolver
             'author' => $reply['author']['username'],
             'author_id' => $reply['author']['id'],
             'author_email' => $reply['author']['email'],
-            'phone' => $reply['author']['phone'] ? (string)$reply['author']['phone'] : '',
+            'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
         ];
@@ -468,7 +467,6 @@ class ProjectDownloadResolver
         // create the writer
         return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
     }
-
 
     // TODO move this function when we have Map util class
     private function getFiledAddress($address): string
