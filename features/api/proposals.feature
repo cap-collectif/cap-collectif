@@ -638,7 +638,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
-      },
+      }
     ],
     "count": 2,
     "order": "last"
