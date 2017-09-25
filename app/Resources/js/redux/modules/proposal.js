@@ -293,6 +293,7 @@ export const changeProposalListView = (mode: string): ChangeProposalListViewActi
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
 });
+
 type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
@@ -335,6 +336,21 @@ export const startVoting = (): RequestVotingAction => ({
 export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
+
+function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStepId: string) {
+  if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
+    const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
+    const lastProposals = randomResultsByStep[currentProjectStepId];
+
+    const proposals = {};
+    proposals[currentProjectStepId] = [proposal.id, ...lastProposals];
+
+    LocalStorageService.set('proposal.randomResultsByStep', {
+      ...randomResultsByStep,
+      ...proposals,
+    });
+  }
+}
 
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   let url = '';
@@ -419,7 +435,12 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
     });
 };
 
-export const submitProposal = (dispatch: Dispatch, form: number, data: Object): Promise<*> => {
+export const submitProposal = (
+  dispatch: Dispatch,
+  form: number,
+  data: Object,
+  currentStepId: string,
+): Promise<*> => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => {
@@ -440,6 +461,9 @@ export const submitProposal = (dispatch: Dispatch, form: number, data: Object): 
             content: 'proposal.request.create.success',
           },
         });
+
+        // Update Local storage with this new proposal
+        addProposalInRandomResultsByStep(proposal, currentStepId);
 
         window.location.href = proposal._links.show;
       });
