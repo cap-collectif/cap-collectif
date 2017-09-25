@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -49,6 +51,7 @@ class ProjectDownloadResolver
     protected $instanceName;
     protected $withVote;
     protected $mediaExtension;
+    protected $customFields;
 
     public function __construct(
         EntityManager $em,
@@ -116,6 +119,7 @@ class ProjectDownloadResolver
                 );
             }
             $this->headers = self::$collectHeaders;
+            $this->initCustomFieldsInHeader($step->getProposalForm());
             $data = $this->getCollectStepData($step);
         } elseif ($step instanceof QuestionnaireStep) {
             $this->headers = $this->getQuestionnaireStepHeaders($step);
@@ -164,8 +168,22 @@ class ProjectDownloadResolver
                 ->getRepository('CapcoAppBundle:ProposalCollectVote')
                 ->getCountsByProposalGroupedBySteps($entity);
 
-            $proposal['votesCountByStepId'] = json_encode($selectionVotesCount + $collectVotesCount);
+            $str = '';
+            $loop = 1;
+            foreach ($selectionVotesCount as $step => $value) {
+                $str .= $step . ' : ' . $value . ($loop !== count($selectionVotesCount) ? '<br>' : '');
+                ++$loop;
+            }
+
+            $loop = 1;
+            foreach ($collectVotesCount as $step => $value) {
+                $str .= $step . ' : ' . $value . ($loop !== count($collectVotesCount) ? '<br>' : '');
+                ++$loop;
+            }
+
+            $proposal['votesCountByStepId'] = $this->formatText($str);
         }
+
         unset($proposal);
 
         $this->getProposalsData($proposals);
@@ -272,6 +290,8 @@ class ProjectDownloadResolver
             'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
         ];
 
+        $item = $this->addCustomsFieldForProposal($proposal, $item);
+
         if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
             $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
@@ -326,6 +346,8 @@ class ProjectDownloadResolver
             'status' => $na,
             'estimation' => $na,
         ];
+
+        $item = $this->addCustomsFieldForProposal($proposal, $item);
 
         if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
@@ -395,36 +417,6 @@ class ProjectDownloadResolver
         return $body;
     }
 
-    private function booleanToString($boolean)
-    {
-        if ($boolean) {
-            return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
-        }
-
-        return $this->translator->trans('project_download.values.no', [], 'CapcoAppBundle');
-    }
-
-    private function dateToString(\DateTime $date = null)
-    {
-        if ($date) {
-            return $date->format('Y-m-d H:i:s');
-        }
-
-        return '';
-    }
-
-    private function formatText($text)
-    {
-        $oneBreak = ['<br>', '<br/>', '&nbsp;'];
-        $twoBreaks = ['</p>'];
-        $text = str_ireplace($oneBreak, "\r", $text);
-        $text = str_ireplace($twoBreaks, "\r\n", $text);
-        $text = strip_tags($text);
-        $text = html_entity_decode($text, ENT_QUOTES);
-
-        return $text;
-    }
-
     private function getWriterFromData($data, $headers, $title)
     {
         $phpExcelObject = $this->phpexcel->createPHPExcelObject();
@@ -445,7 +437,9 @@ class ProjectDownloadResolver
             if (is_array($header)) {
                 $header = $header['label'];
             } else {
-                $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
+                if (!in_array($header, $this->customFields, true)) {
+                    $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
+                }
             }
             $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
             ++$currentColumn;
@@ -480,5 +474,61 @@ class ProjectDownloadResolver
         }
 
         return $address[0]['formatted_address'];
+    }
+
+    private function initCustomFieldsInHeader(ProposalForm $proposalForm)
+    {
+        $this->customFields = [];
+        foreach ($proposalForm->getQuestions() as $question) {
+            $title = $question->getQuestion()->getTitle();
+            $this->customFields[] = $title;
+        }
+
+        array_splice($this->headers, 11, 0, $this->customFields);
+    }
+
+    private function addCustomsFieldForProposal(array $proposal, array $item): array
+    {
+        foreach ($this->customFields as $customField) {
+            $item[$customField] = '';
+        }
+
+        foreach ($proposal['responses'] as $response) {
+            if (in_array($response['question']['title'], $this->customFields, true)) {
+                $item[$response['question']['title']] = (string) $response['value'];
+            }
+        }
+
+        return $item;
+    }
+
+    private function booleanToString($boolean)
+    {
+        if ($boolean) {
+            return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
+        }
+
+        return $this->translator->trans('project_download.values.no', [], 'CapcoAppBundle');
+    }
+
+    private function dateToString(\DateTime $date = null)
+    {
+        if ($date) {
+            return $date->format('Y-m-d H:i:s');
+        }
+
+        return '';
+    }
+
+    private function formatText($text)
+    {
+        $oneBreak = ['<br>', '<br/>', '&nbsp;'];
+        $twoBreaks = ['</p>'];
+        $text = str_ireplace($oneBreak, "\r", $text);
+        $text = str_ireplace($twoBreaks, "\r\n", $text);
+        $text = strip_tags($text);
+        $text = html_entity_decode($text, ENT_QUOTES);
+
+        return $text;
     }
 }
