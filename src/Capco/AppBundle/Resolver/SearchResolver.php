@@ -187,7 +187,7 @@ class SearchResolver
         if (isset($providedFilters['districts'])) {
             $filters['district.id'] = $providedFilters['districts'];
         }
-        if (isset($providedFilters['themes'])) {
+        if (array_key_exists('themes', $providedFilters) && $providedFilters['themes'] > 0) {
             $filters['theme.id'] = $providedFilters['themes'];
         }
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {

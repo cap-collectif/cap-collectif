@@ -333,7 +333,7 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: string
+                  type: long
                   index: not_analyzed
             selections:
               type: object

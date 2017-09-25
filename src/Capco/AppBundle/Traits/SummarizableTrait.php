@@ -18,9 +18,9 @@ trait SummarizableTrait
         return $this->summary;
     }
 
-    public function getSummaryOrBodyExcerpt(): string
+    public function getSummaryOrBodyExcerpt()
     {
-        return $this->summary ?? $this->getBodyTextExcerpt(140);
+        return $this->summary ?? html_entity_decode($this->getBodyTextExcerpt(140));
     }
 
     public function setSummary(string $summary = null): self

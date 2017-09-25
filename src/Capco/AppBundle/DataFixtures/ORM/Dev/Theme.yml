@@ -1,6 +1,5 @@
 Capco\AppBundle\Entity\Theme:
     theme1:
-        id: theme1
         title: Immobilier
         teaser: <sentence(3)>
         isEnabled: true
@@ -13,7 +12,6 @@ Capco\AppBundle\Entity\Theme:
             <p><text(500)></p>
         Author: '@user4'
     theme2:
-        id: theme2
         title: Justice
         teaser: <sentence(3)>
         isEnabled: true
@@ -27,7 +25,6 @@ Capco\AppBundle\Entity\Theme:
         Author: '@user4'
         Media: '@MediaProject1'
     theme3:
-        id: theme3
         title: Transport
         teaser: <sentence(3)>
         isEnabled: true
@@ -41,7 +38,6 @@ Capco\AppBundle\Entity\Theme:
         Author: '@user4'
         Media: '@MediaProject2'
     theme4:
-        id: theme4
         title: Thème vide
         teaser: <sentence(3)>
         isEnabled: true

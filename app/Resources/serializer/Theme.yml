@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Theme:
   properties:
     id:
       expose: true
-      type: string
+      type: integer
       groups: [ThemeDetails]
     title:
       expose: true

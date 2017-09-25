@@ -1016,17 +1016,17 @@ input UpdateProposalFormInput {
   description: String
   summaryHelpText: String
   illustrationHelpText: String
-  usingThemes: Boolean
-  themeMandatory: Boolean
+  usingThemes: Boolean!
+  themeMandatory: Boolean!
   themeHelpText: String
-  usingDistrict: Boolean
-  districtMandatory: Boolean
+  usingDistrict: Boolean!
+  districtMandatory: Boolean!
   districtHelpText: String
-  usingCategories: Boolean
-  categoryMandatory: Boolean
+  usingCategories: Boolean!
+  categoryMandatory: Boolean!
   categoryHelpText: String
-  usingAddress: Boolean
-  proposalInAZoneRequired: Boolean
+  usingAddress: Boolean!
+  proposalInAZoneRequired: Boolean!
   titleHelpText: String
   descriptionHelpText: String
   addressHelpText: String
