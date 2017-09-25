@@ -57,6 +57,15 @@ export const ProposalStepPage = React.createClass({
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !randomOrder;
 
+    let geoJsons = [];
+    try {
+      geoJsons = form.districts
+        .filter(d => d.geojson && d.displayedOnMap)
+        .map(d => JSON.parse(d.geojson));
+    } catch (e) {
+      console.error("Can't parse your geojsons !", e);
+    }
+
     return (
       <div>
         <StepPageHeader step={step} />
@@ -81,9 +90,7 @@ export const ProposalStepPage = React.createClass({
         />
         <Loader show={isLoading}>
           <LeafletMap
-            geoJsons={form.districts
-              .filter(d => d.geojson !== null && d.displayedOnMap)
-              .map(d => JSON.parse(d.geojson))}
+            geoJsons={geoJsons}
             defaultMapOptions={{
               center: { lat: form.latMap, lng: form.lngMap },
               zoom: form.zoomMap,
