@@ -107,21 +107,21 @@ export const ProposalStepPage = React.createClass({
                 </VisibilityBox>
               )}
               {showPagination &&
-                selectedViewByStep === 'mosaic' && (
-                  <Pagination
-                    current={currentPage}
-                    nbPages={nbPages}
-                    onChange={newPage => {
-                      dispatch(changePage(newPage));
-                      dispatch(loadProposals());
-                    }}
-                  />
-                )}
+              selectedViewByStep === 'mosaic' && (
+                <Pagination
+                  current={currentPage}
+                  nbPages={nbPages}
+                  onChange={newPage => {
+                    dispatch(changePage(newPage));
+                    dispatch(loadProposals());
+                  }}
+                />
+              )}
               {randomOrder &&
-                proposals.length > 3 &&
-                selectedViewByStep === 'mosaic' && (
-                  <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
-                )}
+              proposals.length > 3 &&
+              selectedViewByStep === 'mosaic' && (
+                <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
+              )}
             </div>
           )}
         </Loader>

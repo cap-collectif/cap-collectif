@@ -98,32 +98,32 @@ export const ProposalVoteBasketWidget = React.createClass({
             )}
           </Nav>
           {selectedStep.voteType === VOTE_TYPE_SIMPLE &&
-            selectedStep.votesLimit && (
-              <Nav>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes" />}
-                  </p>
-                  <span className="widget__counter__value">{selectedStep.votesLimit}</span>
-                </li>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes_left" />}
-                  </p>
-                  <span className="widget__counter__value">
-                    {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
-                  </span>
-                </li>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes_spent" />}
-                  </p>
-                  <span className="widget__counter__value">
-                    {userVotesCountByStepId[selectedStep.id]}
-                  </span>
-                </li>
-              </Nav>
-            )}
+          selectedStep.votesLimit && (
+            <Nav>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes" />}
+                </p>
+                <span className="widget__counter__value">{selectedStep.votesLimit}</span>
+              </li>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes_left" />}
+                </p>
+                <span className="widget__counter__value">
+                  {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
+                </span>
+              </li>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes_spent" />}
+                </p>
+                <span className="widget__counter__value">
+                  {userVotesCountByStepId[selectedStep.id]}
+                </span>
+              </li>
+            </Nav>
+          )}
           {selectedStep.voteType === VOTE_TYPE_BUDGET && (
             <Nav>
               <li className="navbar-text widget__counter">
@@ -182,18 +182,18 @@ export const ProposalVoteBasketWidget = React.createClass({
             </Nav>
           )}
           {selectedStep.voteType === VOTE_TYPE_SIMPLE &&
-            !selectedStep.votesLimit && (
-              <Nav>
-                <li className="navbar-text widget__counter">
-                  <p className="widget__counter__label">
-                    {<FormattedMessage id="project.votes.widget.votes" />}
-                  </p>
-                  <span className="widget__counter__value">
-                    {userVotesCountByStepId[selectedStep.id]}
-                  </span>
-                </li>
-              </Nav>
-            )}
+          !selectedStep.votesLimit && (
+            <Nav>
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.votes" />}
+                </p>
+                <span className="widget__counter__value">
+                  {userVotesCountByStepId[selectedStep.id]}
+                </span>
+              </li>
+            </Nav>
+          )}
           <Button
             bsStyle="default"
             className="widget__button navbar-btn pull-right"

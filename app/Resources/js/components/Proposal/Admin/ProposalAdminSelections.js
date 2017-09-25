@@ -186,36 +186,34 @@ export class ProposalAdminSelections extends Component<Props> {
                   normalize={val => !!val}
                 />
                 {selectionValues[index] &&
-                  selectionValues[index].selected && (
-                    <div>
-                      {initialValues.selections[index].status !== selectionValues[index].status && (
-                        <p className="text-info">
-                          <i className="fa fa-exclamation-triangle" /> L'auteur de la proposition
-                          sera notifié du changement de statut
-                        </p>
-                      )}
-                      <Field
-                        type="select"
-                        label="Statut"
-                        id={`selections[${index}].status`}
-                        name={`selections[${index}].status`}
-                        normalize={val => (val === '-1' ? null : val)}
-                        component={component}>
-                        <option value="-1">
-                          {intl.formatMessage({ id: 'proposal.no_status' })}
-                        </option>
-                        {step.statuses &&
-                          step.statuses.map(status => (
-                            <option key={status.id} value={status.id}>
-                              {status.name}
-                            </option>
-                          ))}
-                      </Field>
-                      {step.allowingProgressSteps && (
-                        <FieldArray name="progressSteps" component={ProposalAdminProgressSteps} />
-                      )}
-                    </div>
-                  )}
+                selectionValues[index].selected && (
+                  <div>
+                    {initialValues.selections[index].status !== selectionValues[index].status && (
+                      <p className="text-info">
+                        <i className="fa fa-exclamation-triangle" /> L'auteur de la proposition sera
+                        notifié du changement de statut
+                      </p>
+                    )}
+                    <Field
+                      type="select"
+                      label="Statut"
+                      id={`selections[${index}].status`}
+                      name={`selections[${index}].status`}
+                      normalize={val => (val === '-1' ? null : val)}
+                      component={component}>
+                      <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
+                      {step.statuses &&
+                        step.statuses.map(status => (
+                          <option key={status.id} value={status.id}>
+                            {status.name}
+                          </option>
+                        ))}
+                    </Field>
+                    {step.allowingProgressSteps && (
+                      <FieldArray name="progressSteps" component={ProposalAdminProgressSteps} />
+                    )}
+                  </div>
+                )}
               </ListGroupItem>
             ))}
           </ListGroup>
