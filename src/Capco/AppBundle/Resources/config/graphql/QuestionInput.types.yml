@@ -1,0 +1,14 @@
+QuestionInput:
+    type: input-object
+    config:
+        fields:
+            title:
+                type: "String!"
+            inputType:
+                type: "String!"
+            private:
+                type: "Boolean!"
+            required:
+                type: "Boolean!"
+            helpText:
+                type: "String"

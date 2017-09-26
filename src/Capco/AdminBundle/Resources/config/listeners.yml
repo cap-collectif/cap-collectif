@@ -9,11 +9,11 @@ services:
   capco.resolver.proposal_form:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
-          - { name: overblog_graphql.resolver, alias: "proposalform_districts", method: "resolveDistricts" }
+          - { name: overblog_graphql.resolver, alias: "proposal_form_districts", method: "resolveDistricts" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_questions", method: "resolveQuestions" }
           - { name: overblog_graphql.resolver, alias: "query_proposalForm", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_url", method: "resolveUrl" }
-          - { name: overblog_graphql.resolver, alias: "proposalform_categories", method: "resolveCategories" }
+          - { name: overblog_graphql.resolver, alias: "proposal_form_categories", method: "resolveCategories" }
 
 
   capco.resolver.proposals:

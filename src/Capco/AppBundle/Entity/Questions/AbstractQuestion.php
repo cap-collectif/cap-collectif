@@ -217,6 +217,11 @@ abstract class AbstractQuestion
         return $this;
     }
 
+    public function setInputType($type): self
+    {
+        return $this->setType($type);
+    }
+
     // ************************* Custom methods *********************
 
     public function getInputType()

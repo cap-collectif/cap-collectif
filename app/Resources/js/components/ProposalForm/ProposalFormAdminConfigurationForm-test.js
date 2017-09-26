@@ -37,7 +37,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         },
       ],
       districts: [],
-      customFields: [
+      questions: [
         {
           id: 'field-1',
           title: 'Titre 1',

@@ -31,7 +31,7 @@ describe('<ProposalAdminContentForm />', () => {
       form: {
         districts: [],
         categories: [{ id: '1', name: 'category-1' }, { id: '2', name: 'category-2' }],
-        customFields: [
+        questions: [
           {
             id: '1',
             title: 'title',
