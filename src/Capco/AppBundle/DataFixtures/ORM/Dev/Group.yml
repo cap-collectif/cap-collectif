@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Group:
+  group1:
+    id: group1
+    title: Super-administrateur
+    description: Droits d'administration complet
+    createdAt: <(new \DateTime('2017-01-18'))>
+  group2:
+    id: group2
+    title: Agent de la ville
+    description: Lorem ipsum dolor sit amet sapien estiam
+    createdAt: <(new \DateTime('2017-01-01'))>
