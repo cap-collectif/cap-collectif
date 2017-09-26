@@ -13,7 +13,10 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       <h3
         className="box-title"
       >
-        Aperçu
+        <FormattedMessage
+          id="proposal.admin.glimpse"
+          values={Object {}}
+        />
       </h3>
       <a
         className="pull-right link"

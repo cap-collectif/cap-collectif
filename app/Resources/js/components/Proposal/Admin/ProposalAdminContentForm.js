@@ -137,7 +137,9 @@ export class ProposalAdminContentForm extends Component<Props, State> {
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
           <div className="box-header">
-            <h3 className="box-title">Aperçu</h3>
+            <h3 className="box-title">
+              <FormattedMessage id="proposal.admin.glimpse" />
+            </h3>
             <a
               className="pull-right link"
               target="_blank"

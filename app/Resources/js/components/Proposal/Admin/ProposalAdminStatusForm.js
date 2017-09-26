@@ -71,7 +71,9 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">Etat</h3>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal.admin.state" />
+          </h3>
           <a
             className="pull-right link"
             target="_blank"

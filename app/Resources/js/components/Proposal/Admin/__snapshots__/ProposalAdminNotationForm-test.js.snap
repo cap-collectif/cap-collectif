@@ -10,7 +10,10 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
     <h3
       className="box-title"
     >
-      Général
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"

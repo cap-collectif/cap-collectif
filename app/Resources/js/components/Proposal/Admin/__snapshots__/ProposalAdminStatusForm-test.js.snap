@@ -10,7 +10,10 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
     <h3
       className="box-title"
     >
-      Etat
+      <FormattedMessage
+        id="proposal.admin.state"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"
@@ -113,7 +116,10 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
     <h3
       className="box-title"
     >
-      Etat
+      <FormattedMessage
+        id="proposal.admin.state"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"
@@ -210,7 +216,10 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
     <h3
       className="box-title"
     >
-      Etat
+      <FormattedMessage
+        id="proposal.admin.state"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"

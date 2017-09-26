@@ -10,7 +10,10 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
     <h3
       className="box-title"
     >
-      Etapes
+      <FormattedMessage
+        id="proposal.admin.steps"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"

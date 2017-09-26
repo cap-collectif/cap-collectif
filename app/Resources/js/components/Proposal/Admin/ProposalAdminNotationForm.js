@@ -43,7 +43,9 @@ export class ProposalAdminNotationForm extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">Général</h3>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal.admin.general" />
+          </h3>
           <a
             className="pull-right link"
             target="_blank"

@@ -29,9 +29,9 @@
         .image-uploader {
             .image-uploader__dropzone-label {
                 text-align: center;
-                background-color: #fafafa;
+                background-color: $light-bgc;
                 padding: 10px;
-                border: 1px dashed #E3E3E3;
+                border: 1px dashed $border-color;
 
                 p {
                     margin: 5px 0;
@@ -46,6 +46,5 @@
         .box-content__toolbar {
             margin-top: 40px;
         }
-
     }
 }
