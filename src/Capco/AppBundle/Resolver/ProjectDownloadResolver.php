@@ -170,14 +170,16 @@ class ProjectDownloadResolver
 
             $str = '';
             $loop = 1;
+            $nbVotes = count($selectionVotesCount) + count($collectVotesCount);
             foreach ($selectionVotesCount as $step => $value) {
-                $str .= $step . ' : ' . $value . ($loop !== count($selectionVotesCount) ? '<br>' : '');
+                $str .= $step . ' : ' . $value;
+                $str .= $loop < $nbVotes ? '<br>' : '';
                 ++$loop;
             }
 
-            $loop = 1;
             foreach ($collectVotesCount as $step => $value) {
-                $str .= $step . ' : ' . $value . ($loop !== count($collectVotesCount) ? '<br>' : '');
+                $str .= $step . ' : ' . $value;
+                $str .= $loop < $nbVotes ? '<br>' : '';
                 ++$loop;
             }
 
