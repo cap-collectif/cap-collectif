@@ -163,10 +163,10 @@ class ProjectDownloadResolver
                 ->find($proposal['id']);
             $selectionVotesCount = $this->em
                 ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->getCountsByProposalGroupedBySteps($entity);
+                ->getCountsByProposalGroupedByStepsTitle($entity);
             $collectVotesCount = $this->em
                 ->getRepository('CapcoAppBundle:ProposalCollectVote')
-                ->getCountsByProposalGroupedBySteps($entity);
+                ->getCountsByProposalGroupedByStepsTitle($entity);
 
             $str = '';
             $loop = 1;

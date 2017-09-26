@@ -29,14 +29,6 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
-        $projectDownloadResolver = $this->get('capco.project.download.resolver');
-
-        $steps = $this->get('doctrine')->getRepository('CapcoAppBundle:Steps\CollectStep')->findAll();
-
-        foreach ($steps as $step) {
-            $projectDownloadResolver->getContent($step, true);
-        }
-
         $form = $this->createForm(new ContactType());
 
         if ($request->getMethod() === 'POST') {
