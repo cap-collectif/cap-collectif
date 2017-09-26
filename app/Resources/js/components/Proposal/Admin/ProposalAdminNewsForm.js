@@ -20,9 +20,9 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h4 className="box-title">
+          <h3 className="box-title">
             <FormattedMessage id="proposal.admin.news" />
-          </h4>
+          </h3>
           <a
             className="pull-right link"
             target="_blank"
