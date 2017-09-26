@@ -21,7 +21,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 {
     const HEADERS = [
         'name',
-        'email_author',
+        'author',
         'district_name',
         'address',
         'collect_status',
@@ -65,6 +65,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         /* @var ProposalForm $proposalForm */
         $this->proposalForm = $om->getRepository(ProposalForm::class)->find($proposalFormId);
         $this->questionsMap = [];
+        $this->newUsersMap = [];
 
         if (null === $this->proposalForm) {
             $output->writeln(
@@ -111,6 +112,21 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $author = $om->getRepository(User::class)->findOneBy([
                     'email' => $row[1],
                 ]);
+
+                if (!$author) {
+                    if (filter_var($row[1], FILTER_VALIDATE_EMAIL)) {
+                        $output->writeln('<error>Could not find user for "' . $row[1] . '"</error>');
+
+                        return 1;
+                    }
+                    if (!isset($this->newUsersMap[$row[1]])) {
+                        $output->writeln(
+                        '<info>Creating a new user with a fake email and username: ' . $row[1] . '</info>'
+                    );
+                        $this->newUsersMap[$row[1]] = $this->createUserFromUsername($row[1]);
+                    }
+                    $author = $this->newUsersMap[$row[1]];
+                }
 
                 $district = $om->getRepository(District::class)->findOneBy([
                     'name' => $row[2],
@@ -186,6 +202,21 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         );
 
         return 0;
+    }
+
+    protected function createUserFromUsername(string $username)
+    {
+        $userManager = $this->getContainer()->get('fos_user.user_manager');
+        $passwordEncoder = $this->getContainer()->get('security.password_encoder');
+
+        $user = $userManager->createUser();
+        $user->setUsername($username);
+        $user->setEmail(filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL));
+        $user->setPlainpassword('laposte');
+        $user->setEnabled(true);
+        $userManager->updateUser($user);
+
+        return $user;
     }
 
     protected function isValidRow($row, $output): bool

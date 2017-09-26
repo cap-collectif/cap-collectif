@@ -32,15 +32,18 @@ Scenario: Admin wants to import a consultation with apostrophes in title
   Then the command exit code should be 0
 
 @database
+# author can be either an existing user email or a unique Username
 Scenario: Admin wants to import a BP
   Given "proposals.csv" contains:
   """
-  name;email_author;district_name;address;collect_status;estimation;category;summary;body;"Evaluez l'importance de votre proposition";"Evaluez le coût de votre proposition"
-  new proposition 1;maury.danielle@club-internet.fr;Nord Saint-Martin;5 Allée Rallier-du-Baty 35000 Rennes;Rejeté;200 euros;Politique;blalala;blalblal body;très important;gratuit
-  new proposition 2;maury.danielle@club-internet.fr;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
+  name;author;district_name;address;collect_status;estimation;category;summary;body;"Evaluez l'importance de votre proposition";"Evaluez le coût de votre proposition"
+  new proposition 1;adavid@jolicode.com;Nord Saint-Martin;5 Allée Rallier-du-Baty 35000 Rennes;Rejeté;200 euros;Politique;blalala;blalblal body;très important;gratuit
+  new proposition 2;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
+  new proposition 3;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
   """
   Given I run "capco:import:proposals-from-csv vfs://proposals.csv 1"
   Then the command exit code should be 0
+  And I should see "Creating a new user with a fake email and username: Pierre Michel" in output
 
 @database
 Scenario: Admin wants to create a PJL
