@@ -36,13 +36,8 @@ class ReferenceEventListener
 
             $proposalFormRep = $om->getRepository(ProposalForm::class);
 
-            $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId())['last_reference'];
-
-            if (null === $lastReference) {
-                $entity->setReference(1);
-            } else {
-                $entity->setReference($lastReference + 1);
-            }
+            $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId());
+            $entity->setReference($lastReference + 1);
 
             return;
         }

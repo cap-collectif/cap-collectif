@@ -57,7 +57,7 @@ Scenario: Logged in API client wants to get all proposals from a selection step
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "theme": {
-          "id": @integer@,
+          "id": @string@,
           "title": @string@,
           "enabled": @boolean@,
           "_links": @...@
@@ -115,7 +115,7 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
         "theme": {
-          "id": @integer@,
+          "id": @string@,
           "title": @string@,
           "enabled": @boolean@,
           "_links": @...@

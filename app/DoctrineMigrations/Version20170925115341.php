@@ -5,7 +5,7 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-class Version20170915154039 extends AbstractMigration
+class Version20170925115341 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -27,6 +27,7 @@ class Version20170915154039 extends AbstractMigration
         // Update reference on each proposal forms
         $proposalForms = $this->connection->fetchAll('SELECT * FROM proposal_form');
 
+        $count = 0;
         $reference = 1;
         foreach ($proposalForms as $proposalForm) {
             $this->connection->update('proposal_form', ['reference' => $reference], ['id' => $proposalForm['id']]);
@@ -41,7 +42,10 @@ class Version20170915154039 extends AbstractMigration
                 $this->connection->update('proposal', ['reference' => $proposalReference], ['id' => $proposal['id']]);
 
                 ++$proposalReference;
+                ++$count;
             }
         }
+
+        echo $count.' proposals were updated.';
     }
 }
