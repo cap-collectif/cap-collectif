@@ -538,7 +538,7 @@
   "proposal.vote.vote_with_my_account": "Voter avec mon compte",
   "proposal.map.map": "Carte",
   "proposal.map.mosaic": "Mosaïque",
-  "proposal.map.form.field": "Lieu ou Adresse",
+  "proposal.map.form.field": "Lieu ou adresse",
   "proposal.map.form.placeholder": "Recherche d'un lieu ou d'une adresse",
   "proposal.map.form.control.title": "Localiser moi",
   "proposal.map.form.control.metersUnit": "mètres",

@@ -465,3 +465,9 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 .proposal__content .block:first-child > h3  {
     margin-top: 0;
 }
+
+#proposal-form {
+    .control-label.h5 {
+        margin-bottom: 5px;
+    }
+}
