@@ -161,7 +161,7 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
   """
   {
     "filters": {
-      "themes": 2
+      "themes": "theme2"
     }
   }
   """

@@ -606,6 +606,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
       },
       {
         "id": @integer@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
