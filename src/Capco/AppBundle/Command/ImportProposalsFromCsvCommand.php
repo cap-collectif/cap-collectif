@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
@@ -50,7 +51,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->import($input, $output);
+        return $this->import($input, $output);
     }
 
     protected function import(InputInterface $input, OutputInterface $output): int
@@ -61,10 +62,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $om = $this->getContainer()->get('doctrine')->getManager();
 
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $om->getRepository(ProposalForm::class)->find($proposalFormId);
+        /* @var ProposalForm $proposalForm */
+        $this->proposalForm = $om->getRepository(ProposalForm::class)->find($proposalFormId);
+        $this->questionsMap = [];
 
-        if ($proposalForm === null) {
+        if (null === $this->proposalForm) {
             $output->writeln(
                 '<error>Proposal Form with id '
                 . $proposalFormId .
@@ -76,7 +78,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $proposals = $this->getProposals();
 
-        if (count($proposals) === 0) {
+        if (0 === count($proposals)) {
             $output->writeln(
                 '<error>Your file with path '
                 . $this->filePath .
@@ -93,13 +95,13 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $loop = 1;
         foreach ($proposals as $row) {
             // if first line : check if headers are valid
-            if ($loop === 1) {
+            if (1 === $loop) {
                 if (!$this->isValidHeaders($row, $output)) {
-                    exit;
+                    return $this->generateContentException($output);
                 }
             } else {
                 if (!$this->isValidRow($row, $output)) {
-                    $this->generateContentException($output);
+                    return $this->generateContentException($output);
                 }
 
                 $proposal = new Proposal();
@@ -116,27 +118,27 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 $status = $om->getRepository(Status::class)->findOneBy([
                     'name' => $row[4],
-                    'step' => $proposalForm->getStep(),
+                    'step' => $this->proposalForm->getStep(),
                 ]);
 
                 if (null === $author || null === $district || null === $status) {
-                    $this->generateContentException($output);
+                    return $this->generateContentException($output);
                 }
 
                 $proposal->setAuthor($author);
-                $proposal->setProposalForm($proposalForm);
+                $proposal->setProposalForm($this->proposalForm);
                 $proposal->setDistrict($district);
                 $proposal->setStatus($status);
                 $proposal->setAddress($map->getFormattedAddress($row[3]));
 
-                if ($row[5] !== '') {
+                if ('' !== $row[5]) {
                     $proposal->setEstimation((float) $row[5]);
                 }
 
-                if ($row[6] !== '') {
+                if ('' !== $row[6]) {
                     $proposalCategory = $om->getRepository(ProposalCategory::class)->findOneBy([
                         'name' => $row[6],
-                        'form' => $proposalForm,
+                        'form' => $this->proposalForm,
                     ]);
 
                     if (null !== $proposalCategory) {
@@ -144,11 +146,20 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                     }
                 }
 
-                if ($row[7] !== '') {
+                if ('' !== $row[7]) {
                     $proposal->setSummary(Text::escapeHtml($row[7]));
                 }
 
                 $proposal->setBody($row[8]);
+
+                if (count($row) > 9) {
+                    for ($i = 9; isset($row[$i]); ++$i) {
+                        $reponse = (new ValueResponse())
+                      ->setQuestion($this->questionsMap[$i])
+                      ->setValue($row[$i]);
+                        $proposal->addResponse($reponse);
+                    }
+                }
 
                 $om->persist($proposal);
             }
@@ -180,17 +191,17 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function isValidRow($row, $output): bool
     {
         $hasError = false;
-        if (count($row) !== count(self::HEADERS)) {
+        if (count($row) < count(self::HEADERS)) {
             $hasError = true;
         }
 
         // name, email, collect_status, category are mandatory
-        if ($row[0] === '' || $row[1] === '' || $row[4] === '' || $row[6] === '') {
+        if ('' === $row[0] || '' === $row[1] || '' === $row[4] || '' === $row[6]) {
             $hasError = true;
         }
 
         if ($hasError) {
-            $this->generateContentException($output);
+            return $this->generateContentException($output);
         }
 
         return true;
@@ -198,8 +209,28 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
     protected function isValidHeaders($row, $output): bool
     {
-        if ($row !== self::HEADERS) {
-            $this->generateContentException($output);
+        if (self::HEADERS !== $row) {
+            if (count($row) > 9) {
+                for ($i = 9; isset($row[$i]); ++$i) {
+                    $found = false;
+                    foreach ($this->proposalForm->getRealQuestions() as $question) {
+                        if ($question->getTitle() === $row[$i]) {
+                            $this->questionsMap[$i] = $question;
+                            $found = true;
+                        }
+                    }
+                    if (!$found) {
+                        $output->writeln('<error>Error could not find question "' . $row[$i] . '"</error>');
+
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            $output->writeln('<error>Error headers not correct</error>');
+
+            return false;
         }
 
         return true;
@@ -222,6 +253,6 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             '<error>Content of your file is not valid.</error>');
         $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
-        exit;
+        return 1;
     }
 }
