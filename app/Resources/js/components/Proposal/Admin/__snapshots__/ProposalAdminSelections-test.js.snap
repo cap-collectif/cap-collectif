@@ -7,11 +7,11 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
   <div
     className="box-header"
   >
-    <h4
+    <h3
       className="box-title"
     >
       Etapes
-    </h4>
+    </h3>
     <a
       className="pull-right link"
       href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#avancement"
@@ -23,133 +23,127 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
       />
        Aide
     </a>
-    <h5
-      style={
-        Object {
-          "fontWeight": "bold",
-          "marginBottom": 0,
-        }
-      }
-    >
-      Etapes
-    </h5>
   </div>
-  <form
-    onSubmit={[Function]}
+  <div
+    className="box-content"
   >
-    <ListGroup
-      bsClass="list-group"
-      style={
-        Object {
-          "margin": 10,
-          "paddingBottom": 10,
-        }
-      }
+    <form
+      onSubmit={[Function]}
     >
-      <ListGroupItem
-        bsClass="list-group-item"
-        listItem={false}
+      <ListGroup
+        bsClass="list-group"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
       >
-        <div>
-          <strong>
-            step-1
-          </strong>
-           - 
-          <span>
-            Etape de dépôt
-          </span>
-        </div>
-        <br />
-        <Field
-          component={[Function]}
-          disabled={true}
-          id="collectPublished"
-          label="Publié dans cette étape"
-          name="collectPublished"
-          readOnly={true}
-        />
-        <div>
+        <ListGroupItem
+          bsClass="list-group-item"
+          listItem={false}
+        >
+          <div>
+            <strong>
+              step-1
+            </strong>
+             - 
+            <span>
+              Etape de dépôt
+            </span>
+          </div>
+          <br />
           <Field
             component={[Function]}
-            id="collectStatus"
-            label="Statut"
-            name="collectStatus"
-            normalize={[Function]}
-            type="select"
-          >
-            <option
-              value="-1"
-            >
-              proposal.no_status
-            </option>
-          </Field>
-        </div>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        listItem={false}
-      >
-        <div>
-          <strong>
-            step-2
-          </strong>
-           - 
-          <span>
-            Etape de sélection
-          </span>
-        </div>
-        <br />
-        <Field
-          component={[Function]}
-          id="selections[0].selected"
-          label="Publié dans cette étape"
-          name="selections[0].selected"
-          normalize={[Function]}
-        />
-        <div>
-          <Field
-            component={[Function]}
-            id="selections[0].status"
-            label="Statut"
-            name="selections[0].status"
-            normalize={[Function]}
-            type="select"
-          >
-            <option
-              value="-1"
-            >
-              proposal.no_status
-            </option>
-          </Field>
-          <FieldArray
-            component={[Function]}
-            name="progressSteps"
+            disabled={true}
+            id="collectPublished"
+            label="Publié dans cette étape"
+            name="collectPublished"
+            readOnly={true}
           />
-        </div>
-      </ListGroupItem>
-    </ListGroup>
-    <ButtonToolbar
-      bsClass="btn-toolbar"
-      style={
-        Object {
-          "marginBottom": 10,
+          <div>
+            <Field
+              component={[Function]}
+              id="collectStatus"
+              label="Statut"
+              name="collectStatus"
+              normalize={[Function]}
+              type="select"
+            >
+              <option
+                value="-1"
+              >
+                proposal.no_status
+              </option>
+            </Field>
+          </div>
+        </ListGroupItem>
+        <ListGroupItem
+          bsClass="list-group-item"
+          listItem={false}
+        >
+          <div>
+            <strong>
+              step-2
+            </strong>
+             - 
+            <span>
+              Etape de sélection
+            </span>
+          </div>
+          <br />
+          <Field
+            component={[Function]}
+            id="selections[0].selected"
+            label="Publié dans cette étape"
+            name="selections[0].selected"
+            normalize={[Function]}
+          />
+          <div>
+            <Field
+              component={[Function]}
+              id="selections[0].status"
+              label="Statut"
+              name="selections[0].status"
+              normalize={[Function]}
+              type="select"
+            >
+              <option
+                value="-1"
+              >
+                proposal.no_status
+              </option>
+            </Field>
+            <FieldArray
+              component={[Function]}
+              name="progressSteps"
+            />
+          </div>
+        </ListGroupItem>
+      </ListGroup>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
         }
-      }
-    >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="primary"
-        disabled={false}
-        type="submit"
       >
-        <FormattedMessage
-          id="global.save"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
-  </form>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+      </ButtonToolbar>
+    </form>
+  </div>
 </div>
 `;

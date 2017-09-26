@@ -10,16 +10,11 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     <a />
   </p>
   <Uncontrolled(Tabs)
-    defaultActiveKey={2}
+    defaultActiveKey={1}
     id="proposal-admin-page-tabs"
   >
     <Tab
-      disabled={true}
       eventKey={1}
-      title="proposal.admin.activity"
-    />
-    <Tab
-      eventKey={2}
       title="proposal.admin.content"
     >
       <Relay(Connect(InjectIntl(ReduxForm)))
@@ -27,7 +22,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={3}
+      eventKey={2}
       title="proposal.admin.advancement"
     >
       <Relay(Connect(InjectIntl(ReduxForm)))
@@ -35,7 +30,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={4}
+      eventKey={3}
       title="proposal.admin.news"
     >
       <Relay(ProposalAdminNewsForm)
@@ -43,7 +38,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={5}
+      eventKey={4}
       title="proposal.admin.notation"
     >
       <Relay(Connect(ReduxForm))
@@ -51,7 +46,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
-      eventKey={6}
+      eventKey={5}
       title="proposal.admin.publication"
     >
       <Relay(Connect(ReduxForm))

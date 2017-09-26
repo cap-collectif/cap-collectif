@@ -26,7 +26,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
               ->andWhere('pv.user = :user')
               ->andWhere('pv.expired = 0')
               ->leftJoin('pv.proposal', 'proposal')
-              ->andWhere('proposal.deletedAt IS NULL')
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;

@@ -136,15 +136,17 @@ export class ProposalAdminContentForm extends Component<Props, State> {
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
-          <h4 className="h4">Aperçu</h4>
-          <a
-            className="pull-right link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
-            <i className="fa fa-info-circle" /> Aide
-          </a>
-          <div>
+          <div className="box-header">
+            <h3 className="box-title">Aperçu</h3>
+            <a
+              className="pull-right link"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
+              <i className="fa fa-info-circle" /> Aide
+            </a>
+          </div>
+          <div className="box-content">
             <Field
               name="title"
               component={component}
@@ -270,7 +272,6 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 placeholder="proposal.map.form.placeholder"
               />
             )}
-            <h4 className="h4">Présentation</h4>
             <Field
               id="proposal_body"
               type="editor"
@@ -323,7 +324,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 </span>
               }
             />
-            <ButtonToolbar style={{ marginBottom: 10 }}>
+            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
               <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>

@@ -105,6 +105,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
         </ListGroup>
         <Button
           style={{ marginBottom: 10 }}
+          className="box-content__toolbar"
           onClick={() => {
             dispatch(arrayPush(formName, 'progressSteps', {}));
             this.setState({ editIndex: fields.length });

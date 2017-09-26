@@ -193,6 +193,12 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
      }
  }
 
+ .proposal__status {
+     display: block;
+     padding: 5px 0;
+     margin: 10px 0;
+ }
+
  .proposal__preview .proposal__status {
      overflow: hidden;
      padding: 3px;
