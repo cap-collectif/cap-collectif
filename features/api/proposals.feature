@@ -49,7 +49,6 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
         },
         "vip": @boolean@,
         "_links": {
-          "profile": @string@,
           "settings": @string@
         }
       },
