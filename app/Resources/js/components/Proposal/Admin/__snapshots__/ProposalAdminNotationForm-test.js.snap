@@ -28,7 +28,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
     </a>
   </div>
   <div
-    className="box-content"
+    className="box-content box-content__notation-form"
   >
     <form
       onSubmit={[Function]}

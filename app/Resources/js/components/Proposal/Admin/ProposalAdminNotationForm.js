@@ -54,7 +54,7 @@ export class ProposalAdminNotationForm extends Component<Props> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <div className="box-content">
+        <div className="box-content box-content__notation-form">
           <form onSubmit={handleSubmit}>
             <div>
               <Field

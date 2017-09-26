@@ -55,7 +55,9 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
             componentClass="div"
             xs={6}
           >
-            news-1
+            <strong>
+              news-1
+            </strong>
           </Col>
           <Col
             bsClass="col"

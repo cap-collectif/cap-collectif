@@ -31,7 +31,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       </a>
     </div>
     <div
-      className="box-content"
+      className="box-content box-content__content-form"
     >
       <Field
         component={[Function]}

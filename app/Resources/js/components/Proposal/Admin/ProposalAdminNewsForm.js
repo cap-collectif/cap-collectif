@@ -16,6 +16,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     const { proposal } = this.props;
+
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -35,7 +36,9 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             {proposal.news.map((news, index) => (
               <ListGroupItem key={index}>
                 <Row>
-                  <Col xs={6}>{news.title}</Col>
+                  <Col xs={6}>
+                    <strong>{news.title}</strong>
+                  </Col>
                   <Col xs={6}>
                     <ButtonToolbar className="pull-right">
                       <Button

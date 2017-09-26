@@ -1,7 +1,7 @@
 #proposal-admin-page-tabs {
     .box-header {
         h3.box-title {
-            margin: 15px 0 10px 0;
+            margin: 15px 0 0;
             padding-bottom: 10px;
             border-bottom: 1px solid $border-color;
             font-size: 24px;
@@ -17,6 +17,19 @@
 
     .box-content {
         padding: 10px;
+
+        &.box-content__notation-form,
+        &.box-content__status-form {
+            .box-content__toolbar {
+                margin-top: 20px;
+            }
+        }
+
+        //&.box-content__content-form {
+        //    .fo {
+        //        margin-top: 0;
+        //    }
+        //}
 
         .editor {
             border: 1px solid $border-color;
@@ -43,8 +56,19 @@
             }
         }
 
-        .box-content__toolbar {
-            margin-top: 40px;
+        .box-content__toolbar:not(button) {
+            padding-top: 20px;
+            margin-top: 10px;
+            border-top: 1px solid $border-color;
+            margin-left: 0;
+
+            >.btn {
+                margin-left: 0;
+            }
+        }
+
+        button.box-content__toolbar {
+            margin-top: 20px;
         }
     }
 }

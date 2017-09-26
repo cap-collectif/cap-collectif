@@ -18,11 +18,6 @@ exports[`<ProposalAdminProgressSteps /> render correctly 1`] = `
     className="box-content__toolbar"
     disabled={false}
     onClick={[Function]}
-    style={
-      Object {
-        "marginBottom": 10,
-      }
-    }
   >
     <FormattedMessage
       id="global.add"

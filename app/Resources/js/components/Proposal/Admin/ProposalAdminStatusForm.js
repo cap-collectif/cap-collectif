@@ -82,7 +82,7 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <div className="box-content">
+        <div className="box-content box-content__status-form">
           <form onSubmit={handleSubmit}>
             {proposal.author.expiresAt && (
               <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>

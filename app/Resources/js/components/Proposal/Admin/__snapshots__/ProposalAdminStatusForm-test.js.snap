@@ -28,7 +28,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
     </a>
   </div>
   <div
-    className="box-content"
+    className="box-content box-content__status-form"
   >
     <form
       onSubmit={[Function]}
@@ -134,7 +134,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
     </a>
   </div>
   <div
-    className="box-content"
+    className="box-content box-content__status-form"
   >
     <form
       onSubmit={[Function]}
@@ -234,7 +234,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
     </a>
   </div>
   <div
-    className="box-content"
+    className="box-content box-content__status-form"
   >
     <form
       onSubmit={[Function]}

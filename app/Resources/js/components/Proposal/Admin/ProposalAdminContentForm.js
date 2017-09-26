@@ -148,7 +148,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <i className="fa fa-info-circle" /> Aide
             </a>
           </div>
-          <div className="box-content">
+          <div className="box-content box-content__content-form">
             <Field
               name="title"
               component={component}
