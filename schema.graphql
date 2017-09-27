@@ -164,7 +164,7 @@ type ChangeSelectionStatusPayload {
 }
 
 input ChangeTitleProposalFormInput {
-  proposalFormId: Int!
+  proposalFormId: ID!
   title: String!
   clientMutationId: String
 }
@@ -1012,7 +1012,7 @@ type UnselectProposalPayload {
 }
 
 input UpdateProposalFormInput {
-  proposalFormId: Int!
+  proposalFormId: ID!
   description: String
   summaryHelpText: String
   illustrationHelpText: String
@@ -1039,7 +1039,7 @@ input UpdateProposalFormInput {
 }
 
 input UpdateProposalFormNotificationsConfigurationInput {
-  proposalFormId: Int!
+  proposalFormId: ID!
   onCreate: Boolean!
   onUpdate: Boolean!
   onDelete: Boolean!

@@ -79,7 +79,7 @@ Scenario: GraphQL client wants to update a proposal form
     }",
     "variables": {
       "input": {
-        "proposalFormId": 1,
+        "proposalFormId": "proposalForm1",
         "titleHelpText": "Title help",
         "description": "New description",
         "descriptionHelpText": "Description help",
