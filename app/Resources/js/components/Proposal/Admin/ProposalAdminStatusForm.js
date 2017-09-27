@@ -123,27 +123,27 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
             )}
           </Field>
           {(publicationStatus === 'TRASHED' || publicationStatus === 'TRASHED_NOT_VISIBLE') && (
-              <div>
-                <Field
-                  id="trashedReason"
-                  name="trashedReason"
-                  label="Motif de la modération (facultatif)"
-                  type="textarea"
-                  component={component}
-                />
-              </div>
-            )}
+            <div>
+              <Field
+                id="trashedReason"
+                name="trashedReason"
+                label="Motif de la modération (facultatif)"
+                type="textarea"
+                component={component}
+              />
+            </div>
+          )}
           {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
           <ButtonToolbar style={{ marginBottom: 10 }}>
             <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
             {(isSuperAdmin || isAuthor) &&
-              !proposal.deletedAt && (
-                <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
-                  <FormattedMessage id="global.delete" />
-                </Button>
-              )}
+            !proposal.deletedAt && (
+              <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
+                <FormattedMessage id="global.delete" />
+              </Button>
+            )}
           </ButtonToolbar>
         </form>
       </div>

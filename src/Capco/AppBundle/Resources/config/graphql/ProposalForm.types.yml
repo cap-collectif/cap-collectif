@@ -16,7 +16,7 @@ ProposalForm:
                 type: "String!"
             categories:
                 type: "[ProposalCategory!]!"
-                resolve: "@=resolver('proposal_form_categories', [value])"
+                resolve: "@=resolver('proposalform_categories', [value])"
             usingThemes:
                 type: "Boolean!"
             themeMandatory:
@@ -32,7 +32,7 @@ ProposalForm:
                   order:
                     type: "DistrictOrderField"
                     defaultValue: "ALPHABETICAL"
-                resolve: "@=resolver('proposal_form_districts', [value, args['order']])"
+                resolve: "@=resolver('proposalform_districts', [value, args['order']])"
                 type: "[District!]!"
             districtMandatory:
                 type: "Boolean!"
@@ -52,7 +52,7 @@ ProposalForm:
                 type: "String"
             addressHelpText:
                 type: "String"
-            questions:
+            customFields:
                 type: "[Question!]!"
                 resolve: "@=resolver('proposal_form_questions', [value])"
             latMap:

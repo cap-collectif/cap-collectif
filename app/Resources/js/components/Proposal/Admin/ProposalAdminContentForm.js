@@ -102,7 +102,7 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   if (features.themes && form.usingThemes && form.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
-  form.questions.map(field => {
+  form.customFields.map(field => {
     if (field.required) {
       const response = values.responses.filter(res => res && res.question.id === field.id)[0];
       if (!response) {
@@ -190,75 +190,75 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 }))}
             />
             {features.themes &&
-              form.usingThemes && (
-                <Field
-                  name="theme"
-                  id="proposal_theme"
-                  type="select"
-                  component={component}
-                  label={
-                    <span>
-                      <FormattedMessage id="proposal.theme" />
-                      {!form.themeMandatory && optional}
-                    </span>
-                  }>
-                  <FormattedMessage id="proposal.select.theme">
-                    {message => <option value="">{message}</option>}
-                  </FormattedMessage>
-                  {themes.map(theme => (
-                    <option key={theme.id} value={theme.id}>
-                      {theme.title}
-                    </option>
-                  ))}
-                </Field>
-              )}
+            form.usingThemes && (
+              <Field
+                name="theme"
+                id="proposal_theme"
+                type="select"
+                component={component}
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.theme" />
+                    {!form.themeMandatory && optional}
+                  </span>
+                }>
+                <FormattedMessage id="proposal.select.theme">
+                  {message => <option value="">{message}</option>}
+                </FormattedMessage>
+                {themes.map(theme => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.title}
+                  </option>
+                ))}
+              </Field>
+            )}
             {categories.length > 0 &&
-              form.usingCategories && (
-                <Field
-                  id="proposal_category"
-                  type="select"
-                  name="category"
-                  component={component}
-                  label={
-                    <span>
-                      <FormattedMessage id="proposal.category" />
-                      {!form.categoryMandatory && optional}
-                    </span>
-                  }>
-                  <FormattedMessage id="proposal.select.category">
-                    {message => <option value="">{message}</option>}
-                  </FormattedMessage>
-                  {categories.map(category => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </Field>
-              )}
+            form.usingCategories && (
+              <Field
+                id="proposal_category"
+                type="select"
+                name="category"
+                component={component}
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.category" />
+                    {!form.categoryMandatory && optional}
+                  </span>
+                }>
+                <FormattedMessage id="proposal.select.category">
+                  {message => <option value="">{message}</option>}
+                </FormattedMessage>
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
+            )}
             {features.districts &&
-              form.usingDistrict &&
-              form.districts.length > 0 && (
-                <Field
-                  id="proposal_district"
-                  type="select"
-                  name="district"
-                  component={component}
-                  label={
-                    <span>
-                      <FormattedMessage id="proposal.district" />
-                      {!form.districtMandatory && optional}
-                    </span>
-                  }>
-                  <FormattedMessage id="proposal.select.district">
-                    {message => <option value="">{message}</option>}
-                  </FormattedMessage>
-                  {form.districts.map(district => (
-                    <option key={district.id} value={district.id}>
-                      {district.name}
-                    </option>
-                  ))}
-                </Field>
-              )}
+            form.usingDistrict &&
+            form.districts.length > 0 && (
+              <Field
+                id="proposal_district"
+                type="select"
+                name="district"
+                component={component}
+                label={
+                  <span>
+                    <FormattedMessage id="proposal.district" />
+                    {!form.districtMandatory && optional}
+                  </span>
+                }>
+                <FormattedMessage id="proposal.select.district">
+                  {message => <option value="">{message}</option>}
+                </FormattedMessage>
+                {form.districts.map(district => (
+                  <option key={district.id} value={district.id}>
+                    {district.name}
+                  </option>
+                ))}
+              </Field>
+            )}
             {form.usingAddress && (
               <Field
                 id="proposal_address"
@@ -291,24 +291,24 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                         <Field
                           key={field.id}
                           id={field.id}
-                          name={`responses.${index}.${field.type !== 'medias'
+                          name={`responses.${index}.${field.inputType !== 'medias'
                             ? 'value'
                             : 'medias'}`}
-                          type={field.type}
+                          type={field.inputType}
                           component={component}
                           label={field.title}
                         />
                         {response &&
-                          response.medias &&
-                          response.medias.length && (
-                            <ProposalMediaResponse medias={response.medias} />
-                          )}
+                        response.medias &&
+                        response.medias.length && (
+                          <ProposalMediaResponse medias={response.medias} />
+                        )}
                       </div>
                     );
                   })}
                 </div>
               )}
-              fields={form.questions}
+              fields={form.customFields}
             />
             <Field
               id="proposal_media"
@@ -357,7 +357,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       : undefined,
     address: proposal.address,
     media: null,
-    responses: proposal.form.questions.map(field => {
+    responses: proposal.form.customFields.map(field => {
       const response = proposal.responses.filter(res => res && res.question.id === field.id)[0];
       if (response) {
         if (response.value) {
@@ -371,7 +371,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
           medias: response.medias,
         };
       }
-      if (field.type === 'medias') {
+      if (field.inputType === 'medias') {
         return { question: parseInt(field.id, 10), medias: [] };
       }
       return { question: parseInt(field.id, 10), value: null };
@@ -418,10 +418,10 @@ export default createFragmentContainer(
           id
           name
         }
-        questions {
+        customFields {
           id
           title
-          type
+          inputType
           position
           private
           required

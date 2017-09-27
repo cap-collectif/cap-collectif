@@ -64,15 +64,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                 <Col xs={8}>
                   <div>
                     <strong>{questions[index].title}</strong>
-                    <p>
-                      <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
-                    </p>
+                    <p>{questions[index].inputType}</p>
                   </div>
                 </Col>
                 <Col xs={4}>
                   <ButtonToolbar className="pull-right">
                     <Button
                       bsStyle="warning"
+                      disabled
                       onClick={() => {
                         this.setState({ editIndex: index });
                       }}>
@@ -80,6 +79,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                     </Button>
                     <Button
                       bsStyle="danger"
+                      disabled
                       onClick={() => {
                         if (
                           window.confirm(
@@ -101,10 +101,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
         <Button
           style={{ marginBottom: 10 }}
           bsStyle="primary"
+          disabled
           onClick={() => {
-            dispatch(
-              arrayPush(formName, 'questions', { private: false, required: false, position: 99 }),
-            );
+            dispatch(arrayPush(formName, 'customFields', {}));
             this.setState({ editIndex: fields.length });
           }}>
           <Glyphicon glyph="plus" /> <FormattedMessage id="global.add" />
@@ -115,7 +114,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  questions: selector(state, 'questions'),
+  questions: selector(state, 'customFields'),
 });
 
 export default connect(mapStateToProps)(ProposalFormAdminQuestions);

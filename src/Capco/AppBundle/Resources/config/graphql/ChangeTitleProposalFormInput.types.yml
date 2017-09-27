@@ -4,6 +4,6 @@ ChangeTitleProposalFormInput:
         description: ""
         fields:
             proposalFormId:
-                type: "ID!"
+                type: "Int!"
             title:
                 type: "String!"

@@ -31,11 +31,11 @@ describe('<ProposalAdminContentForm />', () => {
       form: {
         districts: [],
         categories: [{ id: '1', name: 'category-1' }, { id: '2', name: 'category-2' }],
-        questions: [
+        customFields: [
           {
             id: '1',
             title: 'title',
-            type: 'text',
+            inputType: 'text',
             position: 0,
             private: false,
             required: true,

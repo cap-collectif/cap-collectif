@@ -65,37 +65,37 @@ export const ProposalPageContent = React.createClass({
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {address &&
-          config.canUseDOM && (
-            <div className="block" style={{ height: 255 }}>
-              <h4 className="h4">Lieu ou adresse</h4>
-              <p>{address[0].formatted_address}</p>
-              <Map
-                center={{
-                  lat: address[0].geometry.location.lat,
-                  lng: address[0].geometry.location.lng,
-                }}
-                zoom={13}
-                maxZoom={18}
-                style={{
-                  width: '100%',
-                  height: 175,
-                }}>
-                <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${config.mapboxApiKey}`}
-                />
-                <Marker
-                  position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
-                  icon={L.icon({
-                    // eslint-disable-line
-                    iconUrl: '/svg/marker.svg',
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 40],
-                    popupAnchor: [0, -40],
-                  })}
-                />
-              </Map>
-            </div>
-          )}
+        config.canUseDOM && (
+          <div className="block" style={{ height: 255 }}>
+            <h4 className="h4">Lieu ou adresse</h4>
+            <p>{address[0].formatted_address}</p>
+            <Map
+              center={{
+                lat: address[0].geometry.location.lat,
+                lng: address[0].geometry.location.lng,
+              }}
+              zoom={13}
+              maxZoom={18}
+              style={{
+                width: '100%',
+                height: 175,
+              }}>
+              <TileLayer
+                url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${config.mapboxApiKey}`}
+              />
+              <Marker
+                position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
+                icon={L.icon({
+                  // eslint-disable-line
+                  iconUrl: '/svg/marker.svg',
+                  iconSize: [40, 40],
+                  iconAnchor: [20, 40],
+                  popupAnchor: [0, -40],
+                })}
+              />
+            </Map>
+          </div>
+        )}
         {proposal.responses.map((response, index) => (
           <ProposalResponse key={index} response={response} />
         ))}
