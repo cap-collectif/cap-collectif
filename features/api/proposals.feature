@@ -334,7 +334,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
         }
       },
       "proposalForm": {
-        "id": @integer@
+        "id": @string@
       },
       "comments": @array@,
       "responses":[
@@ -678,7 +678,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               }
           },
           "proposalForm": {
-              "id": @integer@
+              "id": @string@
           },
           "likers": @array@,
           "theme": {
@@ -746,7 +746,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               }
           },
           "proposalForm": {
-              "id": @integer@
+              "id": @string@
           },
           "likers": @array@,
           "address": @string@,

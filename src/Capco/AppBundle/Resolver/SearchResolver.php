@@ -80,7 +80,7 @@ class SearchResolver
         $query->setFrom($from);
         $query->setSize($resultsPerPage);
 
-        if ($type && $type !== 'all') {
+        if ($type && 'all' !== $type) {
             $resultSet = $this->index->getType($type)->search($query);
         } else {
             $resultSet = $this->index->search($query);
@@ -175,7 +175,7 @@ class SearchResolver
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
         }
-        if (array_key_exists('proposalForm', $providedFilters)) {
+        if (isset($filters['proposalForm.id'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
         if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
@@ -210,7 +210,7 @@ class SearchResolver
             $filters,
             false,
             $pagination,
-            $order === 'random'
+            'random' === $order
         );
 
         return [
@@ -290,7 +290,7 @@ class SearchResolver
         return [
             $sort => [
                 'order' => $order,
-                'missing' => $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
+                'missing' => 'desc' === $order ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
             ],
         ];
     }
