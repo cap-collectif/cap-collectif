@@ -24,11 +24,11 @@ type SubmitFusionFormAction = {
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId: Uuid,
-  proposalId: number,
+  proposalId: Uuid,
 };
 type LoadSelectionsAction = {
   type: 'proposal/LOAD_SELECTIONS_REQUEST',
-  proposalId: number,
+  proposalId: Uuid,
 };
 type LoadMarkersAction = {
   type: 'proposal/LOAD_MARKERS_REQUEST',
@@ -58,7 +58,7 @@ type CloseVotesModalActionAction = {
 };
 type VoteSuccessAction = {
   type: 'proposal/VOTE_SUCCEEDED',
-  proposalId: number,
+  proposalId: Uuid,
   stepId: Uuid,
   vote: Object,
   comment: Object,
@@ -66,17 +66,17 @@ type VoteSuccessAction = {
 type RequestLoadVotesAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId: Uuid,
-  proposalId: number,
+  proposalId: Uuid,
 };
 type DeleteVoteSucceededAction = {
   type: 'proposal/DELETE_VOTE_SUCCEEDED',
-  proposalId: number,
+  proposalId: Uuid,
   stepId: Uuid,
   vote: Object,
 };
 type RequestDeleteProposalVoteAction = {
   type: 'proposal/DELETE_VOTE_REQUESTED',
-  proposalId: number,
+  proposalId: Uuid,
 };
 type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
@@ -87,13 +87,13 @@ type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM' };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
-type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: number };
+type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
 type ChangePageAction = { type: 'proposal/CHANGE_PAGE', page: number };
 type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type RequestLoadProposalsAction = {
   type: 'proposal/FETCH_REQUESTED',
-  step: ?number,
+  step: ?Uuid,
   regenerateRandomOrder: ?boolean,
 };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
@@ -112,17 +112,17 @@ type Proposal = {
   selections: Array<Selection>,
   votesByStepId: { [id: Uuid]: Array<Object> },
 } & Object;
-type ProposalMap = { [id: number]: Proposal };
+type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {
   +queryCount: ?number,
-  +currentProposalId: ?number,
-  +proposalShowedId: Array<number>,
+  +currentProposalId: ?Uuid,
+  +proposalShowedId: Array<Uuid>,
   +creditsLeftByStepId: Object,
   +proposalsById: ProposalMap,
   +userVotesByStepId: Object,
   +currentVotesModal: ?Object,
-  +currentVoteModal: ?number,
-  +currentDeletingVote: ?number,
+  +currentVoteModal: ?Uuid,
+  +currentDeletingVote: ?Uuid,
   +showCreateModal: boolean,
   +isCreating: boolean,
   +isCreatingFusion: boolean,
@@ -138,7 +138,7 @@ export type State = {
   +terms: ?string,
   +lastEditedStepId: ?Uuid,
   +currentPaginationPage: number,
-  +lastEditedProposalId: ?number,
+  +lastEditedProposalId: ?Uuid,
   +lastNotifiedStepId: ?Uuid,
   +selectedViewByStep: string,
   +markers: ?Object,
@@ -208,7 +208,7 @@ export const closeVotesModal = (stepId: Uuid): CloseVotesModalActionAction => ({
   stepId,
 });
 export const voteSuccess = (
-  proposalId: number,
+  proposalId: Uuid,
   stepId: Uuid,
   vote: Object,
   comment: Object,
@@ -219,14 +219,14 @@ export const voteSuccess = (
   vote,
   comment,
 });
-export const loadVotes = (stepId: Uuid, proposalId: number): RequestLoadVotesAction => ({
+export const loadVotes = (stepId: Uuid, proposalId: Uuid): RequestLoadVotesAction => ({
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId,
   proposalId,
 });
 export const deleteVoteSucceeded = (
   stepId: Uuid,
-  proposalId: number,
+  proposalId: Uuid,
   vote: Object,
 ): DeleteVoteSucceededAction => ({
   type: 'proposal/DELETE_VOTE_SUCCEEDED',
@@ -234,7 +234,7 @@ export const deleteVoteSucceeded = (
   stepId,
   vote,
 });
-const deleteVoteRequested = (proposalId: number): RequestDeleteProposalVoteAction => ({
+const deleteVoteRequested = (proposalId: Uuid): RequestDeleteProposalVoteAction => ({
   type: 'proposal/DELETE_VOTE_REQUESTED',
   proposalId,
 });
@@ -265,7 +265,7 @@ export const cancelSubmitProposal = (): CancelSubmitProposalAction => ({
 export const closeCreateModal = (): CloseCreateModalAction => ({
   type: 'proposal/CLOSE_CREATE_MODAL',
 });
-export const openVoteModal = (id: number): OpenVoteModalAction => ({
+export const openVoteModal = (id: Uuid): OpenVoteModalAction => ({
   type: 'proposal/OPEN_VOTE_MODAL',
   id,
 });
@@ -299,14 +299,14 @@ const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
 export const loadProposals = (
-  step: ?number,
+  step: ?Uuid,
   regenerateRandomOrder: ?boolean,
 ): RequestLoadProposalsAction => ({
   type: 'proposal/FETCH_REQUESTED',
   step,
   regenerateRandomOrder,
 });
-export const deleteProposal = (form: number, proposal: Object, dispatch: Dispatch): void => {
+export const deleteProposal = (form: Uuid, proposal: Object, dispatch: Dispatch): void => {
   dispatch(deleteRequest());
   Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
     .then(() => {
@@ -437,7 +437,7 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
 
 export const submitProposal = (
   dispatch: Dispatch,
-  form: number,
+  form: Uuid,
   data: Object,
   currentStepId: string,
 ): Promise<*> => {
@@ -480,7 +480,7 @@ export const submitProposal = (
     });
 };
 
-export const updateProposal = (dispatch: Dispatch, form: number, id: number, data: Object) => {
+export const updateProposal = (dispatch: Dispatch, form: Uuid, id: Uuid, data: Object) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
@@ -630,13 +630,13 @@ type FetchVotesSucceededAction = {
   type: 'proposal/VOTES_FETCH_SUCCEEDED',
   stepId: Uuid,
   votes: Array<Object>,
-  proposalId: number,
+  proposalId: Uuid,
 };
 type RequestFetchProposalPostsAction = {
   type: 'proposal/POSTS_FETCH_REQUESTED',
-  proposalId: number,
+  proposalId: Uuid,
 };
-export const fetchProposalPosts = (proposalId: number): RequestFetchProposalPostsAction => ({
+export const fetchProposalPosts = (proposalId: Uuid): RequestFetchProposalPostsAction => ({
   type: 'proposal/POSTS_FETCH_REQUESTED',
   proposalId,
 });

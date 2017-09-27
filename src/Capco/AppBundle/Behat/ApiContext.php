@@ -580,7 +580,7 @@ EOF;
     /**
      * @Then proposal with id :id should be disable
      */
-    public function proposalWithIdShouldBeSoftDeleted(int $id)
+    public function proposalWithIdShouldBeSoftDeleted(string $id)
     {
         $em = $this->getEntityManager();
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);

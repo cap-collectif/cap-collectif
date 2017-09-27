@@ -20,13 +20,10 @@ export const ProposalFormAdminQuestionModal = React.createClass({
   render() {
     const { member, show, isCreating, onClose, onSubmit } = this.props;
     return (
-      <Modal
-        show={show}
-        onHide={onClose}
-        aria-labelledby="proposal-form-admin-question-modal-title-lg">
+      <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title
-            id="proposal-form-admin-question-modal-title-lg"
+            id="report-modal-title-lg"
             children={
               <FormattedMessage id={!isCreating ? 'Créer une question' : 'Modifier la question'} />
             }
@@ -48,9 +45,19 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             component={component}
           />
           <Field
+            label="Type de réponse"
+            id={`${member}.questionType`}
+            name={`${member}.questionType`}
+            type="select"
+            component={component}>
+            <option value="">Sélectionner un type</option>
+            <option value="value">Texte libre</option>
+            <option value="medias">Documents</option>
+          </Field>
+          <Field
             label="Format de réponse"
-            id={`${member}.type`}
-            name={`${member}.type`}
+            id={`${member}.inputType`}
+            name={`${member}.inputType`}
             type="select"
             component={component}>
             <option value="" disabled>
@@ -65,22 +72,17 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             <option value="editor">
               <FormattedMessage id="global.question.types.editor" />
             </option>
-            <option value="medias">
-              <FormattedMessage id="global.question.types.medias" />
-            </option>
           </Field>
           <Field
             id={`${member}.required`}
             name={`${member}.required`}
             type="checkbox"
-            normalize={val => !!val}
             children={<FormattedMessage id="global.admin.required" />}
             component={component}
           />
           <Field
             children="Visible uniquement par l'utilisateur et l'administrateur"
             id={`${member}.private`}
-            normalize={val => !!val}
             name={`${member}.private`}
             type="checkbox"
             component={component}

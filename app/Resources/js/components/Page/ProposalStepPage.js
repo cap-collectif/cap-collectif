@@ -63,7 +63,6 @@ export const ProposalStepPage = React.createClass({
         .filter(d => d.geojson && d.displayedOnMap)
         .map(d => JSON.parse(d.geojson));
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);
     }
 

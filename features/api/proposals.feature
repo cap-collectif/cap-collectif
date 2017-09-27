@@ -3,12 +3,12 @@ Feature: Proposal Restful Api
 
 @parallel-scenario
 Scenario: Anonymous API client wants to get one proposal from a ProposalForm and should not see private fields
-  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/proposal1"
   Then the JSON response should match:
   """
   {
     "proposal": {
-      "id": @integer@,
+      "id": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -132,12 +132,12 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
 @parallel-scenario
 Scenario: Admin wants to get one proposal from a ProposalForm and should see private fields
   Given I am logged in to api as admin
-  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/proposal1"
   Then the JSON response should match:
   """
   {
     "proposal": {
-      "id": @integer@,
+      "id": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -283,12 +283,12 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
 @parallel-scenario
 Scenario: User wants to get his proposal from a ProposalForm and should see private fields
   Given I am logged in to api as user
-  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/proposal1"
   Then the JSON response should match:
   """
   {
     "proposal": {
-      "id": @integer@,
+      "id": @string@,
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
@@ -434,7 +434,7 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -492,7 +492,7 @@ Scenario: Logged in API client wants to get all proposals from a private collect
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -560,7 +560,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -651,7 +651,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
   """
   {
     "ids": [
-      10, 1
+      "proposal10", "proposal1"
     ]
   }
   """
@@ -823,7 +823,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
   """
   {
     "ids": [
-      3, 2
+      "proposal3", "proposal2"
     ]
   }
   """
@@ -847,7 +847,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "comments": @array@,
         "selections": @array@,
         "progressSteps": @array@,
-        "id": 3,
+        "id": "proposal3",
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
         "enabled": @boolean@,
@@ -875,7 +875,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "comments": @array@,
         "selections": @array@,
         "progressSteps": @array@,
-        "id": 2,
+        "id": "proposal2",
         "comments_count": @integer@,
         "created_at": "@string@.isDateTime()",
         "enabled": @boolean@,
@@ -979,9 +979,9 @@ Scenario: Logged in admin API client wants to add a proposal with fusion
   }
   """
   Then the JSON response status code should be 201
-  And proposal "1" should be fusioned to proposal "19"
-  And proposal "2" should be fusioned to proposal "19"
-  And proposal "19" should have author "sfavot"
+  And proposal "proposal1" should be fusioned to proposal "proposal19"
+  And proposal "proposal2" should be fusioned to proposal "proposal19"
+  And proposal "proposal19" should have author "sfavot"
 
 @database
 Scenario: Logged in API client wants to add a proposal (with nothing for not required response)
@@ -1042,22 +1042,22 @@ Scenario: Logged in API client wants to add a proposal not in zone
 @database
 Scenario: Admin API client wants to update proposal status
   Given I am logged in to api as admin
-  When I send a PATCH request to "/api/proposals/12" with json:
+  When I send a PATCH request to "/api/proposals/proposal12" with json:
   """
   {
     "status": 1
   }
   """
   Then the JSON response status code should be 200
-  And proposal 12 should have status 1
-  When I send a PATCH request to "/api/proposals/12" with json:
+  And proposal "proposal12" should have status 1
+  When I send a PATCH request to "/api/proposals/proposal12" with json:
   """
   {
     "status": null
   }
   """
   Then the JSON response status code should be 204
-  And proposal 12 should not have a status
+  And proposal "proposal12" should not have a status
 
 @security
 Scenario: Logged in API client wants to add a proposal without a required response
@@ -1218,7 +1218,7 @@ Scenario: Logged in API client wants to add a proposal with no address when mand
 @database
 Scenario: logged in API client wants to edit a proposal
   Given I am logged in to api as user
-  When I send a POST request to "api/proposal_forms/proposalForm1/proposals/2" with json:
+  When I send a POST request to "api/proposal_forms/proposalForm1/proposals/proposal2" with json:
   """
   {
     "title": "Acheter un sauna par personne pour Capco",
@@ -1230,31 +1230,31 @@ Scenario: logged in API client wants to edit a proposal
 @database
 Scenario: logged in API client wants to remove a proposal
   Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/2"
+  When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/proposal2"
   Then the JSON response status code should be 204
 
 @database
 Scenario: logged in API client wants to remove a proposal and ensure that its proposal was disabled
   Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/12"
+  When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/proposal12"
   Then the JSON response status code should be 204
-  And proposal with id 12 should be disable
+  And proposal with id "proposal12" should be disable
 
 # Report
 @database
 Scenario: Anonymous API client wants to report a proposal
-  When I send a POST request to "/api/proposals/1/reports" with a valid report json
+  When I send a POST request to "/api/proposals/proposal1/reports" with a valid report json
   Then the JSON response status code should be 401
 
 @database
 Scenario: Logged in API client wants to report an proposal
   Given I am logged in to api as admin
-  When I send a POST request to "/api/proposals/1/reports" with a valid report json
+  When I send a POST request to "/api/proposals/proposal1/reports" with a valid report json
   Then the JSON response status code should be 201
 
 # Selections
 Scenario: Anonymous API client wants to get selections of a proposal
-  When I send a GET request to "/api/proposals/1/selections"
+  When I send a GET request to "/api/proposals/proposal1/selections"
   Then the JSON response should match:
   """
     [

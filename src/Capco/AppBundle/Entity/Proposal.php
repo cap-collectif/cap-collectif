@@ -9,7 +9,6 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
@@ -17,6 +16,7 @@ use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -39,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
-    use IdTrait;
+    use UuidTrait;
     use CommentableTrait;
     use TimestampableTrait;
     use EnableTrait;
@@ -573,7 +573,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
         }, $this->getSelections()->getValues()),
             function ($value) {
-                return $value !== null;
+                return null !== $value;
             });
 
         return $ids;
@@ -895,7 +895,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $findStatus = null;
         $loop = 0;
 
-        while ($findStatus === null && $loop < count($selections)) {
+        while (null === $findStatus && $loop < count($selections)) {
             $selection = $selections[$loop];
 
             if (null !== $selection->getStatus()) {
