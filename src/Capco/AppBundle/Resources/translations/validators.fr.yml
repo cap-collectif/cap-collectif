@@ -62,6 +62,8 @@ proposal:
     already_voted: "Vous avez déjà voté pour cette proposition."
     email_belongs_to_user: "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
     not_enough_credits: "Vous n'avez pas suffisamment de crédits disponibles pour soutenir cette proposition."
+  reference:
+    not_unique: "Vous ne pouvez pas ajouter une proposition avec une référence déjà existante dans l'étape."
 
 reply:
   missing_required_responses: "Veuillez répondre à toutes les questions obligatoires pour soumettre votre réponse."
@@ -94,3 +96,7 @@ username:
 
 vote:
   no_comment_when_private_error: "Vous ne pouvez pas poster de commentaire en tant qu'anonyme."
+
+proposal_form:
+  reference:
+    not_unique: "Cette référence existe déjà pour ce formulaire."

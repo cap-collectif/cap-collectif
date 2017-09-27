@@ -29,6 +29,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,6 +42,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
+ * @UniqueEntity(
+ *   fields={"reference", "proposalForm"},
+ *   message="proposal.reference.not_unique",
+ *   repositoryMethod="getDuplicateOnReferenceField"
+ * )
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
