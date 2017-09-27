@@ -22,14 +22,14 @@ class UserGroup
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="userGroups")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
     /**
      * @var Group
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Group")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="userGroups")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      */
     protected $group;

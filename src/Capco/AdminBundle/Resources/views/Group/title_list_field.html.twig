@@ -1,0 +1,15 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{% block field %}
+    {% spaceless %}
+        {% if value %}
+            <a href="{{ path('admin_capco_app_group_edit', {id: value.id}) }}">
+                {{ value.title }}
+            </a>
+            {% if value.description is defined %}
+                <br>
+                <span class="text-grey">{{ value.description }}</span>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

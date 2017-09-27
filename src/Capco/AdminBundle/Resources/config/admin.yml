@@ -444,3 +444,4 @@ services:
       - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.group}
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
+      - [ setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]

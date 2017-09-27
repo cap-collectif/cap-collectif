@@ -2,40 +2,40 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Group;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class GroupAdmin extends Admin
 {
-//    public function getFormBuilder()
-//    {
-    ////        $this->formOptions['data_class'] = $this->getClass();
-    ////
-//        $options = $this->formOptions;
-//        $options['validation_groups'] = 'Default';
-//        $options['translation_domain'] = 'SonataUserBundle';
-    ////
-//        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
-    ////
-//        $this->defineFormBuilder($formBuilder);
-    //
-//        return $formBuilder;
-//    }
-
     /**
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
-            ->add('title', null, [
+            ->add('titleInfo', null, [
                 'label' => 'admin.fields.group.title',
+                'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
+            ])
+            ->add('countUserGroups', null, [
+                'label' => 'admin.fields.group.number_users',
+            ])
+            ->add('updatedInfo', 'datetime', [
+                'label' => 'admin.fields.group.updated_at',
+                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ])
         ;
     }
 
-//    public function getTemplate($name)
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['list', 'edit']);
+    }
+
+    //    public function getTemplate($name)
 //    {
 ////        if ($name === 'delete') {
 ////            return 'CapcoAdminBundle:User:delete.html.twig';
