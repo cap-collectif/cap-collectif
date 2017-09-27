@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\Mapping as ORM;
 
 trait TextableTrait
@@ -38,13 +39,13 @@ trait TextableTrait
 
     public function getBodyTextExcerpt(int $nb = 100): string
     {
-        $text = strip_tags($this->body);
+        $text = Text::htmlToString($this->body);
 
         if (strlen($text) > $nb) {
             $text = substr($text, 0, $nb);
             $text .= '[…]';
         }
 
-        return $text;
+        return Text::htmlToString($text);
     }
 }
