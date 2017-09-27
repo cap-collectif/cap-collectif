@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\ProposalForm:
   proposalform1:
-    id: 1
+    id: proposalForm1
     title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
     description: <p><text(100)></p>
     step: "@collectstep1"
@@ -21,12 +21,12 @@ Capco\AppBundle\Entity\ProposalForm:
     latMap: 48.1159675
     lngMap: -1.7234738
   proposalform2:
-    id: 2
+    id: proposalForm2
     title: Formulaire de la collecte 2
     description: <text(100)>
     step: "@collectstep2"
   proposalform3:
-    id: 3
+    id: proposalForm3
     title: Formulaire de la collecte 3
     description: <text(100)>
     step: "@collectstep3"
@@ -34,22 +34,22 @@ Capco\AppBundle\Entity\ProposalForm:
     usingThemes: true
     usingDistrict: true
   proposalform4:
-    id: 4
+    id: proposalForm4
     title: Formulaire de la collecte 4
     description: <text(100)>
     step: "@collectstep4"
   proposalform5:
-    id: 5
+    id: proposalForm5
     title: Formulaire de la collecte 5
     description: <text(100)>
     step: "@collectstep5"
   proposalform6:
-    id: 6
+    id: proposalForm6
     title: Formulaire du dépôt fermé
     description: <text(100)>
     step: "@collectstep6"
   proposalform7:
-    id: 7
+    id: proposalForm7
     title: Formulaire de la collecte 7
     description: <text(100)>
     step: "@collectstep7"

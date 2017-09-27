@@ -65,11 +65,11 @@ const ArgumentCreate = React.createClass({
               <Button
                 disabled={submitting || disabled}
                 onClick={
-                  submitting || disabled ? null : (
-                    () => {
-                      dispatch(submit(form));
-                    }
-                  )
+                  submitting || disabled
+                    ? null
+                    : () => {
+                        dispatch(submit(form));
+                      }
                 }
                 bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />

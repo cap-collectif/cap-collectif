@@ -161,19 +161,19 @@ const ProjectStatsList = React.createClass({
           </ListGroup>
         )}
         {haveData &&
-        data.total > data.values.length && (
-          <ProjectStatsModal
-            type={type}
-            stepId={stepId}
-            data={data}
-            label={label}
-            icon={icon}
-            showPercentage={this.state.showPercentage}
-            isCurrency={isCurrency}
-            theme={this.state.theme}
-            district={this.state.district}
-          />
-        )}
+          data.total > data.values.length && (
+            <ProjectStatsModal
+              type={type}
+              stepId={stepId}
+              data={data}
+              label={label}
+              icon={icon}
+              showPercentage={this.state.showPercentage}
+              isCurrency={isCurrency}
+              theme={this.state.theme}
+              district={this.state.district}
+            />
+          )}
       </div>
     );
   },

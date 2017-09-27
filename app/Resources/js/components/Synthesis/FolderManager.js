@@ -93,9 +93,9 @@ const FolderManager = React.createClass({
             return (
               <li className="tree__item" key={index}>
                 {this.renderTreeItemContent(element)}
-                {this.state.expanded[element.id] ? (
-                  this.renderTreeItems(element.children, level + 1)
-                ) : null}
+                {this.state.expanded[element.id]
+                  ? this.renderTreeItems(element.children, level + 1)
+                  : null}
               </li>
             );
           })}
