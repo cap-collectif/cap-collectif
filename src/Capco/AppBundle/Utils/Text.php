@@ -6,6 +6,6 @@ final class Text
 {
     public static function escapeHtml($str): string
     {
-        return htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE);
+        return strip_tags($str);
     }
 }

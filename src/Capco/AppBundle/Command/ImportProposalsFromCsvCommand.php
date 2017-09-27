@@ -46,6 +46,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 'proposal-form',
                 InputArgument::REQUIRED,
                 'Please provide the proposal form id where you want to import proposals.'
+            )
+            ->addArgument(
+                'delimiter',
+                InputArgument::OPTIONAL,
+                ', or ;'
             );
     }
 
@@ -57,13 +62,14 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function import(InputInterface $input, OutputInterface $output): int
     {
         $this->filePath = $input->getArgument('filePath');
+        $this->delimiter = $input->getArgument('delimiter');
         $proposalFormId = $input->getArgument('proposal-form');
         $map = $this->getContainer()->get('capco.utils.map');
 
-        $om = $this->getContainer()->get('doctrine')->getManager();
+        $this->om = $this->getContainer()->get('doctrine')->getManager();
 
         /* @var ProposalForm $proposalForm */
-        $this->proposalForm = $om->getRepository(ProposalForm::class)->find($proposalFormId);
+        $this->proposalForm = $this->om->getRepository(ProposalForm::class)->find($proposalFormId);
         $this->questionsMap = [];
         $this->newUsersMap = [];
 
@@ -77,9 +83,10 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             return 1;
         }
 
-        $proposals = $this->getProposals();
+        $rows = $this->getRows();
+        $count = count($rows);
 
-        if (0 === count($proposals)) {
+        if (0 === $count) {
             $output->writeln(
                 '<error>Your file with path '
                 . $this->filePath .
@@ -89,12 +96,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             return 1;
         }
 
-        $count = count($proposals);
         $progress = new ProgressBar($output, $count - 1);
         $progress->start();
 
         $loop = 1;
-        foreach ($proposals as $row) {
+        foreach ($rows as $row) {
             // if first line : check if headers are valid
             if (1 === $loop) {
                 if (!$this->isValidHeaders($row, $output)) {
@@ -109,7 +115,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal->setTitle(Text::escapeHtml($row[0]));
 
                 /** @var User $author */
-                $author = $om->getRepository(User::class)->findOneBy([
+                $author = $this->om->getRepository(User::class)->findOneBy([
                     'email' => $row[1],
                 ]);
 
@@ -119,25 +125,25 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                         return 1;
                     }
-                    if (!isset($this->newUsersMap[$row[1]])) {
+                    if (!isset($this->newUsersMap[trim($row[1])])) {
                         $output->writeln(
                         '<info>Creating a new user with a fake email and username: ' . $row[1] . '</info>'
                     );
-                        $this->newUsersMap[$row[1]] = $this->createUserFromUsername($row[1]);
+                        $this->newUsersMap[trim($row[1])] = $this->createUserFromUsername(trim($row[1]));
                     }
-                    $author = $this->newUsersMap[$row[1]];
+                    $author = $this->newUsersMap[trim($row[1])];
                 }
 
-                $district = $om->getRepository(District::class)->findOneBy([
+                $district = $this->om->getRepository(District::class)->findOneBy([
                     'name' => $row[2],
                 ]);
 
-                $status = $om->getRepository(Status::class)->findOneBy([
+                $status = $this->om->getRepository(Status::class)->findOneBy([
                     'name' => $row[4],
                     'step' => $this->proposalForm->getStep(),
                 ]);
 
-                if (null === $author || null === $district || null === $status) {
+                if (null === $author) {
                     return $this->generateContentException($output);
                 }
 
@@ -145,31 +151,30 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal->setProposalForm($this->proposalForm);
                 $proposal->setDistrict($district);
                 $proposal->setStatus($status);
-                $proposal->setAddress($map->getFormattedAddress($row[3]));
+                if ('' !== $row[3]) {
+                    $proposal->setAddress($map->getFormattedAddress($row[3]));
+                }
 
                 if ('' !== $row[5]) {
                     $proposal->setEstimation((float) $row[5]);
                 }
 
                 if ('' !== $row[6]) {
-                    $proposalCategory = $om->getRepository(ProposalCategory::class)->findOneBy([
+                    $proposalCategory = $this->om->getRepository(ProposalCategory::class)->findOneBy([
                         'name' => $row[6],
                         'form' => $this->proposalForm,
                     ]);
-
-                    if (null !== $proposalCategory) {
-                        $proposal->setCategory($proposalCategory);
-                    }
+                    $proposal->setCategory($proposalCategory);
                 }
 
                 if ('' !== $row[7]) {
                     $proposal->setSummary(Text::escapeHtml($row[7]));
                 }
 
-                $proposal->setBody($row[8]);
+                $proposal->setBody(Text::escapeHtml($row[8]));
 
-                if (count($row) > 9) {
-                    for ($i = 9; isset($row[$i]); ++$i) {
+                if (count($row) > count(self::HEADERS)) {
+                    for ($i = count(self::HEADERS); isset($row[$i]); ++$i) {
                         $reponse = (new ValueResponse())
                       ->setQuestion($this->questionsMap[$i])
                       ->setValue($row[$i]);
@@ -177,18 +182,16 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                     }
                 }
 
-                $om->persist($proposal);
+                $this->om->persist($proposal);
             }
 
             ++$loop;
         }
 
         try {
-            $om->flush();
+            $this->om->flush();
         } catch (\Exception $e) {
-            $output->writeln(
-                '<error>Error when flushing proposals : ' . $e->getMessage() . '</error>');
-            $output->writeln('<error>Import cancelled. No proposal was created.</error>');
+            $output->writeln('<error>Error when flushing proposals : ' . $e->getMessage() . '</error>');
 
             return 1;
         }
@@ -197,7 +200,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $output->writeln(
             '<info>'
-            . (count($proposals) - 1) .
+            . (count($rows) - 1) .
             ' proposals successfully created.</info>'
         );
 
@@ -214,7 +217,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $user->setEmail(filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL));
         $user->setPlainpassword('laposte');
         $user->setEnabled(true);
-        $userManager->updateUser($user);
+        $this->om->persist($user);
 
         return $user;
     }
@@ -226,8 +229,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             $hasError = true;
         }
 
-        // name, email, collect_status, category are mandatory
-        if ('' === $row[0] || '' === $row[1] || '' === $row[4] || '' === $row[6]) {
+        // name, author are mandatory
+        if ('' === $row[0] || '' === $row[1]) {
             $hasError = true;
         }
 
@@ -241,8 +244,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function isValidHeaders($row, $output): bool
     {
         if (self::HEADERS !== $row) {
-            if (count($row) > 9) {
-                for ($i = 9; isset($row[$i]); ++$i) {
+            if (count($row) > count(self::HEADERS)) {
+                for ($i = count(self::HEADERS); isset($row[$i]); ++$i) {
                     $found = false;
                     foreach ($this->proposalForm->getRealQuestions() as $question) {
                         if ($question->getTitle() === $row[$i]) {
@@ -267,11 +270,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         return true;
     }
 
-    protected function getProposals(): array
+    protected function getRows(): array
     {
         try {
             return Reader::createFromPath($this->filePath)
-                ->setDelimiter(';')
+                ->setDelimiter($this->delimiter ?? ';')
                 ->fetchAll();
         } catch (\RuntimeException $e) {
             return [];

@@ -45,6 +45,6 @@ trait TextableTrait
             $text .= '[…]';
         }
 
-        return $text;
+        return utf8_encode($text);
     }
 }
