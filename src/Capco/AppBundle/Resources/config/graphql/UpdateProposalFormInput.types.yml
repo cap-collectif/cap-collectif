@@ -50,4 +50,4 @@ UpdateProposalFormInput:
             districts:
                 type: "[DistrictInput!]"
             questions:
-                type: "[QuestionnaireAbstractQuestionInput]"
+                type: "[QuestionnaireAbstractQuestionInput!]!"

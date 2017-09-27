@@ -773,7 +773,7 @@ type Query {
 type Question {
   id: String!
   title: String!
-  type: String!
+  type: QuestionTypeValue!
   position: Int!
   private: Boolean!
   required: Boolean!
@@ -786,6 +786,14 @@ input QuestionInput {
   private: Boolean!
   required: Boolean!
   helpText: String
+}
+
+# Value of type of question
+enum QuestionTypeValue {
+  text
+  textarea
+  editor
+  medias
 }
 
 type QuestionnaireAbstractQuestion {
@@ -1055,7 +1063,7 @@ input UpdateProposalFormInput {
   zoomMap: Int
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
-  questions: [QuestionnaireAbstractQuestionInput]
+  questions: [QuestionnaireAbstractQuestionInput!]!
   clientMutationId: String
 }
 

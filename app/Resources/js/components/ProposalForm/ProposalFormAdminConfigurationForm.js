@@ -137,7 +137,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     })),
   };
   return UpdateProposalFormMutation.commit({ input }).then(() => {
-    // location.reload();
+    location.reload();
   });
 };
 

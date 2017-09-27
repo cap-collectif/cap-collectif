@@ -11,7 +11,7 @@ class QuestionResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveType(AbstractQuestion $question)
+    public function resolveType(AbstractQuestion $question): string
     {
         return $question->getInputType();
     }

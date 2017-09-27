@@ -9,7 +9,7 @@ Question:
             title:
                 type: "String!"
             type:
-                type: "String!"
+                type: "QuestionTypeValue!"
                 resolve: "@=resolver('question_type', [value])"
             position:
                 type: "Int!"
