@@ -436,3 +436,11 @@ services:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.pages.types}
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
+
+  capco_admin.admin.group:
+    class: Capco\AdminBundle\Admin\GroupAdmin
+    arguments: [~, Capco\AppBundle\Entity\Group, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.group}
+    calls:
+      - [ setTranslationDomain, [CapcoAppBundle]]

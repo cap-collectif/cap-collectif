@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Traits;
 
-use FOS\UserBundle\Model\UserInterface;
+use Capco\UserBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 trait BlameableTrait
@@ -22,7 +22,7 @@ trait BlameableTrait
     protected $updatedBy;
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getCreatedBy()
     {
@@ -30,7 +30,7 @@ trait BlameableTrait
     }
 
     /**
-     * @param UserInterface $createdBy
+     * @param User $createdBy
      */
     public function setCreatedBy($createdBy)
     {
@@ -38,7 +38,7 @@ trait BlameableTrait
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getUpdatedBy()
     {
@@ -46,7 +46,7 @@ trait BlameableTrait
     }
 
     /**
-     * @param UserInterface $updatedBy
+     * @param User $updatedBy
      */
     public function setUpdatedBy($updatedBy)
     {
