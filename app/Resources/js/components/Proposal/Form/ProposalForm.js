@@ -345,9 +345,8 @@ export const ProposalForm = React.createClass({
     );
 
     const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
-      <div>
-        <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
-        <small>{formattedSuggestion.secondaryText}</small>
+      <div className="places-autocomplete">
+        <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
       </div>
     );
     return (
@@ -463,27 +462,6 @@ export const ProposalForm = React.createClass({
               })}
             </Input>
           )}
-        {features.districts &&
-          form.usingDistrict &&
-          form.districts.length > 0 && (
-            <Input
-              id="proposal_district"
-              type="select"
-              valueLink={this.linkState('form.district')}
-              label={districtLabel}
-              groupClassName={this.getGroupStyle('district')}
-              errors={this.renderFormErrors('district')}
-              help={form.districtHelpText}>
-              <FormattedMessage id="proposal.select.district">
-                {message => <option value="">{message}</option>}
-              </FormattedMessage>
-              {form.districts.map(district => (
-                <option key={district.id} value={district.id}>
-                  {district.name}
-                </option>
-              ))}
-            </Input>
-          )}
         {form.usingAddress && (
           <div
             className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>
@@ -536,6 +514,27 @@ export const ProposalForm = React.createClass({
             {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
           </div>
         )}
+        {features.districts &&
+          form.usingDistrict &&
+          form.districts.length > 0 && (
+            <Input
+              id="proposal_district"
+              type="select"
+              valueLink={this.linkState('form.district')}
+              label={districtLabel}
+              groupClassName={this.getGroupStyle('district')}
+              errors={this.renderFormErrors('district')}
+              help={form.districtHelpText}>
+              <FormattedMessage id="proposal.select.district">
+                {message => <option value="">{message}</option>}
+              </FormattedMessage>
+              {form.districts.map(district => (
+                <option key={district.id} value={district.id}>
+                  {district.name}
+                </option>
+              ))}
+            </Input>
+          )}
         <Input
           id="proposal_body"
           type="editor"
