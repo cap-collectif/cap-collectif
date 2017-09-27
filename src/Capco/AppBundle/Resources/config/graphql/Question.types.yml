@@ -8,10 +8,12 @@ Question:
                 type: "String!"
             title:
                 type: "String!"
-            inputType:
-                type: "String!"
+            type:
+                type: "QuestionTypeValue!"
+                resolve: "@=resolver('question_type', [value])"
             position:
                 type: "Int!"
+                resolve: "@=resolver('question_position', [value])"
             private:
                 type: "Boolean!"
             required:
