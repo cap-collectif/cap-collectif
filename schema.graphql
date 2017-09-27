@@ -766,13 +766,14 @@ type Query {
   section(id: ID!): Section
   proposal(id: ID!): Proposal!
   proposalForm(id: Int!): ProposalForm!
+  question(id: Int!): Question!
 }
 
 # A question
 type Question {
   id: String!
   title: String!
-  inputType: String!
+  type: String!
   position: Int!
   private: Boolean!
   required: Boolean!
@@ -781,10 +782,21 @@ type Question {
 
 input QuestionInput {
   title: String!
-  inputType: String!
+  type: String!
   private: Boolean!
   required: Boolean!
   helpText: String
+}
+
+type QuestionnaireAbstractQuestion {
+  id: Int!
+  position: Int
+  question: Question
+}
+
+input QuestionnaireAbstractQuestionInput {
+  question: QuestionInput!
+  position: Int!
 }
 
 type RankingStep implements Step {
@@ -1043,7 +1055,7 @@ input UpdateProposalFormInput {
   zoomMap: Int
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
-  questions: [QuestionInput!]
+  questions: [QuestionnaireAbstractQuestionInput]
   clientMutationId: String
 }
 

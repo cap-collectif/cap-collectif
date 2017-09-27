@@ -65,7 +65,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                   <div>
                     <strong>{questions[index].title}</strong>
                     <p>
-                      <FormattedMessage id={`proposal_form.fields.${questions[index].inputType}`} />
+                      <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
                     </p>
                   </div>
                 </Col>
@@ -102,7 +102,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           style={{ marginBottom: 10 }}
           bsStyle="primary"
           onClick={() => {
-            dispatch(arrayPush(formName, 'questions', {}));
+            dispatch(
+              arrayPush(formName, 'questions', { private: false, required: false, position: 99 }),
+            );
             this.setState({ editIndex: fields.length });
           }}>
           <Glyphicon glyph="plus" /> <FormattedMessage id="global.add" />

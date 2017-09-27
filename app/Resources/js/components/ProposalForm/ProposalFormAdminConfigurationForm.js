@@ -131,10 +131,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district, id: undefined })),
     categories: values.categories.map(category => ({ ...category, id: undefined })),
-    questions: values.questions.map(question => ({ ...question, id: undefined })),
+    questions: values.questions.map(question => ({
+      position: question.position,
+      question: { ...question, id: undefined, position: undefined },
+    })),
   };
   return UpdateProposalFormMutation.commit({ input }).then(() => {
-    location.reload();
+    // location.reload();
   });
 };
 
@@ -435,9 +438,10 @@ export default createFragmentContainer(
         id
         title
         helpText
-        inputType
+        type
         private
         required
+        position
       }
     }
   `,

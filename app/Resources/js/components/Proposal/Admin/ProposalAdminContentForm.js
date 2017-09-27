@@ -291,10 +291,10 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                         <Field
                           key={field.id}
                           id={field.id}
-                          name={`responses.${index}.${field.inputType !== 'medias'
+                          name={`responses.${index}.${field.type !== 'medias'
                             ? 'value'
                             : 'medias'}`}
-                          type={field.inputType}
+                          type={field.type}
                           component={component}
                           label={field.title}
                         />
@@ -371,7 +371,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
           medias: response.medias,
         };
       }
-      if (field.inputType === 'medias') {
+      if (field.type === 'medias') {
         return { question: parseInt(field.id, 10), medias: [] };
       }
       return { question: parseInt(field.id, 10), value: null };
@@ -421,7 +421,7 @@ export default createFragmentContainer(
         questions {
           id
           title
-          inputType
+          type
           position
           private
           required

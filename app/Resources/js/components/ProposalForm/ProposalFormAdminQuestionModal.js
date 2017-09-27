@@ -49,8 +49,8 @@ export const ProposalFormAdminQuestionModal = React.createClass({
           />
           <Field
             label="Format de réponse"
-            id={`${member}.inputType`}
-            name={`${member}.inputType`}
+            id={`${member}.type`}
+            name={`${member}.type`}
             type="select"
             component={component}>
             <option value="" disabled>
@@ -73,12 +73,14 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             id={`${member}.required`}
             name={`${member}.required`}
             type="checkbox"
+            normalize={val => !!val}
             children={<FormattedMessage id="global.admin.required" />}
             component={component}
           />
           <Field
             children="Visible uniquement par l'utilisateur et l'administrateur"
             id={`${member}.private`}
+            normalize={val => !!val}
             name={`${member}.private`}
             type="checkbox"
             component={component}

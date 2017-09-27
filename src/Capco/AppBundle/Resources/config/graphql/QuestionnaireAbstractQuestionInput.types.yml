@@ -1,0 +1,8 @@
+QuestionnaireAbstractQuestionInput:
+    type: input-object
+    config:
+        fields:
+            question:
+                type: "QuestionInput!"
+            position:
+                type: "Int!"

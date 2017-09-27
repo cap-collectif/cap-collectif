@@ -35,7 +35,7 @@ describe('<ProposalAdminContentForm />', () => {
           {
             id: '1',
             title: 'title',
-            inputType: 'text',
+            type: 'text',
             position: 0,
             private: false,
             required: true,

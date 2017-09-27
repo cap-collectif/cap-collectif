@@ -15,6 +15,12 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposal_form_url", method: "resolveUrl" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_categories", method: "resolveCategories" }
 
+  capco.resolver.question:
+    class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
+    tags:
+      - { name: overblog_graphql.resolver, alias: "query_question", method: "resolve" }
+      - { name: overblog_graphql.resolver, alias: "question_type", method: "resolveType" }
+      - { name: overblog_graphql.resolver, alias: "question_position", method: "resolvePosition" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
