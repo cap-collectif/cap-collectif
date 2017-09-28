@@ -32,7 +32,7 @@ class ProposalFormRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLastProposalReference(int $formId): int
+    public function getLastProposalReference(string $formId): int
     {
         $qb = $this->createQueryBuilder('f')
             ->select('MAX(p.reference) AS last_reference')

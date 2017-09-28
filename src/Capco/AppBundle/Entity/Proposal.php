@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;

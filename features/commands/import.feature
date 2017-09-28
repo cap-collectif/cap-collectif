@@ -41,7 +41,7 @@ Scenario: Admin wants to import a BP
   new proposition 2;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
   new proposition 3;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
   """
-  Given I run "capco:import:proposals-from-csv vfs://proposals.csv 1"
+  Given I run "capco:import:proposals-from-csv vfs://proposals.csv proposalForm1"
   Then the command exit code should be 0
   And I should see "Creating a new user with a fake email and username: Pierre Michel" in output
 
