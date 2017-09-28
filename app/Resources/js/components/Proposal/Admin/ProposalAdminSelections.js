@@ -129,9 +129,7 @@ export class ProposalAdminSelections extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.steps" />
-          </h3>
+          <h4 className="box-title">Etapes</h4>
           <a
             className="pull-right link"
             target="_blank"
@@ -139,55 +137,55 @@ export class ProposalAdminSelections extends Component<Props> {
             href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#avancement">
             <i className="fa fa-info-circle" /> Aide
           </a>
+          <h5 style={{ marginBottom: 0, fontWeight: 'bold' }}>Etapes</h5>
         </div>
-        <div className="box-content">
-          <form onSubmit={handleSubmit}>
-            <ListGroup style={{ paddingBottom: 10 }}>
-              <ListGroupItem>
+        <form onSubmit={handleSubmit}>
+          <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
+            <ListGroupItem>
+              <div>
+                <strong>{collectStep.title}</strong> - <span>Etape de dépôt</span>
+              </div>
+              <br />
+              <Field
+                label="Publié dans cette étape"
+                name={`collectPublished`}
+                id="collectPublished"
+                disabled
+                readOnly
+                component={toggle}
+              />
+              <div>
+                <Field
+                  type="select"
+                  label="Statut"
+                  name="collectStatus"
+                  id="collectStatus"
+                  normalize={val => (val === '-1' ? null : val)}
+                  component={component}>
+                  <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
+                  {collectStep.statuses &&
+                    collectStep.statuses.map(status => (
+                      <option key={status.id} value={status.id}>
+                        {status.name}
+                      </option>
+                    ))}
+                </Field>
+              </div>
+            </ListGroupItem>
+            {selectionSteps.map((step, index) => (
+              <ListGroupItem key={index}>
                 <div>
-                  <strong>{collectStep.title}</strong> - <span>Etape de dépôt</span>
+                  <strong>{step.title}</strong> - <span>Etape de sélection</span>
                 </div>
                 <br />
                 <Field
                   label="Publié dans cette étape"
-                  name={`collectPublished`}
-                  id="collectPublished"
-                  disabled
-                  readOnly
+                  id={`selections[${index}].selected`}
+                  name={`selections[${index}].selected`}
                   component={toggle}
+                  normalize={val => !!val}
                 />
-                <div>
-                  <Field
-                    type="select"
-                    label="Statut"
-                    name="collectStatus"
-                    id="collectStatus"
-                    normalize={val => (val === '-1' ? null : val)}
-                    component={component}>
-                    <option value="-1">{intl.formatMessage({ id: 'proposal.no_status' })}</option>
-                    {collectStep.statuses &&
-                      collectStep.statuses.map(status => (
-                        <option key={status.id} value={status.id}>
-                          {status.name}
-                        </option>
-                      ))}
-                  </Field>
-                </div>
-              </ListGroupItem>
-              {selectionSteps.map((step, index) => (
-                <ListGroupItem key={index}>
-                  <div>
-                    <strong>{step.title}</strong> - <span>Etape de sélection</span>
-                  </div>
-                  <br />
-                  <Field
-                    label="Publié dans cette étape"
-                    id={`selections[${index}].selected`}
-                    name={`selections[${index}].selected`}
-                    component={toggle}
-                    normalize={val => !!val}
-                  />
-                  {selectionValues[index] &&
+                {selectionValues[index] &&
                   selectionValues[index].selected && (
                     <div>
                       {initialValues.selections[index].status !== selectionValues[index].status && (
@@ -218,16 +216,15 @@ export class ProposalAdminSelections extends Component<Props> {
                       )}
                     </div>
                   )}
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
-            </ButtonToolbar>
-          </form>
-        </div>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+          <ButtonToolbar style={{ marginBottom: 10 }}>
+            <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+            </Button>
+          </ButtonToolbar>
+        </form>
       </div>
     );
   }

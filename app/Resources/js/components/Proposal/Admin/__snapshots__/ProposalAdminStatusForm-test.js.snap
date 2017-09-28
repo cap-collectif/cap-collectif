@@ -7,14 +7,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
   <div
     className="box-header"
   >
-    <h3
+    <h4
       className="box-title"
     >
-      <FormattedMessage
-        id="proposal.admin.state"
-        values={Object {}}
-      />
-    </h3>
+      Etat
+    </h4>
     <a
       className="pull-right link"
       href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
@@ -27,82 +24,77 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
        Aide
     </a>
   </div>
-  <div
-    className="box-content box-content__status-form"
+  <form
+    onSubmit={[Function]}
   >
-    <form
-      onSubmit={[Function]}
+    <Field
+      component={[Function]}
+      disabled={false}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
     >
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="publicationStatus"
-        name="publicationStatus"
-        type="radio-buttons"
+      <ToggleButton
+        onClick={[Function]}
+        value="PUBLISHED"
       >
-        <ToggleButton
-          onClick={[Function]}
-          value="PUBLISHED"
-        >
-          Publié
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED"
-        >
-          Corbeille
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED_NOT_VISIBLE"
-        >
-          Corbeille (contenu masqué)
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="EXPIRED"
-        >
-          Expiré
-        </ToggleButton>
-      </Field>
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-        style={
-          Object {
-            "marginBottom": 10,
-          }
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (contenu masqué)
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="EXPIRED"
+      >
+        Expiré
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
         }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={true}
+        type="submit"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={true}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </form>
-  </div>
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
 </div>
 `;
 
@@ -113,14 +105,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
   <div
     className="box-header"
   >
-    <h3
+    <h4
       className="box-title"
     >
-      <FormattedMessage
-        id="proposal.admin.state"
-        values={Object {}}
-      />
-    </h3>
+      Etat
+    </h4>
     <a
       className="pull-right link"
       href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
@@ -133,76 +122,71 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
        Aide
     </a>
   </div>
-  <div
-    className="box-content box-content__status-form"
+  <form
+    onSubmit={[Function]}
   >
-    <form
-      onSubmit={[Function]}
+    <Field
+      component={[Function]}
+      disabled={false}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
     >
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="publicationStatus"
-        name="publicationStatus"
-        type="radio-buttons"
+      <ToggleButton
+        onClick={[Function]}
+        value="PUBLISHED"
       >
-        <ToggleButton
-          onClick={[Function]}
-          value="PUBLISHED"
-        >
-          Publié
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED"
-        >
-          Corbeille
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED_NOT_VISIBLE"
-        >
-          Corbeille (contenu masqué)
-        </ToggleButton>
-      </Field>
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-        style={
-          Object {
-            "marginBottom": 10,
-          }
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (contenu masqué)
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
         }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={true}
+        type="submit"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={true}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </form>
-  </div>
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
 </div>
 `;
 
@@ -213,14 +197,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
   <div
     className="box-header"
   >
-    <h3
+    <h4
       className="box-title"
     >
-      <FormattedMessage
-        id="proposal.admin.state"
-        values={Object {}}
-      />
-    </h3>
+      Etat
+    </h4>
     <a
       className="pull-right link"
       href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
@@ -233,79 +214,74 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
        Aide
     </a>
   </div>
-  <div
-    className="box-content box-content__status-form"
+  <form
+    onSubmit={[Function]}
   >
-    <form
-      onSubmit={[Function]}
+    <p>
+      Adresse email de l'auteur en attente de confirmation: 
+      soon@yopmail.com
+    </p>
+    <Field
+      component={[Function]}
+      disabled={false}
+      id="publicationStatus"
+      name="publicationStatus"
+      type="radio-buttons"
     >
-      <p>
-        Adresse email de l'auteur en attente de confirmation: 
-        soon@yopmail.com
-      </p>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="publicationStatus"
-        name="publicationStatus"
-        type="radio-buttons"
+      <ToggleButton
+        onClick={[Function]}
+        value="PUBLISHED"
       >
-        <ToggleButton
-          onClick={[Function]}
-          value="PUBLISHED"
-        >
-          Publié
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED"
-        >
-          Corbeille
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED_NOT_VISIBLE"
-        >
-          Corbeille (contenu masqué)
-        </ToggleButton>
-      </Field>
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-        style={
-          Object {
-            "marginBottom": 10,
-          }
+        Publié
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED"
+      >
+        Corbeille
+      </ToggleButton>
+      <ToggleButton
+        onClick={[Function]}
+        value="TRASHED_NOT_VISIBLE"
+      >
+        Corbeille (contenu masqué)
+      </ToggleButton>
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
         }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={true}
+        type="submit"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={true}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </form>
-  </div>
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
 </div>
 `;

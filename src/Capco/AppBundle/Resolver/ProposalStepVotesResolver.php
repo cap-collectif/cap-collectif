@@ -231,23 +231,13 @@ class ProposalStepVotesResolver
         if ($step instanceof SelectionStep) {
             $votes = $this
               ->proposalSelectionVoteRepository
-              ->findBy(
-                  [
-                      'selectionStep' => $step,
-                      'user' => $user,
-                  ]
-              )
+              ->getVotesByStepAndUser($step, $user)
           ;
         }
         if ($step instanceof CollectStep) {
             $votes = $this
               ->proposalCollectVoteRepository
-              ->findBy(
-                  [
-                      'collectStep' => $step,
-                      'user' => $user,
-                  ]
-              )
+              ->getVotesByStepAndUser($step, $user)
           ;
         }
 
