@@ -74,21 +74,12 @@ Scenario: GraphQL client wants to update a proposal form
             id
             name
           }
-          questions {
-            id
-            title
-            helpText
-            type
-            private
-            required
-            position
-          }
         }
       }
     }",
     "variables": {
       "input": {
-        "proposalFormId": "proposalForm1",
+        "proposalFormId": 1,
         "titleHelpText": "Title help",
         "description": "New description",
         "descriptionHelpText": "Description help",
@@ -131,8 +122,7 @@ Scenario: GraphQL client wants to update a proposal form
             "displayedOnMap": true,
             "geojson": ""
           }
-        ],
-        "questions": []
+        ]
       }
     }
   }
@@ -143,7 +133,7 @@ Scenario: GraphQL client wants to update a proposal form
     "data": {
       "updateProposalForm": {
         "proposalForm": {
-          "id": "proposalForm1",
+          "id": "1",
           "titleHelpText": "Title help",
           "description": "New description",
           "descriptionHelpText": "Description help",
@@ -178,8 +168,7 @@ Scenario: GraphQL client wants to update a proposal form
               "name": "Politique"
             }
           ],
-          "districts": @wildcard@,
-          "questions": []
+          "districts": @wildcard@
         }
       }
     }

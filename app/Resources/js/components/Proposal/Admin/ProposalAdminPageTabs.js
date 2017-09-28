@@ -22,20 +22,25 @@ export class ProposalAdminPageTabs extends Component<Props, State> {
         <p>
           <strong>Permalien:</strong> <a href={proposal.url}>{proposal.url}</a>
         </p>
-        <Tabs defaultActiveKey={1} id="proposal-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal.admin.content' })}>
+        <Tabs defaultActiveKey={2} id="proposal-admin-page-tabs">
+          <Tab
+            eventKey={1}
+            title={intl.formatMessage({ id: 'proposal.admin.activity' })}
+            disabled
+          />
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.admin.content' })}>
             <ProposalAdminContentForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal.admin.advancement' })}>
+          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.admin.advancement' })}>
             <ProposalAdminSelections proposal={proposal} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
             <ProposalAdminNewsForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
+          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
             <ProposalAdminNotationForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
+          <Tab eventKey={6} title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
             <ProposalAdminStatusForm proposal={proposal} />
           </Tab>
         </Tabs>

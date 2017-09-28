@@ -150,11 +150,12 @@ export const ProposalDetailAdvancement = React.createClass({
               status={step.isCurrent ? this.getStatus(step) : null}
               roundColor={roundColor}
               borderColor={
-                index + 1 === displayedSteps.length
-                  ? null
-                  : displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast
-                    ? green
-                    : grey
+                index + 1 === displayedSteps.length ? null : displayedSteps[index + 1].isCurrent ||
+                displayedSteps[index + 1].isPast ? (
+                  green
+                ) : (
+                  grey
+                )
               }
               children={
                 step.isCurrent &&

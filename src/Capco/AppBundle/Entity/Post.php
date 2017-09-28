@@ -528,7 +528,7 @@ class Post implements CommentableInterface, IndexableInterface
             return $this->abstract;
         }
 
-        return strlen($this->getBodyText()) > 300 ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]' : $this->getBodyText();
+        return strlen($this->getBodyText()) > 300 ? substr($this->getBodyText(), 0, 300) . '[&hellip;]' : $this->getBodyText();
     }
 
     // ************************** Lifecycle **************************************

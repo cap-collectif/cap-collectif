@@ -5,21 +5,23 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * ProposalForm.
+ *
  * @ORM\Table(name="proposal_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalFormRepository")
  */
 class ProposalForm
 {
-    use UuidTrait;
+    use IdTrait;
     use TimestampableTrait;
     use SluggableTitleTrait;
 

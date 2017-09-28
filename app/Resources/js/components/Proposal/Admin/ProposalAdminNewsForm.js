@@ -16,13 +16,12 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     const { proposal } = this.props;
-
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">
+          <h4 className="box-title">
             <FormattedMessage id="proposal.admin.news" />
-          </h3>
+          </h4>
           <a
             className="pull-right link"
             target="_blank"
@@ -31,38 +30,34 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
-        <div className="box-content">
-          <ListGroup style={{ paddingBottom: 10 }}>
-            {proposal.news.map((news, index) => (
-              <ListGroupItem key={index}>
-                <Row>
-                  <Col xs={6}>
-                    <strong>{news.title}</strong>
-                  </Col>
-                  <Col xs={6}>
-                    <ButtonToolbar className="pull-right">
-                      <Button
-                        bsStyle="warning"
-                        href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
-                        <FormattedMessage id="global.edit" />
-                      </Button>
-                      <Button
-                        bsStyle="danger"
-                        href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
-                        <FormattedMessage id="global.delete" />
-                      </Button>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
-          <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-            <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
-              <FormattedMessage id="global.add" />
-            </Button>
-          </ButtonToolbar>
-        </div>
+        <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
+          {proposal.news.map((news, index) => (
+            <ListGroupItem key={index}>
+              <Row>
+                <Col xs={6}>{news.title}</Col>
+                <Col xs={6}>
+                  <ButtonToolbar className="pull-right">
+                    <Button
+                      bsStyle="warning"
+                      href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
+                      <FormattedMessage id="global.edit" />
+                    </Button>
+                    <Button
+                      bsStyle="danger"
+                      href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
+                      <FormattedMessage id="global.delete" />
+                    </Button>
+                  </ButtonToolbar>
+                </Col>
+              </Row>
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+        <ButtonToolbar style={{ marginBottom: 10 }}>
+          <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
+            <FormattedMessage id="global.add" />
+          </Button>
+        </ButtonToolbar>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { ProposalFormAdminPage } from './ProposalFormAdminPage';
 describe('<ProposalFormAdminPage />', () => {
   const props = {
     intl: global.intlMock,
-    proposalFormId: '1',
+    proposalFormId: 1,
   };
 
   it('render correctly', () => {

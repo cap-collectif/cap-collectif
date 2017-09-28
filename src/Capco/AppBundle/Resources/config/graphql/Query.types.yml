@@ -54,11 +54,5 @@ Query:
                 type: "ProposalForm!"
                 args:
                     id:
-                        type: "ID!"
-                resolve: "@=resolver('query_proposalForm', [args])"
-            question:
-                type: "Question!"
-                args:
-                    id:
                         type: "Int!"
-                resolve: "@=resolver('query_question', [args])"
+                resolve: "@=resolver('query_proposalForm', [args])"

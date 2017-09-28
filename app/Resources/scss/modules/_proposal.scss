@@ -4,17 +4,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     @include ellipsis();
 }
 
-.proposal-preview-list, .proposal-preview-trash_list {
+.proposal-preview-list {
     display: flex;
     flex-wrap: wrap;
 
     > li {
         display: flex;
     }
-}
-
-.proposal-preview-trash_list > div {
-    display: flex;
 }
 
 .proposal__header {
@@ -191,12 +187,6 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
          width: 2%;
          min-width: 2em;
      }
- }
-
- .proposal__status {
-     display: block;
-     padding: 5px 0;
-     margin: 10px 0;
  }
 
  .proposal__preview .proposal__status {
