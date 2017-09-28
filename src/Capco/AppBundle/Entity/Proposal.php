@@ -2,18 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
-<<<<<<< HEAD
-=======
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
->>>>>>> Reference to proposal and proposal form #4289
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
@@ -50,12 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
-<<<<<<< HEAD
     use UuidTrait;
-=======
-    use IdTrait;
     use ReferenceTrait;
->>>>>>> Reference to proposal and proposal form #4289
     use CommentableTrait;
     use TimestampableTrait;
     use EnableTrait;

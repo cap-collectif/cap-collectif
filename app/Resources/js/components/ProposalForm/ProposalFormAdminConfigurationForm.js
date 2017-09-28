@@ -14,7 +14,6 @@ import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutati
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
-type FormValues = ProposalFormAdminConfigurationForm_proposalForm;
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
 type Props = RelayProps & {
   handleSubmit: () => void,
@@ -124,7 +123,7 @@ const headerPanelUsingDistrict = (
   </div>
 );
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
     id: undefined,

@@ -49,6 +49,7 @@ exports[`<ProposalPageMetadata /> should not render category if proposal has non
         Reference
       </div>
     </div>
+    )}
   </div>
 </div>
 `;
@@ -108,6 +109,7 @@ exports[`<ProposalPageMetadata /> should not render category if specified not to
         Reference
       </div>
     </div>
+    )}
   </div>
 </div>
 `;
@@ -124,7 +126,7 @@ exports[`<ProposalPageMetadata /> should not render district if proposal has non
         className="proposal__info proposal__info--category ellipsis"
       >
         <i
-          className="cap cap-folder-2-1 icon--blue"
+          className="cap cap-tag-1-1 icon--blue"
         />
         Nom de la catégorie
       </div>
@@ -161,6 +163,7 @@ exports[`<ProposalPageMetadata /> should not render district if proposal has non
         Reference
       </div>
     </div>
+    )}
   </div>
 </div>
 `;
@@ -177,7 +180,7 @@ exports[`<ProposalPageMetadata /> should not render district if specified not to
         className="proposal__info proposal__info--category ellipsis"
       >
         <i
-          className="cap cap-folder-2-1 icon--blue"
+          className="cap cap-tag-1-1 icon--blue"
         />
         Nom de la catégorie
       </div>
@@ -220,6 +223,7 @@ exports[`<ProposalPageMetadata /> should not render district if specified not to
         Reference
       </div>
     </div>
+    )}
   </div>
 </div>
 `;
@@ -236,7 +240,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         className="proposal__info proposal__info--category ellipsis"
       >
         <i
-          className="cap cap-folder-2-1 icon--blue"
+          className="cap cap-tag-1-1 icon--blue"
         />
         Nom de la catégorie
       </div>
@@ -287,6 +291,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         Reference
       </div>
     </div>
+    )}
   </div>
 </div>
 `;

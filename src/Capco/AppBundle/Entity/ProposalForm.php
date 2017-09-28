@@ -24,12 +24,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class ProposalForm
 {
-<<<<<<< HEAD
     use UuidTrait;
-=======
-    use IdTrait;
     use ReferenceTrait;
->>>>>>> Reference to proposal and proposal form #4289
     use TimestampableTrait;
     use SluggableTitleTrait;
 
