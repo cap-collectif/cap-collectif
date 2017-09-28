@@ -74,15 +74,6 @@ Scenario: GraphQL client wants to update a proposal form
             id
             name
           }
-          questions {
-            id
-            title
-            helpText
-            type
-            private
-            required
-            position
-          }
         }
       }
     }",
@@ -131,8 +122,7 @@ Scenario: GraphQL client wants to update a proposal form
             "displayedOnMap": true,
             "geojson": ""
           }
-        ],
-        "questions": []
+        ]
       }
     }
   }
@@ -178,8 +168,7 @@ Scenario: GraphQL client wants to update a proposal form
               "name": "Politique"
             }
           ],
-          "districts": @wildcard@,
-          "questions": []
+          "districts": @wildcard@
         }
       }
     }

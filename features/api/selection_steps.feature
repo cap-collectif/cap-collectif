@@ -219,14 +219,14 @@ Scenario: Admin API client wants add, then delete a selection
   When I send a POST request to "/api/selection_steps/selectionstep1/selections" with json:
   """
   {
-    "proposal": 8
+    "proposal": "proposal8"
   }
   """
   Then the JSON response status code should be 201
-  And proposal "8" should be selected in selection step "selectionstep1"
+  And proposal "proposal8" should be selected in selection step "selectionstep1"
   When I send a DELETE request to "/api/selection_steps/selectionstep1/selections/8"
   Then the JSON response status code should be 204
-  And proposal "8" should not be selected in selection step "selectionstep1"
+  And proposal "proposal8" should not be selected in selection step "selectionstep1"
 
 @database
 Scenario: Admin API client wants to update proposal status
@@ -238,7 +238,7 @@ Scenario: Admin API client wants to update proposal status
   }
   """
   Then the JSON response status code should be 204
-  And selection "selectionstep1" 3 should have status 1
+  And selection "selectionstep1" "proposal3" should have status 1
   And 1 mail should be sent
   And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
@@ -249,4 +249,4 @@ Scenario: Admin API client wants to update proposal status
   }
   """
   Then the JSON response status code should be 204
-  And selection "selectionstep1" 3 should have no status
+  And selection "selectionstep1" "proposal3" should have no status
