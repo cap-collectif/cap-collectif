@@ -40,11 +40,9 @@ const ProposalPreview = React.createClass({
               showNullEstimation={voteType === VOTE_TYPE_BUDGET}
               showThemes={showThemes}
             />
-            {step.id === proposal.votableStepId && (
             <div className="proposal__buttons text-center">
-               <ProposalPreviewVote proposal={proposal} />
+              {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
             </div>
-            )}
             {step.voteThreshold > 0 && (
               <div style={{ marginTop: '20px' }}>
                 <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
