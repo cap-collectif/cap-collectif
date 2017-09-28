@@ -19,7 +19,6 @@ const onSubmit = values => {
   });
 };
 
-
 export const ProposalFormCreateButton = React.createClass({
   getInitialState() {
     return { showModal: false };
@@ -86,5 +85,5 @@ export const ProposalFormCreateButton = React.createClass({
 export default reduxForm({
   onSubmit,
   validate,
-  form: formName
+  form: formName,
 })(ProposalFormCreateButton);

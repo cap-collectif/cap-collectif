@@ -18,15 +18,16 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
     const { intl, proposalForm } = this.props;
     return (
       <div>
-        {proposalForm.url !== '' ? <p style={{ marginTop: 30, marginBottom: 30 }}>
-          <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a>
-        </p>
-        :
+        {proposalForm.url !== '' ? (
+          <p style={{ marginTop: 30, marginBottom: 30 }}>
+            <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a>
+          </p>
+        ) : (
           <p style={{ marginTop: 30, marginBottom: 30 }}>
             <strong>Permalien indisponible </strong>
             (Ce formulaire de dépôt n'est pas encore relié à un projet participatif)
           </p>
-        }
+        )}
         <Tabs defaultActiveKey={2} id="proposal-form-admin-page-tabs">
           <Tab
             eventKey={1}

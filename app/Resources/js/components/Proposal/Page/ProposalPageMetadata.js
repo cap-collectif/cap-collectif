@@ -54,10 +54,11 @@ export const ProposalPageMetadata = React.createClass({
                   <i className="cap cap-tag-1-1 icon--blue" />
                   {proposal.reference}
                 </div>
+              </div>
+              )}
             </div>
           )}
-      </div>)}
-    </div>
+      </div>
     );
   },
 });
