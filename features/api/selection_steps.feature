@@ -42,16 +42,16 @@ Scenario: Anonymous API client wants to get a step
 Scenario: Logged in API client wants to get all proposals from a selection step
   Given I am logged in to api as user
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search" with json:
-    """
-    {
-    }
-    """
+  """
+  {
+  }
+  """
   Then the JSON response should match:
   """
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -99,16 +99,16 @@ Scenario: Logged in API client wants to get all proposals from a selection step
 @elasticsearch
 Scenario: Anonymous API client wants to get all proposals from a selection step
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search" with json:
-    """
-    {
-    }
-    """
+  """
+  {
+  }
+  """
   Then the JSON response should match:
   """
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",

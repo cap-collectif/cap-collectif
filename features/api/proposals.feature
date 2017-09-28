@@ -979,9 +979,9 @@ Scenario: Logged in admin API client wants to add a proposal with fusion
   }
   """
   Then the JSON response status code should be 201
-  And proposal "proposal1" should be fusioned to proposal "proposal19"
-  And proposal "proposal2" should be fusioned to proposal "proposal19"
-  And proposal "proposal19" should have author "sfavot"
+  And proposal "proposal1" should be fusioned to the last inserted proposal
+  And proposal "proposal2" should be fusioned to the last inserted proposal
+  And the last inserted proposal should have author "sfavot"
 
 @database
 Scenario: Logged in API client wants to add a proposal (with nothing for not required response)

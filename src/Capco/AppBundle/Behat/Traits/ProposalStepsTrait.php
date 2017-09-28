@@ -499,22 +499,23 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then proposal :id should be fusioned to proposal :lastId
+     * @Then proposal :id should be fusioned to the last inserted proposal
      */
-    public function proposalShouldBeFusioned(string $id, string $lastId)
+    public function proposalShouldBeFusioned(string $id)
     {
+        $last = $this->getRepository('CapcoAppBundle:Proposal')->findOneBy([], ['createdAt' => 'DESC']);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
         expect($proposal->getParentConnections()->count())->toBe(1);
-        expect($proposal->getParentConnections()->first()->getId())->toBe($lastId);
+        expect($proposal->getParentConnections()->first()->getId())->toBe($last->getId());
     }
 
     /**
-     * @Then proposal :id should have author :username
+     * @Then the last inserted proposal should have author :username
      */
-    public function proposalShouldHaveAuthor(string $id, string $username)
+    public function proposalShouldHaveAuthor(string $username)
     {
-        $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($id);
-        expect($proposal->getAuthor()->getUsername())->toBe($username);
+        $lastProposal = $this->getRepository('CapcoAppBundle:Proposal')->findOneBy([], ['createdAt' => 'DESC']);
+        expect($lastProposal->getAuthor()->getUsername())->toBe($username);
     }
 
     /**
