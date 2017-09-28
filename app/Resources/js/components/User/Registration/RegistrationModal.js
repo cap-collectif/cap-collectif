@@ -71,12 +71,9 @@ export const RegistrationModal = React.createClass({
 });
 
 const mapStateToProps = (state: State) => ({
-  textTop: state.user.registration_form.topTextDisplayed
-    ? state.user.registration_form.topText
-    : null,
-  textBottom: state.user.registration_form.bottomTextDisplayed
-    ? state.user.registration_form.bottomText
-    : null,
+  textTop: state.user.registration_form.topTextDisplayed && state.user.registration_form.topText,
+  textBottom:
+    state.user.registration_form.bottomTextDisplayed && state.user.registration_form.bottomText,
   show: state.user.showRegistrationModal,
   submitting: isSubmitting(form)(state),
 });

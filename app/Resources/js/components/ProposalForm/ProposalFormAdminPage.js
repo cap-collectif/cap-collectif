@@ -37,7 +37,7 @@ export class ProposalFormAdminPage extends Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalFormAdminPageQuery($id: Int!) {
+            query ProposalFormAdminPageQuery($id: ID!) {
               proposalForm(id: $id) {
                 ...ProposalFormAdminPageTabs_proposalForm
               }
