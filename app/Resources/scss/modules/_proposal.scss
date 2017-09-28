@@ -131,7 +131,6 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
          .cap {
              font-size: 22px;
-             margin: 0 5px 0 3px;
          }
      }
 
@@ -396,19 +395,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 }
 
-.proposal__private-excerpt {
-    color: $brand-warning;
-    margin-top: 25px;
-}
-
-.proposal__private-field {
-    background-color: $main-bg;
-    border: 1px solid $brand-warning;
-    padding: 12px 15px 15px;
-
-    h2, h4 {
-        margin-top: 0;
-    }
+.proposal__private-field h2 {
+    margin-top: 0;
 }
 
 .consultation__header__title {
@@ -476,54 +464,4 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
 .proposal__content .block:first-child > h3  {
     margin-top: 0;
-}
-
-#proposal-form {
-    font-size: 14px;
-
-    input, textarea, select, .ql-container {
-        background-color: $main-field-bg;
-        border-color: $main-border-color;
-        font-size: 14px;
-    }
-
-    .control-label.h5 {
-        margin-bottom: 5px;
-    }
-
-    #PlacesAutocomplete__autocomplete-container {
-        border: 1px solid $main-border-color;
-        border-radius: 0 0 5px 5px;
-        color: $field-font-color;
-
-        .places-autocomplete {
-            padding: 5px 9px;
-
-            &:hover {
-                background-color: $autocomplete-hover-bg;
-            }
-
-            strong {
-                font-weight: 500;
-            }
-        }
-    }
-
-    #PlacesAutocomplete__root {
-        input {
-            padding-left: 30px;
-        }
-    }
-
-    .places-autocomplete__field {
-        position: relative;
-    }
-
-    .places-autocomplete__icon {
-        width: 30px;
-        text-align: center;
-        position: absolute;
-        top: 8px;
-        left: 4px;
-    }
 }

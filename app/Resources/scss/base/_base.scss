@@ -723,9 +723,10 @@ svg.avatar {
 .image-uploader__dropzone {
     width: 200px;
     height: 200px;
-    margin-top: 5px;
-    border: 2px dashed $main-border-color;
-    background-color: $main-field-bg;
+    margin-top: 20px;
+    border-color: #666;
+    border-style: dashed;
+    border-width: 2px;
     border-radius: 5px;
 }
 
@@ -740,14 +741,14 @@ svg.avatar {
         height: 1.2em;
         text-align: right;
         content: "";
-    }
-
-    p {
-        margin-bottom: 5px;
-    }
+  }
 }
 
 .image-uploader__dropzone {
+    height: 200px;
+    margin-top: 20px;
+    border: 2px dashed #666;
+    border-radius: 5px;
     cursor: pointer;
 
     &-label {
