@@ -6,6 +6,7 @@ imports:
     - { resource: services/validators.yml }
     - { resource: services/forms.yml }
     - { resource: services/processors.yml }
+    - { resource: services/utils.yml }
 
 parameters:
   traits:
