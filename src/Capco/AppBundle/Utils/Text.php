@@ -11,7 +11,7 @@ final class Text
 
     public static function htmlToString($str): string
     {
-        $str = html_entity_decode($str, ENT_QUOTES);
+        $str = html_entity_decode(strip_tags($str), ENT_QUOTES);
 
         return iconv('UTF-8', 'UTF-8//IGNORE', $str);
     }
