@@ -7,11 +7,14 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
   <div
     className="box-header"
   >
-    <h4
+    <h3
       className="box-title"
     >
-      Général
-    </h4>
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
+    </h3>
     <a
       className="pull-right link"
       href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
@@ -24,63 +27,68 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
        Aide
     </a>
   </div>
-  <form
-    onSubmit={[Function]}
+  <div
+    className="box-content box-content__notation-form"
   >
-    <div>
-      <Field
-        addonAfter={
-          <Glyphicon
-            bsClass="glyphicon"
-            glyph="euro"
-          />
-        }
-        component={[Function]}
-        id="proposal_estimation"
-        label={
-          <FormattedMessage
-            id="proposal.estimation"
-            values={Object {}}
-          />
-        }
-        name="estimation"
-        type="number"
-      />
-      <Field
-        clearable={false}
-        component={[Function]}
-        id="likers"
-        inputClassName="fake-inputClassName"
-        label="Coup(s) de coeur"
-        labelClassName="control-label"
-        loadOptions={[Function]}
-        multi={true}
-        name="likers"
-        placeholder="Sélectionnez un coup de coeur"
-      />
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        style={
-          Object {
-            "marginBottom": 10,
+    <form
+      onSubmit={[Function]}
+    >
+      <div>
+        <Field
+          addonAfter={
+            <Glyphicon
+              bsClass="glyphicon"
+              glyph="euro"
+            />
           }
-        }
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          type="submit"
+          component={[Function]}
+          id="proposal_estimation"
+          label={
+            <FormattedMessage
+              id="proposal.estimation"
+              values={Object {}}
+            />
+          }
+          name="estimation"
+          type="number"
+        />
+        <Field
+          clearable={false}
+          component={[Function]}
+          id="likers"
+          inputClassName="fake-inputClassName"
+          label="Coup(s) de coeur"
+          labelClassName="control-label"
+          loadOptions={[Function]}
+          multi={true}
+          name="likers"
+          placeholder="Sélectionnez un coup de coeur"
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+          className="box-content__toolbar"
+          style={
+            Object {
+              "marginBottom": 10,
+            }
+          }
         >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </div>
-  </form>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            type="submit"
+          >
+            <FormattedMessage
+              id="global.save"
+              values={Object {}}
+            />
+          </Button>
+        </ButtonToolbar>
+      </div>
+    </form>
+  </div>
 </div>
 `;

@@ -136,6 +136,22 @@ const ImageUpload = React.createClass({
       classes[className] = true;
     }
 
+    const dropzoneTextForFile = (
+      <div>
+        <FormattedMessage id="global.image_uploader.file.dropzone" />
+        <br />
+        <FormattedMessage id="global.or" />
+      </div>
+    );
+
+    const dropzoneTextForImage = (
+      <div>
+        <FormattedMessage id="global.image_uploader.image.dropzone" />
+        <br />
+        <FormattedMessage id="global.or" />
+      </div>
+    );
+
     return (
       <Row id={id} className={classNames(classes)}>
         <Col xs={12} sm={12}>
@@ -151,11 +167,7 @@ const ImageUpload = React.createClass({
             disablePreview={disablePreview}
             className="image-uploader__dropzone--fullwidth">
             <div className="image-uploader__dropzone-label">
-              {multiple ? (
-                <FormattedMessage id="global.image_uploader.file.dropzone" />
-              ) : (
-                <FormattedMessage id="global.image_uploader.image.dropzone" />
-              )}
+              {multiple ? dropzoneTextForFile : dropzoneTextForImage}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn">
                   {multiple ? (
@@ -173,7 +185,7 @@ const ImageUpload = React.createClass({
             <Row>
               {this.state.files.map(file => {
                 return (
-                  <Col md={12}>
+                  <Col md={12} className="image-uploader__label-info">
                     <Label bsStyle="info" style={{ marginRight: '5px' }}>
                       {file.name}{' '}
                       <i
@@ -194,7 +206,9 @@ const ImageUpload = React.createClass({
               {<FormattedMessage id="global.image_uploader.image.preview" />}
             </p>
             <div className="image-uploader__preview text-center">
-              {this.state.preview && <img alt="" src={this.state.preview} />}
+              {this.state.preview && (
+                <img alt="" src={this.state.preview} className="img-responsive" />
+              )}
             </div>
             {(this.state.preview || preview) && (
                 <Input

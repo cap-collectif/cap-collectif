@@ -7,23 +7,32 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <h4
-      className="h4"
+    <div
+      className="box-header"
     >
-      Aperçu
-    </h4>
-    <a
-      className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
-      rel="noopener noreferrer"
-      target="_blank"
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="proposal.admin.glimpse"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        className="pull-right link"
+        href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         Aide
+      </a>
+    </div>
+    <div
+      className="box-content box-content__content-form"
     >
-      <i
-        className="fa fa-info-circle"
-      />
-       Aide
-    </a>
-    <div>
       <Field
         component={[Function]}
         id="proposal_title"
@@ -113,11 +122,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         placeholder="proposal.map.form.placeholder"
         type="address"
       />
-      <h4
-        className="h4"
-      >
-        Présentation
-      </h4>
       <Field
         component={[Function]}
         id="proposal_body"
@@ -171,6 +175,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       />
       <ButtonToolbar
         bsClass="btn-toolbar"
+        className="box-content__toolbar"
         style={
           Object {
             "marginBottom": 10,
