@@ -73,7 +73,7 @@ class ProposalStepVotesResolver
         return $this->checkIntanceOfProposalVote($vote);
     }
 
-    public function getAmountSpentForVotes(array $votes)
+    public function getAmountSpentForVotes($votes): int
     {
         $spent = 0;
         foreach ($votes as $vote) {
