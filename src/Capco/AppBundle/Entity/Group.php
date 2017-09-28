@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,11 @@ class Group
         $this->userGroups = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
@@ -47,7 +53,7 @@ class Group
         return $this;
     }
 
-    public function getUserGroups(): ArrayCollection
+    public function getUserGroups(): Collection
     {
         return $this->userGroups;
     }

@@ -34,13 +34,4 @@ class GroupAdmin extends Admin
     {
         $collection->clearExcept(['list', 'edit']);
     }
-
-    //    public function getTemplate($name)
-//    {
-////        if ($name === 'delete') {
-////            return 'CapcoAdminBundle:User:delete.html.twig';
-////        }
-//
-//        return parent::getTemplate($name);
-//    }
 }

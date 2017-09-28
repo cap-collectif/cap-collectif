@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="user_in_group")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserGroupRepository")
  * @Assert\UniqueEntity(
  *   fields={"user", "group"},
  *   errorPath="user",

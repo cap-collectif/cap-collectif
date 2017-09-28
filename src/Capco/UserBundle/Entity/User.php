@@ -250,9 +250,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     private $consentExternalCommunication = false;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\UserGroup", mappedBy="user",  cascade={"persist", "remove"})
-     */
     private $userGroups;
 
     public function __construct($encoder = null)

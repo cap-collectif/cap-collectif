@@ -1,0 +1,17 @@
+Group:
+    type: object
+    config:
+        description: "A list of groups"
+        fields:
+            id:
+                type: "String!"
+                description: "The content of the group."
+            title:
+                type: "String!"
+                description: "Identifies the group name."
+            description:
+                type: "HTML!"
+                description: "Identifies the description of the group."
+            userGroups:
+              type: "[UserGroup!]!"
+#              resolve: "@=resolver('group_user_group', [value])"
