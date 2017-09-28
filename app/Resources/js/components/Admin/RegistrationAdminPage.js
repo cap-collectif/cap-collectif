@@ -133,11 +133,11 @@ export const RegistrationAdminPage = React.createClass({
             disabled={!isSuperAdmin}
             style={{ marginBottom: 10 }}
             onClick={
-              !isSuperAdmin ? null : (
-                () => {
-                  addNewField();
-                }
-              )
+              !isSuperAdmin
+                ? null
+                : () => {
+                    addNewField();
+                  }
             }>
             Ajouter
           </Button>

@@ -65,17 +65,17 @@ export class IdeaVoteForm extends React.Component<Props> {
         ) : null}
 
         {idea.commentable &&
-        !isPrivate &&
-        (anonymous || !this.userHasVote()) && (
-          <Field
-            id="idea-vote-comment"
-            type="textarea"
-            name="comment"
-            component={renderComponent}
-            label={<FormattedMessage id="idea.vote.form.comment" />}
-            placeholder="idea.vote.form.comment_placeholder"
-          />
-        )}
+          !isPrivate &&
+          (anonymous || !this.userHasVote()) && (
+            <Field
+              id="idea-vote-comment"
+              type="textarea"
+              name="comment"
+              component={renderComponent}
+              label={<FormattedMessage id="idea.vote.form.comment" />}
+              placeholder="idea.vote.form.comment_placeholder"
+            />
+          )}
 
         {hasCommentValue || (!anonymous && this.userHasVote()) ? null : (
           <Field

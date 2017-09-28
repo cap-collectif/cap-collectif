@@ -34,6 +34,7 @@ class ProposalCollectVoteRepository extends EntityRepository
               ->andWhere('pv.collectStep = :id')
               ->andWhere('pv.user = :user')
               ->leftJoin('pv.proposal', 'proposal')
+              ->andWhere('proposal.deletedAt IS NULL')
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;

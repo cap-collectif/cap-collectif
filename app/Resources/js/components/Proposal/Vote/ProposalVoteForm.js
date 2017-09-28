@@ -47,25 +47,25 @@ const ProposalVoteForm = React.createClass({
           </Alert>
         )}
         {anonymous &&
-        voteWithoutAccount && (
-          <Field
-            type="text"
-            component={renderComponent}
-            name="username"
-            id="proposal-vote__username"
-            label={<FormattedMessage id="proposal.vote.form.username" />}
-          />
-        )}
+          voteWithoutAccount && (
+            <Field
+              type="text"
+              component={renderComponent}
+              name="username"
+              id="proposal-vote__username"
+              label={<FormattedMessage id="proposal.vote.form.username" />}
+            />
+          )}
         {anonymous &&
-        voteWithoutAccount && (
-          <Field
-            type="email"
-            component={renderComponent}
-            name="email"
-            id="proposal-vote__email"
-            label={<FormattedMessage id="proposal.vote.form.email" />}
-          />
-        )}
+          voteWithoutAccount && (
+            <Field
+              type="email"
+              component={renderComponent}
+              name="email"
+              id="proposal-vote__email"
+              label={<FormattedMessage id="proposal.vote.form.email" />}
+            />
+          )}
         {comment.length > 0 && (voteWithoutAccount || !anonymous) ? null : (
           <Field
             type="checkbox"
@@ -77,21 +77,21 @@ const ProposalVoteForm = React.createClass({
           />
         )}
         {!isPrivate &&
-        (!voteWithoutAccount || anonymous) && (
-          <Field
-            type="textarea"
-            component={renderComponent}
-            name="comment"
-            id="proposal-vote__comment"
-            label={
-              <span style={{ fontWeight: 'normal' }}>
-                {<FormattedMessage id="proposal.vote.form.comment" />}
-                <span className="excerpt">{<FormattedMessage id="global.form.optional" />}</span>
-              </span>
-            }
-            placeholder="proposal.vote.form.comment_placeholder"
-          />
-        )}
+          (!voteWithoutAccount || anonymous) && (
+            <Field
+              type="textarea"
+              component={renderComponent}
+              name="comment"
+              id="proposal-vote__comment"
+              label={
+                <span style={{ fontWeight: 'normal' }}>
+                  {<FormattedMessage id="proposal.vote.form.comment" />}
+                  <span className="excerpt">{<FormattedMessage id="global.form.optional" />}</span>
+                </span>
+              }
+              placeholder="proposal.vote.form.comment_placeholder"
+            />
+          )}
       </form>
     );
   },

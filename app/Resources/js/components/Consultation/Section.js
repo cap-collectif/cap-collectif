@@ -20,10 +20,10 @@ export const Section = React.createClass({
         <br />
         {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
         {(section.contributionsCount > 0 || section.contribuable) && (
-          <div style={{ marginTop: 15 }}>
-            <OpinionList consultation={consultation} section={section} />
-          </div>
-        )}
+            <div style={{ marginTop: 15 }}>
+              <OpinionList consultation={consultation} section={section} />
+            </div>
+          )}
       </div>
     );
   },

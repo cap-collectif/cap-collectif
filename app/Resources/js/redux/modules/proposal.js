@@ -19,7 +19,7 @@ type ChangeFilterAction = {
 type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 type SubmitFusionFormAction = {
   type: 'proposal/SUBMIT_FUSION_FORM',
-  proposalForm: number,
+  proposalForm: Uuid,
 };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -192,7 +192,7 @@ export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
 export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 });
-export const submitFusionForm = (proposalForm: number): SubmitFusionFormAction => ({
+export const submitFusionForm = (proposalForm: Uuid): SubmitFusionFormAction => ({
   type: 'proposal/SUBMIT_FUSION_FORM',
   proposalForm,
 });

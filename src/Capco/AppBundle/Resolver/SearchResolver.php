@@ -80,7 +80,7 @@ class SearchResolver
         $query->setFrom($from);
         $query->setSize($resultsPerPage);
 
-        if ($type && $type !== 'all') {
+        if ($type && 'all' !== $type) {
             $resultSet = $this->index->getType($type)->search($query);
         } else {
             $resultSet = $this->index->search($query);
@@ -175,7 +175,7 @@ class SearchResolver
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
         }
-        if (array_key_exists('proposalForm', $providedFilters)) {
+        if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
         if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
@@ -184,16 +184,16 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (isset($providedFilters['districts']) && (int) $providedFilters['districts'] !== 0) {
+        if (isset($providedFilters['districts'])) {
             $filters['district.id'] = $providedFilters['districts'];
         }
-        if (isset($providedFilters['themes']) && (int) $providedFilters['themes'] !== 0) {
+        if (isset($providedFilters['themes'])) {
             $filters['theme.id'] = $providedFilters['themes'];
         }
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
             $filters['author.user_type.id'] = $providedFilters['types'];
         }
-        if (isset($providedFilters['categories']) && (int) $providedFilters['categories'] !== 0) {
+        if (isset($providedFilters['categories'])) {
             $filters['category.id'] = $providedFilters['categories'];
         }
         if (array_key_exists('authorUniqueId', $providedFilters)) {
@@ -210,7 +210,7 @@ class SearchResolver
             $filters,
             false,
             $pagination,
-            $order === 'random'
+            'random' === $order
         );
 
         return [
@@ -290,7 +290,7 @@ class SearchResolver
         return [
             $sort => [
                 'order' => $order,
-                'missing' => $order === 'desc' ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
+                'missing' => 'desc' === $order ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
             ],
         ];
     }

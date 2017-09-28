@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,9 +14,7 @@ class QuestionnaireAbstractQuestionType extends AbstractType
     {
         $builder
             ->add('position', IntegerType::class)
-            ->add('question', EntityType::class, [
-                'class' => AbstractQuestion::class,
-            ])
+            ->add('question', SimpleQuestionType::class)
         ;
     }
 

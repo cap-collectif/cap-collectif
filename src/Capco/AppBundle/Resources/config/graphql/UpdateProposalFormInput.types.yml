@@ -4,7 +4,7 @@ UpdateProposalFormInput:
         description: ""
         fields:
             proposalFormId:
-                type: "Int!"
+                type: "ID!"
             description:
                 type: "String"
             summaryHelpText:
@@ -49,3 +49,5 @@ UpdateProposalFormInput:
                 type: "[ProposalCategoryInput!]"
             districts:
                 type: "[DistrictInput!]"
+            questions:
+                type: "[QuestionnaireAbstractQuestionInput!]"

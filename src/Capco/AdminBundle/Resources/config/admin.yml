@@ -124,6 +124,8 @@ services:
     calls:
       - [ setTranslationDomain, [SonataAdminBundle]]
       - [ setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
+      - [ setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
+
 
   capco_admin.admin.question:
     class: Capco\AdminBundle\Admin\QuestionAdmin
