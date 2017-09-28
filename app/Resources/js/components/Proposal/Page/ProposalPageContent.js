@@ -74,7 +74,7 @@ export const ProposalPageContent = React.createClass({
                   lat: address[0].geometry.location.lat,
                   lng: address[0].geometry.location.lng,
                 }}
-                zoom={13}
+                zoom={16}
                 maxZoom={18}
                 style={{
                   width: '100%',
