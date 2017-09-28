@@ -345,9 +345,8 @@ export const ProposalForm = React.createClass({
     );
 
     const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
-      <div>
-        <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
-        <small>{formattedSuggestion.secondaryText}</small>
+      <div className="places-autocomplete">
+        <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
       </div>
     );
     return (
@@ -463,6 +462,64 @@ export const ProposalForm = React.createClass({
               })}
             </Input>
           )}
+        {form.usingAddress && (
+          <div
+            className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>
+            <label className="control-label h5" htmlFor="proposal_address">
+              <FormattedMessage id="proposal.map.form.field" />
+            </label>
+            {form.addressHelpText && <span className="help-block">{form.addressHelpText}</span>}
+            <div className="places-autocomplete__field">
+              <div className="places-autocomplete__icon">
+                <i className="cap cap-magnifier" />
+              </div>
+              <PlacesAutocomplete
+                inputProps={{
+                  onChange: address => {
+                    this.setState(prevState => ({ ...prevState, address }));
+                  },
+                  placeholder: intl.formatMessage({
+                    id: 'proposal.map.form.placeholder',
+                  }),
+                  value: this.state.address,
+                  type: 'text',
+                  id: 'proposal_address',
+                }}
+                autocompleteItem={autocompleteItem}
+                onEnterKeyDown={this.handleAddressChange}
+                onSelect={this.handleAddressChange}
+                onError={() => {
+                  this.resetAddressField();
+                }}
+                classNames={{
+                  root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
+                  input: 'form-control',
+                  autocompleteContainer: {
+                    zIndex: 9999,
+                    position: 'absolute',
+                    top: '100%',
+                    backgroundColor: 'white',
+                    border: '1px solid #555555',
+                    width: '100%',
+                  },
+                  autocompleteItem: {
+                    zIndex: 9999,
+                    backgroundColor: '#ffffff',
+                    padding: '10px',
+                    color: '#555555',
+                    cursor: 'pointer',
+                  },
+                  autocompleteItemActive: {
+                    zIndex: 9999,
+                    backgroundColor: '#fafafa',
+                  },
+                }}
+              />
+            </div>
+
+            {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
+          </div>
+        )}
         {features.districts &&
           form.usingDistrict &&
           form.districts.length > 0 && (
@@ -484,58 +541,6 @@ export const ProposalForm = React.createClass({
               ))}
             </Input>
           )}
-        {form.usingAddress && (
-          <div
-            className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>
-            <label className="control-label h5" htmlFor="proposal_address">
-              <FormattedMessage id="proposal.map.form.field" />
-            </label>
-            {form.addressHelpText && <span className="help-block">{form.addressHelpText}</span>}
-            <PlacesAutocomplete
-              inputProps={{
-                onChange: address => {
-                  this.setState(prevState => ({ ...prevState, address }));
-                },
-                placeholder: intl.formatMessage({
-                  id: 'proposal.map.form.placeholder',
-                }),
-                value: this.state.address,
-                type: 'text',
-                id: 'proposal_address',
-              }}
-              autocompleteItem={autocompleteItem}
-              onEnterKeyDown={this.handleAddressChange}
-              onSelect={this.handleAddressChange}
-              onError={() => {
-                this.resetAddressField();
-              }}
-              classNames={{
-                root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
-                input: 'form-control',
-                autocompleteContainer: {
-                  zIndex: 9999,
-                  position: 'absolute',
-                  top: '100%',
-                  backgroundColor: 'white',
-                  border: '1px solid #555555',
-                  width: '100%',
-                },
-                autocompleteItem: {
-                  zIndex: 9999,
-                  backgroundColor: '#ffffff',
-                  padding: '10px',
-                  color: '#555555',
-                  cursor: 'pointer',
-                },
-                autocompleteItemActive: {
-                  zIndex: 9999,
-                  backgroundColor: '#fafafa',
-                },
-              }}
-            />
-            {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
-          </div>
-        )}
         <Input
           id="proposal_body"
           type="editor"
