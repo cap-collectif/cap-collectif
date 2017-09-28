@@ -136,11 +136,11 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           Array [
             Object {
               "id": "1",
-              "inputType": "text",
               "position": 0,
               "private": false,
               "required": true,
               "title": "title",
+              "type": "text",
             },
           ]
         }

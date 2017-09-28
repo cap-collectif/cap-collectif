@@ -15,6 +15,23 @@ class ProposalSelectionVoteRepository extends EntityRepository
 {
     use AnonymousVoteRepositoryTrait;
 
+    public function getVotesByStepAndUser(SelectionStep $step, User $user)
+    {
+        return $this->createQueryBuilder('pv')
+          ->select('pv', 'proposal')
+          ->andWhere('pv.selectionStep = :step')
+          ->andWhere('pv.user = :user')
+          ->andWhere('pv.expired = 0')
+          ->leftJoin('pv.proposal', 'proposal')
+          ->andWhere('proposal.id IS NOT NULL')
+          ->andWhere('proposal.deletedAt IS NULL')
+          ->setParameter('user', $user)
+          ->setParameter('step', $step)
+          ->getQuery()
+          ->getResult()
+        ;
+    }
+
     public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
     {
         $userVotes = [];
@@ -26,6 +43,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
               ->andWhere('pv.user = :user')
               ->andWhere('pv.expired = 0')
               ->leftJoin('pv.proposal', 'proposal')
+              ->andWhere('proposal.deletedAt IS NULL')
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;

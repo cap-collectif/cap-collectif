@@ -8,11 +8,17 @@ import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import CreateProposalFormMutation from '../../mutations/CreateProposalFormMutation';
 
+const formName = 'proposal-form-admin-create';
+const validate = () => {
+  return {};
+};
+
 const onSubmit = values => {
   return CreateProposalFormMutation.commit({ input: values }).then(() => {
     window.location.reload();
   });
 };
+
 
 export const ProposalFormCreateButton = React.createClass({
   getInitialState() {
@@ -20,7 +26,7 @@ export const ProposalFormCreateButton = React.createClass({
   },
 
   render() {
-    const { submitting, handleSubmit } = this.props;
+    const { submitting, handleSubmit, submit } = this.props;
     const { showModal } = this.state;
     return (
       <div>
@@ -31,7 +37,7 @@ export const ProposalFormCreateButton = React.createClass({
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id="proposal.add_proposalform" />
+          <FormattedMessage id="proposal_form.create" />
         </Button>
         <Modal
           animation={false}
@@ -43,7 +49,7 @@ export const ProposalFormCreateButton = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="proposal.add_proposalform" />
+              <FormattedMessage id="proposal_form.create.title" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -66,7 +72,9 @@ export const ProposalFormCreateButton = React.createClass({
             <SubmitButton
               id="confirm-proposalform-create"
               isSubmitting={submitting}
-              // onSubmit={() => ()}
+              onSubmit={() => {
+                submit(formName);
+              }}
             />
           </Modal.Footer>
         </Modal>
@@ -75,4 +83,8 @@ export const ProposalFormCreateButton = React.createClass({
   },
 });
 
-export default reduxForm({ onSubmit })(ProposalFormCreateButton);
+export default reduxForm({
+  onSubmit,
+  validate,
+  form: formName
+})(ProposalFormCreateButton);
