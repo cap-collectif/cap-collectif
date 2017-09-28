@@ -182,7 +182,9 @@ type CollectStep implements Step {
 }
 
 # A consultation
-type Consultation {
+type Consultation implements Step {
+  kind: String!
+
   # The id of the consultation.
   id: ID!
 
@@ -672,7 +674,7 @@ input ProposalCategoryInput {
 
 # A budget form
 type ProposalForm {
-  id: String!
+  id: ID!
   description: String
   summaryHelpText: String
   illustrationHelpText: String
@@ -765,7 +767,7 @@ type Query {
   ): [Opinion]
   section(id: ID!): Section
   proposal(id: ID!): Proposal!
-  proposalForm(id: Int!): ProposalForm!
+  proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
 }
 

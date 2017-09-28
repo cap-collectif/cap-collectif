@@ -4,6 +4,9 @@ Consultation:
         interfaces: [Step]
         description: "A consultation"
         fields:
+            kind:
+                type: "String!"
+                resolve: "consultation"
             id:
                 type: "ID!"
                 description: "The id of the consultation."
