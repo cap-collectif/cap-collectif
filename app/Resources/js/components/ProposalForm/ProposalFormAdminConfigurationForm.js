@@ -129,13 +129,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ...values,
     id: undefined,
     proposalFormId: props.proposalForm.id,
-    districts: values.districts.map(district => ({ ...district, id: undefined })),
-    categories: values.categories.map(category => ({ ...category, id: undefined })),
-    questions: values.questions.map(question => ({
-      position: question.position,
-      question: { ...question, id: undefined, position: undefined },
-    })),
+    districts: values.districts.map(d => ({ ...d, id: undefined })),
+    categories: values.categories.map(d => ({ ...d, id: undefined })),
   };
+  delete input.customFields;
   return UpdateProposalFormMutation.commit({ input }).then(() => {
     location.reload();
   });
@@ -364,7 +361,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               className="box-title">
               Champs personnalisés
             </h3>
-            <FieldArray name="questions" component={ProposalFormAdminQuestions} />
+            <FieldArray name="customFields" component={ProposalFormAdminQuestions} />
           </div>
           <ButtonToolbar style={{ marginBottom: 10 }}>
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
@@ -434,14 +431,13 @@ export default createFragmentContainer(
         id
         name
       }
-      questions {
+      customFields {
         id
         title
         helpText
-        type
+        inputType
         private
         required
-        position
       }
     }
   `,

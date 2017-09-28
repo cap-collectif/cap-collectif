@@ -42,16 +42,16 @@ Scenario: Anonymous API client wants to get a step
 Scenario: Logged in API client wants to get all proposals from a selection step
   Given I am logged in to api as user
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search" with json:
-    """
-    {
-    }
-    """
+  """
+  {
+  }
+  """
   Then the JSON response should match:
   """
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -99,16 +99,16 @@ Scenario: Logged in API client wants to get all proposals from a selection step
 @elasticsearch
 Scenario: Anonymous API client wants to get all proposals from a selection step
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search" with json:
-    """
-    {
-    }
-    """
+  """
+  {
+  }
+  """
   Then the JSON response should match:
   """
   {
     "proposals": [
       {
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -219,34 +219,34 @@ Scenario: Admin API client wants add, then delete a selection
   When I send a POST request to "/api/selection_steps/selectionstep1/selections" with json:
   """
   {
-    "proposal": 8
+    "proposal": "proposal8"
   }
   """
   Then the JSON response status code should be 201
-  And proposal "8" should be selected in selection step "selectionstep1"
-  When I send a DELETE request to "/api/selection_steps/selectionstep1/selections/8"
+  And proposal "proposal8" should be selected in selection step "selectionstep1"
+  When I send a DELETE request to "/api/selection_steps/selectionstep1/selections/proposal8"
   Then the JSON response status code should be 204
-  And proposal "8" should not be selected in selection step "selectionstep1"
+  And proposal "proposal8" should not be selected in selection step "selectionstep1"
 
 @database
 Scenario: Admin API client wants to update proposal status
   Given I am logged in to api as admin
-  When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/3" with json:
+  When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/proposal3" with json:
   """
   {
     "status": 1
   }
   """
   Then the JSON response status code should be 204
-  And selection "selectionstep1" 3 should have status 1
+  And selection "selectionstep1" "proposal3" should have status 1
   And 1 mail should be sent
   And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
-  When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/3" with json:
+  When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/proposal3" with json:
   """
   {
     "status": null
   }
   """
   Then the JSON response status code should be 204
-  And selection "selectionstep1" 3 should have no status
+  And selection "selectionstep1" "proposal3" should have no status
