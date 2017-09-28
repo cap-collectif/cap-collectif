@@ -23,7 +23,7 @@ export const ProposalCreateFusionButton = React.createClass({
     open: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
-    proposalFormId: PropTypes.string,
+    proposalFormId: PropTypes.number,
   },
 
   getInitialState() {

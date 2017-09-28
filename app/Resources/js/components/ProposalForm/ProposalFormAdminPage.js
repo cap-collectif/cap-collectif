@@ -5,9 +5,8 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalFormAdminPageTabs from './ProposalFormAdminPageTabs';
 import Loader from '../Utils/Loader';
 import type { ProposalFormAdminPageQueryResponse } from './__generated__/ProposalFormAdminPageQuery.graphql';
-import type { Uuid } from '../../types';
 
-type Props = { proposalFormId: Uuid };
+type Props = { proposalFormId: number };
 
 const component = ({
   error,
@@ -37,7 +36,7 @@ export class ProposalFormAdminPage extends Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalFormAdminPageQuery($id: ID!) {
+            query ProposalFormAdminPageQuery($id: Int!) {
               proposalForm(id: $id) {
                 ...ProposalFormAdminPageTabs_proposalForm
               }

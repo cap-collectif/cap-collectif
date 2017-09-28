@@ -68,59 +68,59 @@ export const ProposalAdminForm = React.createClass({
           wrapperClassName="col-sm-10"
         />
         {proposalForm.usingCategories &&
-          proposalForm.categories.length > 0 && (
-            <Field
-              name="category"
-              id="proposal-admin-category"
-              clearable={!proposalForm.categoryMandatory}
-              label={
-                <span>
-                  {<FormattedMessage id="proposal.category" />}
-                  {!proposalForm.categoryMandatory && optional}
-                </span>
-              }
-              component={renderSelect}
-              placeholder="proposal.select.category"
-              options={proposalForm.categories.map(c => ({
-                value: c.id,
-                label: c.name,
-              }))}
-            />
-          )}
+        proposalForm.categories.length > 0 && (
+          <Field
+            name="category"
+            id="proposal-admin-category"
+            clearable={!proposalForm.categoryMandatory}
+            label={
+              <span>
+                {<FormattedMessage id="proposal.category" />}
+                {!proposalForm.categoryMandatory && optional}
+              </span>
+            }
+            component={renderSelect}
+            placeholder="proposal.select.category"
+            options={proposalForm.categories.map(c => ({
+              value: c.id,
+              label: c.name,
+            }))}
+          />
+        )}
         {features.themes &&
-          proposalForm.usingThemes && (
-            <Field
-              name="theme"
-              id="proposal-admin-theme"
-              placeholder="proposal.select.theme"
-              options={themes.map(t => ({ value: t.id, label: t.title }))}
-              component={renderSelect}
-              clearable={!proposalForm.themeMandatory}
-              label={
-                <span>
-                  {<FormattedMessage id="proposal.theme" />}
-                  {!proposalForm.themeMandatory && optional}
-                </span>
-              }
-            />
-          )}
+        proposalForm.usingThemes && (
+          <Field
+            name="theme"
+            id="proposal-admin-theme"
+            placeholder="proposal.select.theme"
+            options={themes.map(t => ({ value: t.id, label: t.title }))}
+            component={renderSelect}
+            clearable={!proposalForm.themeMandatory}
+            label={
+              <span>
+                {<FormattedMessage id="proposal.theme" />}
+                {!proposalForm.themeMandatory && optional}
+              </span>
+            }
+          />
+        )}
         {features.districts &&
-          proposalForm.usingDistrict && (
-            <Field
-              name="district"
-              id="proposal-admin-district"
-              placeholder="proposal.select.district"
-              component={renderSelect}
-              clearable={!proposalForm.districtMandatory}
-              label={
-                <span>
-                  {<FormattedMessage id="proposal.district" />}
-                  {!proposalForm.districtMandatory && optional}
-                </span>
-              }
-              options={proposalForm.districts.map(d => ({ value: d.id, label: d.name }))}
-            />
-          )}
+        proposalForm.usingDistrict && (
+          <Field
+            name="district"
+            id="proposal-admin-district"
+            placeholder="proposal.select.district"
+            component={renderSelect}
+            clearable={!proposalForm.districtMandatory}
+            label={
+              <span>
+                {<FormattedMessage id="proposal.district" />}
+                {!proposalForm.districtMandatory && optional}
+              </span>
+            }
+            options={proposalForm.districts.map(d => ({ value: d.id, label: d.name }))}
+          />
+        )}
         {proposalForm.fields.map((field, index) => (
           <Field
             key={index}

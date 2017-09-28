@@ -60,39 +60,39 @@ const ProposalVoteBox = React.createClass({
     return (
       <div className={className}>
         {!user &&
-          step.open && (
-            <div>
-              <p className="text-center small" style={{ fontWeight: 'bold' }}>
-                {features.vote_without_account ? (
-                  <FormattedMessage id="proposal.vote.authenticated" />
-                ) : (
-                  'Veuillez vous authentifier pour voter'
-                )}
-              </p>
-              <Row>
-                <Col xs={12} sm={6}>
-                  <RegistrationButton className="btn-block" buttonStyle={{ margin: '0' }} />
-                </Col>
-                <Col xs={12} sm={6}>
-                  <LoginButton className="btn-darkest-gray btn-block btn--connection" />
-                </Col>
-              </Row>
-              {features.vote_without_account && (
-                <p className="excerpt p--lined">
-                  <span>{<FormattedMessage id="global.or" />}</span>
-                </p>
+        step.open && (
+          <div>
+            <p className="text-center small" style={{ fontWeight: 'bold' }}>
+              {features.vote_without_account ? (
+                <FormattedMessage id="proposal.vote.authenticated" />
+              ) : (
+                'Veuillez vous authentifier pour voter'
               )}
-            </div>
-          )}
-        {!user &&
-          features.vote_without_account && (
-            <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
-              {<FormattedMessage id="proposal.vote.non_authenticated" />}
             </p>
-          )}
+            <Row>
+              <Col xs={12} sm={6}>
+                <RegistrationButton className="btn-block" buttonStyle={{ margin: '0' }} />
+              </Col>
+              <Col xs={12} sm={6}>
+                <LoginButton className="btn-darkest-gray btn-block btn--connection" />
+              </Col>
+            </Row>
+            {features.vote_without_account && (
+              <p className="excerpt p--lined">
+                <span>{<FormattedMessage id="global.or" />}</span>
+              </p>
+            )}
+          </div>
+        )}
+        {!user &&
+        features.vote_without_account && (
+          <p className="text-center small" style={{ marginBottom: '0', fontWeight: 'bold' }}>
+            {<FormattedMessage id="proposal.vote.non_authenticated" />}
+          </p>
+        )}
         <div className={formWrapperClassName}>
           {(user || features.vote_without_account) &&
-            this.displayForm() && <ProposalVoteForm proposal={proposal} step={step} />}
+          this.displayForm() && <ProposalVoteForm proposal={proposal} step={step} />}
           <ProposalVoteBoxMessage
             enoughCredits={this.userHasEnoughCredits()}
             submitting={isSubmitting}

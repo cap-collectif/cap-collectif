@@ -43,7 +43,7 @@ export class ProposalAdminNotationForm extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">Général</h3>
+          <h4 className="box-title">Général</h4>
           <a
             className="pull-right link"
             target="_blank"
@@ -52,53 +52,48 @@ export class ProposalAdminNotationForm extends Component<Props> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <div className="box-content">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <Field
-                name="estimation"
-                component={component}
-                type="number"
-                id="proposal_estimation"
-                addonAfter={<Glyphicon glyph="euro" />}
-                label={<FormattedMessage id="proposal.estimation" />}
-              />
-              <Field
-                name="likers"
-                id="likers"
-                label="Coup(s) de coeur"
-                labelClassName="control-label"
-                inputClassName="fake-inputClassName"
-                multi
-                placeholder="Sélectionnez un coup de coeur"
-                component={select}
-                clearable={false}
-                loadOptions={terms =>
-                  Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
-                    options: res.users
-                      .map(u => ({
+        <form onSubmit={handleSubmit}>
+          <div>
+            <Field
+              name="estimation"
+              component={component}
+              type="number"
+              id="proposal_estimation"
+              addonAfter={<Glyphicon glyph="euro" />}
+              label={<FormattedMessage id="proposal.estimation" />}
+            />
+            <Field
+              name="likers"
+              id="likers"
+              label="Coup(s) de coeur"
+              labelClassName="control-label"
+              inputClassName="fake-inputClassName"
+              multi
+              placeholder="Sélectionnez un coup de coeur"
+              component={select}
+              clearable={false}
+              loadOptions={terms =>
+                Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
+                  options: res.users
+                    .map(u => ({
+                      value: u.id,
+                      label: u.displayName,
+                    }))
+                    .concat(
+                      proposal.likers.map(u => ({
                         value: u.id,
                         label: u.displayName,
-                      }))
-                      .concat(
-                        proposal.likers.map(u => ({
-                          value: u.id,
-                          label: u.displayName,
-                        })),
-                      ),
-                  }))}
-              />
-              <ButtonToolbar style={{ marginBottom: 10 }}>
-                <Button
-                  disabled={invalid || pristine || submitting}
-                  type="submit"
-                  bsStyle="primary">
-                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-                </Button>
-              </ButtonToolbar>
-            </div>
-          </form>
-        </div>
+                      })),
+                    ),
+                }))}
+            />
+            <ButtonToolbar style={{ marginBottom: 10 }}>
+              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+              </Button>
+            </ButtonToolbar>
+          </div>
+        </form>
       </div>
     );
   }

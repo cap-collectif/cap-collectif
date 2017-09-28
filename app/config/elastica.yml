@@ -302,12 +302,6 @@ fos_elastica:
             address:
               type: string
               index: not_analyzed
-            proposalForm:
-              type: object
-              properties:
-                id:
-                  type: string
-                  index: not_analyzed
             district:
               type: object
               properties:

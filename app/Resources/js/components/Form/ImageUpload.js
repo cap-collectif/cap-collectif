@@ -197,14 +197,14 @@ const ImageUpload = React.createClass({
               {this.state.preview && <img alt="" src={this.state.preview} />}
             </div>
             {(this.state.preview || preview) && (
-                <Input
-                  type="checkbox"
-                  name="image-uploader__delete"
-                  onChange={this.onToggleDelete}
-                  ref={c => (this._deleteCheckbox = c)}
-                  children={<FormattedMessage id="global.image_uploader.image.delete" />}
-                />
-              )}
+              <Input
+                type="checkbox"
+                name="image-uploader__delete"
+                onChange={this.onToggleDelete}
+                ref={c => (this._deleteCheckbox = c)}
+                children={<FormattedMessage id="global.image_uploader.image.delete" />}
+              />
+            )}
           </Col>
         )}
       </Row>

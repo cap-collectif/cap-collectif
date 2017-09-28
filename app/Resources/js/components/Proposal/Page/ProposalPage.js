@@ -113,15 +113,15 @@ export const ProposalPage = React.createClass({
                       />
                       <br />
                       {currentVotableStep &&
-                        currentVotableStep.voteThreshold > 0 && (
-                          <span>
-                            <ProposalPageVoteThreshold
-                              proposal={proposal}
-                              step={currentVotableStep}
-                            />
-                            <br />
-                          </span>
-                        )}
+                      currentVotableStep.voteThreshold > 0 && (
+                        <span>
+                          <ProposalPageVoteThreshold
+                            proposal={proposal}
+                            step={currentVotableStep}
+                          />
+                          <br />
+                        </span>
+                      )}
                       <ProposalPageAdvancement proposal={proposal} />
                     </Col>
                   </Row>

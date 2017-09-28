@@ -4,11 +4,11 @@ Feature: ProposalForm Restful Api
 
 @parallel-scenario
 Scenario: Anonymous API client wants to get one proposal form
-  When I send a GET request to "/api/proposal_forms/proposalForm1"
+  When I send a GET request to "/api/proposal_forms/1"
   Then the JSON response should match:
   """
   {
-  "id": @string@,
+  "id": @integer@,
   "title": @string@,
   "titleHelpText": @string@,
   "description": @string@,
