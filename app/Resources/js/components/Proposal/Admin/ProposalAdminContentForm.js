@@ -102,7 +102,7 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   if (features.themes && form.usingThemes && form.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
-  form.customFields.map(field => {
+  form.questions.map(field => {
     if (field.required) {
       const response = values.responses.filter(res => res && res.question.id === field.id)[0];
       if (!response) {
@@ -291,10 +291,10 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                         <Field
                           key={field.id}
                           id={field.id}
-                          name={`responses.${index}.${field.inputType !== 'medias'
+                          name={`responses.${index}.${field.type !== 'medias'
                             ? 'value'
                             : 'medias'}`}
-                          type={field.inputType}
+                          type={field.type}
                           component={component}
                           label={field.title}
                         />
@@ -308,7 +308,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                   })}
                 </div>
               )}
-              fields={form.customFields}
+              fields={form.questions}
             />
             <Field
               id="proposal_media"
@@ -357,7 +357,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       : undefined,
     address: proposal.address,
     media: null,
-    responses: proposal.form.customFields.map(field => {
+    responses: proposal.form.questions.map(field => {
       const response = proposal.responses.filter(res => res && res.question.id === field.id)[0];
       if (response) {
         if (response.value) {
@@ -371,7 +371,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
           medias: response.medias,
         };
       }
-      if (field.inputType === 'medias') {
+      if (field.type === 'medias') {
         return { question: parseInt(field.id, 10), medias: [] };
       }
       return { question: parseInt(field.id, 10), value: null };
@@ -418,10 +418,10 @@ export default createFragmentContainer(
           id
           name
         }
-        customFields {
+        questions {
           id
           title
-          inputType
+          type
           position
           private
           required

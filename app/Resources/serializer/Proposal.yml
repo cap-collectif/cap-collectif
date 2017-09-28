@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Proposal:
   properties:
     id:
       expose: true
-      type: string
+      type: integer
       groups: [Proposals]
     title:
       expose: true
