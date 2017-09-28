@@ -606,9 +606,17 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
         console.log('Unknown step type'); // eslint-disable-line no-console
         return false;
     }
+
+    const filters = {};
+    Object.keys(state.filters).forEach(key => {
+      if (state.filters[key] !== '0') {
+        filters[key] = state.filters[key];
+      }
+    });
+
     const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
     url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-    body = { terms: state.terms, filters: state.filters };
+    body = { terms: state.terms, filters };
   }
 
   const result = yield call(Fetcher.postToJson, url, body);
