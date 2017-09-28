@@ -469,48 +469,54 @@ export const ProposalForm = React.createClass({
               <FormattedMessage id="proposal.map.form.field" />
             </label>
             {form.addressHelpText && <span className="help-block">{form.addressHelpText}</span>}
-            <PlacesAutocomplete
-              inputProps={{
-                onChange: address => {
-                  this.setState(prevState => ({ ...prevState, address }));
-                },
-                placeholder: intl.formatMessage({
-                  id: 'proposal.map.form.placeholder',
-                }),
-                value: this.state.address,
-                type: 'text',
-                id: 'proposal_address',
-              }}
-              autocompleteItem={autocompleteItem}
-              onEnterKeyDown={this.handleAddressChange}
-              onSelect={this.handleAddressChange}
-              onError={() => {
-                this.resetAddressField();
-              }}
-              classNames={{
-                root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
-                input: 'form-control',
-                autocompleteContainer: {
-                  zIndex: 9999,
-                  position: 'absolute',
-                  top: '100%',
-                  backgroundColor: 'white',
-                  border: '1px solid #555555',
-                  width: '100%',
-                },
-                autocompleteItem: {
-                  zIndex: 9999,
-                  backgroundColor: '#ffffff',
-                  padding: '10px',
-                  color: '#555555',
-                  cursor: 'pointer',
-                },
-                autocompleteItemActive: {
-                  zIndex: 9999,
-                  backgroundColor: '#fafafa',
-                },
-              }}
-            />
+            <div className="places-autocomplete__field">
+              <div className="places-autocomplete__icon">
+                <i className="cap cap-magnifier" />
+              </div>
+              <PlacesAutocomplete
+                inputProps={{
+                  onChange: address => {
+                    this.setState(prevState => ({ ...prevState, address }));
+                  },
+                  placeholder: intl.formatMessage({
+                    id: 'proposal.map.form.placeholder',
+                  }),
+                  value: this.state.address,
+                  type: 'text',
+                  id: 'proposal_address',
+                }}
+                autocompleteItem={autocompleteItem}
+                onEnterKeyDown={this.handleAddressChange}
+                onSelect={this.handleAddressChange}
+                onError={() => {
+                  this.resetAddressField();
+                }}
+                classNames={{
+                  root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
+                  input: 'form-control',
+                  autocompleteContainer: {
+                    zIndex: 9999,
+                    position: 'absolute',
+                    top: '100%',
+                    backgroundColor: 'white',
+                    border: '1px solid #555555',
+                    width: '100%',
+                  },
+                  autocompleteItem: {
+                    zIndex: 9999,
+                    backgroundColor: '#ffffff',
+                    padding: '10px',
+                    color: '#555555',
+                    cursor: 'pointer',
+                  },
+                  autocompleteItemActive: {
+                    zIndex: 9999,
+                    backgroundColor: '#fafafa',
+                  },
+                }}
+              />
+            </div>
+
             {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
           </div>
         )}
