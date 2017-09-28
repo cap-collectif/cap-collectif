@@ -7,18 +7,18 @@ describe('Proposal Reducer', () => {
   it('Should handle POSTS_FETCH_SUCCEEDED', () => {
     const initialState = {
       proposalsById: {
-        1: {},
+        proposal1: {},
       },
     };
     const posts = [{}, {}];
     const newState = reducer(initialState, {
       type: 'proposal/POSTS_FETCH_SUCCEEDED',
-      proposalId: 1,
+      proposalId: 'proposal1',
       posts,
     });
     expect(newState).toEqual({
       proposalsById: {
-        1: {
+        proposal1: {
           posts,
         },
       },
@@ -27,10 +27,10 @@ describe('Proposal Reducer', () => {
 
   it('Should handle deleteVoteSucceeded', () => {
     const initialState = {
-      userVotesByStepId: { 6: [2, 3] },
+      userVotesByStepId: { step6: ['proposal2', 'proposal3'] },
       proposalsById: {},
     };
-    const newState = reducer(initialState, deleteVoteSucceeded(6, 2, {}));
+    const newState = reducer(initialState, deleteVoteSucceeded('step6', 'proposal2', {}));
     expect(newState).toMatchSnapshot();
   });
 });
@@ -38,14 +38,14 @@ describe('Proposal Reducer', () => {
 describe('Proposal Sagas', () => {
   it('Should fetchPosts', () => {
     const generator = fetchPosts({
-      proposalId: 1,
+      proposalId: 'proposal1',
     });
     const posts = [];
-    expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/1/posts'));
+    expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/proposal1/posts'));
     expect(generator.next({ posts }).value).toEqual(
       put({
         type: 'proposal/POSTS_FETCH_SUCCEEDED',
-        proposalId: 1,
+        proposalId: 'proposal1',
         posts,
       }),
     );

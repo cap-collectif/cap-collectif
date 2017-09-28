@@ -73,7 +73,7 @@ class ProposalStepVotesResolver
         return $this->checkIntanceOfProposalVote($vote);
     }
 
-    public function getAmountSpentForVotes($votes): int
+    public function getAmountSpentForVotes(array $votes)
     {
         $spent = 0;
         foreach ($votes as $vote) {
@@ -231,13 +231,23 @@ class ProposalStepVotesResolver
         if ($step instanceof SelectionStep) {
             $votes = $this
               ->proposalSelectionVoteRepository
-              ->getVotesByStepAndUser($step, $user)
+              ->findBy(
+                  [
+                      'selectionStep' => $step,
+                      'user' => $user,
+                  ]
+              )
           ;
         }
         if ($step instanceof CollectStep) {
             $votes = $this
               ->proposalCollectVoteRepository
-              ->getVotesByStepAndUser($step, $user)
+              ->findBy(
+                  [
+                      'collectStep' => $step,
+                      'user' => $user,
+                  ]
+              )
           ;
         }
 

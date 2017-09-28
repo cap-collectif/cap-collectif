@@ -33,7 +33,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
             "show": "http://capco.test",
           },
           "author": Object {},
-          "id": 3,
+          "id": "proposal3",
           "referer": "http://capco.test",
           "responses": Array [],
           "title": "Titre proposition",
@@ -57,7 +57,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
             "show": "http://capco.test",
           },
           "author": Object {},
-          "id": 3,
+          "id": "proposal3",
           "referer": "http://capco.test",
           "responses": Array [],
           "title": "Titre proposition",
@@ -98,7 +98,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           "show": "http://capco.test",
         },
         "author": Object {},
-        "id": 3,
+        "id": "proposal3",
         "referer": "http://capco.test",
         "responses": Array [],
         "title": "Titre proposition",
@@ -118,7 +118,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           "show": "http://capco.test",
         },
         "author": Object {},
-        "id": 3,
+        "id": "proposal3",
         "referer": "http://capco.test",
         "responses": Array [],
         "title": "Titre proposition",
@@ -133,7 +133,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         "usingThemes": true,
       }
     }
-    id={3}
+    id="proposal3"
   />
 </div>
 `;

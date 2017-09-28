@@ -27,7 +27,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
         $em->remove($proposal);
         $em->flush();
@@ -65,7 +65,7 @@ class ProposalMutation implements ContainerAwareInterface
         $values = $input->getRawArguments();
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
         unset($values['proposalId']); // This only usefull to retrieve the proposal
 
@@ -191,7 +191,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['proposalId']));
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
 
         switch ($values['publicationStatus']) {
@@ -242,13 +242,13 @@ class ProposalMutation implements ContainerAwareInterface
 
         $proposal = $this->container->get('capco.proposal.repository')->find($values['id']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%d"', $values['id']));
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $values['id']));
         }
 
         unset($values['id']); // This only usefull to retrieve the proposal
 
         // Handle media deletion
-        if (isset($values['deleteCurrentMedia']) && $values['deleteCurrentMedia'] === true) {
+        if (isset($values['deleteCurrentMedia']) && true === $values['deleteCurrentMedia']) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
                 $proposal->setMedia(null);
@@ -272,7 +272,7 @@ class ProposalMutation implements ContainerAwareInterface
         // Now we handle file uploads for every responses
         foreach ($request->files->all() as $key => $file) {
             $logger->info('File: ' . $key);
-            if (strpos($key, 'responses_') === false) {
+            if (false === strpos($key, 'responses_')) {
                 break;
             }
             $questionId = str_replace('responses.', '', $key);

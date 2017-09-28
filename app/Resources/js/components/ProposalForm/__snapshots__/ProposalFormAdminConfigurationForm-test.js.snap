@@ -532,7 +532,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       </h3>
       <FieldArray
         component={[Function]}
-        name="questions"
+        name="customFields"
       />
     </div>
     <ButtonToolbar

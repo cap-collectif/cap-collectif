@@ -203,7 +203,7 @@ abstract class AbstractQuestion
     }
 
     /**
-     * @return null|int
+     * @return string
      */
     public function getType()
     {
@@ -212,10 +212,6 @@ abstract class AbstractQuestion
 
     public function setType($type): self
     {
-        if (is_string($type)) {
-            return $this->setInputType($type);
-        }
-
         $this->type = $type;
 
         return $this;
@@ -228,15 +224,6 @@ abstract class AbstractQuestion
         if (array_key_exists($this->getType(), self::$questionTypesInputs)) {
             return self::$questionTypesInputs[$this->getType()];
         }
-    }
-
-    public function setInputType(string $type = null): self
-    {
-        if (in_array($type, self::$questionTypesInputs, true)) {
-            $this->setType(array_search($type, self::$questionTypesInputs, true));
-        }
-
-        return $this;
     }
 
     public function getPosition()

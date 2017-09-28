@@ -6,7 +6,7 @@ const ProposalPageComments = React.createClass({
   displayName: 'ProposalPageComments',
 
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.string.isRequired,
     form: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
   },

@@ -12,7 +12,7 @@ describe('<ProposalPageContent />', () => {
     _links: {
       show: 'http://capco.test',
     },
-    id: 3,
+    id: 'proposal3',
   };
 
   const props = {

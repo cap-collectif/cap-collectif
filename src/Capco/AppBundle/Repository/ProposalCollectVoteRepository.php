@@ -24,23 +24,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         ;
     }
 
-    public function getVotesByStepAndUser(CollectStep $step, User $user)
-    {
-        return $this->createQueryBuilder('pv')
-          ->select('pv', 'proposal')
-          ->andWhere('pv.collectStep = :step')
-          ->andWhere('pv.user = :user')
-          ->andWhere('pv.expired = 0')
-          ->leftJoin('pv.proposal', 'proposal')
-          ->andWhere('proposal.id IS NOT NULL')
-          ->andWhere('proposal.deletedAt IS NULL')
-          ->setParameter('user', $user)
-          ->setParameter('step', $step)
-          ->getQuery()
-          ->getResult()
-        ;
-    }
-
     public function getUserVotesGroupedByStepIds(array $collectStepsIds, User $user = null): array
     {
         $userVotes = [];
@@ -51,7 +34,6 @@ class ProposalCollectVoteRepository extends EntityRepository
               ->andWhere('pv.collectStep = :id')
               ->andWhere('pv.user = :user')
               ->leftJoin('pv.proposal', 'proposal')
-              ->andWhere('proposal.deletedAt IS NULL')
               ->setParameter('user', $user)
               ->setParameter('id', $id)
               ;

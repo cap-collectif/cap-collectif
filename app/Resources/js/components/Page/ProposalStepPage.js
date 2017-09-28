@@ -20,7 +20,7 @@ export const ProposalStepPage = React.createClass({
     step: PropTypes.object.isRequired,
     count: PropTypes.number.isRequired,
     queryCount: PropTypes.number,
-    countFusions: PropTypes.number.isRequired,
+    countFusions: PropTypes.number,
     form: PropTypes.object.isRequired,
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
@@ -63,7 +63,6 @@ export const ProposalStepPage = React.createClass({
         .filter(d => d.geojson && d.displayedOnMap)
         .map(d => JSON.parse(d.geojson));
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);
     }
 
