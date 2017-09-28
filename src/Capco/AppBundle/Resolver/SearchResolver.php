@@ -184,16 +184,16 @@ class SearchResolver
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
-        if (isset($providedFilters['districts']) && $providedFilters['districts'] !== '0') {
+        if (isset($providedFilters['districts']) && (int) $providedFilters['districts'] !== 0) {
             $filters['district.id'] = $providedFilters['districts'];
         }
-        if (isset($providedFilters['themes']) && $providedFilters['themes'] !== '0') {
+        if (isset($providedFilters['themes']) && (int) $providedFilters['themes'] !== 0) {
             $filters['theme.id'] = $providedFilters['themes'];
         }
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
             $filters['author.user_type.id'] = $providedFilters['types'];
         }
-        if (isset($providedFilters['categories']) && $providedFilters['categories'] !== '0') {
+        if (isset($providedFilters['categories']) && (int) $providedFilters['categories'] !== 0) {
             $filters['category.id'] = $providedFilters['categories'];
         }
         if (array_key_exists('authorUniqueId', $providedFilters)) {
