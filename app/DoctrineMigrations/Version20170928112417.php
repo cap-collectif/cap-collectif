@@ -35,7 +35,7 @@ class Version20170928112417 extends AbstractMigration
             $reference++;
 
             // Update reference on each proposals in proposal form
-            $proposals = $this->connection->fetchAll('SELECT * FROM proposal WHERE proposal_form_id = '.$proposalForm['id']);
+            $proposals = $this->connection->fetchAll('SELECT * FROM proposal WHERE proposal_form_id = "'.$proposalForm['id'].'"');
 
             $proposalReference = 1;
             foreach ($proposals as $proposal) {
