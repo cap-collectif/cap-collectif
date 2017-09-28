@@ -9,8 +9,8 @@ class Version20170928112417 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE proposal ADD reference INT NOT NULL');
-        $this->addSql('ALTER TABLE proposal_form ADD reference INT NOT NULL');
+        $this->addSql('ALTER TABLE proposal ADD reference INT');
+        $this->addSql('ALTER TABLE proposal_form ADD reference INT');
     }
 
     /**
