@@ -91,19 +91,19 @@ const ProposalVoteModal = React.createClass({
             }}
           />
           {(voteWithoutAccount || user) && (
-            <SubmitButton
-              id="confirm-proposal-vote"
-              onSubmit={() => {
-                dispatch(submit('proposalVote'));
-              }}
-              label="proposal.vote.confirm"
-              isSubmitting={valid && isSubmitting}
-              bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
-              style={{ marginLeft: '10px' }}
-              disabled={this.disableSubmitButton()}
-              loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
-            />
-          )}
+              <SubmitButton
+                id="confirm-proposal-vote"
+                onSubmit={() => {
+                  dispatch(submit('proposalVote'));
+                }}
+                label="proposal.vote.confirm"
+                isSubmitting={valid && isSubmitting}
+                bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
+                style={{ marginLeft: '10px' }}
+                disabled={this.disableSubmitButton()}
+                loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
+              />
+            )}
         </Modal.Footer>
       </Modal>
     );

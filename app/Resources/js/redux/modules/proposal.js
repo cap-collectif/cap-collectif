@@ -19,7 +19,7 @@ type ChangeFilterAction = {
 type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 type SubmitFusionFormAction = {
   type: 'proposal/SUBMIT_FUSION_FORM',
-  proposalForm: number,
+  proposalForm: Uuid,
 };
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -192,7 +192,7 @@ export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
 export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 });
-export const submitFusionForm = (proposalForm: number): SubmitFusionFormAction => ({
+export const submitFusionForm = (proposalForm: Uuid): SubmitFusionFormAction => ({
   type: 'proposal/SUBMIT_FUSION_FORM',
   proposalForm,
 });
@@ -606,17 +606,9 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
         console.log('Unknown step type'); // eslint-disable-line no-console
         return false;
     }
-
-    const filters = {};
-    Object.keys(state.filters).forEach(key => {
-      if (state.filters[key] !== '0') {
-        filters[key] = state.filters[key];
-      }
-    });
-
     const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
     url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-    body = { terms: state.terms, filters };
+    body = { terms: state.terms, filters: state.filters };
   }
 
   const result = yield call(Fetcher.postToJson, url, body);

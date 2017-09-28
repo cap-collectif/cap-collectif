@@ -3,7 +3,7 @@ Feature: Proposal Restful Api
 
 @parallel-scenario
 Scenario: Anonymous API client wants to get one proposal from a ProposalForm and should not see private fields
-  When I send a GET request to "/api/proposal_forms/1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
   Then the JSON response should match:
   """
   {
@@ -53,7 +53,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
         }
       },
       "proposalForm": {
-        "id": @integer@
+        "id": @string@
       },
       "address": @string@,
       "comments": @array@,
@@ -132,7 +132,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
 @parallel-scenario
 Scenario: Admin wants to get one proposal from a ProposalForm and should see private fields
   Given I am logged in to api as admin
-  When I send a GET request to "/api/proposal_forms/1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
   Then the JSON response should match:
   """
   {
@@ -183,7 +183,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
         }
       },
       "proposalForm": {
-        "id": @integer@
+        "id": @string@
       },
       "comments": @array@,
       "responses":[
@@ -283,7 +283,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
 @parallel-scenario
 Scenario: User wants to get his proposal from a ProposalForm and should see private fields
   Given I am logged in to api as user
-  When I send a GET request to "/api/proposal_forms/1/proposals/1"
+  When I send a GET request to "/api/proposal_forms/proposalForm1/proposals/1"
   Then the JSON response should match:
   """
   {
@@ -334,7 +334,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
         }
       },
       "proposalForm": {
-        "id": @integer@
+        "id": @string@
       },
       "comments": @array@,
       "responses":[
@@ -459,7 +459,7 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
         },
         "author": @...@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
@@ -508,7 +508,7 @@ Scenario: Logged in API client wants to get all proposals from a private collect
           "vip": false
         },
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
@@ -585,7 +585,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         },
         "author": @...@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
@@ -625,7 +625,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         },
         "author": @...@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
@@ -678,7 +678,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               }
           },
           "proposalForm": {
-              "id": @integer@
+              "id": @string@
           },
           "likers": @array@,
           "theme": {
@@ -746,7 +746,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               }
           },
           "proposalForm": {
-              "id": @integer@
+              "id": @string@
           },
           "likers": @array@,
           "address": @string@,
@@ -836,7 +836,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "updated_at": "@string@.isDateTime()",
         "author": @wildcard@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "likers": @array@,
         "address": @string@,
@@ -915,7 +915,7 @@ Scenario: Logged in API client wants to add a proposal (with no value for not re
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -945,7 +945,7 @@ Scenario: Logged in API client wants to add a proposal with documents and illust
   Given feature districts is enabled
   And I should have 24 files in media folder
   And I should have 0 files in source media folder
-  When I send a POST request to "/api/proposal_forms/1/proposals" with a document and an illustration
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with a document and an illustration
   Then the JSON response status code should be 201
   And I should have 25 files in media folder
   And I should have 1 files in source media folder
@@ -955,7 +955,7 @@ Scenario: Logged in admin API client wants to add a proposal with fusion
   Given I am logged in to api as admin
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "author": "user2",
@@ -988,7 +988,7 @@ Scenario: Logged in API client wants to add a proposal (with nothing for not req
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -1012,7 +1012,7 @@ Scenario: Logged in API client wants to add a proposal not in zone
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
     """
     {
       "title": "Acheter un sauna pour Capco",
@@ -1064,7 +1064,7 @@ Scenario: Logged in API client wants to add a proposal without a required respon
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -1101,7 +1101,7 @@ Scenario: Logged in API client wants to add a proposal with empty required respo
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -1141,7 +1141,7 @@ Scenario: Logged in API client wants to add a proposal with empty required respo
 Scenario: Logged in API client wants to add a proposal with no category when mandatory
   Given I am logged in to api as user
   And features themes, districts are enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -1180,7 +1180,7 @@ Scenario: Logged in API client wants to add a proposal with no category when man
 Scenario: Logged in API client wants to add a proposal with no address when mandatory
   Given I am logged in to api as user
   And features themes, districts are enabled
-  When I send a POST request to "/api/proposal_forms/1/proposals" with json:
+  When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with json:
   """
   {
     "title": "Acheter un sauna pour Capco",
@@ -1218,7 +1218,7 @@ Scenario: Logged in API client wants to add a proposal with no address when mand
 @database
 Scenario: logged in API client wants to edit a proposal
   Given I am logged in to api as user
-  When I send a POST request to "api/proposal_forms/1/proposals/2" with json:
+  When I send a POST request to "api/proposal_forms/proposalForm1/proposals/2" with json:
   """
   {
     "title": "Acheter un sauna par personne pour Capco",
@@ -1230,13 +1230,13 @@ Scenario: logged in API client wants to edit a proposal
 @database
 Scenario: logged in API client wants to remove a proposal
   Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/1/proposals/2"
+  When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/2"
   Then the JSON response status code should be 204
 
 @database
 Scenario: logged in API client wants to remove a proposal and ensure that its proposal was disabled
   Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/4/proposals/12"
+  When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/12"
   Then the JSON response status code should be 204
   And proposal with id 12 should be disable
 

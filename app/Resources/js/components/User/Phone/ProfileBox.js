@@ -132,15 +132,15 @@ export const ProfileBox = React.createClass({
           />
         )}
         {user.isPhoneConfirmed &&
-        !isUpdating && (
-          <span style={{ color: '#57AD68' }}>
-            {<FormattedMessage id="phone.confirm.ok" />}
-            {' - '}
-            <Button style={{ paddingLeft: 0 }} onClick={this.deletePhone} bsStyle="link">
-              {<FormattedMessage id="phone.ask_delete" />}
-            </Button>
-          </span>
-        )}
+          !isUpdating && (
+            <span style={{ color: '#57AD68' }}>
+              {<FormattedMessage id="phone.confirm.ok" />}
+              {' - '}
+              <Button style={{ paddingLeft: 0 }} onClick={this.deletePhone} bsStyle="link">
+                {<FormattedMessage id="phone.ask_delete" />}
+              </Button>
+            </span>
+          )}
         {smsSentToNumber && (
           <span>
             <Button

@@ -20,7 +20,9 @@ class Version20170830143518 extends AbstractMigration
         foreach ($proposals as $proposal) {
             if ($proposal['answer_id']) {
                $answer = $this->connection->fetchAll('SELECT * from answer where answer.id = ' . $proposal['answer_id'])[0];
-               if ($answer['title'] !== null) {
+               if (!$answer['title']) {
+                 $answer['title'] = 'Réponse officielle';
+               }
                  $news = [
                     'title' => $answer['title'],
                     'body' => $answer['body'],
@@ -36,7 +38,6 @@ class Version20170830143518 extends AbstractMigration
                   $postId = $this->connection->lastInsertId();
                   $this->connection->insert('blog_post_authors', ['post_id' => $postId, 'user_id' => $answer['author_id']]);
                   $this->connection->insert('proposal_post', ['post_id' => $postId, 'proposal_id' => $proposal['id']]);
-                }
                 $this->connection->delete('answer', array('id' => $answer['id']));
             }
         }

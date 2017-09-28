@@ -1,0 +1,13 @@
+QuestionTypeValue:
+    type: enum
+    config:
+        description: "Value of type of question"
+        values:
+            text:
+                value: text
+            textarea:
+                value: textarea
+            editor:
+                value: editor
+            medias:
+                value: medias

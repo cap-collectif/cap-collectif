@@ -1,0 +1,4 @@
+services:
+  capco.utils.map:
+    class: Capco\AppBundle\Utils\Map
+    arguments: ["%google_maps_key_server%"]

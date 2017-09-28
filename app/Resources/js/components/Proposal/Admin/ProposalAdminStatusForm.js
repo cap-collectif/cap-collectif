@@ -71,7 +71,9 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h4 className="box-title">Etat</h4>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal.admin.state" />
+          </h3>
           <a
             className="pull-right link"
             target="_blank"
@@ -80,72 +82,76 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <form onSubmit={handleSubmit}>
-          {proposal.author.expiresAt && (
-            <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>
-          )}
-          <Field
-            type="radio-buttons"
-            id="publicationStatus"
-            name="publicationStatus"
-            component={component}
-            disabled={
-              !isSuperAdmin && (publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED')
-            }>
-            <ToggleButton
-              onClick={() => dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
-              value="PUBLISHED">
-              Publié
-            </ToggleButton>
-            <ToggleButton
-              onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
-              value="TRASHED">
-              Corbeille
-            </ToggleButton>
-            <ToggleButton
-              onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))}
-              value="TRASHED_NOT_VISIBLE">
-              Corbeille (contenu masqué)
-            </ToggleButton>
-            {publicationStatus === 'EXPIRED' && (
-              <ToggleButton
-                onClick={() => dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
-                value="EXPIRED">
-                Expiré
-              </ToggleButton>
+        <div className="box-content box-content__status-form">
+          <form onSubmit={handleSubmit}>
+            {proposal.author.expiresAt && (
+              <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>
             )}
-            {publicationStatus === 'DELETED' && (
+            <Field
+              type="radio-buttons"
+              id="publicationStatus"
+              name="publicationStatus"
+              component={component}
+              disabled={
+                !isSuperAdmin &&
+                (publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED')
+              }>
               <ToggleButton
-                onClick={() => dispatch(change(formName, 'publicationStatus', 'DELETED'))}
-                value="DELETED">
-                Supprimé
+                onClick={() => dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
+                value="PUBLISHED">
+                Publié
               </ToggleButton>
+              <ToggleButton
+                onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
+                value="TRASHED">
+                Corbeille
+              </ToggleButton>
+              <ToggleButton
+                onClick={() =>
+                  dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))}
+                value="TRASHED_NOT_VISIBLE">
+                Corbeille (contenu masqué)
+              </ToggleButton>
+              {publicationStatus === 'EXPIRED' && (
+                <ToggleButton
+                  onClick={() => dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
+                  value="EXPIRED">
+                  Expiré
+                </ToggleButton>
+              )}
+              {publicationStatus === 'DELETED' && (
+                <ToggleButton
+                  onClick={() => dispatch(change(formName, 'publicationStatus', 'DELETED'))}
+                  value="DELETED">
+                  Supprimé
+                </ToggleButton>
+              )}
+            </Field>
+            {(publicationStatus === 'TRASHED' || publicationStatus === 'TRASHED_NOT_VISIBLE') && (
+              <div>
+                <Field
+                  id="trashedReason"
+                  name="trashedReason"
+                  label="Motif de la modération (facultatif)"
+                  type="textarea"
+                  component={component}
+                />
+              </div>
             )}
-          </Field>
-          {(publicationStatus === 'TRASHED' || publicationStatus === 'TRASHED_NOT_VISIBLE') && (
-            <div>
-              <Field
-                id="trashedReason"
-                name="trashedReason"
-                label="Motif de la modération (facultatif)"
-                type="textarea"
-                component={component}
-              />
-            </div>
-          )}
-          {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
-          <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-            </Button>
-            {(isSuperAdmin || isAuthor) &&
-            !proposal.deletedAt && (
-              <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
-                <FormattedMessage id="global.delete" />
+            {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
+            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+              <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-            )}
-          </ButtonToolbar>
-        </form>
+              {(isSuperAdmin || isAuthor) &&
+              !proposal.deletedAt && (
+                <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
+                  <FormattedMessage id="global.delete" />
+                </Button>
+              )}
+            </ButtonToolbar>
+          </form>
+        </div>
       </div>
     );
   }

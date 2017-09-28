@@ -63,6 +63,7 @@ export const ProposalStepPage = React.createClass({
         .filter(d => d.geojson && d.displayedOnMap)
         .map(d => JSON.parse(d.geojson));
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);
     }
 
@@ -114,21 +115,21 @@ export const ProposalStepPage = React.createClass({
                 </VisibilityBox>
               )}
               {showPagination &&
-              selectedViewByStep === 'mosaic' && (
-                <Pagination
-                  current={currentPage}
-                  nbPages={nbPages}
-                  onChange={newPage => {
-                    dispatch(changePage(newPage));
-                    dispatch(loadProposals());
-                  }}
-                />
-              )}
+                selectedViewByStep === 'mosaic' && (
+                  <Pagination
+                    current={currentPage}
+                    nbPages={nbPages}
+                    onChange={newPage => {
+                      dispatch(changePage(newPage));
+                      dispatch(loadProposals());
+                    }}
+                  />
+                )}
               {randomOrder &&
-              proposals.length > 3 &&
-              selectedViewByStep === 'mosaic' && (
-                <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
-              )}
+                proposals.length > 3 &&
+                selectedViewByStep === 'mosaic' && (
+                  <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
+                )}
             </div>
           )}
         </Loader>
