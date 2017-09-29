@@ -4,7 +4,7 @@ District:
         description: "A district"
         fields:
             id:
-                type: "String!"
+                type: "ID!"
             name:
                 type: "String!"
             geojson:

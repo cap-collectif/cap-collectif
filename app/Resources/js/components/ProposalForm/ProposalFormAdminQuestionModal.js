@@ -2,11 +2,13 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
+
+const selector = formValueSelector('proposal-form-admin-configuration');
 
 export const ProposalFormAdminQuestionModal = React.createClass({
   propTypes: {
@@ -15,10 +17,11 @@ export const ProposalFormAdminQuestionModal = React.createClass({
     onSubmit: PropTypes.func.isRequired,
     member: PropTypes.string.isRequired,
     isCreating: PropTypes.bool.isRequired,
+    questionType: PropTypes.string.isRequired,
   },
 
   render() {
-    const { member, show, isCreating, onClose, onSubmit } = this.props;
+    const { member, show, isCreating, onClose, onSubmit, questionType } = this.props;
     return (
       <Modal
         show={show}
@@ -48,11 +51,29 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             component={component}
           />
           <Field
+            label="Type de réponse"
+            id={`${member}.questionType`}
+            name={`${member}.questionType`}
+            type="select"
+            component={component}>
+            <option value="" disabled>
+              Sélectionner un type
+            </option>
+            <option value="simple">Texte Libre</option>
+            <option value="media">
+              <FormattedMessage id="global.question.types.medias" />
+            </option>
+          </Field>
+          <Field
             label="Format de réponse"
             id={`${member}.type`}
             name={`${member}.type`}
             type="select"
-            component={component}>
+            style={{ display: questionType === 'text' ? 'inline' : 'hide' }}
+            component={component}
+            normalize={value => {
+              return questionType === 'medias' ? 'media' : value;
+            }}>
             <option value="" disabled>
               <FormattedMessage id="global.select" />
             </option>
@@ -64,9 +85,6 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             </option>
             <option value="editor">
               <FormattedMessage id="global.question.types.editor" />
-            </option>
-            <option value="medias">
-              <FormattedMessage id="global.question.types.medias" />
             </option>
           </Field>
           <Field
@@ -95,4 +113,8 @@ export const ProposalFormAdminQuestionModal = React.createClass({
   },
 });
 
-export default connect()(ProposalFormAdminQuestionModal);
+const mapStateToProps = (state, props) => ({
+  questionType: selector(state, `${props.member}.questionType`) || '',
+});
+
+export default connect(mapStateToProps)(ProposalFormAdminQuestionModal);

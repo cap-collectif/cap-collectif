@@ -1,8 +1,7 @@
 Question:
-    type: object
+    type: interface
     config:
-        description: "A question"
-        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        resolveType: "@=resolver('question_question_type', [value])"
         fields:
             id:
                 type: "String!"

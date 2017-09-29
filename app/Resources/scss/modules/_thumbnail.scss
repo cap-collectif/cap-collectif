@@ -132,30 +132,3 @@
     padding-top: 30px;
     padding-bottom: 30px;
 }
-
-// à changer de place !
-
-.project__preview {
-    display: flex;
-    flex-wrap: wrap;
-
-    & > div, .thumbnail--custom {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .thumbnail--custom {
-        flex: 1 0 auto;
-    }
-
-    .project__preview__body {
-        flex: 1 0 auto;
-        display: flex;
-        flex-direction: column;
-
-        &__infos {
-            flex: 1 0 auto;
-            margin-bottom: 15px;
-        }
-    }
-}

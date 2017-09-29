@@ -309,7 +309,7 @@ type DeleteProposalPayload {
 
 # A district
 type District {
-  id: String!
+  id: ID!
   name: String!
   geojson: GeoJSON
   displayedOnMap: Boolean!
@@ -360,6 +360,17 @@ type Media {
   url: String!
   name: String!
   size: String!
+}
+
+# A media question
+type MediaQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
 }
 
 # A response
@@ -829,8 +840,7 @@ type Query {
   availableQuestionnaires: [Question!]
 }
 
-# A question
-type Question {
+interface Question {
   id: String!
   title: String!
   slug: String!
@@ -1034,8 +1044,18 @@ input SetEvaluationFormInProposalFormInput {
 }
 
 type SetEvaluationFormInProposalFormPayload {
-  proposalForm: ProposalForm!
-  clientMutationId: String
+    proposalForm: ProposalForm!
+    clientMutationId: String
+}
+# A simple question
+type SimpleQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
 }
 
 # A source

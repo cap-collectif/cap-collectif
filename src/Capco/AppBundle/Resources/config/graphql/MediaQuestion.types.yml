@@ -1,0 +1,22 @@
+MediaQuestion:
+    type: object
+    config:
+        interfaces: [Question]
+        description: "A media question"
+        fields:
+            id:
+                type: "String!"
+            title:
+                type: "String!"
+            type:
+                type: "QuestionTypeValue!"
+                resolve: "@=resolver('question_type', [value])"
+            position:
+                type: "Int!"
+                resolve: "@=resolver('question_position', [value])"
+            private:
+                type: "Boolean!"
+            required:
+                type: "Boolean!"
+            helpText:
+                type: "String"
