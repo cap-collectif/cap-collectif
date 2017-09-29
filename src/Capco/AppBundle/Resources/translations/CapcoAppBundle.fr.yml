@@ -1147,7 +1147,7 @@ project_download:
     related_object: "Lié à :"
     score: Score
     sources: Sources
-    status: Statut
+    status: Dernier statut
     theme: Thème
     title: Titre
     total_arguments: Total des arguments

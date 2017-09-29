@@ -11,6 +11,7 @@ services:
         - '@capco.url.array.resolver'
         - '@phpexcel'
         - '@sonata.media.twig.extension'
+        - '@twig.extension.httpfoundation'
 
   capco.contribution.resolver:
     class: Capco\AppBundle\Resolver\ContributionResolver

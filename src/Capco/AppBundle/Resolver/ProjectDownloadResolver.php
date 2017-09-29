@@ -11,6 +11,7 @@ use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\ORM\EntityManager;
 use Liuggio\ExcelBundle\Factory;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
+use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -52,13 +53,15 @@ class ProjectDownloadResolver
     protected $withVote;
     protected $mediaExtension;
     protected $customFields;
+    protected $httpFoundExtension;
 
     public function __construct(
         EntityManager $em,
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
         Factory $phpexcel,
-        MediaExtension $mediaExtension
+        MediaExtension $mediaExtension,
+        HttpFoundationExtension $httpFoundationExtension
     ) {
         $this->em = $em;
         $this->translator = $translator;
@@ -68,6 +71,7 @@ class ProjectDownloadResolver
         $this->data = [];
         $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
         $this->mediaExtension = $mediaExtension;
+        $this->httpFoundExtension = $httpFoundationExtension;
     }
 
     public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
@@ -186,6 +190,7 @@ class ProjectDownloadResolver
             $proposal['status'] = $entity->lastStatus() !== null ? $entity->lastStatus()->getName() : '';
             $proposal['reference'] = $entity->getFullReference();
             $proposal['votesCountByStepId'] = $this->formatText($str);
+            $proposal['media'] = $entity->getMedia();
         }
 
         unset($proposal);
@@ -260,7 +265,11 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $na;
-        $media = isset($proposal['media']) ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
+
+        $media = '';
+        if ($proposal['media']) {
+            $media = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($proposal['media'], 'proposal'));
+        }
 
         $item = [
             'reference' => $proposal['reference'],
@@ -319,7 +328,11 @@ class ProjectDownloadResolver
         $authorId = $author ? $author['id'] : $na;
         $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
         $authorEmail = $author ? $author['email'] : $vote['email'];
-        $media = isset($proposal['media']) ? $this->mediaExtension->path($proposal['media'], 'proposal') : '';
+
+        $media = '';
+        if ($proposal['media']) {
+            $media = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($proposal['media'], 'proposal'));
+        }
 
         $item = [
             'reference' => $vote['id'],
