@@ -14,4 +14,3 @@ Group:
                 description: "Identifies the description of the group."
             userGroups:
               type: "[UserGroup!]!"
-#              resolve: "@=resolver('group_user_group', [value])"

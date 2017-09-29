@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
+import GroupAdminAddUsersForm from './GroupAdminAddUsersForm';
 
 type Props = {
   show: boolean,
@@ -11,9 +12,11 @@ type Props = {
   group: GroupAdminUsers_group,
 };
 
-export class GroupAdminModalCreateGroup extends React.Component<Props> {
+export class GroupAdminModalAddUsers extends React.Component<Props> {
+  handleSubmit = () => {};
+
   render() {
-    const { show, onClose } = this.props;
+    const { show, onClose, group } = this.props;
 
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
@@ -22,7 +25,9 @@ export class GroupAdminModalCreateGroup extends React.Component<Props> {
             {<FormattedMessage id="group.admin.add_users" />}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body />
+        <Modal.Body>
+          <GroupAdminAddUsersForm group={group} handleSubmit={this.handleSubmit()} />
+        </Modal.Body>
         <Modal.Footer />
       </Modal>
     );
@@ -33,4 +38,4 @@ const mapStateToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps)(GroupAdminModalCreateGroup);
+export default connect(mapStateToProps)(GroupAdminModalAddUsers);

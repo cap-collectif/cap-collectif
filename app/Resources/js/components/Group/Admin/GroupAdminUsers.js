@@ -6,10 +6,10 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
-import GroupAdminModalCreateGroup from './GroupAdminModalCreateGroup';
+import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 
 type Props = { group: GroupAdminUsers_group };
-type State = { showCreateModal: boolean };
+type State = { showAddUsersModal: boolean };
 
 const onDelete = (userId: string, groupId: string) => {
   return DeleteUserInGroupMutation.commit({
@@ -22,20 +22,20 @@ const onDelete = (userId: string, groupId: string) => {
 
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
-    showCreateModal: false,
+    showAddUsersModal: false,
   };
 
   openCreateModal = () => {
-    this.setState({ showCreateModal: true });
+    this.setState({ showAddUsersModal: true });
   };
 
   handleClose = () => {
-    this.setState({ showCreateModal: false });
+    this.setState({ showAddUsersModal: false });
   };
 
   render() {
     const { group } = this.props;
-    const { showCreateModal } = this.state;
+    const { showAddUsersModal } = this.state;
 
     return (
       <div className="box box-primary container">
@@ -51,8 +51,8 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           onClick={() => this.openCreateModal()}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
         </Button>
-        <GroupAdminModalCreateGroup
-          show={showCreateModal}
+        <GroupAdminModalAddUsers
+          show={showAddUsersModal}
           onClose={this.handleClose}
           group={group}
         />
