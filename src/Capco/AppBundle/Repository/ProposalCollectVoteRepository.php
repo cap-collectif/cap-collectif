@@ -85,29 +85,14 @@ class ProposalCollectVoteRepository extends EntityRepository
       ;
     }
 
-    public function getCountsByProposalGroupedBySteps(Proposal $proposal)
+    public function getCountsByProposalGroupedByStepsId(Proposal $proposal)
     {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id) as votesCount', 'cs.id as stepId')
-            ->leftJoin('pv.collectStep', 'cs')
-            ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = false')
-            ->setParameter('proposal', $proposal)
-            ->groupBy('pv.collectStep')
-        ;
-        $results = $qb->getQuery()->getResult();
-        $votesBySteps = [];
+        return $this->getCountsByProposalGroupedBySteps($proposal);
+    }
 
-        foreach ($results as $result) {
-            $votesBySteps[$result['stepId']] = (int) ($result['votesCount']);
-        }
-
-        $id = $proposal->getProposalForm()->getStep()->getId();
-        if (!array_key_exists($id, $votesBySteps)) {
-            $votesBySteps[$id] = 0;
-        }
-
-        return $votesBySteps;
+    public function getCountsByProposalGroupedByStepsTitle(Proposal $proposal)
+    {
+        return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
     public function getVotesForProposalByStepId(Proposal $proposal, $step, $limit = null, $offset = 0)
@@ -156,5 +141,37 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return (int) ($qb->getQuery()->getSingleScalarResult());
+    }
+
+    private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
+    {
+        $qb = $this->createQueryBuilder('pv');
+
+        if ($asTitle) {
+            $qb->select('COUNT(pv.id) as votesCount', 'cs.title as stepId');
+            $index = $proposal->getProposalForm()->getStep()->getTitle();
+        } else {
+            $qb->select('COUNT(pv.id) as votesCount', 'cs.id as stepId');
+            $index = $proposal->getProposalForm()->getStep()->getId();
+        }
+
+        $qb
+            ->leftJoin('pv.collectStep', 'cs')
+            ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.expired = false')
+            ->setParameter('proposal', $proposal)
+            ->groupBy('pv.collectStep');
+
+        $results = $qb->getQuery()->getResult();
+        $votesBySteps = [];
+        foreach ($results as $result) {
+            $votesBySteps[$result['stepId']] = (int) ($result['votesCount']);
+        }
+
+        if (!array_key_exists($index, $votesBySteps)) {
+            $votesBySteps[$index] = 0;
+        }
+
+        return $votesBySteps;
     }
 }

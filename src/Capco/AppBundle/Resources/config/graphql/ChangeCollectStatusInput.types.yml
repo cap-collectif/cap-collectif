@@ -4,7 +4,7 @@ ChangeCollectStatusInput:
         description: ""
         fields:
             statusId:
-                type: "ID"
+                type: "String"
             proposalId:
               type: "ID!"
               description: "The proposal id"

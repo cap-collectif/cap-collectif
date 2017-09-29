@@ -83,7 +83,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeCollectStatus(string $proposalId, string $statusId = null): array
+    public function changeCollectStatus(string $proposalId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -105,7 +105,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeSelectionStatus(string $proposalId, string $stepId, string $statusId = null): array
+    public function changeSelectionStatus(string $proposalId, string $stepId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -150,7 +150,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function selectProposal(string $proposalId, string $stepId, string $statusId = null): array
+    public function selectProposal(string $proposalId, string $stepId, $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
