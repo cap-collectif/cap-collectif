@@ -538,8 +538,7 @@ admin:
       address: Lieu ou adresse
       trashedReason: Raison de la mise dans la corbeille
       updateAuthor: Auteur de la dernière mise à jour
-      updated_at: Mise à jour le
-      updated_by: Mise à jour par
+      updated_at: Mise à jour
       group_evaluation: Évaluation
       servicePilote: Service pilote / Référent du dossier
       domaniality: Domanialité
@@ -551,7 +550,6 @@ admin:
       delay: Délai de mise en œuvre du projet
       proposedAnswer: Analyse synthétique de l'avis du service
       last_status: Dernier statut
-      reference: Réf.
     proposal_category:
       name: Nom
     proposal_form:

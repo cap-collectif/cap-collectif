@@ -620,7 +620,7 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have status :statusId
      */
-    public function proposalSelectionShouldHaveStatus(string $selectionStepId, string $proposalId, int $statusId)
+    public function proposalSelectionShouldHaveStatus(string $selectionStepId, string $proposalId, string $statusId)
     {
         $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
           'selectionStep' => $selectionStepId,
@@ -646,7 +646,7 @@ trait ProposalStepsTrait
     /**
      * @Then proposal :proposalId should have status :statusId
      */
-    public function proposalShouldHaveStatus(string $proposalId, int $statusId)
+    public function proposalShouldHaveStatus(string $proposalId, string $statusId)
     {
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         expect($proposal->getStatus()->getId())->toBe($statusId);

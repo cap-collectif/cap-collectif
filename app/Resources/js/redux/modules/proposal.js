@@ -468,7 +468,7 @@ export const submitProposal = (
         window.location.href = proposal._links.show;
       });
     })
-    .catch(() => {
+    .catch((error: Error) => {
       dispatch(cancelSubmitProposal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
@@ -477,6 +477,7 @@ export const submitProposal = (
           content: 'proposal.request.create.failure',
         },
       });
+      throw error;
     });
 };
 
