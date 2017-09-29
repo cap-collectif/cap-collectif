@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "981aa75844c18cffa1ed37f61cede711",
+    "content-hash": "57c8e31dbcd43dcdea14a603f790473b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -48,16 +48,16 @@
         },
         {
             "name": "cap-collectif/id-to-uuid",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/id-to-uuid.git",
-                "reference": "818254d870a8167708daff45a39ac93f8ef8d599"
+                "reference": "a5478c99ab5d10e986b997346b52726e28b0426c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/818254d870a8167708daff45a39ac93f8ef8d599",
-                "reference": "818254d870a8167708daff45a39ac93f8ef8d599",
+                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/a5478c99ab5d10e986b997346b52726e28b0426c",
+                "reference": "a5478c99ab5d10e986b997346b52726e28b0426c",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 }
             ],
             "description": "Easily migrate from auto incremented id to uuid",
-            "time": "2017-06-21T11:20:35+00:00"
+            "time": "2017-09-29T09:58:31+00:00"
         },
         {
             "name": "caxy/htmldiff-bundle",
@@ -309,7 +309,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2016-02-24 18:17:09"
+            "time": "2016-02-24T18:17:09+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2372,7 +2372,7 @@
                 "bundle",
                 "jwt"
             ],
-            "time": "2017-05-03 19:09:07"
+            "time": "2017-05-03T19:09:07+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -6282,7 +6282,7 @@
                 }
             ],
             "description": "SAML2 PHP library from SimpleSAMLphp",
-            "time": "2017-05-26 15:53:39"
+            "time": "2017-05-26T15:53:39+00:00"
         },
         {
             "name": "simplesamlphp/simplesamlphp",
@@ -6359,7 +6359,7 @@
                 "sp",
                 "ws-federation"
             ],
-            "time": "2017-05-26 14:56:32"
+            "time": "2017-05-26T14:56:32+00:00"
         },
         {
             "name": "snc/redis-bundle",
@@ -12816,7 +12816,7 @@
             "support": {
                 "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
             },
-            "time": "2016-03-15 13:13:55"
+            "time": "2016-03-15T13:13:55+00:00"
         },
         {
             "name": "sjparkinson/behat-file-system-context",
@@ -12907,7 +12907,7 @@
             "support": {
                 "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
             },
-            "time": "2016-03-11 13:43:33"
+            "time": "2016-03-11T13:43:33+00:00"
         },
         {
             "name": "tonicforhealth/parallel-process-runner",
