@@ -1,13 +1,15 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
+import GroupAdminModalCreateGroup from './GroupAdminModalCreateGroup';
 
 type Props = { group: GroupAdminUsers_group };
+type State = { showCreateModal: boolean };
 
 const onDelete = (userId: string, groupId: string) => {
   return DeleteUserInGroupMutation.commit({
@@ -18,19 +20,40 @@ const onDelete = (userId: string, groupId: string) => {
   }).then(location.reload());
 };
 
-export class GroupAdminUsers extends Component<Props> {
+export class GroupAdminUsers extends React.Component<Props, State> {
+  state = {
+    showCreateModal: false,
+  };
+
+  openCreateModal = () => {
+    this.setState({ showCreateModal: true });
+  };
+
+  handleClose = () => {
+    this.setState({ showCreateModal: false });
+  };
+
   render() {
     const { group } = this.props;
+    const { showCreateModal } = this.state;
 
     return (
       <div className="box box-primary container">
-        <div className="box-header">
+        <div className="box-header  pl-0">
           <h4 className="box-title">
             <FormattedMessage id="group.admin.users" />
           </h4>
         </div>
+        <Button
+          className="mt-5 mb-15"
+          bsStyle="success"
+          href="#"
+          onClick={() => this.openCreateModal()}>
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
+        </Button>
+        <GroupAdminModalCreateGroup show={showCreateModal} onClose={this.handleClose} />
         {group.userGroups.length ? (
-          <ListGroup style={{ margin: 10, paddingBottom: 10 }}>
+          <ListGroup>
             {group.userGroups.map((userGroup, index) => (
               <ListGroupItem key={index}>
                 <Row>
@@ -59,7 +82,7 @@ export class GroupAdminUsers extends Component<Props> {
                       bsStyle="danger"
                       href="#"
                       onClick={() => onDelete(userGroup.user.id, group.id)}>
-                      <FormattedMessage id="global.delete" />
+                      <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
                     </Button>
                   </Col>
                 </Row>
@@ -80,7 +103,7 @@ const mapStateToProps = () => {
   return {};
 };
 
-const container = connect(mapStateToProps);
+const container = connect(mapStateToProps)(GroupAdminUsers);
 
 export default createFragmentContainer(
   container,

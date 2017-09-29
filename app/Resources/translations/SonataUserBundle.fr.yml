@@ -1,0 +1,3 @@
+# Override SonataUserBundle translations
+users: Tous les utilisateurs
+breadcrumb.link_user_list: Tous les utilisateurs
