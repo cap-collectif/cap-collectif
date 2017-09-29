@@ -125,7 +125,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     valueLink={
       Object {
         "requestChange": [Function],
-        "value": -1,
+        "value": null,
       }
     }
   >
@@ -375,7 +375,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     valueLink={
       Object {
         "requestChange": [Function],
-        "value": -1,
+        "value": null,
       }
     }
   >

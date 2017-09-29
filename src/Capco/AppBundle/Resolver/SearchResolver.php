@@ -178,7 +178,7 @@ class SearchResolver
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
+        if (isset($providedFilters['statuses'])) {
             $filters['status.id'] = $providedFilters['statuses'];
         }
         if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {

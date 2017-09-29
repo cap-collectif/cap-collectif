@@ -110,15 +110,15 @@ class ProposalCollectVoteRepository extends EntityRepository
         return $votesBySteps;
     }
 
-    public function getVotesForProposalByStepId(Proposal $proposal, $step, $limit = null, $offset = 0)
+    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.collectStep', 'cs')
             ->where('pv.proposal = :proposal')
             ->andWhere('pv.expired = false')
             ->setParameter('proposal', $proposal)
-            ->andWhere('cs.id = :step')
-            ->setParameter('step', $step)
+            ->andWhere('cs.id = :stepId')
+            ->setParameter('stepId', $stepId)
             ->addOrderBy('pv.createdAt', 'DESC')
         ;
 

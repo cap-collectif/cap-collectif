@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 
 const FlashMessages = React.createClass({
@@ -28,7 +28,7 @@ const FlashMessages = React.createClass({
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
-        return <FormattedMessage id={message} />;
+        return <FormattedHTMLMessage id={message} />;
       }
       return <FormattedMessage id={message.message} values={message.params} />;
     }
