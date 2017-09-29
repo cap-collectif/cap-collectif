@@ -357,6 +357,12 @@ fos_elastica:
                     id:
                       type: string
                       index: not_analyzed
+                status:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      index: not_analyzed
             likers:
               type: object
               properties:

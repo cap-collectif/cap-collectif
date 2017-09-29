@@ -8,10 +8,6 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
     </strong>
      
     <a />
-     |
-     
-    global.reference
-     
   </p>
   <Uncontrolled(Tabs)
     defaultActiveKey={1}
