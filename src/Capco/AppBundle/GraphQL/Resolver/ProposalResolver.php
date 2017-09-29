@@ -136,9 +136,4 @@ class ProposalResolver implements ContainerAwareInterface
             'stepSlug' => $step->getSlug(),
           ], true);
     }
-
-    public function resolveReference(Proposal $proposal): string
-    {
-        return $proposal->getFullReference();
-    }
 }
