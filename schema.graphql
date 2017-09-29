@@ -643,6 +643,9 @@ type Proposal {
   # The content of the contribution.
   id: String!
 
+  # The unique reference of proposal
+  reference: String!
+
   # Identifies the contribution title.
   title: String!
 
