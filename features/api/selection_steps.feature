@@ -19,7 +19,7 @@ Scenario: Anonymous API client wants to get a step
     "body": @string@,
     "statuses": [
       {
-        "id": @string@,
+        "id": @integer@,
         "name": @string@,
         "color": @string@
       }
@@ -67,17 +67,17 @@ Scenario: Logged in API client wants to get all proposals from a selection step
           "name": @string@
         },
         "status": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@,
           "color": @string@
         },
         "category": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@
         },
         "author": @...@,
         "proposalForm": {
-          "id": @string@
+          "id": @integer@
         },
         "comments": @...@,
         "responses": @...@,
@@ -125,17 +125,17 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
           "name": @string@
         },
         "status": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@,
           "color": @string@
         },
         "category": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@
         },
         "author": @...@,
         "proposalForm": {
-          "id": @string@
+          "id": @integer@
         },
         "comments": @...@,
         "responses": @...@,
@@ -170,7 +170,8 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
   {
     "proposals": [
       {
-        "id": @string@,
+        "id": @integer@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -185,17 +186,17 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
           "name": @string@
         },
         "status": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@,
           "color": @string@
         },
         "category": {
-          "id": @string@,
+          "id": @integer@,
           "name": @string@
         },
         "author": @...@,
         "proposalForm": {
-          "id": @string@
+          "id": @integer@
         },
         "comments": @...@,
         "responses": @...@,
@@ -236,11 +237,11 @@ Scenario: Admin API client wants to update proposal status
   When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/proposal3" with json:
   """
   {
-    "status": "status1"
+    "status": 1
   }
   """
   Then the JSON response status code should be 204
-  And selection "selectionstep1" "proposal3" should have status "status1"
+  And selection "selectionstep1" "proposal3" should have status 1
   And 1 mail should be sent
   And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail

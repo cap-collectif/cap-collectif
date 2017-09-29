@@ -325,7 +325,7 @@ fos_elastica:
               type: object
               properties:
                 id:
-                  type: string
+                  type: long
                   index: not_analyzed
                 name:
                   type: string
@@ -592,8 +592,6 @@ fos_elastica:
             groups: [Statuses]
           _all: { enabled: false }
           mappings:
-            id:
-              index: not_analyzed
             name:
               index: not_analyzed
             color:

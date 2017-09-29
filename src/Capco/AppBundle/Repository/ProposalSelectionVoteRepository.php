@@ -107,7 +107,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $votesBySteps;
     }
 
-    public function getVotesForProposalByStepId(Proposal $proposal, SelectionStep $step, $limit = null, $offset = 0)
+    public function getVotesForProposalByStepId(Proposal $proposal, $step, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.selectionStep', 'ss')
