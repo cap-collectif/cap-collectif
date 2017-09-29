@@ -30,8 +30,8 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
-            ->add('fullReference', null, [
-                'label' => 'admin.fields.proposal.reference',
+            ->add('id', null, [
+                'label' => 'admin.fields.proposal.id',
             ])
             ->add('titleInfo', null, [
                 'label' => 'admin.fields.proposal.title',
@@ -67,11 +67,9 @@ class ProposalAdmin extends Admin
         }
 
         $listMapper
-            ->add('updatedAt', 'datetime', [
+            ->add('updatedInfo', 'datetime', [
                 'label' => 'admin.fields.proposal.updated_at',
-            ])
-            ->add('updateAuthor', null, [
-                'label' => 'admin.fields.proposal.updated_by',
+                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ]);
     }
 

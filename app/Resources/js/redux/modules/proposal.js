@@ -609,11 +609,13 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
     }
 
     const filters = {};
-    Object.keys(state.filters).forEach(key => {
-      if (state.filters[key] !== '0') {
-        filters[key] = state.filters[key];
-      }
-    });
+    if (state.filters) {
+      Object.keys(state.filters).forEach(key => {
+        if (state.filters[key] && state.filters[key] !== '0') {
+          filters[key] = state.filters[key];
+        }
+      });
+    }
 
     const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
     url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
