@@ -77,7 +77,7 @@ Scenario: Logged in API client wants to get all proposals from a selection step
         },
         "author": @...@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
@@ -135,7 +135,7 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
         },
         "author": @...@,
         "proposalForm": {
-          "id": @integer@
+          "id": @string@
         },
         "comments": @...@,
         "responses": @...@,
