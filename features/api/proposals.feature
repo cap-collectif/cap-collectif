@@ -846,13 +846,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "reference": @string@,
         "updated_at": "@string@.isDateTime()",
         "author": @wildcard@,
-<<<<<<< HEAD
         "proposalForm": @wildcard@,
-=======
-        "proposalForm": {
-          "id": @integer@
-        },
->>>>>>> Fixes
         "likers": @array@,
         "address": @string@,
         "theme": @wildcard@,
