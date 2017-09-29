@@ -644,7 +644,7 @@ type Proposal {
   id: String!
 
   # The unique reference of proposal
-  fullReference: String!
+  reference: String!
 
   # Identifies the contribution title.
   title: String!
