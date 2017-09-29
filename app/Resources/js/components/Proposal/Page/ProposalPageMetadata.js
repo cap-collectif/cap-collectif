@@ -55,6 +55,7 @@ export const ProposalPageMetadata = React.createClass({
                   {proposal.reference}
                 </div>
               </div>
+              )}
             </div>
           )}
       </div>

@@ -5,12 +5,7 @@ services:
 
   capco.project.download.resolver:
     class: Capco\AppBundle\Resolver\ProjectDownloadResolver
-    arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@translator'
-        - '@capco.url.array.resolver'
-        - '@phpexcel'
-        - '@sonata.media.twig.extension'
+    arguments: ['@doctrine.orm.entity_manager', '@translator', '@capco.url.array.resolver', '@phpexcel']
 
   capco.contribution.resolver:
     class: Capco\AppBundle\Resolver\ContributionResolver

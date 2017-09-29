@@ -1131,12 +1131,12 @@ project_download:
     arguments_ok: Arguments pour
     author: Auteur
     author_email: Email de l'auteur
-    author_id: Identifiant de l'auteur
+    author_id: Id de l'auteur
     category: Catégorie
-    content: Description
+    content: Contenu
     content_type: Type de contenu
     created: Création
-    district: Zone géographique
+    district: Localisation
     enabled: Publié
     estimation: Estimation financière
     id: Identifiant
@@ -1169,9 +1169,6 @@ project_download:
     evaluation: Évaluation financière de l'investissement proposé
     delay: Délai de mise en œuvre du projet
     proposedAnswer: Analyse synthétique de l'avis du service
-    summary: Résumé
-    address: Lieu ou adresse
-    media: Illustration
   sheet:
     title: Contributions
   values:
@@ -1180,7 +1177,7 @@ project_download:
     content_type:
       argument: Argument
       opinion: Proposition
-      proposal: Proposition
+      proposal: Projet
       simple_argument: Avis
       source: Source
       version: Modification
