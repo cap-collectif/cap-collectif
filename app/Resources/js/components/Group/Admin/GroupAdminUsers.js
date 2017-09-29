@@ -51,7 +51,11 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           onClick={() => this.openCreateModal()}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
         </Button>
-        <GroupAdminModalCreateGroup show={showCreateModal} onClose={this.handleClose} />
+        <GroupAdminModalCreateGroup
+          show={showCreateModal}
+          onClose={this.handleClose}
+          group={group}
+        />
         {group.userGroups.length ? (
           <ListGroup>
             {group.userGroups.map((userGroup, index) => (

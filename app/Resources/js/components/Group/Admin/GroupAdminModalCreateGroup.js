@@ -3,10 +3,12 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
+import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 
 type Props = {
   show: boolean,
   onClose: Function,
+  group: GroupAdminUsers_group,
 };
 
 export class GroupAdminModalCreateGroup extends React.Component<Props> {
