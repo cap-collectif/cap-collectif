@@ -81,6 +81,9 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $datagridMapper
+            ->add('id', null, [
+                'label' => 'admin.fields.proposal.id',
+            ])
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
