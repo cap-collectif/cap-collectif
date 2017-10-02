@@ -4,8 +4,8 @@ ChangeSelectionStatusInput:
         description: ""
         fields:
             stepId:
-                type: "ID!"
+                type: "String!"
             proposalId:
                 type: "ID!"
             statusId:
-                type: "ID"
+                type: "String"
