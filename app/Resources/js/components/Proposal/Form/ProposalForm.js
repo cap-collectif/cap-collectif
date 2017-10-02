@@ -61,7 +61,7 @@ export const ProposalForm = React.createClass({
         title: proposal.title,
         body: proposal.body,
         summary: proposal.summary,
-        theme: proposal.theme ? proposal.theme.id : -1,
+        theme: proposal.theme ? proposal.theme.id : null,
         district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : null,
         media: null,
@@ -134,7 +134,7 @@ export const ProposalForm = React.createClass({
         if (responses.length === 0) {
           delete form.responses;
         }
-        if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
+        if (!features.themes || !this.props.form.usingThemes || !form.theme) {
           delete form.theme;
         }
         if (!form.usingAddress && form.address.length === 0) {
@@ -152,7 +152,20 @@ export const ProposalForm = React.createClass({
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
-          submitProposal(dispatch, this.props.form.id, form, currentStepId);
+          submitProposal(dispatch, this.props.form.id, form, currentStepId).catch(e => {
+            if (
+              e.response &&
+              e.response.errors &&
+              e.response.errors.errors.includes('global.address_not_in_zone')
+            ) {
+              const errors = this.state.errors;
+              this.setState({
+                errors: { ...errors, address: ['proposal.constraints.address_in_zone'] },
+              });
+              return;
+            }
+            throw e;
+          });
         }
       } else {
         dispatch(cancelSubmitProposal());

@@ -145,7 +145,7 @@ Scenario: GraphQL client wants to change proposal collect status
       "variables": {
         "input": {
           "proposalId": "proposal2",
-          "statusId": "3"
+          "statusId": "status3"
         }
       }
     }
@@ -157,7 +157,7 @@ Scenario: GraphQL client wants to change proposal collect status
       "changeCollectStatus": {
         "proposal": {
           "status": {
-            "id": "3"
+            "id": "status3"
           }
         }
       }
@@ -246,7 +246,7 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
     "input": {
       "stepId": "selectionstep1",
       "proposalId": "proposal8",
-      "statusId": "1"
+      "statusId": "status1"
     }
   }
   }
@@ -265,7 +265,7 @@ Scenario: GraphQL client wants select a proposal with status, then unselect
             },
             {
               "step": { "id": "selectionstep1" },
-              "status": { "id": "1" }
+              "status": { "id": "status1" }
             }
           ]
         }
@@ -340,7 +340,7 @@ Scenario: GraphQL client wants to update proposal status
       "input": {
             "stepId": "selectionstep1",
             "proposalId": "proposal3",
-            "statusId": "1"
+            "statusId": "status1"
           }
         }
       }
@@ -353,7 +353,7 @@ Scenario: GraphQL client wants to update proposal status
         "proposal": {
           "selections": [{
             "step": { "id": "selectionstep1" },
-            "status": { "id": "1" }
+            "status": { "id": "status1" }
           }]
         }
       }

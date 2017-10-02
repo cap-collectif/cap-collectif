@@ -30,8 +30,8 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
-            ->add('id', null, [
-                'label' => 'admin.fields.proposal.id',
+            ->add('fullReference', null, [
+                'label' => 'admin.fields.proposal.reference',
             ])
             ->add('titleInfo', null, [
                 'label' => 'admin.fields.proposal.title',
@@ -67,9 +67,11 @@ class ProposalAdmin extends Admin
         }
 
         $listMapper
-            ->add('updatedInfo', 'datetime', [
+            ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.proposal.updated_at',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
+            ])
+            ->add('updateAuthor', null, [
+                'label' => 'admin.fields.proposal.updated_by',
             ]);
     }
 
@@ -79,9 +81,6 @@ class ProposalAdmin extends Admin
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $datagridMapper
-            ->add('id', null, [
-                'label' => 'admin.fields.proposal.id',
-            ])
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
