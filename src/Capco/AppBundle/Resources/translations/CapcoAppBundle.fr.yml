@@ -25,6 +25,8 @@ global:
   email:
     footer: Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.
   reference: Réf.
+  yes: Oui
+  no: Non
 
 
 sms:
@@ -1131,22 +1133,23 @@ project_download:
     arguments_ok: Arguments pour
     author: Auteur
     author_email: Email de l'auteur
-    author_id: Id de l'auteur
+    author_id: Identifiant de l'auteur
     category: Catégorie
-    content: Contenu
+    content: Description
     content_type: Type de contenu
     created: Création
-    district: Localisation
+    district: Zone géographique
     enabled: Publié
-    estimation: Estimation financière
+    estimation: Estimation du coût
     id: Identifiant
+    reference: Référence
     link: Lien
     nbVotes: Nombre de votes
     phone: Numéro de téléphone
     related_object: "Lié à :"
     score: Score
     sources: Sources
-    status: Statut
+    status: Dernier statut
     theme: Thème
     title: Titre
     total_arguments: Total des arguments
@@ -1154,7 +1157,7 @@ project_download:
     trashed: Corbeille
     trashed_date: Date de mise à la corbeille
     trashed_reason: Raison de la mise en corbeille
-    updated: Modification
+    updated: Dernière modification
     user_type: Type de profil
     votesCountByStepId: Nombre de votes par étape
     votes_mitigated: Votes mitigés
@@ -1169,6 +1172,11 @@ project_download:
     evaluation: Évaluation financière de l'investissement proposé
     delay: Délai de mise en œuvre du projet
     proposedAnswer: Analyse synthétique de l'avis du service
+    summary: Résumé
+    address: Lieu ou adresse
+    media: Illustration
+    likers: Coup de coeur
+    expired: Expiré
   sheet:
     title: Contributions
   values:
@@ -1177,7 +1185,7 @@ project_download:
     content_type:
       argument: Argument
       opinion: Proposition
-      proposal: Projet
+      proposal: Proposition
       simple_argument: Avis
       source: Source
       version: Modification

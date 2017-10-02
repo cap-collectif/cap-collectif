@@ -118,11 +118,11 @@ class ProposalRepository extends EntityRepository
                 ->setParameter('type', $type);
         }
 
-        if ('old' === $order) {
+        if ($order === 'old') {
             $qb->addOrderBy('proposal.createdAt', 'ASC');
         }
 
-        if ('last' === $order) {
+        if ($order === 'last') {
             $qb->addOrderBy('proposal.createdAt', 'DESC');
         }
 
@@ -131,7 +131,7 @@ class ProposalRepository extends EntityRepository
         //     $qb->addOrderBy('proposal.votesCount', 'DESC');
         // }
 
-        if ('comments' === $order) {
+        if ($order === 'comments') {
             $qb->addOrderBy('proposal.commentsCount', 'DESC');
         }
 
@@ -423,6 +423,22 @@ class ProposalRepository extends EntityRepository
     {
         return $queryBuilder
             ->andWhere($alias . '.address IS NOT NULL');
+    }
+
+    public function getDuplicateOnReferenceField(array $constraints): array
+    {
+        $reference = $constraints['reference'];
+        $proposalForm = $constraints['proposalForm'];
+
+        return $this->createQueryBuilder('p')
+            ->where('p.proposalForm = :proposal_form')
+            ->andWhere('p.reference = :reference')
+            ->setParameters([
+                'proposal_form' => $proposalForm->getId(),
+                'reference' => $reference,
+            ])
+            ->getQuery()
+            ->execute();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder

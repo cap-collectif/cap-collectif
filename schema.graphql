@@ -43,7 +43,7 @@ enum ArgumentValue {
 }
 
 input ChangeCollectStatusInput {
-  statusId: ID
+  statusId: String
 
   # The proposal id
   proposalId: ID!
@@ -152,9 +152,9 @@ type ChangeProposalPublicationStatusPayload {
 }
 
 input ChangeSelectionStatusInput {
-  stepId: ID!
+  stepId: String!
   proposalId: ID!
-  statusId: ID
+  statusId: String
   clientMutationId: String
 }
 
@@ -643,9 +643,6 @@ type Proposal {
   # The content of the contribution.
   id: String!
 
-  # The unique reference of proposal
-  reference: String!
-
   # Identifies the contribution title.
   title: String!
 
@@ -994,7 +991,7 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 }
 
 type Status {
-  id: ID!
+  id: String!
   name: String!
 }
 

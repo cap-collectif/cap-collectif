@@ -5,25 +5,28 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ReferenceEventListener
 {
     const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
-    public function preFlush(PreFlushEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args)
     {
+        $entity = $args->getEntity();
         $om = $args->getEntityManager();
-        $uow = $args->getEntityManager()->getUnitOfWork();
 
-        foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
-            $classMetaData = $om->getClassMetadata(get_class($entityInsertion));
+        $classMetaData = $om->getClassMetadata(get_class($entity));
 
-            // if entity has Reference Trait & has not already a reference (specific case in fixtures)
-            if ($this->hasTrait($classMetaData->getReflectionClass()) && !$entityInsertion->getReference()) {
-                $this->updateReferenceIsNecessary($om, $entityInsertion);
-            }
+        if (!$this->hasTrait($classMetaData->getReflectionClass())) {
+            return;
         }
+
+        if ($entity->getReference()) { // Used for fixtures
+            return;
+        }
+
+        $this->updateReferenceIsNecessary($om, $entity);
     }
 
     private function updateReferenceIsNecessary(EntityManager $om, $entity)
