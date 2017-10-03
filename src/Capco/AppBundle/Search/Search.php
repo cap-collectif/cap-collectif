@@ -56,7 +56,11 @@ abstract class Search
 
     public function searchNotInTermsForField(Query\BoolQuery $query, $fieldName, $terms): Query\BoolQuery
     {
-        $matchQuery = new Query\Match($fieldName, $terms);
+        if (is_array($terms)) {
+            $matchQuery = new Query\Terms($fieldName, $terms);
+        } else {
+            $matchQuery = new Query\Match($fieldName, $terms);
+        }
 
         $query->addMustNot($matchQuery);
 

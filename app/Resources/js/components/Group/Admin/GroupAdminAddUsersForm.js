@@ -43,7 +43,12 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
   static defaultProps: DefaultProps;
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, group } = this.props;
+
+    const usersInGroup = [];
+    group.userGroups.map(userGroup => {
+      usersInGroup.push(userGroup.user.id);
+    });
 
     return (
       <form onSubmit={handleSubmit}>
@@ -59,7 +64,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
             multi
             autoload
             loadOptions={terms =>
-              Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
+              Fetcher.postToJson(`/users/search`, { terms, notInIds: usersInGroup }).then(res => ({
                 options: res.users.map(u => ({
                   value: u.id,
                   label: u.displayName,

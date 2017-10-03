@@ -26,13 +26,14 @@ class UserSearch extends Search
         $this->type = 'user';
     }
 
-    public function searchAllUsers($terms = null, $without = null): array
+    public function searchAllUsers($terms = null, $notInIds = null): array
     {
         $query = new Query\BoolQuery();
 
-        $searchQuery = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms);
+        $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms);
+        $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
 
-        $results = $this->getResults($searchQuery, null, false);
+        $results = $this->getResults($query, null, false);
 
         return [
             'users' => array_map(function ($result) {
