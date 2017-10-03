@@ -7,6 +7,7 @@ import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
+import Fetcher from '../../../services/Fetcher';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import ProposalPrivateField from '../ProposalPrivateField';
@@ -16,6 +17,19 @@ import {
   cancelSubmitProposal,
 } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
+
+const query = `
+          query availableDistrictsForLocalisation(
+            $proposalFormId: ID!
+            $latitude: Float!
+            $longitude: Float!
+          ) {
+            availableDistrictsForLocalisation(proposalFormId: $proposalFormId, latitude: $latitude, longitude: $longitude) {
+              id
+              name
+            }
+          }
+        `;
 
 export const ProposalForm = React.createClass({
   propTypes: {
@@ -78,6 +92,7 @@ export const ProposalForm = React.createClass({
         address: [],
       },
       suggestions: [],
+      visibleDistricts: this.props.form.districts.map(district => district.id),
       address: proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
     };
   },
@@ -216,6 +231,30 @@ export const ProposalForm = React.createClass({
           address: results[0].formatted_address,
           errors: { ...prevState.errors, address: [] },
         }));
+        const [latitude, longitude] = [
+          results[0].geometry.location.lat(),
+          results[0].geometry.location.lng(),
+        ];
+        Fetcher.graphql({
+          operationName: 'availableDistrictsForLocalisation',
+          query,
+          variables: {
+            proposalFormId: this.props.form.id,
+            latitude,
+            longitude,
+          },
+        }).then(response => {
+          const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
+            district => district.id,
+          );
+          const form = { ...this.state.form };
+          form.district = visibleDistricts[0];
+          this.setState({
+            visibleDistricts,
+            form,
+          });
+          console.log(response); // eslint-disable-line
+        });
       })
       .catch(error => {
         this.resetAddressField();
@@ -547,9 +586,9 @@ export const ProposalForm = React.createClass({
               <FormattedMessage id="proposal.select.district">
                 {message => <option value="">{message}</option>}
               </FormattedMessage>
-              {form.districts.map(district => (
-                <option key={district.id} value={district.id}>
-                  {district.name}
+              {this.state.visibleDistricts.map(districtId => (
+                <option key={districtId} value={districtId}>
+                  {form.districts.filter(district => district.id === districtId)[0].name}
                 </option>
               ))}
             </Input>
