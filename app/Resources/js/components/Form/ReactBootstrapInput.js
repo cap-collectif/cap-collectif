@@ -56,6 +56,7 @@ type Props = {
   id: ?string,
   children: any,
   help: string | any,
+  description: string | any,
   bsSize: ?string,
   wrapperClassName: ?string,
   groupClassName: ?string,
@@ -277,6 +278,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {this.renderInputGroup(props)}
+        {props.description && <HelpBlock>{props.description}</HelpBlock>}
         {props.errors && <span className="error-block">{props.errors}</span>}
       </FormGroup>
     );
