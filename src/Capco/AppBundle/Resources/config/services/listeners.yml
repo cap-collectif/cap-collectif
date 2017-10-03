@@ -185,4 +185,4 @@ services:
   capco.listener.reference:
     class: Capco\AppBundle\EventListener\ReferenceEventListener
     tags:
-      - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
