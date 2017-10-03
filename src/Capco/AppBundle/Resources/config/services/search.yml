@@ -1,0 +1,9 @@
+services:
+  capco.search.search:
+    class: Capco\AppBundle\Search\Search
+    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app', '@validator']
+
+
+  capco.search.user_search:
+    class: Capco\AppBundle\Search\UserSearch
+    parent: capco.search.search
