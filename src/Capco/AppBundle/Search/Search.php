@@ -29,9 +29,13 @@ abstract class Search
         return $this;
     }
 
-    public function searchTermsInField(Query\BoolQuery $query, string $field = '', array $terms = []): Query\BoolQuery
+    public function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
     {
-        $termsQuery = new Query\Terms($field, $terms);
+        if (is_array($terms)) {
+            $termsQuery = new Query\Terms($fieldName, $terms);
+        } else {
+            $termsQuery = new Query\Match($fieldName, $terms);
+        }
 
         $query->addMust($termsQuery);
 
@@ -67,7 +71,7 @@ abstract class Search
         return $query;
     }
 
-    public function getResults(Query\BoolQuery $queryToExecute, int $size = null, bool $hybridResults): array
+    public function getResults(Query\BoolQuery $queryToExecute, int $size = null, bool $hybridResults = true): array
     {
         $query = new Query();
         $query
