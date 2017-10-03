@@ -5,28 +5,27 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 
 class ReferenceEventListener
 {
     const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
-    public function prePersist(LifecycleEventArgs $args)
+    private $lastProposals = [];
+
+    public function preFlush(PreFlushEventArgs $args)
     {
-        $entity = $args->getEntity();
         $om = $args->getEntityManager();
+        $uow = $args->getEntityManager()->getUnitOfWork();
 
-        $classMetaData = $om->getClassMetadata(get_class($entity));
+        foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
+            $classMetaData = $om->getClassMetadata(get_class($entityInsertion));
 
-        if (!$this->hasTrait($classMetaData->getReflectionClass())) {
-            return;
+            // if entity has Reference Trait & has not already a reference (specific case in fixtures)
+            if ($this->hasTrait($classMetaData->getReflectionClass()) && !$entityInsertion->getReference()) {
+                $this->updateReferenceIsNecessary($om, $entityInsertion);
+            }
         }
-
-        if ($entity->getReference()) { // Used for fixtures
-            return;
-        }
-
-        $this->updateReferenceIsNecessary($om, $entity);
     }
 
     private function updateReferenceIsNecessary(EntityManager $om, $entity)
@@ -36,8 +35,14 @@ class ReferenceEventListener
 
             $proposalFormRep = $om->getRepository(ProposalForm::class);
 
-            $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId());
+            if (isset($this->lastProposals[$proposalForm->getId()])) {
+                $lastReference = $this->lastProposals[$proposalForm->getId()];
+            } else {
+                $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId());
+            }
+
             $entity->setReference($lastReference + 1);
+            $this->lastProposals[$proposalForm->getId()] = $lastReference + 1;
 
             return;
         }

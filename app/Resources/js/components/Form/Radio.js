@@ -84,7 +84,7 @@ const Radio = React.createClass({
                 name={fieldName}
                 type="radio"
                 value={choice.label}
-                help={choice.description}
+                description={choice.description}
                 disabled={disabled}
                 image={choice.image ? choice.image.url : null}>
                 {choice.label}
