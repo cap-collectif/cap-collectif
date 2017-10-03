@@ -18,7 +18,6 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -26,11 +25,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="proposal")
+ * @ORM\Table(name="proposal", uniqueConstraints={
+ *    @ORM\UniqueConstraint(columns={ "proposal_form_id", "reference"}),
+ * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
@@ -39,11 +39,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasCategoryIfMandatory()
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
- * @UniqueEntity(
- *   fields={"reference", "proposalForm"},
- *   message="proposal.reference.not_unique",
- *   repositoryMethod="getDuplicateOnReferenceField"
- * )
  */
 class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
 {
@@ -859,7 +854,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             return '';
         }
 
-        return Map::decodeAddressFromJson($this->getAddress());
+        if (!is_array($this->getAddress())) {
+            return \GuzzleHttp\json_decode($this->getAddress(), true)[0]['formatted_address'];
+        }
+
+        return $this->getAddress()[0]['formatted_address'];
     }
 
     public function getFullReference(): string
