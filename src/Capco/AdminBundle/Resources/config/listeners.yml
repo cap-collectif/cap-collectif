@@ -134,8 +134,10 @@ services:
 
   capco.mutation.groups:
         class: Capco\AppBundle\GraphQL\Mutation\GroupMutation
+        arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: overblog_graphql.mutation, alias: "deleteUserInGroup", method: "deleteUserInGroup" }
+            - { name: overblog_graphql.mutation, alias: "addUsersInGroup", method: "addUsersInGroup" }
 
   capco.resolver.evaluation_forms:
     class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver
