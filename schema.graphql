@@ -371,6 +371,7 @@ type MediaQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
+  kind: String!
 }
 
 # A response
@@ -860,6 +861,7 @@ type QuestionChoice {
   title: String!
   description: String
   color: String
+  kind: String!
 }
 
 input QuestionInput {
@@ -1056,6 +1058,7 @@ type SimpleQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
+  kind: String!
 }
 
 # A source

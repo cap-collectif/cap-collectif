@@ -30,3 +30,5 @@ Question:
             validationRule:
                 type: "MultipleChoiceQuestionValidationRule"
                 resolve: "@=resolver('question_validation_rule', [value])"
+            kind:
+                type: "String!"

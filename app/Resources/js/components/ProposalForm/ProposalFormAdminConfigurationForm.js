@@ -482,6 +482,7 @@ export default createFragmentContainer(
         private
         required
         position
+        kind
       }
     }
   `,

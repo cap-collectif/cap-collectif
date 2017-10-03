@@ -20,3 +20,6 @@ MediaQuestion:
                 type: "Boolean!"
             helpText:
                 type: "String"
+            kind:
+                type: "String!"
+                resolve: "media"
