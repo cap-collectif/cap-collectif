@@ -7,9 +7,10 @@ import { Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
+import DeleteModal from '../../Modal/DeleteModal';
 
 type Props = { group: GroupAdminUsers_group };
-type State = { showAddUsersModal: boolean };
+type State = { showAddUsersModal: boolean, showRemoveUserModal: ?number };
 
 const onDelete = (userId: string, groupId: string) => {
   return DeleteUserInGroupMutation.commit({
@@ -23,6 +24,7 @@ const onDelete = (userId: string, groupId: string) => {
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
+    showRemoveUserModal: null,
   };
 
   openCreateModal = () => {
@@ -33,9 +35,13 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     this.setState({ showAddUsersModal: false });
   };
 
+  cancelCloseRemoveUserModal = () => {
+    this.setState({ showRemoveUserModal: null });
+  };
+
   render() {
     const { group } = this.props;
-    const { showAddUsersModal } = this.state;
+    const { showAddUsersModal, showRemoveUserModal } = this.state;
 
     return (
       <div className="box box-primary container">
@@ -60,6 +66,15 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           <ListGroup>
             {group.userGroups.map((userGroup, index) => (
               <ListGroupItem key={index}>
+                <DeleteModal
+                  closeDeleteModal={this.cancelCloseRemoveUserModal}
+                  showDeleteModal={index === showRemoveUserModal}
+                  deleteElement={() => {
+                    onDelete(userGroup.user.id, group.id);
+                  }}
+                  deleteModalTitle={'group.admin.modal.delete.title'}
+                  deleteModalContent={'group.admin.modal.delete.content'}
+                />
                 <Row>
                   <Col xs={3}>
                     {userGroup.user.media ? (
@@ -85,7 +100,9 @@ export class GroupAdminUsers extends React.Component<Props, State> {
                       className="pull-right mt-5"
                       bsStyle="danger"
                       href="#"
-                      onClick={() => onDelete(userGroup.user.id, group.id)}>
+                      onClick={() => {
+                        this.setState({ showRemoveUserModal: index });
+                      }}>
                       <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
                     </Button>
                   </Col>

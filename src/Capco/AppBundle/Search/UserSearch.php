@@ -24,7 +24,7 @@ class UserSearch extends Search
     {
         $query = new Query\BoolQuery();
 
-        $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms);
+        $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
         $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
 
         $results = $this->getResults($query, null, false);
