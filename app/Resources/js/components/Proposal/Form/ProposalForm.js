@@ -244,11 +244,11 @@ export const ProposalForm = React.createClass({
             longitude,
           },
         }).then(response => {
+          const form = { ...this.state.form };
           const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
             district => district.id,
           );
-          const form = { ...this.state.form };
-          form.district = visibleDistricts[0];
+          form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
           this.setState({
             visibleDistricts,
             form,

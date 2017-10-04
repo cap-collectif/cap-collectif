@@ -42,16 +42,11 @@ Scenario: GraphQL client wants to trash a proposal
   """
 
 Scenario: GraphQL client wants to get list of available districts for a particular location
-  Given I send a GraphQL POST request:
+  Given I send a GraphQL request:
   """
   {
-    "query": "availableDistrictsForLocalisation ($proposalFormId: ID!, $latitude: Float!, $longitude: Float!) {
+    availableDistrictsForLocalisation (proposalFormId: "proposalForm1", latitude: 48.1159675, longitude: -1.7234738) {
       name
-    }",
-    "variables": {
-      "proposalFormId": "proposalForm1",
-      "latitude": 48.1159675,
-      "longitude": -1.7234738
     }
   }
   """
@@ -62,8 +57,29 @@ Scenario: GraphQL client wants to get list of available districts for a particul
       "availableDistrictsForLocalisation": [
         {
           "name": "La Touche"
+        },
+        {
+          "name": "Rennes"
         }
       ]
     }
   }
   """
+
+Scenario: GraphQL client wants to get list of available districts for an invalid location
+  Given I send a GraphQL request:
+"""
+{
+  availableDistrictsForLocalisation (proposalFormId: "proposalForm1", latitude: 32.1159675, longitude: -13.7234738) {
+    name
+  }
+}
+"""
+  Then the JSON response should match:
+"""
+{
+  "data": {
+    "availableDistrictsForLocalisation": []
+  }
+}
+"""
