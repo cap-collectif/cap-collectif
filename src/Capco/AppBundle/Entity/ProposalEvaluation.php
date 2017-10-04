@@ -46,7 +46,7 @@ class ProposalEvaluation
     {
         if (!$this->responses->contains($response)) {
             $this->responses->add($response);
-            $response->setEvaluation($this);
+            $response->setProposalEvaluation($this);
         }
 
         return $this;
