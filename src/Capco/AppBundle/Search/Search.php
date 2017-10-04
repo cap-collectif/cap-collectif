@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Search;
 
+use Elastica\Filter\BoolFilter;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
 use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
@@ -9,6 +12,14 @@ use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 abstract class Search
 {
     const RESULTS_PER_PAGE = 10;
+
+    const AVAILABLE_TYPES_FOR_MULTI_MATCH = [
+        Query\MultiMatch::TYPE_BEST_FIELDS,
+        Query\MultiMatch::TYPE_MOST_FIELDS,
+        Query\MultiMatch::TYPE_CROSS_FIELDS,
+        Query\MultiMatch::TYPE_PHRASE,
+        Query\MultiMatch::TYPE_PHRASE_PREFIX,
+    ];
 
     protected $index;
     protected $transformer;
@@ -22,14 +33,14 @@ abstract class Search
         $this->validator = $validator;
     }
 
-    public function setType(string $type): self
+    protected function setType(string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
+    protected function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
     {
         if (is_array($terms)) {
             $termsQuery = new Query\Terms($fieldName, $terms);
@@ -42,7 +53,7 @@ abstract class Search
         return $query;
     }
 
-    public function searchTermsInMultipleFields(Query\BoolQuery $query, array $fields, $terms = null): Query\BoolQuery
+    protected function searchTermsInMultipleFields(Query\BoolQuery $query, array $fields, $terms = null, $type = null): Query\BoolQuery
     {
         if (empty(trim($terms))) {
             $multiMatchQuery = new Query\MatchAll();
@@ -51,6 +62,10 @@ abstract class Search
             $multiMatchQuery
                 ->setQuery($terms)
                 ->setFields($fields);
+
+            if ($type && in_array($type, self::AVAILABLE_TYPES_FOR_MULTI_MATCH, true)) {
+                $multiMatchQuery->setType($type);
+            }
         }
 
         $query->addMust($multiMatchQuery);
@@ -58,7 +73,7 @@ abstract class Search
         return $query;
     }
 
-    public function searchNotInTermsForField(Query\BoolQuery $query, $fieldName, $terms): Query\BoolQuery
+    protected function searchNotInTermsForField(Query\BoolQuery $query, $fieldName, $terms): Query\BoolQuery
     {
         if (is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
@@ -71,7 +86,7 @@ abstract class Search
         return $query;
     }
 
-    public function getResults(Query\BoolQuery $queryToExecute, int $size = null, bool $hybridResults = true): array
+    protected function getResults(Query\BoolQuery $queryToExecute, int $size = null, bool $hybridResults = true): array
     {
         $query = new Query();
         $query
@@ -91,5 +106,45 @@ abstract class Search
             'count' => $totalHits,
             'results' => $results,
         ];
+    }
+
+    protected function getRandomSortedQuery(Query\AbstractQuery $query): Query
+    {
+        $functionScore = new Query\FunctionScore();
+        $functionScore->setQuery($query);
+        $functionScore->setRandomScore();
+
+        return new Query($functionScore);
+    }
+
+    protected function getBoolFilter(array $filters): BoolFilter
+    {
+        $boolFilter = new BoolFilter();
+
+        foreach ($filters as $filterName => $filterData) {
+            if (is_array($filterData)) {
+                $nested = new Nested();
+                $nested->setPath($filterName);
+                $nested->setFilter($this->getBoolFilter($filterData));
+                $boolFilter->addMust($nested);
+            } else {
+                $boolFilter->addMust(new Term([
+                    $filterName => $filterData,
+                ]));
+            }
+        }
+
+        return $boolFilter;
+    }
+
+    protected function addSort(Query $query, string $sort = '_score', string $order = 'desc')
+    {
+        $query
+            ->addSort([
+                $sort => [
+                    'order' => $order,
+                    'missing' => 'desc' === $order ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
+                ],
+            ]);
     }
 }

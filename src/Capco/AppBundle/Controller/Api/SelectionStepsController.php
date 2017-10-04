@@ -68,7 +68,7 @@ class SelectionStepsController extends FOSRestController
             unset($providedFilters['statuses']);
         }
 
-        $results = $this->get('capco.search.resolver')->searchProposals(
+        $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,
             $order,

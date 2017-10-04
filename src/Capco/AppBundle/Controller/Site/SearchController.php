@@ -43,10 +43,9 @@ class SearchController extends Controller
         }
 
         // Perform the search
-        $searchResults = $this->container->get('capco.search.resolver')->searchAll(
+        $searchResults = $this->container->get('capco.search.global_search')->search(
             $page,
             $searchParams['term'],
-            $searchParams['type'],
             $sortField,
             $sortOrder
         );

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeff
- * Date: 03/10/2017
- * Time: 11:30.
- */
 
 namespace Capco\AppBundle\Search;
 
