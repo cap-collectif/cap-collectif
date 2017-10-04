@@ -1,99 +1,85 @@
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
 
-const Navbar = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    logo: PropTypes.string,
-    items: PropTypes.array.isRequired,
-  },
+type Props = {
+  intl: intlShape,
+  logo?: ?string,
+  items: Array,
+  siteName: ?string,
+};
 
-  getDefaultProps() {
-    return {
-      logo: null,
-    };
-  },
-
-  getInitialState() {
-    const { items } = this.props;
-    return {
-      items,
-      moreItems: [],
-    };
-  },
-
-  componentDidMount() {
-    window.addEventListener('resize', this.autocollapseNavbar);
-    setTimeout(() => {
-      this.autocollapseNavbar();
-    }, 100);
-  },
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.autocollapseNavbar);
-  },
-
-  getPixelsWidth(component) {
-    return component && ReactDOM.findDOMNode(component)
-      ? ReactDOM.findDOMNode(component).clientWidth
-      : 0;
-  },
-
-  autocollapseNavbar() {
-    const tempItems = this.state.items.concat(this.state.moreItems);
-    let items = [];
-    const moreItems = [];
-    if (window.innerWidth >= 768) {
-      // Only applied to window from sm size (otherwise menu is collapsed)
-      const containerWidth = this.getPixelsWidth(this.container) - 30; // Minus padding
-      const seeMoreDropdownWidth = this.getPixelsWidth(this.seeMoreDropdown) || 75; // Approximate size of menu item
-      const headerWidth = this.getPixelsWidth(this.header);
-      const navrightWidth = this.getPixelsWidth(this.navright.getWrappedInstance());
-      const occupiedWidth = headerWidth + navrightWidth + seeMoreDropdownWidth + 30; // + 30px just in case
-      const maxWidth = containerWidth - occupiedWidth;
-      let width = 0;
-      tempItems.map(item => {
-        width += this.getPixelsWidth(this[`item-${item.id}`]);
-        if (maxWidth < width) {
-          moreItems.push(item);
-        } else {
-          items.push(item);
-        }
-      });
-    } else {
-      items = tempItems;
-    }
-
-    this.setState(
-      {
-        items,
-        moreItems,
-      },
-      () => {
-        if (window.innerWidth >= 768 && ReactDOM.findDOMNode(this.container).clientHeight > 53) {
-          // 53 => 50px (navbar height) + 3px margin (just in case)
-          this.autocollapseNavbar();
-        }
-      },
-    );
-  },
-
+class Navbar extends React.Component<Props> {
   render() {
-    const { logo, intl } = this.props;
-    const { items, moreItems } = this.state;
-    const moreItem =
-      moreItems.length > 0
-        ? {
-            id: 'see-more',
-            title: intl.formatMessage({ id: 'global.navbar.see_more' }),
-            hasEnabledFeature: true,
-            children: moreItems,
-          }
-        : null;
+    const { logo, intl, items, siteName } = this.props;
+
+    const navbarLgSize = (
+      <Nav id="navbar-content" className="visible-lg-block">
+        {items.filter((item, index) => index < 5).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
+        {items.length > 5 && (
+          <NavbarItem
+            item={{
+              id: 'see-more',
+              title: intl.formatMessage({ id: 'global.navbar.see_more' }),
+              hasEnabledFeature: true,
+              children: items.filter((item, index) => index >= 5),
+            }}
+            className="navbar-dropdown-more"
+          />
+        )}
+      </Nav>
+    );
+
+    const navbarMdSize = (
+      <Nav id="navbar-content" className="visible-md-block">
+        {items.filter((item, index) => index < 3).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
+        {items.length > 3 && (
+          <NavbarItem
+            item={{
+              id: 'see-more',
+              title: intl.formatMessage({ id: 'global.navbar.see_more' }),
+              hasEnabledFeature: true,
+              children: items.filter((item, index) => index >= 3),
+            }}
+            className="navbar-dropdown-more"
+          />
+        )}
+      </Nav>
+    );
+
+    const navbarSmSize = (
+      <Nav id="navbar-content" className="visible-sm-block">
+        {items.filter((item, index) => index < 2).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
+        {items.length > 2 && (
+          <NavbarItem
+            item={{
+              id: 'see-more',
+              title: intl.formatMessage({ id: 'global.navbar.see_more' }),
+              hasEnabledFeature: true,
+              children: items.filter((item, index) => index >= 2),
+            }}
+            className="navbar-dropdown-more"
+          />
+        )}
+      </Nav>
+    );
+
+    const navbarXsSize = (
+      <Nav id="navbar-content" className="visible-xs-block">
+        {items.map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
+      </Nav>
+    );
+
     return (
       <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
@@ -114,45 +100,28 @@ const Navbar = React.createClass({
             </div>
           </div>
         </div>
-        <div className="container" ref={c => (this.container = c)}>
+        <div className="container">
           <Navigation.Header>
-            <Navigation.Brand href="/" id="home" ref={c => (this.header = c)}>
-              <a href="/">
-                <img
-                  src={logo}
-                  title={intl.formatMessage({ id: 'navbar.homepage' })}
-                  alt={intl.formatMessage({ id: 'navbar.homepage' })}
-                />
-              </a>
-            </Navigation.Brand>
-
+            {logo && (
+              <Navigation.Brand href="/" id="home">
+                <a href="/">
+                  <img src={logo} alt={siteName} />
+                </a>
+              </Navigation.Brand>
+            )}
             <Navigation.Toggle />
           </Navigation.Header>
           <Navigation.Collapse>
-            <Nav id="navbar-content">
-              {items.map((header, index) => {
-                return (
-                  <NavbarItem
-                    key={index}
-                    item={header}
-                    ref={c => (this[`item-${header.id}`] = c)}
-                  />
-                );
-              })}
-              {moreItem && (
-                <NavbarItem
-                  item={moreItem}
-                  ref={c => (this.seeMoreDropdown = c)}
-                  className="navbar-dropdown-more"
-                />
-              )}
-            </Nav>
-            <NavbarRight ref={c => (this.navright = c)} />
+            {navbarLgSize}
+            {navbarMdSize}
+            {navbarSmSize}
+            {navbarXsSize}
+            <NavbarRight />
           </Navigation.Collapse>
         </div>
       </Navigation>
     );
-  },
-});
+  }
+}
 
 export default injectIntl(Navbar);

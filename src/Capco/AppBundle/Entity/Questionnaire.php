@@ -87,11 +87,17 @@ class Questionnaire
     private $acknowledgeReplies = false;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="questionnaire", cascade={"persist", "remove"})
+     */
+    private $proposalEvaluations;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->proposalEvaluations = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -387,6 +393,34 @@ class Questionnaire
     public function setAcknowledgeReplies($acknowledgeReplies)
     {
         $this->acknowledgeReplies = $acknowledgeReplies;
+
+        return $this;
+    }
+
+    public function getProposalEvaluations(): ArrayCollection
+    {
+        return $this->proposalEvaluations;
+    }
+
+    public function setProposalEvaluations($proposalEvaluations): self
+    {
+        $this->proposalEvaluations = $proposalEvaluations;
+
+        return $this;
+    }
+
+    public function addProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
+    {
+        if (!$this->proposalEvaluations->contains($proposalEvaluation)) {
+            $this->proposalEvaluations->add($proposalEvaluation);
+        }
+
+        return $this;
+    }
+
+    public function removeProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
+    {
+        $this->proposalEvaluations->removeElement($proposalEvaluation);
 
         return $this;
     }

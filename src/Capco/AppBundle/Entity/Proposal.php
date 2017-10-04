@@ -223,6 +223,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      */
     private $proposedAnswer;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist", "remove"})
+     */
+    private $proposalEvaluations;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -237,6 +242,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
+        $this->proposalEvaluations = new ArrayCollection();
     }
 
     public function __toString()
@@ -916,5 +922,33 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         }
 
         return $this->getStatus();
+    }
+
+    public function getProposalEvaluations(): ArrayCollection
+    {
+        return $this->proposalEvaluations;
+    }
+
+    public function setProposalEvaluations($proposalEvaluations): self
+    {
+        $this->proposalEvaluations = $proposalEvaluations;
+
+        return $this;
+    }
+
+    public function addProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
+    {
+        if (!$this->proposalEvaluations->contains($proposalEvaluation)) {
+            $this->proposalEvaluations->add($proposalEvaluation);
+        }
+
+        return $this;
+    }
+
+    public function removeProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
+    {
+        $this->proposalEvaluations->removeElement($proposalEvaluation);
+
+        return $this;
     }
 }
