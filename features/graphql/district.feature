@@ -40,3 +40,30 @@ Scenario: GraphQL client wants to trash a proposal
     }
   }
   """
+
+Scenario: GraphQL client wants to get list of available districts for a particular location
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "availableDistrictsForLocalisation ($proposalFormId: ID!, $latitude: Float!, $longitude: Float!) {
+      name
+    }",
+    "variables": {
+      "proposalFormId": "proposalForm1",
+      "latitude": 48.1159675,
+      "longitude": -1.7234738
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "availableDistrictsForLocalisation": [
+        {
+          "name": "La Touche"
+        }
+      ]
+    }
+  }
+  """
