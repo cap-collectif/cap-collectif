@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import Loader from '../../../../js/components/Utils/Loader';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
@@ -91,6 +92,7 @@ export const ProposalForm = React.createClass({
         media: [],
         address: [],
       },
+      loadingDistricts: false,
       suggestions: [],
       visibleDistricts: this.props.form.districts.map(district => district.id),
       address: proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
@@ -235,6 +237,9 @@ export const ProposalForm = React.createClass({
           results[0].geometry.location.lat(),
           results[0].geometry.location.lng(),
         ];
+        this.setState({
+          loadingDistricts: true,
+        });
         Fetcher.graphql({
           operationName: 'availableDistrictsForLocalisation',
           query,
@@ -253,7 +258,9 @@ export const ProposalForm = React.createClass({
             visibleDistricts,
             form,
           });
-          console.log(response); // eslint-disable-line
+          this.setState({
+            loadingDistricts: false,
+          });
         });
       })
       .catch(error => {
@@ -572,10 +579,12 @@ export const ProposalForm = React.createClass({
             {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
           </div>
         )}
+        <Loader show={this.state.loadingDistricts} />
         {features.districts &&
           form.usingDistrict &&
           form.districts.length > 0 && (
             <Input
+              disabled={this.state.loadingDistricts}
               id="proposal_district"
               type="select"
               valueLink={this.linkState('form.district')}
