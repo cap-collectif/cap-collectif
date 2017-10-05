@@ -441,7 +441,7 @@ export const submitProposal = (
   data: Object,
   currentStepId: string,
 ): Promise<*> => {
-  if(data.visibleDistricts) {
+  if (data.visibleDistricts) {
     delete data.visibleDistricts;
   }
   const formData = new FormData();
@@ -485,7 +485,7 @@ export const submitProposal = (
 };
 
 export const updateProposal = (dispatch: Dispatch, form: Uuid, id: Uuid, data: Object) => {
-  if(data.visibleDistricts) {
+  if (data.visibleDistricts) {
     delete data.visibleDistricts;
   }
   const formData = new FormData();
