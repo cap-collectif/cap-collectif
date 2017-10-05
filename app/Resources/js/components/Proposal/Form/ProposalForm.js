@@ -117,6 +117,14 @@ export const ProposalForm = React.createClass({
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
     this.updateAddressConstraint();
+    if (this.state.form.address !== '') {
+      const address = JSON.parse(this.state.form.address);
+      const [latitude, longitude] = [
+        address[0].geometry.location.lat,
+        address[0].geometry.location.lng,
+      ];
+      this.retrieveDistrictForLocation(latitude, longitude);
+    }
   },
 
   componentWillReceiveProps(nextProps) {
@@ -237,31 +245,7 @@ export const ProposalForm = React.createClass({
           results[0].geometry.location.lat(),
           results[0].geometry.location.lng(),
         ];
-        this.setState({
-          loadingDistricts: true,
-        });
-        Fetcher.graphql({
-          operationName: 'availableDistrictsForLocalisation',
-          query,
-          variables: {
-            proposalFormId: this.props.form.id,
-            latitude,
-            longitude,
-          },
-        }).then(response => {
-          const form = { ...this.state.form };
-          const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
-            district => district.id,
-          );
-          form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
-          this.setState({
-            visibleDistricts,
-            form,
-          });
-          this.setState({
-            loadingDistricts: false,
-          });
-        });
+        this.retrieveDistrictForLocation(latitude, longitude);
       })
       .catch(error => {
         this.resetAddressField();
@@ -299,6 +283,34 @@ export const ProposalForm = React.createClass({
         }
       });
     }
+  },
+
+  retrieveDistrictForLocation(latitude, longitude) {
+    this.setState({
+      loadingDistricts: true,
+    });
+    Fetcher.graphql({
+      operationName: 'availableDistrictsForLocalisation',
+      query,
+      variables: {
+        proposalFormId: this.props.form.id,
+        latitude,
+        longitude,
+      },
+    }).then(response => {
+      const form = { ...this.state.form };
+      const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
+        district => district.id,
+      );
+      form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
+      this.setState({
+        visibleDistricts,
+        form,
+      });
+      this.setState({
+        loadingDistricts: false,
+      });
+    });
   },
 
   updateThemeConstraint() {
