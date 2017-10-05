@@ -123,7 +123,7 @@ export const ProposalForm = React.createClass({
         address[0].geometry.location.lat,
         address[0].geometry.location.lng,
       ];
-      this.retrieveDistrictForLocation(latitude, longitude);
+      this.retrieveDistrictForLocation(latitude, longitude, true);
     }
   },
 
@@ -285,7 +285,7 @@ export const ProposalForm = React.createClass({
     }
   },
 
-  retrieveDistrictForLocation(latitude, longitude) {
+  retrieveDistrictForLocation(latitude, longitude, isEditMode = false) {
     this.setState({
       loadingDistricts: true,
     });
@@ -302,7 +302,9 @@ export const ProposalForm = React.createClass({
       const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
-      form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
+      if (!isEditMode) {
+        form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
+      }
       this.setState({
         visibleDistricts,
         form,
