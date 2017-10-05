@@ -321,6 +321,15 @@ interface EditableContribution {
   updatedAt: String!
 }
 
+# A Evaluation form (question)
+type EvaluationForm {
+  # The id of evaluation form (question)
+  id: String!
+
+  # The title of evaluation form (question)
+  title: String!
+}
+
 scalar GeoJSON
 
 scalar HTML
@@ -361,6 +370,7 @@ type Mutation {
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
   changeTitleProposalForm(input: ChangeTitleProposalFormInput!): ChangeTitleProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
+  setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
 }
 
 # A notifications configuration
@@ -663,6 +673,9 @@ type Proposal {
 
   # Identifies the form where the contribution was submitted.
   form: ProposalForm!
+
+  # Identifies the evaluation form of proposal.
+  proposalEvaluation: ProposalEvaluation
 }
 
 # A proposal category
@@ -673,6 +686,15 @@ type ProposalCategory {
 
 input ProposalCategoryInput {
   name: String!
+}
+
+# A proposal Evaluation
+type ProposalEvaluation {
+  # Identifies the proposal.
+  proposal: Proposal!
+
+  # Identifies the question.
+  question: Question!
 }
 
 # A budget form
@@ -707,6 +729,12 @@ type ProposalForm {
   # The HTTP url for this proposal form.
   url: URI!
   notificationsConfiguration: NotificationsConfiguration!
+
+  # Get all available evaluation forms.
+  evaluationForms: [EvaluationForm!]
+
+  # Get the evaluation form of the proposal form
+  evaluationForm: EvaluationForm
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -958,6 +986,17 @@ type SelectionStep implements Step {
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
+}
+
+input SetEvaluationFormInProposalFormInput {
+  proposalFormId: ID!
+  evaluationFormId: String
+  clientMutationId: String
+}
+
+type SetEvaluationFormInProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
 }
 
 # A source

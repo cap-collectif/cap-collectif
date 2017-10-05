@@ -224,9 +224,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $proposedAnswer;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist", "remove"})
      */
-    private $proposalEvaluations;
+    private $proposalEvaluation;
 
     public function __construct()
     {
@@ -242,7 +242,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
-        $this->proposalEvaluations = new ArrayCollection();
     }
 
     public function __toString()
@@ -924,30 +923,14 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->getStatus();
     }
 
-    public function getProposalEvaluations(): ArrayCollection
+    public function getProposalEvaluation()
     {
-        return $this->proposalEvaluations;
+        return $this->proposalEvaluation;
     }
 
-    public function setProposalEvaluations($proposalEvaluations): self
+    public function setProposalEvaluation($proposalEvaluation): self
     {
-        $this->proposalEvaluations = $proposalEvaluations;
-
-        return $this;
-    }
-
-    public function addProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
-    {
-        if (!$this->proposalEvaluations->contains($proposalEvaluation)) {
-            $this->proposalEvaluations->add($proposalEvaluation);
-        }
-
-        return $this;
-    }
-
-    public function removeProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
-    {
-        $this->proposalEvaluations->removeElement($proposalEvaluation);
+        $this->proposalEvaluation = $proposalEvaluation;
 
         return $this;
     }

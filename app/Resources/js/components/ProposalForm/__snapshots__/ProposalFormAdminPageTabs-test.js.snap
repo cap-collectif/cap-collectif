@@ -39,8 +39,13 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
+<<<<<<< HEAD
       eventKey={2}
       title="proposal_form.admin.notification"
+=======
+      eventKey={3}
+      title="proposal_form.admin.evaluation"
+>>>>>>> add evaluation form in proposal form #2969
     >
       <Relay(Connect(ReduxForm))
         proposalForm={
@@ -52,7 +57,23 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       />
     </Tab>
     <Tab
+<<<<<<< HEAD
       eventKey={3}
+=======
+      eventKey={4}
+      title="proposal_form.admin.notification"
+    >
+      <Relay(Connect(ReduxForm))
+        proposalForm={
+          Object {
+            "url": "http://capco.dev/top-budget",
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={5}
+>>>>>>> add evaluation form in proposal form #2969
       title="proposal_form.admin.settings"
     >
       <Relay(Connect(ReduxForm))

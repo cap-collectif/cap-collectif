@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\Questionnaire:
     id:
       expose: true
       type: integer
-      groups: [Questionnaires]
+      groups: [Questionnaires, ProposalEvaluation]
     title:
       expose: true
       type: string
-      groups: [Questionnaires]
+      groups: [Questionnaires, ProposalEvaluation]
     description:
       expose: true
       type: string

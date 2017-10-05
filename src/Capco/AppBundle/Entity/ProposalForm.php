@@ -172,6 +172,12 @@ class ProposalForm
     private $lngMap;
 
     /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
+     * @ORM\JoinColumn(name="evaluation_form_id", nullable=true)
+     */
+    private $evaluationForm;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -678,6 +684,18 @@ class ProposalForm
     public function setIllustrationHelpText(string $illustrationHelpText = null): self
     {
         $this->illustrationHelpText = $illustrationHelpText;
+
+        return $this;
+    }
+
+    public function getEvaluationForm()
+    {
+        return $this->evaluationForm;
+    }
+
+    public function setEvaluationForm($evaluationForm): self
+    {
+        $this->evaluationForm = $evaluationForm;
 
         return $this;
     }

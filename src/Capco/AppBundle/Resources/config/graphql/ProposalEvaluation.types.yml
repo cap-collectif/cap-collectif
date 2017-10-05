@@ -1,0 +1,11 @@
+ProposalEvaluation:
+    type: object
+    config:
+        description: "A proposal Evaluation"
+        fields:
+            proposal:
+                type: "Proposal!"
+                description: "Identifies the proposal."
+            question:
+                type: "Question!"
+                description: "Identifies the question."

@@ -14,7 +14,7 @@ class ProposalEvaluation
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluations")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false)
      */
     protected $proposal;
