@@ -119,11 +119,11 @@ export const ProposalForm = React.createClass({
     this.updateAddressConstraint();
     if (this.state.form.address !== '') {
       const address = JSON.parse(this.state.form.address);
-      const [latitude, longitude] = [
-        address[0].geometry.location.lat,
-        address[0].geometry.location.lng,
-      ];
-      this.retrieveDistrictForLocation(latitude, longitude, true);
+      const location = address[0].geometry.location;
+      console.log(location);
+      if (location !== null) {
+        this.retrieveDistrictForLocation(location, true);
+      }
     }
   },
 
@@ -241,11 +241,7 @@ export const ProposalForm = React.createClass({
           address: results[0].formatted_address,
           errors: { ...prevState.errors, address: [] },
         }));
-        const [latitude, longitude] = [
-          results[0].geometry.location.lat(),
-          results[0].geometry.location.lng(),
-        ];
-        this.retrieveDistrictForLocation(latitude, longitude);
+        this.retrieveDistrictForLocation(results[0].geometry.location);
       })
       .catch(error => {
         this.resetAddressField();
@@ -285,17 +281,22 @@ export const ProposalForm = React.createClass({
     }
   },
 
-  retrieveDistrictForLocation(latitude, longitude, isEditMode = false) {
+  retrieveDistrictForLocation(location, isEditMode = false) {
     this.setState({
       loadingDistricts: true,
     });
+    if (typeof location.lat === 'function' || typeof location.lng === 'function') {
+      // Google API return the lat and lng as a function, whereas when editing, I get those values directly from the
+      // component as a value so I have to convert the function to a value to have the same output in edit and creation
+      [location.lat, location.lng] = [location.lat(), location.lng()];
+    }
     Fetcher.graphql({
       operationName: 'availableDistrictsForLocalisation',
       query,
       variables: {
         proposalFormId: this.props.form.id,
-        latitude,
-        longitude,
+        latitude: location.lat,
+        longitude: location.lng,
       },
     }).then(response => {
       const form = { ...this.state.form };
@@ -303,13 +304,11 @@ export const ProposalForm = React.createClass({
         district => district.id,
       );
       if (!isEditMode) {
-        form.district = visibleDistricts.length === 0 ? '' : visibleDistricts[0];
+        form.district = visibleDistricts.length === 0 ? null : visibleDistricts[0];
       }
       this.setState({
         visibleDistricts,
         form,
-      });
-      this.setState({
         loadingDistricts: false,
       });
     });

@@ -441,9 +441,6 @@ export const submitProposal = (
   data: Object,
   currentStepId: string,
 ): Promise<*> => {
-  if (data.visibleDistricts) {
-    delete data.visibleDistricts;
-  }
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => {
@@ -485,9 +482,6 @@ export const submitProposal = (
 };
 
 export const updateProposal = (dispatch: Dispatch, form: Uuid, id: Uuid, data: Object) => {
-  if (data.visibleDistricts) {
-    delete data.visibleDistricts;
-  }
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
