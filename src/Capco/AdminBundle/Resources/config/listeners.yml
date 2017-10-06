@@ -23,6 +23,8 @@ services:
       - { name: overblog_graphql.resolver, alias: "question_type", method: "resolveType" }
       - { name: overblog_graphql.resolver, alias: "question_position", method: "resolvePosition" }
       - { name: overblog_graphql.resolver, alias: "query_available_districts_for_location", method: "resolveDistrictsForLocalisation" }
+      - { name: overblog_graphql.resolver, alias: "question_choices", method: "resolveChoices" }
+      - { name: overblog_graphql.resolver, alias: "question_validation_rule", method: "resolveValidationRule" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
@@ -117,3 +119,8 @@ services:
         - { name: overblog_graphql.resolver, alias: "user_dateOfBirth", method: "resolveDateOfBirth" }
         - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
         - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
+
+  capco.resolvers.evaluation_forms:
+    class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver
+    tags:
+      - { name: overblog_graphql.resolver, alias: "evaluation_form_questions", method: "resolveQuestions" }

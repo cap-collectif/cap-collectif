@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -35,5 +36,23 @@ class QuestionResolver implements ContainerAwareInterface
     public function resolvePosition(AbstractQuestion $question): int
     {
         return $question->getQuestionnaireAbstractQuestion()->getPosition();
+    }
+
+    public function resolveChoices(AbstractQuestion $question)
+    {
+        if ($question instanceof MultipleChoiceQuestion) {
+            return $question->getQuestionChoices();
+        }
+
+        return null;
+    }
+
+    public function resolveValidationRule(AbstractQuestion $question)
+    {
+        if ($question instanceof MultipleChoiceQuestion) {
+            return $question->getValidationRule();
+        }
+
+        return null;
     }
 }

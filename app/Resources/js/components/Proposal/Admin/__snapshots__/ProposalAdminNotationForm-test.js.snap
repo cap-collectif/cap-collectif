@@ -34,36 +34,40 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
       onSubmit={[Function]}
     >
       <div>
-        <Field
-          addonAfter={
-            <Glyphicon
-              bsClass="glyphicon"
-              glyph="euro"
-            />
-          }
-          component={[Function]}
-          id="proposal_estimation"
-          label={
-            <FormattedMessage
-              id="proposal.estimation"
-              values={Object {}}
-            />
-          }
-          name="estimation"
-          type="number"
-        />
-        <Field
-          clearable={false}
-          component={[Function]}
-          id="likers"
-          inputClassName="fake-inputClassName"
-          label="Coup(s) de coeur"
-          labelClassName="control-label"
-          loadOptions={[Function]}
-          multi={true}
-          name="likers"
-          placeholder="Sélectionnez un coup de coeur"
-        />
+        <div
+          className="mb-40"
+        >
+          <Field
+            addonAfter={
+              <Glyphicon
+                bsClass="glyphicon"
+                glyph="euro"
+              />
+            }
+            component={[Function]}
+            id="proposal_estimation"
+            label={
+              <FormattedMessage
+                id="proposal.estimation"
+                values={Object {}}
+              />
+            }
+            name="estimation"
+            type="number"
+          />
+          <Field
+            clearable={false}
+            component={[Function]}
+            id="likers"
+            inputClassName="fake-inputClassName"
+            label="Coup(s) de coeur"
+            labelClassName="control-label"
+            loadOptions={[Function]}
+            multi={true}
+            name="likers"
+            placeholder="Sélectionnez un coup de coeur"
+          />
+        </div>
         <ButtonToolbar
           bsClass="btn-toolbar"
           className="box-content__toolbar"

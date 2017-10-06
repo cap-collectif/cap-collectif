@@ -8,6 +8,8 @@ Question:
                 type: "String!"
             title:
                 type: "String!"
+            slug:
+                type: "String!"
             type:
                 type: "QuestionTypeValue!"
                 resolve: "@=resolver('question_type', [value])"
@@ -20,3 +22,9 @@ Question:
                 type: "Boolean!"
             helpText:
                 type: "String"
+            choices:
+                type: "[QuestionChoice!]"
+                resolve: "@=resolver('question_choices', [value])"
+            validationRule:
+                type: "MultipleChoiceQuestionValidationRule"
+                resolve: "@=resolver('question_validation_rule', [value])"

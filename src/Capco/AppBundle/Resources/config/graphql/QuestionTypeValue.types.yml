@@ -11,3 +11,11 @@ QuestionTypeValue:
                 value: editor
             medias:
                 value: medias
+            radio:
+                value: radio
+            checkbox:
+                value: checkbox
+            button:
+                value: button
+            ranking:
+                value: ranking

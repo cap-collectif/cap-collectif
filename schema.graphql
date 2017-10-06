@@ -328,6 +328,9 @@ type EvaluationForm {
 
   # The title of evaluation form (question)
   title: String!
+
+  # List of questions in the evaluation form
+  questions: [Question!]
 }
 
 scalar GeoJSON
@@ -353,6 +356,12 @@ type MediaResponse implements Response {
 
   # Medias
   medias: [Media]!
+}
+
+# Make all fields nullable is currently the only way to make the VO nullable
+type MultipleChoiceQuestionValidationRule {
+  type: String
+  number: String
 }
 
 type Mutation {
@@ -810,11 +819,22 @@ type Query {
 type Question {
   id: String!
   title: String!
+  slug: String!
   type: QuestionTypeValue!
   position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+}
+
+# A possible choice of a question
+type QuestionChoice {
+  id: String!
+  title: String!
+  description: String
+  color: String
 }
 
 input QuestionInput {
@@ -831,6 +851,10 @@ enum QuestionTypeValue {
   textarea
   editor
   medias
+  radio
+  checkbox
+  button
+  ranking
 }
 
 type QuestionnaireAbstractQuestion {

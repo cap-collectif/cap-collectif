@@ -90,6 +90,8 @@
     "editor.size.small": "Petit",
     "editor.url": "Visiter l'URL",
     "global.add": "Ajouter",
+    "global.mandatory": "Obligatoire",
+    "global.optional": "Facultatif",
     "global.admin.required": "Saisie obligatoire",
     "global.advanced_filters": "Filtres avancés",
     "global.required": "Cette valeur est requise.",
@@ -434,6 +436,7 @@
     "proposal.admin.news": "Actualité",
     "proposal.admin.news.empty": "Aucune actualité",
     "proposal.admin.notation": "Evalutation",
+    "proposal.admin.personalize": "Personnalisé",
     "proposal.admin.publication": "Publication",
     "proposal.admin.advancement": "Avancement",
     "proposal.admin.steps": "Étapes",
@@ -585,7 +588,7 @@
     "proposal_form.help_text": "Texte d'aide",
     "proposal_form.introduction": "Introduction",
     "proposal_form.admin.activity": "Activité",
-    "proposal_form.admin.configuration": "Configuration",
+      "proposal_form.admin.configuration": "Configuration",
     "proposal_form.admin.configuration.form": "Formulaire",
     "proposal_form.admin.configuration.permanent_field": "Champs permanents",
     "proposal_form.admin.configuration.optional_field": "Champs optionnels",
@@ -769,5 +772,6 @@
     "login.facebook": "Se connecter via Facebook",
     "login.google": "Se connecter via Google",
     "login.saml": "Se connecter via SAML",
-    "login.or": "OU"
+    "login.or": "OU",
+    "evaluation_form.constraints.medias": "Les documents ne sont pas supportés sur les évaluations."
 }

@@ -1,0 +1,9 @@
+MultipleChoiceQuestionValidationRule:
+    type: object
+    config:
+        description: "Make all fields nullable is currently the only way to make the VO nullable"
+        fields:
+            type:
+                type: "String"
+            number:
+                type: "String"
