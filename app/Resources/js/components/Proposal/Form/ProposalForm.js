@@ -120,7 +120,6 @@ export const ProposalForm = React.createClass({
     if (this.state.form.address !== '') {
       const address = JSON.parse(this.state.form.address);
       const location = address[0].geometry.location;
-      console.log(location);
       if (location !== null) {
         this.retrieveDistrictForLocation(location, true);
       }
