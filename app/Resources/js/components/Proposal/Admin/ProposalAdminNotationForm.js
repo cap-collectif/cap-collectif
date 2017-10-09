@@ -431,8 +431,6 @@ export default createFragmentContainer(
       }
       form {
         evaluationForm {
-          id
-          title
           questions {
             id
             title
@@ -452,6 +450,13 @@ export default createFragmentContainer(
               description
               color
             }
+          }
+        }
+      }
+      proposalEvaluation {
+        responses {
+          ... on ValueResponse {
+            value
           }
         }
       }

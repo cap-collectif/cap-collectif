@@ -120,7 +120,12 @@ services:
         - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
         - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
 
-  capco.resolvers.evaluation_forms:
+  capco.resolver.evaluation_forms:
     class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver
     tags:
       - { name: overblog_graphql.resolver, alias: "evaluation_form_questions", method: "resolveQuestions" }
+
+  capco.resolver.response:
+    class: Capco\AppBundle\GraphQL\Resolver\ResponseResolver
+    tags:
+      - { name: overblog_graphql.resolver, alias: "response_value", method: "resolveValue" }
