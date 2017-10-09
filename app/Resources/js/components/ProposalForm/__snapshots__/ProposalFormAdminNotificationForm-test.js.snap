@@ -9,11 +9,16 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
   >
     <h3
       className="box-title"
+      style={
+        Object {
+          "fontSize": 22,
+          "padding": 0,
+          "paddingBottom": 30,
+          "paddingTop": 10,
+        }
+      }
     >
-      <FormattedMessage
-        id="proposal_form.admin.notification"
-        values={Object {}}
-      />
+      Notification
     </h3>
     <a
       className="pull-right link"
@@ -23,96 +28,136 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       
-      <FormattedMessage
-        id="global.help"
-        values={Object {}}
-      />
+       Aide
     </a>
   </div>
-  <div
-    className="box-content"
+  <form
+    onSubmit={[Function]}
   >
-    <form
-      onSubmit={[Function]}
-    >
-      <h4
-        style={
-          Object {
-            "fontWeight": "bold",
-            "marginTop": 0,
-          }
+    <h4
+      style={
+        Object {
+          "fontWeight": "bold",
         }
+      }
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.label"
+        values={Object {}}
+      />
+    </h4>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_create"
+      name="onCreate"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_create"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_update"
+      name="onUpdate"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_update"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_delete"
+      name="onDelete"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_delete"
+        values={Object {}}
+      />
+    </Field>
+    <h4
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      <FormattedMessage
+        id="proposal_form.notifications_comment.label"
+        values={Object {}}
+      />
+    </h4>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_create"
+      name="onCommentCreate"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_create"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_update"
+      name="onCommentUpdate"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_update"
+        values={Object {}}
+      />
+    </Field>
+    <Field
+      component={[Function]}
+      id="proposal_form_notification_on_delete"
+      name="onCommentDelete"
+      type="checkbox"
+    >
+      <FormattedMessage
+        id="proposal_form.notifications.on_delete"
+        values={Object {}}
+      />
+    </Field>
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        type="submit"
       >
         <FormattedMessage
-          id="proposal_form.notifications.label"
+          id="global.save"
           values={Object {}}
         />
-      </h4>
-      <Field
-        component={[Function]}
-        id="proposal_form_notification_on_create"
-        name="onCreate"
-        type="checkbox"
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={true}
       >
         <FormattedMessage
-          id="proposal_form.notifications.on_create"
+          id="global.delete"
           values={Object {}}
         />
-      </Field>
-      <Field
-        component={[Function]}
-        id="proposal_form_notification_on_update"
-        name="onUpdate"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="proposal_form.notifications.on_update"
-          values={Object {}}
-        />
-      </Field>
-      <Field
-        component={[Function]}
-        id="proposal_form_notification_on_delete"
-        name="onDelete"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="proposal_form.notifications.on_delete"
-          values={Object {}}
-        />
-      </Field>
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={true}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </form>
-  </div>
+      </Button>
+    </ButtonToolbar>
+  </form>
 </div>
 `;
