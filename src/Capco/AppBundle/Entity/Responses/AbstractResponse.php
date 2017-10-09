@@ -62,10 +62,10 @@ abstract class AbstractResponse
     private $reply;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Evaluation", inversedBy="responses", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private $evaluation;
+    private $proposalEvaluation;
 
     /**
      * @var AbstractQuestion
@@ -159,6 +159,18 @@ abstract class AbstractResponse
         return $this;
     }
 
+    public function getProposalEvaluation()
+    {
+        return $this->proposalEvaluation;
+    }
+
+    public function setProposalEvaluation($proposalEvaluation): self
+    {
+        $this->proposalEvaluation = $proposalEvaluation;
+
+        return $this;
+    }
+
     /**
      * @ORM\PreFlush()
      */
@@ -167,17 +179,5 @@ abstract class AbstractResponse
         if ($this->getUpdatedAt() && $this->getProposal()) {
             $this->getProposal()->setUpdatedAt(new \DateTime());
         }
-    }
-
-    public function getEvaluation()
-    {
-        return $this->evaluation;
-    }
-
-    public function setEvaluation($evaluation): self
-    {
-        $this->evaluation = $evaluation;
-
-        return $this;
     }
 }

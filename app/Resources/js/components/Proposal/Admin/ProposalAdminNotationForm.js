@@ -21,7 +21,7 @@ import type { Dispatch } from '../../../types';
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
 type Props = RelayProps & {
-  handleSubmit: Object,
+  handleSubmit: () => {},
   invalid: boolean,
   pristine: boolean,
   submitting: boolean,
@@ -264,7 +264,6 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                       return (
                         <Checkbox
                           key={key}
-                          // ref={c => (this[`field-${formattedCBField.id}`] = c)}
                           id={`reply-${formattedCBField.id}`}
                           field={formattedCBField}
                           getGroupStyle={() => {}}
@@ -283,7 +282,6 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                       return (
                         <Radio
                           key={key}
-                          // ref={c => (this[`field-${formattedRadioField.id}`] = c)}
                           id={`reply-${formattedRadioField.id}`}
                           field={formattedRadioField}
                           getGroupStyle={() => {}}
@@ -299,7 +297,6 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                       return (
                         <Ranking
                           key={key}
-                          // ref={c => (this[`field-${field.id}`] = c)}
                           id={`reply-${field.id}`}
                           field={field}
                           getGroupStyle={() => {}}
@@ -315,12 +312,10 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                       return (
                         <Input
                           key={key}
-                          // ref={c => (this[`field-${field.id}`] = c)}
                           id={`reply-${field.id}`}
                           type={inputType}
                           help={field.helpText}
                           groupClassName={() => {}}
-                          // valueLink={this.linkState(`form.${field.id}`)}
                           errors={() => {}}
                           defaultValue=""
                           label={label}
@@ -356,7 +351,6 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                           <RadioGroup
                             key={key}
                             horizontal
-                            // ref={c => (this[`field-${field.id}`] = c)}
                             id={`reply-${field.id}`}
                             onChange={value => {
                               this.onChange(field, value);
@@ -378,7 +372,6 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                     default: {
                       return (
                         <Input
-                          // ref={c => (this[`field-${field.id}`] = c)}
                           key={key}
                           id={`reply-${field.id}`}
                           type={inputType}

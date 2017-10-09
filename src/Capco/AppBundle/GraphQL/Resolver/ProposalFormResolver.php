@@ -68,11 +68,4 @@ class ProposalFormResolver implements ContainerAwareInterface
                 'stepSlug' => $step->getSlug(),
             ], true);
     }
-
-    public function resolveEvaluationForms(ProposalForm $proposalForm)
-    {
-        return $this->container
-            ->get('capco.questionnaire.repository')
-            ->getAvailableQuestionnairesForEvaluation($proposalForm);
-    }
 }

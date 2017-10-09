@@ -14,7 +14,6 @@ services:
           - { name: overblog_graphql.resolver, alias: "query_proposalForm", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_url", method: "resolveUrl" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_categories", method: "resolveCategories" }
-          - { name: overblog_graphql.resolver, alias: "proposal_evaluation_forms", method: "resolveEvaluationForms" }
 
   capco.resolver.question:
     class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
@@ -25,6 +24,7 @@ services:
       - { name: overblog_graphql.resolver, alias: "query_available_districts_for_location", method: "resolveDistrictsForLocalisation" }
       - { name: overblog_graphql.resolver, alias: "question_choices", method: "resolveChoices" }
       - { name: overblog_graphql.resolver, alias: "question_validation_rule", method: "resolveValidationRule" }
+      - { name: overblog_graphql.resolver, alias: "query_get_available_questionnaires", method: "resolveAvailableQuestionnaires" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver

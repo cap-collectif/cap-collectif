@@ -2,13 +2,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { reduxForm, Field } from 'redux-form';
+import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
+import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
 import component from '../Form/Field';
 import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated__/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
+import Loader from '../Utils/Loader';
 
 type RelayProps = { proposalForm: ProposalFormAdminEvaluationForm_proposalForm };
 type Props = RelayProps & {
@@ -59,22 +61,55 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
           </a>
         </div>
         <form onSubmit={handleSubmit}>
-          <Field
-            name="evaluationForm"
-            component={component}
-            type="select"
-            id="evaluation-form"
-            label={<FormattedMessage id="proposal_form.evaluation_form" />}>
-            <FormattedMessage id="proposal_form.select_evaluation_form">
-              {message => <option value="">{message}</option>}
-            </FormattedMessage>
-            {proposalForm.evaluationForms &&
-              proposalForm.evaluationForms.map(evaluationForm => (
-                <option key={evaluationForm.id} value={evaluationForm.id}>
-                  {evaluationForm.title}
-                </option>
-              ))}
-          </Field>
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query ProposalFormAdminEvaluationForm_availableQuestionnairesQuery {
+                availableQuestionnaires {
+                  id
+                  title
+                }
+              }
+            `}
+            render={({ error, props }: { error: ?Error, props: any }) => {
+              if (error) {
+                console.log(error); // eslint-disable-line no-console
+                return graphqlError;
+              }
+              if (props) {
+                const { availableQuestionnaires } = props;
+
+                return (
+                  <Field
+                    name="evaluationForm"
+                    component={component}
+                    type="select"
+                    id="evaluation-form"
+                    label={<FormattedMessage id="proposal_form.evaluation_form" />}>
+                    <FormattedMessage id="proposal_form.select_evaluation_form">
+                      {message => <option value="">{message}</option>}
+                    </FormattedMessage>
+
+                    {proposalForm.evaluationForm && (
+                      <option
+                        key={proposalForm.evaluationForm.id}
+                        value={proposalForm.evaluationForm.id}>
+                        {proposalForm.evaluationForm.title}
+                      </option>
+                    )}
+                    {availableQuestionnaires &&
+                      availableQuestionnaires.map(evaluationForm => (
+                        <option key={evaluationForm.id} value={evaluationForm.id}>
+                          {evaluationForm.title}
+                        </option>
+                      ))}
+                  </Field>
+                );
+              }
+
+              return <Loader />;
+            }}
+          />
           <ButtonToolbar style={{ marginBottom: 10 }}>
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -94,14 +129,11 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminEvaluationForm);
 
-const selector = formValueSelector(formName);
-
 const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     ...props.proposalForm,
     evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null,
   },
-  evaluationForm: selector(state, 'evaluationForm'),
 });
 
 const container = connect(mapStateToProps)(form);
@@ -111,10 +143,6 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalFormAdminEvaluationForm_proposalForm on ProposalForm {
       id
-      evaluationForms {
-        id
-        title
-      }
       evaluationForm {
         id
         title

@@ -12,7 +12,6 @@ describe('<ProposalFormAdminEvaluationForm />', () => {
     submitting: false,
     proposalForm: {
       id: 'proposalFormId',
-      evaluationForms: [],
       evaluationForm: null,
     },
   };

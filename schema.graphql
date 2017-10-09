@@ -702,8 +702,8 @@ type ProposalEvaluation {
   # Identifies the proposal.
   proposal: Proposal!
 
-  # Identifies the question.
-  question: Question!
+  # List of responses for the evaluation
+  responses: [Response]
 }
 
 # A budget form
@@ -738,9 +738,6 @@ type ProposalForm {
   # The HTTP url for this proposal form.
   url: URI!
   notificationsConfiguration: NotificationsConfiguration!
-
-  # Get all available evaluation forms.
-  evaluationForms: [EvaluationForm!]
 
   # Get the evaluation form of the proposal form
   evaluationForm: EvaluationForm
@@ -813,6 +810,7 @@ type Query {
   proposal(id: ID!): Proposal!
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
+  availableQuestionnaires: [Question!]
 }
 
 # A question

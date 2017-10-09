@@ -55,4 +55,11 @@ class QuestionResolver implements ContainerAwareInterface
 
         return null;
     }
+
+    public function resolveAvailableQuestionnaires()
+    {
+        return $this->container
+            ->get('capco.questionnaire.repository')
+            ->getAvailableQuestionnaires();
+    }
 }

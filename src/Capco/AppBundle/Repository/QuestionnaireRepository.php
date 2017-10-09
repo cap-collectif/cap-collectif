@@ -33,13 +33,12 @@ class QuestionnaireRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getAvailableQuestionnairesForEvaluation(ProposalForm $proposalForm)
+    public function getAvailableQuestionnaires()
     {
         $qb = $this->createQueryBuilder('q')
             ->leftJoin('q.proposalForm', 'pf')
             ->where('q.step IS NULL')
-            ->andWhere('pf.id IS NULL OR pf.id = :proposal_form')
-            ->setParameter('proposal_form', $proposalForm);
+            ->andWhere('pf.id IS NULL');
 
         return $qb->getQuery()->execute();
     }

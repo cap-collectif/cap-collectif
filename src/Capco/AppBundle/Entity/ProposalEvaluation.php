@@ -2,8 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="proposal_evaluation")
@@ -12,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ProposalEvaluation
 {
     use UuidTrait;
+    use TimestampableTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
@@ -20,31 +25,55 @@ class ProposalEvaluation
     protected $proposal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalEvaluations")
-     * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposalEvaluation", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    protected $questionnaire;
+    private $responses;
 
-    public function getProposal(): Proposal
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    public function __construct()
     {
-        return $this->proposal;
+        $this->updatedAt = new \Datetime();
+        $this->responses = new ArrayCollection();
     }
 
-    public function setProposal($proposal): self
+    public function addResponse(AbstractResponse $response): self
     {
-        $this->proposal = $proposal;
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setEvaluation($this);
+        }
 
         return $this;
     }
 
-    public function getQuestionnaire(): Questionnaire
+    public function removeResponse(AbstractResponse $response): self
     {
-        return $this->questionnaire;
+        $this->responses->removeElement($response);
+
+        return $this;
     }
 
-    public function setQuestionnaire($questionnaire): self
+    public function getResponses(): ArrayCollection
     {
-        $this->questionnaire = $questionnaire;
+        return $this->responses;
+    }
+
+    /**
+     * @param ArrayCollection $responses
+     *
+     * @return $this
+     */
+    public function setResponses(ArrayCollection $responses): self
+    {
+        $this->responses = $responses;
+        foreach ($responses as $response) {
+            $response->setProposalEvaluation($this);
+        }
 
         return $this;
     }

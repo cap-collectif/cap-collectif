@@ -69,10 +69,6 @@ ProposalForm:
                 resolve: "@=resolver('proposal_form_url', [value])"
             notificationsConfiguration:
                 type: "NotificationsConfiguration!"
-            evaluationForms:
-                type: "[EvaluationForm!]"
-                description: "Get all available evaluation forms."
-                resolve: "@=resolver('proposal_evaluation_forms', [value])"
             evaluationForm:
                 type: "EvaluationForm"
                 description: "Get the evaluation form of the proposal form"

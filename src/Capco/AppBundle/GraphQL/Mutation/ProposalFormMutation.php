@@ -116,15 +116,13 @@ class ProposalFormMutation implements ContainerAwareInterface
 
         $om = $this->container->get('doctrine')->getManager();
 
-        $proposalFormRep = $om->getRepository(ProposalForm::class);
-        /** @var ProposalForm $proposalForm */
-        $proposalForm = $proposalFormRep->find($arguments['proposalFormId']);
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
-        $evaluationForm = $om->getRepository(Questionnaire::class)->find($arguments['evaluationFormId']);
+        $evaluationForm = $this->container->get('capco.questionnaire.repository')->find($arguments['evaluationFormId']);
 
         $proposalForm->setEvaluationForm($evaluationForm);
 

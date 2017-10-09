@@ -6,4 +6,4 @@ SetEvaluationFormInProposalFormInput:
             proposalFormId:
                 type: "ID!"
             evaluationFormId:
-                type: "String"
+                type: "String" # Because in the entity : Id is typed as integer
