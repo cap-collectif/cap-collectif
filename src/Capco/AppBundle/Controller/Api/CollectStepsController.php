@@ -29,7 +29,7 @@ class CollectStepsController extends FOSRestController
      * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
+     * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
     public function getProposalsByCollectStepAction(

@@ -469,8 +469,6 @@ step:
     old: Les plus anciennes
     random: Aléatoire
     votes: Les plus votées
-    expensive: Les plus coûteuses
-    cheap: Les moins coûteuses
   selection:
     alert:
       ended:
