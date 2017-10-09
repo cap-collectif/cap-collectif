@@ -75,7 +75,7 @@ services:
     arguments: ['CapcoAppBundle:OpinionType']
 
   capco.comment.repository:
-    class: Capco\AppBundle\Repository\ProposalRepository
+    class: Capco\AppBundle\Repository\CommentRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Comment']
 
