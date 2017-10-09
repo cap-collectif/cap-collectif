@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -273,6 +274,10 @@ class Notify implements MailerInterface
             ], 'CapcoAppBundle'
         );
         $this->sendInternalEmail($body, $subject);
+    }
+
+    public function notifyComment(Comment $comment, string $action)
+    {
     }
 
     public function notifyProposalStatusChangeInCollect(Proposal $proposal)
