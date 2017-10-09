@@ -113,9 +113,6 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function setEvaluationForm(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-
-        $om = $this->container->get('doctrine')->getManager();
-
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
@@ -126,8 +123,7 @@ class ProposalFormMutation implements ContainerAwareInterface
 
         $proposalForm->setEvaluationForm($evaluationForm);
 
-        $om->persist($proposalForm);
-        $om->flush();
+        $this->container->get('doctrine.orm.default_entity_manager')->flush();
 
         return [
             'proposalForm' => $proposalForm,
