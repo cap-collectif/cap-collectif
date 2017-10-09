@@ -40,7 +40,7 @@ class ReferenceEventListener
             } else {
                 $filters = $om->getFilters();
                 if ($filters->isEnabled('softdeleted')) {
-                    $om->getFilters()->disable('softdeleted');
+                    $filters->disable('softdeleted');
                 }
                 $lastReference = $proposalFormRep->getLastProposalReference($proposalForm->getId());
             }
