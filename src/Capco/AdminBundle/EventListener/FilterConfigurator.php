@@ -27,7 +27,7 @@ class FilterConfigurator
             $filters = $this->em->getFilters();
             if (
                 $filters->isEnabled('softdeleted') &&
-                $this->tokenStorage->getToken()->getUser()->isAdmin()
+                $this->tokenStorage->getToken()->getUser()->hasRole('ROLE_SUPER_ADMIN')
             ) {
                 $this->em->getFilters()->disable('softdeleted');
             }

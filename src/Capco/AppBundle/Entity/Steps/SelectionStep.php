@@ -30,7 +30,7 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         self::VOTE_TYPE_BUDGET => 'step.selection.vote_type.budget',
     ];
 
-    public static $sort = ['old', 'last', 'votes', 'comments', 'random'];
+    public static $sort = ['old', 'last', 'votes', 'comments', 'random', 'expensive', 'cheap'];
 
     public static $sortLabels = [
         'comments' => 'step.sort.comments',
@@ -38,6 +38,8 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         'old' => 'step.sort.old',
         'random' => 'step.sort.random',
         'votes' => 'step.sort.votes',
+        'expensive' => 'step.sort.expensive',
+        'cheap' => 'step.sort.cheap',
     ];
 
     /**
@@ -62,7 +64,7 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
-     * @Assert\Choice(choices={"old","last","votes","comments","random"})
+     * @Assert\Choice(choices={"old","last","votes","comments","random", "cheap", "expensive"})
      */
     private $defaultSort = 'random';
 
@@ -157,10 +159,10 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
     public function getProposalForm(): ProposalForm
     {
         $step = (new ArrayCollection($this->getProject()->getExportableSteps()))
-                ->filter(function (ProjectAbstractStep $step) {
-                    return $step->getStep()->isCollectStep();
-                })
-                ->first();
+            ->filter(function (ProjectAbstractStep $step) {
+                return $step->getStep()->isCollectStep();
+            })
+            ->first();
 
         if ($step) {
             return $step->getStep()->getProposalForm();
