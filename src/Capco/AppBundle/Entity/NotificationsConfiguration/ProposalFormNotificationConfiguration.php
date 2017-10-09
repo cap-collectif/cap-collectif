@@ -26,6 +26,21 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     private $onDelete = false;
 
     /**
+     * @ORM\Column(name="on_comment_create", type="boolean")
+     */
+    private $onCommentCreate = false;
+
+    /**
+     * @ORM\Column(name="on_comment_update", type="boolean")
+     */
+    private $onCommentUpdate = false;
+
+    /**
+     * @ORM\Column(name="on_comment_delete", type="boolean")
+     */
+    private $onCommentDelete = false;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="notificationsConfiguration")
      */
     private $proposalForm;
@@ -62,6 +77,42 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     public function setOnDelete(bool $onDelete): self
     {
         $this->onDelete = $onDelete;
+
+        return $this;
+    }
+
+    public function isOnCommentCreate(): bool
+    {
+        return $this->onCommentCreate;
+    }
+
+    public function setOnCommentCreate($onCommentCreate): self
+    {
+        $this->onCommentCreate = $onCommentCreate;
+
+        return $this;
+    }
+
+    public function isOnCommentUpdate(): bool
+    {
+        return $this->onCommentUpdate;
+    }
+
+    public function setOnCommentUpdate($onCommentUpdate): self
+    {
+        $this->onCommentUpdate = $onCommentUpdate;
+
+        return $this;
+    }
+
+    public function isOnCommentDelete(): bool
+    {
+        return $this->onCommentDelete;
+    }
+
+    public function setOnCommentDelete($onCommentDelete): self
+    {
+        $this->onCommentDelete = $onCommentDelete;
 
         return $this;
     }
