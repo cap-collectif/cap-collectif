@@ -757,9 +757,6 @@ type Query {
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
   ): [Consultation]
-
-  # Retrieve availables districts for a given address
-  availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
   votesByContribution(contribution: Int!): [PropositionVote]
   contributions(
     # Returns all contributions of the provided consultation.
