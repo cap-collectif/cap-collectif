@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Processor\Proposal;
+namespace Capco\AppBundle\Processor\Comment;
 
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;

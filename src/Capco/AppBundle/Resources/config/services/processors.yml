@@ -9,11 +9,11 @@ services:
     class: Capco\AppBundle\Processor\Proposal\ProposalDeleteProcessor
     arguments: ["@doctrine.orm.entity_manager", "@capco.proposal.repository", "@capco.notify_manager"]
   comment_create.processor:
-    class: Capco\AppBundle\Processor\Proposal\CommentCreateProcessor
+    class: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
     arguments: ["@capco.comment.repository", "@capco.notify_manager"]
   comment_update.processor:
-    class: Capco\AppBundle\Processor\Proposal\CommentUpdateProcessor
+    class: Capco\AppBundle\Processor\Comment\CommentUpdateProcessor
     arguments: ["@capco.comment.repository", "@capco.notify_manager"]
   comment_delete.processor:
-    class: Capco\AppBundle\Processor\Proposal\CommentDeleteProcessor
+    class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
     arguments: ["@doctrine.orm.entity_manager", "@capco.comment.repository", "@capco.notify_manager"]
