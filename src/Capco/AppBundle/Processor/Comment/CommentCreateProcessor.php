@@ -22,7 +22,7 @@ class CommentCreateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $comment = $this->commentRepository->find($json['commentId']);
-        $this->notifier->notifyComment($comment, 'create');
+        $this->notifier->notifyProposalComment($comment, 'create');
 
         return true;
     }

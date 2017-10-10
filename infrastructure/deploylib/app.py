@@ -28,6 +28,12 @@ def clean():
 
 
 @task(environments=['local'])
+def rabbitmq():
+    "Update RabbitMQ"
+    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
+
+
+@task(environments=['local'])
 def ssh(user='capco'):
     "Ssh into application container"
     env.ssh_into('application', user)

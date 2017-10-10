@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Selection;
@@ -276,8 +277,52 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
-    public function notifyComment(Comment $comment, string $action)
+    public function notifyProposalComment(Comment $comment, string $action)
     {
+        if ($comment instanceof ProposalComment) {
+            /** @var $comment ProposalComment */
+            $sitename = $this->resolver->getValue('global.site.fullname');
+            $subject = $this->translator->trans(
+                'notification.email.comment.' . $action . '.subject', [
+                '%sitename%' => $sitename,
+                '%username%' => $comment->getAuthor()->getDisplayName(),
+            ], 'CapcoAppBundle'
+            );
+            $body = $this->translator->trans(
+                'notification.email.comment.' . $action . '.body', [
+                '%userUrl%' => $this->router->generate(
+                    'capco_user_profile_show_all', [
+                    'slug' => $comment->getAuthor()->getSlug(),
+                ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+                '%username%' => $comment->getAuthor()->getDisplayName(),
+                '%proposal%' => $comment->getProposal()->getTitle(),
+                '%comment%' => $comment->getBodyText(),
+                '%date%' => $comment->getCreatedAt()->format('d/m/Y'),
+                '%time%' => $comment->getCreatedAt()->format('H:i:s'),
+                '%commentUrlBack%' => $this->router->generate(
+                    'capco_admin_contributions_show', [
+                        'id' => $comment->getId(),
+                        'type' => 'comment',
+                    ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+                '%proposalUrl%' => $this->router->generate(
+                    'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_show',
+                    'delete' !== $action
+                        ? [
+                        'projectSlug' => $comment->getProposal()->getSlug(),
+                        'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
+                        'proposalSlug' => $comment->getProposal()->getSlug(),
+                    ]
+                        : ['id' => $comment->getProposal()->getId()],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+            ], 'CapcoAppBundle'
+            );
+            $this->sendInternalEmail($body, $subject);
+        }
     }
 
     public function notifyProposalStatusChangeInCollect(Proposal $proposal)

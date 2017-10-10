@@ -26,7 +26,7 @@ class CommentDeleteProcessor implements ProcessorInterface
         $json = json_decode($message->getBody(), true);
         $this->em->getFilters()->disable('softdeleted');
         $comment = $this->commentRepository->find($json['commentId']);
-        $this->notifier->notifyComment($comment, 'delete');
+        $this->notifier->notifyProposalComment($comment, 'delete');
 
         return true;
     }
