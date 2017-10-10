@@ -312,7 +312,7 @@ class Notify implements MailerInterface
                     'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_show',
                     'delete' !== $action
                         ? [
-                        'projectSlug' => $comment->getProposal()->getSlug(),
+                        'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
                         'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
                         'proposalSlug' => $comment->getProposal()->getSlug(),
                     ]
@@ -419,12 +419,15 @@ class Notify implements MailerInterface
 
     private function sendInternalEmail($body, $subject, $contentType = 'text/html')
     {
+        $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
         $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
         $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
         $body .= $this->translator->trans(
             'notification.email.admin_footer', [
               '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+              '%to%' => $to,
+              '%siteUrl%' => $siteUrl,
             ], 'CapcoAppBundle'
         );
         $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
