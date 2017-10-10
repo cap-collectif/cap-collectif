@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-// import ReactDOM from 'react-dom';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
@@ -30,7 +29,7 @@ const Navbar = React.createClass({
     const { logo, intl } = this.props;
     const { items } = this.state;
 
-    const navbarMaxSize = (
+    const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
         {items.filter((item, index) => index < 5).map((header, index) => {
           return (
@@ -52,7 +51,7 @@ const Navbar = React.createClass({
       </Nav>
     );
 
-    const navbarMidSize = (
+    const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
         {items.filter((item, index) => index < 3).map((header, index) => {
           return (
@@ -74,7 +73,7 @@ const Navbar = React.createClass({
       </Nav>
     );
 
-    const navbarLittleSize = (
+    const navbarSmSize = (
       <Nav id="navbar-content" className="visible-sm-block">
         {items.filter((item, index) => index < 2).map((header, index) => {
           return (
@@ -93,6 +92,16 @@ const Navbar = React.createClass({
             className="navbar-dropdown-more"
           />
         )}
+      </Nav>
+    );
+
+    const navbarXsSize = (
+      <Nav id="navbar-content" className="visible-xs-block">
+        {items.map((header, index) => {
+          return (
+            <NavbarItem key={index} item={header} ref={c => (this[`item-${header.id}`] = c)} />
+          );
+        })}
       </Nav>
     );
 
@@ -127,12 +136,13 @@ const Navbar = React.createClass({
                 />
               </a>
             </Navigation.Brand>
-            {navbarMaxSize}
-            {navbarMidSize}
-            {navbarLittleSize}
             <Navigation.Toggle />
           </Navigation.Header>
           <Navigation.Collapse>
+            {navbarLgSize}
+            {navbarMdSize}
+            {navbarSmSize}
+            {navbarXsSize}
             <NavbarRight ref={c => (this.navright = c)} />
           </Navigation.Collapse>
         </div>
