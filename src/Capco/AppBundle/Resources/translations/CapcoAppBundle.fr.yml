@@ -739,7 +739,6 @@ notification:
               <p><a href="%userUrl%">%username%</a> a supprimé la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
               <h2>Résumé</h2>
               <p>%proposalExcerpt%</p>
-              <p><a href="%proposalUrl%">Afficher la proposition sur le slite</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
     comment:
       create:
           subject: "%sitename% — %username% a publié un commentaire sur une proposition"
@@ -761,7 +760,6 @@ notification:
             <p><a href="%userUrl%">%username%</a> a supprimé un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Commentaire</h2>
             <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le slite</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
 proposal_status_change_collect:
   notification:
     subject: Le statut de votre proposition vient d’être mis à jour sur %sitename%.

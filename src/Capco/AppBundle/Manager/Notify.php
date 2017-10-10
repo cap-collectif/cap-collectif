@@ -247,6 +247,7 @@ class Notify implements MailerInterface
         $subject = $this->translator->trans(
             'notification.email.proposal.' . $action . '.subject', [
               '%sitename%' => $sitename,
+              '%username%' => $proposal->getAuthor()->getDisplayName(),
               '%project%' => $project->getTitle(),
             ], 'CapcoAppBundle'
         );
@@ -260,6 +261,9 @@ class Notify implements MailerInterface
               ),
               '%username%' => $proposal->getAuthor()->getDisplayName(),
               '%proposal%' => $proposal->getTitle(),
+              '%date%' => $proposal->getCreatedAt()->format('d/m/Y'),
+              '%time%' => $proposal->getCreatedAt()->format('H:i:s'),
+              '%proposalExcerpt%' => $proposal->getBodyExcerpt(),
               '%proposalUrl%' => $this->router->generate(
                 'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_edit',
                 'delete' !== $action

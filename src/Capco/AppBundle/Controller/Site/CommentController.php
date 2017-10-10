@@ -3,11 +3,12 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Swarrot\Broker\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -63,7 +64,7 @@ class CommentController extends Controller
 
         $form = $this->createForm(new CommentForm($user), $comment);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             if (false === $this->get('capco.comment.resolver')->canAddCommentOn($object)) {
                 throw new AccessDeniedException($this->get('translator')->trans('project.error.no_contribute', [], 'CapcoAppBundle'));
             }
@@ -136,7 +137,7 @@ class CommentController extends Controller
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
 
-        if ($comment === null) {
+        if (null === $comment) {
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
         }
 
@@ -152,7 +153,7 @@ class CommentController extends Controller
         }
 
         $form = $this->createForm(new CommentForm($userCurrent), $comment, ['actionType' => 'edit']);
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -162,6 +163,13 @@ class CommentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.update.success'));
+                if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
+                    $this->get('swarrot.publisher')->publish('comment.update', new Message(
+                        json_encode([
+                            'commentId' => $comment->getId(),
+                        ])
+                    ));
+                }
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             }
@@ -193,7 +201,7 @@ class CommentController extends Controller
 
         $comment = $this->getDoctrine()->getRepository('CapcoAppBundle:Comment')->getOneById($commentId);
 
-        if ($comment === null) {
+        if (null === $comment) {
             throw $this->createNotFoundException($this->get('translator')->trans('comment.error.not_found', [], 'CapcoAppBundle'));
         }
 
@@ -211,7 +219,7 @@ class CommentController extends Controller
         //Champ CSRF
         $form = $this->createFormBuilder()->getForm();
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -224,6 +232,13 @@ class CommentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.delete.success'));
+                if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete()) {
+                    $this->get('swarrot.publisher')->publish('comment.update', new Message(
+                        json_encode([
+                            'commentId' => $comment->getId(),
+                        ])
+                    ));
+                }
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             }
