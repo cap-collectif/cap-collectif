@@ -132,7 +132,13 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     categories: values.categories.map(category => ({ ...category, id: undefined })),
     questions: values.questions.map(question => ({
       position: question.position,
-      question: { ...question, id: undefined, position: undefined },
+      question: {
+        ...question,
+        id: undefined,
+        position: undefined,
+        type: question.kind,
+        kind: undefined,
+      },
     })),
   };
   return UpdateProposalFormMutation.commit({ input }).then(() => {

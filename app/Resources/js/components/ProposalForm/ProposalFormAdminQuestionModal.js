@@ -82,7 +82,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             normalize={value => {
               return kind === 'medias' ? 'media' : value;
             }}>
-            <option value="" disabled>
+            <option value="" disabled selected={kind === 'simple'}>
               <FormattedMessage id="global.select" />
             </option>
             <option value="text">
