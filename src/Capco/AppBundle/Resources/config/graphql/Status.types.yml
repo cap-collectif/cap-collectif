@@ -3,6 +3,6 @@ Status:
     config:
         fields:
             id:
-                type: "ID!"
+                type: "String!"
             name:
                 type: "String!"

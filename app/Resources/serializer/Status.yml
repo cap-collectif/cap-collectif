@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Status:
     properties:
         id:
             expose: true
-            type: string
+            type: integer
             groups: [Statuses, Proposals]
         name:
             expose: true

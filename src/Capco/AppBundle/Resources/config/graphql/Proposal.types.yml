@@ -50,10 +50,6 @@ Proposal:
             id:
                 type: "String!"
                 description: "The content of the contribution."
-            reference:
-                type: "String!"
-                description: "The unique reference of proposal"
-                resolve: "@=resolver('proposal_reference', [value])"
             title:
                 type: "String!"
                 description: "Identifies the contribution title."
