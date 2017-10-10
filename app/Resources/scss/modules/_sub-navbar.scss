@@ -37,22 +37,6 @@
             &:hover > div {
                 background-color: $light-gray;
             }
-
-            &.trash__step {
-                i {
-                    margin-right: 4px;
-                }
-
-                a {
-                    text-decoration: none;
-                }
-
-                &.active:hover a,
-                a,
-                a:hover {
-                    border: none;
-                }
-            }
         }
     }
 

@@ -170,6 +170,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
+    disabled={false}
     errors={null}
     groupClassName=""
     id="proposal_district"
@@ -420,6 +421,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     </option>
   </InjectIntl(ReactBootstrapInput)>
   <InjectIntl(ReactBootstrapInput)
+    disabled={false}
     errors={null}
     groupClassName=""
     id="proposal_district"

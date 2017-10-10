@@ -37,7 +37,7 @@ class ProposalController extends Controller
         })->toArray();
 
         $refererUri = $request->headers->has('referer')
-            && filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) !== false && in_array($request->headers->get('referer'), $stepUrls, true)
+            && false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) && in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -50,6 +50,7 @@ class ProposalController extends Controller
             ->setGroups([
                 'ProposalCategories',
                 'UserVotes',
+                'Districts',
                 'ProposalForms',
                 'Questions',
                 'Steps',
