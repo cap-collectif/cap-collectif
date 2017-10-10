@@ -96,7 +96,7 @@ const Checkbox = React.createClass({
                   name={fieldName}
                   type="checkbox"
                   value={choice.label}
-                  help={choice.description}
+                  description={choice.description}
                   disabled={disabled}
                   image={choice.image ? choice.image.url : null}>
                   {choice.label}

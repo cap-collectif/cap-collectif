@@ -43,7 +43,7 @@ enum ArgumentValue {
 }
 
 input ChangeCollectStatusInput {
-  statusId: String
+  statusId: ID
 
   # The proposal id
   proposalId: ID!
@@ -152,9 +152,9 @@ type ChangeProposalPublicationStatusPayload {
 }
 
 input ChangeSelectionStatusInput {
-  stepId: String!
+  stepId: ID!
   proposalId: ID!
-  statusId: String
+  statusId: ID
   clientMutationId: String
 }
 
@@ -643,6 +643,9 @@ type Proposal {
   # The content of the contribution.
   id: String!
 
+  # The unique reference of proposal
+  reference: String!
+
   # Identifies the contribution title.
   title: String!
 
@@ -754,6 +757,9 @@ type Query {
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
   ): [Consultation]
+
+  # Retrieve availables districts for a given address
+  availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
   votesByContribution(contribution: Int!): [PropositionVote]
   contributions(
     # Returns all contributions of the provided consultation.
@@ -991,7 +997,7 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 }
 
 type Status {
-  id: String!
+  id: ID!
   name: String!
 }
 

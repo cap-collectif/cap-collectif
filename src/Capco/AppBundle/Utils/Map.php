@@ -30,13 +30,4 @@ final class Map
 
         return $updatedAddress;
     }
-
-    public static function decodeAddressFromJson(string $address)
-    {
-        if (!is_array($address)) {
-            return json_decode($address, true)[0]['formatted_address'];
-        }
-
-        return $address[0]['formatted_address'];
-    }
 }

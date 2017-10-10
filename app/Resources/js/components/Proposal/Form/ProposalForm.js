@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { Button, Collapse, Panel, Glyphicon } from 'react-bootstrap';
 import { debounce } from 'lodash';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import Loader from '../../../../js/components/Utils/Loader';
 import FormMixin from '../../../utils/FormMixin';
 import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import FlashMessages from '../../Utils/FlashMessages';
+import Fetcher from '../../../services/Fetcher';
 import ArrayHelper from '../../../services/ArrayHelper';
 import Input from '../../Form/Input';
 import ProposalPrivateField from '../ProposalPrivateField';
@@ -16,6 +18,24 @@ import {
   cancelSubmitProposal,
 } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
+
+type LatLng = {
+  lat: Number,
+  lng: Number,
+};
+
+const query = `
+          query availableDistrictsForLocalisation(
+            $proposalFormId: ID!
+            $latitude: Float!
+            $longitude: Float!
+          ) {
+            availableDistrictsForLocalisation(proposalFormId: $proposalFormId, latitude: $latitude, longitude: $longitude) {
+              id
+              name
+            }
+          }
+        `;
 
 export const ProposalForm = React.createClass({
   propTypes: {
@@ -61,7 +81,7 @@ export const ProposalForm = React.createClass({
         title: proposal.title,
         body: proposal.body,
         summary: proposal.summary,
-        theme: proposal.theme ? proposal.theme.id : -1,
+        theme: proposal.theme ? proposal.theme.id : null,
         district: proposal.district ? proposal.district.id : null,
         category: proposal.category ? proposal.category.id : null,
         media: null,
@@ -77,7 +97,9 @@ export const ProposalForm = React.createClass({
         media: [],
         address: [],
       },
+      loadingDistricts: false,
       suggestions: [],
+      visibleDistricts: this.props.form.districts.map(district => district.id),
       address: proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
     };
   },
@@ -100,6 +122,13 @@ export const ProposalForm = React.createClass({
     this.updateDistrictConstraint();
     this.updateCategoryConstraint();
     this.updateAddressConstraint();
+    if (this.state.form.address !== '') {
+      const address = JSON.parse(this.state.form.address);
+      const location = address[0].geometry.location;
+      if (location !== null) {
+        this.retrieveDistrictForLocation(location, true);
+      }
+    }
   },
 
   componentWillReceiveProps(nextProps) {
@@ -134,7 +163,7 @@ export const ProposalForm = React.createClass({
         if (responses.length === 0) {
           delete form.responses;
         }
-        if (!features.themes || !this.props.form.usingThemes || form.theme === -1) {
+        if (!features.themes || !this.props.form.usingThemes || !form.theme) {
           delete form.theme;
         }
         if (!form.usingAddress && form.address.length === 0) {
@@ -152,7 +181,20 @@ export const ProposalForm = React.createClass({
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
-          submitProposal(dispatch, this.props.form.id, form, currentStepId);
+          submitProposal(dispatch, this.props.form.id, form, currentStepId).catch(e => {
+            if (
+              e.response &&
+              e.response.errors &&
+              e.response.errors.errors.includes('global.address_not_in_zone')
+            ) {
+              const errors = this.state.errors;
+              this.setState({
+                errors: { ...errors, address: ['proposal.constraints.address_in_zone'] },
+              });
+              return;
+            }
+            throw e;
+          });
         }
       } else {
         dispatch(cancelSubmitProposal());
@@ -203,6 +245,7 @@ export const ProposalForm = React.createClass({
           address: results[0].formatted_address,
           errors: { ...prevState.errors, address: [] },
         }));
+        this.retrieveDistrictForLocation(results[0].geometry.location);
       })
       .catch(error => {
         this.resetAddressField();
@@ -240,6 +283,39 @@ export const ProposalForm = React.createClass({
         }
       });
     }
+  },
+
+  retrieveDistrictForLocation(location: LatLng, isEditMode: ?Boolean = false): void {
+    this.setState({
+      loadingDistricts: true,
+    });
+    if (typeof location.lat === 'function' || typeof location.lng === 'function') {
+      // Google API return the lat and lng as a function, whereas when editing, I get those values directly from the
+      // component as a value so I have to convert the function to a value to have the same output in edit and creation
+      [location.lat, location.lng] = [location.lat(), location.lng()];
+    }
+    Fetcher.graphql({
+      operationName: 'availableDistrictsForLocalisation',
+      query,
+      variables: {
+        proposalFormId: this.props.form.id,
+        latitude: location.lat,
+        longitude: location.lng,
+      },
+    }).then(response => {
+      const form = { ...this.state.form };
+      const visibleDistricts = response.data.availableDistrictsForLocalisation.map(
+        district => district.id,
+      );
+      if (!isEditMode) {
+        form.district = visibleDistricts.length === 0 ? null : visibleDistricts[0];
+      }
+      this.setState({
+        visibleDistricts,
+        form,
+        loadingDistricts: false,
+      });
+    });
   },
 
   updateThemeConstraint() {
@@ -520,10 +596,12 @@ export const ProposalForm = React.createClass({
             {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
           </div>
         )}
+        <Loader show={this.state.loadingDistricts} />
         {features.districts &&
           form.usingDistrict &&
           form.districts.length > 0 && (
             <Input
+              disabled={this.state.loadingDistricts}
               id="proposal_district"
               type="select"
               valueLink={this.linkState('form.district')}
@@ -534,9 +612,9 @@ export const ProposalForm = React.createClass({
               <FormattedMessage id="proposal.select.district">
                 {message => <option value="">{message}</option>}
               </FormattedMessage>
-              {form.districts.map(district => (
-                <option key={district.id} value={district.id}>
-                  {district.name}
+              {this.state.visibleDistricts.map(districtId => (
+                <option key={districtId} value={districtId}>
+                  {form.districts.filter(district => district.id === districtId)[0].name}
                 </option>
               ))}
             </Input>
