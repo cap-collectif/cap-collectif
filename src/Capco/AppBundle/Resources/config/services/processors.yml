@@ -16,4 +16,4 @@ services:
     arguments: ["@capco.comment.repository", "@capco.notify_manager"]
   comment_delete.processor:
     class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
-    arguments: ["@doctrine.orm.entity_manager", "@capco.comment.repository", "@capco.notify_manager"]
+    arguments: ["@capco.comment.repository", "@capco.notify_manager"]

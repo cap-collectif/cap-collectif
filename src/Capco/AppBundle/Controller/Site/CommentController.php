@@ -3,12 +3,10 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Swarrot\Broker\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -74,12 +72,11 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
+                $em->flush();
                 $this->get('event_dispatcher')->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'add')
                 );
-                $em->flush();
-
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.create.success'));
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
@@ -161,15 +158,11 @@ class CommentController extends Controller
                 $comment->resetVotes();
                 $em->persist($comment);
                 $em->flush();
-
+                $this->get('event_dispatcher')->dispatch(
+                    CapcoAppBundleEvents::COMMENT_CHANGED,
+                    new CommentChangedEvent($comment, 'update')
+                );
                 $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('comment.update.success'));
-                if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
-                    $this->get('swarrot.publisher')->publish('comment.update', new Message(
-                        json_encode([
-                            'commentId' => $comment->getId(),
-                        ])
-                    ));
-                }
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             }
@@ -232,13 +225,6 @@ class CommentController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('comment.delete.success'));
-                if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete()) {
-                    $this->get('swarrot.publisher')->publish('comment.update', new Message(
-                        json_encode([
-                            'commentId' => $comment->getId(),
-                        ])
-                    ));
-                }
 
                 return $this->redirect($this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment));
             }

@@ -281,49 +281,34 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
-    public function notifyProposalComment(Comment $comment, string $action)
+    public function notifyProposalComment($comment, string $action)
     {
-        if ($comment instanceof ProposalComment) {
-            /** @var $comment ProposalComment */
-            $sitename = $this->resolver->getValue('global.site.fullname');
+        if ('delete' === $action) {
+            $params = $this->buildParamsForComment($comment, false);
             $subject = $this->translator->trans(
-                'notification.email.comment.' . $action . '.subject', [
-                '%sitename%' => $sitename,
-                '%username%' => $comment->getAuthor()->getDisplayName(),
-            ], 'CapcoAppBundle'
-            );
+                'notification.email.comment.delete.subject',
+                $params['subject'],
+                'CapcoAppBundle');
             $body = $this->translator->trans(
-                'notification.email.comment.' . $action . '.body', [
-                '%userUrl%' => $this->router->generate(
-                    'capco_user_profile_show_all', [
-                    'slug' => $comment->getAuthor()->getSlug(),
-                ],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ),
-                '%username%' => $comment->getAuthor()->getDisplayName(),
-                '%proposal%' => $comment->getProposal()->getTitle(),
-                '%comment%' => $comment->getBodyText(),
-                '%date%' => $comment->getCreatedAt()->format('d/m/Y'),
-                '%time%' => $comment->getCreatedAt()->format('H:i:s'),
-                '%commentUrlBack%' => $this->router->generate(
-                    'capco_admin_contributions_show', [
-                        'id' => $comment->getId(),
-                        'type' => 'comment',
-                    ],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ),
-                '%proposalUrl%' => $this->router->generate(
-                    'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_show',
-                    'delete' !== $action
-                        ? [
-                        'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
-                        'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
-                        'proposalSlug' => $comment->getProposal()->getSlug(),
-                    ]
-                        : ['id' => $comment->getProposal()->getId()],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ),
-            ], 'CapcoAppBundle'
+                'notification.email.comment.delete.body',
+                $params['body'],
+                'CapcoAppBundle'
+            );
+            $this->sendInternalEmail($body, $subject);
+        } elseif ($comment instanceof ProposalComment) {
+            /** @var $comment ProposalComment */
+            $isAnonymous = null === $comment->getAuthor();
+            $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.' . $action . '.subject' : 'notification.email.comment.' . $action . '.subject';
+            $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.' . $action . '.body' : 'notification.email.comment.' . $action . '.body';
+            $params = $this->buildParamsForComment($comment, $isAnonymous);
+            $subject = $this->translator->trans(
+                $subjectId,
+                $params['subject'],
+                'CapcoAppBundle');
+            $body = $this->translator->trans(
+                $bodyId,
+                $params['body'],
+                'CapcoAppBundle'
             );
             $this->sendInternalEmail($body, $subject);
         }
@@ -435,6 +420,74 @@ class Notify implements MailerInterface
             ], 'CapcoAppBundle'
         );
         $this->sendEmail($to, $fromAdress, $fromName, $body, $subject, $contentType);
+    }
+
+    private function buildParamsForComment($comment, bool $isAnonymous)
+    {
+        $result = ['subject' => [], 'body' => []];
+        $sitename = $this->resolver->getValue('global.site.fullname');
+        $result['subject']['%sitename%'] = $sitename;
+        if ($isAnonymous) {
+            $result['subject']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
+            $result['body']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
+        } else {
+            if ($comment instanceof ProposalComment) {
+                $result['subject']['%username%'] = $comment->getAuthor()->getDisplayName();
+                $result['body']['%username%'] = $comment->getAuthor()->getDisplayName();
+                $result['body']['%userUrl%'] = $this->router->generate(
+                    'capco_user_profile_show_all', [
+                    'slug' => $comment->getAuthor()->getSlug(),
+                ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+            } else {
+                $result['subject']['%username%'] = $comment['username'];
+                $result['body']['%username%'] = $comment['username'];
+                $result['body']['%userUrl%'] = $this->router->generate(
+                    'capco_user_profile_show_all', [
+                    'slug' => $comment['userSlug'],
+                ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+            }
+        }
+        if ($comment instanceof ProposalComment) {
+            $result['body']['%proposal%'] = $comment->getProposal()->getTitle();
+            $result['body']['%comment%'] = $comment->getBodyText();
+            $result['body']['%date%'] = $comment->getCreatedAt()->format('d/m/Y');
+            $result['body']['%time%'] = $comment->getCreatedAt()->format('H:i:s');
+            $result['body']['%commentUrlBack%'] = $this->router->generate(
+                'capco_admin_contributions_show',
+                [
+                    'id' => $comment->getId(),
+                    'type' => 'comment',
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            $result['body']['%proposalUrl%'] = $this->router->generate(
+                'app_project_show_proposal',
+                [
+                    'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
+                    'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
+                    'proposalSlug' => $comment->getProposal()->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+        } else {
+            $result['body']['%proposal%'] = $comment['proposal'];
+            $result['body']['%proposalUrl%'] = $this->router->generate(
+                'app_project_show_proposal',
+                [
+                    'projectSlug' => $comment['projectSlug'],
+                    'stepSlug' => $comment['stepSlug'],
+                    'proposalSlug' => $comment['proposalSlug'],
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            $result['body']['%comment%'] = $comment['body'];
+        }
+
+        return $result;
     }
 
     private function emailsAreValid($to, $from)
