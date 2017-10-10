@@ -1,33 +1,19 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
 
-const Navbar = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    logo: PropTypes.string,
-    items: PropTypes.array.isRequired,
-  },
+type Props = {
+  intl: intlShape,
+  logo?: ?string,
+  items: Array,
+  siteName: ?string,
+};
 
-  getDefaultProps() {
-    return {
-      logo: null,
-    };
-  },
-
-  getInitialState() {
-    const { items } = this.props;
-    return {
-      items,
-      moreItems: [],
-    };
-  },
-
+class Navbar extends React.Component<Props> {
   render() {
-    const { logo, intl } = this.props;
-    const { items } = this.state;
+    const { logo, intl, items, siteName } = this.props;
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
@@ -127,15 +113,15 @@ const Navbar = React.createClass({
         </div>
         <div className="container" ref={c => (this.container = c)}>
           <Navigation.Header>
-            <Navigation.Brand href="/" id="home" ref={c => (this.header = c)}>
-              <a href="/">
-                <img
-                  src={logo}
-                  title={intl.formatMessage({ id: 'navbar.homepage' })}
-                  alt={intl.formatMessage({ id: 'navbar.homepage' })}
-                />
-              </a>
-            </Navigation.Brand>
+            {logo ? (
+              <Navigation.Brand href="/" id="home" ref={c => (this.header = c)}>
+                <a href="/">
+                  <img src={logo} title={siteName} alt={siteName} />
+                </a>
+              </Navigation.Brand>
+            ) : (
+              <div className="navbar_site_full-name">{siteName}</div>
+            )}
             <Navigation.Toggle />
           </Navigation.Header>
           <Navigation.Collapse>
@@ -148,7 +134,7 @@ const Navbar = React.createClass({
         </div>
       </Navigation>
     );
-  },
-});
+  }
+}
 
 export default injectIntl(Navbar);
