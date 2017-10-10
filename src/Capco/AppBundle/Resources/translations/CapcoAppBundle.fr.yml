@@ -725,14 +725,14 @@ notification:
             <p><a href="%userUrl%">%username%</a> a publié la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Résumé</h2>
             <p>%proposalExcerpt%</p>
-            <p><a href="%proposalUrl%">Afficher la proposition sur le slite</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher la proposition sur le site</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
       update:
           subject: "%sitename% — %username% a modifié une proposition sur %project%"
           body: |
             <p><a href="%userUrl%">%username%</a> a modifié la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Résumé</h2>
             <p>%proposalExcerpt%</p>
-            <p><a href="%proposalUrl%">Afficher la proposition sur le slite</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher la proposition sur le site</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
       delete:
           subject: "%sitename% — %username% a supprimé une proposition sur %project%"
           body: |
@@ -744,14 +744,14 @@ notification:
             <p><a href="%userUrl%">%username%</a> a publié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Commentaire</h2>
             <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le slite</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
       update:
           subject: "%sitename% — %username% a modifié un commentaire sur une proposition"
           body: |
             <p><a href="%userUrl%">%username%</a> a modifié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Commentaire</h2>
             <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le slite</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
       delete:
           subject: "%sitename% — %username% a supprimé un commentaire sur une proposition"
           body: |
@@ -765,14 +765,14 @@ notification:
             <p>%username% a publié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Commentaire</h2>
             <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le slite</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
       update:
           subject: "%sitename% — %username% a modifié un commentaire sur une proposition"
           body: |
             <p>%username% a modifié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
             <h2>Commentaire</h2>
             <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le slite</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
+            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
       delete:
           subject: "%sitename% — %username% a supprimé un commentaire sur une proposition"
           body: |
