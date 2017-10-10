@@ -163,6 +163,14 @@ class SearchResolver
                 $sortField = 'comments_count';
                 $sortOrder = 'desc';
                 break;
+            case 'expensive':
+                $sortField = 'estimation';
+                $sortOrder = 'desc';
+                break;
+            case 'cheap':
+                $sortField = 'estimation';
+                $sortOrder = 'asc';
+                break;
             default:
                 $sortField = '_score';
                 $sortOrder = 'desc';

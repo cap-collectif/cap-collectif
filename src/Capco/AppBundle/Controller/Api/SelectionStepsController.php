@@ -42,7 +42,7 @@ class SelectionStepsController extends FOSRestController
      * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|votes|comments|random)", nullable=true)
+     * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
     public function postProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
@@ -51,7 +51,7 @@ class SelectionStepsController extends FOSRestController
         $pagination = (int) $paramFetcher->get('pagination');
         $order = $paramFetcher->get('order') ?: $selectionStep->getDefaultSort();
 
-        if ($order === 'votes' && !$selectionStep->isVotable()) {
+        if ('votes' === $order && !$selectionStep->isVotable()) {
             $order = 'last';
         }
 

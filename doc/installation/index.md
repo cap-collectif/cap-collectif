@@ -14,6 +14,23 @@ $ pip --version
 $ sudo pip install docker-compose==1.8.0 Fabric==1.10.2
 ```
 
+##### Erreurs possibles
+
+Si vous avez l'erreur suivante en lançant docker-compose : 
+
+```
+$ [...] ImportError: cannot import name _thread
+```
+
+Il faut pour corriger le problème réinstaller six : 
+
+```
+pip install -I six
+```
+
+source: https://eddyerburgh.me/fix-docker-compose-importerror-cannot-import-name-_thread
+
+
 Pour lister les commandes disponibles : ``fab -l``
 Il est recommandé d'utiliser le plugin oh-my-zsh pour l'autocompletion des commandes.
 
