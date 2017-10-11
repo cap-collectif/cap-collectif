@@ -11,10 +11,11 @@ const Checkbox = React.createClass({
     field: PropTypes.object.isRequired,
     getGroupStyle: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    label: PropTypes.any.isRequired,
+    label: PropTypes.any,
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
+    isReduxForm: PropTypes.bool.isRequired,
   },
 
   other: Other,
@@ -23,6 +24,7 @@ const Checkbox = React.createClass({
     return {
       disabled: false,
       labelClassName: '',
+      isReduxForm: false,
     };
   },
 
@@ -33,7 +35,7 @@ const Checkbox = React.createClass({
   },
 
   onChange(e) {
-    const { field, onChange } = this.props;
+    const { field, onChange, isReduxForm } = this.props;
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     const values = [];
 
@@ -45,6 +47,12 @@ const Checkbox = React.createClass({
 
     if (e.target.type === 'text') {
       values.push(e.target.value);
+    }
+
+    if (isReduxForm) {
+      onChange(values);
+
+      return;
     }
 
     onChange(field, values);

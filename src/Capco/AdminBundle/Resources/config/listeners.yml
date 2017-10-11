@@ -129,3 +129,13 @@ services:
     class: Capco\AppBundle\GraphQL\Resolver\ResponseResolver
     tags:
       - { name: overblog_graphql.resolver, alias: "response_value", method: "resolveValue" }
+
+  capco.resolver.proposal_evaluations:
+    class: Capco\AppBundle\GraphQL\Resolver\ProposalEvaluationResolver
+    tags:
+          - { name: overblog_graphql.resolver, alias: "response_type", method: "resolveResponseType" }
+
+  capco.resolver.value_responses:
+    class: Capco\AppBundle\GraphQL\Resolver\ValueResponseResolver
+    tags:
+          - { name: overblog_graphql.resolver, alias: "value_response_value", method: "resolveValue" }

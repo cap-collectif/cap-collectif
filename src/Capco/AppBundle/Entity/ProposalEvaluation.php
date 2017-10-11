@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -58,7 +59,7 @@ class ProposalEvaluation
         return $this;
     }
 
-    public function getResponses(): ArrayCollection
+    public function getResponses(): Collection
     {
         return $this->responses;
     }

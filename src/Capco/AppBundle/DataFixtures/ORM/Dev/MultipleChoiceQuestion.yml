@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule (local):
 
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion1:
-    id: 10
+    id: 13
     title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
     helpText: Plusieurs choix sont possibles
     questionChoices: ['@questionchoice1', '@questionchoice2', '@questionchoice3', '@questionchoice4']
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     otherAllowed: true
     validationRule: '@validationRule1'
   multiplequestion2:
-    id: 11
+    id: 14
     title: Quel est ton athlète favori ?
     helpText: Un seul choix possible
     questionChoices: ['@questionchoice5', '@questionchoice6', '@questionchoice7', '@questionchoice8']
@@ -25,15 +25,15 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     randomQuestionChoices: true
     otherAllowed: true
   multiplequestion3:
-    id: 12
-    title: Nelson Monfort parle-t-il:
+    id: 15
+    title: "Nelson Monfort parle-t-il:"
     helpText: Merci de répondre sincèrement
     questionChoices: ['@questionchoice9', '@questionchoice10', '@questionchoice11']
     required: false
     type: 4
     randomQuestionChoices: true
   multiplequestion4:
-    id: 13
+    id: 16
     title: Classez vos choix
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     questionChoices: ['@questionchoice12', '@questionchoice13', '@questionchoice14']
@@ -42,23 +42,54 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     randomQuestionChoices: true
     validationRule: '@validationRule2'
   multiplequestion5:
-    id: 14
+    id: 17
     title: Sangohan / Vegeta ?
     questionChoices: ['@questionchoice15', '@questionchoice16']
     required: true
     type: 4
     randomQuestionChoices: true
   multiplequestion6:
-    id: 15
+    id: 18
     title: Choissez le meilleur logo
     questionChoices: ['@questionchoice17', '@questionchoice18']
     required: false
     type: 3
     randomQuestionChoices: false
   multiplequestion7:
-    id: 16
+    id: 19
     title: Est-ce que Martoni a encore une balle dans son chargeur ?
     questionChoices: ['@questionchoice19', '@questionchoice20']
     required: false
     type: 8
     randomQuestionChoices: false
+  multiplequestion8:
+    id: 20
+    title: Comment trouvez-vous cette présentation ?
+    questionChoices: ['@questionchoice21', '@questionchoice22']
+    required: false
+    type: 8
+    randomQuestionChoices: false
+  multiplequestion9:
+    id: 21
+    title: Quelle définition pour cette proposition ?
+    helpText: Vous pouvez sélectionner bien évidemment plusieurs valeurs.
+    questionChoices: ['@questionchoice23', '@questionchoice24', '@questionchoice25']
+    required: true
+    type: 5
+    randomQuestionChoices: false
+  multiplequestion10:
+    id: 22
+    title: En résumé
+    helpText: Une seule réponse valable ici, faites le bon choix !
+    questionChoices: ['@questionchoice26', '@questionchoice27', '@questionchoice28']
+    required: false
+    type: 3
+    randomQuestionChoices: false
+  multiplequestion11:
+    id: 23
+    title: Classez vos choix
+    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    questionChoices: ['@questionchoice29', '@questionchoice30', '@questionchoice31']
+    required: false
+    type: 6
+    randomQuestionChoices: true

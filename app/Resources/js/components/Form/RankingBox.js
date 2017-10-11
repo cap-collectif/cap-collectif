@@ -8,7 +8,7 @@ const RankingBox = React.createClass({
     items: PropTypes.array.isRequired,
     spotsNb: PropTypes.number.isRequired,
     listType: PropTypes.oneOf(['pickBox', 'choiceBox']),
-    fieldId: PropTypes.number.isRequired,
+    fieldId: PropTypes.any.isRequired,
     moveItem: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
   },

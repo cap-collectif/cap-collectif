@@ -110,6 +110,18 @@ type ChangeProposalContentPayload {
   clientMutationId: String
 }
 
+input ChangeProposalEvaluationInput {
+  # The proposal id
+  proposalId: ID!
+  responses: JSON
+  clientMutationId: String
+}
+
+type ChangeProposalEvaluationPayload {
+  proposalEvaluation: ProposalEvaluation!
+  clientMutationId: String
+}
+
 input ChangeProposalNotationInput {
   # The proposal id
   proposalId: ID!
@@ -380,6 +392,7 @@ type Mutation {
   changeTitleProposalForm(input: ChangeTitleProposalFormInput!): ChangeTitleProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
+  changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
 }
 
 # A notifications configuration
@@ -703,7 +716,7 @@ type ProposalEvaluation {
   proposal: Proposal!
 
   # List of responses for the evaluation
-  responses: [Response]
+  responses: [Response]!
 }
 
 # A budget form

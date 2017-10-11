@@ -2,19 +2,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
-import Input from '../../Form/Input';
-import Radio from '../../Form/Radio';
-import Checkbox from '../../Form/Checkbox';
-import Ranking from '../../Form/Ranking';
 import Fetcher from '../../../services/Fetcher';
-import ButtonBody from '../../Reply/Form/ButtonBody';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { Dispatch } from '../../../types';
 
@@ -32,13 +26,13 @@ type Props = RelayProps & {
 
 type State = { form: Object };
 
-const formName = 'proposal-admin-notation';
+const formName = 'proposal-admin-evaluation';
 const validate = () => {
   const errors = {};
   return errors;
 };
 
-const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean }>) => {
+const getRequiredFieldIndicationStrategy = (fields: Array<{ required: boolean }>) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
@@ -59,16 +53,24 @@ const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean 
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   values.likers = values.likers.map(u => u.value);
+
+  const promises = [];
+
   const variables = {
     input: { ...values, proposalId: props.proposal.id },
   };
-  return ChangeProposalNotationMutation.commit(variables).then(() => {
-    location.reload();
-  });
+
+  promises.push(ChangeProposalNotationMutation.commit(variables));
+
+  return Promise.all(promises)
+    .then(() => {
+      // location.reload();
+    })
+    .catch(() => {});
 };
 
 const formattedChoicesInField = field => {
-  const choices = field.choices.map(choice => {
+  return field.choices.map(choice => {
     return {
       id: choice.id,
       label: choice.title,
@@ -76,8 +78,6 @@ const formattedChoicesInField = field => {
       color: choice.color,
     };
   });
-
-  return { ...field, choices };
 };
 
 export class ProposalAdminNotationForm extends React.Component<Props, State> {
@@ -151,23 +151,13 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
     this.state = { form };
   }
 
-  onChange(field: Object, value: string) {
-    const form = this.state.form;
-    if (field) {
-      form[field.id] = value;
-    }
-    this.setState({
-      form,
-    });
-  }
-
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal, disabled } = this.props;
+    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     let strategy = null;
     if (evaluationForm) {
-      strategy = getRequiredFieldIndicationStrategory(proposal.form.evaluationForm.questions);
+      strategy = getRequiredFieldIndicationStrategy(proposal.form.evaluationForm.questions);
     }
 
     return (
@@ -233,157 +223,69 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
               )}
 
               {evaluationForm &&
-                evaluationForm.questions &&
-                evaluationForm.questions.map(field => {
-                  const key = field.slug;
-                  const inputType = field.type || 'text';
-                  const labelAppend = field.required
-                    ? strategy === 'minority_required'
-                      ? ' <span class="small warning"><FormattedMessage id="proposal.mandatory"/></span>'
-                      : ''
-                    : strategy === 'majority_required' || strategy === 'half_required'
-                      ? ' <span class="small excerpt"><FormattedMessage id="proposal.optional"/></span>'
-                      : '';
-                  const labelMessage = field.title + labelAppend;
-                  const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+                evaluationForm.questions && (
+                  <FieldArray
+                    name="responses"
+                    component={({ fields }) => (
+                      <div>
+                        {fields.map((field, index) => {
+                          const key = field.slug;
+                          const inputType = field.type || 'text';
+                          const labelAppend = field.required
+                            ? strategy === 'minority_required'
+                              ? ' <span class="small warning"><FormattedMessage id="proposal.mandatory"/></span>'
+                              : ''
+                            : strategy === 'majority_required' || strategy === 'half_required'
+                              ? ' <span class="small excerpt"><FormattedMessage id="proposal.optional"/></span>'
+                              : '';
+                          const labelMessage = field.title + labelAppend;
+                          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
-                  switch (inputType) {
-                    case 'medias': {
-                      return (
-                        <p className="text-danger">
-                          <Glyphicon bsClass="glyphicon" glyph="alert" />
-                          <span className="ml-10">
-                            <FormattedMessage id="evaluation_form.constraints.medias" />
-                          </span>
-                        </p>
-                      );
-                    }
-                    case 'checkbox': {
-                      const formattedCBField = formattedChoicesInField(field);
+                          switch (inputType) {
+                            case 'medias': {
+                              return (
+                                <p className="text-danger">
+                                  <Glyphicon bsClass="glyphicon" glyph="alert" />
+                                  <span className="ml-10">
+                                    <FormattedMessage id="evaluation_form.constraints.medias" />
+                                  </span>
+                                </p>
+                              );
+                            }
 
-                      return (
-                        <Checkbox
-                          key={key}
-                          id={`reply-${formattedCBField.id}`}
-                          field={formattedCBField}
-                          getGroupStyle={() => {}}
-                          renderFormErrors={() => {}}
-                          onChange={this.onChange}
-                          values={this.state.form}
-                          label={label}
-                          labelClassName="h4"
-                          disabled={disabled}
-                        />
-                      );
-                    }
-                    case 'radio': {
-                      const formattedRadioField = formattedChoicesInField(field);
+                            default: {
+                              let choices;
+                              if (
+                                inputType === 'ranking' ||
+                                inputType === 'radio' ||
+                                inputType === 'checkbox' ||
+                                inputType === 'button'
+                              ) {
+                                choices = formattedChoicesInField(field);
+                              }
 
-                      return (
-                        <Radio
-                          key={key}
-                          id={`reply-${formattedRadioField.id}`}
-                          field={formattedRadioField}
-                          getGroupStyle={() => {}}
-                          renderFormErrors={() => {}}
-                          onChange={this.onChange}
-                          label={label}
-                          labelClassName="h4"
-                          disabled={disabled}
-                        />
-                      );
-                    }
-                    case 'ranking': {
-                      return (
-                        <Ranking
-                          key={key}
-                          id={`reply-${field.id}`}
-                          field={field}
-                          getGroupStyle={() => {}}
-                          renderFormErrors={() => {}}
-                          onChange={this.onChange}
-                          label={label}
-                          labelClassName="h4"
-                          disabled={disabled}
-                        />
-                      );
-                    }
-                    case 'select': {
-                      return (
-                        <Input
-                          key={key}
-                          id={`reply-${field.id}`}
-                          type={inputType}
-                          help={field.helpText}
-                          groupClassName={() => {}}
-                          errors={() => {}}
-                          defaultValue=""
-                          label={label}
-                          labelClassName="h4"
-                          disabled={disabled}>
-                          <option value="" disabled>
-                            {<FormattedMessage id="global.select" />}
-                          </option>
-                          {field.choices.map(choice => (
-                            <option key={choice.id} value={choice.title}>
-                              {choice.title}
-                            </option>
-                          ))}
-                        </Input>
-                      );
-                    }
-                    case 'button': {
-                      return (
-                        <div className="form-group" id={`reply-${field.id}`}>
-                          <label htmlFor={`reply-${field.id}`} className="control-label h4">
-                            {label}
-                          </label>
-                          {field.helpText && (
-                            <span className="help-block" key="help">
-                              {field.helpText}
-                            </span>
-                          )}
-                          {field.description && (
-                            <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-                              <ButtonBody body={field.description || ''} />
-                            </div>
-                          )}
-                          <RadioGroup
-                            key={key}
-                            horizontal
-                            id={`reply-${field.id}`}
-                            onChange={value => {
-                              this.onChange(field, value);
-                            }}
-                            value={field.choices[0].label}>
-                            {field.choices.map(choice => (
-                              <RadioButton
-                                key={choice.id}
-                                value={choice.title}
-                                iconSize={20}
-                                pointColor={choice.color}>
-                                {choice.title}
-                              </RadioButton>
-                            ))}
-                          </RadioGroup>
-                        </div>
-                      );
-                    }
-                    default: {
-                      return (
-                        <Input
-                          key={key}
-                          id={`reply-${field.id}`}
-                          type={inputType}
-                          help={field.helpText}
-                          labelClassName="h4"
-                          placeholder="reply.your_response"
-                          label={label}
-                        />
-                      );
-                    }
-                  }
-                })}
+                              return (
+                                <Field
+                                  key={key}
+                                  name={`responses.${index}.value`}
+                                  id={`reply-${field.id}`}
+                                  type={inputType}
+                                  component={component}
+                                  help={field.helpText}
+                                  labelClassName="h4"
+                                  placeholder="reply.your_response"
+                                  choices={choices}
+                                  label={label}
+                                />
+                              );
+                            }
+                          }
+                        })}
+                      </div>
+                    )}
+                    fields={evaluationForm.questions}
+                  />
+                )}
 
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
@@ -414,6 +316,38 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
       value: u.id,
       label: u.displayName,
     })),
+    responses:
+      !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
+        ? undefined
+        : props.proposal.form.evaluationForm.questions.map(field => {
+            if (!props.proposal.proposalEvaluation) {
+              return;
+            }
+            const response = props.proposal.proposalEvaluation.responses.filter(
+              res => res && res.question.id === field.id,
+            )[0];
+            if (response) {
+              if (response.value) {
+                let responseValue = response.value;
+
+                const questionType = response.question.type;
+                if (questionType === 'radio' || questionType === 'button') {
+                  responseValue = JSON.parse(response.value).labels[0];
+                }
+
+                if (questionType === 'checkbox' || questionType === 'ranking') {
+                  responseValue = JSON.parse(response.value).labels;
+                }
+
+                return {
+                  question: parseInt(field.id, 10),
+                  value: responseValue,
+                };
+              }
+            }
+
+            return { question: parseInt(field.id, 10), value: null };
+          }),
   },
 });
 
@@ -455,6 +389,10 @@ export default createFragmentContainer(
       }
       proposalEvaluation {
         responses {
+          question {
+            id
+            type
+          }
           ... on ValueResponse {
             value
           }

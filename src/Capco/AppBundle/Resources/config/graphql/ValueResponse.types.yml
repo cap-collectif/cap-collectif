@@ -9,3 +9,5 @@ ValueResponse:
             value:
               type: "String"
               description: "The value"
+              resolve: "@=resolver('value_response_value', [value])"
+

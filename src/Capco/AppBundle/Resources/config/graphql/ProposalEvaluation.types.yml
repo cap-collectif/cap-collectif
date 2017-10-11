@@ -7,5 +7,5 @@ ProposalEvaluation:
                 type: "Proposal!"
                 description: "Identifies the proposal."
             responses:
-                type: "[Response]"
+                type: "[Response]!"
                 description: "List of responses for the evaluation"

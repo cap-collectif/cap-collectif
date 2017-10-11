@@ -13,14 +13,16 @@ const Radio = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    label: PropTypes.any.isRequired,
+    label: PropTypes.any,
     labelClassName: PropTypes.string,
+    isReduxForm: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
       labelClassName: '',
+      isReduxForm: false,
     };
   },
 
@@ -29,7 +31,7 @@ const Radio = React.createClass({
   },
 
   reverseOnChange(value, e) {
-    const { field, onChange } = this.props;
+    const { field, onChange, isReduxForm } = this.props;
     if (field.isOtherAllowed) {
       const otherRadioElement = Array.from(
         ReactDOM.findDOMNode(this.other).getElementsByTagName('*'),
@@ -40,6 +42,13 @@ const Radio = React.createClass({
         this.other.clear();
       }
     }
+
+    if (isReduxForm) {
+      onChange(value);
+
+      return;
+    }
+
     onChange(field, value);
   },
 
@@ -75,7 +84,7 @@ const Radio = React.createClass({
           ref={c => (this.radioGroup = c)}
           name={fieldName}
           onChange={this.reverseOnChange}>
-          {this.props.field.choices.map(choice => {
+          {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
             return (
               <Input

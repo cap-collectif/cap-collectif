@@ -12,14 +12,16 @@ const Ranking = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    label: PropTypes.any.isRequired,
+    label: PropTypes.any,
     labelClassName: PropTypes.string,
+    isReduxForm: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
       labelClassName: '',
+      isReduxForm: false,
     };
   },
 
@@ -32,9 +34,16 @@ const Ranking = React.createClass({
   },
 
   handleRankingChange(ranking) {
-    const { field, onChange } = this.props;
+    const { field, onChange, isReduxForm } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
+
+    if (isReduxForm) {
+      onChange(values);
+
+      return;
+    }
+
     onChange(field, values);
   },
 

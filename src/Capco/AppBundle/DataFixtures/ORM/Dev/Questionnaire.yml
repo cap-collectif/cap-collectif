@@ -19,3 +19,11 @@ Capco\AppBundle\Entity\Questionnaire:
     description: <p><text(100)></p>
     step: '@questionnairestep3'
     multipleRepliesAllowed: true
+  questionnaire4:
+    id: 4
+    title: Questionnaire pour budget participatif
+    description: <p><text(100)></p>
+  questionnaire5:
+    id: 5
+    title: Questionnaire pour budget participatif disponible
+    description: <p><text(100)></p>

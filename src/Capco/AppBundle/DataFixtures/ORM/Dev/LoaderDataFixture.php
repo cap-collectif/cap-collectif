@@ -82,6 +82,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/Selection.yml',
             __DIR__ . '/Reply.yml',
 
+            __DIR__ . '/ProposalEvaluation.yml',
             __DIR__ . '/ValueResponse.yml',
             __DIR__ . '/MediaResponse.yml',
 
