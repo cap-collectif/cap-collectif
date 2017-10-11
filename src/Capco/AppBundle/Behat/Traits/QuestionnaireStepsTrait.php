@@ -308,8 +308,9 @@ trait QuestionnaireStepsTrait
             $this->checkOption('reply-10_choice-questionchoice1');
             $this->checkOption('reply-10_choice-questionchoice2');
             $this->checkOption('reply-10_choice-questionchoice3');
-        } else {
-            $this->fillField('reply-2', 'En fait c\'est nul, je ne veux pas des JO à Paris');
+
+            return;
         }
+        $this->fillField('reply-2', 'En fait c\'est nul, je ne veux pas des JO à Paris');
     }
 }
