@@ -20,6 +20,8 @@ function test_redis {
   redis-cli -h "${SYMFONY_REDIS_HOST}" PING > /dev/null
 }
 
+
+
 # Wait till mysql and redis are ready
 count=0
 until ( test_mysqldatabase && test_redis )
@@ -32,5 +34,13 @@ do
   sleep 0.1
   echo "Waiting"
 done
+
+while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
+  do sleep 0.1
+  echo "Waiting for rabbitmq to boot..."
+done
+
+echo "Updating rabbitmq vhost to match schema..."
+su capco -c "php /var/www/bin/rabbit vhost:mapping:create --password=guest /var/www/app/config/rabbitmq.yml"
 
 exec /usr/sbin/php-fpm7.0 -y /etc/service/php-fpm/fpm.conf -O

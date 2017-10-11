@@ -126,7 +126,7 @@ RUN apt-get update && \
 
 # Install Supervisor
 RUN apt-get update && \
-    apt-get install python-meld3 python-pkg-resources supervisor
+    apt-get install -y supervisor
 
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
@@ -140,7 +140,7 @@ COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY nodejs/run                 /etc/service/nodejs/run
-COPY supervisor/run             /etc/service/supervisor/run
+COPY supervisord/run            /etc/service/supervisord/run
 
 # Configuration
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
@@ -151,8 +151,9 @@ COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
-COPY supervisor/supervisor.conf     /etc/supervisor/supervisor.conf
-COPY supervisor/comment.conf        /etc/supervisor/comment.conf
+COPY supervisord/comment.conf       /etc/supervisord/comment.conf
+COPY supervisord/proposal.conf      /etc/supervisord/proposal.conf
+COPY supervisord/supervisord.conf   /etc/supervisord/supervisord.conf
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache
