@@ -113,14 +113,12 @@ class Navbar extends React.Component<Props> {
         </div>
         <div className="container" ref={c => (this.container = c)}>
           <Navigation.Header>
-            {logo ? (
+            {logo && (
               <Navigation.Brand href="/" id="home" ref={c => (this.header = c)}>
                 <a href="/">
-                  <img src={logo} title={siteName} alt={siteName} />
+                  <img src={logo} alt={siteName} />
                 </a>
               </Navigation.Brand>
-            ) : (
-              <div className="navbar_site_full-name">{siteName}</div>
             )}
             <Navigation.Toggle />
           </Navigation.Header>
