@@ -6,6 +6,8 @@ ProposalForm:
         fields:
             id:
                 type: "ID!"
+            reference:
+                type: "String!"
             description:
                 type: "String"
             summaryHelpText:

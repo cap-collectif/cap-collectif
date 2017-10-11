@@ -18,6 +18,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -854,11 +855,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             return '';
         }
 
-        if (!is_array($this->getAddress())) {
-            return \GuzzleHttp\json_decode($this->getAddress(), true)[0]['formatted_address'];
-        }
-
-        return $this->getAddress()[0]['formatted_address'];
+        return Map::decodeAddressFromJson($this->getAddress());
     }
 
     public function getFullReference(): string

@@ -171,6 +171,7 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
     "proposals": [
       {
         "id": @string@,
+        "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
         "updated_at": "@string@.isDateTime()",
@@ -205,7 +206,6 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "reference": @string@,
         "votesCountByStepId": @...@,
         "_links": @...@
       },

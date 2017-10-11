@@ -5,8 +5,8 @@
         table="media__media"
         >
 
-        <id name="id" type="guid" column="id">
-            <generator strategy="UUID"/>
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
         </id>
 
     </entity>
