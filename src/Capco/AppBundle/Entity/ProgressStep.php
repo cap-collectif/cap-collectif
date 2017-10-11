@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgressStep
 {
-    use IdTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="title", type="string", nullable=false)

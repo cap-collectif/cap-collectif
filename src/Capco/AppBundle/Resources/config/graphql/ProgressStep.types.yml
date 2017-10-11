@@ -4,7 +4,7 @@ ProgressStep:
         description: "A budget contribution"
         fields:
             id:
-              type: "String!"
+              type: "ID!"
             title:
               type: "String!"
             startAt:
