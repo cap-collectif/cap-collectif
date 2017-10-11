@@ -20,12 +20,16 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
       <div>
         {proposalForm.url !== '' ? (
           <p style={{ marginTop: 30, marginBottom: 30 }}>
-            <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a>
+            <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
+            <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
+            {proposalForm.reference}
           </p>
         ) : (
           <p style={{ marginTop: 30, marginBottom: 30 }}>
             <strong>Permalien indisponible </strong>
-            (Ce formulaire de dépôt n'est pas encore relié à un projet participatif)
+            (Ce formulaire de dépôt n'est pas encore relié à un projet participatif) |{' '}
+            <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
+            {proposalForm.reference}
           </p>
         )}
         <Tabs defaultActiveKey={2} id="proposal-form-admin-page-tabs">
@@ -56,6 +60,7 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
       url
+      reference
       ...ProposalFormAdminConfigurationForm_proposalForm
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm

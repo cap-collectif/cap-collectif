@@ -23,7 +23,8 @@ class MediaController extends BaseController
      */
     public function liipImagineFilterAction($path, $filter)
     {
-        if (!preg_match('@([^/]*)/(.*)/([0-9]*)_([a-z_A-Z]*).(jpg|png|jpeg)@', $path, $matches)) {
+        // Updated to support UUIDs
+        if (!preg_match('@([^/]*)/(.*)/([a-z0-9\-]*)_([a-z_A-Z]*).(jpg|png|jpeg)@', $path, $matches)) {
             throw new NotFoundHttpException();
         }
 
