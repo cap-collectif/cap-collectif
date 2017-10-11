@@ -28,18 +28,6 @@ def clean():
 
 
 @task(environments=['local'])
-def rabbitmq():
-    "Update RabbitMQ"
-    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
-
-
-@task(environments=['local'])
-def rabbitmq():
-    "Create RabbitMQ queues"
-    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
-
-
-@task(environments=['local'])
 def consumes_rabbitmq():
     "Consumes RabbitMQ queues"
     env.service_command('php bin/console swarrot:consume:proposal_create proposal_create --requeue-on-error &', 'application', env.www_app)
