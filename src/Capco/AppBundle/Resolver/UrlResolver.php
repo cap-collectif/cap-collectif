@@ -257,7 +257,7 @@ class UrlResolver
         }
 
         if ($object instanceof Proposal) {
-            return $this->router->generate('admin_capco_app_proposal_show', ['id' => $object->getId()], $absolute);
+            return $this->router->generate('admin_capco_app_proposal_edit', ['id' => $object->getId()], $absolute);
         }
 
         return '';

@@ -16,6 +16,17 @@ Query:
                         description: "If omitted, returns all consultations. If provided, returns the consultation of the particular id."
                         type: "ID"
                 resolve: "@=resolver('consultation', [args])"
+            availableDistrictsForLocalisation:
+                type: "[District!]!"
+                description: "Retrieve availables districts for a given address"
+                args:
+                    proposalFormId:
+                        type: "ID!"
+                    latitude:
+                        type: "Float!"
+                    longitude:
+                        type: "Float!"
+                resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
             votesByContribution:
                 type: "[PropositionVote]"
                 args:

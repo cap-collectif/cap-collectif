@@ -1,7 +1,7 @@
 services:
   filter.configurator:
       class: Capco\AdminBundle\EventListener\FilterConfigurator
-      arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+      arguments: ["@doctrine.orm.entity_manager"]
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
@@ -21,6 +21,7 @@ services:
       - { name: overblog_graphql.resolver, alias: "query_question", method: "resolve" }
       - { name: overblog_graphql.resolver, alias: "question_type", method: "resolveType" }
       - { name: overblog_graphql.resolver, alias: "question_position", method: "resolvePosition" }
+      - { name: overblog_graphql.resolver, alias: "query_available_districts_for_location", method: "resolveDistrictsForLocalisation" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
