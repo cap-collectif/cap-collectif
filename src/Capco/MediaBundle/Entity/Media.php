@@ -2,13 +2,15 @@
 
 namespace Capco\MediaBundle\Entity;
 
-use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Entity\BaseMedia as BaseMedia;
 
 class Media extends BaseMedia
 {
-    use UuidTrait;
+    /**
+     * @var int
+     */
+    protected $id;
 
     /**
      * Constructor.
@@ -16,6 +18,16 @@ class Media extends BaseMedia
     public function __construct()
     {
         $this->galleryHasMedias = new ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int $id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
