@@ -19,14 +19,6 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
     >
       http://capco.dev/top-budget
     </a>
-     |
-     
-    <b>
-      proposal_form.admin.reference
-       : 
-    </b>
-     
-    2
   </p>
   <Uncontrolled(Tabs)
     defaultActiveKey={2}
@@ -44,7 +36,6 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(ReduxForm))
         proposalForm={
           Object {
-            "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
         }
@@ -57,7 +48,6 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(ReduxForm))
         proposalForm={
           Object {
-            "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
         }
@@ -70,7 +60,6 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(ReduxForm))
         proposalForm={
           Object {
-            "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
         }

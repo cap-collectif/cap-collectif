@@ -4,16 +4,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
 <div>
   <p>
     <strong>
-      Permalien : 
+      Permalien:
     </strong>
      
     <a />
      |
      
-    <b>
-      proposal.admin.reference
-       :
-    </b>
+    global.reference
      
   </p>
   <Uncontrolled(Tabs)
