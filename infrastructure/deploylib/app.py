@@ -28,14 +28,9 @@ def clean():
 
 
 @task(environments=['local'])
-def consumes_rabbitmq():
-    "Consumes RabbitMQ queues"
-    env.service_command('php bin/console swarrot:consume:proposal_create proposal_create --requeue-on-error &', 'application', env.www_app)
-    env.service_command('php bin/console swarrot:consume:proposal_update proposal_update --requeue-on-error &', 'application', env.www_app)
-    env.service_command('php bin/console swarrot:consume:proposal_delete proposal_delete --requeue-on-error &', 'application', env.www_app)
-    env.service_command('php bin/console swarrot:consume:comment_create comment_create --requeue-on-error &', 'application', env.www_app)
-    env.service_command('php bin/console swarrot:consume:comment_update comment_update --requeue-on-error &', 'application', env.www_app)
-    env.service_command('php bin/console swarrot:consume:comment_delete comment_delete --requeue-on-error &', 'application', env.www_app)
+def rabbitmq():
+    "Create RabbitMQ queues"
+    env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
 
 
 @task(environments=['local'])

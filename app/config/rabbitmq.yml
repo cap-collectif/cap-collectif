@@ -7,7 +7,6 @@
     queues:
         proposal_create:
             durable: true
-            delay: 5000
             retries: [25, 125, 625]
             bindings:
                 -
@@ -15,7 +14,6 @@
                     routing_key: proposal_create
         proposal_update:
             durable: true
-            delay: 5000
             retries: [25, 125, 625]
             bindings:
                 -
@@ -23,7 +21,6 @@
                     routing_key: proposal_update
         proposal_delete:
            durable: true
-           delay: 5000
            retries: [25, 125, 625]
            bindings:
                -
@@ -31,7 +28,6 @@
                    routing_key: proposal_delete
         comment_create:
            durable: true
-           delay: 5000
            retries: [25, 125, 625]
            bindings:
                -
@@ -39,7 +35,6 @@
                    routing_key: comment_create
         comment_update:
            durable: true
-           delay: 5000
            retries: [25, 125, 625]
            bindings:
                -
@@ -47,7 +42,6 @@
                    routing_key: comment_update
         comment_delete:
            durable: true
-           delay: 5000
            retries: [25, 125, 625]
            bindings:
                -
