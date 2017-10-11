@@ -249,13 +249,6 @@ class ProposalsController extends FOSRestController
         $em->persist($comment);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-        if ($proposal->getForm()->isNotifyingCommentOnCreate()) {
-            $this->get('swarrot.publisher')->publish('comment.create', new Message(
-                json_encode([
-                    'commentId' => $comment->getId(),
-                ])
-            ));
-        }
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')
