@@ -102,7 +102,7 @@ trait ProjectStepsTrait
     public function iShouldSeeAllDistrictsStats()
     {
         $selector = $this->navigationContext->getPage('project stats page')->getDistrictStatsModalItemsSelector();
-        $this->assertNumElements(12, $selector);
+        $this->assertNumElements(13, $selector);
     }
 
     /**
