@@ -678,7 +678,6 @@ input ProposalCategoryInput {
 # A budget form
 type ProposalForm {
   id: ID!
-  reference: String!
   description: String
   summaryHelpText: String
   illustrationHelpText: String

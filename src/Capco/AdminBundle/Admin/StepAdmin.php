@@ -66,7 +66,7 @@ class StepAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ('edit' === $name) {
+        if ($name === 'edit') {
             return 'CapcoAdminBundle:Step:edit.html.twig';
         }
 
@@ -158,8 +158,8 @@ class StepAdmin extends Admin
                     'query' => $this->createQueryForConsultationStepType(),
                 ])
                 ->add('opinionCountShownBySection', null, [
-                    'label' => 'admin.fields.step.opinionCountShownBySection',
-                    'required' => true,
+                  'label' => 'admin.fields.step.opinionCountShownBySection',
+                  'required' => true,
                 ])
                 ->end()
                 ->with('admin.fields.proposal_form.group_help_texts')
@@ -183,10 +183,10 @@ class StepAdmin extends Admin
                     'required' => false,
                 ])
                 ->add('synthesis', 'sonata_type_admin', [
-                    'label' => 'admin.fields.step.synthesis',
-                    'required' => true,
+                        'label' => 'admin.fields.step.synthesis',
+                        'required' => true,
                 ], ['link_parameters' => ['projectId']]
-                );
+            );
         } elseif ($subject instanceof RankingStep) {
             $formMapper
                 ->add('body', CKEditorType::class, [
@@ -217,38 +217,29 @@ class StepAdmin extends Admin
                     'required' => true,
                 ])
                 ->add('allowingProgressSteps', null, [
-                    'label' => 'admin.fields.step.allowingProgressSteps',
-                    'required' => false,
-                ])
-            ;
-        } elseif ($subject instanceof CollectStep) {
-            $formMapper
-                ->add('defaultSort', 'choice', [
-                    'label' => 'admin.fields.step.default_sort',
-                    'choices' => SelectionStep::$sortLabels,
-                    'translation_domain' => 'CapcoAppBundle',
-                    'required' => true,
+                  'label' => 'admin.fields.step.allowingProgressSteps',
+                  'required' => false,
                 ])
             ;
         }
 
         if ($subject instanceof QuestionnaireStep) {
             $formMapper
-                ->add('footer', CKEditorType::class, [
-                    'config_name' => 'admin_editor',
-                    'label' => 'admin.fields.step.footer',
-                    'required' => false,
-                    'translation_domain' => 'SonataAdminBundle',
-                ])
-            ;
+            ->add('footer', CKEditorType::class, [
+                'config_name' => 'admin_editor',
+                'label' => 'admin.fields.step.footer',
+                'required' => false,
+                'translation_domain' => 'SonataAdminBundle',
+            ])
+          ;
             if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
                 $formMapper
-                    ->add('verification', 'choice', [
-                        'label' => 'admin.fields.step.verification',
-                        'choices' => QuestionnaireStep::$verificationLabels,
-                        'translation_domain' => 'SonataAdminBundle',
-                    ])
-                ;
+                ->add('verification', 'choice', [
+                    'label' => 'admin.fields.step.verification',
+                    'choices' => QuestionnaireStep::$verificationLabels,
+                    'translation_domain' => 'SonataAdminBundle',
+                ])
+              ;
             }
         }
 
@@ -265,8 +256,8 @@ class StepAdmin extends Admin
                     'help' => 'admin.help.step.vote_type',
                 ])
                 ->add('votesLimit', IntegerType::class, [
-                    'label' => 'admin.fields.step.votesLimit',
-                    'required' => false,
+                  'label' => 'admin.fields.step.votesLimit',
+                  'required' => false,
                 ])
                 ->add('hasVoteThreshold', CheckboxType::class, [
                     'label' => 'admin.fields.step.vote_threshold.checkbox',
@@ -317,8 +308,8 @@ class StepAdmin extends Admin
                 $formMapper->end();
                 $formMapper->with('admin.fields.step.group_selections')
                     ->add('private', CheckboxType::class, [
-                        'label' => 'admin.fields.step.private',
-                        'required' => false,
+                            'label' => 'admin.fields.step.private',
+                            'required' => false,
                     ]);
             }
             $formMapper->end();
@@ -392,7 +383,7 @@ class StepAdmin extends Admin
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject)
             ->getQuery()
-            ;
+        ;
     }
 
     private function createQueryForProposalForms()

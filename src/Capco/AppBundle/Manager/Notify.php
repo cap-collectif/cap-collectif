@@ -259,8 +259,8 @@ class Notify implements MailerInterface
               '%username%' => $proposal->getAuthor()->getDisplayName(),
               '%proposal%' => $proposal->getTitle(),
               '%proposalUrl%' => $this->router->generate(
-                'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_edit',
-                'delete' !== $action
+                $action !== 'delete' ? 'app_project_show_proposal' : 'admin_capco_app_proposal_show',
+                $action !== 'delete'
                 ? [
                     'projectSlug' => $project->getSlug(),
                     'stepSlug' => $step->getSlug(),
