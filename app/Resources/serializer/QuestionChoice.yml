@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\QuestionChoice:
   properties:
     id:
       expose: true
-      type: integer
+      type: string
       groups: [QuestionChoices, Questions, Questionnaires]
     title:
       expose: true
