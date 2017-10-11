@@ -18,9 +18,7 @@ class Navbar extends React.Component<Props> {
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
         {items.filter((item, index) => index < 5).map((header, index) => {
-          return (
-            <NavbarItem key={index} item={header} ref={c => (this[`item-${header.id}`] = c)} />
-          );
+          return <NavbarItem key={index} item={header} />;
         })}
         {items.length > 5 && (
           <NavbarItem
@@ -30,7 +28,6 @@ class Navbar extends React.Component<Props> {
               hasEnabledFeature: true,
               children: items.filter((item, index) => index >= 5),
             }}
-            ref={c => (this.seeMoreDropdown = c)}
             className="navbar-dropdown-more"
           />
         )}
@@ -40,9 +37,7 @@ class Navbar extends React.Component<Props> {
     const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
         {items.filter((item, index) => index < 3).map((header, index) => {
-          return (
-            <NavbarItem key={index} item={header} ref={c => (this[`item-${header.id}`] = c)} />
-          );
+          return <NavbarItem key={index} item={header} />;
         })}
         {items.length > 3 && (
           <NavbarItem
@@ -52,7 +47,6 @@ class Navbar extends React.Component<Props> {
               hasEnabledFeature: true,
               children: items.filter((item, index) => index >= 3),
             }}
-            ref={c => (this.seeMoreDropdown = c)}
             className="navbar-dropdown-more"
           />
         )}
@@ -62,9 +56,7 @@ class Navbar extends React.Component<Props> {
     const navbarSmSize = (
       <Nav id="navbar-content" className="visible-sm-block">
         {items.filter((item, index) => index < 2).map((header, index) => {
-          return (
-            <NavbarItem key={index} item={header} ref={c => (this[`item-${header.id}`] = c)} />
-          );
+          return <NavbarItem key={index} item={header} />;
         })}
         {items.length > 2 && (
           <NavbarItem
@@ -74,7 +66,6 @@ class Navbar extends React.Component<Props> {
               hasEnabledFeature: true,
               children: items.filter((item, index) => index >= 2),
             }}
-            ref={c => (this.seeMoreDropdown = c)}
             className="navbar-dropdown-more"
           />
         )}
@@ -84,9 +75,7 @@ class Navbar extends React.Component<Props> {
     const navbarXsSize = (
       <Nav id="navbar-content" className="visible-xs-block">
         {items.map((header, index) => {
-          return (
-            <NavbarItem key={index} item={header} ref={c => (this[`item-${header.id}`] = c)} />
-          );
+          return <NavbarItem key={index} item={header} />;
         })}
       </Nav>
     );
@@ -111,10 +100,10 @@ class Navbar extends React.Component<Props> {
             </div>
           </div>
         </div>
-        <div className="container" ref={c => (this.container = c)}>
+        <div className="container">
           <Navigation.Header>
             {logo && (
-              <Navigation.Brand href="/" id="home" ref={c => (this.header = c)}>
+              <Navigation.Brand href="/" id="home">
                 <a href="/">
                   <img src={logo} alt={siteName} />
                 </a>
@@ -127,7 +116,7 @@ class Navbar extends React.Component<Props> {
             {navbarMdSize}
             {navbarSmSize}
             {navbarXsSize}
-            <NavbarRight ref={c => (this.navright = c)} />
+            <NavbarRight />
           </Navigation.Collapse>
         </div>
       </Navigation>
