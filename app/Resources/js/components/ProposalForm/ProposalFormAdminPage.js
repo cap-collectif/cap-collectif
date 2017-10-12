@@ -33,7 +33,7 @@ const component = ({
 export class ProposalFormAdminPage extends Component<Props> {
   render() {
     return (
-      <div className="container">
+      <div className="admin_proposal_form">
         <QueryRenderer
           environment={environment}
           query={graphql`

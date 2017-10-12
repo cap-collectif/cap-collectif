@@ -36,6 +36,11 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
   >
     <ListGroup
       bsClass="list-group"
+      style={
+        Object {
+          "paddingBottom": 10,
+        }
+      }
     >
       <ListGroupItem
         bsClass="list-group-item"
@@ -68,14 +73,9 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
                 block={false}
                 bsClass="btn"
                 bsStyle="warning"
-                className="btn-outline-warning"
                 disabled={false}
                 href="about:///admin/capco/app/post/1/edit"
               >
-                <i
-                  className="fa fa-pencil"
-                />
-                 
                 <FormattedMessage
                   id="global.edit"
                   values={Object {}}
@@ -86,12 +86,12 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
                 block={false}
                 bsClass="btn"
                 bsStyle="danger"
-                className="btn-outline-danger"
                 disabled={false}
                 href="about:///admin/capco/app/post/1/delete"
               >
-                <i
-                  className="fa fa-trash"
+                <FormattedMessage
+                  id="global.delete"
+                  values={Object {}}
                 />
               </Button>
             </ButtonToolbar>
@@ -99,71 +99,6 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
         </Row>
       </ListGroupItem>
     </ListGroup>
-    <ButtonToolbar
-      bsClass="btn-toolbar"
-      className="box-content__toolbar"
-      style={
-        Object {
-          "marginBottom": 10,
-        }
-      }
-    >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="primary"
-        disabled={false}
-        href="about:///admin/capco/app/post/create"
-      >
-        <FormattedMessage
-          id="global.add"
-          values={Object {}}
-        />
-      </Button>
-    </ButtonToolbar>
-  </div>
-</div>
-`;
-
-exports[`<ProposalAdminNewsForm /> render correctly when there is not news 1`] = `
-<div
-  className="box box-primary container"
->
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="proposal.admin.news"
-        values={Object {}}
-      />
-    </h3>
-    <a
-      className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <i
-        className="fa fa-info-circle"
-      />
-       
-      <FormattedMessage
-        id="global.help"
-        values={Object {}}
-      />
-    </a>
-  </div>
-  <div
-    className="box-content"
-  >
-    <FormattedMessage
-      id="proposal.admin.news.empty"
-      values={Object {}}
-    />
     <ButtonToolbar
       bsClass="btn-toolbar"
       className="box-content__toolbar"

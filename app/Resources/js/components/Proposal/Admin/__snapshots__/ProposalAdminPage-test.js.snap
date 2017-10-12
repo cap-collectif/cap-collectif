@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalAdminPage /> render correctly 1`] = `
-<div>
+<div
+  className="admin_proposal_form"
+>
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {
