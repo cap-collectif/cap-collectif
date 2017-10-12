@@ -84,20 +84,18 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                   <ButtonToolbar className="pull-right">
                     <Button
                       bsStyle="warning"
-                      className="btn-outline-warning"
                       onClick={() => {
                         this.setState({ editIndex: index });
                       }}>
-                      <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
+                      <FormattedMessage id="global.edit" />
                     </Button>
 
                     <Button
                       bsStyle="danger"
-                      className="btn-outline-danger"
                       onClick={() => {
                         this.setState({ showModal: index });
                       }}>
-                      <i className="fa fa-trash" />
+                      <FormattedMessage id="global.remove" />
                     </Button>
                   </ButtonToolbar>
                 </Col>

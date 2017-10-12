@@ -12,10 +12,7 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
       }
     }
   >
-    <FormattedMessage
-      id="proposal_form.admin.configuration.categories_list"
-      values={Object {}}
-    />
+    Liste des catégories
   </label>
   <ListGroup
     bsClass="list-group"
@@ -25,17 +22,17 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
     block={false}
     bsClass="btn"
     bsStyle="primary"
-    className="btn-outline-primary box-content__toolbar"
     disabled={false}
     onClick={[Function]}
     style={
       Object {
-        "marginBottom": 5,
+        "marginBottom": 10,
       }
     }
   >
-    <i
-      className="fa fa-plus-circle"
+    <Glyphicon
+      bsClass="glyphicon"
+      glyph="plus"
     />
      
     <FormattedMessage

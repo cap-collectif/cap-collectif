@@ -2,7 +2,7 @@
 
 exports[`<ProposalFormAdminPage /> render correctly 1`] = `
 <div
-  className="admin_proposal_form"
+  className="container"
 >
   <ReactRelayQueryRenderer
     environment={

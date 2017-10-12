@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "74853df06cd5dc55a37dd520a83577e9",
+    "content-hash": "9f644b6956e12a21f9fec3f3c50ff2e7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7207,12 +7207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/SonataMediaBundle.git",
-                "reference": "a8008ed911a80a8c8131635e7870a740092568d2"
+                "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/SonataMediaBundle/zipball/a8008ed911a80a8c8131635e7870a740092568d2",
-                "reference": "a8008ed911a80a8c8131635e7870a740092568d2",
+                "url": "https://api.github.com/repos/cap-collectif/SonataMediaBundle/zipball/98553d7faf8639ff6f2557c74a1a4e032b25f490",
+                "reference": "98553d7faf8639ff6f2557c74a1a4e032b25f490",
                 "shasum": ""
             },
             "require": {
@@ -7286,9 +7286,9 @@
                 "youtube"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/SonataMediaBundle/tree/master"
+                "source": "https://github.com/spyl94/SonataMediaBundle/tree/master"
             },
-            "time": "2017-10-12T14:35:09+00:00"
+            "time": "2016-09-30T14:15:26+00:00"
         },
         {
             "name": "sonata-project/notification-bundle",

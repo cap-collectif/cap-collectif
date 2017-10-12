@@ -1,13 +1,7 @@
-.admin_proposal_form {
-    .box-primary {
-        padding: 0 20px 20px;
-    }
-
+#proposal-admin-page-tabs {
     .box-header {
-        padding: 10px 0;
-
         h3.box-title {
-            margin: 15px 0;
+            margin: 15px 0 0;
             padding-bottom: 10px;
             border-bottom: 1px solid $border-color;
             font-size: 24px;
@@ -22,14 +16,7 @@
     }
 
     .box-content {
-        input,
-        textarea,
-        select,
-        select.form-control,
-        .ql-container,
-        .form-group > .list-group > .list-group-item {
-            background-color: $light-bgc;
-        }
+        padding: 10px;
 
         &.box-content__notation-form,
         &.box-content__status-form {
@@ -42,35 +29,8 @@
             border: 1px solid $border-color;
         }
 
-        .ql-container {
-            min-height: 100px;
-        }
-
         .list-group {
             margin-bottom: 0;
-        }
-
-        .panel-heading {
-            a:hover {
-                color: currentColor;
-            }
-
-            h4 {
-                margin: 0;
-                line-height: 31px;
-            }
-
-            .form-group {
-                margin: 5px 0 0;
-            }
-        }
-
-        .panel-body .form-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .form-group .checkbox {
-            margin-top: 0;
         }
 
         .image-uploader {
@@ -92,11 +52,11 @@
 
         .box-content__toolbar:not(button) {
             padding-top: 20px;
-            margin-top: 20px;
+            margin-top: 10px;
             border-top: 1px solid $border-color;
             margin-left: 0;
 
-            >.btn:first-child {
+            >.btn {
                 margin-left: 0;
             }
         }
