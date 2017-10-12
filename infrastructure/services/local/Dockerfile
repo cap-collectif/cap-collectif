@@ -151,9 +151,7 @@ COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
-COPY supervisord/comment.conf       /etc/supervisord/comment.conf
-COPY supervisord/proposal.conf      /etc/supervisord/proposal.conf
-COPY supervisord/supervisord.conf   /etc/supervisord/supervisord.conf
+COPY supervisord/                   /etc/supervisord
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache

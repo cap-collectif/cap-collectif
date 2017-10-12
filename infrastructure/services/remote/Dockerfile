@@ -205,9 +205,7 @@ COPY elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
-COPY supervisord/comment.conf       /etc/supervisord/comment.conf
-COPY supervisord/proposal.conf      /etc/supervisord/proposal.conf
-COPY supervisord/supervisord.conf   /etc/supervisord/supervisord.conf
+COPY supervisord/                   /etc/supervisord
 
 # Binaries
 COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin

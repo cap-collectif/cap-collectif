@@ -183,6 +183,8 @@ trait ProposalStepsTrait
 
     /**
      * @Then there should be :nb proposals
+     *
+     * @param int $nb
      */
     public function thereShouldBeNbProposals(int $nb)
     {
@@ -345,9 +347,9 @@ trait ProposalStepsTrait
     /**
      * @When I comment :body
      *
-     * @param mixed $body
+     * @param string $body
      */
-    public function iComment($body)
+    public function iComment(string $body)
     {
         $this->fillComment($body);
         $this->iSubmitTheCommentForm();
@@ -356,11 +358,11 @@ trait ProposalStepsTrait
     /**
      * @When I anonymously comment :body as :name with address :email
      *
-     * @param mixed $body
-     * @param mixed $name
-     * @param mixed $email
+     * @param string $body
+     * @param string $name
+     * @param string $email
      */
-    public function iAnonymouslyComment($body, $name, $email)
+    public function iAnonymouslyComment(string $body, string $name, string $email)
     {
         $this->fillAnonymousComment($body, $name, $email);
         $this->iSubmitTheCommentForm();
