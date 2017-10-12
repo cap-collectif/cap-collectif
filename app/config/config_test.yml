@@ -3,7 +3,7 @@ imports:
 
 # do not publish rabbitmq messages
 parameters:
-    swarrot.publisher.class: Swarrot\SwarrotBundle\Broker\BlackholePublisher
+#    swarrot.publisher.class: Swarrot\SwarrotBundle\Broker\BlackholePublisher
 
 framework:
   test: ~

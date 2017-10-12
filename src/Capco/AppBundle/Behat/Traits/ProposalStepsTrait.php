@@ -52,6 +52,16 @@ trait ProposalStepsTrait
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
     ];
+    protected static $proposalCommentNotNotifiable = [
+        'projectSlug' => 'appel-a-projets',
+        'stepSlug' => 'collecte-des-propositions-avec-vote-simple',
+        'proposalSlug' => 'mon-super-projet',
+    ];
+    protected static $proposalCommentNotifiable = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'renovation-du-gymnase',
+    ];
     protected static $proposalWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
         'stepSlug' => 'collecte-des-propositions-1',
@@ -112,6 +122,22 @@ trait ProposalStepsTrait
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+    }
+
+    /**
+     * @When I go to a proposal which is comment notifiable
+     */
+    public function iGoToACommentNotifiableProposal()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
+    }
+
+    /**
+     * @When I go to a proposal which is not comment notifiable
+     */
+    public function iGoToAProposalNotCommentNotifiable()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
     }
 
     /**
@@ -292,6 +318,30 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I comment :body
+     *
+     * @param mixed $body
+     */
+    public function iComment($body)
+    {
+        $this->fillComment($body);
+        $this->iSubmitTheCommentForm();
+    }
+
+    /**
+     * @When I anonymously comment :body as :name with address :email
+     *
+     * @param mixed $body
+     * @param mixed $name
+     * @param mixed $email
+     */
+    public function iAnonymouslyComment($body, $name, $email)
+    {
+        $this->fillAnonymousComment($body, $name, $email);
+        $this->iSubmitTheCommentForm();
+    }
+
+    /**
      * @When I fill the proposal form with a theme
      */
     public function iFillTheProposalFormWithATheme()
@@ -313,6 +363,15 @@ trait ProposalStepsTrait
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
+        $this->iWait(5);
+    }
+
+    /**
+     * @When I submit the comment form
+     */
+    public function iSubmitTheCommentForm()
+    {
+        $this->navigationContext->getPage('proposal page')->submitCommentForm();
         $this->iWait(5);
     }
 
@@ -996,6 +1055,18 @@ trait ProposalStepsTrait
         $this->iWait(1);
         $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
         $this->iWait(1);
+    }
+
+    protected function fillComment($body)
+    {
+        $this->fillField('body', $body);
+    }
+
+    protected function fillAnonymousComment($body, $name, $email)
+    {
+        $this->fillField('body', $body);
+        $this->fillField('authorName', $name);
+        $this->fillField('authorEmail', $email);
     }
 
     protected function votesDetailsPageIsOpen()

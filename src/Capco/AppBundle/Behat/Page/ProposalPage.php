@@ -26,6 +26,7 @@ class ProposalPage extends Page
         'confirm delete proposal button' => '#confirm-proposal-delete',
         'confirm edit proposal button' => '#confirm-proposal-edit',
         'report proposal button' => '.proposal__btn--report',
+        'comment button' => 'button.btn--comment',
         'proposal buttons' => '.proposal__content .proposal__buttons',
         'share button' => '#proposal-share-button',
         'votes tab' => '#proposal-page-tabs-tab-votes',
@@ -35,6 +36,11 @@ class ProposalPage extends Page
     public function getVoteButtonSelector($id)
     {
         return $this->getSelector('proposal vote form submit button');
+    }
+
+    public function getCommentButton()
+    {
+        return $this->getElement('comment button');
     }
 
     public function getVotesCounter()
@@ -83,6 +89,12 @@ class ProposalPage extends Page
         //     // $button->getParent()->getParent()->getParent()->click();
         //     $button->getParent()->getParent()->click();
         // }
+    }
+
+    public function submitCommentForm()
+    {
+        $button = $this->getCommentButton();
+        $button->click();
     }
 
     public function getVoteButtonLabel()
