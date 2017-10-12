@@ -1163,7 +1163,7 @@
   "proposal_form.lng_map": "Longitude",
   "proposal_form.districts": "Zones géographiques",
   "proposal_form.notifications.label": "Recevoir une notification lorsqu'une proposition est :",
-  "proposal_form.notifications_comment.label": "Recevoir une notification lorsqu'un commentaireest :",
+  "proposal_form.notifications_comment.label": "Recevoir une notification lorsqu'un commentaire est :",
   "proposal_form.notifications.on_create": "Déposée",
   "proposal_form.notifications.on_update": "Modifiée",
   "proposal_form.notifications.on_delete": "Supprimée",

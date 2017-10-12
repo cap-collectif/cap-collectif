@@ -20,8 +20,6 @@ function test_redis {
   redis-cli -h "${SYMFONY_REDIS_HOST}" PING > /dev/null
 }
 
-
-
 # Wait till mysql and redis are ready
 count=0
 until ( test_mysqldatabase && test_redis )

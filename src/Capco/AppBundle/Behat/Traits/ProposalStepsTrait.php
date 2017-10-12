@@ -19,7 +19,6 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-fermee',
     ];
-
     protected static $selectionStepOpenParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'selection',
@@ -61,6 +60,16 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
+    ];
+    protected static $proposalNotifiable = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'renovation-du-gymnase',
+    ];
+    protected static $proposalNotNotifiable = [
+        'projectSlug' => 'budget-avec-vote-limitte',
+        'stepSlug' => 'collecte-avec-vote-simple-limite',
+        'proposalSlug' => 'proposition-17',
     ];
     protected static $proposalWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
@@ -138,6 +147,22 @@ trait ProposalStepsTrait
     public function iGoToAProposalNotCommentNotifiable()
     {
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
+    }
+
+    /**
+     * @When I go to a proposal which is notifiable
+     */
+    public function iGoToANotifiableProposal()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotifiable);
+    }
+
+    /**
+     * @When I go to a proposal which is not notifiable
+     */
+    public function iGoToANotNotifiableProposal()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
     }
 
     /**
