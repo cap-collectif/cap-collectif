@@ -2,14 +2,7 @@
 
 exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
 <div>
-  <p
-    style={
-      Object {
-        "marginBottom": 30,
-        "marginTop": 30,
-      }
-    }
-  >
+  <p>
     <strong>
       Permalien :
     </strong>

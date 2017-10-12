@@ -19,13 +19,13 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
     return (
       <div>
         {proposalForm.url !== '' ? (
-          <p style={{ marginTop: 30, marginBottom: 30 }}>
+          <p>
             <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
             <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
             {proposalForm.reference}
           </p>
         ) : (
-          <p style={{ marginTop: 30, marginBottom: 30 }}>
+          <p>
             <strong>Permalien indisponible </strong>
             (Ce formulaire de dépôt n'est pas encore relié à un projet participatif) |{' '}
             <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
