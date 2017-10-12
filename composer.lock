@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "9f644b6956e12a21f9fec3f3c50ff2e7",
-=======
-    "content-hash": "af9588708facc0049186649bc11446da",
->>>>>>> Update sonata media fork
+    "content-hash": "74853df06cd5dc55a37dd520a83577e9",
     "packages": [
         {
             "name": "behat/transliterator",
