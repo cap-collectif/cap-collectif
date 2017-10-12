@@ -28,7 +28,7 @@ export class ProposalAdminPage extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     return (
-      <div>
+      <div className="admin_proposal_form">
         <QueryRenderer
           environment={environment}
           query={graphql`

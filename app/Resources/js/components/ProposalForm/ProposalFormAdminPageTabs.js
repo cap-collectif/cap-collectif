@@ -32,19 +32,14 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
             {proposalForm.reference}
           </p>
         )}
-        <Tabs defaultActiveKey={2} id="proposal-form-admin-page-tabs">
-          <Tab
-            eventKey={1}
-            title={intl.formatMessage({ id: 'proposal_form.admin.activity' })}
-            disabled
-          />
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
+        <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
+          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
             <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
           </Tab>
         </Tabs>

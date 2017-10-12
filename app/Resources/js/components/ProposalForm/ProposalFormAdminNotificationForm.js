@@ -40,11 +40,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3
-            className="box-title"
-            style={{ fontSize: 22, padding: 0, paddingTop: 10, paddingBottom: 30 }}>
-            Notification
-          </h3>
+          <h3 className="box-title">Notification</h3>
           <a
             className="pull-right link"
             rel="noopener noreferrer"
@@ -52,40 +48,42 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <form onSubmit={handleSubmit}>
-          <h4 style={{ fontWeight: 'bold' }}>
-            <FormattedMessage id="proposal_form.notifications.label" />
-          </h4>
-          <Field
-            name="onCreate"
-            component={component}
-            type="checkbox"
-            id="proposal_form_notification_on_create">
-            <FormattedMessage id="proposal_form.notifications.on_create" />
-          </Field>
-          <Field
-            name="onUpdate"
-            component={component}
-            type="checkbox"
-            id="proposal_form_notification_on_update">
-            <FormattedMessage id="proposal_form.notifications.on_update" />
-          </Field>
-          <Field
-            name="onDelete"
-            component={component}
-            type="checkbox"
-            id="proposal_form_notification_on_delete">
-            <FormattedMessage id="proposal_form.notifications.on_delete" />
-          </Field>
-          <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-            </Button>
-            <Button bsStyle="danger" disabled>
-              <FormattedMessage id="global.delete" />
-            </Button>
-          </ButtonToolbar>
-        </form>
+        <div className="box-content">
+          <form onSubmit={handleSubmit}>
+            <h4 style={{ fontWeight: 'bold', marginTop: 0 }}>
+              <FormattedMessage id="proposal_form.notifications.label" />
+            </h4>
+            <Field
+              name="onCreate"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_on_create">
+              <FormattedMessage id="proposal_form.notifications.on_create" />
+            </Field>
+            <Field
+              name="onUpdate"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_on_update">
+              <FormattedMessage id="proposal_form.notifications.on_update" />
+            </Field>
+            <Field
+              name="onDelete"
+              component={component}
+              type="checkbox"
+              id="proposal_form_notification_on_delete">
+              <FormattedMessage id="proposal_form.notifications.on_delete" />
+            </Field>
+            <ButtonToolbar className="box-content__toolbar">
+              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+              </Button>
+              <Button bsStyle="danger" disabled>
+                <FormattedMessage id="global.delete" />
+              </Button>
+            </ButtonToolbar>
+          </form>
+        </div>
       </div>
     );
   }

@@ -30,7 +30,7 @@
                 {{ object.Comment.body }}
             </a>
         {% elseif (object.Proposal is not null) %}
-            <a href="{{ path('admin_capco_app_proposal_edit', {'id': object.Proposal.id}) }}">
+            <a href="{{ path('admin_capco_app_proposal_show', {'id': object.Proposal.id}) }}">
                 {{ object.Proposal.title }}
             </a>
         {% endif %}

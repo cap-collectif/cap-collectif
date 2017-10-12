@@ -1,88 +1,68 @@
 Capco\AppBundle\Entity\QuestionChoice:
   questionchoice1:
-    id: questionchoice1
     title: Athlétisme
     position: 1
   questionchoice2:
-    id: questionchoice2
     title: Natation
     position: 2
   questionchoice3:
-    id: questionchoice3
     title: Sports collectifs
     position: 3
   questionchoice4:
-    id: questionchoice4
     title: Sports individuels
     position: 4
   questionchoice5:
-    id: questionchoice5
     title: Maxime Arrouard
     position: 1
   questionchoice6:
-    id: questionchoice6
     title: Superman
     position: 2
   questionchoice7:
-    id: questionchoice7
     title: Cyril Lage
     position: 3
   questionchoice8:
-    id: questionchoice8
     title: Spylou Super Sayen
     position: 4
   questionchoice9:
-    id: questionchoice9
     title: Trop fort (Mon sonotone est tout neuf)
     position: 1
   questionchoice10:
-    id: questionchoice10
     title: Assez fort (Mon sonotone est mal réglé)
     position: 2
   questionchoice11:
-    id: questionchoice11
     title: Pas assez fort (Mon sonotone est en panne)
     position: 3
   questionchoice12:
-    id: questionchoice12
-    title: Choix 1
-    position: 1
-    description: Description
+      title: Choix 1
+      position: 1
+      description: Description
   questionchoice13:
-    id: questionchoice13
     title: Choix 2
     position: 2
     description: Description
     image: '@MediaProject1'
   questionchoice14:
-    id: questionchoice14
     title: Choix 3 avec un titre très long pour le test du rendu
     position: 3
   questionchoice15:
-    id: questionchoice15
     title: Sangohan
     position: 3
   questionchoice16:
-    id: questionchoice16
     title: Végéta
     position: 3
   questionchoice17:
-    id: questionchoice17
     title: Logo 1
     position: 1
     image: '@MediaProject1'
   questionchoice18:
-    id: questionchoice18
     title: Logo 2
     image: '@MediaProject2'
     position: 2
   questionchoice19:
-    id: questionchoice19
     title: Oui
     color: '#5cb85c'
     position: 1
   questionchoice20:
-    id: questionchoice20
     title: Il bluffe
     color: '#d9534f'
     position: 2

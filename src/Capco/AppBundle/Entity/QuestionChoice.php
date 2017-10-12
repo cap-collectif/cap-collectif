@@ -3,20 +3,22 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * QuestionChoice.
+ *
  * @ORM\Table(name="question_choice")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
  */
 class QuestionChoice
 {
-    use UuidTrait;
+    use IdTrait;
     use SluggableTitleTrait;
     use PositionableTrait;
 

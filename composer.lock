@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f644b6956e12a21f9fec3f3c50ff2e7",
+    "content-hash": "57c8e31dbcd43dcdea14a603f790473b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5062,16 +5062,16 @@
         },
         {
             "name": "phayes/geophp",
-            "version": "dev-master",
+            "version": "1.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Liinkiing/geoPHP.git",
-                "reference": "dcd53748bbd632f4285a4143e329f67226baae10"
+                "url": "https://github.com/phayes/geoPHP.git",
+                "reference": "015404e85b602e0df1f91441f8db0f9e98f7e567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Liinkiing/geoPHP/zipball/dcd53748bbd632f4285a4143e329f67226baae10",
-                "reference": "dcd53748bbd632f4285a4143e329f67226baae10",
+                "url": "https://api.github.com/repos/phayes/geoPHP/zipball/015404e85b602e0df1f91441f8db0f9e98f7e567",
+                "reference": "015404e85b602e0df1f91441f8db0f9e98f7e567",
                 "shasum": ""
             },
             "require-dev": {
@@ -5083,6 +5083,7 @@
                     "geoPHP.inc"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2 or New-BSD"
             ],
@@ -5093,10 +5094,7 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
-            "support": {
-                "source": "https://github.com/Liinkiing/geoPHP/tree/dev-bugfix"
-            },
-            "time": "2017-10-11T16:26:25+00:00"
+            "time": "2014-12-02T06:11:22+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -13027,7 +13025,6 @@
         "simplesamlphp/saml2": 20,
         "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
-        "phayes/geophp": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20
     },

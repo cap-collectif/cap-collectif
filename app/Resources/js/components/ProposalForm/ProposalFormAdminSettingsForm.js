@@ -40,11 +40,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3
-            className="box-title"
-            style={{ fontSize: 22, padding: 0, paddingTop: 10, paddingBottom: 30 }}>
-            Paramètres
-          </h3>
+          <h3 className="box-title">Paramètres</h3>
           <a
             className="pull-right link"
             rel="noopener noreferrer"
@@ -52,23 +48,25 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <form onSubmit={handleSubmit}>
-          <Field
-            name="title"
-            label={<FormattedMessage id="proposal_form.title" />}
-            component={component}
-            type="text"
-            id="proposal_form_title"
-          />
-          <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-            </Button>
-            <Button bsStyle="danger" disabled>
-              <FormattedMessage id="global.delete" />
-            </Button>
-          </ButtonToolbar>
-        </form>
+        <div className="box-content">
+          <form onSubmit={handleSubmit}>
+            <Field
+              name="title"
+              label={<FormattedMessage id="proposal_form.title" />}
+              component={component}
+              type="text"
+              id="proposal_form_title"
+            />
+            <ButtonToolbar className="box-content__toolbar">
+              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+              </Button>
+              <Button bsStyle="danger" disabled>
+                <FormattedMessage id="global.delete" />
+              </Button>
+            </ButtonToolbar>
+          </form>
+        </div>
       </div>
     );
   }
