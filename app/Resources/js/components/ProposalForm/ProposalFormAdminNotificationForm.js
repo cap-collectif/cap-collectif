@@ -40,12 +40,14 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">Notification</h3>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal_form.admin.notification" />
+          </h3>
           <a
             className="pull-right link"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot">
-            <i className="fa fa-info-circle" /> Aide
+            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
         <div className="box-content">

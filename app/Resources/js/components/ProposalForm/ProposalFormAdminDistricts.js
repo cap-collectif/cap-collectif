@@ -39,7 +39,9 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <label style={{ marginBottom: 15, marginTop: 15 }}>Liste des zones géographiques</label>
+        <label style={{ marginBottom: 15, marginTop: 15 }}>
+          <FormattedMessage id="proposal_form.admin.configuration.district_list" />
+        </label>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>

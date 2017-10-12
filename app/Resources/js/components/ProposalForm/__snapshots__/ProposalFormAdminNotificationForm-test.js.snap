@@ -10,7 +10,10 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
     <h3
       className="box-title"
     >
-      Notification
+      <FormattedMessage
+        id="proposal_form.admin.notification"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"
@@ -20,7 +23,11 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       Aide
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
     </a>
   </div>
   <div

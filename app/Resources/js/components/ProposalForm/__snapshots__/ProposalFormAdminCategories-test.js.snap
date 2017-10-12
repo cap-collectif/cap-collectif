@@ -12,7 +12,10 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
       }
     }
   >
-    Liste des catégories
+    <FormattedMessage
+      id="proposal_form.admin.configuration.categories_list"
+      values={Object {}}
+    />
   </label>
   <ListGroup
     bsClass="list-group"

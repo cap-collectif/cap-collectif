@@ -158,15 +158,18 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
         <FormattedMessage id="global.form.optional" />
       </span>
     );
+
     return (
       <div className="box box-primary container">
         <div className="box-header">
-          <h3 className="box-title">Formulaire</h3>
+          <h3 className="box-title">
+            <FormattedMessage id="proposal_form.admin.configuration.form" />
+          </h3>
           <a
             className="pull-right link"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot">
-            <i className="fa fa-info-circle" /> Aide
+            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
 
@@ -180,7 +183,9 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               label={<FormattedMessage id="proposal_form.introduction" />}
             />
             <div className="box-header">
-              <h3 className="box-title">Champs permanents</h3>
+              <h3 className="box-title">
+                <FormattedMessage id="proposal_form.admin.configuration.permanent_field" />
+              </h3>
             </div>
             <div className="panel panel-default">
               <h4 className="panel-heading" style={{ margin: 0 }}>
@@ -259,7 +264,9 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               </div>
             </div>
             <div className="box-header">
-              <h3 className="box-title">Champs optionnels</h3>
+              <h3 className="box-title">
+                <FormattedMessage id="proposal_form.admin.configuration.optional_field" />
+              </h3>
             </div>
             {features.themes && (
               <Panel collapsible expanded={usingThemes} header={headerPanelUsingThemes}>
@@ -393,7 +400,9 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               </Panel>
             )}
             <div className="box-header">
-              <h3 className="box-title">Champs personnalisés</h3>
+              <h3 className="box-title">
+                <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
+              </h3>
             </div>
             <FieldArray name="questions" component={ProposalFormAdminQuestions} />
             <ButtonToolbar className="box-content__toolbar">

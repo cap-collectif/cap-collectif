@@ -10,7 +10,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
     <h3
       className="box-title"
     >
-      Formulaire
+      <FormattedMessage
+        id="proposal_form.admin.configuration.form"
+        values={Object {}}
+      />
     </h3>
     <a
       className="pull-right link"
@@ -20,7 +23,11 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       Aide
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
     </a>
   </div>
   <div
@@ -47,7 +54,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         <h3
           className="box-title"
         >
-          Champs permanents
+          <FormattedMessage
+            id="proposal_form.admin.configuration.permanent_field"
+            values={Object {}}
+          />
         </h3>
       </div>
       <div
@@ -228,7 +238,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         <h3
           className="box-title"
         >
-          Champs optionnels
+          <FormattedMessage
+            id="proposal_form.admin.configuration.optional_field"
+            values={Object {}}
+          />
         </h3>
       </div>
       <Panel
@@ -559,7 +572,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         <h3
           className="box-title"
         >
-          Champs personnalisés
+          <FormattedMessage
+            id="proposal_form.admin.configuration.custom_field"
+            values={Object {}}
+          />
         </h3>
       </div>
       <FieldArray
