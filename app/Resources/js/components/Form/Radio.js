@@ -16,6 +16,7 @@ const Radio = React.createClass({
     label: PropTypes.any,
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
+    checkedValue: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -65,7 +66,15 @@ const Radio = React.createClass({
   },
 
   render() {
-    const { disabled, getGroupStyle, id, labelClassName, label, renderFormErrors } = this.props;
+    const {
+      disabled,
+      getGroupStyle,
+      id,
+      labelClassName,
+      label,
+      renderFormErrors,
+      checkedValue,
+    } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -81,6 +90,7 @@ const Radio = React.createClass({
         </label>
         <span className="help-block">{field.helpText}</span>
         <RadioGroup
+          value={checkedValue}
           ref={c => (this.radioGroup = c)}
           name={fieldName}
           onChange={this.reverseOnChange}>

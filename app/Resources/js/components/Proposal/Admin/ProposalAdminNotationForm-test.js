@@ -12,6 +12,7 @@ describe('<ProposalAdminNotationForm />', () => {
     pristine: false,
     submitting: false,
     formValidationRules: Object,
+    initialValues: Object,
     proposal: {
       id: '1',
       estimation: 1000,

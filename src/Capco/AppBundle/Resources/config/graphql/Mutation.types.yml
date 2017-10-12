@@ -117,5 +117,4 @@ Mutation:
               builderConfig:
                   inputType: ChangeProposalEvaluationInput
                   payloadType: ChangeProposalEvaluationPayload
-                  mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value['proposalId'], value['responses']])"
-
+                  mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value])"

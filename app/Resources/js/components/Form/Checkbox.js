@@ -16,6 +16,7 @@ const Checkbox = React.createClass({
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
+    value: PropTypes.array,
   },
 
   other: Other,
@@ -30,7 +31,7 @@ const Checkbox = React.createClass({
 
   getInitialState() {
     return {
-      value: [],
+      value: this.props.value || [],
     };
   },
 

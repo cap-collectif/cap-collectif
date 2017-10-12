@@ -203,3 +203,8 @@ services:
     class: Capco\AppBundle\Repository\QuestionnaireRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questionnaire']
+
+  capco.proposal_evaluation.repository:
+    class: Capco\AppBundle\Repository\ProposalEvaluationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:ProposalEvaluation']

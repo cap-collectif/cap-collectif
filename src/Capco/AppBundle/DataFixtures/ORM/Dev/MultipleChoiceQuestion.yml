@@ -3,7 +3,6 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule (local):
     __construct: { create: [equal, 3] }
   validationRule2:
     __construct: { create: [min, 2] }
-
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion1:
     id: 13

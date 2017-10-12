@@ -78,7 +78,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response20:
     question: '@multiplequestion9'
     proposalEvaluation: '@proposalEvaluation2'
-    value: {"labels":["Au top"],"other":null}
+    value: {"labels":["Incohérente"],"other":null}
   response21:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation2'
@@ -102,7 +102,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response26:
     question: '@multiplequestion9'
     proposalEvaluation: '@proposalEvaluation3'
-    value: {"labels":["Du pur bullshit"],"other":null}
+    value: {"labels":["C'est de la diffamation !", "Que de la publicité (mensongère en plus !)"],"other":null}
   response27:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation3'

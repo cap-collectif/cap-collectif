@@ -136,6 +136,11 @@ services:
     tags:
           - { name: overblog_graphql.resolver, alias: "response_type", method: "resolveResponseType" }
 
+  capco.mutation.proposal_evaluation:
+    class: Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation
+    tags:
+      - { name: overblog_graphql.mutation, alias: "changeProposalEvaluation", method: "changeProposalEvaluation" }
+
   capco.resolver.value_responses:
     class: Capco\AppBundle\GraphQL\Resolver\ValueResponseResolver
     tags:

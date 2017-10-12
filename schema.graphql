@@ -113,12 +113,12 @@ type ChangeProposalContentPayload {
 input ChangeProposalEvaluationInput {
   # The proposal id
   proposalId: ID!
-  responses: JSON
+  responses: [ResponseInput!]!
   clientMutationId: String
 }
 
 type ChangeProposalEvaluationPayload {
-  proposalEvaluation: ProposalEvaluation!
+  proposal: Proposal!
   clientMutationId: String
 }
 
@@ -627,7 +627,7 @@ type PresentationStep implements Step {
 
 # A budget contribution
 type ProgressStep {
-  id: String!
+  id: ID!
   title: String!
   startAt: DateTime!
   endAt: DateTime

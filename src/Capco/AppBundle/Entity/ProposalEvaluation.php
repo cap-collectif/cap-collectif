@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="proposal_evaluation")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalEvaluationRepository")
  */
 class ProposalEvaluation
 {
@@ -75,6 +75,18 @@ class ProposalEvaluation
         foreach ($responses as $response) {
             $response->setProposalEvaluation($this);
         }
+
+        return $this;
+    }
+
+    public function getProposal()
+    {
+        return $this->proposal;
+    }
+
+    public function setProposal(Proposal $proposal): self
+    {
+        $this->proposal = $proposal;
 
         return $this;
     }

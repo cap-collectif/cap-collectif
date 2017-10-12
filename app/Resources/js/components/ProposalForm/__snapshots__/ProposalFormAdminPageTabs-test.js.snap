@@ -66,6 +66,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(ReduxForm))
         proposalForm={
           Object {
+            "reference": "2",
             "url": "http://capco.dev/top-budget",
           }
         }

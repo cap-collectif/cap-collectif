@@ -6,4 +6,4 @@ ChangeProposalEvaluationInput:
                 type: "ID!"
                 description: "The proposal id"
             responses:
-                type: "JSON"
+                type: "[ResponseInput!]!"

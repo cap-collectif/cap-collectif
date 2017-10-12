@@ -77,6 +77,7 @@ type Props = {
   errors: Array<string>,
   choices: Array<any>,
   onChange: any,
+  checkedValue: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -227,12 +228,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioGroup
-          key={props.id}
-          horizontal
-          id={props.id}
-          onChange={props.onChange}
-          value={field.choices[0].label}>
+        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange} value={value}>
           {field.choices.map(choice => (
             <RadioButton
               key={choice.id}
@@ -261,6 +257,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
             isReduxForm
+            checkedValue={props.checkedValue} // Ugly Hack because value is undefined (for compatibility)
             {...props}
           />
         );
@@ -286,18 +283,33 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'ranking') {
+      let values;
+      let choices;
+      if (value) {
+        values = props.choices.filter(
+          choice => choice.label === value.find(val => val === choice.label),
+        );
+        choices = props.choices.filter(
+          choice => choice.label !== value.find(val => val === choice.label),
+        );
+      } else {
+        choices = props.choices;
+      }
+
       const field = {};
       field.id = props.id;
-      field.choices = props.choices;
+      field.choices = choices;
+      field.values = values;
+
       return (
         <Ranking
           formName={formName}
-          value={value}
           field={field}
           label={null}
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
           isReduxForm
+          labelClassName="h4"
           {...props}
         />
       );

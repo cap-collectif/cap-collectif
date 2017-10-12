@@ -6,6 +6,7 @@ import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
+import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
@@ -22,6 +23,7 @@ type Props = RelayProps & {
   disabled: boolean,
   formValidationRules: Object,
   proposal: ProposalAdminNotationForm_proposal,
+  initialValues: Object,
 };
 
 type State = { form: Object };
@@ -57,10 +59,48 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const promises = [];
 
   const variables = {
-    input: { ...values, proposalId: props.proposal.id },
+    input: {
+      proposalId: props.proposal.id,
+      estimation: values.estimation,
+      likers: values.likers,
+    },
   };
 
+  const responses = values.responses.map(resp => {
+    const questions = props.proposal.form.evaluationForm.questions;
+    const actualQuestion = questions.find(question => question.id === String(resp.question));
+    const questionType = actualQuestion.type;
+
+    let value;
+    if (
+      questionType === 'ranking' ||
+      questionType === 'radio' ||
+      questionType === 'checkbox' ||
+      questionType === 'button'
+    ) {
+      value = JSON.stringify({
+        labels: resp.value,
+        other: null,
+      });
+    } else {
+      value = resp.value;
+    }
+
+    return {
+      question: actualQuestion.id,
+      value,
+    };
+  });
+
+  const variablesEvaluation = {
+    input: { proposalId: props.proposal.id, responses },
+  };
+
+  // console.log(variables);
+  // console.log(variablesEvaluation);
+
   promises.push(ChangeProposalNotationMutation.commit(variables));
+  promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
 
   return Promise.all(promises)
     .then(() => {
@@ -152,7 +192,7 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
+    const { invalid, pristine, handleSubmit, submitting, proposal, initialValues } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     let strategy = null;
@@ -255,6 +295,7 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
 
                             default: {
                               let choices;
+                              let checkedValue;
                               if (
                                 inputType === 'ranking' ||
                                 inputType === 'radio' ||
@@ -262,6 +303,10 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                                 inputType === 'button'
                               ) {
                                 choices = formattedChoicesInField(field);
+
+                                if (inputType === 'radio') {
+                                  checkedValue = initialValues.responses[index].value;
+                                }
                               }
 
                               return (
@@ -276,6 +321,7 @@ export class ProposalAdminNotationForm extends React.Component<Props, State> {
                                   placeholder="reply.your_response"
                                   choices={choices}
                                   label={label}
+                                  checkedValue={checkedValue}
                                 />
                               );
                             }
