@@ -28,7 +28,12 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/SonataMediaBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Liinkiing/geoPHP"
         }
+
     ],
     "require": {
         "php": ">=7.0",
@@ -102,7 +107,7 @@
         "lexik/jwt-authentication-bundle": "^2.4",
         "gfreeau/get-jwt-bundle": "dev-dev",
         "cocur/slugify": "@dev",
-        "phayes/geophp": "^1.2"
+        "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

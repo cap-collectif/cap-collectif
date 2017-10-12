@@ -32,31 +32,35 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
           </a>
         </div>
         <div className="box-content">
-          <ListGroup style={{ paddingBottom: 10 }}>
-            {proposal.news.map((news, index) => (
-              <ListGroupItem key={index}>
-                <Row>
-                  <Col xs={6}>
-                    <strong>{news.title}</strong>
-                  </Col>
-                  <Col xs={6}>
-                    <ButtonToolbar className="pull-right">
-                      <Button
-                        bsStyle="warning"
-                        href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
-                        <FormattedMessage id="global.edit" />
-                      </Button>
-                      <Button
-                        bsStyle="danger"
-                        href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
-                        <FormattedMessage id="global.delete" />
-                      </Button>
-                    </ButtonToolbar>
-                  </Col>
-                </Row>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+          {proposal.news.length !== 0 ? (
+            <ListGroup>
+              {proposal.news.map((news, index) => (
+                <ListGroupItem key={index}>
+                  <Row>
+                    <Col xs={6}>
+                      <strong>{news.title}</strong>
+                    </Col>
+                    <Col xs={6}>
+                      <ButtonToolbar className="pull-right">
+                        <Button
+                          bsStyle="warning"
+                          href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
+                          <FormattedMessage id="global.edit" />
+                        </Button>
+                        <Button
+                          bsStyle="danger"
+                          href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
+                          <FormattedMessage id="global.delete" />
+                        </Button>
+                      </ButtonToolbar>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          ) : (
+            <FormattedMessage id="proposal.admin.news.empty" />
+          )}
           <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
             <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
               <FormattedMessage id="global.add" />

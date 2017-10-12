@@ -1,24 +1,29 @@
 Capco\AppBundle\Entity\ProgressStep:
   progressStep1:
+    id: progressStep1
     proposal: '@proposal2'
     title: Casser le gymnase
     startAt: <dateTimeBetween('-80 days', '-70 days')>
     endAt: <dateTimeBetween('-69 days', '-60 days')>
   progressStep2:
+    id: progressStep2
     proposal: '@proposal2'
     title: Reconstruire le gymnase
     startAt: <dateTimeBetween('-59 days', '-50 days')>
     endAt: <dateTimeBetween('-49 days', '-40 days')>
   progressStep3:
+    id: progressStep3
     proposal: '@proposal2'
     title: Recasser le gymnase
     startAt: <dateTimeBetween('-30 days', '-29 days')>
   progressStep4:
+    id: progressStep4
     proposal: '@proposal2'
     title: Faire un apéro dans les ruines du gymnase
     startAt: <dateTimeBetween('-2 days', '-1 days')>
     endAt: <dateTimeBetween('+3 days', '+5 days')>
   progressStep5:
+    id: progressStep5
     proposal: '@proposal2'
     title: Installer une chèvre pour reconstruire le gymnase
     startAt: <dateTimeBetween('+10 days', '+15 days')>

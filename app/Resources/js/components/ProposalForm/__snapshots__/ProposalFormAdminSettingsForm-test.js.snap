@@ -9,11 +9,16 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
   >
     <h3
       className="box-title"
+      style={
+        Object {
+          "fontSize": 22,
+          "padding": 0,
+          "paddingBottom": 30,
+          "paddingTop": 10,
+        }
+      }
     >
-      <FormattedMessage
-        id="proposal_form.admin.settings"
-        values={Object {}}
-      />
+      Paramètres
     </h3>
     <a
       className="pull-right link"
@@ -23,62 +28,58 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       
-      <FormattedMessage
-        id="global.help"
-        values={Object {}}
-      />
+       Aide
     </a>
   </div>
-  <div
-    className="box-content"
+  <form
+    onSubmit={[Function]}
   >
-    <form
-      onSubmit={[Function]}
-    >
-      <Field
-        component={[Function]}
-        id="proposal_form_title"
-        label={
-          <FormattedMessage
-            id="proposal_form.title"
-            values={Object {}}
-          />
+    <Field
+      component={[Function]}
+      id="proposal_form_title"
+      label={
+        <FormattedMessage
+          id="proposal_form.title"
+          values={Object {}}
+        />
+      }
+      name="title"
+      type="text"
+    />
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      style={
+        Object {
+          "marginBottom": 10,
         }
-        name="title"
-        type="text"
-      />
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        type="submit"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={true}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-      </ButtonToolbar>
-    </form>
-  </div>
+        <FormattedMessage
+          id="global.save"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={true}
+      >
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </form>
 </div>
 `;

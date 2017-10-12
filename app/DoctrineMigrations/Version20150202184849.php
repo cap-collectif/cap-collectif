@@ -30,15 +30,6 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $em = $this->container->get('doctrine.orm.entity_manager');
-
-        $query = $em->createQuery("SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname");
-        $query->setParameter('keyname', 'image.default_avatar');
-        $siteImage = $query->getOneOrNullResult();
-        if (null == $siteImage) {
-            $date = (new \DateTime())->format('Y-m-d H:i:s');
-            $this->connection->insert('site_image', array('keyname' => 'image.default_avatar', 'Media_id' => null, 'is_enabled' => 0, 'title' => 'Avatar par défaut', 'position' => 4, 'created_at' => $date, 'updated_at' => $date));
-        }
     }
 
     public function down(Schema $schema)
