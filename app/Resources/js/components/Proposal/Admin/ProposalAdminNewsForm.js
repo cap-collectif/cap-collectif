@@ -44,13 +44,15 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
                       <ButtonToolbar className="pull-right">
                         <Button
                           bsStyle="warning"
+                          className="btn-outline-warning"
                           href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
-                          <FormattedMessage id="global.edit" />
+                          <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                         </Button>
                         <Button
                           bsStyle="danger"
+                          className="btn-outline-danger"
                           href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
-                          <FormattedMessage id="global.delete" />
+                          <i className="fa fa-trash" />
                         </Button>
                       </ButtonToolbar>
                     </Col>
