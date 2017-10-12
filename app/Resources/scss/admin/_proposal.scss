@@ -22,7 +22,12 @@
     }
 
     .box-content {
-        input, textarea, select, select.form-control, .ql-container, .list-group-item {
+        input,
+        textarea,
+        select,
+        select.form-control,
+        .ql-container,
+        .form-group > .list-group > .list-group-item {
             background-color: $light-bgc;
         }
 
