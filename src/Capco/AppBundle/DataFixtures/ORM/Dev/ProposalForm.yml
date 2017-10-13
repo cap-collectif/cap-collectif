@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\ProposalForm:
     step: "@collectstep1"
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
-    districtHelpText: Sélectionnez une localisation
+    districtHelpText: Sélectionnez une zone géographique
     descriptionHelpText: Décrivez votre proposition
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true

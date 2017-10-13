@@ -3,15 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import {
-  ListGroup,
-  ListGroupItem,
-  ButtonToolbar,
-  Button,
-  Row,
-  Col,
-  Glyphicon,
-} from 'react-bootstrap';
+import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
 
@@ -47,7 +39,6 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <label style={{ marginBottom: 15, marginTop: 15 }}>Liste des autres champs</label>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>
@@ -64,22 +55,25 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                 <Col xs={8}>
                   <div>
                     <strong>{questions[index].title}</strong>
-                    <p>
+                    <br />
+                    <span className="excerpt">
                       <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
-                    </p>
+                    </span>
                   </div>
                 </Col>
                 <Col xs={4}>
                   <ButtonToolbar className="pull-right">
                     <Button
                       bsStyle="warning"
+                      className="btn-outline-warning"
                       onClick={() => {
                         this.setState({ editIndex: index });
                       }}>
-                      <Glyphicon glyph="pencil" /> <FormattedMessage id="global.edit" />
+                      <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                     </Button>
                     <Button
                       bsStyle="danger"
+                      className="btn-outline-danger"
                       onClick={() => {
                         if (
                           window.confirm(
@@ -90,7 +84,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                           fields.remove(index);
                         }
                       }}>
-                      <Glyphicon glyph="trash" />
+                      <i className="fa fa-trash" />
                     </Button>
                   </ButtonToolbar>
                 </Col>
@@ -99,15 +93,15 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           ))}
         </ListGroup>
         <Button
-          style={{ marginBottom: 10 }}
           bsStyle="primary"
+          className="btn-outline-primary box-content__toolbar"
           onClick={() => {
             dispatch(
               arrayPush(formName, 'questions', { private: false, required: false, position: 99 }),
             );
             this.setState({ editIndex: fields.length });
           }}>
-          <Glyphicon glyph="plus" /> <FormattedMessage id="global.add" />
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
         </Button>
       </div>
     );

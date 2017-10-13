@@ -3,15 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import {
-  ListGroup,
-  ListGroupItem,
-  ButtonToolbar,
-  Button,
-  Row,
-  Col,
-  Glyphicon,
-} from 'react-bootstrap';
+import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import ProposalFormAdminDistrictModal from './ProposalFormAdminDistrictModal';
 import type { GlobalState, Dispatch } from '../../types';
 
@@ -47,7 +39,9 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <label style={{ marginBottom: 15, marginTop: 15 }}>Liste des zones géographiques</label>
+        <label style={{ marginBottom: 15, marginTop: 15 }}>
+          <FormattedMessage id="proposal_form.admin.configuration.district_list" />
+        </label>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>
@@ -70,13 +64,15 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
                   <ButtonToolbar className="pull-right">
                     <Button
                       bsStyle="warning"
+                      className="btn-outline-warning"
                       onClick={() => {
                         this.setState({ editIndex: index });
                       }}>
-                      <Glyphicon glyph="pencil" /> <FormattedMessage id="global.edit" />
+                      <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                     </Button>
                     <Button
                       bsStyle="danger"
+                      className="btn-outline-danger"
                       onClick={() => {
                         if (
                           window.confirm(
@@ -87,7 +83,7 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
                           fields.remove(index);
                         }
                       }}>
-                      <Glyphicon glyph="trash" />
+                      <i className="fa fa-trash" />
                     </Button>
                   </ButtonToolbar>
                 </Col>
@@ -96,13 +92,14 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
           ))}
         </ListGroup>
         <Button
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 5 }}
           bsStyle="primary"
+          className="btn-outline-primary box-content__toolbar"
           onClick={() => {
             dispatch(arrayPush(formName, 'districts', {}));
             this.setState({ editIndex: fields.length });
           }}>
-          <Glyphicon glyph="plus" /> <FormattedMessage id="global.add" />
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
         </Button>
       </div>
     );
