@@ -79,7 +79,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       questionType === 'button'
     ) {
       value = JSON.stringify({
-        labels: resp.value,
+        labels: Array.isArray(resp.value) ? resp.value : [resp.value],
         other: null,
       });
     } else {
@@ -101,7 +101,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
   return Promise.all(promises)
     .then(() => {
-      location.reload();
+      // location.reload();
     })
     .catch(() => {});
 };
