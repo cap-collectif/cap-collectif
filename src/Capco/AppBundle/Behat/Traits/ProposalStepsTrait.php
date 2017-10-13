@@ -438,6 +438,25 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I click the edit comment button
+     */
+    public function iClickTheEditCommentButton()
+    {
+        $this->navigationContext->getPage('proposal page')->clickEditCommentButton();
+    }
+
+    /**
+     * @When I fill and submit the edit comment form with :body
+     *
+     * @param string $body
+     */
+    public function iFillTheEditCommentForm(string $body)
+    {
+        $this->navigationContext->getPage('edit comment page')->fillEditForm($body);
+        $this->iWait(1);
+    }
+
+    /**
      * @When I change the proposal title
      */
     public function iChangeTheProposalTitle()
