@@ -39,7 +39,7 @@ class Post implements CommentableInterface, IndexableInterface
 
     /**
      * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", unique=true, type="string", length=255)
      */
     private $slug;
 
