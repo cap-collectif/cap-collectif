@@ -141,8 +141,8 @@ class ProposalForm
     private $usingDistrict = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist"}, inversedBy="proposalForm")
-     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
+     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=true)
      */
     private $notificationsConfiguration;
 
@@ -594,7 +594,7 @@ class ProposalForm
         return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
     }
 
-    public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
+    public function getNotificationsConfiguration()
     {
         return $this->notificationsConfiguration;
     }
