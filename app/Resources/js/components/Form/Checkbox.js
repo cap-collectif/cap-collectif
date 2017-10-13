@@ -26,7 +26,7 @@ const Checkbox = React.createClass({
       disabled: false,
       labelClassName: '',
       isReduxForm: false,
-      value: []
+      value: [],
     };
   },
 
@@ -46,16 +46,15 @@ const Checkbox = React.createClass({
     }
 
     this.setState({
-      mixinValue: newValue
+      mixinValue: newValue,
     });
 
     onChange(field, newValue);
   },
 
-
   onOtherChange(e) {
     const { field } = this.props;
-    const checkedValues = this.state.mixinValue.filter((value) => {
+    const checkedValues = this.state.mixinValue.filter(value => {
       let find = false;
       let i = 0;
 
@@ -86,7 +85,17 @@ const Checkbox = React.createClass({
   },
 
   render() {
-    const { disabled, getGroupStyle, id, labelClassName, label, renderFormErrors, field, value, isReduxForm } = this.props;
+    const {
+      disabled,
+      getGroupStyle,
+      id,
+      labelClassName,
+      label,
+      renderFormErrors,
+      field,
+      value,
+      isReduxForm,
+    } = this.props;
     const { mixinValue } = this.state;
 
     const finalValue = isReduxForm ? value : mixinValue;
@@ -105,11 +114,7 @@ const Checkbox = React.createClass({
           {label}
         </label>
         <span className="help-block">{field.helpText}</span>
-        <CheckboxGroup
-          id={fieldName}
-          ref={'choices'}
-          name={fieldName}
-          className="input-choices">
+        <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
             return (
@@ -125,7 +130,7 @@ const Checkbox = React.createClass({
                   onChange={event => {
                     const newValue = [...finalValue];
 
-                    if(event.target.checked) {
+                    if (event.target.checked) {
                       newValue.push(choice.label);
                     } else {
                       newValue.splice(newValue.indexOf(choice.label), 1);
@@ -142,6 +147,7 @@ const Checkbox = React.createClass({
           {this.props.field.isOtherAllowed ? (
             <Other
               ref={c => (this.other = c)}
+              isReduxForm={isReduxForm}
               field={this.props.field}
               onChange={this.onOtherChange}
               disabled={disabled}

@@ -20,6 +20,9 @@ Question:
                 type: "Boolean!"
             required:
                 type: "Boolean!"
+            isOtherAllowed:
+                type: "Boolean!"
+                resolve: "@=resolver('question_isOtherAllowed', [value])"
             helpText:
                 type: "String"
             choices:

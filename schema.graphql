@@ -835,6 +835,7 @@ type Question {
   position: Int!
   private: Boolean!
   required: Boolean!
+  isOtherAllowed: Boolean!
   helpText: String
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule

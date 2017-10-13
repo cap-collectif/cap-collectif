@@ -23,6 +23,7 @@ services:
       - { name: overblog_graphql.resolver, alias: "question_position", method: "resolvePosition" }
       - { name: overblog_graphql.resolver, alias: "query_available_districts_for_location", method: "resolveDistrictsForLocalisation" }
       - { name: overblog_graphql.resolver, alias: "question_choices", method: "resolveChoices" }
+      - { name: overblog_graphql.resolver, alias: "question_isOtherAllowed", method: "resolveisOtherAllowed" }
       - { name: overblog_graphql.resolver, alias: "question_validation_rule", method: "resolveValidationRule" }
       - { name: overblog_graphql.resolver, alias: "query_get_available_questionnaires", method: "resolveAvailableQuestionnaires" }
 

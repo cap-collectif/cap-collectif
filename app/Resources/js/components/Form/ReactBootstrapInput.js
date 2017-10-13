@@ -72,6 +72,7 @@ type Props = {
   standalone: ?boolean,
   hasFeedback: ?boolean,
   validationState: ?string,
+  isOtherAllowed: ?boolean,
   label: string | any,
   type: ?string,
   errors: Array<string>,
@@ -200,6 +201,8 @@ class ReactBootstrapInput extends React.Component<Props> {
         // Custom checkbox type
         const field = {};
         field.id = props.id;
+        field.type = type;
+        field.isOtherAllowed = props.isOtherAllowed;
         field.choices = props.choices;
 
         return (

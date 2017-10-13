@@ -71,7 +71,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         <FieldArray
           component={[Function]}
           evaluationForm={null}
-          initialValues={[Function]}
+          initialValues={Object {}}
           name="responses"
         />
         <ButtonToolbar

@@ -74,6 +74,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     helpText: Vous pouvez sélectionner bien évidemment plusieurs valeurs.
     questionChoices: ['@questionchoice23', '@questionchoice24', '@questionchoice25']
     required: true
+    isOtherAllowed: true
     type: 5
     randomQuestionChoices: false
   multiplequestion10:
@@ -82,6 +83,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     helpText: Une seule réponse valable ici, faites le bon choix !
     questionChoices: ['@questionchoice26', '@questionchoice27', '@questionchoice28']
     required: false
+    isOtherAllowed: true
     type: 3
     randomQuestionChoices: false
   multiplequestion11:

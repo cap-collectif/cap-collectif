@@ -1,17 +1,17 @@
 // @flow
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
-import {connect} from 'react-redux';
-import {reduxForm, Field, FieldArray} from 'redux-form';
-import {createFragmentContainer, graphql} from 'react-relay';
-import {Glyphicon, ButtonToolbar, Button} from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { reduxForm, Field, FieldArray } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
-import type {ProposalAdminNotationForm_proposal} from './__generated__/ProposalAdminNotationForm_proposal.graphql';
-import type {Dispatch, State} from '../../../types';
+import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
+import type { Dispatch, State } from '../../../types';
 
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
@@ -23,7 +23,7 @@ type Props = RelayProps & {
   proposal: ProposalAdminNotationForm_proposal,
   initialValues: Object,
   fields: Object,
-  evaluationForm: Object
+  evaluationForm: Object,
 };
 
 const formName = 'proposal-admin-evaluation';
@@ -68,7 +68,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   });
 
   const variablesEvaluation = {
-    input: {proposalId: props.proposal.id, responses},
+    input: { proposalId: props.proposal.id, responses },
   };
 
   promises.push(ChangeProposalNotationMutation.commit(variables));
@@ -78,11 +78,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     .then(() => {
       location.reload();
     })
-    .catch(() => {
-    });
+    .catch(() => {});
 };
 
-const validate = (values: FormValues, {proposal}: Props) => {
+const validate = (values: FormValues, { proposal }: Props) => {
   const errors = {};
   const questions = proposal.form.evaluationForm.questions;
 
@@ -96,7 +95,6 @@ const validate = (values: FormValues, {proposal}: Props) => {
         responseError.value = 'global.constraints.notBlank';
         responsesArrayErrors[index] = responseError;
       }
-
     } else if (currentQuestion && currentQuestion.validationRule) {
       // todo
     }
@@ -120,23 +118,32 @@ const formattedChoicesInField = field => {
   });
 };
 
-const renderResponses = ({fields, evaluationForm, initialValues}) => (
+const renderResponses = ({
+  fields,
+  evaluationForm,
+  initialValues,
+}: {
+  fields: Object,
+  evaluationForm: Object,
+  initialValues: Object,
+}) => (
   <div>
     {fields.map((member, index) => {
       const field = evaluationForm.questions[index];
       const key = field.slug;
       const inputType = field.type || 'text';
       const labelMessage = field.title;
-      const label = <span dangerouslySetInnerHTML={{__html: labelMessage}}/>;
+      const isOtherAllowed = field.isOtherAllowed;
+      const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
         case 'medias': {
           return (
             <p className="text-danger">
-              <Glyphicon bsClass="glyphicon" glyph="alert"/>
+              <Glyphicon bsClass="glyphicon" glyph="alert" />
               <span className="ml-10">
-                  <FormattedMessage id="evaluation_form.constraints.medias"/>
-                </span>
+                <FormattedMessage id="evaluation_form.constraints.medias" />
+              </span>
             </p>
           );
         }
@@ -162,6 +169,7 @@ const renderResponses = ({fields, evaluationForm, initialValues}) => (
               type={inputType}
               component={component}
               help={field.helpText}
+              isOtherAllowed={isOtherAllowed}
               labelClassName="h4"
               placeholder="reply.your_response"
               choices={choices}
@@ -176,23 +184,22 @@ const renderResponses = ({fields, evaluationForm, initialValues}) => (
 );
 
 export class ProposalAdminNotationForm extends React.Component<Props> {
-
   render() {
-    const {invalid, pristine, handleSubmit, submitting, proposal, initialValues} = this.props;
+    const { invalid, pristine, handleSubmit, submitting, proposal, initialValues } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     return (
       <div className="box box-primary container">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.general"/>
+            <FormattedMessage id="proposal.admin.general" />
           </h3>
           <a
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
             href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
-            <i className="fa fa-info-circle"/> Aide
+            <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
         <div className="box-content box-content__notation-form">
@@ -204,8 +211,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   component={component}
                   type="number"
                   id="proposal_estimation"
-                  addonAfter={<Glyphicon glyph="euro"/>}
-                  label={<FormattedMessage id="proposal.estimation"/>}
+                  addonAfter={<Glyphicon glyph="euro" />}
+                  label={<FormattedMessage id="proposal.estimation" />}
                 />
                 <Field
                   name="likers"
@@ -218,7 +225,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   component={select}
                   clearable={false}
                   loadOptions={terms =>
-                    Fetcher.postToJson(`/users/search`, {terms}).then(res => ({
+                    Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
                       options: res.users
                         .map(u => ({
                           value: u.id,
@@ -237,24 +244,24 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               {evaluationForm && (
                 <div>
                   <h3>
-                    <FormattedMessage id="proposal.admin.personalize"/>
+                    <FormattedMessage id="proposal.admin.personalize" />
                   </h3>
-                  <hr/>
+                  <hr />
                 </div>
               )}
 
-                <FieldArray
-                  name="responses"
-                  component={renderResponses}
-                  evaluationForm={evaluationForm}
-                  initialValues={initialValues}
-                />
-              <ButtonToolbar style={{marginBottom: 10}} className="box-content__toolbar">
+              <FieldArray
+                name="responses"
+                component={renderResponses}
+                evaluationForm={evaluationForm}
+                initialValues={initialValues}
+              />
+              <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
                   disabled={invalid || pristine || submitting}
                   type="submit"
                   bsStyle="primary">
-                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
+                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
                 </Button>
               </ButtonToolbar>
             </div>
@@ -282,31 +289,33 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
       !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
         ? undefined
         : props.proposal.form.evaluationForm.questions.map(field => {
-          const response = props.proposal.proposalEvaluation ? props.proposal.proposalEvaluation.responses.filter(
-            res => res && res.question.id === field.id,
-          )[0] : null;
-          if (response) {
-            if (response.value) {
-              let responseValue = response.value;
+            const response = props.proposal.proposalEvaluation
+              ? props.proposal.proposalEvaluation.responses.filter(
+                  res => res && res.question.id === field.id,
+                )[0]
+              : null;
+            if (response) {
+              if (response.value) {
+                let responseValue = response.value;
 
-              const questionType = response.question.type;
-              if (questionType === 'radio' || questionType === 'button') {
-                responseValue = JSON.parse(response.value).labels[0];
+                const questionType = response.question.type;
+                if (questionType === 'radio' || questionType === 'button') {
+                  responseValue = JSON.parse(response.value).labels[0];
+                }
+
+                if (questionType === 'checkbox' || questionType === 'ranking') {
+                  responseValue = JSON.parse(response.value).labels;
+                }
+
+                return {
+                  question: parseInt(field.id, 10),
+                  value: responseValue,
+                };
               }
-
-              if (questionType === 'checkbox' || questionType === 'ranking') {
-                responseValue = JSON.parse(response.value).labels;
-              }
-
-              return {
-                question: parseInt(field.id, 10),
-                value: responseValue,
-              };
             }
-          }
 
-          return {question: parseInt(field.id, 10), value: null};
-        }),
+            return { question: parseInt(field.id, 10), value: null };
+          }),
   },
 });
 
@@ -333,6 +342,7 @@ export default createFragmentContainer(
             required
             helpText
             type
+            isOtherAllowed
             validationRule {
               type
               number

@@ -40,6 +40,7 @@ const Field = React.createClass({
     label: PropTypes.any,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
+    isOtherAllowed: PropTypes.bool,
     image: PropTypes.string,
     children: PropTypes.any,
     id: PropTypes.string.isRequired,
@@ -75,6 +76,7 @@ const Field = React.createClass({
       addonBefore,
       choices,
       checkedValue,
+      isOtherAllowed,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -89,6 +91,7 @@ const Field = React.createClass({
         popover={popover}
         addonAfter={addonAfter}
         addonBefore={addonBefore}
+        isOtherAllowed={isOtherAllowed}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
