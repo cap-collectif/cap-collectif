@@ -23,6 +23,7 @@ export const ProposalListFilters = React.createClass({
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     orderByVotes: PropTypes.bool,
+    defaultSort: PropTypes.string,
     features: PropTypes.object.isRequired,
     showThemes: PropTypes.bool.isRequired,
     filters: PropTypes.object.isRequired,
@@ -65,7 +66,7 @@ export const ProposalListFilters = React.createClass({
   },
 
   render() {
-    const { dispatch, filters, showToggleMapButton } = this.props;
+    const { dispatch, filters, showToggleMapButton, defaultSort } = this.props;
     const { displayedFilters, orderByVotes } = this.state;
     const colWidth = showToggleMapButton ? 4 : 6;
 
@@ -73,7 +74,7 @@ export const ProposalListFilters = React.createClass({
       <div className="mb-15">
         <Row>
           <Col xs={12} md={colWidth}>
-            <ProposalListOrderSorting orderByVotes={orderByVotes} />
+            <ProposalListOrderSorting orderByVotes={orderByVotes} defaultSort={defaultSort} />
           </Col>
           <Col xs={12} md={colWidth}>
             <ProposalListSearch />

@@ -210,24 +210,9 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.body',
                     'required' => false,
                 ])
-                ->add('defaultSort', 'choice', [
-                    'label' => 'admin.fields.step.default_sort',
-                    'choices' => SelectionStep::$sortLabels,
-                    'translation_domain' => 'CapcoAppBundle',
-                    'required' => true,
-                ])
                 ->add('allowingProgressSteps', null, [
                     'label' => 'admin.fields.step.allowingProgressSteps',
                     'required' => false,
-                ])
-            ;
-        } elseif ($subject instanceof CollectStep) {
-            $formMapper
-                ->add('defaultSort', 'choice', [
-                    'label' => 'admin.fields.step.default_sort',
-                    'choices' => SelectionStep::$sortLabels,
-                    'translation_domain' => 'CapcoAppBundle',
-                    'required' => true,
                 ])
             ;
         }
@@ -319,6 +304,12 @@ class StepAdmin extends Admin
                     ->add('private', CheckboxType::class, [
                         'label' => 'admin.fields.step.private',
                         'required' => false,
+                    ])
+                    ->add('defaultSort', 'choice', [
+                        'label' => 'admin.fields.step.default_sort',
+                        'choices' => SelectionStep::$sortLabels,
+                        'translation_domain' => 'CapcoAppBundle',
+                        'required' => true,
                     ]);
             }
             $formMapper->end();
@@ -330,6 +321,12 @@ class StepAdmin extends Admin
                 ->add('proposalsHidden', CheckboxType::class,
                     ['label' => 'admin.fields.step.proposals_hidden', 'required' => false]
                 )
+                ->add('defaultSort', 'choice', [
+                    'label' => 'admin.fields.step.default_sort',
+                    'choices' => SelectionStep::$sortLabels,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => true,
+                ])
                 ->end()
             ;
         }
