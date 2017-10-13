@@ -96,15 +96,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: { proposalId: props.proposal.id, responses },
   };
 
-  // console.log(variables);
-  // console.log(variablesEvaluation);
-
   promises.push(ChangeProposalNotationMutation.commit(variables));
   promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
 
   return Promise.all(promises)
     .then(() => {
-      // location.reload();
+      location.reload();
     })
     .catch(() => {});
 };

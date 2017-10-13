@@ -14,7 +14,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function changeProposalEvaluation(Argument $input)
+    public function changeProposalEvaluation(Argument $input): array
     {
         $arguments = $input->getRawArguments();
         $om = $this->container->get('doctrine.orm.default_entity_manager');
