@@ -11,7 +11,7 @@ class ResponseResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveValue(AbstractResponse $response): string
+    public function resolveValue(AbstractResponse $response)
     {
         if ($response instanceof ValueResponse && $response->getValue() !== null) {
             return json_decode($response->getValue(), true);

@@ -370,7 +370,7 @@ type MediaResponse implements Response {
   medias: [Media]!
 }
 
-# Make all fields nullable is currently the only way to make the VO nullable
+# Multiple Choice Question Validation Rule
 type MultipleChoiceQuestionValidationRule {
   type: String
   number: String
@@ -696,7 +696,7 @@ type Proposal {
   # Identifies the form where the contribution was submitted.
   form: ProposalForm!
 
-  # Identifies the evaluation form of proposal.
+  # Identifies the answers to an evaluation form.
   proposalEvaluation: ProposalEvaluation
 }
 
@@ -842,7 +842,7 @@ type Question {
 
 # A possible choice of a question
 type QuestionChoice {
-  id: String!
+  id: ID!
   title: String!
   description: String
   color: String
@@ -1025,7 +1025,7 @@ type SelectionStep implements Step {
 
 input SetEvaluationFormInProposalFormInput {
   proposalFormId: ID!
-  evaluationFormId: String
+  evaluationFormId: ID
   clientMutationId: String
 }
 

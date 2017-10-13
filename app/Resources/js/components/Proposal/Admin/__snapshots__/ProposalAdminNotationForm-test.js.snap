@@ -68,6 +68,12 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             placeholder="Sélectionnez un coup de coeur"
           />
         </div>
+        <FieldArray
+          component={[Function]}
+          evaluationForm={null}
+          initialValues={[Function]}
+          name="responses"
+        />
         <ButtonToolbar
           bsClass="btn-toolbar"
           className="box-content__toolbar"

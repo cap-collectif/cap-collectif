@@ -20,8 +20,8 @@ import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
 import Ranking from './Ranking';
-import CustomCheckbox from './Checkbox';
-import CustomRadio from './Radio';
+import MultipleChoiceCheckbox from './Checkbox';
+import MultipleChoiceRadio from './Radio';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -203,7 +203,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         field.choices = props.choices;
 
         return (
-          <CustomCheckbox
+          <MultipleChoiceCheckbox
             value={value}
             field={field}
             label={null}
@@ -250,7 +250,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         field.choices = props.choices;
 
         return (
-          <CustomRadio
+          <MultipleChoiceRadio
             value={value}
             field={field}
             label={null}

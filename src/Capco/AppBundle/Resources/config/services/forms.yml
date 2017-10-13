@@ -139,6 +139,6 @@ services:
 
   capco.form.proposal_evaluation:
     class: Capco\AppBundle\Form\ProposalEvaluationType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
       - { name: form.type }

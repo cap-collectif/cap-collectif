@@ -4,7 +4,7 @@ QuestionChoice:
         description: "A possible choice of a question"
         fields:
             id:
-                type: "String!"
+                type: "ID!"
             title:
                 type: "String!"
             description:

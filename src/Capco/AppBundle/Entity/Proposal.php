@@ -928,7 +928,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalEvaluation;
     }
 
-    public function setProposalEvaluation($proposalEvaluation): self
+    public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
 

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
-use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +11,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProposalEvaluationType extends AbstractType
 {
     protected $transformer;
-    protected $toggleManager;
 
-    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager)
+    public function __construct(EntityToIdTransformer $transformer)
     {
         $this->transformer = $transformer;
-        $this->toggleManager = $toggleManager;
     }
 
     /**

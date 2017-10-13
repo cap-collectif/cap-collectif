@@ -131,7 +131,6 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
-    ...props.proposalForm,
     evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null,
   },
 });

@@ -12,7 +12,7 @@ class ValueResponseResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveValue(ValueResponse $response): string
+    public function resolveValue(ValueResponse $response)
     {
         // Use this condition because value type of string and Relay return array on multiple choice question value.
         if ($response->getQuestion() instanceof MultipleChoiceQuestion) {

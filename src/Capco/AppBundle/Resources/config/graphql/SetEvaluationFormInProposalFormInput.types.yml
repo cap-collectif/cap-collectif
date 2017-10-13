@@ -6,4 +6,4 @@ SetEvaluationFormInProposalFormInput:
             proposalFormId:
                 type: "ID!"
             evaluationFormId:
-                type: "String"
+                type: "ID"
