@@ -303,6 +303,8 @@ fos_elastica:
               type: date
             deletedAt:
               type: date
+            isTrashed:
+              type: boolean
             address:
               type: string
               index: not_analyzed
