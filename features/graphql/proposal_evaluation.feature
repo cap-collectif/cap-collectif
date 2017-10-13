@@ -11,6 +11,16 @@ Scenario: GraphQL client wants to update a proposal Evaluation
       changeProposalEvaluation(input: $input) {
         proposal {
           id
+          proposalEvaluation {
+            responses {
+              question {
+                id
+              }
+              ... on ValueResponse {
+                value
+              }
+            }
+          }
         }
       }
     }",
@@ -52,7 +62,34 @@ Scenario: GraphQL client wants to update a proposal Evaluation
     "data": {
       "changeProposalEvaluation": {
         "proposal": {
-          "id": "proposal2"
+          "id": "proposal2",
+          "proposalEvaluation": {
+            "responses": [
+            {
+               "question": { "id": "8" },
+               "value":"Modification de l'évaluation"
+            },
+            {
+               "question": { "id": "9" },
+               "value":"Cette évaluation est hyper utile, à accepter."
+            },
+            {
+               "question": { "id": "20" },
+               "value":"{\"labels\":\"Au top\",\"other\":null}"},
+            {
+               "question": { "id": "21" },
+               "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
+            },
+            {
+               "question": { "id": "22" },
+               "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
+            },
+            {
+               "question": { "id": "23" },
+               "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
+            }
+            ]
+          }
         }
       }
     }
