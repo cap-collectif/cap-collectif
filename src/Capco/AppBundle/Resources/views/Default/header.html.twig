@@ -2,6 +2,7 @@
     'props': {
         'logo': media_public_url(capco_site_image_media('image.logo'), 'default_logo'),
         'items': headers_list(app.request.pathInfo),
+        'siteName': capco_site_parameter_value('global.site.fullname'),
     }
   })
 }}

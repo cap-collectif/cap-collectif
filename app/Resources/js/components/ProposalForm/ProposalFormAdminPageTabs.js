@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
+import ProposalFormAdminEvaluationForm from './ProposalFormAdminEvaluationForm';
 import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from './__generated__/ProposalFormAdminPageTabs_proposalForm.graphql';
 
@@ -36,10 +37,13 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={1} title={intl.formatMessage({ id: 'proposal_form.admin.configuration' })}>
             <ProposalFormAdminConfigurationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'proposal_form.admin.evaluation' })}>
+            <ProposalFormAdminEvaluationForm proposalForm={proposalForm} />
+          </Tab>
+          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.notification' })}>
             <ProposalFormAdminNotificationForm proposalForm={proposalForm} />
           </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal_form.admin.settings' })}>
             <ProposalFormAdminSettingsForm proposalForm={proposalForm} />
           </Tab>
         </Tabs>
@@ -59,6 +63,7 @@ export default createFragmentContainer(
       ...ProposalFormAdminConfigurationForm_proposalForm
       ...ProposalFormAdminNotificationForm_proposalForm
       ...ProposalFormAdminSettingsForm_proposalForm
+      ...ProposalFormAdminEvaluationForm_proposalForm
     }
   `,
 );

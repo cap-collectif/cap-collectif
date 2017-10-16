@@ -18,6 +18,7 @@
     "relay:watch": "yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
     "checkcs": "eslint --cache app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
+    "bundlesize": "bundlesize",
     "prettier": "prettier --write \"app/Resources/js/**/*.js\"",
     "precommit": "flow status && lint-staged"
   },
@@ -47,6 +48,16 @@
       "php bin/console lint:twig"
     ]
   },
+  "bundlesize": [
+    {
+      "path": "./web/js/app.js",
+      "maxSize": "270KB"
+    },
+    {
+      "path": "./web/js/vendor.js",
+      "maxSize": "1.5MB"
+    }
+  ],
   "prettier": {
     "parser": "flow",
     "bracketSpacing": true,
@@ -146,7 +157,7 @@
     "react-truncate": "^2.1.5",
     "readmore": "0.0.2",
     "redux": "^3.7.2",
-    "redux-form": "^7.0.4",
+    "redux-form": "^7.1.1",
     "redux-saga": "v0.14.0",
     "relay-runtime": "^1.1.0",
     "sass-brunch": "https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e",
@@ -157,6 +168,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.0.0",
+    "bundlesize": "^0.15.3",
     "enzyme": "^2.8.2",
     "eslint": "3.x",
     "eslint-brunch": "^3.12.0",

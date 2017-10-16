@@ -136,3 +136,9 @@ services:
     class: Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType
     tags:
       - { name: form.type }
+
+  capco.form.proposal_evaluation:
+    class: Capco\AppBundle\Form\ProposalEvaluationType
+    arguments: ["@capco.form.transformer.entity_to_id"]
+    tags:
+      - { name: form.type }

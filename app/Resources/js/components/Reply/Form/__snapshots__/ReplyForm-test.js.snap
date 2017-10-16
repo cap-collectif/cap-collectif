@@ -62,6 +62,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     }
     getGroupStyle={[Function]}
     id="reply-12"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -153,6 +154,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     }
     getGroupStyle={[Function]}
     id="reply-14"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -231,6 +233,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     }
     getGroupStyle={[Function]}
     id="reply-12"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -272,6 +275,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     }
     getGroupStyle={[Function]}
     id="reply-14"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -350,6 +354,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     }
     getGroupStyle={[Function]}
     id="reply-11"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -362,6 +367,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
+    value={Array []}
     values={
       Object {
         "10": "",
@@ -405,6 +411,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     }
     getGroupStyle={[Function]}
     id="reply-12"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -496,6 +503,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     }
     getGroupStyle={[Function]}
     id="reply-14"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -549,6 +557,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     }
     getGroupStyle={[Function]}
     id="reply-11"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -561,6 +570,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
+    value={Array []}
     values={
       Object {
         "11": Array [],
@@ -647,6 +657,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     }
     getGroupStyle={[Function]}
     id="reply-14"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={
@@ -732,6 +743,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
     }
     getGroupStyle={[Function]}
     id="reply-12"
+    isReduxForm={false}
     label={
       <span
         dangerouslySetInnerHTML={

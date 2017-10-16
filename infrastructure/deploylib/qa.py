@@ -55,6 +55,12 @@ def jest():
 
 
 @task(environments=['local', 'ci'])
+def perf():
+    "Run perf Tests"
+    env.compose('run -e CI=True builder yarn run bundlesize')
+
+
+@task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)

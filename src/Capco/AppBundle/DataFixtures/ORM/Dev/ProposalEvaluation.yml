@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\ProposalEvaluation:
+  proposalEvaluation1:
+    id: 'proposalEvaluation1'
+    proposal: '@proposal1'
+  proposalEvaluation2:
+    id: 'proposalEvaluation2'
+    proposal: '@proposal2'
+  proposalEvaluation3:
+    id: 'proposalEvaluation3'
+    proposal: '@proposal3'

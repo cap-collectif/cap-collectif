@@ -1,0 +1,4661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr-FR" trgLang="fr-FR">
+  <file id="validators.fr-FR">
+    <unit id="_xCEyDk">
+      <segment>
+        <source>project.see_all</source>
+        <target>VOIIIIIRRREEE TOUUUUUSSSSS</target>
+      </segment>
+    </unit>
+    <unit id="Jl9JEpO">
+      <segment>
+        <source>alert.danger.add.argument</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la création de l'argument. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="VsYuwDT">
+      <segment>
+        <source>alert.danger.add.idea</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la création de l'idée. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="Js4vLB5">
+      <segment>
+        <source>alert.danger.add.source</source>
+        <target>Toutes nos excuses, un problème est survenu lors de l'ajout de la source. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="S50sE1F">
+      <segment>
+        <source>alert.danger.add.vote</source>
+        <target>Toutes nos excuses, un problème est survenu lors de l'ajout de votre vote. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="AdgHc7O">
+      <segment>
+        <source>alert.danger.delete.idea</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la suppression de votre idée. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="q_x1.ps">
+      <segment>
+        <source>alert.danger.delete.vote</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la suppression votre vote. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="4uA9ZMo">
+      <segment>
+        <source>alert.danger.update.argument</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la mise à jour de votre argument. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="_z7347A">
+      <segment>
+        <source>alert.danger.update.idea</source>
+        <target>Toutes nos excuses, un problème est survenu lors de la mise à jour de votre idée. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="cmH5jAg">
+      <segment>
+        <source>alert.danger.update.source</source>
+        <target>Toutes nos excuses, un problème est survenu lors de l'édition de votre source. Réessayez plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="5ztlDf7">
+      <segment>
+        <source>alert.success.add.argument</source>
+        <target>Merci ! Votre argument a bien été enregistré.</target>
+      </segment>
+    </unit>
+    <unit id="8bhxTnd">
+      <segment>
+        <source>alert.success.add.idea</source>
+        <target>Merci ! Votre idée a bien été enregistrée.</target>
+      </segment>
+    </unit>
+    <unit id="37TPpB9">
+      <segment>
+        <source>alert.success.add.source</source>
+        <target>Merci ! La source a bien été ajoutée.</target>
+      </segment>
+    </unit>
+    <unit id="h.VhE7k">
+      <segment>
+        <source>alert.success.add.user</source>
+        <target>Merci, votre compte a été créé avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="E5J.9AD">
+      <segment>
+        <source>alert.success.add.vote</source>
+        <target>Merci ! Votre vote a bien été pris en compte.</target>
+      </segment>
+    </unit>
+    <unit id="8yQZGb3">
+      <segment>
+        <source>alert.success.delete.argument</source>
+        <target>Votre argument a bien été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="BF19G5x">
+      <segment>
+        <source>alert.success.delete.idea</source>
+        <target>Votre idée a bien été supprimée.</target>
+      </segment>
+    </unit>
+    <unit id="E0OGncA">
+      <segment>
+        <source>alert.success.delete.source</source>
+        <target>La source a bien été supprimée.</target>
+      </segment>
+    </unit>
+    <unit id="jBebW0F">
+      <segment>
+        <source>alert.success.delete.vote</source>
+        <target>Votre vote a bien été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="TD7lXUH">
+      <segment>
+        <source>alert.success.delete.phone</source>
+        <target>Le numéro de téléphone a bien été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="_wF7N2Q">
+      <segment>
+        <source>alert.success.report.argument</source>
+        <target>Merci ! L'argument a bien été signalé.</target>
+      </segment>
+    </unit>
+    <unit id="aquzxTJ">
+      <segment>
+        <source>alert.success.report.comment</source>
+        <target>Merci ! Le commentaire a bien été signalé.</target>
+      </segment>
+    </unit>
+    <unit id="JzNsq0D">
+      <segment>
+        <source>alert.success.report.idea</source>
+        <target>Merci ! L'idée a bien été signalée.</target>
+      </segment>
+    </unit>
+    <unit id="dbZcyCA">
+      <segment>
+        <source>alert.success.report.opinion</source>
+        <target>Merci ! La proposition a bien été signalée.</target>
+      </segment>
+    </unit>
+    <unit id="JGFVjFD">
+      <segment>
+        <source>alert.success.report.version</source>
+        <target>Merci ! La proposition a bien été signalée.</target>
+      </segment>
+    </unit>
+    <unit id="MnpZKOt">
+      <segment>
+        <source>alert.success.report.proposal</source>
+        <target>Merci ! La proposition a bien été signalée.</target>
+      </segment>
+    </unit>
+    <unit id="jVBzcBV">
+      <segment>
+        <source>alert.success.report.source</source>
+        <target>Merci ! La source a bien été signalée.</target>
+      </segment>
+    </unit>
+    <unit id="rHns8eN">
+      <segment>
+        <source>alert.success.update.argument</source>
+        <target>Merci ! Votre argument a bien été mis à jour.</target>
+      </segment>
+    </unit>
+    <unit id="mCdazdx">
+      <segment>
+        <source>alert.success.update.idea</source>
+        <target>Merci ! Votre idée a bien été modifiée.</target>
+      </segment>
+    </unit>
+    <unit id="gk8G9bg">
+      <segment>
+        <source>alert.success.update.proposal</source>
+        <target>Merci ! La proposition a bien été modifiée.</target>
+      </segment>
+    </unit>
+    <unit id="GxjuUbc">
+      <segment>
+        <source>alert.success.update.source</source>
+        <target>Merci ! Votre source a bien été modifiée.</target>
+      </segment>
+    </unit>
+    <unit id="pOGko.i">
+      <segment>
+        <source>alert.success.update.synthesis_display</source>
+        <target>Merci ! Vos modifications ont bien été enregistrées.</target>
+      </segment>
+    </unit>
+    <unit id="JeoNW8U">
+      <segment>
+        <source>argument.constraints.confirm</source>
+        <target>Vous devez confirmer la perte de vos votes pour continuer.</target>
+      </segment>
+    </unit>
+    <unit id="LwGC9oC">
+      <segment>
+        <source>argument.constraints.max</source>
+        <target>Les avis sont limités à 2000 caractères. Soyez plus concis ou publiez une nouvelle proposition.</target>
+      </segment>
+    </unit>
+    <unit id="x1Pdz6W">
+      <segment>
+        <source>argument.constraints.min</source>
+        <target>Le contenu doit faire au moins 3 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="qt6oJv2">
+      <segment>
+        <source>argument.delete.modal.infos</source>
+        <target><![CDATA[Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action.]]></target>
+      </segment>
+    </unit>
+    <unit id="_Exvnu9">
+      <segment>
+        <source>argument.edit.body</source>
+        <target>Contenu</target>
+      </segment>
+    </unit>
+    <unit id="HsgTGjv">
+      <segment>
+        <source>argument.edit.confirm</source>
+        <target>En modifiant mon argument, je comprends que les votes qui lui sont associés seront réinitialisés.</target>
+      </segment>
+    </unit>
+    <unit id="x3KNqgc">
+      <segment>
+        <source>argument.filter.no</source>
+        <target>Trier les arguments contre</target>
+      </segment>
+    </unit>
+    <unit id="SbGZAKA">
+      <segment>
+        <source>argument.filter.simple</source>
+        <target>Trier les avis</target>
+      </segment>
+    </unit>
+    <unit id="30Awdra">
+      <segment>
+        <source>argument.filter.yes</source>
+        <target>Trier les arguments pour</target>
+      </segment>
+    </unit>
+    <unit id="CU477Ic">
+      <segment>
+        <source>argument.no.add</source>
+        <target>Ajouter un argument contre</target>
+      </segment>
+    </unit>
+    <unit id="w9GUp9O">
+      <segment>
+        <source>argument.no.list</source>
+        <target>{num, plural, =0{0 argument contre} one{# argument contre} other{# arguments contre}}</target>
+      </segment>
+    </unit>
+    <unit id="byrC7iF">
+      <segment>
+        <source>argument.simple.add</source>
+        <target>Déposer un avis</target>
+      </segment>
+    </unit>
+    <unit id="dQs7GeT">
+      <segment>
+        <source>argument.simple.list</source>
+        <target>{num, plural, =0{0 avis} one{# avis} other{# avis}}</target>
+      </segment>
+    </unit>
+    <unit id="vriyKqZ">
+      <segment>
+        <source>argument.update</source>
+        <target>Modifier l'argument</target>
+      </segment>
+    </unit>
+    <unit id="DOGilxy">
+      <segment>
+        <source>argument.yes.add</source>
+        <target>Ajouter un argument pour</target>
+      </segment>
+    </unit>
+    <unit id="EBAeDne">
+      <segment>
+        <source>argument.yes.list</source>
+        <target>{num, plural, =0{0 argument pour} one{# argument pour} other{# arguments pour}}</target>
+      </segment>
+    </unit>
+    <unit id="CuDIZHW">
+      <segment>
+        <source>confirm_password.title</source>
+        <target>Confirmez votre mot de passe pour continuer</target>
+      </segment>
+    </unit>
+    <unit id="3fyMm6.">
+      <segment>
+        <source>confirm_password.help</source>
+        <target>Par mesure de sécurité, ressaisissez votre mot de passe.</target>
+      </segment>
+    </unit>
+    <unit id="oD6a8.4">
+      <segment>
+        <source>confirm_password.errors.password</source>
+        <target>Mot de passe incorrect ! Entrez votre mot de passe actuel pour modifier vos paramètres.</target>
+      </segment>
+    </unit>
+    <unit id="hkfaMAF">
+      <segment>
+        <source>comment.add</source>
+        <target>Commenter</target>
+      </segment>
+    </unit>
+    <unit id="PbOFFZl">
+      <segment>
+        <source>comment.constraints.author_email</source>
+        <target>Cette valeur n'est pas une adresse email valide.</target>
+      </segment>
+    </unit>
+    <unit id="MZ66rAy">
+      <segment>
+        <source>comment.constraints.author_name</source>
+        <target>Votre nom doit faire au moins 2 caractères</target>
+      </segment>
+    </unit>
+    <unit id="_icDwqj">
+      <segment>
+        <source>comment.constraints.body</source>
+        <target>Votre commentaire doit faire au moins 2 caractères</target>
+      </segment>
+    </unit>
+    <unit id="o1vOyvs">
+      <segment>
+        <source>comment.count_no_nb</source>
+        <target>{count, plural, =0{commentaire} one{commentaire} other{commentaires}}</target>
+      </segment>
+    </unit>
+    <unit id="2HZ83Ud">
+      <segment>
+        <source>comment.create_account_reason_1</source>
+        <target>valider que vous n'êtes pas un robot une bonne fois pour toutes</target>
+      </segment>
+    </unit>
+    <unit id="IN7dAeX">
+      <segment>
+        <source>comment.create_account_reason_2</source>
+        <target>modifier/supprimer vos commentaires</target>
+      </segment>
+    </unit>
+    <unit id="jC9pIAA">
+      <segment>
+        <source>comment.create_account_reason_3</source>
+        <target>lier vos commentaires à votre profil</target>
+      </segment>
+    </unit>
+    <unit id="vTHw39M">
+      <segment>
+        <source>comment.edited</source>
+        <target>modifié le</target>
+      </segment>
+    </unit>
+    <unit id="uaD.BFt">
+      <segment>
+        <source>comment.email_info</source>
+        <target>Pour valider que vous n'êtes pas un robot.</target>
+      </segment>
+    </unit>
+    <unit id="LuThxq4">
+      <segment>
+        <source>comment.list</source>
+        <target><![CDATA[{num, plural, =0{<span id='proposal-page-comments-counter'>0</span> commentaire} one{<span id='proposal-page-comments-counter'>#</span> commentaire} other{<span id='proposal-page-comments-counter'>#</span> commentaires}}]]></target>
+      </segment>
+    </unit>
+    <unit id="2CHrMlp">
+      <segment>
+        <source>comment.more</source>
+        <target>Voir plus de commentaires</target>
+      </segment>
+    </unit>
+    <unit id="bfGa55e">
+      <segment>
+        <source>comment.public_name</source>
+        <target>Votre nom sera rendu public sur la plateforme.</target>
+      </segment>
+    </unit>
+    <unit id="tUfcDT6">
+      <segment>
+        <source>comment.publish</source>
+        <target>Publier un commentaire</target>
+      </segment>
+    </unit>
+    <unit id="V1P1jg6">
+      <segment>
+        <source>comment.report.reported</source>
+        <target>Signalé</target>
+      </segment>
+    </unit>
+    <unit id="ufi9Fnv">
+      <segment>
+        <source>comment.report.submit</source>
+        <target>Signaler</target>
+      </segment>
+    </unit>
+    <unit id="_gXE.aA">
+      <segment>
+        <source>comment.submit</source>
+        <target>Commenter</target>
+      </segment>
+    </unit>
+    <unit id="v8LSPQt">
+      <segment>
+        <source>comment.submit_error</source>
+        <target>Désolé, un problème est survenu lors de l'ajout de votre commentaire.</target>
+      </segment>
+    </unit>
+    <unit id="83st4qb">
+      <segment>
+        <source>comment.submit_success</source>
+        <target>Merci ! Votre commentaire a bien été ajouté.</target>
+      </segment>
+    </unit>
+    <unit id="3xCJO1P">
+      <segment>
+        <source>comment.trashed.label</source>
+        <target>Dans la corbeille</target>
+      </segment>
+    </unit>
+    <unit id="uly7KuD">
+      <segment>
+        <source>comment.update.button</source>
+        <target>Modifier</target>
+      </segment>
+    </unit>
+    <unit id="qXtjTrK">
+      <segment>
+        <source>comment.vote.remove</source>
+        <target>Annuler mon vote</target>
+      </segment>
+    </unit>
+    <unit id="zD2eZs7">
+      <segment>
+        <source>comment.vote.submit</source>
+        <target>D'accord</target>
+      </segment>
+    </unit>
+    <unit id="AvEIXKX">
+      <segment>
+        <source>comment.why_create_account</source>
+        <target>Pourquoi créer un compte ?</target>
+      </segment>
+    </unit>
+    <unit id="3hEZ3.7">
+      <segment>
+        <source>comment.with_my_account</source>
+        <target>Commenter avec mon compte</target>
+      </segment>
+    </unit>
+    <unit id="du2LzeX">
+      <segment>
+        <source>comment.without_account</source>
+        <target>Commenter sans créer de compte</target>
+      </segment>
+    </unit>
+    <unit id="yyQY6pD">
+      <segment>
+        <source>comment.write</source>
+        <target>Ecrire un commentaire...</target>
+      </segment>
+    </unit>
+    <unit id="uUobdoq">
+      <segment>
+        <source>editor.align.center</source>
+        <target>Centrer</target>
+      </segment>
+    </unit>
+    <unit id="ZnlxcJO">
+      <segment>
+        <source>editor.align.justify</source>
+        <target>Justifier</target>
+      </segment>
+    </unit>
+    <unit id="6zQKYqA">
+      <segment>
+        <source>editor.align.left</source>
+        <target>Gauche</target>
+      </segment>
+    </unit>
+    <unit id="GADi3Vk">
+      <segment>
+        <source>editor.align.right</source>
+        <target>Droite</target>
+      </segment>
+    </unit>
+    <unit id="L7sCb2k">
+      <segment>
+        <source>editor.align.title</source>
+        <target>Aligner</target>
+      </segment>
+    </unit>
+    <unit id="lzXQ6oo">
+      <segment>
+        <source>editor.bullet</source>
+        <target>Liste</target>
+      </segment>
+    </unit>
+    <unit id="dhdSa1u">
+      <segment>
+        <source>editor.image</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="BYhT7mC">
+      <segment>
+        <source>editor.link</source>
+        <target>Lien</target>
+      </segment>
+    </unit>
+    <unit id="LSimxLT">
+      <segment>
+        <source>editor.list</source>
+        <target>Liste ordonnée</target>
+      </segment>
+    </unit>
+    <unit id=".QOETZj">
+      <segment>
+        <source>editor.size.large</source>
+        <target>Grand</target>
+      </segment>
+    </unit>
+    <unit id="wbzoz_f">
+      <segment>
+        <source>editor.size.normal</source>
+        <target>Normal</target>
+      </segment>
+    </unit>
+    <unit id="7j4TeHk">
+      <segment>
+        <source>editor.size.small</source>
+        <target>Petit</target>
+      </segment>
+    </unit>
+    <unit id="H1JRSBO">
+      <segment>
+        <source>editor.url</source>
+        <target>Visiter l'URL</target>
+      </segment>
+    </unit>
+    <unit id="oGhTKPc">
+      <segment>
+        <source>global.add</source>
+        <target>Ajouter</target>
+      </segment>
+    </unit>
+    <unit id="Jb.F5Bc">
+      <segment>
+        <source>global.mandatory</source>
+        <target>Obligatoire</target>
+      </segment>
+    </unit>
+    <unit id="aEKKBds">
+      <segment>
+        <source>global.optional</source>
+        <target>Facultatif</target>
+      </segment>
+    </unit>
+    <unit id="GuVL5rN">
+      <segment>
+        <source>global.admin.required</source>
+        <target>Saisie obligatoire</target>
+      </segment>
+    </unit>
+    <unit id="bpH0KTB">
+      <segment>
+        <source>global.advanced_filters</source>
+        <target>Filtres avancés</target>
+      </segment>
+    </unit>
+    <unit id="rrRRhKh">
+      <segment>
+        <source>global.required</source>
+        <target>Cette valeur est requise.</target>
+      </segment>
+    </unit>
+    <unit id="8.zqz8j">
+      <segment>
+        <source>global.all_required</source>
+        <target>Tous les champs sont obligatoires.</target>
+      </segment>
+    </unit>
+    <unit id="VpXBi92">
+      <segment>
+        <source>global.anonymous</source>
+        <target>Anonyme</target>
+      </segment>
+    </unit>
+    <unit id="rcZCz5G">
+      <segment>
+        <source>global.answer</source>
+        <target>Répondre</target>
+      </segment>
+    </unit>
+    <unit id="zlqOmsD">
+      <segment>
+        <source>global.arguments</source>
+        <target>{num, plural, =0{0 argument} one{# argument} other{# arguments}}</target>
+      </segment>
+    </unit>
+    <unit id="okSKjCY">
+      <segment>
+        <source>global.back</source>
+        <target>Retour</target>
+      </segment>
+    </unit>
+    <unit id="OJRWDJH">
+      <segment>
+        <source>global.byAuthor</source>
+        <target>par {author}</target>
+      </segment>
+    </unit>
+    <unit id="6REmlqK">
+      <segment>
+        <source>global.byDate</source>
+        <target>Publié le {date}</target>
+      </segment>
+    </unit>
+    <unit id="OJ4V1EC">
+      <segment>
+        <source>global.cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="Jx8VdbA">
+      <segment>
+        <source>global.change.required</source>
+        <target>Cette valeur doit être modifiée.</target>
+      </segment>
+    </unit>
+    <unit id="gVlNnKv">
+      <segment>
+        <source>global.create</source>
+        <target>Créer</target>
+      </segment>
+    </unit>
+    <unit id="a8iDSw0">
+      <segment>
+        <source>global.close</source>
+        <target>Fermer</target>
+      </segment>
+    </unit>
+    <unit id="KwX5mFY">
+      <segment>
+        <source>global.comment</source>
+        <target>Commentaire</target>
+      </segment>
+    </unit>
+    <unit id="DibuaYd">
+      <segment>
+        <source>global.comments</source>
+        <target>{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}</target>
+      </segment>
+    </unit>
+    <unit id="WoNe2wx">
+      <segment>
+        <source>global.constraints.notBlank</source>
+        <target>Cette valeur ne doit pas être vide.</target>
+      </segment>
+    </unit>
+    <unit id="0r39Hc_">
+      <segment>
+        <source>global.constraints.check</source>
+        <target>Veuillez cocher cette case.</target>
+      </segment>
+    </unit>
+    <unit id="fqB8b9j">
+      <segment>
+        <source>global.question.types.text</source>
+        <target>Réponse courte</target>
+      </segment>
+    </unit>
+    <unit id="nOuhRkk">
+      <segment>
+        <source>global.question.types.textarea</source>
+        <target>Réponse longue</target>
+      </segment>
+    </unit>
+    <unit id="KwEKL32">
+      <segment>
+        <source>global.question.types.editor</source>
+        <target>Réponse longue avec éditeur de texte</target>
+      </segment>
+    </unit>
+    <unit id="8iZnSXs">
+      <segment>
+        <source>global.question.types.medias</source>
+        <target>Documents</target>
+      </segment>
+    </unit>
+    <unit id="aP9npQ0">
+      <segment>
+        <source>global.question.types.radio</source>
+        <target>Boutons radio (une seule réponse possible)</target>
+      </segment>
+    </unit>
+    <unit id="c9XLz3H">
+      <segment>
+        <source>global.question.types.select</source>
+        <target>Liste déroulante (une seule réponse possible)</target>
+      </segment>
+    </unit>
+    <unit id="sDjpevi">
+      <segment>
+        <source>global.question.types.checkbox</source>
+        <target>Cases à cocher (plusieurs réponses possibles)</target>
+      </segment>
+    </unit>
+    <unit id="Bs56c7h">
+      <segment>
+        <source>global.question.types.ranking</source>
+        <target>Vote avec classement (plusieurs réponses possibles)</target>
+      </segment>
+    </unit>
+    <unit id="uJ21eiq">
+      <segment>
+        <source>global.continue</source>
+        <target>Continuer</target>
+      </segment>
+    </unit>
+    <unit id="El5EWIv">
+      <segment>
+        <source>global.confirm</source>
+        <target>Confirmer</target>
+      </segment>
+    </unit>
+    <unit id="ORGL5Pg">
+      <segment>
+        <source>global.content</source>
+        <target>Contenu</target>
+      </segment>
+    </unit>
+    <unit id="wHHdCrz">
+      <segment>
+        <source>global.counters.contributions</source>
+        <target>{num, plural, =0{contribution} one{contribution} other{contributions}}</target>
+      </segment>
+    </unit>
+    <unit id="xJ.AtEe">
+      <segment>
+        <source>global.counters.contributors</source>
+        <target>{num, plural, =0{participant} one{participant} other{participants}}</target>
+      </segment>
+    </unit>
+    <unit id="lqkIYL8">
+      <segment>
+        <source>global.counters.proposals</source>
+        <target>{num, plural, =0{proposition} one{proposition} other{propositions}}</target>
+      </segment>
+    </unit>
+    <unit id="T.I46ef">
+      <segment>
+        <source>global.counters.remaining_days</source>
+        <target>{num, plural, =0{jour restant} one{jour restant} other{jours restants}}</target>
+      </segment>
+    </unit>
+    <unit id="Z4fkR3_">
+      <segment>
+        <source>global.counters.remaining_hours</source>
+        <target>{num, plural, =0{heure restante} one{heure restante} other{heures restantes}}</target>
+      </segment>
+    </unit>
+    <unit id="Mv10mod">
+      <segment>
+        <source>global.counters.replies</source>
+        <target>{num, plural, =0{réponse} one{réponse} other{réponses}}</target>
+      </segment>
+    </unit>
+    <unit id="Ljy3g7S">
+      <segment>
+        <source>global.counters.voters</source>
+        <target>{num, plural, =0{votant} one{votant} other{votants}}</target>
+      </segment>
+    </unit>
+    <unit id="3J3AW8x">
+      <segment>
+        <source>global.counters.votes</source>
+        <target>{num, plural, =0{vote} one{vote} other{votes}}</target>
+      </segment>
+    </unit>
+    <unit id="lSDOjB1">
+      <segment>
+        <source>global.dates.between</source>
+        <target>Du {start} au {end}</target>
+      </segment>
+    </unit>
+    <unit id="rZQ9dni">
+      <segment>
+        <source>global.dates.full_day</source>
+        <target>Le {date} à {time}</target>
+      </segment>
+    </unit>
+    <unit id="Xr8PgaG">
+      <segment>
+        <source>global.dates.part_day</source>
+        <target>Le {date} de {startTime} à {endTime}</target>
+      </segment>
+    </unit>
+    <unit id="1p_vFdl">
+      <segment>
+        <source>global.endDate</source>
+        <target>Date de fin</target>
+      </segment>
+    </unit>
+    <unit id="qtGYd7a">
+      <segment>
+        <source>global.delete</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="Ipb5yn4">
+      <segment>
+        <source>global.done</source>
+        <target>Terminé</target>
+      </segment>
+    </unit>
+    <unit id="diGyRhI">
+      <segment>
+        <source>global.email</source>
+        <target>Adresse électronique</target>
+      </segment>
+    </unit>
+    <unit id="6qHfwB.">
+      <segment>
+        <source>global.edit</source>
+        <target>Modifier</target>
+      </segment>
+    </unit>
+    <unit id="inCrZP9">
+      <segment>
+        <source>global.edited</source>
+        <target>modifié le</target>
+      </segment>
+    </unit>
+    <unit id="hvMq4z4">
+      <segment>
+        <source>global.edited_on</source>
+        <target>Modifié le {updated}</target>
+      </segment>
+    </unit>
+    <unit id="2vqbota">
+      <segment>
+        <source>global.filter_comments</source>
+        <target>Commentés</target>
+      </segment>
+    </unit>
+    <unit id="F6Gueq.">
+      <segment>
+        <source>global.filter_f_comments</source>
+        <target>Les plus commentées</target>
+      </segment>
+    </unit>
+    <unit id="zKfR.s.">
+      <segment>
+        <source>global.filter_f_last</source>
+        <target>Les plus récentes</target>
+      </segment>
+    </unit>
+    <unit id="z9mvmi3">
+      <segment>
+        <source>global.filter_f_old</source>
+        <target>Les plus anciennes</target>
+      </segment>
+    </unit>
+    <unit id="i_wJ.qx">
+      <segment>
+        <source>global.filter_f_popular</source>
+        <target>Les plus populaires</target>
+      </segment>
+    </unit>
+    <unit id="OP9Ygrw">
+      <segment>
+        <source>global.filter_f_expensive</source>
+        <target>Les plus coûteuses</target>
+      </segment>
+    </unit>
+    <unit id="xtyDL73">
+      <segment>
+        <source>global.filter_f_cheap</source>
+        <target>Les moins coûteuses</target>
+      </segment>
+    </unit>
+    <unit id="nPGJr5l">
+      <segment>
+        <source>global.filter_f_random</source>
+        <target>Tri aléatoire</target>
+      </segment>
+    </unit>
+    <unit id="pO1H3A7">
+      <segment>
+        <source>global.filter_f_votes</source>
+        <target>Les plus votées</target>
+      </segment>
+    </unit>
+    <unit id="UxSHRRe">
+      <segment>
+        <source>global.filter_favorable</source>
+        <target>Favorables</target>
+      </segment>
+    </unit>
+    <unit id="xYYtKGx">
+      <segment>
+        <source>global.filter_last</source>
+        <target>Récents</target>
+      </segment>
+    </unit>
+    <unit id="CQP5LTj">
+      <segment>
+        <source>global.filter_old</source>
+        <target>Anciens</target>
+      </segment>
+    </unit>
+    <unit id="QsJ2Ipy">
+      <segment>
+        <source>global.filter_popular</source>
+        <target>Populaires</target>
+      </segment>
+    </unit>
+    <unit id="qVR1CIo">
+      <segment>
+        <source>global.filter_random</source>
+        <target>Tri aléatoire</target>
+      </segment>
+    </unit>
+    <unit id="wLlhANH">
+      <segment>
+        <source>global.filter_votes</source>
+        <target>Votés</target>
+      </segment>
+    </unit>
+    <unit id="jP9zyL4">
+      <segment>
+        <source>global.help</source>
+        <target>Aide</target>
+      </segment>
+    </unit>
+    <unit id="NfHspR1">
+      <segment>
+        <source>global.form.optional</source>
+        <target> facultatif</target>
+      </segment>
+    </unit>
+    <unit id="7rpcyii">
+      <segment>
+        <source>global.form.private</source>
+        <target>Visible uniquement par vous et l'administrateur</target>
+      </segment>
+    </unit>
+    <unit id="j8itue9">
+      <segment>
+        <source>global.form.ranking.choiceBox.placeholder</source>
+        <target>Faites glisser et déposez vos choix sur cet emplacement.</target>
+      </segment>
+    </unit>
+    <unit id="pXqWdAe">
+      <segment>
+        <source>global.form.ranking.choiceBox.title</source>
+        <target>Votre classement</target>
+      </segment>
+    </unit>
+    <unit id="YihqqKv">
+      <segment>
+        <source>global.form.ranking.pickBox.title</source>
+        <target>Choix disponibles</target>
+      </segment>
+    </unit>
+    <unit id="hFS13W0">
+      <segment>
+        <source>global.form.ranking.select</source>
+        <target>Sélectionner</target>
+      </segment>
+    </unit>
+    <unit id="QM2v80i">
+      <segment>
+        <source>global.forgot_password</source>
+        <target>Mot de passe oublié ?</target>
+      </segment>
+    </unit>
+    <unit id="xvl0cAF">
+      <segment>
+        <source>global.fullname</source>
+        <target>Nom complet *</target>
+      </segment>
+    </unit>
+    <unit id="8yHBu4z">
+      <segment>
+        <source>global.hidden_email</source>
+        <target>Adresse électronique (cachée) *</target>
+      </segment>
+    </unit>
+    <unit id="u.YtUJ1">
+      <segment>
+        <source>global.image_uploader.image.btn</source>
+        <target>Sélectionner une photo sur votre ordinateur</target>
+      </segment>
+    </unit>
+    <unit id="RfQo70o">
+      <segment>
+        <source>global.image_uploader.image.delete</source>
+        <target>Supprimer mon image</target>
+      </segment>
+    </unit>
+    <unit id="oQCZGzN">
+      <segment>
+        <source>global.image_uploader.image.dropzone</source>
+        <target>Faites glisser votre image sur cette zone</target>
+      </segment>
+    </unit>
+    <unit id="ZzgDqYv">
+      <segment>
+        <source>global.image_uploader.image.preview</source>
+        <target>Aperçu de l'image</target>
+      </segment>
+    </unit>
+    <unit id="KcS.l5p">
+      <segment>
+        <source>global.image_uploader.file.btn</source>
+        <target>Sélectionner un document sur votre ordinateur</target>
+      </segment>
+    </unit>
+    <unit id="FtS54pk">
+      <segment>
+        <source>global.image_uploader.file.dropzone</source>
+        <target>Faites glisser votre document sur cette zone</target>
+      </segment>
+    </unit>
+    <unit id="h0R8vm4">
+      <segment>
+        <source>global.insert</source>
+        <target>Insérer</target>
+      </segment>
+    </unit>
+    <unit id="PkAfQcB">
+      <segment>
+        <source>global.link</source>
+        <target>Lien *</target>
+      </segment>
+    </unit>
+    <unit id="iFW2s5r">
+      <segment>
+        <source>global.links</source>
+        <target>{num, plural, =0{0 proposition liée} one{# proposition liée} other{# propositions liées}}</target>
+      </segment>
+    </unit>
+    <unit id="FSKEsRa">
+      <segment>
+        <source>global.loading</source>
+        <target>Chargement...</target>
+      </segment>
+    </unit>
+    <unit id="2x_lTMv">
+      <segment>
+        <source>global.login</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="QaJbChg">
+      <segment>
+        <source>global.modal.report.form.body</source>
+        <target>Message *</target>
+      </segment>
+    </unit>
+    <unit id="M_DYRna">
+      <segment>
+        <source>global.modal.report.form.status</source>
+        <target>Quelle est la nature du problème ? *</target>
+      </segment>
+    </unit>
+    <unit id="myqf7L9">
+      <segment>
+        <source>global.modal.report.infos</source>
+        <target>L'équipe du site évalue les contenus et les utilisateurs signalés régulièrement pour déterminer s'ils portent atteinte au règlement de la communauté. Les comptes sont sanctionnés pour toute infraction au règlement de la communauté et peuvent être clôturés en cas de violations graves ou répétées.</target>
+      </segment>
+    </unit>
+    <unit id="MMCSHwD">
+      <segment>
+        <source>global.modal.report.title</source>
+        <target>Signaler un contenu</target>
+      </segment>
+    </unit>
+    <unit id="QgMmwV8">
+      <segment>
+        <source>global.more</source>
+        <target>Voir plus</target>
+      </segment>
+    </unit>
+    <unit id="D3eITKU">
+      <segment>
+        <source>global.name</source>
+        <target>Nom </target>
+      </segment>
+    </unit>
+    <unit id="kOb.UC5">
+      <segment>
+        <source>global.navbar.see_more</source>
+        <target>Plus</target>
+      </segment>
+    </unit>
+    <unit id="D0nnTta">
+      <segment>
+        <source>global.or</source>
+        <target>ou</target>
+      </segment>
+    </unit>
+    <unit id="ZPNZq6M">
+      <segment>
+        <source>global.password</source>
+        <target>Mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="tCY.qkX">
+      <segment>
+        <source>global.pinned.label</source>
+        <target>Épinglé</target>
+      </segment>
+    </unit>
+    <unit id="QNBwK4C">
+      <segment>
+        <source>global.pinned.tooltip.comment</source>
+        <target>Ce commentaire a été épinglé par l'administrateur.</target>
+      </segment>
+    </unit>
+    <unit id="oq8AKC.">
+      <segment>
+        <source>global.pinned.tooltip.opinion</source>
+        <target>Cette proposition a été épinglée par l'administrateur.</target>
+      </segment>
+    </unit>
+    <unit id="l2qSV7V">
+      <segment>
+        <source>global.phone</source>
+        <target>Numéro de téléphone portable</target>
+      </segment>
+    </unit>
+    <unit id=".jhV.nG">
+      <segment>
+        <source>global.preview</source>
+        <target>Aperçu</target>
+      </segment>
+    </unit>
+    <unit id="BBH864M">
+      <segment>
+        <source>global.publish</source>
+        <target>Envoyer</target>
+      </segment>
+    </unit>
+    <unit id="vvAgahe">
+      <segment>
+        <source>global.save</source>
+        <target>Enregistrer</target>
+      </segment>
+    </unit>
+    <unit id="atJDLky">
+      <segment>
+        <source>global.save_and_close</source>
+        <target>Enregistrer et fermer</target>
+      </segment>
+    </unit>
+    <unit id="XTwAl26">
+      <segment>
+        <source>global.save_modifications</source>
+        <target>Enregistrer les modifications</target>
+      </segment>
+    </unit>
+    <unit id="Bh3sUiI">
+      <segment>
+        <source>global.login_me</source>
+        <target>Se connecter</target>
+      </segment>
+    </unit>
+    <unit id="h6F8vyD">
+      <segment>
+        <source>global.login_failed</source>
+        <target>Email ou mot de passe incorrect.</target>
+      </segment>
+    </unit>
+    <unit id="hVgXLSk">
+      <segment>
+        <source>global.logout</source>
+        <target>Déconnexion</target>
+      </segment>
+    </unit>
+    <unit id="yF9Hy7f">
+      <segment>
+        <source>global.read_less</source>
+        <target>Masquer</target>
+      </segment>
+    </unit>
+    <unit id="ny5yuzj">
+      <segment>
+        <source>global.read_more</source>
+        <target>Afficher la suite</target>
+      </segment>
+    </unit>
+    <unit id="vih5kfo">
+      <segment>
+        <source>global.register</source>
+        <target>S'inscrire</target>
+      </segment>
+    </unit>
+    <unit id="pc_myLa">
+      <segment>
+        <source>global.registration</source>
+        <target>Inscription</target>
+      </segment>
+    </unit>
+    <unit id=".1sMIyc">
+      <segment>
+        <source>global.remaining.days</source>
+        <target>{num, plural, =0{0 jour restant} one{# jour restant} other{# jours restants}}</target>
+      </segment>
+    </unit>
+    <unit id="RSrH2cf">
+      <segment>
+        <source>global.remaining.hours</source>
+        <target>{num, plural, =0{0 heure restante} one{# heure restante} other{# heures restantes}}</target>
+      </segment>
+    </unit>
+    <unit id="tq5wHmc">
+      <segment>
+        <source>global.remove</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="_VajUL5">
+      <segment>
+        <source>global.removeDefinitively</source>
+        <target>Supprimer définitivement</target>
+      </segment>
+    </unit>
+    <unit id="By8QVLg">
+      <segment>
+        <source>global.removeMessage</source>
+        <target>Êtes-vous sûr de vouloir supprimer cette contribution ?</target>
+      </segment>
+    </unit>
+    <unit id="DppfH2_">
+      <segment>
+        <source>global.report.reported</source>
+        <target>Signalé</target>
+      </segment>
+    </unit>
+    <unit id="GJFFrvP">
+      <segment>
+        <source>global.report.submit</source>
+        <target>Signaler</target>
+      </segment>
+    </unit>
+    <unit id="rd4.8lx">
+      <segment>
+        <source>global.select</source>
+        <target>Choisir une valeur</target>
+      </segment>
+    </unit>
+    <unit id="DCCV86T">
+      <segment>
+        <source>global.select_categories</source>
+        <target>Toutes les catégories</target>
+      </segment>
+    </unit>
+    <unit id="UBZdo3d">
+      <segment>
+        <source>global.select_districts</source>
+        <target>Toutes les localisations</target>
+      </segment>
+    </unit>
+    <unit id="bFzll7c">
+      <segment>
+        <source>global.select_statuses</source>
+        <target>Tous les statuts</target>
+      </segment>
+    </unit>
+    <unit id="JwMd5Pn">
+      <segment>
+        <source>global.select_themes</source>
+        <target>Tous les thèmes</target>
+      </segment>
+    </unit>
+    <unit id="kcs00dv">
+      <segment>
+        <source>global.select_types</source>
+        <target>Tous les contributeurs</target>
+      </segment>
+    </unit>
+    <unit id="2vfFzYa">
+      <segment>
+        <source>global.share</source>
+        <target>Partager</target>
+      </segment>
+    </unit>
+    <unit id="DXqioD6">
+      <segment>
+        <source>global.simple_arguments</source>
+        <target>{num, plural, =0{0 avis} one{# avis} other{# avis}}</target>
+      </segment>
+    </unit>
+    <unit id="jDBvG3A">
+      <segment>
+        <source>global.sources</source>
+        <target>{num, plural, =0{0 source} one{# source} other{# sources}}</target>
+      </segment>
+    </unit>
+    <unit id="B_SNfMF">
+      <segment>
+        <source>global.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="2rSB1Tg">
+      <segment>
+        <source>global.typo</source>
+        <target>Vouliez vous dire</target>
+      </segment>
+    </unit>
+    <unit id="QScjp6M">
+      <segment>
+        <source>global.validate</source>
+        <target>Valider</target>
+      </segment>
+    </unit>
+    <unit id="OltZGIk">
+      <segment>
+        <source>global.versions</source>
+        <target>{num, plural, =0{0 modification} one{# modification} other{# modifications}}</target>
+      </segment>
+    </unit>
+    <unit id="N9xPP1R">
+      <segment>
+        <source>global.votes</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="q7wSCwu">
+      <segment>
+        <source>global.reference</source>
+        <target>Réf.</target>
+      </segment>
+    </unit>
+    <unit id="EalquGd">
+      <segment>
+        <source>idea.add</source>
+        <target>Proposer une idée</target>
+      </segment>
+    </unit>
+    <unit id="ZruN7hL">
+      <segment>
+        <source>idea.appendices.trashed.button</source>
+        <target>Voir la corbeille</target>
+      </segment>
+    </unit>
+    <unit id="Dg1V.Z0">
+      <segment>
+        <source>idea.appendices.trashed.nb</source>
+        <target>{num, plural, =0{Aucune idée à la corbeille} one{# idée à la corbeille} other{# idées à la corbeille}}</target>
+      </segment>
+    </unit>
+    <unit id="V9JPdp8">
+      <segment>
+        <source>idea.appendices.trashed.title</source>
+        <target>Corbeille des idées</target>
+      </segment>
+    </unit>
+    <unit id="bSs7OtP">
+      <segment>
+        <source>idea.body</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="iN6nAIC">
+      <segment>
+        <source>idea.confirm</source>
+        <target>En modifiant mon idée, je comprends que les votes qui lui sont associés seront réinitialisés.</target>
+      </segment>
+    </unit>
+    <unit id="WEOhDbW">
+      <segment>
+        <source>idea.constraints.body</source>
+        <target>Le contenu de l'idée doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="AcRmV36">
+      <segment>
+        <source>idea.constraints.confirm</source>
+        <target>Merci de confirmer la perte de vos votes pour continuer.</target>
+      </segment>
+    </unit>
+    <unit id="F9fatjZ">
+      <segment>
+        <source>idea.constraints.object</source>
+        <target>L'objectif de l'idée doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="wDgAb85">
+      <segment>
+        <source>idea.constraints.url</source>
+        <target>Veuillez entrer une URL valide.</target>
+      </segment>
+    </unit>
+    <unit id="AN3f4CA">
+      <segment>
+        <source>idea.constraints.title</source>
+        <target>Le titre de l'idée doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="Gm0dbfc">
+      <segment>
+        <source>idea.constraints.theme</source>
+        <target>Vous devez sélectionner un thème.</target>
+      </segment>
+    </unit>
+    <unit id="zdWwZed">
+      <segment>
+        <source>idea.delete.confirm</source>
+        <target>Voulez-vous vraiment supprimer l'idée "{title}" ?</target>
+      </segment>
+    </unit>
+    <unit id="3zrZbWJ">
+      <segment>
+        <source>idea.form.body</source>
+        <target>Contenu</target>
+      </segment>
+    </unit>
+    <unit id="uwlqhcO">
+      <segment>
+        <source>idea.form.object</source>
+        <target>Objectif</target>
+      </segment>
+    </unit>
+    <unit id="Pjkt_lM">
+      <segment>
+        <source>idea.form.media</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="hnXwnyX">
+      <segment>
+        <source>idea.form.select_theme</source>
+        <target>Sélectionnez un thème</target>
+      </segment>
+    </unit>
+    <unit id="thNZK3J">
+      <segment>
+        <source>idea.form.theme</source>
+        <target>Thème</target>
+      </segment>
+    </unit>
+    <unit id="jkuvNab">
+      <segment>
+        <source>idea.form.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="rNo0HS3">
+      <segment>
+        <source>idea.form.url</source>
+        <target>Site web</target>
+      </segment>
+    </unit>
+    <unit id="ak_6XQG">
+      <segment>
+        <source>idea.form.url_help</source>
+        <target>Indiquez un site proposant des informations complémentaires.</target>
+      </segment>
+    </unit>
+    <unit id="z_f7cjT">
+      <segment>
+        <source>idea.form.url_placeholder</source>
+        <target>http://</target>
+      </segment>
+    </unit>
+    <unit id="G0YGVIl">
+      <segment>
+        <source>idea.header.comments</source>
+        <target>{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}</target>
+      </segment>
+    </unit>
+    <unit id="hSYx5ac">
+      <segment>
+        <source>idea.header.infos</source>
+        <target>{user} dans {theme} le {created}</target>
+      </segment>
+    </unit>
+    <unit id="m8Zp46h">
+      <segment>
+        <source>idea.header.infos_no_theme</source>
+        <target>{user} le {created}</target>
+      </segment>
+    </unit>
+    <unit id="xu3jdlW">
+      <segment>
+        <source>idea.header.trashed</source>
+        <target>Dans la corbeille</target>
+      </segment>
+    </unit>
+    <unit id="usQKQSG">
+      <segment>
+        <source>idea.header.votes</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="Jzwr4FB">
+      <segment>
+        <source>idea.no_result</source>
+        <target>Il n'y a aucune idée.</target>
+      </segment>
+    </unit>
+    <unit id="4hQUnhk">
+      <segment>
+        <source>idea.object</source>
+        <target>Objectif</target>
+      </segment>
+    </unit>
+    <unit id="_Fk5Bbs">
+      <segment>
+        <source>idea.preview.counters.comments</source>
+        <target>{num, plural, =0{0 commentaire} one{# commentaire} other{# commentaires}}</target>
+      </segment>
+    </unit>
+    <unit id="Vg_kPxP">
+      <segment>
+        <source>idea.preview.counters.votes</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="hPRgAWa">
+      <segment>
+        <source>idea.preview.trashed</source>
+        <target>Dans la corbeille</target>
+      </segment>
+    </unit>
+    <unit id="RM5ctbO">
+      <segment>
+        <source>idea.search</source>
+        <target>Rechercher une idée</target>
+      </segment>
+    </unit>
+    <unit id="h_oXKCh">
+      <segment>
+        <source>idea.trashed.date</source>
+        <target>Mis à la corbeille le {date}</target>
+      </segment>
+    </unit>
+    <unit id="3Rmlw6f">
+      <segment>
+        <source>idea.trashed.no_reason</source>
+        <target>Motif non renseigné.</target>
+      </segment>
+    </unit>
+    <unit id="YPnSetM">
+      <segment>
+        <source>idea.trashed.reason</source>
+        <target>Motif de la modération</target>
+      </segment>
+    </unit>
+    <unit id="Y_lrQs9">
+      <segment>
+        <source>idea.url</source>
+        <target>Informations complémentaires</target>
+      </segment>
+    </unit>
+    <unit id="qJqy88W">
+      <segment>
+        <source>idea.vote.add</source>
+        <target>Voter pour</target>
+      </segment>
+    </unit>
+    <unit id="pApCZ34">
+      <segment>
+        <source>idea.vote.constraints.email</source>
+        <target>Veuillez entrer une adresse email valide</target>
+      </segment>
+    </unit>
+    <unit id="E7AJywr">
+      <segment>
+        <source>idea.vote.constraints.username</source>
+        <target>Le nom doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="R3gwwvK">
+      <segment>
+        <source>idea.vote.count</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="C7LQdwO">
+      <segment>
+        <source>idea.vote.count_no_nb</source>
+        <target>{count, plural, =0{vote} one{vote} other{votes}}</target>
+      </segment>
+    </unit>
+    <unit id="5t3DRXn">
+      <segment>
+        <source>idea.vote.delete</source>
+        <target>Annuler mon vote</target>
+      </segment>
+    </unit>
+    <unit id="gWqm5lU">
+      <segment>
+        <source>idea.vote.form.comment</source>
+        <target>Commentaire</target>
+      </segment>
+    </unit>
+    <unit id="IIggVDA">
+      <segment>
+        <source>idea.vote.form.already.voted</source>
+        <target>Vous avez déjà voté pour cette idée.</target>
+      </segment>
+    </unit>
+    <unit id="0Th5kGq">
+      <segment>
+        <source>idea.vote.form.email.has_account</source>
+        <target>Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.</target>
+      </segment>
+    </unit>
+    <unit id="nBTRY6n">
+      <segment>
+        <source>idea.vote.form.comment_placeholder</source>
+        <target>Pourquoi soutenez-vous cette idée ? (optionnel)</target>
+      </segment>
+    </unit>
+    <unit id="5YciZCL">
+      <segment>
+        <source>idea.vote.form.email</source>
+        <target>Adresse électronique</target>
+      </segment>
+    </unit>
+    <unit id="oIHSqJw">
+      <segment>
+        <source>idea.vote.form.private</source>
+        <target>Voter de manière anonyme</target>
+      </segment>
+    </unit>
+    <unit id="FaUdTrU">
+      <segment>
+        <source>idea.vote.form.username</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="SD47nwp">
+      <segment>
+        <source>idea.vote.hide</source>
+        <target>Masquer</target>
+      </segment>
+    </unit>
+    <unit id="jWolWKZ">
+      <segment>
+        <source>idea.vote.modal.title</source>
+        <target>Voter</target>
+      </segment>
+    </unit>
+    <unit id="moglo.Y">
+      <segment>
+        <source>idea.vote.show_more</source>
+        <target>Voir tous les votes</target>
+      </segment>
+    </unit>
+    <unit id="o5NHTsC">
+      <segment>
+        <source>opinion.add_new_source</source>
+        <target>Proposer une source</target>
+      </segment>
+    </unit>
+    <unit id="Bemq3Wh">
+      <segment>
+        <source>opinion.add_new_version</source>
+        <target>Proposer une modification</target>
+      </segment>
+    </unit>
+    <unit id="djxdCUM">
+      <segment>
+        <source>opinion.add_new_version_infos</source>
+        <target>Merci d'examiner les modifications existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</target>
+      </segment>
+    </unit>
+    <unit id="_KNoYrx">
+      <segment>
+        <source>opinion.add_new</source>
+        <target>Proposer</target>
+      </segment>
+    </unit>
+    <unit id="ixUme.S">
+      <segment>
+        <source>opinion.add_new_infos</source>
+        <target>Merci d'examiner les propositions en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour une proposition existante !</target>
+      </segment>
+    </unit>
+    <unit id="kfO_hGf">
+      <segment>
+        <source>opinion.appendices.hide</source>
+        <target>Masquer {title}.</target>
+      </segment>
+    </unit>
+    <unit id="GvFc5Wy">
+      <segment>
+        <source>opinion.appendices.show</source>
+        <target>Afficher {title}</target>
+      </segment>
+    </unit>
+    <unit id="0BQk37E">
+      <segment>
+        <source>opinion.body</source>
+        <target>Proposition*</target>
+      </segment>
+    </unit>
+    <unit id="wiNflws">
+      <segment>
+        <source>opinion.body_help</source>
+        <target>Rédigez votre proposition</target>
+      </segment>
+    </unit>
+    <unit id="48gTWti">
+      <segment>
+        <source>opinion.constraints.body</source>
+        <target>Le contenu de la proposition doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="6v1ri4E">
+      <segment>
+        <source>opinion.constraints.title</source>
+        <target>Le titre de la proposition doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="lGx_cLB">
+      <segment>
+        <source>opinion.delete.confirm</source>
+        <target><![CDATA[Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action.]]></target>
+      </segment>
+    </unit>
+    <unit id="mdM9UdH">
+      <segment>
+        <source>opinion.diff.infos</source>
+        <target>Les ajouts en vert et les suppressions en rouge</target>
+      </segment>
+    </unit>
+    <unit id="QgDjSbR">
+      <segment>
+        <source>opinion.diff.title</source>
+        <target>Modification(s) proposée(s)</target>
+      </segment>
+    </unit>
+    <unit id="abPgbv5">
+      <segment>
+        <source>opinion.diff.tooltip</source>
+        <target>Voir les modifications</target>
+      </segment>
+    </unit>
+    <unit id="zJ2Cycx">
+      <segment>
+        <source>opinion.edit_check</source>
+        <target>En modifiant ma proposition, je comprends que les votes qui lui sont associés seront réinitialisés.</target>
+      </segment>
+    </unit>
+    <unit id="laC9dfm">
+      <segment>
+        <source>opinion.header.article</source>
+        <target>Article</target>
+      </segment>
+    </unit>
+    <unit id="KqJcJUv">
+      <segment>
+        <source>opinion.header.back</source>
+        <target>Retour</target>
+      </segment>
+    </unit>
+    <unit id="lUYLKYf">
+      <segment>
+        <source>opinion.header.opinion</source>
+        <target>Proposition</target>
+      </segment>
+    </unit>
+    <unit id="eD19Aji">
+      <segment>
+        <source>opinion.header.version</source>
+        <target>Modification</target>
+      </segment>
+    </unit>
+    <unit id="yH0GtSn">
+      <segment>
+        <source>opinion.link.add_new</source>
+        <target>Ajouter une proposition liée</target>
+      </segment>
+    </unit>
+    <unit id="ndMtZmA">
+      <segment>
+        <source>opinion.link.constraints.type</source>
+        <target>Veuillez choisir un type pour soumettre une proposition liée.</target>
+      </segment>
+    </unit>
+    <unit id="RK_ABLl">
+      <segment>
+        <source>opinion.link.help.body</source>
+        <target>Rédigez votre proposition</target>
+      </segment>
+    </unit>
+    <unit id="6P0zRqN">
+      <segment>
+        <source>opinion.link.help.title</source>
+        <target>Quel est l'objet de votre proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="sx7q4nF">
+      <segment>
+        <source>opinion.link.help.type</source>
+        <target>Quel est le type de votre proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="Gim_pvg">
+      <segment>
+        <source>opinion.link.select_type</source>
+        <target>Section</target>
+      </segment>
+    </unit>
+    <unit id=".UWgJz0">
+      <segment>
+        <source>opinion.link.info</source>
+        <target>Votre proposition sera liée à :</target>
+      </segment>
+    </unit>
+    <unit id="QsjNIoJ">
+      <segment>
+        <source>opinion.link.infos</source>
+        <target>Merci d'examiner les propositions existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</target>
+      </segment>
+    </unit>
+    <unit id="EcwI2Hv">
+      <segment>
+        <source>opinion.link.type</source>
+        <target>Type de proposition*</target>
+      </segment>
+    </unit>
+    <unit id="M1q7CCV">
+      <segment>
+        <source>opinion.no_new_link</source>
+        <target>Aucune proposition liée</target>
+      </segment>
+    </unit>
+    <unit id="wwbyCC5">
+      <segment>
+        <source>opinion.no_new_source</source>
+        <target>Aucune source proposée</target>
+      </segment>
+    </unit>
+    <unit id="lHUQPMu">
+      <segment>
+        <source>opinion.no_new_version</source>
+        <target>Aucune modification proposée</target>
+      </segment>
+    </unit>
+    <unit id="CGgA_9C">
+      <segment>
+        <source>opinion.progress.done</source>
+        <target>{num, plural, =0{0 vote favorable} one{# vote favorable} other{# votes favorables}}.</target>
+      </segment>
+    </unit>
+    <unit id="FuSq0NQ">
+      <segment>
+        <source>opinion.progress.left</source>
+        <target>{left, plural, =0{0 nécessaire} one{# nécessaire} other{# nécessaires}} pour atteindre {max}.</target>
+      </segment>
+    </unit>
+    <unit id="dG5tsFP">
+      <segment>
+        <source>opinion.progress.reached</source>
+        <target>Cette proposition a atteint le seuil avec {with, plural, =0{0 vote} one{# vote} other{# votes}}.</target>
+      </segment>
+    </unit>
+    <unit id="xJHi5uv">
+      <segment>
+        <source>opinion.ranking.articles</source>
+        <target>Top {max} des articles</target>
+      </segment>
+    </unit>
+    <unit id="KG.C4oe">
+      <segment>
+        <source>opinion.ranking.opinions</source>
+        <target>Top {max} des propositions</target>
+      </segment>
+    </unit>
+    <unit id="Y_NPpbP">
+      <segment>
+        <source>opinion.ranking.versions</source>
+        <target>Top {max} des modifications</target>
+      </segment>
+    </unit>
+    <unit id="hRilq7b">
+      <segment>
+        <source>opinion.request.create_vote.success</source>
+        <target>Merci ! Votre vote a bien été pris en compte.</target>
+      </segment>
+    </unit>
+    <unit id="kpsfbqk">
+      <segment>
+        <source>opinion.request.delete_vote.success</source>
+        <target>Votre vote a bien été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="zT49dFN">
+      <segment>
+        <source>opinion.request.failure</source>
+        <target>Une erreur est survenue, veuillez réessayer.</target>
+      </segment>
+    </unit>
+    <unit id="teB8GVG">
+      <segment>
+        <source>opinion.title</source>
+        <target>Titre*</target>
+      </segment>
+    </unit>
+    <unit id="u4MEeDY">
+      <segment>
+        <source>opinion.title_help</source>
+        <target>Quel est l'objet de votre proposition ?</target>
+      </segment>
+    </unit>
+    <unit id=".NN6_DZ">
+      <segment>
+        <source>opinion.type</source>
+        <target>Type de proposition*</target>
+      </segment>
+    </unit>
+    <unit id="t4msJQM">
+      <segment>
+        <source>opinion.type_help</source>
+        <target>Quel est le type de votre proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="0R5RS9v">
+      <segment>
+        <source>opinion.version.body</source>
+        <target>Modification *</target>
+      </segment>
+    </unit>
+    <unit id="QoS19yW">
+      <segment>
+        <source>opinion.version.body_error</source>
+        <target>Vous devez modifier le contenu de la proposition d'origine pour pouvoir proposer une modification.</target>
+      </segment>
+    </unit>
+    <unit id="t4012wq">
+      <segment>
+        <source>opinion.version.body_helper</source>
+        <target>Modifiez le texte</target>
+      </segment>
+    </unit>
+    <unit id="afRcwQa">
+      <segment>
+        <source>opinion.version.comment</source>
+        <target>Explication *</target>
+      </segment>
+    </unit>
+    <unit id="yyo0oCX">
+      <segment>
+        <source>opinion.version.comment_error</source>
+        <target>L'explication doit contenir au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="8YvNfZX">
+      <segment>
+        <source>opinion.version.comment_helper</source>
+        <target>Expliquez pourquoi vous souhaitez apporter ces modifications</target>
+      </segment>
+    </unit>
+    <unit id="LQdKo7a">
+      <segment>
+        <source>opinion.version.confirm</source>
+        <target>En modifiant ma contribution, je comprends que tous les votes qui lui sont associés seront réinitialisés.</target>
+      </segment>
+    </unit>
+    <unit id="nIea.7o">
+      <segment>
+        <source>opinion.version.confirm_error</source>
+        <target>Vous devez confirmer la perte de vos votes pour continuer.</target>
+      </segment>
+    </unit>
+    <unit id="gQmXSgn">
+      <segment>
+        <source>opinion.version.filter</source>
+        <target>Trier les modifications</target>
+      </segment>
+    </unit>
+    <unit id="QNCJ8PF">
+      <segment>
+        <source>opinion.version.title</source>
+        <target>Titre *</target>
+      </segment>
+    </unit>
+    <unit id="jnYtNUF">
+      <segment>
+        <source>opinion.version.title_error</source>
+        <target>Le titre doit contenir au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="G14Eo_2">
+      <segment>
+        <source>opinion.version_comment</source>
+        <target>Explication</target>
+      </segment>
+    </unit>
+    <unit id="2zUhMuI">
+      <segment>
+        <source>opinion.version_parent</source>
+        <target>Modification de : </target>
+      </segment>
+    </unit>
+    <unit id="VDsTgwI">
+      <segment>
+        <source>opinion.votes.modal.title</source>
+        <target>Tous les votes</target>
+      </segment>
+    </unit>
+    <unit id="abMwT.v">
+      <segment>
+        <source>registration.admin.topText</source>
+        <target>Afficher un message personnalisé au dessus du formulaire</target>
+      </segment>
+    </unit>
+    <unit id="F7PtZQ2">
+      <segment>
+        <source>registration.admin.bottomText</source>
+        <target>Afficher un message personnalisé en dessous du formulaire</target>
+      </segment>
+    </unit>
+    <unit id="iauo5te">
+      <segment>
+        <source>registration.facebook</source>
+        <target>S'inscrire via Facebook</target>
+      </segment>
+    </unit>
+    <unit id="ivycdta">
+      <segment>
+        <source>registration.google</source>
+        <target>S'inscrire via Google</target>
+      </segment>
+    </unit>
+    <unit id="8TN6VNh">
+      <segment>
+        <source>registration.username</source>
+        <target>Nom ou pseudonyme</target>
+      </segment>
+    </unit>
+    <unit id="VOUEPmZ">
+      <segment>
+        <source>registration.charte</source>
+        <target>J'ai lu et j'accepte {link}.</target>
+      </segment>
+    </unit>
+    <unit id="qtbcpUk">
+      <segment>
+        <source>registration.type</source>
+        <target>Statut</target>
+      </segment>
+    </unit>
+    <unit id="TutHCUa">
+      <segment>
+        <source>registration.zipcode</source>
+        <target>Code postal</target>
+      </segment>
+    </unit>
+    <unit id="9uT4VTC">
+      <segment>
+        <source>registration.password</source>
+        <target>Créez un mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="DCPDJAh">
+      <segment>
+        <source>registration.select.type</source>
+        <target>Je suis...</target>
+      </segment>
+    </unit>
+    <unit id="X7rn_hi">
+      <segment>
+        <source>registration.tooltip.email</source>
+        <target>Vous recevrez un e-mail contenant un lien permettant de confirmer qu'il s'agit bien de votre adresse.</target>
+      </segment>
+    </unit>
+    <unit id="_LfawUN">
+      <segment>
+        <source>registration.tooltip.password</source>
+        <target>Le mot de passe doit comporter au moins huit caractères.</target>
+      </segment>
+    </unit>
+    <unit id="68EoB34">
+      <segment>
+        <source>registration.constraints.captcha.invalid</source>
+        <target>Veuillez valider que vous n'êtes pas un robot.</target>
+      </segment>
+    </unit>
+    <unit id="nZZ1dng">
+      <segment>
+        <source>registration.constraints.username.min</source>
+        <target>Le nom doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id=".h_8.Do">
+      <segment>
+        <source>registration.constraints.username.max</source>
+        <target>Le nom doit faire moins de 128 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="l3NWAFr">
+      <segment>
+        <source>registration.constraints.email.min</source>
+        <target>Votre email doit faire au moins 2 caractères</target>
+      </segment>
+    </unit>
+    <unit id="LeJ08eN">
+      <segment>
+        <source>registration.constraints.email.max</source>
+        <target>Votre email doit faire moins de 128 caractères</target>
+      </segment>
+    </unit>
+    <unit id="cAyIm15">
+      <segment>
+        <source>registration.constraints.email.invalid</source>
+        <target>Cet email n'est pas valide.</target>
+      </segment>
+    </unit>
+    <unit id="4JGKkY8">
+      <segment>
+        <source>registration.constraints.email.throwable</source>
+        <target>Ce fournisseur d'adresse électronique n'est pas accepté sur ce site, car il n'est pas considéré comme fiable. Veuillez utiliser une autre adresse.</target>
+      </segment>
+    </unit>
+    <unit id="YiB0o9U">
+      <segment>
+        <source>registration.constraints.email.already_used</source>
+        <target>Cette adresse électronique est déjà utilisée.</target>
+      </segment>
+    </unit>
+    <unit id="nZjiA.s">
+      <segment>
+        <source>registration.constraints.email.not_authorized</source>
+        <target>Inscription impossible. Cette adresse électronique n'est pas autorisée à l'inscription.</target>
+      </segment>
+    </unit>
+    <unit id="gXuDz5m">
+      <segment>
+        <source>registration.constraints.charte.check</source>
+        <target>Veuillez cocher la case pour accepter la charte.</target>
+      </segment>
+    </unit>
+    <unit id="QuoVmtL">
+      <segment>
+        <source>registration.constraints.password.min</source>
+        <target>Le mot de passe doit faire au moins 8 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="4GFZ9yL">
+      <segment>
+        <source>registration.constraints.password.max</source>
+        <target>Le mot de passe doit faire moins de 72 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="E7FaHGx">
+      <segment>
+        <source>user.confirm.email</source>
+        <target><![CDATA[Merci de confirmer votre adresse email <strong>{email}</strong> dans un délai de 12 heures pour conserver l'accès à votre compte. <a target="_blank" href="{link}">En savoir plus</a>]]></target>
+      </segment>
+    </unit>
+    <unit id="A_aErk.">
+      <segment>
+        <source>user.confirm.new_email_send_succeed</source>
+        <target><![CDATA[Un email de confirmation a été envoyé à <strong>{email}</strong>. Votre email ne sera pas modifié tant que vous n'aurez pas confirmé votre nouvelle adresse email.]]></target>
+      </segment>
+    </unit>
+    <unit id="dx9o7Wq">
+      <segment>
+        <source>user.confirm.new_email_send_succeed_cancel_or_update</source>
+        <target>Mettre à jour cette adresse email</target>
+      </segment>
+    </unit>
+    <unit id=".nU_.t4">
+      <segment>
+        <source>user.confirm.new_email_send_failed</source>
+        <target><![CDATA[Oups, nous n'avons pas pu envoyer l'e-mail à votre nouvelle adresse ! Nous avons essayé d'envoyer des emails de confirmation à <strong>%email%</strong> mais ils n'ont pas été remis. Vous pouvez choisir une autre adresse ou nous pouvons réessayer.]]></target>
+      </segment>
+    </unit>
+    <unit id="UpM7dqa">
+      <segment>
+        <source>user.confirm.profile_help</source>
+        <target><![CDATA[Vérifiez votre email (<strong>{email}</strong>) pour confirmer votre nouvelle adresse. Jusqu'à ce que vous confirmez, les notifications continueront d'être envoyées à votre adresse email actuelle.]]></target>
+      </segment>
+    </unit>
+    <unit id=".IpdNCU">
+      <segment>
+        <source>user.confirm.email_already_used</source>
+        <target>L'adresse email est déjà utilitée.</target>
+      </segment>
+    </unit>
+    <unit id="vTehtUx">
+      <segment>
+        <source>user.confirm.sent</source>
+        <target>Un nouvel email de confirmation a été envoyé.</target>
+      </segment>
+    </unit>
+    <unit id="qsJH9bR">
+      <segment>
+        <source>user.confirm.sending</source>
+        <target>Envoi en cours...</target>
+      </segment>
+    </unit>
+    <unit id="NsHhueN">
+      <segment>
+        <source>user.confirm.wrong_password</source>
+        <target><![CDATA[<strong>Mot de passe incorrect.</strong> Entrez votre mot de passe actuel pour modifier votre adresse email.]]></target>
+      </segment>
+    </unit>
+    <unit id="Ctr.Py8">
+      <segment>
+        <source>user.confirm.cancel</source>
+        <target>Annuler cette modification</target>
+      </segment>
+    </unit>
+    <unit id="X02uu90">
+      <segment>
+        <source>user.confirm.update</source>
+        <target>Mettre à jour l'adresse email</target>
+      </segment>
+    </unit>
+    <unit id="shX0jzY">
+      <segment>
+        <source>user.confirm.resend</source>
+        <target>Renvoyer la confirmation</target>
+      </segment>
+    </unit>
+    <unit id="6JMi5WU">
+      <segment>
+        <source>phone.ask_delete</source>
+        <target>Supprimer ce numéro de téléphone</target>
+      </segment>
+    </unit>
+    <unit id="OZ5BzLn">
+      <segment>
+        <source>phone.confirm.constraints.code</source>
+        <target>Le code est composé d'exactement 6 chiffres.</target>
+      </segment>
+    </unit>
+    <unit id="2qgN6.R">
+      <segment>
+        <source>phone.confirm.code</source>
+        <target>Code de vérification</target>
+      </segment>
+    </unit>
+    <unit id="EbIbjnm">
+      <segment>
+        <source>phone.confirm.ok</source>
+        <target>Numéro de téléphone validé</target>
+      </segment>
+    </unit>
+    <unit id="QmfoRLd">
+      <segment>
+        <source>phone.confirm.infos</source>
+        <target><![CDATA[<strong>Ajouter votre numéro de téléphone.</strong><br />Un code de vérification sera envoyé à ce numéro.]]></target>
+      </segment>
+    </unit>
+    <unit id="z6E8Slq">
+      <segment>
+        <source>phone.confirm.sent</source>
+        <target><![CDATA[Nous vous avons envoyé un code au <strong>{phone}</strong>. Entrez-le ci-dessous afin de vérifier votre numéro.]]></target>
+      </segment>
+    </unit>
+    <unit id="IGo9KNi">
+      <segment>
+        <source>phone.confirm.ask_new</source>
+        <target>Demander un nouveau code de validation</target>
+      </segment>
+    </unit>
+    <unit id="KtxGoCQ">
+      <segment>
+        <source>phone.confirm.ask_change_number</source>
+        <target>Changer de numéro de téléphone</target>
+      </segment>
+    </unit>
+    <unit id="kUCilyh">
+      <segment>
+        <source>phone.confirm.check_your_phone</source>
+        <target>Consultez votre téléphone</target>
+      </segment>
+    </unit>
+    <unit id="Bym2j5l">
+      <segment>
+        <source>phone.confirm.phone</source>
+        <target>Numéro de téléphone portable</target>
+      </segment>
+    </unit>
+    <unit id="cfCObkD">
+      <segment>
+        <source>phone.confirm.code_invalid</source>
+        <target>Le code semble erroné, veuillez réessayer.</target>
+      </segment>
+    </unit>
+    <unit id="SmVcyaF">
+      <segment>
+        <source>phone.confirm.validate</source>
+        <target>Valider le numéro</target>
+      </segment>
+    </unit>
+    <unit id="vleGVPv">
+      <segment>
+        <source>phone.confirm.alert.received</source>
+        <target>Code de confirmation envoyé.</target>
+      </segment>
+    </unit>
+    <unit id="AWprGLk">
+      <segment>
+        <source>phone.confirm.alert.failed_to_send</source>
+        <target>Une erreur est survenue lors de l'envoi du SMS à ce numéro de téléphone. Veuillez réessayer avec un autre numéro.</target>
+      </segment>
+    </unit>
+    <unit id="Jx54k9u">
+      <segment>
+        <source>phone.confirm.alert.wait_for_new</source>
+        <target>Merci de patienter 3 minutes avant de demander un nouveau code.</target>
+      </segment>
+    </unit>
+    <unit id="cryAMND">
+      <segment>
+        <source>phone.please_verify</source>
+        <target>Veuillez vérifier votre compte par SMS pour participer.</target>
+      </segment>
+    </unit>
+    <unit id="Tqg6aVm">
+      <segment>
+        <source>phone.check</source>
+        <target>Vérifier mon compte</target>
+      </segment>
+    </unit>
+    <unit id="eFLdhto">
+      <segment>
+        <source>profile.constraints.phone.already_used</source>
+        <target>Ce numéro est déjà utilisé sur un autre compte</target>
+      </segment>
+    </unit>
+    <unit id="9J.nsp4">
+      <segment>
+        <source>profile.constraints.phone.invalid</source>
+        <target>Le numéro renseigné semble incorrect</target>
+      </segment>
+    </unit>
+    <unit id="6tenQku">
+      <segment>
+        <source>profile.account.title</source>
+        <target>Mon compte</target>
+      </segment>
+    </unit>
+    <unit id="COQLQC0">
+      <segment>
+        <source>project.preview.counters.contributions</source>
+        <target>{num, plural, =0{contribution} one{contribution} other{contributions}}</target>
+      </segment>
+    </unit>
+    <unit id="PEL4e.x">
+      <segment>
+        <source>project.preview.counters.contributors</source>
+        <target>{num, plural, =0{participant} one{participant} other{participants}}</target>
+      </segment>
+    </unit>
+    <unit id="Mm4b9Wq">
+      <segment>
+        <source>project.preview.counters.votes</source>
+        <target>{num, plural, =0{vote} one{vote} other{votes}}</target>
+      </segment>
+    </unit>
+    <unit id="opNrtpb">
+      <segment>
+        <source>project.preview.popover.title</source>
+        <target>Étape {num}</target>
+      </segment>
+    </unit>
+    <unit id="8xqbBra">
+      <segment>
+        <source>project.stats.display.all</source>
+        <target>Voir tous</target>
+      </segment>
+    </unit>
+    <unit id="fwEkGHf">
+      <segment>
+        <source>project.stats.display.number</source>
+        <target>Nombres</target>
+      </segment>
+    </unit>
+    <unit id="DMXmhTS">
+      <segment>
+        <source>project.stats.display.percentage</source>
+        <target>Pourcentage</target>
+      </segment>
+    </unit>
+    <unit id="dhb4hl9">
+      <segment>
+        <source>project.stats.list.costs</source>
+        <target>Répartition des coûts par proposition</target>
+      </segment>
+    </unit>
+    <unit id="zdS2hOU">
+      <segment>
+        <source>project.stats.list.districts</source>
+        <target>Répartition par localisations</target>
+      </segment>
+    </unit>
+    <unit id="ZIahLYv">
+      <segment>
+        <source>project.stats.list.categories</source>
+        <target>Répartition par catégories</target>
+      </segment>
+    </unit>
+    <unit id="7L1S_p3">
+      <segment>
+        <source>project.stats.list.themes</source>
+        <target>Répartition par thèmes</target>
+      </segment>
+    </unit>
+    <unit id="s9N5lFW">
+      <segment>
+        <source>project.stats.list.userTypes</source>
+        <target>Répartition par profil de l'auteur</target>
+      </segment>
+    </unit>
+    <unit id="CraR6Rj">
+      <segment>
+        <source>project.stats.list.votes</source>
+        <target>Répartition des votes par propositions</target>
+      </segment>
+    </unit>
+    <unit id="7HWGEyP">
+      <segment>
+        <source>project.stats.modal.close</source>
+        <target>Fermer</target>
+      </segment>
+    </unit>
+    <unit id="NXjYSAo">
+      <segment>
+        <source>project.stats.no_data</source>
+        <target>Aucune source de données</target>
+      </segment>
+    </unit>
+    <unit id="MGnzvJV">
+      <segment>
+        <source>project.stats.no_values</source>
+        <target>Aucun élèment.</target>
+      </segment>
+    </unit>
+    <unit id="2ZFPEY_">
+      <segment>
+        <source>project.stats.title</source>
+        <target>Statistiques</target>
+      </segment>
+    </unit>
+    <unit id="ksLFGov">
+      <segment>
+        <source>project.votes.back</source>
+        <target>Retour à l'étape de vote</target>
+      </segment>
+    </unit>
+    <unit id="O5wKm_T">
+      <segment>
+        <source>project.votes.delete</source>
+        <target>Retirer</target>
+      </segment>
+    </unit>
+    <unit id="Oggcl6V">
+      <segment>
+        <source>project.votes.nb</source>
+        <target>{num, plural, =0{0 proposition sélectionnée} one{# proposition sélectionnée} other{# propositions sélectionnées}}</target>
+      </segment>
+    </unit>
+    <unit id="ysTMvFu">
+      <segment>
+        <source>project.votes.no_active_step</source>
+        <target>Aucun étape de vote n'est actuellement active.</target>
+      </segment>
+    </unit>
+    <unit id="OqSvhQ6">
+      <segment>
+        <source>project.votes.title</source>
+        <target>Mes votes</target>
+      </segment>
+    </unit>
+    <unit id="dkWS_MR">
+      <segment>
+        <source>project.votes.type.budget</source>
+        <target>(vote selon le budget)</target>
+      </segment>
+    </unit>
+    <unit id="gdd3cwE">
+      <segment>
+        <source>project.votes.type.simple</source>
+        <target>(vote simple)</target>
+      </segment>
+    </unit>
+    <unit id="L9.46hL">
+      <segment>
+        <source>project.votes.widget.budget</source>
+        <target>Budget</target>
+      </segment>
+    </unit>
+    <unit id="M7GgpLI">
+      <segment>
+        <source>project.votes.widget.count</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="L_5gWr7">
+      <segment>
+        <source>project.votes.widget.left</source>
+        <target>Restant</target>
+      </segment>
+    </unit>
+    <unit id="ri6MINS">
+      <segment>
+        <source>project.votes.widget.no_value</source>
+        <target>Non renseigné</target>
+      </segment>
+    </unit>
+    <unit id="mxkU7z_">
+      <segment>
+        <source>project.votes.widget.votes</source>
+        <target>Votes</target>
+      </segment>
+    </unit>
+    <unit id="GK33Sve">
+      <segment>
+        <source>project.votes.widget.votes_left</source>
+        <target>Restants</target>
+      </segment>
+    </unit>
+    <unit id="NgG7mRa">
+      <segment>
+        <source>project.votes.widget.votes_spent</source>
+        <target>Dépensés</target>
+      </segment>
+    </unit>
+    <unit id="bMpipDX">
+      <segment>
+        <source>project.votes.widget.votes_left_budget</source>
+        <target>Votes restants</target>
+      </segment>
+    </unit>
+    <unit id="5UYTDZK">
+      <segment>
+        <source>project.votes.widget.spent</source>
+        <target>Dépensé</target>
+      </segment>
+    </unit>
+    <unit id="Mg6wtFI">
+      <segment>
+        <source>project.votes.widget.step</source>
+        <target>Étape</target>
+      </segment>
+    </unit>
+    <unit id="M3bUHiO">
+      <segment>
+        <source>project.types.callForProject</source>
+        <target>Appel à projets</target>
+      </segment>
+    </unit>
+    <unit id="_qR5EPE">
+      <segment>
+        <source>project.types.consultation</source>
+        <target>Consultation</target>
+      </segment>
+    </unit>
+    <unit id="Z0kPBTp">
+      <segment>
+        <source>project.types.interpellation</source>
+        <target>Interpellation</target>
+      </segment>
+    </unit>
+    <unit id="LnukTgq">
+      <segment>
+        <source>project.types.participatoryBudgeting</source>
+        <target>Budget participatif</target>
+      </segment>
+    </unit>
+    <unit id="X9jnTX_">
+      <segment>
+        <source>project.types.petition</source>
+        <target>Pétition</target>
+      </segment>
+    </unit>
+    <unit id="E47QJO6">
+      <segment>
+        <source>project.types.publicInquiry</source>
+        <target>Enquête publique</target>
+      </segment>
+    </unit>
+    <unit id="3IQZTsS">
+      <segment>
+        <source>project.types.questionnaire</source>
+        <target>Questionnaire</target>
+      </segment>
+    </unit>
+    <unit id="KZtrQC_">
+      <segment>
+        <source>project.types.suggestionBox</source>
+        <target>Boite à idées</target>
+      </segment>
+    </unit>
+    <unit id="RQnsFcz">
+      <segment>
+        <source>proposal.add</source>
+        <target>Déposer une proposition</target>
+      </segment>
+    </unit>
+    <unit id="yu58ubb">
+      <segment>
+        <source>proposal.admin.news</source>
+        <target>Actualité</target>
+      </segment>
+    </unit>
+    <unit id="IJuD0ty">
+      <segment>
+        <source>proposal.admin.news.empty</source>
+        <target>Aucune actualité</target>
+      </segment>
+    </unit>
+    <unit id="XB0rXOe">
+      <segment>
+        <source>proposal.admin.notation</source>
+        <target>Évaluation</target>
+      </segment>
+    </unit>
+    <unit id="mDXtqGw">
+      <segment>
+        <source>proposal.admin.personalize</source>
+        <target>Personnalisé</target>
+      </segment>
+    </unit>
+    <unit id="axN0if2">
+      <segment>
+        <source>proposal.admin.publication</source>
+        <target>Publication</target>
+      </segment>
+    </unit>
+    <unit id="7OCexay">
+      <segment>
+        <source>proposal.admin.advancement</source>
+        <target>Avancement</target>
+      </segment>
+    </unit>
+    <unit id="aadQmRq">
+      <segment>
+        <source>proposal.admin.steps</source>
+        <target>Étapes</target>
+      </segment>
+    </unit>
+    <unit id="GOvFvHL">
+      <segment>
+        <source>proposal.admin.glimpse</source>
+        <target>Aperçu</target>
+      </segment>
+    </unit>
+    <unit id="dFLIIF2">
+      <segment>
+        <source>proposal.admin.general</source>
+        <target>Général</target>
+      </segment>
+    </unit>
+    <unit id="Yit06jw">
+      <segment>
+        <source>proposal.admin.state</source>
+        <target>État</target>
+      </segment>
+    </unit>
+    <unit id="LsDJuX0">
+      <segment>
+        <source>proposal.admin.reference</source>
+        <target>Référence</target>
+      </segment>
+    </unit>
+    <unit id="3MfjfE5">
+      <segment>
+        <source>proposal.estimation</source>
+        <target>Estimation du coût</target>
+      </segment>
+    </unit>
+    <unit id="W7v0DWq">
+      <segment>
+        <source>proposal.admin.content</source>
+        <target>Contenu</target>
+      </segment>
+    </unit>
+    <unit id="wrwi4.h">
+      <segment>
+        <source>proposal.admin.activity</source>
+        <target>Activité</target>
+      </segment>
+    </unit>
+    <unit id="7YZR92j">
+      <segment>
+        <source>proposal.admin.realisationStep.modal.delete</source>
+        <target>Êtes-vous sûr de vouloir supprimer cette phase de réalisation ?</target>
+      </segment>
+    </unit>
+    <unit id="aEp2rfx">
+      <segment>
+        <source>proposal.admin.realisationStep.modal.content</source>
+        <target>Cette action est irréversible.</target>
+      </segment>
+    </unit>
+    <unit id="GAnraoV">
+      <segment>
+        <source>proposal.add_fusion</source>
+        <target>Fusionner</target>
+      </segment>
+    </unit>
+    <unit id="KwH3eEa">
+      <segment>
+        <source>proposal.body</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="9Q26rMR">
+      <segment>
+        <source>proposal.category</source>
+        <target>Catégorie</target>
+      </segment>
+    </unit>
+    <unit id="oGT3EgP">
+      <segment>
+        <source>proposal.back</source>
+        <target>Liste des propositions</target>
+      </segment>
+    </unit>
+    <unit id="0xM.tHW">
+      <segment>
+        <source>proposal.fusionnedInto</source>
+        <target>Cette proposition a été fusionnée dans une nouvelle proposition</target>
+      </segment>
+    </unit>
+    <unit id="gy3GsSS">
+      <segment>
+        <source>proposal.fusionnedFrom</source>
+        <target>Cette proposition est issue d'une fusion de {num, plural, one{# propositions similaire} other{# propositions similaires}}</target>
+      </segment>
+    </unit>
+    <unit id="tjegYd2">
+      <segment>
+        <source>proposal.constraints.body</source>
+        <target>La description de la proposition doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="_qL11qH">
+      <segment>
+        <source>proposal.constraints.summary</source>
+        <target>Le résumé de la proposition est limité à 140 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="Fn2Tx3i">
+      <segment>
+        <source>proposal.constraints.category</source>
+        <target>Merci de sélectionner une catégorie.</target>
+      </segment>
+    </unit>
+    <unit id="ls6UZ7W">
+      <segment>
+        <source>proposal.constraints.district</source>
+        <target>Merci de sélectionner une localisation.</target>
+      </segment>
+    </unit>
+    <unit id="WNp5KuK">
+      <segment>
+        <source>proposal.constraints.field_mandatory</source>
+        <target>Ce champ est obligatoire.</target>
+      </segment>
+    </unit>
+    <unit id="_SsURIT">
+      <segment>
+        <source>proposal.constraints.address</source>
+        <target>Merci de sélectionner un lieu ou une adresse.</target>
+      </segment>
+    </unit>
+    <unit id="3Raws9E">
+      <segment>
+        <source>proposal.constraints.address_in_zone</source>
+        <target><![CDATA[<strong>Adresse hors périmètre.</strong> L'adresse renseignée n'est pas située dans l'une des zones géographiques.]]></target>
+      </segment>
+    </unit>
+    <unit id="kqOt9D9">
+      <segment>
+        <source>proposal.constraints.theme</source>
+        <target>Merci de sélectionner un thème.</target>
+      </segment>
+    </unit>
+    <unit id="egLttvj">
+      <segment>
+        <source>proposal.constraints.title</source>
+        <target>Le titre de la proposition doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="jQidjXM">
+      <segment>
+        <source>proposal.constraints.media</source>
+        <target>Vous avez sélectionné un nombre trop important d'image.</target>
+      </segment>
+    </unit>
+    <unit id="xW6BlTs">
+      <segment>
+        <source>proposal.count</source>
+        <target>{num, plural, =0{0 proposition} one{# proposition} other{# propositions}}</target>
+      </segment>
+    </unit>
+    <unit id="sGhHN4x">
+      <segment>
+        <source>proposal.count_with_total</source>
+        <target>{num, plural, =0{0} one{1} other{#}} sur {total} propositions</target>
+      </segment>
+    </unit>
+    <unit id="avmPD4G">
+      <segment>
+        <source>proposal.count_fusions</source>
+        <target>{num, plural, =0{} one{dont # issue d'une fusion} other{dont # issues d'une fusion}}</target>
+      </segment>
+    </unit>
+    <unit id="jMmTzEZ">
+      <segment>
+        <source>proposal.confirm_close_modal</source>
+        <target>Êtes-vous sûr de vouloir annuler votre proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="d.5NdEZ">
+      <segment>
+        <source>proposal.delete.confirm</source>
+        <target><![CDATA[Les contenus et les votes qui lui sont associés seront également supprimés.<br/><br/><strong>Avertissement</strong> : Vous ne pourrez pas annuler cette action.]]></target>
+      </segment>
+    </unit>
+    <unit id="8AzO6pb">
+      <segment>
+        <source>proposal.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="pYqJ4W0">
+      <segment>
+        <source>proposal.details</source>
+        <target>Mes votes</target>
+      </segment>
+    </unit>
+    <unit id="j49vuUd">
+      <segment>
+        <source>proposal.detail.advancement</source>
+        <target>État d'avancement</target>
+      </segment>
+    </unit>
+    <unit id="AbGSrEW">
+      <segment>
+        <source>proposal.detail.intervals.continuously</source>
+        <target>En continu</target>
+      </segment>
+    </unit>
+    <unit id="kmiOvcZ">
+      <segment>
+        <source>proposal.detail.intervals.from</source>
+        <target>À partir du</target>
+      </segment>
+    </unit>
+    <unit id="iA26.qX">
+      <segment>
+        <source>proposal.detail.intervals.until</source>
+        <target>Jusqu'au</target>
+      </segment>
+    </unit>
+    <unit id="2Fj5qVY">
+      <segment>
+        <source>proposal.district</source>
+        <target>Zone géographique</target>
+      </segment>
+    </unit>
+    <unit id="Rgtcjpd">
+      <segment>
+        <source>proposal.empty</source>
+        <target>Aucune proposition</target>
+      </segment>
+    </unit>
+    <unit id="uo.._Fj">
+      <segment>
+        <source>proposal.media</source>
+        <target>Illustration</target>
+      </segment>
+    </unit>
+    <unit id="SxZaFXi">
+      <segment>
+        <source>proposal.private.show_login</source>
+        <target>Connectez-vous pour consulter ou modifier vos propositions déjà déposées</target>
+      </segment>
+    </unit>
+    <unit id="g3uCJsh">
+      <segment>
+        <source>proposal.private.message</source>
+        <target>Visible uniquement par vous et l'administrateur</target>
+      </segment>
+    </unit>
+    <unit id="usinSXr">
+      <segment>
+        <source>proposal.private.empty</source>
+        <target>Aucune proposition.</target>
+      </segment>
+    </unit>
+    <unit id="sQ.Zf9p">
+      <segment>
+        <source>proposal.infos.header</source>
+        <target>{user}, le {createdDate}</target>
+      </segment>
+    </unit>
+    <unit id="6_enG9V">
+      <segment>
+        <source>proposal.likers.count</source>
+        <target>{num, plural, one{# coup de coeur} other{# coups de coeur}}</target>
+      </segment>
+    </unit>
+    <unit id=".UQLiDa">
+      <segment>
+        <source>proposal.likers.label</source>
+        <target>Coup de coeur de {user}</target>
+      </segment>
+    </unit>
+    <unit id="7BdMEDK">
+      <segment>
+        <source>proposal.no_posts</source>
+        <target>Aucune actualité</target>
+      </segment>
+    </unit>
+    <unit id="BhgOkUy">
+      <segment>
+        <source>proposal.no_status</source>
+        <target>Aucun statut</target>
+      </segment>
+    </unit>
+    <unit id="whis0wM">
+      <segment>
+        <source>proposal.random_search</source>
+        <target>Relancer le tri aléatoire</target>
+      </segment>
+    </unit>
+    <unit id="fkhXK8F">
+      <segment>
+        <source>proposal.change_filter</source>
+        <target> ou changer le tri pour consulter toutes les propositions.</target>
+      </segment>
+    </unit>
+    <unit id="DBCfC5Y">
+      <segment>
+        <source>proposal.request.create.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="eZRfqtq">
+      <segment>
+        <source>proposal.request.create.success</source>
+        <target>Merci ! Votre proposition a bien été créée.</target>
+      </segment>
+    </unit>
+    <unit id="HardhEa">
+      <segment>
+        <source>proposal.request.delete.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="3GJnPyb">
+      <segment>
+        <source>proposal.request.delete.success</source>
+        <target>Votre proposition a bien été supprimée.</target>
+      </segment>
+    </unit>
+    <unit id="85iY26R">
+      <segment>
+        <source>proposal.request.delete_vote.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="mhq5rv2">
+      <segment>
+        <source>proposal.request.delete_vote.success</source>
+        <target>Merci, votre vote a bien été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="biEWPZz">
+      <segment>
+        <source>proposal.request.update.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="B4Qnqmp">
+      <segment>
+        <source>proposal.request.vote.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="enhM8as">
+      <segment>
+        <source>proposal.request.vote.success</source>
+        <target>Merci, votre vote a bien été pris en compte.</target>
+      </segment>
+    </unit>
+    <unit id="a7uE7OD">
+      <segment>
+        <source>proposal.suggest_header</source>
+        <target>{matches, plural, one{# proposition déjà déposée contenant} other{# propositions déjà déposées contiennent}} {terms, plural, one{ce mot-clé} other {ces mots-clés}}</target>
+      </segment>
+    </unit>
+    <unit id="CaAx8Gb">
+      <segment>
+        <source>proposal.search</source>
+        <target>Mots-clés ou référence</target>
+      </segment>
+    </unit>
+    <unit id="F2DXJIA">
+      <segment>
+        <source>proposal.summary</source>
+        <target>Résumé</target>
+      </segment>
+    </unit>
+    <unit id="GV8IBU7">
+      <segment>
+        <source>proposal.select.category</source>
+        <target>Sélectionnez une catégorie</target>
+      </segment>
+    </unit>
+    <unit id="d9IjXcr">
+      <segment>
+        <source>proposal.select.district</source>
+        <target>Sélectionnez une localisation</target>
+      </segment>
+    </unit>
+    <unit id="hnSGrvx">
+      <segment>
+        <source>proposal.select.theme</source>
+        <target>Sélectionnez un thème</target>
+      </segment>
+    </unit>
+    <unit id="gPYMA7c">
+      <segment>
+        <source>proposal.tabs.blog</source>
+        <target>Actualités</target>
+      </segment>
+    </unit>
+    <unit id="y1O0kVp">
+      <segment>
+        <source>proposal.tabs.content</source>
+        <target>Présentation</target>
+      </segment>
+    </unit>
+    <unit id="a1H1X9n">
+      <segment>
+        <source>proposal.tabs.comments</source>
+        <target>Discussions</target>
+      </segment>
+    </unit>
+    <unit id="gER8URw">
+      <segment>
+        <source>proposal.tabs.votes</source>
+        <target>Votes</target>
+      </segment>
+    </unit>
+    <unit id="09qMy1n">
+      <segment>
+        <source>proposal.theme</source>
+        <target>Thème</target>
+      </segment>
+    </unit>
+    <unit id="QOR57LP">
+      <segment>
+        <source>proposal.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="b8ykWhH">
+      <segment>
+        <source>proposal.trashed.label</source>
+        <target>Proposition dans la corbeille.</target>
+      </segment>
+    </unit>
+    <unit id="CdZhuAv">
+      <segment>
+        <source>proposal.trashed.motive</source>
+        <target>Motif : {motive}</target>
+      </segment>
+    </unit>
+    <unit id="QjpPkmK">
+      <segment>
+        <source>proposal.vote.add</source>
+        <target>Voter pour</target>
+      </segment>
+    </unit>
+    <unit id="bXe4wOc">
+      <segment>
+        <source>proposal.vote.authenticated</source>
+        <target>Voter avec mon compte</target>
+      </segment>
+    </unit>
+    <unit id="ldobtZv">
+      <segment>
+        <source>proposal.vote.confirm</source>
+        <target>Valider mon vote</target>
+      </segment>
+    </unit>
+    <unit id="4mX6ipb">
+      <segment>
+        <source>proposal.vote.constraints.email</source>
+        <target>Veuillez entrer une adresse email valide</target>
+      </segment>
+    </unit>
+    <unit id="7M7VTBn">
+      <segment>
+        <source>proposal.vote.constraints.username</source>
+        <target>Le nom doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="paSJ4QH">
+      <segment>
+        <source>proposal.vote.count</source>
+        <target>{num, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="31s9JkH">
+      <segment>
+        <source>proposal.vote.count_no_nb</source>
+        <target>{count, plural, =0{vote} one{vote} other{votes}}</target>
+      </segment>
+    </unit>
+    <unit id="Yymaje3">
+      <segment>
+        <source>proposal.vote.delete</source>
+        <target>Annuler mon vote</target>
+      </segment>
+    </unit>
+    <unit id="fViR7C7">
+      <segment>
+        <source>proposal.vote.deleting</source>
+        <target>Annulation en cours...</target>
+      </segment>
+    </unit>
+    <unit id="R_B6s7f">
+      <segment>
+        <source>proposal.vote.form.comment</source>
+        <target>Commentaire</target>
+      </segment>
+    </unit>
+    <unit id="i4DKtRX">
+      <segment>
+        <source>proposal.vote.form.comment_placeholder</source>
+        <target>Pourquoi soutenez-vous ce projet ?</target>
+      </segment>
+    </unit>
+    <unit id="ZfMfgO1">
+      <segment>
+        <source>proposal.vote.form.email</source>
+        <target>Adresse électronique</target>
+      </segment>
+    </unit>
+    <unit id="9LgfG7b">
+      <segment>
+        <source>proposal.vote.form.private</source>
+        <target>Vote anonyme</target>
+      </segment>
+    </unit>
+    <unit id="914o.9X">
+      <segment>
+        <source>proposal.vote.form.username</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="lj2VLDb">
+      <segment>
+        <source>proposal.vote.hide</source>
+        <target>Masquer</target>
+      </segment>
+    </unit>
+    <unit id="4CbLUpf">
+      <segment>
+        <source>proposal.vote.modal.title</source>
+        <target>Voter pour</target>
+      </segment>
+    </unit>
+    <unit id="A8paVew">
+      <segment>
+        <source>proposal.vote.threshold.step</source>
+        <target>{num, plural, =0{Aucun vote n'est nécessaire} one{# vote est nécessaire} other{# votes sont nécessaires}} pour qu'une proposition atteigne le seuil</target>
+      </segment>
+    </unit>
+    <unit id="CVh6A9T">
+      <segment>
+        <source>proposal.vote.threshold.title</source>
+        <target>Soutenez cette proposition</target>
+      </segment>
+    </unit>
+    <unit id="_nJHcr_">
+      <segment>
+        <source>proposal.vote.threshold.reached</source>
+        <target>Objectif atteint</target>
+      </segment>
+    </unit>
+    <unit id="rZEz7Bq">
+      <segment>
+        <source>proposal.vote.threshold.progress</source>
+        <target>{num, plural, =0{0 vote nécessaire} one{# vote nécessaire} other{# votes nécessaires}} pour atteindre les {max, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="Fp7E5Qz">
+      <segment>
+        <source>proposal.vote.threshold.progress_reached</source>
+        <target>{num, plural, =0{0 vote obtenu} one{# vote obtenu} other{# votes obtenus}} sur {max, plural, =0{0 vote nécessaire} one{le vote nécessaire} other{les # votes nécessaires}}</target>
+      </segment>
+    </unit>
+    <unit id="ZzNqvF8">
+      <segment>
+        <source>proposal.vote.must_log_in</source>
+        <target>Vous devez vous connecter pour pouvoir voter pour cette proposition.</target>
+      </segment>
+    </unit>
+    <unit id="b0UR0jK">
+      <segment>
+        <source>proposal.vote.non_authenticated</source>
+        <target>Voter sans compte</target>
+      </segment>
+    </unit>
+    <unit id="zaiwnB3">
+      <segment>
+        <source>proposal.vote.none</source>
+        <target>Aucun vote</target>
+      </segment>
+    </unit>
+    <unit id="pnjqdDJ">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_title</source>
+        <target>Limite de votes atteinte</target>
+      </segment>
+    </unit>
+    <unit id="1yyuM5r">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_text</source>
+        <target>Vous avez atteint la limite de {num, plural, one{# vote} other {# votes}}.</target>
+      </segment>
+    </unit>
+    <unit id="WlI9Qrj">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_help</source>
+        <target>Veuillez retirer un vote si vous souhaitez voter pour cette proposition.</target>
+      </segment>
+    </unit>
+    <unit id="ashdWW4">
+      <segment>
+        <source>proposal.vote.popover.not_enough_credits_title</source>
+        <target>Limite du budget atteinte</target>
+      </segment>
+    </unit>
+    <unit id="rt5kYvu">
+      <segment>
+        <source>proposal.vote.popover.not_enough_credits_text</source>
+        <target>Vous avez atteint la limite du budget.</target>
+      </segment>
+    </unit>
+    <unit id="9TfJAlz">
+      <segment>
+        <source>proposal.vote.popover.not_enough_credits_help</source>
+        <target>Veuillez retirer un ou plusieurs votes si vous souhaitez voter pour cette proposition.</target>
+      </segment>
+    </unit>
+    <unit id="7vi2ns_">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_and_not_enough_credits_title</source>
+        <target>Limites atteintes</target>
+      </segment>
+    </unit>
+    <unit id="4ei0ACW">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_and_not_enough_credits_text</source>
+        <target>Vous avez atteint la limite de {num, plural, one{# vote} other {# votes}} et celle du budget.</target>
+      </segment>
+    </unit>
+    <unit id="n.ID2ZD">
+      <segment>
+        <source>proposal.vote.popover.limit_reached_and_not_enough_credits_help</source>
+        <target>Veuillez retirer un ou plusieurs votes si vous souhaitez voter pour cette proposition.</target>
+      </segment>
+    </unit>
+    <unit id="eRr2TFi">
+      <segment>
+        <source>proposal.vote.show_more</source>
+        <target>Voir tous les votes</target>
+      </segment>
+    </unit>
+    <unit id="zUcZ.y1">
+      <segment>
+        <source>proposal.vote.step_closed</source>
+        <target>L'étape de sélection est terminée, merci pour votre participation.</target>
+      </segment>
+    </unit>
+    <unit id="JZWzYXw">
+      <segment>
+        <source>proposal.vote.step_not_yet_open</source>
+        <target>L'étape de sélection n'est pas encore ouverte aux votes. Revenez plus tard !</target>
+      </segment>
+    </unit>
+    <unit id="bpVpQkN">
+      <segment>
+        <source>proposal.vote.vote_with_my_account</source>
+        <target>Voter avec mon compte</target>
+      </segment>
+    </unit>
+    <unit id="rrcvR7O">
+      <segment>
+        <source>proposal.map.map</source>
+        <target>Carte</target>
+      </segment>
+    </unit>
+    <unit id="LDkqRlV">
+      <segment>
+        <source>proposal.map.mosaic</source>
+        <target>Mosaïque</target>
+      </segment>
+    </unit>
+    <unit id="DVQa8Uz">
+      <segment>
+        <source>proposal.map.form.field</source>
+        <target>Lieu ou adresse</target>
+      </segment>
+    </unit>
+    <unit id="5Pfq2M4">
+      <segment>
+        <source>proposal.map.form.placeholder</source>
+        <target>Recherche d'un lieu ou d'une adresse</target>
+      </segment>
+    </unit>
+    <unit id="KRlidIK">
+      <segment>
+        <source>proposal.map.form.control.title</source>
+        <target>Localiser moi</target>
+      </segment>
+    </unit>
+    <unit id="ok.tXuK">
+      <segment>
+        <source>proposal.map.form.control.metersUnit</source>
+        <target>mètres</target>
+      </segment>
+    </unit>
+    <unit id="PCO4a2C">
+      <segment>
+        <source>proposal.map.form.control.feetUnit</source>
+        <target>pieds</target>
+      </segment>
+    </unit>
+    <unit id="hA4iGii">
+      <segment>
+        <source>proposal.map.form.control.popup</source>
+        <target>Vous êtes à moins de \{distance\} \{unit\} de ce point</target>
+      </segment>
+    </unit>
+    <unit id="UZjYJ8T">
+      <segment>
+        <source>proposal.map.form.control.outsideMapBoundsMsg</source>
+        <target>Vous semblez situé en dehors des limites de la carte</target>
+      </segment>
+    </unit>
+    <unit id="9KueV_J">
+      <segment>
+        <source>proposal_form.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="T.n2IZb">
+      <segment>
+        <source>proposal_form.create</source>
+        <target>Ajouter</target>
+      </segment>
+    </unit>
+    <unit id="gucBbCk">
+      <segment>
+        <source>proposal_form.create.title</source>
+        <target>Créer une formulaire de dépôt</target>
+      </segment>
+    </unit>
+    <unit id="yg9mP9A">
+      <segment>
+        <source>proposal_form.proposalInAZoneRequired</source>
+        <target>Limiter le dépôt des propositions aux zones géographiques</target>
+      </segment>
+    </unit>
+    <unit id="D1xQRAb">
+      <segment>
+        <source>proposal_form.summary</source>
+        <target>Résumé</target>
+      </segment>
+    </unit>
+    <unit id="PwxHqIX">
+      <segment>
+        <source>proposal_form.illustration</source>
+        <target>Illustration</target>
+      </segment>
+    </unit>
+    <unit id="07NGM0a">
+      <segment>
+        <source>proposal_form.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="mvNs08i">
+      <segment>
+        <source>proposal_form.theme</source>
+        <target>Thème</target>
+      </segment>
+    </unit>
+    <unit id="57qP7zD">
+      <segment>
+        <source>proposal_form.fields.text</source>
+        <target>Texte court</target>
+      </segment>
+    </unit>
+    <unit id="kSqms_W">
+      <segment>
+        <source>proposal_form.fields.textarea</source>
+        <target>Texte long</target>
+      </segment>
+    </unit>
+    <unit id="5pqdJXo">
+      <segment>
+        <source>proposal_form.fields.editor</source>
+        <target>Texte long avec éditeur de texte</target>
+      </segment>
+    </unit>
+    <unit id="3kwvg_D">
+      <segment>
+        <source>proposal_form.fields.medias</source>
+        <target>Documents</target>
+      </segment>
+    </unit>
+    <unit id="AqfpEoP">
+      <segment>
+        <source>proposal_form.category</source>
+        <target>Catégorie</target>
+      </segment>
+    </unit>
+    <unit id="cAL_zak">
+      <segment>
+        <source>proposal_form.address</source>
+        <target>Lieu ou adresse</target>
+      </segment>
+    </unit>
+    <unit id="FdOZKDm">
+      <segment>
+        <source>proposal_form.lat_map</source>
+        <target>Latitude</target>
+      </segment>
+    </unit>
+    <unit id="bQXMitM">
+      <segment>
+        <source>proposal_form.lng_map</source>
+        <target>Longitude</target>
+      </segment>
+    </unit>
+    <unit id="tyFkxu_">
+      <segment>
+        <source>proposal_form.districts</source>
+        <target>Zones géographiques</target>
+      </segment>
+    </unit>
+    <unit id="1wh0kQw">
+      <segment>
+        <source>proposal_form.notifications.label</source>
+        <target>Recevoir une notification lorsqu'une proposition est :</target>
+      </segment>
+    </unit>
+    <unit id="vk.1MW6">
+      <segment>
+        <source>proposal_form.notifications.on_create</source>
+        <target>Déposée</target>
+      </segment>
+    </unit>
+    <unit id="XfPR6Ml">
+      <segment>
+        <source>proposal_form.notifications.on_update</source>
+        <target>Modifiée</target>
+      </segment>
+    </unit>
+    <unit id="6v6AwXI">
+      <segment>
+        <source>proposal_form.notifications.on_delete</source>
+        <target>Supprimée</target>
+      </segment>
+    </unit>
+    <unit id=".jQ.KM6">
+      <segment>
+        <source>proposal_form.evaluation</source>
+        <target>Évaluation</target>
+      </segment>
+    </unit>
+    <unit id="mW4ln91">
+      <segment>
+        <source>proposal_form.evaluation_form</source>
+        <target>Questionnaire</target>
+      </segment>
+    </unit>
+    <unit id="rkJbZgS">
+      <segment>
+        <source>proposal_form.select_evaluation_form</source>
+        <target>Sélectionner un questionnaire</target>
+      </segment>
+    </unit>
+    <unit id="RtJT_K6">
+      <segment>
+        <source>proposal_form.select.zoom</source>
+        <target>Sélectionner un niveau de zoom</target>
+      </segment>
+    </unit>
+    <unit id="US2Oplc">
+      <segment>
+        <source>proposal_form.zoom</source>
+        <target>Niveau de zoom</target>
+      </segment>
+    </unit>
+    <unit id=".lDw6ZI">
+      <segment>
+        <source>proposal_form.required</source>
+        <target>Obligatoire</target>
+      </segment>
+    </unit>
+    <unit id="bc6V5qD">
+      <segment>
+        <source>proposal_form.help_text</source>
+        <target>Texte d'aide</target>
+      </segment>
+    </unit>
+    <unit id="Txn0Qf8">
+      <segment>
+        <source>proposal_form.introduction</source>
+        <target>Introduction</target>
+      </segment>
+    </unit>
+    <unit id="QzOtZPU">
+      <segment>
+        <source>proposal_form.admin.activity</source>
+        <target>Activité</target>
+      </segment>
+    </unit>
+    <unit id="D.YROxd">
+      <segment>
+        <source>proposal_form.admin.configuration</source>
+        <target>Configuration</target>
+      </segment>
+    </unit>
+    <unit id="f0eZ59s">
+      <segment>
+        <source>proposal_form.admin.configuration.form</source>
+        <target>Formulaire</target>
+      </segment>
+    </unit>
+    <unit id="y4WQf87">
+      <segment>
+        <source>proposal_form.admin.configuration.permanent_field</source>
+        <target>Champs permanents</target>
+      </segment>
+    </unit>
+    <unit id="kDHDuH2">
+      <segment>
+        <source>proposal_form.admin.configuration.optional_field</source>
+        <target>Champs optionnels</target>
+      </segment>
+    </unit>
+    <unit id="246mHmo">
+      <segment>
+        <source>proposal_form.admin.configuration.custom_field</source>
+        <target>Champs personnalisés</target>
+      </segment>
+    </unit>
+    <unit id="od70gXU">
+      <segment>
+        <source>proposal_form.admin.configuration.district_list</source>
+        <target>Liste des zones géographiques</target>
+      </segment>
+    </unit>
+    <unit id="I_9099M">
+      <segment>
+        <source>proposal_form.admin.configuration.categories_list</source>
+        <target>Liste des catégories</target>
+      </segment>
+    </unit>
+    <unit id="EIP52Ru">
+      <segment>
+        <source>proposal_form.admin.notification</source>
+        <target>Notification</target>
+      </segment>
+    </unit>
+    <unit id="r5a15xz">
+      <segment>
+        <source>proposal_form.admin.settings</source>
+        <target>Paramètres</target>
+      </segment>
+    </unit>
+    <unit id="prIdcHE">
+      <segment>
+        <source>proposal_form.admin.reference</source>
+        <target>Référence</target>
+      </segment>
+    </unit>
+    <unit id="RwZLf0W">
+      <segment>
+        <source>proposal_form.admin.evaluation</source>
+        <target>Évaluation</target>
+      </segment>
+    </unit>
+    <unit id="aQvAnNK">
+      <segment>
+        <source>reply.add</source>
+        <target>Répondre au questionnaire</target>
+      </segment>
+    </unit>
+    <unit id="i.hRT0x">
+      <segment>
+        <source>reply.constraints.choices_equal</source>
+        <target>Vous devez sélectionner exactement {nb} réponses.</target>
+      </segment>
+    </unit>
+    <unit id="RL2hWWd">
+      <segment>
+        <source>reply.constraints.choices_max</source>
+        <target>Vous devez sélectionner au maximum {nb} réponses.</target>
+      </segment>
+    </unit>
+    <unit id="O65H8YB">
+      <segment>
+        <source>reply.constraints.choices_min</source>
+        <target>Vous devez sélectionner au moins {nb} réponses.</target>
+      </segment>
+    </unit>
+    <unit id="Me4GOKt">
+      <segment>
+        <source>reply.constraints.field_mandatory</source>
+        <target>Ce champ est obligatoire.</target>
+      </segment>
+    </unit>
+    <unit id="No13L6F">
+      <segment>
+        <source>reply.count</source>
+        <target>{num, plural, =0{0 réponse} one{# réponse} other{# réponses}}</target>
+      </segment>
+    </unit>
+    <unit id="e_UlQ7Q">
+      <segment>
+        <source>reply.delete.confirm</source>
+        <target>Voulez-vous vraiment supprimer votre réponse ?</target>
+      </segment>
+    </unit>
+    <unit id="aV7E7jO">
+      <segment>
+        <source>reply.form.private</source>
+        <target>Rendre ma participation anonyme</target>
+      </segment>
+    </unit>
+    <unit id="Ty4turE">
+      <segment>
+        <source>reply.not_logged_in.error</source>
+        <target>Vous devez être connecté pour participer</target>
+      </segment>
+    </unit>
+    <unit id="1_5wPy5">
+      <segment>
+        <source>reply.other</source>
+        <target>Autre</target>
+      </segment>
+    </unit>
+    <unit id="63neyRf">
+      <segment>
+        <source>reply.private</source>
+        <target>(anonyme)</target>
+      </segment>
+    </unit>
+    <unit id="laaG_5h">
+      <segment>
+        <source>reply.request.create.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="Ijvl60w">
+      <segment>
+        <source>reply.request.create.success</source>
+        <target>Merci ! Votre réponse a bien été enregistrée.</target>
+      </segment>
+    </unit>
+    <unit id="wfjUZGe">
+      <segment>
+        <source>reply.request.delete.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="UC9aQZO">
+      <segment>
+        <source>reply.request.delete.success</source>
+        <target>Votre réponse a bien été supprimée.</target>
+      </segment>
+    </unit>
+    <unit id="fKDV3Zg">
+      <segment>
+        <source>reply.request.update.failure</source>
+        <target>Toutes nos excuses ! Une erreur est survenue, merci de réessayer plus tard.</target>
+      </segment>
+    </unit>
+    <unit id="MmVghtx">
+      <segment>
+        <source>reply.request.update.success</source>
+        <target>Votre réponse a bien été modifiée.</target>
+      </segment>
+    </unit>
+    <unit id="8z..8ri">
+      <segment>
+        <source>reply.show.link</source>
+        <target>Réponse du {date} à {time}</target>
+      </segment>
+    </unit>
+    <unit id="mU7Uw3N">
+      <segment>
+        <source>reply.show.response.no_value</source>
+        <target>Non répondu</target>
+      </segment>
+    </unit>
+    <unit id="RLIjPSS">
+      <segment>
+        <source>reply.show.title</source>
+        <target>{num, plural, =0{Aucune réponse} one{Ma réponse} other{Mes réponses}}</target>
+      </segment>
+    </unit>
+    <unit id="APcI_Fv">
+      <segment>
+        <source>reply.user_has_reply.error</source>
+        <target>Vous ne pouvez participer qu'une fois</target>
+      </segment>
+    </unit>
+    <unit id="46rV7j0">
+      <segment>
+        <source>reply.user_has_reply.reason</source>
+        <target>Vous avez déjà participé.</target>
+      </segment>
+    </unit>
+    <unit id="3i338qE">
+      <segment>
+        <source>reply.your_response</source>
+        <target>Votre réponse</target>
+      </segment>
+    </unit>
+    <unit id="Q6IYc_h">
+      <segment>
+        <source>reporting.status.error</source>
+        <target>Information erronée</target>
+      </segment>
+    </unit>
+    <unit id="TogQhm0">
+      <segment>
+        <source>reporting.status.off_topic</source>
+        <target>Propos hors-sujet</target>
+      </segment>
+    </unit>
+    <unit id="3xkCX23">
+      <segment>
+        <source>reporting.status.offending</source>
+        <target>Contenu raciste, offensant ou haineux</target>
+      </segment>
+    </unit>
+    <unit id="KhrSQPa">
+      <segment>
+        <source>reporting.status.sexual</source>
+        <target>Contenu à caractère sexuel</target>
+      </segment>
+    </unit>
+    <unit id="Sm84Tce">
+      <segment>
+        <source>reporting.status.spam</source>
+        <target>Spam ou contenu trompeur</target>
+      </segment>
+    </unit>
+    <unit id="YgTWh8n">
+      <segment>
+        <source>share.facebook</source>
+        <target>Facebook</target>
+      </segment>
+    </unit>
+    <unit id="hZdR62R">
+      <segment>
+        <source>share.googleplus</source>
+        <target>Google+</target>
+      </segment>
+    </unit>
+    <unit id="PpAPz39">
+      <segment>
+        <source>share.link</source>
+        <target>Lien de partage</target>
+      </segment>
+    </unit>
+    <unit id="j6G2FDc">
+      <segment>
+        <source>share.mail</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="B9B_wAh">
+      <segment>
+        <source>share.twitter</source>
+        <target>Twitter</target>
+      </segment>
+    </unit>
+    <unit id="dpGP67E">
+      <segment>
+        <source>source.add</source>
+        <target>Créer une source</target>
+      </segment>
+    </unit>
+    <unit id="J.4jONU">
+      <segment>
+        <source>source.add_infos</source>
+        <target>Merci d'examiner les sources existantes en premier lieu afin de ne pas soumettre de doublon. Vous pouvez voter pour celles existantes !</target>
+      </segment>
+    </unit>
+    <unit id="YCtqpiB">
+      <segment>
+        <source>source.body</source>
+        <target>Description *</target>
+      </segment>
+    </unit>
+    <unit id="HXG42nf">
+      <segment>
+        <source>source.check</source>
+        <target>En modifiant ma source, je comprends que les votes qui lui sont associés seront réinitialisés.</target>
+      </segment>
+    </unit>
+    <unit id="50hjydD">
+      <segment>
+        <source>source.constraints.body</source>
+        <target>Le contenu de la source doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="NGdOqA8">
+      <segment>
+        <source>source.constraints.category</source>
+        <target>Veuillez choisir un type pour soumettre une source</target>
+      </segment>
+    </unit>
+    <unit id="g.nB1o4">
+      <segment>
+        <source>source.constraints.check</source>
+        <target>Veuillez cocher cette case pour continuer.</target>
+      </segment>
+    </unit>
+    <unit id="f9AvnjM">
+      <segment>
+        <source>source.constraints.link</source>
+        <target>Cette valeur n'est pas une URL valide.</target>
+      </segment>
+    </unit>
+    <unit id="9t7IHAZ">
+      <segment>
+        <source>source.constraints.title</source>
+        <target>Le titre de la source doit faire au moins 2 caractères.</target>
+      </segment>
+    </unit>
+    <unit id="A6jeyXo">
+      <segment>
+        <source>source.delete_modal.bold</source>
+        <target>Êtes-vous sûr de vouloir supprimer cette source ?</target>
+      </segment>
+    </unit>
+    <unit id="iHyW.6g">
+      <segment>
+        <source>source.delete_modal.infos</source>
+        <target>Cette suppression marquera la fin de ce contenu à jamais.</target>
+      </segment>
+    </unit>
+    <unit id="lZlCAlN">
+      <segment>
+        <source>source.delete_modal.title</source>
+        <target>Supprimer une source</target>
+      </segment>
+    </unit>
+    <unit id="A3Xj8iI">
+      <segment>
+        <source>source.link</source>
+        <target>Lien *</target>
+      </segment>
+    </unit>
+    <unit id=".n6d7Ju">
+      <segment>
+        <source>source.title</source>
+        <target>Titre *</target>
+      </segment>
+    </unit>
+    <unit id="qk_90w0">
+      <segment>
+        <source>source.type</source>
+        <target>Type *</target>
+      </segment>
+    </unit>
+    <unit id="EAZP7.Y">
+      <segment>
+        <source>source.update</source>
+        <target>Modifier une source</target>
+      </segment>
+    </unit>
+    <unit id="9nLRTpM">
+      <segment>
+        <source>step.status.closed</source>
+        <target>Terminé</target>
+      </segment>
+    </unit>
+    <unit id="l.NzyfZ">
+      <segment>
+        <source>step.status.future</source>
+        <target>À venir</target>
+      </segment>
+    </unit>
+    <unit id="3sDJdMo">
+      <segment>
+        <source>step.status.open</source>
+        <target>En cours</target>
+      </segment>
+    </unit>
+    <unit id="rqYzU5H">
+      <segment>
+        <source>synthesis.common.elements.nb</source>
+        <target>{num, plural, =0{# contribution} one{# contribution} other{# contributions}}</target>
+      </segment>
+    </unit>
+    <unit id="RrxUzGc">
+      <segment>
+        <source>synthesis.common.elements.default_title</source>
+        <target>Contribution</target>
+      </segment>
+    </unit>
+    <unit id="QGEuj3Y">
+      <segment>
+        <source>synthesis.common.elements.no_source_date</source>
+        <target>Date non renseignée</target>
+      </segment>
+    </unit>
+    <unit id="0cVU5wW">
+      <segment>
+        <source>synthesis.common.elements.more</source>
+        <target>Voir plus</target>
+      </segment>
+    </unit>
+    <unit id="9lOffPe">
+      <segment>
+        <source>synthesis.common.errors.not_enabled</source>
+        <target>La synthèse est en cours de rédaction et sera bientôt disponible.</target>
+      </segment>
+    </unit>
+    <unit id="dDpwPsE">
+      <segment>
+        <source>synthesis.common.errors.no_synthesis</source>
+        <target>La synthèse n'a pas encore été rédigée. Elle sera disponible prochainement.</target>
+      </segment>
+    </unit>
+    <unit id="SPtKdyX">
+      <segment>
+        <source>synthesis.common.errors.incorrect_mode</source>
+        <target>Un problème est survenu. Veuillez réessayer.</target>
+      </segment>
+    </unit>
+    <unit id="HwEfEGn">
+      <segment>
+        <source>synthesis.common.errors.create_error</source>
+        <target>Une erreur est survenue, merci de réessayer cette action ultérieurement.</target>
+      </segment>
+    </unit>
+    <unit id="CCIzWUs">
+      <segment>
+        <source>synthesis.common.errors.update_error</source>
+        <target>Une erreur est survenue, merci de réessayer cette action ultérieurement.</target>
+      </segment>
+    </unit>
+    <unit id="ZwzfWFz">
+      <segment>
+        <source>synthesis.common.errors.archive_error</source>
+        <target>Impossible de traiter cet élément. Veuillez réessayer.</target>
+      </segment>
+    </unit>
+    <unit id="aToI2vf">
+      <segment>
+        <source>synthesis.common.errors.divide_error</source>
+        <target>Impossible de diviser cet élement.. Veuillez réessayer.</target>
+      </segment>
+    </unit>
+    <unit id="OpPpZz2">
+      <segment>
+        <source>synthesis.common.errors.close</source>
+        <target>Fermer</target>
+      </segment>
+    </unit>
+    <unit id="DhJ6Z3K">
+      <segment>
+        <source>synthesis.common.loading</source>
+        <target>Chargement</target>
+      </segment>
+    </unit>
+    <unit id="jSGGczA">
+      <segment>
+        <source>synthesis.common.success.create_success</source>
+        <target>L'élément a été créé avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="Zn42fbL">
+      <segment>
+        <source>synthesis.common.success.update_success</source>
+        <target>L'opération a été réalisée avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="rRLyzyT">
+      <segment>
+        <source>synthesis.common.success.archive_success</source>
+        <target>L'élément a été traité avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="IS.EsZ9">
+      <segment>
+        <source>synthesis.common.success.divide_success</source>
+        <target>L'élément a été divisé avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="EEcOgBQ">
+      <segment>
+        <source>synthesis.view.childrenModal.title</source>
+        <target>Contributions</target>
+      </segment>
+    </unit>
+    <unit id="gJ7Wu95">
+      <segment>
+        <source>synthesis.view.childrenModal.close</source>
+        <target>Fermer</target>
+      </segment>
+    </unit>
+    <unit id="NnEjkla">
+      <segment>
+        <source>synthesis.edition.navbar.search</source>
+        <target>Rechercher</target>
+      </segment>
+    </unit>
+    <unit id="PnxAVqJ">
+      <segment>
+        <source>synthesis.edition.navbar.user.admin</source>
+        <target>Administration</target>
+      </segment>
+    </unit>
+    <unit id="QGX69Z0">
+      <segment>
+        <source>synthesis.edition.navbar.user.profile</source>
+        <target>Mon profil</target>
+      </segment>
+    </unit>
+    <unit id="kRtmm95">
+      <segment>
+        <source>synthesis.edition.navbar.user.settings</source>
+        <target>Paramètres</target>
+      </segment>
+    </unit>
+    <unit id="XQVG77l">
+      <segment>
+        <source>synthesis.edition.navbar.user.logout</source>
+        <target>Déconnexion</target>
+      </segment>
+    </unit>
+    <unit id="mxDYasQ">
+      <segment>
+        <source>synthesis.edition.navbar.second.brand</source>
+        <target>Synthèse (Version beta)</target>
+      </segment>
+    </unit>
+    <unit id="DUMa2P.">
+      <segment>
+        <source>synthesis.edition.navbar.second.inbox</source>
+        <target>Boîte de réception</target>
+      </segment>
+    </unit>
+    <unit id="L3JvV6p">
+      <segment>
+        <source>synthesis.edition.navbar.second.preview</source>
+        <target>Voir le rendu</target>
+      </segment>
+    </unit>
+    <unit id="xpotYlq">
+      <segment>
+        <source>synthesis.edition.navbar.filter.oldest</source>
+        <target>Les plus anciens</target>
+      </segment>
+    </unit>
+    <unit id="NGRbUrO">
+      <segment>
+        <source>synthesis.edition.navbar.filter.newest</source>
+        <target>Les plus récents</target>
+      </segment>
+    </unit>
+    <unit id="3RYIFAh">
+      <segment>
+        <source>synthesis.edition.navbar.filter.popular</source>
+        <target>Les plus populaires</target>
+      </segment>
+    </unit>
+    <unit id="tY2b8oX">
+      <segment>
+        <source>synthesis.edition.topMenu.inbox</source>
+        <target>À traiter</target>
+      </segment>
+    </unit>
+    <unit id="hjJ24xu">
+      <segment>
+        <source>synthesis.edition.topMenu.archived</source>
+        <target>Traitées</target>
+      </segment>
+    </unit>
+    <unit id="d3u5RMu">
+      <segment>
+        <source>synthesis.edition.topMenu.published</source>
+        <target>Classées</target>
+      </segment>
+    </unit>
+    <unit id="Q0pBcig">
+      <segment>
+        <source>synthesis.edition.topMenu.unpublished</source>
+        <target>Ignorées</target>
+      </segment>
+    </unit>
+    <unit id="WSJhcmH">
+      <segment>
+        <source>synthesis.edition.topMenu.all</source>
+        <target>Toutes</target>
+      </segment>
+    </unit>
+    <unit id="kYxAHMH">
+      <segment>
+        <source>synthesis.edition.sideMenu.contributions</source>
+        <target>Les contributions</target>
+      </segment>
+    </unit>
+    <unit id="43J0Amq">
+      <segment>
+        <source>synthesis.edition.list.none</source>
+        <target>Aucun élément.</target>
+      </segment>
+    </unit>
+    <unit id="Y8gXXun">
+      <segment>
+        <source>synthesis.edition.finder.root</source>
+        <target>Synthèse</target>
+      </segment>
+    </unit>
+    <unit id="YaVZMFD">
+      <segment>
+        <source>synthesis.edition.action.create.label</source>
+        <target>Nouveau dossier</target>
+      </segment>
+    </unit>
+    <unit id="2O95pU9">
+      <segment>
+        <source>synthesis.edition.action.create.title</source>
+        <target>Nouveau dossier</target>
+      </segment>
+    </unit>
+    <unit id="P.Qi588">
+      <segment>
+        <source>synthesis.edition.action.create.btn_cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="gwhdUka">
+      <segment>
+        <source>synthesis.edition.action.create.btn_submit</source>
+        <target>Créer</target>
+      </segment>
+    </unit>
+    <unit id="GaT9IW_">
+      <segment>
+        <source>synthesis.edition.action.create.name.label</source>
+        <target>Nom</target>
+      </segment>
+    </unit>
+    <unit id="LiigV2k">
+      <segment>
+        <source>synthesis.edition.action.create.name.placeholder</source>
+        <target>Nom du dossier</target>
+      </segment>
+    </unit>
+    <unit id="QBdW1te">
+      <segment>
+        <source>synthesis.edition.action.create.description.label</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="28Z8n33">
+      <segment>
+        <source>synthesis.edition.action.create.parent.label</source>
+        <target>Imbriquer sous</target>
+      </segment>
+    </unit>
+    <unit id="7SBwCaD">
+      <segment>
+        <source>synthesis.edition.action.create.optional</source>
+        <target>Facultatif</target>
+      </segment>
+    </unit>
+    <unit id="CfHABig">
+      <segment>
+        <source>synthesis.edition.action.manage.label</source>
+        <target>Gérer les dossiers</target>
+      </segment>
+    </unit>
+    <unit id="oWKCa0T">
+      <segment>
+        <source>synthesis.edition.action.publish.btn_cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="6SekZZu">
+      <segment>
+        <source>synthesis.edition.action.publish.btn_submit</source>
+        <target>Classer</target>
+      </segment>
+    </unit>
+    <unit id="0gLqFXb">
+      <segment>
+        <source>synthesis.edition.action.publish.help.notation</source>
+        <target>Sélectionner des étoiles pour noter.</target>
+      </segment>
+    </unit>
+    <unit id=".NgeI.7">
+      <segment>
+        <source>synthesis.edition.action.publish.field.comment</source>
+        <target>Annoter</target>
+      </segment>
+    </unit>
+    <unit id="vXX9Eio">
+      <segment>
+        <source>synthesis.edition.action.publish.field.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="vwcKd9u">
+      <segment>
+        <source>synthesis.edition.action.publish.field.notation</source>
+        <target>Noter</target>
+      </segment>
+    </unit>
+    <unit id="KbT3quM">
+      <segment>
+        <source>synthesis.edition.action.publish.field.parent</source>
+        <target>Déplacer</target>
+      </segment>
+    </unit>
+    <unit id="ZDHpOHN">
+      <segment>
+        <source>synthesis.edition.action.publish.field.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="9sEFrzc">
+      <segment>
+        <source>synthesis.edition.action.publish.optional</source>
+        <target>Facultatif</target>
+      </segment>
+    </unit>
+    <unit id="bZl6gRI">
+      <segment>
+        <source>synthesis.edition.action.publish.title</source>
+        <target>Classer...</target>
+      </segment>
+    </unit>
+    <unit id="i6ffUfn">
+      <segment>
+        <source>synthesis.edition.action.update.btn_cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="KbLuy80">
+      <segment>
+        <source>synthesis.edition.action.update.btn_submit</source>
+        <target>Modifier</target>
+      </segment>
+    </unit>
+    <unit id="WHhMvEt">
+      <segment>
+        <source>synthesis.edition.action.update.field.parent</source>
+        <target>Déplacer</target>
+      </segment>
+    </unit>
+    <unit id="fQEeI3m">
+      <segment>
+        <source>synthesis.edition.action.update.field.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="3j77q54">
+      <segment>
+        <source>synthesis.edition.action.update.field.title</source>
+        <target>Titre</target>
+      </segment>
+    </unit>
+    <unit id="0f9e59y">
+      <segment>
+        <source>synthesis.edition.action.update.title</source>
+        <target>Modifier le dossier</target>
+      </segment>
+    </unit>
+    <unit id="1AbKmUj">
+      <segment>
+        <source>synthesis.edition.action.divide.title</source>
+        <target>Diviser la contribution</target>
+      </segment>
+    </unit>
+    <unit id="wmkGJf8">
+      <segment>
+        <source>synthesis.edition.action.divide.btn_cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="GBMsyyV">
+      <segment>
+        <source>synthesis.edition.action.divide.btn_submit</source>
+        <target>Diviser</target>
+      </segment>
+    </unit>
+    <unit id="uronu5y">
+      <segment>
+        <source>synthesis.edition.action.divide.help.title</source>
+        <target>Information</target>
+      </segment>
+    </unit>
+    <unit id="XM0GnDz">
+      <segment>
+        <source>synthesis.edition.action.divide.help.message</source>
+        <target>Veuillez sélectionner du texte dans le contenu pour créer une nouvelle contribution.</target>
+      </segment>
+    </unit>
+    <unit id="fRfNUid">
+      <segment>
+        <source>synthesis.edition.action.divide.create_button</source>
+        <target>Créer à partir d'une sélection</target>
+      </segment>
+    </unit>
+    <unit id="hw6nGLp">
+      <segment>
+        <source>synthesis.edition.action.confirm_ignore.title</source>
+        <target>Souhaitez-vous vraiment ignorer le dossier "{name}"</target>
+      </segment>
+    </unit>
+    <unit id="eUi3MQx">
+      <segment>
+        <source>synthesis.edition.action.confirm_ignore.body</source>
+        <target>Tous les dossiers et toutes les contributions contenus dans ce dossier seront également ignorés.</target>
+      </segment>
+    </unit>
+    <unit id="cijChCB">
+      <segment>
+        <source>synthesis.edition.action.confirm_ignore.btn_cancel</source>
+        <target>Annuler</target>
+      </segment>
+    </unit>
+    <unit id="XxN_qnL">
+      <segment>
+        <source>synthesis.edition.action.confirm_ignore.btn_submit</source>
+        <target>Ignorer</target>
+      </segment>
+    </unit>
+    <unit id="ndoMQDS">
+      <segment>
+        <source>synthesis.settings.display.level</source>
+        <target>Niveau des propositions</target>
+      </segment>
+    </unit>
+    <unit id="YG66Dj7">
+      <segment>
+        <source>synthesis.settings.display.level_constraints</source>
+        <target>Le niveau des propositions doit être compris entre 0 et 5.</target>
+      </segment>
+    </unit>
+    <unit id="ujr367V">
+      <segment>
+        <source>synthesis.settings.display.level_help</source>
+        <target>Définissez le niveau dans l'arborescence des premières contributions, le premier niveau étant 0.</target>
+      </segment>
+    </unit>
+    <unit id="taQW_yy">
+      <segment>
+        <source>synthesis.settings.menu.display</source>
+        <target>Rendu</target>
+      </segment>
+    </unit>
+    <unit id="tv1EoKh">
+      <segment>
+        <source>synthesis.vote.ok</source>
+        <target>D'accord</target>
+      </segment>
+    </unit>
+    <unit id="Y2iC9c0">
+      <segment>
+        <source>synthesis.vote.mitige</source>
+        <target>Mitigé</target>
+      </segment>
+    </unit>
+    <unit id="tC.ItfO">
+      <segment>
+        <source>synthesis.vote.nok</source>
+        <target>Pas d'accord</target>
+      </segment>
+    </unit>
+    <unit id="9WlTz1H">
+      <segment>
+        <source>synthesis.vote.total</source>
+        <target>{nb, plural, =0{# vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="40XRZu_">
+      <segment>
+        <source>synthesis.counter.contributions</source>
+        <target>{nb, plural, =0{# contribution} one{# contribution} other{# contributions}}</target>
+      </segment>
+    </unit>
+    <unit id="G9Ps1fn">
+      <segment>
+        <source>synthesis.counter.link</source>
+        <target>Voir la contribution initiale</target>
+      </segment>
+    </unit>
+    <unit id="f8vaixZ">
+      <segment>
+        <source>synthesis.readmore.show</source>
+        <target>Voir la synthèse de "{title}"</target>
+      </segment>
+    </unit>
+    <unit id="Hgr_K5j">
+      <segment>
+        <source>synthesis.readmore.hide</source>
+        <target>Masquer la synthèse de "{title}"</target>
+      </segment>
+    </unit>
+    <unit id="M2nttJm">
+      <segment>
+        <source>synthesis.percentage.tooltip</source>
+        <target>{contributions, plural, =0{# élément} one{# élément} other{# éléments}} {scoreSign} {score, plural, =0{0 vote} one{# vote} other{# votes}} soit {percentage, plural, other{#}}%</target>
+      </segment>
+    </unit>
+    <unit id="xjaG1KP">
+      <segment>
+        <source>navbar.search</source>
+        <target>Rechercher</target>
+      </segment>
+    </unit>
+    <unit id="gphGQyT">
+      <segment>
+        <source>navbar.admin</source>
+        <target>Administration</target>
+      </segment>
+    </unit>
+    <unit id="lgxeOlm">
+      <segment>
+        <source>navbar.profile</source>
+        <target>Mon profil</target>
+      </segment>
+    </unit>
+    <unit id="eAgYVWt">
+      <segment>
+        <source>navbar.user_settings</source>
+        <target>Paramètres</target>
+      </segment>
+    </unit>
+    <unit id="EzhiInE">
+      <segment>
+        <source>navbar.homepage</source>
+        <target>Accueil</target>
+      </segment>
+    </unit>
+    <unit id="a96.zCX">
+      <segment>
+        <source>navbar.skip_links.menu</source>
+        <target>Aller au menu</target>
+      </segment>
+    </unit>
+    <unit id="LP0f8OS">
+      <segment>
+        <source>navbar.skip_links.content</source>
+        <target>Aller au contenu</target>
+      </segment>
+    </unit>
+    <unit id="E3k.jkl">
+      <segment>
+        <source>vote.add</source>
+        <target>Voter</target>
+      </segment>
+    </unit>
+    <unit id="bFbPl_a">
+      <segment>
+        <source>vote.aria_label.mitige</source>
+        <target>Souhaitez-vous déclarer être mitigé sur cette proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="77QumdK">
+      <segment>
+        <source>vote.aria_label.nok</source>
+        <target>Souhaitez-vous déclarer ne pas être d'accord avec cette proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="RiDIjs_">
+      <segment>
+        <source>vote.aria_label.ok</source>
+        <target>Souhaitez-vous déclarer être d'accord avec cette proposition ?</target>
+      </segment>
+    </unit>
+    <unit id="xUkND24">
+      <segment>
+        <source>vote.aria_label_active.mitige</source>
+        <target>Vous avez déclaré être mitigé sur cette proposition</target>
+      </segment>
+    </unit>
+    <unit id="v_70n8e">
+      <segment>
+        <source>vote.aria_label_active.nok</source>
+        <target>Vous avez déclaré n'être pas d'accord avec cette proposition</target>
+      </segment>
+    </unit>
+    <unit id="imnWnq8">
+      <segment>
+        <source>vote.aria_label_active.ok</source>
+        <target>Vous avez déclaré être d'accord avec cette proposition</target>
+      </segment>
+    </unit>
+    <unit id="44iXdK7">
+      <segment>
+        <source>vote.cancel</source>
+        <target>Annuler mon vote</target>
+      </segment>
+    </unit>
+    <unit id="JFWRQ.U">
+      <segment>
+        <source>vote.count</source>
+        <target>{count, plural, =0{0 vote} one{# vote} other{# votes}}</target>
+      </segment>
+    </unit>
+    <unit id="UYweXPK">
+      <segment>
+        <source>vote.count_no_nb</source>
+        <target>{count, plural, =0{vote} one{vote} other{votes}}</target>
+      </segment>
+    </unit>
+    <unit id="FHHyQ43">
+      <segment>
+        <source>vote.evolution.date</source>
+        <target>Date</target>
+      </segment>
+    </unit>
+    <unit id="XMnVa8C">
+      <segment>
+        <source>vote.evolution.mitige</source>
+        <target>Mitigé</target>
+      </segment>
+    </unit>
+    <unit id="WvtkT_B">
+      <segment>
+        <source>vote.evolution.nok</source>
+        <target>Pas d'accord</target>
+      </segment>
+    </unit>
+    <unit id="aYvVPHN">
+      <segment>
+        <source>vote.evolution.ok</source>
+        <target>D'accord</target>
+      </segment>
+    </unit>
+    <unit id="mFx8o2Z">
+      <segment>
+        <source>vote.evolution.tab</source>
+        <target>Évolution des votes</target>
+      </segment>
+    </unit>
+    <unit id="CmsCmxR">
+      <segment>
+        <source>vote.evolution.vaxis</source>
+        <target>Votes</target>
+      </segment>
+    </unit>
+    <unit id="MGwWMSi">
+      <segment>
+        <source>vote.form</source>
+        <target>Formulaire de vote</target>
+      </segment>
+    </unit>
+    <unit id="VxxNn0K">
+      <segment>
+        <source>vote.mitige</source>
+        <target>Mitigé</target>
+      </segment>
+    </unit>
+    <unit id="3Tq2gAZ">
+      <segment>
+        <source>vote.nok</source>
+        <target>Pas d'accord</target>
+      </segment>
+    </unit>
+    <unit id="8BiUNmT">
+      <segment>
+        <source>vote.ok</source>
+        <target>D'accord</target>
+      </segment>
+    </unit>
+    <unit id="Fdgnt9m">
+      <segment>
+        <source>vote.popover.body</source>
+        <target>Vous devez être connecté pour réaliser cette action.</target>
+      </segment>
+    </unit>
+    <unit id="bSQHdlf">
+      <segment>
+        <source>vote.popover.login</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="uPw8jUG">
+      <segment>
+        <source>vote.popover.signin</source>
+        <target>Inscription</target>
+      </segment>
+    </unit>
+    <unit id="mT6sbXm">
+      <segment>
+        <source>vote.popover.title</source>
+        <target>Connectez-vous pour contribuer</target>
+      </segment>
+    </unit>
+    <unit id="ZTIM2Mo">
+      <segment>
+        <source>login.facebook</source>
+        <target>Se connecter via Facebook</target>
+      </segment>
+    </unit>
+    <unit id="iB79TBK">
+      <segment>
+        <source>login.google</source>
+        <target>Se connecter via Google</target>
+      </segment>
+    </unit>
+    <unit id="ADaUQm1">
+      <segment>
+        <source>login.saml</source>
+        <target>Se connecter via SAML</target>
+      </segment>
+    </unit>
+    <unit id="R4Nzv5Q">
+      <segment>
+        <source>login.or</source>
+        <target>OU</target>
+      </segment>
+    </unit>
+    <unit id="WlAppJX">
+      <segment>
+        <source>evaluation_form.constraints.medias</source>
+        <target>Les documents ne sont pas supportés sur les évaluations.</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
