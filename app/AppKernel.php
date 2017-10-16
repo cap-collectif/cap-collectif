@@ -15,6 +15,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 
+            new Translation\PlatformAdapter\Loco\Bridge\Symfony\TranslationAdapterLocoBundle(),
+            new Translation\Bundle\TranslationBundle(),
+
             // Redis
             new Snc\RedisBundle\SncRedisBundle(),
 

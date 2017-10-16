@@ -65,6 +65,7 @@ setOverridableParameter($container, 'disable_mail_delivery', 'false', 'SYMFONY_D
 
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 $container->setParameter('google_maps_key', '***REMOVED***');
+$container->setParameter('loco_key', '5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII');
 
 // This key is used for server to server call
 // There are a restriction on IP

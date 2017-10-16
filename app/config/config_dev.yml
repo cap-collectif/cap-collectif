@@ -12,6 +12,10 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+translation:
+    symfony_profiler:
+        enabled: true
+
 monolog:
     handlers:
         file:

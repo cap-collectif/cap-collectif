@@ -29,7 +29,10 @@ framework:
         handler_id: snc_redis.session.handler
     fragments: null
     http_method_override: true
-    translator: { fallback: fr }
+    translator:
+        paths:
+            - '%kernel.root_dir%/../translations'
+        fallback: fr
 
 twig:
     debug: "%kernel.debug%"
@@ -46,6 +49,22 @@ twig:
 ekino_new_relic:
     enabled:          true
     log_exceptions:   true
+
+translation_adapter_loco:
+  projects:
+    cap-collectif:
+      api_key: "%loco_key%"
+      domains: ['CapcoAppBundle', 'validators']
+
+translation:
+  locales: ["en-GB", "fr-FR", "es-ES"]
+  configs:
+    app:
+      dirs: ["%kernel.root_dir%/../src"] # not used
+      output_dir: "translations"
+      remote_storage: ["php_translation.adapter.loco"]
+      excluded_names: ["*TestCase.php", "*Test.php"]
+      excluded_dirs: [cache, data, logs]
 
 doctrine:
     dbal:
@@ -383,9 +402,9 @@ overblog_graphql:
         query_max_depth: false
         query_max_complexity: false
     definitions:
-        show_debug_info: %kernel.debug%
+        show_debug_info: "%kernel.debug%"
         internal_error_message: "An error occurred, please retry later or contact us!"
-        config_validation: %kernel.debug%
+        config_validation: "%kernel.debug%"
         schema:
             query: Query
             mutation: Mutation
