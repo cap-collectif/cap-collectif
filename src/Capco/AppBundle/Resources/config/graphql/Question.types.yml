@@ -7,8 +7,6 @@ Question:
                 type: "String!"
             title:
                 type: "String!"
-            slug:
-                type: "String!"
             type:
                 type: "QuestionTypeValue!"
                 resolve: "@=resolver('question_type', [value])"
@@ -31,4 +29,6 @@ Question:
                 type: "MultipleChoiceQuestionValidationRule"
                 resolve: "@=resolver('question_validation_rule', [value])"
             kind:
+                type: "String!"
+            slug:
                 type: "String!"

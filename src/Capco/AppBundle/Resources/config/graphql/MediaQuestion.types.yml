@@ -23,3 +23,14 @@ MediaQuestion:
             kind:
                 type: "String!"
                 resolve: "media"
+            isOtherAllowed:
+                type: "Boolean!"
+                resolve: "@=resolver('question_isOtherAllowed', [value])"
+            choices:
+                type: "[QuestionChoice!]"
+                resolve: "@=resolver('question_choices', [value])"
+            validationRule:
+                type: "MultipleChoiceQuestionValidationRule"
+                resolve: "@=resolver('question_validation_rule', [value])"
+            slug:
+                type: "String!"

@@ -372,6 +372,10 @@ type MediaQuestion implements Question {
   required: Boolean!
   helpText: String
   kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A response
@@ -844,7 +848,6 @@ type Query {
 interface Question {
   id: String!
   title: String!
-  slug: String!
   type: QuestionTypeValue!
   position: Int!
   private: Boolean!
@@ -853,6 +856,8 @@ interface Question {
   helpText: String
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
+  kind: String!
+  slug: String!
 }
 
 # A possible choice of a question
@@ -861,7 +866,6 @@ type QuestionChoice {
   title: String!
   description: String
   color: String
-  kind: String!
 }
 
 input QuestionInput {
@@ -1046,9 +1050,10 @@ input SetEvaluationFormInProposalFormInput {
 }
 
 type SetEvaluationFormInProposalFormPayload {
-    proposalForm: ProposalForm!
-    clientMutationId: String
+  proposalForm: ProposalForm!
+  clientMutationId: String
 }
+
 # A simple question
 type SimpleQuestion implements Question {
   id: String!
@@ -1059,6 +1064,10 @@ type SimpleQuestion implements Question {
   required: Boolean!
   helpText: String
   kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A source
