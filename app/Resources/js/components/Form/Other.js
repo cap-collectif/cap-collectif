@@ -10,13 +10,6 @@ const Other = React.createClass({
     field: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    isReduxForm: PropTypes.bool,
-  },
-
-  getDefaultProps() {
-    return {
-      isReduxForm: false,
-    };
   },
 
   getInitialState() {
@@ -59,17 +52,11 @@ const Other = React.createClass({
     if (input instanceof HTMLInputElement) {
       if (e.target.checked) {
         input.focus();
-        if (this.props.isReduxForm) {
-          this.props.onChange(e, this.state.value);
-        }
       } else {
         input.value = '';
         this.setState({
           value: '',
         });
-        if (this.props.isReduxForm) {
-          this.props.onChange(e, undefined);
-        }
       }
     }
     this.setState({

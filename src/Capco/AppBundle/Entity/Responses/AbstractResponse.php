@@ -62,12 +62,6 @@ abstract class AbstractResponse
     private $reply;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
-     * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     */
-    private $proposalEvaluation;
-
-    /**
      * @var AbstractQuestion
      *
      * @Assert\NotNull()
@@ -155,18 +149,6 @@ abstract class AbstractResponse
     public function setReply($reply)
     {
         $this->reply = $reply;
-
-        return $this;
-    }
-
-    public function getProposalEvaluation()
-    {
-        return $this->proposalEvaluation;
-    }
-
-    public function setProposalEvaluation($proposalEvaluation): self
-    {
-        $this->proposalEvaluation = $proposalEvaluation;
 
         return $this;
     }

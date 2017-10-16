@@ -13,17 +13,14 @@ const Radio = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    label: PropTypes.any,
+    label: PropTypes.any.isRequired,
     labelClassName: PropTypes.string,
-    isReduxForm: PropTypes.bool.isRequired,
-    checkedValue: PropTypes.string,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
       labelClassName: '',
-      isReduxForm: false,
     };
   },
 
@@ -32,7 +29,7 @@ const Radio = React.createClass({
   },
 
   reverseOnChange(value, e) {
-    const { field, onChange, isReduxForm } = this.props;
+    const { field, onChange } = this.props;
     if (field.isOtherAllowed) {
       const otherRadioElement = Array.from(
         ReactDOM.findDOMNode(this.other).getElementsByTagName('*'),
@@ -43,13 +40,6 @@ const Radio = React.createClass({
         this.other.clear();
       }
     }
-
-    if (isReduxForm) {
-      onChange(value);
-
-      return;
-    }
-
     onChange(field, value);
   },
 
@@ -66,15 +56,7 @@ const Radio = React.createClass({
   },
 
   render() {
-    const {
-      disabled,
-      getGroupStyle,
-      id,
-      labelClassName,
-      label,
-      renderFormErrors,
-      checkedValue,
-    } = this.props;
+    const { disabled, getGroupStyle, id, labelClassName, label, renderFormErrors } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -90,11 +72,10 @@ const Radio = React.createClass({
         </label>
         <span className="help-block">{field.helpText}</span>
         <RadioGroup
-          value={checkedValue}
           ref={c => (this.radioGroup = c)}
           name={fieldName}
           onChange={this.reverseOnChange}>
-          {field.choices.map(choice => {
+          {this.props.field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
             return (
               <Input

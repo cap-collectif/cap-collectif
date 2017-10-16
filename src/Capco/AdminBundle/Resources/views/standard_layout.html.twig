@@ -4,19 +4,6 @@
     {# Sonata css #}
     {{ parent() }}
 
-    <style>
-        @font-face {
-            font-family: 'cap-collectif';
-            font-weight: normal;
-            font-style: normal;
-            src: url("{{ asset('fonts/cap-collectif.eot') }}");
-            src: url("{{ asset('fonts/cap-collectif.eot#iefix') }}") format('embedded-opentype'),
-            url("{{ asset('fonts/cap-collectif.woff') }}") format('woff'),
-            url("{{ asset('fonts/cap-collectif.tff') }}") format('truetype'),
-            url("{{ asset('fonts/cap-collectif.svg#cap-collectif') }}") format('svg');
-        }
-    </style>
-
     <link href="{{ asset('css/jquery.minicolors.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}

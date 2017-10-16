@@ -1,9 +1,0 @@
-SetEvaluationFormInProposalFormInput:
-    type: relay-mutation-input
-    config:
-        description: "Set an Evaluation form in a proposal form."
-        fields:
-            proposalFormId:
-                type: "ID!"
-            evaluationFormId:
-                type: "ID"

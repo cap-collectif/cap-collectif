@@ -110,18 +110,6 @@ type ChangeProposalContentPayload {
   clientMutationId: String
 }
 
-input ChangeProposalEvaluationInput {
-  # The proposal id
-  proposalId: ID!
-  responses: [ResponseInput!]!
-  clientMutationId: String
-}
-
-type ChangeProposalEvaluationPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
 input ChangeProposalNotationInput {
   # The proposal id
   proposalId: ID!
@@ -333,18 +321,6 @@ interface EditableContribution {
   updatedAt: String!
 }
 
-# A Evaluation form (question)
-type EvaluationForm {
-  # The id of evaluation form (question)
-  id: String!
-
-  # The title of evaluation form (question)
-  title: String!
-
-  # List of questions in the evaluation form
-  questions: [Question!]
-}
-
 scalar GeoJSON
 
 scalar HTML
@@ -370,12 +346,6 @@ type MediaResponse implements Response {
   medias: [Media]!
 }
 
-# Multiple Choice Question Validation Rule
-type MultipleChoiceQuestionValidationRule {
-  type: String
-  number: String
-}
-
 type Mutation {
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
@@ -391,8 +361,6 @@ type Mutation {
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
   changeTitleProposalForm(input: ChangeTitleProposalFormInput!): ChangeTitleProposalFormPayload
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
-  setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
-  changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
 }
 
 # A notifications configuration
@@ -627,7 +595,7 @@ type PresentationStep implements Step {
 
 # A budget contribution
 type ProgressStep {
-  id: ID!
+  id: String!
   title: String!
   startAt: DateTime!
   endAt: DateTime
@@ -695,9 +663,6 @@ type Proposal {
 
   # Identifies the form where the contribution was submitted.
   form: ProposalForm!
-
-  # Identifies the answers to an evaluation form.
-  evaluation: ProposalEvaluation
 }
 
 # A proposal category
@@ -708,15 +673,6 @@ type ProposalCategory {
 
 input ProposalCategoryInput {
   name: String!
-}
-
-# An evaluation for a proposal
-type ProposalEvaluation {
-  # Identifies the proposal.
-  proposal: Proposal!
-
-  # List of responses for the evaluation
-  responses: [Response]!
 }
 
 # A budget form
@@ -751,9 +707,6 @@ type ProposalForm {
   # The HTTP url for this proposal form.
   url: URI!
   notificationsConfiguration: NotificationsConfiguration!
-
-  # Get the evaluation form of the proposal form
-  evaluationForm: EvaluationForm
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -823,30 +776,17 @@ type Query {
   proposal(id: ID!): Proposal!
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
-  availableQuestionnaires: [Question!]
 }
 
 # A question
 type Question {
   id: String!
   title: String!
-  slug: String!
   type: QuestionTypeValue!
   position: Int!
   private: Boolean!
   required: Boolean!
-  isOtherAllowed: Boolean!
   helpText: String
-  choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
-}
-
-# A possible choice of a question
-type QuestionChoice {
-  id: ID!
-  title: String!
-  description: String
-  color: String
 }
 
 input QuestionInput {
@@ -863,10 +803,6 @@ enum QuestionTypeValue {
   textarea
   editor
   medias
-  radio
-  checkbox
-  button
-  ranking
 }
 
 type QuestionnaireAbstractQuestion {
@@ -1022,17 +958,6 @@ type SelectionStep implements Step {
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
-}
-
-input SetEvaluationFormInProposalFormInput {
-  proposalFormId: ID!
-  evaluationFormId: ID
-  clientMutationId: String
-}
-
-type SetEvaluationFormInProposalFormPayload {
-  proposalForm: ProposalForm!
-  clientMutationId: String
 }
 
 # A source

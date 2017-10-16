@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DisplaySettings /> should render correctly 1`] = `
+<div
+  className="display-settings"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <label>
+      <FormattedMessage
+        id="synthesis.settings.display.level"
+        values={Object {}}
+      />
+    </label>
+    <br />
+    <FormattedMessage
+      id="synthesis.settings.display.level_help"
+      values={Object {}}
+    />
+    <Field
+      component={[Function]}
+      id="display-settings__form__input"
+      name="level"
+      type="number"
+    />
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
+`;

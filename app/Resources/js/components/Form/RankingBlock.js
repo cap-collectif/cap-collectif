@@ -32,7 +32,7 @@ const RankingBlock = React.createClass({
     return {
       items: {
         pickBox: field.choices,
-        choiceBox: field.values || [],
+        choiceBox: [],
       },
       choicesHeight: 'auto',
     };
@@ -97,13 +97,7 @@ const RankingBlock = React.createClass({
     }
     const { field, connectDropTarget, disabled } = this.props;
     const { items, choicesHeight } = this.state;
-
-    let spotsNb = field.choices.length;
-
-    if (field.values) {
-      spotsNb += field.values.length;
-    }
-
+    const spotsNb = field.choices.length;
     return connectDropTarget(
       <div>
         <Row>

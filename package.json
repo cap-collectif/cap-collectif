@@ -146,7 +146,7 @@
     "react-truncate": "^2.1.5",
     "readmore": "0.0.2",
     "redux": "^3.7.2",
-    "redux-form": "^7.1.1",
+    "redux-form": "^7.0.4",
     "redux-saga": "v0.14.0",
     "relay-runtime": "^1.1.0",
     "sass-brunch": "https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e",
