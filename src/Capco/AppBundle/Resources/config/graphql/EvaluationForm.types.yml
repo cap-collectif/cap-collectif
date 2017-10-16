@@ -1,0 +1,15 @@
+EvaluationForm:
+    type: object
+    config:
+        description: "A Evaluation form (question)"
+        fields:
+            id:
+                type: "String!"
+                description: "The id of evaluation form (question)"
+            title:
+                type: "String!"
+                description: "The title of evaluation form (question)"
+            questions:
+                type: "[Question!]"
+                description: "List of questions in the evaluation form"
+                resolve: "@=resolver('evaluation_form_questions', [value])"

@@ -15,9 +15,13 @@ import {
   Popover,
   Radio,
 } from 'react-bootstrap';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
+import Ranking from './Ranking';
+import MultipleChoiceCheckbox from './Checkbox';
+import MultipleChoiceRadio from './Radio';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -68,9 +72,13 @@ type Props = {
   standalone: ?boolean,
   hasFeedback: ?boolean,
   validationState: ?string,
+  isOtherAllowed: ?boolean,
   label: string | any,
   type: ?string,
   errors: Array<string>,
+  choices: Array<any>,
+  onChange: any,
+  checkedValue: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -189,6 +197,27 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'checkbox') {
+      if (props.choices) {
+        // Custom checkbox type
+        const field = {};
+        field.id = props.id;
+        field.type = type;
+        field.isOtherAllowed = props.isOtherAllowed;
+        field.choices = props.choices;
+
+        return (
+          <MultipleChoiceCheckbox
+            value={value}
+            field={field}
+            label={null}
+            renderFormErrors={() => {}}
+            getGroupStyle={() => {}}
+            isReduxForm
+            {...props}
+          />
+        );
+      }
+
       formControl = (
         <Checkbox value={value} {...props}>
           {children}
@@ -196,7 +225,47 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
+    if (type === 'button') {
+      const field = {};
+      field.id = props.id;
+      field.choices = props.choices;
+
+      return (
+        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange} value={value}>
+          {field.choices.map(choice => (
+            <RadioButton
+              key={choice.id}
+              value={choice.label}
+              iconSize={20}
+              pointColor={choice.color}>
+              {choice.label}
+            </RadioButton>
+          ))}
+        </RadioGroup>
+      );
+    }
+
     if (type === 'radio') {
+      if (props.choices) {
+        // Custom radio type
+        const field = {};
+        field.id = props.id;
+        field.choices = props.choices;
+
+        return (
+          <MultipleChoiceRadio
+            value={value}
+            field={field}
+            label={null}
+            renderFormErrors={() => {}}
+            getGroupStyle={() => {}}
+            isReduxForm
+            checkedValue={props.checkedValue} // Ugly Hack because value is undefined (for compatibility)
+            {...props}
+          />
+        );
+      }
+
       formControl = (
         <Radio value={value} {...props}>
           {children}
@@ -213,6 +282,39 @@ class ReactBootstrapInput extends React.Component<Props> {
         <ButtonGroup type="radio" value={value} {...props}>
           {children}
         </ButtonGroup>
+      );
+    }
+
+    if (type === 'ranking') {
+      let values;
+      let choices;
+      if (value) {
+        values = props.choices.filter(
+          choice => choice.label === value.find(val => val === choice.label),
+        );
+        choices = props.choices.filter(
+          choice => choice.label !== value.find(val => val === choice.label),
+        );
+      } else {
+        choices = props.choices;
+      }
+
+      const field = {};
+      field.id = props.id;
+      field.choices = choices;
+      field.values = values;
+
+      return (
+        <Ranking
+          formName={formName}
+          field={field}
+          label={null}
+          renderFormErrors={() => {}}
+          getGroupStyle={() => {}}
+          isReduxForm
+          labelClassName="h4"
+          {...props}
+        />
       );
     }
 

@@ -20,15 +20,15 @@ exports[`<Checkbox /> should render correctly 1`] = `
     className="input-choices"
     id="choices-for-field-11"
     name="choices-for-field-11"
-    onChange={[Function]}
-    value={Array []}
   >
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-20"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Athlétisme"
       >
@@ -37,10 +37,12 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-21"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Natation"
       >
@@ -49,10 +51,12 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-22"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Sports collectifs"
       >
@@ -61,10 +65,12 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-23"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Sports individuels"
       >
@@ -95,15 +101,15 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     className="input-choices"
     id="choices-for-field-11"
     name="choices-for-field-11"
-    onChange={[Function]}
-    value={Array []}
   >
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-20"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Athlétisme"
       >
@@ -112,10 +118,12 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-21"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Natation"
       >
@@ -124,10 +132,12 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-22"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Sports collectifs"
       >
@@ -136,10 +146,12 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </div>
     <div>
       <InjectIntl(ReactBootstrapInput)
+        checked={false}
         disabled={false}
         id="reply-1_choice-23"
         image={null}
         name="choices-for-field-11"
+        onChange={[Function]}
         type="checkbox"
         value="Sports individuels"
       >
@@ -176,6 +188,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
           "type": "checkbox",
         }
       }
+      isReduxForm={false}
       onChange={[Function]}
     />
   </CheckboxGroup>

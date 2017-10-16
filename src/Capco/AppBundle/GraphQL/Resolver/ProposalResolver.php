@@ -141,4 +141,9 @@ class ProposalResolver implements ContainerAwareInterface
     {
         return $proposal->getFullReference();
     }
+
+    public function resolveEvaluation(Proposal $proposal)
+    {
+        return $proposal->getProposalEvaluation();
+    }
 }

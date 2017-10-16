@@ -51,3 +51,59 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion2'
     reply: '@reply2'
     value: {"labels":["Maxime Arrouard"],"other":null}
+  response14:
+    question: '@simplequestion8'
+    proposalEvaluation: '@proposalEvaluation1'
+    value: Cette proposition me parait inadaptée.
+  response15:
+    question: '@simplequestion9'
+    proposalEvaluation: '@proposalEvaluation1'
+    value: Cette évaluation est effectivement utile, mais ce n'est clairement pas prioritaire.
+  response16:
+    question: '@multiplequestion9'
+    proposalEvaluation: '@proposalEvaluation1'
+    value: {"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":null}
+  response17:
+    question: '@multiplequestion10'
+    proposalEvaluation: '@proposalEvaluation1'
+    value: {"labels":["Je dis oui"],"other":null}
+  response18:
+    question: '@simplequestion8'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: Cette proposition est top.
+  response19:
+    question: '@simplequestion9'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: Cette évaluation est hyper utile, à accepter.
+  response20:
+    question: '@multiplequestion9'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: {"labels":["Incohérente"],"other":null}
+  response21:
+    question: '@multiplequestion10'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: {"labels":["Je dis non"],"other":null}
+  response22:
+    question: '@multiplequestion11'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: {"labels":["Réalisable", "Importante"],"other":null}
+  response23:
+    question: '@multiplequestion8'
+    proposalEvaluation: '@proposalEvaluation2'
+    value: {"labels":["Du pur bullshit"],"other":null}
+  response24:
+    question: '@simplequestion8'
+    proposalEvaluation: '@proposalEvaluation3'
+    value: Proposition que ma femme approuve ... Pas moi.
+  response25:
+    question: '@simplequestion9'
+    proposalEvaluation: '@proposalEvaluation3'
+    value: Que dire de plus ?
+  response26:
+    question: '@multiplequestion9'
+    proposalEvaluation: '@proposalEvaluation3'
+    value: {"labels":["C'est de la diffamation !", "Que de la publicité (mensongère en plus !)"],"other":null}
+  response27:
+    question: '@multiplequestion10'
+    proposalEvaluation: '@proposalEvaluation3'
+    value: {"labels":["J'ai rien compris"],"other":null}

@@ -86,3 +86,51 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Il bluffe
     color: '#d9534f'
     position: 2
+  questionchoice21:
+    id: questionchoice21
+    title: Du pur bullshit
+    color: '#d953f9'
+    position: 2
+  questionchoice22:
+    id: questionchoice22
+    title: Au top
+    color: '#FFF600'
+    position: 1
+  questionchoice23:
+    id: questionchoice23
+    title: Incohérente
+    color: '#FF000'
+    position: 1
+  questionchoice24:
+    id: questionchoice24
+    title: C'est de la diffamation !
+    position: 2
+  questionchoice25:
+    id: questionchoice25
+    title: Que de la publicité (mensongère en plus !)
+    position: 3
+  questionchoice26:
+    id: questionchoice26
+    title: Je dis oui
+    position: 1
+  questionchoice27:
+    id: questionchoice27
+    title: Je dis non
+    position: 2
+  questionchoice28:
+    id: questionchoice28
+    title: J'ai rien compris
+    position: 3
+  questionchoice29:
+    id: questionchoice29
+    title: Compréhensible
+    position: 1
+  questionchoice30:
+    id: questionchoice30
+    title: Réalisable
+    position: 2
+  questionchoice31:
+    id: questionchoice31
+    title: Importante
+    description: Description de ma valeur importante !
+    position: 3

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
@@ -107,5 +108,25 @@ class ProposalFormMutation implements ContainerAwareInterface
         $this->container->get('doctrine.orm.default_entity_manager')->flush();
 
         return ['proposalForm' => $proposalForm];
+    }
+
+    public function setEvaluationForm(Argument $input): array
+    {
+        $arguments = $input->getRawArguments();
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
+
+        if (!$proposalForm) {
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
+        }
+
+        $evaluationForm = $this->container->get('capco.questionnaire.repository')->find($arguments['evaluationFormId']);
+
+        $proposalForm->setEvaluationForm($evaluationForm);
+
+        $this->container->get('doctrine.orm.default_entity_manager')->flush();
+
+        return [
+            'proposalForm' => $proposalForm,
+        ];
     }
 }

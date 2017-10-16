@@ -87,6 +87,11 @@ class Questionnaire
     private $acknowledgeReplies = false;
 
     /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="evaluationForm", cascade={"persist"})
+     */
+    private $proposalForm;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -387,6 +392,18 @@ class Questionnaire
     public function setAcknowledgeReplies($acknowledgeReplies)
     {
         $this->acknowledgeReplies = $acknowledgeReplies;
+
+        return $this;
+    }
+
+    public function getProposalForm()
+    {
+        return $this->proposalForm;
+    }
+
+    public function setProposalForm($proposalForm): self
+    {
+        $this->proposalForm = $proposalForm;
 
         return $this;
     }

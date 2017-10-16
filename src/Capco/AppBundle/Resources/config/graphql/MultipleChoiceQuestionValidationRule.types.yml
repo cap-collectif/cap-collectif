@@ -1,0 +1,9 @@
+MultipleChoiceQuestionValidationRule:
+    type: object
+    config:
+        description: "Multiple Choice Question Validation Rule"
+        fields:
+            type:
+                type: "String"
+            number:
+                type: "String"

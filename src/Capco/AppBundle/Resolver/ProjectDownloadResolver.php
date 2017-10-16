@@ -158,7 +158,7 @@ class ProjectDownloadResolver
 
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
-            ->getEnabledByProposalForm($collectStep->getProposalForm(), true);
+            ->getByProposalForm($collectStep->getProposalForm(), true);
 
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;

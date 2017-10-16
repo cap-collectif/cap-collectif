@@ -1,0 +1,9 @@
+ChangeProposalEvaluationInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalId:
+                type: "ID!"
+                description: "The proposal id"
+            responses:
+                type: "[ResponseInput!]!"

@@ -73,3 +73,6 @@ Query:
                     id:
                         type: "Int!"
                 resolve: "@=resolver('query_question', [args])"
+            availableQuestionnaires:
+                type: "[Question!]"
+                resolve: "@=resolver('query_get_available_questionnaires')"

@@ -1,0 +1,13 @@
+QuestionChoice:
+    type: object
+    config:
+        description: "A possible choice of a question"
+        fields:
+            id:
+                type: "ID!"
+            title:
+                type: "String!"
+            description:
+                type: "String"
+            color:
+                type: "String"

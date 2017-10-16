@@ -63,3 +63,31 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion7'
     position: 6
+  qaq17:
+    questionnaire: '@questionnaire4'
+    question: '@simplequestion8'
+    position: 1
+  qaq18:
+    questionnaire: '@questionnaire4'
+    question: '@simplequestion9'
+    position: 2
+  qaq19:
+    questionnaire: '@questionnaire4'
+    question: '@multiplequestion8'
+    position: 3
+  qaq20:
+    questionnaire: '@questionnaire5'
+    question: '@simplequestion10'
+    position: 1
+  qaq21:
+    questionnaire: '@questionnaire4'
+    question: '@multiplequestion9'
+    position: 4
+  qaq22:
+    questionnaire: '@questionnaire4'
+    question: '@multiplequestion10'
+    position: 5
+  qaq23:
+    questionnaire: '@questionnaire4'
+    question: '@multiplequestion11'
+    position: 6

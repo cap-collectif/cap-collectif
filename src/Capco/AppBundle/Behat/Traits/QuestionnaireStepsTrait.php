@@ -76,7 +76,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->selectOption('reply-12', 'Pas assez fort (Mon sonotone est en panne)');
+        $this->selectOption('reply-15', 'Pas assez fort (Mon sonotone est en panne)');
     }
 
     /**
@@ -87,8 +87,8 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
-        $this->checkOption('reply-10_choice-questionchoice1');
-        $this->checkOption('reply-10_choice-questionchoice3');
+        $this->checkOption('reply-13_choice-questionchoice1');
+        $this->checkOption('reply-13_choice-questionchoice3');
     }
 
     /**
@@ -305,9 +305,9 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField('reply-2', 'Je pense que c\'est la ville parfaite pour organiser les JO');
-            $this->checkOption('reply-10_choice-questionchoice1');
-            $this->checkOption('reply-10_choice-questionchoice2');
-            $this->checkOption('reply-10_choice-questionchoice3');
+            $this->checkOption('reply-13_choice-questionchoice1');
+            $this->checkOption('reply-13_choice-questionchoice2');
+            $this->checkOption('reply-13_choice-questionchoice3');
 
             return;
         }
