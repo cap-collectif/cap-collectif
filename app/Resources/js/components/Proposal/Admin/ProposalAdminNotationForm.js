@@ -188,8 +188,6 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
     const { invalid, pristine, handleSubmit, submitting, proposal, initialValues } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
-    console.log(proposal);
-
     return (
       <div className="box box-primary container">
         <div className="box-header">
