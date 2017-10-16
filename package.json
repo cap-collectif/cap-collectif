@@ -13,6 +13,9 @@
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.graphql",
     "build-relay-schema:watch": "relay-compiler --watch --src ./app/Resources/js --schema schema.graphql",
+    "download-translations": "bin/console translation:download",
+    "update-js-translation": "babel-node ./xlf2-to-json.js",
+    "trad": "yarn run download-translations && yarn run update-js-translation",
     "dump-graphql-schema": "bin/console graphql:dump-schema --file schema.graphql --format graphqls",
     "relay": "yarn run dump-graphql-schema && yarn run build-relay-schema",
     "relay:watch": "yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
@@ -163,7 +166,8 @@
     "sass-brunch": "https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e",
     "uglify-js-brunch": "^2.10.0",
     "webpack": "^1.13.2",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "xml2json": "^0.11.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

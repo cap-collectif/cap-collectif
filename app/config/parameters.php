@@ -32,7 +32,7 @@ setOverridableParameter($container, 'mailer_password', null, 'SYMFONY_MAILER_PAS
 setOverridableParameter($container, 'mailer_host', 'mailcatchersmtp', 'SYMFONY_MAILER_HOST');
 setOverridableParameter($container, 'mailer_port', 25, 'SYMFONY_MAILER_PORT');
 
-setOverridableParameter($container, 'locale', 'fr', 'SYMFONY_LOCALE');
+setOverridableParameter($container, 'locale', 'fr-FR', 'SYMFONY_LOCALE');
 setOverridableParameter($container, 'secret', '***REMOVED***', 'SYMFONY_SECRET');
 setOverridableParameter($container, 'use_assetic_controller', true, 'SYMFONY_USE_ASSETIC_CONTROLLER');
 
@@ -66,6 +66,7 @@ setOverridableParameter($container, 'disable_mail_delivery', 'false', 'SYMFONY_D
 $container->setParameter('sonata.media.thumbnail.liip_imagine', 'Capco\MediaBundle\Thumbnail\LiipImagineThumbnail');
 $container->setParameter('google_maps_key', '***REMOVED***');
 $container->setParameter('loco_key', '5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII');
+$container->setParameter('locales', ["en-GB", "fr-FR", "es-ES"]);
 
 // This key is used for server to server call
 // There are a restriction on IP

@@ -8,6 +8,9 @@
 /web/uploads/*
 /web/export/*
 
+!translations/README.md
+translations/*
+
 coverage/
 
 /var

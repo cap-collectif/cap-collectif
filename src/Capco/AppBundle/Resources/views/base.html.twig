@@ -33,10 +33,11 @@
     {{ parent() }}
     <script type="text/javascript">
         require('Resources/js/modernizr');
-        // remove when Piechart is rendered by VotePiechart component everywhere
+        {# remove when Piechart is rendered by VotePiechart component everywhere #}
         require('Resources/js/jsapi');
         require('Resources/js/googleCharts');
-        // ...
+        window.locale = "{{ intl_locale() }}";
+
         var cookieChoices = require('Resources/js/cookiechoices').default;
         var App = require('Resources/js/app').default;
         if (!Modernizr.intl) {
@@ -65,5 +66,5 @@
     {% if null != client_js %}
         {{ client_js|raw }}
     {% endif %}
-    
+
 {% endblock %}

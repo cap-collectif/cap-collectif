@@ -19,6 +19,7 @@ if [ "$PRODUCTION" ]; then
   echo "Building node-sass binding for the container..."
   npm rebuild node-sass > /dev/null
 
+  yarn run trad
   yarn run build:prod
 
   # Server side rendering deps
@@ -43,6 +44,7 @@ else
       npm rebuild node-sass > /dev/null
   fi
   echo "Binding ready!"
+  yarn run trad
   yarn run build
 
   # Server side rendering deps

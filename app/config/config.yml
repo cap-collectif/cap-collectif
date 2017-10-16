@@ -32,7 +32,7 @@ framework:
     translator:
         paths:
             - '%kernel.root_dir%/../translations'
-        fallback: fr
+        fallback: fr-FR
 
 twig:
     debug: "%kernel.debug%"
@@ -57,11 +57,11 @@ translation_adapter_loco:
       domains: ['CapcoAppBundle', 'validators']
 
 translation:
-  locales: ["en-GB", "fr-FR", "es-ES"]
+  locales: "%locales%"
   configs:
     app:
       dirs: ["%kernel.root_dir%/../src"] # not used
-      output_dir: "translations"
+      output_dir: "%kernel.root_dir%/../translations"
       remote_storage: ["php_translation.adapter.loco"]
       excluded_names: ["*TestCase.php", "*Test.php"]
       excluded_dirs: [cache, data, logs]
@@ -162,7 +162,7 @@ swiftmailer:
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:
-    default_locale: fr_FR
+    default_locale: "%locale%"
     orm:
         default:
             timestampable: true
@@ -173,7 +173,7 @@ stof_doctrine_extensions:
             tree: true
 
 hautelook_alice:
-    locale: fr_FR
+    locale: "%locale%"
     loading_limit: 1
 
 fos_user:

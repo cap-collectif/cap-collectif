@@ -3,6 +3,8 @@ import 'moment/locale/fr';
 import ReactOnRails from 'react-on-rails';
 import { addLocaleData } from 'react-intl';
 import frLocaleData from 'react-intl/locale-data/fr';
+import enLocaleData from 'react-intl/locale-data/en';
+import esLocaleData from 'react-intl/locale-data/es';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
@@ -40,14 +42,25 @@ import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
 import appStore from '../js/stores/AppStore';
 
-addLocaleData(frLocaleData);
-if ('ReactIntlLocaleData' in window) {
-  Object.keys(ReactIntlLocaleData).forEach(lang => {
-    addLocaleData(ReactIntlLocaleData[lang]);
-  });
+const locale = window.locale;
+if (locale === 'fr-FR') {
+  addLocaleData(frLocaleData);
+  moment.locale('fr-FR');
 }
+if (locale === 'en-GB') {
+  addLocaleData(enLocaleData);
+  moment.locale('en-GB');
+}
+if (locale === 'es') {
+  addLocaleData(esLocaleData);
+  moment.locale('es-ES');
+}
+// if ('ReactIntlLocaleData' in window) {
+//   Object.keys(ReactIntlLocaleData).forEach(lang => {
+//     addLocaleData(ReactIntlLocaleData[lang]);
+//   });
+// }
 
-moment.locale('fr');
 window.__SERVER__ = false;
 
 ReactOnRails.registerStore({ appStore });
