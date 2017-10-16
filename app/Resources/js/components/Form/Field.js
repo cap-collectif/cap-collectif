@@ -31,22 +31,16 @@ const Field = React.createClass({
       'radio-buttons',
       'image',
       'medias',
-      'ranking',
-      'radio',
-      'button',
     ]).isRequired,
     addonAfter: PropTypes.any,
     addonBefore: PropTypes.any,
     label: PropTypes.any,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
-    isOtherAllowed: PropTypes.bool,
     image: PropTypes.string,
     children: PropTypes.any,
     id: PropTypes.string.isRequired,
     popover: PropTypes.object,
-    choices: PropTypes.array,
-    checkedValue: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
@@ -74,9 +68,6 @@ const Field = React.createClass({
       formName,
       addonAfter,
       addonBefore,
-      choices,
-      checkedValue,
-      isOtherAllowed,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -91,7 +82,6 @@ const Field = React.createClass({
         popover={popover}
         addonAfter={addonAfter}
         addonBefore={addonBefore}
-        isOtherAllowed={isOtherAllowed}
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
@@ -101,8 +91,6 @@ const Field = React.createClass({
         hasFeedback={check}
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
-        choices={choices}
-        checkedValue={checkedValue}
         {...this.props.input}>
         {children}
       </Input>

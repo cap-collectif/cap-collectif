@@ -141,8 +141,8 @@ class ProposalForm
     private $usingDistrict = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist"}, inversedBy="proposalForm")
-     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
+     * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=true)
      */
     private $notificationsConfiguration;
 
@@ -170,12 +170,6 @@ class ProposalForm
      * @ORM\Column(name="lng_map", nullable=true, type="float")
      */
     private $lngMap;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
-     * @ORM\JoinColumn(name="evaluation_form_id", nullable=true)
-     */
-    private $evaluationForm;
 
     /**
      * Constructor.
@@ -600,7 +594,7 @@ class ProposalForm
         return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
     }
 
-    public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
+    public function getNotificationsConfiguration()
     {
         return $this->notificationsConfiguration;
     }
@@ -684,18 +678,6 @@ class ProposalForm
     public function setIllustrationHelpText(string $illustrationHelpText = null): self
     {
         $this->illustrationHelpText = $illustrationHelpText;
-
-        return $this;
-    }
-
-    public function getEvaluationForm()
-    {
-        return $this->evaluationForm;
-    }
-
-    public function setEvaluationForm($evaluationForm): self
-    {
-        $this->evaluationForm = $evaluationForm;
 
         return $this;
     }

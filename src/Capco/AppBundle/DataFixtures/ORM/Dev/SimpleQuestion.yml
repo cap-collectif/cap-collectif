@@ -39,18 +39,3 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: Champ facultatif
     required: false
     type: 0
-  simplequestion8:
-    id: 8
-    title: Évaluer la proposition
-    required: true
-    type: 0 # one line text
-  simplequestion9:
-    id: 9
-    title: Donnez plus d'informations sur l'évaluation
-    required: false
-    type: 1 # Textarea
-  simplequestion10:
-    id: 10
-    title: Un peu d'informations s'il vous plaît !
-    required: true
-    type: 0

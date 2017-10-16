@@ -72,6 +72,3 @@ Proposal:
             form:
                 type: "ProposalForm!"
                 description: "Identifies the form where the contribution was submitted."
-            proposalEvaluation:
-                type: "ProposalEvaluation"
-                description: "Identifies the answers to an evaluation form."

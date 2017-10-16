@@ -21,7 +21,6 @@ Capco\AppBundle\Entity\ProposalForm:
     latMap: 48.1159675
     lngMap: -1.7234738
     reference: 1
-    evaluationForm: "@questionnaire4"
   proposalform2:
     id: proposalForm2
     title: Formulaire de la collecte 2

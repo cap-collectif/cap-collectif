@@ -10,19 +10,9 @@ describe('<ProposalAdminNewsForm />', () => {
       news: [{ id: '1', title: 'news-1' }],
     },
   };
-  const props2 = {
-    proposal: {
-      news: [],
-    },
-  };
 
   it('render correctly', () => {
     const wrapper = shallow(<ProposalAdminNewsForm {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('render correctly when there are no news', () => {
-    const wrapper = shallow(<ProposalAdminNewsForm {...props2} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

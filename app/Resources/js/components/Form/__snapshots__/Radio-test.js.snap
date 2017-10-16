@@ -174,7 +174,6 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
           "type": "radio",
         }
       }
-      isReduxForm={false}
       onChange={[Function]}
     />
   </ReactRadioGroup>
