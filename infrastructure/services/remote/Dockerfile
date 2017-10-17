@@ -175,6 +175,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install Supervisor
+RUN apt-get update && \
+    apt-get install -y supervisor && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco

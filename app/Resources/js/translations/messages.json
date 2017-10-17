@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "alert.danger.add.argument": "Toutes nos excuses, un problème est survenu lors de la création de l'argument. Réessayez plus tard.",
     "alert.danger.add.idea": "Toutes nos excuses, un problème est survenu lors de la création de l'idée. Réessayez plus tard.",
     "alert.danger.add.source": "Toutes nos excuses, un problème est survenu lors de l'ajout de la source. Réessayez plus tard.",
@@ -589,8 +588,7 @@
     "proposal_form.help_text": "Texte d'aide",
     "proposal_form.introduction": "Introduction",
     "proposal_form.admin.activity": "Activité",
-      "proposal_form.admin.configuration": "Configuration",
-=======
+    "proposal_form.admin.configuration": "Configuration",
   "alert.danger.add.argument": "Toutes nos excuses, un problème est survenu lors de la création de l'argument. Réessayez plus tard.",
   "alert.danger.add.idea": "Toutes nos excuses, un problème est survenu lors de la création de l'idée. Réessayez plus tard.",
   "alert.danger.add.source": "Toutes nos excuses, un problème est survenu lors de l'ajout de la source. Réessayez plus tard.",
@@ -1177,14 +1175,12 @@
   "proposal_form.introduction": "Introduction",
   "proposal_form.admin.activity": "Activité",
   "proposal_form.admin.configuration": "Configuration",
->>>>>>> Changed GraphQL schema and added new fields to FormNotifConfiguration
     "proposal_form.admin.configuration.form": "Formulaire",
     "proposal_form.admin.configuration.permanent_field": "Champs permanents",
     "proposal_form.admin.configuration.optional_field": "Champs optionnels",
     "proposal_form.admin.configuration.custom_field": "Champs personnalisés",
     "proposal_form.admin.configuration.district_list": "Liste des zones géographiques",
     "proposal_form.admin.configuration.categories_list": "Liste des catégories",
-<<<<<<< HEAD
     "proposal_form.admin.notification": "Notification",
     "proposal_form.admin.settings": "Paramètres",
     "proposal_form.admin.reference": "Référence",
@@ -1363,8 +1359,7 @@
     "login.google": "Se connecter via Google",
     "login.saml": "Se connecter via SAML",
     "login.or": "OU",
-    "evaluation_form.constraints.medias": "Les documents ne sont pas supportés sur les évaluations."
-=======
+    "evaluation_form.constraints.medias": "Les documents ne sont pas supportés sur les évaluations.",
   "proposal_form.admin.notification": "Notification",
   "proposal_form.admin.settings": "Paramètres",
   "proposal_form.admin.reference": "Référence",
@@ -1542,5 +1537,4 @@
   "login.google": "Se connecter via Google",
   "login.saml": "Se connecter via SAML",
   "login.or": "OU"
->>>>>>> Changed GraphQL schema and added new fields to FormNotifConfiguration
 }
