@@ -29,7 +29,7 @@ const NavbarRight = React.createClass({
   render() {
     const { user, features } = this.props;
     return (
-      <Nav pullRight style={{ marginRight: 0 }}>
+      <Nav pullRight>
         {features.search && (
           <NavItem eventKey={1} className="navbar__search" href="/search">
             <i className="cap cap-magnifier" />{' '}
@@ -71,7 +71,7 @@ const NavbarRight = React.createClass({
             </MenuItem>
           </NavDropdown>
         ) : (
-          <li style={{ paddingLeft: 15, paddingRight: 15 }}>
+          <li>
             <RegistrationButton className="navbar-btn" />{' '}
             <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
           </li>

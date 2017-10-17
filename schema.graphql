@@ -400,9 +400,6 @@ type NotificationsConfiguration {
   onCreate: Boolean!
   onUpdate: Boolean!
   onDelete: Boolean!
-  onCommentCreate: Boolean!
-  onCommentUpdate: Boolean!
-  onCommentDelete: Boolean!
 }
 
 # A contribution
@@ -1159,9 +1156,6 @@ input UpdateProposalFormNotificationsConfigurationInput {
   onCreate: Boolean!
   onUpdate: Boolean!
   onDelete: Boolean!
-  onCommentCreate: Boolean!
-  onCommentUpdate: Boolean!
-  onCommentDelete: Boolean!
   clientMutationId: String
 }
 

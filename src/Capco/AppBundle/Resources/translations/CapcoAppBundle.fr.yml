@@ -716,67 +716,25 @@ moderation:
 notification:
   email:
     admin_footer: |
-      <p>Vous recevez ce courriel à <a href="mailto:%to%">%to%</a> parce que vous êtes inscrit sur <a href="%siteUrl%">%sitename%</a></p>
-      <p>Ce message vous a été adressé automatiquement par %sitename% via <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
+      <p>Vous recevez ce courriel car votre adresse email est configurée dans la section Notification de l'administration du site %sitename%.</p>
+      <p>Ce message vous a été adressé automatiquement par <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
     proposal:
       create:
-          subject: "%sitename% — %username% a publié une proposition sur %project%"
+          subject: "%sitename% — Une proposition a été déposée sur %project%"
           body: |
-            <p><a href="%userUrl%">%username%</a> a publié la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Résumé</h2>
-            <p>%proposalExcerpt%</p>
-            <p><a href="%proposalUrl%">Afficher la proposition sur le site</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de publier une proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
       update:
-          subject: "%sitename% — %username% a modifié une proposition sur %project%"
+          subject: "%sitename% — Une proposition a été modifiée sur %project%"
           body: |
-            <p><a href="%userUrl%">%username%</a> a modifié la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Résumé</h2>
-            <p>%proposalExcerpt%</p>
-            <p><a href="%proposalUrl%">Afficher la proposition sur le site</a> | <a href="%proposalUrlBack%">dans l'administration</a></p>
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de modifier la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
       delete:
-          subject: "%sitename% — %username% a supprimé une proposition sur %project%"
+          subject: "%sitename% — Une proposition a été supprimée sur %project%"
           body: |
-              <p><a href="%userUrl%">%username%</a> a supprimé la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-    comment:
-      create:
-          subject: "%sitename% — %username% a publié un commentaire sur une proposition"
-          body: |
-            <p><a href="%userUrl%">%username%</a> a publié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Commentaire</h2>
-            <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
-      update:
-          subject: "%sitename% — %username% a modifié un commentaire sur une proposition"
-          body: |
-            <p><a href="%userUrl%">%username%</a> a modifié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Commentaire</h2>
-            <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
-      delete:
-          subject: "%sitename% — %username% a supprimé un commentaire sur une proposition"
-          body: |
-            <p><a href="%userUrl%">%username%</a> a supprimé un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a></p>
-            <h2>Commentaire</h2>
-            <p>%comment%</p>
-    anonymous_comment:
-      create:
-          subject: "%sitename% — %username% a publié un commentaire sur une proposition"
-          body: |
-            <p>%username% a publié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Commentaire</h2>
-            <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
-      update:
-          subject: "%sitename% — %username% a modifié un commentaire sur une proposition"
-          body: |
-            <p>%username% a modifié un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a> le %date%, à %time%</p>
-            <h2>Commentaire</h2>
-            <p>%comment%</p>
-            <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a> | <a href="%commentUrlBack%">dans l'administration</a></p>
-      delete:
-          subject: "%sitename% — %username% a supprimé un commentaire sur une proposition"
-          body: |
-            <p>%username% a supprimé un commentaire sur la proposition <a href="%proposalUrl%">%proposal%</a></p>
+            <p>Bonjour,</p>
+            <p>L'utilisateur <a href="%userUrl%">%username%</a> vient de supprimer la proposition <a href="%proposalUrl%">%proposal%</a> sur le projet %project%.</p>
+
 proposal_status_change_collect:
   notification:
     subject: Le statut de votre proposition vient d’être mis à jour sur %sitename%.

@@ -4,7 +4,6 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
     description: <p><text(100)></p>
     step: "@collectstep1"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration1"
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -28,14 +27,12 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Formulaire de la collecte 2
     description: <text(100)>
     step: "@collectstep2"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration2"
     reference: 2
   proposalform3:
     id: proposalForm3
     title: Formulaire de la collecte 3
     description: <text(100)>
     step: "@collectstep3"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration3"
     usingCategories: true
     usingThemes: true
     usingDistrict: true
@@ -45,26 +42,22 @@ Capco\AppBundle\Entity\ProposalForm:
     title: Formulaire de la collecte 4
     description: <text(100)>
     step: "@collectstep4"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration4"
     reference: 4
   proposalform5:
     id: proposalForm5
     title: Formulaire de la collecte 5
     description: <text(100)>
     step: "@collectstep5"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration5"
     reference: 5
   proposalform6:
     id: proposalForm6
     title: Formulaire du dépôt fermé
     description: <text(100)>
     step: "@collectstep6"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration6"
     reference: 6
   proposalform7:
     id: proposalForm7
     title: Formulaire de la collecte 7
     description: <text(100)>
     step: "@collectstep7"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration7"
     reference: 7
