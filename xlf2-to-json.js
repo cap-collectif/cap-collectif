@@ -1,7 +1,7 @@
 import parser from 'xml2json';
 import fs from 'fs';
 
-for (const locale of ['fr-FR', 'es-SP', 'en-GB']) {
+for (const locale of ['fr-FR', /*'es-SP',*/ 'en-GB']) {
   const xml = fs.readFileSync(`translations/CapcoAppBundle.${locale}.xlf`, 'utf8');
   const json = JSON.parse(parser.toJson(xml));
 

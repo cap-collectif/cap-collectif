@@ -8,8 +8,8 @@
 /web/uploads/*
 /web/export/*
 
-!translations/README.md
 translations/*
+!translations/README.md
 
 coverage/
 
