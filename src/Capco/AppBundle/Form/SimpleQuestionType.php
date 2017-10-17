@@ -28,8 +28,7 @@ class SimpleQuestionType extends AbstractType
             function ($typeAsString) {
                 return array_search($typeAsString, AbstractQuestion::$questionTypesInputs, true);
             }
-        ))
-        ;
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

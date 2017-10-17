@@ -63,7 +63,8 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             id={`${member}.kind`}
             name={`${member}.kind`}
             type="select"
-            component={component}>
+            component={component}
+            disabled={isCreating}>
             <option value="" disabled>
               Sélectionner un type
             </option>
@@ -79,6 +80,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             type="select"
             style={{ display: kind === 'simple' ? 'inline' : 'none' }}
             component={component}
+            disabled={isCreating}
             normalize={value => {
               return kind === 'medias' ? 'media' : value;
             }}>

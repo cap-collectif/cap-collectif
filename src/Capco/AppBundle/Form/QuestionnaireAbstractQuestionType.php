@@ -14,15 +14,16 @@ class QuestionnaireAbstractQuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('position', IntegerType::class)
-            ->add('question')
-        ;
+        $builder->add('position', IntegerType::class);
+        $builder->add('question');
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $form = $event->getForm();
+            if (!$data = $event->getData()) {
+                return;
+            }
 
-            $form->add('question', $form['question']['type'] === 'medias' ? MediaQuestionType::class : SimpleQuestionType::class);
+            $event->getForm()
+                ->add('question', 7 === (int) $data->getQuestion()->getType() ? MediaQuestionType::class : SimpleQuestionType::class);
         });
     }
 

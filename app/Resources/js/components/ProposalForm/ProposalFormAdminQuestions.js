@@ -57,7 +57,9 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                     <strong>{questions[index].title}</strong>
                     <br />
                     <span className="excerpt">
-                      <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
+                      {questions[index].type && (
+                        <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
+                      )}
                     </span>
                   </div>
                 </Col>
