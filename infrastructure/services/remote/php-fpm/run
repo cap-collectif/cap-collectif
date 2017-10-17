@@ -89,9 +89,6 @@ EOF
 echo "Updating rabbitmq vhost to match schema..."
 su capco -c "php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml"
 
-echo "Starting daemon to start rabbitmq consumers..."
-/etc/service/php-fpm/start_rabbitmq_consumers &
-
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 
