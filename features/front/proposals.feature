@@ -173,6 +173,23 @@ Scenario: Author of a proposal wants to delete it
   Then there should be 5 proposals
   And I should not see my proposal anymore
 
+@javascript @database
+Scenario: Admin should be notified when an user deletes his proposal on an notifiable proposal
+  Given I am logged in as user
+  And I go to a proposal which is notifiable
+  When I click the delete proposal button
+  And I confirm proposal deletion
+  Then 1 mails should be sent
+  And I should see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
+
+@javascript @database
+Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
+  Given I am logged in as user
+  And I go to a proposal which is not notifiable
+  When I click the delete proposal button
+  And I confirm proposal deletion
+  Then 0 mails should be sent
+
 @javascript
 Scenario: Non author of a proposal wants to delete it
   Given I am logged in as admin

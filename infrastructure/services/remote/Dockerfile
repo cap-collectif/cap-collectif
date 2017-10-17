@@ -175,6 +175,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install Supervisor
+RUN apt-get update && \
+    apt-get install -y supervisor && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
     adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
@@ -192,25 +198,26 @@ COPY elasticsearch/run          /etc/service/elasticsearch/run
 COPY varnish/run                /etc/service/varnish/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY nodejs/run                 /etc/service/nodejs/run
+COPY supervisord/run            /etc/service/supervisord/run
 
 # Configuration
-COPY mysql/capco.cnf            /etc/mysql/conf.d/capco.cnf
-COPY nginx/nginx.conf           /etc/nginx/nginx.conf
-COPY php-fpm/fpm.conf           /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
-COPY cron/crontab               /etc/cron.d/crontab
-COPY elasticsearch/capco.yml    /etc/elasticsearch/config/elasticsearch.yml
-COPY varnish/capco.vcl          /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs   /etc/logrotate.d/mysql-slow-logs
+COPY mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
+COPY nginx/nginx.conf               /etc/nginx/nginx.conf
+COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
+COPY php-fpm/capco.ini              /etc/php/7.0/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.0/cli/conf.d/capco.ini
+COPY cron/crontab                   /etc/cron.d/crontab
+COPY elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
+COPY varnish/capco.vcl              /etc/varnish/capco.vcl
+COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
+COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
+COPY supervisord/                   /etc/supervisord
 
 # Binaries
 COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
 
 # Daemons
 COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
-COPY php-fpm/start_rabbitmq_consumers /etc/service/php-fpm/start_rabbitmq_consumers
 
 WORKDIR /var/www
 USER root

@@ -124,6 +124,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Install Supervisor
+RUN apt-get update && \
+    apt-get install -y supervisor
+
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
@@ -136,16 +140,18 @@ COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY nodejs/run                 /etc/service/nodejs/run
+COPY supervisord/run            /etc/service/supervisord/run
 
 # Configuration
-COPY nginx/nginx.conf           /etc/nginx/nginx.conf
-COPY php-fpm/fpm.conf           /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini          /etc/php/7.0/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini          /etc/php/7.0/cli/conf.d/capco.ini
-COPY cron/crontab               /etc/cron.d/crontab
-COPY varnish/capco.vcl          /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config   /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs  /etc/logrotate.d/mysql-slow-logs
+COPY nginx/nginx.conf               /etc/nginx/nginx.conf
+COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
+COPY php-fpm/capco.ini              /etc/php/7.0/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.0/cli/conf.d/capco.ini
+COPY cron/crontab                   /etc/cron.d/crontab
+COPY varnish/capco.vcl              /etc/varnish/capco.vcl
+COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
+COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
+COPY supervisord/                   /etc/supervisord
 
 # Volume for log / cache ...
 VOLUME /var/www/var/cache
