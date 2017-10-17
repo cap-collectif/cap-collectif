@@ -289,8 +289,8 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
       !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
         ? undefined
         : props.proposal.form.evaluationForm.questions.map(field => {
-            const response = props.proposal.evaluation
-              ? props.proposal.evaluation.responses.filter(
+            const response = props.proposal.proposalEvaluation
+              ? props.proposal.proposalEvaluation.responses.filter(
                   res => res && res.question.id === field.id,
                 )[0]
               : null;
@@ -356,7 +356,7 @@ export default createFragmentContainer(
           }
         }
       }
-      evaluation {
+      proposalEvaluation {
         responses {
           question {
             id

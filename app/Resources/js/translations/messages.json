@@ -588,7 +588,7 @@
     "proposal_form.help_text": "Texte d'aide",
     "proposal_form.introduction": "Introduction",
     "proposal_form.admin.activity": "Activité",
-      "proposal_form.admin.configuration": "Configuration",
+    "proposal_form.admin.configuration": "Configuration",
     "proposal_form.admin.configuration.form": "Formulaire",
     "proposal_form.admin.configuration.permanent_field": "Champs permanents",
     "proposal_form.admin.configuration.optional_field": "Champs optionnels",

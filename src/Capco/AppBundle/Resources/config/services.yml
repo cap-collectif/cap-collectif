@@ -83,6 +83,7 @@ services:
 
   capco.comment.subscriber:
     class: Capco\AppBundle\EventListener\CommentSubscriber
+    arguments: ['@swarrot.publisher']
     tags:
       - { name: "kernel.event_subscriber" }
 

@@ -11,3 +11,9 @@ UpdateProposalFormNotificationsConfigurationInput:
               type: "Boolean!"
             onDelete:
               type: "Boolean!"
+            onCommentCreate:
+              type: "Boolean!"
+            onCommentUpdate:
+              type: "Boolean!"
+            onCommentDelete:
+              type: "Boolean!"

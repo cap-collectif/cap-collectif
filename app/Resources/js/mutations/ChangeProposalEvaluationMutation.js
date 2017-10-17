@@ -12,16 +12,6 @@ const mutation = graphql`
     changeProposalEvaluation(input: $input) {
       proposal {
         id
-        evaluation {
-          responses {
-            question {
-              id
-            }
-            ... on ValueResponse {
-              value
-            }
-          }
-        }
       }
     }
   }
