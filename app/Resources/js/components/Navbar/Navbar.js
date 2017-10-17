@@ -17,16 +17,16 @@ class Navbar extends React.Component<Props> {
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
-        {items.filter((item, index) => index < 5).map((header, index) => {
+        {items.filter((item, index) => index < 6).map((header, index) => {
           return <NavbarItem key={index} item={header} />;
         })}
-        {items.length > 5 && (
+        {items.length > 6 && (
           <NavbarItem
             item={{
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 5),
+              children: items.filter((item, index) => index >= 6),
             }}
             className="navbar-dropdown-more"
           />
@@ -36,16 +36,16 @@ class Navbar extends React.Component<Props> {
 
     const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
-        {items.filter((item, index) => index < 3).map((header, index) => {
+        {items.filter((item, index) => index < 4).map((header, index) => {
           return <NavbarItem key={index} item={header} />;
         })}
-        {items.length > 3 && (
+        {items.length > 4 && (
           <NavbarItem
             item={{
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 3),
+              children: items.filter((item, index) => index >= 4),
             }}
             className="navbar-dropdown-more"
           />
@@ -84,7 +84,7 @@ class Navbar extends React.Component<Props> {
       <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
-            <div className="container">
+            <div>
               <ul className="skip-links-list clearfix">
                 <li>
                   <a href="#navbar">
@@ -100,7 +100,7 @@ class Navbar extends React.Component<Props> {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div>
           <Navigation.Header>
             {logo && (
               <Navigation.Brand href="/" id="home">
