@@ -18,15 +18,6 @@ swarrot:
         proposal.delete:
             exchange: capco_direct_exchange
             routing_key: proposal_delete
-        comment.create:
-            exchange: capco_direct_exchange
-            routing_key: comment_create
-        comment.update:
-            exchange: capco_direct_exchange
-            routing_key: comment_update
-        comment.delete:
-            exchange: capco_direct_exchange
-            routing_key: comment_delete
     consumers:
         proposal_create:
             processor: proposal_create.processor
@@ -80,81 +71,6 @@ swarrot:
                  #       new_relic_transaction_name: ~
         proposal_delete:
             processor: proposal_delete.processor
-            middleware_stack:
-                 - configurator: swarrot.processor.signal_handler
-                 - configurator: swarrot.processor.max_messages
-                   extras:
-                       max_messages: 100
-                 - configurator: swarrot.processor.max_execution_time
-                   extras:
-                       max_execution_time: 300
-                 - configurator: swarrot.processor.memory_limit
-                   extras:
-                       memory_limit: null
-                 - configurator: swarrot.processor.doctrine_connection
-                 - configurator: swarrot.processor.doctrine_object_manager
-                 - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
-                 - configurator: swarrot.processor.retry
-                 #  - configurator: swarrot.processor.new_relic
-                 #   extras:
-                 #       new_relic_app_name: ~
-                 #       new_relic_license: ~
-                 #       new_relic_transaction_name: ~
-        comment_create:
-            processor: comment_create.processor
-            middleware_stack:
-                 - configurator: swarrot.processor.signal_handler
-                 - configurator: swarrot.processor.max_messages
-                   extras:
-                       max_messages: 100
-                 - configurator: swarrot.processor.max_execution_time
-                   extras:
-                       max_execution_time: 300
-                 - configurator: swarrot.processor.memory_limit
-                   extras:
-                       memory_limit: null
-                 - configurator: swarrot.processor.doctrine_connection
-                 - configurator: swarrot.processor.doctrine_object_manager
-                 - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
-                 - configurator: swarrot.processor.retry
-                 #  - configurator: swarrot.processor.new_relic
-                 #   extras:
-                 #       new_relic_app_name: ~
-                 #       new_relic_license: ~
-                 #       new_relic_transaction_name: ~
-        comment_update:
-            processor: comment_update.processor
-            middleware_stack:
-                 - configurator: swarrot.processor.signal_handler
-                 - configurator: swarrot.processor.max_messages
-                   extras:
-                       max_messages: 100
-                 - configurator: swarrot.processor.max_execution_time
-                   extras:
-                       max_execution_time: 300
-                 - configurator: swarrot.processor.memory_limit
-                   extras:
-                       memory_limit: null
-                 - configurator: swarrot.processor.doctrine_connection
-                 - configurator: swarrot.processor.doctrine_object_manager
-                 - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
-                 - configurator: swarrot.processor.retry
-                 #  - configurator: swarrot.processor.new_relic
-                 #   extras:
-                 #       new_relic_app_name: ~
-                 #       new_relic_license: ~
-                 #       new_relic_transaction_name: ~
-        comment_delete:
-            processor: comment_delete.processor
             middleware_stack:
                  - configurator: swarrot.processor.signal_handler
                  - configurator: swarrot.processor.max_messages

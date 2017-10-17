@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Traits\IdTrait;
@@ -16,7 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Response.
  *
- * @ORM\Table(name="response")
+ * @ORM\Table(name="response", uniqueConstraints={
+ *    @ORM\UniqueConstraint(columns={ "question_id", "evaluation_id"}),
+ * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractResponseRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasRequiredNumberOfChoices()
@@ -164,7 +167,7 @@ abstract class AbstractResponse
         return $this->proposalEvaluation;
     }
 
-    public function setProposalEvaluation($proposalEvaluation): self
+    public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation = null): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
 

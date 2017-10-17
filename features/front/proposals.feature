@@ -106,7 +106,7 @@ Scenario: Logged in user wants to create a proposal
   When I click the create proposal button
   And I fill the proposal form
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal_custom-8_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal_custom-11_field"
   And I submit the create proposal form
   Then I wait 3 seconds
   And I should see my new proposal
@@ -172,23 +172,6 @@ Scenario: Author of a proposal wants to delete it
   And I confirm proposal deletion
   Then there should be 5 proposals
   And I should not see my proposal anymore
-
-@javascript @database
-Scenario: Admin should be notified when an user deletes his proposal on an notifiable proposal
-  Given I am logged in as user
-  And I go to a proposal which is notifiable
-  When I click the delete proposal button
-  And I confirm proposal deletion
-  Then 1 mails should be sent
-  And I should see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
-
-@javascript @database
-Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
-  Given I am logged in as user
-  And I go to a proposal which is not notifiable
-  When I click the delete proposal button
-  And I confirm proposal deletion
-  Then 0 mails should be sent
 
 @javascript
 Scenario: Non author of a proposal wants to delete it

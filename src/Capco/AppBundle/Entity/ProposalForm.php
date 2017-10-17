@@ -600,21 +600,6 @@ class ProposalForm
         return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
     }
 
-    public function isNotifyingCommentOnCreate(): bool
-    {
-           return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentCreate();
-    }
-
-    public function isNotifyingCommentOnUpdate(): bool
-    {
-           return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentUpdate();
-    }
-
-    public function isNotifyingCommentOnDelete(): bool
-    {
-      return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentDelete();
-    }
-
     public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
     {
         return $this->notificationsConfiguration;
@@ -708,7 +693,7 @@ class ProposalForm
         return $this->evaluationForm;
     }
 
-    public function setEvaluationForm($evaluationForm): self
+    public function setEvaluationForm(Questionnaire $evaluationForm = null): self
     {
         $this->evaluationForm = $evaluationForm;
 

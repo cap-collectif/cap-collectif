@@ -19,6 +19,7 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-fermee',
     ];
+
     protected static $selectionStepOpenParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'selection',
@@ -50,26 +51,6 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
-    ];
-    protected static $proposalCommentNotNotifiable = [
-        'projectSlug' => 'appel-a-projets',
-        'stepSlug' => 'collecte-des-propositions-avec-vote-simple',
-        'proposalSlug' => 'mon-super-projet',
-    ];
-    protected static $proposalCommentNotifiable = [
-        'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
-    ];
-    protected static $proposalNotifiable = [
-        'projectSlug' => 'budget-participatif-rennes',
-        'stepSlug' => 'collecte-des-propositions',
-        'proposalSlug' => 'renovation-du-gymnase',
-    ];
-    protected static $proposalNotNotifiable = [
-        'projectSlug' => 'budget-avec-vote-limitte',
-        'stepSlug' => 'collecte-avec-vote-simple-limite',
-        'proposalSlug' => 'proposition-17',
     ];
     protected static $proposalWithBudgetVoteParams = [
         'projectSlug' => 'depot-avec-selection-vote-budget',
@@ -134,38 +115,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a proposal which is comment notifiable
-     */
-    public function iGoToACommentNotifiableProposal()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
-    }
-
-    /**
-     * @When I go to a proposal which is not comment notifiable
-     */
-    public function iGoToAProposalNotCommentNotifiable()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
-    }
-
-    /**
-     * @When I go to a proposal which is notifiable
-     */
-    public function iGoToANotifiableProposal()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNotifiable);
-    }
-
-    /**
-     * @When I go to a proposal which is not notifiable
-     */
-    public function iGoToANotNotifiableProposal()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
-    }
-
-    /**
      * @When I go to a proposal not yet votable
      */
     public function iGoToAProposalNotYetVotable()
@@ -183,8 +132,6 @@ trait ProposalStepsTrait
 
     /**
      * @Then there should be :nb proposals
-     *
-     * @param int $nb
      */
     public function thereShouldBeNbProposals(int $nb)
     {
@@ -345,30 +292,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I comment :body
-     *
-     * @param string $body
-     */
-    public function iComment(string $body)
-    {
-        $this->fillComment($body);
-        $this->iSubmitTheCommentForm();
-    }
-
-    /**
-     * @When I anonymously comment :body as :name with address :email
-     *
-     * @param string $body
-     * @param string $name
-     * @param string $email
-     */
-    public function iAnonymouslyComment(string $body, string $name, string $email)
-    {
-        $this->fillAnonymousComment($body, $name, $email);
-        $this->iSubmitTheCommentForm();
-    }
-
-    /**
      * @When I fill the proposal form with a theme
      */
     public function iFillTheProposalFormWithATheme()
@@ -390,15 +313,6 @@ trait ProposalStepsTrait
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
-        $this->iWait(5);
-    }
-
-    /**
-     * @When I submit the comment form
-     */
-    public function iSubmitTheCommentForm()
-    {
-        $this->navigationContext->getPage('proposal page')->submitCommentForm();
         $this->iWait(5);
     }
 
@@ -434,25 +348,6 @@ trait ProposalStepsTrait
     public function iClickTheEditProposalButton()
     {
         $this->navigationContext->getPage('proposal page')->clickEditProposalButton();
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I click the edit comment button
-     */
-    public function iClickTheEditCommentButton()
-    {
-        $this->navigationContext->getPage('proposal page')->clickEditCommentButton();
-    }
-
-    /**
-     * @When I fill and submit the edit comment form with :body
-     *
-     * @param string $body
-     */
-    public function iFillTheEditCommentForm(string $body)
-    {
-        $this->navigationContext->getPage('edit comment page')->fillEditForm($body);
         $this->iWait(1);
     }
 
@@ -1101,18 +996,6 @@ trait ProposalStepsTrait
         $this->iWait(1);
         $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
         $this->iWait(1);
-    }
-
-    protected function fillComment($body)
-    {
-        $this->fillField('body', $body);
-    }
-
-    protected function fillAnonymousComment($body, $name, $email)
-    {
-        $this->fillField('body', $body);
-        $this->fillField('authorName', $name);
-        $this->fillField('authorEmail', $email);
     }
 
     protected function votesDetailsPageIsOpen()

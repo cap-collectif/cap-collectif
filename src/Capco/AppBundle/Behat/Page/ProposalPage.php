@@ -26,8 +26,6 @@ class ProposalPage extends Page
         'confirm delete proposal button' => '#confirm-proposal-delete',
         'confirm edit proposal button' => '#confirm-proposal-edit',
         'report proposal button' => '.proposal__btn--report',
-        'comment button' => 'button.btn--comment',
-        'edit comment button' => '.comment__buttons a[href*="/edit"]',
         'proposal buttons' => '.proposal__content .proposal__buttons',
         'share button' => '#proposal-share-button',
         'votes tab' => '#proposal-page-tabs-tab-votes',
@@ -37,11 +35,6 @@ class ProposalPage extends Page
     public function getVoteButtonSelector($id)
     {
         return $this->getSelector('proposal vote form submit button');
-    }
-
-    public function getCommentButton()
-    {
-        return $this->getElement('comment button');
     }
 
     public function getVotesCounter()
@@ -92,12 +85,6 @@ class ProposalPage extends Page
         // }
     }
 
-    public function submitCommentForm()
-    {
-        $button = $this->getCommentButton();
-        $button->click();
-    }
-
     public function getVoteButtonLabel()
     {
         return $this->getVoteButton()->getText();
@@ -126,11 +113,6 @@ class ProposalPage extends Page
     public function clickReportProposalButton()
     {
         $this->getElement('report proposal button')->click();
-    }
-
-    public function clickEditCommentButton()
-    {
-        $this->getElement('edit comment button')->click();
     }
 
     public function getProposalButtonsSelector()
