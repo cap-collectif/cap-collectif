@@ -1,87 +1,61 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { reduxForm, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import Input from '../../Form/Input';
+import renderComponent from '../../Form/Field';
+import Fetcher from '../../../services/Fetcher';
 import SynthesisActions from '../../../actions/SynthesisActions';
-import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
-import FormMixin from '../../../utils/FormMixin';
-import FlashMessages from '../../Utils/FlashMessages';
+import type { State } from '../../../types';
 
-const DisplaySettings = React.createClass({
-  propTypes: {
-    synthesis: PropTypes.object,
-  },
+type Props = {
+  synthesis: Object,
+  submitting: boolean,
+  handleSubmit?: Function,
+};
 
-  mixins: [DeepLinkStateMixin, FormMixin],
+const onSubmit = (values, dispatch, props) => {
+  const { synthesis } = props;
 
-  getInitialState() {
-    const { synthesis } = this.props;
-    return {
-      isSaving: false,
-      form: synthesis.displayRules || {
-        level: 1,
-      },
-      errors: {
-        level: [],
-      },
-    };
-  },
+  return Fetcher.put(`/syntheses/${synthesis.id}/display`, {
+    rules: { level: values.level },
+  }).then(() => {
+    return SynthesisActions.load(synthesis.id);
+  });
+};
 
-  formValidationRules: {
-    level: {
-      minValue: {
-        value: 0,
-        message: 'synthesis.settings.display.level_constraints',
-      },
-      maxValue: {
-        value: 5,
-        message: 'synthesis.settings.display.level_constraints',
-      },
-    },
-  },
+const validate = ({ level }: Object) => {
+  const errors = {};
+  if (level < 0 || level > 5) {
+    errors.level = 'synthesis.settings.display.level_constraints';
+  }
 
-  updateSettings() {
-    const { synthesis } = this.props;
-    if (this.isValid()) {
-      this.setState({
-        isSaving: true,
-      });
-      SynthesisActions.updateDisplaySettings(synthesis.id, {
-        rules: this.state.form,
-      }).then(() => {
-        SynthesisActions.load(synthesis.id);
-        this.setState({
-          isSaving: false,
-        });
-      });
-    }
-    return false;
-  },
+  return errors;
+};
 
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length === 0) {
-      return null;
-    }
-    return <FlashMessages errors={errors} form />;
-  },
+export const formName = 'DisplaySettings';
 
+export class DisplaySettings extends React.Component<Props> {
   render() {
+    const { submitting, handleSubmit } = this.props;
+
     return (
       <div className="display-settings">
-        <form>
-          <Input
+        <form onSubmit={handleSubmit}>
+          <label>
+            <FormattedMessage id="synthesis.settings.display.level" />
+          </label>
+          <br />
+          <FormattedMessage id="synthesis.settings.display.level_help" />
+          <Field
+            id="display-settings__form__input"
             type="number"
-            label={<FormattedMessage id="synthesis.settings.display.level" />}
-            valueLink={this.linkState('form.level')}
-            min="1"
-            max="5"
-            groupClassName={this.getGroupStyle('level')}
-            errors={this.renderFormErrors('level')}
-            help={<FormattedMessage id="synthesis.settings.display.level_help" />}
+            name="level"
+            component={renderComponent}
           />
-          <Button type="button" onClick={() => this.updateSettings()}>
-            {this.state.isSaving ? (
+          <Button type="submit">
+            {submitting ? (
               <FormattedMessage id="global.loading" />
             ) : (
               <FormattedMessage id="global.save" />
@@ -90,7 +64,19 @@ const DisplaySettings = React.createClass({
         </form>
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state: State, props: Props) => ({
+  initialValues: {
+    level: props.synthesis.displayRules.level,
   },
 });
 
-export default DisplaySettings;
+export default connect(mapStateToProps)(
+  reduxForm({
+    validate,
+    onSubmit,
+    form: formName,
+  })(DisplaySettings),
+);
