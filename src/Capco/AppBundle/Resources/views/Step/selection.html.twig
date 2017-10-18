@@ -6,7 +6,7 @@
     <meta property="og:title" content="{{ project.title }}" />
     <meta property="og:url" content="{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" />
     {% if currentStep is defined and currentStep.body %}
-        <meta property="og:description" content="{{ currentStep.body|striptags }}" />
+        <meta property="og:description" content="{{ currentStep.body }}" />
     {% endif %}
     <meta property="og:type" content="project" />
     {% if project.Cover %}

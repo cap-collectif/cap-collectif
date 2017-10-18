@@ -17,16 +17,16 @@ class Navbar extends React.Component<Props> {
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
-        {items.filter((item, index) => index < 6).map((header, index) => {
+        {items.filter((item, index) => index < 5).map((header, index) => {
           return <NavbarItem key={index} item={header} />;
         })}
-        {items.length > 6 && (
+        {items.length > 5 && (
           <NavbarItem
             item={{
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 6),
+              children: items.filter((item, index) => index >= 5),
             }}
             className="navbar-dropdown-more"
           />
@@ -36,16 +36,16 @@ class Navbar extends React.Component<Props> {
 
     const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
-        {items.filter((item, index) => index < 4).map((header, index) => {
+        {items.filter((item, index) => index < 3).map((header, index) => {
           return <NavbarItem key={index} item={header} />;
         })}
-        {items.length > 4 && (
+        {items.length > 3 && (
           <NavbarItem
             item={{
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 4),
+              children: items.filter((item, index) => index >= 3),
             }}
             className="navbar-dropdown-more"
           />
@@ -84,37 +84,41 @@ class Navbar extends React.Component<Props> {
       <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
-            <ul className="skip-links-list clearfix">
-              <li>
-                <a href="#navbar">
-                  <FormattedMessage id="navbar.skip_links.menu" />
-                </a>
-              </li>
-              <li>
-                <a href="#main">
-                  <FormattedMessage id="navbar.skip_links.content" />
-                </a>
-              </li>
-            </ul>
+            <div className="container">
+              <ul className="skip-links-list clearfix">
+                <li>
+                  <a href="#navbar">
+                    <FormattedMessage id="navbar.skip_links.menu" />
+                  </a>
+                </li>
+                <li>
+                  <a href="#main">
+                    <FormattedMessage id="navbar.skip_links.content" />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <Navigation.Header>
-          {logo && (
-            <Navigation.Brand href="/" id="home">
-              <a href="/">
-                <img src={logo} alt={siteName} />
-              </a>
-            </Navigation.Brand>
-          )}
-          <Navigation.Toggle />
-        </Navigation.Header>
-        <Navigation.Collapse>
-          {navbarLgSize}
-          {navbarMdSize}
-          {navbarSmSize}
-          {navbarXsSize}
-          <NavbarRight />
-        </Navigation.Collapse>
+        <div className="container">
+          <Navigation.Header>
+            {logo && (
+              <Navigation.Brand href="/" id="home">
+                <a href="/">
+                  <img src={logo} alt={siteName} />
+                </a>
+              </Navigation.Brand>
+            )}
+            <Navigation.Toggle />
+          </Navigation.Header>
+          <Navigation.Collapse>
+            {navbarLgSize}
+            {navbarMdSize}
+            {navbarSmSize}
+            {navbarXsSize}
+            <NavbarRight />
+          </Navigation.Collapse>
+        </div>
       </Navigation>
     );
   }

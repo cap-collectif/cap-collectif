@@ -106,7 +106,7 @@ Scenario: Logged in user wants to create a proposal
   When I click the create proposal button
   And I fill the proposal form
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal_custom-11_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal_custom-8_field"
   And I submit the create proposal form
   Then I wait 3 seconds
   And I should see my new proposal

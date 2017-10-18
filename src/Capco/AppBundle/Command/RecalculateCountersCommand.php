@@ -33,21 +33,21 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ****************************** Opinion counters **********************************************
 
         $query = $em->createQuery('UPDATE CapcoAppBundle:Opinion o set o.versionsCount = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVersion ov
           where ov.enabled = 1 AND ov.isTrashed = 0 AND ov.expired = 0 AND ov.parent = o
         )');
         $query->execute();
 
         $query = $em->createQuery('UPDATE CapcoAppBundle:Opinion o set o.argumentsCount = (
-          select count(DISTINCT a.id)
+          select count(a.id)
           from CapcoAppBundle:Argument a
           WHERE a.isEnabled = 1 AND a.isTrashed = 0 AND a.expired = 0 AND a.opinion = o
         )');
         $query->execute();
 
         $query = $em->createQuery('UPDATE CapcoAppBundle:Opinion o set o.sourcesCount = (
-          select count(DISTINCT s.id)
+          select count(s.id)
           from CapcoAppBundle:Source s
           WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND s.Opinion = o
         )');
@@ -57,7 +57,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $conn = $em->getConnection();
         $conn->executeUpdate('UPDATE opinion AS o
           JOIN
-          ( SELECT p.id, COUNT(DISTINCT r.opinion_source) AS cnt
+          ( SELECT p.id, COUNT(r.opinion_source) AS cnt
             FROM opinion p
             LEFT JOIN opinion_relation r
             ON r.opinion_source = p.id OR r.opinion_target = p.id
@@ -69,19 +69,19 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         );
 
         $em->createQuery('UPDATE CapcoAppBundle:Opinion a set a.votesCountOk = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVote ov
           where ov.opinion = a AND ov.expired = 0 AND ov.value = 1 group by ov.opinion
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Opinion a set a.votesCountMitige = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVote ov
           where ov.opinion = a AND ov.expired = 0 AND ov.value = 0 group by ov.opinion
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Opinion a set a.votesCountNok = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVote ov
           where ov.opinion = a AND ov.expired = 0 AND ov.value = -1 group by ov.opinion
         )')->execute();
@@ -89,31 +89,31 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ******************************** Opinion version counters ****************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:OpinionVersion ov set ov.argumentsCount = (
-          select count(DISTINCT a.id)
+          select count(a.id)
           from CapcoAppBundle:Argument a
           WHERE a.isEnabled = 1 AND a.isTrashed = 0 AND a.expired = 0 AND a.opinionVersion = ov
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:OpinionVersion ov set ov.sourcesCount = (
-          select count(DISTINCT s.id)
+          select count(s.id)
           from CapcoAppBundle:Source s
           WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND s.opinionVersion = ov
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountOk = (
-          select count(DISTINCT ovv.id)
+          select count(ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
           where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = 1 group by ovv.opinionVersion
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountMitige = (
-          select count(DISTINCT ovv.id)
+          select count(ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
           where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = 0 group by ovv.opinionVersion
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountNok = (
-          select count(DISTINCT ovv.id)
+          select count(ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
           where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = -1 group by ovv.opinionVersion
         )')->execute();
@@ -121,25 +121,25 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ************************************ Votes counters **********************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Argument a set a.votesCount = (
-          select count(DISTINCT av.id)
+          select count(av.id)
           from CapcoAppBundle:ArgumentVote av
           where av.argument = a AND av.expired = 0 group by av.argument
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Source s set s.votesCount = (
-          select count(DISTINCT sv.id)
+          select count(sv.id)
           from CapcoAppBundle:SourceVote sv
           where sv.source = s AND sv.expired = 0 group by sv.source
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Idea i set i.votesCount = (
-          select count(DISTINCT iv.id)
+          select count(iv.id)
           from CapcoAppBundle:IdeaVote iv
           where iv.idea = i AND iv.expired = 0 group by iv.idea
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Comment c set c.votesCount = (
-          select count(DISTINCT cv.id)
+          select count(cv.id)
           from CapcoAppBundle:CommentVote cv
           where cv.comment = c AND cv.expired = 0 group by cv.comment
         )')->execute();
@@ -147,25 +147,25 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // **************************************** Comments counters ***************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Idea i set i.commentsCount = (
-          select count(DISTINCT ic.id)
+          select count(ic.id)
           from CapcoAppBundle:IdeaComment ic
           where ic.Idea = i AND ic.isEnabled = 1 AND ic.isTrashed = 0 AND ic.expired = 0 GROUP BY ic.Idea
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Post p set p.commentsCount = (
-          select count(DISTINCT pc.id)
+          select count(pc.id)
           from CapcoAppBundle:PostComment pc
           where pc.Post = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.Post
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Event e set e.commentsCount = (
-          select count(DISTINCT ec.id)
+          select count(ec.id)
           from CapcoAppBundle:EventComment ec
           where ec.Event = e AND ec.isEnabled = 1 AND ec.isTrashed = 0 AND ec.expired = 0 GROUP BY ec.Event
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Proposal p set p.commentsCount = (
-          select count(DISTINCT pc.id)
+          select count(pc.id)
           from CapcoAppBundle:ProposalComment pc
           where pc.proposal = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.proposal
         )')->execute();
@@ -173,31 +173,31 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ************************ Consultation step counters ***********************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
-          select count(DISTINCT o.id)
+          select count(o.id)
           from CapcoAppBundle:Opinion o
           where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 0 AND o.expired = 0 group by o.step
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionVersionsCount = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
           where o.step = cs AND ov.enabled = 1 AND ov.isTrashed = 0 AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.step
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionCount = (
-          select count(DISTINCT o.id)
+          select count(o.id)
           from CapcoAppBundle:Opinion o
           where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 1 AND o.expired = 0 group by o.step
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionVersionsCount = (
-          select count(DISTINCT ov.id)
+          select count(ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
           where o.step = cs AND ov.enabled = 1 AND ov.isTrashed = 1 AND o.isEnabled = 1 AND o.expired = 0 group by o.step
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.argumentCount = (
-          select count(DISTINCT a.id)
+          select count(a.id)
           from CapcoAppBundle:Argument a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
@@ -210,7 +210,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedArgumentCount = (
-          select count(DISTINCT a.id)
+          select count(a.id)
           from CapcoAppBundle:Argument a
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
@@ -223,7 +223,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.sourcesCount = (
-          select count(DISTINCT s.id)
+          select count(s.id)
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
@@ -236,7 +236,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedSourceCount = (
-          select count(DISTINCT s.id)
+          select count(s.id)
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
@@ -267,7 +267,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ****************************** Collect step counters **************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount = (
-          select count(DISTINCT p.id)
+          select count(p.id)
           from CapcoAppBundle:Proposal p
           INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
           where pf.step = cs AND p.enabled = 1 group by pf.step
@@ -287,7 +287,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         // ****************************** Questionnaire step counters **************************************
 
         $em->createQuery('UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs set qs.repliesCount = (
-          select count(DISTINCT r.id)
+          select count(r.id)
           from CapcoAppBundle:Reply r INNER JOIN CapcoAppBundle:Questionnaire q WITH r.questionnaire = q
           where q.step = qs AND r.enabled = 1 group by q.step
         )')->execute();
@@ -305,7 +305,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         // ****************************** Selection steps counters **************************************
         $em->createQuery('UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
-          select count(DISTINCT pv.id)
+          select count(pv.id)
           from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           where pv.selectionStep = ss AND pv.expired = 0 AND p.enabled = 1 group by pv.selectionStep
         )')->execute();

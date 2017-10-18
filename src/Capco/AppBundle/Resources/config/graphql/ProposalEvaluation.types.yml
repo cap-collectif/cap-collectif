@@ -1,7 +1,7 @@
 ProposalEvaluation:
     type: object
     config:
-        description: "An evaluation for a proposal"
+        description: "A proposal Evaluation"
         fields:
             proposal:
                 type: "Proposal!"

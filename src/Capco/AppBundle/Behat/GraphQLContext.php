@@ -99,7 +99,6 @@ class GraphQLContext implements Context
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $matcher = (new SimpleFactory())->createMatcher();
-
         PHPUnit::assertTrue($matcher->match($this->response, $pattern->getRaw()), $matcher->getError());
     }
 
