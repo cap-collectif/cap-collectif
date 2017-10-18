@@ -82,22 +82,24 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const validate = (values: FormValues, { proposal }: Props) => {
   const errors = {};
-  const questions = proposal.form.evaluationForm.questions;
+  const questions = proposal.form.evaluationForm ? proposal.form.evaluationForm.questions : [];
 
   const responsesArrayErrors = [];
-  values.responses.forEach((response, index) => {
-    const currentQuestion = questions.find(question => question.id === String(response.question));
+  if (values.responses) {
+    values.responses.forEach((response, index) => {
+      const currentQuestion = questions.find(question => question.id === String(response.question));
 
-    if (currentQuestion && currentQuestion.required) {
-      if (!response.value || response.value.length === 0) {
-        const responseError = {};
-        responseError.value = 'global.constraints.notBlank';
-        responsesArrayErrors[index] = responseError;
+      if (currentQuestion && currentQuestion.required) {
+        if (!response.value || response.value.length === 0) {
+          const responseError = {};
+          responseError.value = 'global.constraints.notBlank';
+          responsesArrayErrors[index] = responseError;
+        }
+      } else if (currentQuestion && currentQuestion.validationRule) {
+        // todo
       }
-    } else if (currentQuestion && currentQuestion.validationRule) {
-      // todo
-    }
-  });
+    });
+  }
 
   if (responsesArrayErrors.length) {
     errors.responses = responsesArrayErrors;
