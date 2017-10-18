@@ -11,34 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
 class ProposalFormNotificationConfiguration extends AbstractNotificationConfiguration
 {
     /**
-     * @ORM\Column(name="on_create", type="boolean", options={"default": false})
+     * @ORM\Column(name="on_create", type="boolean")
      */
     private $onCreate = false;
 
     /**
-     * @ORM\Column(name="on_update", type="boolean", options={"default": false})
+     * @ORM\Column(name="on_update", type="boolean")
      */
     private $onUpdate = false;
 
     /**
-     * @ORM\Column(name="on_delete", type="boolean", options={"default": false})
+     * @ORM\Column(name="on_delete", type="boolean")
      */
     private $onDelete = false;
-
-    /**
-     * @ORM\Column(name="on_comment_create", type="boolean", options={"default": false})
-     */
-    private $onCommentCreate = false;
-
-    /**
-     * @ORM\Column(name="on_comment_update", type="boolean", options={"default": false})
-     */
-    private $onCommentUpdate = false;
-
-    /**
-     * @ORM\Column(name="on_comment_delete", type="boolean", options={"default": false})
-     */
-    private $onCommentDelete = false;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="notificationsConfiguration")
@@ -77,42 +62,6 @@ class ProposalFormNotificationConfiguration extends AbstractNotificationConfigur
     public function setOnDelete(bool $onDelete): self
     {
         $this->onDelete = $onDelete;
-
-        return $this;
-    }
-
-    public function isOnCommentCreate(): bool
-    {
-        return $this->onCommentCreate;
-    }
-
-    public function setOnCommentCreate(bool $onCommentCreate): self
-    {
-        $this->onCommentCreate = $onCommentCreate;
-
-        return $this;
-    }
-
-    public function isOnCommentUpdate(): bool
-    {
-        return $this->onCommentUpdate;
-    }
-
-    public function setOnCommentUpdate(bool $onCommentUpdate): self
-    {
-        $this->onCommentUpdate = $onCommentUpdate;
-
-        return $this;
-    }
-
-    public function isOnCommentDelete(): bool
-    {
-        return $this->onCommentDelete;
-    }
-
-    public function setOnCommentDelete(bool $onCommentDelete): self
-    {
-        $this->onCommentDelete = $onCommentDelete;
 
         return $this;
     }

@@ -265,9 +265,9 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
+    public function getByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('proposal')
             ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut')
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')

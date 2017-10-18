@@ -1,0 +1,50 @@
+{% set user = app.user %}
+<div class="opinion  opinion--comment  opinion--add-comment">
+    <div class="opinion__body">
+        <h2 class="h4">{{ 'comment.create.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        <div class="media">
+            {% if user != null %}
+                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                <div class="media-body">
+                    <p class="media--aligned  excerpt">
+                        {% if is_feature_enabled('profiles') %}
+                            <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ user.username }}</a>
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="opinion__data">
+            <form method="post" action="{{ path('app_comment_create', {'objectType': object.className, 'objectId': object.id}) }}" {{ form_enctype(form) }} >
+                {% if null == user %}
+                    <p class="excerpt">{{ 'comment.create.all_fields_mandatory'|trans({}, 'CapcoAppBundle') }}</p>
+                    <div class="row">
+                        <div class="col-sm-12  col-md-6">
+                            <div class="form-group">
+                                <label for="commentName" class="control-label  h5" style="width:100%;">
+                                    {{ 'comment.create.name_label'|trans({}, 'CapcoAppBundle') }}
+                                    <span class="pull-right"><a href="{{ path('app_comment_login', {'objectType': object.className, 'objectId': object.id}) }}">{{ 'comment.create.with_account'|trans({}, 'CapcoAppBundle') }}</a></span>
+                                </label>
+                                {{ form_widget(form.authorName, {'id': 'commentName'}) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="commentEmail" class="control-label  h5">{{ 'comment.create.email_label'|trans({}, 'CapcoAppBundle') }}</label>
+                                {{ form_widget(form.authorEmail, {'id': 'commentEmail'}) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="commentInput" class="control-label  h5">{{ 'comment.create.input_label'|trans({}, 'CapcoAppBundle') }}</label>
+                    {{ form_widget(form.body, {'id': 'commentInput', 'attr': {'rows': 5} }) }}
+                    {{ form_rest(form) }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn  btn-primary">{{ 'comment.create.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
