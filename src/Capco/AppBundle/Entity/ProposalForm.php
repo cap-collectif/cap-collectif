@@ -141,7 +141,7 @@ class ProposalForm
     private $usingDistrict = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist"}, inversedBy="proposalForm")
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
     private $notificationsConfiguration;
@@ -186,12 +186,21 @@ class ProposalForm
         $this->categories = new ArrayCollection();
         $this->districts = new ArrayCollection();
         $this->proposals = new ArrayCollection();
-        $this->notificationsConfiguration = new ProposalFormNotificationConfiguration();
+
+        $this->initializeNotificationConfiguration();
     }
 
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
+    }
+
+    public function initializeNotificationConfiguration()
+    {
+        $proposalFormNotificationConfiguration = new ProposalFormNotificationConfiguration();
+        $proposalFormNotificationConfiguration->setProposalForm($this);
+
+        $this->notificationsConfiguration = $proposalFormNotificationConfiguration;
     }
 
     public function setProposalInAZoneRequired(bool $proposalInAZoneRequired): self
@@ -600,6 +609,21 @@ class ProposalForm
         return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCreate();
     }
 
+    public function isNotifyingCommentOnCreate(): bool
+    {
+        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentCreate();
+    }
+
+    public function isNotifyingCommentOnUpdate(): bool
+    {
+        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentUpdate();
+    }
+
+    public function isNotifyingCommentOnDelete(): bool
+    {
+        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentDelete();
+    }
+
     public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
     {
         return $this->notificationsConfiguration;
@@ -693,7 +717,7 @@ class ProposalForm
         return $this->evaluationForm;
     }
 
-    public function setEvaluationForm(Questionnaire $evaluationForm = null): self
+    public function setEvaluationForm($evaluationForm): self
     {
         $this->evaluationForm = $evaluationForm;
 

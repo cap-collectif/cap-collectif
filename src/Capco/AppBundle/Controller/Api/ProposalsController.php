@@ -249,7 +249,6 @@ class ProposalsController extends FOSRestController
         $em->persist($comment);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')

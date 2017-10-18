@@ -400,6 +400,9 @@ type NotificationsConfiguration {
   onCreate: Boolean!
   onUpdate: Boolean!
   onDelete: Boolean!
+  onCommentCreate: Boolean!
+  onCommentUpdate: Boolean!
+  onCommentDelete: Boolean!
 }
 
 # A contribution
@@ -697,7 +700,7 @@ type Proposal {
   form: ProposalForm!
 
   # Identifies the answers to an evaluation form.
-  evaluation: ProposalEvaluation
+  proposalEvaluation: ProposalEvaluation
 }
 
 # A proposal category
@@ -710,7 +713,7 @@ input ProposalCategoryInput {
   name: String!
 }
 
-# An evaluation for a proposal
+# A proposal Evaluation
 type ProposalEvaluation {
   # Identifies the proposal.
   proposal: Proposal!
@@ -1156,6 +1159,9 @@ input UpdateProposalFormNotificationsConfigurationInput {
   onCreate: Boolean!
   onUpdate: Boolean!
   onDelete: Boolean!
+  onCommentCreate: Boolean!
+  onCommentUpdate: Boolean!
+  onCommentDelete: Boolean!
   clientMutationId: String
 }
 

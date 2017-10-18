@@ -22,7 +22,7 @@ describe('<ProposalAdminNotationForm />', () => {
       form: {
         evaluationForm: null,
       },
-      evaluation: {
+      proposalEvaluation: {
         responses: [],
       },
     },

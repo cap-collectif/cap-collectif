@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Traits\IdTrait;
@@ -165,7 +164,7 @@ abstract class AbstractResponse
         return $this->proposalEvaluation;
     }
 
-    public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation = null): self
+    public function setProposalEvaluation($proposalEvaluation): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
 
