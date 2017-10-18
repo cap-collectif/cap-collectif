@@ -35,6 +35,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-intl \
         php7.1-mysql \
         php7.1-zip \
+				php7.1-xml \
         php7.1-mbstring \
     && \
     apt-get clean && \
