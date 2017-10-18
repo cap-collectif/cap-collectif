@@ -11,32 +11,32 @@ use Doctrine\ORM\Mapping as ORM;
 class ProposalFormNotificationConfiguration extends AbstractNotificationConfiguration
 {
     /**
-     * @ORM\Column(name="on_create", type="boolean")
+     * @ORM\Column(name="on_create", type="boolean", options={"default": false})
      */
     private $onCreate = false;
 
     /**
-     * @ORM\Column(name="on_update", type="boolean")
+     * @ORM\Column(name="on_update", type="boolean", options={"default": false})
      */
     private $onUpdate = false;
 
     /**
-     * @ORM\Column(name="on_delete", type="boolean")
+     * @ORM\Column(name="on_delete", type="boolean", options={"default": false})
      */
     private $onDelete = false;
 
     /**
-     * @ORM\Column(name="on_comment_create", type="boolean")
+     * @ORM\Column(name="on_comment_create", type="boolean", options={"default": false})
      */
     private $onCommentCreate = false;
 
     /**
-     * @ORM\Column(name="on_comment_update", type="boolean")
+     * @ORM\Column(name="on_comment_update", type="boolean", options={"default": false})
      */
     private $onCommentUpdate = false;
 
     /**
-     * @ORM\Column(name="on_comment_delete", type="boolean")
+     * @ORM\Column(name="on_comment_delete", type="boolean", options={"default": false})
      */
     private $onCommentDelete = false;
 
