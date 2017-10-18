@@ -717,7 +717,7 @@ class ProposalForm
         return $this->evaluationForm;
     }
 
-    public function setEvaluationForm($evaluationForm): self
+    public function setEvaluationForm(Questionnaire $evaluationForm = null): self
     {
         $this->evaluationForm = $evaluationForm;
 

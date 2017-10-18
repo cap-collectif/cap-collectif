@@ -39,6 +39,7 @@ services:
           - { name: overblog_graphql.resolver, alias: "query_proposal", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_publicationStatus", method: "resolveProposalPublicationStatus" }
           - { name: overblog_graphql.resolver, alias: "proposal_reference", method: "resolveReference" }
+          - { name: overblog_graphql.resolver, alias: "proposal_evaluation", method: "resolveEvaluation" }
 
   capco.mutation.district:
         class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation

@@ -401,7 +401,7 @@ class Questionnaire
         return $this->proposalForm;
     }
 
-    public function setProposalForm($proposalForm): self
+    public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
 

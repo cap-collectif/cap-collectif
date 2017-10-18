@@ -16,7 +16,7 @@ class ValueResponseResolver implements ContainerAwareInterface
     {
         // Use this condition because value type of string and Relay return array on multiple choice question value.
         if ($response->getQuestion() instanceof MultipleChoiceQuestion) {
-            return json_encode($response->getValue());
+            return json_encode($response->getValue(), JSON_UNESCAPED_UNICODE); // encodes characters correctly
         }
 
         return $response->getValue();

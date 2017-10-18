@@ -29,7 +29,6 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         }
 
         unset($arguments['proposalId']);
-
         $proposalEvaluation = $this->container->get('capco.proposal_evaluation.repository')->findOneBy([
             'proposal' => $proposal,
         ]);
@@ -39,25 +38,31 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             $proposalEvaluation->setProposal($proposal);
         }
 
-        $responses = array_map(function ($response) {
+        $arguments['responses'] = array_values(array_map(function ($response) {
             $decodeValue = json_decode($response['value']);
-            $value = $decodeValue ?? $response['value'];
 
             return [
-                'value' => $value,
+                'value' => $decodeValue ?? $response['value'],
                 'question' => $response['question'],
                 '_type' => 'value_response',
             ];
-        }, $arguments['responses']);
+        }, $arguments['responses']));
 
         $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
 
-        $arguments['responses'] = $responses;
-
         $form->submit($arguments, false);
 
+        if (!$form->isValid()) {
+            throw new UserError('Form is not valid :' . (string) $form->getErrors(true, false));
+        }
+
         $om->persist($proposalEvaluation);
-        $om->flush();
+
+        try {
+            $om->flush();
+        } catch (\Exception $e) {
+            throw new UserError('Error during the flush :' . $e->getMessage());
+        }
 
         return ['proposal' => $proposal];
     }
