@@ -10,7 +10,7 @@ import UserActions from '../../../actions/UserActions';
 type Props = {
   onSubmitSuccess: Function,
   submitting: boolean,
-  handleSubmit?: Function,
+  handleSubmit: Function,
 };
 
 const onSubmit = (values, dispatch, props) => {
