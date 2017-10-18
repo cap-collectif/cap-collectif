@@ -1,9 +1,11 @@
 import moment from 'moment';
-import 'moment/locale/fr';
 import ReactOnRails from 'react-on-rails';
 import { addLocaleData } from 'react-intl';
+import 'moment/locale/fr';
 import frLocaleData from 'react-intl/locale-data/fr';
+import 'moment/locale/en-gb';
 import enLocaleData from 'react-intl/locale-data/en';
+import 'moment/locale/es';
 import esLocaleData from 'react-intl/locale-data/es';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
@@ -51,15 +53,10 @@ if (locale === 'en-GB') {
   addLocaleData(enLocaleData);
   moment.locale('en-GB');
 }
-if (locale === 'es') {
+if (locale === 'es-ES') {
   addLocaleData(esLocaleData);
   moment.locale('es-ES');
 }
-// if ('ReactIntlLocaleData' in window) {
-//   Object.keys(ReactIntlLocaleData).forEach(lang => {
-//     addLocaleData(ReactIntlLocaleData[lang]);
-//   });
-// }
 
 window.__SERVER__ = false;
 
