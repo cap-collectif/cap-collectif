@@ -81,6 +81,8 @@ RUN npm install -g yarn@0.27.5
 # Install bower
 RUN npm install --global bower@1.8.0
 
+RUN npm install --global babel-cli
+
 # Install pep8
 RUN pip install pep8 autopep8
 

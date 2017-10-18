@@ -19,7 +19,8 @@ if [ "$PRODUCTION" ]; then
   echo "Building node-sass binding for the container..."
   npm rebuild node-sass > /dev/null
 
-  yarn run trad
+  php bin/console translation:download --env=prod
+  yarn run update-js-translation
   yarn run build:prod
 
   # Server side rendering deps
