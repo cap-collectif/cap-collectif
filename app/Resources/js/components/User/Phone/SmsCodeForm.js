@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-// import UserActions from '../../../actions/UserActions';
+import renderComponent from '../../Form/Field';
+// import Fetcher from '../../../services/Fetcher';
+import UserActions from '../../../actions/UserActions';
 // import FlashMessages from '../../Utils/FlashMessages';
 
 type Props = {
@@ -12,15 +14,26 @@ type Props = {
   handleSubmit?: Function,
 };
 
-// const onSubmit = (values, dispatch, props) => {
-//   const { onSubmitSuccess} = this.props;
-//
-//
-// };
+const onSubmit = (values, dispatch, props) => {
+  const { onSubmitSuccess } = props;
+
+  console.warn(values.code);
+
+  UserActions.sendSmsCode(values)
+    .then(() => {
+      onSubmitSuccess();
+    })
+    .catch(error => {
+      if (error && error.response && error.response.message === 'sms_code_invalid') {
+        throw new SubmissionError({ email: 'phone.confirm.code_invalid' });
+      }
+    });
+};
 
 const validate = ({ code }: Object) => {
   const errors = {};
-  if (code === 0 || code !== 6) {
+
+  if (code === undefined || code.length !== 6) {
     errors.code = 'phone.confirm.constraints.code';
   }
 
@@ -61,9 +74,7 @@ export class SmsCodeForm extends React.Component<Props> {
   // }
 
   render() {
-    const { submitting, handleSubmit, onSubmitSuccess } = this.props;
-
-    console.log(onSubmitSuccess);
+    const { submitting, handleSubmit } = this.props;
 
     return (
       <form onSubmit={handleSubmit} style={{ maxWidth: '350px' }}>
@@ -73,8 +84,13 @@ export class SmsCodeForm extends React.Component<Props> {
           autoFocus
           label={<FormattedMessage id="phone.confirm.code" />}
           id="_code"
+          component={renderComponent}
         />
-        <Button type="submit" bsStyle="primary" style={{ padding: '6px 12px 7px' }} disabled>
+        <Button
+          type="submit"
+          bsStyle="primary"
+          style={{ padding: '6px 12px 7px' }}
+          disabled={submitting}>
           {submitting ? (
             <FormattedMessage id="global.loading" />
           ) : (
@@ -86,16 +102,10 @@ export class SmsCodeForm extends React.Component<Props> {
   }
 }
 
-// const mapStateToProps = (state: State, props: Props) => ({
-//   initialValues: {
-//     code: props..,
-//   },
-// });
-
 export default connect()(
   reduxForm({
     validate,
-    // onSubmit,
+    onSubmit,
     form: formName,
   })(SmsCodeForm),
 );
