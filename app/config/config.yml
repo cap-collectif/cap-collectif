@@ -60,11 +60,8 @@ translation:
   locales: "%locales%"
   configs:
     app:
-      dirs: ["%kernel.root_dir%/../src"] # not used
       output_dir: "%kernel.root_dir%/../translations"
       remote_storage: ["php_translation.adapter.loco"]
-      excluded_names: ["*TestCase.php", "*Test.php"]
-      excluded_dirs: [cache, data, logs]
 
 doctrine:
     dbal:
