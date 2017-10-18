@@ -32,47 +32,46 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   values.likers = values.likers.map(u => u.value);
 
   const promises = [];
+  promises.push(
+    ChangeProposalNotationMutation.commit({
+      input: {
+        proposalId: props.proposal.id,
+        estimation: values.estimation,
+        likers: values.likers,
+      },
+    }),
+  );
 
-  const variables = {
-    input: {
-      proposalId: props.proposal.id,
-      estimation: values.estimation,
-      likers: values.likers,
-    },
-  };
+  if (props.proposal.form.evaluationForm) {
+    const responses = values.responses.map(resp => {
+      const questions = props.proposal.form.evaluationForm.questions;
+      const actualQuestion = questions.find(question => question.id === String(resp.question));
+      const questionType = actualQuestion.type;
 
-  const responses = values.responses.map(resp => {
-    const questions = props.proposal.form.evaluationForm.questions;
-    const actualQuestion = questions.find(question => question.id === String(resp.question));
-    const questionType = actualQuestion.type;
-
-    let value;
-    if (
-      questionType === 'ranking' ||
-      questionType === 'radio' ||
-      questionType === 'checkbox' ||
-      questionType === 'button'
-    ) {
-      value = JSON.stringify({
-        labels: Array.isArray(resp.value) ? resp.value : [resp.value],
-        other: null,
-      });
-    } else {
-      value = resp.value;
-    }
-
-    return {
-      question: actualQuestion.id,
-      value,
+      let value;
+      if (
+        questionType === 'ranking' ||
+        questionType === 'radio' ||
+        questionType === 'checkbox' ||
+        questionType === 'button'
+      ) {
+        value = JSON.stringify({
+          labels: Array.isArray(resp.value) ? resp.value : [resp.value],
+          other: null,
+        });
+      } else {
+        value = resp.value;
+      }
+      return {
+        question: actualQuestion.id,
+        value,
+      };
+    });
+    const variablesEvaluation = {
+      input: { proposalId: props.proposal.id, responses },
     };
-  });
-
-  const variablesEvaluation = {
-    input: { proposalId: props.proposal.id, responses },
-  };
-
-  promises.push(ChangeProposalNotationMutation.commit(variables));
-  promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
+    promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
+  }
 
   return Promise.all(promises)
     .then(() => {
