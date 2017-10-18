@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
+use FOS\UserBundle\Model\UserInterface;
 use Sonata\UserBundle\Controller\ResettingFOSUser1Controller as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
@@ -54,5 +55,10 @@ class ResettingFOSUser1Controller extends BaseController
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.' . $this->getEngine(), [
             'email' => $email,
         ]);
+    }
+
+    protected function getRedirectionUrl(UserInterface $user)
+    {
+        return $this->container->get('router')->generate('fos_user_profile_show');
     }
 }
