@@ -11,7 +11,7 @@ Scenario: GraphQL client wants to update a proposal Evaluation
       changeProposalEvaluation(input: $input) {
         proposal {
           id
-          proposalEvaluation {
+          evaluation {
             responses {
               question {
                 id
@@ -63,7 +63,7 @@ Scenario: GraphQL client wants to update a proposal Evaluation
       "changeProposalEvaluation": {
         "proposal": {
           "id": "proposal2",
-          "proposalEvaluation": {
+          "evaluation": {
             "responses": [
             {
                "question": { "id": "8" },

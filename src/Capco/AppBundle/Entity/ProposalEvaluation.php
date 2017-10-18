@@ -64,11 +64,6 @@ class ProposalEvaluation
         return $this->responses;
     }
 
-    /**
-     * @param ArrayCollection $responses
-     *
-     * @return $this
-     */
     public function setResponses(ArrayCollection $responses): self
     {
         $this->responses = $responses;

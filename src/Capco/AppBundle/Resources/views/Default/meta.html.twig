@@ -8,9 +8,9 @@
 <meta name="twitter:url" content="{{ url }}" />
 
 {% if description is defined and description is not empty %}
-    <meta name="description" content="{{ description }}" />
-    <meta property="og:description" content="{{ description }}" />
-    <meta name="twitter:description" content="{{ description }}" />
+    <meta name="description" content="{{ description|striptags }}" />
+    <meta property="og:description" content="{{ description|striptags }}" />
+    <meta name="twitter:description" content="{{ description|striptags }}" />
 {% endif %}
 
 {% if image is defined and image is not empty %}
