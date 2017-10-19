@@ -253,7 +253,12 @@ Scenario: API client wants to update his phone
     "message": "Validation Failed",
     "errors": {
       "children":{
-        "phone": {"errors": ["This value is not a valid phone number."]}
+        "phone": { "errors": [
+          "This value is not a valid phone number. {
+          "{{ type }}": "any",
+          "{{ value }}": "+33"
+          }"
+        ]
       }
     }
   }

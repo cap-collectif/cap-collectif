@@ -165,8 +165,8 @@ Scenario: Logged in API client wants to add a reply
   """
   Then the JSON response status code should be 201
   And 1 mail should be sent
-  And I open mail with subject "Cap-Collectif - Accusé de réception de votre participation"
-  Then I should see "Nous accusons réception de votre participation. Vos réponses étaient les suivantes :" in mail
+  And I open mail with subject "reply.acknowledgement.subject"
+  Then I should see "reply.acknowledgement.replies" in mail
 
 @database @elasticsearch
 Scenario: Logged in API client wants to add an anonymous reply
