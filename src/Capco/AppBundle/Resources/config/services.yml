@@ -105,7 +105,7 @@ services:
 
   capco.react_intl.twig:
     class: Capco\AppBundle\Twig\ReactIntlExtension
-    arguments: ["%kernel.root_dir%/../translations/"]
+    arguments: ["%kernel.root_dir%/../translations/", "@capco.site_parameter.resolver"]
     tags:
       - { name: "twig.extension" }
 

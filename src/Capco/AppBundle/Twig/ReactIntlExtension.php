@@ -2,13 +2,17 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\SiteParameter\Resolver;
+
 class ReactIntlExtension extends \Twig_Extension
 {
     private $translationFolder;
+    private $resolver;
 
-    public function __construct(string $translationFolder)
+    public function __construct(string $translationFolder, Resolver $resolver)
     {
         $this->translationFolder = $translationFolder;
+        $this->resolver = $resolver;
     }
 
     public function getFunctions()
@@ -21,7 +25,7 @@ class ReactIntlExtension extends \Twig_Extension
 
     public function getLocale(): string
     {
-        return 'fr-FR';
+        return $this->resolver->getValue('global.locale');
     }
 
     public function getIntlMessages()
