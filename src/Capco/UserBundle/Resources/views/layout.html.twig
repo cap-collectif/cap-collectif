@@ -3,13 +3,13 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1 class="h2  h--no-border">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h1>
+            <h1 class="h2  h--no-border">{{ 'layout.login'|trans({}, 'CapcoAppBundle') }}</h1>
         </div>
     </div>
 {% endblock %}
 
 {% block error_message %}
-    {{ message | trans({}, 'SonataUserBundle') }}
+    {{ message | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block body %}

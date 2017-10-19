@@ -1,10 +1,10 @@
 {% extends "CapcoUserBundle::layout.html.twig" %}
-{% block title %} {{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }} {% endblock %}
+{% block title %} {{ 'resetting.request.submit'|trans({}, 'CapcoAppBundle') }} {% endblock %}
 
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1 class="h2  h--no-border">{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}</h1>
+            <h1 class="h2  h--no-border">{{ 'resetting.request.submit'|trans({}, 'CapcoAppBundle') }}</h1>
         </div>
     </div>
 {% endblock %}
@@ -12,7 +12,7 @@
 {% block fos_user_content %}
     <div class="container  container--custom">
         <div class="alert alert-success alert-dismissible  block" role="alert">
-            <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+            <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'CapcoAppBundle') }}</p>
         </div>
     </div>
 {% endblock %}

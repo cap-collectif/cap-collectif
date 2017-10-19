@@ -6,7 +6,7 @@ framework:
   profiler:
     collect: false
   translator:
-    enabled: false
+    enabled: true
 
 translation:
     symfony_profiler:
@@ -26,6 +26,12 @@ services:
           arguments: ["@request_stack", '%recaptcha_private_key%', '@capco.toggle.manager', false]
           tags:
               - { name: validator.constraint_validator, alias: recaptcha.validator }
+    capco.decorating_translator:
+        class: Capco\AppBundle\Translator\NoTranslator
+        decorates: translator
+        arguments:
+            - '@capco.decorating_translator.inner'
+        public: false
 
 monolog:
     handlers:

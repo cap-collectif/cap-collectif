@@ -9,7 +9,7 @@ Feature: Sms
     """
     {
       "code":404,
-      "message": "Cette fonction n'est pas activ\u00e9e, veuillez l'activer dans l'espace d'administration !",
+      "message": "error.feature_not_enabled",
       "errors": null
     }
     """

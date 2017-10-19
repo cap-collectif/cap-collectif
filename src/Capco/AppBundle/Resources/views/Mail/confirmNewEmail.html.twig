@@ -4,9 +4,9 @@
         {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
     </p>
     <p>
-      Confirmez votre adresse électronique pour valider votre compte. Il suffit de cliquer sur le lien ci-dessous.
+      {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
     <p>
-        <a href="{{ confirmationUrl }}">Confirmer mon adresse électronique</a>
+        <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
     </p>
     <p>
       {{ 'global.email.footer'|trans({

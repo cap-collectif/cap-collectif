@@ -1,6 +1,6 @@
 {% block subject %}
 {% autoescape false %}
-{{ 'registration.email.subject'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'FOSUserBundle') }}
+{{ 'registration.email.subject'|trans({'%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') }}
 {% endautoescape %}
 {% endblock %}
 
@@ -22,7 +22,7 @@
                 <p>{{ 'user.register.confirmation_message.hello'|trans({'%username%': user.username}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.thanks'|trans({'%sitename%': sitename}, 'CapcoAppBundle') }}</p>
 								<p>{{ 'user.register.confirmation_message.please'|trans({}, 'CapcoAppBundle') }}</p>
-								<p>{{ 'user.register.confirmation_message.validate'|trans({'%url%': confirmationUrl}, 'CapcoAppBundle') }}</p>
+								<p><a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a></p>
                 <p>{{ 'user.register.confirmation_message.participate'|trans({}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.question'|trans({'%email%': capco_site_parameter_value('admin.mail.contact') | default('support@cap-collectif.com')}, 'CapcoAppBundle') }}</p>
                 <p>{{ 'user.register.confirmation_message.bye'|trans({}, 'CapcoAppBundle') }}</p>

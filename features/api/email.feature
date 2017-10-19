@@ -9,7 +9,7 @@ Scenario: Registration is disabled and API client wants to resend an email
   """
   {
     "code":404,
-    "message": "Cette fonction n'est pas activ\u00e9e, veuillez l'activer dans l'espace d'administration !",
+    "message": "error.feature_not_enabled",
     "errors": null
   }
   """
@@ -69,8 +69,8 @@ Scenario: Not confirmed logged in API client can receive a new confirmation emai
   And I send a POST request to "/api/account/resend_confirmation_email"
   Then the JSON response status code should be 201
   And 1 mail should be sent
-  And I open mail with subject "Cap-Collectif — Confirmez votre adresse électronique"
-  Then I should see "Confirmer mon adresse électronique" in mail
+  And I open mail with subject 'registration.email.subject {"%sitename%":"Cap-Collectif"}'
+  Then I should see "user.register.confirmation_message.validate" in mail
   Then I should see "/account/email_confirmation/azertyuiop" in mail
 
 @database @security
@@ -105,7 +105,7 @@ Scenario: Logged in API client can update his email
   Then the JSON response status code should be 204
   And 2 mail should be sent
   And I open mail with subject "[Cap-Collectif] Veuillez confirmer votre nouvelle adresse électronique"
-  Then I should see "Confirmer mon adresse électronique" in mail
+  Then I should see "user.register.confirmation_message.validate" in mail
   Then I should see "/account/new_email_confirmation/" in mail
   And I open mail with subject "[Cap-Collectif] L'adresse électronique de user a été changée"
   Then I should see "Votre adresse électronique a été changée" in mail
