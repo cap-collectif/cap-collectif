@@ -60,7 +60,7 @@
 
                         {% for parameter in parameters %}
                             <tr>
-                                <td>{{ parameter.keyname | trans({}, 'CapcoAdminParameters') }}</td>
+                                <td>{{ parameter.keyname | trans({}, 'CapcoAppBundle') }}</td>
                                 <td>
                                     {% if parameter.isEnabled %}
                                         <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
@@ -84,7 +84,7 @@
 
                         {% for color in colors %}
                             <tr>
-                                <td>{{ color.keyname | trans({}, 'CapcoAdminParameters') }}</td>
+                                <td>{{ color.keyname | trans({}, 'CapcoAppBundle') }}</td>
                                 <td>
                                     {% if color.isEnabled %}
                                         <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
@@ -114,7 +114,7 @@
 
                         {% for image in images %}
                             <tr>
-                                <td>{{ image.keyname | trans({}, 'CapcoAdminParameters') }}</td>
+                                <td>{{ image.keyname | trans({}, 'CapcoAppBundle') }}</td>
                                 <td>
                                     {% if image.isEnabled %}
                                         <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>

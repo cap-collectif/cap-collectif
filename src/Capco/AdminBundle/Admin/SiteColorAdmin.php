@@ -20,7 +20,7 @@ class SiteColorAdmin extends Admin
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAdminParameters');
+            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
