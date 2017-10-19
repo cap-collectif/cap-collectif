@@ -99,7 +99,11 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           className="btn-outline-primary box-content__toolbar"
           onClick={() => {
             dispatch(
-              arrayPush(formName, 'questions', { private: false, required: false, position: 99 }),
+              arrayPush(formName, 'questions', {
+                private: false,
+                required: false,
+                position: fields.length + 1,
+              }),
             );
             this.setState({ editIndex: fields.length });
           }}>

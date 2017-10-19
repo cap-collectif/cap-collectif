@@ -870,7 +870,7 @@ type QuestionChoice {
 
 input QuestionInput {
   title: String!
-  type: String!
+  type: QuestionTypeValue!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -881,11 +881,12 @@ enum QuestionTypeValue {
   text
   textarea
   editor
-  medias
   radio
+  select
   checkbox
-  button
   ranking
+  medias
+  button
 }
 
 type QuestionnaireAbstractQuestion {
