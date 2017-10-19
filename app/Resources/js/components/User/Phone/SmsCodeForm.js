@@ -44,7 +44,7 @@ export class SmsCodeForm extends React.Component<Props> {
     const { submitting, handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit} style={{ maxWidth: '350px' }}>
+      <form onSubmit={handleSubmit} className="phone__confirm-code__form">
         <Field
           type="text"
           name="code"
@@ -53,17 +53,19 @@ export class SmsCodeForm extends React.Component<Props> {
           id="_code"
           component={renderComponent}
         />
-        <Button
-          type="submit"
-          bsStyle="primary"
-          style={{ padding: '6px 12px 7px' }}
-          disabled={submitting}>
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="phone.confirm.validate" />
-          )}
-        </Button>
+        <div className="phone__confirm-code__btn">
+          <Button
+            type="submit"
+            bsStyle="primary"
+            style={{ padding: '6px 12px 7px' }}
+            disabled={submitting}>
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="phone.confirm.validate" />
+            )}
+          </Button>
+        </div>
       </form>
     );
   }

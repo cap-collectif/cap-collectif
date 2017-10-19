@@ -2,12 +2,8 @@
 
 exports[`<SmsCodeForm /> should render correctly 1`] = `
 <form
+  className="phone__confirm-code__form"
   onSubmit={[Function]}
-  style={
-    Object {
-      "maxWidth": "350px",
-    }
-  }
 >
   <Field
     autoFocus={true}
@@ -22,23 +18,27 @@ exports[`<SmsCodeForm /> should render correctly 1`] = `
     name="code"
     type="text"
   />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    disabled={false}
-    style={
-      Object {
-        "padding": "6px 12px 7px",
-      }
-    }
-    type="submit"
+  <div
+    className="phone__confirm-code__btn"
   >
-    <FormattedMessage
-      id="phone.confirm.validate"
-      values={Object {}}
-    />
-  </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      style={
+        Object {
+          "padding": "6px 12px 7px",
+        }
+      }
+      type="submit"
+    >
+      <FormattedMessage
+        id="phone.confirm.validate"
+        values={Object {}}
+      />
+    </Button>
+  </div>
 </form>
 `;

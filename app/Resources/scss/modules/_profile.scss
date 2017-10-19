@@ -149,6 +149,37 @@
   margin-top: 0;
 }
 
+.phone__confirm-code {
+    &__form {
+        display: flex;
+        align-items: flex-start;
+        margin: 5px 0;
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 0;
+
+            input {
+               border-radius: 4px 0 0 4px;
+
+            }
+        }
+    }
+
+    &__btn {
+        margin-top: 27px;
+        flex: 2;
+
+        @media (max-width: $screen-sm-max) {
+            flex: none;
+        }
+
+        button {
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}
+
 #personal-data {
   .alert-info {
     display: flex;
