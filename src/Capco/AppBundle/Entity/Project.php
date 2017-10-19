@@ -822,7 +822,7 @@ class Project implements IndexableInterface
             }
         }
 
-        return $first !== null ? $first->getStep() : null;
+        return null !== $first ? $first->getStep() : null;
     }
 
     public function getCurrentStep()
@@ -871,6 +871,18 @@ class Project implements IndexableInterface
         }
 
         return $steps;
+    }
+
+    public function hasParticipativeStep(): bool
+    {
+        foreach ($this->steps as $pas) {
+            $step = $pas->getStep();
+            if ($step->isParticipative()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
