@@ -122,11 +122,9 @@ const formattedChoicesInField = field => {
 const renderResponses = ({
   fields,
   evaluationForm,
-  initialValues,
 }: {
   fields: Object,
   evaluationForm: Object,
-  initialValues: Object,
 }) => (
   <div>
     {fields.map((member, index) => {
@@ -150,7 +148,6 @@ const renderResponses = ({
         }
         default: {
           let choices = [];
-          let checkedValue;
           if (
             inputType === 'ranking' ||
             inputType === 'radio' ||
@@ -159,9 +156,24 @@ const renderResponses = ({
           ) {
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
-              checkedValue = initialValues.responses[index].value;
+              return (
+                <div>
+                  {choices.map(choice => (
+                    <Field
+                      component={component}
+                      type="radio"
+                      key={choice.id}
+                      name={`${member}.value`}
+                      id={`${member}.value`}
+                      value={choice.label}>
+                      {choice.label}
+                    </Field>
+                  ))}
+                </div>
+              );
             }
           }
+
           return (
             <Field
               key={key}
@@ -175,7 +187,6 @@ const renderResponses = ({
               placeholder="reply.your_response"
               choices={choices}
               label={label}
-              checkedValue={checkedValue}
             />
           );
         }
@@ -186,7 +197,7 @@ const renderResponses = ({
 
 export class ProposalAdminNotationForm extends React.Component<Props> {
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal, initialValues } = this.props;
+    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     return (
@@ -255,7 +266,6 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 name="responses"
                 component={renderResponses}
                 evaluationForm={evaluationForm}
-                initialValues={initialValues}
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button

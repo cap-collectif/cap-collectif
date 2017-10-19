@@ -21,7 +21,6 @@ import DateTime from './DateTime';
 import Editor from './Editor';
 import Ranking from './Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
-import MultipleChoiceRadio from './Radio';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -247,26 +246,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'radio') {
-      if (props.choices) {
-        // Custom radio type
-        const field = {};
-        field.id = props.id;
-        field.choices = props.choices;
-
-        return (
-          <MultipleChoiceRadio
-            value={value}
-            field={field}
-            label={null}
-            renderFormErrors={() => {}}
-            getGroupStyle={() => {}}
-            isReduxForm
-            checkedValue={props.checkedValue} // Ugly Hack because value is undefined (for compatibility)
-            {...props}
-          />
-        );
-      }
-
       formControl = (
         <Radio value={value} {...props}>
           {children}

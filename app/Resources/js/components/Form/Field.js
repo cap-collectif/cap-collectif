@@ -46,7 +46,6 @@ const Field = React.createClass({
     id: PropTypes.string.isRequired,
     popover: PropTypes.object,
     choices: PropTypes.array,
-    checkedValue: PropTypes.string,
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
@@ -76,7 +75,6 @@ const Field = React.createClass({
       addonAfter,
       addonBefore,
       choices,
-      checkedValue,
       isOtherAllowed,
       style,
     } = this.props;
@@ -104,7 +102,6 @@ const Field = React.createClass({
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
         choices={choices}
-        checkedValue={checkedValue}
         style={style}
         {...this.props.input}>
         {children}
