@@ -29,18 +29,18 @@ class LogManager
         ;
 
         // Update actions
-        if ($log->getAction() === 'update') {
+        if ('update' === $log->getAction()) {
             if (array_key_exists('parent', $log->getData())) {
                 $sentences[] = $this->makeSentence('move', $username);
             }
             if (array_key_exists('published', $log->getData())) {
-                if ($log->getData()['published'] === true) {
+                if (true === $log->getData()['published']) {
                     $sentences[] = $this->makeSentence('publish', $username);
                 } else {
                     $sentences[] = $this->makeSentence('unpublish', $username);
                 }
             }
-            if (array_key_exists('archived', $log->getData()) && $log->getData()['archived'] === true) {
+            if (array_key_exists('archived', $log->getData()) && true === $log->getData()['archived']) {
                 $sentences[] = $this->makeSentence('archive', $username);
             }
             if (array_key_exists('notation', $log->getData())) {
@@ -76,6 +76,6 @@ class LogManager
 
         return $this->translator->trans($transBase . $action, [
             '%author%' => $username,
-        ], 'CapcoAppBundleSynthesis');
+        ], 'CapcoAppBundle');
     }
 }

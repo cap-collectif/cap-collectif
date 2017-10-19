@@ -47,7 +47,7 @@ Scenario: Anonymous user wants to vote twice with the same email in a selection 
   When I click the proposal vote button
   And I fill the proposal vote form with already used email
   And I submit the proposal vote form
-  Then I should see "Vous avez déjà voté pour cette proposition."
+  Then I should see "proposal.vote.already_voted"
 
 @javascript @elasticsearch @security @votes_from_selection_step
 Scenario: Anonymous user wants to vote in a selection step with an email already associated to an account
@@ -56,7 +56,7 @@ Scenario: Anonymous user wants to vote in a selection step with an email already
   When I click the proposal vote button
   And I fill the proposal vote form with a registered email
   And I submit the proposal vote form
-  Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
+  Then I should see "proposal.vote.email_belongs_to_user"
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
@@ -167,7 +167,7 @@ Scenario: Anonymous user wants to vote twice with the same email
   When I click the proposal vote button
   And I fill the proposal vote form with already used email
   And I submit the proposal vote form
-  Then I should see "Vous avez déjà voté pour cette proposition."
+  Then I should see "proposal.vote.already_voted"
 
 @javascript @security @votes_from_proposal
 Scenario: Anonymous user wants to vote with an email already associated to an account
@@ -177,7 +177,7 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
   When I click the proposal vote button
   And I fill the proposal vote form with a registered email
   And I submit the proposal vote form
-  Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."
+  Then I should see "proposal.vote.email_belongs_to_user"
 
 @javascript @security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left

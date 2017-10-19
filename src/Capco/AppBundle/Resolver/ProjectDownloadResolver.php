@@ -107,7 +107,7 @@ class ProjectDownloadResolver
             $this->withVote = $withVote;
 
             if (
-                ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod')
+                ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName)
                 && !in_array('servicePilote', self::$collectHeaders, true)
             ) {
                 array_push(
@@ -188,14 +188,14 @@ class ProjectDownloadResolver
                 ++$loop;
             }
 
-            $proposal['status'] = $entity->lastStatus() !== null ? $entity->lastStatus()->getName() : '';
+            $proposal['status'] = null !== $entity->lastStatus() ? $entity->lastStatus()->getName() : '';
             $proposal['reference'] = $entity->getFullReference();
             $proposal['votesCountByStepId'] = $this->formatText($str);
             $proposal['media'] = $entity->getMedia();
 
             $proposal['likers'] = '';
             foreach ($entity->getLikers() as $liker) {
-                $separator = $proposal['likers'] === '' ? '' : ', ';
+                $separator = '' === $proposal['likers'] ? '' : ', ';
                 $proposal['likers'] = $proposal['likers'] . $separator . $liker->getDisplayName();
             }
         }
@@ -262,7 +262,7 @@ class ProjectDownloadResolver
 
     private function getProposalItem(array $proposal)
     {
-        $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
+        $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
         $author = $proposal['author'];
         $authorName = $author ? $author['username'] : $this->translator->trans(
             'project_download.values.user_removed',
@@ -309,7 +309,7 @@ class ProjectDownloadResolver
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
 
-        if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
+        if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
             $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
             $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
@@ -326,7 +326,7 @@ class ProjectDownloadResolver
 
     private function getProposalVoteItem(array $vote, array $proposal)
     {
-        $na = $this->translator->trans('project_download.values.non_applicable', [], 'CapcoAppBundle');
+        $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
         $author = $vote['user'];
         $authorName = $author ? $author['username'] : $vote['username'];
         $authorId = $author ? $author['id'] : $na;
@@ -367,7 +367,7 @@ class ProjectDownloadResolver
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
 
-        if ($this->instanceName === 'rennes' || $this->instanceName === 'rennespreprod') {
+        if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
             $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
             $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
@@ -512,7 +512,7 @@ class ProjectDownloadResolver
             return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
         }
 
-        return $this->translator->trans('project_download.values.no', [], 'CapcoAppBundle');
+        return $this->translator->trans('global.no', [], 'CapcoAppBundle');
     }
 
     private function dateToString(\DateTime $date = null)

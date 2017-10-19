@@ -165,7 +165,7 @@ Scenario: GraphQL client wants to change proposal collect status
   }
   """
   And 1 mail should be sent
-  And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
+  And I open mail with subject "proposal_status_change_collect.notification.subject"
   Then I should see "<li><strong>Nouveau statut :</strong> Rejeté</li>" in mail
 
 @database
@@ -361,7 +361,7 @@ Scenario: GraphQL client wants to update proposal status
   }
   """
   And 1 mail should be sent
-  And I open mail with subject "Le statut de votre proposition vient d’être mis à jour sur Cap-Collectif."
+  And I open mail with subject "proposal_status_change_collect.notification.subject"
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
   When I send a GraphQL POST request:
   """

@@ -23,4 +23,17 @@ for (const locale of locales) {
 
   const bundlePath = `translations/messages.${locale}.json`;
   fs.writeFileSync(bundlePath, JSON.stringify(translations, null, 2));
+
+  // Generate a file for test env without traduction
+  if (locale === 'fr-FR') {
+    let testTranslations = {};
+    if (Array.isArray(json.xliff.file.unit)) {
+      testTranslations = json.xliff.file.unit.reduce((acc, trad) => {
+        acc[trad.segment.source] = trad.segment.source;
+        return acc;
+      }, {});
+    }
+    const bundlePath = `translations/messages.test.json`;
+    fs.writeFileSync(bundlePath, JSON.stringify(testTranslations, null, 2));
+  }
 }

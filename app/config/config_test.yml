@@ -5,6 +5,12 @@ framework:
   test: ~
   profiler:
     collect: false
+  translator:
+    enabled: false
+
+translation:
+    symfony_profiler:
+        enabled: false
 
 qandidate_toggle:
     redis_namespace: feature_toggle_test

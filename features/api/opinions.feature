@@ -190,7 +190,7 @@ Feature: Opinions
           "code": 400,
           "message":"Validation Failed",
           "errors": {
-            "errors": ["Appendices must correspond to the opinion type."],
+            "errors": ["opinion.wrong_appendices"],
             "children": @...@
          }
       }
@@ -219,7 +219,7 @@ Feature: Opinions
             "code": 400,
             "message": "Validation Failed",
             "errors": {
-                "errors": ["Appendices must correspond to the opinion type."],
+                "errors": ["opinion.wrong_appendices"],
                 "children": @...@
             }
         }

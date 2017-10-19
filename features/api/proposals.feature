@@ -1181,7 +1181,7 @@ Scenario: Logged in API client wants to add a proposal with no category when man
     "message": "Validation Failed",
     "errors": {
         "errors": [
-          "Vous devez spécifier une catégorie."
+          "global.no_category_when_mandatory"
         ],
         "children": @...@
     }
@@ -1220,7 +1220,7 @@ Scenario: Logged in API client wants to add a proposal with no address when mand
     "message": "Validation Failed",
     "errors": {
         "errors": [
-          "Vous devez spécifier une adresse valide."
+          "global.no_address_when_mandatory"
         ],
         "children": @...@
     }

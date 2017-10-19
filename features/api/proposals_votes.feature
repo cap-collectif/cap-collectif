@@ -95,7 +95,7 @@ Scenario: Logged in API client wants to vote several times for a proposal in a s
     "code": 400,
     "message": "Validation Failed",
     "errors": {
-      "errors": ["Vous avez déjà voté pour cette proposition."],
+      "errors": ["proposal.vote.already_voted"],
       "children": {
         "comment":[],
         "private":[]
@@ -124,7 +124,7 @@ Scenario: Anonymous API client wants to vote several times for a proposal in a s
       "children": {
         "username":[],
         "email": {
-          "errors": ["Vous avez déjà voté pour cette proposition."]
+          "errors": ["proposal.vote.already_voted"]
         },
         "comment":[],
         "private":[]
@@ -153,7 +153,7 @@ Scenario: Anonymous API client wants to vote with an email associated to an acco
       "children": {
         "username":[],
         "email": {
-          "errors": ["Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette proposition."]
+          "errors": ["proposal.vote.email_belongs_to_user"]
         },
         "comment":[],
         "private":[]
@@ -244,7 +244,7 @@ Scenario: Logged in API client wants to vote when he has not enough credits left
     "code":400,
     "message":"Validation Failed",
     "errors": {
-      "errors": ["Vous n'avez pas suffisamment de cr\u00e9dits disponibles pour soutenir cette proposition."],
+      "errors": ["proposal.vote.not_enough_credits"],
       "children":{"comment":[],"private":[]}
     }
   }

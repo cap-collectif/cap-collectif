@@ -127,7 +127,7 @@ Feature: Ideas
     """
     {
       "code": 404,
-      "message": "Cette fonction n'est pas activée, veuillez l'activer dans l'espace d'administration !",
+      "message": "error.feature_not_enabled",
       "errors": @null@
     }
     """
@@ -289,7 +289,7 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "Vous avez déjà voté pour cette idée.",
+       "message": "idea.vote.already_voted",
        "errors": @null@
     }
     """
@@ -308,7 +308,7 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "Vous avez déjà voté pour cette idée.",
+       "message": "idea.vote.already_voted",
        "errors": @null@
     }
     """
@@ -327,7 +327,7 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.",
+       "message": "idea.vote.email_belongs_to_user",
        "errors": @null@
     }
     """
@@ -398,7 +398,7 @@ Feature: Ideas
     """
     {
       "code": 400,
-      "message": "Ce formulaire ne doit pas contenir des champs supplémentaires.",
+      "message": "This form should not contain extra fields.",
       "errors": @null@
     }
     """
@@ -418,7 +418,7 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "Ce formulaire ne doit pas contenir des champs supplémentaires.",
+       "message": "This form should not contain extra fields.",
        "errors": @null@
     }
     """

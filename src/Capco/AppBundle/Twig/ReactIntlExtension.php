@@ -8,11 +8,13 @@ class ReactIntlExtension extends \Twig_Extension
 {
     private $translationFolder;
     private $resolver;
+    private $env;
 
-    public function __construct(string $translationFolder, Resolver $resolver)
+    public function __construct(string $translationFolder, Resolver $resolver, string $env)
     {
         $this->translationFolder = $translationFolder;
         $this->resolver = $resolver;
+        $this->env = $env;
     }
 
     public function getFunctions()
@@ -30,6 +32,8 @@ class ReactIntlExtension extends \Twig_Extension
 
     public function getIntlMessages()
     {
-        return json_decode(file_get_contents($this->translationFolder . 'messages.' . $this->getLocale() . '.json'), true);
+        $filename = 'test' === 'messages.' . $this->env ? 'test' : $this->getLocale() . '.json';
+
+        return json_decode(file_get_contents($this->translationFolder . $filename), true);
     }
 }

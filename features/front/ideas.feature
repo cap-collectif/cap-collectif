@@ -318,7 +318,7 @@ Scenario: Anonymous user wants to vote twice with the same email
   And the idea has 2 votes
   When I fill the idea vote form with already used email
   And I submit the idea vote form
-  Then I should see "Vous avez déjà voté pour cette idée."
+  Then I should see "idea.vote.already_voted"
   And the idea should have 2 votes
 
 @javascript @security
@@ -327,7 +327,7 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
   And the idea has 2 votes
   When I fill the idea vote form with a registered email
   And I submit the idea vote form
-  Then I should see "Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée."
+  Then I should see "idea.vote.email_belongs_to_user"
   And the idea should have 2 votes
 
 # Trash
@@ -343,7 +343,6 @@ Scenario: Can not access trash if not logged in
   Given feature "idea_trash" is enabled
   And I go to the ideas page
   When I follow "Voir la corbeille"
-  # Then I should see "Se connecter"
 
 @javascript
 Scenario: Ideas trash display correct number of elements

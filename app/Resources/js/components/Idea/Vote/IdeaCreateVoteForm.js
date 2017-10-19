@@ -41,19 +41,10 @@ const onSubmit = (values, dispatch, props) => {
       return vote;
     })
     .catch(error => {
-      if (
-        error &&
-        error.response &&
-        error.response.message === 'Vous avez déjà voté pour cette idée.'
-      ) {
+      if (error && error.response && error.response.message === 'idea.vote.already_voted') {
         throw new SubmissionError({ email: 'idea.vote.form.already.voted' });
       }
-      if (
-        error &&
-        error.response &&
-        error.response.message ===
-          'Cette adresse électronique est déjà associée à un compte. Veuillez vous connecter pour soutenir cette idée.'
-      ) {
+      if (error && error.response && error.response.message === 'idea.vote.email_belongs_to_user') {
         throw new SubmissionError({ email: 'idea.vote.form.email.has_account' });
       }
       AppDispatcher.dispatch({

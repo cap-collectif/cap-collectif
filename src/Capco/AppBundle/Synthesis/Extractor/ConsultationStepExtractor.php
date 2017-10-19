@@ -110,11 +110,11 @@ class ConsultationStepExtractor
             $elementFromOpinion = $this->getRelatedElement($opinion, $parent);
 
             // Create elements from arguments
-            if ($opinion->getOpinionType()->getCommentSystem() === 2) {
+            if (2 === $opinion->getOpinionType()->getCommentSystem()) {
                 $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromOpinion);
                 $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromOpinion);
                 $this->createElementsFromArguments($opinion->getArguments(), $proArgumentsElement, $consArgumentsElement);
-            } elseif ($opinion->getOpinionType()->getCommentSystem() === 1) {
+            } elseif (1 === $opinion->getOpinionType()->getCommentSystem()) {
                 $simpleArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_SIMPLE, $elementFromOpinion);
                 $this->createElementsFromArguments($opinion->getArguments(), $simpleArgumentsElement);
             }
@@ -163,9 +163,9 @@ class ConsultationStepExtractor
     public function createElementsFromArguments($arguments, SynthesisElement $prosFolder, SynthesisElement $consFolder = null)
     {
         foreach ($arguments as $argument) {
-            if ($argument->getType() === 1 || $consFolder !== null) {
+            if (1 === $argument->getType() || null !== $consFolder) {
                 // Define parent folder
-                if ($argument->getType() === 1) {
+                if (1 === $argument->getType()) {
                     $parent = $prosFolder;
                 } else {
                     $parent = $consFolder;
@@ -220,11 +220,11 @@ class ConsultationStepExtractor
      */
     public function createFolderInElement(string $label, SynthesisElement $parent): SynthesisElement
     {
-        $label = $this->translator->trans($label, [], 'CapcoAppBundleSynthesis');
+        $label = $this->translator->trans($label, [], 'CapcoAppBundle');
 
         // Check if folder already exists
         foreach ($parent->getChildren() as $el) {
-            if ($el->getDisplayType() === 'folder' && $el->getTitle() === $label) {
+            if ('folder' === $el->getDisplayType() && $el->getTitle() === $label) {
                 return $el;
             }
         }
@@ -339,12 +339,12 @@ class ConsultationStepExtractor
 
             $content = '';
             if (count($opinion->getAppendices()) > 0) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundle') . '</p>';
                 foreach ($opinion->getAppendices() as $app) {
                     $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
                     $content .= $app->getBody();
                 }
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') . '</p>';
             }
             $content .= $opinion->getBody();
 
@@ -371,9 +371,9 @@ class ConsultationStepExtractor
 
             $content = '';
             if ($version->getComment()) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundle') . '</p>';
                 $content .= $version->getComment();
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundleSynthesis') . '</p>';
+                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') . '</p>';
             }
             $content .= $version->getBody();
             $element->setBody($content);
