@@ -17,8 +17,6 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
         '_sort_by' => 'position',
     ];
 
-    protected $translationDomain = 'SonataAdminBundle';
-
     public function postRemove($object)
     {
         // delete linked question
@@ -47,7 +45,7 @@ class QuestionnaireAbstractQuestionAdmin extends Admin
             ->add('question', 'sonata_type_model_list', [
                 'required' => true,
                 'label' => 'admin.fields.questionnaire_abstractquestion.questions',
-                'translation_domain' => 'SonataAdminBundle',
+                'translation_domain' => 'CapcoAppBundle',
                 'btn_delete' => false,
                 'btn_add' => 'admin.fields.questionnaire_abstractquestion.questions_add',
             ], [

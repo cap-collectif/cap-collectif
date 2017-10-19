@@ -38,12 +38,12 @@ file that was distributed with this source code.
                                                             {% if admin.subClasses is empty %}
                                                                 <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('create')}}">
                                                                     <i class="fa fa-plus-circle"></i>
-                                                                    {% trans from 'SonataAdminBundle' %}link_add{% endtrans %}
+                                                                    {% trans from 'CapcoAppBundle' %}link_add{% endtrans %}
                                                                 </a>
                                                             {% else %}
                                                                 <a class="btn btn-link btn-flat dropdown-toggle" data-toggle="dropdown" href="#">
                                                                     <i class="fa fa-plus-circle"></i>
-                                                                    {% trans from 'SonataAdminBundle' %}link_add{% endtrans %}
+                                                                    {% trans from 'CapcoAppBundle' %}link_add{% endtrans %}
                                                                     <span class="caret"></span>
                                                                 </a>
                                                                 <ul class="dropdown-menu">
@@ -58,7 +58,7 @@ file that was distributed with this source code.
                                                         {% if admin.hasroute('list') and admin.isGranted('LIST') %}
                                                             <a class="btn btn-link btn-flat" href="{{ admin.generateUrl('list')}}">
                                                                 <i class="glyphicon glyphicon-list"></i>
-                                                                {% trans from 'SonataAdminBundle' %}link_list{% endtrans -%}
+                                                                {% trans from 'CapcoAppBundle' %}link_list{% endtrans -%}
                                                             </a>
                                                         {% endif %}
                                                     </div>

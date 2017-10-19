@@ -8,7 +8,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.page, show_in_dashboard: true}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.menu_item:
     class: Capco\AdminBundle\Admin\MenuItemAdmin
@@ -16,7 +16,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.menu_item}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.opinion:
     class: Capco\AdminBundle\Admin\OpinionAdmin
@@ -24,7 +24,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.opinion}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.argument:
     class: Capco\AdminBundle\Admin\ArgumentAdmin
@@ -32,7 +32,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.argument}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.appendix:
     class: Capco\AdminBundle\Admin\OpinionAppendixAdmin
@@ -40,7 +40,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.appendix}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.appendix_type:
     class: Capco\AdminBundle\Admin\AppendixTypeAdmin
@@ -48,7 +48,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.appendix_type}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.opinion_type_appendix_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin
@@ -56,7 +56,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.appendixTypes}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.argument_vote:
     class: Capco\AdminBundle\Admin\ArgumentVoteAdmin
@@ -64,7 +64,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.argument_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal_collect_vote:
     class: Capco\AdminBundle\Admin\ProposalCollectVoteAdmin
@@ -72,7 +72,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal_selection_vote:
     class: Capco\AdminBundle\Admin\ProposalSelectionVoteAdmin
@@ -80,7 +80,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_collect_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.project:
     class: Capco\AdminBundle\Admin\ProjectAdmin
@@ -88,7 +88,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.project}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal:
     class: Capco\AdminBundle\Admin\ProposalAdmin
@@ -96,7 +96,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.proposal}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
       - [ setTemplate, [list, CapcoAdminBundle:Proposal:list.html.twig]]
 
@@ -106,7 +106,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.reply}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.questionnaire:
     class: Capco\AdminBundle\Admin\QuestionnaireAdmin
@@ -114,7 +114,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.questionnaire}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal_form:
     class: Capco\AdminBundle\Admin\ProposalFormAdmin
@@ -122,7 +122,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.proposal_form}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
       - [ setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
 
@@ -133,7 +133,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.question}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setSubClasses, [{ simple_question: Capco\AppBundle\Entity\Questions\SimpleQuestion, multiple_choice_question: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion, document_question: Capco\AppBundle\Entity\Questions\MediaQuestion }]]
       - [ setTemplate, [edit, CapcoAdminBundle:Question:edit.html.twig]]
 
@@ -143,7 +143,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.question_choice}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.status:
     class: Capco\AdminBundle\Admin\StatusAdmin
@@ -151,7 +151,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.status}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.footer_social_network:
     class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
@@ -159,7 +159,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.footer_social_network}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.idea:
     class: Capco\AdminBundle\Admin\IdeaAdmin
@@ -167,7 +167,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.idea}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.idea_vote:
     class: Capco\AdminBundle\Admin\IdeaVoteAdmin
@@ -175,7 +175,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.idea_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.newsletter_subscription:
     class: Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
@@ -183,7 +183,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.newsletter_subscription}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.opinion_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAdmin
@@ -191,7 +191,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.opinion_type}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.reporting:
     class: Capco\AdminBundle\Admin\ReportingAdmin
@@ -199,7 +199,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.reporting}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.step:
     class: Capco\AdminBundle\Admin\StepAdmin
@@ -207,7 +207,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.step}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [setSubClasses, [{ collect_step: Capco\AppBundle\Entity\Steps\CollectStep, presentation_step: Capco\AppBundle\Entity\Steps\PresentationStep, consultation_step: Capco\AppBundle\Entity\Steps\ConsultationStep, synthesis_step: Capco\AppBundle\Entity\Steps\SynthesisStep, ranking_step: Capco\AppBundle\Entity\Steps\RankingStep, selection_step: Capco\AppBundle\Entity\Steps\SelectionStep, questionnaire_step: Capco\AppBundle\Entity\Steps\QuestionnaireStep, other_step: Capco\AppBundle\Entity\Steps\OtherStep }]]
 
   capco_admin.admin.theme:
@@ -216,7 +216,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.theme}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.opinion_vote:
     class: Capco\AdminBundle\Admin\OpinionVoteAdmin
@@ -224,7 +224,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.opinion_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.site_parameter:
     class: Capco\AdminBundle\Admin\SiteParameterAdmin
@@ -232,7 +232,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.site_parameter}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.site_color:
     class: Capco\AdminBundle\Admin\SiteColorAdmin
@@ -240,7 +240,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.site_color}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.social_network:
     class: Capco\AdminBundle\Admin\SocialNetworkAdmin
@@ -248,7 +248,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.social_network}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.site_image:
     class: Capco\AdminBundle\Admin\SiteImageAdmin
@@ -256,7 +256,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin.label.site_image}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.category:
     class: Capco\AdminBundle\Admin\CategoryAdmin
@@ -264,7 +264,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.category}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.source:
     class: Capco\AdminBundle\Admin\SourceAdmin
@@ -272,7 +272,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.source}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.post:
     class: Capco\AdminBundle\Admin\PostAdmin
@@ -280,7 +280,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.post}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.event:
     class: Capco\AdminBundle\Admin\EventAdmin
@@ -288,7 +288,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.events}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.event_registrations:
     class: Capco\AdminBundle\Admin\EventRegistrationAdmin
@@ -296,7 +296,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.event_registrations}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.video:
     class: Capco\AdminBundle\Admin\VideoAdmin
@@ -304,7 +304,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.video}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.comment:
     class: Capco\AdminBundle\Admin\CommentAdmin
@@ -312,7 +312,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [setSubClasses, [{idea_comment: Capco\AppBundle\Entity\IdeaComment, event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment, proposal_comment: Capco\AppBundle\Entity\ProposalComment}]]
 
   capco_admin.admin.comment_vote:
@@ -321,7 +321,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.comment_vote}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.consultation_step_type:
     class: Capco\AdminBundle\Admin\ConsultationStepTypeAdmin
@@ -329,7 +329,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.consultation_step_type}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.section:
     class: Capco\AdminBundle\Admin\SectionAdmin
@@ -337,7 +337,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.pages, label: admin.label.section}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.user_type:
     class: Capco\AdminBundle\Admin\UserTypeAdmin
@@ -345,7 +345,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: sonata.admin.group.user, label: admin.label.user_type}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.highlighted:
     class: Capco\AdminBundle\Admin\HighlightedContentAdmin
@@ -353,7 +353,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.content, label: admin.label.highlighted}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
       - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_project: Capco\AppBundle\Entity\HighlightedProject}]]
 
@@ -362,12 +362,16 @@ services:
     arguments: [~, Capco\AppBundle\Entity\Steps\ProjectAbstractStep, SonataAdminBundle:CRUD]
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.project_abstractstep}
+    calls:
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.questionnaire_abstractquestion:
     class: Capco\AdminBundle\Admin\QuestionnaireAbstractQuestionAdmin
     arguments: [~, Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion, SonataAdminBundle:CRUD]
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.questionnaire_abstractquestion}
+    calls:
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.synthesis:
     class: Capco\AdminBundle\Admin\SynthesisAdmin
@@ -375,7 +379,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, label: admin.label.synthesis}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.opinion_version:
     class: Capco\AdminBundle\Admin\OpinionVersionAdmin
@@ -383,7 +387,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.opinion_version}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.answer:
     class: Capco\AdminBundle\Admin\AnswerAdmin
@@ -391,7 +395,7 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.answer}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.selection_step:
       class: Capco\AdminBundle\Admin\SelectionStepAdmin
@@ -399,7 +403,7 @@ services:
       tags:
         - {name: sonata.admin, manager_type: orm, label: admin.label.step}
       calls:
-        - [ setTranslationDomain, [SonataAdminBundle]]
+        - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.response:
       class: Capco\AdminBundle\Admin\ResponseAdmin
@@ -407,7 +411,7 @@ services:
       tags:
         - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.response}
       calls:
-        - [ setTranslationDomain, [SonataAdminBundle]]
+        - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal_category:
       class: Capco\AdminBundle\Admin\ProposalCategoryAdmin
@@ -415,13 +419,15 @@ services:
       tags:
         - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_category}
       calls:
-        - [ setTranslationDomain, [SonataAdminBundle]]
+        - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.proposal_form.notification:
       class: Capco\AdminBundle\Admin\ProposalFormNotificationConfigurationAdmin
       arguments: [~, Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration, SonataAdminBundle:CRUD]
       tags:
         - {name: sonata.admin, manager_type: orm, label: admin.label.proposal_form.notifications}
+      calls:
+        - [ setTranslationDomain, [CapcoAppBundle]]
 
   capco_admin.admin.project_type:
     class: Capco\AdminBundle\Admin\ProjectTypeAdmin
@@ -429,4 +435,4 @@ services:
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.pages.types}
     calls:
-      - [ setTranslationDomain, [SonataAdminBundle]]
+      - [ setTranslationDomain, [CapcoAppBundle]]

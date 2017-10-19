@@ -162,7 +162,6 @@ class ProjectAdmin extends Admin
             ])
             ->add('projectType', 'sonata_type_model', [
                 'label' => 'admin.fields.project.type.title',
-                'translation_domain' => 'SonataAdminBundle',
                 'required' => false,
                 'attr' => ['placeholder' => 'admin.help.project.type'],
             ])

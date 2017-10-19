@@ -120,12 +120,12 @@
                                         {% endblock %}
 
                                         {% block num_results %}
-                                            {% transchoice admin.datagrid.pager.nbresults with {'%count%': admin.datagrid.pager.nbresults} from 'SonataAdminBundle' %}list_results_count{% endtranschoice %}
+                                            {% transchoice admin.datagrid.pager.nbresults with {'%count%': admin.datagrid.pager.nbresults} from 'CapcoAppBundle' %}list_results_count{% endtranschoice %}
                                             &nbsp;-&nbsp;
                                         {% endblock %}
 
                                         {% block max_per_page %}
-                                            <label class="control-label" for="{{ admin.uniqid }}_per_page">{% trans from 'SonataAdminBundle' %}label_per_page{% endtrans %}</label>
+                                            <label class="control-label" for="{{ admin.uniqid }}_per_page">{% trans from 'CapcoAppBundle' %}label_per_page{% endtrans %}</label>
                                             <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
                                                 {% for per_page in admin.getperpageoptions %}
                                                     <option {% if per_page == admin.datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('browser', {'filter': admin.datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
@@ -147,11 +147,11 @@
                                     <div class="text-center">
                                         <ul class="pagination">
                                             {% if admin.datagrid.pager.page > 2  %}
-                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, 1)|merge(ckParameters)) }}" title="{{ 'link_first_pager'|trans({}, 'SonataAdminBundle') }}">&laquo;</a></li>
+                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, 1)|merge(ckParameters)) }}" title="{{ 'link_first_pager'|trans({}, 'CapcoAppBundle') }}">&laquo;</a></li>
                                             {% endif %}
 
                                             {% if admin.datagrid.pager.page != admin.datagrid.pager.previouspage %}
-                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.previouspage)|merge(ckParameters)) }}" title="{{ 'link_previous_pager'|trans({}, 'SonataAdminBundle') }}">&lsaquo;</a></li>
+                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.previouspage)|merge(ckParameters)) }}" title="{{ 'link_previous_pager'|trans({}, 'CapcoAppBundle') }}">&lsaquo;</a></li>
                                             {% endif %}
 
                                             {# Set the number of pages to display in the pager #}
@@ -164,11 +164,11 @@
                                             {% endfor %}
 
                                             {% if admin.datagrid.pager.page != admin.datagrid.pager.nextpage %}
-                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.nextpage)|merge(ckParameters)) }}" title="{{ 'link_next_pager'|trans({}, 'SonataAdminBundle') }}">&rsaquo;</a></li>
+                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.nextpage)|merge(ckParameters)) }}" title="{{ 'link_next_pager'|trans({}, 'CapcoAppBundle') }}">&rsaquo;</a></li>
                                             {% endif %}
 
                                             {% if admin.datagrid.pager.page != admin.datagrid.pager.lastpage and admin.datagrid.pager.lastpage != admin.datagrid.pager.nextpage %}
-                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.lastpage)|merge(ckParameters)) }}" title="{{ 'link_last_pager'|trans({}, 'SonataAdminBundle') }}">&raquo;</a></li>
+                                                <li><a href="{{ admin.generateUrl('browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.lastpage)|merge(ckParameters)) }}" title="{{ 'link_last_pager'|trans({}, 'CapcoAppBundle') }}">&raquo;</a></li>
                                             {% endif %}
                                         </ul>
                                     </div>
@@ -182,7 +182,7 @@
             </table>
         {% else %}
             <p class="notice">
-                {{ 'no_result'|trans({}, 'SonataAdminBundle') }}
+                {{ 'no_result'|trans({}, 'CapcoAppBundle') }}
             </p>
         {% endif %}
     </div>
@@ -192,7 +192,7 @@
     {% if admin.datagrid.filters %}
         <form class="sonata-filter-form {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('browser') }}" method="GET">
             <fieldset class="filter_legend">
-                <legend class="filter_legend {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">{{ 'label_filters'|trans({}, 'SonataAdminBundle') }}</legend>
+                <legend class="filter_legend {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">{{ 'label_filters'|trans({}, 'CapcoAppBundle') }}</legend>
 
                 <div class="filter_container {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">
                     <div>
@@ -210,9 +210,9 @@
                     {% set foo = form.children['_page'].setRendered() %}
                     {{ form_rest(form) }}
 
-                    <input type="submit" class="btn btn-primary" value="{{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}" />
+                    <input type="submit" class="btn btn-primary" value="{{ 'btn_filter'|trans({}, 'CapcoAppBundle') }}" />
 
-                    <a class="btn" href="{{ admin.generateUrl('browser', {filters: 'reset'}|merge(ckParameters)) }}">{{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}</a>
+                    <a class="btn" href="{{ admin.generateUrl('browser', {filters: 'reset'}|merge(ckParameters)) }}">{{ 'link_reset_filter'|trans({}, 'CapcoAppBundle') }}</a>
                 </div>
 
                 {% for paramKey, paramValue in admin.persistentParameters|merge(ckParameters) %}

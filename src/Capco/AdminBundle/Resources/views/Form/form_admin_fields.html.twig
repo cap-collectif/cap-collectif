@@ -49,7 +49,7 @@
          {% set attr = attr|merge({'class': attr.class|default('') ~ ' checkbox  login__checkbox'}) %}
          <div {{ block('widget_container_attributes') }}>
              <label for="{{ id }}">
-                 <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans({}, translation_domain | default('SonataAdminBundle')) }}
+                 <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans({}, translation_domain | default('CapcoAppBundle')) }}
              </label>
          </div>
      {% endspaceless %}
@@ -68,7 +68,7 @@
                     }) %}
                 {% elseif sonata_admin.field_description.options.placeholder is defined and sonata_admin.field_description.options.placeholder %}
                     <span class="inner-field-short-description">
-                        {{ sonata_admin.field_description.options.placeholder|trans({}, 'SonataAdminBundle') }}
+                        {{ sonata_admin.field_description.options.placeholder|trans({}, 'CapcoAppBundle') }}
                     </span>
                 {% endif %}
             </span>

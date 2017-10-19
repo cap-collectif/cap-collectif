@@ -55,7 +55,7 @@ class SynthesisAdmin extends Admin
                 'label' => 'admin.fields.synthesis.source_type',
                 'required' => true,
                 'choices' => Synthesis::$sourceTypesLabels,
-                'translation_domain' => 'CapcoAppBundleSynthesis',
+                'translation_domain' => 'CapcoAppBundle',
                 'map' => [
                     'none' => ['enabled'],
                     'consultation_step' => ['enabled', 'consultationStep'],

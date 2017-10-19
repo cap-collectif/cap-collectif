@@ -2,6 +2,6 @@
 
 {% block field %}
     {%  if object is not null %}
-        <a href="{{ object | capco_url }}">{{ 'admin.global.contribution_link_label' | trans({}, 'SonataAdminBundle') }}</a>
+        <a href="{{ object | capco_url }}">{{ 'admin.global.contribution_link_label' | trans({}, 'CapcoAppBundle') }}</a>
     {%  endif %}
 {% endblock %}

@@ -9,20 +9,20 @@
 
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">{{ title | trans({}, 'SonataAdminBundle') }}</h3>
+                <h3 class="box-title">{{ title | trans({}, 'CapcoAppBundle') }}</h3>
             </div>
             <form method="POST" action="{{ path('capco_admin_contributions_' ~ del_action, {'type': type, 'id': id}) }}">
                 <div class="box-body">
-                    <p>{{ message | trans({}, 'SonataAdminBundle') }}</p>
-                    <label for="motives" class="control-label">{{ inputLabel | trans({}, 'SonataAdminBundle') }}</label>
+                    <p>{{ message | trans({}, 'CapcoAppBundle') }}</p>
+                    <label for="motives" class="control-label">{{ inputLabel | trans({}, 'CapcoAppBundle') }}</label>
                     <textarea class="form-control" name="motives"></textarea>
                 </div>
                 <div class="box-footer clearfix">
-                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ submit|trans({}, 'SonataAdminBundle') }}</button>
-                    {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ submit|trans({}, 'CapcoAppBundle') }}</button>
+                    {{ 'delete_or'|trans({}, 'CapcoAppBundle') }}
                     <a class="btn btn-success" href="{{ path('capco_admin_contributions_show', {'type': type, 'id': id}) }}">
                         <i class="glyphicon glyphicon-eye"></i>
-                        {{ 'link_action_show'|trans({}, 'SonataAdminBundle') }}</a>
+                        {{ 'link_action_show'|trans({}, 'CapcoAppBundle') }}</a>
                 </div>
             </form>
         </div>

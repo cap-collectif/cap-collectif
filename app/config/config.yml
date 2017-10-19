@@ -60,6 +60,7 @@ translation:
   locales: "%locales%"
   configs:
     app:
+      dirs: ["%kernel.root_dir%/../src"]
       output_dir: "%kernel.root_dir%/../translations"
       remote_storage: ["php_translation.adapter.loco"]
 

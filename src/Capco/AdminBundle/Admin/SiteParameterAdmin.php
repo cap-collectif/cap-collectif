@@ -99,7 +99,7 @@ class SiteParameterAdmin extends Admin
                 'required' => false,
                 'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
             ]);
-        } elseif ($subject->getKeyname() === 'homepage.jumbotron.margin' && $subject->getType() === $types['select']) {
+        } elseif ('homepage.jumbotron.margin' === $subject->getKeyname() && $subject->getType() === $types['select']) {
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
@@ -109,6 +109,16 @@ class SiteParameterAdmin extends Admin
                     100 => 'Marges par défaut (100px)',
                     150 => 'Grandes marges (150px)',
                     200 => 'Marges importantes (200px)',
+                ],
+            ]);
+        } elseif ('global.locale' === $subject->getKeyname()) {
+            $formMapper->add('value', ChoiceType::class, [
+                'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
+                'choices' => [
+                    'fr-FR' => 'French (France)',
+                    'en-GB' => 'English (UK)',
+                    'es-ES' => 'Spanish (Spain)',
                 ],
             ]);
         } else {

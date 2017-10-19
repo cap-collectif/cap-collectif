@@ -80,7 +80,7 @@ class RecentContributionsController extends Controller
             $this->get('translator')->trans(
                 'admin.global.validate',
                 [],
-                'SonataAdminBundle'
+                'CapcoAppBundle'
             )
         );
 
@@ -119,7 +119,7 @@ class RecentContributionsController extends Controller
                 $this->get('translator')->trans(
                     'admin.global.unpublish',
                     [],
-                    'SonataAdminBundle'
+                    'CapcoAppBundle'
                 )
             );
 
@@ -166,7 +166,7 @@ class RecentContributionsController extends Controller
                 $this->get('translator')->trans(
                     'admin.global.trash',
                     [],
-                    'SonataAdminBundle'
+                    'CapcoAppBundle'
                 )
             );
 

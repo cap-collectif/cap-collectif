@@ -5,23 +5,23 @@
     <div class="col-xs-12 col-md-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h2>{{ label | trans({}, 'SonataAdminBundle') }}</h2>
+                <h2>{{ label | trans({}, 'CapcoAppBundle') }}</h2>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="sonata-ba-list-field-header">
                             <th class="sonata-ba-list-field-header-text">
-                                {{ 'admin.settings.header.name'|trans({}, 'SonataAdminBundle') }}
+                                {{ 'admin.settings.header.name'|trans({}, 'CapcoAppBundle') }}
                             </th>
                             <th class="sonata-ba-list-field-header-text">
-                                {{ 'admin.settings.header.enabled'|trans({}, 'SonataAdminBundle') }}
+                                {{ 'admin.settings.header.enabled'|trans({}, 'CapcoAppBundle') }}
                             </th>
                             <th class="sonata-ba-list-field-header-text">
-                                {{ 'admin.settings.header.value'|trans({}, 'SonataAdminBundle') }}
+                                {{ 'admin.settings.header.value'|trans({}, 'CapcoAppBundle') }}
                             </th>
                             <th class="sonata-ba-list-field-header-text">
-                                {{ 'admin.settings.header.action'|trans({}, 'SonataAdminBundle') }}
+                                {{ 'admin.settings.header.action'|trans({}, 'CapcoAppBundle') }}
                             </th>
                         </tr>
                     </thead>
@@ -31,26 +31,26 @@
                     {% for toggle, value in toggles %}
                         {% set key = 'capco.module.' ~ toggle %}
                         <tr>
-                            <td>{{ key|trans({}, 'SonataAdminBundle') }}</td>
+                            <td>{{ key|trans({}, 'CapcoAppBundle') }}</td>
                             <td>
                                 {% if value %}
-                                    <span class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                                    <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                 {% else %}
-                                    <span class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                    <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
                                 {% endif %}
                             </td>
                             <td>N/A</td>
                             <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                 <div class="btn-group">
                                     {% if value %}
-                                        <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'disable'|trans({}, 'SonataAdminBundle') }}">
+                                        <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'disable'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
-                                            {{ 'action_disable'|trans({}, 'SonataAdminBundle') }}
+                                            {{ 'action_disable'|trans({}, 'CapcoAppBundle') }}
                                         </a>
                                     {% else %}
-                                        <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'enable'|trans({}, 'SonataAdminBundle') }}">
+                                        <a href="{{ path('capco_admin_feature_switch', { toggle: toggle }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'enable'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
-                                            {{ 'action_enable'|trans({}, 'SonataAdminBundle') }}
+                                            {{ 'action_enable'|trans({}, 'CapcoAppBundle') }}
                                         </a>
                                     {% endif %}
                                 </div>
@@ -63,9 +63,9 @@
                                 <td>{{ parameter.keyname | trans({}, 'CapcoAdminParameters') }}</td>
                                 <td>
                                     {% if parameter.isEnabled %}
-                                        <span class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                                        <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                     {% else %}
-                                        <span class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                        <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
                                     {% endif %}
                                 </td>
                                 <td>
@@ -73,9 +73,9 @@
                                 </td>
                                 <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                     <div class="btn-group">
-                                        <a href="{{ path('admin_capco_app_siteparameter_edit', {'id': parameter.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
+                                        <a href="{{ path('admin_capco_app_siteparameter_edit', {'id': parameter.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
-                                            {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+                                            {{ 'action_edit'|trans({}, 'CapcoAppBundle') }}
                                         </a>
                                     </div>
                                 </td>
@@ -87,9 +87,9 @@
                                 <td>{{ color.keyname | trans({}, 'CapcoAdminParameters') }}</td>
                                 <td>
                                     {% if color.isEnabled %}
-                                        <span class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                                        <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                     {% else %}
-                                        <span class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                        <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
                                     {% endif %}
                                 </td>
                                 <td>
@@ -98,14 +98,14 @@
                                             <strong>{{ color.value }}</strong>
                                         </div>
                                     {% else %}
-                                        {{ 'admin.settings.color.undefined' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.settings.color.undefined' | trans({}, 'CapcoAppBundle') }}
                                     {% endif %}
                                 </td>
                                 <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                     <div class="btn-group">
-                                        <a href="{{ path('admin_capco_app_sitecolor_edit', {'id': color.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
+                                        <a href="{{ path('admin_capco_app_sitecolor_edit', {'id': color.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
-                                            {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+                                            {{ 'action_edit'|trans({}, 'CapcoAppBundle') }}
                                         </a>
                                     </div>
                                 </td>
@@ -117,9 +117,9 @@
                                 <td>{{ image.keyname | trans({}, 'CapcoAdminParameters') }}</td>
                                 <td>
                                     {% if image.isEnabled %}
-                                        <span class="label label-success">{%- trans from 'SonataAdminBundle' %}label_type_yes{% endtrans -%}</span>
+                                        <span class="label label-success">{%- trans from 'CapcoAppBundle' %}label_type_yes{% endtrans -%}</span>
                                     {% else %}
-                                        <span class="label label-danger">{%- trans from 'SonataAdminBundle' %}label_type_no{% endtrans -%}</span>
+                                        <span class="label label-danger">{%- trans from 'CapcoAppBundle' %}label_type_no{% endtrans -%}</span>
                                     {% endif %}
                                 </td>
                                 <td>
@@ -131,9 +131,9 @@
                                 </td>
                                 <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                     <div class="btn-group">
-                                        <a href="{{ path('admin_capco_app_siteimage_edit', {'id': image.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
+                                        <a href="{{ path('admin_capco_app_siteimage_edit', {'id': image.id}) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'CapcoAppBundle') }}">
                                             <i class="glyphicon glyphicon-edit"></i>
-                                            {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+                                            {{ 'action_edit'|trans({}, 'CapcoAppBundle') }}
                                         </a>
                                     </div>
                                 </td>

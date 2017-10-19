@@ -4,7 +4,7 @@
     <div class="sonata-news-block-recent-post box">
         {% if settings.title %}
             <div class="box-header">
-                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
+                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'CapcoAppBundle') }}</h3>
             </div>
         {% endif %}
 
@@ -13,18 +13,18 @@
                 {% for post in posts %}
                     <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
                         {% if post.isPublic %}
-                            <span class="label label-success">{{ 'post_is_public'|trans({}, 'SonataAdminBundle') }}</span>
+                            <span class="label label-success">{{ 'post_is_public'|trans({}, 'CapcoAppBundle') }}</span>
                         {% else %}
-                            <span class="label label-danger">{{ 'post_is_not_public'|trans({}, 'SonataAdminBundle') }}</span>
+                            <span class="label label-danger">{{ 'post_is_not_public'|trans({}, 'CapcoAppBundle') }}</span>
                         {% endif %}&nbsp;
 
                         {{ post.title }} - {{ post.publishedAt | format_date }}</a>
                 {% else %}
-                    <a class="list-group-item" href="#">{{ 'no_post_found'|trans({}, 'SonataAdminBundle') }}</a>
+                    <a class="list-group-item" href="#">{{ 'no_post_found'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endfor %}
             </div>
 
-            <a href="{{ url('admin_capco_app_post_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_posts'|trans({}, 'SonataAdminBundle') }}</a>
+            <a href="{{ url('admin_capco_app_post_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_posts'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </div>
 {% endblock %}

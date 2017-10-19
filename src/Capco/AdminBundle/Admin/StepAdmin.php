@@ -223,7 +223,7 @@ class StepAdmin extends Admin
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.footer',
                     'required' => false,
-                    'translation_domain' => 'SonataAdminBundle',
+                    'translation_domain' => 'CapcoAppBundle',
                 ])
             ;
             if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
@@ -231,7 +231,7 @@ class StepAdmin extends Admin
                     ->add('verification', 'choice', [
                         'label' => 'admin.fields.step.verification',
                         'choices' => QuestionnaireStep::$verificationLabels,
-                        'translation_domain' => 'SonataAdminBundle',
+                        'translation_domain' => 'CapcoAppBundle',
                     ])
                 ;
             }

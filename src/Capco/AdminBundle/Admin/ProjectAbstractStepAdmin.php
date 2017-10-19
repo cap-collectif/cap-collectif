@@ -17,8 +17,6 @@ class ProjectAbstractStepAdmin extends Admin
         '_sort_by' => 'position',
     ];
 
-    protected $translationDomain = 'SonataAdminBundle';
-
     public function postRemove($object)
     {
         // delete linked step
@@ -49,7 +47,7 @@ class ProjectAbstractStepAdmin extends Admin
             ->add('step', 'sonata_type_model_list', [
                 'required' => true,
                 'label' => 'admin.fields.project_abstractstep.steps',
-                'translation_domain' => 'SonataAdminBundle',
+                'translation_domain' => 'CapcoAppBundle',
                 'btn_delete' => false,
                 'btn_add' => 'admin.fields.project_abstractstep.steps_add',
             ], [

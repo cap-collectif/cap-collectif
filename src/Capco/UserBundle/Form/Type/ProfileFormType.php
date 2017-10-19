@@ -77,7 +77,7 @@ class ProfileFormType extends AbstractType
             ->remove('phone')
             ->add('gender', 'sonata_user_gender', [
                 'required' => true,
-                'translation_domain' => 'SonataUserBundle',
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('dateOfBirth',
                 BirthdayType::class, [

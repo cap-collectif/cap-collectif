@@ -41,7 +41,7 @@ class QuestionChoiceAdmin extends Admin
                 'required' => false,
                 'choices' => $colorsAvailable,
                 'choices_as_values' => true,
-                'choice_translation_domain' => 'SonataAdminBundle',
+                'choice_translation_domain' => 'CapcoAppBundle',
                 'placeholder' => 'Choisir une couleur...',
             ])
             ->add('image', 'sonata_type_model_list', [

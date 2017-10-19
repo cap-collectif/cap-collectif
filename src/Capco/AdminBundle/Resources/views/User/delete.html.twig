@@ -5,21 +5,21 @@
 
         <div class="box box-danger">
             <div class="box-header">
-                <h3 class="box-title">{{ 'title_delete'|trans({}, 'SonataAdminBundle') }}</h3>
+                <h3 class="box-title">{{ 'title_delete'|trans({}, 'CapcoAppBundle') }}</h3>
             </div>
             <div class="box-body">
-                {{ 'user.delete.confirmation'|trans({'%object%': admin.toString(object)}, 'SonataAdminBundle')|raw }}
+                {{ 'user.delete.confirmation'|trans({'%object%': admin.toString(object)}, 'CapcoAppBundle')|raw }}
 
                 {% if object.opinions|length  > 0 or object.ideas|length > 0 or
                       object.sources|length   > 0 or object.comments|length > 0 or
                       object.arguments|length > 0 or object.votes|length > 0
                 %}
-                    <p>{{ 'user.delete.warning_message'|trans({}, 'SonataAdminBundle')|raw }}</p>
+                    <p>{{ 'user.delete.warning_message'|trans({}, 'CapcoAppBundle')|raw }}</p>
                 {% endif %}
 
                 {% if object.opinions|length > 0 %}
                     <h4>
-                        {% transchoice object.opinions|length with {'%count%': object.opinions|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.opinions|length with {'%count%': object.opinions|length} from 'CapcoAppBundle' %}
                             user.delete.opinions
                         {% endtranschoice %}
                     </h4>
@@ -32,7 +32,7 @@
 
                 {% if object.ideas|length > 0 %}
                     <h4>
-                        {% transchoice object.ideas|length with {'%count%': object.ideas|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.ideas|length with {'%count%': object.ideas|length} from 'CapcoAppBundle' %}
                             user.delete.ideas
                         {% endtranschoice %}
                     </h4>
@@ -45,7 +45,7 @@
 
                 {% if object.sources|length > 0 %}
                     <h4>
-                        {% transchoice object.sources|length with {'%count%': object.sources|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.sources|length with {'%count%': object.sources|length} from 'CapcoAppBundle' %}
                             user.delete.sources
                         {% endtranschoice %}
                     </h4>
@@ -58,7 +58,7 @@
 
                 {% if object.comments|length > 0 %}
                     <h4>
-                        {% transchoice object.comments|length with {'%count%': object.comments|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.comments|length with {'%count%': object.comments|length} from 'CapcoAppBundle' %}
                             user.delete.comments
                         {% endtranschoice %}
                     </h4>
@@ -70,7 +70,7 @@
 
                 {% if object.arguments|length > 0 %}
                     <h4>
-                        {% transchoice object.arguments|length with {'%count%': object.arguments|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.arguments|length with {'%count%': object.arguments|length} from 'CapcoAppBundle' %}
                             user.delete.arguments
                         {% endtranschoice %}
                     </h4>
@@ -82,7 +82,7 @@
 
                 {% if object.votes|length > 0 %}
                     <h4>
-                        {% transchoice object.votes|length with {'%count%': object.votes|length} from 'SonataAdminBundle' %}
+                        {% transchoice object.votes|length with {'%count%': object.votes|length} from 'CapcoAppBundle' %}
                             user.delete.votes
                         {% endtranschoice %}
                     </h4>
@@ -94,13 +94,13 @@
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
 
-                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'btn_delete'|trans({}, 'SonataAdminBundle') }}</button>
+                    <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'btn_delete'|trans({}, 'CapcoAppBundle') }}</button>
                     {% if admin.hasRoute('edit') and admin.isGranted('EDIT', object) %}
-                        {{ 'delete_or'|trans({}, 'SonataAdminBundle') }}
+                        {{ 'delete_or'|trans({}, 'CapcoAppBundle') }}
 
                         <a class="btn btn-success" href="{{ admin.generateObjectUrl('edit', object) }}">
                             <i class="glyphicon glyphicon-edit"></i>
-                            {{ 'link_action_edit'|trans({}, 'SonataAdminBundle') }}</a>
+                            {{ 'link_action_edit'|trans({}, 'CapcoAppBundle') }}</a>
                     {% endif %}
                 </form>
             </div>

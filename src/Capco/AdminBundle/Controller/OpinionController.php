@@ -21,7 +21,7 @@ class OpinionController extends Controller
         }
 
         $preResponse = $this->preList($request);
-        if ($preResponse !== null) {
+        if (null !== $preResponse) {
             return $preResponse;
         }
 
@@ -81,7 +81,7 @@ class OpinionController extends Controller
         $this->admin->setSubject($object);
 
         $preResponse = $this->preCreate($request, $object);
-        if ($preResponse !== null) {
+        if (null !== $preResponse) {
             return $preResponse;
         }
 
@@ -119,7 +119,7 @@ class OpinionController extends Controller
                         $this->admin->trans(
                             'flash_create_success',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
-                            'SonataAdminBundle'
+                            'CapcoAppBundle'
                         )
                     );
 
@@ -140,7 +140,7 @@ class OpinionController extends Controller
                         $this->admin->trans(
                             'flash_create_error',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
-                            'SonataAdminBundle'
+                            'CapcoAppBundle'
                         )
                     );
                 }
@@ -186,7 +186,7 @@ class OpinionController extends Controller
         }
 
         $preResponse = $this->preEdit($request, $object);
-        if ($preResponse !== null) {
+        if (null !== $preResponse) {
             return $preResponse;
         }
 
@@ -225,7 +225,7 @@ class OpinionController extends Controller
                         $this->admin->trans(
                             'flash_edit_success',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
-                            'SonataAdminBundle'
+                            'CapcoAppBundle'
                         )
                     );
 
@@ -245,7 +245,7 @@ class OpinionController extends Controller
                                 '%link_start%' => '<a href="' . $this->admin->generateObjectUrl('edit', $object) . '">',
                                 '%link_end%' => '</a>',
                             ],
-                            'SonataAdminBundle'
+                            'CapcoAppBundle'
                         )
                     );
                 }
@@ -259,7 +259,7 @@ class OpinionController extends Controller
                         $this->admin->trans(
                             'flash_edit_error',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
-                            'SonataAdminBundle'
+                            'CapcoAppBundle'
                         )
                     );
                 }
@@ -303,7 +303,7 @@ class OpinionController extends Controller
         }
 
         $preResponse = $this->preShow($request, $object);
-        if ($preResponse !== null) {
+        if (null !== $preResponse) {
             return $preResponse;
         }
 
@@ -336,11 +336,11 @@ class OpinionController extends Controller
         }
 
         $preResponse = $this->preDelete($request, $object);
-        if ($preResponse !== null) {
+        if (null !== $preResponse) {
             return $preResponse;
         }
 
-        if ($this->getRestMethod($request) === 'DELETE') {
+        if ('DELETE' === $this->getRestMethod($request)) {
             // check the csrf token
             $this->validateCsrfToken('sonata.delete', $request);
 
@@ -358,7 +358,7 @@ class OpinionController extends Controller
                     $this->admin->trans(
                         'flash_delete_success',
                         ['%name%' => $this->escapeHtml($objectName)],
-                        'SonataAdminBundle'
+                        'CapcoAppBundle'
                     )
                 );
             } catch (ModelManagerException $e) {
@@ -373,7 +373,7 @@ class OpinionController extends Controller
                     $this->admin->trans(
                         'flash_delete_error',
                         ['%name%' => $this->escapeHtml($objectName)],
-                        'SonataAdminBundle'
+                        'CapcoAppBundle'
                     )
                 );
             }

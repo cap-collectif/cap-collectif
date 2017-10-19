@@ -334,3 +334,9 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ""
         position: 2
         type: 1
+    SiteParameterLocale:
+        keyname: global.locale
+        category: pages.homepage
+        value: fr-FR
+        position: 1
+        type: 9

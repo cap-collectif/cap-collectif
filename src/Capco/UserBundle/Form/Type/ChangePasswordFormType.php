@@ -19,14 +19,14 @@ class ChangePasswordFormType extends AbstractType
         $builder->add('current_password',
             PasswordType::class, [
             'label' => 'form.current_password',
-            'translation_domain' => 'FOSUserBundle',
+            'translation_domain' => 'CapcoAppBundle',
             'mapped' => false,
             'constraints' => $constraint,
         ]);
         $builder->add('new',
             RepeatedType::class, [
             'type' => 'password',
-            'options' => ['translation_domain' => 'FOSUserBundle'],
+            'options' => ['translation_domain' => 'CapcoAppBundle'],
             'first_options' => ['label' => 'form.new_password'],
             'second_options' => ['label' => 'form.new_password_confirmation'],
             'invalid_message' => 'fos_user.password.mismatch',

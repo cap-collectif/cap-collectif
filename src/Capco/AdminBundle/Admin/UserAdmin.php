@@ -34,7 +34,7 @@ class UserAdmin extends BaseAdmin
 
         $options = $this->formOptions;
         $options['validation_groups'] = 'Default';
-        $options['translation_domain'] = 'SonataUserBundle';
+        $options['translation_domain'] = 'CapcoAppBundle';
 
         $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
 
@@ -45,7 +45,7 @@ class UserAdmin extends BaseAdmin
 
     public function getTemplate($name)
     {
-        if ($name === 'delete') {
+        if ('delete' === $name) {
             return 'CapcoAdminBundle:User:delete.html.twig';
         }
 
@@ -113,7 +113,7 @@ class UserAdmin extends BaseAdmin
             ->add('enabled')
             ->add('locked')
             ->add('phone', null, [
-                'translation_domain' => 'SonataAdminBundle',
+                'translation_domain' => 'CapcoAppBundle',
             ])
         ;
     }
@@ -248,7 +248,7 @@ class UserAdmin extends BaseAdmin
             ->add('neighborhood', null, ['required' => false])
             ->add('gender', 'sonata_user_gender', [
                 'required' => true,
-                'translation_domain' => 'SonataUserBundle',
+                'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('locale', 'locale', ['required' => false])
             ->add('timezone', 'timezone', ['required' => false])
@@ -263,7 +263,7 @@ class UserAdmin extends BaseAdmin
         $formMapper->with('Confidentialité')
             ->add('profilePageIndexed', CheckboxType::class, [
                 'required' => false,
-                'translation_domain' => 'SonataUserBundle',
+                'translation_domain' => 'CapcoAppBundle',
             ])->end()->end();
 
         if (($subject && !$subject->hasRole('ROLE_SUPER_ADMIN')) || $currentUser->hasRole('ROLE_SUPER_ADMIN')) {
@@ -305,7 +305,7 @@ class UserAdmin extends BaseAdmin
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,
-                        'translation_domain' => 'SonataUserBundle',
+                        'translation_domain' => 'CapcoAppBundle',
                         'choices' => $currentUser->hasRole('ROLE_SUPER_ADMIN')
                             ? $this->rolesLabels
                             : $this->rolesLabelsNoSuper,

@@ -115,7 +115,7 @@ class QuestionAdmin extends Admin
                 ->add('validationRule', QuestionValidationRuleType::class, [
                     'required' => false,
                     'label' => 'admin.fields.question.validation_rule',
-                    'translation_domain' => 'SonataAdminBundle',
+                    'translation_domain' => 'CapcoAppBundle',
                 ])
                 ->end()
             ;

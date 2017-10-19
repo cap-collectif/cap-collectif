@@ -1,14 +1,25 @@
 import parser from 'xml2json';
 import fs from 'fs';
 
-for (const locale of ['fr-FR', /*'es-SP',*/ 'en-GB']) {
-  const xml = fs.readFileSync(`translations/CapcoAppBundle.${locale}.xlf`, 'utf8');
-  const json = JSON.parse(parser.toJson(xml));
+const locales = ['fr-FR', 'es-ES', 'en-GB'];
 
-  const translations = json.xliff.file.unit.reduce((acc, trad) => {
-    acc[trad.segment.source] = trad.segment.target;
-    return acc;
-  }, {});
+for (const locale of locales) {
+  const xml = fs.readFileSync(`translations/CapcoAppBundle.${locale}.xlf`, 'utf8');
+  // Fix to add Sonata bundles
+  fs.writeFileSync(`translations/SonataAdminBundle.${locale}.xlf`, xml);
+  fs.writeFileSync(`translations/SonataMediaBundle.${locale}.xlf`, xml);
+  fs.writeFileSync(`translations/SonataUserBundle.${locale}.xlf`, xml);
+  fs.writeFileSync(`translations/SonataCoreBundle.${locale}.xlf`, xml);
+
+  // Create JSON translations for JS
+  const json = JSON.parse(parser.toJson(xml));
+  let translations = {};
+  if (Array.isArray(json.xliff.file.unit)) {
+    translations = json.xliff.file.unit.reduce((acc, trad) => {
+      acc[trad.segment.source] = trad.segment.target;
+      return acc;
+    }, {});
+  }
 
   const bundlePath = `translations/messages.${locale}.json`;
   fs.writeFileSync(bundlePath, JSON.stringify(translations, null, 2));

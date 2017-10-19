@@ -4,7 +4,7 @@
     <div class="sonata-news-block-recent-post box">
         {% if settings.title %}
             <div class="box-header">
-                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'SonataAdminBundle') }}</h3>
+                <h3 class="sonata-news-block-recent-post box-title"><i class="fa fa-pencil"></i> {{ settings.title|trans({}, 'CapcoAppBundle') }}</h3>
             </div>
         {% endif %}
 
@@ -15,11 +15,11 @@
                     {{ contribution.title }} - {{ contribution.updatedAt | format_date }}
                 </a>
                 {% else %}
-                    <a class="list-group-item" href="#">{{ 'recent_contributions.not_found'|trans({}, 'SonataAdminBundle') }}</a>
+                    <a class="list-group-item" href="#">{{ 'recent_contributions.not_found'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endfor %}
             </div>
 
-            <a href="{{ url('capco_admin_contributions_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'recent_contributions.view_all'|trans({}, 'SonataAdminBundle') }}</a>
+            <a href="{{ url('capco_admin_contributions_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'recent_contributions.view_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </div>
 {% endblock %}

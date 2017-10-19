@@ -17,8 +17,6 @@ class OpinionTypeAppendixTypeAdmin extends Admin
         '_sort_by' => 'position',
     ];
 
-    protected $translationDomain = 'SonataAdminBundle';
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

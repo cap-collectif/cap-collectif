@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    {{ 'admin.fields.recent_contributions.number' | transchoice(contributions | length, {'%count%': contributions | length}, 'SonataAdminBundle') }}
+                    {{ 'admin.fields.recent_contributions.number' | transchoice(contributions | length, {'%count%': contributions | length}, 'CapcoAppBundle') }}
                 </a>
             </div>
         </div>
@@ -29,31 +29,31 @@
                             <tr class="sonata-ba-list-field-header">
                                 {% spaceless %}
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.title' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.title' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.type' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.type' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.author' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.author' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.project' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-boolean">
-                                        {{ 'admin.fields.recent_contributions.published' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.published' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-boolean">
-                                        {{ 'admin.fields.recent_contributions.trashed' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.trashed' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.created_at' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.created_at' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-text">
-                                        {{ 'admin.fields.recent_contributions.updated_at' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.updated_at' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                     <th class="sonata-ba-list-field-header-actions">
-                                        {{ 'admin.fields.recent_contributions.actions' | trans({}, 'SonataAdminBundle') }}
+                                        {{ 'admin.fields.recent_contributions.actions' | trans({}, 'CapcoAppBundle') }}
                                     </th>
                                 {% endspaceless %}
                             </tr>
@@ -84,16 +84,16 @@
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-boolean">
                                             {% if contribution['published'] %}
-                                                <span class="label label-success">{{ 'label_type_yes' | trans({}, 'SonataAdminBundle') }}</span>
+                                                <span class="label label-success">{{ 'label_type_yes' | trans({}, 'CapcoAppBundle') }}</span>
                                             {% else %}
-                                                <span class="label label-danger">{{ 'label_type_no' | trans({}, 'SonataAdminBundle') }}</span>
+                                                <span class="label label-danger">{{ 'label_type_no' | trans({}, 'CapcoAppBundle') }}</span>
                                             {% endif %}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-boolean">
                                             {% if contribution['trashed'] %}
-                                                <span class="label label-success">{{ 'label_type_yes' | trans({}, 'SonataAdminBundle') }}</span>
+                                                <span class="label label-success">{{ 'label_type_yes' | trans({}, 'CapcoAppBundle') }}</span>
                                             {% else %}
-                                                <span class="label label-danger">{{ 'label_type_no' | trans({}, 'SonataAdminBundle') }}</span>
+                                                <span class="label label-danger">{{ 'label_type_no' | trans({}, 'CapcoAppBundle') }}</span>
                                             {% endif %}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-text">
@@ -103,9 +103,9 @@
                                             {{ contribution['updatedAt'] | format_date }}
                                         </td>
                                         <td class="sonata-ba-list-field sonata-ba-list-field-actions">
-                                            <a href="{{ path('capco_admin_contributions_show', {'type': contribution.type, 'id': contribution.id}) }}" class="btn btn-sm btn-default view_link" title="{{ 'link_action_show' | trans({}, 'SonataAdminBundle') }}">
+                                            <a href="{{ path('capco_admin_contributions_show', {'type': contribution.type, 'id': contribution.id}) }}" class="btn btn-sm btn-default view_link" title="{{ 'link_action_show' | trans({}, 'CapcoAppBundle') }}">
                                                 <i class="glyphicon glyphicon-zoom-in"></i>
-                                                {{ 'link_action_show' | trans({}, 'SonataAdminBundle') }}
+                                                {{ 'link_action_show' | trans({}, 'CapcoAppBundle') }}
                                             </a>
                                         </td>
                                     </tr>
@@ -120,7 +120,7 @@
                     <div class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">{{ 'no_result'|trans({}, 'SonataAdminBundle') }}</span>
+                            <span class="info-box-text">{{ 'no_result'|trans({}, 'CapcoAppBundle') }}</span>
                             <div class="progress">
                                 <div class="progress-bar" style="width: 0%"></div>
                             </div>

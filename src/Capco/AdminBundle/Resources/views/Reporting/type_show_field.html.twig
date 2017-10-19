@@ -3,19 +3,19 @@
 {% block field %}
     <div>
         {% if(object.Opinion is not null) %}
-            <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.opinionVersion is not null) %}
-            <span>{{ 'admin.fields.reporting.version'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.version'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Source is not null) %}
-            <span>{{ 'admin.fields.reporting.source'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.source'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Argument is not null) %}
-            <span>{{ 'admin.fields.reporting.argument'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.argument'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Idea is not null) %}
-            <span>{{ 'admin.fields.reporting.idea'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.idea'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Comment is not null) %}
-            <span>{{ 'admin.fields.reporting.comment'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.comment'|trans({}, 'CapcoAppBundle') }}</span>
         {% elseif (object.Proposal is not null) %}
-            <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'SonataAdminBundle') }}</span>
+            <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
         {% endif %}
     </div>
 {% endblock %}
