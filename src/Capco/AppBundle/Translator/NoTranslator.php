@@ -20,7 +20,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
             return $id;
         }
 
-        return $id . ' ' . json_encode($parameters, JSON_HEX_QUOT);
+        return $id . ' ' . json_encode($parameters, JSON_PRETTY_PRINT);
     }
 
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)

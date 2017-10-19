@@ -147,10 +147,7 @@ Scenario: Logged in API client can't update his email to a wrong email
     "errors": {
       "children": {
         "newEmailToConfirm": {
-          "errors": [
-            "email.invalid",
-            "email.throwable"
-          ]
+          "errors":["email.invalid {\n    \"{{ value }}\": \"\\\"plop.com\\\"\"\n}","email.throwable"]
         }
       }
     }
