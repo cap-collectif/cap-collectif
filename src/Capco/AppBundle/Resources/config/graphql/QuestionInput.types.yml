@@ -5,7 +5,7 @@ QuestionInput:
             title:
                 type: "String!"
             type:
-                type: "QuestionTypeValue!"
+                type: "String!"
             private:
                 type: "Boolean!"
             required:

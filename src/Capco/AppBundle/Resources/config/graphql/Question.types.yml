@@ -1,11 +1,14 @@
 Question:
-    type: interface
+    type: object
     config:
-        resolveType: "@=resolver('question_question_type', [value])"
+        description: "A question"
+        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             id:
                 type: "String!"
             title:
+                type: "String!"
+            slug:
                 type: "String!"
             type:
                 type: "QuestionTypeValue!"
@@ -28,7 +31,3 @@ Question:
             validationRule:
                 type: "MultipleChoiceQuestionValidationRule"
                 resolve: "@=resolver('question_validation_rule', [value])"
-            kind:
-                type: "String!"
-            slug:
-                type: "String!"

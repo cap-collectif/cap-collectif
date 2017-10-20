@@ -3,11 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
-use Overblog\GraphQLBundle\Error\UserError;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -18,7 +15,7 @@ class QuestionResolver implements ContainerAwareInterface
 
     public function resolveType(AbstractQuestion $question): string
     {
-        return $question->getType();
+        return $question->getInputType();
     }
 
     public function resolve(Arg $args): AbstractQuestion
@@ -73,18 +70,5 @@ class QuestionResolver implements ContainerAwareInterface
         return $this->container
             ->get('capco.questionnaire.repository')
             ->getAvailableQuestionnaires();
-    }
-
-    public function resolveQuestionType(AbstractQuestion $question): string
-    {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
-        if ($question instanceof SimpleQuestion) {
-            return $typeResolver->resolve('SimpleQuestion');
-        }
-        if ($question instanceof MediaQuestion) {
-            return $typeResolver->resolve('MediaQuestion');
-        }
-
-        throw new UserError('Could not resolve type of Question.');
     }
 }

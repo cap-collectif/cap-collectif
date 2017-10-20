@@ -53,7 +53,6 @@ const Field = React.createClass({
       onChange: PropTypes.func,
       value: PropTypes.any,
     }).isRequired,
-    style: PropTypes.object,
   },
 
   render() {
@@ -78,7 +77,6 @@ const Field = React.createClass({
       choices,
       checkedValue,
       isOtherAllowed,
-      style,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -105,7 +103,6 @@ const Field = React.createClass({
         autoFocus={autoFocus || false}
         choices={choices}
         checkedValue={checkedValue}
-        style={style}
         {...this.props.input}>
         {children}
       </Input>
