@@ -12,6 +12,7 @@ import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
+import { MultipleChoiceRadio } from '../../Form/MultipleChoiceRadio';
 
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
@@ -158,17 +159,13 @@ const renderResponses = ({
             if (inputType === 'radio') {
               return (
                 <div>
-                  {choices.map(choice => (
-                    <Field
-                      component={component}
-                      type="radio"
-                      key={choice.id}
-                      name={`${member}.value`}
-                      id={`${member}.value`}
-                      value={choice.label}>
-                      {choice.label}
-                    </Field>
-                  ))}
+                  <MultipleChoiceRadio
+                    name={`${member}.value`}
+                    helpText={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    label={label}
+                    choices={choices}
+                  />
                 </div>
               );
             }
