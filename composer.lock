@@ -7,45 +7,6 @@
     "content-hash": "533c312c3e93426f50bb612e15b99023",
     "packages": [
         {
-            "name": "alexandresalome/mailcatcher",
-            "version": "dev-master",
-            "target-dir": "Alex/MailCatcher",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cap-collectif/mailcatcher.git",
-                "reference": "f773047afa0a18c7998b6a34915b768d3e7561f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/f773047afa0a18c7998b6a34915b768d3e7561f5",
-                "reference": "f773047afa0a18c7998b6a34915b768d3e7561f5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/dom-crawler": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "behat/behat": "~3.0",
-                "phpunit/phpunit": "~4.6",
-                "swiftmailer/swiftmailer": "~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Alex\\MailCatcher": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A library to access MailCatcher",
-            "support": {
-                "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
-            },
-            "time": "2017-10-20T09:55:05+00:00"
-        },
-        {
             "name": "behat/transliterator",
             "version": "v1.1.0",
             "source": {
@@ -9970,6 +9931,45 @@
             "time": "2014-09-04T16:57:00+00:00"
         },
         {
+            "name": "alexandresalome/mailcatcher",
+            "version": "dev-master",
+            "target-dir": "Alex/MailCatcher",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cap-collectif/mailcatcher.git",
+                "reference": "be2b3897caab28f59daa813be2034b97e3617427"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/be2b3897caab28f59daa813be2034b97e3617427",
+                "reference": "be2b3897caab28f59daa813be2034b97e3617427",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/dom-crawler": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "phpunit/phpunit": "~4.6",
+                "swiftmailer/swiftmailer": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Alex\\MailCatcher": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A library to access MailCatcher",
+            "support": {
+                "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
+            },
+            "time": "2017-10-20T10:21:55+00:00"
+        },
+        {
             "name": "behat/behat",
             "version": "v3.3.0",
             "source": {
@@ -13342,9 +13342,9 @@
         "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,
-        "alexandresalome/mailcatcher": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
-        "sensiolabs/behat-page-object-extension": 20
+        "sensiolabs/behat-page-object-extension": 20,
+        "alexandresalome/mailcatcher": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

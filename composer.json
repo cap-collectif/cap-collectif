@@ -112,9 +112,13 @@
         "cocur/slugify": "@dev",
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
+<<<<<<< HEAD
         "php-translation/loco-adapter": "^0.4.0",
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "alexandresalome/mailcatcher": "dev-master#f773047afa0a18c7998b6a34915b768d3e7561f5"
+=======
+        "php-translation/loco-adapter": "^0.4.0"
+>>>>>>> Fix more tests
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -133,7 +137,8 @@
         "phpstan/phpstan": "^0.7.0",
         "phpunit/phpunit": "^5.0",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
-        "sjparkinson/behat-file-system-context": "^0.1.0"
+        "sjparkinson/behat-file-system-context": "^0.1.0",
+        "alexandresalome/mailcatcher": "dev-master#be2b3897caab28f59daa813be2034b97e3617427"
     },
     "scripts": {},
     "config": {

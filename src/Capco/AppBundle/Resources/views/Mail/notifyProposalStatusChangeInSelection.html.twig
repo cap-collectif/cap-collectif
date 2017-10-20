@@ -7,7 +7,7 @@
             '%step%': selection.selectionStep.title,
             '%status%': selection.status.name,
             '%proposal_link%': url('app_project_show_proposal', {'projectSlug': selection.proposal.step.project.slug, 'stepSlug': selection.proposal.step.slug, 'proposalSlug': selection.proposal.slug}),
-            '%user%': selection.proposal.author,
+            '%user%': selection.proposal.author.getDisplayName(),
         }, 'CapcoAppBundle') | raw }}
     {% endautoescape %}
 {% endblock %}
