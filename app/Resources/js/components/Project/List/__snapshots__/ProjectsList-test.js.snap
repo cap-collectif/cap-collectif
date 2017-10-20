@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectsList /> should render correctly 1`] = `
+<Row
+  bsClass="row"
+  className="project__preview"
+  componentClass="div"
+>
+  <ProjectPreview
+    hasNotParticipativeSteps={false}
+    project={
+      Object {
+        "hasParticipativeStep": false,
+        "title": "project without participative step",
+      }
+    }
+  />
+  <ProjectPreview
+    hasNotParticipativeSteps={false}
+    project={
+      Object {
+        "hasParticipativeStep": true,
+        "title": "project with participative step",
+      }
+    }
+  />
+</Row>
+`;

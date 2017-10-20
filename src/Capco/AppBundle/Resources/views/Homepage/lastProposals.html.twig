@@ -11,7 +11,7 @@
         {% if null != section.body %}
             <p>{{ section.body | raw }}</p>
         {% endif %}
-        <div class="row">
+        <div class="row proposal-preview-list">
             {% for proposal in proposals %}
                 {% include '@CapcoApp/Proposal/blockProposal.html.twig' with {'proposal': proposal, 'colClasses': 'col-xs-12 col-sm-4 col-md-3 col-lg-3'} only %}
             {% endfor %}

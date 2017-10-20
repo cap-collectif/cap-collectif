@@ -1,27 +1,47 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import ProjectPreview from '../Preview/ProjectPreview';
 
-const ProjectsList = React.createClass({
-  propTypes: {
-    projects: PropTypes.array.isRequired,
-  },
+type Props = {
+  projects: Array<Object>,
+};
+
+export class ProjectsList extends React.Component<Props> {
+  hasNotParticipativeSteps() {
+    const { projects } = this.props;
+
+    const hasNotParticipativeSteps = projects.filter(
+      project => project.hasParticipativeStep === false,
+    );
+
+    if (hasNotParticipativeSteps.length === projects.length) {
+      return true;
+    }
+
+    return false;
+  }
 
   render() {
     const { projects } = this.props;
 
     if (projects.length > 0) {
       return (
-        <Row>
+        <Row className="project__preview">
           {projects.map((projectDetail, index) => {
-            return <ProjectPreview key={index} project={projectDetail} />;
+            return (
+              <ProjectPreview
+                key={index}
+                project={projectDetail}
+                hasNotParticipativeSteps={this.hasNotParticipativeSteps()}
+              />
+            );
           })}
         </Row>
       );
     }
     return <p>Aucun projet</p>;
-  },
-});
+  }
+}
 
 export default ProjectsList;

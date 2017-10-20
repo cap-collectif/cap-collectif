@@ -48,7 +48,7 @@ const ProjectPreviewBody = React.createClass({
 
     return (
       <div className="box project__preview__body">
-        <div style={{ height: 130 }}>
+        <div className="project__preview__body__infos">
           <ProjectPreviewThemes project={project} />
           <h2
             className="h4 project__preview__title"
