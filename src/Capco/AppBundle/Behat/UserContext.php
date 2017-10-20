@@ -239,7 +239,7 @@ class UserContext extends DefaultContext
         $this->iOpenLoginModal();
         $this->fillField('username', $email);
         $this->fillField('password', $pwd);
-        $this->pressButton('Se connecter');
+        $this->pressButton('global.login_me');
         sleep(4); // TODO
     }
 }

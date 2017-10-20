@@ -108,37 +108,37 @@ Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "8 votes"
+  Then I should see "8 project.show.meta.votes_count"
 
 @javascript
 Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "161 contributions"
+  Then I should see "161 project.show.meta.total_count"
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see "34 propositions"
-  And I should see "95 arguments"
-  And I should see "32 sources"
+  And I should see "34 project.show.meta.opinionsCount"
+  And I should see "95 project.show.meta.argumentsCount"
+  And I should see "32 project.show.meta.sourcesCount"
 
 Scenario: Project header should display correct number of participants
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "22 participants"
+  Then I should see "22 project.show.meta.contributors_count"
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:
     | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
-  Then I should not see "Exporter"
+  Then I should not see "project.download.button" in the "#main" element
 
 @javascript
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
   When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
-  Then I should see "Désolé, cette page n'existe pas (404)"
+  Then I should see 'error.404.title {"%code%":404}'
 
 @javascript
 Scenario: Can not access trash if feature is disabled
@@ -146,7 +146,7 @@ Scenario: Can not access trash if feature is disabled
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should not see "Corbeille"
+  Then I should not see "project.show.meta.info.trash" in the "#main" element
 
 @javascript
 Scenario: Can not access trash if not logged in
@@ -154,10 +154,10 @@ Scenario: Can not access trash if not logged in
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I should see "Corbeille"
+  And I should see "project.show.meta.info.trash" in the "#main" element
   When I click the "#trash-link" element
   And I wait 1 seconds
-  Then I should see "Vous devez être connecté pour réaliser cette action."
+  Then I should see "user.login.popover.body"
 
 @javascript
 Scenario: Project trash display correct numbers of elements

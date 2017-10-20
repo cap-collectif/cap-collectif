@@ -144,7 +144,7 @@ Scenario: Logged in user wants to create a proposal in closed collect step
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
   When I click the create proposal button
-  Then I should see "Vous devez être connecté pour réaliser cette action."
+  Then I should see "user.login.popover.body"
 
 @javascript @database
 Scenario: Author of a proposal wants to update it

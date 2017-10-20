@@ -35,9 +35,9 @@ Scenario: Anonymous wants to comment a blogpost
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 8 seconds
-  Then I should see "Merci ! Votre commentaire a bien été ajouté."
+  Then I should see "comment.submit_success" in the "#main" element
   And I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @database @javascript
@@ -48,9 +48,9 @@ Scenario: Logged in user wants to comment a blogpost
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
-  And I should not see "Commenter avec mon compte"
-  And I should not see "Commenter sans créer de compte"
-  When I press "Commenter"
+  And I should not see "comment.with_my_account"
+  And I should not see "comment.without_account"
+  When I press "comment.submit"
   And I wait 2 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
@@ -63,6 +63,6 @@ Scenario: Anonymous wants to comment a blogpost without email
     | body        | J'ai un truc à dire anonymement |
   And I fill in the following:
     | authorName  | Naruto              |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 1 seconds
   Then I should not see "J'ai un truc à dire anonymement" in the ".opinion__list" element

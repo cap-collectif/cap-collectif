@@ -7,7 +7,9 @@ import AlertBox from '../components/Alert/AlertBox';
 export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <AlertBox {...props} />
+      <div id="global-alert-box">
+        <AlertBox {...props} />
+      </div>
     </IntlProvider>
   </Provider>
 );

@@ -86,7 +86,7 @@ Scenario: Anonymous user wants to create an idea
   Given feature "idea_creation" is enabled
   When I go to the ideas page
   And I click the idea create button
-  Then I should see "Vous devez être connecté pour réaliser cette action."
+  Then I should see "user.login.popover.body"
 
 @javascript
 Scenario: Logged in user wants to create an idea from a theme
@@ -105,7 +105,7 @@ Scenario: Anonymous user wants to create an idea from a theme
   And feature "idea_creation" is enabled
   When I go to an empty theme page
   And I click the idea create button
-  Then I should see "Vous devez être connecté pour réaliser cette action."
+  Then I should see "user.login.popover.body"
 
 @javascript
 Scenario: Can not create an idea from theme when idea creation is disabled

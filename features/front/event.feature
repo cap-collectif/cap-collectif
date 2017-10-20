@@ -28,7 +28,7 @@ Scenario: Events can be filtered by projects
 @javascript
 Scenario: Archived events can be filtered by projects
   Given I visited "events page"
-  And I follow "Voir les évènements passés"
+  And I follow "event.see archived"
   And I select "Croissance, innovation, disruption" from "event_search_project"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
@@ -49,7 +49,7 @@ Scenario: Events can be filtered by theme
 Scenario: Archived events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I follow "Voir les évènements passés"
+  And I follow "event.see archived"
   And I select "Justice" from "event_search_theme"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
@@ -70,7 +70,7 @@ Scenario: Events can be filtered by title
 @javascript
 Scenario: Archived events can be filtered by title
   Given I visited "events page"
-  And I follow "Voir les évènements passés"
+  And I follow "event.see archived"
   When I fill in the following:
     | event_search_term | ParisWeb2014 |
   And I click the ".filter__search .btn" element
