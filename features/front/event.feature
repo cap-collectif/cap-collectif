@@ -12,8 +12,8 @@ Scenario: Anonymous wants to list events
 @parallel-scenario
 Scenario: Anonymous wants to list archived events
   Given I visited "events page"
-  And I should see "2 évènements passés"
-  And I follow "Voir les évènements passés"
+  And I should see 'event.index.appendices.archived.number {"%count%":"2"}'
+  And I follow "event.see archived"
   Then I should see 2 ".event" elements
 
 @javascript
