@@ -398,10 +398,8 @@ Feature: Ideas
     """
     {
       "code": 400,
-      "message": "This form should not contain extra fields. {
-          \"{{ extra_fields }}\": \"comment\"
-      }",
-      "errors": @null@
+      "message": "This form should not contain extra fields. {\"{{ extra_fields }}\":\"comment\"}",
+      "errors": null
     }
     """
 
@@ -420,10 +418,8 @@ Feature: Ideas
     """
     {
       "code": 400,
-       "message": "This form should not contain extra fields. {
-          "{{ extra_fields }}": "comment"
-       }",
-       "errors": @null@
+       "message": "This form should not contain extra fields. {\"{{ extra_fields }}\":\"comment\"}",
+       "errors": null
     }
     """
 

@@ -104,10 +104,10 @@ Scenario: Logged in API client can update his email
   """
   Then the JSON response status code should be 204
   And 2 mail should be sent
-  And I open mail with subject "[Cap-Collectif] Veuillez confirmer votre nouvelle adresse électronique"
+  And I open mail with subject 'email.confirmNewEmail.subject {"%sitename%":"Cap-Collectif"}'
   Then I should see "user.register.confirmation_message.validate" in mail
   Then I should see "/account/new_email_confirmation/" in mail
-  And I open mail with subject "[Cap-Collectif] L'adresse électronique de user a été changée"
+  And I open mail with subject 'email.confirmEmailChanged.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
   Then I should see "Votre adresse électronique a été changée" in mail
 
 @security
@@ -147,7 +147,7 @@ Scenario: Logged in API client can't update his email to a wrong email
     "errors": {
       "children": {
         "newEmailToConfirm": {
-          "errors":["email.invalid {\n    \"{{ value }}\": \"\\\"plop.com\\\"\"\n}","email.throwable"]
+          "errors":["email.invalid {\"{{ value }}\":\"\\\"plop.com\\\"\"}","email.throwable"]
         }
       }
     }

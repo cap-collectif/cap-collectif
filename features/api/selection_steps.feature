@@ -244,7 +244,7 @@ Scenario: Admin API client wants to update proposal status
   Then the JSON response status code should be 204
   And selection "selectionstep1" "proposal3" should have status "status1"
   And 1 mail should be sent
-  And I open mail with subject "proposal_status_change_collect.notification.subject"
+  And I open mail with subject 'proposal_status_change_selection.notification.subject {"%sitename%":"Cap-Collectif"}'
   Then I should see "<li><strong>Nouveau statut :</strong> En cours</li>" in mail
   When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/proposal3" with json:
   """

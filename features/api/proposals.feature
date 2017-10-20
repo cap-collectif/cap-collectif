@@ -1101,7 +1101,7 @@ Scenario: Logged in API client wants to add a proposal without a required respon
     "message": "Validation Failed",
     "errors": {
       "errors": [
-        "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+        "proposal.missing_required_responses"
       ],
       "children": @...@
     }
@@ -1142,7 +1142,7 @@ Scenario: Logged in API client wants to add a proposal with empty required respo
     "message": "Validation Failed",
     "errors": {
         "errors": [
-          "Veuillez répondre à toutes les questions obligatoires pour soumettre cette proposition."
+          "proposal.missing_required_responses"
         ],
         "children": @...@
     }

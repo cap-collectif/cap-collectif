@@ -132,8 +132,23 @@ class Notify implements MailerInterface
         );
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
 
-        $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $emailToNewMail, '[' . $sitename . '] Veuillez confirmer votre nouvelle adresse électronique');
-        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, '[' . $sitename . '] L\'adresse électronique de ' . $user->getUsername() . ' a été changée');
+        $subject = $this->translator->trans(
+            'email.confirmNewEmail.subject',
+            [
+                '%sitename%' => $sitename,
+            ],
+            'CapcoAppBundle'
+        );
+        $this->sendEmail($user->getNewEmailToConfirm(), $fromAddress, 'Cap Collectif', $emailToNewMail, $subject);
+        $oldEmailSubject = $this->translator->trans(
+            'email.confirmEmailChanged.subject',
+            [
+                '%sitename%' => $sitename,
+                '%username%' => $user->getUsername(),
+            ],
+            'CapcoAppBundle'
+        );
+        $this->sendEmail($user->getEmail(), $fromAddress, 'Cap Collectif', $emailToOldMail, $oldEmailSubject);
     }
 
     public function sendResettingEmailMessage(UserInterface $user)

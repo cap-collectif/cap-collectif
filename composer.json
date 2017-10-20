@@ -32,8 +32,11 @@
         {
             "type": "vcs",
             "url": "https://github.com/Liinkiing/geoPHP"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/mailcatcher"
         }
-
     ],
     "require": {
         "php": ">=7.0",
@@ -110,7 +113,8 @@
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
         "php-translation/loco-adapter": "^0.4.0",
-        "pmill/doctrine-array-hydrator": "^0.1.2"
+        "pmill/doctrine-array-hydrator": "^0.1.2",
+        "alexandresalome/mailcatcher": "dev-master#f773047afa0a18c7998b6a34915b768d3e7561f5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -122,7 +126,6 @@
         "coduo/php-matcher": "^2.1",
         "jolicode/jolinotif": "^1.1",
         "pyrech/composer-changelogs": "^1.5",
-        "alexandresalome/mailcatcher": "^1.0",
         "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
         "bossa/phpspec2-expect": "2.0.0",
         "phpspec/phpspec": "3.0",
