@@ -25,7 +25,11 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
 
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
-        return $id . 'po';
+        if (0 === count($parameters)) {
+            return $id;
+        }
+
+        return $id . ' ' . json_encode($parameters, JSON_PRETTY_PRINT);
     }
 
     public function getCatalogue($locale = null)
