@@ -10,7 +10,7 @@ Feature: Profil
     And I visited "edit profile page"
     And I fill in the following:
       | sonata_user_profile_form_username | user3 |
-    And I press "Enregistrer les modifications"
+    And I press "user.profile.edit.submit"
     Then I should see "Votre profil a été mis à jour"
 
   @javascript @database
@@ -19,7 +19,7 @@ Feature: Profil
     And I am logged in as user
     And I visited "edit profile page"
     And I select "Organisation à but non lucratif" from "sonata_user_profile_form_userType"
-    And I press "Enregistrer les modifications"
+    And I press "user.profile.edit.submit"
     Then I should see "Votre profil a été mis à jour"
 
   @javascript @database
@@ -30,9 +30,9 @@ Feature: Profil
       | fos_user_change_password_form_current_password | toto         |
       | fos_user_change_password_form_new_first        | tototototo   |
       | fos_user_change_password_form_new_second       | tatatatata   |
-    And I press "Enregistrer les modifications"
-    Then I should see "Ceci n'est pas votre mot de passe."
-    And I should see "Les deux mots de passe ne sont pas identiques."
+    And I press "user.profile.edit.submit"
+    Then I should see "fos_user.password.not_current" in the "#main" element
+    And I should see "fos_user.password.mismatch" in the "#main" element
 
   @javascript @database
   Scenario: Logged in user wants to change his password to a too short password
@@ -42,8 +42,8 @@ Feature: Profil
       | fos_user_change_password_form_current_password | user |
       | fos_user_change_password_form_new_first        | 1234 |
       | fos_user_change_password_form_new_second       | 1234 |
-    And I press "Enregistrer les modifications"
-    And I should see "Le nouveau mot de passe est trop court."
+    And I press "user.profile.edit.submit"
+    And I should see "fos_user.new password.short" in the "#main" element
 
   @javascript @database
   Scenario: Logged in user wants to change his password
@@ -53,5 +53,5 @@ Feature: Profil
       | fos_user_change_password_form_current_password | user        |
       | fos_user_change_password_form_new_first        | toto12345   |
       | fos_user_change_password_form_new_second       | toto12345   |
-    And I press "Enregistrer les modifications"
-    Then I should see "Votre mot de passe a bien été configuré"
+    And I press "user.profile.edit.submit"
+    Then I should see "change_password.flash.success" in the "#main" element

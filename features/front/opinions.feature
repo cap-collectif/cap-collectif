@@ -25,6 +25,7 @@ Scenario: Can not create an opinion of non-contribuable type
   And I wait 2 seconds
   Then I should see 0 "#opinions--le-probleme-constate" element
 
+<<<<<<< HEAD
 @javascript @security
 Scenario: Can not create an opinion in closed project
   Given I am logged in as user
@@ -73,6 +74,56 @@ Scenario: Author of an opinion loose their votes when updating it
   And I wait 1 seconds
   # Then I should see "Merci ! Votre proposition a bien été modifiée."
   And I should see "0 vote" in the ".opinion__votes" element
+=======
+  @javascript @security
+  Scenario: Can not create an opinion in closed project
+    Given I am logged in as user
+    And I visited "consultation page" with:
+      | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
+      | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
+    Then I should see "step.consultation.alert.ended.title" in the "#main" element
+    Then I should see "step.consultation.alert.ended.text" in the "#main" element
+    And the create opinion button should be disabled
+
+  @javascript @security
+  Scenario: Can not create an opinion when not logged in
+    Given I visited "consultation page" with:
+      | projectSlug | croissance-innovation-disruption |
+      | stepSlug    | collecte-des-avis                |
+    And I wait 2 seconds
+    When I click the "#btn-add--les-causes" element
+    Then I should see "user.login.popover.title" in the "#main" element
+
+  @javascript @database
+  Scenario: Logged in user can report an opinion
+    Given feature "reporting" is enabled
+    And I am logged in as admin
+    And I go to an opinion
+    When I click the "#report-opinion-opinion2-button" element
+    And I fill the reporting form
+    And I submit the reporting form
+    Then I should see "alert.success.report.opinion" in the "#main" element
+
+  @javascript @database
+  Scenario: Author of an opinion loose their votes when updating it
+    Given I am logged in as user
+    And I visited "opinion page" with:
+      | projectSlug | croissance-innovation-disruption |
+      | stepSlug         | collecte-des-avis                |
+      | opinionTypeSlug  | enjeux                           |
+      | opinionSlug      | opinion-3                        |
+    And I wait 1 seconds
+    And I should see "1 vote" in the ".opinion__votes" element
+    When I press "Modifier"
+    And I wait 1 seconds
+    And I fill in the following:
+      | opinion_body | Je modifie ma proposition !   |
+    And I check "opinion_check"
+    And I press "confirm-opinion-update"
+    Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
+    And I wait 1 seconds
+    And I should see "0 vote" in the ".opinion__votes" element
+>>>>>>> Fix more tests
 
 @javascript @security
 Scenario: Non author of an opinion wants to update it
@@ -96,6 +147,7 @@ Scenario: Anonymous wants to see opinion appendix
   And I wait 1 seconds
   Then I should see "Impacts 1"
 
+<<<<<<< HEAD
 @javascript @database
 Scenario: Logged in user wants to create a linked opinion
   Given I am logged in as user
@@ -116,6 +168,28 @@ Scenario: Logged in user wants to create a linked opinion
   And I should see "1 proposition liée"
   And I go on the connections tab
   And I should see "Article 1" in the "#links-list" element
+=======
+  @javascript @database
+  Scenario: Logged in user wants to create a linked opinion
+    Given I am logged in as user
+    And I go to an opinion with versions
+    Then I should see "project.show.connections {"%count%": 0}"
+    When I go on the connections tab
+    And I press "opinion.link.add_new"
+    And I wait 1 seconds
+    And I select "Section 1" from "opinionType"
+    And I wait 2 seconds
+    And I fill in the following:
+      | opinion_title      | Titre                           |
+      | opinion_body       | Description de ma proposition   |
+      | opinion_appendix-2 | Exposay                         |
+    And I press "confirm-opinion-link-create"
+    Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
+    And I wait 1 seconds
+    Then I should see "project.show.connections {"%count%": 1}"
+    And I go on the connections tab
+    And I should see "Article 1" in the "#links-list" element
+>>>>>>> Fix more tests
 
 @javascript
 Scenario: Anonymous user wants to see all votes of an opinion

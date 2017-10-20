@@ -9,5 +9,5 @@ Feature: Newsletter
   Given I visited "home page"
   When I fill in the following:
     | newsletter_subscription_email  | iwantsomenews@gmail.com  |
-  And I press "S'inscrire"
-  Then I should see "Merci ! Votre inscription a bien été prise en compte."
+  And I press "homepage.newsletter.submit"
+  Then I should see "homepage.newsletter.success" in the "#main" element

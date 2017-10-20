@@ -27,11 +27,11 @@ Scenario: Author of a comment try to update it without checking the confirm chec
   And I visited "idea page" with:
     | slug | troisieme-idee |
   And I wait 2 seconds
-  When I follow "Modifier"
+  When I follow "comment.update.button"
   And I fill in the following:
     | body | Je modifie mon commentaire ! |
-  And I press "Modifier"
-  Then I should not see "Merci ! Votre commentaire a bien été modifié."
+  And I press "comment.update.submit"
+  Then I should not see "comment.update.success" in the "#main" element
 
 @javascript
 Scenario: Non author of a comment wants to update it
@@ -40,7 +40,7 @@ Scenario: Non author of a comment wants to update it
   And I visited "idea page" with:
     | slug | troisieme-idee |
   And I wait 1 seconds
-  Then I should not see "Modifier"
+  Then I should not see "comment.update.button" in the "#main" element
 
 @javascript
 Scenario: Anonymous user wants to see pinned and vip comments on top of the comments list

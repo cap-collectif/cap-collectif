@@ -11,7 +11,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form
     And I submit my reply
-    Then I should see "Merci ! Votre réponse a bien été enregistrée."
+    Then I should see "reply.request.create.success" in the "#main" element
     And I go to a questionnaire step
     Then I should see my reply
 
@@ -22,7 +22,7 @@ Feature: Questionnaire
     And I fill the questionnaire form
     And I check the reply private checkbox
     And I submit my reply
-    Then I should see "Merci ! Votre réponse a bien été enregistrée."
+    Then I should see "reply.request.create.success" in the "#main" element
     And I go to a questionnaire step
     Then I should see my anonymous reply
 
@@ -32,7 +32,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form without the required questions
     And I submit my reply
-    Then I should see "Ce champ est obligatoire."
+    Then I should see "reply.constraints.field mandatory" in the "#main" element
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for required question
@@ -40,7 +40,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form with not enough choices for required question
     And I submit my reply
-    Then I should see "Vous devez sélectionner exactement 3 réponses."
+    Then I should see 'response.min {"%nb%":3}' in the "#main" element
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for optional question
@@ -48,7 +48,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form with not enough choices for optional question
     And I submit my reply
-    Then I should see "Vous devez sélectionner au moins 2 réponses."
+    Then I should see 'response.min {"%nb%":2}' in the "#main" element
 
   @javascript @database
   Scenario: Logged in user wants to answer with a ranking
@@ -60,14 +60,14 @@ Feature: Questionnaire
   @javascript @security
   Scenario: Anonymous user wants to add a reply to a questionnaire
     Given I go to a questionnaire step
-    Then I should see "Vous devez être connecté pour participer"
+    Then I should see "reply.not_logged_in.error" in the "#main" element
     And the questionnaire form should be disabled
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a closed questionnaire step
     Given I am logged in as user
     When I go to a closed questionnaire step
-    Then I should see "Participation terminée."
+    Then I should see "step.questionnaire.alert.ended.title" in the "#main" element
     And the questionnaire form should be disabled
 
   @javascript @database
@@ -76,14 +76,14 @@ Feature: Questionnaire
     When I go to a questionnaire step
     And I fill the questionnaire form
     And I submit my reply
-    Then I should see "Merci ! Votre réponse a bien été enregistrée."
+    Then I should see "reply.request.create.success" in the "#main" element
     And I should see my reply
 
   @javascript @security
   Scenario: Logged in user wants to add another reply when multiple replies is not allowed
     Given I am logged in as admin
     When I go to a questionnaire step with no multiple replies allowed
-    Then I should see "Vous avez déjà participé."
+    Then I should see "reply.user_has_reply.reason" in the "#main" element
     And the questionnaire form should be disabled
 
   ## Replies list
@@ -133,7 +133,7 @@ Feature: Questionnaire
     And I click on my first reply
     And I click the delete reply button
     And I confirm reply deletion
-    Then I should see "Votre réponse a bien été supprimée."
+    Then I should see "reply.request.delete.success" in the "#main" element
     And I should not see my reply anymore
 
   @javascript @security

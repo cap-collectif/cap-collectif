@@ -84,7 +84,7 @@ Scenario: Presentation step should display correct number of element
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
+  And I follow "proposal.tabs.content"
   Then I should see 2 ".media--news" elements
   And I should see 2 ".event" elements
 
@@ -166,6 +166,6 @@ Scenario: Project trash display correct numbers of elements
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  When I follow "Corbeille"
+  When I follow "project.show.meta.info.trash"
   Then I should see 100 ".opinion__list .opinion" elements
   And I should see "100" in the "span.badge" element
