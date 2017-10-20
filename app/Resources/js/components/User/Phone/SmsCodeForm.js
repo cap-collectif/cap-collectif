@@ -2,18 +2,18 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
-import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import type { Dispatch } from '../../../types';
 import renderComponent from '../../Form/Field';
 import UserActions from '../../../actions/UserActions';
 
 type Props = {
-  onSubmitSuccess: Function,
+  onSubmitSuccess: () => void,
   submitting: boolean,
-  handleSubmit: Function,
+  handleSubmit: () => void,
 };
 
-const onSubmit = (values, dispatch, props) => {
+const onSubmit = (values: { code: string }, dispatch: Dispatch, props: Props) => {
   const { onSubmitSuccess } = props;
 
   return UserActions.sendSmsCode(values)
@@ -30,7 +30,7 @@ const onSubmit = (values, dispatch, props) => {
 const validate = ({ code }: Object) => {
   const errors = {};
 
-  if (code === undefined || code.length !== 6) {
+  if (!code || code.length !== 6) {
     errors.code = 'phone.confirm.constraints.code';
   }
 
@@ -71,10 +71,8 @@ export class SmsCodeForm extends React.Component<Props> {
   }
 }
 
-export default connect()(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-  })(SmsCodeForm),
-);
+export default reduxForm({
+  validate,
+  onSubmit,
+  form: formName,
+})(SmsCodeForm);
