@@ -43,8 +43,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   );
 
   if (props.proposal.form.evaluationForm) {
+    const questions = props.proposal.form.evaluationForm.questions;
     const responses = values.responses.map(resp => {
-      const questions = props.proposal.form.evaluationForm.questions;
       const actualQuestion = questions.find(question => question.id === String(resp.question));
       const questionType = actualQuestion.type;
 
@@ -64,11 +64,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         question: actualQuestion.id,
         value,
       };
-
     });
 
     const variablesEvaluation = {
-      input: {proposalId: props.proposal.id, responses},
+      input: { proposalId: props.proposal.id, responses },
     };
 
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
