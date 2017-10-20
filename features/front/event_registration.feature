@@ -12,7 +12,7 @@ Feature: Event Registration
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
     And I check "capco_event_registration_private"
-    And I press "S'inscrire à l'évènement"
+    And I press "event_registration.create.submit"
     Then I should see "Anonyme" in the "#eventRegistrationModal" element
 
   @database @javascript
@@ -22,7 +22,7 @@ Feature: Event Registration
     When I fill in the following:
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
-    And I press "S'inscrire à l'évènement"
+    And I press "event_registration.create.submit"
     Then I should see "Naruto42" in the "#eventRegistrationModal" element
 
   @database @javascript
@@ -33,8 +33,8 @@ Feature: Event Registration
     When I fill in the following:
     | capco_event_registration_username        | Naruto42             |
     | capco_event_registration_email           | naruto42@gmail.com   |
-    And I press "S'inscrire à l'évènement"
-    Then I should see "Cette adresse électronique a déjà été utilisée pour s'inscrire à l'évènement."
+    And I press "event_registration.create.submit"
+    Then I should see "event_registration.create.listed_email" in the '#main' element
 
   @javascript @database
   Scenario: logged user wants to register an event anonymously
@@ -42,7 +42,7 @@ Feature: Event Registration
     And I visited eventpage with:
     | slug | event-without-registrations |
     And I check "capco_event_registration_private"
-    When I press "S'inscrire"
+    When I press "event_registration.create.register"
     Then I should see "Anonyme" in the "#eventRegistrationModal" element
 
   @javascript @database
@@ -50,6 +50,6 @@ Feature: Event Registration
     Given I am logged in as user
     And I visited eventpage with:
     | slug | event-without-registrations |
-    When I press "S'inscrire"
+    When I press "event_registration.create.register"
     Then I should see "user" in the "#eventRegistrationModal" element
-    Then I should see "Se désinscrire"
+    Then I should see "Se désinscrire" in the '#main' element

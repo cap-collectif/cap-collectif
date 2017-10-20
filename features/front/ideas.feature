@@ -8,14 +8,14 @@ Background:
 Scenario: Can see no ideas in empty theme
   Given feature "themes" is enabled
   When I go to an empty theme page
-  Then I should see "Il n'y a aucune idée dans ce thème pour le moment. Soyez le premier à en proposer une !"
+  Then I should see "idea.none_in_theme" in the "#main" element
   Then there should be 0 ideas
 
 @javascript
 Scenario: Can see ideas in not empty theme
   Given feature "themes" is enabled
   When I go to a theme page
-  Then I should not see "Il n'y a aucune idée dans ce thème pour le moment. Soyez le premier à en proposer une !"
+  Then I should not see "idea.none_in_theme" in the "#main" element
   And there should be 3 ideas
 
 # Homepage
@@ -24,7 +24,7 @@ Scenario: Can see ideas in not empty theme
 Scenario: User wants to see ideas on the homepage
   When I go to the homepage
   Then there should be 4 ideas
-  And I should see "Voir toutes les idées"
+  And I should see "idea.see_all" in the "#main" element
 
 # List
 
@@ -73,7 +73,7 @@ Scenario: Logged in user wants to create an idea with a theme
   And I click the idea create button
   And I fill the idea create form with a theme
   And I submit the new idea
-  Then I should see "Merci ! Votre idée a bien été enregistrée."
+  Then I should see "alert.success.add.idea" in the "#main" element
   And I should see my new idea
 
 @javascript
@@ -86,7 +86,7 @@ Scenario: Anonymous user wants to create an idea
   Given feature "idea_creation" is enabled
   When I go to the ideas page
   And I click the idea create button
-  Then I should see "user.login.popover.body"
+  Then I should see "user.login.popover.body" in the "#main" element
 
 @javascript
 Scenario: Logged in user wants to create an idea from a theme
@@ -105,7 +105,7 @@ Scenario: Anonymous user wants to create an idea from a theme
   And feature "idea_creation" is enabled
   When I go to an empty theme page
   And I click the idea create button
-  Then I should see "user.login.popover.body"
+  Then I should see "user.login.popover.body" in the "#main" element
 
 @javascript
 Scenario: Can not create an idea from theme when idea creation is disabled
@@ -138,7 +138,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
   And I click the idea edit button
   And I edit my idea without confirming my votes lost
   And I submit my edited idea
-  Then I should see "Merci de confirmer la perte de vos votes pour continuer."
+  Then I should see "idea.constraints.confirm" in the "#main" element
 
 # Delete
 
@@ -166,7 +166,7 @@ Scenario: Logged in user wants to report an idea
   When I click the idea report button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "Merci ! L'idée a bien été signalée."
+  Then I should see "alert.success.report.idea" in the "#main" element
 
 @javascript
 Scenario: Logged in user wants to report his own idea
@@ -191,7 +191,7 @@ Scenario: Anonymous user wants to share an idea
 @javascript
 Scenario: Can not comment an uncommentable idea
   When I go to an idea not commentable
-  Then I should not see "Commenter"
+  Then I should not see "Commenter" in the "#main" element
 
   ## Add a comment
 
@@ -202,8 +202,8 @@ Scenario: Anonymous wants to comment an idea
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire de la part de Naruto |
-  And I should see "Commenter avec mon compte"
-  And I should see "Commenter sans créer de compte"
+  And I should see "comment.with_my_account" in the "#main" element
+  And I should see "comment.without_my_account" in the "#main" element
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
@@ -219,8 +219,8 @@ Scenario: Logged in user wants to comment an idea
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire avec mon compte |
-  And I should not see "Commenter avec mon compte"
-  And I should not see "Commenter sans créer de compte"
+  And I should not see "comment.with_my_account" in the "#main" element
+  And I should not see "comment.without_my_account" in the "#main" element
   When I press "Commenter"
   And I wait 5 seconds
   Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
@@ -236,7 +236,7 @@ Scenario: Anonymous wants to comment an idea without email
     | authorName  | Naruto              |
   When I press "Commenter"
   And I wait 2 seconds
-  Then I should see "Cette valeur n'est pas une adresse email valide."
+  Then I should see "comment.constraints.author_email" in the "#main" element
   And I should not see "J'ai un truc à dire mais pas le droit" in the ".opinion__list" element
 
 ## Comments vote
@@ -250,12 +250,12 @@ Scenario: Logged in user wants to vote for a comment of an idea
   And The first comment vote counter should be "0"
   When I vote for the first comment
   And I wait 1 seconds
-  Then I should see "Merci ! Votre vote a bien été pris en compte."
-  And I should see "Annuler mon vote"
+  Then I should see "idea.vote.add_success" in the "#main" element
+  And I should see "idea.vote.delete" in the "#main" element
   And The first comment vote counter should be "1"
   And I vote for the first comment
   And I wait 1 seconds
-  And I should see "Votre vote a bien été supprimé."
+  And I should see "idea.vote.delete_success" in the "#main" element
   And The first comment vote counter should be "0"
 
 # Votes
@@ -267,13 +267,13 @@ Scenario: Logged in user wants to vote and unvote for an idea with a comment
   And the idea has 2 votes
   When I add an idea vote comment
   And I submit the idea vote form
-  And I should see "Merci ! Votre vote a bien été pris en compte."
+  And I should see "idea.vote.add_success" in the "#main" element
   And I close current alert
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
   And I should see my vote in the idea votes list
   And I submit the idea vote form
-  And I should see "Votre vote a bien été supprimé."
+  And I should see "idea.vote.delete_success" in the "#main" element
   Then the idea should have 2 votes
   And I should not see my vote in the idea votes list
 
@@ -286,7 +286,7 @@ Scenario: Logged in user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "Merci ! Votre vote a bien été pris en compte."
+  And I should see "idea.vote.add_success" in the "#main" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea with a comment
@@ -299,7 +299,7 @@ Scenario: Anonymous user wants to vote for an idea with a comment
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
   And I should see my not logged in vote in the idea votes list
-  And I should see "Merci ! Votre vote a bien été pris en compte."
+  And I should see "idea.vote.add_success" in the "#main" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea anonymously
@@ -310,7 +310,7 @@ Scenario: Anonymous user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "Merci ! Votre vote a bien été pris en compte."
+  And I should see "idea.vote.add_success" in the "#main" element
 
 @javascript @security
 Scenario: Anonymous user wants to vote twice with the same email
@@ -318,7 +318,7 @@ Scenario: Anonymous user wants to vote twice with the same email
   And the idea has 2 votes
   When I fill the idea vote form with already used email
   And I submit the idea vote form
-  Then I should see "idea.vote.already_voted"
+  Then I should see "idea.vote.already_voted" in the "#main" element
   And the idea should have 2 votes
 
 @javascript @security
@@ -327,7 +327,7 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
   And the idea has 2 votes
   When I fill the idea vote form with a registered email
   And I submit the idea vote form
-  Then I should see "idea.vote.email_belongs_to_user"
+  Then I should see "idea.vote.email_belongs_to_user" in the "#main" element
   And the idea should have 2 votes
 
 # Trash
@@ -336,13 +336,7 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
 Scenario: Can not access trash if feature is disabled
   Given I am logged in as user
   And I go to the ideas page
-  Then I should not see "Corbeille des idées"
-
-@javascript
-Scenario: Can not access trash if not logged in
-  Given feature "idea_trash" is enabled
-  And I go to the ideas page
-  When I follow "Voir la corbeille"
+  Then I should not see "Corbeille des idées" in the "#main" element
 
 @javascript
 Scenario: Ideas trash display correct number of elements

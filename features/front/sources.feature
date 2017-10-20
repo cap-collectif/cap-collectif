@@ -6,16 +6,16 @@ Feature: Source
     Given I am logged in as user
     And I go to an opinion with no sources
     When I go on the sources tab
-    Then I should see "Aucune source proposée"
+    Then I should see "opinion.no_new_source" in the "#main" element
     When I create a new source
-    Then I should see "Merci ! La source a bien été ajoutée."
+    Then I should see "alert.success.add.source" in the "#main" element
     And I should see my new source
 
   @javascript
   Scenario: Can not create a source in non-contribuable project
     Given I am logged in as user
     And I go to an opinion in a closed step
-    Then I should see "Consultation terminée"
+    Then I should see "step.consultation.alert.ended.title" in the "#main" element
     And I go on the sources tab
     Then the create source button should be disabled
 
@@ -34,7 +34,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I edit my source
-    Then I should see "Merci ! Votre source a bien été modifiée."
+    Then I should see "alert.success.update.source" in the "#main" element
     And my source should have lost its votes
 
   @javascript @database
@@ -43,7 +43,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I edit my source without confirming my votes lost
-    Then I should see "Veuillez cocher cette case pour continuer."
+    Then I should see "source.constraints.check"
 
   @javascript
   Scenario: Non author of a source can not update or delete
@@ -60,7 +60,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I delete my source
-    Then I should see "La source a bien été supprimée."
+    Then I should see "alert.success.delete.source"
     And I should not see my source anymore
 
   # Reporting
@@ -81,4 +81,4 @@ Feature: Source
     And I click the source report button
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "Merci ! La source a bien été signalée."
+    Then I should see "alert.success.report.source"

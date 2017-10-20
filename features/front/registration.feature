@@ -46,6 +46,6 @@ Scenario: Anonymous wants to register with every possible errors
   | password             | 1234                 |
   | zipcode              | 94                   |
   And I press "global.register"
-  Then I should see "Le nom doit faire au moins 2 caractères."
-  And I should see "Cet email n'est pas valide."
-  And I should see "Le mot de passe doit faire au moins 8 caractères."
+  Then I should see "registration.constraints.username.min"
+  And I should see "registration.constraints.email.invalid"
+  And I should see "registration.constraints.password.min"
