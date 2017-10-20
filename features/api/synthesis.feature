@@ -662,9 +662,7 @@ Scenario: API client wants to get a synthesis element that is published
         "logged_at": "@string@.isDateTime()",
         "version": 2,
         "sentences": [
-          "synthesis.logs.sentence.update {
-            "%author%": null
-          }"
+          "synthesis.logs.sentence.update {\"%author%\": null}"
         ]
       },
       {

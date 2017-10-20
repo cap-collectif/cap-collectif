@@ -29,7 +29,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
             return $id;
         }
 
-        return $id . ' ' . json_encode($parameters, JSON_PRETTY_PRINT);
+        return $id . ' ' . json_encode($parameters);
     }
 
     public function getCatalogue($locale = null)
