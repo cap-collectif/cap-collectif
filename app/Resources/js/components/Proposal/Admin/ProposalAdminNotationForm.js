@@ -49,27 +49,28 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       const questionType = actualQuestion.type;
 
       let value;
-      if (
-        questionType === 'ranking' ||
-        questionType === 'radio' ||
-        questionType === 'checkbox' ||
-        questionType === 'button'
-      ) {
+      if (questionType === 'ranking' || questionType === 'radio' || questionType === 'button') {
         value = JSON.stringify({
           labels: Array.isArray(resp.value) ? resp.value : [resp.value],
           other: null,
         });
+      } else if (questionType === 'checkbox') {
+        value = JSON.stringify(resp.value);
       } else {
         value = resp.value;
       }
+
       return {
         question: actualQuestion.id,
         value,
       };
+
     });
+
     const variablesEvaluation = {
-      input: { proposalId: props.proposal.id, responses },
+      input: {proposalId: props.proposal.id, responses},
     };
+
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
   }
 
@@ -314,8 +315,12 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
                   responseValue = JSON.parse(response.value).labels[0];
                 }
 
-                if (questionType === 'checkbox' || questionType === 'ranking') {
+                if (questionType === 'ranking') {
                   responseValue = JSON.parse(response.value).labels;
+                }
+
+                if (questionType === 'checkbox') {
+                  responseValue = JSON.parse(response.value);
                 }
 
                 return {

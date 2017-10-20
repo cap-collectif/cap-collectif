@@ -16,7 +16,7 @@ const Checkbox = React.createClass({
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
-    value: PropTypes.array.isRequired,
+    value: PropTypes.object.isRequired,
   },
 
   other: Other,
@@ -26,7 +26,7 @@ const Checkbox = React.createClass({
       disabled: false,
       labelClassName: '',
       isReduxForm: false,
-      value: [],
+      value: {},
     };
   },
 
@@ -37,41 +37,60 @@ const Checkbox = React.createClass({
   },
 
   onChange(newValue) {
-    const { isReduxForm, onChange, field } = this.props;
+    const { isReduxForm, onChange, field, value } = this.props;
 
     if (isReduxForm) {
-      onChange(newValue);
+      if (Array.isArray(newValue)) {
+        onChange({ labels: newValue, other: value.other });
+      } else {
+        onChange(newValue);
+      }
 
       return;
     }
 
+    // Without redux form
+
+    let resolveValue;
+    if (Array.isArray(newValue)) {
+      resolveValue = newValue;
+    } else {
+      const lastValues = this.state.mixinValue.filter(val => {
+        let find = false;
+        let i = 0;
+
+        while (i < field.choices.length && !find) {
+          if (val === field.choices[i].label) {
+            find = true;
+          }
+          i++;
+        }
+
+        return find;
+      });
+
+      resolveValue = [...lastValues, newValue];
+    }
+
     this.setState({
-      mixinValue: newValue,
+      mixinValue: resolveValue,
     });
 
-    onChange(field, newValue);
+    onChange(field, resolveValue);
   },
 
-  onOtherChange(e) {
-    const { field } = this.props;
-    const checkedValues = this.state.mixinValue.filter(value => {
-      let find = false;
-      let i = 0;
+  onOtherChange(e, changeValue) {
+    const { isReduxForm, value } = this.props;
+    const values = isReduxForm ? value.labels : this.state.mixinValue;
 
-      while (i < field.choices.length && !find) {
-        if (value === field.choices[i].label) {
-          find = true;
-        }
-        i++;
+    if (isReduxForm) {
+      if (changeValue) {
+        this.onChange({ labels: values, other: changeValue });
+      } else {
+        this.onChange({ labels: values, other: null });
       }
-
-      return find;
-    });
-
-    if (e.target.value) {
-      this.onChange([...checkedValues, e.target.value]);
     } else {
-      this.onChange(checkedValues);
+      this.onChange(changeValue);
     }
   },
 
@@ -98,7 +117,8 @@ const Checkbox = React.createClass({
     } = this.props;
     const { mixinValue } = this.state;
 
-    const finalValue = isReduxForm ? value : mixinValue;
+    const finalValue = isReduxForm ? value.labels : mixinValue;
+    const otherValue = isReduxForm ? value.other : undefined;
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
@@ -147,6 +167,7 @@ const Checkbox = React.createClass({
           {this.props.field.isOtherAllowed ? (
             <Other
               ref={c => (this.other = c)}
+              value={otherValue}
               isReduxForm={isReduxForm}
               field={this.props.field}
               onChange={this.onOtherChange}
