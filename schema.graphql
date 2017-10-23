@@ -309,7 +309,7 @@ type DeleteProposalPayload {
 
 # A district
 type District {
-  id: String!
+  id: ID!
   name: String!
   geojson: GeoJSON
   displayedOnMap: Boolean!
@@ -362,12 +362,44 @@ type Media {
   size: String!
 }
 
+# A media question
+type MediaQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
+}
+
 # A response
 type MediaResponse implements Response {
   question: Question!
 
   # Medias
   medias: [Media]!
+}
+
+# A multiple choice question
+type MultipleChoiceQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # Multiple Choice Question Validation Rule
@@ -829,11 +861,9 @@ type Query {
   availableQuestionnaires: [Question!]
 }
 
-# A question
-type Question {
+interface Question {
   id: String!
   title: String!
-  slug: String!
   type: QuestionTypeValue!
   position: Int!
   private: Boolean!
@@ -842,6 +872,8 @@ type Question {
   helpText: String
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
+  kind: String!
+  slug: String!
 }
 
 # A possible choice of a question
@@ -854,7 +886,7 @@ type QuestionChoice {
 
 input QuestionInput {
   title: String!
-  type: String!
+  type: QuestionTypeValue!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -865,11 +897,12 @@ enum QuestionTypeValue {
   text
   textarea
   editor
-  medias
   radio
+  select
   checkbox
-  button
   ranking
+  medias
+  button
 }
 
 type QuestionnaireAbstractQuestion {
@@ -1036,6 +1069,22 @@ input SetEvaluationFormInProposalFormInput {
 type SetEvaluationFormInProposalFormPayload {
   proposalForm: ProposalForm!
   clientMutationId: String
+}
+
+# A simple question
+type SimpleQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A source

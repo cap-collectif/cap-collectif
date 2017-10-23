@@ -552,7 +552,6 @@ admin:
       proposedAnswer: Analyse synthétique de l'avis du service
       last_status: Dernier statut
       reference: Réf.
-      reference_of_proposal: Référence
     proposal_category:
       name: Nom
     proposal_form:

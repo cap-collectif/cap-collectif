@@ -61,6 +61,18 @@ services:
     tags:
       - { name: form.type }
 
+  capco.form.questionnaire.simple:
+    class: Capco\AppBundle\Form\QuestionnaireAbstractSimpleQuestionType
+    arguments: ["@capco.form.transformer.entity_to_id"]
+    tags:
+      - { name: form.type }
+
+  capco.form.questionnaire.media:
+    class: Capco\AppBundle\Form\QuestionnaireAbstractMediaQuestionType
+    arguments: ["@capco.form.transformer.entity_to_id"]
+    tags:
+      - { name: form.type }
+
   capco.form.response.media:
     class: Capco\AppBundle\Form\MediaResponseType
     arguments: ["@capco.form.transformer.entity_to_id"]
