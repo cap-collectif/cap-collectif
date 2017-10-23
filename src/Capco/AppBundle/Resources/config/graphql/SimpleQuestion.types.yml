@@ -1,7 +1,8 @@
-Question:
-    type: interface
+SimpleQuestion:
+    type: object
     config:
-        resolveType: "@=resolver('question_question_type', [value])"
+        interfaces: [Question]
+        description: "A simple question"
         fields:
             id:
                 type: "String!"
@@ -17,18 +18,19 @@ Question:
                 type: "Boolean!"
             required:
                 type: "Boolean!"
+            helpText:
+                type: "String"
+            kind:
+                type: "String!"
+                resolve: "simple"
             isOtherAllowed:
                 type: "Boolean!"
                 resolve: "@=resolver('question_isOtherAllowed', [value])"
-            helpText:
-                type: "String"
             choices:
                 type: "[QuestionChoice!]"
                 resolve: "@=resolver('question_choices', [value])"
             validationRule:
                 type: "MultipleChoiceQuestionValidationRule"
-                resolve: "@=resolver('question_validation_rule', [value])"
-            kind:
-                type: "String!"
+                resolve: "@=resolver('question_validation_rule', [value])"                
             slug:
                 type: "String!"

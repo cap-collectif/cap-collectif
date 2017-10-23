@@ -4,18 +4,20 @@ QuestionTypeValue:
         description: "Value of type of question"
         values:
             text:
-                value: text
+                value: 0
             textarea:
-                value: textarea
+                value: 1
             editor:
-                value: editor
-            medias:
-                value: medias
+                value: 2
             radio:
-                value: radio
+                value: 3
+            select:
+                value: 4
             checkbox:
-                value: checkbox
-            button:
-                value: button
+                value: 5
             ranking:
-                value: ranking
+                value: 6
+            medias:
+                value: 7
+            button:
+                value: 8
