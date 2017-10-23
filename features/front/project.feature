@@ -55,7 +55,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
   And feature "projects_form" is enabled
   And I visited "projects page"
-  And I select "Consultation" from "project-type"
+  And I select "project.types.consultation" from "project-type"
   And I wait 1 seconds
   And I select "Les plus populaires" from "project-sorting"
   And I wait 1 seconds

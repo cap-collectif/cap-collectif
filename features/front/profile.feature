@@ -1,4 +1,4 @@
-@profil
+@profile
 Feature: Profil
 
   Background:
@@ -11,7 +11,7 @@ Feature: Profil
     And I fill in the following:
       | sonata_user_profile_form_username | user3 |
     And I press "user.profile.edit.submit"
-    Then I should see "Votre profil a été mis à jour"
+    Then I should see "profile.flash.updated" in the "#symfony-flash-messages" element
 
   @javascript @database
   Scenario: Logged in user wants to change his user type
@@ -20,7 +20,7 @@ Feature: Profil
     And I visited "edit profile page"
     And I select "Organisation à but non lucratif" from "sonata_user_profile_form_userType"
     And I press "user.profile.edit.submit"
-    Then I should see "Votre profil a été mis à jour"
+    Then I should see "profile.flash.updated" in the "#symfony-flash-messages" element
 
   @javascript @database
   Scenario: Logged in user wants to change his password with a wrong current password
@@ -43,7 +43,7 @@ Feature: Profil
       | fos_user_change_password_form_new_first        | 1234 |
       | fos_user_change_password_form_new_second       | 1234 |
     And I press "user.profile.edit.submit"
-    And I should see "fos_user.new password.short" in the "#main" element
+    And I should see "fos_user.new_password.short" in the "#main" element
 
   @javascript @database
   Scenario: Logged in user wants to change his password
@@ -54,4 +54,4 @@ Feature: Profil
       | fos_user_change_password_form_new_first        | toto12345   |
       | fos_user_change_password_form_new_second       | toto12345   |
     And I press "user.profile.edit.submit"
-    Then I should see "change_password.flash.success" in the "#main" element
+    Then I should see "change_password.flash.success" in the "#symfony-flash-messages" element

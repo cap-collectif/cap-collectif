@@ -16,7 +16,7 @@ Scenario: Author of a comment loose their votes when updating it
     | body | Je modifie mon commentaire ! |
   And I check "confirm"
   And I press "comment.update.submit"
-  Then I should see "comment.update.success" in the "#main" element
+  Then I should see "comment.update.success" in the "#symfony-flash-messages" element
   And I wait 1 seconds
   And I should see "0" in the ".opinion--comment .opinion__votes-nb" element
 
@@ -31,7 +31,7 @@ Scenario: Author of a comment try to update it without checking the confirm chec
   And I fill in the following:
     | body | Je modifie mon commentaire ! |
   And I press "comment.update.submit"
-  Then I should not see "comment.update.success" in the "#main" element
+  Then I should not see "comment.update.success" in the "#symfony-flash-messages" element
 
 @javascript
 Scenario: Non author of a comment wants to update it
@@ -40,7 +40,7 @@ Scenario: Non author of a comment wants to update it
   And I visited "idea page" with:
     | slug | troisieme-idee |
   And I wait 1 seconds
-  Then I should not see "comment.update.button" in the "#main" element
+  Then I should not see "comment.update.button" in the "#global-alert-box" element
 
 @javascript
 Scenario: Anonymous user wants to see pinned and vip comments on top of the comments list

@@ -675,7 +675,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('Annuler mon vote');
+        $this->clickProposalVoteButtonWithLabel('vote.cancel');
     }
 
     /**

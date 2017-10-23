@@ -365,7 +365,7 @@ trait IdeaStepsTrait
      */
     public function iClickTheIdeaUnvoteButton()
     {
-        $this->clickIdeaVoteButtonWithLabel('Annuler mon vote');
+        $this->clickIdeaVoteButtonWithLabel('vote.cancel');
     }
 
     /**

@@ -89,7 +89,7 @@ Scenario: Anonymous wants to comment an event
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 2 seconds
   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
@@ -103,7 +103,7 @@ Scenario: Logged in user wants to comment an event
     | body        | J'ai un truc à dire |
   And I should not see "Commenter avec mon compte"
   And I should not see "Commenter sans créer de compte"
-#   When I press "Commenter"
+#   When I press "comment.submit"
 #   And I wait 2 seconds
 #   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
@@ -116,6 +116,6 @@ Scenario: Anonymous wants to comment an event without email
     | body        | J'ai un truc à dire |
   And I fill in the following:
     | authorName  | Naruto              |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 2 seconds
   Then I should not see "J'ai un truc à dire" in the ".opinion__list" element

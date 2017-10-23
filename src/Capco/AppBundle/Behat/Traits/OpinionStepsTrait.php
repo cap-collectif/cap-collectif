@@ -368,29 +368,25 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I vote for the argument.
-     *
      * @When I vote for the argument
      */
     public function iVoteForTheArgument()
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
-        $this->clickArgumentVoteButtonWithLabel('D\'accord');
+        $this->clickArgumentVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getArgumentVotesCount();
         \PHPUnit_Framework_Assert::assertEquals($wantedVotesCount, $newVotesCount, 'Argument votes number should be increased by 1.');
     }
 
     /**
-     * I delete my vote on the argument.
-     *
      * @When I delete my vote on the argument
      */
     public function iDeleteMyVoteOnTheArgument()
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getArgumentVotesCount() - 1;
-        $this->clickArgumentVoteButtonWithLabel('Annuler mon vote');
+        $this->clickArgumentVoteButtonWithLabel('vote.cancel');
         $newVotesCount = $page->getArgumentVotesCount();
         \PHPUnit_Framework_Assert::assertEquals($wantedVotesCount, $newVotesCount, 'Argument votes number should be decreased by 1.');
     }
@@ -456,7 +452,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getSourceVotesCount() - 1;
-        $this->clickSourceVoteButtonWithLabel('Annuler mon vote');
+        $this->clickSourceVoteButtonWithLabel('vote.cancel');
         $newVotesCount = $page->getSourceVotesCount();
         \PHPUnit_Framework_Assert::assertEquals($wantedVotesCount, $newVotesCount, 'Source votes number should be decreased by 1.');
     }

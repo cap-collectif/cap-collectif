@@ -191,7 +191,7 @@ Scenario: Anonymous user wants to share an idea
 @javascript
 Scenario: Can not comment an uncommentable idea
   When I go to an idea not commentable
-  Then I should not see "Commenter" in the "#main" element
+  Then I should not see "comment.submit" in the "#main" element
 
   ## Add a comment
 
@@ -207,7 +207,7 @@ Scenario: Anonymous wants to comment an idea
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 5 seconds
   Then I should see "J'ai un truc à dire de la part de Naruto" in the ".opinion__list" element
 
@@ -221,7 +221,7 @@ Scenario: Logged in user wants to comment an idea
     | body        | J'ai un truc à dire avec mon compte |
   And I should not see "comment.with_my_account" in the "#main" element
   And I should not see "comment.without_my_account" in the "#main" element
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 5 seconds
   Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
 
@@ -234,7 +234,7 @@ Scenario: Anonymous wants to comment an idea without email
     | body        | J'ai un truc à dire mais pas le droit |
   And I fill in the following:
     | authorName  | Naruto              |
-  When I press "Commenter"
+  When I press "comment.submit"
   And I wait 2 seconds
   Then I should see "comment.constraints.author_email" in the "#main" element
   And I should not see "J'ai un truc à dire mais pas le droit" in the ".opinion__list" element

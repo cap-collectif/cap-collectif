@@ -79,7 +79,7 @@ Feature: Arguments
     Given I am logged in as user
     And I go to an opinion
     When I edit my argument without confirming my votes lost
-    Then I should see "argument.constraints.confirm" in the "#main" element
+    Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
   @javascript @security
   Scenario: Non author of an argument on an opinion wants to update it
@@ -108,7 +108,7 @@ Feature: Arguments
     Given I am logged in as user
     And I go to a version
     When I edit my argument without confirming my votes lost
-    Then I should see "argument.constraints.confirm" in the "#main" element
+    Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
   @javascript @security
   Scenario: Non author of an argument on a version wants to update it
@@ -170,7 +170,7 @@ Feature: Arguments
     Given I am logged in as admin
     And I go to an opinion
     When I vote for the argument
-    Then I should see "argument.vote.add success" in the "#global-alert-box" element
+    Then I should see "alert.success.add.vote" in the "#global-alert-box" element
     When I delete my vote on the argument
     Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
 
@@ -199,7 +199,7 @@ Feature: Arguments
     Given I am logged in as admin
     And I go to a version
     When I vote for the argument
-    Then I should see "argument.vote.add success" in the "#global-alert-box" element
+    Then I should see "alert.success.add.vote" in the "#global-alert-box" element
     When I delete my vote on the argument
     Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
 

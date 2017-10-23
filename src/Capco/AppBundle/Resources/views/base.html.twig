@@ -6,6 +6,7 @@
     {% include '@CapcoApp/Default/header.html.twig' %}
 
     {% if app.request.hasPreviousSession %}
+      <div id="symfony-flash-messages">
         {% for key, messages in app.session.flashbag.all() %}
             {% for message in messages %}
             <div class="alert alert-{{ key }} alert-dismissible  alert--no-radius" role="alert" style="margin-bottom: 0; text-align: center">
@@ -14,6 +15,7 @@
             </div>
             {% endfor %}
         {% endfor %}
+      </div>
     {% endif %}
 
 
