@@ -60,18 +60,13 @@ class ProposalFormUpdateType extends AbstractType
                 'by_reference' => false,
             ])
 
-            /*->add('questions', CollectionType::class, [
+            ->add('questions', CollectionType::class, [
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-            ])*/
-            ->add('questions', CollectionType::class, [
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'entry_type' => QuestionnaireAbstractQuestionType::class,
-                    'by_reference' => false,
+                'by_reference' => false,
             ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

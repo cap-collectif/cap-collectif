@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
     private $filePath;
+    private $delimiter;
 
     protected function configure()
     {
@@ -36,6 +37,11 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 InputArgument::REQUIRED,
                 'Please provide the slug of the consultation step you want to use'
             )
+            ->addArgument(
+                'delimiter',
+                InputArgument::OPTIONAL,
+                ', or ;'
+            )
             ->addOption(
                 'force',
                 'f',
@@ -53,6 +59,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
     protected function import(InputInterface $input, OutputInterface $output): int
     {
         $this->filePath = $input->getArgument('filePath');
+        $this->delimiter = $input->getArgument('delimiter');
         $userEmail = $input->getArgument('user');
         $consultationStepSlug = $input->getArgument('step');
 
@@ -101,7 +108,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         $opinions = $this->getOpinions();
 
-        if (!$opinions || count($opinions) === 0) {
+        if (!$opinions || 0 === count($opinions)) {
             $output->writeln(
                 '<error>File "opinions.csv" is not provided, is empty or could not be parsed.</error>'
             );
@@ -119,7 +126,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinionType = null;
             $otPath = explode('|', $row['type']);
             foreach ($otPath as $index => $ot) {
-                if ($index === 0) {
+                if (0 === $index) {
                     $opinionType = $em
                         ->getRepository('CapcoAppBundle:OpinionType')
                         ->findOneBy([
@@ -202,7 +209,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                     return 1;
                 }
 
-                if (count($opinion->getAppendices()) === 0) {
+                if (0 === count($opinion->getAppendices())) {
                     $appendix = new OpinionAppendix();
                     $appendix->setAppendixType($opinionTypeAppendixType->getAppendixType());
                     $opinion->addAppendice($appendix);
@@ -229,7 +236,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
     protected function getOpinions(): array
     {
         return Reader::createFromPath($this->filePath)
-            ->setDelimiter(';')
+            ->setDelimiter($this->delimiter ?? ';')
             ->fetchAll();
     }
 }

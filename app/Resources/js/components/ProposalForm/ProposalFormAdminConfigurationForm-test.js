@@ -46,7 +46,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           type: 'text',
           private: false,
           position: 1,
-          kind: 'simple',
         },
       ],
     },

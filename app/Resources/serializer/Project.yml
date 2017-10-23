@@ -11,7 +11,6 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects]
     Author:
       expose: true
-      serialized_name: author
       groups: [Projects]
       serialized_name: author
     contributionsCount:
@@ -54,3 +53,9 @@ Capco\AppBundle\Entity\Project:
     video:
       expose: true
       groups: [Projects]
+  virtual_properties:
+    hasParticipativeStep:
+      expose: true
+      type: boolean
+      groups: [Projects]
+      serialized_name: hasParticipativeStep

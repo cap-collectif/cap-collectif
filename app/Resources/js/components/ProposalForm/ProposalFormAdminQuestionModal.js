@@ -2,13 +2,11 @@
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Field, formValueSelector, change } from 'redux-form';
+import { Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
-
-const selector = formValueSelector('proposal-form-admin-configuration');
 
 export const ProposalFormAdminQuestionModal = React.createClass({
   propTypes: {
@@ -17,19 +15,10 @@ export const ProposalFormAdminQuestionModal = React.createClass({
     onSubmit: PropTypes.func.isRequired,
     member: PropTypes.string.isRequired,
     isCreating: PropTypes.bool.isRequired,
-    kind: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
-
-  componentWillUpdate(nextProps) {
-    const { kind, dispatch, member } = this.props;
-    if (nextProps.kind === 'media' && nextProps.kind !== kind) {
-      dispatch(change('proposal-form-admin-configuration', `${member}.type`, 'medias'));
-    }
   },
 
   render() {
-    const { member, show, isCreating, onClose, onSubmit, kind } = this.props;
+    const { member, show, isCreating, onClose, onSubmit } = this.props;
     return (
       <Modal
         show={show}
@@ -59,32 +48,12 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             component={component}
           />
           <Field
-            label="Type de réponse"
-            id={`${member}.kind`}
-            name={`${member}.kind`}
-            type="select"
-            component={component}
-            disabled={isCreating}>
-            <option value="" disabled>
-              Sélectionner un type
-            </option>
-            <option value="simple">Texte Libre</option>
-            <option value="media">
-              <FormattedMessage id="global.question.types.medias" />
-            </option>
-          </Field>
-          <Field
             label="Format de réponse"
             id={`${member}.type`}
             name={`${member}.type`}
             type="select"
-            style={{ display: kind === 'simple' ? 'inline' : 'none' }}
-            component={component}
-            disabled={isCreating}
-            normalize={value => {
-              return kind === 'medias' ? 'media' : value;
-            }}>
-            <option value="" disabled selected={kind === 'simple'}>
+            component={component}>
+            <option value="" disabled>
               <FormattedMessage id="global.select" />
             </option>
             <option value="text">
@@ -95,6 +64,9 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             </option>
             <option value="editor">
               <FormattedMessage id="global.question.types.editor" />
+            </option>
+            <option value="medias">
+              <FormattedMessage id="global.question.types.medias" />
             </option>
           </Field>
           <Field
@@ -123,8 +95,4 @@ export const ProposalFormAdminQuestionModal = React.createClass({
   },
 });
 
-const mapStateToProps = (state, props) => ({
-  kind: selector(state, `${props.member}.kind`) || '',
-});
-
-export default connect(mapStateToProps)(ProposalFormAdminQuestionModal);
+export default connect()(ProposalFormAdminQuestionModal);

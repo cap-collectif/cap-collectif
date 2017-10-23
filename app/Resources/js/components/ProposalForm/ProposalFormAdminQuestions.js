@@ -57,9 +57,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                     <strong>{questions[index].title}</strong>
                     <br />
                     <span className="excerpt">
-                      {questions[index].type && (
-                        <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
-                      )}
+                      <FormattedMessage id={`proposal_form.fields.${questions[index].type}`} />
                     </span>
                   </div>
                 </Col>
@@ -99,11 +97,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           className="btn-outline-primary box-content__toolbar"
           onClick={() => {
             dispatch(
-              arrayPush(formName, 'questions', {
-                private: false,
-                required: false,
-                position: fields.length + 1,
-              }),
+              arrayPush(formName, 'questions', { private: false, required: false, position: 99 }),
             );
             this.setState({ editIndex: fields.length });
           }}>

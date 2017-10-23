@@ -84,6 +84,9 @@ class ProposalAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.proposal.title',
             ])
+            ->add('reference', null, [
+                'label' => 'admin.fields.proposal.reference_of_proposal',
+            ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.proposal.enabled',
             ])
