@@ -10,4 +10,5 @@ do
    sed -i "s|%$var%|${!var}|g" /etc/php/7.0/cli/conf.d/92-blackfire-config.ini
 done
 
-exec /usr/bin/blackfire-agent
+# To enable it again when we'll have a licence
+# exec /usr/bin/blackfire-agent
