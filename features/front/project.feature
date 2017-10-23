@@ -84,7 +84,7 @@ Scenario: Presentation step should display correct number of element
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I follow "proposal.tabs.content"
+  And I follow "Présentation"
   Then I should see 2 ".media--news" elements
   And I should see 2 ".event" elements
 
