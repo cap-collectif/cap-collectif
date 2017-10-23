@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
@@ -25,6 +25,8 @@ type Props = RelayProps & {
   initialValues: Object,
   fields: Object,
   evaluationForm: Object,
+  change: Function,
+  responses: Array<Object>,
 };
 
 const formName = 'proposal-admin-evaluation';
@@ -50,12 +52,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       const questionType = actualQuestion.type;
 
       let value;
-      if (questionType === 'ranking' || questionType === 'radio' || questionType === 'button') {
+      if (questionType === 'ranking' || questionType === 'button') {
         value = JSON.stringify({
           labels: Array.isArray(resp.value) ? resp.value : [resp.value],
           other: null,
         });
-      } else if (questionType === 'checkbox') {
+      } else if (questionType === 'checkbox' || questionType === 'radio') {
         value = JSON.stringify(resp.value);
       } else {
         value = resp.value;
@@ -123,9 +125,13 @@ const formattedChoicesInField = field => {
 const renderResponses = ({
   fields,
   evaluationForm,
+  responses,
+  change,
 }: {
   fields: Object,
   evaluationForm: Object,
+  responses: Array<Object>,
+  change: Function,
 }) => (
   <div>
     {fields.map((member, index) => {
@@ -148,6 +154,11 @@ const renderResponses = ({
           );
         }
         default: {
+          let response;
+          if (responses) {
+            response = responses[index].value;
+          }
+
           let choices = [];
           if (
             inputType === 'ranking' ||
@@ -160,11 +171,13 @@ const renderResponses = ({
               return (
                 <div>
                   <MultipleChoiceRadio
-                    name={`${member}.value`}
+                    name={member}
                     helpText={field.helpText}
                     isOtherAllowed={isOtherAllowed}
                     label={label}
                     choices={choices}
+                    value={response}
+                    change={change}
                   />
                 </div>
               );
@@ -263,6 +276,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 name="responses"
                 component={renderResponses}
                 evaluationForm={evaluationForm}
+                responses={this.props.responses}
+                change={this.props.change}
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
@@ -287,6 +302,7 @@ const form = reduxForm({
 })(ProposalAdminNotationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
+  responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,
     likers: props.proposal.likers.map(u => ({
@@ -307,8 +323,12 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
                 let responseValue = response.value;
 
                 const questionType = response.question.type;
-                if (questionType === 'radio' || questionType === 'button') {
+                if (questionType === 'button') {
                   responseValue = JSON.parse(response.value).labels[0];
+                }
+
+                if (questionType === 'radio') {
+                  responseValue = JSON.parse(response.value);
                 }
 
                 if (questionType === 'ranking') {

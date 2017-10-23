@@ -15,6 +15,8 @@ describe('<ProposalAdminNotationForm />', () => {
     initialValues: {},
     evaluationForm: {},
     fields: {},
+    change: jest.fn(),
+    responses: [],
     proposal: {
       id: '1',
       estimation: 1000,

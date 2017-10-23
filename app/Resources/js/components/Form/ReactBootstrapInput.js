@@ -77,6 +77,7 @@ type Props = {
   errors: Array<string>,
   choices: Array<any>,
   onChange: any,
+  radioChecked?: boolean,
   checkedValue: ?string,
   maxLength: ?string,
 };
@@ -131,6 +132,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     image,
     medias,
     intl,
+    radioChecked,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -247,7 +249,7 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'radio') {
       formControl = (
-        <Radio value={value} {...props}>
+        <Radio value={value} {...props} checked={radioChecked}>
           {children}
         </Radio>
       );

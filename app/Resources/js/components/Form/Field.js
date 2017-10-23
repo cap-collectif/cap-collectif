@@ -46,6 +46,7 @@ const Field = React.createClass({
     id: PropTypes.string.isRequired,
     popover: PropTypes.object,
     choices: PropTypes.array,
+    radioChecked: PropTypes.bool,
     input: PropTypes.shape({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
@@ -77,6 +78,7 @@ const Field = React.createClass({
       choices,
       isOtherAllowed,
       style,
+      radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -103,6 +105,7 @@ const Field = React.createClass({
         autoFocus={autoFocus || false}
         choices={choices}
         style={style}
+        radioChecked={radioChecked}
         {...this.props.input}>
         {children}
       </Input>

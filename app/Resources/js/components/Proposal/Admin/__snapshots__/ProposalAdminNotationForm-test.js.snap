@@ -69,9 +69,11 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
           />
         </div>
         <FieldArray
+          change={[Function]}
           component={[Function]}
           evaluationForm={null}
           name="responses"
+          responses={Array []}
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
