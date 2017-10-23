@@ -41,6 +41,14 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     }
 
     /**
+     * @Then /^(?:|I )should see '(?P<text>(?:[^']|\\')*)'$/
+     */
+    public function assertPageContainsText(string $text)
+    {
+        $this->assertSession()->pageTextContains($this->fixStepArgument($text));
+    }
+
+    /**
      * Get entity manager.
      *
      * @return ObjectManager
