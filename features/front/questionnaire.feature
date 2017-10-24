@@ -11,7 +11,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form
     And I submit my reply
-    Then I should see "reply.request.create.success" in the "#main" element
+    Then I should see "reply.request.create.success" in the "#global-alert-box" element
     And I go to a questionnaire step
     Then I should see my reply
 
@@ -22,7 +22,7 @@ Feature: Questionnaire
     And I fill the questionnaire form
     And I check the reply private checkbox
     And I submit my reply
-    Then I should see "reply.request.create.success" in the "#main" element
+    Then I should see "reply.request.create.success" in the "#global-alert-box" element
     And I go to a questionnaire step
     Then I should see my anonymous reply
 
@@ -32,7 +32,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form without the required questions
     And I submit my reply
-    Then I should see "reply.constraints.field mandatory" in the "#main" element
+    Then I should see "reply.constraints.field_mandatory" in the "#main" element
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for required question
@@ -40,7 +40,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form with not enough choices for required question
     And I submit my reply
-    Then I should see 'response.min {"%nb%":3}' in the "#main" element
+    Then I should see 'reply.constraints.choices_equal {"nb":3}'
 
   @javascript @security
   Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for optional question
@@ -48,7 +48,7 @@ Feature: Questionnaire
     And I go to a questionnaire step
     When I fill the questionnaire form with not enough choices for optional question
     And I submit my reply
-    Then I should see 'response.min {"%nb%":2}' in the "#main" element
+    Then I should see 'reply.constraints.choices_min {"nb":2}'
 
   @javascript @database
   Scenario: Logged in user wants to answer with a ranking
@@ -76,7 +76,7 @@ Feature: Questionnaire
     When I go to a questionnaire step
     And I fill the questionnaire form
     And I submit my reply
-    Then I should see "reply.request.create.success" in the "#main" element
+    Then I should see "reply.request.create.success" in the "#global-alert-box" element
     And I should see my reply
 
   @javascript @security
@@ -101,29 +101,6 @@ Feature: Questionnaire
     And I click on my first reply
     Then I should see my first reply
 
-  ## Edition
-
-#  @javascript @database
-#  Scenario: Logged in user wants to edit a reply
-#    Given I am logged in as admin
-#    When I go to a questionnaire step
-#    And I click the edit reply button
-#    And I edit my reply
-#    And I submit my edited reply
-#    Then I should see "Votre réponse a bien été modifiée."
-
-#  @javascript security
-#  Scenario: logged in user wants to edit a reply when edition is not allowed
-#    Given I am logged in as admin
-#    When I go to a questionnaire step with edition not allowed
-#    Then I should not see the edit reply button
-
-#  @javascript security
-#  Scenario: Logged in user wants to edit a reply in a closed questionnaire step
-#    Given I am logged in as admin
-#    When I go to a closed questionnaire step
-#    Then I should not see the edit reply button
-
   ## Deletion
 
   @javascript @database
@@ -133,7 +110,7 @@ Feature: Questionnaire
     And I click on my first reply
     And I click the delete reply button
     And I confirm reply deletion
-    Then I should see "reply.request.delete.success" in the "#main" element
+    Then I should see "reply.request.delete.success" in the "#global-alert-box" element
     And I should not see my reply anymore
 
   @javascript @security

@@ -18,8 +18,6 @@ trait QuestionnaireStepsTrait
     ];
 
     /**
-     * Go to a questionnaire step page.
-     *
      * @When I go to a questionnaire step
      */
     public function iGoToAQuestionnaireStep()
@@ -28,8 +26,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * Go to a closed questionnaire step page.
-     *
      * @When I go to a closed questionnaire step
      */
     public function iGoToAClosedQuestionnaireStep()
@@ -38,8 +34,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * Go to a questionnaire step with no multiple replies allowed page.
-     *
      * @When I go to a questionnaire step with no multiple replies allowed
      */
     public function iGoToAQuestionnaireStepWithNoMultipleRepliesAllowed()
@@ -48,8 +42,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * Go to a questionnaire step with no edition allowed.
-     *
      * @When I go to a questionnaire step with no edition allowed
      */
     public function iGoToAQuestionnaireStepWithNoEditionAllowed()
@@ -60,8 +52,6 @@ trait QuestionnaireStepsTrait
     // ************************************************** Creation ***********************************************************
 
     /**
-     * I fill the questionnaire form.
-     *
      * @When I fill the questionnaire form
      */
     public function iFillTheQuestionnaireForm()
@@ -70,8 +60,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I fill the questionnaire form without the required questions.
-     *
      * @When I fill the questionnaire form without the required questions
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
@@ -80,8 +68,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I fill the questionnaire form with not enough choices for required question.
-     *
      * @When I fill the questionnaire form with not enough choices for required question
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
@@ -92,8 +78,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I fill the questionnaire form with not enough choices for optional question.
-     *
      * @When I fill the questionnaire form with not enough choices for optional question
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForOptionalQuestion()
@@ -103,8 +87,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I check the reply private checkbox.
-     *
      * @When I check the reply private checkbox
      */
     public function iCheckTheReplyPrivateCheckbox()
@@ -113,8 +95,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I submit my reply.
-     *
      * @When I submit my reply
      */
     public function iSubmitMyReply()
@@ -124,8 +104,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * The questionnaire form should be disabled.
-     *
      * @Then the questionnaire form should be disabled
      */
     public function theQuestionnaireFormShouldBeDisabled()
@@ -151,12 +129,10 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
-        $this->assertElementNotContainsText($userReplySelector, '(anonyme)');
+        $this->assertElementNotContainsText($userReplySelector, 'reply.private');
     }
 
     /**
-     * I should see my anonymous reply.
-     *
      * @Then I should see my anonymous reply
      */
     public function iShouldSeeMyAnonymousReply()
@@ -164,7 +140,7 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
-        $this->assertElementContainsText($userReplySelector, '(anonyme)');
+        $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
 
     /**
@@ -177,8 +153,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I click one ranking choice right arrow.
-     *
      * @Then I click one ranking choice right arrow
      */
     public function iClickOneRankingChoiceRightArrow()
@@ -188,8 +162,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * The ranking choice should be in the choice box.
-     *
      * @Then the ranking choice should be in the choice box
      */
     public function theRankingChoiceShouldBeInTheChoiceBox()
@@ -197,56 +169,9 @@ trait QuestionnaireStepsTrait
         $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
     }
 
-    // *************************************************************** Edition *********************************************************************
-
-    /**
-     * I click the edit reply button.
-     *
-     * @Then I click the edit reply button
-     */
-    public function iClickTheEditReplyButton()
-    {
-        $this->navigationContext->getPage('questionnaire page')->clickEditReplyButton();
-        $this->iWait(1);
-    }
-
-    /**
-     * I edit my reply.
-     *
-     * @When I edit my reply
-     */
-    public function iEditMyReply()
-    {
-        $this->fillQuestionnaireForm(false);
-    }
-
-    /**
-     * I submit my edited reply.
-     *
-     * @When I submit my edited reply
-     */
-    public function iSubmitMyEditedReply()
-    {
-        $this->navigationContext->getPage('questionnaire page')->submitEditedReply();
-        $this->iWait(5);
-    }
-
-    /**
-     * I should not see the edit reply button.
-     *
-     * @Then I should not see the edit reply button
-     */
-    public function iShouldNotSeeTheEditReplyButton()
-    {
-        $replyButtonsSelector = $this->navigationContext->getPage('questionnaire page')->getReplyButtonsSelector();
-        $this->assertElementNotContainsText($replyButtonsSelector, 'Modifier');
-    }
-
     // ************************************************* Deletion *************************************************
 
     /**
-     * I click the delete reply button.
-     *
      * @Then I click the delete reply button
      */
     public function iClickTheDeleteReplyButton()
@@ -256,8 +181,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I confirm reply deletion.
-     *
      * @Then I confirm reply deletion
      */
     public function iConfirmReplyDeletion()
@@ -267,8 +190,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I should not see the delete reply button.
-     *
      * @Then I should not see the delete reply button
      */
     public function iShouldNotSeeTheDeleteReplyButton()
@@ -278,8 +199,6 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I click on my first reply.
-     *
      * @When I click on my first reply
      */
     public function iClickOnMyFirstReply()
@@ -289,15 +208,13 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * I should see my first reply.
-     *
      * @Then I should see my first reply
      */
     public function iShouldSeeMyFirstReply()
     {
         $replyModalSelector = $this->navigationContext->getPage('questionnaire page')->getReplyModalSelector();
         $this->assertElementOnPage($replyModalSelector);
-        $this->assertElementContainsText($replyModalSelector, 'Réponse du');
+        $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
     }
 
     protected function fillQuestionnaireForm($edition = false)
