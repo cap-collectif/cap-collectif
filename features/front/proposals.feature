@@ -131,20 +131,21 @@ Scenario: Logged in user wants to create a proposal without providing required r
   When I click the create proposal button
   And I fill the proposal form without required response
   And I submit the create proposal form
-  Then I should see "Ce champ est obligatoire."
+  Then I should see "proposal.constraints.field_mandatory"
 
 @javascript @security
 Scenario: Logged in user wants to create a proposal in closed collect step
   Given I am logged in as user
   And I go to a closed collect step
-  Then I should see "Dépôt terminé. Merci à tous d'avoir contribué."
+  Then I should see "step.collect.alert.ended.title"
+  Then I should see "step.collect.alert.ended.text"
   And the create proposal button should be disabled
 
 @javascript @security @elasticsearch
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
   When I click the create proposal button
-  Then I should see "user.login.popover.body"
+  Then I should see "user.login.popover.body" in the "#main" element
 
 @javascript @database
 Scenario: Author of a proposal wants to update it
@@ -181,7 +182,7 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   And I confirm proposal deletion
   And I wait 3 seconds
   Then 1 mails should be sent
-  And I should see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
+  And I should see mail with subject 'notification.email.proposal.delete.subject {"%sitename":"Cap-Collectif","%username%":"user","%project%":"Budget Participatif Rennes"}'
 
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
@@ -232,7 +233,7 @@ Scenario: Logged in user wants to report a proposal
   When I click the report proposal button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "Merci ! La proposition a bien été signalée."
+  Then I should see "alert.success.report.proposal" in the "#global-alert-box"
 
 # Sharing
 
