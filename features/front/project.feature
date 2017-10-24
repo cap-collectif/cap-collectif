@@ -10,7 +10,7 @@ Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
   And I wait 1 seconds
-  And I select "Les plus récents" from "project-sorting"
+  And I select "global.filter_f_last" from "project-sorting"
   And I wait 1 seconds
   Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".thumbnail--custom .project__preview__title a"
 
@@ -18,7 +18,7 @@ Scenario: Project can be sorted by published date
 Scenario: Project can be sorted by contributions number
   Given feature "projects_form" is enabled
   And I visited "projects page"
-  And I select "Les plus populaires" from "project-sorting"
+  And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
   Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".thumbnail--custom .project__preview__title a"
 
@@ -57,7 +57,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I visited "projects page"
   And I select "project.types.consultation" from "project-type"
   And I wait 1 seconds
-  And I select "Les plus populaires" from "project-sorting"
+  And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
   Then I should see 3 ".thumbnail--custom" elements
   And I should see "Projet de loi Renseignement"

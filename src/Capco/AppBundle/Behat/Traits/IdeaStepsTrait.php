@@ -462,7 +462,7 @@ trait IdeaStepsTrait
      */
     public function iShouldSeeMyAnonymousVoteInTheIdeaVotesList()
     {
-        $this->assertFirstIdeaVoteContains('Anonyme');
+        $this->assertFirstIdeaVoteContains('idea.vote.listing.anonymous');
     }
 
     /**

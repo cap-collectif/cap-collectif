@@ -201,7 +201,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   Given I am logged in as admin
   When I go to the votes details page
   Then I should have 2 votes
-  And I should see "project.votes.nb {"%num%":1}"
+  And I should see 'project.votes.nb {"%num%":1}'
   And I remove the first vote
-  And I should see "project.votes.nb {"%num%":0}"
+  And I should see 'project.votes.nb {"%num%":0}'
   And I should have 1 votes

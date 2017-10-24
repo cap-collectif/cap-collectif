@@ -18,8 +18,6 @@ trait SharingStepsTrait
     }
 
     /**
-     * I should see the opinion share dropdown.
-     *
      * @Then I should see the opinion share dropdown
      */
     public function iShouldSeeTheOpinionShareDropdown()
@@ -31,8 +29,6 @@ trait SharingStepsTrait
     }
 
     /**
-     * I click the share link button.
-     *
      * @When I click the share link button
      */
     public function iClickTheShareLinkButton()
@@ -42,8 +38,6 @@ trait SharingStepsTrait
     }
 
     /**
-     * I click the opinion share link button.
-     *
      * @When I click the opinion share link button
      */
     public function iClickTheOpinionShareLinkButton()
@@ -54,8 +48,6 @@ trait SharingStepsTrait
     }
 
     /**
-     * I should see the share link modal.
-     *
      * @Then I should see the share link modal
      */
     public function iShouldSeeTheShareLinkModal()

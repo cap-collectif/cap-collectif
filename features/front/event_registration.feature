@@ -13,7 +13,7 @@ Feature: Event Registration
     | capco_event_registration_email           | naruto42@gmail.com   |
     And I check "capco_event_registration_private"
     And I press "event_registration.create.submit"
-    Then I should see "Anonyme" in the "#eventRegistrationModal" element
+    Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
 
   @database @javascript
   Scenario: Anonymous wants to register an event
@@ -43,7 +43,7 @@ Feature: Event Registration
     | slug | event-without-registrations |
     And I check "capco_event_registration_private"
     When I press "event_registration.create.register"
-    Then I should see "Anonyme" in the "#eventRegistrationModal" element
+    Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
 
   @javascript @database
   Scenario: logged user wants to register an event
@@ -52,4 +52,4 @@ Feature: Event Registration
     | slug | event-without-registrations |
     When I press "event_registration.create.register"
     Then I should see "user" in the "#eventRegistrationModal" element
-    Then I should see "Se désinscrire" in the '#main' element
+    Then I should see "event_registration.unsubscribe" in the '#main' element

@@ -38,7 +38,7 @@ class ProposalPage extends Page
 
     public function getUpdateButtonSelector()
     {
-        return $this->getSelector('update proposal button');
+        return $this->getSelector('edit proposal button');
     }
 
     public function getVoteButtonSelector($id)

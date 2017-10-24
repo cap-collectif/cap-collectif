@@ -479,7 +479,7 @@ trait ProposalStepsTrait
     public function iShouldNotSeeTheEditProposalButton()
     {
         $selector = $this->navigationContext->getPage('proposal page')->getUpdateButtonSelector();
-        $this->assertElementNotExists('css', $selector);
+        $this->assertElementNotOnPage($selector);
     }
 
     /**
@@ -515,7 +515,7 @@ trait ProposalStepsTrait
     public function iShouldNotSeeTheDeleteProposalButton()
     {
         $selector = $this->navigationContext->getPage('proposal page')->getDeleteButtonSelector();
-        $this->assertElementNotExists('css', $selector);
+        $this->assertElementNotOnPage($selector);
     }
 
     /**
@@ -917,7 +917,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeMyAnonymousVoteInTheProposalVotesList()
     {
-        $this->assertFirstProposalVoteContains('Anonyme');
+        $this->assertFirstProposalVoteContains('global.anonymous');
     }
 
     /**
