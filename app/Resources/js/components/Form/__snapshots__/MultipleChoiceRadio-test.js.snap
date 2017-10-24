@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultipleChoiceRadio /> render correctly 1`] = `
+<div>
+  <FormGroup
+    bsClass="form-group"
+  >
+    <HelpBlock
+      bsClass="help-block"
+    >
+      Une seule réponse valable ici, faites le bon choix !
+    </HelpBlock>
+    <Field
+      component={[Function]}
+      id="responses[4]-0"
+      name="responses[4].value.labels"
+      normalize={[Function]}
+      onChange={[Function]}
+      radioChecked={false}
+      type="radio"
+      value="Je dis oui"
+    >
+      Je dis oui
+    </Field>
+    <Field
+      component={[Function]}
+      id="responses[4]-1"
+      name="responses[4].value.labels"
+      normalize={[Function]}
+      onChange={[Function]}
+      radioChecked={false}
+      type="radio"
+      value="Je dis non"
+    >
+      Je dis non
+    </Field>
+    <Field
+      component={[Function]}
+      id="responses[4]-2"
+      name="responses[4].value.labels"
+      normalize={[Function]}
+      onChange={[Function]}
+      radioChecked={false}
+      type="radio"
+      value="J'ai rien compris"
+    >
+      J'ai rien compris
+    </Field>
+    <Row
+      bsClass="row"
+      componentClass="div"
+      id="responses[4]-other-value-row"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        md={1}
+        xs={2}
+      >
+        <Field
+          component={[Function]}
+          id="responses[4]-other-value"
+          name="responses[4]-other-value-field"
+          onChange={[Function]}
+          radioChecked={true}
+          type="radio"
+          value="other"
+        >
+          <FormattedMessage
+            id="reply.other"
+            values={Object {}}
+          />
+        </Field>
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        md={11}
+        xs={10}
+      >
+        <Field
+          component={[Function]}
+          id="responses[4].value.other"
+          name="responses[4].value.other"
+          onFocus={[Function]}
+          placeholder="reply.your_response"
+          type="text"
+          value="Autre valeur"
+        />
+      </Col>
+    </Row>
+  </FormGroup>
+</div>
+`;
