@@ -45,7 +45,7 @@ class SelectionPage extends Page
 
     public function sortByComments()
     {
-        $this->getElement('sorting select')->selectOption('Les plus commentées');
+        $this->getElement('sorting select')->selectOption('global.filter_f_comments');
     }
 
     public function getSelectedSortingOption()

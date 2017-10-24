@@ -11,7 +11,7 @@ trait ReportingStepsTrait
     {
         $this->getSession()->wait(2000, "$('#reportBody').length > 0");
         $this->fillField('reportBody', 'Pas terrible tout ça...');
-        $this->selectOption('reportType', 'Spam ou contenu trompeur');
+        $this->selectOption('reportType', 'reporting.status.spam');
     }
 
     /**

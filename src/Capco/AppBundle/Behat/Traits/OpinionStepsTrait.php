@@ -399,7 +399,7 @@ trait OpinionStepsTrait
     public function iClickTheArgumentVoteButton()
     {
         $page = $this->getCurrentPage();
-        $this->clickArgumentVoteButtonWithLabel('argument.vote.submit');
+        $this->clickArgumentVoteButtonWithLabel('vote.ok');
     }
 
     /**

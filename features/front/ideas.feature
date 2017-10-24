@@ -73,7 +73,7 @@ Scenario: Logged in user wants to create an idea with a theme
   And I click the idea create button
   And I fill the idea create form with a theme
   And I submit the new idea
-  Then I should see "alert.success.add.idea" in the "#main" element
+  Then I should see "alert.success.add.idea" in the "#global-alert-box" element
   And I should see my new idea
 
 @javascript

@@ -115,12 +115,12 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "161 project.show.meta.total_count"
+  Then I should see 'project.show.meta.total_count {"num":161}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see "34 project.show.meta.opinionsCount"
-  And I should see "95 project.show.meta.argumentsCount"
-  And I should see "32 project.show.meta.sourcesCount"
+  And I should see 'project.show.meta.opinionsCount {"%count%":34}'
+  And I should see 'project.show.meta.argumentsCount {"%count%":95}'
+  And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 
 Scenario: Project header should display correct number of participants
   Given I visited "consultation page" with:

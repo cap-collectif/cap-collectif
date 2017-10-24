@@ -173,7 +173,7 @@ Scenario: Logged in user wants to create a linked opinion
   Scenario: Logged in user wants to create a linked opinion
     Given I am logged in as user
     And I go to an opinion with versions
-    Then I should see "project.show.connections {"%count%": 0}"
+    Then I should see 'project.show.connections {"%count%": 0}'
     When I go on the connections tab
     And I press "opinion.link.add_new"
     And I wait 1 seconds
@@ -186,7 +186,7 @@ Scenario: Logged in user wants to create a linked opinion
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds
-    Then I should see "project.show.connections {"%count%": 1}"
+    Then I should see 'project.show.connections {"%count%": 1}'
     And I go on the connections tab
     And I should see "Article 1" in the "#links-list" element
 >>>>>>> Fix more tests

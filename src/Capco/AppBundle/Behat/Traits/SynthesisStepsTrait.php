@@ -10,8 +10,6 @@ trait SynthesisStepsTrait
     ];
 
     /**
-     * Go to a synthesis page.
-     *
      * @When I go to a synthesis page
      */
     public function iGoToASynthesisPage()
@@ -20,8 +18,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * Go to a synthesis edition page.
-     *
      * @When I go to a synthesis edition page
      */
     public function iGoToASynthesisEditionPage()
@@ -30,8 +26,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the synthesis.
-     *
      * @Then I should see the synthesis
      */
     public function iShouldSeeTheSynthesis()
@@ -43,8 +37,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I go to the new inbox.
-     *
      * @When I go to the new inbox
      */
     public function iGoToTheNewInbox()
@@ -54,8 +46,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the new synthesis elements.
-     *
      * @Then I should see the new synthesis elements
      */
     public function iShouldSeeTheNewSynthesisElements()
@@ -65,8 +55,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I go to the archived inbox.
-     *
      * @When I go to the archived inbox
      */
     public function iGoToTheArchivedInbox()
@@ -76,21 +64,15 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the archived synthesis elements.
-     *
      * @Then I should see the archived synthesis elements
-     *
-     * @param mixed $nb
      */
-    public function iShouldSeeTheArchivedSynthesisElements($nb = 15)
+    public function iShouldSeeTheArchivedSynthesisElements(int $nb = 15)
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
         $this->assertNumElements($nb, $elementsSelector);
     }
 
     /**
-     * I go to the published inbox.
-     *
      * @When I go to the published inbox
      */
     public function iGoToThePublishedInbox()
@@ -100,8 +82,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the published synthesis elements.
-     *
      * @Then I should see the published synthesis elements
      */
     public function iShouldSeeThePublishedSynthesisElements()
@@ -111,8 +91,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I go to the unpublished inbox.
-     *
      * @When I go to the unpublished inbox
      */
     public function iGoToTheUnpublishedInbox()
@@ -122,24 +100,18 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the unpublished synthesis elements.
-     *
      * @Then I should see the unpublished synthesis elements
-     *
-     * @param mixed $nb
      */
-    public function iShouldSeeTheUnpublishedSynthesisElements($nb = 0)
+    public function iShouldSeeTheUnpublishedSynthesisElements(int $nb = 0)
     {
         $elementsSelector = $this->navigationContext->getPage('synthesis edition page')->getElementsSelector();
         $this->assertNumElements($nb, $elementsSelector);
-        if ($nb === 0) {
-            $this->assertPageContainsText('Aucun élément.');
+        if (0 === $nb) {
+            $this->assertPageContainsText('synthesis.edition.list.none');
         }
     }
 
     /**
-     * I go to the all elements inbox.
-     *
      * @When I go to the all elements inbox
      */
     public function iGoToTheAllElementsInbox()
@@ -149,8 +121,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see all the synthesis elements.
-     *
      * @Then I should see all the synthesis elements
      */
     public function iShouldSeeAllTheSynthesisElements()
@@ -160,8 +130,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click on a synthesis element.
-     *
      * @When I click on a synthesis element
      */
     public function iClickOnASynthesisElement()
@@ -171,8 +139,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the synthesis element details.
-     *
      * @Then I should see the synthesis element details
      */
     public function iShouldSeeTheSynthesisElementDetails()
@@ -181,8 +147,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click the ignore element button.
-     *
      * @When I click the ignore element button
      */
     public function iClickTheIgnoreElementButton()
@@ -192,8 +156,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I confirm the ignore element action.
-     *
      * @When I confirm the ignore element action
      */
     public function iConfirmTheIgnoreElementAction()
@@ -203,8 +165,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the synthesis element in the unpublished inbox.
-     *
      * @Then I should see the synthesis element in the unpublished inbox
      */
     public function iShouldSeeTheSynthesisElementInTheUnpublishedInbox()
@@ -215,8 +175,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see the synthesis element in the archived inbox.
-     *
      * @Then I should see the synthesis element in the archived inbox
      */
     public function iShouldSeeTheSynthesisElementInTheArchivedInbox()
@@ -227,8 +185,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click the publish element button.
-     *
      * @When I click the publish element button
      */
     public function iClickThePublishElementButton()
@@ -238,8 +194,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I confirm element publication.
-     *
      * @When I confirm element publication
      */
     public function iConfirmElementPublication()
@@ -249,8 +203,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I give a note to the synthesis element.
-     *
      * @When I give a note to the synthesis element
      */
     public function iGiveANoteToTheSynthesisElement()
@@ -259,8 +211,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * The synthesis element should have the correct note.
-     *
      * @Then the synthesis element should have the correct note
      */
     public function theSynthesisElementShouldHaveTheCorrectNote()
@@ -273,8 +223,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I choose a parent for the synthesis element.
-     *
      * @When I choose a parent for the synthesis element
      */
     public function iChooseAParentForTheSynthesisElement()
@@ -283,8 +231,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I add a comment to the synthesis element.
-     *
      * @When I add a comment to the synthesis element
      */
     public function iAddACommentToTheSynthesisElement()
@@ -293,8 +239,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click the divide element button.
-     *
      * @When I click the divide element button
      */
     public function iClickTheDivideElementButton()
@@ -304,8 +248,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click the create element division button.
-     *
      * @When I click the create element division button
      */
     public function iClickTheCreateElementDivisionButton()
@@ -315,19 +257,15 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I click the new folder button.
-     *
      * @When I click the new folder button
      */
     public function iClickTheNewFolderButton()
     {
-        $this->clickLink('Nouveau dossier');
+        $this->clickLink('synthesis.edition.action.create.label');
         $this->iWait(2);
     }
 
     /**
-     * I create a new synthesis element.
-     *
      * @When I create a new synthesis element
      */
     public function iCreateANewSynthesisElement()
@@ -337,8 +275,6 @@ trait SynthesisStepsTrait
     }
 
     /**
-     * I should see my newly created element in the archived inbox.
-     *
      * @Then I should see my newly created element in the archived inbox
      */
     public function iShouldSeeMyNewlyCreatedElementInTheArchivedInbox()

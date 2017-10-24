@@ -2,7 +2,6 @@
 Feature: Synthesis
 
 # View
-
 @javascript
 Scenario: Anonymous wants to see synthesis view
   Given I go to a synthesis page
@@ -16,12 +15,12 @@ Scenario: Anonymous wants to see synthesis view
 Scenario: User can not access synthesis edition
   Given I am logged in as user
   And I go to a synthesis page
-  Then I should not see "Éditer"
+  Then I should not see "synthesis.edit.button"
 
 @javascript
 Scenario: Anonymous can not access synthesis edition
   Given I go to a synthesis page
-  Then I should not see "Éditer"
+  Then I should not see "synthesis.edit.button"
 
   # Lists
 
@@ -79,7 +78,7 @@ Scenario: Admin wants to ignore an element
   When I click on a synthesis element
   And I click the ignore element button
   And I confirm the ignore element action
-  Then I should see "L'élément a été traité avec succès."
+  Then I should see "synthesis.common.success.archive_success"
   And I should see the synthesis element in the unpublished inbox
 
 @javascript @database
@@ -90,7 +89,7 @@ Scenario: Admin wants to publish an element without note, comment or parent
   When I click on a synthesis element
   And I click the publish element button
   And I confirm element publication
-  Then I should see "L'élément a été traité avec succès."
+  Then I should see "synthesis.common.success.archive_success"
   And I should see the synthesis element in the archived inbox
 
 @javascript @database
@@ -103,7 +102,7 @@ Scenario: Admin wants to publish an element with note
   And I give a note to the synthesis element
   And I confirm element publication
   And I wait 1 seconds
-  Then I should see "L'élément a été traité avec succès."
+  Then I should see "synthesis.common.success.archive_success"
   And I should see the synthesis element in the archived inbox
   When I click on a synthesis element
   Then the synthesis element should have the correct note
@@ -117,7 +116,7 @@ Scenario: Admin wants to publish an element with parent
   And I click the publish element button
   And I choose a parent for the synthesis element
   And I confirm element publication
-  Then I should see "L'élément a été traité avec succès."
+  Then I should see "synthesis.common.success.archive_success"
   And I should see the synthesis element in the archived inbox
 
 @javascript @database
@@ -129,7 +128,7 @@ Scenario: Admin wants to publish an element with comment
   And I click the publish element button
   And I add a comment to the synthesis element
   And I confirm element publication
-  Then I should see "L'élément a été traité avec succès."
+  Then I should see "synthesis.common.success.archive_success"
   And I should see the synthesis element in the archived inbox
 
 @javascript
@@ -140,7 +139,7 @@ Scenario: Admin wants to divide an element without selecting text
   When I click on a synthesis element
   And I click the divide element button
   And I click the create element division button
-  Then I should see "Veuillez sélectionner du texte dans le contenu pour créer une nouvelle contribution."
+  Then I should see "synthesis.edition.action.divide.help.message"
 
 @javascript
 Scenario: Admin wants to create an element

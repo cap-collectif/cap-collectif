@@ -138,8 +138,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * Ideas should be filtered by terms.
-     *
      * @Then ideas should be filtered by terms
      */
     public function ideasShouldBeFilteredByTerms()
@@ -149,8 +147,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I should see not see the idea create button.
-     *
      * @Then I should not see the idea create button
      */
     public function iShouldNotSeeTheIdeaCreateButton()
@@ -160,8 +156,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I click the idea create button.
-     *
      * @When I click the idea create button
      */
     public function iClickTheIdeaCreateButton()
@@ -171,8 +165,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I fill the idea create form.
-     *
      * @When I fill the idea create form
      */
     public function iFillTheIdeaCreateForm()
@@ -181,8 +173,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I fill the idea create form with a theme.
-     *
      * @When I fill the idea create form with a theme
      */
     public function iFillTheIdeaCreateFormWithATheme()
@@ -191,8 +181,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I submit the new idea.
-     *
      * @When I submit the new idea
      */
     public function iSubmitTheNewIdea()
@@ -202,8 +190,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I should see my new idea.
-     *
      * @Then I should see my new idea
      */
     public function iShouldSeMyNewIdea()
@@ -212,8 +198,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I click the idea edit button.
-     *
      * @When I click the idea edit button
      */
     public function iClickTheIdeaEditButton()
@@ -223,8 +207,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I edit my idea.
-     *
      * @When I edit my idea
      */
     public function iEditMyIdea()
@@ -238,8 +220,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I submit my edited idea.
-     *
      * @When I submit my edited idea
      */
     public function iSubmitMyEditedIdea()
@@ -249,8 +229,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * My idea should have been modified.
-     *
      * @When my idea should have been modified
      */
     public function myIdeaShouldHaveBeenModified()
@@ -259,8 +237,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I edit my idea without confirming my votes lost.
-     *
      * @When I edit my idea without confirming my votes lost
      */
     public function iEditMyIdeaWithoutConfirmingMyVotesLost()
@@ -272,8 +248,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * My idea should have lost its votes.
-     *
      * @Then my idea should have lost its votes
      */
     public function myIdeaShouldHaveLostItsVotes()
@@ -283,8 +257,6 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I should not see the idea edit button.
-     *
      * @Then I should not see the idea edit button
      */
     public function iShouldNotSeeTheIdeaEditButton()
