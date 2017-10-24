@@ -5721,9 +5721,9 @@ react-intl-redux@^0.6.0:
     prop-types "^15.5.10"
     warning "^3.0.0"
 
-"react-intl@https://github.com/cap-collectif/react-intl/tarball/46831c02d85c477313208f1bbb623ca9b2d7f8ca":
+"react-intl@https://github.com/cap-collectif/react-intl/tarball/2395c315a2b7cb87c18a14fcc46b8855becdccb0":
   version "2.4.0"
-  resolved "https://github.com/cap-collectif/react-intl/tarball/46831c02d85c477313208f1bbb623ca9b2d7f8ca#14746d76e5448d6d888ae0b793021f16a06847d5"
+  resolved "https://github.com/cap-collectif/react-intl/tarball/2395c315a2b7cb87c18a14fcc46b8855becdccb0#734b8802081e2ed34f7cea8be96a2ed505982817"
   dependencies:
     intl-format-cache "^2.0.5"
     intl-messageformat "^2.1.0"
