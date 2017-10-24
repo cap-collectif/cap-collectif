@@ -8,7 +8,7 @@ Feature: Source
     When I go on the sources tab
     Then I should see "opinion.no_new_source" in the "#main" element
     When I create a new source
-    Then I should see "alert.success.add.source" in the "#main" element
+    Then I should see "alert.success.add.source" in the "#global-alert-box" element
     And I should see my new source
 
   @javascript
@@ -34,7 +34,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I edit my source
-    Then I should see "alert.success.update.source" in the "#main" element
+    Then I should see "alert.success.update.source" in the "#global-alert-box" element
     And my source should have lost its votes
 
   @javascript @database
@@ -60,7 +60,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I delete my source
-    Then I should see "alert.success.delete.source"
+    Then I should see "alert.success.delete.source" in the "global-alert-box" element
     And I should not see my source anymore
 
   # Reporting
@@ -81,4 +81,4 @@ Feature: Source
     And I click the source report button
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "alert.success.report.source"
+    Then I should see "alert.success.report.source" in the "global-alert-box" element

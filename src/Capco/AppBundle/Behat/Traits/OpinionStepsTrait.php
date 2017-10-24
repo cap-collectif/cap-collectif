@@ -474,14 +474,12 @@ trait OpinionStepsTrait
     }
 
     /**
-     * I should see my new source.
-     *
      * @Then I should see my new source
      */
     public function iShouldSeeMyNewSource()
     {
         $page = $this->getCurrentPage();
-        $this->assertPageContainsText('1 source');
+        $this->assertPageContainsText('global.sources {"num":1}');
         $sourcesSelector = $page->getSourcesListSelector();
         $this->assertElementContainsText($sourcesSelector, 'Titre de la source');
     }

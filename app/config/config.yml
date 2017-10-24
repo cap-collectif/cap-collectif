@@ -50,11 +50,11 @@ ekino_new_relic:
     enabled:          true
     log_exceptions:   true
 
+# Fetch xlf files from Loco: CapcoAppBundle.{locale}.xlf and validators.{locale}.xlf
 translation_adapter_loco:
   projects:
     cap-collectif:
       api_key: "%loco_key%"
-      domains: ['CapcoAppBundle', 'validators']
 
 translation:
   locales: "%locales%"

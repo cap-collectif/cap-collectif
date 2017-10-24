@@ -32,7 +32,10 @@ class ReactIntlExtension extends \Twig_Extension
 
     public function getIntlMessages()
     {
-        $locale = 'test' === $this->env ? 'test' : $this->getLocale();
+        if ('test' === $this->env) {
+            return json_decode('{}');
+        }
+        $locale = $this->getLocale();
         $filename = 'messages.' . $locale . '.json';
 
         return json_decode(file_get_contents($this->translationFolder . $filename), true);

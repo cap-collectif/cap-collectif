@@ -138,7 +138,7 @@
     "react-dropzone": "^3.3.4",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",
-    "react-intl": "^2.3.0",
+    "react-intl": "https://github.com/cap-collectif/react-intl/tarball/46831c02d85c477313208f1bbb623ca9b2d7f8ca",
     "react-intl-redux": "^0.6.0",
     "react-leaflet": "^1.4.1",
     "react-leaflet-markercluster": "https://github.com/cap-collectif/react-leaflet-markercluster/tarball/2d91878f0bd99af7a5352050315a50b4c4c4bf34",
