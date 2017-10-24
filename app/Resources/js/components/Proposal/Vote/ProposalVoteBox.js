@@ -58,7 +58,7 @@ const ProposalVoteBox = React.createClass({
       features,
     } = this.props;
     return (
-      <div className={className}>
+      <div className={className} id="proposal-vote-box">
         {!user &&
           step.open && (
             <div>
@@ -66,7 +66,7 @@ const ProposalVoteBox = React.createClass({
                 {features.vote_without_account ? (
                   <FormattedMessage id="proposal.vote.authenticated" />
                 ) : (
-                  'Veuillez vous authentifier pour voter'
+                  <FormattedMessage id="proposal.vote.please_authenticate" />
                 )}
               </p>
               <Row>

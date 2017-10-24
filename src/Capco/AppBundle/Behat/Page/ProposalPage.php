@@ -31,6 +31,16 @@ class ProposalPage extends Page
         'comments tab' => '#proposal-page-tabs-tab-comments',
     ];
 
+    public function getDeleteButtonSelector()
+    {
+        return $this->getSelector('delete proposal button');
+    }
+
+    public function getUpdateButtonSelector()
+    {
+        return $this->getSelector('update proposal button');
+    }
+
     public function getVoteButtonSelector($id)
     {
         return $this->getSelector('proposal vote form submit button');

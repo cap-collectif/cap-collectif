@@ -304,8 +304,8 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldHaveNoResults()
     {
-        $this->assertPageContainsText('Aucune proposition');
-        $this->assertPageNotContainsText('Relancer le tri aléatoire');
+        $this->assertPageContainsText('proposal.empty');
+        $this->assertPageNotContainsText('proposal.random_search');
     }
 
     /**
@@ -322,7 +322,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalPrivateField()
     {
-        $this->assertPageContainsText("Visible uniquement par vous et l'administrateur");
+        $this->assertPageContainsText('proposal.private.message');
         $this->assertPageContainsText("Evaluez l'importance de votre proposition");
         $this->assertPageContainsText('souhaitable');
     }
@@ -332,7 +332,7 @@ trait ProposalStepsTrait
      */
     public function iShouldNotSeeTheProposalPrivateField()
     {
-        $this->assertPageNotContainsText("Visible uniquement par vous et l'administrateur");
+        $this->assertPageNotContainsText('proposal.private.message');
         $this->assertPageNotContainsText("Evaluez l'importance de votre proposition");
     }
 
@@ -478,8 +478,8 @@ trait ProposalStepsTrait
      */
     public function iShouldNotSeeTheEditProposalButton()
     {
-        $proposalButtonsSelector = $this->navigationContext->getPage('proposal page')->getProposalButtonsSelector();
-        $this->assertElementNotContainsText($proposalButtonsSelector, 'Modifier');
+        $selector = $this->navigationContext->getPage('proposal page')->getUpdateButtonSelector();
+        $this->assertElementNotExists('css', $selector);
     }
 
     /**
@@ -514,8 +514,8 @@ trait ProposalStepsTrait
      */
     public function iShouldNotSeeTheDeleteProposalButton()
     {
-        $proposalButtonsSelector = $this->navigationContext->getPage('proposal page')->getProposalButtonsSelector();
-        $this->assertElementNotContainsText($proposalButtonsSelector, 'Supprimer');
+        $selector = $this->navigationContext->getPage('proposal page')->getDeleteButtonSelector();
+        $this->assertElementNotExists('css', $selector);
     }
 
     /**
@@ -532,7 +532,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalLikers()
     {
-        $this->assertPageContainsText('2 coups de coeur');
+        $this->assertPageContainsText('proposal.likers.count {"num":2}');
     }
 
     /**
@@ -667,7 +667,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalVoteButton(string $id = null)
     {
-        $this->clickProposalVoteButtonWithLabel('Voter pour', $id);
+        $this->clickProposalVoteButtonWithLabel('proposal.vote.add', $id);
     }
 
     /**
@@ -675,7 +675,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('vote.cancel');
+        $this->clickProposalVoteButtonWithLabel('proposal.vote.delete');
     }
 
     /**
@@ -683,7 +683,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheReloadRandomButton()
     {
-        $this->clickProposalVoteButtonWithLabel('Relancer le tri aléatoire');
+        $this->clickProposalVoteButtonWithLabel('proposal.random_search');
     }
 
     /**
@@ -869,7 +869,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
-        $this->assertPageContainsText('Limite de votes atteinte');
+        $this->assertPageContainsText('proposal.vote.popover.limit_reached_title');
     }
 
     /**
@@ -885,7 +885,7 @@ trait ProposalStepsTrait
         } catch (\Exception $e) {
         }
         $this->iWait(1);
-        $this->assertPageContainsText('Vous avez atteint la limite du budget.');
+        $this->assertPageContainsText('proposal.vote.popover.not_enough_credits_text');
     }
 
     /**
@@ -1019,7 +1019,7 @@ trait ProposalStepsTrait
      */
     public function isShouldNotSeeRandomRow()
     {
-        $this->assertPageNotContainsText('Relancer le tri aléatoire');
+        $this->assertPageNotContainsText('proposal.random_search');
     }
 
     /**

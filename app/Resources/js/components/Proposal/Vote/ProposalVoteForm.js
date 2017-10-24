@@ -42,7 +42,7 @@ const ProposalVoteForm = React.createClass({
     return (
       <form onSubmit={handleSubmit}>
         {error && (
-          <Alert bsStyle="danger">
+          <Alert bsStyle="danger" id="proposal-vote-form-alertbox">
             <p>{error}</p>
           </Alert>
         )}

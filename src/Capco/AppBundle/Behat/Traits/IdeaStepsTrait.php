@@ -355,7 +355,7 @@ trait IdeaStepsTrait
      */
     public function iClickTheIdeaVoteButton()
     {
-        $this->clickIdeaVoteButtonWithLabel('Voter pour');
+        $this->clickIdeaVoteButtonWithLabel('proposal.vote.add');
     }
 
     /**

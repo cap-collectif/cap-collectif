@@ -399,7 +399,7 @@ trait OpinionStepsTrait
     public function iClickTheArgumentVoteButton()
     {
         $page = $this->getCurrentPage();
-        $this->clickArgumentVoteButtonWithLabel('D\'accord');
+        $this->clickArgumentVoteButtonWithLabel('argument.vote.submit');
     }
 
     /**
@@ -440,7 +440,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $wantedVotesCount = $page->getSourceVotesCount() + 1;
-        $this->clickSourceVoteButtonWithLabel('D\'accord');
+        $this->clickSourceVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getSourceVotesCount();
         \PHPUnit_Framework_Assert::assertEquals($wantedVotesCount, $newVotesCount, 'Source votes number should be increased by 1.');
     }

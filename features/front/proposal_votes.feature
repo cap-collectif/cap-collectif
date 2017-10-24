@@ -10,12 +10,12 @@ Scenario: Logged in user wants to vote and unvote for a proposal in a selection 
   When I click the proposal vote button
   And I add a proposal vote comment
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   Then the proposal should have 4 votes
   And I reload the page
   Then the proposal should have 4 votes
   Then I click the proposal unvote button
-  And I should see "proposal.request.delete_vote.success" in the "#main" element
+  And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
   Then the proposal should have 3 votes
   And I reload the page
   Then the proposal should have 3 votes
@@ -28,7 +28,7 @@ Scenario: Anonymous user wants to vote for a proposal in a selection step with a
   And I fill the proposal vote form
   And I add a proposal vote comment
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
 
 @javascript @database @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote for a proposal in a selection step anonymously
@@ -38,7 +38,7 @@ Scenario: Anonymous user wants to vote for a proposal in a selection step anonym
   And I fill the proposal vote form
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
 
 @javascript @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote twice with the same email in a selection step
@@ -47,7 +47,7 @@ Scenario: Anonymous user wants to vote twice with the same email in a selection 
   When I click the proposal vote button
   And I fill the proposal vote form with already used email
   And I submit the proposal vote form
-  Then I should see "proposal.vote.already_voted" in the "#main" element
+  Then I should see "proposal.vote.already_voted" in the "#proposal-vote-form-alertbox" element
 
 @javascript @elasticsearch @security @votes_from_selection_step
 Scenario: Anonymous user wants to vote in a selection step with an email already associated to an account
@@ -56,7 +56,7 @@ Scenario: Anonymous user wants to vote in a selection step with an email already
   When I click the proposal vote button
   And I fill the proposal vote form with a registered email
   And I submit the proposal vote form
-  Then I should see "proposal.vote.email_belongs_to_user" in the "#main" element
+  Then I should see "proposal.vote.email_belongs_to_user" in the "#proposal-vote-form-alertbox" element
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
@@ -65,11 +65,11 @@ Scenario: Logged in user wants to vote when he has not enough credits left in a 
   Then the proposal vote button must be disabled
   And I should see the proposal vote tooltip
 
-@javascript @security @elasticsearch @votes_from_selection_step
+@javascript @security @elasticsearch @votes_from_selection_step @dev
 Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
   Given I go to a selection step with budget vote enabled
   When I click the proposal vote button
-  Then I should see "Veuillez vous authentifier pour voter" in the "#main" element
+  Then I should see "proposal.vote.please_authenticate" in the "#proposal-vote-box" element
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote on a selection step that is not open yet
@@ -104,13 +104,13 @@ Scenario: Logged in user wants to vote and unvote for a proposal with a comment
   And I click the proposal vote button
   And I add a proposal vote comment
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 4 votes
   And the proposal should have 1 comments
   And I go to the proposal votes tab
   And I should see my vote in the proposal votes list
   When I click the proposal unvote button
-  And I should see "proposal.request.delete_vote.success" in the "#main" element
+  And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
   And the proposal should have 3 votes
   And I should not see my vote in the proposal votes list
 
@@ -122,7 +122,7 @@ Scenario: Logged in user wants to vote for a proposal anonymously
   When I click the proposal vote button
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 4 votes
   And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
@@ -137,7 +137,7 @@ Scenario: Anonymous user wants to vote for a proposal with a comment
   And I fill the proposal vote form
   And I add a proposal vote comment
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 4 votes
   And the proposal should have 1 comments
 #    And I go to the proposal comments tab
@@ -154,7 +154,7 @@ Scenario: Anonymous user wants to vote for a proposal anonymously
   And I fill the proposal vote form
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#main" element
+  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 4 votes
   And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
@@ -167,7 +167,7 @@ Scenario: Anonymous user wants to vote twice with the same email
   When I click the proposal vote button
   And I fill the proposal vote form with already used email
   And I submit the proposal vote form
-  Then I should see "proposal.vote.already_voted"
+  Then I should see "proposal.vote.already_voted" in the "#proposal-vote-form-alertbox" element
 
 @javascript @security @votes_from_proposal
 Scenario: Anonymous user wants to vote with an email already associated to an account
@@ -177,15 +177,13 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
   When I click the proposal vote button
   And I fill the proposal vote form with a registered email
   And I submit the proposal vote form
-  Then I should see "proposal.vote.email_belongs_to_user"
+  Then I should see "proposal.vote.email_belongs_to_user" in the "#proposal-vote-form-alertbox" element
 
 @javascript @security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left
   Given I am logged in as admin
   When I go to a proposal with budget vote enabled
   Then the proposal vote button must be disabled
-# And I click the proposal vote button
-# And I should see "Vous avez atteint la limite du budget."
 
 @javascript @security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable yet
