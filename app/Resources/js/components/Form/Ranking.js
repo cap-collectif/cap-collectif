@@ -11,6 +11,7 @@ const Ranking = React.createClass({
     getGroupStyle: PropTypes.func.isRequired,
     renderFormErrors: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
     disabled: PropTypes.bool,
     label: PropTypes.any,
     labelClassName: PropTypes.string,
@@ -71,6 +72,7 @@ const Ranking = React.createClass({
           ref={c => (this.rankingBlock = c)}
           field={field}
           disabled={disabled}
+          onBlur={this.props.onBlur}
           onRankingChange={this.handleRankingChange}
         />
         {renderFormErrors(field.id)}

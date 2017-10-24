@@ -40,6 +40,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
     ReactDOM.findDOMNode(this.textField)
       .getElementsByTagName('input')[0]
       .focus();
+
     this.setState({ otherChecked: true });
   };
 

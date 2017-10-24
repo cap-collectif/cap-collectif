@@ -11,12 +11,14 @@ const Checkbox = React.createClass({
     field: PropTypes.object.isRequired,
     getGroupStyle: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
     label: PropTypes.any,
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
     value: PropTypes.object.isRequired,
+    errors: PropTypes.any,
   },
 
   other: Other,
@@ -33,15 +35,21 @@ const Checkbox = React.createClass({
   getInitialState() {
     return {
       mixinValue: [],
+      currentValue: [],
     };
   },
 
   onChange(newValue) {
     const { isReduxForm, onChange, field, value } = this.props;
+    const otherValue = value.other ? value.other : null;
 
     if (isReduxForm) {
       if (Array.isArray(newValue)) {
-        onChange({ labels: newValue, other: value.other });
+        onChange({ labels: newValue, other: otherValue });
+
+        this.setState({
+          currentValue: newValue,
+        });
       } else {
         onChange(newValue);
       }
@@ -89,9 +97,11 @@ const Checkbox = React.createClass({
       } else {
         this.onChange({ labels: values, other: null });
       }
-    } else {
-      this.onChange(changeValue);
+
+      return;
     }
+
+    this.onChange(changeValue);
   },
 
   empty() {
@@ -113,11 +123,16 @@ const Checkbox = React.createClass({
       renderFormErrors,
       field,
       value,
+      onBlur,
       isReduxForm,
     } = this.props;
-    const { mixinValue } = this.state;
+    const { mixinValue, currentValue } = this.state;
 
-    const finalValue = isReduxForm ? value.labels : mixinValue;
+    let finalValue = mixinValue;
+    if (isReduxForm) {
+      finalValue = value.labels ? value.labels : currentValue;
+    }
+
     const otherValue = isReduxForm ? value.other : undefined;
     const fieldName = `choices-for-field-${field.id}`;
 
@@ -149,6 +164,9 @@ const Checkbox = React.createClass({
                   checked={finalValue.indexOf(choice.label) !== -1}
                   description={choice.description}
                   disabled={disabled}
+                  onBlur={event => {
+                    if (onBlur) onBlur(event.preventDefault());
+                  }}
                   onChange={event => {
                     const newValue = [...finalValue];
 

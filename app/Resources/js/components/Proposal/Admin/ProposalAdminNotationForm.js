@@ -85,21 +85,83 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const validate = (values: FormValues, { proposal }: Props) => {
   const errors = {};
+  const responsesArrayErrors = [];
   const questions = proposal.form.evaluationForm ? proposal.form.evaluationForm.questions : [];
 
-  const responsesArrayErrors = [];
   if (values.responses) {
     values.responses.forEach((response, index) => {
       const currentQuestion = questions.find(question => question.id === String(response.question));
 
+      if (response.value && currentQuestion && currentQuestion.validationRule) {
+        const rule = currentQuestion.validationRule;
+        let currentLength = 0;
+        if (currentQuestion.type === 'checkbox' || currentQuestion.type === 'radio') {
+          if (response.value.labels) {
+            currentLength = response.value.labels.length;
+          }
+
+          if (response.value.other !== null) {
+            currentLength += 1;
+          }
+        } else {
+          currentLength = response.value.length;
+        }
+
+        if (rule.type === 'min' && currentLength < rule.number) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_min',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+
+        if (rule.type === 'max' && currentLength > rule.number) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_max',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+
+        if (rule.type === 'equal' && currentLength !== Number(rule.number)) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_equal',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+      }
+
       if (currentQuestion && currentQuestion.required) {
-        if (!response.value || response.value.length === 0) {
+        let currentValue = response.value;
+
+        if (currentQuestion.type === 'checkbox' || currentQuestion.type === 'radio') {
+          if (response.value && response.value.labels !== null) {
+            currentValue = response.value.labels;
+          } else if (response.value && response.value.other !== null) {
+            currentValue = response.value.other;
+          } else {
+            currentValue = null;
+          }
+        }
+
+        if (!currentValue || currentValue.length === 0) {
           const responseError = {};
           responseError.value = 'global.constraints.notBlank';
           responsesArrayErrors[index] = responseError;
         }
-      } else if (currentQuestion && currentQuestion.validationRule) {
-        // todo
       }
     });
   }
@@ -138,14 +200,21 @@ const renderResponses = ({
       const field = evaluationForm.questions[index];
       const key = field.slug;
       const inputType = field.type || 'text';
-      const labelMessage = field.title;
       const isOtherAllowed = field.isOtherAllowed;
+
+      let labelMessage = field.title;
+      if (field.required) {
+        labelMessage += ' <span class="small warning">Obligatoire</span>';
+      } else {
+        labelMessage += ' <span class="small warning">Facultatif</span>';
+      }
+
       const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
         case 'medias': {
           return (
-            <p className="text-danger">
+            <p className="text-danger" key={`${member}-container`}>
               <Glyphicon bsClass="glyphicon" glyph="alert" />
               <span className="ml-10">
                 <FormattedMessage id="evaluation_form.constraints.medias" />
@@ -169,7 +238,7 @@ const renderResponses = ({
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
               return (
-                <div>
+                <div key={`${member}-container`}>
                   <MultipleChoiceRadio
                     name={member}
                     helpText={field.helpText}

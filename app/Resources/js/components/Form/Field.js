@@ -7,7 +7,7 @@ const Field = React.createClass({
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
-      error: PropTypes.node,
+      error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,
     divClassName: PropTypes.string,
@@ -51,11 +51,11 @@ const Field = React.createClass({
       name: PropTypes.string.isRequired,
       autoFocus: PropTypes.bool,
       onChange: PropTypes.func,
+      onBlur: PropTypes.func,
       value: PropTypes.any,
     }).isRequired,
     style: PropTypes.object,
   },
-
   render() {
     const { touched, error } = this.props.meta;
     const {
@@ -82,6 +82,17 @@ const Field = React.createClass({
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
+
+    let errorMessage = null;
+
+    if (check && error) {
+      if (error.id) {
+        errorMessage = <FormattedMessage id={error.id} values={error.values} />;
+      } else {
+        errorMessage = <FormattedMessage id={error} />;
+      }
+    }
+
     const input = (
       <Input
         id={id}
@@ -98,7 +109,7 @@ const Field = React.createClass({
         labelClassName={labelClassName || ''}
         label={label || null}
         placeholder={placeholder || null}
-        errors={check && error ? <FormattedMessage id={error} /> : null}
+        errors={errorMessage}
         validationState={check ? (error ? 'error' : 'success') : null}
         hasFeedback={check}
         autoComplete={autoComplete}
