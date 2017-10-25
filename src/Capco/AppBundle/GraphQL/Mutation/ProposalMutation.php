@@ -242,7 +242,9 @@ class ProposalMutation implements ContainerAwareInterface
 
         $proposal = $this->container->get('capco.proposal.repository')->find($values['id']);
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%s"', $values['id']));
+            $error = sprintf('Unknown proposal with id "%s"', $values['id']);
+            $logger->error($error);
+            throw new UserError($error);
         }
 
         unset($values['id']); // This only usefull to retrieve the proposal
@@ -305,14 +307,19 @@ class ProposalMutation implements ContainerAwareInterface
 
         if (!$user->isSuperAdmin()) {
             if (isset($values['author'])) {
-                throw new UserError('Only a user with role ROLE_SUPER_ADMIN can update an author.');
+                $error = 'Only a user with role ROLE_SUPER_ADMIN can update an author.';
+                $logger->error($error);
+                // For now we only log an error and unset the subbmitted value…
+                unset($values['author']);
             }
             $form->remove('author');
         }
 
         $form->submit($values);
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            $error = 'Input not valid : ' . (string) $form->getErrors(true, false);
+            $logger->error($error);
+            throw new UserError($error);
         }
 
         $proposal->setUpdateAuthor($user);
