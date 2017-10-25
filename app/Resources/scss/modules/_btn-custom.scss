@@ -45,3 +45,13 @@ body .btn:focus {
 .btn:active:focus {
     outline: none !important;
 }
+
+.btn-draft {
+    background-color: #868E96;
+    color: #FFFFFF;
+
+    &:hover {
+        background-color: #8C949C;
+        color: #FFFFFF;
+    }
+}

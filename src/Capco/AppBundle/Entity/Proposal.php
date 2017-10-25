@@ -10,12 +10,12 @@ use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SummarizableTrait;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -54,7 +54,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use ExpirableTrait;
     use SelfLinkableTrait;
     use SoftDeleteTrait;
-    use TextableTrait;
+    use NullableTextableTrait;
     use SummarizableTrait;
     use DraftableTrait;
 

@@ -146,4 +146,12 @@ class ProposalResolver implements ContainerAwareInterface
     {
         return $proposal->getProposalEvaluation();
     }
+
+    public function resolveDraftProposalsForUserInStep(string $stepId, User $user = null)
+    {
+        var_dump($stepId);
+        var_dump($user);
+
+        die;
+    }
 }

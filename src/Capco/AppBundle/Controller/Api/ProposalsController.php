@@ -101,6 +101,7 @@ class ProposalsController extends FOSRestController
         }
 
         $proposal = (new Proposal())
+            ->setDraft($request->request->get('draft'))
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
             ->setEnabled(true)
@@ -114,6 +115,7 @@ class ProposalsController extends FOSRestController
 
         $form = $this->createForm($formClass, $proposal, [
             'proposalForm' => $proposalForm,
+            'validation_groups' => [$proposal->isDraft() ? 'ProposalDraft' : 'Default'],
         ]);
 
         if ($uploadedMedia = $request->files->get('media')) {

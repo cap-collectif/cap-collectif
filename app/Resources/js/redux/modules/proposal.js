@@ -82,7 +82,7 @@ type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM' };
+type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM', isDraft?: boolean };
 type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM' };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
@@ -250,8 +250,9 @@ export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({
 export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({
   type: 'proposal/OPEN_DELETE_MODAL',
 });
-export const submitProposalForm = (): SubmitProposalFormAction => ({
+export const submitProposalForm = (isDraft?: boolean): SubmitProposalFormAction => ({
   type: 'proposal/SUBMIT_PROPOSAL_FORM',
+  isDraft,
 });
 export const editProposalForm = (): EditProposalFormAction => ({
   type: 'proposal/EDIT_PROPOSAL_FORM',
@@ -462,8 +463,9 @@ export const submitProposal = (
           },
         });
 
-        // Update Local storage with this new proposal
-        addProposalInRandomResultsByStep(proposal, currentStepId);
+        if (!proposal.isDraft) {
+          addProposalInRandomResultsByStep(proposal, currentStepId);
+        }
 
         window.location.href = proposal._links.show;
       });
@@ -883,7 +885,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CHANGE_TERMS':
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case 'proposal/SUBMIT_PROPOSAL_FORM':
-      return { ...state, isCreating: true };
+      return { ...state, isCreating: true, isDraft: action.isDraft };
     case 'proposal/CANCEL_SUBMIT_PROPOSAL':
       return { ...state, isCreating: false, isEditing: false };
     case 'proposal/EDIT_PROPOSAL_FORM':

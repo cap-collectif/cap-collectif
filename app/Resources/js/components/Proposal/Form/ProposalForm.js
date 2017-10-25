@@ -44,6 +44,7 @@ export const ProposalForm = React.createClass({
     themes: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
+    isDraft: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
     mode: PropTypes.string,
@@ -140,11 +141,24 @@ export const ProposalForm = React.createClass({
       dispatch,
       currentStepId,
     } = this.props;
-    this.updateThemeConstraint();
-    this.updateDistrictConstraint();
-    this.updateCategoryConstraint();
-    this.updateAddressConstraint();
+
+    if (!nextProps.isDraft) {
+      this.updateThemeConstraint();
+      this.updateDistrictConstraint();
+      this.updateCategoryConstraint();
+      this.updateAddressConstraint();
+    }
+
     if (!isSubmitting && nextProps.isSubmitting) {
+      if (nextProps.isDraft) {
+        this.formValidationRules = {
+          title: {
+            min: { value: 2, message: 'proposal.constraints.title_min_value_for_draft' },
+            notBlank: { message: 'proposal.constraints.title_for_draft' },
+          },
+        };
+      }
+
       if (this.isValid()) {
         const form = this.state.form;
         const responses = [];
@@ -177,6 +191,8 @@ export const ProposalForm = React.createClass({
         if (form.summary !== null && form.summary.length === 0) {
           form.summary = null;
         }
+
+        form.draft = nextProps.isDraft;
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
@@ -671,6 +687,7 @@ const mapStateToProps = state => ({
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
+  isDraft: state.proposal.isDraft || false,
 });
 
 export default connect(mapStateToProps)(injectIntl(ProposalForm));

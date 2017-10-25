@@ -76,3 +76,6 @@ Proposal:
                 type: "ProposalEvaluation"
                 description: "Identifies the answers to an evaluation form."
                 resolve: "@=resolver('proposal_evaluation', [value])"
+            draft:
+              type: "Boolean!"
+              description: "Identifies proposals as draft."

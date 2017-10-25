@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,15 +27,17 @@ class ProposalType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $isDraft = $builder->getData()->isDraft();
         $form = $options['proposalForm'];
         if (!$form) {
             throw new \Exception('A proposal form is needed to create or update a proposal.');
         }
 
         $builder
+            ->add('draft', RadioType::class, ['required' => true])
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('summary', PurifiedTextareaType::class, ['required' => false])
-            ->add('body', PurifiedTextareaType::class, ['required' => true])
+            ->add('body', PurifiedTextareaType::class, ['required' => $isDraft])
         ;
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {

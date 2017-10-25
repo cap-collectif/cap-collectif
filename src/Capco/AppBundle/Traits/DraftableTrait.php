@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait DraftableTrait
 {
     /**
-     * @ORM\Column(name="draft", type="boolean", nullable=false)
+     * @ORM\Column(name="is_draft", type="boolean", nullable=false)
      */
     private $draft = false;
 
