@@ -16,6 +16,7 @@ describe('<ProposalAdminNotationForm />', () => {
     evaluationForm: {},
     fields: {},
     change: jest.fn(),
+    intl: global.intlMock,
     responses: [],
     proposal: {
       id: '1',

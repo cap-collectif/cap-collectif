@@ -72,6 +72,18 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
           change={[Function]}
           component={[Function]}
           evaluationForm={null}
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "now": [Function],
+            }
+          }
           name="responses"
           responses={Array []}
         />

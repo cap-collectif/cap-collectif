@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -17,6 +17,7 @@ import { MultipleChoiceRadio } from '../../Form/MultipleChoiceRadio';
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
 type Props = RelayProps & {
+  intl: intlShape,
   handleSubmit: () => void,
   invalid: boolean,
   pristine: boolean,
@@ -189,11 +190,13 @@ const renderResponses = ({
   evaluationForm,
   responses,
   change,
+  intl,
 }: {
   fields: Object,
   evaluationForm: Object,
   responses: Array<Object>,
   change: Function,
+  intl: intlShape,
 }) => (
   <div>
     {fields.map((member, index) => {
@@ -203,12 +206,14 @@ const renderResponses = ({
       const isOtherAllowed = field.isOtherAllowed;
 
       let labelMessage = field.title;
+      let intlMessage;
       if (field.required) {
-        labelMessage += ' <span class="small warning">Obligatoire</span>';
+        intlMessage = intl.formatMessage({ id: 'global.mandatory' });
       } else {
-        labelMessage += ' <span class="small warning">Facultatif</span>';
+        intlMessage = intl.formatMessage({ id: 'global.optional' });
       }
 
+      labelMessage += ` <span class="small warning">${intlMessage}</span>`;
       const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
@@ -347,6 +352,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 evaluationForm={evaluationForm}
                 responses={this.props.responses}
                 change={this.props.change}
+                intl={this.props.intl}
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
@@ -364,11 +370,13 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
   }
 }
 
-const form = reduxForm({
-  onSubmit,
-  validate,
-  form: formName,
-})(ProposalAdminNotationForm);
+const form = injectIntl(
+  reduxForm({
+    onSubmit,
+    validate,
+    form: formName,
+  })(ProposalAdminNotationForm),
+);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
