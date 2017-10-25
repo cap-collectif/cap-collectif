@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
@@ -55,6 +56,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SoftDeleteTrait;
     use TextableTrait;
     use SummarizableTrait;
+    use DraftableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
