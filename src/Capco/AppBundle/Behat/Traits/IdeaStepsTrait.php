@@ -501,14 +501,10 @@ trait IdeaStepsTrait
     }
 
     /**
-     * The idea should have nb comments.
-     *
      * @Given the idea has :nb comments
      * @Then the idea should have :nb comments
-     *
-     * @param mixed $nb
      */
-    public function theIdeaShouldHaveNbComments($nb)
+    public function theIdeaShouldHaveNbComments(int $nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount();
         \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number ' . $commentsCount . ' for idea.');

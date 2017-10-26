@@ -145,7 +145,7 @@ Scenario: Logged in user wants to create a proposal in closed collect step
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
   When I click the create proposal button
-  Then I should see "user.login.popover.body" in the "#main" element
+  Then I should see "vote.popover.body" in the "#main" element
 
 @javascript @database
 Scenario: Author of a proposal wants to update it
@@ -233,7 +233,7 @@ Scenario: Logged in user wants to report a proposal
   When I click the report proposal button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.report.proposal" in the "#global-alert-box"
+  Then I should see "alert.success.report.proposal" in the "#global-alert-box" element
 
 # Sharing
 

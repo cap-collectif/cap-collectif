@@ -157,7 +157,7 @@ Scenario: Can not access trash if not logged in
   And I should see "project.show.meta.info.trash" in the "#main" element
   When I click the "#trash-link" element
   And I wait 1 seconds
-  Then I should see "user.login.popover.body"
+  Then I should see "vote.popover.body"
 
 @javascript
 Scenario: Project trash display correct numbers of elements

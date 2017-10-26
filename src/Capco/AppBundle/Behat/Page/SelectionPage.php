@@ -40,7 +40,7 @@ class SelectionPage extends Page
 
     public function sortByDate()
     {
-        $this->getElement('sorting select')->selectOption('Les plus récentes');
+        $this->getElement('sorting select')->selectOption('global.filter_f_lastrécentes');
     }
 
     public function sortByComments()
@@ -89,9 +89,9 @@ class SelectionPage extends Page
         return $this->getElement('proposal votes counter ' . $id);
     }
 
-    public function getVotesCount(string $id = 'proposal2')
+    public function getVotesCount(string $id = 'proposal2'): int
     {
-        return (int) $this->getVotesCounter($id)->getText();
+        return (int) filter_var($this->getVotesCounter($id)->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsCounter(string $id)
@@ -99,9 +99,9 @@ class SelectionPage extends Page
         return $this->getElement('proposal comments counter ' . $id);
     }
 
-    public function getCommentsCount(string $id = 'proposal2')
+    public function getCommentsCount(string $id = 'proposal2'): int
     {
-        return (int) $this->getCommentsCounter($id)->getText();
+        return (int) filter_var($this->getCommentsCounter($id)->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function submitProposalVoteForm()

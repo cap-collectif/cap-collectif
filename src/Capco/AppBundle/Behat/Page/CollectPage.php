@@ -25,7 +25,7 @@ class CollectPage extends Page
 
     public function sortByDate()
     {
-        $this->getElement('sorting select')->selectOption('Les plus récentes');
+        $this->getElement('sorting select')->selectOption('global.filter_f_last');
     }
 
     public function sortByComments()

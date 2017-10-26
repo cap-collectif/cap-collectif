@@ -60,7 +60,7 @@ Feature: Source
     And I go to an opinion
     And I go on the sources tab
     When I delete my source
-    Then I should see "alert.success.delete.source" in the "global-alert-box" element
+    Then I should see "alert.success.delete.source" in the "#global-alert-box" element
     And I should not see my source anymore
 
   # Reporting
@@ -81,4 +81,4 @@ Feature: Source
     And I click the source report button
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "alert.success.report.source" in the "global-alert-box" element
+    Then I should see "alert.success.report.source" in the "#global-alert-box" element

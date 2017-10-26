@@ -86,7 +86,7 @@ Scenario: Anonymous user wants to create an idea
   Given feature "idea_creation" is enabled
   When I go to the ideas page
   And I click the idea create button
-  Then I should see "user.login.popover.body" in the "#main" element
+  Then I should see "vote.popover.body" in the "#main" element
 
 @javascript
 Scenario: Logged in user wants to create an idea from a theme
@@ -105,7 +105,7 @@ Scenario: Anonymous user wants to create an idea from a theme
   And feature "idea_creation" is enabled
   When I go to an empty theme page
   And I click the idea create button
-  Then I should see "user.login.popover.body" in the "#main" element
+  Then I should see "vote.popover.body" in the "#main" element
 
 @javascript
 Scenario: Can not create an idea from theme when idea creation is disabled
@@ -166,7 +166,7 @@ Scenario: Logged in user wants to report an idea
   When I click the idea report button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.report.idea" in the "#main" element
+  Then I should see "alert.success.report.idea" in the "#global-alert-box" element
 
 @javascript
 Scenario: Logged in user wants to report his own idea
@@ -250,7 +250,7 @@ Scenario: Logged in user wants to vote for a comment of an idea
   And The first comment vote counter should be "0"
   When I vote for the first comment
   And I wait 1 seconds
-  Then I should see "idea.vote.add_success" in the "#main" element
+  Then I should see "idea.vote.add_success" in the "#global-alert-box" element
   And I should see "idea.vote.delete" in the "#main" element
   And The first comment vote counter should be "1"
   And I vote for the first comment
@@ -267,7 +267,7 @@ Scenario: Logged in user wants to vote and unvote for an idea with a comment
   And the idea has 2 votes
   When I add an idea vote comment
   And I submit the idea vote form
-  And I should see "idea.vote.add_success" in the "#main" element
+  And I should see "idea.vote.add_success" in the "#global-alert-box" element
   And I close current alert
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
@@ -286,7 +286,7 @@ Scenario: Logged in user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#main" element
+  And I should see "idea.vote.add_success" in the "#global-alert-box" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea with a comment
@@ -299,7 +299,7 @@ Scenario: Anonymous user wants to vote for an idea with a comment
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
   And I should see my not logged in vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#main" element
+  And I should see "idea.vote.add_success" in the "#global-alert-box" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea anonymously
@@ -310,7 +310,7 @@ Scenario: Anonymous user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#main" element
+  And I should see "idea.vote.add_success" in the "#global-alert-box" element
 
 @javascript @security
 Scenario: Anonymous user wants to vote twice with the same email

@@ -190,7 +190,7 @@ Feature: Arguments
   Scenario: Anonymous user wants to vote for an argument on an opinion
     Given I go to an opinion
     When I click the argument vote button
-    Then I should see "user.login.popover.body"
+    Then I should see "vote.popover.body"
 
 ## Votes from version
 
@@ -219,7 +219,7 @@ Feature: Arguments
   Scenario: Anonymous user wants to vote for an argument on a version
     Given I go to a version
     When I click the argument vote button
-    Then I should see "user.login.popover.body"
+    Then I should see "vote.popover.body"
 
   # Reporting
 

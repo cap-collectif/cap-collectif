@@ -17,6 +17,7 @@ export const OpinionEditButton = React.createClass({
     return (
       <span>
         <Button
+          id="opinion-edit-btn"
           className="opinion__action--edit pull-right btn--outline btn-dark-gray"
           onClick={() => {
             dispatch(openOpinionEditModal(opinion.id));

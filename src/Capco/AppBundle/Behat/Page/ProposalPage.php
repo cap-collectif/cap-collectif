@@ -56,9 +56,9 @@ class ProposalPage extends Page
         return $this->getElement('proposal votes counter');
     }
 
-    public function getVotesCount()
+    public function getVotesCount(): int
     {
-        return (int) $this->getVotesCounter()->getText();
+        return (int) filter_var($this->getVotesCounter()->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsCounter()
@@ -66,9 +66,9 @@ class ProposalPage extends Page
         return $this->getElement('proposal comments counter');
     }
 
-    public function getCommentsCount()
+    public function getCommentsCount(): int
     {
-        return (int) $this->getCommentsCounter()->getText();
+        return (int) filter_var($this->getCommentsCounter()->getText(), FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsListSelector()
