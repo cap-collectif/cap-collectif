@@ -101,8 +101,8 @@ Scenario: Logged in user wants to comment an event
   And I wait 1 seconds
   And I fill in the following:
     | body        | J'ai un truc à dire |
-  And I should not see "Commenter avec mon compte"
-  And I should not see "Commenter sans créer de compte"
+  And I should not see "comment.with_my_account"
+  And I should not see "comment.without_account"
 #   When I press "comment.submit"
 #   And I wait 2 seconds
 #   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
