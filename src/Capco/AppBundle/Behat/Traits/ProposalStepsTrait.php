@@ -318,11 +318,11 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then I should see the proposal private field
+     * @Then I should see the proposal private I should see the proposal private field
      */
     public function iShouldSeeTheProposalPrivateField()
     {
-        $this->assertPageContainsText('proposal.private.message');
+        $this->assertPageContainsText('global.form.private');
         $this->assertPageContainsText("Evaluez l'importance de votre proposition");
         $this->assertPageContainsText('souhaitable');
     }
@@ -332,8 +332,9 @@ trait ProposalStepsTrait
      */
     public function iShouldNotSeeTheProposalPrivateField()
     {
-        $this->assertPageNotContainsText('proposal.private.message');
+        $this->assertPageNotContainsText('global.form.private');
         $this->assertPageNotContainsText("Evaluez l'importance de votre proposition");
+        $this->assertPageNotContainsText('souhaitable');
     }
 
     /**

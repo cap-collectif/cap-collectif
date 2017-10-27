@@ -63,8 +63,8 @@ Scenario: Can not create an opinion of non-contribuable type
       | opinionTypeSlug  | enjeux                           |
       | opinionSlug      | opinion-3                        |
     And I wait 1 seconds
-    And I should see "1 vote" in the ".opinion__votes" element
-    When I press "Modifier"
+    And I should see 'global.votes {"num":1}'
+    When I press "global.edit"
     And I wait 1 seconds
     And I fill in the following:
       | opinion_body | Je modifie ma proposition !   |
@@ -100,7 +100,7 @@ Scenario: Anonymous wants to see opinion appendix
   Scenario: Logged in user wants to create a linked opinion
     Given I am logged in as user
     And I go to an opinion with versions
-    Then I should see "project.show.connections {"%count%": 0}"
+    Then I should see 'project.show.connections {"%count%":0}'
     When I go on the connections tab
     And I press "opinion.link.add_new"
     And I wait 1 seconds
@@ -113,7 +113,11 @@ Scenario: Anonymous wants to see opinion appendix
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds
+<<<<<<< HEAD
     Then I should see "project.show.connections {"%count%": 1}"
+=======
+    Then I should see 'project.show.connections {"%count%":1}'
+>>>>>>> Fix more tests
     And I go on the connections tab
     And I should see "Article 1" in the "#links-list" element
 

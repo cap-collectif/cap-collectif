@@ -23,7 +23,7 @@ const ProposalPrivateField = React.createClass({
         <div>
           <p className="excerpt proposal__private-excerpt">
             <i className="cap cap-lock-2" />
-            {<FormattedMessage id="global.form.private" />}
+            <FormattedMessage id="global.form.private" />
           </p>
           <div className={`well well-form proposal__private-field ${divClassName}`}>{children}</div>
         </div>

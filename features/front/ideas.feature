@@ -203,7 +203,7 @@ Scenario: Anonymous wants to comment an idea
   And I fill in the following:
     | body        | J'ai un truc à dire de la part de Naruto |
   And I should see "comment.with_my_account" in the "#main" element
-  And I should see "comment.without_my_account" in the "#main" element
+  And I should see "comment.without_account" in the "#main" element
   And I fill in the following:
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
@@ -220,7 +220,7 @@ Scenario: Logged in user wants to comment an idea
   And I fill in the following:
     | body        | J'ai un truc à dire avec mon compte |
   And I should not see "comment.with_my_account" in the "#main" element
-  And I should not see "comment.without_my_account" in the "#main" element
+  And I should not see "comment.without_account" in the "#main" element
   When I press "comment.submit"
   And I wait 5 seconds
   Then I should see "J'ai un truc à dire avec mon compte" in the ".opinion__list" element
@@ -250,7 +250,7 @@ Scenario: Logged in user wants to vote for a comment of an idea
   And The first comment vote counter should be "0"
   When I vote for the first comment
   And I wait 1 seconds
-  Then I should see "idea.vote.add_success" in the "#global-alert-box" element
+  Then I should see "alert.success.add.vote" in the "#global-alert-box" element
   And I should see "idea.vote.delete" in the "#main" element
   And The first comment vote counter should be "1"
   And I vote for the first comment
@@ -267,7 +267,7 @@ Scenario: Logged in user wants to vote and unvote for an idea with a comment
   And the idea has 2 votes
   When I add an idea vote comment
   And I submit the idea vote form
-  And I should see "idea.vote.add_success" in the "#global-alert-box" element
+  And I should see "alert.success.add.vote" in the "#global-alert-box" element
   And I close current alert
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
@@ -286,7 +286,7 @@ Scenario: Logged in user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#global-alert-box" element
+  And I should see "alert.success.add.vote" in the "#global-alert-box" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea with a comment
@@ -299,7 +299,7 @@ Scenario: Anonymous user wants to vote for an idea with a comment
   Then the idea should have 3 votes
   And I should see my comment in the idea comments list
   And I should see my not logged in vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#global-alert-box" element
+  And I should see "alert.success.add.vote" in the "#global-alert-box" element
 
 @javascript @database
 Scenario: Anonymous user wants to vote for an idea anonymously
@@ -310,7 +310,7 @@ Scenario: Anonymous user wants to vote for an idea anonymously
   And I submit the idea vote form
   Then the idea should have 3 votes
   And I should see my anonymous vote in the idea votes list
-  And I should see "idea.vote.add_success" in the "#global-alert-box" element
+  And I should see "alert.success.add.vote" in the "#global-alert-box" element
 
 @javascript @security
 Scenario: Anonymous user wants to vote twice with the same email
@@ -318,7 +318,7 @@ Scenario: Anonymous user wants to vote twice with the same email
   And the idea has 2 votes
   When I fill the idea vote form with already used email
   And I submit the idea vote form
-  Then I should see "idea.vote.already_voted" in the "#main" element
+  Then I should see "idea.vote.form.already.voted" in the "#main" element
   And the idea should have 2 votes
 
 @javascript @security
@@ -327,7 +327,7 @@ Scenario: Anonymous user wants to vote with an email already associated to an ac
   And the idea has 2 votes
   When I fill the idea vote form with a registered email
   And I submit the idea vote form
-  Then I should see "idea.vote.email_belongs_to_user" in the "#main" element
+  Then I should see "idea.vote.form.email.has_account" in the "#main" element
   And the idea should have 2 votes
 
 # Trash

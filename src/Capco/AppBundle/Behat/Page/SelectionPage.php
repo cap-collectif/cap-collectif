@@ -40,7 +40,7 @@ class SelectionPage extends Page
 
     public function sortByDate()
     {
-        $this->getElement('sorting select')->selectOption('global.filter_f_lastrécentes');
+        $this->getElement('sorting select')->selectOption('global.filter_f_last');
     }
 
     public function sortByComments()
