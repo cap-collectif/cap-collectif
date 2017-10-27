@@ -24,7 +24,7 @@ const validate = ({ title, body, object, url, confirm, theme }: Object, { showTh
   if (!confirm) {
     errors.confirm = 'idea.constraints.confirm';
   }
-  if (showThemes && theme < 0) {
+  if (showThemes && !theme) {
     errors.theme = 'idea.constraints.theme';
   }
   return errors;
@@ -33,14 +33,14 @@ const validate = ({ title, body, object, url, confirm, theme }: Object, { showTh
 export const IdeaForm = React.createClass({
   propTypes: {
     themes: PropTypes.array.isRequired,
-    themeId: PropTypes.number,
+    themeId: PropTypes.string,
     idea: PropTypes.object,
     showThemes: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
-      themeId: -1,
+      themeId: null,
     };
   },
 
