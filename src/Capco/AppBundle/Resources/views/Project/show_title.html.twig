@@ -90,44 +90,41 @@
         {% set contributionsCount = project.contributionsCount %}
         {% set contributorsCount = project.participantsCount %}
 
-        {% if project.hasParticipativeStep %}
-            <ul class="nav nav-pills counters-nav counters-nav--project">
-                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
-                    <i class="cap cap-file-edit-1"></i>
-                    <span class="value">{{ contributionsCount }}</span>
-                    <span class="excerpt category">
+        <ul class="nav nav-pills counters-nav counters-nav--project">
+            <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
+                <i class="cap cap-file-edit-1"></i>
+                <span class="value">{{ contributionsCount }}</span>
+                <span class="excerpt category">
                     {% transchoice contributionsCount from 'CapcoAppBundle' %}
-                        project.show.meta.total_count
-                        {% endtranschoice %}
+                    project.show.meta.total_count
+                    {% endtranschoice %}
                 </span>
-                </li>
-                {% if votesCount > 0 %}
-                    <li id="votes-counter-pill">
-                        <i class="cap cap-hand-like-2-1"></i>
-                        <span class="value">{{ votesCount }}</span>
-                        <span class="excerpt category">
+            </li>
+            {% if votesCount > 0 %}
+                <li id="votes-counter-pill">
+                    <i class="cap cap-hand-like-2-1"></i>
+                    <span class="value">{{ votesCount }}</span>
+                    <span class="excerpt category">
                         {% transchoice votesCount from 'CapcoAppBundle' %}
-                            project.show.meta.votes_count
-                            {% endtranschoice %}
+                        project.show.meta.votes_count
+                        {% endtranschoice %}
                     </span>
-                    </li>
-                {% endif %}
-                <li id="contributors-counter-pill">
-                    <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
-                        <i class="cap cap-contacts-1"></i>
-                        <span class="value">{{ contributorsCount }}</span>
-                        <span class="excerpt category">
-                        {% transchoice contributorsCount from 'CapcoAppBundle' %}
-                            project.show.meta.contributors_count
-                            {% endtranschoice %}
-                    </span>
-                    </a>
                 </li>
-            </ul>
-        {% endif %}
+            {% endif %}
+            <li id="contributors-counter-pill">
+                <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
+                    <i class="cap cap-contacts-1"></i>
+                    <span class="value">{{ contributorsCount }}</span>
+                    <span class="excerpt category">
+                        {% transchoice contributorsCount from 'CapcoAppBundle' %}
+                        project.show.meta.contributors_count
+                        {% endtranschoice %}
+                    </span>
+                </a>
+            </li>
+        </ul>
 
-
-        <div class="share-button-wrapper">
+        <div style="margin-top: 15px" class="share-button-wrapper">
 
             {{ react_render_component('ShareButtonDropdownApp', {
                 'props': {

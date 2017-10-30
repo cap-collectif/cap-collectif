@@ -96,34 +96,34 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
       </h4>
       <Field
         component={[Function]}
-        id="proposal_form_notification_on_create"
+        id="proposal_form_notification_comment_on_create"
         name="onCommentCreate"
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications.comment.on_create"
+          id="proposal_form.notifications_comment.on_create"
           values={Object {}}
         />
       </Field>
       <Field
         component={[Function]}
-        id="proposal_form_notification_on_update"
+        id="proposal_form_notification_comment_on_update"
         name="onCommentUpdate"
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications.comment.on_update"
+          id="proposal_form.notifications_comment.on_update"
           values={Object {}}
         />
       </Field>
       <Field
         component={[Function]}
-        id="proposal_form_notification_on_delete"
+        id="proposal_form_notification_comment_on_delete"
         name="onCommentDelete"
         type="checkbox"
       >
         <FormattedMessage
-          id="proposal_form.notifications.comment.on_delete"
+          id="proposal_form.notifications_comment.on_delete"
           values={Object {}}
         />
       </Field>
