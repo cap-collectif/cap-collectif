@@ -6,6 +6,7 @@ import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/Proposa
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalListRandomRow from '../Proposal/List/ProposalListRandomRow';
 import ProposalList from '../Proposal/List/ProposalList';
+import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Utils/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
@@ -72,6 +73,7 @@ export const ProposalStepPage = React.createClass({
     return (
       <div className="proposal__step-page">
         <StepPageHeader step={step} />
+        <DraftProposalList step={step} showThemes={form.usingThemes} />
         {step.type === 'collect' ? (
           <CollectStepPageHeader
             total={count}

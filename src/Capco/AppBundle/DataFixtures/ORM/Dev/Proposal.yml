@@ -255,3 +255,27 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
+  proposal19:
+    id: proposal19
+    title: Proposition 19
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    draft: true
+    author: '@user501'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    reference: 9
+  proposal20:
+    id: proposal20
+    title: Proposition 20
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    draft: true
+    author: '@user1'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    reference: 10

@@ -17,6 +17,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Model\CreatableInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -121,7 +122,7 @@ class ProposalResolver implements ContainerAwareInterface
         return 'PUBLISHED';
     }
 
-    public function resolveUrl(Proposal $proposal): string
+    public function resolveShowUrl(Proposal $proposal): string
     {
         $step = $proposal->getStep();
         $project = $step->getProject();
@@ -130,11 +131,11 @@ class ProposalResolver implements ContainerAwareInterface
         }
 
         return $this->container->get('router')->generate('app_project_show_proposal',
-          [
-            'proposalSlug' => $proposal->getSlug(),
-            'projectSlug' => $project->getSlug(),
-            'stepSlug' => $step->getSlug(),
-          ], true);
+            [
+                'proposalSlug' => $proposal->getSlug(),
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+            ], true);
     }
 
     public function resolveReference(Proposal $proposal): string
@@ -147,11 +148,40 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveDraftProposalsForUserInStep(string $stepId, User $user = null)
+    public function resolveCountVotesByStepId(Proposal $proposal): array
     {
-        var_dump($stepId);
-        var_dump($user);
+        $selectionVotesCount = $this->container->get('capco.proposal_selection_vote.repository')
+            ->getCountsByProposalGroupedByStepsId($proposal);
 
-        die;
+        $collectVotesCount = $this->container->get('capco.proposal_collect_vote.repository')
+            ->getCountsByProposalGroupedByStepsId($proposal);
+
+        return $selectionVotesCount + $collectVotesCount;
+    }
+
+    public function resolveDraftProposalsForUserInStep(string $stepId, User $user = null): array
+    {
+        $proposalRep = $this->container->get('capco.proposal.repository');
+
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([
+            'step' => $stepId,
+        ]);
+
+        if (!$proposalForm) {
+            throw new UserError(sprintf('Unknown step with id "%d"', $stepId));
+        }
+
+        $proposals = $proposalRep->findBy([
+            'draft' => true,
+            'author' => $user,
+            'proposalForm' => $proposalForm,
+        ]);
+
+        return $proposals;
+    }
+
+    public function resolveCreatedAt(CreatableInterface $object): string
+    {
+        return $object->getCreatedAt()->format(\DateTime::ATOM);
     }
 }

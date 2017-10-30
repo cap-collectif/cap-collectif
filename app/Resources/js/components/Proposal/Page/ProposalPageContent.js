@@ -130,7 +130,7 @@ export const ProposalPageContent = React.createClass({
         </div>
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
         <ProposalDeleteModal proposal={proposal} form={form} />
-        <ProposalPageComments id={proposal.id} form={form} />
+        <ProposalPageComments id={proposal.id} isDraft={proposal.draft} form={form} />
       </div>
     );
   },

@@ -4,10 +4,10 @@ Proposal:
         description: "A budget contribution"
         # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
-            url:
+            show_url:
                 type: "URI!"
-                description: "The HTTP url for this contribution."
-                resolve: "@=resolver('proposal_url', [value])"
+                description: "The HTTP show url for this contribution."
+                resolve: "@=resolver('proposal_show_url', [value])"
             progressSteps:
               type: "[ProgressStep!]!"
             news:
@@ -79,3 +79,14 @@ Proposal:
             draft:
               type: "Boolean!"
               description: "Identifies proposals as draft."
+            votesCountByStepId:
+              type: "[String]!"
+              description: "Count number of selection vote and collect vote."
+              resolve: "@=resolver('proposal_votes_count_by_step_id', [value])"
+            commentsCount:
+              type: "Int!"
+              description: "Count number of comments for the proposal."
+            createdAt:
+              type: "String!"
+              description: "Identifies the date and time when the object was created."
+              resolve: "@=resolver('proposal_created_at', [value])"

@@ -191,6 +191,7 @@ type CollectStep implements Step {
   kind: String!
   title: String!
   statuses: [Status!]!
+  voteThreshold: Int
 }
 
 # A consultation
@@ -681,8 +682,8 @@ type Project {
 
 # A budget contribution
 type Proposal {
-  # The HTTP url for this contribution.
-  url: URI!
+  # The HTTP show url for this contribution.
+  show_url: URI!
   progressSteps: [ProgressStep!]!
   news: [Post!]!
   project: Project!
@@ -733,6 +734,18 @@ type Proposal {
 
   # Identifies the answers to an evaluation form.
   evaluation: ProposalEvaluation
+
+  # Identifies proposals as draft.
+  draft: Boolean!
+
+  # Count number of selection vote and collect vote.
+  votesCountByStepId: [String]!
+
+  # Count number of comments for the proposal.
+  commentsCount: Int!
+
+  # Identifies the date and time when the object was created.
+  createdAt: String!
 }
 
 # A proposal category
@@ -789,6 +802,9 @@ type ProposalForm {
 
   # Get the evaluation form of the proposal form
   evaluationForm: EvaluationForm
+
+  # Identifies the step that use the proposal form.
+  step: Step
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -858,7 +874,12 @@ type Query {
   proposal(id: ID!): Proposal!
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
+<<<<<<< HEAD
   availableQuestionnaires: [Questionnaire!]
+=======
+  availableQuestionnaires: [Question!]
+  draftProposalsForUserInStep(stepId: ID!): [Proposal!]
+>>>>>>> Add many stuff for proposal draft
 }
 
 interface Question {
@@ -1064,6 +1085,7 @@ type SelectionStep implements Step {
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
+  voteThreshold: Int
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -1151,7 +1173,7 @@ type SynthesisStep implements Step {
 # A theme
 type Theme {
   id: String!
-  name: String!
+  title: String!
 }
 
 # A trashable contribution
@@ -1247,7 +1269,7 @@ type User {
   username: String!
 
   # URL to user profile, null if the feature profiles is disabled.
-  url: String
+  show_url: URI
 
   # Identifies the date and time when the object was created.
   createdAt: String!

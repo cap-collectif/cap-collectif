@@ -197,8 +197,21 @@ h2,
 h3,
 .h3 {
     color: $brand-color-2;
-}
 
+    .subtitle {
+        color: $darkest-gray;
+        font-size: 15px;
+        font-weight: 300;
+        padding-left: 12px;
+
+        i {
+            background-color: $light-blue;
+            color: $white;
+            font-size: 12px;
+            padding: 3px;
+        }
+    }
+}
 h4,
 .h4 {
     margin-top: 20px;

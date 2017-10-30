@@ -759,7 +759,7 @@ const voteReducer = (state: State, action): Exact<State> => {
   votesByStepId[action.stepId].unshift(action.vote);
   const votesCountByStepId = proposal.votesCountByStepId;
   votesCountByStepId[action.stepId]++;
-  let commentsCount = proposal.comments_count;
+  let commentsCount = proposal.commentsCount;
   if (action.comment) {
     commentsCount++;
   }
@@ -770,7 +770,7 @@ const voteReducer = (state: State, action): Exact<State> => {
     ...proposal,
     votesCountByStepId,
     votesByStepId,
-    comments_count: commentsCount,
+    commentsCount,
   };
   const creditsLeftByStepId = state.creditsLeftByStepId;
   creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;

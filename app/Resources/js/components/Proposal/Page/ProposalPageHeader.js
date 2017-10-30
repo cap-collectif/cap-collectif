@@ -27,7 +27,7 @@ export const ProposalPageHeader = React.createClass({
 
     const createdDate = (
       <FormattedDate
-        value={moment(proposal.created_at)}
+        value={moment(proposal.createdAt)}
         day="numeric"
         month="long"
         year="numeric"
@@ -37,7 +37,7 @@ export const ProposalPageHeader = React.createClass({
     );
     const updatedDate = (
       <FormattedDate
-        value={moment(proposal.updated_at)}
+        value={moment(proposal.updatedAt)}
         day="numeric"
         month="long"
         year="numeric"
@@ -76,7 +76,7 @@ export const ProposalPageHeader = React.createClass({
                   createdDate,
                 }}
               />
-              {moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1 && (
+              {moment(proposal.updatedAt).diff(proposal.createdAt, 'seconds') > 1 && (
                 <span>
                   {' • '}
                   <FormattedMessage
