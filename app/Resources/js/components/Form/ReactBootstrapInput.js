@@ -79,6 +79,7 @@ type Props = {
   choices: Array<any>,
   onChange: any,
   checkedValue: ?string,
+  maxLength: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -323,7 +324,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'textarea') {
-      formControl = <AutosizedTextarea value={value} {...props} />;
+      formControl = <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />;
     }
 
     if (popover) {

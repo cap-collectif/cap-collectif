@@ -476,6 +476,7 @@ export const ProposalForm = React.createClass({
         <Input
           id="proposal_summary"
           type="textarea"
+          maxLength="140"
           autoComplete="off"
           valueLink={this.linkState('form.summary')}
           label={
