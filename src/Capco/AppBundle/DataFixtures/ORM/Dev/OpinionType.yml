@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         versionable: false
         sourceable: false
-        consultationStepType: '@typePJL'
+        consultationStepType: '@typeDefault'
     opinionType5ter:
         id: 'opinionType5ter'
         title: Chapitre Ier
@@ -56,7 +56,7 @@ Capco\AppBundle\Entity\OpinionType:
         isEnabled: false
         versionable: false
         sourceable: false
-        consultationStepType: '@typePJL'
+        consultationStepType: '@typeDefault'
         parent: '@opinionType5bis'
     opinionType5:
         id: 'opinionType5'
@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\OpinionType:
         votesHelpText: <text(200)>
         votesThreshold: 5
         votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typePJL'
+        consultationStepType: '@typeDefault'
         parent: '@opinionType5ter'
         linkable: true
     opinionType6:
