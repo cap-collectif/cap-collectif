@@ -29,6 +29,7 @@ import ProposalListApp from './startup/ProposalListApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
 import PhoneProfileApp from './startup/PhoneProfileApp';
 import AccountProfileApp from './startup/AccountProfileApp';
+import AccountProfileNotificationsApp from './startup/AccountProfileNotificationsApp';
 import IdeasIndexPageApp from './startup/IdeasIndexPageApp';
 import IdeasListApp from './startup/IdeasListApp';
 import IdeaPageApp from './startup/IdeaPageApp';
@@ -67,6 +68,7 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  AccountProfileNotificationsApp,
   AdminModalsApp,
   RegistrationAdminApp,
   ShieldApp,

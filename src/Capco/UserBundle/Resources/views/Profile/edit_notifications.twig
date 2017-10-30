@@ -15,21 +15,7 @@
         <div class="row">
             {% include '@CapcoUser/Profile/action.html.twig' %}
             <div class="col-xs-12 col-sm-8 col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <span>{{ "user.profile.notifications.title" | trans({}, 'CapcoAppBundle') }}</span>
-                    </div>
-                    <div class="panel-body">
-                        {{ react_render_component() }}
-                    </div>
-                    <div class="panel-footer">
-
-                        <button id="edit-account-profile-button" type="button"
-                                class="col-sm-offset-4 btn btn-primary" disabled="">
-                            <span>{{ "user.profile.notifications.submit" | trans({}, 'CapcoAppBundle') }}</span>
-                        </button>
-                    </div>
-                </div>
+                {{ react_render_component("AccountProfileNotificationsApp") }}
             </div>
         </div>
     </div>
