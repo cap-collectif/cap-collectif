@@ -79,7 +79,12 @@ class OpinionType
     private $subtitle;
 
     /**
-     * @Gedmo\Slug(fields={"title", "subtitle"}, updatable=false, unique=false)
+     * @Gedmo\Slug(handlers={
+     *  @Gedmo\SlugHandler(class="Gedmo\Sluggable\Handler\TreeSlugHandler", options={
+     *      @Gedmo\SlugHandlerOption(name="parentRelationField", value="parent"),
+     *      @Gedmo\SlugHandlerOption(name="separator", value="-")
+     *  })
+     * }, fields={"title", "subtitle"}, unique=false)
      * @ORM\Column(length=255)
      */
     private $slug;
