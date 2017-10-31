@@ -38,3 +38,20 @@ body {
     color: $excerpt;
     font-weight: normal;
 }
+
+//à changer de place
+#valid-modif-alert, #error-modif-alert {
+
+    padding: 6px 12px;
+    margin-left: 5px;
+    float: left;
+}
+
+#valid-modif-alert {
+    display: none;
+    color: $success-color;
+}
+
+#error-modif-alert {
+    color: $danger-color;
+}

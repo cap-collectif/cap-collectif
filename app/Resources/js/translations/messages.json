@@ -191,6 +191,8 @@
     "global.preview": "Aperçu",
     "global.publish": "Envoyer",
     "global.save": "Enregistrer",
+    "global.saved": "Enregistré !",
+    "global.invalid.form": "Votre formulaire semble invalide, veuillez vérifier vos réponses",
     "global.save_and_close": "Enregistrer et fermer",
     "global.save_modifications": "Enregistrer les modifications",
     "global.login_me": "Se connecter",

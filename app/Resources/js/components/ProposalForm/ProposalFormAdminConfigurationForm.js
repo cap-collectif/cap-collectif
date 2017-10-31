@@ -123,6 +123,12 @@ const headerPanelUsingDistrict = (
   </div>
 );
 
+// const validModificationAlert = (
+//   <Alert bsStyle="success">
+//     <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+//   </Alert>
+// );
+
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
@@ -141,7 +147,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     })),
   };
   return UpdateProposalFormMutation.commit({ input }).then(() => {
-    location.reload();
+    const alert = document.getElementById('valid-modif-alert');
+    alert.style.display = "block";
   });
 };
 
@@ -417,7 +424,29 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
+              <div id="valid-modif-alert">
+                {/*{ submitting ? (*/}
+                    {/*<span>*/}
+                      {/*<i className="fa fa-spinner fa-spin fa-fw" aria-hidden="true"> </i><FormattedMessage id="global.loading" />*/}
+                    {/*</span>*/}
+                  {/*) : (*/}
+                    {/*<span>*/}
+                      {/*<i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved" />*/}
+                    {/*</span>*/}
+                  {/*)*/}
+                {/*}*/}
+                <span>
+                  <i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved" />
+                </span>
+              </div>
+              { invalid && (
+                <div id="error-modif-alert">
+                  <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.invalid.form" />
+                </div>
+              )
+              }
             </ButtonToolbar>
+
           </form>
         </div>
       </div>

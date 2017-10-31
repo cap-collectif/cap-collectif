@@ -28,6 +28,7 @@ type Props = {
   isSuperAdmin: boolean,
   pristine: boolean,
   invalid: boolean,
+  valid: boolean,
   submitting: boolean,
 };
 type State = void;
@@ -68,7 +69,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: { ...values, id: props.proposal.id },
   };
   ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
-    window.location.reload();
+    // window.location.reload();
+    const alert = document.getElementById('valid-modif-alert');
+    alert.style.display = "block";
   });
 };
 
@@ -119,6 +122,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
     const {
       pristine,
       invalid,
+      valid,
       proposal,
       features,
       submitting,
@@ -330,6 +334,19 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
+              { valid &&
+              <div id="valid-modif-alert">
+                <span>
+                  <i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved"/>
+                </span>
+              </div>
+              }
+              { invalid && (
+                  <div id="error-modif-alert">
+                    <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.invalid.form" />
+                  </div>
+                )
+              }
             </ButtonToolbar>
           </div>
         </form>
