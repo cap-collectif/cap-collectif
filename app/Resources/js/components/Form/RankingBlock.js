@@ -19,7 +19,6 @@ const RankingBlock = React.createClass({
     connectDropTarget: PropTypes.func.isRequired,
     onRankingChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    onBlur: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -44,7 +43,7 @@ const RankingBlock = React.createClass({
   },
 
   moveItem(atList, atIndex, it) {
-    const { onRankingChange, onBlur } = this.props;
+    const { onRankingChange } = this.props;
     const { item, list, index } = this.findItem(it.id);
     const items = JSON.parse(JSON.stringify(this.state.items));
     items[list].splice(index, 1);
@@ -58,8 +57,6 @@ const RankingBlock = React.createClass({
         this.recalculateChoicesHeight();
       },
     );
-
-    onBlur();
   },
 
   recalculateChoicesHeight() {

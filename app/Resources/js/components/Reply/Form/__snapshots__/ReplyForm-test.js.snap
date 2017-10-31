@@ -367,7 +367,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
-    value={Object {}}
+    value={Array []}
     values={
       Object {
         "10": "",
@@ -570,7 +570,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
-    value={Object {}}
+    value={Array []}
     values={
       Object {
         "11": Array [],

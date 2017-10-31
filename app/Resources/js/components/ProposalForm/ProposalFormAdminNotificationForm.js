@@ -83,22 +83,22 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               name="onCommentCreate"
               component={component}
               type="checkbox"
-              id="proposal_form_notification_on_create">
-              <FormattedMessage id="proposal_form.notifications.comment.on_create" />
+              id="proposal_form_notification_comment_on_create">
+              <FormattedMessage id="proposal_form.notifications_comment.on_create" />
             </Field>
             <Field
               name="onCommentUpdate"
               component={component}
               type="checkbox"
-              id="proposal_form_notification_on_update">
-              <FormattedMessage id="proposal_form.notifications.comment.on_update" />
+              id="proposal_form_notification_comment_on_update">
+              <FormattedMessage id="proposal_form.notifications_comment.on_update" />
             </Field>
             <Field
               name="onCommentDelete"
               component={component}
               type="checkbox"
-              id="proposal_form_notification_on_delete">
-              <FormattedMessage id="proposal_form.notifications.comment.on_delete" />
+              id="proposal_form_notification_comment_on_delete">
+              <FormattedMessage id="proposal_form.notifications_comment.on_delete" />
             </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">

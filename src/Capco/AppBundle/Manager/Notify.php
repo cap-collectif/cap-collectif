@@ -261,8 +261,8 @@ class Notify implements MailerInterface
               ),
               '%username%' => $proposal->getAuthor()->getDisplayName(),
               '%proposal%' => $proposal->getTitle(),
-              '%date%' => $proposal->getCreatedAt()->format('d/m/Y'),
-              '%time%' => $proposal->getCreatedAt()->format('H:i:s'),
+              '%date%' => 'delete' === $action ? $proposal->getDeletedAt()->format('d/m/Y') : $proposal->getCreatedAt()->format('d/m/Y'),
+              '%time%' => 'delete' === $action ? $proposal->getDeletedAt()->format('H:i:s') : $proposal->getCreatedAt()->format('H:i:s'),
               '%proposalExcerpt%' => $proposal->getBodyExcerpt(),
               '%proposalUrl%' => $this->router->generate(
                 'delete' !== $action ? 'app_project_show_proposal' : 'admin_capco_app_proposal_edit',

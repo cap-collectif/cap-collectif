@@ -10,9 +10,7 @@
             <p>{{ section.body | raw }}</p>
         {% endif %}
 
-        <div class="row">
-            {{ react_render_component('ProjectsListApp', { 'props': props }) }}
-        </div>
+        {{ react_render_component('ProjectsListApp', { 'props': props }) }}
 
         {% if count > max %}
             <a href="{{ path('app_project') }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>

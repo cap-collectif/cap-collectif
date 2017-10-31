@@ -50,9 +50,9 @@ export const ProposalList = React.createClass({
     }
 
     return (
-      <Row>
+      <div>
         {publicProposals.length > 0 && (
-          <ul className={classes}>
+          <Row componentClass="ul" className={classes}>
             {publicProposals.map(proposal => (
               <ProposalPreview
                 key={proposal.id}
@@ -61,11 +61,11 @@ export const ProposalList = React.createClass({
                 showThemes={showThemes}
               />
             ))}
-          </ul>
+          </Row>
         )}
         {privateProposals.length > 0 && (
           <VisibilityBox enabled>
-            <ul className={classes}>
+            <Row componentClass="ul" className={classes}>
               {privateProposals.map(proposal => (
                 <ProposalPreview
                   key={proposal.id}
@@ -74,10 +74,10 @@ export const ProposalList = React.createClass({
                   showThemes={showThemes}
                 />
               ))}
-            </ul>
+            </Row>
           </VisibilityBox>
         )}
-      </Row>
+      </div>
     );
   },
 });

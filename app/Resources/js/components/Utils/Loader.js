@@ -18,8 +18,10 @@ const Loader = React.createClass({
     const { children, show } = this.props;
     if (show) {
       return (
-        <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
-          <div className="spinner-loader" />
+        <div className="row">
+          <div className="col-xs-2 col-xs-offset-5 spinner-loader-container">
+            <div className="spinner-loader" />
+          </div>
         </div>
       );
     }
