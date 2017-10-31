@@ -113,11 +113,7 @@ Scenario: Anonymous wants to see opinion appendix
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds
-<<<<<<< HEAD
-    Then I should see "project.show.connections {"%count%": 1}"
-=======
     Then I should see 'project.show.connections {"%count%":1}'
->>>>>>> Fix more tests
     And I go on the connections tab
     And I should see "Article 1" in the "#links-list" element
 
