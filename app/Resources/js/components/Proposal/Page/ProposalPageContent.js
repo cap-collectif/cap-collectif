@@ -47,27 +47,45 @@ export const ProposalPageContent = React.createClass({
     const address = proposal.address ? JSON.parse(proposal.address) : null;
     return (
       <div className={classNames(classes)}>
-        {proposal.media && (
-          <img
-            id="proposal-media"
-            src={proposal.media.url}
-            alt=""
-            className="block img-responsive"
-          />
-        )}
         <div className="block">
-          {proposal.summary && (
-            <p className="excerpt" style={{ fontStyle: 'italic' }}>
-              {proposal.summary}
-            </p>
+          <h2 className="h2 with-buttons no-margin">
+            {<FormattedMessage id="proposal.tabs.content" />}
+            <div className="pull-right">
+              <EditButton
+                id="proposal-edit-button"
+                author={proposal.author}
+                onClick={() => {
+                  dispatch(openEditProposalModal());
+                }}
+                editable={form.isContribuable}
+              />
+              <DeleteButton
+                id="proposal-delete-button"
+                author={proposal.author}
+                onClick={() => {
+                  dispatch(openDeleteProposalModal());
+                }}
+                style={{ marginLeft: '15px' }}
+                deletable={form.isContribuable}
+              />
+            </div>
+          </h2>
+          {proposal.media && (
+            <img
+              id="proposal-media"
+              src={proposal.media.url}
+              alt=""
+              className="img-responsive mt-15"
+            />
           )}
-          <h3 className="h3">{<FormattedMessage id="proposal.description" />}</h3>
+          {proposal.summary && <p className="excerpt mt-15">{proposal.summary}</p>}
+          <h3 className="h3 mt-15">{<FormattedMessage id="proposal.description" />}</h3>
           <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
         </div>
         {address &&
           config.canUseDOM && (
             <div className="block" style={{ height: 255 }}>
-              <h4 className="h4">Lieu ou adresse</h4>
+              <h3 className="h3">Lieu ou adresse</h3>
               <p>{address[0].formatted_address}</p>
               <Map
                 center={{
@@ -100,37 +118,22 @@ export const ProposalPageContent = React.createClass({
           <ProposalResponse key={index} response={response} />
         ))}
         <div className="block proposal__buttons">
-          <ProposalVoteButtonWrapper proposal={proposal} />
-          <ShareButtonDropdown
-            id="proposal-share-button"
-            url={proposal._links.show}
-            title={proposal.title}
-            style={{ marginLeft: 15 }}
-          />
+          {!proposal.isDraft && (
+            <div>
+              <ProposalVoteButtonWrapper proposal={proposal} />
+              <ShareButtonDropdown
+                id="proposal-share-button"
+                url={proposal._links.show}
+                title={proposal.title}
+                style={{ marginLeft: 15 }}
+              />
+            </div>
+          )}
           <ProposalReportButton proposal={proposal} />
-          <div className="pull-right">
-            <EditButton
-              id="proposal-edit-button"
-              author={proposal.author}
-              onClick={() => {
-                dispatch(openEditProposalModal());
-              }}
-              editable={form.isContribuable}
-            />
-            <DeleteButton
-              id="proposal-delete-button"
-              author={proposal.author}
-              onClick={() => {
-                dispatch(openDeleteProposalModal());
-              }}
-              style={{ marginLeft: '15px' }}
-              deletable={form.isContribuable}
-            />
-          </div>
         </div>
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
         <ProposalDeleteModal proposal={proposal} form={form} />
-        <ProposalPageComments id={proposal.id} isDraft={proposal.draft} form={form} />
+        {!proposal.isDraft && <ProposalPageComments id={proposal.id} form={form} />}
       </div>
     );
   },

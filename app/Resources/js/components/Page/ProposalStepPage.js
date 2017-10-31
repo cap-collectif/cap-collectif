@@ -73,7 +73,7 @@ export const ProposalStepPage = React.createClass({
     return (
       <div className="proposal__step-page">
         <StepPageHeader step={step} />
-        <DraftProposalList step={step} showThemes={form.usingThemes} />
+        <DraftProposalList step={step} />
         {step.type === 'collect' ? (
           <CollectStepPageHeader
             total={count}

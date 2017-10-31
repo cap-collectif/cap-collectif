@@ -60,11 +60,13 @@ export const ProposalPageHeader = React.createClass({
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
-        <ProposalVoteButtonWrapper
-          id="proposal-vote-btn"
-          proposal={proposal}
-          className="pull-right btn-lg"
-        />
+        {!proposal.isDraft && (
+          <ProposalVoteButtonWrapper
+            id="proposal-vote-btn"
+            proposal={proposal}
+            className="pull-right btn-lg"
+          />
+        )}
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">

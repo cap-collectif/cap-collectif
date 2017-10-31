@@ -156,7 +156,7 @@ export const ProposalPage = React.createClass({
                 </Tab.Pane>
               </Tab.Content>
             </div>
-            {currentVotableStep && <ProposalVoteModal proposal={proposal} />}
+            {!proposal.isDraft && currentVotableStep && <ProposalVoteModal proposal={proposal} />}
           </div>
         </Tab.Container>
       </div>

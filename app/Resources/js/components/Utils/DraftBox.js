@@ -17,8 +17,8 @@ export class DraftBox extends React.Component<Props> {
           <h3>
             <FormattedMessage id="global.draft.your_draft" />
             <span className="subtitle">
-              <i className="glyphicon glyphicon-lock" />
-              {'  '} <FormattedMessage id="global.draft.only_visible_by_you" />
+              <i className="cap cap-lock-2-1" />
+              <FormattedMessage id="global.draft.only_visible_by_you" />
             </span>
           </h3>
         </p>

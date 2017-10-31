@@ -14,10 +14,8 @@ exports[`<DraftBox /> renders draft box 1`] = `
         className="subtitle"
       >
         <i
-          className="glyphicon glyphicon-lock"
+          className="cap cap-lock-2-1"
         />
-          
-         
         <FormattedMessage
           id="global.draft.only_visible_by_you"
           values={Object {}}

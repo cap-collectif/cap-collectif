@@ -27,6 +27,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'form')
             ->leftJoin('form.step', 'step')
             ->andWhere('proposal.author = :author')
+            ->andWhere('proposal.draft = false')
             ->setParameter('author', $user);
 
         $results = $qb->getQuery()->getResult();
@@ -148,6 +149,8 @@ class ProposalRepository extends EntityRepository
             ->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
             ->andWhere('proposal.isTrashed = false')
+            ->andWhere('proposal.enabled = true')
+            ->andWhere('proposal.draft = false')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $form);
 
@@ -162,6 +165,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'selectionStep')
             ->andWhere('proposal.isTrashed = false')
+            ->andWhere('proposal.enabled = true')
+            ->andWhere('proposal.draft = false')
             ->andWhere('selectionStep.id = :stepId')
             ->setParameter('stepId', $step->getId());
 
@@ -429,6 +434,7 @@ class ProposalRepository extends EntityRepository
     {
         return $this->createQueryBuilder($alias)
             ->andWhere($alias . '.enabled = true')
-            ->andWhere($alias . '.expired = false');
+            ->andWhere($alias . '.expired = false')
+            ->andWhere($alias . '.draft = false');
     }
 }

@@ -61,6 +61,7 @@ const ProposalCreate = React.createClass({
               label="global.save_as_draft"
             />
             <SubmitButton
+              label="global.submit"
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
               onSubmit={() => dispatch(submitProposalForm())}

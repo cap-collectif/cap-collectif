@@ -483,7 +483,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
-            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1 AND proposals.expired = 0')
+            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1 AND proposals.expired = 0 AND proposals.draft = false')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
             ->groupBy('u.id')

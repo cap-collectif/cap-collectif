@@ -83,7 +83,7 @@ type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
 type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM', isDraft?: boolean };
-type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM' };
+type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM', isDraft?: boolean };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
@@ -254,8 +254,9 @@ export const submitProposalForm = (isDraft?: boolean): SubmitProposalFormAction 
   type: 'proposal/SUBMIT_PROPOSAL_FORM',
   isDraft,
 });
-export const editProposalForm = (): EditProposalFormAction => ({
+export const editProposalForm = (isDraft?: boolean): EditProposalFormAction => ({
   type: 'proposal/EDIT_PROPOSAL_FORM',
+  isDraft,
 });
 export const openCreateModal = (): OpenCreateModalAction => ({
   type: 'proposal/OPEN_CREATE_MODAL',
@@ -889,7 +890,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CANCEL_SUBMIT_PROPOSAL':
       return { ...state, isCreating: false, isEditing: false };
     case 'proposal/EDIT_PROPOSAL_FORM':
-      return { ...state, isEditing: true };
+      return { ...state, isEditing: true, isDraft: action.isDraft };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':

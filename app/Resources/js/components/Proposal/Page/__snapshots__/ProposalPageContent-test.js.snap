@@ -7,8 +7,35 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   <div
     className="block"
   >
+    <h2
+      className="h2 with-buttons no-margin"
+    >
+      <FormattedMessage
+        id="proposal.tabs.content"
+        values={Object {}}
+      />
+      <div
+        className="pull-right"
+      >
+        <Connect(EditButton)
+          author={Object {}}
+          id="proposal-edit-button"
+          onClick={[Function]}
+        />
+        <Connect(DeleteButton)
+          author={Object {}}
+          id="proposal-delete-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": "15px",
+            }
+          }
+        />
+      </div>
+    </h2>
     <h3
-      className="h3"
+      className="h3 mt-15"
     >
       <FormattedMessage
         id="proposal.description"
@@ -26,30 +53,32 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   <div
     className="block proposal__buttons"
   >
-    <Connect(ProposalVoteButtonWrapper)
-      proposal={
-        Object {
-          "_links": Object {
-            "show": "http://capco.test",
-          },
-          "author": Object {},
-          "id": "proposal3",
-          "referer": "http://capco.test",
-          "responses": Array [],
-          "title": "Titre proposition",
+    <div>
+      <Connect(ProposalVoteButtonWrapper)
+        proposal={
+          Object {
+            "_links": Object {
+              "show": "http://capco.test",
+            },
+            "author": Object {},
+            "id": "proposal3",
+            "referer": "http://capco.test",
+            "responses": Array [],
+            "title": "Titre proposition",
+          }
         }
-      }
-    />
-    <Connect(ShareButtonDropdown)
-      id="proposal-share-button"
-      style={
-        Object {
-          "marginLeft": 15,
+      />
+      <Connect(ShareButtonDropdown)
+        id="proposal-share-button"
+        style={
+          Object {
+            "marginLeft": 15,
+          }
         }
-      }
-      title="Titre proposition"
-      url="http://capco.test"
-    />
+        title="Titre proposition"
+        url="http://capco.test"
+      />
+    </div>
     <Connect(ProposalReportButton)
       proposal={
         Object {
@@ -64,25 +93,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         }
       }
     />
-    <div
-      className="pull-right"
-    >
-      <Connect(EditButton)
-        author={Object {}}
-        id="proposal-edit-button"
-        onClick={[Function]}
-      />
-      <Connect(DeleteButton)
-        author={Object {}}
-        id="proposal-delete-button"
-        onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "15px",
-          }
-        }
-      />
-    </div>
   </div>
   <Connect(InjectIntl(ProposalEditModal))
     categories={Array []}

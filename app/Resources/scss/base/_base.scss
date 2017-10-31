@@ -200,15 +200,15 @@ h3,
 
     .subtitle {
         color: $darkest-gray;
-        font-size: 15px;
-        font-weight: 300;
+        font-size: 16px;
+        font-weight: normal;
         padding-left: 12px;
+    }
 
-        i {
-            background-color: $light-blue;
-            color: $white;
-            font-size: 12px;
-            padding: 3px;
+    &.with-buttons {
+        > span {
+            display: inline-block;
+            margin-top: 2px;
         }
     }
 }

@@ -15,7 +15,6 @@ const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
     object: PropTypes.number,
-    isDraft: PropTypes.bool,
   },
 
   getInitialState() {

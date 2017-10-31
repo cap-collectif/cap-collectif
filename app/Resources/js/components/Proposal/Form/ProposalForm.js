@@ -443,7 +443,13 @@ export const ProposalForm = React.createClass({
     );
     return (
       <form id="proposal-form">
-        {form.description && <div dangerouslySetInnerHTML={{ __html: form.description }} />}
+        {proposal.isDraft ? (
+          <div className="mt-20">
+            <div dangerouslySetInnerHTML={{ __html: form.description }} />
+          </div>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: form.description }} />
+        )}
         <Input
           id="proposal_title"
           type="text"

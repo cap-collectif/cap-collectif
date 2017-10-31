@@ -92,7 +92,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
         $this->compute('UPDATE CapcoUserBundle:User u set u.proposalsCount = (
           SELECT count(p.id) FROM CapcoAppBundle:Proposal p
-          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0
+          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0 AND p.draft = 0
           GROUP BY p.author
         )');
 
