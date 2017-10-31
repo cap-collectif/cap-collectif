@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectsList /> should render correctly 1`] = `
-<Row
-  bsClass="row"
+<div
   className="project__preview"
-  componentClass="div"
 >
   <ProjectPreview
     hasNotParticipativeSteps={false}
@@ -24,5 +22,5 @@ exports[`<ProjectsList /> should render correctly 1`] = `
       }
     }
   />
-</Row>
+</div>
 `;

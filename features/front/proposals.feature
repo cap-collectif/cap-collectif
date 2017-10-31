@@ -179,7 +179,6 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   And I go to a proposal which is notifiable
   When I click the delete proposal button
   And I confirm proposal deletion
-  And I wait 3 seconds
   Then 1 mails should be sent
   And I should see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
 

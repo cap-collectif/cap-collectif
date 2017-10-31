@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { Row } from 'react-bootstrap';
 import ProjectPreview from '../Preview/ProjectPreview';
 
 type Props = {
@@ -27,7 +26,7 @@ export class ProjectsList extends React.Component<Props> {
 
     if (projects.length > 0) {
       return (
-        <Row className="project__preview">
+        <div className="project__preview">
           {projects.map((projectDetail, index) => {
             return (
               <ProjectPreview
@@ -37,7 +36,7 @@ export class ProjectsList extends React.Component<Props> {
               />
             );
           })}
-        </Row>
+        </div>
       );
     }
     return <p>Aucun projet</p>;
