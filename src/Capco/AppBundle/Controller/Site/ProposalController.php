@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProposalController extends Controller
 {
@@ -27,6 +28,10 @@ class ProposalController extends Controller
      */
     public function showProposalAction(Request $request, Project $project, CollectStep $currentStep, Proposal $proposal)
     {
+        if ($proposal->isDraft() && $proposal->getAuthor() !== $this->getUser()) {
+            throw new AccessDeniedException(sprintf('The proposal `%s` is in draft state and current user is not the creator.', $proposal->getId()));
+        }
+
         $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
 
