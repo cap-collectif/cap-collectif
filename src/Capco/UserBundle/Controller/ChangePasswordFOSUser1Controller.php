@@ -9,6 +9,6 @@ class ChangePasswordFOSUser1Controller extends BaseController
 {
     protected function getRedirectionUrl(UserInterface $user)
     {
-        return $this->generateUrl('app_homepage');
+        return $this->generateUrl('sonata_user_profile_show');
     }
 }

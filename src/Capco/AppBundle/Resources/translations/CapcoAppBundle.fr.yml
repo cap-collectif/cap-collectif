@@ -1391,3 +1391,7 @@ email:
       question: Si vous avez des questions concernant votre compte ou tout autre sujet, n'hésitez pas à nous contacter à cette adresse %email%.
       done: Bien cordialement,
       footer: Ce message vous a été adressé automatiquement par %sitename% via <a href="http://www.cap-collectif.com">Cap Collectif</a>.
+
+resetting:
+    flash:
+      success: Votre mot de passe a bien été configuré
