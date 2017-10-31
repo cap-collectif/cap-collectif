@@ -21,7 +21,6 @@ import DateTime from './DateTime';
 import Editor from './Editor';
 import Ranking from './Ranking';
 import MultipleChoiceCheckbox from './Checkbox';
-import MultipleChoiceRadio from './Radio';
 import ButtonGroup from './ButtonGroup';
 import ImageUpload from './ImageUpload';
 import Captcha from './Captcha';
@@ -78,7 +77,9 @@ type Props = {
   errors: Array<string>,
   choices: Array<any>,
   onChange: any,
+  radioChecked?: boolean,
   checkedValue: ?string,
+  maxLength: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -131,6 +132,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     image,
     medias,
     intl,
+    radioChecked,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -213,6 +215,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
             isReduxForm
+            errors={errors}
             {...props}
           />
         );
@@ -246,28 +249,8 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'radio') {
-      if (props.choices) {
-        // Custom radio type
-        const field = {};
-        field.id = props.id;
-        field.choices = props.choices;
-
-        return (
-          <MultipleChoiceRadio
-            value={value}
-            field={field}
-            label={null}
-            renderFormErrors={() => {}}
-            getGroupStyle={() => {}}
-            isReduxForm
-            checkedValue={props.checkedValue} // Ugly Hack because value is undefined (for compatibility)
-            {...props}
-          />
-        );
-      }
-
       formControl = (
-        <Radio value={value} {...props}>
+        <Radio value={value} {...props} checked={radioChecked}>
           {children}
         </Radio>
       );
@@ -313,6 +296,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           getGroupStyle={() => {}}
           isReduxForm
           labelClassName="h4"
+          onBlur={props.onBlur}
           {...props}
         />
       );
@@ -323,7 +307,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'textarea') {
-      formControl = <AutosizedTextarea value={value} {...props} />;
+      formControl = <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />;
     }
 
     if (popover) {
