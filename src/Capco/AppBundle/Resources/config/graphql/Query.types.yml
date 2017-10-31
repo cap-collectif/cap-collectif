@@ -24,6 +24,13 @@ Query:
                 type: "[ProposalForm!]!"
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('proposalForms')"
+            userNotificationsConfiguration:
+                type: "UserNotificationsConfiguration"
+                description: "Get an user notifications configuration"
+                args:
+                    userId:
+                        type: "ID!"
+                resolve: "@=resolver('user_notifications_configuration', [args])"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"
