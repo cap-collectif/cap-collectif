@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class ProfileNotificationsResolver implements ContainerAwareInterface
+class UserNotificationsConfigurationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 

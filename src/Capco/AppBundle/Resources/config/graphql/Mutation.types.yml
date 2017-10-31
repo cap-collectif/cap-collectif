@@ -2,6 +2,13 @@ Mutation:
     type: object
     config:
         fields:
+        # User notifications
+          changeUserNotificationsConfiguration:
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeUserNotificationsConfigurationInput
+                    payloadType: ChangeUserNotificationsConfigurationPayload
+                    mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, user])"
         # Proposal
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
