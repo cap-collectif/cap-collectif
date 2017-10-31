@@ -858,7 +858,7 @@ type Query {
   proposal(id: ID!): Proposal!
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
-  availableQuestionnaires: [Questionnaire!]
+  availableQuestionnaires: [Question!]
 }
 
 interface Question {
@@ -903,12 +903,6 @@ enum QuestionTypeValue {
   ranking
   medias
   button
-}
-
-type Questionnaire {
-  id: String!
-  title: String!
-  questions: [Question!]!
 }
 
 type QuestionnaireAbstractQuestion {

@@ -25,7 +25,6 @@ describe('<Checkbox />', () => {
 
     disabled: false,
     onChange: jest.fn(),
-    onBlur: jest.fn(),
     getGroupStyle: jest.fn(),
     renderFormErrors: jest.fn(),
   };

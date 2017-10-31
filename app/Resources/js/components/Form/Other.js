@@ -11,7 +11,6 @@ const Other = React.createClass({
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     isReduxForm: PropTypes.bool,
-    value: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -22,14 +21,14 @@ const Other = React.createClass({
 
   getInitialState() {
     return {
-      value: this.props.value || '',
-      checked: !!this.props.value,
+      value: '',
+      checked: false,
     };
   },
 
   componentDidUpdate() {
     // $FlowFixMe
-    const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       input.addEventListener(
         'blur',
@@ -47,19 +46,16 @@ const Other = React.createClass({
 
   onType(e) {
     const { onChange } = this.props;
-
     this.setState({
       value: e.target.value,
       checked: true,
     });
-
-    onChange(e, e.target.value);
+    onChange(e, this.state.value);
   },
 
   onCheckUncheck(e) {
     // $FlowFixMe
-    const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
-
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       if (e.target.checked) {
         input.focus();
@@ -87,7 +83,7 @@ const Other = React.createClass({
       checked: false,
     });
     // $FlowFixMe
-    const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
+    const input = ReactDOM.findDOMNode(this.textField.refFormControl);
     if (input instanceof HTMLInputElement) {
       input.value = '';
     }
@@ -95,8 +91,6 @@ const Other = React.createClass({
 
   render() {
     const { disabled, field } = this.props;
-    const { value } = this.state;
-
     const fieldName = `choices-for-field-${field.id}`;
 
     return (
@@ -121,7 +115,6 @@ const Other = React.createClass({
             bsSize="small"
             onChange={this.onType}
             placeholder="reply.your_response"
-            value={value}
             disabled={disabled}
           />
         </Col>

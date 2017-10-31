@@ -48,7 +48,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={4}
       title="proposal.admin.notation"
     >
-      <Relay(Connect(InjectIntl(ReduxForm)))
+      <Relay(Connect(ReduxForm))
         proposal={Object {}}
       />
     </Tab>

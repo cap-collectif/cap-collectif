@@ -28,6 +28,7 @@ Scenario: User update his comment and admin should be notified if the proposal h
   And I click the edit comment button
   And I wait 3 seconds
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
+  And I wait 3 seconds
   Then 2 mails should be sent
   And I should see mail with subject "Cap-Collectif — user a modifié un commentaire sur une proposition"
   And I should see mail containing "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
@@ -41,6 +42,7 @@ Scenario: User update his comment and admin should not be notified if the propos
   And I click the edit comment button
   And I wait 3 seconds
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
+  And I wait 3 seconds
   Then 0 mails should be sent
 
 @javascript @database

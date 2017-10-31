@@ -98,9 +98,6 @@ class ProposalAdmin extends Admin
             ], null, [
                 'property' => 'username',
             ])
-            ->add('district', null, [
-                'label' => 'admin.fields.proposal.district',
-            ])
             ->add('author', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.proposal.author',
             ], null, [
