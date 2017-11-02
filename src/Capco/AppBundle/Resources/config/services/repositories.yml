@@ -64,6 +64,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Opinion']
 
+  capco.opinion_version.repository:
+    class: Capco\AppBundle\Repository\OpinionVersionRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:OpinionVersion']
+
   capco.reporting.repository:
     class: Capco\AppBundle\Repository\ReportingRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -208,3 +213,8 @@ services:
     class: Capco\AppBundle\Repository\ProposalEvaluationRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalEvaluation']
+
+  capco.source.repository:
+    class: Capco\AppBundle\Repository\SourceRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Source']

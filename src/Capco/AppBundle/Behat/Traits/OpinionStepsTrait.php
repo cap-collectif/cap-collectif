@@ -7,45 +7,45 @@ trait OpinionStepsTrait
     protected static $opinion = [
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'collecte-des-avis',
-        'opinionTypeSlug' => 'les-causes-1',
+        'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-2',
     ];
 
     protected static $opinionInClosedStep = [
         'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
-        'opinionTypeSlug' => 'les-causes-2',
+        'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-51',
     ];
     protected static $opinionWithVersions = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
     ];
     protected static $opinionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
     ];
     protected static $opinionWithNoSources = [
         'projectSlug' => 'croissance-innovation-disruption',
         'stepSlug' => 'collecte-des-avis',
-        'opinionTypeSlug' => 'les-causes-1',
+        'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-sans-sources',
     ];
     protected static $version = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
         'versionSlug' => 'modification-1',
     ];
     protected static $opinionVersionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
         'versionSlug' => 'modification-2',
     ];
@@ -53,14 +53,14 @@ trait OpinionStepsTrait
     protected static $versionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' => 'section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
         'versionSlug' => 'modification-2',
     ];
     protected static $versionInClosedStep = [
         'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
-        'opinionTypeSlug' => 'les-causes-2',
+        'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-51',
         'versionSlug' => 'version-sur-une-etape-fermee',
     ];

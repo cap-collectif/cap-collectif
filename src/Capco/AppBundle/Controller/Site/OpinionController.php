@@ -17,9 +17,9 @@ class OpinionController extends Controller
 {
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/sort/{opinionsSort}/page/{page}", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}/", name="app_project_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="app_consultation_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
-     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/sort/{opinionsSort}/page/{page}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
+     * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}/sort/{opinionsSort}", name="app_consultation_show_opinions_sorted", requirements={"page" = "\d+","opinionsSort" = "last|old|comments|favorable|votes|positions|random", "opinionTypeSlug" = ".+"}, defaults={"page" = 1})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}})
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
@@ -42,9 +42,7 @@ class OpinionController extends Controller
                 'opinionTypeSlug' => $opinionType->getSlug(),
                 'page' => $page,
             ]);
-        $opinions = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getByOpinionTypeOrdered($opinionType->getId(), 10, $page, $filter);
+        $opinions = $this->get('capco.opinion.repository')->getByOpinionTypeOrdered($opinionType->getId(), 10, $page, $filter);
 
         return [
             'currentUrl' => $currentUrl,
@@ -66,17 +64,17 @@ class OpinionController extends Controller
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
      * @Cache(smaxage=60, public=true)
      */
-    public function showOpinionVersionAction(Request $request, string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, string $versionSlug)
+    public function showOpinionVersionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, string $versionSlug)
     {
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
-        $version = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionVersion')->findOneBySlug($versionSlug);
+        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
+        $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version || !$version->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $currentStep = $opinion->getStep();
-        $sources = $this->getDoctrine()->getRepository('CapcoAppBundle:Source')->getByOpinionJoinUserReports($opinion, $this->getUser());
+        $sources = $this->get('capco.source.repository')->getByOpinionJoinUserReports($opinion, $this->getUser());
         $backLink = $this->generateUrl('app_project_show_opinion', [
           'projectSlug' => $projectSlug,
           'stepSlug' => $stepSlug,
@@ -104,9 +102,9 @@ class OpinionController extends Controller
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      * @Cache(smaxage=60, public=true)
      */
-    public function showOpinionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, Request $request)
+    public function showOpinionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug)
     {
-        $opinion = $this->getDoctrine()->getRepository('CapcoAppBundle:Opinion')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
+        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
 
         if (!$opinion || !$opinion->canDisplay()) {
             throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
@@ -115,7 +113,7 @@ class OpinionController extends Controller
         $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
         $currentStep = $opinion->getStep();
 
-        $steps = $this->getDoctrine()->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
+        $steps = $this->get('capco.abstract_step.repository')->getByProjectSlug($projectSlug);
 
         $urlResolver = $this->get('capco.url.resolver');
 
