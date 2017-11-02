@@ -136,7 +136,7 @@ const ProjectListFilter = React.createClass({
     const columnWidth = 12 / filters.length;
 
     return (
-      <Row>
+      <Row className="mb-35">
         {filters.map((filter, index) => {
           return (
             <Col key={index} xs={12} sm={columnWidth}>

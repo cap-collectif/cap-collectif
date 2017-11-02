@@ -17,11 +17,12 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 `;
 
 exports[`<ProposalList /> should render a proposal list 1`] = `
-<div>
-  <Row
-    bsClass="row"
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <ul
     className="media-list proposal-preview-list opinion__list"
-    componentClass="ul"
   >
     <ProposalPreview
       proposal={
@@ -55,6 +56,6 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
         }
       }
     />
-  </Row>
-</div>
+  </ul>
+</Row>
 `;

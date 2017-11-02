@@ -74,5 +74,5 @@ Query:
                         type: "Int!"
                 resolve: "@=resolver('query_question', [args])"
             availableQuestionnaires:
-                type: "[Question!]"
+                type: "[Questionnaire!]"
                 resolve: "@=resolver('query_get_available_questionnaires')"

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
@@ -12,10 +12,12 @@ import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
+import { MultipleChoiceRadio } from '../../Form/MultipleChoiceRadio';
 
 type FormValues = Object;
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
 type Props = RelayProps & {
+  intl: intlShape,
   handleSubmit: () => void,
   invalid: boolean,
   pristine: boolean,
@@ -24,6 +26,8 @@ type Props = RelayProps & {
   initialValues: Object,
   fields: Object,
   evaluationForm: Object,
+  change: Function,
+  responses: Array<Object>,
 };
 
 const formName = 'proposal-admin-evaluation';
@@ -43,33 +47,33 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   );
 
   if (props.proposal.form.evaluationForm) {
+    const questions = props.proposal.form.evaluationForm.questions;
     const responses = values.responses.map(resp => {
-      const questions = props.proposal.form.evaluationForm.questions;
       const actualQuestion = questions.find(question => question.id === String(resp.question));
       const questionType = actualQuestion.type;
 
       let value;
-      if (
-        questionType === 'ranking' ||
-        questionType === 'radio' ||
-        questionType === 'checkbox' ||
-        questionType === 'button'
-      ) {
+      if (questionType === 'ranking' || questionType === 'button') {
         value = JSON.stringify({
           labels: Array.isArray(resp.value) ? resp.value : [resp.value],
           other: null,
         });
+      } else if (questionType === 'checkbox' || questionType === 'radio') {
+        value = JSON.stringify(resp.value);
       } else {
         value = resp.value;
       }
+
       return {
         question: actualQuestion.id,
         value,
       };
     });
+
     const variablesEvaluation = {
       input: { proposalId: props.proposal.id, responses },
     };
+
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
   }
 
@@ -82,21 +86,83 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 const validate = (values: FormValues, { proposal }: Props) => {
   const errors = {};
+  const responsesArrayErrors = [];
   const questions = proposal.form.evaluationForm ? proposal.form.evaluationForm.questions : [];
 
-  const responsesArrayErrors = [];
   if (values.responses) {
     values.responses.forEach((response, index) => {
       const currentQuestion = questions.find(question => question.id === String(response.question));
 
+      if (response.value && currentQuestion && currentQuestion.validationRule) {
+        const rule = currentQuestion.validationRule;
+        let currentLength = 0;
+        if (currentQuestion.type === 'checkbox' || currentQuestion.type === 'radio') {
+          if (response.value.labels) {
+            currentLength = response.value.labels.length;
+          }
+
+          if (response.value.other !== null) {
+            currentLength += 1;
+          }
+        } else {
+          currentLength = response.value.length;
+        }
+
+        if (rule.type === 'min' && currentLength < rule.number) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_min',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+
+        if (rule.type === 'max' && currentLength > rule.number) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_max',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+
+        if (rule.type === 'equal' && currentLength !== Number(rule.number)) {
+          const responseError = {};
+          responseError.value = {
+            id: 'reply.constraints.choices_equal',
+            values: {
+              nb: rule.number,
+            },
+          };
+
+          responsesArrayErrors[index] = responseError;
+        }
+      }
+
       if (currentQuestion && currentQuestion.required) {
-        if (!response.value || response.value.length === 0) {
+        let currentValue = response.value;
+
+        if (currentQuestion.type === 'checkbox' || currentQuestion.type === 'radio') {
+          if (response.value && response.value.labels !== null) {
+            currentValue = response.value.labels;
+          } else if (response.value && response.value.other !== null) {
+            currentValue = response.value.other;
+          } else {
+            currentValue = null;
+          }
+        }
+
+        if (!currentValue || currentValue.length === 0) {
           const responseError = {};
           responseError.value = 'global.constraints.notBlank';
           responsesArrayErrors[index] = responseError;
         }
-      } else if (currentQuestion && currentQuestion.validationRule) {
-        // todo
       }
     });
   }
@@ -122,25 +188,38 @@ const formattedChoicesInField = field => {
 const renderResponses = ({
   fields,
   evaluationForm,
-  initialValues,
+  responses,
+  change,
+  intl,
 }: {
   fields: Object,
   evaluationForm: Object,
-  initialValues: Object,
+  responses: Array<Object>,
+  change: Function,
+  intl: intlShape,
 }) => (
   <div>
     {fields.map((member, index) => {
       const field = evaluationForm.questions[index];
       const key = field.slug;
       const inputType = field.type || 'text';
-      const labelMessage = field.title;
       const isOtherAllowed = field.isOtherAllowed;
+
+      let labelMessage = field.title;
+      let intlMessage;
+      if (field.required) {
+        intlMessage = intl.formatMessage({ id: 'global.mandatory' });
+      } else {
+        intlMessage = intl.formatMessage({ id: 'global.optional' });
+      }
+
+      labelMessage += ` <span class="small warning">${intlMessage}</span>`;
       const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
         case 'medias': {
           return (
-            <p className="text-danger">
+            <p className="text-danger" key={`${member}-container`}>
               <Glyphicon bsClass="glyphicon" glyph="alert" />
               <span className="ml-10">
                 <FormattedMessage id="evaluation_form.constraints.medias" />
@@ -149,8 +228,12 @@ const renderResponses = ({
           );
         }
         default: {
+          let response;
+          if (responses) {
+            response = responses[index].value;
+          }
+
           let choices = [];
-          let checkedValue;
           if (
             inputType === 'ranking' ||
             inputType === 'radio' ||
@@ -159,9 +242,22 @@ const renderResponses = ({
           ) {
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
-              checkedValue = initialValues.responses[index].value;
+              return (
+                <div key={`${member}-container`}>
+                  <MultipleChoiceRadio
+                    name={member}
+                    helpText={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    label={label}
+                    choices={choices}
+                    value={response}
+                    change={change}
+                  />
+                </div>
+              );
             }
           }
+
           return (
             <Field
               key={key}
@@ -175,7 +271,6 @@ const renderResponses = ({
               placeholder="reply.your_response"
               choices={choices}
               label={label}
-              checkedValue={checkedValue}
             />
           );
         }
@@ -186,7 +281,7 @@ const renderResponses = ({
 
 export class ProposalAdminNotationForm extends React.Component<Props> {
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal, initialValues } = this.props;
+    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     return (
@@ -255,7 +350,9 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 name="responses"
                 component={renderResponses}
                 evaluationForm={evaluationForm}
-                initialValues={initialValues}
+                responses={this.props.responses}
+                change={this.props.change}
+                intl={this.props.intl}
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
@@ -273,13 +370,16 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
   }
 }
 
-const form = reduxForm({
-  onSubmit,
-  validate,
-  form: formName,
-})(ProposalAdminNotationForm);
+const form = injectIntl(
+  reduxForm({
+    onSubmit,
+    validate,
+    form: formName,
+  })(ProposalAdminNotationForm),
+);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
+  responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,
     likers: props.proposal.likers.map(u => ({
@@ -300,12 +400,20 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
                 let responseValue = response.value;
 
                 const questionType = response.question.type;
-                if (questionType === 'radio' || questionType === 'button') {
+                if (questionType === 'button') {
                   responseValue = JSON.parse(response.value).labels[0];
                 }
 
-                if (questionType === 'checkbox' || questionType === 'ranking') {
+                if (questionType === 'radio') {
+                  responseValue = JSON.parse(response.value);
+                }
+
+                if (questionType === 'ranking') {
                   responseValue = JSON.parse(response.value).labels;
+                }
+
+                if (questionType === 'checkbox') {
+                  responseValue = JSON.parse(response.value);
                 }
 
                 return {

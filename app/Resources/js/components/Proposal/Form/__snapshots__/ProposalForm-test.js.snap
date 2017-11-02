@@ -101,6 +101,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         </span>
       </span>
     }
+    maxLength="140"
     type="textarea"
     valueLink={
       Object {
@@ -352,6 +353,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         </span>
       </span>
     }
+    maxLength="140"
     type="textarea"
     valueLink={
       Object {

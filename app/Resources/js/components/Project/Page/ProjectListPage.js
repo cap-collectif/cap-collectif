@@ -26,27 +26,25 @@ export const ProjectListPage = React.createClass({
     const projects = project.visibleProjects.map(id => project.projectsById[id]);
     return (
       <div>
+        <ProjectListFilter projectTypes={project.projectTypes || []} />
         <Row>
-          <ProjectListFilter projectTypes={project.projectTypes || []} />
+          <Loader show={project.isLoading}>
+            <ProjectList projects={projects} />
+            {features.projects_form &&
+              project.count > 0 && (
+                <Pagination
+                  nbPages={project.pages}
+                  current={project.page}
+                  onChange={wantedPage => {
+                    if (wantedPage !== project.page) {
+                      dispatch(changePage(wantedPage));
+                      dispatch(fetchProjects());
+                    }
+                  }}
+                />
+              )}
+          </Loader>
         </Row>
-        <br />
-        <br />
-        <Loader show={project.isLoading}>
-          <ProjectList projects={projects} />
-          {features.projects_form &&
-            project.count > 0 && (
-              <Pagination
-                nbPages={project.pages}
-                current={project.page}
-                onChange={wantedPage => {
-                  if (wantedPage !== project.page) {
-                    dispatch(changePage(wantedPage));
-                    dispatch(fetchProjects());
-                  }
-                }}
-              />
-            )}
-        </Loader>
       </div>
     );
   },
