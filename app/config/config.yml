@@ -55,6 +55,7 @@ translation_adapter_loco:
   projects:
     cap-collectif:
       api_key: "%loco_key%"
+      domains: ['CapcoAppBundle', 'validators']
 
 translation:
   locales: "%locales%"
