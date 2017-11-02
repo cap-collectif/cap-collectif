@@ -439,8 +439,6 @@ class ProposalsController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $proposal->setEnabled(false);
-        $em->persist($proposal);
         $em->remove($proposal);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());

@@ -1250,7 +1250,7 @@ Scenario: logged in API client wants to remove a proposal and ensure that its pr
   Given I am logged in to api as user
   When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/proposal12"
   Then the JSON response status code should be 204
-  And proposal with id "proposal12" should be disable
+  And proposal with id "proposal12" should be deleted
 
 # Report
 @database
