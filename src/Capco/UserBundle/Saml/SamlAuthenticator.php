@@ -28,11 +28,15 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 
     public function getAuthenticationAttribute()
     {
-        if ($this->samlIdp === 'oda') {
+        if ('oda' === $this->samlIdp) {
             return 'oda_id';
         }
-        if ($this->samlIdp === 'daher') {
+        if ('daher' === $this->samlIdp) {
             return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn';
+        }
+
+        if ('afd-interne' === $this->samlIdp) {
+            return 'id';
         }
 
         throw new \Exception('Could not find your authentication attribute.');
@@ -43,7 +47,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $authAttribute = $this->getAuthenticationAttribute();
         if (!array_key_exists($authAttribute, $attributes)) {
             throw new MissingSamlAuthAttributeException(
-                sprintf("Attribute '%s' was not found in SAMLResponse", $authAttribute)
+                sprintf("Attribute '%s' was not found in SAMLResponse '%s'", $authAttribute, print_r($attributes, true))
             );
         }
 
