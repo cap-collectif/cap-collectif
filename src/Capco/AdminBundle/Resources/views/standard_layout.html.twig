@@ -22,12 +22,14 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript">window.CKEDITOR_BASEPATH = '/js/ckeditor/';</script>
+    <script type="text/javascript">
+      window.CKEDITOR_BASEPATH = '/js/ckeditor/';
+      window.locale = "{{ intl_locale() }}";
+    </script>
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-    window.locale = "{{ intl_locale() }}";
-    var App = require('Resources/js/app').default;
+    var App = require('Resowindow.localeurces/js/app').default;
     </script>
 
     {# Sonata javascript #}
