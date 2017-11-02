@@ -107,7 +107,7 @@ class ProposalsController extends FOSRestController
             ->setDraft($isDraft)
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
-            ->setEnabled(true)
+            ->setEnabled($isDraft ? false : true)
         ;
 
         if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
@@ -352,7 +352,9 @@ class ProposalsController extends FOSRestController
 
         $isDraft = filter_var($request->request->get('draft', false), FILTER_VALIDATE_BOOLEAN);
         $request->request->remove('draft');
-        $proposal->setDraft($isDraft);
+        $proposal
+            ->setDraft($isDraft)
+            ->setEnabled($isDraft ? false : true);
 
         if ($this->getUser() !== $proposal->getAuthor()) {
             throw new AccessDeniedException();

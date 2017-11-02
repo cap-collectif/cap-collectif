@@ -157,21 +157,21 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedForSelectionStep(SelectionStep $step): int
-    {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
-            ->select('COUNT(proposal.id) as proposalsCount')
-            ->leftJoin('proposal.selections', 'selections')
-            ->leftJoin('selections.selectionStep', 'selectionStep')
-            ->andWhere('proposal.isTrashed = false')
-            ->andWhere('proposal.enabled = true')
-            ->andWhere('proposal.draft = false')
-            ->andWhere('selectionStep.id = :stepId')
-            ->setParameter('stepId', $step->getId());
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
+//    public function countPublishedForSelectionStep(SelectionStep $step): int
+//    {
+//        $qb = $this
+//            ->getIsEnabledQueryBuilder()
+//            ->select('COUNT(proposal.id) as proposalsCount')
+//            ->leftJoin('proposal.selections', 'selections')
+//            ->leftJoin('selections.selectionStep', 'selectionStep')
+//            ->andWhere('proposal.isTrashed = false')
+//            ->andWhere('proposal.enabled = true')
+//            ->andWhere('proposal.draft = false')
+//            ->andWhere('selectionStep.id = :stepId')
+//            ->setParameter('stepId', $step->getId());
+    //
+//        return (int) $qb->getQuery()->getSingleScalarResult();
+//    }
 
     public function getOne(string $slug)
     {
@@ -433,7 +433,7 @@ class ProposalRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.enabled = true')
+        //    ->andWhere($alias . '.enabled = true')
             ->andWhere($alias . '.expired = false')
             ->andWhere($alias . '.draft = false');
     }

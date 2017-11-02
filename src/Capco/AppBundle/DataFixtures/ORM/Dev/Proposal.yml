@@ -192,7 +192,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 1
   proposal13:
     id: proposal13
-    title: Proposition plus votable
+    title: Proposition plus votable 2
     body: |
        <p><text(100)></p>
     enabled: true
@@ -259,7 +259,7 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal19
     title: Proposition 19
     body: <p><text(100)></p>
-    enabled: true
+    enabled: false
     isTrashed: false
     draft: true
     author: '@user501'
@@ -271,7 +271,7 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal20
     title: Proposition 20
     body: <p><text(100)></p>
-    enabled: true
+    enabled: false
     isTrashed: false
     draft: true
     author: '@user1'
