@@ -874,12 +874,8 @@ type Query {
   proposal(id: ID!): Proposal!
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
-<<<<<<< HEAD
   availableQuestionnaires: [Questionnaire!]
-=======
-  availableQuestionnaires: [Question!]
   draftProposalsForUserInStep(stepId: ID!): [Proposal!]
->>>>>>> Add many stuff for proposal draft
 }
 
 interface Question {
