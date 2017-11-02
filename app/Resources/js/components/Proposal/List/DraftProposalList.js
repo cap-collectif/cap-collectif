@@ -11,7 +11,13 @@ type Props = {
   step: Object,
 };
 
-const renderDraftProposals = ({ error, props }: { error: ?Error, props: any }) => {
+const renderDraftProposals = ({
+  error,
+  props,
+}: {
+  error: ?Error,
+  props: ?{ draftProposalsForUserInStep?: Array<{ title: string, show_url: string }> },
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
@@ -22,19 +28,19 @@ const renderDraftProposals = ({ error, props }: { error: ?Error, props: any }) =
       'list-group': true,
       'mb-40': true,
     });
+
     // eslint-disable-next-line react/prop-types
-    if (props.draftProposalsForUserInStep.length === 0) {
+    if (!props.draftProposalsForUserInStep || props.draftProposalsForUserInStep.length === 0) {
       return null;
     }
 
     return (
       <DraftBox>
         <ul className={classes}>
-          {props.draftProposalsForUserInStep.map((
-            // eslint-disable-line
-            proposal,
-            i,
-          ) => <DraftProposalPreview key={`draft-proposal-${i}`} proposal={proposal} />)}
+          {// eslint-disable-next-line react/prop-types
+          props.draftProposalsForUserInStep.map((proposal, i) => (
+            <DraftProposalPreview key={`draft-proposal-${i}`} proposal={proposal} />
+          ))}
         </ul>
       </DraftBox>
     );

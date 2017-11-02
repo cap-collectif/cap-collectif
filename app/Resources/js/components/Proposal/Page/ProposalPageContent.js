@@ -48,7 +48,7 @@ export const ProposalPageContent = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div className="block">
-          <h2 className="h2 with-buttons no-margin">
+          <h2 className="h2 with-buttons">
             {<FormattedMessage id="proposal.tabs.content" />}
             <div className="pull-right">
               <EditButton

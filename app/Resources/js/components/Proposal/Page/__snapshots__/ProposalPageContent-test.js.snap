@@ -8,7 +8,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
     className="block"
   >
     <h2
-      className="h2 with-buttons no-margin"
+      className="h2 with-buttons"
     >
       <FormattedMessage
         id="proposal.tabs.content"
