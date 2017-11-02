@@ -52,7 +52,7 @@ Scenario: Can not create an opinion of non-contribuable type
     When I click the "#report-opinion-opinion2-button" element
     And I fill the reporting form
     And I submit the reporting form
-    Then I should see "alert.success.report.opinion" in the "#main" element
+    Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
 
   @javascript @database
   Scenario: Author of an opinion loose their votes when updating it

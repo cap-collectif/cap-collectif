@@ -255,7 +255,7 @@ Scenario: Logged in user wants to vote for a comment of an idea
   And The first comment vote counter should be "1"
   And I vote for the first comment
   And I wait 1 seconds
-  And I should see "idea.vote.delete_success" in the "#main" element
+  And I should see "idea.vote.delete_success" in the "#global-alert-box" element
   And The first comment vote counter should be "0"
 
 # Votes
@@ -273,7 +273,7 @@ Scenario: Logged in user wants to vote and unvote for an idea with a comment
   And I should see my comment in the idea comments list
   And I should see my vote in the idea votes list
   And I submit the idea vote form
-  And I should see "idea.vote.delete_success" in the "#main" element
+  And I should see "idea.vote.delete_success" in the "#global-alert-box" element
   Then the idea should have 2 votes
   And I should not see my vote in the idea votes list
 

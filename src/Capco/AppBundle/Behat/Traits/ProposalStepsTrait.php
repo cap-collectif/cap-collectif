@@ -318,7 +318,7 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @Then I should see the proposal private I should see the proposal private field
+     * @Then I should see the proposal private field
      */
     public function iShouldSeeTheProposalPrivateField()
     {

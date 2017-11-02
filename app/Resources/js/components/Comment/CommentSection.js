@@ -174,7 +174,7 @@ const CommentSection = React.createClass({
           <FormattedMessage id="proposal.tabs.comments" />
         </h3>
         <Row>
-          <Col componentClass="h4" sm={6}>
+          <Col componentClass="h4" id="proposal-page-comments-counter" sm={6}>
             <FormattedHTMLMessage
               id="comment.list"
               values={{
