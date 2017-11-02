@@ -38,7 +38,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
       id="report-modal-title-lg"
     >
       <FormattedMessage
-        id="Créer une phase de réalisation"
+        id="realisation_step_modal.create.title"
         values={Object {}}
       />
     </ModalTitle>

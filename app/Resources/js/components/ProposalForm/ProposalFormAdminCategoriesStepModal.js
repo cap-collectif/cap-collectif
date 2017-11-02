@@ -26,7 +26,7 @@ export const ProposalFormAdminCategoriesStepModal = React.createClass({
             id="report-modal-title-lg"
             children={
               <FormattedMessage
-                id={!isCreating ? 'Créer une catégorie' : 'Modifier la catégorie'}
+                id={!isCreating ? 'category_modal.create.title' : 'category_modal.update.title'}
               />
             }
           />

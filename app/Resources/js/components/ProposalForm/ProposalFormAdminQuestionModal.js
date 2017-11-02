@@ -39,7 +39,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
           <Modal.Title
             id="proposal-form-admin-question-modal-title-lg"
             children={
-              <FormattedMessage id={!isCreating ? 'Créer une question' : 'Modifier la question'} />
+              <FormattedMessage id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'} />
             }
           />
         </Modal.Header>
@@ -66,9 +66,11 @@ export const ProposalFormAdminQuestionModal = React.createClass({
             component={component}
             disabled={isCreating}>
             <option value="" disabled>
-              Sélectionner un type
+              <FormattedMessage id="admin.fields.questionnaire_abstractquestion.questions_add" />
             </option>
-            <option value="simple">Texte Libre</option>
+            <option value="simple">
+              <FormattedMessage id="global.question.types.text" />
+            </option>
             <option value="media">
               <FormattedMessage id="global.question.types.medias" />
             </option>

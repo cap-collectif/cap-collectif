@@ -38,7 +38,10 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
       componentClass="h4"
       id="contained-modal-title-lg"
     >
-      Modifier un champ supplémentaire
+      <FormattedMessage
+        id="registration_question_modal.edit.title"
+        values={Object {}}
+      />
     </ModalTitle>
   </ModalHeader>
   <ModalBody

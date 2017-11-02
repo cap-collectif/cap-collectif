@@ -42,7 +42,7 @@ Scenario: Can not create an opinion of non-contribuable type
       | stepSlug    | collecte-des-avis                |
     And I wait 2 seconds
     When I click the "#btn-add--les-causes" element
-    Then I should see "user.login.popover.title" in the "#main" element
+    Then I should see a "#login-popover" element
 
   @javascript @database
   Scenario: Logged in user can report an opinion
@@ -83,7 +83,7 @@ Scenario: Non author of an opinion wants to update it
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
   And I wait 1 seconds
-  Then I should not see "Modifier" in the ".opinion__description .opinion__buttons" element
+  Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
 
 @javascript
 Scenario: Anonymous wants to see opinion appendix

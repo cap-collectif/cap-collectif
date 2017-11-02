@@ -26,7 +26,7 @@ export const ProposalAdminRealisationStepModal = React.createClass({
             children={
               <FormattedMessage
                 id={
-                  isCreating ? 'Créer une phase de réalisation' : 'Modifier la phase de réalisation'
+                  isCreating ? 'realisation_step_modal.create.title' : 'realisation_step_modal.update.title'
                 }
               />
             }

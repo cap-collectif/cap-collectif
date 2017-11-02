@@ -29,7 +29,9 @@ export const UpdateRegistrationQuestionModal = React.createClass({
         bsSize="large"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">Modifier un champ supplémentaire</Modal.Title>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id="registration_question_modal.edit.title" />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <UpdateRegistrationQuestionForm />

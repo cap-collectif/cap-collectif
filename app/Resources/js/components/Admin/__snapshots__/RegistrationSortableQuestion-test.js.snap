@@ -40,7 +40,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly 1`] = `
       disabled={false}
       onClick={[Function]}
     >
-      Supprimer
+      <FormattedMessage
+        id="glodal.delete"
+        values={Object {}}
+      />
     </Button>
     <Button
       active={false}
@@ -56,7 +59,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly 1`] = `
         }
       }
     >
-      Modifier
+      <FormattedMessage
+        id="glodal.edit"
+        values={Object {}}
+      />
     </Button>
   </div>
 </ListGroupItem>
@@ -102,7 +108,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly when not a superAdmi
       disabled={true}
       onClick={null}
     >
-      Supprimer
+      <FormattedMessage
+        id="glodal.delete"
+        values={Object {}}
+      />
     </Button>
     <Button
       active={false}
@@ -118,7 +127,10 @@ exports[`<RegistrationSortableQuestion /> renders correctly when not a superAdmi
         }
       }
     >
-      Modifier
+      <FormattedMessage
+        id="glodal.edit"
+        values={Object {}}
+      />
     </Button>
   </div>
 </ListGroupItem>

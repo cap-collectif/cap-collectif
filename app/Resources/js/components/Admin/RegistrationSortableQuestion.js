@@ -43,14 +43,14 @@ export const RegistrationSortableQuestion = React.createClass({
             className="pull-right"
             disabled={!isSuperAdmin}
             onClick={!isSuperAdmin ? null : () => deleteField()}>
-            Supprimer
+            <FormattedMessage id="glodal.delete" />
           </Button>
           <Button
             disabled={!isSuperAdmin}
             style={{ marginRight: 5 }}
             className="pull-right"
             onClick={!isSuperAdmin ? null : () => updateField()}>
-            Modifier
+            <FormattedMessage id="glodal.edit" />
           </Button>
         </div>
       </ListGroupItem>

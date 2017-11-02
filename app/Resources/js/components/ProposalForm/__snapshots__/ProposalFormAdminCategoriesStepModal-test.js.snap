@@ -38,7 +38,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       id="report-modal-title-lg"
     >
       <FormattedMessage
-        id="Modifier la catégorie"
+        id="category_modal.update.title"
         values={Object {}}
       />
     </ModalTitle>
