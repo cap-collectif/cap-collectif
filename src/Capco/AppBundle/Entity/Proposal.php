@@ -58,6 +58,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SummarizableTrait;
     use DraftableTrait;
 
+    const STATE_DRAFT = 'draft';
+    const STATE_ENABLED = 'published';
+    const STATE_TRASHED = 'trashed';
+    const STATE_DISABlED = 'unpublished';
+    const STATE_DELETED = 'deleted';
+
     public static $ratings = [1, 2, 3, 4, 5];
 
     /**
@@ -902,7 +908,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $selections = $this->getSelections()->toArray();
 
         usort($selections, function ($step, $nextStep) {
-            return  $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
+            return $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
         });
 
         $findStatus = null;
@@ -923,6 +929,31 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         }
 
         return $this->getStatus();
+    }
+
+    public function state()
+    {
+        if ($this->getDeletedAt() !== null) {
+            return self::STATE_DELETED;
+        }
+
+        if ($this->isTrashed()) {
+            return self::STATE_TRASHED;
+        }
+
+        if ($this->isDeleted() || !$this->isEnabled()) {
+            return self::STATE_DISABlED;
+        }
+
+        if ($this->isDraft()) {
+            return self::STATE_DRAFT;
+        }
+
+        if ($this->isEnabled()) {
+            return self::STATE_ENABLED;
+        }
+
+        throw new \Exception(sprintf('no current state was found for this proposition %s', $this->getId()));
     }
 
     public function getProposalEvaluation()

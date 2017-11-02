@@ -828,20 +828,23 @@ type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithA
 }
 
 enum PublicationStatus {
-  # Was pubicly visible, but has expired.
+  # Was Publicly visible, but has expired.
   EXPIRED
 
-  # Normal status, publicly visible
+  # Normal status, Publicly visible
   PUBLISHED
 
-  # Pubicly visible in the trash bin
+  # Publicly visible in the trash bin
   TRASHED
 
   # In the trash bin, content not visible
   TRASHED_NOT_VISIBLE
 
-  # Not pubicly visible, deleted by author
+  # Not publicly visible, deleted by author
   DELETED
+
+  # Draft, not publicly visible, only showed for his author.
+  DRAFT
 
   # Visible only by the author, he is not yet confirmed !
   NOT_ACCOUNTED

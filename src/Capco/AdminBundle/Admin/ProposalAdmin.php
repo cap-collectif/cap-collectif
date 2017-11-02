@@ -27,7 +27,6 @@ class ProposalAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
-        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         $listMapper
             ->add('fullReference', null, [
@@ -52,26 +51,18 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.district',
             ])
             ->add('lastStatus', null, [
-                'label' => 'admin.fields.proposal.last_status',
+                'label' => 'admin.fields.proposal.status',
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
-            ->add('isTrashed', null, [
-                'editable' => true,
-                'label' => 'admin.fields.proposal.isTrashed',
+            ->add('state', null, [
+                'label' => 'admin.fields.proposal.state.label',
+                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
             ]);
-
-        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $listMapper->add('deletedAt', null, [
-                'label' => 'admin.fields.proposal.deleted',
-            ]);
-        }
 
         $listMapper
-            ->add('updatedAt', 'datetime', [
-                'label' => 'admin.fields.proposal.updated_at',
-            ])
-            ->add('updateAuthor', null, [
-                'label' => 'admin.fields.proposal.updated_by',
+            ->add('updatedInfo', 'datetime', [
+                'label' => 'admin.fields.proposal.updated',
+                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ]);
     }
 
@@ -91,7 +82,10 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.enabled',
             ])
             ->add('isTrashed', null, [
-                'label' => 'admin.fields.proposal.isTrashed',
+                'label' => 'admin.fields.proposal.is_trashed',
+            ])
+            ->add('draft', null, [
+                'label' => 'admin.fields.proposal.draft',
             ])
             ->add('updateAuthor', 'doctrine_orm_model_autocomplete', [
                 'label' => 'admin.fields.proposal.updateAuthor',

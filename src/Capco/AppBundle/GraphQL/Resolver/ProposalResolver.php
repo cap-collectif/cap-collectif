@@ -105,6 +105,9 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolveProposalPublicationStatus(Proposal $proposal): string
     {
+        if ($proposal->isDraft()) {
+            return 'DRAFT';
+        }
         if ($proposal->isDeleted()) {
             return 'DELETED';
         }
