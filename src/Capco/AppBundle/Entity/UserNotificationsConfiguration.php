@@ -57,4 +57,11 @@ class UserNotificationsConfiguration
     {
         $this->onProposalCommentMail = $onProposalCommentMail;
     }
+
+    public function getNotificationsValues(): array
+    {
+        return [
+            'onProposalCommentMail' => $this->onProposalCommentMail,
+        ];
+    }
 }

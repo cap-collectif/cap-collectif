@@ -22,6 +22,7 @@
         'isEvaluer': app.user.isEvaluer,
         'email': app.user.email,
         'newEmailToConfirm': app.user.newEmailToConfirm,
+        'notificationsConfiguration': app.user.notificationsConfiguration.notificationsValues,
         'media': app.user.Media
         ? {
             'url': media_public_url(app.user.Media, 'default_avatar')
@@ -48,6 +49,6 @@
   },
 }
 %}
-
+{% dump app.user %}
 {% set state = state|merge(data is defined ? data : {}) %}
 {{ redux_store('appStore', state) }}

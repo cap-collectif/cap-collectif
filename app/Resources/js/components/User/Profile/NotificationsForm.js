@@ -1,44 +1,79 @@
-// @flow
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import type { State } from '../../../types';
+/**
+ * @flow
+ */
+import React, {Component} from 'react';
+import {injectIntl, FormattedMessage} from 'react-intl';
+import {Table} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {reduxForm, Field} from 'redux-form';
+import component from '../../Form/Field';
+import type { NotificationForm_configuration } from "./NotificationForm_configuration";
+import type { GlobalState } from '../../../types'
 
-export const form = 'notifications';
+type FormValues = Object;
+type DefaultProps = void;
+type Props = {
+  notificationsConfiguration: NotificationForm_configuration
+};
+type State = void;
 
-export const NotificationsForm = React.createClass({
-  propTypes: {
-    newEmailToConfirm: PropTypes.string,
-    error: PropTypes.string,
-    initialValues: PropTypes.object.isRequired,
-    confirmationEmailResent: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-  },
+const formName = 'user-notifications';
+
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  console.log(props, values);
+};
+
+export class NotificationsForm extends Component<Props, State> {
+  static defaultProps: DefaultProps;
 
   render() {
+    const {notificationsConfiguration} = this.props;
+    const {onProposalCommentMail} = notificationsConfiguration;
+    console.log(this.props);
     return (
       <form
-        onSubmit={() => {
-          console.log('submit called');
-        }}
+        onSubmit={onSubmit}
         className="form-horizontal">
-        <h1>Jsuis le form des notifs</h1>
+        <Table>
+          <thead>
+          <tr>
+            <th>
+              <FormattedMessage id="profile.account.notifications.title"/>
+            </th>
+            <th>
+              <FormattedMessage id="profile.account.notifications.email"/>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <FormattedMessage id="profile.account.notifications.proposal_comment"/>
+            </td>
+            <td>
+              <Field name="onProposalCommentMail"
+                     component={component}
+                     type="checkbox"
+                     id="proposal-comment-mail"
+                     checked={onProposalCommentMail}
+              
+              />
+            </td>
+          </tr>
+          </tbody>
+        </Table>
       </form>
     );
-  },
+  }
+}
+
+const form = reduxForm({
+  onSubmit,
+  form: formName,
+})(NotificationsForm);
+
+const mapStateToProps = (state: GlobalState) => ({
+  notificationsConfiguration: state.user.user ? state.user.user.notificationsConfiguration : null
 });
 
-const mapStateToProps = (state: State) => ({
-  newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
-  confirmationEmailResent: state.user.confirmationEmailResent,
-  initialValues: {
-    email: state.user.user && state.user.user.email,
-  },
-});
-
-export default connect(mapStateToProps)(
-  reduxForm({
-    form,
-  })(NotificationsForm),
-);
+export default connect(mapStateToProps)(injectIntl(form));

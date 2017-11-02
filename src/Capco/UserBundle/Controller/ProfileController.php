@@ -75,6 +75,7 @@ class ProfileController extends BaseController
      */
     public function showNotificationsOptionsAction(Request $request)
     {
+        return [];
     }
 
     /**
