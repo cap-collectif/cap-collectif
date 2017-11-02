@@ -8,8 +8,8 @@ Scenario: User comment a proposal and admin should be notified if the proposal h
   And I comment "Salut les filles"
   And I wait 3 seconds
   Then 1 mails should be sent
-  And I should see mail with subject 'notification.email.comment.create.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
-  And I should see mail containing "Salut les filles"
+  And I open mail with subject 'notification.email.comment.create.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
+  And I should see "Salut les filles" in mail
 
 @javascript @database
 Scenario: User comment a proposal and admin should not be notified if the proposal have comments notifications off
@@ -30,8 +30,8 @@ Scenario: User update his comment and admin should be notified if the proposal h
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
   And I wait 3 seconds
   Then 2 mails should be sent
-  And I should see mail with subject 'notification.email.comment.update.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
-  And I should see mail containing "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
+  And I open mail with subject 'notification.email.comment.update.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
+  And I should see "Salut les filles, il faut que vous essayiez ce DOP à la madeleine" in mail
 
 @javascript @database
 Scenario: User update his comment and admin should not be notified if the proposal have comments notifications off
@@ -51,8 +51,8 @@ Scenario: Anonymous user comment a proposal and admin should be notified if the 
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   And I wait 3 seconds
   Then 1 mails should be sent
-  And I should see mail with subject 'notification.email.comment.update.subject {"%sitename%":"Cap-Collectif","%username%":"Marie Lopez"}'
-  And I should see mail containing "Salut les filles"
+  And I open mail with subject 'notification.email.comment.update.subject {"%sitename%":"Cap-Collectif","%username%":"Marie Lopez"}'
+  And I should see "Salut les filles" in mail
 
 @javascript @database
 Scenario: Anonymous user comment a proposal and admin should not be notified if the proposal have comments notifications off

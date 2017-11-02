@@ -494,19 +494,6 @@ EOF;
     }
 
     /**
-     * There should be a created log on response element.
-     *
-     * @Then there should be a create log on response element
-     */
-    public function thereShouldBeACreateLogOnResponseElement()
-    {
-        $body = (string) $this->response->getBody();
-        $data = json_decode($body, true);
-        $elementId = $data['id'];
-        $this->thereShouldBeALogOnElementWithSentence($elementId, 'Création de l\'élément');
-    }
-
-    /**
      * I update opinion with values.
      *
      * @Given I update opinion :id with values:

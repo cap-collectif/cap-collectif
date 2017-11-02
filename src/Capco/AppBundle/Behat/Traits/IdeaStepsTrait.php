@@ -456,18 +456,14 @@ trait IdeaStepsTrait
     }
 
     /**
-     * I should see my anonymous vote in the idea votes list.
-     *
      * @Then I should see my anonymous vote in the idea votes list
      */
     public function iShouldSeeMyAnonymousVoteInTheIdeaVotesList()
     {
-        $this->assertFirstIdeaVoteContains('idea.vote.listing.anonymous');
+        $this->assertFirstIdeaVoteContains('global.anonymous');
     }
 
     /**
-     * I should see my not logged in vote in the idea votes list.
-     *
      * @Then I should see my not logged in vote in the idea votes list
      */
     public function iShouldSeeMyNotLoggedInVoteInTheIdeaVotesList()
@@ -554,7 +550,7 @@ trait IdeaStepsTrait
         }
     }
 
-    protected function clickIdeaVoteButtonWithLabel($label)
+    protected function clickIdeaVoteButtonWithLabel(string $label)
     {
         $page = $this->getCurrentPage();
         $buttonLabel = $page->getVoteButtonLabel();
@@ -563,19 +559,19 @@ trait IdeaStepsTrait
         $this->iWait(2);
     }
 
-    protected function assertIdeaCommentsContains($text)
+    protected function assertIdeaCommentsContains(string $text)
     {
         $commentsListSelector = $this->getCurrentPage()->getCommentsListSelector();
         $this->assertElementContainsText($commentsListSelector, $text);
     }
 
-    protected function assertFirstIdeaVoteContains($text)
+    protected function assertFirstIdeaVoteContains(string $text)
     {
         $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
-    protected function assertFirstIdeaVoteNotContains($text)
+    protected function assertFirstIdeaVoteNotContains(string $text)
     {
         $firstVoteSelector = $this->getCurrentPage()->getFirstVoteSelector();
         $this->assertElementNotContainsText($firstVoteSelector, $text);

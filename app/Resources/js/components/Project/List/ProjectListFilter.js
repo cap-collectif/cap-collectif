@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Col, Row, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
@@ -20,6 +20,7 @@ const ProjectListFilter = React.createClass({
     themes: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
     orderBy: PropTypes.string.isRequired,
+    intl: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
   },
 
@@ -42,7 +43,7 @@ const ProjectListFilter = React.createClass({
   },
 
   render() {
-    const { projectTypes, features, themes, dispatch, orderBy, type } = this.props;
+    const { projectTypes, features, themes, dispatch, orderBy, type, intl } = this.props;
 
     const filters = [];
 
@@ -58,10 +59,10 @@ const ProjectListFilter = React.createClass({
           dispatch(fetchProjects());
         }}>
         <option key="date" value="date">
-          Les plus récents
+          {intl.formatMessage('global.filter_f_last')}
         </option>
         <option key="popularity" value="popularity">
-          Les plus populaires
+          {intl.formatMessage('global.filter_f_popular')}
         </option>
       </FormControl>,
     );
@@ -79,7 +80,7 @@ const ProjectListFilter = React.createClass({
             dispatch(fetchProjects());
           }}>
           <option key="all" value="">
-            Tous les types
+            {intl.formatMessage('global.select_project_types')}
           </option>
           {projectTypes.map(projectType => (
             <FormattedMessage id={projectType.title} key={projectType.slug}>
@@ -102,7 +103,7 @@ const ProjectListFilter = React.createClass({
             dispatch(fetchProjects());
           }}>
           <option key="all" value="">
-            Tous les thèmes
+            {intl.formatMessage('global.select_themes')}
           </option>
           {themes.map(theme => {
             return (
@@ -158,4 +159,4 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-export default connect(mapStateToProps)(ProjectListFilter);
+export default connect(mapStateToProps)(injectIntl(ProjectListFilter));

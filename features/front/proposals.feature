@@ -145,7 +145,7 @@ Scenario: Logged in user wants to create a proposal in closed collect step
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
   When I click the create proposal button
-  Then I should see "vote.popover.body" in the "#main" element
+  Then I should see a "#login-popover" element
 
 @javascript @database
 Scenario: Author of a proposal wants to update it
@@ -182,7 +182,8 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   And I confirm proposal deletion
   And I wait 3 seconds
   Then 1 mails should be sent
-  And I should see mail with subject 'notification.email.proposal.delete.subject {"%sitename":"Cap-Collectif","%username%":"user","%project%":"Budget Participatif Rennes"}'
+  And I open mail with subject 'notification.email.proposal.delete.subject {"%sitename":"Cap-Collectif","%username%":"user","%project%":"Budget Participatif Rennes"}'
+  And I should see 'notification.email.proposal.delete.body' in mail
 
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal

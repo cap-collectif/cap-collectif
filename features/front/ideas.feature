@@ -86,7 +86,7 @@ Scenario: Anonymous user wants to create an idea
   Given feature "idea_creation" is enabled
   When I go to the ideas page
   And I click the idea create button
-  Then I should see "vote.popover.body" in the "#main" element
+  Then I should see a "#login-popover" element
 
 @javascript
 Scenario: Logged in user wants to create an idea from a theme
@@ -105,7 +105,7 @@ Scenario: Anonymous user wants to create an idea from a theme
   And feature "idea_creation" is enabled
   When I go to an empty theme page
   And I click the idea create button
-  Then I should see "vote.popover.body" in the "#main" element
+  Then I should see a "#login-popover" element
 
 @javascript
 Scenario: Can not create an idea from theme when idea creation is disabled
@@ -138,7 +138,7 @@ Scenario: Author of an idea try to update without checking the confirm checkbox
   And I click the idea edit button
   And I edit my idea without confirming my votes lost
   And I submit my edited idea
-  Then I should see "idea.constraints.confirm" in the "#main" element
+  Then I should see "idea.constraints.confirm" in the "#idea-form" element
 
 # Delete
 
@@ -251,7 +251,7 @@ Scenario: Logged in user wants to vote for a comment of an idea
   When I vote for the first comment
   And I wait 1 seconds
   Then I should see "alert.success.add.vote" in the "#global-alert-box" element
-  And I should see "idea.vote.delete" in the "#main" element
+  And I should see "idea.vote.delete" in the "#global-alert-box" element
   And The first comment vote counter should be "1"
   And I vote for the first comment
   And I wait 1 seconds
