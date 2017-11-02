@@ -11,6 +11,8 @@ import ChangeProposalContentMutation from '../../../mutations/ChangeProposalCont
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
+import { proposalAdminContentFormSucceeded, proposalAdminContentFormServerError } from '../../../redux/modules/proposal';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 
@@ -26,6 +28,8 @@ type Props = {
   handleSubmit: () => void,
   intl: IntlShape,
   isSuperAdmin: boolean,
+  isSaved: boolean,
+  hasServerError: boolean,
   pristine: boolean,
   invalid: boolean,
   valid: boolean,
@@ -68,10 +72,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
+
+  return ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
     // window.location.reload();
-    const alert = document.getElementById('valid-modif-alert');
-    alert.style.display = "block";
+    dispatch(proposalAdminContentFormSucceeded())
+  }).catch(() => {
+    dispatch(proposalAdminContentFormServerError())
   });
 };
 
@@ -123,9 +129,12 @@ export class ProposalAdminContentForm extends Component<Props, State> {
       pristine,
       invalid,
       valid,
+      isSaved,
+      hasServerError,
       proposal,
       features,
       submitting,
+      // dispatch,
       isSuperAdmin,
       themes,
       handleSubmit,
@@ -137,6 +146,9 @@ export class ProposalAdminContentForm extends Component<Props, State> {
         <FormattedMessage id="global.form.optional" />
       </span>
     );
+
+    console.log(pristine);
+
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -334,19 +346,13 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              { valid &&
-              <div id="valid-modif-alert">
-                <span>
-                  <i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved"/>
-                </span>
-              </div>
-              }
-              { invalid && (
-                  <div id="error-modif-alert">
-                    <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.invalid.form" />
-                  </div>
-                )
-              }
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                isSaved={isSaved}
+                hasServerError={hasServerError}
+                submitting={submitting}
+              />
             </ButtonToolbar>
           </div>
         </form>
@@ -364,6 +370,8 @@ const form = reduxForm({
 const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
+  isSaved: state.proposal.proposalAdminContentFormSucceeded,
+  hasServerError: state.proposal.proposalAdminContentFormServerError,
   themes: state.default.themes,
   initialValues: {
     title: proposal.title,

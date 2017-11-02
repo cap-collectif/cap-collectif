@@ -11,6 +11,18 @@ import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/Prop
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
 type Status = { name: string, id: number, color: string };
+type ProposalAdminContentFormSucceededAction = {
+  type: 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SUCCEEDED',
+};
+type ProposalAdminContentFormServerErrorAction = {
+  type: 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SERVER_ERROR',
+};
+type ProposalFormAdminConfigurationFormSucceededAction = {
+  type: 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SUCCEEDED',
+};
+type ProposalFormAdminConfigurationFormServerErrorAction = {
+  type: 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SERVER_ERROR',
+};
 type ChangeFilterAction = {
   type: 'proposal/CHANGE_FILTER',
   filter: string,
@@ -146,6 +158,10 @@ export type State = {
 
 export const initialState: State = {
   currentProposalId: null,
+  proposalAdminContentFormSucceeded: false,
+  proposalAdminContentFormServerError: false,
+  proposalFormAdminConfigurationFormSucceeded: false,
+  proposalFormAdminConfigurationFormServerError: false,
   proposalShowedId: [],
   queryCount: undefined,
   creditsLeftByStepId: {},
@@ -237,6 +253,18 @@ export const deleteVoteSucceeded = (
 const deleteVoteRequested = (proposalId: Uuid): RequestDeleteProposalVoteAction => ({
   type: 'proposal/DELETE_VOTE_REQUESTED',
   proposalId,
+});
+export const proposalAdminContentFormSucceeded = (): ProposalAdminContentFormSucceededAction => ({
+  type: 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SUCCEEDED',
+});
+export const proposalAdminContentFormServerError = (): ProposalAdminContentFormServerErrorAction => ({
+  type: 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SERVER_ERROR',
+});
+export const proposalFormAdminConfigurationFormSucceeded = (): ProposalFormAdminConfigurationFormSucceededAction => ({
+  type: 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SUCCEEDED',
+});
+export const proposalFormAdminConfigurationFormServerError = (): ProposalFormAdminConfigurationFormServerErrorAction => ({
+  type: 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SERVER_ERROR',
 });
 export const closeEditProposalModal = (): CloseEditProposalModalAction => ({
   type: 'proposal/CLOSE_EDIT_MODAL',
@@ -711,6 +739,10 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 
 export type ProposalAction =
   | FetchVotesRequestedAction
+  | ProposalAdminContentFormSucceededAction
+  | ProposalAdminContentFormServerErrorAction
+  | ProposalFormAdminConfigurationFormSucceededAction
+  | ProposalFormAdminConfigurationFormServerErrorAction
   | SubmitFusionFormAction
   | ChangeFilterAction
   | VoteFailedAction
@@ -858,6 +890,14 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       const filters = { ...state.filters, [action.filter]: action.value };
       return { ...state, filters, currentPaginationPage: 1 };
     }
+    case 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SUCCEEDED' :
+      return { ...state, proposalAdminContentFormSucceeded: true };
+    case 'proposal/PROPOSAL_ADMIN_CONTENT_FORM_SERVER_ERROR' :
+      return { ...state, proposalAdminContentFormServerError: true };
+    case 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SUCCEEDED' :
+      return { ...state, proposalFormAdminConfigurationFormSucceeded: true };
+    case 'proposal/PROPOSAL_FORM_ADMIN_CONFIGURATION_FORM_SERVER_ERROR' :
+      return { ...state, proposalFormAdminConfigurationFormServerError: true };
     case 'proposal/OPEN_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: true };
     case 'proposal/CLOSE_CREATE_FUSION_MODAL':

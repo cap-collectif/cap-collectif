@@ -11,13 +11,18 @@ import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
+import AlertAdminForm from '../Alert/AlertAdminForm';
+import { proposalFormAdminConfigurationFormSucceeded, proposalFormAdminConfigurationFormServerError } from '../../redux/modules/proposal';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
 type Props = RelayProps & {
   handleSubmit: () => void,
+  isSaved: boolean,
+  hasServerError: boolean,
   invalid: boolean,
+  valid: boolean,
   pristine: boolean,
   submitting: boolean,
   usingAddress: boolean,
@@ -123,12 +128,6 @@ const headerPanelUsingDistrict = (
   </div>
 );
 
-// const validModificationAlert = (
-//   <Alert bsStyle="success">
-//     <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
-//   </Alert>
-// );
-
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
@@ -147,8 +146,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     })),
   };
   return UpdateProposalFormMutation.commit({ input }).then(() => {
-    const alert = document.getElementById('valid-modif-alert');
-    alert.style.display = "block";
+    dispatch(proposalFormAdminConfigurationFormSucceeded());
+  }).catch(() => {
+    dispatch(proposalFormAdminConfigurationFormServerError());
   });
 };
 
@@ -156,6 +156,9 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
   render() {
     const {
       invalid,
+      valid,
+      isSaved,
+      hasServerError,
       pristine,
       handleSubmit,
       submitting,
@@ -424,27 +427,13 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
-              <div id="valid-modif-alert">
-                {/*{ submitting ? (*/}
-                    {/*<span>*/}
-                      {/*<i className="fa fa-spinner fa-spin fa-fw" aria-hidden="true"> </i><FormattedMessage id="global.loading" />*/}
-                    {/*</span>*/}
-                  {/*) : (*/}
-                    {/*<span>*/}
-                      {/*<i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved" />*/}
-                    {/*</span>*/}
-                  {/*)*/}
-                {/*}*/}
-                <span>
-                  <i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved" />
-                </span>
-              </div>
-              { invalid && (
-                <div id="error-modif-alert">
-                  <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.invalid.form" />
-                </div>
-              )
-              }
+                <AlertAdminForm
+                  valid={valid}
+                  invalid={invalid}
+                  isSaved={isSaved}
+                  hasServerError={hasServerError}
+                  submitting={submitting}
+                />
             </ButtonToolbar>
 
           </form>
@@ -464,6 +453,8 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: props.proposalForm,
+  isSaved: state.proposal.proposalFormAdminConfigurationFormSucceeded,
+  hasServerError: state.proposal.proposalFormAdminConfigurationFormServerError,
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),

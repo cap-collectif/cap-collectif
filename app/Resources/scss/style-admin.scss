@@ -40,18 +40,18 @@ body {
 }
 
 //à changer de place
-#valid-modif-alert, #error-modif-alert {
+.alert__admin-form {
+    &_succeeded-action, &_invalid-field, &_server-failed-action {
+        padding: 6px 12px;
+        margin-left: 5px;
+        float: left;
+    }
 
-    padding: 6px 12px;
-    margin-left: 5px;
-    float: left;
-}
+    &_invalid-field, &_server-failed-action {
+        color: $danger-color;
+    }
 
-#valid-modif-alert {
-    display: none;
-    color: $success-color;
-}
-
-#error-modif-alert {
-    color: $danger-color;
+    &_succeeded-action {
+        color: $success-color;
+    }
 }
