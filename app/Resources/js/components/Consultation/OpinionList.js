@@ -51,7 +51,7 @@ export const OpinionList = React.createClass({
                   className="form-control"
                   style={{ marginRight: section.contribuable ? 15 : 0 }}
                   onChange={(event: SyntheticInputEvent<>) => {
-                    window.location.href = `${section.url}/${event.target.value}`;
+                    window.location.href = `${section.url}/sort/${event.target.value}`;
                   }}>
                   <option value="positions">Tri ordonné puis aléatoire</option>
                   <option value="random">Tri aléatoire</option>

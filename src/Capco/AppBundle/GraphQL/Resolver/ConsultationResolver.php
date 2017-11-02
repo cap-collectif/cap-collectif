@@ -176,14 +176,14 @@ class ConsultationResolver implements ContainerAwareInterface
               'opinionTypeSlug' => $type->getSlug(),
           ],
           UrlGeneratorInterface::ABSOLUTE_URL
-      );
+      ) . '/1';
     }
 
     public function getSectionOpinions(OpinionType $type, Arg $arg)
     {
         $limit = $arg->offsetGet('limit');
 
-        if ($type->getOpinions()->count() === 0) {
+        if (0 === $type->getOpinions()->count()) {
             return [];
         }
 
@@ -212,7 +212,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
         $iterator = $sections->filter(
             function ($section) {
-                return $section->getParent() === null;
+                return null === $section->getParent();
             }
         )->getIterator();
 
