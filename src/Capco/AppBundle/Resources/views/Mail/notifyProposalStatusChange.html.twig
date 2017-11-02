@@ -6,7 +6,7 @@
             '%proposal%': proposal.title,
             '%status%': proposal.status.name,
             '%proposal_link%': url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}),
-            '%user%': proposal.author,
+            '%user%': proposal.author.getDisplayName(),
         }, 'CapcoAppBundle') | raw }}
     {% endautoescape %}
 {% endblock %}
