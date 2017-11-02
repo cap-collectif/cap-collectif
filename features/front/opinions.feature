@@ -72,7 +72,7 @@ Scenario: Can not create an opinion of non-contribuable type
     And I press "confirm-opinion-update"
     Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
     And I wait 1 seconds
-    And I should see "0 vote" in the ".opinion__votes" element
+    And I should see 'global.votes {"num":0}'
 
 @javascript @security
 Scenario: Non author of an opinion wants to update it
@@ -100,9 +100,9 @@ Scenario: Anonymous wants to see opinion appendix
   Scenario: Logged in user wants to create a linked opinion
     Given I am logged in as user
     And I go to an opinion with versions
-    Then I should see 'project.show.connections {"%count%":0}'
+    Then I should see 'global.links {"num":0}'
     When I go on the connections tab
-    And I press "opinion.link.add_new"
+    And I press "#link-form__add"
     And I wait 1 seconds
     And I select "Section 1" from "opinionType"
     And I wait 2 seconds
@@ -113,7 +113,7 @@ Scenario: Anonymous wants to see opinion appendix
     And I press "confirm-opinion-link-create"
     Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds
-    Then I should see 'project.show.connections {"%count%":1}'
+    Then I should see 'global.links {"num":1}'
     And I go on the connections tab
     And I should see "Article 1" in the "#links-list" element
 

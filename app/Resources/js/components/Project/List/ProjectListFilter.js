@@ -59,10 +59,10 @@ const ProjectListFilter = React.createClass({
           dispatch(fetchProjects());
         }}>
         <option key="date" value="date">
-          {intl.formatMessage('global.filter_f_last')}
+          {intl.formatMessage({id:'global.filter_f_last'})}
         </option>
         <option key="popularity" value="popularity">
-          {intl.formatMessage('global.filter_f_popular')}
+          {intl.formatMessage({id:'global.filter_f_popular'})}
         </option>
       </FormControl>,
     );
@@ -80,7 +80,7 @@ const ProjectListFilter = React.createClass({
             dispatch(fetchProjects());
           }}>
           <option key="all" value="">
-            {intl.formatMessage('global.select_project_types')}
+            {intl.formatMessage({id: 'global.select_project_types'})}
           </option>
           {projectTypes.map(projectType => (
             <FormattedMessage id={projectType.title} key={projectType.slug}>
@@ -103,7 +103,7 @@ const ProjectListFilter = React.createClass({
             dispatch(fetchProjects());
           }}>
           <option key="all" value="">
-            {intl.formatMessage('global.select_themes')}
+            {intl.formatMessage({id:'global.select_themes'})}
           </option>
           {themes.map(theme => {
             return (

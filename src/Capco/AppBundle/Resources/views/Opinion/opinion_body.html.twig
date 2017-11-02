@@ -56,33 +56,35 @@
         {% set opinionType = isVersion ? opinion.parent.opinionType : opinion.opinionType %}
         <p class="opinion__votes  excerpt  small">
             {% if opinionType.voteWidgetType != 0 %}
-                <span>{% transchoice nbVotes with {'%count%': nbVotes} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbVotes from 'CapcoAppBundle' %}
                     project.show.votes
                 {% endtranschoice %}</span>
             {% endif %}
             {% if isVersion == false and opinionType.versionable %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbVersions with {'%count%': nbVersions} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbVersions from 'CapcoAppBundle' %}
                     project.show.versions
                     {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.commentSystem != 0 %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbArguments with {'%count%': nbArguments} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbArguments from 'CapcoAppBundle' %}
                     project.show.arguments
                 {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.sourceable %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbSources with {'%count%': nbSources} from 'CapcoAppBundle' %}
+                <span>{% transchoice nbSources from 'CapcoAppBundle' %}
                     project.show.sources
                 {% endtranschoice %}</span>
             {% endif %}
             {% if opinionType.linkable and isVersion == false %}
                 <span class="count__separator"> • </span>
-                <span>{% transchoice nbConnections with {'%count%': nbConnections} from 'CapcoAppBundle' %}
+                <span>
+                  {% transchoice nbConnections from 'CapcoAppBundle' %}
                     project.show.connections
-                    {% endtranschoice %}</span>
+                  {% endtranschoice %}
+                </span>
             {% endif %}
         </p>
     </div>
