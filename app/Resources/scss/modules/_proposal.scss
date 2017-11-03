@@ -481,7 +481,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 #proposal-form {
     font-size: 14px;
 
-    input, textarea, select, .ql-container {
+    input, textarea, select {
         background-color: $main-field-bg;
         border-color: $main-border-color;
         font-size: 14px;

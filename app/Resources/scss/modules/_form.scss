@@ -52,7 +52,21 @@ Hack form button - radio check
 
 .editor {
     position: relative;
-    border: 1px solid #ccc;
+
+    .ql-toolbar, .ql-container {
+        border: 1px solid $main-border-color;
+    }
+
+    .ql-toolbar {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .ql-container {
+        border-radius: 0 0 3px 3px;
+        border-top: none;
+        min-height: 100px;
+        background-color: $main-field-bg;
+    }
 }
 
 .has-error {
