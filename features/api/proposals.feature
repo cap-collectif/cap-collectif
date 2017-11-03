@@ -872,7 +872,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@,
+        "votableStepId": @string@
       },
       {
         "summaryOrBodyExcerpt": @string@,
@@ -901,7 +901,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@,
+        "votableStepId": @string@
       }
     ],
     "count": 2

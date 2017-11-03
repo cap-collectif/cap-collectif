@@ -371,6 +371,7 @@ EOF;
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $body = (string) $this->response->getBody();
+        var_dump($body);
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
         PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
