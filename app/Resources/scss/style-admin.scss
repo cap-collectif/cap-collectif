@@ -11,6 +11,7 @@
   "admin/variables",
   "admin/tools",
   "admin/proposal",
+  "admin/form",
   "modules/social-block",
   "modules/sonata",
   "modules/editor",
@@ -34,6 +35,6 @@ body {
 }
 
 .excerpt {
-    color: #999;
+    color: $excerpt;
     font-weight: normal;
 }

@@ -22,28 +22,11 @@
     }
 
     .box-content {
-        input,
-        textarea,
-        select,
-        select.form-control,
-        .ql-container,
-        .form-group > .list-group > .list-group-item {
-            background-color: $light-bgc;
-        }
-
         &.box-content__notation-form,
         &.box-content__status-form {
             .box-content__toolbar {
                 margin-top: 20px;
             }
-        }
-
-        .editor {
-            border: 1px solid $border-color;
-        }
-
-        .ql-container {
-            min-height: 100px;
         }
 
         .list-group {
@@ -71,23 +54,6 @@
 
         .form-group .checkbox {
             margin-top: 0;
-        }
-
-        .image-uploader {
-            .image-uploader__dropzone-label {
-                text-align: center;
-                background-color: $light-bgc;
-                padding: 10px;
-                border: 1px dashed $border-color;
-
-                p {
-                    margin: 5px 0;
-                }
-            }
-
-            .image-uploader__label-info {
-                margin-bottom: 5px;
-            }
         }
 
         .box-content__toolbar:not(button) {
