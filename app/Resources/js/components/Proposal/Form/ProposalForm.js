@@ -44,7 +44,7 @@ export const ProposalForm = React.createClass({
     themes: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    isDraft: PropTypes.bool.isRequired,
+    isSubmittingDraft: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
     mode: PropTypes.string,
@@ -142,7 +142,7 @@ export const ProposalForm = React.createClass({
       currentStepId,
     } = this.props;
 
-    if (!nextProps.isDraft) {
+    if (!nextProps.isSubmittingDraft) {
       this.updateThemeConstraint();
       this.updateDistrictConstraint();
       this.updateCategoryConstraint();
@@ -150,7 +150,7 @@ export const ProposalForm = React.createClass({
     }
 
     if (!isSubmitting && nextProps.isSubmitting) {
-      if (nextProps.isDraft) {
+      if (nextProps.isSubmittingDraft) {
         this.formValidationRules = {
           title: {
             min: { value: 2, message: 'proposal.constraints.title_min_value_for_draft' },
@@ -192,7 +192,7 @@ export const ProposalForm = React.createClass({
           form.summary = null;
         }
 
-        form.draft = nextProps.isDraft;
+        form.draft = nextProps.isSubmittingDraft;
         if (mode === 'edit') {
           updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
@@ -443,7 +443,7 @@ export const ProposalForm = React.createClass({
     );
     return (
       <form id="proposal-form">
-        {proposal.isDraft ? (
+        {proposal.isSubmittingDraft ? (
           <div className="mt-20">
             <div dangerouslySetInnerHTML={{ __html: form.description }} />
           </div>
@@ -693,7 +693,7 @@ const mapStateToProps = state => ({
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
-  isDraft: state.proposal.isDraft || false,
+  isSubmittingDraft: state.proposal.isDraft || false,
 });
 
 export default connect(mapStateToProps)(injectIntl(ProposalForm));

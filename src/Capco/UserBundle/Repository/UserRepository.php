@@ -619,7 +619,6 @@ class UserRepository extends EntityRepository
             ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
             ->leftJoin('CapcoAppBundle:Proposal', 'proposal', Join::WITH, 'proposal_selection_vote.proposal = proposal')
             ->andWhere('proposal_selection_vote.expired = 0')
-//            ->andWhere('proposal.enabled = 1')
             ->andWhere('proposal.expired = 0')
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal_selection_vote.selectionStep = :step');

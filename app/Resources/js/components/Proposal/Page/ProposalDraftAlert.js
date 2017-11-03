@@ -4,18 +4,18 @@ import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 type Props = {
-  proposal: any,
+  proposal: { isDraft: boolean },
 };
 
 export default class ProposalDraftAlert extends React.Component<Props> {
-  displayName: 'ProposalPageAlert';
-
   render() {
     const proposal = this.props.proposal;
     if (proposal.isDraft) {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
-          <strong>{<FormattedMessage id="proposal.draft.is_draft" />}</strong>
+          <strong>
+            <FormattedMessage id="proposal.draft.is_draft" />
+          </strong>
           <span>
             {' '}
             <FormattedMessage id="proposal.draft.explain" />

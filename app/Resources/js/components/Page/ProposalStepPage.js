@@ -29,6 +29,7 @@ export const ProposalStepPage = React.createClass({
     proposals: PropTypes.array.isRequired,
     currentPage: PropTypes.number.isRequired,
     randomOrder: PropTypes.bool.isRequired,
+    isLogged: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     selectedViewByStep: PropTypes.string.isRequired,
@@ -52,10 +53,10 @@ export const ProposalStepPage = React.createClass({
       currentPage,
       dispatch,
       isLoading,
+      isLogged,
       randomOrder,
       selectedViewByStep,
     } = this.props;
-
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
     const showPagination = nbPages > 1 && !randomOrder;
@@ -73,7 +74,7 @@ export const ProposalStepPage = React.createClass({
     return (
       <div className="proposal__step-page">
         <StepPageHeader step={step} />
-        <DraftProposalList step={step} />
+        {isLogged && <DraftProposalList step={step} />}
         {step.type === 'collect' ? (
           <CollectStepPageHeader
             total={count}
@@ -145,6 +146,7 @@ export const ProposalStepPage = React.createClass({
 
 const mapStateToProps = (state, props) => ({
   stepId: undefined,
+  isLogged: state.user.user !== null,
   step: state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
   proposals: state.proposal.proposalShowedId.map(
     proposal => state.proposal.proposalsById[proposal],

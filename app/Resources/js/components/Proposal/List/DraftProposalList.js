@@ -2,6 +2,7 @@
 import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import classNames from 'classnames';
+import { Row } from 'react-bootstrap';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import DraftBox from '../../Utils/DraftBox';
@@ -45,7 +46,11 @@ const renderDraftProposals = ({
       </DraftBox>
     );
   }
-  return <Loader />;
+  return (
+    <Row>
+      <Loader />
+    </Row>
+  );
 };
 
 export default class DraftProposalList extends React.Component<Props> {

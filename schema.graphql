@@ -738,14 +738,11 @@ type Proposal {
   # Identifies proposals as draft.
   draft: Boolean!
 
-  # Count number of selection vote and collect vote.
-  votesCountByStepId: [String]!
-
   # Count number of comments for the proposal.
   commentsCount: Int!
 
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 }
 
 # A proposal category
@@ -804,7 +801,7 @@ type ProposalForm {
   evaluationForm: EvaluationForm
 
   # Identifies the step that use the proposal form.
-  step: Step
+  step: CollectStep
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {

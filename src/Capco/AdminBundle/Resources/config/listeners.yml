@@ -43,7 +43,6 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposal_reference", method: "resolveReference" }
           - { name: overblog_graphql.resolver, alias: "proposal_evaluation", method: "resolveEvaluation" }
           - { name: overblog_graphql.resolver, alias: "query_get_draft_proposals_for_user_in_step", method: "resolveDraftProposalsForUserInStep" }
-          - { name: overblog_graphql.resolver, alias: "proposal_votes_count_by_step_id", method: "resolveCountVotesByStepId" }
           - { name: overblog_graphql.resolver, alias: "proposal_created_at", method: "resolveCreatedAt" }
 
   capco.mutation.district:

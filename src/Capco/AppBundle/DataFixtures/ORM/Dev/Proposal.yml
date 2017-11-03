@@ -257,7 +257,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 2
   proposal19:
     id: proposal19
-    title: Proposition 19
+    title: Proposition brouillon 1
     body: <p><text(100)></p>
     enabled: false
     isTrashed: false
@@ -269,7 +269,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 9
   proposal20:
     id: proposal20
-    title: Proposition 20
+    title: Proposition brouillon 2
     body: <p><text(100)></p>
     enabled: false
     isTrashed: false
@@ -279,3 +279,15 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 10
+  proposal21:
+    id: proposal21
+    title: Proposition brouillon 3
+    body: <p><text(100)></p>
+    enabled: false
+    isTrashed: false
+    draft: true
+    author: '@user4'
+    proposalForm: '@proposalform1'
+    theme: '@theme2'
+    district: '@district3'
+    reference: 11

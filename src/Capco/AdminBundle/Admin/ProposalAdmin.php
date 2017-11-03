@@ -12,7 +12,7 @@ class ProposalAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'updatedAt',
+        '_sort_by' => 'createdAt',
     ];
 
     public function getList()
@@ -57,9 +57,10 @@ class ProposalAdmin extends Admin
             ->add('state', null, [
                 'label' => 'admin.fields.proposal.state.label',
                 'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
-            ]);
-
-        $listMapper
+            ])
+            ->addIdentifier('createdAt', null, [
+                'label' => 'admin.fields.proposal.created_at',
+            ])
             ->add('updatedInfo', 'datetime', [
                 'label' => 'admin.fields.proposal.updated',
                 'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
@@ -80,6 +81,9 @@ class ProposalAdmin extends Admin
             ])
             ->add('enabled', null, [
                 'label' => 'admin.fields.proposal.enabled',
+            ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.proposal.created_at',
             ])
             ->add('isTrashed', null, [
                 'label' => 'admin.fields.proposal.is_trashed',

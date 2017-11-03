@@ -31,7 +31,7 @@ describe('<ProposalForm />', () => {
     },
     mode: 'create',
     proposal: { title: 'Proposal title' },
-    isDraft: true,
+    isSubmittingDraft: true,
   };
 
   it('should render a simple form without custom field', () => {

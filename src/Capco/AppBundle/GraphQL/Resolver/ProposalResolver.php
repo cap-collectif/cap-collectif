@@ -151,17 +151,6 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveCountVotesByStepId(Proposal $proposal): array
-    {
-        $selectionVotesCount = $this->container->get('capco.proposal_selection_vote.repository')
-            ->getCountsByProposalGroupedByStepsId($proposal);
-
-        $collectVotesCount = $this->container->get('capco.proposal_collect_vote.repository')
-            ->getCountsByProposalGroupedByStepsId($proposal);
-
-        return $selectionVotesCount + $collectVotesCount;
-    }
-
     public function resolveDraftProposalsForUserInStep(string $stepId, User $user = null): array
     {
         $proposalRep = $this->container->get('capco.proposal.repository');
@@ -171,7 +160,7 @@ class ProposalResolver implements ContainerAwareInterface
         ]);
 
         if (!$proposalForm) {
-            throw new UserError(sprintf('Unknown step with id "%d"', $stepId));
+            throw new UserError(sprintf('Unknown proposal form for step "%d"', $stepId));
         }
 
         $proposals = $proposalRep->findBy([
