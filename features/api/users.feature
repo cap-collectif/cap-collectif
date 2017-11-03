@@ -126,7 +126,7 @@ Scenario: Anonymous API client wants to register with throwable email
   }
   """
 
-@security
+@security @dev
 Scenario: Anonymous API client wants to register with additional data
   Given feature "registration" is enabled
   When I send a POST request to "/api/users" with json:
@@ -147,7 +147,7 @@ Scenario: Anonymous API client wants to register with additional data
     "code":400,
     "message": "Validation Failed",
     "errors": {
-      "errors": ["Ce formulaire ne doit pas contenir des champs suppl\u00e9mentaires."],
+      "errors": ["This form should not contain extra fields. {\"{{ extra_fields }}\":\"userType\\\", \\\"zipcode\"}"],
       "children":{
         "username":[],
         "email":[],
@@ -236,7 +236,7 @@ Scenario: API client wants to update his phone
   And "user" phone number should be "+33628353290"
   And "user" should not be sms confirmed
 
-@security
+@security @dev
 Scenario: API client wants to update his phone
   Given I am logged in to api as user
   When I send a PUT request to "/api/users/me" with json:
@@ -252,13 +252,10 @@ Scenario: API client wants to update his phone
     "code":400,
     "message": "Validation Failed",
     "errors": {
-      "children":{
-        "phone": { "errors": [
-          "This value is not a valid phone number. {
-          "{{ type }}": "any",
-          "{{ value }}": "+33"
-          }"
-        ]
+      "children": {
+        "phone": {
+          "errors": ["This value is not a valid phone number. {\"{{ type }}\":\"any\",\"{{ value }}\":\"+33\"}"]
+        }
       }
     }
   }

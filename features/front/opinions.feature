@@ -102,7 +102,7 @@ Scenario: Anonymous wants to see opinion appendix
     And I go to an opinion with versions
     Then I should see 'global.links {"num":0}'
     When I go on the connections tab
-    And I press "#link-form__add"
+    And I press "link-form__add"
     And I wait 1 seconds
     And I select "Section 1" from "opinionType"
     And I wait 2 seconds

@@ -43,7 +43,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I visited "projects page"
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
-  And I select "Les plus populaires" from "project-sorting"
+  And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
   Then I should see 7 ".thumbnail--custom" elements
   And I should see "Projet de loi Renseignement"
@@ -115,7 +115,7 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"num":161}'
+  Then I should see 'project.show.meta.total_count {"%count%":161}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
   And I should see 'project.show.meta.opinionsCount {"%count%":34}'
