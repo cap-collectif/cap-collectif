@@ -33,7 +33,7 @@ Scenario: User update his comment and admin should be notified if the proposal h
   And I open mail with subject 'notification.email.comment.update.subject'
   And I should see "notification.email.comment.update.body" in mail
 
-@javascript @database @dev
+@javascript @database
 Scenario: User update his comment and admin should not be notified if the proposal have comments notifications off
   Given I am logged in as user
   And I go to a proposal which is not comment notifiable
