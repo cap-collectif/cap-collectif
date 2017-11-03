@@ -24,7 +24,11 @@ export const ProposalFormAdminDistrictModal = React.createClass({
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
-            children={<FormattedMessage id={!isCreating ? 'district_modal.create.title' : 'district_modal.update.title'} />}
+            children={
+              <FormattedMessage
+                id={!isCreating ? 'district_modal.create.title' : 'district_modal.update.title'}
+              />
+            }
           />
         </Modal.Header>
         <Modal.Body>

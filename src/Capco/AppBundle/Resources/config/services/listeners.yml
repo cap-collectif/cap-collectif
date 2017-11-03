@@ -122,7 +122,8 @@ services:
 
   capco.proposal_vote.serialization_listener:
     class: Capco\AppBundle\EventListener\ProposalVoteSerializationListener
-    arguments: ["@translator"]
+    arguments:
+      - "@translator"
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

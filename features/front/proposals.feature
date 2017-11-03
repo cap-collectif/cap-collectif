@@ -182,7 +182,7 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   And I confirm proposal deletion
   And I wait 3 seconds
   Then 1 mails should be sent
-  And I open mail with subject 'notification.email.proposal.delete.subject {"%sitename":"Cap-Collectif","%username%":"user","%project%":"Budget Participatif Rennes"}'
+  And I open mail with subject 'notification.email.proposal.delete.subject'
   And I should see 'notification.email.proposal.delete.body' in mail
 
 @javascript @database

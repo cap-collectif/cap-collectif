@@ -111,7 +111,7 @@ Scenario: Anonymous wants to see opinion appendix
       | opinion_body       | Description de ma proposition   |
       | opinion_appendix-2 | Exposay                         |
     And I press "confirm-opinion-link-create"
-    Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/section-1-ouverture-des-donnees-publiques/titre"
+    Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/titre"
     And I wait 1 seconds
     Then I should see 'global.links {"num":1}'
     And I go on the connections tab

@@ -39,7 +39,9 @@ export const ProposalFormAdminQuestionModal = React.createClass({
           <Modal.Title
             id="proposal-form-admin-question-modal-title-lg"
             children={
-              <FormattedMessage id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'} />
+              <FormattedMessage
+                id={!isCreating ? 'question_modal.create.title' : 'question_modal.update.title'}
+              />
             }
           />
         </Modal.Header>

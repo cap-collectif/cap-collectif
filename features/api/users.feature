@@ -126,7 +126,7 @@ Scenario: Anonymous API client wants to register with throwable email
   }
   """
 
-@security @dev
+@security
 Scenario: Anonymous API client wants to register with additional data
   Given feature "registration" is enabled
   When I send a POST request to "/api/users" with json:
@@ -236,7 +236,7 @@ Scenario: API client wants to update his phone
   And "user" phone number should be "+33628353290"
   And "user" should not be sms confirmed
 
-@security @dev
+@security
 Scenario: API client wants to update his phone
   Given I am logged in to api as user
   When I send a PUT request to "/api/users/me" with json:

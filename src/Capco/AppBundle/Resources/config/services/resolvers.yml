@@ -7,7 +7,7 @@ services:
     class: Capco\AppBundle\Resolver\ProjectDownloadResolver
     arguments:
         - '@doctrine.orm.entity_manager'
-        - '@translator'
+        - "@translator"
         - '@capco.url.array.resolver'
         - '@phpexcel'
         - '@sonata.media.twig.extension'

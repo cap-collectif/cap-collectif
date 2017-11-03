@@ -26,12 +26,13 @@ services:
           arguments: ["@request_stack", '%recaptcha_private_key%', '@capco.toggle.manager', false]
           tags:
               - { name: validator.constraint_validator, alias: recaptcha.validator }
-    capco.decorating_translator:
+    # We disable translation
+    no_translator:
         class: Capco\AppBundle\Translator\NoTranslator
         decorates: translator
         arguments:
-            - '@capco.decorating_translator.inner'
-        public: false
+            - '@no_translator.inner'
+        public: true
 
 monolog:
     handlers:

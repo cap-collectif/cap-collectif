@@ -27,7 +27,11 @@ services:
 
   sms.service:
     class: Capco\AppBundle\Sms\SmsService
-    arguments: ["@twilio.sms_sender", "%twilio_number%", "@capco.site_parameter.resolver", "@translator"]
+    arguments:
+      - "@twilio.sms_sender"
+      - "%twilio_number%"
+      - "@capco.site_parameter.resolver"
+      - "@translator"
 
   capco.doctrine.subscriber.dynamic_relation:
     class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
@@ -38,7 +42,15 @@ services:
   ## Service Notify - send mail
   capco.notify_manager:
     class: Capco\AppBundle\Manager\Notify
-    arguments: ["@mailer", "@templating", "@translator", "@capco.site_parameter.resolver", "@router", "@capco.url.resolver", "@validator", {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}]
+    arguments:
+      - "@mailer"
+      - "@templating"
+      - "@translator"
+      - "@capco.site_parameter.resolver"
+      - "@router"
+      - "@capco.url.resolver"
+      - "@validator"
+      - {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
@@ -89,7 +101,10 @@ services:
 
   capco.synthesis.log_manager:
     class: Capco\AppBundle\Manager\LogManager
-    arguments: ["@translator", "@fos_user.user_manager", "@doctrine.orm.entity_manager"]
+    arguments:
+      - "@translator"
+      - "@fos_user.user_manager"
+      - "@doctrine.orm.entity_manager"
 
   capco.synthesis.synthesis_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
@@ -101,7 +116,12 @@ services:
 
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
-    arguments: ["@doctrine.orm.entity_manager", "@translator", "@router", "@capco.opinion_types.resolver", "@capco.url.resolver"]
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@translator"
+      - "@router"
+      - "@capco.opinion_types.resolver"
+      - "@capco.url.resolver"
 
   capco.react_intl.twig:
     class: Capco\AppBundle\Twig\ReactIntlExtension

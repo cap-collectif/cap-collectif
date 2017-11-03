@@ -25,7 +25,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
 
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
-        return $this->trans($id, $parameters);
+        return $this->trans($id, $parameters, $domain, $locale);
     }
 
     public function getCatalogue($locale = null)

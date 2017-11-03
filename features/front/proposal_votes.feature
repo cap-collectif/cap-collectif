@@ -65,7 +65,7 @@ Scenario: Logged in user wants to vote when he has not enough credits left in a 
   Then the proposal vote button must be disabled
   And I should see the proposal vote tooltip
 
-@javascript @security @elasticsearch @votes_from_selection_step @dev
+@javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
   Given I go to a selection step with budget vote enabled
   When I click the proposal vote button
