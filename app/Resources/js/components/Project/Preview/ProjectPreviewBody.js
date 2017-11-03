@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 
@@ -35,7 +36,7 @@ const ProjectPreviewBody = React.createClass({
       progress = (
         <div>
           <p style={{ marginBottom: 10, height: 16 }} className="small">
-            Etat d'avancement
+            <FormattedMessage id="global.advancement" />
           </p>
           <ProjectPreviewProgressBar project={project} />
         </div>
