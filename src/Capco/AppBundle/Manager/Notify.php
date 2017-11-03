@@ -296,6 +296,25 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
+    public function notifyUserProposalComment(ProposalComment $comment)
+    {
+        $isAnonymous = null === $comment->getAuthor();
+        $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.subject' : 'notification.email.comment.to_user.subject';
+        $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.body' : 'notification.email.comment.to_user.body';
+        $params = $this->buildParamsForComment($comment, $isAnonymous);
+        $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_edit_account', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $subject = $this->translator->trans(
+            $subjectId,
+            $params['subject'],
+            'CapcoAppBundle');
+        $body = $this->translator->trans(
+            $bodyId,
+            $params['body'],
+            'CapcoAppBundle'
+        );
+        $this->sendInternalEmail($body, $subject, $comment->getProposal()->getAuthor()->getEmailCanonical());
+    }
+
     public function notifyProposalComment($comment, string $action)
     {
         if ('delete' === $action) {
