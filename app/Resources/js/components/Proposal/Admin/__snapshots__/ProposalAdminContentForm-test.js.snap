@@ -196,9 +196,9 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           />
         </Button>
         <AlertAdminForm
-          hasServerError={false}
           invalid={false}
-          isSaved={false}
+          submitFailded={false}
+          submitSucceeded={false}
           submitting={false}
           valid={false}
         />

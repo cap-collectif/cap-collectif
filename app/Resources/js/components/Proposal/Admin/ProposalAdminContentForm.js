@@ -342,8 +342,8 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
-                isSaved={submitSucceeded}
-                hasServerError={submitFailed}
+                submitSucceeded={submitSucceeded}
+                submitFailded={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>
@@ -363,8 +363,6 @@ const form = reduxForm({
 const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
-  // isSaved: state.proposal.proposalAdminContentFormSucceeded,
-  // hasServerError: state.proposal.proposalAdminContentFormServerError,
   themes: state.default.themes,
   initialValues: {
     title: proposal.title,

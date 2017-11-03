@@ -157,8 +157,8 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
               <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
-                isSaved={submitSucceeded}
-                hasServerError={submitFailed}
+                submitSucceeded={submitSucceeded}
+                submitFailded={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>

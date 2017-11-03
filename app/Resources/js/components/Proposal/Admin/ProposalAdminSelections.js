@@ -232,8 +232,8 @@ export class ProposalAdminSelections extends Component<Props> {
               <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
-                isSaved={submitSucceeded}
-                hasServerError={submitFailed}
+                submitSucceeded={submitSucceeded}
+                submitFailded={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>

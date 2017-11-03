@@ -373,8 +373,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 <AlertAdminForm
                   valid={valid}
                   invalid={invalid}
-                  isSaved={submitSucceeded}
-                  hasServerError={submitFailed}
+                  submitSucceeded={submitSucceeded}
+                  submitFailded={submitFailed}
                   submitting={submitting}
                 />
               </ButtonToolbar>

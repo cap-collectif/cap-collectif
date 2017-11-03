@@ -101,9 +101,9 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
           />
         </Button>
         <AlertAdminForm
-          hasServerError={false}
           invalid={false}
-          isSaved={false}
+          submitFailded={false}
+          submitSucceeded={false}
           submitting={false}
           valid={false}
         />
@@ -208,9 +208,9 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
           />
         </Button>
         <AlertAdminForm
-          hasServerError={false}
           invalid={false}
-          isSaved={false}
+          submitFailded={false}
+          submitSucceeded={false}
           submitting={false}
           valid={false}
         />
@@ -319,9 +319,9 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
           />
         </Button>
         <AlertAdminForm
-          hasServerError={false}
           invalid={false}
-          isSaved={false}
+          submitFailded={false}
+          submitSucceeded={false}
           submitting={false}
           valid={false}
         />
