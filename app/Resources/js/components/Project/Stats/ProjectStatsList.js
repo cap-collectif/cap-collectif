@@ -102,8 +102,6 @@ const ProjectStatsList = React.createClass({
       step,
     } = this.props;
     const { data } = this.state;
-    console.log(data);
-
     const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;
 
     return (
