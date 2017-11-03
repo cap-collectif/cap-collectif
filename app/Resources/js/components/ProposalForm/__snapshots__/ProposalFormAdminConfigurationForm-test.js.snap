@@ -612,9 +612,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           />
         </Button>
         <AlertAdminForm
-          hasServerError={false}
           invalid={false}
-          isSaved={false}
+          submitFailed={false}
+          submitSucceeded={false}
           submitting={false}
           valid={false}
         />

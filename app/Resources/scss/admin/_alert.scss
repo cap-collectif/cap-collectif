@@ -1,0 +1,19 @@
+.alert__admin-form {
+    &_succeeded-action, &_invalid-field, &_server-failed-action {
+        padding: 6px 12px;
+        margin-left: 5px;
+        float: left;
+    }
+
+    &_server-failed-action a {
+        text-decoration: underline;
+    }
+
+    &_invalid-field, &_server-failed-action, &_server-failed-action a {
+        color: $danger-color;
+    }
+
+    &_succeeded-action {
+        color: $success-color;
+    }
+}

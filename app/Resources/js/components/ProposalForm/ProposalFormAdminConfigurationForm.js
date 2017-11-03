@@ -12,17 +12,16 @@ import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
 import AlertAdminForm from '../Alert/AlertAdminForm';
-import { proposalFormAdminConfigurationFormSucceeded, proposalFormAdminConfigurationFormServerError } from '../../redux/modules/proposal';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
 type Props = RelayProps & {
   handleSubmit: () => void,
-  isSaved: boolean,
-  hasServerError: boolean,
   invalid: boolean,
   valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   pristine: boolean,
   submitting: boolean,
   usingAddress: boolean,
@@ -145,11 +144,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       },
     })),
   };
-  return UpdateProposalFormMutation.commit({ input }).then(() => {
-    dispatch(proposalFormAdminConfigurationFormSucceeded());
-  }).catch(() => {
-    dispatch(proposalFormAdminConfigurationFormServerError());
-  });
+  return UpdateProposalFormMutation.commit({ input });
 };
 
 export class ProposalFormAdminConfigurationForm extends Component<Props> {
@@ -157,8 +152,8 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
     const {
       invalid,
       valid,
-      isSaved,
-      hasServerError,
+      submitSucceeded,
+      submitFailed,
       pristine,
       handleSubmit,
       submitting,
@@ -427,15 +422,14 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
-                <AlertAdminForm
-                  valid={valid}
-                  invalid={invalid}
-                  isSaved={isSaved}
-                  hasServerError={hasServerError}
-                  submitting={submitting}
-                />
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </ButtonToolbar>
-
           </form>
         </div>
       </div>
@@ -453,8 +447,6 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: props.proposalForm,
-  isSaved: state.proposal.proposalFormAdminConfigurationFormSucceeded,
-  hasServerError: state.proposal.proposalFormAdminConfigurationFormServerError,
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),

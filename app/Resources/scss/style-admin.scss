@@ -11,6 +11,7 @@
   "admin/variables",
   "admin/tools",
   "admin/proposal",
+  "admin/alert",
   "admin/form",
   "modules/social-block",
   "modules/sonata",
@@ -37,21 +38,4 @@ body {
 .excerpt {
     color: $excerpt;
     font-weight: normal;
-}
-
-//à changer de place
-.alert__admin-form {
-    &_succeeded-action, &_invalid-field, &_server-failed-action {
-        padding: 6px 12px;
-        margin-left: 5px;
-        float: left;
-    }
-
-    &_invalid-field, &_server-failed-action {
-        color: $danger-color;
-    }
-
-    &_succeeded-action {
-        color: $success-color;
-    }
 }

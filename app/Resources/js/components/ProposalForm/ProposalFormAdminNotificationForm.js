@@ -6,6 +6,7 @@ import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
+import AlertAdminForm from '../Alert/AlertAdminForm';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from './__generated__/ProposalFormAdminNotificationForm_proposalForm.graphql';
 import type { State } from '../../types';
@@ -16,6 +17,9 @@ type Props = RelayProps & {
   invalid: boolean,
   pristine: boolean,
   submitting: boolean,
+  valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
 };
 
 const formName = 'proposal-form-admin-notification';
@@ -29,14 +33,20 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   inputs.proposalFormId = proposalForm.id;
   return UpdateProposalFormNotificationsConfigurationMutation.commit({
     input: inputs,
-  }).then(() => {
-    location.reload();
   });
 };
 
 export class ProposalFormAdminNotificationForm extends Component<Props> {
   render() {
-    const { invalid, pristine, handleSubmit, submitting } = this.props;
+    const {
+      invalid,
+      pristine,
+      handleSubmit,
+      submitting,
+      valid,
+      submitSucceeded,
+      submitFailed,
+    } = this.props;
     return (
       <div className="box box-primary container">
         <div className="box-header">
@@ -107,6 +117,13 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </ButtonToolbar>
           </form>
         </div>

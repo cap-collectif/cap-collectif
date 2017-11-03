@@ -109,6 +109,13 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               values={Object {}}
             />
           </Button>
+          <AlertAdminForm
+            hasServerError={false}
+            invalid={false}
+            isSaved={false}
+            submitting={false}
+            valid={false}
+          />
         </ButtonToolbar>
       </div>
     </form>

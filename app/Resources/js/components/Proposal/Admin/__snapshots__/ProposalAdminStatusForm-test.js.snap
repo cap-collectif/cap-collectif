@@ -100,6 +100,13 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
             values={Object {}}
           />
         </Button>
+        <AlertAdminForm
+          hasServerError={false}
+          invalid={false}
+          isSaved={false}
+          submitting={false}
+          valid={false}
+        />
       </ButtonToolbar>
     </form>
   </div>
@@ -200,6 +207,13 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
             values={Object {}}
           />
         </Button>
+        <AlertAdminForm
+          hasServerError={false}
+          invalid={false}
+          isSaved={false}
+          submitting={false}
+          valid={false}
+        />
       </ButtonToolbar>
     </form>
   </div>
@@ -304,6 +318,13 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
             values={Object {}}
           />
         </Button>
+        <AlertAdminForm
+          hasServerError={false}
+          invalid={false}
+          isSaved={false}
+          submitting={false}
+          valid={false}
+        />
       </ButtonToolbar>
     </form>
   </div>

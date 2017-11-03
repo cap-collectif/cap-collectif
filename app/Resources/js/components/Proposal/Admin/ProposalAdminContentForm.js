@@ -12,7 +12,6 @@ import component from '../../Form/Field';
 import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
-import { proposalAdminContentFormSucceeded, proposalAdminContentFormServerError } from '../../../redux/modules/proposal';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 
@@ -28,8 +27,8 @@ type Props = {
   handleSubmit: () => void,
   intl: IntlShape,
   isSuperAdmin: boolean,
-  isSaved: boolean,
-  hasServerError: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   pristine: boolean,
   invalid: boolean,
   valid: boolean,
@@ -73,12 +72,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: { ...values, id: props.proposal.id },
   };
 
-  return ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
-    // window.location.reload();
-    dispatch(proposalAdminContentFormSucceeded())
-  }).catch(() => {
-    dispatch(proposalAdminContentFormServerError())
-  });
+  return ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
@@ -129,12 +123,11 @@ export class ProposalAdminContentForm extends Component<Props, State> {
       pristine,
       invalid,
       valid,
-      isSaved,
-      hasServerError,
+      submitSucceeded,
+      submitFailed,
       proposal,
       features,
       submitting,
-      // dispatch,
       isSuperAdmin,
       themes,
       handleSubmit,
@@ -349,8 +342,8 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
-                isSaved={isSaved}
-                hasServerError={hasServerError}
+                isSaved={submitSucceeded}
+                hasServerError={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>
@@ -370,8 +363,8 @@ const form = reduxForm({
 const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
-  isSaved: state.proposal.proposalAdminContentFormSucceeded,
-  hasServerError: state.proposal.proposalAdminContentFormServerError,
+  // isSaved: state.proposal.proposalAdminContentFormSucceeded,
+  // hasServerError: state.proposal.proposalAdminContentFormServerError,
   themes: state.default.themes,
   initialValues: {
     title: proposal.title,

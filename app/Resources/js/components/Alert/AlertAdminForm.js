@@ -1,38 +1,42 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 type Props = {
-  valid : boolean,
+  valid: boolean,
   invalid: boolean,
-  isSaved: boolean,
+  pristine: boolean,
   submitting: boolean,
-  hasServerError: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
 };
 
 class AlertAdminForm extends React.Component<Props> {
-
   render() {
-    const { valid, invalid, isSaved, hasServerError, submitting } = this.props;
+    const { valid, invalid, submitSucceeded, submitFailed, submitting } = this.props;
 
     return (
       <div>
-        { valid &&
-          isSaved &&
-          !submitting &&
-          <div className="alert__admin-form_succeeded-action">
-              <i className="fa fa-check-square-o" aria-hidden="true"></i> <FormattedMessage id="global.saved"/>
-          </div>
-        }
-        { invalid &&
+        {valid &&
+          submitSucceeded &&
+          !submitting && (
+            <div className="alert__admin-form_succeeded-action">
+              <i className="icon ion-android-checkmark-circle" />{' '}
+              <FormattedMessage id="global.saved" />
+            </div>
+          )}
+        {invalid && (
           <div className="alert__admin-form_invalid-field">
-            <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.invalid.form" />
+            <i className="icon ion-ios-close-outline" />{' '}
+            <FormattedMessage id="global.invalid.form" />
           </div>
-        }
-        { hasServerError &&
+        )}
+        {submitFailed && (
           <div className="alert__admin-form_server-failed-action">
-            <i className="fa fa-times" aria-hidden="true"></i> <FormattedMessage id="global.server.error.form" />
+            <i className="icon ion-ios-close-outline" />{' '}
+            <FormattedMessage id="global.error.server.form" />{' '}
+            <FormattedHTMLMessage id="global.contact.assistance" />
           </div>
-        }
+        )}
       </div>
     );
   }
