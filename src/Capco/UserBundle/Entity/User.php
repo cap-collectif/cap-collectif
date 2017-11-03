@@ -267,12 +267,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function setSamlAttributes(string $idp, array $attributes)
     {
-        if ($idp === 'oda') {
+        if ('oda' === $idp) {
             $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
         }
-        if ($idp === 'daher') {
+        if ('daher' === $idp) {
             $this->setUsername($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
             $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
+        }
+        if ('afd-interne' === $idp) {
+            $this->setUsername($attributes['cn'][0]);
+            $this->setEmail($attributes['mail'][0]);
         }
     }
 
@@ -1192,7 +1196,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function isEmailConfirmed()
     {
-        return $this->confirmationToken === null;
+        return null === $this->confirmationToken;
     }
 
     public function getFullname()

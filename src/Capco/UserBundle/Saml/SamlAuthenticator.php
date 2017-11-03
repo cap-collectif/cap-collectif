@@ -36,7 +36,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         if ('afd-interne' === $this->samlIdp) {
-            return 'id';
+            return 'mail';
         }
 
         throw new \Exception('Could not find your authentication attribute.');

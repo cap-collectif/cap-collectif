@@ -25,10 +25,10 @@ class SamlUserProvider implements UserProviderInterface
             $user->setSamlId($id);
             $user->setUsername($id);
 
-            if ($this->samlIdp === 'oda') {
+            if ('oda' === $this->samlIdp) {
                 $user->setEmail($id . '@fake-email-cap-collectif.com');
             }
-            if ($this->samlIdp === 'daher') {
+            if ('daher' === $this->samlIdp || 'afd-interne' === $this->samlIdp) {
                 $user->setEmail($id);
             }
 
@@ -48,6 +48,6 @@ class SamlUserProvider implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        return $class === 'Capco\UserBundle\Entity\User';
+        return 'Capco\UserBundle\Entity\User' === $class;
     }
 }
