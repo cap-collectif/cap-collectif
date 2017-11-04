@@ -24,7 +24,6 @@ def ci():
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/testing.yml']
     env.run = lrun
     env.local = True
-    env.build_at_up = False
     env.directory = env.root_dir
     env.ci = True
 

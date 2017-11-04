@@ -52,7 +52,7 @@ def get_images():
 
 def change_paths():
     return [
-        'infrastructure/environments/base.yml',
+        'infrastructure/environments/(.+?)',
         'infrastructure/services/(.+?)',
         '.circleci/.circle-cache',
     ]
