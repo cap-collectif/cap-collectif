@@ -5,7 +5,6 @@ import AlertAdminFormSucceededMessage from './AlertAdminFormSucceededMessage';
 type Props = {
   valid: boolean,
   invalid: boolean,
-  pristine: boolean,
   submitting: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,

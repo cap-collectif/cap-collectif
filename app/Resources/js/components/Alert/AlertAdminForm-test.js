@@ -8,7 +8,6 @@ describe('<AlertAdminForm />', () => {
   const submitSucceededForm = {
     valid: true,
     invalid: false,
-    pristine: false,
     submitting: false,
     submitSucceeded: true,
     submitFailed: false,
@@ -17,7 +16,6 @@ describe('<AlertAdminForm />', () => {
   const submitFailedForm = {
     valid: true,
     invalid: false,
-    pristine: false,
     submitting: false,
     submitSucceeded: false,
     submitFailed: true,
@@ -26,7 +24,6 @@ describe('<AlertAdminForm />', () => {
   const invalidForm = {
     valid: false,
     invalid: true,
-    pristine: false,
     submitting: false,
     submitSucceeded: true,
     submitFailed: false,
@@ -35,7 +32,6 @@ describe('<AlertAdminForm />', () => {
   const validForm = {
     valid: true,
     invalid: false,
-    pristine: false,
     submitting: false,
     submitSucceeded: false,
     submitFailed: false,
@@ -44,7 +40,6 @@ describe('<AlertAdminForm />', () => {
   const submittingForm = {
     valid: true,
     invalid: false,
-    pristine: false,
     submitting: true,
     submitSucceeded: false,
     submitFailed: false,
