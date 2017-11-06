@@ -745,7 +745,7 @@ notification:
             <h2>Commentaire</h2>
             <p>%comment%</p>
             <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a></p>
-            <p><a>Ne plus recevoir ces notificiations</a> | <a href="%notificationsUrl%">Paramètre de notification</a></p>
+            <p><a href="%disableNotificationsUrl%">Ne plus recevoir ces notificiations</a> | <a href="%notificationsUrl%">Paramètre de notification</a></p>
       create:
           subject: "%sitename% — %username% a publié un commentaire sur une proposition"
           body: |
@@ -774,7 +774,7 @@ notification:
             <h2>Commentaire</h2>
             <p>%comment%</p>
             <p><a href="%proposalUrl%">Afficher le commentaire sur le site</a></p>
-            <p><a>Ne plus recevoir ces notificiations</a> | <a href="%notificationsUrl%">Paramètre de notification</a></p>
+            <p><a href="%disableNotificationsUrl%">Ne plus recevoir ces notificiations</a> | <a href="%notificationsUrl%">Paramètre de notification</a></p>
       create:
           subject: "%sitename% — %username% a publié un commentaire sur une proposition"
           body: |
