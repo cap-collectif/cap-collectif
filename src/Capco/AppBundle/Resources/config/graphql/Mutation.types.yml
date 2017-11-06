@@ -4,6 +4,7 @@ Mutation:
         fields:
         # User notifications
           changeUserNotificationsConfiguration:
+                access: "@=isAuthenticated()"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeUserNotificationsConfigurationInput

@@ -25,12 +25,10 @@ Query:
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('proposalForms')"
             userNotificationsConfiguration:
+                access: "@=isAuthenticated()"
                 type: "UserNotificationsConfiguration"
                 description: "Get an user notifications configuration"
-                args:
-                    userId:
-                        type: "ID!"
-                resolve: "@=resolver('user_notifications_configuration', [args])"
+                resolve: "@=resolver('user_notifications_configuration', [user])"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"
