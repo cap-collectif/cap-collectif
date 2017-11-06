@@ -140,8 +140,6 @@ export class ProposalAdminContentForm extends Component<Props, State> {
       </span>
     );
 
-    console.log(pristine);
-
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -356,6 +354,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
 
 const form = reduxForm({
   onSubmit,
+  // onSubmitSuccess,
   validate,
   form: formName,
 })(ProposalAdminContentForm);
