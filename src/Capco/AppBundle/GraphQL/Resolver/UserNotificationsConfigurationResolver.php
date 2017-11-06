@@ -3,16 +3,21 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserNotificationsConfigurationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolve(Arg $args): UserNotificationsConfiguration
+    public function resolve($user): UserNotificationsConfiguration
     {
-        return $this->container->get('capco.user.repository')->find($args['userId'])->getNotificationsConfiguration();
+        if (!$user instanceof User) {
+            throw new AccessDeniedException('You must be logged');
+        }
+
+        return $user->getNotificationsConfiguration();
     }
 }
