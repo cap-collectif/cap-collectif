@@ -341,7 +341,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}
-                submitFailded={submitFailed}
+                submitFailed={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>

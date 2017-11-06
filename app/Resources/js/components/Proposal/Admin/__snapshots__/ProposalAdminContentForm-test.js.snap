@@ -197,7 +197,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         </Button>
         <AlertAdminForm
           invalid={false}
-          submitFailded={false}
+          submitFailed={false}
           submitSucceeded={false}
           submitting={false}
           valid={false}

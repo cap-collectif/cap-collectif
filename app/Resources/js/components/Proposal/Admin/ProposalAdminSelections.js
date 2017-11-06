@@ -233,7 +233,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}
-                submitFailded={submitFailed}
+                submitFailed={submitFailed}
                 submitting={submitting}
               />
             </ButtonToolbar>
