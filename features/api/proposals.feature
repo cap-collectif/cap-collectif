@@ -1265,7 +1265,7 @@ Scenario: logged in API client wants to remove a proposal
   When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/proposal2"
   Then the JSON response status code should be 204
 
-@database
+@database @dev
 Scenario: logged in API client wants to remove a proposal and ensure that its proposal was disabled
   Given I am logged in to api as user
   When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/proposal12"
