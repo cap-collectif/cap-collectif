@@ -354,7 +354,6 @@ export class ProposalAdminContentForm extends Component<Props, State> {
 
 const form = reduxForm({
   onSubmit,
-  // onSubmitSuccess,
   validate,
   form: formName,
 })(ProposalAdminContentForm);

@@ -26,13 +26,8 @@ exports[`<AlertAdminForm /> render correctly the message for submit failed 1`] =
       className="icon ion-ios-close-outline"
     />
      
-    <FormattedMessage
-      id="global.error.server.form"
-      values={Object {}}
-    />
-     
     <FormattedHTMLMessage
-      id="global.contact.assistance"
+      id="global.error.server.form"
       values={Object {}}
     />
   </div>
