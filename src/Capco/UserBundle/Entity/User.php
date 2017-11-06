@@ -1346,7 +1346,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     private function initializeNotificationsConfiguration()
     {
         $notificationsConfiguration = new UserNotificationsConfiguration();
-        $notificationsConfiguration->setUser($this);
         $this->setNotificationsConfiguration($notificationsConfiguration);
     }
 
