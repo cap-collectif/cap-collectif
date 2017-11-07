@@ -72,10 +72,6 @@ class ProfileController extends BaseController
      * @Route("/notifications", name="capco_profile_notifications_edit_account")
      * @Template("@CapcoUser/Profile/edit_notifications.twig")
      * @Security("has_role('ROLE_USER')")
-     *
-     * @param Request $request
-     *
-     * @return array
      */
     public function showNotificationsOptionsAction(Request $request)
     {
