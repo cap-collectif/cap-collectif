@@ -10,7 +10,8 @@ Group:
                 type: "String!"
                 description: "Identifies the group name."
             description:
-                type: "HTML!"
+                type: "String"
                 description: "Identifies the description of the group."
-            userGroups:
-              type: "[UserGroup!]!"
+            usersConnection:
+                type: "[UserGroup!]!"
+                resolve: "@=resolver('group_users_connection', [value])"

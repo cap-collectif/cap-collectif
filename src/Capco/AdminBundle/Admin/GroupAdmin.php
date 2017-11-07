@@ -3,11 +3,36 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class GroupAdmin extends Admin
 {
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFields(): array
+    {
+        return [
+            'title',
+            'description',
+            'countUserGroups',
+            'createdAt',
+            'updatedAt',
+        ];
+    }
+
+    public function getExportFormats(): array
+    {
+        return ['csv'];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -23,15 +48,32 @@ class GroupAdmin extends Admin
             ->add('countUserGroups', null, [
                 'label' => 'admin.fields.group.number_users',
             ])
-            ->add('updatedInfo', 'datetime', [
+            ->add('createdAt', 'datetime', [
+                'label' => 'admin.fields.group.created_at',
+            ])
+            ->add('updatedAt', 'datetime', [
                 'label' => 'admin.fields.group.updated_at',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
             ])
         ;
     }
 
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('title', null, [
+                'label' => 'admin.fields.group.title',
+            ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.group.created_at',
+            ])
+            ->add('updatedAt', null, [
+                'label' => 'admin.fields.group.updated_at',
+            ]);
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit']);
+        $collection->remove('create');
+        $collection->remove('delete');
     }
 }

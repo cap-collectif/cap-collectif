@@ -32,9 +32,10 @@ export class GroupAdminPage extends Component<Props, State> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query GroupAdminPageQuery($id: String!) {
+            query GroupAdminPageQuery($id: ID!) {
               group(id: $id) {
                 ...GroupAdminPageTabs_group
+                ...GroupAdminParameters_group
               }
             }
           `}

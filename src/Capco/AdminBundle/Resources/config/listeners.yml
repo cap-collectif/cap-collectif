@@ -131,11 +131,17 @@ services:
     tags:
         - { name: overblog_graphql.resolver, alias: "group", method: "resolve" }
         - { name: overblog_graphql.resolver, alias: "query_group", method: "resolve" }
+        - { name: overblog_graphql.resolver, alias: "group_users_connection", method: "resolveUsersConnection" }
 
   capco.mutation.groups:
         class: Capco\AppBundle\GraphQL\Mutation\GroupMutation
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@form.factory'
         tags:
+            - { name: overblog_graphql.mutation, alias: "createGroup", method: "create" }
+            - { name: overblog_graphql.mutation, alias: "updateGroup", method: "update" }
+            - { name: overblog_graphql.mutation, alias: "deleteGroup", method: "delete" }
             - { name: overblog_graphql.mutation, alias: "deleteUserInGroup", method: "deleteUserInGroup" }
             - { name: overblog_graphql.mutation, alias: "addUsersInGroup", method: "addUsersInGroup" }
 

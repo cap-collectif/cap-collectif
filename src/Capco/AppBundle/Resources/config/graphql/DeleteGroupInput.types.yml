@@ -1,0 +1,8 @@
+DeleteGroupInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            groupId:
+              type: "ID!"
+              description: "The group id"

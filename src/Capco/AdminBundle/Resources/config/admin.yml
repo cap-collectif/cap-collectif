@@ -445,3 +445,4 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
+      - [ setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]

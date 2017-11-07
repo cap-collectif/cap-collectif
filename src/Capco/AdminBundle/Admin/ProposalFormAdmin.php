@@ -240,6 +240,7 @@ class ProposalFormAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+        die('eee');
         $showMapper
             ->add('title', null, [
                 'label' => 'admin.fields.proposal_form.title',

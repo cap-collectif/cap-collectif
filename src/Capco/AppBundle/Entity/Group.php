@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="user_group")
@@ -22,7 +23,13 @@ class Group
     use BlameableTrait;
 
     /**
-     * @ORM\Column(name="description", type="text")
+     * @Gedmo\Timestampable(on="change", field={"title", "description"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -34,6 +41,7 @@ class Group
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
+        $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
@@ -41,7 +49,7 @@ class Group
         return $this->title;
     }
 
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }

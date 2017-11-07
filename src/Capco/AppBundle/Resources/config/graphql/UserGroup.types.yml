@@ -4,8 +4,8 @@ UserGroup:
         description: "A list of users in groups"
         fields:
             id:
-                type: "String!"
-                description: "The content of the group."
+                type: "ID!"
+                description: "The identifier of the group"
             user:
                 type: "User!"
                 description: "Identifies the user"

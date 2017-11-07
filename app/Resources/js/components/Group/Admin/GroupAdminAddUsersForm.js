@@ -46,7 +46,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
     const { handleSubmit, group } = this.props;
 
     const usersInGroup = [];
-    group.userGroups.map(userGroup => {
+    group.usersConnection.map(userGroup => {
       usersInGroup.push(userGroup.user.id);
     });
 

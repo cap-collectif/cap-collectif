@@ -11,6 +11,7 @@ type Props = {
   deleteElement: Function,
   deleteModalTitle: string,
   deleteModalContent: string,
+  buttonConfirmMessage?: string,
 };
 
 export class DeleteModal extends React.Component<Props> {
@@ -21,6 +22,7 @@ export class DeleteModal extends React.Component<Props> {
       deleteElement,
       deleteModalContent,
       deleteModalTitle,
+      buttonConfirmMessage,
     } = this.props;
 
     const onDelete = () => {
@@ -42,7 +44,11 @@ export class DeleteModal extends React.Component<Props> {
         <Modal.Footer>
           <CloseButton onClose={closeDeleteModal} />
           <Button onClick={onDelete} bsStyle="danger">
-            {<FormattedMessage id="global.delete" />}
+            {buttonConfirmMessage ? (
+              <FormattedMessage id={buttonConfirmMessage} />
+            ) : (
+              <FormattedMessage id="global.delete" />
+            )}
           </Button>
         </Modal.Footer>
       </Modal>

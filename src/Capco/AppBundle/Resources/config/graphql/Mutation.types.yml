@@ -119,6 +119,27 @@ Mutation:
                   payloadType: ChangeProposalEvaluationPayload
                   mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value])"
         # Groups
+          createGroup:
+              access: "@=hasRole('ROLE_ADMIN')"
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: CreateGroupInput
+                  payloadType: CreateGroupPayload
+                  mutateAndGetPayload: "@=mutation('createGroup', [value])"
+          updateGroup:
+              access: "@=hasRole('ROLE_ADMIN')"
+              builder: "Relay::Mutation"
+              builderConfig:
+                  inputType: UpdateGroupInput
+                  payloadType: UpdateGroupPayload
+                  mutateAndGetPayload: "@=mutation('updateGroup', [value])"
+          deleteGroup:
+            access: "@=hasRole('ROLE_SUPER_ADMIN')"
+            builder: "Relay::Mutation"
+            builderConfig:
+              inputType: DeleteGroupInput
+              payloadType: DeleteGroupPayload
+              mutateAndGetPayload: "@=mutation('deleteGroup', [value['groupId']])"
           deleteUserInGroup:
             access: "@=hasRole('ROLE_SUPER_ADMIN')"
             builder: "Relay::Mutation"

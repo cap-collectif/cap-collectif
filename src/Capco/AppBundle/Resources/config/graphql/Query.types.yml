@@ -87,5 +87,5 @@ Query:
                 type: "Group!"
                 args:
                     id:
-                        type: "String!"
+                        type: "ID!"
                 resolve: "@=resolver('query_group', [args['id'], user])"

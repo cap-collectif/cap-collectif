@@ -62,38 +62,38 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           onClose={this.handleClose}
           group={group}
         />
-        {group.userGroups.length ? (
+        {group.usersConnection.length ? (
           <ListGroup>
-            {group.userGroups.map((userGroup, index) => (
+            {group.usersConnection.map((userConnection, index) => (
               <ListGroupItem key={index}>
                 <DeleteModal
                   closeDeleteModal={this.cancelCloseRemoveUserModal}
                   showDeleteModal={index === showRemoveUserModal}
                   deleteElement={() => {
-                    onDelete(userGroup.user.id, group.id);
+                    onDelete(userConnection.user.id, group.id);
                   }}
-                  deleteModalTitle={'group.admin.modal.delete.title'}
-                  deleteModalContent={'group.admin.modal.delete.content'}
+                  deleteModalTitle={'group.admin.user.modal.delete.title'}
+                  deleteModalContent={'group.admin.user.modal.delete.content'}
                 />
                 <Row>
                   <Col xs={3}>
-                    {userGroup.user.media ? (
+                    {userConnection.user.media ? (
                       <img
                         className="img-circle mr-15"
-                        src={userGroup.user.media.url}
-                        alt={userGroup.user.displayName}
+                        src={userConnection.user.media.url}
+                        alt={userConnection.user.displayName}
                       />
                     ) : (
                       <img
                         className="img-circle mr-15"
                         src="/bundles/sonatauser/default_avatar.png"
-                        alt={userGroup.user.displayName}
+                        alt={userConnection.user.displayName}
                       />
                     )}
-                    {userGroup.user.displayName}
+                    {userConnection.user.displayName}
                   </Col>
                   <Col xs={4}>
-                    <p className="mt-10">{userGroup.user.email}</p>
+                    <p className="mt-10">{userConnection.user.email}</p>
                   </Col>
                   <Col xs={4} className="pull-right">
                     <Button
@@ -111,7 +111,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
             ))}
           </ListGroup>
         ) : (
-          <div style={{ padding: '10px' }}>
+          <div className="mb-15">
             <FormattedMessage id="group.admin.no_users" />
           </div>
         )}
@@ -132,7 +132,7 @@ export default createFragmentContainer(
     fragment GroupAdminUsers_group on Group {
       id
       title
-      userGroups {
+      usersConnection {
         id
         user {
           id
