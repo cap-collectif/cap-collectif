@@ -30,7 +30,6 @@ const validate = () => {
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { proposalForm } = props;
   const inputs = values;
-  console.log(inputs);
   inputs.proposalFormId = proposalForm.id;
   return UpdateProposalFormNotificationsConfigurationMutation.commit({
     input: inputs,

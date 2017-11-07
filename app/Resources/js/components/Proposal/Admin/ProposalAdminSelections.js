@@ -50,12 +50,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     const array = proposal.selections.filter(s => s.step.id === selection.step);
     const previousSelection = array.length ? array[0] : null;
 
-    // console.warn(selection);
-    // console.error(values);
-
     if (selection.selected && previousSelection === null) {
-      // console.log('SelectProposalMutation');
-      // console.log(selection);
       promises.push(
         SelectProposalMutation.commit({
           input: {
@@ -67,8 +62,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       );
     }
     if (selection.selected && previousSelection && previousSelection.status !== selection.status) {
-      // console.log('ChangeSelectionStatusMutation');
-      // console.log(selection);
       promises.push(
         ChangeSelectionStatusMutation.commit({
           input: {
@@ -80,8 +73,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       );
     }
     if (!selection.selected && previousSelection) {
-      // console.log('SelectProposalMutation');
-      // console.log(selection);
       promises.push(
         UnselectProposalMutation.commit({
           input: {
@@ -93,8 +84,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     }
   }
   if (values.progressSteps !== props.initialValues.progressSteps) {
-    // console.log('ChangeProposalProgressStepsMutation');
-    // console.log(values);
     promises.push(
       ChangeProposalProgressStepsMutation.commit({
         input: {
@@ -110,8 +99,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   if (values.collectStatus !== props.initialValues.collectStatus) {
-    // console.log('ChangeCollectStatusMutation');
-    // console.log(values);
     promises.push(
       ChangeCollectStatusMutation.commit({
         input: {

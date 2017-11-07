@@ -52,7 +52,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
   if (props.proposal.form.evaluationForm) {
     const questions = props.proposal.form.evaluationForm.questions;
-
     const responses = values.responses.map(resp => {
       const actualQuestion = questions.find(question => question.id === String(resp.question));
       const questionType = actualQuestion.type;
@@ -294,10 +293,6 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       proposal,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
-
-    // const { initialValues } = this.props;
-    //
-    // console.log(initialValues);
 
     return (
       <div className="box box-primary container">
