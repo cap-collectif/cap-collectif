@@ -11,6 +11,7 @@ import ChangeProposalContentMutation from '../../../mutations/ChangeProposalCont
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 
@@ -26,8 +27,11 @@ type Props = {
   handleSubmit: () => void,
   intl: IntlShape,
   isSuperAdmin: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   pristine: boolean,
   invalid: boolean,
+  valid: boolean,
   submitting: boolean,
 };
 type State = void;
@@ -67,9 +71,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const variables = {
     input: { ...values, id: props.proposal.id },
   };
-  ChangeProposalContentMutation.commit(variables, uploadables).then(() => {
-    window.location.reload();
-  });
+
+  return ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
@@ -119,6 +122,9 @@ export class ProposalAdminContentForm extends Component<Props, State> {
     const {
       pristine,
       invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
       proposal,
       features,
       submitting,
@@ -133,6 +139,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
         <FormattedMessage id="global.form.optional" />
       </span>
     );
+
     return (
       <div className="box box-primary container">
         <form onSubmit={handleSubmit}>
@@ -330,6 +337,13 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </ButtonToolbar>
           </div>
         </form>
@@ -341,6 +355,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
 const form = reduxForm({
   onSubmit,
   validate,
+  enableReinitialize: true,
   form: formName,
 })(ProposalAdminContentForm);
 

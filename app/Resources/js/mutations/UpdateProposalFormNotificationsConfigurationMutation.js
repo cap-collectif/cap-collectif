@@ -14,6 +14,14 @@ const mutation = graphql`
     updateProposalFormNotificationsConfiguration(input: $input) {
       proposalForm {
         id
+        notificationsConfiguration {
+          onCreate
+          onUpdate
+          onDelete
+          onCommentCreate
+          onCommentUpdate
+          onCommentDelete
+        }
       }
     }
   }

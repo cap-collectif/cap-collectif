@@ -12,6 +12,11 @@ const mutation = graphql`
     unselectProposal(input: $input) {
       proposal {
         id
+        selections {
+          step {
+            id
+          }
+        }
       }
     }
   }

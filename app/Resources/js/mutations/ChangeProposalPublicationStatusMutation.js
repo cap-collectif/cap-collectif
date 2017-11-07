@@ -11,7 +11,9 @@ const mutation = graphql`
   mutation ChangeProposalPublicationStatusMutation($input: ChangeProposalPublicationStatusInput!) {
     changeProposalPublicationStatus(input: $input) {
       proposal {
+        id
         publicationStatus
+        trashedReason
       }
     }
   }

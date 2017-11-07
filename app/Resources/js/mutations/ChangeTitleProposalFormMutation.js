@@ -12,6 +12,7 @@ const mutation = graphql`
     changeTitleProposalForm(input: $input) {
       proposalForm {
         id
+        title
       }
     }
   }

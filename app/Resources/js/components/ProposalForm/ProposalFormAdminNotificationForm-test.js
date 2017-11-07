@@ -11,6 +11,9 @@ describe('<ProposalFormAdminNotificationForm />', () => {
     pristine: false,
     handleSubmit: jest.fn(),
     invalid: false,
+    valid: false,
+    submitSucceeded: false,
+    submitFailed: false,
     proposalForm: {
       id: 'proposalFormId',
       notificationsConfiguration: {
