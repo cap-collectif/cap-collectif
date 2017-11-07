@@ -35,7 +35,7 @@ export const ProposalPageContent = React.createClass({
   },
 
   render() {
-    const { proposal, className, form, categories, dispatch } = this.props;
+    const { proposal, className, form, categories, dispatch, user } = this.props;
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -48,40 +48,41 @@ export const ProposalPageContent = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div className="block">
-          <h2 className="h2 with-buttons">
-            {<FormattedMessage id="proposal.tabs.content" />}
-            <div className="pull-right">
-              <EditButton
-                id="proposal-edit-button"
-                author={proposal.author}
-                onClick={() => {
-                  dispatch(openEditProposalModal());
-                }}
-                editable={form.isContribuable}
-              />
-              <DeleteButton
-                id="proposal-delete-button"
-                author={proposal.author}
-                onClick={() => {
-                  dispatch(openDeleteProposalModal());
-                }}
-                style={{ marginLeft: '15px' }}
-                deletable={form.isContribuable}
-              />
+          {user === proposal.author && (
+            <div className="actions">
+              <div className="pull-right">
+                <EditButton
+                  id="proposal-edit-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openEditProposalModal());
+                  }}
+                  editable={form.isContribuable}
+                />
+                <DeleteButton
+                  id="proposal-delete-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openDeleteProposalModal());
+                  }}
+                  style={{ marginLeft: '15px' }}
+                  deletable={form.isContribuable}
+                />
+              </div>
             </div>
-          </h2>
+          )}
           {proposal.media && (
             <img
               id="proposal-media"
               src={proposal.media.url}
-              alt=""
-              className="img-responsive mt-15"
+              alt={proposal.title}
+              className="img-responsive mb-15"
             />
           )}
-          {proposal.summary && <p className="excerpt mt-15">{proposal.summary}</p>}
+          {proposal.summary && <p className="excerpt">{proposal.summary}</p>}
           {proposal.body && (
             <div>
-              <h3 className="h3 mt-15">{<FormattedMessage id="proposal.description" />}</h3>
+              <h3 className="h3">{<FormattedMessage id="proposal.description" />}</h3>
               <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
             </div>
           )}
@@ -129,11 +130,10 @@ export const ProposalPageContent = React.createClass({
                 id="proposal-share-button"
                 url={proposal._links.show}
                 title={proposal.title}
-                style={{ marginLeft: 15 }}
               />
+              <ProposalReportButton proposal={proposal} />
             </div>
           )}
-          <ProposalReportButton proposal={proposal} />
         </div>
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
         <ProposalDeleteModal proposal={proposal} form={form} />
@@ -143,4 +143,10 @@ export const ProposalPageContent = React.createClass({
   },
 });
 
-export default connect()(ProposalPageContent);
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPageContent);

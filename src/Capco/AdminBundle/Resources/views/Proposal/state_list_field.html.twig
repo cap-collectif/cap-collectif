@@ -12,6 +12,10 @@
                 <span class="label label-info">{{ trans_state }}</span>
             {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_ENABLED') %}
                 <span class="label label-success">{{ trans_state }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_EXPIRED') %}
+                <span class="label label-danger">{{ trans_state }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_HIDDEN_CONTENT') %}
+                <span class="label label-danger">{{ trans_state }}</span>
             {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_TRASHED') %}
                 <span class="label label-danger">{{ trans_state }}</span>
             {% endif %}

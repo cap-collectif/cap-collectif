@@ -111,6 +111,7 @@ class ThemeRepository extends EntityRepository
                 AND pt.id = t.id
                 AND p.draft = false
                 AND p.expired = false
+                AND p.isTrashed = false
                 AND p.deletedAt IS NULL
             ) as value')
             ->setParameter('step', $step)

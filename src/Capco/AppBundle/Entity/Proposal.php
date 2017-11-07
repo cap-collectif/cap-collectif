@@ -61,8 +61,10 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';
     const STATE_TRASHED = 'trashed';
+    const STATE_HIDDEN_CONTENT = 'hidden_content';
     const STATE_DISABlED = 'unpublished';
     const STATE_DELETED = 'deleted';
+    const STATE_EXPIRED = 'expired';
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -931,10 +933,22 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->getStatus();
     }
 
-    public function state()
+    public function state(): string
     {
         if ($this->getDeletedAt() !== null) {
             return self::STATE_DELETED;
+        }
+
+        if (!$this->isEnabled() && $this->isTrashed()) {
+            return self::STATE_HIDDEN_CONTENT;
+        }
+
+        if (!$this->isEnabled() && !$this->isDraft()) {
+            return self::STATE_DISABlED;
+        }
+
+        if ($this->isExpired()) {
+            return self::STATE_EXPIRED;
         }
 
         if ($this->isTrashed()) {
@@ -943,10 +957,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
         if ($this->isDraft()) {
             return self::STATE_DRAFT;
-        }
-
-        if ($this->isDeleted() || !$this->isEnabled()) {
-            return self::STATE_DISABlED;
         }
 
         if ($this->isEnabled()) {
