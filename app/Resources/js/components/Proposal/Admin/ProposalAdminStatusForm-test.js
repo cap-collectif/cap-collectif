@@ -24,9 +24,6 @@ describe('<ProposalAdminStatusForm />', () => {
         isAuthor={false}
         pristine
         invalid={false}
-        valid={false}
-        submitSucceeded={false}
-        submitFailed={false}
         submitting={false}
         relay={{}}
         dispatch={jest.fn()}
@@ -57,9 +54,6 @@ describe('<ProposalAdminStatusForm />', () => {
         isAuthor={false}
         pristine
         invalid={false}
-        valid={false}
-        submitSucceeded={false}
-        submitFailed={false}
         submitting={false}
         dispatch={jest.fn()}
         proposal={proposalExpired}
@@ -89,9 +83,6 @@ describe('<ProposalAdminStatusForm />', () => {
         isAuthor={false}
         pristine
         invalid={false}
-        valid={false}
-        submitSucceeded={false}
-        submitFailed={false}
         submitting={false}
         dispatch={jest.fn()}
         proposal={proposalConfirmed}

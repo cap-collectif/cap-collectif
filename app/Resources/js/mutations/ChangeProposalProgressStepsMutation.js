@@ -12,12 +12,6 @@ const mutation = graphql`
     changeProposalProgressSteps(input: $input) {
       proposal {
         id
-        progressSteps {
-          id
-          title
-          startAt
-          endAt
-        }
       }
     }
   }

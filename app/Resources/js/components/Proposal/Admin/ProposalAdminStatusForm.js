@@ -6,7 +6,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import moment from 'moment';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
 import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
 import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
@@ -21,9 +20,6 @@ type Props = RelayProps & {
   isAuthor: boolean,
   pristine: boolean,
   invalid: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
   submitting: boolean,
   dispatch: Dispatch,
   handleSubmit: () => void,
@@ -45,6 +41,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
   return ChangeProposalPublicationStatusMutation.commit({
     input,
+  }).then(() => {
+    location.reload();
   });
 };
 
@@ -65,9 +63,6 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
       proposal,
       pristine,
       invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
       submitting,
       handleSubmit,
       publicationStatus,
@@ -154,13 +149,6 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
                     <FormattedMessage id="global.delete" />
                   </Button>
                 )}
-              <AlertAdminForm
-                valid={valid}
-                invalid={invalid}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
             </ButtonToolbar>
           </form>
         </div>
@@ -170,7 +158,6 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
 }
 
 const form = reduxForm({
-  enableReinitialize: true,
   form: formName,
 })(ProposalAdminStatusForm);
 

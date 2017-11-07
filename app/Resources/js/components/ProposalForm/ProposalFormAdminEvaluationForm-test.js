@@ -8,9 +8,6 @@ describe('<ProposalFormAdminEvaluationForm />', () => {
   const props = {
     handleSubmit: jest.fn(),
     invalid: false,
-    valid: false,
-    submitSucceeded: false,
-    submitFailed: false,
     pristine: false,
     submitting: false,
     proposalForm: {

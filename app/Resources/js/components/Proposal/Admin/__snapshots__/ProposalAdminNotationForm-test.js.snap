@@ -53,7 +53,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               />
             }
             name="estimation"
-            normalize={[Function]}
             type="number"
           />
           <Field
@@ -110,13 +109,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               values={Object {}}
             />
           </Button>
-          <AlertAdminForm
-            invalid={false}
-            submitFailed={false}
-            submitSucceeded={false}
-            submitting={false}
-            valid={false}
-          />
         </ButtonToolbar>
       </div>
     </form>

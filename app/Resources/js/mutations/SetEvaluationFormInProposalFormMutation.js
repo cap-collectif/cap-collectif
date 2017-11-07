@@ -12,10 +12,6 @@ const mutation = graphql`
     setEvaluationFormInProposalForm(input: $input) {
       proposalForm {
         id
-        evaluationForm {
-          id
-          title
-        }
       }
     }
   }

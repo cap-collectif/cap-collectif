@@ -11,7 +11,6 @@ const mutation = graphql`
   mutation ChangeCollectStatusMutation($input: ChangeCollectStatusInput!) {
     changeCollectStatus(input: $input) {
       proposal {
-        id
         status {
           id
         }
