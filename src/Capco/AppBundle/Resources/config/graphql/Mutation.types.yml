@@ -134,21 +134,21 @@ Mutation:
                   payloadType: UpdateGroupPayload
                   mutateAndGetPayload: "@=mutation('updateGroup', [value])"
           deleteGroup:
-            access: "@=hasRole('ROLE_SUPER_ADMIN')"
+            access: "@=hasRole('ROLE_ADMIN')"
             builder: "Relay::Mutation"
             builderConfig:
               inputType: DeleteGroupInput
               payloadType: DeleteGroupPayload
               mutateAndGetPayload: "@=mutation('deleteGroup', [value['groupId']])"
           deleteUserInGroup:
-            access: "@=hasRole('ROLE_SUPER_ADMIN')"
+            access: "@=hasRole('ROLE_ADMIN')"
             builder: "Relay::Mutation"
             builderConfig:
               inputType: DeleteUserInGroupInput
               payloadType: DeleteUserInGroupPayload
               mutateAndGetPayload: "@=mutation('deleteUserInGroup', [value['userId'], value['groupId']])"
           addUsersInGroup:
-            access: "@=hasRole('ROLE_SUPER_ADMIN')"
+            access: "@=hasRole('ROLE_ADMIN')"
             builder: "Relay::Mutation"
             builderConfig:
               inputType: AddUsersInGroupInput

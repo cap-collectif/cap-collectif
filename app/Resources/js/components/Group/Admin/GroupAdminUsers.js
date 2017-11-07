@@ -18,7 +18,8 @@ const onDelete = (userId: string, groupId: string) => {
       userId,
       groupId,
     },
-  }).then(location.reload());
+  });
+  // .then(location.reload());
 };
 
 export class GroupAdminUsers extends React.Component<Props, State> {
