@@ -8,7 +8,6 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
 import component from '../Form/Field';
-import AlertAdminForm from '../Alert/AlertAdminForm';
 import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated__/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
 import Loader from '../Utils/Loader';
@@ -19,9 +18,6 @@ type Props = RelayProps & {
   invalid: boolean,
   pristine: boolean,
   submitting: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
 };
 
 type DefaultProps = void;
@@ -38,23 +34,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm }: Prop
     evaluationFormId,
   };
 
-  return SetEvaluationFormInProposalFormMutation.commit({ input });
+  return SetEvaluationFormInProposalFormMutation.commit({ input }).then(() => {
+    location.reload();
+  });
 };
 
 export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
   static defaultProps: DefaultProps;
 
   render() {
-    const {
-      proposalForm,
-      handleSubmit,
-      pristine,
-      submitting,
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-    } = this.props;
+    const { proposalForm, handleSubmit, pristine, submitting, invalid } = this.props;
 
     return (
       <div className="box box-primary container">
@@ -128,13 +117,6 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
             <Button bsStyle="danger" disabled>
               <FormattedMessage id="global.delete" />
             </Button>
-            <AlertAdminForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
           </ButtonToolbar>
         </form>
       </div>
