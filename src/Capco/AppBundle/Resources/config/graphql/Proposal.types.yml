@@ -58,7 +58,7 @@ Proposal:
                 type: "String!"
                 description: "Identifies the contribution title."
             body:
-                type: "HTML!"
+                type: "HTML"
                 description: "Identifies the body of the contribution."
             bodyText:
                 type: "String!"

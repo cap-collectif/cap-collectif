@@ -79,8 +79,12 @@ export const ProposalPageContent = React.createClass({
             />
           )}
           {proposal.summary && <p className="excerpt mt-15">{proposal.summary}</p>}
-          <h3 className="h3 mt-15">{<FormattedMessage id="proposal.description" />}</h3>
-          <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
+          {proposal.body && (
+            <div>
+              <h3 className="h3 mt-15">{<FormattedMessage id="proposal.description" />}</h3>
+              <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
+            </div>
+          )}
         </div>
         {address &&
           config.canUseDOM && (

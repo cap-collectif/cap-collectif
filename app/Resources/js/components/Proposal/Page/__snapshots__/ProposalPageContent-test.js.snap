@@ -34,21 +34,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         />
       </div>
     </h2>
-    <h3
-      className="h3 mt-15"
-    >
-      <FormattedMessage
-        id="proposal.description"
-        values={Object {}}
-      />
-    </h3>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": undefined,
-        }
-      }
-    />
   </div>
   <div
     className="block proposal__buttons"

@@ -941,12 +941,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             return self::STATE_TRASHED;
         }
 
-        if ($this->isDeleted() || !$this->isEnabled()) {
-            return self::STATE_DISABlED;
-        }
-
         if ($this->isDraft()) {
             return self::STATE_DRAFT;
+        }
+
+        if ($this->isDeleted() || !$this->isEnabled()) {
+            return self::STATE_DISABlED;
         }
 
         if ($this->isEnabled()) {

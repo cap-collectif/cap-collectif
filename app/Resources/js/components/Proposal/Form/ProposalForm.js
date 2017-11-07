@@ -194,7 +194,7 @@ export const ProposalForm = React.createClass({
 
         form.draft = nextProps.isSubmittingDraft;
         if (mode === 'edit') {
-          updateProposal(dispatch, this.props.form.id, proposal.id, form);
+          updateProposal(dispatch, this.props.form.id, proposal.id, form, currentStepId);
         } else {
           submitProposal(dispatch, this.props.form.id, form, currentStepId).catch(e => {
             if (

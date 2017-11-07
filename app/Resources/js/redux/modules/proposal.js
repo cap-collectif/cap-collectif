@@ -344,6 +344,10 @@ function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStep
     const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
     const lastProposals = randomResultsByStep[currentProjectStepId];
 
+    if (lastProposals.indexOf(proposal.id) !== -1) {
+      return;
+    }
+
     const proposals = {};
     proposals[currentProjectStepId] = [proposal.id, ...lastProposals];
 
@@ -484,17 +488,30 @@ export const submitProposal = (
     });
 };
 
-export const updateProposal = (dispatch: Dispatch, form: Uuid, id: Uuid, data: Object) => {
+export const updateProposal = (
+  dispatch: Dispatch,
+  form: Uuid,
+  id: Uuid,
+  data: Object,
+  currentStepId: string,
+) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
-    .then(() => {
+    .then(response => {
       dispatch(closeEditProposalModal());
-      location.reload();
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
+      });
+
+      response.json().then(proposal => {
+        if (!proposal.isDraft) {
+          addProposalInRandomResultsByStep(proposal, currentStepId);
+        }
+
+        location.reload();
       });
     })
     .catch(() => {

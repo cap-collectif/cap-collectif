@@ -718,7 +718,7 @@ type Proposal {
   title: String!
 
   # Identifies the body of the contribution.
-  body: HTML!
+  body: HTML
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
