@@ -18,26 +18,26 @@
 
                         <div class="form-group">
                             <p class="text-danger">{{ form_errors(form.username) }}</p>
-                            <label for="username" class="control-label">{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}</label>
+                            <label for="username" class="control-label">{{ 'security.login.username'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.username, {'attr': {'placeholder': 'Votre pseudo', 'class': 'form-control'} }) }}
                             <p class="excerpt">Votre nom d'utilisateur est rendu public sur la plateforme.</p>
                         </div>
 
                         <div class="form-group">
                             <p class="text-danger">{{ form_errors(form.email) }}</p>
-                            <label for="email" class="control-label">{{ 'form.email'|trans({}, 'SonataUserBundle') }}</label>
+                            <label for="email" class="control-label">{{ 'form.email'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.email, {'attr': {'placeholder': 'pseudo@exemple.fr', 'class': 'form-control'} }) }}
                         </div>
 
                         <div class="form-group">
                             <p class="text-danger">{{ form_errors(form.plainPassword.first) }}</p>
-                            <label for="password" class="control-label">{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}</label>
+                            <label for="password" class="control-label">{{ 'security.login.password'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'} }) }}
                         </div>
 
                         <div class="form-group">
                             <p class="text-danger">{{ form_errors(form.plainPassword.second) }}</p>
-                            <label for="password" class="control-label">{{ 'form.password_confirmation'|trans({}, 'SonataUserBundle') }}</label>
+                            <label for="password" class="control-label">{{ 'form.password_confirmation'|trans({}, 'CapcoAppBundle') }}</label>
                             {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'} }) }}
                         </div>
 

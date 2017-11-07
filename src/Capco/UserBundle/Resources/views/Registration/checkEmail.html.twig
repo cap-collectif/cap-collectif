@@ -4,18 +4,18 @@
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1 class="h2  h--no-border">{{ 'registration.check_email.title'|trans({}, 'SonataUserBundle') }}</h1>
+            <h1 class="h2  h--no-border">{{ 'registration.check_email.title'|trans({}, 'CapcoAppBundle') }}</h1>
         </div>
     </div>
 {% endblock %}
 
 {% block fos_user_content %}
     <div class="container  container--custom">
-        <h2 class="h2">{{ 'registration.check_email.title'|trans({}, 'SonataUserBundle') }}</h2>
-        <p class="text-blue">{{ 'registration.check_email.body'|trans({'%email%': user.email}, 'SonataUserBundle') }}</p>
-        <p class="text-blue">{{ 'registration.check_email.spam'|trans({}, 'SonataUserBundle') }}</p>
-        <h2 class="h2">{{ 'registration.check_email.content.title'|trans({}, 'SonataUserBundle') }}</h2>
-        <p>{{ 'registration.check_email.content.body'|trans({}, 'SonataUserBundle') }}</p>
+        <h2 class="h2">{{ 'registration.check_email.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        <p class="text-blue">{{ 'registration.check_email.body'|trans({'%email%': user.email}, 'CapcoAppBundle') }}</p>
+        <p class="text-blue">{{ 'registration.check_email.spam'|trans({}, 'CapcoAppBundle') }}</p>
+        <h2 class="h2">{{ 'registration.check_email.content.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        <p>{{ 'registration.check_email.content.body'|trans({}, 'CapcoAppBundle') }}</p>
     </div>
 
 {% endblock fos_user_content %}

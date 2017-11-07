@@ -18,7 +18,7 @@ services:
     arguments:
       - "@capco.site_parameter.resolver"
     tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 15 }
 
   capco.listener.shield:
     class: Capco\AppBundle\EventListener\ShieldListener

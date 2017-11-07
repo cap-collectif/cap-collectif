@@ -5,16 +5,16 @@
                 {{ form_errors(form.new.first) }}
                 <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
                     <div class="form-group">
-                        <label for="password" class="control-label">{{ 'change_password.form.password'|trans({}, 'SonataUserBundle') }}</label>
+                        <label for="password" class="control-label">{{ 'change_password.form.password'|trans({}, 'CapcoAppBundle') }}</label>
                         {{ form_widget(form.new.first) }}
                     </div>
                     <div class="form-group">
-                        <label for="password" class="control-label">{{ 'change_password.form.password_confirmation'|trans({}, 'SonataUserBundle') }}</label>
+                        <label for="password" class="control-label">{{ 'change_password.form.password_confirmation'|trans({}, 'CapcoAppBundle') }}</label>
                         {{ form_widget(form.new.second) }}
                     </div>
                     {{ form_widget(form) }}
                     <div>
-                        <input type="submit" value="{{ 'change_password.form.submit'|trans({}, 'SonataUserBundle') }}" class="btn btn-success btn-block  login__submit"/>
+                        <input type="submit" value="{{ 'change_password.form.submit'|trans({}, 'CapcoAppBundle') }}" class="btn btn-success btn-block  login__submit"/>
                     </div>
                 </form>
 
