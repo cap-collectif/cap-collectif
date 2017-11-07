@@ -124,11 +124,12 @@
             <join-column name="user_type_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
-        <one-to-one field="notificationsConfiguration" target-entity="Capco\AppBundle\Entity\UserNotificationsConfiguration">
+        <one-to-one field="notificationsConfiguration" target-entity="Capco\AppBundle\Entity\UserNotificationsConfiguration" >
             <cascade>
                 <cascade-persist/>
+                <cascade-remove/>
             </cascade>
-            <join-column name="notifications_configuration_id" referenced-column-name="id" />
+            <join-column name="notifications_configuration_id" referenced-column-name="id"/>
         </one-to-one>
 
         <one-to-many target-entity="Capco\AppBundle\Entity\Proposal" mapped-by="author" field="proposals">

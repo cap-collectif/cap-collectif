@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,11 +27,22 @@ class UserNotificationsConfiguration
      */
     private $onProposalCommentMail = true;
 
+    /**
+     * @var User
+     * @ORM\OneToOne(targetEntity="Capco\UserBundle\Entity\User", mappedBy="notificationsConfiguration")
+     */
+    private $user;
+
     public function getNotificationsValues(): array
     {
         return [
             'onProposalCommentMail' => $this->onProposalCommentMail,
         ];
+    }
+
+    public function disableAllNotifications()
+    {
+        $this->onProposalCommentMail = false;
     }
 
     /**
@@ -67,5 +79,25 @@ class UserNotificationsConfiguration
     public function setOnProposalCommentMail(bool $onProposalCommentMail)
     {
         $this->onProposalCommentMail = $onProposalCommentMail;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return UserNotificationsConfiguration
+     */
+    public function setUser(User $user): UserNotificationsConfiguration
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

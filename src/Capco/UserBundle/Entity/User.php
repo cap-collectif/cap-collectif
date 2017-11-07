@@ -243,7 +243,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     /**
      * @var UserNotificationsConfiguration
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"remove", "persist"})
      * @ORM\JoinColumn(name="notifications_configuration_id", referencedColumnName="id")
      */
     private $notificationsConfiguration;
