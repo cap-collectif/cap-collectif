@@ -17,7 +17,7 @@ class UserNotificationsConfiguration
 
     /**
      * @var string
-     * @ORM\Column(name="unsubscribe_token", type="string", length=255, options={"default": NULL}, nullable=true)
+     * @ORM\Column(name="unsubscribe_token", type="string", length=255, nullable=false)
      */
     private $unsubscribeToken;
 

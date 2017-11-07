@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: jbaraomar
- * Date: 31/10/2017
- * Time: 09:53.
- */
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 

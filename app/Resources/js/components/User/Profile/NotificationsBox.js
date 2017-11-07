@@ -19,18 +19,6 @@ export class NotificationsBox extends Component<Props, State> {
   static defaultProps: DefaultProps;
 
   render() {
-    const footer = (
-      <Button
-        id="edit-account-profile-button"
-        onClick={() => {
-          console.log('click');
-        }}
-        // disabled={invalid || submitting}
-        bsStyle="primary"
-        className="col-sm-offset-4">
-        <FormattedMessage id="global.save_modifications" />
-      </Button>
-    );
     return (
       <Panel header={<FormattedMessage id="profile.account.notifications.title" />} footer={footer}>
         <NotificationsForm />
