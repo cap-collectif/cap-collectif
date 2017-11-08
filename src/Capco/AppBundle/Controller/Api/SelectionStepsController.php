@@ -68,7 +68,7 @@ class SelectionStepsController extends FOSRestController
             unset($providedFilters['statuses']);
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposals(
+        $results = $this->get('capco.search.resolver')->searchProposals(
             $page,
             $pagination,
             $order,
@@ -92,7 +92,7 @@ class SelectionStepsController extends FOSRestController
             throw new HttpException(400, 'ids are not setted');
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds, $selectionStep->getId());
+        $results = $this->get('capco.search.resolver')->searchProposalsIn($selectedIds, $selectionStep->getId());
 
         // Reorder proposals
         $orderedProposals = [];

@@ -1,19 +1,11 @@
 services:
-    # Redeclare Sonata services
-  sonata.user.admin.group:
-    abstract: false
-    public: true
-  sonata.user.orm.group_manager:
-    abstract: false
-    public: true
-
   my_user_provider:
-    class: Capco\UserBundle\Security\Core\User\UserProvider
-    arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
+      class: Capco\UserBundle\Security\Core\User\UserProvider
+      arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
 
   saml_user_provider:
-    class: Capco\UserBundle\Security\Core\User\SamlUserProvider
-    arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
+      class: Capco\UserBundle\Security\Core\User\SamlUserProvider
+      arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType

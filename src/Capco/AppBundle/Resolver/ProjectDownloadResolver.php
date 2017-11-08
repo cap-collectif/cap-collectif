@@ -488,6 +488,14 @@ class ProjectDownloadResolver
             $this->customFields[] = $title;
         }
 
+        $evaluationForm = $proposalForm->getEvaluationForm();
+
+        if ($evaluationForm) {
+            foreach ($evaluationForm->getRealQuestions() as $question) {
+                $this->customFields[] = $question->getTitle();
+            }
+        }
+
         $this->headers = array_merge($this->headers, $this->customFields);
     }
 

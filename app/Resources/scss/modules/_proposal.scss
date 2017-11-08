@@ -495,6 +495,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         background-color: $main-field-bg;
         border-color: $main-border-color;
         font-size: 14px;
+        border-radius: 5px;
     }
 
     .control-label.h5 {
