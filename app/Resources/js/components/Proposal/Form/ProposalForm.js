@@ -389,6 +389,7 @@ export const ProposalForm = React.createClass({
 
   render() {
     const { form, intl, features, themes, categories, proposal } = this.props;
+
     const optional = (
       <span className="excerpt">
         <FormattedMessage id="global.form.optional" />
@@ -479,6 +480,7 @@ export const ProposalForm = React.createClass({
           maxLength="140"
           autoComplete="off"
           valueLink={this.linkState('form.summary')}
+          help={form.summaryHelpText}
           label={
             <span>
               <FormattedMessage id="proposal.summary" />

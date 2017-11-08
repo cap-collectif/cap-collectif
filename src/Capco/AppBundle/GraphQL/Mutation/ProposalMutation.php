@@ -60,6 +60,7 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
 
         $values = $input->getRawArguments();
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
@@ -67,6 +68,8 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
         unset($values['proposalId']); // This only usefull to retrieve the proposal
+
+        // $logger->info('changeProgressSteps:' . json_encode($values, true));
 
         $form = $formFactory->create(ProposalProgressStepType::class, $proposal);
         $form->submit($values);

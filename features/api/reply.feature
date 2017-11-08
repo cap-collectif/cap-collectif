@@ -40,8 +40,7 @@ Scenario: Logged in API client wants to get one of his replies
           "type": @string@,
           "helpText": @...@,
           "slug": @string@,
-          "required": @boolean@,
-          "private": @boolean@
+          "required": @boolean@
         },
         "updated_at": "@string@.isDateTime()"
       },
@@ -102,8 +101,7 @@ Scenario: Logged in API client wants to get his replies
               "type": @string@,
               "helpText": @...@,
               "slug": @string@,
-              "required": @boolean@,
-              "private": @boolean@
+              "required": @boolean@
             },
             "updated_at": "@string@.isDateTime()"
           },

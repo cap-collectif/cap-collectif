@@ -3,18 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import Input from '../../Form/Input';
-import LocalStorage from '../../../services/LocalStorageService';
 import { changeOrder, loadProposals } from '../../../redux/modules/proposal';
 import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
 import type { Dispatch, State } from '../../../types';
 
-type Props = {
-  orderByVotes: boolean,
-  dispatch: Dispatch,
-  order?: string,
-  defaultSort?: string,
-  stepId?: string,
-};
+type Props = { orderByVotes: boolean, dispatch: Dispatch, order?: string };
 
 type ComponentState = {
   displayedOrders: Array<string>,
@@ -32,17 +25,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
       // eslint-disable-next-line react/prop-types
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByVotes ? ['votes'] : []),
     };
-  }
-
-  componentWillMount() {
-    const { dispatch, defaultSort, stepId } = this.props;
-    const savedSort = LocalStorage.get('proposal.orderByStep');
-    if (!savedSort || !Object.prototype.hasOwnProperty.call(savedSort, stepId)) {
-      if (defaultSort) {
-        dispatch(changeOrder(defaultSort));
-        dispatch(loadProposals());
-      }
-    }
   }
 
   render() {
@@ -74,7 +56,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 const mapStateToProps = (state: State) => {
   return {
     order: state.proposal.order,
-    stepId: state.project.currentProjectStepById || null,
   };
 };
 

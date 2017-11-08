@@ -360,9 +360,8 @@ class EventAdmin extends Admin
             return;
         }
 
-        $apiKey = $this->getConfigurationPool()->getContainer()->getParameter('google_maps_key_server');
         $curl = new CurlHttpAdapter();
-        $geocoder = new GoogleMaps($curl, null, null, true, $apiKey);
+        $geocoder = new GoogleMaps($curl);
 
         $address = $event->getAddress() . ', ' . $event->getZipCode() . ' ' . $event->getCity() . ', ' . $event->getCountry();
 

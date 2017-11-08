@@ -39,6 +39,7 @@ const CommentDate = React.createClass({
 
     return (
       <span className="excerpt">
+        {' - '}
         {<FormattedMessage id="comment.edited" />}{' '}
         <FormattedDate
           value={moment(comment.updated_at)}
@@ -56,7 +57,6 @@ const CommentDate = React.createClass({
     return (
       <span className="h5 comment__date">
         {this.renderDate()}
-        <br />
         {this.renderEditionDate()}
       </span>
     );

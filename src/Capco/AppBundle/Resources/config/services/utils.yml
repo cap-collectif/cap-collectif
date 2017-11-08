@@ -2,7 +2,3 @@ services:
   capco.utils.map:
     class: Capco\AppBundle\Utils\Map
     arguments: ["%google_maps_key_server%"]
-
-  capco.utils.array_hydrator:
-    class: pmill\Doctrine\Hydrator\ArrayHydrator
-    arguments: ["@doctrine.orm.entity_manager"]
