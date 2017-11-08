@@ -116,8 +116,8 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => [
-                    'fr-FR' => 'French (France)',
-                    'en-GB' => 'English (UK)',
+                    'fr-FR' => 'French',
+                    'en-GB' => 'English',
                     // 'es-ES' => 'Spanish (Spain)',
                 ],
             ]);
