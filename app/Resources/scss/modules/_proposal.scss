@@ -17,6 +17,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     display: flex;
 }
 
+.proposal__step-page .PrivateList {
+    margin-bottom: 30px;
+}
+
 .proposal__header {
     .media {
         display: flex;
