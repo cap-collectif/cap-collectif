@@ -43,6 +43,10 @@ Capco\AppBundle\Entity\ProposalForm:
             type: string
             groups: [ProposalForms]
             serialized_name: addressHelpText
+        summaryHelpText:
+            expose: true
+            groups: [ProposalForms]
+            serialized_name: summaryHelpText
         usingThemes:
           expose: true
           type: boolean
