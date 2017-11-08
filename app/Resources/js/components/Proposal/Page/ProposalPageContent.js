@@ -52,25 +52,23 @@ export const ProposalPageContent = React.createClass({
           {user &&
             user.uniqueId === proposal.author.uniqueId && (
               <div className="actions">
-                <div className="pull-right">
-                  <EditButton
-                    id="proposal-edit-button"
-                    author={proposal.author}
-                    onClick={() => {
-                      dispatch(openEditProposalModal());
-                    }}
-                    editable={form.isContribuable}
-                  />
-                  <DeleteButton
-                    id="proposal-delete-button"
-                    author={proposal.author}
-                    onClick={() => {
-                      dispatch(openDeleteProposalModal());
-                    }}
-                    style={{ marginLeft: '15px' }}
-                    deletable={form.isContribuable}
-                  />
-                </div>
+                <EditButton
+                  id="proposal-edit-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openEditProposalModal());
+                  }}
+                  editable={form.isContribuable}
+                />
+                <DeleteButton
+                  id="proposal-delete-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openDeleteProposalModal());
+                  }}
+                  style={{ marginLeft: '15px' }}
+                  deletable={form.isContribuable}
+                />
               </div>
             )}
           {proposal.media && (

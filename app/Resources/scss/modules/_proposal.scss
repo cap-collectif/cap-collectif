@@ -482,15 +482,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
     .block {
         > .actions {
-            margin-top: 0px;
-            display: block;
-            width: 100%;
-            float: right;
-            margin-bottom: 15px;
-        }
-
-        &:first-child > h3 {
-            margin-top: 0;
+            margin-bottom: 20px;
         }
     }
 }
