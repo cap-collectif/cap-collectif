@@ -478,12 +478,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 }
 
-.proposal__content {
+.proposal__content .block {
+    > .actions {
+        margin-bottom: 20px;
+    }
 
-    .block {
-        > .actions {
-            margin-bottom: 20px;
-        }
+    &:first-child > h3, &:first-child > div > h3 {
+        margin-top: 0;
     }
 }
 
