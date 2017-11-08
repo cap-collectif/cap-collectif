@@ -2,19 +2,27 @@
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
-use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20171107165657 extends AbstractMigration implements ContainerAwareInterface
 {
-    use ContainerAwareTrait;
+    private $em;
+    private $generator;
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->em = $container->get('doctrine')->getManager();
+        $this->container = $container;
+        $this->generator = new UuidGenerator();
+    }
     
     /**
      * @param Schema $schema
@@ -33,17 +41,19 @@ class Version20171107165657 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-
-//        $users = $this->container->get('capco.user.repository')->findAll();
-//        foreach ($users as $user) {
-//            if(!$user->getNotificationsConfiguration()) {
-//                $user->setNotificationsConfiguration((new UserNotificationsConfiguration())
-//                    ->setUser($user)
-//                    ->setUnsubscribeToken($this->container->get('fos_user.util.token_generator')->generateToken())
-//                );
-//            }
-//        }
-//        $this->container->get('doctrine.orm.default_entity_manager')->flush();
+        echo '-> Adding user notifications for existing users...' . PHP_EOL;
+        $users = $this->connection->fetchAll('SELECT * from fos_user');
+        foreach ($users as $user) {
+            if (!$user['notifications_configuration_id']) {
+                $uuid = $this->generator->generate($this->em, null);
+                $this->connection->insert('user_notifications_configuration', [
+                    'id' => $uuid,
+                    'on_proposal_comment_mail' => 1,
+                    'unsubscribe_token' => $this->container->get('fos_user.util.token_generator')->generateToken()
+                ]);
+                $this->connection->update('fos_user', ['notifications_configuration_id' => $uuid], ['id' => $user['id']]);
+            }
+        }
     }
 
     /**
