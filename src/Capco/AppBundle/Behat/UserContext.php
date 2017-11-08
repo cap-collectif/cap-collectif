@@ -69,19 +69,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given /^user with email "([^"]+)" has disabled notifications$/
-     *
-     * @param mixed $email
-     */
-    public function disableUserNotifications($email)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneBy(['email' => $email]);
-        $user->getNotificationsConfiguration()->disableAllNotifications();
-        $this->getEntityManager()->flush();
-    }
-
-    /**
      * @Then user :userSlug email_to_confirm should be :email
      */
     public function userNewEmailIs(string $userSlug, string $email)

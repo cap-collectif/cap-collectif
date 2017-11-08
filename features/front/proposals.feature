@@ -203,11 +203,10 @@ Scenario: Author of a proposal should be notified when someone comment if he has
 
 @javascript @database
 Scenario: Author of a proposal should not be notified when someone comment if he has turned off comments notifications
-  Given user with email "msantostefano@jolicode.com" has disabled notifications
-  And I go to a proposal made by msantostefano@jolicode.com
+  Given I go to a proposal made by user@test.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   And I wait 3 seconds
-  Then I should not see mail to "msantostefano@jolicode.com"
+  Then I should not see mail to "user@test.com"
 
 @javascript
 Scenario: Non author of a proposal wants to delete it
