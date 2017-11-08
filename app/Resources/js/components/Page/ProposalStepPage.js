@@ -68,7 +68,7 @@ export const ProposalStepPage = React.createClass({
     }
 
     return (
-      <div className="proposal__step-page">
+      <div>
         <StepPageHeader step={step} />
         {step.type === 'collect' ? (
           <CollectStepPageHeader
