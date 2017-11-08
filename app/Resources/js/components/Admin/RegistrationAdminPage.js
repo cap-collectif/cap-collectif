@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import { arrayMove } from 'react-sortable-hoc';
@@ -142,6 +143,39 @@ export const RegistrationAdminPage = React.createClass({
             Ajouter
           </Button>
         </Well>
+        <div className="row" style={{ padding: '10px 0' }}>
+          <Col xs={1}>
+            <Toggle
+              checked={features.consent_external_communication}
+              onChange={() =>
+                onToggle(
+                  'consent_external_communication',
+                  !features.consent_external_communication,
+                )}
+            />
+          </Col>
+          <Col xs={11}>
+            <p>
+              <strong>
+                <FormattedMessage id="registration.enable_consent_external_communication.title" />
+              </strong>
+              <br />
+              <FormattedMessage
+                id="registration.enable_consent_external_communication.subtitle"
+                values={{
+                  link: (
+                    <a
+                      className="external-link"
+                      href={`${window.location.protocol}//${window.location
+                        .host}/admin/settings/settings.global/list`}>
+                      <FormattedMessage id="proposal.admin.general" />
+                    </a>
+                  ),
+                }}
+              />
+            </p>
+          </Col>
+        </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle

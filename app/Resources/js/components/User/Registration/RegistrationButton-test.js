@@ -7,6 +7,7 @@ import { RegistrationButton } from './RegistrationButton';
 describe('<RegistrationButton />', () => {
   const props = {
     openRegistrationModal: jest.fn(),
+    organizationName: 'Cap Collectif',
   };
 
   const style = { marginTop: '0' };

@@ -15,6 +15,7 @@ class Manager
         'calendar',
         'ideas',
         'captcha',
+        'consent_external_communication',
         'idea_creation',
         'idea_trash',
         'login_facebook',

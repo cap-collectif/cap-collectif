@@ -211,6 +211,13 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 1
         type: 0
 
+    SiteParameter32:
+        keyname: global.site.organization_name
+        category: settings.global
+        value: Cap Collectif
+        position: 2
+        type: 0
+
     # blog
     SiteParameterBlogPaginationSize:
         keyname: blog.pagination.size
@@ -242,7 +249,7 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: global.site.embed_js
         category: settings.global
         value: ''
-        position: 2
+        position: 3
         type: 3
 
     SiteParameterLoginTop:

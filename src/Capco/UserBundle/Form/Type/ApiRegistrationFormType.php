@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Form\Type;
 use Capco\AppBundle\Form\ValueResponseType;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,6 +41,9 @@ class ApiRegistrationFormType extends AbstractType
         }
 
         $builder
+            ->add('consentExternalCommunication', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('responses', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,

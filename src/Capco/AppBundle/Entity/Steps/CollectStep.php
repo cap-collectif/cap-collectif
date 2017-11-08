@@ -137,7 +137,7 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
 
     public function getDefaultSort(): string
     {
-        return $this->defaultSort ?? 'random';
+        return $this->defaultSort;
     }
 
     public function setDefaultSort(string $defaultSort): self

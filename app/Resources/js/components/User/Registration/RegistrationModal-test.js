@@ -7,6 +7,7 @@ import RegistrationForm from './RegistrationForm';
 
 describe('<RegistrationModal />', () => {
   const props = {
+    organizationName: 'Cap Collectif',
     onClose: jest.fn(),
     onSubmit: jest.fn(),
     submitting: false,

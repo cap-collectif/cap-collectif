@@ -120,3 +120,6 @@ User:
             userType:
                 type: "UserType"
                 description: "The type of the person."
+            consentExternalCommunication:
+                type: "Boolean!"
+                description: "Is user accepted the external communication during the registration."

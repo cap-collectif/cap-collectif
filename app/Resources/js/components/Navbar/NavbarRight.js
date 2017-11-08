@@ -11,6 +11,7 @@ const NavbarRight = React.createClass({
   propTypes: {
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
+    organizationName: PropTypes.string.isRequired,
   },
 
   getDefaultProps() {
@@ -27,7 +28,7 @@ const NavbarRight = React.createClass({
   },
 
   render() {
-    const { user, features } = this.props;
+    const { user, features, organizationName } = this.props;
     return (
       <Nav pullRight>
         {features.search && (
@@ -72,7 +73,7 @@ const NavbarRight = React.createClass({
           </NavDropdown>
         ) : (
           <li>
-            <RegistrationButton className="navbar-btn" />{' '}
+            <RegistrationButton className="navbar-btn" organizationName={organizationName} />{' '}
             <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
           </li>
         )}

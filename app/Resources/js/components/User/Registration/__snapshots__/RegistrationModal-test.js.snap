@@ -51,7 +51,9 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(ReduxForm)
+      organizationName="Cap Collectif"
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -136,7 +138,9 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(ReduxForm)
+      organizationName="Cap Collectif"
+    />
     <div
       className="text-center small excerpt"
       dangerouslySetInnerHTML={
@@ -220,7 +224,9 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(ReduxForm)
+      organizationName="Cap Collectif"
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -291,7 +297,9 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(ReduxForm)
+      organizationName="Cap Collectif"
+    />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"

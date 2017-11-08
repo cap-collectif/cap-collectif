@@ -1303,6 +1303,9 @@ type User {
 
   # The type of the person.
   userType: UserType
+
+  # Is user accepted the external communication during the registration.
+  consentExternalCommunication: Boolean!
 }
 
 # A type of person
