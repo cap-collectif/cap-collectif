@@ -22,7 +22,8 @@ Scenario: Anonymous API client wants to get one questionnaire
         "helpText": @...@,
         "required": @boolean@,
         "question": @string@,
-        "slug": @string@
+        "slug": @string@,
+        "private": @boolean@
       },
       {
         "id": @integer@,
@@ -33,6 +34,7 @@ Scenario: Anonymous API client wants to get one questionnaire
         "slug": @string@,
         "randomChoices": @boolean@,
         "isOtherAllowed": @boolean@,
+        "private": @boolean@,
         "choices": [
           {
             "id": @string@,
@@ -52,6 +54,7 @@ Scenario: Anonymous API client wants to get one questionnaire
         "slug": @string@,
         "randomChoices": @boolean@,
         "isOtherAllowed": @boolean@,
+        "private": @boolean@,
         "choices": [
           {
             "id": @string@,
@@ -71,6 +74,7 @@ Scenario: Anonymous API client wants to get one questionnaire
         "slug": @string@,
         "randomChoices": @boolean@,
         "isOtherAllowed": @boolean@,
+        "private": @boolean@,
         "choices": [
           {
             "id": @string@,

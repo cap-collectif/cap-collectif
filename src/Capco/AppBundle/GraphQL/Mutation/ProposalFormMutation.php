@@ -40,12 +40,14 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function changeTitle(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $formFactory = $this->container->get('form.factory');
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
+
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
 
         unset($arguments['proposalFormId']);
 
@@ -53,7 +55,8 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            $logger->error(get_class($this) . ' changeTitle: ' . (string) $form->getErrors(true, false));
+            throw new UserError('Can\'t change the title');
         }
 
         $this->container->get('doctrine.orm.default_entity_manager')->flush();
@@ -64,12 +67,14 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function update(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $formFactory = $this->container->get('form.factory');
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
+
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
 
         unset($arguments['proposalFormId']);
 
@@ -77,7 +82,8 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            $logger->error(get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            throw new UserError('Can\'t update this proposal form!');
         }
 
         $this->container->get('doctrine.orm.default_entity_manager')->flush();
@@ -88,13 +94,14 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function updateNotificationsConfiguration(Argument $input)
     {
         $arguments = $input->getRawArguments();
-        $formFactory = $this->container->get('form.factory');
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
         unset($arguments['proposalFormId']);
 
         $form = $formFactory->create(ProposalFormNotificationsConfigurationType::class, $proposalForm->getNotificationsConfiguration());
@@ -102,7 +109,8 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            $logger->error(get_class($this) . ' updateNotificationsConfiguration: ' . (string) $form->getErrors(true, false));
+            throw new UserError('Can\'t change the notification config!');
         }
 
         $this->container->get('doctrine.orm.default_entity_manager')->flush();
