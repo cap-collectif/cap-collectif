@@ -259,6 +259,24 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->getId() ? $this->getTitle() : 'New proposal';
     }
 
+    public function getEvaluationResponses()
+    {
+        if (!$this->proposalEvaluation) {
+            return null;
+        }
+        $tab = $this->proposalEvaluation->getResponses()->map(function ($response) {
+            $r = $response->getValue();
+
+            return [$response->getQuestion()->getTitle() => isset($r['labels']) ? implode(', ', $r['labels']) : $r];
+        });
+        $final = [];
+        foreach ($tab as $value) {
+            $final += $value;
+        }
+
+        return $final;
+    }
+
     public function getKind(): string
     {
         return 'proposal';

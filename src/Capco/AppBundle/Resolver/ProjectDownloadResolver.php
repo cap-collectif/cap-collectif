@@ -156,12 +156,18 @@ class ProjectDownloadResolver
 
         $this->data = [];
 
+        $proposalsObject = $this->em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getByProposalForm($collectStep->getProposalForm());
+
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByProposalForm($collectStep->getProposalForm(), true);
 
+        $i = 0;
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;
+            $proposal['evaluation_responses'] = $proposalsObject[$i]->getEvaluationResponses();
             $proposal['entity_type'] = 'proposal';
             $entity = $this->em
                 ->getRepository('CapcoAppBundle:Proposal')
@@ -198,6 +204,7 @@ class ProjectDownloadResolver
                 $separator = '' === $proposal['likers'] ? '' : ', ';
                 $proposal['likers'] = $proposal['likers'] . $separator . $liker->getDisplayName();
             }
+            ++$i;
         }
 
         unset($proposal);
@@ -508,6 +515,12 @@ class ProjectDownloadResolver
         foreach ($proposal['responses'] as $response) {
             if (in_array($response['question']['title'], $this->customFields, true)) {
                 $item[$response['question']['title']] = (string) $response['value'];
+            }
+        }
+
+        if (isset($proposal['evaluation_responses'])) {
+            foreach ($proposal['evaluation_responses'] as $question => $response) {
+                $item[$question] = $response;
             }
         }
 
