@@ -191,7 +191,8 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   And I go to a proposal which is not notifiable
   When I click the delete proposal button
   And I confirm proposal deletion
-  Then 0 mails should be sent
+  And I wait 3 seconds
+  Then I should not see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
 
 @javascript
 Scenario: Non author of a proposal wants to delete it
