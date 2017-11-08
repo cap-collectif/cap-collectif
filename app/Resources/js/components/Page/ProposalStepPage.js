@@ -21,7 +21,6 @@ export const ProposalStepPage = React.createClass({
     count: PropTypes.number.isRequired,
     queryCount: PropTypes.number,
     countFusions: PropTypes.number,
-    defaultSort: PropTypes.string,
     form: PropTypes.object.isRequired,
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
@@ -45,7 +44,6 @@ export const ProposalStepPage = React.createClass({
       statuses,
       step,
       count,
-      defaultSort,
       queryCount,
       countFusions,
       currentPage,
@@ -70,7 +68,7 @@ export const ProposalStepPage = React.createClass({
     }
 
     return (
-      <div>
+      <div className="proposal__step-page">
         <StepPageHeader step={step} />
         {step.type === 'collect' ? (
           <CollectStepPageHeader
@@ -86,7 +84,6 @@ export const ProposalStepPage = React.createClass({
           statuses={statuses}
           categories={categories}
           districts={form.districts}
-          defaultSort={defaultSort}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={form.usingThemes}
           showDistrictFilter={form.usingDistrict}
