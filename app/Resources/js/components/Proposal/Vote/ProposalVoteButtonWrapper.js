@@ -66,11 +66,12 @@ export const ProposalVoteButtonWrapper = React.createClass({
             step={step}
             user={user}
             style={style}
-            className={className}
+            className={`${className} mr-15`}
           />
         </VoteButtonOverlay>
       );
     }
+
     return (
       <VoteButtonOverlay
         popoverId={`vote-tooltip-proposal-${proposal.id}`}

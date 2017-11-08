@@ -45,32 +45,34 @@ export const ProposalPageContent = React.createClass({
     }
 
     const address = proposal.address ? JSON.parse(proposal.address) : null;
+
     return (
       <div className={classNames(classes)}>
         <div className="block">
-          {user === proposal.author && (
-            <div className="actions">
-              <div className="pull-right">
-                <EditButton
-                  id="proposal-edit-button"
-                  author={proposal.author}
-                  onClick={() => {
-                    dispatch(openEditProposalModal());
-                  }}
-                  editable={form.isContribuable}
-                />
-                <DeleteButton
-                  id="proposal-delete-button"
-                  author={proposal.author}
-                  onClick={() => {
-                    dispatch(openDeleteProposalModal());
-                  }}
-                  style={{ marginLeft: '15px' }}
-                  deletable={form.isContribuable}
-                />
+          {user &&
+            user.uniqueId === proposal.author.uniqueId && (
+              <div className="actions">
+                <div className="pull-right">
+                  <EditButton
+                    id="proposal-edit-button"
+                    author={proposal.author}
+                    onClick={() => {
+                      dispatch(openEditProposalModal());
+                    }}
+                    editable={form.isContribuable}
+                  />
+                  <DeleteButton
+                    id="proposal-delete-button"
+                    author={proposal.author}
+                    onClick={() => {
+                      dispatch(openDeleteProposalModal());
+                    }}
+                    style={{ marginLeft: '15px' }}
+                    deletable={form.isContribuable}
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
           {proposal.media && (
             <img
               id="proposal-media"
@@ -82,7 +84,9 @@ export const ProposalPageContent = React.createClass({
           {proposal.summary && <p className="excerpt">{proposal.summary}</p>}
           {proposal.body && (
             <div>
-              <h3 className="h3">{<FormattedMessage id="proposal.description" />}</h3>
+              <h3 className="h3">
+                <FormattedMessage id="proposal.description" />
+              </h3>
               <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
             </div>
           )}
@@ -90,7 +94,9 @@ export const ProposalPageContent = React.createClass({
         {address &&
           config.canUseDOM && (
             <div className="block" style={{ height: 255 }}>
-              <h3 className="h3">Lieu ou adresse</h3>
+              <h3 className="h3">
+                <FormattedMessage id="proposal.map.form.field" />
+              </h3>
               <p>{address[0].formatted_address}</p>
               <Map
                 center={{
