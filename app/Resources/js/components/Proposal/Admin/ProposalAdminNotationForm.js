@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
@@ -20,6 +21,9 @@ type Props = RelayProps & {
   intl: intlShape,
   handleSubmit: () => void,
   invalid: boolean,
+  valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   pristine: boolean,
   submitting: boolean,
   proposal: ProposalAdminNotationForm_proposal,
@@ -53,6 +57,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       const questionType = actualQuestion.type;
 
       let value;
+
       if (questionType === 'ranking' || questionType === 'button') {
         value = JSON.stringify({
           labels: Array.isArray(resp.value) ? resp.value : [resp.value],
@@ -77,11 +82,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
   }
 
-  return Promise.all(promises)
-    .then(() => {
-      location.reload();
-    })
-    .catch(() => {});
+  return Promise.all(promises);
 };
 
 const validate = (values: FormValues, { proposal }: Props) => {
@@ -281,7 +282,16 @@ const renderResponses = ({
 
 export class ProposalAdminNotationForm extends React.Component<Props> {
   render() {
-    const { invalid, pristine, handleSubmit, submitting, proposal } = this.props;
+    const {
+      invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
+      pristine,
+      handleSubmit,
+      submitting,
+      proposal,
+    } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
     return (
@@ -305,6 +315,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 <Field
                   name="estimation"
                   component={component}
+                  normalize={val => parseInt(val, 10)}
                   type="number"
                   id="proposal_estimation"
                   addonAfter={<Glyphicon glyph="euro" />}
@@ -361,6 +372,13 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   bsStyle="primary">
                   <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
                 </Button>
+                <AlertAdminForm
+                  valid={valid}
+                  invalid={invalid}
+                  submitSucceeded={submitSucceeded}
+                  submitFailed={submitFailed}
+                  submitting={submitting}
+                />
               </ButtonToolbar>
             </div>
           </form>
@@ -374,6 +392,7 @@ const form = injectIntl(
   reduxForm({
     onSubmit,
     validate,
+    enableReinitialize: true,
     form: formName,
   })(ProposalAdminNotationForm),
 );

@@ -278,6 +278,7 @@ class StepController extends Controller
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             'stepId' => $step->getId(),
+            'defaultSort' => $step->getDefaultSort() ?: null,
             'count' => $searchResults['count'],
             'countFusions' => $countFusions,
         ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'DistrictDetails', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
@@ -386,6 +387,7 @@ class StepController extends Controller
             'categories' => $categories,
             'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
+            'defaultSort' => $step->getDefaultSort() ?: null,
             'form' => $form,
             'showThemes' => $showThemes,
         ], 'json', SerializationContext::create()->setGroups(['Steps', 'ProposalForms', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));

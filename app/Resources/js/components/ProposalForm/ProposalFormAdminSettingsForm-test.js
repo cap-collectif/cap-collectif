@@ -9,6 +9,9 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     handleSubmit: jest.fn(),
     intl: global.intlMock,
     invalid: false,
+    valid: false,
+    submitSucceeded: false,
+    submitFailed: false,
     pristine: false,
     submitting: false,
     proposalForm: {

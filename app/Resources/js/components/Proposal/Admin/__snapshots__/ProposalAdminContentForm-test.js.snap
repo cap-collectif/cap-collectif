@@ -195,6 +195,13 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             values={Object {}}
           />
         </Button>
+        <AlertAdminForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={false}
+        />
       </ButtonToolbar>
     </div>
   </form>

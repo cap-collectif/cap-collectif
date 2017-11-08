@@ -74,6 +74,15 @@ Scenario: GraphQL client wants to update a proposal form
             id
             name
           }
+          questions {
+            id
+            position
+            helpText
+            private
+            required
+            title
+            type
+          }
         }
       }
     }",
@@ -122,6 +131,28 @@ Scenario: GraphQL client wants to update a proposal form
             "displayedOnMap": true,
             "geojson": ""
           }
+        ],
+        "questions": [
+          {
+            "position": 1,
+            "question": {
+              "title": "Etes-vous réél ?",
+              "helpText": "Peut-être que non...",
+              "private": false,
+              "required": true,
+              "type": "text"
+            }
+          },
+          {
+            "position": 2,
+            "question": {
+              "title": "Documents",
+              "helpText": "5 fichiers max",
+              "private": false,
+              "required": true,
+              "type": "medias"
+            }
+          }
         ]
       }
     }
@@ -168,7 +199,27 @@ Scenario: GraphQL client wants to update a proposal form
               "name": "Politique"
             }
           ],
-          "districts": @wildcard@
+          "districts": @wildcard@,
+          "questions": [
+            {
+              "id": @integer@,
+              "position": 1,
+              "title": "Etes-vous réél ?",
+              "helpText": "Peut-être que non...",
+              "private": false,
+              "required": true,
+              "type": "text"
+            },
+            {
+              "id": @integer@,
+              "position": 2,
+              "title": "Documents",
+              "helpText": "5 fichiers max",
+              "private": false,
+              "required": true,
+              "type": "medias"
+            }
+          ]
         }
       }
     }

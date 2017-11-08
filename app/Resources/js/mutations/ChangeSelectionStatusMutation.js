@@ -12,6 +12,14 @@ const mutation = graphql`
     changeSelectionStatus(input: $input) {
       proposal {
         id
+        selections {
+          step {
+            id
+          }
+          status {
+            id
+          }
+        }
       }
     }
   }

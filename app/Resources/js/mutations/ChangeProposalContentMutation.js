@@ -11,7 +11,44 @@ const mutation = graphql`
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!) {
     changeProposalContent(input: $input) {
       proposal {
-        publicationStatus
+        id
+        title
+        body
+        summary
+        responses {
+          question {
+            id
+          }
+          ... on ValueResponse {
+            value
+          }
+          ... on MediaResponse {
+            medias {
+              id
+              name
+              size
+              url
+            }
+          }
+        }
+        media {
+          id
+          url
+        }
+        author {
+          id
+          displayName
+        }
+        theme {
+          id
+        }
+        category {
+          id
+        }
+        address
+        district {
+          id
+        }
       }
     }
   }

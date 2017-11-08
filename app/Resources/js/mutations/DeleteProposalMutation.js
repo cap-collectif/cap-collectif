@@ -11,7 +11,7 @@ const mutation = graphql`
   mutation DeleteProposalMutation($input: DeleteProposalInput!) {
     deleteProposal(input: $input) {
       proposal {
-        publicationStatus
+        id
       }
     }
   }

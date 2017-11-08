@@ -7,6 +7,7 @@ import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
 import type { State, Dispatch } from '../../../types';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import SelectProposalMutation from '../../../mutations/SelectProposalMutation';
@@ -31,6 +32,9 @@ type Props = PassedProps & {
   handleSubmit: Function,
   pristine: boolean,
   invalid: boolean,
+  valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   submitting: boolean,
 };
 
@@ -104,11 +108,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }),
     );
   }
-  return Promise.all(promises)
-    .then(() => {
-      window.location.reload();
-    })
-    .catch(() => {});
+  return Promise.all(promises);
 };
 
 export class ProposalAdminSelections extends Component<Props> {
@@ -121,6 +121,9 @@ export class ProposalAdminSelections extends Component<Props> {
       handleSubmit,
       pristine,
       invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
       submitting,
     } = this.props;
     const steps = proposal.project.steps;
@@ -226,6 +229,13 @@ export class ProposalAdminSelections extends Component<Props> {
               <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </ButtonToolbar>
           </form>
         </div>
@@ -237,6 +247,7 @@ export class ProposalAdminSelections extends Component<Props> {
 const form = reduxForm({
   onSubmit,
   validate,
+  enableReinitialize: true,
   form: formName,
 })(ProposalAdminSelections);
 

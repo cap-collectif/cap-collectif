@@ -67,12 +67,6 @@ services:
     tags:
       - { name: form.type }
 
-  capco.form.questionnaire.media:
-    class: Capco\AppBundle\Form\QuestionnaireAbstractMediaQuestionType
-    arguments: ["@capco.form.transformer.entity_to_id"]
-    tags:
-      - { name: form.type }
-
   capco.form.response.media:
     class: Capco\AppBundle\Form\MediaResponseType
     arguments: ["@capco.form.transformer.entity_to_id"]
@@ -136,11 +130,13 @@ services:
 
   capco.form.proposal_form.update:
     class: Capco\AppBundle\Form\ProposalFormUpdateType
+    arguments: ["@doctrine.orm.entity_manager"]
     tags:
       - { name: form.type }
 
-  capco.form.questionnaire_abstract_questionnaire:
+  capco.form.questionnaire_abstract_question:
     class: Capco\AppBundle\Form\QuestionnaireAbstractQuestionType
+    arguments: ["@capco.utils.array_hydrator"]
     tags:
       - { name: form.type }
 

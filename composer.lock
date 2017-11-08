@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "74853df06cd5dc55a37dd520a83577e9",
+    "content-hash": "533c312c3e93426f50bb612e15b99023",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5717,6 +5717,54 @@
                 "type"
             ],
             "time": "2015-07-25T16:39:46+00:00"
+        },
+        {
+            "name": "pmill/doctrine-array-hydrator",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pmill/doctrine-array-hydrator.git",
+                "reference": "a4c6bd0c6c35ddb9235872295f8fd66b7c457bf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pmill/doctrine-array-hydrator/zipball/a4c6bd0c6c35ddb9235872295f8fd66b7c457bf8",
+                "reference": "a4c6bd0c6c35ddb9235872295f8fd66b7c457bf8",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.5"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "pmill\\Doctrine\\Hydrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "pmill",
+                    "email": "dev.pmill@gmail.com"
+                }
+            ],
+            "description": " An array to entity hydrator for Doctrine 2 entities ",
+            "homepage": "https://github.com/pmill/doctrine-array-hydrator",
+            "keywords": [
+                "array",
+                "doctrine",
+                "hydrator",
+                "php"
+            ],
+            "time": "2016-02-17T20:29:44+00:00"
         },
         {
             "name": "predis/predis",

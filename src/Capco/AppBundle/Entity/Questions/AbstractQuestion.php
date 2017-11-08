@@ -76,25 +76,25 @@ abstract class AbstractQuestion
     protected $type;
 
     /**
-     * @ORM\Column(name="help_text", type="text", nullable=true)
-     */
-    private $helpText = null;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question")
-     */
-    private $responses;
-
-    /**
      * @ORM\Column(name="required", type="boolean", nullable=false)
      */
-    private $required = false;
+    protected $required = false;
 
     /**
      * @var bool
      * @ORM\Column(name="private", type="boolean", nullable=false)
      */
-    private $private = false;
+    protected $private = false;
+
+    /**
+     * @ORM\Column(name="help_text", type="text", nullable=true)
+     */
+    protected $helpText = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})
+     */
+    protected $responses;
 
     public function __toString()
     {

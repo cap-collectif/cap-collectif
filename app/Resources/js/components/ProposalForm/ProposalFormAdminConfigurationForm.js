@@ -11,6 +11,7 @@ import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
+import AlertAdminForm from '../Alert/AlertAdminForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
@@ -18,6 +19,9 @@ type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalFor
 type Props = RelayProps & {
   handleSubmit: () => void,
   invalid: boolean,
+  valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
   pristine: boolean,
   submitting: boolean,
   usingAddress: boolean,
@@ -140,15 +144,17 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       },
     })),
   };
-  return UpdateProposalFormMutation.commit({ input }).then(() => {
-    location.reload();
-  });
+
+  return UpdateProposalFormMutation.commit({ input });
 };
 
 export class ProposalFormAdminConfigurationForm extends Component<Props> {
   render() {
     const {
       invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
       pristine,
       handleSubmit,
       submitting,
@@ -417,6 +423,13 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
+              <AlertAdminForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
             </ButtonToolbar>
           </form>
         </div>
@@ -428,6 +441,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
 const form = reduxForm({
   onSubmit,
   validate,
+  enableReinitialize: true,
   form: formName,
 })(ProposalFormAdminConfigurationForm);
 

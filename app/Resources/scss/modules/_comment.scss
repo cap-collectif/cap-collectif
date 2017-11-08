@@ -52,9 +52,10 @@
 
         .comment__action {
             display: flex;
+            align-items: center;
 
             .comment__date {
-                margin: 17px 15px 0 0;
+                margin: 8px 20px 0 0;
             }
 
             .comment__buttons {
