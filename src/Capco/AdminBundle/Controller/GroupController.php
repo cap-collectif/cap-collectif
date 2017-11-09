@@ -11,7 +11,6 @@ class GroupController extends Controller
 {
     public function exportAction(Request $request)
     {
-        die('aaa');
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');
 

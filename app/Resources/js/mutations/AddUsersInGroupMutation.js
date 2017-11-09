@@ -12,6 +12,12 @@ const mutation = graphql`
     addUsersInGroup(input: $input) {
       group {
         id
+        usersConnection {
+          id
+          user {
+            id
+          }
+        }
       }
     }
   }

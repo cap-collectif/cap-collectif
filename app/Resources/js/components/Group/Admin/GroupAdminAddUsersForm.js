@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import type { Dispatch } from '../../../types';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
@@ -16,7 +15,9 @@ type Props = {
 };
 
 type DefaultProps = void;
-type FormValues = Object;
+type FormValues = {
+  users: Array<Object>,
+};
 
 export const formName = 'group-users-add';
 
@@ -34,7 +35,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group }: Props) => {
     },
   };
 
-  AddUsersInGroupMutation.commit(variables).then(() => {
+  return AddUsersInGroupMutation.commit(variables).then(() => {
     window.location.reload();
   });
 };
@@ -82,8 +83,4 @@ const form = reduxForm({
   form: formName,
 })(GroupAdminAddUsersForm);
 
-const mapStateToProps = () => {
-  return {};
-};
-
-export default connect(mapStateToProps)(injectIntl(form));
+export default injectIntl(form);

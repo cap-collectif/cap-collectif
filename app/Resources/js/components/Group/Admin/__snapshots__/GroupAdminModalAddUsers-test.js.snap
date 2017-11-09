@@ -47,7 +47,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <Connect(InjectIntl(ReduxForm))
+    <InjectIntl(ReduxForm)
       group={
         Object {
           "id": "group4",

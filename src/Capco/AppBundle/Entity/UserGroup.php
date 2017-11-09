@@ -23,7 +23,7 @@ class UserGroup
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="userGroups")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id")
      */
     protected $user;
 

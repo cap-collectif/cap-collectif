@@ -7,5 +7,5 @@ AddUsersInGroupInput:
                 type: "[ID!]!"
                 description: "Users that will be added to the group."
             groupId:
-              type: "String!"
+              type: "ID!"
               description: "The concerned group id."

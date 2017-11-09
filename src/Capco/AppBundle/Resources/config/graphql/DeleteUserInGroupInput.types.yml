@@ -4,8 +4,8 @@ DeleteUserInGroupInput:
         description: "Remove an user in a specific group."
         fields:
             userId:
-              type: "String!"
+              type: "ID!"
               description: "The user id"
             groupId:
-              type: "String!"
+              type: "ID!"
               description: "The group id"

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -18,8 +17,7 @@ const onDelete = (userId: string, groupId: string) => {
       userId,
       groupId,
     },
-  });
-  // .then(location.reload());
+  }).then(location.reload());
 };
 
 export class GroupAdminUsers extends React.Component<Props, State> {
@@ -121,14 +119,8 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = () => {
-  return {};
-};
-
-const container = connect(mapStateToProps)(GroupAdminUsers);
-
 export default createFragmentContainer(
-  container,
+  GroupAdminUsers,
   graphql`
     fragment GroupAdminUsers_group on Group {
       id

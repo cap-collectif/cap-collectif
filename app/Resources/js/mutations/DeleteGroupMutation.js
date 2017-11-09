@@ -10,9 +10,7 @@ import type {
 const mutation = graphql`
   mutation DeleteGroupMutation($input: DeleteGroupInput!) {
     deleteGroup(input: $input) {
-      group {
-        title
-      }
+      deletedGroupTitle
     }
   }
 `;

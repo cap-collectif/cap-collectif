@@ -8,7 +8,7 @@ import GroupAdminParameters from './GroupAdminParameters';
 import type { GroupAdminPageTabs_group } from './__generated__/GroupAdminPageTabs_group.graphql';
 
 type DefaultProps = void;
-type Props = { group: GroupAdminPageTabs_group, intl: Object };
+type Props = { group: GroupAdminPageTabs_group, intl: global.intlMock };
 type State = void;
 
 export class GroupAdminPageTabs extends Component<Props, State> {

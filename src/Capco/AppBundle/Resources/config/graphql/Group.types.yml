@@ -4,7 +4,7 @@ Group:
         description: "A list of groups"
         fields:
             id:
-                type: "String!"
+                type: "ID!"
                 description: "The content of the group."
             title:
                 type: "String!"

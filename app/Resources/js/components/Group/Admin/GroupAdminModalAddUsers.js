@@ -17,8 +17,6 @@ type Props = {
 };
 
 export class GroupAdminModalAddUsers extends React.Component<Props> {
-  handleSubmit = () => {};
-
   render() {
     const { show, onClose, group, dispatch } = this.props;
 
@@ -30,7 +28,7 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <GroupAdminAddUsersForm group={group} handleSubmit={this.handleSubmit()} />
+          <GroupAdminAddUsersForm group={group} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -43,8 +41,4 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = () => {
-  return {};
-};
-
-export default connect(mapStateToProps)(GroupAdminModalAddUsers);
+export default connect()(GroupAdminModalAddUsers);

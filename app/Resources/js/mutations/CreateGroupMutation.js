@@ -12,6 +12,7 @@ const mutation = graphql`
     createGroup(input: $input) {
       group {
         id
+        title
       }
     }
   }

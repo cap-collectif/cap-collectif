@@ -11,6 +11,7 @@ Scenario: GraphQL client wants to create a group
       createGroup(input: $input) {
         group {
           id
+          title
         }
       }
     }",
@@ -27,7 +28,8 @@ Scenario: GraphQL client wants to create a group
     "data": {
       "createGroup": {
         "group": {
-          "id": @string@
+          "id": @string@,
+          "title": "Nouveau groupe"
         }
       }
     }
@@ -44,6 +46,8 @@ Scenario: GraphQL client wants to update a group
       updateGroup(input: $input) {
         group {
           id
+          title
+          description
         }
       }
     }",
@@ -63,6 +67,8 @@ Scenario: GraphQL client wants to update a group
       "updateGroup": {
         "group": {
           "id": "group2"
+          "title": "Nouveau titre",
+          "description": "Nouvelle description"
         }
       }
     }
@@ -77,9 +83,7 @@ Scenario: GraphQL client wants to delete a group
   {
     "query": "mutation ($input: DeleteGroupInput!) {
       deleteGroup(input: $input) {
-        group {
-          title
-        }
+        deletedGroupTitle
       }
     }",
     "variables": {
@@ -94,9 +98,7 @@ Scenario: GraphQL client wants to delete a group
   {
     "data": {
       "deleteGroup": {
-        "group": {
-          "title": "Agent de la ville"
-        }
+        "deletedGroupTitle": "Agent de la ville"
       }
     }
   }
@@ -112,6 +114,11 @@ Scenario: GraphQL client wants to add a user in group
       addUsersInGroup(input: $input) {
         group {
           id
+          usersConnection {
+            user {
+              id
+            }
+          }
         }
       }
     }",
@@ -131,7 +138,15 @@ Scenario: GraphQL client wants to add a user in group
     "data": {
       "addUsersInGroup": {
         "group": {
-          "id": "group2"
+          "id": "group2",
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user101"
+              }
+            },
+            @...@
+          ]
         }
       }
     }
@@ -148,6 +163,11 @@ Scenario: GraphQL client wants to add multiple users in group
       addUsersInGroup(input: $input) {
         group {
           id
+          usersConnection {
+            user {
+              id
+            }
+          }
         }
       }
     }",
@@ -168,7 +188,20 @@ Scenario: GraphQL client wants to add multiple users in group
     "data": {
       "addUsersInGroup": {
         "group": {
-          "id": "group2"
+          "id": "group2",
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user101"
+              }
+            },
+            {
+              "user": {
+                "id": "user107"
+              }
+            },
+            @...@
+          ]
         }
       }
     }
@@ -185,6 +218,11 @@ Scenario: GraphQL client wants to remove a user from group
       deleteUserInGroup(input: $input) {
         group {
           id
+          usersConnection {
+            user {
+              id
+            }
+          }
         }
       }
     }",
@@ -202,7 +240,14 @@ Scenario: GraphQL client wants to remove a user from group
     "data": {
       "deleteUserInGroup": {
         "group": {
-          "id": "group2"
+          "id": "group2",
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user503"
+              }
+            }
+          ]
         }
       }
     }

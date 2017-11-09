@@ -12,6 +12,12 @@ const mutation = graphql`
     deleteUserInGroup(input: $input) {
       group {
         id
+        usersConnection {
+          id
+          user {
+            id
+          }
+        }
       }
     }
   }
