@@ -1307,8 +1307,10 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->consentExternalCommunication;
     }
 
-    public function setConsentExternalCommunication(bool $consentExternalCommunication)
+    public function setConsentExternalCommunication(bool $consentExternalCommunication): self
     {
         $this->consentExternalCommunication = $consentExternalCommunication;
+
+        return $this;
     }
 }
