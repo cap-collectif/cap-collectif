@@ -718,6 +718,9 @@ notification:
     admin_footer: |
       <p>Vous recevez ce courriel à <a href="mailto:%to%">%to%</a> parce que vous êtes inscrit sur <a href="%siteUrl%">%sitename%</a></p>
       <p>Ce message vous a été adressé automatiquement par %sitename% via <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
+    external_footer: |
+      <p>Vous recevez ce courriel à <a href="mailto:%to%">%to%</a> parce que vous êtes inscrit sur <a href="%siteUrl%">%sitename%</a></p>
+      <p>Ce message vous a été adressé automatiquement par %sitename% via <a href="https://cap-collectif.com/">Cap Collectif</a>.</p>
     proposal:
       create:
           subject: "%sitename% — %username% a publié une proposition sur %project%"

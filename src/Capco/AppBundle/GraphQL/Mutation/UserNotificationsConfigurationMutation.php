@@ -26,10 +26,10 @@ class UserNotificationsConfigurationMutation implements ContainerAwareInterface
         $values = $args->getRawArguments();
         $form->submit($values);
         if (!$form->isValid()) {
-            throw new UserError('Input not valid.');
+            throw new UserError('Could not update your notification settings.');
         }
         $em->flush();
 
-        return compact('userNotificationsConfiguration');
+        return ['user' => $userNotificationsConfiguration->getUser()];
     }
 }

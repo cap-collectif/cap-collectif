@@ -2,5 +2,5 @@ ChangeUserNotificationsConfigurationPayload:
     type: relay-mutation-payload
     config:
         fields:
-            userNotificationsConfiguration:
-                type: "UserNotificationsConfiguration!"
+            user:
+                type: "User!"

@@ -298,11 +298,18 @@ class Notify implements MailerInterface
 
     public function notifyUserProposalComment(ProposalComment $comment)
     {
+        $proposalAuthor = $comment->getProposal()->getAuthor();
         $isAnonymous = null === $comment->getAuthor();
         $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.subject' : 'notification.email.comment.to_user.subject';
         $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.body' : 'notification.email.comment.to_user.body';
         $params = $this->buildParamsForComment($comment, $isAnonymous);
-        $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_edit_account', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_login'
+            , ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+        $params['body']['%disableNotificationsUrl%'] = $this->router->generate(
+            'capco_profile_notifications_disable',
+            ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
         $subject = $this->translator->trans(
             $subjectId,
             $params['subject'],
@@ -312,7 +319,17 @@ class Notify implements MailerInterface
             $params['body'],
             'CapcoAppBundle'
         );
-        $this->sendInternalEmail($body, $subject, $comment->getProposal()->getAuthor()->getEmailCanonical());
+        $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $body .= $this->translator->trans(
+            'notification.email.external_footer', [
+            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            '%to%' => $proposalAuthor->getEmailCanonical(),
+            '%siteUrl%' => $siteUrl,
+        ], 'CapcoAppBundle'
+        );
+        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+        $this->sendEmail($proposalAuthor->getEmailCanonical(), $fromAdress, $fromName, $body, $subject);
     }
 
     public function notifyProposalComment($comment, string $action)

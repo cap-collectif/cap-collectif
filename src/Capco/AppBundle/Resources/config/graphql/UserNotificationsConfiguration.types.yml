@@ -1,11 +1,8 @@
 UserNotificationsConfiguration:
     type: object
     config:
-        description: "An user's notifications configuration"
+        description: "A user's notifications configuration"
         fields:
-            user:
-                type: "User!"
-                description: "The user associated with this configuration."
             onProposalCommentMail:
                 type: "Boolean!"
                 description: "A boolean representing if the user wants to receive notifications by mail when someone commented his proposal"

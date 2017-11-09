@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotificationsBox /> should render a disabled button when the form is invalid 1`] = `
+<Panel
+  bsClass="panel"
+  bsStyle="default"
+  defaultExpanded={false}
+  header={
+    <FormattedMessage
+      id="profile.account.notifications.title"
+      values={Object {}}
+    />
+  }
+>
+  <Connect(InjectIntl(ReduxForm)) />
+</Panel>
+`;
+
+exports[`<NotificationsBox /> should render a disabled button when the form is submitting 1`] = `
+<Panel
+  bsClass="panel"
+  bsStyle="default"
+  defaultExpanded={false}
+  header={
+    <FormattedMessage
+      id="profile.account.notifications.title"
+      values={Object {}}
+    />
+  }
+>
+  <Connect(InjectIntl(ReduxForm)) />
+</Panel>
+`;
+
+exports[`<NotificationsBox /> should render and enabled button when the form is valid 1`] = `
+<Panel
+  bsClass="panel"
+  bsStyle="default"
+  defaultExpanded={false}
+  header={
+    <FormattedMessage
+      id="profile.account.notifications.title"
+      values={Object {}}
+    />
+  }
+>
+  <Connect(InjectIntl(ReduxForm)) />
+</Panel>
+`;

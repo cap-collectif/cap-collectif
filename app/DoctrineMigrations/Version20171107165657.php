@@ -36,6 +36,7 @@ class Version20171107165657 extends AbstractMigration implements ContainerAwareI
         $this->addSql('ALTER TABLE fos_user ADD notifications_configuration_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\'');
         $this->addSql('ALTER TABLE fos_user ADD CONSTRAINT FK_957A6479580B13B7 FOREIGN KEY (notifications_configuration_id) REFERENCES user_notifications_configuration (id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_957A6479580B13B7 ON fos_user (notifications_configuration_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_AAEA4B03E0674361 ON user_notifications_configuration (unsubscribe_token)');
 
     }
 
@@ -63,6 +64,7 @@ class Version20171107165657 extends AbstractMigration implements ContainerAwareI
     {
         $this->addSql('ALTER TABLE fos_user DROP FOREIGN KEY FK_957A6479580B13B7');
         $this->addSql('DROP TABLE user_notifications_configuration');
+        $this->addSql('DROP INDEX UNIQ_AAEA4B03E0674361 ON user_notifications_configuration');
         $this->addSql('DROP INDEX UNIQ_957A6479580B13B7 ON fos_user');
         $this->addSql('ALTER TABLE fos_user DROP notifications_configuration_id');
     }

@@ -30,8 +30,10 @@ Scenario: GraphQL client wants to modify an user notifications configuration
   {
     "query": "mutation ($input: ChangeUserNotificationsConfigurationInput!) {
       changeUserNotificationsConfiguration(input: $input) {
-        userNotificationsConfiguration {
-          onProposalCommentMail
+        user {
+          notificationsConfiguration {
+            onProposalCommentMail
+          }
         }
       }
     }",
@@ -47,8 +49,10 @@ Scenario: GraphQL client wants to modify an user notifications configuration
   {
     "data": {
       "changeUserNotificationsConfiguration": {
-        "userNotificationsConfiguration": {
-          "onProposalCommentMail": false
+        "user": {
+          "notificationsConfiguration": {
+            "onProposalCommentMail": false
+          }
         }
       }
     }

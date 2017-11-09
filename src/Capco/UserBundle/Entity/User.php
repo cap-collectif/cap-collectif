@@ -277,8 +277,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->sources = new ArrayCollection();
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
-        $this->initializeNotificationsConfiguration();
         $this->userGroups = new ArrayCollection();
+        $this->notificationsConfiguration = new UserNotificationsConfiguration();
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -1341,12 +1341,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration)
     {
         $this->notificationsConfiguration = $notificationsConfiguration;
-    }
-
-    private function initializeNotificationsConfiguration()
-    {
-        $notificationsConfiguration = new UserNotificationsConfiguration();
-        $this->setNotificationsConfiguration($notificationsConfiguration);
     }
 
     public function isConsentExternalCommunication(): bool
