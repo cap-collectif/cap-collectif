@@ -71,6 +71,7 @@ Capco\UserBundle\Entity\User:
         lastname: authentifier
         email: user@test.com
         enabled: true
+        notificationsConfiguration: '@allDisabledUserNotifications'
         userType: '@UserType1'
         Media: null
         plainPassword: user

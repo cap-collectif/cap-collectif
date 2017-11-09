@@ -27,6 +27,12 @@ services:
     tags:
       - { name: form.type }
 
+  capco_user_notifications.listener:
+    class: Capco\UserBundle\Listener\UserNotificationsListener
+    tags:
+        - { name: doctrine.orm.entity_listener, event: prePersist }
+    arguments: ['@fos_user.util.token_generator']
+
   capco_user.user_provider.email:
     class: Capco\UserBundle\Security\Core\User\UserEmailProvider
     arguments: ["@fos_user.user_manager", {}]

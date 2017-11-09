@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "036b9e3655567905c03215b70e1e6bbd",
+    "content-hash": "904a202335b5bba2887b1e0108bde94a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9282,16 +9282,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.8.32",
+            "version": "v2.8.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "0efa80d0a01f60e28ae5800c94d6288239cefefe"
+                "reference": "fa9fa59d7bf9d5c73a264d348f0da793cafdc73c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/0efa80d0a01f60e28ae5800c94d6288239cefefe",
-                "reference": "0efa80d0a01f60e28ae5800c94d6288239cefefe",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/fa9fa59d7bf9d5c73a264d348f0da793cafdc73c",
+                "reference": "fa9fa59d7bf9d5c73a264d348f0da793cafdc73c",
                 "shasum": ""
             },
             "require": {
@@ -9373,7 +9373,7 @@
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection": "^1.0.7",
                 "sensio/framework-extra-bundle": "^3.0.2",
-                "symfony/phpunit-bridge": "~3.4|~4.0"
+                "symfony/phpunit-bridge": "~3.2"
             },
             "type": "library",
             "extra": {
@@ -9417,7 +9417,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-12-04T22:02:29+00:00"
+            "time": "2017-11-16T17:44:10+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -10331,12 +10331,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/mailcatcher.git",
-                "reference": "be2b3897caab28f59daa813be2034b97e3617427"
+                "reference": "cbfcc6acefa27230db3cbcd10334e0819fb364b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/be2b3897caab28f59daa813be2034b97e3617427",
-                "reference": "be2b3897caab28f59daa813be2034b97e3617427",
+                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/cbfcc6acefa27230db3cbcd10334e0819fb364b7",
+                "reference": "cbfcc6acefa27230db3cbcd10334e0819fb364b7",
                 "shasum": ""
             },
             "require": {
@@ -10361,7 +10361,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
             },
-            "time": "2017-10-20T10:21:55+00:00"
+            "time": "2017-11-07T17:02:07+00:00"
         },
         {
             "name": "behat/behat",

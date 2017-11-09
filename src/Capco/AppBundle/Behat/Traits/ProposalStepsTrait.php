@@ -51,6 +51,16 @@ trait ProposalStepsTrait
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
     ];
+    protected static $proposalByMSantoStefano = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
+    ];
+    protected static $proposalsByUserTest = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'renovation-du-gymnase',
+    ];
     protected static $proposalCommentNotNotifiable = [
         'projectSlug' => 'appel-a-projets',
         'stepSlug' => 'collecte-des-propositions-avec-vote-simple',
@@ -130,6 +140,24 @@ trait ProposalStepsTrait
     public function iGoToAProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
+        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+    }
+
+    /**
+     * @When I go to a proposal made by msantostefano@jolicode.com
+     */
+    public function iGoToAProposalMadeByMSantoStefano()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
+        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+    }
+
+    /**
+     * @When I go to a proposal made by user@test.com
+     */
+    public function iGoToAProposalMadeByUserTest()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
