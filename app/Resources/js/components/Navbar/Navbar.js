@@ -9,12 +9,11 @@ type Props = {
   logo?: ?string,
   items: Array,
   siteName: ?string,
-  organizationName: string,
 };
 
 class Navbar extends React.Component<Props> {
   render() {
-    const { logo, intl, items, siteName, organizationName } = this.props;
+    const { logo, intl, items, siteName } = this.props;
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
@@ -114,7 +113,7 @@ class Navbar extends React.Component<Props> {
           {navbarMdSize}
           {navbarSmSize}
           {navbarXsSize}
-          <NavbarRight organizationName={organizationName} />
+          <NavbarRight />
         </Navigation.Collapse>
       </Navigation>
     );

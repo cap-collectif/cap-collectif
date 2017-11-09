@@ -236,6 +236,7 @@ const mapStateToProps = (state: State) => ({
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
+  organizationName: state.default.parameters['global.site.organization_name'],
   dynamicFields: state.user.registration_form.questions,
 });
 

@@ -15,7 +15,6 @@ export const RegistrationButton = React.createClass({
     bsStyle: PropTypes.string,
     buttonStyle: PropTypes.object,
     openRegistrationModal: PropTypes.func.isRequired,
-    organizationName: PropTypes.string.isRequired,
   },
 
   getDefaultProps() {
@@ -37,7 +36,6 @@ export const RegistrationButton = React.createClass({
       style,
       user,
       openRegistrationModal,
-      organizationName,
     } = this.props;
     if (!features.registration || !!user) {
       return null;
@@ -51,7 +49,7 @@ export const RegistrationButton = React.createClass({
           className={`btn--registration ${className}`}>
           {<FormattedMessage id="global.registration" />}
         </Button>
-        <RegistrationModal organizationName={organizationName} />
+        <RegistrationModal />
       </span>
     );
   },

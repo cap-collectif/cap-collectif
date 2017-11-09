@@ -17,7 +17,7 @@ class Version20171108093808 extends AbstractMigration
 
         $values = [
             'keyname' => 'global.site.organization_name',
-            'value' => 'Cap Collectif',
+            'value' => '',
             'created_at' => $created,
             'updated_at' => $created,
             'is_enabled' => true,

@@ -18,19 +18,10 @@ export const RegistrationModal = React.createClass({
     textBottom: PropTypes.string,
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    organizationName: PropTypes.string.isRequired,
   },
 
   render() {
-    const {
-      submitting,
-      onSubmit,
-      onClose,
-      show,
-      textTop,
-      textBottom,
-      organizationName,
-    } = this.props;
+    const { submitting, onSubmit, onClose, show, textTop, textBottom } = this.props;
     return (
       <Modal
         animation={false}
@@ -56,7 +47,6 @@ export const RegistrationModal = React.createClass({
             ref={c => (this.form = c)}
             onSubmitFail={this.stopSubmit}
             onSubmitSuccess={this.handleSubmitSuccess}
-            organizationName={organizationName}
           />
           {textBottom && (
             <div
