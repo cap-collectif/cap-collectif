@@ -91,7 +91,3 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaqMedia:
-    questionnaire: '@questionnaire4'
-    question: '@mediaquestion3'
-    position: 7

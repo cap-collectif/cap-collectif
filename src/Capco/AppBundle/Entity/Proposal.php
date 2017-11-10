@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -259,34 +257,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New proposal';
-    }
-
-    public function getEvaluationResponses()
-    {
-        if (!$this->proposalEvaluation) {
-            return null;
-        }
-        if (!$this->proposalEvaluation || 0 === $this->proposalEvaluation->getResponses()->count()) {
-            return null;
-        }
-        $tab = $this->proposalEvaluation->getResponses()->map(function ($response) {
-            if ($response instanceof ValueResponse) {
-                $r = $response->getValue();
-
-                return [$response->getQuestion()->getTitle() => isset($r['labels']) ? implode(", \n", $r['labels']) : $r];
-            } elseif ($response instanceof MediaResponse) {
-                return [$response->getQuestion()->getTitle() => $response];
-            }
-
-            return null;
-        });
-
-        $final = [];
-        foreach ($tab as $value) {
-            $final += $value;
-        }
-
-        return $final;
     }
 
     public function getKind(): string

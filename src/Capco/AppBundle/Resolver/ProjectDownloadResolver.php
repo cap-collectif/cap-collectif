@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -125,7 +125,9 @@ class ProjectDownloadResolver
                 );
             }
             $this->headers = self::$collectHeaders;
-            $this->initCustomFieldsInHeader($step->getProposalForm());
+            if ($step->getProposalForm()) {
+                $this->initCustomFieldsInHeader($step->getProposalForm());
+            }
             $data = $this->getCollectStepData($step);
         } elseif ($step instanceof QuestionnaireStep) {
             $this->headers = $this->getQuestionnaireStepHeaders($step);
@@ -157,19 +159,11 @@ class ProjectDownloadResolver
 
         $this->data = [];
 
-        $proposalsObject = $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getByProposalForm($collectStep->getProposalForm());
-
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByProposalForm($collectStep->getProposalForm(), true);
-
-        $i = 0;
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;
-            $proposal['evaluation_responses'] = $proposalsObject[$i]->getEvaluationResponses();
-            $proposal['media_responses'] = $proposalsObject[$i]->getResponses()->filter(function ($response) { return $response instanceof MediaResponse; })->getValues();
             $proposal['entity_type'] = 'proposal';
             $entity = $this->em
                 ->getRepository('CapcoAppBundle:Proposal')
@@ -180,6 +174,7 @@ class ProjectDownloadResolver
             $collectVotesCount = $this->em
                 ->getRepository('CapcoAppBundle:ProposalCollectVote')
                 ->getCountsByProposalGroupedByStepsTitle($entity);
+
             $str = '';
             $loop = 1;
             $nbVotes = count($selectionVotesCount) + count($collectVotesCount);
@@ -205,7 +200,6 @@ class ProjectDownloadResolver
                 $separator = '' === $proposal['likers'] ? '' : ', ';
                 $proposal['likers'] = $proposal['likers'] . $separator . $liker->getDisplayName();
             }
-            ++$i;
         }
 
         unset($proposal);
@@ -316,6 +310,7 @@ class ProjectDownloadResolver
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
+        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
 
         if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
@@ -374,6 +369,7 @@ class ProjectDownloadResolver
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
+        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
 
         if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
@@ -496,10 +492,8 @@ class ProjectDownloadResolver
             $this->customFields[] = $title;
         }
 
-        $evaluationForm = $proposalForm->getEvaluationForm();
-
-        if ($evaluationForm) {
-            foreach ($evaluationForm->getRealQuestions() as $question) {
+        if ($proposalForm->getEvaluationForm()) {
+            foreach ($proposalForm->getEvaluationForm()->getRealQuestions() as $question) {
                 $this->customFields[] = $question->getTitle();
             }
         }
@@ -519,31 +513,35 @@ class ProjectDownloadResolver
             }
         }
 
-        if (isset($proposal['media_responses'])) {
-            foreach ($proposal['media_responses'] as $response) {
-                $item[$response->getQuestion()->getTitle()] = $this->getMediasUrlForResponse($response);
-            }
-        }
+        return $item;
+    }
 
-        if (isset($proposal['evaluation_responses'])) {
-            foreach ($proposal['evaluation_responses'] as $question => $response) {
-                $item[$question] = $response instanceof MediaResponse ?
-                    $this->getMediasUrlForResponse($response) :
-                    $response;
+    private function addEvaluationsFieldsForProposal(array $proposal, array $item): array
+    {
+        if (null !== $proposal['proposalEvaluation']) {
+            $evaluation = $this->em->getRepository('CapcoAppBundle:ProposalEvaluation')->find($proposal['proposalEvaluation']['id']);
+            foreach ($evaluation->getResponses() as $response) {
+                $item[$response->getQuestion()->getTitle()] = $this->getEvaluationResponseValue($response);
             }
         }
 
         return $item;
     }
 
-    private function getMediasUrlForResponse($response)
+    private function getEvaluationResponseValue($response)
     {
-        $filenames = [];
-        foreach ($response->getMedias() as $media) {
-            $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
-        }
+        if ($response instanceof ValueResponse) {
+            $r = $response->getValue();
 
-        return implode(", \n", $filenames);
+            return isset($r['labels']) ? implode(';', $r['labels']) : $r;
+        } elseif ($response instanceof MediaResponse) {
+            $filenames = [];
+            foreach ($response->getMedias() as $media) {
+                $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
+            }
+
+            return implode(';', $filenames);
+        }
     }
 
     private function booleanToString($boolean)
