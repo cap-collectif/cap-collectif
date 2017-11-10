@@ -22,6 +22,7 @@ export type FeatureToggles = {
   blog: boolean,
   calendar: boolean,
   captcha: boolean,
+  consent_external_communication: boolean,
   ideas: boolean,
   idea_creation: boolean,
   idea_trash: boolean,
@@ -53,6 +54,7 @@ export type FeatureToggle =
   | 'blog'
   | 'calendar'
   | 'captcha'
+  | 'consent_external_communication'
   | 'ideas'
   | 'restrict_registration_via_email_domain'
   | 'idea_creation'

@@ -7,14 +7,15 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SummarizableTrait;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -53,8 +54,17 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use ExpirableTrait;
     use SelfLinkableTrait;
     use SoftDeleteTrait;
-    use TextableTrait;
+    use NullableTextableTrait;
     use SummarizableTrait;
+    use DraftableTrait;
+
+    const STATE_DRAFT = 'draft';
+    const STATE_ENABLED = 'published';
+    const STATE_TRASHED = 'trashed';
+    const STATE_HIDDEN_CONTENT = 'hidden_content';
+    const STATE_DISABlED = 'unpublished';
+    const STATE_DELETED = 'deleted';
+    const STATE_EXPIRED = 'expired';
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -496,7 +506,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      */
     public function canContribute(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->getStep()->canContribute();
+        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
     public function canComment(): bool
@@ -900,7 +910,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $selections = $this->getSelections()->toArray();
 
         usort($selections, function ($step, $nextStep) {
-            return  $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
+            return $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
         });
 
         $findStatus = null;
@@ -921,6 +931,39 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         }
 
         return $this->getStatus();
+    }
+
+    public function state(): string
+    {
+        if ($this->getDeletedAt() !== null) {
+            return self::STATE_DELETED;
+        }
+
+        if (!$this->isEnabled() && $this->isTrashed()) {
+            return self::STATE_HIDDEN_CONTENT;
+        }
+
+        if (!$this->isEnabled() && !$this->isDraft()) {
+            return self::STATE_DISABlED;
+        }
+
+        if ($this->isExpired()) {
+            return self::STATE_EXPIRED;
+        }
+
+        if ($this->isTrashed()) {
+            return self::STATE_TRASHED;
+        }
+
+        if ($this->isDraft()) {
+            return self::STATE_DRAFT;
+        }
+
+        if ($this->isEnabled()) {
+            return self::STATE_ENABLED;
+        }
+
+        throw new \Exception(sprintf('no current state was found for this proposition %s', $this->getId()));
     }
 
     public function getProposalEvaluation()

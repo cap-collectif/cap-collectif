@@ -27,7 +27,7 @@ export const ProposalPageHeader = React.createClass({
 
     const createdDate = (
       <FormattedDate
-        value={moment(proposal.created_at)}
+        value={moment(proposal.createdAt)}
         day="numeric"
         month="long"
         year="numeric"
@@ -37,7 +37,7 @@ export const ProposalPageHeader = React.createClass({
     );
     const updatedDate = (
       <FormattedDate
-        value={moment(proposal.updated_at)}
+        value={moment(proposal.updatedAt)}
         day="numeric"
         month="long"
         year="numeric"
@@ -60,11 +60,13 @@ export const ProposalPageHeader = React.createClass({
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
-        <ProposalVoteButtonWrapper
-          id="proposal-vote-btn"
-          proposal={proposal}
-          className="pull-right btn-lg"
-        />
+        {!proposal.isDraft && (
+          <ProposalVoteButtonWrapper
+            id="proposal-vote-btn"
+            proposal={proposal}
+            className="pull-right btn-lg"
+          />
+        )}
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
@@ -76,7 +78,7 @@ export const ProposalPageHeader = React.createClass({
                   createdDate,
                 }}
               />
-              {moment(proposal.updated_at).diff(proposal.created_at, 'seconds') > 1 && (
+              {moment(proposal.updatedAt).diff(proposal.createdAt, 'seconds') > 1 && (
                 <span>
                   {' • '}
                   <FormattedMessage

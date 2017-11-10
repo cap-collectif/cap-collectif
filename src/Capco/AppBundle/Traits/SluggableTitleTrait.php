@@ -4,13 +4,10 @@ namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait SluggableTitleTrait
 {
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      */

@@ -96,6 +96,21 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   </Field>
   <Field
     component={[Function]}
+    id="consent-external-communication"
+    name="consentExternalCommunication"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="registration.consent_external_communication"
+      values={
+        Object {
+          "organization_name": "Cap Collectif",
+        }
+      }
+    />
+  </Field>
+  <Field
+    component={[Function]}
     id="captcha"
     name="captcha"
     type="captcha"
@@ -180,6 +195,21 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           >
             la charte
           </a>,
+        }
+      }
+    />
+  </Field>
+  <Field
+    component={[Function]}
+    id="consent-external-communication"
+    name="consentExternalCommunication"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="registration.consent_external_communication"
+      values={
+        Object {
+          "organization_name": "Cap Collectif",
         }
       }
     />
@@ -310,6 +340,21 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   </Field>
   <Field
     component={[Function]}
+    id="consent-external-communication"
+    name="consentExternalCommunication"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="registration.consent_external_communication"
+      values={
+        Object {
+          "organization_name": "Cap Collectif",
+        }
+      }
+    />
+  </Field>
+  <Field
+    component={[Function]}
     id="captcha"
     name="captcha"
     type="captcha"
@@ -419,6 +464,21 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
           >
             la charte
           </a>,
+        }
+      }
+    />
+  </Field>
+  <Field
+    component={[Function]}
+    id="consent-external-communication"
+    name="consentExternalCommunication"
+    type="checkbox"
+  >
+    <FormattedMessage
+      id="registration.consent_external_communication"
+      values={
+        Object {
+          "organization_name": "Cap Collectif",
         }
       }
     />

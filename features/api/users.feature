@@ -120,6 +120,7 @@ Scenario: Anonymous API client wants to register with throwable email
         },
         "plainPassword":[],
         "captcha":[],
+        "consentExternalCommunication":[],
         "responses": []
       }
     }
@@ -152,6 +153,7 @@ Scenario: Anonymous API client wants to register with additional data
         "username":[],
         "email":[],
         "plainPassword":[],
+        "consentExternalCommunication":[],
         "captcha":[],
         "responses": []
       }

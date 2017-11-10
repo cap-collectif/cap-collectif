@@ -76,3 +76,10 @@ Query:
             availableQuestionnaires:
                 type: "[Questionnaire!]"
                 resolve: "@=resolver('query_get_available_questionnaires')"
+            draftProposalsForUserInStep:
+                type: "[Proposal!]"
+                access: "@=hasRole('ROLE_USER')"
+                args:
+                    stepId:
+                        type: "ID!"
+                resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [args['stepId'], user])"

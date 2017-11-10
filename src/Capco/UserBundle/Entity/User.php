@@ -247,6 +247,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     private $profilePageIndexed = true;
 
+    private $consentExternalCommunication = false;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -1298,5 +1300,17 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setProfilePageIndexed(bool $profilePageIndexed = true)
     {
         $this->profilePageIndexed = !$profilePageIndexed;
+    }
+
+    public function isConsentExternalCommunication(): bool
+    {
+        return $this->consentExternalCommunication;
+    }
+
+    public function setConsentExternalCommunication(bool $consentExternalCommunication): self
+    {
+        $this->consentExternalCommunication = $consentExternalCommunication;
+
+        return $this;
     }
 }

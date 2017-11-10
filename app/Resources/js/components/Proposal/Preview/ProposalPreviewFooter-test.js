@@ -5,7 +5,7 @@ import ProposalPreviewFooter from './ProposalPreviewFooter';
 
 describe('<ProposalPreviewFooter />', () => {
   const proposal = {
-    comments_count: 3,
+    commentsCount: 3,
     votesCountByStepId: {
       '1': 1,
       '42': 5,
@@ -30,7 +30,7 @@ describe('<ProposalPreviewFooter />', () => {
     const commentsCounter = countersDiv.find('div.proposal__counter--comments');
     expect(commentsCounter).toHaveLength(1);
     expect(commentsCounter.find('.proposal__counter__value').text()).toEqual(
-      `${proposal.comments_count}`,
+      `${proposal.commentsCount}`,
     );
   });
 
@@ -47,7 +47,7 @@ describe('<ProposalPreviewFooter />', () => {
     const commentsCounter = countersDiv.find('div.proposal__counter--comments');
     expect(commentsCounter).toHaveLength(1);
     expect(commentsCounter.find('.proposal__counter__value').text()).toEqual(
-      `${proposal.comments_count}`,
+      `${proposal.commentsCount}`,
     );
 
     const votesCounter = countersDiv.find('div.proposal__counter--votes');

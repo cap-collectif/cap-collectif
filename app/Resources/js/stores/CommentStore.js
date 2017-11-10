@@ -23,7 +23,7 @@ class CommentStore extends BaseStore {
     switch (action.actionType) {
       case RECEIVE_COMMENTS:
         this._comments = action.comments;
-        this._commentsCount = action.comments_count;
+        this._commentsCount = action.commentsCount;
         this._commentsAndAnswersCount = action.comments_total;
         this._commentsAndAnswersCount = action.comments_and_answers_count;
         this._isSync = true;

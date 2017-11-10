@@ -20,10 +20,10 @@ User:
             username:
                 type: "String!"
                 description: "Username of the user."
-            url:
-                type: "String"
+            show_url:
+                type: "URI"
                 description: "URL to user profile, null if the feature profiles is disabled."
-                resolve: "@=resolver('user_url', [value])"
+                resolve: "@=resolver('user_show_url', [value])"
             createdAt:
                 type: "String!"
                 description: "Identifies the date and time when the object was created."
@@ -120,3 +120,6 @@ User:
             userType:
                 type: "UserType"
                 description: "The type of the person."
+            consentExternalCommunication:
+                type: "Boolean!"
+                description: "Is user accepted the external communication during the registration."

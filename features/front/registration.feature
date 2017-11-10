@@ -49,3 +49,21 @@ Scenario: Anonymous wants to register with every possible errors
   Then I should see "registration.constraints.username.min"
   And I should see "registration.constraints.email.invalid"
   And I should see "registration.constraints.password.min"
+
+@database @javascript
+Scenario: Anonymous wants to register with the consent of external communication
+  Given feature "registration" is enabled
+  Given feature "consent_external_communication" is enabled
+  And I visited "home page"
+  When I press "global.registration"
+  And I fill in the following:
+    | username             | Naruto42             |
+    | email                | naruto42@gmail.com   |
+    | password             | narutoisthebest      |
+    | dynamic-6            | plop                 |
+  And I select "Sangohan" from "dynamic-17"
+  And I check "charte"
+  And I check "consentExternalCommunication"
+  And I press "global.register"
+  Then I wait 5 seconds
+  Then I can see I am logged in as "Naruto42"

@@ -6,79 +6,41 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
 >
   <div
     className="block"
-  >
-    <h3
-      className="h3"
-    >
-      <FormattedMessage
-        id="proposal.description"
-        values={Object {}}
-      />
-    </h3>
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": undefined,
-        }
-      }
-    />
-  </div>
+  />
   <div
     className="block proposal__buttons"
   >
-    <Connect(ProposalVoteButtonWrapper)
-      proposal={
-        Object {
-          "_links": Object {
-            "show": "http://capco.test",
-          },
-          "author": Object {},
-          "id": "proposal3",
-          "referer": "http://capco.test",
-          "responses": Array [],
-          "title": "Titre proposition",
-        }
-      }
-    />
-    <Connect(ShareButtonDropdown)
-      id="proposal-share-button"
-      style={
-        Object {
-          "marginLeft": 15,
-        }
-      }
-      title="Titre proposition"
-      url="http://capco.test"
-    />
-    <Connect(ProposalReportButton)
-      proposal={
-        Object {
-          "_links": Object {
-            "show": "http://capco.test",
-          },
-          "author": Object {},
-          "id": "proposal3",
-          "referer": "http://capco.test",
-          "responses": Array [],
-          "title": "Titre proposition",
-        }
-      }
-    />
-    <div
-      className="pull-right"
-    >
-      <Connect(EditButton)
-        author={Object {}}
-        id="proposal-edit-button"
-        onClick={[Function]}
-      />
-      <Connect(DeleteButton)
-        author={Object {}}
-        id="proposal-delete-button"
-        onClick={[Function]}
-        style={
+    <div>
+      <Connect(ProposalVoteButtonWrapper)
+        proposal={
           Object {
-            "marginLeft": "15px",
+            "_links": Object {
+              "show": "http://capco.test",
+            },
+            "author": Object {},
+            "id": "proposal3",
+            "referer": "http://capco.test",
+            "responses": Array [],
+            "title": "Titre proposition",
+          }
+        }
+      />
+      <Connect(ShareButtonDropdown)
+        id="proposal-share-button"
+        title="Titre proposition"
+        url="http://capco.test"
+      />
+      <Connect(ProposalReportButton)
+        proposal={
+          Object {
+            "_links": Object {
+              "show": "http://capco.test",
+            },
+            "author": Object {},
+            "id": "proposal3",
+            "referer": "http://capco.test",
+            "responses": Array [],
+            "title": "Titre proposition",
           }
         }
       />

@@ -314,6 +314,61 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={11}
+    >
+      <p>
+        <strong>
+          <FormattedMessage
+            id="registration.enable_consent_external_communication.title"
+            values={Object {}}
+          />
+        </strong>
+        <br />
+        <FormattedMessage
+          id="registration.enable_consent_external_communication.subtitle"
+          values={
+            Object {
+              "link": <a
+                className="external-link"
+                href="about:///admin/settings/settings.global/list"
+              >
+                <FormattedMessage
+                  id="proposal.admin.general"
+                  values={Object {}}
+                />
+              </a>,
+            }
+          }
+        />
+      </p>
+    </Col>
+  </div>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
         disabled={false}
         icons={
           Object {
@@ -646,6 +701,61 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       Ajouter
     </Button>
   </Well>
+  <div
+    className="row"
+    style={
+      Object {
+        "padding": "10px 0",
+      }
+    }
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={1}
+    >
+      <Toggle
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
+        onChange={[Function]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      xs={11}
+    >
+      <p>
+        <strong>
+          <FormattedMessage
+            id="registration.enable_consent_external_communication.title"
+            values={Object {}}
+          />
+        </strong>
+        <br />
+        <FormattedMessage
+          id="registration.enable_consent_external_communication.subtitle"
+          values={
+            Object {
+              "link": <a
+                className="external-link"
+                href="about:///admin/settings/settings.global/list"
+              >
+                <FormattedMessage
+                  id="proposal.admin.general"
+                  values={Object {}}
+                />
+              </a>,
+            }
+          }
+        />
+      </p>
+    </Col>
+  </div>
   <div
     className="row"
     style={

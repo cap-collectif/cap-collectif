@@ -5,3 +5,12 @@
 .share-button-wrapper {
     margin-top: 30px;
 }
+
+
+.disabled-btn-wrapper {
+    display: inline-block;
+
+    button[disabled] {
+        pointer-events: none;
+    }
+}

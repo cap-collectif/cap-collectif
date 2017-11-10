@@ -68,7 +68,7 @@ export default createFragmentContainer(
         media {
           url
         }
-        url
+        show_url
       }
       section {
         title

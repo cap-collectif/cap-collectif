@@ -12,3 +12,5 @@ CollectStep:
                type: "String!"
             statuses:
                 type: "[Status!]!"
+            voteThreshold:
+                type: "Int"
