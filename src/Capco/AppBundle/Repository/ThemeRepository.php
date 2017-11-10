@@ -108,9 +108,11 @@ class ThemeRepository extends EntityRepository
                 LEFT JOIN p.proposalForm pf
                 LEFT JOIN p.theme pt
                 WHERE pf.step = :step
-                AND p.enabled = true
                 AND pt.id = t.id
+                AND p.draft = false
+                AND p.expired = false
                 AND p.isTrashed = false
+                AND p.deletedAt IS NULL
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')

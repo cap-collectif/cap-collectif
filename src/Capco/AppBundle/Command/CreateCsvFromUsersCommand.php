@@ -55,7 +55,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         phoneConfirmed
         phoneConfirmationSentAt
         userType { name }
-        consentExternalCommunication
         gender
         firstname
         lastname
@@ -87,6 +86,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         postCommentsCount
         eventCommentsCount
         projectsCount
+        consentExternalCommunication
     }
 }
         ';

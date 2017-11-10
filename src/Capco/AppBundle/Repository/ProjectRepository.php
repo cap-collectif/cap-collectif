@@ -251,6 +251,7 @@ class ProjectRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('p')->andWhere('p.isEnabled = true');
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isEnabled = true');
     }
 }

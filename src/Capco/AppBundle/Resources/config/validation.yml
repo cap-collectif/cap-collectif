@@ -38,6 +38,8 @@ Capco\AppBundle\Entity\Proposal:
   properties:
     body:
       - NotBlank: ~
+    title:
+      - NotBlank: { groups: [Default, ProposalDraft] }
 
 Capco\AppBundle\Entity\Reporting:
   properties:

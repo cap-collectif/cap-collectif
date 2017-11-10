@@ -35,7 +35,7 @@ export const ProposalPageContent = React.createClass({
   },
 
   render() {
-    const { proposal, className, form, categories, dispatch } = this.props;
+    const { proposal, className, form, categories, dispatch, user } = this.props;
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -45,29 +45,56 @@ export const ProposalPageContent = React.createClass({
     }
 
     const address = proposal.address ? JSON.parse(proposal.address) : null;
+
     return (
       <div className={classNames(classes)}>
-        {proposal.media && (
-          <img
-            id="proposal-media"
-            src={proposal.media.url}
-            alt=""
-            className="block img-responsive"
-          />
-        )}
         <div className="block">
-          {proposal.summary && (
-            <p className="excerpt" style={{ fontStyle: 'italic' }}>
-              {proposal.summary}
-            </p>
+          {user &&
+            user.uniqueId === proposal.author.uniqueId && (
+              <div className="actions">
+                <EditButton
+                  id="proposal-edit-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openEditProposalModal());
+                  }}
+                  editable={form.isContribuable}
+                />
+                <DeleteButton
+                  id="proposal-delete-button"
+                  author={proposal.author}
+                  onClick={() => {
+                    dispatch(openDeleteProposalModal());
+                  }}
+                  style={{ marginLeft: '15px' }}
+                  deletable={form.isContribuable}
+                />
+              </div>
+            )}
+          {proposal.media && (
+            <img
+              id="proposal-media"
+              src={proposal.media.url}
+              alt={proposal.title}
+              className="img-responsive mb-15"
+            />
           )}
-          <h3 className="h3">{<FormattedMessage id="proposal.description" />}</h3>
-          <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
+          {proposal.summary && <p className="excerpt">{proposal.summary}</p>}
+          {proposal.body && (
+            <div>
+              <h3 className="h3">
+                <FormattedMessage id="proposal.description" />
+              </h3>
+              <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
+            </div>
+          )}
         </div>
         {address &&
           config.canUseDOM && (
             <div className="block" style={{ height: 255 }}>
-              <h4 className="h4">Lieu ou adresse</h4>
+              <h3 className="h3">
+                <FormattedMessage id="proposal.map.form.field" />
+              </h3>
               <p>{address[0].formatted_address}</p>
               <Map
                 center={{
@@ -100,40 +127,30 @@ export const ProposalPageContent = React.createClass({
           <ProposalResponse key={index} response={response} />
         ))}
         <div className="block proposal__buttons">
-          <ProposalVoteButtonWrapper proposal={proposal} />
-          <ShareButtonDropdown
-            id="proposal-share-button"
-            url={proposal._links.show}
-            title={proposal.title}
-            style={{ marginLeft: 15 }}
-          />
-          <ProposalReportButton proposal={proposal} />
-          <div className="pull-right">
-            <EditButton
-              id="proposal-edit-button"
-              author={proposal.author}
-              onClick={() => {
-                dispatch(openEditProposalModal());
-              }}
-              editable={form.isContribuable}
-            />
-            <DeleteButton
-              id="proposal-delete-button"
-              author={proposal.author}
-              onClick={() => {
-                dispatch(openDeleteProposalModal());
-              }}
-              style={{ marginLeft: '15px' }}
-              deletable={form.isContribuable}
-            />
-          </div>
+          {!proposal.isDraft && (
+            <div>
+              <ProposalVoteButtonWrapper proposal={proposal} />
+              <ShareButtonDropdown
+                id="proposal-share-button"
+                url={proposal._links.show}
+                title={proposal.title}
+              />
+              <ProposalReportButton proposal={proposal} />
+            </div>
+          )}
         </div>
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
         <ProposalDeleteModal proposal={proposal} form={form} />
-        <ProposalPageComments id={proposal.id} form={form} />
+        {!proposal.isDraft && <ProposalPageComments id={proposal.id} form={form} />}
       </div>
     );
   },
 });
 
-export default connect()(ProposalPageContent);
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPageContent);

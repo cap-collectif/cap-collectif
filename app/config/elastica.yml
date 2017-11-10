@@ -305,6 +305,8 @@ fos_elastica:
               type: date
             isTrashed:
               type: boolean
+            isDraft:
+              type: boolean
             address:
               type: string
               index: not_analyzed

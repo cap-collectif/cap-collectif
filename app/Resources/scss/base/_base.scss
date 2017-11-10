@@ -197,8 +197,21 @@ h2,
 h3,
 .h3 {
     color: $brand-color-2;
-}
 
+    .subtitle {
+        color: $darkest-gray;
+        font-size: 16px;
+        font-weight: normal;
+        padding-left: 12px;
+    }
+
+    &.with-buttons {
+        > span {
+            display: inline-block;
+            margin-top: 2px;
+        }
+    }
+}
 h4,
 .h4 {
     margin-top: 20px;

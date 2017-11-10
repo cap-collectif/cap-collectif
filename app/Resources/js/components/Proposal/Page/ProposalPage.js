@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
+import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalPageVotes from './ProposalPageVotes';
@@ -61,6 +62,7 @@ export const ProposalPage = React.createClass({
     const votableSteps = steps.filter(step => step.votable);
     return (
       <div>
+        <ProposalDraftAlert proposal={proposal} />
         <ProposalPageAlert proposal={proposal} />
         <ProposalPageHeader proposal={proposal} className="container container--custom" />
         <Tab.Container
@@ -154,7 +156,7 @@ export const ProposalPage = React.createClass({
                 </Tab.Pane>
               </Tab.Content>
             </div>
-            {currentVotableStep && <ProposalVoteModal proposal={proposal} />}
+            {!proposal.isDraft && currentVotableStep && <ProposalVoteModal proposal={proposal} />}
           </div>
         </Tab.Container>
       </div>
