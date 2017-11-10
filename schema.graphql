@@ -191,7 +191,6 @@ type CollectStep implements Step {
   kind: String!
   title: String!
   statuses: [Status!]!
-  voteThreshold: Int
 }
 
 # A consultation
@@ -682,8 +681,8 @@ type Project {
 
 # A budget contribution
 type Proposal {
-  # The HTTP show url for this contribution.
-  show_url: URI!
+  # The HTTP url for this contribution.
+  url: URI!
   progressSteps: [ProgressStep!]!
   news: [Post!]!
   project: Project!
@@ -718,7 +717,7 @@ type Proposal {
   title: String!
 
   # Identifies the body of the contribution.
-  body: HTML
+  body: HTML!
 
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
@@ -734,15 +733,6 @@ type Proposal {
 
   # Identifies the answers to an evaluation form.
   evaluation: ProposalEvaluation
-
-  # Identifies proposals as draft.
-  draft: Boolean!
-
-  # Count number of comments for the proposal.
-  commentsCount: Int!
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
 }
 
 # A proposal category
@@ -799,9 +789,6 @@ type ProposalForm {
 
   # Get the evaluation form of the proposal form
   evaluationForm: EvaluationForm
-
-  # Identifies the step that use the proposal form.
-  step: CollectStep
 }
 
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
@@ -825,23 +812,20 @@ type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithA
 }
 
 enum PublicationStatus {
-  # Was Publicly visible, but has expired.
+  # Was pubicly visible, but has expired.
   EXPIRED
 
-  # Normal status, Publicly visible
+  # Normal status, publicly visible
   PUBLISHED
 
-  # Publicly visible in the trash bin
+  # Pubicly visible in the trash bin
   TRASHED
 
   # In the trash bin, content not visible
   TRASHED_NOT_VISIBLE
 
-  # Not publicly visible, deleted by author
+  # Not pubicly visible, deleted by author
   DELETED
-
-  # Draft, not publicly visible, only showed for his author.
-  DRAFT
 
   # Visible only by the author, he is not yet confirmed !
   NOT_ACCOUNTED
@@ -875,7 +859,6 @@ type Query {
   proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]
-  draftProposalsForUserInStep(stepId: ID!): [Proposal!]
 }
 
 interface Question {
@@ -902,6 +885,7 @@ type QuestionChoice {
 }
 
 input QuestionInput {
+  id: Int
   title: String!
   type: QuestionTypeValue!
   private: Boolean!
@@ -1081,7 +1065,6 @@ type SelectionStep implements Step {
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
-  voteThreshold: Int
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -1169,7 +1152,7 @@ type SynthesisStep implements Step {
 # A theme
 type Theme {
   id: String!
-  title: String!
+  name: String!
 }
 
 # A trashable contribution
@@ -1265,7 +1248,7 @@ type User {
   username: String!
 
   # URL to user profile, null if the feature profiles is disabled.
-  show_url: URI
+  url: String
 
   # Identifies the date and time when the object was created.
   createdAt: String!

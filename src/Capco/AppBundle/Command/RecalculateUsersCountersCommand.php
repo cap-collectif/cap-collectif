@@ -92,7 +92,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
         $this->compute('UPDATE CapcoUserBundle:User u set u.proposalsCount = (
           SELECT count(p.id) FROM CapcoAppBundle:Proposal p
-          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL
+          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0
           GROUP BY p.author
         )');
 
@@ -217,7 +217,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->compute('UPDATE fos_user u set u.proposal_votes_count = (
           SELECT count(pv.id) from votes pv
           INNER JOIN proposal p ON pv.proposal_id = p.id
-          WHERE pv.voter_id = u.id AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1 AND p.expired = 0 AND p.is_draft = 0 AND p.trashed = 0 AND p.deleted_at IS NULL
+          WHERE pv.voter_id = u.id AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1
           GROUP BY pv.voter_id
         )', true);
 

@@ -20,10 +20,10 @@ User:
             username:
                 type: "String!"
                 description: "Username of the user."
-            show_url:
-                type: "URI"
+            url:
+                type: "String"
                 description: "URL to user profile, null if the feature profiles is disabled."
-                resolve: "@=resolver('user_show_url', [value])"
+                resolve: "@=resolver('user_url', [value])"
             createdAt:
                 type: "String!"
                 description: "Identifies the date and time when the object was created."

@@ -72,6 +72,3 @@ ProposalForm:
             evaluationForm:
                 type: "EvaluationForm"
                 description: "Get the evaluation form of the proposal form"
-            step:
-                type: "CollectStep"
-                description: "Identifies the step that use the proposal form."

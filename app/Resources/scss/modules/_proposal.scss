@@ -71,32 +71,32 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         }
 
         .proposal__body {
-            flex: 1 0 auto;
+             flex: 1 0 auto;
 
-            .proposal__title {
-                margin: 13px auto 10px;
-                font-size: 18px;
-            }
+             .proposal__title  {
+                 margin: 13px auto 10px;
+                 font-size: 18px;
+             }
 
-            .proposal__infos {
-                margin-top: 5px;
+             .proposal__infos {
+                 margin-top: 5px;
 
-                .proposal__info {
-                    padding-top: 5px;
-                    padding-left: 5px;
-                    display: block;
+                 .proposal__info {
+                     padding-top: 5px;
+                     padding-left: 5px;
+                     display: block;
 
-                    .cap {
-                        padding-right: 5px;
-                    }
-                }
-            }
-        }
+                     .cap {
+                         padding-right: 5px;
+                     }
+                 }
+             }
+         }
 
         .proposal__buttons {
             margin-top: 15px;
         }
-    }
+     }
 
     .proposal__footer {
         .proposal__counters {
@@ -123,107 +123,107 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         padding: 5px 0;
         margin: 10px 0;
     }
-}
+ }
 
-.proposal__page__metadata .proposal__infos {
-    padding: 10px;
-    background-color: #f6f6f6;
-    font-size: 100%;
+ .proposal__page__metadata .proposal__infos {
+     padding: 10px;
+     background-color: #f6f6f6;
+     font-size: 100%;
 
-    .proposal__info {
-        padding-top: 10px;
+     .proposal__info {
+         padding-top: 10px;
 
-        .cap {
-            font-size: 22px;
-            margin: 0 5px 0 3px;
-        }
-    }
+         .cap {
+             font-size: 22px;
+             margin: 0 5px 0 3px;
+         }
+     }
 
-    .proposal__info:first-child {
-        padding-top: 0;
-    }
-}
+     .proposal__info:first-child {
+         padding-top: 0;
+     }
+ }
 
-.proposal__page__vote_threshold {
-    padding: 10px;
-    background-color: #f6f6f6;
-    font-size: 100%;
+ .proposal__page__vote_threshold {
+     padding: 10px;
+     background-color: #f6f6f6;
+     font-size: 100%;
 
-    .proposal__info {
-        padding-top: 10px;
+     .proposal__info {
+         padding-top: 10px;
 
-        .cap {
-            font-size: 34px;
-        }
-    }
+         .cap {
+             font-size: 34px;
+         }
+     }
 
-    &__votes {
-        font-size: 1.3em;
-        text-align: left;
-        padding-left: 5px;
+     &__votes {
+         font-size: 1.3em;
+         text-align: left;
+         padding-left: 5px;
 
-        i {
-            color: $blue;
-            font-size: 22px;
-        }
-    }
+         i {
+             color: $blue;
+             font-size: 22px;
+         }
+     }
 
-    &__progressbar {
-        color: $brand-info;
-    }
+     &__progressbar {
+         color: $brand-info;
+     }
 
-    .proposal__info:first-child {
-        padding-top: 0;
-    }
+     .proposal__info:first-child {
+         padding-top: 0;
+     }
 
-    .progress-bar {
-        width: 2%;
-        min-width: 2em;
-    }
+     .progress-bar {
+         width: 2%;
+         min-width: 2em;
+     }
 
-    .progress {
-        background-color: #cecece;
-        margin-bottom: 10px;
-    }
-}
+     .progress {
+         background-color: #cecece;
+         margin-bottom: 10px;
+     }
+ }
 
-.propopal__vote_threshold {
-    .progress {
-        margin-bottom: 5px;
-    }
+ .propopal__vote_threshold {
+     .progress {
+         margin-bottom: 5px;
+     }
 
-    .progress-bar {
-        width: 2%;
-        min-width: 2em;
-    }
-}
+     .progress-bar {
+         width: 2%;
+         min-width: 2em;
+     }
+ }
 
-.proposal__preview .proposal__status {
-    overflow: hidden;
-    padding: 3px;
-    margin: 0;
-    color: $white;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+ .proposal__preview .proposal__status {
+     overflow: hidden;
+     padding: 3px;
+     margin: 0;
+     color: $white;
+     text-align: center;
+     white-space: nowrap;
+     text-overflow: ellipsis;
 
-    @each $status in $statuses {
-        $name: nth($status, 1);
-        $bg: nth($status, 2);
-        $color: nth($status, 3);
+     @each $status in $statuses {
+         $name: nth($status, 1);
+         $bg: nth($status, 2);
+         $color: nth($status, 3);
 
-        &.status--#{$name} {
-            background-color: $bg;
-            color: $color;
-        }
-    }
-}
+         &.status--#{$name} {
+             background-color: $bg;
+             color: $color;
+         }
+     }
+ }
 
-.proposal-search-group {
-    @media (max-width: $screen-sm-max) {
-        margin-top: 15px;
-    }
-}
+ .proposal-search-group {
+     @media (max-width: $screen-sm-max) {
+         margin-top: 15px;
+     }
+ }
 
 @media (min-width: $screen-sm-min) {
     .proposal__details__button {
@@ -478,14 +478,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 }
 
-.proposal__content .block {
-    > .actions {
-        margin-bottom: 20px;
-    }
-
-    &:first-child > h3, &:first-child > div > h3 {
-        margin-top: 0;
-    }
+.proposal__content .block:first-child > h3  {
+    margin-top: 0;
 }
 
 #proposal-form {

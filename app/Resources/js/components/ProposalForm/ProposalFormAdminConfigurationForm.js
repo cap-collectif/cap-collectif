@@ -138,7 +138,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       position: question.position,
       question: {
         ...question,
-        id: undefined,
         position: undefined,
         kind: undefined,
       },
