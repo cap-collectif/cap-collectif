@@ -47,7 +47,7 @@ class UserResolver implements ContainerAwareInterface
         return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
     }
 
-    public function resolveShowUrl(User $user): string
+    public function resolveUrl(User $user)
     {
         $manager = $this->container->get('capco.toggle.manager');
         $router = $this->container->get('router');

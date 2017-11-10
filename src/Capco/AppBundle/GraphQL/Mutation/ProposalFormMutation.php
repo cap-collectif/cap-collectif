@@ -67,7 +67,9 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function update(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
+        $id = $arguments['proposalFormId'];
+        $proposalFormRepository = $this->container->get('capco.proposal_form.repository');
+        $proposalForm = $proposalFormRepository->find($id);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
@@ -86,9 +88,11 @@ class ProposalFormMutation implements ContainerAwareInterface
             throw new UserError('Can\'t update this proposal form!');
         }
 
-        $this->container->get('doctrine.orm.default_entity_manager')->flush();
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $em->flush();
+        $em->clear();
 
-        return ['proposalForm' => $proposalForm];
+        return ['proposalForm' => $proposalFormRepository->find($id)];
     }
 
     public function updateNotificationsConfiguration(Argument $input)

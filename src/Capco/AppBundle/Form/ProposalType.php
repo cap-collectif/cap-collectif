@@ -26,7 +26,6 @@ class ProposalType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $isDraft = $builder->getData()->isDraft();
         $form = $options['proposalForm'];
         if (!$form) {
             throw new \Exception('A proposal form is needed to create or update a proposal.');
@@ -35,7 +34,7 @@ class ProposalType extends AbstractType
         $builder
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('summary', PurifiedTextareaType::class, ['required' => false])
-            ->add('body', PurifiedTextareaType::class, ['required' => $isDraft])
+            ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
 
         if ($this->toggleManager->isActive('themes') && $form->isUsingThemes()) {

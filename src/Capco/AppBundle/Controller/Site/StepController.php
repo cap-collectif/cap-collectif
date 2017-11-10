@@ -440,8 +440,15 @@ class StepController extends Controller
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}, "repository_method"="getOne"})
-     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={"mapping": {"stepSlug": "slug"}, "method"="getOne"})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={
+     *    "mapping": {"projectSlug": "slug"},
+     *    "repository_method"="findOneBySlug"
+     * })
+     * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
+     *    "mapping": {"stepSlug": "slug"},
+     *    "method"="getOne",
+     *    "map_method_signature"=true
+     * })
      * @Cache(smaxage=60, public=true)
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
@@ -450,7 +457,8 @@ class StepController extends Controller
         $serializer = $this->get('serializer');
 
         if (!$currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+            $error = $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle');
+            throw $this->createNotFoundException($error);
         }
 
         $stepProps = $serializer->serialize([

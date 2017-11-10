@@ -130,7 +130,6 @@ services:
 
   capco.form.proposal_form.update:
     class: Capco\AppBundle\Form\ProposalFormUpdateType
-    arguments: ["@doctrine.orm.entity_manager"]
     tags:
       - { name: form.type }
 

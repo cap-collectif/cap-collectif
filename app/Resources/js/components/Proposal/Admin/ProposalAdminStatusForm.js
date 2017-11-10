@@ -29,7 +29,7 @@ type Props = RelayProps & {
   handleSubmit: () => void,
 };
 type FormValues = {
-  publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE' | 'DRAFT',
+  publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE',
   trashedReason: ?string,
 };
 
@@ -101,41 +101,34 @@ export class ProposalAdminStatusForm extends Component<Props, void> {
                 !isSuperAdmin &&
                 (publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED')
               }>
-              {isAuthor && (
-                <ToggleButton
-                  onClick={() => dispatch(change(formName, 'publicationStatus', 'DRAFT'))}
-                  value="DRAFT">
-                  <FormattedMessage id="proposal.state.draft" />
-                </ToggleButton>
-              )}
               <ToggleButton
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'PUBLISHED'))}
                 value="PUBLISHED">
-                <FormattedMessage id="proposal.state.published" />
+                Publié
               </ToggleButton>
               <ToggleButton
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
                 value="TRASHED">
-                <FormattedMessage id="proposal.state.trashed" />
+                Corbeille
               </ToggleButton>
               <ToggleButton
                 onClick={() =>
                   dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))}
                 value="TRASHED_NOT_VISIBLE">
-                <FormattedMessage id="proposal.state.hidden_content" />
+                Corbeille (contenu masqué)
               </ToggleButton>
               {publicationStatus === 'EXPIRED' && (
                 <ToggleButton
                   onClick={() => dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
                   value="EXPIRED">
-                  <FormattedMessage id="proposal.state.expired" />
+                  Expiré
                 </ToggleButton>
               )}
               {publicationStatus === 'DELETED' && (
                 <ToggleButton
                   onClick={() => dispatch(change(formName, 'publicationStatus', 'DELETED'))}
                   value="DELETED">
-                  <FormattedMessage id="proposal.state.deleted" />
+                  Supprimé
                 </ToggleButton>
               )}
             </Field>

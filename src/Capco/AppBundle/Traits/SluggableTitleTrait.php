@@ -9,6 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait SluggableTitleTrait
 {
     /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      */

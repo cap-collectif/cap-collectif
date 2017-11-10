@@ -44,7 +44,6 @@ export const ProposalForm = React.createClass({
     themes: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    isSubmittingDraft: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     features: PropTypes.object.isRequired,
     mode: PropTypes.string,
@@ -141,24 +140,11 @@ export const ProposalForm = React.createClass({
       dispatch,
       currentStepId,
     } = this.props;
-
-    if (!nextProps.isSubmittingDraft) {
-      this.updateThemeConstraint();
-      this.updateDistrictConstraint();
-      this.updateCategoryConstraint();
-      this.updateAddressConstraint();
-    }
-
+    this.updateThemeConstraint();
+    this.updateDistrictConstraint();
+    this.updateCategoryConstraint();
+    this.updateAddressConstraint();
     if (!isSubmitting && nextProps.isSubmitting) {
-      if (nextProps.isSubmittingDraft) {
-        this.formValidationRules = {
-          title: {
-            min: { value: 2, message: 'proposal.constraints.title_min_value_for_draft' },
-            notBlank: { message: 'proposal.constraints.title_for_draft' },
-          },
-        };
-      }
-
       if (this.isValid()) {
         const form = this.state.form;
         const responses = [];
@@ -191,10 +177,8 @@ export const ProposalForm = React.createClass({
         if (form.summary !== null && form.summary.length === 0) {
           form.summary = null;
         }
-
-        form.draft = nextProps.isSubmittingDraft;
         if (mode === 'edit') {
-          updateProposal(dispatch, this.props.form.id, proposal.id, form, currentStepId);
+          updateProposal(dispatch, this.props.form.id, proposal.id, form);
         } else {
           submitProposal(dispatch, this.props.form.id, form, currentStepId).catch(e => {
             if (
@@ -443,13 +427,7 @@ export const ProposalForm = React.createClass({
     );
     return (
       <form id="proposal-form">
-        {proposal.isSubmittingDraft ? (
-          <div className="mt-20">
-            <div dangerouslySetInnerHTML={{ __html: form.description }} />
-          </div>
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: form.description }} />
-        )}
+        {form.description && <div dangerouslySetInnerHTML={{ __html: form.description }} />}
         <Input
           id="proposal_title"
           type="text"
@@ -693,7 +671,6 @@ const mapStateToProps = state => ({
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
-  isSubmittingDraft: state.proposal.isDraft || false,
 });
 
 export default connect(mapStateToProps)(injectIntl(ProposalForm));

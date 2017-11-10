@@ -54,14 +54,6 @@ const ProposalCreate = React.createClass({
           <Modal.Footer>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />
             <SubmitButton
-              id="confirm-proposal-create-as-draft"
-              isSubmitting={isSubmitting}
-              onSubmit={() => dispatch(submitProposalForm(true))}
-              bsStyle="draft"
-              label="global.save_as_draft"
-            />
-            <SubmitButton
-              label="global.submit"
               id="confirm-proposal-create"
               isSubmitting={isSubmitting}
               onSubmit={() => dispatch(submitProposalForm())}

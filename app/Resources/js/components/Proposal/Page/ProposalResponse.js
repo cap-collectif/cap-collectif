@@ -21,14 +21,14 @@ const ProposalResponse = React.createClass({
     if (response.field.type === 'medias') {
       value = (
         <div>
-          <h3 className="h3">{response.field.question}</h3>
+          <h4 className="h4">{response.field.question}</h4>
           <ProposalMediaResponse medias={response.medias} />
         </div>
       );
     } else {
       value = (
         <div>
-          <h3 className="h3">{response.field.question}</h3>
+          <h4 className="h4">{response.field.question}</h4>
           {this.isHTML() ? (
             <div dangerouslySetInnerHTML={{ __html: response.value }} />
           ) : (

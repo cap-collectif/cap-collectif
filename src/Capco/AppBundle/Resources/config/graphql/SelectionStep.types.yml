@@ -16,5 +16,3 @@ SelectionStep:
             allowingProgressSteps:
                 type: "Boolean!"
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
-            voteThreshold:
-                type: "Int"
