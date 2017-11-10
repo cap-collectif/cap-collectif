@@ -66,7 +66,7 @@ Scenario: GraphQL client wants to update a group
     "data": {
       "updateGroup": {
         "group": {
-          "id": "group2"
+          "id": "group2",
           "title": "Nouveau titre",
           "description": "Nouvelle description"
         }
