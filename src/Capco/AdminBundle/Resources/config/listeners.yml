@@ -14,6 +14,7 @@ services:
           - { name: overblog_graphql.resolver, alias: "query_proposalForm", method: "resolve" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_url", method: "resolveUrl" }
           - { name: overblog_graphql.resolver, alias: "proposal_form_categories", method: "resolveCategories" }
+          - { name: overblog_graphql.resolver, alias: "proposal_form_step", method: "resolveStepType" }
 
   capco.resolver.question:
     class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
@@ -31,7 +32,7 @@ services:
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver
       tags:
-          - { name: overblog_graphql.resolver, alias: "proposal_url", method: "resolveUrl" }
+          - { name: overblog_graphql.resolver, alias: "proposal_show_url", method: "resolveShowUrl" }
           - { name: overblog_graphql.resolver, alias: "post_abstract", method: "resolvePostAbstract" }
           - { name: overblog_graphql.resolver, alias: "proposal_news", method: "resolveNews" }
           - { name: overblog_graphql.resolver, alias: "project_steps", method: "resolveProjectSteps" }
@@ -41,6 +42,8 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposal_publicationStatus", method: "resolveProposalPublicationStatus" }
           - { name: overblog_graphql.resolver, alias: "proposal_reference", method: "resolveReference" }
           - { name: overblog_graphql.resolver, alias: "proposal_evaluation", method: "resolveEvaluation" }
+          - { name: overblog_graphql.resolver, alias: "query_get_draft_proposals_for_user_in_step", method: "resolveDraftProposalsForUserInStep" }
+          - { name: overblog_graphql.resolver, alias: "proposal_created_at", method: "resolveCreatedAt" }
 
   capco.mutation.district:
         class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
@@ -114,7 +117,7 @@ services:
     tags:
         - { name: overblog_graphql.resolver, alias: "user", method: "resolve" }
         - { name: overblog_graphql.resolver, alias: "user_email", method: "resolveEmail" }
-        - { name: overblog_graphql.resolver, alias: "user_url", method: "resolveUrl" }
+        - { name: overblog_graphql.resolver, alias: "user_show_url", method: "resolveShowUrl" }
         - { name: overblog_graphql.resolver, alias: "user_createdAt", method: "resolveCreatedAt" }
         - { name: overblog_graphql.resolver, alias: "user_updatedAt", method: "resolveUpdatedAt" }
         - { name: overblog_graphql.resolver, alias: "user_lastLogin", method: "resolveLastLogin" }

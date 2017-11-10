@@ -116,8 +116,9 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => [
-                    'fr-FR' => 'Français',
+                    'fr-FR' => 'French',
                     'en-GB' => 'English',
+                    // 'es-ES' => 'Spanish (Spain)',
                 ],
             ]);
         } else {

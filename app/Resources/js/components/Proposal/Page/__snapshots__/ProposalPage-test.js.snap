@@ -2,10 +2,23 @@
 
 exports[`<ProposalPage /> should render a proposal page 1`] = `
 <div>
+  <ProposalDraftAlert
+    proposal={
+      Object {
+        "commentsCount": 5,
+        "id": 41,
+        "referer": "http://capco.test",
+        "votableStepId": "2",
+        "votesCountByStepId": Object {
+          "2": 0,
+        },
+      }
+    }
+  />
   <ProposalPageAlert
     proposal={
       Object {
-        "comments_count": 5,
+        "commentsCount": 5,
         "id": 41,
         "referer": "http://capco.test",
         "votableStepId": "2",
@@ -19,7 +32,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
     className="container container--custom"
     proposal={
       Object {
-        "comments_count": 5,
+        "commentsCount": 5,
         "id": 41,
         "referer": "http://capco.test",
         "votableStepId": "2",
@@ -120,7 +133,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 <ProposalFusionList
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -134,7 +147,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 <ProposalFusionList
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -148,7 +161,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 <Connect(ProposalPageLastNews)
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -168,7 +181,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   }
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -188,7 +201,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 <ProposalPageMetadata
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -206,7 +219,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 <ProposalPageAdvancement
                   proposal={
                     Object {
-                      "comments_count": 5,
+                      "commentsCount": 5,
                       "id": 41,
                       "referer": "http://capco.test",
                       "votableStepId": "2",
@@ -261,7 +274,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       <Connect(ProposalVoteModal)
         proposal={
           Object {
-            "comments_count": 5,
+            "commentsCount": 5,
             "id": 41,
             "referer": "http://capco.test",
             "votableStepId": "2",
@@ -278,6 +291,18 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
 
 exports[`<ProposalPage /> should render a vote tab and a vote modal if votable step is specified 1`] = `
 <div>
+  <ProposalDraftAlert
+    proposal={
+      Object {
+        "id": 42,
+        "referer": "http://capco.test",
+        "votableStepId": "2",
+        "votesCountByStepId": Object {
+          "2": 5,
+        },
+      }
+    }
+  />
   <ProposalPageAlert
     proposal={
       Object {

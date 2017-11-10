@@ -146,7 +146,7 @@ Scenario: GraphQL client wants to update a proposal form
           {
             "position": 2,
             "question": {
-              "title": "Documents à remplir",
+              "title": "Documents",
               "helpText": "5 fichiers max",
               "private": false,
               "required": true,
@@ -202,7 +202,7 @@ Scenario: GraphQL client wants to update a proposal form
           "districts": @wildcard@,
           "questions": [
             {
-              "id": @string@,
+              "id": @integer@,
               "position": 1,
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
@@ -211,9 +211,9 @@ Scenario: GraphQL client wants to update a proposal form
               "type": "text"
             },
             {
-              "id": @string@,
+              "id": @integer@,
               "position": 2,
-              "title": "Documents à remplir",
+              "title": "Documents",
               "helpText": "5 fichiers max",
               "private": false,
               "required": true,

@@ -5,4 +5,4 @@ services:
 
   capco.utils.array_hydrator:
     class: pmill\Doctrine\Hydrator\ArrayHydrator
-    arguments: ["@doctrine.orm.default_entity_manager"]
+    arguments: ["@doctrine.orm.entity_manager"]

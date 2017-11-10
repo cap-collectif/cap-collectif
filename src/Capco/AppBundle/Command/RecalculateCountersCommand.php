@@ -270,7 +270,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT p.id)
           from CapcoAppBundle:Proposal p
           INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
-          where pf.step = cs AND p.enabled = 1 group by pf.step
+          where pf.step = cs AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL AND p.enabled = 1
+          group by pf.step
         )')->execute();
 
         $collectSteps = $em->getRepository('CapcoAppBundle:Steps\CollectStep')->findAll();
@@ -307,7 +308,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $em->createQuery('UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
           select count(DISTINCT pv.id)
           from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          where pv.selectionStep = ss AND pv.expired = 0 AND p.enabled = 1 group by pv.selectionStep
+          where pv.selectionStep = ss AND pv.expired = 0 AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL AND p.enabled = 1
+          group by pv.selectionStep          
         )')->execute();
 
         $selectionSteps = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findAll();

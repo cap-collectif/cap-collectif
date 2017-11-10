@@ -5,5 +5,5 @@ Theme:
         fields:
             id:
                 type: "String!"
-            name:
+            title:
                 type: "String!"
