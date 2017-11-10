@@ -107,8 +107,8 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
-          'proposal' => $proposalId,
-          'selectionStep' => $stepId,
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
         ]);
 
         if (!$selection) {
@@ -134,7 +134,7 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $selection = $this->container->get('capco.selection.repository')
-                      ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+            ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
 
         if (!$selection) {
             throw new UserError('Cant find the selection');
@@ -152,7 +152,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
         $selection = $this->container->get('capco.selection.repository')
-                      ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+            ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
         if ($selection) {
             throw new UserError('Already selected');
         }
@@ -161,8 +161,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         if ($statusId) {
             $selectionStatus = $this->container->get('capco.status.repository')
-            ->find($statusId)
-          ;
+                ->find($statusId);
         }
 
         $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
@@ -186,35 +185,49 @@ class ProposalMutation implements ContainerAwareInterface
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
+        /** @var Proposal $proposal */
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
 
         switch ($values['publicationStatus']) {
-          case 'TRASHED':
-              $proposal->setExpired(false);
-              $proposal->setEnabled(true);
-              $proposal->setTrashed(true);
-              $proposal->setTrashedReason($values['trashedReason']);
-              $proposal->setDeletedAt(null);
-              break;
-          case 'PUBLISHED':
-              $proposal->setExpired(false);
-              $proposal->setEnabled(true);
-              $proposal->setTrashed(false);
-              $proposal->setTrashedReason(null);
-              $proposal->setDeletedAt(null);
-              break;
-          case 'TRASHED_NOT_VISIBLE':
-            $proposal->setExpired(false);
-            $proposal->setEnabled(false);
-            $proposal->setTrashed(true);
-            $proposal->setTrashedReason($values['trashedReason']);
-            $proposal->setDeletedAt(null);
-            break;
-          default:
-            break;
+            case 'TRASHED':
+                $proposal
+                    ->setExpired(false)
+                    ->setEnabled(true)
+                    ->setDraft(false)
+                    ->setTrashed(true)
+                    ->setTrashedReason($values['trashedReason'])
+                    ->setDeletedAt(null);
+                break;
+            case 'PUBLISHED':
+                $proposal
+                    ->setExpired(false)
+                    ->setEnabled(true)
+                    ->setDraft(false)
+                    ->setTrashed(false)
+                    ->setDeletedAt(null);
+                break;
+            case 'TRASHED_NOT_VISIBLE':
+                $proposal
+                    ->setExpired(false)
+                    ->setEnabled(false)
+                    ->setTrashed(true)
+                    ->setDraft(false)
+                    ->setTrashedReason($values['trashedReason'])
+                    ->setDeletedAt(null);
+                break;
+            case 'DRAFT':
+                $proposal
+                    ->setDraft(true)
+                    ->setExpired(false)
+                    ->setEnabled(false)
+                    ->setTrashed(false)
+                    ->setDeletedAt(null);
+                break;
+            default:
+                break;
         }
 
         $em->flush();
@@ -281,10 +294,10 @@ class ProposalMutation implements ContainerAwareInterface
                 throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
             }
             $response = $proposal->getResponses()->filter(
-                  function (AbstractResponse $res) use ($questionId) {
-                      return (int) $res->getQuestion()->getId() === (int) $questionId;
-                  }
-              )->first();
+                function (AbstractResponse $res) use ($questionId) {
+                    return (int) $res->getQuestion()->getId() === (int) $questionId;
+                }
+            )->first();
             if (!$response) {
                 $response = new MediaResponse();
                 $response->setQuestion($question);
@@ -300,8 +313,8 @@ class ProposalMutation implements ContainerAwareInterface
 
         // Now we can submit the form without anything related to file uploads
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
-           'proposalForm' => $proposal->getProposalForm(),
-       ]);
+            'proposalForm' => $proposal->getProposalForm(),
+        ]);
 
         if (!$user->isSuperAdmin()) {
             if (isset($values['author'])) {

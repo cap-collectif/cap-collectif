@@ -274,11 +274,17 @@ class ProposalForm
         return $this;
     }
 
-    public function getRealQuestions(): array
+    /**
+     * @return array
+     */
+    public function getRealQuestions()
     {
-        return $this->getQuestions() ? $this->getQuestions()->map(function (QuestionnaireAbstractQuestion $questionnaireAbstractQuestion) {
-            return $questionnaireAbstractQuestion->getQuestion();
-        })->toArray() : [];
+        $questions = [];
+        foreach ($this->questions as $qaq) {
+            $questions[] = $qaq->getQuestion();
+        }
+
+        return $questions;
     }
 
     /**

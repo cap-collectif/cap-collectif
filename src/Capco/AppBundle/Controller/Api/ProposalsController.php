@@ -100,10 +100,14 @@ class ProposalsController extends FOSRestController
             throw new BadRequestHttpException('You can no longer contribute to this collect step.');
         }
 
+        $isDraft = filter_var($request->request->get('draft', false), FILTER_VALIDATE_BOOLEAN);
+        $request->request->remove('draft');
+
         $proposal = (new Proposal())
+            ->setDraft($isDraft)
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
-            ->setEnabled(true)
+            ->setEnabled($isDraft ? false : true)
         ;
 
         if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
@@ -114,6 +118,7 @@ class ProposalsController extends FOSRestController
 
         $form = $this->createForm($formClass, $proposal, [
             'proposalForm' => $proposalForm,
+            'validation_groups' => [$proposal->isDraft() ? 'ProposalDraft' : 'Default'],
         ]);
 
         if ($uploadedMedia = $request->files->get('media')) {
@@ -345,6 +350,13 @@ class ProposalsController extends FOSRestController
             throw new BadRequestHttpException('This proposal is no longer editable.');
         }
 
+        $isDraft = filter_var($request->request->get('draft', false), FILTER_VALIDATE_BOOLEAN);
+        $request->request->remove('draft');
+
+        $proposal
+            ->setDraft($isDraft && !$proposal->isEnabled())
+            ->setEnabled($proposal->isDraft() ? false : true);
+
         if ($this->getUser() !== $proposal->getAuthor()) {
             throw new AccessDeniedException();
         }
@@ -353,6 +365,7 @@ class ProposalsController extends FOSRestController
 
         $form = $this->createForm(ProposalType::class, $proposal, [
             'proposalForm' => $proposalForm,
+            'validation_groups' => [$isDraft ? 'ProposalDraft' : 'Default'],
         ]);
 
         if ('false' === $request->request->get('media')) {

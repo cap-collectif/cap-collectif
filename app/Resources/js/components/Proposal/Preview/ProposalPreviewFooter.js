@@ -26,12 +26,12 @@ const ProposalPreviewFooter = React.createClass({
           <div
             className="proposal__counter proposal__counter--comments"
             style={{ width: counterWidth }}>
-            <div className="proposal__counter__value">{proposal.comments_count}</div>
+            <div className="proposal__counter__value">{proposal.commentsCount}</div>
             <div className="proposal__counter__label">
               <FormattedMessage
                 id="comment.count_no_nb"
                 values={{
-                  count: proposal.comments_count,
+                  count: proposal.commentsCount,
                 }}
               />
             </div>

@@ -51,7 +51,7 @@ class QuestionSubscriber implements EventSubscriberInterface
     {
         // if data doesn't have any id, it is considered as a creation.
         // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
-        if ((!$data = $event->getData()) || !is_array($data) || isset($data['question']['id'])) {
+        if ((!$data = $event->getData()) || (!is_array($data) && isset($data['question']['id']))) {
             return;
         }
 
@@ -65,9 +65,9 @@ class QuestionSubscriber implements EventSubscriberInterface
             $question = new SimpleQuestion();
         }
 
+        $form->remove('question');
         $question = $this->arrayHydrator->hydrate($question, $data['question']);
         $this->processQuestion($question, $form, $type);
-        $form->get('question')->remove('id');
     }
 
     private function processQuestion(AbstractQuestion $question, FormInterface $form, string $type)

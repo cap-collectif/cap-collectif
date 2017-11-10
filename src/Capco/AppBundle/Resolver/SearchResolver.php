@@ -179,6 +179,7 @@ class SearchResolver
 
         $filters = [];
         $filters['isTrashed'] = false;
+        $filters['isDraft'] = false;
         $filters['enabled'] = true;
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
