@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm from '../Form/ProposalForm';
-import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import { editProposalForm, closeEditProposalModal } from '../../../redux/modules/proposal';
 
 const ProposalEditModal = React.createClass({
@@ -42,7 +41,6 @@ const ProposalEditModal = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalDraftAlert proposal={proposal} />
             <ProposalForm
               form={form}
               categories={categories}
@@ -57,18 +55,7 @@ const ProposalEditModal = React.createClass({
                 dispatch(closeEditProposalModal());
               }}
             />
-            {proposal.isDraft && (
-              <SubmitButton
-                id="confirm-proposal-create-as-draft"
-                isSubmitting={isSubmitting}
-                onSubmit={() => dispatch(editProposalForm(true))}
-                bsStyle="draft"
-                label="global.save_as_draft"
-              />
-            )}
-
             <SubmitButton
-              label="global.submit"
               id="confirm-proposal-edit"
               isSubmitting={isSubmitting}
               onSubmit={() => {

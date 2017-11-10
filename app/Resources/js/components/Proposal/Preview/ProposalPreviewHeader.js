@@ -18,7 +18,7 @@ const ProposalPreviewHeader = React.createClass({
           <UserLink user={proposal.author} />
           <p className="excerpt small proposal__date">
             <FormattedDate
-              value={moment(proposal.createdAt)}
+              value={moment(proposal.created_at)}
               day="numeric"
               month="long"
               year="numeric"

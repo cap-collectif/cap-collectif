@@ -58,14 +58,17 @@ Hack form button - radio check
     }
 
     .ql-toolbar {
-        border-radius: 3px 3px 0 0;
+        border-radius: 5px 5px 0 0;
     }
 
     .ql-container {
-        border-radius: 0 0 3px 3px;
+        border-radius: 0 0 5px 5px;
         border-top: none;
-        min-height: 100px;
         background-color: $main-field-bg;
+
+        .ql-editor {
+            min-height: 100px;
+        }
     }
 }
 
@@ -203,6 +206,7 @@ Hack form button - radio check
 
 .well-form {
     padding: 8px 15px 15px;
+    border-radius: 5px;
 
     .form-group {
         margin-bottom: 0;

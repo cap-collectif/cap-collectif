@@ -15,7 +15,6 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
       "summaryOrBodyExcerpt": @string@,
       "updated_at": "@string@.isDateTime()",
       "estimation": @...@,
-      "isDraft": @boolean@,
       "theme": {
         "id": @string@,
         "title": @string@,
@@ -670,7 +669,6 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           "summaryOrBodyExcerpt": @string@,
           "reference": @string@,
           "updated_at": "@string@.isDateTime()",
-          "isDraft": @boolean@,
           "author": {
               "username": @string@,
               "displayName": @string@,
@@ -737,7 +735,6 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
       {
           "summaryOrBodyExcerpt": @string@,
           "reference": @string@,
-          "isDraft": @boolean@,
           "updated_at": "@string@.isDateTime()",
           "author": {
               "username": @string@,
@@ -867,12 +864,12 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "title": @string@,
         "body": @string@,
         "summary": @string@,
-        "isDraft": @boolean@,
         "_links": @wildcard@,
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@
+        "votableStepId": @string@,
+        "reference": "@string@"
       },
       {
         "summaryOrBodyExcerpt": @string@,
@@ -896,12 +893,12 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "isTrashed": @boolean@,
         "title": @string@,
         "body": @string@,
-        "isDraft": @boolean@,
         "_links": @wildcard@,
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
         "responses": @array@,
-        "votableStepId": @string@
+        "votableStepId": @string@,
+        "reference": "@string@"
       }
     ],
     "count": 2

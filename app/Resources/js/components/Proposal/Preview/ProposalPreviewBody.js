@@ -17,7 +17,7 @@ const ProposalPreviewBody = React.createClass({
 
     return (
       <div className="proposal__body">
-        <a href={proposal.show_url ? proposal.show_url : proposal._links.show}>
+        <a href={proposal._links.show}>
           <h2 className="h4 proposal__title">
             <Truncate lines={3}>{proposal.title}</Truncate>
           </h2>
