@@ -54,7 +54,6 @@ const ProposalVoteButton = React.createClass({
         : () => {
             dispatch(openVoteModal(proposal.id));
           };
-
     return (
       <Button
         id={id}

@@ -82,8 +82,8 @@ type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM', isDraft?: boolean };
-type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM', isDraft?: boolean };
+type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM' };
+type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM' };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
@@ -250,13 +250,11 @@ export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({
 export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({
   type: 'proposal/OPEN_DELETE_MODAL',
 });
-export const submitProposalForm = (isDraft?: boolean): SubmitProposalFormAction => ({
+export const submitProposalForm = (): SubmitProposalFormAction => ({
   type: 'proposal/SUBMIT_PROPOSAL_FORM',
-  isDraft,
 });
-export const editProposalForm = (isDraft?: boolean): EditProposalFormAction => ({
+export const editProposalForm = (): EditProposalFormAction => ({
   type: 'proposal/EDIT_PROPOSAL_FORM',
-  isDraft,
 });
 export const openCreateModal = (): OpenCreateModalAction => ({
   type: 'proposal/OPEN_CREATE_MODAL',
@@ -343,10 +341,6 @@ function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStep
   if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
     const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
     const lastProposals = randomResultsByStep[currentProjectStepId];
-
-    if (lastProposals.indexOf(proposal.id) !== -1) {
-      return;
-    }
 
     const proposals = {};
     proposals[currentProjectStepId] = [proposal.id, ...lastProposals];
@@ -468,9 +462,8 @@ export const submitProposal = (
           },
         });
 
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
+        // Update Local storage with this new proposal
+        addProposalInRandomResultsByStep(proposal, currentStepId);
 
         window.location.href = proposal._links.show;
       });
@@ -488,30 +481,17 @@ export const submitProposal = (
     });
 };
 
-export const updateProposal = (
-  dispatch: Dispatch,
-  form: Uuid,
-  id: Uuid,
-  data: Object,
-  currentStepId: string,
-) => {
+export const updateProposal = (dispatch: Dispatch, form: Uuid, id: Uuid, data: Object) => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
   return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
-    .then(response => {
+    .then(() => {
       dispatch(closeEditProposalModal());
+      location.reload();
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-      });
-
-      response.json().then(proposal => {
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
-
-        location.reload();
       });
     })
     .catch(() => {
@@ -777,7 +757,7 @@ const voteReducer = (state: State, action): Exact<State> => {
   votesByStepId[action.stepId].unshift(action.vote);
   const votesCountByStepId = proposal.votesCountByStepId;
   votesCountByStepId[action.stepId]++;
-  let commentsCount = proposal.commentsCount;
+  let commentsCount = proposal.comments_count;
   if (action.comment) {
     commentsCount++;
   }
@@ -788,7 +768,7 @@ const voteReducer = (state: State, action): Exact<State> => {
     ...proposal,
     votesCountByStepId,
     votesByStepId,
-    commentsCount,
+    comments_count: commentsCount,
   };
   const creditsLeftByStepId = state.creditsLeftByStepId;
   creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;
@@ -903,11 +883,11 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CHANGE_TERMS':
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case 'proposal/SUBMIT_PROPOSAL_FORM':
-      return { ...state, isCreating: true, isDraft: action.isDraft };
+      return { ...state, isCreating: true };
     case 'proposal/CANCEL_SUBMIT_PROPOSAL':
       return { ...state, isCreating: false, isEditing: false };
     case 'proposal/EDIT_PROPOSAL_FORM':
-      return { ...state, isEditing: true, isDraft: action.isDraft };
+      return { ...state, isEditing: true };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':

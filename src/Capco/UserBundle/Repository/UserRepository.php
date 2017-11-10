@@ -483,7 +483,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
-            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.expired = 0 AND proposals.draft = 0 AND proposals.isTrashed = 0 AND proposals.deletedAt IS NULL AND proposals.enabled = 1')
+            ->leftJoin('u.proposals', 'proposals', 'WITH', 'proposals.enabled = 1 AND proposals.expired = 0')
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
             ->groupBy('u.id')
@@ -604,7 +604,7 @@ class UserRepository extends EntityRepository
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          WHERE pv.user = u AND pv.expired = 0 AND p.draft = 0 AND p.expired = 0
+          WHERE pv.user = u AND pv.expired = 0 AND p.enabled = 1 AND p.expired = 0
           GROUP BY pv.user
         ')
             ->setParameter('step', $step);
@@ -619,11 +619,8 @@ class UserRepository extends EntityRepository
             ->from('CapcoAppBundle:ProposalSelectionVote', 'proposal_selection_vote')
             ->leftJoin('CapcoAppBundle:Proposal', 'proposal', Join::WITH, 'proposal_selection_vote.proposal = proposal')
             ->andWhere('proposal_selection_vote.expired = 0')
-            ->andWhere('proposal.expired = 0')
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.isTrashed = 0')
             ->andWhere('proposal.enabled = 1')
-            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('proposal.expired = 0')
             ->andWhere('proposal_selection_vote.selectionStep = :step');
 
         $query->andWhere($query->expr()->andX($query->expr()->isNotNull('proposal_selection_vote.email')))

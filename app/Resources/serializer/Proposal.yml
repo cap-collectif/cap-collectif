@@ -61,10 +61,6 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       serialized_name: isTrashed
       groups: [Proposals]
-    draft:
-      expose: true
-      serialized_name: isDraft
-      groups: [Proposals]
     trashedReason:
       expose: true
       serialized_name: trashedReason

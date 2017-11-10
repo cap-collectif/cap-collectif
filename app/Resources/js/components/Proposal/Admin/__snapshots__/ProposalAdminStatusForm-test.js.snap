@@ -44,37 +44,25 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
           onClick={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="proposal.state.published"
-            values={Object {}}
-          />
+          Publié
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED"
         >
-          <FormattedMessage
-            id="proposal.state.trashed"
-            values={Object {}}
-          />
+          Corbeille
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED_NOT_VISIBLE"
         >
-          <FormattedMessage
-            id="proposal.state.hidden_content"
-            values={Object {}}
-          />
+          Corbeille (contenu masqué)
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="EXPIRED"
         >
-          <FormattedMessage
-            id="proposal.state.expired"
-            values={Object {}}
-          />
+          Expiré
         </ToggleButton>
       </Field>
       <ButtonToolbar
@@ -169,28 +157,19 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
           onClick={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="proposal.state.published"
-            values={Object {}}
-          />
+          Publié
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED"
         >
-          <FormattedMessage
-            id="proposal.state.trashed"
-            values={Object {}}
-          />
+          Corbeille
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED_NOT_VISIBLE"
         >
-          <FormattedMessage
-            id="proposal.state.hidden_content"
-            values={Object {}}
-          />
+          Corbeille (contenu masqué)
         </ToggleButton>
       </Field>
       <ButtonToolbar
@@ -289,28 +268,19 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
           onClick={[Function]}
           value="PUBLISHED"
         >
-          <FormattedMessage
-            id="proposal.state.published"
-            values={Object {}}
-          />
+          Publié
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED"
         >
-          <FormattedMessage
-            id="proposal.state.trashed"
-            values={Object {}}
-          />
+          Corbeille
         </ToggleButton>
         <ToggleButton
           onClick={[Function]}
           value="TRASHED_NOT_VISIBLE"
         >
-          <FormattedMessage
-            id="proposal.state.hidden_content"
-            values={Object {}}
-          />
+          Corbeille (contenu masqué)
         </ToggleButton>
       </Field>
       <ButtonToolbar

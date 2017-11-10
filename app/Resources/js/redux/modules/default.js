@@ -47,7 +47,6 @@ export const features = {
   login_gplus: false,
   members_list: false,
   captcha: false,
-  consent_external_communication: false,
   newsletter: false,
   profiles: false,
   projects_form: false,

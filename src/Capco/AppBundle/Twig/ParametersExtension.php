@@ -48,7 +48,6 @@ class ParametersExtension extends \Twig_Extension
             'login.text.bottom',
             'signin.cgu.name',
             'signin.cgu.link',
-            'global.site.organization_name',
         ];
 
         $exposedParameters = [];

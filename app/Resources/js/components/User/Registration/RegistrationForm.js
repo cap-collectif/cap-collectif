@@ -46,13 +46,11 @@ export const RegistrationForm = React.createClass({
     addUserTypeField: PropTypes.bool.isRequired,
     addZipcodeField: PropTypes.bool.isRequired,
     addCaptchaField: PropTypes.bool.isRequired,
-    addConsentExternalCommunicationField: PropTypes.bool.isRequired,
     userTypes: PropTypes.array.isRequired,
     cguLink: PropTypes.string.isRequired,
     cguName: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
-    organizationName: PropTypes.string.isRequired,
   },
 
   render() {
@@ -62,11 +60,9 @@ export const RegistrationForm = React.createClass({
       dynamicFields,
       addZipcodeField,
       addUserTypeField,
-      addConsentExternalCommunicationField,
       userTypes,
       handleSubmit,
       addCaptchaField,
-      organizationName,
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
@@ -204,22 +200,6 @@ export const RegistrationForm = React.createClass({
             />
           }
         />
-        {addConsentExternalCommunicationField && (
-          <Field
-            id="consent-external-communication"
-            name="consentExternalCommunication"
-            component={renderComponent}
-            type="checkbox"
-            children={
-              <FormattedMessage
-                id="registration.consent_external_communication"
-                values={{
-                  organization_name: organizationName,
-                }}
-              />
-            }
-          />
-        )}
         {addCaptchaField && (
           <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
         )}
@@ -232,11 +212,9 @@ const mapStateToProps = (state: State) => ({
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
-  addConsentExternalCommunicationField: state.default.features.consent_external_communication,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
-  organizationName: state.default.parameters['global.site.organization_name'],
   dynamicFields: state.user.registration_form.questions,
 });
 

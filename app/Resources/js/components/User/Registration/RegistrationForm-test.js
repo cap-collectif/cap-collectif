@@ -8,13 +8,11 @@ describe('<RegistrationForm />', () => {
     addUserTypeField: false,
     addZipcodeField: false,
     addCaptchaField: true,
-    addConsentExternalCommunicationField: true,
     handleSubmit: jest.fn(),
     userTypes: [],
     cguName: 'la charte',
     cguLink: '/charte',
     dynamicFields: [],
-    organizationName: 'Cap Collectif',
   };
 
   it('renders a form with inputs and a captcha', () => {

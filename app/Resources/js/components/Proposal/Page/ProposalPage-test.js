@@ -29,7 +29,7 @@ describe('<ProposalPage />', () => {
     votesCountByStepId: {
       '2': 0,
     },
-    commentsCount: 5,
+    comments_count: 5,
   };
   const proposalWithVotes = {
     id: 42,
