@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -168,6 +169,7 @@ class ProjectDownloadResolver
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;
             $proposal['evaluation_responses'] = $proposalsObject[$i]->getEvaluationResponses();
+            $proposal['media_responses'] = $proposalsObject[$i]->getResponses()->filter(function ($response) { return $response instanceof MediaResponse; })->getValues();
             $proposal['entity_type'] = 'proposal';
             $entity = $this->em
                 ->getRepository('CapcoAppBundle:Proposal')
@@ -178,7 +180,6 @@ class ProjectDownloadResolver
             $collectVotesCount = $this->em
                 ->getRepository('CapcoAppBundle:ProposalCollectVote')
                 ->getCountsByProposalGroupedByStepsTitle($entity);
-
             $str = '';
             $loop = 1;
             $nbVotes = count($selectionVotesCount) + count($collectVotesCount);
@@ -518,13 +519,31 @@ class ProjectDownloadResolver
             }
         }
 
+        if (isset($proposal['media_responses'])) {
+            foreach ($proposal['media_responses'] as $response) {
+                $item[$response->getQuestion()->getTitle()] = $this->getMediasUrlForResponse($response);
+            }
+        }
+
         if (isset($proposal['evaluation_responses'])) {
             foreach ($proposal['evaluation_responses'] as $question => $response) {
-                $item[$question] = $response;
+                $item[$question] = $response instanceof MediaResponse ?
+                    $this->getMediasUrlForResponse($response) :
+                    $response;
             }
         }
 
         return $item;
+    }
+
+    private function getMediasUrlForResponse($response)
+    {
+        $filenames = [];
+        foreach ($response->getMedias() as $media) {
+            $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
+        }
+
+        return implode(", \n", $filenames);
     }
 
     private function booleanToString($boolean)
