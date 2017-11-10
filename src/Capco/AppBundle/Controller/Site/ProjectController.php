@@ -243,7 +243,7 @@ class ProjectController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil(count($posts) / $pagination);
         }
 
@@ -272,7 +272,7 @@ class ProjectController extends Controller
         $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, $pagination, $page);
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil(count($contributors) / $pagination);
         }
 
@@ -298,7 +298,7 @@ class ProjectController extends Controller
     public function showMetaAction($projectSlug, $currentStepSlug)
     {
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOneBySlugWithStepsAndEventsAndPosts($projectSlug);
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         $projectSteps = $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
 
         return [

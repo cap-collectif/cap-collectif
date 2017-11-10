@@ -885,6 +885,7 @@ type QuestionChoice {
 }
 
 input QuestionInput {
+  id: Int
   title: String!
   type: QuestionTypeValue!
   private: Boolean!

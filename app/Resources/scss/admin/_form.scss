@@ -21,11 +21,8 @@
         .ql-container {
             border-radius: 0 0 3px 3px;
             border-top: none;
+            min-height: 100px;
             background-color: $light-bgc;
-
-            .ql-editor {
-                min-height: 100px;
-            }
         }
     }
 
