@@ -39,6 +39,8 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
         proposal_update:
             processor: proposal_update.processor
             middleware_stack:
@@ -50,6 +52,8 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
         proposal_delete:
             processor: proposal_delete.processor
             middleware_stack:
@@ -61,6 +65,8 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
         comment_create:
             processor: comment_create.processor
             middleware_stack:
@@ -72,6 +78,8 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
         comment_update:
             processor: comment_update.processor
             middleware_stack:
@@ -83,6 +91,8 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
         comment_delete:
             processor: comment_delete.processor
             middleware_stack:
@@ -94,3 +104,5 @@ swarrot:
                    extras:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 5
