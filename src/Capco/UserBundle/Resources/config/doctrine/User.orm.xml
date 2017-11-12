@@ -130,8 +130,6 @@
         <one-to-many target-entity="Capco\AppBundle\Entity\Reply" mapped-by="author" field="replies">
         </one-to-many>
 
-        <one-to-many target-entity="Capco\AppBundle\Entity\UserGroup" mapped-by="user" field="userGroups" />
-
         <field name="vip" column="vip" type="boolean" />
         <field name="emailConfirmationSentAt" column="email_confirmation_sent_at" type="datetime" nullable="true" />
 

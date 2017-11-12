@@ -33,6 +33,10 @@ services:
       class: Capco\AppBundle\Resolver\OpinionTypesResolver
       arguments: ['@capco.opinion_type.repository', '@capco.opinion.repository', '@router']
 
+  capco.search.resolver:
+    class: Capco\AppBundle\Resolver\SearchResolver
+    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app', '@validator']
+
   capco.section.resolver:
     class: Capco\AppBundle\Resolver\SectionResolver
     arguments: ['@capco.section.repository', '@capco.toggle.manager']

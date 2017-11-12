@@ -46,7 +46,6 @@ sonata_admin:
             sonata.admin.group.user:
                 items:
                     - sonata.user.admin.user
-                    - capco_admin.admin.group
                     - capco_admin.admin.user_type
                     - capco_admin.admin.newsletter_subscription
             admin.group.parameters:

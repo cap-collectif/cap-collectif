@@ -83,9 +83,3 @@ Query:
                     stepId:
                         type: "ID!"
                 resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [args['stepId'], user])"
-            group:
-                type: "Group!"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_group', [args['id'], user])"

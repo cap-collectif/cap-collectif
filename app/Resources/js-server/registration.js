@@ -35,7 +35,6 @@ import ProposalFormAdminPageApp from '../js/startup/ProposalFormAdminPageApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
-import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
 import appStore from '../js/stores/AppStore';
 
 moment.locale('fr');
@@ -81,5 +80,4 @@ ReactOnRails.register({
   IdeaCreateApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
-  GroupAdminPageApp,
 });

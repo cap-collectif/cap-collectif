@@ -59,7 +59,7 @@ class CollectStepsController extends FOSRestController
         $providedFilters['proposalForm'] = $proposalForm->getId();
         $providedFilters['step'] = $collectStep->getId();
 
-        $results = $this->get('capco.search.proposal_search')->searchProposals(
+        $results = $this->get('capco.search.resolver')->searchProposals(
             $page,
             $pagination,
             $order,
@@ -95,7 +95,7 @@ class CollectStepsController extends FOSRestController
             }
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
+        $results = $this->get('capco.search.resolver')->searchProposalsIn($selectedIds);
 
         // Reorder proposals
         $orderedProposals = [];

@@ -204,16 +204,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalForm']
 
-  capco.group.repository:
-    class: Capco\AppBundle\Repository\GroupRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Group']
-
-  capco.user_group.repository:
-    class: Capco\AppBundle\Repository\UserGroupRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:UserGroup']
-
   capco.questionnaire.repository:
     class: Capco\AppBundle\Repository\QuestionnaireRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
