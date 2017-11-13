@@ -42,6 +42,8 @@ import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
 import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
+import GroupAdminPageApp from './startup/GroupAdminPageApp';
+import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
 import appStore from '../js/stores/AppStore';
 
 const locale = window.locale;
@@ -97,4 +99,6 @@ ReactOnRails.register({
   IdeaCreateApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
+  GroupAdminPageApp,
+  GroupCreateButtonApp,
 });

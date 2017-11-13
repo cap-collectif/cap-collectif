@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupForm /> render correctly 1`] = `
+<form>
+  <Field
+    component={[Function]}
+    id="group_title"
+    label={
+      <FormattedMessage
+        id="group.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    id="group_description"
+    label={
+      <span>
+        <FormattedMessage
+          id="group.description"
+          values={Object {}}
+        />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
+      </span>
+    }
+    name="description"
+    type="textarea"
+  />
+</form>
+`;

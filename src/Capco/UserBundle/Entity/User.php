@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -249,6 +250,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     private $consentExternalCommunication = false;
 
+    private $userGroups;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -265,6 +268,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->sources = new ArrayCollection();
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -1310,6 +1314,34 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setConsentExternalCommunication(bool $consentExternalCommunication): self
     {
         $this->consentExternalCommunication = $consentExternalCommunication;
+
+        return $this;
+    }
+
+    public function getUserGroups(): ArrayCollection
+    {
+        return $this->userGroups;
+    }
+
+    public function setUserGroups(ArrayCollection $userGroups): self
+    {
+        $this->userGroups = $userGroups;
+
+        return $this;
+    }
+
+    public function addUserGroup(UserGroup $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups->add($userGroup);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(UserGroup $userGroup): self
+    {
+        $this->userGroups->removeElement($userGroup);
 
         return $this;
     }

@@ -179,9 +179,6 @@ fos_user:
     db_driver:      orm
     firewall_name:  main
     user_class:     Capco\UserBundle\Entity\User
-    group:
-        group_class:   Capco\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
     service:
         user_manager: sonata.user.orm.user_manager
         mailer: capco.notify_manager
