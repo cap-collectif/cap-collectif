@@ -8,8 +8,8 @@ import type {
 } from './__generated__/ChangeProposalFormParametersMutation.graphql';
 
 const mutation = graphql`
-  mutation ChangeProposalFormParametersMutation($input: ChangeProposalFormParametersInput!) {
-    changeProposalFormParameters(input: $input) {
+  mutation ChangeProposalFormParametersMutation($input: UpdateProposalFormInput!) {
+    updateProposalForm(input: $input) {
       proposalForm {
         id
         title

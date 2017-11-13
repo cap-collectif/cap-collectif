@@ -17,6 +17,7 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     proposalForm: {
       id: 'proposalFormId',
       title: 'title',
+      commentable: true,
     },
   };
 

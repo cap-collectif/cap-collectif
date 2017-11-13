@@ -48,6 +48,17 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         name="title"
         type="text"
       />
+      <Field
+        component={[Function]}
+        id="proposal_form_commentable"
+        name="commentable"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.commentable"
+          values={Object {}}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

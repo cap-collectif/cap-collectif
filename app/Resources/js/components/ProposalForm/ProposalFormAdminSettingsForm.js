@@ -7,7 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
 import AlertAdminForm from '../Alert/AlertAdminForm';
-import ChangeTitleProposalFormMutation from '../../mutations/ChangeTitleProposalFormMutation';
+import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposalFormParametersMutation';
 import type { ProposalFormAdminSettingsForm_proposalForm } from './__generated__/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State } from '../../types';
 
@@ -31,7 +31,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { proposalForm } = props;
   values.proposalFormId = proposalForm.id;
   delete values.id;
-  return ChangeTitleProposalFormMutation.commit({
+  return ChangeProposalFormParametersMutation.commit({
     input: values,
   });
 };
