@@ -1,3 +1,17 @@
+input AddUsersInGroupInput {
+  # Users that will be added to the group.
+  users: [ID!]!
+
+  # The concerned group id.
+  groupId: ID!
+  clientMutationId: String
+}
+
+type AddUsersInGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
 # An argument
 type Argument implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
@@ -284,6 +298,20 @@ interface ContributionWithAuthor {
   author: User!
 }
 
+input CreateGroupInput {
+  # The title of the group
+  title: String!
+
+  # The description of the group
+  description: String
+  clientMutationId: String
+}
+
+type CreateGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
 input CreateProposalFormInput {
   # The proposal form title
   title: String!
@@ -297,6 +325,17 @@ type CreateProposalFormPayload {
 
 scalar DateTime
 
+input DeleteGroupInput {
+  # The group id
+  groupId: ID!
+  clientMutationId: String
+}
+
+type DeleteGroupPayload {
+  deletedGroupTitle: String!
+  clientMutationId: String
+}
+
 input DeleteProposalInput {
   # The proposal id
   proposalId: ID!
@@ -305,6 +344,20 @@ input DeleteProposalInput {
 
 type DeleteProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input DeleteUserInGroupInput {
+  # The user id
+  userId: ID!
+
+  # The group id
+  groupId: ID!
+  clientMutationId: String
+}
+
+type DeleteUserInGroupPayload {
+  group: Group!
   clientMutationId: String
 }
 
@@ -347,6 +400,19 @@ type EvaluationForm {
 }
 
 scalar GeoJSON
+
+# A list of groups
+type Group {
+  # The content of the group.
+  id: ID!
+
+  # Identifies the group name.
+  title: String!
+
+  # Identifies the description of the group.
+  description: String
+  usersConnection: [UserGroup!]!
+}
 
 scalar HTML
 
@@ -426,6 +492,11 @@ type Mutation {
   updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
   setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
   changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
+  createGroup(input: CreateGroupInput!): CreateGroupPayload
+  updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
+  deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
+  deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
+  addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
 }
 
 # A notifications configuration
@@ -876,6 +947,7 @@ type Query {
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]
   draftProposalsForUserInStep(stepId: ID!): [Proposal!]
+  group(id: ID!): Group!
 }
 
 interface Question {
@@ -1201,8 +1273,21 @@ type UnselectProposalPayload {
   clientMutationId: String
 }
 
+input UpdateGroupInput {
+  groupId: ID!
+  title: String!
+  description: String
+  clientMutationId: String
+}
+
+type UpdateGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
 input UpdateProposalFormInput {
   proposalFormId: ID!
+  title: String
   description: String
   summaryHelpText: String
   illustrationHelpText: String
@@ -1326,6 +1411,18 @@ type User {
 
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
+}
+
+# A list of users in groups
+type UserGroup {
+  # The identifier of the group
+  id: ID!
+
+  # Identifies the user
+  user: User!
+
+  # Identifies the group
+  group: Group!
 }
 
 # A type of person

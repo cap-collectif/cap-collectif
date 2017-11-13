@@ -165,7 +165,6 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
     } = this.props;
     const optional = (
       <span className="excerpt">
-        {' '}
         <FormattedMessage id="global.form.optional" />
       </span>
     );

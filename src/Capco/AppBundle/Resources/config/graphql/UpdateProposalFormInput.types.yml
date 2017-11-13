@@ -5,6 +5,8 @@ UpdateProposalFormInput:
         fields:
             proposalFormId:
                 type: "ID!"
+            title:
+                type: "String"
             description:
                 type: "String"
             summaryHelpText:

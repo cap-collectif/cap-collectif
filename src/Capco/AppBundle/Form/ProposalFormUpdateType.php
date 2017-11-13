@@ -17,6 +17,7 @@ class ProposalFormUpdateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title', PurifiedTextType::class)
             ->add('titleHelpText', PurifiedTextType::class)
 
             ->add('description', PurifiedTextType::class)
