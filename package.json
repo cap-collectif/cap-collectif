@@ -44,7 +44,7 @@
       "git add"
     ],
     "*.py": [
-      "autopep8 --in-place --aggressive --aggressive --ignore=E501",
+      "pycodestyle --ignore=E501",
       "git add"
     ],
     "*.twig": [

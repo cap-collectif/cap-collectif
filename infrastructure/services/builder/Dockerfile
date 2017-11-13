@@ -86,8 +86,8 @@ RUN npm install --global bower@1.8.0
 
 RUN npm install --global babel-cli
 
-# Install pep8
-RUN pip install pep8 autopep8
+# Install pycodestyle
+RUN pip install pycodestyle
 
 # Install composer & php-cs-fixer
 RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer && \

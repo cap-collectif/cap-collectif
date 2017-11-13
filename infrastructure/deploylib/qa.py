@@ -21,7 +21,7 @@ def check_dependencies():
 def check_codestyle():
     "Check code style"
     env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
-    env.compose_run('pep8 infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
     env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'builder', '.', no_deps=True)
 
@@ -31,7 +31,7 @@ def lint():
     "Lint all files"
     env.compose_run('yarn run lint', 'builder', '.', no_deps=True)
     env.compose_run('php-cs-fixer fix --config=.php_cs -v || echo true', 'builder', '.', no_deps=True)
-    env.compose_run('autopep8 --in-place --aggressive --aggressive infrastructure/deploylib/* --ignore=E501', 'builder', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
 
 
 @task(environments=['local', 'ci'])
@@ -111,16 +111,3 @@ def blackfire_curl(url):
 def blackfire_run(cli):
     "Blackfire run"
     local('eval "$(docker-machine env dinghy)" && docker exec -u root -i capco_application_1 blackfire run ' + cli + ' --env="Cap Collectif"')
-
-
-@task(environments=['local'])
-def setup_git_hooks():
-    "Set git hooks"
-    local('rm -f .git/hooks/pre-commit && ln -s ../../infrastructure/git-hooks/hooks/pre-commit .git/hooks/pre-commit')
-
-
-@task(environments=['local'])
-def run_pre_commit_hook():
-    "Run pre-commit hook"
-    env.compose_run('infrastructure/git-hooks/scripts/cs-fixer.sh', 'builder', 'capco', '/var/www', no_deps=True)
-    env.compose_run('infrastructure/git-hooks/scripts/pep8.sh', 'builder', 'capco', '/var/www', no_deps=True)
