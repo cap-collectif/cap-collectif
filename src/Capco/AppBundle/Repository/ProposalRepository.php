@@ -247,7 +247,7 @@ class ProposalRepository extends EntityRepository
     public function getByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
     {
         $qb = $this->createQueryBuilder('proposal')
-            ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut', 'proposalEvaluation')
+            ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut')
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.Media', 'amedia')
@@ -257,7 +257,6 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.responses', 'responses')
             ->leftJoin('responses.question', 'questions')
-            ->leftJoin('proposal.proposalEvaluation', 'proposalEvaluation')
             ->leftJoin('proposal.selectionVotes', 'selectionVotes')
             ->leftJoin('selectionVotes.user', 'votesaut')
             ->leftJoin('votesaut.userType', 'votesautut')

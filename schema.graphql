@@ -902,6 +902,7 @@ type QuestionChoice {
 }
 
 input QuestionInput {
+  # Nullable because of editing and to handle creation.
   id: Int
   title: String!
   type: QuestionTypeValue!
