@@ -85,8 +85,11 @@ const ProposalVoteForm = React.createClass({
               id="proposal-vote__comment"
               label={
                 <span style={{ fontWeight: 'normal' }}>
-                  {<FormattedMessage id="proposal.vote.form.comment" />}
-                  <span className="excerpt">{<FormattedMessage id="global.form.optional" />}</span>
+                  <FormattedMessage id="proposal.vote.form.comment" />
+                  <span className="excerpt">
+                    {' '}
+                    <FormattedMessage id="global.form.optional" />
+                  </span>
                 </span>
               }
               placeholder="proposal.vote.form.comment_placeholder"
