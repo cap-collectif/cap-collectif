@@ -113,8 +113,7 @@
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
         "php-translation/loco-adapter": "^0.4.0",
-        "pmill/doctrine-array-hydrator": "^0.1.2",
-        "php-translation/loco-adapter": "^0.4.0"
+        "pmill/doctrine-array-hydrator": "^0.1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
