@@ -1,0 +1,60 @@
+Capco\AppBundle\Entity\UserGroup:
+  # Group 1
+  userGroup1:
+    id: userGroup1
+    user: '@user1'
+    group: '@group1'
+  userGroup2:
+    id: userGroup2
+    user: '@user2'
+    group: '@group1'
+  userGroup3:
+    id: userGroup3
+    user: '@user5'
+    group: '@group1'
+  userGroup4:
+    id: userGroup4
+    user: '@user501'
+    group: '@group1'
+  userGroup5:
+    id: userGroup5
+    user: '@user502'
+    group: '@group1'
+
+  # Group 2
+  userGroup6:
+    id: userGroup6
+    user: '@user1'
+    group: '@group2'
+  userGroup7:
+    id: userGroup7
+    user: '@user503'
+    group: '@group2'
+
+  # Group 3
+  userGroup8:
+    id: userGroup8
+    user: '@user1'
+    group: '@group3'
+  userGroup9:
+    id: userGroup9
+    user: '@user505'
+    group: '@group3'
+  userGroup10:
+    id: userGroup10
+    user: '@user2'
+    group: '@group3'
+
+  # Group 4
+  userGroup11:
+    id: userGroup11
+    user: '@user1'
+    group: '@group4'
+
+  # No persons in Group 5
+
+  # Group 6
+  userGroup12:
+    id: userGroup12
+    user: '@user2'
+    group: '@group6'

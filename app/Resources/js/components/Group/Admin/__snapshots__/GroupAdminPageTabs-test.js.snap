@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupAdminPageTabs /> render correctly 1`] = `
+<div>
+  <Uncontrolled(Tabs)>
+    <Tab
+      eventKey={1}
+      title="group.admin.users"
+    >
+      <Relay(GroupAdminUsers)
+        group={Object {}}
+      />
+    </Tab>
+    <Tab
+      eventKey={2}
+      title="group.admin.parameters"
+    >
+      <Relay(Connect(ReduxForm))
+        group={Object {}}
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;

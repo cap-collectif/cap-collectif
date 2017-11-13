@@ -52,8 +52,9 @@ class UsersController extends FOSRestController
     public function getUsersSearchAction(Request $request)
     {
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
+        $notInIds = $request->request->has('notInIds') ? $request->request->get('notInIds') : null;
 
-        return $this->get('capco.search.resolver')->searchUsers($terms);
+        return $this->get('capco.search.user_search')->searchAllUsers($terms, $notInIds);
     }
 
     /**

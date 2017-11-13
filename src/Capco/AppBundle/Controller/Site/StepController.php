@@ -260,10 +260,10 @@ class StepController extends Controller
 
             if ($step->isPrivate() && $this->getUser()) {
                 $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
-                $searchResults = $this->get('capco.search.resolver')
+                $searchResults = $this->get('capco.search.proposal_search')
                     ->searchProposals(1, 51, null, null, $filters);
             } else {
-                $searchResults = $this->get('capco.search.resolver')
+                $searchResults = $this->get('capco.search.proposal_search')
                     ->searchProposals(1, 51, null, null, $filters);
             }
         }
@@ -368,7 +368,7 @@ class StepController extends Controller
         $serializer = $this->get('serializer');
 
         $searchResults = $this
-            ->get('capco.search.resolver')
+            ->get('capco.search.proposal_search')
             ->searchProposals(
                 1,
                 51,
