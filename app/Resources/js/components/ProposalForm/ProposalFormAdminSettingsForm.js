@@ -70,6 +70,13 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               type="text"
               id="proposal_form_title"
             />
+            <Field
+              name="commentable"
+              children={<FormattedMessage id="proposal_form.commentable" />}
+              component={component}
+              type="checkbox"
+              id="proposal_form_commentable"
+            />
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -101,7 +108,10 @@ const form = reduxForm({
 const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
-    initialValues: { title: proposalForm.title },
+    initialValues: {
+      title: proposalForm.title,
+      commentable: proposalForm.commentable,
+    },
   };
 };
 
@@ -113,6 +123,7 @@ export default createFragmentContainer(
     fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {
       id
       title
+      commentable
     }
   `,
 );

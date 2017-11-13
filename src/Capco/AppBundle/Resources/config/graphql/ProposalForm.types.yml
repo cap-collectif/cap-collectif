@@ -27,6 +27,8 @@ ProposalForm:
                 type: "String"
             usingDistrict:
                 type: "Boolean!"
+            commentable:
+                type: "Boolean!"
             proposalInAZoneRequired:
                 type: "Boolean!"
             districts:

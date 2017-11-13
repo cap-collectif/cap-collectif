@@ -1,0 +1,30 @@
+// @flow
+import { graphql } from 'react-relay';
+import environment from '../createRelayEnvironment';
+import commitMutation from './commitMutation';
+import type {
+  ChangeProposalFormParametersMutationResponse,
+  ChangeProposalFormParametersMutationVariables,
+} from './__generated__/ChangeProposalFormParametersMutation.graphql';
+
+const mutation = graphql`
+  mutation ChangeProposalFormParametersMutation($input: ChangeProposalFormParametersInput!) {
+    changeProposalFormParameters(input: $input) {
+      proposalForm {
+        id
+        title
+        commentable
+      }
+    }
+  }
+`;
+
+const commit = (
+  variables: ChangeProposalFormParametersMutationVariables,
+): Promise<ChangeProposalFormParametersMutationResponse> =>
+  commitMutation(environment, {
+    mutation,
+    variables,
+  });
+
+export default { commit };
