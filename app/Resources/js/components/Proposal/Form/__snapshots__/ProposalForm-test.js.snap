@@ -94,6 +94,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         <span
           className="excerpt"
         >
+           
           <FormattedMessage
             id="global.form.optional"
             values={Object {}}
@@ -234,6 +235,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         <span
           className="excerpt"
         >
+           
           <FormattedMessage
             id="global.form.optional"
             values={Object {}}
@@ -346,6 +348,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         <span
           className="excerpt"
         >
+           
           <FormattedMessage
             id="global.form.optional"
             values={Object {}}
@@ -486,6 +489,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         <span
           className="excerpt"
         >
+           
           <FormattedMessage
             id="global.form.optional"
             values={Object {}}

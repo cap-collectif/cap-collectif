@@ -408,6 +408,7 @@ export const ProposalForm = React.createClass({
 
     const optional = (
       <span className="excerpt">
+        {' '}
         <FormattedMessage id="global.form.optional" />
       </span>
     );
