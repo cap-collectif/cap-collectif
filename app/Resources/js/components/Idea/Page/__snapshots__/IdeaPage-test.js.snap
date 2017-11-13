@@ -21,7 +21,7 @@ exports[`<IdeaPage /> it should not show the sidebar when idea is not contribuab
           idea={
             Object {
               "canContribute": false,
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -30,7 +30,7 @@ exports[`<IdeaPage /> it should not show the sidebar when idea is not contribuab
           idea={
             Object {
               "canContribute": false,
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -39,13 +39,13 @@ exports[`<IdeaPage /> it should not show the sidebar when idea is not contribuab
           idea={
             Object {
               "canContribute": false,
-              "id": 1,
+              "id": "1",
             }
           }
         />
         <IdeaPageComments
           className="container container--thinner container--custom"
-          id={1}
+          id="1"
         />
       </Col>
     </Row>
@@ -73,7 +73,7 @@ exports[`<IdeaPage /> it should render the idea page with header, body, and vote
           className="container container--thinner container--custom"
           idea={
             Object {
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -81,7 +81,7 @@ exports[`<IdeaPage /> it should render the idea page with header, body, and vote
           className="container container--thinner container--custom"
           idea={
             Object {
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -89,13 +89,13 @@ exports[`<IdeaPage /> it should render the idea page with header, body, and vote
           className="container container--thinner container--custom"
           idea={
             Object {
-              "id": 1,
+              "id": "1",
             }
           }
         />
         <IdeaPageComments
           className="container container--thinner container--custom"
-          id={1}
+          id="1"
         />
       </Col>
     </Row>
@@ -124,7 +124,7 @@ exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] =
           idea={
             Object {
               "canContribute": true,
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -133,7 +133,7 @@ exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] =
           idea={
             Object {
               "canContribute": true,
-              "id": 1,
+              "id": "1",
             }
           }
         />
@@ -142,13 +142,13 @@ exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] =
           idea={
             Object {
               "canContribute": true,
-              "id": 1,
+              "id": "1",
             }
           }
         />
         <IdeaPageComments
           className="container--custom container--with-sidebar"
-          id={1}
+          id="1"
         />
       </Col>
       <div
@@ -160,7 +160,7 @@ exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] =
         idea={
           Object {
             "canContribute": true,
-            "id": 1,
+            "id": "1",
           }
         }
         onToggleExpand={[Function]}

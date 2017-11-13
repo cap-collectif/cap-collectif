@@ -11,7 +11,10 @@ import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposal
 import type { ProposalFormAdminSettingsForm_proposalForm } from './__generated__/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type RelayProps = { proposalForm: ProposalFormAdminSettingsForm_proposalForm };
+type RelayProps = {
+  isSuperAdmin: boolean,
+  proposalForm: ProposalFormAdminSettingsForm_proposalForm,
+};
 type Props = RelayProps & {
   handleSubmit: () => void,
   invalid: boolean,
@@ -40,6 +43,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
   render() {
     const {
       invalid,
+      isSuperAdmin,
       pristine,
       handleSubmit,
       submitting,
@@ -70,13 +74,15 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               type="text"
               id="proposal_form_title"
             />
-            <Field
-              name="commentable"
-              children={<FormattedMessage id="proposal_form.commentable" />}
-              component={component}
-              type="checkbox"
-              id="proposal_form_commentable"
-            />
+            {isSuperAdmin && (
+              <Field
+                name="commentable"
+                children={<FormattedMessage id="proposal_form.commentable" />}
+                component={component}
+                type="checkbox"
+                id="proposal_form_commentable"
+              />
+            )}
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -108,6 +114,7 @@ const form = reduxForm({
 const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
+    isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
     initialValues: {
       title: proposalForm.title,
       commentable: proposalForm.commentable,

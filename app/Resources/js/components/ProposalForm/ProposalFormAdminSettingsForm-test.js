@@ -14,6 +14,7 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     submitFailed: false,
     pristine: false,
     submitting: false,
+    isSuperAdmin: true,
     proposalForm: {
       id: 'proposalFormId',
       title: 'title',

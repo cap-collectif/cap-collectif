@@ -23,30 +23,29 @@ class ProposalPageComments extends React.Component<Props> {
       [className]: true,
     };
 
-    const render = ({ props }: { props: ?{ proposalForm: { commentable: boolean } } }) => {
+    const component = ({ props }: { props: ?{ proposalForm: { commentable: boolean } } }) => {
       if (props && props.proposalForm.commentable) {
-        return (
-          <div className={classNames(classes)}>
-            <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />
-          </div>
-        );
+        return <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />;
       }
+      return null;
     };
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ProposalPageCommentsQuery($id: ID!) {
-            proposalForm(id: $id) {
-              commentable
+      <div className={classNames(classes)}>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ProposalPageCommentsQuery($id: ID!) {
+              proposalForm(id: $id) {
+                commentable
+              }
             }
-          }
-        `}
-        variables={{
-          id: form.id,
-        }}
-        render={render}
-      />
+          `}
+          variables={{
+            id: form.id,
+          }}
+          render={component}
+        />
+      </div>
     );
   }
 }
