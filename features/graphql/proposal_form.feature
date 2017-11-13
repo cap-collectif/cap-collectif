@@ -132,28 +132,7 @@ Scenario: GraphQL client wants to update a proposal form
             "geojson": ""
           }
         ],
-        "questions": [
-          {
-            "position": 1,
-            "question": {
-              "title": "Etes-vous réél ?",
-              "helpText": "Peut-être que non...",
-              "private": false,
-              "required": true,
-              "type": "text"
-            }
-          },
-          {
-            "position": 2,
-            "question": {
-              "title": "Documents à remplir",
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": true,
-              "type": "medias"
-            }
-          }
-        ]
+        "questions": []
       }
     }
   }
@@ -200,6 +179,71 @@ Scenario: GraphQL client wants to update a proposal form
             }
           ],
           "districts": @wildcard@,
+          "questions": []
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client wants to update custom fields of a proposal form
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          questions {
+            id
+            position
+            helpText
+            private
+            required
+            title
+            type
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm1",
+        "questions": [
+          {
+            "position": 1,
+            "question": {
+              "title": "Etes-vous réél ?",
+              "helpText": "Peut-être que non...",
+              "private": false,
+              "required": true,
+              "type": "text"
+            }
+          },
+          {
+            "position": 2,
+            "question": {
+              "title": "Documents à remplir",
+              "helpText": "5 fichiers max",
+              "private": false,
+              "required": true,
+              "type": "medias"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateProposalForm": {
+        "proposalForm": {
+          "id": "proposalForm1",
           "questions": [
             {
               "id": @string@,
