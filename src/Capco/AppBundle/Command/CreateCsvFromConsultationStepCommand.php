@@ -22,6 +22,8 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
+            $output->writeln('Please enable "export" feature to run this command');
+
             return;
         }
 

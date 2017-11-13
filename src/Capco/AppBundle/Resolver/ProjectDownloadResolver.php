@@ -2,8 +2,9 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -124,7 +125,9 @@ class ProjectDownloadResolver
                 );
             }
             $this->headers = self::$collectHeaders;
-            $this->initCustomFieldsInHeader($step->getProposalForm());
+            if ($step->getProposalForm()) {
+                $this->initCustomFieldsInHeader($step->getProposalForm());
+            }
             $data = $this->getCollectStepData($step);
         } elseif ($step instanceof QuestionnaireStep) {
             $this->headers = $this->getQuestionnaireStepHeaders($step);
@@ -159,7 +162,6 @@ class ProjectDownloadResolver
         $proposals = $this->em
             ->getRepository('CapcoAppBundle:Proposal')
             ->getByProposalForm($collectStep->getProposalForm(), true);
-
         foreach ($proposals as &$proposal) {
             $proposal['Step'] = $collectStep;
             $proposal['entity_type'] = 'proposal';
@@ -308,6 +310,7 @@ class ProjectDownloadResolver
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
+        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
 
         if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
@@ -366,6 +369,7 @@ class ProjectDownloadResolver
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
+        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
 
         if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
             $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
@@ -488,6 +492,12 @@ class ProjectDownloadResolver
             $this->customFields[] = $title;
         }
 
+        if ($proposalForm->getEvaluationForm()) {
+            foreach ($proposalForm->getEvaluationForm()->getRealQuestions() as $question) {
+                $this->customFields[] = $question->getTitle();
+            }
+        }
+
         $this->headers = array_merge($this->headers, $this->customFields);
     }
 
@@ -504,6 +514,38 @@ class ProjectDownloadResolver
         }
 
         return $item;
+    }
+
+    private function addEvaluationsFieldsForProposal(array $proposal, array $item): array
+    {
+        if (null !== $proposal['proposalEvaluation']) {
+            $evaluation = $this->em->getRepository('CapcoAppBundle:ProposalEvaluation')->find($proposal['proposalEvaluation']['id']);
+            foreach ($evaluation->getResponses() as $response) {
+                $item[$response->getQuestion()->getTitle()] = $this->getEvaluationResponseValue($response);
+            }
+        }
+
+        return $item;
+    }
+
+    private function getEvaluationResponseValue($response)
+    {
+        if ($response instanceof ValueResponse) {
+            $r = $response->getValue();
+
+            return isset($r['labels']) ? implode(';', $r['labels']) : $r;
+        }
+
+        if ($response instanceof MediaResponse) {
+            $filenames = [];
+            foreach ($response->getMedias() as $media) {
+                $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
+            }
+
+            return implode(';', $filenames);
+        }
+
+        return 'unknown';
     }
 
     private function booleanToString($boolean)
