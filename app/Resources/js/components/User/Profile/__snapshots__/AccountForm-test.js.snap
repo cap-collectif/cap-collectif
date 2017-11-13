@@ -22,7 +22,10 @@ exports[`<AccountForm /> should render a form 1`] = `
   <p
     className="small excerpt col-sm-6 col-sm-offset-4"
   >
-    Votre adresse électronique ne sera pas rendue publique.
+    <FormattedMessage
+      id="account.your_email_is_not_public"
+      values={Object {}}
+    />
   </p>
 </form>
 `;
@@ -61,7 +64,10 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
   <p
     className="small excerpt col-sm-6 col-sm-offset-4"
   >
-    Votre adresse électronique ne sera pas rendue publique.
+    <FormattedMessage
+      id="account.your_email_is_not_public"
+      values={Object {}}
+    />
   </p>
 </form>
 `;
@@ -76,9 +82,10 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
     bsStyle="warning"
     closeLabel="Close alert"
   >
-    <p>
-      Un email de confirmation vous a été envoyé.
-    </p>
+    <FormattedMessage
+      id="account.email_confirmation_sent"
+      values={Object {}}
+    />
   </Alert>
   <Field
     component={[Function]}
@@ -97,7 +104,10 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
   <p
     className="small excerpt col-sm-6 col-sm-offset-4"
   >
-    Votre adresse électronique ne sera pas rendue publique.
+    <FormattedMessage
+      id="account.your_email_is_not_public"
+      values={Object {}}
+    />
   </p>
   <div
     className="col-sm-6 col-sm-offset-4"
@@ -163,7 +173,10 @@ exports[`<AccountForm /> should render a form with information about new email 1
   <p
     className="small excerpt col-sm-6 col-sm-offset-4"
   >
-    Votre adresse électronique ne sera pas rendue publique.
+    <FormattedMessage
+      id="account.your_email_is_not_public"
+      values={Object {}}
+    />
   </p>
   <div
     className="col-sm-6 col-sm-offset-4"
