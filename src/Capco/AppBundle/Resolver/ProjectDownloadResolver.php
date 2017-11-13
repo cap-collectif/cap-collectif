@@ -534,7 +534,9 @@ class ProjectDownloadResolver
             $r = $response->getValue();
 
             return isset($r['labels']) ? implode(';', $r['labels']) : $r;
-        } elseif ($response instanceof MediaResponse) {
+        }
+
+        if ($response instanceof MediaResponse) {
             $filenames = [];
             foreach ($response->getMedias() as $media) {
                 $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
@@ -542,6 +544,8 @@ class ProjectDownloadResolver
 
             return implode(';', $filenames);
         }
+
+        return 'unknown';
     }
 
     private function booleanToString($boolean)
