@@ -67,6 +67,9 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
         </div>
         <div className="box-content">
           <form onSubmit={handleSubmit}>
+            <h2>
+              <FormattedMessage id="proposal_form.admin.settings.main" />
+            </h2>
             <Field
               name="title"
               label={<FormattedMessage id="proposal_form.title" />}
@@ -75,13 +78,17 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               id="proposal_form_title"
             />
             {isSuperAdmin && (
-              <Field
-                name="commentable"
-                children={<FormattedMessage id="proposal_form.commentable" />}
-                component={component}
-                type="checkbox"
-                id="proposal_form_commentable"
-              />
+              <div>
+                <h2>
+                  <FormattedMessage id="proposal_form.admin.settings.commentable" />
+                </h2>
+                <Field
+                  name="commentable"
+                  children={<FormattedMessage id="proposal_form.commentable" />}
+                  component={component}
+                  type="checkbox"
+                />
+              </div>
             )}
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
