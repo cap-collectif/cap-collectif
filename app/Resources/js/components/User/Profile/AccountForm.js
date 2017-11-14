@@ -60,7 +60,7 @@ export const AccountForm = React.createClass({
         )}
         {confirmationEmailResent && (
           <Alert bsStyle="warning">
-            <FormattedMessage id="account.email_confirmation_sent" />
+            <p>{'Un email de confirmation vous a été envoyé.'}</p>
           </Alert>
         )}
         <Field
@@ -73,7 +73,7 @@ export const AccountForm = React.createClass({
           label={<FormattedMessage id="proposal.vote.form.email" />}
         />
         <p className="small excerpt col-sm-6 col-sm-offset-4">
-          <FormattedMessage id="account.your_email_is_not_public" />
+          Votre adresse électronique ne sera pas rendue publique.
         </p>
         {newEmailToConfirm && (
           <div className="col-sm-6 col-sm-offset-4">

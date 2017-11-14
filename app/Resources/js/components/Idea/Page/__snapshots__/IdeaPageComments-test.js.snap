@@ -5,7 +5,7 @@ exports[`<IdeaPageComments /> it should a div with provided class name 1`] = `
   className="idea__comments css-class"
 >
   <CommentSection
-    object="idea1"
+    object={1}
     uri="ideas"
   />
 </div>
@@ -16,7 +16,7 @@ exports[`<IdeaPageComments /> it should render a comment section in a div 1`] = 
   className="idea__comments "
 >
   <CommentSection
-    object="idea1"
+    object={1}
     uri="ideas"
   />
 </div>

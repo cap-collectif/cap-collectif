@@ -4,7 +4,7 @@ import CommentSection from '../../Comment/CommentSection';
 
 const IdeaPageComments = React.createClass({
   propTypes: {
-    id: React.PropTypes.string.isRequired,
+    id: React.PropTypes.number.isRequired,
     className: React.PropTypes.string,
   },
 

@@ -14,7 +14,7 @@ const MessagePagination = 10;
 const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
-    object: PropTypes.string,
+    object: PropTypes.number,
   },
 
   getInitialState() {
@@ -159,7 +159,7 @@ const CommentSection = React.createClass({
           ref="loadMore"
           data-loading-text={<FormattedMessage id="global.loading" />}
           onClick={this.loadMore}>
-          <FormattedMessage id="comment.more" />
+          {<FormattedMessage id="comment.more" />}
         </button>
       );
     }
