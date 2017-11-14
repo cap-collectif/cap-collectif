@@ -23,8 +23,6 @@ UpdateProposalFormInput:
                 type: "Boolean"
             districtMandatory:
                 type: "Boolean"
-            commentable:
-                type: "Boolean"
             districtHelpText:
                 type: "String"
             usingCategories:

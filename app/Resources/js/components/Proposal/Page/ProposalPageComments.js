@@ -1,20 +1,21 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../../../createRelayEnvironment';
 import CommentSection from '../../Comment/CommentSection';
 
-type Props = {
-  id: string,
-  form: Object,
-  className: string,
-};
+const ProposalPageComments = React.createClass({
+  displayName: 'ProposalPageComments',
 
-class ProposalPageComments extends React.Component<Props> {
-  static defaultProps = {
-    className: '',
-  };
+  propTypes: {
+    id: React.PropTypes.string.isRequired,
+    form: React.PropTypes.object.isRequired,
+    className: React.PropTypes.string,
+  },
+
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
 
   render() {
     const { className, form, id } = this.props;
@@ -22,32 +23,12 @@ class ProposalPageComments extends React.Component<Props> {
       proposal__comments: true,
       [className]: true,
     };
-
-    const component = ({ props }: { props: ?{ proposalForm: { commentable: boolean } } }) => {
-      if (props && props.proposalForm.commentable) {
-        return <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />;
-      }
-      return null;
-    };
     return (
       <div className={classNames(classes)}>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query ProposalPageCommentsQuery($id: ID!) {
-              proposalForm(id: $id) {
-                commentable
-              }
-            }
-          `}
-          variables={{
-            id: form.id,
-          }}
-          render={component}
-        />
+        <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProposalPageComments;
