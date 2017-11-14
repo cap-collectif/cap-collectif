@@ -501,9 +501,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return !$this->isPrivate() || $this->isSelected();
     }
 
-    /**
-     * @return bool
-     */
     public function canContribute(): bool
     {
         return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep()->canContribute();
@@ -511,7 +508,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canComment(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->getIsCommentable();
+        return $this->enabled && !$this->isTrashed && $this->proposalForm && $this->proposalForm->isCommentable() && $this->getIsCommentable();
     }
 
     public function userHasReport(User $user): bool
@@ -935,7 +932,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function state(): string
     {
-        if ($this->getDeletedAt() !== null) {
+        if (null !== $this->getDeletedAt()) {
             return self::STATE_DELETED;
         }
 

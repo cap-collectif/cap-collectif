@@ -68,7 +68,7 @@ services:
     tags:
       - { name: overblog_graphql.mutation, alias: "createProposalForm", method: "create" }
       - { name: overblog_graphql.mutation, alias: "updateProposalForm", method: "update" }
-      - { name: overblog_graphql.mutation, alias: "changeTitleProposalForm", method: "changeTitle" }
+      - { name: overblog_graphql.mutation, alias: "changeProposalFormParameters", method: "changeParameters" }
       - { name: overblog_graphql.mutation, alias: "updateProposalFormNotificationsConfiguration", method: "updateNotificationsConfiguration" }
       - { name: overblog_graphql.mutation, alias: "setEvaluationFormInProposalForm", method: "setEvaluationForm" }
 

@@ -53,6 +53,11 @@ class ProposalForm
     private $proposals;
 
     /**
+     * @ORM\Column(name="commentable", type="boolean", nullable=false, options={"default": true})
+     */
+    private $commentable = true;
+
+    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -177,9 +182,6 @@ class ProposalForm
      */
     private $evaluationForm;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -215,33 +217,18 @@ class ProposalForm
         return $this->proposalInAZoneRequired;
     }
 
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return ProposalForm
-     */
-    public function setDescription($description)
+    public function setDescription(string $description = null): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get description.
-     *
-     * @return string
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * @return null|string
-     */
     public function getSummaryHelpText()
     {
         return $this->summaryHelpText;
@@ -254,20 +241,12 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return Proposal[]|ArrayCollection
-     */
-    public function getProposals()
+    public function getProposals(): Collection
     {
         return $this->proposals;
     }
 
-    /**
-     * @param ArrayCollection $proposals
-     *
-     * @return $this
-     */
-    public function setProposals(ArrayCollection $proposals)
+    public function setProposals(ArrayCollection $proposals): self
     {
         $this->proposals = $proposals;
 
@@ -281,20 +260,12 @@ class ProposalForm
         })->toArray() : [];
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getQuestions()
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }
 
-    /**
-     * @param ArrayCollection $questions
-     *
-     * @return $this
-     */
-    public function setQuestions($questions)
+    public function setQuestions(Collection $questions): Collection
     {
         foreach ($questions as $question) {
             $question->setProposalForm($this);
@@ -304,14 +275,7 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * Add question.
-     *
-     * @param QuestionnaireAbstractQuestion $question
-     *
-     * @return $this
-     */
-    public function addQuestion(QuestionnaireAbstractQuestion $question)
+    public function addQuestion(QuestionnaireAbstractQuestion $question): self
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
@@ -321,14 +285,7 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * Remove question.
-     *
-     * @param QuestionnaireAbstractQuestion $question
-     *
-     * @return $this
-     */
-    public function removeQuestion(QuestionnaireAbstractQuestion $question)
+    public function removeQuestion(QuestionnaireAbstractQuestion $question): self
     {
         $this->questions->removeElement($question);
         $question->setProposalForm(null);
@@ -336,30 +293,19 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return CollectStep
-     */
     public function getStep()
     {
         return $this->step;
     }
 
-    /**
-     * @param CollectStep $step
-     *
-     * @return $this
-     */
-    public function setStep(CollectStep $step = null)
+    public function setStep(CollectStep $step = null): self
     {
         $this->step = $step;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->getStep()->canDisplay();
     }
@@ -369,35 +315,24 @@ class ProposalForm
         return $this->getStep() && $this->getStep()->canContribute();
     }
 
-    /**
-     * @return string
-     */
     public function getTitleHelpText()
     {
         return $this->titleHelpText;
     }
 
-    /**
-     * @param string $titleHelpText
-     *
-     * @return $this
-     */
-    public function setTitleHelpText($titleHelpText)
+    public function setTitleHelpText(string $titleHelpText = null): self
     {
         $this->titleHelpText = $titleHelpText;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDescriptionHelpText()
     {
         return $this->descriptionHelpText;
     }
 
-    public function setDescriptionHelpText(string $descriptionHelpText = null)
+    public function setDescriptionHelpText(string $descriptionHelpText = null): self
     {
         $this->descriptionHelpText = $descriptionHelpText;
 
@@ -433,7 +368,7 @@ class ProposalForm
         return $this->categories;
     }
 
-    public function addCategory(ProposalCategory $category)
+    public function addCategory(ProposalCategory $category): self
     {
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
@@ -443,7 +378,7 @@ class ProposalForm
         return $this;
     }
 
-    public function removeCategory(ProposalCategory $category)
+    public function removeCategory(ProposalCategory $category): self
     {
         $this->categories->removeElement($category);
 
@@ -484,20 +419,12 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isThemeMandatory()
+    public function isThemeMandatory(): bool
     {
         return $this->themeMandatory;
     }
 
-    /**
-     * @param bool $themeMandatory
-     *
-     * @return $this
-     */
-    public function setThemeMandatory($themeMandatory)
+    public function setThemeMandatory(bool $themeMandatory): self
     {
         $this->themeMandatory = $themeMandatory;
 
@@ -507,6 +434,18 @@ class ProposalForm
     public function isDistrictMandatory(): bool
     {
         return $this->districtMandatory;
+    }
+
+    public function isCommentable(): bool
+    {
+        return $this->commentable;
+    }
+
+    public function setCommentable(bool $commentable): self
+    {
+        $this->commentable = $commentable;
+
+        return $this;
     }
 
     public function setDistrictMandatory(bool $districtMandatory): self
@@ -528,67 +467,43 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isUsingCategories()
+    public function isUsingCategories(): bool
     {
         return $this->usingCategories;
     }
 
-    /**
-     * @param bool $usingCategories
-     *
-     * @return $this
-     */
-    public function setUsingCategories($usingCategories)
+    public function setUsingCategories(bool $usingCategories): self
     {
         $this->usingCategories = $usingCategories;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isCategoryMandatory()
+    public function isCategoryMandatory(): bool
     {
         return $this->categoryMandatory;
     }
 
-    /**
-     * @param bool $categoryMandatory
-     *
-     * @return $this
-     */
-    public function setCategoryMandatory($categoryMandatory)
+    public function setCategoryMandatory(bool $categoryMandatory): self
     {
         $this->categoryMandatory = $categoryMandatory;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryHelpText()
     {
         return $this->categoryHelpText;
     }
 
-    /**
-     * @param string $categoryHelpText
-     *
-     * @return $this
-     */
-    public function setCategoryHelpText($categoryHelpText)
+    public function setCategoryHelpText(string $categoryHelpText = null): self
     {
         $this->categoryHelpText = $categoryHelpText;
 
         return $this;
     }
 
-    public function getLabelTitle()
+    public function getLabelTitle(): string
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
@@ -691,9 +606,6 @@ class ProposalForm
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getIllustrationHelpText()
     {
         return $this->illustrationHelpText;

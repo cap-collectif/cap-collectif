@@ -5,17 +5,17 @@ import { shallow } from 'enzyme';
 import { IdeaPage } from './IdeaPage';
 
 const contribuableIdea = {
-  id: 1,
+  id: '1',
   canContribute: true,
 };
 
 const uncontribuableIdea = {
-  id: 1,
+  id: '1',
   canContribute: false,
 };
 
 const idea = {
-  id: 1,
+  id: '1',
 };
 
 describe('<IdeaPage />', () => {
