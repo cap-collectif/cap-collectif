@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import IdeaPageComments from './IdeaPageComments';
 
 const props = {
-  id: 1,
+  id: 'idea1',
 };
 
 describe('<IdeaPageComments />', () => {

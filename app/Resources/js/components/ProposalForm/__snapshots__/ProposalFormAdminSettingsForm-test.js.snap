@@ -36,6 +36,12 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
     <form
       onSubmit={[Function]}
     >
+      <h2>
+        <FormattedMessage
+          id="proposal_form.admin.settings.main"
+          values={Object {}}
+        />
+      </h2>
       <Field
         component={[Function]}
         id="proposal_form_title"
@@ -48,6 +54,24 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         name="title"
         type="text"
       />
+      <div>
+        <h2>
+          <FormattedMessage
+            id="proposal_form.admin.settings.commentable"
+            values={Object {}}
+          />
+        </h2>
+        <Field
+          component={[Function]}
+          name="commentable"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="proposal_form.commentable"
+            values={Object {}}
+          />
+        </Field>
+      </div>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

@@ -7,11 +7,14 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
 import AlertAdminForm from '../Alert/AlertAdminForm';
-import ChangeTitleProposalFormMutation from '../../mutations/ChangeTitleProposalFormMutation';
+import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposalFormParametersMutation';
 import type { ProposalFormAdminSettingsForm_proposalForm } from './__generated__/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type RelayProps = { proposalForm: ProposalFormAdminSettingsForm_proposalForm };
+type RelayProps = {
+  isSuperAdmin: boolean,
+  proposalForm: ProposalFormAdminSettingsForm_proposalForm,
+};
 type Props = RelayProps & {
   handleSubmit: () => void,
   invalid: boolean,
@@ -31,7 +34,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { proposalForm } = props;
   values.proposalFormId = proposalForm.id;
   delete values.id;
-  return ChangeTitleProposalFormMutation.commit({
+  return ChangeProposalFormParametersMutation.commit({
     input: values,
   });
 };
@@ -40,6 +43,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
   render() {
     const {
       invalid,
+      isSuperAdmin,
       pristine,
       handleSubmit,
       submitting,
@@ -63,6 +67,9 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
         </div>
         <div className="box-content">
           <form onSubmit={handleSubmit}>
+            <h2>
+              <FormattedMessage id="proposal_form.admin.settings.main" />
+            </h2>
             <Field
               name="title"
               label={<FormattedMessage id="proposal_form.title" />}
@@ -70,6 +77,19 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               type="text"
               id="proposal_form_title"
             />
+            {isSuperAdmin && (
+              <div>
+                <h2>
+                  <FormattedMessage id="proposal_form.admin.settings.commentable" />
+                </h2>
+                <Field
+                  name="commentable"
+                  children={<FormattedMessage id="proposal_form.commentable" />}
+                  component={component}
+                  type="checkbox"
+                />
+              </div>
+            )}
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -101,7 +121,11 @@ const form = reduxForm({
 const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
-    initialValues: { title: proposalForm.title },
+    isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+    initialValues: {
+      title: proposalForm.title,
+      commentable: proposalForm.commentable,
+    },
   };
 };
 
@@ -113,6 +137,7 @@ export default createFragmentContainer(
     fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {
       id
       title
+      commentable
     }
   `,
 );
