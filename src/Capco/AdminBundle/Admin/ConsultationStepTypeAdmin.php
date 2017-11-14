@@ -17,7 +17,7 @@ class ConsultationStepTypeAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ($name === 'edit') {
+        if ('edit' === $name) {
             return 'CapcoAdminBundle:ConsultationStepType:edit.html.twig';
         }
 
@@ -94,6 +94,7 @@ class ConsultationStepTypeAdmin extends Admin
               'expanded' => true,
               'required' => true,
               'tree' => true,
+                'choices_as_values' => true,
             ]);
         }
     }

@@ -164,6 +164,7 @@ class ProjectAdmin extends Admin
                 'label' => 'admin.fields.project.type.title',
                 'required' => false,
                 'attr' => ['placeholder' => 'admin.help.project.type'],
+                'choices_as_values' => true,
             ])
             ->add('Author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.project.author',
@@ -221,6 +222,7 @@ class ProjectAdmin extends Admin
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
+                'choices_as_values' => true,
             ]);
         }
 
