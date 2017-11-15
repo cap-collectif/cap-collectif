@@ -162,6 +162,7 @@ class MenuItemAdmin extends Admin
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => [],
                 'empty_value' => 'admin.fields.menu_item.parent_empty',
+                'choices_as_values' => true,
             ])
         ;
 
@@ -174,6 +175,7 @@ class MenuItemAdmin extends Admin
                     'required' => false,
                     'btn_add' => 'add',
                     'query' => $this->createPageQuery(),
+                    'choices_as_values' => true,
                 ])
                 ->add('link', null, [
                     'label' => 'admin.fields.menu_item.link',
