@@ -103,6 +103,10 @@ Capco\AppBundle\Entity\ProposalForm:
           type: float
           groups: [ProposalForms]
           serialized_name: lngMap
+        commentable:
+          expose: true
+          type: boolean
+          groups: [ProposalForms]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

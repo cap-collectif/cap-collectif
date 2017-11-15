@@ -116,6 +116,7 @@ export const ProposalStepPage = React.createClass({
                     proposals={proposals}
                     step={step}
                     showThemes={form.usingThemes}
+                    showComments={form.commentable}
                     id="proposals-list"
                   />
                 </VisibilityBox>

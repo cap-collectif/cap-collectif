@@ -10,16 +10,18 @@ export const ProposalList = React.createClass({
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
     showThemes: PropTypes.bool,
+    showComments: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       showThemes: false,
+      showComments: false,
     };
   },
 
   render() {
-    const { step, showThemes } = this.props;
+    const { step, showThemes, showComments } = this.props;
 
     let { proposals } = this.props;
 
@@ -72,6 +74,7 @@ export const ProposalList = React.createClass({
                   proposal={proposal}
                   step={step}
                   showThemes={showThemes}
+                  showComments={showComments}
                 />
               ))}
             </ul>
