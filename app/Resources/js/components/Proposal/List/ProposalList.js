@@ -61,6 +61,7 @@ export const ProposalList = React.createClass({
                 proposal={proposal}
                 step={step}
                 showThemes={showThemes}
+                showComments={showComments}
               />
             ))}
           </ul>
