@@ -26,22 +26,18 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       type: integer
       groups: [Proposals]
-      serialized_name: commentsCount
     canContribute:
       expose: true
       type: boolean
       groups: [Proposals]
-      serialized_name: canContribute
     createdAt:
       expose: true
       type: DateTime
       groups: [Proposals]
-      serialized_name: createdAt
     updatedAt:
       expose: true
       type: DateTime
       groups: [Proposals]
-      serialized_name: updatedAt
     theme:
       expose: true
       groups: [Proposals]

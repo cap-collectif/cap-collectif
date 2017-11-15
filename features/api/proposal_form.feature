@@ -24,7 +24,6 @@ Scenario: Anonymous API client wants to get one proposal form
   "usingCategories": @boolean@,
   "categoryMandatory": @boolean@,
   "usingAddress": @boolean@,
-  "commentable": @boolean@,
   "addressHelpText": @null@,
   "summaryHelpText": @null@,
   "zoomMap": @integer@,
