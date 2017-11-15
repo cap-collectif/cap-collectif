@@ -42,7 +42,7 @@ abstract class Search
 
     protected function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
     {
-        if (\is_array($terms)) {
+        if (is_array($terms)) {
             $termsQuery = new Query\Terms($fieldName, $terms);
         } else {
             $termsQuery = new Query\Match($fieldName, $terms);
@@ -63,7 +63,7 @@ abstract class Search
                 ->setQuery($terms)
                 ->setFields($fields);
 
-            if ($type && \in_array($type, self::AVAILABLE_TYPES_FOR_MULTI_MATCH, true)) {
+            if ($type && in_array($type, self::AVAILABLE_TYPES_FOR_MULTI_MATCH, true)) {
                 $multiMatchQuery->setType($type);
             }
         }
@@ -75,7 +75,7 @@ abstract class Search
 
     protected function searchNotInTermsForField(Query\BoolQuery $query, $fieldName, $terms): Query\BoolQuery
     {
-        if (\is_array($terms)) {
+        if (is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
         } else {
             $matchQuery = new Query\Match($fieldName, $terms);
@@ -122,7 +122,7 @@ abstract class Search
         $boolFilter = new BoolFilter();
 
         foreach ($filters as $filterName => $filterData) {
-            if (\is_array($filterData)) {
+            if (is_array($filterData)) {
                 $nested = new Nested();
                 $nested->setPath($filterName);
                 $nested->setFilter($this->getBoolFilter($filterData));
