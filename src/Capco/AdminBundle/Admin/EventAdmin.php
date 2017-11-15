@@ -228,6 +228,7 @@ class EventAdmin extends Admin
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
+                'choices_as_values' => true,
             ]);
         }
 
@@ -237,6 +238,7 @@ class EventAdmin extends Admin
                 'required' => false,
                 'multiple' => true,
                 'by_reference' => false,
+                'choices_as_values' => true,
             ])
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
