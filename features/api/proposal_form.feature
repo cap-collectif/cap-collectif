@@ -17,6 +17,7 @@ Scenario: Anonymous API client wants to get one proposal form
   "districtHelpText": @string@,
   "categoryHelpText": @string@,
   "isContribuable": true,
+  "commentable": @boolean@,
   "usingThemes": @boolean@,
   "themeMandatory": @boolean@,
   "usingDistrict": @boolean@,
