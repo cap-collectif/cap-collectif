@@ -32,7 +32,7 @@ class OpinionTypeAdmin extends Admin
             $consultationStepTypeId = $cst ? $cst->getId() : null;
         }
 
-        if ($consultationStepTypeId === null) {
+        if (null === $consultationStepTypeId) {
             $consultationStepTypeId = $this->getRequest()->get('consultation_step_type_id');
         }
 
@@ -46,7 +46,7 @@ class OpinionTypeAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ($name === 'edit' || $name === 'create') {
+        if ('edit' === $name || 'create' === $name) {
             return 'CapcoAdminBundle:OpinionType:edit.html.twig';
         }
 
@@ -102,6 +102,7 @@ class OpinionTypeAdmin extends Admin
                 'required' => false,
                 'query' => $this->createQueryForParent(),
                 'btn_add' => false,
+                'choices_as_values' => true,
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.opinion_type.position',
