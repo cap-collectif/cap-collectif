@@ -250,7 +250,6 @@ export const ProposalForm = React.createClass({
   },
 
   handleAddressChange(address) {
-    const { form } = this.props;
     geocodeByAddress(address)
       .then(results => {
         this.setState(prevState => ({
@@ -261,9 +260,7 @@ export const ProposalForm = React.createClass({
           address: results[0].formatted_address,
           errors: { ...prevState.errors, address: [] },
         }));
-        if (form.proposalInAZoneRequired) {
-          this.retrieveDistrictForLocation(results[0].geometry.location);
-        }
+        this.retrieveDistrictForLocation(results[0].geometry.location);
       })
       .catch(error => {
         this.resetAddressField();

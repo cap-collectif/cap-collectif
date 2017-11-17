@@ -107,11 +107,6 @@ Capco\AppBundle\Entity\ProposalForm:
           expose: true
           type: boolean
           groups: [ProposalForms]
-        proposalInAZoneRequired:
-          expose: true
-          type: boolean
-          groups: [ProposalForms]
-          serialized_name: proposalInAZoneRequired
     virtual_properties:
         canContribute:
             serialized_name: isContribuable
