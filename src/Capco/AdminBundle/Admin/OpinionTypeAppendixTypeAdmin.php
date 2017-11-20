@@ -26,6 +26,7 @@ class OpinionTypeAppendixTypeAdmin extends Admin
             ->add('appendixType', 'sonata_type_model', [
                 'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
                 'required' => true,
+                'choices_as_values' => true,
             ])
         ;
     }

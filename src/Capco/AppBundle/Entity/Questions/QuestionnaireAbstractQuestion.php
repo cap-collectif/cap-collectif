@@ -97,7 +97,7 @@ class QuestionnaireAbstractQuestion
      *
      * @param AbstractQuestion $question
      *
-     * @return QuestionnaireAbstractQuestion
+     * @return null|QuestionnaireAbstractQuestion
      */
     public function setQuestion(AbstractQuestion $question)
     {
@@ -109,7 +109,7 @@ class QuestionnaireAbstractQuestion
     /**
      * Get question.
      *
-     * @return AbstractQuestion
+     * @return null|AbstractQuestion
      */
     public function getQuestion()
     {
@@ -121,7 +121,7 @@ class QuestionnaireAbstractQuestion
         return $this->proposalForm;
     }
 
-    public function setProposalForm(ProposalForm $proposalForm = null)
+    public function setProposalForm(ProposalForm $proposalForm = null): self
     {
         $this->proposalForm = $proposalForm;
 

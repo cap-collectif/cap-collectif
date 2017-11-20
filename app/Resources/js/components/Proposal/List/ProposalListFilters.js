@@ -29,6 +29,7 @@ export const ProposalListFilters = React.createClass({
     filters: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     showDistrictFilter: PropTypes.bool.isRequired,
+    showCategoriesFilter: PropTypes.bool.isRequired,
     showToggleMapButton: PropTypes.bool,
   },
 
@@ -50,6 +51,7 @@ export const ProposalListFilters = React.createClass({
       themes,
       types,
       showDistrictFilter,
+      showCategoriesFilter,
     } = this.props;
 
     return {
@@ -59,8 +61,8 @@ export const ProposalListFilters = React.createClass({
           features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [],
         )
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
-        .concat(categories.length > 0 ? ['categories'] : [])
-        .concat(statuses.length > 0 ? ['statuses'] : []),
+        .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
+        .concat(features.user_type && statuses.length > 0 ? ['statuses'] : []),
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(orderByVotes ? ['votes'] : []),
     };
   },

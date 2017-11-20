@@ -93,6 +93,7 @@ export const ProposalStepPage = React.createClass({
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
           showThemes={form.usingThemes}
           showDistrictFilter={form.usingDistrict}
+          showCategoriesFilter={form.usingCategories}
           showToggleMapButton={form.usingAddress && !step.isPrivate}
         />
         <Loader show={isLoading}>
@@ -116,6 +117,7 @@ export const ProposalStepPage = React.createClass({
                     proposals={proposals}
                     step={step}
                     showThemes={form.usingThemes}
+                    showComments={form.commentable}
                     id="proposals-list"
                   />
                 </VisibilityBox>
