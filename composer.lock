@@ -5052,53 +5052,55 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.8.5",
+            "version": "v0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "936900bbe751fe19799ad07490becc4bc1f668ce"
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/936900bbe751fe19799ad07490becc4bc1f668ce",
-                "reference": "936900bbe751fe19799ad07490becc4bc1f668ce",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/352700bbb806176461d22db2c1f587e706cba6d2",
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-cache-bundle": "^1.2",
-                "overblog/graphql-php-generator": "^0.4.1",
-                "php": "^5.4|~7.0",
-                "symfony/expression-language": "^2.7|^3.1",
-                "symfony/framework-bundle": "^2.7|^3.1",
-                "symfony/options-resolver": "^2.7|^3.1",
-                "symfony/property-access": "^2.7|^3.1",
-                "webonyx/graphql-php": "^0.9.4"
+                "overblog/graphql-php-generator": "^0.5.0",
+                "php": ">=5.5.9",
+                "symfony/cache": "^3.1",
+                "symfony/expression-language": "^2.8 || ^3.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0",
+                "symfony/options-resolver": "^2.8 || ^3.0",
+                "symfony/property-access": "^2.8 || ^3.0",
+                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.11",
-                "phpunit/phpunit": "^4.1|^5.5",
+                "phpunit/phpunit": "^4.1 || ^5.5 || ^6.0",
                 "react/promise": "^2.5",
                 "sensio/framework-extra-bundle": "^3.0",
                 "sllh/php-cs-fixer-styleci-bridge": "^1.5",
-                "symfony/asset": "^2.7|^3.1",
-                "symfony/browser-kit": "^2.7|^3.1",
-                "symfony/css-selector": "^2.7|^3.1",
-                "symfony/dependency-injection": "^2.7|^3.1",
-                "symfony/phpunit-bridge": "~2.7|^3.1",
-                "symfony/security-bundle": "^2.7|^3.1",
-                "symfony/templating": "^2.7|^3.1",
-                "symfony/twig-bundle": "^2.7|^3.1",
-                "symfony/web-profiler-bundle": "^2.7|^3.1",
-                "symfony/yaml": "^2.7|^3.1"
+                "symfony/asset": "^2.8 || ^3.0",
+                "symfony/browser-kit": "^2.8 || ^3.0",
+                "symfony/css-selector": "^2.8 || ^3.0",
+                "symfony/dependency-injection": "^2.8 || ^3.0",
+                "symfony/phpunit-bridge": "^2.8 || ^3.0",
+                "symfony/security-bundle": "^2.8 || ^3.0",
+                "symfony/templating": "^2.8 || ^3.0",
+                "symfony/twig-bundle": "^2.8 || ^3.0",
+                "symfony/web-profiler-bundle": "^2.8 || ^3.0",
+                "symfony/yaml": "^2.8 || ^3.0"
             },
             "suggest": {
+                "nelmio/cors-bundle": "For more flexibility when using CORS prefight",
                 "react/promise": "To use ReactPHP promise adapter",
                 "twig/twig": "If you want to use graphiQL."
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
@@ -5124,25 +5126,25 @@
                 "Relay",
                 "graphql"
             ],
-            "time": "2017-05-30T07:36:20+00:00"
+            "time": "2017-10-28T16:57:46+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",
-            "version": "v0.4.3",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLPhpGenerator.git",
-                "reference": "ae6e84e106fabe8c0755bc38e3ab52d42bbfec45"
+                "reference": "bca60ad7214c2ad451b992ab6c5acea89531fceb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/ae6e84e106fabe8c0755bc38e3ab52d42bbfec45",
-                "reference": "ae6e84e106fabe8c0755bc38e3ab52d42bbfec45",
+                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/bca60ad7214c2ad451b992ab6c5acea89531fceb",
+                "reference": "bca60ad7214c2ad451b992ab6c5acea89531fceb",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.4|~7.0",
-                "webonyx/graphql-php": "*"
+                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.11",
@@ -5175,7 +5177,7 @@
                 "graphql",
                 "type"
             ],
-            "time": "2017-02-22T11:02:12+00:00"
+            "time": "2017-09-21T09:27:43+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -6305,6 +6307,52 @@
                 "redis"
             ],
             "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
+            "name": "psr/cache",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
+                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "time": "2015-12-11T02:52:07+00:00"
         },
         {
             "name": "psr/http-message",
@@ -8264,6 +8312,73 @@
             "time": "2016-12-29T10:02:40+00:00"
         },
         {
+            "name": "symfony/cache",
+            "version": "v3.2.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache.git",
+                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/b3245bf59f63852e187e0b296a0300d8671c6ecd",
+                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "psr/cache": "~1.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0"
+            },
+            "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/cache": "~1.6",
+                "doctrine/dbal": "~2.4",
+                "predis/predis": "~1.0"
+            },
+            "suggest": {
+                "symfony/polyfill-apcu": "For using ApcuAdapter on HHVM"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Cache\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony implementation of PSR-6",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "caching",
+                "psr6"
+            ],
+            "time": "2017-07-14T14:39:18+00:00"
+        },
+        {
             "name": "symfony/monolog-bundle",
             "version": "2.11.1",
             "source": {
@@ -9308,27 +9423,29 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v0.9.11",
+            "version": "v0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "141afc1cf7353753b0313e9ea17eea2560ded12d"
+                "reference": "b17b1c33366d07877feb4299f207a420fbfe53b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/141afc1cf7353753b0313e9ea17eea2560ded12d",
-                "reference": "141afc1cf7353753b0313e9ea17eea2560ded12d",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/b17b1c33366d07877feb4299f207a420fbfe53b5",
+                "reference": "b17b1c33366d07877feb4299f207a420fbfe53b5",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.4,<8.0-DEV"
+                "php": ">=5.5,<8.0-DEV"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8"
+                "phpunit/phpunit": "^4.8",
+                "psr/http-message": "^1.0"
             },
             "suggest": {
-                "react/promise": "To use ReactPHP promise adapter"
+                "psr/http-message": "To use standard GraphQL server",
+                "react/promise": "To leverage async resolving on React PHP platform"
             },
             "type": "library",
             "autoload": {
@@ -9349,7 +9466,7 @@
                 "api",
                 "graphql"
             ],
-            "time": "2017-06-19T06:35:23+00:00"
+            "time": "2017-10-13T17:45:55+00:00"
         },
         {
             "name": "whitehat101/apr1-md5",
@@ -12435,52 +12552,6 @@
             "time": "2016-12-08T20:27:08+00:00"
         },
         {
-            "name": "psr/cache",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/cache.git",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Cache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for caching libraries",
-            "keywords": [
-                "cache",
-                "psr",
-                "psr-6"
-            ],
-            "time": "2015-12-11T02:52:07+00:00"
-        },
-        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -13417,6 +13488,7 @@
         "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,
+        "overblog/graphql-php-generator": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20

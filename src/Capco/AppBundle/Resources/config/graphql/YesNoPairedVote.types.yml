@@ -1,6 +1,7 @@
 YesNoPairedVote:
     type: interface
     config:
+        resolveType: "@=resolver('contribution_type', [value])"
         fields:
             id:
               type: "ID!"
