@@ -250,10 +250,6 @@ async-each@^1.0.0, async-each@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async-each@~0.1.4:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/async-each/-/async-each-0.1.6.tgz#b67e99edcddf96541e44af56290cd7d5c6e70439"
-
 async-foreach@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/async-foreach/-/async-foreach-0.1.3.tgz#36121f845c0578172de419a97dbeb1d16ec34542"
@@ -3177,6 +3173,16 @@ glob@7.0.5, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+glob@^5.0.5:
+  version "5.0.15"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
+  dependencies:
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "2 || 3"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 glob@^6.0.4:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/glob/-/glob-6.0.4.tgz#0f08860f6a155127b2fadd4f9ce24b1aab6e4d22"
@@ -4933,6 +4939,12 @@ node-pre-gyp@^0.6.36:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
+node-sass-globbing@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/node-sass-globbing/-/node-sass-globbing-0.0.23.tgz#bc5b9ae61aa3e36ae36d1d8de56a7c037d2f8e26"
+  dependencies:
+    glob "^5.0.5"
+
 node-sass@~4.5.3:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.5.3.tgz#d09c9d1179641239d1b97ffc6231fdcec53e1568"
@@ -5454,12 +5466,14 @@ process@^0.11.0, process@~0.11.0, process@~0.11.2:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
 
-progeny@~0.5.1:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/progeny/-/progeny-0.5.2.tgz#1fef1cccba6b057f344e780dbf7bdc8c5135121b"
+progeny@~0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/progeny/-/progeny-0.11.0.tgz#08dd5ecd9fddf457daa2b8ea1f148fa0326a074c"
   dependencies:
-    async-each "~0.1.4"
+    async-each "^1.0.0"
+    chalk "^1.1.3"
     fs-mode "^1.0.1"
+    glob "^7.0.3"
 
 progress@^1.1.8:
   version "1.1.8"
@@ -6281,16 +6295,17 @@ sane@^2.0.0:
   optionalDependencies:
     fsevents "^1.1.1"
 
-"sass-brunch@https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e":
+"sass-brunch@https://github.com/jukebox017/sass-brunch/tarball/793d58d32664a611794efb3894fa3e9827fae4ff":
   version "2.10.4"
-  resolved "https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e#ee0a0e9f19f1a6201e740d602a1d57826a08f78f"
+  resolved "https://github.com/jukebox017/sass-brunch/tarball/793d58d32664a611794efb3894fa3e9827fae4ff#8c75a94e6a61d2c9453e7e86f0b612243b4d6be6"
   dependencies:
     anymatch "^1.3.0"
     micro-promisify "~0.1.1"
     node-sass "~4.5.3"
+    node-sass-globbing "0.0.23"
     postcss "~5.1.2"
     postcss-modules "~0.5.0"
-    progeny "~0.5.1"
+    progeny "~0.11.0"
 
 sass-graph@^2.1.1:
   version "2.2.4"

@@ -163,7 +163,7 @@
     "redux-form": "^7.1.1",
     "redux-saga": "v0.14.0",
     "relay-runtime": "^1.1.0",
-    "sass-brunch": "https://github.com/gavinkflam/sass-brunch/tarball/cbf2edf2646ded550c7f333cc921f295773b1d4e",
+    "sass-brunch": "https://github.com/jukebox017/sass-brunch/tarball/793d58d32664a611794efb3894fa3e9827fae4ff",
     "uglify-js-brunch": "^2.10.0",
     "webpack": "^1.13.2",
     "whatwg-fetch": "^2.0.3",
