@@ -22,7 +22,7 @@ class DistrictMutation implements ContainerAwareInterface
 
         $district = $em->find('CapcoAppBundle:District', $values['districtId']);
         if (!$district) {
-            throw new UserError(sprintf('Unknown district with id "%d"', $districtId));
+            throw new UserError(sprintf('Unknown district with id "%d"', $values['districtId']));
         }
         unset($values['districtId']); // This only usefull to retrieve the district
 

@@ -19,7 +19,7 @@ class ReferenceEventListener
         $uow = $args->getEntityManager()->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
-            $classMetaData = $om->getClassMetadata(get_class($entityInsertion));
+            $classMetaData = $om->getClassMetadata(\get_class($entityInsertion));
 
             // if entity has Reference Trait & has not already a reference (specific case in fixtures)
             if ($this->hasTrait($classMetaData->getReflectionClass()) && !$entityInsertion->getReference()) {
@@ -33,7 +33,7 @@ class ReferenceEventListener
         if ($entity instanceof Proposal) {
             $proposalForm = $entity->getProposalForm();
 
-            $proposalFormRep = $om->getRepository(ProposalForm::class);
+            $proposalFormRep = $om->getRepository('CapcoAppBundle:ProposalForm');
 
             if (isset($this->lastProposals[$proposalForm->getId()])) {
                 $lastReference = $this->lastProposals[$proposalForm->getId()];

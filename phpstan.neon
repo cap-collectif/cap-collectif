@@ -1,4 +1,7 @@
 parameters:
+    includes:
+    	- vendor/phpstan/phpstan-doctrine/extension.neon
     excludes_analyse:
         - src/Capco/UserBundle/Security/DrupalEncoder.php
         - src/Capco/AppBundle/DataFixtures/ORM/*
+        - src/Capco/AdminBundle/*

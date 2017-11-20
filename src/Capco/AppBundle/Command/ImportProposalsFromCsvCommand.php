@@ -31,6 +31,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         'body',
     ];
     private $filePath;
+    private $delimiter;
+    private $om;
+    private $proposalForm;
+    private $questionsMap;
+    private $newUsersMap;
 
     protected function configure()
     {
@@ -84,7 +89,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         }
 
         $rows = $this->getRows();
-        $count = count($rows);
+        $count = \count($rows);
 
         if (0 === $count) {
             $output->writeln(
@@ -174,8 +179,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 $proposal->setBody(Text::escapeHtml($row[8]));
 
-                if (count($row) > count(self::HEADERS)) {
-                    for ($i = count(self::HEADERS); isset($row[$i]); ++$i) {
+                if (\count($row) > \count(self::HEADERS)) {
+                    for ($i = \count(self::HEADERS); isset($row[$i]); ++$i) {
                         $reponse = (new ValueResponse())
                       ->setQuestion($this->questionsMap[$i])
                       ->setValue($row[$i]);
@@ -201,7 +206,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $output->writeln(
             '<info>'
-            . (count($rows) - 1) .
+            . (\count($rows) - 1) .
             ' proposals successfully created.</info>'
         );
 
@@ -211,12 +216,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function createUserFromUsername(string $username)
     {
         $userManager = $this->getContainer()->get('fos_user.user_manager');
-        $passwordEncoder = $this->getContainer()->get('security.password_encoder');
 
         $user = $userManager->createUser();
         $user->setUsername($username);
         $user->setEmail(filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL));
-        $user->setPlainpassword('laposte');
+        $user->setPlainPassword('laposte');
         $user->setEnabled(true);
         $this->om->persist($user);
 
@@ -226,7 +230,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function isValidRow($row, $output): bool
     {
         $hasError = false;
-        if (count($row) < count(self::HEADERS)) {
+        if (\count($row) < \count(self::HEADERS)) {
             $hasError = true;
         }
 
@@ -245,8 +249,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function isValidHeaders($row, $output): bool
     {
         if (self::HEADERS !== $row) {
-            if (count($row) > count(self::HEADERS)) {
-                for ($i = count(self::HEADERS); isset($row[$i]); ++$i) {
+            if (\count($row) > \count(self::HEADERS)) {
+                for ($i = \count(self::HEADERS); isset($row[$i]); ++$i) {
                     $found = false;
                     foreach ($this->proposalForm->getRealQuestions() as $question) {
                         if ($question->getTitle() === $row[$i]) {

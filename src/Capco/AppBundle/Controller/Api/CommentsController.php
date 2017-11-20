@@ -48,7 +48,7 @@ class CommentsController extends FOSRestController
                     ->getEnabledWith($from, $to);
 
         return [
-            'count' => count($comments),
+            'count' => \count($comments),
         ];
     }
 

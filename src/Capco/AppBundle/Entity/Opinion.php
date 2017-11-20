@@ -360,7 +360,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
 
     public function setSources($sources)
     {
-        $this->sources = $sources;
+        $this->Sources = $sources;
 
         return $this;
     }
@@ -564,7 +564,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_FOR) {
+            if (Argument::TYPE_FOR === $argument->getType()) {
                 ++$i;
             }
         }
@@ -576,7 +576,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_AGAINST) {
+            if (Argument::TYPE_AGAINST === $argument->getType()) {
                 ++$i;
             }
         }
@@ -671,7 +671,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     {
         $cs = $this->getCommentSystem();
 
-        return $cs === 1 || $cs === 2;
+        return 1 === $cs || 2 === $cs;
     }
 
     public function increaseArgumentsCount(): self
@@ -695,10 +695,10 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
      */
     public function deleteOpinion()
     {
-        if ($this->step !== null) {
+        if (null !== $this->step) {
             $this->step->removeOpinion($this);
         }
-        if ($this->OpinionType !== null) {
+        if (null !== $this->OpinionType) {
             $this->OpinionType->removeOpinion($this);
         }
     }
@@ -710,11 +710,11 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
             $this->parentConnections->toArray()
         );
 
-        if ($filter === 'old') {
+        if ('old' === $filter) {
             usort($connections, function ($a, $b) {
                 return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
             });
-        } elseif ($filter === 'last') {
+        } elseif ('last' === $filter) {
             usort($connections, function ($a, $b) {
                 return $a->getCreatedAt() < $b->getCreatedAt() ? 1 : -1;
             });

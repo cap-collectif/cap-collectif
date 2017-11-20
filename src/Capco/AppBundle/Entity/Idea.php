@@ -242,19 +242,18 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
     }
 
     /**
-     * @return url
+     * @return null|string
      */
     public function getUrl()
     {
         return $this->url;
     }
 
-    /**
-     * @param url $url
-     */
-    public function setUrl($url)
+    public function setUrl(string $url = null): self
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
@@ -474,7 +473,7 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
      */
     public function deleteIdea()
     {
-        if ($this->theme !== null) {
+        if (null !== $this->theme) {
             $this->theme->removeIdea($this);
         }
     }

@@ -212,7 +212,7 @@ abstract class AbstractQuestion
 
     public function setType($type): self
     {
-        if (is_string($type)) {
+        if (\is_string($type)) {
             return $this->setInputType($type);
         }
 

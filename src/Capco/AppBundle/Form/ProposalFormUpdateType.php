@@ -18,8 +18,6 @@ class ProposalFormUpdateType extends AbstractType
     {
         $builder
             ->add('title', PurifiedTextType::class)
-            ->add('commentable', CheckboxType::class)
-
             ->add('titleHelpText', PurifiedTextType::class)
 
             ->add('description', PurifiedTextType::class)
