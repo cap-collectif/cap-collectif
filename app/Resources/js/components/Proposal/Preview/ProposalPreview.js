@@ -14,18 +14,16 @@ const ProposalPreview = React.createClass({
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
     showThemes: PropTypes.bool,
-    showComments: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       showThemes: false,
-      showComments: false,
     };
   },
 
   render() {
-    const { proposal, step, showThemes, showComments } = this.props;
+    const { proposal, step, showThemes } = this.props;
     const voteType = step.voteType;
     const classes = classNames({
       box: true,
@@ -56,7 +54,6 @@ const ProposalPreview = React.createClass({
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={voteType !== VOTE_TYPE_DISABLED}
-            showComments={showComments}
             stepId={step.id}
           />
           <ProposalStatus proposal={proposal} stepId={step.id} />

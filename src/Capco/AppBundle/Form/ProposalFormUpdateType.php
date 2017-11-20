@@ -18,6 +18,8 @@ class ProposalFormUpdateType extends AbstractType
     {
         $builder
             ->add('title', PurifiedTextType::class)
+            ->add('commentable', CheckboxType::class)
+
             ->add('titleHelpText', PurifiedTextType::class)
 
             ->add('description', PurifiedTextType::class)
@@ -46,8 +48,6 @@ class ProposalFormUpdateType extends AbstractType
             ->add('latMap', NumberType::class)
             ->add('lngMap', NumberType::class)
             ->add('zoomMap', IntegerType::class)
-
-            ->add('commentable', CheckboxType::class)
 
             ->add('categories', CollectionType::class, [
                 'entry_type' => ProposalCategoryType::class,

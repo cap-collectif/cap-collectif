@@ -114,6 +114,7 @@ class ProposalResolver implements ContainerAwareInterface
         if ($proposal->isExpired()) {
             return 'EXPIRED';
         }
+
         if ($proposal->isTrashed()) {
             if ($proposal->isEnabled()) {
                 return 'TRASHED';

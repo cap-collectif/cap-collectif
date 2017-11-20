@@ -76,7 +76,7 @@ class ProjectDownloadResolver
         $this->httpFoundExtension = $httpFoundationExtension;
     }
 
-    public function getQuestionnaireStepHeaders(QuestionnaireStep $step): array
+    public function getQuestionnaireStepHeaders(QuestionnaireStep $step)
     {
         $headers = [
             'id',
@@ -109,7 +109,7 @@ class ProjectDownloadResolver
 
             if (
                 ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName)
-                && !\in_array('servicePilote', self::$collectHeaders, true)
+                && !in_array('servicePilote', self::$collectHeaders, true)
             ) {
                 array_push(
                     self::$collectHeaders,
@@ -125,7 +125,7 @@ class ProjectDownloadResolver
                 );
             }
             $this->headers = self::$collectHeaders;
-            if (null !== $step->getProposalForm()) {
+            if ($step->getProposalForm()) {
                 $this->initCustomFieldsInHeader($step->getProposalForm());
             }
             $data = $this->getCollectStepData($step);
@@ -151,7 +151,7 @@ class ProjectDownloadResolver
 
     // ********************************** Generate data items **************************************
 
-    public function getCollectStepData(CollectStep $collectStep): array
+    public function getCollectStepData(CollectStep $collectStep)
     {
         if (!$collectStep->getProposalForm()) {
             return [];
@@ -177,7 +177,7 @@ class ProjectDownloadResolver
 
             $str = '';
             $loop = 1;
-            $nbVotes = \count($selectionVotesCount) + \count($collectVotesCount);
+            $nbVotes = count($selectionVotesCount) + count($collectVotesCount);
             foreach ($selectionVotesCount as $step => $value) {
                 $str .= $step . ' : ' . $value;
                 $str .= $loop < $nbVotes ? ', ' : '';
@@ -209,7 +209,7 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
-    public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep): array
+    public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep)
     {
         $this->data = [];
 
@@ -262,7 +262,7 @@ class ProjectDownloadResolver
 
     // *************************** Generate items *******************************************
 
-    private function getProposalItem(array $proposal): array
+    private function getProposalItem(array $proposal)
     {
         $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
         $author = $proposal['author'];
@@ -284,7 +284,7 @@ class ProjectDownloadResolver
         $item = [
             'reference' => $proposal['reference'],
             'title' => $proposal['title'],
-            'summary' => $proposal['summary'] ?: '',
+            'summary' => $proposal['summary'] ? $proposal['summary'] : '',
             'votesCountByStepId' => $proposal['votesCountByStepId'],
             'author' => $authorName,
             'author_id' => $authorId,
@@ -327,7 +327,7 @@ class ProjectDownloadResolver
         return $item;
     }
 
-    private function getProposalVoteItem(array $vote, array $proposal): array
+    private function getProposalVoteItem(array $vote, array $proposal)
     {
         $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
         $author = $vote['user'];
@@ -345,7 +345,7 @@ class ProjectDownloadResolver
         $item = [
             'reference' => $vote['id'],
             'title' => $proposal['title'],
-            'summary' => $proposal['summary'] ?: '',
+            'summary' => $proposal['summary'] ? $proposal['summary'] : '',
             'votesCountByStepId' => '',
             'content' => $na,
             'category' => $proposal['category'] ? $proposal['category']['name'] : '',
@@ -386,7 +386,7 @@ class ProjectDownloadResolver
         return $item;
     }
 
-    private function getReplyItem(array $reply, array $responses): array
+    private function getReplyItem(array $reply, array $responses)
     {
         $item = [
             'id' => $reply['id'],
@@ -405,7 +405,7 @@ class ProjectDownloadResolver
         }
 
         foreach ($this->headers as $header) {
-            if (\is_array($header) && !array_key_exists($header['label'], $item)) {
+            if (is_array($header) && !array_key_exists($header['label'], $item)) {
                 $item[$header['label']] = '';
             }
         }
@@ -416,7 +416,7 @@ class ProjectDownloadResolver
     private function getResponseValue(array $response)
     {
         $originalValue = $response['value'];
-        if (\is_array($originalValue)) {
+        if (is_array($originalValue)) {
             $values = $originalValue['labels'];
             if (array_key_exists('other', $originalValue) && $originalValue['other']) {
                 $values[] = $originalValue['other'];
@@ -439,27 +439,27 @@ class ProjectDownloadResolver
         return $body;
     }
 
-    private function getWriterFromData($data, $headers, $title): \PHPExcel_Writer_IWriter
+    private function getWriterFromData($data, $headers, $title)
     {
         $phpExcelObject = $this->phpexcel->createPHPExcelObject();
         $phpExcelObject->getProperties()
             ->setTitle($title);
-        $phpExcelObject->setActiveSheetIndex();
+        $phpExcelObject->setActiveSheetIndex(0);
         $sheet = $phpExcelObject->getActiveSheet();
         $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
         \PHPExcel_Settings::setCacheStorageMethod(
             \PHPExcel_CachedObjectStorageFactory::cache_in_memory,
             ['memoryCacheSize' => '512M']
         );
-        $nbCols = \count($headers);
+        $nbCols = count($headers);
         // Add headers
-        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString();
+        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A1');
         $currentColumn = $startColumn;
         foreach ($headers as $header) {
-            if (\is_array($header)) {
+            if (is_array($header)) {
                 $header = $header['label'];
             } else {
-                if (!\in_array($header, $this->customFields, true)) {
+                if (!in_array($header, $this->customFields, true)) {
                     $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
                 }
             }
@@ -472,7 +472,7 @@ class ProjectDownloadResolver
         foreach ($data as $row) {
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
-                $headerKey = \is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
+                $headerKey = is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
 
                 $sheet->setCellValue($currentColumn . $currentRow, $row[$headerKey]);
                 ++$currentColumn;
@@ -508,7 +508,7 @@ class ProjectDownloadResolver
         }
 
         foreach ($proposal['responses'] as $response) {
-            if (\in_array($response['question']['title'], $this->customFields, true)) {
+            if (in_array($response['question']['title'], $this->customFields, true)) {
                 $item[$response['question']['title']] = (string) $response['value'];
             }
         }
@@ -548,7 +548,7 @@ class ProjectDownloadResolver
         return 'unknown';
     }
 
-    private function booleanToString($boolean): string
+    private function booleanToString($boolean)
     {
         if ($boolean) {
             return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
@@ -557,7 +557,7 @@ class ProjectDownloadResolver
         return $this->translator->trans('global.no', [], 'CapcoAppBundle');
     }
 
-    private function dateToString(\DateTime $date = null): string
+    private function dateToString(\DateTime $date = null)
     {
         if ($date) {
             return $date->format('Y-m-d H:i:s');

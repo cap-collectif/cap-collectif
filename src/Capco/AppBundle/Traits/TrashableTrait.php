@@ -87,10 +87,7 @@ trait TrashableTrait
         return $this->trashedReason;
     }
 
-    /**
-     * @param string $trashedReason
-     */
-    public function setTrashedReason($trashedReason)
+    public function setTrashedReason(string $trashedReason = null)
     {
         $this->trashedReason = $trashedReason;
 

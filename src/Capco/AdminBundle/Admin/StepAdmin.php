@@ -156,7 +156,6 @@ class StepAdmin extends Admin
                     'required' => true,
                     'btn_add' => false,
                     'query' => $this->createQueryForConsultationStepType(),
-                    'choices_as_values' => true,
                 ])
                 ->add('opinionCountShownBySection', null, [
                     'label' => 'admin.fields.step.opinionCountShownBySection',
@@ -298,7 +297,6 @@ class StepAdmin extends Admin
                         'required' => false,
                         'class' => Status::class,
                         'empty_value' => 'admin.fields.step.default_status_none',
-                        'choices_as_values' => true,
                     ])
                 ;
                 $formMapper->end();
@@ -342,7 +340,6 @@ class StepAdmin extends Admin
                     'by_reference' => false,
                     'required' => false,
                     'empty_value' => 'admin.fields.step.no_proposal_form',
-                    'choices_as_values' => true,
                 ])
                 ->end()
                 ->with('admin.fields.step.group_statuses')
@@ -368,7 +365,6 @@ class StepAdmin extends Admin
                     'by_reference' => false,
                     'required' => false,
                     'empty_value' => 'admin.fields.step.no_questionnaire',
-                    'choices_as_values' => true,
                 ])
                 ->end()
             ;

@@ -171,7 +171,7 @@ abstract class AbstractResponse
     }
 
     /**
-     * @ORM\PostUpdate()
+     * @ORM\PreFlush()
      */
     public function updateProposalTimestamp()
     {

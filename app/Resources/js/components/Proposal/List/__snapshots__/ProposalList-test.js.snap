@@ -31,7 +31,6 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
           "id": 1,
         }
       }
-      showComments={false}
       showThemes={false}
       step={
         Object {
@@ -48,7 +47,6 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
           "id": 2,
         }
       }
-      showComments={false}
       showThemes={false}
       step={
         Object {

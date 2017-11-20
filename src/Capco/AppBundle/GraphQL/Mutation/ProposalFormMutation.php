@@ -57,7 +57,7 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            $logger->error(get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update this proposal form!');
         }
 

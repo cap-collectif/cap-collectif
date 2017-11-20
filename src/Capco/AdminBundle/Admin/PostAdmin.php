@@ -193,7 +193,6 @@ class PostAdmin extends Admin
                 'multiple' => true,
                 'btn_add' => false,
                 'by_reference' => false,
-                  'choices_as_values' => true,
             ]);
         }
 
@@ -204,7 +203,6 @@ class PostAdmin extends Admin
                 'multiple' => true,
                 'btn_add' => false,
                 'by_reference' => false,
-                'choices_as_values' => true,
             ])
             ->add('proposals', 'sonata_type_model_autocomplete', [
               'property' => 'title',

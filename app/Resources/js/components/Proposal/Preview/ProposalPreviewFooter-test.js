@@ -15,7 +15,6 @@ describe('<ProposalPreviewFooter />', () => {
   const props = {
     proposal,
     stepId: '1',
-    showComments: true,
   };
 
   it('should render a footer with comment counter', () => {
@@ -56,14 +55,5 @@ describe('<ProposalPreviewFooter />', () => {
     expect(votesCounter.find('.proposal__counter__value').text()).toEqual(
       `${proposal.votesCountByStepId['1']}`,
     );
-  });
-
-  it('should render a footer without comment and votes counters', () => {
-    const wrapper = shallow(
-      <ProposalPreviewFooter {...props} showVotes={false} showComments={false} />,
-    );
-
-    const footer = wrapper.find('div.proposal__footer');
-    expect(footer).toHaveLength(0);
   });
 });

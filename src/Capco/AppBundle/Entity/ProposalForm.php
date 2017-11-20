@@ -265,7 +265,7 @@ class ProposalForm
         return $this->questions;
     }
 
-    public function setQuestions(Collection $questions): self
+    public function setQuestions(Collection $questions): Collection
     {
         foreach ($questions as $question) {
             $question->setProposalForm($this);
@@ -288,7 +288,7 @@ class ProposalForm
     public function removeQuestion(QuestionnaireAbstractQuestion $question): self
     {
         $this->questions->removeElement($question);
-        $question->setProposalForm();
+        $question->setProposalForm(null);
 
         return $this;
     }
