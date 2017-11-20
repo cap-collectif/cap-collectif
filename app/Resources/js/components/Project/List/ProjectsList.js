@@ -7,22 +7,34 @@ type Props = {
 };
 
 export class ProjectsList extends React.Component<Props> {
-  hasNotParticipativeSteps() {
-    const { projects } = this.props;
+  // hasNotParticipativeSteps() {
+  //   const { projects } = this.props;
+  //
+  //   const hasNotParticipativeSteps = projects.filter(
+  //     project => project.hasParticipativeStep === false,
+  //   );
+  //
+  //   if (hasNotParticipativeSteps.length === projects.length) {
+  //     return true;
+  //   }
+  //
+  //   return false;
+  // }
 
-    const hasNotParticipativeSteps = projects.filter(
-      project => project.hasParticipativeStep === false,
-    );
-
-    if (hasNotParticipativeSteps.length === projects.length) {
-      return true;
-    }
-
-    return false;
-  }
+  // testHasNotParticipativeSteps() {
+  //   const { projects } = this.props;
+  //
+  //   const testHasNotParticipativeSteps = projects.filter(
+  //     project => project.hasParticipativeStep === false,
+  //   );
+  //
+  //   return testHasNotParticipativeSteps;
+  // }
 
   render() {
     const { projects } = this.props;
+
+    // console.warn(this.testHasNotParticipativeSteps())
 
     if (projects.length > 0) {
       return (
@@ -32,14 +44,13 @@ export class ProjectsList extends React.Component<Props> {
               <ProjectPreview
                 key={index}
                 project={projectDetail}
-                hasNotParticipativeSteps={this.hasNotParticipativeSteps()}
               />
             );
           })}
         </div>
       );
     }
-    return <p>Aucun projet</p>;
+    return <p>Aucun projet </p>;
   }
 }
 

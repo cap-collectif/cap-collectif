@@ -58,6 +58,15 @@
         height: 15px;
     }
 
+    .project__preview__counters {
+        font-size: 14px;
+        margin-top: 5px;
+
+        .counter__value {
+            color: $excerpt-dark-gray;
+        }
+    }
+
     .progress {
         @include progress-bar-variant($gray-primary);
     }
@@ -101,30 +110,30 @@
         }
     }
 
-    .thumbnail__numbers {
-        height: 55px;
-        padding: 5px;
-        background-color: #f6f6f6;
-        border-top: 1px solid #ddd;
-
-        .thumbnail__number-block {
-            display: inline-block;
-            text-align: center;
-            border-left: 1px solid $border-color;
-
-            &:first-of-type {
-                border-left: 0;
-            }
-        }
-
-        .thumbnail__number {
-            font-size: 18px;
-        }
-
-        .thumbnail__number__label {
-            font-size: 12px;
-        }
-    }
+    //.thumbnail__numbers {
+    //    height: 55px;
+    //    padding: 5px;
+    //    background-color: #f6f6f6;
+    //    border-top: 1px solid #ddd;
+    //
+    //    .thumbnail__number-block {
+    //        display: inline-block;
+    //        text-align: center;
+    //        border-left: 1px solid $border-color;
+    //
+    //        &:first-of-type {
+    //            border-left: 0;
+    //        }
+    //    }
+    //
+    //    .thumbnail__number {
+    //        font-size: 18px;
+    //    }
+    //
+    //    .thumbnail__number__label {
+    //        font-size: 12px;
+    //    }
+    //}
 }
 
 .bg--project {

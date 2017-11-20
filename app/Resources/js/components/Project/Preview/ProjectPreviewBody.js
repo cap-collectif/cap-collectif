@@ -2,9 +2,10 @@
 import * as React from 'react';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
+import ProjectPreviewCounters from './ProjectPreviewCounters';
 
 const ProjectPreviewBody = React.createClass({
   propTypes: {
@@ -30,20 +31,18 @@ const ProjectPreviewBody = React.createClass({
   render() {
     const { project } = this.props;
 
+    // console.log(project);
+
     const externalLink = project._links.external;
-    let progress;
-    if (this.shouldRenderProgressBar()) {
-      progress = (
-        <div>
-          <p style={{ marginBottom: 10, height: 16 }} className="small">
-            <FormattedMessage id="global.advancement" />
-          </p>
-          <ProjectPreviewProgressBar project={project} />
-        </div>
-      );
-    } else {
-      progress = <div style={{ height: 51 }} />;
-    }
+    // let progress;
+    // if (this.shouldRenderProgressBar()) {
+    //   progress = (
+    //     <div>
+    //       <ProjectPreviewProgressBar project={project} />
+    //     </div>
+    //   );
+    // }
+
     const link = externalLink || project._links.show;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
@@ -89,8 +88,13 @@ const ProjectPreviewBody = React.createClass({
           <Truncate lines={1} className="project__preview__author excerpt small">
             {project.author.displayName}
           </Truncate>
+          {project.hasParticipativeStep && <ProjectPreviewCounters project={project} /> }
         </div>
-        {progress}
+        {this.shouldRenderProgressBar() &&<ProjectPreviewProgressBar project={project} />}
+        <div className="project__preview__actions">
+
+          {project.hasParticipativeStep && <span>-- jours restant</span>}
+        </div>
       </div>
     );
   },
