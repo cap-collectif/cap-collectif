@@ -20,7 +20,7 @@ class GroupResolver implements ContainerAwareInterface
 
     public function resolveUsersConnection(Group $group, Argument $args): Connection
     {
-        $paginator = new Paginator(function ($offset, $limit) use ($group, $args) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($group, $args) {
             $repo = $this->container->get('capco.user.repository');
 
             return $repo->getUsersInGroup($group);
