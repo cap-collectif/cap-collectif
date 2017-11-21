@@ -16,7 +16,7 @@
     "download-translations": "bin/console translation:download --no-debug",
     "update-js-translation": "babel-node ./xlf2-to-json.js",
     "trad": "yarn run download-translations && yarn run update-js-translation",
-    "dump-graphql-schema": "bin/console graphql:dump-schema --no-debug --file schema.graphql --format graphql",
+    "dump-graphql-schema": "bin/console graphql:dump-schema --no-debug --file schema.graphql --format graphqls",
     "relay": "yarn run dump-graphql-schema && yarn run build-relay-schema",
     "relay:watch": "yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
     "checkcs": "eslint --cache app/Resources/js",

@@ -40,99 +40,19 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
       Object {
         "id": "group4",
         "title": "Comité de suvi",
-        "usersConnection": Object {
-          "edges": Array [
-            Object {
-              "node": Object {
-                "biography": "biooooo",
-                "displayName": "toto",
-                "email": "toto@cap-collectif.com",
-                "id": "id1",
-                "media": Object {
-                  "url": "https://capco.dev",
-                },
-                "phone": null,
-              },
-            },
-          ],
-        },
+        "usersConnection": Array [],
       }
     }
     onClose={[Function]}
     show={false}
   />
-  <ListGroup
-    bsClass="list-group"
+  <div
+    className="mb-15"
   >
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
-    >
-      <Connect(DeleteModal)
-        closeDeleteModal={[Function]}
-        deleteElement={[Function]}
-        deleteModalContent="group.admin.user.modal.delete.content"
-        deleteModalTitle="group.admin.user.modal.delete.title"
-        showDeleteModal={false}
-      />
-      <Row
-        bsClass="row"
-        componentClass="div"
-      >
-        <Col
-          bsClass="col"
-          componentClass="div"
-          xs={3}
-        >
-          <img
-            alt="toto"
-            className="img-circle mr-15"
-            src="https://capco.dev"
-          />
-          toto
-        </Col>
-        <Col
-          bsClass="col"
-          className="pull-right"
-          componentClass="div"
-          xs={4}
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            className="pull-right mt-5"
-            disabled={false}
-            href="#"
-            onClick={[Function]}
-          >
-            <i
-              className="fa fa-trash"
-            />
-             
-            <FormattedMessage
-              id="global.delete"
-              values={Object {}}
-            />
-          </Button>
-        </Col>
-        <Col
-          bsClass="col"
-          componentClass="div"
-          xs={12}
-        >
-          <p
-            className="mt-10"
-          >
-            toto@cap-collectif.com
-          </p>
-          <p>
-            biooooo
-          </p>
-        </Col>
-      </Row>
-    </ListGroupItem>
-  </ListGroup>
+    <FormattedMessage
+      id="group.admin.no_users"
+      values={Object {}}
+    />
+  </div>
 </div>
 `;

@@ -47,8 +47,8 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
     const { handleSubmit, group } = this.props;
 
     const usersInGroup = [];
-    group.usersConnection.edges.map(edge => {
-      usersInGroup.push(edge.node.id);
+    group.usersConnection.map(userGroup => {
+      usersInGroup.push(userGroup.user.id);
     });
 
     return (

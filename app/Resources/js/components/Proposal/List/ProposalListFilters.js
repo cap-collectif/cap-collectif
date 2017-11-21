@@ -56,13 +56,13 @@ export const ProposalListFilters = React.createClass({
 
     return {
       displayedFilters: []
-        .concat(types.length > 0 ? ['types'] : [])
+        .concat(features.user_type && types.length > 0 ? ['types'] : [])
         .concat(
           features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [],
         )
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
-        .concat(features.user_type && statuses.length > 0 ? ['statuses'] : []),
+        .concat(statuses.length > 0 ? ['statuses'] : []),
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(orderByVotes ? ['votes'] : []),
     };
   },
