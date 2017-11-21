@@ -20,10 +20,8 @@ const ProjectPreviewCounter = React.createClass({
     if (value > 0 || showZero) {
       return (
         <div className="excerpt">
-          <span className="counter__value">{value} </span>
-          <span>
-            <FormattedMessage id={label} values={{ num: value }} />
-          </span>
+          <span className="excerpt_dark">{value} </span>
+          <FormattedMessage id={label} values={{ num: value }} />
         </div>
       );
     }

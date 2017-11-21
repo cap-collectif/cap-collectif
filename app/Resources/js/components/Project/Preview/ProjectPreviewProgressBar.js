@@ -7,74 +7,57 @@ import { ProgressBar } from 'react-bootstrap';
 
 type Props = {
   project: Object,
+  actualStep: Object,
 };
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {
-
-  // getCompletedStepsNb() {
-  //   const { project } = this.props;
-  //   const completedSteps = project.steps.filter(step => {
-  //     return step.status === 'closed';
-  //   });
-  //   return completedSteps.length;
-  // }
-  //
-  // getCompletedStepsPercentage() {
-  //   const { project } = this.props;
-  //   const completedStepsNb = this.getCompletedStepsNb();
-  //   const total = project.steps.length;
-  //   const percentage = completedStepsNb > 0 && total > 0 ? completedStepsNb / total * 100 : 0;
-  //   return Math.round(percentage);
-  // }
-
-  getActualStep() {
-    const { project } = this.props;
-    const dateNow = new Date();
-    const projectStep = project.steps.sort((a, b) => a.position - b.position);
-
-    const stepClosed = projectStep.filter(step => (step.status === 'closed'));
-    const stepFuture = projectStep.filter(step => (step.status === 'future'));
-
-
-  }
-
-  getClasses(stepStatus) {
-    if(stepStatus === 'closed') {
-      return 'info'
+  getStyle = (stepStatus: string) => {
+    if (stepStatus === 'open') {
+      return 'success';
     }
-
-    return 'success'
   };
 
-  getLabel(stepStatus) {
-    if(stepStatus === 'open') {
-      return 'en cours'
-    } else if(stepStatus === 'future') {
-      return 'à venir'
-    } else if(stepStatus === 'closed') {
-      return 'terminé'
+  getClass = (stepStatus: string) => {
+    if (stepStatus === 'future') {
+      return 'progress_future-step';
+    } else if (stepStatus === 'closed') {
+      return 'progress_closed-step';
+    }
+  };
+
+  getLabel = (stepStatus: string) => {
+    if (stepStatus === 'open') {
+      return 'En cours';
+    } else if (stepStatus === 'future') {
+      return 'À venir';
+    } else if (stepStatus === 'closed') {
+      return 'Terminé';
     }
     return '';
   };
 
+  getWidth = (stepStatus: string) => {
+    if (stepStatus === 'open') {
+      return 50;
+    } else if (stepStatus === 'closed' || stepStatus === 'future') {
+      return 100;
+    }
+    return 0;
+  };
+
   render() {
-    const { project } = this.props;
+    const { project, actualStep } = this.props;
     const nbSteps = project.steps.length;
 
-    console.log(this.getActualStep());
-    // console.log(project.steps);
-
     if (nbSteps > 0) {
-      const width = 100 / nbSteps;
       return (
         <div className="thumbnail__steps-bar">
-          <ProgressBar>
-            {project.steps.sort((a, b) => a.position - b.position).map((step, index) => {
-              return (
-                <ProgressBar bsStyle={this.getClasses(step.status)} now={width} key={index} label={this.getLabel(step.status)} />
-              );
-            })}
-          </ProgressBar>
+          <ProgressBar
+            className={this.getClass(actualStep.status)}
+            bsStyle={this.getStyle(actualStep.status)}
+            now={this.getWidth(actualStep.status)}
+            label={this.getLabel(actualStep.status)}
+          />
         </div>
       );
     }
