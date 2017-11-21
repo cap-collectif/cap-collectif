@@ -380,19 +380,19 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       if (response) {
         if (response.value) {
           return {
-            question: parseInt(field.id, 10),
+            question: field.id,
             value: response.value,
           };
         }
         return {
-          question: parseInt(field.id, 10),
+          question: field.id,
           medias: response.medias,
         };
       }
       if (field.type === 'medias') {
-        return { question: parseInt(field.id, 10), medias: [] };
+        return { question: field.id, medias: [] };
       }
-      return { question: parseInt(field.id, 10), value: null };
+      return { question: field.id, value: null };
     }),
     addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },

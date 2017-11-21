@@ -7,5 +7,5 @@ ResponseInput:
               type: "String"
               description: "The value"
             question:
-              type: "Int!"
+              type: "String!"
               description: "The question id"
