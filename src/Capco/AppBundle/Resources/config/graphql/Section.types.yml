@@ -22,7 +22,7 @@ Section:
                 type: "Int!"
                 resolve: "@=resolver('section_contributionsCount', [value])"
             contributionConnection:
-                type: "ContributionConnection"
+                type: "ContributionConnection!"
                 args:
                     orderBy:
                       type: "ContributionOrder"
