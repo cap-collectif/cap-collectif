@@ -34,15 +34,15 @@ export class ProjectPreviewBody extends React.Component<Props> {
     }
   }
 
-  getAction = (stepStatus: string) => {
+  getAction = (step: Object) => {
     const { project } = this.props;
 
-    if (project.hasParticipativeStep && stepStatus === 'open') {
-      return <a>Participer</a>;
-    } else if (!project.hasParticipativeStep && stepStatus === 'open') {
-      return <a>Voir l'étape en cours</a>;
-    } else if (stepStatus === 'closed') {
-      return <a>Voir le résultat</a>;
+    if (project.hasParticipativeStep && step.status === 'open') {
+      return <a href={step._links.show}>Participer</a>;
+    } else if (!project.hasParticipativeStep && step.status === 'open') {
+      return <a href={step._links.show}>Voir l'étape en cours</a>;
+    } else if (step.status === 'closed') {
+      return <a href={step._links.show}>Voir le résultat</a>;
     }
   };
 
@@ -146,8 +146,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         </div>
         {actualStep && <ProjectPreviewProgressBar project={project} actualStep={actualStep} />}
         <div className="project__preview__actions">
-          {actualStep && this.getAction(actualStep.status)}{' '}
-          {actualStep && this.getStartDate(actualStep)}{' '}
+          {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep && this.getRemainingDays(actualStep)}
         </div>
       </div>

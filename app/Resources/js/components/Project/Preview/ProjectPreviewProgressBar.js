@@ -35,8 +35,6 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     } else if (step.status === 'closed') {
       return 'Terminé';
     }
-
-    return '';
   };
 
   getWidth = (step: Object) => {
