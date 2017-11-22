@@ -20,6 +20,10 @@ class ProposalNotationType extends AbstractType
                 'required' => false,
                 'by_reference' => false,
             ])
+            ->add('evaluers', null, [
+                'required' => false,
+                'by_reference' => false,
+            ])
         ;
     }
 

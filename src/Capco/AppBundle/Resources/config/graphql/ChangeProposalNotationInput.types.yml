@@ -8,4 +8,6 @@ ChangeProposalNotationInput:
             estimation:
                 type: "Int"
             likers:
-                type: "[String!]"
+                type: "[ID!]"
+            evaluers:
+                type: "[ID!]"

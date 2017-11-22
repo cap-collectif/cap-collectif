@@ -140,7 +140,8 @@ input ChangeProposalNotationInput {
   # The proposal id
   proposalId: ID!
   estimation: Int
-  likers: [String!]
+  likers: [ID!]
+  evaluers: [ID!]
   clientMutationId: String
 }
 
@@ -756,6 +757,7 @@ type Proposal {
   # The HTTP show url for this contribution.
   show_url: URI!
   progressSteps: [ProgressStep!]!
+  evaluers: [Group!]!
   news: [Post!]!
   project: Project!
   status: Status
@@ -927,7 +929,8 @@ type Query {
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
-  ): [Consultation]
+  ): [Consultation!]!
+  groups: [Group!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -976,7 +979,7 @@ type QuestionChoice {
 
 input QuestionInput {
   # Nullable because of editing and to handle creation.
-  id: Int
+  id: String
   title: String!
   type: QuestionTypeValue!
   private: Boolean!
@@ -1064,7 +1067,7 @@ input ResponseInput {
   value: String
 
   # The question id
-  question: Int!
+  question: String!
 }
 
 # A section
