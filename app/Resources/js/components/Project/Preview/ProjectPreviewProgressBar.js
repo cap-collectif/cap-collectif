@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
-// import { FormattedMessage } from 'react-intl';
-
-// import ProjectPreviewProgressBarItem from './ProjectPreviewProgressBarItem';
+import { FormattedMessage } from 'react-intl';
 
 type Props = {
   project: Object,
@@ -27,13 +25,13 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
 
   getLabel = (step: Object) => {
     if (step.timeless === true) {
-      return 'Participation en continu';
+      return <FormattedMessage id="step.timeless" />;
     } else if (step.status === 'open') {
-      return 'En cours';
+      return <FormattedMessage id="step.status.open" />;
     } else if (step.status === 'future') {
-      return 'À venir';
+      return <FormattedMessage id="step.status.future" />;
     } else if (step.status === 'closed') {
-      return 'Terminé';
+      return <FormattedMessage id="step.status.closed" />;
     }
   };
 

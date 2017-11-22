@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
@@ -38,11 +38,23 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const { project } = this.props;
 
     if (project.hasParticipativeStep && step.status === 'open') {
-      return <a href={step._links.show}>Participer</a>;
+      return (
+        <a href={step._links.show}>
+          <FormattedMessage id="project.preview.action.participe" />
+        </a>
+      );
     } else if (!project.hasParticipativeStep && step.status === 'open') {
-      return <a href={step._links.show}>Voir l'étape en cours</a>;
+      return (
+        <a href={step._links.show}>
+          <FormattedMessage id="project.preview.action.seeStep" />
+        </a>
+      );
     } else if (step.status === 'closed') {
-      return <a href={step._links.show}>Voir le résultat</a>;
+      return (
+        <a href={step._links.show}>
+          <FormattedMessage id="project.preview.action.seeResult" />
+        </a>
+      );
     }
   };
 
@@ -53,7 +65,11 @@ export class ProjectPreviewBody extends React.Component<Props> {
     );
 
     if (step.status === 'future') {
-      return <span className="excerpt-dark">Commence le {startDay}</span>;
+      return (
+        <span className="excerpt-dark">
+          <FormattedMessage id="date.startAt" /> {startDay}
+        </span>
+      );
     }
   };
 
@@ -72,19 +88,22 @@ export class ProjectPreviewBody extends React.Component<Props> {
     if (daysLeft === 0 && hoursLeft === 0) {
       test = (
         <span className="excerpt">
-          <span className="excerpt_dark">{minutesLeft}</span> minute(s) restante(s)
+          <span className="excerpt_dark">{minutesLeft}</span>{' '}
+          <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
         </span>
       );
     } else if (daysLeft === 0) {
       test = (
         <span className="excerpt">
-          <span className="excerpt_dark">{hoursLeft}</span> heure(s) restante(s)
+          <span className="excerpt_dark">{hoursLeft}</span>{' '}
+          <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
         </span>
       );
     } else {
       test = (
         <span className="excerpt">
-          <span className="excerpt_dark">{daysLeft}</span> jour(s) restant(s)
+          <span className="excerpt_dark">{daysLeft}</span>{' '}
+          <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
         </span>
       );
     }
