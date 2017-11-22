@@ -29,26 +29,26 @@ Scenario: GraphQL client wants to update a proposal Evaluation
         "proposalId": "proposal2",
         "responses": [
            {
-              "question":"8",
+              "question": "8",
               "value":"Modification de l'évaluation"
            },
            {
-              "question":"9",
+              "question": "9",
               "value":"Cette évaluation est hyper utile, à accepter."
            },
            {
-              "question":"20",
+              "question": "20",
               "value":"{\"labels\":\"Au top\",\"other\":null}"},
            {
-              "question":"21",
+              "question": "21",
               "value":"{\"labels\":[\"Incohérente\",\"Que de la publicité (mensongère en plus !)\"],\"other\":null}"
            },
            {
-              "question":"22",
+              "question": "22",
               "value":"{\"labels\":[\"J'ai rien compris\"],\"other\":null}"
            },
            {
-              "question":"23",
+              "question": "23",
               "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
            }
         ]

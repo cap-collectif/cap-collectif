@@ -436,13 +436,13 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
                 }
 
                 return {
-                  question: parseInt(field.id, 10),
+                  question: field.id,
                   value: responseValue,
                 };
               }
             }
 
-            return { question: parseInt(field.id, 10), value: null };
+            return { question: field.id, value: null };
           }),
   },
 });

@@ -13,5 +13,19 @@ Group:
                 type: "String"
                 description: "Identifies the description of the group."
             usersConnection:
-                type: "[UserGroup!]!"
-                resolve: "@=resolver('group_users_connection', [value])"
+                type: "UsersConnection!"
+                args:
+                    after:
+                      type: "String"
+                      description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                      type: "Int"
+                      defaultValue: 100
+                      description: "Returns the first n elements from the list."
+                    before:
+                      type: "String"
+                      description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                      type: "Int"
+                      description: "Returns the last n elements from the list."
+                resolve: "@=resolver('group_users_connection', [value, args])"

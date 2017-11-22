@@ -3,7 +3,7 @@ QuestionInput:
     config:
         fields:
             id:
-                type: "Int"
+                type: "String"
                 description: "Nullable because of editing and to handle creation."
             title:
                 type: "String!"
