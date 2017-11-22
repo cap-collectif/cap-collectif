@@ -115,10 +115,8 @@ Scenario: GraphQL client wants to add a user in group
         group {
           id
           usersConnection {
-            edges {
-              node {
-                id
-              }
+            user {
+              id
             }
           }
         }
@@ -141,16 +139,14 @@ Scenario: GraphQL client wants to add a user in group
       "addUsersInGroup": {
         "group": {
           "id": "group2",
-          "usersConnection": {
-              "edges": [
-                {
-                  "node": {
-                    "id": "user101"
-                  }
-                },
-                @...@
-             ]
-          }
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user101"
+              }
+            },
+            @...@
+          ]
         }
       }
     }
@@ -168,10 +164,8 @@ Scenario: GraphQL client wants to add multiple users in group
         group {
           id
           usersConnection {
-            edges {
-              node {
-                id
-              }
+            user {
+              id
             }
           }
         }
@@ -195,21 +189,19 @@ Scenario: GraphQL client wants to add multiple users in group
       "addUsersInGroup": {
         "group": {
           "id": "group2",
-          "usersConnection": {
-            "edges": [
-              {
-                "node": {
-                  "id": "user101"
-                }
-              },
-              {
-                "node": {
-                  "id": "user107"
-                }
-              },
-              @...@
-            ]
-          }
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user101"
+              }
+            },
+            {
+              "user": {
+                "id": "user107"
+              }
+            },
+            @...@
+          ]
         }
       }
     }
@@ -227,10 +219,8 @@ Scenario: GraphQL client wants to remove a user from group
         group {
           id
           usersConnection {
-            edges {
-              node {
-                id
-              }
+            user {
+              id
             }
           }
         }
@@ -251,15 +241,13 @@ Scenario: GraphQL client wants to remove a user from group
       "deleteUserInGroup": {
         "group": {
           "id": "group2",
-          "usersConnection": {
-            "edges": [
-              {
-                "node": {
-                  "id": "user503"
-                }
+          "usersConnection": [
+            {
+              "user": {
+                "id": "user503"
               }
-            ]
-          }
+            }
+          ]
         }
       }
     }

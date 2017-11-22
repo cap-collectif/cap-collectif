@@ -91,7 +91,7 @@
         "doctrine/orm": "^2.5",
         "infinite-networks/form-bundle": "^1.0",
         "swarrot/swarrot-bundle": "^1.4",
-        "overblog/graphql-bundle": "^0.9.3",
+        "overblog/graphql-bundle": "^0.8.5",
         "league/csv": "^8.2",
         "php-http/socket-client": "^1.2",
         "php-http/discovery": "^1.2",
@@ -113,9 +113,7 @@
         "phayes/geoPHP": "dev-master#dcd53748bbd632f4285a4143e329f67226baae10",
         "php-translation/symfony-bundle": "^0.4.0",
         "php-translation/loco-adapter": "^0.4.0",
-        "pmill/doctrine-array-hydrator": "^0.1.2",
-        "webonyx/graphql-php": "^0.11.2",
-        "overblog/graphql-php-generator": "@dev"
+        "pmill/doctrine-array-hydrator": "^0.1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

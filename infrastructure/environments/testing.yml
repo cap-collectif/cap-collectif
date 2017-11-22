@@ -8,11 +8,11 @@ application:
         BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
     volumes:
         - ../../:/var/www
+        # - /var/run/docker.sock:/run/docker.sock:ro
+        # - /usr/bin/docker:/usr/bin/docker
         - /etc/localtime:/etc/localtime:ro
 
 builder:
-    environment:
-      BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
     build: ../services/builder
     volumes:
         - ../../:/var/www

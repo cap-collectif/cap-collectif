@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Repository;
 
-use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -15,20 +14,11 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * UserRepository.
+ */
 class UserRepository extends EntityRepository
 {
-    public function getUsersInGroup(Group $group): array
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb
-        ->innerJoin('u.userGroups', 'ug')
-        ->andWhere('ug.group = :group')
-        ->setParameter('group', $group)
-      ;
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function getRegisteredContributorCount(): int
     {
         $qb = $this->createQueryBuilder('u');
@@ -667,13 +657,13 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.userType', 'ut')
         ;
 
-        if (null !== $type && UserType::FILTER_ALL !== $type) {
+        if ($type !== null && $type !== UserType::FILTER_ALL) {
             $qb->andWhere('ut.slug = :type')
                 ->setParameter('type', $type)
             ;
         }
 
-        if (isset(User::$sortOrder[$sort]) && User::SORT_ORDER_CONTRIBUTIONS_COUNT === User::$sortOrder[$sort]) {
+        if (isset(User::$sortOrder[$sort]) && User::$sortOrder[$sort] === User::SORT_ORDER_CONTRIBUTIONS_COUNT) {
             $qb = $this->orderByContributionsCount($qb, 'DESC');
         } else {
             $qb->orderBy('u.createdAt', 'DESC');

@@ -29,7 +29,6 @@ Capco\UserBundle\Entity\User:
         website: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
         vip: true
-        phone: '+3300000000'
         confirmationToken: ~
         phoneConfirmed: true
 
@@ -44,7 +43,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser3'
+        Media: @MediaUser3
         confirmationToken: ~
 
     user4:

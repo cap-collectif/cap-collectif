@@ -13,10 +13,9 @@ const mutation = graphql`
       group {
         id
         usersConnection {
-          edges {
-            node {
-              id
-            }
+          id
+          user {
+            id
           }
         }
       }

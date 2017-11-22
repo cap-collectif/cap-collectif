@@ -90,11 +90,11 @@ Scenario: GraphQL client wants to change proposal content
         "category": "pCategory2",
         "responses": [
           {
-            "question": "1",
+            "question": 1,
             "value": "reponse-1"
           },
           {
-            "question": "3",
+            "question": 3,
             "value": "reponse-3"
           }
         ],
