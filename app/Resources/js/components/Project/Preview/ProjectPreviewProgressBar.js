@@ -25,22 +25,25 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     }
   };
 
-  getLabel = (stepStatus: string) => {
-    if (stepStatus === 'open') {
+  getLabel = (step: Object) => {
+    if (step.timeless === true) {
+      return 'Participation en continu';
+    } else if (step.status === 'open') {
       return 'En cours';
-    } else if (stepStatus === 'future') {
+    } else if (step.status === 'future') {
       return 'À venir';
-    } else if (stepStatus === 'closed') {
+    } else if (step.status === 'closed') {
       return 'Terminé';
     }
+
     return '';
   };
 
-  getWidth = (stepStatus: string) => {
-    if (stepStatus === 'open') {
-      return 50;
-    } else if (stepStatus === 'closed' || stepStatus === 'future') {
+  getWidth = (step: Object) => {
+    if (step.status === 'closed' || step.status === 'future' || step.timeless === true) {
       return 100;
+    } else if (step.status === 'open') {
+      return 50;
     }
     return 0;
   };
@@ -55,8 +58,8 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
           <ProgressBar
             className={this.getClass(actualStep.status)}
             bsStyle={this.getStyle(actualStep.status)}
-            now={this.getWidth(actualStep.status)}
-            label={this.getLabel(actualStep.status)}
+            now={this.getWidth(actualStep)}
+            label={this.getLabel(actualStep)}
           />
         </div>
       );

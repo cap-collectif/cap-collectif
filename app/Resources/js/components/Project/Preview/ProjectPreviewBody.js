@@ -21,8 +21,11 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const stepClosed = projectStep.filter(step => step.status === 'closed');
     const stepFuture = projectStep.filter(step => step.status === 'future');
     const stepOpen = projectStep.filter(step => step.status === 'open');
+    const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
 
-    if (stepOpen.length > 0) {
+    if (stepContinuousParticipation.length > 0) {
+      return stepContinuousParticipation[0];
+    } else if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
       return stepOpen[0];
     } else if (stepClosed.length > 0 && stepOpen.length === 0 && stepFuture.length === 0) {
       return stepClosed[stepClosed.length - 1];
@@ -86,27 +89,10 @@ export class ProjectPreviewBody extends React.Component<Props> {
       );
     }
 
-    if (project.hasParticipativeStep && step.status === 'open') {
+    if (project.hasParticipativeStep && step.status === 'open' && !step.timeless) {
       return test;
     }
   };
-
-  shouldRenderProgressBar() {
-    const { project } = this.props;
-
-    return (
-      project.steps.filter(step => {
-        return (
-          !step.startAt &&
-          !step.endAt &&
-          step.type !== 'presentation' &&
-          step.type !== 'ranking' &&
-          step.type !== 'other' &&
-          step.timeless
-        );
-      }).length === 0 && project.steps.length > 0
-    );
-  }
 
   render() {
     const { project } = this.props;
@@ -158,8 +144,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
           </h4>
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
         </div>
-        {this.shouldRenderProgressBar() &&
-          actualStep && <ProjectPreviewProgressBar project={project} actualStep={actualStep} />}
+        {actualStep && <ProjectPreviewProgressBar project={project} actualStep={actualStep} />}
         <div className="project__preview__actions">
           {actualStep && this.getAction(actualStep.status)}{' '}
           {actualStep && this.getStartDate(actualStep)}{' '}
