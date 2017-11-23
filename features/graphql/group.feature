@@ -23,7 +23,8 @@ Scenario: GraphQL client wants to list groups
         {
           "id": @string@,
           "title": @string@
-        }
+        },
+        @...@
       ]
     }
   }

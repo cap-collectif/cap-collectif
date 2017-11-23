@@ -27,7 +27,7 @@ Scenario: API client wants to know the number of citoyens
 
 @parallel-scenario
 Scenario: API client wants to know the number of citoyens who registered since 2011-11-23
-  When I send a GET request to "/api/users?type=citoyen&from=2017-11-23T00:00:00"
+  When I send a GET request to "/api/users?type=citoyen&from=2020-11-23T00:00:00"
   Then the JSON response should match:
   """
   {
