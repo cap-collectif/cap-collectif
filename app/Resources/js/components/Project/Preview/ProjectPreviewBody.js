@@ -16,11 +16,16 @@ export class ProjectPreviewBody extends React.Component<Props> {
   getActualStep() {
     const { project } = this.props;
 
-    const projectStep = project.steps.sort((a, b) => a.position - b.position);
+    const projectStep = project.steps.sort((a, b) => {
+      const dateA = new Date(a.startAt);
+      const dateB = new Date(b.startAt);
+      return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
+    });
 
     const stepClosed = projectStep.filter(step => step.status === 'closed');
     const stepFuture = projectStep.filter(step => step.status === 'future');
     const stepOpen = projectStep.filter(step => step.status === 'open');
+
     const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
 
     if (stepContinuousParticipation.length > 0) {
