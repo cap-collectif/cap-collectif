@@ -23,7 +23,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
             return;
         }
-        $csvGenerator = new GraphQLToCsv();
+        $csvGenerator = new GraphQLToCsv($container->get('logger'));
         $fileName = 'users.csv';
         $writer = Writer::createFromPath($container->getParameter('kernel.root_dir') . '/../web/export/' . $fileName, 'w');
         $writer->setDelimiter(',');

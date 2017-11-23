@@ -25,7 +25,6 @@ describe('<ProposalAdminNotationForm />', () => {
       id: '1',
       estimation: 1000,
       likers: [{ id: '1', displayName: 'liker-1' }],
-      evaluers: [{ id: 'group1', title: 'Group 1' }],
       form: {
         evaluationForm: null,
       },

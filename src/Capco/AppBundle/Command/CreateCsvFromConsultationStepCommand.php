@@ -30,7 +30,7 @@ class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
         $steps = $container->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
             ->findAll();
-        $csvGenerator = new GraphQLToCsv();
+        $csvGenerator = new GraphQLToCsv($container->get('logger'));
 
         foreach ($steps as $step) {
             if ($step->getProject()) {

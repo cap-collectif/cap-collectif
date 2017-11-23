@@ -106,12 +106,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     protected $likers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", cascade={"persist"})
-     * @ORM\JoinTable(name="user_evaluatin_proposal")
-     */
-    protected $evaluers;
-
-    /**
      * @ORM\Column(name="address", type="text", nullable=true)
      */
     private $address;
@@ -255,7 +249,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->updatedAt = new \Datetime();
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
-        $this->evaluers = new ArrayCollection();
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
@@ -978,34 +971,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function setProposalEvaluation(ProposalEvaluation $proposalEvaluation): self
     {
         $this->proposalEvaluation = $proposalEvaluation;
-
-        return $this;
-    }
-
-    public function getEvaluers(): Collection
-    {
-        return $this->evaluers;
-    }
-
-    public function setEvaluers(Collection $userGroups): self
-    {
-        $this->evaluers = $evaluers;
-
-        return $this;
-    }
-
-    public function addEvaluer(Group $group): self
-    {
-        if (!$this->evaluers->contains($group)) {
-            $this->evaluers->add($group);
-        }
-
-        return $this;
-    }
-
-    public function removeEvaluer(Group $group): self
-    {
-        $this->evaluers->removeElement($group);
 
         return $this;
     }

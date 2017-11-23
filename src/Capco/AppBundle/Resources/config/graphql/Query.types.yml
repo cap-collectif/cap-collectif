@@ -10,16 +10,12 @@ Query:
                         description: "Remove super admin from export."
                 resolve: "@=resolver('user', [args])"
             consultations:
-                type: "[Consultation!]!"
+                type: "[Consultation]"
                 args:
                     id:
                         description: "If omitted, returns all consultations. If provided, returns the consultation of the particular id."
                         type: "ID"
                 resolve: "@=resolver('consultation', [args])"
-            groups:
-                type: "[Group!]!"
-                access: "@=hasRole('ROLE_ADMIN')"
-                resolve: "@=resolver('groups')"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"

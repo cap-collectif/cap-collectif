@@ -18,11 +18,6 @@ class GroupResolver implements ContainerAwareInterface
         return $this->container->get('capco.group.repository')->find($groupId);
     }
 
-    public function resolveAll(): array
-    {
-        return $this->container->get('capco.group.repository')->findAll();
-    }
-
     public function resolveUsersConnection(Group $group, Argument $args): Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) use ($group, $args) {

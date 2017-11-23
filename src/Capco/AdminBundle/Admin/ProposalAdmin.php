@@ -58,9 +58,6 @@ class ProposalAdmin extends Admin
                 'label' => 'admin.fields.proposal.state.label',
                 'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
             ])
-            ->add('evaluers', null, [
-                'label' => 'admin.fields.proposal.evaluers',
-            ])
             ->addIdentifier('createdAt', null, [
                 'label' => 'admin.fields.proposal.created_at',
             ])
@@ -130,9 +127,7 @@ class ProposalAdmin extends Admin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
-            ->add('expired', null, ['label' => 'admin.global.expired'])
-            ->add('evaluers', null, ['label' => 'admin.global.evaluers'])
-        ;
+            ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

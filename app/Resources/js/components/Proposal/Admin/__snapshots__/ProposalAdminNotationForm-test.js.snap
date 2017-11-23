@@ -5,6 +5,29 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
   className="box box-primary container"
 >
   <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.admin.general"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <div
     className="box-content box-content__notation-form"
   >
     <form
@@ -14,53 +37,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         <div
           className="mb-40"
         >
-          <div
-            className="box-header"
-          >
-            <h3
-              className="box-title"
-            >
-              <FormattedMessage
-                id="Analystes"
-                values={Object {}}
-              />
-            </h3>
-            <a
-              className="pull-right link"
-              href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <i
-                className="fa fa-info-circle"
-              />
-               Aide
-            </a>
-          </div>
-          <Field
-            clearable={false}
-            component={[Function]}
-            id="evaluers"
-            inputClassName="fake-inputClassName"
-            label="Groupes"
-            labelClassName="control-label"
-            loadOptions={[Function]}
-            multi={true}
-            name="evaluers"
-            placeholder="Aucun analyste"
-          />
-          <div
-            className="box-header"
-          >
-            <h3
-              className="box-title"
-            >
-              <FormattedMessage
-                id="Questionnaire"
-                values={Object {}}
-              />
-            </h3>
-          </div>
           <Field
             addonAfter={
               <Glyphicon

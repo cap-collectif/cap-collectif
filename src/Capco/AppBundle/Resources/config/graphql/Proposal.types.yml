@@ -10,8 +10,6 @@ Proposal:
                 resolve: "@=resolver('proposal_show_url', [value])"
             progressSteps:
               type: "[ProgressStep!]!"
-            evaluers:
-              type: "[Group!]!"
             news:
               type: "[Post!]!"
               resolve: "@=resolver('proposal_news', [value])"

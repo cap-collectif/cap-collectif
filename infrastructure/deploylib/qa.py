@@ -51,13 +51,13 @@ def phpspec():
 @task(environments=['local', 'ci'])
 def jest():
     "Run JS Unit Tests"
-    env.compose('run -e CI=true builder yarn test')
+    env.compose('run -e CI=True builder yarn test')
 
 
-@task(environments=['ci'])
+@task(environments=['local', 'ci'])
 def perf():
     "Run perf Tests"
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH builder yarn run bundlesize')
+    env.compose('run -e CI=True builder yarn run bundlesize')
 
 
 @task(environments=['local', 'ci'])

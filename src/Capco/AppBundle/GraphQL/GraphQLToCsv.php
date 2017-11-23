@@ -3,18 +3,31 @@
 namespace Capco\AppBundle\GraphQL;
 
 use League\Csv\Writer;
+use Monolog\Logger;
+use Overblog\GraphQLBundle\Request\Executor;
 
 class GraphQLToCsv
 {
     protected $infoResolver;
     protected $csvGenerator;
+    protected $logger;
 
-    public function generate(string $requestString, $executor, Writer $writer)
+    public function __construct(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function generate(string $requestString, Executor $executor, Writer $writer)
     {
         $response = $executor->execute([
           'query' => $requestString,
           'variables' => [],
-        ], [], null)->toArray();
+        ])->toArray();
+
+        if (!isset($response['data'])) {
+            $this->logger->error('GraphQL Query Error: ' . $response['error']);
+            $this->logger->info('Last graphQL query: ' . json_encode($response));
+        }
 
         $this->infoResolver = new InfoResolver();
         $this->csvGenerator = new CsvWriter();
