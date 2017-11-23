@@ -18,9 +18,9 @@ Scenario: API client wants to list sources of an opinion
         },
         "body": @string@,
         "link": @string@,
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
-        "votesCount": @integer@,
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "votes_count": @integer@,
         "isContribuable": @boolean@,
         "author": {
           "username": @string@,
@@ -34,8 +34,8 @@ Scenario: API client wants to list sources of an opinion
             "settings": @string@
           }
         },
-        "hasUserVoted": @boolean@,
-        "hasUserReported": @boolean@
+        "has_user_voted": @boolean@,
+        "has_user_reported": @boolean@
       },
       @...@
     ],

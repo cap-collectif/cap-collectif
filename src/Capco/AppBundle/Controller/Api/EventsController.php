@@ -59,8 +59,8 @@ class EventsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByEvent($event);
 
         return [
-            'commentsAndAnswersCount' => (int) $countWithAnswers,
-            'commentsCount' => count($paginator),
+            'comments_and_answers_count' => (int) $countWithAnswers,
+            'comments_count' => count($paginator),
             'comments' => $comments,
         ];
     }
@@ -104,7 +104,7 @@ class EventsController extends FOSRestController
             if (!$parent instanceof EventComment || $event !== $parent->getEvent()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this event');
             }
-            if (null !== $parent->getParent()) {
+            if ($parent->getParent() !== null) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }

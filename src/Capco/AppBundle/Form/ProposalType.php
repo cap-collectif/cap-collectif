@@ -63,6 +63,7 @@ class ProposalType extends AbstractType
                     ValueResponseType::class,
                     MediaResponseType::class,
                 ],
+                'type_name' => 'type',
                 'required' => false,
             ])
         ;

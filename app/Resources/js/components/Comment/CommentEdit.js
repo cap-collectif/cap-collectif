@@ -8,7 +8,7 @@ const CommentEdit = React.createClass({
 
   render() {
     const { comment } = this.props;
-    if (comment.canEdit) {
+    if (comment.can_edit) {
       return (
         <a href={comment._links.edit} className="btn btn-dark-gray btn--outline btn-sm">
           <i className="cap cap-pencil-1" />

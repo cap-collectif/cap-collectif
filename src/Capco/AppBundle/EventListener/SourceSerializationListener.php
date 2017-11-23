@@ -37,11 +37,11 @@ class SourceSerializationListener extends AbstractSerializationListener
         $user = $token ? $token->getUser() : 'anon.';
 
         $event->getVisitor()->addData(
-            'hasUserVoted', 'anon.' === $user ? false : $source->userHasVote($user)
+            'has_user_voted', $user === 'anon.' ? false : $source->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'hasUserReported', 'anon.' === $user ? false : $source->userHasReport($user)
+            'has_user_reported', $user === 'anon.' ? false : $source->userHasReport($user)
         );
     }
 }

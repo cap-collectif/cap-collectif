@@ -6,7 +6,7 @@ Object {
     "1": Object {
       "id": 1,
       "userHasVote": true,
-      "userVote": 1,
+      "user_vote": 1,
       "votes": Array [
         Object {
           "user": Object {
@@ -30,7 +30,7 @@ Object {
     "1": Object {
       "id": 1,
       "userHasVote": true,
-      "userVote": 1,
+      "user_vote": 1,
       "votes": Array [
         Object {
           "user": Object {

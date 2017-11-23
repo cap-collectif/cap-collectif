@@ -136,7 +136,7 @@ const EditElement = React.createClass({
         <ul className="element__history">
           {element.logs.map(log => {
             return log.sentences.map(sentence => {
-              return this.renderLogSentence(sentence, log.loggedAt);
+              return this.renderLogSentence(sentence, log.logged_at);
             });
           })}
         </ul>

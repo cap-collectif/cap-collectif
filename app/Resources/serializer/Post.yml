@@ -20,7 +20,6 @@ Capco\AppBundle\Entity\Post:
         createdAt:
             expose: true
             type: DateTime
-            serialized_name: createdAt
             groups: [Posts, PostDetails]
         updatedAt:
             expose: true

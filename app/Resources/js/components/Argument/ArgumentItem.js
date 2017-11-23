@@ -20,7 +20,7 @@ const ArgumentItem = React.createClass({
     return (
       <p className="excerpt opinion__date">
         <FormattedDate
-          value={moment(argument.createdAt)}
+          value={moment(argument.created_at)}
           day="numeric"
           month="long"
           year="numeric"

@@ -98,9 +98,9 @@ Capco\AppBundle\Entity\OpinionVersion:
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentForCount:
             type: integer
-            serialized_name: argumentsYesCount
+            serialized_name: arguments_yes_count
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentAgainstCount:
             type: integer
-            serialized_name: argumentsNoCount
+            serialized_name: arguments_no_count
             groups: [OpinionVersions, OpinionVersionPreviews]

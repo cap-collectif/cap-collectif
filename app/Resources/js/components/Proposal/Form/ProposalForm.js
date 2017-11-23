@@ -664,6 +664,12 @@ export const ProposalForm = React.createClass({
               {!field.required && optional}
             </span>
           );
+          const medias =
+            field.type === 'medias'
+              ? proposal.responses.filter(response => {
+                  return response.field.id === field.id;
+                })[0].medias
+              : [];
           const input = (
             <Input
               key={key}
@@ -674,6 +680,7 @@ export const ProposalForm = React.createClass({
               valueLink={this.linkState(`custom.${key}`)}
               help={field.helpText}
               errors={this.renderFormErrors(key)}
+              medias={medias}
             />
           );
           return <ProposalPrivateField show={field.private} children={input} />;

@@ -355,6 +355,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
                     component={component}
                     type="number"
                     id="proposal_form_lat_map"
+                    normalize={val => val && parseFloat(val)}
                     label={<FormattedMessage id="proposal_form.lat_map" />}
                   />
                 </Col>
@@ -364,6 +365,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
                     component={component}
                     type="number"
                     id="proposal_form_lng_map"
+                    normalize={val => val && parseFloat(val)}
                     label={<FormattedMessage id="proposal_form.lng_map" />}
                   />
                 </Col>
@@ -372,7 +374,8 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
                     name="zoomMap"
                     component={component}
                     type="select"
-                    id="proposal_form_lat_map"
+                    id="proposal_form_zoom_map"
+                    normalize={val => val && parseInt(val, 10)}
                     label={<FormattedMessage id="proposal_form.zoom" />}>
                     <FormattedMessage id="proposal_form.select.zoom">
                       {message => <option value="">{message}</option>}

@@ -19,7 +19,6 @@ Capco\UserBundle\Entity\User:
       userType:
         expose: true
         groups: [UsersInfos]
-        serialized_name: userType
     virtual_properties:
       getDisplayName:
         serialized_name: displayName

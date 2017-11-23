@@ -181,20 +181,18 @@ const ImageUpload = React.createClass({
           </Dropzone>
         </Col>
         {disablePreview && (
-          <Col xs={12} sm={12}>
-            <Row>
+          <Col xs={12} sm={12} md={12} className="image-uploader__label-info">
+            <Row style={{ paddingLeft: 15, paddingRight: 15 }}>
               {this.state.files.map(file => {
                 return (
-                  <Col md={12} className="image-uploader__label-info">
-                    <Label bsStyle="info" style={{ marginRight: '5px' }}>
-                      {file.name}{' '}
-                      <i
-                        style={{ cursor: 'pointer' }}
-                        className="glyphicon glyphicon-remove"
-                        onClick={this.removeMedia.bind(this, file)}
-                      />
-                    </Label>
-                  </Col>
+                  <Label bsStyle="info" style={{ marginRight: '5px' }}>
+                    {file.name}{' '}
+                    <i
+                      style={{ cursor: 'pointer' }}
+                      className="glyphicon glyphicon-remove"
+                      onClick={this.removeMedia.bind(this, file)}
+                    />
+                  </Label>
                 );
               })}
             </Row>
