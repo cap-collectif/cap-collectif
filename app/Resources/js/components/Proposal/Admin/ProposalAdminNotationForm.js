@@ -38,6 +38,7 @@ const formName = 'proposal-admin-evaluation';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   values.likers = values.likers.map(u => u.value);
+  values.evaluers = values.evaluers.map(u => u.value);
 
   const promises = [];
   promises.push(
@@ -46,6 +47,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         proposalId: props.proposal.id,
         estimation: values.estimation,
         likers: values.likers,
+        evaluers: values.evaluers,
       },
     }),
   );
@@ -296,22 +298,54 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
 
     return (
       <div className="box box-primary container">
-        <div className="box-header">
-          <h3 className="box-title">
-            <FormattedMessage id="proposal.admin.general" />
-          </h3>
-          <a
-            className="pull-right link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
-            <i className="fa fa-info-circle" /> Aide
-          </a>
-        </div>
         <div className="box-content box-content__notation-form">
           <form onSubmit={handleSubmit}>
             <div>
               <div className="mb-40">
+                <div className="box-header">
+                  <h3 className="box-title">
+                    <FormattedMessage id="Analystes" />
+                  </h3>
+                  <a
+                    className="pull-right link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
+                    <i className="fa fa-info-circle" /> Aide
+                  </a>
+                </div>
+                <Field
+                  name="evaluers"
+                  id="evaluers"
+                  label="Groupes"
+                  labelClassName="control-label"
+                  inputClassName="fake-inputClassName"
+                  multi
+                  placeholder="Aucun analyste"
+                  component={select}
+                  clearable={false}
+                  loadOptions={() =>
+                    Fetcher.graphql({
+                      query: `
+                        query {
+                          groups {
+                            id
+                            title
+                          }
+                        }
+                      `,
+                    }).then(response => ({
+                      options: response.data.groups.map(group => ({
+                        value: group.id,
+                        label: group.title,
+                      })),
+                    }))}
+                />
+                <div className="box-header">
+                  <h3 className="box-title">
+                    <FormattedMessage id="Questionnaire" />
+                  </h3>
+                </div>
                 <Field
                   name="estimation"
                   component={component}
@@ -401,6 +435,10 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,
+    evaluers: props.proposal.evaluers.map(u => ({
+      value: u.id,
+      label: u.title,
+    })),
     likers: props.proposal.likers.map(u => ({
       value: u.id,
       label: u.displayName,
@@ -455,6 +493,10 @@ export default createFragmentContainer(
     fragment ProposalAdminNotationForm_proposal on Proposal {
       id
       estimation
+      evaluers {
+        id
+        title
+      }
       likers {
         id
         displayName

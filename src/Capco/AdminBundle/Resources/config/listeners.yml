@@ -129,6 +129,7 @@ services:
   capco.resolvers.groups:
     class: Capco\AppBundle\GraphQL\Resolver\GroupResolver
     tags:
+        - { name: overblog_graphql.resolver, alias: "groups", method: "resolveAll" }
         - { name: overblog_graphql.resolver, alias: "group", method: "resolve" }
         - { name: overblog_graphql.resolver, alias: "query_group", method: "resolve" }
         - { name: overblog_graphql.resolver, alias: "group_users_connection", method: "resolveUsersConnection" }
