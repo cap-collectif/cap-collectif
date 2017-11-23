@@ -20,6 +20,10 @@ Query:
                 type: "[Group!]!"
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: "@=resolver('groups')"
+            proposalForms:
+                type: "[ProposalForm!]!"
+                access: "@=hasRole('ROLE_USER')"
+                resolve: "@=resolver('proposalForms')"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"

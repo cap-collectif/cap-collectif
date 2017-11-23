@@ -14,3 +14,5 @@ CollectStep:
                 type: "[Status!]!"
             voteThreshold:
                 type: "Int"
+            project:
+                type: "Project!"

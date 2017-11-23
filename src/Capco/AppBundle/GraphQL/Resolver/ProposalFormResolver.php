@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
@@ -44,9 +47,30 @@ class ProposalFormResolver implements ContainerAwareInterface
         return $districts;
     }
 
+    public function resolveProposals(ProposalForm $form, Arg $args, User $user): Connection
+    {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user) {
+            $repo = $this->container->get('capco.proposal.repository');
+            if ($args->offsetExists('affiliations')) {
+                $affiliations = $args->offsetGet('affiliations');
+                if (in_array('EVALUER', $affiliations, true)) {
+                    return $repo->getProposalsByFormAndEvaluer($form, $user);
+                }
+            }
+            throw new UserException('Not implemented');
+        });
+
+        return $paginator->auto($args, count($paginator));
+    }
+
     public function resolve(Arg $args): ProposalForm
     {
         return $this->container->get('capco.proposal_form.repository')->find($args['id']);
+    }
+
+    public function resolveAll(): array
+    {
+        return $this->container->get('capco.proposal_form.repository')->findAll();
     }
 
     public function resolveUrl(ProposalForm $proposalForm): string

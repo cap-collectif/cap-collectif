@@ -31,8 +31,6 @@ class GroupResolver implements ContainerAwareInterface
             return $repo->getUsersInGroup($group);
         });
 
-        $connection = $paginator->forward($args);
-
-        return $connection;
+        return $paginator->auto($args);
     }
 }

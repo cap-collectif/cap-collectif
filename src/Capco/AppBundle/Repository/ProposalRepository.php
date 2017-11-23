@@ -53,6 +53,25 @@ class ProposalRepository extends EntityRepository
         return $proposalsWithStep;
     }
 
+    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user): array
+    {
+        $qb = $this->createQueryBuilder('proposal')
+            ->leftJoin('proposal.evaluers', 'group')
+            ->leftJoin('group.userGroups', 'userGroup')
+            ->andWhere('proposal.proposalForm = :form')
+            ->andWhere('userGroup.user = :user')
+            ->setParameter('form', $form)
+            ->setParameter('user', $user)
+        ;
+
+        // $qb
+        //     ->setFirstResult($first)
+        //     ->setMaxResults($offset);
+        //
+        // return new Paginator($qb);
+        return $qb->getQuery()->getResult();
+    }
+
     public function countFusionsByProposalForm(ProposalForm $form)
     {
         $qb = $this->getIsEnabledQueryBuilder()
