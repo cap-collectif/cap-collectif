@@ -93,9 +93,19 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-50 days', 'now')>
   p11:
     id: '11'
-    title: Budget avec vote limitté
+    title: Budget avec vote limité
     projectType: '@projectType4'
     Author: '@user4'
     isEnabled: true
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p12:
+    id: '12'
+    title: Projet sans étapes participatives
+    projectType: '@projectType2'
+    Author: '@user4'
+    Cover: '@MediaProject4'
+    isEnabled: true
+    themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
