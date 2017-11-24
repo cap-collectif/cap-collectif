@@ -19,7 +19,7 @@ export class ProjectsList extends React.Component<Props> {
         </div>
       );
     }
-    return <p>Aucun projet </p>;
+    return <p>Aucun projet</p>;
   }
 }
 

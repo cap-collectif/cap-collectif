@@ -68,3 +68,10 @@ Capco\AppBundle\Entity\ProposalForm:
     step: "@collectstep7"
     notificationsConfiguration: "@proposalFormNotificationConfiguration7"
     reference: 7
+  proposalform8:
+    id: proposalForm8
+    title: Formulaire de la collecte 8
+    description: <text(100)>
+    step: "@collectstep8"
+    notificationsConfiguration: "@proposalFormNotificationConfiguration8"
+    reference: 8

@@ -22,8 +22,8 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         id: cstep4
         title: Projet
         isEnabled: true
-        startAt: <dateTimeBetween('-40 days', 'now')>
-        endAt: <dateTimeBetween('now', '+10 days')>
+        startAt: <dateTimeBetween('+10 days', '+20 days')>
+        endAt: <dateTimeBetween('+40 days', '+80 days')>
     cstep5:
         id: cstep5
         title: Elaboration de la Loi

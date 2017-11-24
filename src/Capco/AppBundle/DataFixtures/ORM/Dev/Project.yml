@@ -109,3 +109,12 @@ Capco\AppBundle\Entity\Project:
     themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p13:
+    id: '13'
+    title: Projet avec une étape de participation en continue
+    projectType: '@projectType4'
+    Author: '@user3'
+    isEnabled: true
+    themes: ['@theme1']
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>

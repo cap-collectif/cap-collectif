@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor3:
         keyname: color.header.bg
         category: settings.appearance
-        value: '#16a085'
+        value: '#29434e'
         position: 3
     SiteColor41:
         keyname: color.header.title
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor42:
         keyname: color.home.bg
         category: pages.homepage
-        value: '#16a085'
+        value: '#546E7A'
         position: 1
     SiteColor43:
         keyname: color.home.title
@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor5:
         keyname: color.header2.bg
         category: pages.homepage
-        value: '#1abc9c'
+        value: '#546E7A'
         position: 5
     SiteColor6:
         keyname: color.header2.text
@@ -52,7 +52,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor8:
         keyname: color.btn.bg
         category: pages.homepage
-        value: '#1abc9c'
+        value: '#00acc1'
         position: 8
     SiteColor9:
         keyname: color.btn.text
@@ -66,12 +66,12 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor11:
         keyname: color.h2
         category: settings.appearance
-        value: '#16a085'
+        value: '#5ECDD4'
         position: 11
     SiteColor12:
         keyname: color.h3
         category: settings.appearance
-        value: '#1abc9c'
+        value: '#29434e'
         position: 12
     SiteColor13:
         keyname: color.h4
@@ -88,7 +88,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor16:
         keyname: color.btn.primary.bg
         category: settings.appearance
-        value: '#1abc9c'
+        value: '#546E7A'
         position: 16
     SiteColor17:
         keyname: color.btn.primary.text
@@ -103,17 +103,17 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor172:
         keyname: color.btn.ghost.base
         category: settings.appearance
-        value: '#1abc9c'
+        value: '#546E7A'
         position: 17
     SiteColor18:
         keyname: color.link.default
         category: settings.appearance
-        value: '#1abc9c'
+        value: '#00acc1'
         position: 18
     SiteColor19:
         keyname: color.link.hover
         category: settings.appearance
-        value: '#16a085'
+        value: '#007c91'
         position: 19
     SiteColor20:
         keyname: color.footer.text
@@ -123,7 +123,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor21:
         keyname: color.footer.bg
         category: pages.footer
-        value: '#1abc9c'
+        value: '#29434e'
         position: 21
     SiteColor22:
         keyname: color.footer2.text
@@ -133,7 +133,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor23:
         keyname: color.footer2.bg
         category: pages.footer
-        value: '#16a085'
+        value: '#546E7A'
         position: 23
     SiteColor24:
         keyname: color.section.bg
@@ -149,27 +149,27 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor26:
         keyname: color.main_menu.text
         category: settings.appearance
-        value: '#ffffff'
+        value: '#000000'
         position: 24
     SiteColor27:
         keyname: color.main_menu.text_active
         category: settings.appearance
-        value: '#000000'
+        value: '#ffffff'
         position: 25
     SiteColor28:
         keyname: color.main_menu.text_hover
         category: settings.appearance
-        value: '#1183F5'
+        value: '#ffffff'
         position: 25
     SiteColor29:
         keyname: color.main_menu.bg
         category: settings.appearance
-        value: '#52a2f2'
+        value: '#ffffff'
         position: 26
     SiteColor30:
         keyname: color.main_menu.bg_active
         category: settings.appearance
-        value: '#B1D2F2'
+        value: '#00ACC1'
         position: 27
 
     SiteColor31:
@@ -181,7 +181,7 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor32:
         keyname: color.user.vip.bg
         category: settings.appearance
-        value: '#b1D2F2'
+        value: '#F7F7F7'
         position: 28
 
     SiteColor33:

@@ -7,8 +7,6 @@
     padding: 0;
 
     &:hover {
-        background-color: $light-gray;
-
         .smart-fade:after {
             background: $light-gray;
         }
@@ -31,8 +29,8 @@
             @include border-top-radius(3px);
             overflow: hidden;
             width: 100%;
-            height: 25px;
-            line-height: 25px;
+            height: 24px;
+            line-height: 24px;
             color: #FFFFFF;
             text-align: center;
         }
