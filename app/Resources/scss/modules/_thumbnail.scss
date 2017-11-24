@@ -58,10 +58,6 @@
             height: 15px;
         }
 
-        //&__counters {
-        //    margin-top: 5px;
-        //}
-
         &__body {
             flex: 1 0 auto;
             display: flex;
@@ -88,7 +84,6 @@
         width: 100%;
 
         .progress {
-            // @include progress-bar-variant($gray-primary);
             margin-bottom: 15px;
             background-color: $light-gray;
 

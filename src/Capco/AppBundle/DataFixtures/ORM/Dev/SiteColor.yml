@@ -187,12 +187,12 @@ Capco\AppBundle\Entity\SiteColor:
     SiteColor33:
         keyname: color.votes_bar.bg
         category: settings.appearance
-        value: '#F6F6F6'
+        value: '#29434e'
         position: 29
     SiteColor34:
         keyname: color.votes_bar.text
         category: settings.appearance
-        value: '#777777'
+        value: '#ffffff'
         position: 30
     SiteColor35:
         keyname: color.votes_bar.border
