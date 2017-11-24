@@ -101,7 +101,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
     const defaultDistrictStyle = {
       color: '#ff0000',
       weight: 1,
-      opacity: 0.65,
+      opacity: 0.3,
     };
 
     const markersList =

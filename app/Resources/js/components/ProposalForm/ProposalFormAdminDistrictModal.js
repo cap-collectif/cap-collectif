@@ -40,8 +40,8 @@ export const ProposalFormAdminDistrictModal = React.createClass({
             component={component}
           />
           <Field
-            label="Zone"
-            help="Au format GeoJSON"
+            label={<FormattedMessage id="admin.fields.proposal.map.zone" />}
+            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatGeojson" />}
             id={`${member}.geojson`}
             name={`${member}.geojson`}
             type="textarea"
@@ -56,7 +56,7 @@ export const ProposalFormAdminDistrictModal = React.createClass({
           /> */}
           <p>Options</p>
           <Field
-            children="Afficher la zone sur la carte"
+            children={<FormattedMessage id="admin.fields.proposal.map.displayZones" />}
             id={`${member}.displayedOnMap`}
             name={`${member}.displayedOnMap`}
             type="checkbox"
@@ -64,8 +64,8 @@ export const ProposalFormAdminDistrictModal = React.createClass({
             component={component}
           />
           <Field
-            label="Style"
-            help="Au format CSS"
+            label={<FormattedMessage id="admin.fields.proposal.map.style" />}
+            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatCSS" />}
             id={`${member}.geojsonStyle`}
             name={`${member}.geojsonStyle`}
             type="textarea"
