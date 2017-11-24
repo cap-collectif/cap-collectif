@@ -28,7 +28,7 @@ Scenario: Project can be filtered by theme
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait 1 seconds
-  Then I should see 10 ".thumbnail--custom" elements
+  Then I should see 12 ".thumbnail--custom" elements
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
   Then I should see 7 ".thumbnail--custom" elements
@@ -59,7 +59,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then I should see 3 ".thumbnail--custom" elements
+  Then I should see 4 ".thumbnail--custom" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Croissance, innovation, disruption"

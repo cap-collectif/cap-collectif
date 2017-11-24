@@ -44,19 +44,19 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (project.hasParticipativeStep && step.status === 'open') {
       return (
-        <a href={step._links.show}>
+        <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     } else if (!project.hasParticipativeStep && step.status === 'open') {
       return (
-        <a href={step._links.show}>
+        <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     } else if (step.status === 'closed') {
       return (
-        <a href={step._links.show}>
+        <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeResult" />
         </a>
       );
