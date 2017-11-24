@@ -63,6 +63,14 @@ export const ProposalFormAdminDistrictModal = React.createClass({
             normalize={val => !!val}
             component={component}
           />
+          <Field
+            label="Style"
+            help="Au format CSS"
+            id={`${member}.geojsonStyle`}
+            name={`${member}.geojsonStyle`}
+            type="textarea"
+            component={component}
+          />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
