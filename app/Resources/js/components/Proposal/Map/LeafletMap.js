@@ -22,14 +22,9 @@ type ComponentState = {
   loaded: boolean,
 };
 
-type GeoJson = {
-  style: string,
-  district: string,
-};
-
 type Props = {
   markers: ?Object,
-  geoJsons?: Array<GeoJson>,
+  geoJsons?: Array<string>,
   defaultMapOptions: MapOptions,
   visible: boolean,
   stepId: string,
@@ -98,12 +93,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
     const token = config.mapboxApiKey;
 
-    const defaultDistrictStyle = {
-      color: '#ff0000',
-      weight: 1,
-      opacity: 0.3,
-    };
-
     const markersList =
       markers && markers.length > 0
         ? markers.map(mark => ({
@@ -143,14 +132,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
           }}
           markers={markersList}
         />
-        {geoJsons &&
-          geoJsons.map((geoJson, key) => (
-            <GeoJSON
-              style={geoJson.style ? JSON.parse(geoJson.style) : defaultDistrictStyle}
-              key={key}
-              data={geoJson.district}
-            />
-          ))}
+        {geoJsons && geoJsons.map((json, key) => <GeoJSON key={key} data={json} />)}
         <LocateControl />
       </Map>
     );

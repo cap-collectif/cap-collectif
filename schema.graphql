@@ -313,8 +313,6 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
-scalar CssJSON
-
 scalar DateTime
 
 input DeleteGroupInput {
@@ -358,14 +356,12 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
-  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
-  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 

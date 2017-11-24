@@ -35,11 +35,6 @@ class District
     private $geojson;
 
     /**
-     * @ORM\Column(name="geojson_style", type="string", nullable=true)
-     */
-    private $geojsonStyle;
-
-    /**
      * @ORM\Column(name="display_on_map", nullable=false, type="boolean")
      */
     private $displayedOnMap = true;
@@ -86,18 +81,6 @@ class District
     public function setGeojson(string $geojson = null): self
     {
         $this->geojson = $geojson;
-
-        return $this;
-    }
-
-    public function getGeojsonStyle()
-    {
-        return $this->geojsonStyle;
-    }
-
-    public function setGeojsonStyle(string $geojsonStyle = null): self
-    {
-        $this->geojsonStyle = $geojsonStyle;
 
         return $this;
     }
