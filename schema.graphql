@@ -356,12 +356,14 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
+  geojsonStyle: String
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
+  geojsonStyle: String
   displayedOnMap: Boolean!
 }
 
