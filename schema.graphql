@@ -446,7 +446,12 @@ type District {
 input DistrictInput {
   name: String!
   geojson: GeoJSON
+<<<<<<< HEAD
   displayedOnMap: Boolean = false
+=======
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+>>>>>>> Add CssJSON type in DistrictInput.types
 }
 
 # Ordering options for districts.
