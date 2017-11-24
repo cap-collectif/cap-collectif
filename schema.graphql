@@ -365,7 +365,7 @@ type District {
 input DistrictInput {
   name: String!
   geojson: GeoJSON
-  geojsonStyle: String
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 

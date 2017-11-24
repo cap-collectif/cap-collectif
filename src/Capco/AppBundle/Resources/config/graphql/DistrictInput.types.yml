@@ -7,6 +7,6 @@ DistrictInput:
             geojson:
                 type: "GeoJSON"
             geojsonStyle:
-                type: "String"
+                type: "CssJSON"
             displayedOnMap:
                 type: "Boolean!"
