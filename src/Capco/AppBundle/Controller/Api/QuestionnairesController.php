@@ -37,7 +37,10 @@ class QuestionnairesController extends FOSRestController
      */
     public function getQuestionnairesStatsAction()
     {
-        $questionnaires = $this->get('capco.questionnaire.repository')->findAll();
+        $questionnaires = $this->getDoctrine()->getManager()
+             ->getRepository('CapcoAppBundle:Questionnaire')
+             ->findAll()
+        ;
         $results = [];
         foreach ($questionnaires as $questionnaire) {
             $questions = $questionnaire->getRealQuestions();
@@ -45,7 +48,7 @@ class QuestionnairesController extends FOSRestController
             foreach ($questions as $question) {
                 $scores = [];
                 $type = $question->getInputType();
-                if ('ranking' === $type) {
+                if ($type === 'ranking') {
                     $questionChoices = $question->getQuestionChoices();
                     $choices = $questionChoices->map(function ($choice) {
                         return $choice->getTitle();
@@ -55,8 +58,7 @@ class QuestionnairesController extends FOSRestController
                     }, $choices));
                     foreach ($question->getResponses() as $response) {
                         $reply = $response->getReply();
-                        $responseValue = $response->getValue();
-                        if ($reply && $responseValue && $reply->isEnabled() && !$reply->isExpired()) {
+                        if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
                             // The score is the maximum number of choices for the question
                             // 4 replies gives 4 3 2 1 points
                             // 2 replies with maximum 4 gives 4 3 points
@@ -64,14 +66,14 @@ class QuestionnairesController extends FOSRestController
                           ? $question->getValidationRule()->getNumber()
                           : $question->getQuestionChoices()->count()
                         ;
-                            foreach ($responseValue['labels'] as $label) {
+                            foreach ($response->getValue()['labels'] as $label) {
                                 $scores[$label] += $score;
                                 --$score;
                             }
                         }
                     }
                 }
-                if ('radio' === $type || 'select' === $type || 'checkbox' === $type) {
+                if ($type === 'radio' || $type === 'select' || $type === 'checkbox') {
                     $choices = $question->getQuestionChoices()->map(function ($choice) {
                         return $choice->getTitle();
                     })->toArray();
@@ -80,13 +82,12 @@ class QuestionnairesController extends FOSRestController
                     }, $choices));
                     foreach ($question->getResponses() as $response) {
                         $reply = $response->getReply();
-                        $responseValue = $response->getValue();
-                        if ($reply && $responseValue && $reply->isEnabled() && !$reply->isExpired()) {
-                            if (\is_string($responseValue)) {
-                                ++$scores[$responseValue];
+                        if ($reply && $reply->isEnabled() && !$reply->isExpired()) {
+                            if (is_string($response->getValue())) {
+                                $scores[$response->getValue()] += 1;
                             } else {
-                                foreach ($responseValue['labels'] as $label) {
-                                    ++$scores[$label];
+                                foreach ($response->getValue()['labels'] as $label) {
+                                    $scores[$label] += 1;
                                 }
                             }
                         }
@@ -97,7 +98,7 @@ class QuestionnairesController extends FOSRestController
                   'question_id' => $question->getId(),
                   'question_type' => $question->getInputType(),
                 ];
-                if (\count($scores) > 0) {
+                if (count($scores) > 0) {
                     $data['scores'] = $scores;
                 }
                 $questionsResults[] = $data;
