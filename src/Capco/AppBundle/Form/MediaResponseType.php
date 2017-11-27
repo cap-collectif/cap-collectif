@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -27,7 +28,7 @@ class MediaResponseType extends AbstractType
         $builder->add('question', HiddenType::class);
         $builder->get('question')->addModelTransformer($this->transformer);
 
-        $builder->add('type', HiddenType::class, [
+        $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
             'mapped' => false,
         ]);

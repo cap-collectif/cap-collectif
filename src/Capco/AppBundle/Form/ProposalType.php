@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
@@ -63,7 +64,7 @@ class ProposalType extends AbstractType
                     ValueResponseType::class,
                     MediaResponseType::class,
                 ],
-                'type_name' => 'type',
+                'type_name' => AbstractResponse::TYPE_FIELD_NAME,
                 'required' => false,
             ])
         ;

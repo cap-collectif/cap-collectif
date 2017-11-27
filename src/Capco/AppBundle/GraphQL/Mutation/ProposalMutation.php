@@ -244,7 +244,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $values = $input->getRawArguments();
         $values['responses'] = array_map(function ($value) {
-            $value['type'] = 'value_response';
+            $value[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
 
             return $value;
         }, $values['responses']);
@@ -308,7 +308,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         foreach ($values['responses'] as $valueResponse) {
-            $valueResponse['type'] = 'value_response';
+            $valueResponse[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
         }
 
         // Now we can submit the form without anything related to file uploads

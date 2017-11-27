@@ -16,7 +16,7 @@ class ResponseMediaManager
     protected $entityManager;
     protected $proposal;
     protected $mediaManager;
-    protected $typeField = 'type';
+    protected $typeField = AbstractResponse::TYPE_FIELD_NAME;
 
     public function __construct(EntityManager $entityManager, MediaManager $mediaManager)
     {

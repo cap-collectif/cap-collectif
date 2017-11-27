@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -29,7 +30,7 @@ class ValueResponseType extends AbstractType
 
         $builder->get('question')->addModelTransformer($this->transformer);
 
-        $builder->add('type', HiddenType::class, [
+        $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
             'mapped' => false,
         ]);
