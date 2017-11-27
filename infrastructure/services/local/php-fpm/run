@@ -38,7 +38,8 @@ while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
   echo "Waiting for rabbitmq to boot..."
 done
 
-echo "Updating rabbitmq vhost to match schema..."
-su capco -c "php /var/www/bin/rabbit vhost:mapping:create --password=guest /var/www/app/config/rabbitmq.yml"
+
+#echo "Updating rabbitmq vhost to match schema..."
+#su capco -c "php /var/www/bin/rabbit vhost:mapping:create --password=guest /var/www/app/config/rabbitmq.yml"
 
 exec /usr/sbin/php-fpm7.0 -y /etc/service/php-fpm/fpm.conf -O
