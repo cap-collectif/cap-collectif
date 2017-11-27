@@ -35,9 +35,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group }: Props) => {
     },
   };
 
-  return AddUsersInGroupMutation.commit(variables).then(() => {
-    window.location.reload();
-  });
+  return AddUsersInGroupMutation.commit(variables);
 };
 
 export class GroupAdminAddUsersForm extends React.Component<Props> {
