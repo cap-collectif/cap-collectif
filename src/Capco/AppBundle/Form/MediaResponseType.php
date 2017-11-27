@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
@@ -22,8 +22,8 @@ class MediaResponseType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->transformer->setEntityClass(MediaQuestion::class);
-        $this->transformer->setEntityRepository('CapcoAppBundle:Questions\MediaQuestion');
+        $this->transformer->setEntityClass(AbstractQuestion::class);
+        $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
 
         $builder->add('question', HiddenType::class);
         $builder->get('question')->addModelTransformer($this->transformer);

@@ -365,7 +365,7 @@ class ProposalsController extends FOSRestController
         if ('false' === $request->request->get('media')) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
-                $proposal->setMedia(null);
+                $proposal->setMedia();
             }
             $request->files->remove('delete_media');
         } elseif ($uploadedMedia = $request->files->get('media')) {
@@ -390,8 +390,6 @@ class ProposalsController extends FOSRestController
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, ArrayHelper::unflatten($request->files->all()));
         }
-
-        dump($unflattenRequest);
 
         $form->submit($unflattenRequest, false);
 

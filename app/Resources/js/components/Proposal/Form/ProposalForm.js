@@ -112,7 +112,7 @@ export const ProposalForm = React.createClass({
     const { form } = this.props;
     form.fields.map(field => {
       const ref = `custom-${field.id}`;
-      if (field.required) {
+      if (field.required && field.type !== 'medias') {
         this.formValidationRules[ref] = {
           notBlank: { message: 'proposal.constraints.field_mandatory' },
         };
