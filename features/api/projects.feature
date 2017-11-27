@@ -130,7 +130,7 @@ Scenario: API client wants to get all projects sorted by popularity
     ],
     "page": 1,
     "pages": 1,
-    "count": 3
+    "count": 5
   }
   """
 

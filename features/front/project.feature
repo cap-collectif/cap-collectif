@@ -28,7 +28,7 @@ Scenario: Project can be filtered by theme
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait 1 seconds
-  Then I should see 12 ".thumbnail--custom" elements
+  Then I should see 13 ".thumbnail--custom" elements
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
   Then I should see 7 ".thumbnail--custom" elements
@@ -59,7 +59,7 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then I should see 4 ".thumbnail--custom" elements
+  Then I should see 5 ".thumbnail--custom" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Croissance, innovation, disruption"
@@ -115,18 +115,18 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":169}'
+  Then I should see 'project.show.meta.total_count {"%count%":164}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":34}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":32}'
   #And I should see 'project.show.meta.argumentsCount {"%count%":95}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
-  
+
 Scenario: Project header should display correct number of participants
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "23 project.show.meta.contributors_count"
+  Then I should see "20 project.show.meta.contributors_count"
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:

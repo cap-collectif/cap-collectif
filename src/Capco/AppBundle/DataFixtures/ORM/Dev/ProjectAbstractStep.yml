@@ -169,3 +169,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: "@collectstep8"
     project: "@p13"
     position: 1
+  pas36:
+    id: pas36
+    step: "@pstep4"
+    project: "@p14"
+    position: 1

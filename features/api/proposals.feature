@@ -958,11 +958,11 @@ Scenario: Logged in API client wants to add a proposal with documents and illust
   Given I am logged in to api as user
   Given feature themes is enabled
   Given feature districts is enabled
-  And I should have 24 files in media folder
+  And I should have 25 files in media folder
   And I should have 0 files in source media folder
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals" with a document and an illustration
   Then the JSON response status code should be 201
-  And I should have 25 files in media folder
+  And I should have 26 files in media folder
   And I should have 1 files in source media folder
 
 @database
