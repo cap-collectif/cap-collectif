@@ -63,7 +63,7 @@ class ApplicationContext extends UserContext
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
             $jobs[] = new Process('rm -rf web/media/*');
-            $jobs[] = new Process('php -d memory_limit=-1 bin/console capco:reinit --force');
+            $jobs[] = new Process('php -d memory_limit=-1 bin/console capco:reinit --force --env=test');
         }
         foreach ($jobs as $job) {
             $job->mustRun();

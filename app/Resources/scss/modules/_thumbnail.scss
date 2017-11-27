@@ -7,59 +7,72 @@
     padding: 0;
 
     &:hover {
-        background-color: $light-gray;
-
         .smart-fade:after {
             background: $light-gray;
         }
     }
 
-    .project__preview__cover {
-        overflow: hidden;
-        width: 100%;
-        height: 175px;
-
-        img {
+    .project__preview {
+        &__cover {
+            overflow: hidden;
             width: 100%;
-            object-fit: cover;
-            height: 100%;
+            height: 175px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
         }
-    }
 
-    .project__preview__type {
-        overflow: hidden;
-        width: 100%;
-        height: 30px;
-        line-height: 30px;
-        color: #FFFFFF;
-        text-align: center;
-    }
+        &__type {
+            @include border-top-radius(3px);
+            overflow: hidden;
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+            color: #FFFFFF;
+            text-align: center;
+        }
 
-    .project__preview__themes {
-        overflow: hidden;
+        &__themes {
+            overflow: hidden;
 
-        &:after {
+            &:after {
+                height: 15px;
+            }
+        }
+
+        &__title {
+            overflow: hidden;
+            height: 75px;
+            margin-top: 10px;
+
+            &:after {
+                height: 25px;
+            }
+        }
+
+        &__author {
+            overflow: hidden;
             height: 15px;
         }
-    }
 
-    .project__preview__title {
-        overflow: hidden;
-        height: 75px;
-        margin-top: 10px;
+        &__body {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
 
-        &:after {
-            height: 25px;
+            &__infos {
+                flex: 1 0 auto;
+                margin-bottom: 15px;
+            }
         }
-    }
 
-    .project__preview__author {
-        overflow: hidden;
-        height: 15px;
-    }
-
-    .progress {
-        @include progress-bar-variant($gray-primary);
+        &__actions a {
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
     }
 
     .progress-bar--custom {
@@ -69,22 +82,19 @@
 
     .thumbnail__steps-bar {
         width: 100%;
-        height: 25px;
 
-        .thumbnail__steps-bar__percentage {
-            position: absolute;
-            left: 45%;
-            color: #ebebeb;
-        }
+        .progress {
+            margin-bottom: 15px;
+            background-color: $light-gray;
 
-        .thumbnail__steps-bar__item {
-            display: inline-block;
-            height: 100%;
-            border-left: 1px solid #f6f6f6;
-            background-color: $brand-success;
+            &_future-step .progress-bar {
+                background-color: $light-gray;
+                color: $dark-gray;
+                @include box-shadow(inset 0 1px 2px rgba($black, 0.1));
+            }
 
-            &:first-child {
-                border-left: 0;
+            &_closed-step .progress-bar {
+                background-color: $dark-gray;
             }
         }
 
@@ -136,24 +146,15 @@
 .project__preview {
     display: flex;
     flex-wrap: wrap;
+    font-size: 14px;
 
     & > div, .thumbnail--custom {
+        @include border-radius(4px);
         display: flex;
         flex-direction: column;
     }
 
     .thumbnail--custom {
         flex: 1 0 auto;
-    }
-
-    .project__preview__body {
-        flex: 1 0 auto;
-        display: flex;
-        flex-direction: column;
-
-        &__infos {
-            flex: 1 0 auto;
-            margin-bottom: 15px;
-        }
     }
 }

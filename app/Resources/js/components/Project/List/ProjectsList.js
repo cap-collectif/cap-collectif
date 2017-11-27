@@ -7,20 +7,6 @@ type Props = {
 };
 
 export class ProjectsList extends React.Component<Props> {
-  hasNotParticipativeSteps() {
-    const { projects } = this.props;
-
-    const hasNotParticipativeSteps = projects.filter(
-      project => project.hasParticipativeStep === false,
-    );
-
-    if (hasNotParticipativeSteps.length === projects.length) {
-      return true;
-    }
-
-    return false;
-  }
-
   render() {
     const { projects } = this.props;
 
@@ -28,13 +14,7 @@ export class ProjectsList extends React.Component<Props> {
       return (
         <div className="project__preview">
           {projects.map((projectDetail, index) => {
-            return (
-              <ProjectPreview
-                key={index}
-                project={projectDetail}
-                hasNotParticipativeSteps={this.hasNotParticipativeSteps()}
-              />
-            );
+            return <ProjectPreview key={index} project={projectDetail} />;
           })}
         </div>
       );

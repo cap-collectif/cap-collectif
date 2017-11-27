@@ -5,7 +5,6 @@ exports[`<ProjectsList /> should render correctly 1`] = `
   className="project__preview"
 >
   <ProjectPreview
-    hasNotParticipativeSteps={false}
     project={
       Object {
         "hasParticipativeStep": false,
@@ -14,7 +13,6 @@ exports[`<ProjectsList /> should render correctly 1`] = `
     }
   />
   <ProjectPreview
-    hasNotParticipativeSteps={false}
     project={
       Object {
         "hasParticipativeStep": true,

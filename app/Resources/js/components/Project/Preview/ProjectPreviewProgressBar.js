@@ -1,46 +1,73 @@
 // @flow
-import React, { PropTypes } from 'react';
-import ProjectPreviewProgressBarItem from './ProjectPreviewProgressBarItem';
+import * as React from 'react';
+import { ProgressBar } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
-const ProjectPreviewProgressBar = React.createClass({
-  propTypes: {
-    project: PropTypes.object.isRequired,
-  },
+type Props = {
+  project: Object,
+  actualStep: Object,
+};
 
-  getCompletedStepsNb() {
-    const { project } = this.props;
-    const completedSteps = project.steps.filter(step => {
-      return step.status === 'closed';
-    });
-    return completedSteps.length;
-  },
+export class ProjectPreviewProgressBar extends React.Component<Props> {
+  getStyle = (stepStatus: string) => {
+    if (stepStatus === 'open') {
+      return 'success';
+    }
+  };
 
-  getCompletedStepsPercentage() {
-    const { project } = this.props;
-    const completedStepsNb = this.getCompletedStepsNb();
-    const total = project.steps.length;
-    const percentage = completedStepsNb > 0 && total > 0 ? completedStepsNb / total * 100 : 0;
-    return Math.round(percentage);
-  },
+  getClass = (stepStatus: string) => {
+    if (stepStatus === 'future') {
+      return 'progress_future-step';
+    }
+    if (stepStatus === 'closed') {
+      return 'progress_closed-step';
+    }
+  };
+
+  getLabel = (step: Object) => {
+    if (step.timeless === true) {
+      return <FormattedMessage id="step.timeless" />;
+    }
+    if (step.status === 'open') {
+      return <FormattedMessage id="step.status.open" />;
+    }
+    if (step.status === 'future') {
+      return <FormattedMessage id="step.status.future" />;
+    }
+    if (step.status === 'closed') {
+      return <FormattedMessage id="step.status.closed" />;
+    }
+  };
+
+  getWidth = (step: Object) => {
+    if (step.status === 'closed' || step.status === 'future' || step.timeless === true) {
+      return 100;
+    }
+    if (step.status === 'open') {
+      return 50;
+    }
+
+    return 0;
+  };
 
   render() {
-    const { project } = this.props;
+    const { project, actualStep } = this.props;
     const nbSteps = project.steps.length;
+
     if (nbSteps > 0) {
-      const width = `${100 / nbSteps}%`;
       return (
         <div className="thumbnail__steps-bar">
-          {project.steps.sort((a, b) => a.position - b.position).map((step, index) => {
-            return <ProjectPreviewProgressBarItem key={index} step={step} style={{ width }} />;
-          })}
-          <span className="thumbnail__steps-bar__percentage">
-            {`${this.getCompletedStepsPercentage()}%`}
-          </span>
+          <ProgressBar
+            className={this.getClass(actualStep.status)}
+            bsStyle={this.getStyle(actualStep.status)}
+            now={this.getWidth(actualStep)}
+            label={this.getLabel(actualStep)}
+          />
         </div>
       );
     }
     return null;
-  },
-});
+  }
+}
 
 export default ProjectPreviewProgressBar;

@@ -126,7 +126,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 4
   pas27:
     id: pas27
-    step: @pstep2
+    step: '@pstep2'
     project: '@p8'
     position: 1
   pas28:
@@ -159,3 +159,18 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: "@selectionstep8"
     project: "@p11"
     position: 2
+  pas34:
+    id: pas34
+    step: "@pstep3"
+    project: "@p12"
+    position: 1
+  pas35:
+    id: pas35
+    step: "@collectstep8"
+    project: "@p13"
+    position: 1
+  pas36:
+    id: pas36
+    step: "@pstep4"
+    project: "@p14"
+    position: 1

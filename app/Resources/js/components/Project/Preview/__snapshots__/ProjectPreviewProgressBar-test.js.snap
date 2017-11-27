@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for closed step 1`] = `
+<div
+  className="thumbnail__steps-bar"
+>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    className="progress_closed-step"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="step.status.closed"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={100}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
+
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for future step 1`] = `
+<div
+  className="thumbnail__steps-bar"
+>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    className="progress_future-step"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="step.status.future"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={100}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
+
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for open & timeless step 1`] = `
+<div
+  className="thumbnail__steps-bar"
+>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="step.timeless"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={100}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
+
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for open step 1`] = `
+<div
+  className="thumbnail__steps-bar"
+>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="step.status.open"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={50}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
