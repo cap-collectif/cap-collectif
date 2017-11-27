@@ -665,7 +665,7 @@ export const ProposalForm = React.createClass({
             </span>
           );
           const medias =
-            field.type === 'medias'
+            field.type === 'medias' && proposal.responses.length > 0
               ? proposal.responses.filter(response => {
                   return response.field.id === field.id;
                 })[0].medias
