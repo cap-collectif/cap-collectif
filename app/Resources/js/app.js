@@ -1,9 +1,5 @@
-// Sometimes an iframe import babel-polyfill (eg: typeform)
-// This trick avoid multiple babel-polyfill loaded
-if (!global._babelPolyfill) {
-  require('babel-polyfill');
-}
-require('./registration');
+import 'babel-polyfill';
+import './registration';
 
 require('fancybox')($);
 
