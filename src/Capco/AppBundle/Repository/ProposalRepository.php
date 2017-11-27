@@ -53,23 +53,24 @@ class ProposalRepository extends EntityRepository
         return $proposalsWithStep;
     }
 
-    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user): array
+    public function countProposalsByFormAndEvaluer(ProposalForm $form, User $user): int
     {
-        $qb = $this->createQueryBuilder('proposal')
-            ->leftJoin('proposal.evaluers', 'group')
-            ->leftJoin('group.userGroups', 'userGroup')
-            ->andWhere('proposal.proposalForm = :form')
-            ->andWhere('userGroup.user = :user')
-            ->setParameter('form', $form)
-            ->setParameter('user', $user)
+        return $this->qbProposalsByFormAndEvaluer($form, $user)
+                  ->select('COUNT(proposal.id)')
+                  ->getQuery()
+                  ->getSingleScalarResult()
+        ;
+    }
+
+    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, int $first = 0, int $offset = 100): Paginator
+    {
+        $qb = $this
+            ->qbProposalsByFormAndEvaluer($form, $user)
+            ->setFirstResult($first)
+            ->setMaxResults($offset)
         ;
 
-        // $qb
-        //     ->setFirstResult($first)
-        //     ->setMaxResults($offset);
-        //
-        // return new Paginator($qb);
-        return $qb->getQuery()->getResult();
+        return new Paginator($qb);
     }
 
     public function countFusionsByProposalForm(ProposalForm $form)
@@ -432,5 +433,17 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.isTrashed = false')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.enabled = true');
+    }
+
+    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user)
+    {
+        return $this->createQueryBuilder('proposal')
+                ->leftJoin('proposal.evaluers', 'group')
+                ->leftJoin('group.userGroups', 'userGroup')
+                ->andWhere('proposal.proposalForm = :form')
+                ->andWhere('userGroup.user = :user')
+                ->setParameter('form', $form)
+                ->setParameter('user', $user)
+      ;
     }
 }

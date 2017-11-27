@@ -59,14 +59,19 @@ const NavbarRight = React.createClass({
                 {<FormattedMessage id="navbar.profile" />}
               </MenuItem>
             )}
+            {user.isEvaluer && (
+              <MenuItem key={3.3} eventKey={3.3} href="/evaluations">
+                <FormattedMessage id="evaluations.index.page_title" />
+              </MenuItem>
+            )}
             <MenuItem
-              key={3.3}
-              eventKey={3.3}
+              key={3.4}
+              eventKey={3.4}
               href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
               {<FormattedMessage id="navbar.user_settings" />}
             </MenuItem>
-            <MenuItem key={3.4} divider />
-            <MenuItem key={3.5} eventKey={3.5} id="logout-button" onClick={this.logout}>
+            <MenuItem key={3.5} divider />
+            <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
               {<FormattedMessage id="global.logout" />}
             </MenuItem>
           </NavDropdown>

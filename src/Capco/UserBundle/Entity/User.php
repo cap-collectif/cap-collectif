@@ -1293,6 +1293,17 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->hasRole('ROLE_ADMIN') || $this->hasRole('ROLE_SUPER_ADMIN');
     }
 
+    public function isEvaluer(): bool
+    {
+        foreach ($this->userGroups as $userGroup) {
+            if ($userGroup->getGroup()->isEvaluating()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isProfilePageIndexed(): bool
     {
         return !$this->profilePageIndexed;

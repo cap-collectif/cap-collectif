@@ -43,6 +43,9 @@ Proposal:
             deletedAt:
                 type: "DateTime"
                 description: "The delete date."
+            updatedAt:
+                type: "DateTime"
+                description: "The updated date."
             publicationStatus:
                 type: "PublicationStatus!"
                 description: "The publication status."

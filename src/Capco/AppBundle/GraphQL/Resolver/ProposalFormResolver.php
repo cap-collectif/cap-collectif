@@ -49,18 +49,18 @@ class ProposalFormResolver implements ContainerAwareInterface
 
     public function resolveProposals(ProposalForm $form, Arg $args, User $user): Connection
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user) {
-            $repo = $this->container->get('capco.proposal.repository');
+        $repo = $this->container->get('capco.proposal.repository');
+        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user) {
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
                 if (in_array('EVALUER', $affiliations, true)) {
-                    return $repo->getProposalsByFormAndEvaluer($form, $user);
+                    return $repo->getProposalsByFormAndEvaluer($form, $user)->getIterator()->getArrayCopy();
                 }
             }
             throw new UserException('Not implemented');
         });
 
-        return $paginator->auto($args, count($paginator));
+        return $paginator->auto($args, $repo->countProposalsByFormAndEvaluer($form, $user));
     }
 
     public function resolve(Arg $args): ProposalForm
