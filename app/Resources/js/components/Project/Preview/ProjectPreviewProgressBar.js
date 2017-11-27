@@ -18,7 +18,8 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   getClass = (stepStatus: string) => {
     if (stepStatus === 'future') {
       return 'progress_future-step';
-    } else if (stepStatus === 'closed') {
+    }
+    if (stepStatus === 'closed') {
       return 'progress_closed-step';
     }
   };
@@ -26,11 +27,14 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   getLabel = (step: Object) => {
     if (step.timeless === true) {
       return <FormattedMessage id="step.timeless" />;
-    } else if (step.status === 'open') {
+    }
+    if (step.status === 'open') {
       return <FormattedMessage id="step.status.open" />;
-    } else if (step.status === 'future') {
+    }
+    if (step.status === 'future') {
       return <FormattedMessage id="step.status.future" />;
-    } else if (step.status === 'closed') {
+    }
+    if (step.status === 'closed') {
       return <FormattedMessage id="step.status.closed" />;
     }
   };
@@ -38,9 +42,11 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   getWidth = (step: Object) => {
     if (step.status === 'closed' || step.status === 'future' || step.timeless === true) {
       return 100;
-    } else if (step.status === 'open') {
+    }
+    if (step.status === 'open') {
       return 50;
     }
+
     return 0;
   };
 

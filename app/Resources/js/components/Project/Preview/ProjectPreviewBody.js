@@ -30,11 +30,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (stepContinuousParticipation.length > 0) {
       return stepContinuousParticipation[0];
-    } else if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
+    }
+    if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
       return stepOpen[0];
-    } else if (stepClosed.length > 0 && stepOpen.length === 0 && stepFuture.length === 0) {
+    }
+    if (stepClosed.length > 0 && stepOpen.length === 0 && stepFuture.length === 0) {
       return stepClosed[stepClosed.length - 1];
-    } else if (stepFuture.length > 0 && stepOpen.length === 0) {
+    }
+    if (stepFuture.length > 0 && stepOpen.length === 0) {
       return stepFuture[0];
     }
   }
@@ -48,13 +51,15 @@ export class ProjectPreviewBody extends React.Component<Props> {
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
-    } else if (!project.hasParticipativeStep && step.status === 'open') {
+    }
+    if (!project.hasParticipativeStep && step.status === 'open') {
       return (
         <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
-    } else if (step.status === 'closed') {
+    }
+    if (step.status === 'closed') {
       return (
         <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeResult" />
@@ -88,24 +93,24 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const hoursLeft = endDate.diff(now, 'hours');
     const minutesLeft = endDate.diff(now, 'minutes');
 
-    let test;
+    let timeLeft;
 
     if (daysLeft === 0 && hoursLeft === 0) {
-      test = (
+      timeLeft = (
         <span className="excerpt">
           <span className="excerpt_dark">{minutesLeft}</span>{' '}
           <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
         </span>
       );
     } else if (daysLeft === 0) {
-      test = (
+      timeLeft = (
         <span className="excerpt">
           <span className="excerpt_dark">{hoursLeft}</span>{' '}
           <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
         </span>
       );
     } else {
-      test = (
+      timeLeft = (
         <span className="excerpt">
           <span className="excerpt_dark">{daysLeft}</span>{' '}
           <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
@@ -114,7 +119,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
     }
 
     if (project.hasParticipativeStep && step.status === 'open' && !step.timeless) {
-      return test;
+      return timeLeft;
     }
   };
 
