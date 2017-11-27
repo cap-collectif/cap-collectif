@@ -76,16 +76,19 @@ export const ProposalPage = React.createClass({
                   <NavItem eventKey="content" className="tab">
                     <FormattedMessage id="proposal.tabs.content" />
                   </NavItem>
+                  <NavItem eventKey="blog" className="tab">
+                    <FormattedMessage id="proposal.tabs.blog" />
+                    <span className="badge">{proposal.postsCount}</span>
+                  </NavItem>
+                  <NavItem eventKey="evaluation" className="tab">
+                      <FormattedMessage id="proposal.tabs.evaluation" />
+                  </NavItem>
                   {showVotesTab && (
                     <NavItem eventKey="votes" className="tab">
                       <FormattedMessage id="proposal.tabs.votes" />
                       <span className="badge">{votesCount}</span>
                     </NavItem>
                   )}
-                  <NavItem eventKey="blog" className="tab">
-                    <FormattedMessage id="proposal.tabs.blog" />
-                    <span className="badge">{proposal.postsCount}</span>
-                  </NavItem>
                 </Nav>
               </div>
             </div>
@@ -153,6 +156,9 @@ export const ProposalPage = React.createClass({
                 )}
                 <Tab.Pane eventKey="blog">
                   <ProposalPageBlog />
+                </Tab.Pane>
+                <Tab.Pane eventKey="evaluation">
+                  <ProposalEvaluation />
                 </Tab.Pane>
               </Tab.Content>
             </div>
