@@ -44,7 +44,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             return [
                 'value' => $decodeValue ?? $response['value'],
                 'question' => $response['question'],
-                '_type' => 'value_response',
+                'type' => 'value_response',
             ];
         }, $arguments['responses']));
 
