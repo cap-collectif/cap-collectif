@@ -49,9 +49,13 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveShowUrl(User $user): string
     {
+        $manager = $this->container->get('capco.toggle.manager');
         $router = $this->container->get('router');
+        if ($manager->isActive('profiles')) {
+            return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
 
-        return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+        return null;
     }
 
     public function resolveUpdatedAt($object): string

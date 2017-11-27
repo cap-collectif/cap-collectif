@@ -35,7 +35,7 @@ trait ProposalStepsTrait
         'stepSlug' => 'selection-avec-vote-selon-le-budget',
     ];
     protected static $selectionStepWithBudgetVoteLimitedParams = [
-        'projectSlug' => 'budget-avec-vote-limite',
+        'projectSlug' => 'budget-avec-vote-limitte',
         'stepSlug' => 'selection-avec-vote-budget-limite',
     ];
     protected static $selectionStepNotYetOpen = [
@@ -67,7 +67,7 @@ trait ProposalStepsTrait
         'proposalSlug' => 'renovation-du-gymnase',
     ];
     protected static $proposalNotNotifiable = [
-        'projectSlug' => 'budget-avec-vote-limite',
+        'projectSlug' => 'budget-avec-vote-limitte',
         'stepSlug' => 'collecte-avec-vote-simple-limite',
         'proposalSlug' => 'proposition-17',
     ];

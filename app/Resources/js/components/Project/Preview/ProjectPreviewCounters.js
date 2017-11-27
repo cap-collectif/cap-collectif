@@ -20,7 +20,7 @@ const ProjectPreviewCounters = React.createClass({
     const nbCounters = this.getNbCounters();
     const counterWidth = `${100 / nbCounters}%`;
     return (
-      <div className="project__preview__counters">
+      <div className="thumbnail__numbers">
         <ProjectPreviewCounter
           value={project.contributionsCount}
           label="project.preview.counters.contributions"

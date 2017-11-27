@@ -50,12 +50,3 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     endAt: <dateTimeBetween('-10 days', '-5 days')>
     voteType: 1
     votesLimit: 1
-  collectstep8:
-    id: collectstep8
-    title: Collecte avec vote simple limité
-    body: <p><text(1000)></p>
-    timeless: true
-    startAt: null
-    endAt: null
-    voteType: 1
-    votesLimit: 1

@@ -28,6 +28,14 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         }
       }
     />
+    <ProjectPreviewCounters
+      project={
+        Object {
+          "hasParticipativeStep": true,
+          "title": "project with participative step",
+        }
+      }
+    />
   </div>
 </Col>
 `;
@@ -132,6 +140,15 @@ exports[`<ProjectPreview /> should render correctly project without participativ
         }
       }
     />
+    <div
+      style={
+        Object {
+          "height": "55px",
+        }
+      }
+    >
+       
+    </div>
   </div>
 </Col>
 `;

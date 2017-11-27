@@ -1,143 +1,58 @@
 // @flow
 import * as React from 'react';
-import moment from 'moment';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
-import ProjectPreviewCounters from './ProjectPreviewCounters';
 
-type Props = {
-  project: Object,
-};
+const ProjectPreviewBody = React.createClass({
+  propTypes: {
+    project: React.PropTypes.object.isRequired,
+  },
 
-export class ProjectPreviewBody extends React.Component<Props> {
-  getActualStep() {
+  shouldRenderProgressBar() {
     const { project } = this.props;
-
-    const projectStep = project.steps.sort((a, b) => {
-      const dateA = new Date(a.startAt);
-      const dateB = new Date(b.startAt);
-      return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
-    });
-
-    const stepClosed = projectStep.filter(step => step.status === 'closed');
-    const stepFuture = projectStep.filter(step => step.status === 'future');
-    const stepOpen = projectStep.filter(step => step.status === 'open');
-
-    const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
-
-    if (stepContinuousParticipation.length > 0) {
-      return stepContinuousParticipation[0];
-    }
-    if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
-      return stepOpen[0];
-    }
-    if (stepClosed.length > 0 && stepOpen.length === 0 && stepFuture.length === 0) {
-      return stepClosed[stepClosed.length - 1];
-    }
-    if (stepFuture.length > 0 && stepOpen.length === 0) {
-      return stepFuture[0];
-    }
-  }
-
-  getAction = (step: Object) => {
-    const { project } = this.props;
-
-    if (project.hasParticipativeStep && step.status === 'open') {
-      return (
-        <a href={step._links && step._links.show}>
-          <FormattedMessage id="project.preview.action.participe" />
-        </a>
-      );
-    }
-    if (!project.hasParticipativeStep && step.status === 'open') {
-      return (
-        <a href={step._links && step._links.show}>
-          <FormattedMessage id="project.preview.action.seeStep" />
-        </a>
-      );
-    }
-    if (step.status === 'closed') {
-      return (
-        <a href={step._links && step._links.show}>
-          <FormattedMessage id="project.preview.action.seeResult" />
-        </a>
-      );
-    }
-  };
-
-  getStartDate = (step: Object) => {
-    const startAtDate = moment(step.startAt).toDate();
-    const startDay = (
-      <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
+    return (
+      project.steps.filter(step => {
+        return (
+          !step.startAt &&
+          !step.endAt &&
+          step.type !== 'presentation' &&
+          step.type !== 'ranking' &&
+          step.type !== 'other' &&
+          step.timeless
+        );
+      }).length === 0 && project.steps.length > 0
     );
-
-    if (step.status === 'future') {
-      return (
-        <span className="excerpt-dark">
-          <FormattedMessage id="date.startAt" /> {startDay}
-        </span>
-      );
-    }
-  };
-
-  getRemainingDays = (step: Object) => {
-    const { project } = this.props;
-
-    const endDate = moment(step.endAt);
-    const now = moment();
-
-    const daysLeft = endDate.diff(now, 'days');
-    const hoursLeft = endDate.diff(now, 'hours');
-    const minutesLeft = endDate.diff(now, 'minutes');
-
-    let timeLeft;
-
-    if (daysLeft === 0 && hoursLeft === 0) {
-      timeLeft = (
-        <span className="excerpt">
-          <span className="excerpt_dark">{minutesLeft}</span>{' '}
-          <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
-        </span>
-      );
-    } else if (daysLeft === 0) {
-      timeLeft = (
-        <span className="excerpt">
-          <span className="excerpt_dark">{hoursLeft}</span>{' '}
-          <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
-        </span>
-      );
-    } else {
-      timeLeft = (
-        <span className="excerpt">
-          <span className="excerpt_dark">{daysLeft}</span>{' '}
-          <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
-        </span>
-      );
-    }
-
-    if (project.hasParticipativeStep && step.status === 'open' && !step.timeless) {
-      return timeLeft;
-    }
-  };
+  },
 
   render() {
     const { project } = this.props;
 
     const externalLink = project._links.external;
+    let progress;
+    if (this.shouldRenderProgressBar()) {
+      progress = (
+        <div>
+          <p style={{ marginBottom: 10, height: 16 }} className="small">
+            <FormattedMessage id="global.advancement" />
+          </p>
+          <ProjectPreviewProgressBar project={project} />
+        </div>
+      );
+    } else {
+      progress = <div style={{ height: 51 }} />;
+    }
     const link = externalLink || project._links.show;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
-
-    const actualStep = this.getActualStep();
 
     return (
       <div className="box project__preview__body">
         <div className="project__preview__body__infos">
           <ProjectPreviewThemes project={project} />
-          <h4
-            className="project__preview__title"
+          <h2
+            className="h4 project__preview__title"
             style={{ height: 'auto', lineHeight: 'auto', margin: '5px 0' }}>
             <OverlayTrigger placement="top" overlay={tooltip}>
               <a href={link}>
@@ -170,17 +85,15 @@ export class ProjectPreviewBody extends React.Component<Props> {
                 </div>
               </a>
             </OverlayTrigger>
-          </h4>
-          {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
+          </h2>
+          <Truncate lines={1} className="project__preview__author excerpt small">
+            {project.author.displayName}
+          </Truncate>
         </div>
-        {actualStep && <ProjectPreviewProgressBar project={project} actualStep={actualStep} />}
-        <div className="project__preview__actions">
-          {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
-          {actualStep && this.getRemainingDays(actualStep)}
-        </div>
+        {progress}
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProjectPreviewBody;

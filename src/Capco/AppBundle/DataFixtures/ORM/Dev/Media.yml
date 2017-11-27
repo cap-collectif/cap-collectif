@@ -13,10 +13,6 @@ Capco\MediaBundle\Entity\Media:
         id: media3
         binaryContent: project-3.jpg
         name:          Titre du média 2
-    MediaProject4:
-        id: media-project4
-        binaryContent: project-4.jpg
-        name:          Titre du média 4
     MediaProjectImageVideo:
         id: media4
         binaryContent: project-image-video.jpg

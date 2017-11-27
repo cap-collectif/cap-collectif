@@ -55,6 +55,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'no-plusplus': 'off',
     'no-alert': 'off',
+    'global-require': 'off',
     'react/no-danger': 'off',
     'jsx-a11y/label-has-for': 'off',
     'react/forbid-prop-types': 'off',
