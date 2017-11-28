@@ -108,9 +108,10 @@ type Step = {
   id: Uuid,
 };
 type Selection = { step: Step, status: ?Status };
-type Proposal = {
+export type Proposal = {
   selections: Array<Selection>,
   votesByStepId: { [id: Uuid]: Array<Object> },
+  votesCountByStepId: { [id: Uuid]: number },
 } & Object;
 type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {

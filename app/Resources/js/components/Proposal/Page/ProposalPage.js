@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -20,25 +21,30 @@ import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 import ProposalFusionList from './ProposalFusionList';
 import Loader from '../../Utils/Loader';
+import type { FeatureToggles, State } from '../../../types';
+import type { Proposal } from '../../../redux/modules/proposal';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
-export const ProposalPage = React.createClass({
-  propTypes: {
-    form: PropTypes.object.isRequired,
-    proposal: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired,
-    steps: PropTypes.array.isRequired,
-    features: PropTypes.object.isRequired,
-  },
+type Props = {
+  form: Object,
+  proposal: Proposal,
+  categories: Array<Object>,
+  steps: Array<Object>,
+  features: FeatureToggles,
+};
 
+export class ProposalPage extends React.Component<Props> {
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  },
+  }
 
-  getHashKey(hash) {
+  getHashKey(hash: string) {
     let key = null;
     if (hash.indexOf('content') !== -1) {
       key = 'content';
+    }
+    if (hash.indexOf('evaluation') !== -1) {
+      key = 'evaluation';
     }
     if (hash.indexOf('comments') !== -1) {
       key = 'comments';
@@ -47,7 +53,7 @@ export const ProposalPage = React.createClass({
       key = 'votes';
     }
     return key;
-  },
+  }
 
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
@@ -55,13 +61,14 @@ export const ProposalPage = React.createClass({
       return this.getHashKey(hash);
     }
     return 'content';
-  },
+  }
 
   render() {
     const { proposal, form, categories, features, steps } = this.props;
     const currentVotableStep = proposal.votableStepId
       ? steps.filter(s => s.id === proposal.votableStepId)[0]
       : null;
+    // $FlowFixMe
     const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b) => a + b, 0);
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
@@ -202,14 +209,18 @@ export const ProposalPage = React.createClass({
         </Tab.Container>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: State) => {
   return {
     features: state.default.features,
-    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
-    steps: state.project.projectsById[state.project.currentProjectById].steps,
+    proposal:
+      state.proposal.currentProposalId &&
+      state.proposal.proposalsById[state.proposal.currentProposalId],
+    steps:
+      state.project.currentProjectById &&
+      state.project.projectsById[state.project.currentProjectById].steps,
   };
 };
 

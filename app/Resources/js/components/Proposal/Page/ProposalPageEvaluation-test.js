@@ -41,6 +41,7 @@ describe('<ProposalPageEvaluation />', () => {
   const props = {
     proposal,
     ...global.formMock,
+    intl: global.intlMock,
   };
 
   it('render a form if viewer is an evaluer', () => {
@@ -51,6 +52,7 @@ describe('<ProposalPageEvaluation />', () => {
   const propsDisabled = {
     proposal: { ...proposal, viewerIsAnEvaluer: false },
     ...global.formMock,
+    intl: global.intlMock,
   };
 
   it('render a disabled form if viewer is not an evaluer', () => {
