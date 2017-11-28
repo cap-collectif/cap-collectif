@@ -52,7 +52,6 @@ services:
       - "@capco.url.resolver"
       - "@validator"
       - {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}
-      - "@logger"
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
