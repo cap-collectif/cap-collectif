@@ -14,7 +14,32 @@
  */
 
 declare module 'react-relay' {
-  declare module.exports: any;
+  declare export type ReadyState = {
+    error: ?Error,
+    props: ?Object,
+    retry: ?() => void,
+  };
+  declare export type Variables = { [name: string]: $FlowFixMe };
+  declare export class QueryRenderer extends React$Component<{
+    environment: any,
+    query: any,
+    render: (readyState: ReadyState) => ?React$Element<*>,
+    variables?: Variables,
+  }> {}
+  declare export function graphql (strings: Array<string>): any
+  declare export function createFragmentContainer (
+    Component: any,
+    fragmentSpec: any
+  ): any
+  declare export function createPaginationContainer (
+    Component: any,
+    fragmentSpec: any,
+    connectionConfig: any
+  ): any;
+  declare export function commitMutation (
+    environment: any,
+    config: any,
+  ): any
 }
 
 /**

@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import ProposalFormEvaluationList from './ProposalFormEvaluationList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
 import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
 
-const render = ({ error, props }: { error: ?Error, props?: EvaluationsIndexPageQueryResponse }) => {
+const render = ({ error, props }: ReadyState & { props: ?EvaluationsIndexPageQueryResponse }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
