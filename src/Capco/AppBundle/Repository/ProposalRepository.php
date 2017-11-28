@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
