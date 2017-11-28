@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -21,10 +21,7 @@ type FormValues = { responses: ResponsesValues } & Object;
 type RelayProps = {
   proposal: ProposalPageEvaluation_proposal,
 };
-type Props = FormProps &
-  RelayProps & {
-    intl: intlShape,
-  };
+type Props = FormProps & RelayProps;
 
 const formName = 'proposal-evaluation';
 
@@ -48,7 +45,6 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       handleSubmit,
       submitting,
       proposal,
-      intl,
       responses,
       change,
     } = this.props;
@@ -63,7 +59,6 @@ export class ProposalPageEvaluation extends React.Component<Props> {
               evaluationForm={evaluationForm}
               responses={responses}
               change={change}
-              intl={intl}
               disabled={!proposal.viewerIsAnEvaluer}
             />
             {proposal.viewerIsAnEvaluer && (
