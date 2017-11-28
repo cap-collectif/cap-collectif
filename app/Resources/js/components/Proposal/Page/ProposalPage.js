@@ -92,9 +92,11 @@ export class ProposalPage extends React.Component<Props> {
                     <FormattedMessage id="proposal.tabs.blog" />
                     <span className="badge">{proposal.postsCount}</span>
                   </NavItem>
-                  <NavItem eventKey="evaluation" className="tab">
-                    <FormattedMessage id="proposal.tabs.evaluation" />
-                  </NavItem>
+                  {proposal.hasEvaluation && (
+                    <NavItem eventKey="evaluation" className="tab">
+                      <FormattedMessage id="proposal.tabs.evaluation" />
+                    </NavItem>
+                  )}
                   {showVotesTab && (
                     <NavItem eventKey="votes" className="tab">
                       <FormattedMessage id="proposal.tabs.votes" />

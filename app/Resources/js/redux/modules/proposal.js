@@ -112,6 +112,7 @@ export type Proposal = {
   selections: Array<Selection>,
   votesByStepId: { [id: Uuid]: Array<Object> },
   votesCountByStepId: { [id: Uuid]: number },
+  hasEvaluation: boolean,
 } & Object;
 type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {
