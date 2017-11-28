@@ -27,7 +27,6 @@ import Captcha from './Captcha';
 import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
-import PreviewMedia from './PreviewMedia';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -165,7 +164,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (type === 'medias') {
       return (
         <div>
-          <PreviewMedia medias={medias} />
           <ImageUpload
             id={props.id}
             className={props.className}
@@ -174,6 +172,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             onChange={props.onChange}
             accept={acceptedMimeTypes.join()}
             maxSize={26214400}
+            files={medias}
             disablePreview
             multiple
           />

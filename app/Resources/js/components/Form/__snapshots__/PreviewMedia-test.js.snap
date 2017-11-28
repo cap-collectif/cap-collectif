@@ -2,9 +2,6 @@
 
 exports[`<PreviewMedia /> should render correctly 1`] = `
 <div>
-  <p>
-    Liste des fichiers actuellement en ligne :
-  </p>
   <Col
     bsClass="col"
     className="image-uploader__label-info"
@@ -16,6 +13,13 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
       }
     }
   >
+    <strong>
+      <FormattedMessage
+        id="proposal.document.added"
+        values={Object {}}
+      />
+    </strong>
+     
     <a
       href="http://capco.dev/image.jpg"
       rel="noopener noreferrer"
@@ -39,8 +43,4 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
 </div>
 `;
 
-exports[`<PreviewMedia /> should render correctly without medias 1`] = `
-<p>
-  Aucun document mise en ligne.
-</p>
-`;
+exports[`<PreviewMedia /> should render correctly without medias 1`] = `null`;

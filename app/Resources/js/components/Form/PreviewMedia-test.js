@@ -7,7 +7,9 @@ import { PreviewMedia } from './PreviewMedia';
 describe('<PreviewMedia />', () => {
   const props = {
     intl: global.intlMock,
-    medias: [{ name: 'image', extension: 'jpg', url: 'http://capco.dev/image.jpg' }],
+    currentMedias: [{ name: 'image', extension: 'jpg', url: 'http://capco.dev/image.jpg' }],
+    newMedias: [],
+    onRemoveMedia: jest.fn(),
   };
 
   it('should render correctly', () => {
@@ -16,7 +18,9 @@ describe('<PreviewMedia />', () => {
   });
 
   it('should render correctly without medias', () => {
-    const wrapper = shallow(<PreviewMedia medias={[]} />);
+    const wrapper = shallow(
+      <PreviewMedia currentMedias={[]} newMedias={[]} onRemoveMedias={jest.fn()} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
