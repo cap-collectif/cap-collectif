@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   type FieldArrayProps,
@@ -28,7 +28,7 @@ export type ResponsesValues = Array<Object>;
 type FormValues = { responses: ResponsesValues } & Object;
 type MinimalRelayProps = { proposal: ProposalPageEvaluation_proposal };
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
-type Props = RelayProps & FormProps & FormValues & { intl: intlShape };
+type Props = RelayProps & FormProps & FormValues & { intl: IntlShape };
 
 const formName = 'proposal-admin-evaluation';
 
@@ -203,7 +203,7 @@ export const renderResponses = ({
   evaluationForm: Object,
   responses: Array<Object>,
   change: (field: string, value: any) => void,
-  intl: intlShape,
+  intl: IntlShape,
   disabled: boolean,
 }) => (
   <div>

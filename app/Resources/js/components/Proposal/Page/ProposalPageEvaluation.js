@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -17,11 +17,11 @@ import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPa
 import type { Dispatch, State } from '../../../types';
 import type { ResponsesValues } from '../Admin/ProposalAdminNotationForm';
 
-type FormValues = { responses: ResponsesValues } & Object;
+type FormValues = { responses: ResponsesValues };
 type RelayProps = {
   proposal: ProposalPageEvaluation_proposal,
 };
-type Props = FormProps & FormValues & RelayProps & { intl: intlShape };
+type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 
 const formName = 'proposal-evaluation';
 
