@@ -6,7 +6,10 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
 import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
 
-const render = ({ error, props }: ReadyState & { props: ?EvaluationsIndexPageQueryResponse }) => {
+export const render = ({
+  error,
+  props,
+}: ReadyState & { props: ?EvaluationsIndexPageQueryResponse }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;

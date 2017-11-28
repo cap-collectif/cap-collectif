@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
+<div>
+  <Relay(ProposalFormEvaluationList)
+    proposalForm={
+      Object {
+        "id": "1",
+      }
+    }
+  />
+  <Relay(ProposalFormEvaluationList)
+    proposalForm={
+      Object {
+        "id": "2",
+      }
+    }
+  />
+</div>
+`;
+
 exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
 <ReactRelayQueryRenderer
   environment={
