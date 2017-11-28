@@ -27,7 +27,7 @@ class GraphQLContext implements Context
     /**
      * @When I am logged in to graphql as admin
      */
-    public function iAmLoggedInToApiAsAdmin()
+    public function iAmLoggedInToGraphQLAsAdmin()
     {
         $this->createAuthenticatedClient('admin@test.com', 'admin');
     }
@@ -35,7 +35,7 @@ class GraphQLContext implements Context
     /**
      * @When I am logged in to graphql as user
      */
-    public function iAmLoggedInToApiAsUser()
+    public function iAmLoggedInToGraphQLAsUser()
     {
         $this->createAuthenticatedClient('user@test.com', 'user');
     }
@@ -43,9 +43,17 @@ class GraphQLContext implements Context
     /**
      * @Given I am logged in to graphql as super admin
      */
-    public function iAmLoggedInToApiAsSfavot()
+    public function iAmLoggedInToGraphQLAsSfavot()
     {
         $this->createAuthenticatedClient('sfavot@jolicode.com', 'toto');
+    }
+
+    /**
+     * @Given I am logged in to graphql as pierre
+     */
+    public function iAmLoggedInToGraphQLAsPierre()
+    {
+        $this->createAuthenticatedClient('pierre@cap-collectif.com', 'toto');
     }
 
     /**
@@ -90,7 +98,6 @@ class GraphQLContext implements Context
             ]
         );
         $this->response = (string) $response->getBody();
-        PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
     }
 
     /**
@@ -100,7 +107,7 @@ class GraphQLContext implements Context
     {
         $matcher = (new SimpleFactory())->createMatcher();
 
-        PHPUnit::assertTrue($matcher->match($this->response, $pattern->getRaw()), $matcher->getError());
+        PHPUnit::assertTrue($matcher->match($this->response, $pattern->getRaw()), $matcher->getError() . ' ' . $this->response);
     }
 
     protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')

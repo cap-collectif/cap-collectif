@@ -280,7 +280,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
   """
 
 @database
-Scenario: GraphQL client wants to update custom fields of a proposal form
+Scenario: GraphQL client wants to retrieve his evaluations
   Given I am logged in to graphql as user
   When I send a GraphQL request:
   """
@@ -315,11 +315,16 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
             }
           },
           "proposals": {
-            "totalCount": 1,
+            "totalCount": 2,
             "edges": [
               {
                 "node": {
                   "id": "proposal1"
+                }
+              },
+              {
+                "node": {
+                  "id": "proposal2"
                 }
               }
             ]

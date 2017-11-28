@@ -60,7 +60,9 @@ class ProposalFormResolver implements ContainerAwareInterface
             throw new UserException('Not implemented');
         });
 
-        return $paginator->auto($args, $repo->countProposalsByFormAndEvaluer($form, $user));
+        $totalCount = $repo->countProposalsByFormAndEvaluer($form, $user);
+
+        return $paginator->auto($args, $totalCount);
     }
 
     public function resolve(Arg $args): ProposalForm
