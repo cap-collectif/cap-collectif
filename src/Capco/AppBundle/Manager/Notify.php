@@ -14,6 +14,7 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Monolog\Logger;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
@@ -32,10 +33,14 @@ class Notify implements MailerInterface
     protected $parameters;
     protected $urlResolver;
     protected $validator;
+    protected $logger;
+    protected $swiftLogger;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters, Logger $logger)
     {
+        $this->swiftLogger = new \Swift_Plugins_Loggers_ArrayLogger();
         $this->mailer = $mailer;
+        $this->mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($this->swiftLogger));
         $this->templating = $templating;
         $this->resolver = $resolver;
         $this->translator = $translator;
@@ -43,12 +48,14 @@ class Notify implements MailerInterface
         $this->urlResolver = $urlResolver;
         $this->validator = $validator;
         $this->parameters = $parameters;
+        $this->logger = $logger;
     }
 
     public function sendEmail($to, $fromAddress, $fromName, $body, $subject, $contentType = 'text/html')
     {
         if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
+            $this->logger->warn($this->swiftLogger->dump());
         }
     }
 
