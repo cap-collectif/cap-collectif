@@ -40,7 +40,9 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'proposal_create_retry_%%attempt%%'
         proposal_update:
             processor: proposal_update.processor
             middleware_stack:
@@ -53,7 +55,9 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'proposal_update_retry_%%attempt%%'
         proposal_delete:
             processor: proposal_delete.processor
             middleware_stack:
@@ -66,7 +70,9 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'proposal_delete_retry_%%attempt%%'
         comment_create:
             processor: comment_create.processor
             middleware_stack:
@@ -79,7 +85,9 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'comment_create_retry_%%attempt%%'
         comment_update:
             processor: comment_update.processor
             middleware_stack:
@@ -92,7 +100,9 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'comment_update_retry_%%attempt%%'
         comment_delete:
             processor: comment_delete.processor
             middleware_stack:
@@ -105,4 +115,6 @@ swarrot:
                        requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
-                       retry_attempts: 5
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'comment_delete_retry_%%attempt%%'
