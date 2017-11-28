@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import ProposalFormEvaluationsList from './ProposalFormEvaluationsList';
+import ProposalFormEvaluationList from './ProposalFormEvaluationList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
 import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
@@ -18,7 +18,7 @@ const render = ({ error, props }: { error: ?Error, props?: EvaluationsIndexPageQ
         <div>
           {// eslint-disable-next-line react/prop-types
           props.proposalForms.map(proposalForm => (
-            <ProposalFormEvaluationsList key={proposalForm.id} proposalForm={proposalForm} />
+            <ProposalFormEvaluationList key={proposalForm.id} proposalForm={proposalForm} />
           ))}
         </div>
       );
@@ -37,7 +37,7 @@ export class EvaluationsIndexPage extends React.Component<{}> {
           query EvaluationsIndexPageQuery {
             proposalForms {
               id
-              ...ProposalFormEvaluationsList_proposalForm
+              ...ProposalFormEvaluationList_proposalForm
             }
           }
         `}

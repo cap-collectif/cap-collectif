@@ -2,38 +2,20 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Table, ButtonToolbar, Button } from 'react-bootstrap';
-import type { ProposalFormEvaluationsList_proposalForm } from './__generated__/ProposalFormEvaluationsList_proposalForm.graphql';
+import { Table } from 'react-bootstrap';
+import ProposalFormEvaluationRow from './ProposalFormEvaluationRow';
+import type { ProposalFormEvaluationList_proposalForm } from './__generated__/ProposalFormEvaluationList_proposalForm.graphql';
 
-type Props = { proposalForm: ProposalFormEvaluationsList_proposalForm };
+type Props = { proposalForm: ProposalFormEvaluationList_proposalForm };
 
-const Row = (proposal: Object) => (
-  <tr key={proposal.id}>
-    <td>{proposal.reference}</td>
-    <td>{proposal.title}</td>
-    <td>{proposal.status && proposal.status.name}</td>
-    <td>{proposal.updatedAt}</td>
-    <td>
-      <ButtonToolbar>
-        <Button href={proposal.show_url}>
-          <FormattedMessage id="global.see" />
-        </Button>
-        <Button bStyle="primary" href={`${proposal.show_url}#evaluation`}>
-          <FormattedMessage id="global.eval" />
-        </Button>
-      </ButtonToolbar>
-    </td>
-  </tr>
-);
-
-export class ProposalFormEvaluationsList extends Component<Props> {
+export class ProposalFormEvaluationList extends Component<Props> {
   render() {
     const { proposalForm } = this.props;
     if (proposalForm.proposals.totalCount === 0) {
       return null;
     }
     return (
-      <div>
+      <div className="container">
         <h4>{proposalForm.step && proposalForm.step.project.title}</h4>
         <Table striped bordered condensed hover>
           <thead>
@@ -59,7 +41,7 @@ export class ProposalFormEvaluationsList extends Component<Props> {
             {proposalForm.proposals.edges &&
               proposalForm.proposals.edges
                 .filter(Boolean)
-                .map(edge => <Row proposal={edge.node} />)}
+                .map(edge => <ProposalFormEvaluationRow key={edge.node.id} proposal={edge.node} />)}
           </tbody>
         </Table>
       </div>
@@ -68,9 +50,9 @@ export class ProposalFormEvaluationsList extends Component<Props> {
 }
 
 export default createFragmentContainer(
-  ProposalFormEvaluationsList,
+  ProposalFormEvaluationList,
   graphql`
-    fragment ProposalFormEvaluationsList_proposalForm on ProposalForm {
+    fragment ProposalFormEvaluationList_proposalForm on ProposalForm {
       step {
         title
         project {
@@ -82,14 +64,7 @@ export default createFragmentContainer(
         edges {
           node {
             id
-            show_url
-            reference
-            title
-            updatedAt
-            status {
-              name
-              id
-            }
+            ...ProposalFormEvaluationRow_proposal
           }
         }
       }

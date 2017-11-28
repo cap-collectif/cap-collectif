@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
+<div
+  className="container"
+>
+  <h4>
+    My Project title
+  </h4>
+  <Table
+    bordered={true}
+    bsClass="table"
+    condensed={true}
+    hover={true}
+    responsive={false}
+    striped={true}
+  >
+    <thead>
+      <tr>
+        <th>
+          <FormattedMessage
+            id="global.reference"
+            values={Object {}}
+          />
+        </th>
+        <th>
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        </th>
+        <th>
+          <FormattedMessage
+            id="project_download.label.status"
+            values={Object {}}
+          />
+        </th>
+        <th>
+          <FormattedMessage
+            id="show.label_updated_at"
+            values={Object {}}
+          />
+        </th>
+        <th>
+          <FormattedMessage
+            id="admin.fields.project.proposals_table.actions"
+            values={Object {}}
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <Relay(ProposalFormEvaluationRow)
+        proposal={
+          Object {
+            "id": "1",
+          }
+        }
+      />
+      <Relay(ProposalFormEvaluationRow)
+        proposal={
+          Object {
+            "id": "2",
+          }
+        }
+      />
+    </tbody>
+  </Table>
+</div>
+`;
+
+exports[`<ProposalFormEvaluationList /> renders nothing when no evaluations 1`] = `null`;
