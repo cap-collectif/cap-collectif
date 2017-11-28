@@ -64,20 +64,25 @@ export class ProposalPageEvaluation extends React.Component<Props> {
               responses={responses}
               change={change}
               intl={intl}
-              disabled
+              disabled={!proposal.viewerIsAnEvaluer}
             />
-            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
-              <AlertAdminForm
-                valid={valid}
-                invalid={invalid}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
-            </ButtonToolbar>
+            {proposal.viewerIsAnEvaluer && (
+              <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+                <Button
+                  disabled={invalid || pristine || submitting}
+                  type="submit"
+                  bsStyle="primary">
+                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+                </Button>
+                <AlertAdminForm
+                  valid={valid}
+                  invalid={invalid}
+                  submitSucceeded={submitSucceeded}
+                  submitFailed={submitFailed}
+                  submitting={submitting}
+                />
+              </ButtonToolbar>
+            )}
           </div>
         </form>
       </div>
@@ -108,6 +113,7 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalPageEvaluation_proposal on Proposal {
       id
+      viewerIsAnEvaluer
       form {
         evaluationForm {
           questions {
