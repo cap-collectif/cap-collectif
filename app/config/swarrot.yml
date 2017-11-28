@@ -35,9 +35,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
@@ -50,9 +47,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
@@ -65,9 +59,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
@@ -80,9 +71,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
@@ -95,9 +83,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
@@ -110,9 +95,6 @@ swarrot:
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                   extras:
-                       requeue_on_error: true
                  - configurator: swarrot.processor.retry
                    extras:
                        retry_attempts: 3
