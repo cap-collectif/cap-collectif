@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -15,6 +15,7 @@ const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
     object: PropTypes.string,
+    intl: PropTypes.object,
   },
 
   getInitialState() {
@@ -149,15 +150,17 @@ const CommentSection = React.createClass({
   },
 
   renderLoadMore() {
+    const { intl } = this.props;
+
     if (
       !this.state.isLoading &&
       (this.state.limit < this.state.count || this.state.isLoadingMore)
     ) {
       return (
         <button
-          className="btn btn-block btn-dark-grey"
+          className="btn btn-block btn-secondary"
           ref="loadMore"
-          data-loading-text={<FormattedMessage id="global.loading" />}
+          data-loading-text={intl.formatMessage({ id: 'global.loading' })}
           onClick={this.loadMore}>
           <FormattedMessage id="comment.more" />
         </button>
@@ -198,4 +201,4 @@ const CommentSection = React.createClass({
   },
 });
 
-export default CommentSection;
+export default injectIntl(CommentSection);
