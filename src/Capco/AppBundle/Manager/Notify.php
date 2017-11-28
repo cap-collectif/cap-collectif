@@ -448,7 +448,7 @@ class Notify implements MailerInterface
 
     private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
     {
-        return \Swift_Message::newInstance()
+        return (new \Swift_Message())
             ->setTo($to)
             ->setSubject($subject)
             ->setContentType($contentType)
