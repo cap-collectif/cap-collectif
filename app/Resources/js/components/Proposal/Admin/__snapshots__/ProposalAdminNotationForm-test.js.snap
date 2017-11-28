@@ -125,7 +125,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             block={false}
             bsClass="btn"
             bsStyle="primary"
-            disabled={false}
+            disabled={true}
             type="submit"
           >
             <FormattedMessage
@@ -138,7 +138,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             submitFailed={false}
             submitSucceeded={false}
             submitting={false}
-            valid={false}
+            valid={true}
           />
         </ButtonToolbar>
       </div>

@@ -21,7 +21,7 @@ type FormValues = { responses: ResponsesValues } & Object;
 type RelayProps = {
   proposal: ProposalPageEvaluation_proposal,
 };
-type Props = FormProps & RelayProps;
+type Props = FormProps & FormValues & RelayProps;
 
 const formName = 'proposal-evaluation';
 

@@ -8,6 +8,7 @@ describe('<ProposalPageEvaluation />', () => {
   const proposal = {
     id: 'proposal1',
     viewerIsAnEvaluer: true,
+    responses: [],
     form: {
       evaluationForm: {
         questions: [
@@ -39,6 +40,7 @@ describe('<ProposalPageEvaluation />', () => {
 
   const props = {
     proposal,
+    ...global.formMock,
   };
 
   it('render a form if viewer is an evaluer', () => {
@@ -48,6 +50,7 @@ describe('<ProposalPageEvaluation />', () => {
 
   const propsDisabled = {
     proposal: { ...proposal, viewerIsAnEvaluer: false },
+    ...global.formMock,
   };
 
   it('render a disabled form if viewer is not an evaluer', () => {

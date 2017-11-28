@@ -4,9 +4,12 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
 <div
   className="container"
 >
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <div>
       <FieldArray
+        change={[Function]}
         component={[Function]}
         disabled={true}
         evaluationForm={
@@ -39,9 +42,12 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
 <div
   className="container"
 >
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <div>
       <FieldArray
+        change={[Function]}
         component={[Function]}
         disabled={false}
         evaluationForm={
@@ -79,7 +85,7 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
           block={false}
           bsClass="btn"
           bsStyle="primary"
-          disabled={false}
+          disabled={true}
           type="submit"
         >
           <FormattedMessage
@@ -87,7 +93,13 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
             values={Object {}}
           />
         </Button>
-        <AlertAdminForm />
+        <AlertAdminForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
       </ButtonToolbar>
     </div>
   </form>

@@ -28,14 +28,7 @@ export type ResponsesValues = Array<Object>;
 type FormValues = { responses: ResponsesValues } & Object;
 type MinimalRelayProps = { proposal: ProposalPageEvaluation_proposal };
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
-type Props = RelayProps &
-  FormProps & {
-    intl: intlShape,
-    // initialValues: Object,
-    // fields: Object,
-    // evaluationForm: Object,
-    // responses: ResponsesValues,
-  };
+type Props = RelayProps & FormProps & FormValues & { intl: intlShape };
 
 const formName = 'proposal-admin-evaluation';
 
