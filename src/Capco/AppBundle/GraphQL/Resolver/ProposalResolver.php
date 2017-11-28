@@ -27,6 +27,13 @@ class ProposalResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public function resolveViewerIsEvaluer(Proposal $proposal, $user): bool
+    {
+        $repo = $this->container->get('capco.proposal.repository');
+
+        return $user instanceof User ? $repo->isViewerAnEvaluer($proposal, $user) : false;
+    }
+
     public function resolveProjectSteps(Project $project)
     {
         return $project->getRealSteps();

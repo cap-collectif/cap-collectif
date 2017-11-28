@@ -77,6 +77,31 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               active={false}
               className="tab"
               disabled={false}
+              eventKey="blog"
+            >
+              <FormattedMessage
+                id="proposal.tabs.blog"
+                values={Object {}}
+              />
+              <span
+                className="badge"
+              />
+            </NavItem>
+            <NavItem
+              active={false}
+              className="tab"
+              disabled={false}
+              eventKey="evaluation"
+            >
+              <FormattedMessage
+                id="proposal.tabs.evaluation"
+                values={Object {}}
+              />
+            </NavItem>
+            <NavItem
+              active={false}
+              className="tab"
+              disabled={false}
               eventKey="votes"
             >
               <FormattedMessage
@@ -88,20 +113,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               >
                 0
               </span>
-            </NavItem>
-            <NavItem
-              active={false}
-              className="tab"
-              disabled={false}
-              eventKey="blog"
-            >
-              <FormattedMessage
-                id="proposal.tabs.blog"
-                values={Object {}}
-              />
-              <span
-                className="badge"
-              />
             </NavItem>
           </Nav>
         </div>
@@ -268,6 +279,73 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             eventKey="blog"
           >
             <Connect(ProposalPageBlog) />
+          </TabPane>
+          <TabPane
+            bsClass="tab-pane"
+            eventKey="evaluation"
+          >
+            <ReactRelayQueryRenderer
+              environment={
+                RelayModernEnvironment {
+                  "__setNet": [Function],
+                  "_debugger": EnvironmentDebugger {
+                    "_envIsDirty": false,
+                    "_environment": [Circular],
+                    "_id": "RelayModernEnvironment1",
+                    "_isRecordingMutationEvents": false,
+                    "_recordedMutationEvents": Array [],
+                  },
+                  "_network": Object {
+                    "execute": [Function],
+                  },
+                  "_publishQueue": RelayPublishQueue {
+                    "_appliedOptimisticUpdates": Array [],
+                    "_backup": Object {},
+                    "_handlerProvider": [Function],
+                    "_pendingBackupRebase": false,
+                    "_pendingData": Array [],
+                    "_pendingOptimisticUpdates": Array [],
+                    "_pendingUpdaters": Array [],
+                    "_store": RelayMarkSweepStore {
+                      "_hasScheduledGC": false,
+                      "_index": 0,
+                      "_recordSource": Object {},
+                      "_roots": Array [],
+                      "_subscriptions": Array [],
+                      "_updatedRecordIDs": Object {},
+                    },
+                  },
+                  "_store": RelayMarkSweepStore {
+                    "_hasScheduledGC": false,
+                    "_index": 0,
+                    "_recordSource": Object {},
+                    "_roots": Array [],
+                    "_subscriptions": Array [],
+                    "_updatedRecordIDs": Object {},
+                  },
+                  "configName": undefined,
+                  "unstable_internal": Object {
+                    "areEqualSelectors": [Function],
+                    "createFragmentSpecResolver": [Function],
+                    "createOperationSelector": [Function],
+                    "getDataIDsFromObject": [Function],
+                    "getFragment": [Function],
+                    "getOperation": [Function],
+                    "getSelector": [Function],
+                    "getSelectorList": [Function],
+                    "getSelectorsFromObject": [Function],
+                    "getVariablesFromObject": [Function],
+                  },
+                }
+              }
+              query={[Function]}
+              render={[Function]}
+              variables={
+                Object {
+                  "proposalId": 41,
+                }
+              }
+            />
           </TabPane>
         </TabContent>
       </div>
@@ -363,6 +441,31 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
               active={false}
               className="tab"
               disabled={false}
+              eventKey="blog"
+            >
+              <FormattedMessage
+                id="proposal.tabs.blog"
+                values={Object {}}
+              />
+              <span
+                className="badge"
+              />
+            </NavItem>
+            <NavItem
+              active={false}
+              className="tab"
+              disabled={false}
+              eventKey="evaluation"
+            >
+              <FormattedMessage
+                id="proposal.tabs.evaluation"
+                values={Object {}}
+              />
+            </NavItem>
+            <NavItem
+              active={false}
+              className="tab"
+              disabled={false}
               eventKey="votes"
             >
               <FormattedMessage
@@ -374,20 +477,6 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
               >
                 5
               </span>
-            </NavItem>
-            <NavItem
-              active={false}
-              className="tab"
-              disabled={false}
-              eventKey="blog"
-            >
-              <FormattedMessage
-                id="proposal.tabs.blog"
-                values={Object {}}
-              />
-              <span
-                className="badge"
-              />
             </NavItem>
           </Nav>
         </div>
@@ -548,6 +637,73 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
             eventKey="blog"
           >
             <Connect(ProposalPageBlog) />
+          </TabPane>
+          <TabPane
+            bsClass="tab-pane"
+            eventKey="evaluation"
+          >
+            <ReactRelayQueryRenderer
+              environment={
+                RelayModernEnvironment {
+                  "__setNet": [Function],
+                  "_debugger": EnvironmentDebugger {
+                    "_envIsDirty": false,
+                    "_environment": [Circular],
+                    "_id": "RelayModernEnvironment1",
+                    "_isRecordingMutationEvents": false,
+                    "_recordedMutationEvents": Array [],
+                  },
+                  "_network": Object {
+                    "execute": [Function],
+                  },
+                  "_publishQueue": RelayPublishQueue {
+                    "_appliedOptimisticUpdates": Array [],
+                    "_backup": Object {},
+                    "_handlerProvider": [Function],
+                    "_pendingBackupRebase": false,
+                    "_pendingData": Array [],
+                    "_pendingOptimisticUpdates": Array [],
+                    "_pendingUpdaters": Array [],
+                    "_store": RelayMarkSweepStore {
+                      "_hasScheduledGC": false,
+                      "_index": 0,
+                      "_recordSource": Object {},
+                      "_roots": Array [],
+                      "_subscriptions": Array [],
+                      "_updatedRecordIDs": Object {},
+                    },
+                  },
+                  "_store": RelayMarkSweepStore {
+                    "_hasScheduledGC": false,
+                    "_index": 0,
+                    "_recordSource": Object {},
+                    "_roots": Array [],
+                    "_subscriptions": Array [],
+                    "_updatedRecordIDs": Object {},
+                  },
+                  "configName": undefined,
+                  "unstable_internal": Object {
+                    "areEqualSelectors": [Function],
+                    "createFragmentSpecResolver": [Function],
+                    "createOperationSelector": [Function],
+                    "getDataIDsFromObject": [Function],
+                    "getFragment": [Function],
+                    "getOperation": [Function],
+                    "getSelector": [Function],
+                    "getSelectorList": [Function],
+                    "getSelectorsFromObject": [Function],
+                    "getVariablesFromObject": [Function],
+                  },
+                }
+              }
+              query={[Function]}
+              render={[Function]}
+              variables={
+                Object {
+                  "proposalId": 42,
+                }
+              }
+            />
           </TabPane>
         </TabContent>
       </div>

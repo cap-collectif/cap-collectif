@@ -12,6 +12,9 @@ Proposal:
               type: "[ProgressStep!]!"
             evaluers:
               type: "[Group!]!"
+            viewerIsAnEvaluer:
+              type: "Boolean!"
+              resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
             news:
               type: "[Post!]!"
               resolve: "@=resolver('proposal_news', [value])"

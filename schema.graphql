@@ -760,6 +760,7 @@ type Proposal {
   show_url: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
+  viewerIsAnEvaluer: Boolean!
   news: [Post!]!
   project: Project!
   status: Status

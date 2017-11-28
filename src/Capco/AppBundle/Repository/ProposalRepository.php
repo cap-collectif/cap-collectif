@@ -62,6 +62,20 @@ class ProposalRepository extends EntityRepository
         ;
     }
 
+    public function isViewerAnEvaluer(Proposal $proposal, User $user): bool
+    {
+        return count($this->createQueryBuilder('proposal')
+              ->leftJoin('proposal.evaluers', 'group')
+              ->leftJoin('group.userGroups', 'userGroup')
+              ->andWhere('proposal.id = :id')
+              ->andWhere('userGroup.user = :user')
+              ->setParameter('id', $proposal->getId())
+              ->setParameter('user', $user)
+              ->getQuery()
+              ->getResult()
+            ) > 0;
+    }
+
     public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, int $first = 0, int $offset = 100): Paginator
     {
         $qb = $this

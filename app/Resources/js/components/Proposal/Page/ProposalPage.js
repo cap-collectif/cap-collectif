@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { QueryRenderer, graphql } from 'react-relay';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
@@ -9,6 +11,7 @@ import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageBlog from './ProposalPageBlog';
+import ProposalPageEvaluation from './ProposalPageEvaluation';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
@@ -16,6 +19,8 @@ import ProposalPageAdvancement from './ProposalPageAdvancement';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 import ProposalFusionList from './ProposalFusionList';
+import Loader from '../../Utils/Loader';
+import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 export const ProposalPage = React.createClass({
   propTypes: {
@@ -81,7 +86,7 @@ export const ProposalPage = React.createClass({
                     <span className="badge">{proposal.postsCount}</span>
                   </NavItem>
                   <NavItem eventKey="evaluation" className="tab">
-                      <FormattedMessage id="proposal.tabs.evaluation" />
+                    <FormattedMessage id="proposal.tabs.evaluation" />
                   </NavItem>
                   {showVotesTab && (
                     <NavItem eventKey="votes" className="tab">
@@ -158,7 +163,37 @@ export const ProposalPage = React.createClass({
                   <ProposalPageBlog />
                 </Tab.Pane>
                 <Tab.Pane eventKey="evaluation">
-                  <ProposalEvaluation />
+                  <QueryRenderer
+                    environment={environment}
+                    query={graphql`
+                      query ProposalPageQuery($proposalId: ID!) {
+                        proposal(id: $proposalId) {
+                          ...ProposalPageEvaluation_proposal
+                        }
+                      }
+                    `}
+                    variables={{ proposalId: proposal.id }}
+                    render={({
+                      error,
+                      props,
+                    }: {
+                      error: ?Error,
+                      props?: ProposalPageQueryResponse,
+                    }) => {
+                      if (error) {
+                        console.log(error); // eslint-disable-line no-console
+                        return graphqlError;
+                      }
+                      if (props) {
+                        // eslint-disable-next-line react/prop-types
+                        if (props.proposal) {
+                          return <ProposalPageEvaluation proposal={props.proposal} />;
+                        }
+                        return graphqlError;
+                      }
+                      return <Loader />;
+                    }}
+                  />
                 </Tab.Pane>
               </Tab.Content>
             </div>
