@@ -43,7 +43,7 @@ class Version20171107165657 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         echo '-> Adding user notifications for existing users...' . PHP_EOL;
-        $users = $this->connection->fetchAll('SELECT * from fos_user');
+        $users = $this->connection->fetchAll('SELECT id, notifications_configuration_id from fos_user');
         foreach ($users as $user) {
             if (!$user['notifications_configuration_id']) {
                 $uuid = $this->generator->generate($this->em, null);
