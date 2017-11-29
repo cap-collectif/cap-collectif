@@ -16,10 +16,12 @@ Capco\AppBundle\Entity\Argument:
             expose: true
             type: DateTime
             groups: [Opinions, OpinionVersions]
+            serialized_name: createdAt
         updatedAt:
             expose: true
             type: DateTime
             groups: [Opinions, OpinionVersions]
+            serialized_name: updatedAt
         votesCount:
             expose: true
             type: integer

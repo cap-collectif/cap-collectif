@@ -15,8 +15,8 @@ Scenario: API client wants to list arguments of an opinion
         "id": @string@,
         "body": @string@,
         "type": @integer@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
 
         "votesCount": @integer@,
         "is_trashed": @boolean@,
@@ -59,8 +59,8 @@ Scenario: API client wants to list arguments of an opinion version
         "id": @string@,
         "body": @string@,
         "type": @integer@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
 
         "votesCount": @integer@,
         "is_trashed": @boolean@,

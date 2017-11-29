@@ -43,7 +43,7 @@ Scenario: Logged in API client wants to get one of his replies
           "required": @boolean@,
           "private": @boolean@
         },
-        "updated_at": "@string@.isDateTime()"
+        "updatedAt": "@string@.isDateTime()"
       },
       @...@
     ],
@@ -105,7 +105,7 @@ Scenario: Logged in API client wants to get his replies
               "required": @boolean@,
               "private": @boolean@
             },
-            "updated_at": "@string@.isDateTime()"
+            "updatedAt": "@string@.isDateTime()"
           },
           @...@
         ],
