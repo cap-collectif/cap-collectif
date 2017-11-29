@@ -1,6 +1,7 @@
+// @flow
 import React, { PureComponent } from 'react';
 import { Col, Label } from 'react-bootstrap';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 type CurrentMedia = {
   name: string,
@@ -76,4 +77,4 @@ export class PreviewMedia extends PureComponent<Props> {
   }
 }
 
-export default injectIntl(PreviewMedia);
+export default PreviewMedia;
