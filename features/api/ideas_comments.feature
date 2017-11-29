@@ -14,7 +14,7 @@ Feature: Ideas comments
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "id": @integer@,
           "body": @string@,
           "createdAt": "@string@.isDateTime()",
@@ -59,7 +59,7 @@ Feature: Ideas comments
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "id": @integer@,
           "body": @string@,
           "createdAt": "@string@.isDateTime()",

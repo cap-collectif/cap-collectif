@@ -14,7 +14,7 @@ Feature: Events comments
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "pinned": @boolean@,
           "id": @integer@,
           "body": @string@,
@@ -59,7 +59,7 @@ Feature: Events comments
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "id": @integer@,
           "body": @string@,
           "createdAt": "@string@.isDateTime()",

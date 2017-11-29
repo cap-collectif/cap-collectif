@@ -23,6 +23,7 @@ Capco\AppBundle\Entity\Comment:
       expose: true
       type: integer
       groups: [Comments]
+      serialized_name: votesCount
     Author:
       expose: true
       type: Capco\UserBundle\Entity\User
@@ -49,6 +50,6 @@ Capco\AppBundle\Entity\Comment:
       groups: [Comments]
   virtual_properties:
     canContribute:
-      serialized_name: can_contribute
+      serialized_name: canContribute
       type: boolean
       groups: [Comments]

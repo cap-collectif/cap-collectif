@@ -12,7 +12,7 @@ Scenario: API client wants to list comments of a proposal
     "comments":
     [
       {
-        "can_contribute": @boolean@,
+        "canContribute": @boolean@,
         "id": @integer@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
@@ -57,7 +57,7 @@ Scenario: API client wants to find the first comment of a proposal
     "comments":
     [
       {
-        "can_contribute": @boolean@,
+        "canContribute": @boolean@,
         "id": @integer@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
