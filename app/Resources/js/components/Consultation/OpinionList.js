@@ -45,8 +45,8 @@ export const OpinionList = React.createClass({
           <div className="opinion__header  opinion__header--mobile-centered">
             <h2 className="pull-left  h4  opinion__header__title">
               <FormattedMessage
-                id="project.show.opinions"
-                values={{ '%count%': section.contributionsCount }}
+                id="global.opinionsCount"
+                values={{ num: section.contributionsCount }}
               />
             </h2>
             <div className="pull-right  opinion__header__filter">

@@ -15,10 +15,10 @@ exports[`<OpinionList /> renders correcty 1`] = `
         className="pull-left  h4  opinion__header__title"
       >
         <FormattedMessage
-          id="project.show.opinions"
+          id="global.opinionsCount"
           values={
             Object {
-              "%count%": undefined,
+              "num": undefined,
             }
           }
         />
