@@ -925,12 +925,12 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "_links": Object {
                 "show": "http://capco/step1/show-link",
               },
-              "endAt": "2017-11-25T09:00:24+01:00",
+              "endAt": "2017-11-26T09:00:24+01:00",
               "startAt": "2017-01-10T09:00:24+01:00",
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
+              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -941,7 +941,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 2",
-              "type": "presentation",
+              "type": "collect",
             },
             Object {
               "status": "future",
@@ -1016,12 +1016,12 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "_links": Object {
                 "show": "http://capco/step1/show-link",
               },
-              "endAt": "2017-11-25T09:00:24+01:00",
+              "endAt": "2017-11-26T09:00:24+01:00",
               "startAt": "2017-01-10T09:00:24+01:00",
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
+              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -1032,7 +1032,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 2",
-              "type": "presentation",
+              "type": "collect",
             },
             Object {
               "status": "future",
@@ -1050,12 +1050,12 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "_links": Object {
           "show": "http://capco/step1/show-link",
         },
-        "endAt": "2017-11-25T09:00:24+01:00",
+        "endAt": "2017-11-26T09:00:24+01:00",
         "startAt": "2017-01-10T09:00:24+01:00",
         "status": "open",
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
+        "type": "presentation",
       }
     }
     project={
@@ -1073,12 +1073,12 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "_links": Object {
               "show": "http://capco/step1/show-link",
             },
-            "endAt": "2017-11-25T09:00:24+01:00",
+            "endAt": "2017-11-26T09:00:24+01:00",
             "startAt": "2017-01-10T09:00:24+01:00",
             "status": "open",
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
+            "type": "presentation",
           },
           Object {
             "_links": Object {
@@ -1089,7 +1089,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 2",
-            "type": "presentation",
+            "type": "collect",
           },
           Object {
             "status": "future",
@@ -1107,30 +1107,12 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       href="http://capco/step1/show-link"
     >
       <FormattedMessage
-        id="project.preview.action.participe"
+        id="project.preview.action.seeStep"
         values={Object {}}
       />
     </a>
      
      
-    <span
-      className="excerpt"
-    >
-      <span
-        className="excerpt_dark"
-      >
-        20
-      </span>
-       
-      <FormattedMessage
-        id="count.minutesLeft"
-        values={
-          Object {
-            "count": 20,
-          }
-        }
-      />
-    </span>
   </div>
 </div>
 `;
