@@ -41,7 +41,7 @@ Feature: Events comments
           },
           "hasUserReported": @boolean@,
           "hasUserVoted": @boolean@,
-          "can_edit": @boolean@
+          "canEdit": @boolean@
         },
         @...@
       ]
@@ -73,7 +73,7 @@ Feature: Events comments
           "_links": @...@,
           "hasUserReported": @boolean@,
           "hasUserVoted": @boolean@,
-          "can_edit": @boolean@
+          "canEdit": @boolean@
         }
       ]
     }
