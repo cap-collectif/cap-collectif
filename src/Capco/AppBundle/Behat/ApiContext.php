@@ -547,8 +547,8 @@ EOF;
                 $max = 100000;
                 $pinned = false;
             }
-            PHPUnit::assertGreaterThanOrEqual($comment['votes_count'], $max);
-            $max = $comment['votes_count'];
+            PHPUnit::assertGreaterThanOrEqual($comment['votesCount'], $max);
+            $max = $comment['votesCount'];
         }
     }
 

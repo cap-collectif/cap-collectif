@@ -265,6 +265,7 @@ fos_elastica:
           _all: { enabled: false }
           serializer:
             groups: [Proposals, ThemeDetails, UsersInfos]
+            serialize_null: true
           mappings:
             id:
               index: not_analyzed

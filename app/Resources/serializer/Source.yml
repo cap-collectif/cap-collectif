@@ -25,14 +25,16 @@ Capco\AppBundle\Entity\Source:
             expose: true
             type: DateTime
             groups: [Opinions, OpinionVersions]
+            serialized_name: createdAt
         updatedAt:
             expose: true
             type: DateTime
             groups: [Opinions, OpinionVersions]
+            serialized_name: updatedAt
         votesCount:
             expose: true
             type: integer
-            serialized_name: votes_count
+            serialized_name: votesCount
             groups: [Opinions, OpinionVersions]
         Author:
             expose: true

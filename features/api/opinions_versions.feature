@@ -43,8 +43,8 @@ Feature: Opinions Versions
           "sourcesCount": @integer@,
 
           "argumentsCount": @integer@,
-          "arguments_yes_count": @integer@,
-          "arguments_no_count": @integer@,
+          "argumentsYesCount": @integer@,
+          "argumentsNoCount": @integer@,
 
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
@@ -87,12 +87,12 @@ Feature: Opinions Versions
         "comment": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
-        "is_trashed": @boolean@,
+        "isTrashed": @boolean@,
         "isContribuable": @boolean@,
 
         "arguments": @...@,
-        "arguments_yes_count": @integer@,
-        "arguments_no_count": @integer@,
+        "argumentsYesCount": @integer@,
+        "argumentsNoCount": @integer@,
         "argumentsCount": @integer@,
 
         "sources": @...@,

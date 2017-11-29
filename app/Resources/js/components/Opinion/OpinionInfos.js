@@ -68,7 +68,7 @@ const OpinionInfos = React.createClass({
       return <UserLink user={opinion.author} />;
     }
 
-    return <span>{opinion.author_name}</span>;
+    return <span>{opinion.authorName}</span>;
   },
 
   renderRankingLabel() {

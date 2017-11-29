@@ -18,9 +18,9 @@ Scenario: API client wants to list sources of an opinion
         },
         "body": @string@,
         "link": @string@,
-        "created_at": "@string@.isDateTime()",
-        "updated_at": "@string@.isDateTime()",
-        "votes_count": @integer@,
+        "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
+        "votesCount": @integer@,
         "isContribuable": @boolean@,
         "author": {
           "username": @string@,
