@@ -12,10 +12,10 @@ import {
   renderResponses,
   formatInitialResponses,
   formatResponsesToSubmit,
+  type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
-import type { ResponsesValues } from '../Admin/ProposalAdminNotationForm';
 
 type FormValues = { responses: ResponsesValues };
 type RelayProps = {

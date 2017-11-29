@@ -18,6 +18,7 @@ import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalE
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
+import ProposalPrivateField from '../ProposalPrivateField';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 
@@ -251,37 +252,41 @@ export const renderResponses = ({
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
               return (
-                <div key={`${member}-container`}>
-                  <MultipleChoiceRadio
-                    name={member}
-                    helpText={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    label={label}
-                    change={change}
-                    choices={choices}
-                    value={response}
-                    disabled={disabled}
-                  />
-                </div>
+                <ProposalPrivateField show={field.private}>
+                  <div key={`${member}-container`}>
+                    <MultipleChoiceRadio
+                      name={member}
+                      helpText={field.helpText}
+                      isOtherAllowed={isOtherAllowed}
+                      label={label}
+                      change={change}
+                      choices={choices}
+                      value={response}
+                      disabled={disabled}
+                    />
+                  </div>
+                </ProposalPrivateField>
               );
             }
           }
 
           return (
-            <Field
-              key={key}
-              name={`${member}.value`}
-              id={`reply-${field.id}`}
-              type={inputType}
-              component={component}
-              help={field.helpText}
-              isOtherAllowed={isOtherAllowed}
-              labelClassName="h4"
-              placeholder="reply.your_response"
-              choices={choices}
-              label={label}
-              disabled={disabled}
-            />
+            <ProposalPrivateField show={field.private}>
+              <Field
+                key={key}
+                name={`${member}.value`}
+                id={`reply-${field.id}`}
+                type={inputType}
+                component={component}
+                help={field.helpText}
+                isOtherAllowed={isOtherAllowed}
+                labelClassName="h4"
+                placeholder="reply.your_response"
+                choices={choices}
+                label={label}
+                disabled={disabled}
+              />
+            </ProposalPrivateField>
           );
         }
       }
