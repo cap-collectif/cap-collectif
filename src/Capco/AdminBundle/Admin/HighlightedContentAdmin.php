@@ -77,7 +77,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('post', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.post',
                     'class' => Post::class,
-                    'choices_as_values' => true,
                 ])
             ;
         } elseif ($subject instanceof HighlightedProject) {
@@ -85,7 +84,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('project', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.project',
                     'class' => Project::class,
-                    'choices_as_values' => true,
                 ])
             ;
         } elseif ($subject instanceof HighlightedIdea) {
@@ -93,7 +91,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('idea', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.idea',
                     'class' => Idea::class,
-                    'choices_as_values' => true,
                 ])
             ;
         } elseif ($subject instanceof HighlightedEvent) {
@@ -101,7 +98,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('event', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.event',
                     'class' => Event::class,
-                    'choices_as_values' => true,
                 ])
             ;
         } elseif ($subject instanceof HighlightedTheme) {
@@ -109,7 +105,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('theme', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.theme',
                     'class' => Theme::class,
-                    'choices_as_values' => true,
                 ])
             ;
         }

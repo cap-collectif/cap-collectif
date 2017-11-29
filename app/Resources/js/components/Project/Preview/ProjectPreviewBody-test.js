@@ -18,6 +18,7 @@ const firstTest = {
         startAt: '2017-11-20T09:00:24+01:00',
         endAt: '2018-11-28T09:00:24+01:00',
         timeless: false,
+        type: 'collect',
         _links: { show: 'http://capco/step2/show-link' },
       },
       {
@@ -26,6 +27,7 @@ const firstTest = {
         startAt: '2017-01-10T09:00:24+01:00',
         endAt: '2017-11-25T09:00:24+01:00',
         timeless: false,
+        type: 'collect',
         _links: { show: 'http://capco/step1/show-link' },
       },
       { title: 'Future step', status: 'future' },
@@ -46,6 +48,7 @@ const secondTest = {
         startAt: '2017-11-10T09:00:24+01:00',
         endAt: '2017-11-25T09:00:24+01:00',
         timeless: false,
+        type: 'presentation',
         _links: { show: 'http://capco/step/show-link' },
       },
       {
@@ -54,6 +57,7 @@ const secondTest = {
         startAt: null,
         endAt: null,
         timeless: true,
+        type: 'presentation',
         _links: { show: 'http://capco/timeless-step/show-link' },
       },
       { title: 'Future step', status: 'future' },
@@ -73,11 +77,13 @@ const thirdTest = {
         status: 'future',
         startAt: '2018-01-20T09:00:24+01:00',
         endAt: '2018-01-28T09:00:24+01:00',
+        type: 'presentation',
         _links: { show: 'http://capco/future-step2/show-link' },
       },
       {
         title: 'Future step 1',
         status: 'future',
+        type: 'presentation',
         startAt: '2017-12-20T09:00:24+01:00',
         endAt: '2017-12-28T09:00:24+01:00',
         _links: { show: 'http://capco/future-step1/show-link' },
@@ -97,6 +103,7 @@ const fourthTest = {
         status: 'closed',
         startAt: '2016-12-20T09:00:24+01:00',
         endAt: '2016-12-28T09:00:24+01:00',
+        type: 'presentation',
         _links: { show: 'http://capco/closed-step1/show-link' },
       },
       {
@@ -104,6 +111,7 @@ const fourthTest = {
         status: 'closed',
         startAt: '2017-01-20T09:00:24+01:00',
         endAt: '2017-01-28T09:00:24+01:00',
+        type: 'presentation',
         _links: { show: 'http://capco/closed-step2/show-link' },
       },
     ],
@@ -114,7 +122,7 @@ const fifthTest = {
   project: {
     title: 'Name of my project',
     _links: { show: 'http://capco/show-link' },
-    hasParticipativeStep: false,
+    hasParticipativeStep: true,
     steps: [
       { title: 'Closed step', status: 'closed' },
       {
@@ -123,6 +131,7 @@ const fifthTest = {
         startAt: '2017-11-20T09:00:24+01:00',
         endAt: '2018-11-28T09:00:24+01:00',
         timeless: false,
+        type: 'presentation',
         _links: { show: 'http://capco/step2/show-link' },
       },
       {
@@ -131,6 +140,7 @@ const fifthTest = {
         startAt: '2017-01-10T09:00:24+01:00',
         endAt: '2017-11-25T09:00:24+01:00',
         timeless: false,
+        type: 'collect',
         _links: { show: 'http://capco/step1/show-link' },
       },
       { title: 'Future step', status: 'future' },
@@ -150,6 +160,7 @@ const remainingTimeTest = {
         startAt: '2017-01-10T09:00:24+01:00',
         endAt: '2017-11-25T09:00:24+01:00',
         timeless: false,
+        type: 'collect',
         _links: { show: 'http://capco/step1/show-link' },
       },
     ],
@@ -190,7 +201,7 @@ describe('<ProjectPreviewBody />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly project preview body & elements for open step (with no participative step)', () => {
+  it('should render correctly project preview body & elements for open step (with no actual participative step)', () => {
     const wrapper = shallow(<ProjectPreviewBody {...fifthTest} />);
     expect(wrapper).toMatchSnapshot();
   });

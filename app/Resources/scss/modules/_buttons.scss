@@ -14,16 +14,3 @@
         pointer-events: none;
     }
 }
-
-// To remove with bootstrap4
-.btn-secondary {
-    background-color: $dark-gray;
-    border-color: $dark-gray;
-    color: $white;
-
-    &:hover {
-        background-color: $dark-gray-hover;
-        border-color: $dark-gray-hover;
-        color: $white;
-    }
-}

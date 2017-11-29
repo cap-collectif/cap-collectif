@@ -14,14 +14,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
       <h2
         className="pull-left  h4  opinion__header__title"
       >
-        <FormattedMessage
-          id="global.opinionsCount"
-          values={
-            Object {
-              "num": undefined,
-            }
-          }
-        />
+         proposition
       </h2>
       <div
         className="pull-right  opinion__header__filter"
