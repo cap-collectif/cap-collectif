@@ -9,7 +9,7 @@ type Props = {
   proposal: ProposalLastUpdateInfo_proposal,
 };
 
-export class ProposalLastUpdateInfo extends React.Component<Props> {
+export class ProposalLastUpdateInfo extends React.PureComponent<Props> {
   render() {
     const { proposal } = this.props;
     return (

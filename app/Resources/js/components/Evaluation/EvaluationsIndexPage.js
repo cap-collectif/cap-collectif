@@ -11,7 +11,6 @@ export const render = ({
   props,
 }: ReadyState & { props: ?EvaluationsIndexPageQueryResponse }) => {
   if (error) {
-    console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
