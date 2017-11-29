@@ -889,7 +889,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     {
         return [
             'date' => $this->getUpdatedAt(),
-            'user' => $this->getAuthor(),
+            'user' => $this->getUpdateAuthor(),
         ];
     }
 

@@ -6,13 +6,33 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
     1-1
   </td>
   <td>
-    Title
+    <a
+      href="http://capco.dev/proposal"
+    >
+      Title
+    </a>
   </td>
   <td>
-    En cours
+    <Relay(ProposalCollectStatus)
+      proposal={
+        Object {
+          "reference": "1-1",
+          "show_url": "http://capco.dev/proposal",
+          "title": "Title",
+        }
+      }
+    />
   </td>
   <td>
-    2017-07-10T18:53:58+0200
+    <Relay(ProposalLastUpdateInfo)
+      proposal={
+        Object {
+          "reference": "1-1",
+          "show_url": "http://capco.dev/proposal",
+          "title": "Title",
+        }
+      }
+    />
   </td>
   <td>
     <ButtonToolbar
@@ -33,10 +53,9 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
       </Button>
       <Button
         active={false}
-        bStyle="primary"
         block={false}
         bsClass="btn"
-        bsStyle="default"
+        bsStyle="primary"
         disabled={false}
         href="http://capco.dev/proposal#evaluation"
       >

@@ -783,6 +783,9 @@ type Proposal {
   # The updated date.
   updatedAt: DateTime
 
+  # The update user.
+  updatedBy: User
+
   # The publication status.
   publicationStatus: PublicationStatus!
   trashedReason: String
@@ -1269,6 +1272,7 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 type Status {
   id: ID!
   name: String!
+  color: String!
 }
 
 # A step in a project

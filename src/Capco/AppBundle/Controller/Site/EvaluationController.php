@@ -15,6 +15,10 @@ class EvaluationController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if (!$this->getUser()->isEvaluer()) {
+            throw $this->createAccessDeniedException();
+        }
+
         return [];
     }
 }

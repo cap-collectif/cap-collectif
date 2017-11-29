@@ -10,11 +10,6 @@ describe('<ProposalFormEvaluationRow />', () => {
       show_url: 'http://capco.dev/proposal',
       reference: '1-1',
       title: 'Title',
-      updatedAt: '2017-07-10T18:53:58+0200',
-      status: {
-        name: 'En cours',
-        id: '1',
-      },
     },
   };
 

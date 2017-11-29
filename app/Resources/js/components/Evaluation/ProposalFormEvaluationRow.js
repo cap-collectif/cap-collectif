@@ -3,6 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
+import ProposalCollectStatus from '../Proposal/ProposalCollectStatus';
+import ProposalLastUpdateInfo from '../Proposal/ProposalLastUpdateInfo';
 import type { ProposalFormEvaluationRow_proposal } from './__generated__/ProposalFormEvaluationRow_proposal.graphql';
 
 type Props = { proposal: ProposalFormEvaluationRow_proposal };
@@ -13,15 +15,21 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
     return (
       <tr>
         <td>{proposal.reference}</td>
-        <td>{proposal.title}</td>
-        <td>{proposal.status && proposal.status.name}</td>
-        <td>{proposal.updatedAt}</td>
+        <td>
+          <a href={proposal.show_url}>{proposal.title}</a>
+        </td>
+        <td>
+          <ProposalCollectStatus proposal={proposal} />
+        </td>
+        <td>
+          <ProposalLastUpdateInfo proposal={proposal} />
+        </td>
         <td>
           <ButtonToolbar>
             <Button href={proposal.show_url}>
               <FormattedMessage id="global.see" />
             </Button>
-            <Button bStyle="primary" href={`${proposal.show_url}#evaluation`}>
+            <Button bsStyle="primary" href={`${proposal.show_url}#evaluation`}>
               <FormattedMessage id="global.eval" />
             </Button>
           </ButtonToolbar>
@@ -38,11 +46,8 @@ export default createFragmentContainer(
       show_url
       reference
       title
-      updatedAt
-      status {
-        name
-        id
-      }
+      ...ProposalCollectStatus_proposal
+      ...ProposalLastUpdateInfo_proposal
     }
   `,
 );

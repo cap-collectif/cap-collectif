@@ -49,6 +49,10 @@ Proposal:
             updatedAt:
                 type: "DateTime"
                 description: "The updated date."
+            updatedBy:
+                type: "User"
+                description: "The update user."
+                resolve: "@=value.getUpdateAuthor()"
             publicationStatus:
                 type: "PublicationStatus!"
                 description: "The publication status."

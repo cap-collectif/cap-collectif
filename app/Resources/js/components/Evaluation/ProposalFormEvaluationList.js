@@ -16,8 +16,16 @@ export class ProposalFormEvaluationList extends Component<Props> {
     }
     return (
       <div className="container">
-        <h4>{proposalForm.step && proposalForm.step.project.title}</h4>
-        <Table striped bordered condensed hover>
+        <h4>
+          {proposalForm.step && proposalForm.step.project.title}{' '}
+          <span className="excerpt small">
+            <FormattedMessage
+              id="proposal.count"
+              values={{ num: proposalForm.proposals.totalCount }}
+            />
+          </span>
+        </h4>
+        <Table striped hover className="mt-20">
           <thead>
             <tr>
               <th>

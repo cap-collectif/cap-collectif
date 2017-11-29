@@ -6,11 +6,25 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
 >
   <h4>
     My Project title
+     
+    <span
+      className="excerpt small"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </span>
   </h4>
   <Table
-    bordered={true}
+    bordered={false}
     bsClass="table"
-    condensed={true}
+    className="mt-20"
+    condensed={false}
     hover={true}
     responsive={false}
     striped={true}
