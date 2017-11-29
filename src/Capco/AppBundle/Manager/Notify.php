@@ -50,6 +50,9 @@ class Notify implements MailerInterface
     {
         if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
+            if ($this->mailer->getTransport()->isStarted()) {
+                $this->mailer->getTransport()->stop();
+            }
         }
     }
 
