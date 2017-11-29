@@ -75,7 +75,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       serialized_name: body
       groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
     hasLinkedData:
-      serialized_name: has_linked_data
+      serialized_name: hasLinkedData
       groups: [ElementsList, ElementsPublished, ElementDetails]
   relations:
     -
