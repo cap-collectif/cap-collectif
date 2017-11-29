@@ -19,8 +19,8 @@ Scenario: API client wants to list arguments of an opinion
         "updatedAt": "@string@.isDateTime()",
 
         "votesCount": @integer@,
-        "is_trashed": @boolean@,
-        "is_enabled": @boolean@,
+        "isTrashed": @boolean@,
+        "isEnabled": @boolean@,
         "isContribuable": @boolean@,
 
         "author": {
@@ -63,8 +63,8 @@ Scenario: API client wants to list arguments of an opinion version
         "updatedAt": "@string@.isDateTime()",
 
         "votesCount": @integer@,
-        "is_trashed": @boolean@,
-        "is_enabled": @boolean@,
+        "isTrashed": @boolean@,
+        "isEnabled": @boolean@,
         "isContribuable": @boolean@,
 
         "author": {

@@ -59,8 +59,8 @@ class PostsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByPost($post);
 
         return [
-            'comments_and_answers_count' => (int) $countWithAnswers,
-            'comments_count' => count($paginator),
+            'commentsAndAnswersCount' => (int) $countWithAnswers,
+            'commentsCount' => count($paginator),
             'comments' => $comments,
         ];
     }
@@ -104,7 +104,7 @@ class PostsController extends FOSRestController
             if (!$parent instanceof PostComment || $post !== $parent->getPost()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this post');
             }
-            if ($parent->getParent() !== null) {
+            if (null !== $parent->getParent()) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }

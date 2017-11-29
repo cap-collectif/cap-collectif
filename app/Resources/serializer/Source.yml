@@ -34,7 +34,7 @@ Capco\AppBundle\Entity\Source:
         votesCount:
             expose: true
             type: integer
-            serialized_name: votes_count
+            serialized_name: votesCount
             groups: [Opinions, OpinionVersions]
         Author:
             expose: true

@@ -20,7 +20,7 @@ Scenario: API client wants to list sources of an opinion
         "link": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
-        "votes_count": @integer@,
+        "votesCount": @integer@,
         "isContribuable": @boolean@,
         "author": {
           "username": @string@,

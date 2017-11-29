@@ -9,8 +9,8 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": @integer@,
-      "comments_count": @integer@,
+      "commentsAndAnswersCount": @integer@,
+      "commentsCount": @integer@,
       "comments":
       [
         {
@@ -20,7 +20,7 @@ Feature: Events comments
           "body": @string@,
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "votesCount": @integer@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -33,9 +33,9 @@ Feature: Events comments
             }
           },
           "answers": [],
-          "author_email": @null@,
-          "author_name": @null@,
-          "is_trashed": @boolean@,
+          "authorEmail": @null@,
+          "authorName": @null@,
+          "isTrashed": @boolean@,
           "_links": {
             "edit": @string@
           },
@@ -54,8 +54,8 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": @integer@,
-      "comments_count": @integer@,
+      "commentsAndAnswersCount": @integer@,
+      "commentsCount": @integer@,
       "comments":
       [
         {
@@ -64,12 +64,12 @@ Feature: Events comments
           "body": @string@,
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "votesCount": @integer@,
           "author": @...@,
           "answers": @...@,
-          "author_email": @null@,
-          "author_name": @null@,
-          "is_trashed": @boolean@,
+          "authorEmail": @null@,
+          "authorName": @null@,
+          "isTrashed": @boolean@,
           "_links": @...@,
           "has_user_reported": @boolean@,
           "has_user_voted": @boolean@,
@@ -85,8 +85,8 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": "@integer@",
-      "comments_count": "@integer@",
+      "commentsAndAnswersCount": "@integer@",
+      "commentsCount": "@integer@",
       "comments":
       [
         @...@
