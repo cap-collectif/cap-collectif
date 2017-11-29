@@ -79,7 +79,7 @@ class OpinionSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'user_vote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
+            'userVote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
         );
 
         $event->getVisitor()->addData(
@@ -128,7 +128,7 @@ class OpinionSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'user_vote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinion', $opinion, $user)
+            'userVote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinion', $opinion, $user)
         );
 
         $event->getVisitor()->addData(

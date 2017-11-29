@@ -27,7 +27,7 @@ Feature: Opinions Links
 
           "type": @...@,
 
-          "user_vote": @null@,
+          "userVote": @null@,
           "hasUserReported": @boolean@,
 
           "_links": {

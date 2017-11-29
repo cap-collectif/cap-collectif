@@ -100,7 +100,7 @@ Feature: Opinions
         },
 
         "hasUserReported": @boolean@,
-        "user_vote": @null@,
+        "userVote": @null@,
 
         "ranking": @...@,
         "modals": @array@,

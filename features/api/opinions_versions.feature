@@ -36,7 +36,7 @@ Feature: Opinions Versions
               "show": @string@,
               "type": @string@
             },
-            "user_vote": @null@,
+            "userVote": @null@,
             "hasUserReported": @boolean@
           },
 
@@ -61,7 +61,7 @@ Feature: Opinions Versions
             "parent": @string@
           },
 
-          "user_vote": @null@,
+          "userVote": @null@,
           "hasUserReported": @boolean@
         },
         @...@
@@ -119,7 +119,7 @@ Feature: Opinions Versions
             "edit": @string@,
             "type": @string@
           },
-          "user_vote": @null@,
+          "userVote": @null@,
           "hasUserReported": @boolean@
         },
         "author": {
@@ -137,7 +137,7 @@ Feature: Opinions Versions
           "show": @string@,
           "parent": @string@
         },
-        "user_vote": @null@,
+        "userVote": @null@,
         "hasUserReported": @boolean@,
 
         "ranking": @integer@
