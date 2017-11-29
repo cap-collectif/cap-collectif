@@ -203,8 +203,8 @@ class ProposalsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByProposal($proposal);
 
         return [
-            'commentsAndAnswersCount' => (int) $countWithAnswers,
-            'commentsCount' => count($paginator),
+            'comments_and_answers_count' => (int) $countWithAnswers,
+            'comments_count' => count($paginator),
             'comments' => $comments,
         ];
     }

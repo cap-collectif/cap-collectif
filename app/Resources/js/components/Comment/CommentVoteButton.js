@@ -70,7 +70,7 @@ const CommentVoteButton = React.createClass({
     return (
       <span className="comment__agree">
         {this.renderFormOrDisabled()}{' '}
-        <span className="opinion__votes-nb">{comment.votesCount}</span>
+        <span className="opinion__votes-nb">{comment.votes_count}</span>
       </span>
     );
   },

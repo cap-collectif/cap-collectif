@@ -13,7 +13,7 @@ const CommentInfos = React.createClass({
       return <UserLink user={comment.author} />;
     }
 
-    return <span>{comment.authorName}</span>;
+    return <span>{comment.author_name}</span>;
   },
 
   render() {

@@ -12,7 +12,7 @@ Feature: Opinions
     {
       "opinion": {
         "isContribuable": @boolean@,
-        "isTrashed": @boolean@,
+        "is_trashed": @boolean@,
 
         "id": @string@,
         "title": @string@,

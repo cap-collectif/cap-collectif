@@ -9,17 +9,17 @@ Feature: Posts comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": @integer@,
-      "commentsCount": @integer@,
+      "comments_and_answers_count": @integer@,
+      "comments_count": @integer@,
       "comments":
       [
         {
           "can_contribute": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "createdAt": "@string@.isDateTime()",
-          "updatedAt": "@string@.isDateTime()",
-          "votesCount": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "votes_count": @integer@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -32,9 +32,9 @@ Feature: Posts comments
             }
           },
           "answers": @...@,
-          "authorEmail": @null@,
-          "authorName": @null@,
-          "isTrashed": @boolean@,
+          "author_email": @null@,
+          "author_name": @null@,
+          "is_trashed": @boolean@,
           "_links": {
             "vote": @string@,
             "edit": @string@
@@ -54,22 +54,22 @@ Feature: Posts comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": @integer@,
-      "commentsCount": @integer@,
+      "comments_and_answers_count": @integer@,
+      "comments_count": @integer@,
       "comments":
       [
         {
           "can_contribute": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "createdAt": "@string@.isDateTime()",
-          "updatedAt": "@string@.isDateTime()",
-          "votesCount": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "votes_count": @integer@,
           "author": @...@,
           "answers": @...@,
-          "authorEmail": @null@,
-          "authorName": @null@,
-          "isTrashed": @boolean@,
+          "author_email": @null@,
+          "author_name": @null@,
+          "is_trashed": @boolean@,
           "_links": @...@,
           "has_user_reported": @boolean@,
           "has_user_voted": @boolean@,
@@ -86,8 +86,8 @@ Feature: Posts comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": "@integer@.greaterThan(0)",
-      "commentsCount": "@integer@.greaterThan(0)",
+      "comments_and_answers_count": "@integer@.greaterThan(0)",
+      "comments_count": "@integer@.greaterThan(0)",
       "comments":
       [
         @...@

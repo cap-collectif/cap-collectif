@@ -87,7 +87,7 @@ Feature: Opinions Versions
         "comment": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
-        "isTrashed": @boolean@,
+        "is_trashed": @boolean@,
         "isContribuable": @boolean@,
 
         "arguments": @...@,

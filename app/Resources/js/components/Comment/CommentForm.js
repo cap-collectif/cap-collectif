@@ -92,8 +92,8 @@ const CommentForm = React.createClass({
         isEmail: { message: 'comment.constraints.author_email' },
       };
       this.formValidationRules.authorName = {
-        notBlank: { message: 'comment.constraints.authorName' },
-        min: { value: 2, message: 'comment.constraints.authorName' },
+        notBlank: { message: 'comment.constraints.author_name' },
+        min: { value: 2, message: 'comment.constraints.author_name' },
       };
     }
   },
