@@ -58,6 +58,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     originalDivision:
       expose: true
       groups: [ElementDetails]
+      serialized_name: originalDivision
     division:
       expose: true
       groups: [ElementDetails]
