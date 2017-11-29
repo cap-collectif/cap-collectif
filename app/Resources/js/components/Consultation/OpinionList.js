@@ -1,7 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -44,10 +43,7 @@ export const OpinionList = React.createClass({
         <div className={`opinion  opinion--${section.color} opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
             <h2 className="pull-left  h4  opinion__header__title">
-              <FormattedMessage
-                id="project.show.opinions"
-                values={{ '%count%': section.contributionsCount }}
-              />
+              {section.contributionsCount} proposition{section.contributionsCount > 1 && 's'}
             </h2>
             <div className="pull-right  opinion__header__filter">
               {section.contributionsCount > 1 && (
@@ -57,27 +53,13 @@ export const OpinionList = React.createClass({
                   onChange={(event: SyntheticInputEvent<>) => {
                     window.location.href = `${section.url}/sort/${event.target.value}`;
                   }}>
-                  <option value="positions">
-                    <FormattedMessage id="opinion.sort.positions" />
-                  </option>
-                  <option value="random">
-                    <FormattedMessage id="opinion.sort.random" />
-                  </option>
-                  <option value="last">
-                    <FormattedMessage id="opinion.sort.last" />
-                  </option>
-                  <option value="old">
-                    <FormattedMessage id="opinion.sort.old" />
-                  </option>
-                  <option value="favorable">
-                    <FormattedMessage id="opinion.sort.favorable" />
-                  </option>
-                  <option value="votes">
-                    <FormattedMessage id="opinion.sort.votes" />
-                  </option>
-                  <option value="comments">
-                    <FormattedMessage id="opinion.sort.comments" />
-                  </option>
+                  <option value="positions">Tri ordonné puis aléatoire</option>
+                  <option value="random">Tri aléatoire</option>
+                  <option value="last">Les plus récents</option>
+                  <option value="old">Les plus anciens</option>
+                  <option value="favorable">Les plus favorables</option>
+                  <option value="votes">Les plus votés</option>
+                  <option value="comments">Les plus commentés</option>
                 </select>
               )}
               {section.contribuable && (
@@ -86,7 +68,7 @@ export const OpinionList = React.createClass({
                   stepId={consultation.id}
                   projectId={consultation.projectId}
                   disabled={!consultation.open}
-                  label={<FormattedMessage id="opinion.create.button" />}
+                  label={'Proposer'}
                 />
               )}
             </div>
@@ -114,7 +96,7 @@ export const OpinionList = React.createClass({
         {section.contributionsCount > consultation.opinion_count_shown_by_section && (
           <div className="opinion  opinion__footer  box">
             <a href={section.url} className="text-center" style={{ display: 'block' }}>
-              <FormattedMessage id="opinion.show.all" />
+              Voir toutes les propositions
             </a>
           </div>
         )}
