@@ -35,6 +35,8 @@ export type State = {
     +displayName: string,
     +uniqueId: string,
   },
+  +groupAdminUsersUserDeletionSuccessful: boolean,
+  +groupAdminUsersUserDeletionFailed: boolean,
 };
 
 type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
@@ -62,6 +64,13 @@ type DeleteRegistrationFieldSucceededAction = {
   id: number,
 };
 type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
+type GroupAdminUsersUserDeletionSuccessfulAction = {
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
+};
+type GroupAdminUsersUserDeletionFailedAction = {
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
+};
+
 export type UserAction =
   | UpdateRegistrationFieldAction
   | ShowRegistrationModalAction
@@ -77,7 +86,9 @@ export type UserAction =
   | DeleteRegistrationFieldSucceededAction
   | ReorderSucceededAction
   | AddRegistrationFieldAction
-  | SubmitConfirmPasswordAction;
+  | SubmitConfirmPasswordAction
+  | GroupAdminUsersUserDeletionSuccessfulAction
+  | GroupAdminUsersUserDeletionFailedAction;
 
 const initialState: State = {
   showLoginModal: false,
@@ -94,6 +105,8 @@ const initialState: State = {
     questions: [],
     domains: [],
   },
+  groupAdminUsersUserDeletionSuccessful: false,
+  groupAdminUsersUserDeletionFailed: false,
 };
 
 export const addRegistrationFieldSucceeded = (element: Object): AddRegistrationFieldAction => ({
@@ -311,6 +324,13 @@ export const reorderRegistrationQuestions = (questions: Array<Object>, dispatch:
   dispatch(reorderSuceeded(questions));
 };
 
+export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
+});
+export const groupAdminUsersUserDeletionFailed = (): GroupAdminUsersUserDeletionFailedAction => ({
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
+});
+
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case '@@INIT':
@@ -384,6 +404,12 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, showConfirmPasswordModal: true };
     case 'CLOSE_CONFIRM_PASSWORD_MODAL':
       return { ...state, showConfirmPasswordModal: false };
+    case 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL' :
+      return { ...state, groupAdminUsersUserDeletionSuccessful: true };
+    case 'GROUP_ADMIN_USERS_USER_DELETION_FAILED' :
+      return { ...state, groupAdminUsersUserDeletionFailed: true };
+    // case 'GROUP_ADMIN_USERS_USER_DELETION_RESET' :
+    //   return { ...state, groupAdminUsersUserDeletionSuccessful: false, groupAdminUsersUserDeletionFailed: false };
     default:
       return state;
   }
