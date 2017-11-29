@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Col, Label } from 'react-bootstrap';
+import { Col, Label, Row } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
 type CurrentMedia = {
@@ -26,36 +26,55 @@ export class PreviewMedia extends PureComponent<Props> {
 
     return (
       <div>
-        <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
-          <strong>
-            <FormattedMessage id="proposal.document.added" />
-          </strong>{' '}
-          {currentMedias &&
-            currentMedias.map((media, key) => {
-              return (
-                <a key={key} href={media.url} rel="noopener noreferrer" target="_blank">
-                  <Label bsStyle="success" style={{ marginRight: '5px' }}>
-                    {media.name}.{media.extension}
-                  </Label>
-                </a>
-              );
-            })}
-          {newMedias &&
-            newMedias.map((file, key) => {
-              return (
-                <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
-                  {file.name}{' '}
-                  <i
-                    style={{ cursor: 'pointer' }}
-                    className="glyphicon glyphicon-remove"
-                    onClick={() => {
-                      onRemoveMedia(file);
-                    }}
-                  />
-                </Label>
-              );
-            })}
-        </Col>
+        {currentMedias &&
+          currentMedias.length > 0 && (
+            <span className="help-block">
+              <FormattedMessage id="proposal.documents.helptext" />
+            </span>
+          )}
+        {newMedias &&
+          newMedias.length > 0 && (
+            <Row>
+              <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
+                <strong>
+                  <FormattedMessage id="proposal.documents.deposited" />
+                </strong>{' '}
+                {newMedias.map((file, key) => {
+                  return (
+                    <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
+                      {file.name}{' '}
+                      <i
+                        style={{ cursor: 'pointer' }}
+                        className="glyphicon glyphicon-remove"
+                        onClick={() => {
+                          onRemoveMedia(file);
+                        }}
+                      />
+                    </Label>
+                  );
+                })}
+              </Col>
+            </Row>
+          )}
+        {currentMedias &&
+          currentMedias.length > 0 && (
+            <Row>
+              <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
+                <strong>
+                  <FormattedMessage id="proposal.documents.added" />
+                </strong>{' '}
+                {currentMedias.map((media, key) => {
+                  return (
+                    <a key={key} href={media.url} rel="noopener noreferrer" target="_blank">
+                      <Label bsStyle="success" style={{ marginRight: '5px' }}>
+                        {media.name}.{media.extension}
+                      </Label>
+                    </a>
+                  );
+                })}
+              </Col>
+            </Row>
+          )}
       </div>
     );
   }
