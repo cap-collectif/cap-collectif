@@ -39,8 +39,8 @@ Feature: Events comments
           "_links": {
             "edit": @string@
           },
-          "has_user_reported": @boolean@,
-          "has_user_voted": @boolean@,
+          "hasUserReported": @boolean@,
+          "hasUserVoted": @boolean@,
           "can_edit": @boolean@
         },
         @...@
@@ -71,8 +71,8 @@ Feature: Events comments
           "authorName": @null@,
           "isTrashed": @boolean@,
           "_links": @...@,
-          "has_user_reported": @boolean@,
-          "has_user_voted": @boolean@,
+          "hasUserReported": @boolean@,
+          "hasUserVoted": @boolean@,
           "can_edit": @boolean@
         }
       ]

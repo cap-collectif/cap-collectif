@@ -99,7 +99,7 @@ Feature: Opinions
           }
         },
 
-        "has_user_reported": @boolean@,
+        "hasUserReported": @boolean@,
         "user_vote": @null@,
 
         "ranking": @...@,

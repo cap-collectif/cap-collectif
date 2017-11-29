@@ -509,7 +509,8 @@ Scenario: Logged in API client wants to get all proposals from a private collect
           "displayName": "user",
           "uniqueId": "user",
           "isAdmin": false,
-          "userType": @...@,
+          "userType": @...@,,
+          "media": @wildcard@,
           "vip": false
         },
         "proposalForm": {

@@ -48,7 +48,7 @@ const CommentVoteButton = React.createClass({
   renderVoteButton() {
     const { comment } = this.props;
 
-    if (comment.has_user_voted) {
+    if (comment.hasUserVoted) {
       return (
         <button className="btn btn-danger btn-sm" onClick={this.deleteVote}>
           {<FormattedMessage id="comment.vote.remove" />}

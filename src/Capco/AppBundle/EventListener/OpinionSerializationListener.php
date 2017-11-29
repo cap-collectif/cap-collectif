@@ -79,11 +79,11 @@ class OpinionSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
+            'user_vote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinionVersion', $version, $user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === 'anon.' ? false : $version->userHasReport($user)
+            'hasUserReported', 'anon.' === $user ? false : $version->userHasReport($user)
         );
     }
 
@@ -128,11 +128,11 @@ class OpinionSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'user_vote', $user === 'anon.' ? null : $this->voteRepository->getByObjectUser('opinion', $opinion, $user)
+            'user_vote', 'anon.' === $user ? null : $this->voteRepository->getByObjectUser('opinion', $opinion, $user)
         );
 
         $event->getVisitor()->addData(
-            'has_user_reported', $user === 'anon.' ? false : $opinion->userHasReport($user)
+            'hasUserReported', 'anon.' === $user ? false : $opinion->userHasReport($user)
         );
 
         if (isset($this->getIncludedGroups($event)['Opinions']) && $this->toggleManager->isActive('votes_evolution')) {

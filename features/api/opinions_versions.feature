@@ -37,7 +37,7 @@ Feature: Opinions Versions
               "type": @string@
             },
             "user_vote": @null@,
-            "has_user_reported": @boolean@
+            "hasUserReported": @boolean@
           },
 
           "sourcesCount": @integer@,
@@ -62,7 +62,7 @@ Feature: Opinions Versions
           },
 
           "user_vote": @null@,
-          "has_user_reported": @boolean@
+          "hasUserReported": @boolean@
         },
         @...@
       ],
@@ -120,7 +120,7 @@ Feature: Opinions Versions
             "type": @string@
           },
           "user_vote": @null@,
-          "has_user_reported": @boolean@
+          "hasUserReported": @boolean@
         },
         "author": {
           "username": @string@,
@@ -138,7 +138,7 @@ Feature: Opinions Versions
           "parent": @string@
         },
         "user_vote": @null@,
-        "has_user_reported": @boolean@,
+        "hasUserReported": @boolean@,
 
         "ranking": @integer@
       },

@@ -37,8 +37,8 @@ class CommentSerializationListener extends AbstractSerializationListener
             ]
         );
 
-        $event->getVisitor()->addData('has_user_voted', $this->hasUserVoted($comment));
-        $event->getVisitor()->addData('has_user_reported', $this->hasUserReported($comment));
+        $event->getVisitor()->addData('hasUserVoted', $this->hasUserVoted($comment));
+        $event->getVisitor()->addData('hasUserReported', $this->hasUserReported($comment));
         $event->getVisitor()->addData('can_edit', $this->canEdit($comment));
     }
 
@@ -46,7 +46,7 @@ class CommentSerializationListener extends AbstractSerializationListener
     {
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
-        if ($user === 'anon.') {
+        if ('anon.' === $user) {
             return false;
         }
 
@@ -57,7 +57,7 @@ class CommentSerializationListener extends AbstractSerializationListener
     {
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
-        if ($user === 'anon.') {
+        if ('anon.' === $user) {
             return false;
         }
 
@@ -68,7 +68,7 @@ class CommentSerializationListener extends AbstractSerializationListener
     {
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
-        if ($user === 'anon.') {
+        if ('anon.' === $user) {
             return false;
         }
 

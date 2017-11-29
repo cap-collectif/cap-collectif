@@ -37,8 +37,8 @@ Scenario: API client wants to list comments of a proposal
           "vote": @string@,
           "edit": @string@
         },
-        "has_user_reported": @boolean@,
-        "has_user_voted": @boolean@,
+        "hasUserReported": @boolean@,
+        "hasUserVoted": @boolean@,
         "can_edit": @boolean@
       },
       @...@
@@ -69,8 +69,8 @@ Scenario: API client wants to find the first comment of a proposal
         "authorName": @null@,
         "isTrashed": @boolean@,
         "_links": @...@,
-        "has_user_reported": @boolean@,
-        "has_user_voted": @boolean@,
+        "hasUserReported": @boolean@,
+        "hasUserVoted": @boolean@,
         "can_edit": @boolean@
       }
     ]

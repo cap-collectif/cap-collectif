@@ -34,8 +34,8 @@ Scenario: API client wants to list sources of an opinion
             "settings": @string@
           }
         },
-        "has_user_voted": @boolean@,
-        "has_user_reported": @boolean@
+        "hasUserVoted": @boolean@,
+        "hasUserReported": @boolean@
       },
       @...@
     ],
