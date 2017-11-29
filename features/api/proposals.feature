@@ -1051,7 +1051,7 @@ Scenario: Logged in API client wants to add a proposal not in zone
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"errors":["global.address_not_in_zone"],"children":{"title":[],"summary":[],"body":[],"theme":[],"district":[],"category":[],"address":[],"responses":{"children":[{"children":{"value":[],"question":[],"_type":[]}},{"children":{"value":[],"question":[],"_type":[]}}]}}}}
+  {"code":400,"message":"Validation Failed","errors":{"errors":["global.address_not_in_zone"],"children":{"title":[],"summary":[],"body":[],"theme":[],"district":[],"category":[],"address":[],"responses":{"children":[{"children":{"value":[],"question":[],"type":[]}},{"children":{"value":[],"question":[],"type":[]}}]}}}}
   """
 
 @database
