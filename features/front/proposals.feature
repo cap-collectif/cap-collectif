@@ -181,7 +181,6 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   When I click the delete proposal button
   And I confirm proposal deletion
   And I wait 3 seconds
-  Then 1 mails should be sent
   And I open mail with subject 'notification.email.proposal.delete.subject'
   And I should see 'notification.email.proposal.delete.body' in mail
 
