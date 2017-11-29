@@ -1,65 +1,95 @@
 /**
  * @flow
  */
-import React, {Component} from 'react';
-import {injectIntl, FormattedMessage} from 'react-intl';
-import {Table} from 'react-bootstrap';
-import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form';
+import React, { Component } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { Button, Table } from 'react-bootstrap';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
 import component from '../../Form/Field';
-import type { NotificationForm_configuration } from "./NotificationForm_configuration";
-import type { GlobalState } from '../../../types'
+import { AlertAdminForm } from '../../Alert/AlertAdminForm';
+import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation';
+import type { NotificationsForm_viewer } from './__generated__/NotificationsForm_viewer.graphql';
+import type { State } from '../../../types';
 
-type FormValues = Object;
-type DefaultProps = void;
-type Props = {
-  notificationsConfiguration: NotificationForm_configuration
+type RelayProps = {
+  viewer: NotificationsForm_viewer,
 };
-type State = void;
+type FormValues = Object;
+type Props = {
+  viewer: Object,
+  initialValues: Object,
+  invalid: boolean,
+  pristine: boolean,
+  submitting: boolean,
+  valid: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
+  handleSubmit: () => void,
+};
 
 const formName = 'user-notifications';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  console.log(props, values);
+const onSubmit = (values: FormValues) => {
+  const variables = {
+    input: { ...values },
+  };
+  return ChangeUserNotificationsConfigurationMutation.commit(variables);
 };
 
-export class NotificationsForm extends Component<Props, State> {
-  static defaultProps: DefaultProps;
-
+export class NotificationsForm extends Component<Props> {
   render() {
-    const {notificationsConfiguration} = this.props;
-    const {onProposalCommentMail} = notificationsConfiguration;
-    console.log(this.props);
+    const {
+      pristine,
+      invalid,
+      submitting,
+      handleSubmit,
+      valid,
+      submitSucceeded,
+      submitFailed,
+    } = this.props;
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
         <Table className="notifications-table" striped>
           <thead>
-          <tr>
-            <th>
-              <FormattedMessage id="profile.account.notifications.title"/>
-            </th>
-            <th>
-              <FormattedMessage id="profile.account.notifications.email"/>
-            </th>
-          </tr>
+            <tr>
+              <th>
+                <FormattedMessage id="profile.account.notifications.informations" />
+              </th>
+              <th>
+                <FormattedMessage id="profile.account.notifications.email" />
+              </th>
+            </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>
-              <FormattedMessage id="profile.account.notifications.proposal_comment"/>
-            </td>
-            <td>
-              <Field name="onProposalCommentMail"
-                     component={component}
-                     type="checkbox"
-                     id="proposal-comment-mail"
-                     checked={onProposalCommentMail}
-              
-              />
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <FormattedMessage id="profile.account.notifications.proposal_comment" />
+              </td>
+              <td>
+                <Field
+                  name="onProposalCommentMail"
+                  component={component}
+                  type="checkbox"
+                  id="proposal-comment-mail"
+                />
+              </td>
+            </tr>
           </tbody>
         </Table>
+        <div className="notifications-form-controls">
+          <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+            <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+          </Button>
+          <AlertAdminForm
+            valid={valid}
+            invalid={invalid}
+            submitSucceeded={submitSucceeded}
+            submitFailed={submitFailed}
+            submitting={submitting}
+          />
+        </div>
       </form>
     );
   }
@@ -68,10 +98,24 @@ export class NotificationsForm extends Component<Props, State> {
 const form = reduxForm({
   onSubmit,
   form: formName,
+  enableReinitialize: true,
 })(NotificationsForm);
 
-const mapStateToProps = (state: GlobalState) => ({
-  notificationsConfiguration: state.user.user ? state.user.user.notificationsConfiguration : null
-});
+const mapStateToProps = (state: State, props: RelayProps) => {
+  return {
+    initialValues: props.viewer.notificationsConfiguration,
+  };
+};
 
-export default connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(injectIntl(form));
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment NotificationsForm_viewer on User {
+      notificationsConfiguration {
+        onProposalCommentMail
+      }
+    }
+  `,
+);

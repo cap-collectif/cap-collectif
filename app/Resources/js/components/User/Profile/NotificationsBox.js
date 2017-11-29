@@ -3,20 +3,40 @@
  */
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { QueryRenderer, graphql } from 'react-relay';
 import NotificationsForm from './NotificationsForm';
+import Loader from '../../Utils/Loader';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 
-type Props = void;
+const query = graphql`
+  query NotificationsBoxQuery {
+    viewer {
+      ...NotificationsForm_viewer
+    }
+  }
+`;
+
+type Props = Object;
 
 export class NotificationsBox extends Component<Props> {
   render() {
+    const renderNotificationsForm = ({ props, error }) => {
+      if (error) {
+        console.log(error); // eslint-disable-line no-console
+        return graphqlError;
+      }
+      if (props) {
+        return <NotificationsForm viewer={props.viewer} />;
+      }
+      return <Loader />;
+    };
     return (
       <Panel header={<FormattedMessage id="profile.account.notifications.title" />}>
-        <NotificationsForm />
+        <QueryRenderer environment={environment} query={query} render={renderNotificationsForm} />
       </Panel>
     );
   }
 }
 
-export default connect()(NotificationsBox);
+export default NotificationsBox;

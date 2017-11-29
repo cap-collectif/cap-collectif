@@ -190,6 +190,28 @@ type ChangeSelectionStatusPayload {
   clientMutationId: String
 }
 
+input ChangeTitleProposalFormInput {
+  proposalFormId: ID!
+  title: String!
+  clientMutationId: String
+}
+
+type ChangeTitleProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+input ChangeUserNotificationsConfigurationInput {
+  # The new proposal comment notification value
+  onProposalCommentMail: Boolean!
+  clientMutationId: String
+}
+
+type ChangeUserNotificationsConfigurationPayload {
+  user: User!
+  clientMutationId: String
+}
+
 type CollectStep implements Step {
   id: ID!
   kind: String!
@@ -479,6 +501,7 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
+  changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
@@ -964,6 +987,8 @@ enum PublicationStatus {
 }
 
 type Query {
+  # Get currently logged in user
+  viewer: User
   users(
     # Remove super admin from export.
     superAdmin: Boolean!
@@ -974,6 +999,9 @@ type Query {
   ): [Consultation!]!
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
+
+  # Get a user notifications configuration
+  notificationsConfiguration: UserNotificationsConfiguration
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -1385,7 +1413,7 @@ type UpdateProposalFormPayload {
   clientMutationId: String
 }
 
-# An user
+# A user
 type User {
   # The id of the user.
   id: ID!
@@ -1415,6 +1443,9 @@ type User {
 
   # Is user is activated.
   enabled: Boolean!
+
+  # A user notifications preferences
+  notificationsConfiguration: UserNotificationsConfiguration
   locked: Boolean!
   phoneConfirmed: Boolean!
   expiresAt: String
@@ -1473,6 +1504,12 @@ type UserGroup {
 
   # Identifies the group
   group: Group!
+}
+
+# A user's notifications configuration
+type UserNotificationsConfiguration {
+  # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
+  onProposalCommentMail: Boolean!
 }
 
 # A type of person

@@ -2,6 +2,11 @@ Query:
     type: object
     config:
         fields:
+            viewer:
+                access: "@=isAuthenticated()"
+                type: "User"
+                description: "Get currently logged in user"
+                resolve: "@=resolver('current_user', [args])"
             users:
                 type: "[User]"
                 args:
@@ -24,10 +29,10 @@ Query:
                 type: "[ProposalForm!]!"
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('proposalForms')"
-            userNotificationsConfiguration:
+            notificationsConfiguration:
                 access: "@=isAuthenticated()"
                 type: "UserNotificationsConfiguration"
-                description: "Get an user notifications configuration"
+                description: "Get a user notifications configuration"
                 resolve: "@=resolver('user_notifications_configuration', [user])"
             availableDistrictsForLocalisation:
                 type: "[District!]!"

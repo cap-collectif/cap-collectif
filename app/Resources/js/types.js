@@ -82,10 +82,6 @@ export type FeatureToggle =
   | 'zipcode_at_register'
   | 'vote_without_account';
 
-export type UserNotificationsConfigurationType = {
-  +onProposalCommentMail: boolean,
-};
-
 export type Action =
   | ProposalAction
   | OpinionAction

@@ -1,29 +1,34 @@
 @profile
 Feature: Profile
 
-Scenario: GraphQL client wants to get an user's notifications configuration
+@dev
+Scenario: GraphQL client wants to get a user's notifications configuration
   Given I am logged in to graphql as user
   When I send a GraphQL request:
   """
   {
-    userNotificationsConfiguration {
-       onProposalCommentMail
-     }
+    viewer {
+      notificationsConfiguration {
+        onProposalCommentMail
+      }
+    }
   }
   """
   Then the JSON response should match:
   """
   {
     "data": {
-      "userNotificationsConfiguration": {
-        "onProposalCommentMail": @boolean@
+      "viewer": {
+        "notificationsConfiguration": {
+          "onProposalCommentMail": @boolean@
+        }
       }
     }
   }
   """
 
 @database
-Scenario: GraphQL client wants to modify an user notifications configuration
+Scenario: GraphQL client wants to modify a user notifications configuration
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """

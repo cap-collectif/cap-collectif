@@ -5,7 +5,6 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
-
   capco.resolver.user_notifications:
       class: Capco\AppBundle\GraphQL\Resolver\UserNotificationsConfigurationResolver
       tags:
@@ -128,6 +127,7 @@ services:
     class: Capco\AppBundle\GraphQL\Resolver\UserResolver
     tags:
         - { name: overblog_graphql.resolver, alias: "user", method: "resolve" }
+        - { name: overblog_graphql.resolver, alias: "current_user", method: "resolveCurrentUser" }
         - { name: overblog_graphql.resolver, alias: "user_email", method: "resolveEmail" }
         - { name: overblog_graphql.resolver, alias: "user_show_url", method: "resolveShowUrl" }
         - { name: overblog_graphql.resolver, alias: "user_createdAt", method: "resolveCreatedAt" }

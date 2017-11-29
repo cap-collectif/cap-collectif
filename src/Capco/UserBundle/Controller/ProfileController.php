@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -12,6 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * @Route("/profile")
@@ -80,7 +84,6 @@ class ProfileController extends BaseController
 
     /**
      * @Route("/notifications/{token}", name="capco_profile_notifications_login")
-     * @Template("@CapcoUser/Profile/edit_notifications.twig")
      */
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
@@ -384,5 +387,14 @@ class ProfileController extends BaseController
         'proposalsPropsBySteps' => $proposalsPropsBySteps,
         'proposalsCount' => $proposalsCount,
       ];
+    }
+
+    private function loginWithToken(Request $request, UserNotificationsConfiguration $userNotificationsConfiguration)
+    {
+        $user = $userNotificationsConfiguration->getUser();
+        $userToken = new UsernamePasswordToken($user, null, $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+        $this->get('security.token_storage')->setToken($userToken);
+        $logInEvent = new InteractiveLoginEvent($request, $userToken);
+        $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);
     }
 }

@@ -191,7 +191,7 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   When I click the delete proposal button
   And I confirm proposal deletion
   And I wait 3 seconds
-  Then I should not see mail with subject "Cap-Collectif — user a supprimé une proposition sur Budget Participatif Rennes"
+  Then I should not see mail with subject "notification.email.proposal.delete.subject"
 
 @javascript @database
 Scenario: Author of a proposal should be notified when someone comment if he has turned on comments notifications
