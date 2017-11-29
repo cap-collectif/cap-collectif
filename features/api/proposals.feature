@@ -499,6 +499,7 @@ Scenario: Logged in API client wants to get all proposals from a private collect
         "id": @string@,
         "reference": @string@,
         "body": @string@,
+        "address": @null@,
         "summaryOrBodyExcerpt": @string@,
         "updatedAt": "@string@.isDateTime()",
         "theme": @...@,
@@ -509,8 +510,8 @@ Scenario: Logged in API client wants to get all proposals from a private collect
           "displayName": "user",
           "uniqueId": "user",
           "isAdmin": false,
-          "userType": @...@,,
-          "media": @wildcard@,
+          "userType": @...@,
+          "media": @null@,
           "vip": false
         },
         "proposalForm": {
@@ -600,6 +601,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "commentsCount": @integer@,
         "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
+        "estimation": @wildcard@,
         "isTrashed": @boolean@,
         "title": @string@,
         "votesCountByStepId": @...@,
@@ -611,6 +613,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
+        "estimation": @wildcard@,
         "updatedAt": "@string@.isDateTime()",
         "theme": {
           "id": @string@,
@@ -672,6 +675,9 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           "reference": @string@,
           "updatedAt": "@string@.isDateTime()",
           "isDraft": @boolean@,
+          "address": @null@,
+          "summary": @null@,
+          "estimation": @null@,
           "author": {
               "username": @string@,
               "displayName": @string@,
@@ -682,6 +688,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
                   "slug": @string@,
                   "id": @integer@
               },
+              "media": @null@,
               "vip": @boolean@,
               "_links": {
                   "settings": @string@
@@ -691,6 +698,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "id": @string@
           },
           "likers": @array@,
+          "category": @null@,
           "theme": {
               "title": @string@,
               "enabled": @boolean@,
@@ -711,6 +719,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           "comments": @array@,
           "selections": @array@,
           "estimation": @integer@,
+          "trashedReason": @null@,
           "progressSteps": @array@,
           "id": "proposal10",
           "commentsCount": @integer@,
@@ -737,6 +746,9 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
       },
       {
           "summaryOrBodyExcerpt": @string@,
+          "estimation": @null@,
+          "summary": @null@,
+          "address": @null@,
           "reference": @string@,
           "isDraft": @boolean@,
           "updatedAt": "@string@.isDateTime()",
@@ -780,10 +792,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "id": @string@,
               "color": @string@
           },
-          "category": {
-              "name": @string@,
-              "id": @string@
-          },
+          "category": @wildcard@,
           "comments": @array@,
           "selections": @array@,
           "progressSteps": @array@,
@@ -792,6 +801,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           "createdAt": "@string@.isDateTime()",
           "enabled": @boolean@,
           "isTrashed": @boolean@,
+          "trashedReason": @null@,
           "title": @string@,
           "body": @string@,
           "_links": {
@@ -850,6 +860,8 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "reference": @string@,
         "updatedAt": "@string@.isDateTime()",
         "author": @wildcard@,
+        "estimation": @...@,
+        "summary": @null@,
         "proposalForm": @wildcard@,
         "likers": @array@,
         "address": @string@,
@@ -869,6 +881,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "body": @string@,
         "summary": @string@,
         "isDraft": @boolean@,
+        "trashedReason": @null@,
         "_links": @wildcard@,
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
@@ -878,6 +891,8 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
       {
         "summaryOrBodyExcerpt": @string@,
         "reference": @string@,
+        "summary": @null@,
+        "estimation": @wildcard@,
         "updatedAt": "@string@.isDateTime()",
         "author": @wildcard@,
         "proposalForm": @wildcard@,
@@ -895,6 +910,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
+        "trashedReason": @null@,
         "title": @string@,
         "body": @string@,
         "isDraft": @boolean@,

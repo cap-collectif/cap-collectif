@@ -240,7 +240,7 @@ Scenario: API client wants to get synthesis elements
   {
     "elements": [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "43",
         "published": false,
         "createdAt": "@string@.isDateTime()",
@@ -300,7 +300,7 @@ Scenario: API client wants to get new synthesis elements
   {
     "elements": [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "43",
         "published": false,
         "createdAt": "@string@.isDateTime()",
@@ -363,7 +363,7 @@ Scenario: API client wants to get archived synthesis elements
   {
     "elements": [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "44",
         "published": false,
         "createdAt": "@string@.isDateTime()",
@@ -416,7 +416,7 @@ Scenario: API client wants to get unpublished synthesis elements
   {
     "elements": [
       {
-        "has_linked_data": false,
+        "hasLinkedData": false,
         "id": "44",
         "published": false,
         "createdAt": "@string@.isDateTime()",
@@ -623,7 +623,7 @@ Scenario: API client wants to get a synthesis element that is published
   """
   {
     "childrenCount": 0,
-    "has_linked_data": false,
+    "hasLinkedData": false,
     "id": "43",
     "published": true,
     "createdAt": "@string@.isDateTime()",
@@ -641,7 +641,7 @@ Scenario: API client wants to get a synthesis element that is published
         "settings": @string@
       }
     },
-    "original_division": @null@,
+    "originalDivision": @null@,
     "division": @null@,
     "level": 0,
     "path": "Je suis un élément-43",
@@ -659,7 +659,7 @@ Scenario: API client wants to get a synthesis element that is published
       {
         "id": @integer@,
         "action": "update",
-        "logged_at": "@string@.isDateTime()",
+        "loggedAt": "@string@.isDateTime()",
         "version": 2,
         "sentences": [
           "synthesis.logs.sentence.update {\"%author%\":null}"
@@ -668,7 +668,7 @@ Scenario: API client wants to get a synthesis element that is published
       {
         "id": @integer@,
         "action": "create",
-        "logged_at": "@string@.isDateTime()",
+        "loggedAt": "@string@.isDateTime()",
         "version": 1,
         "sentences": [
           "synthesis.logs.sentence.create"
@@ -703,14 +703,14 @@ Scenario: API client wants to create a synthesis element
   """
   {
     "childrenCount": 0,
-    "has_linked_data": false,
+    "hasLinkedData": false,
     "id": @string@,
     "published": true,
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
     "archived": true,
     "author": @...@,
-    "original_division": @null@,
+    "originalDivision": @null@,
     "division": @null@,
     "path": @string@,
     "children": [],
@@ -777,7 +777,7 @@ Scenario: API client wants to update a synthesis element
   """
   {
     "childrenCount": 0,
-    "has_linked_data": false,
+    "hasLinkedData": false,
     "id": "43",
     "published": true,
     "createdAt": "@string@.isDateTime()",
@@ -795,7 +795,7 @@ Scenario: API client wants to update a synthesis element
         "settings": @string@
       }
     },
-    "original_division": @null@,
+    "originalDivision": @null@,
     "division": @null@,
     "level": 0,
     "path": "Je suis un élément-43",
@@ -887,14 +887,14 @@ Scenario: API client wants to divide a synthesis element
   {
     "childrenCount": @integer@,
     "body": @string@,
-    "has_linked_data": @boolean@,
+    "hasLinkedData": @boolean@,
     "id": "43",
     "published": false,
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
     "archived": true,
     "author": @...@,
-    "original_division": @null@,
+    "originalDivision": @null@,
     "division": {
       "id": @string@,
       "original_element": @...@,
@@ -902,14 +902,14 @@ Scenario: API client wants to divide a synthesis element
         {
           "childrenCount": @integer@,
           "body": @string@,
-          "has_linked_data": false,
+          "hasLinkedData": false,
           "id": @string@,
           "published": true,
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
           "archived": true,
           "author": @...@,
-          "original_division": @...@,
+          "originalDivision": @...@,
           "division": @null@,
           "level": @integer@,
           "path": @string@,
@@ -1025,7 +1025,7 @@ Scenario: API client wants to get a synthesis element history
     {
       "id": @integer@,
       "action": "update",
-      "logged_at": "@string@.isDateTime()",
+      "loggedAt": "@string@.isDateTime()",
       "version": 2,
       "sentences": [
         "synthesis.logs.sentence.update {\"%author%\":null}"
@@ -1034,7 +1034,7 @@ Scenario: API client wants to get a synthesis element history
     {
       "id": @integer@,
       "action": "create",
-      "logged_at": "@string@.isDateTime()",
+      "loggedAt": "@string@.isDateTime()",
       "version": 1,
       "sentences": [
         "synthesis.logs.sentence.create {\"%author%\":null}"
