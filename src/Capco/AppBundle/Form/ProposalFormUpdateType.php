@@ -48,7 +48,6 @@ class ProposalFormUpdateType extends AbstractType
             ->add('zoomMap', IntegerType::class)
 
             ->add('commentable', CheckboxType::class)
-            ->add('costable', CheckboxType::class)
 
             ->add('categories', CollectionType::class, [
                 'entry_type' => ProposalCategoryType::class,

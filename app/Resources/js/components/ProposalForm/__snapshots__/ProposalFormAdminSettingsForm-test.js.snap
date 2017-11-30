@@ -72,22 +72,6 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
           />
         </Field>
       </div>
-      <h2>
-        <FormattedMessage
-          id="proposal_form.admin.settings.costable"
-          values={Object {}}
-        />
-      </h2>
-      <Field
-        component={[Function]}
-        name="costable"
-        type="checkbox"
-      >
-        <FormattedMessage
-          id="proposal_form.costable"
-          values={Object {}}
-        />
-      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

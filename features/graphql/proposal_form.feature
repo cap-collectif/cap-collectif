@@ -67,8 +67,6 @@ Scenario: GraphQL client wants to update a proposal form
           latMap
           lngMap
           zoomMap
-          commentable
-          costable
           categories {
             id
             name
@@ -113,8 +111,6 @@ Scenario: GraphQL client wants to update a proposal form
         "latMap": 0.0,
         "lngMap": 0.0,
         "zoomMap": 0,
-        "commentable": true,
-        "costable": true,
         "categories": [
           {
             "name": "Aménagement"

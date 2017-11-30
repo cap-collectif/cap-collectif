@@ -90,15 +90,6 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
                 />
               </div>
             )}
-            <h2>
-              <FormattedMessage id="proposal_form.admin.settings.costable" />
-            </h2>
-            <Field
-              name="costable"
-              children={<FormattedMessage id="proposal_form.costable" />}
-              component={component}
-              type="checkbox"
-            />
             <ButtonToolbar className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -134,7 +125,6 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     initialValues: {
       title: proposalForm.title,
       commentable: proposalForm.commentable,
-      costable: proposalForm.costable,
     },
   };
 };
@@ -148,7 +138,6 @@ export default createFragmentContainer(
       id
       title
       commentable
-      costable
     }
   `,
 );

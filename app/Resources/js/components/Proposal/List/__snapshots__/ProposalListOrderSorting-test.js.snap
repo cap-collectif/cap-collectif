@@ -20,6 +20,18 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
       id="global.filter_f_old"
       values={Object {}}
     />
+    <FormattedMessage
+      id="global.filter_f_comments"
+      values={Object {}}
+    />
+    <FormattedMessage
+      id="global.filter_f_expensive"
+      values={Object {}}
+    />
+    <FormattedMessage
+      id="global.filter_f_cheap"
+      values={Object {}}
+    />
     ) }
   </InjectIntl(ReactBootstrapInput)>
 </div>
