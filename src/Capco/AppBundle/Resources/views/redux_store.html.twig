@@ -48,6 +48,5 @@
   },
 }
 %}
-{% dump app.user %}
 {% set state = state|merge(data is defined ? data : {}) %}
 {{ redux_store('appStore', state) }}
