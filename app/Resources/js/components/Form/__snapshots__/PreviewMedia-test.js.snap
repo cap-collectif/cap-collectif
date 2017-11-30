@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PreviewMedia /> should render correctly 1`] = `
+<div>
+  <span
+    className="help-block"
+  >
+    <FormattedMessage
+      id="proposal.documents.helptext"
+      values={Object {}}
+    />
+  </span>
+  <Col
+    bsClass="col"
+    className="image-uploader__label-info"
+    componentClass="div"
+    md={12}
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
+  >
+    <strong>
+      <FormattedMessage
+        id="proposal.documents.added"
+        values={Object {}}
+      />
+    </strong>
+     
+    <a
+      href="http://capco.dev/image.jpg"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <Label
+        bsClass="label"
+        bsStyle="success"
+        style={
+          Object {
+            "marginRight": "5px",
+          }
+        }
+      >
+        image
+        .
+        jpg
+      </Label>
+    </a>
+  </Col>
+</div>
+`;
+
+exports[`<PreviewMedia /> should render correctly without medias 1`] = `null`;

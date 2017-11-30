@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -22,16 +24,12 @@ class MediaResponseType extends AbstractType
     {
         $this->transformer->setEntityClass(AbstractQuestion::class);
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
-        $builder
-            ->add('question', HiddenType::class)
-        ;
-        $builder
-            ->get('question')
-            ->addModelTransformer($this->transformer)
-        ;
 
-        $builder->add('_type', HiddenType::class, [
-            'data' => 'media_response', // Arbitrary, but must be distinct
+        $builder->add('question', HiddenType::class);
+        $builder->get('question')->addModelTransformer($this->transformer);
+
+        $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
+            'data' => $this->getBlockPrefix(),
             'mapped' => false,
         ]);
     }
@@ -39,8 +37,8 @@ class MediaResponseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Responses\MediaResponse',
-            'model_class' => 'Capco\AppBundle\Entity\Responses\MediaResponse',
+            'data_class' => MediaResponse::class,
+            'model_class' => MediaResponse::class,
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
