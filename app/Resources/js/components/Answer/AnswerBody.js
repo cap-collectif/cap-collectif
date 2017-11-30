@@ -26,7 +26,7 @@ const AnswerBody = React.createClass({
               </p>
               <span className="small excerpt">
                 <FormattedDate
-                  value={moment(answer.created_at)}
+                  value={moment(answer.createdAt)}
                   day="numeric"
                   month="long"
                   year="numeric"

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\ProposalEvaluationType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -45,7 +44,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             return [
                 'value' => $decodeValue ?? $response['value'],
                 'question' => $response['question'],
-                AbstractResponse::TYPE_FIELD_NAME => 'value_response',
+                '_type' => 'value_response',
             ];
         }, $arguments['responses']));
 

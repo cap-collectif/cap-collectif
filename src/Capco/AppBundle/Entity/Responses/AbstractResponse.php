@@ -33,8 +33,6 @@ abstract class AbstractResponse
     use IdTrait;
     use TimestampableTrait;
 
-    const TYPE_FIELD_NAME = 'type';
-
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"value"})

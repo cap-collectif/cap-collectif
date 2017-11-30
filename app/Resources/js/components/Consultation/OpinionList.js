@@ -105,13 +105,13 @@ export const OpinionList = React.createClass({
               `}
               variables={{
                 sectionId: section.id,
-                limit: consultation.opinion_count_shown_by_section,
+                limit: consultation.opinionCountShownBySection,
               }}
               render={renderOpinionList}
             />
           </ul>
         )}
-        {section.contributionsCount > consultation.opinion_count_shown_by_section && (
+        {section.contributionsCount > consultation.opinionCountShownBySection && (
           <div className="opinion  opinion__footer  box">
             <a href={section.url} className="text-center" style={{ display: 'block' }}>
               <FormattedMessage id="opinion.show.all" />

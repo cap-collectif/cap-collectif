@@ -49,7 +49,7 @@ class IdeasController extends FOSRestController
     public function getIdeasAction(Request $request, ParamFetcherInterface $paramFetcher)
     {
         $pagination = (int) $paramFetcher->get('pagination');
-        if ($pagination === null) {
+        if (null === $pagination) {
             $pagination = $this->get('capco.site_parameter.resolver')->getValue('ideas.pagination');
         }
         $page = (int) $paramFetcher->get('page');
@@ -395,8 +395,8 @@ class IdeasController extends FOSRestController
             ->countCommentsAndAnswersEnabledByIdea($idea);
 
         return [
-            'comments_and_answers_count' => (int) $countWithAnswers,
-            'comments_count' => count($paginator),
+            'commentsAndAnswersCount' => (int) $countWithAnswers,
+            'commentsCount' => count($paginator),
             'comments' => $comments,
         ];
     }
@@ -440,7 +440,7 @@ class IdeasController extends FOSRestController
             if (!$parent instanceof IdeaComment || $idea !== $parent->getIdea()) {
                 throw $this->createNotFoundException('This parent comment is not linked to this idea');
             }
-            if ($parent->getParent() !== null) {
+            if (null !== $parent->getParent()) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
             }
         }

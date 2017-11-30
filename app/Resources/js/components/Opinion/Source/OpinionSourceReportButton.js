@@ -21,7 +21,7 @@ const OpinionSourceReportButton = React.createClass({
     return (
       <ReportBox
         id={`source-${source.id}`}
-        reported={source.has_user_reported}
+        reported={source.hasUserReported}
         onReport={this.handleReport}
         author={source.author}
         buttonBsSize="xs"

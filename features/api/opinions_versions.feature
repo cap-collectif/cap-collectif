@@ -36,15 +36,15 @@ Feature: Opinions Versions
               "show": @string@,
               "type": @string@
             },
-            "user_vote": @null@,
-            "has_user_reported": @boolean@
+            "userVote": @null@,
+            "hasUserReported": @boolean@
           },
 
           "sourcesCount": @integer@,
 
           "argumentsCount": @integer@,
-          "arguments_yes_count": @integer@,
-          "arguments_no_count": @integer@,
+          "argumentsYesCount": @integer@,
+          "argumentsNoCount": @integer@,
 
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
@@ -61,8 +61,8 @@ Feature: Opinions Versions
             "parent": @string@
           },
 
-          "user_vote": @null@,
-          "has_user_reported": @boolean@
+          "userVote": @null@,
+          "hasUserReported": @boolean@
         },
         @...@
       ],
@@ -87,12 +87,12 @@ Feature: Opinions Versions
         "comment": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
-        "is_trashed": @boolean@,
+        "isTrashed": @boolean@,
         "isContribuable": @boolean@,
 
         "arguments": @...@,
-        "arguments_yes_count": @integer@,
-        "arguments_no_count": @integer@,
+        "argumentsYesCount": @integer@,
+        "argumentsNoCount": @integer@,
         "argumentsCount": @integer@,
 
         "sources": @...@,
@@ -119,8 +119,8 @@ Feature: Opinions Versions
             "edit": @string@,
             "type": @string@
           },
-          "user_vote": @null@,
-          "has_user_reported": @boolean@
+          "userVote": @null@,
+          "hasUserReported": @boolean@
         },
         "author": {
           "username": @string@,
@@ -137,8 +137,8 @@ Feature: Opinions Versions
           "show": @string@,
           "parent": @string@
         },
-        "user_vote": @null@,
-        "has_user_reported": @boolean@,
+        "userVote": @null@,
+        "hasUserReported": @boolean@,
 
         "ranking": @integer@
       },
