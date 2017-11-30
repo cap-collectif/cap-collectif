@@ -25,7 +25,8 @@ class ThemeExtension extends \Twig_Extension
         $twig,
         Serializer $serializer,
         Router $router,
-        StepHelper $stepHelper
+        StepHelper $stepHelper,
+        $urlResolver
         ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
@@ -86,7 +87,7 @@ class ThemeExtension extends \Twig_Extension
                   'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
                   'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
                   '_links' => [
-                      'show' => $this->urlResolver->getStepUrl($realStep),
+                      'show' => $this->urlResolver->getStepUrl($realStep, true),
                   ],
                 ];
                 $projectStepsData[] = $stepData;
