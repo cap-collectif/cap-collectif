@@ -8,7 +8,6 @@ use Capco\AppBundle\Event\CommentChangedEvent;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
@@ -19,15 +18,10 @@ class CommentSubscriber implements EventSubscriberInterface
      * @var Publisher
      */
     private $publisher;
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
 
-    public function __construct(Publisher $publisher, TokenStorageInterface $tokenStorage)
+    public function __construct(Publisher $publisher)
     {
         $this->publisher = $publisher;
-        $this->tokenStorage = $tokenStorage;
     }
 
     public static function getSubscribedEvents()
