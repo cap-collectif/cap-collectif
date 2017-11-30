@@ -851,6 +851,7 @@ type ProposalForm {
   themeHelpText: String
   usingDistrict: Boolean!
   commentable: Boolean!
+  costable: Boolean!
   proposalInAZoneRequired: Boolean!
   districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
@@ -1301,6 +1302,7 @@ input UpdateProposalFormInput {
   usingDistrict: Boolean
   districtMandatory: Boolean
   commentable: Boolean
+  costable: Boolean
   districtHelpText: String
   usingCategories: Boolean
   categoryMandatory: Boolean

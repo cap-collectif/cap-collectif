@@ -11,9 +11,7 @@ const mutation = graphql`
   mutation ChangeProposalFormParametersMutation($input: UpdateProposalFormInput!) {
     updateProposalForm(input: $input) {
       proposalForm {
-        id
-        title
-        commentable
+        ...ProposalFormAdminSettingsForm_proposalForm
       }
     }
   }

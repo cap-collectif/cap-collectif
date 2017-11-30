@@ -25,6 +25,8 @@ UpdateProposalFormInput:
                 type: "Boolean"
             commentable:
                 type: "Boolean"
+            costable:
+                type: "Boolean"
             districtHelpText:
                 type: "String"
             usingCategories:

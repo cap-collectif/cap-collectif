@@ -6,7 +6,6 @@ import type { State } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
-import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
 
 import {
   changeFilter,
@@ -23,6 +22,8 @@ export const ProposalListFilters = React.createClass({
     statuses: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     orderByVotes: PropTypes.bool,
+    orderByComments: PropTypes.bool,
+    orderByCost: PropTypes.bool,
     defaultSort: PropTypes.string,
     features: PropTypes.object.isRequired,
     showThemes: PropTypes.bool.isRequired,
@@ -36,6 +37,8 @@ export const ProposalListFilters = React.createClass({
   getDefaultProps() {
     return {
       orderByVotes: false,
+      orderByComments: false,
+      orderByCost: false,
       showToggleMapButton: false,
     };
   },
@@ -45,7 +48,6 @@ export const ProposalListFilters = React.createClass({
       categories,
       features,
       showThemes,
-      orderByVotes,
       statuses,
       districts,
       themes,
@@ -63,12 +65,18 @@ export const ProposalListFilters = React.createClass({
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),
-      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(orderByVotes ? ['votes'] : []),
     };
   },
 
   render() {
-    const { dispatch, filters, showToggleMapButton, defaultSort } = this.props;
+    const {
+      dispatch,
+      filters,
+      orderByComments,
+      orderByCost,
+      showToggleMapButton,
+      defaultSort,
+    } = this.props;
     const { displayedFilters, orderByVotes } = this.state;
     const colWidth = showToggleMapButton ? 4 : 6;
 
@@ -76,7 +84,12 @@ export const ProposalListFilters = React.createClass({
       <div className="mb-15">
         <Row>
           <Col xs={12} md={colWidth}>
-            <ProposalListOrderSorting orderByVotes={orderByVotes} defaultSort={defaultSort} />
+            <ProposalListOrderSorting
+              orderByCost={orderByCost}
+              orderByComments={orderByComments}
+              orderByVotes={orderByVotes}
+              defaultSort={defaultSort}
+            />
           </Col>
           <Col xs={12} md={colWidth}>
             <ProposalListSearch />
