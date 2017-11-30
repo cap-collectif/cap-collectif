@@ -97,6 +97,7 @@ class UrlResolver
         if (!$step->getProject() || !$step->getProject()->getSlug() || !$step->getSlug()) {
             return;
         }
+
         if ($step->isConsultationStep()) {
             return $this->router->generate(
                 'app_project_show_consultation',

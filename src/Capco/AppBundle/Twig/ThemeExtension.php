@@ -7,7 +7,6 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
 class ThemeExtension extends \Twig_Extension
@@ -18,6 +17,7 @@ class ThemeExtension extends \Twig_Extension
     protected $stepHelper;
     private $serializer;
     private $router;
+    private $urlResolver;
 
     public function __construct(
         ThemeRepository $themeRepo,
@@ -33,6 +33,7 @@ class ThemeExtension extends \Twig_Extension
         $this->serializer = $serializer;
         $this->router = $router;
         $this->stepHelper = $stepHelper;
+        $this->urlResolver = $urlResolver;
     }
 
     public function getFunctions(): array
@@ -85,12 +86,7 @@ class ThemeExtension extends \Twig_Extension
                   'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
                   'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
                   '_links' => [
-                      'show' => $realStep->getType() === 'other' ? '' :
-                        $this->router->generate(
-                          'app_project_show_' . $realStep->getType(),
-                          ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()],
-                          UrlGeneratorInterface::ABSOLUTE_URL
-                        ),
+                      'show' => $this->urlResolver->getStepUrl($realStep),
                   ],
                 ];
                 $projectStepsData[] = $stepData;
