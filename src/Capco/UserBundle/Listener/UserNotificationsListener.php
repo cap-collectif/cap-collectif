@@ -16,6 +16,8 @@ class UserNotificationsListener
 
     public function prePersist(UserNotificationsConfiguration $userNotificationsConfiguration)
     {
-        $userNotificationsConfiguration->setUnsubscribeToken($this->tokenGenerator->generateToken());
+        if (!$userNotificationsConfiguration->getUnsubscribeToken()) {
+            $userNotificationsConfiguration->setUnsubscribeToken($this->tokenGenerator->generateToken());
+        }
     }
 }

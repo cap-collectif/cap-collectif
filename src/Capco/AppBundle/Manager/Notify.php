@@ -50,6 +50,8 @@ class Notify implements MailerInterface
     {
         if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
+
+            // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
             if ($this->mailer->getTransport()->isStarted()) {
                 $this->mailer->getTransport()->stop();
             }

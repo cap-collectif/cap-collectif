@@ -13,9 +13,7 @@ const mutation = graphql`
   ) {
     changeUserNotificationsConfiguration(input: $input) {
       user {
-        notificationsConfiguration {
-          onProposalCommentMail
-        }
+        ...NotificationsForm_viewer
       }
     }
   }

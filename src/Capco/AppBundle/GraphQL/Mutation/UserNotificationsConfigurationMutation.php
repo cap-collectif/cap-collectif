@@ -8,7 +8,6 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserNotificationsConfigurationMutation implements ContainerAwareInterface
 {
@@ -16,9 +15,6 @@ class UserNotificationsConfigurationMutation implements ContainerAwareInterface
 
     public function change(Argument $args, $user)
     {
-        if (!$user instanceof User) {
-            throw new AccessDeniedException('You must be logged in');
-        }
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');
         $userNotificationsConfiguration = $user->getNotificationsConfiguration();

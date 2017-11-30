@@ -46,9 +46,9 @@ class UserNotificationsConfiguration
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUnsubscribeToken(): string
+    public function getUnsubscribeToken()
     {
         return $this->unsubscribeToken;
     }
