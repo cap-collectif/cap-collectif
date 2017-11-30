@@ -38,17 +38,8 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     showAddUsersModal: false
   };
 
-  openCreateModal = () => {
-    this.setState({ showAddUsersModal: true });
-  };
-
-  handleClose = () => {
-    this.setState({ showAddUsersModal: false });
-  };
-
-  render() {
+  getAlertAdminForm() {
     const {
-      group,
       valid,
       invalid,
       submitting,
@@ -58,7 +49,63 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       userIsNotDeleted,
     } = this.props;
 
+    if(userIsDeleted) {
+      return (
+        <AlertAdminForm
+          valid
+          invalid={false}
+          submitSucceeded
+          submitFailed={false}
+          submitting={false}
+        />
+      )
+    }
+
+    if(userIsNotDeleted) {
+      return (
+        <AlertAdminForm
+          valid={false}
+          invalid={false}
+          submitSucceeded={false}
+          submitFailed
+          submitting={false}
+        />
+      )
+    }
+
+    return (
+      <AlertAdminForm
+        valid={valid}
+        invalid={invalid}
+        submitSucceeded={submitSucceeded}
+        submitFailed={submitFailed}
+        submitting={submitting}
+      />
+    )
+  }
+
+  openCreateModal = () => {
+    this.setState({ showAddUsersModal: true });
+  };
+
+  handleClose = () => {
+    this.setState({ showAddUsersModal: false });
+  };
+
+
+  render() {
+    const {
+      group,
+      submitSucceeded,
+      submitFailed,
+      userIsDeleted,
+    } = this.props;
+
     const { showAddUsersModal } = this.state;
+
+    console.log(submitSucceeded);
+    console.warn(submitFailed);
+    console.error(userIsDeleted);
 
     return (
       <div className="box box-primary container">
@@ -81,31 +128,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
             onClick={() => this.openCreateModal()}>
             <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
           </Button>
-          <AlertAdminForm
-            valid={valid}
-            invalid={invalid}
-            submitSucceeded={submitSucceeded}
-            submitFailed={submitFailed}
-            submitting={submitting}
-          />
-          { userIsDeleted &&
-            <AlertAdminForm
-              valid
-              invalid={false}
-              submitSucceeded
-              submitFailed={false}
-              submitting={false}
-            />
-          }
-          { userIsNotDeleted &&
-            <AlertAdminForm
-              valid={false}
-              invalid={false}
-              submitSucceeded={false}
-              submitFailed
-              submitting={false}
-            />
-          }
+          {this.getAlertAdminForm()}
           <GroupAdminModalAddUsers
             show={showAddUsersModal}
             onClose={this.handleClose}

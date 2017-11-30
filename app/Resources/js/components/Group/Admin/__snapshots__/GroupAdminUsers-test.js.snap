@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GroupAdminUsers /> render correctly 1`] = `
+exports[`<GroupAdminUsers /> render correctly group admin user with confirmation notification when adding a user 1`] = `
 <div
   className="box box-primary container"
 >
@@ -48,7 +48,13 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
         values={Object {}}
       />
     </Button>
-    <AlertAdminForm />
+    <AlertAdminForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={true}
+      submitting={false}
+      valid={true}
+    />
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
@@ -58,14 +64,7 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
             "edges": Array [
               Object {
                 "node": Object {
-                  "biography": "biooooo",
-                  "displayName": "toto",
-                  "email": "toto@cap-collectif.com",
                   "id": "id1",
-                  "media": Object {
-                    "url": "https://capco.dev",
-                  },
-                  "phone": null,
                 },
               },
             ],
@@ -83,14 +82,280 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
         groupId="group4"
         user={
           Object {
-            "biography": "biooooo",
-            "displayName": "toto",
-            "email": "toto@cap-collectif.com",
             "id": "id1",
-            "media": Object {
-              "url": "https://capco.dev",
-            },
-            "phone": null,
+          }
+        }
+      />
+    </ListGroup>
+  </div>
+</div>
+`;
+
+exports[`<GroupAdminUsers /> render correctly group admin user with confirmation notification when deleting a user 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header  pl-0"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="group.admin.users"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="success"
+      disabled={false}
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-plus-circle"
+      />
+       
+      <FormattedMessage
+        id="group.admin.add_users"
+        values={Object {}}
+      />
+    </Button>
+    <AlertAdminForm
+      invalid={false}
+      submitFailed={false}
+      submitSucceeded={true}
+      submitting={false}
+      valid={true}
+    />
+    <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "usersConnection": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <ListGroup
+      bsClass="list-group"
+      className="mt-15"
+    >
+      <Relay(Connect(GroupAdminUsersListGroupItem))
+        groupId="group4"
+        user={
+          Object {
+            "id": "id1",
+          }
+        }
+      />
+    </ListGroup>
+  </div>
+</div>
+`;
+
+exports[`<GroupAdminUsers /> render correctly group admin user with error notification when adding a user 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header  pl-0"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="group.admin.users"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="success"
+      disabled={false}
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-plus-circle"
+      />
+       
+      <FormattedMessage
+        id="group.admin.add_users"
+        values={Object {}}
+      />
+    </Button>
+    <AlertAdminForm
+      invalid={false}
+      submitFailed={true}
+      submitSucceeded={false}
+      submitting={false}
+      valid={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "usersConnection": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <ListGroup
+      bsClass="list-group"
+      className="mt-15"
+    >
+      <Relay(Connect(GroupAdminUsersListGroupItem))
+        groupId="group4"
+        user={
+          Object {
+            "id": "id1",
+          }
+        }
+      />
+    </ListGroup>
+  </div>
+</div>
+`;
+
+exports[`<GroupAdminUsers /> render correctly group admin user with error notification when deleting a user 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header  pl-0"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="group.admin.users"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       Aide
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="success"
+      disabled={false}
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-plus-circle"
+      />
+       
+      <FormattedMessage
+        id="group.admin.add_users"
+        values={Object {}}
+      />
+    </Button>
+    <AlertAdminForm
+      invalid={false}
+      submitFailed={true}
+      submitSucceeded={false}
+      submitting={false}
+      valid={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "usersConnection": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <ListGroup
+      bsClass="list-group"
+      className="mt-15"
+    >
+      <Relay(Connect(GroupAdminUsersListGroupItem))
+        groupId="group4"
+        user={
+          Object {
+            "id": "id1",
           }
         }
       />

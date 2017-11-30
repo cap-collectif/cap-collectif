@@ -23,6 +23,7 @@ type State = {
 const onDelete = (userId: Uuid, groupId: Uuid, dispatch: Dispatch) => {
   dispatch(groupAdminUsersUserDeletionReset());
 
+
   return DeleteUserInGroupMutation.commit({
     input: {
       userId,
