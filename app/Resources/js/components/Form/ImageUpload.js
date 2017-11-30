@@ -3,8 +3,9 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
-import { Row, Col, Button, Label } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import Input from './Input';
+import PreviewMedia from './PreviewMedia';
 
 const ImageUpload = React.createClass({
   propTypes: {
@@ -38,11 +39,11 @@ const ImageUpload = React.createClass({
   },
 
   getInitialState() {
-    const { preview, files } = this.props;
+    const { preview } = this.props;
     return {
       preview,
       delete: false,
-      files,
+      files: [],
     };
   },
 
@@ -128,6 +129,7 @@ const ImageUpload = React.createClass({
       maxSize,
       minSize,
       disablePreview,
+      files,
     } = this.props;
     const classes = {
       'image-uploader': true,
@@ -154,6 +156,17 @@ const ImageUpload = React.createClass({
 
     return (
       <Row id={id} className={classNames(classes)}>
+        {disablePreview && (
+          <Col xs={12} sm={12} style={{ marginBottom: 5 }}>
+            <PreviewMedia
+              currentMedias={files}
+              newMedias={this.state.files}
+              onRemoveMedia={media => {
+                this.removeMedia(media);
+              }}
+            />
+          </Col>
+        )}
         <Col xs={12} sm={12}>
           <Dropzone
             ref="dropzone"
@@ -180,26 +193,6 @@ const ImageUpload = React.createClass({
             </div>
           </Dropzone>
         </Col>
-        {disablePreview && (
-          <Col xs={12} sm={12}>
-            <Row>
-              {this.state.files.map(file => {
-                return (
-                  <Col md={12} className="image-uploader__label-info">
-                    <Label bsStyle="info" style={{ marginRight: '5px' }}>
-                      {file.name}{' '}
-                      <i
-                        style={{ cursor: 'pointer' }}
-                        className="glyphicon glyphicon-remove"
-                        onClick={this.removeMedia.bind(this, file)}
-                      />
-                    </Label>
-                  </Col>
-                );
-              })}
-            </Row>
-          </Col>
-        )}
         {!disablePreview && (
           <Col xs={12} sm={12}>
             <p className="h5 text-center">

@@ -37,7 +37,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProposalsController extends FOSRestController
 {
@@ -134,7 +133,7 @@ class ProposalsController extends FOSRestController
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
         $unflattenFile = ArrayHelper::unflatten($request->files->all());
 
-        if (isset($unflattenRequest['responses']) && is_array($unflattenRequest['responses'])) {
+        if (isset($unflattenRequest['responses']) && \is_array($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
         }
@@ -150,7 +149,7 @@ class ProposalsController extends FOSRestController
         $em->persist($proposal);
         $em->flush();
 
-        if (count($request->files->all()) > 0) {
+        if ($request->files->count() > 0) {
             $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
             $em->persist($proposal);
             $em->flush();
@@ -293,11 +292,7 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalPostsAction(Proposal $proposal)
     {
-        $posts = $this
-            ->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:Post')
-            ->getPublishedPostsByProposal($proposal)
-        ;
+        $posts = $this->get('capco.blog.post.repository')->getPublishedPostsByProposal($proposal);
 
         return [
             'posts' => $posts,
@@ -312,15 +307,14 @@ class ProposalsController extends FOSRestController
      */
     public function patchProposalAction(Request $request, Proposal $proposal)
     {
-        $em = $this->getDoctrine()->getManager();
         $status = null;
 
         if ($request->request->get('status')) {
-            $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
+            $status = $this->get('capco.status.repository')->find($request->request->get('status'));
         }
 
         $proposal->setStatus($status);
-        $em->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         return $status;
     }
@@ -358,7 +352,7 @@ class ProposalsController extends FOSRestController
             ->setEnabled($proposal->isDraft() ? false : true);
 
         if ($this->getUser() !== $proposal->getAuthor()) {
-            throw new AccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -371,7 +365,7 @@ class ProposalsController extends FOSRestController
         if ('false' === $request->request->get('media')) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
-                $proposal->setMedia(null);
+                $proposal->setMedia();
             }
             $request->files->remove('delete_media');
         } elseif ($uploadedMedia = $request->files->get('media')) {
@@ -388,7 +382,7 @@ class ProposalsController extends FOSRestController
 
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
 
-        if (count($request->files->all()) > 0) {
+        if ($request->files->count() > 0) {
             $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
         }
 

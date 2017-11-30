@@ -12,9 +12,9 @@ class HasResponsesToRequiredQuestions extends Constraint
     public $message = 'global.missing_required_responses';
     public $formField = '';
 
-    public function validatedBy()
+    public function validatedBy(): string
     {
-        return get_class($this) . 'Validator';
+        return \get_class($this) . 'Validator';
     }
 
     public function getTargets()

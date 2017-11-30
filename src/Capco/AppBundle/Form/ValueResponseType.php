@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -23,17 +25,13 @@ class ValueResponseType extends AbstractType
         $this->transformer->setEntityClass(AbstractQuestion::class);
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
 
-        $builder
-            ->add('value', null)
-            ->add('question', HiddenType::class)
-        ;
-        $builder
-            ->get('question')
-            ->addModelTransformer($this->transformer)
-        ;
+        $builder->add('value')
+            ->add('question');
 
-        $builder->add('_type', HiddenType::class, [
-            'data' => 'value_response',
+        $builder->get('question')->addModelTransformer($this->transformer);
+
+        $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
+            'data' => $this->getBlockPrefix(),
             'mapped' => false,
         ]);
     }
@@ -41,11 +39,16 @@ class ValueResponseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Responses\ValueResponse',
-            'model_class' => 'Capco\AppBundle\Entity\Responses\ValueResponse',
+            'data_class' => ValueResponse::class,
+            'model_class' => ValueResponse::class,
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
         ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'value_response';
     }
 }
