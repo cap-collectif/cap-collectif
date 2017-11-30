@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AlertAdminForm /> render correctly the message for invalid form 1`] = `
-<div>
+<div
+  className="d-ib"
+>
   <div
     className="alert__form_invalid-field"
   >
@@ -18,7 +20,9 @@ exports[`<AlertAdminForm /> render correctly the message for invalid form 1`] = 
 `;
 
 exports[`<AlertAdminForm /> render correctly the message for submit failed 1`] = `
-<div>
+<div
+  className="d-ib"
+>
   <div
     className="alert__form_server-failed-message"
   >
@@ -35,11 +39,18 @@ exports[`<AlertAdminForm /> render correctly the message for submit failed 1`] =
 `;
 
 exports[`<AlertAdminForm /> render correctly the message for submit succeeded 1`] = `
-<div>
+<div
+  className="d-ib"
+>
   <AlertAdminFormSucceededMessage />
 </div>
 `;
 
+exports[`<AlertAdminForm /> render no message during submitting of form 1`] = `
+<div
+  className="d-ib"
+/>
+`;
 exports[`<AlertAdminForm /> render correctly the message with a custom error message 1`] = `
 <div
   className="alert__form_server-failed-message"
@@ -47,7 +58,7 @@ exports[`<AlertAdminForm /> render correctly the message with a custom error mes
   <i
     className="cap cap-ios-close-outline"
   />
-   
+
   <FormattedHTMLMessage
     id="error.test"
     values={Object {}}
@@ -57,4 +68,8 @@ exports[`<AlertAdminForm /> render correctly the message with a custom error mes
 
 exports[`<AlertAdminForm /> render no message during submitting of form 1`] = `<div />`;
 
-exports[`<AlertAdminForm /> render no message when the form is valid 1`] = `<div />`;
+exports[`<AlertAdminForm /> render no message when the form is valid 1`] = `
+<div
+  className="d-ib"
+/>
+`;

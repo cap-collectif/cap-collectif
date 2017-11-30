@@ -49,7 +49,7 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
       />
     </Button>
     <AlertAdminForm />
-    <Connect(GroupAdminModalAddUsers)
+    <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
           "id": "group4",

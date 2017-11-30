@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit } from 'redux-form';
@@ -14,11 +14,12 @@ type Props = {
   onClose: Function,
   group: GroupAdminUsers_group,
   dispatch: Dispatch,
+  intl: Object
 };
 
 export class GroupAdminModalAddUsers extends React.Component<Props> {
   render() {
-    const { show, onClose, group, dispatch } = this.props;
+    const { show, onClose, group, dispatch, intl } = this.props;
 
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
@@ -28,10 +29,10 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <GroupAdminAddUsersForm group={group} />
+          <GroupAdminAddUsersForm group={group} onClose={onClose} />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={onClose} />
+          <CloseButton label={intl.formatMessage({ id: 'global.close' })} onClose={onClose} />
           <Button bsStyle="primary" type="button" onClick={() => dispatch(submit(formName))}>
             {<FormattedMessage id="global.add" />}
           </Button>
@@ -41,4 +42,4 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
   }
 }
 
-export default connect()(GroupAdminModalAddUsers);
+export default connect()(injectIntl(GroupAdminModalAddUsers));
