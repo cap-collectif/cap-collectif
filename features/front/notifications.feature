@@ -5,6 +5,7 @@ Feature: Notifications
 Scenario: User with good unsubscribe token wants to connect via email link
   When I go to an email notifications preferences link with token "***REMOVED***"
   Then I should be redirected to "/profile/notifications"
+  And I can see I am logged in as "user"
 
 @javascript
 Scenario: User with false unsubscribe token wants to connect via email link
