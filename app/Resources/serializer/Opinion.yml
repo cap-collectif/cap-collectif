@@ -108,11 +108,11 @@ Capco\AppBundle\Entity\Opinion:
             groups: [Opinions, OpinionLinkPreviews]
         getArgumentForCount:
             type: integer
-            serialized_name: arguments_yes_count
+            serialized_name: argumentsYesCount
             groups: [Opinions]
         getArgumentAgainstCount:
             type: integer
-            serialized_name: arguments_no_count
+            serialized_name: argumentsNoCount
             groups: [Opinions]
         getStep:
             type: object

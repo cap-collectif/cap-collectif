@@ -13,8 +13,8 @@ Scenario: API client wants to list posts of a proposal
       "id": @integer@,
       "title": @string@,
       "body": @string@,
-      "created_at": "@string@.isDateTime()",
-      "updated_at": "@string@.isDateTime()",
+      "createdAt": "@string@.isDateTime()",
+      "updatedAt": "@string@.isDateTime()",
       "media": @null@,
       "themes": [
         {

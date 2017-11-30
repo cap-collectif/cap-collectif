@@ -13,7 +13,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
-      "updated_at": "@string@.isDateTime()",
+      "updatedAt": "@string@.isDateTime()",
       "estimation": @...@,
       "isDraft": @boolean@,
       "theme": {
@@ -43,7 +43,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
         "uniqueId": @string@,
         "isAdmin": @boolean@,
         "media": @...@,
-        "user_type": {
+        "userType": {
           "id": @integer@,
           "name": @string@,
           "slug": @string@
@@ -71,7 +71,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         },
         {
           "id": @integer@,
@@ -85,7 +85,7 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         }
       ],
       "selections": [
@@ -113,8 +113,8 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
           "proposal": @...@
         }
       ],
-      "comments_count": @integer@,
-      "created_at": "@string@.isDateTime()",
+      "commentsCount": @integer@,
+      "createdAt": "@string@.isDateTime()",
       "enabled": @boolean@,
       "isTrashed": @boolean@,
       "trashedReason": @...@,
@@ -143,7 +143,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
-      "updated_at": "@string@.isDateTime()",
+      "updatedAt": "@string@.isDateTime()",
       "estimation": @...@,
       "theme": {
         "id": @string@,
@@ -173,7 +173,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
         "uniqueId": @string@,
         "isAdmin": @boolean@,
         "media": @...@,
-        "user_type": {
+        "userType": {
           "id": @integer@,
           "name": @string@,
           "slug": @string@
@@ -201,7 +201,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         },
         {
           "id": @integer@,
@@ -215,7 +215,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         },
         {
           "id": @integer@,
@@ -229,7 +229,7 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         }
       ],
       "selections": [
@@ -257,8 +257,8 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
           "proposal": @...@
         }
       ],
-      "comments_count": @integer@,
-      "created_at": "@string@.isDateTime()",
+      "commentsCount": @integer@,
+      "createdAt": "@string@.isDateTime()",
       "enabled": @boolean@,
       "isTrashed": @boolean@,
       "trashedReason": @...@,
@@ -295,7 +295,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
       "body": @string@,
       "summary": @null@,
       "summaryOrBodyExcerpt": @string@,
-      "updated_at": "@string@.isDateTime()",
+      "updatedAt": "@string@.isDateTime()",
       "estimation": @...@,
       "theme": {
         "id": @string@,
@@ -325,7 +325,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
         "uniqueId": @string@,
         "isAdmin": @boolean@,
         "media": @...@,
-        "user_type": {
+        "userType": {
           "id": @integer@,
           "name": @string@,
           "slug": @string@
@@ -353,7 +353,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         },
         {
           "id": @integer@,
@@ -367,7 +367,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         },
         {
           "id": @integer@,
@@ -381,7 +381,7 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
             "private": @boolean@
           },
           "value": @string@,
-          "updated_at": "@string@.isDateTime()"
+          "updatedAt": "@string@.isDateTime()"
         }
       ],
       "selections": [
@@ -409,8 +409,8 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
           "proposal": @...@
         }
       ],
-      "comments_count": @integer@,
-      "created_at": "@string@.isDateTime()",
+      "commentsCount": @integer@,
+      "createdAt": "@string@.isDateTime()",
       "enabled": @boolean@,
       "isTrashed": @boolean@,
       "trashedReason": @...@,
@@ -441,7 +441,7 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
         "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "theme": {
           "id": @string@,
           "title": @string@,
@@ -468,8 +468,8 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
         "comments": @...@,
         "responses": @...@,
         "selections": @...@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
@@ -499,8 +499,9 @@ Scenario: Logged in API client wants to get all proposals from a private collect
         "id": @string@,
         "reference": @string@,
         "body": @string@,
+        "address": @null@,
         "summaryOrBodyExcerpt": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "theme": @...@,
         "district": @...@,
         "status": @...@,
@@ -509,7 +510,8 @@ Scenario: Logged in API client wants to get all proposals from a private collect
           "displayName": "user",
           "uniqueId": "user",
           "isAdmin": false,
-          "user_type": @...@,
+          "userType": @...@,
+          "media": @null@,
           "vip": false
         },
         "proposalForm": {
@@ -518,8 +520,8 @@ Scenario: Logged in API client wants to get all proposals from a private collect
         "comments": @...@,
         "responses": @...@,
         "selections": @...@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
@@ -569,7 +571,7 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "theme": {
           "id": @string@,
           "title": @string@,
@@ -596,9 +598,10 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "comments": @...@,
         "responses": @...@,
         "selections": @...@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
+        "estimation": @wildcard@,
         "isTrashed": @boolean@,
         "title": @string@,
         "votesCountByStepId": @...@,
@@ -610,7 +613,8 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "reference": @string@,
         "body": @string@,
         "summaryOrBodyExcerpt": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "estimation": @wildcard@,
+        "updatedAt": "@string@.isDateTime()",
         "theme": {
           "id": @string@,
           "title": @string@,
@@ -637,8 +641,8 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "comments": @...@,
         "responses": @...@,
         "selections": @...@,
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
@@ -669,18 +673,22 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
       {
           "summaryOrBodyExcerpt": @string@,
           "reference": @string@,
-          "updated_at": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
           "isDraft": @boolean@,
+          "address": @null@,
+          "summary": @null@,
+          "estimation": @null@,
           "author": {
               "username": @string@,
               "displayName": @string@,
               "uniqueId": @string@,
               "isAdmin": @boolean@,
-              "user_type": {
+              "userType": {
                   "name": @string@,
                   "slug": @string@,
                   "id": @integer@
               },
+              "media": @null@,
               "vip": @boolean@,
               "_links": {
                   "settings": @string@
@@ -690,6 +698,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "id": @string@
           },
           "likers": @array@,
+          "category": @null@,
           "theme": {
               "title": @string@,
               "enabled": @boolean@,
@@ -710,10 +719,11 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
           "comments": @array@,
           "selections": @array@,
           "estimation": @integer@,
+          "trashedReason": @null@,
           "progressSteps": @array@,
           "id": "proposal10",
-          "comments_count": @integer@,
-          "created_at": "@string@.isDateTime()",
+          "commentsCount": @integer@,
+          "createdAt": "@string@.isDateTime()",
           "enabled": @boolean@,
           "isTrashed": @boolean@,
           "title": @string@,
@@ -736,9 +746,12 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
       },
       {
           "summaryOrBodyExcerpt": @string@,
+          "estimation": @null@,
+          "summary": @null@,
+          "address": @null@,
           "reference": @string@,
           "isDraft": @boolean@,
-          "updated_at": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
           "author": {
               "username": @string@,
               "displayName": @string@,
@@ -747,7 +760,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "media": {
                   "url": @string@
               },
-              "user_type": {
+              "userType": {
                   "name": @string@,
                   "slug": @string@,
                   "id": @integer@
@@ -779,18 +792,16 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "id": @string@,
               "color": @string@
           },
-          "category": {
-              "name": @string@,
-              "id": @string@
-          },
+          "category": @wildcard@,
           "comments": @array@,
           "selections": @array@,
           "progressSteps": @array@,
           "id": "proposal1",
-          "comments_count": @integer@,
-          "created_at": "@string@.isDateTime()",
+          "commentsCount": @integer@,
+          "createdAt": "@string@.isDateTime()",
           "enabled": @boolean@,
           "isTrashed": @boolean@,
+          "trashedReason": @null@,
           "title": @string@,
           "body": @string@,
           "_links": {
@@ -847,8 +858,10 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
       {
         "summaryOrBodyExcerpt": @string@,
         "reference": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "author": @wildcard@,
+        "estimation": @...@,
+        "summary": @null@,
         "proposalForm": @wildcard@,
         "likers": @array@,
         "address": @string@,
@@ -860,14 +873,15 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "selections": @array@,
         "progressSteps": @array@,
         "id": "proposal3",
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
         "body": @string@,
         "summary": @string@,
         "isDraft": @boolean@,
+        "trashedReason": @null@,
         "_links": @wildcard@,
         "votesCountByStepId": @wildcard@,
         "votesByStepId": @wildcard@,
@@ -877,7 +891,9 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
       {
         "summaryOrBodyExcerpt": @string@,
         "reference": @string@,
-        "updated_at": "@string@.isDateTime()",
+        "summary": @null@,
+        "estimation": @wildcard@,
+        "updatedAt": "@string@.isDateTime()",
         "author": @wildcard@,
         "proposalForm": @wildcard@,
         "likers": @array@,
@@ -890,10 +906,11 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
         "selections": @array@,
         "progressSteps": @array@,
         "id": "proposal2",
-        "comments_count": @integer@,
-        "created_at": "@string@.isDateTime()",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
         "enabled": @boolean@,
         "isTrashed": @boolean@,
+        "trashedReason": @null@,
         "title": @string@,
         "body": @string@,
         "isDraft": @boolean@,
@@ -1051,7 +1068,7 @@ Scenario: Logged in API client wants to add a proposal not in zone
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
-  {"code":400,"message":"Validation Failed","errors":{"errors":["global.address_not_in_zone"],"children":{"title":[],"summary":[],"body":[],"theme":[],"district":[],"category":[],"address":[],"responses":{"children":[{"children":{"value":[],"question":[],"type":[]}},{"children":{"value":[],"question":[],"type":[]}}]}}}}
+  {"code":400,"message":"Validation Failed","errors":{"errors":["global.address_not_in_zone"],"children":{"title":[],"summary":[],"body":[],"theme":[],"district":[],"category":[],"address":[],"responses":{"children":[{"children":{"value":[],"question":[],"_type":[]}},{"children":{"value":[],"question":[],"_type":[]}}]}}}}
   """
 
 @database

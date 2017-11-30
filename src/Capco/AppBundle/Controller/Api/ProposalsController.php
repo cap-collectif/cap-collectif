@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProposalsController extends FOSRestController
 {
@@ -133,7 +134,7 @@ class ProposalsController extends FOSRestController
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
         $unflattenFile = ArrayHelper::unflatten($request->files->all());
 
-        if (isset($unflattenRequest['responses']) && \is_array($unflattenRequest['responses'])) {
+        if (isset($unflattenRequest['responses']) && is_array($unflattenRequest['responses'])) {
             $unflattenRequest = $this->get('capco.media.response.media.manager')
                 ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
         }
@@ -149,7 +150,7 @@ class ProposalsController extends FOSRestController
         $em->persist($proposal);
         $em->flush();
 
-        if ($request->files->count() > 0) {
+        if (count($request->files->all()) > 0) {
             $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
             $em->persist($proposal);
             $em->flush();
@@ -202,8 +203,8 @@ class ProposalsController extends FOSRestController
                       ->countCommentsAndAnswersEnabledByProposal($proposal);
 
         return [
-            'comments_and_answers_count' => (int) $countWithAnswers,
-            'comments_count' => count($paginator),
+            'commentsAndAnswersCount' => (int) $countWithAnswers,
+            'commentsCount' => count($paginator),
             'comments' => $comments,
         ];
     }
@@ -292,7 +293,11 @@ class ProposalsController extends FOSRestController
      */
     public function getProposalPostsAction(Proposal $proposal)
     {
-        $posts = $this->get('capco.blog.post.repository')->getPublishedPostsByProposal($proposal);
+        $posts = $this
+            ->getDoctrine()->getManager()
+            ->getRepository('CapcoAppBundle:Post')
+            ->getPublishedPostsByProposal($proposal)
+        ;
 
         return [
             'posts' => $posts,
@@ -307,14 +312,15 @@ class ProposalsController extends FOSRestController
      */
     public function patchProposalAction(Request $request, Proposal $proposal)
     {
+        $em = $this->getDoctrine()->getManager();
         $status = null;
 
         if ($request->request->get('status')) {
-            $status = $this->get('capco.status.repository')->find($request->request->get('status'));
+            $status = $em->getRepository('CapcoAppBundle:Status')->find($request->request->get('status'));
         }
 
         $proposal->setStatus($status);
-        $this->getDoctrine()->getManager()->flush();
+        $em->flush();
 
         return $status;
     }
@@ -352,7 +358,7 @@ class ProposalsController extends FOSRestController
             ->setEnabled($proposal->isDraft() ? false : true);
 
         if ($this->getUser() !== $proposal->getAuthor()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedException();
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -365,7 +371,7 @@ class ProposalsController extends FOSRestController
         if ('false' === $request->request->get('media')) {
             if ($proposal->getMedia()) {
                 $em->remove($proposal->getMedia());
-                $proposal->setMedia();
+                $proposal->setMedia(null);
             }
             $request->files->remove('delete_media');
         } elseif ($uploadedMedia = $request->files->get('media')) {
@@ -382,7 +388,7 @@ class ProposalsController extends FOSRestController
 
         $unflattenRequest = ArrayHelper::unflatten($request->request->all());
 
-        if ($request->files->count() > 0) {
+        if (count($request->files->all()) > 0) {
             $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
         }
 

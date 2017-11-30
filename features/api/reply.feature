@@ -19,7 +19,7 @@ Scenario: Logged in API client wants to get one of his replies
       "uniqueId": @string@,
       "isAdmin": @boolean@,
       "media": @...@,
-      "user_type": {
+      "userType": {
         "id": @integer@,
         "name": @string@,
         "slug": @string@
@@ -43,7 +43,7 @@ Scenario: Logged in API client wants to get one of his replies
           "required": @boolean@,
           "private": @boolean@
         },
-        "updated_at": "@string@.isDateTime()"
+        "updatedAt": "@string@.isDateTime()"
       },
       @...@
     ],
@@ -81,7 +81,7 @@ Scenario: Logged in API client wants to get his replies
           "uniqueId": @string@,
           "isAdmin": @boolean@,
           "media": @...@,
-          "user_type": {
+          "userType": {
             "id": @integer@,
             "name": @string@,
             "slug": @string@
@@ -105,7 +105,7 @@ Scenario: Logged in API client wants to get his replies
               "required": @boolean@,
               "private": @boolean@
             },
-            "updated_at": "@string@.isDateTime()"
+            "updatedAt": "@string@.isDateTime()"
           },
           @...@
         ],

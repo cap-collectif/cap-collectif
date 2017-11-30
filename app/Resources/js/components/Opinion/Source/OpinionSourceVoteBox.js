@@ -19,7 +19,7 @@ const OpinionSourceVoteBox = React.createClass({
   getInitialState() {
     const { source } = this.props;
     return {
-      hasVoted: source.has_user_voted,
+      hasVoted: source.hasUserVoted,
     };
   },
 
@@ -46,8 +46,8 @@ const OpinionSourceVoteBox = React.createClass({
   render() {
     const { hasVoted } = this.state;
     const { source } = this.props;
-    const hasVotedSince = hasVoted && !source.has_user_voted;
-    const hasUnVotedSince = !hasVoted && source.has_user_voted;
+    const hasVotedSince = hasVoted && !source.hasUserVoted;
+    const hasUnVotedSince = !hasVoted && source.hasUserVoted;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
@@ -59,7 +59,7 @@ const OpinionSourceVoteBox = React.createClass({
           />
         </form>{' '}
         <span className="opinion__votes-nb">
-          {source.votes_count + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
+          {source.votesCount + (hasVotedSince ? 1 : 0) + (hasUnVotedSince ? -1 : 0)}
         </span>
       </span>
     );

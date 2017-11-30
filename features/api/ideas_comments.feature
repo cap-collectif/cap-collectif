@@ -9,17 +9,17 @@ Feature: Ideas comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": @integer@,
-      "comments_count": @integer@,
+      "commentsAndAnswersCount": @integer@,
+      "commentsCount": @integer@,
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "createdAt": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
+          "votesCount": @integer@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -32,16 +32,16 @@ Feature: Ideas comments
             }
           },
           "answers": @...@,
-          "author_email": @null@,
-          "author_name": @null@,
-          "is_trashed": @boolean@,
+          "authorEmail": @null@,
+          "authorName": @null@,
+          "isTrashed": @boolean@,
           "_links": {
             "vote": @string@,
             "edit": @string@
           },
-          "has_user_reported": @boolean@,
-          "has_user_voted": @boolean@,
-          "can_edit": @boolean@
+          "hasUserReported": @boolean@,
+          "hasUserVoted": @boolean@,
+          "canEdit": @boolean@
         },
         @...@
       ]
@@ -54,26 +54,26 @@ Feature: Ideas comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": @integer@,
-      "comments_count": @integer@,
+      "commentsAndAnswersCount": @integer@,
+      "commentsCount": @integer@,
       "comments":
       [
         {
-          "can_contribute": @boolean@,
+          "canContribute": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "created_at": "@string@.isDateTime()",
-          "updated_at": "@string@.isDateTime()",
-          "votes_count": @integer@,
+          "createdAt": "@string@.isDateTime()",
+          "updatedAt": "@string@.isDateTime()",
+          "votesCount": @integer@,
           "author": @...@,
           "answers": @...@,
-          "author_email": @null@,
-          "author_name": @null@,
-          "is_trashed": @boolean@,
+          "authorEmail": @null@,
+          "authorName": @null@,
+          "isTrashed": @boolean@,
           "_links": @...@,
-          "has_user_reported": @boolean@,
-          "has_user_voted": @boolean@,
-          "can_edit": @boolean@
+          "hasUserReported": @boolean@,
+          "hasUserVoted": @boolean@,
+          "canEdit": @boolean@
         }
       ]
     }
@@ -85,8 +85,8 @@ Feature: Ideas comments
     Then the JSON response should match:
     """
     {
-      "comments_and_answers_count": "@integer@.greaterThan(3)",
-      "comments_count": "@integer@.greaterThan(3)",
+      "commentsAndAnswersCount": "@integer@.greaterThan(3)",
+      "commentsCount": "@integer@.greaterThan(3)",
       "comments":
       [
         @...@

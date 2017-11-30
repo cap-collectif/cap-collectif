@@ -20,7 +20,7 @@ const OpinionReportButton = React.createClass({
     return (
       <ReportBox
         id={`opinion-${opinion.id}`}
-        reported={opinion.has_user_reported}
+        reported={opinion.hasUserReported}
         onReport={this.handleReport}
         author={opinion.author}
         buttonClassName="opinion__action--report pull-right btn--outline btn-dark-gray"

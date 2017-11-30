@@ -12,7 +12,7 @@ Feature: Opinions
     {
       "opinion": {
         "isContribuable": @boolean@,
-        "is_trashed": @boolean@,
+        "isTrashed": @boolean@,
 
         "id": @string@,
         "title": @string@,
@@ -57,8 +57,8 @@ Feature: Opinions
         },
 
         "argumentsCount": @integer@,
-        "arguments_yes_count": @integer@,
-        "arguments_no_count": @integer@,
+        "argumentsYesCount": @integer@,
+        "argumentsNoCount": @integer@,
         "arguments": @array@,
 
         "sourcesCount": @integer@,
@@ -99,8 +99,8 @@ Feature: Opinions
           }
         },
 
-        "has_user_reported": @boolean@,
-        "user_vote": @null@,
+        "hasUserReported": @boolean@,
+        "userVote": @null@,
 
         "ranking": @...@,
         "modals": @array@,

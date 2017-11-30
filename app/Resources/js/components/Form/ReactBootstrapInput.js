@@ -163,20 +163,18 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'medias') {
       return (
-        <div>
-          <ImageUpload
-            id={props.id}
-            className={props.className}
-            valueLink={props.valueLink}
-            value={value}
-            onChange={props.onChange}
-            accept={acceptedMimeTypes.join()}
-            maxSize={26214400}
-            files={medias}
-            disablePreview
-            multiple
-          />
-        </div>
+        <ImageUpload
+          id={props.id}
+          className={props.className}
+          valueLink={props.valueLink}
+          value={value}
+          onChange={props.onChange}
+          accept={acceptedMimeTypes.join()}
+          maxSize={26214400}
+          files={medias}
+          disablePreview
+          multiple
+        />
       );
     }
 

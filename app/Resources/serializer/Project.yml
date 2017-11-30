@@ -36,10 +36,12 @@ Capco\AppBundle\Entity\Project:
       expose: true
       type: DateTime
       groups: [Projects]
+      serialized_name: createdAt
     updatedAt:
       expose: true
       type: DateTime
       groups: [Projects]
+      serialized_name: updatedAt
     enabled:
       expose: true
       groups: [Projects]
