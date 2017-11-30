@@ -7,132 +7,94 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
   <div
     className="box-header  pl-0"
   >
-    <h4
+    <h3
       className="box-title"
     >
       <FormattedMessage
         id="group.admin.users"
         values={Object {}}
       />
-    </h4>
-  </div>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="success"
-    className="mt-5 mb-15"
-    disabled={false}
-    href="#"
-    onClick={[Function]}
-  >
-    <i
-      className="fa fa-plus-circle"
-    />
-     
-    <FormattedMessage
-      id="group.admin.add_users"
-      values={Object {}}
-    />
-  </Button>
-  <Connect(GroupAdminModalAddUsers)
-    group={
-      Object {
-        "id": "group4",
-        "title": "Comité de suvi",
-        "usersConnection": Object {
-          "edges": Array [
-            Object {
-              "node": Object {
-                "biography": "biooooo",
-                "displayName": "toto",
-                "email": "toto@cap-collectif.com",
-                "id": "id1",
-                "media": Object {
-                  "url": "https://capco.dev",
-                },
-                "phone": null,
-              },
-            },
-          ],
-        },
-      }
-    }
-    onClose={[Function]}
-    show={false}
-  />
-  <ListGroup
-    bsClass="list-group"
-  >
-    <ListGroupItem
-      bsClass="list-group-item"
-      listItem={false}
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      <Connect(DeleteModal)
-        closeDeleteModal={[Function]}
-        deleteElement={[Function]}
-        deleteModalContent="group.admin.user.modal.delete.content"
-        deleteModalTitle="group.admin.user.modal.delete.title"
-        showDeleteModal={false}
+      <i
+        className="fa fa-info-circle"
       />
-      <Row
-        bsClass="row"
-        componentClass="div"
-      >
-        <Col
-          bsClass="col"
-          componentClass="div"
-          xs={3}
-        >
-          <img
-            alt="toto"
-            className="img-circle mr-15"
-            src="https://capco.dev"
-          />
-          toto
-        </Col>
-        <Col
-          bsClass="col"
-          className="pull-right"
-          componentClass="div"
-          xs={4}
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="danger"
-            className="pull-right mt-5"
-            disabled={false}
-            href="#"
-            onClick={[Function]}
-          >
-            <i
-              className="fa fa-trash"
-            />
-             
-            <FormattedMessage
-              id="global.delete"
-              values={Object {}}
-            />
-          </Button>
-        </Col>
-        <Col
-          bsClass="col"
-          componentClass="div"
-          xs={12}
-        >
-          <p
-            className="mt-10"
-          >
-            toto@cap-collectif.com
-          </p>
-          <p>
-            biooooo
-          </p>
-        </Col>
-      </Row>
-    </ListGroupItem>
-  </ListGroup>
+       Aide
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="success"
+      disabled={false}
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-plus-circle"
+      />
+       
+      <FormattedMessage
+        id="group.admin.add_users"
+        values={Object {}}
+      />
+    </Button>
+    <AlertAdminForm />
+    <Connect(GroupAdminModalAddUsers)
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "usersConnection": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "biography": "biooooo",
+                  "displayName": "toto",
+                  "email": "toto@cap-collectif.com",
+                  "id": "id1",
+                  "media": Object {
+                    "url": "https://capco.dev",
+                  },
+                  "phone": null,
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <ListGroup
+      bsClass="list-group"
+      className="mt-15"
+    >
+      <Relay(Connect(GroupAdminUsersListGroupItem))
+        groupId="group4"
+        user={
+          Object {
+            "biography": "biooooo",
+            "displayName": "toto",
+            "email": "toto@cap-collectif.com",
+            "id": "id1",
+            "media": Object {
+              "url": "https://capco.dev",
+            },
+            "phone": null,
+          }
+        }
+      />
+    </ListGroup>
+  </div>
 </div>
 `;

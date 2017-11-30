@@ -28,16 +28,14 @@ type Props = {
 };
 
 type State = {
-  showAddUsersModal: boolean,
-  // showRemoveUserModal: ?number
+  showAddUsersModal: boolean
 };
 
 export const formName = 'group-admin-users';
 
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
-    showAddUsersModal: false,
-    // showRemoveUserModal: null,
+    showAddUsersModal: false
   };
 
   openCreateModal = () => {

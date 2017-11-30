@@ -6,7 +6,7 @@ import { Button, Row, Col, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import DeleteModal from '../../Modal/DeleteModal';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
-import { groupAdminUsersUserDeletionSuccessful, groupAdminUsersUserDeletionFailed } from '../../../redux/modules/user'
+import { groupAdminUsersUserDeletionSuccessful, groupAdminUsersUserDeletionFailed, groupAdminUsersUserDeletionReset } from '../../../redux/modules/user'
 import type { GroupAdminUsersListGroupItem_user } from './__generated__/GroupAdminUsersListGroupItem_user.graphql';
 import type { Uuid, Dispatch } from "../../../types"
 
@@ -21,21 +21,21 @@ type State = {
 };
 
 const onDelete = (userId: Uuid, groupId: Uuid, dispatch: Dispatch) => {
-  dispatch(groupAdminUsersUserDeletionSuccessful())
+  dispatch(groupAdminUsersUserDeletionReset());
 
   return DeleteUserInGroupMutation.commit({
     input: {
       userId,
       groupId,
     },
-    // ajouter un dispatch qui met à false au départ
+
   })
   .then(() => {
     dispatch(groupAdminUsersUserDeletionSuccessful())
   })
   .catch(() => {
     dispatch(groupAdminUsersUserDeletionFailed())
-  });
+  })
 };
 
 export class GroupAdminUsersListGroupItem extends React.Component<Props, State> {
@@ -58,7 +58,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
           closeDeleteModal={this.cancelCloseRemoveUserModal}
           showDeleteModal={showRemoveUserModal}
           deleteElement={() => {
-            onDelete(user.id, groupId, dispatch);
+            onDelete(user.id, groupId, dispatch)
           }}
           deleteModalTitle={'group.admin.user.modal.delete.title'}
           deleteModalContent={'group.admin.user.modal.delete.content'}

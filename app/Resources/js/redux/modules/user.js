@@ -70,6 +70,9 @@ type GroupAdminUsersUserDeletionSuccessfulAction = {
 type GroupAdminUsersUserDeletionFailedAction = {
   type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
 };
+type GroupAdminUsersUserDeletionReserAction = {
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET',
+};
 
 export type UserAction =
   | UpdateRegistrationFieldAction
@@ -88,7 +91,8 @@ export type UserAction =
   | AddRegistrationFieldAction
   | SubmitConfirmPasswordAction
   | GroupAdminUsersUserDeletionSuccessfulAction
-  | GroupAdminUsersUserDeletionFailedAction;
+  | GroupAdminUsersUserDeletionFailedAction
+  | GroupAdminUsersUserDeletionResetAction;
 
 const initialState: State = {
   showLoginModal: false,
@@ -330,6 +334,9 @@ export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDele
 export const groupAdminUsersUserDeletionFailed = (): GroupAdminUsersUserDeletionFailedAction => ({
   type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
 });
+export const groupAdminUsersUserDeletionReset = (): GroupAdminUsersUserDeletionResetAction => ({
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET',
+});
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
@@ -408,8 +415,8 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, groupAdminUsersUserDeletionSuccessful: true };
     case 'GROUP_ADMIN_USERS_USER_DELETION_FAILED' :
       return { ...state, groupAdminUsersUserDeletionFailed: true };
-    // case 'GROUP_ADMIN_USERS_USER_DELETION_RESET' :
-    //   return { ...state, groupAdminUsersUserDeletionSuccessful: false, groupAdminUsersUserDeletionFailed: false };
+    case 'GROUP_ADMIN_USERS_USER_DELETION_RESET' :
+      return { ...state, groupAdminUsersUserDeletionSuccessful: false, groupAdminUsersUserDeletionFailed: false };
     default:
       return state;
   }
