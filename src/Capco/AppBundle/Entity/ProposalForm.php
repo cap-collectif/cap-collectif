@@ -58,6 +58,11 @@ class ProposalForm
     private $commentable = true;
 
     /**
+     * @ORM\Column(name="costable", type="boolean", nullable=false, options={"default": true})
+     */
+    private $costable = true;
+
+    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -444,6 +449,18 @@ class ProposalForm
     public function setCommentable(bool $commentable): self
     {
         $this->commentable = $commentable;
+
+        return $this;
+    }
+
+    public function isCostable(): bool
+    {
+        return $this->costable;
+    }
+
+    public function setCostable(bool $costable): self
+    {
+        $this->costable = $costable;
 
         return $this;
     }

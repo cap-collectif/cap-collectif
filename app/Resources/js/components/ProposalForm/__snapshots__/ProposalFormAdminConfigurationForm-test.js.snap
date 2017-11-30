@@ -424,7 +424,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 />
               }
               name="latMap"
-              normalize={[Function]}
               type="number"
             />
           </Col>
@@ -444,7 +443,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 />
               }
               name="lngMap"
-              normalize={[Function]}
               type="number"
             />
           </Col>
@@ -456,7 +454,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           >
             <Field
               component={[Function]}
-              id="proposal_form_zoom_map"
+              id="proposal_form_lat_map"
               label={
                 <FormattedMessage
                   id="proposal_form.zoom"
@@ -464,7 +462,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 />
               }
               name="zoomMap"
-              normalize={[Function]}
               type="select"
             >
               <FormattedMessage

@@ -29,6 +29,8 @@ ProposalForm:
                 type: "Boolean!"
             commentable:
                 type: "Boolean!"
+            costable:
+                type: "Boolean!"
             proposalInAZoneRequired:
                 type: "Boolean!"
             districts:

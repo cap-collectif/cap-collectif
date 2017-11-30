@@ -23,7 +23,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "startAt": "2016-12-20T09:00:24+01:00",
               "status": "closed",
               "title": "closed step 1",
-              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -33,7 +32,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "startAt": "2017-01-20T09:00:24+01:00",
               "status": "closed",
               "title": "closed step 2",
-              "type": "presentation",
             },
           ],
           "title": "Name of my project",
@@ -46,6 +44,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -99,7 +98,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "startAt": "2017-01-20T09:00:24+01:00",
         "status": "closed",
         "title": "closed step 2",
-        "type": "presentation",
       }
     }
     project={
@@ -117,7 +115,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "startAt": "2016-12-20T09:00:24+01:00",
             "status": "closed",
             "title": "closed step 1",
-            "type": "presentation",
           },
           Object {
             "_links": Object {
@@ -127,7 +124,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "startAt": "2017-01-20T09:00:24+01:00",
             "status": "closed",
             "title": "closed step 2",
-            "type": "presentation",
           },
         ],
         "title": "Name of my project",
@@ -178,7 +174,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "startAt": "2017-12-20T09:00:24+01:00",
               "status": "future",
               "title": "Future step 1",
-              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -188,7 +183,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "startAt": "2018-01-20T09:00:24+01:00",
               "status": "future",
               "title": "Future step 2",
-              "type": "presentation",
             },
           ],
           "title": "Name of my project",
@@ -201,6 +195,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -254,7 +249,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "startAt": "2017-12-20T09:00:24+01:00",
         "status": "future",
         "title": "Future step 1",
-        "type": "presentation",
       }
     }
     project={
@@ -276,7 +270,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "startAt": "2017-12-20T09:00:24+01:00",
             "status": "future",
             "title": "Future step 1",
-            "type": "presentation",
           },
           Object {
             "_links": Object {
@@ -286,7 +279,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "startAt": "2018-01-20T09:00:24+01:00",
             "status": "future",
             "title": "Future step 2",
-            "type": "presentation",
           },
         ],
         "title": "Name of my project",
@@ -345,7 +337,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
             Object {
               "_links": Object {
@@ -356,7 +347,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
             },
             Object {
               "status": "future",
@@ -373,6 +363,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -436,7 +427,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
             Object {
               "_links": Object {
@@ -447,7 +437,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
             },
             Object {
               "status": "future",
@@ -470,7 +459,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "status": "open",
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
       }
     }
     project={
@@ -493,7 +481,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
           },
           Object {
             "_links": Object {
@@ -504,7 +491,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 2",
-            "type": "collect",
           },
           Object {
             "status": "future",
@@ -574,7 +560,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
           ],
           "title": "Name of my project",
@@ -587,6 +572,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -646,7 +632,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
           ],
           "title": "Name of my project",
@@ -665,7 +650,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "status": "open",
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
       }
     }
     project={
@@ -684,7 +668,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
           },
         ],
         "title": "Name of my project",
@@ -750,7 +733,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
           ],
           "title": "Name of my project",
@@ -763,6 +745,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -822,7 +805,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "collect",
             },
           ],
           "title": "Name of my project",
@@ -841,7 +823,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "status": "open",
         "timeless": false,
         "title": "Open step 1",
-        "type": "collect",
       }
     }
     project={
@@ -860,7 +841,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 1",
-            "type": "collect",
           },
         ],
         "title": "Name of my project",
@@ -902,7 +882,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 </div>
 `;
 
-exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no actual participative step) 1`] = `
+exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no participative step) 1`] = `
 <div
   className="box project__preview__body"
 >
@@ -915,7 +895,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           "_links": Object {
             "show": "http://capco/show-link",
           },
-          "hasParticipativeStep": true,
+          "hasParticipativeStep": false,
           "steps": Array [
             Object {
               "status": "closed",
@@ -925,12 +905,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "_links": Object {
                 "show": "http://capco/step1/show-link",
               },
-              "endAt": "2017-11-26T09:00:24+01:00",
+              "endAt": "2017-11-25T09:00:24+01:00",
               "startAt": "2017-01-10T09:00:24+01:00",
               "status": "open",
               "timeless": false,
               "title": "Open step 1",
-              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -941,7 +920,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step 2",
-              "type": "collect",
             },
             Object {
               "status": "future",
@@ -958,6 +936,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -1000,49 +979,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         </a>
       </OverlayTrigger>
     </h4>
-    <ProjectPreviewCounters
-      project={
-        Object {
-          "_links": Object {
-            "show": "http://capco/show-link",
-          },
-          "hasParticipativeStep": true,
-          "steps": Array [
-            Object {
-              "status": "closed",
-              "title": "Closed step",
-            },
-            Object {
-              "_links": Object {
-                "show": "http://capco/step1/show-link",
-              },
-              "endAt": "2017-11-26T09:00:24+01:00",
-              "startAt": "2017-01-10T09:00:24+01:00",
-              "status": "open",
-              "timeless": false,
-              "title": "Open step 1",
-              "type": "presentation",
-            },
-            Object {
-              "_links": Object {
-                "show": "http://capco/step2/show-link",
-              },
-              "endAt": "2018-11-28T09:00:24+01:00",
-              "startAt": "2017-11-20T09:00:24+01:00",
-              "status": "open",
-              "timeless": false,
-              "title": "Open step 2",
-              "type": "collect",
-            },
-            Object {
-              "status": "future",
-              "title": "Future step",
-            },
-          ],
-          "title": "Name of my project",
-        }
-      }
-    />
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -1050,12 +986,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "_links": Object {
           "show": "http://capco/step1/show-link",
         },
-        "endAt": "2017-11-26T09:00:24+01:00",
+        "endAt": "2017-11-25T09:00:24+01:00",
         "startAt": "2017-01-10T09:00:24+01:00",
         "status": "open",
         "timeless": false,
         "title": "Open step 1",
-        "type": "presentation",
       }
     }
     project={
@@ -1063,7 +998,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "_links": Object {
           "show": "http://capco/show-link",
         },
-        "hasParticipativeStep": true,
+        "hasParticipativeStep": false,
         "steps": Array [
           Object {
             "status": "closed",
@@ -1073,12 +1008,11 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "_links": Object {
               "show": "http://capco/step1/show-link",
             },
-            "endAt": "2017-11-26T09:00:24+01:00",
+            "endAt": "2017-11-25T09:00:24+01:00",
             "startAt": "2017-01-10T09:00:24+01:00",
             "status": "open",
             "timeless": false,
             "title": "Open step 1",
-            "type": "presentation",
           },
           Object {
             "_links": Object {
@@ -1089,7 +1023,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step 2",
-            "type": "collect",
           },
           Object {
             "status": "future",
@@ -1146,7 +1079,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": true,
               "title": "timeless step",
-              "type": "presentation",
             },
             Object {
               "_links": Object {
@@ -1157,7 +1089,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               "status": "open",
               "timeless": false,
               "title": "Open step",
-              "type": "presentation",
             },
             Object {
               "status": "future",
@@ -1174,6 +1105,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         Object {
           "height": "auto",
           "lineHeight": "auto",
+          "margin": "5px 0",
         }
       }
     >
@@ -1256,7 +1188,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         "status": "open",
         "timeless": true,
         "title": "timeless step",
-        "type": "presentation",
       }
     }
     project={
@@ -1280,7 +1211,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": true,
             "title": "timeless step",
-            "type": "presentation",
           },
           Object {
             "_links": Object {
@@ -1291,7 +1221,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
             "status": "open",
             "timeless": false,
             "title": "Open step",
-            "type": "presentation",
           },
           Object {
             "status": "future",
