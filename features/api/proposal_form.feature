@@ -18,7 +18,6 @@ Scenario: Anonymous API client wants to get one proposal form
   "categoryHelpText": @string@,
   "isContribuable": true,
   "commentable": @boolean@,
-  "costable": @boolean@,
   "proposalInAZoneRequired": @boolean@,
   "usingThemes": @boolean@,
   "themeMandatory": @boolean@,

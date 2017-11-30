@@ -91,8 +91,6 @@ export const ProposalStepPage = React.createClass({
           districts={form.districts}
           defaultSort={defaultSort}
           orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
-          orderByComments={form.commentable}
-          orderByCost={form.costable}
           showThemes={form.usingThemes}
           showDistrictFilter={form.usingDistrict}
           showCategoriesFilter={form.usingCategories}

@@ -10,8 +10,6 @@ import type { Dispatch, State } from '../../../types';
 
 type Props = {
   orderByVotes: boolean,
-  orderByComments: boolean,
-  orderByCost: boolean,
   dispatch: Dispatch,
   order?: string,
   defaultSort?: string,
@@ -25,8 +23,6 @@ type ComponentState = {
 export class ProposalListOrderSorting extends React.Component<Props, ComponentState> {
   static defaultProps = {
     orderByVotes: false,
-    orderByComments: false,
-    orderByCost: false,
   };
 
   constructor(props: Props) {
@@ -34,9 +30,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 
     this.state = {
       // eslint-disable-next-line react/prop-types
-      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByVotes ? ['votes'] : [])
-        .concat(props.orderByComments ? ['comments'] : [])
-        .concat(props.orderByCost ? ['expensive', 'cheap'] : []),
+      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByVotes ? ['votes'] : []),
     };
   }
 

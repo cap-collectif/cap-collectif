@@ -24,6 +24,30 @@ exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for 
 </div>
 `;
 
+exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for closed step which remains a current step 1`] = `
+<div
+  className="thumbnail__steps-bar"
+>
+  <ProgressBar
+    active={false}
+    bsClass="progress-bar"
+    bsStyle="success"
+    isChild={false}
+    label={
+      <FormattedMessage
+        id="step.status.open"
+        values={Object {}}
+      />
+    }
+    max={100}
+    min={0}
+    now={50}
+    srOnly={false}
+    striped={false}
+  />
+</div>
+`;
+
 exports[`<ProjectPreviewProgressBar /> should render correctly progress bar for future step 1`] = `
 <div
   className="thumbnail__steps-bar"

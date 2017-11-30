@@ -107,10 +107,6 @@ Capco\AppBundle\Entity\ProposalForm:
           expose: true
           type: boolean
           groups: [ProposalForms]
-        costable:
-          expose: true
-          type: boolean
-          groups: [ProposalForms]
         proposalInAZoneRequired:
           expose: true
           type: boolean

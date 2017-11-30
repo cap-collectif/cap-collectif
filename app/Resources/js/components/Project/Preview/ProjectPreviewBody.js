@@ -12,37 +12,66 @@ type Props = {
   project: Object,
 };
 
-export class ProjectPreviewBody extends React.Component<Props> {
-  getActualStep() {
-    const { project } = this.props;
+const getStepsFilter = (project: Object) => {
+  const projectStep = project.steps.sort((a, b) => {
+    const dateA = new Date(a.startAt);
+    const dateB = new Date(b.startAt);
+    return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
+  });
 
-    const projectStep = project.steps.sort((a, b) => {
-      const dateA = new Date(a.startAt);
-      const dateB = new Date(b.startAt);
-      return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
-    });
+  const stepClosed = projectStep.filter(step => step.status === 'closed');
+  const stepFuture = projectStep.filter(step => step.status === 'future');
+  const stepOpen = projectStep.filter(step => step.status === 'open');
+  const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
 
-    const stepClosed = projectStep.filter(step => step.status === 'closed');
-    const stepFuture = projectStep.filter(step => step.status === 'future');
-    const stepOpen = projectStep.filter(step => step.status === 'open');
+  return {
+    stepClosed,
+    stepFuture,
+    stepOpen,
+    stepContinuousParticipation,
+  };
+};
 
-    const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
+const getCurrentStep = (project: Object) => {
+  const { stepOpen, stepClosed, stepFuture } = getStepsFilter(project);
 
-    if (stepContinuousParticipation.length > 0) {
-      return stepContinuousParticipation[0];
-    }
-    if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
-      return stepOpen[0];
-    }
-    if (stepClosed.length > 0 && stepOpen.length === 0 && stepFuture.length === 0) {
-      return stepClosed[stepClosed.length - 1];
-    }
-    if (stepFuture.length > 0 && stepOpen.length === 0) {
-      return stepFuture[0];
-    }
+  if (stepClosed.length > 0 && stepFuture.length > 0 && stepOpen.length === 0) {
+    return true;
+  }
+  if (stepFuture.length > 0 && stepOpen.length === 0 && stepClosed.length === 0) {
+    return false;
   }
 
+  return null;
+};
+
+const getActualStep = (project: Object) => {
+  const { stepContinuousParticipation, stepOpen, stepClosed, stepFuture } = getStepsFilter(project);
+
+  if (stepContinuousParticipation.length > 0) {
+    return stepContinuousParticipation[0];
+  }
+  if (stepOpen.length > 0 && stepContinuousParticipation.length === 0) {
+    return stepOpen[0];
+  }
+  if (stepFuture.length > 0 && stepOpen.length === 0 && stepClosed.length === 0) {
+    return stepFuture[0];
+  }
+  if (
+    stepClosed.length > 0 &&
+    (stepFuture.length > 0 || stepFuture.length === 0) &&
+    stepOpen.length === 0
+  ) {
+    return stepClosed[stepClosed.length - 1];
+  }
+};
+
+export class ProjectPreviewBody extends React.Component<Props> {
   getAction = (step: Object) => {
+    const { project } = this.props;
+
+    const isCurrentStep = getCurrentStep(project);
+
     if (step.status === 'open' && this.actualStepIsParticipative()) {
       return (
         <a href={step._links && step._links.show}>
@@ -50,7 +79,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         </a>
       );
     }
-    if (!this.actualStepIsParticipative() && step.status === 'open') {
+    if ((!this.actualStepIsParticipative() && step.status === 'open') || isCurrentStep) {
       return (
         <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeStep" />
@@ -120,7 +149,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
   };
 
   actualStepIsParticipative() {
-    const step = this.getActualStep();
+    const { project } = this.props;
+    const step = getActualStep(project);
 
     return (
       step &&
@@ -138,13 +168,16 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const link = externalLink || project._links.show;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
-    const actualStep = this.getActualStep();
+    const actualStep = getActualStep(project);
+    const isCurrentStep = getCurrentStep(project);
 
     return (
       <div className="box project__preview__body">
         <div className="project__preview__body__infos">
           <ProjectPreviewThemes project={project} />
-          <h4 className="project__preview__title" style={{ height: 'auto', lineHeight: 'auto' }}>
+          <h4
+            className="project__preview__title"
+            style={{ height: 'auto', lineHeight: 'auto', marginTop: '5px' }}>
             <OverlayTrigger placement="top" overlay={tooltip}>
               <a href={link}>
                 <div style={{ width: '98%' }}>
@@ -179,7 +212,13 @@ export class ProjectPreviewBody extends React.Component<Props> {
           </h4>
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
         </div>
-        {actualStep && <ProjectPreviewProgressBar project={project} actualStep={actualStep} />}
+        {actualStep && (
+          <ProjectPreviewProgressBar
+            project={project}
+            actualStep={actualStep}
+            isCurrentStep={isCurrentStep}
+          />
+        )}
         <div className="project__preview__actions">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep && this.getRemainingDays(actualStep)}

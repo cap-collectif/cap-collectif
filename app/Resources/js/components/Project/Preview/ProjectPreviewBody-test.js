@@ -35,6 +35,25 @@ const firstTest = {
   },
 };
 
+const remainingTimeTest = {
+  project: {
+    title: 'Name of my project',
+    _links: { show: 'http://capco/show-link' },
+    hasParticipativeStep: true,
+    steps: [
+      {
+        title: 'Open step 1',
+        status: 'open',
+        startAt: '2017-01-10T09:00:24+01:00',
+        endAt: '2017-11-25T09:00:24+01:00',
+        timeless: false,
+        type: 'collect',
+        _links: { show: 'http://capco/step1/show-link' },
+      },
+    ],
+  },
+};
+
 const secondTest = {
   project: {
     title: 'Name of my project',
@@ -57,7 +76,7 @@ const secondTest = {
         startAt: null,
         endAt: null,
         timeless: true,
-        type: 'presentation',
+        type: 'collect',
         _links: { show: 'http://capco/timeless-step/show-link' },
       },
       { title: 'Future step', status: 'future' },
@@ -71,7 +90,6 @@ const thirdTest = {
     _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: false,
     steps: [
-      { title: 'Closed step', status: 'closed' },
       {
         title: 'Future step 2',
         status: 'future',
@@ -148,20 +166,35 @@ const fifthTest = {
   },
 };
 
-const remainingTimeTest = {
+const sixthTest = {
   project: {
     title: 'Name of my project',
     _links: { show: 'http://capco/show-link' },
-    hasParticipativeStep: true,
+    hasParticipativeStep: false,
     steps: [
       {
-        title: 'Open step 1',
-        status: 'open',
-        startAt: '2017-01-10T09:00:24+01:00',
-        endAt: '2017-11-25T09:00:24+01:00',
-        timeless: false,
-        type: 'collect',
-        _links: { show: 'http://capco/step1/show-link' },
+        title: 'closed step 1',
+        status: 'closed',
+        startAt: '2016-12-20T09:00:24+01:00',
+        endAt: '2016-12-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step1/show-link' },
+      },
+      {
+        title: 'closed step 2',
+        status: 'closed',
+        startAt: '2017-01-20T09:00:24+01:00',
+        endAt: '2017-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step2/show-link' },
+      },
+      {
+        title: 'future step',
+        status: 'future',
+        startAt: '2018-01-20T09:00:24+01:00',
+        endAt: '2018-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step2/show-link' },
       },
     ],
   },
@@ -191,7 +224,7 @@ describe('<ProjectPreviewBody />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly project preview body & elements for future step', () => {
+  it('should render correctly project preview body & elements for future project', () => {
     const wrapper = shallow(<ProjectPreviewBody {...thirdTest} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -203,6 +236,11 @@ describe('<ProjectPreviewBody />', () => {
 
   it('should render correctly project preview body & elements for open step (with no actual participative step)', () => {
     const wrapper = shallow(<ProjectPreviewBody {...fifthTest} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly project preview body & elements for closed step which remains a current step', () => {
+    const wrapper = shallow(<ProjectPreviewBody {...sixthTest} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

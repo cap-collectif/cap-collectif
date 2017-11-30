@@ -33,12 +33,20 @@ const closedStep = {
   actualStep: {
     status: 'closed',
   },
+  isCurrentStep: false,
 };
 
 const futureStep = {
   actualStep: {
     status: 'future',
   },
+};
+
+const closedAndCurrentStep = {
+  actualStep: {
+    status: 'closed',
+  },
+  isCurrentStep: true,
 };
 
 describe('<ProjectPreviewProgressBar />', () => {
@@ -56,6 +64,10 @@ describe('<ProjectPreviewProgressBar />', () => {
   });
   it('should render correctly progress bar for future step', () => {
     const wrapper = shallow(<ProjectPreviewProgressBar {...props} {...futureStep} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render correctly progress bar for closed step which remains a current step', () => {
+    const wrapper = shallow(<ProjectPreviewProgressBar {...props} {...closedAndCurrentStep} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

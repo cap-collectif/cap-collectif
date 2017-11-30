@@ -6,44 +6,57 @@ import { FormattedMessage } from 'react-intl';
 type Props = {
   project: Object,
   actualStep: Object,
+  isCurrentStep?: ?boolean,
 };
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {
   getStyle = (stepStatus: string) => {
-    if (stepStatus === 'open') {
+    const { isCurrentStep } = this.props;
+
+    if (stepStatus === 'open' || isCurrentStep) {
       return 'success';
     }
   };
 
   getClass = (stepStatus: string) => {
+    const { isCurrentStep } = this.props;
+
     if (stepStatus === 'future') {
       return 'progress_future-step';
     }
-    if (stepStatus === 'closed') {
+    if (stepStatus === 'closed' && !isCurrentStep) {
       return 'progress_closed-step';
     }
   };
 
   getLabel = (step: Object) => {
+    const { isCurrentStep } = this.props;
+
     if (step.timeless === true) {
       return <FormattedMessage id="step.timeless" />;
     }
-    if (step.status === 'open') {
+    if (step.status === 'open' || isCurrentStep) {
       return <FormattedMessage id="step.status.open" />;
     }
     if (step.status === 'future') {
       return <FormattedMessage id="step.status.future" />;
     }
-    if (step.status === 'closed') {
+    if (step.status === 'closed' && !isCurrentStep) {
       return <FormattedMessage id="step.status.closed" />;
     }
   };
 
   getWidth = (step: Object) => {
-    if (step.status === 'closed' || step.status === 'future' || step.timeless === true) {
+    const { isCurrentStep } = this.props;
+
+    if (
+      (step.status === 'closed' && !isCurrentStep) ||
+      step.status === 'future' ||
+      step.timeless === true
+    ) {
       return 100;
     }
-    if (step.status === 'open') {
+    if (step.status === 'open' || isCurrentStep) {
       return 50;
     }
 
