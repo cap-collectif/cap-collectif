@@ -32,9 +32,9 @@ const OpinionVersion = React.createClass({
               top={10}
               height={'90px'}
               width={'145px'}
-              ok={version.votes_ok}
-              nok={version.votes_nok}
-              mitige={version.votes_mitige}
+              ok={version.votesCountOk}
+              nok={version.votesCountNok}
+              mitige={version.votesCountMitige}
             />
           </Col>
         </Row>
