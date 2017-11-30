@@ -43,16 +43,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
   }
 
   getAction = (step: Object) => {
-    const { project } = this.props;
-
-    if (project.hasParticipativeStep && step.status === 'open') {
+    if (step.status === 'open' && this.actualStepIsParticipative()) {
       return (
         <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
-    if (!project.hasParticipativeStep && step.status === 'open') {
+    if (!this.actualStepIsParticipative() && step.status === 'open') {
       return (
         <a href={step._links && step._links.show}>
           <FormattedMessage id="project.preview.action.seeStep" />
@@ -84,8 +82,6 @@ export class ProjectPreviewBody extends React.Component<Props> {
   };
 
   getRemainingDays = (step: Object) => {
-    const { project } = this.props;
-
     const endDate = moment(step.endAt);
     const now = moment();
 
@@ -118,10 +114,22 @@ export class ProjectPreviewBody extends React.Component<Props> {
       );
     }
 
-    if (project.hasParticipativeStep && step.status === 'open' && !step.timeless) {
+    if (step.status === 'open' && !step.timeless && this.actualStepIsParticipative()) {
       return timeLeft;
     }
   };
+
+  actualStepIsParticipative() {
+    const step = this.getActualStep();
+
+    return (
+      step &&
+      (step.type === 'consultation' ||
+        step.type === 'collect' ||
+        step.type === 'questionnaire' ||
+        (step.type === 'selection' && step.votable === true))
+    );
+  }
 
   render() {
     const { project } = this.props;
@@ -136,9 +144,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
       <div className="box project__preview__body">
         <div className="project__preview__body__infos">
           <ProjectPreviewThemes project={project} />
-          <h4
-            className="project__preview__title"
-            style={{ height: 'auto', lineHeight: 'auto', margin: '5px 0' }}>
+          <h4 className="project__preview__title" style={{ height: 'auto', lineHeight: 'auto' }}>
             <OverlayTrigger placement="top" overlay={tooltip}>
               <a href={link}>
                 <div style={{ width: '98%' }}>
