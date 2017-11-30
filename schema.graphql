@@ -190,17 +190,6 @@ type ChangeSelectionStatusPayload {
   clientMutationId: String
 }
 
-input ChangeTitleProposalFormInput {
-  proposalFormId: ID!
-  title: String!
-  clientMutationId: String
-}
-
-type ChangeTitleProposalFormPayload {
-  proposalForm: ProposalForm!
-  clientMutationId: String
-}
-
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
