@@ -26,7 +26,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         foreach ($questions as $qaq) {
             $question = $qaq->getQuestion();
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
-                $this->context->addViolationAt('responses', $constraint->message, [], null);
+                $this->context->buildViolation($constraint->message)->atPath('responses')->addViolation();
 
                 return;
             }
@@ -35,7 +35,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 
     private function getQuestions(Constraint $constraint, $object)
     {
-        if ($constraint->formField === 'registrationForm') {
+        if ('registrationForm' === $constraint->formField) {
             $form = $this->formRepo->findCurrent();
 
             return $form->getQuestions();
@@ -46,25 +46,23 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         return $form->getQuestions();
     }
 
-    private function hasResponseForQuestion(AbstractQuestion $question, $responses)
+    private function hasResponseForQuestion(AbstractQuestion $question, $responses): bool
     {
         foreach ($responses as $response) {
             if ($response->getQuestion() === $question) {
-                $value = null;
-                if ($response instanceof MediaResponse) {
-                    $value = $response->getMedias();
-                    // hot fix
+                if ($response instanceof MediaResponse && $response->getMedias()->count() > 0) {
                     return true;
                 }
+
                 $value = $response->getValue();
 
                 if ($value instanceof Collection && $value->count() > 0) {
                     return true;
                 }
-                if (is_array($value) && count($value)) {
+                if (\is_array($value) && \count($value)) {
                     return true;
                 }
-                if (is_string($value) && strlen($value)) {
+                if (\is_string($value) && '' !== $value) {
                     return true;
                 }
 

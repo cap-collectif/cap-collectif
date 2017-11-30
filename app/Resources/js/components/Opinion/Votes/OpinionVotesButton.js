@@ -131,8 +131,8 @@ const mapStateToProps = (
   { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion },
 ) => {
   const vote = opinion.parent
-    ? state.opinion.versionsById[opinion.id].userVote
-    : state.opinion.opinionsById[opinion.id].userVote;
+    ? state.opinion.versionsById[opinion.id].user_vote
+    : state.opinion.opinionsById[opinion.id].user_vote;
   return {
     features: state.default.features,
     user: state.user.user,

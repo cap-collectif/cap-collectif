@@ -48,7 +48,7 @@ const CommentVoteButton = React.createClass({
   renderVoteButton() {
     const { comment } = this.props;
 
-    if (comment.hasUserVoted) {
+    if (comment.has_user_voted) {
       return (
         <button className="btn btn-danger btn-sm" onClick={this.deleteVote}>
           {<FormattedMessage id="comment.vote.remove" />}
@@ -70,7 +70,7 @@ const CommentVoteButton = React.createClass({
     return (
       <span className="comment__agree">
         {this.renderFormOrDisabled()}{' '}
-        <span className="opinion__votes-nb">{comment.votesCount}</span>
+        <span className="opinion__votes-nb">{comment.votes_count}</span>
       </span>
     );
   },

@@ -36,15 +36,15 @@ Feature: Opinions Versions
               "show": @string@,
               "type": @string@
             },
-            "userVote": @null@,
-            "hasUserReported": @boolean@
+            "user_vote": @null@,
+            "has_user_reported": @boolean@
           },
 
           "sourcesCount": @integer@,
 
           "argumentsCount": @integer@,
-          "argumentsYesCount": @integer@,
-          "argumentsNoCount": @integer@,
+          "arguments_yes_count": @integer@,
+          "arguments_no_count": @integer@,
 
           "createdAt": "@string@.isDateTime()",
           "updatedAt": "@string@.isDateTime()",
@@ -52,17 +52,17 @@ Feature: Opinions Versions
           "ranking": "expr(value === null || value > 0)",
 
           "votesCount": @integer@,
-          "votesCountNok": @integer@,
-          "votesCountOk": @integer@,
-          "votesCountMitige": @integer@,
+          "votes_nok": @integer@,
+          "votes_ok": @integer@,
+          "votes_mitige": @integer@,
 
           "_links": {
             "show": @string@,
             "parent": @string@
           },
 
-          "userVote": @null@,
-          "hasUserReported": @boolean@
+          "user_vote": @null@,
+          "has_user_reported": @boolean@
         },
         @...@
       ],
@@ -87,21 +87,21 @@ Feature: Opinions Versions
         "comment": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
-        "isTrashed": @boolean@,
+        "is_trashed": @boolean@,
         "isContribuable": @boolean@,
 
         "arguments": @...@,
-        "argumentsYesCount": @integer@,
-        "argumentsNoCount": @integer@,
+        "arguments_yes_count": @integer@,
+        "arguments_no_count": @integer@,
         "argumentsCount": @integer@,
 
         "sources": @...@,
         "sourcesCount": @integer@,
 
         "votes": @...@,
-        "votesCountNok": @integer@,
-        "votesCountOk": @integer@,
-        "votesCountMitige": @integer@,
+        "votes_nok": @integer@,
+        "votes_ok": @integer@,
+        "votes_mitige": @integer@,
         "votesCount": @integer@,
 
         "parent": {
@@ -119,8 +119,8 @@ Feature: Opinions Versions
             "edit": @string@,
             "type": @string@
           },
-          "userVote": @null@,
-          "hasUserReported": @boolean@
+          "user_vote": @null@,
+          "has_user_reported": @boolean@
         },
         "author": {
           "username": @string@,
@@ -137,8 +137,8 @@ Feature: Opinions Versions
           "show": @string@,
           "parent": @string@
         },
-        "userVote": @null@,
-        "hasUserReported": @boolean@,
+        "user_vote": @null@,
+        "has_user_reported": @boolean@,
 
         "ranking": @integer@
       },

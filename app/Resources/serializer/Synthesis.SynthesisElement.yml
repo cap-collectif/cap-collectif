@@ -58,7 +58,6 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     originalDivision:
       expose: true
       groups: [ElementDetails]
-      serialized_name: originalDivision
     division:
       expose: true
       groups: [ElementDetails]
@@ -76,7 +75,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       serialized_name: body
       groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
     hasLinkedData:
-      serialized_name: hasLinkedData
+      serialized_name: has_linked_data
       groups: [ElementsList, ElementsPublished, ElementDetails]
   relations:
     -

@@ -19,16 +19,16 @@ Feature: Opinions Links
           "argumentsCount": @integer@,
           "connectionsCount": @integer@,
           "votesCount": @integer@,
-          "votesCountNok": @integer@,
-          "votesCountOk": @integer@,
-          "votesCountMitige": @integer@,
+          "votes_nok": @integer@,
+          "votes_ok": @integer@,
+          "votes_mitige": @integer@,
 
           "author": @...@,
 
           "type": @...@,
 
-          "userVote": @null@,
-          "hasUserReported": @boolean@,
+          "user_vote": @null@,
+          "has_user_reported": @boolean@,
 
           "_links": {
             "show": @string@,

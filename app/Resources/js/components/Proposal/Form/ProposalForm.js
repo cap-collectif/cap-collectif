@@ -112,7 +112,7 @@ export const ProposalForm = React.createClass({
     const { form } = this.props;
     form.fields.map(field => {
       const ref = `custom-${field.id}`;
-      if (field.required) {
+      if (field.required && field.type !== 'medias') {
         this.formValidationRules[ref] = {
           notBlank: { message: 'proposal.constraints.field_mandatory' },
         };
@@ -664,6 +664,13 @@ export const ProposalForm = React.createClass({
               {!field.required && optional}
             </span>
           );
+
+          const medias =
+            field.type === 'medias' && proposal.responses.length > 0
+              ? proposal.responses.filter(response => {
+                  return response.field.id === field.id;
+                })
+              : [];
           const input = (
             <Input
               key={key}
@@ -674,6 +681,7 @@ export const ProposalForm = React.createClass({
               valueLink={this.linkState(`custom.${key}`)}
               help={field.helpText}
               errors={this.renderFormErrors(key)}
+              medias={medias.length > 0 ? medias[0].medias : []}
             />
           );
           return <ProposalPrivateField show={field.private} children={input} />;

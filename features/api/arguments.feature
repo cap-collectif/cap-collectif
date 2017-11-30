@@ -15,12 +15,12 @@ Scenario: API client wants to list arguments of an opinion
         "id": @string@,
         "body": @string@,
         "type": @integer@,
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
 
         "votesCount": @integer@,
-        "isTrashed": @boolean@,
-        "isEnabled": @boolean@,
+        "is_trashed": @boolean@,
+        "is_enabled": @boolean@,
         "isContribuable": @boolean@,
 
         "author": {
@@ -59,12 +59,12 @@ Scenario: API client wants to list arguments of an opinion version
         "id": @string@,
         "body": @string@,
         "type": @integer@,
-        "createdAt": "@string@.isDateTime()",
-        "updatedAt": "@string@.isDateTime()",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
 
         "votesCount": @integer@,
-        "isTrashed": @boolean@,
-        "isEnabled": @boolean@,
+        "is_trashed": @boolean@,
+        "is_enabled": @boolean@,
         "isContribuable": @boolean@,
 
         "author": {

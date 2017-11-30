@@ -9,18 +9,18 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": @integer@,
-      "commentsCount": @integer@,
+      "comments_and_answers_count": @integer@,
+      "comments_count": @integer@,
       "comments":
       [
         {
-          "canContribute": @boolean@,
+          "can_contribute": @boolean@,
           "pinned": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "createdAt": "@string@.isDateTime()",
-          "updatedAt": "@string@.isDateTime()",
-          "votesCount": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "votes_count": @integer@,
           "author": {
             "username": @string@,
             "displayName": @string@,
@@ -33,15 +33,15 @@ Feature: Events comments
             }
           },
           "answers": [],
-          "authorEmail": @null@,
-          "authorName": @null@,
-          "isTrashed": @boolean@,
+          "author_email": @null@,
+          "author_name": @null@,
+          "is_trashed": @boolean@,
           "_links": {
             "edit": @string@
           },
-          "hasUserReported": @boolean@,
-          "hasUserVoted": @boolean@,
-          "canEdit": @boolean@
+          "has_user_reported": @boolean@,
+          "has_user_voted": @boolean@,
+          "can_edit": @boolean@
         },
         @...@
       ]
@@ -54,26 +54,26 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": @integer@,
-      "commentsCount": @integer@,
+      "comments_and_answers_count": @integer@,
+      "comments_count": @integer@,
       "comments":
       [
         {
-          "canContribute": @boolean@,
+          "can_contribute": @boolean@,
           "id": @integer@,
           "body": @string@,
-          "createdAt": "@string@.isDateTime()",
-          "updatedAt": "@string@.isDateTime()",
-          "votesCount": @integer@,
+          "created_at": "@string@.isDateTime()",
+          "updated_at": "@string@.isDateTime()",
+          "votes_count": @integer@,
           "author": @...@,
           "answers": @...@,
-          "authorEmail": @null@,
-          "authorName": @null@,
-          "isTrashed": @boolean@,
+          "author_email": @null@,
+          "author_name": @null@,
+          "is_trashed": @boolean@,
           "_links": @...@,
-          "hasUserReported": @boolean@,
-          "hasUserVoted": @boolean@,
-          "canEdit": @boolean@
+          "has_user_reported": @boolean@,
+          "has_user_voted": @boolean@,
+          "can_edit": @boolean@
         }
       ]
     }
@@ -85,8 +85,8 @@ Feature: Events comments
     Then the JSON response should match:
     """
     {
-      "commentsAndAnswersCount": "@integer@",
-      "commentsCount": "@integer@",
+      "comments_and_answers_count": "@integer@",
+      "comments_count": "@integer@",
       "comments":
       [
         @...@

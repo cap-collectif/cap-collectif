@@ -16,7 +16,7 @@ const CommentDate = React.createClass({
     return (
       <span className="excerpt">
         <FormattedDate
-          value={moment(comment.createdAt)}
+          value={moment(comment.created_at)}
           day="numeric"
           month="long"
           year="numeric"
@@ -33,7 +33,7 @@ const CommentDate = React.createClass({
       return null;
     }
 
-    if (moment(comment.updatedAt).diff(comment.createdAt, 'seconds') <= 1) {
+    if (moment(comment.updated_at).diff(comment.created_at, 'seconds') <= 1) {
       return null;
     }
 

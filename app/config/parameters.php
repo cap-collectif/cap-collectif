@@ -71,5 +71,3 @@ $container->setParameter('locales', ["en-GB", "fr-FR", "es-ES"]);
 // This key is used for server to server call
 // There are a restriction on IP
 $container->setParameter('google_maps_key_server', '***REMOVED***');
-
-$container->setParameter('jms_serializer.serialized_name_annotation_strategy.class', 'Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy');

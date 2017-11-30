@@ -110,7 +110,7 @@ type ContributionMap = {
     },
     votes: OpinionVotes,
     votesCount: number,
-    userVote: ?VoteValue,
+    user_vote: ?VoteValue,
   },
 };
 export type State = {
@@ -412,7 +412,7 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
       userHasVote: true,
       [voteCountIncreasing]: object[voteCountIncreasing] + 1,
       votesCount: object.votesCount + 1,
-      userVote: newVote.value,
+      user_vote: newVote.value,
     };
     return type === 'version'
       ? updateVersion(state, contribution)
@@ -428,7 +428,7 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
     votes: [...object.votes, newVote],
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
     [voteCountIncreasing]: object[voteCountIncreasing] + 1,
-    userVote: newVote.value,
+    user_vote: newVote.value,
   };
   return type === 'version'
     ? updateVersion(state, contribution)
@@ -444,7 +444,7 @@ const removeVote = (state: State, oldVote: Object, object: Object, type: string)
     ...object,
     votes: [...object.votes.slice(0, indexToRemove), ...object.votes.slice(indexToRemove + 1)],
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
-    userVote: null,
+    user_vote: null,
     userHasVote: false,
     votesCount: object.votesCount - 1,
   };

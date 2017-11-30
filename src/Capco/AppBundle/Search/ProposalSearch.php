@@ -55,11 +55,11 @@ class ProposalSearch extends Search
 
         switch ($order) {
             case 'old':
-                $sortField = 'createdAt';
+                $sortField = 'created_at';
                 $sortOrder = 'asc';
                 break;
             case 'last':
-                $sortField = 'createdAt';
+                $sortField = 'created_at';
                 $sortOrder = 'desc';
                 break;
             case 'votes':
@@ -68,7 +68,7 @@ class ProposalSearch extends Search
                 $sortOrder = 'desc';
                 break;
             case 'comments':
-                $sortField = 'commentsCount';
+                $sortField = 'comments_count';
                 $sortOrder = 'desc';
                 break;
             default:

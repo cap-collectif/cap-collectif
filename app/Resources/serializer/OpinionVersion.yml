@@ -44,17 +44,17 @@ Capco\AppBundle\Entity\OpinionVersion:
         votesCountNok:
             expose: true
             type: integer
-            serialized_name: votesCountNok
+            serialized_name: votes_nok
             groups: [OpinionVersions, OpinionVersionPreviews]
         votesCountOk:
             expose: true
             type: integer
-            serialized_name: votesCountOk
+            serialized_name: votes_ok
             groups: [OpinionVersions, OpinionVersionPreviews]
         votesCountMitige:
             expose: true
             type: integer
-            serialized_name: votesCountMitige
+            serialized_name: votes_mitige
             groups: [OpinionVersions, OpinionVersionPreviews]
         arguments:
             expose: true
@@ -83,7 +83,6 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: boolean
             groups: [OpinionVersions]
-            serialized_name: isTrashed
         ranking:
             expose: true
             type: integer
@@ -99,9 +98,9 @@ Capco\AppBundle\Entity\OpinionVersion:
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentForCount:
             type: integer
-            serialized_name: argumentsYesCount
+            serialized_name: arguments_yes_count
             groups: [OpinionVersions, OpinionVersionPreviews]
         getArgumentAgainstCount:
             type: integer
-            serialized_name: argumentsNoCount
+            serialized_name: arguments_no_count
             groups: [OpinionVersions, OpinionVersionPreviews]

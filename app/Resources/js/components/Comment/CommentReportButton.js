@@ -19,7 +19,7 @@ const CommentReportButton = React.createClass({
     return (
       <ReportBox
         id={`comment-${comment.id}`}
-        reported={comment.hasUserReported}
+        reported={comment.has_user_reported}
         onReport={this.handleReport}
         author={comment.author}
         buttonBsSize="sm"
