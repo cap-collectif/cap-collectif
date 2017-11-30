@@ -1,7 +1,7 @@
 ChangeUserNotificationsConfigurationInput:
     type: relay-mutation-input
     config:
-        description: ""
+        description: "Change a user notifications preferences"
         fields:
             onProposalCommentMail:
                 type: "Boolean!"

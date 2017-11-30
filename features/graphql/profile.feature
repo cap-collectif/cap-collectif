@@ -1,7 +1,6 @@
 @profile
 Feature: Profile
 
-@dev
 Scenario: GraphQL client wants to get a user's notifications configuration
   Given I am logged in to graphql as user
   When I send a GraphQL request:

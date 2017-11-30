@@ -4,9 +4,9 @@ Query:
         fields:
             viewer:
                 access: "@=isAuthenticated()"
-                type: "User"
+                type: "User!"
                 description: "Get currently logged in user"
-                resolve: "@=resolver('current_user', [args])"
+                resolve: "@=user"
             users:
                 type: "[User]"
                 args:

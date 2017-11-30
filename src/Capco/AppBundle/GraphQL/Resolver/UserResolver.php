@@ -19,11 +19,6 @@ class UserResolver implements ContainerAwareInterface
         return $typeResolver->resolve('user');
     }
 
-    public function resolveCurrentUser()
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
-    }
-
     public function resolve(Arg $args)
     {
         $repo = $this->container->get('capco.user.repository');

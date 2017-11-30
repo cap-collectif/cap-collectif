@@ -5,11 +5,6 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
-  capco.resolver.user_notifications:
-      class: Capco\AppBundle\GraphQL\Resolver\UserNotificationsConfigurationResolver
-      tags:
-          - { name: overblog_graphql.resolver, alias: "user_notifications_configuration", method: "resolve" }
-
   capco.resolver.proposal_form:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
