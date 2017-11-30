@@ -15,7 +15,6 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
           expose: true
           type: integer
           groups: [ConsultationSteps]
-          serialized_name: opinionCountShownBySection
     virtual_properties:
         getProjectId:
             serialized_name: projectId
