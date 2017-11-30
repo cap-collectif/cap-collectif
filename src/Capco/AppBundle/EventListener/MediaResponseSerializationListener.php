@@ -28,7 +28,7 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => MediaResponse::class,
+                'class' => 'Capco\AppBundle\Entity\Responses\MediaResponse',
                 'method' => 'onPostResponse',
             ],
         ];
@@ -55,7 +55,6 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
                         ]
                     );
                     $metas['name'] = $media->getName();
-                    $metas['extension'] = $media->getExtension();
                     $metas['size'] = $this->formatBytes($media->getSize());
                 } catch (RouteNotFoundException $e) {
                     return;

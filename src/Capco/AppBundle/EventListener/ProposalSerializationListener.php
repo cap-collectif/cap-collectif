@@ -45,7 +45,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $this->voteResolver = $voteResolver;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [
@@ -108,7 +108,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
         $votesByStepId[$proposal->getProposalForm()->getStep()->getId()] = [];
         $event->getVisitor()->addData('votesByStepId', $votesByStepId);
 
-        $userIsAuthorOrAdmin = 'anon.' !== $user && ($user->getId() === $proposal->getAuthor()->getId() || $user->isAdmin());
+        $userIsAuthorOrAdmin = $user !== 'anon.' && ($user->getId() === $proposal->getAuthor()->getId() || $user->isAdmin());
         $responses = $this
             ->responseRepository
             ->getByProposal($proposal, $userIsAuthorOrAdmin)
@@ -160,7 +160,7 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
         if (isset($this->getIncludedGroups($event)['ProposalUserData'])) {
             $event->getVisitor()->addData(
-                'hasUserReported', 'anon.' === $user ? false : $proposal->userHasReport($user)
+                'hasUserReported', $user === 'anon.' ? false : $proposal->userHasReport($user)
             );
         }
     }

@@ -7,11 +7,13 @@ use Sonata\UserBundle\Controller\ResettingFOSUser1Controller as BaseController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
-/**
- * Class ResettingFOSUser1Controller.
- */
 class ResettingFOSUser1Controller extends BaseController
 {
+    public function requestAction()
+    {
+        return $this->container->get('templating')->renderResponse('CapcoUserBundle:Resetting:request.html.twig');
+    }
+
     /**
      * Request reset user password: submit form and send email.
      */
@@ -21,7 +23,7 @@ class ResettingFOSUser1Controller extends BaseController
         $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
 
         if (count($errors) > 0) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine(), ['invalid_email' => $email]);
+            return $this->container->get('templating')->renderResponse('CapcoUserBundle:Resetting:request.html.twig', ['invalid_email' => $email]);
         }
 
         $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
@@ -52,7 +54,7 @@ class ResettingFOSUser1Controller extends BaseController
         $email = $session->get(static::SESSION_EMAIL);
         $session->remove(static::SESSION_EMAIL);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.' . $this->getEngine(), [
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.twig', [
             'email' => $email,
         ]);
     }

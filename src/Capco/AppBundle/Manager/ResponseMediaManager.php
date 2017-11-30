@@ -16,7 +16,6 @@ class ResponseMediaManager
     protected $entityManager;
     protected $proposal;
     protected $mediaManager;
-    protected $typeField = AbstractResponse::TYPE_FIELD_NAME;
 
     public function __construct(EntityManager $entityManager, MediaManager $mediaManager)
     {
@@ -59,9 +58,9 @@ class ResponseMediaManager
 
     public function resolveTypeOfResponses(array $valueResponses, array $mediasResponses): array
     {
-        if (0 === \count($mediasResponses) || !isset($mediasResponses['responses'])) {
+        if (count($mediasResponses) === 0 || !isset($mediasResponses['responses'])) {
             $valueResponses['responses'] = array_map(function ($valueResponse) {
-                $valueResponse[$this->typeField] = 'value_response';
+                $valueResponse['_type'] = 'value_response';
 
                 return $valueResponse;
             }, $valueResponses['responses']);
@@ -73,10 +72,10 @@ class ResponseMediaManager
         $valueResponsesKeys = array_keys($valueResponses['responses']);
 
         foreach ($valueResponsesKeys as $valueResponsesKey) {
-            if (\in_array($valueResponsesKey, $mediasResponsesKeys, true)) {
-                $valueResponses['responses'][$valueResponsesKey][$this->typeField] = 'media_response';
+            if (in_array($valueResponsesKey, $mediasResponsesKeys, true)) {
+                $valueResponses['responses'][$valueResponsesKey]['_type'] = 'media_response';
             } else {
-                $valueResponses['responses'][$valueResponsesKey][$this->typeField] = 'value_response';
+                $valueResponses['responses'][$valueResponsesKey]['_type'] = 'value_response';
             }
         }
 

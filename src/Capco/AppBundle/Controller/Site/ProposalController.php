@@ -32,6 +32,7 @@ class ProposalController extends Controller
             throw new NotFoundHttpException(sprintf('The proposal `%s` is in draft state and current user is not the creator.', $proposal->getId()));
         }
 
+        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
 
         $urlResolver = $this->get('capco.url.resolver');
@@ -41,7 +42,7 @@ class ProposalController extends Controller
         })->toArray();
 
         $refererUri = $request->headers->has('referer')
-            && false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) && \in_array($request->headers->get('referer'), $stepUrls, true)
+            && false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) && in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -83,7 +84,7 @@ class ProposalController extends Controller
         ;
 
         $proposalSerializedAsArray = json_decode($proposalSerialized, true);
-        $proposalSerializedAsArray['postsCount'] = $this->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
+        $proposalSerializedAsArray['postsCount'] = $em->getRepository('CapcoAppBundle:Post')->countPublishedPostsByProposal($proposal);
 
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
