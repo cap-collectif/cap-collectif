@@ -77,6 +77,9 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               type="text"
               id="proposal_form_title"
             />
+            <h2>
+              <FormattedMessage id="proposal_form.admin.settings.options" />
+            </h2>
             {isSuperAdmin && (
               <div>
                 <h2>
@@ -90,12 +93,9 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
                 />
               </div>
             )}
-            <h2>
-              <FormattedMessage id="proposal_form.admin.settings.costable" />
-            </h2>
             <Field
               name="costable"
-              children={<FormattedMessage id="proposal_form.costable" />}
+              children={<FormattedMessage id="proposal_form.admin.settings.costable" />}
               component={component}
               type="checkbox"
             />
