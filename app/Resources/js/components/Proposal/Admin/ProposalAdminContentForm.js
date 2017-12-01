@@ -141,6 +141,7 @@ export class ProposalAdminContentForm extends React.Component<Props> {
     const categories = proposal.form.categories;
     const optional = (
       <span className="excerpt">
+        {' '}
         <FormattedMessage id="global.form.optional" />
       </span>
     );

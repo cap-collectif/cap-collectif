@@ -48,6 +48,11 @@
 }
 
 .sonata-ba-form {
+    svg.avatar {
+        vertical-align: middle;
+        background-color: $sonata-bgc;
+    }
+
     .box-primary {
         padding: 0 20px 20px;
     }

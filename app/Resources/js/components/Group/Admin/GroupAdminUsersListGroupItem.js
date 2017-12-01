@@ -5,6 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Row, Col, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import DeleteModal from '../../Modal/DeleteModal';
+import DefaultAvatar from '../../User/DefaultAvatar';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
 import { groupAdminUsersUserDeletionSuccessful, groupAdminUsersUserDeletionFailed, groupAdminUsersUserDeletionReset } from '../../../redux/modules/user'
 import type { GroupAdminUsersListGroupItem_user } from './__generated__/GroupAdminUsersListGroupItem_user.graphql';
@@ -13,7 +14,7 @@ import type { Uuid, Dispatch } from "../../../types"
 type Props = {
   groupId: string,
   user: GroupAdminUsersListGroupItem_user,
-  dispatch: Function
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -29,7 +30,6 @@ const onDelete = (userId: Uuid, groupId: Uuid, dispatch: Dispatch) => {
       userId,
       groupId,
     },
-
   })
   .then(() => {
     dispatch(groupAdminUsersUserDeletionSuccessful())
@@ -73,11 +73,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
                 alt={user.displayName}
               />
             ) : (
-              <img
-                className="img-circle mr-15"
-                src="/bundles/sonatauser/default_avatar.png"
-                alt={user.displayName}
-              />
+              <DefaultAvatar className="img-circle avatar mr-15" />
             )}
             {user.displayName}
           </Col>
@@ -99,7 +95,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
                 <span>
                 {' | '}
                   {user.phone}
-              </span>
+                </span>
               )}
             </p>
             <p>{user.biography}</p>

@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit } from 'redux-form';
@@ -14,7 +15,7 @@ type Props = {
   onClose: Function,
   group: GroupAdminUsers_group,
   dispatch: Dispatch,
-  intl: Object
+  intl: IntlShape,
 };
 
 export class GroupAdminModalAddUsers extends React.Component<Props> {

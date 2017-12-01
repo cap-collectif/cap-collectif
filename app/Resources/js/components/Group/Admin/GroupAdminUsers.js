@@ -28,14 +28,16 @@ type Props = {
 };
 
 type State = {
-  showAddUsersModal: boolean
+  showAddUsersModal: boolean,
+  user: Object,
 };
 
 export const formName = 'group-admin-users';
 
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
-    showAddUsersModal: false
+    showAddUsersModal: false,
+    user: {},
   };
 
   getAlertAdminForm() {
@@ -92,20 +94,10 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     this.setState({ showAddUsersModal: false });
   };
 
-
   render() {
-    const {
-      group,
-      submitSucceeded,
-      submitFailed,
-      userIsDeleted,
-    } = this.props;
+    const { group } = this.props;
 
     const { showAddUsersModal } = this.state;
-
-    console.log(submitSucceeded);
-    console.warn(submitFailed);
-    console.error(userIsDeleted);
 
     return (
       <div className="box box-primary container">
@@ -125,7 +117,8 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           <Button
             bsStyle="success"
             href="#"
-            onClick={() => this.openCreateModal()}>
+            onClick={() => this.openCreateModal()}
+          >
             <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
           </Button>
           {this.getAlertAdminForm()}
@@ -155,7 +148,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: State) => {
   return {
     valid: isValid('group-users-add')(state),
     invalid: isInvalid('group-users-add')(state),
