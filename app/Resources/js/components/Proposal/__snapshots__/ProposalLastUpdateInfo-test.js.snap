@@ -30,6 +30,7 @@ exports[`<ProposalLastUpdateInfo /> renders updated 1`] = `
       id="admin.global.by"
       values={Object {}}
     />
+     
     <a
       href="http://capco.dev"
     >

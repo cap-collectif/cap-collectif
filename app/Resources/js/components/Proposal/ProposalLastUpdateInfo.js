@@ -26,7 +26,7 @@ export class ProposalLastUpdateInfo extends React.PureComponent<Props> {
         )}
         {proposal.updatedBy && (
           <div>
-            <FormattedMessage id="admin.global.by" />
+            <FormattedMessage id="admin.global.by" />{' '}
             <a href={proposal.updatedBy.show_url}>{proposal.updatedBy.displayName}</a>
           </div>
         )}

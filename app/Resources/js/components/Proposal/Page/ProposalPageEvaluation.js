@@ -70,7 +70,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
                   type="submit"
                   bsStyle="primary">
                   <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-                </Button>
+                </Button>{' '}
                 <AlertAdminForm
                   valid={valid}
                   invalid={invalid}

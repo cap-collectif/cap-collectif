@@ -117,6 +117,7 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
             values={Object {}}
           />
         </Button>
+         
         <AlertAdminForm
           invalid={false}
           submitFailed={false}
