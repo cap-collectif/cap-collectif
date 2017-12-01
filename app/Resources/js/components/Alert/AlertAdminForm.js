@@ -18,14 +18,14 @@ export class AlertAdminForm extends React.Component<Props> {
       <div>
         {valid && submitSucceeded && !submitting && <AlertAdminFormSucceededMessage />}
         {invalid && (
-          <div className="alert__admin-form_invalid-field">
-            <i className="icon ion-ios-close-outline" />{' '}
+          <div className="alert__form_invalid-field">
+            <i className="cap cap-ios-close-outline" />{' '}
             <FormattedMessage id="global.invalid.form" />
           </div>
         )}
         {submitFailed && (
-          <div className="alert__admin-form_server-failed-message">
-            <i className="icon ion-ios-close-outline" />{' '}
+          <div className="alert__form_server-failed-message">
+            <i className="cap cap-ios-close-outline" />{' '}
             <FormattedHTMLMessage id="global.error.server.form" />
           </div>
         )}
