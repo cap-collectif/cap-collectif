@@ -18,7 +18,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       type="select"
     >
       <option
-        value="0"
+        value=""
       >
         <FormattedMessage
           id="global.select_themes"
@@ -44,7 +44,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       type="select"
     >
       <option
-        value="0"
+        value=""
       >
         <FormattedMessage
           id="global.select_categories"
@@ -68,7 +68,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       type="select"
     >
       <option
-        value="0"
+        value=""
       >
         <FormattedMessage
           id="global.select_districts"
@@ -101,7 +101,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
       type="select"
     >
       <option
-        value="0"
+        value=""
       >
         <FormattedMessage
           id="global.select_categories"

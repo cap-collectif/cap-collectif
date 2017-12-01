@@ -106,16 +106,18 @@ class ProjectsController extends FOSRestController
         $district = $paramFetcher->get('district');
         $category = $paramFetcher->get('category');
 
-        if ($key === 'votes' && $step instanceof CollectStep) {
+        if ('votes' === $key && $step instanceof CollectStep) {
             throw new BadRequestHttpException('Collect steps have no votes stats.');
         }
 
-        if ($key !== 'votes' && $step instanceof SelectionStep) {
+        if ('votes' !== $key && $step instanceof SelectionStep) {
             throw new BadRequestHttpException('Selection steps have no ' . $key . ' stats.');
         }
 
-        if ($key !== 'votes' && ($theme || $district)) {
-            throw new BadRequestHttpException('Only votes stats can be filtered by theme or district.');
+        if ('votes' !== $key && (null !== $theme || null !== $district)) {
+            $theme = null;
+            $district = null;
+            // throw new BadRequestHttpException('Only votes stats can be filtered by theme or district.');
         }
 
         $data = $this->get('capco.project_stats.resolver')

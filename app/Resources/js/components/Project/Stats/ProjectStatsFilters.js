@@ -38,7 +38,7 @@ export const ProjectStatsFilters = React.createClass({
     const showDistrictsFilter = showDistricts && districts && districts.length > 0;
 
     filtersNumber = showCategoriesFilter ? filtersNumber + 1 : filtersNumber;
-    filtersNumber = showThemesFilter > 0 ? filtersNumber + 1 : filtersNumber;
+    filtersNumber = showThemesFilter ? filtersNumber + 1 : filtersNumber;
     filtersNumber = showDistrictsFilter ? filtersNumber + 1 : filtersNumber;
 
     let colWidth = 12;
@@ -54,7 +54,9 @@ export const ProjectStatsFilters = React.createClass({
         {showThemesFilter && (
           <Col xs={12} md={colWidth}>
             <Input id="stats-filter-themes" type="select" ref="themes" onChange={onThemeChange}>
-              <option value="0">{<FormattedMessage id="global.select_themes" />}</option>
+              <option value="">
+                <FormattedMessage id="global.select_themes" />
+              </option>
               {themes.map(theme => (
                 <option key={theme.id} value={theme.id}>
                   {theme.title}
@@ -66,7 +68,9 @@ export const ProjectStatsFilters = React.createClass({
         {showCategoriesFilter && (
           <Col xs={12} md={colWidth}>
             <Input id="stats-filter-categories" type="select" onChange={onCategoryChange}>
-              <option value="0">{<FormattedMessage id="global.select_categories" />}</option>
+              <option value="">
+                <FormattedMessage id="global.select_categories" />
+              </option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -82,7 +86,9 @@ export const ProjectStatsFilters = React.createClass({
               type="select"
               ref="districts"
               onChange={onDistrictChange}>
-              <option value="0">{<FormattedMessage id="global.select_districts" />}</option>
+              <option value="">
+                <FormattedMessage id="global.select_districts" />
+              </option>
               {districts.map(district => (
                 <option key={district.id} value={district.id}>
                   {district.name}
