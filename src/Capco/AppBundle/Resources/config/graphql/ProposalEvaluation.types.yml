@@ -6,6 +6,9 @@ ProposalEvaluation:
             proposal:
                 type: "Proposal!"
                 description: "Identifies the proposal."
+            version:
+                type: "Int!"
+                description: "The version (revision number) of an evaluation"
             responses:
                 type: "[Response]!"
                 description: "List of responses for the evaluation"

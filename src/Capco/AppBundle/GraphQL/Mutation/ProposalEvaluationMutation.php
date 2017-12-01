@@ -18,6 +18,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
     public function changeProposalEvaluation(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
+
         $om = $this->container->get('doctrine.orm.default_entity_manager');
 
         $formFactory = $this->container->get('form.factory');
@@ -56,6 +57,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             throw new UserError('Form is not valid :' . (string) $form->getErrors(true, false));
         }
 
+        $proposalEvaluation->setUpdatedAt(new \DateTime());
         $om->persist($proposalEvaluation);
 
         try {

@@ -2,17 +2,6 @@
 
 {% block canonical_link %}{{ '' }}{% endblock %}
 
-{% block metaTags %}
-    {% set image %}{% if proposal.media %}{% path proposal.media, 'blockHeader' %}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       proposal.title,
-        'description': proposal.body|striptags|truncate(250, true),
-        'image':       image,
-        'url':         url('app_project_show_proposal', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'proposalSlug': proposal.slug})
-        } only %}
-{% endblock %}
-
-
 {% block title %}
     {{ parent() }} - {{ proposal.title }}
 {% endblock %}

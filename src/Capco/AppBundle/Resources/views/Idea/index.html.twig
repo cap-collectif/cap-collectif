@@ -3,18 +3,14 @@
 {% block canonical_link %}{{ url('app_idea') }}{% endblock %}
 
 {% set jumbotron_title = capco_site_parameter_value('ideas.jumbotron.title') %}
-{% set meta_description = capco_site_parameter_value('ideas.metadescription') %}
 {% set jumbotron_body = capco_site_parameter_value('ideas.jumbotron.body') %}
-{% set picto = capco_site_image_media('ideas.picto') %}
 
 {% block metaTags %}
-    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       (jumbotron_title ?: 'idea.page_title'|trans({}, 'CapcoAppBundle')),
-        'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
-        'image':       image,
+        'title':       (jumbotron_title ?: 'idea.index.page_title'|trans({}, 'CapcoAppBundle')),
+        'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'url':         url('app_idea')
-        } only %}
+    } only %}
 {% endblock %}
 
 {% block title %}
@@ -43,9 +39,3 @@
 {% block body %}
     {{ react_render_component('IdeasIndexPageApp', {'props': props}) }}
 {% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    {% set customCode = capco_site_parameter_value('ideas.customcode') %}
-    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
-{% endblock %}
-

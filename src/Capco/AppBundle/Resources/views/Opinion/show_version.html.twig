@@ -5,10 +5,9 @@
 {% endblock %}
 
 {% block metaTags %}
-    {% set title = ('opinion.modification.title' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.proposal' | trans({}, 'CapcoAppBundle') ~ ' ' ~ version.title %}
     {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       title,
+        'title':       version.title,
         'description': version.body|striptags|truncate(250, true),
         'url':         url('app_project_show_opinion_version', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'versionSlug': version.slug}),
         'type':        'article',

@@ -22,6 +22,12 @@ class ProposalEvaluation
     use HasResponsesTrait;
 
     /**
+     * @ORM\Version()
+     * @ORM\Column(name="version", type="integer")
+     */
+    protected $version;
+
+    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false)
      */
@@ -63,6 +69,18 @@ class ProposalEvaluation
     public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
+
+        return $this;
+    }
+
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    public function setVersion($version)
+    {
+        $this->version = $version;
 
         return $this;
     }

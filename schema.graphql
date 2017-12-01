@@ -928,6 +928,9 @@ type ProposalEvaluation {
   # Identifies the proposal.
   proposal: Proposal!
 
+  # The version (revision number) of an evaluation
+  version: Int!
+
   # List of responses for the evaluation
   responses: [Response]!
 }

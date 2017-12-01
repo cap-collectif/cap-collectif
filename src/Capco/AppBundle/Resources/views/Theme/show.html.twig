@@ -6,7 +6,7 @@
     {% set themeMedia %}{% if theme.Media %}{% path theme.Media, 'idea' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       theme.title,
-        'description': theme.metaDescription|striptags ?: theme.body|striptags|truncate(250, true),
+        'description': theme.body|striptags|truncate(250, true),
         'url':         url('app_theme_show', {'slug': theme.slug}),
         'type':        'article',
         'image':       themeMedia
@@ -81,8 +81,4 @@
 
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    {% if theme.customCode is defined and theme.customCode != '' %}{{ theme.customCode | raw }}{% endif %}
 {% endblock %}
