@@ -19,8 +19,7 @@ describe('<GroupAdminUsers />', () => {
         ],
       },
     },
-    invalid: false,
-    submitting: false,
+    ...global.formMock,
   };
 
   const SuccessDeleteUser = {

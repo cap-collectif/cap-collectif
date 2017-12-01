@@ -9,20 +9,16 @@ import {
   isInvalid,
   isSubmitting,
   hasSubmitSucceeded,
-  hasSubmitFailed
-} from 'redux-form'
+  hasSubmitFailed,
+  type FormProps,
+} from 'redux-form';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
-import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem'
+import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 
-type Props = {
+type Props = FormProps & {
   group: GroupAdminUsers_group,
-  valid: boolean,
-  invalid: boolean,
-  submitting: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
   userIsDeleted: ?boolean,
   userIsNotDeleted: ?boolean,
 };
