@@ -170,6 +170,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       submitting,
       proposal,
     } = this.props;
+    console.log(this.props);
     const evaluationForm = proposal.form.evaluationForm;
 
     return (

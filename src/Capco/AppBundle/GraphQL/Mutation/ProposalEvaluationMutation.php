@@ -5,6 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Form\ProposalEvaluationType;
+use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\OptimisticLockException;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -18,6 +20,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
     public function changeProposalEvaluation(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
+        $version = $this->container->get('session')->get('version', $arguments['version']);
 
         $om = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -39,6 +42,12 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         $proposalEvaluation = $this->container->get('capco.proposal_evaluation.repository')->findOneBy([
             'proposal' => $proposal,
         ]);
+        try {
+            $entity = $this->container->get('capco.proposal_evaluation.repository')->find($proposalEvaluation->getId(),
+                LockMode::OPTIMISTIC, $version);
+        } catch (OptimisticLockException $e) {
+            throw new UserError('Proposal evaluation was modified, please refresh the page :' . (string) $e->getMessage());
+        }
 
         if (!$proposalEvaluation) {
             $proposalEvaluation = new ProposalEvaluation();
@@ -62,6 +71,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 
         try {
             $om->flush();
+            $this->container->get('session')->set('version', $proposalEvaluation->getVersion());
         } catch (\Exception $e) {
             throw new UserError('Error during the flush :' . $e->getMessage());
         }

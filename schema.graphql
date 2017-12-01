@@ -132,6 +132,9 @@ type ChangeProposalContentPayload {
 input ChangeProposalEvaluationInput {
   # The proposal id
   proposalId: ID!
+
+  # The version (revision number) of the evaluation
+  version: Int!
   responses: [ResponseInput!]!
   clientMutationId: String
 }
