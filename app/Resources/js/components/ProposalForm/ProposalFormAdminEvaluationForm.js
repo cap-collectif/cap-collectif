@@ -62,7 +62,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
           <h3
             className="box-title"
             style={{ fontSize: 22, padding: 0, paddingTop: 10, paddingBottom: 30 }}>
-            <FormattedMessage id="proposal_form.evaluation" />
+            {<FormattedMessage id="proposal_form.evaluation" />}
           </h3>
           <a
             className="pull-right link"

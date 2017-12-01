@@ -196,7 +196,6 @@ type CollectStep implements Step {
   title: String!
   statuses: [Status!]!
   voteThreshold: Int
-  project: Project!
 }
 
 # A consultation
@@ -751,7 +750,6 @@ input ProgressStepInput {
 # A budget contribution
 type Project {
   steps: [Step!]!
-  title: String!
 }
 
 # A budget contribution
@@ -760,7 +758,6 @@ type Proposal {
   show_url: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
-  viewerIsAnEvaluer: Boolean!
   news: [Post!]!
   project: Project!
   status: Status
@@ -779,12 +776,6 @@ type Proposal {
 
   # The delete date.
   deletedAt: DateTime
-
-  # The updated date.
-  updatedAt: DateTime
-
-  # The update user.
-  updatedBy: User
 
   # The publication status.
   publicationStatus: PublicationStatus!
@@ -827,12 +818,6 @@ type Proposal {
   createdAt: DateTime!
 }
 
-# The affiliation of a user to a proposal
-enum ProposalAffiliation {
-  OWNER
-  EVALUER
-}
-
 # A proposal category
 type ProposalCategory {
   id: ID!
@@ -841,26 +826,6 @@ type ProposalCategory {
 
 input ProposalCategoryInput {
   name: String!
-}
-
-# A connection to a list of items.
-type ProposalConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ProposalEdge]
-}
-
-# An edge in a connection.
-type ProposalEdge {
-  # The item at the end of the edge.
-  node: Proposal!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # An evaluation for a proposal
@@ -880,7 +845,6 @@ type ProposalForm {
   summaryHelpText: String
   illustrationHelpText: String
   title: String!
-  proposals(affiliations: [ProposalAffiliation]): ProposalConnection!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!
@@ -915,10 +879,6 @@ type ProposalForm {
   step: CollectStep
 }
 
-input ProposalsConnectionFilter {
-  viewerIsEvaluer: Boolean = false
-}
-
 type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
   id: ID!
 
@@ -939,7 +899,6 @@ type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithA
   kind: String!
 }
 
-# Available statuses
 enum PublicationStatus {
   # Was publicly visible, but has expired.
   EXPIRED
@@ -973,7 +932,6 @@ type Query {
     id: ID
   ): [Consultation!]!
   groups: [Group!]!
-  proposalForms: [ProposalForm!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -1272,7 +1230,6 @@ type Source implements Contribution, TrashableContribution, ContributionWithAuth
 type Status {
   id: ID!
   name: String!
-  color: String!
 }
 
 # A step in a project
@@ -1623,7 +1580,6 @@ interface YesNoPairedVote {
   createdAt: String!
 }
 
-# 3 possible values
 enum YesNoPairedVoteValue {
   YES
   NO

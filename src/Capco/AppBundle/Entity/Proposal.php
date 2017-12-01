@@ -106,7 +106,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     protected $likers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="evaluating", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", cascade={"persist"})
      * @ORM\JoinTable(name="user_evaluatin_proposal")
      */
     protected $evaluers;
@@ -889,7 +889,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     {
         return [
             'date' => $this->getUpdatedAt(),
-            'user' => $this->getUpdateAuthor(),
+            'user' => $this->getAuthor(),
         ];
     }
 

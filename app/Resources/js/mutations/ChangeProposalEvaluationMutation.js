@@ -11,7 +11,17 @@ const mutation = graphql`
   mutation ChangeProposalEvaluationMutation($input: ChangeProposalEvaluationInput!) {
     changeProposalEvaluation(input: $input) {
       proposal {
-        ...ProposalAdminNotationForm_proposal
+        id
+        evaluation {
+          responses {
+            question {
+              id
+            }
+            ... on ValueResponse {
+              value
+            }
+          }
+        }
       }
     }
   }

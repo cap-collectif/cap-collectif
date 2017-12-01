@@ -6,10 +6,20 @@ import { ProposalAdminNotationForm } from './ProposalAdminNotationForm';
 
 describe('<ProposalAdminNotationForm />', () => {
   const props = {
-    ...global.formMock,
-    intl: global.intlMock,
+    handleSubmit: jest.fn(),
+    invalid: false,
+    valid: false,
+    submitSucceeded: false,
+    submitFailed: false,
     disabled: false,
+    pristine: false,
+    submitting: false,
+    formValidationRules: {},
+    initialValues: {},
     evaluationForm: {},
+    fields: {},
+    change: jest.fn(),
+    intl: global.intlMock,
     responses: [],
     proposal: {
       id: '1',

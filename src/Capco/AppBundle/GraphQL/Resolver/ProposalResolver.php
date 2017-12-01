@@ -27,13 +27,6 @@ class ProposalResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveViewerIsEvaluer(Proposal $proposal, $user): bool
-    {
-        $repo = $this->container->get('capco.proposal.repository');
-
-        return $user instanceof User ? $repo->isViewerAnEvaluer($proposal, $user) : false;
-    }
-
     public function resolveProjectSteps(Project $project)
     {
         return $project->getRealSteps();
@@ -95,10 +88,10 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
-    public function resolve(string $proposalId, $user): Proposal
+    public function resolve(string $proposalId, User $user = null): Proposal
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        if ($user instanceof User && $user->isAdmin()) {
+        if ($user && $user->isAdmin()) {
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }

@@ -17,19 +17,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class UserRepository extends EntityRepository
 {
-    public function countUsersInGroup(Group $group): int
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb
-        ->select('COUNT(u.id)')
-        ->innerJoin('u.userGroups', 'ug')
-        ->andWhere('ug.group = :group')
-        ->setParameter('group', $group)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
     public function getUsersInGroup(Group $group): array
     {
         $qb = $this->createQueryBuilder('u');

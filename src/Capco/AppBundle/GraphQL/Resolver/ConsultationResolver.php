@@ -75,9 +75,10 @@ class ConsultationResolver implements ContainerAwareInterface
             return $repo->getByCriteriaOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
         });
 
-        $totalCount = $consultation->getOpinionCount();
+        $connection = $paginator->forward($args);
+        $connection->totalCount = $consultation->getOpinionCount();
 
-        return $paginator->auto($args, $totalCount);
+        return $connection;
     }
 
     public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
@@ -95,9 +96,10 @@ class ConsultationResolver implements ContainerAwareInterface
             return $repo->getByCriteriaOrdered($criteria, $orderBy, null, $offset)->getIterator()->getArrayCopy();
         });
 
-        $totalCount = $section->getOpinions()->count();
+        $connection = $paginator->forward($args);
+        $connection->totalCount = $section->getOpinions()->count();
 
-        return $paginator->auto($args, $totalCount);
+        return $connection;
     }
 
     public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool

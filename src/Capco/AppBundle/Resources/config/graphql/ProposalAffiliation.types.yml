@@ -1,9 +1,0 @@
-ProposalAffiliation:
-    type: enum
-    config:
-        description: The affiliation of a user to a proposal
-        values:
-            OWNER:
-                value: OWNER
-            EVALUER:
-                value: EVALUER

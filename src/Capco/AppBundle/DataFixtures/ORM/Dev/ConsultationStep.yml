@@ -6,28 +6,24 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
         body: <p><text(1000)></p>
-        opinionCount: 0
     cstep2:
         id: cstep2
         title: Collecte des avis pour une meilleur stratégie
         isEnabled: true
         startAt: <(new \DateTime('2014-08-14'))>
         endAt: <(new \DateTime('2014-09-27'))>
-        opinionCount: 0
     cstep3:
         id: cstep3
         title: Ma futur collecte de proposition
         isEnabled: true
         startAt: <(new \DateTime('2015-09-20'))>
         endAt: <(new \DateTime('2015-10-20'))>
-        opinionCount: 0
     cstep4:
         id: cstep4
         title: Projet
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        opinionCount: 0
     cstep5:
         id: cstep5
         title: Elaboration de la Loi
@@ -35,4 +31,3 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         body: <p><text(1000)></p>
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
-        opinionCount: 0

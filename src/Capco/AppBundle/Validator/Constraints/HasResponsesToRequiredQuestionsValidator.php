@@ -50,8 +50,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     {
         foreach ($responses as $response) {
             if ($response->getQuestion() === $question) {
-                if ($response instanceof MediaResponse && $response->getMedias()->count() > 0) {
-                    return true;
+                if ($response instanceof MediaResponse) {
+                    return $response->getMedias()->count() > 0;
                 }
 
                 $value = $response->getValue();

@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\ProposalEvaluationType;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -16,23 +15,18 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function changeProposalEvaluation(Argument $input, User $user): array
+    public function changeProposalEvaluation(Argument $input): array
     {
         $arguments = $input->getRawArguments();
         $om = $this->container->get('doctrine.orm.default_entity_manager');
 
         $formFactory = $this->container->get('form.factory');
-        $proposalRepo = $this->container->get('capco.proposal.repository');
 
-        $proposal = $proposalRepo->find($arguments['proposalId']);
+        /** @var Proposal $proposal */
+        $proposal = $this->container->get('capco.proposal.repository')->find($arguments['proposalId']);
 
         if (!$proposal) {
-            throw new UserError(sprintf('Unknown proposal with id "%s"', $arguments['proposalId']));
-        }
-
-        $isEvaluer = $proposalRepo->isViewerAnEvaluer($proposal, $user);
-        if (!$isEvaluer && !$user->isAdmin()) {
-            throw new UserError(sprintf('You are not an evaluer of proposal with id %s', $arguments['proposalId']));
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $arguments['proposalId']));
         }
 
         unset($arguments['proposalId']);

@@ -1,10 +1,7 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql } from 'react-relay';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
@@ -12,7 +9,6 @@ import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalPageVotes from './ProposalPageVotes';
 import ProposalPageBlog from './ProposalPageBlog';
-import ProposalPageEvaluation from './ProposalPageEvaluation';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
@@ -20,31 +16,24 @@ import ProposalPageAdvancement from './ProposalPageAdvancement';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 import ProposalFusionList from './ProposalFusionList';
-import Loader from '../../Utils/Loader';
-import type { FeatureToggles, State } from '../../../types';
-import type { Proposal } from '../../../redux/modules/proposal';
-import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
-type Props = {
-  form: Object,
-  proposal: Proposal,
-  categories: Array<Object>,
-  steps: Array<Object>,
-  features: FeatureToggles,
-};
+export const ProposalPage = React.createClass({
+  propTypes: {
+    form: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired,
+    categories: PropTypes.array.isRequired,
+    steps: PropTypes.array.isRequired,
+    features: PropTypes.object.isRequired,
+  },
 
-export class ProposalPage extends React.Component<Props> {
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  }
+  },
 
-  getHashKey(hash: string) {
+  getHashKey(hash) {
     let key = null;
     if (hash.indexOf('content') !== -1) {
       key = 'content';
-    }
-    if (hash.indexOf('evaluation') !== -1) {
-      key = 'evaluation';
     }
     if (hash.indexOf('comments') !== -1) {
       key = 'comments';
@@ -53,7 +42,7 @@ export class ProposalPage extends React.Component<Props> {
       key = 'votes';
     }
     return key;
-  }
+  },
 
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
@@ -61,14 +50,13 @@ export class ProposalPage extends React.Component<Props> {
       return this.getHashKey(hash);
     }
     return 'content';
-  }
+  },
 
   render() {
     const { proposal, form, categories, features, steps } = this.props;
     const currentVotableStep = proposal.votableStepId
       ? steps.filter(s => s.id === proposal.votableStepId)[0]
       : null;
-    // $FlowFixMe
     const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b) => a + b, 0);
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
@@ -88,21 +76,16 @@ export class ProposalPage extends React.Component<Props> {
                   <NavItem eventKey="content" className="tab">
                     <FormattedMessage id="proposal.tabs.content" />
                   </NavItem>
-                  <NavItem eventKey="blog" className="tab">
-                    <FormattedMessage id="proposal.tabs.blog" />
-                    <span className="badge">{proposal.postsCount}</span>
-                  </NavItem>
-                  {proposal.hasEvaluation && (
-                    <NavItem eventKey="evaluation" className="tab">
-                      <FormattedMessage id="proposal.tabs.evaluation" />
-                    </NavItem>
-                  )}
                   {showVotesTab && (
                     <NavItem eventKey="votes" className="tab">
                       <FormattedMessage id="proposal.tabs.votes" />
                       <span className="badge">{votesCount}</span>
                     </NavItem>
                   )}
+                  <NavItem eventKey="blog" className="tab">
+                    <FormattedMessage id="proposal.tabs.blog" />
+                    <span className="badge">{proposal.postsCount}</span>
+                  </NavItem>
                 </Nav>
               </div>
             </div>
@@ -171,39 +154,6 @@ export class ProposalPage extends React.Component<Props> {
                 <Tab.Pane eventKey="blog">
                   <ProposalPageBlog />
                 </Tab.Pane>
-                <Tab.Pane eventKey="evaluation">
-                  <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                      query ProposalPageQuery($proposalId: ID!) {
-                        proposal(id: $proposalId) {
-                          ...ProposalPageEvaluation_proposal
-                        }
-                      }
-                    `}
-                    variables={{ proposalId: proposal.id }}
-                    render={({
-                      error,
-                      props,
-                    }: {
-                      error: ?Error,
-                      props?: ProposalPageQueryResponse,
-                    }) => {
-                      if (error) {
-                        console.log(error); // eslint-disable-line no-console
-                        return graphqlError;
-                      }
-                      if (props) {
-                        // eslint-disable-next-line react/prop-types
-                        if (props.proposal) {
-                          return <ProposalPageEvaluation proposal={props.proposal} />;
-                        }
-                        return graphqlError;
-                      }
-                      return <Loader />;
-                    }}
-                  />
-                </Tab.Pane>
               </Tab.Content>
             </div>
             {!proposal.isDraft && currentVotableStep && <ProposalVoteModal proposal={proposal} />}
@@ -211,18 +161,14 @@ export class ProposalPage extends React.Component<Props> {
         </Tab.Container>
       </div>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = state => {
   return {
     features: state.default.features,
-    proposal:
-      state.proposal.currentProposalId &&
-      state.proposal.proposalsById[state.proposal.currentProposalId],
-    steps:
-      state.project.currentProjectById &&
-      state.project.projectsById[state.project.currentProjectById].steps,
+    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
+    steps: state.project.projectsById[state.project.currentProjectById].steps,
   };
 };
 

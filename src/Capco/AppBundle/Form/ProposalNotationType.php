@@ -32,7 +32,6 @@ class ProposalNotationType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Proposal',
             'csrf_protection' => false,
-            'validation_groups' => ['Notation'],
         ]);
     }
 }

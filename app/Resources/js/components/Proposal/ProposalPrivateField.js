@@ -1,19 +1,20 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  show: boolean,
-  children: React.Node,
-  divClassName: string,
-};
+const ProposalPrivateField = React.createClass({
+  propTypes: {
+    show: PropTypes.bool,
+    children: PropTypes.node,
+    divClassName: PropTypes.string,
+  },
 
-export class ProposalPrivateField extends React.Component<Props> {
-  static defaultProps = {
-    show: true,
-    children: null,
-    divClassName: '',
-  };
+  getDefaultProps() {
+    return {
+      show: true,
+      children: null,
+      divClassName: '',
+    };
+  },
 
   render() {
     const { children, show, divClassName } = this.props;
@@ -34,7 +35,7 @@ export class ProposalPrivateField extends React.Component<Props> {
     }
 
     return children;
-  }
-}
+  },
+});
 
 export default ProposalPrivateField;

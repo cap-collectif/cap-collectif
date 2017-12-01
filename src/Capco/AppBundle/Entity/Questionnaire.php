@@ -129,17 +129,6 @@ class Questionnaire
         return $this->description;
     }
 
-    public function isFullyPrivate(): bool
-    {
-        foreach ($this->getRealQuestions() as $question) {
-            if (!$question->isPrivate()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public function getRealQuestions()
     {
         $questions = [];

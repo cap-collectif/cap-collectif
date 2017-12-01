@@ -1,7 +1,6 @@
 YesNoPairedVoteValue:
     type: enum
     config:
-        description: "3 possible values"
         values:
             YES:
                 value: 1

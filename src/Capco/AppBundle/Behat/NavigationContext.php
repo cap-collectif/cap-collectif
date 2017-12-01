@@ -28,16 +28,20 @@ class NavigationContext extends PageObjectContext
 
     /**
      * @Then The first source vote counter should be :value
+     *
+     * @param mixed $value
      */
-    public function theFirstSourceVoteCounterShouldBe(int $value)
+    public function theFirstSourceVoteCounterShouldBe($value)
     {
         expect($this->getPage('opinion page')->getFirstSourceVoteCounter())->toBe($value);
     }
 
     /**
      * @Then The first comment vote counter should be :value
+     *
+     * @param mixed $value
      */
-    public function theFirstCommentVoteCounterShouldBe(int $value)
+    public function theFirstCommentVoteCounterShouldBe($value)
     {
         expect($this->getPage('idea page')->getFirstCommentVoteCounter())->toBe($value);
     }

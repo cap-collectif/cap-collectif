@@ -29,11 +29,6 @@ class Group
     protected $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="evaluers")
-     */
-    protected $evaluating;
-
-    /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -46,18 +41,12 @@ class Group
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
-        $this->evaluating = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
     public function __toString()
     {
         return $this->title;
-    }
-
-    public function isEvaluating()
-    {
-        return $this->evaluating->count() > 0;
     }
 
     public function getDescription()

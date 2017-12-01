@@ -16,12 +16,6 @@ ProposalForm:
                 type: "String"
             title:
                 type: "String!"
-            proposals:
-                type: "ProposalConnection!"
-                args:
-                  affiliations:
-                    type: "[ProposalAffiliation]"
-                resolve: "@=resolver('proposal_form_proposals', [value, args, user])"
             categories:
                 type: "[ProposalCategory!]!"
                 resolve: "@=resolver('proposal_form_categories', [value])"

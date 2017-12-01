@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -52,40 +51,6 @@ class ProposalRepository extends EntityRepository
         }
 
         return $proposalsWithStep;
-    }
-
-    public function countProposalsByFormAndEvaluer(ProposalForm $form, User $user): int
-    {
-        return $this->qbProposalsByFormAndEvaluer($form, $user)
-                  ->select('COUNT(proposal.id)')
-                  ->getQuery()
-                  ->getSingleScalarResult()
-        ;
-    }
-
-    public function isViewerAnEvaluer(Proposal $proposal, User $user): bool
-    {
-        return $this->createQueryBuilder('proposal')
-              ->select('COUNT(proposal.id)')
-              ->leftJoin('proposal.evaluers', 'group')
-              ->leftJoin('group.userGroups', 'userGroup')
-              ->andWhere('proposal.id = :id')
-              ->andWhere('userGroup.user = :user')
-              ->setParameter('id', $proposal->getId())
-              ->setParameter('user', $user)
-              ->getQuery()
-              ->getSingleScalarResult() > 0;
-    }
-
-    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, int $first = 0, int $offset = 100): Paginator
-    {
-        $qb = $this
-            ->qbProposalsByFormAndEvaluer($form, $user)
-            ->setFirstResult($first)
-            ->setMaxResults($offset)
-        ;
-
-        return new Paginator($qb);
     }
 
     public function countFusionsByProposalForm(ProposalForm $form)
@@ -448,17 +413,5 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.isTrashed = false')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.enabled = true');
-    }
-
-    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user)
-    {
-        return $this->createQueryBuilder('proposal')
-                ->leftJoin('proposal.evaluers', 'group')
-                ->leftJoin('group.userGroups', 'userGroup')
-                ->andWhere('proposal.proposalForm = :form')
-                ->andWhere('userGroup.user = :user')
-                ->setParameter('form', $form)
-                ->setParameter('user', $user)
-      ;
     }
 }

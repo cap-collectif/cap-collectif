@@ -105,12 +105,12 @@ Mutation:
                   mutateAndGetPayload: "@=mutation('setEvaluationFormInProposalForm', [value])"
           # Proposal Evaluation
           changeProposalEvaluation:
-              access: "@=hasRole('ROLE_USER')"
+              access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: ChangeProposalEvaluationInput
                   payloadType: ChangeProposalEvaluationPayload
-                  mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value, user])"
+                  mutateAndGetPayload: "@=mutation('changeProposalEvaluation', [value])"
         # Groups
           createGroup:
               access: "@=hasRole('ROLE_ADMIN')"

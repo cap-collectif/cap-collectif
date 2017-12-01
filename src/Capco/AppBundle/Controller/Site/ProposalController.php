@@ -83,9 +83,7 @@ class ProposalController extends Controller
         ;
 
         $proposalSerializedAsArray = json_decode($proposalSerialized, true);
-        $proposalSerializedAsArray['postsCount'] = $em->getRepository('CapcoAppBundle:Post')->countPublishedPostsByProposal($proposal);
-        $evalForm = $proposal->getProposalForm()->getEvaluationForm();
-        $proposalSerializedAsArray['hasEvaluation'] = null !== $evalForm && !$evalForm->isFullyPrivate();
+        $proposalSerializedAsArray['postsCount'] = $this->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
 
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,

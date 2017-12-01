@@ -19,6 +19,8 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     use TimelessStepTrait;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="opinion_count", type="integer")
      */
     private $opinionCount = 0;
@@ -30,51 +32,70 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
     private $opinionCountShownBySection = 5;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="trashed_opinion_count", type="integer")
      */
     private $trashedOpinionCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="opinion_versions_count", type="integer")
      */
     private $opinionVersionsCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="trashed_opinion_versions_count", type="integer")
      */
     private $trashedOpinionVersionsCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="argument_count", type="integer")
      */
     private $argumentCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="trashed_argument_count", type="integer")
      */
     private $trashedArgumentCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="sources_count", type="integer")
      */
     private $sourcesCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="trashed_sources_count", type="integer")
      */
     private $trashedSourceCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="votes_count", type="integer")
      */
     private $votesCount = 0;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="contributors_count", type="integer")
      */
     private $contributorsCount = 0;
 
     /**
+     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="step",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $opinions;
@@ -105,12 +126,20 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $this->getIsEnabled();
     }
 
-    public function getOpinionCount(): int
+    /**
+     * @return int
+     */
+    public function getOpinionCount()
     {
-        return $this->opinionCount ?? 0;
+        return $this->opinionCount;
     }
 
-    public function setOpinionCount(int $opinionCount): self
+    /**
+     * @param $opinionCount
+     *
+     * @return $this
+     */
+    public function setOpinionCount($opinionCount)
     {
         $this->opinionCount = $opinionCount;
 

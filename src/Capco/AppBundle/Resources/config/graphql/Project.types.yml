@@ -6,5 +6,3 @@ Project:
             steps:
               type: "[Step!]!"
               resolve: "@=resolver('project_steps', [value])"
-            title:
-              type: "String!"

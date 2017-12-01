@@ -1,7 +1,0 @@
-ProposalConnection:
-    type: relay-connection
-    config:
-        nodeType: Proposal!
-        connectionFields:
-            totalCount:
-                type: Int!

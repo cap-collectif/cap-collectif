@@ -1,16 +1,18 @@
 // @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 
-type Props = {
-  show?: boolean,
-  children?: any,
-};
+const Loader = React.createClass({
+  propTypes: {
+    show: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  },
 
-export class Loader extends React.Component<Props> {
-  static defaultProps = {
-    show: true,
-    children: null,
-  };
+  getDefaultProps() {
+    return {
+      show: true,
+      children: null,
+    };
+  },
 
   render() {
     const { children, show } = this.props;
@@ -22,7 +24,7 @@ export class Loader extends React.Component<Props> {
       );
     }
     return Array.isArray(children) ? <div>{children}</div> : children;
-  }
-}
+  },
+});
 
 export default Loader;
