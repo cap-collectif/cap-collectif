@@ -43,10 +43,11 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             'proposal' => $proposal,
         ]);
         try {
-            $entity = $this->container->get('capco.proposal_evaluation.repository')->find($proposalEvaluation->getId(),
-                LockMode::OPTIMISTIC, $version);
+            $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
         } catch (OptimisticLockException $e) {
-            throw new UserError('Proposal evaluation was modified, please refresh the page :' . (string) $e->getMessage());
+            throw new UserError('Proposal evaluation was modified, please refresh the page (' .
+                ((int) $proposalEvaluation->getVersion() - (int) $version) . ' modification(s) have been made since) : '
+                . (string) $e->getMessage());
         }
 
         if (!$proposalEvaluation) {
