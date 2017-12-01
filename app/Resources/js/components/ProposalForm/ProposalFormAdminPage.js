@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalFormAdminPageTabs from './ProposalFormAdminPageTabs';
 import Loader from '../Utils/Loader';
@@ -12,9 +12,8 @@ type Props = { proposalFormId: Uuid };
 const component = ({
   error,
   props,
-}: {
-  error: ?Error,
-  props: ProposalFormAdminPageQueryResponse,
+}: ReadyState & {
+  props: ?ProposalFormAdminPageQueryResponse,
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console

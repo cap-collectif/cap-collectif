@@ -44,6 +44,8 @@ import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
 import GroupAdminPageApp from './startup/GroupAdminPageApp';
 import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
+import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
+
 import appStore from '../js/stores/AppStore';
 
 const locale = window.locale;
@@ -80,6 +82,7 @@ ReactOnRails.register({
   NewIdeaApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
+  EvaluationsIndexPageApp,
   OpinionPageApp,
   CommentSectionApp,
   SynthesisViewBoxApp,

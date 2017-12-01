@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an evaluer 1`] = `
+<div
+  className="container"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <div>
+      <FieldArray
+        change={[Function]}
+        component={[Function]}
+        disabled={true}
+        evaluationForm={
+          Object {
+            "questions": Array [
+              Object {
+                "choices": Array [],
+                "helpText": null,
+                "id": "question1",
+                "isOtherAllowed": false,
+                "position": 0,
+                "private": false,
+                "required": true,
+                "slug": "slug-1",
+                "title": "Question 1",
+                "type": "text",
+                "validationRule": null,
+              },
+            ],
+          }
+        }
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        name="responses"
+      />
+    </div>
+  </form>
+</div>
+`;
+
+exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = `
+<div
+  className="container"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <div>
+      <FieldArray
+        change={[Function]}
+        component={[Function]}
+        disabled={false}
+        evaluationForm={
+          Object {
+            "questions": Array [
+              Object {
+                "choices": Array [],
+                "helpText": null,
+                "id": "question1",
+                "isOtherAllowed": false,
+                "position": 0,
+                "private": false,
+                "required": true,
+                "slug": "slug-1",
+                "title": "Question 1",
+                "type": "text",
+                "validationRule": null,
+              },
+            ],
+          }
+        }
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "now": [Function],
+          }
+        }
+        name="responses"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+         
+        <AlertAdminForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;

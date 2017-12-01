@@ -52,6 +52,13 @@ describe('<ProposalPage />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render a proposal page with evaluation tab', () => {
+    const wrapper = shallow(
+      <ProposalPage {...props} proposal={{ ...proposalNoVotes, hasEvaluation: true }} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should render a vote tab and a vote modal if votable step is specified', () => {
     const wrapper = shallow(<ProposalPage {...props} proposal={proposalWithVotes} />);
     expect(wrapper).toMatchSnapshot();

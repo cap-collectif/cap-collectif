@@ -6,3 +6,5 @@ Status:
                 type: "ID!"
             name:
                 type: "String!"
+            color:
+                type: "String!"

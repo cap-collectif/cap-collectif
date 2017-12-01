@@ -18,7 +18,7 @@ type Props = {
   disabled?: ?boolean,
   errors?: Array<string>,
   value: ?Object,
-  change: Function,
+  change: (field: string, value: any) => void,
 };
 
 type State = {
@@ -28,7 +28,6 @@ type State = {
 export class MultipleChoiceRadio extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
     this.state = {
       otherChecked: false,
     };
@@ -54,7 +53,16 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   };
 
   render() {
-    const { name, choices, helpText, validationState, label, value, ...props } = this.props;
+    const {
+      disabled,
+      name,
+      choices,
+      helpText,
+      validationState,
+      label,
+      value,
+      ...props
+    } = this.props;
 
     const finalValue = value && Array.isArray(value.labels) ? value.labels[0] : undefined;
     const otherValue = value ? value.other : undefined;
@@ -72,6 +80,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               key={`${name}-${index}`}
               name={`${name}.value.labels`}
               id={`${name}-${index}`}
+              disabled={disabled}
               radioChecked={finalValue === choice.label}
               onChange={this.uncheckOtherRadio}
               normalize={this.normalize}
@@ -86,6 +95,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                 <Field
                   component={component}
                   type="radio"
+                  disabled={disabled}
                   name={`${name}-other-value-field`}
                   id={`${name}-other-value`}
                   radioChecked={this.state.otherChecked || !!otherValue}
@@ -102,7 +112,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                   id={`${name}.value.other`}
                   placeholder="reply.your_response"
                   value={otherValue}
-                  disabled={props.disabled}
+                  disabled={disabled}
                   onFocus={this.checkOtherRadio}
                   // $FlowFixMe
                   ref={c => (this.textField = c)}

@@ -1,6 +1,7 @@
 PublicationStatus:
     type: enum
     config:
+        description: "Available statuses"
         values:
             EXPIRED: # TODO KILL THIS
                 value: "EXPIRED"

@@ -1,8 +1,15 @@
 // @flow
 import React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
+import {
+  type FieldArrayProps,
+  type FormProps,
+  reduxForm,
+  formValueSelector,
+  Field,
+  FieldArray,
+} from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
@@ -11,34 +18,56 @@ import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalE
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
+import ProposalPrivateField from '../ProposalPrivateField';
+import ProposalAdminEvaluersForm from './ProposalAdminEvaluersForm';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
+import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+
 import type { Dispatch, State } from '../../../types';
 import { MultipleChoiceRadio } from '../../Form/MultipleChoiceRadio';
 
-type FormValues = Object;
+export type ResponsesValues = Array<Object>;
+type FormValues = { responses: ResponsesValues } & Object;
+type MinimalRelayProps = { proposal: ProposalPageEvaluation_proposal };
 type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
-type Props = RelayProps & {
-  intl: intlShape,
-  handleSubmit: () => void,
-  invalid: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-  pristine: boolean,
-  submitting: boolean,
-  proposal: ProposalAdminNotationForm_proposal,
-  initialValues: Object,
-  fields: Object,
-  evaluationForm: Object,
-  change: Function,
-  responses: Array<Object>,
-};
+type Props = RelayProps & FormProps & FormValues & { intl: IntlShape };
 
 const formName = 'proposal-admin-evaluation';
 
+export const formatResponsesToSubmit = (
+  values: FormValues,
+  props: MinimalRelayProps | RelayProps,
+) => {
+  const questions =
+    props.proposal.form.evaluationForm && props.proposal.form.evaluationForm.questions;
+  if (!questions) return [];
+  return values.responses.map(resp => {
+    const actualQuestion = questions.find(question => question.id === String(resp.question));
+
+    if (!actualQuestion) throw new Error("Can't find the question");
+
+    const questionType = actualQuestion.type;
+    let value;
+    if (questionType === 'ranking' || questionType === 'button') {
+      value = JSON.stringify({
+        labels: Array.isArray(resp.value) ? resp.value : [resp.value],
+        other: null,
+      });
+    } else if (questionType === 'checkbox' || questionType === 'radio') {
+      value = JSON.stringify(resp.value);
+    } else {
+      value = resp.value;
+    }
+
+    return {
+      question: actualQuestion.id,
+      value,
+    };
+  });
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   values.likers = values.likers.map(u => u.value);
-  values.evaluers = values.evaluers.map(u => u.value);
 
   const promises = [];
   promises.push(
@@ -47,38 +76,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         proposalId: props.proposal.id,
         estimation: values.estimation,
         likers: values.likers,
-        evaluers: values.evaluers,
       },
     }),
   );
 
   if (props.proposal.form.evaluationForm) {
-    const questions = props.proposal.form.evaluationForm.questions;
-    const responses = values.responses.map(resp => {
-      const actualQuestion = questions.find(question => question.id === String(resp.question));
-      const questionType = actualQuestion.type;
-
-      let value;
-
-      if (questionType === 'ranking' || questionType === 'button') {
-        value = JSON.stringify({
-          labels: Array.isArray(resp.value) ? resp.value : [resp.value],
-          other: null,
-        });
-      } else if (questionType === 'checkbox' || questionType === 'radio') {
-        value = JSON.stringify(resp.value);
-      } else {
-        value = resp.value;
-      }
-
-      return {
-        question: actualQuestion.id,
-        value,
-      };
-    });
-
     const variablesEvaluation = {
-      input: { proposalId: props.proposal.id, responses },
+      input: { proposalId: props.proposal.id, responses: formatResponsesToSubmit(values, props) },
     };
 
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
@@ -87,7 +91,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return Promise.all(promises);
 };
 
-const validate = (values: FormValues, { proposal }: Props) => {
+export const validate = (values: FormValues, { proposal }: Props) => {
   const errors = {};
   const responsesArrayErrors = [];
   const questions = proposal.form.evaluationForm ? proposal.form.evaluationForm.questions : [];
@@ -188,18 +192,19 @@ const formattedChoicesInField = field => {
   });
 };
 
-const renderResponses = ({
+export const renderResponses = ({
   fields,
   evaluationForm,
   responses,
-  change,
   intl,
-}: {
-  fields: Object,
+  change,
+  disabled,
+}: FieldArrayProps & {
   evaluationForm: Object,
   responses: Array<Object>,
-  change: Function,
-  intl: intlShape,
+  change: (field: string, value: any) => void,
+  intl: IntlShape,
+  disabled: boolean,
 }) => (
   <div>
     {fields.map((member, index) => {
@@ -246,35 +251,40 @@ const renderResponses = ({
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
               return (
-                <div key={`${member}-container`}>
-                  <MultipleChoiceRadio
-                    name={member}
-                    helpText={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    label={label}
-                    choices={choices}
-                    value={response}
-                    change={change}
-                  />
-                </div>
+                <ProposalPrivateField key={key} show={field.private}>
+                  <div key={`${member}-container`}>
+                    <MultipleChoiceRadio
+                      name={member}
+                      helpText={field.helpText}
+                      isOtherAllowed={isOtherAllowed}
+                      label={label}
+                      change={change}
+                      choices={choices}
+                      value={response}
+                      disabled={disabled}
+                    />
+                  </div>
+                </ProposalPrivateField>
               );
             }
           }
 
           return (
-            <Field
-              key={key}
-              name={`${member}.value`}
-              id={`reply-${field.id}`}
-              type={inputType}
-              component={component}
-              help={field.helpText}
-              isOtherAllowed={isOtherAllowed}
-              labelClassName="h4"
-              placeholder="reply.your_response"
-              choices={choices}
-              label={label}
-            />
+            <ProposalPrivateField key={key} show={field.private}>
+              <Field
+                name={`${member}.value`}
+                id={`reply-${field.id}`}
+                type={inputType}
+                component={component}
+                help={field.helpText}
+                isOtherAllowed={isOtherAllowed}
+                labelClassName="h4"
+                placeholder="reply.your_response"
+                choices={choices}
+                label={label}
+                disabled={disabled}
+              />
+            </ProposalPrivateField>
           );
         }
       }
@@ -299,48 +309,10 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
     return (
       <div className="box box-primary container">
         <div className="box-content box-content__notation-form">
-          <form onSubmit={handleSubmit}>
-            <div>
+          <div>
+            <ProposalAdminEvaluersForm proposal={proposal} />
+            <form onSubmit={handleSubmit}>
               <div className="mb-40">
-                <div className="box-header">
-                  <h3 className="box-title">
-                    <FormattedMessage id="Analystes" />
-                  </h3>
-                  <a
-                    className="pull-right link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
-                    <i className="fa fa-info-circle" /> Aide
-                  </a>
-                </div>
-                <Field
-                  name="evaluers"
-                  id="evaluers"
-                  label="Groupes"
-                  labelClassName="control-label"
-                  inputClassName="fake-inputClassName"
-                  multi
-                  placeholder="Aucun analyste"
-                  component={select}
-                  clearable={false}
-                  loadOptions={() =>
-                    Fetcher.graphql({
-                      query: `
-                        query {
-                          groups {
-                            id
-                            title
-                          }
-                        }
-                      `,
-                    }).then(response => ({
-                      options: response.data.groups.map(group => ({
-                        value: group.id,
-                        label: group.title,
-                      })),
-                    }))}
-                />
                 <div className="box-header">
                   <h3 className="box-title">
                     <FormattedMessage id="Questionnaire" />
@@ -396,7 +368,6 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 component={renderResponses}
                 evaluationForm={evaluationForm}
                 responses={this.props.responses}
-                change={this.props.change}
                 intl={this.props.intl}
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
@@ -414,8 +385,8 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   submitting={submitting}
                 />
               </ButtonToolbar>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -431,57 +402,55 @@ const form = injectIntl(
   })(ProposalAdminNotationForm),
 );
 
+export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
+  !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
+    ? undefined
+    : props.proposal.form.evaluationForm.questions.map(field => {
+        const response = props.proposal.evaluation
+          ? props.proposal.evaluation.responses.filter(
+              res => res && res.question.id === field.id,
+            )[0]
+          : null;
+        if (response) {
+          if (response.value) {
+            let responseValue = response.value;
+
+            const questionType = response.question.type;
+            if (questionType === 'button') {
+              responseValue = JSON.parse(response.value).labels[0];
+            }
+
+            if (questionType === 'radio') {
+              responseValue = JSON.parse(response.value);
+            }
+
+            if (questionType === 'ranking') {
+              responseValue = JSON.parse(response.value).labels;
+            }
+
+            if (questionType === 'checkbox') {
+              responseValue = JSON.parse(response.value);
+            }
+
+            return {
+              question: field.id,
+              value: responseValue,
+            };
+          }
+        }
+
+        return { question: field.id, value: null };
+      });
+
 const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,
-    evaluers: props.proposal.evaluers.map(u => ({
-      value: u.id,
-      label: u.title,
-    })),
     likers: props.proposal.likers.map(u => ({
       value: u.id,
       label: u.displayName,
     })),
-    responses:
-      !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
-        ? undefined
-        : props.proposal.form.evaluationForm.questions.map(field => {
-            const response = props.proposal.evaluation
-              ? props.proposal.evaluation.responses.filter(
-                  res => res && res.question.id === field.id,
-                )[0]
-              : null;
-            if (response) {
-              if (response.value) {
-                let responseValue = response.value;
-
-                const questionType = response.question.type;
-                if (questionType === 'button') {
-                  responseValue = JSON.parse(response.value).labels[0];
-                }
-
-                if (questionType === 'radio') {
-                  responseValue = JSON.parse(response.value);
-                }
-
-                if (questionType === 'ranking') {
-                  responseValue = JSON.parse(response.value).labels;
-                }
-
-                if (questionType === 'checkbox') {
-                  responseValue = JSON.parse(response.value);
-                }
-
-                return {
-                  question: field.id,
-                  value: responseValue,
-                };
-              }
-            }
-
-            return { question: field.id, value: null };
-          }),
+    responses: formatInitialResponses(props),
   },
 });
 
@@ -493,10 +462,7 @@ export default createFragmentContainer(
     fragment ProposalAdminNotationForm_proposal on Proposal {
       id
       estimation
-      evaluers {
-        id
-        title
-      }
+      ...ProposalAdminEvaluersForm_proposal
       likers {
         id
         displayName

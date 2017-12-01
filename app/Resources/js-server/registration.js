@@ -36,6 +36,7 @@ import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
 import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
+import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import appStore from '../js/stores/AppStore';
 
 moment.locale('fr');
@@ -55,6 +56,7 @@ ReactOnRails.register({
   ProposalCreateFusionButtonApp,
   ProposalAdminPageApp,
   ProjectsListApp,
+  EvaluationsIndexPageApp,
   ProposalStepPageApp,
   NavbarApp,
   EmailNotConfirmedApp,

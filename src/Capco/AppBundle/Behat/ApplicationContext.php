@@ -12,6 +12,7 @@ use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\IdeaStepsTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
+use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
@@ -30,6 +31,7 @@ class ApplicationContext extends UserContext
     use OpinionStepsTrait;
     use ProjectStepsTrait;
     use ProposalStepsTrait;
+    use ProposalEvaluationTrait;
     use QuestionnaireStepsTrait;
     use ReportingStepsTrait;
     use SharingStepsTrait;
@@ -175,12 +177,12 @@ class ApplicationContext extends UserContext
         $resultCode = $suiteScope->getTestResult()->getResultCode();
         if ($notifier = NotifierFactory::create()) {
             $notification = new Notification();
-            if ($resultCode === TestResult::PASSED) {
+            if (TestResult::PASSED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended successfully')
                     ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
                 ;
-            } elseif ($resultCode === TestResult::SKIPPED) {
+            } elseif (TestResult::SKIPPED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
                     ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.')
@@ -197,10 +199,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then I should be redirected to :url
-     *
-     * @param mixed $url
      */
-    public function assertRedirect($url)
+    public function assertRedirect(string $url)
     {
         $this->getSession()->wait(1000);
 
@@ -220,11 +220,10 @@ class ApplicationContext extends UserContext
      * @Given features :featureA, :featureB are enabled
      * @Given features :featureA, :featureB, :featureC are enabled
      *
-     * @param mixed      $featureA
      * @param null|mixed $featureB
      * @param null|mixed $featureC
      */
-    public function activateFeatures($featureA, $featureB = null, $featureC = null)
+    public function activateFeatures(string $featureA, $featureB = null, $featureC = null)
     {
         $this->getService('capco.toggle.manager')->activate($featureA);
         if ($featureB) {
@@ -266,22 +265,16 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then I should see :element on :page
-     *
-     * @param mixed $element
-     * @param mixed $page
      */
-    public function iShouldSeeElementOnPage($element, $page)
+    public function iShouldSeeElementOnPage(string $element, string $page)
     {
         expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(true);
     }
 
     /**
      * @Then I should not see :element on :page
-     *
-     * @param mixed $element
-     * @param mixed $page
      */
-    public function iShouldNotSeeElementOnPage($element, $page)
+    public function iShouldNotSeeElementOnPage(string $element, string $page)
     {
         expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(false);
     }
@@ -309,9 +302,8 @@ class ApplicationContext extends UserContext
      *
      * @param mixed $first
      * @param mixed $second
-     * @param mixed $cssQuery
      */
-    public function element1ShouldBeBeforeElement2ForSelector($first, $second, $cssQuery)
+    public function element1ShouldBeBeforeElement2ForSelector($first, $second, string $cssQuery)
     {
         $items = array_map(
             function ($element) {
@@ -329,11 +321,9 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I click the :element element
-     *
-     * @param mixed $selector
+     * @When I click the :selector element
      */
-    public function iClickElement($selector)
+    public function iClickElement(string $selector)
     {
         $element = $this->getSession()->getPage()->find('css', $selector);
         if (null === $element) {
@@ -344,10 +334,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I hover over the :selector element
-     *
-     * @param mixed $selector
      */
-    public function iHoverOverTheElement($selector)
+    public function iHoverOverTheElement(string $selector)
     {
         $element = $this->getSession()->getPage()->find('css', $selector);
 
@@ -362,10 +350,9 @@ class ApplicationContext extends UserContext
      * Fills in form field with specified id|name|label|value.
      * Overrided to fill wysiwyg fields as well.
      *
-     * @param mixed $field
      * @param mixed $value
      */
-    public function fillField($field, $value)
+    public function fillField(string $field, $value)
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
@@ -394,17 +381,13 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I wait :seconds seconds
-     *
-     * @param mixed $seconds
      */
-    public function iWait($seconds)
+    public function iWait(int $seconds)
     {
         $this->getSession()->wait((int) ($seconds * 1000));
     }
 
     /**
-     * Wait for debug.
-     *
      * @Given /^I wait for debug$/
      */
     public function iWaitForDebug()
@@ -414,10 +397,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I try to download :path
-     *
-     * @param mixed $path
      */
-    public function iTryToDownload($path)
+    public function iTryToDownload(string $path)
     {
         $url = $this->getSession()->getCurrentUrl() . $path;
         $this->headers = get_headers($url);
@@ -426,10 +407,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then /^I should see response status code "([^"]*)"$/
-     *
-     * @param mixed $statusCode
      */
-    public function iShouldSeeResponseStatusCode($statusCode)
+    public function iShouldSeeResponseStatusCode(int $statusCode)
     {
         $responseStatusCode = $this->getSession()->getStatusCode();
         if (!$responseStatusCode === (int) $statusCode) {
@@ -439,10 +418,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then /^I should see in the header "([^"]*)"$/
-     *
-     * @param mixed $header
      */
-    public function iShouldSeeInTheHeader($header)
+    public function iShouldSeeInTheHeader(string $header)
     {
         assert(in_array($header, $this->headers, true), "Did not see \"$header\" in the headers.");
     }
@@ -452,11 +429,8 @@ class ApplicationContext extends UserContext
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should have class "([^"]*)"$/
-     *
-     * @param mixed $selector
-     * @param mixed $class
      */
-    public function elementShouldHaveClass($selector, $class)
+    public function elementShouldHaveClass(string $selector, string $class)
     {
         $session = $this->getSession();
         $page = $session->getPage();
@@ -472,11 +446,8 @@ class ApplicationContext extends UserContext
      * Copyright neemzy https://github.com/neemzy/patchwork-core.
      *
      * @Then /^"([^"]*)" element should not have class "([^"]*)"$/
-     *
-     * @param mixed $selector
-     * @param mixed $class
      */
-    public function elementShouldNotHaveClass($selector, $class)
+    public function elementShouldNotHaveClass(string $selector, string $class)
     {
         $session = $this->getSession();
         $page = $session->getPage();
@@ -488,13 +459,9 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * Checks that a button is disabled.
-     *
      * @Then /^the button "([^"]*)" should be disabled$/
-     *
-     * @param mixed $locator
      */
-    public function buttonShouldBeDisabled($locator)
+    public function buttonShouldBeDisabled(string $locator)
     {
         $locator = $this->fixStepArgument($locator);
         $button = $this->getSession()->getPage()->findButton($locator);
