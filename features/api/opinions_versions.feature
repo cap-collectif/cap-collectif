@@ -52,9 +52,9 @@ Feature: Opinions Versions
           "ranking": "expr(value === null || value > 0)",
 
           "votesCount": @integer@,
-          "votes_nok": @integer@,
-          "votes_ok": @integer@,
-          "votes_mitige": @integer@,
+          "votesCountNok": @integer@,
+          "votesCountOk": @integer@,
+          "votesCountMitige": @integer@,
 
           "_links": {
             "show": @string@,
@@ -99,9 +99,9 @@ Feature: Opinions Versions
         "sourcesCount": @integer@,
 
         "votes": @...@,
-        "votes_nok": @integer@,
-        "votes_ok": @integer@,
-        "votes_mitige": @integer@,
+        "votesCountNok": @integer@,
+        "votesCountOk": @integer@,
+        "votesCountMitige": @integer@,
         "votesCount": @integer@,
 
         "parent": {

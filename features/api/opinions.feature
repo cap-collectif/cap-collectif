@@ -67,9 +67,9 @@ Feature: Opinions
         "versionsCount": @integer@,
 
         "votes": @array@,
-        "votes_nok": @integer@,
-        "votes_ok": @integer@,
-        "votes_mitige": @integer@,
+        "votesCountNok": @integer@,
+        "votesCountOk": @integer@,
+        "votesCountMitige": @integer@,
         "votesCount": @integer@,
 
         "appendices": [

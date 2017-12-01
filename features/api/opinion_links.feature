@@ -19,9 +19,9 @@ Feature: Opinions Links
           "argumentsCount": @integer@,
           "connectionsCount": @integer@,
           "votesCount": @integer@,
-          "votes_nok": @integer@,
-          "votes_ok": @integer@,
-          "votes_mitige": @integer@,
+          "votesCountNok": @integer@,
+          "votesCountOk": @integer@,
+          "votesCountMitige": @integer@,
 
           "author": @...@,
 
