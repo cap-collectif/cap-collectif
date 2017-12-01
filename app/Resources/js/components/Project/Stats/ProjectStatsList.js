@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
@@ -7,39 +8,46 @@ import ProjectStatsFilters from './ProjectStatsFilters';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
 import { DEFAULT_STATS_PAGINATION } from '../../../constants/ProjectStatsConstants';
 
-const ProjectStatsList = React.createClass({
-  propTypes: {
-    type: React.PropTypes.string.isRequired,
-    stepId: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    data: React.PropTypes.object.isRequired,
-    step: React.PropTypes.object.isRequired,
-    isCurrency: React.PropTypes.bool.isRequired,
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    categories: React.PropTypes.array.isRequired,
-    showFilters: React.PropTypes.bool.isRequired,
-  },
+type Props = {
+  type: string,
+  stepId: string,
+  icon: string,
+  label: string,
+  data: Object,
+  step: Object,
+  isCurrency: boolean,
+  themes: Array<Object>,
+  districts: Array<Object>,
+  categories: Array<Object>,
+  showFilters: boolean,
+};
+type State = {
+  showPercentage: boolean,
+  data: Object,
+  theme: ?string,
+  district: ?string,
+  category: ?string,
+};
 
-  getInitialState() {
-    const { data } = this.props;
-    return {
+export class ProjectStatsList extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
       showPercentage: false,
-      data,
-      theme: 0,
-      district: 0,
-      category: 0,
+      data: props.data,
+      theme: null,
+      district: null,
+      category: null,
     };
-  },
+  }
 
-  showPercentage(value) {
+  showPercentage(value: boolean) {
     this.setState({
       showPercentage: value,
     });
-  },
+  }
 
-  changeTheme(ev) {
+  changeTheme(ev: SyntheticInputEvent<HTMLInputElement>) {
     this.setState(
       {
         theme: ev.target.value,
@@ -48,9 +56,9 @@ const ProjectStatsList = React.createClass({
         this.reloadData();
       },
     );
-  },
+  }
 
-  changeDistrict(ev) {
+  changeDistrict(ev: SyntheticInputEvent<HTMLInputElement>) {
     this.setState(
       {
         district: ev.target.value,
@@ -59,18 +67,18 @@ const ProjectStatsList = React.createClass({
         this.reloadData();
       },
     );
-  },
+  }
 
-  changeCategory(element) {
+  changeCategory(ev: SyntheticInputEvent<HTMLInputElement>) {
     this.setState(
       {
-        category: element.target.value,
+        category: ev.target.value,
       },
       () => {
         this.reloadData();
       },
     );
-  },
+  }
 
   reloadData() {
     const { stepId, type } = this.props;
@@ -86,7 +94,7 @@ const ProjectStatsList = React.createClass({
         data: response.data,
       });
     });
-  },
+  }
 
   render() {
     const {
@@ -120,7 +128,7 @@ const ProjectStatsList = React.createClass({
         {haveData && (
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
-              <i className={icon} /> {<FormattedMessage id={label} />}
+              <i className={icon} /> <FormattedMessage id={label} />
               <span
                 id={`step-stats-display-${stepId}`}
                 className="pull-right excerpt stats__buttons">
@@ -129,7 +137,7 @@ const ProjectStatsList = React.createClass({
                   id={`step-stats-display-${stepId}-number`}
                   active={!this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, false)}>
-                  {<FormattedMessage id="project.stats.display.number" />}
+                  <FormattedMessage id="project.stats.display.number" />
                 </Button>
                 <span>/</span>
                 <Button
@@ -137,7 +145,7 @@ const ProjectStatsList = React.createClass({
                   id={`step-stats-display-${stepId}-percentage`}
                   active={this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, true)}>
-                  {<FormattedMessage id="project.stats.display.percentage" />}
+                  <FormattedMessage id="project.stats.display.percentage" />
                 </Button>
               </span>
             </ListGroupItem>
@@ -154,7 +162,7 @@ const ProjectStatsList = React.createClass({
               })
             ) : (
               <ListGroupItem className="excerpt text-center">
-                {<FormattedMessage id="project.stats.no_values" />}
+                <FormattedMessage id="project.stats.no_values" />
               </ListGroupItem>
             )}
           </ListGroup>
@@ -175,7 +183,7 @@ const ProjectStatsList = React.createClass({
           )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default ProjectStatsList;

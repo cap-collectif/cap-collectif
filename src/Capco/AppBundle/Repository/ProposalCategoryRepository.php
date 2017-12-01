@@ -21,6 +21,7 @@ class ProposalCategoryRepository extends EntityRepository
                 AND pc.id = c.id
                 AND p.isTrashed = false
             ) as value')
+            ->andWhere('c.draft = false')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
         ;
@@ -36,10 +37,14 @@ class ProposalCategoryRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countAll()
+    public function countAll(): int
     {
-        $qb = $this->createQueryBuilder('c')->select('COUNT(c.id)');
+        $qb = $this
+          ->createQueryBuilder('c')
+          ->select('COUNT(c.id)')
+          ->andWhere('c.draft = false')
+        ;
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

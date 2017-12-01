@@ -80,13 +80,15 @@ class ProjectStatsResolver
     public function getStatsForStep(AbstractStep $step, $limit = null)
     {
         $stats = [];
-        if ($step->getType() === 'collect') {
+        if ('collect' === $step->getType()) {
             $stats['themes'] = $this->getStatsForStepByKey($step, 'themes', $limit);
             $stats['districts'] = $this->getStatsForStepByKey($step, 'districts', $limit);
             $stats['categories'] = $this->getStatsForStepByKey($step, 'categories', $limit);
             $stats['userTypes'] = $this->getStatsForStepByKey($step, 'userTypes', $limit);
-            $stats['costs'] = $this->getStatsForStepByKey($step, 'costs', $limit);
-        } elseif ($step->getType() === 'selection') {
+            if ($step->getPropsalForm()->isCostable()) {
+                $stats['costs'] = $this->getStatsForStepByKey($step, 'costs', $limit);
+            }
+        } elseif ('selection' === $step->getType()) {
             $stats['votes'] = $this->getStatsForStepByKey($step, 'votes', $limit);
         }
 
@@ -99,31 +101,31 @@ class ProjectStatsResolver
 
         switch ($key) {
             case 'themes':
-                if ($step->getType() === 'collect') {
+                if ('collect' === $step->getType()) {
                     $data['total'] = $this->countThemes();
                     $data['values'] = $this->getThemesWithProposalsCountForStep($step, $limit);
                 }
                 break;
             case 'districts':
-                if ($step->getType() === 'collect') {
+                if ('collect' === $step->getType()) {
                     $data['values'] = $this->getDistrictsWithProposalsCountForStep($step, $limit);
                     $data['total'] = $this->countDistricts();
                 }
                 break;
             case 'userTypes':
-                if ($step->getType() === 'collect') {
+                if ('collect' === $step->getType()) {
                     $data['values'] = $this->getUserTypesWithProposalsCountForStep($step, $limit);
                     $data['total'] = $this->countUserTypes();
                 }
                 break;
             case 'costs':
-                if ($step->getType() === 'collect') {
+                if ('collect' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
                     $data['total'] = $step->getProposalsCount();
                 }
                 break;
             case 'votes':
-                if ($step->getType() === 'selection') {
+                if ('selection' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId, $categoryId);
                     $data['total'] = $this->getProposalsCountForSelectionStep($step, $themeId, $districtId, $categoryId);
                 }
