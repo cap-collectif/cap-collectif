@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import ProjectStatsListItem from './ProjectStatsListItem';
@@ -8,46 +7,39 @@ import ProjectStatsFilters from './ProjectStatsFilters';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
 import { DEFAULT_STATS_PAGINATION } from '../../../constants/ProjectStatsConstants';
 
-type Props = {
-  type: string,
-  stepId: string,
-  icon: string,
-  label: string,
-  data: Object,
-  step: Object,
-  isCurrency: boolean,
-  themes: Array<Object>,
-  districts: Array<Object>,
-  categories: Array<Object>,
-  showFilters: boolean,
-};
-type State = {
-  showPercentage: boolean,
-  data: Object,
-  theme: ?string,
-  district: ?string,
-  category: ?string,
-};
+const ProjectStatsList = React.createClass({
+  propTypes: {
+    type: React.PropTypes.string.isRequired,
+    stepId: React.PropTypes.string.isRequired,
+    icon: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
+    data: React.PropTypes.object.isRequired,
+    step: React.PropTypes.object.isRequired,
+    isCurrency: React.PropTypes.bool.isRequired,
+    themes: React.PropTypes.array.isRequired,
+    districts: React.PropTypes.array.isRequired,
+    categories: React.PropTypes.array.isRequired,
+    showFilters: React.PropTypes.bool.isRequired,
+  },
 
-export class ProjectStatsList extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
+  getInitialState() {
+    const { data } = this.props;
+    return {
       showPercentage: false,
-      data: props.data,
-      theme: null,
-      district: null,
-      category: null,
+      data,
+      theme: 0,
+      district: 0,
+      category: 0,
     };
-  }
+  },
 
-  showPercentage(value: boolean) {
+  showPercentage(value) {
     this.setState({
       showPercentage: value,
     });
-  }
+  },
 
-  changeTheme(ev: SyntheticInputEvent<HTMLInputElement>) {
+  changeTheme(ev) {
     this.setState(
       {
         theme: ev.target.value,
@@ -56,9 +48,9 @@ export class ProjectStatsList extends React.Component<Props, State> {
         this.reloadData();
       },
     );
-  }
+  },
 
-  changeDistrict(ev: SyntheticInputEvent<HTMLInputElement>) {
+  changeDistrict(ev) {
     this.setState(
       {
         district: ev.target.value,
@@ -67,18 +59,18 @@ export class ProjectStatsList extends React.Component<Props, State> {
         this.reloadData();
       },
     );
-  }
+  },
 
-  changeCategory(ev: SyntheticInputEvent<HTMLInputElement>) {
+  changeCategory(element) {
     this.setState(
       {
-        category: ev.target.value,
+        category: element.target.value,
       },
       () => {
         this.reloadData();
       },
     );
-  }
+  },
 
   reloadData() {
     const { stepId, type } = this.props;
@@ -94,7 +86,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
         data: response.data,
       });
     });
-  }
+  },
 
   render() {
     const {
@@ -128,7 +120,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
         {haveData && (
           <ListGroup className="stats__list">
             <ListGroupItem className="stats__list__header">
-              <i className={icon} /> <FormattedMessage id={label} />
+              <i className={icon} /> {<FormattedMessage id={label} />}
               <span
                 id={`step-stats-display-${stepId}`}
                 className="pull-right excerpt stats__buttons">
@@ -137,7 +129,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
                   id={`step-stats-display-${stepId}-number`}
                   active={!this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, false)}>
-                  <FormattedMessage id="project.stats.display.number" />
+                  {<FormattedMessage id="project.stats.display.number" />}
                 </Button>
                 <span>/</span>
                 <Button
@@ -145,7 +137,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
                   id={`step-stats-display-${stepId}-percentage`}
                   active={this.state.showPercentage}
                   onClick={this.showPercentage.bind(this, true)}>
-                  <FormattedMessage id="project.stats.display.percentage" />
+                  {<FormattedMessage id="project.stats.display.percentage" />}
                 </Button>
               </span>
             </ListGroupItem>
@@ -162,7 +154,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
               })
             ) : (
               <ListGroupItem className="excerpt text-center">
-                <FormattedMessage id="project.stats.no_values" />
+                {<FormattedMessage id="project.stats.no_values" />}
               </ListGroupItem>
             )}
           </ListGroup>
@@ -183,7 +175,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
           )}
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProjectStatsList;

@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * DistrictRepository.
+ */
 class DistrictRepository extends EntityRepository
 {
     public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
@@ -20,7 +23,6 @@ class DistrictRepository extends EntityRepository
                 AND p.enabled = true
                 AND pd.id = d.id
                 AND p.isTrashed = false
-                AND p.draft = false
             ) as value')
             ->setParameter('step', $step)
             ->orderBy('value', 'DESC')
@@ -33,14 +35,12 @@ class DistrictRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countAll(): int
+    public function countAll()
     {
         $qb = $this->createQueryBuilder('d')
-            ->andWhere('d.draft = false')
-            ->andWhere('d.isTrashed = false')
             ->select('COUNT(d.id)')
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }
