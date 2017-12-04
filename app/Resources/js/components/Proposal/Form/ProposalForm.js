@@ -2,154 +2,183 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FieldArray } from 'redux-form';
-// import { createFragmentContainer, graphql } from 'react-relay';
-import { debounce } from 'lodash';
+import { type FormProps, change, SubmissionError, reduxForm, Field, FieldArray, formValueSelector } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+// import { debounce } from 'lodash';
 import { Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
-// import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import ProposalPrivateField from '../ProposalPrivateField';
 import component from '../../Form/Field';
-import ProposalMediaResponse from '../Page/ProposalMediaResponse';
-// import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
+// import ProposalMediaResponse from '../Page/ProposalMediaResponse';
+import query from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
+import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
+import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import {
   submitProposal,
   updateProposal,
-  cancelSubmitProposal,
 } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
+import Fetcher from '../../../services/Fetcher';
+import { formatInitialResponsesValues, renderResponses } from '../Admin/ProposalAdminNotationForm';
+
+// eslint-disable-next-line
+const getAvailableDistrictsQuery = graphql`
+  query ProposalFormAvailableDistrictsForLocalisationQuery(
+    $proposalFormId: ID!
+    $latitude: Float!
+    $longitude: Float!
+  ) {
+    availableDistrictsForLocalisation(proposalFormId: $proposalFormId, latitude: $latitude, longitude: $longitude) {
+      id
+      name
+    }
+  }
+`;
 
 type LatLng = {
-  lat: Number,
-  lng: Number,
+  lat: number,
+  lng: number,
 };
 
-const query = `
-          query availableDistrictsForLocalisation(
-            $proposalFormId: ID!
-            $latitude: Float!
-            $longitude: Float!
-          ) {
-            availableDistrictsForLocalisation(proposalFormId: $proposalFormId, latitude: $latitude, longitude: $longitude) {
-              id
-              name
-            }
-          }
-        `;
+export const formName = 'proposal-form';
 
-type Props = {
+type Props = FormProps & {
   intl: IntlShape,
   currentStepId: string,
-  form: Object,
+  proposalForm: ProposalForm_proposalForm,
   themes: Array<Object>,
-  categories: Array<Object>,
-  isSubmitting: boolean,
   isSubmittingDraft: boolean,
   dispatch: Dispatch,
   features: FeatureToggles,
-  proposal: ?Object,
-}
-
-const onSubmit = () => {
-//   const form = this.state.form;
-//   const responses = [];
-//   const custom = this.state.custom;
-//   Object.keys(custom).map(key => {
-//     const question = key.split('-')[1];
-//     if (typeof custom[key] !== 'undefined' && custom[key].length > 0) {
-//       responses.push({
-//         question,
-//         value: custom[key],
-//       });
-//     }
-//   });
-//   form.responses = responses;
-//   if (responses.length === 0) {
-//     delete form.responses;
-//   }
-//   if (!features.themes || !this.props.form.usingThemes || !form.theme) {
-//     delete form.theme;
-//   }
-//   if (!form.usingAddress && form.address.length === 0) {
-//     delete form.address;
-//   }
-//   if (!features.districts || !form.district || !this.props.form.usingDistrict) {
-//     delete form.district;
-//   }
-//   if (categories.length === 0 || !this.props.form.usingCategories) {
-//     delete form.category;
-//   }
-//   if (form.summary !== null && form.summary.length === 0) {
-//     form.summary = null;
-//   }
-//
-//   form.draft = nextProps.isSubmittingDraft;
-//   if (mode === 'edit') {
-//     updateProposal(dispatch, this.props.form.id, proposal.id, form, currentStepId);
-//   } else {
-//     submitProposal(dispatch, this.props.form.id, form, currentStepId).catch(e => {
-//       if (
-//         e.response &&
-//         e.response.errors &&
-//         e.response.errors.errors.includes('global.address_not_in_zone')
-//       ) {
-//         const errors = this.state.errors;
-//         this.setState({
-//           errors: { ...errors, address: ['proposal.constraints.address_in_zone'] },
-//         });
-//         return;
-//       }
-//       throw e;
-//     });
-//   }
-// } else {
-//   dispatch(cancelSubmitProposal());
-// }
-}
-
-const validate = () => {
-  // notBlank: { message: 'proposal.constraints.field_mandatory' },
-    // min: { value: 2, message: 'proposal.constraints.title_min_value_for_draft' },
-    // notBlank: { message: 'proposal.constraints.title_for_draft' },
-    // minValue: { value: 0, message: 'proposal.constraints.theme' },
-    // form.usingAddress notBlank: { message: 'proposal.constraints.address' },
-
-    // if (features.districts && form.usingDistrict && form.districtMandatory) {
-    //   this.formValidationRules.district = {
-    //     notBlank: { message: 'proposal.constraints.district' },
-    //   };
-    //   return;
-    // }
-
-    // if (categories.length && form.usingCategories && form.categoryMandatory) {
-    //   this.formValidationRules.category = {
-    //     notBlank: { message: 'proposal.constraints.category' },
-    //   };
-    //   return;
-    // }
-
-    // title: {
-    //   min: { value: 2, message: 'proposal.constraints.title' },
-    //   notBlank: { message: 'proposal.constraints.title' },
-    // },
-    // summary: {
-    //   min: { value: 2, message: 'proposal.constraints.summary' },
-    //   max: { value: 140, message: 'proposal.constraints.summary' },
-    // },
-    // body: {
-    //   min: { value: 2, message: 'proposal.constraints.body' },
-    //   notBlankHtml: { message: 'proposal.constraints.body' },
-    // },
-    // address: {
-    //   notBlank: { message: 'proposal.constraints.address' },
-    // },
+  proposal: ?ProposalForm_proposal,
 };
 
-const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
-  <div className="places-autocomplete">
-    <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
-  </div>
-);
+type FormValues = {
+  title?: ?string,
+  summary?: ?string,
+  body?: ?string,
+  address?: ?string,
+  addresstext?: ?string,
+  theme?: ?string,
+  district?: ?string,
+  responses?: ?Array<Object>
+};
+
+const onSubmit = (values: FormValues, dispatch: Dispatch, {proposalForm, proposal}: Props) => {
+  // Only used for the user view
+  delete values.addressText;
+
+  // // We must remove Files to upload from variables and put them in uploadables
+  // const uploadables = {};
+  // if (values.media instanceof File) {
+  //   // User wants to upload a new media
+  //   uploadables.media = values.media;
+  // }
+  // delete values.media;
+  //
+  // values.responses = values.responses.filter(res => {
+  //   if (!res.medias) {
+  //     // We only send value responses
+  //     return true;
+  //   }
+  //   for (const media of res.medias) {
+  //     if (media instanceof File) {
+  //       uploadables[`responses_${res.question}`] = media;
+  //     }
+  //   }
+  //   return false;
+  // });
+
+  const catchErrors = (e: Object) => {
+    if (e.response && e.response.errors && e.response.errors.errors.includes('global.address_not_in_zone')) {
+      throw new SubmissionError({
+        address: 'proposal.constraints.address_in_zone',
+        _error: 'Creation failed!'
+      });
+    }
+    throw e;
+  }
+
+  if (proposal) {
+    return updateProposal(dispatch, proposalForm.id, proposal.id, values, proposalForm.step.id);
+    // const variables = {
+    //   input: { ...values, id: props.proposal.id },
+    // };
+    //
+    // return ChangeProposalContentMutation.commit(variables, uploadables);
+  }
+
+  return submitProposal(
+    dispatch,
+    proposalForm.id,
+    values,
+    proposalForm.step.id
+  ).catch(catchErrors);
+
+  // return CreateProposalMutation.commit({
+  //   input: {
+  //     ...values,
+  //     formId: props.proposalForm.id,
+  //     //   proposalForm.draft = nextProps.isSubmittingDraft;
+  //   },
+  // }, uploadables).then();
+}
+
+const validate = (values: FormValues, { proposalForm, features, isSubmittingDraft }: Props) => {
+  const errors = {};
+
+  if (isSubmittingDraft) {
+    if (!values.title) {
+      errors.title = 'proposal.constraints.title_for_draft';
+    }
+    else if (values.title.length <= 2) {
+      errors.title = 'proposal.constraints.title_min_value_for_draft';
+    }
+    return errors;
+  }
+
+  if (!values.title || values.title.length <= 2) {
+    errors.title = 'proposal.constraints.title';
+  }
+  if (values.summary && (values.summary.length > 140 || values.summary.length < 2)) {
+    errors.summary = 'proposal.constraints.summary';
+  }
+  if (!values.body || values.body.length <= 2) {
+    errors.body = 'proposal.constraints.body';
+  }
+  if (proposalForm.usingAddress && !values.address) {
+    errors.addressText = 'proposal.constraints.address';
+  }
+  if (
+    proposalForm.categories.length &&
+    proposalForm.usingCategories &&
+    proposalForm.categoryMandatory &&
+    !values.category
+  ) {
+    errors.category = 'proposal.constraints.category';
+  }
+  if (features.districts && proposalForm.usingDistrict && proposalForm.districtMandatory && !values.district) {
+    errors.district = 'proposal.constraints.district';
+  }
+  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
+    errors.theme = 'proposal.constraints.theme';
+  }
+  proposalForm.questions.map(field => {
+    if (field.required) {
+      const response = values.responses && values.responses.filter(res => res && res.question.id === field.id)[0];
+      if (!response) {
+        errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
+      }
+    }
+  });
+  return errors;
+};
+
+type State = {
+  titleSuggestions: Array<Object>,
+  isLoadingTitleSuggestions: boolean,
+  districtIdsFilteredByAddress: Array<string>,
+  address: ?string,
+};
 
 export class ProposalForm extends React.Component<Props, State> {
 
@@ -158,109 +187,66 @@ export class ProposalForm extends React.Component<Props, State> {
     this.state = {
       titleSuggestions: [],
       isLoadingTitleSuggestions: false,
-      districtsFilteredByAddress: props.form.districts.map(district => district.id),
+      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
       address: props.proposal && props.proposal.address ? JSON.parse(props.proposal.address)[0].formatted_address : '',
     };
-  };
-
-  componentWillMount() {
-    this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 500);
   }
 
-  // if (this.state.form.address !== '') {
-  //   const address = JSON.parse(this.state.form.address);
-  //   const location = address[0].geometry.location;
-  //   if (location !== null) {
-  //     this.retrieveDistrictForLocation(location, true);
-  //   }
+  componentWillReceiveProps({titleValue, addressValue}: Props) {
+    const { currentStepId, proposalForm } = this.props;
+    if (this.props.titleValue !== titleValue) {
+        this.setState({ titleSuggestions: [] });
+        if (titleValue && titleValue.length > 3) {
+          this.setState({ isLoadingTitleSuggestions: true });
+          loadSuggestions(currentStepId, titleValue).then(res => {
+              this.setState({
+                titleSuggestions: res.proposals,
+                isLoadingTitleSuggestions: false,
+              });
+          });
+        }
+    }
+    if (this.props.addressValue !== addressValue) {
+      if (proposalForm.proposalInAZoneRequired && addressValue) {
+        this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
+      }
+    }
+  }
+
+  // componentWillMount() {
+  //   this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 500);
   // }
 
-  // handleTitleChange(e) {
-  //   e.persist();
-  //   const title = e.target.value;
-  //   this.setState(prevState => ({
-  //     form: { ...prevState.form, title },
-  //   }));
-  //   this.handleTitleChangeDebounced(title);
-  // },
-  //
-  // handleAddressChange(address) {
-  //   const { form } = this.props;
-  //   geocodeByAddress(address)
-  //     .then(results => {
-  //       this.setState(prevState => ({
-  //         form: { ...prevState.form, address: JSON.stringify(results) },
-  //       }));
-  //       this.setState(prevState => ({
-  //         ...prevState,
-  //         address: results[0].formatted_address,
-  //         errors: { ...prevState.errors, address: [] },
-  //       }));
-  //       if (form.proposalInAZoneRequired) {
-  //         this.retrieveDistrictForLocation(results[0].geometry.location);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       this.resetAddressField();
-  //       console.error('Google places error!', error); // eslint-disable-line
-  //     });
-  // },
-
-  // handleTitleChangeDebounced(title) {
-  //   this.setState({
-  //     suggestions: [],
-  //   });
-  //   if (title.length > 3) {
-  //     this.setState({ isLoadingSuggestions: true });
-  //     loadSuggestions(this.props.currentStepId, title).then(res => {
-  //       if (this.state.form.title === title) {
-  //         // last request only
-  //         this.setState({
-  //           suggestions: res.proposals,
-  //           isLoadingSuggestions: false,
-  //         });
-  //       }
-  //     });
-  //   }
-  // },
-
-  // retrieveDistrictForLocation(location: LatLng, isEditMode: ?Boolean = false): void {
-  //   this.setState({
-  //     loadingDistricts: true,
-  //   });
-  //   if (typeof location.lat === 'function' || typeof location.lng === 'function') {
-  //     // Google API return the lat and lng as a function, whereas when editing, I get those values directly from the
-  //     // component as a value so I have to convert the function to a value to have the same output in edit and creation
-  //     [location.lat, location.lng] = [location.lat(), location.lng()];
-  //   }
-  //   Fetcher.graphql({
-  //     operationName: 'availableDistrictsForLocalisation',
-  //     query,
-  //     variables: {
-  //       proposalFormId: this.props.form.id,
-  //       latitude: location.lat,
-  //       longitude: location.lng,
-  //     },
-  //   }).then(response => {
-  //     const form = { ...this.state.form };
-  //     const districtsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
-  //       district => district.id,
-  //     );
-  //     if (!isEditMode) {
-  //       form.district = districtsFilteredByAddress.length === 0 ? null : districtsFilteredByAddress[0];
-  //     }
-  //     this.setState({
-  //       districtsFilteredByAddress,
-  //       form,
-  //       loadingDistricts: false,
-  //     });
-  //   });
-  // },
+  retrieveDistrictForLocation(location: LatLng, isEditMode: ?boolean = false) {
+    this.setState({
+      loadingDistricts: true,
+    });
+    Fetcher.graphql({
+      operationName: 'ProposalFormAvailableDistrictsForLocalisationQuery',
+      query: query.text,
+      variables: {
+        proposalFormId: this.props.proposalForm.id,
+        latitude: location.lat,
+        longitude: location.lng,
+      },
+    }).then((response: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
+      const districtIdsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
+        district => district.id,
+      );
+      if (!isEditMode) {
+        this.props.dispatch(change(formName, 'district', districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0]))
+      }
+      this.setState({
+        districtIdsFilteredByAddress,
+        loadingDistricts: false,
+      });
+    });
+  }
 
   render() {
-    const { form, intl, features, themes, categories, proposal } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, isSubmittingDraft, proposal } = this.props;
+    const { districtIdsFilteredByAddress, isLoadingTitleSuggestions, titleSuggestions } = this.state;
 
-    const title = '';
     const optional = (
       <span className="excerpt">
         {' '}
@@ -269,12 +255,12 @@ export class ProposalForm extends React.Component<Props, State> {
     );
     return (
       <form id="proposal-form">
-        {proposal.isSubmittingDraft ? (
+        {isSubmittingDraft ? (
           <div className="mt-20">
-            <div dangerouslySetInnerHTML={{ __html: form.description }} />
+            <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
           </div>
         ) : (
-          <div dangerouslySetInnerHTML={{ __html: form.description }} />
+          <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
         )}
         <Field
           name="title"
@@ -282,33 +268,28 @@ export class ProposalForm extends React.Component<Props, State> {
           type="text"
           id="proposal_title"
           autoComplete="off"
-          help={form.titleHelpText}
-          // onChange={this.handleTitleChange}
+          help={proposalForm.titleHelpText}
           label={<FormattedMessage id="proposal.title" />}
           addonAfter={
-            this.state.isLoadingTitleSuggestions ? (
-              <Glyphicon glyph="refresh" className="glyphicon-spin" />
-            ) : (
-              <Glyphicon glyph="refresh" />
-            )
+            <Glyphicon glyph="refresh" className={isLoadingTitleSuggestions ? "glyphicon-spin" : ""} />
           }
         />
-        <Collapse in={this.state.titleSuggestions.length > 0}>
+        <Collapse in={titleSuggestions.length > 0}>
           <Panel
             header={
               <FormattedMessage
                 id="proposal.suggest_header"
                 values={{
-                  matches: this.state.titleSuggestions.length,
-                  terms: title.split(' ').length,
+                  matches: titleSuggestions.length,
+                  terms: titleValue ? titleValue.split(' ').length : '',
                 }}
               />
             }>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
-              {this.state.titleSuggestions.slice(0, 5).map(suggest => (
+              {titleSuggestions.slice(0, 5).map(suggestion => (
                 <li>
-                  <a href={suggest._links.show} className="external-link">
-                    {suggest.title}
+                  <a href={suggestion._links.show} className="external-link">
+                    {suggestion.title}
                   </a>
                 </li>
               ))}
@@ -321,7 +302,6 @@ export class ProposalForm extends React.Component<Props, State> {
             </Button>
           </Panel>
         </Collapse>
-
         <Field
           name="summary"
           component={component}
@@ -329,7 +309,7 @@ export class ProposalForm extends React.Component<Props, State> {
           id="proposal_summary"
           maxLength="140"
           autoComplete="off"
-          help={form.summaryHelpText}
+          help={proposalForm.summaryHelpText}
           label={
             <span>
               <FormattedMessage id="proposal.summary" />
@@ -338,22 +318,22 @@ export class ProposalForm extends React.Component<Props, State> {
           }
         />
         {features.themes &&
-          form.usingThemes && (
+          proposalForm.usingThemes && (
             <Field
               name="theme"
-              id="proposal_theme"
               type="select"
+              id="proposal_theme"
               component={component}
-              help={form.themeHelpText}
+              help={proposalForm.themeHelpText}
               label={
                 <span>
                   <FormattedMessage id="proposal.theme" />
-                  {!form.themeMandatory && optional}
+                  {!proposalForm.themeMandatory && optional}
                 </span>
               }>
               <FormattedMessage id="proposal.select.theme">
                 {message => (
-                  <option value={-1} disabled>
+                  <option value="" disabled>
                     {message}
                   </option>
                 )}
@@ -365,28 +345,28 @@ export class ProposalForm extends React.Component<Props, State> {
               ))}
             </Field>
           )}
-        {categories.length > 0 &&
-          form.usingCategories && (
+        {proposalForm.categories.length > 0 &&
+          proposalForm.usingCategories && (
             <Field
               id="proposal_category"
               type="select"
               name="category"
               component={component}
-              help={form.categoryHelpText}
+              help={proposalForm.categoryHelpText}
               label={
                 <span>
                   <FormattedMessage id="proposal.category" />
-                  {!form.categoryMandatory && optional}
+                  {!proposalForm.categoryMandatory && optional}
                 </span>
               }>
               <FormattedMessage id="proposal.select.category">
                 {message => (
-                  <option value={-1} disabled>
+                  <option value="" disabled>
                     {message}
                   </option>
                 )}
               </FormattedMessage>
-              {categories.map(category => {
+              {proposalForm.categories.map(category => {
                 return (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -395,96 +375,39 @@ export class ProposalForm extends React.Component<Props, State> {
               })}
             </Field>
           )}
-          {/* {form.usingAddress && (
-            <div
-              className={`form-group${this.state.errors.address.length > 0 ? ' has-warning' : ''}`}>
-              <label className="control-label h5" htmlFor="proposal_address">
-                <FormattedMessage id="proposal.map.form.field" />
-              </label>
-              {form.addressHelpText && <span className="help-block">{form.addressHelpText}</span>}
-              <div className="places-autocomplete__field">
-                <div className="places-autocomplete__icon">
-                  <i className="cap cap-magnifier" />
-                </div>
-                <PlacesAutocomplete
-                  inputProps={{
-                    onChange: address => {
-                      this.setState(prevState => ({ ...prevState, address }));
-                    },
-                    placeholder: intl.formatMessage({
-                      id: 'proposal.map.form.placeholder',
-                    }),
-                    value: this.state.address,
-                    type: 'text',
-                    id: 'proposal_address',
-                  }}
-                  autocompleteItem={autocompleteItem}
-                  onEnterKeyDown={this.handleAddressChange}
-                  onSelect={this.handleAddressChange}
-                  onError={() => {
-                    this.resetAddressField();
-                  }}
-                  classNames={{
-                    root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
-                    input: 'form-control',
-                    autocompleteContainer: {
-                      zIndex: 9999,
-                      position: 'absolute',
-                      top: '100%',
-                      backgroundColor: 'white',
-                      border: '1px solid #555555',
-                      width: '100%',
-                    },
-                    autocompleteItem: {
-                      zIndex: 9999,
-                      backgroundColor: '#ffffff',
-                      padding: '10px',
-                      color: '#555555',
-                      cursor: 'pointer',
-                    },
-                    autocompleteItemActive: {
-                      zIndex: 9999,
-                      backgroundColor: '#fafafa',
-                    },
-                  }}
-                />
-              </div>
-
-              {this.state.errors.address.length > 0 && this.renderFormErrors('address')}
-            </div>
-          )} */}
-          {form.usingAddress && (
+          {proposalForm.usingAddress &&
             <Field
               id="proposal_address"
               component={component}
               type="address"
+              help={proposalForm.addressHelpText}
               name="addressText"
               formName={formName}
               label={<FormattedMessage id="proposal.map.form.field" />}
               placeholder="proposal.map.form.placeholder"
             />
-          )}
+        }
         {features.districts &&
-          form.usingDistrict &&
-          form.districts.length > 0 && (
+          proposalForm.usingDistrict &&
+          proposalForm.districts.length > 0 && (
             <Field
               id="proposal_district"
               type="select"
               name="district"
               component={component}
-              help={form.districtHelpText}
+              help={proposalForm.districtHelpText}
               label={
                 <span>
                   <FormattedMessage id="proposal.district" />
-                  {!form.districtMandatory && optional}
+                  {!proposalForm.districtMandatory && optional}
                 </span>
               }>
               <FormattedMessage id="proposal.select.district">
                 {message => <option value="">{message}</option>}
               </FormattedMessage>
-              {this.state.districtsFilteredByAddress.map(districtId => (
+              {districtIdsFilteredByAddress.map(districtId => (
                 <option key={districtId} value={districtId}>
-                  {form.districts.filter(district => district.id === districtId)[0].name}
+                  {proposalForm.districts.filter(district => district.id === districtId)[0].name}
                 </option>
               ))}
             </Field>
@@ -495,44 +418,13 @@ export class ProposalForm extends React.Component<Props, State> {
           name="body"
           component={component}
           label={<FormattedMessage id="proposal.body" />}
-          help={form.descriptionHelpText}
+          help={proposalForm.descriptionHelpText}
         />
         <FieldArray
           name="responses"
-          component={({ fields }) => (
-            <div>
-              {fields.map((field, index) => {
-                const response = proposal.responses.filter(
-                  res => res && res.question.id === field.id,
-                )[0];
-                return (
-                  <ProposalPrivateField show={field.private} key={index}>
-                    <Field
-                      id={field.id}
-                      name={`responses.${index}.${field.type !== 'medias'
-                        ? 'value'
-                        : 'medias'}`}
-                      type={field.type}
-                      component={component}
-                      help={field.helpText}
-                      label={
-                        <span>
-                          {field.question}
-                          {!field.required && optional}
-                        </span>
-                      }
-                    />
-                    {response &&
-                      response.medias &&
-                      response.medias.length && (
-                        <ProposalMediaResponse medias={response.medias} />
-                      )}
-                  </ProposalPrivateField>
-                );
-              })}
-            </div>
-          )}
-          fields={form.questions}
+          component={renderResponses}
+          questions={proposalForm.questions}
+          intl={intl}
         />
         <Field
           id="proposal_media"
@@ -546,7 +438,7 @@ export class ProposalForm extends React.Component<Props, State> {
               {optional}
             </span>
           }
-          help={form.illustrationHelpText}
+          help={proposalForm.illustrationHelpText}
         />
 {/*
           const medias =
@@ -562,7 +454,9 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 };
 
-const mapStateToProps = (state: GlobalState, { proposal }: Props) => ({
+const selector = formValueSelector(formName);
+
+const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
   initialValues: {
     title: proposal ? proposal.title : null,
     summary: proposal ? proposal.summary : null,
@@ -571,81 +465,96 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => ({
     district: proposal && proposal.district ? proposal.district.id : null,
     category: proposal && proposal.category ? proposal.category.id : null,
     media: proposal ? proposal.media : null,
-    address: proposal.address ? proposal.address : '',
-    responses: proposal.responses ? proposal.responses : [],
+    addressText: proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
+    address: proposal && proposal.address || null,
+    responses: formatInitialResponsesValues(proposalForm.questions, proposal ? proposal.responses : []),
   },
-  // addressJson: proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
+  titleValue: selector(state, 'title'),
+  addressValue: selector(state, 'address'),
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
-  isSubmittingDraft: state.proposal.isDraft || false,
+  isSubmittingDraft: state.proposal.isSubmittingDraft,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProposalForm));
+const form = reduxForm({
+  form: formName,
+  validate,
+  onSubmit,
+})(ProposalForm);
 
-export default container;
+const container = connect(mapStateToProps)(injectIntl(form));
 
-// export default createFragmentContainer(
-//   container,
-//   {
-//     proposal: graphql`
-//       fragment ProposalForm_proposal on Proposal {
-//         id
-//         title
-//         body
-//         summary
-//         responses {
-//           question {
-//             id
-//           }
-//           ... on ValueResponse {
-//             value
-//           }
-//           ... on MediaResponse {
-//             medias {
-//               id
-//               name
-//               size
-//               url
-//             }
-//           }
-//         }
-//         media {
-//           id
-//           url
-//         }
-//         form
-//     `,
-//     form: graphql`
-//       fragment ProposalForm_form on ProposalForm {
-//         id
-//         districts {
-//           id
-//           name
-//         }
-//         categories {
-//           id
-//           name
-//         }
-//         questions {
-//           id
-//           title
-//           type
-//           position
-//           private
-//           required
-//         }
-//         usingDistrict
-//         districtMandatory
-//         districtHelpText
-//         usingThemes
-//         themeMandatory
-//         usingCategories
-//         categoryMandatory
-//         categoryHelpText
-//         usingAddress
-//         titleHelpText
-//         descriptionHelpText
-//     }`
-//   }
-// );
+export default createFragmentContainer(
+  container,
+  {
+    proposal: graphql`
+      fragment ProposalForm_proposal on Proposal {
+        id
+        title
+        body
+        summary
+        address
+        responses {
+          question {
+            id
+          }
+          ... on ValueResponse {
+            value
+          }
+          ... on MediaResponse {
+            medias {
+              id
+              name
+              size
+              url
+            }
+          }
+        }
+        media {
+          id
+          url
+        }
+      }
+    `,
+    proposalForm: graphql`
+      fragment ProposalForm_proposalForm on ProposalForm {
+        id
+        description
+        step {
+          id
+        }
+        districts {
+          id
+          name
+        }
+        categories {
+          id
+          name
+        }
+        questions {
+          id
+          title
+          type
+          position
+          private
+          required
+        }
+        usingDistrict
+        districtMandatory
+        districtHelpText
+        usingThemes
+        themeMandatory
+        usingCategories
+        categoryMandatory
+        categoryHelpText
+        usingAddress
+        titleHelpText
+        summaryHelpText
+        themeHelpText
+        illustrationHelpText
+        descriptionHelpText
+        proposalInAZoneRequired
+    }`
+  }
+);

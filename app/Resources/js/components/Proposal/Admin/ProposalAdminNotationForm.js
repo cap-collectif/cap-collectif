@@ -194,13 +194,13 @@ const formattedChoicesInField = field => {
 
 export const renderResponses = ({
   fields,
-  evaluationForm,
+  questions,
   responses,
   intl,
   change,
   disabled,
 }: FieldArrayProps & {
-  evaluationForm: Object,
+  questions: Array<Object>,
   responses: Array<Object>,
   change: (field: string, value: any) => void,
   intl: IntlShape,
@@ -208,7 +208,7 @@ export const renderResponses = ({
 }) => (
   <div>
     {fields.map((member, index) => {
-      const field = evaluationForm.questions[index];
+      const field = questions[index];
       const key = field.slug;
       const inputType = field.type || 'text';
       const isOtherAllowed = field.isOtherAllowed;
@@ -362,11 +362,10 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   <hr />
                 </div>
               )}
-
               <FieldArray
                 name="responses"
                 component={renderResponses}
-                evaluationForm={evaluationForm}
+                questions={evaluationForm.questions}
                 responses={this.props.responses}
                 intl={this.props.intl}
               />
@@ -402,45 +401,47 @@ const form = injectIntl(
   })(ProposalAdminNotationForm),
 );
 
-export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
-  !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
-    ? undefined
-    : props.proposal.form.evaluationForm.questions.map(field => {
-        const response = props.proposal.evaluation
-          ? props.proposal.evaluation.responses.filter(
-              res => res && res.question.id === field.id,
-            )[0]
-          : null;
-        if (response) {
-          if (response.value) {
-            let responseValue = response.value;
+export const formatInitialResponsesValues = (questions, responses) => {
+  return questions.map(question => {
+      const response = responses.filter(res => res && res.question.id === question.id)[0];
+      if (response) {
+        if (response.value) {
+          let responseValue = response.value;
 
-            const questionType = response.question.type;
-            if (questionType === 'button') {
-              responseValue = JSON.parse(response.value).labels[0];
-            }
-
-            if (questionType === 'radio') {
-              responseValue = JSON.parse(response.value);
-            }
-
-            if (questionType === 'ranking') {
-              responseValue = JSON.parse(response.value).labels;
-            }
-
-            if (questionType === 'checkbox') {
-              responseValue = JSON.parse(response.value);
-            }
-
-            return {
-              question: field.id,
-              value: responseValue,
-            };
+          const questionType = response.question.type;
+          if (questionType === 'button') {
+            responseValue = JSON.parse(response.value).labels[0];
           }
-        }
 
-        return { question: field.id, value: null };
-      });
+          if (questionType === 'radio') {
+            responseValue = JSON.parse(response.value);
+          }
+
+          if (questionType === 'ranking') {
+            responseValue = JSON.parse(response.value).labels;
+          }
+
+          if (questionType === 'checkbox') {
+            responseValue = JSON.parse(response.value);
+          }
+
+          return {
+            question: question.id,
+            value: responseValue,
+          };
+        }
+      }
+      return { question: question.id, value: null };
+  });
+};
+
+export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
+  return !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
+    ? undefined
+    : formatInitialResponsesValues(props.proposal.form.evaluationForm.questions,
+    props.proposal.evaluation ? props.proposal.evaluation.responses : []
+  );
+};
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),

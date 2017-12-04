@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import type { Connector } from 'react-redux';
@@ -24,7 +24,7 @@ const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object
   </div>
 );
 
-class Address extends Component<Props, void> {
+class Address extends React.Component<Props> {
   static defaultProps = {
     disabled: false,
   };
@@ -68,19 +68,40 @@ class Address extends Component<Props, void> {
           this.resetAddressField();
         }}
         classNames={{
+          // root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
           input: 'form-control',
+          autocompleteContainer: {
+            zIndex: 9999,
+            position: 'absolute',
+            top: '100%',
+            backgroundColor: 'white',
+            border: '1px solid #555555',
+            width: '100%',
+          },
+          autocompleteItem: {
+            zIndex: 9999,
+            backgroundColor: '#ffffff',
+            padding: '10px',
+            color: '#555555',
+            cursor: 'pointer',
+          },
+          autocompleteItemActive: {
+            zIndex: 9999,
+            backgroundColor: '#fafafa',
+          },
         }}
       />
+      // {hasError && <div className="form-control-feedback">{error}</div>}
     );
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-  updateAddressValue: value => {
+  updateAddressValue: (value) => {
     dispatch(change(props.formName, 'address', value));
   },
 });
 
-const connector: Connector<PassedProps, Props> = connect(mapDispatchToProps);
+const connector: Connector<PassedProps, Props> = connect(null, mapDispatchToProps);
 
 export default connector(Address);
