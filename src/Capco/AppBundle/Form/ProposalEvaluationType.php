@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +16,7 @@ class ProposalEvaluationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('version', HiddenType::class)
+            ->add('version', IntegerType::class)
             ->add('responses', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,

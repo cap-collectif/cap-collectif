@@ -61,7 +61,7 @@ class ProposalEvaluation
         $response->setProposalEvaluation($this);
     }
 
-    public function getProposal()// : Proposal
+    public function getProposal()
     {
         return $this->proposal;
     }
@@ -73,12 +73,12 @@ class ProposalEvaluation
         return $this;
     }
 
-    public function getVersion()
+    public function getVersion(): int
     {
         return $this->version;
     }
 
-    public function setVersion($version)
+    public function setVersion(int $version): self
     {
         $this->version = $version;
 
