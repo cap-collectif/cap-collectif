@@ -202,7 +202,21 @@ services:
         tags:
             - { name: twig.extension }
 
+httplug:
+    clients:
+        default:
+            factory: 'httplug.factory.curl'
+        hwi:
+            factory: 'httplug.factory.guzzle6'
+            config:
+                timeout: 10
+                verify_peer: false
+                max_redirects: 1
+                ignore_errors: false
+
 hwi_oauth:
+    http:
+        client: httplug.client.hwi
     connect:
         account_connector: my_user_provider
     firewall_names: [main]

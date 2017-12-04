@@ -45,6 +45,9 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
 
+            // HTTPlug
+            new \Http\HttplugBundle\HttplugBundle(),
+
             // oauth user
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
