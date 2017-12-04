@@ -19,21 +19,30 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
         if ($rule && is_array($value)) {
             $valueLength = array_key_exists('labels', $value) ? count($value['labels']) : 0;
             $valueLength += array_key_exists('other', $value) ? 1 : 0;
-            if ($valueLength === 0 && !$question->isRequired()) {
+            if (0 === $valueLength && !$question->isRequired()) {
                 return;
             }
-            if ($rule->getType() === 'min' && $valueLength < $rule->getNumber()) {
-                $this->context->addViolationAt('value', 'response.min', ['%nb%' => $rule->getNumber()], null);
+            if ('min' === $rule->getType() && $valueLength < $rule->getNumber()) {
+                $this->context->buildViolation('response.min')
+                    ->atPath('value')
+                    ->setParameter('%nb%', $rule->getNumber())
+                    ->addViolation();
 
                 return;
             }
-            if ($rule->getType() === 'max' && $valueLength > $rule->getNumber()) {
-                $this->context->addViolationAt('value', 'response.max', ['%nb%' => $rule->getNumber()], null);
+            if ('max' === $rule->getType() && $valueLength > $rule->getNumber()) {
+                $this->context->buildViolation('response.max')
+                    ->atPath('value')
+                    ->setParameter('%nb%', $rule->getNumber())
+                    ->addViolation();
 
                 return;
             }
-            if ($rule->getType() === 'equal' && $valueLength !== $rule->getNumber()) {
-                $this->context->addViolationAt('value', 'response.equal', ['%nb%' => $rule->getNumber()], null);
+            if ('equal' === $rule->getType() && $valueLength !== $rule->getNumber()) {
+                $this->context->buildViolation('response.equal')
+                    ->atPath('value')
+                    ->setParameter('%nb%', $rule->getNumber())
+                    ->addViolation();
 
                 return;
             }

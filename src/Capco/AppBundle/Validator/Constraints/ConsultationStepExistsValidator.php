@@ -9,8 +9,10 @@ class ConsultationStepExistsValidator extends ConstraintValidator
 {
     public function validate($protocol, Constraint $constraint)
     {
-        if ($protocol->getSourceType() === 'consultation_step' && !$protocol->getConsultationStep()) {
-            $this->context->addViolationAt('consultationStep', $constraint->message, [], null);
+        if ('consultation_step' === $protocol->getSourceType() && !$protocol->getConsultationStep()) {
+            $this->context->buildViolation($constraint->message)
+                ->atPath('consultationStep')
+                ->addViolation();
         }
     }
 }

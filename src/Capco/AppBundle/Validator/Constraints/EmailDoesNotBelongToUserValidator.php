@@ -20,7 +20,9 @@ class EmailDoesNotBelongToUserValidator extends ConstraintValidator
         if (null !== $value->getEmail()) {
             $user = $this->userManager->findUserByEmail($value->getEmail());
             if (null !== $user) {
-                $this->context->addViolationAt('email', $constraint->message, [], null);
+                $this->context->buildViolation($constraint->message)
+                    ->atPath('email')
+                    ->addViolation();
             }
         }
     }

@@ -17,7 +17,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if ($value->getEmail() === null) {
+        if (null === $value->getEmail()) {
             return;
         }
 
@@ -34,7 +34,9 @@ class HasUnlistedEmailValidator extends ConstraintValidator
         }
 
         if ($present) {
-            $this->context->addViolationAt('email', $constraint->message, [], null);
+            $this->context->buildViolation($constraint->message)
+                ->atPath('email')
+                ->addViolation();
 
             return false;
         }

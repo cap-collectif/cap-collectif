@@ -11,7 +11,9 @@ class HasAuthorValidator extends ConstraintValidator
     {
         $author = $protocol->getAuthor();
         if ((null === $protocol->getAuthorName() || null === $protocol->getAuthorEmail()) && null === $protocol->getAuthor()) {
-            $this->context->addViolationAt('authorName', $constraint->message, [], null);
+            $this->context->buildViolation($constraint->message)
+                ->atPath('authorName')
+                ->addViolation();
         }
     }
 }
