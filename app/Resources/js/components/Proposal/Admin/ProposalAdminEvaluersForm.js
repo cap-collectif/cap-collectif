@@ -83,7 +83,6 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-                <i className="cap cap-download-1"> </i>{' '}
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <AlertAdminForm

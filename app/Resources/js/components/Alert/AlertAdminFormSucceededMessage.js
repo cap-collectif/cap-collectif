@@ -33,8 +33,8 @@ export class AlertAdminFormSucceededMessage extends React.Component<Props, State
 
     if (showSucceededMessage) {
       return (
-        <div className="alert__form_succeeded-message">
-          <i className="cap cap-android-checkmark-circle" /> <FormattedMessage id="global.saved" />
+        <div className="alert__admin-form_succeeded-message">
+          <i className="icon ion-android-checkmark-circle" /> <FormattedMessage id="global.saved" />
         </div>
       );
     }
