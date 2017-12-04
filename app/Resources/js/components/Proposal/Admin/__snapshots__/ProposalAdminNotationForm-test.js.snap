@@ -136,6 +136,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             />
           </Button>
           <AlertAdminForm
+            errorMessage={null}
             invalid={false}
             submitFailed={false}
             submitSucceeded={false}

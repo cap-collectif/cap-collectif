@@ -20,7 +20,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
     public function changeProposalEvaluation(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
-        $version = $this->container->get('session')->get('version', $arguments['version']);
+        $version = $arguments['version'];
 
         $om = $this->container->get('doctrine.orm.default_entity_manager');
 
@@ -45,9 +45,8 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         try {
             $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
         } catch (OptimisticLockException $e) {
-            throw new UserError('Proposal evaluation was modified, please refresh the page (' .
-                ((int) $proposalEvaluation->getVersion() - (int) $version) . ' modification(s) have been made since) : '
-                . (string) $e->getMessage());
+            throw new UserError('Proposal evaluation was modified, please refresh the page ('
+                . $e->getMessage() . ')');
         }
 
         if (!$proposalEvaluation) {
@@ -72,7 +71,6 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 
         try {
             $om->flush();
-            $this->container->get('session')->set('version', $proposalEvaluation->getVersion());
         } catch (\Exception $e) {
             throw new UserError('Error during the flush :' . $e->getMessage());
         }
