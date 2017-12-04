@@ -110,6 +110,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
         proposal {
           id
           evaluation {
+            version
             responses {
               question {
                 id
@@ -125,6 +126,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
     "variables": {
       "input": {
         "proposalId": "proposal2",
+        "version": 1,
         "responses": [
         {
            "question": "8",
@@ -143,6 +145,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
         "proposal": {
           "id": "proposal2",
           "evaluation": {
+            "version": 2,
             "responses": [
               {
                 "question": { "id": "8" },
@@ -168,6 +171,7 @@ Scenario: Non evaluer wants to update the evaluation of a proposal
         proposal {
           id
           evaluation {
+            version
             responses {
               question {
                 id
@@ -183,6 +187,7 @@ Scenario: Non evaluer wants to update the evaluation of a proposal
     "variables": {
       "input": {
         "proposalId": "proposal2",
+        "version": 1,
         "responses": []
       }
     }
