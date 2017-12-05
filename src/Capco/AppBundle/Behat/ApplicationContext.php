@@ -10,7 +10,6 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\IdeaStepsTrait;
-use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
@@ -29,7 +28,6 @@ class ApplicationContext extends UserContext
 {
     use CommentStepsTrait;
     use IdeaStepsTrait;
-    use NotificationsStepTrait;
     use OpinionStepsTrait;
     use ProjectStepsTrait;
     use ProposalStepsTrait;
@@ -207,18 +205,6 @@ class ApplicationContext extends UserContext
         $this->getSession()->wait(1000);
 
         $this->assertPageAddress($url);
-    }
-
-    /**
-     * @Then I should not be redirected to :url
-     *
-     * @param mixed $url
-     */
-    public function assertNotRedirect($url)
-    {
-        $this->getSession()->wait(1000);
-
-        $this->assertSession()->addressNotEquals($this->locatePath($url));
     }
 
     /**

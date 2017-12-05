@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while [ ! -f /var/run/php7.0-fpm.pid ] > /dev/null 2>&1;
+  do sleep 1
+  echo "Supervisor is waiting for php-fpm to be running..."
+done
+
+echo "Starting Supervisor..."
+exec supervisord --configuration=/etc/supervisord/supervisord.conf

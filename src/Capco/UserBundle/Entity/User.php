@@ -5,11 +5,9 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -242,13 +240,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $alertExpirationSent = false;
 
     /**
-     * @var UserNotificationsConfiguration
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"remove", "persist"})
-     * @ORM\JoinColumn(name="notifications_configuration_id", referencedColumnName="id")
-     */
-    private $notificationsConfiguration;
-
-    /**
      * @var string
      */
     private $slug;
@@ -278,7 +269,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
-        $this->notificationsConfiguration = new UserNotificationsConfiguration();
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -1325,22 +1315,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setProfilePageIndexed(bool $profilePageIndexed = true)
     {
         $this->profilePageIndexed = !$profilePageIndexed;
-    }
-
-    /**
-     * @return UserNotificationsConfiguration
-     */
-    public function getNotificationsConfiguration(): UserNotificationsConfiguration
-    {
-        return $this->notificationsConfiguration;
-    }
-
-    /**
-     * @param UserNotificationsConfiguration $notificationsConfiguration
-     */
-    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration)
-    {
-        $this->notificationsConfiguration = $notificationsConfiguration;
     }
 
     public function isConsentExternalCommunication(): bool

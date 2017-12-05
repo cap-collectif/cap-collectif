@@ -181,6 +181,7 @@ Scenario: Admin should be notified when an user deletes his proposal on an notif
   When I click the delete proposal button
   And I confirm proposal deletion
   And I wait 3 seconds
+  Then 1 mails should be sent
   And I open mail with subject 'notification.email.proposal.delete.subject'
   And I should see 'notification.email.proposal.delete.body' in mail
 
@@ -190,22 +191,7 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   And I go to a proposal which is not notifiable
   When I click the delete proposal button
   And I confirm proposal deletion
-  And I wait 3 seconds
-  Then I should not see mail with subject "notification.email.proposal.delete.subject"
-
-@javascript @database
-Scenario: Author of a proposal should be notified when someone comment if he has turned on comments notifications
-  Given I go to a proposal made by msantostefano@jolicode.com
-  And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
-  And I wait 3 seconds
-  Then I should see mail to "msantostefano@jolicode.com"
-
-@javascript @database
-Scenario: Author of a proposal should not be notified when someone comment if he has turned off comments notifications
-  Given I go to a proposal made by user@test.com
-  And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
-  And I wait 3 seconds
-  Then I should not see mail to "user@test.com"
+  Then 0 mails should be sent
 
 @javascript
 Scenario: Non author of a proposal wants to delete it

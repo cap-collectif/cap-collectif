@@ -26,7 +26,7 @@ class UserResolver implements ContainerAwareInterface
             return [$repo->find($args['id'])];
         }
 
-        if (isset($args['superAdmin']) && true === $args['superAdmin']) {
+        if (isset($args['superAdmin']) && $args['superAdmin'] === true) {
             return [$repo->getAllUsersWithoutSuperAdmin()];
         }
 
@@ -35,7 +35,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveEmail($object): string
     {
-        if (0 === strpos($object->getEmail(), 'twitter_')) {
+        if (strpos($object->getEmail(), 'twitter_') === 0) {
             return '';
         }
 
@@ -89,10 +89,10 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveGender($object): string
     {
-        if ('u' === $object->getGender()) {
+        if ($object->getGender() === 'u') {
             return 'Non communiqué';
         }
-        if ('m' === $object->getGender()) {
+        if ($object->getGender() === 'm') {
             return 'Homme';
         }
 

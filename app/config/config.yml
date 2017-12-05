@@ -154,7 +154,6 @@ swiftmailer:
     mailers:
         default:
             transport: smtp
-            local_domain: "%router.request_context.host%"
             host: "%mailer_host%"
             port: "%mailer_port%"
             username: "%mailer_user%"

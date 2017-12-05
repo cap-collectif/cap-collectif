@@ -142,6 +142,7 @@ COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
 COPY nodejs/run                 /etc/service/nodejs/run
+COPY supervisord/run            /etc/service/supervisord/run
 
 # Configuration
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf

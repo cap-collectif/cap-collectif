@@ -27,17 +27,10 @@ def clean():
     env.compose('rm -f chrome')
 
 
-@task(environments=['local', 'ci'])
-def rabbitmq_queues():
+@task(environments=['local'])
+def rabbitmq():
     "Create RabbitMQ queues"
     env.service_command('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml', 'application', env.www_app)
-
-
-@task(environments=['local', 'ci'])
-def start_consumers():
-    "Start consumers"
-    env.service_command('if pgrep supervisord; then pkill supervisord; fi', 'application', env.www_app, 'root')
-    env.service_command('supervisord --configuration=/etc/supervisord/supervisord.conf', 'application', env.www_app, 'root')
 
 
 @task(environments=['local'])

@@ -32,7 +32,6 @@ class Notify implements MailerInterface
     protected $parameters;
     protected $urlResolver;
     protected $validator;
-    protected $logger;
 
     public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
     {
@@ -50,11 +49,6 @@ class Notify implements MailerInterface
     {
         if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
-
-            // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
-            if ($this->mailer->getTransport()->isStarted()) {
-                $this->mailer->getTransport()->stop();
-            }
         }
     }
 
@@ -302,42 +296,6 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
-    public function notifyUserProposalComment(ProposalComment $comment)
-    {
-        $proposalAuthor = $comment->getProposal()->getAuthor();
-        $isAnonymous = null === $comment->getAuthor();
-        $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.subject' : 'notification.email.comment.to_user.subject';
-        $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.body' : 'notification.email.comment.to_user.body';
-        $params = $this->buildParamsForComment($comment, $isAnonymous);
-        $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_login'
-            , ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
-            UrlGeneratorInterface::ABSOLUTE_URL);
-        $params['body']['%disableNotificationsUrl%'] = $this->router->generate(
-            'capco_profile_notifications_disable',
-            ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
-            UrlGeneratorInterface::ABSOLUTE_URL);
-        $subject = $this->translator->trans(
-            $subjectId,
-            $params['subject'],
-            'CapcoAppBundle');
-        $body = $this->translator->trans(
-            $bodyId,
-            $params['body'],
-            'CapcoAppBundle'
-        );
-        $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
-        $body .= $this->translator->trans(
-            'notification.email.external_footer', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-            '%to%' => $proposalAuthor->getEmailCanonical(),
-            '%siteUrl%' => $siteUrl,
-        ], 'CapcoAppBundle'
-        );
-        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-        $this->sendEmail($proposalAuthor->getEmailCanonical(), $fromAdress, $fromName, $body, $subject);
-    }
-
     public function notifyProposalComment($comment, string $action)
     {
         if ('delete' === $action) {
@@ -454,7 +412,7 @@ class Notify implements MailerInterface
 
     private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
     {
-        return (new \Swift_Message())
+        return \Swift_Message::newInstance()
             ->setTo($to)
             ->setSubject($subject)
             ->setContentType($contentType)

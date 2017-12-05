@@ -31,7 +31,7 @@ class DefaultController extends Controller
     {
         $form = $this->createForm(new ContactType());
 
-        if ('POST' === $request->getMethod()) {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -46,7 +46,7 @@ class DefaultController extends Controller
 
                 $subject = $this->get('translator')->trans('contact.email.subject', ['%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname'), '%sender%' => $data['name']], 'CapcoAppBundle');
 
-                $message = (new \Swift_Message())
+                $message = \Swift_Message::newInstance()
                     ->setTo($adminEmail)
                     ->setSubject($subject)
                     ->setBody($data['message'])

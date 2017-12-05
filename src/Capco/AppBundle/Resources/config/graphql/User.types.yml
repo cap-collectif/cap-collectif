@@ -1,7 +1,7 @@
 User:
     type: object
     config:
-        description: "A user"
+        description: "An user"
         fields:
             id:
                 type: "ID!"
@@ -39,9 +39,6 @@ User:
             enabled:
                 type: "Boolean!"
                 description: "Is user is activated."
-            notificationsConfiguration:
-                type: "UserNotificationsConfiguration!"
-                description: "A user notifications preferences"
             locked:
                 type: "Boolean!"
             phoneConfirmed:
