@@ -14,14 +14,18 @@ type PassedProps = {
   placeholder: string,
   formName: string,
   disabled: boolean,
+  error: ?string,
 };
 type DefaultProps = { disabled: boolean };
 type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
-const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
-  <div>
-    <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
-    <small>{formattedSuggestion.secondaryText}</small>
+const autocompleteItem = ({
+  formattedSuggestion,
+}: {
+  formattedSuggestion: { mainText: string, secondaryText: string },
+}) => (
+  <div className="places-autocomplete">
+    <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
   </div>
 );
 
@@ -50,11 +54,11 @@ class Address extends React.Component<Props> {
   };
 
   render() {
-    const { placeholder, value, id, onChange } = this.props;
+    const { error, placeholder, value, id, onChange } = this.props;
     return (
       <PlacesAutocomplete
         inputProps={{
-          onChange: address => {
+          onChange: (address: ?string) => {
             onChange(address);
           },
           placeholder,
@@ -69,7 +73,7 @@ class Address extends React.Component<Props> {
           this.resetAddressField();
         }}
         classNames={{
-          // root: `${this.state.errors.address.length > 0 ? 'form-control-warning' : ''}`,
+          root: `${error ? 'form-control-warning' : ''}`,
           input: 'form-control',
           autocompleteContainer: {
             zIndex: 9999,
@@ -92,7 +96,6 @@ class Address extends React.Component<Props> {
           },
         }}
       />
-      // {hasError && <div className="form-control-feedback">{error}</div>}
     );
   }
 }

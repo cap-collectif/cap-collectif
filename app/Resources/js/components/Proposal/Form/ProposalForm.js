@@ -98,7 +98,7 @@ const onSubmit = (
   { proposalForm, proposal, isSubmittingDraft }: Props,
 ) => {
   // Only used for the user view
-  if (values.addressText) {
+  if (typeof values.addressText !== 'undefined') {
     delete values.addressText;
   }
   if (isSubmittingDraft) {
