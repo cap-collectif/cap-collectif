@@ -12,7 +12,7 @@ import {
   formValueSelector,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-// import { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import { Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import query, {
@@ -79,6 +79,19 @@ type FormValues = {
   draft?: boolean,
 };
 
+const catchServerSubmitErrors = (e: Object) => {
+  if (
+    e.response &&
+    e.response.errors &&
+    e.response.errors.errors.includes('global.address_not_in_zone')
+  ) {
+    throw new SubmissionError({
+      address: 'proposal.constraints.address_in_zone',
+    });
+  }
+  throw e;
+};
+
 const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
@@ -92,62 +105,21 @@ const onSubmit = (
     values.draft = true;
   }
 
-  // // We must remove Files to upload from variables and put them in uploadables
-  // const uploadables = {};
-  // if (values.media instanceof File) {
-  //   // User wants to upload a new media
-  //   uploadables.media = values.media;
-  // }
-  // delete values.media;
-  //
-  // values.responses = values.responses.filter(res => {
-  //   if (!res.medias) {
-  //     // We only send value responses
-  //     return true;
-  //   }
-  //   for (const media of res.medias) {
-  //     if (media instanceof File) {
-  //       uploadables[`responses_${res.question}`] = media;
-  //     }
-  //   }
-  //   return false;
-  // });
-
-  const catchErrors = (e: Object) => {
-    if (
-      e.response &&
-      e.response.errors &&
-      e.response.errors.errors.includes('global.address_not_in_zone')
-    ) {
-      throw new SubmissionError({
-        address: 'proposal.constraints.address_in_zone',
-        _error: 'Creation failed!',
-      });
-    }
-    throw e;
-  };
-
   if (proposalForm.step) {
     if (proposal) {
-      return updateProposal(dispatch, proposalForm.id, proposal.id, values, proposalForm.step.id);
-      // const variables = {
-      //   input: { ...values, id: props.proposal.id },
-      // };
-      //
-      // return ChangeProposalContentMutation.commit(variables, uploadables);
+      return updateProposal(
+        dispatch,
+        proposalForm.id,
+        proposal.id,
+        values,
+        proposalForm.step.id,
+      ).catch(catchServerSubmitErrors);
     }
 
     return submitProposal(dispatch, proposalForm.id, values, proposalForm.step.id).catch(
-      catchErrors,
+      catchServerSubmitErrors,
     );
   }
-  // return CreateProposalMutation.commit({
-  //   input: {
-  //     ...values,
-  //     formId: props.proposalForm.id,
-  //     //   proposalForm.draft = nextProps.isSubmittingDraft;
-  //   },
-  // }, uploadables).then();
 };
 
 const validate = (values: FormValues, { proposalForm, features, isSubmittingDraft }: Props) => {
@@ -216,7 +188,6 @@ type State = {
   titleSuggestions: Array<Object>,
   isLoadingTitleSuggestions: boolean,
   districtIdsFilteredByAddress: Array<string>,
-  address: ?string,
 };
 
 export class ProposalForm extends React.Component<Props, State> {
@@ -226,10 +197,6 @@ export class ProposalForm extends React.Component<Props, State> {
       titleSuggestions: [],
       isLoadingTitleSuggestions: false,
       districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
-      address:
-        props.proposal && props.proposal.address
-          ? JSON.parse(props.proposal.address)[0].formatted_address
-          : '',
     };
   }
 
@@ -237,15 +204,7 @@ export class ProposalForm extends React.Component<Props, State> {
     if (this.props.titleValue !== titleValue) {
       this.setState({ titleSuggestions: [] });
       if (titleValue && titleValue.length > 3) {
-        this.setState({ isLoadingTitleSuggestions: true });
-        if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
-          loadSuggestions(this.props.proposalForm.step.id, titleValue).then(res => {
-            this.setState({
-              titleSuggestions: res.proposals,
-              isLoadingTitleSuggestions: false,
-            });
-          });
-        }
+        this.loadTitleSuggestions(titleValue);
       }
     }
     if (this.props.addressValue !== addressValue) {
@@ -255,9 +214,17 @@ export class ProposalForm extends React.Component<Props, State> {
     }
   }
 
-  // componentWillMount() {
-  //   this.handleTitleChangeDebounced = debounce(this.handleTitleChangeDebounced, 500);
-  // }
+  loadTitleSuggestions = debounce((title: string) => {
+    this.setState({ isLoadingTitleSuggestions: true });
+    if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
+      loadSuggestions(this.props.proposalForm.step.id, title).then(res => {
+        this.setState({
+          titleSuggestions: res.proposals,
+          isLoadingTitleSuggestions: false,
+        });
+      });
+    }
+  }, 500);
 
   retrieveDistrictForLocation(location: LatLng, isEditMode: ?boolean = false) {
     Fetcher.graphql({

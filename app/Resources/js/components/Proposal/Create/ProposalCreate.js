@@ -16,7 +16,7 @@ import {
   setSubmittingDraft,
 } from '../../../redux/modules/proposal';
 import type { ProposalCreateQueryResponse } from './__generated__/ProposalCreateQuery.graphql';
-import type { Dispatch, GlobalState } from '../../../types';
+import type { Uuid, Dispatch, GlobalState } from '../../../types';
 
 const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResponse }) => {
   if (error) {
@@ -30,7 +30,7 @@ const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResp
 
 type Props = {
   intl: IntlShape,
-  form: Object,
+  form: { isContribuable: boolean, id: Uuid },
   showModal: boolean,
   submitting: boolean,
   dispatch: Dispatch,
@@ -88,7 +88,6 @@ export class ProposalCreate extends React.Component<Props> {
                 dispatch(setSubmittingDraft(true));
                 dispatch(submit(formName));
               }}
-              // bsStyle="draft"
               label="global.save_as_draft"
             />
             <SubmitButton
