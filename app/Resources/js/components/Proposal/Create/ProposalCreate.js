@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import { isSubmitting } from 'redux-form';
+import { isSubmitting, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalCreateButton from './ProposalCreateButton';
@@ -33,12 +33,13 @@ type Props = {
   form: { isContribuable: boolean, id: Uuid },
   showModal: boolean,
   submitting: boolean,
+  pristine: boolean,
   dispatch: Dispatch,
 };
 
 export class ProposalCreate extends React.Component<Props> {
   render() {
-    const { intl, form, showModal, submitting, dispatch } = this.props;
+    const { intl, form, showModal, pristine, submitting, dispatch } = this.props;
     return (
       <div>
         <ProposalCreateButton
@@ -84,8 +85,10 @@ export class ProposalCreate extends React.Component<Props> {
             <SubmitButton
               id="confirm-proposal-create-as-draft"
               isSubmitting={submitting}
+              disabled={pristine}
               onSubmit={() => {
                 dispatch(setSubmittingDraft(true));
+                dispatch(submit(formName));
               }}
               label="global.save_as_draft"
             />
@@ -93,8 +96,10 @@ export class ProposalCreate extends React.Component<Props> {
               label="global.submit"
               id="confirm-proposal-create"
               isSubmitting={submitting}
+              disabled={pristine}
               onSubmit={() => {
                 dispatch(setSubmittingDraft(false));
+                dispatch(submit(formName));
               }}
             />
           </Modal.Footer>
@@ -106,6 +111,7 @@ export class ProposalCreate extends React.Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
   showModal: state.proposal.showCreateModal,
 });
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
-import { isSubmitting } from 'redux-form';
+import { isSubmitting, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
@@ -30,12 +30,13 @@ type Props = {
   proposal: { id: Uuid, isDraft: boolean },
   show: boolean,
   submitting: boolean,
+  pristine: boolean,
   dispatch: Dispatch,
 };
 
 class ProposalEditModal extends React.Component<Props> {
   render() {
-    const { form, proposal, show, submitting, dispatch, intl } = this.props;
+    const { form, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     return (
       <div>
         <Modal
@@ -87,8 +88,10 @@ class ProposalEditModal extends React.Component<Props> {
               <SubmitButton
                 id="confirm-proposal-create-as-draft"
                 isSubmitting={submitting}
+                disabled={pristine}
                 onSubmit={() => {
                   dispatch(setSubmittingDraft(true));
+                  dispatch(submit(formName));
                 }}
                 label="global.save_as_draft"
               />
@@ -99,6 +102,7 @@ class ProposalEditModal extends React.Component<Props> {
               isSubmitting={submitting}
               onSubmit={() => {
                 dispatch(setSubmittingDraft(false));
+                dispatch(submit(formName));
               }}
             />
           </Modal.Footer>
@@ -111,5 +115,7 @@ class ProposalEditModal extends React.Component<Props> {
 const mapStateToProps = (state: GlobalState) => ({
   show: state.proposal.showEditModal,
   submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
 });
+
 export default connect(mapStateToProps)(injectIntl(ProposalEditModal));

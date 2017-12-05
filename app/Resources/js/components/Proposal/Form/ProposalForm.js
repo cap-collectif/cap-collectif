@@ -79,6 +79,7 @@ type FormValues = {|
 |};
 
 const catchServerSubmitErrors = (e: Object) => {
+  console.log(e.response);
   if (
     e.response &&
     e.response.errors &&
@@ -88,7 +89,9 @@ const catchServerSubmitErrors = (e: Object) => {
       address: 'proposal.constraints.address_in_zone',
     });
   }
-  throw e;
+  throw new SubmissionError({
+    _error: 'global.error.server.form',
+  });
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm, proposal }: Props) => {

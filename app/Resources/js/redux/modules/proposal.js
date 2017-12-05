@@ -448,36 +448,25 @@ export const submitProposal = (
     }
   });
 
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
-    .then(response => {
-      dispatch(closeCreateModal());
+  return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData).then(response => {
+    dispatch(closeCreateModal());
 
-      response.json().then(proposal => {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            bsStyle: 'success',
-            content: 'proposal.request.create.success',
-          },
-        });
-
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
-
-        window.location.href = proposal._links.show;
-      });
-    })
-    .catch((error: Error) => {
+    return response.json().then(proposal => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
-          bsStyle: 'warning',
-          content: 'proposal.request.create.failure',
+          bsStyle: 'success',
+          content: 'proposal.request.create.success',
         },
       });
-      throw error;
+
+      if (!proposal.isDraft) {
+        addProposalInRandomResultsByStep(proposal, currentStepId);
+      }
+
+      window.location.href = proposal._links.show;
     });
+  });
 };
 
 export const updateProposal = (
@@ -490,31 +479,22 @@ export const updateProposal = (
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
-    .then(response => {
-      dispatch(closeEditProposalModal());
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-      });
-
-      response.json().then(proposal => {
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
-
-        location.reload();
-      });
-    })
-    .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'proposal.request.update.failure',
-        },
-      });
+  return Fetcher.postFormData(
+    `/proposal_forms/${form}/proposals/${id}`,
+    formData,
+  ).then(response => {
+    dispatch(closeEditProposalModal());
+    FluxDispatcher.dispatch({
+      actionType: UPDATE_ALERT,
+      alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
     });
+    return response.json().then(proposal => {
+      if (!proposal.isDraft) {
+        addProposalInRandomResultsByStep(proposal, currentStepId);
+      }
+      location.reload();
+    });
+  });
 };
 
 export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<*, *, *> {

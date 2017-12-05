@@ -86,7 +86,7 @@ export default function configureStore(initialState: Object): Store {
             return {
               ...state,
               values: { ...state.values, draft: action.isDraft },
-              triggerSubmit: true,
+              // triggerSubmit: true,
             };
           default:
             return state;

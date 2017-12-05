@@ -209,7 +209,6 @@ export const renderResponses = ({
   <div>
     {fields.map((member, index) => {
       const field = questions[index];
-      const key = field.slug;
       const inputType = field.type || 'text';
       const isOtherAllowed = field.isOtherAllowed;
 
@@ -227,7 +226,7 @@ export const renderResponses = ({
       switch (inputType) {
         case 'medias': {
           return (
-            <ProposalPrivateField key={key} show={field.private}>
+            <ProposalPrivateField key={field.id} show={field.private}>
               <Field
                 name={`${member}.value`}
                 id={`reply-${field.id}`}
@@ -276,7 +275,7 @@ export const renderResponses = ({
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
               return (
-                <ProposalPrivateField key={key} show={field.private}>
+                <ProposalPrivateField key={field.id} show={field.private}>
                   <div key={`${member}-container`}>
                     <MultipleChoiceRadio
                       name={member}
@@ -295,7 +294,7 @@ export const renderResponses = ({
           }
 
           return (
-            <ProposalPrivateField key={key} show={field.private}>
+            <ProposalPrivateField key={field.id} show={field.private}>
               <Field
                 name={`${member}.value`}
                 id={`reply-${field.id}`}
