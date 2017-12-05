@@ -136,7 +136,7 @@
         "phpunit/phpunit": "^5.0",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "sjparkinson/behat-file-system-context": "^0.1.0",
-        "alexandresalome/mailcatcher": "dev-master#cbfcc6acefa27230db3cbcd10334e0819fb364b7",
+        "alexandresalome/mailcatcher": "dev-master#be2b3897caab28f59daa813be2034b97e3617427",
         "phpstan/phpstan-doctrine": "^0.8.0"
     },
     "scripts": {},

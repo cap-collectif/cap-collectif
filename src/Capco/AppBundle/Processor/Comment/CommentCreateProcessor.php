@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Processor\Comment;
 
-use Capco\AppBundle\EventListener\CommentSubscriber;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;
 use Swarrot\Broker\Message;
@@ -23,14 +22,7 @@ class CommentCreateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $comment = $this->commentRepository->find($json['commentId']);
-        switch ($json['notify_type']) {
-            case CommentSubscriber::NOTIFY_TO_ADMIN:
-                $this->notifier->notifyProposalComment($comment, 'create');
-                break;
-            case CommentSubscriber::NOTIFY_TO_AUTHOR:
-                $this->notifier->notifyUserProposalComment($comment);
-                break;
-        }
+        $this->notifier->notifyProposalComment($comment, 'create');
 
         return true;
     }

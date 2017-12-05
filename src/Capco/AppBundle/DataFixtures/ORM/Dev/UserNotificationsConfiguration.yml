@@ -1,3 +1,0 @@
-Capco\AppBundle\Entity\UserNotificationsConfiguration:
-    allDisabledUserNotifications:
-        onProposalCommentMail: false

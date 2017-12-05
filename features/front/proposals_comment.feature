@@ -17,7 +17,7 @@ Scenario: User comment a proposal and admin should not be notified if the propos
   And I go to a proposal which is not comment notifiable
   And I comment "Salut les filles"
   And I wait 3 seconds
-  Then I should not see mail with subject "Cap-Collectif — user a publié un commentaire sur une proposition"
+  Then 0 mails should be sent
 
 @javascript @database
 Scenario: User update his comment and admin should be notified if the proposal have comments notifications on
@@ -43,7 +43,7 @@ Scenario: User update his comment and admin should not be notified if the propos
   And I wait 3 seconds
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
   And I wait 3 seconds
-  Then I should not see mail with subject "Cap-Collectif — user a modifié un commentaire sur une proposition"
+  Then 0 mails should be sent
 
 @javascript @database
 Scenario: Anonymous user comment a proposal and admin should be notified if the proposal have comments notifications on
@@ -59,4 +59,4 @@ Scenario: Anonymous user comment a proposal and admin should not be notified if 
   Given I go to a proposal which is not comment notifiable
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   And I wait 3 seconds
-  Then I should not see mail with subject "Cap-Collectif — user a publié un commentaire sur une proposition"
+  Then 0 mails should be sent

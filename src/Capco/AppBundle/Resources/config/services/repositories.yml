@@ -169,11 +169,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoUserBundle:User']
 
-  capco.user_notifications_configuration.repository:
-    class: Capco\AppBundle\Repository\UserNotificationsConfigurationRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:UserNotificationsConfiguration']
-
   capco.video.repository:
     class: Capco\AppBundle\Repository\VideoRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

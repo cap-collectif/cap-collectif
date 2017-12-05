@@ -27,7 +27,6 @@ export type State = {
     +phone: string,
     +isAdmin: boolean,
     +email: string,
-    +notificationsConfiguration: Object,
     +newEmailToConfirm: ?string,
     +media: ?{
       +url: string,
