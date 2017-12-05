@@ -57,17 +57,16 @@ type RelayProps = {|
 |};
 
 type Props = RelayProps &
-  FormProps & {
+  FormProps & {|
     intl: IntlShape,
     themes: Array<Object>,
-    isSubmittingDraft: boolean,
     dispatch: Dispatch,
     features: FeatureToggles,
     titleValue: ?string,
     addressValue: ?string,
-  };
+  |};
 
-type FormValues = {
+type FormValues = {|
   title: ?string,
   summary: ?string,
   body: ?string,
@@ -76,8 +75,8 @@ type FormValues = {
   theme: ?string,
   district: ?string,
   responses: Array<Object>,
-  draft?: boolean,
-};
+  draft: boolean,
+|};
 
 const catchServerSubmitErrors = (e: Object) => {
   if (
@@ -92,17 +91,10 @@ const catchServerSubmitErrors = (e: Object) => {
   throw e;
 };
 
-const onSubmit = (
-  values: FormValues,
-  dispatch: Dispatch,
-  { proposalForm, proposal, isSubmittingDraft }: Props,
-) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm, proposal }: Props) => {
   // Only used for the user view
   if (typeof values.addressText !== 'undefined') {
     delete values.addressText;
-  }
-  if (isSubmittingDraft) {
-    values.draft = true;
   }
 
   if (proposalForm.step) {
@@ -122,10 +114,10 @@ const onSubmit = (
   }
 };
 
-const validate = (values: FormValues, { proposalForm, features, isSubmittingDraft }: Props) => {
+const validate = (values: FormValues, { proposalForm, features }: Props) => {
   const errors = {};
 
-  if (isSubmittingDraft) {
+  if (values.draft) {
     if (!values.title) {
       errors.title = 'proposal.constraints.title_for_draft';
     } else if (values.title.length <= 2) {
@@ -255,16 +247,7 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      intl,
-      titleValue,
-      proposalForm,
-      features,
-      themes,
-      isSubmittingDraft,
-      proposal,
-      error,
-    } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, proposal, error } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -279,13 +262,9 @@ export class ProposalForm extends React.Component<Props, State> {
     );
     return (
       <form id="proposal-form">
-        {isSubmittingDraft ? (
-          <div className="mt-20">
-            <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
-          </div>
-        ) : (
+        <div className="mt-20">
           <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
-        )}
+        </div>
         {error && (
           <div className="alert__admin-form_server-failed-message">
             <i className="icon ion-ios-close-outline" />{' '}
@@ -502,7 +481,6 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
-  isSubmittingDraft: state.proposal.isSubmittingDraft,
 });
 
 const form = reduxForm({

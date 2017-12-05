@@ -88,7 +88,6 @@ describe('<ProposalForm />', () => {
         url: 'http://capco.dev',
       },
     },
-    isSubmittingDraft: true,
   };
 
   it('should render an edit form', () => {

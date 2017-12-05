@@ -82,7 +82,7 @@ type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-type SetSubmittingDraftAction = { type: 'proposal/SET_SUBMITTING_DRAFT', isDraft: boolean };
+export type SetSubmittingDraftAction = { type: 'proposal/SET_SUBMITTING_DRAFT', isDraft: boolean };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
 type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
@@ -128,7 +128,6 @@ export type State = {
   +isSubmittingFusion: boolean,
   +showDeleteModal: boolean,
   +isDeleting: boolean,
-  +isSubmittingDraft: boolean,
   +isVoting: boolean,
   +isLoading: boolean,
   +isEditing: boolean,
@@ -163,7 +162,6 @@ export const initialState: State = {
   isVoting: false,
   isLoading: true,
   isEditing: false,
-  isSubmittingDraft: false,
   showEditModal: false,
   order: 'random',
   filters: {},
@@ -895,8 +893,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, currentPaginationPage: action.page };
     case 'proposal/CHANGE_TERMS':
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
-    case 'proposal/SET_SUBMITTING_DRAFT':
-      return { ...state, isSubmittingDraft: action.isDraft };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':

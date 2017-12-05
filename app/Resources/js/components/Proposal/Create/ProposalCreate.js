@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import { isSubmitting, submit } from 'redux-form';
+import { isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalCreateButton from './ProposalCreateButton';
@@ -86,7 +86,6 @@ export class ProposalCreate extends React.Component<Props> {
               isSubmitting={submitting}
               onSubmit={() => {
                 dispatch(setSubmittingDraft(true));
-                dispatch(submit(formName));
               }}
               label="global.save_as_draft"
             />
@@ -96,7 +95,6 @@ export class ProposalCreate extends React.Component<Props> {
               isSubmitting={submitting}
               onSubmit={() => {
                 dispatch(setSubmittingDraft(false));
-                dispatch(submit(formName));
               }}
             />
           </Modal.Footer>

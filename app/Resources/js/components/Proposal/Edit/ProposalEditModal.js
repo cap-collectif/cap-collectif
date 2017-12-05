@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
-import { isSubmitting, submit } from 'redux-form';
+import { isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
@@ -12,7 +12,7 @@ import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalEditModalQueryResponse } from './__generated__/ProposalEditModalQuery.graphql';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
-import { closeEditProposalModal } from '../../../redux/modules/proposal';
+import { closeEditProposalModal, setSubmittingDraft } from '../../../redux/modules/proposal';
 
 const render = ({ props, error }: ReadyState & { props: ?ProposalEditModalQueryResponse }) => {
   if (error) {
@@ -88,7 +88,7 @@ class ProposalEditModal extends React.Component<Props> {
                 id="confirm-proposal-create-as-draft"
                 isSubmitting={submitting}
                 onSubmit={() => {
-                  dispatch(submit(formName));
+                  dispatch(setSubmittingDraft(true));
                 }}
                 label="global.save_as_draft"
               />
@@ -98,7 +98,7 @@ class ProposalEditModal extends React.Component<Props> {
               id="confirm-proposal-edit"
               isSubmitting={submitting}
               onSubmit={() => {
-                dispatch(submit(formName));
+                dispatch(setSubmittingDraft(false));
               }}
             />
           </Modal.Footer>
