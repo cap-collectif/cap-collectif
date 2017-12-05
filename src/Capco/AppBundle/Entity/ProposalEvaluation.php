@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\VersionableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,13 +20,8 @@ class ProposalEvaluation
 {
     use UuidTrait;
     use TimestampableTrait;
+    use VersionableTrait;
     use HasResponsesTrait;
-
-    /**
-     * @ORM\Version()
-     * @ORM\Column(name="version", type="integer")
-     */
-    protected $version;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
@@ -69,18 +65,6 @@ class ProposalEvaluation
     public function setProposal(Proposal $proposal): self
     {
         $this->proposal = $proposal;
-
-        return $this;
-    }
-
-    public function getVersion(): int
-    {
-        return $this->version;
-    }
-
-    public function setVersion(int $version): self
-    {
-        $this->version = $version;
 
         return $this;
     }

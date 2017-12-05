@@ -2,12 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Form\ProposalEvaluationType;
+use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\OptimisticLockException;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -60,6 +59,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 
         $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
 
+        unset($arguments['version']);
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
