@@ -50,6 +50,9 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
+    if (!evaluationForm) {
+      return null;
+    }
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -57,7 +60,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
             <FieldArray
               name="responses"
               component={renderResponses}
-              evaluationForm={evaluationForm}
+              questions={evaluationForm.questions}
               responses={responses}
               change={change}
               intl={intl}
