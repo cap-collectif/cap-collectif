@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import type { IntlShape } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
