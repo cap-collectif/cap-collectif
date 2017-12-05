@@ -1,26 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalForm /> should render a simple form without custom field 1`] = `
+exports[`<ProposalForm /> should render a create form 1`] = `
 <form
   id="proposal-form"
 >
   <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "description",
+    className="mt-20"
+  >
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Description 1",
+        }
       }
-    }
-  />
-  <InjectIntl(ReactBootstrapInput)
+    />
+  </div>
+  <Field
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
+        className=""
         glyph="refresh"
       />
     }
     autoComplete="off"
-    errors={null}
-    groupClassName=""
+    component={[Function]}
+    help="Title help"
     id="proposal_title"
     label={
       <FormattedMessage
@@ -28,9 +33,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         values={Object {}}
       />
     }
-    onChange={[Function]}
+    name="title"
     type="text"
-    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -51,7 +55,7 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
           values={
             Object {
               "matches": 0,
-              "terms": 2,
+              "terms": "",
             }
           }
         />
@@ -80,10 +84,10 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       </Button>
     </Panel>
   </Collapse>
-  <InjectIntl(ReactBootstrapInput)
+  <Field
     autoComplete="off"
-    errors={null}
-    groupClassName=""
+    component={[Function]}
+    help="Summary help"
     id="proposal_summary"
     label={
       <span>
@@ -103,17 +107,12 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
       </span>
     }
     maxLength="140"
+    name="summary"
     type="textarea"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": undefined,
-      }
-    }
   />
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  <Field
+    component={[Function]}
+    help="Theme help"
     id="proposal_theme"
     label={
       <span>
@@ -123,13 +122,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
+    name="theme"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.theme"
@@ -140,10 +134,10 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     >
       Theme 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  </Field>
+  <Field
+    component={[Function]}
+    help="Category help"
     id="proposal_category"
     label={
       <span>
@@ -153,13 +147,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
+    name="category"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.category"
@@ -170,11 +159,30 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     >
       Category 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    disabled={false}
-    errors={null}
-    groupClassName=""
+    <option
+      value="category2"
+    >
+      Category 2
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    formName="proposal-form"
+    help="Address help"
+    id="proposal_address"
+    label={
+      <FormattedMessage
+        id="proposal.map.form.field"
+        values={Object {}}
+      />
+    }
+    name="addressText"
+    placeholder="proposal.map.form.placeholder"
+    type="address"
+  />
+  <Field
+    component={[Function]}
+    help="District help"
     id="proposal_district"
     label={
       <span>
@@ -184,13 +192,8 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         />
       </span>
     }
+    name="district"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.district"
@@ -199,12 +202,17 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     <option
       value="district1"
     >
-      Disctrict 1
+      District 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+    <option
+      value="district2"
+    >
+      District 2
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    help="Description help"
     id="proposal_body"
     label={
       <FormattedMessage
@@ -214,16 +222,38 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
     }
     name="body"
     type="editor"
-    valueLink={
+  />
+  <FieldArray
+    component={[Function]}
+    intl={
       Object {
-        "requestChange": [Function],
-        "value": undefined,
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "now": [Function],
       }
     }
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "id": "question1",
+          "position": 1,
+          "private": true,
+          "required": true,
+          "title": "Lol",
+          "type": "text",
+        },
+      ]
+    }
   />
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  <Field
+    component={[Function]}
+    help="Illustration help"
     id="proposal_media"
     image={null}
     label={
@@ -243,38 +273,38 @@ exports[`<ProposalForm /> should render a simple form without custom field 1`] =
         </span>
       </span>
     }
+    name="media"
     type="image"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   />
 </form>
 `;
 
-exports[`<ProposalForm /> should render a simple form without custom field and district 1`] = `
+exports[`<ProposalForm /> should render an edit form 1`] = `
 <form
   id="proposal-form"
 >
   <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "description",
+    className="mt-20"
+  >
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Description 1",
+        }
       }
-    }
-  />
-  <InjectIntl(ReactBootstrapInput)
+    />
+  </div>
+  <Field
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
+        className=""
         glyph="refresh"
       />
     }
     autoComplete="off"
-    errors={null}
-    groupClassName=""
+    component={[Function]}
+    help="Title help"
     id="proposal_title"
     label={
       <FormattedMessage
@@ -282,9 +312,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         values={Object {}}
       />
     }
-    onChange={[Function]}
+    name="title"
     type="text"
-    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -305,7 +334,7 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
           values={
             Object {
               "matches": 0,
-              "terms": 2,
+              "terms": "",
             }
           }
         />
@@ -334,10 +363,10 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       </Button>
     </Panel>
   </Collapse>
-  <InjectIntl(ReactBootstrapInput)
+  <Field
     autoComplete="off"
-    errors={null}
-    groupClassName=""
+    component={[Function]}
+    help="Summary help"
     id="proposal_summary"
     label={
       <span>
@@ -357,17 +386,12 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
       </span>
     }
     maxLength="140"
+    name="summary"
     type="textarea"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": undefined,
-      }
-    }
   />
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  <Field
+    component={[Function]}
+    help="Theme help"
     id="proposal_theme"
     label={
       <span>
@@ -377,13 +401,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         />
       </span>
     }
+    name="theme"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.theme"
@@ -394,10 +413,10 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     >
       Theme 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  </Field>
+  <Field
+    component={[Function]}
+    help="Category help"
     id="proposal_category"
     label={
       <span>
@@ -407,13 +426,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         />
       </span>
     }
+    name="category"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.category"
@@ -424,11 +438,30 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     >
       Category 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    disabled={false}
-    errors={null}
-    groupClassName=""
+    <option
+      value="category2"
+    >
+      Category 2
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    formName="proposal-form"
+    help="Address help"
+    id="proposal_address"
+    label={
+      <FormattedMessage
+        id="proposal.map.form.field"
+        values={Object {}}
+      />
+    }
+    name="addressText"
+    placeholder="proposal.map.form.placeholder"
+    type="address"
+  />
+  <Field
+    component={[Function]}
+    help="District help"
     id="proposal_district"
     label={
       <span>
@@ -438,13 +471,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         />
       </span>
     }
+    name="district"
     type="select"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   >
     <FormattedMessage
       id="proposal.select.district"
@@ -453,12 +481,17 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     <option
       value="district1"
     >
-      Disctrict 1
+      District 1
     </option>
-  </InjectIntl(ReactBootstrapInput)>
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+    <option
+      value="district2"
+    >
+      District 2
+    </option>
+  </Field>
+  <Field
+    component={[Function]}
+    help="Description help"
     id="proposal_body"
     label={
       <FormattedMessage
@@ -468,18 +501,40 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
     }
     name="body"
     type="editor"
-    valueLink={
+  />
+  <FieldArray
+    component={[Function]}
+    intl={
       Object {
-        "requestChange": [Function],
-        "value": undefined,
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "now": [Function],
       }
     }
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "id": "question1",
+          "position": 1,
+          "private": true,
+          "required": true,
+          "title": "Lol",
+          "type": "text",
+        },
+      ]
+    }
   />
-  <InjectIntl(ReactBootstrapInput)
-    errors={null}
-    groupClassName=""
+  <Field
+    component={[Function]}
+    help="Illustration help"
     id="proposal_media"
-    image={null}
+    image="http://capco.dev"
     label={
       <span>
         <FormattedMessage
@@ -497,13 +552,8 @@ exports[`<ProposalForm /> should render a simple form without custom field and d
         </span>
       </span>
     }
+    name="media"
     type="image"
-    valueLink={
-      Object {
-        "requestChange": [Function],
-        "value": null,
-      }
-    }
   />
 </form>
 `;

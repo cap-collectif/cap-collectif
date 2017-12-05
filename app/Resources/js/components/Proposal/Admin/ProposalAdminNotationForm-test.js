@@ -9,7 +9,6 @@ describe('<ProposalAdminNotationForm />', () => {
     ...global.formMock,
     intl: global.intlMock,
     disabled: false,
-    evaluationForm: {},
     responses: [],
     proposal: {
       id: '1',
@@ -17,7 +16,9 @@ describe('<ProposalAdminNotationForm />', () => {
       likers: [{ id: '1', displayName: 'liker-1' }],
       evaluers: [{ id: 'group1', title: 'Group 1' }],
       form: {
-        evaluationForm: null,
+        evaluationForm: {
+          questions: [],
+        },
       },
       evaluation: {
         responses: [],

@@ -18,15 +18,15 @@ import {
 import type { ProposalCreateQueryResponse } from './__generated__/ProposalCreateQuery.graphql';
 import type { Dispatch, GlobalState } from '../../../types';
 
-const render = ({props, error}: ReadyState & { props: ?ProposalCreateQueryResponse }) => {
+const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResponse }) => {
   if (error) {
     return graphqlError;
   }
   if (props) {
-    return <ProposalForm proposalForm={props.proposalForm} proposal={null} />
+    return <ProposalForm proposalForm={props.proposalForm} proposal={null} />;
   }
   return null;
-}
+};
 
 type Props = {
   intl: IntlShape,
@@ -37,7 +37,6 @@ type Props = {
 };
 
 export class ProposalCreate extends React.Component<Props> {
-
   render() {
     const { intl, form, showModal, submitting, dispatch } = this.props;
     return (
@@ -106,7 +105,7 @@ export class ProposalCreate extends React.Component<Props> {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),

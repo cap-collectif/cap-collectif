@@ -2,20 +2,26 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { type FormProps, change, SubmissionError, reduxForm, Field, FieldArray, formValueSelector } from 'redux-form';
+import {
+  type FormProps,
+  change,
+  SubmissionError,
+  reduxForm,
+  Field,
+  FieldArray,
+  formValueSelector,
+} from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 // import { debounce } from 'lodash';
 import { Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
-// import ProposalMediaResponse from '../Page/ProposalMediaResponse';
-import query from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
+import query, {
+  type ProposalFormAvailableDistrictsForLocalisationQueryResponse,
+} from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
 import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import {
-  submitProposal,
-  updateProposal,
-} from '../../../redux/modules/proposal';
+import { submitProposal, updateProposal } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 import Fetcher from '../../../services/Fetcher';
 import { formatInitialResponsesValues, renderResponses } from '../Admin/ProposalAdminNotationForm';
@@ -27,7 +33,11 @@ const getAvailableDistrictsQuery = graphql`
     $latitude: Float!
     $longitude: Float!
   ) {
-    availableDistrictsForLocalisation(proposalFormId: $proposalFormId, latitude: $latitude, longitude: $longitude) {
+    availableDistrictsForLocalisation(
+      proposalFormId: $proposalFormId
+      latitude: $latitude
+      longitude: $longitude
+    ) {
       id
       name
     }
@@ -41,31 +51,46 @@ type LatLng = {
 
 export const formName = 'proposal-form';
 
-type Props = FormProps & {
-  intl: IntlShape,
-  currentStepId: string,
-  proposalForm: ProposalForm_proposalForm,
-  themes: Array<Object>,
-  isSubmittingDraft: boolean,
-  dispatch: Dispatch,
-  features: FeatureToggles,
-  proposal: ?ProposalForm_proposal,
-};
+type RelayProps = {|
+  +proposalForm: ProposalForm_proposalForm,
+  +proposal: ?ProposalForm_proposal,
+|};
+
+type Props = RelayProps &
+  FormProps & {
+    intl: IntlShape,
+    themes: Array<Object>,
+    isSubmittingDraft: boolean,
+    dispatch: Dispatch,
+    features: FeatureToggles,
+    titleValue: ?string,
+    addressValue: ?string,
+  };
 
 type FormValues = {
-  title?: ?string,
-  summary?: ?string,
-  body?: ?string,
-  address?: ?string,
-  addresstext?: ?string,
-  theme?: ?string,
-  district?: ?string,
-  responses?: ?Array<Object>
+  title: ?string,
+  summary: ?string,
+  body: ?string,
+  address: ?string,
+  addresstext: ?string,
+  theme: ?string,
+  district: ?string,
+  responses: Array<Object>,
+  draft?: boolean,
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, {proposalForm, proposal}: Props) => {
+const onSubmit = (
+  values: FormValues,
+  dispatch: Dispatch,
+  { proposalForm, proposal, isSubmittingDraft }: Props,
+) => {
   // Only used for the user view
-  delete values.addressText;
+  if (values.addressText) {
+    delete values.addressText;
+  }
+  if (isSubmittingDraft) {
+    values.draft = true;
+  }
 
   // // We must remove Files to upload from variables and put them in uploadables
   // const uploadables = {};
@@ -89,31 +114,33 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {proposalForm, proposa
   // });
 
   const catchErrors = (e: Object) => {
-    if (e.response && e.response.errors && e.response.errors.errors.includes('global.address_not_in_zone')) {
+    if (
+      e.response &&
+      e.response.errors &&
+      e.response.errors.errors.includes('global.address_not_in_zone')
+    ) {
       throw new SubmissionError({
         address: 'proposal.constraints.address_in_zone',
-        _error: 'Creation failed!'
+        _error: 'Creation failed!',
       });
     }
     throw e;
+  };
+
+  if (proposalForm.step) {
+    if (proposal) {
+      return updateProposal(dispatch, proposalForm.id, proposal.id, values, proposalForm.step.id);
+      // const variables = {
+      //   input: { ...values, id: props.proposal.id },
+      // };
+      //
+      // return ChangeProposalContentMutation.commit(variables, uploadables);
+    }
+
+    return submitProposal(dispatch, proposalForm.id, values, proposalForm.step.id).catch(
+      catchErrors,
+    );
   }
-
-  if (proposal) {
-    return updateProposal(dispatch, proposalForm.id, proposal.id, values, proposalForm.step.id);
-    // const variables = {
-    //   input: { ...values, id: props.proposal.id },
-    // };
-    //
-    // return ChangeProposalContentMutation.commit(variables, uploadables);
-  }
-
-  return submitProposal(
-    dispatch,
-    proposalForm.id,
-    values,
-    proposalForm.step.id
-  ).catch(catchErrors);
-
   // return CreateProposalMutation.commit({
   //   input: {
   //     ...values,
@@ -121,7 +148,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {proposalForm, proposa
   //     //   proposalForm.draft = nextProps.isSubmittingDraft;
   //   },
   // }, uploadables).then();
-}
+};
 
 const validate = (values: FormValues, { proposalForm, features, isSubmittingDraft }: Props) => {
   const errors = {};
@@ -129,8 +156,7 @@ const validate = (values: FormValues, { proposalForm, features, isSubmittingDraf
   if (isSubmittingDraft) {
     if (!values.title) {
       errors.title = 'proposal.constraints.title_for_draft';
-    }
-    else if (values.title.length <= 2) {
+    } else if (values.title.length <= 2) {
       errors.title = 'proposal.constraints.title_min_value_for_draft';
     }
     return errors;
@@ -156,20 +182,33 @@ const validate = (values: FormValues, { proposalForm, features, isSubmittingDraf
   ) {
     errors.category = 'proposal.constraints.category';
   }
-  if (features.districts && proposalForm.usingDistrict && proposalForm.districtMandatory && !values.district) {
+  if (
+    features.districts &&
+    proposalForm.usingDistrict &&
+    proposalForm.districtMandatory &&
+    !values.district
+  ) {
     errors.district = 'proposal.constraints.district';
   }
   if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
-  proposalForm.questions.map(field => {
+  const responsesError = [];
+  proposalForm.questions.map((field, index) => {
     if (field.required) {
-      const response = values.responses && values.responses.filter(res => res && res.question.id === field.id)[0];
-      if (!response) {
-        errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
+      const response = values.responses.filter(res => res && res.question === field.id)[0];
+      if (field.type === 'medias') {
+        if (!response || response.value.length === 0) {
+          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+        }
+      } else if (!response || !response.value) {
+        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
       }
     }
   });
+  if (responsesError.length) {
+    errors.responses = responsesError;
+  }
   return errors;
 };
 
@@ -181,30 +220,33 @@ type State = {
 };
 
 export class ProposalForm extends React.Component<Props, State> {
-
   constructor(props: Props) {
     super(props);
     this.state = {
       titleSuggestions: [],
       isLoadingTitleSuggestions: false,
       districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
-      address: props.proposal && props.proposal.address ? JSON.parse(props.proposal.address)[0].formatted_address : '',
+      address:
+        props.proposal && props.proposal.address
+          ? JSON.parse(props.proposal.address)[0].formatted_address
+          : '',
     };
   }
 
-  componentWillReceiveProps({titleValue, addressValue}: Props) {
-    const { currentStepId, proposalForm } = this.props;
+  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
     if (this.props.titleValue !== titleValue) {
-        this.setState({ titleSuggestions: [] });
-        if (titleValue && titleValue.length > 3) {
-          this.setState({ isLoadingTitleSuggestions: true });
-          loadSuggestions(currentStepId, titleValue).then(res => {
-              this.setState({
-                titleSuggestions: res.proposals,
-                isLoadingTitleSuggestions: false,
-              });
+      this.setState({ titleSuggestions: [] });
+      if (titleValue && titleValue.length > 3) {
+        this.setState({ isLoadingTitleSuggestions: true });
+        if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
+          loadSuggestions(this.props.proposalForm.step.id, titleValue).then(res => {
+            this.setState({
+              titleSuggestions: res.proposals,
+              isLoadingTitleSuggestions: false,
+            });
           });
         }
+      }
     }
     if (this.props.addressValue !== addressValue) {
       if (proposalForm.proposalInAZoneRequired && addressValue) {
@@ -218,9 +260,6 @@ export class ProposalForm extends React.Component<Props, State> {
   // }
 
   retrieveDistrictForLocation(location: LatLng, isEditMode: ?boolean = false) {
-    this.setState({
-      loadingDistricts: true,
-    });
     Fetcher.graphql({
       operationName: 'ProposalFormAvailableDistrictsForLocalisationQuery',
       query: query.text,
@@ -229,23 +268,40 @@ export class ProposalForm extends React.Component<Props, State> {
         latitude: location.lat,
         longitude: location.lng,
       },
-    }).then((response: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
+    }).then((response: { data: ProposalFormAvailableDistrictsForLocalisationQueryResponse }) => {
       const districtIdsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
       if (!isEditMode) {
-        this.props.dispatch(change(formName, 'district', districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0]))
+        this.props.dispatch(
+          change(
+            formName,
+            'district',
+            districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
+          ),
+        );
       }
       this.setState({
         districtIdsFilteredByAddress,
-        loadingDistricts: false,
       });
     });
   }
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, isSubmittingDraft, proposal } = this.props;
-    const { districtIdsFilteredByAddress, isLoadingTitleSuggestions, titleSuggestions } = this.state;
+    const {
+      intl,
+      titleValue,
+      proposalForm,
+      features,
+      themes,
+      isSubmittingDraft,
+      proposal,
+    } = this.props;
+    const {
+      districtIdsFilteredByAddress,
+      isLoadingTitleSuggestions,
+      titleSuggestions,
+    } = this.state;
 
     const optional = (
       <span className="excerpt">
@@ -271,7 +327,10 @@ export class ProposalForm extends React.Component<Props, State> {
           help={proposalForm.titleHelpText}
           label={<FormattedMessage id="proposal.title" />}
           addonAfter={
-            <Glyphicon glyph="refresh" className={isLoadingTitleSuggestions ? "glyphicon-spin" : ""} />
+            <Glyphicon
+              glyph="refresh"
+              className={isLoadingTitleSuggestions ? 'glyphicon-spin' : ''}
+            />
           }
         />
         <Collapse in={titleSuggestions.length > 0}>
@@ -375,18 +434,18 @@ export class ProposalForm extends React.Component<Props, State> {
               })}
             </Field>
           )}
-          {proposalForm.usingAddress &&
-            <Field
-              id="proposal_address"
-              component={component}
-              type="address"
-              help={proposalForm.addressHelpText}
-              name="addressText"
-              formName={formName}
-              label={<FormattedMessage id="proposal.map.form.field" />}
-              placeholder="proposal.map.form.placeholder"
-            />
-        }
+        {proposalForm.usingAddress && (
+          <Field
+            id="proposal_address"
+            component={component}
+            type="address"
+            help={proposalForm.addressHelpText}
+            name="addressText"
+            formName={formName}
+            label={<FormattedMessage id="proposal.map.form.field" />}
+            placeholder="proposal.map.form.placeholder"
+          />
+        )}
         {features.districts &&
           proposalForm.usingDistrict &&
           proposalForm.districts.length > 0 && (
@@ -440,19 +499,10 @@ export class ProposalForm extends React.Component<Props, State> {
           }
           help={proposalForm.illustrationHelpText}
         />
-{/*
-          const medias =
-            field.type === 'medias' && proposal.responses.length > 0
-              ? proposal.responses.filter(response => {
-                  return response.field.id === field.id;
-                })
-              : [];
-              medias={medias.length > 0 ? medias[0].medias : []}
- */}
       </form>
     );
   }
-};
+}
 
 const selector = formValueSelector(formName);
 
@@ -465,9 +515,13 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     district: proposal && proposal.district ? proposal.district.id : null,
     category: proposal && proposal.category ? proposal.category.id : null,
     media: proposal ? proposal.media : null,
-    addressText: proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
-    address: proposal && proposal.address || null,
-    responses: formatInitialResponsesValues(proposalForm.questions, proposal ? proposal.responses : []),
+    addressText:
+      proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
+    address: (proposal && proposal.address) || null,
+    responses: formatInitialResponsesValues(
+      proposalForm.questions,
+      proposal ? proposal.responses : [],
+    ),
   },
   titleValue: selector(state, 'title'),
   addressValue: selector(state, 'address'),
@@ -485,76 +539,75 @@ const form = reduxForm({
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
-export default createFragmentContainer(
-  container,
-  {
-    proposal: graphql`
-      fragment ProposalForm_proposal on Proposal {
-        id
-        title
-        body
-        summary
-        address
-        responses {
-          question {
-            id
-          }
-          ... on ValueResponse {
-            value
-          }
-          ... on MediaResponse {
-            medias {
-              id
-              name
-              size
-              url
-            }
-          }
-        }
-        media {
+export default createFragmentContainer(container, {
+  proposal: graphql`
+    fragment ProposalForm_proposal on Proposal {
+      id
+      title
+      body
+      summary
+      address
+      responses {
+        question {
           id
-          url
+        }
+        ... on ValueResponse {
+          value
+        }
+        ... on MediaResponse {
+          medias {
+            id
+            name
+            size
+            url
+          }
         }
       }
-    `,
-    proposalForm: graphql`
-      fragment ProposalForm_proposalForm on ProposalForm {
+      media {
         id
-        description
-        step {
-          id
-        }
-        districts {
-          id
-          name
-        }
-        categories {
-          id
-          name
-        }
-        questions {
-          id
-          title
-          type
-          position
-          private
-          required
-        }
-        usingDistrict
-        districtMandatory
-        districtHelpText
-        usingThemes
-        themeMandatory
-        usingCategories
-        categoryMandatory
-        categoryHelpText
-        usingAddress
-        titleHelpText
-        summaryHelpText
-        themeHelpText
-        illustrationHelpText
-        descriptionHelpText
-        proposalInAZoneRequired
-    }`
-  }
-);
+        url
+      }
+    }
+  `,
+  proposalForm: graphql`
+    fragment ProposalForm_proposalForm on ProposalForm {
+      id
+      description
+      step {
+        id
+      }
+      districts {
+        id
+        name
+      }
+      categories {
+        id
+        name
+      }
+      questions {
+        id
+        title
+        type
+        position
+        private
+        required
+      }
+      usingDistrict
+      districtMandatory
+      districtHelpText
+      usingThemes
+      themeMandatory
+      usingCategories
+      categoryMandatory
+      categoryHelpText
+      usingAddress
+      titleHelpText
+      summaryHelpText
+      themeHelpText
+      illustrationHelpText
+      descriptionHelpText
+      addressHelpText
+      proposalInAZoneRequired
+    }
+  `,
+});

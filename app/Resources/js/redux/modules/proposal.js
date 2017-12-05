@@ -723,6 +723,8 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 }
 
 export type ProposalAction =
+  | OpenCreateModalAction
+  | SetSubmittingDraftAction
   | FetchVotesRequestedAction
   | SubmitFusionFormAction
   | ChangeFilterAction

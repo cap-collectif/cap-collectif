@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import type { Connector } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import type { Dispatch } from '../../types';
 
 type PassedProps = {
   onChange: Function,
@@ -15,7 +16,7 @@ type PassedProps = {
   disabled: boolean,
 };
 type DefaultProps = { disabled: boolean };
-type Props = PassedProps & DefaultProps & { updateAddressValue: Function };
+type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
 const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
   <div>
@@ -96,8 +97,8 @@ class Address extends React.Component<Props> {
   }
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-  updateAddressValue: (value) => {
+const mapDispatchToProps = (dispatch: Dispatch, props: PassedProps) => ({
+  updateAddressValue: value => {
     dispatch(change(props.formName, 'address', value));
   },
 });

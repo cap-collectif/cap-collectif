@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {
@@ -227,13 +227,38 @@ export const renderResponses = ({
       switch (inputType) {
         case 'medias': {
           return (
-            <p className="text-danger" key={`${member}-container`}>
-              <Glyphicon bsClass="glyphicon" glyph="alert" />
-              <span className="ml-10">
-                <FormattedMessage id="evaluation_form.constraints.medias" />
-              </span>
-            </p>
+            <ProposalPrivateField key={key} show={field.private}>
+              <Field
+                name={`${member}.value`}
+                id={`reply-${field.id}`}
+                type="medias"
+                component={component}
+                help={field.helpText}
+                labelClassName="h4"
+                placeholder="reply.your_response"
+                label={label}
+                disabled={disabled}
+                // medias={}
+              />
+            </ProposalPrivateField>
           );
+          /*
+            const medias =
+            field.type === 'medias' && proposal.responses.length > 0
+            ? proposal.responses.filter(response => {
+            return response.field.id === field.id;
+          })
+          : [];
+          medias={medias.length > 0 ? medias[0].medias : []}
+           */
+          // return (
+          //   <p className="text-danger" key={`${member}-container`}>
+          //     <Glyphicon bsClass="glyphicon" glyph="alert" />
+          //     <span className="ml-10">
+          //       <FormattedMessage id="evaluation_form.constraints.medias" />
+          //     </span>
+          //   </p>
+          // );
         }
         default: {
           let response;
@@ -401,46 +426,61 @@ const form = injectIntl(
   })(ProposalAdminNotationForm),
 );
 
-export const formatInitialResponsesValues = (questions, responses) => {
+// type Responses = $ReadOnlyArray<?{|
+//   +question: {|
+//     +id: string,
+//     +type: "text" | "textarea" | "editor" | "radio" | "select" | "checkbox" | "ranking" | "medias" | "button",
+//   |},
+//   +value?: ?string,
+// |}>;
+
+export const formatInitialResponsesValues = (questions: any, responses: any) => {
   return questions.map(question => {
-      const response = responses.filter(res => res && res.question.id === question.id)[0];
-      if (response) {
-        if (response.value) {
-          let responseValue = response.value;
+    const response = responses.filter(res => res && res.question.id === question.id)[0];
+    if (response) {
+      if (response.value) {
+        let responseValue = response.value;
 
-          const questionType = response.question.type;
-          if (questionType === 'button') {
-            responseValue = JSON.parse(response.value).labels[0];
-          }
-
-          if (questionType === 'radio') {
-            responseValue = JSON.parse(response.value);
-          }
-
-          if (questionType === 'ranking') {
-            responseValue = JSON.parse(response.value).labels;
-          }
-
-          if (questionType === 'checkbox') {
-            responseValue = JSON.parse(response.value);
-          }
-
-          return {
-            question: question.id,
-            value: responseValue,
-          };
+        const questionType = response.question.type;
+        if (questionType === 'button') {
+          responseValue = JSON.parse(response.value).labels[0];
         }
+
+        if (questionType === 'radio') {
+          responseValue = JSON.parse(response.value);
+        }
+
+        if (questionType === 'ranking') {
+          responseValue = JSON.parse(response.value).labels;
+        }
+
+        if (questionType === 'checkbox') {
+          responseValue = JSON.parse(response.value);
+        }
+
+        return {
+          question: question.id,
+          value: responseValue,
+        };
       }
-      return { question: question.id, value: null };
+      if (response.medias) {
+        return { question: question.id, value: response.medias };
+      }
+    }
+    if (question.type === 'medias') {
+      return { question: question.id, value: [] };
+    }
+    return { question: question.id, value: null };
   });
 };
 
 export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
   return !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
     ? undefined
-    : formatInitialResponsesValues(props.proposal.form.evaluationForm.questions,
-    props.proposal.evaluation ? props.proposal.evaluation.responses : []
-  );
+    : formatInitialResponsesValues(
+        props.proposal.form.evaluationForm.questions,
+        props.proposal.evaluation ? props.proposal.evaluation.responses : [],
+      );
 };
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
@@ -501,6 +541,14 @@ export default createFragmentContainer(
           }
           ... on ValueResponse {
             value
+          }
+          ... on MediaResponse {
+            medias {
+              id
+              name
+              url
+              size
+            }
           }
         }
       }
