@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   type FormProps,
@@ -263,6 +263,7 @@ export class ProposalForm extends React.Component<Props, State> {
       themes,
       isSubmittingDraft,
       proposal,
+      error,
     } = this.props;
     const {
       districtIdsFilteredByAddress,
@@ -284,6 +285,12 @@ export class ProposalForm extends React.Component<Props, State> {
           </div>
         ) : (
           <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
+        )}
+        {error && (
+          <div className="alert__admin-form_server-failed-message">
+            <i className="icon ion-ios-close-outline" />{' '}
+            <FormattedHTMLMessage id="global.error.server.form" />
+          </div>
         )}
         <Field
           name="title"
