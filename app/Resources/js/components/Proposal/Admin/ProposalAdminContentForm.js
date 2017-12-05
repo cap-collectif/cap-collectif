@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
@@ -10,10 +10,10 @@ import Fetcher from '../../../services/Fetcher';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
-import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import { renderResponses, formatInitialResponsesValues } from './ProposalAdminNotationForm';
 
 type FormValues = Object;
 type DefaultProps = void;
@@ -34,8 +34,6 @@ type Props = {
   valid: boolean,
   submitting: boolean,
 };
-type State = void;
-
 const formName = 'proposal-admin-edit';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
@@ -116,7 +114,7 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   return errors;
 };
 
-export class ProposalAdminContentForm extends Component<Props, State> {
+export class ProposalAdminContentForm extends React.Component<Props> {
   static defaultProps: DefaultProps;
   render() {
     const {
@@ -288,38 +286,7 @@ export class ProposalAdminContentForm extends Component<Props, State> {
               component={component}
               label={<FormattedMessage id="proposal.body" />}
             />
-            <FieldArray
-              name="responses"
-              component={({ fields }) => (
-                <div>
-                  {fields.map((field, index) => {
-                    const response = this.props.proposal.responses.filter(
-                      res => res && res.question.id === field.id,
-                    )[0];
-                    return (
-                      <div key={index}>
-                        <Field
-                          key={field.id}
-                          id={field.id}
-                          name={`responses.${index}.${field.type !== 'medias'
-                            ? 'value'
-                            : 'medias'}`}
-                          type={field.type}
-                          component={component}
-                          label={field.title}
-                        />
-                        {response &&
-                          response.medias &&
-                          response.medias.length && (
-                            <ProposalMediaResponse medias={response.medias} />
-                          )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              fields={form.questions}
-            />
+            <FieldArray name="responses" component={renderResponses} questions={form.questions} />
             <Field
               id="proposal_media"
               name="media"
@@ -375,25 +342,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       : undefined,
     address: proposal.address,
     media: null,
-    responses: proposal.form.questions.map(field => {
-      const response = proposal.responses.filter(res => res && res.question.id === field.id)[0];
-      if (response) {
-        if (response.value) {
-          return {
-            question: field.id,
-            value: response.value,
-          };
-        }
-        return {
-          question: field.id,
-          medias: response.medias,
-        };
-      }
-      if (field.type === 'medias') {
-        return { question: field.id, medias: [] };
-      }
-      return { question: field.id, value: null };
-    }),
+    responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
     addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
 });

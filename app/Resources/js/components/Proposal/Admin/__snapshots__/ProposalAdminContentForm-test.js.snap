@@ -136,7 +136,8 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       />
       <FieldArray
         component={[Function]}
-        fields={
+        name="responses"
+        questions={
           Array [
             Object {
               "id": "1",
@@ -148,7 +149,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             },
           ]
         }
-        name="responses"
       />
       <Field
         component={[Function]}
