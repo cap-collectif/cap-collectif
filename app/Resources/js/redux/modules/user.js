@@ -207,8 +207,10 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
     .catch(error => {
       const response = error.response;
       const errors: Object = { _error: 'Registration failed !' };
-      window.grecaptcha.reset();
-      dispatch(change('registration-form', 'captcha', null));
+      if (typeof window.grecaptcha !== 'undefined') {
+        window.grecaptcha.reset();
+        dispatch(change('registration-form', 'captcha', null));
+      }
       if (response.errors) {
         const children = response.errors.children;
         if (children.email.errors && children.email.errors.length > 0) {
