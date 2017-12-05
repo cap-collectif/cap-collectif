@@ -475,7 +475,7 @@ export const updateProposal = (
   id: Uuid,
   data: Object,
   currentStepId: string,
-) => {
+): Promise<*> => {
   const formData = new FormData();
   const flattenedData = flatten(data);
   Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));

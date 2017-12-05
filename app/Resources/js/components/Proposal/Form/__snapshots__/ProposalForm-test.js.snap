@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalForm /> should render a create form 1`] = `
-<form
+<Form
   id="proposal-form"
+  onSubmit={[Function]}
 >
   <div
     className="mt-20"
@@ -276,12 +277,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     name="media"
     type="image"
   />
-</form>
+</Form>
 `;
 
 exports[`<ProposalForm /> should render an edit form 1`] = `
-<form
+<Form
   id="proposal-form"
+  onSubmit={[Function]}
 >
   <div
     className="mt-20"
@@ -555,5 +557,5 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     name="media"
     type="image"
   />
-</form>
+</Form>
 `;

@@ -10,10 +10,11 @@ import {
   Field,
   FieldArray,
   formValueSelector,
+  Form,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { debounce } from 'lodash';
-import { Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
+import { Alert, Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import query, {
   type ProposalFormAvailableDistrictsForLocalisationQueryResponse,
@@ -78,15 +79,17 @@ type FormValues = {|
   draft: boolean,
 |};
 
-const catchServerSubmitErrors = (e: Object) => {
-  console.log(e.response);
+const catchServerSubmitErrors = (reason: Object) => {
   if (
-    e.response &&
-    e.response.errors &&
-    e.response.errors.errors.includes('global.address_not_in_zone')
+    reason &&
+    reason.response &&
+    reason.response.errors &&
+    reason.response.errors.errors &&
+    reason.response.errors.errors.length &&
+    reason.response.errors.errors.includes('global.address_not_in_zone')
   ) {
     throw new SubmissionError({
-      address: 'proposal.constraints.address_in_zone',
+      addressText: 'proposal.constraints.address_in_zone',
     });
   }
   throw new SubmissionError({
@@ -115,6 +118,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm, propos
       catchServerSubmitErrors,
     );
   }
+  throw new Error('No collect step');
 };
 
 const validate = (values: FormValues, { proposalForm, features }: Props) => {
@@ -250,7 +254,16 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, proposal, error } = this.props;
+    const {
+      intl,
+      handleSubmit,
+      titleValue,
+      proposalForm,
+      features,
+      themes,
+      proposal,
+      error,
+    } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -264,15 +277,15 @@ export class ProposalForm extends React.Component<Props, State> {
       </span>
     );
     return (
-      <form id="proposal-form">
+      <Form id="proposal-form" onSubmit={handleSubmit}>
         <div className="mt-20">
           <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
         </div>
         {error && (
-          <div className="alert__admin-form_server-failed-message">
+          <Alert bsStyle="danger">
             <i className="icon ion-ios-close-outline" />{' '}
             <FormattedHTMLMessage id="global.error.server.form" />
-          </div>
+          </Alert>
         )}
         <Field
           name="title"
@@ -455,7 +468,7 @@ export class ProposalForm extends React.Component<Props, State> {
           }
           help={proposalForm.illustrationHelpText}
         />
-      </form>
+      </Form>
     );
   }
 }
