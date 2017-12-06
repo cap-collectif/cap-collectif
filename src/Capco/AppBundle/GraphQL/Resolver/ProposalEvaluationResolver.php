@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use GraphQL\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
