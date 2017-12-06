@@ -28,7 +28,7 @@ ChangeProposalContentInput:
               type: "String"
               description: "The district id (feature districts enabled)"
             address:
-              type: "String"
+              type: "Address"
               description: "The address geocoded by google"
             responses:
               type: "[ResponseInput]"
@@ -36,3 +36,6 @@ ChangeProposalContentInput:
             deleteCurrentMedia:
               type: "Boolean"
               description: "Set this to true to delete the current media"
+            media:
+              type: "ID"
+              description: "Current media id"

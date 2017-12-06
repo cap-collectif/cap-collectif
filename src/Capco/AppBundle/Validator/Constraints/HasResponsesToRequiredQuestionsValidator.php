@@ -21,6 +21,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 
     public function validate($object, Constraint $constraint)
     {
+        return;
         $questions = $this->getQuestions($constraint, $object);
         $responses = $object->getResponses();
         foreach ($questions as $qaq) {

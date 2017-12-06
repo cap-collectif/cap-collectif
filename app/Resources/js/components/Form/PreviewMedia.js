@@ -9,12 +9,10 @@ type CurrentMedia = {
   url: string,
 };
 
-type NewMedia = File;
-
 type Props = {
   currentMedias: Array<CurrentMedia>,
-  newMedias: Array<NewMedia>,
-  onRemoveMedia: (newMedia: NewMedia) => void,
+  newMedias: Array<CurrentMedia>,
+  onRemoveMedia: (newMedia: CurrentMedia) => void,
 };
 
 export class PreviewMedia extends PureComponent<Props> {

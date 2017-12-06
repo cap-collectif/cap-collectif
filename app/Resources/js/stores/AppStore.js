@@ -80,18 +80,22 @@ export default function configureStore(initialState: Object): Store {
             return state;
         }
       },
-      'proposal-form': (state, action: SetSubmittingDraftAction) => {
-        switch (action.type) {
-          case 'proposal/SET_SUBMITTING_DRAFT':
-            return {
-              ...state,
-              values: { ...state.values, draft: action.isDraft },
-              // triggerSubmit: true,
-            };
-          default:
-            return state;
-        }
-      },
+      // 'proposal-form': (state, action: SetSubmittingDraftAction) => {
+      //   switch (action.type) {
+      //     case 'proposal/SET_SUBMITTING_DRAFT': {
+      //       // const fields = Object.keys(state.values).forEach(function(key){ return  {[key]: {touched: true} }});
+      //       return {
+      //         ...state,
+      //         values: { ...state.values, draft: action.isDraft },
+      //         fields: { ...state.fields, category: {touched: true} },
+      //         anyTouched: true,
+      //         // triggerSubmit: true,
+      //       }
+      //     }
+      //     default:
+      //       return state;
+      //   }
+      // },
     }),
   };
 

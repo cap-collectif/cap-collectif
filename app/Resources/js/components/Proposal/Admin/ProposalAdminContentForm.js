@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { type FormProps, reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
@@ -23,15 +23,9 @@ type Props = {
   proposal: ProposalAdminContentForm_proposal,
   themes: Array<Object>,
   features: FeatureToggles,
-  handleSubmit: () => void,
   intl: IntlShape,
   isSuperAdmin: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-  pristine: boolean,
-  invalid: boolean,
-  valid: boolean,
-  submitting: boolean,
+  ...FormProps,
 };
 const formName = 'proposal-admin-edit';
 
@@ -39,25 +33,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   // Only used for the user view
   delete values.addressText;
 
-  // We must remove Files to upload from variables and put them in uploadables
-  const uploadables = {};
-  if (values.media instanceof File) {
-    // User wants to upload a new media
-    uploadables.media = values.media;
-  }
-  delete values.media;
-
-  values.responses = values.responses.filter(res => {
-    if (!res.medias) {
-      // We only send value responses
-      return true;
+  const questions = props.proposal.form.questions;
+  values.responses = values.responses.map(res => {
+    const question = questions.filter(q => res.question === q.id)[0];
+    if (question.type !== 'medias') {
+      return res;
     }
-    for (const media of res.medias) {
-      if (media instanceof File) {
-        uploadables[`responses_${res.question}`] = media;
-      }
-    }
-    return false;
+    return {...res, medias: res.value ? res.value : [], value: undefined};
   });
 
   // Only super admin can edit author
@@ -69,7 +51,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: { ...values, id: props.proposal.id },
   };
 
-  return ChangeProposalContentMutation.commit(variables, uploadables);
+  return ChangeProposalContentMutation.commit(variables);
 };
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
@@ -128,6 +110,7 @@ export class ProposalAdminContentForm extends React.Component<Props> {
       isSuperAdmin,
       themes,
       handleSubmit,
+      intl,
     } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
@@ -285,7 +268,7 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               component={component}
               label={<FormattedMessage id="proposal.body" />}
             />
-            <FieldArray name="responses" component={renderResponses} questions={form.questions} />
+            <FieldArray intl={intl} name="responses" component={renderResponses} questions={form.questions} />
             <Field
               id="proposal_media"
               name="media"

@@ -10,7 +10,6 @@ import {
   Field,
   FieldArray,
   formValueSelector,
-  Form,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { debounce } from 'lodash';
@@ -97,7 +96,11 @@ const catchServerSubmitErrors = (reason: Object) => {
   });
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm, proposal }: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  if (validate(values, props).length > 0) {
+    return;
+  }
+  const { proposalForm, proposal } = props;
   // Only used for the user view
   if (typeof values.addressText !== 'undefined') {
     delete values.addressText;
@@ -130,6 +133,7 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
     } else if (values.title.length <= 2) {
       errors.title = 'proposal.constraints.title_min_value_for_draft';
     }
+    console.log(errors);
     return errors;
   }
 
@@ -166,6 +170,7 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
   }
   const responsesError = [];
   proposalForm.questions.map((field, index) => {
+    responsesError[index] = {};
     if (field.required) {
       const response = values.responses.filter(res => res && res.question === field.id)[0];
       if (field.type === 'medias') {
@@ -180,6 +185,7 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
   if (responsesError.length) {
     errors.responses = responsesError;
   }
+  console.log(errors);
   return errors;
 };
 
@@ -225,7 +231,7 @@ export class ProposalForm extends React.Component<Props, State> {
     }
   }, 500);
 
-  retrieveDistrictForLocation(location: LatLng, isEditMode: ?boolean = false) {
+  retrieveDistrictForLocation(location: LatLng) {
     Fetcher.graphql({
       operationName: 'ProposalFormAvailableDistrictsForLocalisationQuery',
       query: query.text,
@@ -238,7 +244,8 @@ export class ProposalForm extends React.Component<Props, State> {
       const districtIdsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
-      if (!isEditMode) {
+      // Select a district if not editing
+      if (!this.props.proposal) {
         this.props.dispatch(
           change(
             formName,
@@ -277,7 +284,7 @@ export class ProposalForm extends React.Component<Props, State> {
       </span>
     );
     return (
-      <Form id="proposal-form" onSubmit={handleSubmit}>
+      <form id="proposal-form">
         <div className="mt-20">
           <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
         </div>
@@ -468,7 +475,7 @@ export class ProposalForm extends React.Component<Props, State> {
           }
           help={proposalForm.illustrationHelpText}
         />
-      </Form>
+      </form>
     );
   }
 }
@@ -477,6 +484,7 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
   initialValues: {
+    draft: proposal ? proposal.publicationStatus === "DRAFT" : true,
     title: proposal ? proposal.title : null,
     summary: proposal ? proposal.summary : null,
     body: proposal ? proposal.body : null,
@@ -515,6 +523,7 @@ export default createFragmentContainer(container, {
       body
       summary
       address
+      publicationStatus
       responses {
         question {
           id

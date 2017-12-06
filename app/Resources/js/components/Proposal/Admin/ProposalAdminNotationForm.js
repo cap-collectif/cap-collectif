@@ -237,27 +237,9 @@ export const renderResponses = ({
                 placeholder="reply.your_response"
                 label={label}
                 disabled={disabled}
-                // medias={}
               />
             </ProposalPrivateField>
           );
-          /*
-            const medias =
-            field.type === 'medias' && proposal.responses.length > 0
-            ? proposal.responses.filter(response => {
-            return response.field.id === field.id;
-          })
-          : [];
-          medias={medias.length > 0 ? medias[0].medias : []}
-           */
-          // return (
-          //   <p className="text-danger" key={`${member}-container`}>
-          //     <Glyphicon bsClass="glyphicon" glyph="alert" />
-          //     <span className="ml-10">
-          //       <FormattedMessage id="evaluation_form.constraints.medias" />
-          //     </span>
-          //   </p>
-          // );
         }
         default: {
           let response;
@@ -437,10 +419,10 @@ export const formatInitialResponsesValues = (questions: any, responses: any) => 
   return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
     if (response) {
-      if (response.value) {
-        let responseValue = response.value;
+      let responseValue = response.value;
+      if (responseValue) {
+        const questionType = question.type;
 
-        const questionType = response.question.type;
         if (questionType === 'button') {
           responseValue = JSON.parse(response.value).labels[0];
         }

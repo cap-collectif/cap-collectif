@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import { isSubmitting, submit, isPristine } from 'redux-form';
+import { isSubmitting, change, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalCreateButton from './ProposalCreateButton';
@@ -87,8 +87,12 @@ export class ProposalCreate extends React.Component<Props> {
               isSubmitting={submitting}
               disabled={pristine}
               onSubmit={() => {
-                dispatch(setSubmittingDraft(true));
-                dispatch(submit(formName));
+                dispatch(change(formName, 'draft', true));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
               }}
               label="global.save_as_draft"
             />
@@ -98,8 +102,12 @@ export class ProposalCreate extends React.Component<Props> {
               isSubmitting={submitting}
               disabled={pristine}
               onSubmit={() => {
-                dispatch(setSubmittingDraft(false));
-                dispatch(submit(formName));
+                dispatch(change(formName, 'draft', false));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
               }}
             />
           </Modal.Footer>

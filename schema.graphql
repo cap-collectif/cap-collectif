@@ -12,6 +12,8 @@ type AddUsersInGroupPayload {
   clientMutationId: String
 }
 
+scalar Address
+
 # An argument
 type Argument implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
@@ -109,13 +111,16 @@ input ChangeProposalContentInput {
   district: String
 
   # The address geocoded by google
-  address: String
+  address: Address
 
   # The custom fields responses
   responses: [ResponseInput]
 
   # Set this to true to delete the current media
   deleteCurrentMedia: Boolean
+
+  # Current media id
+  media: ID
   clientMutationId: String
 }
 
@@ -1121,7 +1126,7 @@ interface Response {
 # A response
 input ResponseInput {
   # The value
-  value: String
+  value: JSON
 
   # The question id
   question: String!
