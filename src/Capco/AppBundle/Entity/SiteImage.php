@@ -66,6 +66,12 @@ class SiteImage
 
     /**
      * @var string
+     * @ORM\Column(name="help_text", type="string", nullable=true)
+     */
+    private $helpText;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="category", type="text")
      */
@@ -226,5 +232,15 @@ class SiteImage
     public function setIsSocialNetworkThumbnail(bool $isSocialNetworkThumbnail)
     {
         $this->isSocialNetworkThumbnail = $isSocialNetworkThumbnail;
+    }
+
+    public function getHelpText(): string
+    {
+        return $this->helpText;
+    }
+
+    public function setHelpText(string $helpText)
+    {
+        $this->helpText = $helpText;
     }
 }
