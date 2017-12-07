@@ -16,7 +16,6 @@ Capco\AppBundle\Entity\SiteImage:
         category: pages.homepage
         media: '@picto'
         isEnabled: true
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
         isSocialNetworkThumbnail: true
         position: 3
     SiteImage4:

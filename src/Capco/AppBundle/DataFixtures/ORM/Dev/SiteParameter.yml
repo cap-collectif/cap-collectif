@@ -171,6 +171,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 16
         position: 700
         type: 2
+    SiteParameter25:
+        keyname: ideas.pagination
+        category: pages.ideas
+        value: 20
+        position: 710
+        type: 2
     SiteParameter26:
         keyname: themes.pagination
         category: pages.themes
@@ -361,7 +367,7 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 9
 
     SiteParameterMetaDescription:
-        keyname: homepage.metadescription
+        keyname: homepage.meta_description
         category: pages.homepage
         value: Participez à l'élaboration de la loi
         position: 101
