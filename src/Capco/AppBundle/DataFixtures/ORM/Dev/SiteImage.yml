@@ -12,10 +12,11 @@ Capco\AppBundle\Entity\SiteImage:
         isEnabled: true
         position: 2
     SiteImage3:
-        keyname: image.picto
+        keyname: homepage.picto
         category: pages.homepage
         media: '@picto'
         isEnabled: true
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
         position: 3
     SiteImage4:
         keyname: image.default_avatar
@@ -35,3 +36,10 @@ Capco\AppBundle\Entity\SiteImage:
         media: '@Logo'
         isEnabled: true
         position: 1
+    SiteImageBlogPicto:
+        keyname: blog.picto
+        category: pages.blog
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 6

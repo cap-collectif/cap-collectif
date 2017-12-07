@@ -242,6 +242,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ''
         position: 771
         type: 1
+    SiteParameterBlogMetaDescription:
+        keyname: blog.metadescription
+        category: pages.blog
+        value: 'La méta description'
+        position: 761
+        type: 0
 
     SiteParameterScript:
         keyname: global.site.embed_js
@@ -333,6 +339,7 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: homepage.meta_description
         category: pages.homepage
         value: Participez à l'élaboration de la loi
+        helpText: Ajoutez une meta description si vous souhaitez remplacer la description utilisée sur les réseaux sociaux.
         position: 101
         type: 0
     SiteParameterShieldText:
