@@ -1,0 +1,38 @@
+CreateProposalInput:
+    type: relay-mutation-input
+    config:
+        description: "Create a proposal"
+        fields:
+            proposalFormId:
+                type: "ID!"
+                description: "The id of the form form proposal"
+            draft:
+                type: "Boolean!"
+                description: "If true will create a draft proposal"
+            title:
+                type: "String"
+                description: "The proposal title"
+            body:
+                type: "HTML"
+                description: "The proposal body"
+            summary:
+                type: "String"
+                description: "The proposal summary"
+            theme:
+              type: "ID"
+              description: "The theme id (feature themes must be enabled)"
+            category:
+              type: "ID"
+              description: "The category id"
+            district:
+              type: "ID"
+              description: "The district id (feature districts must be enabled)"
+            address:
+              type: "Address"
+              description: "The address geocoded by google"
+            responses:
+              type: "[ResponseInput]"
+              description: "The responses to the form questions"
+            media:
+              type: "ID"
+              description: "The media id to illustrate"

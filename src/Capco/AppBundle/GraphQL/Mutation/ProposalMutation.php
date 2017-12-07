@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
@@ -17,7 +18,6 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class ProposalMutation implements ContainerAwareInterface
@@ -237,13 +237,107 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, Request $request, User $user): array
+    private function formatResponses(&$responses) {
+      $questionRepo = $this->container->get('capco.abstract_question.repository');
+      foreach ($responses as &$response) {
+        $question = $questionRepo->find((int) $response['question']);
+        if (!$question) {
+            throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
+        }
+        $response['question'] = (int) $response['question'];
+        if ($question instanceof MediaQuestion) {
+            $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
+        } else {
+            $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
+        }
+      }
+    }
+
+    public function create(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
-        $questionRepo = $this->container->get('capco.abstract_question.repository');
+        $proposalFormRepo = $this->container->get('capco.proposal_form.repository');
+
+        $values = $input->getRawArguments();
+
+        $proposalForm = $proposalFormRepo->find($values['proposalFormId']);
+        if (!$proposalForm) {
+            $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
+            $logger->error($error);
+            throw new UserError($error);
+        }
+        if (!$proposalForm->canContribute() && !$user->isAdmin()) {
+          throw new UserError('You can no longer contribute to this collect step.');
+        }
+        unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
+
+        $isDraft = $values['draft'];
+        unset($values['draft']);
+
+        $this->formatResponses($values['responses']);
+
+        $proposal = (new Proposal())
+            ->setDraft($isDraft)
+            ->setAuthor($user)
+            ->setProposalForm($proposalForm)
+            ->setEnabled($isDraft ? false : true)
+        ;
+
+        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
+            $proposal->setStatus($defaultStatus);
+        }
+
+        $form = $formFactory->create(ProposalType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+            'validation_groups' => [$isDraft ? 'ProposalDraft' : 'Default'],
+        ]);
+
+        $logger->info('createProposal:' . json_encode($values, true));
+        $form->submit($values);
+
+        if (!$form->isValid()) {
+            $error = 'Input not valid : ' . (string) $form->getErrors(true, false);
+            $logger->error($error);
+            throw new UserError($error);
+        }
+
+        $em->persist($proposal);
+        $em->flush();
+
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+
+        // If not present, es listener will take some time to execute the refresh
+        // and, next time proposals will be fetched, the set of data will be outdated.
+        // Keep in mind that refresh should usually not be triggered manually.
+        $index = $this->container->get('fos_elastica.index');
+        $index->refresh();
+
+        if ($proposalForm->isNotifyingOnCreate()) {
+            $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
+        return ['proposal' => $proposal];
+    }
+
+    public function changeContent(Argument $input, User $user): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $logger = $this->container->get('logger');
+        $formFactory = $this->container->get('form.factory');
         $proposalRepo = $this->container->get('capco.proposal.repository');
+
+        if ($this->getUser() !== $proposal->getAuthor() && !$user->isAdmin()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if (!$proposal->canContribute()) {
+            throw new BadRequestHttpException('This proposal is no longer editable.');
+        }
 
         $values = $input->getRawArguments();
 
@@ -256,21 +350,11 @@ class ProposalMutation implements ContainerAwareInterface
 
         unset($values['id']); // This only usefull to retrieve the proposal
 
-        foreach ($values['responses'] as &$response) {
-          $question = $questionRepo->find((int) $response['question']);
-          if (!$question) {
-              throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
-          }
-          $response['question'] = (int) $response['question'];
-          if ($question instanceof MediaQuestion) {
-              $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
-          } else {
-              $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
-          }
-        }
+        $this->formatResponses($values['responses']);
 
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposal->getProposalForm(),
+            'validation_groups' => [$isDraft ? 'ProposalDraft' : 'Default'],
         ]);
 
         if (!$user->isSuperAdmin()) {
@@ -294,6 +378,17 @@ class ProposalMutation implements ContainerAwareInterface
 
         $proposal->setUpdateAuthor($user);
         $em->flush();
+
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
+        ) {
+            $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
 
         return ['proposal' => $proposal];
     }

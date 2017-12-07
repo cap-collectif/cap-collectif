@@ -89,6 +89,9 @@ input ChangeProposalContentInput {
   # The proposal id
   id: ID!
 
+  # Pass false to publishn, otherwise your proposal will be a draft
+  draft: Boolean!
+
   # The new proposal title
   title: String
 
@@ -115,9 +118,6 @@ input ChangeProposalContentInput {
 
   # The custom fields responses
   responses: [ResponseInput]
-
-  # Set this to true to delete the current media
-  deleteCurrentMedia: Boolean
 
   # Current media id
   media: ID
@@ -330,6 +330,48 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
+input CreateProposalInput {
+  # The id of the form form proposal
+  proposalFormId: ID!
+
+  # If true will create a draft proposal
+  draft: Boolean!
+
+  # The proposal title
+  title: String
+
+  # The proposal body
+  body: HTML
+
+  # The proposal summary
+  summary: String
+
+  # The theme id (feature themes must be enabled)
+  theme: ID
+
+  # The category id
+  category: ID
+
+  # The district id (feature districts must be enabled)
+  district: ID
+
+  # The address geocoded by google
+  address: Address
+
+  # The responses to the form questions
+  responses: [ResponseInput]
+
+  # The media id to illustrate
+  media: ID
+  clientMutationId: String
+}
+
+type CreateProposalPayload {
+  # The created proposal, if everything goes well !
+  proposal: Proposal
+  clientMutationId: String
+}
+
 scalar DateTime
 
 input DeleteGroupInput {
@@ -498,6 +540,7 @@ type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
+  createProposal(input: CreateProposalInput!): CreateProposalPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
@@ -1125,11 +1168,14 @@ interface Response {
 
 # A response
 input ResponseInput {
-  # The value
+  # If related to a value question
   value: JSON
 
   # The question id
   question: String!
+
+  # If related to a media question
+  medias: [ID!]
 }
 
 # A section

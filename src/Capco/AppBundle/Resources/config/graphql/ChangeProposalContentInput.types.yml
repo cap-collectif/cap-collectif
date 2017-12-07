@@ -1,11 +1,14 @@
 ChangeProposalContentInput:
     type: relay-mutation-input
     config:
-        description: "Can provide a file `media` or `responses.x` where x is the question id"
+        description: "Update a proposal"
         fields:
             id:
                 type: "ID!"
                 description: "The proposal id"
+            draft:
+                type: "Boolean!"
+                description: "Pass false to publishn, otherwise your proposal will be a draft"
             title:
                 type: "String"
                 description: "The new proposal title"
@@ -33,9 +36,6 @@ ChangeProposalContentInput:
             responses:
               type: "[ResponseInput]"
               description: "The custom fields responses"
-            deleteCurrentMedia:
-              type: "Boolean"
-              description: "Set this to true to delete the current media"
             media:
               type: "ID"
               description: "Current media id"

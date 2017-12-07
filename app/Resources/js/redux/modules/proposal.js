@@ -434,69 +434,6 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
     });
 };
 
-export const submitProposal = (
-  dispatch: Dispatch,
-  form: Uuid,
-  data: Object,
-  currentStepId: string,
-): Promise<*> => {
-  const formData = new FormData();
-  const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => {
-    if (flattenedData[key] !== -1) {
-      formData.append(key, flattenedData[key]);
-    }
-  });
-
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData).then(response => {
-    dispatch(closeCreateModal());
-
-    return response.json().then(proposal => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content: 'proposal.request.create.success',
-        },
-      });
-
-      if (!proposal.isDraft) {
-        addProposalInRandomResultsByStep(proposal, currentStepId);
-      }
-
-      window.location.href = proposal._links.show;
-    });
-  });
-};
-
-export const updateProposal = (
-  dispatch: Dispatch,
-  form: Uuid,
-  id: Uuid,
-  data: Object,
-  currentStepId: string,
-): Promise<*> => {
-  const formData = new FormData();
-  const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
-  return Fetcher.postFormData(
-    `/proposal_forms/${form}/proposals/${id}`,
-    formData,
-  ).then(response => {
-    dispatch(closeEditProposalModal());
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-    });
-    return response.json().then(proposal => {
-      if (!proposal.isDraft) {
-        addProposalInRandomResultsByStep(proposal, currentStepId);
-      }
-      location.reload();
-    });
-  });
-};
-
 export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<*, *, *> {
   const { stepId, proposalId } = action;
   try {

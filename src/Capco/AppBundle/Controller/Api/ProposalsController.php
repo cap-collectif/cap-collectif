@@ -74,17 +74,6 @@ class ProposalsController extends FOSRestController
     }
 
     /**
-     * Add a proposal.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Post a proposal",
-     *  statusCodes={
-     *    201 = "Returned when successful",
-     *    401 = "Proposal does not exist",
-     *  }
-     * )
-     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/proposal_forms/{proposal_form_id}/proposals")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -92,85 +81,7 @@ class ProposalsController extends FOSRestController
      */
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        if (!$proposalForm->canContribute() && !$user->isAdmin()) {
-            throw new BadRequestHttpException('You can no longer contribute to this collect step.');
-        }
-
-        $isDraft = filter_var($request->request->get('draft', false), FILTER_VALIDATE_BOOLEAN);
-        $request->request->remove('draft');
-
-        $proposal = (new Proposal())
-            ->setDraft($isDraft)
-            ->setAuthor($user)
-            ->setProposalForm($proposalForm)
-            ->setEnabled($isDraft ? false : true)
-        ;
-
-        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
-            $proposal->setStatus($defaultStatus);
-        }
-
-        $formClass = $user->isAdmin() ? ProposalFusionType::class : ProposalType::class;
-
-        $form = $this->createForm($formClass, $proposal, [
-            'proposalForm' => $proposalForm,
-            'validation_groups' => [$proposal->isDraft() ? 'ProposalDraft' : 'Default'],
-        ]);
-
-        if ($uploadedMedia = $request->files->get('media')) {
-            $media = $this->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
-            $proposal->setMedia($media);
-            $request->files->remove('media');
-        }
-
-        $request->files->remove('media');
-        $request->request->remove('media');
-        $request->request->remove('delete_media');
-
-        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
-        $unflattenFile = ArrayHelper::unflatten($request->files->all());
-
-        if (isset($unflattenRequest['responses']) && \is_array($unflattenRequest['responses'])) {
-            $unflattenRequest = $this->get('capco.media.response.media.manager')
-                ->resolveTypeOfResponses($unflattenRequest, $unflattenFile);
-        }
-
-        unset($unflattenRequest['delete_media'], $unflattenRequest['media']);
-
-        $form->submit($unflattenRequest, false);
-
-        if (!$form->isValid()) {
-            return $form;
-        }
-
-        $em->persist($proposal);
-        $em->flush();
-
-        if ($request->files->count() > 0) {
-            $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
-            $em->persist($proposal);
-            $em->flush();
-        }
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->get('fos_elastica.index');
-        $index->refresh();
-
-        if ($proposalForm->isNotifyingOnCreate()) {
-            $this->get('swarrot.publisher')->publish('proposal.create', new Message(
-              json_encode([
-                'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
-
-        return $proposal;
+        throw new BadRequestHttpException('Not supported anymore, use GraphQL mutation "createProposal" instead.');
     }
 
     /**
@@ -339,81 +250,7 @@ class ProposalsController extends FOSRestController
      */
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {
-        $user = $this->getUser();
-        if (!$proposal->canContribute()) {
-            throw new BadRequestHttpException('This proposal is no longer editable.');
-        }
-
-        $isDraft = filter_var($request->request->get('draft', false), FILTER_VALIDATE_BOOLEAN);
-        $request->request->remove('draft');
-
-        $proposal
-            ->setDraft($isDraft && !$proposal->isEnabled())
-            ->setEnabled($proposal->isDraft() ? false : true);
-
-        if ($this->getUser() !== $proposal->getAuthor()) {
-            throw $this->createAccessDeniedException();
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm(ProposalType::class, $proposal, [
-            'proposalForm' => $proposalForm,
-            'validation_groups' => [$isDraft ? 'ProposalDraft' : 'Default'],
-        ]);
-
-        if ('false' === $request->request->get('media')) {
-            if ($proposal->getMedia()) {
-                $em->remove($proposal->getMedia());
-                $proposal->setMedia();
-            }
-            $request->files->remove('delete_media');
-        } elseif ($uploadedMedia = $request->files->get('media')) {
-            if ($proposal->getMedia()) {
-                $em->remove($proposal->getMedia());
-            }
-            $media = $this->get('capco.media.manager')->createFileFromUploadedFile($uploadedMedia);
-            $proposal->setMedia($media);
-        }
-
-        $request->files->remove('media');
-        $request->request->remove('media');
-        $request->request->remove('delete_media');
-
-        $unflattenRequest = ArrayHelper::unflatten($request->request->all());
-
-        if ($request->files->count() > 0) {
-            $request = $this->get('capco.media.response.media.manager')->updateMediasFromRequest($proposal, $request);
-        }
-
-        if (isset($unflattenRequest['responses'])) {
-            $unflattenRequest = $this->get('capco.media.response.media.manager')
-                ->resolveTypeOfResponses($unflattenRequest, ArrayHelper::unflatten($request->files->all()));
-        }
-
-        $form->submit($unflattenRequest, false);
-
-        if ($form->isValid()) {
-            $proposal->setUpdateAuthor($user);
-
-            $em->persist($proposal);
-            $em->flush();
-
-            if (
-                $proposalForm->getNotificationsConfiguration()
-                && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
-            ) {
-                $this->get('swarrot.publisher')->publish('proposal.update', new Message(
-                  json_encode([
-                    'proposalId' => $proposal->getId(),
-                  ])
-                ));
-            }
-
-            return $proposal;
-        }
-
-        return $this->view($form->getErrors(true), Response::HTTP_BAD_REQUEST);
+        throw new BadRequestHttpException('Not supported anymore, use GraphQL mutation "changeProposalContent" instead.');
     }
 
     /**

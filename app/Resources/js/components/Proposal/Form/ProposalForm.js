@@ -21,10 +21,12 @@ import query, {
 import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import { submitProposal, updateProposal } from '../../../redux/modules/proposal';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 import Fetcher from '../../../services/Fetcher';
+import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
+import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import { formatInitialResponsesValues, renderResponses } from '../Admin/ProposalAdminNotationForm';
+import { validateProposalContent, formatSubmitResponses } from '../Admin/ProposalAdminContentForm';
 
 // eslint-disable-next-line
 const getAvailableDistrictsQuery = graphql`
@@ -97,31 +99,59 @@ const catchServerSubmitErrors = (reason: Object) => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  if (validate(values, props).length > 0) {
-    return;
-  }
   const { proposalForm, proposal } = props;
   // Only used for the user view
   if (typeof values.addressText !== 'undefined') {
     delete values.addressText;
   }
+  values.responses = formatSubmitResponses(values.responses, proposalForm.questions);
 
-  if (proposalForm.step) {
-    if (proposal) {
-      return updateProposal(
-        dispatch,
-        proposalForm.id,
-        proposal.id,
-        values,
-        proposalForm.step.id,
-      ).catch(catchServerSubmitErrors);
-    }
-
-    return submitProposal(dispatch, proposalForm.id, values, proposalForm.step.id).catch(
-      catchServerSubmitErrors,
-    );
+  if (!proposalForm.step) {
+    return;
   }
-  throw new Error('No collect step');
+  if (proposal) {
+        return ChangeProposalContentMutation
+          .commit({
+            input: { ...values, id: proposal.id },
+          })
+          .then((res: Object) => {
+            // dispatch(closeEditProposalModal());
+            // FluxDispatcher.dispatch({
+            //   actionType: UPDATE_ALERT,
+            //   alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
+            // });
+            // const proposal = res.propsal;
+            // if (!proposal.isDraft) {
+            //     addProposalInRandomResultsByStep(proposal, currentStepId);
+            // }
+            location.reload();
+          })
+          .catch(catchServerSubmitErrors)
+        ;
+  }
+
+  return CreateProposalMutation
+    .commit({
+      input: { ...values, proposalFormId: proposalForm.id },
+    })
+    .then((res: Object) => {
+      //dispatch(closeCreateModal());
+
+      //       FluxDispatcher.dispatch({
+      //         actionType: UPDATE_ALERT,
+      //         alert: {
+      //           bsStyle: 'success',
+      //           content: 'proposal.request.create.success',
+      //         },
+      //       });
+      //
+      //       if (!proposal.isDraft) {
+      //         addProposalInRandomResultsByStep(proposal, currentStepId);
+      //       }
+      //
+      location.href = proposal._links.show;
+    })
+    .catch(catchServerSubmitErrors);
 };
 
 const validate = (values: FormValues, { proposalForm, features }: Props) => {
@@ -133,60 +163,10 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
     } else if (values.title.length <= 2) {
       errors.title = 'proposal.constraints.title_min_value_for_draft';
     }
-    console.log(errors);
     return errors;
   }
 
-  if (!values.title || values.title.length <= 2) {
-    errors.title = 'proposal.constraints.title';
-  }
-  if (values.summary && (values.summary.length > 140 || values.summary.length < 2)) {
-    errors.summary = 'proposal.constraints.summary';
-  }
-  if (!values.body || values.body.length <= 2) {
-    errors.body = 'proposal.constraints.body';
-  }
-  if (proposalForm.usingAddress && !values.address) {
-    errors.addressText = 'proposal.constraints.address';
-  }
-  if (
-    proposalForm.categories.length &&
-    proposalForm.usingCategories &&
-    proposalForm.categoryMandatory &&
-    !values.category
-  ) {
-    errors.category = 'proposal.constraints.category';
-  }
-  if (
-    features.districts &&
-    proposalForm.usingDistrict &&
-    proposalForm.districtMandatory &&
-    !values.district
-  ) {
-    errors.district = 'proposal.constraints.district';
-  }
-  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
-    errors.theme = 'proposal.constraints.theme';
-  }
-  const responsesError = [];
-  proposalForm.questions.map((field, index) => {
-    responsesError[index] = {};
-    if (field.required) {
-      const response = values.responses.filter(res => res && res.question === field.id)[0];
-      if (field.type === 'medias') {
-        if (!response || response.value.length === 0) {
-          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
-        }
-      } else if (!response || !response.value) {
-        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
-      }
-    }
-  });
-  if (responsesError.length) {
-    errors.responses = responsesError;
-  }
-  console.log(errors);
-  return errors;
+  return validateProposalContent(values, proposalForm, features);
 };
 
 type State = {
@@ -263,7 +243,6 @@ export class ProposalForm extends React.Component<Props, State> {
   render() {
     const {
       intl,
-      handleSubmit,
       titleValue,
       proposalForm,
       features,

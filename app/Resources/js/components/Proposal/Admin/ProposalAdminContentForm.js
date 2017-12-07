@@ -29,35 +29,36 @@ type Props = {
 };
 const formName = 'proposal-admin-edit';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  // Only used for the user view
-  delete values.addressText;
-
-  const questions = props.proposal.form.questions;
-  values.responses = values.responses.map(res => {
+export const formatSubmitResponses = (responses: Array<Object>, questions: Array<Object>) => {
+  return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
     if (question.type !== 'medias') {
       return res;
     }
     return {...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined};
   });
+}
+
+const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
+  // Only used for the user view
+  delete values.addressText;
+
+  values.responses = formatSubmitResponses(values.responses, proposal.form.questions);
 
   // Only super admin can edit author
-  if (!props.isSuperAdmin) {
+  if (!isSuperAdmin) {
     delete values.author;
   }
 
   const variables = {
-    input: { ...values, id: props.proposal.id },
+    input: { ...values, id: proposal.id },
   };
 
   return ChangeProposalContentMutation.commit(variables);
 };
 
-const validate = (values: FormValues, { proposal, features }: Props) => {
+export const validateProposalContent = (values: Object, proposalForm: Object, features: FeatureToggles) => {
   const errors = {};
-  const form = proposal.form;
-
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
   }
@@ -67,32 +68,50 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   if (!values.body || values.body.length <= 2) {
     errors.body = 'proposal.constraints.body';
   }
-  if (form.usingAddress && !values.address) {
+  if (proposalForm.usingAddress && !values.address) {
     errors.addressText = 'proposal.constraints.address';
   }
   if (
-    form.categories.length &&
-    form.usingCategories &&
-    form.categoryMandatory &&
+    proposalForm.categories.length &&
+    proposalForm.usingCategories &&
+    proposalForm.categoryMandatory &&
     !values.category
   ) {
     errors.category = 'proposal.constraints.category';
   }
-  if (features.districts && form.usingDistrict && form.districtMandatory && !values.district) {
+  if (
+    features.districts &&
+    proposalForm.usingDistrict &&
+    proposalForm.districtMandatory &&
+    !values.district
+  ) {
+    errors.district = 'proposal.constraints.district';
+  }
+  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
-  if (features.themes && form.usingThemes && form.themeMandatory && !values.theme) {
-    errors.theme = 'proposal.constraints.theme';
-  }
-  form.questions.map(field => {
+  const responsesError = [];
+  proposalForm.questions.map((field, index) => {
+    responsesError[index] = {};
     if (field.required) {
-      const response = values.responses.filter(res => res && res.question.id === field.id)[0];
-      if (!response) {
-        errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
+      const response = values.responses.filter(res => res && res.question === field.id)[0];
+      if (field.type === 'medias') {
+        if (!response || response.value.length === 0) {
+          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+        }
+      } else if (!response || !response.value) {
+        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
       }
     }
   });
+  if (responsesError.length) {
+    errors.responses = responsesError;
+  }
   return errors;
+}
+
+const validate = (values: FormValues, { proposal, features }: Props) => {
+  return validateProposalContent(values, proposal.form, features);
 };
 
 export class ProposalAdminContentForm extends React.Component<Props> {
