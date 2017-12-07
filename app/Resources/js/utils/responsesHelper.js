@@ -62,27 +62,23 @@ export const formatSubmitResponses = (responses: Array<Object>, questions: Quest
 export const formatInitialResponsesValues = (questions: Questions, responses: ResponsesFromAPI) => {
   return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
+
+    // If we have a previous respnse format it
     if (response) {
-      let responseValue = null;
-      if (response.value) {
+      if (typeof response.value !== 'undefined' && response.value !== null) {
         const questionType = question.type;
 
+        // For some questions type we need to parse the JSON of previous value
+        let responseValue = response.value;
         if (questionType === 'button') {
           responseValue = JSON.parse(response.value).labels[0];
         }
-
-        if (questionType === 'radio') {
+        if (questionType === 'radio' || questionType === 'checkbox') {
           responseValue = JSON.parse(response.value);
         }
-
         if (questionType === 'ranking') {
           responseValue = JSON.parse(response.value).labels;
         }
-
-        if (questionType === 'checkbox') {
-          responseValue = JSON.parse(response.value);
-        }
-
         return {
           question: question.id,
           value: responseValue,
@@ -92,6 +88,8 @@ export const formatInitialResponsesValues = (questions: Questions, responses: Re
         return { question: question.id, value: response.medias };
       }
     }
+
+    // Otherwise we create an empty response
     if (question.type === 'medias') {
       return { question: question.id, value: [] };
     }
