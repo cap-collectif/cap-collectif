@@ -13,9 +13,22 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * @ORM\Table(name="response")
+ * @ORM\Table(
+ *   name="response",
+ *   uniqueConstraints={
+ *        @UniqueConstraint(
+ *            name="proposal_response_unique",
+ *            columns={"proposal_id", "question_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="evaluation_response_unique",
+ *            columns={"evaluation_id", "question_id"}
+ *        )
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractResponseRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasRequiredNumberOfChoices()
@@ -34,7 +47,6 @@ abstract class AbstractResponse
     const TYPE_FIELD_NAME = '_type';
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */

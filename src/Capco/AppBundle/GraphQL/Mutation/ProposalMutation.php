@@ -269,7 +269,6 @@ class ProposalMutation implements ContainerAwareInterface
           }
         }
 
-        $proposal->setResponses(new ArrayCollection());
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposal->getProposalForm(),
         ]);

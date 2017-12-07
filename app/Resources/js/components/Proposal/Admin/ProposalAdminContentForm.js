@@ -39,7 +39,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     if (question.type !== 'medias') {
       return res;
     }
-    return {...res, medias: res.value ? res.value : [], value: undefined};
+    return {...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined};
   });
 
   // Only super admin can edit author

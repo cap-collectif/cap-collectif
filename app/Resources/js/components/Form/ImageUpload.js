@@ -10,8 +10,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 
 type Props = {
   preview: any,
-  valueLink: Object,
-  value: any,
+  value: Array<Object>,
   onChange: Function,
   id: string,
   className: string,
@@ -20,12 +19,10 @@ type Props = {
   maxSize: number,
   minSize: number,
   disablePreview: boolean,
-  files: Array<Object>,
 };
 type State = {
   preview: any,
   delete: boolean,
-  files: Array<Object>,
 };
 
 export class ImageUpload extends React.Component<Props, State> {
@@ -38,7 +35,6 @@ export class ImageUpload extends React.Component<Props, State> {
       maxSize: Infinity,
       minSize: 0,
       disablePreview: false,
-      files: [],
   };
 
   constructor(props: Props) {
@@ -46,50 +42,26 @@ export class ImageUpload extends React.Component<Props, State> {
     this.state = {
       preview: this.props.preview,
       delete: false,
-      files: [],
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    const value = nextProps.valueLink ? nextProps.valueLink.value : nextProps.value;
-    if (value) {
-      this.setState({
-        preview: value.preview,
-      });
     }
   }
 
   onDrop = (acceptedFiles: Array<File>) => {
-    const { valueLink, onChange, multiple } = this.props;
+    const { onChange, multiple, value } = this.props;
     for (const file of acceptedFiles) {
       const formData = new FormData();
       formData.append("file", file);
       Fetcher.postFormData('/files', formData)
         .then(json)
         .then(res => {
-        console.log(res);
-        this.setState(
-          {
-            delete: false,
-            files: [...this.state.files, {
-              id: res.id,
-              name: res.name,
-              url: res.url
-            } ],
-          },
-          () => {
-            this.uncheckDelete();
-            const newValue = multiple ? this.state.files.map(fi => fi.id) : res.id;
-            if (typeof newValue !== 'undefined') {
-              if (valueLink) {
-                valueLink.requestChange(newValue);
-              }
-              if (onChange && typeof onChange !== 'undefined') {
-                onChange(newValue);
-              }
-            }
-          },
-      )});
+        const newFile = {
+          id: res.id,
+          name: res.name,
+          url: res.url
+        };
+        this.uncheckDelete();
+        const newValue = multiple ? [...value, newFile ] : newFile;
+        onChange(newValue);
+      });
     }
   }
 
@@ -98,13 +70,11 @@ export class ImageUpload extends React.Component<Props, State> {
   }
 
   onToggleDelete = () => {
-    const { valueLink, onChange } = this.props;
+    const { onChange } = this.props;
     // $FlowFixMe
     const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
-      if (valueLink) {
-        valueLink.requestChange(null);
-      } else if (onChange && typeof onChange !== 'undefined') {
+      if (onChange && typeof onChange !== 'undefined') {
         onChange(null);
       }
     }
@@ -114,7 +84,7 @@ export class ImageUpload extends React.Component<Props, State> {
     });
   }
 
-  _deleteCheckbox: ?Input;
+  // _deleteCheckbox: ?Input;
 
   uncheckDelete = () => {
     const ref = this._deleteCheckbox;
@@ -124,12 +94,9 @@ export class ImageUpload extends React.Component<Props, State> {
     }
   }
 
-  removeMedia = (media) => {
-    this.setState({
-      files: this.state.files.filter(file => {
-        return file !== media;
-      }),
-    });
+  removeMedia = (media: Object) => {
+    const newValue = this.props.multiple ? this.props.value.filter(m => m.id !== media.id) : null;
+    this.props.onChange(newValue);
   }
 
   render() {
@@ -142,7 +109,7 @@ export class ImageUpload extends React.Component<Props, State> {
       maxSize,
       minSize,
       disablePreview,
-      files,
+      value,
     } = this.props;
     const classes = {
       'image-uploader': true,
@@ -172,8 +139,7 @@ export class ImageUpload extends React.Component<Props, State> {
         {disablePreview && (
           <Col xs={12} sm={12} style={{ marginBottom: 5 }}>
             <PreviewMedia
-              currentMedias={files}
-              newMedias={this.state.files}
+              medias={value}
               onRemoveMedia={media => {
                 this.removeMedia(media);
               }}
@@ -196,11 +162,7 @@ export class ImageUpload extends React.Component<Props, State> {
               {multiple ? dropzoneTextForFile : dropzoneTextForImage}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn">
-                  {multiple ? (
-                    <FormattedMessage id="global.image_uploader.file.btn" />
-                  ) : (
-                    <FormattedMessage id="global.image_uploader.image.btn" />
-                  )}
+                    <FormattedMessage id={multiple ? "global.image_uploader.file.btn" : "global.image_uploader.image.btn"} />
                 </Button>
               </p>
             </div>
@@ -209,7 +171,7 @@ export class ImageUpload extends React.Component<Props, State> {
         {!disablePreview && (
           <Col xs={12} sm={12}>
             <p className="h5 text-center">
-              {<FormattedMessage id="global.image_uploader.image.preview" />}
+              <FormattedMessage id="global.image_uploader.image.preview" />
             </p>
             <div className="image-uploader__preview text-center">
               {this.state.preview && (
