@@ -43,7 +43,7 @@
         "symfony/symfony": "~2.8",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",
-        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "^3.1.0",
         "symfony/monolog-bundle": "~2.11",
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "^3.0.14",
@@ -136,7 +136,7 @@
         "phpunit/phpunit": "^5.0",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "sjparkinson/behat-file-system-context": "^0.1.0",
-        "alexandresalome/mailcatcher": "dev-master#be2b3897caab28f59daa813be2034b97e3617427",
+        "alexandresalome/mailcatcher": "dev-master#cbfcc6acefa27230db3cbcd10334e0819fb364b7",
         "phpstan/phpstan-doctrine": "^0.8.0"
     },
     "scripts": {},

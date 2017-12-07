@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Swarrot\Broker\Message;
@@ -11,6 +12,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
+    const NOTIFY_TO_ADMIN = 'admin';
+    const NOTIFY_TO_AUTHOR = 'author';
+
     /**
      * @var Publisher
      */
@@ -38,6 +42,7 @@ class CommentSubscriber implements EventSubscriberInterface
             if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete()) {
                 $this->publisher->publish('comment.delete', new Message(
                     json_encode([
+                        'notify_type' => self::NOTIFY_TO_ADMIN,
                         'username' => $comment->getAuthor()->getDisplayName(),
                         'userSlug' => $comment->getAuthor()->getSlug(),
                         'body' => $comment->getBody(),
@@ -53,6 +58,17 @@ class CommentSubscriber implements EventSubscriberInterface
             if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnCreate()) {
                 $this->publisher->publish('comment.create', new Message(
                     json_encode([
+                        'notify_type' => self::NOTIFY_TO_ADMIN,
+                        'commentId' => $comment->getId(),
+                    ])
+                ));
+            }
+            if ($comment instanceof Comment &&
+                $comment->getRelatedObject()->getAuthor()->getNotificationsConfiguration()->isOnProposalCommentMail() &&
+                $comment->getRelatedObject()->getAuthor() !== $comment->getAuthor()) {
+                $this->publisher->publish('comment.create', new Message(
+                    json_encode([
+                        'notify_type' => self::NOTIFY_TO_AUTHOR,
                         'commentId' => $comment->getId(),
                     ])
                 ));
@@ -61,6 +77,7 @@ class CommentSubscriber implements EventSubscriberInterface
             if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
                 $this->publisher->publish('comment.update', new Message(
                     json_encode([
+                        'notify_type' => self::NOTIFY_TO_ADMIN,
                         'commentId' => $comment->getId(),
                     ])
                 ));

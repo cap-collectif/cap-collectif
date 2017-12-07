@@ -64,11 +64,9 @@ const RankingBlock = React.createClass({
 
   recalculateChoicesHeight() {
     const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
-    if (height !== '0px') {
-      this.setState({
-        choicesHeight: height,
-      });
-    }
+    this.setState({
+      choicesHeight: height,
+    });
   },
 
   findItem(id) {

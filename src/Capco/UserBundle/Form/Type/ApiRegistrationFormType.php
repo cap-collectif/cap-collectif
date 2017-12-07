@@ -48,7 +48,7 @@ class ApiRegistrationFormType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'entry_type' => new ValueResponseType($this->transformer),
+                'type' => new ValueResponseType($this->transformer),
                 'required' => false,
             ])
         ;
@@ -63,7 +63,7 @@ class ApiRegistrationFormType extends AbstractType
         ]);
     }
 
-    public function getParent(): string
+    public function getParent()
     {
         return 'sonata_user_registration';
     }

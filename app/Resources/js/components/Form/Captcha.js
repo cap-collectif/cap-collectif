@@ -1,14 +1,11 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-type Props = {
-  value: ?any,
-  onChange: (response: string) => void,
-};
-
-export class Captcha extends React.PureComponent<Props> {
-  captcha: ?Object;
+const Captcha = React.createClass({
+  propTypes: {
+    value: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
+  },
 
   render() {
     const { onChange } = this.props;
@@ -16,11 +13,11 @@ export class Captcha extends React.PureComponent<Props> {
       <ReCAPTCHA
         ref={c => (this.captcha = c)}
         style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
-        sitekey="6LfKLxsTAAAAANGSsNIlspDarsFFK53b4bKiBYKC"
+        sitekey="6LctYxsTAAAAANsAl06GxNeV5xGaPjy5jbDe-J8M"
         onChange={onChange}
       />
     );
-  }
-}
+  },
+});
 
 export default Captcha;

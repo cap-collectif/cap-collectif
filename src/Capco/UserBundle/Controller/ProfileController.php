@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -12,6 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * @Route("/profile")
@@ -66,6 +70,54 @@ class ProfileController extends BaseController
         }
 
         return [];
+    }
+
+    /**
+     * @Route("/notifications", name="capco_profile_notifications_edit_account")
+     * @Template("@CapcoUser/Profile/edit_notifications.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function showNotificationsOptionsAction(Request $request)
+    {
+        return [];
+    }
+
+    /**
+     * @Route("/notifications/{token}", name="capco_profile_notifications_login")
+     */
+    public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
+    {
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        if (!$userNotificationsConfiguration) {
+            throw new NotFoundHttpException();
+        }
+        if (!$this->getUser()) {
+            $this->loginWithToken($request, $userNotificationsConfiguration);
+        }
+
+        return $this->redirectToRoute('capco_profile_notifications_edit_account');
+    }
+
+    /**
+     * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable")
+     * @Security("has_role('ROLE_USER')")
+     *
+     * @param Request $request
+     */
+    public function disableNotificationsAction(Request $request, string $token)
+    {
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        if (!$userNotificationsConfiguration) {
+            throw new NotFoundHttpException();
+        }
+        if (!$this->getUser()) {
+            $this->loginWithToken($request, $userNotificationsConfiguration);
+        }
+        $userNotificationsConfiguration->disableAllNotifications();
+        $this->get('doctrine.orm.default_entity_manager')->flush($userNotificationsConfiguration);
+        $this->addFlash('sonata_flash_success', $this->get('translator')->trans('resetting.notifications.flash.success', [], 'CapcoAppBundle'));
+
+        return $this->redirectToRoute('capco_profile_notifications_edit_account');
     }
 
     /**
@@ -335,5 +387,14 @@ class ProfileController extends BaseController
         'proposalsPropsBySteps' => $proposalsPropsBySteps,
         'proposalsCount' => $proposalsCount,
       ];
+    }
+
+    private function loginWithToken(Request $request, UserNotificationsConfiguration $userNotificationsConfiguration)
+    {
+        $user = $userNotificationsConfiguration->getUser();
+        $userToken = new UsernamePasswordToken($user, null, $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+        $this->get('security.token_storage')->setToken($userToken);
+        $logInEvent = new InteractiveLoginEvent($request, $userToken);
+        $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);
     }
 }

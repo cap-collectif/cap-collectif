@@ -1,0 +1,50 @@
+/* ===============================================================
+   $User notifications preferences page
+================================================================*/
+
+table.notifications-table {
+
+    tbody tr {
+
+        td {
+            vertical-align: middle;
+            padding: 14px;
+            text-align: center;
+            &:first-of-type {
+                text-align: left;
+            }
+        }
+
+        .form-group {
+            margin: 0;
+
+            .checkbox {
+                padding-top: 0;
+            }
+        }
+    }
+
+    thead th {
+        text-align: center;
+
+        &:first-of-type {
+            text-align: left;
+        }
+    }
+}
+
+.notifications-form-controls {
+    display: flex;
+    align-items: center;
+    > * {
+        margin-right: 15px;
+        :last-of-type {
+            margin-right: 0;
+        }
+    }
+}
+
+.notifications-app-title {
+    font-size: 2rem;
+    font-weight: 500;
+}

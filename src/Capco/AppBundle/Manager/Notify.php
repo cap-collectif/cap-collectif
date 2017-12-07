@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -32,6 +33,7 @@ class Notify implements MailerInterface
     protected $parameters;
     protected $urlResolver;
     protected $validator;
+    protected $logger;
 
     public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $resolver, Router $router, UrlResolver $urlResolver, ValidatorInterface $validator, array $parameters)
     {
@@ -49,6 +51,11 @@ class Notify implements MailerInterface
     {
         if ($this->emailsAreValid($to, $fromAddress) && !filter_var($this->parameters['disable_delivery'], FILTER_VALIDATE_BOOLEAN)) {
             $this->mailer->send($this->generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType));
+
+            // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
+            if ($this->mailer->getTransport()->isStarted()) {
+                $this->mailer->getTransport()->stop();
+            }
         }
     }
 
@@ -296,6 +303,42 @@ class Notify implements MailerInterface
         $this->sendInternalEmail($body, $subject);
     }
 
+    public function notifyUserProposalComment($comment)
+    {
+        $proposalAuthor = $comment->getRelatedObject()->getAuthor();
+        $isAnonymous = null === $comment->getAuthor();
+        $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.subject' : 'notification.email.comment.to_user.subject';
+        $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.body' : 'notification.email.comment.to_user.body';
+        $params = $this->buildParamsForComment($comment, $isAnonymous);
+        $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_login'
+            , ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+        $params['body']['%disableNotificationsUrl%'] = $this->router->generate(
+            'capco_profile_notifications_disable',
+            ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+        $subject = $this->translator->trans(
+            $subjectId,
+            $params['subject'],
+            'CapcoAppBundle');
+        $body = $this->translator->trans(
+            $bodyId,
+            $params['body'],
+            'CapcoAppBundle'
+        );
+        $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $body .= $this->translator->trans(
+            'notification.email.external_footer', [
+            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
+            '%to%' => $proposalAuthor->getEmailCanonical(),
+            '%siteUrl%' => $siteUrl,
+        ], 'CapcoAppBundle'
+        );
+        $fromAdress = $this->resolver->getValue('admin.mail.notifications.send_address');
+        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
+        $this->sendEmail($proposalAuthor->getEmailCanonical(), $fromAdress, $fromName, $body, $subject);
+    }
+
     public function notifyProposalComment($comment, string $action)
     {
         if ('delete' === $action) {
@@ -412,7 +455,7 @@ class Notify implements MailerInterface
 
     private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
     {
-        return \Swift_Message::newInstance()
+        return (new \Swift_Message())
             ->setTo($to)
             ->setSubject($subject)
             ->setContentType($contentType)
@@ -446,7 +489,7 @@ class Notify implements MailerInterface
             $result['subject']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
             $result['body']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
         } else {
-            if ($comment instanceof ProposalComment) {
+            if ($comment instanceof Comment) {
                 $result['subject']['%username%'] = $comment->getAuthor()->getDisplayName();
                 $result['body']['%username%'] = $comment->getAuthor()->getDisplayName();
                 $result['body']['%userUrl%'] = $this->router->generate(
@@ -466,8 +509,8 @@ class Notify implements MailerInterface
                 );
             }
         }
-        if ($comment instanceof ProposalComment) {
-            $result['body']['%proposal%'] = $comment->getProposal()->getTitle();
+        if ($comment instanceof Comment) {
+            $result['body']['%proposal%'] = $comment->getRelatedObject()->getTitle();
             $result['body']['%comment%'] = $comment->getBodyText();
             $result['body']['%date%'] = $comment->getCreatedAt()->format('d/m/Y');
             $result['body']['%time%'] = $comment->getCreatedAt()->format('H:i:s');
@@ -479,15 +522,25 @@ class Notify implements MailerInterface
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
-            $result['body']['%proposalUrl%'] = $this->router->generate(
-                'app_project_show_proposal',
-                [
-                    'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
-                    'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
-                    'proposalSlug' => $comment->getProposal()->getSlug(),
-                ],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
+            if ($comment instanceof IdeaComment) {
+                $result['body']['%proposalUrl%'] = $this->router->generate(
+                    'app_idea_show',
+                    [
+                        'slug' => $comment->getIdea()->getSlug(),
+                    ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+            } elseif ($comment instanceof ProposalComment) {
+                $result['body']['%proposalUrl%'] = $this->router->generate(
+                    'app_project_show_proposal',
+                    [
+                        'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
+                        'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
+                        'proposalSlug' => $comment->getProposal()->getSlug(),
+                    ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+            }
         } else {
             $result['body']['%proposal%'] = $comment['proposal'];
             $result['body']['%proposalUrl%'] = $this->router->generate(

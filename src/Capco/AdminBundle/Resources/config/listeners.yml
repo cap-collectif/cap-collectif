@@ -5,7 +5,6 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
-
   capco.resolver.proposal_form:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
       tags:
@@ -48,6 +47,10 @@ services:
           - { name: overblog_graphql.resolver, alias: "query_get_draft_proposals_for_user_in_step", method: "resolveDraftProposalsForUserInStep" }
           - { name: overblog_graphql.resolver, alias: "proposal_created_at", method: "resolveCreatedAt" }
 
+  capco.mutation.user_notifications:
+        class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
+        tags:
+            - { name: overblog_graphql.mutation, alias: "changeUserNotificationsConfiguration", method: "change" }
   capco.mutation.district:
         class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
         tags:
@@ -119,6 +122,7 @@ services:
     class: Capco\AppBundle\GraphQL\Resolver\UserResolver
     tags:
         - { name: overblog_graphql.resolver, alias: "user", method: "resolve" }
+        - { name: overblog_graphql.resolver, alias: "current_user", method: "resolveCurrentUser" }
         - { name: overblog_graphql.resolver, alias: "user_email", method: "resolveEmail" }
         - { name: overblog_graphql.resolver, alias: "user_show_url", method: "resolveShowUrl" }
         - { name: overblog_graphql.resolver, alias: "user_createdAt", method: "resolveCreatedAt" }
