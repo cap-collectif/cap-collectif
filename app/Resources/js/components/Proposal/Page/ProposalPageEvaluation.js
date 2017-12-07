@@ -9,11 +9,10 @@ import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import {
   validate,
-  renderResponses,
   formatInitialResponses,
-  formatResponsesToSubmit,
   type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
+import { renderResponses, formatResponsesToSubmit } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
@@ -119,7 +118,6 @@ export default createFragmentContainer(
           questions {
             id
             title
-            slug
             position
             private
             required
@@ -143,10 +141,17 @@ export default createFragmentContainer(
         responses {
           question {
             id
-            type
           }
           ... on ValueResponse {
             value
+          }
+          ... on MediaResponse {
+            medias {
+              id
+              name
+              size
+              url
+            }
           }
         }
       }

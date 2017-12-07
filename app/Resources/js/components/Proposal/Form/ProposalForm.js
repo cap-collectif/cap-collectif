@@ -30,8 +30,12 @@ import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules
 import ChangeProposalContentMutation, {
   type ChangeProposalContentMutationResponse,
 } from '../../../mutations/ChangeProposalContentMutation';
-import { formatInitialResponsesValues, renderResponses } from '../Admin/ProposalAdminNotationForm';
-import { validateProposalContent, formatSubmitResponses } from '../Admin/ProposalAdminContentForm';
+import {
+  formatInitialResponsesValues,
+  formatSubmitResponses,
+  renderResponses,
+} from '../../../utils/responsesHelper';
+import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 
 // eslint-disable-next-line
 const getAvailableDistrictsQuery = graphql`
@@ -548,10 +552,22 @@ export default createFragmentContainer(container, {
       questions {
         id
         title
-        type
         position
         private
         required
+        helpText
+        type
+        isOtherAllowed
+        validationRule {
+          type
+          number
+        }
+        choices {
+          id
+          title
+          description
+          color
+        }
       }
       usingDistrict
       districtMandatory

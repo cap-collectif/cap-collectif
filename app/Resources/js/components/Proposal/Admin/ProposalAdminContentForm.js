@@ -12,7 +12,11 @@ import select from '../../Form/Select';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import { renderResponses, formatInitialResponsesValues } from './ProposalAdminNotationForm';
+import {
+  renderResponses,
+  formatSubmitResponses,
+  formatInitialResponsesValues,
+} from '../../../utils/responsesHelper';
 
 type FormValues = Object;
 type DefaultProps = void;
@@ -27,35 +31,7 @@ type Props = FormProps &
     +isSuperAdmin: boolean,
   };
 
-type Questions = $ReadOnlyArray<{|
-  +id: string,
-  +title: string,
-  +type:
-    | 'text'
-    | 'textarea'
-    | 'editor'
-    | 'radio'
-    | 'select'
-    | 'checkbox'
-    | 'ranking'
-    | 'medias'
-    | 'button',
-  +position: number,
-  +private: boolean,
-  +required: boolean,
-|}>;
-
 const formName = 'proposal-admin-edit';
-
-export const formatSubmitResponses = (responses: Array<Object>, questions: Questions) => {
-  return responses.map(res => {
-    const question = questions.filter(q => res.question === q.id)[0];
-    if (question.type !== 'medias') {
-      return res;
-    }
-    return { ...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined };
-  });
-};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
   // Only used for the user view
@@ -418,10 +394,22 @@ export default createFragmentContainer(
         questions {
           id
           title
-          type
           position
           private
           required
+          helpText
+          type
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          choices {
+            id
+            title
+            description
+            color
+          }
         }
         usingDistrict
         districtMandatory
