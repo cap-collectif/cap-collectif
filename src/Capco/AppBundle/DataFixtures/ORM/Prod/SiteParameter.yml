@@ -245,7 +245,7 @@ Capco\AppBundle\Entity\SiteParameter:
     SiteParameterBlogMetaDescription:
         keyname: blog.metadescription
         category: pages.blog
-        value: 'La méta description'
+        value: ''
         position: 761
         type: 0
 
@@ -288,6 +288,12 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 303
         type: 1
+    SiteParameterEventMetaDescription:
+        keyname: event.metadescription
+        category: pages.events
+        value: ''
+        position: 304
+        type: 0
 
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken

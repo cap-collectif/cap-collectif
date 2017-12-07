@@ -43,3 +43,10 @@ Capco\AppBundle\Entity\SiteImage:
         helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
         isEnabled: true
         position: 6
+    SiteImageEventPicto:
+        keyname: events.picto
+        category: pages.events
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 7
