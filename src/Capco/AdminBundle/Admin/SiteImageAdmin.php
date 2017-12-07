@@ -62,6 +62,9 @@ class SiteImageAdmin extends Admin
                     'provider' => 'sonata.media.provider.image',
             ], ])
         ;
+        if ($this->subject->isSocialNetworkThumbnail()) {
+            $formMapper->addHelp('Media', 'admin.help.social_network_thumbnail');
+        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

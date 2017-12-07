@@ -54,6 +54,9 @@ class SiteParameterAdmin extends Admin
                     'label' => 'admin.fields.site_parameter.value',
                     'required' => false,
                 ]);
+            if ($subject->isSocialNetworkDescription()) {
+                $formMapper->addHelp('value', 'admin.help.metadescription');
+            }
         } elseif ($subject->getType() === $types['rich_text']) {
             $formMapper->add('value', CKEditorType::class, [
                 'label' => 'admin.fields.site_parameter.value',

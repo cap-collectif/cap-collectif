@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\SiteImage:
         keyname: homepage.picto
         category: pages.homepage
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 3
     SiteImage4:
@@ -40,55 +40,55 @@ Capco\AppBundle\Entity\SiteImage:
         keyname: blog.picto
         category: pages.blog
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 6
     SiteImageEventPicto:
         keyname: events.picto
         category: pages.blog
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 7
     SiteImageIdeasPicto:
         keyname: ideas.picto
         category: pages.ideas
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 8
     SiteImageThemesPicto:
         keyname: themes.picto
         category: pages.themes
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 9
     SiteImageProjectsPicto:
         keyname: projects.picto
         category: pages.projects
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 10
     SiteImageMembersPicto:
         keyname: members.picto
         category: pages.members
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 11
     SiteImageContactPicto:
         keyname: contact.picto
         category: pages.contact
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 12
     SiteImageTrashIdeasPicto:
         keyname: ideas_trash.picto
         category: pages.ideas_trash
         media: '@picto'
-        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isSocialNetworkThumbnail: true
         isEnabled: true
         position: 13

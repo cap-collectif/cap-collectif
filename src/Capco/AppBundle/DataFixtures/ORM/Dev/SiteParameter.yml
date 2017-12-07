@@ -348,58 +348,66 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 9
 
     SiteParameterMetaDescription:
-        keyname: homepage.meta_description
+        keyname: homepage.metadescription
         category: pages.homepage
         value: Participez à l'élaboration de la loi
-        helpText: Ajoutez une meta description si vous souhaitez remplacer la description utilisée sur les réseaux sociaux.
         position: 101
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterEventMetaDescription:
         keyname: event.metadescription
         category: pages.events
         value: ''
         position: 304
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterIdeasMetaDescription:
         keyname: ideas.metadescription
         category: pages.ideas
         value: ''
         position: 421
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterBlogMetaDescription:
         keyname: blog.metadescription
         category: pages.blog
         value: ''
         position: 761
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterThemesMetaDescription:
         keyname: themes.metadescription
         category: pages.themes
         value: ''
         position: 521
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterProjectsMetaDescription:
         keyname: projects.metadescription
         category: pages.projects
         value: ''
         position: 321
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterMembersMetaDescription:
         keyname: members.metadescription
         category: pages.members
         value: ''
         position: 783
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterContactMetaDescription:
         keyname: contact.metadescription
         category: pages.contact
         value: ''
         position: 621
+        isSocialNetworkDescription: true
         type: 0
     SiteParameterTrashIdeasMetaDescription:
         keyname: ideas_trash.metadescription
         category: pages.ideas_trash
         value: ''
         position: 441
+        isSocialNetworkDescription: true
         type: 0
 

@@ -76,6 +76,12 @@ class SiteParameter
     private $isEnabled = true;
 
     /**
+     * @var bool
+     * @ORM\Column(name="is_social_network_description", type="boolean")
+     */
+    private $isSocialNetworkDescription = false;
+
+    /**
      * @var int
      * @ORM\Column(name="position", type="integer")
      */
@@ -86,12 +92,6 @@ class SiteParameter
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
-
-    /**
-     * @var string
-     * @ORM\Column(name="help_text", type="string", nullable=true)
-     */
-    private $helpText;
 
     /**
      * @var string
@@ -259,13 +259,13 @@ class SiteParameter
         $this->category = $category;
     }
 
-    public function getHelpText(): string
+    public function isSocialNetworkDescription(): bool
     {
-        return $this->helpText;
+        return $this->isSocialNetworkDescription;
     }
 
-    public function setHelpText(string $helpText)
+    public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription)
     {
-        $this->helpText = $helpText;
+        $this->isSocialNetworkDescription = $isSocialNetworkDescription;
     }
 }

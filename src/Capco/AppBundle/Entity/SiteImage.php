@@ -24,6 +24,12 @@ class SiteImage
     private $keyname;
 
     /**
+     * @var bool
+     * @ORM\Column(name="is_social_network_thumbnail", type="boolean")
+     */
+    private $isSocialNetworkThumbnail = false;
+
+    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -57,12 +63,6 @@ class SiteImage
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;
-
-    /**
-     * @var string
-     * @ORM\Column(name="help_text", type="string", nullable=true)
-     */
-    private $helpText;
 
     /**
      * @var string
@@ -218,13 +218,13 @@ class SiteImage
         $this->category = $category;
     }
 
-    public function getHelpText(): string
+    public function isSocialNetworkThumbnail(): bool
     {
-        return $this->helpText;
+        return $this->isSocialNetworkThumbnail;
     }
 
-    public function setHelpText(string $helpText)
+    public function setIsSocialNetworkThumbnail(bool $isSocialNetworkThumbnail)
     {
-        $this->helpText = $helpText;
+        $this->isSocialNetworkThumbnail = $isSocialNetworkThumbnail;
     }
 }
