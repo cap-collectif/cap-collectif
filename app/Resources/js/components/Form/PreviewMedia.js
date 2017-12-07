@@ -17,19 +17,18 @@ type Props = {
 
 type State = {
   initialMedias: Array<Media>,
-}
+};
 
 export class PreviewMedia extends React.PureComponent<Props, State> {
   constructor(props: Props) {
-      super(props);
-      this.state = {
-        initialMedias: props.medias,
-      };
+    super(props);
+    this.state = {
+      initialMedias: props.medias,
+    };
   }
 
   render() {
     const { medias, onRemoveMedia } = this.props;
-    const { initialMedias } = this.state;
 
     if (medias.length === 0) {
       return null;

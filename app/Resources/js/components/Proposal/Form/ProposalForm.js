@@ -23,8 +23,13 @@ import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_pro
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 import Fetcher from '../../../services/Fetcher';
-import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
-import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
+import CreateProposalMutation, {
+  type CreateProposalMutationResponse,
+} from '../../../mutations/CreateProposalMutation';
+import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import ChangeProposalContentMutation, {
+  type ChangeProposalContentMutationResponse,
+} from '../../../mutations/ChangeProposalContentMutation';
 import { formatInitialResponsesValues, renderResponses } from '../Admin/ProposalAdminNotationForm';
 import { validateProposalContent, formatSubmitResponses } from '../Admin/ProposalAdminContentForm';
 
@@ -53,22 +58,22 @@ type LatLng = {
 
 export const formName = 'proposal-form';
 
-type RelayProps = {|
+type RelayProps = {
   +proposalForm: ProposalForm_proposalForm,
   +proposal: ?ProposalForm_proposal,
-|};
+};
 
-type Props = RelayProps &
-  FormProps & {|
-    intl: IntlShape,
-    themes: Array<Object>,
-    dispatch: Dispatch,
-    features: FeatureToggles,
-    titleValue: ?string,
-    addressValue: ?string,
-  |};
+type Props = FormProps &
+  RelayProps & {
+    +intl: IntlShape,
+    +themes: Array<Object>,
+    +dispatch: Dispatch,
+    +features: FeatureToggles,
+    +titleValue: ?string,
+    +addressValue: ?string,
+  };
 
-type FormValues = {|
+type FormValues = {
   title: ?string,
   summary: ?string,
   body: ?string,
@@ -78,25 +83,25 @@ type FormValues = {|
   district: ?string,
   responses: Array<Object>,
   draft: boolean,
-|};
-
-const catchServerSubmitErrors = (reason: Object) => {
-  if (
-    reason &&
-    reason.response &&
-    reason.response.errors &&
-    reason.response.errors.errors &&
-    reason.response.errors.errors.length &&
-    reason.response.errors.errors.includes('global.address_not_in_zone')
-  ) {
-    throw new SubmissionError({
-      addressText: 'proposal.constraints.address_in_zone',
-    });
-  }
-  throw new SubmissionError({
-    _error: 'global.error.server.form',
-  });
 };
+
+// const catchServerSubmitErrors = (reason: Object) => {
+//   if (
+//     reason &&
+//     reason.response &&
+//     reason.response.errors &&
+//     reason.response.errors.errors &&
+//     reason.response.errors.errors.length &&
+//     reason.response.errors.errors.includes('global.address_not_in_zone')
+//   ) {
+//     throw new SubmissionError({
+//       addressText: 'proposal.constraints.address_in_zone',
+//     });
+//   }
+//   throw new SubmissionError({
+//     _error: 'global.error.server.form',
+//   });
+// };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
@@ -110,48 +115,56 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     return;
   }
   if (proposal) {
-        return ChangeProposalContentMutation
-          .commit({
-            input: { ...values, id: proposal.id },
-          })
-          .then((res: Object) => {
-            // dispatch(closeEditProposalModal());
-            // FluxDispatcher.dispatch({
-            //   actionType: UPDATE_ALERT,
-            //   alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-            // });
-            // const proposal = res.propsal;
-            // if (!proposal.isDraft) {
-            //     addProposalInRandomResultsByStep(proposal, currentStepId);
-            // }
-            location.reload();
-          })
-          .catch(catchServerSubmitErrors)
-        ;
+    return ChangeProposalContentMutation.commit({
+      input: { ...values, id: proposal.id },
+    })
+      .then((response: ChangeProposalContentMutationResponse) => {
+        if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
+          throw new Error('');
+        }
+        console.log(response);
+        dispatch(closeEditProposalModal());
+        // FluxDispatcher.dispatch({
+        //   actionType: UPDATE_ALERT,
+        //   alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
+        // });
+        // const proposal = res.propsal;
+        // if (!proposal.isDraft) {
+        //     addProposalInRandomResultsByStep(proposal, currentStepId);
+        // }
+        location.reload();
+      })
+      .catch(() => {
+        throw new SubmissionError({
+          _error: 'global.error.server.form',
+        });
+      });
   }
 
-  return CreateProposalMutation
-    .commit({
-      input: { ...values, proposalFormId: proposalForm.id },
-    })
-    .then((res: Object) => {
-      //dispatch(closeCreateModal());
-
-      //       FluxDispatcher.dispatch({
+  return CreateProposalMutation.commit({
+    input: { ...values, proposalFormId: proposalForm.id },
+  })
+    .then((response: CreateProposalMutationResponse) => {
+      if (!response.createProposal || !response.createProposal.proposal) {
+        throw new Error('');
+      }
+      window.location.href = response.createProposal.proposal.show_url;
+      dispatch(closeCreateModal());
+      // if (!proposal.isDraft) {
+      //   addProposalInRandomResultsByStep(proposal, currentStepId);
+      // }
       //         actionType: UPDATE_ALERT,
       //         alert: {
       //           bsStyle: 'success',
       //           content: 'proposal.request.create.success',
       //         },
       //       });
-      //
-      //       if (!proposal.isDraft) {
-      //         addProposalInRandomResultsByStep(proposal, currentStepId);
-      //       }
-      //
-      location.href = proposal._links.show;
     })
-    .catch(catchServerSubmitErrors);
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
+    });
 };
 
 const validate = (values: FormValues, { proposalForm, features }: Props) => {
@@ -241,15 +254,7 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      intl,
-      titleValue,
-      proposalForm,
-      features,
-      themes,
-      proposal,
-      error,
-    } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, proposal, error } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -463,7 +468,7 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
   initialValues: {
-    draft: proposal ? proposal.publicationStatus === "DRAFT" : true,
+    draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
     title: proposal ? proposal.title : null,
     summary: proposal ? proposal.summary : null,
     body: proposal ? proposal.body : null,

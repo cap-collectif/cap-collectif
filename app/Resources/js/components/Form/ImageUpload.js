@@ -26,15 +26,14 @@ type State = {
 };
 
 export class ImageUpload extends React.Component<Props, State> {
-
   static defaultProps = {
-      id: '',
-      className: '',
-      preview: null,
-      multiple: false,
-      maxSize: Infinity,
-      minSize: 0,
-      disablePreview: false,
+    id: '',
+    className: '',
+    preview: null,
+    multiple: false,
+    maxSize: Infinity,
+    minSize: 0,
+    disablePreview: false,
   };
 
   constructor(props: Props) {
@@ -42,32 +41,32 @@ export class ImageUpload extends React.Component<Props, State> {
     this.state = {
       preview: this.props.preview,
       delete: false,
-    }
+    };
   }
 
   onDrop = (acceptedFiles: Array<File>) => {
     const { onChange, multiple, value } = this.props;
     for (const file of acceptedFiles) {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append('file', file);
       Fetcher.postFormData('/files', formData)
         .then(json)
         .then(res => {
-        const newFile = {
-          id: res.id,
-          name: res.name,
-          url: res.url
-        };
-        this.uncheckDelete();
-        const newValue = multiple ? [...value, newFile ] : newFile;
-        onChange(newValue);
-      });
+          const newFile = {
+            id: res.id,
+            name: res.name,
+            url: res.url,
+          };
+          this.uncheckDelete();
+          const newValue = multiple ? [...value, newFile] : newFile;
+          onChange(newValue);
+        });
     }
-  }
+  };
 
   onOpenClick = () => {
     this.refs.dropzone.open();
-  }
+  };
 
   onToggleDelete = () => {
     const { onChange } = this.props;
@@ -82,22 +81,21 @@ export class ImageUpload extends React.Component<Props, State> {
       delete: deleteValue,
       preview: null,
     });
-  }
-
-  // _deleteCheckbox: ?Input;
+  };
 
   uncheckDelete = () => {
+    // $FlowFixMe
     const ref = this._deleteCheckbox;
     if (ref) {
       // $FlowFixMe
       $(ref.getDOMNode()).prop('checked', false);
     }
-  }
+  };
 
   removeMedia = (media: Object) => {
     const newValue = this.props.multiple ? this.props.value.filter(m => m.id !== media.id) : null;
     this.props.onChange(newValue);
-  }
+  };
 
   render() {
     const {
@@ -162,7 +160,13 @@ export class ImageUpload extends React.Component<Props, State> {
               {multiple ? dropzoneTextForFile : dropzoneTextForImage}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn">
-                    <FormattedMessage id={multiple ? "global.image_uploader.file.btn" : "global.image_uploader.image.btn"} />
+                  <FormattedMessage
+                    id={
+                      multiple
+                        ? 'global.image_uploader.file.btn'
+                        : 'global.image_uploader.image.btn'
+                    }
+                  />
                 </Button>
               </p>
             </div>
@@ -183,6 +187,7 @@ export class ImageUpload extends React.Component<Props, State> {
                   type="checkbox"
                   name="image-uploader__delete"
                   onChange={this.onToggleDelete}
+                  // $FlowFixMe
                   ref={c => (this._deleteCheckbox = c)}
                   children={<FormattedMessage id="global.image_uploader.image.delete" />}
                 />
@@ -192,6 +197,6 @@ export class ImageUpload extends React.Component<Props, State> {
       </Row>
     );
   }
-};
+}
 
 export default ImageUpload;

@@ -832,7 +832,7 @@ type Proposal {
   theme: Theme
   category: ProposalCategory
   district: District
-  address: JSON
+  address: Address
 
   # The author of the contribution.
   author: User!

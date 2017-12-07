@@ -77,7 +77,6 @@ class ProposalType extends AbstractType
             'data_class' => Proposal::class,
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-            'validation_groups' => ['OSEF'],
             'cascade_validation' => true,
             'proposalForm' => null,
         ]);

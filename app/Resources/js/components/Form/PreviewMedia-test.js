@@ -16,9 +16,7 @@ describe('<PreviewMedia />', () => {
   });
 
   it('should render correctly without medias', () => {
-    const wrapper = shallow(
-      <PreviewMedia medias={[]} onRemoveMedia={jest.fn()} />,
-    );
+    const wrapper = shallow(<PreviewMedia medias={[]} onRemoveMedia={jest.fn()} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

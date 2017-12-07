@@ -17,27 +17,45 @@ import { renderResponses, formatInitialResponsesValues } from './ProposalAdminNo
 type FormValues = Object;
 type DefaultProps = void;
 type PassedProps = {
-  proposal: ProposalAdminContentForm_proposal,
+  +proposal: ProposalAdminContentForm_proposal,
 };
-type Props = {
-  proposal: ProposalAdminContentForm_proposal,
-  themes: Array<Object>,
-  features: FeatureToggles,
-  intl: IntlShape,
-  isSuperAdmin: boolean,
-  ...FormProps,
-};
+type Props = FormProps &
+  PassedProps & {
+    +themes: Array<Object>,
+    +features: FeatureToggles,
+    +intl: IntlShape,
+    +isSuperAdmin: boolean,
+  };
+
+type Questions = $ReadOnlyArray<{|
+  +id: string,
+  +title: string,
+  +type:
+    | 'text'
+    | 'textarea'
+    | 'editor'
+    | 'radio'
+    | 'select'
+    | 'checkbox'
+    | 'ranking'
+    | 'medias'
+    | 'button',
+  +position: number,
+  +private: boolean,
+  +required: boolean,
+|}>;
+
 const formName = 'proposal-admin-edit';
 
-export const formatSubmitResponses = (responses: Array<Object>, questions: Array<Object>) => {
+export const formatSubmitResponses = (responses: Array<Object>, questions: Questions) => {
   return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
     if (question.type !== 'medias') {
       return res;
     }
-    return {...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined};
+    return { ...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined };
   });
-}
+};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
   // Only used for the user view
@@ -57,7 +75,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
   return ChangeProposalContentMutation.commit(variables);
 };
 
-export const validateProposalContent = (values: Object, proposalForm: Object, features: FeatureToggles) => {
+export const validateProposalContent = (
+  values: Object,
+  proposalForm: Object,
+  features: FeatureToggles,
+) => {
   const errors = {};
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
@@ -108,7 +130,7 @@ export const validateProposalContent = (values: Object, proposalForm: Object, fe
     errors.responses = responsesError;
   }
   return errors;
-}
+};
 
 const validate = (values: FormValues, { proposal, features }: Props) => {
   return validateProposalContent(values, proposal.form, features);
@@ -287,7 +309,12 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               component={component}
               label={<FormattedMessage id="proposal.body" />}
             />
-            <FieldArray intl={intl} name="responses" component={renderResponses} questions={form.questions} />
+            <FieldArray
+              intl={intl}
+              name="responses"
+              component={renderResponses}
+              questions={form.questions}
+            />
             <Field
               id="proposal_media"
               name="media"
@@ -332,6 +359,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   features: state.default.features,
   themes: state.default.themes,
   initialValues: {
+    draft: proposal.publicationStatus === 'DRAFT',
     title: proposal.title,
     body: proposal.body,
     summary: proposal.summary,
@@ -357,6 +385,7 @@ export default createFragmentContainer(
       title
       body
       summary
+      publicationStatus
       responses {
         question {
           id
