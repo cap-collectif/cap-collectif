@@ -50,3 +50,45 @@ Capco\AppBundle\Entity\SiteImage:
         helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
         isEnabled: true
         position: 7
+    SiteImageIdeasPicto:
+        keyname: ideas.picto
+        category: pages.ideas
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 8
+    SiteImageThemesPicto:
+        keyname: themes.picto
+        category: pages.themes
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 9
+    SiteImageProjectsPicto:
+        keyname: projects.picto
+        category: pages.projects
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 10
+    SiteImageMembersPicto:
+        keyname: members.picto
+        category: pages.members
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 11
+    SiteImageContactPicto:
+        keyname: contact.picto
+        category: pages.contact
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 12
+    SiteImageTrashIdeasPicto:
+        keyname: ideas_trash.picto
+        category: pages.ideas_trash
+        media: '@picto'
+        helpText: Ajoutez une image si vous souhaitez remplacer l'image utilisée sur les réseaux sociaux. La taille d'image recommandée est de 1200 x 630 pixels.
+        isEnabled: true
+        position: 13

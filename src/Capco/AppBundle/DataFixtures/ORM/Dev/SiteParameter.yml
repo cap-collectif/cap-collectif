@@ -244,12 +244,6 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 771
         type: 1
-    SiteParameterBlogMetaDescription:
-        keyname: blog.metadescription
-        category: pages.blog
-        value: 'La méta description'
-        position: 761
-        type: 0
 
     SiteParameterScript:
         keyname: global.site.embed_js
@@ -291,12 +285,6 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 303
         type: 1
-    SiteParameterEventMetaDescription:
-        keyname: event.metadescription
-        category: pages.events
-        value: ''
-        position: 304
-        type: 0
 
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken
@@ -345,13 +333,6 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 3
         type: 4
 
-    SiteParameterMetaDescription:
-        keyname: homepage.meta_description
-        category: pages.homepage
-        value: Participez à l'élaboration de la loi
-        position: 101
-        helpText: Ajoutez une meta description si vous souhaitez remplacer la description utilisée sur les réseaux sociaux.
-        type: 0
     SiteParameterShieldText:
         keyname: shield.introduction
         category: pages.shield
@@ -365,3 +346,60 @@ Capco\AppBundle\Entity\SiteParameter:
         value: fr-FR
         position: 1
         type: 9
+
+    SiteParameterMetaDescription:
+        keyname: homepage.meta_description
+        category: pages.homepage
+        value: Participez à l'élaboration de la loi
+        helpText: Ajoutez une meta description si vous souhaitez remplacer la description utilisée sur les réseaux sociaux.
+        position: 101
+        type: 0
+    SiteParameterEventMetaDescription:
+        keyname: event.metadescription
+        category: pages.events
+        value: ''
+        position: 304
+        type: 0
+    SiteParameterIdeasMetaDescription:
+        keyname: ideas.metadescription
+        category: pages.ideas
+        value: ''
+        position: 421
+        type: 0
+    SiteParameterBlogMetaDescription:
+        keyname: blog.metadescription
+        category: pages.blog
+        value: ''
+        position: 761
+        type: 0
+    SiteParameterThemesMetaDescription:
+        keyname: themes.metadescription
+        category: pages.themes
+        value: ''
+        position: 521
+        type: 0
+    SiteParameterProjectsMetaDescription:
+        keyname: projects.metadescription
+        category: pages.projects
+        value: ''
+        position: 321
+        type: 0
+    SiteParameterMembersMetaDescription:
+        keyname: members.metadescription
+        category: pages.members
+        value: ''
+        position: 783
+        type: 0
+    SiteParameterContactMetaDescription:
+        keyname: contact.metadescription
+        category: pages.contact
+        value: ''
+        position: 621
+        type: 0
+    SiteParameterTrashIdeasMetaDescription:
+        keyname: ideas_trash.metadescription
+        category: pages.ideas_trash
+        value: ''
+        position: 441
+        type: 0
+

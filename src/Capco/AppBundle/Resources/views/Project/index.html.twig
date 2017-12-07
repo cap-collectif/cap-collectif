@@ -3,13 +3,17 @@
 {% block canonical_link %}{{ url('app_project') }}{% endblock %}
 
 {% set jumbotron_title = capco_site_parameter_value('projects.jumbotron.title') %}
+{% set meta_description = capco_site_parameter_value('projects.metadescription') %}
 {% set jumbotron_body = capco_site_parameter_value('projects.jumbotron.body') %}
 {% set content_body = capco_site_parameter_value('projects.content.body') %}
+{% set picto = capco_site_image_media('projects.picto') %}
 
 {% block metaTags %}
+    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-    'title':       (jumbotron_title ?: 'project.title'|trans({}, 'CapcoAppBundle')),
-    'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
+        'title':       (jumbotron_title ?: 'projects.jumbotron.title'|trans({}, 'CapcoAppBundle')),
+        'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
+        'image':       image,
     'url':         url('app_project')
     } only %}
 {% endblock %}

@@ -3,13 +3,18 @@
 
 {% block canonical_link %}{{ url('app_contact') }}{% endblock %}
 
-{% set teaser = capco_site_parameter_value('contact.jumbotron.body') %}
-{% set body = capco_site_parameter_value('contact.content.body') %}
+{% set jumbotron_title = capco_site_parameter_value('contact.jumbotron.title') %}
+{% set meta_description = capco_site_parameter_value('contact.metadescription') %}
+{% set jumbotron_body = capco_site_parameter_value('contact.jumbotron.body') %}
+{% set content_body = capco_site_parameter_value('contact.content.body') %}
+{% set picto = capco_site_image_media('contact.picto') %}
 
 {% block metaTags %}
+    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       'contact.title'|trans({}, 'CapcoAppBundle'),
-        'description': (teaser|striptags ?: body|striptags|truncate(250, true)),
+        'title':       (jumbotron_title ?: 'contact.title'|trans({}, 'CapcoAppBundle')),
+        'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
+        'image':       image,
         'url':         url('app_contact')
     } only %}
 {% endblock %}
