@@ -1,10 +1,11 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_presentation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
 
 {% block metaTags %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       currentStep.title,
+        'title':       title,
         'description': currentStep.body|striptags|truncate(250, true),
         'url':         url('app_project_show_presentation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
     } only %}

@@ -1,19 +1,22 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
 
 {% block metaTags %}
-    <meta property="og:title" content="{{ project.title }}" />
-    <meta property="og:url" content="{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" />
-    <meta property="og:type" content="project" />
-    {% if project.Cover %}
-        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
-    {% endif %}
+    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set author = null %}
     {% if is_feature_enabled('profiles') %}
-        <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-        <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
+        {% set author = url('capco_user_profile_show_all', {'slug': project.author.slug}) %}
     {% endif %}
-
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'type':        'project',
+        'image':       image,
+        'author':      author,
+        'description': currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
+    } only %}
 {% endblock %}
 
 {% block reduxStore %}
