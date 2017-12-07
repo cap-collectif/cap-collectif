@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Swarrot\Broker\Message;
@@ -63,7 +63,7 @@ class CommentSubscriber implements EventSubscriberInterface
                     ])
                 ));
             }
-            if ($comment instanceof Comment &&
+            if (($comment instanceof ProposalComment || $comment instanceof IdeaComment) &&
                 $comment->getRelatedObject()->getAuthor()->getNotificationsConfiguration()->isOnProposalCommentMail() &&
                 $comment->getRelatedObject()->getAuthor() !== $comment->getAuthor()) {
                 $this->publisher->publish('comment.create', new Message(

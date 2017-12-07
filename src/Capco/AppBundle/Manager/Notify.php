@@ -489,7 +489,7 @@ class Notify implements MailerInterface
             $result['subject']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
             $result['body']['%username%'] = $comment->getAuthorName() ?: $comment->getAuthorEmail() ?: '';
         } else {
-            if ($comment instanceof Comment) {
+            if ($comment instanceof ProposalComment || $comment instanceof IdeaComment) {
                 $result['subject']['%username%'] = $comment->getAuthor()->getDisplayName();
                 $result['body']['%username%'] = $comment->getAuthor()->getDisplayName();
                 $result['body']['%userUrl%'] = $this->router->generate(
