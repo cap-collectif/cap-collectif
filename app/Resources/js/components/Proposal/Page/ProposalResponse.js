@@ -23,7 +23,7 @@ class ProposalResponse extends React.Component<Props> {
       value = (
         <div>
           <h3 className="h3">{response.field.question}</h3>
-          <ProposalMediaResponse medias={response.value} />
+          <ProposalMediaResponse medias={response.medias} />
         </div>
       );
     } else {
