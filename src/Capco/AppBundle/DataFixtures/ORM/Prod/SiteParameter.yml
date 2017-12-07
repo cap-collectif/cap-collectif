@@ -242,7 +242,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ''
         position: 770
         type: 1
-
+    SiteParameterBlogMetaDescription:
+        keyname: blog.metadescription
+        category: pages.blog
+        value: ''
+        position: 761
+        type: 0
     SiteParameterScript:
         keyname: global.site.embed_js
         category: settings.global
@@ -282,6 +287,12 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 303
         type: 1
+    SiteParameterEventMetaDescription:
+        keyname: event.metadescription
+        category: pages.events
+        value: ''
+        position: 304
+        type: 0
 
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken
