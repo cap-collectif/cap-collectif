@@ -11,12 +11,18 @@ trait MetaDescriptionTrait
      */
     private $metaDescription;
 
-    public function getMetaDescription(): string
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
     {
         return $this->metaDescription;
     }
 
-    public function setMetaDescription(string $metaDescription)
+    /**
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription)
     {
         $this->metaDescription = $metaDescription;
     }
