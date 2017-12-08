@@ -89,8 +89,8 @@ input ChangeProposalContentInput {
   # The proposal id
   id: ID!
 
-  # Pass false to publishn, otherwise your proposal will be a draft
-  draft: Boolean!
+  # Pass 'true' to keep your proposal in draft state, otherwise we admit that you want to publish it.
+  draft: Boolean
 
   # The new proposal title
   title: String

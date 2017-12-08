@@ -7,8 +7,8 @@ CreateProposalInput:
                 type: "ID!"
                 description: "The id of the form form proposal"
             draft:
-                type: "Boolean!"
-                description: "If true will create a draft proposal"
+                type: "Boolean"
+                description: "If true will create a draft proposal, otherwise a published proposal."
             title:
                 type: "String"
                 description: "The proposal title"

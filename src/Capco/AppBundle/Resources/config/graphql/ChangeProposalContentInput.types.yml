@@ -7,8 +7,8 @@ ChangeProposalContentInput:
                 type: "ID!"
                 description: "The proposal id"
             draft:
-                type: "Boolean!"
-                description: "Pass false to publishn, otherwise your proposal will be a draft"
+                type: "Boolean"
+                description: "Pass 'true' to keep your proposal in draft state, otherwise we admit that you want to publish it."
             title:
                 type: "String"
                 description: "The new proposal title"

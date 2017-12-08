@@ -14,6 +14,7 @@ use Capco\AppBundle\Form\ProposalType;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Error\UserErrors;
 use Swarrot\Broker\Message;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -255,10 +256,15 @@ class ProposalMutation implements ContainerAwareInterface
         }
         unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
 
-        $draft = $values['draft'];
-        unset($values['draft']);
+        $draft = false;
+        if (isset($values['draft'])) {
+            $draft = $values['draft'];
+            unset($values['draft']);
+        }
 
-        $this->formatResponses($values['responses']);
+        if (isset($values['responses'])) {
+            $this->formatResponses($values['responses']);
+        }
 
         $proposal = (new Proposal())
             ->setDraft($draft)
@@ -280,9 +286,14 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            $error = 'Input not valid : ' . (string) $form->getErrors(true, false);
-            $logger->error($error);
-            throw new UserError($error);
+            $errors = [];
+            foreach ($form->getErrors() as $error) {
+                $logger->error((string) $error->getMessage());
+                $errors[] = (string) $error->getMessage();
+            }
+            if (!empty($errors)) {
+                throw new UserErrors($errors);
+            }
         }
 
         $em->persist($proposal);
@@ -336,10 +347,17 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError($error);
         }
 
-        $draft = $proposal->isDraft() ? $values['draft'] : false;
-        unset($values['draft']);
+        $draft = false;
+        if (isset($values['draft'])) {
+            if (!$proposal->isDraft()) {
+                $draft = $values['draft'];
+            }
+            unset($values['draft']);
+        }
 
-        $this->formatResponses($values['responses']);
+        if (isset($values['responses'])) {
+            $this->formatResponses($values['responses']);
+        }
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposal->getProposalForm(),
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
@@ -356,12 +374,17 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $logger->info('changeContent:' . json_encode($values, true));
-        $form->submit($values);
+        $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $error = 'Input not valid : ' . (string) $form->getErrors(true, false);
-            $logger->error($error);
-            throw new UserError($error);
+            $errors = [];
+            foreach ($form->getErrors() as $error) {
+                $logger->error((string) $error->getMessage());
+                $errors[] = (string) $error->getMessage();
+            }
+            if (!empty($errors)) {
+                throw new UserErrors($errors);
+            }
         }
 
         $proposal->setUpdateAuthor($user);

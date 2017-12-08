@@ -27,6 +27,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             $question = $qaq->getQuestion();
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
                 $this->context->buildViolation($constraint->message)->atPath('responses')->addViolation();
+
+                return;
             }
         }
     }
