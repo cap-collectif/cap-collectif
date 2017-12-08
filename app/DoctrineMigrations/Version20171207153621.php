@@ -26,6 +26,10 @@ class Version20171207153621 extends AbstractMigration
         $this->addSql('ALTER TABLE page ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE event ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE blog_post ADD meta_description VARCHAR(160) DEFAULT NULL');
+
+        $this->addSql('ALTER TABLE page ADD cover_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\'');
+        $this->addSql('ALTER TABLE page ADD CONSTRAINT FK_140AB620922726E9 FOREIGN KEY (cover_id) REFERENCES media__media (id) ON DELETE SET NULL');
+        $this->addSql('CREATE INDEX IDX_140AB620922726E9 ON page (cover_id)');
     }
 
     /**
@@ -44,5 +48,9 @@ class Version20171207153621 extends AbstractMigration
         $this->addSql('ALTER TABLE step DROP meta_description');
         $this->addSql('ALTER TABLE theme DROP meta_description');
         $this->addSql('ALTER TABLE project DROP meta_description');
+
+        $this->addSql('ALTER TABLE page DROP FOREIGN KEY FK_140AB620922726E9');
+        $this->addSql('DROP INDEX IDX_140AB620922726E9 ON page');
+        $this->addSql('ALTER TABLE page DROP cover_id');
     }
 }
