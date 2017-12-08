@@ -13,7 +13,7 @@ class UserNotificationsConfigurationMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function change(Argument $args, $user)
+    public function change(Argument $args, User $user)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');
