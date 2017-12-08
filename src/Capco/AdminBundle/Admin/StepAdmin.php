@@ -373,6 +373,14 @@ class StepAdmin extends Admin
                 ->end()
             ;
         }
+        $formMapper
+            ->with('admin.fields.step.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'projects.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])
+            ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)

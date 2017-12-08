@@ -152,6 +152,7 @@ class ProjectAdmin extends Admin
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_steps', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.project.advanced', ['class' => 'col-md-12'])->end()
         ;
 
         $formMapper
@@ -273,6 +274,14 @@ class ProjectAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ])
+            ->end();
+
+        $formMapper->with('admin.fields.project.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'projects.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])
             ->end()
         ;
     }

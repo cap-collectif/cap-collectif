@@ -3,18 +3,18 @@
 {% block canonical_link %}{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    <meta property="og:title" content="{{ project.title }}" />
-    <meta property="og:url" content="{{ url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" />
-    <meta property="og:type" content="project" />
-    {% if project.Cover %}
-        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
-    {% endif %}
-    {% if is_feature_enabled('profiles') %}
-        <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-        <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-    {% endif %}
-
+    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'type':        'project',
+        'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null,
+        'image':       image,
+        'url':         url('app_project_show_questionnaire', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}),
+    } only %}
 {% endblock %}
+
 
 {% block title %}
     {{ parent() }} - {{ project.title }}

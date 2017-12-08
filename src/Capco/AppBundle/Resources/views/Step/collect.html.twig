@@ -1,20 +1,16 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
 {% block canonical_link %}{{ url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
-{% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
 
 {% block metaTags %}
     {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
-    {% set author = null %}
-    {% if is_feature_enabled('profiles') %}
-        {% set author = url('capco_user_profile_show_all', {'slug': project.author.slug}) %}
-    {% endif %}
+    {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'image':       image,
-        'author':      author,
-        'description': currentStep.body|striptags|truncate(250, true),
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null,
+        'description': currentStep.metaDescription|striptags ?: currentStep.body|striptags|truncate(250, true),
         'url':         url('app_project_show_collect', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
     } only %}
 {% endblock %}
