@@ -20,6 +20,12 @@ class Version20171207153621 extends AbstractMigration
 
         $this->addSql('ALTER TABLE site_image ADD is_social_network_thumbnail TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE site_parameter ADD is_social_network_description TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE project ADD meta_description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE theme ADD meta_description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE step ADD meta_description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE page ADD meta_description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE event ADD meta_description LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE blog_post ADD meta_description LONGTEXT DEFAULT NULL');
     }
 
     /**
@@ -32,5 +38,11 @@ class Version20171207153621 extends AbstractMigration
 
         $this->addSql('ALTER TABLE site_image DROP is_social_network_thumbnail');
         $this->addSql('ALTER TABLE site_parameter DROP is_social_network_description');
+        $this->addSql('ALTER TABLE blog_post DROP meta_description');
+        $this->addSql('ALTER TABLE event DROP meta_description');
+        $this->addSql('ALTER TABLE page DROP meta_description');
+        $this->addSql('ALTER TABLE step DROP meta_description');
+        $this->addSql('ALTER TABLE theme DROP meta_description');
+        $this->addSql('ALTER TABLE project DROP meta_description');
     }
 }

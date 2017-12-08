@@ -7,6 +7,7 @@ use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,10 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface
 {
-    use DateHelperTrait;
-    use CommentableTrait;
-    use IdTrait;
-    use TextableTrait;
+    use DateHelperTrait, CommentableTrait, IdTrait, TextableTrait, MetaDescriptionTrait;
 
     /**
      * @var string
@@ -648,7 +646,7 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function lastOneDay()
     {
-        if ($this->endAt === null) {
+        if (null === $this->endAt) {
             return true;
         }
 
@@ -669,7 +667,7 @@ class Event implements CommentableInterface, IndexableInterface
     {
         $now = new \DateTime();
 
-        if ($this->endAt === null) {
+        if (null === $this->endAt) {
             return $this->startAt < $now && $this->isSameDate($this->startAt, $now);
         }
 
@@ -680,7 +678,7 @@ class Event implements CommentableInterface, IndexableInterface
     {
         $now = new \DateTime();
 
-        if ($this->endAt === null) {
+        if (null === $this->endAt) {
             return $this->extractDate($this->startAt) < $this->extractDate($now);
         }
 

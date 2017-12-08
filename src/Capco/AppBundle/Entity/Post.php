@@ -6,6 +6,7 @@ use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,9 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post implements CommentableInterface, IndexableInterface
 {
-    use CommentableTrait;
-    use IdTrait;
-    use TextableTrait;
+    use CommentableTrait, IdTrait, TextableTrait, MetaDescriptionTrait;
 
     /**
      * @Assert\NotBlank()

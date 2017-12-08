@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page
 {
-    use IdTrait, TextableTrait;
+    use IdTrait, TextableTrait, MetaDescriptionTrait;
 
     /**
      * @var string
