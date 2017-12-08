@@ -344,7 +344,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, int $limit = null, int $themeId = null, string $districtId = null, $categoryId = null): array
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null, $categoryId = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name')
@@ -401,7 +401,7 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countForSelectionStep(SelectionStep $step, int $themeId = null, string $districtId = null, $categoryId = null): int
+    public function countForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null): int
     {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('COUNT(p.id)')

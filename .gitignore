@@ -73,6 +73,7 @@ Icon
 # capco
 infrastructure/services/remote/VERSION
 data/*
+syslog
 dump.sql
 
 # cs-fixer

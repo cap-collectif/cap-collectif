@@ -37,7 +37,7 @@ class NavigationContext extends PageObjectContext
     /**
      * @Then The first comment vote counter should be :value
      */
-    public function theFirstCommentVoteCounterShouldBe(int $value)
+    public function theFirstCommentVoteCounterShouldBe(string $value)
     {
         expect($this->getPage('idea page')->getFirstCommentVoteCounter())->toBe($value);
     }

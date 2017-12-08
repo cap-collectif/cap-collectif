@@ -124,11 +124,13 @@ trait ProjectStepsTrait
     }
 
     /**
-     * @Then the votes stats should be filtered by category
+     * @Then the votes stats should be filtered by category and I should see :number items
+     *
+     * @param mixed $number
      */
-    public function theVotesStatsShouldBeFilteredByCategory()
+    public function theVotesStatsShouldBeFilteredByCategory($number)
     {
         $selector = $this->navigationContext->getPage('project stats page')->getVotesStatsItemsSelector();
-        $this->assertNumElements(2, $selector);
+        $this->assertNumElements($number, $selector);
     }
 }
