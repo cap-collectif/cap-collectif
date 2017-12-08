@@ -16,7 +16,6 @@ import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules
 import { reducer as userReducer } from '../redux/modules/user';
 import { reducer as defaultReducer } from '../redux/modules/default';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
-import type { SetSubmittingDraftAction } from '../redux/modules/proposal';
 import type { Store } from '../types';
 
 export default function configureStore(initialState: Object): Store {
@@ -80,22 +79,6 @@ export default function configureStore(initialState: Object): Store {
             return state;
         }
       },
-      // 'proposal-form': (state, action: SetSubmittingDraftAction) => {
-      //   switch (action.type) {
-      //     case 'proposal/SET_SUBMITTING_DRAFT': {
-      //       // const fields = Object.keys(state.values).forEach(function(key){ return  {[key]: {touched: true} }});
-      //       return {
-      //         ...state,
-      //         values: { ...state.values, draft: action.isDraft },
-      //         fields: { ...state.fields, category: {touched: true} },
-      //         anyTouched: true,
-      //         // triggerSubmit: true,
-      //       }
-      //     }
-      //     default:
-      //       return state;
-      //   }
-      // },
     }),
   };
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
-import { isSubmitting, submit, change, isInvalid, getFormSyncErrors, isPristine } from 'redux-form';
+import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
@@ -12,7 +12,7 @@ import ProposalDraftAlert from '../Page/ProposalDraftAlert';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalEditModalQueryResponse } from './__generated__/ProposalEditModalQuery.graphql';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
-import { closeEditProposalModal, setSubmittingDraft } from '../../../redux/modules/proposal';
+import { closeEditProposalModal } from '../../../redux/modules/proposal';
 
 const render = ({ props, error }: ReadyState & { props: ?ProposalEditModalQueryResponse }) => {
   if (error) {

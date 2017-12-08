@@ -82,7 +82,6 @@ type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-export type SetSubmittingDraftAction = { type: 'proposal/SET_SUBMITTING_DRAFT', isDraft: boolean };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
 type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
@@ -249,11 +248,6 @@ export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({
   type: 'proposal/OPEN_DELETE_MODAL',
 });
 
-export const setSubmittingDraft = (isDraft: boolean): SetSubmittingDraftAction => ({
-  type: 'proposal/SET_SUBMITTING_DRAFT',
-  isDraft,
-});
-
 export const openCreateModal = (): OpenCreateModalAction => ({
   type: 'proposal/OPEN_CREATE_MODAL',
 });
@@ -332,7 +326,10 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStepId: string) {
+export const addProposalInRandomResultsByStep = (
+  proposal: { +id: string },
+  currentProjectStepId: string,
+) => {
   if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
     const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
     const lastProposals = randomResultsByStep[currentProjectStepId];
@@ -349,7 +346,7 @@ function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStep
       ...proposals,
     });
   }
-}
+};
 
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   let url = '';
@@ -639,7 +636,6 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 
 export type ProposalAction =
   | OpenCreateModalAction
-  | SetSubmittingDraftAction
   | FetchVotesRequestedAction
   | SubmitFusionFormAction
   | ChangeFilterAction

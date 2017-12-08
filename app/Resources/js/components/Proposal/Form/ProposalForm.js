@@ -26,7 +26,11 @@ import Fetcher from '../../../services/Fetcher';
 import CreateProposalMutation, {
   type CreateProposalMutationResponse,
 } from '../../../mutations/CreateProposalMutation';
-import { closeCreateModal, closeEditProposalModal } from '../../../redux/modules/proposal';
+import {
+  closeCreateModal,
+  closeEditProposalModal,
+  addProposalInRandomResultsByStep,
+} from '../../../redux/modules/proposal';
 import ChangeProposalContentMutation, {
   type ChangeProposalContentMutationResponse,
 } from '../../../mutations/ChangeProposalContentMutation';
@@ -68,14 +72,14 @@ type RelayProps = {
 };
 
 type Props = FormProps &
-  RelayProps & {
+  RelayProps & {|
     +intl: IntlShape,
     +themes: Array<Object>,
     +dispatch: Dispatch,
     +features: FeatureToggles,
     +titleValue: ?string,
     +addressValue: ?string,
-  };
+  |};
 
 type FormValues = {
   title: ?string,
@@ -86,6 +90,7 @@ type FormValues = {
   theme: ?string,
   district: ?string,
   responses: Array<Object>,
+  media: ?any,
   draft: boolean,
 };
 
@@ -109,33 +114,30 @@ type FormValues = {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
-  // Only used for the user view
-  if (typeof values.addressText !== 'undefined') {
-    delete values.addressText;
-  }
-  values.responses = formatSubmitResponses(values.responses, proposalForm.questions);
+
+  const data = {
+    ...values,
+    responses: formatSubmitResponses(values.responses, proposalForm.questions),
+    media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
+    addressText: undefined,
+  };
 
   if (!proposalForm.step) {
     return;
   }
   if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: { ...values, id: proposal.id },
+      input: { ...data, id: proposal.id },
     })
       .then((response: ChangeProposalContentMutationResponse) => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
-          throw new Error('');
+          throw new Error('Mutation "changeProposalContent" failed.');
         }
-        console.log(response);
+        const updatedProposal = response.changeProposalContent.proposal;
+        if (updatedProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
+          addProposalInRandomResultsByStep(updatedProposal, proposalForm.step.id);
+        }
         dispatch(closeEditProposalModal());
-        // FluxDispatcher.dispatch({
-        //   actionType: UPDATE_ALERT,
-        //   alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-        // });
-        // const proposal = res.propsal;
-        // if (!proposal.isDraft) {
-        //     addProposalInRandomResultsByStep(proposal, currentStepId);
-        // }
         location.reload();
       })
       .catch(() => {
@@ -146,23 +148,18 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return CreateProposalMutation.commit({
-    input: { ...values, proposalFormId: proposalForm.id },
+    input: { ...data, proposalFormId: proposalForm.id },
   })
     .then((response: CreateProposalMutationResponse) => {
       if (!response.createProposal || !response.createProposal.proposal) {
-        throw new Error('');
+        throw new Error('Mutation "createProposal" failed.');
       }
-      window.location.href = response.createProposal.proposal.show_url;
+      const createdProposal = response.createProposal.proposal;
+      if (createdProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
+        addProposalInRandomResultsByStep(createdProposal, proposalForm.step.id);
+      }
+      window.location.href = createdProposal.show_url;
       dispatch(closeCreateModal());
-      // if (!proposal.isDraft) {
-      //   addProposalInRandomResultsByStep(proposal, currentStepId);
-      // }
-      //         actionType: UPDATE_ALERT,
-      //         alert: {
-      //           bsStyle: 'success',
-      //           content: 'proposal.request.create.success',
-      //         },
-      //       });
     })
     .catch(() => {
       throw new SubmissionError({
@@ -258,7 +255,7 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, proposal, error } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, error } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -454,7 +451,6 @@ export class ProposalForm extends React.Component<Props, State> {
           name="media"
           component={component}
           type="image"
-          image={proposal && proposal.media ? proposal.media.url : null}
           label={
             <span>
               <FormattedMessage id="proposal.media" />
@@ -479,7 +475,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) 
     theme: proposal && proposal.theme ? proposal.theme.id : null,
     district: proposal && proposal.district ? proposal.district.id : null,
     category: proposal && proposal.category ? proposal.category.id : null,
-    media: proposal && proposal.media ? proposal.media.id : null,
+    media: proposal ? proposal.media : null,
     addressText:
       proposal && proposal.address ? JSON.parse(proposal.address)[0].formatted_address : '',
     address: (proposal && proposal.address) || null,
@@ -539,6 +535,8 @@ export default createFragmentContainer(container, {
       }
       media {
         id
+        name
+        size
         url
       }
     }

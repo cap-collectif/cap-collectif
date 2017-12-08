@@ -255,7 +255,6 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     component={[Function]}
     help="Illustration help"
     id="proposal_media"
-    image={null}
     label={
       <span>
         <FormattedMessage
@@ -534,7 +533,6 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     component={[Function]}
     help="Illustration help"
     id="proposal_media"
-    image="http://capco.dev"
     label={
       <span>
         <FormattedMessage

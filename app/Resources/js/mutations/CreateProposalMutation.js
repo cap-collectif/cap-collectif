@@ -15,6 +15,7 @@ const mutation = graphql`
       proposal {
         id
         show_url
+        publicationStatus
       }
     }
   }

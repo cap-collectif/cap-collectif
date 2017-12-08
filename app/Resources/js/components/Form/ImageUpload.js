@@ -9,8 +9,7 @@ import PreviewMedia from './PreviewMedia';
 import Fetcher, { json } from '../../services/Fetcher';
 
 type Props = {
-  preview: any,
-  value: Array<Object>,
+  value: Object | Array<Object>,
   onChange: Function,
   id: string,
   className: string,
@@ -20,29 +19,16 @@ type Props = {
   minSize: number,
   disablePreview: boolean,
 };
-type State = {
-  preview: any,
-  delete: boolean,
-};
 
-export class ImageUpload extends React.Component<Props, State> {
+export class ImageUpload extends React.Component<Props> {
   static defaultProps = {
     id: '',
     className: '',
-    preview: null,
     multiple: false,
     maxSize: Infinity,
     minSize: 0,
     disablePreview: false,
   };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      preview: this.props.preview,
-      delete: false,
-    };
-  }
 
   onDrop = (acceptedFiles: Array<File>) => {
     const { onChange, multiple, value } = this.props;
@@ -69,18 +55,12 @@ export class ImageUpload extends React.Component<Props, State> {
   };
 
   onToggleDelete = () => {
-    const { onChange } = this.props;
+    const { onChange, multiple } = this.props;
     // $FlowFixMe
     const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
-      if (onChange && typeof onChange !== 'undefined') {
-        onChange(null);
-      }
+      onChange(multiple ? [] : null);
     }
-    this.setState({
-      delete: deleteValue,
-      preview: null,
-    });
   };
 
   uncheckDelete = () => {
@@ -93,22 +73,13 @@ export class ImageUpload extends React.Component<Props, State> {
   };
 
   removeMedia = (media: Object) => {
-    const newValue = this.props.multiple ? this.props.value.filter(m => m.id !== media.id) : null;
+    const { multiple, value } = this.props;
+    const newValue = multiple ? value.filter(m => m.id !== media.id) : null;
     this.props.onChange(newValue);
   };
 
   render() {
-    const {
-      className,
-      id,
-      preview,
-      multiple,
-      accept,
-      maxSize,
-      minSize,
-      disablePreview,
-      value,
-    } = this.props;
+    const { className, id, multiple, accept, maxSize, minSize, disablePreview, value } = this.props;
     const classes = {
       'image-uploader': true,
     };
@@ -137,7 +108,7 @@ export class ImageUpload extends React.Component<Props, State> {
         {disablePreview && (
           <Col xs={12} sm={12} style={{ marginBottom: 5 }}>
             <PreviewMedia
-              medias={value}
+              medias={Array.isArray(value) ? value : [value]}
               onRemoveMedia={media => {
                 this.removeMedia(media);
               }}
@@ -178,20 +149,24 @@ export class ImageUpload extends React.Component<Props, State> {
               <FormattedMessage id="global.image_uploader.image.preview" />
             </p>
             <div className="image-uploader__preview text-center">
-              {this.state.preview && (
-                <img alt="" src={this.state.preview} className="img-responsive" />
+              {value && Array.isArray(value) ? (
+                value.map(media => (
+                  <img alt="" key={media.id} src={media.url} className="img-responsive" />
+                ))
+              ) : (
+                <img alt="" src={value.url} className="img-responsive" />
               )}
             </div>
-            {(this.state.preview || preview) && (
-                <Input
-                  type="checkbox"
-                  name="image-uploader__delete"
-                  onChange={this.onToggleDelete}
-                  // $FlowFixMe
-                  ref={c => (this._deleteCheckbox = c)}
-                  children={<FormattedMessage id="global.image_uploader.image.delete" />}
-                />
-              )}
+            {value && (
+              <Input
+                type="checkbox"
+                name="image-uploader__delete"
+                onChange={this.onToggleDelete}
+                // $FlowFixMe
+                ref={c => (this._deleteCheckbox = c)}
+                children={<FormattedMessage id="global.image_uploader.image.delete" />}
+              />
+            )}
           </Col>
         )}
       </Row>

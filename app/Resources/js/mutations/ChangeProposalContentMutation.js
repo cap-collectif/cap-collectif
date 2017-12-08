@@ -17,6 +17,7 @@ const mutation = graphql`
         title
         body
         summary
+        publicationStatus
         responses {
           question {
             id

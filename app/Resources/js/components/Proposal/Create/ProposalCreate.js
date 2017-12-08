@@ -10,11 +10,7 @@ import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
-import {
-  openCreateModal,
-  closeCreateModal,
-  setSubmittingDraft,
-} from '../../../redux/modules/proposal';
+import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
 import type { ProposalCreateQueryResponse } from './__generated__/ProposalCreateQuery.graphql';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
 
