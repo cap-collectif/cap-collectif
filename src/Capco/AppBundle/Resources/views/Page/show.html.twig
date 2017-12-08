@@ -3,12 +3,16 @@
 {% block canonical_link %}{{ url('app_page_show', {'slug': page.slug}) }}{% endblock %}
 
 {% block metaTags %}
+    {% set picto = capco_site_image_media('homepage.picto') %}
+    {% set image %}{% if page.cover %}{% path page.cover, 'blockHeader' %}{% else %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       page.title,
-        'description': page.body|striptags|truncate(250, true),
+        'image':       image,
+        'description': page.metaDescription|striptags ?: page.body|striptags|truncate(250, true),
         'url':         url('app_page_show', {'slug': page.slug})
     } only %}
 {% endblock %}
+
 
 {% block title %}
     {{ parent() }} - {{ page.title }}

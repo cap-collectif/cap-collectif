@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -31,6 +32,14 @@ class Page
      * @ORM\Column(length=255)
      */
     private $slug;
+
+    /**
+     * @var Media
+     *
+     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $cover;
 
     /**
      * @var \DateTime
@@ -244,5 +253,21 @@ class Page
     public function removeMenuItem($menuItem)
     {
         $this->MenuItems->removeElement($menuItem);
+    }
+
+    /**
+     * @return Media
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    /**
+     * @param Media $cover
+     */
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
     }
 }
