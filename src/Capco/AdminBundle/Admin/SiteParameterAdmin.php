@@ -50,13 +50,15 @@ class SiteParameterAdmin extends Admin
         $types = SiteParameter::$types;
 
         if ($subject->getType() === $types['simple_text']) {
-            $formMapper->add('value', TextType::class, [
-                    'label' => 'admin.fields.site_parameter.value',
-                    'required' => false,
-                ]);
+            $options = [
+                'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
+            ];
             if ($subject->isSocialNetworkDescription()) {
-                $formMapper->addHelp('value', 'admin.help.metadescription');
+                $options['help'] = 'admin.help.metadescription';
+                $options['max_length'] = 160;
             }
+            $formMapper->add('value', TextType::class, $options);
         } elseif ($subject->getType() === $types['rich_text']) {
             $formMapper->add('value', CKEditorType::class, [
                 'label' => 'admin.fields.site_parameter.value',

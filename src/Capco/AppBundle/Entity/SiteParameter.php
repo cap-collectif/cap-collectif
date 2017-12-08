@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -11,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="site_parameter")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
+ * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
 class SiteParameter
 {

@@ -4,10 +4,11 @@
 
 {% block metaTags %}
     {% set picto = capco_site_image_media('homepage.picto') %}
-    {% set image %}{% if page.cover %}{% path page.cover, 'blockHeader' %}{% else %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}{% if page.cover %}{% path page.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       page.title,
         'image':       image,
+        'type':        'article',
         'description': page.metaDescription|striptags ?: page.body|striptags|truncate(250, true),
         'url':         url('app_page_show', {'slug': page.slug})
     } only %}

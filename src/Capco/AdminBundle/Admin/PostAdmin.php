@@ -178,8 +178,14 @@ class PostAdmin extends Admin
                     'context' => 'default',
                     'hide_context' => true,
                 ],
-            ])
-        ;
+            ])->end();
+        $formMapper
+            ->with('admin.fields.page.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'post.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])->end();
 
         $formMapper
             ->end()

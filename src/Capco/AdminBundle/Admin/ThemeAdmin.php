@@ -183,8 +183,14 @@ class ThemeAdmin extends Admin
                     'hide_context' => true,
                     'provider' => 'sonata.media.provider.image',
                 ],
-            ])
-        ;
+            ])->end();
+        $formMapper
+            ->with('admin.fields.page.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'theme.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])->end();
     }
 
     /**
