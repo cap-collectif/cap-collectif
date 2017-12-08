@@ -32,6 +32,49 @@ class Version20171207153621 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_140AB620922726E9 ON page (cover_id)');
     }
 
+    public function postUp(Schema $schema)
+    {
+        $this->setPosition('ideas.jumbotron.title', 1);
+        $this->setPosition('ideas.jumbotron.body', 2);
+        $this->setPosition('ideas.content.body', 3);
+        $this->setPosition('ideas.pagination', 4);
+        $this->setPosition('ideas.metadescription', 5);
+
+        $this->setPosition('blog.jumbotron.title', 1);
+        $this->setPosition('blog.jumbotron.body', 2);
+        $this->setPosition('blog.content.body', 3);
+        $this->setPosition('blog.pagination.size', 4);
+        $this->setPosition('blog.metadescription', 5);
+
+        $this->setPosition('events.jumbotron.title', 1);
+        $this->setPosition('events.jumbotron.body', 2);
+        $this->setPosition('events.content.body', 3);
+        $this->setPosition('events.metadescription', 4);
+
+        $this->setPosition('members.jumbotron.title', 1);
+        $this->setPosition('members.jumbotron.body', 2);
+        $this->setPosition('members.content.body', 3);
+        $this->setPosition('members.pagination.size', 4);
+        $this->setPosition('members.metadescription', 5);
+
+        $this->setPosition('contact.jumbotron.title', 1);
+        $this->setPosition('contact.jumbotron.body', 2);
+        $this->setPosition('contact.content.body', 3);
+        $this->setPosition('contact.content.phone_number', 4);
+        $this->setPosition('admin.mail.contact', 5);
+        $this->setPosition('contact.metadescription', 6);
+
+        $this->setPosition('ideas.trashed.jumbotron.title', 1);
+        $this->setPosition('ideas.trashed.content.body', 2);
+        $this->setPosition('ideas_trash.metadescription', 3);
+    }
+
+    private function setPosition($keyname, $position)
+    {
+        echo "-> Updating $keyname with position $position " . PHP_EOL;
+        echo $this->connection->update('site_parameter', ['position' => $position], ['keyname' => $keyname]) . ' rows updated';
+    }
+
     /**
      * @param Schema $schema
      */

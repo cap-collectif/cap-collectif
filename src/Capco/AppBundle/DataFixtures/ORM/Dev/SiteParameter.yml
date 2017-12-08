@@ -68,22 +68,35 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: ideas.jumbotron.title
         category: pages.ideas
         value: Idées
-        position: 400
+        position: 1
         type: 0
     SiteParameter13:
         keyname: ideas.jumbotron.body
         category: pages.ideas
         value: |
             <p><text(100)></p>
-        position: 410
+        position: 2
         type: 1
     SiteParameter14:
         keyname: ideas.content.body
         category: pages.ideas
         value: |
             <p><text(100)></p>
-        position: 420
+        position: 3
         type: 1
+    SiteParameter25:
+        keyname: ideas.pagination
+        category: pages.ideas
+        value: 20
+        position: 4
+        type: 2
+    SiteParameterIdeasMetaDescription:
+        keyname: ideas.metadescription
+        category: pages.ideas
+        value: ''
+        position: 5
+        isSocialNetworkDescription: true
+        type: 0
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
         category: pages.ideas_trash
@@ -158,12 +171,6 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 16
         position: 700
         type: 2
-    SiteParameter25:
-        keyname: ideas.pagination
-        category: pages.ideas
-        value: 20
-        position: 710
-        type: 2
     SiteParameter26:
         keyname: themes.pagination
         category: pages.themes
@@ -223,26 +230,26 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: blog.pagination.size
         category: pages.blog
         value: 10
-        position: 750
+        position: 780
         type: 2
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
         category: pages.blog
-        value: <p>Description de la page "Blog"</p>
+        value: Description de la page "Blog"
         position: 760
         type: 1
     SiteParameterBlogJumbotronTitle:
         keyname: blog.jumbotron.title
         category: pages.blog
         value: Blog
-        position: 770
+        position: 750
         type: 0
     SiteParameterBlogDescription:
         keyname: blog.content.body
         category: pages.blog
         value: |
-           <p><text(100)></p>
-        position: 771
+            <p><text(100)></p>
+        position: 770
         type: 1
 
     SiteParameterScript:
@@ -361,18 +368,11 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 304
         isSocialNetworkDescription: true
         type: 0
-    SiteParameterIdeasMetaDescription:
-        keyname: ideas.metadescription
-        category: pages.ideas
-        value: ''
-        position: 421
-        isSocialNetworkDescription: true
-        type: 0
     SiteParameterBlogMetaDescription:
         keyname: blog.metadescription
         category: pages.blog
         value: ''
-        position: 761
+        position: 790
         isSocialNetworkDescription: true
         type: 0
     SiteParameterThemesMetaDescription:

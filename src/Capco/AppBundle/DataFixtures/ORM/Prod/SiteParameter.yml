@@ -162,7 +162,7 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: ideas.pagination
         category: pages.ideas
         value: 16
-        position: 710
+        position: 421
         type: 2
     SiteParameter26:
         keyname: themes.pagination
@@ -222,7 +222,7 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: blog.pagination.size
         category: pages.blog
         value: 10
-        position: 750
+        position: 780
         type: 2
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
@@ -234,13 +234,13 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: blog.jumbotron.title
         category: pages.blog
         value: Blog
-        position: 770
+        position: 750
         type: 0
     SiteParameterBlogDescription:
         keyname: blog.content.body
         category: pages.blog
         value: ''
-        position: 771
+        position: 770
         type: 1
 
     SiteParameterScript:
@@ -360,14 +360,14 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: ideas.metadescription
         category: pages.ideas
         value: ''
-        position: 421
+        position: 422
         isSocialNetworkDescription: true
         type: 0
     SiteParameterBlogMetaDescription:
         keyname: blog.metadescription
         category: pages.blog
         value: ''
-        position: 761
+        position: 790
         isSocialNetworkDescription: true
         type: 0
     SiteParameterThemesMetaDescription:
@@ -399,7 +399,7 @@ Capco\AppBundle\Entity\SiteParameter:
         isSocialNetworkDescription: true
         type: 0
     SiteParameterTrashIdeasMetaDescription:
-        keyname: ideas_trash.metadescription
+        keyname: ideas.trashed.metadescription
         category: pages.ideas_trash
         value: ''
         position: 441
