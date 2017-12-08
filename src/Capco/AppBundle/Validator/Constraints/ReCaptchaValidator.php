@@ -25,7 +25,7 @@ class ReCaptchaValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if ($this->toggle->isActive('captcha') && $this->enabled && !$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
+        if ($this->enabled && $this->toggle->isActive('captcha') && !$this->recaptcha->verify($value, $this->request->getClientIp())->isSuccess()) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

@@ -1,30 +1,35 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import mailcheck from 'mailcheck';
 import { FormControl } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import domains from '../../utils/email_domains';
 
-const EmailInput = React.createClass({
-  propTypes: {
-    value: PropTypes.any,
-    onChange: PropTypes.func.isRequired,
-  },
+type Props = {
+  value: ?any,
+  onChange: (response: ?string) => void,
+};
 
-  getInitialState() {
-    return { suggestion: null };
-  },
+type State = {
+  suggestion: ?string,
+};
 
-  componentDidUpdate(prevProps) {
+export class EmailInput extends React.Component<Props, State> {
+  state = {
+    suggestion: null,
+  };
+
+  componentDidUpdate(prevProps: Props) {
     const { value } = this.props;
     if (prevProps.value !== value) {
       this.checkMail();
     }
-  },
+  }
 
   setSuggestion() {
     const { onChange } = this.props;
     onChange(this.state.suggestion);
-  },
+  }
 
   checkMail() {
     const { value } = this.props;
@@ -34,17 +39,16 @@ const EmailInput = React.createClass({
       suggested: suggestion => this.setState({ suggestion: suggestion.full }),
       empty: () => this.setState({ suggestion: null }),
     });
-  },
+  }
 
   render() {
-    // const { onChange } = this.props;
     const { suggestion } = this.state;
     return (
       <div>
         <FormControl type="email" {...this.props} />
         {suggestion && (
           <p className="registration__help">
-            Vouliez vous dire{' '}
+            <FormattedMessage id="registration.email.suggestion" />{' '}
             <a
               href={'#email-correction'}
               onClick={() => {
@@ -58,7 +62,7 @@ const EmailInput = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default EmailInput;
