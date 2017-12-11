@@ -48,7 +48,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         values={Object {}}
       />
     </Button>
-    <AlertAdminForm
+    <AlertForm
       invalid={false}
       submitFailed={false}
       submitSucceeded={true}
@@ -139,7 +139,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         values={Object {}}
       />
     </Button>
-    <AlertAdminForm
+    <AlertForm
       invalid={false}
       submitFailed={false}
       submitSucceeded={true}
@@ -230,7 +230,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         values={Object {}}
       />
     </Button>
-    <AlertAdminForm
+    <AlertForm
       invalid={false}
       submitFailed={true}
       submitSucceeded={false}
@@ -321,7 +321,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         values={Object {}}
       />
     </Button>
-    <AlertAdminForm
+    <AlertForm
       invalid={false}
       submitFailed={true}
       submitSucceeded={false}

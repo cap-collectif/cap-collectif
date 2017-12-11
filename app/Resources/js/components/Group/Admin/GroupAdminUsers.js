@@ -13,7 +13,7 @@ import {
   type FormProps,
 } from 'redux-form';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 
@@ -26,6 +26,8 @@ type Props = FormProps & {
 type State = {
   showAddUsersModal: boolean,
   user: Object,
+  groupAdminUsersUserDeletionFailed: ?boolean,
+  groupAdminUsersUserDeletionSuccessful: ?boolean,
 };
 
 export const formName = 'group-admin-users';
@@ -34,9 +36,11 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
     user: {},
+    groupAdminUsersUserDeletionFailed: null,
+    groupAdminUsersUserDeletionSuccessful: null,
   };
 
-  getAlertAdminForm() {
+  getAlertForm() {
     const {
       valid,
       invalid,
@@ -47,39 +51,33 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       userIsNotDeleted,
     } = this.props;
 
-    if(userIsDeleted) {
+    if (userIsDeleted) {
       return (
-        <AlertAdminForm
-          valid
-          invalid={false}
-          submitSucceeded
-          submitFailed={false}
-          submitting={false}
-        />
-      )
+        <AlertForm valid invalid={false} submitSucceeded submitFailed={false} submitting={false} />
+      );
     }
 
-    if(userIsNotDeleted) {
+    if (userIsNotDeleted) {
       return (
-        <AlertAdminForm
+        <AlertForm
           valid={false}
           invalid={false}
           submitSucceeded={false}
           submitFailed
           submitting={false}
         />
-      )
+      );
     }
 
     return (
-      <AlertAdminForm
+      <AlertForm
         valid={valid}
         invalid={invalid}
         submitSucceeded={submitSucceeded}
         submitFailed={submitFailed}
         submitting={submitting}
       />
-    )
+    );
   }
 
   openCreateModal = () => {
@@ -110,14 +108,10 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           </a>
         </div>
         <div className="box-content">
-          <Button
-            bsStyle="success"
-            href="#"
-            onClick={() => this.openCreateModal()}
-          >
+          <Button bsStyle="success" href="#" onClick={() => this.openCreateModal()}>
             <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
           </Button>
-          {this.getAlertAdminForm()}
+          {this.getAlertForm()}
           <GroupAdminModalAddUsers
             show={showAddUsersModal}
             onClose={this.handleClose}
@@ -129,7 +123,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
                 .map(edge => edge && edge.node)
                 // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
                 .filter(Boolean)
-                .map((user) => (
+                .map(user => (
                   <GroupAdminUsersListGroupItem key={user.id} user={user} groupId={group.id} />
                 ))}
             </ListGroup>
@@ -152,8 +146,8 @@ const mapStateToProps = (state: State) => {
     submitSucceeded: hasSubmitSucceeded('group-users-add')(state),
     submitFailed: hasSubmitFailed('group-users-add')(state),
     userIsDeleted: state.user.groupAdminUsersUserDeletionSuccessful,
-    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed
-  }
+    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
+  };
 };
 
 const container = connect(mapStateToProps)(GroupAdminUsers);

@@ -7,9 +7,13 @@ import { connect } from 'react-redux';
 import DeleteModal from '../../Modal/DeleteModal';
 import DefaultAvatar from '../../User/DefaultAvatar';
 import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
-import { groupAdminUsersUserDeletionSuccessful, groupAdminUsersUserDeletionFailed, groupAdminUsersUserDeletionReset } from '../../../redux/modules/user'
+import {
+  groupAdminUsersUserDeletionSuccessful,
+  groupAdminUsersUserDeletionFailed,
+  groupAdminUsersUserDeletionReset,
+} from '../../../redux/modules/user';
 import type { GroupAdminUsersListGroupItem_user } from './__generated__/GroupAdminUsersListGroupItem_user.graphql';
-import type { Uuid, Dispatch } from "../../../types"
+import type { Uuid, Dispatch } from '../../../types';
 
 type Props = {
   groupId: string,
@@ -24,19 +28,18 @@ type State = {
 const onDelete = (userId: Uuid, groupId: Uuid, dispatch: Dispatch) => {
   dispatch(groupAdminUsersUserDeletionReset());
 
-
   return DeleteUserInGroupMutation.commit({
     input: {
       userId,
       groupId,
     },
   })
-  .then(() => {
-    dispatch(groupAdminUsersUserDeletionSuccessful())
-  })
-  .catch(() => {
-    dispatch(groupAdminUsersUserDeletionFailed())
-  })
+    .then(() => {
+      dispatch(groupAdminUsersUserDeletionSuccessful());
+    })
+    .catch(() => {
+      dispatch(groupAdminUsersUserDeletionFailed());
+    });
 };
 
 export class GroupAdminUsersListGroupItem extends React.Component<Props, State> {
@@ -59,7 +62,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
           closeDeleteModal={this.cancelCloseRemoveUserModal}
           showDeleteModal={showRemoveUserModal}
           deleteElement={() => {
-            onDelete(user.id, groupId, dispatch)
+            onDelete(user.id, groupId, dispatch);
           }}
           deleteModalTitle={'group.admin.user.modal.delete.title'}
           deleteModalContent={'group.admin.user.modal.delete.content'}
@@ -67,11 +70,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
         <Row>
           <Col xs={3}>
             {user.media ? (
-              <img
-                className="img-circle mr-15"
-                src={user.media.url}
-                alt={user.displayName}
-              />
+              <img className="img-circle mr-15" src={user.media.url} alt={user.displayName} />
             ) : (
               <DefaultAvatar className="img-circle avatar mr-15" />
             )}
@@ -93,7 +92,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
               {user.email}
               {user.phone && (
                 <span>
-                {' | '}
+                  {' | '}
                   {user.phone}
                 </span>
               )}

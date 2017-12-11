@@ -12,7 +12,7 @@ import {
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import component from '../../Form/Field';
@@ -255,7 +255,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   bsStyle="primary">
                   <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
                 </Button>
-                <AlertAdminForm
+                <AlertForm
                   valid={valid}
                   errorMessage={error}
                   invalid={invalid}

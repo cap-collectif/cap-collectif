@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import type { GroupAdminParameters_group } from './__generated__/GroupAdminParameters_group.graphql';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import DeleteGroupMutation from '../../../mutations/DeleteGroupMutation';
 import SubmitButton from '../../Form/SubmitButton';
 import type { Dispatch } from '../../../types';
@@ -74,7 +74,15 @@ export class GroupAdminParameters extends React.Component<Props, State> {
   };
 
   render() {
-    const { submitting, submit, invalid, valid, submitSucceeded, submitFailed, pristine } = this.props;
+    const {
+      submitting,
+      submit,
+      invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
+      pristine,
+    } = this.props;
     const { showDeleteModal } = this.state;
 
     return (
@@ -111,7 +119,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
             <Button bsStyle="danger" onClick={this.openDeleteModal}>
               <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
             </Button>
-            <AlertAdminForm
+            <AlertForm
               valid={valid}
               invalid={invalid}
               submitSucceeded={submitSucceeded}

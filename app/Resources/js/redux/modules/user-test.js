@@ -27,6 +27,8 @@ const initialState: State = {
     domains: [],
   },
   user: null,
+  groupAdminUsersUserDeletionSuccessful: false,
+  groupAdminUsersUserDeletionFailed: false,
 };
 
 describe('User Reducer', () => {

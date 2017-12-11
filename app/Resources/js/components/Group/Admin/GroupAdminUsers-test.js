@@ -13,7 +13,7 @@ describe('<GroupAdminUsers />', () => {
         edges: [
           {
             node: {
-              id: 'id1'
+              id: 'id1',
             },
           },
         ],
@@ -73,5 +73,4 @@ describe('<GroupAdminUsers />', () => {
     const wrapper = shallow(<GroupAdminUsers {...props} {...FailAddUser} />);
     expect(wrapper).toMatchSnapshot();
   });
-
 });

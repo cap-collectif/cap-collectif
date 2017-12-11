@@ -14,7 +14,7 @@ describe('<GroupAdminModalAddUsers />', () => {
       title: 'Comité de suvi',
       usersConnection: [],
     },
-    intl: global.intlMock
+    intl: global.intlMock,
   };
 
   it('render correctly', () => {

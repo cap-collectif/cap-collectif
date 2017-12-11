@@ -11,7 +11,7 @@ import ChangeProposalContentMutation, {
 } from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import {
@@ -325,7 +325,7 @@ export class ProposalAdminContentForm extends React.Component<Props> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              <AlertAdminForm
+              <AlertForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

@@ -6,7 +6,7 @@ import { GroupAdminUsersListGroupItem } from './GroupAdminUsersListGroupItem';
 
 describe('<GroupAdminUsers />', () => {
   const props = {
-    groupeId: 'group4',
+    groupId: 'group4',
     user: {
       id: 'id1',
       displayName: 'toto',
@@ -15,7 +15,7 @@ describe('<GroupAdminUsers />', () => {
       phone: null,
       media: { url: 'https://capco.dev' },
     },
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   };
 
   it('render correctly', () => {

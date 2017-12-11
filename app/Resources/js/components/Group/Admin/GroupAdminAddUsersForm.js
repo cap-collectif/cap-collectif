@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import type { Dispatch } from '../../../types';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
-import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user'
+import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
@@ -39,7 +39,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, rese
     },
   };
 
-  return AddUsersInGroupMutation.commit(variables).then(() => {reset(); onClose()});
+  return AddUsersInGroupMutation.commit(variables).then(() => {
+    reset();
+    onClose();
+  });
 };
 
 export class GroupAdminAddUsersForm extends React.Component<Props> {
@@ -84,7 +87,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   form: formName,
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
 })(GroupAdminAddUsersForm);
 
 export default injectIntl(form);
