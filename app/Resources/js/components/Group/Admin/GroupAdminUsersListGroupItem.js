@@ -25,7 +25,7 @@ type State = {
   showRemoveUserModal: boolean,
 };
 
-const onDelete = (userId: Uuid, groupId: Uuid, dispatch: Dispatch) => {
+const onDelete = (userId: Uuid, groupId: Uuid, dispatch) => {
   dispatch(groupAdminUsersUserDeletionReset());
 
   return DeleteUserInGroupMutation.commit({

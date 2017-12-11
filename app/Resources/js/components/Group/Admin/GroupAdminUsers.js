@@ -26,8 +26,6 @@ type Props = FormProps & {
 type State = {
   showAddUsersModal: boolean,
   user: Object,
-  groupAdminUsersUserDeletionFailed: ?boolean,
-  groupAdminUsersUserDeletionSuccessful: ?boolean,
 };
 
 export const formName = 'group-admin-users';
@@ -36,8 +34,6 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
     user: {},
-    groupAdminUsersUserDeletionFailed: null,
-    groupAdminUsersUserDeletionSuccessful: null,
   };
 
   getAlertForm() {
