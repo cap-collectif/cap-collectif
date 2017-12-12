@@ -1,85 +1,136 @@
 // @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Button } from 'react-bootstrap';
 import Input from './Input';
 import PreviewMedia from './PreviewMedia';
-import Fetcher, { json } from '../../services/Fetcher';
 
-type Props = {
-  value: Object | Array<Object>,
-  onChange: Function,
-  id: string,
-  className: string,
-  multiple: boolean,
-  accept: string,
-  maxSize: number,
-  minSize: number,
-  disablePreview: boolean,
-};
+const ImageUpload = React.createClass({
+  propTypes: {
+    preview: PropTypes.any,
+    valueLink: PropTypes.object,
+    value: PropTypes.any,
+    onChange: PropTypes.func,
+    id: PropTypes.string,
+    className: PropTypes.string,
+    multiple: PropTypes.bool,
+    accept: PropTypes.string,
+    maxSize: PropTypes.number,
+    minSize: PropTypes.number,
+    disablePreview: PropTypes.bool,
+    files: PropTypes.array.isRequired,
+  },
 
-export class ImageUpload extends React.Component<Props> {
-  static defaultProps = {
-    id: '',
-    className: '',
-    multiple: false,
-    maxSize: Infinity,
-    minSize: 0,
-    disablePreview: false,
-  };
+  _deleteCheckbox: Input,
 
-  onDrop = (acceptedFiles: Array<File>) => {
-    const { onChange, multiple, value } = this.props;
-    for (const file of acceptedFiles) {
-      const formData = new FormData();
-      formData.append('file', file);
-      Fetcher.postFormData('/files', formData)
-        .then(json)
-        .then(res => {
-          const newFile = {
-            id: res.id,
-            name: res.name,
-            url: res.url,
-          };
-          this.uncheckDelete();
-          const newValue = multiple ? [...value, newFile] : newFile;
-          onChange(newValue);
-        });
+  getDefaultProps() {
+    return {
+      id: '',
+      className: '',
+      preview: null,
+      multiple: false,
+      maxSize: Infinity,
+      minSize: 0,
+      disablePreview: false,
+      files: [],
+    };
+  },
+
+  getInitialState() {
+    const { preview } = this.props;
+    return {
+      preview,
+      delete: false,
+      files: [],
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    const value = nextProps.valueLink ? nextProps.valueLink.value : nextProps.value;
+    if (value) {
+      this.setState({
+        preview: value.preview,
+      });
     }
-  };
+  },
 
-  onOpenClick = () => {
+  onDrop(droppedFiles) {
+    const { valueLink, onChange, multiple } = this.props;
+    let files = droppedFiles.filter(file => file !== null);
+    if (files.length > 0 && files.length <= 5 && this.state.files.length <= 5) {
+      files = files.concat(this.state.files);
+      this.setState(
+        {
+          delete: false,
+          files,
+        },
+        () => {
+          this.uncheckDelete();
+          const newValue = multiple ? files : files[0];
+          if (typeof newValue !== 'undefined') {
+            if (valueLink) {
+              valueLink.requestChange(newValue);
+            }
+            if (onChange && typeof onChange !== 'undefined') {
+              onChange(newValue);
+            }
+          }
+        },
+      );
+    }
+  },
+
+  onOpenClick() {
     this.refs.dropzone.open();
-  };
+  },
 
-  onToggleDelete = () => {
-    const { onChange, multiple } = this.props;
+  onToggleDelete() {
+    const { valueLink, onChange } = this.props;
     // $FlowFixMe
     const deleteValue = !this._deleteCheckbox.getWrappedInstance().getValue();
     if (deleteValue) {
-      onChange(multiple ? [] : null);
+      if (valueLink) {
+        valueLink.requestChange(null);
+      } else if (onChange && typeof onChange !== 'undefined') {
+        onChange(null);
+      }
     }
-  };
+    this.setState({
+      delete: deleteValue,
+      preview: null,
+    });
+  },
 
-  uncheckDelete = () => {
-    // $FlowFixMe
+  uncheckDelete() {
     const ref = this._deleteCheckbox;
     if (ref) {
       // $FlowFixMe
       $(ref.getDOMNode()).prop('checked', false);
     }
-  };
+  },
 
-  removeMedia = (media: Object) => {
-    const { multiple, value } = this.props;
-    const newValue = multiple ? value.filter(m => m.id !== media.id) : null;
-    this.props.onChange(newValue);
-  };
+  removeMedia(media) {
+    this.setState({
+      files: this.state.files.filter(file => {
+        return file !== media;
+      }),
+    });
+  },
 
   render() {
-    const { className, id, multiple, accept, maxSize, minSize, disablePreview, value } = this.props;
+    const {
+      className,
+      id,
+      preview,
+      multiple,
+      accept,
+      maxSize,
+      minSize,
+      disablePreview,
+      files,
+    } = this.props;
     const classes = {
       'image-uploader': true,
     };
@@ -108,7 +159,8 @@ export class ImageUpload extends React.Component<Props> {
         {disablePreview && (
           <Col xs={12} sm={12} style={{ marginBottom: 5 }}>
             <PreviewMedia
-              medias={Array.isArray(value) ? value : [value]}
+              currentMedias={files}
+              newMedias={this.state.files}
               onRemoveMedia={media => {
                 this.removeMedia(media);
               }}
@@ -131,13 +183,11 @@ export class ImageUpload extends React.Component<Props> {
               {multiple ? dropzoneTextForFile : dropzoneTextForImage}
               <p style={{ textAlign: 'center' }}>
                 <Button className="image-uploader__btn">
-                  <FormattedMessage
-                    id={
-                      multiple
-                        ? 'global.image_uploader.file.btn'
-                        : 'global.image_uploader.image.btn'
-                    }
-                  />
+                  {multiple ? (
+                    <FormattedMessage id="global.image_uploader.file.btn" />
+                  ) : (
+                    <FormattedMessage id="global.image_uploader.image.btn" />
+                  )}
                 </Button>
               </p>
             </div>
@@ -146,32 +196,27 @@ export class ImageUpload extends React.Component<Props> {
         {!disablePreview && (
           <Col xs={12} sm={12}>
             <p className="h5 text-center">
-              <FormattedMessage id="global.image_uploader.image.preview" />
+              {<FormattedMessage id="global.image_uploader.image.preview" />}
             </p>
             <div className="image-uploader__preview text-center">
-              {value && Array.isArray(value) ? (
-                value.map(media => (
-                  <img alt="" key={media.id} src={media.url} className="img-responsive" />
-                ))
-              ) : (
-                <img alt="" src={value.url} className="img-responsive" />
+              {this.state.preview && (
+                <img alt="" src={this.state.preview} className="img-responsive" />
               )}
             </div>
-            {value && (
-              <Input
-                type="checkbox"
-                name="image-uploader__delete"
-                onChange={this.onToggleDelete}
-                // $FlowFixMe
-                ref={c => (this._deleteCheckbox = c)}
-                children={<FormattedMessage id="global.image_uploader.image.delete" />}
-              />
-            )}
+            {(this.state.preview || preview) && (
+                <Input
+                  type="checkbox"
+                  name="image-uploader__delete"
+                  onChange={this.onToggleDelete}
+                  ref={c => (this._deleteCheckbox = c)}
+                  children={<FormattedMessage id="global.image_uploader.image.delete" />}
+                />
+              )}
           </Col>
         )}
       </Row>
     );
-  }
-}
+  },
+});
 
 export default ImageUpload;

@@ -14,10 +14,9 @@ class MediaResponse extends AbstractResponse
 {
     /**
      * @ORM\ManyToMany(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinTable(
-     *   name="responses_medias",
-     *   joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id", unique=false)}
+     * @ORM\JoinTable(name="responses_medias",
+     *      joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id", unique=false)}
      * )
      */
     protected $medias;
@@ -42,7 +41,7 @@ class MediaResponse extends AbstractResponse
         return $this;
     }
 
-    public function setMedias(Collection $medias): self
+    public function setMedias(ArrayCollection $medias): self
     {
         $this->medias = $medias;
 

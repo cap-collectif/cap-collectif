@@ -25,10 +25,8 @@ class ValueResponseType extends AbstractType
         $this->transformer->setEntityClass(AbstractQuestion::class);
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
 
-        $builder
-            ->add('value')
-            ->add('question')
-        ;
+        $builder->add('value')
+            ->add('question');
 
         $builder->get('question')->addModelTransformer($this->transformer);
 
@@ -44,8 +42,8 @@ class ValueResponseType extends AbstractType
             'data_class' => ValueResponse::class,
             'model_class' => ValueResponse::class,
             'csrf_protection' => false,
-            'allow_extra_fields' => true,
             'translation_domain' => 'CapcoAppBundle',
+            'cascade_validation' => true,
         ]);
     }
 
