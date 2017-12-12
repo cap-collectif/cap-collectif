@@ -1,4 +1,5 @@
 /*eslint-disable */
+
 var document = window.document;
 var supportsTextContent = 'textContent' in document.body;
 
@@ -42,6 +43,7 @@ var cookieChoices = function() {
     _setElementText(dismissLink, dismissText);
     dismissLink.id = dismissLinkId;
     dismissLink.href = '#';
+    dismissLink.title = "j'ai compris";
     dismissLink.style.marginLeft = '24px';
     dismissLink.className = 'btn  btn-darkest-gray';
     return dismissLink;
@@ -52,6 +54,7 @@ var cookieChoices = function() {
     _setElementText(infoLink, linkText);
     infoLink.href = linkHref;
     infoLink.target = '';
+    infoLink.title = 'en savoir plus sur les cookies';
     infoLink.style.marginLeft = '8px';
     return infoLink;
   }

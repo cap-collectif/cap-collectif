@@ -77,7 +77,7 @@ class ProposalRepository extends EntityRepository
               ->getSingleScalarResult() > 0;
     }
 
-    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, $first = 0, $offset = 100): Paginator
+    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, int $first = 0, int $offset = 100): Paginator
     {
         $qb = $this
             ->qbProposalsByFormAndEvaluer($form, $user)

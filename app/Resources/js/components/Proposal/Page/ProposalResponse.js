@@ -1,17 +1,16 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 
-type Props = {
-  response: Object,
-};
+const ProposalResponse = React.createClass({
+  propTypes: {
+    response: React.PropTypes.object.isRequired,
+  },
 
-class ProposalResponse extends React.Component<Props> {
-  isHTML = () => {
+  isHTML() {
     const { response } = this.props;
     return /<[a-z][\s\S]*>/i.test(response.value);
-  };
+  },
 
   render() {
     const response = this.props.response;
@@ -42,7 +41,7 @@ class ProposalResponse extends React.Component<Props> {
     return (
       <ProposalPrivateField show={response.field.private} children={value} divClassName="block" />
     );
-  }
-}
+  },
+});
 
 export default ProposalResponse;

@@ -5,6 +5,8 @@ namespace Capco\AppBundle\Entity\Responses;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class ValueResponse.
+ *
  * @ORM\Entity()
  */
 class ValueResponse extends AbstractResponse

@@ -43,12 +43,12 @@ class ProposalType extends AbstractType
             $builder->add('theme');
         }
 
-        if ($form->isUsingCategories()) {
-            $builder->add('category');
-        }
-
         if ($this->toggleManager->isActive('districts') && $form->isUsingDistrict()) {
             $builder->add('district');
+        }
+
+        if ($form->isUsingCategories() && $form->getCategories()->count() > 0) {
+            $builder->add('category');
         }
 
         if ($form->getUsingAddress()) {
@@ -58,18 +58,16 @@ class ProposalType extends AbstractType
         $builder
             ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
-                'allow_delete' => true,
+                'allow_delete' => false,
                 'by_reference' => false,
-                'index_property' => $options['index_property'],
                 'types' => [
                     ValueResponseType::class,
                     MediaResponseType::class,
                 ],
                 'type_name' => AbstractResponse::TYPE_FIELD_NAME,
+                'required' => false,
             ])
         ;
-
-        $builder->add('media');
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -77,10 +75,9 @@ class ProposalType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Proposal::class,
             'csrf_protection' => false,
-            'translation_domain' => false,
+            'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
             'proposalForm' => null,
-            'index_property' => 'id',
         ]);
     }
 }
