@@ -1,26 +1,43 @@
-import React, { PropTypes } from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+// @flow
+import * as React from 'react';
+import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import ProposalForm from '../Form/ProposalForm';
+import ProposalForm, { formName } from '../Form/ProposalForm';
 import ProposalDraftAlert from '../Page/ProposalDraftAlert';
-import { editProposalForm, closeEditProposalModal } from '../../../redux/modules/proposal';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import type { ProposalEditModalQueryResponse } from './__generated__/ProposalEditModalQuery.graphql';
+import type { Uuid, Dispatch, GlobalState } from '../../../types';
+import { closeEditProposalModal } from '../../../redux/modules/proposal';
 
-const ProposalEditModal = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    form: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired,
-    proposal: PropTypes.object.isRequired,
-    show: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+const render = ({ props, error }: ReadyState & { props: ?ProposalEditModalQueryResponse }) => {
+  if (error) {
+    return graphqlError;
+  }
+  if (props) {
+    return <ProposalForm proposalForm={props.proposalForm} proposal={props.proposal} />;
+  }
+  return null;
+};
 
+type Props = {
+  intl: IntlShape,
+  form: { id: Uuid },
+  proposal: { id: Uuid, isDraft: boolean },
+  show: boolean,
+  submitting: boolean,
+  invalid: boolean,
+  pristine: boolean,
+  dispatch: Dispatch,
+};
+
+class ProposalEditModal extends React.Component<Props> {
   render() {
-    const { categories, form, proposal, show, isSubmitting, dispatch, intl } = this.props;
+    const { invalid, form, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     return (
       <div>
         <Modal
@@ -38,17 +55,28 @@ const ProposalEditModal = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.edit" />}
+              <FormattedMessage id="global.edit" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ProposalDraftAlert proposal={proposal} />
-            <ProposalForm
-              form={form}
-              categories={categories}
-              isSubmitting={isSubmitting}
-              mode="edit"
-              proposal={proposal}
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
+                query ProposalEditModalQuery($proposalFormId: ID!, $proposalId: ID!) {
+                  proposalForm(id: $proposalFormId) {
+                    ...ProposalForm_proposalForm
+                  }
+                  proposal(id: $proposalId) {
+                    ...ProposalForm_proposal
+                  }
+                }
+              `}
+              variables={{
+                proposalFormId: form.id,
+                proposalId: proposal.id,
+              }}
+              render={render}
             />
           </Modal.Body>
           <Modal.Footer>
@@ -60,32 +88,45 @@ const ProposalEditModal = React.createClass({
             {proposal.isDraft && (
               <SubmitButton
                 id="confirm-proposal-create-as-draft"
-                isSubmitting={isSubmitting}
-                onSubmit={() => dispatch(editProposalForm(true))}
-                bsStyle="draft"
+                isSubmitting={submitting}
+                disabled={pristine}
+                onSubmit={() => {
+                  dispatch(change(formName, 'draft', true));
+                  setTimeout(() => {
+                    // TODO find a better way
+                    // We need to wait validation values to be updated with 'draft'
+                    dispatch(submit(formName));
+                  }, 200);
+                }}
                 label="global.save_as_draft"
               />
             )}
-
             <SubmitButton
               label="global.submit"
               id="confirm-proposal-edit"
-              isSubmitting={isSubmitting}
+              isSubmitting={submitting}
+              disabled={invalid}
               onSubmit={() => {
-                dispatch(editProposalForm());
+                dispatch(change(formName, 'draft', false));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
               }}
             />
           </Modal.Footer>
         </Modal>
       </div>
     );
-  },
+  }
+}
+
+const mapStateToProps = (state: GlobalState) => ({
+  show: state.proposal.showEditModal,
+  submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
+  invalid: isInvalid(formName)(state),
 });
 
-const mapStateToProps = state => {
-  return {
-    show: state.proposal.showEditModal,
-    isSubmitting: state.proposal.isEditing,
-  };
-};
 export default connect(mapStateToProps)(injectIntl(ProposalEditModal));

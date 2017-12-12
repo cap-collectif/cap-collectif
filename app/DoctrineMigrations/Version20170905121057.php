@@ -10,10 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Version20170905121057 extends AbstractMigration implements ContainerAwareInterface
 {
-    private $generator;
-    private $em;
-
-    public function setContainer(ContainerInterface $container = null)
+  public function setContainer(ContainerInterface $container = null)
   {
     $this->em = $container->get('doctrine')->getManager();
     $this->generator = new UuidGenerator();
@@ -30,9 +27,9 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
     {
         $proposalForms = $this->connection->fetchAll('SELECT * from proposal_form');
         $districts = $this->connection->fetchAll('SELECT * from district');
-        if (\count($proposalForms) === 0) {
+        if (count($proposalForms) === 0) {
           foreach($districts as $district) {
-              $this->connection->delete('district', ['id' => $district['id']]);
+              $this->connection->remove('district', ['id' => $district['id']]);
           }
           return;
         }
@@ -42,7 +39,7 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
         foreach ($districts as $district) {
           $this->connection->update('district', ['form_id' => $formId], ['id' => $district['id']]);
         }
-        if (\count($proposalForms) === 1) {
+        if (count($proposalForms) === 1) {
           return;
         }
 
@@ -59,7 +56,7 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
             // We must update district for each proposal
             $proposals = $this->connection->fetchAll('SELECT * from proposal');
             foreach ($proposals as $proposal) {
-              if ($proposal['district_id'] === $previousDistrictId && $proposal['proposal_form_id'] === $proposalForm['id']) {
+              if ($proposal['proposal_form_id'] === $proposalForm['id'] && $proposal['district_id'] === $previousDistrictId) {
                 $this->connection->update('proposal', ['district_id' => $newDistrictId], ['id' => $proposal['id']]);
               }
             }
