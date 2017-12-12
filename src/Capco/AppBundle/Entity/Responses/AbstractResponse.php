@@ -13,11 +13,22 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Response.
- *
- * @ORM\Table(name="response")
+ * @ORM\Table(
+ *   name="response",
+ *   uniqueConstraints={
+ *        @UniqueConstraint(
+ *            name="proposal_response_unique",
+ *            columns={"proposal_id", "question_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="evaluation_response_unique",
+ *            columns={"evaluation_id", "question_id"}
+ *        )
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractResponseRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasRequiredNumberOfChoices()
@@ -33,18 +44,15 @@ abstract class AbstractResponse
     use IdTrait;
     use TimestampableTrait;
 
-    const TYPE_FIELD_NAME = 'type';
+    const TYPE_FIELD_NAME = '_type';
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
-     * @var Proposal
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
@@ -57,8 +65,6 @@ abstract class AbstractResponse
     private $user;
 
     /**
-     * @var Reply
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
@@ -72,15 +78,15 @@ abstract class AbstractResponse
 
     /**
      * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="responses",
-     *                                                                                  cascade={"persist", "remove"})
+     * @ORM\ManyToOne(
+     *   targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion",
+     *   inversedBy="responses",
+     *   cascade={"persist", "remove"}
+     * )
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $question;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
@@ -96,64 +102,43 @@ abstract class AbstractResponse
         return $this->proposal;
     }
 
-    /**
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
-    public function setProposal(Proposal $proposal)
+    public function setProposal(Proposal $proposal = null): self
     {
         $this->proposal = $proposal;
 
         return $this;
     }
 
-    public function setUser(User $user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @return AbstractQuestion
-     */
-    public function getQuestion()
+    public function getQuestion()//: AbstractQuestion
     {
         return $this->question;
     }
 
-    /**
-     * @param AbstractQuestion $question
-     *
-     * @return $this
-     */
-    public function setQuestion(AbstractQuestion $question)
+    public function setQuestion(AbstractQuestion $question): self
     {
         $this->question = $question;
 
         return $this;
     }
 
-    /**
-     * @return Reply
-     */
     public function getReply()
     {
         return $this->reply;
     }
 
-    /**
-     * @param Reply $reply
-     *
-     * @return $this
-     */
-    public function setReply($reply)
+    public function setReply(Reply $reply = null): self
     {
         $this->reply = $reply;
 

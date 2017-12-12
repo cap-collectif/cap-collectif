@@ -1,9 +1,10 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import type { Connector } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import type { Dispatch } from '../../types';
 
 type PassedProps = {
   onChange: Function,
@@ -13,18 +14,22 @@ type PassedProps = {
   placeholder: string,
   formName: string,
   disabled: boolean,
+  error: ?string,
 };
 type DefaultProps = { disabled: boolean };
-type Props = PassedProps & DefaultProps & { updateAddressValue: Function };
+type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
-const autocompleteItem = ({ formattedSuggestion }: { formattedSuggestion: Object }) => (
-  <div>
-    <i className="cap cap-map-location" /> <strong>{formattedSuggestion.mainText}</strong>{' '}
-    <small>{formattedSuggestion.secondaryText}</small>
+const autocompleteItem = ({
+  formattedSuggestion,
+}: {
+  formattedSuggestion: { mainText: string, secondaryText: string },
+}) => (
+  <div className="places-autocomplete">
+    <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
   </div>
 );
 
-class Address extends Component<Props, void> {
+class Address extends React.Component<Props> {
   static defaultProps = {
     disabled: false,
   };
@@ -49,11 +54,11 @@ class Address extends Component<Props, void> {
   };
 
   render() {
-    const { placeholder, value, id, onChange } = this.props;
+    const { error, placeholder, value, id, onChange } = this.props;
     return (
       <PlacesAutocomplete
         inputProps={{
-          onChange: address => {
+          onChange: (address: ?string) => {
             onChange(address);
           },
           placeholder,
@@ -68,19 +73,39 @@ class Address extends Component<Props, void> {
           this.resetAddressField();
         }}
         classNames={{
+          root: `${error ? 'form-control-warning' : ''}`,
           input: 'form-control',
+          autocompleteContainer: {
+            zIndex: 9999,
+            position: 'absolute',
+            top: '100%',
+            backgroundColor: 'white',
+            border: '1px solid #555555',
+            width: '100%',
+          },
+          autocompleteItem: {
+            zIndex: 9999,
+            backgroundColor: '#ffffff',
+            padding: '10px',
+            color: '#555555',
+            cursor: 'pointer',
+          },
+          autocompleteItemActive: {
+            zIndex: 9999,
+            backgroundColor: '#fafafa',
+          },
         }}
       />
     );
   }
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = (dispatch: Dispatch, props: PassedProps) => ({
   updateAddressValue: value => {
     dispatch(change(props.formName, 'address', value));
   },
 });
 
-const connector: Connector<PassedProps, Props> = connect(mapDispatchToProps);
+const connector: Connector<PassedProps, Props> = connect(null, mapDispatchToProps);
 
 export default connector(Address);

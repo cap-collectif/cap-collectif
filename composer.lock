@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a93aa6e08a1c745a971448edb93e825",
+    "content-hash": "fab46b3f487a87b911c8347dc2dd1e98",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10912,16 +10912,16 @@
         },
         {
             "name": "coduo/php-matcher",
-            "version": "2.1.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "80ce761282da62db12906885f58d1e4bbddb525f"
+                "reference": "79a27d13e0edc699ede6e64bcfee1e9bb5498793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/80ce761282da62db12906885f58d1e4bbddb525f",
-                "reference": "80ce761282da62db12906885f58d1e4bbddb525f",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/79a27d13e0edc699ede6e64bcfee1e9bb5498793",
+                "reference": "79a27d13e0edc699ede6e64bcfee1e9bb5498793",
                 "shasum": ""
             },
             "require": {
@@ -10939,7 +10939,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -10968,7 +10968,7 @@
                 "matcher",
                 "tests"
             ],
-            "time": "2016-10-20T14:41:41+00:00"
+            "time": "2017-09-04T10:03:41+00:00"
         },
         {
             "name": "coduo/php-to-string",
