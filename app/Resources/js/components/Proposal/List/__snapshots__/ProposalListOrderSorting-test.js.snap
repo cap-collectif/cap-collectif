@@ -3,6 +3,7 @@
 exports[`<ProposalListOrderSorting /> should render the list order sorting component 1`] = `
 <div>
   <InjectIntl(ReactBootstrapInput)
+    aria-label="global.filter"
     id="proposal-sorting"
     onChange={[Function]}
     type="select"

@@ -101,7 +101,7 @@ class Navbar extends React.Component<Props> {
         <Navigation.Header>
           {logo && (
             <Navigation.Brand href="/" id="home">
-              <a href="/">
+              <a href="/" title={intl.formatMessage({ id: 'navbar.homepage' })}>
                 <img src={logo} alt={siteName} />
               </a>
             </Navigation.Brand>

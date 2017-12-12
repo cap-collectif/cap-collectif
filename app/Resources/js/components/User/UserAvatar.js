@@ -31,12 +31,13 @@ const UserAvatar = React.createClass({
 
   renderAvatar() {
     const { user } = this.props;
+    console.log(user);
     const size = `${this.props.size}px`;
     if (user && user.media) {
       return (
         <img
           src={user.media.url}
-          alt=""
+          alt={user.username}
           className="img-circle"
           style={{ width: size, height: size }}
         />
