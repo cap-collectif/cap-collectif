@@ -31,7 +31,6 @@ const UserAvatar = React.createClass({
 
   renderAvatar() {
     const { user } = this.props;
-    console.log(user);
     const size = `${this.props.size}px`;
     if (user && user.media) {
       return (

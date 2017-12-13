@@ -7,7 +7,6 @@
 $white: #fff;
 $black: #000;
 $gray-primary: #c0c0c0;
-$excerpt: #808080;
 $excerpt-dark-gray: #434343;
 $light-gray: #f6f6f6;
 $dark-gray: #868E96;
@@ -15,10 +14,11 @@ $dark-gray-hover: #727b84;
 $darkest-gray: #3e4149;
 $dark-blue: #2a6496;
 $light-blue: #428bca;
-$excerpt: #999;
 
 $success-color: #5cb85c;
 $danger-color: #d9534f;
+
+$excerpt: $dark-gray;
 
 // = Brand colors
 // -----------------------------
