@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -410,7 +412,21 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function addResponse(AbstractResponse $response): self
     {
-        if (!$this->responses->contains($response)) {
+        $found = false;
+        foreach ($this->responses as $currentResponse) {
+          $questionId = $currentResponse->getQuestion()->getId();
+          if ($response->getQuestion()->getId() === $questionId) {
+              if ($response instanceof ValueResponse) {
+                $currentResponse->setValue($response->getValue());
+              }
+              if ($response instanceof MediaResponse) {
+                $currentResponse->setMedias($response->getMedias());
+              }
+              $currentResponse->setUpdatedAt(new \DateTime());
+              $found = true;
+          }
+        }
+        if (!$found) {
             $this->responses[] = $response;
             $response->setProposal($this);
         }

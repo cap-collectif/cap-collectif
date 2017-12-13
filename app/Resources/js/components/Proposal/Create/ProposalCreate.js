@@ -1,29 +1,41 @@
-import React, { PropTypes } from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+// @flow
+import * as React from 'react';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
+import { isSubmitting, change, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import ProposalForm from '../Form/ProposalForm';
-import {
-  submitProposalForm,
-  openCreateModal,
-  closeCreateModal,
-} from '../../../redux/modules/proposal';
+import ProposalForm, { formName } from '../Form/ProposalForm';
+import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
+import type { ProposalCreateQueryResponse } from './__generated__/ProposalCreateQuery.graphql';
+import type { Uuid, Dispatch, GlobalState } from '../../../types';
 
-const ProposalCreate = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    form: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResponse }) => {
+  if (error) {
+    return graphqlError;
+  }
+  if (props) {
+    return <ProposalForm proposalForm={props.proposalForm} proposal={null} />;
+  }
+  return null;
+};
 
+type Props = {
+  intl: IntlShape,
+  form: { isContribuable: boolean, id: Uuid },
+  showModal: boolean,
+  submitting: boolean,
+  pristine: boolean,
+  dispatch: Dispatch,
+};
+
+export class ProposalCreate extends React.Component<Props> {
   render() {
-    const { intl, categories, form, showModal, isSubmitting, dispatch } = this.props;
+    const { intl, form, showModal, pristine, submitting, dispatch } = this.props;
     return (
       <div>
         <ProposalCreateButton
@@ -45,36 +57,65 @@ const ProposalCreate = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="proposal.add" />}
+              <FormattedMessage id="proposal.add" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalForm form={form} isSubmitting={isSubmitting} categories={categories} />
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
+                query ProposalCreateQuery($proposalFormId: ID!) {
+                  proposalForm(id: $proposalFormId) {
+                    ...ProposalForm_proposalForm
+                  }
+                }
+              `}
+              variables={{
+                proposalFormId: form.id,
+              }}
+              render={render}
+            />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />
             <SubmitButton
               id="confirm-proposal-create-as-draft"
-              isSubmitting={isSubmitting}
-              onSubmit={() => dispatch(submitProposalForm(true))}
-              bsStyle="draft"
+              isSubmitting={submitting}
+              disabled={pristine}
+              onSubmit={() => {
+                dispatch(change(formName, 'draft', true));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
+              }}
               label="global.save_as_draft"
             />
             <SubmitButton
               label="global.submit"
               id="confirm-proposal-create"
-              isSubmitting={isSubmitting}
-              onSubmit={() => dispatch(submitProposalForm())}
+              isSubmitting={submitting}
+              disabled={pristine}
+              onSubmit={() => {
+                dispatch(change(formName, 'draft', false));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
+              }}
             />
           </Modal.Footer>
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => ({
-  isSubmitting: state.proposal.isCreating,
+const mapStateToProps = (state: GlobalState) => ({
+  submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
   showModal: state.proposal.showCreateModal,
 });
 

@@ -113,7 +113,6 @@ class VideoAdmin extends Admin
             ])
             ->add('Author', 'sonata_type_model', [
                 'label' => 'admin.fields.video.author',
-                'choices_as_values' => true,
                 'required' => true,
             ])
             ->add('link', null, [

@@ -1,0 +1,120 @@
+@proposal
+Feature: Update a proposal
+
+@database
+Scenario: GraphQL client wants to edit his proposal
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          publicationStatus
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "proposal2",
+        "title": "Acheter un sauna par personne pour Capco",
+        "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "changeProposalContent": {
+        "proposal": {
+          "id": "proposal2",
+          "title": "Acheter un sauna par personne pour Capco",
+          "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
+          "publicationStatus": "PUBLISHED"
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: Super Admin GraphQL client wants to update a proposal
+  Given features themes, districts are enabled
+  And I am logged in to graphql as super admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          author {
+            id
+          }
+          theme {
+            id
+          }
+          district {
+            id
+          }
+          category {
+            id
+          }
+          responses {
+            question {
+              id
+            }
+            ... on ValueResponse {
+              value
+            }
+            ... on MediaResponse {
+              medias {
+                id
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "title": "NewTitle",
+        "body": "NewBody",
+        "theme": "theme1",
+        "author": "userAdmin",
+        "district": "district2",
+        "category": "pCategory2",
+        "responses": [
+          {
+            "question": "1",
+            "value": "reponse-1"
+          },
+          {
+            "question": "3",
+            "value": "reponse-3"
+          },
+          {
+            "question": "11",
+            "medias": ["media1"]
+          },
+          {
+            "question": "12",
+            "medias": ["media1"]
+          }
+        ],
+        "id": "proposal2"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"data":{"changeProposalContent":{"proposal":{"id":"proposal2","title":"NewTitle","body":"NewBody","author":{"id":"userAdmin"},"theme":{"id":"theme1"},"district":{"id":"district2"},"category":{"id":"pCategory2"},"responses":[{"question":{"id":"1"},"value":"reponse-1"},{"question":{"id":"3"},"value":"reponse-3"},{"question":{"id":"11"},"medias":[{"id":"media1"}]},{"question":{"id":"12"},"medias":[{"id":"media1"}]}]}}}}
+  """
