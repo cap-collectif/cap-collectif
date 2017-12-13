@@ -76,6 +76,7 @@ class ProposalType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Proposal::class,
             'csrf_protection' => false,
+            'allow_extra_fields' => true,
             'translation_domain' => 'CapcoAppBundle',
             'cascade_validation' => true,
             'proposalForm' => null,
