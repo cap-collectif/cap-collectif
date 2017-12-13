@@ -1,62 +1,84 @@
 // @flow
-import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import React, { Component } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
-import { type FormProps, reduxForm, Field, FieldArray } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
+import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import {
-  renderResponses,
-  formatSubmitResponses,
-  formatInitialResponsesValues,
-} from '../../../utils/responsesHelper';
 
 type FormValues = Object;
 type DefaultProps = void;
 type PassedProps = {
-  +proposal: ProposalAdminContentForm_proposal,
+  proposal: ProposalAdminContentForm_proposal,
 };
-type Props = FormProps &
-  PassedProps & {
-    +themes: Array<Object>,
-    +features: FeatureToggles,
-    +intl: IntlShape,
-    +isSuperAdmin: boolean,
-  };
+type Props = {
+  proposal: ProposalAdminContentForm_proposal,
+  themes: Array<Object>,
+  features: FeatureToggles,
+  handleSubmit: () => void,
+  intl: IntlShape,
+  isSuperAdmin: boolean,
+  submitSucceeded: boolean,
+  submitFailed: boolean,
+  pristine: boolean,
+  invalid: boolean,
+  valid: boolean,
+  submitting: boolean,
+};
+type State = void;
 
 const formName = 'proposal-admin-edit';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   // Only used for the user view
   delete values.addressText;
 
-  values.responses = formatSubmitResponses(values.responses, proposal.form.questions);
+  // We must remove Files to upload from variables and put them in uploadables
+  const uploadables = {};
+  if (values.media instanceof File) {
+    // User wants to upload a new media
+    uploadables.media = values.media;
+  }
+  delete values.media;
+
+  values.responses = values.responses.filter(res => {
+    if (!res.medias) {
+      // We only send value responses
+      return true;
+    }
+    for (const media of res.medias) {
+      if (media instanceof File) {
+        uploadables[`responses_${res.question}`] = media;
+      }
+    }
+    return false;
+  });
 
   // Only super admin can edit author
-  if (!isSuperAdmin) {
+  if (!props.isSuperAdmin) {
     delete values.author;
   }
 
   const variables = {
-    input: { ...values, id: proposal.id },
+    input: { ...values, id: props.proposal.id },
   };
 
-  return ChangeProposalContentMutation.commit(variables);
+  return ChangeProposalContentMutation.commit(variables, uploadables);
 };
 
-export const validateProposalContent = (
-  values: Object,
-  proposalForm: Object,
-  features: FeatureToggles,
-) => {
+const validate = (values: FormValues, { proposal, features }: Props) => {
   const errors = {};
+  const form = proposal.form;
+
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
   }
@@ -66,53 +88,35 @@ export const validateProposalContent = (
   if (!values.body || values.body.length <= 2) {
     errors.body = 'proposal.constraints.body';
   }
-  if (proposalForm.usingAddress && !values.address) {
+  if (form.usingAddress && !values.address) {
     errors.addressText = 'proposal.constraints.address';
   }
   if (
-    proposalForm.categories.length &&
-    proposalForm.usingCategories &&
-    proposalForm.categoryMandatory &&
+    form.categories.length &&
+    form.usingCategories &&
+    form.categoryMandatory &&
     !values.category
   ) {
     errors.category = 'proposal.constraints.category';
   }
-  if (
-    features.districts &&
-    proposalForm.usingDistrict &&
-    proposalForm.districtMandatory &&
-    !values.district
-  ) {
-    errors.district = 'proposal.constraints.district';
-  }
-  if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
+  if (features.districts && form.usingDistrict && form.districtMandatory && !values.district) {
     errors.theme = 'proposal.constraints.theme';
   }
-  const responsesError = [];
-  proposalForm.questions.map((field, index) => {
-    responsesError[index] = {};
+  if (features.themes && form.usingThemes && form.themeMandatory && !values.theme) {
+    errors.theme = 'proposal.constraints.theme';
+  }
+  form.questions.map(field => {
     if (field.required) {
-      const response = values.responses.filter(res => res && res.question === field.id)[0];
-      if (field.type === 'medias') {
-        if (!response || response.value.length === 0) {
-          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
-        }
-      } else if (!response || !response.value) {
-        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+      const response = values.responses.filter(res => res && res.question.id === field.id)[0];
+      if (!response) {
+        errors['responses[1].value'] = 'proposal.constraints.field_mandatory';
       }
     }
   });
-  if (responsesError.length) {
-    errors.responses = responsesError;
-  }
   return errors;
 };
 
-const validate = (values: FormValues, { proposal, features }: Props) => {
-  return validateProposalContent(values, proposal.form, features);
-};
-
-export class ProposalAdminContentForm extends React.Component<Props> {
+export class ProposalAdminContentForm extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     const {
@@ -127,7 +131,6 @@ export class ProposalAdminContentForm extends React.Component<Props> {
       isSuperAdmin,
       themes,
       handleSubmit,
-      intl,
     } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
@@ -286,10 +289,36 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               label={<FormattedMessage id="proposal.body" />}
             />
             <FieldArray
-              intl={intl}
               name="responses"
-              component={renderResponses}
-              questions={form.questions}
+              component={({ fields }) => (
+                <div>
+                  {fields.map((field, index) => {
+                    const response = this.props.proposal.responses.filter(
+                      res => res && res.question.id === field.id,
+                    )[0];
+                    return (
+                      <div key={index}>
+                        <Field
+                          key={field.id}
+                          id={field.id}
+                          name={`responses.${index}.${field.type !== 'medias'
+                            ? 'value'
+                            : 'medias'}`}
+                          type={field.type}
+                          component={component}
+                          label={field.title}
+                        />
+                        {response &&
+                          response.medias &&
+                          response.medias.length && (
+                            <ProposalMediaResponse medias={response.medias} />
+                          )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              fields={form.questions}
             />
             <Field
               id="proposal_media"
@@ -335,7 +364,6 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   features: state.default.features,
   themes: state.default.themes,
   initialValues: {
-    draft: proposal.publicationStatus === 'DRAFT',
     title: proposal.title,
     body: proposal.body,
     summary: proposal.summary,
@@ -347,7 +375,25 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       : undefined,
     address: proposal.address,
     media: null,
-    responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
+    responses: proposal.form.questions.map(field => {
+      const response = proposal.responses.filter(res => res && res.question.id === field.id)[0];
+      if (response) {
+        if (response.value) {
+          return {
+            question: field.id,
+            value: response.value,
+          };
+        }
+        return {
+          question: field.id,
+          medias: response.medias,
+        };
+      }
+      if (field.type === 'medias') {
+        return { question: field.id, medias: [] };
+      }
+      return { question: field.id, value: null };
+    }),
     addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
 });
@@ -361,7 +407,6 @@ export default createFragmentContainer(
       title
       body
       summary
-      publicationStatus
       responses {
         question {
           id
@@ -394,22 +439,10 @@ export default createFragmentContainer(
         questions {
           id
           title
+          type
           position
           private
           required
-          helpText
-          type
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          choices {
-            id
-            title
-            description
-            color
-          }
         }
         usingDistrict
         districtMandatory
