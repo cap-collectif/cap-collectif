@@ -414,17 +414,17 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     {
         $found = false;
         foreach ($this->responses as $currentResponse) {
-          $questionId = $currentResponse->getQuestion()->getId();
-          if ($response->getQuestion()->getId() === $questionId) {
-              if ($response instanceof ValueResponse) {
-                $currentResponse->setValue($response->getValue());
-              }
-              if ($response instanceof MediaResponse) {
-                $currentResponse->setMedias($response->getMedias());
-              }
-              $currentResponse->setUpdatedAt(new \DateTime());
-              $found = true;
-          }
+            $questionId = $currentResponse->getQuestion()->getId();
+            if ($response->getQuestion()->getId() === $questionId) {
+                if ($response instanceof ValueResponse) {
+                    $currentResponse->setValue($response->getValue());
+                }
+                if ($response instanceof MediaResponse) {
+                    $currentResponse->setMedias($response->getMedias());
+                }
+                $currentResponse->setUpdatedAt(new \DateTime());
+                $found = true;
+            }
         }
         if (!$found) {
             $this->responses[] = $response;
@@ -434,12 +434,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    public function removeResponse(AbstractResponse $response): self
-    {
-        $this->responses->removeElement($response);
-
-        return $this;
-    }
+    //public function removeResponse(AbstractResponse $response): self
+    // {
+    //     $this->responses->removeElement($response);
+    //
+    //     return $this;
+    // }
 
     public function getResponses(): Collection
     {
@@ -448,9 +448,8 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function setResponses(Collection $responses): self
     {
-        $this->responses = $responses;
         foreach ($responses as $response) {
-            $response->setProposal($this);
+            $this->addResponse($response);
         }
 
         return $this;

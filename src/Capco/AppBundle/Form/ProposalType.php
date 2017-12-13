@@ -58,7 +58,6 @@ class ProposalType extends AbstractType
         $builder
             ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
-                'allow_delete' => true,
                 'by_reference' => false,
                 'types' => [
                     ValueResponseType::class,
