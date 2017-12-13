@@ -343,6 +343,7 @@ class ProposalMutation implements ContainerAwareInterface
         if (isset($values['draft'])) {
             if ($proposal->isDraft()) {
                 $draft = $values['draft'];
+                $proposal->setDraft($draft);
             }
             unset($values['draft']);
         }
