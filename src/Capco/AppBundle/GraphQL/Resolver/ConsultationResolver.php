@@ -209,7 +209,7 @@ class ConsultationResolver implements ContainerAwareInterface
         $sections = $consultation->getConsultationStepType()->getOpinionTypes();
 
         $iterator = $sections->filter(
-            function ($section) {
+            function (OpinionType $section) {
                 return null === $section->getParent();
             }
         )->getIterator();

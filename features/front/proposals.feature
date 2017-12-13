@@ -106,8 +106,9 @@ Scenario: Logged in user wants to create a proposal
   When I click the create proposal button
   And I fill the proposal form
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "proposal_custom-11_field"
   And I submit the create proposal form
+  Then I wait 3 seconds
   And I should see my new proposal
 
 @database @javascript @elasticsearch
@@ -119,6 +120,7 @@ Scenario: Logged in user wants to create a proposal with theme
   When I click the create proposal button
   And I fill the proposal form with a theme
   And I submit the create proposal form
+  Then I wait 3 seconds
   And I should see my new proposal
 
 @javascript @security
@@ -150,9 +152,9 @@ Scenario: Author of a proposal wants to update it
   Given I am logged in as user
   And I go to a proposal
   When I click the edit proposal button
-  And I wait 3 seconds
   And I change the proposal title
   And I submit the edit proposal form
+  # Then I should see "Merci ! Votre proposition a bien été modifiée."
   Then the proposal title should have changed
 
 @javascript

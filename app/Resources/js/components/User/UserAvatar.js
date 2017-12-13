@@ -36,7 +36,7 @@ const UserAvatar = React.createClass({
       return (
         <img
           src={user.media.url}
-          alt=""
+          alt={user.username}
           className="img-circle"
           style={{ width: size, height: size }}
         />
@@ -53,6 +53,7 @@ const UserAvatar = React.createClass({
       onMouseOver,
       onMouseOut,
     };
+
     if (user && user._links && user._links.profile && anchor) {
       return (
         <a {...funcProps} className={className} style={style} href={user._links.profile}>

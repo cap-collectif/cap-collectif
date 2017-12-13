@@ -12,8 +12,6 @@ type AddUsersInGroupPayload {
   clientMutationId: String
 }
 
-scalar Address
-
 # An argument
 type Argument implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
@@ -89,9 +87,6 @@ input ChangeProposalContentInput {
   # The proposal id
   id: ID!
 
-  # Pass 'true' to keep your proposal in draft state, otherwise we admit that you want to publish it.
-  draft: Boolean
-
   # The new proposal title
   title: String
 
@@ -114,13 +109,13 @@ input ChangeProposalContentInput {
   district: String
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The custom fields responses
   responses: [ResponseInput]
 
-  # Current media id
-  media: ID
+  # Set this to true to delete the current media
+  deleteCurrentMedia: Boolean
   clientMutationId: String
 }
 
@@ -330,48 +325,6 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
-input CreateProposalInput {
-  # The id of the form form proposal
-  proposalFormId: ID!
-
-  # If true will create a draft proposal, otherwise a published proposal.
-  draft: Boolean
-
-  # The proposal title
-  title: String
-
-  # The proposal body
-  body: HTML
-
-  # The proposal summary
-  summary: String
-
-  # The theme id (feature themes must be enabled)
-  theme: ID
-
-  # The category id
-  category: ID
-
-  # The district id (feature districts must be enabled)
-  district: ID
-
-  # The address geocoded by google
-  address: Address
-
-  # The responses to the form questions
-  responses: [ResponseInput]
-
-  # The media id to illustrate
-  media: ID
-  clientMutationId: String
-}
-
-type CreateProposalPayload {
-  # The created proposal, if everything goes well !
-  proposal: Proposal
-  clientMutationId: String
-}
-
 scalar DateTime
 
 input DeleteGroupInput {
@@ -540,7 +493,6 @@ type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
-  createProposal(input: CreateProposalInput!): CreateProposalPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
@@ -832,7 +784,7 @@ type Proposal {
   theme: Theme
   category: ProposalCategory
   district: District
-  address: Address
+  address: JSON
 
   # The author of the contribution.
   author: User!
@@ -1037,9 +989,6 @@ type Query {
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
 
-  # Get a user notifications configuration
-  notificationsConfiguration: UserNotificationsConfiguration
-
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
   votesByContribution(contribution: Int!): [PropositionVote]
@@ -1171,14 +1120,11 @@ interface Response {
 
 # A response
 input ResponseInput {
-  # If related to a value question
-  value: JSON
+  # The value
+  value: String
 
   # The question id
   question: String!
-
-  # If related to a media question
-  medias: [ID!]
 }
 
 # A section

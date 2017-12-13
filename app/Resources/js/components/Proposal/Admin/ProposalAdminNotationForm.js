@@ -1,10 +1,10 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {
+  type FieldArrayProps,
   type FormProps,
-  SubmissionError,
   reduxForm,
   formValueSelector,
   Field,
@@ -18,15 +18,13 @@ import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalE
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
+import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalAdminEvaluersForm from './ProposalAdminEvaluersForm';
 import type { ProposalAdminNotationForm_proposal } from './__generated__/ProposalAdminNotationForm_proposal.graphql';
 import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
-import {
-  formatInitialResponsesValues,
-  formatResponsesToSubmit,
-  renderResponses,
-} from '../../../utils/responsesHelper';
+
 import type { Dispatch, State } from '../../../types';
+import { MultipleChoiceRadio } from '../../Form/MultipleChoiceRadio';
 
 export type ResponsesValues = Array<Object>;
 type FormValues = { responses: ResponsesValues } & Object;
@@ -36,36 +34,61 @@ type Props = RelayProps & FormProps & FormValues & { intl: IntlShape };
 
 const formName = 'proposal-admin-evaluation';
 
+export const formatResponsesToSubmit = (
+  values: FormValues,
+  props: MinimalRelayProps | RelayProps,
+) => {
+  const questions =
+    props.proposal.form.evaluationForm && props.proposal.form.evaluationForm.questions;
+  if (!questions) return [];
+  return values.responses.map(resp => {
+    const actualQuestion = questions.find(question => question.id === String(resp.question));
+
+    if (!actualQuestion) throw new Error("Can't find the question");
+
+    const questionType = actualQuestion.type;
+    let value;
+    if (questionType === 'ranking' || questionType === 'button') {
+      value = JSON.stringify({
+        labels: Array.isArray(resp.value) ? resp.value : [resp.value],
+        other: null,
+      });
+    } else if (questionType === 'checkbox' || questionType === 'radio') {
+      value = JSON.stringify(resp.value);
+    } else {
+      value = resp.value;
+    }
+
+    return {
+      question: actualQuestion.id,
+      value,
+    };
+  });
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const data = {
-    ...values,
-    likers: values.likers.map(u => u.value),
-  };
+  values.likers = values.likers.map(u => u.value);
 
   const promises = [];
   promises.push(
     ChangeProposalNotationMutation.commit({
       input: {
         proposalId: props.proposal.id,
-        estimation: data.estimation,
-        likers: data.likers,
+        estimation: values.estimation,
+        likers: values.likers,
       },
     }),
   );
 
   if (props.proposal.form.evaluationForm) {
     const variablesEvaluation = {
-      input: { proposalId: props.proposal.id, responses: formatResponsesToSubmit(data, props) },
+      input: { proposalId: props.proposal.id, responses: formatResponsesToSubmit(values, props) },
     };
 
     promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
   }
 
-  return Promise.all(promises).catch(() => {
-    throw new SubmissionError({
-      _error: 'global.error.server.form',
-    });
-  });
+  return Promise.all(promises);
 };
 
 export const validate = (values: FormValues, { proposal }: Props) => {
@@ -158,6 +181,117 @@ export const validate = (values: FormValues, { proposal }: Props) => {
   return errors;
 };
 
+const formattedChoicesInField = field => {
+  return field.choices.map(choice => {
+    return {
+      id: choice.id,
+      label: choice.title,
+      description: choice.description,
+      color: choice.color,
+    };
+  });
+};
+
+export const renderResponses = ({
+  fields,
+  evaluationForm,
+  responses,
+  intl,
+  change,
+  disabled,
+}: FieldArrayProps & {
+  evaluationForm: Object,
+  responses: Array<Object>,
+  change: (field: string, value: any) => void,
+  intl: IntlShape,
+  disabled: boolean,
+}) => (
+  <div>
+    {fields.map((member, index) => {
+      const field = evaluationForm.questions[index];
+      const key = field.slug;
+      const inputType = field.type || 'text';
+      const isOtherAllowed = field.isOtherAllowed;
+
+      let labelMessage = field.title;
+      let intlMessage;
+      if (field.required) {
+        intlMessage = intl.formatMessage({ id: 'global.mandatory' });
+      } else {
+        intlMessage = intl.formatMessage({ id: 'global.optional' });
+      }
+
+      labelMessage += ` <span class="small warning">${intlMessage}</span>`;
+      const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+
+      switch (inputType) {
+        case 'medias': {
+          return (
+            <p className="text-danger" key={`${member}-container`}>
+              <Glyphicon bsClass="glyphicon" glyph="alert" />
+              <span className="ml-10">
+                <FormattedMessage id="evaluation_form.constraints.medias" />
+              </span>
+            </p>
+          );
+        }
+        default: {
+          let response;
+          if (responses) {
+            response = responses[index].value;
+          }
+
+          let choices = [];
+          if (
+            inputType === 'ranking' ||
+            inputType === 'radio' ||
+            inputType === 'checkbox' ||
+            inputType === 'button'
+          ) {
+            choices = formattedChoicesInField(field);
+            if (inputType === 'radio') {
+              return (
+                <ProposalPrivateField key={key} show={field.private}>
+                  <div key={`${member}-container`}>
+                    <MultipleChoiceRadio
+                      name={member}
+                      helpText={field.helpText}
+                      isOtherAllowed={isOtherAllowed}
+                      label={label}
+                      change={change}
+                      choices={choices}
+                      value={response}
+                      disabled={disabled}
+                    />
+                  </div>
+                </ProposalPrivateField>
+              );
+            }
+          }
+
+          return (
+            <ProposalPrivateField key={key} show={field.private}>
+              <Field
+                name={`${member}.value`}
+                id={`reply-${field.id}`}
+                type={inputType}
+                component={component}
+                help={field.helpText}
+                isOtherAllowed={isOtherAllowed}
+                labelClassName="h4"
+                placeholder="reply.your_response"
+                choices={choices}
+                label={label}
+                disabled={disabled}
+              />
+            </ProposalPrivateField>
+          );
+        }
+      }
+    })}
+  </div>
+);
+
 export class ProposalAdminNotationForm extends React.Component<Props> {
   render() {
     const {
@@ -204,22 +338,19 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   component={select}
                   clearable={false}
                   loadOptions={terms =>
-                    Fetcher.postToJson(`/users/search`, { terms })
-                      .then(res => ({
-                        options: res.users
-                          .map(u => ({
+                    Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
+                      options: res.users
+                        .map(u => ({
+                          value: u.id,
+                          label: u.displayName,
+                        }))
+                        .concat(
+                          proposal.likers.map(u => ({
                             value: u.id,
                             label: u.displayName,
-                          }))
-                          .concat(
-                            proposal.likers.map(u => ({
-                              value: u.id,
-                              label: u.displayName,
-                            })),
-                          ),
-                      }))
-                      // eslint-disable-next-line no-console
-                      .catch(e => console.error(e))}
+                          })),
+                        ),
+                    }))}
                 />
               </div>
 
@@ -231,10 +362,11 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   <hr />
                 </div>
               )}
+
               <FieldArray
                 name="responses"
                 component={renderResponses}
-                questions={evaluationForm ? evaluationForm.questions : []}
+                evaluationForm={evaluationForm}
                 responses={this.props.responses}
                 intl={this.props.intl}
               />
@@ -270,14 +402,45 @@ const form = injectIntl(
   })(ProposalAdminNotationForm),
 );
 
-export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
-  return !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
-    ? []
-    : formatInitialResponsesValues(
-        props.proposal.form.evaluationForm.questions,
-        props.proposal.evaluation ? props.proposal.evaluation.responses : [],
-      );
-};
+export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
+  !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
+    ? undefined
+    : props.proposal.form.evaluationForm.questions.map(field => {
+        const response = props.proposal.evaluation
+          ? props.proposal.evaluation.responses.filter(
+              res => res && res.question.id === field.id,
+            )[0]
+          : null;
+        if (response) {
+          if (response.value) {
+            let responseValue = response.value;
+
+            const questionType = response.question.type;
+            if (questionType === 'button') {
+              responseValue = JSON.parse(response.value).labels[0];
+            }
+
+            if (questionType === 'radio') {
+              responseValue = JSON.parse(response.value);
+            }
+
+            if (questionType === 'ranking') {
+              responseValue = JSON.parse(response.value).labels;
+            }
+
+            if (questionType === 'checkbox') {
+              responseValue = JSON.parse(response.value);
+            }
+
+            return {
+              question: field.id,
+              value: responseValue,
+            };
+          }
+        }
+
+        return { question: field.id, value: null };
+      });
 
 const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
@@ -309,6 +472,7 @@ export default createFragmentContainer(
           questions {
             id
             title
+            slug
             position
             private
             required
@@ -332,17 +496,10 @@ export default createFragmentContainer(
         responses {
           question {
             id
+            type
           }
           ... on ValueResponse {
             value
-          }
-          ... on MediaResponse {
-            medias {
-              id
-              name
-              url
-              size
-            }
           }
         }
       }

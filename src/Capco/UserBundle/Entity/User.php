@@ -1311,7 +1311,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
             }
         }
 
-        return $this->isAdmin();
+        return false;
     }
 
     public function isProfilePageIndexed(): bool

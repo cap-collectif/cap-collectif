@@ -58,7 +58,9 @@
               "{{ 'cnil.message' | trans({}, 'CapcoAppBundle') | raw }}",
               "{{ 'cnil.close' | trans({}, 'CapcoAppBundle') | raw }}",
               "{{ 'cnil.learn' | trans({}, 'CapcoAppBundle') | raw }}",
-              "{{ url('app_confidentialite') }}"
+              "{{ url('app_confidentialite') }}",
+              "{{ 'cnil.learn.link.title' | trans({}, 'CapcoAppBundle') | raw }}",
+              "{{ 'cnil.close.title' | trans({}, 'CapcoAppBundle') | raw }}",
             );
         });
         App.customModal('.modal--custom');

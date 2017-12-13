@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import Input from '../../Form/Input';
 import LocalStorage from '../../../services/LocalStorageService';
@@ -16,6 +16,7 @@ type Props = {
   order?: string,
   defaultSort?: string,
   stepId?: string,
+  intl: Object,
 };
 
 type ComponentState = {
@@ -53,7 +54,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 
   render() {
     // eslint-disable-next-line react/prop-types
-    const { order, dispatch } = this.props;
+    const { order, dispatch, intl } = this.props;
     const { displayedOrders } = this.state;
 
     return (
@@ -61,6 +62,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
         <Input
           id="proposal-sorting"
           type="select"
+          aria-label={intl.formatMessage({ id: 'global.filter' })}
           onChange={e => {
             dispatch(changeOrder(e.target.value));
             dispatch(loadProposals());
@@ -84,4 +86,6 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-export default connect(mapStateToProps)(ProposalListOrderSorting);
+const container = injectIntl(ProposalListOrderSorting);
+
+export default connect(mapStateToProps)(container);

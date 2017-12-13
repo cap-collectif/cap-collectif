@@ -38,7 +38,8 @@
           url("{{ asset('fonts/cap-collectif.svg#cap-collectif') }}") format('svg');
         }
         </style>
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" media="screen">
+        <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print" type="text/css">
     {% endblock %}
 
     {# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries  #}

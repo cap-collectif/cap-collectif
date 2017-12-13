@@ -29,7 +29,7 @@ export const ProjectListPage = React.createClass({
         <ProjectListFilter projectTypes={project.projectTypes || []} />
         <Row>
           <Loader show={project.isLoading}>
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects} hasSecondTitle />
             {features.projects_form &&
               project.count > 0 && (
                 <Pagination
