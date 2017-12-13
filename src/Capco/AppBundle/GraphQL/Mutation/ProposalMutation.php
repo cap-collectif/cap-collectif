@@ -312,9 +312,9 @@ class ProposalMutation implements ContainerAwareInterface
     public function changeContent(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
         $proposalRepo = $this->container->get('capco.proposal.repository');
+        $logger = $this->container->get('logger');
 
         $values = $input->getRawArguments();
         $proposal = $proposalRepo->find($values['id']);
@@ -415,6 +415,7 @@ class ProposalMutation implements ContainerAwareInterface
 
     private function handleErrors($form)
     {
+        $logger = $this->container->get('logger');
         $errors = [];
         foreach ($form->getErrors() as $error) {
             $logger->error((string) $error->getMessage());
