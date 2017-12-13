@@ -284,14 +284,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            $errors = [];
-            foreach ($form->getErrors() as $error) {
-                $logger->error((string) $error->getMessage());
-                $errors[] = (string) $error->getMessage();
-            }
-            if (!empty($errors)) {
-                throw new UserErrors($errors);
-            }
+            $this->handleErrors($form);
         }
 
         $em->persist($proposal);
@@ -375,14 +368,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $errors = [];
-            foreach ($form->getErrors() as $error) {
-                $logger->error((string) $error->getMessage());
-                $errors[] = (string) $error->getMessage();
-            }
-            if (!empty($errors)) {
-                throw new UserErrors($errors);
-            }
+            $this->handleErrors($form);
         }
 
         $proposal->setUpdateAuthor($user);
@@ -424,6 +410,19 @@ class ProposalMutation implements ContainerAwareInterface
 
         if (isset($values['responses'])) {
             $this->formatResponses($values['responses']);
+        }
+    }
+
+    private function handleErrors($form)
+    {
+        $errors = [];
+        foreach ($form->getErrors() as $error) {
+            $logger->error((string) $error->getMessage());
+            $logger->error((string) $form->getExtraData());
+            $errors[] = (string) $error->getMessage();
+        }
+        if (!empty($errors)) {
+            throw new UserErrors($errors);
         }
     }
 
