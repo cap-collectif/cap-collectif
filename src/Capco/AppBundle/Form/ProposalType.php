@@ -59,6 +59,7 @@ class ProposalType extends AbstractType
             ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
                 'by_reference' => false,
+                'allow_extra_fields' => true,
                 'types' => [
                     ValueResponseType::class,
                     MediaResponseType::class,
