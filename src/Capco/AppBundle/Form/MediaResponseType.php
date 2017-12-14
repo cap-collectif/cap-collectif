@@ -53,6 +53,7 @@ class MediaResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => MediaResponse::class,
             'model_class' => MediaResponse::class,
+            'allow_extra_fields' => true,
         ]);
     }
 

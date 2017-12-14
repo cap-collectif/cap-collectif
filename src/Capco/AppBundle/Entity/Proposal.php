@@ -434,12 +434,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    //public function removeResponse(AbstractResponse $response): self
-    // {
-    //     $this->responses->removeElement($response);
-    //
-    //     return $this;
-    // }
+    public function removeResponse(AbstractResponse $response): self
+    {
+        $this->responses->removeElement($response);
+
+        return $this;
+    }
 
     public function getResponses(): Collection
     {

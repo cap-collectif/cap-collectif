@@ -36,12 +36,6 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
 
     return (
       <div>
-        {/* {initialMedias &&
-          initialMedias.length > 0 && (
-            <span className="help-block">
-              <FormattedMessage id="proposal.documents.helptext" />
-            </span>
-          )} */}
         {medias &&
           medias.length > 0 && (
             <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
@@ -64,23 +58,6 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
               })}
             </Col>
           )}
-        {/* {initialMedias &&
-          initialMedias.length > 0 && (
-            <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
-              <strong>
-                <FormattedMessage id="proposal.documents.added" />
-              </strong>{' '}
-              {initialMedias.map((media, key) => {
-                return (
-                  <a key={key} href={media.url} rel="noopener noreferrer" target="_blank">
-                    <Label bsStyle="success" style={{ marginRight: '5px' }}>
-                      {media.name}.{media.extension}
-                    </Label>
-                  </a>
-                );
-              })}
-            </Col>
-          )} */}
       </div>
     );
   }
