@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class MediaResponseType extends AbstractType
 {
@@ -31,6 +32,12 @@ class MediaResponseType extends AbstractType
           ->add('medias', EntityType::class, [
               'class' => Media::class,
               'multiple' => true,
+              'constraints' => [
+                new Assert\Count([
+                  'max' => 5,
+                  'maxMessage' => 'You must add 5 files or less.',
+                ]),
+              ],
           ])
         ;
         $builder->get('question')->addModelTransformer($this->transformer);
