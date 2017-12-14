@@ -90,6 +90,8 @@ Scenario: GraphQL client wants to edit his proposal
         "id": "proposal2",
         "title": "New title",
         "body": "New body",
+        "district": "district3",
+        "category": "pCategory3",
         "responses": [
           {
             "question": "1",
@@ -123,10 +125,10 @@ Scenario: GraphQL client wants to edit his proposal
           "body": "New body",
           "publicationStatus": "PUBLISHED",
           "responses": [
-            {"question": {"id":"1"}, "value":"New reponse-1"},
-            {"question": {"id":"3"}, "value":"New reponse-3"},
-            {"question": {"id":"11"}, "medias":[{"id":"media1"},{"id":"media2"}]},
-            {"question": {"id":"12"}, "medias":[]}
+            {"question": {"id":"1"}, "value": "New reponse-1"},
+            {"question": {"id":"3"}, "value": "New reponse-3"},
+            {"question": {"id":"11"}, "medias": [{"id":"media1"},{"id":"media2"}]},
+            {"question": {"id":"12"}, "medias": []}
           ]
         }
       }
