@@ -113,7 +113,7 @@ export const ProposalListFilters = React.createClass({
                 type="select"
                 aria-label={intl.formatMessage({
                   id: 'global.searchIn',
-                  values: { element: 'test' },
+                  values: { element: filterName },
                 })}
                 id={`proposal-filter-${filterName}`}
                 onChange={e => {

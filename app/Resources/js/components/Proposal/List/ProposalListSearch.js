@@ -41,7 +41,7 @@ const ProposalListSearch = React.createClass({
         <Input
           id="proposal-search-input"
           type="text"
-          aria-label={intl.formatMessage({ id: 'global.search' })}
+          aria-label={intl.formatMessage({ id: 'project.searchform.search' })}
           ref={c => (this._input = c)}
           placeholder="proposal.search"
           buttonAfter={
