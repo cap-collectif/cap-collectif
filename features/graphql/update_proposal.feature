@@ -1,4 +1,4 @@
-@proposal
+@proposal @update_proposal
 Feature: Update a proposal
 
 @database
@@ -21,7 +21,25 @@ Scenario: GraphQL client wants to edit his proposal
       "input": {
         "id": "proposal2",
         "title": "Acheter un sauna par personne pour Capco",
-        "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit"
+        "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
+        "responses": [
+          {
+            "question": "1",
+            "value": "reponse-1"
+          },
+          {
+            "question": "3",
+            "value": "reponse-3"
+          },
+          {
+            "question": "11",
+            "medias": ["media1"]
+          },
+          {
+            "question": "12",
+            "medias": ["media1"]
+          }
+        ]
       }
     }
   }
@@ -36,6 +54,80 @@ Scenario: GraphQL client wants to edit his proposal
           "title": "Acheter un sauna par personne pour Capco",
           "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
           "publicationStatus": "PUBLISHED"
+        }
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          publicationStatus
+          responses {
+            question {
+              id
+            }
+            ... on ValueResponse {
+              value
+            }
+            ... on MediaResponse {
+              medias {
+                id
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "proposal2",
+        "title": "New title",
+        "body": "New body",
+        "responses": [
+          {
+            "question": "1",
+            "value": "New reponse-1"
+          },
+          {
+            "question": "3",
+            "value": "New reponse-3"
+          },
+          {
+            "question": "11",
+            "medias": ["media1", "media2"]
+          },
+          {
+            "question": "12",
+            "medias": []
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "changeProposalContent": {
+        "proposal": {
+          "id": "proposal2",
+          "title": "New title",
+          "body": "New body",
+          "publicationStatus": "PUBLISHED",
+          "responses": [
+            {"question": {"id":"1"}, "value":"New reponse-1"},
+            {"question": {"id":"3"}, "value":"New reponse-3"},
+            {"question": {"id":"11"}, "medias":[{"id":"media1"},{"id":"media2"}]},
+            {"question": {"id":"12"}, "medias":[]}
+          ]
         }
       }
     }
