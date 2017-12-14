@@ -454,11 +454,8 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function setResponses(Collection $responses): self
     {
-        $this->responses = $responses;
-
         foreach ($responses as $response) {
-            $response->setProposal($this);
-            // $this->addResponse($response);
+            $this->addResponse($response);
         }
 
         return $this;
