@@ -97,12 +97,12 @@ Scenario: GraphQL client wants to edit his proposal
             "value": "New reponse-1"
           },
           {
-            "question": "3",
-            "value": "New reponse-3"
-          },
-          {
             "question": "11",
             "medias": ["media1", "media2"]
+          },
+          {
+            "question": "3",
+            "value": "New reponse-3"
           },
           {
             "question": "12",

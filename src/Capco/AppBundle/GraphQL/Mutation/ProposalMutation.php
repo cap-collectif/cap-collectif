@@ -262,7 +262,7 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['draft']);
         }
 
-        $this->fixValue($values, $proposalForm);
+        $this->fixValues($values, $proposalForm);
 
         $proposal = (new Proposal())
             ->setDraft($draft)
@@ -348,7 +348,7 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['draft']);
         }
 
-        $this->fixValue($values, $proposalForm);
+        $this->fixValues($values, $proposalForm);
 
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposalForm,
@@ -389,7 +389,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    private function fixValue(&$values, $proposalForm)
+    private function fixValues(&$values, $proposalForm)
     {
         $toggleManager = $this->container->get('capco.toggle.manager');
 
@@ -431,17 +431,28 @@ class ProposalMutation implements ContainerAwareInterface
     private function formatResponses(&$responses)
     {
         $questionRepo = $this->container->get('capco.abstract_question.repository');
+
+        // we need to set _type for polycollection
         foreach ($responses as &$response) {
             $question = $questionRepo->find((int) $response['question']);
             if (!$question) {
                 throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
             }
-            $response['question'] = (int) $response['question'];
+            $questions[] = $question;
+            $response['question'] = $question;
             if ($question instanceof MediaQuestion) {
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
             } else {
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
             }
+        }
+
+        // We need to reorder the responses by question position
+        usort($responses, function ($a, $b) {
+            return ($a['question']->getPosition() < $b['question']->getPosition()) ? -1 : 1;
+        });
+        foreach ($responses as &$response) {
+            $response['question'] = $response['question']->getId();
         }
     }
 }

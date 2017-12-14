@@ -444,7 +444,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function getResponses(): Collection
     {
-        return $this->responses;
+        $iterator = $this->responses->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return ($a->getQuestion()->getPosition() < $b->getQuestion()->getPosition()) ? -1 : 1;
+        });
+
+        return new ArrayCollection(iterator_to_array($iterator));
     }
 
     public function setResponses(Collection $responses): self
