@@ -58,6 +58,7 @@ class ProposalType extends AbstractType
         $builder
             ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
                 'allow_extra_fields' => true,
                 'types' => [
@@ -77,8 +78,8 @@ class ProposalType extends AbstractType
             'data_class' => Proposal::class,
             'csrf_protection' => false,
             'allow_extra_fields' => true,
-            'translation_domain' => 'CapcoAppBundle',
-            'cascade_validation' => true,
+            'translation_domain' => false,
+            'cascade_validation' => false,
             'proposalForm' => null,
         ]);
     }
