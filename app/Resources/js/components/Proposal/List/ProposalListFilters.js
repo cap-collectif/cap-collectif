@@ -111,7 +111,10 @@ export const ProposalListFilters = React.createClass({
             <Col xs={12} md={colWidth} key={index}>
               <Input
                 type="select"
-                aria-label={intl.formatMessage({ id: 'global.search' })}
+                aria-label={intl.formatMessage({
+                  id: 'global.searchIn',
+                  values: { element: 'test' },
+                })}
                 id={`proposal-filter-${filterName}`}
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
