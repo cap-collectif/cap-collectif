@@ -24,7 +24,6 @@ class MediaResponse extends AbstractResponse
 
     public function __construct()
     {
-        parent::__construct();
         $this->medias = new ArrayCollection();
     }
 

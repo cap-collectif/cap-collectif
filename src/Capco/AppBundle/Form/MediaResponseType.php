@@ -2,17 +2,15 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Capco\MediaBundle\Entity\Media;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MediaResponseType extends AbstractType
 {
@@ -33,11 +31,6 @@ class MediaResponseType extends AbstractType
           ->add('medias', EntityType::class, [
               'class' => Media::class,
               'multiple' => true,
-              // 'collection'
-              // 'entry_type' => 'media_id_type',
-              // 'allow_add' => true,
-              // 'allow_delete' => true,
-              // 'by_reference' => false,
           ])
         ;
         $builder->get('question')->addModelTransformer($this->transformer);
@@ -53,8 +46,6 @@ class MediaResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => MediaResponse::class,
             'model_class' => MediaResponse::class,
-            'csrf_protection' => false,
-            'translation_domain' => 'CapcoAppBundle',
         ]);
     }
 

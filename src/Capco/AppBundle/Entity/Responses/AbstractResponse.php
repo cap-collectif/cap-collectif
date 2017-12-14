@@ -11,9 +11,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
@@ -47,8 +46,7 @@ abstract class AbstractResponse
     const TYPE_FIELD_NAME = '_type';
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"value"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -87,17 +85,9 @@ abstract class AbstractResponse
      */
     private $question;
 
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime();
-    }
-
     abstract public function getType();
 
-    /**
-     * @return Proposal
-     */
-    public function getProposal()
+    public function getProposal()// : ?Proposal
     {
         return $this->proposal;
     }
@@ -116,7 +106,7 @@ abstract class AbstractResponse
         return $this;
     }
 
-    public function getUser(): User
+    public function getUser()//: ?User
     {
         return $this->user;
     }

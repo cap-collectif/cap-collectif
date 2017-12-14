@@ -43,9 +43,6 @@ class ValueResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ValueResponse::class,
             'model_class' => ValueResponse::class,
-            'csrf_protection' => false,
-            'allow_extra_fields' => true,
-            'translation_domain' => 'CapcoAppBundle',
         ]);
     }
 
