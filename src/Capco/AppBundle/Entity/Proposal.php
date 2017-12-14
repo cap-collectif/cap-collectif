@@ -434,6 +434,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
+    // Should not be called ?
     public function removeResponse(AbstractResponse $response): self
     {
         $this->responses->removeElement($response);
@@ -448,8 +449,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function setResponses(Collection $responses): self
     {
+        $this->responses = $responses;
+
         foreach ($responses as $response) {
-            $this->addResponse($response);
+            $response->setProposal($this);
+            // $this->addResponse($response);
         }
 
         return $this;
