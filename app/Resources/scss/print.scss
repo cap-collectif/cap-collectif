@@ -1,0 +1,108 @@
+/* ===============================================================
+    $PRINT
+================================================================*/
+
+@import "bower_components/compass-mixins/lib/compass";
+@import "base/fonts";
+
+body {
+    font-family: "openSans", sans-serif;
+    font-size: 13.5pt;
+    margin: 10%
+}
+
+#main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg {
+    display: none;
+}
+
+span.avatar {
+    background-color: #000;
+    @include border-radius(50%);
+    width: 45px;
+    height: 45px;
+    display: flex;
+
+    i.cap-user-2-1 {
+        color: #fff;
+        margin: auto;
+        font-size: 20pt;
+    }
+}
+
+h1, h2, h3, h4 {
+    font-family: "montserrat", sans-serif;
+    font-weight: normal;
+}
+
+p, a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
+    color: #000 !important;
+    text-decoration: none;
+}
+
+p, li {
+    margin:2pt 0 6pt 0;
+}
+
+ul {
+    margin: 0;
+}
+
+ul.event__meta {
+    list-style-type: none;
+    padding: 0;
+
+    address {
+        font-style: normal;
+    }
+}
+
+.media {
+    line-height: 33pt;
+    margin-bottom: 22.5pt;
+}
+
+.media--news {
+    &__meta {
+        margin-bottom: 15pt;
+    }
+
+    &__avatar {
+        float: left;
+        margin-right: 11.25pt;
+    }
+
+    &--aligned {
+        line-height: 33pt;
+    }
+}
+
+img {
+    margin: 15pt 0;
+    padding: 0;
+    background: #fff;
+}
+
+.media .img-circle {
+    margin: 0;
+}
+
+p img {
+    margin: 15pt 0 14pt;
+}
+
+.img-circle {
+    @include border-radius(50%);
+}
+
+.pull-left {
+    float: left;
+    margin-right: 11.25pt;
+}
+
+.block.event_link-project, .block.blog_link-project {
+    margin-top: 22.5pt;
+}
+
+.block h2:first-child {
+    margin-top: 5pt;
+}

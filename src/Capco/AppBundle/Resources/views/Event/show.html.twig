@@ -89,7 +89,7 @@
                     {% endif %}
 
                     {% if event.projects | length > 0 %}
-                        <div class="block">
+                        <div class="block event_link-project">
                             <p>
                                 {% transchoice event.projects | length from 'CapcoAppBundle' %}
                                     event.show.projects.title
