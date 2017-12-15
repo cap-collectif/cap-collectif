@@ -280,7 +280,7 @@ class ProposalMutation implements ContainerAwareInterface
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        $logger->info('createProposal:' . json_encode($values, true));
+        $logger->info('createProposal: ' . json_encode($values, true));
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -366,7 +366,7 @@ class ProposalMutation implements ContainerAwareInterface
             $form->remove('author');
         }
 
-        $logger->info('changeContent:' . json_encode($values, true));
+        $logger->info('changeContent: ' . json_encode($values, true));
         $form->submit($values, false);
 
         if (!$form->isValid()) {
