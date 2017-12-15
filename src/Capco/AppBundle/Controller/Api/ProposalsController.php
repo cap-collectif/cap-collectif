@@ -15,10 +15,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\Form\ProposalFusionType;
-use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\Form\ReportingType;
-use Capco\AppBundle\Helper\ArrayHelper;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Patch;
@@ -34,7 +31,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swarrot\Broker\Message;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
