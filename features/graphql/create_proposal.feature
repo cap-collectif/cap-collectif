@@ -1,4 +1,4 @@
-@proposal
+@proposal @create_proposal
 Feature: Create Proposal
 
 @database @elasticsearch

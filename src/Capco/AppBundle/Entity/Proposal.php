@@ -434,22 +434,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    // Should not be called ?
-    public function removeResponse(AbstractResponse $response): self
-    {
-        $this->responses->removeElement($response);
-
-        return $this;
-    }
-
     public function getResponses(): Collection
     {
-        $iterator = $this->responses->getIterator();
-        $iterator->uasort(function ($a, $b) {
-            return ($a->getQuestion()->getPosition() < $b->getQuestion()->getPosition()) ? -1 : 1;
-        });
-
-        return new ArrayCollection(iterator_to_array($iterator));
+        return $this->responses;
     }
 
     public function setResponses(Collection $responses): self
