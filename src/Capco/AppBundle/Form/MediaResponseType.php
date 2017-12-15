@@ -42,6 +42,10 @@ class MediaResponseType extends AbstractType
         ;
         $builder->get('question')->addModelTransformer($this->transformer);
 
+        $builder->add('position', HiddenType::class, [
+            'mapped' => false,
+        ]);
+
         $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
             'mapped' => false,

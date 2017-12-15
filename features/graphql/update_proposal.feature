@@ -93,20 +93,20 @@ Scenario: GraphQL client wants to edit his proposal
         "category": "pCategory3",
         "responses": [
           {
-            "question": "1",
-            "value": "New reponse-1"
+            "question": "3",
+            "value": "New reponse-3"
           },
           {
             "question": "11",
             "medias": ["media1", "media2"]
           },
           {
-            "question": "3",
-            "value": "New reponse-3"
-          },
-          {
             "question": "12",
             "medias": []
+          },
+          {
+            "question": "1",
+            "value": "New reponse-1"
           }
         ]
       }
@@ -186,16 +186,16 @@ Scenario: Super Admin GraphQL client wants to update a proposal
         "category": "pCategory2",
         "responses": [
           {
+            "question": "11",
+            "medias": ["media1"]
+          },
+          {
             "question": "1",
             "value": "reponse-1"
           },
           {
             "question": "3",
             "value": "reponse-3"
-          },
-          {
-            "question": "11",
-            "medias": ["media1"]
           },
           {
             "question": "12",

@@ -433,26 +433,20 @@ class ProposalMutation implements ContainerAwareInterface
         $questionRepo = $this->container->get('capco.abstract_question.repository');
 
         // we need to set _type for polycollection
+        // and position for reordering
         foreach ($responses as &$response) {
             $question = $questionRepo->find((int) $response['question']);
             if (!$question) {
                 throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
             }
             $questions[] = $question;
-            $response['question'] = $question;
+            $response['question'] = $question->getId();
+            $response['position'] = $question->getPosition();
             if ($question instanceof MediaQuestion) {
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
             } else {
                 $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
             }
-        }
-
-        // We need to reorder the responses by question position
-        usort($responses, function ($a, $b) {
-            return ($a['question']->getPosition() < $b['question']->getPosition()) ? -1 : 1;
-        });
-        foreach ($responses as &$response) {
-            $response['question'] = $response['question']->getId();
         }
     }
 }

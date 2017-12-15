@@ -60,6 +60,7 @@ class ProposalType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'index_property' => 'position',
                 'types' => [
                     ValueResponseType::class,
                     MediaResponseType::class,

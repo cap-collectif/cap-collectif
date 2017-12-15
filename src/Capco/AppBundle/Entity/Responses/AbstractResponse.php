@@ -116,6 +116,11 @@ abstract class AbstractResponse
         return $this->question;
     }
 
+    public function getPosition()
+    {
+        return $this->question->getPosition();
+    }
+
     public function setQuestion(AbstractQuestion $question): self
     {
         $this->question = $question;
