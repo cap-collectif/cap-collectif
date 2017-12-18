@@ -906,3 +906,11 @@ textarea {
 .print {
     display: none;
 }
+
+.label-default {
+    background-color: $label-default-color;
+}
+
+.label-success {
+    background-color: $success-color;
+}
