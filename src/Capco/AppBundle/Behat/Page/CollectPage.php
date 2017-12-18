@@ -19,6 +19,7 @@ class CollectPage extends Page
         'proposal' => '.proposal__preview',
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',
+        'proposal form submit draft button' => '#confirm-proposal-create-as-draft',
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
     ];

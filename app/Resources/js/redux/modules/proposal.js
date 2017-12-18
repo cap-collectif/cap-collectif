@@ -82,10 +82,7 @@ type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
 type OpenDeleteProposalModalAction = { type: 'proposal/OPEN_DELETE_MODAL' };
-type SubmitProposalFormAction = { type: 'proposal/SUBMIT_PROPOSAL_FORM', isDraft?: boolean };
-type EditProposalFormAction = { type: 'proposal/EDIT_PROPOSAL_FORM', isDraft?: boolean };
 type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
-type CancelSubmitProposalAction = { type: 'proposal/CANCEL_SUBMIT_PROPOSAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
 type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
@@ -126,7 +123,6 @@ export type State = {
   +currentVoteModal: ?Uuid,
   +currentDeletingVote: ?Uuid,
   +showCreateModal: boolean,
-  +isCreating: boolean,
   +isCreatingFusion: boolean,
   +isSubmittingFusion: boolean,
   +showDeleteModal: boolean,
@@ -158,7 +154,6 @@ export const initialState: State = {
   currentVoteModal: null,
   currentDeletingVote: null,
   showCreateModal: false,
-  isCreating: false,
   isCreatingFusion: false,
   isSubmittingFusion: false,
   showDeleteModal: false,
@@ -252,19 +247,9 @@ export const closeDeleteProposalModal = (): CloseDeleteProposalModalAction => ({
 export const openDeleteProposalModal = (): OpenDeleteProposalModalAction => ({
   type: 'proposal/OPEN_DELETE_MODAL',
 });
-export const submitProposalForm = (isDraft?: boolean): SubmitProposalFormAction => ({
-  type: 'proposal/SUBMIT_PROPOSAL_FORM',
-  isDraft,
-});
-export const editProposalForm = (isDraft?: boolean): EditProposalFormAction => ({
-  type: 'proposal/EDIT_PROPOSAL_FORM',
-  isDraft,
-});
+
 export const openCreateModal = (): OpenCreateModalAction => ({
   type: 'proposal/OPEN_CREATE_MODAL',
-});
-export const cancelSubmitProposal = (): CancelSubmitProposalAction => ({
-  type: 'proposal/CANCEL_SUBMIT_PROPOSAL',
 });
 export const closeCreateModal = (): CloseCreateModalAction => ({
   type: 'proposal/CLOSE_CREATE_MODAL',
@@ -341,7 +326,10 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStepId: string) {
+export const addProposalInRandomResultsByStep = (
+  proposal: { +id: string },
+  currentProjectStepId: string,
+) => {
   if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
     const randomResultsByStep = LocalStorageService.get('proposal.randomResultsByStep');
     const lastProposals = randomResultsByStep[currentProjectStepId];
@@ -358,7 +346,7 @@ function addProposalInRandomResultsByStep(proposal: Proposal, currentProjectStep
       ...proposals,
     });
   }
-}
+};
 
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   let url = '';
@@ -438,91 +426,6 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
         alert: {
           bsStyle: 'warning',
           content: 'proposal.request.delete_vote.failure',
-        },
-      });
-    });
-};
-
-export const submitProposal = (
-  dispatch: Dispatch,
-  form: Uuid,
-  data: Object,
-  currentStepId: string,
-): Promise<*> => {
-  const formData = new FormData();
-  const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => {
-    if (flattenedData[key] !== -1) {
-      formData.append(key, flattenedData[key]);
-    }
-  });
-
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals`, formData)
-    .then(response => {
-      dispatch(closeCreateModal());
-
-      response.json().then(proposal => {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            bsStyle: 'success',
-            content: 'proposal.request.create.success',
-          },
-        });
-
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
-
-        window.location.href = proposal._links.show;
-      });
-    })
-    .catch((error: Error) => {
-      dispatch(cancelSubmitProposal());
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'proposal.request.create.failure',
-        },
-      });
-      throw error;
-    });
-};
-
-export const updateProposal = (
-  dispatch: Dispatch,
-  form: Uuid,
-  id: Uuid,
-  data: Object,
-  currentStepId: string,
-) => {
-  const formData = new FormData();
-  const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => formData.append(key, flattenedData[key]));
-  return Fetcher.postFormData(`/proposal_forms/${form}/proposals/${id}`, formData)
-    .then(response => {
-      dispatch(closeEditProposalModal());
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.update.proposal' },
-      });
-
-      response.json().then(proposal => {
-        if (!proposal.isDraft) {
-          addProposalInRandomResultsByStep(proposal, currentStepId);
-        }
-
-        location.reload();
-      });
-    })
-    .catch(() => {
-      dispatch(cancelSubmitProposal());
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'proposal.request.update.failure',
         },
       });
     });
@@ -732,6 +635,7 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 }
 
 export type ProposalAction =
+  | OpenCreateModalAction
   | FetchVotesRequestedAction
   | SubmitFusionFormAction
   | ChangeFilterAction
@@ -745,8 +649,6 @@ export type ProposalAction =
   | CloseCreateModalAction
   | OpenVoteModalAction
   | OpenVotesModalAction
-  | CancelSubmitProposalAction
-  | SubmitProposalFormAction
   | OpenDeleteProposalModalAction
   | RequestFetchProposalPostsAction
   | DeleteVoteSucceededAction
@@ -904,12 +806,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, currentPaginationPage: action.page };
     case 'proposal/CHANGE_TERMS':
       return { ...state, terms: action.terms, currentPaginationPage: 1 };
-    case 'proposal/SUBMIT_PROPOSAL_FORM':
-      return { ...state, isCreating: true, isDraft: action.isDraft };
-    case 'proposal/CANCEL_SUBMIT_PROPOSAL':
-      return { ...state, isCreating: false, isEditing: false };
-    case 'proposal/EDIT_PROPOSAL_FORM':
-      return { ...state, isEditing: true, isDraft: action.isDraft };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':
@@ -921,7 +817,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/OPEN_CREATE_MODAL':
       return { ...state, showCreateModal: true };
     case 'proposal/CLOSE_CREATE_MODAL':
-      return { ...state, showCreateModal: false, isCreating: false };
+      return { ...state, showCreateModal: false };
     case 'proposal/OPEN_VOTE_MODAL':
       return { ...state, currentVoteModal: action.id };
     case 'proposal/CLOSE_VOTE_MODAL':

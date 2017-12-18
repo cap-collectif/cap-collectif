@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -57,7 +58,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                     return $repo->getProposalsByFormAndEvaluer($form, $user)->getIterator()->getArrayCopy();
                 }
             }
-            throw new UserException('Not implemented');
+            throw new UserError('Not implemented');
         });
 
         $totalCount = $repo->countProposalsByFormAndEvaluer($form, $user);

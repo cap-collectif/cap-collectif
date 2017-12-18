@@ -9,11 +9,10 @@ import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import {
   validate,
-  renderResponses,
   formatInitialResponses,
-  formatResponsesToSubmit,
   type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
+import { renderResponses, formatResponsesToSubmit } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
@@ -50,6 +49,9 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
+    if (!evaluationForm) {
+      return null;
+    }
     return (
       <div className="container">
         <form onSubmit={handleSubmit}>
@@ -57,7 +59,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
             <FieldArray
               name="responses"
               component={renderResponses}
-              evaluationForm={evaluationForm}
+              questions={evaluationForm.questions}
               responses={responses}
               change={change}
               intl={intl}
@@ -116,7 +118,6 @@ export default createFragmentContainer(
           questions {
             id
             title
-            slug
             position
             private
             required
@@ -140,10 +141,17 @@ export default createFragmentContainer(
         responses {
           question {
             id
-            type
           }
           ... on ValueResponse {
             value
+          }
+          ... on MediaResponse {
+            medias {
+              id
+              name
+              size
+              url
+            }
           }
         }
       }
