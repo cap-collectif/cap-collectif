@@ -19,6 +19,7 @@ describe('<GroupAdminUsers />', () => {
         ],
       },
     },
+    intl: global.intlMock,
     ...global.formMock,
   };
 

@@ -17,7 +17,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      href="admin.help.addGroup.link"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -108,7 +108,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      href="admin.help.addGroup.link"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -199,7 +199,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      href="admin.help.addGroup.link"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -290,7 +290,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes"
+      href="admin.help.addGroup.link"
       rel="noopener noreferrer"
       target="_blank"
     >

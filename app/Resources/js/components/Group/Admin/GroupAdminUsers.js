@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -21,6 +21,7 @@ type Props = FormProps & {
   group: GroupAdminUsers_group,
   userIsDeleted: ?boolean,
   userIsNotDeleted: ?boolean,
+  intl: Object,
 };
 
 type State = {
@@ -85,8 +86,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   };
 
   render() {
-    const { group } = this.props;
-
+    const { group, intl } = this.props;
     const { showAddUsersModal } = this.state;
 
     return (
@@ -99,7 +99,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/137-ajouter-des-groupes">
+            href={intl.formatMessage({ id: 'admin.help.addGroup.link' })}>
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
@@ -146,7 +146,9 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-const container = connect(mapStateToProps)(GroupAdminUsers);
+const myComponent = injectIntl(GroupAdminUsers);
+
+const container = connect(mapStateToProps)(myComponent);
 
 export default createFragmentContainer(
   container,
