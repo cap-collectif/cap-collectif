@@ -105,7 +105,10 @@ export const formatResponsesToSubmit = (values: Object, props: Object) => {
   return values.responses.map(resp => {
     const actualQuestion = questions.find(question => question.id === String(resp.question));
 
-    if (!actualQuestion) throw new Error("Can't find the question");
+    if (!actualQuestion) {
+      console.error(`Can't find the question with id: ${resp.question}`);
+      throw new Error(`Can't find the question with id: ${resp.question}`);
+    }
 
     const questionType = actualQuestion.type;
     let value;
