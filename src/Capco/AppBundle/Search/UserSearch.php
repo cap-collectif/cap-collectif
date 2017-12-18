@@ -27,7 +27,9 @@ class UserSearch extends Search
         if ($terms && !empty($terms)) {
             $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
         }
-        $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
+        if (count($notsInIds) > 0) {
+            $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
+        }
 
         $results = $this->getResults($query, null, false);
 
