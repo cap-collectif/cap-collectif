@@ -183,19 +183,21 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               clearable={false}
               autoload
               loadOptions={terms =>
-                Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
-                  options: res.users
-                    .map(u => ({
-                      value: u.id,
-                      label: u.displayName,
-                    }))
-                    .concat([
-                      {
-                        value: proposal.author.id,
-                        label: proposal.author.displayName,
-                      },
-                    ]),
-                }))}
+                Fetcher.postToJson(`/users/search`, { terms })
+                  .then(res => ({
+                    options: res.users
+                      .map(u => ({
+                        value: u.id,
+                        label: u.displayName,
+                      }))
+                      .concat([
+                        {
+                          value: proposal.author.id,
+                          label: proposal.author.displayName,
+                        },
+                      ]),
+                  }))
+                  .catch(e => console.error(e))}
             />
             {features.themes &&
               form.usingThemes && (
