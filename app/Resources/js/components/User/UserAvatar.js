@@ -36,7 +36,7 @@ const UserAvatar = React.createClass({
       return (
         <img
           src={user.media.url}
-          alt={user.username}
+          alt=""
           className="img-circle"
           style={{ width: size, height: size }}
         />

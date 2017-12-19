@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm, loadProposals } from '../../../redux/modules/proposal';
@@ -10,7 +9,6 @@ const ProposalListSearch = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     terms: PropTypes.string.isRequired,
-    intl: PropTypes.object.isRequired,
   },
 
   getInitialState() {
@@ -34,14 +32,11 @@ const ProposalListSearch = React.createClass({
   },
 
   render() {
-    const { intl } = this.props;
-
     return (
       <form onSubmit={this.handleSubmit}>
         <Input
           id="proposal-search-input"
           type="text"
-          aria-label={intl.formatMessage({ id: 'global.search' })}
           ref={c => (this._input = c)}
           placeholder="proposal.search"
           buttonAfter={
@@ -64,6 +59,4 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-const container = injectIntl(ProposalListSearch);
-
-export default connect(mapStateToProps)(container);
+export default connect(mapStateToProps)(ProposalListSearch);
