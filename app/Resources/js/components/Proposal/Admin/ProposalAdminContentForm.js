@@ -6,7 +6,9 @@ import { type FormProps, SubmissionError, reduxForm, Field, FieldArray } from 'r
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
-import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
+import ChangeProposalContentMutation, {
+  type ChangeProposalContentMutationResponse,
+} from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
@@ -49,11 +51,17 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
     input: { ...data, id: proposal.id },
   };
 
-  return ChangeProposalContentMutation.commit(variables).catch(() => {
-    throw new SubmissionError({
-      _error: 'global.error.server.form',
+  return ChangeProposalContentMutation.commit(variables)
+    .then((response: ChangeProposalContentMutationResponse) => {
+      if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
+        throw new Error('Mutation "changeProposalContent" failed.');
+      }
+    })
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
     });
-  });
 };
 
 export const validateProposalContent = (
