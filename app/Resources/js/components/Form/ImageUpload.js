@@ -50,10 +50,6 @@ export class ImageUpload extends React.Component<Props> {
     }
   };
 
-  onOpenClick = () => {
-    this.refs.dropzone.open();
-  };
-
   onToggleDelete = () => {
     const { onChange, multiple } = this.props;
     // $FlowFixMe
