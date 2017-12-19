@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-export const ProposalMediaResponse = React.createClass({
-  propTypes: {
-    medias: PropTypes.array.isRequired,
-  },
+type Props = {
+  medias: Array<Object>,
+};
 
+export class ProposalMediaResponse extends React.Component<Props> {
   render() {
     const { medias } = this.props;
     if (!medias || medias.length === 0) {
@@ -25,7 +26,7 @@ export const ProposalMediaResponse = React.createClass({
         })}
       </Row>
     );
-  },
-});
+  }
+}
 
 export default ProposalMediaResponse;

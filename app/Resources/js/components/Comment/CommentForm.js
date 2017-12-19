@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import { Row, Col, Button } from 'react-bootstrap';
@@ -19,7 +19,6 @@ const CommentForm = React.createClass({
     focus: PropTypes.bool,
     comment: PropTypes.func,
     user: PropTypes.object,
-    intl: PropTypes.object,
   },
 
   mixins: [DeepLinkStateMixin, FormMixin],
@@ -238,7 +237,7 @@ const CommentForm = React.createClass({
   },
 
   render() {
-    const { isAnswer, user, intl } = this.props;
+    const { isAnswer, user } = this.props;
     const classes = classNames({
       'comment-answer-form': isAnswer,
     });
@@ -251,7 +250,6 @@ const CommentForm = React.createClass({
               type="textarea"
               name="body"
               ref="body"
-              aria-label={intl.formatMessage({ id: 'comment.write' })}
               valueLink={this.linkState('form.body')}
               rows="2"
               onFocus={this.expand.bind(this, true)}
@@ -271,6 +269,4 @@ const mapStateToProps = state => {
   return { user: state.user.user };
 };
 
-const container = injectIntl(CommentForm);
-
-export default connect(mapStateToProps)(container);
+export default connect(mapStateToProps)(CommentForm);

@@ -17,7 +17,6 @@ const ProjectCover = React.createClass({
     const divClasses = classNames({
       project__preview__cover: true,
     });
-
     return (
       <div className={divClasses}>
         <a href={link} alt={project.title} className={linkClasses}>

@@ -40,7 +40,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -88,7 +88,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -203,7 +203,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -251,7 +251,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -366,7 +366,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -414,7 +414,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -536,7 +536,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -584,7 +584,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
     <ProjectPreviewCounters
       project={
         Object {
@@ -752,7 +752,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -800,7 +800,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
     <ProjectPreviewCounters
       project={
         Object {
@@ -930,7 +930,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -978,7 +978,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
     <ProjectPreviewCounters
       project={
         Object {
@@ -1127,7 +1127,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -1175,7 +1175,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
     <ProjectPreviewCounters
       project={
         Object {
@@ -1345,7 +1345,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h3
+    <h4
       className="project__preview__title"
       style={
         Object {
@@ -1421,7 +1421,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h3>
+    </h4>
   </div>
   <ProjectPreviewProgressBar
     actualStep={

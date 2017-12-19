@@ -1,7 +1,7 @@
 <div class="excerpt h5">
     <div class="media  media--news__meta">
         <div class="media-body">
-            <p class="media--aligned media--news--aligned excerpt">
+            <p class="media--aligned  excerpt">
                 {% if authors|length > 0 %}
                     {% for author in authors %}
                         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': author, 'classes': 'media-object media--news__author'} only %}

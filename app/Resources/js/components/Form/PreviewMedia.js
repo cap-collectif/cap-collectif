@@ -1,45 +1,48 @@
 // @flow
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import { Col, Label } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-type CurrentMedia = {
+type Media = {
+  id: string,
   name: string,
   extension: string,
   url: string,
 };
 
-type NewMedia = File;
-
 type Props = {
-  currentMedias: Array<CurrentMedia>,
-  newMedias: Array<NewMedia>,
-  onRemoveMedia: (newMedia: NewMedia) => void,
+  medias: Array<Media>,
+  onRemoveMedia: (newMedia: Media) => void,
 };
 
-export class PreviewMedia extends PureComponent<Props> {
-  render() {
-    const { currentMedias, newMedias, onRemoveMedia } = this.props;
+type State = {
+  initialMedias: Array<Media>,
+};
 
-    if (currentMedias.length === 0 && newMedias.length === 0) {
+export class PreviewMedia extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      initialMedias: props.medias,
+    };
+  }
+
+  render() {
+    const { medias, onRemoveMedia } = this.props;
+
+    if (medias.length === 0) {
       return null;
     }
 
     return (
       <div>
-        {currentMedias &&
-          currentMedias.length > 0 && (
-            <span className="help-block">
-              <FormattedMessage id="proposal.documents.helptext" />
-            </span>
-          )}
-        {newMedias &&
-          newMedias.length > 0 && (
+        {medias &&
+          medias.length > 0 && (
             <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
               <strong>
                 <FormattedMessage id="proposal.documents.deposited" />
               </strong>{' '}
-              {newMedias.map((file, key) => {
+              {medias.map((file, key) => {
                 return (
                   <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
                     {file.name}{' '}
@@ -51,23 +54,6 @@ export class PreviewMedia extends PureComponent<Props> {
                       }}
                     />
                   </Label>
-                );
-              })}
-            </Col>
-          )}
-        {currentMedias &&
-          currentMedias.length > 0 && (
-            <Col md={12} className="image-uploader__label-info" style={{ padding: 0 }}>
-              <strong>
-                <FormattedMessage id="proposal.documents.added" />
-              </strong>{' '}
-              {currentMedias.map((media, key) => {
-                return (
-                  <a key={key} href={media.url} rel="noopener noreferrer" target="_blank">
-                    <Label bsStyle="success" style={{ marginRight: '5px' }}>
-                      {media.name}.{media.extension}
-                    </Label>
-                  </a>
                 );
               })}
             </Col>

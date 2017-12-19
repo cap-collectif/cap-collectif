@@ -5,18 +5,15 @@ import ProjectPreview from '../Preview/ProjectPreview';
 
 type Props = {
   projects: Array<Object>,
-  hasSecondTitle?: boolean,
 };
 
 export class ProjectsList extends React.Component<Props> {
   render() {
-    const { projects, hasSecondTitle } = this.props;
+    const { projects } = this.props;
     if (projects.length > 0) {
       return (
         <div className="project__preview">
-          {projects.map((project, index) => (
-            <ProjectPreview key={index} project={project} hasSecondTitle={hasSecondTitle} />
-          ))}
+          {projects.map((project, index) => <ProjectPreview key={index} project={project} />)}
         </div>
       );
     }
