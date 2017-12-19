@@ -351,11 +351,17 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
     body: proposal.body,
     summary: proposal.summary,
     author: proposal.author.id,
-    theme: state.default.features.themes ? (proposal.theme ? proposal.theme.id : null) : undefined,
-    category: proposal.category ? proposal.category.id : null,
-    district: state.default.features.districts
-      ? proposal.district ? proposal.district.id : null
+    theme:
+      state.default.features.themes && proposal.form.usingThemes
+        ? proposal.theme ? proposal.theme.id : null
+        : undefined,
+    category: proposal.form.usingCategories
+      ? proposal.category ? proposal.category.id : null
       : undefined,
+    district:
+      state.default.features.districts && proposal.form.usingDistrict
+        ? proposal.district ? proposal.district.id : null
+        : undefined,
     address: proposal.address,
     media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
