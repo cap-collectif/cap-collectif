@@ -219,7 +219,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               <FieldArray
                 name="responses"
                 component={renderResponses}
-                questions={evaluationForm.questions}
+                questions={evaluationForm ? evaluationForm.questions : []}
                 responses={this.props.responses}
                 intl={this.props.intl}
               />
