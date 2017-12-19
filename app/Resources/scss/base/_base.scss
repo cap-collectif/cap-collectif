@@ -815,7 +815,7 @@ svg.avatar {
         }
 
         &.active .badge {
-            background-color: #767676;
+            background-color: $dark-gray;
             color: $white;
         }
 
@@ -908,7 +908,7 @@ textarea {
 }
 
 .label-default {
-    background-color: $label-default-color;
+    background-color: $dark-gray;
 }
 
 .label-success {
@@ -921,4 +921,8 @@ textarea {
 
 .label-info {
     background-color: $info-color;
+}
+
+.small.excerpt {
+    color: $dark-gray;
 }
