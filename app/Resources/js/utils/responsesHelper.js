@@ -106,6 +106,7 @@ export const formatResponsesToSubmit = (values: Object, props: Object) => {
     const actualQuestion = questions.find(question => question.id === String(resp.question));
 
     if (!actualQuestion) {
+      // eslint-disable-next-line no-console
       console.error(`Can't find the question with id: ${resp.question}`);
       throw new Error(`Can't find the question with id: ${resp.question}`);
     }

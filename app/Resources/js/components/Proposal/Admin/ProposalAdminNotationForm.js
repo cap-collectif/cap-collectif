@@ -204,6 +204,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                             })),
                           ),
                       }))
+                      // eslint-disable-next-line no-console
                       .catch(e => console.error(e))}
                 />
               </div>
