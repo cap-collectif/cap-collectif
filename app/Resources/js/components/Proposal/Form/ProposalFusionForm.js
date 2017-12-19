@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
@@ -7,7 +7,8 @@ import select from '../../Form/Select';
 import type { State, Uuid } from '../../../types';
 
 export const formName = 'proposal';
-const validate = (values: Object): Object => {
+
+const validate = (values: Object) => {
   const errors = {};
   if (values.childConnections && values.childConnections.length < 2) {
     errors.childConnections = 'Sélectionnez au moins 2 propositions.';
@@ -15,14 +16,14 @@ const validate = (values: Object): Object => {
   return errors;
 };
 
-export const ProposalFusionForm = React.createClass({
-  propTypes: {
-    proposalForm: PropTypes.object,
-    projects: PropTypes.array.isRequired,
-    currentCollectStep: PropTypes.object,
-    onProjectChange: PropTypes.func.isRequired,
-  },
+type Props = {
+  proposalForm: Object,
+  projects: Array<Object>,
+  currentCollectStep: Object,
+  onProjectChange: (form: string, field: string, value: any) => void,
+};
 
+export class ProposalFusionForm extends React.Component<Props> {
   render() {
     const { currentCollectStep, projects, onProjectChange } = this.props;
     return (
@@ -68,8 +69,8 @@ export const ProposalFusionForm = React.createClass({
         )}
       </form>
     );
-  },
-});
+  }
+}
 
 const getBudgetProjects = (projects: { [id: Uuid]: Object }): Array<Object> => {
   return Object.keys(projects)
@@ -96,7 +97,7 @@ const getCurrentCollectStep = (state: State): ?Object => {
 };
 
 export default connect(
-  state => ({
+  (state: State) => ({
     projects: getBudgetProjects(state.project.projectsById),
     currentCollectStep: getCurrentCollectStep(state),
   }),
