@@ -190,19 +190,21 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   component={select}
                   clearable={false}
                   loadOptions={terms =>
-                    Fetcher.postToJson(`/users/search`, { terms }).then(res => ({
-                      options: res.users
-                        .map(u => ({
-                          value: u.id,
-                          label: u.displayName,
-                        }))
-                        .concat(
-                          proposal.likers.map(u => ({
+                    Fetcher.postToJson(`/users/search`, { terms })
+                      .then(res => ({
+                        options: res.users
+                          .map(u => ({
                             value: u.id,
                             label: u.displayName,
-                          })),
-                        ),
-                    }))}
+                          }))
+                          .concat(
+                            proposal.likers.map(u => ({
+                              value: u.id,
+                              label: u.displayName,
+                            })),
+                          ),
+                      }))
+                      .catch(e => console.error(e))}
                 />
               </div>
 
@@ -255,7 +257,7 @@ const form = injectIntl(
 
 export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
   return !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
-    ? undefined
+    ? []
     : formatInitialResponsesValues(
         props.proposal.form.evaluationForm.questions,
         props.proposal.evaluation ? props.proposal.evaluation.responses : [],
