@@ -362,7 +362,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       state.default.features.districts && proposal.form.usingDistrict
         ? proposal.district ? proposal.district.id : null
         : undefined,
-    address: proposal.address,
+    address: proposal.form.usingAddress ? proposal.address : undefined,
     media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
     addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,

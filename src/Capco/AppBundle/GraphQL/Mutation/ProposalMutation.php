@@ -257,7 +257,7 @@ class ProposalMutation implements ContainerAwareInterface
         unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
 
         $draft = false;
-        if (isset($values['draft'])) {
+        if (array_key_exists('draft', $values)) {
             $draft = $values['draft'];
             unset($values['draft']);
         }
@@ -340,7 +340,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $draft = false;
-        if (isset($values['draft'])) {
+        if (array_key_exists('draft', $values)) {
             if ($proposal->isDraft()) {
                 $draft = $values['draft'];
             }
@@ -361,7 +361,7 @@ class ProposalMutation implements ContainerAwareInterface
         ]);
 
         if (!$user->isSuperAdmin()) {
-            if (isset($values['author'])) {
+            if (array_key_exists('author', $values)) {
                 $error = 'Only a user with role ROLE_SUPER_ADMIN can update an author.';
                 $logger->error($error);
                 // For now we only log an error and unset the submitted value…
@@ -398,19 +398,19 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $toggleManager = $this->container->get('capco.toggle.manager');
 
-        if ((!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) && isset($values['theme'])) {
+        if ((!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) && array_key_exists('theme', $values)) {
             unset($values['theme']);
         }
 
-        if (!$proposalForm->isUsingCategories() && isset($values['category'])) {
+        if (!$proposalForm->isUsingCategories() && array_key_exists('category', $values)) {
             unset($values['category']);
         }
 
-        if ((!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) && isset($values['district'])) {
+        if ((!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) && array_key_exists('district', $values)) {
             unset($values['district']);
         }
 
-        if (!$proposalForm->getUsingAddress() && isset($values['address'])) {
+        if (!$proposalForm->getUsingAddress() && array_key_exists('address', $values)) {
             unset($values['address']);
         }
 
