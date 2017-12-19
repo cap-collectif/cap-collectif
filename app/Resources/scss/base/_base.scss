@@ -815,7 +815,7 @@ svg.avatar {
         }
 
         &.active .badge {
-            background-color: #777;
+            background-color: $dark-gray;
             color: $white;
         }
 
@@ -901,4 +901,28 @@ textarea {
 .settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
     font-weight: normal;
     color: #000000;
+}
+
+.print {
+    display: none;
+}
+
+.label-default {
+    background-color: $dark-gray;
+}
+
+.label-success {
+    background-color: $success-color;
+}
+
+.label-danger {
+    background-color: $danger-color;
+}
+
+.label-info {
+    background-color: $info-color;
+}
+
+.small.excerpt {
+    color: $dark-gray;
 }

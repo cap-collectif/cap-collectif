@@ -4,11 +4,8 @@ ResponseInput:
         description: "A response"
         fields:
             value:
-              type: "JSON"
-              description: "If related to a value question"
+              type: "String"
+              description: "The value"
             question:
               type: "String!"
               description: "The question id"
-            medias:
-              type: "[ID!]"
-              description: "If related to a media question"

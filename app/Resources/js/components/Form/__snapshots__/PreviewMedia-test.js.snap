@@ -2,6 +2,14 @@
 
 exports[`<PreviewMedia /> should render correctly 1`] = `
 <div>
+  <span
+    className="help-block"
+  >
+    <FormattedMessage
+      id="proposal.documents.helptext"
+      values={Object {}}
+    />
+  </span>
   <Col
     bsClass="col"
     className="image-uploader__label-info"
@@ -15,32 +23,30 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
   >
     <strong>
       <FormattedMessage
-        id="proposal.documents.deposited"
+        id="proposal.documents.added"
         values={Object {}}
       />
     </strong>
      
-    <Label
-      bsClass="label"
-      bsStyle="info"
-      style={
-        Object {
-          "marginRight": "5px",
-        }
-      }
+    <a
+      href="http://capco.dev/image.jpg"
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      image
-       
-      <i
-        className="glyphicon glyphicon-remove"
-        onClick={[Function]}
+      <Label
+        bsClass="label"
+        bsStyle="success"
         style={
           Object {
-            "cursor": "pointer",
+            "marginRight": "5px",
           }
         }
-      />
-    </Label>
+      >
+        image
+        .
+        jpg
+      </Label>
+    </a>
   </Col>
 </div>
 `;

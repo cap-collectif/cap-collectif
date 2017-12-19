@@ -91,6 +91,9 @@ exports.config = {
           /^node_modules/,
           'app/Resources/scss/style.scss',
         ],
+        'css/print.css': [
+          'app/Resources/scss/print.scss',
+        ],
         'css/jquery.minicolors.css': [
           'bower_components/jquery-minicolors/jquery.minicolors.css',
         ],

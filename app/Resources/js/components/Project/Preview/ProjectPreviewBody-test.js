@@ -134,6 +134,7 @@ const fourthTest = {
       },
     ],
   },
+  hasSecondTitle: true,
 };
 
 const fifthTest = {
@@ -229,7 +230,7 @@ describe('<ProjectPreviewBody />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly project preview body & elements for closed step', () => {
+  it('should render correctly project preview body with h2 title & elements for closed step', () => {
     const wrapper = shallow(<ProjectPreviewBody {...fourthTest} />);
     expect(wrapper).toMatchSnapshot();
   });

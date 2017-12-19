@@ -48,7 +48,7 @@ class ApiRegistrationFormType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'entry_type' => ValueResponseType::class,
+                'entry_type' => new ValueResponseType($this->transformer),
                 'required' => false,
             ])
         ;

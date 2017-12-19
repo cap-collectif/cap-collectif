@@ -12,9 +12,15 @@
     border-left: 1px solid $border-color;
     border-right: 1px solid $border-color;
 
-    h4 {
+    h4, .appendices__title {
         color: $black;
         margin-top: 10px;
+    }
+
+    .appendices__title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: 500;
     }
 
     &:last-child:not(:only-of-type) {

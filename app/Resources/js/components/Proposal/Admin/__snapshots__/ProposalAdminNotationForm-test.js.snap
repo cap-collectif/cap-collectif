@@ -22,9 +22,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               },
             ],
             "form": Object {
-              "evaluationForm": Object {
-                "questions": Array [],
-              },
+              "evaluationForm": null,
             },
             "id": "1",
             "likers": Array [
@@ -86,17 +84,9 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             placeholder="Sélectionnez un coup de coeur"
           />
         </div>
-        <div>
-          <h3>
-            <FormattedMessage
-              id="proposal.admin.personalize"
-              values={Object {}}
-            />
-          </h3>
-          <hr />
-        </div>
         <FieldArray
           component={[Function]}
+          evaluationForm={null}
           intl={
             Object {
               "formatDate": [Function],
@@ -110,7 +100,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             }
           }
           name="responses"
-          questions={Array []}
           responses={Array []}
         />
         <ButtonToolbar

@@ -12,12 +12,12 @@
     <div class="pagination--custom  text-center">
         <ul class="pagination">
             <li {% if current <= 1 %} class="disabled"{% endif %}>
-                <a {% if current > 1 %} href="{{ render.link(1, route, params, pageName) }}"{% endif %} aria-label="{{ 'global.pagination.first' | trans({}, 'CapcoAppBundle') }}">
+                <a  href="{% if current > 1 %}{{ render.link(1, route, params, pageName) }}{% else %}#{% endif %}" aria-label="{{ 'global.pagination.first' | trans({}, 'CapcoAppBundle') }}">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             <li {% if current <= 1 %} class="disabled"{% endif %}>
-                <a {% if current > 1 %} href="{{ render.link(current-1, route, params, pageName) }}"{% endif %} aria-label="{{ 'global.pagination.previous' | trans({}, 'CapcoAppBundle') }}">
+                <a  href="{% if current > 1 %}{{ render.link(current-1, route, params, pageName) }}{% else %}#{% endif %}" aria-label="{{ 'global.pagination.previous' | trans({}, 'CapcoAppBundle') }}">
                     <span aria-hidden="true">&lsaquo;</span>
                 </a>
             </li>
@@ -30,13 +30,13 @@
             {% endfor %}
             <li {% if current >= nb %} class="disabled"{% endif %}>
                 {% set p = current+1 %}
-                <a {% if current < nb %} href="{{ render.link(current+1, route, params, pageName) }}"{% endif %} aria-label="{{ 'global.pagination.next' | trans({}, 'CapcoAppBundle') }}">
+                <a  href="{% if current < nb %}{{ render.link(current+1, route, params, pageName) }}{% else %}#{% endif %}" aria-label="{{ 'global.pagination.next' | trans({}, 'CapcoAppBundle') }}">
                     <span aria-hidden="true">&rsaquo;</span>
                 </a>
             </li>
             <li {% if current >= nb %} class="disabled"{% endif %}>
                 {% set p = nb %}
-                <a {% if current < nb %} href="{{ render.link(nb, route, params, pageName) }}"{% endif %} aria-label="{{ 'global.pagination.last' | trans({}, 'CapcoAppBundle') }}">
+                <a  href="{% if current < nb %}{{ render.link(nb, route, params, pageName) }}{% else %}#{% endif %}" aria-label="{{ 'global.pagination.last' | trans({}, 'CapcoAppBundle') }}">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
