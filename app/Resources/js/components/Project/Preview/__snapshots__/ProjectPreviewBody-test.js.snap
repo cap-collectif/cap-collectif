@@ -1,158 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step 1`] = `
-<div
-  className="box project__preview__body"
->
-  <div
-    className="project__preview__body__infos"
-  >
-    <Connect(ProjectPreviewThemes)
-      project={
-        Object {
-          "_links": Object {
-            "show": "http://capco/show-link",
-          },
-          "hasParticipativeStep": false,
-          "steps": Array [
-            Object {
-              "_links": Object {
-                "show": "http://capco/closed-step1/show-link",
-              },
-              "endAt": "2016-12-28T09:00:24+01:00",
-              "startAt": "2016-12-20T09:00:24+01:00",
-              "status": "closed",
-              "title": "closed step 1",
-              "type": "presentation",
-            },
-            Object {
-              "_links": Object {
-                "show": "http://capco/closed-step2/show-link",
-              },
-              "endAt": "2017-01-28T09:00:24+01:00",
-              "startAt": "2017-01-20T09:00:24+01:00",
-              "status": "closed",
-              "title": "closed step 2",
-              "type": "presentation",
-            },
-          ],
-          "title": "Name of my project",
-        }
-      }
-    />
-    <h4
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
-    >
-      <OverlayTrigger
-        defaultOverlayShown={false}
-        overlay={
-          <Tooltip
-            bsClass="tooltip"
-            id="project-undefined-tooltip"
-            placement="right"
-          >
-            Name of my project
-          </Tooltip>
-        }
-        placement="top"
-        trigger={
-          Array [
-            "hover",
-            "focus",
-          ]
-        }
-      >
-        <a
-          href="http://capco/show-link"
-        >
-          <div
-            style={
-              Object {
-                "width": "98%",
-              }
-            }
-          >
-            <Truncate
-              ellipsis="…"
-              lines={3}
-            >
-              Name of my project
-            </Truncate>
-          </div>
-        </a>
-      </OverlayTrigger>
-    </h4>
-  </div>
-  <ProjectPreviewProgressBar
-    actualStep={
-      Object {
-        "_links": Object {
-          "show": "http://capco/closed-step2/show-link",
-        },
-        "endAt": "2017-01-28T09:00:24+01:00",
-        "startAt": "2017-01-20T09:00:24+01:00",
-        "status": "closed",
-        "title": "closed step 2",
-        "type": "presentation",
-      }
-    }
-    isCurrentStep={null}
-    project={
-      Object {
-        "_links": Object {
-          "show": "http://capco/show-link",
-        },
-        "hasParticipativeStep": false,
-        "steps": Array [
-          Object {
-            "_links": Object {
-              "show": "http://capco/closed-step1/show-link",
-            },
-            "endAt": "2016-12-28T09:00:24+01:00",
-            "startAt": "2016-12-20T09:00:24+01:00",
-            "status": "closed",
-            "title": "closed step 1",
-            "type": "presentation",
-          },
-          Object {
-            "_links": Object {
-              "show": "http://capco/closed-step2/show-link",
-            },
-            "endAt": "2017-01-28T09:00:24+01:00",
-            "startAt": "2017-01-20T09:00:24+01:00",
-            "status": "closed",
-            "title": "closed step 2",
-            "type": "presentation",
-          },
-        ],
-        "title": "Name of my project",
-      }
-    }
-  />
-  <div
-    className="project__preview__actions"
-  >
-    <a
-      href="http://capco/closed-step2/show-link"
-    >
-      <FormattedMessage
-        id="project.preview.action.seeResult"
-        values={Object {}}
-      />
-    </a>
-     
-     
-  </div>
-</div>
-`;
-
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step which remains a current step 1`] = `
 <div
   className="box project__preview__body"
@@ -203,7 +50,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -251,7 +98,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -366,7 +213,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -414,7 +261,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -536,7 +383,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -584,7 +431,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
     <ProjectPreviewCounters
       project={
         Object {
@@ -752,7 +599,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -800,7 +647,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
     <ProjectPreviewCounters
       project={
         Object {
@@ -930,7 +777,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -978,7 +825,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
     <ProjectPreviewCounters
       project={
         Object {
@@ -1127,7 +974,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -1175,7 +1022,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
     <ProjectPreviewCounters
       project={
         Object {
@@ -1345,7 +1192,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
         }
       }
     />
-    <h4
+    <h3
       className="project__preview__title"
       style={
         Object {
@@ -1421,7 +1268,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
           </div>
         </a>
       </OverlayTrigger>
-    </h4>
+    </h3>
   </div>
   <ProjectPreviewProgressBar
     actualStep={
@@ -1489,6 +1336,159 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     >
       <FormattedMessage
         id="project.preview.action.participe"
+        values={Object {}}
+      />
+    </a>
+     
+     
+  </div>
+</div>
+`;
+
+exports[`<ProjectPreviewBody /> should render correctly project preview body with h2 title & elements for closed step 1`] = `
+<div
+  className="box project__preview__body"
+>
+  <div
+    className="project__preview__body__infos"
+  >
+    <Connect(ProjectPreviewThemes)
+      project={
+        Object {
+          "_links": Object {
+            "show": "http://capco/show-link",
+          },
+          "hasParticipativeStep": false,
+          "steps": Array [
+            Object {
+              "_links": Object {
+                "show": "http://capco/closed-step1/show-link",
+              },
+              "endAt": "2016-12-28T09:00:24+01:00",
+              "startAt": "2016-12-20T09:00:24+01:00",
+              "status": "closed",
+              "title": "closed step 1",
+              "type": "presentation",
+            },
+            Object {
+              "_links": Object {
+                "show": "http://capco/closed-step2/show-link",
+              },
+              "endAt": "2017-01-28T09:00:24+01:00",
+              "startAt": "2017-01-20T09:00:24+01:00",
+              "status": "closed",
+              "title": "closed step 2",
+              "type": "presentation",
+            },
+          ],
+          "title": "Name of my project",
+        }
+      }
+    />
+    <h2
+      className="project__preview__title"
+      style={
+        Object {
+          "height": "auto",
+          "lineHeight": "auto",
+          "marginTop": "5px",
+        }
+      }
+    >
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="project-undefined-tooltip"
+            placement="right"
+          >
+            Name of my project
+          </Tooltip>
+        }
+        placement="top"
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <a
+          href="http://capco/show-link"
+        >
+          <div
+            style={
+              Object {
+                "width": "98%",
+              }
+            }
+          >
+            <Truncate
+              ellipsis="…"
+              lines={3}
+            >
+              Name of my project
+            </Truncate>
+          </div>
+        </a>
+      </OverlayTrigger>
+    </h2>
+  </div>
+  <ProjectPreviewProgressBar
+    actualStep={
+      Object {
+        "_links": Object {
+          "show": "http://capco/closed-step2/show-link",
+        },
+        "endAt": "2017-01-28T09:00:24+01:00",
+        "startAt": "2017-01-20T09:00:24+01:00",
+        "status": "closed",
+        "title": "closed step 2",
+        "type": "presentation",
+      }
+    }
+    isCurrentStep={null}
+    project={
+      Object {
+        "_links": Object {
+          "show": "http://capco/show-link",
+        },
+        "hasParticipativeStep": false,
+        "steps": Array [
+          Object {
+            "_links": Object {
+              "show": "http://capco/closed-step1/show-link",
+            },
+            "endAt": "2016-12-28T09:00:24+01:00",
+            "startAt": "2016-12-20T09:00:24+01:00",
+            "status": "closed",
+            "title": "closed step 1",
+            "type": "presentation",
+          },
+          Object {
+            "_links": Object {
+              "show": "http://capco/closed-step2/show-link",
+            },
+            "endAt": "2017-01-28T09:00:24+01:00",
+            "startAt": "2017-01-20T09:00:24+01:00",
+            "status": "closed",
+            "title": "closed step 2",
+            "type": "presentation",
+          },
+        ],
+        "title": "Name of my project",
+      }
+    }
+  />
+  <div
+    className="project__preview__actions"
+  >
+    <a
+      href="http://capco/closed-step2/show-link"
+    >
+      <FormattedMessage
+        id="project.preview.action.seeResult"
         values={Object {}}
       />
     </a>

@@ -100,7 +100,7 @@
     <div class="container  container--custom  appendices__container">
         <div class="row">
             <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
-                <h4 class="h4">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</h4>
+                <p class="appendices__title">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</p>
                 <p class="excerpt">
                     {% transchoice archivedEventsNb with {'%count%': archivedEventsNb} from 'CapcoAppBundle' %}
                         event.index.appendices.archived.number

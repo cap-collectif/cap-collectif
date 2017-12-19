@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -124,10 +125,7 @@ class ConsultationStepType
         return $this->updatedAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOpinionTypes()
+    public function getOpinionTypes(): Collection
     {
         return $this->opinionTypes;
     }

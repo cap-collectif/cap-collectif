@@ -68,7 +68,6 @@ services:
             - { name: overblog_graphql.mutation, alias: "selectProposal", method: "selectProposal" }
             - { name: overblog_graphql.mutation, alias: "changeProposalPublicationStatus", method: "changePublicationStatus" }
             - { name: overblog_graphql.mutation, alias: "changeProposalContent", method: "changeContent" }
-            - { name: overblog_graphql.mutation, alias: "createProposal", method: "create" }
 
   capco.mutation.proposal_form:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation

@@ -21,10 +21,10 @@ const AnswerBody = React.createClass({
               style={{ paddingRight: '10px' }}
             />
             <div className="media-body">
-              <p className="media-heading media--macro__user  small" style={{ marginBottom: '0' }}>
+              <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>
                 <UserLink user={answer.author} />
               </p>
-              <span className="small excerpt">
+              <span className="excerpt">
                 <FormattedDate
                   value={moment(answer.createdAt)}
                   day="numeric"

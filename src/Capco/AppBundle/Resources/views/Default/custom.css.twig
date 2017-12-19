@@ -363,26 +363,26 @@
     }
 
     {% if header2Text is not null %}
-        .main .container--header2 {
+        .main .container--header {
             color: {{ header2Text | raw }} !important;
         }
     {% endif %}
 
     {% if header2Bg is not null %}
-        .main .container--header2:after {
+        .main .container--header {
             background-color: {{ header2Bg | raw }} !important;
         }
     {% endif %}
 
     {% if header2Title is not null %}
-        .container--header2 h1,
-        .container--header2 h2,
-        .container--header2 h3,
-        .container--header2 h4,
-        .container--header2 h5 {
+        .container--header h1,
+        .container--header h2,
+        .container--header h3,
+        .container--header h4,
+        .container--header h5 {
             color: {{ header2Title | raw }};
         }
-        .container--header2 h2 {
+        .container--header h2 {
             border-bottom-color: {{ header2Title | raw }};
         }
     {% endif %}

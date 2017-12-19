@@ -8,6 +8,7 @@ describe('<OpinionList />', () => {
   const props = {
     section: {},
     consultation: {},
+    intl: global.intlMock,
   };
 
   it('renders correcty', () => {

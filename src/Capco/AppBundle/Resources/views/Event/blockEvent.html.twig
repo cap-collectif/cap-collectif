@@ -10,17 +10,17 @@
             </div>
         </div>
         <div class="col-md-9  col-sm-9  col-xs-12  event__body  box  event-js">
-            <h2 class="h4  event__title"><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}">{{ event.title }}</a></h2>
+            <h3 class="event__title"><a href="{{ path('app_event_show' ,{'slug': event.slug } ) }}">{{ event.title }}</a></h3>
             <p>
                 {% for theme in event.themes %}
                     <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}"><span class="label label-default">{{ theme.title }}</span></a>
                 {% endfor %}
             </p>
-            <p class="small  excerpt"><i class="cap-calendar-1"></i>
+            <p class="excerpt"><i class="cap-calendar-1"></i>
                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': event} only %}
             </p>
             {% if (event.address) or (event.zipCode) or (event.city) %}
-            <p class="excerpt small"><i class="cap-marker-1"></i> {{ event.address }}, {{ event.zipCode }} {{ event.city }}</p>
+            <p class="excerpt"><i class="cap-marker-1"></i> {{ event.address }}, {{ event.zipCode }} {{ event.city }}</p>
             {% endif %}
         </div>
     </div>

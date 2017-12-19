@@ -1,31 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalForm /> should render a create form 1`] = `
+exports[`<ProposalForm /> should render a simple form without custom field 1`] = `
 <form
   id="proposal-form"
 >
   <div
-    className="mt-20"
-  >
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Description 1",
-        }
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "description",
       }
-    />
-  </div>
-  <Field
+    }
+  />
+  <InjectIntl(ReactBootstrapInput)
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
-        className=""
         glyph="refresh"
       />
     }
     autoComplete="off"
-    component={[Function]}
-    help="Title help"
+    errors={null}
+    groupClassName=""
     id="proposal_title"
     label={
       <FormattedMessage
@@ -33,8 +28,9 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         values={Object {}}
       />
     }
-    name="title"
+    onChange={[Function]}
     type="text"
+    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -55,7 +51,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
           values={
             Object {
               "matches": 0,
-              "terms": "",
+              "terms": 2,
             }
           }
         />
@@ -84,10 +80,10 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       </Button>
     </Panel>
   </Collapse>
-  <Field
+  <InjectIntl(ReactBootstrapInput)
     autoComplete="off"
-    component={[Function]}
-    help="Summary help"
+    errors={null}
+    groupClassName=""
     id="proposal_summary"
     label={
       <span>
@@ -107,12 +103,17 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       </span>
     }
     maxLength="140"
-    name="summary"
     type="textarea"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
   />
-  <Field
-    component={[Function]}
-    help="Theme help"
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_theme"
     label={
       <span>
@@ -122,8 +123,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         />
       </span>
     }
-    name="theme"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.theme"
@@ -134,10 +140,10 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     >
       Theme 1
     </option>
-  </Field>
-  <Field
-    component={[Function]}
-    help="Category help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_category"
     label={
       <span>
@@ -147,8 +153,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         />
       </span>
     }
-    name="category"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.category"
@@ -159,30 +170,11 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     >
       Category 1
     </option>
-    <option
-      value="category2"
-    >
-      Category 2
-    </option>
-  </Field>
-  <Field
-    component={[Function]}
-    formName="proposal-form"
-    help="Address help"
-    id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal.map.form.field"
-        values={Object {}}
-      />
-    }
-    name="addressText"
-    placeholder="proposal.map.form.placeholder"
-    type="address"
-  />
-  <Field
-    component={[Function]}
-    help="District help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    disabled={false}
+    errors={null}
+    groupClassName=""
     id="proposal_district"
     label={
       <span>
@@ -192,8 +184,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         />
       </span>
     }
-    name="district"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.district"
@@ -202,17 +199,12 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     <option
       value="district1"
     >
-      District 1
+      Disctrict 1
     </option>
-    <option
-      value="district2"
-    >
-      District 2
-    </option>
-  </Field>
-  <Field
-    component={[Function]}
-    help="Description help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_body"
     label={
       <FormattedMessage
@@ -222,39 +214,18 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     }
     name="body"
     type="editor"
-  />
-  <FieldArray
-    component={[Function]}
-    intl={
+    valueLink={
       Object {
-        "formatDate": [Function],
-        "formatHTMLMessage": [Function],
-        "formatMessage": [Function],
-        "formatNumber": [Function],
-        "formatPlural": [Function],
-        "formatRelative": [Function],
-        "formatTime": [Function],
-        "now": [Function],
+        "requestChange": [Function],
+        "value": undefined,
       }
     }
-    name="responses"
-    questions={
-      Array [
-        Object {
-          "id": "question1",
-          "position": 1,
-          "private": true,
-          "required": true,
-          "title": "Lol",
-          "type": "text",
-        },
-      ]
-    }
   />
-  <Field
-    component={[Function]}
-    help="Illustration help"
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_media"
+    image={null}
     label={
       <span>
         <FormattedMessage
@@ -272,38 +243,38 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         </span>
       </span>
     }
-    name="media"
     type="image"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   />
 </form>
 `;
 
-exports[`<ProposalForm /> should render an edit form 1`] = `
+exports[`<ProposalForm /> should render a simple form without custom field and district 1`] = `
 <form
   id="proposal-form"
 >
   <div
-    className="mt-20"
-  >
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Description 1",
-        }
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "description",
       }
-    />
-  </div>
-  <Field
+    }
+  />
+  <InjectIntl(ReactBootstrapInput)
     addonAfter={
       <Glyphicon
         bsClass="glyphicon"
-        className=""
         glyph="refresh"
       />
     }
     autoComplete="off"
-    component={[Function]}
-    help="Title help"
+    errors={null}
+    groupClassName=""
     id="proposal_title"
     label={
       <FormattedMessage
@@ -311,8 +282,9 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         values={Object {}}
       />
     }
-    name="title"
+    onChange={[Function]}
     type="text"
+    value="Proposal title"
   />
   <Collapse
     dimension="height"
@@ -333,7 +305,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
           values={
             Object {
               "matches": 0,
-              "terms": "",
+              "terms": 2,
             }
           }
         />
@@ -362,10 +334,10 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       </Button>
     </Panel>
   </Collapse>
-  <Field
+  <InjectIntl(ReactBootstrapInput)
     autoComplete="off"
-    component={[Function]}
-    help="Summary help"
+    errors={null}
+    groupClassName=""
     id="proposal_summary"
     label={
       <span>
@@ -385,12 +357,17 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       </span>
     }
     maxLength="140"
-    name="summary"
     type="textarea"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": undefined,
+      }
+    }
   />
-  <Field
-    component={[Function]}
-    help="Theme help"
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_theme"
     label={
       <span>
@@ -400,8 +377,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       </span>
     }
-    name="theme"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.theme"
@@ -412,10 +394,10 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     >
       Theme 1
     </option>
-  </Field>
-  <Field
-    component={[Function]}
-    help="Category help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_category"
     label={
       <span>
@@ -425,8 +407,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       </span>
     }
-    name="category"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.category"
@@ -437,30 +424,11 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     >
       Category 1
     </option>
-    <option
-      value="category2"
-    >
-      Category 2
-    </option>
-  </Field>
-  <Field
-    component={[Function]}
-    formName="proposal-form"
-    help="Address help"
-    id="proposal_address"
-    label={
-      <FormattedMessage
-        id="proposal.map.form.field"
-        values={Object {}}
-      />
-    }
-    name="addressText"
-    placeholder="proposal.map.form.placeholder"
-    type="address"
-  />
-  <Field
-    component={[Function]}
-    help="District help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    disabled={false}
+    errors={null}
+    groupClassName=""
     id="proposal_district"
     label={
       <span>
@@ -470,8 +438,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         />
       </span>
     }
-    name="district"
     type="select"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   >
     <FormattedMessage
       id="proposal.select.district"
@@ -480,17 +453,12 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <option
       value="district1"
     >
-      District 1
+      Disctrict 1
     </option>
-    <option
-      value="district2"
-    >
-      District 2
-    </option>
-  </Field>
-  <Field
-    component={[Function]}
-    help="Description help"
+  </InjectIntl(ReactBootstrapInput)>
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_body"
     label={
       <FormattedMessage
@@ -500,39 +468,18 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     }
     name="body"
     type="editor"
-  />
-  <FieldArray
-    component={[Function]}
-    intl={
+    valueLink={
       Object {
-        "formatDate": [Function],
-        "formatHTMLMessage": [Function],
-        "formatMessage": [Function],
-        "formatNumber": [Function],
-        "formatPlural": [Function],
-        "formatRelative": [Function],
-        "formatTime": [Function],
-        "now": [Function],
+        "requestChange": [Function],
+        "value": undefined,
       }
     }
-    name="responses"
-    questions={
-      Array [
-        Object {
-          "id": "question1",
-          "position": 1,
-          "private": true,
-          "required": true,
-          "title": "Lol",
-          "type": "text",
-        },
-      ]
-    }
   />
-  <Field
-    component={[Function]}
-    help="Illustration help"
+  <InjectIntl(ReactBootstrapInput)
+    errors={null}
+    groupClassName=""
     id="proposal_media"
+    image={null}
     label={
       <span>
         <FormattedMessage
@@ -550,8 +497,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         </span>
       </span>
     }
-    name="media"
     type="image"
+    valueLink={
+      Object {
+        "requestChange": [Function],
+        "value": null,
+      }
+    }
   />
 </form>
 `;

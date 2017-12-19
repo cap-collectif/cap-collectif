@@ -327,6 +327,9 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $this;
     }
 
+    /**
+     * @return null|ConsultationStepType
+     */
     public function getConsultationStepType()
     {
         return $this->consultationStepType;

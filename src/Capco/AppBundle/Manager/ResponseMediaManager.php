@@ -39,13 +39,14 @@ class ResponseMediaManager
         foreach ($responsesKeys as $responsesKey) {
             $questionId = $this->request->request->get('responses_' . $responsesKey . '_question');
 
+            /** @var MediaResponse $response */
             $response = $this->proposal->getResponses()->filter(
                 function (AbstractResponse $element) use ($questionId) {
                     return (int) $element->getQuestion()->getId() === (int) $questionId;
                 }
             )->first();
 
-            if ($response instanceof MediaResponse) {
+            if ($response) {
                 $this->removeMedias($response);
                 $this->addMediasFromArray($uploadedMedias, $responsesKey, $response);
             }
