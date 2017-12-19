@@ -3,20 +3,22 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
+use Capco\AppBundle\Form\ProposalType;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Error\UserErrors;
+use Swarrot\Broker\Message;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -235,107 +237,226 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, Request $request, User $user): array
+    public function create(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
-        $mediaManager = $this->container->get('capco.media.manager');
+        $proposalFormRepo = $this->container->get('capco.proposal_form.repository');
 
         $values = $input->getRawArguments();
-        $values['responses'] = array_map(function ($value) {
-            $value[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
 
-            return $value;
-        }, $values['responses']);
+        $proposalForm = $proposalFormRepo->find($values['proposalFormId']);
+        if (!$proposalForm) {
+            $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
+            $logger->error($error);
+            throw new UserError($error);
+        }
+        if (!$proposalForm->canContribute() && !$user->isAdmin()) {
+            throw new UserError('You can no longer contribute to this collect step.');
+        }
+        unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
 
-        $logger->info('changeContent:' . json_encode($values, true));
+        $draft = false;
+        if (array_key_exists('draft', $values)) {
+            $draft = $values['draft'];
+            unset($values['draft']);
+        }
 
-        $proposal = $this->container->get('capco.proposal.repository')->find($values['id']);
+        $values = $this->fixValues($values, $proposalForm);
+
+        $proposal = (new Proposal())
+            ->setDraft($draft)
+            ->setAuthor($user)
+            ->setProposalForm($proposalForm)
+            ->setEnabled($draft ? false : true)
+        ;
+
+        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
+            $proposal->setStatus($defaultStatus);
+        }
+
+        $form = $formFactory->create(ProposalType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
+        ]);
+
+        $logger->info('createProposal: ' . json_encode($values, true));
+        $form->submit($values);
+
+        if (!$form->isValid()) {
+            $this->handleErrors($form);
+        }
+
+        $em->persist($proposal);
+        $em->flush();
+
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+
+        // If not present, es listener will take some time to execute the refresh
+        // and, next time proposals will be fetched, the set of data will be outdated.
+        // Keep in mind that refresh should usually not be triggered manually.
+        $index = $this->container->get('fos_elastica.index');
+        $index->refresh();
+
+        if ($proposalForm->isNotifyingOnCreate()) {
+            $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
+
+        return ['proposal' => $proposal];
+    }
+
+    public function changeContent(Argument $input, User $user): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $formFactory = $this->container->get('form.factory');
+        $proposalRepo = $this->container->get('capco.proposal.repository');
+        $logger = $this->container->get('logger');
+
+        $values = $input->getRawArguments();
+        $proposal = $proposalRepo->find($values['id']);
+        $proposalForm = $proposal->getProposalForm();
+
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
             $logger->error($error);
             throw new UserError($error);
         }
-
         unset($values['id']); // This only usefull to retrieve the proposal
 
-        // Handle media deletion
-        if (isset($values['deleteCurrentMedia']) && true === $values['deleteCurrentMedia']) {
-            if ($proposal->getMedia()) {
-                $em->remove($proposal->getMedia());
-                $proposal->setMedia(null);
-            }
-        }
-        unset($values['deleteCurrentMedia']);
-
-        // Handle File upload for key `media`
-        $uploadedMedia = $request->files->get('media');
-        if ($uploadedMedia instanceof UploadedFile) {
-            $logger->info('UploadedMedia:' . $uploadedMedia->getClientOriginalName());
-            if ($proposal->getMedia()) {
-                $em->remove($proposal->getMedia());
-            }
-            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
-            $proposal->setMedia($media);
-            $request->files->remove('media');
-        }
-        unset($values['media']);
-
-        // Now we handle file uploads for every responses
-        foreach ($request->files->all() as $key => $file) {
-            $logger->info('File: ' . $key);
-            if (false === strpos($key, 'responses_')) {
-                break;
-            }
-            $questionId = str_replace('responses.', '', $key);
-            $question = $this->container->get('capco.abstract_question.repository')->find((int) $questionId);
-            if (!$question) {
-                throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
-            }
-            $response = $proposal->getResponses()->filter(
-                function (AbstractResponse $res) use ($questionId) {
-                    return (int) $res->getQuestion()->getId() === (int) $questionId;
-                }
-            )->first();
-            if (!$response) {
-                $response = new MediaResponse();
-                $response->setQuestion($question);
-                $proposal->addResponse($response);
-            }
-            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
-            $response->addMedia($media);
+        if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
+            $error = sprintf('You must be the author to update a proposal.');
+            $logger->error($error);
+            throw new UserError($error);
         }
 
-        foreach ($values['responses'] as $valueResponse) {
-            $valueResponse[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
+        if (!$proposal->canContribute() && !$user->isAdmin()) {
+            $error = sprintf('Sorry, you can\'t contribute to this proposal anymore.');
+            $logger->error($error);
+            throw new UserError($error);
         }
 
-        // Now we can submit the form without anything related to file uploads
+        $draft = false;
+        if (array_key_exists('draft', $values)) {
+            if ($proposal->isDraft()) {
+                $draft = $values['draft'];
+            }
+            unset($values['draft']);
+        }
+
+        $proposal
+          ->setDraft($draft)
+          ->setEnabled($draft ? false : true)
+        ;
+
+        $values = $this->fixValues($values, $proposalForm);
+
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
-            'proposalForm' => $proposal->getProposalForm(),
+            'proposalForm' => $proposalForm,
+            'index_property' => 'position',
+            'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
         if (!$user->isSuperAdmin()) {
-            if (isset($values['author'])) {
+            if (array_key_exists('author', $values)) {
                 $error = 'Only a user with role ROLE_SUPER_ADMIN can update an author.';
                 $logger->error($error);
-                // For now we only log an error and unset the subbmitted value…
+                // For now we only log an error and unset the submitted value…
                 unset($values['author']);
             }
             $form->remove('author');
         }
 
-        $form->submit($values);
+        $logger->info('changeContent: ' . json_encode($values, true));
+        $form->submit($values, false);
+
         if (!$form->isValid()) {
-            $error = 'Input not valid : ' . (string) $form->getErrors(true, false);
-            $logger->error($error);
-            throw new UserError($error);
+            $this->handleErrors($form);
         }
 
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
+        ) {
+            $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
+              json_encode([
+                'proposalId' => $proposal->getId(),
+              ])
+            ));
+        }
+
         return ['proposal' => $proposal];
+    }
+
+    private function fixValues(array $values, ProposalForm $proposalForm)
+    {
+        $toggleManager = $this->container->get('capco.toggle.manager');
+
+        if ((!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) && array_key_exists('theme', $values)) {
+            unset($values['theme']);
+        }
+
+        if (!$proposalForm->isUsingCategories() && array_key_exists('category', $values)) {
+            unset($values['category']);
+        }
+
+        if ((!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) && array_key_exists('district', $values)) {
+            unset($values['district']);
+        }
+
+        if (!$proposalForm->getUsingAddress() && array_key_exists('address', $values)) {
+            unset($values['address']);
+        }
+
+        if (isset($values['responses'])) {
+            $values['responses'] = $this->formatResponses($values['responses']);
+        }
+
+        return $values;
+    }
+
+    private function handleErrors($form)
+    {
+        $logger = $this->container->get('logger');
+        $errors = [];
+        foreach ($form->getErrors() as $error) {
+            $logger->error((string) $error->getMessage());
+            $logger->error(implode($form->getExtraData()));
+            $errors[] = (string) $error->getMessage();
+        }
+        if (!empty($errors)) {
+            throw new UserErrors($errors);
+        }
+    }
+
+    private function formatResponses(array $responses)
+    {
+        $questionRepo = $this->container->get('capco.abstract_question.repository');
+
+        // we need to set _type for polycollection
+        // and position for reordering
+        foreach ($responses as &$response) {
+            $question = $questionRepo->find((int) $response['question']);
+            if (!$question) {
+                throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
+            }
+            $questions[] = $question;
+            $response['question'] = $question->getId();
+            $response['position'] = $question->getPosition();
+            if ($question instanceof MediaQuestion) {
+                $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
+            } else {
+                $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
+            }
+        }
+
+        return $responses;
     }
 }

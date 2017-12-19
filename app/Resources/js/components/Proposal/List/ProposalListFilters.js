@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { State } from '../../../types';
@@ -32,7 +32,6 @@ export const ProposalListFilters = React.createClass({
     showDistrictFilter: PropTypes.bool.isRequired,
     showCategoriesFilter: PropTypes.bool.isRequired,
     showToggleMapButton: PropTypes.bool,
-    intl: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
@@ -77,7 +76,6 @@ export const ProposalListFilters = React.createClass({
       orderByCost,
       showToggleMapButton,
       defaultSort,
-      intl,
     } = this.props;
     const { displayedFilters, orderByVotes } = this.state;
     const colWidth = showToggleMapButton ? 4 : 6;
@@ -111,7 +109,6 @@ export const ProposalListFilters = React.createClass({
             <Col xs={12} md={colWidth} key={index}>
               <Input
                 type="select"
-                aria-label={intl.formatMessage({ id: 'global.searchIn' }, { filterName })}
                 id={`proposal-filter-${filterName}`}
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
@@ -146,6 +143,4 @@ const mapStateToProps = (state: State) => {
   };
 };
 
-const container = injectIntl(ProposalListFilters);
-
-export default connect(mapStateToProps)(container);
+export default connect(mapStateToProps)(ProposalListFilters);
