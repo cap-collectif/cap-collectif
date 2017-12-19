@@ -12,7 +12,7 @@ exports[`<ProposalListRandomRow /> should render the random row on the list 1`] 
       md={4}
       xs={4}
     >
-      <Connect(InjectIntl(ProposalListOrderSorting))
+      <Connect(ProposalListOrderSorting)
         orderByVotes={true}
       />
     </Col>

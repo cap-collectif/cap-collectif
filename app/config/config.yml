@@ -414,7 +414,7 @@ overblog_graphql:
         query_max_complexity: false
     definitions:
         show_debug_info: "%kernel.debug%"
-        internal_error_message: "An error occurred, please retry later or contact us!"
+        # internal_error_message: "An error occurred, please retry later or contact us!"
         config_validation: "%kernel.debug%"
         schema:
             query: Query

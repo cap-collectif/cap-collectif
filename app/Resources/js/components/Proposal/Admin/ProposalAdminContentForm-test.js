@@ -9,15 +9,10 @@ describe('<ProposalAdminContentForm />', () => {
   const props = {
     features,
     handleSubmit: jest.fn(),
+    ...global.formMock,
     intl: global.intlMock,
-    invalid: false,
-    valid: false,
-    submitSucceeded: false,
-    submitFailed: false,
-    pristine: false,
-    submitting: false,
     isSuperAdmin: true,
-    themes: [],
+    themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
     proposal: {
       id: '1',
       title: 'title-1',
