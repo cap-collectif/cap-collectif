@@ -39,19 +39,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
   const data = {
     ...values,
     addressText: undefined, // Only used for the user view
+    media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
+    author: isSuperAdmin ? values.author : undefined,
   };
 
-  // Only super admin can edit author
-  if (!isSuperAdmin) {
-    delete data.author;
-  }
-
-  const variables = {
+  return ChangeProposalContentMutation.commit({
     input: { ...data, id: proposal.id },
-  };
-
-  return ChangeProposalContentMutation.commit(variables)
+  })
     .then((response: ChangeProposalContentMutationResponse) => {
       if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
         throw new Error('Mutation "changeProposalContent" failed.');
@@ -362,7 +357,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
       ? proposal.district ? proposal.district.id : null
       : undefined,
     address: proposal.address,
-    media: null,
+    media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
     addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
