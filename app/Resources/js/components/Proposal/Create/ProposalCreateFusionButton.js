@@ -12,8 +12,6 @@ import {
 import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import ProposalAdminForm from '../Form/ProposalAdminForm';
-import Fetcher from '../../../services/Fetcher';
 import type { State, Uuid } from '../../../types';
 
 export const ProposalCreateFusionButton = React.createClass({
@@ -26,28 +24,8 @@ export const ProposalCreateFusionButton = React.createClass({
     proposalFormId: PropTypes.string,
   },
 
-  getInitialState() {
-    return { proposalForm: null };
-  },
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.proposalFormId !== this.props.proposalFormId) {
-      this.loadProposalForm();
-    }
-  },
-
-  loadProposalForm() {
-    const { proposalFormId } = this.props;
-    if (proposalFormId) {
-      Fetcher.get(`/proposal_forms/${proposalFormId}`).then(proposalForm => {
-        this.setState({ proposalForm });
-      });
-    }
-  },
-
   render() {
     const { proposalFormId, showModal, isSubmitting, open, close, submit } = this.props;
-    const { proposalForm } = this.state;
     return (
       <div>
         <Button
@@ -71,12 +49,6 @@ export const ProposalCreateFusionButton = React.createClass({
           <Modal.Body>
             <h3>Propositions fusionnées</h3>
             <ProposalFusionForm />
-            {proposalForm && (
-              <div>
-                <h3>Nouvelle proposition issue de la fusion</h3>
-                <ProposalAdminForm proposalForm={proposalForm} />
-              </div>
-            )}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => close()} />

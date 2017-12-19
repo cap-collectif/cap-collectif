@@ -11,11 +11,6 @@ class ProposalFusionType extends ProposalType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('author', EntityType::class, [
-              'class' => 'CapcoUserBundle:User',
-              'required' => true,
-              'property' => 'id',
-            ])
             ->add('childConnections', EntityType::class, [
                 'multiple' => true,
                 'class' => 'CapcoAppBundle:Proposal',
@@ -24,10 +19,21 @@ class ProposalFusionType extends ProposalType
                     'min' => 2,
                     'minMessage' => 'You must specify more than 2 proposal',
                   ]),
+                  // AssertProposalsAreFromSameProposalForm
                 ],
             ])
         ;
 
         parent::buildForm($builder, $options);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Proposal::class,
+            'csrf_protection' => false,
+            'validation_groups' => ['create_fusion'],
+            'cascade_validation' => true,
+        ]);
     }
 }

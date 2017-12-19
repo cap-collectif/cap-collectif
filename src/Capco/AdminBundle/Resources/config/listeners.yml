@@ -59,6 +59,7 @@ services:
   capco.mutation.proposal:
         class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
         tags:
+            - { name: overblog_graphql.mutation, alias: "createFusion", method: "createFusion" }
             - { name: overblog_graphql.mutation, alias: "deleteProposal", method: "delete" }
             - { name: overblog_graphql.mutation, alias: "changeProposalNotation", method: "changeNotation" }
             - { name: overblog_graphql.mutation, alias: "changeProposalEvaluers", method: "changeEvaluers" }
