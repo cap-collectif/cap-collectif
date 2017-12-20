@@ -15,7 +15,7 @@
         {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'private': private, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
 
         <div class="media-body">
-            <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user  small">
+            <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user">
                 {% if user is not null and not private %}
                     {% if is_feature_enabled('profiles') %}
                         <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username }}</a>
@@ -26,7 +26,7 @@
                     {{ username }}
                 {% endif %}
             </p>
-            <span class="excerpt small">
+            <span class="excerpt">
                 {% if user is not null and not private %}
                     {% if contributions is not defined %}
                         {% set contributions = user.contributionsCount | default(0) %}

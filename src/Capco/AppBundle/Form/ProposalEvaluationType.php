@@ -28,7 +28,7 @@ class ProposalEvaluationType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'type' => ValueResponseType::class,
+                'type' => new ValueResponseType($this->transformer),
                 'required' => false,
             ]);
     }

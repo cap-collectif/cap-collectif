@@ -3,5 +3,5 @@ Capco\MediaBundle\Entity\Media:
     properties:
         id:
             expose: true
-            type: string
+            type: integer
             groups: [Default]

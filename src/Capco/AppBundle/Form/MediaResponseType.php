@@ -2,16 +2,14 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
-use Capco\MediaBundle\Entity\Media;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class MediaResponseType extends AbstractType
 {
@@ -27,24 +25,8 @@ class MediaResponseType extends AbstractType
         $this->transformer->setEntityClass(AbstractQuestion::class);
         $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
 
-        $builder
-          ->add('question')
-          ->add('medias', EntityType::class, [
-              'class' => Media::class,
-              'multiple' => true,
-              'constraints' => [
-                new Assert\Count([
-                  'max' => 5,
-                  'maxMessage' => 'You must add 5 files or less.',
-                ]),
-              ],
-          ])
-        ;
+        $builder->add('question', HiddenType::class);
         $builder->get('question')->addModelTransformer($this->transformer);
-
-        $builder->add('position', HiddenType::class, [
-            'mapped' => false,
-        ]);
 
         $builder->add(AbstractResponse::TYPE_FIELD_NAME, HiddenType::class, [
             'data' => $this->getBlockPrefix(),
@@ -57,7 +39,9 @@ class MediaResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => MediaResponse::class,
             'model_class' => MediaResponse::class,
-            'allow_extra_fields' => true,
+            'csrf_protection' => false,
+            'translation_domain' => 'CapcoAppBundle',
+            'cascade_validation' => true,
         ]);
     }
 

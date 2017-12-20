@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -35,10 +35,11 @@ export const OpinionList = React.createClass({
   propTypes: {
     section: PropTypes.object.isRequired,
     consultation: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
   },
 
   render() {
-    const { section, consultation } = this.props;
+    const { section, consultation, intl } = this.props;
     return (
       <div id={`opinions--test17${section.slug}`} className="anchor-offset block  block--bordered">
         <div className={`opinion  opinion--${section.color} opinion--default`}>
@@ -54,6 +55,7 @@ export const OpinionList = React.createClass({
                 <select
                   className="form-control"
                   style={{ marginRight: section.contribuable ? 15 : 0 }}
+                  aria-label={intl.formatMessage({ id: 'global.filter' })}
                   onChange={(event: SyntheticInputEvent<>) => {
                     window.location.href = `${section.url}/sort/${event.target.value}`;
                   }}>
@@ -123,7 +125,9 @@ export const OpinionList = React.createClass({
   },
 });
 
-export default createFragmentContainer(OpinionList, {
+const container = injectIntl(OpinionList);
+
+export default createFragmentContainer(container, {
   section: graphql`
     fragment OpinionList_section on Section {
       id
