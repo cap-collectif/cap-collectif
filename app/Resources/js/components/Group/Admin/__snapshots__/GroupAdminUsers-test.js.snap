@@ -139,13 +139,11 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         values={Object {}}
       />
     </Button>
-    <AlertForm
-      invalid={false}
-      submitFailed={false}
-      submitSucceeded={true}
-      submitting={false}
-      valid={true}
-    />
+    <div
+      className="d-ib"
+    >
+      <AlertFormSucceededMessage />
+    </div>
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {

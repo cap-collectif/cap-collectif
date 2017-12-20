@@ -14,6 +14,7 @@ import {
 } from 'redux-form';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
+import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 
@@ -50,7 +51,9 @@ export class GroupAdminUsers extends React.Component<Props, State> {
 
     if (userIsDeleted) {
       return (
-        <AlertForm valid invalid={false} submitSucceeded submitFailed={false} submitting={false} />
+        <div className="d-ib">
+          <AlertFormSucceededMessage />
+        </div>
       );
     }
 
