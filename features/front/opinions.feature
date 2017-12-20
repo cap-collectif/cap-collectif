@@ -33,7 +33,7 @@ Scenario: Can not create an opinion of non-contribuable type
       | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
     Then I should see "step.consultation.alert.ended.title" in the "#main" element
     Then I should see "step.consultation.alert.ended.text" in the "#main" element
-    And the create opinion button should be disabled
+    And I should see 0 "#btn-add--les-causes" element
 
   @javascript @security
   Scenario: Can not create an opinion when not logged in

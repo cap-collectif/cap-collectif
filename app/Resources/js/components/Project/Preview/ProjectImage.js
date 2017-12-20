@@ -10,7 +10,7 @@ const ProjectImage = React.createClass({
   render() {
     const { project } = this.props;
     if (project.cover) {
-      return <img src={project.cover.url} alt={project.title} className="img-responsive" />;
+      return <img src={project.cover.url} alt="" className="img-responsive" />;
     }
     return (
       <div className="bg--default bg--project">
