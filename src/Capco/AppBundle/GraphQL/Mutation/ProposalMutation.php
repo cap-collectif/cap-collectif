@@ -42,10 +42,11 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
+        $title = $this->container->get('translator')->trans('untitled-proposal', [], 'CapcoAppBundle');
         $proposal = (new Proposal())
             ->setAuthor($author)
             ->setEnabled(true)
-            ->setTitle('Proposition sans titre')
+            ->setTitle($title)
         ;
 
         $form = $formFactory->create(ProposalFusionType::class, $proposal);

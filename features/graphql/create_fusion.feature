@@ -7,12 +7,13 @@ Scenario: GraphQL client wants to create a fusion
   And I send a GraphQL POST request:
   """
     {
-      "query": "mutation ($input: CreateFusionInput!) {
+      "query": "mutation ($input: CreateProposalFusionInput!) {
         createProposalFusion (input: $input) {
           proposal {
             author {
               id
             }
+            title
             adminUrl
             mergedFrom {
               id
@@ -36,6 +37,7 @@ Scenario: GraphQL client wants to create a fusion
             "author": {
               "id": "userAdmin"
             },
+            "title": "untitled-proposal",
             "adminUrl": @string@,
             "mergedFrom": [
               {
@@ -47,6 +49,36 @@ Scenario: GraphQL client wants to create a fusion
             ]
           }
         }
+      }
+    }
+  """
+
+@security
+Scenario: GraphQL client wants to create a fusion with only 1 proposal
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+    {
+      "query": "mutation ($input: CreateProposalFusionInput!) {
+        createProposalFusion (input: $input) {
+          proposal {
+            id
+          }
+        }
+      }",
+      "variables": {
+        "input": {
+          "fromProposals": ["proposal1"]
+        }
+      }
+    }
+  """
+  Then the JSON response should match:
+  """
+    {
+      "data": {
+        "errors": [],
+        "createProposalFusion": null
       }
     }
   """

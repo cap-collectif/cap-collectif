@@ -48,7 +48,7 @@ export class ProposalCreateFusionButton extends React.Component<Props> {
             <CloseButton onClose={() => close()} />
             <SubmitButton
               id="confirm-proposal-merge-create"
-              label="Créer une nouvelle proposition"
+              label="create-a-new-proposal"
               isSubmitting={submitting}
               onSubmit={() => {
                 dispatch(submit(formName));

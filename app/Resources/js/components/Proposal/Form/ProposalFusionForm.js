@@ -19,10 +19,10 @@ type FormValues = {
 const validate = (values: FormValues) => {
   const errors = {};
   if (!values.project) {
-    errors.project = 'Veuillez sélectionner un projet';
+    errors.project = 'please-select-a-participatory-project';
   }
   if (!values.fromProposals || values.fromProposals.length < 2) {
-    errors.childConnections = 'Veuillez sélectionner au minimum 2 propositions';
+    errors.fromProposals = 'please-select-at-least-2-proposals';
   }
   return errors;
 };
@@ -60,8 +60,8 @@ export class ProposalFusionForm extends React.Component<Props> {
         <Field
           name="project"
           id="project"
-          label="Projet participatif"
-          placeholder="Sélectionner le projet participatif"
+          label="admin.fields.proposal.project"
+          placeholder="select-a-participatory-project"
           isLoading={projects.length === 0}
           component={select}
           clearable={false}
@@ -74,10 +74,10 @@ export class ProposalFusionForm extends React.Component<Props> {
             name="fromProposals"
             id="childConnections"
             multi
-            label="Propositions initiales"
+            label="initial-proposals"
             autoload
-            help=""
-            placeholder="Sélectionner des propositions initiales"
+            help="2-proposals-minimum"
+            placeholder="select-proposals"
             component={select}
             filterOptions={(options, filter, currentValues) =>
               options

@@ -19,8 +19,11 @@ class ProposalFusionType extends AbstractType
                 'class' => Proposal::class,
                 'constraints' => [
                   new Assert\Count([
+                    'groups' => ['CreateFusion'],
                     'min' => 2,
                     'minMessage' => 'You must specify at least 2 proposals to merge.',
+                    'max' => 100,
+                    'maxMessage' => 'You cannot specify more than 100 proposals to merge.',
                   ]),
                   // TODO AssertProposalsAreFromSameProposalForm
                 ],
