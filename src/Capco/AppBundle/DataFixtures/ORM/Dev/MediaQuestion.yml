@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
     title: Documents
     id: 11
     helpText: "5 fichiers max"
-    required: false
+    required: true
     type: 7 # media
     private: false
 

@@ -37,7 +37,7 @@ Scenario: GraphQL client wants to edit his proposal
           },
           {
             "question": "12",
-            "medias": ["media1"]
+            "medias": []
           }
         ]
       }
