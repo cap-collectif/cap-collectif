@@ -149,6 +149,16 @@ class ProposalResolver implements ContainerAwareInterface
             ], true);
     }
 
+    public function resolveAdminUrl(Proposal $proposal): string
+    {
+        return $this->container->get('router')->generate(
+            'admin_capco_app_proposal_edit',
+            [
+                'id' => $proposal->getId(),
+            ], true
+        );
+    }
+
     public function resolveReference(Proposal $proposal): string
     {
         return $proposal->getFullReference();

@@ -1,31 +1,26 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import {
-  closeCreateFusionModal,
-  openCreateFusionModal,
-  submitFusionForm,
-} from '../../../redux/modules/proposal';
+import { isSubmitting, submit } from 'redux-form';
+import { closeCreateFusionModal, openCreateFusionModal } from '../../../redux/modules/proposal';
 import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import type { State, Uuid } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 
-export const ProposalCreateFusionButton = React.createClass({
-  propTypes: {
-    showModal: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    open: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired,
-    submit: PropTypes.func.isRequired,
-    proposalFormId: PropTypes.string,
-  },
+type Props = {
+  showModal: boolean,
+  submitting: boolean,
+  open: () => void,
+  close: () => void,
+  dispatch: Dispatch,
+};
 
+export class ProposalCreateFusionButton extends React.Component<Props> {
   render() {
-    const { proposalFormId, showModal, isSubmitting, open, close, submit } = this.props;
+    const { showModal, submitting, open, close, dispatch } = this.props;
     return (
       <div>
         <Button
@@ -47,36 +42,31 @@ export const ProposalCreateFusionButton = React.createClass({
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h3>Propositions fusionnées</h3>
             <ProposalFusionForm />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => close()} />
             <SubmitButton
               id="confirm-proposal-merge-create"
-              isSubmitting={isSubmitting}
-              onSubmit={() => submit(proposalFormId)}
+              label="Créer une nouvelle proposition"
+              isSubmitting={submitting}
+              onSubmit={() => {
+                dispatch(submit(formName));
+              }}
             />
           </Modal.Footer>
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = (state: State) => {
-  const selectedProjectId: Uuid = formValueSelector(formName)(state, 'project');
-  const project = state.project.projectsById[selectedProjectId];
-  const currentCollectStep = project ? project.steps.filter(s => s.type === 'collect')[0] : null;
-  return {
-    showModal: state.proposal.isCreatingFusion,
-    isSubmitting: state.proposal.isSubmittingFusion,
-    proposalFormId: currentCollectStep ? currentCollectStep.proposalFormId : null,
-  };
-};
+const mapStateToProps = (state: State) => ({
+  showModal: state.proposal.isCreatingFusion,
+  submitting: isSubmitting(formName)(state),
+});
 
 export default connect(mapStateToProps, {
   close: closeCreateFusionModal,
   open: openCreateFusionModal,
-  submit: submitFusionForm,
 })(ProposalCreateFusionButton);

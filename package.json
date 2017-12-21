@@ -111,7 +111,6 @@
     "diff": "^3.3.0",
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
-    "flat": "^2.0.1",
     "flux": "^3.1.2",
     "ignore-loader": "^0.1.2",
     "imports-loader": "^0.7.0",

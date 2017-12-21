@@ -8,11 +8,12 @@ Scenario: GraphQL client wants to create a fusion
   """
     {
       "query": "mutation ($input: CreateFusionInput!) {
-        createFusion (input: $input) {
+        createProposalFusion (input: $input) {
           proposal {
             author {
               id
             }
+            adminUrl
             mergedFrom {
               id
             }
@@ -30,11 +31,12 @@ Scenario: GraphQL client wants to create a fusion
   """
     {
       "data": {
-        "createFusion": {
+        "createProposalFusion": {
           "proposal": {
             "author": {
-              "id": "user2"
+              "id": "userAdmin"
             },
+            "adminUrl": @string@,
             "mergedFrom": [
               {
                 "id": "proposal1"

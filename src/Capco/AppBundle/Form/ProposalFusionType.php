@@ -2,24 +2,27 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Proposal;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ProposalFusionType extends ProposalType
+class ProposalFusionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('childConnections', EntityType::class, [
                 'multiple' => true,
-                'class' => 'CapcoAppBundle:Proposal',
+                'class' => Proposal::class,
                 'constraints' => [
                   new Assert\Count([
                     'min' => 2,
-                    'minMessage' => 'You must specify more than 2 proposal',
+                    'minMessage' => 'You must specify at least 2 proposals to merge.',
                   ]),
-                  // AssertProposalsAreFromSameProposalForm
+                  // TODO AssertProposalsAreFromSameProposalForm
                 ],
             ])
         ;
@@ -32,7 +35,8 @@ class ProposalFusionType extends ProposalType
         $resolver->setDefaults([
             'data_class' => Proposal::class,
             'csrf_protection' => false,
-            'validation_groups' => ['create_fusion'],
+            'translation_domain' => false,
+            'validation_groups' => ['CreateFusion'],
             'cascade_validation' => true,
         ]);
     }

@@ -1,6 +1,5 @@
 // @flow
 import { takeEvery, select, call, put } from 'redux-saga/effects';
-import flatten from 'flat';
 import { SubmissionError } from 'redux-form';
 import LocalStorageService from '../../services/LocalStorageService';
 import Fetcher, { json } from '../../services/Fetcher';
@@ -17,10 +16,7 @@ type ChangeFilterAction = {
   value: string,
 };
 type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
-type SubmitFusionFormAction = {
-  type: 'proposal/SUBMIT_FUSION_FORM',
-  proposalForm: Uuid,
-};
+
 type FetchVotesRequestedAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
   stepId: Uuid,
@@ -44,9 +40,6 @@ type CloseCreateFusionModalAction = {
 };
 type OpenCreateFusionModalAction = {
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
-};
-type CancelSubmitFusionFormAction = {
-  type: 'proposal/CANCEL_SUBMIT_FUSION_FORM',
 };
 type OpenVotesModalAction = {
   type: 'proposal/OPEN_VOTES_MODAL',
@@ -124,7 +117,6 @@ export type State = {
   +currentDeletingVote: ?Uuid,
   +showCreateModal: boolean,
   +isCreatingFusion: boolean,
-  +isSubmittingFusion: boolean,
   +showDeleteModal: boolean,
   +isDeleting: boolean,
   +isVoting: boolean,
@@ -155,7 +147,6 @@ export const initialState: State = {
   currentDeletingVote: null,
   showCreateModal: false,
   isCreatingFusion: false,
-  isSubmittingFusion: false,
   showDeleteModal: false,
   isDeleting: false,
   isVoting: false,
@@ -188,13 +179,6 @@ export const closeCreateFusionModal = (): CloseCreateFusionModalAction => ({
 });
 export const openCreateFusionModal = (): OpenCreateFusionModalAction => ({
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
-});
-export const submitFusionForm = (proposalForm: Uuid): SubmitFusionFormAction => ({
-  type: 'proposal/SUBMIT_FUSION_FORM',
-  proposalForm,
-});
-export const cancelSubmitFusionForm = (): CancelSubmitFusionFormAction => ({
-  type: 'proposal/CANCEL_SUBMIT_FUSION_FORM',
 });
 export const openVotesModal = (stepId: Uuid): OpenVotesModalAction => ({
   type: 'proposal/OPEN_VOTES_MODAL',
@@ -457,29 +441,6 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
   }
 }
 
-function* submitFusionFormData(action: SubmitFusionFormAction): Generator<*, *, *> {
-  const { proposalForm } = action;
-  const globalState: GlobalState = yield select();
-  const formData = new FormData();
-  const data = { ...globalState.form.proposal.values };
-  delete data.project;
-  if (data.responses.length === 0) {
-    delete data.responses;
-  }
-  data.childConnections = data.childConnections.map(u => u.value);
-  const flattenedData = flatten(data);
-  Object.keys(flattenedData).map(key => {
-    formData.append(key, flattenedData[key]);
-  });
-  try {
-    yield call(Fetcher.postFormData, `/proposal_forms/${proposalForm}/proposals`, formData);
-    yield put(closeCreateFusionModal());
-    location.reload();
-  } catch (e) {
-    yield put(cancelSubmitFusionForm());
-  }
-}
-
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
   const { regenerateRandomOrder } = action;
@@ -637,7 +598,6 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 export type ProposalAction =
   | OpenCreateModalAction
   | FetchVotesRequestedAction
-  | SubmitFusionFormAction
   | ChangeFilterAction
   | VoteFailedAction
   | RequestVotingAction
@@ -685,7 +645,6 @@ export function* saga(): Generator<*, *, *> {
     takeEvery('proposal/POSTS_FETCH_REQUESTED', fetchPosts),
     takeEvery('proposal/VOTES_FETCH_REQUESTED', fetchVotesByStep),
     takeEvery('proposal/FETCH_REQUESTED', fetchProposals),
-    takeEvery('proposal/SUBMIT_FUSION_FORM', submitFusionFormData),
     takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),
@@ -804,10 +763,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isCreatingFusion: true };
     case 'proposal/CLOSE_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: false };
-    case 'proposal/SUBMIT_FUSION_FORM':
-      return { ...state, isSubmittingFusion: true };
-    case 'proposal/CANCEL_SUBMIT_FUSION_FORM':
-      return { ...state, isSubmittingFusion: false };
     case 'proposal/OPEN_VOTES_MODAL':
       return {
         ...state,

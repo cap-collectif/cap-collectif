@@ -32,13 +32,13 @@ Mutation:
                     inputType: CreateProposalInput
                     payloadType: CreateProposalPayload
                     mutateAndGetPayload: "@=mutation('createProposal', [value, user])"
-          createFusion:
+          createProposalFusion:
                access: "@=hasRole('ROLE_ADMIN')"
                builder: "Relay::Mutation"
                builderConfig:
-                   inputType: CreateFusionInput
-                   payloadType: CreateFusionPayload
-                   mutateAndGetPayload: "@=mutation('createFusion', [value, user])"
+                   inputType: CreateProposalFusionInput
+                   payloadType: CreateProposalFusionPayload
+                   mutateAndGetPayload: "@=mutation('createProposalFusion', [value, user])"
           changeProposalNotation:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

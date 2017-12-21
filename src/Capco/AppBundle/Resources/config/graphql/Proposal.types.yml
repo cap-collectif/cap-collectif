@@ -8,6 +8,11 @@ Proposal:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"
+            adminUrl:
+                type: "URI!"
+                description: "The admin url for this contribution."
+                resolve: "@=resolver('proposal_admin_url', [value])"
+                access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
             progressSteps:
               type: "[ProgressStep!]!"
             evaluers:
@@ -101,4 +106,4 @@ Proposal:
             mergedFrom:
                 type: "[Proposal!]!"
                 description: "If the proposal is a fusion, contains the list of merged proposals."
-                resolve: "@=value->getChildConnections()"
+                resolve: "@=value.getChildConnections()"

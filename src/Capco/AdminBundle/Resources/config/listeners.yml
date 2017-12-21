@@ -35,6 +35,7 @@ services:
       tags:
           - { name: overblog_graphql.resolver, alias: "proposal_viewer_is_evaluer", method: "resolveViewerIsEvaluer" }
           - { name: overblog_graphql.resolver, alias: "proposal_show_url", method: "resolveShowUrl" }
+          - { name: overblog_graphql.resolver, alias: "proposal_admin_url", method: "resolveAdminUrl" }
           - { name: overblog_graphql.resolver, alias: "post_abstract", method: "resolvePostAbstract" }
           - { name: overblog_graphql.resolver, alias: "proposal_news", method: "resolveNews" }
           - { name: overblog_graphql.resolver, alias: "project_steps", method: "resolveProjectSteps" }
@@ -59,7 +60,7 @@ services:
   capco.mutation.proposal:
         class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
         tags:
-            - { name: overblog_graphql.mutation, alias: "createFusion", method: "createFusion" }
+            - { name: overblog_graphql.mutation, alias: "createProposalFusion", method: "createFusion" }
             - { name: overblog_graphql.mutation, alias: "deleteProposal", method: "delete" }
             - { name: overblog_graphql.mutation, alias: "changeProposalNotation", method: "changeNotation" }
             - { name: overblog_graphql.mutation, alias: "changeProposalEvaluers", method: "changeEvaluers" }

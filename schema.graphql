@@ -345,6 +345,17 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
+input CreateProposalFusionInput {
+  # Proposal ids from which the fusion is created
+  fromProposals: [ID!]!
+  clientMutationId: String
+}
+
+type CreateProposalFusionPayload {
+  proposal: Proposal
+  clientMutationId: String
+}
+
 input CreateProposalInput {
   # The id of the form form proposal
   proposalFormId: ID!
@@ -556,6 +567,7 @@ type Mutation {
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
+  createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
@@ -834,6 +846,9 @@ type Project {
 type Proposal {
   # The HTTP show url for this contribution.
   show_url: URI!
+
+  # The admin url for this contribution.
+  adminUrl: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   viewerIsAnEvaluer: Boolean!
@@ -901,6 +916,9 @@ type Proposal {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
+
+  # If the proposal is a fusion, contains the list of merged proposals.
+  mergedFrom: [Proposal!]!
 }
 
 # The affiliation of a user to a proposal

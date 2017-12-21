@@ -1,19 +1,48 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector, change } from 'redux-form';
+import { Field, SubmissionError, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
+import CreateProposalFusionMutation, {
+  type CreateProposalFusionMutationResponse,
+} from '../../../mutations/CreateProposalFusionMutation';
 import type { State, Uuid } from '../../../types';
 
 export const formName = 'proposal';
 
-const validate = (values: Object) => {
+type FormValues = {
+  project: ?Uuid,
+  fromProposals: $ReadOnlyArray<Uuid>,
+};
+
+const validate = (values: FormValues) => {
   const errors = {};
-  if (values.childConnections && values.childConnections.length < 2) {
-    errors.childConnections = 'Sélectionnez au moins 2 propositions.';
+  if (!values.project) {
+    errors.project = 'Veuillez sélectionner un projet';
+  }
+  if (!values.fromProposals || values.fromProposals.length < 2) {
+    errors.childConnections = 'Veuillez sélectionner au minimum 2 propositions';
   }
   return errors;
+};
+
+const onSubmit = (values: FormValues) => {
+  return CreateProposalFusionMutation.commit({
+    input: { fromProposals: values.fromProposals },
+  })
+    .then((response: CreateProposalFusionMutationResponse) => {
+      if (!response.createFusion || !response.createFusion.proposal) {
+        throw new Error('Mutation "createFusion" failed.');
+      }
+      const createdProposal = response.createFusion.proposal;
+      window.location.href = createdProposal.show_url;
+    })
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
+    });
 };
 
 type Props = {
@@ -27,12 +56,12 @@ export class ProposalFusionForm extends React.Component<Props> {
   render() {
     const { currentCollectStep, projects, onProjectChange } = this.props;
     return (
-      <form className="form-horizontal">
+      <form>
         <Field
           name="project"
           id="project"
-          label="Projet lié"
-          placeholder="Sélectionnez un projet"
+          label="Projet participatif"
+          placeholder="Sélectionner le projet participatif"
           isLoading={projects.length === 0}
           component={select}
           clearable={false}
@@ -42,12 +71,13 @@ export class ProposalFusionForm extends React.Component<Props> {
         <br />
         {currentCollectStep && (
           <Field
-            name="childConnections"
+            name="fromProposals"
             id="childConnections"
             multi
-            label="Propositions"
+            label="Propositions initiales"
             autoload
-            placeholder="Sélectionnez les propositions à fusionner"
+            help=""
+            placeholder="Sélectionner des propositions initiales"
             component={select}
             filterOptions={(options, filter, currentValues) =>
               options
@@ -107,5 +137,6 @@ export default connect(
     form: formName,
     destroyOnUnmount: false,
     validate,
+    onSubmit,
   })(ProposalFusionForm),
 );

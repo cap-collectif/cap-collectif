@@ -43,9 +43,10 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $proposal = (new Proposal())
-        ->setAuthor($author)
-        ->setEnabled(true)
-    ;
+            ->setAuthor($author)
+            ->setEnabled(true)
+            ->setTitle('Proposition sans titre')
+        ;
 
         $form = $formFactory->create(ProposalFusionType::class, $proposal);
         $form->submit(['childConnections' => $input->getRawArguments()['fromProposals']]);
@@ -56,7 +57,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $proposalForm = $proposal->getChildConnections()->first()->getProposalForm();
         $proposal->setProposalForm($proposalForm);
-        $proposal->setTitle('Proposition sans titre');
 
         if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
             $proposal->setStatus($defaultStatus);

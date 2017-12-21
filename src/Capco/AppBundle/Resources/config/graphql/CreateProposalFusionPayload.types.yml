@@ -1,4 +1,4 @@
-CreateFusionPayload:
+CreateProposalFusionPayload:
     type: relay-mutation-payload
     config:
         fields:
