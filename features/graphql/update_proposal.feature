@@ -211,3 +211,52 @@ Scenario: Super Admin GraphQL client wants to update a proposal
   """
   {"data":{"changeProposalContent":{"proposal":{"id":"proposal2","title":"NewTitle","body":"NewBody","author":{"id":"userAdmin"},"theme":{"id":"theme1"},"district":{"id":"district2"},"category":{"id":"pCategory2"},"responses":[{"question":{"id":"1"},"value":"reponse-1"},{"question":{"id":"3"},"value":"reponse-3"},{"question":{"id":"11"},"medias":[{"id":"media1"}]},{"question":{"id":"12"},"medias":[{"id":"media1"}]}]}}}}
   """
+
+@database
+Scenario: GraphQL client wants to edit his proposal without required response
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          publicationStatus
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "proposal2",
+        "responses": [
+          {
+            "question": "1",
+            "value": "reponse-1"
+          },
+          {
+            "question": "3",
+            "value": "reponse-3"
+          },
+          {
+            "question": "11",
+            "medias": []
+          },
+          {
+            "question": "12",
+            "medias": []
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","locations":[{"line":1,"column":53}]}],
+    "data": { "changeProposalContent": null }
+  }
+  """
