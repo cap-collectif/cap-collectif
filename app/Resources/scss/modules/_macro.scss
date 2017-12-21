@@ -62,5 +62,9 @@
     .media-body {
         height: auto;
         word-break: break-word;
+
+        .excerpt {
+            font-size: 14px;
+        }
     }
 }
