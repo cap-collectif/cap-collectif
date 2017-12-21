@@ -355,7 +355,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $form = $formFactory->create(ProposalAdminType::class, $proposal, [
             'proposalForm' => $proposalForm,
-            'index_property' => 'position',
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 

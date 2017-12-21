@@ -57,7 +57,7 @@ class ProposalType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'index_property' => $options['index_property'],
+                'index_property' => 'position',
                 'types' => [
                     ValueResponseType::class,
                     MediaResponseType::class,
@@ -77,7 +77,6 @@ class ProposalType extends AbstractType
             'translation_domain' => false,
             'cascade_validation' => true,
             'proposalForm' => null,
-            'index_property' => 'id',
         ]);
     }
 }
