@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Toggle\Manager;
@@ -16,12 +15,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProposalType extends AbstractType
 {
-    protected $transformer;
     protected $toggleManager;
 
-    public function __construct(EntityToIdTransformer $transformer, Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
-        $this->transformer = $transformer;
         $this->toggleManager = $toggleManager;
     }
 

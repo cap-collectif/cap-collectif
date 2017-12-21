@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,32 +15,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class MediaResponseType extends AbstractType
 {
-    protected $transformer;
-
-    public function __construct(EntityToIdTransformer $transformer)
-    {
-        $this->transformer = $transformer;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->transformer->setEntityClass(AbstractQuestion::class);
-        $this->transformer->setEntityRepository('CapcoAppBundle:Questions\AbstractQuestion');
-
         $builder
-          ->add('question')
+          ->add('question', EntityType::class, ['class' => MediaQuestion::class])
           ->add('medias', EntityType::class, [
               'class' => Media::class,
               'multiple' => true,
               'constraints' => [
                 new Assert\Count([
-                  'max' => 5,
-                  'maxMessage' => 'You must add 5 files or less.',
+                  'max' => 20,
+                  'maxMessage' => 'You must add 20 files or less.',
                 ]),
               ],
           ])
         ;
-        $builder->get('question')->addModelTransformer($this->transformer);
 
         $builder->add('position', HiddenType::class, [
             'mapped' => false,
@@ -57,7 +46,6 @@ class MediaResponseType extends AbstractType
         $resolver->setDefaults([
             'data_class' => MediaResponse::class,
             'model_class' => MediaResponse::class,
-            'allow_extra_fields' => true,
         ]);
     }
 

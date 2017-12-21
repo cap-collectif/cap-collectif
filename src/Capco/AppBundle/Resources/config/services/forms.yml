@@ -33,19 +33,19 @@ services:
 
   capco.form.proposal_admin:
     class: Capco\AppBundle\Form\ProposalAdminType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
 
   capco.form.proposal_fusion:
     class: Capco\AppBundle\Form\ProposalFusionType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
+    arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
 
@@ -57,19 +57,11 @@ services:
 
   capco.form.response.value:
     class: Capco\AppBundle\Form\ValueResponseType
-    arguments: ["@capco.form.transformer.entity_to_id"]
-    tags:
-      - { name: form.type }
-
-  capco.form.questionnaire.simple:
-    class: Capco\AppBundle\Form\QuestionnaireAbstractSimpleQuestionType
-    arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
       - { name: form.type }
 
   capco.form.response.media:
     class: Capco\AppBundle\Form\MediaResponseType
-    arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
       - { name: form.type }
 

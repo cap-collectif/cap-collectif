@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Entity\Questions;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SimpleQuestion.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SimpleQuestionRepository")
  */
 class SimpleQuestion extends AbstractQuestion

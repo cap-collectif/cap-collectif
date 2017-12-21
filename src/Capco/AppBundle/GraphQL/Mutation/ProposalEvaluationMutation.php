@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\ProposalEvaluationType;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -40,22 +39,20 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             'proposal' => $proposal,
         ]);
 
+        $isCreating = false;
         if (!$proposalEvaluation) {
             $proposalEvaluation = new ProposalEvaluation();
             $proposalEvaluation->setProposal($proposal);
+            $isCreating = true;
         }
 
-        $arguments['responses'] = array_values(array_map(function ($response) {
-            $decodeValue = json_decode($response['value']);
+        if (isset($arguments['responses'])) {
+            $arguments['responses'] = $this->container->get('responses.formatter')->format($arguments['responses']);
+        }
 
-            return [
-                'value' => $decodeValue ?? $response['value'],
-                'question' => $response['question'],
-                AbstractResponse::TYPE_FIELD_NAME => 'value_response',
-            ];
-        }, $arguments['responses']));
-
-        $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
+        $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation, [
+          'index_property' => $isCreating ? 'id' : 'position',
+        ]);
 
         $form->submit($arguments, false);
 

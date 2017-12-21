@@ -22,6 +22,11 @@ services:
   import.csvtoarray:
     class: Capco\AppBundle\Helper\ConvertCsvToArray
 
+  responses.formatter:
+    class: Capco\AppBundle\Helper\ResponsesFormatter
+    arguments:
+      - "@capco.abstract_question.repository"
+
   twilio.sms_sender:
     class: Capco\AppBundle\Sms\TwilioSmsSender
     arguments: ['%twilio_sid%', '%twilio_token%']

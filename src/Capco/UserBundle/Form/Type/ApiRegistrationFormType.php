@@ -14,12 +14,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ApiRegistrationFormType extends AbstractType
 {
     private $toggleManager;
-    private $transformer;
 
-    public function __construct(Manager $toggleManager, $transformer)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
-        $this->transformer = $transformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

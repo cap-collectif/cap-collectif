@@ -32,13 +32,12 @@ class ProposalEvaluation
 
     /**
      * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     public function __construct()
     {
-        $this->updatedAt = new \Datetime();
         $this->responses = new ArrayCollection();
     }
 
@@ -64,7 +63,7 @@ class ProposalEvaluation
         return $this->responses;
     }
 
-    public function setResponses(ArrayCollection $responses): self
+    public function setResponses(Collection $responses): self
     {
         $this->responses = $responses;
         foreach ($responses as $response) {
@@ -74,7 +73,7 @@ class ProposalEvaluation
         return $this;
     }
 
-    public function getProposal()
+    public function getProposal()// : Proposal
     {
         return $this->proposal;
     }

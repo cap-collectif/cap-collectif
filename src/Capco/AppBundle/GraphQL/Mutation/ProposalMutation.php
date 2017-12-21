@@ -4,8 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
@@ -416,7 +414,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         if (isset($values['responses'])) {
-            $values['responses'] = $this->formatResponses($values['responses']);
+            $values['responses'] = $this->container->get('responses.formatter')->format($values['responses']);
         }
 
         return $values;
@@ -434,29 +432,5 @@ class ProposalMutation implements ContainerAwareInterface
         if (!empty($errors)) {
             throw new UserErrors($errors);
         }
-    }
-
-    private function formatResponses(array $responses)
-    {
-        $questionRepo = $this->container->get('capco.abstract_question.repository');
-
-        // we need to set _type for polycollection
-        // and position for reordering
-        foreach ($responses as &$response) {
-            $question = $questionRepo->find((int) $response['question']);
-            if (!$question) {
-                throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
-            }
-            $questions[] = $question;
-            $response['question'] = $question->getId();
-            $response['position'] = $question->getPosition();
-            if ($question instanceof MediaQuestion) {
-                $response[AbstractResponse::TYPE_FIELD_NAME] = 'media_response';
-            } else {
-                $response[AbstractResponse::TYPE_FIELD_NAME] = 'value_response';
-            }
-        }
-
-        return $responses;
     }
 }

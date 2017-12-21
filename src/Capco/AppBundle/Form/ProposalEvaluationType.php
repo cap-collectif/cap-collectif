@@ -2,44 +2,40 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer;
+use Capco\AppBundle\Entity\ProposalEvaluation;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProposalEvaluationType extends AbstractType
 {
-    protected $transformer;
-
-    public function __construct(EntityToIdTransformer $transformer)
-    {
-        $this->transformer = $transformer;
-    }
-
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('responses', CollectionType::class, [
-                'allow_add' => true,
-                'allow_delete' => false,
-                'by_reference' => false,
-                'type' => ValueResponseType::class,
-                'required' => false,
-            ]);
+          ->add('responses', PolyCollectionType::class, [
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'index_property' => $options['index_property'],
+            'types' => [
+                ValueResponseType::class,
+                MediaResponseType::class,
+            ],
+            'type_name' => AbstractResponse::TYPE_FIELD_NAME,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\ProposalEvaluation',
+            'data_class' => ProposalEvaluation::class,
             'csrf_protection' => false,
             'cascade_validation' => true,
+            'translation_domain' => false,
             'anonymousAllowed' => false,
+            'index_property' => 'id',
         ]);
     }
 }

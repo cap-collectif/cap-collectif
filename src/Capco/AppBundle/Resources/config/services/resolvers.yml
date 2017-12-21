@@ -91,10 +91,6 @@ services:
     class: Capco\AppBundle\Manager\MediaManager
     arguments: ['@sonata.media.manager.media']
 
-  capco.media.response.media.manager:
-    class: Capco\AppBundle\Manager\ResponseMediaManager
-    arguments: ['@doctrine.orm.entity_manager', '@capco.media.manager']
-
   capco.project.serializer:
     class: Capco\AppBundle\Resolver\Project\ProjectSerializer
     arguments: ['@jms_serializer.serializer']
