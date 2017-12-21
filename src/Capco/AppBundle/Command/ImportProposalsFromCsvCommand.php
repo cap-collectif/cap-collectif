@@ -220,7 +220,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $user = $userManager->createUser();
         $user->setUsername($username);
         $user->setEmail(filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL));
-        $user->setPlainPassword('laposte');
+        $user->setPlainPassword('ykWc+ud(4vza2|');
         $user->setEnabled(true);
         $this->om->persist($user);
 
