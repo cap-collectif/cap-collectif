@@ -427,7 +427,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             }
         }
         if (!$found) {
-            $this->responses[] = $response;
+            $this->responses->add($response);
             $response->setProposal($this);
         }
 
