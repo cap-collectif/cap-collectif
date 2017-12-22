@@ -235,7 +235,7 @@ Scenario: Logged in API client wants to add a reply without a required response
     "code": 400,
     "message": "Validation Failed",
     "errors": {
-      "errors": ["reply.missing_required_responses"],
+      "errors": ["reply.missing_required_responses {\"missing\":2}"],
       "children": @...@
     }
   }

@@ -119,6 +119,8 @@ Scenario: Logged in user wants to create a proposal with theme
   Then there should be 6 proposals
   When I click the create proposal button
   And I fill the proposal form with a theme
+  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
+  And I wait 3 seconds
   And I submit the create proposal form
   And I should see my new proposal
 
@@ -153,6 +155,8 @@ Scenario: Author of a proposal wants to update it
   When I click the edit proposal button
   And I wait 3 seconds
   And I change the proposal title
+  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
+  And I wait 3 seconds
   And I submit the edit proposal form
   Then the proposal title should have changed
 

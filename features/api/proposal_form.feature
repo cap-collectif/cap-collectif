@@ -74,7 +74,7 @@ Scenario: Anonymous API client wants to get one proposal form
           "id": @integer@,
           "type": @string@,
           "helpText": @string@,
-          "required": false,
+          "required": true,
           "private": @boolean@,
           "question": @string@,
           "slug": @string@
