@@ -55,8 +55,61 @@ const zoomLevels = [
 ];
 const formName = 'proposal-form-admin-configuration';
 
-const validate = () => {
-  return {};
+const validate = (values: Object) => {
+  const errors = {};
+
+  if (!values.description || values.description.length <= 2) {
+    errors.description = 'admin.fields.proposal_form.errors.introduction';
+  }
+
+  if (values.usingCategories && values.categories.length === 0) {
+    errors.categories = 'admin.fields.proposal_form.errors.categories';
+  }
+
+  if (values.usingAddress) {
+    if (!values.zoomMap || values.zoomMap.length === 0) {
+      errors.zoomMap = 'admin.fields.proposal_form.errors.zoom';
+    }
+
+    if (!values.latMap || values.latMap.length === 0) {
+      errors.latMap = 'admin.fields.proposal_form.errors.lat';
+    }
+
+    if (!values.lngMap || values.lngMap.length === 0) {
+      errors.lngMap = 'admin.fields.proposal_form.errors.lng';
+    }
+  }
+
+  if (values.usingDistrict && values.districts.length === 0) {
+    errors.districts = 'admin.fields.proposal_form.errors.districts';
+  }
+
+  if (values.questions.length) {
+    const questionsArrayErrors = [];
+    values.questions.forEach((question: Object, questionIndex: number) => {
+      const questionErrors = {};
+      if (!question.title || question.title.length === 0) {
+        questionErrors.title = 'admin.fields.proposal_form.errors.question.title';
+        questionsArrayErrors[questionIndex] = questionErrors;
+      }
+
+      if (!question.kind || question.kind.length === 0) {
+        questionErrors.kind = 'admin.fields.proposal_form.errors.question.kind';
+        questionsArrayErrors[questionIndex] = questionErrors;
+      }
+
+      if (question.kind === 'simple' && (!question.type || question.type.length === 0)) {
+        questionErrors.type = 'admin.fields.proposal_form.errors.question.type';
+        questionsArrayErrors[questionIndex] = questionErrors;
+      }
+    });
+
+    if (questionsArrayErrors.length) {
+      errors.questions = questionsArrayErrors;
+    }
+  }
+
+  return errors;
 };
 
 const headerPanelUsingCategories = (

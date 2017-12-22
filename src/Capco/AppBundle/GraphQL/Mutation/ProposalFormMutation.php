@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
@@ -86,7 +85,7 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $logger->error(get_class($this) . ' updateNotificationsConfiguration: ' . (string) $form->getErrors(true, false));
+            $logger->error(\get_class($this) . ' updateNotificationsConfiguration: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t change the notification config!');
         }
 
