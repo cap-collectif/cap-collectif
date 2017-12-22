@@ -80,8 +80,29 @@ const validate = (values: Object) => {
     }
   }
 
-  if (values.usingDistrict && values.districts.length === 0) {
-    errors.districts = 'admin.fields.proposal_form.errors.districts';
+  if (values.usingDistrict) {
+    if (values.districts.length === 0) {
+      errors.districts = 'admin.fields.proposal_form.errors.districts';
+    }
+    if (values.districts.length) {
+      const districtsArrayErrors = [];
+      values.districts.forEach((district: Object, districtIndex: number) => {
+        const districtErrors = {};
+        if (!district.name || district.name.length === 0) {
+          districtErrors.title = 'admin.fields.proposal_form.errors.district.name';
+          districtsArrayErrors[districtIndex] = districtErrors;
+        }
+
+        if (!district.geojson || district.geojson.length === 0) {
+          districtErrors.title = 'admin.fields.proposal_form.errors.district.geojson';
+          districtsArrayErrors[districtIndex] = districtErrors;
+        }
+      });
+
+      if (districtsArrayErrors.length) {
+        errors.districts = districtsArrayErrors;
+      }
+    }
   }
 
   if (values.questions.length) {
