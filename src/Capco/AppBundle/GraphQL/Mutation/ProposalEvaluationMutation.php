@@ -39,20 +39,16 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             'proposal' => $proposal,
         ]);
 
-        $isCreating = false;
         if (!$proposalEvaluation) {
             $proposalEvaluation = new ProposalEvaluation();
             $proposalEvaluation->setProposal($proposal);
-            $isCreating = true;
         }
 
         if (isset($arguments['responses'])) {
             $arguments['responses'] = $this->container->get('responses.formatter')->format($arguments['responses']);
         }
 
-        $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation, [
-          'index_property' => $isCreating ? 'id' : 'position',
-        ]);
+        $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
 
         $form->submit($arguments, false);
 

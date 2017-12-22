@@ -3,16 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
@@ -60,6 +58,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use NullableTextableTrait;
     use SummarizableTrait;
     use DraftableTrait;
+    use HasResponsesTrait;
 
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';
@@ -411,65 +410,14 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
 
-    public function addResponse(AbstractResponse $response): self
+    public function getResponsesQuestions(): Collection
     {
-        foreach ($this->responses as $currentResponse) {
-            $questionId = $currentResponse->getQuestion()->getId();
+        return $this->proposalForm->getRealQuestions();
+    }
 
-            if ($response->getQuestion()->getId() === $questionId) {
-                if ($response instanceof ValueResponse) {
-                    $currentResponse->setValue($response->getValue());
-                }
-
-                if ($response instanceof MediaResponse) {
-                    $currentResponse->setMedias($response->getMedias());
-                }
-
-                $currentResponse->setUpdatedAt(new \DateTime());
-
-                return $this;
-            }
-        }
-
-        $this->responses->add($response);
+    public function setResponseOn(AbstractResponse $response)
+    {
         $response->setProposal($this);
-
-        return $this;
-    }
-
-    public function getResponses(): Collection
-    {
-        $responses = $this->responses;
-
-        foreach ($this->proposalForm->getRealQuestions() as $question) {
-            $found = false;
-            foreach ($this->responses as $response) {
-                if ($response->getQuestion()->getId() === $question->getId()) {
-                    $found = true;
-                }
-            }
-            // Concat missing responses
-            if (!$found) {
-                if ($question instanceof MediaQuestion) {
-                    $response = new MediaResponse();
-                } else {
-                    $response = new ValueResponse();
-                }
-                $response->setQuestion($question);
-                $responses->add($response);
-            }
-        }
-
-        return $responses;
-    }
-
-    public function setResponses(Collection $responses): self
-    {
-        foreach ($responses as $response) {
-            $this->addResponse($response);
-        }
-
-        return $this;
     }
 
     public function getReports(): Collection
