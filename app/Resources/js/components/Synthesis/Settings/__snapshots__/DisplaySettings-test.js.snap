@@ -5,7 +5,7 @@ exports[`<DisplaySettings /> should render correctly 1`] = `
   className="display-settings"
 >
   <form
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
   >
     <label>
       <FormattedMessage

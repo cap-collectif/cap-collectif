@@ -31,7 +31,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
     className="box-content"
   >
     <form
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <ListGroup
         bsClass="list-group"

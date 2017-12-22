@@ -5,7 +5,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
   className="box box-primary container"
 >
   <form
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
   >
     <div
       className="box-header"

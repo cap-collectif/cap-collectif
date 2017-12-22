@@ -22,7 +22,7 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[MockFunction]}
+  onHide={[Function]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -58,7 +58,7 @@ exports[`<DeleteModal /> render correctly Delete Modal 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[MockFunction]}
+      onClose={[Function]}
     />
     <Button
       active={false}
