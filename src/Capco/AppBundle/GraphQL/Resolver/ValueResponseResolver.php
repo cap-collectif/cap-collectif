@@ -12,10 +12,14 @@ class ValueResponseResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveValue(ValueResponse $response)
+    public function resolveValue(ValueResponse $response)// : ?string
     {
-        // Use this condition because value type of string and Relay return array on multiple choice question value.
+        // Multiple choice question value is encoded in JSON.
         if ($response->getQuestion() instanceof MultipleChoiceQuestion) {
+            if (!$response->getValue()) {
+                return null;
+            }
+
             return json_encode($response->getValue(), JSON_UNESCAPED_UNICODE); // encodes characters correctly
         }
 

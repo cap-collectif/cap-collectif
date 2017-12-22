@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Doctrine\Common\Collections\Collection;
 
 // must have setResponseOn and getResponsesQuestions to use this trait
 trait HasResponsesTrait

@@ -64,28 +64,32 @@ export const formatInitialResponsesValues = (questions: Questions, responses: Re
   return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
 
-    // If we have a previous respnse format it
+    // If we have a previous response format it
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
         const questionType = question.type;
 
         // For some questions type we need to parse the JSON of previous value
         let responseValue = response.value;
-        if (questionType === 'button') {
-          responseValue = JSON.parse(response.value).labels[0];
-        }
-        if (questionType === 'radio' || questionType === 'checkbox') {
-          responseValue = JSON.parse(response.value);
-        }
-        if (questionType === 'ranking') {
-          responseValue = JSON.parse(response.value).labels;
+        try {
+          if (questionType === 'button') {
+            responseValue = JSON.parse(response.value).labels[0];
+          }
+          if (questionType === 'radio' || questionType === 'checkbox') {
+            responseValue = JSON.parse(response.value);
+          }
+          if (questionType === 'ranking') {
+            responseValue = JSON.parse(response.value).labels;
+          }
+        } catch (e) {
+          console.error(`Failed to parse : ${response.value}`);
         }
         return {
           question: question.id,
           value: responseValue,
         };
       }
-      if (response.medias) {
+      if (typeof response.medias !== 'undefined') {
         return { question: question.id, value: response.medias };
       }
     }

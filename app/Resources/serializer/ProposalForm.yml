@@ -123,5 +123,4 @@ Capco\AppBundle\Entity\ProposalForm:
             groups: [ProposalForms]
         getRealQuestions:
             serialized_name: fields
-            type: array
             groups: [ProposalForms]

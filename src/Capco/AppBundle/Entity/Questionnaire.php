@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -140,11 +141,11 @@ class Questionnaire
         return true;
     }
 
-    public function getRealQuestions()
+    public function getRealQuestions(): Collection
     {
-        $questions = [];
+        $questions = new ArrayCollection();
         foreach ($this->questions as $qaq) {
-            $questions[] = $qaq->getQuestion();
+            $questions->add($qaq->getQuestion());
         }
 
         return $questions;

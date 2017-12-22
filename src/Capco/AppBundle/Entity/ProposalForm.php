@@ -258,11 +258,11 @@ class ProposalForm
         return $this;
     }
 
-    public function getRealQuestions(): array
+    public function getRealQuestions(): Collection
     {
         return $this->getQuestions() ? $this->getQuestions()->map(function (QuestionnaireAbstractQuestion $questionnaireAbstractQuestion) {
             return $questionnaireAbstractQuestion->getQuestion();
-        })->toArray() : [];
+        }) : new ArrayCollection();
     }
 
     public function getQuestions(): Collection

@@ -100,22 +100,22 @@ class RegistrationForm
         return $this->bottomText;
     }
 
-    public function getRealQuestions()
+    public function getRealQuestions(): Collection
     {
-        $questions = [];
+        $questions = new ArrayCollection();
         foreach ($this->questions as $qaq) {
-            $questions[] = $qaq->getQuestion();
+            $questions->add($qaq->getQuestion());
         }
 
         return $questions;
     }
 
-    public function getQuestions()
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }
 
-    public function setQuestions(Collection $questions)
+    public function setQuestions(Collection $questions): self
     {
         foreach ($questions as $question) {
             $question->setRegistrationForm($this);
@@ -125,7 +125,7 @@ class RegistrationForm
         return $this;
     }
 
-    public function addQuestion(QuestionnaireAbstractQuestion $question)
+    public function addQuestion(QuestionnaireAbstractQuestion $question): self
     {
         if (!$this->questions->contains($question)) {
             $this->questions->add($question);
@@ -135,7 +135,7 @@ class RegistrationForm
         return $this;
     }
 
-    public function removeQuestion(QuestionnaireAbstractQuestion $question)
+    public function removeQuestion(QuestionnaireAbstractQuestion $question): self
     {
         $this->questions->removeElement($question);
         $question->setRegistrationForm(null);

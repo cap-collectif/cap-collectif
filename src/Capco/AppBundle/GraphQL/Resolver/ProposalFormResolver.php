@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -15,7 +16,7 @@ class ProposalFormResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveQuestions(ProposalForm $form)
+    public function resolveQuestions(ProposalForm $form): Collection
     {
         return $form->getRealQuestions();
     }
