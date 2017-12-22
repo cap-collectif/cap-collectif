@@ -14,7 +14,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
   >
     <form
       id="login-form"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <Connect(LoginBox) />
       <Button

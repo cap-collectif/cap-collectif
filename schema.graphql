@@ -421,7 +421,7 @@ type District {
 input DistrictInput {
   name: String!
   geojson: GeoJSON
-  displayedOnMap: Boolean = false
+  displayedOnMap: Boolean!
 }
 
 # Ordering options for districts.

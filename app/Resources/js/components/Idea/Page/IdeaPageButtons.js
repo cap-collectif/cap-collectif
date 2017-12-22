@@ -33,11 +33,7 @@ export const IdeaPageButtons = React.createClass({
     const { idea, dispatch } = this.props;
     return (
       <div className="block idea__buttons">
-        <ShareButtonDropdown
-          id="idea-share-button"
-          title={idea.title}
-          url={idea._links.show}
-        />{' '}
+        <ShareButtonDropdown id="idea-share-button" title={idea.title} url={idea._links.show} />{' '}
         <IdeaReportButton idea={idea} />
         <div className="pull-right">
           <EditButton

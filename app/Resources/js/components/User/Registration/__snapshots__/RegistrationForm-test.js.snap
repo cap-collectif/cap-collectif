@@ -2,7 +2,7 @@
 
 exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -120,7 +120,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 
 exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -225,7 +225,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 
 exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}
@@ -364,7 +364,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
 
 exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}

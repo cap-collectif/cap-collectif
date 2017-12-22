@@ -127,9 +127,11 @@ var $buo = function(op, test) {
 
   if (!this.op.test && Math.round(Math.random() * 5000) < 1) {
     var i = new Image();
-    i.src = `//browser-update.org/viewcount.php?n=${this.op.browser.n}&v=${this.op.browser
-      .v}&p=${escape(this.op.pageurl)}&jsv=${jsv}&inv=${this.op
-      .v}&vs=${myvs.i},${myvs.f},${myvs.o},${myvs.s}`;
+    i.src = `//browser-update.org/viewcount.php?n=${this.op.browser.n}&v=${
+      this.op.browser.v
+    }&p=${escape(this.op.pageurl)}&jsv=${jsv}&inv=${this.op.v}&vs=${myvs.i},${myvs.f},${myvs.o},${
+      myvs.s
+    }`;
   }
 
   function setCookie(hours) {
@@ -240,7 +242,9 @@ var $buo = function(op, test) {
   else if (ll == 'nb')
     t =
       'Nettleseren din (%s) er <b>utdatert</b>. Den har kjente <b>sikkerhetshull</b> og <b>kan ikke vise alle funksjonene</b> på denne og andre websider. <a%s>Lær hvordan du kan oppdatere din nettleser</a>';
-  else if (ll == 'zh') t = '您的浏览器(%s) 需要更新。该浏览器有诸多安全漏洞，无法显示本网站的所有功能。 <a%s>了解如何更新浏览器</a>';
+  else if (ll == 'zh')
+    t =
+      '您的浏览器(%s) 需要更新。该浏览器有诸多安全漏洞，无法显示本网站的所有功能。 <a%s>了解如何更新浏览器</a>';
   else if (ll == 'fi')
     t =
       'Selaimesi (%s) on <b>vanhentunut</b>. Siinä on tunnettuja tietoturvaongelmia eikä se välttämättä tue kaikkia ominaisuuksia tällä tai muilla sivustoilla. <a%s>Lue lisää siitä kuinka päivität selaimesi</a>.';
@@ -276,8 +280,9 @@ var $buo = function(op, test) {
   var style = `.buorg {position:absolute;position:fixed;z-index:111111;\
 width:100%; top:0px; left:0px; \
 border-bottom:1px solid #A29330; \
-background:#FDF2AB no-repeat 13px center url(//browser-update.org/img/small/${this.op.browser
-    .n}.png);\
+background:#FDF2AB no-repeat 13px center url(//browser-update.org/img/small/${
+    this.op.browser.n
+  }.png);\
 text-align:left; cursor:pointer; \
 font-family: Arial,Helvetica,sans-serif; color:#000; font-size: 12px;}\
 .buorg div { padding:5px 36px 5px 40px; } \

@@ -7,5 +7,4 @@ DistrictInput:
             geojson:
                 type: "GeoJSON"
             displayedOnMap:
-                type: "Boolean"
-                defaultValue: false
+                type: "Boolean!"

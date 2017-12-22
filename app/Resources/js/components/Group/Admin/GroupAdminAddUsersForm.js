@@ -70,7 +70,8 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
                   value: u.id,
                   label: u.displayName,
                 })),
-              }))}
+              }))
+            }
           />
         </div>
       </form>

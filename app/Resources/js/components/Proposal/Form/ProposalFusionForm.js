@@ -51,7 +51,8 @@ export const ProposalFusionForm = React.createClass({
             filterOptions={(options, filter, currentValues) =>
               options
                 .filter(o => o.stepId === currentCollectStep.id) // If step has changed, we hide previous steps
-                .filter(o => !currentValues.includes(o))}
+                .filter(o => !currentValues.includes(o))
+            }
             loadOptions={input =>
               Fetcher.postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, {
                 terms: input,
@@ -61,7 +62,8 @@ export const ProposalFusionForm = React.createClass({
                   label: p.title,
                   stepId: currentCollectStep.id,
                 })),
-              }))}
+              }))
+            }
           />
         )}
       </form>

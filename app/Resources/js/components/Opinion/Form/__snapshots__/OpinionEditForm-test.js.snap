@@ -3,7 +3,7 @@
 exports[`<OpinionEditForm /> renders a form 1`] = `
 <form
   id="opinion-edit-form"
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}

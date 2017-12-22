@@ -33,13 +33,13 @@ export default {
   },
 
   loadFromServer: (uri, object, offset, limit, filter) => {
-    Fetcher.get(
-      `/${uri}/${object}/comments?offset=${offset}&limit=${limit}&filter=${filter}`,
-    ).then(data => {
-      data.actionType = RECEIVE_COMMENTS;
-      AppDispatcher.dispatch(data);
-      return true;
-    });
+    Fetcher.get(`/${uri}/${object}/comments?offset=${offset}&limit=${limit}&filter=${filter}`).then(
+      data => {
+        data.actionType = RECEIVE_COMMENTS;
+        AppDispatcher.dispatch(data);
+        return true;
+      },
+    );
   },
 
   vote: comment => {

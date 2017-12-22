@@ -23,7 +23,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -59,13 +59,13 @@ exports[`<RegistrationModal /> renders a form 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       id="confirm-register"
       isSubmitting={false}
       label="global.register"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>
@@ -94,7 +94,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -157,13 +157,13 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       id="confirm-register"
       isSubmitting={false}
       label="global.register"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>
@@ -192,7 +192,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={false}
@@ -228,13 +228,13 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       id="confirm-register"
       isSubmitting={false}
       label="global.register"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>
@@ -263,7 +263,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -299,13 +299,13 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       id="confirm-register"
       isSubmitting={false}
       label="global.register"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>

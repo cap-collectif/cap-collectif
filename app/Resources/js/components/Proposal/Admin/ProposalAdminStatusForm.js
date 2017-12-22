@@ -120,7 +120,8 @@ export class ProposalAdminStatusForm extends Component<Props> {
               </ToggleButton>
               <ToggleButton
                 onClick={() =>
-                  dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))}
+                  dispatch(change(formName, 'publicationStatus', 'TRASHED_NOT_VISIBLE'))
+                }
                 value="TRASHED_NOT_VISIBLE">
                 <FormattedMessage id="proposal.state.hidden_content" />
               </ToggleButton>
@@ -140,16 +141,16 @@ export class ProposalAdminStatusForm extends Component<Props> {
               )}
             </Field>
             {(publicationStatus === 'TRASHED' || publicationStatus === 'TRASHED_NOT_VISIBLE') && (
-                <div>
-                  <Field
-                    id="trashedReason"
-                    name="trashedReason"
-                    label="Motif de la modération (facultatif)"
-                    type="textarea"
-                    component={component}
-                  />
-                </div>
-              )}
+              <div>
+                <Field
+                  id="trashedReason"
+                  name="trashedReason"
+                  label="Motif de la modération (facultatif)"
+                  type="textarea"
+                  component={component}
+                />
+              </div>
+            )}
             {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
               <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">

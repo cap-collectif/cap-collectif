@@ -23,7 +23,7 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -56,7 +56,7 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Button
       active={false}
@@ -65,7 +65,7 @@ exports[`<UpdateRegistrationQuestionModal /> renders correctly 1`] = `
       bsStyle="primary"
       disabled={false}
       id="confirm-update-question"
-      onClick={[Function]}
+      onClick={[MockFunction]}
       type="submit"
     >
       <FormattedMessage

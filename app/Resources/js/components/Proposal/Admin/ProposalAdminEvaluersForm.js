@@ -79,7 +79,8 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
                     value: group.id,
                     label: group.title,
                   })),
-                }))}
+                }))
+              }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
               <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">

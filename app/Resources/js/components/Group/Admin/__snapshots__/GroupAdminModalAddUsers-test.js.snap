@@ -22,7 +22,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -63,7 +63,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Button
       active={false}

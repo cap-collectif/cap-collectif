@@ -206,7 +206,8 @@ export class ProposalAdminContentForm extends React.Component<Props> {
                       ]),
                   }))
                   // eslint-disable-next-line no-console
-                  .catch(e => console.error(e))}
+                  .catch(e => console.error(e))
+              }
             />
             {features.themes &&
               form.usingThemes && (

@@ -74,7 +74,8 @@ export const RegistrationAdminPage = React.createClass({
                 onToggle(
                   'restrict_registration_via_email_domain',
                   !features.restrict_registration_via_email_domain,
-                )}
+                )
+              }
             />
           </Col>
           <Col xs={11}>Limiter l'inscription à certains noms de domaine</Col>
@@ -148,10 +149,8 @@ export const RegistrationAdminPage = React.createClass({
             <Toggle
               checked={features.consent_external_communication}
               onChange={() =>
-                onToggle(
-                  'consent_external_communication',
-                  !features.consent_external_communication,
-                )}
+                onToggle('consent_external_communication', !features.consent_external_communication)
+              }
             />
           </Col>
           <Col xs={11}>
@@ -166,8 +165,9 @@ export const RegistrationAdminPage = React.createClass({
                   link: (
                     <a
                       className="external-link"
-                      href={`${window.location.protocol}//${window.location
-                        .host}/admin/settings/settings.global/list`}>
+                      href={`${window.location.protocol}//${
+                        window.location.host
+                      }/admin/settings/settings.global/list`}>
                       <FormattedMessage id="proposal.admin.general" />
                     </a>
                   ),

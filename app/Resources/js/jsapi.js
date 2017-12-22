@@ -406,9 +406,9 @@ if (!window['google']['loader']) {
         if (!this.h.versions[`:${a}`])
           throw I(`Module: '${this.b}' with version '${a}' not found!`);
       }
-      return `${google[A].GoogleApisBase}/libs/${this.b}/${a}/${this.h.versions[`:${a}`][
-        b && b.uncompressed ? 'uncompressed' : 'compressed'
-      ]}`;
+      return `${google[A].GoogleApisBase}/libs/${this.b}/${a}/${
+        this.h.versions[`:${a}`][b && b.uncompressed ? 'uncompressed' : 'compressed']
+      }`;
     };
     T[q].D = function() {
       return !1;

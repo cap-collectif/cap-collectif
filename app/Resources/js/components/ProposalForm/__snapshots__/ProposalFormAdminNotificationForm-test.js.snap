@@ -34,7 +34,7 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
     className="box-content"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <h4
         style={

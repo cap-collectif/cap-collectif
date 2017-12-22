@@ -82,6 +82,7 @@ export const formatInitialResponsesValues = (questions: Questions, responses: Re
             responseValue = JSON.parse(response.value).labels;
           }
         } catch (e) {
+          // eslint-disable-next-line no-console
           console.error(`Failed to parse : ${response.value}`);
         }
         return {

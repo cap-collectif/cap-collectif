@@ -42,7 +42,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
             bsStyle="success"
             className="center-block btn-block"
             disabled={false}
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             <FormattedMessage
               id="global.login"

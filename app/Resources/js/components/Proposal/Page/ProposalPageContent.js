@@ -108,7 +108,9 @@ export const ProposalPageContent = React.createClass({
                   height: 175,
                 }}>
                 <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${config.mapboxApiKey}`}
+                  url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${
+                    config.mapboxApiKey
+                  }`}
                 />
                 <Marker
                   position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
