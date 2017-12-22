@@ -31,7 +31,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
     className="box-content box-content__status-form"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <Field
         component={[Function]}
@@ -156,7 +156,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
     className="box-content box-content__status-form"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <Field
         component={[Function]}
@@ -272,7 +272,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
     className="box-content box-content__status-form"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <p>
         Adresse email de l'auteur en attente de confirmation: 

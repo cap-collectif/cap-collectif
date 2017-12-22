@@ -2,7 +2,7 @@
 
 exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     component={[Function]}

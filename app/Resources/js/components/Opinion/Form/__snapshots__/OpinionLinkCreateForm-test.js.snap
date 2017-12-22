@@ -3,7 +3,7 @@
 exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
 <form
   id="opinion-link-create-form"
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     autoFocus={true}

@@ -35,7 +35,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
     </a>
   </div>
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <ReactRelayQueryRenderer
       environment={

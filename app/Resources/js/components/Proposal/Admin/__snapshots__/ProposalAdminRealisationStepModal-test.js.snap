@@ -22,7 +22,7 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
@@ -93,12 +93,12 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
   >
     <CloseButton
       label="global.cancel"
-      onClose={[Function]}
+      onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
       isSubmitting={false}
       label="global.validate"
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     />
   </ModalFooter>
 </Modal>

@@ -34,7 +34,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
     className="box-content"
   >
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <Field
         component={[Function]}

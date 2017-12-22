@@ -23,14 +23,14 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
       "remove": [Function],
     }
   }
-  onHide={[Function]}
+  onHide={[MockFunction]}
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
 >
   <form
     id="login-form"
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <ModalHeader
       bsClass="modal-header"
@@ -60,7 +60,7 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
     >
       <CloseButton
         label="global.cancel"
-        onClose={[Function]}
+        onClose={[MockFunction]}
       />
       <Button
         active={false}

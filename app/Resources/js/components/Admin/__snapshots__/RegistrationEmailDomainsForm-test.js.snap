@@ -14,7 +14,7 @@ exports[`<RegistrationEmailDomainsForm /> renders correctly 1`] = `
     </strong>
   </p>
   <form
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
   >
     <FieldArray
       component={[Function]}
