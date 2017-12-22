@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 // must have setResponseOn and getResponsesQuestions to use this trait
@@ -31,20 +32,20 @@ trait HasResponsesTrait
             }
         }
 
-        $this->responses->add($response);
         $this->setResponseOn($response);
+        $this->responses->add($response);
 
         return $this;
     }
 
     public function getResponses(): Collection
     {
-        $responses = $this->responses;
+        $responses = new ArrayCollection($this->responses->toArray());
         $questions = $this->getResponsesQuestions();
 
         foreach ($questions as $question) {
             $found = false;
-            foreach ($this->responses as $response) {
+            foreach ($responses as $response) {
                 if ($response->getQuestion()->getId() === $question->getId()) {
                     $found = true;
                 }
