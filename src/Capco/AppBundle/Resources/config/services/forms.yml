@@ -51,7 +51,6 @@ services:
 
   capco.form.reply:
     class: Capco\AppBundle\Form\ReplyType
-    arguments: ["@capco.form.transformer.entity_to_id", "@capco.toggle.manager"]
     tags:
       - { name: form.type }
 
@@ -77,10 +76,6 @@ services:
       tags:
         - { name: form.type }
 
-  capco.form.transformer.entity_to_id:
-    class: Capco\AppBundle\Form\DataTransformer\EntityToIdTransformer
-    arguments: ["@doctrine.orm.entity_manager"]
-
   capco.form.argument:
     class: Capco\AppBundle\Form\ArgumentType
     tags:
@@ -93,7 +88,7 @@ services:
 
   capco.form.admin_registration:
       class: Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType
-      arguments: ["@capco.toggle.manager", "@capco.form.transformer.entity_to_id"]
+      arguments: ["@capco.toggle.manager"]
       tags:
         - { name: form.type }
 
@@ -138,6 +133,5 @@ services:
 
   capco.form.proposal_evaluation:
     class: Capco\AppBundle\Form\ProposalEvaluationType
-    arguments: ["@capco.form.transformer.entity_to_id"]
     tags:
       - { name: form.type }
