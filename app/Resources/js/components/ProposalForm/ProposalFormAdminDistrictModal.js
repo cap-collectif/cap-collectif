@@ -60,6 +60,7 @@ export const ProposalFormAdminDistrictModal = React.createClass({
             id={`${member}.displayedOnMap`}
             name={`${member}.displayedOnMap`}
             type="checkbox"
+            normalize={val => !!val}
             component={component}
           />
         </Modal.Body>
