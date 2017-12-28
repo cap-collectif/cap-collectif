@@ -279,7 +279,7 @@ export class ProposalForm extends React.Component<Props, State> {
     );
     return (
       <form id="proposal-form">
-        <div className="mt-20">
+        <div>
           <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
         </div>
         {error && (
