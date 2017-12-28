@@ -1,0 +1,103 @@
+/* ===============================================================
+    $SUB-NAVBAR
+================================================================*/
+.step-tabs-bar {
+    border: 1px solid $border-color;
+    background-color: $white;
+    margin-bottom: 0;
+    font-size: 15px;
+
+    .nav {
+        li {
+            position: relative;
+            white-space: nowrap;
+            display: inline-block;
+            font-size: 16px;
+
+            > a {
+                display: flex;
+            }
+
+            svg {
+                position: absolute;
+                top: 0;
+                right: -35px;
+                z-index: 5;
+
+                polygon {
+                    fill: $white;
+                    // stroke-width: 1;
+                    // stroke: $border-color;
+                }
+            }
+
+            .navbar__step-nb {
+                @include border-radius(50%);
+                margin: auto 15px auto;
+                width: 30px;
+                height: 30px;
+                background-color: $brand-primary;
+                color: $white;
+                font-size: 20px;
+                display: flex;
+
+                span {
+                    margin: auto;
+                }
+            }
+
+            .navbar__step-title {
+                color: $black;
+                font-weight: 500;
+            }
+
+            &.active polygon, &:hover polygon {
+                fill: $light-gray;
+            }
+
+            &.active {
+                a {
+                    border-bottom: 3px solid $brand-primary;
+                    background-color: $light-gray;
+                }
+            }
+
+            &::after {
+                content: "";
+                width: 1px;
+                background-color: $white;
+                height: 70px;
+                position: absolute;
+                right: -1px;
+                top: 0;
+            }
+        }
+    }
+}
+
+//.navbar--sub.navbar--no-nb .navbar__step-title {
+//    margin-top: 0;
+//}
+
+//@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+//    .navbar--sub {
+//
+//        .navbar__step-nb {
+//            float: none;
+//        }
+//
+//        .navbar__step-title {
+//            margin-top: 0;
+//        }
+//
+//        .navbar__step-nb {
+//            padding-top: 0;
+//            padding-bottom: 5px;
+//        }
+//
+//        .navbar__step {
+//            margin-left: 0;
+//        }
+//
+//    }
+//}

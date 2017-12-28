@@ -20,12 +20,83 @@
 
 {% block body %}
 
-    <div class="container  container--custom">
+    <div class="container container--custom">
         {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
-    <div class="container  container--custom">
-
+    <div class="container container--custom" style="padding-top: 0">
+        <div class="block">
+            <div class="step-tabs-bar">
+                <ul class="nav">
+                    {% set nb = 1 %}
+                    {% set now = date("now") %}
+                    <li class="active">
+                        <a href="" class="d-flex">
+                            <div class="navbar__step-nb"><span>3</span></div>
+                            <div class="navbar__step">
+                                <span class="navbar__step-title">Titre étape très très longue pour voir comment ça fait</span>
+                                <p class="excerpt">ouvert</p>
+                            </div>
+                        </a>
+                        <svg height="72" width="35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs>
+                                <filter id="dropShadow">
+                                    <feGaussianBlur result = "blurOut" in = "offOut" stdDeviation = "10" />
+                                    <feOffset result = "offOut" in = "SourceAlpha" dx="1" dy="0" />
+                                    <feBlend in = "SourceGraphic" in2 = "blurOut" mode = "normal"/>
+                                    {#<feMerge>#}
+                                        {#<feMergeNode />#}
+                                        {#<feMergeNode in="SourceGraphic" />#}
+                                    {#</feMerge>#}
+                                </filter>
+                            </defs>
+                            <polygon points="0,0, 0,70,20 35" filter="url(#dropShadow)"/>
+                        </svg>
+                    </li>
+                    <li>
+                        <a href="" class="d-flex">
+                            <div class="navbar__step-nb"><span>3</span></div>
+                            <div class="navbar__step">
+                                <span class="navbar__step-title">Titre étape</span>
+                                <p class="excerpt">ouvert</p>
+                            </div>
+                        </a>
+                        <svg height="72" width="35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <polygon points="0,0, 0,70,20 35" />
+                        </svg>
+                    </li>
+                    <li>
+                        <a href="" class="d-flex">
+                            <div class="navbar__step-nb"><span>3</span></div>
+                            <div class="navbar__step">
+                                <span class="navbar__step-title">Titre étape</span>
+                                <p class="excerpt">ouvert</p>
+                            </div>
+                        </a>
+                        <svg height="72" width="35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <polygon points="0,0, 0,70,20 35" />
+                        </svg>
+                    </li>
+                    {#{% for step in projectSteps %}#}
+                        {#<li {% if currentStep == step.slug %} class="active" {% endif %}>#}
+                            {#<a href="{{ step | capco_step_link }}">#}
+                                {#<div class="navbar__step-nb">{{ nb }}</div>#}
+                                {#<div class="navbar__step">#}
+                                    {#<h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>#}
+                                    {#<p class="navbar__step-date excerpt">#}
+                                        {#{% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}#}
+                                    {#</p>#}
+                                    {#<p class="label label-default">#}
+                                        {#{{ ('step.status.' ~ step | capco_step_status) | trans({}, 'CapcoAppBundle') }}#}
+                                    {#</p>#}
+                                {#</div>#}
+                            {#</a>#}
+                        {#</li>#}
+                        {#{% set nb = (nb + 1) %}#}
+                    {#{% endfor %}#}
+                </ul>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
                 {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
