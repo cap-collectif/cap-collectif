@@ -6,39 +6,59 @@
     background-color: $white;
     margin-bottom: 0;
     font-size: 15px;
+    overflow: hidden;
 
     .nav {
+        flex-wrap: nowrap;
+        display: flex;
+
         li {
             position: relative;
             white-space: nowrap;
             display: inline-block;
             font-size: 16px;
 
-            > a {
+            &:not(.active):hover {
+                background-color: $light-gray;
+                border-bottom: 3px solid $light-gray;
+            }
+
+            a {
                 display: flex;
+                padding: 15px;
+
+                &:hover {
+                    background-color: transparent;
+                }
             }
 
             svg {
                 position: absolute;
                 top: 0;
-                right: -35px;
+                right: -20px;
                 z-index: 5;
 
                 polygon {
                     fill: $white;
-                    // stroke-width: 1;
-                    // stroke: $border-color;
+                }
+            }
+
+            &:first-child {
+                .navbar__step-nb {
+                    margin: auto 15px auto 0;
                 }
             }
 
             .navbar__step-nb {
                 @include border-radius(50%);
-                margin: auto 15px auto;
+                margin: auto 15px auto 17px;
                 width: 30px;
                 height: 30px;
-                background-color: $brand-primary;
-                color: $white;
-                font-size: 20px;
+                background-color: transparent;
+                border: 1px solid $dark-gray;
+                color: $dark-gray;
+                font-size: 18px;
+                font-weight: 300;
                 display: flex;
 
                 span {
@@ -47,7 +67,7 @@
             }
 
             .navbar__step-title {
-                color: $black;
+                color: $dark-gray;
                 font-weight: 500;
             }
 
@@ -60,17 +80,27 @@
                     border-bottom: 3px solid $brand-primary;
                     background-color: $light-gray;
                 }
-            }
 
-            &::after {
-                content: "";
-                width: 1px;
-                background-color: $white;
-                height: 70px;
-                position: absolute;
-                right: -1px;
-                top: 0;
+                .navbar__step-title {
+                    color: $black;
+                }
+
+                .navbar__step-nb {
+                    background-color: $brand-primary;
+                    border: 1px solid $brand-primary;
+                    color: $white;
+                }
             }
+            //
+            //&::after {
+            //    content: "";
+            //    width: 1px;
+            //    background-color: $white;
+            //    height: 70px;
+            //    position: absolute;
+            //    right: -1px;
+            //    top: 0;
+            //}
         }
     }
 }
