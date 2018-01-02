@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import classNames from 'classnames';
 import AnswerBody from '../../Answer/AnswerBody';
+import type { State } from '../../../types';
 
 export class ProposalPageLastNews extends React.Component<{
   proposal: Object,
@@ -38,9 +39,11 @@ export class ProposalPageLastNews extends React.Component<{
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
+    proposal:
+      state.proposal.currentProposalId &&
+      state.proposal.proposalsById[state.proposal.currentProposalId],
   };
 };
 

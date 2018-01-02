@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import renderInput from '../../Form/Field';
 import { renderSelect } from '../../Form/Select';
@@ -158,7 +158,7 @@ export const ProposalAdminForm = React.createClass({
   },
 });
 
-export default connect((state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
   initialValues: {
     project: formValueSelector(formName)(state, 'project'),
     author: state.user.user.id,
@@ -167,7 +167,9 @@ export default connect((state, props) => ({
   user: state.user.user,
   features: state.default.features,
   themes: state.default.themes,
-}))(
+});
+
+export default connect(mapStateToProps)(
   reduxForm({
     form: formName,
     destroyOnUnmount: false,

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import OpinionLinkCreateButton from './OpinionLinkCreateButton';
@@ -10,41 +10,43 @@ import CloseButton from '../../Form/CloseButton';
 import OpinionLinkCreateInfos from './OpinionLinkCreateInfos';
 import OpinionLinkCreateForm, { formName } from './../Form/OpinionLinkCreateForm';
 import OpinionTypeActions from '../../../actions/OpinionTypeActions';
+import type { GlobalState, Dispatch } from '../../../types';
 
-const OpinionLinkCreate = React.createClass({
-  propTypes: {
-    submitting: React.PropTypes.bool.isRequired,
-    opinion: React.PropTypes.object.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-  },
+type Props = {
+  submitting: boolean,
+  opinion: Object,
+  dispatch: Dispatch,
+};
+type State = {
+  showModal: boolean,
+  availableTypes: Array<Object>,
+};
 
-  getInitialState() {
-    return {
-      showModal: false,
-      availableTypes: [],
-    };
-  },
+class OpinionLinkCreate extends React.Component<Props, State> {
+  state = {
+    showModal: false,
+    availableTypes: [],
+  };
 
   componentDidMount() {
     const { opinion } = this.props;
     OpinionTypeActions.getAvailableTypes(opinion.type.id).then(availableTypes => {
       this.setState({ availableTypes });
     });
-  },
+  }
 
   close() {
     this.setState({ showModal: false });
-  },
+  }
 
   show() {
     this.setState({ showModal: true });
-  },
+  }
 
   handleSubmitSuccess() {
     this.close();
-    this.setState({ isSubmitting: false });
     window.location.reload();
-  },
+  }
 
   render() {
     const { submitting, opinion, dispatch } = this.props;
@@ -85,9 +87,12 @@ const OpinionLinkCreate = React.createClass({
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
-export default connect(state => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
-}))(OpinionLinkCreate);
+});
+const connector: Connector<{ opinion: Object }, Props> = connect(mapStateToProps);
+
+export default connector(OpinionLinkCreate);

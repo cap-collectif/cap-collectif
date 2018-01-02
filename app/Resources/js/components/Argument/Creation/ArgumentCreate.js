@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { reduxForm, Field, submit } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import renderComponent from '../../Form/Field';
@@ -82,7 +82,7 @@ const ArgumentCreate = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     user: state.user.user,
   };

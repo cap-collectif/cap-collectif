@@ -89,7 +89,8 @@ export type Action =
   | ProjectAction
   | IdeaAction
   | ReportAction
-  | DefaultAction;
+  | DefaultAction
+  | { type: '@@INIT' };
 
 export type GlobalState = {
   form: Object,

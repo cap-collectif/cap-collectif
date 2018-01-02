@@ -1,6 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
+import type { State } from '../../../types';
 
 const ProjectPreviewThemes = React.createClass({
   propTypes: {
@@ -30,7 +31,7 @@ const ProjectPreviewThemes = React.createClass({
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return { features: state.default.features };
 };
 

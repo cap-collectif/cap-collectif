@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import {
   type FormProps,
   SubmissionError,
@@ -73,7 +73,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
   const responsesArrayErrors = [];
   const questions = proposal.form.evaluationForm ? proposal.form.evaluationForm.questions : [];
 
-  if (values.responses) {
+  if (questions && values.responses) {
     values.responses.forEach((response, index) => {
       const currentQuestion = questions.find(question => question.id === String(response.question));
 
@@ -92,7 +92,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           currentLength = response.value.length;
         }
 
-        if (rule.type === 'min' && currentLength < rule.number) {
+        if (rule.number && rule.type === 'min' && currentLength < Number(rule.number)) {
           const responseError = {};
           responseError.value = {
             id: 'reply.constraints.choices_min',
@@ -104,7 +104,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           responsesArrayErrors[index] = responseError;
         }
 
-        if (rule.type === 'max' && currentLength > rule.number) {
+        if (rule.number && rule.type === 'max' && currentLength > Number(rule.number)) {
           const responseError = {};
           responseError.value = {
             id: 'reply.constraints.choices_max',
@@ -116,7 +116,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           responsesArrayErrors[index] = responseError;
         }
 
-        if (rule.type === 'equal' && currentLength !== Number(rule.number)) {
+        if (rule.number && rule.type === 'equal' && currentLength !== Number(rule.number)) {
           const responseError = {};
           responseError.value = {
             id: 'reply.constraints.choices_equal',
@@ -280,7 +280,7 @@ export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
       );
 };
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,

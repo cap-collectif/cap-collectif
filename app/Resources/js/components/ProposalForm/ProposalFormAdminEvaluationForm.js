@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -148,7 +148,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminEvaluationForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null,
   },

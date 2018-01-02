@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -127,7 +127,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminSettingsForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
     isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),

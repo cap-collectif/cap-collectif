@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import IdeaCreateButton from './IdeaCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -73,7 +73,9 @@ export const IdeaCreate = React.createClass({
   },
 });
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.idea.showCreateModal,
   submitting: isSubmitting(formName)(state),
-}))(IdeaCreate);
+});
+
+export default connect(mapStateToProps)(IdeaCreate);

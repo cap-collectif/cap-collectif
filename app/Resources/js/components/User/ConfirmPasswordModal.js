@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit } from 'redux-form';
 import type { State } from '../../types';
 import CloseButton from '../Form/CloseButton';
@@ -50,7 +50,7 @@ export const ConfirmPasswordModal = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.user.showConfirmPasswordModal,
   isSubmitting: state.user.isSubmittingAccountForm,
 });

@@ -2,8 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import type { Connector } from 'react-redux';
+import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import renderInput from '../../Form/Field';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Uuid, Dispatch } from '../../../types';
@@ -93,7 +92,10 @@ export const OpinionLinkCreateForm = React.createClass({
 });
 
 type PassedProps = { availableTypes: Array<Object> };
-const mapStateToProps = (state: State, { availableTypes }: PassedProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (
+  state: State,
+  { availableTypes }: PassedProps,
+) => {
   const currentTypeId = formValueSelector(formName)(state, 'opinionType');
   const initialType = availableTypes[0];
   return {

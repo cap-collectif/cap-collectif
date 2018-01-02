@@ -1,8 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import type { Connector } from 'react-redux';
+import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { Button, Alert } from 'react-bootstrap';
 import renderInput from '../Form/Field';
@@ -79,7 +78,7 @@ export const RegistrationQuestionForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State, props: { form: string }) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: { form: string }) => ({
   showChoices: formValueSelector(props.form)(state, 'type') === '4',
 });
 const connector: Connector<{ form: string }, Props> = connect(mapStateToProps);

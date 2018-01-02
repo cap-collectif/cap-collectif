@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { Connector } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Dispatch } from '../../../types';
@@ -100,7 +100,7 @@ export const OpinionEditForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State, { opinion }: Object) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { opinion }: Object) => {
   const dynamicsInitialValues = {};
   for (const appendix of opinion.appendices) {
     dynamicsInitialValues[appendix.type.title] = appendix.body;
