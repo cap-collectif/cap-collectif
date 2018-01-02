@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaStore from '../../../stores/IdeaStore';
@@ -122,7 +122,7 @@ export const IdeasListFilters = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = (state: State) => {
   return { features: state.default.features };
 };
 

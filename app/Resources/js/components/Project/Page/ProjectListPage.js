@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Row } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import Pagination from '../../Utils/Pagination';
 import ProjectList from './../List/ProjectsList';
 import ProjectListFilter from '../List/ProjectListFilter';
@@ -50,7 +50,7 @@ export const ProjectListPage = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
   themes: state.default.themes,
   project: state.project,

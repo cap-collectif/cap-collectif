@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit } from 'redux-form';
 import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import OpinionVersionEditForm, { formName } from './OpinionVersionEditForm';
@@ -58,7 +58,7 @@ const OpinionVersionEditModal = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   show: state.opinion.showOpinionVersionEditModal,
   submitting: state.opinion.isEditingOpinionVersion,
 });

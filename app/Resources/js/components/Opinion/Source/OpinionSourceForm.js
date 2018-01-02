@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 import renderComponent from '../../Form/Field';
@@ -118,7 +118,7 @@ const OpinionSourceForm = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
+export default connect((state, { source }) => ({
   initialValues: {
     link: source ? source.link : '',
     title: source ? source.title : '',
@@ -126,8 +126,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
     category: source ? source.category.id : null,
     check: !source,
   },
-});
-export default connect(mapStateToProps)(
+}))(
   reduxForm({
     validate,
     onSubmit,

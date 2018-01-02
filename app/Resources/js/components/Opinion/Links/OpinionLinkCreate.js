@@ -88,8 +88,6 @@ const OpinionLinkCreate = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+export default connect(state => ({
   submitting: isSubmitting(formName)(state),
-});
-
-export default connect(mapStateToProps)(OpinionLinkCreate);
+}))(OpinionLinkCreate);

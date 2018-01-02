@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import OpinionActions from '../../../actions/OpinionActions';
 import CloseButton from '../../Form/CloseButton';
@@ -108,7 +108,7 @@ const OpinionDelete = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => {
+const mapStateToProps = state => {
   return {
     user: state.user.user,
   };

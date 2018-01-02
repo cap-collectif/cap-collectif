@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { type FormProps, SubmissionError, reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -342,10 +342,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminContentForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: GlobalState,
-  { proposal }: PassedProps,
-) => ({
+const mapStateToProps = (state: GlobalState, { proposal }: PassedProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
   themes: state.default.themes,
