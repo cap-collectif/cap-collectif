@@ -10,7 +10,7 @@ trait VersionableTrait
      */
     protected $version;
 
-    public function getVersion(): int
+    public function getVersion()
     {
         return $this->version;
     }

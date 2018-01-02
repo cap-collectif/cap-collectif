@@ -36,21 +36,21 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         if (!$isEvaluer && !$user->isAdmin()) {
             throw new UserError(sprintf('You are not an evaluer of proposal with id %s', $arguments['proposalId']));
         }
-
         unset($arguments['proposalId']);
         $proposalEvaluation = $this->container->get('capco.proposal_evaluation.repository')->findOneBy([
             'proposal' => $proposal,
         ]);
-        try {
-            $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
-        } catch (OptimisticLockException $e) {
-            throw new UserError('Proposal evaluation was modified, please refresh the page ('
-                . $e->getMessage() . ')');
-        }
 
         if (!$proposalEvaluation) {
             $proposalEvaluation = new ProposalEvaluation();
             $proposalEvaluation->setProposal($proposal);
+        } else {
+            try {
+                $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
+            } catch (OptimisticLockException $e) {
+                throw new UserError('Proposal evaluation was modified, please refresh the page ('
+                    . $e->getMessage() . ')');
+            }
         }
 
         if (isset($arguments['responses'])) {

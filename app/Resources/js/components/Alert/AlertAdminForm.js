@@ -17,8 +17,8 @@ export class AlertAdminForm extends React.Component<Props> {
 
     if ((submitFailed || invalid) && errorMessage) {
       return (
-        <div className="alert__admin-form_server-failed-message">
-          <i className="icon ion-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
+        <div className="alert__form_server-failed-message">
+          <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
         </div>
       );
     }

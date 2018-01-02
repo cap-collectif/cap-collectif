@@ -42,10 +42,10 @@ exports[`<AlertAdminForm /> render correctly the message for submit succeeded 1`
 
 exports[`<AlertAdminForm /> render correctly the message with a custom error message 1`] = `
 <div
-  className="alert__admin-form_server-failed-message"
+  className="alert__form_server-failed-message"
 >
   <i
-    className="icon ion-ios-close-outline"
+    className="cap cap-ios-close-outline"
   />
    
   <FormattedHTMLMessage
