@@ -133,7 +133,7 @@ input ChangeProposalEvaluationInput {
   # The proposal id
   proposalId: ID!
 
-  # The version (revision number) of the evaluation
+  # The revision number of the evaluation
   version: Int!
   responses: [ResponseInput!]!
   clientMutationId: String
@@ -931,7 +931,7 @@ type ProposalEvaluation {
   # Identifies the proposal.
   proposal: Proposal!
 
-  # The version (revision number) of an evaluation
+  # The revision number of the evaluation
   version: Int!
 
   # List of responses for the evaluation
