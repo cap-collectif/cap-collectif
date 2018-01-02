@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
@@ -66,7 +66,7 @@ export class OpinionEditModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Object) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
   step:

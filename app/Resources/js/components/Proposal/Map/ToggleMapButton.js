@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 
@@ -49,7 +49,7 @@ export const ToggleMapButton = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   mode: state.proposal.selectedViewByStep || 'mosaic',
 });
 

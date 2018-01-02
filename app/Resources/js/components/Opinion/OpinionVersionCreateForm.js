@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
 import { createOpinionVersion as onSubmit } from '../../redux/modules/opinion';
@@ -59,7 +59,7 @@ const OpinionVersionCreateForm = React.createClass({
   },
 });
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   initialValues: {
     title: '',
     body:
@@ -68,7 +68,9 @@ export default connect((state: State) => ({
     comment: '',
   },
   opinionId: state.opinion.currentOpinionId,
-}))(
+});
+
+export default connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,

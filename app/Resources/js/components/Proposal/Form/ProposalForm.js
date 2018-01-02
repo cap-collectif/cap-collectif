@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import {
   type FormProps,
   change,
@@ -467,7 +467,10 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (
+  state: GlobalState,
+  { proposal, proposalForm }: Props,
+) => ({
   initialValues: {
     draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
     title: proposal ? proposal.title : null,

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -98,7 +98,7 @@ const form = injectIntl(
   })(ProposalPageEvaluation),
 );
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     responses: formatInitialResponses(props),

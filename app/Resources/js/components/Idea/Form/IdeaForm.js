@@ -121,7 +121,7 @@ export const IdeaForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State, { idea, themeId }) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { idea, themeId }) => {
   return {
     themes: state.default.themes,
     initialValues: {

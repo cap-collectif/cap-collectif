@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -251,7 +251,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminSelections);
 
-const mapStateToProps = (state: State, props: PassedProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => {
   const steps = props.proposal.project.steps;
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {

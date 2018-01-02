@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
 
 export const SamlLoginButton = React.createClass({
@@ -28,7 +28,7 @@ export const SamlLoginButton = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.default.features.login_saml,
 });
 

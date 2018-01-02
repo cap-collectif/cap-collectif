@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import ProjectPreview from '../Preview/ProjectPreview';
+import type { State } from '../../../types';
 
 type Props = {
   projects: Array<Object>,
@@ -24,7 +25,7 @@ export class ProjectsList extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   projects: props.projects.map(project => state.project.projectsById[project.id]),
 });
 export default connect(mapStateToProps)(ProjectsList);

@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
@@ -126,7 +126,7 @@ export const OpinionVotesButton = React.createClass({
   },
 });
 
-const mapStateToProps = (
+const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
   { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion },
 ) => {

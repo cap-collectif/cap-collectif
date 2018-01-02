@@ -1,8 +1,9 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
+import type { State } from '../../../types';
 
 const OpinionSourceVoteBox = React.createClass({
   propTypes: {
@@ -66,7 +67,7 @@ const OpinionSourceVoteBox = React.createClass({
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     user: state.user.user,
   };

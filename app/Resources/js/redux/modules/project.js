@@ -66,7 +66,9 @@ export type ProjectAction =
   | ChangeProjectTypeAction
   | ChangeProjectTermAction
   | ChangeProjectThemeAction
-  | ReceivedProjectSucceedAction;
+  | ReceivedProjectSucceedAction
+  | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
+  | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
 export const fetchProjects = (): RequestFetchProjectsAction => ({
   type: 'project/PROJECTS_FETCH_REQUESTED',

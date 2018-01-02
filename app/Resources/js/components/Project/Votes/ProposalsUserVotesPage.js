@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Row } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
@@ -75,7 +75,7 @@ const ProposalsUserVotesPage = React.createClass({
   },
 });
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => {
   const currentUserVotesByStepId = state.proposal.userVotesByStepId;
   const userVotesByStepId = {};
   for (const stepId in props.userVotesByStepId) {

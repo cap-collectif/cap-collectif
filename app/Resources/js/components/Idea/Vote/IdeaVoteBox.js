@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import UserPreview from '../../User/UserPreview';
 import SubmitButton from '../../Form/SubmitButton';
@@ -57,7 +57,7 @@ export class IdeaVoteBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
   submitting: isSubmitting('IdeaVoteForm')(state),
 });

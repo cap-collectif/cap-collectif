@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type Connector } from 'react-redux';
+import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentStore from '../../../stores/ArgumentStore';
@@ -63,12 +63,14 @@ const ArgumentForm = React.createClass({
 });
 
 type PassedProps = { argument: Object };
-const connector: Connector<PassedProps, {}> = connect((state: State, props: PassedProps) => ({
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => ({
   initialValues: {
     body: props.argument ? props.argument.body : '',
     confirm: false,
   },
-}));
+});
+const connector: Connector<PassedProps, {}> = connect(mapStateToProps);
 
 export default connector(
   reduxForm({

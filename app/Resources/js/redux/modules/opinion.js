@@ -8,12 +8,25 @@ import type { Exact, Version, Opinion, VoteValue, Uuid, Dispatch, Action } from 
 type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
 
+type ShowSourceCreateModalAction = {
+  type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
+};
+type HideSourceCreateModalAction = {
+  type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
+};
+type HideArgumentEditModalAction = {
+  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
+};
 type ShowArgumentEditModalAction = {
   type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
   id: Uuid,
 };
-type HideArgumentEditModalAction = {
-  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
+type ShowSourceEditModalAction = {
+  type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
+  id: Uuid,
+};
+type HideSourceEditModalAction = {
+  type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
 };
 type StartEditOpinionVersionAction = {
   type: 'opinion/START_EDIT_OPINION_VERSION',
@@ -84,6 +97,9 @@ export type OpinionAction =
       opinionId: Uuid,
     }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
+  | ShowSourceCreateModalAction
+  | HideSourceCreateModalAction
+  | HideSourceEditModalAction
   | HideArgumentEditModalAction
   | ShowArgumentEditModalAction
   | StartEditOpinionVersionAction
@@ -98,6 +114,7 @@ export type OpinionAction =
   | ShowOpinionCreateModalAction
   | CloseOpinionCreateModalAction
   | ShowOpinionEditModalAction
+  | ShowSourceEditModalAction
   | CloseOpinionEditModalAction;
 type ContributionMap = {
   [id: Uuid]: {
@@ -159,18 +176,18 @@ export const openArgumentEditModal = (id: Uuid): ShowArgumentEditModalAction => 
   id,
 });
 
-export const showSourceEditModal = (id: Uuid) => ({
+export const showSourceEditModal = (id: Uuid): ShowSourceEditModalAction => ({
   type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
   id,
 });
-export const hideSourceEditModal = () => ({
+export const hideSourceEditModal = (): HideSourceEditModalAction => ({
   type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
 });
 
-export const showSourceCreateModal = () => ({
+export const showSourceCreateModal = (): ShowSourceCreateModalAction => ({
   type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
 });
-export const hideSourceCreateModal = () => ({
+export const hideSourceCreateModal = (): HideSourceCreateModalAction => ({
   type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
 });
 
