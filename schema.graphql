@@ -144,6 +144,18 @@ type ChangeProposalEvaluationPayload {
   clientMutationId: String
 }
 
+input ChangeProposalEvaluersInput {
+  # The proposal id
+  proposalId: ID!
+  evaluers: [ID!]
+  clientMutationId: String
+}
+
+type ChangeProposalEvaluersPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 input ChangeProposalNotationInput {
   # The proposal id
   proposalId: ID!
@@ -545,6 +557,7 @@ type Mutation {
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
+  changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload

@@ -1,0 +1,9 @@
+ChangeProposalEvaluersInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalId:
+                type: "ID!"
+                description: "The proposal id"
+            evaluers:
+                type: "[ID!]"
