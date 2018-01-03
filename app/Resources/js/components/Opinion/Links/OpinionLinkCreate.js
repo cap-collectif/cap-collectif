@@ -37,16 +37,16 @@ class OpinionLinkCreate extends React.Component<Props, State> {
 
   close = () => {
     this.setState({ showModal: false });
-  }
+  };
 
   show = () => {
     this.setState({ showModal: true });
-  }
+  };
 
   handleSubmitSuccess = () => {
     this.close();
     window.location.reload();
-  }
+  };
 
   render() {
     const { submitting, opinion, dispatch } = this.props;
