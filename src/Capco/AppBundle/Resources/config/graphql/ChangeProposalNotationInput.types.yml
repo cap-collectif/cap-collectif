@@ -9,5 +9,3 @@ ChangeProposalNotationInput:
                 type: "Int"
             likers:
                 type: "[ID!]"
-            evaluers:
-                type: "[ID!]"
