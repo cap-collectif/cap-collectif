@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalListRandomRow from '../Proposal/List/ProposalListRandomRow';
@@ -15,6 +15,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
 import LeafletMap from '../Proposal/Map/LeafletMap';
 import { loadProposals, changePage } from '../../redux/modules/proposal';
+import type { State } from '../../types';
 
 export const ProposalStepPage = React.createClass({
   propTypes: {
@@ -148,10 +149,12 @@ export const ProposalStepPage = React.createClass({
   },
 });
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   stepId: undefined,
   isLogged: state.user.user !== null,
-  step: state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
+  step:
+    state.project.currentProjectById &&
+    state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
   proposals: state.proposal.proposalShowedId.map(
     proposal => state.proposal.proposalsById[proposal],
   ),

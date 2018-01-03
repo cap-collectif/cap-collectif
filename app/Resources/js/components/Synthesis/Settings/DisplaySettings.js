@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import renderComponent from '../../Form/Field';
 import Fetcher from '../../../services/Fetcher';
@@ -67,7 +67,7 @@ export class DisplaySettings extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
     level: props.synthesis.displayRules.level,
   },

@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import IdeaActions from '../../../actions/IdeaActions';
 import IdeaForm from '../Form/IdeaForm';
 import { hideIdeaCreateModal } from '../../../redux/modules/idea';
@@ -55,7 +55,7 @@ const IdeaCreateForm = React.createClass({
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return { features: state.default.features };
 };
 

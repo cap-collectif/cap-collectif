@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
@@ -182,7 +182,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminStatusForm);
 
-const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   isAuthor: !!(state.user.user && state.user.user.id === proposal.author.id),
   onSubmit,

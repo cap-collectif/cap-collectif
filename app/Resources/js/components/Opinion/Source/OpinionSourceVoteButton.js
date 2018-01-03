@@ -2,8 +2,9 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import type { State } from '../../../types';
 
 const OpinionSourceVoteButton = React.createClass({
   propTypes: {
@@ -43,7 +44,7 @@ const OpinionSourceVoteButton = React.createClass({
   },
 });
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     user: state.user.user,
     features: state.default.features,

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import renderComponent from '../../Form/Field';
 import { isEmail } from '../../../services/Validator';
@@ -91,7 +91,7 @@ export class IdeaVoteForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   hasCommentValue: formValueSelector(formName)(state, 'comment'),
   isPrivate: formValueSelector(formName)(state, 'private'),
 });

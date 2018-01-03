@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm, formValueSelector, isDirty } from 'redux-form';
 import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import renderInput from '../Form/Field';
 import { updateRegistrationCommunicationForm as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
@@ -47,7 +47,7 @@ export const RegistrationCommunicationForm = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   useTopText: isDirty(formName)(state)
     ? formValueSelector(formName)(state, 'topTextDisplayed') === true
     : state.user.registration_form.topTextDisplayed,

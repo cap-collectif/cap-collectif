@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Table } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import component from '../../Form/Field';
 import { AlertAdminForm } from '../../Alert/AlertAdminForm';
 import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation';
@@ -106,7 +106,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(NotificationsForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   return {
     initialValues: props.viewer.notificationsConfiguration,
   };

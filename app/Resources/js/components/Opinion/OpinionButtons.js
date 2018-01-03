@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionEditButton from './OpinionVersionEditButton';
@@ -81,7 +81,7 @@ const OpinionButtons = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });

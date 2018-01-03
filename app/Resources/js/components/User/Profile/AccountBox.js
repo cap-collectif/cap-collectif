@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Panel, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import AccountForm from './AccountForm';
@@ -42,7 +42,7 @@ export const AccountBox = React.createClass({
   },
 });
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),

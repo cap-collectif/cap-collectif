@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
 import { editOpinionVersion as onSubmit } from '../../redux/modules/opinion';
@@ -72,7 +72,7 @@ const OpinionVersionEditForm = React.createClass({
   },
 });
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   initialValues: {
     title:
       state.opinion.currentVersionId &&
@@ -88,7 +88,9 @@ export default connect((state: State) => ({
     state.opinion.currentVersionId &&
     state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
   versionId: state.opinion.currentVersionId,
-}))(
+});
+
+export default connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,

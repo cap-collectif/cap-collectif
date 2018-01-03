@@ -1,26 +1,25 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { showOpinionVersionCreateModal } from '../../redux/modules/opinion';
+import type { Dispatch } from '../../types';
 
-const OpinionVersionCreateButton = React.createClass({
-  propTypes: {
-    className: PropTypes.string,
-    style: PropTypes.object.isRequired,
-    isContribuable: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  className?: string,
+  style: Object,
+  isContribuable: boolean,
+  dispatch: Dispatch,
+};
 
-  getDefaultProps() {
-    return {
-      isContribuable: false,
-      className: '',
-      style: {},
-    };
-  },
+class OpinionVersionCreateButton extends React.Component<Props> {
+  static defaultProps = {
+    isContribuable: false,
+    className: '',
+    style: {},
+  };
 
   render() {
     const { isContribuable, dispatch, style, className } = this.props;
@@ -43,7 +42,7 @@ const OpinionVersionCreateButton = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default connect()(OpinionVersionCreateButton);

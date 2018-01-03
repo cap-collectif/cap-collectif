@@ -2,7 +2,7 @@
 import React from 'react';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
@@ -214,7 +214,7 @@ export class ProposalPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     features: state.default.features,
     proposal:

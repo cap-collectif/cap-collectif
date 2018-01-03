@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
@@ -67,10 +67,12 @@ const OpinionSourceFormModal = React.createClass({
   },
 });
 
-export default connect((state: State, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   show:
     (!props.source && state.opinion.showSourceCreateModal) ||
     (props.source && state.opinion.showSourceEditModal === props.source.id) ||
     false,
   submitting: isSubmitting(formName)(state),
-}))(OpinionSourceFormModal);
+});
+
+export default connect(mapStateToProps)(OpinionSourceFormModal);
