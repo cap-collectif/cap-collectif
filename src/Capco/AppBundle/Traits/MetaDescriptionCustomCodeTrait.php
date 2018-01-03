@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait MetaDescriptionTrait
+trait MetaDescriptionCustomCodeTrait
 {
     /**
      * @ORM\Column(name="meta_description", type="string", nullable=true, length=160)
@@ -15,18 +15,29 @@ trait MetaDescriptionTrait
     private $metaDescription;
 
     /**
-     * @return string
+     * @ORM\Column(name="custom_code", type="text", nullable=true)
      */
+    private $customCode;
+
     public function getMetaDescription()
     {
         return $this->metaDescription;
     }
 
-    /**
-     * @param string $metaDescription
-     */
     public function setMetaDescription($metaDescription)
     {
         $this->metaDescription = $metaDescription;
+    }
+
+    public function getCustomCode()
+    {
+        return $this->customCode;
+    }
+
+    public function setCustomCode($customCode)
+    {
+        $this->customCode = $customCode;
+
+        return $this;
     }
 }

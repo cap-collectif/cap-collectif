@@ -82,3 +82,7 @@
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% if theme.customCode is defined and theme.customCode != '' %}{{ theme.customCode | raw }}{% endif %}
+{% endblock %}

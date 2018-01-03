@@ -114,4 +114,6 @@
             App.resized('.media--user-thumbnail');
         });
     </script>
+    {% set customCode = capco_site_parameter_value('members.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
 {% endblock %}

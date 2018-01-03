@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\IndexableInterface;
-use Capco\AppBundle\Traits\MetaDescriptionTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Theme implements IndexableInterface
 {
-    use UuidTrait, MetaDescriptionTrait;
+    use UuidTrait, MetaDescriptionCustomCodeTrait;
 
     const STATUS_CLOSED = 0;
     const STATUS_OPENED = 1;

@@ -243,11 +243,11 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 770
         type: 1
     SiteParameterScript:
-        keyname: global.site.embed_js
-        category: settings.global
-        value: ''
-        position: 3
-        type: 3
+    keyname: global.site.embed_js
+    category: settings.global
+    value: ''
+    position: 3
+    type: 3
 
     SiteParameterLoginTop:
         keyname: login.text.top
@@ -404,3 +404,57 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 441
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterIdeasCustomCode:
+        keyname: ideas.customcode
+        category: pages.ideas
+        value: ''
+        position: 6
+        type: 3
+    SiteParameterHomeCustomCode:
+        keyname: homepage.customcode
+        category: pages.homepage
+        value: ''
+        position: 102
+        type: 3
+    SiteParameterEventCustomCode:
+        keyname: event.customcode
+        category: pages.events
+        value: ''
+        position: 305
+        type: 3
+    SiteParameterBlogCustomCode:
+        keyname: blog.customcode
+        category: pages.blog
+        value: ''
+        position: 791
+        type: 3
+    SiteParameterThemesCustomCode:
+        keyname: themes.customcode
+        category: pages.themes
+        value: ''
+        position: 522
+        type: 3
+    SiteParameterProjectsCustomCode:
+        keyname: projects.customcode
+        category: pages.projects
+        value: ''
+        position: 322
+        type: 3
+    SiteParameterMembersCustomCode:
+        keyname: members.customcode
+        category: pages.members
+        value: ''
+        position: 784
+        type: 3
+    SiteParameterContactCustomCode:
+        keyname: contact.customcode
+        category: pages.contact
+        value: ''
+        position: 622
+        type: 3
+    SiteParameterTrashIdeasCustomCode:
+        keyname: ideas_trash.customcode
+        category: pages.ideas_trash
+        value: ''
+        position: 442
+        type: 3

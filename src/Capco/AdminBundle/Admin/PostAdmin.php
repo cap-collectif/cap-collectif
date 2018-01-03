@@ -185,7 +185,14 @@ class PostAdmin extends Admin
                 'label' => 'post.metadescription',
                 'required' => false,
                 'help' => 'admin.help.metadescription',
-            ])->end();
+            ])
+            ->add('customCode', null, [
+                'label' => 'admin.customcode',
+                'required' => false,
+                'help' => 'admin.help.customcode',
+                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+            ])
+            ->end();
 
         $formMapper
             ->end()

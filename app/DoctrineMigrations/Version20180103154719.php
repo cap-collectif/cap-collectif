@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20171207153621 extends AbstractMigration
+class Version20180103154719 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -30,6 +30,19 @@ class Version20171207153621 extends AbstractMigration
         $this->addSql('ALTER TABLE page ADD cover_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\'');
         $this->addSql('ALTER TABLE page ADD CONSTRAINT FK_140AB620922726E9 FOREIGN KEY (cover_id) REFERENCES media__media (id) ON DELETE SET NULL');
         $this->addSql('CREATE INDEX IDX_140AB620922726E9 ON page (cover_id)');
+
+        $this->addSql('ALTER TABLE theme ADD custom_code LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE step ADD custom_code LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE page ADD custom_code LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE project ADD custom_code LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE event ADD custom_code LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE blog_post ADD custom_code LONGTEXT DEFAULT NULL');
+    }
+
+    private function setPosition($keyname, $position)
+    {
+        echo "-> Updating $keyname with position $position " . PHP_EOL;
+        echo $this->connection->update('site_parameter', ['position' => $position], ['keyname' => $keyname]) . ' rows updated';
     }
 
     public function postUp(Schema $schema)
@@ -39,23 +52,27 @@ class Version20171207153621 extends AbstractMigration
         $this->setPosition('ideas.content.body', 3);
         $this->setPosition('ideas.pagination', 4);
         $this->setPosition('ideas.metadescription', 5);
+        $this->setPosition('ideas.customcode', 6);
 
         $this->setPosition('blog.jumbotron.title', 1);
         $this->setPosition('blog.jumbotron.body', 2);
         $this->setPosition('blog.content.body', 3);
         $this->setPosition('blog.pagination.size', 4);
         $this->setPosition('blog.metadescription', 5);
+        $this->setPosition('blog.customcode', 6);
 
         $this->setPosition('events.jumbotron.title', 1);
         $this->setPosition('events.jumbotron.body', 2);
         $this->setPosition('events.content.body', 3);
         $this->setPosition('events.metadescription', 4);
+        $this->setPosition('events.customcode', 5);
 
         $this->setPosition('members.jumbotron.title', 1);
         $this->setPosition('members.jumbotron.body', 2);
         $this->setPosition('members.content.body', 3);
         $this->setPosition('members.pagination.size', 4);
         $this->setPosition('members.metadescription', 5);
+        $this->setPosition('members.customcode', 6);
 
         $this->setPosition('contact.jumbotron.title', 1);
         $this->setPosition('contact.jumbotron.body', 2);
@@ -63,16 +80,12 @@ class Version20171207153621 extends AbstractMigration
         $this->setPosition('contact.content.phone_number', 4);
         $this->setPosition('admin.mail.contact', 5);
         $this->setPosition('contact.metadescription', 6);
+        $this->setPosition('contact.customcode', 7);
 
         $this->setPosition('ideas.trashed.jumbotron.title', 1);
         $this->setPosition('ideas.trashed.content.body', 2);
         $this->setPosition('ideas_trash.metadescription', 3);
-    }
-
-    private function setPosition($keyname, $position)
-    {
-        echo "-> Updating $keyname with position $position " . PHP_EOL;
-        echo $this->connection->update('site_parameter', ['position' => $position], ['keyname' => $keyname]) . ' rows updated';
+        $this->setPosition('ideas_trash.customcode', 4);
     }
 
     /**
@@ -95,5 +108,12 @@ class Version20171207153621 extends AbstractMigration
         $this->addSql('ALTER TABLE page DROP FOREIGN KEY FK_140AB620922726E9');
         $this->addSql('DROP INDEX IDX_140AB620922726E9 ON page');
         $this->addSql('ALTER TABLE page DROP cover_id');
+
+        $this->addSql('ALTER TABLE blog_post DROP custom_code');
+        $this->addSql('ALTER TABLE event DROP custom_code');
+        $this->addSql('ALTER TABLE page DROP custom_code');
+        $this->addSql('ALTER TABLE project DROP custom_code');
+        $this->addSql('ALTER TABLE step DROP custom_code');
+        $this->addSql('ALTER TABLE theme DROP custom_code');
     }
 }

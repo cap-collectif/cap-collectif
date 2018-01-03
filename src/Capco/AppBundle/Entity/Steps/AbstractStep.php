@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
-use Capco\AppBundle\Traits\MetaDescriptionTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -35,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractStep
 {
-    use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionTrait;
+    use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
     /**
      * @var array

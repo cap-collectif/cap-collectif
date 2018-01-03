@@ -126,4 +126,7 @@
             App.resized('.event-js');
         });
     </script>
+    {% set customCode = capco_site_parameter_value('event.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+
 {% endblock %}

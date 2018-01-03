@@ -261,7 +261,7 @@ class SiteParameter
         $this->category = $category;
     }
 
-    public function isSocialNetworkDescription(): bool
+    public function isSocialNetworkDescription()
     {
         return $this->isSocialNetworkDescription;
     }
@@ -269,5 +269,19 @@ class SiteParameter
     public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription)
     {
         $this->isSocialNetworkDescription = $isSocialNetworkDescription;
+
+        return $this;
+    }
+
+    public function isCustomCodeDescription()
+    {
+        return $this->isCustomCodeDescription;
+    }
+
+    public function setIsCustomCodeDescription(bool $isCustomCodeDescription)
+    {
+        $this->isCustomCodeDescription = $isCustomCodeDescription;
+
+        return $this;
     }
 }

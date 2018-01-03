@@ -57,7 +57,14 @@ class PageAdmin extends Admin
                         'hide_context' => true,
                         'provider' => 'sonata.media.provider.image',
                     ],
-                ])->end();
+                ])
+                ->add('customCode', null, [
+                    'label' => 'admin.customcode',
+                    'required' => false,
+                    'help' => 'admin.help.customcode',
+                    'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+                ])
+                ->end();
     }
 
     // Fields to be shown on filter forms

@@ -43,3 +43,9 @@
 {% block body %}
     {{ react_render_component('IdeasIndexPageApp', {'props': props}) }}
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% set customCode = capco_site_parameter_value('ideas.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+{% endblock %}
+

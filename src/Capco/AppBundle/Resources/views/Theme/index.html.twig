@@ -102,4 +102,6 @@
             App.resized('.theme');
         });
     </script>
+    {% set customCode = capco_site_parameter_value('themes.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
 {% endblock %}

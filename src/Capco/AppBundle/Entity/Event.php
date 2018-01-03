@@ -7,7 +7,7 @@ use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\MetaDescriptionTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface
 {
-    use DateHelperTrait, CommentableTrait, IdTrait, TextableTrait, MetaDescriptionTrait;
+    use DateHelperTrait, CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
     /**
      * @var string

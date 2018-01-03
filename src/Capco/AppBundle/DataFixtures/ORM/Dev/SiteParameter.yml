@@ -97,6 +97,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 5
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterIdeasCustomCode:
+        keyname: ideas.customcode
+        category: pages.ideas
+        value: ''
+        position: 6
+        type: 3
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
         category: pages.ideas_trash
@@ -361,6 +367,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 101
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterHomeCustomCode:
+        keyname: homepage.customcode
+        category: pages.homepage
+        value: ''
+        position: 102
+        type: 3
     SiteParameterEventMetaDescription:
         keyname: event.metadescription
         category: pages.events
@@ -368,6 +380,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 304
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterEventCustomCode:
+        keyname: event.customcode
+        category: pages.events
+        value: ''
+        position: 305
+        type: 3
     SiteParameterBlogMetaDescription:
         keyname: blog.metadescription
         category: pages.blog
@@ -375,6 +393,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 790
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterBlogCustomCode:
+        keyname: blog.customcode
+        category: pages.blog
+        value: ''
+        position: 791
+        type: 3
     SiteParameterThemesMetaDescription:
         keyname: themes.metadescription
         category: pages.themes
@@ -382,6 +406,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 521
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterThemesCustomCode:
+        keyname: themes.customcode
+        category: pages.themes
+        value: ''
+        position: 522
+        type: 3
     SiteParameterProjectsMetaDescription:
         keyname: projects.metadescription
         category: pages.projects
@@ -389,6 +419,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 321
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterProjectsCustomCode:
+        keyname: projects.customcode
+        category: pages.projects
+        value: ''
+        position: 322
+        type: 3
     SiteParameterMembersMetaDescription:
         keyname: members.metadescription
         category: pages.members
@@ -396,6 +432,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 783
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterMembersCustomCode:
+        keyname: members.customcode
+        category: pages.members
+        value: ''
+        position: 784
+        type: 3
     SiteParameterContactMetaDescription:
         keyname: contact.metadescription
         category: pages.contact
@@ -403,6 +445,12 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 621
         isSocialNetworkDescription: true
         type: 0
+    SiteParameterContactCustomCode:
+        keyname: contact.customcode
+        category: pages.contact
+        value: ''
+        position: 622
+        type: 3
     SiteParameterTrashIdeasMetaDescription:
         keyname: ideas_trash.metadescription
         category: pages.ideas_trash
@@ -410,4 +458,9 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 441
         isSocialNetworkDescription: true
         type: 0
-
+    SiteParameterTrashIdeasCustomCode:
+        keyname: ideas_trash.customcode
+        category: pages.ideas_trash
+        value: ''
+        position: 442
+        type: 3

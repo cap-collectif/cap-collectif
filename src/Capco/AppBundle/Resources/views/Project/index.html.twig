@@ -58,3 +58,9 @@
 {% block reduxStore %}
     {% include '@CapcoApp/redux_store.html.twig' with {'projectReducerData' : params} %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% set customCode = capco_site_parameter_value('projects.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+{% endblock %}
