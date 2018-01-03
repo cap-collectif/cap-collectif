@@ -17,13 +17,15 @@ class ProposalFusionType extends AbstractType
             ->add('childConnections', EntityType::class, [
                 'multiple' => true,
                 'class' => Proposal::class,
+                'validation_groups' => ['createProposalFusion'],
                 'constraints' => [
+                  new Assert\NotBlank(['groups' => ['createProposalFusion']]),
                   new Assert\Count([
-                    'groups' => ['CreateFusion'],
-                    'min' => 2,
-                    'minMessage' => 'You must specify at least 2 proposals to merge.',
+                    'groups' => ['createProposalFusion'],
+                    'min' => 5,
+                    // 'minMessage' => 'You must specify at least 2 proposals to merge.',
                     'max' => 100,
-                    'maxMessage' => 'You cannot specify more than 100 proposals to merge.',
+                    // 'maxMessage' => 'You cannot specify more than 100 proposals to merge.',
                   ]),
                   // TODO AssertProposalsAreFromSameProposalForm
                 ],
@@ -39,7 +41,7 @@ class ProposalFusionType extends AbstractType
             'data_class' => Proposal::class,
             'csrf_protection' => false,
             'translation_domain' => false,
-            'validation_groups' => ['CreateFusion'],
+            'validation_groups' => ['createProposalFusion'],
             'cascade_validation' => true,
         ]);
     }
