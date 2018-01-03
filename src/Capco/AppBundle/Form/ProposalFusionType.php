@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class ProposalFusionType extends AbstractType
 {
@@ -17,22 +17,15 @@ class ProposalFusionType extends AbstractType
             ->add('childConnections', EntityType::class, [
                 'multiple' => true,
                 'class' => Proposal::class,
-                'validation_groups' => ['createProposalFusion'],
-                'constraints' => [
-                  new Assert\NotBlank(['groups' => ['createProposalFusion']]),
-                  new Assert\Count([
-                    'groups' => ['createProposalFusion'],
-                    'min' => 5,
-                    // 'minMessage' => 'You must specify at least 2 proposals to merge.',
-                    'max' => 100,
-                    // 'maxMessage' => 'You cannot specify more than 100 proposals to merge.',
-                  ]),
-                  // TODO AssertProposalsAreFromSameProposalForm
-                ],
+                // We make sure that all childs are from the same proposalForm
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                    ->where('p.proposalForm = :form')
+                    ->setParameter('form', $options['proposalForm'])
+                  ;
+                },
             ])
         ;
-
-        parent::buildForm($builder, $options);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -41,8 +34,8 @@ class ProposalFusionType extends AbstractType
             'data_class' => Proposal::class,
             'csrf_protection' => false,
             'translation_domain' => false,
-            'validation_groups' => ['createProposalFusion'],
-            'cascade_validation' => true,
+            'proposalForm' => null,
+            'validation_groups' => false,
         ]);
     }
 }

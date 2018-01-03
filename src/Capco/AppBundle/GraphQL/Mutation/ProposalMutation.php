@@ -37,38 +37,6 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function createFusion(Argument $input, User $author)
-    {
-        $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $formFactory = $this->container->get('form.factory');
-
-        $title = $this->container->get('translator')->trans('untitled-proposal', [], 'CapcoAppBundle');
-        $proposal = (new Proposal())
-            ->setAuthor($author)
-            ->setEnabled(true)
-            ->setTitle($title)
-        ;
-
-        $form = $formFactory->create(ProposalFusionType::class, $proposal);
-        $form->submit(['childConnections' => $input->getRawArguments()['fromProposals']]);
-
-        if (!$form->isValid()) {
-            $this->handleErrors($form);
-        }
-
-        $proposalForm = $proposal->getChildConnections()->first()->getProposalForm();
-        $proposal->setProposalForm($proposalForm);
-
-        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
-            $proposal->setStatus($defaultStatus);
-        }
-
-        $em->persist($proposal);
-        $em->flush();
-
-        return ['proposal' => $proposal];
-    }
-
     public function changeNotation(Argument $input)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');

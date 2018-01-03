@@ -1,0 +1,11 @@
+services:
+  Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@form.factory"
+          - "@capco.proposal.repository"
+          - "@translator"
+      tags:
+          - { name: overblog_graphql.mutation }

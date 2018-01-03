@@ -623,7 +623,6 @@ export type ProposalAction =
   | LoadMarkersAction
   | OpenCreateFusionModalAction
   | CloseCreateFusionModalAction
-  | CancelSubmitFusionFormAction
   | CloseVotesModalActionAction
   | OpenEditProposalModalAction
   | LoadMarkersSuccessAction

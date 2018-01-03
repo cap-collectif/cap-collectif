@@ -38,7 +38,7 @@ Mutation:
                builderConfig:
                    inputType: CreateProposalFusionInput
                    payloadType: CreateProposalFusionPayload
-                   mutateAndGetPayload: "@=mutation('createProposalFusion', [value, user])"
+                   mutateAndGetPayload: "@=mutation('Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFusionMutation', [value, user])"
           changeProposalNotation:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
