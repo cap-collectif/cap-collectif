@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import renderComponent from '../../Form/Field';
 import { isUrl } from '../../../services/Validator';
@@ -121,7 +121,7 @@ export const IdeaForm = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { idea, themeId }) => {
+const mapStateToProps = (state: State, { idea, themeId }) => {
   return {
     themes: state.default.themes,
     initialValues: {

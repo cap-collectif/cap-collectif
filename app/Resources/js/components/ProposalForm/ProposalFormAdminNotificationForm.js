@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -139,7 +139,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminNotificationForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: props.proposalForm.notificationsConfiguration,
 });
 

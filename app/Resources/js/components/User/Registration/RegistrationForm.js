@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
@@ -228,7 +228,7 @@ export const RegistrationForm = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,

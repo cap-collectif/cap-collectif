@@ -88,7 +88,7 @@ export const OpinionList = React.createClass({
                   stepId={consultation.id}
                   projectId={consultation.projectId}
                   disabled={!consultation.open}
-                  label={intl.formatMessage({ id: 'opinion.create.button' })}
+                  label={<FormattedMessage id="opinion.create.button" />}
                 />
               )}
             </div>

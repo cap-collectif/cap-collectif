@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import type { IntlShape } from 'react-intl';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
@@ -77,12 +77,10 @@ export class OpinionCreateModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => {
+export default connect((state: State, props: Object) => {
   return {
     show: state.opinion.showOpinionCreateModal === props.opinionType.id,
     submitting: isSubmitting(formName)(state),
     step: state.project.projectsById[props.projectId].stepsById[props.stepId],
   };
-};
-
-export default connect(mapStateToProps)(injectIntl(OpinionCreateModal));
+})(injectIntl(OpinionCreateModal));

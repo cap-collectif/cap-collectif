@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -127,7 +127,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
+const mapStateToProps = (state, props) => ({
   kind: selector(state, `${props.member}.kind`) || '',
 });
 

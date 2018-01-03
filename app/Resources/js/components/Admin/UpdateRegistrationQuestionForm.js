@@ -1,6 +1,7 @@
 // @flow
 import { reduxForm } from 'redux-form';
-import { connect, type MapStateToProps, type Connector } from 'react-redux';
+import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
 import { requestUpdateRegistrationField as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
 import RegistrationQuestionForm from './RegistrationQuestionForm';
@@ -25,7 +26,7 @@ const typeToEnum = (type: string) => {
 };
 
 export const formName = 'update-registration-question';
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = (state: State) => {
   const fieldId = state.default.updatingRegistrationFieldModal;
   const field = state.user.registration_form.questions.find(f => f.id === fieldId);
   if (!field) {

@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { connect, type Connector, type MapStateToProps } from 'react-redux';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
@@ -11,14 +12,15 @@ import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 
 type Props = {
+  intl: IntlShape,
   show: boolean,
   opinion: Object,
-  step: ?Object,
+  step: Object,
   submitting: boolean,
   dispatch: Dispatch,
 };
 
-export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
+export class OpinionEditModal extends React.Component<Props> {
   render() {
     // eslint-disable-next-line
     const { dispatch, submitting, show, opinion, step, intl } = this.props;
@@ -64,18 +66,14 @@ export class OpinionEditModal extends React.Component<Props & { intl: IntlShape 
   }
 }
 
-type ParentProps = { opinion: Object };
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => ({
+const mapStateToProps = (state: State, props: Object) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
-  step: state.project.currentProjectById
-    ? state.project.projectsById[state.project.currentProjectById].steps.filter(
-        step => step.type === 'consultation',
-      )[0]
-    : null,
+  step:
+    state.project.currentProjectById &&
+    state.project.projectsById[state.project.currentProjectById].steps.filter(
+      step => step.type === 'consultation',
+    )[0],
 });
 
-const connector: Connector<ParentProps, Props> = connect(mapStateToProps);
-
-export default connector(injectIntl(OpinionEditModal));
+export default connect(mapStateToProps)(injectIntl(OpinionEditModal));

@@ -660,25 +660,7 @@ export type ProposalAction =
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
   | ChangeProposalListViewAction
-  | LoadMarkersAction
-  | OpenCreateFusionModalAction
-  | CloseCreateFusionModalAction
-  | CancelSubmitFusionFormAction
-  | CloseVotesModalActionAction
-  | OpenEditProposalModalAction
-  | LoadMarkersSuccessAction
-  | FetchVotesSucceededAction
-  | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
-  | {
-      type: 'proposal/FETCH_SUCCEEDED',
-      proposals: Array<Object>,
-      count: number,
-    }
-  | {
-      type: 'proposal/POSTS_FETCH_SUCCEEDED',
-      posts: Array<Object>,
-      proposalId: Uuid,
-    };
+  | LoadMarkersAction;
 
 export function* saga(): Generator<*, *, *> {
   yield [
@@ -872,6 +854,13 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return fetchVotesSucceedReducer(state, action);
     case 'proposal/POSTS_FETCH_FAILED': {
       console.log('proposal/POSTS_FETCH_FAILED', action.error); // eslint-disable-line no-console
+      return state;
+    }
+    case 'proposal/SEND_PROPOSAL_NOTIFICATION_SUCCEED': {
+      return { ...state, lastNotifiedStepId: action.stepId };
+    }
+    case 'proposal/SEND_PROPOSAL_NOTIFICATION_ERROR': {
+      console.log('proposal/SEND_PROPOSAL_NOTIFICATION_ERROR', action.error); // eslint-disable-line no-console
       return state;
     }
     case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {

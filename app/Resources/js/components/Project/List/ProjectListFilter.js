@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Col, Row, FormControl, Button } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   fetchProjects,
   changeOrderBy,
@@ -150,7 +150,7 @@ const ProjectListFilter = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = (state: State) => {
   return {
     features: state.default.features,
     themes: state.default.themes,

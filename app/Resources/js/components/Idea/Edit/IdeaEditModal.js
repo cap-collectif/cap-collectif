@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
@@ -58,8 +58,7 @@ export const IdeaEditModal = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
+export default connect((state: State, props) => ({
   show: state.idea.showEditModal === props.idea.id,
   submitting: isSubmitting(formName)(state),
-});
-export default connect(mapStateToProps)(IdeaEditModal);
+}))(IdeaEditModal);

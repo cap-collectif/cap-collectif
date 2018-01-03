@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import LoginSocialButtons from './LoginSocialButtons';
 import LoginForm from './LoginForm';
@@ -35,7 +35,7 @@ export const LoginBox = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   textTop: state.default.parameters['login.text.top'],
   textBottom: state.default.parameters['login.text.bottom'],
 });

@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import {
@@ -99,7 +99,7 @@ export const AccountForm = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
   confirmationEmailResent: state.user.confirmationEmailResent,
   initialValues: {

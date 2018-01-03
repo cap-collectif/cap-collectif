@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
@@ -47,10 +47,7 @@ const OpinionVotesBar = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
+const mapStateToProps = (state: State, props: { opinion: OpinionAndVersion }) => ({
   opinion: {
     ...props.opinion,
     ...(Object.keys(state.opinion.opinionsById).length
