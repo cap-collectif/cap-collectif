@@ -292,12 +292,6 @@ Capco\AppBundle\Entity\SiteParameter:
            <p><text(100)></p>
         position: 303
         type: 1
-    SiteParameterEventMetaDescription:
-        keyname: event.metadescription
-        category: pages.events
-        value: ''
-        position: 304
-        type: 0
 
     SiteParameterHomepageDarkening:
         keyname: homepage.jumbotron.darken
@@ -361,7 +355,7 @@ Capco\AppBundle\Entity\SiteParameter:
         type: 9
 
     SiteParameterMetaDescription:
-        keyname: homepage.meta_description
+        keyname: homepage.metadescription
         category: pages.homepage
         value: Participez à l'élaboration de la loi
         position: 101
