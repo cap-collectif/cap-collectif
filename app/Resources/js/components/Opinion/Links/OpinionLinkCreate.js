@@ -35,15 +35,15 @@ class OpinionLinkCreate extends React.Component<Props, State> {
     });
   }
 
-  close() {
+  close = () => {
     this.setState({ showModal: false });
   }
 
-  show() {
+  show = () => {
     this.setState({ showModal: true });
   }
 
-  handleSubmitSuccess() {
+  handleSubmitSuccess = () => {
     this.close();
     window.location.reload();
   }
