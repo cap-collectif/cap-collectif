@@ -430,13 +430,7 @@ class ProjectDownloadResolver
 
     private function getProposalContent(array $proposal)
     {
-        $body = $this->formatText(html_entity_decode($proposal['body']));
-        foreach ($proposal['responses'] as $response) {
-            $body .= "\n\n" . $response['question']['title'] . ' :';
-            $body .= "\n" . $this->formatText($response['value']);
-        }
-
-        return $body;
+        return $this->formatText(html_entity_decode($proposal['body']));
     }
 
     private function getWriterFromData($data, $headers, $title): \PHPExcel_Writer_IWriter
