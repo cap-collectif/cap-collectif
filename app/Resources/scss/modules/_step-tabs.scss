@@ -1,14 +1,59 @@
 /* ===============================================================
     $SUB-NAVBAR
 ================================================================*/
-.step-tabs-bar {
-    border: 1px solid $border-color;
-    background-color: $white;
-    margin-bottom: 0;
-    font-size: 15px;
-    overflow: hidden;
+.step-tabs {
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
 
-    .nav {
+    &__bar {
+        background-color: $white;
+        margin-bottom: 0;
+        font-size: 15px;
+        position: relative;
+
+        &.container {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .nav {
+
+        }
+    }
+
+    &__tab-prev, &__tab-next {
+        position: absolute;
+        height: 100%;
+        padding: 0 15px;
+        // width: 50px;
+        display: flex;
+
+        span {
+            height: 30px;
+            width: 30px;
+            display: flex;
+            margin: auto;
+            border: 1px solid $border-color;
+            @include border-radius(50%);
+
+            i {
+                margin: 5px 6px;
+            }
+        }
+    }
+
+    &__tab-prev {
+        left: -46px;
+        border-right: 1px solid $border-color;
+    }
+
+    &__tab-next {
+        right: -46px;
+        border-left: 1px solid $border-color;
+    }
+
+    &__list {
+        overflow: hidden;
         flex-wrap: nowrap;
         display: flex;
 
@@ -18,16 +63,20 @@
             display: inline-block;
             font-size: 16px;
 
-            &:not(.active):hover {
-                background-color: $light-gray;
-                border-bottom: 3px solid $light-gray;
+            &:not(.active) {
+                &:hover {
+                    background-color: $light-gray;
+                    border-bottom: 3px solid $light-gray;
+                }
+
+                border-bottom: 3px solid $white;
             }
 
             a {
                 display: flex;
                 padding: 15px;
 
-                &:hover {
+                &:hover, &:focus {
                     background-color: transparent;
                 }
             }
@@ -91,16 +140,6 @@
                     color: $white;
                 }
             }
-            //
-            //&::after {
-            //    content: "";
-            //    width: 1px;
-            //    background-color: $white;
-            //    height: 70px;
-            //    position: absolute;
-            //    right: -1px;
-            //    top: 0;
-            //}
         }
     }
 }

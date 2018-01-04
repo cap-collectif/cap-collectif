@@ -11,9 +11,9 @@
     {{ parent() }} - {{ project.title }}
 {% endblock %}
 
-{% block reduxStore %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
-{% endblock %}
+{#{% block reduxStore %}#}
+    {#{% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}#}
+{#{% endblock %}#}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -30,10 +30,19 @@
         {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
-    <div class="container container--custom" style="padding-top: 0">
+    <section>
         <div class="block">
             {{ render(controller('CapcoAppBundle:Site/Project:stepTabs', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
+            {#{{ react_render_component('ProjectStepTabsApp', {
+                'props': {
+                    'projectSteps': projectSteps
+                },
+            })}}#}
         </div>
+    </section>
+
+    <div class="container container--custom" style="padding-top: 0">
+
         <div class="row">
             <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
                 {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
