@@ -43,15 +43,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   };
 
   if (props.proposal.form.evaluationForm) {
-    const variablesEvaluation = {
+    const evaluationInput = {
       input: {
         proposalId: props.proposal.id,
-        responses: formatResponsesToSubmit(data, props),
         version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
+        responses: formatResponsesToSubmit(values, props),
       },
     };
-
-    return ChangeProposalEvaluationMutation.commit(variablesEvaluation).then(response => {
+    return ChangeProposalEvaluationMutation.commit(evaluationInput).then(response => {
       if (!response.changeProposalEvaluation) {
         throw new SubmissionError({
           _error: 'proposal_form.admin.evaluation.error.modified_since',
@@ -60,8 +59,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         return ChangeProposalNotationMutation.commit({
           input: {
             proposalId: props.proposal.id,
-            estimation: values.estimation,
-            likers: values.likers,
+            estimation: data.estimation,
+            likers: data.likers,
           },
         });
       }
@@ -70,8 +69,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalNotationMutation.commit({
     input: {
       proposalId: props.proposal.id,
-      estimation: values.estimation,
-      likers: values.likers,
+      estimation: data.estimation,
+      likers: data.likers,
     },
   });
 };

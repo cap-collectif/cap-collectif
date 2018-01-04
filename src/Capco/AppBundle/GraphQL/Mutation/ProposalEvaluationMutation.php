@@ -48,8 +48,7 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             try {
                 $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
             } catch (OptimisticLockException $e) {
-                throw new UserError('Proposal evaluation was modified, please refresh the page ('
-                    . $e->getMessage() . ')');
+                throw new UserError('The proposal was modified. Please refresh the page', 409);
             }
         }
 

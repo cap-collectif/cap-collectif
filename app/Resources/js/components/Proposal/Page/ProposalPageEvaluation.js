@@ -2,7 +2,13 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { type FormProps, reduxForm, formValueSelector, FieldArray, SubmissionError } from 'redux-form';
+import {
+  type FormProps,
+  reduxForm,
+  formValueSelector,
+  FieldArray,
+  SubmissionError,
+} from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
@@ -20,7 +26,7 @@ type FormValues = { responses: ResponsesValues };
 type RelayProps = {
   proposal: ProposalPageEvaluation_proposal,
 };
-type Props = FormProps & FormValues & RelayProps & { error: ?string, intl: IntlShape };
+type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 
 const formName = 'proposal-evaluation';
 
