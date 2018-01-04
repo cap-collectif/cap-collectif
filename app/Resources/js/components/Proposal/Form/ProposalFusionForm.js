@@ -9,11 +9,11 @@ import CreateProposalFusionMutation, {
 } from '../../../mutations/CreateProposalFusionMutation';
 import type { State, Uuid } from '../../../types';
 
-export const formName = 'proposal';
+export const formName = 'create-proposal-fusion';
 
 type FormValues = {
   project: ?Uuid,
-  fromProposals: $ReadOnlyArray<Uuid>,
+  fromProposals: $ReadOnlyArray<{ value: Uuid }>,
 };
 
 const validate = (values: FormValues) => {
@@ -29,14 +29,14 @@ const validate = (values: FormValues) => {
 
 const onSubmit = (values: FormValues) => {
   return CreateProposalFusionMutation.commit({
-    input: { fromProposals: values.fromProposals },
+    input: { fromProposals: values.fromProposals.map(proposal => proposal.value) },
   })
     .then((response: CreateProposalFusionMutationResponse) => {
-      if (!response.createFusion || !response.createFusion.proposal) {
-        throw new Error('Mutation "createFusion" failed.');
+      if (!response.createProposalFusion || !response.createProposalFusion.proposal) {
+        throw new Error('Mutation "createProposalFusion" failed.');
       }
-      const createdProposal = response.createFusion.proposal;
-      window.location.href = createdProposal.show_url;
+      const createdProposal = response.createProposalFusion.proposal;
+      window.location.href = createdProposal.adminUrl;
     })
     .catch(() => {
       throw new SubmissionError({
@@ -68,7 +68,6 @@ export class ProposalFusionForm extends React.Component<Props> {
           onChange={() => onProjectChange(formName, 'childConnections', [])}
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
-        <br />
         {currentCollectStep && (
           <Field
             name="fromProposals"
@@ -126,13 +125,12 @@ const getCurrentCollectStep = (state: State): ?Object => {
     .filter(s => s.type === 'collect')[0];
 };
 
-export default connect(
-  (state: State) => ({
-    projects: getBudgetProjects(state.project.projectsById),
-    currentCollectStep: getCurrentCollectStep(state),
-  }),
-  { onProjectChange: change },
-)(
+const mapStateToProps = (state: State) => ({
+  projects: getBudgetProjects(state.project.projectsById),
+  currentCollectStep: getCurrentCollectStep(state),
+});
+
+export default connect(mapStateToProps, { onProjectChange: change })(
   reduxForm({
     form: formName,
     destroyOnUnmount: false,

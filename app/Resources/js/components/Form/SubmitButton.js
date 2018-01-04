@@ -1,43 +1,41 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
+import type { State } from '../../types';
 
-const SubmitButton = React.createClass({
-  displayName: 'SubmitButton',
+type Props = {
+  id: string,
+  onSubmit: () => any,
+  isSubmitting: boolean,
+  label: string,
+  bsStyle: string,
+  className: string,
+  style: Object,
+  disabled: boolean,
+  loginOverlay: boolean,
+  user: Object,
+};
 
-  propTypes: {
-    id: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    label: PropTypes.string,
-    bsStyle: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    disabled: PropTypes.bool,
-    loginOverlay: PropTypes.bool,
-    user: PropTypes.object,
-  },
+class SubmitButton extends React.Component<Props> {
+  static defaultProps = {
+    label: 'global.publish',
+    bsStyle: 'primary',
+    className: '',
+    style: {},
+    disabled: false,
+    loginOverlay: false,
+  };
 
-  getDefaultProps() {
-    return {
-      label: 'global.publish',
-      bsStyle: 'primary',
-      className: '',
-      style: {},
-      disabled: false,
-      loginOverlay: false,
-    };
-  },
-
-  onClick() {
+  onClick = () => {
     const { isSubmitting, loginOverlay, onSubmit, user } = this.props;
     if ((loginOverlay && !user) || isSubmitting) {
       return null;
     }
     onSubmit();
-  },
+  };
 
   render() {
     const { loginOverlay, isSubmitting, bsStyle, className, id, label, style } = this.props;
@@ -52,18 +50,14 @@ const SubmitButton = React.createClass({
           bsStyle={bsStyle}
           className={className}
           style={style}>
-          {isSubmitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id={label} />
-          )}
+          <FormattedMessage id={isSubmitting ? 'global.loading' : label} />
         </Button>
       </LoginOverlay>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     user: state.user.user,
   };

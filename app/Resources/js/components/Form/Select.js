@@ -58,11 +58,11 @@ export const renderSelect = React.createClass({
     return (
       <div className="form-group">
         {label && (
-          <label htmlFor={input.name} className={labelClassName || 'col-sm-2 control-label'}>
+          <label htmlFor={input.name} className={labelClassName || 'control-label'}>
             {label}
           </label>
         )}
-        <div id={input.name} className={inputClassName || 'col-sm-10'}>
+        <div id={input.name} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Select.Async
               filterOptions={filterOptions}

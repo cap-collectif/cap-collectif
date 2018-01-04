@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { isSubmitting, submit } from 'redux-form';
+import { isSubmitting, isInvalid, isPristine, submit } from 'redux-form';
 import { closeCreateFusionModal, openCreateFusionModal } from '../../../redux/modules/proposal';
 import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm';
 import CloseButton from '../../Form/CloseButton';
@@ -13,14 +13,16 @@ import type { State, Dispatch } from '../../../types';
 type Props = {
   showModal: boolean,
   submitting: boolean,
+  pristine: boolean,
+  invalid: boolean,
   open: () => void,
   close: () => void,
-  dispatch: Dispatch,
+  submitForm: () => void,
 };
 
 export class ProposalCreateFusionButton extends React.Component<Props> {
   render() {
-    const { showModal, submitting, open, close, dispatch } = this.props;
+    const { showModal, invalid, pristine, submitting, open, close, submitForm } = this.props;
     return (
       <div>
         <Button
@@ -50,9 +52,8 @@ export class ProposalCreateFusionButton extends React.Component<Props> {
               id="confirm-proposal-merge-create"
               label="create-a-new-proposal"
               isSubmitting={submitting}
-              onSubmit={() => {
-                dispatch(submit(formName));
-              }}
+              disabled={invalid || pristine}
+              onSubmit={() => submitForm()}
             />
           </Modal.Footer>
         </Modal>
@@ -64,9 +65,20 @@ export class ProposalCreateFusionButton extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   showModal: state.proposal.isCreatingFusion,
   submitting: isSubmitting(formName)(state),
+  pristine: isPristine(formName)(state),
+  invalid: isInvalid(formName)(state),
 });
 
-export default connect(mapStateToProps, {
-  close: closeCreateFusionModal,
-  open: openCreateFusionModal,
-})(ProposalCreateFusionButton);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  close: () => {
+    dispatch(closeCreateFusionModal());
+  },
+  open: () => {
+    dispatch(openCreateFusionModal());
+  },
+  submitForm: () => {
+    dispatch(submit(formName));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProposalCreateFusionButton);
