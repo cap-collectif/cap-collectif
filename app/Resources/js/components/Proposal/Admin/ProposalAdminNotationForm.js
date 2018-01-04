@@ -42,29 +42,37 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     likers: values.likers.map(u => u.value),
   };
 
-  const promises = [];
-  promises.push(
-    ChangeProposalNotationMutation.commit({
-      input: {
-        proposalId: props.proposal.id,
-        estimation: data.estimation,
-        likers: data.likers,
-      },
-    }),
-  );
-
   if (props.proposal.form.evaluationForm) {
     const variablesEvaluation = {
-      input: { proposalId: props.proposal.id, responses: formatResponsesToSubmit(data, props) },
+      input: {
+        proposalId: props.proposal.id,
+        responses: formatResponsesToSubmit(data, props),
+        version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
+      },
     };
 
-    promises.push(ChangeProposalEvaluationMutation.commit(variablesEvaluation));
-  }
-
-  return Promise.all(promises).catch(() => {
-    throw new SubmissionError({
-      _error: 'global.error.server.form',
+    return ChangeProposalEvaluationMutation.commit(variablesEvaluation).then(response => {
+      if (!response.changeProposalEvaluation) {
+        throw new SubmissionError({
+          _error: 'proposal_form.admin.evaluation.error.modified_since',
+        });
+      } else {
+        return ChangeProposalNotationMutation.commit({
+          input: {
+            proposalId: props.proposal.id,
+            estimation: values.estimation,
+            likers: values.likers,
+          },
+        });
+      }
     });
+  }
+  return ChangeProposalNotationMutation.commit({
+    input: {
+      proposalId: props.proposal.id,
+      estimation: values.estimation,
+      likers: values.likers,
+    },
   });
 };
 
@@ -161,6 +169,7 @@ export const validate = (values: FormValues, { proposal }: Props) => {
 export class ProposalAdminNotationForm extends React.Component<Props> {
   render() {
     const {
+      error,
       invalid,
       valid,
       submitSucceeded,
@@ -248,6 +257,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 </Button>
                 <AlertAdminForm
                   valid={valid}
+                  errorMessage={error}
                   invalid={invalid}
                   submitSucceeded={submitSucceeded}
                   submitFailed={submitFailed}
@@ -288,6 +298,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
       value: u.id,
       label: u.displayName,
     })),
+    version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
     responses: formatInitialResponses(props),
   },
 });
@@ -330,6 +341,7 @@ export default createFragmentContainer(
         }
       }
       evaluation {
+        version
         responses {
           question {
             id

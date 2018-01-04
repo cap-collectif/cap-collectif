@@ -3,13 +3,12 @@
 {% block canonical_link %}{{ url('app_project_show_stats', {'projectSlug': project.slug}, true) }}{% endblock %}
 
 {% block metaTags %}
-    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-    'title' :('project.show.stats.title' | trans({}, 'CapcoAppBundle')~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title),
+    'title':  project.title~' - '~('project.show.stats.title' | trans({}, 'CapcoAppBundle')),
     'url':    url('app_project_show_stats', {'projectSlug': project.slug}),
-    'description':  project.metaDescription|striptags,
     'type':   'project',
-    'image':  image,
+    'image':  projectCover,
     'author': is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null
     } only %}
 {% endblock %}
