@@ -220,7 +220,7 @@ class EventAdmin extends Admin
                     'provider' => 'sonata.media.provider.image',
                 ],
             ])
-        ;
+            ->end();
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -268,6 +268,20 @@ class EventAdmin extends Admin
                 'required' => false,
             ])
             ->end()
+        ;
+        $formMapper
+            ->with('admin.fields.page.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'event.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])
+            ->add('customCode', null, [
+                'label' => 'admin.customcode',
+                'required' => false,
+                'help' => 'admin.help.customcode',
+                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+            ])
         ;
     }
 

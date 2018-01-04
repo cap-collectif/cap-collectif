@@ -3,17 +3,16 @@
 {% block canonical_link %}{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    <meta property="og:title" content="{{ project.title }}" />
-    <meta property="og:url" content="{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" />
-    <meta property="og:type" content="project" />
-    {% if project.Cover %}
-        <meta property="og:image" content="{% path project.Cover, 'blockHeader' %}" />
-    {% endif %}
-    {% if is_feature_enabled('profiles') %}
-        <meta property="article:author" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-        <meta property="article:publisher" content="{{ url('capco_user_profile_show_all', {'slug': project.Author.slug}) }}" />
-    {% endif %}
-
+    {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
+    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'type':        'project',
+        'image':       image,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null,
+        'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
+    } only %}
 {% endblock %}
 
 {% block title %}
@@ -36,6 +35,7 @@
 {% endblock %}
 
 {% block details %}
+    {% dump currentStep %}
     {% if currentStep.isClosed and currentStep.isVotable %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'step.selection.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
@@ -54,4 +54,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+    {% if currentStep.customCode is defined and currentStep.customCode != '' %}{{ currentStep.customCode | raw }}{% endif %}
 {% endblock %}

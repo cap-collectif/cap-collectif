@@ -61,7 +61,6 @@ services:
         tags:
             - { name: overblog_graphql.mutation, alias: "deleteProposal", method: "delete" }
             - { name: overblog_graphql.mutation, alias: "changeProposalNotation", method: "changeNotation" }
-            - { name: overblog_graphql.mutation, alias: "changeProposalEvaluers", method: "changeEvaluers" }
             - { name: overblog_graphql.mutation, alias: "changeProgressSteps", method: "changeProgressSteps" }
             - { name: overblog_graphql.mutation, alias: "changeCollectStatus", method: "changeCollectStatus" }
             - { name: overblog_graphql.mutation, alias: "changeSelectionStatus", method: "changeSelectionStatus" }

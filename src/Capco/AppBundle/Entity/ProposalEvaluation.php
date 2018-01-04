@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\VersionableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +19,6 @@ class ProposalEvaluation
 {
     use UuidTrait;
     use TimestampableTrait;
-    use VersionableTrait;
     use HasResponsesTrait;
 
     /**
@@ -57,7 +55,7 @@ class ProposalEvaluation
         $response->setProposalEvaluation($this);
     }
 
-    public function getProposal()
+    public function getProposal()// : Proposal
     {
         return $this->proposal;
     }
