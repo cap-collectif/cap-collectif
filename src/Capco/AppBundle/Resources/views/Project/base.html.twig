@@ -31,14 +31,11 @@
     </div>
 
     <section>
-        <div class="block">
-            {{ render(controller('CapcoAppBundle:Site/Project:stepTabs', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
-            {#{{ react_render_component('ProjectStepTabsApp', {
-                'props': {
-                    'projectSteps': projectSteps
-                },
-            })}}#}
-        </div>
+        {{ react_render_component('ProjectStepTabsApp', {
+            'props': {
+                'projectId': project.id
+            },
+        })}}
     </section>
 
     <div class="container container--custom" style="padding-top: 0">
@@ -65,16 +62,5 @@
             moreLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
             lessLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
         });
-
-//        const stepTabsBar = document.getElementById('step-tabs-list');
-//        const navWidth = stepTabsBar.offsetWidth;
-//        const totalTabs = stepTabsBar.getElementsByTagName('li');
-//
-//        for (let i = 0; i < totalTabs.length; i++) {
-//            let tabsWidth = totalTabs[i].offsetWidth;
-//            console.warn(tabsWidth)
-//        }
-//
-//        console.log(totalTabsWidth);
     </script>
 {% endblock %}

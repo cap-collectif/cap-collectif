@@ -309,48 +309,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Template("CapcoAppBundle:Project:show_step_tabs.html.twig")
-     *
-     * @param mixed $projectSlug
-     * @param mixed $currentStepSlug
-     */
-    public function stepTabsAction($projectSlug, $currentStepSlug)
-    {
-        $serializer = $this->get('serializer');
-
-        $em = $this->getDoctrine()->getManager();
-        $projectSteps = $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
-
-        $props = $serializer->serialize([
-            'currentStepSlug' => $currentStepSlug,
-            'projectSteps' => $projectSteps,
-        ], 'json');
-
-        return [
-            'props' => $props,
-        ];
-    }
-
-//    /**
-//     * @Template("CapcoAppBundle:Project:base.html.twig")
-//     *
-//     * @param mixed $projectSlug
-//     * @param mixed $currentStepSlug
-//     */
-//    public function baseAction($projectSlug, $currentStepSlug)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
-//        $projectSteps = $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->getByProjectSlug($projectSlug);
-    //
-//        return [
-//            'project' => $project,
-//            'currentStep' => $currentStepSlug,
-//            'projectSteps' => $projectSteps,
-//        ];
-//    }
-
-    /**
      * @Route("/projects", name="app_project")
      * @Template("CapcoAppBundle:Project:index.html.twig")
      */

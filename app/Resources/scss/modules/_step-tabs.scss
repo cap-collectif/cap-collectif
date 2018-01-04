@@ -4,6 +4,7 @@
 .step-tabs {
     border-bottom: 1px solid $border-color;
     border-top: 1px solid $border-color;
+    margin-bottom: 50px;
 
     &__bar {
         background-color: $white;
@@ -25,19 +26,21 @@
         position: absolute;
         height: 100%;
         padding: 0 15px;
-        // width: 50px;
         display: flex;
 
-        span {
+        a {
             height: 30px;
             width: 30px;
             display: flex;
             margin: auto;
+            color: $dark-gray;
             border: 1px solid $border-color;
             @include border-radius(50%);
 
-            i {
-                margin: 5px 6px;
+            &:hover {
+                text-decoration: none;
+                color: $dark-gray;
+                border: 1px solid $dark-gray;
             }
         }
     }
@@ -45,102 +48,116 @@
     &__tab-prev {
         left: -46px;
         border-right: 1px solid $border-color;
+
+        i {
+            margin: 5px 6px;
+        }
     }
 
     &__tab-next {
         right: -46px;
         border-left: 1px solid $border-color;
+
+        i {
+            margin: 5px 8px;
+        }
     }
 
     &__list {
         overflow: hidden;
-        flex-wrap: nowrap;
-        display: flex;
+        white-space: nowrap;
 
-        li {
-            position: relative;
-            white-space: nowrap;
+        ul {
             display: inline-block;
-            font-size: 16px;
+            flex-wrap: nowrap;
 
-            &:not(.active) {
-                &:hover {
-                    background-color: $light-gray;
-                    border-bottom: 3px solid $light-gray;
+            li {
+                position: relative;
+                // white-space: nowrap;
+                display: inline-block;
+                font-size: 16px;
+
+                &:not(.active) {
+                    &:hover {
+                        background-color: $light-gray;
+                        border-bottom: 3px solid $light-gray;
+                    }
+
+                    border-bottom: 3px solid $white;
                 }
 
-                border-bottom: 3px solid $white;
-            }
-
-            a {
-                display: flex;
-                padding: 15px;
-
-                &:hover, &:focus {
-                    background-color: transparent;
-                }
-            }
-
-            svg {
-                position: absolute;
-                top: 0;
-                right: -20px;
-                z-index: 5;
-
-                polygon {
-                    fill: $white;
-                }
-            }
-
-            &:first-child {
-                .navbar__step-nb {
-                    margin: auto 15px auto 0;
-                }
-            }
-
-            .navbar__step-nb {
-                @include border-radius(50%);
-                margin: auto 15px auto 17px;
-                width: 30px;
-                height: 30px;
-                background-color: transparent;
-                border: 1px solid $dark-gray;
-                color: $dark-gray;
-                font-size: 18px;
-                font-weight: 300;
-                display: flex;
-
-                span {
-                    margin: auto;
-                }
-            }
-
-            .navbar__step-title {
-                color: $dark-gray;
-                font-weight: 500;
-            }
-
-            &.active polygon, &:hover polygon {
-                fill: $light-gray;
-            }
-
-            &.active {
                 a {
-                    border-bottom: 3px solid $brand-primary;
-                    background-color: $light-gray;
+                    display: flex;
+                    padding: 15px;
+
+                    &:hover, &:focus {
+                        background-color: transparent;
+                    }
+                }
+
+                svg {
+                    position: absolute;
+                    top: 0;
+                    right: -20px;
+                    z-index: 5;
+
+                    polygon {
+                        fill: $white;
+                    }
+                }
+
+                &:first-child {
+                    .navbar__step-nb {
+                        margin: auto 15px auto 0;
+                    }
+                }
+
+                .navbar__step-nb {
+                    @include border-radius(50%);
+                    margin: auto 15px auto 17px;
+                    width: 30px;
+                    height: 30px;
+                    background-color: transparent;
+                    border: 1px solid $dark-gray;
+                    color: $dark-gray;
+                    font-size: 18px;
+                    font-weight: 300;
+                    display: flex;
+
+                    span {
+                        margin: auto;
+                    }
                 }
 
                 .navbar__step-title {
-                    color: $black;
+                    color: $dark-gray;
+                    font-weight: 500;
                 }
 
-                .navbar__step-nb {
-                    background-color: $brand-primary;
-                    border: 1px solid $brand-primary;
-                    color: $white;
+                &.active polygon, &:hover polygon {
+                    fill: $light-gray;
+                }
+
+                &.active {
+                    a {
+                        border-bottom: 3px solid $brand-primary;
+                        background-color: $light-gray;
+                    }
+
+                    .navbar__step-title {
+                        color: $black;
+                    }
+
+                    .navbar__step-nb {
+                        background-color: $brand-primary;
+                        border: 1px solid $brand-primary;
+                        color: $white;
+                    }
                 }
             }
         }
+
+
     }
 }
 

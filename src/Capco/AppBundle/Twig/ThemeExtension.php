@@ -67,6 +67,7 @@ class ThemeExtension extends \Twig_Extension
                   'id' => $realStep->getId(),
                   'title' => $realStep->getTitle(),
                   'body' => $realStep->getBody(),
+                  // 'slug' => $realStep->getSlug(),
                   'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
                   'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
                   'position' => $realStep->getPosition(),
