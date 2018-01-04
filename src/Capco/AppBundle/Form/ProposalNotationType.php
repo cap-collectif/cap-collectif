@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,13 +20,17 @@ class ProposalNotationType extends AbstractType
                 'required' => false,
                 'by_reference' => false,
             ])
+            ->add('evaluers', null, [
+                'required' => false,
+                'by_reference' => false,
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Proposal::class,
+            'data_class' => 'Capco\AppBundle\Entity\Proposal',
             'csrf_protection' => false,
             'validation_groups' => ['Notation'],
         ]);
