@@ -27,7 +27,7 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
       </a>
     </div>
     <form
-      onSubmit={[Function]}
+      onSubmit={[MockFunction]}
     >
       <Field
         clearable={false}
