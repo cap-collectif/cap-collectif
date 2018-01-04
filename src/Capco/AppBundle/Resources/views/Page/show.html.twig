@@ -3,12 +3,17 @@
 {% block canonical_link %}{{ url('app_page_show', {'slug': page.slug}) }}{% endblock %}
 
 {% block metaTags %}
+    {% set picto = capco_site_image_media('homepage.picto') %}
+    {% set image %}{% if page.cover %}{% path page.cover, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       page.title,
-        'description': page.body|striptags|truncate(250, true),
+        'image':       image,
+        'type':        'article',
+        'description': page.metaDescription|striptags ?: page.body|striptags|truncate(250, true),
         'url':         url('app_page_show', {'slug': page.slug})
     } only %}
 {% endblock %}
+
 
 {% block title %}
     {{ parent() }} - {{ page.title }}
@@ -26,4 +31,8 @@
     <div class="container  container--thinner">
         {{ page.body|raw }}
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% if page.customCode is defined and page.customCode != '' %}{{ page.customCode | raw }}{% endif %}
 {% endblock %}

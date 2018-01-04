@@ -8,20 +8,11 @@ type Props = {
   submitting: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-  errorMessage: ?string,
 };
 
 export class AlertAdminForm extends React.Component<Props> {
   render() {
-    const { valid, invalid, submitSucceeded, submitFailed, submitting, errorMessage } = this.props;
-
-    if (errorMessage) {
-      return (
-        <div className="alert__form_server-failed-message">
-          <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
-        </div>
-      );
-    }
+    const { valid, invalid, submitSucceeded, submitFailed, submitting } = this.props;
 
     return (
       <div>
