@@ -351,7 +351,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
   {
     "errors": [
       {
-        "message": "Proposal evaluation was modified, please refresh the page (The optimistic lock failed, version 1 was expected, but is actually 2)",
+        "message": "The proposal was modified. Please refresh the page.",
         "locations": [
           @...@
         ],
@@ -642,7 +642,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
   {
     "errors": [
       {
-        "message": "Proposal evaluation was modified, please refresh the page (The optimistic lock failed, version 1 was expected, but is actually 2)",
+        "message": "The proposal was modified. Please refresh the page.",
         "locations": [
           @...@
         ],
