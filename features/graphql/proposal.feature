@@ -362,9 +362,6 @@ Scenario: GraphQL client wants note a proposal
           likers {
             id
           }
-          evaluers {
-            id
-          }
         }
       }
     }",
@@ -372,8 +369,7 @@ Scenario: GraphQL client wants note a proposal
       "input": {
         "proposalId": "proposal8",
         "estimation": 1000,
-        "likers": ["user1", "user2", "user3"],
-        "evaluers": ["group2", "group5"]
+        "likers": ["user1", "user2", "user3"]
       }
     }
   }
@@ -385,8 +381,7 @@ Scenario: GraphQL client wants note a proposal
       "changeProposalNotation": {
         "proposal": {
           "estimation": 1000,
-          "likers": [{ "id": "user1" }, { "id": "user2" }, { "id": "user3" }],
-          "evaluers": [{ "id": "group2" }, { "id": "group5" }]
+          "likers": [{ "id": "user1" }, { "id": "user2" }, { "id": "user3" }]
         }
       }
     }
