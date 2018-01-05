@@ -29,7 +29,7 @@ class AdminProposalPage extends Page
         'proposal advancement save' => '#proposal_advancement_save',
     ];
 
-    public function clickSaveContentProposalButton()
+    public function clickSaveProposalContentButton()
     {
         $this->getElement('proposal save')->click();
     }
@@ -44,18 +44,21 @@ class AdminProposalPage extends Page
         $this->getElement('proposal advancement tab')->click();
     }
 
-    public function getProposalElement(string $element)
+    public function toggleProposalElement(string $element)
     {
-        return $this->getElement($element);
-    }
-
-    public function checkProposalCheckbox(string $element)
-    {
-        $this->getProposalElement($element)->click();
+        $this->getElement($element)->click();
     }
 
     public function selectProposalAdvancementStatus(string $status, string $element)
     {
         return $this->getElement($element)->selectOption($status);
+    }
+
+    public function fillFieldWithAutoComplete(string $field, string $value)
+    {
+        $this->fillField($field, $value);
+        $this->iWait(1);
+        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->iWait(1);
     }
 }

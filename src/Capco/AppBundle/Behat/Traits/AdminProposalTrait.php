@@ -14,11 +14,11 @@ trait AdminProposalTrait
     }
 
     /**
-     * @Then I save current admin content proposal
+     * @When I save current admin content proposal
      */
-    public function iClickTheProposalContentSaveButton()
+    public function iSaveTheProposalContent()
     {
-        $this->navigationContext->getPage('admin proposal page')->clickSaveContentProposalButton();
+        $this->getCurrentPage()->clickSaveProposalContentButton();
     }
 
     /**
@@ -40,17 +40,14 @@ trait AdminProposalTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3);
-        $page->checkProposalCheckbox($elementName);
+        $page->toggleProposalElement($elementName);
         $this->iWait(3);
     }
 
     /**
      * @When I change the proposal advancement select :select with option :value
-     *
-     * @param mixed $select
-     * @param mixed $value
      */
-    public function iChangeTheProposalAdvancementSelect($select, $value)
+    public function iChangeTheProposalAdvancementSelect(string  $select, string $value)
     {
         $this->getCurrentPage()->selectProposalAdvancementStatus($value, $select);
         $this->iWait(1);
@@ -62,5 +59,16 @@ trait AdminProposalTrait
     public function iSaveTheProposalAdminAdvancement()
     {
         $this->getCurrentPage()->clickSaveProposalAdvancementButton();
+    }
+
+    /**
+     * @When I fill the proposal content address with :address
+     */
+    public function iFillProposalContentAddressWith(string $address)
+    {
+        $this->fillField('proposal_address', $address);
+        $this->iWait(1);
+        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->iWait(1);
     }
 }
