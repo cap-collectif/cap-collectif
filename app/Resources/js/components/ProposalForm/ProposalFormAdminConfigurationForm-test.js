@@ -4,10 +4,11 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
+import { intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
-    intl: global.intlMock,
+    intl: intlMock,
     proposalForm: {
       id: 'proposalFormId',
       description: 'description',

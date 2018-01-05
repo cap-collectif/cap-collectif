@@ -4,14 +4,14 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminContentForm } from './ProposalAdminContentForm';
 import { features } from '../../../redux/modules/default';
-import { formMock } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalAdminContentForm />', () => {
   const props = {
     ...formMock,
     features,
     handleSubmit: jest.fn(),
-    intl: global.intlMock,
+    intl: intlMock,
     isSuperAdmin: true,
     themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
     proposal: {

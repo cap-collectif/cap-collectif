@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminPageTabs } from './GroupAdminPageTabs';
+import { intlMock } from '../../../mocks';
 
 describe('<GroupAdminPageTabs />', () => {
   const props = {
-    intl: global.intlMock,
+    intl: intlMock,
     group: {},
   };
 

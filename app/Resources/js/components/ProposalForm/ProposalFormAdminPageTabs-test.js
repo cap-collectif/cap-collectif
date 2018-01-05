@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminPageTabs } from './ProposalFormAdminPageTabs';
+import { intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminPageTabs />', () => {
   const props = {
-    intl: global.intlMock,
+    intl: intlMock,
     proposalForm: { url: 'http://capco.dev/top-budget', reference: '2' },
   };
 

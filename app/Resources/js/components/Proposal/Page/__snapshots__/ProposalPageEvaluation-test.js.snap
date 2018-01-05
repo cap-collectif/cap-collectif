@@ -21,6 +21,9 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
             "formatPlural": [Function],
             "formatRelative": [Function],
             "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
             "now": [Function],
           }
         }
@@ -69,6 +72,9 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
             "formatPlural": [Function],
             "formatRelative": [Function],
             "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
             "now": [Function],
           }
         }

@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminNotationForm } from './ProposalAdminNotationForm';
-import { formMock } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalAdminNotationForm />', () => {
   const props = {
     ...formMock,
-    intl: global.intlMock,
+    intl: intlMock,
     disabled: false,
     responses: [],
     proposal: {

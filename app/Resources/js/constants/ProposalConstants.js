@@ -1,3 +1,4 @@
+// @flow
 export const VOTE_TYPE_DISABLED = 0;
 export const VOTE_TYPE_SIMPLE = 1;
 export const VOTE_TYPE_BUDGET = 2;

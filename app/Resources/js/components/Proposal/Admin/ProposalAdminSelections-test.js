@@ -3,12 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminSelections } from './ProposalAdminSelections';
+import { intlMock } from '../../../mocks';
 
 describe('<ProposalAdminSelections />', () => {
   const props = {
     dispatch: jest.fn(),
     handleSubmit: jest.fn(),
-    intl: global.intlMock,
+    intl: intlMock,
     initialValues: { selections: [{ step: '2', selected: true, status: null }] },
     pristine: false,
     invalid: false,

@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateModal } from './OpinionCreateModal';
+import { intlMock } from '../../../mocks';
 
 describe('<OpinionCreateModal />', () => {
   const props = {
-    intl: global.intlMock,
+    intl: intlMock,
     show: true,
     projectId: 'projectId',
     stepId: '1',

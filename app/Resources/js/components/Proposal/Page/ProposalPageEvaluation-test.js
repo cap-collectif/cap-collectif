@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageEvaluation } from './ProposalPageEvaluation';
-import { formMock } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalPageEvaluation />', () => {
   const proposal = {
@@ -41,7 +41,7 @@ describe('<ProposalPageEvaluation />', () => {
   const props = {
     ...formMock,
     proposal,
-    intl: global.intlMock,
+    intl: intlMock,
     responses: [],
   };
 
@@ -53,7 +53,7 @@ describe('<ProposalPageEvaluation />', () => {
   const propsDisabled = {
     proposal: { ...proposal, viewerIsAnEvaluer: false },
     ...formMock,
-    intl: global.intlMock,
+    intl: intlMock,
     responses: [],
   };
 

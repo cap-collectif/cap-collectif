@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminNotificationForm } from './ProposalFormAdminNotificationForm';
+import { intlMock } from '../../mocks';
 
 describe('<ProposalFormAdminNotificationForm />', () => {
   const props = {
-    intl: global.intlMock,
+    intl: intlMock,
     submitting: false,
     pristine: false,
     handleSubmit: jest.fn(),

@@ -101,6 +101,9 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               "formatPlural": [Function],
               "formatRelative": [Function],
               "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
               "now": [Function],
             }
           }
