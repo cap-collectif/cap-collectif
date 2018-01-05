@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminNotationForm } from './ProposalAdminNotationForm';
+import { formMock } from '../../../mocks';
 
 describe('<ProposalAdminNotationForm />', () => {
   const props = {
-    ...global.formMock,
+    ...formMock,
     intl: global.intlMock,
     disabled: false,
     responses: [],
@@ -14,7 +15,6 @@ describe('<ProposalAdminNotationForm />', () => {
       id: '1',
       estimation: 1000,
       likers: [{ id: '1', displayName: 'liker-1' }],
-      evaluers: [{ id: 'group1', title: 'Group 1' }],
       form: {
         evaluationForm: {
           questions: [],

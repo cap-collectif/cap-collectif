@@ -3,19 +3,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageEvaluation } from './ProposalPageEvaluation';
+import { formMock } from '../../../mocks';
 
 describe('<ProposalPageEvaluation />', () => {
   const proposal = {
     id: 'proposal1',
     viewerIsAnEvaluer: true,
-    responses: [],
     form: {
       evaluationForm: {
         questions: [
           {
             id: 'question1',
             title: 'Question 1',
-            slug: 'slug-1',
             position: 0,
             private: false,
             required: true,
@@ -32,7 +31,7 @@ describe('<ProposalPageEvaluation />', () => {
       version: 1,
       responses: [
         {
-          question: { id: 'question1', type: 'text' },
+          question: { id: 'question1' },
           value: 'Paul',
         },
       ],
@@ -40,9 +39,10 @@ describe('<ProposalPageEvaluation />', () => {
   };
 
   const props = {
+    ...formMock,
     proposal,
-    ...global.formMock,
     intl: global.intlMock,
+    responses: [],
   };
 
   it('render a form if viewer is an evaluer', () => {
@@ -52,8 +52,9 @@ describe('<ProposalPageEvaluation />', () => {
 
   const propsDisabled = {
     proposal: { ...proposal, viewerIsAnEvaluer: false },
-    ...global.formMock,
+    ...formMock,
     intl: global.intlMock,
+    responses: [],
   };
 
   it('render a disabled form if viewer is not an evaluer', () => {

@@ -9,8 +9,10 @@ import component from '../components/Form/Field';
 type Questions = $ReadOnlyArray<{|
   +id: string,
   +title: string,
+  +position: number,
+  +private: boolean,
+  +required: boolean,
   +helpText: ?string,
-  // eslint-disable-next-line flowtype/space-after-type-colon
   +type:
     | 'text'
     | 'textarea'
@@ -21,9 +23,6 @@ type Questions = $ReadOnlyArray<{|
     | 'ranking'
     | 'medias'
     | 'button',
-  +position: number,
-  +private: boolean,
-  +required: boolean,
   +isOtherAllowed: boolean,
   +validationRule: ?{|
     +type: ?string,
@@ -42,7 +41,7 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
     +id: string,
   |},
   +value?: ?string,
-  +medias?: $ReadOnlyArray<?{|
+  +medias?: $ReadOnlyArray<{|
     +id: string,
     +name: string,
     +url: string,
@@ -50,17 +49,54 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
   |}>,
 |}>;
 
-export const formatSubmitResponses = (responses: Array<Object>, questions: Questions) => {
+export type ResponsesInReduxForm = $ReadOnlyArray<{|
+  question: string,
+  value:
+    | ?string
+    | $ReadOnlyArray<{|
+        +id: string,
+        +name: string,
+        +url: string,
+        +size: string,
+      |}>,
+|}>;
+
+type SubmitResponses = $ReadOnlyArray<{
+  value?: ?string,
+  question: string,
+  medias?: ?$ReadOnlyArray<string>,
+}>;
+
+export const formatSubmitResponses = (
+  responses: ?ResponsesInReduxForm,
+  questions: Questions,
+): SubmitResponses => {
+  if (!responses) return [];
   return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
-    if (question.type !== 'medias') {
-      return res;
+    if (question.type !== 'medias' && (res.value === null || typeof res.value === 'string')) {
+      let value = res.value;
+      if (question.type === 'ranking' || question.type === 'button') {
+        value = JSON.stringify({
+          labels: Array.isArray(res.value) ? res.value : [res.value],
+          other: null,
+        });
+      } else if (question.type === 'checkbox' || question.type === 'radio') {
+        value = JSON.stringify(res.value);
+      }
+      return { value, question: res.question };
     }
-    return { ...res, medias: res.value ? res.value.map(value => value.id) : [], value: undefined };
+    return {
+      question: res.question,
+      medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
+    };
   });
 };
 
-export const formatInitialResponsesValues = (questions: Questions, responses: ResponsesFromAPI) => {
+export const formatInitialResponsesValues = (
+  questions: Questions,
+  responses: ResponsesFromAPI,
+): ResponsesInReduxForm => {
   return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
 
@@ -103,39 +139,6 @@ export const formatInitialResponsesValues = (questions: Questions, responses: Re
   });
 };
 
-export const formatResponsesToSubmit = (values: Object, props: Object) => {
-  const questions =
-    props.proposal.form.evaluationForm && props.proposal.form.evaluationForm.questions;
-  if (!questions) return [];
-  return values.responses.map(resp => {
-    const actualQuestion = questions.find(question => question.id === String(resp.question));
-
-    if (!actualQuestion) {
-      // eslint-disable-next-line no-console
-      console.error(`Can't find the question with id: ${resp.question}`);
-      throw new Error(`Can't find the question with id: ${resp.question}`);
-    }
-
-    const questionType = actualQuestion.type;
-    let value;
-    if (questionType === 'ranking' || questionType === 'button') {
-      value = JSON.stringify({
-        labels: Array.isArray(resp.value) ? resp.value : [resp.value],
-        other: null,
-      });
-    } else if (questionType === 'checkbox' || questionType === 'radio') {
-      value = JSON.stringify(resp.value);
-    } else {
-      value = resp.value;
-    }
-
-    return {
-      question: actualQuestion.id,
-      value,
-    };
-  });
-};
-
 const formattedChoicesInField = field => {
   return field.choices.map(choice => {
     return {
@@ -156,7 +159,7 @@ export const renderResponses = ({
   disabled,
 }: FieldArrayProps & {
   questions: Questions,
-  responses: Array<Object>,
+  responses: ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   intl: IntlShape,
   disabled: boolean,

@@ -4,30 +4,48 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { type FormProps, SubmissionError, reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
-import ChangeProposalContentMutation, {
-  type ChangeProposalContentMutationResponse,
-} from '../../../mutations/ChangeProposalContentMutation';
+import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
+<<<<<<< HEAD
 import AlertForm from '../../Alert/AlertForm';
+=======
+import AlertAdminForm from '../../Alert/AlertAdminForm';
+import ProposalFusionEditModal from './ProposalFusionEditModal';
+>>>>>>> Lot of work to increase flow coverage
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
-import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import type { ProposalForm_proposalForm } from '../Form/__generated__/ProposalForm_proposalForm.graphql';
+import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import {
   renderResponses,
   formatSubmitResponses,
   formatInitialResponsesValues,
+  type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 
-type FormValues = Object;
-type DefaultProps = void;
-type PassedProps = {
+type ProposalForm = ProposalForm_proposalForm;
+type FormValues = {|
+  media: ?{ id: Uuid },
+  responses: ResponsesInReduxForm,
+  draft: boolean,
+  title?: ?string,
+  body?: ?string,
+  summary?: ?string,
+  author?: ?Uuid,
+  theme?: ?Uuid,
+  addresstext?: ?string,
+  category?: ?Uuid,
+  district?: ?Uuid,
+  address?: ?string,
+|};
+type RelayProps = {
   +proposal: ProposalAdminContentForm_proposal,
 };
 type Props = FormProps &
-  PassedProps & {
-    +themes: Array<Object>,
+  RelayProps & {
+    +themes: Array<{ id: Uuid, title: string }>,
     +features: FeatureToggles,
     +intl: IntlShape,
     +isSuperAdmin: boolean,
@@ -36,18 +54,23 @@ type Props = FormProps &
 const formName = 'proposal-admin-edit';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdmin }: Props) => {
-  const data = {
-    ...values,
-    addressText: undefined, // Only used for the user view
+  const input = {
+    title: values.title,
+    summary: values.summary,
+    body: values.body,
+    address: values.address,
+    theme: values.theme,
+    category: values.category,
+    district: values.district,
+    draft: values.draft,
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
     author: isSuperAdmin ? values.author : undefined,
+    id: proposal.id,
   };
 
-  return ChangeProposalContentMutation.commit({
-    input: { ...data, id: proposal.id },
-  })
-    .then((response: ChangeProposalContentMutationResponse) => {
+  return ChangeProposalContentMutation.commit({ input })
+    .then(response => {
       if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
         throw new Error('Mutation "changeProposalContent" failed.');
       }
@@ -60,8 +83,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
 };
 
 export const validateProposalContent = (
-  values: Object,
-  proposalForm: Object,
+  values: FormValues,
+  proposalForm: ProposalForm,
   features: FeatureToggles,
 ) => {
   const errors = {};
@@ -102,7 +125,7 @@ export const validateProposalContent = (
     if (field.required) {
       const response = values.responses.filter(res => res && res.question === field.id)[0];
       if (field.type === 'medias') {
-        if (!response || response.value.length === 0) {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
         }
       } else if (!response || !response.value) {
@@ -120,8 +143,15 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
   return validateProposalContent(values, proposal.form, features);
 };
 
-export class ProposalAdminContentForm extends React.Component<Props> {
-  static defaultProps: DefaultProps;
+type State = {
+  showEditFusionModal: boolean,
+};
+
+export class ProposalAdminContentForm extends React.Component<Props, State> {
+  state = {
+    showEditFusionModal: false,
+  };
+
   render() {
     const {
       pristine,
@@ -145,9 +175,50 @@ export class ProposalAdminContentForm extends React.Component<Props> {
         <FormattedMessage id="global.form.optional" />
       </span>
     );
-
     return (
       <div className="box box-primary container">
+        <ProposalFusionEditModal
+          onClose={() => {
+            this.setState({ showEditFusionModal: false });
+          }}
+          show={this.state.showEditFusionModal}
+          proposal={proposal}
+        />
+        {proposal.mergedFrom.length > 0 && (
+          <Panel
+            className="mt-15"
+            header={
+              <div>
+                <FormattedMessage id="initial-proposals" />
+                <Button
+                  bsStyle="warning"
+                  className="pull-right"
+                  onClick={() => {
+                    this.setState({ showEditFusionModal: true });
+                  }}
+                  style={{ marginTop: -5 }}>
+                  <FormattedMessage id="glodal.edit" />
+                </Button>
+                <Button
+                  bsStyle="danger"
+                  className="pull-right"
+                  onClick={() => {
+                    console.log('click');
+                  }}
+                  style={{ marginTop: -5 }}>
+                  <FormattedMessage id="glodal.delete" />
+                </Button>
+              </div>
+            }>
+            <ListGroup fill>
+              {proposal.mergedFrom.map(child => (
+                <ListGroupItem key={child.id}>
+                  <a href={child.adminUrl}>{child.title}</a>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Panel>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="box-header">
             <h3 className="box-title">
@@ -349,7 +420,7 @@ const form = reduxForm({
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: GlobalState,
-  { proposal }: PassedProps,
+  { proposal }: RelayProps,
 ) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
@@ -384,9 +455,28 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalAdminContentForm_proposal on Proposal {
       id
+      mergedFrom {
+        id
+        adminUrl
+        title
+      }
+      author {
+        id
+        displayName
+      }
+      theme {
+        id
+      }
+      category {
+        id
+      }
+      district {
+        id
+      }
       title
       body
       summary
+      address
       publicationStatus
       responses {
         question {
@@ -409,6 +499,11 @@ export default createFragmentContainer(
         url
       }
       form {
+        id
+        description
+        step {
+          id
+        }
         districts {
           id
           name
@@ -447,21 +542,12 @@ export default createFragmentContainer(
         categoryHelpText
         usingAddress
         titleHelpText
+        summaryHelpText
+        themeHelpText
+        illustrationHelpText
         descriptionHelpText
-      }
-      author {
-        id
-        displayName
-      }
-      theme {
-        id
-      }
-      category {
-        id
-      }
-      address
-      district {
-        id
+        addressHelpText
+        proposalInAZoneRequired
       }
     }
   `,

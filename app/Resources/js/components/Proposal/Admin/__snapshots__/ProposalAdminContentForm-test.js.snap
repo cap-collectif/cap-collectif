@@ -4,6 +4,196 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
 <div
   className="box box-primary container"
 >
+  <Connect(ProposalFusionEditModal)
+    onClose={[Function]}
+    proposal={
+      Object {
+        "address": null,
+        "author": Object {
+          "displayName": "Author",
+          "id": "1",
+        },
+        "body": "body",
+        "category": Object {
+          "id": "1",
+        },
+        "district": Object {
+          "id": "1",
+        },
+        "form": Object {
+          "addressHelpText": "Address Help",
+          "categories": Array [
+            Object {
+              "id": "1",
+              "name": "category-1",
+            },
+            Object {
+              "id": "2",
+              "name": "category-2",
+            },
+          ],
+          "categoryHelpText": "Category Help",
+          "categoryMandatory": true,
+          "description": "Description",
+          "descriptionHelpText": "Description Help",
+          "districtHelpText": "District Help",
+          "districtMandatory": true,
+          "districts": Array [],
+          "id": "form1",
+          "illustrationHelpText": "Illustration Help",
+          "proposalInAZoneRequired": true,
+          "questions": Array [
+            Object {
+              "choices": Array [],
+              "helpText": "Help 1",
+              "id": "1",
+              "isOtherAllowed": false,
+              "position": 0,
+              "private": false,
+              "required": true,
+              "title": "title",
+              "type": "text",
+              "validationRule": null,
+            },
+          ],
+          "step": Object {
+            "id": "step1",
+          },
+          "summaryHelpText": "Summary Help",
+          "themeHelpText": "Theme Help",
+          "themeMandatory": true,
+          "titleHelpText": "Title help",
+          "usingAddress": true,
+          "usingCategories": true,
+          "usingDistrict": true,
+          "usingThemes": true,
+        },
+        "id": "1",
+        "media": Object {
+          "id": "1",
+          "url": "",
+        },
+        "mergedFrom": Array [
+          Object {
+            "adminUrl": "http://capco.dev/child1",
+            "id": "1",
+            "title": "Child 1",
+          },
+          Object {
+            "adminUrl": "http://capco.dev/child2",
+            "id": "2",
+            "title": "Child 2",
+          },
+        ],
+        "publicationStatus": "DRAFT",
+        "responses": Array [
+          Object {
+            "question": Object {
+              "id": "1",
+            },
+            "value": "value-1",
+          },
+          Object {
+            "medias": Array [
+              Object {
+                "id": "1",
+                "name": "media-1",
+                "size": "100",
+                "url": "",
+              },
+            ],
+            "question": Object {
+              "id": "2",
+            },
+          },
+        ],
+        "summary": "summary",
+        "theme": Object {
+          "id": "theme-1",
+        },
+        "title": "title-1",
+      }
+    }
+    show={false}
+  />
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    className="mt-15"
+    defaultExpanded={false}
+    header={
+      <div>
+        <FormattedMessage
+          id="initial-proposals"
+          values={Object {}}
+        />
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="warning"
+          className="pull-right"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "marginTop": -5,
+            }
+          }
+        >
+          <FormattedMessage
+            id="glodal.edit"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          className="pull-right"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "marginTop": -5,
+            }
+          }
+        >
+          <FormattedMessage
+            id="glodal.delete"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    }
+  >
+    <ListGroup
+      bsClass="list-group"
+      fill={true}
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <a
+          href="http://capco.dev/child1"
+        >
+          Child 1
+        </a>
+      </ListGroupItem>
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <a
+          href="http://capco.dev/child2"
+        >
+          Child 2
+        </a>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
   <form
     onSubmit={[MockFunction]}
   >
@@ -153,12 +343,16 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         questions={
           Array [
             Object {
+              "choices": Array [],
+              "helpText": "Help 1",
               "id": "1",
+              "isOtherAllowed": false,
               "position": 0,
               "private": false,
               "required": true,
               "title": "title",
               "type": "text",
+              "validationRule": null,
             },
           ]
         }

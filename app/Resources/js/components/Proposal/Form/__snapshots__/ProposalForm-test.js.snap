@@ -55,7 +55,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
           values={
             Object {
               "matches": 0,
-              "terms": "",
+              "terms": 2,
             }
           }
         />
@@ -130,7 +130,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       values={Object {}}
     />
     <option
-      value={1}
+      value="theme1"
     >
       Theme 1
     </option>
@@ -234,6 +234,9 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         "formatPlural": [Function],
         "formatRelative": [Function],
         "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
         "now": [Function],
       }
     }
@@ -241,12 +244,16 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     questions={
       Array [
         Object {
+          "choices": Array [],
+          "helpText": "Question 1",
           "id": "question1",
+          "isOtherAllowed": false,
           "position": 1,
           "private": true,
           "required": true,
           "title": "Lol",
           "type": "text",
+          "validationRule": null,
         },
       ]
     }
@@ -333,7 +340,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
           values={
             Object {
               "matches": 0,
-              "terms": "",
+              "terms": 2,
             }
           }
         />
@@ -408,7 +415,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       values={Object {}}
     />
     <option
-      value={1}
+      value="theme1"
     >
       Theme 1
     </option>
@@ -512,6 +519,9 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         "formatPlural": [Function],
         "formatRelative": [Function],
         "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
         "now": [Function],
       }
     }
@@ -519,12 +529,16 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     questions={
       Array [
         Object {
+          "choices": Array [],
+          "helpText": "Question 1",
           "id": "question1",
+          "isOtherAllowed": false,
           "position": 1,
           "private": true,
           "required": true,
           "title": "Lol",
           "type": "text",
+          "validationRule": null,
         },
       ]
     }

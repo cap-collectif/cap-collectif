@@ -16,12 +16,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               "responses": Array [],
               "version": 1,
             },
-            "evaluers": Array [
-              Object {
-                "id": "group1",
-                "title": "Group 1",
-              },
-            ],
             "form": Object {
               "evaluationForm": Object {
                 "questions": Array [],

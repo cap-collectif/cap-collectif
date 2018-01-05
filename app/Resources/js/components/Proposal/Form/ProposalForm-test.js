@@ -3,11 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalForm } from './ProposalForm';
+import { intlMock, formMock } from '../../../mocks';
+import { features } from '../../../redux/modules/default';
 
 describe('<ProposalForm />', () => {
   const props = {
-    intl: global.intlMock,
-    ...global.formMock,
+    intl: intlMock,
+    ...formMock,
     proposalForm: {
       id: 'proposalForm1',
       description: 'Description 1',
@@ -38,10 +40,14 @@ describe('<ProposalForm />', () => {
         {
           id: 'question1',
           title: 'Lol',
+          helpText: 'Question 1',
           type: 'text',
           position: 1,
           private: true,
           required: true,
+          validationRule: null,
+          choices: [],
+          isOtherAllowed: false,
         },
       ],
       usingDistrict: true,
@@ -61,24 +67,30 @@ describe('<ProposalForm />', () => {
       addressHelpText: 'Address help',
       proposalInAZoneRequired: true,
     },
-    themes: [{ id: 1, title: 'Theme 1' }],
-    categories: [{ id: 'category1', name: 'Category 1' }],
+    themes: [{ id: 'theme1', title: 'Theme 1' }],
     submitting: false,
     dispatch: jest.fn(),
     features: {
+      ...features,
       themes: true,
       districts: true,
     },
+    titleValue: 'Proposal title',
+    addressValue: null,
     proposal: {
       id: 'proposal1',
       title: 'Proposal title',
       body: 'Proposal Body',
       summary: 'Proposal summary',
+      publicationStatus: 'PUBLISHED',
       address: null,
+      theme: { id: 'theme1' },
+      district: { id: 'district1' },
+      category: { id: 'category1' },
       responses: [
         {
           question: {
-            id: 'questions1',
+            id: 'question1',
           },
           value: 'lol',
         },
@@ -86,6 +98,8 @@ describe('<ProposalForm />', () => {
       media: {
         id: 'media1',
         url: 'http://capco.dev',
+        size: '50',
+        name: 'paul.jpg',
       },
     },
   };

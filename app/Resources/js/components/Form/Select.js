@@ -1,5 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
+import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 
 export const renderSelect = React.createClass({
@@ -13,6 +14,7 @@ export const renderSelect = React.createClass({
     }).isRequired,
     meta: PropTypes.object.isRequired,
     label: PropTypes.any.isRequired,
+    help: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     autoload: PropTypes.bool,
@@ -52,6 +54,7 @@ export const renderSelect = React.createClass({
       placeholder,
       loadOptions,
       filterOptions,
+      help,
       meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
@@ -62,6 +65,7 @@ export const renderSelect = React.createClass({
             {label}
           </label>
         )}
+        {help && <HelpBlock>{help}</HelpBlock>}
         <div id={input.name} className={inputClassName || ''}>
           {typeof loadOptions === 'function' ? (
             <Select.Async

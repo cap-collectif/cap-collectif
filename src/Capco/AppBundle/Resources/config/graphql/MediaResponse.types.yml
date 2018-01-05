@@ -7,5 +7,5 @@ MediaResponse:
             question:
               type: "Question!"
             medias:
-              type: "[Media]!"
+              type: "[Media!]!"
               description: "Medias"

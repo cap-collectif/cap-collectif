@@ -18,7 +18,7 @@ import {
   formatInitialResponses,
   type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
-import { renderResponses, formatResponsesToSubmit } from '../../../utils/responsesHelper';
+import { renderResponses, formatSubmitResponses } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
@@ -31,17 +31,18 @@ type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 const formName = 'proposal-evaluation';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  return ChangeProposalEvaluationMutation.commit({
-    input: {
-      proposalId: props.proposal.id,
-      version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
-      responses: formatResponsesToSubmit(values, props),
-    },
-  }).then(response => {
-    if (!response.changeProposalEvaluation) {
-      throw new SubmissionError({ _error: 'proposal_form.admin.evaluation.error.modified_since' });
-    }
-  });
+  if (props.proposal.form.evaluationForm) {
+    return ChangeProposalEvaluationMutation.commit({
+      input: {
+        proposalId: props.proposal.id,
+        version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
+        responses: formatSubmitResponses(
+          values.responses,
+          props.proposal.form.evaluationForm.questions,
+        ),
+      },
+    });
+  }
 };
 
 export class ProposalPageEvaluation extends React.Component<Props> {

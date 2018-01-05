@@ -23,21 +23,18 @@ import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_pro
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import { loadSuggestions } from '../../../actions/ProposalActions';
 import Fetcher from '../../../services/Fetcher';
-import CreateProposalMutation, {
-  type CreateProposalMutationResponse,
-} from '../../../mutations/CreateProposalMutation';
+import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import {
   closeCreateModal,
   closeEditProposalModal,
   addProposalInRandomResultsByStep,
 } from '../../../redux/modules/proposal';
-import ChangeProposalContentMutation, {
-  type ChangeProposalContentMutationResponse,
-} from '../../../mutations/ChangeProposalContentMutation';
+import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import {
   formatInitialResponsesValues,
   formatSubmitResponses,
   renderResponses,
+  type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 
@@ -72,28 +69,29 @@ type RelayProps = {
 };
 
 type Props = FormProps &
-  RelayProps & {|
+  RelayProps & {
     +intl: IntlShape,
     +themes: Array<Object>,
     +dispatch: Dispatch,
     +features: FeatureToggles,
     +titleValue: ?string,
     +addressValue: ?string,
-  |};
+  };
 
-type FormValues = {
+type FormValues = {|
   title: ?string,
   summary: ?string,
+  author?: ?string,
   body: ?string,
   address?: ?string,
-  addresstext: ?string,
+  addresstext?: ?string,
   theme?: ?string,
   category?: ?string,
   district?: ?string,
-  responses: Array<Object>,
+  responses: ResponsesInReduxForm,
   media?: ?any,
   draft: boolean,
-};
+|};
 
 // const catchServerSubmitErrors = (reason: Object) => {
 //   if (
@@ -117,7 +115,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
 
   const data = {
-    ...values,
+    title: values.title,
+    summary: values.summary,
+    body: values.body,
+    address: values.address,
+    theme: values.theme,
+    category: values.category,
+    district: values.district,
+    draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     addressText: undefined,
@@ -130,7 +135,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     return ChangeProposalContentMutation.commit({
       input: { ...data, id: proposal.id },
     })
-      .then((response: ChangeProposalContentMutationResponse) => {
+      .then(response => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
           throw new Error('Mutation "changeProposalContent" failed.');
         }
@@ -151,7 +156,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return CreateProposalMutation.commit({
     input: { ...data, proposalFormId: proposalForm.id },
   })
-    .then((response: CreateProposalMutationResponse) => {
+    .then(response => {
       if (!response.createProposal || !response.createProposal.proposal) {
         throw new Error('Mutation "createProposal" failed.');
       }
@@ -177,6 +182,9 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
       errors.title = 'proposal.constraints.title_for_draft';
     } else if (values.title.length <= 2) {
       errors.title = 'proposal.constraints.title_min_value_for_draft';
+    }
+    if (values.summary && values.summary.length > 140) {
+      errors.summary = 'proposal.constraints.summary';
     }
     return errors;
   }

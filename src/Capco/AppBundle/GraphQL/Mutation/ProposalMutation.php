@@ -340,7 +340,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $values = $input->getRawArguments();
         $proposal = $proposalRepo->find($values['id']);
-        $proposalForm = $proposal->getProposalForm();
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
@@ -348,6 +347,7 @@ class ProposalMutation implements ContainerAwareInterface
             throw new UserError($error);
         }
         unset($values['id']); // This only usefull to retrieve the proposal
+        $proposalForm = $proposal->getProposalForm();
 
         if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
             $error = sprintf('You must be the author to update a proposal.');

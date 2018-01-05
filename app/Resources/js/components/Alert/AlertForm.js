@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlertFormSucceededMessage from './AlertFormSucceededMessage';

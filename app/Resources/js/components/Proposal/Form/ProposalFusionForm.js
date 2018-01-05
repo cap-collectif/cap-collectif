@@ -7,7 +7,8 @@ import select from '../../Form/Select';
 import CreateProposalFusionMutation, {
   type CreateProposalFusionMutationResponse,
 } from '../../../mutations/CreateProposalFusionMutation';
-import type { State, Uuid } from '../../../types';
+import { closeCreateFusionModal } from '../../../redux/modules/proposal';
+import type { State, Dispatch, Uuid } from '../../../types';
 
 export const formName = 'create-proposal-fusion';
 
@@ -27,7 +28,7 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch) => {
   return CreateProposalFusionMutation.commit({
     input: { fromProposals: values.fromProposals.map(proposal => proposal.value) },
   })
@@ -36,6 +37,7 @@ const onSubmit = (values: FormValues) => {
         throw new Error('Mutation "createProposalFusion" failed.');
       }
       const createdProposal = response.createProposalFusion.proposal;
+      dispatch(closeCreateFusionModal());
       window.location.href = createdProposal.adminUrl;
     })
     .catch(() => {

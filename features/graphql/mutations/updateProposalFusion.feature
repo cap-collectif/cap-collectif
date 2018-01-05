@@ -1,20 +1,15 @@
-@proposal @create_fusion
-Feature: Proposals Fusion
+@proposal @update_proposal_fusion
+Feature: Update Proposal Fusion
 
 @database
-Scenario: GraphQL client wants to create a fusion
+Scenario: GraphQL client wants to update a fusion
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: CreateProposalFusionInput!) {
-      createProposalFusion (input: $input) {
+    "query": "mutation ($input: UpdateProposalFusionInput!) {
+      updateProposalFusion (input: $input) {
         proposal {
-          author {
-            id
-          }
-          title
-          adminUrl
           mergedFrom {
             id
           }
@@ -32,13 +27,8 @@ Scenario: GraphQL client wants to create a fusion
   """
   {
     "data": {
-      "createProposalFusion": {
+      "updateProposalFusion": {
         "proposal": {
-          "author": {
-            "id": "userAdmin"
-          },
-          "title": "untitled-proposal",
-          "adminUrl": @string@,
           "mergedFrom": [
             {
               "id": "proposal1"
@@ -54,13 +44,13 @@ Scenario: GraphQL client wants to create a fusion
   """
 
 @security
-Scenario: GraphQL client wants to create a fusion with only 1 proposal
+Scenario: GraphQL client wants to update a fusion with only 1 proposal
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: CreateProposalFusionInput!) {
-      createProposalFusion (input: $input) {
+    "query": "mutation ($input: UpdateProposalFusionInput!) {
+      updateProposalFusion (input: $input) {
         proposal {
           id
           mergedFrom {
@@ -79,21 +69,21 @@ Scenario: GraphQL client wants to create a fusion with only 1 proposal
   Then the JSON response should match:
   """
   {
-    "errors": [{"message":"You must specify at least 2 proposals to merge.","locations": @wildcard@,"path":["createProposalFusion"]}],
+    "errors": [{"message":"You must specify at least 2 proposals to merge.","locations": @wildcard@,"path":["updateProposalFusion"]}],
     "data": {
-      "createProposalFusion": null
+      "updateProposalFusion": null
     }
   }
   """
 
 @security
-Scenario: GraphQL client wants to create a fusion with proposals from different forms
+Scenario: GraphQL client wants to update a fusion with proposals from different forms
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: CreateProposalFusionInput!) {
-      createProposalFusion (input: $input) {
+    "query": "mutation ($input: UpdateProposalFusionInput!) {
+      updateProposalFusion (input: $input) {
         proposal {
           id
           mergedFrom {
@@ -112,9 +102,9 @@ Scenario: GraphQL client wants to create a fusion with proposals from different 
   Then the JSON response should match:
   """
   {
-    "errors": [{"message":"All proposals to merge should have the same proposalForm.","locations": @wildcard@,"path":["createProposalFusion"]}],
+    "errors": [{"message":"All proposals to merge should have the same proposalForm.","locations": @wildcard@,"path":["updateProposalFusion"]}],
     "data": {
-      "createProposalFusion": null
+      "updateProposalFusion": null
     }
   }
   """

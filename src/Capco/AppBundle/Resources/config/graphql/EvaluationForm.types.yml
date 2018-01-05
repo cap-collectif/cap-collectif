@@ -10,6 +10,6 @@ EvaluationForm:
                 type: "String!"
                 description: "The title of evaluation form (question)"
             questions:
-                type: "[Question!]"
+                type: "[Question!]!"
                 description: "List of questions in the evaluation form"
                 resolve: "@=resolver('evaluation_form_questions', [value])"

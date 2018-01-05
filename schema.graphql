@@ -161,7 +161,6 @@ input ChangeProposalNotationInput {
   proposalId: ID!
   estimation: Int
   likers: [ID!]
-  evaluers: [ID!]
   clientMutationId: String
 }
 
@@ -471,7 +470,7 @@ type EvaluationForm {
   title: String!
 
   # List of questions in the evaluation form
-  questions: [Question!]
+  questions: [Question!]!
 }
 
 scalar GeoJSON
@@ -537,7 +536,7 @@ type MediaResponse implements Response {
   question: Question!
 
   # Medias
-  medias: [Media]!
+  medias: [Media!]!
 }
 
 # A multiple choice question
@@ -568,6 +567,7 @@ type Mutation {
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
   createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
+  updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
@@ -1487,6 +1487,21 @@ type UpdateProposalFormNotificationsConfigurationPayload {
 
 type UpdateProposalFormPayload {
   proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+input UpdateProposalFusionInput {
+  # The proposal to update.
+  proposalId: ID!
+
+  # Proposal ids that are merged.
+  fromProposals: [ID!]!
+  clientMutationId: String
+}
+
+type UpdateProposalFusionPayload {
+  # The updated proposal
+  proposal: Proposal
   clientMutationId: String
 }
 

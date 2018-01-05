@@ -9,3 +9,12 @@ services:
           - "@translator"
       tags:
           - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\UpdateProposalFusionMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFusionMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@form.factory"
+          - "@capco.proposal.repository"
+      tags:
+          - { name: overblog_graphql.mutation }

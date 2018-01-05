@@ -23,7 +23,7 @@ import type { ProposalAdminNotationForm_proposal } from './__generated__/Proposa
 import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import {
   formatInitialResponsesValues,
-  formatResponsesToSubmit,
+  formatSubmitResponses,
   renderResponses,
 } from '../../../utils/responsesHelper';
 import type { Dispatch, State } from '../../../types';
@@ -47,7 +47,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       input: {
         proposalId: props.proposal.id,
         version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
-        responses: formatResponsesToSubmit(values, props),
+        responses: formatSubmitResponses(
+          data.responses,
+          props.proposal.form.evaluationForm.questions,
+        ),
       },
     };
     return ChangeProposalEvaluationMutation.commit(evaluationInput).then(response => {

@@ -35,13 +35,13 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
               "position": 0,
               "private": false,
               "required": true,
-              "slug": "slug-1",
               "title": "Question 1",
               "type": "text",
               "validationRule": null,
             },
           ]
         }
+        responses={Array []}
       />
     </div>
   </form>
@@ -83,13 +83,13 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
               "position": 0,
               "private": false,
               "required": true,
-              "slug": "slug-1",
               "title": "Question 1",
               "type": "text",
               "validationRule": null,
             },
           ]
         }
+        responses={Array []}
       />
       <ButtonToolbar
         bsClass="btn-toolbar"
