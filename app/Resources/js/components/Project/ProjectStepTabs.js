@@ -12,6 +12,8 @@ type State = {
   translateX: number,
   showArrowRight: boolean,
   showArrowLeft: boolean,
+  firstArrowDisplay: boolean,
+  rightTest: boolean,
 };
 
 export class ProjectStepTabs extends React.Component<Props, State> {
@@ -22,13 +24,14 @@ export class ProjectStepTabs extends React.Component<Props, State> {
       translateX: 0,
       showArrowRight: false,
       showArrowLeft: false,
+      firstArrowDisplay: true,
+      rightTest: true,
     };
   }
 
   componentDidMount = () => {
     const stepTabsBar = document.getElementById('step-tabs__list');
     const activeTab = stepTabsBar && stepTabsBar.getElementsByClassName('active')[0];
-    // const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
 
     const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
     const getBoundingActiveTab = activeTab && activeTab.getBoundingClientRect();
@@ -38,16 +41,9 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     const activeTabLeft = getBoundingActiveTab && getBoundingActiveTab.left;
     const activeTabRight = getBoundingActiveTab && getBoundingActiveTab.right;
 
-
-    console.warn(barLeft, barRight, activeTabLeft, activeTabRight);
-
-    // move right
-    if(activeTabLeft < barLeft) {
-      const diffLeft = (activeTabLeft - barLeft);
-      this.setState({
-        translateX: diffLeft + 22,
-      })
-    }
+    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
+    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
+    const scrollNavWidth = stepScrollNav && stepScrollNav.offsetWidth;
 
     // move left
     if(activeTabRight > barRight) {
@@ -58,31 +54,37 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     }
 
     // if it doesn't move
-    if(activeTabRight <= barRight && activeTabLeft >= barLeft) {
-      // const diffRight = (barRight - activeTabRight);
+    if(activeTabRight <= barRight && activeTabLeft >= barLeft && scrollNavWidth > stepTabsBarWidth) {
       this.setState({
         showArrowRight: true,
       })
     }
-
-    // manque flèche droite, à mettre dans didUpdate ? quand scroll nav droite > bar droite après avoir changé
-
   };
 
   componentDidUpdate = (prevProps: Props, preState: State) => {
-    // const {} = this.state;
+    const { firstArrowDisplay, translateX } = this.state;
+
+    const stepTabsBar = document.getElementById('step-tabs__list');
+    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
+    const barRight = getBoundingBar && getBoundingBar.right;
+
+    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
+    const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
+    const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
+
     if(preState.translateX === 0 && this.state.translateX !== 0) {
       if(this.state.translateX < 0) {
         this.setState({
           showArrowLeft: true,
         })
       }
+    }
 
-
-      // marche pas
-      if(this.state.translateX > 0) {
+    if(firstArrowDisplay) {
+      if(scrollNavRight && barRight && ((scrollNavRight + translateX) > barRight)) {
         this.setState({
           showArrowRight: true,
+          firstArrowDisplay: false,
         })
       }
     }
@@ -96,10 +98,6 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     }
   };
 
-  getTranslateRight = () => {
-    console.log("riiiight")
-  };
-
   getTranslateLeft = () => {
     const { translateX } = this.state;
 
@@ -108,22 +106,19 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     const stepTabsBarWidth = stepTabsBar.offsetWidth;
     const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
     const barLeft = getBoundingBar && getBoundingBar.left;
-    const barRight = getBoundingBar && getBoundingBar.right;
+    // fin repetition
 
     const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
     const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
     const scrollNavLeft = getBoundingScrollNav && getBoundingScrollNav.left;
-    const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
-
-    console.log(barLeft, barRight, scrollNavLeft, scrollNavRight);
 
     const diffLeft = barLeft - scrollNavLeft;
-    console.warn(translateX);
-    console.log(diffLeft);
 
     if(diffLeft < stepTabsBarWidth) {
       this.setState({
         translateX: translateX + diffLeft,
+        showArrowLeft: false,
+        showArrowRight: true,
       })
     }
 
@@ -132,15 +127,45 @@ export class ProjectStepTabs extends React.Component<Props, State> {
         translateX: stepTabsBarWidth,
       })
     }
+  };
 
+  getTranslateRight = () => {
+    const { translateX } = this.state;
+
+    // trouver moyen reprendre const du didmount
+    const stepTabsBar = document.getElementById('step-tabs__list');
+    const stepTabsBarWidth = stepTabsBar.offsetWidth;
+    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
+    const barRight = getBoundingBar && getBoundingBar.right;
+    // fin repetition
+
+    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
+    const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
+    const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
+
+    const diffRight = barRight - scrollNavRight;
+
+    if(diffRight < stepTabsBarWidth) {
+      this.setState({
+        translateX: (translateX + diffRight) - 22,
+        showArrowRight: false,
+        showArrowLeft: true,
+      })
+    }
+
+    if(diffRight > stepTabsBarWidth) {
+      this.setState({
+        translateX: stepTabsBarWidth,
+      })
+    }
   };
 
   render() {
     const { steps } = this.props;
     const { translateX, showArrowLeft, showArrowRight } = this.state;
 
-    const test = translateX;
-    const translation = `translateX(${test}px)`;
+    const getTranslateX = translateX;
+    const translation = `translateX(${getTranslateX}px)`;
 
     return (
       <div className="step-tabs">
