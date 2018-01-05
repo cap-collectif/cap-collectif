@@ -6,7 +6,7 @@ import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
-import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
+import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminEvaluersForm_proposal } from './__generated__/ProposalAdminEvaluersForm_proposal.graphql';
@@ -19,7 +19,7 @@ type Props = RelayProps & FormProps & FormValues;
 const formName = 'proposal-admin-evaluers';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  return ChangeProposalNotationMutation.commit({
+  return ChangeProposalEvaluersMutation.commit({
     input: {
       proposalId: props.proposal.id,
       evaluers: values.evaluers.map(u => u.value),

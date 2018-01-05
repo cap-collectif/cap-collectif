@@ -317,11 +317,7 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button
-                type="submit"
-                id="proposal_admin_content_save"
-                bsStyle="primary"
-                disabled={pristine || invalid || submitting}>
+              <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <AlertAdminForm

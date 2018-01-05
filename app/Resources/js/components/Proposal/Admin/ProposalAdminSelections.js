@@ -178,7 +178,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 </div>
               </ListGroupItem>
               {selectionSteps.map((step, index) => (
-                <ListGroupItem key={index} id={`item_${index}`}>
+                <ListGroupItem key={index}>
                   <div>
                     <strong>{step.title}</strong> - <span>Etape de sélection</span>
                   </div>
@@ -199,7 +199,7 @@ export class ProposalAdminSelections extends Component<Props> {
                             <i className="fa fa-exclamation-triangle" /> L'auteur de la proposition
                             sera notifié du changement de statut
                           </p>
-                        )}@
+                        )}
                         <Field
                           type="select"
                           label="Statut"
@@ -226,11 +226,7 @@ export class ProposalAdminSelections extends Component<Props> {
               ))}
             </ListGroup>
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button
-                type="submit"
-                bsStyle="primary"
-                id="proposal_advancement_save"
-                disabled={pristine || invalid || submitting}>
+              <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <AlertAdminForm

@@ -12,7 +12,6 @@ const mutation = graphql`
     changeProposalNotation(input: $input) {
       proposal {
         ...ProposalAdminNotationForm_proposal
-        ...ProposalAdminEvaluersForm_proposal
       }
     }
   }
