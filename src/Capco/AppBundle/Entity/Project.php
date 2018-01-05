@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait;
+    use UuidTrait, MetaDescriptionCustomCodeTrait;
 
     const FILTER_ALL = 'all';
 

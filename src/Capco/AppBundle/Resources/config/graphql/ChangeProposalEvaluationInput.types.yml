@@ -5,8 +5,5 @@ ChangeProposalEvaluationInput:
             proposalId:
                 type: "ID!"
                 description: "The proposal id"
-            version:
-                type: "Int!"
-                description: "The revision number of the evaluation"
             responses:
                 type: "[ResponseInput!]!"
