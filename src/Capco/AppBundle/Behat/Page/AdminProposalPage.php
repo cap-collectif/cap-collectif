@@ -20,6 +20,13 @@ class AdminProposalPage extends Page
         'proposal title' => '#proposal_title',
         'proposal summary' => '#proposal_summary',
         'proposal save' => '#proposal_admin_content_save',
+        'proposal advancement selection' => '#item_0 .form-group .react-toggle',
+        'proposal advancement winner' => '#item_0 .form-group .react-toggle',
+        'proposal advancement closed' => '#item_1 .form-group .react-toggle',
+        'proposal advancement selection to come' => '#item_2 .form-group .react-toggle',
+        'proposal advancement realisation to come' => '#item_3 .form-group .react-toggle',
+        'proposal advancement selection status' => '#item_0 select',
+        'proposal advancement save' => '#proposal_advancement_save',
     ];
 
     public function clickSaveContentProposalButton()
@@ -27,8 +34,28 @@ class AdminProposalPage extends Page
         $this->getElement('proposal save')->click();
     }
 
+    public function clickSaveProposalAdvancementButton()
+    {
+        $this->getElement('proposal advancement save')->click();
+    }
+
     public function clickAdvancementTab()
     {
         $this->getElement('proposal advancement tab')->click();
+    }
+
+    public function getProposalElement(string $element)
+    {
+        return $this->getElement($element);
+    }
+
+    public function checkProposalCheckbox(string $element)
+    {
+        $this->getProposalElement($element)->click();
+    }
+
+    public function selectProposalAdvancementStatus(string $status, string $element)
+    {
+        return $this->getElement($element)->selectOption($status);
     }
 }

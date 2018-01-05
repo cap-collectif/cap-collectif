@@ -1,8 +1,8 @@
 @proposals
 Feature: Edit a proposal
 
-@database @elasticsearch @dev
-Scenario: Logged in admin wants edit a proposal
+@database @elasticsearch
+Scenario: Logged in admin wants edit a proposal content
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   And I fill in the following:
@@ -16,5 +16,17 @@ Scenario: Logged in admin wants edit a proposal
   And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
   And I wait 3 seconds
   Then I save current admin content proposal
+  And I wait 3 seconds
+  Then I should see "global.saved"
+
+@database @elasticsearch
+Scenario: Logged in admin wants edit a proposal advancement tab
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal advancement tab
+  And I toggle a proposal advancement "proposal advancement selection"
+  And I wait 3 seconds
+  And I change the proposal advancement select "proposal advancement selection status" with option "Soumis au vote"
+  Then I save current proposal admin advancement
   And I wait 3 seconds
   Then I should see "global.saved"
