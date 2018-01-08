@@ -67,13 +67,13 @@ export class ProposalFusionForm extends React.Component<Props> {
           isLoading={projects.length === 0}
           component={select}
           clearable={false}
-          onChange={() => onProjectChange(formName, 'childConnections', [])}
+          onChange={() => onProjectChange(formName, 'fromProposals', [])}
           options={projects.map(p => ({ value: p.id, label: p.title }))}
         />
         {currentCollectStep && (
           <Field
             name="fromProposals"
-            id="childConnections"
+            id="fromProposals"
             multi
             label="initial-proposals"
             autoload

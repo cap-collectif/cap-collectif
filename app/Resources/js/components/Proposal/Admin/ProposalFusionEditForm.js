@@ -52,7 +52,7 @@ export class ProposalFusionEditForm extends React.Component<Props> {
       <form>
         <Field
           name="fromProposals"
-          id="childConnections"
+          id="fromProposals"
           multi
           label="initial-proposals"
           autoload

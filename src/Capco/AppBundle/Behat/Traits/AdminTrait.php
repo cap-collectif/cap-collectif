@@ -27,19 +27,27 @@ trait AdminTrait
      */
     public function iFillTheProposalMergeForm()
     {
-        $this->iWait(2);
+        // Select a project
         $this->getSession()->getPage()->find('css', '#project .Select-input input')->setValue('7');
-        $this->iWait(3);
-        $this->getSession()->getPage()->find('css', '#childConnections')->click();
-        $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
-        $this->iWait(3);
-        $this->getSession()->getPage()->find('css', '#childConnections .Select-input input')->setValue('chère');
         $this->iWait(2);
-        $this->getSession()->getPage()->find('css', '#childConnections')->click();
-        $this->iWait(2);
-        $this->getSession()->getPage()->find('css', '#childConnections .Select-option[id*="-option-1"]')->click();
-        $this->fillField('title', 'test');
-        $this->fillField('proposal-admin-body', 'Description');
+        // Select 2 distinct proposals from the project
+        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+        $this->getSession()->getPage()->find('css', '#fromProposals .Select-input input')->setValue('chère');
+        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+        $this->iWait(3);
+        $this->getSession()->getPage()->find('css', '#fromProposals .Select-option')->click();
+        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+        $this->getSession()->getPage()->find('css', '#fromProposals .Select-option')->click();
+        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+    }
+
+    /**
+     * @When I should be redirected to a merge proposal
+     */
+    public function iShouldBeRedirectedToAMergeProposal()
+    {
+        $url = $this->getSession()->getCurrentUrl();
+        expect(preg_match('/^http:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i', $url))->toBe(1);
     }
 
     /**
