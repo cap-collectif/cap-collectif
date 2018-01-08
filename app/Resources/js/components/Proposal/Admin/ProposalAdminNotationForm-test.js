@@ -21,6 +21,7 @@ describe('<ProposalAdminNotationForm />', () => {
         },
       },
       evaluation: {
+        version: 1,
         responses: [],
       },
     },
