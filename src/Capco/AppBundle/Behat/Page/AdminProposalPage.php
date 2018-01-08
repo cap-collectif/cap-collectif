@@ -27,6 +27,7 @@ class AdminProposalPage extends Page
         'proposal advancement realisation to come' => '#item_3 .form-group .react-toggle',
         'proposal advancement selection status' => '#item_0 select',
         'proposal advancement save' => '#proposal_advancement_save',
+        'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
     ];
 
     public function clickSaveProposalContentButton()
@@ -44,6 +45,11 @@ class AdminProposalPage extends Page
         $this->getElement('proposal advancement tab')->click();
     }
 
+    public function clickEvaluationTab()
+    {
+        $this->getElement('proposal evaluation tab')->click();
+    }
+
     public function toggleProposalElement(string $element)
     {
         $this->getElement($element)->click();
@@ -54,11 +60,8 @@ class AdminProposalPage extends Page
         return $this->getElement($element)->selectOption($status);
     }
 
-    public function fillFieldWithAutoComplete(string $field, string $value)
+    public function clickSaveProposalEvaluationAnalystsGroupes()
     {
-        $this->fillField($field, $value);
-        $this->iWait(1);
-        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
-        $this->iWait(1);
+        $this->getElement('proposal evaluation analysts groupes save')->click();
     }
 }

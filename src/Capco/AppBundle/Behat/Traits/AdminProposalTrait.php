@@ -34,6 +34,18 @@ trait AdminProposalTrait
     }
 
     /**
+     * @When I go to the admin proposal evaluation tab
+     */
+    public function iGoToTheAdminProposalEvaluerTab()
+    {
+        $page = $this->getCurrentPage();
+        $this->iWait(3); // Wait alert to disappear
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal evaluation tab') . "').length > 0");
+        $page->clickEvaluationTab();
+        $this->iWait(1);
+    }
+
+    /**
      * @When I toggle a proposal advancement :elementName
      */
     public function iToggleAProposalAdvancementButton(string $elementName)
@@ -70,5 +82,31 @@ trait AdminProposalTrait
         $this->iWait(1);
         $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
         $this->iWait(1);
+    }
+
+    /**
+     * @When I fill :analyst1 and :analyst2 to the analyst select
+     */
+    public function iFillProposalEvaluationAnalysts(string $analyst1, string $analyst2)
+    {
+        $this->iWait(2);
+        $this->getCurrentPage()->find('css', '#evaluers .Select-input input')->setValue($analyst1);
+        $this->iWait(3);
+        $this->getCurrentPage()->find('css', '#evaluers')->click();
+        $this->getCurrentPage()->find('css', '#evaluers .Select-option[id*="-option-1"]')->click();
+        $this->iWait(3);
+        $this->getCurrentPage()->find('css', '#evaluers .Select-input input')->setValue($analyst2);
+        $this->iWait(2);
+        $this->getCurrentPage()->find('css', '#evaluers')->click();
+        $this->iWait(2);
+        $this->getCurrentPage()->find('css', '#evaluers .Select-option[id*="-option-1"]')->click();
+    }
+
+    /**
+     * @When I save the current proposal evaluation analysts groupes
+     */
+    public function iSaveTheProposalEvaluationAnalystGroupes()
+    {
+        $this->getCurrentPage()->clickSaveProposalEvaluationAnalystsGroupes();
     }
 }
