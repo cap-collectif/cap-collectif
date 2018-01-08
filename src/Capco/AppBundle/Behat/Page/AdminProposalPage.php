@@ -9,20 +9,56 @@ class AdminProposalPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin/capco/app/proposal/list';
+    protected $path = 'admin/capco/app/proposal/{proposalid}/edit';
 
     protected $elements = [
-        'create proposal merge button' => '#add-proposal-fusion',
-        'submit proposal merge' => '#confirm-proposal-merge-create',
+        'proposal content tab' => '#proposal-admin-page-tabs-tab-1',
+        'proposal advancement tab' => '#proposal-admin-page-tabs-tab-2',
+        'proposal actuality tab' => '#proposal-admin-page-tabs-tab-3',
+        'proposal evaluation tab' => '#proposal-admin-page-tabs-tab-4',
+        'proposal status tab' => '#proposal-admin-page-tabs-tab-5',
+        'proposal title' => '#proposal_title',
+        'proposal summary' => '#proposal_summary',
+        'proposal save' => '#proposal_admin_content_save',
+        'proposal advancement selection' => '#item_0 .form-group .react-toggle',
+        'proposal advancement winner' => '#item_0 .form-group .react-toggle',
+        'proposal advancement closed' => '#item_1 .form-group .react-toggle',
+        'proposal advancement selection to come' => '#item_2 .form-group .react-toggle',
+        'proposal advancement realisation to come' => '#item_3 .form-group .react-toggle',
+        'proposal advancement selection status' => '#item_0 select',
+        'proposal advancement save' => '#proposal_advancement_save',
     ];
 
-    public function clickCreateProposalMergeButton()
+    public function clickSaveProposalContentButton()
     {
-        $this->getElement('create proposal merge button')->click();
+        $this->getElement('proposal save')->click();
     }
 
-    public function clickSubmitProposalMergeButton()
+    public function clickSaveProposalAdvancementButton()
     {
-        $this->getElement('submit proposal merge')->click();
+        $this->getElement('proposal advancement save')->click();
+    }
+
+    public function clickAdvancementTab()
+    {
+        $this->getElement('proposal advancement tab')->click();
+    }
+
+    public function toggleProposalElement(string $element)
+    {
+        $this->getElement($element)->click();
+    }
+
+    public function selectProposalAdvancementStatus(string $status, string $element)
+    {
+        return $this->getElement($element)->selectOption($status);
+    }
+
+    public function fillFieldWithAutoComplete(string $field, string $value)
+    {
+        $this->fillField($field, $value);
+        $this->iWait(1);
+        $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
+        $this->iWait(1);
     }
 }

@@ -39,10 +39,6 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'mail';
         }
 
-        if ('pole-emploi' === $this->samlIdp) {
-            return 'mail';
-        }
-
         throw new \Exception('Could not find your authentication attribute.');
     }
 
