@@ -32,11 +32,25 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario:Logged in admin, wants to edit a proposal evaluation
+Scenario:Logged in admin, wants to edit a proposal evaluation (adding analyst groupes)
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal evaluation tab
   And I fill "ag" and "Utilisateurs" to the analyst select
   And I save the current proposal evaluation analysts groupes
+  And I wait 1 seconds
+  Then I should see "global.saved"
+
+@database @elasticsearch
+Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with custom form
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal evaluation tab
+  And I fill the element "proposal evaluation evaluate" with value "Bonne"
+  And I fill the element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
+  And I pick Comment trouvez-vous cette présentation with value Au top
+  And I check "Incohérente" in the proposal definition evaluation
+  And  I check "Je dis oui" in the proposal definition resume
+  And I save the custom evaluation
   And I wait 1 seconds
   Then I should see "global.saved"

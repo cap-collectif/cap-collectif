@@ -36,7 +36,7 @@ trait AdminProposalTrait
     /**
      * @When I go to the admin proposal evaluation tab
      */
-    public function iGoToTheAdminProposalEvaluerTab()
+    public function iGoToTheAdminProposalEvaluationTab()
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
@@ -59,7 +59,7 @@ trait AdminProposalTrait
     /**
      * @When I change the proposal advancement select :select with option :value
      */
-    public function iChangeTheProposalAdvancementSelect(string  $select, string $value)
+    public function iChangeTheProposalAdvancementSelect(string $select, string $value)
     {
         $this->getCurrentPage()->selectProposalAdvancementStatus($value, $select);
         $this->iWait(1);
@@ -108,5 +108,47 @@ trait AdminProposalTrait
     public function iSaveTheProposalEvaluationAnalystGroupes()
     {
         $this->getCurrentPage()->clickSaveProposalEvaluationAnalystsGroupes();
+    }
+
+    /**
+     * @When I pick Comment trouvez-vous cette présentation with value Au top
+     */
+    public function iPickCommentTrouvezVousCettePresentation()
+    {
+        $this->getCurrentPage()->find('css', '#proposal-admin-page-tabs-pane-4 div[id="responses[2]"] > div:first-child')->click();
+    }
+
+    /**
+     * @When I fill the element :element with value :value
+     **/
+    public function iFillTheProposalElementWithValue(string $element, string $value)
+    {
+        $this->getCurrentPage()->fillElementWithValue($element, $value);
+    }
+
+    /**
+     * @When I check :value in the proposal definition evaluation
+     */
+    public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
+    {
+        $element = '#proposal-admin-page-tabs-pane-4 div[id="responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-responses[3]"][value="' . $value . '"]';
+        $this->getCurrentPage()->find('css', $element)->check();
+    }
+
+    /**
+     * @When I check :value in the proposal definition resume
+     */
+    public function iCheckTheProposalResumeEvaluationWithValue(string $value)
+    {
+        $element = '#proposal-admin-page-tabs-pane-4 div.radio input[type="radio"][value="' . $value . '"]';
+        $this->getCurrentPage()->find('css', $element)->click();
+    }
+
+    /**
+     * @When I save the custom evaluation
+     */
+    public function iSaveTheCustomEvaluation()
+    {
+        $this->getCurrentPage()->saveCustomEvaluation();
     }
 }

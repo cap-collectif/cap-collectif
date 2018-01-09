@@ -28,6 +28,9 @@ class AdminProposalPage extends Page
         'proposal advancement selection status' => '#item_0 select',
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
+        'proposal evaluation evaluate' => '#proposal-admin-page-tabs-pane-4 input[type="text"][id="responses[0]"]',
+        'proposal evaluation evaluate more information' => '#proposal-admin-page-tabs-pane-4 textarea[type="textarea"][id="responses[1]"]',
+        'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
     ];
 
     public function clickSaveProposalContentButton()
@@ -63,5 +66,16 @@ class AdminProposalPage extends Page
     public function clickSaveProposalEvaluationAnalystsGroupes()
     {
         $this->getElement('proposal evaluation analysts groupes save')->click();
+    }
+
+    public function fillElementWithValue(string $element, string $value)
+    {
+        $element = $this->getElement($element);
+        $this->fillField($element, $value);
+    }
+
+    public function saveCustomEvaluation()
+    {
+        $this->getElement('proposal evaluation custom save')->click();
     }
 }
