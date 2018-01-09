@@ -73,6 +73,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
         </div>
         <form onSubmit={handleSubmit}>
           <QueryRenderer
+            variables={{}}
             environment={environment}
             query={graphql`
               query ProposalFormAdminEvaluationForm_availableQuestionnairesQuery {

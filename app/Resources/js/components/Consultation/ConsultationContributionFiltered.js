@@ -1,36 +1,35 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import * as React from 'react';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import ContributionPaginatedList, { pageSize } from './ContributionPaginatedList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Utils/Loader';
+import type { ConsultationContributionFilteredQueryResponse } from './__generated__/ConsultationContributionFilteredQuery.graphql';
 
 const renderConsultationPaginated = ({
   error,
   props,
-}: {
-  error: ?Error,
-  props?: ?{ consultations: Array<Object> },
-}) => {
+}: { props: ?ConsultationContributionFilteredQueryResponse } & ReadyState) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line react/prop-types
     if (props.consultations && props.consultations.length) {
+      // $FlowFixMe Propably libdef issue.
       return <ContributionPaginatedList consultation={props.consultations[0]} />;
     }
     return graphqlError;
   }
+  // $FlowFixMe Propably libdef issue.
   return <Loader />;
 };
 
-export const ConsultationContributionFiltered = React.createClass({
-  propTypes: {
-    consultationId: PropTypes.string.isRequired,
-  },
+type Props = {
+  consultationId: string,
+};
 
+export class ConsultationContributionFiltered extends React.Component<Props> {
   render() {
     const { consultationId } = this.props;
     return (
@@ -51,7 +50,7 @@ export const ConsultationContributionFiltered = React.createClass({
         render={renderConsultationPaginated}
       />
     );
-  },
-});
+  }
+}
 
 export default ConsultationContributionFiltered;

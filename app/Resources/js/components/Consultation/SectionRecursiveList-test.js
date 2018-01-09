@@ -6,7 +6,7 @@ import { SectionRecursiveList } from './SectionRecursiveList';
 
 describe('<SectionRecursiveList />', () => {
   const props = {
-    sections: [{}, {}],
+    sections: [{ sections: [] }, { sections: [] }],
     consultation: {},
   };
 

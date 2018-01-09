@@ -19,9 +19,11 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
           <a href={proposal.show_url}>{proposal.title}</a>
         </td>
         <td>
+          {/* $FlowFixMe Probably typedef bug. */}
           <ProposalCollectStatus proposal={proposal} />
         </td>
         <td>
+          {/* $FlowFixMe Probably typedef bug. */}
           <ProposalLastUpdateInfo proposal={proposal} />
         </td>
         <td>

@@ -1,5 +1,6 @@
 // @flow
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+import type { Actions as ReduxFormAction } from 'redux-form';
 import type { State as ProposalState, ProposalAction } from './redux/modules/proposal';
 import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';
 import type { State as UserState, UserAction } from './redux/modules/user';
@@ -14,9 +15,6 @@ export type VoteValue = -1 | 0 | 1;
 export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 export type OpinionAndVersion = Opinion | Version;
-
-// Replace once Relay Modern will have flow-typed typedefs.
-export type Environment = Object;
 
 export type FeatureToggles = {
   blog: boolean,
@@ -90,6 +88,7 @@ export type Action =
   | IdeaAction
   | ReportAction
   | DefaultAction
+  | ReduxFormAction
   | { type: '@@INIT' };
 
 export type GlobalState = {

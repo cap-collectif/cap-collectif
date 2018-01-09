@@ -190,24 +190,22 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             header={
               <div>
                 <FormattedMessage id="initial-proposals" />
-                <Button
-                  bsStyle="warning"
-                  className="pull-right"
-                  onClick={() => {
-                    this.setState({ showEditFusionModal: true });
-                  }}
-                  style={{ marginTop: -5 }}>
-                  <FormattedMessage id="glodal.edit" />
-                </Button>
-                <Button
-                  bsStyle="danger"
-                  className="pull-right"
-                  onClick={() => {
-                    console.log('click');
-                  }}
-                  style={{ marginTop: -5 }}>
-                  <FormattedMessage id="glodal.delete" />
-                </Button>
+                <ButtonToolbar style={{ marginTop: -5 }} className="pull-right">
+                  <Button
+                    bsStyle="warning"
+                    onClick={() => {
+                      this.setState({ showEditFusionModal: true });
+                    }}>
+                    <FormattedMessage id="glodal.edit" />
+                  </Button>
+                  <Button
+                    bsStyle="danger"
+                    onClick={() => {
+                      console.log('click');
+                    }}>
+                    <FormattedMessage id="glodal.delete" />
+                  </Button>
+                </ButtonToolbar>
               </div>
             }>
             <ListGroup fill>
@@ -454,6 +452,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalAdminContentForm_proposal on Proposal {
+      ...ProposalFusionEditModal_proposal
       id
       mergedFrom {
         id

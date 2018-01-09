@@ -33,7 +33,12 @@ export class NotificationsBox extends Component<Props> {
     };
     return (
       <Panel header={<FormattedMessage id="profile.account.notifications.title" />}>
-        <QueryRenderer environment={environment} query={query} render={renderNotificationsForm} />
+        <QueryRenderer
+          variables={{}}
+          environment={environment}
+          query={query}
+          render={renderNotificationsForm}
+        />
       </Panel>
     );
   }

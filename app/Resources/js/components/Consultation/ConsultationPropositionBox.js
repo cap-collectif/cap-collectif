@@ -1,40 +1,39 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import * as React from 'react';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
 // import ConsultationContributionFiltered
 //   from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
+import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 
-export const ConsultationPropositionBox = React.createClass({
-  propTypes: {
-    step: PropTypes.object.isRequired,
-  },
+type Props = {
+  step: { id: string },
+};
 
+export class ConsultationPropositionBox extends React.Component<Props> {
   render() {
     const { step } = this.props;
     const renderSectionRecursiveList = ({
       error,
       props,
-    }: {
-      error: ?Error,
-      props: ?{ consultations: Array<{ sections: Array<Object> }> },
-    }) => {
+    }: { props: ?ConsultationPropositionBoxQueryResponse } & ReadyState) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
-        // eslint-disable-next-line react/prop-types
         if (props.consultations[0].sections) {
           return (
+            // $FlowFixMe Propably libdef issue.
             <SectionRecursiveList consultation={step} sections={props.consultations[0].sections} />
           );
         }
         return graphqlError;
       }
+      // $FlowFixMe Propably libdef issue.
       return <Loader />;
     };
     return (
@@ -66,7 +65,7 @@ export const ConsultationPropositionBox = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default ConsultationPropositionBox;

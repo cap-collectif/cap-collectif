@@ -93,6 +93,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
       }
       query={[Function]}
       render={[Function]}
+      variables={Object {}}
     />
     <ButtonToolbar
       bsClass="btn-toolbar"

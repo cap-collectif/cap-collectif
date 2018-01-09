@@ -5,12 +5,20 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
   <SectionList
     consultation={Object {}}
     level={0}
-    section={Object {}}
+    section={
+      Object {
+        "sections": Array [],
+      }
+    }
   />
   <SectionList
     consultation={Object {}}
     level={0}
-    section={Object {}}
+    section={
+      Object {
+        "sections": Array [],
+      }
+    }
   />
 </div>
 `;

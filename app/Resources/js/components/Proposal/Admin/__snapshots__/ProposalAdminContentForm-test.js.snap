@@ -4,7 +4,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
 <div
   className="box box-primary container"
 >
-  <Connect(ProposalFusionEditModal)
+  <Relay(Connect(ProposalFusionEditModal))
     onClose={[Function]}
     proposal={
       Object {
@@ -127,44 +127,42 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           id="initial-proposals"
           values={Object {}}
         />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="warning"
+        <ButtonToolbar
+          bsClass="btn-toolbar"
           className="pull-right"
-          disabled={false}
-          onClick={[Function]}
           style={
             Object {
               "marginTop": -5,
             }
           }
         >
-          <FormattedMessage
-            id="glodal.edit"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          className="pull-right"
-          disabled={false}
-          onClick={[Function]}
-          style={
-            Object {
-              "marginTop": -5,
-            }
-          }
-        >
-          <FormattedMessage
-            id="glodal.delete"
-            values={Object {}}
-          />
-        </Button>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="warning"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="glodal.edit"
+              values={Object {}}
+            />
+          </Button>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="danger"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="glodal.delete"
+              values={Object {}}
+            />
+          </Button>
+        </ButtonToolbar>
       </div>
     }
   >

@@ -9,7 +9,7 @@ type Props = {
   submitting: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-  errorMessage: ?string,
+  errorMessage?: string,
 };
 
 export class AlertForm extends React.Component<Props> {

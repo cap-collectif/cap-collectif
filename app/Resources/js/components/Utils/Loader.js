@@ -2,14 +2,13 @@
 import * as React from 'react';
 
 type Props = {
-  show?: boolean,
-  children?: any,
+  show: boolean,
+  children?: ?React.Node,
 };
 
 export class Loader extends React.Component<Props> {
   static defaultProps = {
     show: true,
-    children: null,
   };
 
   render() {
@@ -20,6 +19,9 @@ export class Loader extends React.Component<Props> {
           <div className="spinner-loader" />
         </div>
       );
+    }
+    if (!children) {
+      return null;
     }
     return Array.isArray(children) ? <div>{children}</div> : children;
   }

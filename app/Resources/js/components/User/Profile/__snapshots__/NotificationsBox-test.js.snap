@@ -68,6 +68,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is i
     }
     query={[Function]}
     render={[Function]}
+    variables={Object {}}
   />
 </Panel>
 `;
@@ -140,6 +141,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is s
     }
     query={[Function]}
     render={[Function]}
+    variables={Object {}}
   />
 </Panel>
 `;
@@ -212,6 +214,7 @@ exports[`<NotificationsBox /> should render and enabled button when the form is 
     }
     query={[Function]}
     render={[Function]}
+    variables={Object {}}
   />
 </Panel>
 `;

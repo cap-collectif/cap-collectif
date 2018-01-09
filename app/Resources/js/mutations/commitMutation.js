@@ -1,19 +1,16 @@
 // @flow
-import { commitMutation as relayCommitMutation } from 'react-relay';
-import type { Environment } from '../types';
+import {
+  commitMutation as relayCommitMutation,
+  type Environment,
+  type MutationConfig,
+} from 'react-relay';
 
-type Config = {
-  mutation: Object,
-  variables: ?Object,
-  uploadables?: any,
-};
-
-const commitMutation = (environment: Environment, config: Config): Promise<any> =>
+const commitMutation = (environment: Environment, config: MutationConfig<*>): Promise<any> =>
   new Promise((resolve, reject) => {
     relayCommitMutation(environment, {
       ...config,
-      onCompleted: response => resolve(response),
-      onError: error => reject(error),
+      onCompleted: (response: ?Object) => resolve(response),
+      onError: (error: Error) => reject(error),
     });
   });
 

@@ -34,6 +34,7 @@ export class EvaluationsIndexPage extends React.Component<{}> {
   render() {
     return (
       <QueryRenderer
+        variables={{}}
         environment={environment}
         query={graphql`
           query EvaluationsIndexPageQuery {

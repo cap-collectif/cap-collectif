@@ -1,43 +1,43 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { HelpBlock } from 'react-bootstrap';
 import Select from 'react-select';
 
-export const renderSelect = React.createClass({
-  propTypes: {
-    input: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired,
-      onBlur: PropTypes.func.isRequired,
-      onChange: PropTypes.func.isRequired,
-      onFocus: PropTypes.func.isRequired,
-    }).isRequired,
-    meta: PropTypes.object.isRequired,
-    label: PropTypes.any.isRequired,
-    help: PropTypes.any.isRequired,
-    id: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    autoload: PropTypes.bool,
-    clearable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    multi: PropTypes.bool,
-    options: PropTypes.array, // or loadOptions for async
-    loadOptions: PropTypes.func, // or options for sync
-    filterOptions: PropTypes.func,
-    onChange: PropTypes.func,
-    labelClassName: PropTypes.string,
-    inputClassName: PropTypes.string,
+type Options = Array<{ id: string, label: string }>;
+type Value = string | Array<{ value: string }>;
+type OnChangeInput = { value: string } | Array<{ value: string }>;
+type Props = {
+  input: {
+    name: string,
+    value: Value,
+    onBlur: () => void,
+    onChange: (value: Value) => void,
+    onFocus: () => void,
   },
+  meta: { touched: boolean, error: ?string },
+  label: string | React.Node,
+  help: string | React.Node,
+  id: string,
+  placeholder?: string,
+  autoload?: boolean,
+  clearable?: boolean,
+  disabled?: boolean,
+  multi: boolean,
+  options?: Options, // or loadOptions for async
+  loadOptions?: () => Options, // or options for sync
+  filterOptions?: Function,
+  onChange: () => void,
+  labelClassName?: string,
+  inputClassName?: string,
+};
 
-  getDefaultProps() {
-    return {
-      multi: false,
-      disabled: false,
-      autoload: false,
-      clearable: true,
-      loadOptions: undefined,
-    };
-  },
+export class renderSelect extends React.Component<Props> {
+  static defaultProps = {
+    multi: false,
+    disabled: false,
+    autoload: false,
+    clearable: true,
+  };
 
   render() {
     const {
@@ -82,14 +82,15 @@ export const renderSelect = React.createClass({
               options={options}
               noResultsText={'Pas de résultats…'}
               loadingPlaceholder={'Chargement…'}
-              onBlur={() => onBlur(value)}
+              onBlur={() => onBlur()}
               onFocus={onFocus}
-              onChange={(newValue: { value: string } | Array<{ value: string }>) => {
+              onChange={(newValue: OnChangeInput) => {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if (multi) {
-                  return input.onChange(newValue);
+                if (multi && Array.isArray(newValue)) {
+                  input.onChange(newValue);
+                  return;
                 }
                 if (!Array.isArray(newValue)) {
                   input.onChange(newValue ? newValue.value : '');
@@ -111,16 +112,18 @@ export const renderSelect = React.createClass({
               value={value}
               noResultsText={'Pas de résultats…'}
               loadingPlaceholder={'Chargement…'}
-              onBlur={() => onBlur(value)}
+              onBlur={() => onBlur()}
               onFocus={onFocus}
-              onChange={(newValue: { value: string }) => {
+              onChange={(newValue: OnChangeInput) => {
                 if (typeof onChange === 'function') {
                   onChange();
                 }
-                if (multi) {
+                if (multi && Array.isArray(newValue)) {
                   return input.onChange(newValue);
                 }
-                input.onChange(newValue ? newValue.value : '');
+                if (!Array.isArray(newValue)) {
+                  input.onChange(newValue ? newValue.value : '');
+                }
               }}
             />
           )}
@@ -128,7 +131,7 @@ export const renderSelect = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default renderSelect;

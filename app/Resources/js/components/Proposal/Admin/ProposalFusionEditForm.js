@@ -2,15 +2,21 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
+import { connect, type MapStateToProps } from 'react-redux';
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
-import type { Dispatch, Uuid } from '../../../types';
+import type { Dispatch, Uuid, State } from '../../../types';
+import type { ProposalFusionEditForm_proposal } from './__generated__/ProposalFusionEditForm_proposal.graphql';
 
 export const formName = 'update-proposal-fusion';
 
+type RelayProps = {
+  proposal: ProposalFusionEditForm_proposal,
+};
+
 type FormValues = {
-  fromProposals: $ReadOnlyArray<{ value: Uuid }>,
+  fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>,
 };
 
 const validate = (values: FormValues) => {
@@ -21,9 +27,7 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-type Props = {
-  proposal: Object,
-};
+type Props = RelayProps & { onClose: () => void };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return UpdateProposalFusionMutation.commit({
@@ -36,7 +40,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       if (!response.updateProposalFusion || !response.updateProposalFusion.proposal) {
         throw new Error('Mutation "updateProposalFusion" failed.');
       }
-      // dispatch(closeUpdateFusionModal());
+      props.onClose();
     })
     .catch(() => {
       throw new SubmissionError({
@@ -47,7 +51,11 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
 export class ProposalFusionEditForm extends React.Component<Props> {
   render() {
-    const { stepId } = this.props.proposal.form.step.id;
+    const { proposal } = this.props;
+    if (!proposal.form.step) {
+      return null;
+    }
+    const stepId = proposal.form.step.id;
     return (
       <form>
         <Field
@@ -59,15 +67,22 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           help="2-proposals-minimum"
           placeholder="select-proposals"
           component={select}
-          loadOptions={input =>
+          clearable={false}
+          loadOptions={(input: string) =>
             Fetcher.postToJson(`/collect_steps/${stepId}/proposals/search`, {
               terms: input,
             }).then(res => ({
-              options: res.proposals.map(p => ({
-                value: p.id,
-                label: p.title,
-                stepId,
-              })),
+              options: res.proposals
+                .map(p => ({
+                  value: p.id,
+                  label: p.title,
+                }))
+                .concat(
+                  proposal.mergedFrom.map(p => ({
+                    value: p.id,
+                    label: p.title,
+                  })),
+                ),
             }))
           }
         />
@@ -78,12 +93,25 @@ export class ProposalFusionEditForm extends React.Component<Props> {
 
 const form = reduxForm({
   form: formName,
+  enableReinitialize: true,
   validate,
   onSubmit,
 })(ProposalFusionEditForm);
 
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+  return {
+    initialValues: {
+      fromProposals: props.proposal.mergedFrom.map(p => ({
+        value: p.id,
+        label: p.title,
+      })),
+    },
+  };
+};
+const container = connect(mapStateToProps)(form);
+
 export default createFragmentContainer(
-  form,
+  container,
   graphql`
     fragment ProposalFusionEditForm_proposal on Proposal {
       id

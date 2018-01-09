@@ -11,12 +11,7 @@ const mutation = graphql`
   mutation UpdateProposalFusionMutation($input: UpdateProposalFusionInput!) {
     updateProposalFusion(input: $input) {
       proposal {
-        id
-        mergedFrom {
-          id
-          title
-          adminUrl
-        }
+        ...ProposalFusionEditForm_proposal
       }
     }
   }

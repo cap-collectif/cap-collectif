@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -25,7 +24,7 @@ class UpdateProposalFusionMutation
         $this->proposalRepo = $proposalRepo;
     }
 
-    public function __invoke(Argument $input, User $author)
+    public function __invoke(Argument $input)
     {
         $proposalIds = $input->getRawArguments()['fromProposals'];
 

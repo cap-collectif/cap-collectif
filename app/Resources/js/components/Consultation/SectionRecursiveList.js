@@ -2,13 +2,14 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import SectionList from './SectionList';
+import type { SectionRecursiveList_sections } from './__generated__/SectionRecursiveList_sections.graphql';
 
-export const SectionRecursiveList = React.createClass({
-  propTypes: {
-    sections: React.PropTypes.array.isRequired,
-    consultation: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  sections: SectionRecursiveList_sections,
+  consultation: Object,
+};
 
+export class SectionRecursiveList extends React.Component<Props> {
   render() {
     const { sections, consultation } = this.props;
     return (
@@ -18,8 +19,8 @@ export const SectionRecursiveList = React.createClass({
         ))}
       </div>
     );
-  },
-});
+  }
+}
 
 export default createFragmentContainer(
   SectionRecursiveList,
