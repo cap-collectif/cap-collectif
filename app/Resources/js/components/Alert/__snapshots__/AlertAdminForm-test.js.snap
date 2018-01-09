@@ -40,21 +40,6 @@ exports[`<AlertAdminForm /> render correctly the message for submit succeeded 1`
 </div>
 `;
 
-exports[`<AlertAdminForm /> render correctly the message with a custom error message 1`] = `
-<div
-  className="alert__form_server-failed-message"
->
-  <i
-    className="cap cap-ios-close-outline"
-  />
-   
-  <FormattedHTMLMessage
-    id="error.test"
-    values={Object {}}
-  />
-</div>
-`;
-
 exports[`<AlertAdminForm /> render no message during submitting of form 1`] = `<div />`;
 
 exports[`<AlertAdminForm /> render no message when the form is valid 1`] = `<div />`;

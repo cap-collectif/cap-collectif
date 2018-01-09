@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
@@ -27,6 +27,7 @@ type Props = RelayProps & {
   submitting: boolean,
   dispatch: Dispatch,
   handleSubmit: () => void,
+  intl: IntlShape
 };
 type FormValues = {
   publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE' | 'DRAFT',
@@ -53,7 +54,7 @@ const onDelete = (proposalId: string) => {
     input: {
       proposalId,
     },
-  }).then(location.reload());
+  });
 };
 
 export class ProposalAdminStatusForm extends Component<Props> {
@@ -72,6 +73,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
       handleSubmit,
       publicationStatus,
       dispatch,
+      intl,
     } = this.props;
     return (
       <div className="box box-primary container">
@@ -158,8 +160,13 @@ export class ProposalAdminStatusForm extends Component<Props> {
               </Button>
               {(isSuperAdmin || isAuthor) &&
                 !proposal.deletedAt && (
-                  <Button bsStyle="danger" onClick={() => onDelete(proposal.id)}>
+                  <Button bsStyle="danger" onClick={() => {
+                      if (window.confirm(intl.formatMessage({id:"proposal.admin.status.delete.confirmation"}))) {
+                          onDelete(proposal.id);
+                      }
+                  }}>
                     <FormattedMessage id="global.delete" />
+
                   </Button>
                 )}
               <AlertAdminForm
@@ -176,11 +183,11 @@ export class ProposalAdminStatusForm extends Component<Props> {
     );
   }
 }
-
+const componentIntl = injectIntl(ProposalAdminStatusForm);
 const form = reduxForm({
   enableReinitialize: true,
   form: formName,
-})(ProposalAdminStatusForm);
+})(componentIntl);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
