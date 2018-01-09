@@ -27,12 +27,12 @@ class UpdateProposalFusionMutation
     public function __invoke(Argument $input)
     {
         $proposalIds = $input->getRawArguments()['fromProposals'];
+        $proposalId = $input->getRawArguments()['proposalId'];
 
-        if (count($proposalIds) < 2) {
-            throw new UserError('You must specify at least 2 proposals to merge.');
+        $proposal = $this->proposalRepo->find($proposalId);
+        if (!$proposal) {
+            throw new UserError('Unknown proposal to merge with id: ' . $proposalId);
         }
-
-        $proposal = $this->proposalRepo->find($input->getRawArguments()['proposalId']);
 
         $proposalForm = $proposal->getProposalForm();
         foreach ($proposalIds as $key => $id) {

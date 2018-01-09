@@ -7,6 +7,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
+import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
 <<<<<<< HEAD
@@ -201,7 +202,12 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   <Button
                     bsStyle="danger"
                     onClick={() => {
-                      console.log('click');
+                      return UpdateProposalFusionMutation.commit({
+                        input: {
+                          proposalId: proposal.id,
+                          fromProposals: [],
+                        },
+                      });
                     }}>
                     <FormattedMessage id="glodal.delete" />
                   </Button>
