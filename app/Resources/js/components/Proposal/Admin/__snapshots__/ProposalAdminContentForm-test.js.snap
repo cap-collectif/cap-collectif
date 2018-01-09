@@ -85,6 +85,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             "title": "Child 2",
           },
         ],
+        "mergedIn": Array [],
         "publicationStatus": "DRAFT",
         "responses": Array [
           Object {

@@ -7,11 +7,63 @@ import type {
   UpdateProposalFusionMutationVariables,
 } from './__generated__/UpdateProposalFusionMutation.graphql';
 
+// We use this mutation from a child or a fusion, that's why we
+// are not using the ...Fragment syntax
+// maybe we can find something better.
 const mutation = graphql`
   mutation UpdateProposalFusionMutation($input: UpdateProposalFusionInput!) {
     updateProposalFusion(input: $input) {
+      removedMergedFrom {
+        id
+        mergedFrom {
+          id
+          adminUrl
+          title
+          mergedIn {
+            id
+            adminUrl
+            title
+            mergedFrom {
+              id
+            }
+          }
+        }
+        mergedIn {
+          id
+          adminUrl
+          title
+          mergedFrom {
+            id
+            adminUrl
+            title
+          }
+        }
+      }
       proposal {
-        ...ProposalFusionEditForm_proposal
+        id
+        mergedFrom {
+          id
+          adminUrl
+          title
+          mergedIn {
+            id
+            adminUrl
+            title
+            mergedFrom {
+              id
+            }
+          }
+        }
+        mergedIn {
+          id
+          adminUrl
+          title
+          mergedFrom {
+            id
+            adminUrl
+            title
+          }
+        }
       }
     }
   }

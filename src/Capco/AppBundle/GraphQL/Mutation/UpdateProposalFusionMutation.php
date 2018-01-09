@@ -34,6 +34,12 @@ class UpdateProposalFusionMutation
             throw new UserError('Unknown proposal to merge with id: ' . $proposalId);
         }
 
+        $beforeChildProposalIds = $proposal->getChildConnections()->map(
+          function ($entity) {
+              return $entity->getId();
+          }
+        );
+
         $proposalForm = $proposal->getProposalForm();
         foreach ($proposalIds as $key => $id) {
             $child = $this->proposalRepo->find($id);
@@ -54,6 +60,21 @@ class UpdateProposalFusionMutation
 
         $this->em->flush();
 
-        return ['proposal' => $proposal];
+        $afterChildProposalIds = $proposal->getChildConnections()->map(
+          function ($entity) {
+              return $entity->getId();
+          }
+        );
+        $removedMergedFromIds = $beforeChildProposalIds->filter(
+            function ($id) use ($afterChildProposalIds) {
+                return !$afterChildProposalIds->contains($id);
+            }
+        );
+        $removedMergedFrom = [];
+        foreach ($removedMergedFromIds as $id) {
+            $removedMergedFrom[] = $this->proposalRepo->find($id);
+        }
+
+        return ['proposal' => $proposal, 'removedMergedFrom' => $removedMergedFrom];
     }
 }

@@ -185,6 +185,35 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
           show={this.state.showEditFusionModal}
           proposal={proposal}
         />
+        {proposal.mergedIn.length > 0 && (
+          <Panel className="mt-15" header={<FormattedMessage id="grouped-into-a-new-proposal" />}>
+            <ListGroup fill>
+              {proposal.mergedIn.map(parent => (
+                <ListGroupItem key={parent.id}>
+                  <a href={parent.adminUrl}>{parent.title}</a>
+                  {parent.mergedFrom.length > 2 && (
+                    <Button
+                      bsStyle="danger"
+                      style={{ marginTop: -7 }}
+                      className="pull-right"
+                      onClick={() => {
+                        return UpdateProposalFusionMutation.commit({
+                          input: {
+                            proposalId: parent.id,
+                            fromProposals: parent.mergedFrom
+                              .map(child => child.id)
+                              .filter(id => id !== proposal.id),
+                          },
+                        });
+                      }}>
+                      <FormattedMessage id="glodal.delete" />
+                    </Button>
+                  )}
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Panel>
+        )}
         {proposal.mergedFrom.length > 0 && (
           <Panel
             className="mt-15"
@@ -464,6 +493,14 @@ export default createFragmentContainer(
         id
         adminUrl
         title
+      }
+      mergedIn {
+        id
+        adminUrl
+        title
+        mergedFrom {
+          id
+        }
       }
       author {
         id

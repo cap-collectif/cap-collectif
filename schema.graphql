@@ -919,6 +919,9 @@ type Proposal {
 
   # If the proposal is a fusion, contains the list of merged proposals.
   mergedFrom: [Proposal!]!
+
+  # If the proposal listed in a fusion, contains the list of fusions.
+  mergedIn: [Proposal!]!
 }
 
 # The affiliation of a user to a proposal
@@ -1502,6 +1505,9 @@ input UpdateProposalFusionInput {
 type UpdateProposalFusionPayload {
   # The updated proposal
   proposal: Proposal
+
+  # The proposals that have been removed from the fusion.
+  removedMergedFrom: [Proposal]!
   clientMutationId: String
 }
 

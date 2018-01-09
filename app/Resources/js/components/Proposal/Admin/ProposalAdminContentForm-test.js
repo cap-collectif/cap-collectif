@@ -27,6 +27,7 @@ describe('<ProposalAdminContentForm />', () => {
           medias: [{ id: '1', name: 'media-1', size: '100', url: '' }],
         },
       ],
+      mergedIn: [],
       mergedFrom: [
         { id: '1', title: 'Child 1', adminUrl: 'http://capco.dev/child1' },
         { id: '2', title: 'Child 2', adminUrl: 'http://capco.dev/child2' },

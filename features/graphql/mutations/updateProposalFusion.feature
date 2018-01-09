@@ -10,15 +10,20 @@ Scenario: GraphQL client wants to update a fusion
     "query": "mutation ($input: UpdateProposalFusionInput!) {
       updateProposalFusion (input: $input) {
         proposal {
+          id
           mergedFrom {
             id
           }
+        }
+        removedMergedFrom {
+          id
         }
       }
     }",
     "variables": {
       "input": {
-        "fromProposals": ["proposal1", "proposal2"]
+        "proposalId": "proposal1",
+        "fromProposals": ["proposal2", "proposal3"]
       }
     }
   }
@@ -29,23 +34,21 @@ Scenario: GraphQL client wants to update a fusion
     "data": {
       "updateProposalFusion": {
         "proposal": {
+          "id": "proposal1",
           "mergedFrom": [
             {
-              "id": "proposal1"
+              "id": "proposal2"
             },
             {
-              "id": "proposal2"
+              "id": "proposal3"
             }
           ]
-        }
+        },
+        "removedMergedFrom": []
       }
     }
   }
   """
-
-@security
-Scenario: GraphQL client wants to update a fusion with only 1 proposal
-  Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
@@ -57,44 +60,15 @@ Scenario: GraphQL client wants to update a fusion with only 1 proposal
             id
           }
         }
-      }
-    }",
-    "variables": {
-      "input": {
-        "fromProposals": ["proposal1"]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors": [{"message":"You must specify at least 2 proposals to merge.","locations": @wildcard@,"path":["updateProposalFusion"]}],
-    "data": {
-      "updateProposalFusion": null
-    }
-  }
-  """
-
-@security
-Scenario: GraphQL client wants to update a fusion with proposals from different forms
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: UpdateProposalFusionInput!) {
-      updateProposalFusion (input: $input) {
-        proposal {
+        removedMergedFrom {
           id
-          mergedFrom {
-            id
-          }
         }
       }
     }",
     "variables": {
       "input": {
-        "fromProposals": ["proposal1", "proposal8"]
+        "proposalId": "proposal1",
+        "fromProposals": ["proposal3", "proposal4"]
       }
     }
   }
@@ -102,9 +76,25 @@ Scenario: GraphQL client wants to update a fusion with proposals from different 
   Then the JSON response should match:
   """
   {
-    "errors": [{"message":"All proposals to merge should have the same proposalForm.","locations": @wildcard@,"path":["updateProposalFusion"]}],
     "data": {
-      "updateProposalFusion": null
+      "updateProposalFusion": {
+        "proposal": {
+          "id": "proposal1",
+          "mergedFrom": [
+            {
+              "id": "proposal3"
+            },
+            {
+              "id": "proposal4"
+            }
+          ]
+        },
+        "removedMergedFrom": [
+          {
+            "id": "proposal2"
+          }
+        ]
+      }
     }
   }
   """

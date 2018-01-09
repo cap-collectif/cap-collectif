@@ -5,3 +5,6 @@ UpdateProposalFusionPayload:
             proposal:
                 type: "Proposal"
                 description: "The updated proposal"
+            removedMergedFrom:
+                type: "[Proposal]!"
+                description: "The proposals that have been removed from the fusion."
