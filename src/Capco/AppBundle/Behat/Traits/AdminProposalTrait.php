@@ -22,26 +22,14 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I go to the admin proposal advancement tab
+     * @When I go to the admin proposal :tab tab
      */
-    public function iGoToTheAdminProposalAdvancementTab()
+    public function iGoToTheAdminProposalTab($tab)
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal advancement tab') . "').length > 0");
-        $page->clickAdvancementTab();
-        $this->iWait(1);
-    }
-
-    /**
-     * @When I go to the admin proposal evaluation tab
-     */
-    public function iGoToTheAdminProposalEvaluationTab()
-    {
-        $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal evaluation tab') . "').length > 0");
-        $page->clickEvaluationTab();
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal '.$tab.' tab') . "').length > 0");
+        $page->clickOnTab($tab);
         $this->iWait(1);
     }
 
@@ -150,5 +138,23 @@ trait AdminProposalTrait
     public function iSaveTheCustomEvaluation()
     {
         $this->getCurrentPage()->saveCustomEvaluation();
+    }
+
+    /**
+     * @When I click on :status status
+     */
+    public function iClickOnStatus($status)
+    {
+        $element = '#proposal-admin-page-tabs-pane-5 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
+        $this->getCurrentPage()->find('css', $element)->click();
+    }
+
+    /**
+     * @When I save the proposal's status
+     */
+    public function iSaveTheStatus()
+    {
+        $element = '#proposal-admin-page-tabs-pane-5 button[type="submit"][class="btn btn-primary"]';
+        $this->getCurrentPage()->find('css', $element)->click();
     }
 }

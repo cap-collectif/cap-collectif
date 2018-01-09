@@ -43,14 +43,9 @@ class AdminProposalPage extends Page
         $this->getElement('proposal advancement save')->click();
     }
 
-    public function clickAdvancementTab()
+    public function clickOnTab($tab)
     {
-        $this->getElement('proposal advancement tab')->click();
-    }
-
-    public function clickEvaluationTab()
-    {
-        $this->getElement('proposal evaluation tab')->click();
+        $this->getElement('proposal '.$tab.' tab')->click();
     }
 
     public function toggleProposalElement(string $element)

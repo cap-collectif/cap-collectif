@@ -54,3 +54,13 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with cu
   And I save the custom evaluation
   And I wait 1 seconds
   Then I should see "global.saved"
+
+@database @elasticsearch
+Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with custom form
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal status tab
+  And I click on DRAFT status
+  And I save the proposal's status
+  And I wait 1 seconds
+  Then I should see "global.saved"
