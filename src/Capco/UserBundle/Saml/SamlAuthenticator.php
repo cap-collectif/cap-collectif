@@ -5,7 +5,6 @@ namespace Capco\UserBundle\Saml;
 use Capco\AppBundle\Toggle\Manager;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
-use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,7 +18,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $httpUtils;
     protected $toggleManager;
 
-    public function __construct(Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager)
+    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager)
     {
         $this->samlAuth = $samlAuth;
         $this->samlIdp = $samlIdp;
