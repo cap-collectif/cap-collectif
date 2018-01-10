@@ -388,6 +388,9 @@ class Notify implements MailerInterface
         ]);
 
         $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+        foreach ($proposal->getChildConnections() as $child) {
+            $this->sendEmail($child->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+        }
     }
 
     public function notifyProposalStatusChangeInSelection(Selection $selection)
@@ -406,6 +409,9 @@ class Notify implements MailerInterface
         ]);
 
         $this->sendEmail($selection->getProposal()->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+        foreach ($selection->getProposal()->getChildConnections() as $child) {
+            $this->sendEmail($child->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
+        }
     }
 
     public function notifyProposalPost(Proposal $proposal, Post $post)
