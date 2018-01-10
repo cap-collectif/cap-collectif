@@ -95,7 +95,10 @@ class StepAdmin extends Admin
                 'label' => 'admin.fields.step.title',
                 'required' => true,
             ])
-        ;
+            ->add('label', null, [
+                'label' => 'admin.fields.step.label',
+                'required' => true,
+            ]);
 
         $formMapper
             ->add('isEnabled', null, [
@@ -109,26 +112,27 @@ class StepAdmin extends Admin
                 'required' => false,
             ]);
         }
-
-        $formMapper
-            ->add('startAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.step.start_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'dp_use_current' => false,
-                'attr' => [
-                    'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ],
-                'required' => false,
-            ])
-            ->add('endAt', 'sonata_type_datetime_picker', [
-                'label' => 'admin.fields.step.end_at',
-                'format' => 'dd/MM/yyyy HH:mm',
-                'dp_use_current' => false,
-                'attr' => [
-                    'data-date-format' => 'DD/MM/YYYY HH:mm',
-                ],
-                'required' => false,
-            ]);
+        if (!$subject instanceof PresentationStep) {
+            $formMapper
+                ->add('startAt', 'sonata_type_datetime_picker', [
+                    'label' => 'admin.fields.step.start_at',
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_use_current' => false,
+                    'attr' => [
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
+                    ],
+                    'required' => false,
+                ])
+                ->add('endAt', 'sonata_type_datetime_picker', [
+                    'label' => 'admin.fields.step.end_at',
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_use_current' => false,
+                    'attr' => [
+                        'data-date-format' => 'DD/MM/YYYY HH:mm',
+                    ],
+                    'required' => false,
+                ]);
+        }
 
         if ($subject instanceof PresentationStep
             || $subject instanceof OtherStep
@@ -373,6 +377,20 @@ class StepAdmin extends Admin
                 ->end()
             ;
         }
+        $formMapper
+            ->with('admin.fields.step.advanced')
+            ->add('metaDescription', null, [
+                'label' => 'projects.metadescription',
+                'required' => false,
+                'help' => 'admin.help.metadescription',
+            ])
+            ->add('customCode', null, [
+                'label' => 'admin.customcode',
+                'required' => false,
+                'help' => 'admin.help.customcode',
+                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+            ])
+            ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)

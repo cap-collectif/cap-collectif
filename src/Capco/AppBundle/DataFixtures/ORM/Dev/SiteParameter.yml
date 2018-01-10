@@ -68,22 +68,41 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: ideas.jumbotron.title
         category: pages.ideas
         value: Idées
-        position: 400
+        position: 1
         type: 0
     SiteParameter13:
         keyname: ideas.jumbotron.body
         category: pages.ideas
         value: |
             <p><text(100)></p>
-        position: 410
+        position: 2
         type: 1
     SiteParameter14:
         keyname: ideas.content.body
         category: pages.ideas
         value: |
             <p><text(100)></p>
-        position: 420
+        position: 3
         type: 1
+    SiteParameter25:
+        keyname: ideas.pagination
+        category: pages.ideas
+        value: 20
+        position: 4
+        type: 2
+    SiteParameterIdeasMetaDescription:
+        keyname: ideas.metadescription
+        category: pages.ideas
+        value: ''
+        position: 5
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterIdeasCustomCode:
+        keyname: ideas.customcode
+        category: pages.ideas
+        value: ''
+        position: 6
+        type: 3
     SiteParameter15:
         keyname: ideas.trashed.jumbotron.title
         category: pages.ideas_trash
@@ -158,12 +177,6 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 16
         position: 700
         type: 2
-    SiteParameter25:
-        keyname: ideas.pagination
-        category: pages.ideas
-        value: 20
-        position: 710
-        type: 2
     SiteParameter26:
         keyname: themes.pagination
         category: pages.themes
@@ -223,26 +236,26 @@ Capco\AppBundle\Entity\SiteParameter:
         keyname: blog.pagination.size
         category: pages.blog
         value: 10
-        position: 750
+        position: 780
         type: 2
     SiteParameterBlogJumbotronBody:
         keyname: blog.jumbotron.body
         category: pages.blog
-        value: <p>Description de la page "Blog"</p>
+        value: Description de la page "Blog"
         position: 760
         type: 1
     SiteParameterBlogJumbotronTitle:
         keyname: blog.jumbotron.title
         category: pages.blog
         value: Blog
-        position: 770
+        position: 750
         type: 0
     SiteParameterBlogDescription:
         keyname: blog.content.body
         category: pages.blog
         value: |
-           <p><text(100)></p>
-        position: 771
+            <p><text(100)></p>
+        position: 770
         type: 1
 
     SiteParameterScript:
@@ -333,12 +346,6 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 3
         type: 4
 
-    SiteParameterMetaDescription:
-        keyname: homepage.meta_description
-        category: pages.homepage
-        value: Participez à l'élaboration de la loi
-        position: 101
-        type: 0
     SiteParameterShieldText:
         keyname: shield.introduction
         category: pages.shield
@@ -352,3 +359,108 @@ Capco\AppBundle\Entity\SiteParameter:
         value: fr-FR
         position: 1
         type: 9
+
+    SiteParameterMetaDescription:
+        keyname: homepage.metadescription
+        category: pages.homepage
+        value: Participez à l'élaboration de la loi
+        position: 101
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterHomeCustomCode:
+        keyname: homepage.customcode
+        category: pages.homepage
+        value: ''
+        position: 102
+        type: 3
+    SiteParameterEventMetaDescription:
+        keyname: event.metadescription
+        category: pages.events
+        value: ''
+        position: 304
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterEventCustomCode:
+        keyname: event.customcode
+        category: pages.events
+        value: ''
+        position: 305
+        type: 3
+    SiteParameterBlogMetaDescription:
+        keyname: blog.metadescription
+        category: pages.blog
+        value: ''
+        position: 790
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterBlogCustomCode:
+        keyname: blog.customcode
+        category: pages.blog
+        value: ''
+        position: 791
+        type: 3
+    SiteParameterThemesMetaDescription:
+        keyname: themes.metadescription
+        category: pages.themes
+        value: ''
+        position: 521
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterThemesCustomCode:
+        keyname: themes.customcode
+        category: pages.themes
+        value: ''
+        position: 522
+        type: 3
+    SiteParameterProjectsMetaDescription:
+        keyname: projects.metadescription
+        category: pages.projects
+        value: ''
+        position: 321
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterProjectsCustomCode:
+        keyname: projects.customcode
+        category: pages.projects
+        value: ''
+        position: 322
+        type: 3
+    SiteParameterMembersMetaDescription:
+        keyname: members.metadescription
+        category: pages.members
+        value: ''
+        position: 783
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterMembersCustomCode:
+        keyname: members.customcode
+        category: pages.members
+        value: ''
+        position: 784
+        type: 3
+    SiteParameterContactMetaDescription:
+        keyname: contact.metadescription
+        category: pages.contact
+        value: ''
+        position: 621
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterContactCustomCode:
+        keyname: contact.customcode
+        category: pages.contact
+        value: ''
+        position: 622
+        type: 3
+    SiteParameterTrashIdeasMetaDescription:
+        keyname: ideas_trash.metadescription
+        category: pages.ideas_trash
+        value: ''
+        position: 441
+        isSocialNetworkDescription: true
+        type: 0
+    SiteParameterTrashIdeasCustomCode:
+        keyname: ideas_trash.customcode
+        category: pages.ideas_trash
+        value: ''
+        position: 442
+        type: 3

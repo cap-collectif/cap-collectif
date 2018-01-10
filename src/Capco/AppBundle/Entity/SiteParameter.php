@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -11,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="site_parameter")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
+ * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
 class SiteParameter
 {
@@ -74,6 +76,12 @@ class SiteParameter
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="is_social_network_description", type="boolean")
+     */
+    private $isSocialNetworkDescription = false;
 
     /**
      * @var int
@@ -251,5 +259,29 @@ class SiteParameter
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    public function isSocialNetworkDescription()
+    {
+        return $this->isSocialNetworkDescription;
+    }
+
+    public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription)
+    {
+        $this->isSocialNetworkDescription = $isSocialNetworkDescription;
+
+        return $this;
+    }
+
+    public function isCustomCodeDescription()
+    {
+        return $this->isCustomCodeDescription;
+    }
+
+    public function setIsCustomCodeDescription(bool $isCustomCodeDescription)
+    {
+        $this->isCustomCodeDescription = $isCustomCodeDescription;
+
+        return $this;
     }
 }

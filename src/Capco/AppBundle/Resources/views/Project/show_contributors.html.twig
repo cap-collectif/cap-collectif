@@ -3,12 +3,15 @@
 {% block canonical_link %}{{ url('app_project_show_contributors', {'projectSlug': project.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set projectCover %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}{% if project.Cover %}{% path project.Cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set title = ('project.show.contributors.title' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       project.title~' - '~('project.show.contributors.title'|trans({}, 'CapcoAppBundle')),
-        'url':         url('app_project_show_contributors', {'projectSlug': project.slug}),
+        'title':       title,
         'type':        'project',
-        'image':       projectCover
+        'image':       image,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.Author.slug}) : null,
+        'description': project.metaDescription|striptags ?: currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_contributors', {'projectSlug': project.slug}),
     } only %}
 {% endblock %}
 

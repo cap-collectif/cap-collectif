@@ -32,6 +32,7 @@ class ProposalType extends AbstractType
 
         $builder
             ->add('title', PurifiedTextType::class, ['required' => true])
+            ->add('label', PurifiedTextType::class, ['required' => true])
             ->add('summary', PurifiedTextareaType::class, ['required' => false])
             ->add('body', PurifiedTextareaType::class, ['required' => $isDraft])
         ;

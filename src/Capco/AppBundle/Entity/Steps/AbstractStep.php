@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
+use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -34,9 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractStep
 {
-    use DateHelperTrait;
-    use UuidTrait;
-    use TextableTrait;
+    use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
     /**
      * @var array
@@ -129,6 +128,14 @@ abstract class AbstractStep
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $statuses;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255)
+     * @Assert\NotBlank(message="admin.step.menu_label.error")
+     */
+    private $label;
 
     /**
      * Constructor.
@@ -323,6 +330,22 @@ abstract class AbstractStep
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
+    }
+
     // ************************* Custom methods *********************
 
     /**
@@ -439,7 +462,7 @@ abstract class AbstractStep
     {
         $now = new \DateTime();
 
-        if ($this->startAt !== null && $this->endAt !== null) {
+        if (null !== $this->startAt && null !== $this->endAt) {
             return $this->startAt < $now && $this->endAt > $now;
         }
 
@@ -459,11 +482,11 @@ abstract class AbstractStep
         }
 
         if (null === $this->endAt) {
-            return $this->startAt !== null && $this->startAt < $now;
+            return null !== $this->startAt && $this->startAt < $now;
         }
 
         if ($this->endAt < $now) {
-            return $this->startAt === null || $this->startAt < $now;
+            return null === $this->startAt || $this->startAt < $now;
         }
 
         return false;
@@ -474,10 +497,10 @@ abstract class AbstractStep
         $now = new \DateTime();
 
         if (null === $this->startAt) {
-            return $this->endAt !== null && $this->endAt > $now;
+            return null !== $this->endAt && $this->endAt > $now;
         }
         if ($this->startAt > $now) {
-            return $this->endAt === null || $this->endAt > $now;
+            return null === $this->endAt || $this->endAt > $now;
         }
 
         return false;
