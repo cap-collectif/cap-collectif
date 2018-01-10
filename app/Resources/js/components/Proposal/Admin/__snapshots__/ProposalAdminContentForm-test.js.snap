@@ -200,7 +200,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={true}
-          id="proposal_admin_content_save"
           type="submit"
         >
           <FormattedMessage

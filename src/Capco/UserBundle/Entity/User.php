@@ -294,6 +294,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
             $this->setUsername($attributes['cn'][0]);
             $this->setEmail($attributes['mail'][0]);
         }
+
+        if ('pole-emploi' === $idp) {
+            $this->setUsername($attributes['cn'][0]);
+            $this->setEmail($attributes['mail'][0]);
+        }
     }
 
     public function setSamlId($id)
