@@ -29,7 +29,6 @@ describe('<ProposalPageEvaluation />', () => {
       },
     },
     evaluation: {
-      version: 1,
       responses: [
         {
           question: { id: 'question1', type: 'text' },

@@ -6,7 +6,7 @@ import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
-import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
+import ChangeProposalNotationMutation from '../../../mutations/ChangeProposalNotationMutation';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminEvaluersForm_proposal } from './__generated__/ProposalAdminEvaluersForm_proposal.graphql';
@@ -19,7 +19,7 @@ type Props = RelayProps & FormProps & FormValues;
 const formName = 'proposal-admin-evaluers';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  return ChangeProposalEvaluersMutation.commit({
+  return ChangeProposalNotationMutation.commit({
     input: {
       proposalId: props.proposal.id,
       evaluers: values.evaluers.map(u => u.value),
@@ -61,7 +61,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               multi
-              placeholder="Aucun analyste"
+              placeholder="proposal.analysts.form.placeholder"
               component={select}
               clearable={false}
               loadOptions={() =>
@@ -83,7 +83,11 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine || submitting}
+                id="proposal-evaluation-analysts-groupes-save"
+                type="submit"
+                bsStyle="primary">
                 <i className="cap cap-download-1"> </i>{' '}
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>

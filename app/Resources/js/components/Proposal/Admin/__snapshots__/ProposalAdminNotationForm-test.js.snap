@@ -14,7 +14,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             "estimation": 1000,
             "evaluation": Object {
               "responses": Array [],
-              "version": 1,
             },
             "evaluers": Array [
               Object {
@@ -129,6 +128,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             bsClass="btn"
             bsStyle="primary"
             disabled={true}
+            id="proposal-evaluation-custom-save"
             type="submit"
           >
             <FormattedMessage
@@ -137,7 +137,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             />
           </Button>
           <AlertAdminForm
-            errorMessage={null}
             invalid={false}
             submitFailed={false}
             submitSucceeded={false}
