@@ -38,7 +38,7 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (adding analyst gr
   Then I go to the admin proposal evaluation tab
   And I fill "ag" and "Utilisateurs" to the analyst select
   And I save the current proposal evaluation analysts groupes
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "global.saved"
 
 @database @elasticsearch
@@ -52,7 +52,7 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with cu
   And I check "Incohérente" in the proposal definition evaluation
   And  I check "Je dis oui" in the proposal definition resume
   And I save the custom evaluation
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see "global.saved"
 
 @database @elasticsearch
