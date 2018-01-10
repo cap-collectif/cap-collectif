@@ -2,13 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import {
-  type FormProps,
-  reduxForm,
-  formValueSelector,
-  FieldArray,
-  SubmissionError,
-} from 'redux-form';
+import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertAdminForm from '../../Alert/AlertAdminForm';
@@ -34,20 +28,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalEvaluationMutation.commit({
     input: {
       proposalId: props.proposal.id,
-      version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
       responses: formatResponsesToSubmit(values, props),
     },
-  }).then(response => {
-    if (!response.changeProposalEvaluation) {
-      throw new SubmissionError({ _error: 'proposal_form.admin.evaluation.error.modified_since' });
-    }
   });
 };
 
 export class ProposalPageEvaluation extends React.Component<Props> {
   render() {
     const {
-      error,
       invalid,
       valid,
       submitSucceeded,
@@ -91,7 +79,6 @@ export class ProposalPageEvaluation extends React.Component<Props> {
                   submitSucceeded={submitSucceeded}
                   submitFailed={submitFailed}
                   submitting={submitting}
-                  errorMessage={error}
                 />
               </ButtonToolbar>
             )}
@@ -114,7 +101,6 @@ const form = injectIntl(
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
-    version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
     responses: formatInitialResponses(props),
   },
 });
@@ -152,7 +138,6 @@ export default createFragmentContainer(
         }
       }
       evaluation {
-        version
         responses {
           question {
             id

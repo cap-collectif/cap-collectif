@@ -13,11 +13,9 @@
                             <p class="navbar__step-date excerpt">
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>
-                            {% if 'presentation' !=  currentStep %}
                             <p class="label label-default">
                                 {{ ('step.status.' ~ step | capco_step_status) | trans({}, 'CapcoAppBundle') }}
                             </p>
-                            {% endif %}
                         </div>
                     </a>
                 </li>

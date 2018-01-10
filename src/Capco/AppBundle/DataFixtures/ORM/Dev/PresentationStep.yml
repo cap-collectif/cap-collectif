@@ -16,11 +16,15 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
     id: pstep3
     title: Présentation
     isEnabled: true
+    startAt: <dateTimeBetween('-10 days', '-5 days')>
+    endAt: <dateTimeBetween('+11 days', '+20 days')>
     body: |
       <p><text(100)></p>
   pstep4:
     id: pstep4
     title: Présentation
     isEnabled: true
+    startAt: <dateTimeBetween('+10 days', '+15 days')>
+    endAt: <dateTimeBetween('+20 days', '+27 days')>
     body: |
       <p><text(100)></p>
