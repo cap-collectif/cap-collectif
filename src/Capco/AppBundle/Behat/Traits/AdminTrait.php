@@ -1,18 +1,15 @@
 <?php
 
 namespace Capco\AppBundle\Behat\Traits;
-use Behat\Mink\Driver\Selenium2Driver;
 
 trait AdminTrait
 {
-    use AdminProposalTrait;
-
     /**
-     * @When I go to the admin proposals pages
+     * @When I go to the admin proposals page
      */
-    public function iGoToTheAdminProposalsPages()
+    public function iGoToTheAdminProposalsPage()
     {
-        $this->visitPageWithParams('admin proposal pages');
+        $this->visitPageWithParams('admin proposal page');
     }
 
     /**
@@ -20,7 +17,7 @@ trait AdminTrait
      */
     public function iClickTheMergeButton()
     {
-        $this->navigationContext->getPage('admin proposal pages')->clickCreateProposalMergeButton();
+        $this->navigationContext->getPage('admin proposal page')->clickCreateProposalMergeButton();
     }
 
     /**
@@ -48,14 +45,6 @@ trait AdminTrait
      */
     public function iSubmitTheCreateMergeForm()
     {
-        $this->navigationContext->getPage('admin proposal pages')->clickSubmitProposalMergeButton();
-    }
-
-    /**
-     * @When I go to the admin proposal page with proposalid :proposalid
-     */
-    public function iGoToTheAdminProposalPageWithId(string $proposalid)
-    {
-        $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalid]);
+        $this->navigationContext->getPage('admin proposal page')->clickSubmitProposalMergeButton();
     }
 }
