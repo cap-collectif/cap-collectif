@@ -23,7 +23,7 @@ class Version20171122175657 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
         $this->generator = new UuidGenerator();
     }
-    
+
     /**
      * @param Schema $schema
      */

@@ -2,13 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import {
-  type FormProps,
-  reduxForm,
-  formValueSelector,
-  FieldArray,
-  SubmissionError,
-} from 'redux-form';
+import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import AlertForm from '../../Alert/AlertForm';
