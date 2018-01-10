@@ -39,6 +39,13 @@ Mutation:
                     inputType: ChangeProposalNotationInput
                     payloadType: ChangeProposalNotationPayload
                     mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"
+          changeProposalEvaluers:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeProposalEvaluersInput
+                    payloadType: ChangeProposalEvaluersPayload
+                    mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value])"
           selectProposal:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

@@ -5,6 +5,15 @@ import { shallow } from 'enzyme';
 import { AlertAdminForm } from './AlertAdminForm';
 
 describe('<AlertAdminForm />', () => {
+  const customErrorMessageForm = {
+    valid: false,
+    invalid: true,
+    submitting: false,
+    submitSucceeded: true,
+    submitFailed: true,
+    errorMessage: 'error.test',
+  };
+
   const submitSucceededForm = {
     valid: true,
     invalid: false,
@@ -44,6 +53,11 @@ describe('<AlertAdminForm />', () => {
     submitSucceeded: false,
     submitFailed: false,
   };
+
+  it('render correctly the message with a custom error message', () => {
+    const wrapper = shallow(<AlertAdminForm {...customErrorMessageForm} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('render correctly the message for submit succeeded', () => {
     const wrapper = shallow(<AlertAdminForm {...submitSucceededForm} />);
