@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep1:
     id: collectstep1
     title: Collecte des propositions
+    label: Collecte des propositions
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
@@ -9,6 +10,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep2:
     id: collectstep2
     title: Collecte des propositions fermée
+    label: Collecte des propositions fermée
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
@@ -16,6 +18,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep3:
     id: collectstep3
     title: Collecte des propositions
+    label: Collecte des propositions
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
@@ -23,6 +26,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep4:
     id: collectstep4
     title: Collecte des propositions privée
+    label: Collecte des propositions privée
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
@@ -31,6 +35,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep5:
     id: collectstep5
     title: Collecte des propositions avec vote simple
+    label: Collecte des propositions avec vote simple
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('+28 days', '+50 days')>
@@ -38,6 +43,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep6:
     id: collectstep6
     title: Dépôt fermé
+    label: Dépôt fermé
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-28 days', '-10 days')>
@@ -45,6 +51,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep7:
     id: collectstep7
     title: Collecte avec vote simple limité
+    label: Collecte avec vote simple limité
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', '-30 days')>
     endAt: <dateTimeBetween('-10 days', '-5 days')>
@@ -53,6 +60,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep8:
     id: collectstep8
     title: Collecte avec vote simple limité
+    label: Collecte avec vote simple limité
     body: <p><text(1000)></p>
     timeless: true
     startAt: null
