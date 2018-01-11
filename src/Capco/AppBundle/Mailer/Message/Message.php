@@ -36,9 +36,13 @@ abstract class Message
         $this->cc = [];
         $this->recipients = [];
 
+<<<<<<< HEAD
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
 
+=======
+<<<<<<< HEAD
+>>>>>>> Add structure for emailing
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
 
@@ -58,6 +62,14 @@ abstract class Message
     final public function getSubjectVars(): array
     {
         return $this->subjectVars;
+=======
+        $this->addRecipient($recipientEmail, $recipientName, $recipientVars);
+    }
+
+    final public function getVars(): array
+    {
+        return $this->vars;
+>>>>>>> Add structure for emailing
     }
 
     final public function getSubject(): string
@@ -78,6 +90,7 @@ abstract class Message
     final public function addRecipient(string $recipientEmail, string $recipientName = null, array $vars = [])//: void
     {
         $key = mb_strtolower($recipientEmail);
+>>>>>>> Add structure for emailing
 
         $this->recipients[$key] = new MessageRecipient($recipientEmail, $recipientName, $vars);
     }

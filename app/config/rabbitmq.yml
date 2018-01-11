@@ -5,6 +5,48 @@
             durable: true
             with_unroutable: true
     queues:
+        opinion_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                -
+                    exchange: capco_direct_exchange
+                    routing_key: opinion_create
+        opinion_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                -
+                    exchange: capco_direct_exchange
+                    routing_key: opinion_update
+        opinion_delete:
+           durable: true
+           retries: [25, 125, 625]
+           bindings:
+               -
+                   exchange: capco_direct_exchange
+                   routing_key: opinion_delete
+        argument_create:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                -
+                    exchange: capco_direct_exchange
+                    routing_key: argument_create
+        argument_update:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                -
+                    exchange: capco_direct_exchange
+                    routing_key: argument_update
+        argument_delete:
+           durable: true
+           retries: [25, 125, 625]
+           bindings:
+               -
+                   exchange: capco_direct_exchange
+                   routing_key: argument_delete
         proposal_create:
             durable: true
             retries: [25, 125, 625]
