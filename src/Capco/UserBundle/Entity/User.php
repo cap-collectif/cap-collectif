@@ -10,6 +10,7 @@ use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Util\Canonicalizer;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
@@ -289,15 +290,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         if ('daher' === $idp) {
             $this->setUsername($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
             $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]));
         }
         if ('afd-interne' === $idp) {
             $this->setUsername($attributes['cn'][0]);
             $this->setEmail($attributes['mail'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
         }
 
         if ('pole-emploi' === $idp) {
             $this->setUsername($attributes['cn'][0]);
             $this->setEmail($attributes['mail'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
         }
     }
 
