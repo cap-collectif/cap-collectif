@@ -32,6 +32,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalToBeExpired}
         handleSubmit={jest.fn()}
+        intl={global.intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -64,6 +65,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalExpired}
         handleSubmit={jest.fn()}
+        intl={global.intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -96,6 +98,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalConfirmed}
         handleSubmit={jest.fn()}
+        intl={global.intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
