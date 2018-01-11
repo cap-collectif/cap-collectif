@@ -4,14 +4,12 @@ namespace Capco\AppBundle\Behat\Traits;
 
 trait AdminTrait
 {
-    use AdminProposalTrait;
-
     /**
-     * @When I go to the admin proposals list page
+     * @When I go to the admin proposals page
      */
-    public function iGoToTheAdminProposalsListPage()
+    public function iGoToTheAdminProposalsPage()
     {
-        $this->visitPageWithParams('admin proposal list page');
+        $this->visitPageWithParams('admin proposal page');
     }
 
     /**
@@ -19,7 +17,7 @@ trait AdminTrait
      */
     public function iClickTheMergeButton()
     {
-        $this->getCurrentPage()->clickCreateProposalMergeButton();
+        $this->navigationContext->getPage('admin proposal page')->clickCreateProposalMergeButton();
     }
 
     /**
@@ -47,14 +45,6 @@ trait AdminTrait
      */
     public function iSubmitTheCreateMergeForm()
     {
-        $this->getCurrentPage()->clickSubmitProposalMergeButton();
-    }
-
-    /**
-     * @When I go to the admin proposal page with proposalid :proposalid
-     */
-    public function iGoToTheAdminProposalPageWithId(string $proposalid)
-    {
-        $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalid]);
+        $this->navigationContext->getPage('admin proposal page')->clickSubmitProposalMergeButton();
     }
 }
