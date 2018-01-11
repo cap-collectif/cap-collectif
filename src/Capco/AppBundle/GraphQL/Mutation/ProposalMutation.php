@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalEvaluersType;
-use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\Form\ProposalType;

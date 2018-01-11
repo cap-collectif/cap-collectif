@@ -197,14 +197,16 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                       style={{ marginTop: -7 }}
                       className="pull-right"
                       onClick={() => {
-                        return UpdateProposalFusionMutation.commit({
-                          input: {
-                            proposalId: parent.id,
-                            fromProposals: parent.mergedFrom
-                              .map(child => child.id)
-                              .filter(id => id !== proposal.id),
-                          },
-                        });
+                        if (window.confirm(intl.formatMessage({ id: '' }))) {
+                          UpdateProposalFusionMutation.commit({
+                            input: {
+                              proposalId: parent.id,
+                              fromProposals: parent.mergedFrom
+                                .map(child => child.id)
+                                .filter(id => id !== proposal.id),
+                            },
+                          });
+                        }
                       }}>
                       <FormattedMessage id="glodal.delete" />
                     </Button>
@@ -231,12 +233,14 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   <Button
                     bsStyle="danger"
                     onClick={() => {
-                      return UpdateProposalFusionMutation.commit({
-                        input: {
-                          proposalId: proposal.id,
-                          fromProposals: [],
-                        },
-                      });
+                      if (window.confirm(intl.formatMessage({ id: '' }))) {
+                        UpdateProposalFusionMutation.commit({
+                          input: {
+                            proposalId: proposal.id,
+                            fromProposals: [],
+                          },
+                        });
+                      }
                     }}>
                     <FormattedMessage id="glodal.delete" />
                   </Button>
