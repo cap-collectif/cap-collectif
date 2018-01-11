@@ -7,11 +7,11 @@ trait AdminTrait
     use AdminProposalTrait;
 
     /**
-     * @When I go to the admin proposals pages
+     * @When I go to the admin proposals list page
      */
-    public function iGoToTheAdminProposalsPages()
+    public function iGoToTheAdminProposalsListPage()
     {
-        $this->visitPageWithParams('admin proposal pages');
+        $this->visitPageWithParams('admin proposal list page');
     }
 
     /**
@@ -19,7 +19,7 @@ trait AdminTrait
      */
     public function iClickTheMergeButton()
     {
-        $this->navigationContext->getPage('admin proposal pages')->clickCreateProposalMergeButton();
+        $this->getCurrentPage()->clickCreateProposalMergeButton();
     }
 
     /**
@@ -47,7 +47,7 @@ trait AdminTrait
      */
     public function iSubmitTheCreateMergeForm()
     {
-        $this->navigationContext->getPage('admin proposal pages')->clickSubmitProposalMergeButton();
+        $this->getCurrentPage()->clickSubmitProposalMergeButton();
     }
 
     /**
