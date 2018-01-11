@@ -1,4 +1,4 @@
-@proposals @dev
+@proposals
 Feature: Edit a proposal
 
 @database @elasticsearch
