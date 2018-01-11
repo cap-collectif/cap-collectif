@@ -3,7 +3,6 @@
 namespace Capco\UserBundle\Security\Http\Logout;
 
 use Capco\AppBundle\Toggle\Manager;
-use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
@@ -15,7 +14,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $router;
     protected $toggleManager;
 
-    public function __construct(Simple $samlAuth, Router $router, Manager $toggleManager)
+    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, Router $router, Manager $toggleManager)
     {
         $this->samlAuth = $samlAuth;
         $this->router = $router;

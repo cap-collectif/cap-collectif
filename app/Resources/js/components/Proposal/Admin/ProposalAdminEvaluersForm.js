@@ -61,7 +61,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               multi
-              placeholder="Aucun analyste"
+              placeholder="proposal.analysts.form.placeholder"
               component={select}
               clearable={false}
               loadOptions={() =>
@@ -83,7 +83,11 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine || submitting}
+                id="proposal-evaluation-analysts-groupes-save"
+                type="submit"
+                bsStyle="primary">
                 <i className="cap cap-download-1"> </i>{' '}
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
