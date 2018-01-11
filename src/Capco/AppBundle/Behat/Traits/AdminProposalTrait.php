@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Behat\Traits;
 trait AdminProposalTrait
 {
     /**
-     * @When I change the proposals Category
+     * @When I change the proposals :selectName with option :option
      */
-    public function iChangeTheProposalsCategory()
+    public function iChangeTheProposalsSelect(string $selectName, string $option)
     {
-        $this->selectOption('category', 'Politique');
+        $this->selectOption($selectName, $option);
         $this->iWait(2);
     }
 
@@ -101,11 +101,11 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I pick Comment trouvez-vous cette présentation with value Au top
+     * @When I evaluate the proposal presentation to :value
      */
-    public function iPickCommentTrouvezVousCettePresentation()
+    public function iEvaluateTheProposalPresentationTo(string $value)
     {
-        $this->getCurrentPage()->find('css', '#proposal-admin-page-tabs-pane-4 div[id="responses[2]"] > div:first-child')->click();
+        $this->getCurrentPage()->evaluateProposalPresentation($value);
     }
 
     /**
@@ -137,7 +137,7 @@ trait AdminProposalTrait
     /**
      * @When I save the custom evaluation
      */
-    public function iSaveTheCustomEvaluation()
+    public function iSaveTheCustomProposalEvaluation()
     {
         $this->getCurrentPage()->saveCustomEvaluation();
     }
@@ -145,7 +145,7 @@ trait AdminProposalTrait
     /**
      * @When I click on :status status
      */
-    public function iClickOnStatus(string $status)
+    public function iClickOnProposalStatus(string $status)
     {
         $element = '#proposal-admin-page-tabs-pane-5 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element)->click();
@@ -155,7 +155,7 @@ trait AdminProposalTrait
     /**
      * @When I save the proposal's status
      */
-    public function iSaveTheStatus()
+    public function iSaveTheProposalStatus()
     {
         $element = '#proposal-admin-page-tabs-pane-5 button[type="submit"][class="btn btn-primary"]';
         $this->getCurrentPage()->find('css', $element)->click();
@@ -181,7 +181,7 @@ trait AdminProposalTrait
     /**
      * @When I should see status :status
      */
-    public function iShouldSeeStatus(string $status)
+    public function iShouldSeeTheProposalStatus(string $status)
     {
         $element = '#proposal-admin-page-tabs-pane-5 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element);

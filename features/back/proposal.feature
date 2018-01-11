@@ -11,7 +11,7 @@ Scenario: Logged in admin wants edit a proposal content
     | proposal_body | "Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfucking' house, fucking' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'?" |
     | responses[1]  | HAHAHA |
   And I fill the proposal content address with "5 Allée Rallier-du-Baty 35000 Rennes"
-  And I change the proposals Category
+  And I change the proposals "category" with option "Politique"
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
   And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
   And I wait 3 seconds
@@ -32,7 +32,7 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario:Logged in admin, wants to edit a proposal evaluation (adding analyst groupes)
+Scenario: Logged in admin wants to add some analyst groups
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal evaluation tab
@@ -42,13 +42,13 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (adding analyst gr
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with custom form
+Scenario: Logged in admin wants to evaluate a proposal
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal evaluation tab
   And I fill the element "proposal evaluation evaluate" with value "Bonne"
   And I fill the element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
-  And I pick Comment trouvez-vous cette présentation with value Au top
+  And I evaluate the proposal presentation to "Au top"
   And I check "Incohérente" in the proposal definition evaluation
   And I check "Je dis oui" in the proposal definition resume
   And I save the custom evaluation
@@ -56,7 +56,7 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with cu
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with custom form
+Scenario: Logged in admin, wants to change the proposal's status
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal status tab
@@ -66,7 +66,7 @@ Scenario:Logged in admin, wants to edit a proposal evaluation (evaluate) with cu
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario:Logged in admin, wants to delete a proposal and re published it
+Scenario: Logged in admin, wants to delete a proposal and re published it
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal status tab

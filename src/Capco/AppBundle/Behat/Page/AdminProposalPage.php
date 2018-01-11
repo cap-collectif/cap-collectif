@@ -31,6 +31,7 @@ class AdminProposalPage extends Page
         'proposal evaluation evaluate' => '#proposal-admin-page-tabs-pane-4 input[type="text"][id="responses[0]"]',
         'proposal evaluation evaluate more information' => '#proposal-admin-page-tabs-pane-4 textarea[type="textarea"][id="responses[1]"]',
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
+        'proposal evaluation presentation' => '#proposal-admin-page-tabs-pane-4 div[id="responses[2]"]',
     ];
 
     public function clickSaveProposalContentButton()
@@ -71,5 +72,16 @@ class AdminProposalPage extends Page
     public function saveCustomEvaluation()
     {
         $this->getElement('proposal evaluation custom save')->click();
+    }
+
+    public function evaluateProposalPresentation(string $value)
+    {
+        $child = 'first-child';
+        if ('Du pur bullshit' === $value) {
+            $child = 'last-child';
+        }
+
+        $element = $this->elements['proposal evaluation presentation'] . " > div:$child";
+        $this->find('css', $element)->click();
     }
 }
