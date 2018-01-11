@@ -13,6 +13,7 @@ type Questions = $ReadOnlyArray<{|
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
+  // eslint-disable-next-line flowtype/space-after-type-colon
   +type:
     | 'text'
     | 'textarea'
