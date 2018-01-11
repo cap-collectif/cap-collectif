@@ -4,20 +4,15 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Proposal;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProposalNotationType extends AbstractType
+class ProposalEvaluersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('estimation', MoneyType::class, [
-              'currency' => 'EUR',
-              'required' => false,
-            ])
-            ->add('likers', null, [
+            ->add('evaluers', null, [
                 'required' => false,
                 'by_reference' => false,
             ])

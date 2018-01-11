@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProposalAdminType;
+use Capco\AppBundle\Form\ProposalEvaluersType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\Form\ProposalType;
@@ -45,6 +46,27 @@ class ProposalMutation implements ContainerAwareInterface
         unset($values['proposalId']); // This only usefull to retrieve the proposal
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
+        $form->submit($values);
+
+        if (!$form->isValid()) {
+            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+        }
+
+        $em->flush();
+
+        return ['proposal' => $proposal];
+    }
+
+    public function changeEvaluers(Argument $input)
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $formFactory = $this->container->get('form.factory');
+
+        $values = $input->getRawArguments();
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
+        unset($values['proposalId']);
+
+        $form = $formFactory->create(ProposalEvaluersType::class, $proposal);
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -181,7 +203,7 @@ class ProposalMutation implements ContainerAwareInterface
     public function changePublicationStatus(Argument $values, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        if ($user && $user->isAdmin()) {
+        if ($user && $user->isSuperAdmin()) {
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
