@@ -31,6 +31,26 @@ class StepAdmin extends Admin
         'cascade_validation' => true,
     ];
 
+    protected $placeholder = [
+        'PresentationStep' => 'proposal.tabs.content',
+        'SynthesisStep' => 'admin.fields.step.synthesis',
+        'QuestionnaireStep' => 'admin.label.questionnaire',
+        'OtherStep' => '',
+        'ConsultationStep' => 'project.types.consultation',
+        'RankingStep' => 'admin.fields.project.group ranking',
+        'SelectionStep' => '',
+        'CollectStep' => 'admin.fields.proposal.group collect',
+    ];
+
+    public function getClassName($className)
+    {
+        if ($pos = strrpos($className, '\\')) {
+            return substr($className, $pos + 1);
+        }
+
+        return $className;
+    }
+
     public function getNewInstance()
     {
         $subClass = $this->getRequest()->query->get('subclass');
@@ -88,15 +108,17 @@ class StepAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
-
+        $translator = $this->getTranslator();
+        $label = $this->getLabelKey($subject);
         $formMapper
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
-                'label' => 'admin.fields.step.title',
+                'label' => 'admin.fields.step.label',
                 'required' => true,
             ])
             ->add('label', null, [
-                'label' => 'admin.fields.step.label',
+                'label' => 'color.main menu.text',
+                'data' => $translator->trans($label),
                 'required' => true,
             ]);
 
@@ -460,5 +482,15 @@ class StepAdmin extends Admin
         ;
 
         return $qb->getQuery();
+    }
+
+    private function getLabelKey($object): string
+    {
+        $className = $this->getClassName(get_class($object));
+        if (isset($this->placeholder[$className])) {
+            return $this->placeholder[$className];
+        }
+
+        return '';
     }
 }

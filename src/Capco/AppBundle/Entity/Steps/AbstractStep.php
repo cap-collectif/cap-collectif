@@ -144,6 +144,7 @@ abstract class AbstractStep
     {
         $this->updatedAt = new \Datetime();
         $this->statuses = new ArrayCollection();
+        $this->label = '';
     }
 
     public function __toString()
