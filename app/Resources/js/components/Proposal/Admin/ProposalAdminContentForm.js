@@ -197,7 +197,11 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                       style={{ marginTop: -7 }}
                       className="pull-right"
                       onClick={() => {
-                        if (window.confirm(intl.formatMessage({ id: '' }))) {
+                        if (
+                          window.confirm(
+                            intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
+                          )
+                        ) {
                           UpdateProposalFusionMutation.commit({
                             input: {
                               proposalId: parent.id,
@@ -233,7 +237,11 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   <Button
                     bsStyle="danger"
                     onClick={() => {
-                      if (window.confirm(intl.formatMessage({ id: '' }))) {
+                      if (
+                        window.confirm(
+                          intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
+                        )
+                      ) {
                         UpdateProposalFusionMutation.commit({
                           input: {
                             proposalId: proposal.id,
