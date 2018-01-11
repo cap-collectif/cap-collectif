@@ -8,11 +8,11 @@ Scenario: Logged in admin wants create a proposal from a merge of 2 proposals
   When I click the create merge button
   And I fill the proposal merge form
   And I submit the create merge form
-  And I wait 2 seconds
+  And I wait 3 seconds
   Then I should be redirected to a merge proposal
 
 # @database @elasticsearch
-# Scenario: Logged in admin wants update a proposal to add a merge proposal
+# Scenario: Logged in admin wants update a fusion
 #   Given I am logged in as admin
 #   And I go to the admin proposals page
 #   When I click the create merge button

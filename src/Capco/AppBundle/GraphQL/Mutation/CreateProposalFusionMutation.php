@@ -31,7 +31,7 @@ class CreateProposalFusionMutation
     public function __invoke(Argument $input, User $author)
     {
         $title = $this->translator->trans('untitled-proposal', [], 'CapcoAppBundle');
-        $proposalIds = $input->getRawArguments()['fromProposals'];
+        $proposalIds = array_unique($input->getRawArguments()['fromProposals']);
 
         if (count($proposalIds) < 2) {
             throw new UserError('You must specify at least 2 proposals to merge.');
