@@ -29,16 +29,20 @@ trait AdminTrait
     {
         // Select a project
         $this->getSession()->getPage()->find('css', '#project .Select-input input')->setValue('7');
-        $this->iWait(2);
-        // Select 2 distinct proposals from the project
-        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
-        $this->getSession()->getPage()->find('css', '#fromProposals .Select-input input')->setValue('chère');
-        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
         $this->iWait(3);
-        $this->getSession()->getPage()->find('css', '#fromProposals .Select-option')->click();
-        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
-        $this->getSession()->getPage()->find('css', '#fromProposals .Select-option')->click();
-        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+        // Select 2 distinct proposals from the project
+        $select = $this->getSession()->getPage()->find('css', '#fromProposals');
+        \PHPUnit_Framework_Assert::assertNotNull($select, 'Could not find the multi select.');
+        $select->click();
+        $this->getSession()->getPage()->find('css', '#fromProposals .Select-input input')->setValue('chère');
+        for ($x = 0; $x < 2; ++$x) {
+            $select->click();
+            $this->iWait(3);
+            $option = $this->getSession()->getPage()->find('css', '#fromProposals .Select-option');
+            \PHPUnit_Framework_Assert::assertNotNull($option, 'Could not select option.');
+            $option->click();
+        }
+        $select->click();
     }
 
     /**
