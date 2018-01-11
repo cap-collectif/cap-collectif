@@ -6,7 +6,7 @@
     {% set postMedia %}{% path post.Media, 'blockHeader' %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       post.title,
-        'description': post.body|striptags|truncate(250, true),
+        'description': post.metadescription|striptags ?: post.abstract|striptags ?: post.body|striptags|truncate(250, true),
         'url':         url('app_blog_show', {'slug': post.slug}),
         'type':        'article',
         'image':       postMedia
@@ -69,4 +69,8 @@
         </div>
     {% endif %}
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% if post.customCode is defined and post.customCode != '' %}{{ post.customCode | raw }}{% endif %}
 {% endblock %}
