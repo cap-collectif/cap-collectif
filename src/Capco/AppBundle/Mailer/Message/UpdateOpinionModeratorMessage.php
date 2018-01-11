@@ -4,15 +4,15 @@ namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Opinion;
 
-final class NewOpinionModeratorMessage extends Message
+final class UpdateOpinionModeratorMessage extends Message
 {
     public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
     {
         return new self(
-            'CapcoAppBundle:Mail:NewOpinionModeratorMessage.html.twig',
+            'CapcoAppBundle:Mail:UpdateOpinionModeratorMessage.html.twig',
             $moderatorEmail,
             $moderatorName,
-            'id.NewOpinionModeratorMessage',
+            'id.UpdateOpinionModeratorMessage',
             static::getTemplateVars(
                 $opinion->getStep()->getProject()->getName(),
                 $opinion->getAuthor()->getUsername(),
