@@ -28,7 +28,7 @@ class SamlUserProvider implements UserProviderInterface
             if ('oda' === $this->samlIdp) {
                 $user->setEmail($id . '@fake-email-cap-collectif.com');
             }
-            if ('daher' === $this->samlIdp || 'afd-interne' === $this->samlIdp) {
+            if ('daher' === $this->samlIdp || 'afd-interne' === $this->samlIdp || 'pole-emploi' === $this->samlIdp) {
                 $user->setEmail($id);
             }
 
@@ -46,7 +46,7 @@ class SamlUserProvider implements UserProviderInterface
         return $this->userManager->findUserBy(['samlId' => $user->getSamlId()]);
     }
 
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return 'Capco\UserBundle\Entity\User' === $class;
     }
