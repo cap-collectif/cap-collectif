@@ -32,7 +32,7 @@ class SamlUserProvider implements UserProviderInterface
                 $email = $id . '@fake-email-cap-collectif.com';
             }
             $user->setEmail($email);
-            $user->setEmailCanonical((new Canonicalizer())->canonicalize($id . '@fake-email-cap-collectif.com'));
+            $user->setEmailCanonical((new Canonicalizer())->canonicalize($email));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
         }
