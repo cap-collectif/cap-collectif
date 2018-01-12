@@ -25,16 +25,14 @@ class SamlUserProvider implements UserProviderInterface
             $user = $this->userManager->createUser();
             $user->setSamlId($id);
             $user->setUsername($id);
+            // for daher, afd-interne, pole-emploi the id is the email
+            $email = $id;
 
             if ('oda' === $this->samlIdp) {
-                $user->setEmail($id . '@fake-email-cap-collectif.com');
-                $this->setEmailCanonical((new Canonicalizer())->canonicalize($id . '@fake-email-cap-collectif.com'));
+                $email = $id . '@fake-email-cap-collectif.com';
             }
-            if ('daher' === $this->samlIdp || 'afd-interne' === $this->samlIdp || 'pole-emploi' === $this->samlIdp) {
-                $user->setEmail($id);
-                $this->setEmailCanonical((new Canonicalizer())->canonicalize($id));
-            }
-
+            $user->setEmail($email);
+            $user->setEmailCanonical((new Canonicalizer())->canonicalize($id . '@fake-email-cap-collectif.com'));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
         }
