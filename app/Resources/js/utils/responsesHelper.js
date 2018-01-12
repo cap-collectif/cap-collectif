@@ -63,6 +63,15 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
       |}>,
 |}>;
 
+// The real type is
+//
+// type SubmitResponses = $ReadOnlyArray<{|
+//   value: string,
+//   question: string,
+// |} | {|
+//   question: string,
+//   medias: $ReadOnlyArray<string>,
+// |}>;
 type SubmitResponses = $ReadOnlyArray<{
   value?: ?string,
   question: string,
@@ -76,22 +85,25 @@ export const formatSubmitResponses = (
   if (!responses) return [];
   return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
-    if (question.type !== 'medias' && (res.value === null || typeof res.value === 'string')) {
-      let value = res.value;
-      if (question.type === 'ranking' || question.type === 'button') {
-        value = JSON.stringify({
-          labels: Array.isArray(res.value) ? res.value : [res.value],
-          other: null,
-        });
-      } else if (question.type === 'checkbox' || question.type === 'radio') {
-        value = JSON.stringify(res.value);
-      }
+    if (question.type === 'medias') {
+      return {
+        question: res.question,
+        medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
+      };
+    }
+    let value = res.value;
+    if (question.type === 'ranking' || question.type === 'button') {
+      value = JSON.stringify({
+        labels: Array.isArray(res.value) ? res.value : [res.value],
+        other: null,
+      });
+    } else if (question.type === 'checkbox' || question.type === 'radio') {
+      value = JSON.stringify(res.value);
+    }
+    if (typeof value === 'string') {
       return { value, question: res.question };
     }
-    return {
-      question: res.question,
-      medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
-    };
+    return { value: null, question: res.question };
   });
 };
 

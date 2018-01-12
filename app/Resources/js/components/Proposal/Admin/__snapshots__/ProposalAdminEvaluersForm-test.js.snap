@@ -58,7 +58,11 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
           id="proposal-evaluation-analysts-groupes-save"
 =======
           disabled={false}
+<<<<<<< HEAD
 >>>>>>> You can update the merge from a proposal
+=======
+          id="proposal-evaluation-analysts-groupes-save"
+>>>>>>> Fix evaluation
           type="submit"
         >
           <i
