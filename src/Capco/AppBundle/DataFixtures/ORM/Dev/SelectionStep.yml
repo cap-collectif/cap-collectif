@@ -30,7 +30,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionstep4:
     id: selectionstep4
     title: Sélection avec vote selon le budget
-    label: Sélection avec vote selon le budget
+    label: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
@@ -41,7 +41,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionstep5:
     id: selectionstep5
     title: Sélection avec vote simple
-    label: Sélection avec vote simple
+    label: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('now', '+40 days')>
@@ -51,7 +51,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionstep6:
     id: selectionstep6
     title: Sélection à venir
-    label: Sélection à venir
+    label: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('+1 days', '+10 days')>
     endAt: <dateTimeBetween('+11 days', '+20 days')>
@@ -69,7 +69,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionstep8:
     id: selectionstep8
     title: Sélection avec vote budget limité
-    label: Sélection avec vote budget limité
+    label: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('-10 days', '-5 days')>
     endAt: <dateTimeBetween('+11 days', '+20 days')>
