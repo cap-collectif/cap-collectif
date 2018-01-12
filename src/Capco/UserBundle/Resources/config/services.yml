@@ -52,7 +52,7 @@ services:
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Saml\SamlAuthenticator
-      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@capco.toggle.manager"]
+      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@capco.toggle.manager", "@logger"]
 
   # We override default security services:
   security.authentication.success_handler:

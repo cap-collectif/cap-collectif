@@ -28,9 +28,18 @@ class SamlUserProvider implements UserProviderInterface
             // for daher, afd-interne, pole-emploi the id is the email
             $email = $id;
 
+            // Warning: do not update "@fake-email-cap-collectif.com"
+            // Because this is used to authenticate users.
+
             if ('oda' === $this->samlIdp) {
                 $email = $id . '@fake-email-cap-collectif.com';
             }
+
+            // If the id is not a valid email, we create a fake one...
+            if (false === strpos($a, '@')) {
+                $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
+            }
+
             $user->setEmail($email);
             $user->setEmailCanonical((new Canonicalizer())->canonicalize($email));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
