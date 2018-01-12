@@ -42,7 +42,7 @@ class StepAdmin extends Admin
         'CollectStep' => 'admin.fields.proposal.group collect',
     ];
 
-    public function getClassName($className)
+    public function getClassName(string $className): string
     {
         if ($pos = strrpos($className, '\\')) {
             return substr($className, $pos + 1);
