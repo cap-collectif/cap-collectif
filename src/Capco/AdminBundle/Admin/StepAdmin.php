@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -31,25 +32,16 @@ class StepAdmin extends Admin
         'cascade_validation' => true,
     ];
 
-    protected $placeholder = [
-        'PresentationStep' => 'proposal.tabs.content',
-        'SynthesisStep' => 'admin.fields.step.synthesis',
-        'QuestionnaireStep' => 'admin.label.questionnaire',
-        'OtherStep' => '',
-        'ConsultationStep' => 'project.types.consultation',
-        'RankingStep' => 'admin.fields.project.group ranking',
-        'SelectionStep' => '',
-        'CollectStep' => 'admin.fields.proposal.group collect',
+    protected $labels = [
+        PresentationStep::class => 'proposal.tabs.content',
+        SynthesisStep::class => 'admin.fields.step.synthesis',
+        QuestionnaireStep::class => 'admin.label.questionnaire',
+        OtherStep::class => '',
+        ConsultationStep::class => 'project.types.consultation',
+        RankingStep::class => 'admin.fields.project.group ranking',
+        SelectionStep::class => '',
+        CollectStep::class => 'admin.fields.proposal.group collect',
     ];
-
-    public function getClassName(string $className): string
-    {
-        if ($pos = strrpos($className, '\\')) {
-            return substr($className, $pos + 1);
-        }
-
-        return $className;
-    }
 
     public function getNewInstance()
     {
@@ -114,6 +106,7 @@ class StepAdmin extends Admin
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
                 'label' => 'admin.fields.step.label',
+                'data' => $translator->trans($label),
                 'required' => true,
             ])
             ->add('label', null, [
@@ -484,11 +477,12 @@ class StepAdmin extends Admin
         return $qb->getQuery();
     }
 
-    private function getLabelKey($object): string
+    private function getLabelKey(AbstractStep $step): string
     {
-        $className = $this->getClassName(get_class($object));
-        if (isset($this->placeholder[$className])) {
-            return $this->placeholder[$className];
+        foreach ($this->labels as $class => $label) {
+            if ($step instanceof $class) {
+                return $label;
+            }
         }
 
         return '';

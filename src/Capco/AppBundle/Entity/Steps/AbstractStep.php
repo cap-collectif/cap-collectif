@@ -132,7 +132,7 @@ abstract class AbstractStep
     /**
      * @var string
      *
-     * @ORM\Column(name="label", type="string", length=255)
+     * @ORM\Column(name="label", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="admin.step.menu_label.error")
      */
     private $label;
