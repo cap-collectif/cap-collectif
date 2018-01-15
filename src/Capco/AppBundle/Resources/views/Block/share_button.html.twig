@@ -1,9 +1,15 @@
 {% if is_feature_enabled('share_buttons') %}
     {% set classes = classes is defined ? ' ' ~ classes : '' %}
     {% set btn_classes = btn_classes is defined ? ' ' ~ btn_classes : '' %}
-    <div class="dropdown  dropdown--custom{{ classes }}">
+    <div class="dropdown dropdown--custom{{ classes }}">
         <button class="btn  btn-default{{ btn_classes }}" type="button" data-toggle="dropdown"><i class="cap cap-link"></i> {{ 'share_button.share' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span></button>
         <ul class="dropdown-menu" role="menu">
+            <!-- is it always used ? Or it can be deleted ? -->
+            <li role="menuitem">
+                <a href="mailto:?subject={{ title|escape('url') }}&amp;body={{ url|escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-mail-2-1"></i> {{ 'share_button.email' | trans({}, 'CapcoAppBundle') }}
+                </a>
+            </li>
             <li role="menuitem">
                 <a href="http://www.facebook.com/sharer.php?u={{ url|escape('url') }}&amp;t={{ title|escape('url') }}" onclick="window.open(this.href, 'Facebook', config='height=500, width=700, toolbar=no, menubar=no'); return false" title="{{ 'share_button.share_on.facebook' | trans({}, 'CapcoAppBundle') }}">
                     <i class="cap cap-facebook"></i> {{ 'share_button.facebook' | trans({}, 'CapcoAppBundle') }}
@@ -15,13 +21,8 @@
                 </a>
             </li>
             <li role="menuitem">
-                <a href="https://plus.google.com/share?url={{ url|escape('url') }}&amp;title={{ title|escape('url') }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="{{ 'share_button.share_on.gplus' | trans({}, 'CapcoAppBundle') }}">
-                    <i class="cap cap-gplus"></i> {{ 'share_button.gplus' | trans({}, 'CapcoAppBundle') }}
-                </a>
-            </li>
-            <li role="menuitem">
-                <a href="mailto:?subject={{ title|escape('url') }}&amp;body={{ url|escape('url') }}" title="{{ 'share_button.share_on.email' | trans({}, 'CapcoAppBundle') }}">
-                    <i class="cap cap-mail-2-1"></i> {{ 'share_button.email' | trans({}, 'CapcoAppBundle') }}
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url|escape('url') }}&amp;text={{ title|escape('url') }}" onclick="window.open(this.href, 'linkedin', config='height=500, width=700, toolbar=no, menubar=no'); return false" title="{{ 'share_button.share_on.twitter' | trans({}, 'CapcoAppBundle') }}">
+                    <i class="cap cap-linkedin"></i> {{ 'share_button.linkedin' | trans({}, 'CapcoAppBundle') }}
                 </a>
             </li>
             <li role="menuitem">
