@@ -1,65 +1,13 @@
-.form-group {
-    input,
-    textarea,
-    select,
-    select.form-control,
-    .select2-container :not(.select2-container-active),
-    .form-group > .list-group > .list-group-item {
-        border-radius: 3px;
-        background-color: $light-bgc;
-    }
-
-    .editor {
-        .ql-toolbar, .ql-container {
-            border: 1px solid $border-color;
-        }
-
-        .ql-toolbar {
-            border-radius: 3px 3px 0 0;
-         }
-
-        .ql-container {
-            border-radius: 0 0 3px 3px;
-            border-top: none;
-            background-color: $light-bgc;
-
-            .ql-editor {
-                min-height: 100px;
-            }
-        }
-    }
-
-    .image-uploader {
-        .image-uploader__dropzone-label {
-            text-align: center;
-            padding: 10px;
-            border: 1px dashed $border-color;
-            background-color: $light-bgc;
-
-            p {
-                margin: 5px 0;
-            }
-        }
-
-        .image-uploader__label-info {
-            margin-bottom: 5px;
-        }
-    }
-}
-
-.sonata-ba-form {
-    svg.avatar {
-        vertical-align: middle;
-        background-color: $sonata-bgc;
-    }
-
+.admin_proposal_form {
     .panel-title {
         display: flex;
         align-items: center;
+
         span {
             flex: 1 0 auto;
         }
     }
+
     .list-group-item {
       display: flex;
       align-items: center;
