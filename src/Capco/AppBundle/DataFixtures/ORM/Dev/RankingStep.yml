@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\RankingStep:
     rstep1:
         id: rstep1
         title: Classement des propositions et modifications
-        label: Classement
         isEnabled: true
         startAt: <(new \DateTime('2015-04-25'))>
         endAt: <(new \DateTime('2015-05-25'))>
@@ -17,7 +16,6 @@ Capco\AppBundle\Entity\Steps\RankingStep:
     rstep2:
         id: rstep2
         title: Classement
-        label: Classement
         isEnabled: true
         nbOpinionsToDisplay: 10
         nbVersionsToDisplay: 15

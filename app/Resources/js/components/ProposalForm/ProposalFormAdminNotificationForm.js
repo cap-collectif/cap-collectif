@@ -6,7 +6,7 @@ import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
-import AlertAdminForm from '../Alert/AlertAdminForm';
+import AlertForm from '../Alert/AlertForm';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from './__generated__/ProposalFormAdminNotificationForm_proposalForm.graphql';
 import type { State } from '../../types';
@@ -117,7 +117,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
-              <AlertAdminForm
+              <AlertForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

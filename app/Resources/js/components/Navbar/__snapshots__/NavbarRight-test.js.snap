@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavbarRight /> should render correctly 1`] = `
+<Nav
+  bsClass="nav"
+  justified={false}
+  pullLeft={false}
+  pullRight={true}
+  stacked={false}
+>
+  <NavDropdown
+    className="navbar__dropdown"
+    eventKey={3}
+    id="navbar-username"
+    title={
+      <span>
+        <UserAvatar
+          anchor={false}
+          className=""
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={34}
+          style={
+            Object {
+              "marginRight": "10px",
+            }
+          }
+          user={Object {}}
+        />
+        <span
+          className="hidden-xs"
+        />
+      </span>
+    }
+  >
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey={3.4}
+      header={false}
+      href="/profile/edit-account"
+    >
+      <FormattedMessage
+        id="navbar.user_settings"
+        values={Object {}}
+      />
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={true}
+      header={false}
+    />
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey={3.6}
+      header={false}
+      id="logout-button"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.logout"
+        values={Object {}}
+      />
+    </MenuItem>
+  </NavDropdown>
+</Nav>
+`;

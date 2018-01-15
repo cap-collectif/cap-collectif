@@ -8,7 +8,7 @@ import { Button, Table } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import component from '../../Form/Field';
-import { AlertAdminForm } from '../../Alert/AlertAdminForm';
+import { AlertForm } from '../../Alert/AlertForm';
 import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation';
 import type { NotificationsForm_viewer } from './__generated__/NotificationsForm_viewer.graphql';
 import type { State } from '../../../types';
@@ -86,7 +86,7 @@ export class NotificationsForm extends Component<Props> {
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
-            <AlertAdminForm
+            <AlertForm
               valid={valid}
               invalid={invalid}
               submitSucceeded={submitSucceeded}

@@ -6,7 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import moment from 'moment';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
 import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
@@ -174,7 +174,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                     <FormattedMessage id="global.delete" />
                   </Button>
                 )}
-              <AlertAdminForm
+              <AlertForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

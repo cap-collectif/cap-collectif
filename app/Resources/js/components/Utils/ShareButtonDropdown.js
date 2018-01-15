@@ -50,11 +50,11 @@ const ShareButtonDropdown = React.createClass({
     );
   },
 
-  googleplus() {
+  linkedin() {
     const { title } = this.props;
     this.openSharer(
-      `https://plus.google.com/share?url=${this.getEncodedUrl()}&title=${title}`,
-      'Google+',
+      `https://www.linkedin.com/shareArticle?mini=true&url=${this.getEncodedUrl()}&text=${title}`,
+      'Linkedin',
     );
   },
 
@@ -120,19 +120,19 @@ const ShareButtonDropdown = React.createClass({
               <i className="cap cap-link" /> {<FormattedMessage id="global.share" />}
             </span>
           }>
-          <MenuItem eventKey="1" onSelect={this.facebook}>
-            <i className="cap cap-facebook" /> {<FormattedMessage id="share.facebook" />}
-          </MenuItem>
-          <MenuItem eventKey="2" onSelect={this.twitter}>
-            <i className="cap cap-twitter" /> {<FormattedMessage id="share.twitter" />}
-          </MenuItem>
-          <MenuItem eventKey="3" onSelect={this.googleplus}>
-            <i className="cap cap-gplus" /> {<FormattedMessage id="share.googleplus" />}
-          </MenuItem>
-          <MenuItem eventKey="4" href={`mailto:?subject=${title}&body=${url}`}>
+          <MenuItem eventKey="1" href={`mailto:?subject=${title}&body=${url}`}>
             <i className="cap cap-mail-2-1" /> {<FormattedMessage id="share.mail" />}
           </MenuItem>
-          <MenuItem eventKey="4" onSelect={this.showModal}>
+          <MenuItem eventKey="2" onSelect={this.facebook}>
+            <i className="cap cap-facebook" /> {<FormattedMessage id="share.facebook" />}
+          </MenuItem>
+          <MenuItem eventKey="3" onSelect={this.twitter}>
+            <i className="cap cap-twitter" /> {<FormattedMessage id="share.twitter" />}
+          </MenuItem>
+          <MenuItem eventKey="4" onSelect={this.linkedin}>
+            <i className="cap cap-linkedin" /> {<FormattedMessage id="share.linkedin" />}
+          </MenuItem>
+          <MenuItem eventKey="5" onSelect={this.showModal}>
             <i className="cap cap-link-1" /> {<FormattedMessage id="share.link" />}
           </MenuItem>
         </DropdownButton>

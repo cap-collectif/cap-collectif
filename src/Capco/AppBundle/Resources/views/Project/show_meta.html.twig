@@ -9,7 +9,7 @@
                     <a href="{{ step | capco_step_link }}">
                         <div class="navbar__step-nb">{{ nb }}</div>
                         <div class="navbar__step">
-                            <h3 class="navbar__step-title">{{ step.label }}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                            <h3 class="navbar__step-title">{{ step.title}}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
                             <p class="navbar__step-date excerpt">
                                 {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
                             </p>

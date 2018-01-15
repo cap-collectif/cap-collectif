@@ -11,7 +11,7 @@ import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
 import component from '../Form/Field';
 import toggle from '../Form/Toggle';
 import UpdateProposalFormMutation from '../../mutations/UpdateProposalFormMutation';
-import AlertAdminForm from '../Alert/AlertAdminForm';
+import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
@@ -500,7 +500,7 @@ export class ProposalFormAdminConfigurationForm extends Component<Props> {
               <Button bsStyle="danger" disabled>
                 <FormattedMessage id="global.delete" />
               </Button>
-              <AlertAdminForm
+              <AlertForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

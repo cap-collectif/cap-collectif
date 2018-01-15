@@ -57,6 +57,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             <span
               className="excerpt"
             >
+               
               <FormattedMessage
                 id="global.form.optional"
                 values={Object {}}
@@ -175,6 +176,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             <span
               className="excerpt"
             >
+               
               <FormattedMessage
                 id="global.form.optional"
                 values={Object {}}
@@ -208,7 +210,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             values={Object {}}
           />
         </Button>
-        <AlertAdminForm
+        <AlertForm
           invalid={false}
           submitFailed={false}
           submitSucceeded={false}

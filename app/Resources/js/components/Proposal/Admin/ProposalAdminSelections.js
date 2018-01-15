@@ -7,7 +7,7 @@ import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { ProposalAdminSelections_proposal } from './__generated__/ProposalAdminSelections_proposal.graphql';
 import type { State, Dispatch } from '../../../types';
-import AlertAdminForm from '../../Alert/AlertAdminForm';
+import AlertForm from '../../Alert/AlertForm';
 import component from '../../Form/Field';
 import toggle from '../../Form/Toggle';
 import SelectProposalMutation from '../../../mutations/SelectProposalMutation';
@@ -233,7 +233,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              <AlertAdminForm
+              <AlertForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

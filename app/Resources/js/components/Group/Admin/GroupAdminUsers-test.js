@@ -14,20 +14,64 @@ describe('<GroupAdminUsers />', () => {
           {
             node: {
               id: 'id1',
-              displayName: 'toto',
-              biography: 'biooooo',
-              email: 'toto@cap-collectif.com',
-              phone: null,
-              media: { url: 'https://capco.dev' },
             },
           },
         ],
       },
     },
+    intl: global.intlMock,
+    ...global.formMock,
   };
 
-  it('render correctly', () => {
-    const wrapper = shallow(<GroupAdminUsers {...props} />);
+  const SuccessDeleteUser = {
+    valid: false,
+    userIsDeleted: true,
+    userIsNotDeleted: false,
+    submitFailed: false,
+    submitSucceeded: false,
+  };
+
+  const FailDeleteUser = {
+    valid: false,
+    userIsDeleted: false,
+    userIsNotDeleted: true,
+    submitFailed: false,
+    submitSucceeded: false,
+  };
+
+  const SuccessAddUser = {
+    valid: true,
+    userIsDeleted: false,
+    userIsNotDeleted: false,
+    submitFailed: false,
+    submitSucceeded: true,
+  };
+
+  const FailAddUser = {
+    valid: false,
+    userIsDeleted: false,
+    userIsNotDeleted: false,
+    submitFailed: true,
+    submitSucceeded: false,
+  };
+
+  it('render correctly group admin user with confirmation notification when deleting a user', () => {
+    const wrapper = shallow(<GroupAdminUsers {...props} {...SuccessDeleteUser} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly group admin user with error notification when deleting a user', () => {
+    const wrapper = shallow(<GroupAdminUsers {...props} {...FailDeleteUser} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly group admin user with confirmation notification when adding a user', () => {
+    const wrapper = shallow(<GroupAdminUsers {...props} {...SuccessAddUser} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('render correctly group admin user with error notification when adding a user', () => {
+    const wrapper = shallow(<GroupAdminUsers {...props} {...FailAddUser} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
