@@ -82,6 +82,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
         </ListGroupItem>
         <ListGroupItem
           bsClass="list-group-item"
+          id="item_0"
           listItem={false}
         >
           <div>
@@ -102,6 +103,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
             normalize={[Function]}
           />
           <div>
+            @
             <Field
               component={[Function]}
               id="selections[0].status"
@@ -138,6 +140,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={false}
+          id="proposal_advancement_save"
           type="submit"
         >
           <FormattedMessage
@@ -145,7 +148,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
             values={Object {}}
           />
         </Button>
-        <AlertAdminForm
+        <AlertForm
           invalid={false}
           submitFailed={false}
           submitSucceeded={false}

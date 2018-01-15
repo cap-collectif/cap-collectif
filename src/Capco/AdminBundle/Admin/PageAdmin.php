@@ -39,8 +39,32 @@ class PageAdmin extends Admin
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.page.is_enabled',
                 'required' => false,
-            ])
-        ;
+            ])->end();
+        $formMapper
+            ->with('admin.fields.page.advanced')
+                ->add('metaDescription', null, [
+                    'label' => 'page.metadescription',
+                    'required' => false,
+                    'help' => 'admin.help.metadescription',
+                ])
+                ->add('cover', 'sonata_type_model_list', [
+                    'required' => false,
+                    'label' => 'admin.fields.project.cover',
+                    'help' => 'admin.help.social_network_thumbnail',
+                ], [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ])
+                ->add('customCode', null, [
+                    'label' => 'admin.customcode',
+                    'required' => false,
+                    'help' => 'admin.help.customcode',
+                    'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+                ])
+                ->end();
     }
 
     // Fields to be shown on filter forms
@@ -108,6 +132,10 @@ class PageAdmin extends Admin
             ])
             ->add('body', null, [
                 'label' => 'admin.fields.page.body',
+            ])
+            ->add('cover', null, [
+                'template' => 'CapcoAdminBundle:Page:cover_show_field.html.twig',
+                'label' => 'admin.fields.page.cover',
             ])
             ->add('URL', null, [
                 'template' => 'CapcoAdminBundle:Page:url_show_field.html.twig',

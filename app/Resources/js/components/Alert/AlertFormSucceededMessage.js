@@ -7,7 +7,7 @@ type State = {
   showSucceededMessage: boolean,
 };
 
-export class AlertAdminFormSucceededMessage extends React.Component<Props, State> {
+export class AlertFormSucceededMessage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -43,4 +43,4 @@ export class AlertAdminFormSucceededMessage extends React.Component<Props, State
   }
 }
 
-export default AlertAdminFormSucceededMessage;
+export default AlertFormSucceededMessage;

@@ -7,7 +7,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="group.admin.users"
     >
-      <Relay(GroupAdminUsers)
+      <Relay(Connect(InjectIntl(GroupAdminUsers)))
         group={Object {}}
       />
     </Tab>
