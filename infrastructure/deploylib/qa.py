@@ -67,7 +67,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
     if profile:
         jobs = [profile]
     else:
-        jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql', 'back']
+        jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql']
 
     for job in jobs:
         command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']

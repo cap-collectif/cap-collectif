@@ -2,19 +2,13 @@
 
 {% block canonical_link %}{{ url('app_idea_trashed') }}{% endblock %}
 
-{% set jumbotron_title = capco_site_parameter_value('contact.jumbotron.title') %}
-{% set meta_description = capco_site_parameter_value('contact.metadescription') %}
-{% set jumbotron_body = capco_site_parameter_value('contact.jumbotron.body') %}
-{% set content_body = capco_site_parameter_value('contact.content.body') %}
-{% set picto = capco_site_image_media('contact.picto') %}
-
+{% set title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
+{% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
 
 {% block metaTags %}
-    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       (jumbotron_title ?: 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle')),
-        'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
-        'image':       image,
+        'title':       (title ?: 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle')),
+        'description': content_body|striptags|truncate(250, true),
         'url':         url('app_idea_trashed')
     } only %}
 {% endblock %}
@@ -62,9 +56,4 @@
 
     </div>
 
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    {% set customCode = capco_site_parameter_value('ideas_trash.customcode') %}
-    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
 {% endblock %}

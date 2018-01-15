@@ -112,7 +112,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
             values={Object {}}
           />
         </Button>
-        <AlertForm
+        <AlertAdminForm
           invalid={false}
           submitFailed={false}
           submitSucceeded={false}
@@ -228,7 +228,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
             values={Object {}}
           />
         </Button>
-        <AlertForm
+        <AlertAdminForm
           invalid={false}
           submitFailed={false}
           submitSucceeded={false}
@@ -348,7 +348,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
             values={Object {}}
           />
         </Button>
-        <AlertForm
+        <AlertAdminForm
           invalid={false}
           submitFailed={false}
           submitSucceeded={false}

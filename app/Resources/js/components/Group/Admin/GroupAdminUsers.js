@@ -1,84 +1,31 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Button, ListGroup } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import {
-  isValid,
-  isInvalid,
-  isSubmitting,
-  hasSubmitSucceeded,
-  hasSubmitFailed,
-  type FormProps,
-} from 'redux-form';
+import { Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
-import AlertForm from '../../Alert/AlertForm';
-import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
-import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
+import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutation';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
+import DeleteModal from '../../Modal/DeleteModal';
+import type { Uuid } from '../../../types';
 
-type Props = FormProps & {
-  group: GroupAdminUsers_group,
-  userIsDeleted: ?boolean,
-  userIsNotDeleted: ?boolean,
-  intl: Object,
+type Props = { group: GroupAdminUsers_group };
+type State = { showAddUsersModal: boolean, showRemoveUserModal: ?number };
+
+const onDelete = (userId: Uuid, groupId: Uuid) => {
+  return DeleteUserInGroupMutation.commit({
+    input: {
+      userId,
+      groupId,
+    },
+  }).then(location.reload());
 };
-
-type State = {
-  showAddUsersModal: boolean,
-  user: Object,
-};
-
-export const formName = 'group-admin-users';
 
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
-    user: {},
+    showRemoveUserModal: null,
   };
-
-  getAlertForm() {
-    const {
-      valid,
-      invalid,
-      submitting,
-      submitSucceeded,
-      submitFailed,
-      userIsDeleted,
-      userIsNotDeleted,
-    } = this.props;
-
-    if (userIsDeleted) {
-      return (
-        <div className="d-ib">
-          <AlertFormSucceededMessage />
-        </div>
-      );
-    }
-
-    if (userIsNotDeleted) {
-      return (
-        <AlertForm
-          valid={false}
-          invalid={false}
-          submitSucceeded={false}
-          submitFailed
-          submitting={false}
-        />
-      );
-    }
-
-    return (
-      <AlertForm
-        valid={valid}
-        invalid={invalid}
-        submitSucceeded={submitSucceeded}
-        submitFailed={submitFailed}
-        submitting={submitting}
-      />
-    );
-  }
 
   openCreateModal = () => {
     this.setState({ showAddUsersModal: true });
@@ -88,73 +35,106 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     this.setState({ showAddUsersModal: false });
   };
 
+  cancelCloseRemoveUserModal = () => {
+    this.setState({ showRemoveUserModal: null });
+  };
+
   render() {
-    const { group, intl } = this.props;
-    const { showAddUsersModal } = this.state;
+    const { group } = this.props;
+    const { showAddUsersModal, showRemoveUserModal } = this.state;
 
     return (
       <div className="box box-primary container">
         <div className="box-header  pl-0">
-          <h3 className="box-title">
+          <h4 className="box-title">
             <FormattedMessage id="group.admin.users" />
-          </h3>
-          <a
-            className="pull-right link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={intl.formatMessage({ id: 'admin.help.addGroup.link' })}>
-            <i className="fa fa-info-circle" /> Aide
-          </a>
+          </h4>
         </div>
-        <div className="box-content">
-          <Button bsStyle="success" href="#" onClick={() => this.openCreateModal()}>
-            <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
-          </Button>
-          {this.getAlertForm()}
-          <GroupAdminModalAddUsers
-            show={showAddUsersModal}
-            onClose={this.handleClose}
-            group={group}
-          />
-          {group.usersConnection.edges ? (
-            <ListGroup className="mt-15">
-              {group.usersConnection.edges
-                .map(edge => edge && edge.node)
-                // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
-                .filter(Boolean)
-                .map(user => (
-                  <GroupAdminUsersListGroupItem key={user.id} user={user} groupId={group.id} />
-                ))}
-            </ListGroup>
-          ) : (
-            <div className="mb-15">
-              <FormattedMessage id="group.admin.no_users" />
-            </div>
-          )}
-        </div>
+        <Button
+          className="mt-5 mb-15"
+          bsStyle="success"
+          href="#"
+          onClick={() => this.openCreateModal()}>
+          <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
+        </Button>
+        <GroupAdminModalAddUsers
+          show={showAddUsersModal}
+          onClose={this.handleClose}
+          group={group}
+        />
+        {group.usersConnection.edges ? (
+          <ListGroup>
+            {group.usersConnection.edges
+              .map(edge => edge && edge.node)
+              // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
+              .filter(Boolean)
+              .map((node, index) => (
+                <ListGroupItem key={index}>
+                  <DeleteModal
+                    closeDeleteModal={this.cancelCloseRemoveUserModal}
+                    showDeleteModal={index === showRemoveUserModal}
+                    deleteElement={() => {
+                      onDelete(node.id, group.id);
+                    }}
+                    deleteModalTitle={'group.admin.user.modal.delete.title'}
+                    deleteModalContent={'group.admin.user.modal.delete.content'}
+                  />
+                  <Row>
+                    <Col xs={3}>
+                      {node.media ? (
+                        <img
+                          className="img-circle mr-15"
+                          src={node.media.url}
+                          alt={node.displayName}
+                        />
+                      ) : (
+                        <img
+                          className="img-circle mr-15"
+                          src="/bundles/sonatauser/default_avatar.png"
+                          alt={node.displayName}
+                        />
+                      )}
+                      {node.displayName}
+                    </Col>
+                    <Col xs={4} className="pull-right">
+                      <Button
+                        className="pull-right mt-5"
+                        bsStyle="danger"
+                        href="#"
+                        onClick={() => {
+                          this.setState({ showRemoveUserModal: index });
+                        }}>
+                        <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                      </Button>
+                    </Col>
+                    <Col xs={12}>
+                      <p className="mt-10">
+                        {node.email}
+                        {node.phone && (
+                          <span>
+                            {' | '}
+                            {node.phone}
+                          </span>
+                        )}
+                      </p>
+                      <p>{node.biography}</p>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))}
+          </ListGroup>
+        ) : (
+          <div className="mb-15">
+            <FormattedMessage id="group.admin.no_users" />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: State) => {
-  return {
-    valid: isValid('group-users-add')(state),
-    invalid: isInvalid('group-users-add')(state),
-    submitting: isSubmitting('group-users-add')(state),
-    submitSucceeded: hasSubmitSucceeded('group-users-add')(state),
-    submitFailed: hasSubmitFailed('group-users-add')(state),
-    userIsDeleted: state.user.groupAdminUsersUserDeletionSuccessful,
-    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
-  };
-};
-
-const myComponent = injectIntl(GroupAdminUsers);
-
-const container = connect(mapStateToProps)(myComponent);
-
 export default createFragmentContainer(
-  container,
+  GroupAdminUsers,
   graphql`
     fragment GroupAdminUsers_group on Group {
       id
@@ -163,7 +143,13 @@ export default createFragmentContainer(
         edges {
           node {
             id
-            ...GroupAdminUsersListGroupItem_user
+            displayName
+            biography
+            email
+            phone
+            media {
+              url
+            }
           }
         }
       }

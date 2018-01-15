@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import type { GroupAdminParameters_group } from './__generated__/GroupAdminParameters_group.graphql';
-import AlertForm from '../../Alert/AlertForm';
 import DeleteGroupMutation from '../../../mutations/DeleteGroupMutation';
 import SubmitButton from '../../Form/SubmitButton';
 import type { Dispatch } from '../../../types';
@@ -25,9 +24,6 @@ type Props = RelayProps & {
   submit: Function,
   invalid: boolean,
   pristine: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
 };
 
 type FormValues = Object;
@@ -57,7 +53,9 @@ const validate = ({ title }) => {
 const onSubmit = (values: FormValues, dispatch: Dispatch, { group }: Props) => {
   const input = { ...values, groupId: group.id };
 
-  return UpdateGroupMutation.commit({ input });
+  return UpdateGroupMutation.commit({ input }).then(() => {
+    window.location.reload();
+  });
 };
 
 export class GroupAdminParameters extends React.Component<Props, State> {
@@ -74,60 +72,43 @@ export class GroupAdminParameters extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      submitting,
-      submit,
-      invalid,
-      valid,
-      submitSucceeded,
-      submitFailed,
-      pristine,
-    } = this.props;
+    const { submitting, submit, invalid, pristine } = this.props;
     const { showDeleteModal } = this.state;
 
     return (
       <div className="box box-primary container">
         <div className="box-header  pl-0">
-          <h3 className="box-title">
+          <h4 className="box-title">
             <FormattedMessage id="group.admin.parameters" />
-          </h3>
+          </h4>
         </div>
-        <div className="box-content">
-          <GroupForm />
+        <GroupForm />
 
-          <DeleteModal
-            closeDeleteModal={this.cancelCloseDeleteModal}
-            showDeleteModal={showDeleteModal}
-            deleteElement={() => {
-              onDelete(this.props.group.id);
+        <DeleteModal
+          closeDeleteModal={this.cancelCloseDeleteModal}
+          showDeleteModal={showDeleteModal}
+          deleteElement={() => {
+            onDelete(this.props.group.id);
+          }}
+          deleteModalTitle={'group.admin.parameters.modal.delete.title'}
+          deleteModalContent={'group.admin.parameters.modal.delete.content'}
+          buttonConfirmMessage={'group.admin.parameters.modal.delete.button'}
+        />
+
+        <ButtonToolbar className="box-content__toolbar mb-15">
+          <SubmitButton
+            id="confirm-group-edit"
+            isSubmitting={submitting}
+            disabled={invalid || pristine || submitting}
+            label="global.save"
+            onSubmit={() => {
+              submit(formName);
             }}
-            deleteModalTitle={'group.admin.parameters.modal.delete.title'}
-            deleteModalContent={'group.admin.parameters.modal.delete.content'}
-            buttonConfirmMessage={'group.admin.parameters.modal.delete.button'}
           />
-
-          <ButtonToolbar className="box-content__toolbar mb-15">
-            <SubmitButton
-              id="confirm-group-edit"
-              isSubmitting={submitting}
-              disabled={pristine || invalid || submitting}
-              label="global.save"
-              onSubmit={() => {
-                submit(formName);
-              }}
-            />
-            <Button bsStyle="danger" onClick={this.openDeleteModal}>
-              <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-            </Button>
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          </ButtonToolbar>
-        </div>
+          <Button bsStyle="danger" onClick={this.openDeleteModal}>
+            <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+          </Button>
+        </ButtonToolbar>
       </div>
     );
   }
@@ -136,7 +117,6 @@ export class GroupAdminParameters extends React.Component<Props, State> {
 const form = reduxForm({
   onSubmit,
   validate,
-  enableReinitialize: true,
   form: formName,
 })(GroupAdminParameters);
 

@@ -15,9 +15,6 @@ describe('<GroupAdminParameters />', () => {
     submit: () => {},
     invalid: false,
     pristine: false,
-    valid: false,
-    submitSucceeded: false,
-    submitFailed: false,
   };
 
   it('render correctly', () => {

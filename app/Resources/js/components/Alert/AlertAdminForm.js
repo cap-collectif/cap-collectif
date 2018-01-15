@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import AlertFormSucceededMessage from './AlertFormSucceededMessage';
+import AlertAdminFormSucceededMessage from './AlertAdminFormSucceededMessage';
 
 type Props = {
   valid: boolean,
@@ -11,7 +11,7 @@ type Props = {
   errorMessage: ?string,
 };
 
-export class AlertForm extends React.Component<Props> {
+export class AlertAdminForm extends React.Component<Props> {
   render() {
     const { valid, invalid, submitSucceeded, submitFailed, submitting, errorMessage } = this.props;
 
@@ -24,8 +24,8 @@ export class AlertForm extends React.Component<Props> {
     }
 
     return (
-      <div className="d-ib">
-        {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
+      <div>
+        {valid && submitSucceeded && !submitting && <AlertAdminFormSucceededMessage />}
         {invalid && (
           <div className="alert__form_invalid-field">
             <i className="cap cap-ios-close-outline" />{' '}
@@ -43,4 +43,4 @@ export class AlertForm extends React.Component<Props> {
   }
 }
 
-export default AlertForm;
+export default AlertAdminForm;

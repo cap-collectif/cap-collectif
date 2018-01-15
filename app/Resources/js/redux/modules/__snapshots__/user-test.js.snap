@@ -3,8 +3,6 @@
 exports[`User Reducer Should handle CANCEL_EMAIL_CHANGE 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",
@@ -26,8 +24,6 @@ Object {
 exports[`User Reducer Should handle CLOSE_CONFIRM_PASSWORD_MODAL 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",
@@ -47,8 +43,6 @@ Object {
 exports[`User Reducer Should handle SHOW_CONFIRM_PASSWORD_MODAL 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",
@@ -68,8 +62,6 @@ Object {
 exports[`User Reducer Should handle STOP_SUBMIT_ACCOUNT_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",
@@ -89,8 +81,6 @@ Object {
 exports[`User Reducer Should handle SUBMIT_ACCOUNT_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": true,
   "registration_form": Object {
     "bottomText": "",
@@ -110,8 +100,6 @@ Object {
 exports[`User Reducer Should handle SUBMIT_CONFIRM_PASSWORD_FORM 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",
@@ -131,8 +119,6 @@ Object {
 exports[`User Reducer Should handle USER_REQUEST_EMAIL_CHANGE 1`] = `
 Object {
   "confirmationEmailResent": false,
-  "groupAdminUsersUserDeletionFailed": false,
-  "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
   "registration_form": Object {
     "bottomText": "",

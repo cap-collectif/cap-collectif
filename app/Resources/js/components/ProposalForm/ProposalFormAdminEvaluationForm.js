@@ -8,7 +8,7 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
 import component from '../Form/Field';
-import AlertForm from '../Alert/AlertForm';
+import AlertAdminForm from '../Alert/AlertAdminForm';
 import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated__/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
 import Loader from '../Utils/Loader';
@@ -128,7 +128,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
             <Button bsStyle="danger" disabled>
               <FormattedMessage id="global.delete" />
             </Button>
-            <AlertForm
+            <AlertAdminForm
               valid={valid}
               invalid={invalid}
               submitSucceeded={submitSucceeded}

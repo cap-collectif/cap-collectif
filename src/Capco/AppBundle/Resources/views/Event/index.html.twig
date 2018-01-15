@@ -3,19 +3,15 @@
 {% block canonical_link %}{{ url('app_event') }}{% endblock %}
 
 {% set jumbotron_title = capco_site_parameter_value('events.jumbotron.title') %}
-{% set meta_description = capco_site_parameter_value('events.metadescription') %}
 {% set jumbotron_body = capco_site_parameter_value('events.jumbotron.body') %}
 {% set content_body = capco_site_parameter_value('events.content.body') %}
-{% set picto = capco_site_image_media('events.picto') %}
 
 {% block metaTags %}
-    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
-        'title':       (jumbotron_title ?: 'events.jumbotron.title'|trans({}, 'CapcoAppBundle')),
-        'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
-        'image':       image,
-        'url':         url('app_blog')
-        } only %}
+        'title':       (jumbotron_title ?: 'event.index.title'|trans({}, 'CapcoAppBundle')),
+        'description': (jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
+        'url':         url('app_event')
+    } only %}
 {% endblock %}
 
 {% block title %}
@@ -126,7 +122,4 @@
             App.resized('.event-js');
         });
     </script>
-    {% set customCode = capco_site_parameter_value('event.customcode') %}
-    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
-
 {% endblock %}

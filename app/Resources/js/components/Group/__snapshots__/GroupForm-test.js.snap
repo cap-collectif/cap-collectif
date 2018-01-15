@@ -23,7 +23,6 @@ exports[`<GroupForm /> render correctly 1`] = `
           id="group.description"
           values={Object {}}
         />
-         
         <span
           className="excerpt"
         >
