@@ -185,6 +185,7 @@ sonata_media:
     cdn:
         server:
             path: / # http://media.sonata-project.org/
+
     filesystem:
         local:
             directory:  '%kernel.root_dir%/../web/media'
