@@ -194,8 +194,6 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   {parent.mergedFrom.length > 2 && (
                     <Button
                       bsStyle="danger"
-                      style={{ marginTop: -7 }}
-                      className="pull-right"
                       onClick={() => {
                         if (
                           window.confirm(
@@ -226,7 +224,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
             header={
               <div>
                 <FormattedMessage id="initial-proposals" />
-                <ButtonToolbar style={{ marginTop: -5 }} className="pull-right">
+                <ButtonToolbar>
                   <Button
                     bsStyle="warning"
                     onClick={() => {

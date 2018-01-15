@@ -130,12 +130,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         />
         <ButtonToolbar
           bsClass="btn-toolbar"
-          className="pull-right"
-          style={
-            Object {
-              "marginTop": -5,
-            }
-          }
         >
           <Button
             active={false}

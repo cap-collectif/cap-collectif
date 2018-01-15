@@ -53,6 +53,20 @@
         background-color: $sonata-bgc;
     }
 
+    .panel-title {
+        display: flex;
+        align-items: center;
+        span {
+            flex: 1 0 auto;
+        }
+    }
+    .list-group-item {
+      display: flex;
+      align-items: center;
+      button {
+          margin-left: auto;
+    }
+
     .box-primary {
         padding: 0 20px 20px;
     }
