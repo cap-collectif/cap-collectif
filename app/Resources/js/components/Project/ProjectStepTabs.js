@@ -45,16 +45,28 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
     const scrollNavWidth = stepScrollNav && stepScrollNav.offsetWidth;
 
+    const stepTabsSvg = document.getElementById('step-tabs-svg');
+    const getBoundingStepTabsSvg = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
+    const stepTabsSvgWidth = getBoundingStepTabsSvg.width;
+
     // move left
-    if(activeTabRight > barRight) {
+    if(barRight && activeTabRight && activeTabRight > barRight) {
       const diffRight = (barRight - activeTabRight);
       this.setState({
-        translateX: diffRight - 22,
+        translateX: diffRight - stepTabsSvgWidth,
       })
     }
 
     // if it doesn't move
-    if(activeTabRight <= barRight && activeTabLeft >= barLeft && scrollNavWidth > stepTabsBarWidth) {
+    if(barRight &&
+      activeTabRight &&
+      barLeft &&
+      stepTabsBarWidth &&
+      scrollNavWidth &&
+      activeTabLeft &&
+      activeTabRight <= barRight &&
+      activeTabLeft >= barLeft &&
+      scrollNavWidth > stepTabsBarWidth) {
       this.setState({
         showArrowRight: true,
       })
@@ -103,7 +115,7 @@ export class ProjectStepTabs extends React.Component<Props, State> {
 
     // trouver moyen reprendre const du didmount
     const stepTabsBar = document.getElementById('step-tabs__list');
-    const stepTabsBarWidth = stepTabsBar.offsetWidth;
+    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
     const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
     const barLeft = getBoundingBar && getBoundingBar.left;
     // fin repetition
@@ -114,7 +126,13 @@ export class ProjectStepTabs extends React.Component<Props, State> {
 
     const diffLeft = barLeft - scrollNavLeft;
 
-    if(diffLeft < stepTabsBarWidth) {
+    console.log(barLeft);
+    console.warn(scrollNavLeft);
+    console.log(diffLeft);
+    console.error(stepTabsBarWidth);
+    console.log(translateX);
+
+    if(stepTabsBarWidth && diffLeft < stepTabsBarWidth) {
       this.setState({
         translateX: translateX + diffLeft,
         showArrowLeft: false,
@@ -122,9 +140,18 @@ export class ProjectStepTabs extends React.Component<Props, State> {
       })
     }
 
-    if(diffLeft > stepTabsBarWidth) {
+    if(stepTabsBarWidth && diffLeft > stepTabsBarWidth) {
       this.setState({
-        translateX: stepTabsBarWidth,
+        translateX: translateX + stepTabsBarWidth,
+        showArrowRight: true,
+      })
+    }
+
+    if(stepTabsBarWidth && diffLeft === stepTabsBarWidth) {
+      this.setState({
+        translateX: translateX + stepTabsBarWidth,
+        showArrowRight: true,
+        showArrowLeft: false,
       })
     }
   };
@@ -134,7 +161,7 @@ export class ProjectStepTabs extends React.Component<Props, State> {
 
     // trouver moyen reprendre const du didmount
     const stepTabsBar = document.getElementById('step-tabs__list');
-    const stepTabsBarWidth = stepTabsBar.offsetWidth;
+    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
     const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
     const barRight = getBoundingBar && getBoundingBar.right;
     // fin repetition
@@ -143,11 +170,22 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
     const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
 
-    const diffRight = barRight - scrollNavRight;
+    const stepTabsSvg = document.getElementById('step-tabs-svg');
+    const getBoundingStepTabsSvg = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
+    const stepTabsSvgWidth = getBoundingStepTabsSvg.width;
+
+    // console.error(barRight);
+    // console.warn(scrollNavRight);
+
+    const diffRight = scrollNavRight - barRight;
+
+    // console.log(translateX);
+    // console.warn(stepTabsBarWidth);
+    // console.log(diffRight);
 
     if(diffRight < stepTabsBarWidth) {
       this.setState({
-        translateX: (translateX + diffRight) - 22,
+        translateX: (translateX - diffRight) - stepTabsSvgWidth,
         showArrowRight: false,
         showArrowLeft: true,
       })
@@ -155,7 +193,16 @@ export class ProjectStepTabs extends React.Component<Props, State> {
 
     if(diffRight > stepTabsBarWidth) {
       this.setState({
-        translateX: stepTabsBarWidth,
+        translateX: translateX - stepTabsBarWidth,
+        showArrowLeft: true,
+      })
+    }
+
+    if(diffRight === stepTabsBarWidth) {
+      this.setState({
+        translateX: translateX - stepTabsBarWidth,
+        showArrowLeft: true,
+        showArrowRight: false,
       })
     }
   };
@@ -187,7 +234,7 @@ export class ProjectStepTabs extends React.Component<Props, State> {
           <div className="step-tabs__list" id="step-tabs__list">
             <ul className="nav" id="step-tabs__scroll-nav" style={{ transform : translation }}>
               {steps.map((step,key) => (
-                <li className={this.getClass(step.id)}>
+                <li className={this.getClass(step.id)} key={key}>
                   <a href={step._links.show} className="d-flex">
                     <div className="navbar__step-nb"><span>{key+1}</span></div>
                     <div className="navbar__step">
@@ -197,7 +244,7 @@ export class ProjectStepTabs extends React.Component<Props, State> {
                       </p>
                     </div>
                   </a>
-                  <svg height="80" width="21" xmlns="http://www.w3.org/2000/svg">
+                  <svg id="step-tabs-svg" height="80" width="21" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                       <filter id="f1" x="0" y="0" width="200%" height="200%">
                         <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />

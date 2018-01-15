@@ -11,10 +11,6 @@
     {{ parent() }} - {{ project.title }}
 {% endblock %}
 
-{#{% block reduxStore %}#}
-    {#{% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}#}
-{#{% endblock %}#}
-
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
