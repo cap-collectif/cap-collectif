@@ -5,8 +5,6 @@ namespace Capco\UserBundle\Saml;
 use Capco\AppBundle\Toggle\Manager;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
-use Psr\Log\LoggerInterface;
-use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,15 +17,13 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $samlIdp;
     protected $httpUtils;
     protected $toggleManager;
-    protected $logger;
 
-    public function __construct(Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager, LoggerInterface $logger)
+    public function __construct(\SimpleSAML_Auth_Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager)
     {
         $this->samlAuth = $samlAuth;
         $this->samlIdp = $samlIdp;
         $this->httpUtils = $httpUtils;
         $this->toggleManager = $toggleManager;
-        $this->logger = $logger;
     }
 
     public function getAuthenticationAttribute()
@@ -76,8 +72,6 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->samlAuth->requireAuth(); // force the user to login with SAML
         $attributes = $this->samlAuth->getAttributes();
 
-        $this->logger->info('Creating SAML token from: ' . json_encode($attributes));
-
         $username = $this->findUsernameInResponse($attributes);
         $token = new SamlToken($username);
         $token->setAttributes($attributes);
@@ -85,7 +79,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         return $token;
     }
 
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey): SamlToken
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
@@ -98,7 +92,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         return $authenticatedToken;
     }
 
-    public function supportsToken(TokenInterface $token, $providerKey): bool
+    public function supportsToken(TokenInterface $token, $providerKey)
     {
         return $token instanceof SamlToken;
     }
