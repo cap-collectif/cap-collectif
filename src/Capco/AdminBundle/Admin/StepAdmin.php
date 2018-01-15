@@ -195,6 +195,20 @@ class StepAdmin extends Admin
                     'help' => 'admin.fields.proposal_form.help_text_description_help_text',
                 ])
                 ->end()
+                ->with('moderation')
+                // receive-email-notification-when-a-contribution-is
+                ->add('moderatingOnCreate', null, [
+                    'label' => 'reported',
+                    'mapped' => false,
+                    'disabled' => true,
+                ])
+                ->add('moderatingOnCreate', null, [
+                    'label' => 'admin.fields.synthesis.enabled',
+                ])
+                ->add('moderatingOnUpdate', null, [
+                    'label' => 'admin.fields.proposal form.notification.on_update',
+                ])
+                ->end()
             ;
         } elseif ($subject instanceof SynthesisStep) {
             $formMapper
