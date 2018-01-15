@@ -32,15 +32,6 @@
                         <li><i class="cap cap-gplus"></i> <a class="external-link" href="{{ user.getGoogleUrl }}">{{ 'user.profile.show.gplus' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}
                 </ul>
-                {{
-                    react_render_component('ShareButtonDropdownApp', {
-                        'props': {
-                            'url': url('app_event_show', {'slug': user.userName}),
-                            'title': user.userName,
-                            'id': 'user-' ~ user.userName,
-                        }
-                    })
-                }}
             </div>
         </div>
     </div>

@@ -75,7 +75,7 @@ services:
 
   capco.media_response.serialization_listener:
     class: Capco\AppBundle\EventListener\MediaResponseSerializationListener
-    arguments: ["@jms_serializer", "@twig.extension.routing", "@sonata.core.twig.template_extension"]
+    arguments: ["@jms_serializer", "@router", "@sonata.core.twig.template_extension"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

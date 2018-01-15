@@ -1,15 +1,13 @@
-/* @flow */
 import React, { PropTypes } from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import LoginActions from '../../actions/LoginActions';
 import UserAvatar from '../User/UserAvatar';
-import type { State } from '../../types';
 
-export const NavbarRight = React.createClass({
+const NavbarRight = React.createClass({
   propTypes: {
     user: PropTypes.object,
     features: PropTypes.object.isRequired,
@@ -57,7 +55,7 @@ export const NavbarRight = React.createClass({
               </MenuItem>
             )}
             {features.profiles && (
-              <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.username}`}>
+              <MenuItem key={3.2} eventKey={3.2} href="/profile">
                 {<FormattedMessage id="navbar.profile" />}
               </MenuItem>
             )}
@@ -88,7 +86,7 @@ export const NavbarRight = React.createClass({
   },
 });
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = state => {
   return {
     features: state.default.features,
     user: state.user.user,
