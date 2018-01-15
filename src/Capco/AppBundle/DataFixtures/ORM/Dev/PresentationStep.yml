@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
   pstep1:
     id: pstep1
     title: Présentation
-    label: Présentation
     isEnabled: true
     body: |
       <p>Afficher le texte pour la préparation de la synthèse</p>
@@ -10,21 +9,18 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
   pstep2:
     id: pstep2
     title: Présentation
-    label: Présentation
     isEnabled: true
     body: |
       <p><text(1000)></p>
   pstep3:
     id: pstep3
     title: Présentation
-    label: Présentation
     isEnabled: true
     body: |
       <p><text(100)></p>
   pstep4:
     id: pstep4
     title: Présentation
-    label: Présentation
     isEnabled: true
     body: |
       <p><text(100)></p>

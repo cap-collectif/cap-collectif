@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     cstep1:
         id: cstep1
         title: Collecte des avis
-        label: Consultation
         isEnabled: true
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>

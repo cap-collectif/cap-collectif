@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\SynthesisStep:
     sstep1:
         id: sstep1
         title: Synthèse
-        label: Synthèse
         body: Voici la synthèse
         isEnabled: true
         synthesis: '@synthesis1'
@@ -12,7 +11,6 @@ Capco\AppBundle\Entity\Steps\SynthesisStep:
     sstep2:
         id: sstep2
         title: Synthèse
-        label: Synthèse
         body: Voici la synthèse
         isEnabled: true
         synthesis: '@synthesis2'
