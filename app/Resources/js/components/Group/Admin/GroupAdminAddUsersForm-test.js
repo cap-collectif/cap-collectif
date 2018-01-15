@@ -13,7 +13,6 @@ describe('<GroupAdminAddUsersForm />', () => {
     },
     handleSubmit: jest.fn(),
     dispatch: jest.fn(),
-    onClose: jest.fn(),
   };
 
   it('render correctly', () => {

@@ -11,7 +11,7 @@ import {
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import AlertForm from '../../Alert/AlertForm';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalEvaluationMutation';
 import {
   validate,
@@ -85,7 +85,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
                   bsStyle="primary">
                   <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
                 </Button>{' '}
-                <AlertForm
+                <AlertAdminForm
                   valid={valid}
                   invalid={invalid}
                   submitSucceeded={submitSucceeded}

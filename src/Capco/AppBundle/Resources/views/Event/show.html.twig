@@ -6,13 +6,12 @@
     {% set eventMedia %}{% if event.Media %}{% path event.Media, 'idea' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       event.title,
-        'description': event.metaDescription|striptags ?: event.body|striptags|truncate(250, true),
+        'description': event.body|striptags|truncate(250, true),
         'url':         url('app_event_show', {'slug': event.slug}),
         'type':        'article',
         'image':       eventMedia
     } only %}
 {% endblock %}
-
 
 {% block title %}
     {{ parent() }} - {{ event.title }}
@@ -221,5 +220,4 @@
             {% endif %}
         });
     </script>
-    {% if event.customCode is defined and event.customCode != '' %}{{ event.customCode | raw }}{% endif %}
 {% endblock %}

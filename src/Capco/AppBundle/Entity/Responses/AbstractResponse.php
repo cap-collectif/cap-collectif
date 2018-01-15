@@ -78,7 +78,8 @@ abstract class AbstractResponse
      * @Assert\NotNull()
      * @ORM\ManyToOne(
      *   targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion",
-     *   inversedBy="responses"
+     *   inversedBy="responses",
+     *   cascade={"persist", "remove"}
      * )
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */

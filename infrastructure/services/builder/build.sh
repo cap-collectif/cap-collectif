@@ -9,13 +9,6 @@ if [ "$PRODUCTION" ]; then
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
   composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
-
-  echo "Configure simplesamlphp library"
-  rm -rf vendor/simplesamlphp/simplesamlphp/config/*
-  rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*
-  rm -rf vendor/simplesamlphp/simplesamlphp/cert
-  cp -R app/config/simplesamlphp vendor/simplesamlphp
-
   # We build bootstrap.php.cache in the `var` directory
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
@@ -40,13 +33,6 @@ else
   else
       composer install --prefer-dist --no-interaction --ignore-platform-reqs
   fi
-
-  echo "Configure simplesamlphp library"
-  rm -rf vendor/simplesamlphp/simplesamlphp/config/*
-  rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*
-  rm -rf vendor/simplesamlphp/simplesamlphp/cert
-  cp -R app/config/simplesamlphp vendor/simplesamlphp
-
   composer dump-autoload
 
   # Frontend deps

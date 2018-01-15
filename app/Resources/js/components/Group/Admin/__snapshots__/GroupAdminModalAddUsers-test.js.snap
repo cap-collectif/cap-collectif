@@ -55,7 +55,6 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
           "usersConnection": Array [],
         }
       }
-      onClose={[MockFunction]}
     />
   </ModalBody>
   <ModalFooter
@@ -63,7 +62,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
     componentClass="div"
   >
     <CloseButton
-      label="global.close"
+      label="global.cancel"
       onClose={[MockFunction]}
     />
     <Button

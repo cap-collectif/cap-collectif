@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use FOS\UserBundle\Util\Canonicalizer;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -25,23 +24,14 @@ class SamlUserProvider implements UserProviderInterface
             $user = $this->userManager->createUser();
             $user->setSamlId($id);
             $user->setUsername($id);
-            // for daher, afd-interne, pole-emploi the id is the email
-            $email = $id;
-
-            // Warning: do not update "@fake-email-cap-collectif.com"
-            // Because this is used to authenticate users.
 
             if ('oda' === $this->samlIdp) {
-                $email = $id . '@fake-email-cap-collectif.com';
+                $user->setEmail($id . '@fake-email-cap-collectif.com');
+            }
+            if ('daher' === $this->samlIdp || 'afd-interne' === $this->samlIdp) {
+                $user->setEmail($id);
             }
 
-            // If the id is not a valid email, we create a fake one...
-            if (false === strpos($a, '@')) {
-                $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
-            }
-
-            $user->setEmail($email);
-            $user->setEmailCanonical((new Canonicalizer())->canonicalize($email));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
         }
@@ -56,7 +46,7 @@ class SamlUserProvider implements UserProviderInterface
         return $this->userManager->findUserBy(['samlId' => $user->getSamlId()]);
     }
 
-    public function supportsClass($class): bool
+    public function supportsClass($class)
     {
         return 'Capco\UserBundle\Entity\User' === $class;
     }

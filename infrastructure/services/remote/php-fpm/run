@@ -19,6 +19,12 @@ done
 echo "Checking media permissions after $(( SECONDS - start )) seconds..."
 chmod -R 777 web/media
 
+echo "Configure simplesamlphp library"
+rm -rf vendor/simplesamlphp/simplesamlphp/config/*
+rm -rf vendor/simplesamlphp/simplesamlphp/metadata/*
+rm -rf vendor/simplesamlphp/simplesamlphp/cert
+php bin/console simplesamlphp:config --env=prod
+
 echo "Checking var permissions after $(( SECONDS - start )) seconds..."
 chown -R capco:capco var
 

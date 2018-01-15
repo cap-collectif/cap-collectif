@@ -5,7 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import AlertForm from '../../Alert/AlertForm';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ChangeProposalEvaluersMutation from '../../../mutations/ChangeProposalEvaluersMutation';
 import select from '../../Form/Select';
 import Fetcher from '../../../services/Fetcher';
@@ -61,7 +61,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               multi
-              placeholder="proposal.analysts.form.placeholder"
+              placeholder="Aucun analyste"
               component={select}
               clearable={false}
               loadOptions={() =>
@@ -83,15 +83,11 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button
-                disabled={invalid || pristine || submitting}
-                id="proposal-evaluation-analysts-groupes-save"
-                type="submit"
-                bsStyle="primary">
+              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
                 <i className="cap cap-download-1"> </i>{' '}
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              <AlertForm
+              <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

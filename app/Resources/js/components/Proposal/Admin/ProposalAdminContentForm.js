@@ -11,7 +11,7 @@ import ChangeProposalContentMutation, {
 } from '../../../mutations/ChangeProposalContentMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
-import AlertForm from '../../Alert/AlertForm';
+import AlertAdminForm from '../../Alert/AlertAdminForm';
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import {
@@ -141,7 +141,6 @@ export class ProposalAdminContentForm extends React.Component<Props> {
     const categories = proposal.form.categories;
     const optional = (
       <span className="excerpt">
-        {' '}
         <FormattedMessage id="global.form.optional" />
       </span>
     );
@@ -318,14 +317,10 @@ export class ProposalAdminContentForm extends React.Component<Props> {
               }
             />
             <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
-              <Button
-                type="submit"
-                id="proposal_admin_content_save"
-                bsStyle="primary"
-                disabled={pristine || invalid || submitting}>
+              <Button type="submit" bsStyle="primary" disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              <AlertForm
+              <AlertAdminForm
                 valid={valid}
                 invalid={invalid}
                 submitSucceeded={submitSucceeded}

@@ -203,7 +203,7 @@ class ProposalMutation implements ContainerAwareInterface
     public function changePublicationStatus(Argument $values, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        if ($user && $user->isAdmin()) {
+        if ($user && $user->isSuperAdmin()) {
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }

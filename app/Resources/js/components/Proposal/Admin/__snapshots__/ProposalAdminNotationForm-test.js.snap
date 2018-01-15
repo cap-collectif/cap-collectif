@@ -129,7 +129,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             bsClass="btn"
             bsStyle="primary"
             disabled={true}
-            id="proposal-evaluation-custom-save"
             type="submit"
           >
             <FormattedMessage
@@ -137,7 +136,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
               values={Object {}}
             />
           </Button>
-          <AlertForm
+          <AlertAdminForm
             errorMessage={null}
             invalid={false}
             submitFailed={false}

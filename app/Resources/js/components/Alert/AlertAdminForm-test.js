@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { AlertForm } from './AlertForm';
+import { AlertAdminForm } from './AlertAdminForm';
 
-describe('<AlertForm />', () => {
+describe('<AlertAdminForm />', () => {
   const customErrorMessageForm = {
     valid: false,
     invalid: true,
@@ -55,32 +55,32 @@ describe('<AlertForm />', () => {
   };
 
   it('render correctly the message with a custom error message', () => {
-    const wrapper = shallow(<AlertForm {...customErrorMessageForm} />);
+    const wrapper = shallow(<AlertAdminForm {...customErrorMessageForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly the message for submit succeeded', () => {
-    const wrapper = shallow(<AlertForm {...submitSucceededForm} />);
+    const wrapper = shallow(<AlertAdminForm {...submitSucceededForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly the message for submit failed', () => {
-    const wrapper = shallow(<AlertForm {...submitFailedForm} />);
+    const wrapper = shallow(<AlertAdminForm {...submitFailedForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly the message for invalid form', () => {
-    const wrapper = shallow(<AlertForm {...invalidForm} />);
+    const wrapper = shallow(<AlertAdminForm {...invalidForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render no message when the form is valid', () => {
-    const wrapper = shallow(<AlertForm {...validForm} />);
+    const wrapper = shallow(<AlertAdminForm {...validForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render no message during submitting of form', () => {
-    const wrapper = shallow(<AlertForm {...submittingForm} />);
+    const wrapper = shallow(<AlertAdminForm {...submittingForm} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

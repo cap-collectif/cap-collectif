@@ -3,12 +3,12 @@
 
 {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
-{% set meta_description = capco_site_parameter_value('homepage.metadescription') %}
+{% set meta_description = capco_site_parameter_value('homepage.meta_description') %}
+{% set picto = capco_site_image_media('image.picto') %}
 
 {% block canonical_link %}{{ url('app_homepage') }}{% endblock %}
 
 {% block metaTags %}
-    {% set picto = capco_site_image_media('homepage.picto') %}
     {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       jumbotron_title ?: siteName,
@@ -45,6 +45,9 @@
                 {% set jumbotron_button_link = capco_site_parameter_value('homepage.jumbotron.button_link') %}
                 {% if null != jumbotron_button and null != jumbotron_button_link %}
                     <p><a href="{{ jumbotron_button_link }}" class="btn  btn--outline btn-custom-1  btn-lg" role="button">{{ jumbotron_button }}</a></p>
+                {% endif %}
+                {% if picto != null %}
+                    <p>{% thumbnail picto, 'header_picto' with {'title': picto.name, 'alt': picto.name} %}</p>
                 {% endif %}
             </div>
         </div>
@@ -111,7 +114,6 @@
             App.resized('.event-js');
             App.resized('.video');
         });
+
     </script>
-    {% set customCode = capco_site_parameter_value('homepage.customcode') %}
-    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
 {% endblock %}

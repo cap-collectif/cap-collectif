@@ -7,63 +7,52 @@ exports[`<GroupAdminParameters /> render correctly 1`] = `
   <div
     className="box-header  pl-0"
   >
-    <h3
+    <h4
       className="box-title"
     >
       <FormattedMessage
         id="group.admin.parameters"
         values={Object {}}
       />
-    </h3>
+    </h4>
   </div>
-  <div
-    className="box-content"
+  <GroupForm />
+  <Connect(DeleteModal)
+    buttonConfirmMessage="group.admin.parameters.modal.delete.button"
+    closeDeleteModal={[Function]}
+    deleteElement={[Function]}
+    deleteModalContent="group.admin.parameters.modal.delete.content"
+    deleteModalTitle="group.admin.parameters.modal.delete.title"
+    showDeleteModal={false}
+  />
+  <ButtonToolbar
+    bsClass="btn-toolbar"
+    className="box-content__toolbar mb-15"
   >
-    <GroupForm />
-    <Connect(DeleteModal)
-      buttonConfirmMessage="group.admin.parameters.modal.delete.button"
-      closeDeleteModal={[Function]}
-      deleteElement={[Function]}
-      deleteModalContent="group.admin.parameters.modal.delete.content"
-      deleteModalTitle="group.admin.parameters.modal.delete.title"
-      showDeleteModal={false}
+    <Connect(SubmitButton)
+      disabled={false}
+      id="confirm-group-edit"
+      isSubmitting={false}
+      label="global.save"
+      onSubmit={[Function]}
     />
-    <ButtonToolbar
-      bsClass="btn-toolbar"
-      className="box-content__toolbar mb-15"
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      onClick={[Function]}
     >
-      <Connect(SubmitButton)
-        disabled={false}
-        id="confirm-group-edit"
-        isSubmitting={false}
-        label="global.save"
-        onSubmit={[Function]}
+      <i
+        className="fa fa-trash"
       />
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="danger"
-        disabled={false}
-        onClick={[Function]}
-      >
-        <i
-          className="fa fa-trash"
-        />
-         
-        <FormattedMessage
-          id="global.delete"
-          values={Object {}}
-        />
-      </Button>
-      <AlertForm
-        invalid={false}
-        submitFailed={false}
-        submitSucceeded={false}
-        submitting={false}
-        valid={false}
+       
+      <FormattedMessage
+        id="global.delete"
+        values={Object {}}
       />
-    </ButtonToolbar>
-  </div>
+    </Button>
+  </ButtonToolbar>
 </div>
 `;

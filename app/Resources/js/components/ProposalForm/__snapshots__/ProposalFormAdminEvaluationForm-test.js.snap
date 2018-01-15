@@ -127,7 +127,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
           values={Object {}}
         />
       </Button>
-      <AlertForm
+      <AlertAdminForm
         invalid={false}
         submitFailed={false}
         submitSucceeded={false}
