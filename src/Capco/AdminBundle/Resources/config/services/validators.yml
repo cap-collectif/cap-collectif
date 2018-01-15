@@ -1,0 +1,5 @@
+services:
+  capco.less_than_if_meta_description.validator:
+    class: Capco\AdminBundle\Validator\Constraints\LessThanIfMetaDescriptionValidator
+    tags:
+      - { name: validator.constraint_validator, alias: less_than_if_meta_description.validator }

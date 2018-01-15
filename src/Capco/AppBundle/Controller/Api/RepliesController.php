@@ -138,8 +138,6 @@ class RepliesController extends FOSRestController
     }
 
     /**
-     * Update a reply.
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Update a reply",

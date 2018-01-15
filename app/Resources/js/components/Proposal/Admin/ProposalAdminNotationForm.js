@@ -249,6 +249,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               />
               <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
                 <Button
+                  id="proposal-evaluation-custom-save"
                   disabled={invalid || pristine || submitting}
                   type="submit"
                   bsStyle="primary">

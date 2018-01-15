@@ -50,10 +50,15 @@ class SiteParameterAdmin extends Admin
         $types = SiteParameter::$types;
 
         if ($subject->getType() === $types['simple_text']) {
-            $formMapper->add('value', TextType::class, [
-                    'label' => 'admin.fields.site_parameter.value',
-                    'required' => false,
-                ]);
+            $options = [
+                'label' => 'admin.fields.site_parameter.value',
+                'required' => false,
+            ];
+            if ($subject->isSocialNetworkDescription()) {
+                $options['help'] = 'admin.help.metadescription';
+                $options['max_length'] = 160;
+            }
+            $formMapper->add('value', TextType::class, $options);
         } elseif ($subject->getType() === $types['rich_text']) {
             $formMapper->add('value', CKEditorType::class, [
                 'label' => 'admin.fields.site_parameter.value',
@@ -69,7 +74,7 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', TextareaType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'help' => 'admin.help.site_parameter.js',
+                'help' => 'global.site.embed_js' === $subject->getKeyname() ? 'admin.help.site_parameter.js' : 'admin.help.customcode',
                 'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
         } elseif ($subject->getType() === $types['email']) {

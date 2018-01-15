@@ -44,7 +44,12 @@ class Reply implements Contribution
     private $questionnaire;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="reply", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *  targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse",
+     *  mappedBy="reply",
+     *  cascade={"persist", "remove"},
+     *  orphanRemoval=true
+     * )
      */
     private $responses;
 

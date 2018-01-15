@@ -24,6 +24,12 @@ class SiteImage
     private $keyname;
 
     /**
+     * @var bool
+     * @ORM\Column(name="is_social_network_thumbnail", type="boolean")
+     */
+    private $isSocialNetworkThumbnail = false;
+
+    /**
      * @var
      *
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
@@ -210,5 +216,15 @@ class SiteImage
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    public function isSocialNetworkThumbnail(): bool
+    {
+        return $this->isSocialNetworkThumbnail;
+    }
+
+    public function setIsSocialNetworkThumbnail(bool $isSocialNetworkThumbnail)
+    {
+        $this->isSocialNetworkThumbnail = $isSocialNetworkThumbnail;
     }
 }
