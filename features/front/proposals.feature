@@ -270,8 +270,10 @@ Scenario: Anonymous user wants to share a proposal
 Scenario: Anonymous user wants to see proposals in a selection step and apply filters
   Given feature "themes" is enabled
   When I go to a selection step with simple vote enabled
+  And I wait 2 seconds
   Then there should be 3 proposals
   And I change the proposals theme filter
+  And I wait 2 seconds
   Then there should be 2 proposals
 
 @javascript @elasticsearch
