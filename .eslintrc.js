@@ -21,8 +21,6 @@ module.exports = {
     // Flow vars
     HTMLInputElement: true,
     Element: true,
-    // jest
-    intlMock: true
   },
   rules: {
     'camelcase': 'off',

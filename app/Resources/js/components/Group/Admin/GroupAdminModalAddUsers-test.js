@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminModalAddUsers } from './GroupAdminModalAddUsers';
+import { intlMock } from '../../../mocks';
 
 describe('<GroupAdminModalAddUsers />', () => {
   const props = {
@@ -14,7 +15,7 @@ describe('<GroupAdminModalAddUsers />', () => {
       title: 'Comité de suvi',
       usersConnection: [],
     },
-    intl: global.intlMock,
+    intl: intlMock,
   };
 
   it('render correctly', () => {

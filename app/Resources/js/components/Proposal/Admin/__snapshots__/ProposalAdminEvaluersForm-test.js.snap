@@ -53,16 +53,8 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
           block={false}
           bsClass="btn"
           bsStyle="primary"
-<<<<<<< HEAD
-          disabled={true}
-          id="proposal-evaluation-analysts-groupes-save"
-=======
           disabled={false}
-<<<<<<< HEAD
->>>>>>> You can update the merge from a proposal
-=======
           id="proposal-evaluation-analysts-groupes-save"
->>>>>>> Fix evaluation
           type="submit"
         >
           <i
@@ -76,17 +68,7 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
             values={Object {}}
           />
         </Button>
-<<<<<<< HEAD
-        <AlertForm
-          invalid={false}
-          submitFailed={false}
-          submitSucceeded={false}
-          submitting={false}
-          valid={true}
-        />
-=======
-        <AlertAdminForm />
->>>>>>> You can update the merge from a proposal
+        <AlertForm />
       </ButtonToolbar>
     </form>
   </div>

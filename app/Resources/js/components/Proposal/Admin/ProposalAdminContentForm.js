@@ -10,12 +10,8 @@ import ChangeProposalContentMutation from '../../../mutations/ChangeProposalCont
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import component from '../../Form/Field';
 import select from '../../Form/Select';
-<<<<<<< HEAD
 import AlertForm from '../../Alert/AlertForm';
-=======
-import AlertAdminForm from '../../Alert/AlertAdminForm';
 import ProposalFusionEditModal from './ProposalFusionEditModal';
->>>>>>> Lot of work to increase flow coverage
 import type { ProposalAdminContentForm_proposal } from './__generated__/ProposalAdminContentForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from '../Form/__generated__/ProposalForm_proposalForm.graphql';
 import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';

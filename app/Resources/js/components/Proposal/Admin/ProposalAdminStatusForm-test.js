@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminStatusForm } from './ProposalAdminStatusForm';
+import { intlMock } from '../../../mocks';
 
 describe('<ProposalAdminStatusForm />', () => {
   it('render correctly if published but user can soon expire', () => {
@@ -32,7 +33,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalToBeExpired}
         handleSubmit={jest.fn()}
-        intl={global.intlMock}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -65,7 +66,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalExpired}
         handleSubmit={jest.fn()}
-        intl={global.intlMock}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -98,7 +99,7 @@ describe('<ProposalAdminStatusForm />', () => {
         dispatch={jest.fn()}
         proposal={proposalConfirmed}
         handleSubmit={jest.fn()}
-        intl={global.intlMock}
+        intl={intlMock}
       />,
     );
     expect(wrapper).toMatchSnapshot();

@@ -3,9 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminUsers } from './GroupAdminUsers';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<GroupAdminUsers />', () => {
   const props = {
+    ...formMock,
+    intl: intlMock,
     group: {
       id: 'group4',
       title: 'Comité de suvi',
@@ -19,8 +22,6 @@ describe('<GroupAdminUsers />', () => {
         ],
       },
     },
-    intl: global.intlMock,
-    ...global.formMock,
   };
 
   const SuccessDeleteUser = {
