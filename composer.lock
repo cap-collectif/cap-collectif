@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5083ecb60f1085d749b9117b27f53802",
+    "content-hash": "3a6120f9c69237ca15a24d02efc0e021",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2867,20 +2867,20 @@
         },
         {
             "name": "hslavich/simplesamlphp-bundle",
-            "version": "v1.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hslavich/SimplesamlphpBundle.git",
-                "reference": "da476be924f4d7c4b9b31f21a69552fc14b2cfdf"
+                "url": "https://github.com/cap-collectif/SimplesamlphpBundle.git",
+                "reference": "186ba4720101e900f42006f9fc4debf2073f4359"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hslavich/SimplesamlphpBundle/zipball/da476be924f4d7c4b9b31f21a69552fc14b2cfdf",
-                "reference": "da476be924f4d7c4b9b31f21a69552fc14b2cfdf",
+                "url": "https://api.github.com/repos/cap-collectif/SimplesamlphpBundle/zipball/186ba4720101e900f42006f9fc4debf2073f4359",
+                "reference": "186ba4720101e900f42006f9fc4debf2073f4359",
                 "shasum": ""
             },
             "require": {
-                "simplesamlphp/simplesamlphp": "~1.13",
+                "simplesamlphp/simplesamlphp": "^1.15.0",
                 "symfony/symfony": ">=2.8"
             },
             "type": "symfony-bundle",
@@ -2889,7 +2889,6 @@
                     "Hslavich\\SimplesamlphpBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "hslavich",
@@ -2900,12 +2899,15 @@
                     "email": "moritz.hesse@tu-dresden.de"
                 }
             ],
-            "description": "SimpleSAMLphp Bundle for Symfony2",
+            "description": "SimpleSAMLphp Bundle for Symfony",
             "keywords": [
                 "saml",
                 "simplesamlphp"
             ],
-            "time": "2017-01-30T17:50:41+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/SimplesamlphpBundle/tree/master"
+            },
+            "time": "2018-01-16T09:42:18+00:00"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -13810,6 +13812,7 @@
         "sonata-project/classification-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
+        "hslavich/simplesamlphp-bundle": 20,
         "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,

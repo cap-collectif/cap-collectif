@@ -36,6 +36,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/mailcatcher"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/SimplesamlphpBundle"
         }
     ],
     "require": {
@@ -99,7 +103,7 @@
         "php-http/client-common": "^1.7",
         "php-http/guzzle6-adapter": "^1.1",
         "simplesamlphp/simplesamlphp": "1.15.0",
-        "hslavich/simplesamlphp-bundle": "^1.1",
+        "hslavich/simplesamlphp-bundle": "dev-master",
         "simplesamlphp/saml2": "^3.1",
         "cap-collectif/id-to-uuid": "^1.1",
         "friendsofsymfony/http-cache-bundle": "^2.1",
