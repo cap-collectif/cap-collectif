@@ -31,6 +31,8 @@ Proposal:
               type: "[Selection!]!"
             likers:
               type: "[User!]!"
+            followers:
+              type: "[User!]!"
             estimation:
                 type: "Int"
             responses:
