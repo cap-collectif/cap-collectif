@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Proposal:
+OCapco\AppBundle\Entity\Proposal:
   exclusion_policy: ALL
   properties:
     id:
@@ -88,6 +88,9 @@ Capco\AppBundle\Entity\Proposal:
       groups: [Proposals, Statuses, Elasticsearch]
       serialized_name: selections
     likers:
+      expose: true
+      groups: [Proposals]
+    followers:
       expose: true
       groups: [Proposals]
     address:
