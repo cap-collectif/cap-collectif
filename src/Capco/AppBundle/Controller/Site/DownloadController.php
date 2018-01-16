@@ -26,6 +26,16 @@ class DownloadController extends Controller
             || $this->getUser() === $mediaResponse->getProposal()->getAuthor()
             || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
+            $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
+
+            // In case something bad happened, and we lost the file…
+            if (!$provider->getReferenceFile($media)->exists()) {
+                $this->get('logger')->error('File not found for media : ' . $media->getId());
+
+                return new Response('File not found.');
+            }
+
+            // Depending on the file type we redirect to the file or download it
             $type = $media->getContentType();
             if ('application/pdf' === $type || 'image/jpeg' === $type || 'image/png' === $type) {
                 $url = $request->getUriForPath('/media') . $this->get('sonata.media.twig.extension')->path($media, 'reference');
@@ -34,7 +44,6 @@ class DownloadController extends Controller
             }
 
             $downloadMode = $this->get('sonata.media.pool')->getDownloadMode($media);
-            $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
             $response = $provider->getDownloadResponse($media, 'reference', $downloadMode);
             if ($response instanceof BinaryFileResponse) {
                 $response->prepare($this->get('request'));
