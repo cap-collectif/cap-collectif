@@ -49,6 +49,9 @@ class DownloadController extends Controller
                 $response->prepare($this->get('request'));
             }
 
+            // Avoid some files to be corrupt
+            ob_get_clean();
+
             return $response;
         }
 
