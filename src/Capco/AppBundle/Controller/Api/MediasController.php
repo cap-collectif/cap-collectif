@@ -31,7 +31,7 @@ class MediasController extends FOSRestController
           'name' => $media->getName(),
           'id' => $media->getId(),
           'size' => $this->formatBytes($media->getSize()),
-          'url' => '/media' . $this->get('sonata.media.twig.extension')->path($media, 'reference'),
+          'url' => $request->getUriForPath('/media') . $this->get('sonata.media.twig.extension')->path($media, 'reference'),
         ];
     }
 
