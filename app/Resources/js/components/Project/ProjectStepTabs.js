@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 type Props = {
   steps: Array<Object>,
-  currentStepId: string
+  currentStepId: string,
 };
 
 type State = {
@@ -16,7 +16,43 @@ type State = {
   rightTest: boolean,
 };
 
-export class ProjectStepTabs extends React.Component<Props, State> {
+const getNavValues = () => {
+  const stepTabsBar = document.getElementById('step-tabs-list');
+  const stepTabsBarWidth: number = stepTabsBar ? stepTabsBar.offsetWidth : 0;
+  const getBoundingBar: ?Object = stepTabsBar ? stepTabsBar.getBoundingClientRect() : null;
+  const barRight: number = getBoundingBar ? getBoundingBar.right : 0;
+  const barLeft: number = getBoundingBar ? getBoundingBar.left : 0;
+
+  const activeTab: ?Object = stepTabsBar && stepTabsBar.getElementsByClassName('active')[0];
+  const getBoundingActiveTab: ?Object = activeTab && activeTab.getBoundingClientRect();
+  const activeTabLeft: number = getBoundingActiveTab ? getBoundingActiveTab.left : 0;
+  const activeTabRight: number = getBoundingActiveTab ? getBoundingActiveTab.right : 0;
+
+  const stepScrollNav: ?Object = document.getElementById('step-tabs-scroll-nav');
+  const scrollNavWidth: number = stepScrollNav ? stepScrollNav.offsetWidth : 0;
+  const getBoundingScrollNav: ?Object = stepScrollNav && stepScrollNav.getBoundingClientRect();
+  const scrollNavRight: number = getBoundingScrollNav ? getBoundingScrollNav.right : 0;
+  const scrollNavLeft: number = getBoundingScrollNav ? getBoundingScrollNav.left : 0;
+
+  const stepTabsSvg: ?Object = document.getElementById('step-tabs-svg');
+  const getBoundingStepTabsSvg: ?Object = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
+  const stepTabsSvgWidth: number = getBoundingStepTabsSvg ? getBoundingStepTabsSvg.width : 0;
+
+  return {
+    stepTabsBarWidth,
+    scrollNavWidth,
+    scrollNavRight,
+    scrollNavLeft,
+    stepTabsSvgWidth,
+    activeTab,
+    barRight,
+    barLeft,
+    activeTabLeft,
+    activeTabRight,
+  };
+};
+
+export class ProjectStepTabs extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -30,74 +66,54 @@ export class ProjectStepTabs extends React.Component<Props, State> {
   }
 
   componentDidMount = () => {
-    const stepTabsBar = document.getElementById('step-tabs__list');
-    const activeTab = stepTabsBar && stepTabsBar.getElementsByClassName('active')[0];
-
-    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
-    const getBoundingActiveTab = activeTab && activeTab.getBoundingClientRect();
-
-    const barLeft = getBoundingBar && getBoundingBar.left;
-    const barRight = getBoundingBar && getBoundingBar.right;
-    const activeTabLeft = getBoundingActiveTab && getBoundingActiveTab.left;
-    const activeTabRight = getBoundingActiveTab && getBoundingActiveTab.right;
-
-    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
-    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
-    const scrollNavWidth = stepScrollNav && stepScrollNav.offsetWidth;
-
-    const stepTabsSvg = document.getElementById('step-tabs-svg');
-    const getBoundingStepTabsSvg = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
-    const stepTabsSvgWidth = getBoundingStepTabsSvg.width;
+    const {
+      barRight,
+      barLeft,
+      activeTabRight,
+      activeTabLeft,
+      scrollNavWidth,
+      stepTabsSvgWidth,
+      stepTabsBarWidth,
+    } = getNavValues();
 
     // move left
-    if(barRight && activeTabRight && activeTabRight > barRight) {
-      const diffRight = (barRight - activeTabRight);
+    if (activeTabRight > barRight) {
+      const diffRight = barRight - activeTabRight;
       this.setState({
         translateX: diffRight - stepTabsSvgWidth,
-      })
+      });
     }
 
     // if it doesn't move
-    if(barRight &&
-      activeTabRight &&
-      barLeft &&
-      stepTabsBarWidth &&
-      scrollNavWidth &&
-      activeTabLeft &&
+    if (
       activeTabRight <= barRight &&
       activeTabLeft >= barLeft &&
-      scrollNavWidth > stepTabsBarWidth) {
+      scrollNavWidth > stepTabsBarWidth
+    ) {
       this.setState({
         showArrowRight: true,
-      })
+      });
     }
   };
 
   componentDidUpdate = (prevProps: Props, preState: State) => {
     const { firstArrowDisplay, translateX } = this.state;
+    const { barRight, scrollNavRight } = getNavValues();
 
-    const stepTabsBar = document.getElementById('step-tabs__list');
-    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
-    const barRight = getBoundingBar && getBoundingBar.right;
-
-    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
-    const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
-    const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
-
-    if(preState.translateX === 0 && this.state.translateX !== 0) {
-      if(this.state.translateX < 0) {
+    if (preState.translateX === 0 && this.state.translateX !== 0) {
+      if (this.state.translateX < 0) {
         this.setState({
           showArrowLeft: true,
-        })
+        });
       }
     }
 
-    if(firstArrowDisplay) {
-      if(scrollNavRight && barRight && ((scrollNavRight + translateX) > barRight)) {
+    if (firstArrowDisplay) {
+      if (scrollNavRight + translateX > barRight) {
         this.setState({
           showArrowRight: true,
           firstArrowDisplay: false,
-        })
+        });
       }
     }
   };
@@ -105,105 +121,68 @@ export class ProjectStepTabs extends React.Component<Props, State> {
   getClass = (stepId: string) => {
     const { currentStepId } = this.props;
 
-    if(currentStepId === stepId) {
-      return "active";
+    if (currentStepId === stepId) {
+      return 'active';
     }
   };
 
   getTranslateLeft = () => {
     const { translateX } = this.state;
-
-    // trouver moyen reprendre const du didmount
-    const stepTabsBar = document.getElementById('step-tabs__list');
-    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
-    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
-    const barLeft = getBoundingBar && getBoundingBar.left;
-    // fin repetition
-
-    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
-    const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
-    const scrollNavLeft = getBoundingScrollNav && getBoundingScrollNav.left;
+    const { stepTabsBarWidth, barLeft, scrollNavLeft } = getNavValues();
 
     const diffLeft = barLeft - scrollNavLeft;
 
-    console.log(barLeft);
-    console.warn(scrollNavLeft);
-    console.log(diffLeft);
-    console.error(stepTabsBarWidth);
-    console.log(translateX);
-
-    if(stepTabsBarWidth && diffLeft < stepTabsBarWidth) {
+    if (diffLeft < stepTabsBarWidth) {
       this.setState({
         translateX: translateX + diffLeft,
         showArrowLeft: false,
         showArrowRight: true,
-      })
+      });
     }
 
-    if(stepTabsBarWidth && diffLeft > stepTabsBarWidth) {
+    if (diffLeft > stepTabsBarWidth) {
       this.setState({
         translateX: translateX + stepTabsBarWidth,
         showArrowRight: true,
-      })
+      });
     }
 
-    if(stepTabsBarWidth && diffLeft === stepTabsBarWidth) {
+    if (diffLeft === stepTabsBarWidth) {
       this.setState({
         translateX: translateX + stepTabsBarWidth,
         showArrowRight: true,
         showArrowLeft: false,
-      })
+      });
     }
   };
 
   getTranslateRight = () => {
     const { translateX } = this.state;
-
-    // trouver moyen reprendre const du didmount
-    const stepTabsBar = document.getElementById('step-tabs__list');
-    const stepTabsBarWidth = stepTabsBar && stepTabsBar.offsetWidth;
-    const getBoundingBar = stepTabsBar && stepTabsBar.getBoundingClientRect();
-    const barRight = getBoundingBar && getBoundingBar.right;
-    // fin repetition
-
-    const stepScrollNav = document.getElementById('step-tabs__scroll-nav');
-    const getBoundingScrollNav = stepScrollNav && stepScrollNav.getBoundingClientRect();
-    const scrollNavRight = getBoundingScrollNav && getBoundingScrollNav.right;
-
-    const stepTabsSvg = document.getElementById('step-tabs-svg');
-    const getBoundingStepTabsSvg = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
-    const stepTabsSvgWidth = getBoundingStepTabsSvg.width;
-
-    // console.error(barRight);
-    // console.warn(scrollNavRight);
+    const { stepTabsBarWidth, scrollNavRight, barRight, stepTabsSvgWidth } = getNavValues();
 
     const diffRight = scrollNavRight - barRight;
 
-    // console.log(translateX);
-    // console.warn(stepTabsBarWidth);
-    // console.log(diffRight);
-
-    if(diffRight < stepTabsBarWidth) {
+    if (diffRight < stepTabsBarWidth) {
       this.setState({
-        translateX: (translateX - diffRight) - stepTabsSvgWidth,
+        translateX: translateX - diffRight - stepTabsSvgWidth,
         showArrowRight: false,
         showArrowLeft: true,
-      })
+      });
     }
 
-    if(diffRight > stepTabsBarWidth) {
+    if (diffRight > stepTabsBarWidth) {
       this.setState({
         translateX: translateX - stepTabsBarWidth,
         showArrowLeft: true,
-      })
+      });
     }
 
-    if(diffRight === stepTabsBarWidth) {
+    if (diffRight === stepTabsBarWidth) {
       this.setState({
         translateX: translateX - stepTabsBarWidth,
         showArrowLeft: true,
         showArrowRight: false,
-      })
+      });
     }
   };
 
@@ -211,36 +190,37 @@ export class ProjectStepTabs extends React.Component<Props, State> {
     const { steps } = this.props;
     const { translateX, showArrowLeft, showArrowRight } = this.state;
 
-    const getTranslateX = translateX;
-    const translation = `translateX(${getTranslateX}px)`;
+    const translation = `translateX(${translateX}px)`;
 
     return (
       <div className="step-tabs">
         <div className="step-tabs__bar container">
-          {showArrowLeft &&
+          {showArrowLeft && (
             <div className="step-tabs__tab-prev">
               <a onClick={this.getTranslateLeft}>
-                <i className="cap-arrow-65"></i>
+                <i className="cap-arrow-65" />
               </a>
             </div>
-          }
-          {showArrowRight &&
+          )}
+          {showArrowRight && (
             <div className="step-tabs__tab-next">
               <a onClick={this.getTranslateRight}>
-                <i className="cap-arrow-66"></i>
+                <i className="cap-arrow-66" />
               </a>
             </div>
-          }
-          <div className="step-tabs__list" id="step-tabs__list">
-            <ul className="nav" id="step-tabs__scroll-nav" style={{ transform : translation }}>
-              {steps.map((step,key) => (
+          )}
+          <div className="step-tabs__list" id="step-tabs-list">
+            <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
+              {steps.map((step, key) => (
                 <li className={this.getClass(step.id)} key={key}>
                   <a href={step._links.show} className="d-flex">
-                    <div className="navbar__step-nb"><span>{key+1}</span></div>
+                    <div className="navbar__step-nb">
+                      <span>{key + 1}</span>
+                    </div>
                     <div className="navbar__step">
                       <span className="navbar__step-title">{step.title}</span>
                       <p className="excerpt">
-                        <FormattedMessage id={`step.status.${step.status}`}/>
+                        <FormattedMessage id={`step.status.${step.status}`} />
                       </p>
                     </div>
                   </a>
@@ -248,7 +228,12 @@ export class ProjectStepTabs extends React.Component<Props, State> {
                     <defs>
                       <filter id="f1" x="0" y="0" width="200%" height="200%">
                         <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                        <feColorMatrix result = "matrixOut" in = "offOut" type = "matrix" values = "0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "/>
+                        <feColorMatrix
+                          result="matrixOut"
+                          in="offOut"
+                          type="matrix"
+                          values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
+                        />
                         <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
                         <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
                       </filter>
@@ -261,14 +246,11 @@ export class ProjectStepTabs extends React.Component<Props, State> {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-
-
 export default connect((state, props) => ({
   steps: state.project.projectsById[props.projectId].steps,
-  currentStepId: state.project.currentProjectStepById
-})
-)(ProjectStepTabs);
+  currentStepId: state.project.currentProjectStepById,
+}))(ProjectStepTabs);
