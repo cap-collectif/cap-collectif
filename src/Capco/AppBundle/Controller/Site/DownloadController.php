@@ -37,7 +37,8 @@ class DownloadController extends Controller
 
             // Depending on the file type we redirect to the file or download it
             $type = $media->getContentType();
-            if ('application/pdf' === $type || 'image/jpeg' === $type || 'image/png' === $type) {
+            $redirectFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+            if (in_array($type, $redirectFileTypes, true)) {
                 $url = $request->getUriForPath('/media') . $this->get('sonata.media.twig.extension')->path($media, 'reference');
 
                 return new RedirectResponse($url);
