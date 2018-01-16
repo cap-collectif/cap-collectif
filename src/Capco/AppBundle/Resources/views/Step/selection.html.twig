@@ -35,7 +35,6 @@
 {% endblock %}
 
 {% block details %}
-    {% dump currentStep %}
     {% if currentStep.isClosed and currentStep.isVotable %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'step.selection.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.selection.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
