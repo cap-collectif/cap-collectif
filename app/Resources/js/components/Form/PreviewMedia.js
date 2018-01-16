@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 type Media = {
   id: string,
   name: string,
-  extension: string,
   url: string,
 };
 
@@ -45,7 +44,9 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
               {medias.map((file, key) => {
                 return (
                   <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
-                    {file.name}{' '}
+                    <a href={file.url} target="_blank">
+                      {file.name}
+                    </a>{' '}
                     <i
                       style={{ cursor: 'pointer' }}
                       className="glyphicon glyphicon-remove"

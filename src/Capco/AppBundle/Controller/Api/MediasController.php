@@ -25,6 +25,21 @@ class MediasController extends FOSRestController
             return;
         }
 
-        return $mediaManager->createFileFromUploadedFile($uploadedMedia);
+        $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
+
+        return [
+          'name' => $media->getName(),
+          'id' => $media->getId(),
+          'size' => $this->formatBytes($media->getSize()),
+          'url' => '/media' . $this->get('sonata.media.twig.extension')->path($media, 'reference'),
+        ];
+    }
+
+    private function formatBytes(int $bytes): string
+    {
+        $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
+        $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
+
+        return number_format($bytes / (1024 ** $power), 1) . ' ' . $units[$power];
     }
 }

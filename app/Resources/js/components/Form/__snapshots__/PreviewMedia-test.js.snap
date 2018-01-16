@@ -29,7 +29,12 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
         }
       }
     >
-      image
+      <a
+        href="http://capco.dev/image.jpg"
+        target="_blank"
+      >
+        image
+      </a>
        
       <i
         className="glyphicon glyphicon-remove"

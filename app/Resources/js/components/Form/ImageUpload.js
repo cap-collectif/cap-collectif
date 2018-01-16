@@ -119,7 +119,6 @@ export class ImageUpload extends React.Component<Props> {
             accept={accept}
             minSize={minSize}
             maxSize={maxSize}
-            // $FlowFixMe
             inputProps={{ id: `${id}_field` }}
             disablePreview={disablePreview}
             className="image-uploader__dropzone--fullwidth">
