@@ -7,19 +7,20 @@ use Capco\MediaBundle\Entity\Media;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use Sonata\CoreBundle\Twig\Extension\TemplateExtension;
-use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 
 class MediaResponseSerializationListener extends AbstractSerializationListener
 {
-    protected $routingExtension;
+    protected $router;
     protected $serializer;
     protected $templateExtension;
 
-    public function __construct(Serializer $serializer, RoutingExtension $routingExtension, TemplateExtension $templateExtension)
+    public function __construct(Serializer $serializer, Router $router, TemplateExtension $templateExtension)
     {
         $this->serializer = $serializer;
-        $this->routingExtension = $routingExtension;
+        $this->router = $router;
         $this->templateExtension = $templateExtension;
     }
 
@@ -47,12 +48,13 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
             ->map(function (Media $media) use ($response) {
                 $metas = [];
                 try {
-                    $metas['url'] = $this->routingExtension->getPath(
+                    $metas['url'] = $this->router->generate(
                         'app_media_response_download',
                         [
                             'responseId' => $response->getId(),
-                            'mediaId' => $this->templateExtension->getUrlsafeIdentifier($media),
-                        ]
+                            'mediaId' => $media->getId(),
+                        ],
+                        UrlGeneratorInterface::ABSOLUTE_URL
                     );
                     $metas['name'] = $media->getName();
                     $metas['extension'] = $media->getExtension();
