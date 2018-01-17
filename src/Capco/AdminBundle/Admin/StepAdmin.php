@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -29,6 +30,17 @@ class StepAdmin extends Admin
 
     protected $formOptions = [
         'cascade_validation' => true,
+    ];
+
+    protected $labels = [
+        PresentationStep::class => 'proposal.tabs.content',
+        SynthesisStep::class => 'admin.fields.step.synthesis',
+        QuestionnaireStep::class => 'admin.label.questionnaire',
+        OtherStep::class => '',
+        ConsultationStep::class => 'project.types.consultation',
+        RankingStep::class => 'admin.fields.project.group ranking',
+        SelectionStep::class => '',
+        CollectStep::class => 'admin.fields.proposal.group collect',
     ];
 
     public function getNewInstance()
@@ -88,14 +100,20 @@ class StepAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
-
+        $translator = $this->getTranslator();
+        $label = $this->getLabelKey($subject);
         $formMapper
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
-                'label' => 'admin.fields.step.title',
+                'label' => 'admin.fields.step.label',
+                'data' => $translator->trans($label),
                 'required' => true,
             ])
-        ;
+            ->add('label', null, [
+                'label' => 'color.main menu.text',
+                'data' => $translator->trans($label),
+                'required' => true,
+            ]);
 
         $formMapper
             ->add('isEnabled', null, [
@@ -457,5 +475,16 @@ class StepAdmin extends Admin
         ;
 
         return $qb->getQuery();
+    }
+
+    private function getLabelKey(AbstractStep $step): string
+    {
+        foreach ($this->labels as $class => $label) {
+            if ($step instanceof $class) {
+                return $label;
+            }
+        }
+
+        return '';
     }
 }

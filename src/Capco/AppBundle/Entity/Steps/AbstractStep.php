@@ -130,12 +130,21 @@ abstract class AbstractStep
     private $statuses;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="admin.step.menu_label.error")
+     */
+    private $label = '';
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
         $this->statuses = new ArrayCollection();
+        $this->label = '';
     }
 
     public function __toString()
@@ -320,6 +329,22 @@ abstract class AbstractStep
         $this->statuses->removeElement($status);
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label)
+    {
+        $this->label = $label;
     }
 
     // ************************* Custom methods *********************
