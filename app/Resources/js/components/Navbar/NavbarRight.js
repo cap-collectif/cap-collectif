@@ -57,7 +57,7 @@ export const NavbarRight = React.createClass({
               </MenuItem>
             )}
             {features.profiles && (
-              <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.username}`}>
+              <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 {<FormattedMessage id="navbar.profile" />}
               </MenuItem>
             )}
