@@ -1,27 +1,40 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import RemainingTime from './../../Utils/RemainingTime';
+import DatesInterval from './../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
 
-const StepPageHeader = React.createClass({
-  propTypes: {
-    step: PropTypes.object.isRequired,
-  },
+type Props = {
+  step: Object,
+};
 
+export class StepPageHeader extends React.Component<Props> {
   render() {
     const { step } = this.props;
+
+    console.log(step);
+
     return (
       <div>
         <h2 className="h2">{step.title}</h2>
-        <div className="mb-15">
-          <span className="mr-15">
-            <i className="cap cap-calendar-2-1" /> du 26 au 30 sept ..
-          </span>
-          <span className="mr-15">
-            <i className="cap cap-hourglass-1" /> 25jours restants
-          </span>
+        <div className="mb-30">
+          {(step.startAt || step.endAt) && (
+              <span className="mr-15">
+                <i className="cap cap-calendar-2-1" />{' '}
+                <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+              </span>
+            )}
+          {step.endAt && (
+            <span className="mr-15">
+              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+            </span>
+          )}
           <span>
-            <i className="cap cap-business-chart-2-1" />
-            <a href="" />
+            {/* To search + add condition for collect, selection, relaisation */}
+            <i className="cap cap-business-chart-2-1" />{' '}
+            <a href="">
+              <FormattedMessage id="project.show.meta.info.stats" />
+            </a>
             {/* <a href="{{ path('app_project_show_stats', {'projectSlug': project.slug }) }}"> */}
             {/* {{ 'project.show.meta.info.stats'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i> */}
             {/* </a> */}
@@ -42,7 +55,7 @@ const StepPageHeader = React.createClass({
         <StepInfos step={step} />
       </div>
     );
-  },
-});
+  }
+}
 
 export default StepPageHeader;

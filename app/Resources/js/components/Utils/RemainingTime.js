@@ -1,40 +1,49 @@
-import React from 'react';
+import * as React from 'react';
+import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
-const RemainingTime = React.createClass({
-  propTypes: {
-    days: React.PropTypes.number,
-    hours: React.PropTypes.number,
-  },
+type Props = {
+  +endAt: string,
+};
 
-  getDefaultProps() {
-    return {
-      days: 0,
-      hours: 0,
-    };
-  },
-
+export class RemainingTime extends React.Component<Props> {
   render() {
-    const { days, hours } = this.props;
-    if (hours > 0) {
-      return (
-        <FormattedMessage
-          id="global.remaining.hours"
-          values={{
-            num: hours,
-          }}
-        />
+    const { endAt } = this.props;
+
+    const endDate = moment(endAt);
+    const now = moment();
+
+    const daysLeft = endDate.diff(now, 'days');
+    const hoursLeft = endDate.diff(now, 'hours');
+    const minutesLeft = endDate.diff(now, 'minutes');
+
+    let timeLeft;
+
+    if (daysLeft === 0 && hoursLeft === 0) {
+      timeLeft = (
+        <span className="remaining-time__container">
+          <span className="remaining-time__number">{minutesLeft}</span>{' '}
+          <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
+        </span>
+      );
+    } else if (daysLeft === 0) {
+      timeLeft = (
+        <span className="remaining-time__container">
+          <span className="remaining-time__number">{hoursLeft}</span>{' '}
+          <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
+        </span>
+      );
+    } else {
+      timeLeft = (
+        <span className="remaining-time__container">
+          <span className="remaining-time__number">{daysLeft}</span>{' '}
+          <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
+        </span>
       );
     }
-    return (
-      <FormattedMessage
-        id="global.remaining.days"
-        values={{
-          num: days,
-        }}
-      />
-    );
-  },
-});
+
+    return timeLeft;
+  }
+}
 
 export default RemainingTime;
