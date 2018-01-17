@@ -1,4 +1,6 @@
+// @flow
 import React, { PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 
@@ -16,19 +18,29 @@ const ProjectTrashButton = React.createClass({
   },
 
   render() {
-    const { link, label, user } = this.props;
+    const { link, user } = this.props;
     return (
-      <LoginOverlay>
-        <a
-          id="trash-link"
-          href={user ? link : null}
-          style={{ display: 'block', borderColor: 'transparent !important' }}>
-          <p className="navbar__step-title">
-            <i className="cap cap-bin-2-1" />
-            {label} <i className="pull-right excerpt cap-arrow-66" />
+      <div className="container container--custom text-center">
+        <div className="row">
+          <h3 className="mt-0">
+            <FormattedMessage id="project.show.trashed.short_name" />
+          </h3>
+          <p className="excerpt">
+            <FormattedMessage id="project.show.trashed.text" />
           </p>
-        </a>
-      </LoginOverlay>
+          <LoginOverlay>
+            <a
+              id="trash-link"
+              href={user ? link : null}
+              style={{ display: 'block', borderColor: 'transparent !important' }}>
+              <p>
+                <FormattedMessage id="project.show.trashed.display" />
+                {/* {label} */}
+              </p>
+            </a>
+          </LoginOverlay>
+        </div>
+      </div>
     );
   },
 });

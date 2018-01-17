@@ -41,6 +41,21 @@
         </div>
     {% endif %}
 
+    {#<div>#}
+        {#<span class="mr-15">#}
+            {#<i class="cap cap-calendar-2-1"></i> du 26 au 30 sept ..#}
+        {#</span>#}
+        {#<span class="mr-15">#}
+            {#<i class="cap cap-hourglass-1"></i> 25jours restants#}
+        {#</span>#}
+        {#<span>#}
+            {#<i class="cap cap-business-chart-2-1"></i>#}
+            {#<a href="{{ path('app_project_show_stats', {'projectSlug': project.slug }) }}">#}
+                {#{{ 'project.show.meta.info.stats'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>#}
+            {#</a>#}
+        {#</span>#}
+    {#</div>#}
+
     {% if currentStep.isFuture %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
             <p><strong>{{ 'step.collect.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.collect.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>

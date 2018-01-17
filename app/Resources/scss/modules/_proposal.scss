@@ -64,6 +64,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-size: 16px;
 
             .proposal__date {
                 margin-bottom: 0;

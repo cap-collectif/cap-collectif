@@ -48,6 +48,15 @@
             </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
         </div> <!-- .row -->
     </div>
+
+    <section>
+        {{ react_render_component('ProjectTrashButtonApp', {
+            'props': {
+                'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
+                'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
+            },
+        })}}
+    </section>
 {% endblock %}
 
 {% block javascripts %}

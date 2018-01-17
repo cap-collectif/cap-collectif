@@ -12,6 +12,21 @@ const StepPageHeader = React.createClass({
     return (
       <div>
         <h2 className="h2">{step.title}</h2>
+        <div className="mb-15">
+          <span className="mr-15">
+            <i className="cap cap-calendar-2-1" /> du 26 au 30 sept ..
+          </span>
+          <span className="mr-15">
+            <i className="cap cap-hourglass-1" /> 25jours restants
+          </span>
+          <span>
+            <i className="cap cap-business-chart-2-1" />
+            <a href="" />
+            {/* <a href="{{ path('app_project_show_stats', {'projectSlug': project.slug }) }}"> */}
+            {/* {{ 'project.show.meta.info.stats'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i> */}
+            {/* </a> */}
+          </span>
+        </div>
         {step.type === 'selection' &&
           step.voteThreshold > 0 && (
             <h4 style={{ marginBottom: '20px' }}>
