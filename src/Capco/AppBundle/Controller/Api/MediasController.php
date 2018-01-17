@@ -27,6 +27,11 @@ class MediasController extends FOSRestController
 
         $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
 
+        // $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
+        // if (!$provider->getReferenceFile($media)->exists()) {
+        //     return new Response('File not found.');
+        // }
+
         return [
           'name' => $media->getName(),
           'id' => $media->getId(),

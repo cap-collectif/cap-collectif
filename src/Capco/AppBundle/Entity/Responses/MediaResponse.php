@@ -13,7 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class MediaResponse extends AbstractResponse
 {
     /**
-     * @ORM\ManyToMany(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(
+     *  targetEntity="Capco\MediaBundle\Entity\Media",
+     *  cascade={"persist", "remove"},
+     *  orphanRemoval=true
+     * )
      * @ORM\JoinTable(
      *   name="responses_medias",
      *   joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},

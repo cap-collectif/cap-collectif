@@ -10,9 +10,6 @@ class Media extends BaseMedia
 {
     use UuidTrait;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->galleryHasMedias = new ArrayCollection();

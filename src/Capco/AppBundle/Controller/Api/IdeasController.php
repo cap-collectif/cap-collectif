@@ -196,13 +196,8 @@ class IdeasController extends FOSRestController
             if ($idea->getMedia()) {
                 $em->remove($idea->getMedia());
             }
-            $mediaManager = $this->get('sonata.media.manager.media');
-            $media = $mediaManager->create();
-            $media->setProviderName('sonata.media.provider.image');
-            $media->setBinaryContent($uploadedMedia);
-            $media->setContext('default');
-            $media->setEnabled(true);
-            $mediaManager->save($media, false);
+            $mediaManager = $this->get('capco.media.manager');
+            $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
             $idea->setMedia($media);
         }
 
