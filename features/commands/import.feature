@@ -53,3 +53,15 @@ Scenario: Admin wants to create a PJL
   email,confirmation_link
   """
   Then print the contents of file "users_created.csv"
+
+@database
+Scenario: Admin wants to import users from a CSV
+  Given "users.csv" contains:
+  """
+  username;email;password
+  john.doe;user_a@test.com;test
+  mcfly;user_b@test.com;carlito
+  """
+  Given I run "capco:import:users vfs://users.csv ;"
+  Then the command exit code should be 0
+  And I should see "2 users successfully created." in output
