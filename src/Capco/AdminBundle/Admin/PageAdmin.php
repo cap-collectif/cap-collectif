@@ -11,7 +11,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PageAdmin extends Admin
 {
@@ -60,7 +60,7 @@ class PageAdmin extends Admin
                         'provider' => 'sonata.media.provider.image',
                     ],
                 ])
-                ->add('customCode', TextType::class, [
+                ->add('customCode', TextareaType::class, [
                     'label' => 'admin.customcode',
                     'required' => false,
                     'help' => 'admin.help.customcode',
