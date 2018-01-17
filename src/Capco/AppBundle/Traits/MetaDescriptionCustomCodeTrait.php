@@ -19,22 +19,24 @@ trait MetaDescriptionCustomCodeTrait
      */
     private $customCode;
 
-    public function getMetaDescription()
+    public function getMetaDescription() //:?string
     {
         return $this->metaDescription;
     }
 
-    public function setMetaDescription($metaDescription)
+    public function setMetaDescription(string $metaDescription = null): self
     {
         $this->metaDescription = $metaDescription;
+
+        return $this;
     }
 
-    public function getCustomCode()
+    public function getCustomCode() //:?string
     {
         return $this->customCode;
     }
 
-    public function setCustomCode($customCode)
+    public function setCustomCode(string $customCode = null): self
     {
         $this->customCode = $customCode;
 
