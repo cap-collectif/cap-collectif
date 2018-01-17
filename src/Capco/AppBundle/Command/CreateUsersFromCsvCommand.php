@@ -65,7 +65,7 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
                 return $this->generateContentException($output);
             }
 
-            if ($this->isValidRow($row, $output)) {
+            if ($loop > 1 && $this->isValidRow($row, $output)) {
                 $user = $userManager->createUser();
                 $user->setUsername($row[0]);
                 $user->setEmail(filter_var($row[1], FILTER_SANITIZE_EMAIL));
@@ -73,8 +73,9 @@ class CreateUsersFromCsvCommand extends ContainerAwareCommand
                 $user->setEnabled(true);
                 $userManager->updateUser($user);
                 $progress->advance();
-                ++$loop;
             }
+
+            ++$loop;
         }
 
         $progress->finish();
