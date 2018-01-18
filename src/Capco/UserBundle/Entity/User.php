@@ -309,9 +309,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         }
     }
 
-    public function setSamlId($id): self
+    public function setSamlId($samlId = null): self
     {
-        $this->samlId = $id;
+        $this->samlId = $samlId;
 
         return $this;
     }
