@@ -75,7 +75,7 @@
             </div>
             {% if proposal.isTrashed %}
                 <div class="{{ 'proposal__status status--default' }}">
-                    {% if proposal.enabled == false %}
+                    {% if proposal.enabled == true %}
                         {{ 'proposal.show.trashed.reason.moderated' | trans({}, 'CapcoAppBundle') }}
                     {% else %}
                         {{ 'proposal.show.trashed.reason.deleted' | trans({}, 'CapcoAppBundle') }}

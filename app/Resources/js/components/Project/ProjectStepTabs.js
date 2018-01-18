@@ -69,6 +69,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     const {
       barRight,
       barLeft,
+      activeTab,
       activeTabRight,
       activeTabLeft,
       scrollNavWidth,
@@ -86,9 +87,10 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     // if it doesn't move
     if (
-      activeTabRight <= barRight &&
-      activeTabLeft >= barLeft &&
-      scrollNavWidth > stepTabsBarWidth
+      (activeTabRight <= barRight &&
+        activeTabLeft >= barLeft &&
+        scrollNavWidth > stepTabsBarWidth) ||
+      (scrollNavWidth > stepTabsBarWidth && !activeTab)
     ) {
       this.setState({
         showArrowRight: true,

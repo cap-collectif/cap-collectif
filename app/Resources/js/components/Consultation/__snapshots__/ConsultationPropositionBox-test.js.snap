@@ -2,6 +2,17 @@
 
 exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
 <div>
+  <h2 />
+  <div
+    className="mb-30"
+  />
+  <StepInfos
+    step={
+      Object {
+        "id": "stepId",
+      }
+    }
+  />
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {

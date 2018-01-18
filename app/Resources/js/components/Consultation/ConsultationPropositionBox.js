@@ -7,6 +7,9 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 //   from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Utils/Loader';
+import RemainingTime from './../Utils/RemainingTime';
+import DatesInterval from './../Utils/DatesInterval';
+import StepInfos from '../../components/Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 
 type Props = {
@@ -36,6 +39,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
       // $FlowFixMe Propably libdef issue.
       return <Loader />;
     };
+
     return (
       <div>
         {/* <Panel>
@@ -47,6 +51,24 @@ export class ConsultationPropositionBox extends React.Component<Props> {
           </span>
         </Panel> */}
         {/* <ConsultationContributionFiltered consultationId={step.id} /> */}
+        <h2>{step.title}</h2>
+        <div className="mb-30">
+          {(step.startAt || step.endAt) && (
+              <span className="mr-15">
+                <i className="cap cap-calendar-2-1" />{' '}
+                <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+              </span>
+            )}
+          {step.endAt &&
+            step.status === 'open' &&
+            !step.timeless && (
+              <span className="mr-15">
+                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+              </span>
+            )}
+        </div>
+
+        <StepInfos step={step} />
         <QueryRenderer
           environment={environment}
           query={graphql`
