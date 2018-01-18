@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
