@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-// use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -25,7 +24,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Reply implements Contribution
 {
     use UuidTrait;
-    // use SoftDeleteTrait;
     use TimestampableTrait;
     use EnableTrait;
     use PrivatableTrait;

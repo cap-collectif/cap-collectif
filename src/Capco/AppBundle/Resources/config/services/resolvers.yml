@@ -67,7 +67,7 @@ services:
 
   capco.url.resolver:
       class: Capco\AppBundle\Resolver\UrlResolver
-      arguments: ['@router', '@capco.toggle.manager', '@capco.twig.media']
+      arguments: ['@router', '@capco.toggle.manager', '@sonata.media.twig.extension']
       tags:
         - { name: overblog_graphql.resolver, alias: "media_url", method: "getMediaUrl" }
 

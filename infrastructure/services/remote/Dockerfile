@@ -131,9 +131,18 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install java
-RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
-    apt-get update && apt-get install -t jessie-backports -y openjdk-8-jdk-headless net-tools && \
-    apt-get clean && \
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list  && \
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list  && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886  && \
+    apt-get update  && \
+    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes \
+        oracle-java8-installer \
+        oracle-java8-set-default \
+    && \
+    rm -rf /var/cache/oracle-jdk8-installer  && \
+    apt-get clean  && \
     rm -rf /var/lib/apt/lists/*
 
 # Install ES

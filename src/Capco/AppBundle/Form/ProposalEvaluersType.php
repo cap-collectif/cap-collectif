@@ -13,6 +13,7 @@ class ProposalEvaluersType extends AbstractType
     {
         $builder
             ->add('evaluers', null, [
+                'required' => false,
                 'by_reference' => false,
             ])
         ;
@@ -23,6 +24,7 @@ class ProposalEvaluersType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Proposal::class,
             'csrf_protection' => false,
+            'validation_groups' => ['Notation'],
         ]);
     }
 }

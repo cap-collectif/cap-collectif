@@ -30,31 +30,8 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
-
-        $author = $proposal->getAuthor();
-        $proposalForm = $proposal->getProposalForm();
-
-        $em->remove($proposal); // softdeleted
+        $em->remove($proposal);
         $em->flush();
-
-        $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
-
-        if (
-            $proposalForm->getNotificationsConfiguration()
-            && $proposalForm->getNotificationsConfiguration()->isOnDelete()
-        ) {
-            $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
-              json_encode([
-                'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
-
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->container->get('fos_elastica.index');
-        $index->refresh();
 
         return ['proposal' => $proposal];
     }

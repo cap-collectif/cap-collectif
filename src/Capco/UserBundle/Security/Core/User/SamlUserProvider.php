@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use FOS\UserBundle\Util\Canonicalizer;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -36,17 +35,15 @@ class SamlUserProvider implements UserProviderInterface
             }
 
             // If the id is not a valid email, we create a fake one...
-            if (false === strpos($a, '@')) {
+            if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
                 $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
             }
 
             $user->setEmail($email);
-            $user->setEmailCanonical((new Canonicalizer())->canonicalize($email));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
+            $this->userManager->updateUser($user);
         }
-
-        $this->userManager->updateUser($user);
 
         return $user;
     }
