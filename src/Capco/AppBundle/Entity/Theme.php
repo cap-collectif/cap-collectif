@@ -115,11 +115,8 @@ class Theme implements IndexableInterface
     private $ideas;
 
     /**
-     * @ORM\OneToMany(
-     *   targetEntity="Capco\AppBundle\Entity\Proposal",
-     *   mappedBy="theme",
-     *   cascade={"persist"}
-     * )
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="theme", cascade={"persist", "remove"})
      */
     private $proposals;
 

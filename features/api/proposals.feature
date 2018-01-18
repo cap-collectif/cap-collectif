@@ -942,6 +942,26 @@ Scenario: Anonymous API client wants to get some proposals from a selection step
   """
 
 @database
+Scenario: Admin API client wants to update proposal status
+  Given I am logged in to api as admin
+  When I send a PATCH request to "/api/proposals/proposal12" with json:
+  """
+  {
+    "status": "status1"
+  }
+  """
+  Then the JSON response status code should be 200
+  And proposal "proposal12" should have status "status1"
+  When I send a PATCH request to "/api/proposals/proposal12" with json:
+  """
+  {
+    "status": null
+  }
+  """
+  Then the JSON response status code should be 204
+  And proposal "proposal12" should not have a status
+
+@database
 Scenario: logged in API client wants to remove a proposal
   Given I am logged in to api as user
   When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/proposal2"

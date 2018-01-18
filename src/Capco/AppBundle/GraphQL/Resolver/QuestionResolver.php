@@ -39,7 +39,7 @@ class QuestionResolver implements ContainerAwareInterface
 
     public function resolvePosition(AbstractQuestion $question): int
     {
-        return $question->getQuestionnaireAbstractQuestion() ? $question->getQuestionnaireAbstractQuestion()->getPosition() : 0;
+        return $question->getQuestionnaireAbstractQuestion()->getPosition();
     }
 
     public function resolveisOtherAllowed(AbstractQuestion $question): bool
