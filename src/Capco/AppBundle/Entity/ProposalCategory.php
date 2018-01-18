@@ -23,8 +23,6 @@ class ProposalCategory
     protected $updatedAt;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
@@ -36,7 +34,11 @@ class ProposalCategory
     private $form;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="category", cascade={"persist"})
+     * @ORM\OneToMany(
+     *    targetEntity="Capco\AppBundle\Entity\Proposal",
+     *    mappedBy="category",
+     *    cascade={"persist"}
+     *  )
      */
     private $proposals;
 
