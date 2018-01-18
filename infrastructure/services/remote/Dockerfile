@@ -131,9 +131,10 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install java
-RUN apt-get install -y openjdk-8-jdk-headless net-tools && \
+RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
+    apt-get update && apt-get install -t jessie-backports -y openjdk-8-jdk-headless net-tools && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install ES
 RUN cd / && \
