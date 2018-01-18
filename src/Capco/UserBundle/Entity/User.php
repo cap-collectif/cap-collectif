@@ -284,6 +284,10 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function setSamlAttributes(string $idp, array $attributes)
     {
+        if (!$this->getId()) {
+            return;
+        }
+
         if ('oda' === $idp) {
             $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
         }
@@ -305,7 +309,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         }
     }
 
-    public function setSamlId($id)
+    public function setSamlId($id): self
     {
         $this->samlId = $id;
 
@@ -321,7 +325,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function sanitizePhoneNumber()
     {
         if ($this->phone) {
-            $this->phone = '+' . preg_replace('/[^0-9]/', '', $this->phone);
+            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
         }
     }
 
