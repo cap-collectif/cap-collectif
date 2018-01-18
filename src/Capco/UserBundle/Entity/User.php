@@ -284,28 +284,39 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function setSamlAttributes(string $idp, array $attributes)
     {
-        if ('oda' === $idp) {
+        if ('oda' === $idp
+            && $attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0] !== $this->getUsername()
+        ) {
             $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
         }
-        if ('daher' === $idp) {
+        if ('daher' === $idp
+            && $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0] !== $this->getEmail()
+            && $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0] !== $this->getUsername()
+        ) {
             $this->setUsername($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
             $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]));
         }
-        if ('afd-interne' === $idp) {
+        if ('afd-interne' === $idp
+            && $attributes['cn'][0] !== $this->getEmail()
+            && $attributes['mail'][0] !== $this->getUsername()
+        ) {
             $this->setUsername($attributes['cn'][0]);
             $this->setEmail($attributes['mail'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
         }
 
-        if ('pole-emploi' === $idp) {
+        if ('pole-emploi' === $idp
+            && $attributes['cn'][0] !== $this->getEmail()
+            && $attributes['mail'][0] !== $this->getUsername()
+        ) {
             $this->setUsername($attributes['cn'][0]);
             $this->setEmail($attributes['mail'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
         }
     }
 
-    public function setSamlId($id)
+    public function setSamlId($id): self
     {
         $this->samlId = $id;
 
@@ -321,7 +332,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function sanitizePhoneNumber()
     {
         if ($this->phone) {
-            $this->phone = '+' . preg_replace('/[^0-9]/', '', $this->phone);
+            $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
         }
     }
 

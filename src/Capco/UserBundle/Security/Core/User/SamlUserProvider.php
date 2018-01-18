@@ -44,9 +44,8 @@ class SamlUserProvider implements UserProviderInterface
             $user->setEmailCanonical((new Canonicalizer())->canonicalize($email));
             $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
             $user->setEnabled(true);
+            $this->userManager->updateUser($user);
         }
-
-        $this->userManager->updateUser($user);
 
         return $user;
     }
