@@ -1167,7 +1167,6 @@ type Query {
     # Remove super admin from export.
     superAdmin: Boolean!
   ): [User]
-  followingProposal(id: ID!): [Proposal!]!
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
