@@ -9,6 +9,18 @@ type Props = {
 };
 
 export class StepPageHeader extends React.Component<Props> {
+  stepIsParticipative() {
+    const { step } = this.props;
+
+    return (
+      step &&
+      (step.type === 'consultation' ||
+        step.type === 'collect' ||
+        step.type === 'questionnaire' ||
+        (step.type === 'selection' && step.votable === true))
+    );
+  }
+
   render() {
     const { step } = this.props;
 
@@ -22,11 +34,14 @@ export class StepPageHeader extends React.Component<Props> {
                 <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
               </span>
             )}
-          {step.endAt && (
-            <span className="mr-15">
-              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-            </span>
-          )}
+          {step.endAt &&
+            step.status === 'open' &&
+            !step.timeless &&
+            this.stepIsParticipative() && (
+              <span className="mr-15">
+                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+              </span>
+            )}
           {step.type !== 'questionnaire' && (
             <span>
               <i className="cap cap-business-chart-2-1" />{' '}

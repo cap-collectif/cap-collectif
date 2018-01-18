@@ -38,12 +38,6 @@ const getNavValues = () => {
   const getBoundingStepTabsSvg: ?Object = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
   const stepTabsSvgWidth: number = getBoundingStepTabsSvg ? getBoundingStepTabsSvg.width : 0;
 
-  // const nextArrow = document.getElementById('step-tabs-tab-next');
-  // const nextArrowRight: ?number = nextArrow ? nextArrow.getBoundingClientRect().right : null;
-  // const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
-  // const prevArrow = document.getElementById('step-tabs-tab-prev');
-  // const prevArrowLeft: number = prevArrow ? prevArrow.getBoundingClientRect().left : 0;
-
   return {
     stepTabsBarWidth,
     scrollNavWidth,
@@ -55,8 +49,6 @@ const getNavValues = () => {
     barLeft,
     activeTabLeft,
     activeTabRight,
-    // nextArrowWidth,
-    // nextArrow,
   };
 };
 
@@ -109,31 +101,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     const { barRight, scrollNavRight } = getNavValues();
 
     const nextArrow: ?Object = document.getElementById('step-tabs-tab-next');
-    const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width - 15 : 0;
-    // const prevArrow: ?Object = document.getElementById('step-tabs-tab-prev');
-    // const prevArrowLeft: number = prevArrow ? (prevArrow.getBoundingClientRect().left + 15) : 0;
-    const nextArrowRight: number = nextArrow ? nextArrow.getBoundingClientRect().right - 15 : 0;
-    // const stepTabsBarContainer: ?Object = document.getElementById('step-tabs-container');
-
-    // const stepTabsBar: ?Object = document.getElementById('step-tabs-list');
-    //
-    // console.warn(nextArrowRight);
-    // console.log(barRight);
-    // console.warn(nextArrowRight === barRight);
-
-    // search condition to remove padding when arrow isn't display
-    // if(!showArrowLeft &&
-    //   prevArrowLeft !== barLeft &&
-    //   stepTabsBarContainer
-    // ) {
-    //   stepTabsBarContainer.style.paddingLeft = "15px";
-    // }
-
-    // if(!showArrowRight &&
-    //   stepTabsBarContainer
-    // ) {
-    //   stepTabsBarContainer.style.paddingRight = "15px";
-    // }
+    const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
+    const nextArrowRight: number = nextArrow ? nextArrow.getBoundingClientRect().right : 0;
 
     if (preState.translateX === 0 && this.state.translateX !== 0) {
       if (this.state.translateX < 0) {
@@ -142,11 +111,6 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
         });
       }
     }
-    // if(nextArrow && (nextArrowRight === barRight) && stepTabsBarContainer) {
-    //   console.log("yolo");
-    //   // stepTabsBarContainer.style.paddingRight=`"${nextArrowWidth}"`;
-    //   stepTabsBar.style.marginRight="60px";
-    // }
 
     if (firstArrowDisplay) {
       if (scrollNavRight + translateX > barRight) {
@@ -157,20 +121,11 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       }
     }
 
-    console.log(
-      nextArrowRight,
-      barRight,
-      nextArrowRight === barRight,
-      preState.showArrowRight === false,
-      this.state.showArrowRight !== false,
-    );
-
     if (
       nextArrowRight === barRight &&
       preState.showArrowRight === false &&
       this.state.showArrowRight !== false
     ) {
-      console.log(translateX, nextArrowWidth);
       this.setState({
         translateX: translateX - nextArrowWidth,
       });
@@ -253,55 +208,63 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     return (
       <div className="step-tabs">
-        <div className="step-tabs__bar container" id="step-tabs-container">
-          {showArrowLeft && (
-            <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
-              <a onClick={this.getTranslateLeft}>
-                <i className="cap-arrow-65" />
-              </a>
+        <div className="step-tabs__bar container">
+          <div id="step-tabs-content" className="position-relative">
+            {showArrowLeft && (
+              <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
+                <a onClick={this.getTranslateLeft}>
+                  <i className="cap-arrow-65" />
+                </a>
+              </div>
+            )}
+            {showArrowRight && (
+              <div className="step-tabs__tab-next" id="step-tabs-tab-next">
+                <a onClick={this.getTranslateRight}>
+                  <i className="cap-arrow-66" />
+                </a>
+              </div>
+            )}
+            <div className="step-tabs__list" id="step-tabs-list">
+              <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
+                {steps.map((step, key) => (
+                  <li className={this.getClass(step.id)} key={key}>
+                    <a href={step._links.show} className="d-flex">
+                      <div className="navbar__step-nb">
+                        <span>{key + 1}</span>
+                      </div>
+
+                      <div className="navbar__step">
+                        <span className="navbar__step-nb_small">{key + 1}.</span>
+                        <span className="navbar__step-title">{step.title}</span>
+                        <p className="excerpt">
+                          <FormattedMessage id={`step.status.${step.status}`} />
+                        </p>
+                      </div>
+                    </a>
+                    <svg
+                      id="step-tabs-svg"
+                      height="80"
+                      width="21"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <filter id="f1" x="0" y="0" width="200%" height="200%">
+                          <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                          <feColorMatrix
+                            result="matrixOut"
+                            in="offOut"
+                            type="matrix"
+                            values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
+                          />
+                          <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
+                          <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                        </filter>
+                      </defs>
+                      <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
+                    </svg>
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
-          {showArrowRight && (
-            <div className="step-tabs__tab-next" id="step-tabs-tab-next">
-              <a onClick={this.getTranslateRight}>
-                <i className="cap-arrow-66" />
-              </a>
-            </div>
-          )}
-          <div className="step-tabs__list" id="step-tabs-list">
-            <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
-              {steps.map((step, key) => (
-                <li className={this.getClass(step.id)} key={key}>
-                  <a href={step._links.show} className="d-flex">
-                    <div className="navbar__step-nb">
-                      <span>{key + 1}</span>
-                    </div>
-                    <div className="navbar__step">
-                      <span className="navbar__step-title">{step.title}</span>
-                      <p className="excerpt">
-                        <FormattedMessage id={`step.status.${step.status}`} />
-                      </p>
-                    </div>
-                  </a>
-                  <svg id="step-tabs-svg" height="80" width="21" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <filter id="f1" x="0" y="0" width="200%" height="200%">
-                        <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                        <feColorMatrix
-                          result="matrixOut"
-                          in="offOut"
-                          type="matrix"
-                          values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                        />
-                        <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                        <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                      </filter>
-                    </defs>
-                    <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
-                  </svg>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>

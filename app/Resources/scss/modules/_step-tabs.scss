@@ -25,7 +25,6 @@
     &__tab-prev, &__tab-next {
         position: absolute;
         height: 100%;
-        // padding: 0 15px;
         width: 45px;
         display: flex;
         z-index: 1;
@@ -49,7 +48,7 @@
     }
 
     &__tab-prev {
-        left: -30px;
+        left: -45px;
         border-right: 1px solid $border-color;
 
         i {
@@ -58,7 +57,7 @@
     }
 
     &__tab-next {
-        right: -30px;
+        right: -45px;
         border-left: 1px solid $border-color;
 
         i {
@@ -133,6 +132,10 @@
                     }
                 }
 
+                .navbar__step-nb_small {
+                    display: none;
+                }
+
                 .navbar__step-title {
                     color: $dark-gray;
                     font-weight: 500;
@@ -170,8 +173,7 @@
        (min-width: 1200px) and (max-width: 1260px)
 {
     .step-tabs__bar.container {
-        // padding: 0 45px;
-        // padding: 0;
+        padding: 0;
     }
 
     .step-tabs__tab-prev {
@@ -185,14 +187,11 @@
 
 @media (max-width: $screen-xs-max) {
     .step-tabs__bar.container {
-        // padding: 0 45px 0 0;
-        // padding: 0;
-    }
+         padding: 0;
+     }
 
     .step-tabs__tab-prev, .step-tabs__tab-next {
         padding: 0;
-        // width: 45px;
-        // display: flex;
 
         a, a:hover {
             border: none;
@@ -221,22 +220,16 @@
             }
 
             .navbar__step-nb {
-                width: auto;
-                height: auto;
-                border: none;
-                background-color: transparent;
-                margin: 0 3px 0 0;
-                display: block;
-                font-size: 16px;
-                font-weight: 500;
-
-                &:after {
-                    content: '.';
-                }
+                display: none;
             }
 
-            &:first-child .navbar__step-nb {
+            .navbar__step-nb_small {
+                color: $dark-gray;
+                border: none;
                 margin: 0 3px 0 0;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
             }
 
             &.active {
@@ -248,7 +241,7 @@
                     color: $brand-primary;
                 }
 
-                .navbar__step-nb {
+                .navbar__step-nb_small {
                     background-color: transparent;
                     color: $brand-primary;
                     border: none;
