@@ -267,12 +267,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     private $userGroups;
 
-    /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="followers")
-     */
-    private $followingProposal;
-
     public function __construct($encoder = null)
     {
         parent::__construct();
