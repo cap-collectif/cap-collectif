@@ -15,8 +15,8 @@ class MediaResponse extends AbstractResponse
     /**
      * @ORM\ManyToMany(
      *  targetEntity="Capco\MediaBundle\Entity\Media",
-     *  cascade={"persist", "remove"},
-     *  orphanRemoval=true
+     *  cascade={"persist"},
+     *  orphanRemoval=false
      * )
      * @ORM\JoinTable(
      *   name="responses_medias",

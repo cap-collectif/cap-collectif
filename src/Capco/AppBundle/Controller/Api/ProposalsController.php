@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -18,7 +17,6 @@ use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\ReportingType;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -28,7 +26,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Swarrot\Broker\Message;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -37,8 +34,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProposalsController extends FOSRestController
 {
     /**
-     * Get a proposal.
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get a proposal",
@@ -207,37 +202,6 @@ class ProposalsController extends FOSRestController
     }
 
     /**
-     * @Patch("/proposals/{proposal}")
-     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200, serializerGroups={"Statuses"})
-     */
-    public function patchProposalAction(Request $request, Proposal $proposal)
-    {
-        $status = null;
-
-        if ($request->request->get('status')) {
-            $status = $this->get('capco.status.repository')->find($request->request->get('status'));
-        }
-
-        $proposal->setStatus($status);
-        $this->getDoctrine()->getManager()->flush();
-
-        return $status;
-    }
-
-    /**
-     * Update a proposal.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Update a proposal",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when proposal is not found",
-     *  }
-     * )
-     *
      * @Security("has_role('ROLE_USER')")
      * @Post("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
      * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -273,32 +237,7 @@ class ProposalsController extends FOSRestController
             throw new BadRequestHttpException('You are not the author of this proposal');
         }
 
-        if (!$proposal) {
-            throw $this->createNotFoundException('Proposal not found');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->remove($proposal);
-        $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        if (
-            $proposalForm->getNotificationsConfiguration()
-            && $proposalForm->getNotificationsConfiguration()->isOnDelete()
-        ) {
-            $this->get('swarrot.publisher')->publish('proposal.delete', new Message(
-              json_encode([
-                'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
-
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->get('fos_elastica.index');
-        $index->refresh();
+        $this->get('capco.mutation.proposal')->delete($proposal->getId());
 
         return [];
     }
