@@ -5,7 +5,7 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-class Version20180102124121 extends AbstractMigration
+class Version20180104154719 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -31,9 +31,9 @@ class Version20180102124121 extends AbstractMigration
 
      public function postUp(Schema $schema)
      {
-         $steps = $this->connection->fetchAll('SELECT * from step');
+         $steps = $this->connection->fetchAll('SELECT id, title from step');
          foreach ($steps as $step) {
-             $this->connection->update('step', ['label' => $steps['title']], ['id' => $steps['id']]);
+             $this->connection->update('step', ['label' => $step['title']], ['id' => $step['id']]);
          }
      }
 }
