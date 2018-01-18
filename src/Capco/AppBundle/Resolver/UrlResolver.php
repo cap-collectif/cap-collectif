@@ -15,9 +15,9 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Twig\MediaExtension;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
-use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver
@@ -33,17 +33,12 @@ class UrlResolver
         $this->mediaExtension = $mediaExtension;
     }
 
-    public function getMediaUrl($media)
+    public function getMediaUrl(Media $media)
     {
-        try {
-            return $this->mediaExtension->path(
-            $media,
-            $this->getImageFormat()
-          );
-        } catch (RouteNotFoundException $e) {
-            // Avoid some SonataMedia problems
-            return '';
-        }
+        return $this->mediaExtension->getMediaUrl(
+          $media,
+          'reference'
+        );
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -267,12 +262,5 @@ class UrlResolver
     public function getReportedUrl(Reporting $reporting, bool $absolute = false): string
     {
         return $this->router->generate('admin_capco_app_reporting_show', ['id' => $reporting->getId()], $absolute);
-    }
-
-    private function getImageFormat()
-    {
-        // $parent instanceof Post:
-        //   return 'post';
-        return 'avatar';
     }
 }

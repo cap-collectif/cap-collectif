@@ -97,7 +97,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     protected $proposalForm;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
     protected $reports;
 
@@ -153,12 +153,16 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $category = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToMany(
+     *  targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse",
+     *  mappedBy="proposal",
+     *  cascade={"persist"}
+     * )
      */
     private $responses;
 
@@ -173,12 +177,12 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $estimation = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist"})
      */
     private $progressSteps;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
@@ -242,7 +246,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $proposedAnswer;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist"})
      */
     private $proposalEvaluation;
 

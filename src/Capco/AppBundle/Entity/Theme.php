@@ -37,7 +37,6 @@ class Theme implements IndexableInterface
     ];
 
     /**
-     * @var string
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotNull()
      * @Assert\NotBlank()
@@ -45,39 +44,33 @@ class Theme implements IndexableInterface
     private $title;
 
     /**
-     * @var string
      * @Gedmo\Slug(fields={"title"}, updatable=false)
      * @ORM\Column(length=255)
      */
     private $slug;
 
     /**
-     * @var string
      * @ORM\Column(name="teaser", type="string", length=255, nullable=true)
      */
     private $teaser;
 
     /**
-     * @var bool
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var int
      * @ORM\Column(name="position", type="integer")
      * @Assert\NotNull()
      */
     private $position;
 
     /**
-     * @var int
      * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
 
     /**
-     * @var string
      * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
@@ -89,34 +82,33 @@ class Theme implements IndexableInterface
     private $Author;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="themes", cascade={"persist"})
      */
     private $projects;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="theme", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="theme", cascade={"persist"})
      */
     private $ideas;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="theme", cascade={"persist", "remove"})
+     * @ORM\OneToMany(
+     *   targetEntity="Capco\AppBundle\Entity\Proposal",
+     *   mappedBy="theme",
+     *   cascade={"persist"}
+     * )
      */
     private $proposals;
 
@@ -135,7 +127,7 @@ class Theme implements IndexableInterface
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $Media;

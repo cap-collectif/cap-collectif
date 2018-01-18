@@ -15,10 +15,8 @@ class ProposalNotationType extends AbstractType
         $builder
             ->add('estimation', MoneyType::class, [
               'currency' => 'EUR',
-              'required' => false,
             ])
             ->add('likers', null, [
-                'required' => false,
                 'by_reference' => false,
             ])
         ;

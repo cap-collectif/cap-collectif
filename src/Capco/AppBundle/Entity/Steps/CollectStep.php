@@ -33,7 +33,7 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
     ];
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist"})
      */
     private $proposalForm = null;
 

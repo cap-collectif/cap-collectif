@@ -29,8 +29,6 @@ class QuestionChoice
     ];
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -107,20 +105,12 @@ class QuestionChoice
         return $this;
     }
 
-    /**
-     * @return Media
-     */
     public function getImage()
     {
         return $this->image;
     }
 
-    /**
-     * @param Media $image
-     *
-     * @return $this
-     */
-    public function setImage(Media $image = null)
+    public function setImage(Media $image = null): self
     {
         $this->image = $image;
 
