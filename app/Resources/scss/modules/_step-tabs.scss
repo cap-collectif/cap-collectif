@@ -25,8 +25,11 @@
     &__tab-prev, &__tab-next {
         position: absolute;
         height: 100%;
-        padding: 0 15px;
+        // padding: 0 15px;
+        width: 45px;
         display: flex;
+        z-index: 1;
+        background-color: $white;
 
         a {
             height: 30px;
@@ -46,7 +49,7 @@
     }
 
     &__tab-prev {
-        left: -46px;
+        left: -30px;
         border-right: 1px solid $border-color;
 
         i {
@@ -55,7 +58,7 @@
     }
 
     &__tab-next {
-        right: -46px;
+        right: -30px;
         border-left: 1px solid $border-color;
 
         i {
@@ -162,13 +165,34 @@
     }
 }
 
+@media (min-width: 768px) and (max-width: 840px),
+       (min-width: 990px) and (max-width: 1065px),
+       (min-width: 1200px) and (max-width: 1260px)
+{
+    .step-tabs__bar.container {
+        // padding: 0 45px;
+        // padding: 0;
+    }
+
+    .step-tabs__tab-prev {
+        left: 0;
+    }
+
+    .step-tabs__tab-next {
+        right: 0;
+    }
+}
+
 @media (max-width: $screen-xs-max) {
     .step-tabs__bar.container {
-        padding: 0 31px;
+        // padding: 0 45px 0 0;
+        // padding: 0;
     }
 
     .step-tabs__tab-prev, .step-tabs__tab-next {
         padding: 0;
+        // width: 45px;
+        // display: flex;
 
         a, a:hover {
             border: none;
@@ -176,7 +200,7 @@
 
         i {
             font-size: 25px;
-            margin: 0 0 0 4px;
+            margin: auto;
         }
     }
 
@@ -188,8 +212,10 @@
         right: 0;
     }
 
-    .step-tabs__list ul {
-        li {
+    .step-tabs__list {
+        overflow: scroll;
+
+        ul li {
             svg {
                 display: none;
             }
@@ -240,4 +266,6 @@
             }
         }
     }
+
+
 }

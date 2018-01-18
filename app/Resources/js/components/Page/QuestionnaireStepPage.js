@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
@@ -6,40 +7,47 @@ import ReplyStore from '../../stores/ReplyStore';
 import ReplyActions from '../../actions/ReplyActions';
 import UserReplies from '../Reply/UserReplies';
 
-const QuestionnaireStepPage = React.createClass({
-  propTypes: {
-    step: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
-    userReplies: PropTypes.array.isRequired,
-  },
+type Props = {
+  step: Object,
+  form: Object,
+  userReplies: Array,
+};
 
-  getInitialState() {
-    return {
+type State = {
+  userReplies: Array,
+};
+
+export class QuestionnaireStepPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
       userReplies: [],
     };
-  },
+  }
 
-  componentWillMount() {
+  componentWillMount = () => {
     ReplyStore.addChangeListener(this.onChange);
-  },
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { userReplies } = this.props;
     ReplyActions.initUserReplies(userReplies);
-  },
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     ReplyStore.removeChangeListener(this.onChange);
-  },
+  };
 
-  onChange() {
+  onChange = () => {
     this.setState({
       userReplies: ReplyStore.userReplies,
     });
-  },
+  };
 
   render() {
     const { form, step } = this.props;
+
     return (
       <div>
         <StepPageHeader step={step} />
@@ -48,7 +56,11 @@ const QuestionnaireStepPage = React.createClass({
         <StepPageFooter step={step} />
       </div>
     );
-  },
+  }
+}
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+  step: state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],
 });
 
-export default QuestionnaireStepPage;
+export default connect(mapStateToProps)(QuestionnaireStepPage);

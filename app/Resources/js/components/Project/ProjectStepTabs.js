@@ -38,6 +38,12 @@ const getNavValues = () => {
   const getBoundingStepTabsSvg: ?Object = stepTabsSvg && stepTabsSvg.getBoundingClientRect();
   const stepTabsSvgWidth: number = getBoundingStepTabsSvg ? getBoundingStepTabsSvg.width : 0;
 
+  // const nextArrow = document.getElementById('step-tabs-tab-next');
+  // const nextArrowRight: ?number = nextArrow ? nextArrow.getBoundingClientRect().right : null;
+  // const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
+  // const prevArrow = document.getElementById('step-tabs-tab-prev');
+  // const prevArrowLeft: number = prevArrow ? prevArrow.getBoundingClientRect().left : 0;
+
   return {
     stepTabsBarWidth,
     scrollNavWidth,
@@ -49,6 +55,8 @@ const getNavValues = () => {
     barLeft,
     activeTabLeft,
     activeTabRight,
+    // nextArrowWidth,
+    // nextArrow,
   };
 };
 
@@ -100,6 +108,33 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     const { firstArrowDisplay, translateX } = this.state;
     const { barRight, scrollNavRight } = getNavValues();
 
+    const nextArrow: ?Object = document.getElementById('step-tabs-tab-next');
+    const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width - 15 : 0;
+    // const prevArrow: ?Object = document.getElementById('step-tabs-tab-prev');
+    // const prevArrowLeft: number = prevArrow ? (prevArrow.getBoundingClientRect().left + 15) : 0;
+    const nextArrowRight: number = nextArrow ? nextArrow.getBoundingClientRect().right - 15 : 0;
+    // const stepTabsBarContainer: ?Object = document.getElementById('step-tabs-container');
+
+    // const stepTabsBar: ?Object = document.getElementById('step-tabs-list');
+    //
+    // console.warn(nextArrowRight);
+    // console.log(barRight);
+    // console.warn(nextArrowRight === barRight);
+
+    // search condition to remove padding when arrow isn't display
+    // if(!showArrowLeft &&
+    //   prevArrowLeft !== barLeft &&
+    //   stepTabsBarContainer
+    // ) {
+    //   stepTabsBarContainer.style.paddingLeft = "15px";
+    // }
+
+    // if(!showArrowRight &&
+    //   stepTabsBarContainer
+    // ) {
+    //   stepTabsBarContainer.style.paddingRight = "15px";
+    // }
+
     if (preState.translateX === 0 && this.state.translateX !== 0) {
       if (this.state.translateX < 0) {
         this.setState({
@@ -107,6 +142,11 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
         });
       }
     }
+    // if(nextArrow && (nextArrowRight === barRight) && stepTabsBarContainer) {
+    //   console.log("yolo");
+    //   // stepTabsBarContainer.style.paddingRight=`"${nextArrowWidth}"`;
+    //   stepTabsBar.style.marginRight="60px";
+    // }
 
     if (firstArrowDisplay) {
       if (scrollNavRight + translateX > barRight) {
@@ -115,6 +155,25 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
           firstArrowDisplay: false,
         });
       }
+    }
+
+    console.log(
+      nextArrowRight,
+      barRight,
+      nextArrowRight === barRight,
+      preState.showArrowRight === false,
+      this.state.showArrowRight !== false,
+    );
+
+    if (
+      nextArrowRight === barRight &&
+      preState.showArrowRight === false &&
+      this.state.showArrowRight !== false
+    ) {
+      console.log(translateX, nextArrowWidth);
+      this.setState({
+        translateX: translateX - nextArrowWidth,
+      });
     }
   };
 
@@ -194,16 +253,16 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     return (
       <div className="step-tabs">
-        <div className="step-tabs__bar container">
+        <div className="step-tabs__bar container" id="step-tabs-container">
           {showArrowLeft && (
-            <div className="step-tabs__tab-prev">
+            <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
               <a onClick={this.getTranslateLeft}>
                 <i className="cap-arrow-65" />
               </a>
             </div>
           )}
           {showArrowRight && (
-            <div className="step-tabs__tab-next">
+            <div className="step-tabs__tab-next" id="step-tabs-tab-next">
               <a onClick={this.getTranslateRight}>
                 <i className="cap-arrow-66" />
               </a>

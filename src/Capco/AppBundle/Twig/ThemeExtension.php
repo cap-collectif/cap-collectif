@@ -89,6 +89,7 @@ class ThemeExtension extends \Twig_Extension
                   'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
                   '_links' => [
                       'show' => $this->urlResolver->getStepUrl($realStep, true),
+                      'stats' => $this->router->generate('app_project_show_stats', ['projectSlug' => $project->getSlug()], true),
                   ],
                 ];
                 $projectStepsData[] = $stepData;
