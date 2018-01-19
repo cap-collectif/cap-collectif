@@ -40,6 +40,8 @@ const getNavValues = () => {
 
   return {
     stepTabsBarWidth,
+    stepScrollNav,
+    stepTabsBar,
     scrollNavWidth,
     scrollNavRight,
     scrollNavLeft,
@@ -100,7 +102,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
   componentDidUpdate = (prevProps: Props, preState: State) => {
     const { firstArrowDisplay, translateX } = this.state;
-    const { barRight, scrollNavRight } = getNavValues();
+    const { barRight, scrollNavRight, activeTabRight } = getNavValues();
 
     const nextArrow: ?Object = document.getElementById('step-tabs-tab-next');
     const nextArrowWidth: number = nextArrow ? nextArrow.getBoundingClientRect().width : 0;
@@ -125,6 +127,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     if (
       nextArrowRight === barRight &&
+      activeTabRight > barRight &&
       preState.showArrowRight === false &&
       this.state.showArrowRight !== false
     ) {
@@ -205,8 +208,15 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   render() {
     const { steps } = this.props;
     const { translateX, showArrowLeft, showArrowRight } = this.state;
+    const { stepTabsBar, scrollNavWidth } = getNavValues();
 
     const translation = `translateX(${translateX}px)`;
+
+    console.log(stepTabsBar, scrollNavWidth);
+    // console.log(steps);
+    // console.warn(currentStepId);
+
+    // console.log(window.innerWidth, showArrowLeft, showArrowRight);
 
     return (
       <div className="step-tabs">
