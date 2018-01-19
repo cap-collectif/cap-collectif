@@ -102,15 +102,16 @@ class StepAdmin extends Admin
         $subject = $this->getSubject();
         $translator = $this->getTranslator();
         $label = $this->getLabelKey($subject);
+        $title = empty($subject->getTitle()) ? $label : $subject->getTitle();
         $formMapper
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
                 'label' => 'admin.fields.step.label',
-                'data' => $translator->trans($label),
+                'data' => $title,
                 'required' => true,
             ])
             ->add('label', null, [
-                'label' => 'color.main menu.text',
+                'label' => 'color.main_menu.text',
                 'data' => $translator->trans($label),
                 'required' => true,
             ]);
@@ -479,6 +480,10 @@ class StepAdmin extends Admin
 
     private function getLabelKey(AbstractStep $step): string
     {
+        if (!empty($step->getLabel())) {
+            return $step->getLabel();
+        }
+
         foreach ($this->labels as $class => $label) {
             if ($step instanceof $class) {
                 return $label;
