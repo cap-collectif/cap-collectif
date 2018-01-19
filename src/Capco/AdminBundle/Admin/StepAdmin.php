@@ -38,9 +38,9 @@ class StepAdmin extends Admin
         QuestionnaireStep::class => 'admin.label.questionnaire',
         OtherStep::class => '',
         ConsultationStep::class => 'project.types.consultation',
-        RankingStep::class => 'admin.fields.project.group ranking',
+        RankingStep::class => 'admin.fields.project.group_ranking',
         SelectionStep::class => '',
-        CollectStep::class => 'admin.fields.proposal.group collect',
+        CollectStep::class => 'admin.fields.proposal.group_collect',
     ];
 
     public function getNewInstance()
@@ -102,7 +102,7 @@ class StepAdmin extends Admin
         $subject = $this->getSubject();
         $translator = $this->getTranslator();
         $label = $this->getLabelKey($subject);
-        $title = empty($subject->getTitle()) ? $label : $subject->getTitle();
+        $title = empty($subject->getTitle()) ? $translator->trans($label) : $subject->getTitle();
         $formMapper
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
