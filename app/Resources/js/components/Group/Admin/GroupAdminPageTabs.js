@@ -13,7 +13,7 @@ export class GroupAdminPageTabs extends Component<Props> {
   render() {
     const { intl, group } = this.props;
     return (
-      <div>
+      <div className="col-xs-12">
         <Tabs>
           <Tab eventKey={1} title={intl.formatMessage({ id: 'group.admin.users' })}>
             {/* $FlowFixMe group is {||}. Probably typedef bug. */}

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GroupAdminPageTabs /> render correctly 1`] = `
-<div>
+<div
+  className="col-xs-12"
+>
   <Uncontrolled(Tabs)>
     <Tab
       eventKey={1}

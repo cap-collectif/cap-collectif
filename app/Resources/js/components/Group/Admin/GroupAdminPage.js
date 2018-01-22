@@ -28,7 +28,7 @@ export class GroupAdminPage extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     return (
-      <div className="container">
+      <div className="row">
         <QueryRenderer
           environment={environment}
           query={graphql`

@@ -2,7 +2,7 @@
 
 exports[`<GroupAdminPage /> render correctly 1`] = `
 <div
-  className="container"
+  className="row"
 >
   <ReactRelayQueryRenderer
     environment={
