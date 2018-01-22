@@ -401,13 +401,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__private-excerpt {
-    color: $info-color;
+    color: $brand-warning;
     margin-top: 25px;
 }
 
 .proposal__private-field {
     background-color: $main-bg;
-    border: 1px solid $info-color;
+    border: 1px solid $brand-warning;
     padding: 12px 15px 15px;
 
     h2, h4 {
@@ -521,18 +521,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     #PlacesAutocomplete__root {
-        position: relative;
-
         input {
-            padding-left: 35px;
-        }
-
-        &:after {
-            font-family: "cap-collectif", sans-serif;
-            content: "\6f";
-            position: absolute;
-            top: 7px;
-            left: 15px;
+            padding-left: 30px;
         }
     }
 
