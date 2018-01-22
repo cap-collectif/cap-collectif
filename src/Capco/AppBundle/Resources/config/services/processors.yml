@@ -4,10 +4,10 @@ services:
     arguments: ["@capco.proposal.repository", "@proposal.notifier"]
   proposal_update.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalUpdateProcessor
-    arguments: ["@capco.proposal.repository", "@capco.notify_manager"]
+    arguments: ["@capco.proposal.repository", "@proposal.notifier"]
   proposal_delete.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalDeleteProcessor
-    arguments: ["@doctrine.orm.entity_manager", "@capco.proposal.repository", "@capco.notify_manager"]
+    arguments: ["@doctrine.orm.entity_manager", "@capco.proposal.repository", "@proposal.notifier"]
   comment_create.processor:
     class: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
     arguments: ["@capco.comment.repository", "@capco.notify_manager"]

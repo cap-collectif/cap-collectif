@@ -28,13 +28,22 @@ class MailerService
         $body = '';
         if (false !== strpos($template, '.twig')) {
             $body = $this->templating->render(
-              $message->getTemplate(),
-              $message->getTemplateVars()
-          );
+                $message->getTemplate(),
+                $message->getTemplateVars()
+            );
         } else {
             $body = $this->translator->trans($template, $message->getTemplateVars(), 'CapcoAppBundle');
         }
-
+        if ($message->getFooterTemplate()) {
+            if (false !== strpos($message->getFooterTemplate(), '.twig')) {
+                $body .= $this->templating->render(
+                    $message->getFooterTemplate(),
+                    $message->getFooterVars()
+                );
+            } else {
+                $body .= $this->translator->trans($message->getFooterTemplate(), $message->getFooterVars(), 'CapcoAppBundle');
+            }
+        }
         //  try {
         foreach ($message->getRecipients() as $recipient) {
             $swiftMessage = (new \Swift_Message())
@@ -43,9 +52,8 @@ class MailerService
                 ->setContentType('text/html')
                 ->setBody($body)
                 ->setFrom([
-                  $message->getSenderEmail() => $message->getSenderName(),
-                ])
-            ;
+                    $message->getSenderEmail() => $message->getSenderName(),
+                ]);
             $this->mailer->send($swiftMessage);
             // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
             if ($this->mailer->getTransport()->isStarted()) {

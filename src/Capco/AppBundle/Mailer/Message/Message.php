@@ -37,6 +37,14 @@ abstract class Message
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
 
+    abstract public function getFooterTemplate();
+
+    //:?string;
+
+    abstract public function getFooterVars();
+
+    //:?array;
+
     final public function getTemplateVars(): array
     {
         return $this->templateVars;
@@ -75,7 +83,7 @@ abstract class Message
         return array_values($this->recipients);
     }
 
-    final public function getRecipient($key)//: ?MessageRecipient
+    final public function getRecipient($key) //:?MessageRecipient
     {
         if (!is_int($key) && !is_string($key)) {
             throw new \InvalidArgumentException('Recipient key must be an integer index or valid email address string.');
