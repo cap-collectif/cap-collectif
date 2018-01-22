@@ -4,7 +4,9 @@ exports[`<ProposalForm /> should render a create form 1`] = `
 <form
   id="proposal-form"
 >
-  <div>
+  <div
+    className="mb-15"
+  >
     <div
       dangerouslySetInnerHTML={
         Object {
@@ -287,7 +289,9 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
 <form
   id="proposal-form"
 >
-  <div>
+  <div
+    className="mb-15"
+  >
     <div
       dangerouslySetInnerHTML={
         Object {
