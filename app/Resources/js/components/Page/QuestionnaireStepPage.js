@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
@@ -10,11 +11,15 @@ import UserReplies from '../Reply/UserReplies';
 type Props = {
   step: Object,
   form: Object,
-  userReplies: Array,
+  userReplies: Array<*>,
 };
 
 type State = {
-  userReplies: Array,
+  userReplies: Array<*>,
+  project: {
+    currentProjectById: string,
+    projectsById: Object,
+  },
 };
 
 export class QuestionnaireStepPage extends React.Component<Props, State> {
@@ -23,6 +28,10 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
 
     this.state = {
       userReplies: [],
+      project: {
+        currentProjectById: '',
+        projectsById: {},
+      },
     };
   }
 

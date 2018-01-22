@@ -1,22 +1,20 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 
-const ProjectTrashButton = React.createClass({
-  propTypes: {
-    link: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    user: PropTypes.object,
-  },
+type Props = {
+  link: string,
+  label: string,
+  user: ?Object,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
+type State = {
+  user: { user: ?Object },
+};
 
+export class ProjectTrashButton extends React.PureComponent<Props, State> {
   render() {
     const { link, user } = this.props;
     return (
@@ -41,13 +39,11 @@ const ProjectTrashButton = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(ProjectTrashButton);

@@ -12,13 +12,22 @@ import DatesInterval from './../Utils/DatesInterval';
 import StepInfos from '../../components/Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 
+type Step = {
+  id: string,
+  title: string,
+  startAt: ?string,
+  endAt: ?string,
+  timeless: boolean,
+};
+
 type Props = {
-  step: { id: string },
+  step: Step,
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
   render() {
     const { step } = this.props;
+
     const renderSectionRecursiveList = ({
       error,
       props,
@@ -54,11 +63,11 @@ export class ConsultationPropositionBox extends React.Component<Props> {
         <h2>{step.title}</h2>
         <div className="mb-30">
           {(step.startAt || step.endAt) && (
-              <span className="mr-15">
-                <i className="cap cap-calendar-2-1" />{' '}
-                <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
-              </span>
-            )}
+            <span className="mr-15">
+              <i className="cap cap-calendar-2-1" />{' '}
+              <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+            </span>
+          )}
           {step.endAt &&
             step.status === 'open' &&
             !step.timeless && (

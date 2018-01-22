@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -22,8 +23,18 @@ type Props = {
 type State = {
   synthesis: ?Object,
   messages: {
-    errors: Array,
-    success: Array,
+    errors: Array<*>,
+    success: Array<*>,
+  },
+  project: {
+    currentProjectStepById: string,
+    currentProjectById: string,
+    projectsById: {
+      stepsById: Object,
+    },
+  },
+  user: {
+    user: ?Object,
   },
 };
 
@@ -32,6 +43,11 @@ export class SynthesisBox extends React.Component<Props, State> {
     super(props);
 
     this.props = {
+      step: {},
+      user: {},
+      mode: '',
+      synthesis_id: '',
+      children: null,
       sideMenu: false,
     };
 
@@ -40,6 +56,16 @@ export class SynthesisBox extends React.Component<Props, State> {
       messages: {
         errors: [],
         success: [],
+      },
+      project: {
+        currentProjectStepById: '',
+        currentProjectById: '',
+        projectsById: {
+          stepsById: {},
+        },
+      },
+      user: {
+        user: null,
       },
     };
   }
@@ -71,7 +97,7 @@ export class SynthesisBox extends React.Component<Props, State> {
     });
   };
 
-  dismissMessage = (message, type) => {
+  dismissMessage = (message: string, type: string) => {
     SynthesisElementActions.dismissMessage(message, type);
   };
 
@@ -102,6 +128,7 @@ export class SynthesisBox extends React.Component<Props, State> {
           {step.title}
           {synthesis &&
             synthesis.editable &&
+            user &&
             user.isAdmin && (
               <a
                 className="btn btn-primary pull-right"
