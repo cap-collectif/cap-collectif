@@ -256,7 +256,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo "-> Removed " . $siteImage['keyname'] . " from site_image " . PHP_EOL;
+            echo '-> Removed ' . $siteImage['keyname'] . ' from site_image ' . PHP_EOL;
         }
         foreach ($this->siteParameters as $siteParameter) {
             foreach ($siteParameter as $property => $value) {
@@ -265,7 +265,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo "-> Removed " . $siteParameter['keyname'] . " from site_parameter " . PHP_EOL;
+            echo '-> Removed ' . $siteParameter['keyname'] . ' from site_parameter ' . PHP_EOL;
         }
         foreach ($this->siteCustomCodes as $siteCustomCode) {
             foreach ($siteCustomCode as $property => $value) {
@@ -274,7 +274,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo "-> Removed " . $siteCustomCode['keyname'] . " from site_parameter " . PHP_EOL;
+            echo '-> Removed ' . $siteCustomCode['keyname'] . ' from site_parameter ' . PHP_EOL;
         }
     }
 

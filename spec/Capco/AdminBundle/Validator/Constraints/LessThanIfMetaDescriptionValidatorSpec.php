@@ -25,7 +25,7 @@ class LessThanIfMetaDescriptionValidatorSpec extends ObjectBehavior
         ConstraintViolationBuilderInterface $builder
     ) {
         $parameter->isSocialNetworkDescription()->willReturn(true)->shouldBeCalled();
-        $str = "";
+        $str = '';
         for($i = 0; $i < $constraint->max + 10; $i++) {
             $str .= $i;
         }
@@ -43,7 +43,7 @@ class LessThanIfMetaDescriptionValidatorSpec extends ObjectBehavior
         ConstraintViolationBuilderInterface $builder
     ) {
         $parameter->isSocialNetworkDescription()->willReturn(true)->shouldBeCalled();
-        $parameter->getValue()->willReturn("Je suis une description.")->shouldBeCalled();
+        $parameter->getValue()->willReturn('Je suis une description.')->shouldBeCalled();
         $builder->addViolation()->shouldNotBeCalled();
         $context->buildViolation($constraint->message)->willReturn($builder)->shouldNotBeCalled();
         $this->initialize($context);
