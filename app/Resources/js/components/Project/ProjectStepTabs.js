@@ -208,15 +208,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   render() {
     const { steps } = this.props;
     const { translateX, showArrowLeft, showArrowRight } = this.state;
-    const { stepTabsBar, scrollNavWidth } = getNavValues();
 
     const translation = `translateX(${translateX}px)`;
-
-    console.log(stepTabsBar, scrollNavWidth);
-    // console.log(steps);
-    // console.warn(currentStepId);
-
-    // console.log(window.innerWidth, showArrowLeft, showArrowRight);
 
     return (
       <div className="step-tabs">

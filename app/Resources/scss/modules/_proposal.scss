@@ -50,6 +50,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     font-size: 14px;
     border-radius: 5px;
 
+    hr {
+        margin-top: 15px;
+        margin-bottom: 0;
+        border: 0.5px solid $border-color;
+        width: 100%;
+    }
+
     .box {
         flex: 1 0 auto;
         display: flex;

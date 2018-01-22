@@ -59,28 +59,6 @@ describe('<ProposalUserVoteItem />', () => {
     currentStepId: 'cs6',
   };
 
-  // let app;
-  //
-  // beforeEach(() => {
-  //   Element.prototype.getBoundingClientRect = jest.fn(() => {
-  //     return {
-  //       width: 120,
-  //       height: 120,
-  //       top: 0,
-  //       left: 0,
-  //       bottom: 0,
-  //       right: 0,
-  //     }
-  //   });
-  //   app = mount(<ProjectStepTabs/>, {attachTo: document.body});
-  // });
-
-  // it('should render correctly', () => {
-  //   global.innerWidth = 1500;
-  //
-  //   expect(app.find('#step-tabs-list')).to.have.length(1);
-  // });
-
   it('should render correctly', () => {
     global.innerWidth = 1500;
 

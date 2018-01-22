@@ -35,7 +35,6 @@ const ProjectTrashButton = React.createClass({
               style={{ display: 'block', borderColor: 'transparent !important' }}>
               <p>
                 <FormattedMessage id="project.show.trashed.display" />
-                {/* {label} */}
               </p>
             </a>
           </LoginOverlay>
