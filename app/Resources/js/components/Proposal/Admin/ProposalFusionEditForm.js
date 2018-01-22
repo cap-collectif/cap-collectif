@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
@@ -19,17 +20,19 @@ type FormValues = {
   fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>,
 };
 
-const validate = (values: FormValues) => {
+type Props = RelayProps & { onClose: () => void, intl: IntlShape };
+
+const validate = (values: FormValues, props: Props) => {
+  const { intl } = props;
   const errors = {};
   if (!values.fromProposals || values.fromProposals.length < 2) {
-    errors.fromProposals = 'please-select-at-least-2-proposals';
+    errors.fromProposals = intl.formatMessage({ id: 'please-select-at-least-2-proposals' });
   }
   return errors;
 };
 
-type Props = RelayProps & { onClose: () => void };
-
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const { intl } = props;
   return UpdateProposalFusionMutation.commit({
     input: {
       proposalId: props.proposal.id,
@@ -44,14 +47,14 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     })
     .catch(() => {
       throw new SubmissionError({
-        _error: 'global.error.server.form',
+        _error: intl.formatMessage({ id: 'global.error.server.form' }),
       });
     });
 };
 
 export class ProposalFusionEditForm extends React.Component<Props> {
   render() {
-    const { proposal } = this.props;
+    const { proposal, intl } = this.props;
     if (!proposal.form.step) {
       return null;
     }
@@ -64,7 +67,7 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           multi
           label="initial-proposals"
           autoload
-          help="2-proposals-minimum"
+          help={intl.formatMessage({ id: '2-proposals-minimum' })}
           placeholder="select-proposals"
           component={select}
           clearable={false}
@@ -108,7 +111,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
     },
   };
 };
-const container = connect(mapStateToProps)(form);
+const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(
   container,

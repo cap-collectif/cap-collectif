@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { Field, SubmissionError, reduxForm, formValueSelector, change } from 'redux-form';
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
@@ -17,13 +18,22 @@ type FormValues = {
   fromProposals: $ReadOnlyArray<{ value: Uuid }>,
 };
 
-const validate = (values: FormValues) => {
+type Props = {
+  proposalForm: Object,
+  projects: Array<Object>,
+  currentCollectStep: Object,
+  onProjectChange: (form: string, field: string, value: any) => void,
+  intl: IntlShape,
+};
+
+const validate = (values: FormValues, props: Props) => {
+  const { intl } = props;
   const errors = {};
   if (!values.project) {
-    errors.project = 'please-select-a-participatory-project';
+    errors.project = intl.formatMessage({ id: 'please-select-a-participatory-project' });
   }
   if (!values.fromProposals || values.fromProposals.length < 2) {
-    errors.fromProposals = 'please-select-at-least-2-proposals';
+    errors.fromProposals = intl.formatMessage({ id: 'please-select-at-least-2-proposals' });
   }
   return errors;
 };
@@ -47,23 +57,16 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) => {
     });
 };
 
-type Props = {
-  proposalForm: Object,
-  projects: Array<Object>,
-  currentCollectStep: Object,
-  onProjectChange: (form: string, field: string, value: any) => void,
-};
-
 export class ProposalFusionForm extends React.Component<Props> {
   render() {
-    const { currentCollectStep, projects, onProjectChange } = this.props;
+    const { currentCollectStep, projects, onProjectChange, intl } = this.props;
     return (
       <form>
         <Field
           name="project"
           id="project"
-          label="admin.fields.proposal.project"
-          placeholder="select-a-participatory-project"
+          label={intl.formatMessage({ id: 'admin.fields.proposal.project' })}
+          placeholder={intl.formatMessage({ id: 'select-a-participatory-project' })}
           isLoading={projects.length === 0}
           component={select}
           clearable={false}
@@ -75,10 +78,10 @@ export class ProposalFusionForm extends React.Component<Props> {
             name="fromProposals"
             id="fromProposals"
             multi
-            label="initial-proposals"
+            label={intl.formatMessage({ id: 'initial-proposals' })}
             autoload
-            help="2-proposals-minimum"
-            placeholder="select-proposals"
+            help={intl.formatMessage({ id: '2-proposals-minimum' })}
+            placeholder={intl.formatMessage({ id: 'select-proposals' })}
             component={select}
             filterOptions={(options, filter, currentValues) =>
               options
@@ -132,11 +135,11 @@ const mapStateToProps = (state: State) => ({
   currentCollectStep: getCurrentCollectStep(state),
 });
 
-export default connect(mapStateToProps, { onProjectChange: change })(
-  reduxForm({
-    form: formName,
-    destroyOnUnmount: false,
-    validate,
-    onSubmit,
-  })(ProposalFusionForm),
-);
+const form = reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  validate,
+  onSubmit,
+})(ProposalFusionForm);
+
+export default connect(mapStateToProps, { onProjectChange: change })(injectIntl(form));
