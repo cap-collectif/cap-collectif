@@ -14,9 +14,8 @@ Capco\AppBundle\Entity\SiteImage:
     SiteImage3:
         keyname: homepage.picto
         category: pages.homepage
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 3
     SiteImage4:
         keyname: image.default_avatar
@@ -39,56 +38,48 @@ Capco\AppBundle\Entity\SiteImage:
     SiteImageBlogPicto:
         keyname: blog.picto
         category: pages.blog
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 6
     SiteImageEventPicto:
         keyname: events.picto
         category: pages.events
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 7
     SiteImageIdeasPicto:
         keyname: ideas.picto
         category: pages.ideas
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 8
     SiteImageThemesPicto:
         keyname: themes.picto
         category: pages.themes
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 9
     SiteImageProjectsPicto:
         keyname: projects.picto
         category: pages.projects
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 10
     SiteImageMembersPicto:
         keyname: members.picto
         category: pages.members
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 11
     SiteImageContactPicto:
         keyname: contact.picto
         category: pages.contact
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 12
     SiteImageTrashIdeasPicto:
         keyname: ideas_trash.picto
         category: pages.ideas_trash
-        media: '@picto'
         isSocialNetworkThumbnail: true
-        isEnabled: true
+        isEnabled: false
         position: 13
