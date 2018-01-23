@@ -15,4 +15,11 @@ trait ModerableTrait
     {
         return $this->moderationToken;
     }
+
+    public function setModerationToken(string $token): self
+    {
+        $this->moderationToken = $token;
+
+        return $this;
+    }
 }

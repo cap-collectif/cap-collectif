@@ -27,6 +27,7 @@ class ModerationController extends Controller
 
         $visibleReasons = [
           'reporting.status.off_topic',
+          'moderation-guideline-violation',
         ];
 
         if (!in_array($visibleReasons, $reason, true) && !in_array($hiddenReasons, $reason, true)) {
