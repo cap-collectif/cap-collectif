@@ -182,7 +182,9 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
           proposal={proposal}
         />
         {proposal.mergedIn.length > 0 && (
-          <Panel className="mt-15" header={<FormattedMessage id="grouped-into-a-new-proposal" />}>
+          <Panel
+            className="mt-30 mb-0 panel_flex"
+            header={<FormattedMessage id="grouped-into-a-new-proposal" />}>
             <ListGroup fill>
               {proposal.mergedIn.map(parent => (
                 <ListGroupItem key={parent.id}>
@@ -216,7 +218,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
         )}
         {proposal.mergedFrom.length > 0 && (
           <Panel
-            className="mt-15"
+            className="mt-30 mb-0 panel_flex"
             header={
               <div>
                 <FormattedMessage id="initial-proposals" />
