@@ -1,11 +1,13 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
+import { type GlobalState } from '../../types';
 
 type Props = {
   steps: Array<Object>,
-  currentStepId: string,
+  currentStepId: ?string,
+  projectId: string,
 };
 
 type State = {
@@ -13,7 +15,6 @@ type State = {
   showArrowRight: boolean,
   showArrowLeft: boolean,
   firstArrowDisplay: boolean,
-  rightTest: boolean,
 };
 
 const getNavValues = () => {
@@ -63,7 +64,6 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       showArrowRight: false,
       showArrowLeft: false,
       firstArrowDisplay: true,
-      rightTest: true,
     };
   }
 
@@ -239,10 +239,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                       </div>
 
                       <div className="navbar__step">
-                        <span className="navbar__step-nb_small">{key + 1}.</span>
-                        <span className="navbar__step-title">{step.title}</span>
+                        <span className="navbar__step-title">
+                          <span className="navbar__step-nb_small">{key + 1}.</span>
+                          {step.title}
+                        </span>
                         <p className="excerpt">
-                          <FormattedMessage id={`step.status.${step.status}`} />
+                          {step.type !== 'presentation' && (
+                            <FormattedMessage id={`step.status.${step.status}`} />
+                          )}
                         </p>
                       </div>
                     </a>
@@ -277,7 +281,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   }
 }
 
-export default connect((state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   steps: state.project.projectsById[props.projectId].steps,
   currentStepId: state.project.currentProjectStepById,
-}))(ProjectStepTabs);
+});
+
+export default connect(mapStateToProps)(ProjectStepTabs);

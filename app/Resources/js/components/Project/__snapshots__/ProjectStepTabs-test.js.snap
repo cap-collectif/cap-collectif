@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
+exports[`<ProposalUserVoteItem /> should render correctly without arrow & with active tab 1`] = `
 <div
   className="step-tabs"
 >
@@ -40,24 +40,19 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
                 className="navbar__step"
               >
                 <span
-                  className="navbar__step-nb_small"
-                >
-                  1
-                  .
-                </span>
-                <span
                   className="navbar__step-title"
                 >
-                  open step 1
+                  <span
+                    className="navbar__step-nb_small"
+                  >
+                    1
+                    .
+                  </span>
+                  presentation step
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
+                />
               </div>
             </a>
             <svg
@@ -120,15 +115,15 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
                 className="navbar__step"
               >
                 <span
-                  className="navbar__step-nb_small"
-                >
-                  2
-                  .
-                </span>
-                <span
                   className="navbar__step-title"
                 >
-                  open step 2
+                  <span
+                    className="navbar__step-nb_small"
+                  >
+                    2
+                    .
+                  </span>
+                  open step
                 </span>
                 <p
                   className="excerpt"
@@ -184,7 +179,9 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
               />
             </svg>
           </li>
-          <li>
+          <li
+            className="active"
+          >
             <a
               className="d-flex"
               href="www.test.com"
@@ -200,14 +197,14 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
                 className="navbar__step"
               >
                 <span
-                  className="navbar__step-nb_small"
-                >
-                  3
-                  .
-                </span>
-                <span
                   className="navbar__step-title"
                 >
+                  <span
+                    className="navbar__step-nb_small"
+                  >
+                    3
+                    .
+                  </span>
                   timeless step
                 </span>
                 <p
@@ -280,176 +277,14 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
                 className="navbar__step"
               >
                 <span
-                  className="navbar__step-nb_small"
-                >
-                  4
-                  .
-                </span>
-                <span
                   className="navbar__step-title"
                 >
-                  step with big big big big big big big big title
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li>
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  5
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-nb_small"
-                >
-                  5
-                  .
-                </span>
-                <span
-                  className="navbar__step-title"
-                >
-                  other step
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li
-            className="active"
-          >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  6
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-nb_small"
-                >
-                  6
-                  .
-                </span>
-                <span
-                  className="navbar__step-title"
-                >
+                  <span
+                    className="navbar__step-nb_small"
+                  >
+                    4
+                    .
+                  </span>
                   last step
                 </span>
                 <p
@@ -457,168 +292,6 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
                 >
                   <FormattedMessage
                     id="step.status.closed"
-                    values={Object {}}
-                  />
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li>
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  7
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-nb_small"
-                >
-                  7
-                  .
-                </span>
-                <span
-                  className="navbar__step-title"
-                >
-                  step with big big big big big big big big title
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
-              </div>
-            </a>
-            <svg
-              height="80"
-              id="step-tabs-svg"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <filter
-                  height="200%"
-                  id="f1"
-                  width="200%"
-                  x="0"
-                  y="0"
-                >
-                  <feOffset
-                    dx="0"
-                    dy="0"
-                    in="SourceGraphic"
-                    result="offOut"
-                  />
-                  <feColorMatrix
-                    in="offOut"
-                    result="matrixOut"
-                    type="matrix"
-                    values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                  />
-                  <feGaussianBlur
-                    in="matrixOut"
-                    result="blurOut"
-                    stdDeviation="1"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="blurOut"
-                    mode="normal"
-                  />
-                </filter>
-              </defs>
-              <polygon
-                filter="url(#f1)"
-                points="0,0, 0,80,20 40"
-              />
-            </svg>
-          </li>
-          <li
-            className="active"
-          >
-            <a
-              className="d-flex"
-              href="www.test.com"
-            >
-              <div
-                className="navbar__step-nb"
-              >
-                <span>
-                  8
-                </span>
-              </div>
-              <div
-                className="navbar__step"
-              >
-                <span
-                  className="navbar__step-nb_small"
-                >
-                  8
-                  .
-                </span>
-                <span
-                  className="navbar__step-title"
-                >
-                  step with big big big big big big big big title
-                </span>
-                <p
-                  className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
                     values={Object {}}
                   />
                 </p>

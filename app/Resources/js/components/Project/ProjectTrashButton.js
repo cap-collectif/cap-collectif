@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
+import { type State } from '../../types';
 
 type Props = {
   link: string,
@@ -10,11 +11,7 @@ type Props = {
   user: ?Object,
 };
 
-type State = {
-  user: { user: ?Object },
-};
-
-export class ProjectTrashButton extends React.PureComponent<Props, State> {
+export class ProjectTrashButton extends React.PureComponent<Props> {
   render() {
     const { link, user } = this.props;
     return (

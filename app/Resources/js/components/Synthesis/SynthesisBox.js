@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import DatesInterval from './../Utils/DatesInterval';
@@ -10,6 +10,7 @@ import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisActions from '../../actions/SynthesisActions';
+import { type GlobalState } from '../../types';
 
 type Props = {
   step: Object,
@@ -25,16 +26,6 @@ type State = {
   messages: {
     errors: Array<*>,
     success: Array<*>,
-  },
-  project: {
-    currentProjectStepById: string,
-    currentProjectById: string,
-    projectsById: {
-      stepsById: Object,
-    },
-  },
-  user: {
-    user: ?Object,
   },
 };
 
@@ -56,16 +47,6 @@ export class SynthesisBox extends React.Component<Props, State> {
       messages: {
         errors: [],
         success: [],
-      },
-      project: {
-        currentProjectStepById: '',
-        currentProjectById: '',
-        projectsById: {
-          stepsById: {},
-        },
-      },
-      user: {
-        user: null,
       },
     };
   }
@@ -165,8 +146,9 @@ export class SynthesisBox extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   step:
+    state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[
       state.project.currentProjectStepById
     ],

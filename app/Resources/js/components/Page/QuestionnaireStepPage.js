@@ -7,6 +7,7 @@ import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import ReplyStore from '../../stores/ReplyStore';
 import ReplyActions from '../../actions/ReplyActions';
 import UserReplies from '../Reply/UserReplies';
+import { type GlobalState } from '../../types';
 
 type Props = {
   step: Object,
@@ -16,10 +17,6 @@ type Props = {
 
 type State = {
   userReplies: Array<*>,
-  project: {
-    currentProjectById: string,
-    projectsById: Object,
-  },
 };
 
 export class QuestionnaireStepPage extends React.Component<Props, State> {
@@ -28,10 +25,6 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
 
     this.state = {
       userReplies: [],
-      project: {
-        currentProjectById: '',
-        projectsById: {},
-      },
     };
   }
 
@@ -68,8 +61,10 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
-  step: state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
+  step:
+    state.project.currentProjectById &&
+    state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],
 });
 
 export default connect(mapStateToProps)(QuestionnaireStepPage);
