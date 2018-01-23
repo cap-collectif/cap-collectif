@@ -78,7 +78,7 @@ export class SynthesisBox extends React.Component<Props, State> {
     });
   };
 
-  dismissMessage = (message: string, type: string) => {
+  dismissMessage = (message: any, type: any) => {
     SynthesisElementActions.dismissMessage(message, type);
   };
 
