@@ -61,7 +61,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
         </Panel> */}
         {/* <ConsultationContributionFiltered consultationId={step.id} /> */}
         <h2>{step.title}</h2>
-        <div className="mb-30">
+        <div className="mb-30 project-step__dates">
           {(step.startAt || step.endAt) && (
             <span className="mr-15">
               <i className="cap cap-calendar-2-1" />{' '}

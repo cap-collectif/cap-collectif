@@ -24,7 +24,7 @@
 {% block details %}
     <h2 class="h2">{{ currentStep.title }}</h2>
     {% if currentStep.startAt %}
-        <div class="mb-30">
+        <div class="mb-30 project-step__dates">
             <i class="cap cap-calendar-2-1"></i>
             {% if currentStep.endAt %}
                 {{ 'global.dates.full.days' | trans({
@@ -41,7 +41,7 @@
             {% endif %}
         </div>
     {% endif %}
-    <div class="block  block--bordered  box">
+    <div class="block">
         {{ currentStep.body | raw }}
     </div>
 {% endblock %}

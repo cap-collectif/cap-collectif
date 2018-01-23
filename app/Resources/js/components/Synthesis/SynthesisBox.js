@@ -128,12 +128,7 @@ export class SynthesisBox extends React.Component<Props, State> {
             </div>
           )}
 
-        {step.body && (
-          <div
-            className="block  block--bordered  box"
-            dangerouslySetInnerHTML={{ __html: step.body }}
-          />
-        )}
+        {step.body && <div className="block" dangerouslySetInnerHTML={{ __html: step.body }} />}
 
         <FlashMessages
           errors={this.state.messages.errors}

@@ -2,14 +2,34 @@
 
 exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
 <div>
-  <h2 />
+  <h2>
+    stepTitle
+  </h2>
   <div
-    className="mb-30"
-  />
+    className="mb-30 project-step__dates"
+  >
+    <span
+      className="mr-15"
+    >
+      <i
+        className="cap cap-calendar-2-1"
+      />
+       
+      <DatesInterval
+        endAt="2014-09-27T00:00:00+0200"
+        fullDay={true}
+        startAt="2014-08-14T00:00:00+0200"
+      />
+    </span>
+  </div>
   <StepInfos
     step={
       Object {
+        "endAt": "2014-09-27T00:00:00+0200",
         "id": "stepId",
+        "startAt": "2014-08-14T00:00:00+0200",
+        "timeless": false,
+        "title": "stepTitle",
       }
     }
   />
