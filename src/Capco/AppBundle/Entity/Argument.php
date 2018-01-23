@@ -138,6 +138,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return 'argument';
     }
 
+    public function getProject()
+    {
+        return $this->getParent()->getStep()->getProject();
+    }
+
     public function getRelated()
     {
         return $this->getParent();
@@ -194,6 +199,13 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
+    public function setEnabled(bool $enabled): self
+    {
+        $this->isEnabled = $enabled;
+
+        return $this;
+    }
+
     /**
      * @return int
      */
@@ -242,6 +254,13 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
     public function getTrashedAt()
     {
         return $this->trashedAt;
+    }
+
+    public function setTrashed(bool $trashed): self
+    {
+        $this->isTrashed = $trashed;
+
+        return $this;
     }
 
     /**

@@ -114,6 +114,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return 'version';
     }
 
+    public function getProject()
+    {
+        return $this->getParent()->getStep()->getProject();
+    }
+
     public function getRelated()
     {
         return $this->getParent();

@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\Argument:
-
   ## Arguments on opinion
   argument1:
     id: 'argument1'
@@ -9,11 +8,12 @@ Capco\AppBundle\Entity\Argument:
     body: Coucou, je suis un bel argument !
     isEnabled: true
     isTrashed: false
+    moderationToken: "argument1ModerationToken"
   argument2:
     id: 'argument2'
     Opinion: '@opinion2'
     type: 0
-    Author: @user4
+    Author: '@user4'
     body: <text(300)>
     isEnabled: true
     isTrashed: false
