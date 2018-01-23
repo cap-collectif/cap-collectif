@@ -29,26 +29,25 @@ class Version20180123173826 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-      echo '-> Adding moderation token for existing opinions...' . PHP_EOL;
+      $this->write('-> Adding moderation token for existing opinions...');
       $opinions = $this->connection->fetchAll('SELECT id from opinion');
       foreach ($opinions as $opinion) {
-              $token = $this->container->get('fos_user.util.token_generator')->generateToken()
+              $token = $this->container->get('fos_user.util.token_generator')->generateToken();
               $this->connection->update('opinion', ['moderation_token' => $token], ['id' => $opinion['id']]);
-          }
       }
-      echo '-> Adding moderation token for existing versions...' . PHP_EOL;
+
+      $this->write('-> Adding moderation token for existing versions...');
       $versions = $this->connection->fetchAll('SELECT id from opinion_version');
       foreach ($versions as $version) {
-              $token = $this->container->get('fos_user.util.token_generator')->generateToken()
+              $token = $this->container->get('fos_user.util.token_generator')->generateToken();
               $this->connection->update('opinion_version', ['moderation_token' => $token], ['id' => $version['id']]);
-          }
       }
-      echo '-> Adding moderation token for existing arguments...' . PHP_EOL;
+
+      $this->write('-> Adding moderation token for existing arguments...');
       $arguments = $this->connection->fetchAll('SELECT id from argument');
       foreach ($arguments as $argument) {
-              $token = $this->container->get('fos_user.util.token_generator')->generateToken()
+              $token = $this->container->get('fos_user.util.token_generator')->generateToken();
               $this->connection->update('argument', ['moderation_token' => $token], ['id' => $argument['id']]);
-          }
       }
     }
 
