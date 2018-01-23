@@ -23,7 +23,7 @@
     "checkcs": "eslint --cache app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
     "bundlesize": "bundlesize",
-    "prettier": "prettier --write 'app/Resources/js/**/*.js'",
+    "prettier": "prettier --write \"app/Resources/js/**/*.js\"",
     "precommit": "flow status && lint-staged"
   },
   "pre-commit": "precommit",
