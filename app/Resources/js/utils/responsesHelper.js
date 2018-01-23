@@ -192,7 +192,7 @@ export const renderResponses = ({
         intlMessage = intl.formatMessage({ id: 'global.optional' });
       }
 
-      labelMessage += ` <span class="small warning">${intlMessage}</span>`;
+      labelMessage += ` <span class="excerpt">${intlMessage}</span>`;
       const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
