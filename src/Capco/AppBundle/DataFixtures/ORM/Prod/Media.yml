@@ -31,6 +31,9 @@ Capco\MediaBundle\Entity\Media:
     MediaCapcoSite:
         binaryContent: social/capco.png
         name:          Capco
+    MediaInstagram:
+        binaryContent: social/instagram.png
+        name:          Instagram
     MediaVotesBar:
         binaryContent: votes_bar_image.png
         name: Image de la barre de votes
