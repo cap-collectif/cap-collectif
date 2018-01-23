@@ -4,21 +4,21 @@ namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
-use Capco\AppBundle\Mailer\MailerService;
+// use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\NewOpinionModeratorMessage;
 use Capco\AppBundle\Mailer\Message\UpdateOpinionModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
 class OpinionNotifier
 {
-    protected $mailer;
+    // protected $mailer;
     protected $siteParams;
     protected $consultationResolver;
     protected $userResolver;
 
-    public function __construct(MailerService $mailer, Resolver $siteParams, ConsultationResolver $consultationResolver, UserResolver $userResolver)
+    public function __construct(/*MailerService $mailer,*/ Resolver $siteParams, ConsultationResolver $consultationResolver, UserResolver $userResolver)
     {
-        $this->mailer = $mailer;
+        // $this->mailer = $mailer;
         $this->siteParams = $siteParams;
         $this->consultationResolver = $consultationResolver;
         $this->userResolver = $userResolver;

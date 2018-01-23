@@ -68,17 +68,17 @@ services:
       - "@validator"
       - {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}
 
-  mailer_service:
-    class: Capco\AppBundle\Mailer\MailerService
-    arguments:
-      - "@mailer"
-      - "@templating"
-      - "@translator"
-
+  # mailer_service:
+  #   class: Capco\AppBundle\Mailer\MailerService
+  #   arguments:
+  #     - "@mailer"
+  #     - "@templating"
+  #     - "@translator"
+  #
   opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
     arguments:
-      - "@mailer_service"
+      # - "@mailer_service"
       - "@capco.site_parameter.resolver"
       - "@capco.resolver.consultations"
       - "@capco.resolvers.users"
