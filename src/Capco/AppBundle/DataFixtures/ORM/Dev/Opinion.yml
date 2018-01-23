@@ -13,6 +13,7 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: '@user1'
         OpinionType: '@opinionType8'
+        moderationToken: "opinion1ModerationToken"
     opinion2:
         id: 'opinion2'
         step: '@cstep1'
@@ -158,7 +159,7 @@ Capco\AppBundle\Entity\Opinion:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 1
         isEnabled: true
         isTrashed: false
@@ -174,7 +175,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: '@user5'
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 3
 
     opinion59:
@@ -187,7 +188,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: '@user2'
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 2
 
     opinion60:

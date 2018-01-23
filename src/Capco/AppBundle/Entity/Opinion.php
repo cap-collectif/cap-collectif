@@ -210,6 +210,13 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->isEnabled;
     }
 
+    public function setEnabled(bool $isEnabled): self
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
     public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
@@ -331,6 +338,11 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         $this->OpinionType = $OpinionType;
 
         return $this;
+    }
+
+    public function getProject()
+    {
+        return $this->step->getProject();
     }
 
     /**

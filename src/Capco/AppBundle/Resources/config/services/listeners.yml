@@ -198,6 +198,6 @@ services:
   capco.listener.moderation_token:
     class: Capco\AppBundle\EventListener\ModerationTokenListener
     arguments:
-      - @fos_user.util.token_generator
+      - "@fos_user.util.token_generator"
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }

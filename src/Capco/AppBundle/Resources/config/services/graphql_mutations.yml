@@ -1,10 +1,7 @@
 services:
   global_id_resolver:
       class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
-      # arguments:
-      #     - "@doctrine.orm.default_entity_manager"
-      #     - "@form.factory"
-      #     - "@capco.proposal.repository"
-      #     - "@translator"
+      arguments:
+          - "@service_container"
       # tags:
       #     - { name: overblog_graphql.resolver }

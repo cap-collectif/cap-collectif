@@ -2,13 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Model\TrashableInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Capco\AppBundle\Model\ModerableInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class GlobalIdResolver implements ContainerAwareInterface
+class GlobalIdResolver
 {
-    use ContainerAwareTrait;
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     public function resolve(string $uuid)
     {
@@ -28,16 +32,16 @@ class GlobalIdResolver implements ContainerAwareInterface
         return $node;
     }
 
-    public function resolveByModerationToken(string $token): TrashableInterface
+    public function resolveByModerationToken(string $token): ModerableInterface
     {
-        $node = $this->container->get('capco.opinion.repository')->findByModerationToken($token);
+        $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_version.repository')->findByModerationToken($token);
+            $node = $this->container->get('capco.opinion_version.repository')->findOneByModerationToken($token);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.argument.repository')->findByModerationToken($token);
+            $node = $this->container->get('capco.argument.repository')->findOneByModerationToken($token);
         }
 
         return $node;

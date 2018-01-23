@@ -6,7 +6,7 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
 use Capco\AppBundle\Model\ModerableInterface;
 
-interface OpinionContributionInterface extends Contribution, TrashableInterface, IsPublishableInterface, VotableInterface, ModerableInterface
+interface OpinionContributionInterface extends Contribution, IsPublishableInterface, VotableInterface, ModerableInterface
 {
     public function getArguments();
 

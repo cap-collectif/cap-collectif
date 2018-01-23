@@ -5,16 +5,11 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class Version20180123173826 extends AbstractMigration implements ContainerAwareInterface
 {
-  private $container;
-
-  public function setContainer(ContainerInterface $container = null)
-  {
-      $this->container = $container;
-  }
+    use ContainerAwareTrait;
 
     public function up(Schema $schema)
     {

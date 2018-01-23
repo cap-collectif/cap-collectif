@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ModerationController extends Controller
 {
@@ -15,6 +16,7 @@ class ModerationController extends Controller
         $contribution = $this->get('global_id_resolver')->resolveByModerationToken($token);
 
         if (!$contribution) {
+            $this->get('logger')->warn('Unknown moderation_token: ' . $token);
             throw new NotFoundHttpException();
         }
 
@@ -30,7 +32,8 @@ class ModerationController extends Controller
           'moderation-guideline-violation',
         ];
 
-        if (!in_array($visibleReasons, $reason, true) && !in_array($hiddenReasons, $reason, true)) {
+        if (!in_array($reason, $visibleReasons, true) && !in_array($reason, $hiddenReasons, true)) {
+            $this->get('logger')->warn('Unknown trash reason: ' . $reason);
             throw new NotFoundHttpException('This trash reason is not available.');
         }
 
@@ -42,19 +45,22 @@ class ModerationController extends Controller
           ->setTrashedReason($trashedReason)
         ;
 
-        if (in_array($hiddenReasons, $reason, true)) {
+        $redirectUrl = $this->get('capco.url.resolver')->getObjectUrl($contribution);
+
+        if (in_array($reason, $hiddenReasons, true)) {
             $contribution->setEnabled(false);
+            $redirectUrl = $this->get('router')->generate('app_project_show_trashed', [
+              'projectSlug' => $contribution->getProject()->getSlug(),
+            ]);
         }
 
-        $this->get('entity_manager')->flush();
+        $this->get('doctrine.orm.default_entity_manager')->flush();
 
         // send emails
 
         $message = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
         $this->get('session')->getFlashBag()->add('success', $message);
 
-        return $this->redirect(
-          $this->get('capco.url.resolver')->getObjectUrl($contribution)
-        );
+        return $this->redirect($redirectUrl);
     }
 }
