@@ -140,9 +140,11 @@ export class ImageUpload extends React.Component<Props> {
         </Col>
         {!disablePreview && (
           <Col xs={12} sm={12}>
-            <p className="h5 text-center">
-              <FormattedMessage id="global.image_uploader.image.preview" />
-            </p>
+            {value && (
+              <p className="h5 text-center">
+                <FormattedMessage id="global.image_uploader.image.preview" />
+              </p>
+            )}
             <div className="image-uploader__preview text-center">
               {value && Array.isArray(value) ? (
                 value.map(media => (

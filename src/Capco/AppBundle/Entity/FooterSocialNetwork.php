@@ -32,7 +32,6 @@ class FooterSocialNetwork
         'instagram' => 'Instagram',
         'flickr' => 'Flickr',
         'tumblr' => 'Tumblr',
-        'youtube' => 'youtube',
    ];
 
     /**

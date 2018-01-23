@@ -45,12 +45,6 @@
 .cap-mail-2-1:before {
   color: #707070;
 }
-.cap-instagram:before {
-    color: #3f729b;
-}
-.cap-youtube:before {
-    color: #c4302b;
-}
 
 [data-icon]:before {
     font-family: "cap-collectif" !important;
@@ -105,7 +99,7 @@
 .cap-gplus:before {
     content: "\6d";
 }
-.cap-instagram:before {
+.cap-instagrem:before {
     content: "\6e";
 }
 .cap-magnifier:before {
@@ -581,9 +575,6 @@
 }
 .cap-ios-close-outline:before {
     content: "\e04a";
-}
-.cap-youtube:before {
-    content: "\6b";
 }
 .cap-map-target-1:before {
     content: "\e049";

@@ -401,13 +401,13 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__private-excerpt {
-    color: $brand-warning;
+    color: $info-color;
     margin-top: 25px;
 }
 
 .proposal__private-field {
     background-color: $main-bg;
-    border: 1px solid $brand-warning;
+    border: 1px solid $info-color;
     padding: 12px 15px 15px;
 
     h2, h4 {
