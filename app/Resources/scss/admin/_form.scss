@@ -1,19 +1,22 @@
 .admin_proposal_form {
-    .panel-title {
-        display: flex;
-        align-items: center;
+    .panel_flex {
+        .panel-title {
+            display: flex;
+            align-items: center;
 
-        span {
-            flex: 1 0 auto;
+            span {
+                flex: 1 0 auto;
+            }
         }
-    }
 
-    .list-group-item {
-      display: flex;
-      align-items: center;
-      button {
-          margin-left: auto;
-      }
+        .list-group-item {
+            display: flex;
+            align-items: center;
+
+            button {
+                margin-left: auto;
+            }
+        }
     }
 
     .box-primary {
