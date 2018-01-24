@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalCreateMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalDeleteMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalUpdateMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
 class ProposalNotifier extends BaseNotifier
@@ -21,7 +21,7 @@ class ProposalNotifier extends BaseNotifier
         $this->proposalResolver = $proposalResolver;
     }
 
-    public function onCreate(Proposal $proposal): void
+    public function onCreate(Proposal $proposal)
     {
         $this->mailer->sendMessage(ProposalCreateMessage::create(
           $proposal,
@@ -34,7 +34,7 @@ class ProposalNotifier extends BaseNotifier
         ));
     }
 
-    public function onDelete(Proposal $proposal): void
+    public function onDelete(Proposal $proposal)
     {
         $this->mailer->sendMessage(ProposalDeleteMessage::create(
             $proposal,
@@ -47,7 +47,7 @@ class ProposalNotifier extends BaseNotifier
         ));
     }
 
-    public function onUpdate(Proposal $proposal): void
+    public function onUpdate(Proposal $proposal)
     {
         $this->mailer->sendMessage(ProposalUpdateMessage::create(
             $proposal,

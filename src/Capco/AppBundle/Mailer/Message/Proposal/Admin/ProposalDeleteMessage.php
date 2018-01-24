@@ -1,24 +1,24 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message\Proposal;
+namespace Capco\AppBundle\Mailer\Message\Proposal\Admin;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 
-final class ProposalCreateMessage extends AdminMessage
+final class ProposalDeleteMessage extends AdminMessage
 {
     public static function create(Proposal $proposal, string $recipentEmail, string $recipientName, string $proposalUrl, string $proposalAdminUrl, string $authorUrl, string $sitename): self
     {
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.proposal.create.subject',
+            'notification.email.proposal.delete.subject',
             static::getMySubjectVars(
                 $sitename,
                 $proposal->getAuthor()->getDisplayName(),
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
             ),
-            'notification.email.proposal.create.body',
+            'notification.email.proposal.delete.body',
             static::getMyTemplateVars(
                 $authorUrl,
                 $proposal->getAuthor()->getDisplayName(),
