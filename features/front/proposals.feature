@@ -178,43 +178,6 @@ Scenario: Author of a proposal wants to delete it
   And I should not see my proposal anymore
 
 @javascript @database
-Scenario: Admin should be notified when an user update his proposal on a notifiable collect step
-  Given I am logged in as user
-  And I go to a proposal of mine which is notifiable
-  When I click the edit proposal button
-  And I change the proposal title
-  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
-  And I wait 3 seconds
-  And I submit the edit proposal form
-  And I wait 3 seconds
-  And I open mail with subject 'notification.email.proposal.edit.subject'
-  Then I should see 'notification.email.proposal.edit.body' in mail
-
-@javascript @database
-Scenario: Admin should be notified when an user delete his proposal on a notifiable collect step
-  Given I am logged in as user
-  And I go to a proposal which is notifiable
-  When I click the delete proposal button
-  And I confirm proposal deletion
-  And I wait 3 seconds
-  And I open mail with subject 'notification.email.proposal.delete.subject'
-  Then I should see 'notification.email.proposal.delete.body' in mail
-
-@javascript @database
-Scenario: Admin should be notified when an user create a proposal on a notifiable collect step
-  Given feature "districts" is enabled
-  And I am logged in as user
-  And I go to a notifiable open collect step
-  When I click the create proposal button
-  And I fill the proposal form
-  And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
-  And I wait 3 seconds
-  And I submit the create proposal form
-  And I open mail with subject 'notification.email.proposal.create.subject'
-  Then I should see 'notification.email.proposal.create.body' in mail
-
-@javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user
   And I go to a proposal which is not notifiable
