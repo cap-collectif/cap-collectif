@@ -88,7 +88,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'event.metadescription',
             'category' => 'pages.events',
-            'value' => "",
+            'value' => '',
             'position' => 304,
             'is_social_network_description' => true,
             'type' => 0,
@@ -96,7 +96,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'ideas.metadescription',
             'category' => 'pages.ideas',
-            'value' => "",
+            'value' => '',
             'position' => 422,
             'is_social_network_description' => true,
             'type' => 0,
@@ -104,7 +104,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'blog.metadescription',
             'category' => 'pages.blog',
-            'value' => "",
+            'value' => '',
             'position' => 790,
             'is_social_network_description' => true,
             'type' => 0,
@@ -112,7 +112,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'themes.metadescription',
             'category' => 'pages.themes',
-            'value' => "",
+            'value' => '',
             'position' => 521,
             'is_social_network_description' => true,
             'type' => 0,
@@ -120,7 +120,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'projects.metadescription',
             'category' => 'pages.projects',
-            'value' => "",
+            'value' => '',
             'position' => 321,
             'is_social_network_description' => true,
             'type' => 0,
@@ -128,7 +128,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'members.metadescription',
             'category' => 'pages.members',
-            'value' => "",
+            'value' => '',
             'position' => 783,
             'is_social_network_description' => true,
             'type' => 0,
@@ -136,7 +136,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'contact.metadescription',
             'category' => 'pages.contact',
-            'value' => "",
+            'value' => '',
             'position' => 621,
             'is_social_network_description' => true,
             'type' => 0,
@@ -144,7 +144,7 @@ class Version20180122115338 extends AbstractMigration
         [
             'keyname' => 'ideas_trash.metadescription',
             'category' => 'pages.ideas_trash',
-            'value' => "",
+            'value' => '',
             'position' => 441,
             'is_social_network_description' => true,
             'type' => 0,
@@ -225,7 +225,7 @@ class Version20180122115338 extends AbstractMigration
                 'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
                 'updated_at' => (new \DateTime())->format('Y-m-d H:i:s')
             ], ['id' => $id]);
-            echo "-> Added " . $siteImage['keyname'] . " thumbnails to site_image" . PHP_EOL;
+            $this->write('-> Added ' . $siteImage['keyname'] . ' thumbnails to site_image');
         }
         foreach ($this->siteParameters as $siteParameter) {
             $this->connection->insert('site_parameter', $siteParameter);
@@ -234,7 +234,7 @@ class Version20180122115338 extends AbstractMigration
                 'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
                 'updated_at' => (new \DateTime())->format('Y-m-d H:i:s')
             ], ['id' => $id]);
-            echo "-> Added " . $siteParameter['keyname'] . " settings to site_parameter" . PHP_EOL;
+            $this->write('-> Added ' . $siteParameter['keyname'] . ' settings to site_parameter');
         }
         foreach ($this->siteCustomCodes as $siteCustomCode) {
             $this->connection->insert('site_parameter', $siteCustomCode);
@@ -243,7 +243,7 @@ class Version20180122115338 extends AbstractMigration
                 'created_at' => (new \DateTime())->format('Y-m-d H:i:s'),
                 'updated_at' => (new \DateTime())->format('Y-m-d H:i:s')
             ], ['id' => $id]);
-            echo "-> Added " . $siteCustomCode['keyname'] . " custom code to site_parameter" . PHP_EOL;
+            $this->write('-> Added ' . $siteCustomCode['keyname'] . ' custom code to site_parameter');
         }
     }
 
@@ -256,7 +256,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo '-> Removed ' . $siteImage['keyname'] . ' from site_image ' . PHP_EOL;
+            $this->write('-> Removed ' . $siteImage['keyname'] . ' from site_image ');
         }
         foreach ($this->siteParameters as $siteParameter) {
             foreach ($siteParameter as $property => $value) {
@@ -265,7 +265,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo '-> Removed ' . $siteParameter['keyname'] . ' from site_parameter ' . PHP_EOL;
+            $this->write('-> Removed ' . $siteParameter['keyname'] . ' from site_parameter ');
         }
         foreach ($this->siteCustomCodes as $siteCustomCode) {
             foreach ($siteCustomCode as $property => $value) {
@@ -274,7 +274,7 @@ class Version20180122115338 extends AbstractMigration
                     break;
                 }
             }
-            echo '-> Removed ' . $siteCustomCode['keyname'] . ' from site_parameter ' . PHP_EOL;
+            $this->write('-> Removed ' . $siteCustomCode['keyname'] . ' from site_parameter ');
         }
     }
 
