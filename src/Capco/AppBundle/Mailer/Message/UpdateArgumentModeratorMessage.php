@@ -2,50 +2,50 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Argument;
 
-final class UpdateOpinionModeratorMessage extends Message
+final class UpdateArgumentModeratorMessage extends Message
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
+    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName, string $argumentLink, string $authorLink): self
     {
         return new self(
             $moderatorEmail,
             $moderatorName,
-            'notification-subject-modified-proposal',
+            'notification-subject-modified-argument',
             static::getMySubjectVars(
-                $opinion->getAuthor()->getUsername(),
-                $opinion->getProject()->getTitle(),
+                $argument->getAuthor()->getUsername(),
+                $argument->getRelated()->getTitle(),
             ),
-            'notification-content-modified-proposal',
+            'notification-content-modified-argument',
             static::getMyTemplateVars(
-                $opinion->getTitle(),
-                $opinion->getBody(),
-                $opinion->getUpdatedAt()->format('d/m/Y'),
-                $opinion->getUpdatedAt()->format('H:i:s'),
-                $opinion->getAuthor()->getUsername(),
+                $argument->getType(),
+                $argument->getBody(),
+                $argument->getUpdatedAt()->format('d/m/Y'),
+                $argument->getUpdatedAt()->format('H:i:s'),
+                $argument->getAuthor()->getUsername(),
                 $authorLink,
-                $opinionLink
+                $argumentLink
             )
         );
     }
 
     private static function getMyTemplateVars(
-        string $title,
+        int $type,
         string $body,
         string $updatedDate,
         string $updatedTime,
         string $authorName,
         string $authorLink,
-        string $opinionLink
+        string $argumentLink
     ): array {
         return [
-            '%title%' => self::escape($title),
+            '%type%' => $type,
             '%body%' => self::escape($body),
             '%updatedDate%' => $updatedDate,
             '%updatedTime%' => $updatedTime,
             '%authorName%' => self::escape($authorName),
             '%authorLink%' => $authorLink,
-            '%opinionLink%' => $opinionLink,
+            '%argumentLink%' => $argumentLink,
         ];
     }
 

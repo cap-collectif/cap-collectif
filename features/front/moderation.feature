@@ -7,8 +7,8 @@ Scenario: Moderator wants to moderate and hide an opinion via email link
   Then I should be redirected to "/projects/croissance-innovation-disruption/trashed"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
   And 1 mail should be sent
-  And I open mail with subject 'notification-subject-proposal-in-the-trash {"%title%":"Opinion 1"}'
-  Then I should see "notification-proposal-in-the-trash" in mail
+  And I open mail with subject 'notification-subject-proposal-in-the-trash {"%title%":"Opinion 1"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
+  Then I should see "notification-content-proposal-in-the-trash {}" in mail
 
 @database @javascript
 Scenario: Moderator wants to moderate an opinion via email link
@@ -16,6 +16,9 @@ Scenario: Moderator wants to moderate an opinion via email link
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/le-probleme-constate/opinion-1"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
   And I should see "in-the-trash"
+  And 1 mail should be sent
+  And I open mail with subject 'notification-subject-proposal-in-the-trash {"%title%":"Opinion 1"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
+  Then I should see "notification-content-proposal-in-the-trash {}" in mail
 
 @database @javascript
 Scenario: Moderator wants to moderate and hide a version via email link
@@ -34,9 +37,15 @@ Scenario: Moderator wants to moderate and hide an argument via email link
   Given I go to "/moderate/argument1ModerationToken/reason/reporting.status.sexual"
   Then I should be redirected to "/projects/croissance-innovation-disruption/trashed"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
+  And 1 mail should be sent
+  And I open mail with subject 'notification-subject-argument-trashed {"%title%":"Opinion 2"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
+  Then I should see "notification-content-argument-trashed {}" in mail
 
 @database @javascript
 Scenario: Moderator wants to moderate an opinion via email link
   Given I go to "/moderate/argument1ModerationToken/reason/moderation-guideline-violation"
   Then I should be redirected to "/projects/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-causes/opinion-2#arg-argument1"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
+  And 1 mail should be sent
+  And I open mail with subject 'notification-subject-argument-trashed {"%title%":"Opinion 2"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
+  Then I should see "notification-content-proposal-in-the-trash {}" in mail

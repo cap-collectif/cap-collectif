@@ -2,29 +2,29 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Argument;
 
-final class NewOpinionModeratorMessage extends Message
+final class NewArgumentModeratorMessage extends Message
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
+    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName, string $argumentLink, string $authorLink): self
     {
         return new self(
             $moderatorEmail,
             $moderatorName,
-            'notification-subject-new-proposal',
+            'notification-subject-new-argument',
             static::getMySubjectVars(
-                $opinion->getAuthor()->getUsername(),
-                $opinion->getProject()->getTitle(),
+                $argument->getAuthor()->getUsername(),
+                $argument->getProject()->getTitle(),
             ),
-            'notification-content-new-proposal',
+            'notification-content-new-argument',
             static::getMyTemplateVars(
-                $opinion->getTitle(),
-                $opinion->getBody(),
-                $opinion->getCreatedAt()->format('d/m/Y'),
-                $opinion->getCreatedAt()->format('H:i:s'),
-                $opinion->getAuthor()->getUsername(),
+                $argument->getTitle(),
+                $argument->getBody(),
+                $argument->getCreatedAt()->format('d/m/Y'),
+                $argument->getCreatedAt()->format('H:i:s'),
+                $argument->getAuthor()->getUsername(),
                 $authorLink,
-                $opinionLink
+                $argumentLink
             )
         );
     }
@@ -36,7 +36,7 @@ final class NewOpinionModeratorMessage extends Message
         string $createdTime,
         string $authorName,
         string $authorLink,
-        string $opinionLink
+        string $argumentLink
     ): array {
         return [
             '%title%' => self::escape($title),
@@ -45,7 +45,7 @@ final class NewOpinionModeratorMessage extends Message
             '%createdTime%' => $createdTime,
             '%authorName%' => self::escape($authorName),
             '%authorLink%' => $authorLink,
-            '%opinionLink%' => $opinionLink,
+            '%argumentLink%' => $argumentLink,
         ];
     }
 
