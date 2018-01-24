@@ -99,37 +99,46 @@ export class SynthesisBox extends React.Component<Props, State> {
     }
   };
 
-  render() {
-    const { step, user } = this.props;
+  renderViewMode = () => {
+    const { step, user, mode } = this.props;
     const { synthesis } = this.state;
 
-    return (
-      <div className="synthesis__box">
-        <h2>
-          {step.title}
-          {synthesis &&
-            synthesis.editable &&
-            user &&
-            user.isAdmin && (
-              <a
-                className="btn btn-primary pull-right"
-                href={step._links.editSynthesis}
-                title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
-                <i className="cap cap-pencil-1" />
-                <FormattedMessage id="synthesis.edit.button" />
-              </a>
-            )}
-        </h2>
+    if (mode === 'view') {
+      return (
+        <div>
+          <h2>
+            {step.title}
+            {synthesis &&
+              synthesis.editable &&
+              user &&
+              user.isAdmin && (
+                <a
+                  className="btn btn-primary pull-right"
+                  href={step._links.editSynthesis}
+                  title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
+                  <i className="cap cap-pencil-1" />
+                  <FormattedMessage id="synthesis.edit.button" />
+                </a>
+              )}
+          </h2>
 
-        {(step.startAt || step.endAt) && (
+          {(step.startAt || step.endAt) && (
             <div className="mb-30">
               <i className="cap cap-calendar-2-1" />{' '}
               <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
             </div>
           )}
 
-        {step.body && <div className="block" dangerouslySetInnerHTML={{ __html: step.body }} />}
+          {step.body && <div className="block" dangerouslySetInnerHTML={{ __html: step.body }} />}
+        </div>
+      );
+    }
+  };
 
+  render() {
+    return (
+      <div className="synthesis__box">
+        {this.renderViewMode()}
         <FlashMessages
           errors={this.state.messages.errors}
           success={this.state.messages.success}

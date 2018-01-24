@@ -7,7 +7,6 @@ import { type State } from '../../types';
 
 type Props = {
   link: string,
-  label: string,
   user: ?Object,
 };
 

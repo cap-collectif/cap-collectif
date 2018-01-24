@@ -42,7 +42,7 @@
                 {% endfor %}
             </ul>
             {% if nbPosts > 2 %}
-                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-posts">{{ 'step.presentation.posts.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     {% endif %}
@@ -56,7 +56,7 @@
                 {% endfor %}
             </div>
             {% if nbEvents > 2 %}
-                <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline" id="project-events">{{ 'step.presentation.events.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
     {% endif %}

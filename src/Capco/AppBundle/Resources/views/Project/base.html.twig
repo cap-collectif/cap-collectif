@@ -1,6 +1,7 @@
 {% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
 
 {% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
+{% set showTrash = is_feature_enabled('project_trash') %}
 
 {% block canonical_link %}{% endblock %}
 
@@ -45,14 +46,15 @@
         </div>
     </div>
 
-    <section>
-        {{ react_render_component('ProjectTrashButtonApp', {
-            'props': {
-                'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
-                'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
-            },
-        })}}
-    </section>
+    {% if showTrash %}
+        <section>
+            {{ react_render_component('ProjectTrashButtonApp', {
+                'props': {
+                    'link': path('app_project_show_trashed', {'projectSlug': project.slug })
+                },
+            })}}
+        </section>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
