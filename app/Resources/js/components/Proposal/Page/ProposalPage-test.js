@@ -54,7 +54,7 @@ describe('<ProposalPage />', () => {
 
   it('should render a proposal page with evaluation tab', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={{ ...proposalNoVotes, hasEvaluation: true }} />,
+      <ProposalPage {...props} proposal={{ ...proposalNoVotes, viewerCanSeeEvaluation: true }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\Form\ReportingType;
+use Doctrine\DBAL\Exception\DriverException;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -25,7 +26,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Swarrot\Broker\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -120,12 +120,6 @@ class OpinionsController extends FOSRestController
         $em->persist($opinion);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish('opinion.create', new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
-
         return $opinion;
     }
 
@@ -159,12 +153,6 @@ class OpinionsController extends FOSRestController
         $opinion->resetVotes();
         $opinion->setValidated(false);
         $this->getDoctrine()->getManager()->flush();
-
-        $this->get('swarrot.publisher')->publish('opinion.update', new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
 
         return $opinion;
     }
@@ -287,8 +275,14 @@ class OpinionsController extends FOSRestController
         ;
 
         $opinion->incrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->flush();
+
+        try {
+            $this->getDoctrine()->getManager()->persist($vote);
+            $this->getDoctrine()->getManager()->flush();
+        } catch (DriverException $e) {
+            // Updating opinion votes count failed
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
 
         return $vote;
     }

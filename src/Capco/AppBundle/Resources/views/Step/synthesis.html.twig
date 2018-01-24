@@ -22,22 +22,6 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-    <h2 class="h2">
-        {{ currentStep.title }}
-        {% if currentStep.synthesis.editable and is_granted('ROLE_ADMIN') %}
-            <a class="btn btn-primary pull-right" href="{{ path('app_project_edit_synthesis', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}" title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
-                <i class="cap cap-pencil-1"></i>
-                {{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}
-            </a>
-        {% endif %}
-    </h2>
-
-    {% if currentStep.body %}
-        <div class="block  block--bordered  box">
-            {{ currentStep.body | raw }}
-        </div>
-    {% endif %}
-
     {% if currentStep.synthesis != null and (currentStep.synthesis.enabled or ( app.user and app.user.vip))  %}
         {{ react_render_component('SynthesisViewBoxApp', {
             'props': props,

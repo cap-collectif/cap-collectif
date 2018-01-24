@@ -1,4 +1,3 @@
-// @flow
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import Fetcher from '../services/Fetcher';
 import {
@@ -10,7 +9,7 @@ import {
 } from '../constants/OpinionConstants';
 
 export default {
-  loadOpinion: (opinionId: string, versionId: ?string) => {
+  loadOpinion: (opinionId, versionId) => {
     const url = versionId
       ? `/opinions/${opinionId}/versions/${versionId}`
       : `/opinions/${opinionId}`;
@@ -25,7 +24,7 @@ export default {
     });
   },
 
-  deleteOpinion: (opinion: string) => {
+  deleteOpinion: opinion => {
     return Fetcher.delete(`/opinions/${opinion}`)
       .then(() => {
         AppDispatcher.dispatch({
@@ -40,7 +39,7 @@ export default {
   },
 
   // Vote for opinion or version
-  loadAllVotes: async (opinionId: string, versionId: ?string) => {
+  loadAllVotes: async (opinionId, versionId) => {
     const url = versionId
       ? `/opinions/${opinionId}/versions/${versionId}/votes`
       : `/opinions/${opinionId}/votes`;
@@ -62,7 +61,7 @@ export default {
     return votes;
   },
 
-  deleteVersion: (version: string, opinion: string) => {
+  deleteVersion: (version, opinion) => {
     return Fetcher.delete(`/opinions/${opinion}/versions/${version}`)
       .then(() => {
         AppDispatcher.dispatch({
@@ -76,7 +75,7 @@ export default {
       });
   },
 
-  addVersionSource: (opinion: string, version: string, data: any) => {
+  addVersionSource: (opinion, version, data) => {
     return Fetcher.post(`/opinions/${opinion}/versions/${version}/sources`, data).then(() => {
       return true;
     });

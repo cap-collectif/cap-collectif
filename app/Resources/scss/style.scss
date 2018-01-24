@@ -51,9 +51,11 @@
     $FONTS
 ================================================================*/
 @import "base/fonts";
+
 /* ===============================================================
     $VARIABLES
 ================================================================*/
+@import "base/variables2";
 @import "base/variables";
 /* ===============================================================
     $BASE
@@ -82,6 +84,7 @@
   "modules/theme",
   "modules/login",
   "modules/profile",
+  "modules/step-tabs",
   "modules/sub-navbar",
   "modules/consult",
   "modules/opinion",
@@ -100,6 +103,7 @@
   "modules/synthesis",
   "modules/search",
   "modules/modal",
+  "modules/project",
   "modules/proposal",
   "modules/reply",
   "modules/editor",
