@@ -144,6 +144,9 @@ Feature: Opinions
     Given I am logged in to api as user
     When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
     Then the JSON response status code should be 201
+    And I wait 3 seconds
+    And I open mail with subject 'notification-subject-new-proposal {"%authorName%":"user","%projectName%":"Projet de loi Renseignement"}' from "assistance@cap-collectif.com" to "dev@cap-collectif.com"
+    Then I should see "notification-subject-new-proposal" in mail
 
   @database
   Scenario: logged in API client wants to add an opinion with appendices

@@ -9,10 +9,14 @@ final class NewOpinionModeratorMessage extends Message
     public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
     {
         return new self(
-            'CapcoAppBundle:Mail:NewOpinionModeratorMessage.html.twig',
             $moderatorEmail,
             $moderatorName,
-            'id.NewOpinionModeratorMessage',
+            'notification-subject-new-proposal',
+            static::getTemplateVars(
+                $opinion->getAuthor()->getUsername(),
+                $opinion->getProject()->getTitle(),
+            ),
+            'notification-new-proposal',
             static::getTemplateVars(
                 $opinion->getStep()->getProject()->getName(),
                 $opinion->getAuthor()->getUsername(),
@@ -22,7 +26,7 @@ final class NewOpinionModeratorMessage extends Message
         );
     }
 
-    private static function getTemplateVars(
+    private static function getMyTemplateVars(
         string $projectName,
         string $authorName,
         string $authorLink,
@@ -33,6 +37,16 @@ final class NewOpinionModeratorMessage extends Message
             'authorName' => self::escape($authorName),
             'authorLink' => $authorLink,
             'opinionLink' => $opinionLink,
+        ];
+    }
+
+    private static function getMySubjectVars(
+        string $authorName,
+        string $projectName,
+    ): array {
+        return [
+            'projectName' => self::escape($projectName),
+            'authorName' => self::escape($authorName),
         ];
     }
 }
