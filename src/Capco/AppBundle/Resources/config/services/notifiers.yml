@@ -4,5 +4,5 @@ services:
     arguments:
       - "@mailer_service"
       - "@capco.site_parameter.resolver"
-      - "@capco.resolver.proposals"
       - "@capco.resolvers.users"
+      - "@capco.resolver.proposals"

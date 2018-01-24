@@ -11,22 +11,17 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
-class ProposalNotifier
+class ProposalNotifier extends BaseNotifier
 {
-    protected $mailer;
-    protected $siteParams;
     protected $proposalResolver;
-    protected $userResolver;
 
-    public function __construct(MailerService $mailer, Resolver $siteParams, ProposalResolver $proposalResolver, UserResolver $userResolver)
+    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, ProposalResolver $proposalResolver)
     {
-        $this->mailer = $mailer;
-        $this->siteParams = $siteParams;
+        parent::__construct($mailer, $siteParams, $userResolver);
         $this->proposalResolver = $proposalResolver;
-        $this->userResolver = $userResolver;
     }
 
-    public function onCreate(Proposal $proposal)
+    public function onCreate(Proposal $proposal): void
     {
         $this->mailer->sendMessage(ProposalCreateMessage::create(
           $proposal,
@@ -39,7 +34,7 @@ class ProposalNotifier
         ));
     }
 
-    public function onDelete(Proposal $proposal)
+    public function onDelete(Proposal $proposal): void
     {
         $this->mailer->sendMessage(ProposalDeleteMessage::create(
             $proposal,
@@ -52,7 +47,7 @@ class ProposalNotifier
         ));
     }
 
-    public function onUpdate(Proposal $proposal)
+    public function onUpdate(Proposal $proposal): void
     {
         $this->mailer->sendMessage(ProposalUpdateMessage::create(
             $proposal,
