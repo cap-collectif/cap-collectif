@@ -25,7 +25,7 @@ class SiteImage
 
     /**
      * @var bool
-     * @ORM\Column(name="is_social_network_thumbnail", type="boolean", nullable=false)
+     * @ORM\Column(name="is_social_network_thumbnail", type="boolean")
      */
     private $isSocialNetworkThumbnail = false;
 
@@ -226,7 +226,5 @@ class SiteImage
     public function setIsSocialNetworkThumbnail(bool $isSocialNetworkThumbnail)
     {
         $this->isSocialNetworkThumbnail = $isSocialNetworkThumbnail;
-
-        return $this;
     }
 }
