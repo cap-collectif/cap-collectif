@@ -398,7 +398,7 @@ Capco\AppBundle\Entity\SiteParameter:
         isSocialNetworkDescription: true
         type: 0
     SiteParameterTrashIdeasMetaDescription:
-        keyname: ideas.trashed.metadescription
+        keyname: ideas_trash.metadescription
         category: pages.ideas_trash
         value: ''
         position: 441
