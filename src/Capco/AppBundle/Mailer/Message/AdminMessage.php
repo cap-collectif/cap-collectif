@@ -14,7 +14,7 @@ class AdminMessage extends Message
     public function getFooterVars(): array
     {
         return [
-            '%to%' => self::escape($this->getRecipient(0)->getEmailAddress()),
+            '%to%' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
             '%sitename%' => $this->getSitename() ? self::escape($this->getSitename()) : 'Cap Collectif',
         ];
     }
