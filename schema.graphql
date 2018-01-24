@@ -927,7 +927,6 @@ type Proposal implements Node {
   status: Status
   selections: [Selection!]!
   likers: [User!]!
-  followers: [User!]!
   estimation: Int
   responses: [Response]!
   media: Media
