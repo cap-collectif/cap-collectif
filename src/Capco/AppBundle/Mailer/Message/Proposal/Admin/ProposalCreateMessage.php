@@ -34,7 +34,6 @@ final class ProposalCreateMessage extends AdminMessage
 
         $message->setSitename($sitename);
         $message->setSenderEmail('assistance@cap-collectif.com');
-        // $message->setSenderName($senderName);
 
         return $message;
     }
