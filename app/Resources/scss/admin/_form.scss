@@ -1,22 +1,19 @@
 .admin_proposal_form {
-    .panel_flex {
-        .panel-title {
-            display: flex;
-            align-items: center;
+    .panel-title {
+        display: flex;
+        align-items: center;
 
-            span {
-                flex: 1 0 auto;
-            }
+        span {
+            flex: 1 0 auto;
         }
+    }
 
-        .list-group-item {
-            display: flex;
-            align-items: center;
-
-            button {
-                margin-left: auto;
-            }
-        }
+    .list-group-item {
+      display: flex;
+      align-items: center;
+      button {
+          margin-left: auto;
+      }
     }
 
     .box-primary {
@@ -90,5 +87,79 @@
         button.box-content__toolbar {
             margin-top: 20px;
         }
+    }
+
+    .editor {
+        position: relative;
+
+        .ql-toolbar, .ql-container {
+            border: 1px solid $border-color;
+        }
+
+        .ql-toolbar {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .ql-container {
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            background-color: $light-bgc;
+
+            .ql-editor {
+                min-height: 100px;
+            }
+        }
+    }
+
+    .image-uploader {
+        &__dropzone {
+            width: 200px;
+            height: 200px;
+            margin-top: 5px;
+            border: 2px dashed $border-color;
+            background-color: $light-bgc;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &-label {
+                padding: 15px;
+
+                &:after {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 50%;
+                    height: 1.2em;
+                    text-align: right;
+                    content: "";
+                }
+
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+
+            &--fullwidth {
+                @extend .image-uploader__dropzone;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+
+        &__btn, .form-group .checkbox {
+            margin-top: 15px;
+        }
+
+        &__preview {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .proposal__private-excerpt {
+        color: $info-color;
+        margin-top: 20px;
     }
 }

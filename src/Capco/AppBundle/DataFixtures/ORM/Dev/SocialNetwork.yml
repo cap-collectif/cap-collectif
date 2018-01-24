@@ -44,13 +44,6 @@ Capco\AppBundle\Entity\SocialNetwork:
     SocialNetwork7:
         title: Cap Collectif
         link: http://www.cap-collectif.com/
-        position: 8
+        position: 6
         isEnabled: true
         media: '@MediaCapcoSite'
-
-    SocialNetwork8:
-        title: Instagram
-        link: https://www.instagram.com/coucou.capco/
-        position: 7
-        isEnabled: true
-        media: '@MediaInstagram'

@@ -192,7 +192,7 @@ export const renderResponses = ({
         intlMessage = intl.formatMessage({ id: 'global.optional' });
       }
 
-      labelMessage += ` <span class="small warning">${intlMessage}</span>`;
+      labelMessage += ` <span class="excerpt"> ${intlMessage}</span>`;
       const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
       switch (inputType) {
@@ -205,7 +205,6 @@ export const renderResponses = ({
                 type="medias"
                 component={component}
                 help={field.helpText}
-                labelClassName="h4"
                 placeholder="reply.your_response"
                 label={label}
                 disabled={disabled}
@@ -257,7 +256,6 @@ export const renderResponses = ({
                 component={component}
                 help={field.helpText}
                 isOtherAllowed={isOtherAllowed}
-                labelClassName="h4"
                 placeholder="reply.your_response"
                 choices={choices}
                 label={label}

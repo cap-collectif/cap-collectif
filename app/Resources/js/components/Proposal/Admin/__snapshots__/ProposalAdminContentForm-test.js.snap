@@ -120,7 +120,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
   <Panel
     bsClass="panel"
     bsStyle="default"
-    className="mt-30 mb-0 panel_flex"
+    className="mt-15"
     defaultExpanded={false}
     header={
       <div>

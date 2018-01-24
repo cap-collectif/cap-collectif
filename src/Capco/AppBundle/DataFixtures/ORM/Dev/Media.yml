@@ -101,10 +101,6 @@ Capco\MediaBundle\Entity\Media:
         id: media23
         binaryContent: votes_bar_image.png
         name: Image de la barre de votes
-    MediaInstagram:
-        id: media25
-        binaryContent: social/instagram.png
-        name:          Instagram
     # File
     MediaFilePdf:
         id: media24      
