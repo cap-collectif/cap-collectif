@@ -79,7 +79,7 @@ class SiteParameter
 
     /**
      * @var bool
-     * @ORM\Column(name="is_social_network_description", type="boolean", nullable=false)
+     * @ORM\Column(name="is_social_network_description", type="boolean")
      */
     private $isSocialNetworkDescription = false;
 
