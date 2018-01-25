@@ -20,11 +20,7 @@ class MessageRecipient
         return $this->emailAddress;
     }
 
-<<<<<<< HEAD
     public function getFullName()//: ?string
-=======
-    public function getFullName(): ?string
->>>>>>> Add structure for emailing
     {
         return $this->fullName;
     }
