@@ -67,6 +67,7 @@ class ThemeExtension extends \Twig_Extension
                   'id' => $realStep->getId(),
                   'title' => $realStep->getTitle(),
                   'body' => $realStep->getBody(),
+                  'slug' => $realStep->getSlug(),
                   'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
                   'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
                   'position' => $realStep->getPosition(),
@@ -88,6 +89,8 @@ class ThemeExtension extends \Twig_Extension
                   'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
                   '_links' => [
                       'show' => $this->urlResolver->getStepUrl($realStep, true),
+                      'stats' => $this->router->generate('app_project_show_stats', ['projectSlug' => $project->getSlug()], true),
+                      'editSynthesis' => $this->router->generate('app_project_edit_synthesis', ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()], true),
                   ],
                 ];
                 $projectStepsData[] = $stepData;

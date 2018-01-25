@@ -23,8 +23,26 @@
 
 {% block details %}
     <h2 class="h2">{{ currentStep.title }}</h2>
+    {% if currentStep.startAt %}
+        <div class="mb-30 project-step__dates">
+            <i class="cap cap-calendar-2-1"></i>
+            {% if currentStep.endAt %}
+                {{ 'global.dates.full.days' | trans({
+                    '{startD}': currentStep.startAt | localizeddate('long', 'none', app.request.locale),
+                    '{startT}': currentStep.startAt | localizeddate('none', 'short', app.request.locale),
+                    '{endD}': currentStep.endAt | localizeddate('long', 'none', app.request.locale),
+                    '{endT}': currentStep.endAt | localizeddate('none', 'short', app.request.locale)
+                }) }}
+            {% else %}
+                {{ 'global.dates.full_day' | trans({
+                    '{date}': currentStep.startAt | localizeddate('long', 'none', app.request.locale),
+                    '{time}': currentStep.startAt |localizeddate('none', 'short', app.request.locale)
+                }) }}
+            {% endif %}
+        </div>
+    {% endif %}
     {% if currentStep.body %}
-        <div class="block  block--bordered  box">
+        <div class="block">
             {{ currentStep.body | raw }}
         </div>
     {% endif %}
