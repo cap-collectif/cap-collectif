@@ -7,7 +7,7 @@
 
     li > a {
         padding: 5px 15px;
-        color: $black;
+        color: $dark;
         font-size: 16px;
         padding-left: 90px;
     }
@@ -40,12 +40,12 @@
     }
 
     li i {
-        color: $black;
+        color: $dark;
         font-size: 18px;
 
         &:hover,
         &:active {
-            color: $black;
+            color: $dark;
         }
     }
 
@@ -75,13 +75,13 @@
     margin-top: 15px;
 
     li .value {
-        color: $black;
+        color: $dark;
         font-size: 24px;
     }
 }
 
 .project__header__title {
-    color: $black;
+    color: $dark;
     padding-top: 0;
     margin-top: 0;
 

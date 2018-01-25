@@ -21,7 +21,7 @@
         white-space: nowrap;
 
         & > a {
-            color: $black;
+            color: $dark;
         }
     }
 
@@ -49,7 +49,7 @@
 .idea {
     .idea__date {
         margin-bottom: 0;
-        color: $excerpt;
+        color: $dark-gray;
         font-size: 80%;
     }
 }

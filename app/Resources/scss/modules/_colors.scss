@@ -41,10 +41,10 @@ $color-swatches:
         (brand-1 $brand-color-1)
         (brand-2 $brand-color-2)
         //Components colors
-        (bodybg $body-bg)
+        (bodybg $brand-color-2)
         (jumbo $brand-color-1)
-        (footer1 $custom-footer)
-        (footer2 $custom-footer-links)
+        (footer1 $brand-color-1)
+        (footer2 $brand-color-2)
         (event $custom-event)
         (formborder $custom-form-border)
         //Bootstrap colors
@@ -56,9 +56,9 @@ $color-swatches:
         //Other colors
         (whitec $white)
         (gray-primary $gray-primary)
-        (light-gray $light-gray)
+        (light-gray $page-bgc)
         (dark-blue $dark-blue)
-        (light-blue $light-blue);
+        (light-blue $primary-color);
 @each $color-swatch in $color-swatches {
     $name: nth($color-swatch, 1);
     $color: nth($color-swatch, 2);

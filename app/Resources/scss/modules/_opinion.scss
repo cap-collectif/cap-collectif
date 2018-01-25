@@ -6,7 +6,7 @@
     font-size: 15px;
 
     &:hover {
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 
     .ranking__nb {
@@ -35,7 +35,7 @@
 
         .opinion__header__title {
             margin: 10px 0;
-            color: $black;
+            color: $dark;
         }
 
         .opinion__header__back {
@@ -109,7 +109,7 @@
 
             &.excerpt {
                 a {
-                    color: $excerpt;
+                    color: $dark-gray;
                 }
             }
         }
@@ -127,7 +127,7 @@
         .opinion__title,
         .opinion__user {
             a {
-                color: $black;
+                color: $dark;
             }
 
             a:hover {
@@ -141,7 +141,7 @@
 
         .opinion__title {
             margin: 0 0 5px;
-            color: $black;
+            color: $dark;
             font-size: $font-size-base;
             font-weight: normal;
         }
@@ -192,7 +192,7 @@
 
     // Special cases : add an argument
     &.opinion--add-argument {
-        background-color: $light-gray;
+        background-color: $page-bgc;
 
         .form-group {
             margin: 0;
@@ -214,7 +214,7 @@
     // Special case : argument
     &.opinion--argument {
         position: relative;
-        background-color: $light-gray;
+        background-color: $page-bgc;
 
         .opinion__text {
             padding-top: 10px;
@@ -417,7 +417,7 @@
     }
 
     .icon {
-        color: $excerpt;
+        color: $dark-gray;
     }
 
     @media (max-width: $screen-xs-max) {
@@ -430,7 +430,7 @@
             border-top: 1px solid $border-color;
 
             &:hover {
-                background-color: $light-gray;
+                background-color: $page-bgc;
                 text-decoration: none;
             }
         }
@@ -459,11 +459,11 @@
             border-top: 1px solid $border-color;
 
             .icon {
-                color: $excerpt;
+                color: $dark-gray;
             }
 
             &:hover {
-                background-color: $light-gray;
+                background-color: $page-bgc;
                 text-decoration: none;
             }
         }
@@ -496,7 +496,7 @@
     margin: 0;
     padding-top: 15px;
     padding-bottom: 15px;
-    background-color: $light-gray;
+    background-color: $page-bgc;
     border-bottom: 1px solid $border-color;
 
     .opinion__header__title {

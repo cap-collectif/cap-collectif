@@ -279,7 +279,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     overflow: hidden;
     height: $navbar-height;
     border-color: $votes-widget-border;
-    background-color: $votes-widget-bg;
+    background-color: $page-bgc;
 
     .container {
         padding-top: 0;
@@ -317,8 +317,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
     .widget__button {
         margin-left: 15px;
-        background-color: $votes-widget-btn-bg;
-        color: $votes-widget-btn-text;
+        background-color: $white;
+        color: $dark;
     }
 
     .widget__image {
@@ -414,7 +414,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__private-field {
-    background-color: $main-bg;
+    background-color: $white;
     border: 1px solid $info-color;
     padding: 12px 15px 15px;
 
@@ -504,8 +504,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     font-size: 14px;
 
     input, textarea, select {
-        background-color: $main-field-bg;
-        border-color: $main-border-color;
+        background-color: $form-bgc;
+        border-color: $border-color;
         font-size: 14px;
         border-radius: 5px;
     }
@@ -515,7 +515,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     #PlacesAutocomplete__autocomplete-container {
-        border: 1px solid $main-border-color;
+        border: 1px solid $border-color;
         border-radius: 0 0 5px 5px;
         color: $field-font-color;
 

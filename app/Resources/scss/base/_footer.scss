@@ -2,8 +2,8 @@
    $Footer
 ================================================================*/
 .footer {
-    background-color: $custom-footer;
-    color: set-link-text-color($custom-footer);
+    background-color: $brand-color-1;
+    color: set-link-text-color($brand-color-1);
     text-align: center;
     border-top: 1px solid $border-color;
 
@@ -47,8 +47,8 @@
     }
 
     .footer__links {
-        background-color: $custom-footer-links;
-        color: set-link-text-color($custom-footer-links);
+        background-color: $brand-color-2;
+        color: set-link-text-color($brand-color-2);
 
         .container {
             padding: 0 30px;
@@ -65,13 +65,13 @@
             li {
                 @include inline-block();
                 height: 45px;
-                color: set-link-text-color($custom-footer-links);
+                color: set-link-text-color($brand-color-2);
                 line-height: 45px;
 
                 & a {
                     padding: 0 5px;
                     @include inline-block();
-                    color: set-link-text-color($custom-footer-links);
+                    color: set-link-text-color($brand-color-2);
                 }
             }
         }

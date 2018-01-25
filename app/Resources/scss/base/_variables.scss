@@ -4,22 +4,11 @@
 
 // = Colors
 // -----------------------------
-$white: #fff;
-$black: #000;
+
 $gray-primary: #c0c0c0;
-$excerpt-dark-gray: #434343;
-$light-gray: #f6f6f6; // fond page
-$dark-gray: #707070;
 $dark-gray-hover: #727b84;
 $darkest-gray: #3e4149;
 $dark-blue: #2a6496;
-$light-blue: #428bca;
-
-$success-color: #088A20;
-$danger-color: #dc3545;
-$info-color: #1D8293;
-
-$excerpt: $dark-gray;
 
 // = Brand colors
 // -----------------------------
@@ -29,14 +18,9 @@ $brand-color-2: #1abc9c;
 // = Base
 // -----------------------------
 $font-size-base: 16px;
-$body-bg: $brand-color-2;
-$main-bg: #fff;
-$main-field-bg: #fafafa;
 $field-font-color: #434343;
 $autocomplete-hover-bg: #d9d9d9;
 $alt-section: #ebebeb;
-$border-color: #ddd;
-$main-border-color: #e3e3e3;
 $thin-container: 690px;
 
 // = Navbar
@@ -48,25 +32,15 @@ $navbar-collapsed-height: 60px;
 $titles: //nb  padding-top  margin-bottom
                 (h1 60px 30px) (h2 60px 30px) (h3 40px 10px);
 
-// = Custom jumbotron
-// -----------------------------
-$custom-jumbotron-1: $brand-color-1;
-$custom-jumbotron-2: $brand-color-2;
-
-// = Custom footer
-// -----------------------------
-$custom-footer: $brand-color-1;
-$custom-footer-links: $brand-color-2;
-
 // = Custom module filter search
 // -----------------------------
 $custom-filter-background: $white;
 
 // = Custom buttons
 // -----------------------------
-$btns-custom: (custom-1 $white $brand-color-1) (custom-2 $brand-color-1 $white) (dark-gray $dark-gray $white) (light-gray $light-gray $black) (darkest-gray $darkest-gray $white);
+$btns-custom: (custom-1 $white $brand-color-1) (custom-2 $brand-color-1 $white) (dark-gray $dark-gray $white) (light-gray $page-bgc $dark) (darkest-gray $darkest-gray $white);
 
-$btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg) (success $btn-success-bg $btn-success-bg $btn-default-bg) (info $btn-info-bg $btn-info-bg $btn-default-bg) (warning $btn-warning-bg $btn-warning-bg $btn-default-bg) (danger $btn-danger-bg $btn-danger-bg $btn-default-bg) (custom-1 $white $white $brand-color-1) (custom-2 $brand-color-1 $brand-color-1 $white) (primary $btn-primary-bg $btn-primary-bg $btn-default-bg) (dark-gray $dark-gray $dark-gray $white) (light-gray $light-gray $light-gray $black);
+$btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg) (success $btn-success-bg $btn-success-bg $btn-default-bg) (info $btn-info-bg $btn-info-bg $btn-default-bg) (warning $btn-warning-bg $btn-warning-bg $btn-default-bg) (danger $btn-danger-bg $btn-danger-bg $btn-default-bg) (custom-1 $white $white $brand-color-1) (custom-2 $brand-color-1 $brand-color-1 $white) (primary $btn-primary-bg $btn-primary-bg $btn-default-bg) (dark-gray $dark-gray $dark-gray $white) (light-gray $page-bgc $page-bgc $dark);
 
 // = Custom form
 // -----------------------------
@@ -76,7 +50,7 @@ $custom-form-legend: $custom-form-border;
 
 // = Custom calendar event
 // -----------------------------
-$custom-event: $light-gray;
+$custom-event: $page-bgc;
 $custom-event-month: #08c;
 
 // = Custom video
@@ -90,7 +64,7 @@ $social-colors: // name color icon
 
 // = Opinion types
 // -------------------------------
-$opinion-types: ("primary" $brand-color-2) ("default" #f5f5f5) ("red" #f2dede) ("orange" #fcf8e3) ("blue" #d9edf7) ("bluedark" darken(#d9edf7, 15%)) ("green" #dff0d8) ("white" #fff) ("gray" $gray-primary) ("light-gray", $light-gray) (source $brand-primary) (idee $light-gray) (project $light-gray);
+$opinion-types: ("primary" $brand-color-2) ("default" #f5f5f5) ("red" #f2dede) ("orange" #fcf8e3) ("blue" #d9edf7) ("bluedark" darken(#d9edf7, 15%)) ("green" #dff0d8) ("white" #fff) ("gray" $gray-primary) ("light-gray", $page-bgc) (source $brand-primary) (idee $page-bgc) (project $page-bgc);
 
 // = Opinion labels
 // -------------------------------
@@ -100,14 +74,11 @@ $opinion-labels: ("blue" #5bc0de) ("green" #5cb85c);
 // -------------------------------
 $warning-bg: #fcf8e3;
 $warning-text: #d9534f;
-$success-text: #5cb85c;
 
 // = Proposal votes widget
-$votes-widget-bg: #f6f6f6;
+
 $votes-widget-text: #777;
 $votes-widget-border: #e7e7e7;
-$votes-widget-btn-bg: #fff;
-$votes-widget-btn-text: $black;
 
 // = Icons color
-$icons-colors: (icon--red #e2264d) (icon--yellow #ff0) (icon--blue #5bc0de) (icon--green #5cb85c) (icon--black $black);
+$icons-colors: (icon--red #e2264d) (icon--yellow #ff0) (icon--blue #5bc0de) (icon--green #5cb85c) (icon--black $dark);

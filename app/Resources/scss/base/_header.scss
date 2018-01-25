@@ -209,7 +209,7 @@
     }
 }
 
-$backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
+$backgrounds: (1 $brand-color-1) (2 $brand-color-2);
 @each $bg in $backgrounds {
     $name: nth($bg, 1);
     $color: nth($bg, 2);

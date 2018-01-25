@@ -3,7 +3,7 @@
 ================================================================*/
 body {
     padding-top: $navbar-height;
-    background-color: $body-bg;
+    background-color: $brand-color-2;
     font-family: $font-family-sans-serif;
     font-size: $font-size-base;
 
@@ -42,7 +42,7 @@ body {
 }
 
 .main {
-    background-color: $main-bg;
+    background-color: $white;
 
     p {
         margin-bottom: 12px;
@@ -87,7 +87,7 @@ body {
 
     .container--alt {
         @extend .container--bg;
-        color: $black;
+        color: $dark;
 
         &:after {
             background-color: $alt-section;
@@ -235,15 +235,15 @@ h2 + h3 {
 }
 
 .excerpt {
-    color: $excerpt;
+    color: $dark-gray;
 }
 
 .excerpt_dark {
-    color: $excerpt-dark-gray
+    color: $dark-gray
 }
 
 a.excerpt {
-    color: $excerpt;
+    color: $dark-gray;
 }
 
 .nb-bordered {
@@ -338,11 +338,11 @@ a.excerpt {
   font-size: 15px;
   padding: 5px;
   color: $white;
-  background-color: $black;
+  background-color: $dark;
 }*/
 
 .play--black:before {
-    @include triangle($black, 'left', $custom-video-play);
+    @include triangle($dark, 'left', $custom-video-play);
 }
 
 .bg__wrapper {
@@ -387,7 +387,7 @@ a.excerpt {
 .icon--circled {
     padding: 5px 7px;
     background-color: $white;
-    color: $black;
+    color: $dark;
     @include border-radius(50%);
 }
 
@@ -754,8 +754,8 @@ svg.avatar {
     width: 200px;
     height: 200px;
     margin-top: 5px;
-    border: 2px dashed $main-border-color;
-    background-color: $main-field-bg;
+    border: 2px dashed $border-color;
+    background-color: $form-bgc;
     border-radius: 5px;
 }
 
@@ -839,7 +839,7 @@ svg.avatar {
         a:focus,
         a:hover {
             background-color: $white;
-            color: $black;
+            color: $dark;
             @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }
@@ -884,7 +884,7 @@ svg.avatar {
         padding: 30px 25px 0;
         border: 1px #d3d3d3 solid;
         border-radius: 5px;
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 }
 

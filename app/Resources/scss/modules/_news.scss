@@ -11,7 +11,7 @@
 .media--news {
 
     &:hover {
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 }
 
@@ -28,7 +28,7 @@
 }
 
 .media--news__user a {
-    color: $black;
+    color: $dark;
 }
 
 .media--news__meta {

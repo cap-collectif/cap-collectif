@@ -51,14 +51,14 @@ Hack form button - radio check
 }
 
 .help-block {
-    color: $excerpt;
+    color: $dark-gray;
 }
 
 .editor {
     position: relative;
 
     .ql-toolbar, .ql-container {
-        border: 1px solid $main-border-color;
+        border: 1px solid $border-color;
     }
 
     .ql-toolbar {
@@ -68,7 +68,7 @@ Hack form button - radio check
     .ql-container {
         border-radius: 0 0 5px 5px;
         border-top: none;
-        background-color: $main-field-bg;
+        background-color: $form-bgc;
 
         .ql-editor {
             min-height: 100px;
@@ -104,7 +104,7 @@ Hack form button - radio check
     }
 
     .help-block {
-        color: $excerpt;
+        color: $dark-gray;
     }
 
     .editor {
@@ -134,20 +134,20 @@ Hack form button - radio check
 .has-success {
 
     .form-control {
-        border-color: $success-text;
+        border-color: $success-color;
     }
 
     .control-label,
     .error-block {
-        color: $success-text;
+        color: $success-color;
     }
 
     .editor {
-        border: 1px solid $success-text;
+        border: 1px solid $success-color;
     }
 
     .help-block {
-        color: $excerpt;
+        color: $dark-gray;
     }
 }
 

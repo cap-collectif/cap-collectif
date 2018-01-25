@@ -6,10 +6,10 @@
 $white: #fff;
 $lightest-gray: #f6f6f6;
 $lighter-gray: #ebebeb;
-$light-gray: #ddd;
+// $border-color: #ddd;
 $gray: #999;
 $darker-gray: #333;
-$black: #000;
+$dark: #000;
 $blue: #377bb5;
 $green: #5fb760;
 $orange: #eeac57;
@@ -63,7 +63,7 @@ $dark-red: #a94442;
         padding: 0;
         padding-top: 15px;
         background-color: $lightest-gray;
-        border-right: 1px solid $light-gray;
+        border-right: 1px solid $border-color;
     }
 
     .col--right {
@@ -213,7 +213,7 @@ $dark-red: #a94442;
     }
 
     .menu__action {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
         margin-top: 0;
     }
 }
@@ -239,15 +239,15 @@ $dark-red: #a94442;
     }
 
     .menu__item {
-        border-right: 1px solid $light-gray;
-        border-top: 1px solid $light-gray;
+        border-right: 1px solid $border-color;
+        border-top: 1px solid $border-color;
         background-color: $lightest-gray;
 
         & > a {
             margin-right: 0;
             @include border-radius(0 !important);
             border: 0;
-            color: $black;
+            color: $dark;
             border-top: 2px solid transparent;
         }
     }
@@ -262,7 +262,7 @@ $dark-red: #a94442;
     }
 
     .menu__item:first-child > a {
-        border-left: 1px solid $light-gray;
+        border-left: 1px solid $border-color;
     }
 }
 
@@ -282,11 +282,11 @@ $dark-red: #a94442;
 // ***************************** Elements list *******************************************
 
 .synthesis__list {
-    border: 1px solid $light-gray;
+    border: 1px solid $border-color;
     margin-bottom: 0;
 
     .synthesis__list-item {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
         background-color: $white;
         font-size: 15px;
         margin-top: 0;
@@ -321,7 +321,7 @@ $dark-red: #a94442;
 
 // Global
 .synthesis__tree {
-    border: 1px solid $light-gray;
+    border: 1px solid $border-color;
     border-top: 0;
 }
 
@@ -377,7 +377,7 @@ $dark-red: #a94442;
 
     .tree__item__content.selected {
         background-color: $lighter-gray;
-        color: $black;
+        color: $dark;
     }
 
     .tree__item.published > .tree__item__content {
@@ -398,7 +398,7 @@ $dark-red: #a94442;
 // In content
 .synthesis__content .synthesis__tree {
     .tree__item__content {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
     }
 
     .tree__list:first-child > .tree__item:first-child > .tree__item__content {
@@ -446,7 +446,7 @@ $dark-red: #a94442;
     }
 
     .element__title {
-        color: $black;
+        color: $dark;
         font-size: 16px;
         word-break: break-word;
 
@@ -501,11 +501,11 @@ $dark-red: #a94442;
 .synthesis__element-panel {
 
     .panel-title {
-        color: $black;
+        color: $dark;
 
         a,
         a.active {
-            color: $black;
+            color: $dark;
         }
     }
 
@@ -523,7 +523,7 @@ $dark-red: #a94442;
 
 .element__description {
     overflow: hidden;
-    border-top: 1px solid $light-gray;
+    border-top: 1px solid $border-color;
     word-wrap: break-word;
 
     .element__chart {
@@ -667,7 +667,7 @@ $dark-red: #a94442;
 
     .panel--original-element {
         background-color: $lightest-gray;
-        border-right: 1px solid $light-gray;
+        border-right: 1px solid $border-color;
 
         .element__title {
             margin-top: 0;
@@ -687,12 +687,12 @@ $dark-red: #a94442;
             margin-top: 15px;
             margin-bottom: 0;
             padding: 0;
-            border: 1px solid $light-gray;
+            border: 1px solid $border-color;
             list-style-type: none;
         }
 
         .division__element {
-            border-top: 1px solid $light-gray;
+            border-top: 1px solid $border-color;
             padding: 15px;
             background-color: $lightest-gray;
 
@@ -710,7 +710,7 @@ $dark-red: #a94442;
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
+$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($dark $dark);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);
@@ -783,7 +783,7 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
             left: 0;
             display: block;
             height: 100%;
-            background-color: $light-gray;
+            background-color: $page-bgc;
         }
 
         .element__title {
@@ -797,6 +797,6 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
 
 @media print {
     .synthesis__element__bar__value {
-        background-color: $light-gray !important;
+        background-color: $page-bgc !important;
     }
 }

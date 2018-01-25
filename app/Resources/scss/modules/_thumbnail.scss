@@ -8,7 +8,7 @@
 
     &:hover {
         .smart-fade:after {
-            background: $light-gray;
+            background: $page-bgc;
         }
     }
 
@@ -101,12 +101,12 @@
 
         .progress {
             margin-bottom: 15px;
-            background-color: $light-gray;
+            background-color: $page-bgc;
 
             &_future-step .progress-bar {
-                background-color: $light-gray;
+                background-color: $page-bgc;
                 color: $dark-gray;
-                @include box-shadow(inset 0 1px 2px rgba($black, 0.1));
+                @include box-shadow(inset 0 1px 2px rgba($dark, 0.1));
             }
 
             &_closed-step .progress-bar {

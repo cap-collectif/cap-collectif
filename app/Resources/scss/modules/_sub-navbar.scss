@@ -30,12 +30,12 @@
             &.active:hover a,
             &.active:hover > div {
                 border-left: 5px solid $brand-primary;
-                background-color: $light-gray;
+                background-color: $page-bgc;
             }
 
             &:hover a,
             &:hover > div {
-                background-color: $light-gray;
+                background-color: $page-bgc;
             }
 
             &.trash__step {
@@ -67,7 +67,7 @@
         margin-bottom: 5px;
         margin-top: 8px;
         padding-top: 0;
-        color: $black;
+        color: $dark;
         font-size: 16px;
     }
 
