@@ -7,7 +7,6 @@ const DatesInterval = React.createClass({
   propTypes: {
     startAt: React.PropTypes.string,
     endAt: React.PropTypes.string,
-    fullDay: React.PropTypes.bool,
   },
 
   getDefaultProps(): Object {
@@ -23,7 +22,7 @@ const DatesInterval = React.createClass({
   },
 
   render(): ?React.Element<any> {
-    const { startAt, endAt, fullDay } = this.props;
+    const { startAt, endAt } = this.props;
 
     if (!startAt) {
       return null;
@@ -61,20 +60,6 @@ const DatesInterval = React.createClass({
             date: startDay,
             startTime,
             endTime,
-          }}
-        />
-      );
-    }
-
-    if (fullDay && endAt && startAt) {
-      return (
-        <FormattedMessage
-          id="global.dates.full.days"
-          values={{
-            startD: startDay,
-            startT: startTime,
-            endD: endDay,
-            endT: endTime,
           }}
         />
       );

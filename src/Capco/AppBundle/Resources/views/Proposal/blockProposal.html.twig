@@ -17,12 +17,13 @@
                     </p>
                 </div>
             </div>
-            <hr>
             <div class="proposal__body" >
                 {% if proposal.enabled == false %}
-                    <h4>
-                        {{ 'proposal.show.trashed.contentDeleted'|trans({}, 'CapcoAppBundle') }}
-                    </h4>
+                    <p>
+                        <span class="label label-default" style="position: static">
+                            {{ 'proposal.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
+                        </span>
+                    </p>
                 {% else %}
                     <h2 class="h4 proposal__title">
                         <a href={{ path('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'proposalSlug': proposal.slug, 'stepSlug': proposal.step.slug}) }}>
@@ -30,67 +31,48 @@
                         </a>
                     </h2>
                 {% endif %}
-                {% if proposal.isTrashed and proposal.enabled == true %}
-                    <p class="excerpt">
-                        {{ proposal.summary }}
-                    </p>
-                {% endif %}
-                {% if proposal.enabled == true %}
-                    <div class="proposal__infos">
-                        {% if proposal.theme is not null %}
-                            <div class="proposal__info">
-                                <i class="cap cap-tag-1-1"></i>{{ proposal.theme.title }}
-                            </div>
-                        {% endif %}
-                        {% if proposal.district is not null %}
-                            <div class="proposal__info">
-                                <i class="cap cap-marker-1-1"></i>{{ proposal.district.name }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endif %}
+                <div class="proposal__infos">
+                    {% if proposal.isTrashed %}
+                        <div class="proposal__info">
+                            <span class="label label-default" style="position: static; margin-right: 5px">
+                                {{ 'proposal.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    {% if proposal.theme is not null %}
+                        <div class="proposal__info">
+                            <i class="cap cap-tag-1-1"></i>{{ proposal.theme.title }}
+                        </div>
+                    {% endif %}
+                    {% if proposal.district is not null %}
+                        <div class="proposal__info">
+                            <i class="cap cap-marker-1-1"></i>{{ proposal.district.name }}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="proposal__footer">
             <div class="proposal__counters">
-            {% if proposal.isTrashed %}
-                <p class="px-15">
-                    {{ 'proposal.show.trashed.shortReason'|trans({}, 'CapcoAppBundle') }}
-                    <br>
-                    <span class="excerpt">{{ proposal.trashedReason }}</span>
-                </p>
-
-            {% else %}
                 <div class="proposal__counter">
                     <div class="proposal__counter__value" >
                         {{ proposal.commentsCount }}
                     </div>
                     <div class="proposal__counter__label" >
                         {% transchoice proposal.commentsCount with {'%count%': proposal.commentsCount} from 'CapcoAppBundle' %}
-                        proposal.show.comments
+                            proposal.show.comments
                         {% endtranschoice %}
                     </div>
                 </div>
-            {% endif %}
             </div>
-            {% if proposal.isTrashed %}
-                <div class="{{ 'proposal__status status--default' }}">
-                    {% if proposal.enabled == true %}
-                        {{ 'proposal.show.trashed.reason.moderated' | trans({}, 'CapcoAppBundle') }}
-                    {% else %}
-                        {{ 'proposal.show.trashed.reason.deleted' | trans({}, 'CapcoAppBundle') }}
-                    {% endif %}
+            {% if proposal.status is not null %}
+                <div class="{{ 'proposal__status status--' ~ proposal.status.color }}">
+                    {{ proposal.status.name }}
                 </div>
             {% else %}
-                {% if proposal.status is not null %}
-                    <div class="{{ 'proposal__status status--' ~ proposal.status.color }}">
-                        {{ proposal.status.name }}
-                    </div>
-                {% else %}
-                    <div class="proposal__status status--default">
-                        {{ 'proposal.show.no_status' | trans({}, 'CapcoAppBundle') }}
-                    </div>
-                {% endif %}
+                <div class="proposal__status status--default">
+                    {{ 'proposal.show.no_status' | trans({}, 'CapcoAppBundle') }}
+                </div>
             {% endif %}
         </div>
     </div>
