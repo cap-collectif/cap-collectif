@@ -1,0 +1,8 @@
+services:
+  proposal.notifier:
+    class: Capco\AppBundle\Notifier\ProposalNotifier
+    arguments:
+      - "@mailer_service"
+      - "@capco.site_parameter.resolver"
+      - "@capco.resolvers.users"
+      - "@capco.resolver.proposals"

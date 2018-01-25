@@ -22,6 +22,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProposalResolver implements ContainerAwareInterface
 {
@@ -146,7 +147,7 @@ class ProposalResolver implements ContainerAwareInterface
                 'proposalSlug' => $proposal->getSlug(),
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
-            ], true);
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function resolveAdminUrl(Proposal $proposal): string
@@ -155,7 +156,7 @@ class ProposalResolver implements ContainerAwareInterface
             'admin_capco_app_proposal_edit',
             [
                 'id' => $proposal->getId(),
-            ], true
+            ], UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
 
