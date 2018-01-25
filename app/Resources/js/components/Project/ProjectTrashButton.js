@@ -1,45 +1,42 @@
-// @flow
-import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
-import { type State } from '../../types';
 
-type Props = {
-  link: string,
-  user: ?Object,
-};
+const ProjectTrashButton = React.createClass({
+  propTypes: {
+    link: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    user: PropTypes.object,
+  },
 
-export class ProjectTrashButton extends React.PureComponent<Props> {
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
+
   render() {
-    const { link, user } = this.props;
+    const { link, label, user } = this.props;
     return (
-      <div className="container container--custom text-center">
-        <div className="row">
-          <h3 className="mt-0">
-            <FormattedMessage id="project.show.trashed.short_name" />
-          </h3>
-          <p className="excerpt">
-            <FormattedMessage id="project.show.trashed.text" />
+      <LoginOverlay>
+        <a
+          id="trash-link"
+          href={user ? link : null}
+          style={{ display: 'block', borderColor: 'transparent !important' }}>
+          <p className="navbar__step-title">
+            <i className="cap cap-bin-2-1" />
+            {label} <i className="pull-right excerpt cap-arrow-66" />
           </p>
-          <LoginOverlay>
-            <a
-              id="trash-link"
-              href={user ? link : null}
-              style={{ display: 'block', borderColor: 'transparent !important' }}>
-              <p>
-                <FormattedMessage id="project.show.trashed.display" />
-              </p>
-            </a>
-          </LoginOverlay>
-        </div>
-      </div>
+        </a>
+      </LoginOverlay>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  },
 });
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(ProjectTrashButton);

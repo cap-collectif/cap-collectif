@@ -333,7 +333,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 </div>
 `;
 
-exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step 1`] = `
+exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step (days left) 1`] = `
 <div
   className="box project__preview__body"
 >
@@ -546,9 +546,380 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     </a>
      
      
-    <RemainingTime
-      endAt="2017-11-25T09:00:24+01:00"
+    <span
+      className="excerpt"
+    >
+      <span
+        className="excerpt_dark"
+      >
+        2
+      </span>
+       
+      <FormattedMessage
+        id="count.daysLeft"
+        values={
+          Object {
+            "count": 2,
+          }
+        }
+      />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step (hours left) 1`] = `
+<div
+  className="box project__preview__body"
+>
+  <div
+    className="project__preview__body__infos"
+  >
+    <Connect(ProjectPreviewThemes)
+      project={
+        Object {
+          "_links": Object {
+            "show": "http://capco/show-link",
+          },
+          "hasParticipativeStep": true,
+          "steps": Array [
+            Object {
+              "_links": Object {
+                "show": "http://capco/step1/show-link",
+              },
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+              "status": "open",
+              "timeless": false,
+              "title": "Open step 1",
+              "type": "collect",
+            },
+          ],
+          "title": "Name of my project",
+        }
+      }
     />
+    <h3
+      className="project__preview__title"
+      style={
+        Object {
+          "height": "auto",
+          "lineHeight": "auto",
+          "marginTop": "5px",
+        }
+      }
+    >
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="project-undefined-tooltip"
+            placement="right"
+          >
+            Name of my project
+          </Tooltip>
+        }
+        placement="top"
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <a
+          href="http://capco/show-link"
+        >
+          <div
+            style={
+              Object {
+                "width": "98%",
+              }
+            }
+          >
+            <Truncate
+              ellipsis="…"
+              lines={3}
+            >
+              Name of my project
+            </Truncate>
+          </div>
+        </a>
+      </OverlayTrigger>
+    </h3>
+    <ProjectPreviewCounters
+      project={
+        Object {
+          "_links": Object {
+            "show": "http://capco/show-link",
+          },
+          "hasParticipativeStep": true,
+          "steps": Array [
+            Object {
+              "_links": Object {
+                "show": "http://capco/step1/show-link",
+              },
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+              "status": "open",
+              "timeless": false,
+              "title": "Open step 1",
+              "type": "collect",
+            },
+          ],
+          "title": "Name of my project",
+        }
+      }
+    />
+  </div>
+  <ProjectPreviewProgressBar
+    actualStep={
+      Object {
+        "_links": Object {
+          "show": "http://capco/step1/show-link",
+        },
+        "endAt": "2017-11-25T09:00:24+01:00",
+        "startAt": "2017-01-10T09:00:24+01:00",
+        "status": "open",
+        "timeless": false,
+        "title": "Open step 1",
+        "type": "collect",
+      }
+    }
+    isCurrentStep={null}
+    project={
+      Object {
+        "_links": Object {
+          "show": "http://capco/show-link",
+        },
+        "hasParticipativeStep": true,
+        "steps": Array [
+          Object {
+            "_links": Object {
+              "show": "http://capco/step1/show-link",
+            },
+            "endAt": "2017-11-25T09:00:24+01:00",
+            "startAt": "2017-01-10T09:00:24+01:00",
+            "status": "open",
+            "timeless": false,
+            "title": "Open step 1",
+            "type": "collect",
+          },
+        ],
+        "title": "Name of my project",
+      }
+    }
+  />
+  <div
+    className="project__preview__actions"
+  >
+    <a
+      href="http://capco/step1/show-link"
+    >
+      <FormattedMessage
+        id="project.preview.action.participe"
+        values={Object {}}
+      />
+    </a>
+     
+     
+    <span
+      className="excerpt"
+    >
+      <span
+        className="excerpt_dark"
+      >
+        4
+      </span>
+       
+      <FormattedMessage
+        id="count.hoursLeft"
+        values={
+          Object {
+            "count": 4,
+          }
+        }
+      />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step (minutes left) 1`] = `
+<div
+  className="box project__preview__body"
+>
+  <div
+    className="project__preview__body__infos"
+  >
+    <Connect(ProjectPreviewThemes)
+      project={
+        Object {
+          "_links": Object {
+            "show": "http://capco/show-link",
+          },
+          "hasParticipativeStep": true,
+          "steps": Array [
+            Object {
+              "_links": Object {
+                "show": "http://capco/step1/show-link",
+              },
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+              "status": "open",
+              "timeless": false,
+              "title": "Open step 1",
+              "type": "collect",
+            },
+          ],
+          "title": "Name of my project",
+        }
+      }
+    />
+    <h3
+      className="project__preview__title"
+      style={
+        Object {
+          "height": "auto",
+          "lineHeight": "auto",
+          "marginTop": "5px",
+        }
+      }
+    >
+      <OverlayTrigger
+        defaultOverlayShown={false}
+        overlay={
+          <Tooltip
+            bsClass="tooltip"
+            id="project-undefined-tooltip"
+            placement="right"
+          >
+            Name of my project
+          </Tooltip>
+        }
+        placement="top"
+        trigger={
+          Array [
+            "hover",
+            "focus",
+          ]
+        }
+      >
+        <a
+          href="http://capco/show-link"
+        >
+          <div
+            style={
+              Object {
+                "width": "98%",
+              }
+            }
+          >
+            <Truncate
+              ellipsis="…"
+              lines={3}
+            >
+              Name of my project
+            </Truncate>
+          </div>
+        </a>
+      </OverlayTrigger>
+    </h3>
+    <ProjectPreviewCounters
+      project={
+        Object {
+          "_links": Object {
+            "show": "http://capco/show-link",
+          },
+          "hasParticipativeStep": true,
+          "steps": Array [
+            Object {
+              "_links": Object {
+                "show": "http://capco/step1/show-link",
+              },
+              "endAt": "2017-11-25T09:00:24+01:00",
+              "startAt": "2017-01-10T09:00:24+01:00",
+              "status": "open",
+              "timeless": false,
+              "title": "Open step 1",
+              "type": "collect",
+            },
+          ],
+          "title": "Name of my project",
+        }
+      }
+    />
+  </div>
+  <ProjectPreviewProgressBar
+    actualStep={
+      Object {
+        "_links": Object {
+          "show": "http://capco/step1/show-link",
+        },
+        "endAt": "2017-11-25T09:00:24+01:00",
+        "startAt": "2017-01-10T09:00:24+01:00",
+        "status": "open",
+        "timeless": false,
+        "title": "Open step 1",
+        "type": "collect",
+      }
+    }
+    isCurrentStep={null}
+    project={
+      Object {
+        "_links": Object {
+          "show": "http://capco/show-link",
+        },
+        "hasParticipativeStep": true,
+        "steps": Array [
+          Object {
+            "_links": Object {
+              "show": "http://capco/step1/show-link",
+            },
+            "endAt": "2017-11-25T09:00:24+01:00",
+            "startAt": "2017-01-10T09:00:24+01:00",
+            "status": "open",
+            "timeless": false,
+            "title": "Open step 1",
+            "type": "collect",
+          },
+        ],
+        "title": "Name of my project",
+      }
+    }
+  />
+  <div
+    className="project__preview__actions"
+  >
+    <a
+      href="http://capco/step1/show-link"
+    >
+      <FormattedMessage
+        id="project.preview.action.participe"
+        values={Object {}}
+      />
+    </a>
+     
+     
+    <span
+      className="excerpt"
+    >
+      <span
+        className="excerpt_dark"
+      >
+        20
+      </span>
+       
+      <FormattedMessage
+        id="count.minutesLeft"
+        values={
+          Object {
+            "count": 20,
+          }
+        }
+      />
+    </span>
   </div>
 </div>
 `;

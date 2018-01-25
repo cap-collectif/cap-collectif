@@ -19,7 +19,7 @@ frontend:
                    symfony2: ~
     suites:
         front:
-            paths: [ %paths.base%/features/front ]
+            paths: [ '%paths.base%/features/front' ]
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
@@ -51,7 +51,7 @@ javascript:
                         wd_host: http://selenium:4444/wd/hub
     suites:
         javascript:
-            paths: [ %paths.base%/features/front ]
+            paths: [ '%paths.base%/features/front' ]
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
@@ -73,7 +73,7 @@ commands:
             purge_before_scenario: true
     suites:
         commands:
-            paths: [ %paths.base%/features/commands ]
+            paths: [ '%paths.base%/features/commands' ]
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
@@ -90,7 +90,7 @@ api:
             purge_before_scenario: true
     suites:
         api:
-            paths: [ %paths.base%/features/api ]
+            paths: [ '%paths.base%/features/api' ]
             contexts:
                 - Capco\AppBundle\Behat\ApiContext
                 - Capco\AppBundle\Behat\NavigationContext
@@ -104,7 +104,9 @@ graphql:
               purge_before_scenario: true
     suites:
         graphql:
-            paths: [ %paths.base%/features/graphql ]
+            paths:
+                - '%paths.base%/features/graphql'
+                - '%paths.base%/features/graphql/mutations'
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
@@ -134,7 +136,7 @@ back:
                         wd_host: http://selenium:4444/wd/hub
     suites:
         javascript:
-            paths: [ %paths.base%/features/back ]
+            paths: [ '%paths.base%/features/back' ]
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Capco\AppBundle\Manager\Notify;
+use Capco\AppBundle\Notifier\ProposalNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -12,7 +12,7 @@ class ProposalCreateProcessor implements ProcessorInterface
     private $proposalRepository;
     private $notifier;
 
-    public function __construct(ProposalRepository $proposalRepository, Notify $notifier)
+    public function __construct(ProposalRepository $proposalRepository, ProposalNotifier $notifier)
     {
         $this->proposalRepository = $proposalRepository;
         $this->notifier = $notifier;
@@ -22,7 +22,7 @@ class ProposalCreateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $proposal = $this->proposalRepository->find($json['proposalId']);
-        $this->notifier->notifyProposal($proposal, 'create');
+        $this->notifier->onCreate($proposal);
 
         return true;
     }

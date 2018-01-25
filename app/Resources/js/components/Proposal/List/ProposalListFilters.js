@@ -85,6 +85,17 @@ export const ProposalListFilters = React.createClass({
     return (
       <div className="mb-15">
         <Row>
+          <Col xs={12} md={colWidth}>
+            <ProposalListOrderSorting
+              orderByCost={orderByCost}
+              orderByComments={orderByComments}
+              orderByVotes={orderByVotes}
+              defaultSort={defaultSort}
+            />
+          </Col>
+          <Col xs={12} md={colWidth}>
+            <ProposalListSearch />
+          </Col>
           {showToggleMapButton && (
             <Col xs={12} md={colWidth} xsHidden smHidden>
               <ToggleMapButton
@@ -94,17 +105,6 @@ export const ProposalListFilters = React.createClass({
               />
             </Col>
           )}
-          <Col xs={12} md={colWidth}>
-            <ProposalListSearch />
-          </Col>
-          <Col xs={12} md={colWidth}>
-            <ProposalListOrderSorting
-              orderByCost={orderByCost}
-              orderByComments={orderByComments}
-              orderByVotes={orderByVotes}
-              defaultSort={defaultSort}
-            />
-          </Col>
         </Row>
         <Row>
           {displayedFilters.map((filterName, index) => (

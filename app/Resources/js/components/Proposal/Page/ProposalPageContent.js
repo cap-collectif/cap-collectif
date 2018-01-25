@@ -91,7 +91,7 @@ export const ProposalPageContent = React.createClass({
         </div>
         {address &&
           config.canUseDOM && (
-            <div className="block" style={{ height: 255 }}>
+            <div className="block proposal-map__block">
               <h3 className="h3">
                 <FormattedMessage id="proposal.map.form.field" />
               </h3>
