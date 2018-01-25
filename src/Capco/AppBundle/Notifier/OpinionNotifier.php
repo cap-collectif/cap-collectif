@@ -27,7 +27,7 @@ class OpinionNotifier extends BaseNotifier
           $this->siteParams->getValue('admin.mail.notifications.send_address'),
           $this->siteParams->getValue('admin.mail.notifications.send_name'),
           $this->consultationResolver->resolvePropositionUrl($opinion),
-          $this->userResolver->resolveUrl($opinion->getAuthor())
+          $this->userResolver->resolveShowUrl($opinion->getAuthor())
       ));
     }
 
@@ -38,7 +38,7 @@ class OpinionNotifier extends BaseNotifier
           $this->siteParams->getValue('admin.mail.notifications.send_address'),
           $this->siteParams->getValue('admin.mail.notifications.send_name'),
           $this->consultationResolver->resolvePropositionUrl($opinion),
-          $this->userResolver->resolveUrl($opinion->getAuthor())
+          $this->userResolver->resolveShowUrl($opinion->getAuthor())
       ));
     }
 }

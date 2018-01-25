@@ -8,13 +8,13 @@ final class NewOpinionModeratorMessage extends Message
 {
     public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
     {
-        return new self(
+        $message = new self(
             $moderatorEmail,
             $moderatorName,
             'notification-subject-new-proposal',
             static::getMySubjectVars(
                 $opinion->getAuthor()->getUsername(),
-                $opinion->getProject()->getTitle(),
+                $opinion->getProject()->getTitle()
             ),
             'notification-content-new-proposal',
             static::getMyTemplateVars(
@@ -27,6 +27,21 @@ final class NewOpinionModeratorMessage extends Message
                 $opinionLink
             )
         );
+
+        $message->setSenderEmail('assistance@cap-collectif.com');
+        $message->setSenderName('Assistance');
+
+        return $message;
+    }
+
+    public function getFooterTemplate()
+    {
+        return null;
+    }
+
+    public function getFooterVars()
+    {
+        return [];
     }
 
     private static function getMyTemplateVars(
@@ -51,7 +66,7 @@ final class NewOpinionModeratorMessage extends Message
 
     private static function getMySubjectVars(
         string $authorName,
-        string $projectName,
+        string $projectName
     ): array {
         return [
             '{projectName}' => self::escape($projectName),
