@@ -19,9 +19,11 @@ class AdminMessage extends Message
         ];
     }
 
-    public function setSitename(string $value)
+    public function setSitename(string $value): self
     {
         $this->sitename = $value;
+
+        return $this;
     }
 
     public function getSitename()//:?string

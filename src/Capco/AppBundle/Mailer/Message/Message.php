@@ -103,9 +103,11 @@ abstract class Message
         return $this->senderEmail;
     }
 
-    public function setSenderEmail(/*?string*/ $senderEmail)//: void
+    public function setSenderEmail(/*?string*/ $senderEmail): self
     {
         $this->senderEmail = $senderEmail;
+
+        return $this;
     }
 
     public function getSenderName()//: ?string
@@ -113,9 +115,11 @@ abstract class Message
         return $this->senderName;
     }
 
-    public function setSenderName(/*?string*/ $senderName)//: void
+    public function setSenderName(/*?string*/ $senderName): self
     {
         $this->senderName = $senderName;
+
+        return $this;
     }
 
     public function getCC(): array
@@ -128,9 +132,11 @@ abstract class Message
         $this->cc[] = $cc;
     }
 
-    public function setReplyTo(string $replyTo)//: void
+    public function setReplyTo(string $replyTo): self
     {
         $this->replyTo = $replyTo;
+
+        return $this;
     }
 
     final protected static function escape(string $string): string
