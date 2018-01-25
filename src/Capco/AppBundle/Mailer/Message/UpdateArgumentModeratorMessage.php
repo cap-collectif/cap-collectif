@@ -39,13 +39,13 @@ final class UpdateArgumentModeratorMessage extends Message
         string $argumentLink
     ): array {
         return [
-            '%type%' => $type,
-            '%body%' => self::escape($body),
-            '%updatedDate%' => $updatedDate,
-            '%updatedTime%' => $updatedTime,
-            '%authorName%' => self::escape($authorName),
-            '%authorLink%' => $authorLink,
-            '%argumentLink%' => $argumentLink,
+            '{type}' => $type,
+            '{body}' => self::escape($body),
+            '{updatedDate}' => $updatedDate,
+            '{updatedTime}' => $updatedTime,
+            '{authorName}' => self::escape($authorName),
+            '{authorLink}' => $authorLink,
+            '{argumentLink}' => $argumentLink,
         ];
     }
 
@@ -54,8 +54,8 @@ final class UpdateArgumentModeratorMessage extends Message
         string $projectName,
     ): array {
         return [
-            'projectName' => self::escape($projectName),
-            'authorName' => self::escape($authorName),
+            '{projectName}' => self::escape($projectName),
+            '{authorName}' => self::escape($authorName),
         ];
     }
 }

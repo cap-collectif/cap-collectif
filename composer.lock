@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fca7f79cc81d798007848d4e72dde95c",
+    "content-hash": "a8d275c176cf7ae12c18204f70bd8e1c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10395,12 +10395,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/mailcatcher.git",
-                "reference": "20b4c266d865e294659c5eca79d23f805338546e"
+                "reference": "e5bff236a6560d5314ea9bba32bcea6e3588b40d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/20b4c266d865e294659c5eca79d23f805338546e",
-                "reference": "20b4c266d865e294659c5eca79d23f805338546e",
+                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/e5bff236a6560d5314ea9bba32bcea6e3588b40d",
+                "reference": "e5bff236a6560d5314ea9bba32bcea6e3588b40d",
                 "shasum": ""
             },
             "require": {
@@ -10425,7 +10425,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
             },
-            "time": "2018-01-24T14:55:03+00:00"
+            "time": "2018-01-25T16:41:14+00:00"
         },
         {
             "name": "behat/behat",

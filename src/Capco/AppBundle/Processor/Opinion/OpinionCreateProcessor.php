@@ -21,7 +21,12 @@ class OpinionCreateProcessor implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $json = json_decode($message->getBody(), true);
-        $opinion = $this->repository->find($json['opinionId']);
+        $id = $json['opinionId'];
+        $opinion = $this->repository->find($id);
+        if (!$opinion) {
+            throw new \Exception('Unable to find opinion with id : ' . $id);
+        }
+
         $this->notifier->onCreation($opinion);
 
         return true;

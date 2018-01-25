@@ -36,12 +36,12 @@ final class TrashedOpinionAuthorMessage extends Message
         string $opinionLink
     ): array {
         return [
-            '%trashedReason%' => self::escape($trashedReason),
-            '%title%' => self::escape($title),
-            '%body%' => self::escape($body),
-            '%trashedDate%' => $trashedDate,
-            '%trashedTime%' => $trashedTime,
-            '%opinionLink%' => $opinionLink,
+            '{trashedReason}' => self::escape($trashedReason),
+            '{title}' => self::escape($title),
+            '{body}' => self::escape($body),
+            '{trashedDate}' => $trashedDate,
+            '{trashedTime}' => $trashedTime,
+            '{opinionLink}' => $opinionLink,
         ];
     }
 
@@ -49,7 +49,7 @@ final class TrashedOpinionAuthorMessage extends Message
         string $title
     ): array {
         return [
-            '%title%' => self::escape($title),
+            '{title}' => self::escape($title),
         ];
     }
 }

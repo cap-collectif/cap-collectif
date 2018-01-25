@@ -3,5 +3,3 @@ services:
       class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
       arguments:
           - "@service_container"
-      # tags:
-      #     - { name: overblog_graphql.resolver }

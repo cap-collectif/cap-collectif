@@ -39,13 +39,13 @@ final class UpdateOpinionModeratorMessage extends Message
         string $opinionLink
     ): array {
         return [
-            '%title%' => self::escape($title),
-            '%body%' => self::escape($body),
-            '%updatedDate%' => $updatedDate,
-            '%updatedTime%' => $updatedTime,
-            '%authorName%' => self::escape($authorName),
-            '%authorLink%' => $authorLink,
-            '%opinionLink%' => $opinionLink,
+            '{title}' => self::escape($title),
+            '{body}' => self::escape($body),
+            '{updatedDate}' => $updatedDate,
+            '{updatedTime}' => $updatedTime,
+            '{authorName}' => self::escape($authorName),
+            '{authorLink}' => $authorLink,
+            '{opinionLink}' => $opinionLink,
         ];
     }
 
@@ -54,8 +54,8 @@ final class UpdateOpinionModeratorMessage extends Message
         string $projectName,
     ): array {
         return [
-            'projectName' => self::escape($projectName),
-            'authorName' => self::escape($authorName),
+            '{projectName}' => self::escape($projectName),
+            '{authorName}' => self::escape($authorName),
         ];
     }
 }
