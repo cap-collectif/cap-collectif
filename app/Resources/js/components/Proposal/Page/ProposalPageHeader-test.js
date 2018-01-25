@@ -60,11 +60,13 @@ describe('<ProposalPageHeader />', () => {
   };
 
   it('should render a proposal header', () => {
+    /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
     const wrapper = shallow(<ProposalPageHeader proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render theme if proposal has none', () => {
+    /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
     const wrapper = shallow(<ProposalPageHeader proposal={proposalWithoutTheme} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
