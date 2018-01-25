@@ -2,68 +2,6 @@
 Feature: Update a proposal
 
 @database
-Scenario: Admin should be notified if GraphQL user modify his proposal
-  Given I am logged in to graphql as user
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: ChangeProposalContentInput!) {
-      changeProposalContent(input: $input) {
-        proposal {
-          id
-          title
-          body
-          publicationStatus
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "id": "proposal2",
-        "title": "Achetez un DOP à la madeleine",
-        "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
-        "responses": [
-          {
-            "question": "1",
-            "value": "reponse-1"
-          },
-          {
-            "question": "3",
-            "value": "reponse-3"
-          },
-          {
-            "question": "11",
-            "medias": ["media1"]
-          },
-          {
-            "question": "12",
-            "medias": []
-          }
-        ]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "changeProposalContent": {
-        "proposal": {
-          "id": "proposal2",
-          "title": "Achetez un DOP à la madeleine",
-          "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
-          "publicationStatus": "PUBLISHED"
-        }
-      }
-    }
-  }
-  """
-  And I wait 3 seconds
-  And I open mail with subject "notification.email.proposal.edit.subject"
-  And I should see mail containing "notification.email.proposal.edit.body"
-
-@database
 Scenario: GraphQL client wants to edit his proposal
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:

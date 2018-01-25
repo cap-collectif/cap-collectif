@@ -1,8 +1,8 @@
 @proposal @create_proposal
-Feature: Create proposal
+Feature: Create Proposal
 
 @database @elasticsearch
-Scenario: GraphQL client wants to add a draft proposal
+Scenario: GraphQL client wants to add creare a draft proposal
   Given features themes, districts are enabled
   And I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -103,72 +103,6 @@ Scenario: GraphQL client wants to create a proposal
     }
   }
   """
-
-@database
-Scenario: Admin should be notified if GraphQL client create a proposal in a notifiable collect step
-  Given features themes, districts are enabled
-  And I am logged in to graphql as user
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: CreateProposalInput!) {
-      createProposal(input: $input) {
-        proposal {
-          id
-          title
-          publicationStatus
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "proposalFormId": "proposalForm1",
-        "draft": false,
-        "title": "Les DOP à la madeleine sont-ils nocifs ?",
-        "body": "Enquête au sein d'un cartel très bien rôdé",
-        "theme": "theme1",
-        "district": "district1",
-        "category": "pCategory1",
-        "address": "[{\"address_components\":[{\"long_name\":\"262\",\"short_name\":\"262\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Général Leclerc\",\"short_name\":\"Avenue Général Leclerc\",\"types\":[\"route\"]},{\"long_name\":\"Rennes\",\"short_name\":\"Rennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Ille-et-Vilaine\",\"short_name\":\"Ille-et-Vilaine\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Bretagne\",\"short_name\":\"Bretagne\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"35700\",\"short_name\":\"35700\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"262 Avenue Général Leclerc, 35700 Rennes, France\",\"geometry\":{\"bounds\":{\"northeast\":{\"lat\":48.1140978,\"lng\":-1.6404985},\"southwest\":{\"lat\":48.1140852,\"lng\":-1.640499}},\"location\":{\"lat\":48.1140852,\"lng\":-1.6404985},\"location_type\":\"RANGE_INTERPOLATED\",\"viewport\":{\"northeast\":{\"lat\":48.1154404802915,\"lng\":-1.639149769708498},\"southwest\":{\"lat\":48.1127425197085,\"lng\":-1.641847730291502}}},\"place_id\":\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\",\"types\":[\"street_address\"]}]",
-        "responses": [
-          {
-            "question": "1",
-            "value": ""
-          },
-          {
-            "question": "3",
-            "value": "Réponse à la question obligatoire"
-          },
-          {
-            "question": "11",
-            "medias": ["media10"]
-          },
-          {
-            "question": "12",
-            "medias": ["media10"]
-          }
-        ]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "createProposal": {
-        "proposal": {
-          "id": @string@,
-          "title": "Les DOP à la madeleine sont-ils nocifs ?",
-          "publicationStatus": "PUBLISHED"
-        }
-      }
-    }
-  }
-  """
-  And I wait 3 seconds
-  And I open mail with subject 'notification.email.proposal.create.subject'
-  Then I should see 'notification.email.proposal.create.body' in mail
 
 @security
 Scenario: GraphQL client wants to create a proposal out of the zone

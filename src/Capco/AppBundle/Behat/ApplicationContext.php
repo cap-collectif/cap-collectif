@@ -398,11 +398,7 @@ class ApplicationContext extends UserContext
      */
     public function iWait(int $seconds)
     {
-        try {
-            $this->getSession()->wait((int) ($seconds * 1000));
-        } catch (\RuntimeException $exception) {
-            sleep($seconds);
-        }
+        $this->getSession()->wait((int) ($seconds * 1000));
     }
 
     /**

@@ -483,6 +483,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         margin-bottom: 20px;
     }
 
+    &.proposal-map__block {
+        height: 255px;
+    }
+
     &:first-child > h3, &:first-child > div > h3 {
         margin-top: 0;
     }
