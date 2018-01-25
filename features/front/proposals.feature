@@ -178,6 +178,16 @@ Scenario: Author of a proposal wants to delete it
   And I should not see my proposal anymore
 
 @javascript @database
+Scenario: Admin should be notified when an user deletes his proposal on an notifiable proposal
+  Given I am logged in as user
+  And I go to a proposal which is notifiable
+  When I click the delete proposal button
+  And I confirm proposal deletion
+  And I wait 3 seconds
+  And I open mail with subject 'notification.email.proposal.delete.subject'
+  And I should see 'notification.email.proposal.delete.body' in mail
+
+@javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user
   And I go to a proposal which is not notifiable
