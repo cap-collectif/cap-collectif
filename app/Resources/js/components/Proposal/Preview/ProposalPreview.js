@@ -42,7 +42,6 @@ const ProposalPreview = React.createClass({
               showNullEstimation={voteType === VOTE_TYPE_BUDGET}
               showThemes={showThemes}
             />
-            <hr />
             {step.id === proposal.votableStepId && (
               <div className="proposal__buttons text-center">
                 <ProposalPreviewVote proposal={proposal} />
