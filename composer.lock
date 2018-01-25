@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a6120f9c69237ca15a24d02efc0e021",
+    "content-hash": "f8ad6bcd8f0331f695507505b4ace6c3",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2870,13 +2870,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/SimplesamlphpBundle.git",
-                "reference": "186ba4720101e900f42006f9fc4debf2073f4359"
+                "url": "https://github.com/hslavich/SimplesamlphpBundle.git",
+                "reference": "12255b15f08c8476149da22b4daa6f9ad31e674e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/SimplesamlphpBundle/zipball/186ba4720101e900f42006f9fc4debf2073f4359",
-                "reference": "186ba4720101e900f42006f9fc4debf2073f4359",
+                "url": "https://api.github.com/repos/hslavich/SimplesamlphpBundle/zipball/12255b15f08c8476149da22b4daa6f9ad31e674e",
+                "reference": "12255b15f08c8476149da22b4daa6f9ad31e674e",
                 "shasum": ""
             },
             "require": {
@@ -2889,6 +2889,7 @@
                     "Hslavich\\SimplesamlphpBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "hslavich",
@@ -2904,10 +2905,7 @@
                 "saml",
                 "simplesamlphp"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/SimplesamlphpBundle/tree/master"
-            },
-            "time": "2018-01-16T09:42:18+00:00"
+            "time": "2018-01-24T16:39:43+00:00"
         },
         {
             "name": "hwi/oauth-bundle",
