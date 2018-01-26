@@ -47,7 +47,7 @@ class MailerService
         //  try {
         foreach ($message->getRecipients() as $recipient) {
             $swiftMessage = (new \Swift_Message())
-                ->setTo($recipient->getEmailAddress())
+                ->setTo([$recipient->getEmailAddress() => $recipient->getFullName()])
                 ->setSubject($subject)
                 ->setContentType('text/html')
                 ->setBody($body)
