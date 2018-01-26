@@ -921,6 +921,11 @@ textarea {
 
 .label-info {
     background-color: $info-color;
+
+    a, a:hover {
+        color: $white;
+        font-weight: 400;
+    }
 }
 
 .small.excerpt {
