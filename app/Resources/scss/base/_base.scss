@@ -458,6 +458,15 @@ a.excerpt {
 
 .share-button-dropdown {
     display: inline-block;
+
+    @each $social-color in $social-colors {
+        $name: nth($social-color, 1);
+        $color: nth($social-color, 2);
+
+        .cap-#{$name}:before {
+            color: $color;
+        }
+    }
 }
 
 // Custom modal
