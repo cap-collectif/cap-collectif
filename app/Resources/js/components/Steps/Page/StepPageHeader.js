@@ -30,11 +30,11 @@ export class StepPageHeader extends React.Component<Props> {
         <h2 className="h2">{step.title}</h2>
         <div className="mb-30 project-step__dates">
           {(step.startAt || step.endAt) && (
-              <span className="mr-15">
-                <i className="cap cap-calendar-2-1" />{' '}
-                <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
-              </span>
-            )}
+            <span className="mr-15">
+              <i className="cap cap-calendar-2-1" />{' '}
+              <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
+            </span>
+          )}
           {step.endAt &&
             step.status === 'open' &&
             !step.timeless &&

@@ -241,7 +241,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
                       <div className="navbar__step">
                         <span className="navbar__step-title">
                           <span className="navbar__step-nb_small">{key + 1}.</span>
-                          {step.title}
+                          {step.label}
                         </span>
                         <p className="excerpt">
                           {step.type !== 'presentation' && (
