@@ -35,7 +35,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
@@ -52,7 +51,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
@@ -69,7 +67,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
@@ -86,7 +83,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
@@ -103,7 +99,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher
@@ -120,7 +115,6 @@ swarrot:
                  - configurator: swarrot.processor.max_execution_time
                    extras:
                        max_execution_time: 100
-                 - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
                  - configurator: swarrot.processor.exception_catcher

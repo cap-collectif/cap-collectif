@@ -7,7 +7,15 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class ProposalDeleteMessage extends AdminMessage
 {
-    public static function create(Proposal $proposal, string $recipentEmail, string $recipientName, string $proposalUrl, string $proposalAdminUrl, string $authorUrl, string $sitename): self
+    public static function create(Proposal $proposal,
+                                  string $recipentEmail,
+                                  string $recipientName = null,
+                                  string $proposalUrl,
+                                  string $proposalAdminUrl,
+                                  string $authorUrl,
+                                  string $sitename,
+                                  string $senderEmail,
+                                  string $senderName = null): self
     {
         $message = new self(
             $recipentEmail,
@@ -29,11 +37,12 @@ final class ProposalDeleteMessage extends AdminMessage
                 $proposalUrl,
                 $proposalAdminUrl,
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
-            )
+            ),
+            $senderEmail,
+            $senderName
         );
 
         $message->setSitename($sitename);
-        $message->setSenderEmail('assistance@cap-collectif.com');
 
         return $message;
     }
