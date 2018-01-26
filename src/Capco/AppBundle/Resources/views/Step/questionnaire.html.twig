@@ -25,27 +25,32 @@
 
 {% block details %}
 
-    {% if currentStep.isClosed %}
-        <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.questionnaire.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
-        </div>
-    {% endif %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1">
+            {% if currentStep.isClosed %}
+                <div class="alert alert-info alert-dismissible  block" role="alert">
+                    <p><strong>{{ 'step.questionnaire.alert.ended.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.ended.text'|trans({}, 'CapcoAppBundle') }}</p>
+                </div>
+            {% endif %}
 
-    {% if currentStep.isFuture %}
-        <div class="alert alert-info alert-dismissible  block" role="alert">
-            <p><strong>{{ 'step.questionnaire.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
-        </div>
-    {% endif %}
+            {% if currentStep.isFuture %}
+                <div class="alert alert-info alert-dismissible  block" role="alert">
+                    <p><strong>{{ 'step.questionnaire.alert.future.title'|trans({}, 'CapcoAppBundle') }}</strong> {{ 'step.questionnaire.alert.future.text'|trans({'%date%': '<strong>' ~ currentStep.startAt| localizeddate('long', 'none', app.request.locale) ~ '</strong>'}, 'CapcoAppBundle') | raw }}</p>
+                </div>
+            {% endif %}
 
-    {% if currentStep.questionnaire is null %}
-        <div>
-            <p>
-                {{ 'step.questionnaire.no_form' | trans({}, 'CapcoAppBundle') }}
-            </p>
+            {% if currentStep.questionnaire is null %}
+                <div>
+                    <p>
+                        {{ 'step.questionnaire.no_form' | trans({}, 'CapcoAppBundle') }}
+                    </p>
+                </div>
+            {% else %}
+                {{ react_render_component('QuestionnaireStepPageApp', {'props': props}) }}
+            {% endif %}
         </div>
-    {% else %}
-        {{ react_render_component('QuestionnaireStepPageApp', {'props': props}) }}
-    {% endif %}
+    </div>
+
 
 {% endblock %}
 {% block javascripts %}

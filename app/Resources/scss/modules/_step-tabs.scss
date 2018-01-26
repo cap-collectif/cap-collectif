@@ -1,0 +1,276 @@
+/* ===============================================================
+    $SUB-NAVBAR
+================================================================*/
+.step-tabs {
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    margin-bottom: 50px;
+
+    &__bar {
+        background-color: $white;
+        margin-bottom: 0;
+        font-size: 15px;
+        position: relative;
+
+        &.container {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    &__tab-prev, &__tab-next {
+        position: absolute;
+        height: 100%;
+        width: 45px;
+        display: flex;
+        z-index: 1;
+        background-color: $white;
+
+        a {
+            height: 30px;
+            width: 30px;
+            display: flex;
+            margin: auto;
+            color: $dark-gray;
+            border: 1px solid $border-color;
+            @include border-radius(50%);
+
+            &:hover {
+                text-decoration: none;
+                color: $dark-gray;
+                border: 1px solid $dark-gray;
+            }
+        }
+    }
+
+    &__tab-prev {
+        left: -45px;
+        border-right: 1px solid $border-color;
+
+        i {
+            margin: 5px 6px;
+        }
+    }
+
+    &__tab-next {
+        right: -45px;
+        border-left: 1px solid $border-color;
+
+        i {
+            margin: 5px 8px;
+        }
+    }
+
+    &__list {
+        overflow: hidden;
+        white-space: nowrap;
+
+        ul {
+            display: inline-block;
+            flex-wrap: nowrap;
+            @include transition(transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1));
+
+            li {
+                position: relative;
+                display: inline-block;
+                font-size: 16px;
+
+                &:not(.active) {
+                    &:hover {
+                        background-color: $light-gray;
+                        border-bottom: 3px solid $light-gray;
+                    }
+
+                    border-bottom: 3px solid $white;
+                }
+
+                a {
+                    display: flex;
+                    padding: 15px;
+
+                    &:hover, &:focus {
+                        background-color: transparent;
+                    }
+                }
+
+                svg {
+                    position: absolute;
+                    top: 0;
+                    right: -20px;
+                    z-index: 5;
+
+                    polygon {
+                        fill: $white;
+                    }
+                }
+
+                &:first-child {
+                    .navbar__step-nb {
+                        margin: auto 15px auto 0;
+                    }
+                }
+
+                .navbar__step {
+                    display: flex;
+                    flex-direction: column;
+                    min-height: 45.7px;
+
+                    &-nb {
+                        @include border-radius(50%);
+                        margin: auto 15px auto 17px;
+                        width: 30px;
+                        height: 30px;
+                        background-color: transparent;
+                        border: 1px solid $dark-gray;
+                        color: $dark-gray;
+                        font-size: 18px;
+                        font-weight: 300;
+                        display: flex;
+
+                        span {
+                            margin: auto;
+                        }
+                    }
+
+                    &-nb_small {
+                        display: none;
+                    }
+
+                    &-title {
+                        color: $dark-gray;
+                        font-weight: 500;
+                        margin: auto;
+                    }
+                }
+
+                &.active polygon, &:hover polygon {
+                    fill: $light-gray;
+                }
+
+                &.active {
+                    a {
+                        border-bottom: 3px solid $brand-primary;
+                        background-color: $light-gray;
+                    }
+
+                    .navbar__step-title {
+                        color: $black;
+                    }
+
+                    .navbar__step-nb {
+                        background-color: $brand-primary;
+                        border: 1px solid $brand-primary;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+@media (min-width: 768px) and (max-width: 840px),
+(min-width: 990px) and (max-width: 1065px),
+(min-width: 1200px) and (max-width: 1260px)
+{
+    .step-tabs__bar.container {
+        padding: 0;
+    }
+
+    .step-tabs__tab-prev {
+        left: 0;
+    }
+
+    .step-tabs__tab-next {
+        right: 0;
+    }
+}
+
+@media (max-width: $screen-xs-max) {
+    .step-tabs__bar.container {
+        padding: 0;
+    }
+
+    .step-tabs__tab-prev, .step-tabs__tab-next {
+        padding: 0;
+
+        a, a:hover {
+            border: none;
+        }
+
+        i {
+            font-size: 25px;
+            margin: auto;
+        }
+    }
+
+    .step-tabs__tab-prev {
+        left: 0;
+    }
+
+    .step-tabs__tab-next {
+        right: 0;
+    }
+
+    .step-tabs__list {
+        overflow: hidden;
+
+        ul li {
+            svg {
+                display: none;
+            }
+
+            .navbar__step-nb {
+                display: none;
+            }
+
+            .navbar__step {
+                min-height: 0;
+
+                .excerpt {
+                    min-height: 22px;
+                }
+            }
+
+            &:hover .navbar__step-nb_small {
+                color: $brand-primary;
+            }
+
+            .navbar__step-nb_small {
+                color: $dark-gray;
+                border: none;
+                margin: 0 3px 0 0;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            &.active {
+                a {
+                    background-color: transparent;
+                }
+
+                .navbar__step-title {
+                    color: $brand-primary;
+                }
+
+                .navbar__step-nb_small {
+                    background-color: transparent;
+                    color: $brand-primary;
+                    border: none;
+                }
+            }
+
+            &:hover {
+                a {
+                    background-color: transparent;
+                }
+
+                .navbar__step-title, .navbar__step-nb {
+                    color: $brand-primary;
+                }
+            }
+        }
+    }
+}

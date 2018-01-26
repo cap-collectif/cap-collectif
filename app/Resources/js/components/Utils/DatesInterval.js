@@ -3,26 +3,25 @@ import * as React from 'react';
 import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
-const DatesInterval = React.createClass({
-  propTypes: {
-    startAt: React.PropTypes.string,
-    endAt: React.PropTypes.string,
-  },
+type Props = {
+  startAt: ?string,
+  endAt: ?string,
+  fullDay: ?boolean,
+};
 
-  getDefaultProps(): Object {
-    return {
-      startAt: null,
-      endAt: null,
-    };
-  },
+export class DatesInterval extends React.Component<Props> {
+  static defaultProps = {
+    startAt: null,
+    endAt: null,
+  };
 
   lastOneDay(): boolean {
     const { startAt, endAt } = this.props;
     return moment(endAt).diff(moment(startAt), 'days') < 1;
-  },
+  }
 
   render(): ?React.Element<any> {
-    const { startAt, endAt } = this.props;
+    const { startAt, endAt, fullDay } = this.props;
 
     if (!startAt) {
       return null;
@@ -65,6 +64,49 @@ const DatesInterval = React.createClass({
       );
     }
 
+    const startT = startAt.substr(11, 5);
+    const endT = endAt.substr(11, 5);
+
+    if (fullDay && endAt && startAt && endT !== '00:00' && startT !== '00:00') {
+      return (
+        <FormattedMessage
+          id="global.dates.full.days"
+          values={{
+            startD: startDay,
+            startT: startTime,
+            endD: endDay,
+            endT: endTime,
+          }}
+        />
+      );
+    }
+
+    if (fullDay && endAt && startAt && endT !== '00:00' && startT === '00:00') {
+      return (
+        <FormattedMessage
+          id="global.dates.full.days.startNoTime"
+          values={{
+            startD: startDay,
+            endD: endDay,
+            endT: endTime,
+          }}
+        />
+      );
+    }
+
+    if (fullDay && endAt && startAt && endT === '00:00' && startT !== '00:00') {
+      return (
+        <FormattedMessage
+          id="global.dates.full.days.endNoTime"
+          values={{
+            startD: startDay,
+            startT: startTime,
+            endD: endDay,
+          }}
+        />
+      );
+    }
+
     return (
       <FormattedMessage
         id="global.dates.between"
@@ -74,7 +116,7 @@ const DatesInterval = React.createClass({
         }}
       />
     );
-  },
-});
+  }
+}
 
 export default DatesInterval;

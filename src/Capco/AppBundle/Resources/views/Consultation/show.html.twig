@@ -35,8 +35,11 @@
     {% endif %}
 
     {% block content %}
-        <h2 class="h2">{{ currentStep.title }}</h2>
-        {{ react_render_component('ConsultationPageApp', { 'props': stepProps }) }}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {{ react_render_component('ConsultationPageApp', { 'props': stepProps }) }}
+            </div>
+        </div>
     {% endblock %}
 {% endblock %}
 

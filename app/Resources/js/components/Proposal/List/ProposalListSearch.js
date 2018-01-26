@@ -49,7 +49,7 @@ const ProposalListSearch = React.createClass({
               <i className="cap cap-magnifier" />
             </Button>
           }
-          groupClassName="proposal-search-group pull-right"
+          groupClassName="proposal-search-group"
           value={this.state.terms}
           onChange={this.handleChange}
         />
