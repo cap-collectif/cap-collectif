@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Argument;
 
-final class TrashedArgumentAuthorMessage extends Message
+final class TrashedArgumentAuthorMessage extends ExternalMessage
 {
     public static function create(Argument $argument, string $argumentLink): self
     {

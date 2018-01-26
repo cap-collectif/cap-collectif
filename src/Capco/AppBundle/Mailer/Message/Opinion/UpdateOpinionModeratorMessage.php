@@ -3,10 +3,11 @@
 namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Mailer\Message\ModeratorMessage;
 
-final class UpdateOpinionModeratorMessage extends Message
+final class UpdateOpinionModeratorMessage extends ModeratorMessage
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
+    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName = null, string $opinionLink, string $authorLink): self
     {
         return new self(
             $moderatorEmail,

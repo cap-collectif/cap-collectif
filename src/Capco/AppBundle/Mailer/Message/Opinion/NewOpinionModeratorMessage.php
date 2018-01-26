@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Mailer\Message\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Mailer\Message\ModeratorMessage;
 
-final class NewOpinionModeratorMessage extends AdminMessage
+final class NewOpinionModeratorMessage extends ModeratorMessage
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName, string $opinionLink, string $authorLink): self
+    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName = null, string $opinionLink, string $authorLink): self
     {
-        $message = new self(
+        return new self(
             $moderatorEmail,
             $moderatorName,
             'notification-subject-new-proposal',
@@ -28,11 +28,6 @@ final class NewOpinionModeratorMessage extends AdminMessage
                 $opinionLink
             )
         );
-
-        $message->setSenderEmail('assistance@cap-collectif.com');
-        $message->setSenderName('Assistance');
-
-        return $message;
     }
 
     public function getFooterTemplate()

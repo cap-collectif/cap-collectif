@@ -3,10 +3,11 @@
 namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Mailer\Message\ModeratorMessage;
 
-final class NewArgumentModeratorMessage extends Message
+final class NewArgumentModeratorMessage extends ModeratorMessage
 {
-    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName, string $argumentLink, string $authorLink): self
+    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName = null, string $argumentLink, string $authorLink): self
     {
         return new self(
             $moderatorEmail,

@@ -11,10 +11,13 @@ abstract class Message
     protected $templateVars;
 
     protected $recipients;
-    protected $replyTo;
+
     protected $senderEmail;
     protected $senderName;
+
     protected $cc;
+    protected $replyTo;
+    protected $sitename;
 
     final public function __construct(
         string $recipientEmail,
@@ -23,7 +26,7 @@ abstract class Message
         array $subjectVars,
         string $template, // twig or trad key
         array $templateVars,
-        string $senderEmail,
+        string $senderEmail = null,
         string $senderName = null,
         string $replyTo = null
     ) {
@@ -36,16 +39,9 @@ abstract class Message
         $this->cc = [];
         $this->recipients = [];
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
 
-=======
-<<<<<<< HEAD
->>>>>>> Add structure for emailing
-=======
->>>>>>> Fix
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
 
@@ -64,7 +60,7 @@ abstract class Message
 
     final public function getSubjectVars(): array
     {
-        return $this->subjectVars;
+        return array_merge($this->subjectVars, ['%sitename%' => $this->getSitename()]);
     }
 
     final public function getSubject(): string
@@ -82,17 +78,9 @@ abstract class Message
         return $this->replyTo;
     }
 
-<<<<<<< HEAD
     final public function addRecipient(string $recipientEmail, string $recipientName = null, array $vars = [])//: void
     {
         $key = mb_strtolower($recipientEmail);
->>>>>>> Add structure for emailing
-=======
-    final public function addRecipient(string $recipientEmail, string $recipientName, array $vars = [])//: void
-    {
-        $key = mb_strtolower($recipientEmail);
-        // $vars = array_merge($this->vars, $vars);
->>>>>>> Fix
 
         $this->recipients[$key] = new MessageRecipient($recipientEmail, $recipientName, $vars);
     }
@@ -156,6 +144,18 @@ abstract class Message
         $this->replyTo = $replyTo;
 
         return $this;
+    }
+
+    public function setSitename(string $value): self
+    {
+        $this->sitename = $value;
+
+        return $this;
+    }
+
+    public function getSitename(): string
+    {
+        return $this->sitename ? self::escape($this->sitename) : 'Cap Collectif';
     }
 
     final protected static function escape(string $string): string

@@ -24,8 +24,8 @@ class OpinionNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(NewOpinionModeratorMessage::create(
           $opinion,
-          $this->siteParams->getValue('admin.mail.notifications.send_address'),
-          $this->siteParams->getValue('admin.mail.notifications.send_name'),
+          $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+          null,
           $this->consultationResolver->resolvePropositionUrl($opinion),
           $this->userResolver->resolveShowUrl($opinion->getAuthor())
       ));
@@ -35,8 +35,8 @@ class OpinionNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(UpdateOpinionModeratorMessage::create(
           $opinion,
-          $this->siteParams->getValue('admin.mail.notifications.send_address'),
-          $this->siteParams->getValue('admin.mail.notifications.send_name'),
+          $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+          null,
           $this->consultationResolver->resolvePropositionUrl($opinion),
           $this->userResolver->resolveShowUrl($opinion->getAuthor())
       ));

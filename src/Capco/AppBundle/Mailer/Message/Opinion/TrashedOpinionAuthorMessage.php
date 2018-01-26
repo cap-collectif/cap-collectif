@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Mailer\Message\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
-final class TrashedOpinionAuthorMessage extends Message
+final class TrashedOpinionAuthorMessage extends ExternalMessage
 {
     public static function create(Opinion $opinion, string $opinionLink): self
     {

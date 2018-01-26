@@ -31,6 +31,7 @@ services:
       - "@mailer"
       - "@templating"
       - "@translator"
+      - "@capco.site_parameter.resolver"
 
   responses.formatter:
     class: Capco\AppBundle\Helper\ResponsesFormatter

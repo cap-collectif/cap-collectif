@@ -11,17 +11,29 @@ class MailerService
     protected $mailer;
     protected $templating;
     protected $translator;
+    protected $siteParams;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, $siteParams)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->translator = $translator;
+        $this->siteParams = $siteParams;
     }
 
     public function sendMessage(Message $message): bool
     {
         $delivered = true;
+
+        if (!$message->getSenderEmail()) {
+            $senderEmail = $this->siteParams->getValue('admin.mail.notifications.send_address');
+            $senderName = $this->siteParams->getValue('admin.mail.notifications.send_name');
+            $message->setSenderEmail($senderEmail);
+            $message->setSenderName($senderName);
+        }
+
+        $message->setSitename($this->siteParams->getValue('global.site.fullname'));
+
         $subject = $this->translator->trans($message->getSubject(), $message->getSubjectVars(), 'CapcoAppBundle');
 
         $template = $message->getTemplate();
