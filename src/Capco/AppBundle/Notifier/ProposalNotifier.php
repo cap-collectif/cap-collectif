@@ -25,12 +25,14 @@ class ProposalNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(ProposalCreateMessage::create(
           $proposal,
-          $this->siteParams->getValue('admin.mail.notifications.send_address'),
-          $this->siteParams->getValue('admin.mail.notifications.send_name'),
+          $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+          null,
           $this->proposalResolver->resolveShowUrl($proposal),
           $this->proposalResolver->resolveAdminUrl($proposal),
           $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-          $this->siteParams->getValue('global.site.fullname')
+          $this->siteParams->getValue('global.site.fullname'),
+          $this->siteParams->getValue('admin.mail.notifications.send_address'),
+          $this->siteParams->getValue('admin.mail.notifications.send_name')
         ));
     }
 
@@ -38,12 +40,14 @@ class ProposalNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(ProposalDeleteMessage::create(
             $proposal,
-            $this->siteParams->getValue('admin.mail.notifications.send_address'),
-            $this->siteParams->getValue('admin.mail.notifications.send_name'),
+            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+            null,
             $this->proposalResolver->resolveShowUrl($proposal),
             $this->proposalResolver->resolveAdminUrl($proposal),
             $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-            $this->siteParams->getValue('global.site.fullname')
+            $this->siteParams->getValue('global.site.fullname'),
+            $this->siteParams->getValue('admin.mail.notifications.send_address'),
+            $this->siteParams->getValue('admin.mail.notifications.send_name')
         ));
     }
 
@@ -51,12 +55,14 @@ class ProposalNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(ProposalUpdateMessage::create(
             $proposal,
-            $this->siteParams->getValue('admin.mail.notifications.send_address'),
-            $this->siteParams->getValue('admin.mail.notifications.send_name'),
+            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+            null,
             $this->proposalResolver->resolveShowUrl($proposal),
             $this->proposalResolver->resolveAdminUrl($proposal),
             $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-            $this->siteParams->getValue('global.site.fullname')
+            $this->siteParams->getValue('global.site.fullname'),
+            $this->siteParams->getValue('admin.mail.notifications.send_address'),
+            $this->siteParams->getValue('admin.mail.notifications.send_name')
         ));
     }
 }
