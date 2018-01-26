@@ -12,8 +12,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CommentSubscriber implements EventSubscriberInterface
 {
-    public const NOTIFY_TO_ADMIN = 'admin';
-    public const NOTIFY_TO_AUTHOR = 'author';
+    const NOTIFY_TO_ADMIN = 'admin';
+    const NOTIFY_TO_AUTHOR = 'author';
 
     /**
      * @var Publisher
