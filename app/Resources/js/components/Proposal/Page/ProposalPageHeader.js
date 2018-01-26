@@ -29,7 +29,6 @@ export class ProposalPageHeader extends React.Component<Props> {
     const { proposal, oldProposal, className, referer } = this.props;
     const createdDate = (
       <FormattedDate
-        /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
         value={moment(proposal.createdAt)}
         day="numeric"
         month="long"
@@ -40,7 +39,6 @@ export class ProposalPageHeader extends React.Component<Props> {
     );
     const updatedDate = (
       <FormattedDate
-        /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
         value={moment(proposal.updatedAt)}
         day="numeric"
         month="long"
@@ -75,7 +73,6 @@ export class ProposalPageHeader extends React.Component<Props> {
                   createdDate,
                 }}
               />
-              {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
               {moment(proposal.updatedAt).diff(proposal.createdAt, 'seconds') > 1 && (
                 <span>
                   {' • '}
