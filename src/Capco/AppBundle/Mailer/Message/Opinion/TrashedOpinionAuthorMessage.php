@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
 

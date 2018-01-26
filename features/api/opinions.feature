@@ -129,7 +129,7 @@ Scenario: logged in API client wants to add an opinion
   When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
   Then the JSON response status code should be 201
   And I wait 3 seconds
-  And I open mail with subject 'notification-subject-new-proposal {"{projectName}":"Projet de loi Renseignement","{authorName}":"user"}' from "assistance@cap-collectif.com" to "dev@cap-collectif.com"
+  And I open mail with subject 'notification-subject-new-proposal {"{projectName}":"Projet de loi Renseignement","{authorName}":"user"}' from "assistance@cap-collectif.com" to "assistance@cap-collectif.com"
   Then I should see 'notification-content-new-proposal {"{title}":"Nouveau titre","{body}":"Mes modifications blablabla","{createdDate}":"25\/01\/2018","{createdTime}":"19:06:24","{authorName}":"user","{authorLink}":"http:\/\/capco.dev\/profile\/user","{opinionLink}":"http:\/\/capco.dev\/consultations\/projet-de-loi-renseignement\/consultation\/elaboration-de-la-loi\/opinions\/les-enjeux\/nouveau-titre"}' in mail
 
 @database
