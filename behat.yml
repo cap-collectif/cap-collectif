@@ -54,6 +54,7 @@ javascript:
             paths: [ '%paths.base%/features/front' ]
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\RabbitMQContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
             filters:
@@ -78,6 +79,7 @@ commands:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\CommandContext
+                - Capco\AppBundle\Behat\RabbitMQContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
                 - SamParkinson\Behat\Context\FileSystemContext
 
@@ -111,6 +113,7 @@ graphql:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\GraphQLContext
+                - Capco\AppBundle\Behat\RabbitMQContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
 
 back:

@@ -490,6 +490,17 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     &:first-child > h3, &:first-child > div > h3 {
         margin-top: 0;
     }
+
+    .share-button-dropdown {
+        @each $social-color in $social-colors {
+            $name: nth($social-color, 1);
+            $color: nth($social-color, 2);
+
+            .cap-#{$name}:before {
+                color: $color;
+            }
+        }
+    }
 }
 
 #proposal-form {

@@ -7,15 +7,7 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class ProposalCreateMessage extends AdminMessage
 {
-    public static function create(Proposal $proposal,
-                                  string $recipentEmail,
-                                  string $recipientName = null,
-                                  string $proposalUrl,
-                                  string $proposalAdminUrl,
-                                  string $authorUrl,
-                                  string $sitename,
-                                  string $senderEmail,
-                                  string $senderName = null): self
+    public static function create(Proposal $proposal, string $recipentEmail, string $recipientName, string $proposalUrl, string $proposalAdminUrl, string $authorUrl, string $sitename): self
     {
         $message = new self(
             $recipentEmail,
@@ -37,12 +29,11 @@ final class ProposalCreateMessage extends AdminMessage
                 $proposalUrl,
                 $proposalAdminUrl,
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
-            ),
-            $senderEmail,
-            $senderName
+            )
         );
 
         $message->setSitename($sitename);
+        $message->setSenderEmail('assistance@cap-collectif.com');
 
         return $message;
     }
