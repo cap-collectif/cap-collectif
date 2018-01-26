@@ -12,8 +12,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class RabbitMQContext implements KernelAwareContext
 {
-    public static $queues = ['comment_create', 'comment_update', 'comment_delete', 'proposal_create', 'proposal_update', 'proposal_delete'];
-
     /**
      * @var KernelInterface
      */

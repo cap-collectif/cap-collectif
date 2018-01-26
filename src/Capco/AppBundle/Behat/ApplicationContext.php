@@ -42,6 +42,7 @@ class ApplicationContext extends UserContext
     use AdminTrait;
     protected $dbContainer;
     protected $currentPage = 'home page';
+    protected static $queues = ['comment_create', 'comment_update', 'comment_delete', 'proposal_create', 'proposal_update', 'proposal_delete'];
 
     /**
      * @BeforeScenario
@@ -581,7 +582,7 @@ class ApplicationContext extends UserContext
         $container = $this->kernel->getContainer();
         try {
             $swarrot = $container->get('swarrot.factory.default');
-            foreach (RabbitMQContext::$queues as $queue) {
+            foreach (self::$queues as $queue) {
                 $q = $swarrot->getQueue($queue, 'rabbitmq');
                 $q->purge();
             }
