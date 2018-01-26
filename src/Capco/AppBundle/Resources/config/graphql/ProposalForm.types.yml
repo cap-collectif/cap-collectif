@@ -12,7 +12,6 @@ ProposalForm:
                 type: "String"
             summaryHelpText:
                 type: "String"
-                resolve: "@=resolver('proposal_form_summaryHelpText', [value])"
             illustrationHelpText:
                 type: "String"
             title:

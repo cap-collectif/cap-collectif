@@ -104,7 +104,7 @@ Scenario: GraphQL client wants to create a proposal
   }
   """
 
-@database
+@database @rabbitmq
 Scenario: Admin should be notified if GraphQL client create a proposal in a notifiable collect step
   Given features themes, districts are enabled
   And I am logged in to graphql as user
@@ -166,9 +166,8 @@ Scenario: Admin should be notified if GraphQL client create a proposal in a noti
     }
   }
   """
-  And I wait 3 seconds
-  And I open mail with subject 'notification.email.proposal.create.subject'
-  Then I should see 'notification.email.proposal.create.body' in mail
+  Then the queue associated to "proposal_create" producer has messages below:
+  | 0 | {"proposalId": "@string@"} |
 
 @security
 Scenario: GraphQL client wants to create a proposal out of the zone
