@@ -278,7 +278,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     z-index: 1020;
     overflow: hidden;
     height: $navbar-height;
-    border-color: $votes-widget-border;
+    border-color: $border-color;
     background-color: $page-bgc;
 
     .container {
@@ -292,10 +292,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .widget__counter {
-        color: $votes-widget-text;
+        color: $dark-gray;
         padding-top: 5px;
         padding-bottom: 5px;
-        border-right: 1px solid $votes-widget-border;
+        border-right: 1px solid $border-color;
     }
 
     .widget__counter__label {
@@ -523,7 +523,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
             padding: 5px 9px;
 
             &:hover {
-                background-color: $autocomplete-hover-bg;
+                background-color: $page-bgc;
             }
 
             strong {

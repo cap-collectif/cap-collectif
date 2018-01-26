@@ -13,7 +13,7 @@ Hack form button - radio check
 }
 
 .warning {
-  color: $warning-text!important;
+  color: $danger-color!important;
 }
 
 [data-toggle=buttons] > .btn > .checkbox,
@@ -35,7 +35,7 @@ Hack form button - radio check
     margin-bottom: 5px;
 
     .input-choices {
-        background-color: $warning-bg;
+        background-color: $white;
     }
 }
 
@@ -85,8 +85,8 @@ Hack form button - radio check
 .has-warning {
 
     .form-control {
-        border-color: $warning-text;
-        background-color: $warning-bg;
+        border-color: $danger-color;
+        background-color: $white;
     }
 
     .checkbox--other .form-control {
@@ -95,12 +95,12 @@ Hack form button - radio check
     }
 
     .cke_wysiwyg_frame {
-        background-color: $warning-bg;
+        background-color: $white;
     }
 
     .control-label,
     .error-block {
-        color: $warning-text;
+        color: $danger-color;
     }
 
     .help-block {
@@ -108,7 +108,7 @@ Hack form button - radio check
     }
 
     .editor {
-        border: 1px solid $warning-text;
+        border: 1px solid $danger-color;
     }
 
     input[type="checkbox"] + span,
@@ -117,16 +117,16 @@ Hack form button - radio check
     }
 
     *:not('.has-warning') input[type="checkbox"] + span {
-        color: $warning-text;
+        color: $danger-color;
     }
 
     .ranking__choice-box__placeholder {
-        background-color: $warning-bg;
-        color: $warning-text;
+        background-color: $white;
+        color: $danger-color;
     }
 
     .ranking__choice-box__choices {
-        border-color: $warning-text;
+        border-color: $danger-color;
     }
 
 }

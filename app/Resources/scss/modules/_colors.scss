@@ -45,7 +45,7 @@ $color-swatches:
         (jumbo $brand-color-1)
         (footer1 $brand-color-1)
         (footer2 $brand-color-2)
-        (event $custom-event)
+        (event $page-bgc)
         (formborder $custom-form-border)
         //Bootstrap colors
         (primary $brand-primary)
@@ -55,7 +55,7 @@ $color-swatches:
         (danger $brand-danger)
         //Other colors
         (whitec $white)
-        (gray-primary $gray-primary)
+        (gray-primary $border-color)
         (light-gray $page-bgc)
         (dark-blue $dark-blue)
         (light-blue $primary-color);
