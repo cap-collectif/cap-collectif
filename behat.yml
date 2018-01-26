@@ -78,7 +78,6 @@ commands:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext
                 - Capco\AppBundle\Behat\CommandContext
-                - Capco\AppBundle\Behat\RabbitMQContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
                 - SamParkinson\Behat\Context\FileSystemContext
 
