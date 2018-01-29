@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Opinion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -56,10 +58,17 @@ class ModerationController extends Controller
 
         $this->get('doctrine.orm.default_entity_manager')->flush();
 
-        // send emails
+        $trashedMessage = '';
+        if ($contribution instanceof Opinion) {
+            $this->get('opinion_notifier')->onTrash($contribution);
+            $trashedMessage = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
+        }
+        if ($contribution instanceof Argument) {
+            $this->get('opinion_notifier')->onTrash($contribution);
+            $trashedMessage = $this->get('translator')->trans('the-argument-has-been-successfully-moved-to-the-trash');
+        }
 
-        $message = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
-        $this->get('session')->getFlashBag()->add('success', $message);
+        $this->get('session')->getFlashBag()->add('success', $trashedMessage);
 
         return $this->redirect($redirectUrl);
     }

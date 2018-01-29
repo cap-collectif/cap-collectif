@@ -1,13 +1,23 @@
 @moderation
 Feature: Moderation
 
+@security
+Scenario: Hacker wants to moderate with a random token
+  Given I go to "/moderate/iamahackerlolilol/reason/reporting.status.sexual"
+  Then I should see 'error.404.title {"%code%":404}'
+
+@security
+Scenario: Moderator wants to moderate with a random reason
+  Given I go to "/moderate/opinion1ModerationToken/reason/jesuispasok"
+  Then I should see 'error.404.title {"%code%":404}'
+
 @database @javascript
 Scenario: Moderator wants to moderate and hide an opinion via email link
   Given I go to "/moderate/opinion1ModerationToken/reason/reporting.status.sexual"
   Then I should be redirected to "/projects/croissance-innovation-disruption/trashed"
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
   And 1 mail should be sent
-  And I open mail with subject 'notification-subject-proposal-in-the-trash {"%title%":"Opinion 1"}' from 'assistance@cap-collectif.com' to 'lbrunet@jolicode.com'
+  And I open mail with subject 'notification-subject-proposal-in-the-trash {"{title}":"Opinion 1"}' from 'assistance@cap-collectif.com' to 'lbrunet@jolicode.com'
   Then I should see "notification-content-proposal-in-the-trash {}" in mail
 
 @database @javascript
@@ -17,7 +27,7 @@ Scenario: Moderator wants to moderate an opinion via email link
   And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
   And I should see "in-the-trash"
   And 1 mail should be sent
-  And I open mail with subject 'notification-subject-proposal-in-the-trash {"%title%":"Opinion 1"}' from 'assistance@cap-collectif.com' to 'lbrunet@jolicode.com'
+  And I open mail with subject 'notification-subject-proposal-in-the-trash {"{title}":"Opinion 1"}' from 'assistance@cap-collectif.com' to 'lbrunet@jolicode.com'
   Then I should see "notification-content-proposal-in-the-trash {}" in mail
 
 @database @javascript

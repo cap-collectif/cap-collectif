@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\NewOpinionModeratorMessage;
+use Capco\AppBundle\Mailer\Message\TrashedOpinionAuthorMessage;
 use Capco\AppBundle\Mailer\Message\UpdateOpinionModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -53,5 +54,13 @@ class OpinionNotifier extends BaseNotifier
           $this->router
         ));
         }
+    }
+
+    public function onTrash(Opinion $opinion)
+    {
+        $this->mailer->sendMessage(TrashedOpinionAuthorMessage::create(
+            $opinion,
+            $this->consultationResolver->resolvePropositionUrl($opinion)
+        ));
     }
 }

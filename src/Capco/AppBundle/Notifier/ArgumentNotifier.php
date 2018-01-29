@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\NewArgumentModeratorMessage;
+use Capco\AppBundle\Mailer\Message\TrashedArgumentAuthorMessage;
 use Capco\AppBundle\Mailer\Message\UpdateArgumentModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -53,5 +54,13 @@ class ArgumentNotifier extends BaseNotifier
           $this->router
         ));
         }
+    }
+
+    public function onTrash(Argument $argument)
+    {
+        $this->mailer->sendMessage(TrashedArgumentAuthorMessage::create(
+            $argument,
+            $this->consultationResolver->resolveArgumentUrl($argument)
+        ));
     }
 }
