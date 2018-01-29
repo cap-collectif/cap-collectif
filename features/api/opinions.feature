@@ -128,9 +128,8 @@ Scenario: logged in API client wants to add an opinion
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
   Then the JSON response status code should be 201
-  And I wait 3 seconds
-  And I open mail with subject 'notification-subject-new-proposal {"{projectName}":"Projet de loi Renseignement","{authorName}":"user"}' from "assistance@cap-collectif.com" to "assistance@cap-collectif.com"
-  Then I should see 'notification-content-new-proposal {"{title}":"Nouveau titre","{body}":"Mes modifications blablabla","{createdDate}":"25\/01\/2018","{createdTime}":"19:06:24","{authorName}":"user","{authorLink}":"http:\/\/capco.dev\/profile\/user","{opinionLink}":"http:\/\/capco.dev\/consultations\/projet-de-loi-renseignement\/consultation\/elaboration-de-la-loi\/opinions\/les-enjeux\/nouveau-titre"}' in mail
+  Then the queue associated to "opinion_create" producer has messages below:
+  | 0 | {"opinionId": "@uuid@"} |
 
 @database
 Scenario: logged in API client wants to add an opinion with appendices
@@ -153,6 +152,8 @@ Scenario: logged in API client wants to add an opinion with appendices
   }
   """
   Then the JSON response status code should be 201
+  Then the queue associated to "opinion_create" producer has messages below:
+  | 0 | {"opinionId": "@uuid@"} |
 
 @security
 Scenario: logged in API client wants to add an opinion with an appendixType from a wrong opinionType
@@ -229,9 +230,8 @@ Scenario: Logged in API client wants to update his opinion
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
   Then the JSON response status code should be 200
-  And I wait 3 seconds
-  And I open mail with subject 'notification-subject-updated-proposal {"%authorName%":"user","%projectName%":"Projet de loi Renseignement"}' from "assistance@cap-collectif.com" to "dev@cap-collectif.com"
-  Then I should see "notification-content-updated-proposal {}" in mail
+  Then the queue associated to "opinion_update" producer has messages below:
+  | 0 | {"opinionId": "opinion3"} |
 
 ## Vote
 

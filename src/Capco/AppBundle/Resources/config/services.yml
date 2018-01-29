@@ -76,6 +76,16 @@ services:
       - "@capco.site_parameter.resolver"
       - "@capco.resolvers.users"
       - "@capco.resolver.consultations"
+      - "@router"
+
+  argument_notifier:
+    class: Capco\AppBundle\Notifier\ArgumentNotifier
+    arguments:
+      - "@mailer_service"
+      - "@capco.site_parameter.resolver"
+      - "@capco.resolvers.users"
+      - "@capco.resolver.consultations"
+      - "@router"
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager

@@ -9,7 +9,7 @@ final class UpdateArgumentModeratorMessage extends ModeratorMessage
 {
     public static function create(Argument $argument, string $moderatorEmail, string $moderatorName, string $argumentLink, string $authorLink): self
     {
-        return new self(
+        $message = new self(
             $moderatorEmail,
             $moderatorName,
             'notification-subject-modified-argument',
@@ -28,6 +28,8 @@ final class UpdateArgumentModeratorMessage extends ModeratorMessage
                 $argumentLink
             )
         );
+        $message->generateModerationLinks($argument, $router);
+        return $message;
     }
 
     private static function getMyTemplateVars(

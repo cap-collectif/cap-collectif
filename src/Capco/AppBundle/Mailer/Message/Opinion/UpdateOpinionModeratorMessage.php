@@ -4,12 +4,13 @@ namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Mailer\Message\ModeratorMessage;
+use Symfony\Component\Routing\RouterInterface;
 
 final class UpdateOpinionModeratorMessage extends ModeratorMessage
 {
-    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName = null, string $opinionLink, string $authorLink): self
+    public static function create(Opinion $opinion, string $moderatorEmail, string $moderatorName = null, string $opinionLink, string $authorLink, $router): self
     {
-        return new self(
+        $message = new self(
             $moderatorEmail,
             $moderatorName,
             'notification-subject-modified-proposal',
@@ -28,6 +29,8 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
                 $opinionLink
             )
         );
+        $message->generateModerationLinks($opinion, $router);
+        return $message;
     }
 
     private static function getMyTemplateVars(

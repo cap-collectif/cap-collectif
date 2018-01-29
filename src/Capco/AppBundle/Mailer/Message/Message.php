@@ -53,7 +53,7 @@ abstract class Message
 
     //:?array;
 
-    final public function getTemplateVars(): array
+    public function getTemplateVars(): array
     {
         return $this->templateVars;
     }

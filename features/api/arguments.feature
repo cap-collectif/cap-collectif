@@ -105,9 +105,8 @@ Scenario: Logged in API client wants to add an argument to an opinion
   Given I am logged in to api as user
   When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
   Then the JSON response status code should be 201
-  And I wait 3 seconds
-  And I open mail with subject 'notification-subject-new-argument {"%authorName%":"user","%projectName%":"Projet de loi Renseignement"}' from "assistance@cap-collectif.com" to "dev@cap-collectif.com"
-  Then I should see "notification-content-new-argument {}" in mail
+  Then the queue associated to "argument_create" producer has messages below:
+  | 0 | {"argumentId": @uuid@} |
 
 ## Create on version
 
@@ -121,6 +120,8 @@ Scenario: Logged in API client wants to add an argument to an opinion version
   Given I am logged in to api as user
   When I send a POST request to "/api/opinions/opinion57/versions/version1/arguments" with a valid argument json
   Then the JSON response status code should be 201
+  Then the queue associated to "argument_create" producer has messages below:
+  | 0 | {"argumentId": @uuid@} |
 
 ## Update on opinion
 
@@ -140,9 +141,8 @@ Scenario: Logged in API client wants to update his argument on an opinion
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
   Then the JSON response status code should be 200
-  And I wait 3 seconds
-  And I open mail with subject 'notification-subject-updated-argument {"%authorName%":"user","%projectName%":"Projet de loi Renseignement"}' from "assistance@cap-collectif.com" to "dev@cap-collectif.com"
-  Then I should see "notification-content-updated-argument {}" in mail
+  Then the queue associated to "argument_update" producer has messages below:
+  | 0 | {"argumentId": "argument1"} |
 
 ## Update on version
 
@@ -162,6 +162,8 @@ Scenario: Logged in API client wants to update his argument on a version
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json
   Then the JSON response status code should be 200
+  Then the queue associated to "argument_update" producer has messages below:
+  | 0 | {"argumentId": "argument204"} |
 
 ## Delete from opinion
 

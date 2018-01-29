@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\NewOpinionModeratorMessage;
-use Capco\AppBundle\Mailer\Message\UpdateOpinionModeratorMessage;
+use Capco\AppBundle\Mailer\Message\NewArgumentModeratorMessage;
+use Capco\AppBundle\Mailer\Message\UpdateArgumentModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 
-class OpinionNotifier extends BaseNotifier
+class ArgumentNotifier extends BaseNotifier
 {
     protected $consultationResolver;
     protected $router;
@@ -23,33 +23,33 @@ class OpinionNotifier extends BaseNotifier
         $this->router = $router;
     }
 
-    public function onCreation(Opinion $opinion)
+    public function onCreation(Argument $argument)
     {
-        $step = $opinion->getStep();
+        $step = $argument->getStep();
 
         if ($step->isModeratingOnCreate()) {
-            $this->mailer->sendMessage(NewOpinionModeratorMessage::create(
-            $opinion,
+            $this->mailer->sendMessage(NewArgumentModeratorMessage::create(
+            $argument,
             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
             null,
-            $this->consultationResolver->resolvePropositionUrl($opinion),
-            $this->userResolver->resolveShowUrl($opinion->getAuthor()),
+            $this->consultationResolver->resolveArgumentUrl($argument),
+            $this->userResolver->resolveShowUrl($argument->getAuthor()),
             $this->router
           ));
         }
     }
 
-    public function onUpdate(Opinion $opinion)
+    public function onUpdate(Argument $argument)
     {
-        $step = $opinion->getStep();
+        $step = $argument->getStep();
 
         if ($step->isModeratingOnUpdate()) {
-            $this->mailer->sendMessage(UpdateOpinionModeratorMessage::create(
-          $opinion,
+            $this->mailer->sendMessage(UpdateArgumentModeratorMessage::create(
+          $argument,
           $this->siteParams->getValue('admin.mail.notifications.receive_address'),
           null,
-          $this->consultationResolver->resolvePropositionUrl($opinion),
-          $this->userResolver->resolveShowUrl($opinion->getAuthor()),
+          $this->consultationResolver->resolveArgumentUrl($argument),
+          $this->userResolver->resolveShowUrl($argument->getAuthor()),
           $this->router
         ));
         }
