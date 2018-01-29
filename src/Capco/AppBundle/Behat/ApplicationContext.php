@@ -40,9 +40,9 @@ class ApplicationContext extends UserContext
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use AdminTrait;
+    protected $headers;
     protected $dbContainer;
     protected $currentPage = 'home page';
-    protected static $queues = ['comment_create', 'comment_update', 'comment_delete', 'proposal_create', 'proposal_update', 'proposal_delete'];
 
     /**
      * @BeforeScenario
@@ -59,10 +59,6 @@ class ApplicationContext extends UserContext
         ];
 
         $scenario = $scope->getScenario();
-        if ($scenario->hasTag('rabbitmq')) {
-            $jobs[] = new Process('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml');
-            $this->purgeRabbitMqQueues();
-        }
         if ($scenario->hasTag('elasticsearch')) {
             $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console fos:elastica:populate -e test -n');
         }
@@ -74,17 +70,8 @@ class ApplicationContext extends UserContext
             $jobs[] = new Process('php -d memory_limit=-1 bin/console capco:reinit --force --env=test');
         }
         foreach ($jobs as $job) {
-            echo 'Running ' . $job->getCommandLine();
             $job->mustRun();
         }
-    }
-
-    /**
-     * @AfterScenario
-     */
-    public function resetRabbitMq()
-    {
-        $this->purgeRabbitMqQueues();
     }
 
     /**
@@ -574,19 +561,6 @@ class ApplicationContext extends UserContext
     {
         if ($this->currentPage) {
             return $this->navigationContext->getPage($this->currentPage);
-        }
-    }
-
-    private function purgeRabbitMqQueues()
-    {
-        $container = $this->kernel->getContainer();
-        try {
-            $swarrot = $container->get('swarrot.factory.default');
-            foreach (self::$queues as $queue) {
-                $q = $swarrot->getQueue($queue, 'rabbitmq');
-                $q->purge();
-            }
-        } catch (\Exception $exception) {
         }
     }
 }

@@ -1,7 +1,7 @@
 @proposal @delete_proposal
 Feature: Delete proposal
 
-@database @rabbitmq
+@database
 Scenario: Admin should be notified if GraphQL client delete a proposal in a notifiable collect step
   Given features themes, districts are enabled
   And I am logged in to graphql as user
@@ -36,5 +36,6 @@ Scenario: Admin should be notified if GraphQL client delete a proposal in a noti
     }
   }
   """
-  Then the queue associated to "proposal_delete" producer has messages below:
-  | 0 | {"proposalId": "@string@"} |
+  And I wait 3 seconds
+  And I open mail with subject 'notification.email.proposal.delete.subject'
+  Then I should see 'notification.email.proposal.delete.body' in mail
