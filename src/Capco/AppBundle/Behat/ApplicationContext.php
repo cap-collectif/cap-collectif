@@ -41,8 +41,9 @@ class ApplicationContext extends UserContext
     use ThemeStepsTrait;
     use AdminTrait;
     protected $dbContainer;
+    protected $container;
     protected $currentPage = 'home page';
-    protected static $queues = ['comment_create', 'comment_update', 'comment_delete', 'proposal_create', 'proposal_update', 'proposal_delete'];
+    protected $queues = [];
 
     /**
      * @BeforeScenario
@@ -51,8 +52,10 @@ class ApplicationContext extends UserContext
      */
     public function reset($scope)
     {
-        // Let's stick with the old way for now
-        $jobs = [
+        if (!$this->container) {
+            $this->container = $this->kernel->getContainer();
+        }
+        $jobs = [ // Let's stick with the old way for now
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
             new Process('curl -sS -XBAN http://capco.test/'),
             new Process('redis-cli -h redis FLUSHALL'),
@@ -60,7 +63,11 @@ class ApplicationContext extends UserContext
 
         $scenario = $scope->getScenario();
         if ($scenario->hasTag('rabbitmq')) {
-            $jobs[] = new Process('php bin/rabbit vhost:mapping:create --password=guest --erase-vhost app/config/rabbitmq.yml');
+            $messagesTypes = $this->container->getParameter('swarrot.messages_types');
+            foreach ($messagesTypes as $messageType) {
+                $this->queues[] = $messageType['routing_key'];
+            }
+            $jobs[] = new Process('php bin/rabbit vhost:mapping:create --password=' . $this->container->getParameter('rabbitmq_password') . ' --erase-vhost app/config/rabbitmq.yml');
             $this->purgeRabbitMqQueues();
         }
         if ($scenario->hasTag('elasticsearch')) {
@@ -195,18 +202,15 @@ class ApplicationContext extends UserContext
             if (TestResult::PASSED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended successfully')
-                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !')
-                ;
+                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !');
             } elseif (TestResult::SKIPPED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
-                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.')
-                ;
+                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.');
             } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
-                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !')
-                ;
+                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !');
             }
             $notifier->send($notification);
         }
@@ -579,14 +583,14 @@ class ApplicationContext extends UserContext
 
     private function purgeRabbitMqQueues()
     {
-        $container = $this->kernel->getContainer();
         try {
-            $swarrot = $container->get('swarrot.factory.default');
-            foreach (self::$queues as $queue) {
+            $swarrot = $this->container->get('swarrot.factory.default');
+            foreach ($this->queues as $queue) {
                 $q = $swarrot->getQueue($queue, 'rabbitmq');
                 $q->purge();
             }
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
         }
     }
 }
