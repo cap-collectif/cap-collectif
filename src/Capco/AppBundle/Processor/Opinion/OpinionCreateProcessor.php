@@ -24,7 +24,7 @@ class OpinionCreateProcessor implements ProcessorInterface
         $id = $json['opinionId'];
         $opinion = $this->repository->find($id);
         if (!$opinion) {
-            throw new \Exception('Unable to find opinion with id : ' . $id);
+            throw new \RuntimeException('Unable to find opinion with id : ' . $id);
         }
 
         $this->notifier->onCreation($opinion);

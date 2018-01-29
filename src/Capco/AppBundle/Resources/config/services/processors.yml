@@ -8,6 +8,15 @@ services:
   opinion_delete.processor:
     class: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
     arguments: []
+  argument_create.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentCreateProcessor
+    arguments: ["@capco.argument.repository", "@argument_notifier"]
+  argument_update.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentUpdateProcessor
+    arguments: ["@capco.argument.repository", "@argument_notifier"]
+  argument_delete.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentDeleteProcessor
+    arguments: []
   proposal_create.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalCreateProcessor
     arguments: ["@capco.proposal.repository", "@proposal.notifier"]

@@ -4,10 +4,11 @@ namespace Capco\AppBundle\Mailer\Message;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Mailer\Message\ModeratorMessage;
+use Symfony\Component\Routing\RouterInterface;
 
 final class NewArgumentModeratorMessage extends ModeratorMessage
 {
-    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName = null, string $argumentLink, string $authorLink): self
+    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName = null, string $argumentLink, string $authorLink, RouterInterface $router): self
     {
         $message = new self(
             $moderatorEmail,

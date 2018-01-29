@@ -34,11 +34,11 @@ final class TrashedArgumentAuthorMessage extends ExternalMessage
         string $argumentLink
     ): array {
         return [
-            '%trashedReason%' => self::escape($trashedReason),
-            '%body%' => self::escape($body),
-            '%trashedDate%' => $trashedDate,
-            '%trashedTime%' => $trashedTime,
-            '%argumentLink%' => $argumentLink,
+            '{trashedReason}' => self::escape($trashedReason),
+            '{body}' => self::escape($body),
+            '{trashedDate}' => $trashedDate,
+            '{trashedTime}' => $trashedTime,
+            '{argumentLink}' => $argumentLink,
         ];
     }
 
@@ -46,7 +46,7 @@ final class TrashedArgumentAuthorMessage extends ExternalMessage
         string $title
     ): array {
         return [
-            '%proposalTitle%' => self::escape($title),
+            '{proposalTitle}' => self::escape($title),
         ];
     }
 }
