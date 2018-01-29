@@ -186,19 +186,18 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   And I wait 3 seconds
   Then I should not see mail with subject "notification.email.proposal.delete.subject"
 
-@javascript @database
+@javascript @database @rabbitmq
 Scenario: Author of a proposal should be notified when someone comment if he has turned on comments notifications
   Given I go to a proposal made by msantostefano@jolicode.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
-  And I wait 3 seconds
-  Then I should see mail to "msantostefano@jolicode.com"
+  Then the queue associated to "comment_create" should have 2 messages
 
-@javascript @database
+@javascript @database @rabbitmq
 Scenario: Author of a proposal should not be notified when someone comment if he has turned off comments notifications
   Given I go to a proposal made by user@test.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
-  And I wait 3 seconds
-  Then I should not see mail to "user@test.com"
+  Then the queue associated to "comment_create" producer has messages below:
+  | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
 
 @javascript
 Scenario: Non author of a proposal wants to delete it
