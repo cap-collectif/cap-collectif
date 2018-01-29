@@ -38,7 +38,7 @@ const StepText = React.createClass({
     return (
       <div className="step__intro">
         <div style={{ fontSize: 15 }}>
-          <div>
+          <div className="box">
             <div
               ref="content"
               className="step__intro__content"

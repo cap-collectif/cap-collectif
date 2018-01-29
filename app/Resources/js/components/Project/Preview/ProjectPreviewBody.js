@@ -4,7 +4,6 @@ import moment from 'moment';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import RemainingTime from './../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
@@ -112,6 +111,44 @@ export class ProjectPreviewBody extends React.Component<Props> {
     }
   };
 
+  getRemainingDays = (step: Object) => {
+    const endDate = moment(step.endAt);
+    const now = moment();
+
+    const daysLeft = endDate.diff(now, 'days');
+    const hoursLeft = endDate.diff(now, 'hours');
+    const minutesLeft = endDate.diff(now, 'minutes');
+
+    let timeLeft;
+
+    if (daysLeft === 0 && hoursLeft === 0) {
+      timeLeft = (
+        <span className="excerpt">
+          <span className="excerpt_dark">{minutesLeft}</span>{' '}
+          <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
+        </span>
+      );
+    } else if (daysLeft === 0) {
+      timeLeft = (
+        <span className="excerpt">
+          <span className="excerpt_dark">{hoursLeft}</span>{' '}
+          <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
+        </span>
+      );
+    } else {
+      timeLeft = (
+        <span className="excerpt">
+          <span className="excerpt_dark">{daysLeft}</span>{' '}
+          <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
+        </span>
+      );
+    }
+
+    if (step.status === 'open' && !step.timeless && this.actualStepIsParticipative()) {
+      return timeLeft;
+    }
+  };
+
   getTitleContent = () => {
     const { project } = this.props;
     const externalLink = project._links.external;
@@ -210,10 +247,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         )}
         <div className="project__preview__actions">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
-          {actualStep &&
-            actualStep.status === 'open' &&
-            !actualStep.timeless &&
-            this.actualStepIsParticipative() && <RemainingTime endAt={actualStep.endAt} />}
+          {actualStep && this.getRemainingDays(actualStep)}
         </div>
       </div>
     );

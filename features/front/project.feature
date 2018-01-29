@@ -78,7 +78,6 @@ Scenario: Project can be filtered by title
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
 
-@javascript
 Scenario: Presentation step should display correct number of element
   Given feature "calendar" is enabled
   And feature "blog" is enabled
@@ -89,24 +88,20 @@ Scenario: Presentation step should display correct number of element
   Then I should see 2 ".media--news" elements
   And I should see 2 ".event" elements
 
-@javascript
 Scenario: Events menu for project should display correct number of events
   Given feature "calendar" is enabled
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
-  And I follow "project-events"
+  And I follow "events_link"
   And I should see 3 ".event" elements
 
-@javascript
 Scenario: Posts menu for project should display correct number of posts
   Given feature "blog" is enabled
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I follow "Présentation"
-  And I follow "project-posts"
+  And I follow "posts_link"
   And I should see 5 ".media--news" elements
 
 Scenario: Project header should display correct number of votes
@@ -151,7 +146,7 @@ Scenario: Can not access trash if feature is disabled
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should not see "project.show.trashed.short_name" in the "#main" element
+  Then I should not see "project.show.meta.info.trash" in the "#main" element
 
 @javascript
 Scenario: Can not access trash if not logged in
@@ -159,7 +154,7 @@ Scenario: Can not access trash if not logged in
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  And I should see "project.show.trashed.short_name" in the "#main" element
+  And I should see "project.show.meta.info.trash" in the "#main" element
   When I click the "#trash-link" element
   And I wait 1 seconds
   Then I should see a "#login-popover" element
@@ -171,7 +166,6 @@ Scenario: Project trash display correct numbers of elements
   And I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  When I should see "project.show.trashed.short_name" in the "#main" element
-  When I click the "#trash-link" element
+  When I follow "project.show.meta.info.trash"
   Then I should see 100 ".opinion__list .opinion" elements
-  And I should see "100 project.show.meta.total_count" in the "h3" element
+  And I should see "100" in the "span.badge" element
