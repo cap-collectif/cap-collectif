@@ -1,7 +1,7 @@
 @proposal @update_proposal
 Feature: Update a proposal
 
-@database
+@database @rabbitmq
 Scenario: Admin should be notified if GraphQL user modify his proposal
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -59,9 +59,8 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
     }
   }
   """
-  And I wait 3 seconds
-  And I open mail with subject "notification.email.proposal.edit.subject"
-  And I should see mail containing "notification.email.proposal.edit.body"
+  Then the queue associated to "proposal_update" producer has messages below:
+  | 0 | {"proposalId": "proposal2"} |
 
 @database
 Scenario: GraphQL client wants to edit his proposal
