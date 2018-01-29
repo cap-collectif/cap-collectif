@@ -32,7 +32,7 @@ Scenario: GraphQL client wants to add a draft proposal
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @string@,
+          "id": @uuid@,
           "title": "Acheter un sauna pour Capco",
           "publicationStatus": "DRAFT"
         }
@@ -95,7 +95,7 @@ Scenario: GraphQL client wants to create a proposal
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @string@,
+          "id": @uuid@,
           "title": "Acheter un sauna pour Capco",
           "publicationStatus": "PUBLISHED"
         }
@@ -104,7 +104,7 @@ Scenario: GraphQL client wants to create a proposal
   }
   """
 
-@database
+@database @rabbitmq
 Scenario: Admin should be notified if GraphQL client create a proposal in a notifiable collect step
   Given features themes, districts are enabled
   And I am logged in to graphql as user
@@ -158,7 +158,7 @@ Scenario: Admin should be notified if GraphQL client create a proposal in a noti
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @string@,
+          "id": @uuid@,
           "title": "Les DOP à la madeleine sont-ils nocifs ?",
           "publicationStatus": "PUBLISHED"
         }
@@ -166,9 +166,8 @@ Scenario: Admin should be notified if GraphQL client create a proposal in a noti
     }
   }
   """
-  And I wait 3 seconds
-  And I open mail with subject 'notification.email.proposal.create.subject'
-  Then I should see 'notification.email.proposal.create.body' in mail
+  Then the queue associated to "proposal_create" producer has messages below:
+  | 0 | {"proposalId": "@uuid@"} |
 
 @security
 Scenario: GraphQL client wants to create a proposal out of the zone
