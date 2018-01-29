@@ -18,11 +18,13 @@ abstract class Message
 
     final public function __construct(
         string $recipientEmail,
-        string $recipientName,
+        string $recipientName = null,
         string $subject,
         array $subjectVars,
         string $template, // twig or trad key
-        array $templateVars = [],
+        array $templateVars,
+        string $senderEmail,
+        string $senderName = null,
         string $replyTo = null
     ) {
         $this->subject = $subject;
@@ -33,6 +35,9 @@ abstract class Message
         $this->replyTo = $replyTo;
         $this->cc = [];
         $this->recipients = [];
+
+        $this->senderEmail = $senderEmail;
+        $this->senderName = $senderName;
 
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
@@ -70,10 +75,9 @@ abstract class Message
         return $this->replyTo;
     }
 
-    final public function addRecipient(string $recipientEmail, string $recipientName, array $vars = [])//: void
+    final public function addRecipient(string $recipientEmail, string $recipientName = null, array $vars = [])//: void
     {
         $key = mb_strtolower($recipientEmail);
-        // $vars = array_merge($this->vars, $vars);
 
         $this->recipients[$key] = new MessageRecipient($recipientEmail, $recipientName, $vars);
     }
