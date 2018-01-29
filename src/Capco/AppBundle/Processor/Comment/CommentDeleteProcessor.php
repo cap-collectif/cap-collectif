@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Processor\Comment;
 
+use Capco\AppBundle\EventListener\CommentSubscriber;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;
 use Swarrot\Broker\Message;
@@ -21,7 +22,14 @@ class CommentDeleteProcessor implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $json = json_decode($message->getBody(), true);
-        $this->notifier->notifyProposalComment($json, 'delete');
+
+        if ($json['notifying']) {
+            switch ($json['notifyTo']) {
+                case CommentSubscriber::NOTIFY_TO_ADMIN:
+                    $this->notifier->notifyProposalComment($json, 'delete');
+                    break;
+            }
+        }
 
         return true;
     }

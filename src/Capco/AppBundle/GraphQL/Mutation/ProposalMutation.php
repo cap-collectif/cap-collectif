@@ -40,16 +40,11 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
 
-        if (
-            $proposalForm->getNotificationsConfiguration()
-            && $proposalForm->getNotificationsConfiguration()->isOnDelete()
-        ) {
-            $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
-              json_encode([
+        $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
+            json_encode([
                 'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
+            ])
+        ));
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.
@@ -365,13 +360,11 @@ class ProposalMutation implements ContainerAwareInterface
         $index = $this->container->get('fos_elastica.index');
         $index->refresh();
 
-        if ($proposalForm->isNotifyingOnCreate()) {
-            $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
-              json_encode([
+        $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
+            json_encode([
                 'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
+            ])
+        ));
 
         return ['proposal' => $proposal];
     }
@@ -415,9 +408,8 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $proposal
-          ->setDraft($draft)
-          ->setEnabled($draft ? false : true)
-        ;
+            ->setDraft($draft)
+            ->setEnabled($draft ? false : true);
 
         $values = $this->fixValues($values, $proposalForm);
 
@@ -446,16 +438,11 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
-        if (
-            $proposalForm->getNotificationsConfiguration()
-            && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
-        ) {
-            $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
-              json_encode([
+        $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
+            json_encode([
                 'proposalId' => $proposal->getId(),
-              ])
-            ));
-        }
+            ])
+        ));
 
         return ['proposal' => $proposal];
     }

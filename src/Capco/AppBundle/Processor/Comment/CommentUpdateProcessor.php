@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Processor\Comment;
 
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;
 use Swarrot\Broker\Message;
@@ -22,7 +23,10 @@ class CommentUpdateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $comment = $this->commentRepository->find($json['commentId']);
-        $this->notifier->notifyProposalComment($comment, 'update');
+
+        if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
+            $this->notifier->notifyProposalComment($comment, 'update');
+        }
 
         return true;
     }

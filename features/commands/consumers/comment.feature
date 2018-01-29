@@ -6,8 +6,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_crea
   Given I publish in "comment_create" with message below:
   """
   {
-    "commentId": 154,
-    "notifyTo": "admin"
+    "commentId": 154
   }
   """
   And I consume "comment_create"
@@ -19,8 +18,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_upda
   Given I publish in "comment_update" with message below:
   """
   {
-    "commentId": 154,
-    "notifyTo": "admin"
+    "commentId": 154
   }
   """
   And I consume "comment_update"
@@ -33,6 +31,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_dele
   """
   {
     "username": "Suzanne Favot",
+    "notifying": true,
     "notifyTo": "admin",
     "userSlug": "sfavot",
     "body": "Expedita in et voluptatum repudiandae consequatur atque est. Deleniti delectus dicta omnis quis voluptate. Maiores qui nihil sit laboriosam accusantium.",

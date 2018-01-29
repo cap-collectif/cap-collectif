@@ -2,7 +2,8 @@
 
 namespace Capco\AppBundle\Processor\Comment;
 
-use Capco\AppBundle\EventListener\CommentSubscriber;
+use Capco\AppBundle\Entity\IdeaComment;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;
 use Swarrot\Broker\Message;
@@ -23,13 +24,15 @@ class CommentCreateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $comment = $this->commentRepository->find($json['commentId']);
-        switch ($json['notifyTo']) {
-            case CommentSubscriber::NOTIFY_TO_ADMIN:
-                $this->notifier->notifyProposalComment($comment, 'create');
-                break;
-            case CommentSubscriber::NOTIFY_TO_AUTHOR:
-                $this->notifier->notifyUserProposalComment($comment);
-                break;
+
+        if ($comment instanceof ProposalComment && $comment->getProposal()->getProposalForm()->isNotifyingCommentOnCreate()) {
+            $this->notifier->notifyProposalComment($comment, 'create');
+        }
+
+        if (($comment instanceof ProposalComment || $comment instanceof IdeaComment) &&
+            $comment->getRelatedObject()->getAuthor()->getNotificationsConfiguration()->isOnProposalCommentMail() &&
+            $comment->getRelatedObject()->getAuthor() !== $comment->getAuthor()) {
+            $this->notifier->notifyUserProposalComment($comment);
         }
 
         return true;
