@@ -136,7 +136,7 @@ Scenario: Logged in API client wants to update an argument on an opinion but is 
   When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
   Then the JSON response status code should be 403
 
-@database
+@database @rabbitmq
 Scenario: Logged in API client wants to update his argument on an opinion
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
@@ -157,7 +157,7 @@ Scenario: Logged in API client wants to update an argument on a version but is n
   When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json
   Then the JSON response status code should be 403
 
-@database
+@database @rabbitmq
 Scenario: Logged in API client wants to update his argument on a version
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json

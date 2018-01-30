@@ -123,7 +123,7 @@ Scenario: logged in API client wants to add an opinion to a not enabled opinionT
   }
   """
 
-@database
+@database @rabbitmq
 Scenario: logged in API client wants to add an opinion
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
@@ -131,7 +131,7 @@ Scenario: logged in API client wants to add an opinion
   Then the queue associated to "opinion_create" producer has messages below:
   | 0 | {"opinionId": "@uuid@"} |
 
-@database
+@database @rabbitmq
 Scenario: logged in API client wants to add an opinion with appendices
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType5/opinions" with json:
@@ -225,7 +225,7 @@ Scenario: Logged in API client wants to update an opinion but is not the author
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
   Then the JSON response status code should be 403
 
-@database
+@database @rabbitmq
 Scenario: Logged in API client wants to update his opinion
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
