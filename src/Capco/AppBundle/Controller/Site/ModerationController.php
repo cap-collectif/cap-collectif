@@ -64,7 +64,7 @@ class ModerationController extends Controller
             $trashedMessage = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
         }
         if ($contribution instanceof Argument) {
-            $this->get('opinion_notifier')->onTrash($contribution);
+            $this->get('argument_notifier')->onTrash($contribution);
             $trashedMessage = $this->get('translator')->trans('the-argument-has-been-successfully-moved-to-the-trash');
         }
 

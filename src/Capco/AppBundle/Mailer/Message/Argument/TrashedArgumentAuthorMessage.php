@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer\Message\Argument;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
 final class TrashedArgumentAuthorMessage extends ExternalMessage
 {
