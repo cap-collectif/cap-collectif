@@ -72,4 +72,5 @@ class ModerationController extends Controller
 
         return $this->redirect($redirectUrl);
     }
+    
 }
