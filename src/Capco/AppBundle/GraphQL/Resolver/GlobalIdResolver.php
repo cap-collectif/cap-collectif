@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Model\ModerableInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
 {
@@ -14,16 +15,14 @@ class GlobalIdResolver
         $this->container = $container;
     }
 
-    public function resolve(string $uuid)
+    public function resolve(string $uuid)// : Node
     {
         $node = null;
-
         $node = $this->container->get('capco.opinion.repository')->find($uuid);
 
         if (!$node) {
             $node = $this->container->get('capco.argument.repository')->find($uuid);
         }
-        // $this->container->get('capco.group.repository')->find($groupId);
 
         if (!$node) {
             throw new AccessDeniedException('Not found');
@@ -32,7 +31,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    public function resolveByModerationToken(string $token)// : ?ModerableInterface
+    public function resolveByModerationToken(string $token): ModerableInterface
     {
         $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
 
@@ -42,6 +41,11 @@ class GlobalIdResolver
 
         if (!$node) {
             $node = $this->container->get('capco.argument.repository')->findOneByModerationToken($token);
+        }
+
+        if (!$node) {
+            $this->container->get('logger')->warn('Unknown moderation_token: ' . $token);
+            throw new NotFoundHttpException();
         }
 
         return $node;

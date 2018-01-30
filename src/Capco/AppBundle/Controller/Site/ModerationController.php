@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,11 +17,6 @@ class ModerationController extends Controller
     public function moderateAction(string $token, string $reason)
     {
         $contribution = $this->get('global_id_resolver')->resolveByModerationToken($token);
-
-        if (!$contribution) {
-            $this->get('logger')->warn('Unknown moderation_token: ' . $token);
-            throw new NotFoundHttpException();
-        }
 
         $hiddenReasons = [
           'reporting.status.sexual',
@@ -63,6 +59,7 @@ class ModerationController extends Controller
             $this->get('opinion_notifier')->onTrash($contribution);
             $trashedMessage = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
         }
+
         if ($contribution instanceof Argument) {
             $this->get('swarrot.publisher')->publish('argument.trash', new Message(
                 json_encode([
@@ -70,6 +67,10 @@ class ModerationController extends Controller
                   ])
             ));
             $trashedMessage = $this->get('translator')->trans('the-argument-has-been-successfully-moved-to-the-trash');
+        }
+
+        if ($contribution instanceof OpinionVersion) {
+            $trashedMessage = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
         }
 
         $this->get('session')->getFlashBag()->add('success', $trashedMessage);

@@ -36,13 +36,13 @@ Scenario: Moderator wants to moderate an opinion via email link
 Scenario: Moderator wants to moderate and hide a version via email link
   Given I go to "/moderate/version1ModerationToken/reason/reporting.status.sexual"
   Then I should be redirected to "/projects/projet-de-loi-renseignement/trashed"
-  #And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
+  And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
 
 @database @javascript
 Scenario: Moderator wants to moderate a version via email link
   Given I go to "/moderate/version1ModerationToken/reason/moderation-guideline-violation"
   Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-1"
-  #And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
+  And I should see "the-proposal-has-been-successfully-moved-to-the-trash"
 
 @database @javascript
 Scenario: Moderator wants to moderate and hide an argument via email link
