@@ -60,7 +60,7 @@ abstract class Message
 
     final public function getSubjectVars(): array
     {
-        return array_merge($this->subjectVars, ['%sitename%' => $this->getSitename()]);
+        return $this->subjectVars;
     }
 
     final public function getSubject(): string

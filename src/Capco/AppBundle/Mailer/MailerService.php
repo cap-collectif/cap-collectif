@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -13,7 +14,7 @@ class MailerService
     protected $translator;
     protected $siteParams;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, $siteParams)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $siteParams)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
