@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\NewArgumentModeratorMessage;
-use Capco\AppBundle\Mailer\Message\TrashedArgumentAuthorMessage;
-use Capco\AppBundle\Mailer\Message\UpdateArgumentModeratorMessage;
+use Capco\AppBundle\Mailer\Message\Argument\NewArgumentModeratorMessage;
+use Capco\AppBundle\Mailer\Message\Argument\TrashedArgumentAuthorMessage;
+use Capco\AppBundle\Mailer\Message\Argument\UpdateArgumentModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 

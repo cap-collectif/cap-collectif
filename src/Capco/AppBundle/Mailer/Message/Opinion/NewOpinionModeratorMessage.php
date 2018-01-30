@@ -35,16 +35,6 @@ final class NewOpinionModeratorMessage extends ModeratorMessage
         return $message;
     }
 
-    public function getFooterTemplate()
-    {
-        return null;
-    }
-
-    public function getFooterVars()
-    {
-        return [];
-    }
-
     private static function getMyTemplateVars(
         string $title,
         string $body,

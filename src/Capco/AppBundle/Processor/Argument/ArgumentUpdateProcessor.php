@@ -25,7 +25,7 @@ class ArgumentUpdateProcessor implements ProcessorInterface
         if (!$argument) {
             throw new \RuntimeException('Unable to find argument with id : ' . $id);
         }
-        $this->argumentNotifier->onArgumentUpdate($argument);
+        $this->argumentNotifier->onUpdate($argument);
 
         return true;
     }

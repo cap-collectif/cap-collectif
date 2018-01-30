@@ -25,7 +25,7 @@ class OpinionUpdateProcessor implements ProcessorInterface
         if (!$opinion) {
             throw new \RuntimeException('Unable to find opinion with id : ' . $id);
         }
-        $this->opinionNotifier->onOpinionUpdate($opinion);
+        $this->opinionNotifier->onUpdate($opinion);
 
         return true;
     }

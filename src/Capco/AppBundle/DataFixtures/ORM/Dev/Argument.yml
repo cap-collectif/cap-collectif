@@ -98,8 +98,30 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
 
+  argument206:
+    id: 'argument206'
+    Opinion: '@opinion57'
+    type: 1
+    Author: '@user1'
+    body: 'Que la force soit avec toi.'
+    isEnabled: true
+    isTrashed: false
+    createdAt: <(new \DateTime('2016-03-01'))>
+    moderationToken: 'argument206ModerationToken'
 
-  argument{206..210}:
+  argument207:
+    id: 'argument207'
+    Opinion: '@opinion57'
+    type: 1
+    Author: '@user1'
+    body: 'Que la force soit avec toi et avec Yoda.'
+    isEnabled: true
+    isTrashed: false
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2017-03-01'))>
+    moderationToken: 'argument207ModerationToken'
+
+  argument{208..210}:
     id: 'argument<current()>'
     Opinion: '@opinion57'
     type: 1

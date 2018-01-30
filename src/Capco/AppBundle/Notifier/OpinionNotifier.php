@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\NewOpinionModeratorMessage;
-use Capco\AppBundle\Mailer\Message\TrashedOpinionAuthorMessage;
-use Capco\AppBundle\Mailer\Message\UpdateOpinionModeratorMessage;
+use Capco\AppBundle\Mailer\Message\Opinion\NewOpinionModeratorMessage;
+use Capco\AppBundle\Mailer\Message\Opinion\TrashedOpinionAuthorMessage;
+use Capco\AppBundle\Mailer\Message\Opinion\UpdateOpinionModeratorMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\RouterInterface;
 

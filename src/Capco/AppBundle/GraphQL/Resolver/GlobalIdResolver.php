@@ -32,7 +32,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    public function resolveByModerationToken(string $token): ModerableInterface
+    public function resolveByModerationToken(string $token)// : ?ModerableInterface
     {
         $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
 

@@ -6,9 +6,7 @@ Capco\AppBundle\Entity\Opinion:
         id: 'opinion1'
         step: '@cstep1'
         title: Opinion 1
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+        body: On va bientôt me mettre à la corbeille
         isEnabled: true
         isTrashed: false
         Author: '@user1'
@@ -195,9 +193,9 @@ Capco\AppBundle\Entity\Opinion:
         id: 'opinion60'
         step: '@cstep5'
         title: Article
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+        createdAt: <(new \DateTime('2016-03-01'))>
+        updatedAt: <(new \DateTime('2017-03-01'))>
+        body: Super opinion de malade
         isEnabled: true
         isTrashed: false
         Author: '@user2'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\Argument;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Mailer\Message\ModeratorMessage;
@@ -16,11 +16,11 @@ final class NewArgumentModeratorMessage extends ModeratorMessage
             'notification-subject-new-argument',
             static::getMySubjectVars(
                 $argument->getAuthor()->getUsername(),
-                $argument->getProject()->getTitle(),
+                $argument->getRelated()->getTitle()
             ),
             'notification-content-new-argument',
             static::getMyTemplateVars(
-                $argument->getTitle(),
+                $argument->getTypeAsString(),
                 $argument->getBody(),
                 $argument->getCreatedAt()->format('d/m/Y'),
                 $argument->getCreatedAt()->format('H:i:s'),
@@ -30,11 +30,12 @@ final class NewArgumentModeratorMessage extends ModeratorMessage
             )
         );
         $message->generateModerationLinks($argument, $router);
+
         return $message;
     }
 
     private static function getMyTemplateVars(
-        string $title,
+        string $type,
         string $body,
         string $createdDate,
         string $createdTime,
@@ -43,7 +44,7 @@ final class NewArgumentModeratorMessage extends ModeratorMessage
         string $argumentLink
     ): array {
         return [
-            '{title}' => self::escape($title),
+            '{type}' => $type,
             '{body}' => self::escape($body),
             '{createdDate}' => $createdDate,
             '{createdTime}' => $createdTime,
@@ -55,7 +56,7 @@ final class NewArgumentModeratorMessage extends ModeratorMessage
 
     private static function getMySubjectVars(
         string $authorName,
-        string $projectName,
+        string $projectName
     ): array {
         return [
             '{projectName}' => self::escape($projectName),

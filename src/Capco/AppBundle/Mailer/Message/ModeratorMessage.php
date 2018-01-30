@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
+use Capco\AppBundle\Model\ModerableInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ModeratorMessage extends AdminMessage

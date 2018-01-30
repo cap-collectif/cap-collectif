@@ -1,10 +1,9 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Mailer\Message\ModeratorMessage;
-use Symfony\Component\Routing\RouterInterface;
 
 final class UpdateOpinionModeratorMessage extends ModeratorMessage
 {
@@ -16,7 +15,7 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
             'notification-subject-modified-proposal',
             static::getMySubjectVars(
                 $opinion->getAuthor()->getUsername(),
-                $opinion->getProject()->getTitle(),
+                $opinion->getProject()->getTitle()
             ),
             'notification-content-modified-proposal',
             static::getMyTemplateVars(
@@ -30,6 +29,7 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
             )
         );
         $message->generateModerationLinks($opinion, $router);
+
         return $message;
     }
 
@@ -55,7 +55,7 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
 
     private static function getMySubjectVars(
         string $authorName,
-        string $projectName,
+        string $projectName
     ): array {
         return [
             '{projectName}' => self::escape($projectName),

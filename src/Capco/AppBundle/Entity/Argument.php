@@ -214,6 +214,16 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->type;
     }
 
+    public function getTypeAsString(): string
+    {
+        switch ($this->type) {
+          case 0:
+            return 'AGAINST';
+          case 1:
+            return 'FOR';
+        }
+    }
+
     /**
      * @param int $type
      */
@@ -317,6 +327,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         $this->Author = $Author;
 
         return $this;
+    }
+
+    public function getStep()
+    {
+        return $this->getRelated()->getStep();
     }
 
     /**

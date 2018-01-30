@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\Argument;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Mailer\Message\ModeratorMessage;
@@ -8,7 +8,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UpdateArgumentModeratorMessage extends ModeratorMessage
 {
-    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName, string $argumentLink, string $authorLink, RouterInterface $router): self
+    public static function create(Argument $argument, string $moderatorEmail, string $moderatorName = null, string $argumentLink, string $authorLink, RouterInterface $router): self
     {
         $message = new self(
             $moderatorEmail,
@@ -16,11 +16,11 @@ final class UpdateArgumentModeratorMessage extends ModeratorMessage
             'notification-subject-modified-argument',
             static::getMySubjectVars(
                 $argument->getAuthor()->getUsername(),
-                $argument->getRelated()->getTitle(),
+                $argument->getRelated()->getTitle()
             ),
             'notification-content-modified-argument',
             static::getMyTemplateVars(
-                $argument->getType(),
+                $argument->getTypeAsString(),
                 $argument->getBody(),
                 $argument->getUpdatedAt()->format('d/m/Y'),
                 $argument->getUpdatedAt()->format('H:i:s'),
@@ -30,11 +30,12 @@ final class UpdateArgumentModeratorMessage extends ModeratorMessage
             )
         );
         $message->generateModerationLinks($argument, $router);
+
         return $message;
     }
 
     private static function getMyTemplateVars(
-        int $type,
+        string $type,
         string $body,
         string $updatedDate,
         string $updatedTime,
@@ -55,7 +56,7 @@ final class UpdateArgumentModeratorMessage extends ModeratorMessage
 
     private static function getMySubjectVars(
         string $authorName,
-        string $projectName,
+        string $projectName
     ): array {
         return [
             '{projectName}' => self::escape($projectName),
