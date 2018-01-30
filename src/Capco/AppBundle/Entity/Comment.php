@@ -157,6 +157,10 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
 
     public function isIndexable()
     {
+        if ($this->getRelatedObject() instanceof Proposal) {
+            return $this->getIsEnabled() && !$this->getRelatedObject()->isDeleted();
+        }
+
         return $this->getIsEnabled();
     }
 
@@ -425,7 +429,7 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
      */
     public function userHasReport(User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($this->Reports as $report) {
                 if ($report->getReporter() === $user) {
                     return true;

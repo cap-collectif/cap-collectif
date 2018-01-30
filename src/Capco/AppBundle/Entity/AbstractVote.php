@@ -55,6 +55,10 @@ abstract class AbstractVote implements Contribution, HasAuthorInterface
 
     public function isIndexable()
     {
+        if ($this->getRelatedEntity() instanceof Proposal) {
+            return !$this->isExpired() && !$this->getRelatedEntity()->isDeleted();
+        }
+
         return !$this->isExpired();
     }
 
