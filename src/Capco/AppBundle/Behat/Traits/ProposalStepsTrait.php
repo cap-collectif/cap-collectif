@@ -189,7 +189,7 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalMadeByUser()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
+        $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
@@ -1194,6 +1194,26 @@ trait ProposalStepsTrait
             new FilesystemIterator('/var/www/web/media/sources/0001/01', FilesystemIterator::SKIP_DOTS)
         );
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
+    }
+
+    /**
+     * @When I click the proposal follow button
+     */
+    public function iClickTheProposalFollowButton()
+    {
+        $page = $this->getCurrentPage();
+        $page->clickFollowButton();
+        $this->iWait(2);
+    }
+
+    /**
+     * @When I click the proposal unfollow button
+     */
+    public function iClickTheProposalUnfollowButton()
+    {
+        $page = $this->getCurrentPage();
+        $page->clickFollowButton(false);
+        $this->iWait(2);
     }
 
     protected function openCollectStepIsOpen()
