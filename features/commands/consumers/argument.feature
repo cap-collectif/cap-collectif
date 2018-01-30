@@ -40,3 +40,15 @@ Scenario: Moderator should not receive an updated argument email if active moder
   """
   When I consume "argument_update"
   Then 0 mail should be sent
+
+@rabbitmq
+Scenario: Author should receive a trashed argument email
+  Given I publish in "argument_trash" with message below:
+  """
+  { "argumentId": "argument208" }
+  """
+  When I consume "argument_trash"
+  Then 1 mail should be sent
+  And I open mail with subject 'notification-subject-argument-trashed {"{proposalTitle}":"Article 1","%sitename%":"Cap-Collectif"}' from "assistance@cap-collectif.com" to "lbrunet@jolicode.com"
+  And I should see 'notification-argument-trashed {"{trashedReason}":"moderation-guideline-violation","{body}":"Le spam c cool","{trashedDate}":"01\/03\/2017","{trashedTime}":"00:00:00","{argumentLink}":"http:\/\/capco.dev\/consultations\/projet-de-loi-renseignement\/consultation\/elaboration-de-la-loi\/opinions\/titre-ier-la-circulation-des-donnees-et-du-savoir\/chapitre-ier-economie-de-la-donnee\/section-1-ouverture-des-donnees-publiques\/article-1#arg-argument208"}' in mail
+  And I should see 'notification.email.external_footer {"%to%":"lbrunet@jolicode.com","%sitename%":"Cap-Collectif"}' in mail
