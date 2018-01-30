@@ -202,6 +202,7 @@ Capco\AppBundle\Entity\Opinion:
         OpinionType: '@opinionType6'
         position: 1
         answer: '@answer1'
+        moderationToken: "opinion60ModerationToken"
 
     opinion61:
         id: 'opinion61'
