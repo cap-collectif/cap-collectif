@@ -30,9 +30,6 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {% if theme.Media %}
-            {% thumbnail theme.Media, 'idea' with {'class': 'block  img-responsive'} %}
-        {% endif %}
         {% if theme.body %}
             {{ theme.body|raw }}
         {% endif %}
