@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -13,13 +15,15 @@ class MailerService
     protected $templating;
     protected $translator;
     protected $siteParams;
+    protected $router;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $siteParams)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $siteParams, Router $router)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->translator = $translator;
         $this->siteParams = $siteParams;
+        $this->router = $router;
     }
 
     public function sendMessage(Message $message): bool
@@ -34,6 +38,7 @@ class MailerService
         }
 
         $message->setSitename($this->siteParams->getValue('global.site.fullname'));
+        $message->setSiteUrl($this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL));
 
         $subject = $this->translator->trans($message->getSubject(), $message->getSubjectVars(), 'CapcoAppBundle');
 

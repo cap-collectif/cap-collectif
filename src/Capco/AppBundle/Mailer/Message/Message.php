@@ -18,6 +18,7 @@ abstract class Message
     protected $cc;
     protected $replyTo;
     protected $sitename;
+    protected $siteUrl;
 
     final public function __construct(
         string $recipientEmail,
@@ -156,6 +157,18 @@ abstract class Message
     public function getSitename(): string
     {
         return $this->sitename ? self::escape($this->sitename) : 'Cap Collectif';
+    }
+
+    public function setSiteUrl(string $value): self
+    {
+        $this->siteUrl = $value;
+
+        return $this;
+    }
+
+    public function getSiteUrl(): string
+    {
+        return $this->siteUrl ?? '';
     }
 
     final protected static function escape(string $string): string

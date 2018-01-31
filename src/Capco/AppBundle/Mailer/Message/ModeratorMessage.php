@@ -43,4 +43,20 @@ class ModeratorMessage extends AdminMessage
     {
         return array_merge($this->templateVars, $this->moderationLinks);
     }
+
+    public function getFooterTemplate(): string
+    {
+        return 'notification.email.moderator_footer';
+    }
+
+    public function getFooterVars(): array
+    {
+        return [
+            '{to}' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
+            '{sitename}' => $this->getSitename(),
+            '{siteUrl}' => $this->getSiteUrl(),
+            '{business}' => 'Cap Collectif',
+            '{businessUrl}' => 'https://cap-collectif.com/',
+        ];
+    }
 }

@@ -33,6 +33,7 @@ services:
       - "@templating"
       - "@translator"
       - "@capco.site_parameter.resolver"
+      - "@router"
 
   responses.formatter:
     class: Capco\AppBundle\Helper\ResponsesFormatter
