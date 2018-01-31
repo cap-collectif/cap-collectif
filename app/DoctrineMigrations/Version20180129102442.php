@@ -7,7 +7,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class Version20180123173826 extends AbstractMigration implements ContainerAwareInterface
+class Version20180129102442 extends AbstractMigration implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
