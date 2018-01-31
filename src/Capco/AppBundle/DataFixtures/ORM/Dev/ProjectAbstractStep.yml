@@ -89,11 +89,6 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@selectionstep3'
     project: '@p6'
     position: 6
-  pasCollectVote:
-    id: pasCollectVote
-    step: '@collectStepWithVote'
-    project: '@p6'
-    position: 7
   pas20:
     id: pas20
     step: '@collectstep3'

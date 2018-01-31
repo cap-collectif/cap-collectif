@@ -312,21 +312,3 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 11
-  proposal22:
-    id: proposal22
-    title: Proposition vraiment intéressante
-    body: <p><text(100)></p>
-    enabled: true
-    isTrashed: false
-    author: '@user4'
-    proposalForm: '@proposalFormVote'
-    reference: 666
-  proposal23:
-    id: proposal23
-    title: Proposition vraiment intéressante 2
-    body: <p><text(100)></p>
-    enabled: true
-    isTrashed: false
-    author: '@user4'
-    proposalForm: '@proposalFormVote'
-    reference: 667

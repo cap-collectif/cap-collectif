@@ -7,16 +7,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
-  collectStepWithVote:
-    id: collectStepWithVote
-    title: Dépôt avec vote
-    label: Le dépôt voté
-    isEnabled: true
-    startAt: <dateTimeBetween('-40 days', 'now')>
-    endAt: <dateTimeBetween('now', '+40 days')>
-    body: <p><text(1000)></p>
-    voteType: 1
-    votesHelpText: <p><text(1000)></p>
   collectstep2:
     id: collectstep2
     title: Collecte des propositions fermée

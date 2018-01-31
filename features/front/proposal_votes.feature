@@ -185,17 +185,6 @@ Scenario: Logged in user wants to vote when he has not enough credits left
   When I go to a proposal with budget vote enabled
   Then the proposal vote button must be disabled
 
-@javascript @security @elasticsearch @database @votes_from_proposal
-Scenario: Proposal should stay voted after user refresh the page
-  Given I am logged in as user
-  And I go to a collect step with vote
-  And I vote for the first proposal
-  And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  And I should see "proposal.vote.delete"
-  Then I go to a collect step with vote
-  And I should see "proposal.vote.delete"
-
 @javascript @security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable yet
   Given I go to a proposal not yet votable
