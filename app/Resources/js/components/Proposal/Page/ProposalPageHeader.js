@@ -85,7 +85,11 @@ export class ProposalPageHeader extends React.Component<Props> {
             </p>
           </div>
           {!proposal.isDraft && (
-            <ProposalVoteButtonWrapper proposal={proposal} className="btn-lg" />
+            <ProposalVoteButtonWrapper
+              proposal={proposal}
+              className="btn-lg"
+              id={`proposal-vote-btn-${proposal.id}`}
+            />
           )}
         </div>
       </div>

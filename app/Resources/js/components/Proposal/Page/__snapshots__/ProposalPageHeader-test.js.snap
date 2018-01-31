@@ -71,6 +71,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
     </div>
     <Connect(ProposalVoteButtonWrapper)
       className="btn-lg"
+      id="proposal-vote-btn-undefined"
       proposal={
         Object {
           "author": Object {},
@@ -154,6 +155,7 @@ exports[`<ProposalPageHeader /> should not render theme if specified not to 1`] 
     </div>
     <Connect(ProposalVoteButtonWrapper)
       className="btn-lg"
+      id="proposal-vote-btn-undefined"
       proposal={
         Object {
           "author": Object {},
@@ -239,6 +241,7 @@ exports[`<ProposalPageHeader /> should render a div with specified classes 1`] =
     </div>
     <Connect(ProposalVoteButtonWrapper)
       className="btn-lg"
+      id="proposal-vote-btn-undefined"
       proposal={
         Object {
           "author": Object {},
@@ -324,6 +327,7 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
     </div>
     <Connect(ProposalVoteButtonWrapper)
       className="btn-lg"
+      id="proposal-vote-btn-undefined"
       proposal={
         Object {
           "author": Object {},
