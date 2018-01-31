@@ -5,24 +5,24 @@ namespace Application\Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
-class Version20180131181637 extends AbstractMigration
+class Version20180131182617 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        // delete from votes where id IN (select id from votes where opinion_id IS NOT NULL group by voter_id, opinion_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where opinion_version_id IS NOT NULL group by voter_id, opinion_version_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where argument_id IS NOT NULL group by voter_id, argument_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where source_id IS NOT NULL group by voter_id, source_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where idea_id IS NOT NULL group by voter_id, idea_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where comment_id IS NOT NULL group by voter_id, comment_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and selection_step_id IS NOT NULL group by voter_id, proposal_id, selection_step_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and collect_step_id IS NOT NULL group by voter_id, proposal_id, collect_step_id having count(*) > 1);
 
         $this->addSql('CREATE UNIQUE INDEX opinion_vote_unique ON votes (voter_id, opinion_id)');
         $this->addSql('CREATE UNIQUE INDEX argument_vote_unique ON votes (voter_id, argument_id)');
         $this->addSql('CREATE UNIQUE INDEX opinion_version_vote_unique ON votes (voter_id, opinion_version_id)');
-        $this->addSql('CREATE UNIQUE INDEX selection_step_vote_unique ON votes (voter_id, selection_step_id)');
-        $this->addSql('CREATE UNIQUE INDEX collect_step_vote_unique ON votes (voter_id, collect_step_id)');
+        $this->addSql('CREATE UNIQUE INDEX selection_step_vote_unique ON votes (voter_id, proposal_id, selection_step_id)');
+        $this->addSql('CREATE UNIQUE INDEX collect_step_vote_unique ON votes (voter_id, proposal_id, collect_step_id)');
         $this->addSql('CREATE UNIQUE INDEX source_vote_unique ON votes (voter_id, source_id)');
         $this->addSql('CREATE UNIQUE INDEX comment_vote_unique ON votes (voter_id, comment_id)');
         $this->addSql('CREATE UNIQUE INDEX idea_vote_unique ON votes (voter_id, idea_id)');
@@ -35,14 +35,8 @@ class Version20180131181637 extends AbstractMigration
         $this->addSql('ALTER TABLE step DROP moderating_on_create, DROP moderating_on_update');
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE argument ADD moderation_token VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_D113B0AAC6D46AF ON argument (moderation_token)');
         $this->addSql('ALTER TABLE opinion ADD moderation_token VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');

@@ -29,11 +29,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *        ),
  *        @UniqueConstraint(
  *            name="selection_step_vote_unique",
- *            columns={"voter_id", "selection_step_id"}
+ *            columns={"voter_id", "proposal_id", "selection_step_id"}
  *        ),
  *        @UniqueConstraint(
  *            name="collect_step_vote_unique",
- *            columns={"voter_id", "collect_step_id"}
+ *            columns={"voter_id", "proposal_id", "collect_step_id"}
  *        ),
  *        @UniqueConstraint(
  *            name="source_vote_unique",
