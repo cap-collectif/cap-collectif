@@ -17,8 +17,6 @@ class CollectPage extends Page
 
     protected $elements = [
         'proposal' => '.proposal__preview',
-        'vote proposal button' => '.proposal__preview__vote.btn.btn-success',
-        'proposal vote form submit button' => '#confirm-proposal-vote',
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',
         'proposal form submit draft button' => '#confirm-proposal-create-as-draft',
@@ -49,16 +47,6 @@ class CollectPage extends Page
     public function clickCreateProposalButton()
     {
         $this->getElement('create proposal button')->click();
-    }
-
-    public function submitProposalVoteForm()
-    {
-        $this->getElement('proposal vote form submit button')->click();
-    }
-
-    public function clickVoteProposalButton()
-    {
-        $this->getElement('vote proposal button')->click();
     }
 
     public function getCreateProposalButton()
