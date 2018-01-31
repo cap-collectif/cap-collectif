@@ -11,26 +11,6 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply filt
   Then there should be 5 proposals
 
 @javascript @elasticsearch
-Scenario: Anonymous user wants to see proposals in a collect step and apply status filters
-  Given features themes, districts are enabled
-  And I go to an open collect step
-  Then there should be 6 proposals
-  And I change the proposals status filter to "Approuvé"
-  Then there should be 1 proposals
-  And I change the proposals status filter to "En cours"
-  Then there should be 4 proposals
-
-@javascript @elasticsearch
-Scenario: Anonymous user wants to see proposals in a collect step and apply contributor type filters
-  Given features themes, districts, user_type are enabled
-  And I go to an open collect step
-  Then there should be 6 proposals
-  And I change the proposals contributor type filter to "Citoyen"
-  Then there should be 6 proposals
-  And I change the proposals contributor type filter to "Institution"
-  Then there should be 0 proposals
-
-@javascript @elasticsearch
 Scenario: Anonymous user wants to see proposals in a private collect step
   Given I go to a private open collect step
   Then there should be 0 proposals
