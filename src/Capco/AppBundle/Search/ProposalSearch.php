@@ -115,7 +115,6 @@ class ProposalSearch extends Search
             ->setSize($pagination);
 
         $resultSet = $this->index->getType($this->type)->search($query);
-        dump($resultSet);
 
         $count = $resultSet->getTotalHits();
         $results = $resultSet->getResults();
