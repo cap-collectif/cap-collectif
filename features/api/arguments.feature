@@ -106,7 +106,7 @@ Scenario: Logged in API client wants to add an argument to an opinion
   When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
   Then the JSON response status code should be 201
   Then the queue associated to "argument_create" producer has messages below:
-  | 0 | {"argumentId": @uuid@} |
+  | 0 | {"argumentId": "@uuid@"} |
 
 ## Create on version
 
@@ -121,7 +121,7 @@ Scenario: Logged in API client wants to add an argument to an opinion version
   When I send a POST request to "/api/opinions/opinion57/versions/version1/arguments" with a valid argument json
   Then the JSON response status code should be 201
   Then the queue associated to "argument_create" producer has messages below:
-  | 0 | {"argumentId": @uuid@} |
+  | 0 | {"argumentId": "@uuid@"} |
 
 ## Update on opinion
 
