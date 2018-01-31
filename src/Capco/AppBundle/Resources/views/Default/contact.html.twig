@@ -27,8 +27,8 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
             <h1>{{ 'contact.title' | trans({}, 'CapcoAppBundle') }}</h1>
-            {%  if teaser is defined %}
-                {{ teaser|raw }}
+            {%  if jumbotron_body is defined %}
+                {{ jumbotron_body|raw }}
             {% endif %}
         </div>
     </div>
@@ -36,8 +36,8 @@
 
 {% block body %}
     <div class="container  container--custom">
-        {%  if body is defined %}
-            {{ body|raw }}
+        {%  if content_body is defined %}
+            {{ content_body|raw }}
         {% endif %}
         {% set address = capco_site_parameter_value('contact.content.address') %}
         {% set tel = capco_site_parameter_value('contact.content.phone_number') %}

@@ -71,6 +71,14 @@ class ProposalSearch extends Search
                 $sortField = 'commentsCount';
                 $sortOrder = 'desc';
                 break;
+            case 'expensive':
+                $sortField = 'estimation';
+                $sortOrder = 'desc';
+                break;
+            case 'cheap':
+                $sortField = 'estimation';
+                $sortOrder = 'asc';
+                break;
             default:
                 $sortField = '_score';
                 $sortOrder = 'desc';
@@ -107,6 +115,7 @@ class ProposalSearch extends Search
             ->setSize($pagination);
 
         $resultSet = $this->index->getType($this->type)->search($query);
+        dump($resultSet);
 
         $count = $resultSet->getTotalHits();
         $results = $resultSet->getResults();

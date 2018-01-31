@@ -1,26 +1,26 @@
-// @flow
-
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import type { Proposal } from '../../../redux/modules/proposal';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
-import type { State } from '../../../types';
 
-type Props = {
-  proposal: Proposal,
-  className: string,
-  referer: ?string,
-};
+export const ProposalPageHeader = React.createClass({
+  displayName: 'ProposalPageHeader',
 
-export class ProposalPageHeader extends React.Component<Props> {
-  static defaultProps = {
-    className: '',
-  };
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    className: PropTypes.string,
+    referer: PropTypes.string.isRequired,
+  },
+
+  getDefaultProps() {
+    return {
+      className: '',
+    };
+  },
 
   render() {
     const { proposal, className, referer } = this.props;
@@ -60,6 +60,13 @@ export class ProposalPageHeader extends React.Component<Props> {
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
+        {!proposal.isDraft && (
+          <ProposalVoteButtonWrapper
+            id="proposal-vote-btn"
+            proposal={proposal}
+            className="pull-right btn-lg"
+          />
+        )}
         <div className="media">
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
@@ -84,22 +91,15 @@ export class ProposalPageHeader extends React.Component<Props> {
               )}
             </p>
           </div>
-          {!proposal.isDraft && (
-            <ProposalVoteButtonWrapper
-              proposal={proposal}
-              className="btn-lg"
-              id={`proposal-vote-btn-${proposal.id}`}
-            />
-          )}
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = state => {
   return {
-    referer: state.proposal.referer || null,
+    referer: state.proposal.referer,
   };
 };
 
