@@ -115,7 +115,7 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":164}'
+  Then I should see 'project.show.meta.total_count {"%count%":151}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
   And I should see 'project.show.meta.opinionsCount {"%count%":32}'

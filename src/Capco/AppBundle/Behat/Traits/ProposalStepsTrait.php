@@ -256,24 +256,6 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When /^I change the proposals status filter to "([^"]*)"$/
-     */
-    public function iChangeTheProposalStatusTo(string $status)
-    {
-        $this->selectOption('proposal-filter-statuses', $status);
-        $this->iWait(2);
-    }
-
-    /**
-     * @When /^I change the proposals contributor type filter to "([^"]*)"$/
-     */
-    public function iChangeTheProposalContributorTypeTo(string $type)
-    {
-        $this->selectOption('proposal-filter-types', $type);
-        $this->iWait(2);
-    }
-
-    /**
      * @When I sort proposals by date
      */
     public function iSortProposalsByDate()
