@@ -10,8 +10,21 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(
+ *   name="votes",
+ *   indexes={}
+ *   uniqueConstraints={
+ *        @UniqueConstraint(
+ *            name="opinion_vote_unique",
+ *            columns={"user_id", "opinion_id"}
+ *        ),
+ *        @UniqueConstraint(
+ *            name="argument_vote_unique",
+ *            columns={"user_id", "argument_id"}
+ *        )
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
- * @ORM\Table(name="votes",indexes={})
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
