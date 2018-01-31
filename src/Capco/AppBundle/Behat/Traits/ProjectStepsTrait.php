@@ -4,6 +4,11 @@ namespace Capco\AppBundle\Behat\Traits;
 
 trait ProjectStepsTrait
 {
+    protected static $collectStepWithVote = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'depot-avec-vote',
+    ];
+
     /**
      * @Then project with slug :slug should have author :authorId
      */
@@ -88,11 +93,29 @@ trait ProjectStepsTrait
     }
 
     /**
+     * @When I go to a collect step with vote
+     */
+    public function iGoToACollectStepWithVote()
+    {
+        $this->visitPageWithParams('collect page', self::$collectStepWithVote);
+        $this->iWait(1);
+    }
+
+    /**
      * @When I click the show all districts stats button
      */
     public function iClickTheShowAllDistrictsStatsButton()
     {
         $selector = $this->navigationContext->getPage('project stats page')->showAllDistrictStats();
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I vote for the first proposal
+     */
+    public function iVoteForTheFirstProposal()
+    {
+        $this->navigationContext->getPage('collect page')->clickVoteProposalButton();
         $this->iWait(1);
     }
 
