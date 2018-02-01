@@ -6,6 +6,14 @@ services:
       - "@capco.site_parameter.resolver"
       - "@capco.resolvers.users"
       - "@capco.resolver.proposals"
+  comment.notifier:
+    class: Capco\AppBundle\Notifier\CommentNotifier
+    arguments:
+      - "@mailer_service"
+      - "@capco.site_parameter.resolver"
+      - "@capco.resolvers.users"
+      - "@capco.comment.resolver"
+      - "@capco.resolver.proposals"
   opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
     arguments:

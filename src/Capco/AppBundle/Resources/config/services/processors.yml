@@ -34,7 +34,7 @@ services:
     arguments: ["@doctrine.orm.entity_manager", "@capco.proposal.repository", "@proposal.notifier"]
   comment_create.processor:
     class: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
-    arguments: ["@capco.comment.repository", "@capco.notify_manager"]
+    arguments: ["@capco.comment.repository", "@comment.notifier"]
   comment_update.processor:
     class: Capco\AppBundle\Processor\Comment\CommentUpdateProcessor
     arguments: ["@capco.comment.repository", "@capco.notify_manager"]

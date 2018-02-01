@@ -29,10 +29,7 @@ class ProposalNotifier extends BaseNotifier
           null,
           $this->proposalResolver->resolveShowUrl($proposal),
           $this->proposalResolver->resolveAdminUrl($proposal),
-          $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-          $this->siteParams->getValue('global.site.fullname'),
-          $this->siteParams->getValue('admin.mail.notifications.send_address'),
-          $this->siteParams->getValue('admin.mail.notifications.send_name')
+          $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
     }
 
@@ -44,10 +41,7 @@ class ProposalNotifier extends BaseNotifier
             null,
             $this->proposalResolver->resolveShowUrl($proposal),
             $this->proposalResolver->resolveAdminUrl($proposal),
-            $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-            $this->siteParams->getValue('global.site.fullname'),
-            $this->siteParams->getValue('admin.mail.notifications.send_address'),
-            $this->siteParams->getValue('admin.mail.notifications.send_name')
+            $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
     }
 
@@ -59,10 +53,7 @@ class ProposalNotifier extends BaseNotifier
             null,
             $this->proposalResolver->resolveShowUrl($proposal),
             $this->proposalResolver->resolveAdminUrl($proposal),
-            $this->userResolver->resolveShowUrl($proposal->getAuthor()),
-            $this->siteParams->getValue('global.site.fullname'),
-            $this->siteParams->getValue('admin.mail.notifications.send_address'),
-            $this->siteParams->getValue('admin.mail.notifications.send_name')
+            $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
     }
 }

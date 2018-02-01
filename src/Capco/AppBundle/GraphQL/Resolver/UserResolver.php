@@ -54,6 +54,21 @@ class UserResolver implements ContainerAwareInterface
         return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
+    public function resolveShowNotificationsPreferencesUrl(): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_profile_notifications_edit_account', [], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveDisableNotificationsUrl(User $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_profile_notifications_disable',
+            ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
     public function resolveUpdatedAt($object): string
     {
         return $object->getUpdatedAt() ? $object->getUpdatedAt()->format(\DateTime::ATOM) : '';
