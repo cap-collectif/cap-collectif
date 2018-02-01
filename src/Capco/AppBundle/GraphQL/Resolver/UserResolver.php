@@ -69,6 +69,14 @@ class UserResolver implements ContainerAwareInterface
             ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
+    public function resolveShowUrlBySlug(string $slug)
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_user_profile_show_all', compact('slug'),
+            UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
     public function resolveUpdatedAt($object): string
     {
         return $object->getUpdatedAt() ? $object->getUpdatedAt()->format(\DateTime::ATOM) : '';

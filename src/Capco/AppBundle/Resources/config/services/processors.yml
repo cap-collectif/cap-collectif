@@ -40,4 +40,4 @@ services:
     arguments: ["@capco.comment.repository", "@comment.notifier"]
   comment_delete.processor:
     class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
-    arguments: ["@capco.comment.repository", "@capco.notify_manager"]
+    arguments: ["@comment.notifier"]

@@ -39,18 +39,21 @@ class CommentSubscriber implements EventSubscriberInterface
         if ('remove' === $action) {
             $entity->decreaseCommentsCount(1);
             if ($comment instanceof ProposalComment) {
+                $isAnonymous = null === $comment->getAuthor();
+                $comment = [
+                    'notifyTo' => self::NOTIFY_TO_ADMIN,
+                    'anonymous' => $isAnonymous,
+                    'notifying' => $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete(),
+                    'username' => $isAnonymous ? $comment->getAuthorName() : $comment->getAuthor()->getDisplayName(),
+                    'userSlug' => $isAnonymous ? null : $comment->getAuthor()->getSlug(),
+                    'body' => $comment->getBody(),
+                    'proposal' => $comment->getProposal()->getTitle(),
+                    'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
+                    'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
+                    'proposalSlug' => $comment->getProposal()->getSlug(),
+                ];
                 $this->publisher->publish('comment.delete', new Message(
-                    json_encode([
-                        'notifyTo' => self::NOTIFY_TO_ADMIN,
-                        'notifying' => $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete(),
-                        'username' => $comment->getAuthor()->getDisplayName(),
-                        'userSlug' => $comment->getAuthor()->getSlug(),
-                        'body' => $comment->getBody(),
-                        'proposal' => $comment->getProposal()->getTitle(),
-                        'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
-                        'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
-                        'proposalSlug' => $comment->getProposal()->getSlug(),
-                    ])
+                    json_encode($comment)
                 ));
             }
         } elseif ('add' === $action) {

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\EventListener\CommentSubscriber;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
@@ -11,6 +12,8 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
@@ -75,8 +78,53 @@ class CommentNotifier extends BaseNotifier
         }
     }
 
-    public function onDelete(Comment $proposal)
+    /**
+     * @param array $comment
+     *                       The comment is an array because a Comment entity doesn't have soft delete
+     *                       The array looks like this :
+     *                       [
+     *                       'username' => string,
+     *                       'notifying' => boolean,
+     *                       'anonymous' => boolean,
+     *                       'notifyTo' => CommentSubscriber::NOTIFY_TO_ADMIN | CommentSubscriber::NOTIFY_TO_USER,
+     *                       'userSlug' => string | null,
+     *                       'body' => string,
+     *                       'proposal' => string,
+     *                       'projectSlug' => string,
+     *                       'stepSlug' => string,
+     *                       'proposalSlug' => string,
+     *                       ]
+     */
+    public function onDelete(array $comment)
     {
+        if ($comment['notifying']) {
+            switch ($comment['notifyTo']) {
+                case CommentSubscriber::NOTIFY_TO_ADMIN:
+                    if ($comment['anonymous']) {
+                        $this->mailer->sendMessage(CommentDeleteAdminAnonymousMessage::create(
+                            $comment,
+                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                            $this->proposalResolver->resolveShowUrlBySlug(
+                                $comment['projectSlug'],
+                                $comment['stepSlug'],
+                                $comment['proposalSlug']
+                            )
+                        ));
+                    } else {
+                        $this->mailer->sendMessage(CommentDeleteAdminMessage::create(
+                            $comment,
+                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                            $this->proposalResolver->resolveShowUrlBySlug(
+                                $comment['projectSlug'],
+                                $comment['stepSlug'],
+                                $comment['proposalSlug']
+                            ),
+                            $this->userResolver->resolveShowUrlBySlug($comment['userSlug'])
+                        ));
+                    }
+                    break;
+            }
+        }
     }
 
     public function onUpdate(Comment $comment)
