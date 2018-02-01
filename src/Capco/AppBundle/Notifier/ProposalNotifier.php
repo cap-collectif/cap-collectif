@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalCreateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalDeleteAdminMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\Admin\ProposalUpdateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
 class ProposalNotifier extends BaseNotifier
