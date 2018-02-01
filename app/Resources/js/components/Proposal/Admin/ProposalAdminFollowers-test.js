@@ -9,6 +9,7 @@ describe('<ProposalAdminFollowers />', () => {
   // $FlowFixMe $refType
   const proposalWithUsers = {
     id: 'proposal1',
+    totalCount: 3,
     followerConnection: {
       totalCount: 3,
     },
@@ -16,6 +17,7 @@ describe('<ProposalAdminFollowers />', () => {
   // $FlowFixMe $refType
   const proposalWithoutUsers = {
     id: 'proposal1',
+    totalCount: 0,
     followerConnection: {
       totalCount: 0,
     },
