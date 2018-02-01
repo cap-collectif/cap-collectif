@@ -20,14 +20,6 @@ class CommentDeleteProcessor implements ProcessorInterface
         $comment = json_decode($message->getBody(), true);
         $this->notifier->onDelete($comment);
 
-        if ($json['notifying']) {
-            switch ($json['notifyTo']) {
-                case CommentSubscriber::NOTIFY_TO_ADMIN:
-                    $this->notifier->notifyProposalComment($json, 'delete');
-                    break;
-            }
-        }
-
         return true;
     }
 }
