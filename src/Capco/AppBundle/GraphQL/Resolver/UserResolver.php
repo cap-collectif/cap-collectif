@@ -80,11 +80,18 @@ class UserResolver implements ContainerAwareInterface
         return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
     }
 
-    public function resolveShowUrl(User $user): string
+    public function resolveShowUrl(User $user = null, string $slug = null): string
     {
         $router = $this->container->get('router');
+        if (null !== $user) {
+            return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
 
-        return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+        if (null !== $slug) {
+            return $router->generate('capco_user_profile_show_all', ['slug' => $slug], UrlGeneratorInterface::ABSOLUTE_URL);
+        }
+
+        throw new \Exception('Missing parameters to resolve show url');
     }
 
     public function resolveShowNotificationsPreferencesUrl(): string

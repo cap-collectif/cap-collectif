@@ -114,8 +114,10 @@
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "webonyx/graphql-php": "dev-master#efe1bcf052d4b42910c9f96fad3c10e4482ef7a8 as 0.11.2",
         "overblog/graphql-php-generator": "@dev",
+        "box/spout": "^2.7"
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
+        "overblog/graphql-bundle": "0.9.3"
         "symfony/polyfill-apcu": "^1.7",
         "overblog/graphql-bundle": "0.9.3",
         "ruflin/elastica": "~5"
