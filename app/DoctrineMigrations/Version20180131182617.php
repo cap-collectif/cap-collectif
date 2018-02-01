@@ -9,14 +9,14 @@ class Version20180131182617 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
-        // delete from votes where id IN (select id from votes where opinion_id IS NOT NULL group by voter_id, opinion_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where opinion_version_id IS NOT NULL group by voter_id, opinion_version_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where argument_id IS NOT NULL group by voter_id, argument_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where source_id IS NOT NULL group by voter_id, source_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where idea_id IS NOT NULL group by voter_id, idea_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where comment_id IS NOT NULL group by voter_id, comment_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and selection_step_id IS NOT NULL group by voter_id, proposal_id, selection_step_id having count(*) > 1);
-        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and collect_step_id IS NOT NULL group by voter_id, proposal_id, collect_step_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where opinion_id IS NOT NULL and voter_id IS NOT NULL group by voter_id, opinion_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where opinion_version_id and voter_id IS NOT NULL IS NOT NULL group by voter_id, opinion_version_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where argument_id IS NOT NULL and voter_id IS NOT NULL group by voter_id, argument_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where source_id IS NOT NULL and voter_id IS NOT NULL group by voter_id, source_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where idea_id IS NOT NULL and voter_id IS NOT NULL group by voter_id, idea_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where comment_id IS NOT NULL and voter_id IS NOT NULL group by voter_id, comment_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and voter_id IS NOT NULL and selection_step_id IS NOT NULL group by voter_id, proposal_id, selection_step_id having count(*) > 1);
+        // delete from votes where id IN (select id from votes where proposal_id IS NOT NULL and voter_id IS NOT NULL and collect_step_id IS NOT NULL group by voter_id, proposal_id, collect_step_id having count(*) > 1);
 
         $this->addSql('CREATE UNIQUE INDEX opinion_vote_unique ON votes (voter_id, opinion_id)');
         $this->addSql('CREATE UNIQUE INDEX argument_vote_unique ON votes (voter_id, argument_id)');
