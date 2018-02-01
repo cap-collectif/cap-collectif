@@ -1,22 +1,22 @@
 Capco\AppBundle\Entity\IdeaVote:
   ideaVote{1..500}:
-    idea: '@Idea<numberBetween(1, 2)>'
-    user: '@user<numberBetween(6, 501)>'
+    idea: '@Idea1'
+    user (unique): '@user<current()>'
 
   ideaVote501:
-    idea: @Idea21
-    user: '@user<numberBetween(6, 501)>'
+    idea: '@Idea21'
+    user: '@user501'
 
   ideaVote{502...550}:
-    idea: '@Idea<numberBetween(1, 2)>'
+    idea: '@Idea1'
     username: <username()>
-    email: <email()>
+    email (unique): <email()>
 
   ideaVote551:
-    idea: @Idea2
-    user: @user4
+    idea: '@Idea2'
+    user: '@user4'
 
   ideaVote552:
-    idea: @Idea21
+    idea: '@Idea21'
     username: test
     email: cheater@test.com
