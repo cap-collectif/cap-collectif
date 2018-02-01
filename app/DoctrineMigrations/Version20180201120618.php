@@ -9,16 +9,16 @@ class Version20180201120618 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
-        for ($i = 0; $i < 10; $i++) {
+        // for ($i = 0; $i < 10; $i++) {
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE opinion_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, opinion_id having count(*) > 1) AS something)');
-          $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE opinion_version_id AND voter_id IS NOT NULL IS NOT NULL group by voter_id, opinion_version_id having count(*) > 1) AS something)');
+          $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE opinion_version_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, opinion_version_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE argument_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, argument_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE source_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, source_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE idea_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, idea_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE comment_id IS NOT NULL AND voter_id IS NOT NULL group by voter_id, comment_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE proposal_id IS NOT NULL AND voter_id IS NOT NULL AND selection_step_id IS NOT NULL group by voter_id, proposal_id, selection_step_id having count(*) > 1) AS something)');
           $this->addSql('DELETE FROM votes WHERE id IN (SELECT id FROM (SELECT * FROM votes WHERE proposal_id IS NOT NULL AND voter_id IS NOT NULL AND collect_step_id IS NOT NULL group by voter_id, proposal_id, collect_step_id having count(*) > 1) AS something)');
-        }
+        // }
         $this->addSql('CREATE UNIQUE INDEX opinion_vote_unique ON votes (voter_id, opinion_id)');
         $this->addSql('CREATE UNIQUE INDEX argument_vote_unique ON votes (voter_id, argument_id)');
         $this->addSql('CREATE UNIQUE INDEX opinion_version_vote_unique ON votes (voter_id, opinion_version_id)');
