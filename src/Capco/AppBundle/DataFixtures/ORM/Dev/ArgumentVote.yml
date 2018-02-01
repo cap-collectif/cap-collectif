@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\ArgumentVote:
-  argumentVote{1..5}:
+  argumentVote{1..4}:
     argument: '@argument1'
     user (unique): '@user<current()>'
   argumentVote{6..10}:
