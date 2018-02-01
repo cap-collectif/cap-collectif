@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Mailer\Message\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 
-final class CommentCreateAdminMessage extends AdminMessage
+final class CommentUpdateAdminMessage extends AdminMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
@@ -17,11 +17,11 @@ final class CommentCreateAdminMessage extends AdminMessage
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.comment.create.subject',
+            'notification.email.comment.update.subject',
             static::getMySubjectVars(
                 $comment->getAuthor()->getDisplayName()
             ),
-            'notification.email.comment.create.body',
+            'notification.email.comment.update.body',
             static::getMyTemplateVars(
                 $authorUrl,
                 $comment->getAuthor()->getDisplayName(),

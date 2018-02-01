@@ -14,13 +14,13 @@ Scenario: Email should be sent to admin if a message is sent to the comment_crea
   And I should see "notification.email.comment.create.body" in mail
 
 @rabbitmq
-Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous
+Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous when I consume comment create
   Given I publish in "comment_create" with message below:
-"""
-{
-  "commentId": 159
-}
-"""
+  """
+  {
+    "commentId": 159
+  }
+  """
   And I consume "comment_create"
   Then I open mail with subject "notification.email.anonymous.comment.create.subject"
   And I should see "notification.email.anonymous.comment.create.body" in mail
@@ -36,6 +36,18 @@ Scenario: Email should be sent to admin if a message is sent to the comment_upda
   And I consume "comment_update"
   Then I open mail with subject "notification.email.comment.update.subject"
   And I should see "notification.email.comment.update.body" in mail
+
+@rabbitmq
+Scenario: Email sent to admin should have correct subject and footer if comment author is anonymous when I consume comment_update
+  Given I publish in "comment_update" with message below:
+  """
+  {
+    "commentId": 159
+  }
+  """
+  And I consume "comment_update"
+  Then I open mail with subject "notification.email.anonymous.comment.update.subject"
+  And I should see "notification.email.anonymous.comment.update.body" in mail
 
 @rabbitmq
 Scenario: Email should be sent to admin if a message is sent to the comment_delete queue

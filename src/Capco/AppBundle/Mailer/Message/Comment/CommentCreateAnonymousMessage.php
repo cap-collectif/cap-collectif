@@ -9,9 +9,9 @@ final class CommentCreateAnonymousMessage extends ExternalMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
-                                  string $recipientName = null,
                                   string $proposalUrl,
-                                  string $disableNotificationsUrl): self
+                                  string $disableNotificationsUrl,
+                                  string $recipientName = null): self
     {
         $message = new self(
             $recipentEmail,

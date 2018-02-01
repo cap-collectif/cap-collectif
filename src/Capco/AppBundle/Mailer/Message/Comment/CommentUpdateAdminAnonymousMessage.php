@@ -3,28 +3,27 @@
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 
-final class CommentCreateAdminMessage extends AdminMessage
+final class CommentUpdateAdminAnonymousMessage extends AdminMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
                                   string $proposalUrl,
                                   string $commentAdminUrl,
-                                  string $authorUrl,
                                   string $recipientName = null): self
     {
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.comment.create.subject',
+            'notification.email.anonymous.comment.update.subject',
             static::getMySubjectVars(
-                $comment->getAuthor()->getDisplayName()
+                $comment->getAuthorName()
             ),
-            'notification.email.comment.create.body',
+            'notification.email.anonymous.comment.update.body',
             static::getMyTemplateVars(
-                $authorUrl,
-                $comment->getAuthor()->getDisplayName(),
+                $comment->getAuthorName(),
                 $comment->getRelatedObject()->getTitle(),
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
@@ -38,7 +37,6 @@ final class CommentCreateAdminMessage extends AdminMessage
     }
 
     private static function getMyTemplateVars(
-        string $authorUrl,
         string $authorName,
         string $proposalTitle,
         string $date,
@@ -48,7 +46,6 @@ final class CommentCreateAdminMessage extends AdminMessage
         string $proposalAdminUrl
     ): array {
         return [
-            '%userUrl%' => $authorUrl,
             '%username%' => self::escape($authorName),
             '%proposal%' => self::escape($proposalTitle),
             '%date%' => $date,

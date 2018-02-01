@@ -11,6 +11,8 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 
@@ -36,7 +38,6 @@ class CommentNotifier extends BaseNotifier
                     $this->mailer->sendMessage(CommentCreateAdminAnonymousMessage::create(
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                        null,
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
                         $this->commentResolver->getAdminUrlOfRelatedObject($comment, true)
                     ));
@@ -44,7 +45,6 @@ class CommentNotifier extends BaseNotifier
                     $this->mailer->sendMessage(CommentCreateAdminMessage::create(
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                        null,
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
                         $this->commentResolver->getAdminUrlOfRelatedObject($comment, true),
                         $this->userResolver->resolveShowUrl($comment->getAuthor())
@@ -59,7 +59,6 @@ class CommentNotifier extends BaseNotifier
                     $this->mailer->sendMessage(CommentCreateAnonymousMessage::create(
                         $comment,
                         $user->getEmail(),
-                        null,
                         $this->proposalResolver->resolveShowUrl($comment->getProposal()),
                         $this->userResolver->resolveDisableNotificationsUrl($user)
                     ));
@@ -67,7 +66,6 @@ class CommentNotifier extends BaseNotifier
                     $this->mailer->sendMessage(CommentCreateAuthorMessage::create(
                         $comment,
                         $user->getEmail(),
-                        null,
                         $this->proposalResolver->resolveShowUrl($comment->getProposal()),
                         $this->userResolver->resolveDisableNotificationsUrl($user),
                         $this->userResolver->resolveShowUrl($comment->getAuthor())
@@ -81,11 +79,29 @@ class CommentNotifier extends BaseNotifier
     {
     }
 
-    public function onUpdate(Comment $proposal)
+    public function onUpdate(Comment $comment)
     {
-    }
+        if ($comment instanceof ProposalComment) {
+            $isAnonymous = null === $comment->getAuthor();
 
-    public function send()
-    {
+            if ($comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
+                if ($isAnonymous) {
+                    $this->mailer->sendMessage(CommentUpdateAdminAnonymousMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true)
+                    ));
+                } else {
+                    $this->mailer->sendMessage(CommentUpdateAdminMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true),
+                        $this->userResolver->resolveShowUrl($comment->getAuthor())
+                    ));
+                }
+            }
+        }
     }
 }

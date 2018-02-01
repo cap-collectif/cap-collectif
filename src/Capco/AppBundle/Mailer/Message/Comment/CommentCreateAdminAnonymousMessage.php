@@ -10,9 +10,9 @@ final class CommentCreateAdminAnonymousMessage extends AdminMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
-                                  string $recipientName = null,
                                   string $proposalUrl,
-                                  string $commentAdminUrl): self
+                                  string $commentAdminUrl,
+                                  string $recipientName = null): self
     {
         $message = new self(
             $recipentEmail,

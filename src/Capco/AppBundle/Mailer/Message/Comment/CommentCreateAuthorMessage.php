@@ -9,10 +9,10 @@ final class CommentCreateAuthorMessage extends ExternalMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
-                                  string $recipientName = null,
                                   string $proposalUrl,
                                   string $disableNotificationsUrl,
-                                  string $authorUrl): self
+                                  string $authorUrl,
+                                  string $recipientName = null): self
     {
         $message = new self(
             $recipentEmail,

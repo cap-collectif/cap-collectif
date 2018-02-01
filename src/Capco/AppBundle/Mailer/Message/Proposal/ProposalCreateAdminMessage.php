@@ -5,14 +5,14 @@ namespace Capco\AppBundle\Mailer\Message\Proposal\Admin;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 
-final class ProposalCreateMessage extends AdminMessage
+final class ProposalCreateAdminMessage extends AdminMessage
 {
     public static function create(Proposal $proposal,
                                   string $recipentEmail,
-                                  string $recipientName = null,
                                   string $proposalUrl,
                                   string $proposalAdminUrl,
-                                  string $authorUrl): self
+                                  string $authorUrl,
+                                  string $recipientName = null): self
     {
         return new self(
             $recipentEmail,
@@ -66,8 +66,8 @@ final class ProposalCreateMessage extends AdminMessage
         string $project
     ): array {
         return [
-          '%username%' => self::escape($username),
-          '%project%' => self::escape($project),
+            '%username%' => self::escape($username),
+            '%project%' => self::escape($project),
         ];
     }
 }
