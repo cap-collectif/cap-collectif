@@ -219,7 +219,6 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower witho
             "totalCount": 0,
           },
           "id": "proposal1",
-          "totalCount": 0,
         }
       }
     />
