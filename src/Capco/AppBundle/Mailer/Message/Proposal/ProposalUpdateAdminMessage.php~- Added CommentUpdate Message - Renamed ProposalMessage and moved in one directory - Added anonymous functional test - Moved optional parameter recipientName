@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message\Proposal\Admin;
+namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
