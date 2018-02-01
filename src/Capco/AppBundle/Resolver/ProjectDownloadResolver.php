@@ -70,7 +70,6 @@ class ProjectDownloadResolver
         $this->urlArrayResolver = $urlArrayResolver;
         $this->phpexcel = $phpexcel;
         $this->headers = [];
-        $this->customFields = [];
         $this->data = [];
         $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
         $this->mediaExtension = $mediaExtension;
