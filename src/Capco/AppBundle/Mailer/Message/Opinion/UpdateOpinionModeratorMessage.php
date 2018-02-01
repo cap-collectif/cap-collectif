@@ -15,7 +15,7 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
             'notification-subject-modified-proposal',
             static::getMySubjectVars(
                 $opinion->getAuthor()->getUsername(),
-                $opinion->getProject()->getTitle()
+                $opinion->getTitle()
             ),
             'notification-content-modified-proposal',
             static::getMyTemplateVars(
