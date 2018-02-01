@@ -170,12 +170,8 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveDraftProposalsForUserInStep(string $stepId, $user): array
+    public function resolveDraftProposalsForUserInStep(string $stepId, User $user = null): array
     {
-        if (!$user instanceof User) {
-            return [];
-        }
-
         $proposalRep = $this->container->get('capco.proposal.repository');
 
         $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([

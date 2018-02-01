@@ -41,5 +41,3 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
         startAt: <dateTimeBetween('-40 days', 'now')>
         endAt: <dateTimeBetween('now', '+10 days')>
         opinionCount: 0
-        moderatingOnCreate: true
-        moderatingOnUpdate: true
