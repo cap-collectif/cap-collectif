@@ -131,7 +131,7 @@ export const ProposalPageContent = React.createClass({
         <div className="block proposal__buttons">
           {!proposal.isDraft && (
             <div>
-              <ProposalVoteButtonWrapper proposal={proposal} />
+              <ProposalVoteButtonWrapper className="mr-15" proposal={proposal} />
               <ShareButtonDropdown
                 id="proposal-share-button"
                 url={proposal._links.show}
