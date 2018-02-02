@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Controller;
 
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Proposal;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
