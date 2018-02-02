@@ -28,7 +28,7 @@ final class CommentCreateAdminMessage extends AdminMessage
                 $comment->getRelatedObject()->getTitle(),
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
-                $comment->getBodyExcerpt(),
+                $comment->getBodyTextExcerpt(),
                 $proposalUrl,
                 $commentAdminUrl
             )

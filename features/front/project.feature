@@ -109,6 +109,7 @@ Scenario: Posts menu for project should display correct number of posts
   And I follow "project-posts"
   And I should see 5 ".media--news" elements
 
+@javascript
 Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
@@ -120,7 +121,7 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":171}'
+  Then I should see 'project.show.meta.total_count {"%count%":170}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
   And I should see 'project.show.meta.opinionsCount {"%count%":34}'

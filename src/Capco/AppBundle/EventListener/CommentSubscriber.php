@@ -46,7 +46,7 @@ class CommentSubscriber implements EventSubscriberInterface
                     'notifying' => $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete(),
                     'username' => $isAnonymous ? $comment->getAuthorName() : $comment->getAuthor()->getDisplayName(),
                     'userSlug' => $isAnonymous ? null : $comment->getAuthor()->getSlug(),
-                    'body' => $comment->getBody(),
+                    'body' => $comment->getBodyTextExcerpt(),
                     'proposal' => $comment->getProposal()->getTitle(),
                     'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
                     'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
