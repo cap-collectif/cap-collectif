@@ -11,6 +11,7 @@ final class CommentCreateAnonymousMessage extends ExternalMessage
                                   string $recipentEmail,
                                   string $proposalUrl,
                                   string $disableNotificationsUrl,
+                                  string $notificationsUrl,
                                   string $recipientName = null): self
     {
         $message = new self(
@@ -28,7 +29,8 @@ final class CommentCreateAnonymousMessage extends ExternalMessage
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
                 $proposalUrl,
-                $disableNotificationsUrl
+                $disableNotificationsUrl,
+                $notificationsUrl
             )
         );
 
@@ -42,7 +44,8 @@ final class CommentCreateAnonymousMessage extends ExternalMessage
         string $time,
         string $comment,
         string $proposalUrl,
-        string $disableNotificationsUrl
+        string $disableNotificationsUrl,
+        string $notificationsUrl
     ): array {
         return [
             '%username%' => self::escape($authorName),
@@ -52,6 +55,7 @@ final class CommentCreateAnonymousMessage extends ExternalMessage
             '%comment%' => self::escape($comment),
             '%proposalUrl%' => $proposalUrl,
             '%disableNotificationsUrl%' => $disableNotificationsUrl,
+            '%notificationsUrl%' => $notificationsUrl,
         ];
     }
 
