@@ -10,7 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminMessage;
-use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAnonymousMessage;
+use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAuthorMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentDeleteAdminMessage;
@@ -59,7 +59,7 @@ class CommentNotifier extends BaseNotifier
             if ($user->getNotificationsConfiguration()->isOnProposalCommentMail() &&
                 $user !== $comment->getAuthor()) {
                 if ($isAnonymous) {
-                    $this->mailer->sendMessage(CommentCreateAnonymousMessage::create(
+                    $this->mailer->sendMessage(CommentCreateAuthorAnonymousMessage::create(
                         $comment,
                         $user->getEmail(),
                         $this->proposalResolver->resolveShowUrl($comment->getProposal()),

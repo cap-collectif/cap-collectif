@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Mailer\Message\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
-final class CommentCreateAnonymousMessage extends ExternalMessage
+final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
 {
     public static function create(Comment $comment,
                                   string $recipentEmail,
