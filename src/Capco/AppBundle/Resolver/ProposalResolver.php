@@ -30,7 +30,7 @@ class ProposalResolver
         $this->logger = $logger;
     }
 
-    public function exportProposalFollowers(Proposal $proposal, string $fileType = Type::CSV): array
+    public function exportProposalFollowers(string $proposalId, string $fileType = Type::CSV): array
     {
         $proposalFollowers = $proposal->getFollowers();
         $followers = [];
