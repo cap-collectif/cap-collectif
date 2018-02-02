@@ -17,12 +17,12 @@ final class ProposalUpdateAdminMessage extends AdminMessage
         return new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.proposal.edit.subject',
+            'notification.email.proposal.update.subject',
             static::getMySubjectVars(
                 $proposal->getAuthor()->getDisplayName(),
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
             ),
-            'notification.email.proposal.edit.body',
+            'notification.email.proposal.update.body',
             static::getMyTemplateVars(
                 $authorUrl,
                 $proposal->getAuthor()->getDisplayName(),

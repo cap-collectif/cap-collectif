@@ -42,14 +42,14 @@ class CommentNotifier extends BaseNotifier
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true)
+                        $this->commentResolver->getAdminUrl($comment, true)
                     ));
                 } else {
                     $this->mailer->sendMessage(CommentCreateAdminMessage::create(
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true),
                         $this->userResolver->resolveShowUrl($comment->getAuthor())
                     ));
                 }
@@ -138,14 +138,14 @@ class CommentNotifier extends BaseNotifier
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true)
+                        $this->commentResolver->getAdminUrl($comment, true)
                     ));
                 } else {
                     $this->mailer->sendMessage(CommentUpdateAdminMessage::create(
                         $comment,
                         $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                         $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                        $this->commentResolver->getAdminUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true),
                         $this->userResolver->resolveShowUrl($comment->getAuthor())
                     ));
                 }
