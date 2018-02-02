@@ -63,7 +63,8 @@ class CommentNotifier extends BaseNotifier
                         $comment,
                         $user->getEmail(),
                         $this->proposalResolver->resolveShowUrl($comment->getProposal()),
-                        $this->userResolver->resolveDisableNotificationsUrl($user)
+                        $this->userResolver->resolveDisableNotificationsUrl($user),
+                        $this->userResolver->resolveShowNotificationsPreferencesUrl()
                     ));
                 } else {
                     $this->mailer->sendMessage(CommentCreateAuthorMessage::create(
@@ -71,6 +72,7 @@ class CommentNotifier extends BaseNotifier
                         $user->getEmail(),
                         $this->proposalResolver->resolveShowUrl($comment->getProposal()),
                         $this->userResolver->resolveDisableNotificationsUrl($user),
+                        $this->userResolver->resolveShowNotificationsPreferencesUrl(),
                         $this->userResolver->resolveShowUrl($comment->getAuthor())
                     ));
                 }

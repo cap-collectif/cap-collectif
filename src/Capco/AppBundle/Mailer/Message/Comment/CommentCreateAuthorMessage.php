@@ -11,6 +11,7 @@ final class CommentCreateAuthorMessage extends ExternalMessage
                                   string $recipentEmail,
                                   string $proposalUrl,
                                   string $disableNotificationsUrl,
+                                  string $notificationsUrl,
                                   string $authorUrl,
                                   string $recipientName = null): self
     {
@@ -30,7 +31,8 @@ final class CommentCreateAuthorMessage extends ExternalMessage
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
                 $proposalUrl,
-                $disableNotificationsUrl
+                $disableNotificationsUrl,
+                $notificationsUrl
             )
         );
 
@@ -45,7 +47,8 @@ final class CommentCreateAuthorMessage extends ExternalMessage
         string $time,
         string $comment,
         string $proposalUrl,
-        string $disableNotificationsUrl
+        string $disableNotificationsUrl,
+        string $notificationsUrl
     ): array {
         return [
             '%userUrl%' => $authorUrl,
@@ -56,6 +59,7 @@ final class CommentCreateAuthorMessage extends ExternalMessage
             '%comment%' => self::escape($comment),
             '%proposalUrl%' => $proposalUrl,
             '%disableNotificationsUrl%' => $disableNotificationsUrl,
+            '%notificationsUrl%' => $notificationsUrl,
         ];
     }
 
