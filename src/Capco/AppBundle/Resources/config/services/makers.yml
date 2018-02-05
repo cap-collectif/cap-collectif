@@ -1,0 +1,5 @@
+services:
+  capco.message_maker:
+    class: Capco\AppBundle\Command\Maker\Makers\MakeMessage
+    tags:
+      - { name: console.command }
