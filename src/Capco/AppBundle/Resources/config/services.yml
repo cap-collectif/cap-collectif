@@ -9,7 +9,6 @@ imports:
     - { resource: services/search.yml }
     - { resource: services/utils.yml }
     - { resource: services/graphql_mutations.yml }
-    - { resource: services/graphql_resolvers.yml }
     - { resource: services/notifiers.yml }
 
 parameters:
@@ -32,8 +31,6 @@ services:
       - "@mailer"
       - "@templating"
       - "@translator"
-      - "@capco.site_parameter.resolver"
-      - "@router"
 
   responses.formatter:
     class: Capco\AppBundle\Helper\ResponsesFormatter

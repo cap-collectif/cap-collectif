@@ -9,7 +9,7 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
     "proposalId": "proposal1"
   }
   """
-  And I consume "proposal_create"
+  And I run "swarrot:consume:proposal_create proposal_create --env=test --max-execution-time=10 --max-messages=1"
   Then I open mail with subject "notification.email.proposal.create.subject"
   And I should see "notification.email.proposal.create.body" in mail
 
@@ -21,7 +21,7 @@ Scenario: Email should be sent if a message is sent to the proposal_delete queue
     "proposalId": "deletedProposal1"
   }
   """
-  And I consume "proposal_delete"
+  And I run "swarrot:consume:proposal_delete proposal_delete --env=test --max-execution-time=10 --max-messages=1"
   Then I open mail with subject "notification.email.proposal.delete.subject"
   And I should see "notification.email.proposal.delete.body" in mail
 
@@ -33,6 +33,6 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
     "proposalId": "proposal10"
   }
   """
-  And I consume "proposal_update"
+  And I run "swarrot:consume:proposal_update proposal_update --env=test --max-execution-time=10 --max-messages=1"
   Then I open mail with subject "notification.email.proposal.edit.subject"
   And I should see "notification.email.proposal.edit.body" in mail

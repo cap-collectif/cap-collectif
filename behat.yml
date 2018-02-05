@@ -96,7 +96,6 @@ api:
             contexts:
                 - Capco\AppBundle\Behat\ApiContext
                 - Capco\AppBundle\Behat\NavigationContext
-                - Capco\AppBundle\Behat\RabbitMQContext
                 - Alex\MailCatcher\Behat\MailCatcherContext
 
 graphql:
