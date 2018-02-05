@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -38,6 +39,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use DiffableTrait;
     use ExpirableTrait;
     use TextableTrait;
+    use ModerableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
@@ -110,6 +112,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function getKind(): string
     {
         return 'version';
+    }
+
+    public function getProject()
+    {
+        return $this->getParent()->getStep()->getProject();
     }
 
     public function getRelated()
@@ -342,7 +349,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_FOR) {
+            if (Argument::TYPE_FOR === $argument->getType()) {
                 ++$i;
             }
         }
@@ -354,7 +361,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     {
         $i = 0;
         foreach ($this->arguments as $argument) {
-            if ($argument->getType() === Argument::TYPE_AGAINST) {
+            if (Argument::TYPE_AGAINST === $argument->getType()) {
                 ++$i;
             }
         }
@@ -364,10 +371,10 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function getArgumentsCountByType($type)
     {
-        if ($type === 'yes') {
+        if ('yes' === $type) {
             return $this->getArgumentForCount();
         }
-        if ($type === 'no') {
+        if ('no' === $type) {
             return $this->getArgumentAgainstCount();
         }
 
