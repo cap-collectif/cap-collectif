@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -76,13 +75,6 @@ class ProposalFormResolver implements ContainerAwareInterface
     public function resolveAll(): array
     {
         return $this->container->get('capco.proposal_form.repository')->findAll();
-    }
-
-    public function resolveSummaryHelpText(ProposalForm $proposalForm)// : ?string
-    {
-        $text = $proposalForm->getSummaryHelpText();
-
-        return $text ? Text::htmlToString($text) : null;
     }
 
     public function resolveUrl(ProposalForm $proposalForm): string

@@ -15,6 +15,13 @@ class Media extends BaseMedia
         $this->galleryHasMedias = new ArrayCollection();
     }
 
+    /**
+     * Add galleryHasMedia.
+     *
+     * @param GalleryHasMedia $galleryHasMedia
+     *
+     * @return Media
+     */
     public function addGalleryHasMedia(GalleryHasMedia $galleryHasMedia)
     {
         $this->galleryHasMedias[] = $galleryHasMedia;
@@ -22,6 +29,11 @@ class Media extends BaseMedia
         return $this;
     }
 
+    /**
+     * Remove galleryHasMedia.
+     *
+     * @param GalleryHasMedia $galleryHasMedia
+     */
     public function removeGalleryHasMedia(GalleryHasMedia $galleryHasMedia)
     {
         $this->galleryHasMedias->removeElement($galleryHasMedia);
