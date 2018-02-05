@@ -1,6 +1,67 @@
 @proposal @update_proposal
 Feature: Update a proposal
 
+@database @rabbitmq
+Scenario: Admin should be notified if GraphQL user modify his proposal
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: ChangeProposalContentInput!) {
+      changeProposalContent(input: $input) {
+        proposal {
+          id
+          title
+          body
+          publicationStatus
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "proposal2",
+        "title": "Achetez un DOP à la madeleine",
+        "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
+        "responses": [
+          {
+            "question": "1",
+            "value": "reponse-1"
+          },
+          {
+            "question": "3",
+            "value": "reponse-3"
+          },
+          {
+            "question": "11",
+            "medias": ["media1"]
+          },
+          {
+            "question": "12",
+            "medias": []
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "changeProposalContent": {
+        "proposal": {
+          "id": "proposal2",
+          "title": "Achetez un DOP à la madeleine",
+          "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
+          "publicationStatus": "PUBLISHED"
+        }
+      }
+    }
+  }
+  """
+  Then the queue associated to "proposal_update" producer has messages below:
+  | 0 | {"proposalId": "proposal2"} |
+
 @database
 Scenario: GraphQL client wants to edit his proposal
   Given I am logged in to graphql as user

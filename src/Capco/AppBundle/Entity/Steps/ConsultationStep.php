@@ -94,10 +94,44 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
      */
     private $descriptionHelpText;
 
+    /**
+     * @ORM\Column(name="moderating_on_create", type="boolean", nullable=false, options={"default" = false})
+     */
+    private $moderatingOnCreate = false;
+
+    /**
+     * @ORM\Column(name="moderating_on_update", type="boolean", nullable=false, options={"default" = false})
+     */
+    private $moderatingOnUpdate = false;
+
     public function __construct()
     {
         parent::__construct();
         $this->opinions = new ArrayCollection();
+    }
+
+    public function isModeratingOnCreate(): bool
+    {
+        return $this->moderatingOnCreate;
+    }
+
+    public function setModeratingOnCreate(bool $value): self
+    {
+        $this->moderatingOnCreate = $value;
+
+        return $this;
+    }
+
+    public function isModeratingOnUpdate(): bool
+    {
+        return $this->moderatingOnUpdate;
+    }
+
+    public function setModeratingOnUpdate(bool $value): self
+    {
+        $this->moderatingOnUpdate = $value;
+
+        return $this;
     }
 
     public function isIndexable()

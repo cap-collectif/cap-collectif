@@ -9,6 +9,8 @@ imports:
     - { resource: services/search.yml }
     - { resource: services/utils.yml }
     - { resource: services/graphql_mutations.yml }
+    - { resource: services/graphql_resolvers.yml }
+    - { resource: services/notifiers.yml }
 
 parameters:
   traits:
@@ -22,6 +24,16 @@ parameters:
 services:
   import.csvtoarray:
     class: Capco\AppBundle\Helper\ConvertCsvToArray
+
+
+  mailer_service:
+    class: Capco\AppBundle\Mailer\MailerService
+    arguments:
+      - "@mailer"
+      - "@templating"
+      - "@translator"
+      - "@capco.site_parameter.resolver"
+      - "@router"
 
   responses.formatter:
     class: Capco\AppBundle\Helper\ResponsesFormatter

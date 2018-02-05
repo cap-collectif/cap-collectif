@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\CommentVote:
   evCommentVote{1..150}:
     comment: '@evComment<numberBetween(1, 50)>'
-    user: '@user<numberBetween(1, 5)>'
+    user: '@user<current()>'
   iCommentVote{2..50}:
     comment: '@iComment<current()>'
     user: '@user1'
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\CommentVote:
     user: '@user3'
   iCommentVote{53..55}:
       comment: '@iComment151'
-      user: '@user<numberBetween(1, 5)>'
+      user (unique): '@user<current()>'
   pCommentVote{1..150}:
     comment: '@pComment<numberBetween(1, 50)>'
-    user: '@user<numberBetween(1, 5)>'
+    user: '@user<current()>'

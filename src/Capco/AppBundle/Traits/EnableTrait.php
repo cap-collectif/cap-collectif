@@ -11,20 +11,12 @@ trait EnableTrait
      */
     private $enabled = true;
 
-    /**
-     * @return mixed
-     */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param mixed $enabled
-     *
-     * @return $this
-     */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
 
