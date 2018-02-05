@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\UserBundle\Entity\User;
+use FOS\UserBundle\Model\UserInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -31,6 +32,22 @@ class UserResolver implements ContainerAwareInterface
         }
 
         return $repo->findAll();
+    }
+
+    public function resolveResettingPassworldUrl(UserInterface $user, $absolute = true): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+    }
+
+    public function resolveRegistrationConfirmationUrl(UserInterface $user, $absolute = true): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('account_confirm_email', ['token' => $user->getConfirmationToken()],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
     }
 
     public function resolveEmail($object): string

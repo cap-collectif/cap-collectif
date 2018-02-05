@@ -182,7 +182,7 @@ fos_user:
     user_class:     Capco\UserBundle\Entity\User
     service:
         user_manager: sonata.user.orm.user_manager
-        mailer: capco.notify_manager
+        mailer: capco.fos_notifier
     registration:
         confirmation:
             enabled:    true

@@ -14,6 +14,12 @@ services:
       - "@capco.resolvers.users"
       - "@capco.comment.resolver"
       - "@capco.resolver.proposals"
+  capco.fos_notifier:
+    class: Capco\AppBundle\Notifier\FOSNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
   opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
     arguments:
