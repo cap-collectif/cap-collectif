@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Swarrot\Broker\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -56,7 +57,11 @@ class ModerationController extends Controller
 
         $trashedMessage = '';
         if ($contribution instanceof Opinion) {
-            $this->get('opinion_notifier')->onTrash($contribution);
+            $this->get('swarrot.publisher')->publish('opinion.trash', new Message(
+              json_encode([
+                  'opinionId' => $contribution->getId(),
+                ])
+          ));
             $trashedMessage = $this->get('translator')->trans('the-proposal-has-been-successfully-moved-to-the-trash');
         }
 
@@ -77,5 +82,4 @@ class ModerationController extends Controller
 
         return $this->redirect($redirectUrl);
     }
-
 }

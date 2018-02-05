@@ -26,6 +26,13 @@
                -
                    exchange: capco_direct_exchange
                    routing_key: opinion_delete
+        opinion_trash:
+           durable: true
+           retries: [25, 125, 625]
+           bindings:
+               -
+                   exchange: capco_direct_exchange
+                   routing_key: opinion_trash
         argument_create:
             durable: true
             retries: [25, 125, 625]
@@ -47,6 +54,13 @@
                -
                    exchange: capco_direct_exchange
                    routing_key: argument_delete
+        argument_trash:
+           durable: true
+           retries: [25, 125, 625]
+           bindings:
+               -
+                   exchange: capco_direct_exchange
+                   routing_key: argument_trash
         proposal_create:
             durable: true
             retries: [25, 125, 625]
