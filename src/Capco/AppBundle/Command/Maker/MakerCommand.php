@@ -29,7 +29,7 @@ class MakerCommand extends ContainerAwareCommand
         $entity = $this->askSimpleQuestion($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>');
         $name = $this->askSimpleQuestion($input, $output, 'Please type your message name <info>(e.g ProposalCreate)</info>');
         $name .= 'Message';
-        $type = $this->askChoiceQuestion($input, $output, 'Please select your message tyme <info>(defaults to External</info>)',
+        $type = $this->askChoiceQuestion($input, $output, 'Please select your message type <info>(defaults to External</info>)',
             $messageTypes,
             'External',
             $messageTypes
@@ -52,7 +52,7 @@ class MakerCommand extends ContainerAwareCommand
         ]);
         $path = $container->get('kernel')->getRootDir() . "/../src/Capco/AppBundle/Mailer/Message/$entity/$name.php";
         $fs->dumpFile($path, $parsed);
-        $output->writeln("<info>File successfuly written at $path</info>");
+        $output->writeln("<info>File successfully written at $path</info>");
     }
 
     private function askSimpleQuestion(InputInterface $input,
