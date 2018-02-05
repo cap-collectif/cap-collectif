@@ -20,54 +20,74 @@
 {% endblock %}
 
 {% block details %}
-    {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length + proposals|length) %}
-    <div class="alert alert-info">
-        {{ 'project.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
-    </div>
-
-    <div class="block  block--bordered">
-        <div class="opinion  opinion--gray opinion--default">
-            <div class="opinion__header  opinion__header--mobile-centered">
-                <h2 class="pull-left  h4  opinion__header__title">{{ 'project.show.trashed.title'|trans({}, 'CapcoAppBundle') }} <span class="badge">{{ trashedNb }}</span></h2>
-                <div class="pull-right  opinion__header__filter">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1">
+            <div class="project__show-trash">
+                <div class="project__show-trash__return">
+                    <a class="btn btn-default" href="javascript:history.back()">
+                        <i class="cap cap-arrow-1-1"></i>
+                        {{ 'project.show.global.title'|trans({}, 'CapcoAppBundle') }}
+                    </a>
                 </div>
+                <h2 class="text-center">
+                    {{ 'project.show.trashed.short_name'|trans({}, 'CapcoAppBundle') }}
+                </h2>
             </div>
-        </div>
-        {% if trashedNb > 0 %}
-        <ul class="media-list  opinion__list">
-            {% if opinions|length > 0 %}
-                {% for opinion in opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} only %}
-                {% endfor %}
-            {% endif %}
-            {% if versions|length > 0 %}
-                {% for version in versions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} only %}
-                {% endfor %}
-            {% endif %}
-            {% if arguments|length > 0 %}
-                {% for argument in arguments %}
-                    {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
-                {% endfor %}
-            {% endif %}
-            {% if sources|length > 0 %}
-                {% for source in sources %}
-                    {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.linkedOpinion, 'opinionType': source.linkedOpinion.opinionType, 'project': project } only %}
-                {% endfor %}
-            {% endif %}
+            {% set trashedNb = (arguments|length + opinions|length + versions|length + sources|length + proposals|length) %}
+            <div>
+                <p>
+                    {{ 'project.show.trashed.text'|trans({}, 'CapcoAppBundle') }}
+                </p>
+            </div>
+
+            <h3 class="mb-25">
+                {{ trashedNb }}
+                {% transchoice trashedNb with {'%count%': trashedNb} from 'CapcoAppBundle'  %}
+                project.show.meta.total_count
+                {% endtranschoice %}
+            </h3>
+
+            {% if trashedNb > 0 %}
+                {% if proposals|length == 0 %}
+                    <div class="block  block--bordered">
+                        <ul class="media-list  opinion__list">
+                            {% if opinions|length > 0 %}
+                                {% for opinion in opinions %}
+                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} only %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if versions|length > 0 %}
+                                {% for version in versions %}
+                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} only %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if arguments|length > 0 %}
+                                {% for argument in arguments %}
+                                    {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if sources|length > 0 %}
+                                {% for source in sources %}
+                                    {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.linkedOpinion, 'opinionType': source.linkedOpinion.opinionType, 'project': project } only %}
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
             {% else %}
                 <div class="project__empty-block  text-center">
                     <p class="icon  cap-bubble-attention-6"></p>
                     <p>{{ 'project.show.trashed.none'|trans({}, 'CapcoAppBundle') }}</p>
                 </div>
             {% endif %}
-        </ul>
-    </div>
-    {% if proposals|length > 0 %}
-        <div class="row proposal-preview-trash_list">
-            {% for proposal in proposals %}
-                {% include 'CapcoAppBundle:Proposal:blockProposal.html.twig' with {'proposal': proposal } only %}
-            {% endfor %}
+
+            {% if proposals|length > 0 %}
+                <div class="row proposal-preview-trash_list">
+                    {% for proposal in proposals %}
+                        {% include 'CapcoAppBundle:Proposal:blockProposal.html.twig' with {'proposal': proposal } only %}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
 {% endblock %}

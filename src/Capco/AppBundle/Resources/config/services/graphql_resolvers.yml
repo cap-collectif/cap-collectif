@@ -1,5 +1,0 @@
-services:
-  global_id_resolver:
-      class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
-      arguments:
-          - "@service_container"

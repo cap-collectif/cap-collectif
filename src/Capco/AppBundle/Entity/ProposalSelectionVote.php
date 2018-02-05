@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousableTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,15 +62,6 @@ class ProposalSelectionVote extends AbstractVote
     public function getRelatedEntity()
     {
         return $this->proposal;
-    }
-
-    public function isIndexable()
-    {
-        try {
-            return !$this->isExpired() && !$this->getRelatedEntity()->isDeleted();
-        } catch (EntityNotFoundException $e) {
-            return false;
-        }
     }
 
     /**

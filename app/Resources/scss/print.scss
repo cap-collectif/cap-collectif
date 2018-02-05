@@ -11,12 +11,8 @@ body {
     margin: 10%
 }
 
-#main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg, .leaflet-container, .proposal-vote__widget {
+#main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg {
     display: none;
-}
-
-.proposal-map__block {
-    height: auto;
 }
 
 span.avatar {

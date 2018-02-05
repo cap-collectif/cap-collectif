@@ -1,34 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RemainingTime /> should not render 0 days if no props 1`] = `
-<FormattedMessage
-  id="global.remaining.days"
-  values={
-    Object {
-      "num": 0,
+exports[`<RemainingTime /> should render correctly remaining time (days left) 1`] = `
+<span
+  className="remaining-time__container"
+>
+  <span
+    className="remaining-time__number"
+  >
+    2
+  </span>
+   
+  <FormattedMessage
+    id="count.daysLeft"
+    values={
+      Object {
+        "count": 2,
+      }
     }
-  }
-/>
+  />
+</span>
 `;
 
-exports[`<RemainingTime /> should render the number of days if hours is not provided 1`] = `
-<FormattedMessage
-  id="global.remaining.days"
-  values={
-    Object {
-      "num": 2,
+exports[`<RemainingTime /> should render correctly remaining time (hours left) 1`] = `
+<span
+  className="remaining-time__container"
+>
+  <span
+    className="remaining-time__number"
+  >
+    4
+  </span>
+   
+  <FormattedMessage
+    id="count.hoursLeft"
+    values={
+      Object {
+        "count": 4,
+      }
     }
-  }
-/>
+  />
+</span>
 `;
 
-exports[`<RemainingTime /> should render the number of hours if provided 1`] = `
-<FormattedMessage
-  id="global.remaining.hours"
-  values={
-    Object {
-      "num": 2,
+exports[`<RemainingTime /> should render correctly remaining time (minutes left) 1`] = `
+<span
+  className="remaining-time__container"
+>
+  <span
+    className="remaining-time__number"
+  >
+    20
+  </span>
+   
+  <FormattedMessage
+    id="count.minutesLeft"
+    values={
+      Object {
+        "count": 20,
+      }
     }
-  }
-/>
+  />
+</span>
 `;

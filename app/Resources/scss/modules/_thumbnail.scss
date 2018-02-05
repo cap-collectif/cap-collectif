@@ -73,9 +73,21 @@
             }
         }
 
-        &__actions a {
-            text-transform: uppercase;
-            margin-right: 10px;
+        &__actions {
+            a {
+                text-transform: uppercase;
+                margin-right: 10px;
+            }
+
+            .remaining-time{
+                &__number {
+                    color: $excerpt-dark-gray;
+                }
+
+                &__container {
+                    color: $excerpt;
+                }
+            }
         }
     }
 
