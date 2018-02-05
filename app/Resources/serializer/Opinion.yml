@@ -91,10 +91,6 @@ Capco\AppBundle\Entity\Opinion:
             type: boolean
             groups: [Opinions]
             serialized_name: isTrashed
-        trashedReason:
-            expose: true
-            groups: [Opinions]
-            serialized_name: trashedReason
         ranking:
             expose: true
             type: integer

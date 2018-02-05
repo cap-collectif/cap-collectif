@@ -98,9 +98,9 @@
         "php-http/httplug": "^1.1",
         "php-http/client-common": "^1.7",
         "php-http/guzzle6-adapter": "^1.1",
-        "simplesamlphp/simplesamlphp": "1.15.0",
+        "simplesamlphp/simplesamlphp": "^1.15.2",
         "hslavich/simplesamlphp-bundle": "dev-master",
-        "simplesamlphp/saml2": "^3.1",
+        "simplesamlphp/saml2": "^3.1.2",
         "cap-collectif/id-to-uuid": "^1.1",
         "friendsofsymfony/http-cache-bundle": "^2.1",
         "jolicode/jolitypo-bundle": "^1.0",
@@ -136,8 +136,8 @@
         "phpunit/phpunit": "^5.0",
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "sjparkinson/behat-file-system-context": "^0.1.0",
-        "phpstan/phpstan-doctrine": "^0.8.0",
-        "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d"
+        "alexandresalome/mailcatcher": "dev-master#cbfcc6acefa27230db3cbcd10334e0819fb364b7",
+        "phpstan/phpstan-doctrine": "^0.8.0"
     },
     "scripts": {},
     "config": {

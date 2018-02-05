@@ -12,13 +12,17 @@ final class ProposalUpdateMessage extends AdminMessage
                                   string $recipientName = null,
                                   string $proposalUrl,
                                   string $proposalAdminUrl,
-                                  string $authorUrl): self
+                                  string $authorUrl,
+                                  string $sitename,
+                                  string $senderEmail,
+                                  string $senderName = null): self
     {
-        return new self(
+        $message = new self(
             $recipentEmail,
             $recipientName,
             'notification.email.proposal.edit.subject',
             static::getMySubjectVars(
+                $sitename,
                 $proposal->getAuthor()->getDisplayName(),
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
             ),
@@ -33,8 +37,14 @@ final class ProposalUpdateMessage extends AdminMessage
                 $proposalUrl,
                 $proposalAdminUrl,
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
-            )
+            ),
+            $senderEmail,
+            $senderName
         );
+
+        $message->setSitename($sitename);
+
+        return $message;
     }
 
     private static function getMyTemplateVars(
@@ -62,10 +72,12 @@ final class ProposalUpdateMessage extends AdminMessage
     }
 
     private static function getMySubjectVars(
+        string $sitename,
         string $username,
         string $project
     ): array {
         return [
+          '%sitename%' => self::escape($sitename),
           '%username%' => self::escape($username),
           '%project%' => self::escape($project),
         ];
