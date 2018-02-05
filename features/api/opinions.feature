@@ -2,6 +2,10 @@
 Feature: Opinions
 
 ## Get
+<<<<<<< HEAD
+=======
+
+>>>>>>> Add limit test
 @parallel-scenario
 Scenario: Anonymous API client wants to retrieve an opinion
   When I send a GET request to "/api/opinions/opinion57"
@@ -123,6 +127,7 @@ Scenario: logged in API client wants to add an opinion to a not enabled opinionT
   }
   """
 
+<<<<<<< HEAD
 @database @rabbitmq
 Scenario: logged in API client wants to add an opinion
   Given I am logged in to api as user
@@ -132,6 +137,27 @@ Scenario: logged in API client wants to add an opinion
   | 0 | {"opinionId": "@uuid@"} |
 
 @database @rabbitmq
+=======
+@database
+Scenario: logged in API client can add some opinion, but not more than 2 in a minute
+  Given I am logged in to api as user
+  When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  Then the JSON response status code should be 201
+  When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  Then the JSON response status code should be 201
+  When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  Then the JSON response status code should be 400
+  And the JSON response should match:
+  """
+  {
+    "code": 400,
+    "message": "You contributed to many times.",
+    "errors": @null@
+  }
+  """
+
+@database
+>>>>>>> Add limit test
 Scenario: logged in API client wants to add an opinion with appendices
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/5/steps/cstep5/opinion_types/opinionType5/opinions" with json:
@@ -152,8 +178,11 @@ Scenario: logged in API client wants to add an opinion with appendices
   }
   """
   Then the JSON response status code should be 201
+<<<<<<< HEAD
   Then the queue associated to "opinion_create" producer has messages below:
   | 0 | {"opinionId": "@uuid@"} |
+=======
+>>>>>>> Add limit test
 
 @security
 Scenario: logged in API client wants to add an opinion with an appendixType from a wrong opinionType
@@ -214,8 +243,14 @@ Scenario: logged in API client wants to add an opinion with unknown appendixType
   """
 
 ## Update
+<<<<<<< HEAD
 @security
 Scenario: Anonymous API client wants to update an opinion
+=======
+
+@security
+Scenario: Anonymous API client wants to update a source
+>>>>>>> Add limit test
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
   Then the JSON response status code should be 401
 
@@ -225,13 +260,20 @@ Scenario: Logged in API client wants to update an opinion but is not the author
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
   Then the JSON response status code should be 403
 
+<<<<<<< HEAD
 @database @rabbitmq
+=======
+@database
+>>>>>>> Add limit test
 Scenario: Logged in API client wants to update his opinion
   Given I am logged in to api as user
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
   Then the JSON response status code should be 200
+<<<<<<< HEAD
   Then the queue associated to "opinion_update" producer has messages below:
   | 0 | {"opinionId": "opinion3"} |
+=======
+>>>>>>> Add limit test
 
 ## Vote
 
