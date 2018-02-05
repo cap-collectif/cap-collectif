@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\Maker;
 
+use Capco\AppBundle\Utils\Text;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,10 +19,21 @@ abstract class AbstractMaker extends ContainerAwareCommand
     protected $fqcns;
     protected $helper;
 
+    /**
+     * This method is meant to be override by any classes which extends AbstractMaker,
+     * to set the template file.
+     */
     abstract public function getTemplate(): string;
 
+    /**
+     * This method is meant to be override by any classes which extends AbstractMaker,
+     * to set the template variables.
+     */
     abstract public function getTemplateVars(): array;
 
+    /**
+     * Get additionnal directories in which entities will be searched in the method 'askEntity".
+     */
     public function getDirectories(): array
     {
         return [];
@@ -31,7 +43,11 @@ abstract class AbstractMaker extends ContainerAwareCommand
     {
         $this->parser = $this->getContainer()->get('capco.maker_parser');
         $this->finder = new Finder();
-        $directories = $this->getDirectories();
+        $defaultDirectories = [
+            'src/Capco/AppBundle/Entity',
+            'src/Capco/UserBundle/Entity',
+        ];
+        $directories = array_merge($this->getDirectories(), $defaultDirectories);
         foreach ($this->finder->files()->name('/\.php$/')->in($directories)->sortByName() as $file) {
             $this->fqcns[] = NamespaceResolver::getFullQualifiedClassName($file->getRealPath());
         }
@@ -110,7 +126,7 @@ abstract class AbstractMaker extends ContainerAwareCommand
         $responses = explode(',', $response);
 
         return array_map(function ($value) {
-            return trim($value);
+            return trim(Text::camelCase($value));
         }, $responses);
     }
 }

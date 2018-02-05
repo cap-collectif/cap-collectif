@@ -37,14 +37,6 @@ class MakeMessage extends AbstractMaker
         ];
     }
 
-    public function getDirectories(): array
-    {
-        return [
-            'src/Capco/AppBundle/Entity',
-            'src/Capco/UserBundle/Entity',
-        ];
-    }
-
     protected function configure(): void
     {
         $this
