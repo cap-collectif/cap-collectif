@@ -33,11 +33,11 @@ class UrlResolver
         $this->mediaExtension = $mediaExtension;
     }
 
-    public function getMediaUrl(Media $media, $args)
+    public function getMediaUrl(Media $media)
     {
         return $this->mediaExtension->getMediaUrl(
           $media,
-          isset($args['format']) ? $args['format'] : 'reference'
+          'reference'
         );
     }
 

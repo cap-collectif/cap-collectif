@@ -15,7 +15,7 @@ const mutation = graphql`
         usersConnection {
           edges {
             node {
-              ...GroupAdminUsersListGroupItem_user
+              id
             }
           }
         }

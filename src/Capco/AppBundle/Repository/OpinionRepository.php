@@ -6,12 +6,36 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionRepository extends EntityRepository
 {
+    public function findCreatedSinceIntervalByAuthor(User $author, string $interval): Collection
+    {
+        $now = new \DateTime();
+        $qb = $this->createQueryBuilder('o');
+        $qb->andWhere($qb->expr()->between(
+              'o.createdAt',
+              ':from',
+              ':to'
+          )
+        )
+        ->andWhere('o.author = :author')
+        ->setParameters([
+          'from' => $now->sub(new \DateInterval($interval)),
+          'to' => $now,
+          'author' => $author,
+        ])
+    ;
+
+        return $qb->getQuery()
+          ->getResult()
+      ;
+    }
+
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
@@ -182,7 +206,7 @@ class OpinionRepository extends EntityRepository
             ->setParameter('trashed', false)
         ;
 
-        if ($excludedAuthor !== null) {
+        if (null !== $excludedAuthor) {
             $qb
                 ->andWhere('aut.id != :author')
                 ->setParameter('author', $excludedAuthor)
@@ -200,7 +224,7 @@ class OpinionRepository extends EntityRepository
 
         $qb->addOrderBy('o.updatedAt', 'DESC');
 
-        if ($limit !== null && is_int($limit) && 0 < $limit) {
+        if (null !== $limit && is_int($limit) && 0 < $limit) {
             $query = $qb->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit)
@@ -333,20 +357,20 @@ class OpinionRepository extends EntityRepository
         $sortField = array_keys($orderBy)[0];
         $direction = $orderBy[$sortField];
 
-        if ($sortField === 'CREATED_AT') {
+        if ('CREATED_AT' === $sortField) {
             $qb
                     ->addOrderBy('o.createdAt', $direction)
                     ->addOrderBy('o.votesCountOk', 'DESC')
                 ;
         }
-        if ($sortField === 'POPULAR') {
-            if ($direction === 'DESC') {
+        if ('POPULAR' === $sortField) {
+            if ('DESC' === $direction) {
                 $qb
                       ->addOrderBy('o.votesCountOk', 'DESC')
                       ->addOrderBy('o.votesCountNok', 'ASC')
                     ;
             }
-            if ($direction === 'ASC') {
+            if ('ASC' === $direction) {
                 $qb
                        ->addOrderBy('o.votesCountNok', 'DESC')
                        ->addOrderBy('o.votesCountOk', 'ASC')
@@ -354,20 +378,20 @@ class OpinionRepository extends EntityRepository
             }
             $qb->addOrderBy('o.createdAt', 'DESC');
         }
-        if ($sortField === 'VOTE_COUNT') {
+        if ('VOTE_COUNT' === $sortField) {
             $qb
                     ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
                     ->addOrderBy('vnb', $direction)
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
         }
-        if ($sortField === 'COMMENT_COUNT') {
+        if ('COMMENT_COUNT' === $sortField) {
             $qb
                     ->addOrderBy('o.argumentsCount', $direction)
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
         }
-        if ($sortField === 'POSITION') {
+        if ('POSITION' === $sortField) {
             $qb
                     // trick in DQL to order NULL values last
                     ->addSelect('-o.position as HIDDEN inversePosition')
@@ -376,7 +400,7 @@ class OpinionRepository extends EntityRepository
                     ->addOrderBy('rand')
                 ;
         }
-        if ($sortField === 'RANDOM') {
+        if ('RANDOM' === $sortField) {
             $qb
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
@@ -422,33 +446,33 @@ class OpinionRepository extends EntityRepository
         ;
 
         if ($opinionsSort) {
-            if ($opinionsSort === 'last') {
+            if ('last' === $opinionsSort) {
                 $qb
                     ->addOrderBy('o.createdAt', 'DESC')
                     ->addOrderBy('o.votesCountOk', 'DESC')
                 ;
-            } elseif ($opinionsSort === 'old') {
+            } elseif ('old' === $opinionsSort) {
                 $qb
                     ->addOrderBy('o.createdAt', 'ASC')
                     ->addOrderBy('o.votesCountOk', 'DESC')
                 ;
-            } elseif ($opinionsSort === 'favorable') {
+            } elseif ('favorable' === $opinionsSort) {
                 $qb
                     ->addOrderBy('o.votesCountOk', 'DESC')
                     ->addOrderBy('o.votesCountNok', 'ASC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort === 'votes') {
+            } elseif ('votes' === $opinionsSort) {
                 $qb
                     ->addOrderBy('vnb', 'DESC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort === 'comments') {
+            } elseif ('comments' === $opinionsSort) {
                 $qb
                     ->addOrderBy('o.argumentsCount', 'DESC')
                     ->addOrderBy('o.createdAt', 'DESC')
                 ;
-            } elseif ($opinionsSort === 'positions') {
+            } elseif ('positions' === $opinionsSort) {
                 $qb
                     // trick in DQL to order NULL values last
                     ->addSelect('-o.position as HIDDEN inversePosition')
@@ -457,7 +481,7 @@ class OpinionRepository extends EntityRepository
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
                 ;
-            } elseif ($opinionsSort === 'random') {
+            } elseif ('random' === $opinionsSort) {
                 $qb
                     ->addSelect('RAND() as HIDDEN rand')
                     ->addOrderBy('rand')
@@ -496,7 +520,7 @@ class OpinionRepository extends EntityRepository
             ->setParameter('project', $project)
         ;
 
-        if ($excludedAuthor !== null) {
+        if (null !== $excludedAuthor) {
             $qb
                 ->innerJoin('o.Author', 'a')
                 ->andWhere('a.id != :author')

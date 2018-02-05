@@ -9,6 +9,30 @@ swarrot:
             password: "%rabbitmq_password%"
             vhost: /
     messages_types:
+        opinion.create:
+            exchange: capco_direct_exchange
+            routing_key: opinion_create
+        opinion.update:
+            exchange: capco_direct_exchange
+            routing_key: opinion_update
+        opinion.delete:
+            exchange: capco_direct_exchange
+            routing_key: opinion_delete
+        opinion.trash:
+            exchange: capco_direct_exchange
+            routing_key: opinion_trash
+        argument.create:
+            exchange: capco_direct_exchange
+            routing_key: argument_create
+        argument.update:
+            exchange: capco_direct_exchange
+            routing_key: argument_update
+        argument.delete:
+            exchange: capco_direct_exchange
+            routing_key: argument_delete
+        argument.trash:
+            exchange: capco_direct_exchange
+            routing_key: argument_trash
         proposal.create:
             exchange: capco_direct_exchange
             routing_key: proposal_create
@@ -28,6 +52,142 @@ swarrot:
             exchange: capco_direct_exchange
             routing_key: comment_delete
     consumers:
+        opinion_create:
+            processor: opinion_create.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'opinion_create_retry_%%attempt%%'
+        opinion_update:
+            processor: opinion_update.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'opinion_update_retry_%%attempt%%'
+        opinion_delete:
+            processor: opinion_delete.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'opinion_delete_retry_%%attempt%%'
+        opinion_trash:
+            processor: opinion_trash.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'opinion_trash_retry_%%attempt%%'
+        argument_create:
+            processor: argument_create.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'argument_create_retry_%%attempt%%'
+        argument_update:
+            processor: argument_update.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'argument_update_retry_%%attempt%%'
+        argument_delete:
+            processor: argument_delete.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'argument_delete_retry_%%attempt%%'
+        argument_trash:
+            processor: argument_trash.processor
+            middleware_stack:
+                 - configurator: swarrot.processor.signal_handler
+                 - configurator: swarrot.processor.max_execution_time
+                   extras:
+                       max_execution_time: 100
+                 - configurator: swarrot.processor.max_messages
+                 - configurator: swarrot.processor.doctrine_connection
+                 - configurator: swarrot.processor.doctrine_object_manager
+                 - configurator: swarrot.processor.exception_catcher
+                 - configurator: swarrot.processor.ack
+                 - configurator: swarrot.processor.retry
+                   extras:
+                       retry_attempts: 3
+                       retry_exchange: 'retry'
+                       retry_routing_key_pattern: 'argument_trash_retry_%%attempt%%'
         proposal_create:
             processor: proposal_create.processor
             middleware_stack:

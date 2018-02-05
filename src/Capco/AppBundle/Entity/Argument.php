@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\IsPublishableInterface;
+use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
@@ -22,13 +23,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
+class Argument implements Contribution, VotableInterface, IsPublishableInterface, ModerableInterface
 {
     use UuidTrait;
     use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
     use TextableTrait;
+    use ModerableTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -136,6 +138,11 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         return 'argument';
     }
 
+    public function getProject()
+    {
+        return $this->getParent()->getStep()->getProject();
+    }
+
     public function getRelated()
     {
         return $this->getParent();
@@ -192,12 +199,29 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         return $this;
     }
 
+    public function setEnabled(bool $enabled): self
+    {
+        $this->isEnabled = $enabled;
+
+        return $this;
+    }
+
     /**
      * @return int
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getTypeAsString(): string
+    {
+        switch ($this->type) {
+          case 0:
+            return 'argument.show.type.against';
+          case 1:
+            return 'argument.show.type.for';
+        }
     }
 
     /**
@@ -240,6 +264,13 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
     public function getTrashedAt()
     {
         return $this->trashedAt;
+    }
+
+    public function setTrashed(bool $trashed): self
+    {
+        $this->isTrashed = $trashed;
+
+        return $this;
     }
 
     /**
@@ -296,6 +327,11 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
         $this->Author = $Author;
 
         return $this;
+    }
+
+    public function getStep()
+    {
+        return $this->getRelated()->getStep();
     }
 
     /**
@@ -373,7 +409,7 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
      */
     public function userHasReport(User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($this->Reports as $report) {
                 if ($report->getReporter() === $user) {
                     return true;
@@ -409,7 +445,7 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
      */
     public function getParent()
     {
-        if ($this->opinionVersion !== null) {
+        if (null !== $this->opinionVersion) {
             return $this->opinionVersion;
         }
 
@@ -432,11 +468,11 @@ class Argument implements Contribution, TrashableInterface, VotableInterface, Is
      */
     public function deleteArgument()
     {
-        if ($this->opinion !== null) {
+        if (null !== $this->opinion) {
             $this->opinion->removeArgument($this);
         }
 
-        if ($this->opinionVersion !== null) {
+        if (null !== $this->opinionVersion) {
             $this->opinionVersion->removeArgument($this);
         }
     }

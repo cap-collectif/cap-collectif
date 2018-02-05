@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\Argument:
-
   ## Arguments on opinion
   argument1:
     id: 'argument1'
@@ -9,11 +8,12 @@ Capco\AppBundle\Entity\Argument:
     body: Coucou, je suis un bel argument !
     isEnabled: true
     isTrashed: false
+    moderationToken: "argument1ModerationToken"
   argument2:
     id: 'argument2'
     Opinion: '@opinion2'
     type: 0
-    Author: @user4
+    Author: '@user4'
     body: <text(300)>
     isEnabled: true
     isTrashed: false
@@ -98,8 +98,41 @@ Capco\AppBundle\Entity\Argument:
     isEnabled: true
     isTrashed: false
 
+  argument206:
+    id: 'argument206'
+    Opinion: '@opinion57'
+    type: 1
+    Author: '@user1'
+    body: 'Que la force soit avec toi.'
+    isEnabled: true
+    isTrashed: false
+    createdAt: <(new \DateTime('2016-03-01'))>
+    moderationToken: 'argument206ModerationToken'
 
-  argument{206..210}:
+  argument207:
+    id: 'argument207'
+    Opinion: '@opinion57'
+    type: 1
+    Author: '@user1'
+    body: 'Que la force soit avec toi et avec Yoda.'
+    isEnabled: true
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2017-03-01'))>
+    moderationToken: 'argument207ModerationToken'
+
+  argument208:
+    id: 'argument208'
+    Opinion: '@opinion57'
+    type: 1
+    Author: '@user1'
+    body: 'Le spam c cool'
+    isEnabled: true
+    isTrashed: true
+    createdAt: <(new \DateTime('2016-03-01'))>
+    trashedAt: <(new \DateTime('2017-03-01'))>
+    trashedReason: "moderation-guideline-violation"
+
+  argument{209..210}:
     id: 'argument<current()>'
     Opinion: '@opinion57'
     type: 1
