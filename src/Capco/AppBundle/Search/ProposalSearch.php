@@ -71,14 +71,6 @@ class ProposalSearch extends Search
                 $sortField = 'commentsCount';
                 $sortOrder = 'desc';
                 break;
-            case 'expensive':
-                $sortField = 'estimation';
-                $sortOrder = 'desc';
-                break;
-            case 'cheap':
-                $sortField = 'estimation';
-                $sortOrder = 'asc';
-                break;
             default:
                 $sortField = '_score';
                 $sortOrder = 'desc';
@@ -160,10 +152,10 @@ class ProposalSearch extends Search
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses'] > 0) {
             $filters['status.id'] = $providedFilters['statuses'];
         }
-        if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses']) {
+        if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses'] > 0) {
             $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
         }
         if (isset($providedFilters['districts'])) {
@@ -173,7 +165,7 @@ class ProposalSearch extends Search
             $filters['theme.id'] = $providedFilters['themes'];
         }
         if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
-            $filters['author.userType.id'] = $providedFilters['types'];
+            $filters['author.user_type.id'] = $providedFilters['types'];
         }
         if (isset($providedFilters['categories'])) {
             $filters['category.id'] = $providedFilters['categories'];
