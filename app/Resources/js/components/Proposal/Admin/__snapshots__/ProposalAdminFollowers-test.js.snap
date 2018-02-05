@@ -45,8 +45,6 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
         id="proposal.admin.followers"
         values={Object {}}
       />
-       
-      3
     </h3>
     <a
       className="pull-right link"
