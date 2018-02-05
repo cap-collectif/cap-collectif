@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { FormattedHTMLMessage } from 'react-intl';
+import { Alert, Glyphicon } from 'react-bootstrap';
 import OpinionStore from '../../stores/OpinionStore';
 import OpinionActions from '../../actions/OpinionActions';
 import FlashMessages from '../Utils/FlashMessages';
@@ -11,39 +13,47 @@ import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
 import Loader from '../Utils/Loader';
 
-const OpinionPage = React.createClass({
-  propTypes: {
-    opinionId: React.PropTypes.string.isRequired,
-    versionId: React.PropTypes.string,
-    fetchOpinionVotes: React.PropTypes.func.isRequired,
+type Props = {
+  opinionId: string,
+  versionId: ?string,
+  fetchOpinionVotes: Function,
+};
+type State = {
+  opinion: ?Object,
+  isLoading: boolean,
+  rankingThreshold: ?number,
+  opinionTerm: number,
+  messages: {
+    errors: Array<string>,
+    success: Array<string>,
   },
+};
 
-  getInitialState() {
-    return {
-      opinion: null,
-      isLoading: true,
-      rankingThreshold: null,
-      opinionTerm: 0,
-      messages: {
-        errors: [],
-        success: [],
-      },
-    };
-  },
+export class OpinionPage extends React.Component<Props, State> {
+  state = {
+    opinion: null,
+    isLoading: true,
+    rankingThreshold: null,
+    opinionTerm: 0,
+    messages: {
+      errors: [],
+      success: [],
+    },
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     OpinionStore.addChangeListener(this.onChange);
-  },
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.loadOpinion();
-  },
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     OpinionStore.removeChangeListener(this.onChange);
-  },
+  };
 
-  onChange() {
+  onChange = () => {
     if (!OpinionStore.isProcessing && OpinionStore.isOpinionSync) {
       this.setState({
         opinion: OpinionStore.opinion,
@@ -56,13 +66,13 @@ const OpinionPage = React.createClass({
     }
 
     this.loadOpinion();
-  },
+  };
 
-  loadOpinion() {
+  loadOpinion = () => {
     const { opinionId, versionId } = this.props;
     OpinionActions.loadOpinion(opinionId, versionId);
     this.props.fetchOpinionVotes(opinionId, versionId);
-  },
+  };
 
   render() {
     return (
@@ -70,19 +80,30 @@ const OpinionPage = React.createClass({
         <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <Loader show={this.state.isLoading}>
           {this.state.opinion && (
-            <OpinionBox
-              {...this.props}
-              rankingThreshold={this.state.rankingThreshold}
-              opinionTerm={this.state.opinionTerm}
-              opinion={this.state.opinion}
-            />
+            <div>
+              {this.state.opinion.isTrashed && (
+                <Alert bsStyle="danger">
+                  <Glyphicon glyph="trash" />{' '}
+                  <FormattedHTMLMessage
+                    id="in-the-trash"
+                    values={{ reason: this.state.opinion.trashedReason || '' }}
+                  />
+                </Alert>
+              )}
+              <OpinionBox
+                {...this.props}
+                rankingThreshold={this.state.rankingThreshold}
+                opinionTerm={this.state.opinionTerm}
+                opinion={this.state.opinion}
+              />
+            </div>
           )}
           {this.state.opinion && <OpinionTabs {...this.props} opinion={this.state.opinion} />}
         </Loader>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {

@@ -14,8 +14,7 @@ Capco\AppBundle\Entity\SiteImage:
     SiteImage3:
         keyname: homepage.picto
         category: pages.homepage
-        media: '@picto'
-        isEnabled: true
+        isEnabled: false
         isSocialNetworkThumbnail: true
         position: 3
     SiteImage4:

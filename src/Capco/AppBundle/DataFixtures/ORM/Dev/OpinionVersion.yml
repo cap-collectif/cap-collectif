@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\OpinionVersion:
-
     version1:
         id: 'version1'
         title: Modification 1
@@ -13,6 +12,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         comment: bououh
         ranking: <numberBetween(1,5)>
         answer: '@answer2'
+        moderationToken: "version1ModerationToken"
     version2:
         id: 'version2'
         title: Modification 2

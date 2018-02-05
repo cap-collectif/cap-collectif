@@ -17,7 +17,7 @@ const StepInfos = React.createClass({
 
     return (
       <div>
-        <div className="step__infos block">
+        <div className="step__infos block block--bordered">
           <CountersNav counters={counters} bordered={!!body} />
           <StepText text={body} />
         </div>

@@ -15,4 +15,9 @@ final class Text
 
         return iconv('UTF-8', 'UTF-8//IGNORE', $str);
     }
+
+    public static function unslug(string $slug)
+    {
+        return ucfirst(str_replace('-', ' ', $slug));
+    }
 }

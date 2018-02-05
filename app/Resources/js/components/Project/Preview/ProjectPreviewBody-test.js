@@ -35,6 +35,25 @@ const firstTest = {
   },
 };
 
+const remainingTimeTest = {
+  project: {
+    title: 'Name of my project',
+    _links: { show: 'http://capco/show-link' },
+    hasParticipativeStep: true,
+    steps: [
+      {
+        title: 'Open step 1',
+        status: 'open',
+        startAt: '2017-01-10T09:00:24+01:00',
+        endAt: '2017-11-25T09:00:24+01:00',
+        timeless: false,
+        type: 'collect',
+        _links: { show: 'http://capco/step1/show-link' },
+      },
+    ],
+  },
+};
+
 const secondTest = {
   project: {
     title: 'Name of my project',
@@ -183,8 +202,21 @@ const sixthTest = {
 };
 
 describe('<ProjectPreviewBody />', () => {
-  it('should render correctly project preview body & elements for open participative step', () => {
+  it('should render correctly project preview body & elements for open participative step (days left)', () => {
+    (Date: any).now = jest.fn(() => 1511341200000);
     const wrapper = shallow(<ProjectPreviewBody {...firstTest} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly project preview body & elements for open participative step (hours left)', () => {
+    (Date: any).now = jest.fn(() => 1511582400000);
+    const wrapper = shallow(<ProjectPreviewBody {...remainingTimeTest} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly project preview body & elements for open participative step (minutes left)', () => {
+    (Date: any).now = jest.fn(() => 1511595600000);
+    const wrapper = shallow(<ProjectPreviewBody {...remainingTimeTest} />);
     expect(wrapper).toMatchSnapshot();
   });
 

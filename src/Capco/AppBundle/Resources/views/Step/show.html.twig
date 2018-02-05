@@ -23,13 +23,7 @@
 
 {% block details %}
     <h2 class="h2">{{ currentStep.title }}</h2>
-    {% if currentStep.startAt %}
-        <div class="mb-30 project__step-dates">
-            <i class="cap cap-calendar-2-1"></i>
-            {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': currentStep} only %}
-        </div>
-    {% endif %}
-    <div class="block">
+    <div class="block  block--bordered  box">
         {{ currentStep.body | raw }}
     </div>
 {% endblock %}
