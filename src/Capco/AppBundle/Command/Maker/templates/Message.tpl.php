@@ -1,12 +1,14 @@
 <?php echo "<?php\n"; ?>
 
-namespace Capco\AppBundle\Mailer\Message\User\<?php echo $command_entity_name; ?>;
+namespace Capco\AppBundle\Mailer\Message\<?php echo $command_entity_name; ?>;
 
 use Capco\AppBundle\Mailer\Message\<?php echo $command_message_type; ?>;
+use <?php echo $command_related_entity_fqcn; ?>;
 
 final class <?php echo $command_class_name; ?> extends <?php echo $command_message_type; ?><?php echo PHP_EOL; ?>
 {
     public static function create(
+        <?php echo $command_entity_name; ?> $<?php echo $command_entity_name_camelCase; ?>,
         string $recipentEmail,
         string $recipientName = null
     ): self
