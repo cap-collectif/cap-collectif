@@ -1,4 +1,3 @@
-// @flow
 import BaseStore from './BaseStore';
 import {
   RECEIVE_OPINION,
@@ -27,7 +26,7 @@ class OpinionStore extends BaseStore {
     };
   }
 
-  _registerToActions(action: any) {
+  _registerToActions(action) {
     switch (action.actionType) {
       case RECEIVE_OPINION:
         this._opinion = action.opinion;
@@ -75,27 +74,27 @@ class OpinionStore extends BaseStore {
     }
   }
 
-  get isProcessing(): boolean {
+  get isProcessing() {
     return this._isProcessing;
   }
 
-  get opinion(): Object {
+  get opinion() {
     return this._opinion;
   }
 
-  get rankingThreshold(): number {
+  get rankingThreshold() {
     return this._rankingThreshold;
   }
 
-  get opinionTerm(): number {
+  get opinionTerm() {
     return this._opinionTerm;
   }
 
-  get isOpinionSync(): boolean {
+  get isOpinionSync() {
     return this._isOpinionSync;
   }
 
-  get messages(): Object {
+  get messages() {
     return this._messages;
   }
 

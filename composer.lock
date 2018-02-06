@@ -10396,12 +10396,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/mailcatcher.git",
-                "reference": "e5bff236a6560d5314ea9bba32bcea6e3588b40d"
+                "reference": "cbfcc6acefa27230db3cbcd10334e0819fb364b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/e5bff236a6560d5314ea9bba32bcea6e3588b40d",
-                "reference": "e5bff236a6560d5314ea9bba32bcea6e3588b40d",
+                "url": "https://api.github.com/repos/cap-collectif/mailcatcher/zipball/cbfcc6acefa27230db3cbcd10334e0819fb364b7",
+                "reference": "cbfcc6acefa27230db3cbcd10334e0819fb364b7",
                 "shasum": ""
             },
             "require": {
@@ -10426,7 +10426,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/mailcatcher/tree/master"
             },
-            "time": "2018-01-25T16:41:14+00:00"
+            "time": "2017-11-07T17:02:07+00:00"
         },
         {
             "name": "behat/behat",

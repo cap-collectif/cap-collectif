@@ -92,7 +92,7 @@ export class ProposalPage extends React.Component<Props> {
                     <FormattedMessage id="proposal.tabs.blog" />
                     <span className="badge">{proposal.postsCount}</span>
                   </NavItem>
-                  {proposal.hasEvaluation && (
+                  {proposal.viewerCanSeeEvaluation && (
                     <NavItem eventKey="evaluation" className="tab">
                       <FormattedMessage id="proposal.tabs.evaluation" />
                     </NavItem>

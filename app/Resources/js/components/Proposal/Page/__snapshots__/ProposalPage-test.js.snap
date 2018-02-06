@@ -362,9 +362,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
     proposal={
       Object {
         "commentsCount": 5,
-        "hasEvaluation": true,
         "id": 41,
         "referer": "http://capco.test",
+        "viewerCanSeeEvaluation": true,
         "votableStepId": "2",
         "votesCountByStepId": Object {
           "2": 0,
@@ -376,9 +376,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
     proposal={
       Object {
         "commentsCount": 5,
-        "hasEvaluation": true,
         "id": 41,
         "referer": "http://capco.test",
+        "viewerCanSeeEvaluation": true,
         "votableStepId": "2",
         "votesCountByStepId": Object {
           "2": 0,
@@ -391,9 +391,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
     proposal={
       Object {
         "commentsCount": 5,
-        "hasEvaluation": true,
         "id": 41,
         "referer": "http://capco.test",
+        "viewerCanSeeEvaluation": true,
         "votableStepId": "2",
         "votesCountByStepId": Object {
           "2": 0,
@@ -504,9 +504,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -519,9 +519,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -534,9 +534,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -555,9 +555,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -576,9 +576,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -595,9 +595,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
                   proposal={
                     Object {
                       "commentsCount": 5,
-                      "hasEvaluation": true,
                       "id": 41,
                       "referer": "http://capco.test",
+                      "viewerCanSeeEvaluation": true,
                       "votableStepId": "2",
                       "votesCountByStepId": Object {
                         "2": 0,
@@ -718,9 +718,9 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
         proposal={
           Object {
             "commentsCount": 5,
-            "hasEvaluation": true,
             "id": 41,
             "referer": "http://capco.test",
+            "viewerCanSeeEvaluation": true,
             "votableStepId": "2",
             "votesCountByStepId": Object {
               "2": 0,

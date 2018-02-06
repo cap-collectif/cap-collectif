@@ -118,7 +118,7 @@ Scenario: Project header should display correct number of contributions
   Then I should see 'project.show.meta.total_count {"%count%":160}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":33}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":34}'
   #And I should see 'project.show.meta.argumentsCount {"%count%":95}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 

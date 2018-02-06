@@ -28,16 +28,6 @@ class CommandContext implements KernelAwareContext
     }
 
     /**
-     * @Given I consume :queue
-     *
-     * @param mixed $maxMessage
-     */
-    public function iConsume(string $queue, $maxMessage = 1)
-    {
-        $this->run('swarrot:consume:' . $queue . ' ' . $queue . ' --env=test --max-execution-time=10 --max-messages=' . $maxMessage);
-    }
-
-    /**
      * @Given I run a command :command with parameters:
      *
      * @param mixed $command
