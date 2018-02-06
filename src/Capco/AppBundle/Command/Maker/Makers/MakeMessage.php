@@ -50,7 +50,7 @@ class MakeMessage extends AbstractMaker
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $messageTypes = ['External', 'Admin', 'Moderator'];
+        $messageTypes = ['External', 'Admin', 'Moderator', 'Default'];
         $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>', true);
 
         $this->className = $this->askSimpleQuestion($input, $output,

@@ -37,3 +37,9 @@ services:
       - "@capco.resolver.consultations"
       - "@router"
       - "@translator"
+  capco.contact_notifier:
+    class: Capco\AppBundle\Notifier\ContactNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
