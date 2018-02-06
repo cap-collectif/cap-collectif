@@ -44,7 +44,7 @@ final class UpdateOpinionModeratorMessage extends ModeratorMessage
     ): array {
         return [
             '{title}' => self::escape($title),
-            '{body}' => self::escape($body),
+            '{body}' => self::escape(self::cleanHtml($body)),
             '{updatedDate}' => $updatedDate,
             '{updatedTime}' => $updatedTime,
             '{authorName}' => self::escape($authorName),

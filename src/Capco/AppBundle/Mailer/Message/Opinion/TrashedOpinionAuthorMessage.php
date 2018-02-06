@@ -39,7 +39,7 @@ final class TrashedOpinionAuthorMessage extends ExternalMessage
         return [
             '{trashedReason}' => self::escape($trashedReason),
             '{title}' => self::escape($title),
-            '{body}' => self::escape($body),
+            '{body}' => self::escape(self::cleanHtml($body)),
             '{trashedDate}' => $trashedDate,
             '{trashedTime}' => $trashedTime,
             '{opinionLink}' => $opinionLink,
