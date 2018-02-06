@@ -24,15 +24,19 @@ abstract class AbstractMaker extends ContainerAwareCommand
     protected $sourcePath;
 
     /**
-     * This method is meant to be override by any classes which extends AbstractMaker,
+     * This method is meant to be overrided by any classes which extends AbstractMaker,
      * to set the template file.
      */
     abstract public function getTemplate(): string;
 
+    /**
+     * This method is meant to be overrided by any classes which extends AbstractMaker.
+     * It allows to modify where the generated file will be located.
+     */
     abstract public function getOutputDirectory(): string;
 
     /**
-     * This method is meant to be override by any classes which extends AbstractMaker,
+     * This method is meant to be overrided by any classes which extends AbstractMaker,
      * to set the template variables.
      */
     abstract public function getTemplateVars(): array;
