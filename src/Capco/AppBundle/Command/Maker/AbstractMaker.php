@@ -15,6 +15,7 @@ abstract class AbstractMaker extends ContainerAwareCommand
 {
     const TEMPLATE_PATH = __DIR__ . '/templates';
     protected $parser;
+    protected $entity;
     protected $finder;
     protected $fs;
     protected $fqcns;

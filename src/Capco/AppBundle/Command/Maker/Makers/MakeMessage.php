@@ -10,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MakeMessage extends AbstractMaker
 {
     protected $className;
-    protected $entity;
     protected $type;
     protected $subject;
     protected $content;
@@ -71,6 +70,6 @@ class MakeMessage extends AbstractMaker
 
         $path = $this->makeFile();
 
-        $output->writeln("<info>File successfully written at $path</info>");
+        $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
     }
 }
