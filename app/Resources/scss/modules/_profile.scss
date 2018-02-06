@@ -58,7 +58,7 @@
             background-color: $white;
             color: $dark;
             @include border-radius(0);
-            @include box-shadow(0 -3px 0 $brand-primary inset);
+            @include box-shadow(0 -3px 0 $primary-color inset);
         }
     }
 

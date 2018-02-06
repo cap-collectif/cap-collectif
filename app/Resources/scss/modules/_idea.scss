@@ -3,10 +3,10 @@
  =================== */
 .idea__preview {
     &:hover {
-        background-color: #f6f6f6;
+        background-color: $page-bgc;
 
         .idea__title:after {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), #f6f6f6 50%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), $page-bgc 50%);
         }
     }
 

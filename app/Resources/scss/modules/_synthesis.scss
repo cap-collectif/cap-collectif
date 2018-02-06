@@ -2,20 +2,6 @@
    $Synthesis
 ================================================================*/
 
-// **************************** Colors ************************************************
-$white: #fff;
-$lightest-gray: #f6f6f6;
-$lighter-gray: #ebebeb;
-// $border-color: #ddd;
-$gray: #999;
-$darker-gray: #333;
-$dark: #000;
-$blue: #377bb5;
-$green: #5fb760;
-$orange: #eeac57;
-$red: #d9534f;
-$dark-red: #a94442;
-
 // **************************** Layout ************************************************
 
 .synthesis_page body {
@@ -62,7 +48,7 @@ $dark-red: #a94442;
         width: 30%;
         padding: 0;
         padding-top: 15px;
-        background-color: $lightest-gray;
+        background-color: $page-bgc;
         border-right: 1px solid $border-color;
     }
 
@@ -138,7 +124,7 @@ $dark-red: #a94442;
 .synthesis__second-navbar {
     z-index: 1020;
     top: 50px;
-    background-color: $red;
+    background-color: $danger-color;
     color: $white;
 
     .navbar-brand,
@@ -159,7 +145,7 @@ $dark-red: #a94442;
     .navbar-right > li.active > a,
     .navbar-right > li.active > a:hover,
     .navbar-right > li.active > a:focus {
-        background-color: darken($red, 15);
+        background-color: darken($danger-color, 15);
     }
 
 }
@@ -188,7 +174,7 @@ $dark-red: #a94442;
         .menu--fixed {
             position: relative;
             z-index: 1000;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
 
         .menu__link > a {
@@ -241,7 +227,7 @@ $dark-red: #a94442;
     .menu__item {
         border-right: 1px solid $border-color;
         border-top: 1px solid $border-color;
-        background-color: $lightest-gray;
+        background-color: $page-bgc;
 
         & > a {
             margin-right: 0;
@@ -296,11 +282,11 @@ $dark-red: #a94442;
         }
 
         &.archived {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
 
         &:hover {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
     }
 }
@@ -308,7 +294,7 @@ $dark-red: #a94442;
 // Empty elements list
 .synthesis__list--empty {
     padding: 30px 15px;
-    color: $gray;
+    color: $dark-gray;
     font-weight: bold;
 
     .icon {
@@ -332,7 +318,7 @@ $dark-red: #a94442;
 }
 
 .tree__item__content.selected {
-    background-color: $blue;
+    background-color: $primary-color;
     color: $white;
 }
 
@@ -376,12 +362,12 @@ $dark-red: #a94442;
     }
 
     .tree__item__content.selected {
-        background-color: $lighter-gray;
+        background-color: $border-color;
         color: $dark;
     }
 
     .tree__item.published > .tree__item__content {
-        color: $green;
+        color: $success-color;
     }
 
     .elements-tree__item-icon {
@@ -431,17 +417,17 @@ $dark-red: #a94442;
     .element__metadata {
         position: relative;
         margin: 0 0 5px;
-        color: $gray;
+        color: $dark-gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $gray;
+            color: $dark-gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $blue;
+            color: $primary-color;
         }
     }
 
@@ -452,7 +438,7 @@ $dark-red: #a94442;
 
         &:hover,
         &.active {
-            color: $blue;
+            color: $primary-color;
             text-decoration: none;
         }
     }
@@ -460,17 +446,17 @@ $dark-red: #a94442;
     .element__breadcrumb {
         margin-bottom: 0;
         margin-top: 5px;
-        color: $gray;
+        color: $dark-gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $gray;
+            color: $dark-gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $blue;
+            color: $primary-color;
         }
     }
 }
@@ -487,7 +473,7 @@ $dark-red: #a94442;
     margin-left: 5px;
 
     span {
-        color: $gray;
+        color: $dark-gray;
         font-size: 16px;
 
         &.active {
@@ -581,12 +567,12 @@ $dark-red: #a94442;
 .element__action-notation {
 
     &:hover a.active {
-        color: $gray;
+        color: $dark-gray;
     }
 
     a {
         direction: rtl;
-        color: $gray;
+        color: $dark-gray;
         text-decoration: none;
         transition: color 0.4s;
         unicode-bidi: embed;
@@ -666,7 +652,7 @@ $dark-red: #a94442;
     }
 
     .panel--original-element {
-        background-color: $lightest-gray;
+        background-color: $page-bgc;
         border-right: 1px solid $border-color;
 
         .element__title {
@@ -694,7 +680,7 @@ $dark-red: #a94442;
         .division__element {
             border-top: 1px solid $border-color;
             padding: 15px;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
 
             &:first-child {
                 border-top: 0;
@@ -710,7 +696,7 @@ $dark-red: #a94442;
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($dark $dark);
+$items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-color) (#808080 $dark-gray) ($dark $dark);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);
@@ -768,7 +754,7 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
         cursor: pointer;
 
         &:hover {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
     }
 

@@ -85,7 +85,7 @@
 
     &.opinion__footer {
         border-top: 1px solid $border-color;
-        background-color: #F6F6F6;
+        background-color: $page-bgc;
         font-size: 16px;
     }
 
@@ -499,7 +499,7 @@
 #opinion__arguments--yes,
 #opinion__arguments--simple {
     .opinion__header__title {
-        color: $brand-success;
+        color: $success-color;
     }
 }
 
@@ -513,7 +513,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 1px 5px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid $border-color;
     font-size: 12px;
     line-height: 1.5;
 }

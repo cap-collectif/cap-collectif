@@ -17,13 +17,13 @@
 
 // To remove with bootstrap4
 .btn-secondary {
-    background-color: $dark-gray;
-    border-color: $dark-gray;
+    background-color: $secondary-color;
+    border-color: $secondary-color;
     color: $white;
 
     &:hover {
-        background-color: $dark-gray-hover;
-        border-color: $dark-gray-hover;
+        background-color: darken($secondary-color, 10%);
+        border-color: darken($secondary-color, 10%);
         color: $white;
     }
 }

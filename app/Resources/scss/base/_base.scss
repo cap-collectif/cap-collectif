@@ -204,7 +204,7 @@ h3,
     color: $brand-color-2;
 
     .subtitle {
-        color: $darkest-gray;
+        color: $dark;
         font-size: 16px;
         font-weight: normal;
         padding-left: 12px;
@@ -444,14 +444,14 @@ a.excerpt {
     li button {
         width: 100%;
         padding: 3px 20px;
-        color: #333;
+        color: $dark;
         font-weight: 400;
         line-height: 1.42857;
         text-align: left;
 
         &:hover {
-            background-color: #f5f5f5;
-            color: #262626;
+            background-color: $page-bgc;
+            color: $dark;
             text-decoration: none;
         }
     }
@@ -875,14 +875,14 @@ svg.avatar {
 .PrivateList {
     &__box {
         padding: 30px 25px 0;
-        border: 1px #d3d3d3 solid;
+        border: 1px $border-color solid;
         border-radius: 5px;
         background-color: $page-bgc;
     }
 }
 
 .well .editor {
-    background-color: #fff;
+    background-color: $white;
 }
 
 input[type="color"],
@@ -907,7 +907,7 @@ textarea {
 
 .settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
     font-weight: normal;
-    color: #000000;
+    color: $dark;
 }
 
 .print {
