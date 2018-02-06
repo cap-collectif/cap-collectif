@@ -20,6 +20,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swarrot\Broker\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -123,7 +124,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException("Can't add an argument to an uncontributable opinion.");
         }
 
-        if ($opinion->getOpinionType()->getCommentSystem() === 0) {
+        if (0 === $opinion->getOpinionType()->getCommentSystem()) {
             throw new BadRequestHttpException("Can't add argument to this opinion type.");
         }
 
@@ -146,6 +147,12 @@ class ArgumentsController extends FOSRestController
         $em->persist($argument);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
+        $this->get('swarrot.publisher')->publish('argument.create', new Message(
+            json_encode([
+                'argumentId' => $argument->getId(),
+            ])
+        ));
 
         return $argument;
     }
@@ -178,7 +185,7 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException("Can't add an argument to an uncontributable opinion.");
         }
 
-        if ($opinion->getOpinionType()->getCommentSystem() === 0) {
+        if (0 === $opinion->getOpinionType()->getCommentSystem()) {
             throw new BadRequestHttpException("Can't add argument to this opinion type.");
         }
 
@@ -201,6 +208,12 @@ class ArgumentsController extends FOSRestController
         $em->persist($argument);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+
+        $this->get('swarrot.publisher')->publish('argument.create', new Message(
+            json_encode([
+                'argumentId' => $argument->getId(),
+            ])
+        ));
 
         return $argument;
     }
@@ -239,6 +252,12 @@ class ArgumentsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($argument);
         $em->flush();
+
+        $this->get('swarrot.publisher')->publish('argument.update', new Message(
+            json_encode([
+                'argumentId' => $argument->getId(),
+            ])
+        ));
 
         return $argument;
     }
@@ -282,6 +301,12 @@ class ArgumentsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($argument);
         $em->flush();
+
+        $this->get('swarrot.publisher')->publish('argument.update', new Message(
+            json_encode([
+                'argumentId' => $argument->getId(),
+            ])
+        ));
 
         return $argument;
     }
