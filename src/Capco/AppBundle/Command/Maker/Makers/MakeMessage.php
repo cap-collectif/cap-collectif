@@ -37,14 +37,14 @@ class MakeMessage extends AbstractMaker
         ];
     }
 
-    protected function configure(): void
+    protected function configure()
     {
         $this
             ->setName('capco:make:message')
             ->setDescription('Generate a message for notifications');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $messageTypes = ['External', 'Admin', 'Moderator'];
         $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>');
