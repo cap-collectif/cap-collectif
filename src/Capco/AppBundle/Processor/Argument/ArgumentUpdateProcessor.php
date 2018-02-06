@@ -23,7 +23,7 @@ class ArgumentUpdateProcessor implements ProcessorInterface
         $json = json_decode($message->getBody(), true);
         $argument = $this->argumentRepository->find($json['argumentId']);
         if (!$argument) {
-            throw new \RuntimeException('Unable to find argument with id : ' . $id);
+            throw new \RuntimeException('Unable to find argument with id : ' . $json['argumentId']);
         }
         $this->argumentNotifier->onUpdate($argument);
 

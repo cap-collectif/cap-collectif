@@ -23,7 +23,7 @@ class OpinionTrashProcessor implements ProcessorInterface
         $json = json_decode($message->getBody(), true);
         $opinion = $this->opinionRepository->find($json['opinionId']);
         if (!$opinion) {
-            throw new \RuntimeException('Unable to find opinion with id : ' . $id);
+            throw new \RuntimeException('Unable to find opinion with id : ' . $json['opinionId']);
         }
         $this->opinionNotifier->onTrash($opinion);
 
