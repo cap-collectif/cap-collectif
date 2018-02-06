@@ -3,3 +3,7 @@ services:
     class: Capco\AppBundle\Command\Maker\Makers\MakeMessage
     tags:
       - { name: console.command }
+  capco.notifier_maker:
+      class: Capco\AppBundle\Command\Maker\Makers\MakeNotifier
+      tags:
+        - { name: console.command }
