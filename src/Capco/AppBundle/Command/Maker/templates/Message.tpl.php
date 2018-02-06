@@ -1,14 +1,16 @@
 <?php echo "<?php\n"; ?>
 
-namespace Capco\AppBundle\Mailer\Message\<?php echo $command_entity_name; ?>;
+namespace Capco\AppBundle\Mailer\Message<?php if (isset($command_entity_name)): ?>\<?php echo $command_entity_name; ?><?php endif; ?>;
 
-use Capco\AppBundle\Mailer\Message\<?php echo $command_message_type; ?>;
-use <?php echo $command_related_entity_fqcn; ?>;
-
+use Capco\AppBundle\Mailer\Message\<?php echo $command_message_type; ?>;<?php echo PHP_EOL; ?>
+<?php if (isset($command_related_entity_fqcn)): ?>use <?php echo $command_related_entity_fqcn; ?>;<?php echo PHP_EOL; ?><?php endif; ?>
+<?php echo PHP_EOL; ?>
 final class <?php echo $command_class_name; ?> extends <?php echo $command_message_type; ?><?php echo PHP_EOL; ?>
 {
     public static function create(
+<?php if (isset($command_entity_name) && isset($command_related_entity_fqcn)): ?>
         <?php echo $command_entity_name; ?> $<?php echo $command_entity_name_camelCase; ?>,
+<?php endif; ?>
         string $recipentEmail,
         string $recipientName = null
     ): self
