@@ -22,13 +22,18 @@ class MakeMessage extends AbstractMaker
         return self::TEMPLATE_PATH . '/Message.tpl.php';
     }
 
+    public function getOutputDirectory(): string
+    {
+        return $this->getSourcePath() . '/Capco/AppBundle/Mailer/Message';
+    }
+
     public function getTemplateVars(): array
     {
         return [
             'command_class_name' => $this->className,
-            'command_entity_name' => $this->entity->getShortName(),
-            'command_entity_name_camelCase' => Text::camelCase($this->entity->getShortName()),
-            'command_related_entity_fqcn' => $this->entity->getName(),
+            'command_entity_name' => $this->entity ? $this->entity->getShortName() : null,
+            'command_entity_name_camelCase' => $this->entity ? Text::camelCase($this->entity->getShortName()) : null,
+            'command_related_entity_fqcn' => $this->entity ? $this->entity->getName() : null,
             'command_message_type' => $this->type,
             'command_subject_template' => $this->subject,
             'command_content_template' => $this->content,
@@ -47,9 +52,10 @@ class MakeMessage extends AbstractMaker
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $messageTypes = ['External', 'Admin', 'Moderator'];
-        $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>');
+        $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>', true);
 
-        $this->className = $this->askSimpleQuestion($input, $output, 'Please type your message name <info>(e.g ' . $this->entity->getShortName() . 'Create)</info>');
+        $this->className = $this->askSimpleQuestion($input, $output,
+            'Please type your message name <info>(e.g ' . ($this->entity ? $this->entity->getShortName() : 'Proposal') . 'Create)</info>');
         $this->className .= 'Message';
         $this->type = $this->askChoiceQuestion($input, $output, 'Please select your message type <info>(defaults to External</info>)',
             $messageTypes,
@@ -63,13 +69,8 @@ class MakeMessage extends AbstractMaker
         $this->templateVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the subject <info>(comma-separated list)</info>');
         $this->subjectVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the content <info>(comma-separated list)</info>');
 
-        $parsed = $this->parser->parseTemplate(
-            $this->getTemplate(),
-            $this->getTemplateVars()
-        );
+        $path = $this->makeFile();
 
-        $path = $this->getContainer()->get('kernel')->getRootDir() . '/../src/Capco/AppBundle/Mailer/Message/' . $this->entity->getShortName() . '/' . $this->className . '.php';
-        $this->fs->dumpFile($path, $parsed);
         $output->writeln("<info>File successfully written at $path</info>");
     }
 }
