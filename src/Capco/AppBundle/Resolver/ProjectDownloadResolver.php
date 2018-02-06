@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Utils\Map;
+use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\EntityManager;
 use Liuggio\ExcelBundle\Factory;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
@@ -70,6 +71,7 @@ class ProjectDownloadResolver
         $this->urlArrayResolver = $urlArrayResolver;
         $this->phpexcel = $phpexcel;
         $this->headers = [];
+        $this->customFields = [];
         $this->data = [];
         $this->instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
         $this->mediaExtension = $mediaExtension;
@@ -91,7 +93,7 @@ class ProjectDownloadResolver
 
         if ($step->getQuestionnaire()) {
             foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
-                $headers[] = ['label' => $question->getTitle(), 'raw' => true];
+                $headers[] = ['label' => Text::unslug($question->getSlug()), 'raw' => true];
             }
         }
 
@@ -401,7 +403,7 @@ class ProjectDownloadResolver
 
         foreach ($responses as $response) {
             $question = $response['question'];
-            $item[$question['title']] = $this->getResponseValue($response);
+            $item[Text::unslug($question['slug'])] = $this->getResponseValue($response);
         }
 
         foreach ($this->headers as $header) {

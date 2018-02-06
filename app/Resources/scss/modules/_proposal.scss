@@ -491,19 +491,12 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         margin-bottom: 20px;
     }
 
-    &:first-child > h3, &:first-child > div > h3 {
-        margin-top: 0;
+    &.proposal-map__block {
+        height: 255px;
     }
 
-    .share-button-dropdown {
-        @each $social-color in $social-colors {
-            $name: nth($social-color, 1);
-            $color: nth($social-color, 2);
-
-            .cap-#{$name}:before {
-                color: $color;
-            }
-        }
+    &:first-child > h3, &:first-child > div > h3 {
+        margin-top: 0;
     }
 }
 

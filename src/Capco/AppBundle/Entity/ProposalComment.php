@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,6 +44,15 @@ class ProposalComment extends Comment
     }
 
     // ************************ Overriden methods *********************************
+
+    public function isIndexable()
+    {
+        try {
+            return $this->getIsEnabled() && !$this->getRelatedObject()->isDeleted();
+        } catch (EntityNotFoundException $e) {
+            return false;
+        }
+    }
 
     /**
      * @return Proposal

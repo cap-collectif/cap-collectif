@@ -11,6 +11,10 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
     ];
+    protected static $collectStepNotifiable = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+    ];
     protected static $collectStepOpenPrivateParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions-privee',
@@ -76,6 +80,11 @@ trait ProposalStepsTrait
         'stepSlug' => 'collecte-des-propositions',
         'proposalSlug' => 'renovation-du-gymnase',
     ];
+    protected static $proposalNotifiableOfMine = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'renovation-du-gymnase',
+    ];
     protected static $proposalNotNotifiable = [
         'projectSlug' => 'budget-avec-vote-limite',
         'stepSlug' => 'collecte-avec-vote-simple-limite',
@@ -108,6 +117,14 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
+    }
+
+    /**
+     * @When I go to a notifiable open collect step
+     */
+    public function iGoToANotifiableOpenCollectStep()
+    {
+        $this->visitPageWithParams('collect page', self::$collectStepNotifiable);
     }
 
     /**
@@ -186,6 +203,14 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I go to a proposal of mine which is notifiable
+     */
+    public function iGoToANotifiableProposalOfMine()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalNotifiableOfMine);
+    }
+
+    /**
      * @When I go to a proposal which is not notifiable
      */
     public function iGoToANotNotifiableProposal()
@@ -227,6 +252,24 @@ trait ProposalStepsTrait
     public function iChangeTheProposalsThemeFilter()
     {
         $this->selectOption('proposal-filter-themes', 'Justice');
+        $this->iWait(2);
+    }
+
+    /**
+     * @When /^I change the proposals status filter to "([^"]*)"$/
+     */
+    public function iChangeTheProposalStatusTo(string $status)
+    {
+        $this->selectOption('proposal-filter-statuses', $status);
+        $this->iWait(2);
+    }
+
+    /**
+     * @When /^I change the proposals contributor type filter to "([^"]*)"$/
+     */
+    public function iChangeTheProposalContributorTypeTo(string $type)
+    {
+        $this->selectOption('proposal-filter-types', $type);
         $this->iWait(2);
     }
 

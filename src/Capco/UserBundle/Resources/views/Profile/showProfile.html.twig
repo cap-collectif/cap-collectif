@@ -35,7 +35,7 @@
                 {{
                     react_render_component('ShareButtonDropdownApp', {
                         'props': {
-                            'url': url('app_event_show', {'slug': user.userName}),
+                            'url': url('capco_user_profile_show_all', {'slug': user.slug}),
                             'title': user.userName,
                             'id': 'user-' ~ user.userName,
                         }

@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\Form\ReportingType;
+use Doctrine\DBAL\Exception\DriverException;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -274,8 +275,14 @@ class OpinionsController extends FOSRestController
         ;
 
         $opinion->incrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->flush();
+
+        try {
+            $this->getDoctrine()->getManager()->persist($vote);
+            $this->getDoctrine()->getManager()->flush();
+        } catch (DriverException $e) {
+            // Updating opinion votes count failed
+            throw new BadRequestHttpException('Sorry, please retry.');
+        }
 
         return $vote;
     }

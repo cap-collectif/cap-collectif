@@ -69,7 +69,7 @@ $container->setParameter('loco_key', '5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII');
 $container->setParameter('locales', ["en-GB", "fr-FR", "es-ES"]);
 
 // This key is used for server to server call
-// There are a restriction on IP
+// https://console.developers.google.com/apis/credentials/key/137?project=cap-collectif
 $container->setParameter('google_maps_key_server', '***REMOVED***');
 
 $container->setParameter('jms_serializer.serialized_name_annotation_strategy.class', 'Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy');
