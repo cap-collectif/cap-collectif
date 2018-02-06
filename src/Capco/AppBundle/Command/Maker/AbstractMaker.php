@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 abstract class AbstractMaker extends ContainerAwareCommand
 {
@@ -45,6 +46,22 @@ abstract class AbstractMaker extends ContainerAwareCommand
     }
 
     /**
+     * Get the directory search depth to use with the Finder component.
+     */
+    public function getDirectoryDepth(): string
+    {
+        return '< 3';
+    }
+
+    /**
+     * Get additionnal directories in which entities will not be searched in the method 'askEntity".
+     */
+    public function getExcludedDirectories(): array
+    {
+        return [];
+    }
+
+    /**
      * Shortcut for the src folder.
      */
     public function getSourcePath(): string
@@ -66,6 +83,10 @@ abstract class AbstractMaker extends ContainerAwareCommand
             $this->getTemplateVars()
         );
 
+        if ($this->fs->exists($path)) {
+            throw new FileException('File already exist.');
+        }
+
         $this->fs->dumpFile($path, $parsed);
 
         return $path;
@@ -81,7 +102,11 @@ abstract class AbstractMaker extends ContainerAwareCommand
             'src/Capco/UserBundle/Entity',
         ];
         $directories = array_merge($this->getDirectories(), $defaultDirectories);
-        foreach ($this->finder->files()->name('/\.php$/')->in($directories)->sortByName() as $file) {
+        foreach ($this->finder->files()->name('/\.php$/')
+                     ->depth($this->getDirectoryDepth())
+                     ->in($directories)
+                     ->exclude($this->getExcludedDirectories())
+                     ->sortByName() as $file) {
             $this->fqcns[] = NamespaceResolver::getFullQualifiedClassName($file->getRealPath());
         }
         $this->helper = $this->getHelper('question');
