@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -41,6 +42,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     use PinnableTrait;
     use ExpirableTrait;
     use TextableTrait;
+    use ModerableTrait;
 
     public static $sortCriterias = [
         'positions' => 'opinion.sort.positions',
@@ -64,7 +66,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     protected $createdAt;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -209,6 +210,13 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->isEnabled;
     }
 
+    public function setEnabled(bool $isEnabled): self
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
     public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
@@ -330,6 +338,11 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         $this->OpinionType = $OpinionType;
 
         return $this;
+    }
+
+    public function getProject()
+    {
+        return $this->step->getProject();
     }
 
     /**
