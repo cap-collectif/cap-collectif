@@ -1,0 +1,92 @@
+<div class="block">
+    <h2 class="h5 excerpt">{{ 'project.show.meta.step.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
+    <div class="navbar--sub">
+        <ul class="nav">
+            {% set nb = 1 %}
+            {% set now = date("now") %}
+            {% for step in projectSteps %}
+                <li {% if currentStep == step.slug %} class="active" {% endif %}>
+                    <a href="{{ step | capco_step_link }}">
+                        <div class="navbar__step-nb">{{ nb }}</div>
+                        <div class="navbar__step">
+                            <h3 class="navbar__step-title">{{ step.label }}  <i class="pull-right  excerpt  cap-arrow-66"></i></h3>
+                            <p class="navbar__step-date excerpt">
+                                {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': step} only %}
+                            </p>
+                            {% if 'presentation' !=  currentStep %}
+                            <p class="label label-default">
+                                {{ ('step.status.' ~ step | capco_step_status) | trans({}, 'CapcoAppBundle') }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </li>
+                {% set nb = (nb + 1) %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% set hasPosts = is_feature_enabled('blog') and project.posts | length > 0 %}
+{% set hasEvents = is_feature_enabled('calendar') and project.events | length > 0 %}
+{% set hasContributors = project.totalOpinionsCount | length > 0 %}
+{% set showTrash = is_feature_enabled('project_trash') %}
+{% set hasStats = capco_has_stats(project) %}
+{% if hasPosts or hasEvents or hasContributors or showTrash or hasStats %}
+    <div class="block">
+        <h2 class="h5 excerpt">{{ 'project.show.meta.info.title'|trans({}, 'CapcoAppBundle') | upper }}</h2>
+        <div class="navbar--sub  navbar--no-nb">
+            <ul class="nav">
+                {% if hasContributors %}
+                    <li {% if currentStep == 'contributors_step' %} class="active" {% endif %}>
+                        <a id="participants_link" href="{{ path('app_project_show_contributors', {
+                            'projectSlug': project.slug }) }}">
+                           <p class="navbar__step-title">
+                               <i class="cap cap-contacts-1"></i> {{ 'project.show.meta.info.contributors'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>
+                           </p>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if hasStats %}
+                    <li {% if currentStep == 'stats_step' %} class="active" {% endif %}>
+                        <a href="{{ path('app_project_show_stats', {
+                            'projectSlug': project.slug }) }}">
+                            <p class="navbar__step-title">
+                                <i class="cap cap-business-chart-2-1"></i> {{ 'project.show.meta.info.stats'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>
+                            </p>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if hasPosts %}
+                    <li {% if currentStep == 'posts_step' %} class="active" {% endif %}>
+                        <a id="posts_link" href="{{ path('app_project_show_posts', {'projectSlug': project.slug}) }}">
+                            <p class="navbar__step-title">
+                                <i class="cap cap-newspaper-2-1"></i> {{ 'project.show.meta.info.posts'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>
+                            </p>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if hasEvents %}
+                    <li {% if currentStep == 'events_step' %} class="active" {% endif %}>
+                        <a id="events_link" href="{{ path('app_project_show_events', {'projectSlug': project.slug}) }}">
+                            <p class="navbar__step-title">
+                                <i class="cap cap-calendar-2-1"></i> {{ 'project.show.meta.info.events'|trans({}, 'CapcoAppBundle') }}  <i class="pull-right  excerpt  cap-arrow-66"></i>
+                            </p>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if showTrash %}
+                    <li class="trash__step{% if currentStep == 'trash_step' %} active{% endif %}">
+                        {{ react_render_component('ProjectTrashButtonApp', {'props': {
+                            'link': path('app_project_show_trashed', {'projectSlug': project.slug }),
+                            'label': 'project.show.meta.info.trash'|trans({}, 'CapcoAppBundle'),
+                            },
+                            }
+                          )
+                        }}
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

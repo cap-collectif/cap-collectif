@@ -181,11 +181,6 @@ hr {
     margin-bottom: 0;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    font-weight: 400;
-}
-
 h1,
 .h1 {
     margin-top: 0;
@@ -463,6 +458,15 @@ a.excerpt {
 
 .share-button-dropdown {
     display: inline-block;
+
+    @each $social-color in $social-colors {
+        $name: nth($social-color, 1);
+        $color: nth($social-color, 2);
+
+        .cap-#{$name}:before {
+            color: $color;
+        }
+    }
 }
 
 // Custom modal
@@ -926,6 +930,11 @@ textarea {
 
 .label-info {
     background-color: $info-color;
+
+    a, a:hover {
+        color: $white;
+        font-weight: 400;
+    }
 }
 
 .small.excerpt {

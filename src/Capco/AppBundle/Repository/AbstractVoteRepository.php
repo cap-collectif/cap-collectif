@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 
 class AbstractVoteRepository extends EntityRepository
@@ -92,10 +93,13 @@ class AbstractVoteRepository extends EntityRepository
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
         foreach ($votes as $vote) {
-            if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {
-                if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
-                    $publicVotes[] = $vote;
+            try {
+                if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {
+                    if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
+                        $publicVotes[] = $vote;
+                    }
                 }
+            } catch (EntityNotFoundException $e) {
             }
         }
 

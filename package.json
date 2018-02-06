@@ -55,7 +55,7 @@
   "bundlesize": [
     {
       "path": "./web/js/app.js",
-      "maxSize": "310KB"
+      "maxSize": "300KB"
     },
     {
       "path": "./web/js/vendor.js",

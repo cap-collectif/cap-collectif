@@ -6,13 +6,7 @@ import { ConsultationPropositionBox } from './ConsultationPropositionBox';
 
 describe('<ConsultationPropositionBox />', () => {
   const props = {
-    step: {
-      id: 'stepId',
-      title: 'stepTitle',
-      startAt: '2014-08-14T00:00:00+0200',
-      endAt: '2014-09-27T00:00:00+0200',
-      timeless: false,
-    },
+    step: { id: 'stepId' },
   };
 
   it('renders correcty', () => {

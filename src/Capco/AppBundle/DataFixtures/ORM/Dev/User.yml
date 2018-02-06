@@ -95,10 +95,10 @@ Capco\UserBundle\Entity\User:
 
     user{6..500}:
         id: 'user<current()>'
-        username: <username()>
+        username (unique): <username()>
         firstname: <firstname()>
         lastname: <lastname()>
-        email: <email()>
+        email (unique): <email()>
         enabled: true
         userType: '@UserType1'
         password: <password()>
