@@ -7,18 +7,6 @@
 
 $dark-gray-hover: #727b84;
 $darkest-gray: #3e4149;
-$dark-blue: #2a6496;
-
-// = Brand colors
-// -----------------------------
-$brand-color-1: #16a085;
-$brand-color-2: #1abc9c;
-
-// = Base
-// -----------------------------
-$font-size-base: 16px;
-$field-font-color: #434343;
-$thin-container: 690px;
 
 // = Navbar
 // ------------------------------
@@ -38,30 +26,6 @@ $custom-filter-background: $white;
 $btns-custom: (custom-1 $white $brand-color-1) (custom-2 $brand-color-1 $white) (dark-gray $dark-gray $white) (light-gray $page-bgc $dark) (darkest-gray $darkest-gray $white);
 
 $btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg) (success $btn-success-bg $btn-success-bg $btn-default-bg) (info $btn-info-bg $btn-info-bg $btn-default-bg) (warning $btn-warning-bg $btn-warning-bg $btn-default-bg) (danger $btn-danger-bg $btn-danger-bg $btn-default-bg) (custom-1 $white $white $brand-color-1) (custom-2 $brand-color-1 $brand-color-1 $white) (primary $btn-primary-bg $btn-primary-bg $btn-default-bg) (dark-gray $dark-gray $dark-gray $white) (light-gray $page-bgc $page-bgc $dark);
-
-// = Custom form
-// -----------------------------
-$custom-form-border: #0c6;
-// $custom-form-bg: #fff;
-$custom-form-legend: $custom-form-border;
-
-// = Custom calendar event
-// -----------------------------
-
-$custom-event-month: #08c;
-
-// = Custom video
-// ------------------------------
-$custom-video-play: 50px;
-
-// = Social Colors
-// ------------------------------
-$social-colors: // name color icon
-                (facebook #3b5998 "e") (twitter #00ACED "h") (googleplus #d34836 "m") (gplus #d34836 "m") (linkedin #3B5998 "f") (nouscitoyens #1086b4 "\e00b") (saml #7498c0 "\e00b")(rss #fdac61 "g")(youtube #c4302b "\6b") (link-1 #3B5998 "\46") (mail-2-1 $dark-gray "\54");
-
-// = Opinion types
-// -------------------------------
-$opinion-types: ("primary" $brand-color-2) ("default" #f5f5f5) ("red" #f2dede) ("orange" #fcf8e3) ("blue" #d9edf7) ("bluedark" darken(#d9edf7, 15%)) ("green" #dff0d8) ("white" #fff) ("gray" $border-color) ("light-gray", $page-bgc) (source $brand-primary) (idee $page-bgc) (project $page-bgc);
 
 // = Opinion labels
 // -------------------------------

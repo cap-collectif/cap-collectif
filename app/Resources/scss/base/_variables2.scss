@@ -24,8 +24,6 @@ $gplus-color: #d73d32;
 $rss-color: #fdac61;
 $saml-color: #7498c0;
 
-
-
 // = Social Networks
 // ------------------------------
 $social-colors: // name color icon
@@ -36,8 +34,30 @@ $social-colors: // name color icon
         (saml $saml-color "\e00b")
         (rss $rss-color "g");
 
+// = size
+// ------------------------------
+$thin-container: 690px;
+$font-size-base: 16px;
+
+// = Custom video
+// ------------------------------
+$custom-video-play: 50px; // ???
 
 // = Default custom colors
 // ------------------------------
+$brand-color-1: #16a085; // color text custom
+$brand-color-2: #1abc9c; // bgc custom
 
-// $c-link-color: #0070c9;
+// = Opinion types
+// -------------------------------
+$opinion-types:
+        ("primary" $brand-color-2)
+        ("default" #f5f5f5)
+        ("red" #f2dede)
+        ("orange" #fcf8e3)
+        ("blue" #d9edf7)
+        ("bluedark" darken(#d9edf7, 15%))
+        ("green" #dff0d8) ("white" #fff)
+        ("gray" $border-color)
+        ("light-gray", $page-bgc)
+        (source darken(#428bca, 6.5%)) // to remove

@@ -471,15 +471,6 @@
         .opinion__resource:first-child {
             border-top: 0 solid $border-color;
         }
-
-        @each $type in $opinion-types {
-            $name: nth($type, 1);
-            $color: nth($type, 2);
-
-            .opinion__resource--#{$name} {
-                color: $color;
-            }
-        }
     }
 }
 

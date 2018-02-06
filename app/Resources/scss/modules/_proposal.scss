@@ -517,7 +517,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     #PlacesAutocomplete__autocomplete-container {
         border: 1px solid $border-color;
         border-radius: 0 0 5px 5px;
-        color: $field-font-color;
+        color: $dark-gray;
 
         .places-autocomplete {
             padding: 5px 9px;

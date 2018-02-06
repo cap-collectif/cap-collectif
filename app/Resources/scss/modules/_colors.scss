@@ -46,7 +46,7 @@ $color-swatches:
         (footer1 $brand-color-1)
         (footer2 $brand-color-2)
         (event $page-bgc)
-        (formborder $custom-form-border)
+        (formborder $success-color)
         //Bootstrap colors
         (primary $brand-primary)
         (success $brand-success)
@@ -57,7 +57,6 @@ $color-swatches:
         (whitec $white)
         (gray-primary $border-color)
         (light-gray $page-bgc)
-        (dark-blue $dark-blue)
         (light-blue $primary-color);
 @each $color-swatch in $color-swatches {
     $name: nth($color-swatch, 1);
