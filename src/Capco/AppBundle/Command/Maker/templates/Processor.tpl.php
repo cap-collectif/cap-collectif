@@ -4,6 +4,7 @@
 <?php $notifierName = $command_entity_name . 'Notifier'; ?>
 <?php $varRepositoryName = lcfirst($repositoryName); ?>
 <?php $varNotifierName = lcfirst($notifierName); ?>
+<?php $varEntityName = lcfirst($command_entity_name); ?>
 
 namespace Capco\AppBundle\Processor<?php if (isset($command_entity_name)): ?>\<?php echo $command_entity_name; ?><?php endif; ?>;
 
@@ -27,10 +28,10 @@ class <?php echo $command_class_name; ?> implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $json = json_decode($message->getBody(), true);
-        $id = $json['<?php echo lcfirst($command_entity_name); ?>Id'];
-        $argument = $this-><?php echo $varRepositoryName; ?>->find($id);
-        if (!$argument) {
-            throw new \RuntimeException('Unable to find <?php echo lcfirst($command_entity_name); ?> with id : ' . $id);
+        $id = $json['<?php echo $varEntityName; ?>Id'];
+        $<?php echo $varEntityName; ?> = $this-><?php echo $varRepositoryName; ?>->find($id);
+        if (!$<?php echo $varEntityName; ?>) {
+            throw new \RuntimeException('Unable to find <?php echo $varEntityName; ?> with id : ' . $id);
         }
         // Use your notifier here
     }
