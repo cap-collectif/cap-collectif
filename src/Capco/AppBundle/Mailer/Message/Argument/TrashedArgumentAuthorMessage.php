@@ -16,7 +16,7 @@ final class TrashedArgumentAuthorMessage extends ExternalMessage
             static::getMySubjectVars(
                 $argument->getRelated()->getTitle()
             ),
-            'notification-argument-trashed',
+            'notification-content-argument-trashed',
             static::getMyTemplateVars(
                 $argument->getTrashedReason(),
                 $argument->getBody(),

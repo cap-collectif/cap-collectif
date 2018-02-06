@@ -16,7 +16,7 @@ final class TrashedOpinionAuthorMessage extends ExternalMessage
             static::getMySubjectVars(
                 $opinion->getTitle()
             ),
-            'notification-proposal-in-the-trash',
+            'notification-content-proposal-in-the-trash',
             static::getMyTemplateVars(
                 $opinion->getTrashedReason(),
                 $opinion->getTitle(),
