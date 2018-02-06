@@ -15,9 +15,7 @@ exports[`<StepText /> should render a step intro div, a FormattedHTMLMessage and
       }
     }
   >
-    <div
-      className="box"
-    >
+    <div>
       <div
         className="step__intro__content"
         dangerouslySetInnerHTML={

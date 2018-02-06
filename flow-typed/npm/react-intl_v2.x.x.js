@@ -108,7 +108,7 @@ type $npm$ReactIntl$PluralCategoryString =
   | "many"
   | "other";
 
-type $npm$ReactIntl$DateParseable = number | string | Date | any;
+type $npm$ReactIntl$DateParseable = number | string | Date;
 
 declare module "react-intl" {
   // PropType checker

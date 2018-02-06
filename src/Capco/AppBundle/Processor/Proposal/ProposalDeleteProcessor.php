@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Capco\AppBundle\Notifier\ProposalNotifier;
+use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManager;
 use Swarrot\Broker\Message;
@@ -14,7 +14,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
     private $proposalRepository;
     private $notifier;
 
-    public function __construct(EntityManager $em, ProposalRepository $proposalRepository, ProposalNotifier $notifier)
+    public function __construct(EntityManager $em, ProposalRepository $proposalRepository, Notify $notifier)
     {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
@@ -27,7 +27,7 @@ class ProposalDeleteProcessor implements ProcessorInterface
         $this->em->getFilters()->disable('softdeleted');
         $proposal = $this->proposalRepository->find($json['proposalId']);
         $this->em->getFilters()->enable('softdeleted');
-        $this->notifier->onDelete($proposal);
+        $this->notifier->notifyProposal($proposal, 'delete');
 
         return true;
     }

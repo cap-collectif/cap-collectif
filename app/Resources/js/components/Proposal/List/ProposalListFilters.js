@@ -80,24 +80,12 @@ export const ProposalListFilters = React.createClass({
       intl,
     } = this.props;
     const { displayedFilters, orderByVotes } = this.state;
-    const colWidth = showToggleMapButton ? 4 : 6;
 
     return (
-      <div className="mb-15">
+      <div className="mb-15 mt-30">
         <Row>
-          <Col xs={12} md={colWidth}>
-            <ProposalListOrderSorting
-              orderByCost={orderByCost}
-              orderByComments={orderByComments}
-              orderByVotes={orderByVotes}
-              defaultSort={defaultSort}
-            />
-          </Col>
-          <Col xs={12} md={colWidth}>
-            <ProposalListSearch />
-          </Col>
           {showToggleMapButton && (
-            <Col xs={12} md={colWidth} xsHidden smHidden>
+            <Col xs={12} sm={6} md={4} lg={3} xsHidden smHidden>
               <ToggleMapButton
                 onChange={mode => {
                   dispatch(changeProposalListView(mode));
@@ -105,10 +93,19 @@ export const ProposalListFilters = React.createClass({
               />
             </Col>
           )}
-        </Row>
-        <Row>
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <ProposalListSearch />
+          </Col>
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <ProposalListOrderSorting
+              orderByCost={orderByCost}
+              orderByComments={orderByComments}
+              orderByVotes={orderByVotes}
+              defaultSort={defaultSort}
+            />
+          </Col>
           {displayedFilters.map((filterName, index) => (
-            <Col xs={12} md={colWidth} key={index}>
+            <Col xs={12} sm={6} md={4} lg={3} key={index}>
               <Input
                 type="select"
                 aria-label={intl.formatMessage({ id: 'global.searchIn' }, { filterName })}

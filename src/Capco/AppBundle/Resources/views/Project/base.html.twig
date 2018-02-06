@@ -1,6 +1,7 @@
 {% extends '@CapcoApp/Project/layout_with_widget.html.twig' %}
 
 {% set currentStepSlug = currentStep.slug is defined ? currentStep.slug : currentStep %}
+{% set showTrash = is_feature_enabled('project_trash') %}
 
 {% block canonical_link %}{% endblock %}
 
@@ -19,25 +20,38 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-
-    <div class="container  container--custom">
+    <div class="container container--custom">
         {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
-    <div class="container  container--custom">
+    <section>
+        {{ react_render_component('ProjectStepTabsApp', {
+            'props': {
+                'projectId': project.id
+            },
+        })}}
+    </section>
+
+    <div class="container container--custom" style="padding-top: 0">
 
         <div class="row">
-            <div class="col-xs-12  col-sm-4  col-md-3  block--mobile">
-                {{ render(controller('CapcoAppBundle:Site/Project:showMeta', {'projectSlug': project.slug, 'currentStepSlug': currentStepSlug })) }}
-            </div>
-
-            <div class="col-xs-12  col-sm-8  col-md-9" id="details">
+            <div class="col-xs-12" id="details">
 
                 {% block details %}{% endblock %}
 
-            </div> <!-- col-xs-12  col-sm-8  col-md-9 -->
-        </div> <!-- .row -->
+            </div>
+        </div>
     </div>
+
+    {% if showTrash %}
+        <section>
+            {{ react_render_component('ProjectTrashButtonApp', {
+                'props': {
+                    'link': path('app_project_show_trashed', {'projectSlug': project.slug })
+                },
+            })}}
+        </section>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

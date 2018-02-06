@@ -12,7 +12,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   >
     <div>
       <Connect(ProposalVoteButtonWrapper)
-        className="mr-15"
         proposal={
           Object {
             "_links": Object {
