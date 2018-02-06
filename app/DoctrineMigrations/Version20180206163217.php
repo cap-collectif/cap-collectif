@@ -4,12 +4,24 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\ORM\Id\UuidGenerator;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180206163217 extends AbstractMigration
+class Version20180206163217 extends AbstractMigration implements ContainerAwareInterface
 {
+    private $generator;
+    private $em;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->em = $container->get('doctrine')->getManager();
+        $this->generator = new UuidGenerator();
+    }
+
     /**
      * @param Schema $schema
      */
@@ -32,5 +44,14 @@ class Version20180206163217 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE user_following_proposal');
+    }
+
+    public function postUp(Schema $schema)
+    {
+        $proposals = $this->connection->fetchAll('SELECT id, author_id from proposal');
+        foreach ($proposals as $proposal) {
+            $uuid = $this->generator->generate($this->em, null);
+            $this->connection->insert('user_following_proposal', ['id'=>$uuid,'user_id' => $proposal['author_id'], 'proposal_id' => $proposal['id']]);
+        }
     }
 }
