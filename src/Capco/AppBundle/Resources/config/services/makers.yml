@@ -7,3 +7,7 @@ services:
       class: Capco\AppBundle\Command\Maker\Makers\MakeNotifier
       tags:
         - { name: console.command }
+  capco.processor_maker:
+      class: Capco\AppBundle\Command\Maker\Makers\MakeProcessor
+      tags:
+        - { name: console.command }
