@@ -34,6 +34,7 @@ Scenario: Anonymous register and email should be sent
   And I select "Sangohan" from "dynamic-17"
   And I check "charte"
   And I press "global.register"
+  Then I wait 5 seconds
   And I open mail with subject "email-subject-registration-confirmation"
   And I should see "email-content-registration-confirmation" in mail
 
