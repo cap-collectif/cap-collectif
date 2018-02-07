@@ -125,7 +125,7 @@ $statuses: (primary $primary-color $white) (success $success-color $white) (info
 
         .proposal__trashed-reason {
             padding: 5px;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
             border-top: 1px solid $border-color;
         }
     }

@@ -81,11 +81,11 @@
 
             .remaining-time{
                 &__number {
-                    color: $excerpt-dark-gray;
+                    color: $dark;
                 }
 
                 &__container {
-                    color: $excerpt;
+                    color: $dark-gray;
                 }
             }
         }
