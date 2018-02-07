@@ -1,6 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Mailer\Message;
+namespace Capco\AppBundle\Mailer\Message\User;
+
+use Capco\AppBundle\Mailer\Message\DefaultMessage;
 
 final class ContactMessage extends DefaultMessage
 {

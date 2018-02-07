@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Mailer\Message\ContactMessage;
+use Capco\AppBundle\Mailer\Message\User\ContactMessage;
 
 final class ContactNotifier extends BaseNotifier
 {
