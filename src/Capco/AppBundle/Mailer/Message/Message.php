@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\AppBundle\Utils\Text;
-
 abstract class Message
 {
     protected $subject;
@@ -13,14 +11,10 @@ abstract class Message
     protected $templateVars;
 
     protected $recipients;
-
+    protected $replyTo;
     protected $senderEmail;
     protected $senderName;
-
     protected $cc;
-    protected $replyTo;
-    protected $sitename;
-    protected $siteUrl;
 
     final public function __construct(
         string $recipientEmail,
@@ -29,7 +23,7 @@ abstract class Message
         array $subjectVars,
         string $template, // twig or trad key
         array $templateVars,
-        string $senderEmail = null,
+        string $senderEmail,
         string $senderName = null,
         string $replyTo = null
     ) {
@@ -56,7 +50,7 @@ abstract class Message
 
     //:?array;
 
-    public function getTemplateVars(): array
+    final public function getTemplateVars(): array
     {
         return $this->templateVars;
     }
@@ -149,37 +143,8 @@ abstract class Message
         return $this;
     }
 
-    public function setSitename(string $value): self
-    {
-        $this->sitename = $value;
-
-        return $this;
-    }
-
-    public function getSitename(): string
-    {
-        return $this->sitename ? self::escape($this->sitename) : 'Cap Collectif';
-    }
-
-    public function setSiteUrl(string $value): self
-    {
-        $this->siteUrl = $value;
-
-        return $this;
-    }
-
-    public function getSiteUrl(): string
-    {
-        return $this->siteUrl ?? '';
-    }
-
     final protected static function escape(string $string): string
     {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', false);
-    }
-
-    final protected static function cleanHtml(string $string): string
-    {
-        return Text::htmlToString($string);
     }
 }

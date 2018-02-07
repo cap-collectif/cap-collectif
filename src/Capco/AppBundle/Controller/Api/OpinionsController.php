@@ -26,7 +26,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Swarrot\Broker\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -103,15 +102,8 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
 
-        $author = $this->getUser();
-        $repo = $this->get('capco.opinion.repository');
-
-        if ($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')->count() > 0) {
-            throw new BadRequestHttpException('You contributed to many times.');
-        }
-
         $opinion = (new Opinion())
-          ->setAuthor($author)
+          ->setAuthor($this->getUser())
           ->setStep($step)
           ->setIsEnabled(true)
           ->setOpinionType($type)
@@ -127,12 +119,6 @@ class OpinionsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($opinion);
         $em->flush();
-
-        $this->get('swarrot.publisher')->publish('opinion.create', new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
 
         return $opinion;
     }
@@ -167,12 +153,6 @@ class OpinionsController extends FOSRestController
         $opinion->resetVotes();
         $opinion->setValidated(false);
         $this->getDoctrine()->getManager()->flush();
-
-        $this->get('swarrot.publisher')->publish('opinion.update', new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
 
         return $opinion;
     }
