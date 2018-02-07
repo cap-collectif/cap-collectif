@@ -65,8 +65,8 @@ class MakeMessage extends AbstractMaker
         $this->subject = $this->askSimpleQuestion($input, $output, 'Please type the translation key of the message subject');
         $this->content = $this->askSimpleQuestion($input, $output, 'Please type the translation key of the message content');
 
-        $this->templateVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the subject <info>(comma-separated list)</info>');
-        $this->subjectVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the content <info>(comma-separated list)</info>');
+        $this->subjectVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the subject <info>(comma-separated list)</info>');
+        $this->templateVars = $this->askQuestionWithArrayResponse($input, $output, 'Please type the names of the variables in the content <info>(comma-separated list)</info>');
 
         $path = $this->makeFile();
 
