@@ -25,31 +25,6 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
         );
     }
 
-    private static function getMyTemplateVars(
-<?php if (isset($command_template_vars)): ?>
-<?php foreach ($command_template_vars as $template_var): ?>
-<?php if (next($command_template_vars)): ?>
-        $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
-<?php else: ?>
-        $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
-<?php endif; ?>
-<?php endforeach; ?>
-<?php endif; ?>
-    ): array
-    {
-        return [
-<?php if (isset($command_template_vars)): ?>
-<?php foreach ($command_template_vars as $template_var): ?>
-<?php if (next($command_template_vars)): ?>
-            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
-<?php else: ?>
-            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
-<?php endif; ?>
-<?php endforeach; ?>
-<?php endif; ?>
-        ];
-    }
-
     private static function getMySubjectVars(
 <?php if (isset($command_subject_vars)): ?>
 <?php foreach ($command_subject_vars as $subject_var): ?>
@@ -74,4 +49,29 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php endif; ?>
         ];
     }
+    private static function getMyTemplateVars(
+<?php if (isset($command_template_vars)): ?>
+<?php foreach ($command_template_vars as $template_var): ?>
+<?php if (next($command_template_vars)): ?>
+        $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
+<?php else: ?>
+        $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+    ): array
+    {
+    return [
+<?php if (isset($command_template_vars)): ?>
+<?php foreach ($command_template_vars as $template_var): ?>
+<?php if (next($command_template_vars)): ?>
+            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
+<?php else: ?>
+            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+    ];
+    }
+
 }
