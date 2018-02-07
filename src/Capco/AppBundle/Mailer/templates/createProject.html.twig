@@ -1,0 +1,35 @@
+{% block body_text %}
+    {% autoescape false %}
+    <p>
+        {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
+    </p>
+    <p>
+      Vous venez de créer un projet de consultation sur {{ sitename }}. Vous pouvez maintenant :
+      <ul>
+        <li>
+        accéder à l'interface d'administration pour paramétrer votre consultation et la publier : <a href="{{ editUrl }}">{{ editUrl }}</a> ;
+        </li>
+        <li>
+          voir la liste des consultations déjà publiées sur la plateforme : <a href="{{ projectsUrl }}">{{ projectsUrl }}</a>
+        </li>
+        <li>
+          accéder à l'aide en ligne : <a href="http://aide.cap-collectif.com/">aide.cap-collectif.com</a>
+        </li>
+      </ul>
+      Si vous souhaitez être accompagnés dans le cadre de la définition de votre projet de consultation, notre équipe sera ravie de vous apporter son assistance ! N'hésitez pas à nous contacter à <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> ou sur notre <a href="https://cap-collectif.com/contact">site Web</a>.
+    </p>
+    <p>
+      Merci pour votre confiance, et à bientôt sur {{ sitename }} !
+    </p>
+    <p>
+      Pour toutes questions relatives à la plateforme, vous pouvez également nous écrire à l'adresse <a href="mailto:assistance@cap-collectif.com">assistance@cap-collectif.com</a>.
+    </p>
+    <p>
+Nous vous souhaitons une excellente consultation,
+</p>
+<p>
+L’équipe de Cap Collectif
+    </p>
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
