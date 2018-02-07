@@ -145,7 +145,7 @@ class UsersController extends FOSRestController
         $user->setConfirmationToken($token);
 
         if ($creatingAnAdmin) {
-            $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
+            $this->get('capco.user_notifier')->adminConfirmation($user);
         } else {
             $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
@@ -201,7 +201,7 @@ class UsersController extends FOSRestController
         }
 
         if ($user->getNewEmailToConfirm()) {
-            $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+            $this->get('capco.user_notifier')->newEmailConfirmation($user);
         } else {
             $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
         }
@@ -321,7 +321,7 @@ class UsersController extends FOSRestController
         $token = $this->get('fos_user.util.token_generator')->generateToken();
 
         $user->setNewEmailConfirmationToken($token);
-        $this->get('capco.notify_manager')->sendNewEmailConfirmationEmailMessage($user);
+        $this->get('capco.user_notifier')->newEmailConfirmation($user);
 
         $em->flush();
     }

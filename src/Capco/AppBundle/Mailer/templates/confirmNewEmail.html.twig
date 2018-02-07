@@ -1,19 +1,14 @@
 {% block body_text %}
     {% autoescape false %}
-    <p>
-        {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
-    </p>
-    <p>
-      {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
-    <p>
-        <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
-    </p>
-    <p>
-      {{ 'global.email.footer'|trans({
-            '%sitename%': capco_site_parameter_value('global.site.fullname'),
-          }, 'CapcoAppBundle')
-      }}
-    </p>
+        <p>
+            {{ 'email.alert_expire_user.hello'|trans({'%username%' : user.username}, 'CapcoAppBundle') }}
+        </p>
+        <p>
+            {{ 'user.register.confirmation_message.please_validate'|trans({}, 'CapcoAppBundle') }}
+        <p>
+            <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle') }}</strong></a>
+        </p>
+        <hr>
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
