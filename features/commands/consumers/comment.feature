@@ -10,7 +10,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_crea
     "notifyTo": "admin"
   }
   """
-  And I run "swarrot:consume:comment_create comment_create --env=test --max-execution-time=10 --max-messages=1"
+  And I consume "comment_create"
   Then I open mail with subject "notification.email.comment.create.subject"
   And I should see "notification.email.comment.create.body" in mail
 
@@ -23,7 +23,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_upda
     "notifyTo": "admin"
   }
   """
-  And I run "swarrot:consume:comment_update comment_update --env=test --max-execution-time=10 --max-messages=1"
+  And I consume "comment_update"
   Then I open mail with subject "notification.email.comment.update.subject"
   And I should see "notification.email.comment.update.body" in mail
 
@@ -42,6 +42,6 @@ Scenario: Email should be sent to admin if a message is sent to the comment_dele
     "proposalSlug": "ravalement-de-la-facade-de-la-bibliotheque-municipale"
   }
   """
-  And I run "swarrot:consume:comment_delete comment_delete --env=test --max-execution-time=10 --max-messages=1"
+  And I consume "comment_delete"
   Then I open mail with subject "notification.email.comment.delete.subject"
   And I should see "notification.email.comment.delete.body" in mail

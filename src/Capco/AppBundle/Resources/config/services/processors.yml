@@ -1,4 +1,28 @@
 services:
+  opinion_create.processor:
+    class: Capco\AppBundle\Processor\Opinion\OpinionCreateProcessor
+    arguments: ["@capco.opinion.repository", "@opinion_notifier"]
+  opinion_update.processor:
+    class: Capco\AppBundle\Processor\Opinion\OpinionUpdateProcessor
+    arguments: ["@capco.opinion.repository", "@opinion_notifier"]
+  opinion_delete.processor:
+    class: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
+    arguments: []
+  opinion_trash.processor:
+    class: Capco\AppBundle\Processor\Opinion\OpinionTrashProcessor
+    arguments: ["@capco.opinion.repository", "@opinion_notifier"]
+  argument_create.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentCreateProcessor
+    arguments: ["@capco.argument.repository", "@argument_notifier"]
+  argument_update.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentUpdateProcessor
+    arguments: ["@capco.argument.repository", "@argument_notifier"]
+  argument_delete.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentDeleteProcessor
+    arguments: []
+  argument_trash.processor:
+    class: Capco\AppBundle\Processor\Argument\ArgumentTrashProcessor
+    arguments: ["@capco.argument.repository", "@argument_notifier"]
   proposal_create.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalCreateProcessor
     arguments: ["@capco.proposal.repository", "@proposal.notifier"]

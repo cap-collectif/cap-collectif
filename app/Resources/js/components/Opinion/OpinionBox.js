@@ -54,7 +54,7 @@ export const OpinionBox = React.createClass({
               <i className="cap cap-arrow-1-1" />
               <span className="hidden-xs hidden-sm">
                 {' '}
-                {<FormattedMessage id="opinion.header.back" />}
+                <FormattedMessage id="opinion.header.back" />
               </span>
             </a>
             <div className="opinion__header__title" />
