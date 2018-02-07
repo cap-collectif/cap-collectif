@@ -1,5 +1,4 @@
 {% block body_text %}
-    {% set sitenameUrl = '<a href="' ~ url('app_homepage') ~ '">' ~ sitename ~ '</a>' %}
     {% autoescape false %}
     <p>
         {{ 'reply.acknowledgement.hello'|trans({
@@ -8,8 +7,7 @@
     </p>
     <p>
         {{ 'reply.acknowledgement.thx'|trans({
-            '%projectname%': project.title,
-            '%sitename%': sitenameUrl,
+            '%projectname%': project.title
         }, 'CapcoAppBundle') }}
     </p>
     <p>
@@ -51,12 +49,6 @@
         {{ 'reply.acknowledgement.done'|trans({}, 'CapcoAppBundle') }}
     </p>
     <hr/>
-    <p>
-        {{ 'reply.acknowledgement.footer1'|trans({'%sitename%': sitenameUrl}, 'CapcoAppBundle') }}
-    </p>
-    <p>
-        {{ 'reply.acknowledgement.footer2'|trans({'%sitename%': sitenameUrl}, 'CapcoAppBundle') }}
-    </p>
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

@@ -43,3 +43,9 @@ services:
       - '@mailer_service'
       - '@capco.site_parameter.resolver'
       - '@capco.resolvers.users'
+  capco.user_notifier:
+    class: Capco\AppBundle\Notifier\UserNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'

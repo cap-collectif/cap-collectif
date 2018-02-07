@@ -447,7 +447,7 @@ class Notify implements MailerInterface
             'reply.acknowledgement.subject', [
             '%sitename%' => $this->resolver->getValue('global.site.fullname'),
         ], 'CapcoAppBundle');
-        $template = 'CapcoAppBundle:Mail:acknowledgeReply.html.twig';
+        $template = '@CapcoMail/acknowledgeReply.html.twig';
         $body = $this->templating->render(
             $template,
             [
