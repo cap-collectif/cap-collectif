@@ -14,7 +14,6 @@ final class UserNotifier extends BaseNotifier
             QuestionnaireAcknowledgeReplyMessage::create(
                 $project,
                 $reply,
-                $this->siteParams->getValue('global.site.fullname'),
                 $reply->getAuthor()->getEmail()
             )
         );
