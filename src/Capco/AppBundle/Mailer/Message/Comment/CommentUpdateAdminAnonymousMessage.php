@@ -25,8 +25,8 @@ final class CommentUpdateAdminAnonymousMessage extends AdminMessage
             static::getMyTemplateVars(
                 $comment->getAuthorName(),
                 $comment->getRelatedObject()->getTitle(),
-                $comment->getCreatedAt()->format('d/m/Y'),
-                $comment->getCreatedAt()->format('H:i:s'),
+                $comment->getUpdatedAt()->format('d/m/Y'),
+                $comment->getUpdatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
                 $proposalUrl,
                 $commentAdminUrl

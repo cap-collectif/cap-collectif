@@ -26,8 +26,8 @@ final class CommentUpdateAdminMessage extends AdminMessage
                 $authorUrl,
                 $comment->getAuthor()->getDisplayName(),
                 $comment->getRelatedObject()->getTitle(),
-                $comment->getCreatedAt()->format('d/m/Y'),
-                $comment->getCreatedAt()->format('H:i:s'),
+                $comment->getUpdatedAt()->format('d/m/Y'),
+                $comment->getUpdatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
                 $proposalUrl,
                 $commentAdminUrl
