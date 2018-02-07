@@ -8,7 +8,7 @@
 
     &:hover {
         .smart-fade:after {
-            background: $page-bgc;
+            background: $light-gray;
         }
     }
 
@@ -31,7 +31,7 @@
             width: 100%;
             height: 24px;
             line-height: 24px;
-            color: $white;
+            color: #FFFFFF;
             text-align: center;
         }
 
@@ -81,11 +81,11 @@
 
             .remaining-time{
                 &__number {
-                    color: $dark;
+                    color: $excerpt-dark-gray;
                 }
 
                 &__container {
-                    color: $dark-gray;
+                    color: $excerpt;
                 }
             }
         }
@@ -101,12 +101,12 @@
 
         .progress {
             margin-bottom: 15px;
-            background-color: $page-bgc;
+            background-color: $light-gray;
 
             &_future-step .progress-bar {
-                background-color: $page-bgc;
+                background-color: $light-gray;
                 color: $dark-gray;
-                @include box-shadow(inset 0 1px 2px rgba($dark, 0.1));
+                @include box-shadow(inset 0 1px 2px rgba($black, 0.1));
             }
 
             &_closed-step .progress-bar {
@@ -115,23 +115,23 @@
         }
 
         .thumbnail__steps-bar__item--closed {
-            background-color: $success-color;
+            background-color: $brand-success;
         }
 
         .thumbnail__steps-bar__item--open {
-            background-color: $warning-color;
+            background-color: $brand-warning;
         }
 
         .thumbnail__steps-bar__item--future {
-            background-color: $border-color;
+            background-color: #ddd;
         }
     }
 
     .thumbnail__numbers {
         height: 55px;
         padding: 5px;
-        background-color: $page-bgc;
-        border-top: 1px solid $border-color;
+        background-color: #f6f6f6;
+        border-top: 1px solid #ddd;
 
         .thumbnail__number-block {
             display: inline-block;
@@ -154,7 +154,7 @@
 }
 
 .bg--project {
-    background-color: $primary-color;
+    background-color: $brand-primary;
     padding-top: 30px;
     padding-bottom: 30px;
 }

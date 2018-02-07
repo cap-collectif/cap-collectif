@@ -19,6 +19,7 @@ describe('<ReportButton />', () => {
     expect(button.prop('onClick')).toBeDefined();
     expect(button.prop('bsSize')).toEqual(null);
     expect(button.prop('style')).toEqual({});
+    expect(button.prop('className')).toEqual('btn--outline btn-dark-gray ');
     expect(button.prop('active')).toEqual(false);
   });
 

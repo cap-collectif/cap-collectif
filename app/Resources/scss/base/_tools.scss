@@ -56,7 +56,7 @@
 // -----------------------------
 @function set-link-text-color($color) {
     @if (lightness( $color ) > 76) {
-        @return $dark;
+        @return $black;
     } @else {
         @return $white;
     }

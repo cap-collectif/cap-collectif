@@ -4,14 +4,14 @@
 .bg--post {
     width: 225px;
     height: 150px;
-    background-color: $primary-color;
+    background-color: $brand-primary;
     padding-top: 20px;
 }
 
 .media--news {
 
     &:hover {
-        background-color: $page-bgc;
+        background-color: $light-gray;
     }
 }
 
@@ -28,7 +28,7 @@
 }
 
 .media--news__user a {
-    color: $dark;
+    color: $black;
 }
 
 .media--news__meta {

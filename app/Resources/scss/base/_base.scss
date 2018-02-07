@@ -3,7 +3,7 @@
 ================================================================*/
 body {
     padding-top: $navbar-height;
-    background-color: $brand-color-2;
+    background-color: $body-bg;
     font-family: $font-family-sans-serif;
     font-size: $font-size-base;
 
@@ -42,7 +42,7 @@ body {
 }
 
 .main {
-    background-color: $white;
+    background-color: $main-bg;
 
     p {
         margin-bottom: 12px;
@@ -87,10 +87,10 @@ body {
 
     .container--alt {
         @extend .container--bg;
-        color: $dark;
+        color: $black;
 
         &:after {
-            background-color: $page-bgc;
+            background-color: $alt-section;
             border-top: 1px solid $border-color;
         }
     }
@@ -204,7 +204,7 @@ h3,
     color: $brand-color-2;
 
     .subtitle {
-        color: $dark;
+        color: $darkest-gray;
         font-size: 16px;
         font-weight: normal;
         padding-left: 12px;
@@ -235,21 +235,21 @@ h2 + h3 {
 }
 
 .excerpt {
-    color: $dark-gray;
+    color: $excerpt;
 }
 
 .excerpt_dark {
-    color: $dark-gray
+    color: $excerpt-dark-gray
 }
 
 a.excerpt {
-    color: $dark-gray;
+    color: $excerpt;
 }
 
 .nb-bordered {
     vertical-align: middle;
     padding: 6px 12px;
-    border: 1px solid $border-color;
+    border: 1px solid $gray-primary;
 }
 
 .p--lined {
@@ -338,11 +338,11 @@ a.excerpt {
   font-size: 15px;
   padding: 5px;
   color: $white;
-  background-color: $dark;
+  background-color: $black;
 }*/
 
 .play--black:before {
-    @include triangle($dark, 'left', $custom-video-play);
+    @include triangle($black, 'left', $custom-video-play);
 }
 
 .bg__wrapper {
@@ -387,7 +387,7 @@ a.excerpt {
 .icon--circled {
     padding: 5px 7px;
     background-color: $white;
-    color: $dark;
+    color: $black;
     @include border-radius(50%);
 }
 
@@ -444,14 +444,14 @@ a.excerpt {
     li button {
         width: 100%;
         padding: 3px 20px;
-        color: $dark;
+        color: #333;
         font-weight: 400;
         line-height: 1.42857;
         text-align: left;
 
         &:hover {
-            background-color: $page-bgc;
-            color: $dark;
+            background-color: #f5f5f5;
+            color: #262626;
             text-decoration: none;
         }
     }
@@ -754,8 +754,8 @@ svg.avatar {
     width: 200px;
     height: 200px;
     margin-top: 5px;
-    border: 2px dashed $border-color;
-    background-color: $form-bgc;
+    border: 2px dashed $main-border-color;
+    background-color: $main-field-bg;
     border-radius: 5px;
 }
 
@@ -839,7 +839,7 @@ svg.avatar {
         a:focus,
         a:hover {
             background-color: $white;
-            color: $dark;
+            color: $black;
             @include border-radius(0);
             @include box-shadow(0 -3px 0 $brand-primary inset);
         }
@@ -865,7 +865,14 @@ svg.avatar {
                 }
 
                 .badge {
+                    background-color: $alt-section;
+                    color: $gray-light;
                     margin-left: 10px;
+                }
+
+                &.active .badge {
+                    background-color: $gray-light;
+                    color: $white;
                 }
             }
         }
@@ -875,14 +882,14 @@ svg.avatar {
 .PrivateList {
     &__box {
         padding: 30px 25px 0;
-        border: 1px $border-color solid;
+        border: 1px #d3d3d3 solid;
         border-radius: 5px;
-        background-color: $page-bgc;
+        background-color: $light-gray;
     }
 }
 
 .well .editor {
-    background-color: $white;
+    background-color: #fff;
 }
 
 input[type="color"],
@@ -907,7 +914,7 @@ textarea {
 
 .settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
     font-weight: normal;
-    color: $dark;
+    color: #000000;
 }
 
 .print {

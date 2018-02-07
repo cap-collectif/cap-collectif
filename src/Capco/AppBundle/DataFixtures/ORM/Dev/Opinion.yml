@@ -6,13 +6,12 @@ Capco\AppBundle\Entity\Opinion:
         id: 'opinion1'
         step: '@cstep1'
         title: Opinion 1
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+        body: On va bientôt me mettre à la corbeille
         isEnabled: true
         isTrashed: false
         Author: '@user1'
         OpinionType: '@opinionType8'
+        moderationToken: "opinion1ModerationToken"
     opinion2:
         id: 'opinion2'
         step: '@cstep1'
@@ -158,7 +157,7 @@ Capco\AppBundle\Entity\Opinion:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 1
         isEnabled: true
         isTrashed: false
@@ -174,7 +173,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: '@user5'
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 3
 
     opinion59:
@@ -187,22 +186,23 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: true
         isTrashed: false
         Author: '@user2'
-        OpinionType: @opinionType5
+        OpinionType: '@opinionType5'
         position: 2
 
     opinion60:
         id: 'opinion60'
         step: '@cstep5'
         title: Article
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
+        createdAt: <(new \DateTime('2016-03-01'))>
+        updatedAt: <(new \DateTime('2017-03-01'))>
+        body: Super opinion de malade
         isEnabled: true
         isTrashed: false
         Author: '@user2'
         OpinionType: '@opinionType6'
         position: 1
         answer: '@answer1'
+        moderationToken: "opinion60ModerationToken"
 
     opinion61:
         id: 'opinion61'
@@ -231,4 +231,18 @@ Capco\AppBundle\Entity\Opinion:
         Author: '@user2'
         OpinionType: '@opinionType6'
         childConnections: ['@opinion60']
+        position: 1
+
+    opinion63:
+        id: 'opinion63'
+        step: '@cstep5'
+        title: Article visible à la corbeille
+        createdAt: <(new \DateTime('2016-03-01'))>
+        body: Je suis du spam
+        isEnabled: true
+        isTrashed: true
+        trashedReason: reporting.status.spam
+        trashedAt: <(new \DateTime('2017-03-01'))>
+        Author: '@user2'
+        OpinionType: '@opinionType6'
         position: 1

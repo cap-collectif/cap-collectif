@@ -29,13 +29,13 @@
             &.active > div,
             &.active:hover a,
             &.active:hover > div {
-                border-left: 5px solid $primary-color;
-                background-color: $page-bgc;
+                border-left: 5px solid $brand-primary;
+                background-color: $light-gray;
             }
 
             &:hover a,
             &:hover > div {
-                background-color: $page-bgc;
+                background-color: $light-gray;
             }
 
             &.trash__step {
@@ -58,7 +58,7 @@
 
     .navbar__step-nb {
         float: left;
-        color: $primary-color;
+        color: $brand-primary;
         font-size: 25px;
         padding-bottom: 0;
     }
@@ -67,7 +67,7 @@
         margin-bottom: 5px;
         margin-top: 8px;
         padding-top: 0;
-        color: $dark;
+        color: $black;
         font-size: 16px;
     }
 

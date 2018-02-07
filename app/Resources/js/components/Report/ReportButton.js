@@ -1,37 +1,44 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
+import classNames from 'classnames';
 import LoginOverlay from '../Utils/LoginOverlay';
-import { type State } from '../../types';
 
-type Props = {
-  id: string,
-  reported: boolean,
-  className: ?string,
-  onClick: Function,
-  style: ?Object,
-  bsSize: ?string,
-};
+export const ReportButton = React.createClass({
+  displayName: 'ReportButton',
 
-export class ReportButton extends React.PureComponent<Props> {
-  static defaultProps = {
-    className: '',
-    style: {},
-    bsSize: null,
-  };
+  propTypes: {
+    id: PropTypes.string.isRequired,
+    reported: PropTypes.bool.isRequired,
+    className: PropTypes.string,
+    onClick: PropTypes.func.isRequired,
+    style: PropTypes.object,
+    bsSize: PropTypes.string,
+  },
+
+  getDefaultProps() {
+    return {
+      className: '',
+      style: {},
+      bsSize: null,
+    };
+  },
 
   render() {
     const { reported, className, onClick, bsSize, id, style } = this.props;
-
+    const classes = {
+      'btn--outline': true,
+      'btn-dark-gray': true,
+    };
+    classes[className] = true;
     return (
       <LoginOverlay>
         <Button
           id={`report-${id}-button`}
           style={style}
           bsSize={bsSize}
-          className={className}
+          className={classNames(classes)}
           onClick={reported ? null : onClick}
           active={reported}
           disabled={reported}>
@@ -44,10 +51,10 @@ export class ReportButton extends React.PureComponent<Props> {
         </Button>
       </LoginOverlay>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     reported: ownProps.reported || state.report.elements.includes(ownProps.id),
   };

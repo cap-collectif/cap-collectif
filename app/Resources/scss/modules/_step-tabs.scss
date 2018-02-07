@@ -78,8 +78,8 @@
 
                 &:not(.active) {
                     &:hover {
-                        background-color: $page-bgc;
-                        border-bottom: 3px solid $border-color;
+                        background-color: $light-gray;
+                        border-bottom: 3px solid $light-gray;
                     }
 
                     border-bottom: 3px solid $white;
@@ -145,17 +145,17 @@
                 }
 
                 &.active polygon, &:hover polygon {
-                    fill: $page-bgc;
+                    fill: $light-gray;
                 }
 
                 &.active {
                     a {
                         border-bottom: 3px solid $brand-primary;
-                        background-color: $page-bgc;
+                        background-color: $light-gray;
                     }
 
                     .navbar__step-title {
-                        color: $dark;
+                        color: $black;
                     }
 
                     .navbar__step-nb {

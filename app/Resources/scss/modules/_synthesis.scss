@@ -2,6 +2,20 @@
    $Synthesis
 ================================================================*/
 
+// **************************** Colors ************************************************
+$white: #fff;
+$lightest-gray: #f6f6f6;
+$lighter-gray: #ebebeb;
+$light-gray: #ddd;
+$gray: #999;
+$darker-gray: #333;
+$black: #000;
+$blue: #377bb5;
+$green: #5fb760;
+$orange: #eeac57;
+$red: #d9534f;
+$dark-red: #a94442;
+
 // **************************** Layout ************************************************
 
 .synthesis_page body {
@@ -48,8 +62,8 @@
         width: 30%;
         padding: 0;
         padding-top: 15px;
-        background-color: $page-bgc;
-        border-right: 1px solid $border-color;
+        background-color: $lightest-gray;
+        border-right: 1px solid $light-gray;
     }
 
     .col--right {
@@ -124,7 +138,7 @@
 .synthesis__second-navbar {
     z-index: 1020;
     top: 50px;
-    background-color: $danger-color;
+    background-color: $red;
     color: $white;
 
     .navbar-brand,
@@ -145,7 +159,7 @@
     .navbar-right > li.active > a,
     .navbar-right > li.active > a:hover,
     .navbar-right > li.active > a:focus {
-        background-color: darken($danger-color, 15);
+        background-color: darken($red, 15);
     }
 
 }
@@ -174,7 +188,7 @@
         .menu--fixed {
             position: relative;
             z-index: 1000;
-            background-color: $page-bgc;
+            background-color: $lightest-gray;
         }
 
         .menu__link > a {
@@ -199,7 +213,7 @@
     }
 
     .menu__action {
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $light-gray;
         margin-top: 0;
     }
 }
@@ -225,15 +239,15 @@
     }
 
     .menu__item {
-        border-right: 1px solid $border-color;
-        border-top: 1px solid $border-color;
-        background-color: $page-bgc;
+        border-right: 1px solid $light-gray;
+        border-top: 1px solid $light-gray;
+        background-color: $lightest-gray;
 
         & > a {
             margin-right: 0;
             @include border-radius(0 !important);
             border: 0;
-            color: $dark;
+            color: $black;
             border-top: 2px solid transparent;
         }
     }
@@ -248,7 +262,7 @@
     }
 
     .menu__item:first-child > a {
-        border-left: 1px solid $border-color;
+        border-left: 1px solid $light-gray;
     }
 }
 
@@ -268,11 +282,11 @@
 // ***************************** Elements list *******************************************
 
 .synthesis__list {
-    border: 1px solid $border-color;
+    border: 1px solid $light-gray;
     margin-bottom: 0;
 
     .synthesis__list-item {
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $light-gray;
         background-color: $white;
         font-size: 15px;
         margin-top: 0;
@@ -282,11 +296,11 @@
         }
 
         &.archived {
-            background-color: $page-bgc;
+            background-color: $lightest-gray;
         }
 
         &:hover {
-            background-color: $page-bgc;
+            background-color: $lightest-gray;
         }
     }
 }
@@ -294,7 +308,7 @@
 // Empty elements list
 .synthesis__list--empty {
     padding: 30px 15px;
-    color: $dark-gray;
+    color: $gray;
     font-weight: bold;
 
     .icon {
@@ -307,7 +321,7 @@
 
 // Global
 .synthesis__tree {
-    border: 1px solid $border-color;
+    border: 1px solid $light-gray;
     border-top: 0;
 }
 
@@ -318,7 +332,7 @@
 }
 
 .tree__item__content.selected {
-    background-color: $primary-color;
+    background-color: $blue;
     color: $white;
 }
 
@@ -362,12 +376,12 @@
     }
 
     .tree__item__content.selected {
-        background-color: $border-color;
-        color: $dark;
+        background-color: $lighter-gray;
+        color: $black;
     }
 
     .tree__item.published > .tree__item__content {
-        color: $success-color;
+        color: $green;
     }
 
     .elements-tree__item-icon {
@@ -384,7 +398,7 @@
 // In content
 .synthesis__content .synthesis__tree {
     .tree__item__content {
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $light-gray;
     }
 
     .tree__list:first-child > .tree__item:first-child > .tree__item__content {
@@ -417,28 +431,28 @@
     .element__metadata {
         position: relative;
         margin: 0 0 5px;
-        color: $dark-gray;
+        color: $gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $dark-gray;
+            color: $gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $primary-color;
+            color: $blue;
         }
     }
 
     .element__title {
-        color: $dark;
+        color: $black;
         font-size: 16px;
         word-break: break-word;
 
         &:hover,
         &.active {
-            color: $primary-color;
+            color: $blue;
             text-decoration: none;
         }
     }
@@ -446,17 +460,17 @@
     .element__breadcrumb {
         margin-bottom: 0;
         margin-top: 5px;
-        color: $dark-gray;
+        color: $gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $dark-gray;
+            color: $gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $primary-color;
+            color: $blue;
         }
     }
 }
@@ -473,7 +487,7 @@
     margin-left: 5px;
 
     span {
-        color: $dark-gray;
+        color: $gray;
         font-size: 16px;
 
         &.active {
@@ -487,11 +501,11 @@
 .synthesis__element-panel {
 
     .panel-title {
-        color: $dark;
+        color: $black;
 
         a,
         a.active {
-            color: $dark;
+            color: $black;
         }
     }
 
@@ -509,7 +523,7 @@
 
 .element__description {
     overflow: hidden;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid $light-gray;
     word-wrap: break-word;
 
     .element__chart {
@@ -567,12 +581,12 @@
 .element__action-notation {
 
     &:hover a.active {
-        color: $dark-gray;
+        color: $gray;
     }
 
     a {
         direction: rtl;
-        color: $dark-gray;
+        color: $gray;
         text-decoration: none;
         transition: color 0.4s;
         unicode-bidi: embed;
@@ -652,8 +666,8 @@
     }
 
     .panel--original-element {
-        background-color: $page-bgc;
-        border-right: 1px solid $border-color;
+        background-color: $lightest-gray;
+        border-right: 1px solid $light-gray;
 
         .element__title {
             margin-top: 0;
@@ -673,14 +687,14 @@
             margin-top: 15px;
             margin-bottom: 0;
             padding: 0;
-            border: 1px solid $border-color;
+            border: 1px solid $light-gray;
             list-style-type: none;
         }
 
         .division__element {
-            border-top: 1px solid $border-color;
+            border-top: 1px solid $light-gray;
             padding: 15px;
-            background-color: $page-bgc;
+            background-color: $lightest-gray;
 
             &:first-child {
                 border-top: 0;
@@ -696,7 +710,7 @@
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-color) (#808080 $dark-gray) ($dark $dark);
+$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);
@@ -754,7 +768,7 @@ $items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-
         cursor: pointer;
 
         &:hover {
-            background-color: $page-bgc;
+            background-color: $lightest-gray;
         }
     }
 
@@ -769,7 +783,7 @@ $items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-
             left: 0;
             display: block;
             height: 100%;
-            background-color: $page-bgc;
+            background-color: $light-gray;
         }
 
         .element__title {
@@ -783,6 +797,6 @@ $items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-
 
 @media print {
     .synthesis__element__bar__value {
-        background-color: $page-bgc !important;
+        background-color: $light-gray !important;
     }
 }

@@ -7,7 +7,7 @@
 
     li > a {
         padding: 5px 15px;
-        color: $dark;
+        color: $black;
         font-size: 16px;
         padding-left: 90px;
     }
@@ -29,7 +29,7 @@
             background-color: inherit;
 
             .category {
-                color: $primary-color;
+                color: $brand-primary;
             }
         }
 
@@ -40,17 +40,17 @@
     }
 
     li i {
-        color: $dark;
+        color: $black;
         font-size: 18px;
 
         &:hover,
         &:active {
-            color: $dark;
+            color: $black;
         }
     }
 
     li .value {
-        color: $primary-color;
+        color: $brand-primary;
         font-size: 18px;
     }
 
@@ -75,13 +75,13 @@
     margin-top: 15px;
 
     li .value {
-        color: $dark;
+        color: $black;
         font-size: 24px;
     }
 }
 
 .project__header__title {
-    color: $dark;
+    color: $black;
     padding-top: 0;
     margin-top: 0;
 

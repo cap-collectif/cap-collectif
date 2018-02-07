@@ -29,7 +29,7 @@
         margin-top: 0;
         padding-top: 0;
         margin-bottom: 15px;
-        color: $dark;
+        color: $black;
     }
 
     .profile__infos {
@@ -56,9 +56,9 @@
         &.active a:hover,
         a:hover {
             background-color: $white;
-            color: $dark;
+            color: $black;
             @include border-radius(0);
-            @include box-shadow(0 -3px 0 $primary-color inset);
+            @include box-shadow(0 -3px 0 $brand-primary inset);
         }
     }
 

@@ -2,7 +2,7 @@
 $THEME
 ================================================================*/
 .bg--theme {
-    background-color: $primary-color;
+    background-color: $brand-primary;
     padding-top: 45px;
     padding-bottom: 45px;
 }
@@ -11,7 +11,7 @@ $THEME
     text-align: center;
 
     &:hover {
-        background-color: $page-bgc;
+        background-color: $light-gray;
     }
 
     .theme__title {

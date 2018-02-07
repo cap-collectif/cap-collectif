@@ -3,10 +3,10 @@
  =================== */
 .idea__preview {
     &:hover {
-        background-color: $page-bgc;
+        background-color: #f6f6f6;
 
         .idea__title:after {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), $page-bgc 50%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #f6f6f6 50%);
         }
     }
 
@@ -21,7 +21,7 @@
         white-space: nowrap;
 
         & > a {
-            color: $dark;
+            color: $black;
         }
     }
 
@@ -49,7 +49,7 @@
 .idea {
     .idea__date {
         margin-bottom: 0;
-        color: $dark-gray;
+        color: $excerpt;
         font-size: 80%;
     }
 }
