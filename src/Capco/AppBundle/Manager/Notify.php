@@ -2,13 +2,10 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
-use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -50,20 +47,6 @@ class Notify
                 $this->mailer->getTransport()->stop();
             }
         }
-    }
-
-    // FOS User emails
-    public function sendConfirmationEmailMessage(UserInterface $user)
-    {
-        $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('account_confirm_email', [
-          'token' => $user->getConfirmationToken(),
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
-        $rendered = $this->templating->render($template, [
-            'user' => $user,
-            'confirmationUrl' => $url,
-        ]);
-        $this->sendFOSEmail($rendered, $user->getEmail());
     }
 
     // Code from FOSUserBundle
@@ -120,27 +103,6 @@ class Notify
             );
 
             $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
-        }
-    }
-
-    public function notifyProposalStatusChangeInCollect(Proposal $proposal)
-    {
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $subject = $this->translator->trans(
-            'proposal_status_change_collect.notification.subject', [
-                '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-            ], 'CapcoAppBundle'
-        );
-        $template = 'CapcoAppBundle:Mail:notifyProposalStatusChange.html.twig';
-        $body = $this->templating->render($template, [
-            'proposal' => $proposal,
-        ]);
-
-        $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
-        foreach ($proposal->getChildConnections() as $child) {
-            $this->sendEmail($child->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
         }
     }
 

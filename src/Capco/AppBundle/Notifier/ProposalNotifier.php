@@ -9,6 +9,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
@@ -25,11 +26,11 @@ class ProposalNotifier extends BaseNotifier
     public function onCreate(Proposal $proposal)
     {
         $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
-          $proposal,
-          $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-          $this->proposalResolver->resolveShowUrl($proposal),
-          $this->proposalResolver->resolveAdminUrl($proposal),
-          $this->userResolver->resolveShowUrl($proposal->getAuthor())
+            $proposal,
+            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+            $this->proposalResolver->resolveShowUrl($proposal),
+            $this->proposalResolver->resolveAdminUrl($proposal),
+            $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
     }
 
@@ -62,5 +63,19 @@ class ProposalNotifier extends BaseNotifier
             $post,
             $proposal->getAuthor()->getEmail()
         ));
+    }
+
+    public function onStatusChangeInCollect(Proposal $proposal)
+    {
+        $this->mailer->sendMessage(ProposalStatusChangeInCollectMessage::create(
+            $proposal,
+            $proposal->getAuthor()->getEmail()
+        ));
+        foreach ($proposal->getChildConnections() as $child) {
+            $this->mailer->sendMessage(ProposalStatusChangeInCollectMessage::create(
+                $proposal,
+                $child->getAuthor()->getEmail()
+            ));
+        }
     }
 }
