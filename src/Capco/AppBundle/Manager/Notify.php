@@ -307,8 +307,8 @@ class Notify implements MailerInterface
     {
         $proposalAuthor = $comment->getRelatedObject()->getAuthor();
         $isAnonymous = null === $comment->getAuthor();
-        $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.create.subject' : 'notification.email.comment.to_user.create.subject';
-        $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.create.body' : 'notification.email.comment.to_user.create.body';
+        $subjectId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.subject' : 'notification.email.comment.to_user.subject';
+        $bodyId = $isAnonymous ? 'notification.email.anonymous_comment.to_user.body' : 'notification.email.comment.to_user.body';
         $params = $this->buildParamsForComment($comment, $isAnonymous);
         $params['body']['%notificationsUrl%'] = $this->router->generate('capco_profile_notifications_login'
             , ['token' => $proposalAuthor->getNotificationsConfiguration()->getUnsubscribeToken()],
