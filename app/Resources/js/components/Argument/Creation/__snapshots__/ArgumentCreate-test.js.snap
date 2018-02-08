@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentCreate /> renders correctly 1`] = `
+<div
+  className="opinion__body box"
+>
+  <div
+    className="opinion__data"
+  >
+    <form
+      id="argument-form--for"
+    >
+      <Connect(LoginOverlay)>
+        <Field
+          component={[Function]}
+          disabled={true}
+          id="arguments-body-for"
+          label={
+            <FormattedMessage
+              id="argument.for.add"
+              values={Object {}}
+            />
+          }
+          labelClassName="sr-only"
+          name="body"
+          placeholder="argument.for.add"
+          rows={2}
+          type="textarea"
+        />
+      </Connect(LoginOverlay)>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={true}
+        onClick={null}
+      >
+        <FormattedMessage
+          id="global.publish"
+          values={Object {}}
+        />
+      </Button>
+    </form>
+  </div>
+</div>
+`;
