@@ -1,37 +1,23 @@
 // @flow
-import * as React from 'react';
-import {
-  reduxForm,
-  Field,
-  submit,
-  SubmissionError,
-  clearSubmitErrors,
-  type FormProps,
-} from 'redux-form';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Button, Alert } from 'react-bootstrap';
+import React, { PropTypes } from 'react';
+import { reduxForm, Field, submit } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import renderComponent from '../../Form/Field';
-import type { State, Dispatch } from '../../../types';
+import type { State } from '../../../types';
 
 const onSubmit = (values, dispatch, { opinion, type, reset }) => {
   const data = {
     body: values.body,
     type: type === 'yes' || type === 'simple' ? 1 : 0,
   };
-  return ArgumentActions.add(opinion, data)
-    .then(() => {
-      ArgumentActions.load(opinion, type === 'no' ? 0 : 1);
-      reset();
-    })
-    .catch((res: Object) => {
-      if (res && res.response && res.response.message === 'You contributed too many times.') {
-        throw new SubmissionError({ _error: 'publication-limit-reached' });
-      }
-      throw new SubmissionError({ _error: 'global.error.server.form' });
-    });
+  return ArgumentActions.add(opinion, data).then(() => {
+    ArgumentActions.load(opinion, type === 'no' ? 0 : 1);
+    reset();
+  });
 };
 
 const validate = ({ body }: { body: ?string }) => {
@@ -45,43 +31,23 @@ const validate = ({ body }: { body: ?string }) => {
   return errors;
 };
 
-type Props = FormProps & {
-  type: string,
-  opinion: Object,
-  user: Object,
-  submitting: boolean,
-  form: string,
-  dispatch: Dispatch,
-};
+const ArgumentCreate = React.createClass({
+  propTypes: {
+    type: PropTypes.string.isRequired,
+    opinion: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    submitting: PropTypes.bool.isRequired,
+    form: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  },
 
-export class ArgumentCreate extends React.Component<Props> {
   render() {
-    const { user, opinion, type, dispatch, form, submitting, error } = this.props;
+    const { user, opinion, type, dispatch, form, submitting } = this.props;
     const disabled = !opinion.isContribuable;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
           <form id={`argument-form--${type}`}>
-            {error && (
-              <Alert
-                bsStyle="warning"
-                onDismiss={() => {
-                  dispatch(clearSubmitErrors(form));
-                }}>
-                {error === 'publication-limit-reached' ? (
-                  <div>
-                    <h4>
-                      <strong>
-                        <FormattedMessage id="publication-limit-reached" />
-                      </strong>
-                    </h4>
-                    <FormattedMessage id="publication-limit-reached-proposal-content" />
-                  </div>
-                ) : (
-                  <FormattedHTMLMessage id="global.error.server.form" />
-                )}
-              </Alert>
-            )}
             <LoginOverlay enabled={opinion.isContribuable}>
               <Field
                 name="body"
@@ -113,12 +79,14 @@ export class ArgumentCreate extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  },
 });
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(
   reduxForm({

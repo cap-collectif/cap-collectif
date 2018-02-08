@@ -18,6 +18,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver
@@ -33,11 +34,11 @@ class UrlResolver
         $this->mediaExtension = $mediaExtension;
     }
 
-    public function getMediaUrl(Media $media)
+    public function getMediaUrl(Media $media, Arg $args)
     {
         return $this->mediaExtension->getMediaUrl(
           $media,
-          'reference'
+          isset($args['format']) ? $args['format'] : 'reference'
         );
     }
 
@@ -180,7 +181,11 @@ class UrlResolver
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
-            return $this->getObjectUrl($object->getRelatedObject());
+            return $this->getObjectUrl($object->getRelatedObject(), $absolute);
+        }
+
+        if ($object instanceof Reporting && $object->getRelated()) {
+            return $this->getObjectUrl($object->getRelated(), $absolute);
         }
 
         if ($object instanceof Theme && $object->getSlug()) {

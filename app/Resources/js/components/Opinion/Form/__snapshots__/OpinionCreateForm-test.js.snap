@@ -20,6 +20,7 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
     type="text"
   />
   <Field
+    autoFocus={true}
     component={[Function]}
     help={null}
     id="opinion_body"
