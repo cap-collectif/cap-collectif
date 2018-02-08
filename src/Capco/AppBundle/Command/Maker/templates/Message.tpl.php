@@ -65,9 +65,9 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php if (isset($command_template_vars)): ?>
 <?php foreach ($command_template_vars as $template_var): ?>
 <?php if (next($command_template_vars)): ?>
-            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
+            '<?php if (!$command_is_twig_template): ?>{<?php endif; ?><?php echo $template_var; ?><?php if (!$command_is_twig_template): ?>}<?php endif; ?>' => $<?php echo $template_var; ?>,<?php echo PHP_EOL; ?>
 <?php else: ?>
-            '{<?php echo $template_var; ?>}' => $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
+            '<?php if (!$command_is_twig_template): ?>{<?php endif; ?><?php echo $template_var; ?><?php if (!$command_is_twig_template): ?>}<?php endif; ?>' => $<?php echo $template_var; ?><?php echo PHP_EOL; ?>
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>

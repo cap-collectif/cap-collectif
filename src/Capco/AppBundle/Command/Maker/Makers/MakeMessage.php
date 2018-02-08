@@ -38,6 +38,7 @@ class MakeMessage extends AbstractMaker
             'command_content_template' => $this->content,
             'command_template_vars' => $this->templateVars,
             'command_subject_vars' => $this->subjectVars,
+            'command_is_twig_template' => false !== strpos($this->content, '.twig'),
         ];
     }
 
@@ -55,6 +56,7 @@ class MakeMessage extends AbstractMaker
 
         $this->className = $this->askSimpleQuestion($input, $output,
             'Please type your message name <info>(e.g ' . ($this->entity ? $this->entity->getShortName() : 'Proposal') . 'Create)</info>');
+        $this->className = str_replace('Message', '', $this->className);
         $this->className .= 'Message';
         $this->type = $this->askChoiceQuestion($input, $output, 'Please select your message type <info>(defaults to External</info>)',
             $messageTypes,
