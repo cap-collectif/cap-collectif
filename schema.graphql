@@ -498,13 +498,6 @@ type FollowProposalPayload {
   clientMutationId: String
 }
 
-# A Follower
-type Follower {
-  id: ID!
-  user: User!
-  proposal: Proposal!
-}
-
 # A connection to a list of items.
 type FollowerConnection {
   totalCount: Int!
