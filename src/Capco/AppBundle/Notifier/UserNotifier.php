@@ -51,4 +51,15 @@ final class UserNotifier extends BaseNotifier
             )
         );
     }
+
+    public function emailConfirmation(User $user)
+    {
+        $this->mailer->sendMessage(
+            UserNewEmailConfirmationMessage::create(
+                $user,
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                $user->getNewEmailToConfirm()
+            )
+        );
+    }
 }
