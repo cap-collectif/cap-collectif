@@ -43,7 +43,7 @@ class PostAdmin extends Admin
     {
         if ($object->getProposals()->count() > 0) {
             foreach ($object->getProposals() as $proposal) {
-                $this->getContainer()->get('notifier')->notifyProposalPost($proposal, $object);
+                $this->getContainer()->get('proposal.notifier')->onOfficialAnswer($proposal, $object);
             }
         }
     }

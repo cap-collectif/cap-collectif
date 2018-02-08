@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Selection;
@@ -164,29 +163,6 @@ class Notify
         foreach ($selection->getProposal()->getChildConnections() as $child) {
             $this->sendEmail($child->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
         }
-    }
-
-    public function notifyProposalPost(Proposal $proposal, Post $post)
-    {
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $subject = $this->translator->trans(
-            'proposal_answer.notification.subject', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-        ], 'CapcoAppBundle'
-        );
-
-        $template = 'CapcoAppBundle:Mail:notifyProposalAnswer.html.twig';
-        $body = $this->templating->render(
-            $template,
-            [
-                'proposal' => $proposal,
-                'post' => $post,
-            ]
-        );
-
-        $this->sendEmail($proposal->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
     }
 
     private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
