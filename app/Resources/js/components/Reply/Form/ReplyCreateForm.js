@@ -1,73 +1,95 @@
 import React, { PropTypes } from 'react';
+import { QueryRenderer, graphql } from 'react-relay';
 import ReplyForm from './ReplyForm';
 import SubmitButton from '../../Form/SubmitButton';
 import ReplyActions from '../../../actions/ReplyActions';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Utils/Loader';
 
-const ReplyCreateForm = React.createClass({
-  displayName: 'ReplyCreateForm',
-
-  propTypes: {
-    form: PropTypes.object.isRequired,
-    disabled: PropTypes.bool,
-  },
-
-  getDefaultProps() {
-    return {
-      disabled: false,
-    };
-  },
-
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
-
-  handleSubmit() {
-    this.setState({
-      isSubmitting: true,
-    });
-  },
-
-  handleSubmitSuccess() {
-    const { form } = this.props;
-    this.setState({
-      isSubmitting: false,
-    });
-    if (form.multipleRepliesAllowed) {
-      this.replyForm.emptyForm();
+const component = ({ error, props }: { error: ?Error, props: any }) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    // eslint-disable-next-line
+    if (props.questionnaire !== null) {
+      return (
+        <div>
+          <ReplyForm
+            questionnaire={props.questionnaire}
+            disabled={false}
+          />
+          <SubmitButton
+            id="submit-create-reply"
+            // onSubmit={this.handleSubmit}
+            disabled={false}
+          />
+        </div>
+      );
     }
-    ReplyActions.loadUserReplies(form.id);
-  },
+    return graphqlError;
+  }
+  return <Loader />;
+};
 
-  handleFailure() {
-    this.setState({
-      isSubmitting: false,
-    });
-  },
+type Props = {
+  form: Object,
+  disabled: boolean,
+}
+
+export class ReplyCreateForm extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+  };
+
+  // state = {
+  //   isSubmitting: false,
+  // };
+  //
+  // handleSubmit() {
+  //   this.setState({
+  //     isSubmitting: true,
+  //   });
+  // }
+  //
+  // handleSubmitSuccess() {
+  //   const { form } = this.props;
+  //   this.setState({
+  //     isSubmitting: false,
+  //   });
+  //   if (form.multipleRepliesAllowed) {
+  //     this.replyForm.emptyForm();
+  //   }
+  //   ReplyActions.loadUserReplies(form.id);
+  // }
+  //
+  // handleFailure() {
+  //   this.setState({
+  //     isSubmitting: false,
+  //   });
+  // }
 
   render() {
-    const { form, disabled } = this.props;
     return (
       <div id="create-reply-form">
-        <ReplyForm
-          ref={c => (this.replyForm = c)}
-          form={form}
-          isSubmitting={this.state.isSubmitting}
-          onSubmitSuccess={this.handleSubmitSuccess}
-          onSubmitFailure={this.handleFailure}
-          onValidationFailure={this.handleFailure}
-          disabled={disabled}
-        />
-        <SubmitButton
-          id="submit-create-reply"
-          isSubmitting={this.state.isSubmitting}
-          onSubmit={this.handleSubmit}
-          disabled={disabled}
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ReplyCreateFormQuery($id: ID!) {
+              questionnaire(id: $id) {
+                ...ReplyForm_questionnaire
+              }
+            }
+          `}
+          variables={{
+            id: this.props.form.id,
+          }}
+          render={component}
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default ReplyCreateForm;

@@ -1,24 +1,28 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Alert } from 'react-bootstrap';
-import { reduxForm, FieldArray } from 'redux-form';
+import { type IntlShape, injectIntl } from 'react-intl';
+// import { Alert, Button } from 'react-bootstrap';
+import {
+  type FormProps,
+  // change,
+  // SubmissionError,
+  reduxForm,
+  FieldArray,
+  // formValueSelector,
+} from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { Dispatch } from '../../../types';
+import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
+import {
+  formatInitialResponsesValues,
+  // formatSubmitResponses,
+  renderResponses,
+  type ResponsesInReduxForm,
+} from '../../../utils/responsesHelper';
 // import { RadioGroup, RadioButton } from 'react-radio-buttons';
 // import FormMixin from '../../../utils/FormMixin';
 // import FlashMessages from '../../Utils/FlashMessages';
 // import ArrayHelper from '../../../services/ArrayHelper';
-// import Input from '../../Form/Input';
-// import Radio from '../../Form/Radio';
-// import Checkbox from '../../Form/Checkbox';
-// import Ranking from '../../Form/Ranking';
-// import ReplyActions from '../../../actions/ReplyActions';
-// import ButtonBody from './ButtonBody';
-import {
-  formatInitialResponsesValues,
-  formatSubmitResponses,
-  renderResponses,
-  type ResponsesInReduxForm,
-} from '../../../utils/responsesHelper';
 
 // const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean }>) => {
 //   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
@@ -39,17 +43,18 @@ import {
 //   return 'minority_required';
 // };
 
-type Props = {
-  form: Object,
-  isSubmitting: boolean,
-  onValidationFailure: Function,
-  onSubmitSuccess: Function,
-  onSubmitFailure: Function,
-  reply?: Object,
-  disabled?: boolean,
+type Props = FormProps & {
+  +questionnaire: ReplyForm_questionnaire,
+  +intl: IntlShape,
+  +reply?: Object,
+  // disabled?: boolean,
 }
 
-const onSubmit = (values, dispatch, props) => {
+type FormValues = {|
+  responses: ResponsesInReduxForm,
+|}
+
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { reply } = this.props;
 
   // ReplyAction.add
@@ -66,25 +71,20 @@ const validate = () => {
 export const formName = 'ReplyForm';
 
 export class ReplyForm extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-    this.props = {
-      reply: {
-        responses: [],
-      },
-      disabled: false,
-    };
-    this.state = {};
-  }
-
   render() {
+    const { intl, questionnaire } = this.props;
+
+    console.log(questionnaire);
+
     return(
-      <FieldArray
-        name="responses"
-        component={renderResponses}
-        questions={ReplyForm.responses}
-        intl={intl}
-      />
+      <form id="reply-form" ref="form">
+        <FieldArray
+          name="responses"
+          component={renderResponses}
+          questions={questionnaire.questions}
+          intl={intl}
+        />
+      </form>
     )
   }
 
@@ -433,14 +433,46 @@ export class ReplyForm extends React.Component<Props> {
   // }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
-  initialValues: {},
+const mapStateToProps: MapStateToProps<*, *, *> = (state, props: Props) => ({
+  initialValues: {
+    responses: formatInitialResponsesValues(
+      props.questionnaire.questions,
+      [],
+    ),
+  },
 });
 
-export default connect()(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName
-  })(ReplyForm)
-)
+const form = reduxForm({
+  form: formName,
+  validate,
+  onSubmit,
+})(ReplyForm);
+
+const container = connect(mapStateToProps)(injectIntl(form));
+
+export default createFragmentContainer(container, {
+  questionnaire: graphql`
+    fragment ReplyForm_questionnaire on Questionnaire {
+      questions {
+          id
+          title
+          position
+          private
+          required
+          helpText
+          type
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          choices {
+            id
+            title
+            description
+            color
+          }
+        }
+    }
+  `,
+})
