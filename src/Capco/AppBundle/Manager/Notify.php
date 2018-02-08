@@ -53,34 +53,6 @@ class Notify
         }
     }
 
-    public function sendExpiredUserEmail(UserInterface $user, $contributionsDeleted)
-    {
-        $template = $contributionsDeleted
-        ? 'CapcoAppBundle:Mail:notifyExpiredWithContributions.html.twig'
-        : 'CapcoAppBundle:Mail:notifyExpiredNoContributions.html.twig'
-      ;
-        $subjectString = $contributionsDeleted
-        ? 'email.expire_user.subject_with_contrib'
-        : 'email.expire_user.subject_no_contrib'
-      ;
-        $sitename = $this->resolver->getValue('global.site.fullname');
-
-        $subject = $this->translator->trans($subjectString, ['%sitename%' => $sitename], 'CapcoAppBundle');
-        $url = $this->router->generate('account_confirm_email', [
-        'token' => $user->getConfirmationToken(),
-      ], true);
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $rendered = $this->templating->render($template, [
-        'user' => $user,
-        'url' => $url,
-        'sitename' => $sitename,
-        'email' => $this->resolver->getValue('admin.mail.notifications.receive_address'),
-      ]);
-        $this->sendEmail($user->getEmail(), $fromAddress, $fromName, $rendered, $subject);
-    }
-
     // FOS User emails
     public function sendConfirmationEmailMessage(UserInterface $user)
     {

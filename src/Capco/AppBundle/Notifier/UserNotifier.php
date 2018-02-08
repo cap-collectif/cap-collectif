@@ -7,6 +7,8 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
+use Capco\AppBundle\Mailer\Message\User\UserExpiredWithContributionsMessage;
+use Capco\AppBundle\Mailer\Message\User\UserExpiredWithNoContributionsMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\UserBundle\Entity\User;
 
@@ -61,5 +63,29 @@ final class UserNotifier extends BaseNotifier
                 $user->getNewEmailToConfirm()
             )
         );
+    }
+
+    public function expired(User $user, bool $contributionDeleted)
+    {
+        $adminEmail = $this->siteParams->getValue('admin.mail.notifications.receive_address');
+        if ($contributionDeleted) {
+            $this->mailer->sendMessage(
+                UserExpiredWithContributionsMessage::create(
+                    $user,
+                    $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                    $adminEmail,
+                    $user->getEmail()
+                )
+            );
+        } else {
+            $this->mailer->sendMessage(
+                UserExpiredWithNoContributionsMessage::create(
+                    $user,
+                    $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                    $adminEmail,
+                    $user->getEmail()
+                )
+            );
+        }
     }
 }
