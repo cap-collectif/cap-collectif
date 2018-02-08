@@ -510,10 +510,7 @@ type Media {
   id: ID!
 
   # The url of the media.
-  url(
-    # The format of the media
-    format: String
-  ): String!
+  url: String!
   name: String!
   size: String!
 }

@@ -3,10 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateForm } from './OpinionCreateForm';
+import { formMock } from '../../../mocks';
 
 describe('<OpinionCreateForm />', () => {
   const props = {
-    handleSubmit: jest.fn(),
+    ...formMock,
     projectId: '1',
     stepId: '1',
     step: {
