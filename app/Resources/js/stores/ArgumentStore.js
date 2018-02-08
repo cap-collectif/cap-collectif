@@ -4,6 +4,7 @@ import {
   RECEIVE_ARGUMENTS,
   CHANGE_ARGUMENTS_SORT_ORDER,
   CREATE_ARGUMENT_SUCCESS,
+  CREATE_ARGUMENT_FAILURE,
   UPDATE_ARGUMENT_FAILURE,
   UPDATE_ARGUMENT_SUCCESS,
 } from '../constants/ArgumentConstants';
@@ -42,6 +43,8 @@ class ArgumentStore extends BaseStore {
       case CREATE_ARGUMENT_SUCCESS:
         this._arguments[action.type].push(action.argument);
         this.emitChange();
+        break;
+      case CREATE_ARGUMENT_FAILURE:
         break;
       case UPDATE_ARGUMENT_SUCCESS:
         ArrayHelper.removeElementFromArray(this._arguments[action.type], action.argument);

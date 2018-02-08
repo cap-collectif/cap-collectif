@@ -4,6 +4,7 @@ import {
   RECEIVE_ARGUMENTS,
   CHANGE_ARGUMENTS_SORT_ORDER,
   CREATE_ARGUMENT_SUCCESS,
+  CREATE_ARGUMENT_FAILURE,
   UPDATE_ARGUMENT_SUCCESS,
   UPDATE_ARGUMENT_FAILURE,
 } from '../constants/ArgumentConstants';
@@ -38,18 +39,28 @@ export default {
   },
 
   add: (opinion, data) => {
-    return Fetcher.post(`/${baseUrl(opinion)}/${opinion.id}/arguments`, data).then(argument => {
-      AppDispatcher.dispatch({
-        actionType: CREATE_ARGUMENT_SUCCESS,
-        type: data.type,
-        argument: argument.json(),
+    return Fetcher.post(`/${baseUrl(opinion)}/${opinion.id}/arguments`, data)
+      .then(argument => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_ARGUMENT_SUCCESS,
+          type: data.type,
+          argument: argument.json(),
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
+        });
+        return true;
+      })
+      .catch(() => {
+        AppDispatcher.dispatch({
+          actionType: CREATE_ARGUMENT_FAILURE,
+        });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.argument' },
+        });
       });
-      AppDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
-      });
-      return true;
-    });
   },
 
   update: (opinion, argument, data) => {

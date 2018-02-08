@@ -117,7 +117,7 @@ export default createFragmentContainer(
       email
       phone
       media {
-        url
+        url(format: "default_avatar")
       }
     }
   `,
