@@ -103,12 +103,13 @@ Scenario: Logged in API client can update his email
   }
   """
   Then the JSON response status code should be 204
+  And I wait 2 seconds
   And 2 mail should be sent
-  And I open mail with subject 'email.confirmNewEmail.subject {"%sitename%":"Cap-Collectif"}'
+  And I open mail with subject 'email.confirmNewEmail.subject'
   Then I should see "user.register.confirmation_message.validate" in mail
   Then I should see "/account/new_email_confirmation/" in mail
-  And I open mail with subject 'email.confirmEmailChanged.subject {"%sitename%":"Cap-Collectif","%username%":"user"}'
-  Then I should see "Votre adresse électronique a été changée" in mail
+  And I open mail with subject 'email.confirmEmailChanged.subject {"%username%":"user"}'
+  Then I should see "email-content-mail-changed" in mail
 
 @security
 Scenario: Logged in API client can't update his email, to an existing email

@@ -17,13 +17,13 @@ final class UserAdminConfirmationMessage extends ExternalMessage
         return new self(
             $recipentEmail,
             $recipientName,
-            'email-subject-admin-confirmation',
+            'email-subject-confirm-admin-account',
             static::getMySubjectVars(
                 $sitename
             ),
-            '@CapcoMail/confirmAdminAccount.html.twig',
+            'email-content-confirm-admin-account',
             static::getMyTemplateVars(
-                $user,
+                $user->getUsername(),
                 $sitename,
                 $confirmationUrl
             )
@@ -31,14 +31,14 @@ final class UserAdminConfirmationMessage extends ExternalMessage
     }
 
     private static function getMyTemplateVars(
-        $user,
-        $sitename,
-        $confirmationUrl
+        string $username,
+        string $sitename,
+        string $confirmationUrl
     ): array {
         return [
-            'user' => $user,
-            'sitename' => $sitename,
-            'confirmationUrl' => $confirmationUrl,
+            '{username}' => $username,
+            '{sitename}' => $sitename,
+            '{confirmationUrl}' => $confirmationUrl,
         ];
     }
 

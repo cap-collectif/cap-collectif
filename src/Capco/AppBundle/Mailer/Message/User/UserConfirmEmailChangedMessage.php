@@ -19,7 +19,7 @@ final class UserConfirmEmailChangedMessage extends ExternalMessage
             static::getMySubjectVars(
                 $user->getUsername()
             ),
-            '@CapcoMail/info_mail_changed.html.twig',
+            'email-content-mail-changed',
             static::getMyTemplateVars(
                 $user->getNewEmailToConfirm(),
                 $user->getUsername()
@@ -32,8 +32,8 @@ final class UserConfirmEmailChangedMessage extends ExternalMessage
         $username
     ): array {
         return [
-            'newEmailToConfirm' => $newEmailToConfirm,
-            'username' => $username,
+            '{newEmailToConfirm}' => $newEmailToConfirm,
+            '{username}' => $username,
         ];
     }
 
