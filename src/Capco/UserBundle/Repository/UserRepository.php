@@ -766,7 +766,7 @@ class UserRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countFollower(Proposal $proposal, User $user = null): int
+    public function countFollowerForProposal(Proposal $proposal): int
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
@@ -775,10 +775,19 @@ class UserRepository extends EntityRepository
             ->andWhere('p.id = :proposalId')
             ->setParameter('proposalId', $proposal->getId());
 
-        if (null !== $user) {
-            $query->andWhere('u.id = :userId')
-                ->setParameter('userId', $user->getId());
-        }
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
+            ->andWhere('p.id = :proposalId')
+            ->andWhere('u.id = :userId')
+            ->setParameter('proposalId', $proposal->getId())
+            ->setParameter('userId', $user->getId());
 
         return $query->getQuery()->getSingleScalarResult();
     }

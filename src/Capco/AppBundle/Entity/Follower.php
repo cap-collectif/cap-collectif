@@ -47,7 +47,7 @@ class Follower
         return $this->followedAt;
     }
 
-    public function setFollowedAt($followedAt): self
+    public function setFollowedAt(\DateTime $followedAt): self
     {
         $this->followedAt = $followedAt;
 

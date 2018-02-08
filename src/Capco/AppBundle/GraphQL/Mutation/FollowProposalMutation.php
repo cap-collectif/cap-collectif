@@ -43,7 +43,7 @@ class FollowProposalMutation
 
         $this->em->flush();
 
-        $totalCount = $this->followerRepository->countProposalFollower($proposal);
+        $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $user);
 
