@@ -61,7 +61,7 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php endif; ?>
     ): array
     {
-    return [
+        return [
 <?php if (isset($command_template_vars)): ?>
 <?php foreach ($command_template_vars as $template_var): ?>
 <?php if (next($command_template_vars)): ?>
@@ -71,7 +71,7 @@ final class <?php echo $command_class_name; ?> extends <?php echo $command_messa
 <?php endif; ?>
 <?php endforeach; ?>
 <?php endif; ?>
-    ];
+        ];
     }
 
 }
