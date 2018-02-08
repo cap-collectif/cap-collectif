@@ -9,7 +9,11 @@ Media:
             url:
                 type: "String!"
                 description: "The url of the media."
-                resolve: "@=resolver('media_url', [value])"
+                resolve: "@=resolver('media_url', [value, args])"
+                args:
+                  format:
+                    type: "String"
+                    description: "The format of the media"
             name:
               type: "String!"
             size:
