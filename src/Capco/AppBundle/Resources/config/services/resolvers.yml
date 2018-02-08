@@ -89,7 +89,9 @@ services:
 
   capco.project.resolver:
     class: Capco\AppBundle\Resolver\ProjectResolver
-    arguments: ['@capco.project.repository', '@router.default']
+    arguments: ['@capco.project.repository']
+    calls:
+      - [ setContainer, ["@service_container"] ]
 
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager
@@ -98,6 +100,7 @@ services:
   capco.project.serializer:
     class: Capco\AppBundle\Resolver\Project\ProjectSerializer
     arguments: ['@jms_serializer.serializer']
+
 
   capco.project.json.serializer:
     class: Capco\AppBundle\Resolver\Project\JsonProjectSerializer

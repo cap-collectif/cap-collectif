@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Selection;
@@ -151,21 +150,6 @@ class Notify
 
             $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
         }
-    }
-
-    public function notifyProjectCreated(Project $project)
-    {
-        $author = $project->getAuthor();
-        $editUrl = $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-        $sitename = $this->resolver->getValue('global.site.fullname');
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $rendered = $this->templating->render('CapcoAppBundle:Mail:createProject.html.twig', [
-          'user' => $author,
-          'sitename' => $sitename,
-          'editUrl' => $editUrl,
-          'projectsUrl' => $this->router->generate('app_project', [], UrlGeneratorInterface::ABSOLUTE_URL),
-      ]);
-        $this->sendEmail($author->getEmail(), $fromAddress, 'Cap Collectif', $rendered, 'Votre consultation sur ' . $sitename);
     }
 
     public function notifyModeration($contribution)

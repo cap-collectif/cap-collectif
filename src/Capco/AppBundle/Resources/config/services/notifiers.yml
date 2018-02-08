@@ -49,3 +49,10 @@ services:
       - '@mailer_service'
       - '@capco.site_parameter.resolver'
       - '@capco.resolvers.users'
+  capco.project_notifier:
+      class: Capco\AppBundle\Notifier\ProjectNotifier
+      arguments:
+        - '@mailer_service'
+        - '@capco.site_parameter.resolver'
+        - '@capco.resolvers.users'
+        - '@capco.project.resolver'
