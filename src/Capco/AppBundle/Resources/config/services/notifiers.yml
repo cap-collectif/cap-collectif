@@ -56,3 +56,10 @@ services:
         - '@capco.site_parameter.resolver'
         - '@capco.resolvers.users'
         - '@capco.project.resolver'
+  capco.contribution_notifier:
+      class: Capco\AppBundle\Notifier\ContributionNotifier
+      arguments:
+        - '@mailer_service'
+        - '@capco.site_parameter.resolver'
+        - '@capco.resolvers.users'
+        - '@capco.url.resolver'

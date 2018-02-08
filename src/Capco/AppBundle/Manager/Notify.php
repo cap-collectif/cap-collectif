@@ -124,27 +124,6 @@ class Notify
         }
     }
 
-    public function notifyModeration($contribution)
-    {
-        $from = $this->resolver->getValue('admin.mail.notifications.send_address');
-        if ($from && $contribution->getAuthor()) {
-            $subject = $this->translator->trans(
-                'moderation.notification.subject', [], 'CapcoAppBundle'
-            );
-            $template = 'CapcoAppBundle:Mail:notifyModeration.html.twig';
-            $body = $this->templating->render(
-                $template,
-                [
-                    'contribution' => $contribution,
-                    'username' => $contribution->getAuthor()->getUsername(),
-                    'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
-                ]
-            );
-
-            $this->sendEmail($contribution->getAuthor()->getEmail(), $from, $from, $body, $subject);
-        }
-    }
-
     public function notifyProposalStatusChangeInCollect(Proposal $proposal)
     {
         $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
