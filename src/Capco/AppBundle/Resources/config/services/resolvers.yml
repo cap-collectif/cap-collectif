@@ -89,9 +89,7 @@ services:
 
   capco.project.resolver:
     class: Capco\AppBundle\Resolver\ProjectResolver
-    arguments: ['@capco.project.repository']
-    calls:
-      - [ setContainer, ["@service_container"] ]
+    arguments: ['@capco.project.repository', '@router.default']
 
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager
