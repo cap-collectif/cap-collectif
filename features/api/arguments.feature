@@ -108,6 +108,24 @@ Scenario: Logged in API client wants to add an argument to an opinion
   Then the queue associated to "argument_create" producer has messages below:
   | 0 | {"argumentId": "@uuid@"} |
 
+@security @database
+Scenario: logged in API client can not add more than 2 arguments in a minute
+  Given I am logged in to api as user
+  When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
+  Then the JSON response status code should be 201
+  When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
+  Then the JSON response status code should be 201
+  When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
+  Then the JSON response status code should be 400
+  And the JSON response should match:
+  """
+  {
+      "code": 400,
+      "message": "You contributed to many times.",
+      "errors": @null@
+  }
+  """
+
 ## Create on version
 
 @security

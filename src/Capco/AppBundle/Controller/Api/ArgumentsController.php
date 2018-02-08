@@ -128,9 +128,16 @@ class ArgumentsController extends FOSRestController
             throw new BadRequestHttpException("Can't add argument to this opinion type.");
         }
 
+        $author = $this->getUser();
+        $repo = $this->get('capco.argument.repository');
+
+        if (count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+            throw new BadRequestHttpException('You contributed to many times.');
+        }
+
         $argument = (new Argument())
             ->setOpinion($opinion)
-            ->setAuthor($this->getUser())
+            ->setAuthor($author)
             ->setUpdatedAt(new \Datetime())
         ;
 

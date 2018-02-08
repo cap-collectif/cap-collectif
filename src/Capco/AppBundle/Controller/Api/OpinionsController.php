@@ -103,8 +103,15 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
 
+        $author = $this->getUser();
+        $repo = $this->get('capco.opinion.repository');
+
+        if (count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+            throw new BadRequestHttpException('You contributed to many times.');
+        }
+
         $opinion = (new Opinion())
-          ->setAuthor($this->getUser())
+          ->setAuthor($author)
           ->setStep($step)
           ->setIsEnabled(true)
           ->setOpinionType($type)
