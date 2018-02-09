@@ -107,9 +107,3 @@ Query:
                     id:
                         type: "ID!"
                 resolve: "@=resolver('query_group', [args['id'], user])"
-            questionnaire:
-                type: "Questionnaire"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_questionnaire', [args['id']])"

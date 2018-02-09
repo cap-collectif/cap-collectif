@@ -25,7 +25,7 @@ class ReportingAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ($name === 'show') {
+        if ('show' === $name) {
             return 'CapcoAdminBundle:Reporting:show.html.twig';
         }
 
@@ -122,6 +122,10 @@ class ReportingAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
                 'mapped' => false,
             ])
+            ->add('link', null, [
+                'label' => 'admin.fields.reporting.link',
+                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig',
+            ])
             ->add('type', null, [
                 'label' => 'admin.fields.reporting.type',
                 'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
@@ -144,8 +148,7 @@ class ReportingAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.reporting.created_at',
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)

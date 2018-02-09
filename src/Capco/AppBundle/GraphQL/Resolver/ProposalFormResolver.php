@@ -17,7 +17,7 @@ class ProposalFormResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveQuestions(ProposalForm $form, $user): Collection
+    public function resolveQuestions(ProposalForm $form): Collection
     {
         return $form->getRealQuestions();
     }
