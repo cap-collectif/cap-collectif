@@ -2,24 +2,24 @@
 
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
-final class ProposalStatusChangeInCollectMessage extends ExternalMessage
+final class ProposalStatusChangeInSelectionMessage extends ExternalMessage
 {
     public static function create(
-        Proposal $proposal,
+        Selection $selection,
         string $recipentEmail,
         string $recipientName = null
     ): self {
         return new self(
             $recipentEmail,
             $recipientName,
-            'proposal_status_change_collect.notification.subject',
+            'proposal_status_change_selection.notification.subject',
             static::getMySubjectVars(),
-            '@CapcoMail/notifyProposalStatusChange.html.twig',
+            '@CapcoMail/notifyProposalStatusChangeInSelection.html.twig',
             static::getMyTemplateVars(
-                $proposal
+                $selection
             )
         );
     }
@@ -30,10 +30,10 @@ final class ProposalStatusChangeInCollectMessage extends ExternalMessage
     }
 
     private static function getMyTemplateVars(
-        Proposal $proposal
+        Selection $selection
     ): array {
         return [
-            'proposal' => $proposal,
+            'selection' => $selection,
         ];
     }
 }

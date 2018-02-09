@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
@@ -10,6 +11,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\SiteParameter\Resolver;
 
@@ -74,6 +76,20 @@ class ProposalNotifier extends BaseNotifier
         foreach ($proposal->getChildConnections() as $child) {
             $this->mailer->sendMessage(ProposalStatusChangeInCollectMessage::create(
                 $proposal,
+                $child->getAuthor()->getEmail()
+            ));
+        }
+    }
+
+    public function onStatusChangeInSelection(Selection $selection)
+    {
+        $this->mailer->sendMessage(ProposalStatusChangeInSelectionMessage::create(
+            $selection,
+            $selection->getProposal()->getAuthor()->getEmail()
+        ));
+        foreach ($selection->getProposal()->getChildConnections() as $child) {
+            $this->mailer->sendMessage(ProposalStatusChangeInSelectionMessage::create(
+                $selection,
                 $child->getAuthor()->getEmail()
             ));
         }

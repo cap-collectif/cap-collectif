@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Router;
@@ -103,27 +102,6 @@ class Notify
             );
 
             $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
-        }
-    }
-
-    public function notifyProposalStatusChangeInSelection(Selection $selection)
-    {
-        $fromAddress = $this->resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $this->resolver->getValue('admin.mail.notifications.send_name');
-
-        $subject = $this->translator->trans(
-            'proposal_status_change_selection.notification.subject', [
-            '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-        ], 'CapcoAppBundle'
-        );
-        $template = 'CapcoAppBundle:Mail:notifyProposalStatusChangeInSelection.html.twig';
-        $body = $this->templating->render($template, [
-            'selection' => $selection,
-        ]);
-
-        $this->sendEmail($selection->getProposal()->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
-        foreach ($selection->getProposal()->getChildConnections() as $child) {
-            $this->sendEmail($child->getAuthor()->getEmail(), $fromAddress, $fromName, $body, $subject);
         }
     }
 

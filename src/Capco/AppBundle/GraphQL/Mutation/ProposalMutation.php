@@ -179,7 +179,7 @@ class ProposalMutation implements ContainerAwareInterface
         $selection->setStatus($status);
         $em->flush();
 
-        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
+        $this->container->get('capco.proposal_notifier')->onStatusChangeInSelection($selection);
 
         $proposal = $this->getProposal($proposalId);
 
