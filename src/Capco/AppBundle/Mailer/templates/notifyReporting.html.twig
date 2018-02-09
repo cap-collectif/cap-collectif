@@ -2,7 +2,7 @@
     {% set username = is_feature_enabled('profiles') ? ('<strong><a href="' ~ url('capco_user_profile_show_all', {'slug': user.slug}) ~'">' ~ user.username ~ '</a></strong>') : ('<strong>' ~ user.username ~ '</strong>') %}
     {% autoescape false %}
         <p>
-            {{ 'reporting.notification.body'|trans({'%username%' : username, '%sitename%': capco_site_parameter_value('global.site.fullname')}, 'CapcoAppBundle') | raw }}
+            {{ 'reporting.notification.body'|trans({'%username%' : username}, 'CapcoAppBundle') | raw }}
         </p>
         <p>{{ 'reporting.notification.type_title'|trans({}, 'CapcoAppBundle') | raw }}</p>
         <p>{{ type }}</p>
@@ -16,10 +16,10 @@
         <p>{{ 'reporting.notification.contribution'|trans({}, 'CapcoAppBundle') | raw }}</p>
         <ul>
             <li>
-                <a href="{{ siteURL }}">{{ 'reporting.notification.contribution_on_site'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ siteUrl }}">{{ 'reporting.notification.contribution_on_site'|trans({}, 'CapcoAppBundle') }}</a>
             </li>
             <li>
-                <a href="{{ adminURL }}">{{ 'reporting.notification.contribution_in_bo'|trans({}, 'CapcoAppBundle') }}</a>
+                <a href="{{ adminUrl }}">{{ 'reporting.notification.contribution_in_bo'|trans({}, 'CapcoAppBundle') }}</a>
             </li>
         </ul>
     {% endautoescape %}

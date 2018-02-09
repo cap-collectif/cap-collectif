@@ -73,38 +73,6 @@ class Notify
      * Notifications for reporting and moderation
      */
 
-    /**
-     * @param Reporting $report
-     */
-    public function sendNotifyMessage(Reporting $report)
-    {
-        $to = $this->resolver->getValue('admin.mail.notifications.receive_address');
-        if ($to) {
-            $subject = $this->translator->trans(
-                'reporting.notification.subject',
-                [
-                    '%sitename%' => $this->resolver->getValue('global.site.fullname'),
-                ],
-                'CapcoAppBundle'
-            );
-            $template = 'CapcoAppBundle:Mail:notifyReporting.html.twig';
-            $type = $this->translator->trans(Reporting::$statusesLabels[$report->getStatus()], [], 'CapcoAppBundle');
-            $body = $this->templating->render(
-                $template,
-                [
-                    'user' => $report->getReporter(),
-                    'type' => $type,
-                    'message' => $report->getBody(),
-                    'contribution' => $report->getRelatedObject(),
-                    'siteURL' => $this->urlResolver->getObjectUrl($report->getRelatedObject(), true),
-                    'adminURL' => $this->urlResolver->getReportedUrl($report, true),
-                ]
-            );
-
-            $this->sendEmail($to, $report->getReporter()->getEmail(), $report->getReporter()->getUsername(), $body, $subject);
-        }
-    }
-
     private function generateMessage($to, $fromAddress, $fromName, $body, $subject, $contentType)
     {
         return (new \Swift_Message())

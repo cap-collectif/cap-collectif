@@ -63,3 +63,11 @@ services:
         - '@capco.site_parameter.resolver'
         - '@capco.resolvers.users'
         - '@capco.url.resolver'
+  capco.report_notifier:
+    class: Capco\AppBundle\Notifier\ReportNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@translator'
+      - '@capco.url.resolver'
