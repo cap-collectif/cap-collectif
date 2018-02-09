@@ -43,7 +43,7 @@ class PostAdmin extends Admin
     {
         if ($object->getProposals()->count() > 0) {
             foreach ($object->getProposals() as $proposal) {
-                $this->getContainer()->get('proposal.notifier')->onOfficialAnswer($proposal, $object);
+                $this->getContainer()->get('capco.proposal_notifier')->onOfficialAnswer($proposal, $object);
             }
         }
     }

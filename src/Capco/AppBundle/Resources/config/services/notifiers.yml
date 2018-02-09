@@ -1,12 +1,12 @@
 services:
-  proposal.notifier:
+  capco.proposal_notifier:
     class: Capco\AppBundle\Notifier\ProposalNotifier
     arguments:
       - "@mailer_service"
       - "@capco.site_parameter.resolver"
       - "@capco.resolvers.users"
       - "@capco.resolver.proposals"
-  comment.notifier:
+  capco.comment_notifier:
     class: Capco\AppBundle\Notifier\CommentNotifier
     arguments:
       - "@mailer_service"
@@ -20,7 +20,7 @@ services:
       - '@mailer_service'
       - '@capco.site_parameter.resolver'
       - '@capco.resolvers.users'
-  opinion_notifier:
+  capco.opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
     arguments:
       - "@mailer_service"
@@ -28,7 +28,7 @@ services:
       - "@capco.resolvers.users"
       - "@capco.resolver.consultations"
       - "@router"
-  argument_notifier:
+  capco.argument_notifier:
     class: Capco\AppBundle\Notifier\ArgumentNotifier
     arguments:
       - "@mailer_service"
