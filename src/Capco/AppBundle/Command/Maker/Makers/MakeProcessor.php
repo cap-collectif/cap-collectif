@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Maker\Makers;
 
 use Capco\AppBundle\Command\Maker\AbstractMaker;
+use Capco\AppBundle\Utils\Text;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -54,7 +55,34 @@ class MakeProcessor extends AbstractMaker
         $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>');
 
         $path = $this->makeFile();
+        $service = $this->configureService();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
+        $output->writeln('<info>Successfully added service "' . $service . '" to ' . $this->getProcessorsPath() . '</info>');
+    }
+
+    private function getProcessorsPath(): string
+    {
+        return realpath($this->sourcePath . '/Capco/AppBundle/Resources/config/services/processors.yml');
+    }
+
+    private function configureService(): string
+    {
+        $shortname = $this->entity->getShortname();
+        $shortnameSnakeCased = Text::snake_case($shortname);
+        $service = Text::snake_case(str_replace('Processor', '', $this->className)) . '.processor';
+        $processorPath = "\\$shortname\\$this->className";
+        $yml = <<<EOF
+  {$service}:
+    class: Capco\AppBundle\Processor{$processorPath}
+    arguments:
+      - '@capco.$shortnameSnakeCased.repository'
+      - '@capco.{$shortnameSnakeCased}_notifier'
+EOF;
+        if (false === file_put_contents($this->getProcessorsPath(), $yml, FILE_APPEND)) {
+            throw new \RuntimeException(sprintf('Error during writing of file %s', $this->getProcessorsPath()));
+        }
+
+        return $service;
     }
 }
