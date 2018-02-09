@@ -1,4 +1,4 @@
-@proposal @proposal_evaluation
+@changeProposalEvaluation
 Feature: Proposal Evaluation
 
 @database

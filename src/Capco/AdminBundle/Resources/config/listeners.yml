@@ -30,6 +30,8 @@ services:
       - { name: overblog_graphql.resolver, alias: "question_validation_rule", method: "resolveValidationRule" }
       - { name: overblog_graphql.resolver, alias: "query_get_available_questionnaires", method: "resolveAvailableQuestionnaires" }
       - { name: overblog_graphql.resolver, alias: "question_question_type", method: "resolveQuestionType" }
+      - { name: overblog_graphql.resolver, alias: "query_questionnaire", method: "resolveQuestionnaire" }
+      - { name: overblog_graphql.resolver, alias: "questionnaire_questions", method: "resolveQuestionnaireQuestions" }
 
   capco.resolver.proposals:
       class: Capco\AppBundle\GraphQL\Resolver\ProposalResolver

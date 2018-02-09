@@ -207,12 +207,8 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
   render() {
     const { steps } = this.props;
-
-    if (steps.length <= 1) {
-      return null;
-    }
-
     const { translateX, showArrowLeft, showArrowRight } = this.state;
+
     const translation = `translateX(${translateX}px)`;
 
     return (
