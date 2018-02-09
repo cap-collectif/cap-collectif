@@ -11,7 +11,7 @@ final class ContactMessage extends DefaultMessage
         string $message,
         string $recipientName = null
     ): self {
-        $message = new self(
+        return new self(
             $recipentEmail,
             $recipientName,
             'email-subject-contact',
@@ -21,16 +21,14 @@ final class ContactMessage extends DefaultMessage
             'email-content-contact',
             static::getMyTemplateVars(
                 $message
-            )
+            ),
+            $senderEmail,
+            $senderName
         );
-        $message->setSenderEmail($senderEmail)
-            ->setSenderName($senderName);
-
-        return $message;
     }
 
     private static function getMyTemplateVars(
-        $message
+        string $message
     ): array {
         return [
             '{message}' => $message,
@@ -38,7 +36,7 @@ final class ContactMessage extends DefaultMessage
     }
 
     private static function getMySubjectVars(
-        $senderName
+        string $senderName
     ): array {
         return [
             '{sender}' => $senderName,

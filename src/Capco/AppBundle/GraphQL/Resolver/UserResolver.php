@@ -63,7 +63,7 @@ class UserResolver implements ContainerAwareInterface
         $router = $this->container->get('router');
 
         return $router->generate('account_confirm_new_email', ['token' => $user->getNewEmailConfirmationToken()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function resolveEmail($object): string
