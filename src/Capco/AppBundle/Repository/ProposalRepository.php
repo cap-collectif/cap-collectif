@@ -77,20 +77,6 @@ class ProposalRepository extends EntityRepository
               ->getSingleScalarResult() > 0;
     }
 
-    public function isViewerAnEvaluerOfAProposalOnForm(ProposalForm $form, User $user): bool
-    {
-        return $this->createQueryBuilder('proposal')
-              ->select('COUNT(proposal.id)')
-              ->leftJoin('proposal.evaluers', 'group')
-              ->leftJoin('group.userGroups', 'userGroup')
-              ->andWhere('proposal.proposalForm = :form')
-              ->andWhere('userGroup.user = :user')
-              ->setParameter('form', $form)
-              ->setParameter('user', $user)
-              ->getQuery()
-              ->getSingleScalarResult() > 0;
-    }
-
     public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, $first = 0, $offset = 100): Paginator
     {
         $qb = $this

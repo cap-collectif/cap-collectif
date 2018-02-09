@@ -181,7 +181,11 @@ class UrlResolver
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
-            return $this->getObjectUrl($object->getRelatedObject());
+            return $this->getObjectUrl($object->getRelatedObject(), $absolute);
+        }
+
+        if ($object instanceof Reporting && $object->getRelated()) {
+            return $this->getObjectUrl($object->getRelated(), $absolute);
         }
 
         if ($object instanceof Theme && $object->getSlug()) {

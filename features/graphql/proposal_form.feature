@@ -1,5 +1,40 @@
-@updateProposalForm
-Feature: Update Proposal Form
+@proposal_form
+Feature: Proposal Forms
+
+@database
+Scenario: GraphQL client wants to create a proposal form
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: CreateProposalFormInput!) {
+      createProposalForm(input: $input) {
+        proposalForm {
+          id
+          title
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "title": "Cliquer"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "createProposalForm": {
+        "proposalForm": {
+          "id": @string@,
+          "title": "Cliquer"
+        }
+      }
+    }
+  }
+  """
 
 @database
 Scenario: GraphQL client wants to update a proposal form
@@ -239,6 +274,61 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
             }
           ]
         }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL client wants to retrieve his evaluations
+  Given I am logged in to graphql as user
+  When I send a GraphQL request:
+  """
+  {
+      proposalForm(id: "proposalForm1") {
+        step {
+          title
+          project {
+            title
+          }
+        }
+        proposals(affiliations: [EVALUER]) {
+          totalCount
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "proposalForm": {
+          "step": {
+            "title": @string@,
+            "project": {
+              "title": @string@
+            }
+          },
+          "proposals": {
+            "totalCount": 2,
+            "edges": [
+              {
+                "node": {
+                  "id": "proposal1"
+                }
+              },
+              {
+                "node": {
+                  "id": "proposal2"
+                }
+              }
+            ]
+          }
       }
     }
   }

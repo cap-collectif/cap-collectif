@@ -1,7 +1,8 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field } from 'redux-form';
+import * as React from 'react';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { Alert } from 'react-bootstrap';
+import { reduxForm, Field, clearSubmitErrors, SubmissionError, type FormProps } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
@@ -26,6 +27,12 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     .then((opinion: Object) => {
       dispatch(closeOpinionCreateModal());
       window.location.href = opinion._links.show;
+    })
+    .catch((res: Object) => {
+      if (res && res.response && res.response.message === 'You contributed too many times.') {
+        throw new SubmissionError({ _error: 'publication-limit-reached' });
+      }
+      throw new SubmissionError({ _error: 'global.error.server.form' });
     });
 };
 
@@ -40,20 +47,39 @@ const validate = ({ title, body }: Object) => {
   return errors;
 };
 
-export const OpinionCreateForm = React.createClass({
-  propTypes: {
-    projectId: PropTypes.string.isRequired,
-    stepId: PropTypes.string.isRequired,
-    opinionType: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-  },
+type Props = FormProps & {
+  projectId: string,
+  stepId: string,
+  opinionType: Object,
+  step: Object,
+};
 
+export class OpinionCreateForm extends React.Component<Props> {
   render() {
-    const { opinionType, step, handleSubmit } = this.props;
+    const { opinionType, step, handleSubmit, error, dispatch } = this.props;
     if (!opinionType) return null;
     return (
       <form id="opinion-create-form" onSubmit={handleSubmit}>
+        {error && (
+          <Alert
+            bsStyle="warning"
+            onDismiss={() => {
+              dispatch(clearSubmitErrors(formName));
+            }}>
+            {error === 'publication-limit-reached' ? (
+              <div>
+                <h4>
+                  <strong>
+                    <FormattedMessage id="publication-limit-reached" />
+                  </strong>
+                </h4>
+                <FormattedMessage id="publication-limit-reached-proposal-content" />
+              </div>
+            ) : (
+              <FormattedHTMLMessage id="global.error.server.form" />
+            )}
+          </Alert>
+        )}
         <Field
           name="title"
           type="text"
@@ -69,7 +95,6 @@ export const OpinionCreateForm = React.createClass({
           id="opinion_body"
           component={renderInput}
           help={step.descriptionHelpText}
-          autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
         {opinionType.appendixTypes.map((field, index) => (
@@ -84,8 +109,8 @@ export const OpinionCreateForm = React.createClass({
         ))}
       </form>
     );
-  },
-});
+  }
+}
 
 export default reduxForm({
   form: formName,
