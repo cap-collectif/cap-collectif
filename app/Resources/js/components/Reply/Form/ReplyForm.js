@@ -27,7 +27,7 @@ import {
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
   +intl: IntlShape,
-  +reply?: Object,
+  // +reply?: Object,
   // disabled?: boolean,
 }
 
@@ -36,7 +36,7 @@ type FormValues = {|
 |}
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { reply } = this.props;
+  const { questionnaire } = this.props;
 
   // ReplyAction.add
 };

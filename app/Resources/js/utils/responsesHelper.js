@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape } from 'react-intl';
+import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
@@ -195,15 +195,17 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
 
+        console.log(field);
+
         const inputType = field.type || 'text';
         const isOtherAllowed = field.isOtherAllowed;
 
         const labelAppend = field.required
           ? strategy === 'minority_required'
-            ? ` <span class="excerpt"> ${intl.formatMessage({ id: 'global.mandatory' })}</span>`
+            ? ` <span class="warning small"> ${intl.formatMessage({ id: 'global.mandatory' })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
-            ? ` <span class="excerpt"> ${intl.formatMessage({ id: 'global.optional' })}</span>`
+            ? ` <span class="excerpt small"> ${intl.formatMessage({ id: 'global.optional' })}</span>`
             : '';
 
         const labelMessage = field.title + labelAppend;
@@ -224,6 +226,32 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}
                 />
+              </ProposalPrivateField>
+            );
+          }
+          case 'select': {
+            return (
+              <ProposalPrivateField key={field.id} show={field.private}>
+                <Field
+                  name={`${member}.value`}
+                  id={member}
+                  type={inputType}
+                  component={component}
+                  help={field.helpText}
+                  isOtherAllowed={isOtherAllowed}
+                  placeholder="reply.your_response"
+                  label={label}
+                  disabled={disabled}
+                >
+                  <option value="" disabled>
+                    {<FormattedMessage id="global.select" />}
+                  </option>
+                  {field.choices.map(choice => (
+                    <option key={choice.id} value={choice.title}>
+                      {choice.title}
+                    </option>
+                  ))}
+                </Field>
               </ProposalPrivateField>
             );
           }
