@@ -1,4 +1,4 @@
-@proposal_form
+@proposalForm
 Feature: Proposal Forms
 
 Scenario: GraphQL client wants to retrieve his evaluations

@@ -30,3 +30,27 @@ Scenario: GraphQL client wants to get list of available districts for a particul
     }
   }
   """
+
+Scenario: Anonymous wants to get list of available districts for a particular location
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "query ($stepId: ID!) {
+      draftProposalsForUserInStep(stepId: $stepId) {
+        title
+        show_url
+      }
+    }",
+    "variables": {
+      "stepId": "collectstep1"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "draftProposalsForUserInStep": []
+    }
+  }
+  """
