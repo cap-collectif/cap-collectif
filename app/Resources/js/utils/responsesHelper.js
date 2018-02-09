@@ -136,7 +136,6 @@ export const formatInitialResponsesValues = (
         return { question: question.id, value: response.medias };
       }
     }
-
     // Otherwise we create an empty response
     if (question.type === 'medias') {
       return { question: question.id, value: [] };
@@ -156,6 +155,25 @@ const formattedChoicesInField = field => {
   });
 };
 
+export const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean }>) => {
+  const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
+  const numberOfFields = fields.length;
+  const halfNumberOfFields = numberOfFields / 2;
+  if (numberOfRequiredFields === 0) {
+    return 'no_required';
+  }
+  if (numberOfRequiredFields === numberOfFields) {
+    return 'all_required';
+  }
+  if (numberOfRequiredFields === halfNumberOfFields) {
+    return 'half_required';
+  }
+  if (numberOfRequiredFields > halfNumberOfFields) {
+    return 'majority_required';
+  }
+  return 'minority_required';
+};
+
 export const renderResponses = ({
   fields,
   questions,
@@ -169,28 +187,32 @@ export const renderResponses = ({
   change: (field: string, value: any) => void,
   intl: IntlShape,
   disabled: boolean,
-}) => (
-  <div>
-    {fields.map((member, index) => {
-      const field = questions[index];
-      const inputType = field.type || 'text';
-      const isOtherAllowed = field.isOtherAllowed;
+}) => {
+  const strategy = getRequiredFieldIndicationStrategory(questions);
 
-      let labelMessage = field.title;
-      let intlMessage;
-      if (field.required) {
-        intlMessage = intl.formatMessage({ id: 'global.mandatory' });
-      } else {
-        intlMessage = intl.formatMessage({ id: 'global.optional' });
-      }
+  return (
+    <div>
+      {fields.map((member, index) => {
+        const field = questions[index];
 
-      labelMessage += ` <span class="excerpt"> ${intlMessage}</span>`;
-      const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+        const inputType = field.type || 'text';
+        const isOtherAllowed = field.isOtherAllowed;
 
-      switch (inputType) {
-        case 'medias': {
-          return (
-            <div>
+        const labelAppend = field.required
+          ? strategy === 'minority_required'
+            ? ` <span class="excerpt"> ${intl.formatMessage({ id: 'global.mandatory' })}</span>`
+            : ''
+          : strategy === 'majority_required' || strategy === 'half_required'
+            ? ` <span class="excerpt"> ${intl.formatMessage({ id: 'global.optional' })}</span>`
+            : '';
+
+        const labelMessage = field.title + labelAppend;
+
+        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+
+        switch (inputType) {
+          case 'medias': {
+            return (
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
@@ -203,26 +225,24 @@ export const renderResponses = ({
                   disabled={disabled}
                 />
               </ProposalPrivateField>
-            </div>
-          );
-        }
-        default: {
-          let response;
-          if (responses) {
-            response = responses[index].value;
+            );
           }
+          default: {
+            let response;
+            if (responses) {
+              response = responses[index].value;
+            }
 
-          let choices = [];
-          if (
-            inputType === 'ranking' ||
-            inputType === 'radio' ||
-            inputType === 'checkbox' ||
-            inputType === 'button'
-          ) {
-            choices = formattedChoicesInField(field);
-            if (inputType === 'radio') {
-              return (
-                <div>
+            let choices = [];
+            if (
+              inputType === 'ranking' ||
+              inputType === 'radio' ||
+              inputType === 'checkbox' ||
+              inputType === 'button'
+            ) {
+              choices = formattedChoicesInField(field, strategy);
+              if (inputType === 'radio') {
+                return (
                   <ProposalPrivateField key={field.id} show={field.private}>
                     <div key={`${member}-container`}>
                       <MultipleChoiceRadio
@@ -238,13 +258,11 @@ export const renderResponses = ({
                       />
                     </div>
                   </ProposalPrivateField>
-                </div>
-              );
+                );
+              }
             }
-          }
 
-          return (
-            <div>
+            return (
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
@@ -259,10 +277,10 @@ export const renderResponses = ({
                   disabled={disabled}
                 />
               </ProposalPrivateField>
-            </div>
-          );
+            );
+          }
         }
-      }
-    })}
-  </div>
-);
+      })}
+    </div>
+  );
+};
