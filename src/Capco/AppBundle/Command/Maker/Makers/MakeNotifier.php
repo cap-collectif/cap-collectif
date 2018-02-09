@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Maker\Makers;
 
 use Capco\AppBundle\Command\Maker\AbstractMaker;
+use Capco\AppBundle\Utils\Text;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -52,7 +53,32 @@ class MakeNotifier extends AbstractMaker
         $this->className .= 'Notifier';
 
         $path = $this->makeFile();
+        $service = $this->configureService();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
+        $output->writeln('<info>Successfully added service "' . $service . '" to ' . $this->getNotifiersPath() . '</info>');
+    }
+
+    private function getNotifiersPath(): string
+    {
+        return realpath($this->sourcePath . '/Capco/AppBundle/Resources/config/services/notifiers.yml');
+    }
+
+    private function configureService(): string
+    {
+        $service = 'capco.' . Text::snake_case($this->className);
+        $yml = <<<EOF
+  {$service}:
+    class: Capco\AppBundle\Notifier\\{$this->className}
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+EOF;
+        if (false === file_put_contents($this->getNotifiersPath(), $yml, FILE_APPEND)) {
+            throw new \RuntimeException(sprintf('Error during writing of file %s', $this->getNotifiersPath()));
+        }
+
+        return $service;
     }
 }
