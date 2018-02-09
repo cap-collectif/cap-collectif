@@ -75,7 +75,7 @@ export class ArgumentCreate extends React.Component<Props> {
                         <FormattedMessage id="publication-limit-reached" />
                       </strong>
                     </h4>
-                    <FormattedMessage id="publication-limit-reached-proposal-content" />
+                    <FormattedMessage id="publication-limit-reached-argument-content" />
                   </div>
                 ) : (
                   <FormattedHTMLMessage id="global.error.server.form" />
