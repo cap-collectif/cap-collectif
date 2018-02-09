@@ -203,7 +203,7 @@ class UsersController extends FOSRestController
         if ($user->getNewEmailToConfirm()) {
             $this->get('capco.user_notifier')->newEmailConfirmation($user);
         } else {
-            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+            $this->get('capco.fos_notifier')->sendConfirmationEmailMessage($user);
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());

@@ -69,9 +69,8 @@ Scenario: Not confirmed logged in API client can receive a new confirmation emai
   And I send a POST request to "/api/account/resend_confirmation_email"
   Then the JSON response status code should be 201
   And 1 mail should be sent
-  And I open mail with subject 'registration.email.subject {"%sitename%":"Cap-Collectif"}'
-  Then I should see "user.register.confirmation_message.validate" in mail
-  Then I should see "/account/email_confirmation/azertyuiop" in mail
+  And I open mail with subject 'email-subject-registration-confirmation {"{username}":"user_not_confirmed"}'
+  Then I should see 'email-content-registration-confirmation {"{username}":"user_not_confirmed","{confirmationUrl}":"http:\/\/capco.test\/account\/email_confirmation\/azertyuiop"}' in mail
 
 @database @security
 Scenario: Not confirmed logged in API client wants to mass spam confirmation email
