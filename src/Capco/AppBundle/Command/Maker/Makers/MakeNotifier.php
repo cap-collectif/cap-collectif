@@ -66,7 +66,7 @@ class MakeNotifier extends AbstractMaker
 
     private function configureService(): string
     {
-        $service = 'capco.' . Text::snake_case($this->className);
+        $service = 'capco.' . Text::snakeCase($this->className);
         $yml = <<<EOF
   {$service}:
     class: Capco\AppBundle\Notifier\\{$this->className}

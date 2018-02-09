@@ -18,13 +18,13 @@ class ProjectResolver
         $this->router = $router;
     }
 
-    public function resolveAdminEditUrl(Project $project, $absolute = true)
+    public function resolveAdminEditUrl(Project $project, bool $absolute = true): string
     {
         return $this->router->generate('admin_capco_app_project_edit', ['id' => $project->getId()],
             $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
     }
 
-    public function resolveIndexUrl($absolute = true)
+    public function resolveIndexUrl(bool $absolute = true): string
     {
         return $this->router->generate('app_project', [],
             $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);

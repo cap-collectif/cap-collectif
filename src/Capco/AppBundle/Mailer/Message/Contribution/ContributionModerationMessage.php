@@ -3,11 +3,12 @@
 namespace Capco\AppBundle\Mailer\Message\Contribution;
 
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Model\Contribution;
 
 final class ContributionModerationMessage extends DefaultMessage
 {
     public static function create(
-        $contribution,
+        Contribution $contribution,
         string $trashUrl,
         string $recipentEmail,
         string $recipientName = null
@@ -31,8 +32,8 @@ final class ContributionModerationMessage extends DefaultMessage
     }
 
     private static function getMyTemplateVars(
-        $contribution,
-        $trashUrl
+        Contribution $contribution,
+        string $trashUrl
     ): array {
         return [
             'contribution' => $contribution,

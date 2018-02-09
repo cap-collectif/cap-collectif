@@ -16,7 +16,7 @@ final class Text
         return iconv('UTF-8', 'UTF-8//IGNORE', $str);
     }
 
-    public static function unslug(string $slug)
+    public static function unslug(string $slug): string
     {
         return ucfirst(str_replace('-', ' ', $slug));
     }
@@ -34,7 +34,7 @@ final class Text
         return $str;
     }
 
-    public static function snake_case(string $str)
+    public static function snakeCase(string $str): string
     {
         $separatorPattern = '/((?<=[^$])[A-Z0-9])/u';
 

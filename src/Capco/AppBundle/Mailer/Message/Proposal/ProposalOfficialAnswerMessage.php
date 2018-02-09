@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
@@ -9,7 +10,7 @@ final class ProposalOfficialAnswerMessage extends ExternalMessage
 {
     public static function create(
         Proposal $proposal,
-        $post,
+        Post $post,
         string $recipentEmail,
         string $recipientName = null
     ): self {
@@ -32,8 +33,8 @@ final class ProposalOfficialAnswerMessage extends ExternalMessage
     }
 
     private static function getMyTemplateVars(
-        $proposal,
-        $post
+        Proposal $proposal,
+        Post $post
     ): array {
         return [
             'proposal' => $proposal,

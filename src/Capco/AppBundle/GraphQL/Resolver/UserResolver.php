@@ -34,28 +34,28 @@ class UserResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
-    public function resolveResettingPassworldUrl(UserInterface $user, $absolute = true): string
+    public function resolveResettingPassworldUrl(UserInterface $user): string
     {
         $router = $this->container->get('router');
 
         return $router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    public function resolveRegistrationConfirmationUrl(UserInterface $user, $absolute = true): string
+    public function resolveRegistrationConfirmationUrl(UserInterface $user): string
     {
         $router = $this->container->get('router');
 
         return $router->generate('account_confirm_email', ['token' => $user->getConfirmationToken()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    public function resolveConfirmNewEmailUrl(User $user, $absolute = true): string
+    public function resolveConfirmNewEmailUrl(User $user): string
     {
         $router = $this->container->get('router');
 
         return $router->generate('account_confirm_new_email', ['token' => $user->getNewEmailConfirmationToken()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function resolveEmail($object): string

@@ -69,8 +69,8 @@ class MakeProcessor extends AbstractMaker
     private function configureService(): string
     {
         $shortname = $this->entity->getShortname();
-        $shortnameSnakeCased = Text::snake_case($shortname);
-        $service = Text::snake_case(str_replace('Processor', '', $this->className)) . '.processor';
+        $shortnameSnakeCased = Text::snakeCase($shortname);
+        $service = Text::snakeCase(str_replace('Processor', '', $this->className)) . '.processor';
         $processorPath = "\\$shortname\\$this->className";
         $yml = <<<EOF
   {$service}:

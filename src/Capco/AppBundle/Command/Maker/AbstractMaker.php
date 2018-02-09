@@ -117,10 +117,10 @@ abstract class AbstractMaker extends ContainerAwareCommand
         $this->fs = $this->getContainer()->get('filesystem');
     }
 
-    protected function askEntity(InputInterface $input, OutputInterface $output, string $question, bool $nullable = false)// :?\ReflectionClass
+    protected function askEntity(InputInterface $input, OutputInterface $output, string $questionLabel, bool $nullable = false)// :?\ReflectionClass
     {
-        $question .= $nullable ? ' <info>[nullable]</info>' : '';
-        $entity = $this->askSimpleQuestion($input, $output, $question, null, null, $nullable);
+        $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
+        $entity = $this->askSimpleQuestion($input, $output, $questionLabel, null, null, $nullable);
         if ($entity) {
             $found = null;
             foreach ($this->fqcns as $fqcn) {
@@ -142,20 +142,20 @@ abstract class AbstractMaker extends ContainerAwareCommand
 
     protected function askSimpleQuestion(InputInterface $input,
                                          OutputInterface $output,
-                                         string $question,
+                                         string $questionLabel,
                                          $default = null,
                                          $autocompleteValues = null,
                                          $nullable = false) //:?string
     {
-        $q = new Question($question . PHP_EOL, $default);
+        $question = new Question($questionLabel . PHP_EOL, $default);
         if ($autocompleteValues) {
-            $q->setAutocompleterValues($autocompleteValues);
+            $question->setAutocompleterValues($autocompleteValues);
         }
-        $q->setNormalizer(function ($value) {
+        $question->setNormalizer(function ($value) {
             return $value ? trim($value) : null;
         });
 
-        $response = $this->helper->ask($input, $output, $q);
+        $response = $this->helper->ask($input, $output, $question);
         if (!$nullable && null === $response) {
             throw new NullableException();
         }
@@ -165,37 +165,37 @@ abstract class AbstractMaker extends ContainerAwareCommand
 
     protected function askChoiceQuestion(InputInterface $input,
                                          OutputInterface $output,
-                                         string $question,
+                                         string $questionLabel,
                                          array $choices,
                                          $default = null,
                                          $autocompleteValues = null): string
     {
-        $q = new ChoiceQuestion(
-            $question . PHP_EOL,
+        $question = new ChoiceQuestion(
+            $questionLabel . PHP_EOL,
             $choices,
             $default
         );
         if ($autocompleteValues) {
-            $q->setAutocompleterValues($autocompleteValues);
+            $question->setAutocompleterValues($autocompleteValues);
         }
-        $q->setNormalizer(function ($value) {
+        $question->setNormalizer(function ($value) {
             return $value ? trim($value) : null;
         });
 
-        return $this->helper->ask($input, $output, $q);
+        return $this->helper->ask($input, $output, $question);
     }
 
     protected function askQuestionWithArrayResponse(InputInterface $input,
                                                     OutputInterface $output,
-                                                    string $question,
+                                                    string $questionLabel,
                                                     bool $nullable = true) //:?array
     {
-        $question .= $nullable ? ' <info>[nullable]</info>' : '';
-        $q = new Question($question . PHP_EOL);
-        $q->setNormalizer(function ($value) {
+        $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
+        $question = new Question($questionLabel . PHP_EOL);
+        $question->setNormalizer(function ($value) {
             return trim($value);
         });
-        $response = $this->helper->ask($input, $output, $q);
+        $response = $this->helper->ask($input, $output, $question);
         if (!$nullable && ('' === $response || null === $response)) {
             throw new NullableException();
         }

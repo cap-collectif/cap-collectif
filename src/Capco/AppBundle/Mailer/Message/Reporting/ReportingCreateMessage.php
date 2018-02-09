@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Mailer\Message\Reporting;
 
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
+use Capco\AppBundle\Model\Contribution;
 use Capco\UserBundle\Entity\User;
 
 final class ReportingCreateMessage extends AdminMessage
@@ -46,7 +47,7 @@ final class ReportingCreateMessage extends AdminMessage
         User $user,
         string $type,
         string $message,
-        $contribution,
+        Contribution $contribution,
         string $siteUrl,
         string $adminUrl
     ): array {
