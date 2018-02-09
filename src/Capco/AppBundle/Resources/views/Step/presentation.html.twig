@@ -79,20 +79,26 @@
                 </a>
             {% endif %}
         </h2>
-        <div class="row">
-            {% for contributor in contributors|slice(0,9) %}
-                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.contributions, votes: contributor.votes, showVotes: showVotes, 'col': 4} only %}
-            {% else %}
+
+        {% if contributors | length > 0 %}
+            <div class="row">
+                {% for contributor in contributors|slice(0,9) %}
+                    {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.contributions, votes: contributor.votes, showVotes: showVotes, 'col': 4} only %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div>
                 {% if (project.consultationStep is defined) and project.isOpen %}
                     {{ 'project.contributors.participate' | trans({
-                    '%link%': '<a href="' ~ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
-                    '%endlink%': '</a>'
+                        '%link%': '<a href="' ~ path('app_project_show_consultation', {'projectSlug': project.slug, 'stepSlug': project.ConsultationStepOpen.slug}) ~'"">' ,
+                        '%endlink%': '</a>'
                     }, 'CapcoAppBundle') | raw }}
                 {% else %}
                     {{ 'project.contributors.no' | trans({}, 'CapcoAppBundle')}}
                 {% endif %}
-            {% endfor %}
-        </div>
+            </div>
+        {% endif %}
+        
         {% if contributors|length > 9 %}
             <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
                 {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
