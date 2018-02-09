@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\ProposalComment:
   anonComment1:
     proposal: '@proposal1'
     author_name: Marie Lopez
-    author_email: enjoyphoenix@gmai.com
+    author_email: enjoyphoenix@gmail.com
     author_ip: 192.168.1.1
     body: <text(300)>
     isEnabled: true
