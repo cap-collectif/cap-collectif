@@ -38,27 +38,8 @@ describe('<ProposalUserVoteItem />', () => {
     projectId: '5',
   };
 
-  const oneStepProps = {
-    steps: [
-      {
-        _links: { show: 'www.test.com' },
-        id: 'cs1',
-        type: 'presentation',
-        label: 'presentation step',
-        status: 'open',
-      },
-    ],
-    currentStepId: 'cs1',
-    projectId: '5',
-  };
-
   it('should render correctly without arrow & with active tab', () => {
     const wrapper = shallow(<ProjectStepTabs {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render null when there is only one step', () => {
-    const wrapper = shallow(<ProjectStepTabs {...oneStepProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
