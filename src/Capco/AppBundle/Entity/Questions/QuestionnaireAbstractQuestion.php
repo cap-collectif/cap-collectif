@@ -12,11 +12,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class QuestionnaireAbstractQuestion
  * Association between questionnaire and questions.
  *
  * @ORM\Entity()
- * @ORM\Table(name="questionnaire_abstractquestion")
+ * @ORM\Table(
+ *  name="questionnaire_abstractquestion",
+ *  uniqueConstraints={
+ *     @ORM\UniqueConstraint(
+ *        name="questionnaire_position_unique",
+ *        columns={"questionnaire_id", "position"}
+ *     ),
+ *     @ORM\UniqueConstraint(
+ *        name="proposal_form_position_unique",
+ *        columns={"proposal_form_id", "position"}
+ *     ),
+ *     @ORM\UniqueConstraint(
+ *        name="registration_form_position_unique",
+ *        columns={"registration_form_id", "position"}
+ *     )
+ *   }
+ * )
  */
 class QuestionnaireAbstractQuestion
 {
