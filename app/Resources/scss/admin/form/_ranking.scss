@@ -4,7 +4,7 @@
 }
 
 .ranking__item {
-    background-color: #f5f5f5;
+    background-color: $page-bgc;
     cursor: move;
     margin-bottom: 5px !important;
 }
@@ -19,7 +19,7 @@
 }
 
 .ranking__pick-box__choices {
-    border: 1px dashed #d3d3d3;
+    border: 1px dashed $border-color;
 }
 
 .ranking__choice-box__choices {
@@ -27,7 +27,7 @@
     top: 0;
     right: 0;
     left: 0;
-    border: 1px dashed #d3d3d3;
+    border: 1px dashed $border-color;
 }
 
 .ranking__choice-box__placeholder {
@@ -37,13 +37,13 @@
     right: 0;
     left: 0;
     padding: 30px;
-    color: #808080;
+    color: $dark-gray;
     text-align: center;
 }
 
 .ranking__item__icon {
     margin-right: 5px;
-    color: #808080;
+    color: $dark-gray;
 }
 
 .ranking__item__arrows {

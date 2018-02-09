@@ -3,11 +3,11 @@
 ================================================================*/
 .event {
     overflow: hidden;
-    background-color: $custom-event;
+    background-color: $page-bgc;
     text-align: center;
 
     &:hover .event__body {
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 
     .event__title {
@@ -23,7 +23,7 @@
     .month {
         @include border-top-radius(4px);
         border: 1px solid $border-color;
-        background-color: $custom-event-month;
+        background-color: $primary-color;
         color: $white;
         font-size: 13px;
     }

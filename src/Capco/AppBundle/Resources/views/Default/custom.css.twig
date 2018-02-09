@@ -95,8 +95,8 @@
 
 {# Proposal votes widget #}
 {% set votesWidgetBg = capco_site_color_value('color.votes_bar.bg') | default('#F6F6F6') %}
-{% set votesWidgetText = capco_site_color_value('color.votes_bar.text') | default('#777777') %}
-{% set votesWidgetBorder = capco_site_color_value('color.votes_bar.border') | default('#E7E7E7') %}
+{% set votesWidgetText = capco_site_color_value('color.votes_bar.text') | default('#707070') %}
+{% set votesWidgetBorder = capco_site_color_value('color.votes_bar.border') | default('#E3E3E3') %}
 {% set votesWidgetBtnBg = capco_site_color_value('color.votes_bar.btn.bg') | default('#FFFFFF') %}
 {% set votesWidgetBtnText = capco_site_color_value('color.votes_bar.btn.text') | default('#000000') %}
 
@@ -111,6 +111,10 @@
 
     a .proposal__title {
         color: {{ link | raw }};
+    }
+
+    a span.badge {
+        background-color: {{ link | raw }};
     }
 
     a:hover,

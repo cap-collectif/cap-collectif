@@ -13,7 +13,7 @@ Hack form button - radio check
 }
 
 .warning {
-  color: $warning-text!important;
+  color: $danger-color!important;
 }
 
 [data-toggle=buttons] > .btn > .checkbox,
@@ -35,7 +35,7 @@ Hack form button - radio check
     margin-bottom: 5px;
 
     .input-choices {
-        background-color: $warning-bg;
+        background-color: $white;
     }
 }
 
@@ -51,14 +51,14 @@ Hack form button - radio check
 }
 
 .help-block {
-    color: $excerpt;
+    color: $dark-gray;
 }
 
 .editor {
     position: relative;
 
     .ql-toolbar, .ql-container {
-        border: 1px solid $main-border-color;
+        border: 1px solid $border-color;
     }
 
     .ql-toolbar {
@@ -68,7 +68,7 @@ Hack form button - radio check
     .ql-container {
         border-radius: 0 0 5px 5px;
         border-top: none;
-        background-color: $main-field-bg;
+        background-color: $form-bgc;
 
         .ql-editor {
             min-height: 100px;
@@ -78,55 +78,55 @@ Hack form button - radio check
 
 .has-error {
     .error-block {
-        color: #a94442;
+        color: $danger-color;
     }
 }
 
 .has-warning {
 
     .form-control {
-        border-color: $warning-text;
-        background-color: $warning-bg;
+        border-color: $danger-color;
+        background-color: $white;
     }
 
     .checkbox--other .form-control {
-        border-color: #ccc;
+        border-color: $border-color;
         background-color: initial;
     }
 
     .cke_wysiwyg_frame {
-        background-color: $warning-bg;
+        background-color: $white;
     }
 
     .control-label,
     .error-block {
-        color: $warning-text;
+        color: $danger-color;
     }
 
     .help-block {
-        color: $excerpt;
+        color: $dark-gray;
     }
 
     .editor {
-        border: 1px solid $warning-text;
+        border: 1px solid $danger-color;
     }
 
     input[type="checkbox"] + span,
     input[type="radio"] + span {
-        color: $darkest-gray;
+        color: $dark;
     }
 
     *:not('.has-warning') input[type="checkbox"] + span {
-        color: $warning-text;
+        color: $danger-color;
     }
 
     .ranking__choice-box__placeholder {
-        background-color: $warning-bg;
-        color: $warning-text;
+        background-color: $white;
+        color: $danger-color;
     }
 
     .ranking__choice-box__choices {
-        border-color: $warning-text;
+        border-color: $danger-color;
     }
 
 }
@@ -134,20 +134,20 @@ Hack form button - radio check
 .has-success {
 
     .form-control {
-        border-color: $success-text;
+        border-color: $success-color;
     }
 
     .control-label,
     .error-block {
-        color: $success-text;
+        color: $success-color;
     }
 
     .editor {
-        border: 1px solid $success-text;
+        border: 1px solid $success-color;
     }
 
     .help-block {
-        color: $excerpt;
+        color: $dark-gray;
     }
 }
 
@@ -157,7 +157,7 @@ Hack form button - radio check
 }
 
 .ranking__item {
-    background-color: #f5f5f5;
+    background-color: $form-bgc;
     cursor: move;
     margin-bottom: 5px !important;
 }
@@ -172,7 +172,7 @@ Hack form button - radio check
 }
 
 .ranking__pick-box__choices {
-    border: 1px dashed #d3d3d3;
+    border: 1px dashed $border-color;
 }
 
 .ranking__choice-box__choices {
@@ -181,7 +181,7 @@ Hack form button - radio check
     top: 0;
     right: 0;
     left: 0;
-    border: 1px dashed #d3d3d3;
+    border: 1px dashed $border-color;
 }
 
 .ranking__choice-box__placeholder {
@@ -191,13 +191,13 @@ Hack form button - radio check
     right: 0;
     left: 0;
     padding: 30px;
-    color: #808080;
+    color: $dark-gray;
     text-align: center;
 }
 
 .ranking__item__icon {
     margin-right: 5px;
-    color: #808080;
+    color: $dark-gray;
 }
 
 .ranking__item__arrows {

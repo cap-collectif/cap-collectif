@@ -10,7 +10,7 @@
     @include border-top-radius(6px);
     .dialog__title {
         margin: 0;
-        color: $black;
+        color: $dark;
     }
 }
 
@@ -28,7 +28,7 @@
 }
 
 .dialog__message {
-    border-top: 1px solid $gray-primary;
+    border-top: 1px solid $border-color;
     background-color: $alert-warning-bg;
     color: $alert-warning-text;
     font-size: 15px;
@@ -40,7 +40,7 @@
 }
 
 .dialog__body {
-    border-top: 1px solid $gray-primary;
+    border-top: 1px solid $border-color;
 
     textarea {
         resize: vertical;
@@ -55,5 +55,5 @@
 
 .dialog__footer {
     overflow: hidden;
-    border-top: 1px solid $gray-primary;
+    border-top: 1px solid $border-color;
 }

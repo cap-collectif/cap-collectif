@@ -3,14 +3,14 @@
 ================================================================*/
 .media--macro {
     padding: 15px;
-    color: $black;
+    color: $dark;
 
     .media-body {
         height: 65px;
     }
 
     &:hover {
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 
     .media-heading {
@@ -18,11 +18,11 @@
     }
 
     .excerpt a {
-        color: $excerpt;
+        color: $dark-gray;
     }
 
     .media--macro__user a {
-        color: $black;
+        color: $dark;
     }
 
     .media-heading {

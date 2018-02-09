@@ -108,7 +108,7 @@
         clear: both;
         display: block;
         padding: 3px 20px;
-        color: #000;
+        color: $dark;
         line-height: 1.42857;
         white-space: nowrap;
     }
@@ -157,7 +157,7 @@
     }
 
     #navbar-content .dropdown-menu > .nav-dropdown-section {
-        border-bottom: 1px solid #e7e7e7;
+        border-bottom: 1px solid $border-color;
         padding-bottom: 9px;
         padding-top: 9px;
 
@@ -173,7 +173,7 @@
     }
 
     #navbar-content .dropdown-menu > li + .nav-dropdown-section {
-        border-top: 1px solid #e7e7e7;
+        border-top: 1px solid $border-color;
         margin-top: 9px;
     }
 
@@ -209,7 +209,7 @@
     }
 }
 
-$backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
+$backgrounds: (1 $brand-color-1) (2 $brand-color-2);
 @each $bg in $backgrounds {
     $name: nth($bg, 1);
     $color: nth($bg, 2);
@@ -283,7 +283,7 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 }
 
 .skip-links-container {
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid $border-color;
 }
 
 .skip-links-list {
@@ -294,11 +294,11 @@ $backgrounds: (1 $custom-jumbotron-1) (2 $custom-jumbotron-2);
 
     li {
         float: left;
-        color: #000;
+        color: $dark;
         font-size: 12px;
 
         &:hover {
-            color: $brand-primary;
+            color: $primary-color;
         }
 
         a {

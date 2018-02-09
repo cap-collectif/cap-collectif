@@ -22,7 +22,7 @@
         left: 0;
         display: block;
         height: 100%;
-        background-color: #ebebeb;
+        background-color: $page-bgc;
     }
 }
 
@@ -32,5 +32,5 @@
 
 .stats__buttons .btn.btn-link:active,
 .stats__buttons .btn.btn-link.active {
-    color: $excerpt;
+    color: $dark-gray;
 }

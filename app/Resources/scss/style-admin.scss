@@ -4,11 +4,10 @@
 
 @import "bower_components/compass-mixins/lib/compass";
 
-@import
+@import "base/variables",
   "base/tools",
   "base/utils",
   "base/fonts",
-  "admin/variables",
   "base/alert",
   "admin/tools",
   "admin/form",
@@ -35,6 +34,6 @@ body {
 }
 
 .excerpt {
-    color: $excerpt;
+    color: $dark-gray;
     font-weight: normal;
 }

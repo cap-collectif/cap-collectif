@@ -4,14 +4,14 @@
 
 #cookieChoiceInfo {
     background-color: $white;
-    color: #666;
+    color: $dark-gray;
     font-size: 14px;
     border-bottom: 1px solid $border-color;
 }
 
 #cookieChoiceInfo span,
 #cookieChoiceInfo a:not(.btn) {
-    color: #666;
+    color: $dark-gray;
 }
 
 #cookieChoiceInfo a:not(.btn) {

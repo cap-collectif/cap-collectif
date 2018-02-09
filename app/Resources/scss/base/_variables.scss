@@ -1,113 +1,102 @@
+// = Colors
+// -----------------------------
+
+$white: #fff;
+$dark: #212529;
+
+$border-color: #e3e3e3;
+$form-bgc: #fafafa;
+$page-bgc: #f6f6f6;
+$dark-gray: #707070; // text, label, excerpt
+$secondary-color: #6c757d; // button
+
+$danger-color: #dc3545;
+$warning-color: #f0ad4e;
+$primary-color: #0388cc;
+$success-color: #088A20;
+$info-color: #1D8293;
+
+$facebook-color: #3B5998;
+$twitter-color: #00ACED;
+$linkedin-color: #0077B5;
+$share-color: #333333;
+$gplus-color: #d73d32;
+$rss-color: #fdac61;
+$saml-color: #7498c0;
+
+// = Social Networks
+// ------------------------------
+$social-colors: // name color icon
+        (facebook $facebook-color "e")
+        (twitter $twitter-color "h")
+        (googleplus $gplus-color "m")
+        (linkedin $linkedin-color "f")
+        (saml $saml-color "\e00b")
+        (rss $rss-color "g");
+
+// = size
+// ------------------------------
+$thin-container: 690px;
+$font-size-base: 16px; // to change with rem
+$navbar-collapsed-height: 60px;
+
+// = Opinion types
+// -------------------------------
+$opinion-types: // to change with variable ?
+        ("default" $page-bgc)
+        ("red" #f2dede)
+        ("orange" #fcf8e3)
+        ("blue" #d9edf7)
+        ("bluedark" darken(#d9edf7, 15%))
+        ("green" #dff0d8) ("white" #fff)
+        ("gray" $border-color)
+        ("light-gray", $page-bgc)
+        (source darken(#428bca, 6.5%)); // to remove
+
+// = Opinion labels
+// -------------------------------
+$opinion-labels:
+        ("blue" #5bc0de)
+        ("green" #5cb85c); // to change with variable
+
+// = Icons color
+$icons-colors:
+        (icon--red #e2264d)
+        (icon--yellow #ff0)
+        (icon--blue #5bc0de)
+        (icon--green #5cb85c)
+        (icon--black $dark); // to change with variable ?
+
 /* ===============================================================
     $Variables Custom
 ================================================================*/
-
-// = Colors
-// -----------------------------
-$white: #fff;
-$black: #000;
-$gray-primary: #c0c0c0;
-$excerpt-dark-gray: #434343;
-$light-gray: #f6f6f6;
-$dark-gray: #707070;
-$dark-gray-hover: #727b84;
-$darkest-gray: #3e4149;
-$dark-blue: #2a6496;
-$light-blue: #428bca;
-
-$success-color: #088A20;
-$danger-color: #dc3545;
-$info-color: #1D8293;
-
-$excerpt: $dark-gray;
-
-// = Brand colors
-// -----------------------------
-$brand-color-1: #16a085;
-$brand-color-2: #1abc9c;
-
-// = Base
-// -----------------------------
-$font-size-base: 16px;
-$body-bg: $brand-color-2;
-$main-bg: #fff;
-$main-field-bg: #fafafa;
-$field-font-color: #434343;
-$autocomplete-hover-bg: #d9d9d9;
-$alt-section: #ebebeb;
-$border-color: #ddd;
-$main-border-color: #e3e3e3;
-$thin-container: 690px;
-
-// = Navbar
-// ------------------------------
-$navbar-collapsed-height: 60px;
-
-// = Titles
-// -------------------------------
-$titles: //nb  padding-top  margin-bottom
-                (h1 60px 30px) (h2 60px 30px) (h3 40px 10px);
-
-// = Custom jumbotron
-// -----------------------------
-$custom-jumbotron-1: $brand-color-1;
-$custom-jumbotron-2: $brand-color-2;
-
-// = Custom footer
-// -----------------------------
-$custom-footer: $brand-color-1;
-$custom-footer-links: $brand-color-2;
-
-// = Custom module filter search
-// -----------------------------
-$custom-filter-background: $white;
-
-// = Custom buttons
-// -----------------------------
-$btns-custom: (custom-1 $white $brand-color-1) (custom-2 $brand-color-1 $white) (dark-gray $dark-gray $white) (light-gray $light-gray $black) (darkest-gray $darkest-gray $white);
-
-$btns-outline: ("default" $btn-default-color $btn-default-color $btn-default-bg) (success $btn-success-bg $btn-success-bg $btn-default-bg) (info $btn-info-bg $btn-info-bg $btn-default-bg) (warning $btn-warning-bg $btn-warning-bg $btn-default-bg) (danger $btn-danger-bg $btn-danger-bg $btn-default-bg) (custom-1 $white $white $brand-color-1) (custom-2 $brand-color-1 $brand-color-1 $white) (primary $btn-primary-bg $btn-primary-bg $btn-default-bg) (dark-gray $dark-gray $dark-gray $white) (light-gray $light-gray $light-gray $black);
-
-// = Custom form
-// -----------------------------
-$custom-form-border: #0c6;
-$custom-form-bg: #fff;
-$custom-form-legend: $custom-form-border;
-
-// = Custom calendar event
-// -----------------------------
-$custom-event: $light-gray;
-$custom-event-month: #08c;
 
 // = Custom video
 // ------------------------------
 $custom-video-play: 50px;
 
-// = Social Colors
+// = Default custom colors
 // ------------------------------
-$social-colors: // name color icon
-                (facebook #3b5998 "e") (twitter #00ACED "h") (googleplus #d34836 "m") (gplus #d34836 "m") (linkedin #3B5998 "f") (nouscitoyens #1086b4 "\e00b") (saml #7498c0 "\e00b")(rss #fdac61 "g")(youtube #c4302b "\6b") (link-1 #3B5998 "\46") (mail-2-1 $dark-gray "\54");
+$brand-color-1: #16a085; // color text custom
+$brand-color-2: #1abc9c; // bgc custom
 
-// = Opinion types
-// -------------------------------
-$opinion-types: ("primary" $brand-color-2) ("default" #f5f5f5) ("red" #f2dede) ("orange" #fcf8e3) ("blue" #d9edf7) ("bluedark" darken(#d9edf7, 15%)) ("green" #dff0d8) ("white" #fff) ("gray" $gray-primary) ("light-gray", $light-gray) (source $brand-primary) (idee $light-gray) (project $light-gray);
+// = Custom buttons
+// -----------------------------
+$btns-custom:
+        (custom-1 $white $brand-color-1)
+        (dark-gray $dark-gray $white)
+        (light-gray $page-bgc $dark)
+        (darkest-gray $dark $white);
 
-// = Opinion labels
-// -------------------------------
-$opinion-labels: ("blue" #5bc0de) ("green" #5cb85c);
+$btns-outline:
+        ("default" $dark $dark $white)
+        (success $success-color $success-color $white)
+        (info $info-color $info-color $white)
+        (warning $warning-color $warning-color $white)
+        (danger $danger-color $danger-color $white)
+        (custom-1 $white $white $brand-color-1)
+        (custom-2 $brand-color-1 $brand-color-1 $white)
+        (primary $primary-color $primary-color $white)
+        (dark-gray $dark-gray $dark-gray $white)
+        (light-gray $page-bgc $page-bgc $dark);
 
-// = Form feedback
-// -------------------------------
-$warning-bg: #fcf8e3;
-$warning-text: #d9534f;
-$success-text: #5cb85c;
-
-// = Proposal votes widget
-$votes-widget-bg: #f6f6f6;
-$votes-widget-text: #777;
-$votes-widget-border: #e7e7e7;
-$votes-widget-btn-bg: #fff;
-$votes-widget-btn-text: $black;
-
-// = Icons color
-$icons-colors: (icon--red #e2264d) (icon--yellow #ff0) (icon--blue #5bc0de) (icon--green #5cb85c) (icon--black $black);

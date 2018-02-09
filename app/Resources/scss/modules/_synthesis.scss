@@ -2,20 +2,6 @@
    $Synthesis
 ================================================================*/
 
-// **************************** Colors ************************************************
-$white: #fff;
-$lightest-gray: #f6f6f6;
-$lighter-gray: #ebebeb;
-$light-gray: #ddd;
-$gray: #999;
-$darker-gray: #333;
-$black: #000;
-$blue: #377bb5;
-$green: #5fb760;
-$orange: #eeac57;
-$red: #d9534f;
-$dark-red: #a94442;
-
 // **************************** Layout ************************************************
 
 .synthesis_page body {
@@ -62,8 +48,8 @@ $dark-red: #a94442;
         width: 30%;
         padding: 0;
         padding-top: 15px;
-        background-color: $lightest-gray;
-        border-right: 1px solid $light-gray;
+        background-color: $page-bgc;
+        border-right: 1px solid $border-color;
     }
 
     .col--right {
@@ -138,7 +124,7 @@ $dark-red: #a94442;
 .synthesis__second-navbar {
     z-index: 1020;
     top: 50px;
-    background-color: $red;
+    background-color: $danger-color;
     color: $white;
 
     .navbar-brand,
@@ -159,7 +145,7 @@ $dark-red: #a94442;
     .navbar-right > li.active > a,
     .navbar-right > li.active > a:hover,
     .navbar-right > li.active > a:focus {
-        background-color: darken($red, 15);
+        background-color: darken($danger-color, 15);
     }
 
 }
@@ -188,7 +174,7 @@ $dark-red: #a94442;
         .menu--fixed {
             position: relative;
             z-index: 1000;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
 
         .menu__link > a {
@@ -213,7 +199,7 @@ $dark-red: #a94442;
     }
 
     .menu__action {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
         margin-top: 0;
     }
 }
@@ -239,15 +225,15 @@ $dark-red: #a94442;
     }
 
     .menu__item {
-        border-right: 1px solid $light-gray;
-        border-top: 1px solid $light-gray;
-        background-color: $lightest-gray;
+        border-right: 1px solid $border-color;
+        border-top: 1px solid $border-color;
+        background-color: $page-bgc;
 
         & > a {
             margin-right: 0;
             @include border-radius(0 !important);
             border: 0;
-            color: $black;
+            color: $dark;
             border-top: 2px solid transparent;
         }
     }
@@ -262,7 +248,7 @@ $dark-red: #a94442;
     }
 
     .menu__item:first-child > a {
-        border-left: 1px solid $light-gray;
+        border-left: 1px solid $border-color;
     }
 }
 
@@ -282,11 +268,11 @@ $dark-red: #a94442;
 // ***************************** Elements list *******************************************
 
 .synthesis__list {
-    border: 1px solid $light-gray;
+    border: 1px solid $border-color;
     margin-bottom: 0;
 
     .synthesis__list-item {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
         background-color: $white;
         font-size: 15px;
         margin-top: 0;
@@ -296,11 +282,11 @@ $dark-red: #a94442;
         }
 
         &.archived {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
 
         &:hover {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
     }
 }
@@ -308,7 +294,7 @@ $dark-red: #a94442;
 // Empty elements list
 .synthesis__list--empty {
     padding: 30px 15px;
-    color: $gray;
+    color: $dark-gray;
     font-weight: bold;
 
     .icon {
@@ -321,7 +307,7 @@ $dark-red: #a94442;
 
 // Global
 .synthesis__tree {
-    border: 1px solid $light-gray;
+    border: 1px solid $border-color;
     border-top: 0;
 }
 
@@ -332,7 +318,7 @@ $dark-red: #a94442;
 }
 
 .tree__item__content.selected {
-    background-color: $blue;
+    background-color: $primary-color;
     color: $white;
 }
 
@@ -376,12 +362,12 @@ $dark-red: #a94442;
     }
 
     .tree__item__content.selected {
-        background-color: $lighter-gray;
-        color: $black;
+        background-color: $border-color;
+        color: $dark;
     }
 
     .tree__item.published > .tree__item__content {
-        color: $green;
+        color: $success-color;
     }
 
     .elements-tree__item-icon {
@@ -398,7 +384,7 @@ $dark-red: #a94442;
 // In content
 .synthesis__content .synthesis__tree {
     .tree__item__content {
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color;
     }
 
     .tree__list:first-child > .tree__item:first-child > .tree__item__content {
@@ -431,28 +417,28 @@ $dark-red: #a94442;
     .element__metadata {
         position: relative;
         margin: 0 0 5px;
-        color: $gray;
+        color: $dark-gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $gray;
+            color: $dark-gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $blue;
+            color: $primary-color;
         }
     }
 
     .element__title {
-        color: $black;
+        color: $dark;
         font-size: 16px;
         word-break: break-word;
 
         &:hover,
         &.active {
-            color: $blue;
+            color: $primary-color;
             text-decoration: none;
         }
     }
@@ -460,17 +446,17 @@ $dark-red: #a94442;
     .element__breadcrumb {
         margin-bottom: 0;
         margin-top: 5px;
-        color: $gray;
+        color: $dark-gray;
         font-size: 85%;
 
         a,
         a.active {
-            color: $gray;
+            color: $dark-gray;
             text-decoration: none;
         }
 
         a:hover {
-            color: $blue;
+            color: $primary-color;
         }
     }
 }
@@ -487,7 +473,7 @@ $dark-red: #a94442;
     margin-left: 5px;
 
     span {
-        color: $gray;
+        color: $dark-gray;
         font-size: 16px;
 
         &.active {
@@ -501,11 +487,11 @@ $dark-red: #a94442;
 .synthesis__element-panel {
 
     .panel-title {
-        color: $black;
+        color: $dark;
 
         a,
         a.active {
-            color: $black;
+            color: $dark;
         }
     }
 
@@ -523,7 +509,7 @@ $dark-red: #a94442;
 
 .element__description {
     overflow: hidden;
-    border-top: 1px solid $light-gray;
+    border-top: 1px solid $border-color;
     word-wrap: break-word;
 
     .element__chart {
@@ -581,12 +567,12 @@ $dark-red: #a94442;
 .element__action-notation {
 
     &:hover a.active {
-        color: $gray;
+        color: $dark-gray;
     }
 
     a {
         direction: rtl;
-        color: $gray;
+        color: $dark-gray;
         text-decoration: none;
         transition: color 0.4s;
         unicode-bidi: embed;
@@ -666,8 +652,8 @@ $dark-red: #a94442;
     }
 
     .panel--original-element {
-        background-color: $lightest-gray;
-        border-right: 1px solid $light-gray;
+        background-color: $page-bgc;
+        border-right: 1px solid $border-color;
 
         .element__title {
             margin-top: 0;
@@ -687,14 +673,14 @@ $dark-red: #a94442;
             margin-top: 15px;
             margin-bottom: 0;
             padding: 0;
-            border: 1px solid $light-gray;
+            border: 1px solid $border-color;
             list-style-type: none;
         }
 
         .division__element {
-            border-top: 1px solid $light-gray;
+            border-top: 1px solid $border-color;
             padding: 15px;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
 
             &:first-child {
                 border-top: 0;
@@ -710,7 +696,7 @@ $dark-red: #a94442;
 // ********************************* Utils **********************************************
 
 // Colors
-$items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) ($black $black);
+$items-colors: (#00f $primary-color) (#008000 $success-color) (#ffa500 $warning-color) (#808080 $dark-gray) ($dark $dark);
 
 @each $icolor in $items-colors {
     $name: nth($icolor, 1);
@@ -768,7 +754,7 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
         cursor: pointer;
 
         &:hover {
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
         }
     }
 
@@ -783,7 +769,7 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
             left: 0;
             display: block;
             height: 100%;
-            background-color: $light-gray;
+            background-color: $page-bgc;
         }
 
         .element__title {
@@ -797,6 +783,6 @@ $items-colors: (#00f $blue) (#008000 $green) (#ffa500 $orange) (#808080 $gray) (
 
 @media print {
     .synthesis__element__bar__value {
-        background-color: $light-gray !important;
+        background-color: $page-bgc !important;
     }
 }

@@ -6,7 +6,7 @@
     font-size: 15px;
 
     &:hover {
-        background-color: $light-gray;
+        background-color: $page-bgc;
     }
 
     .ranking__nb {
@@ -35,7 +35,7 @@
 
         .opinion__header__title {
             margin: 10px 0;
-            color: $black;
+            color: $dark;
         }
 
         .opinion__header__back {
@@ -85,7 +85,7 @@
 
     &.opinion__footer {
         border-top: 1px solid $border-color;
-        background-color: #F6F6F6;
+        background-color: $page-bgc;
         font-size: 16px;
     }
 
@@ -109,7 +109,7 @@
 
             &.excerpt {
                 a {
-                    color: $excerpt;
+                    color: $dark-gray;
                 }
             }
         }
@@ -127,7 +127,7 @@
         .opinion__title,
         .opinion__user {
             a {
-                color: $black;
+                color: $dark;
             }
 
             a:hover {
@@ -141,7 +141,7 @@
 
         .opinion__title {
             margin: 0 0 5px;
-            color: $black;
+            color: $dark;
             font-size: $font-size-base;
             font-weight: normal;
         }
@@ -166,7 +166,7 @@
             display: inline-block;
             vertical-align: middle;
             padding: 5px 6px;
-            border: 1px solid $gray-primary;
+            border: 1px solid $border-color;
             font-size: 12px;
             line-height: 1.5;
         }
@@ -192,7 +192,7 @@
 
     // Special cases : add an argument
     &.opinion--add-argument {
-        background-color: $light-gray;
+        background-color: $page-bgc;
 
         .form-group {
             margin: 0;
@@ -214,7 +214,7 @@
     // Special case : argument
     &.opinion--argument {
         position: relative;
-        background-color: $light-gray;
+        background-color: $page-bgc;
 
         .opinion__text {
             padding-top: 10px;
@@ -234,7 +234,7 @@
             display: inline-block;
             vertical-align: middle;
             padding: 1px 5px;
-            border: 1px solid $gray-primary;
+            border: 1px solid $border-color;
             font-size: 12px;
             line-height: 1.5;
         }
@@ -417,7 +417,7 @@
     }
 
     .icon {
-        color: $excerpt;
+        color: $dark-gray;
     }
 
     @media (max-width: $screen-xs-max) {
@@ -430,7 +430,7 @@
             border-top: 1px solid $border-color;
 
             &:hover {
-                background-color: $light-gray;
+                background-color: $page-bgc;
                 text-decoration: none;
             }
         }
@@ -459,26 +459,17 @@
             border-top: 1px solid $border-color;
 
             .icon {
-                color: $excerpt;
+                color: $dark-gray;
             }
 
             &:hover {
-                background-color: $light-gray;
+                background-color: $page-bgc;
                 text-decoration: none;
             }
         }
 
         .opinion__resource:first-child {
             border-top: 0 solid $border-color;
-        }
-
-        @each $type in $opinion-types {
-            $name: nth($type, 1);
-            $color: nth($type, 2);
-
-            .opinion__resource--#{$name} {
-                color: $color;
-            }
         }
     }
 }
@@ -496,7 +487,7 @@
     margin: 0;
     padding-top: 15px;
     padding-bottom: 15px;
-    background-color: $light-gray;
+    background-color: $page-bgc;
     border-bottom: 1px solid $border-color;
 
     .opinion__header__title {
@@ -508,7 +499,7 @@
 #opinion__arguments--yes,
 #opinion__arguments--simple {
     .opinion__header__title {
-        color: $brand-success;
+        color: $success-color;
     }
 }
 
@@ -522,7 +513,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 1px 5px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid $border-color;
     font-size: 12px;
     line-height: 1.5;
 }

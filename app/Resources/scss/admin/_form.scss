@@ -106,7 +106,7 @@
         .ql-container {
             border-radius: 0 0 5px 5px;
             border-top: none;
-            background-color: $light-bgc;
+            background-color: $form-bgc;
 
             .ql-editor {
                 min-height: 100px;
@@ -120,7 +120,7 @@
             height: 200px;
             margin-top: 5px;
             border: 2px dashed $border-color;
-            background-color: $light-bgc;
+            background-color: $form-bgc;
             border-radius: 5px;
             cursor: pointer;
 

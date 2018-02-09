@@ -1,4 +1,4 @@
-$statuses: (primary $brand-primary $white) (success $brand-success $white) (info $brand-info $white) (warning $brand-warning $white) (danger $brand-danger $white) (default $dark-gray $white);
+$statuses: (primary $primary-color $white) (success $success-color $white) (info $brand-info $white) (warning $warning-color $white) (danger $brand-danger $white) (default $dark-gray $white);
 
 .ellipsis {
     @include ellipsis();
@@ -109,7 +109,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     .proposal__footer {
         .proposal__counters {
             padding: 5px;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
             border-top: 1px solid $border-color;
 
             .proposal__counter {
@@ -125,7 +125,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
         .proposal__trashed-reason {
             padding: 5px;
-            background-color: $lightest-gray;
+            background-color: $page-bgc;
             border-top: 1px solid $border-color;
         }
     }
@@ -141,7 +141,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
 .proposal__page__metadata .proposal__infos {
     padding: 10px;
-    background-color: #f6f6f6;
+    background-color: $page-bgc;
     font-size: 100%;
 
     .proposal__info {
@@ -160,7 +160,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
 .proposal__page__vote_threshold {
     padding: 10px;
-    background-color: #f6f6f6;
+    background-color: $page-bgc;
     font-size: 100%;
 
     .proposal__info {
@@ -177,7 +177,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         padding-left: 5px;
 
         i {
-            color: $blue;
+            color: $primary-color;
             font-size: 22px;
         }
     }
@@ -196,7 +196,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .progress {
-        background-color: #cecece;
+        background-color: $dark-gray;
         margin-bottom: 10px;
     }
 }
@@ -240,7 +240,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .nb--highlighted {
-    color: $brand-primary;
+    color: $primary-color;
     font-size: 120%;
 }
 
@@ -278,8 +278,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     z-index: 1020;
     overflow: hidden;
     height: $navbar-height;
-    border-color: $votes-widget-border;
-    background-color: $votes-widget-bg;
+    border-color: $border-color;
+    background-color: $page-bgc;
 
     .container {
         padding-top: 0;
@@ -292,10 +292,10 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     .widget__counter {
-        color: $votes-widget-text;
+        color: $dark-gray;
         padding-top: 5px;
         padding-bottom: 5px;
-        border-right: 1px solid $votes-widget-border;
+        border-right: 1px solid $border-color;
     }
 
     .widget__counter__label {
@@ -317,8 +317,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 
     .widget__button {
         margin-left: 15px;
-        background-color: $votes-widget-btn-bg;
-        color: $votes-widget-btn-text;
+        background-color: $white;
+        color: $dark;
     }
 
     .widget__image {
@@ -414,7 +414,7 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
 }
 
 .proposal__private-field {
-    background-color: $main-bg;
+    background-color: $white;
     border: 1px solid $info-color;
     padding: 12px 15px 15px;
 
@@ -456,11 +456,11 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
         left: -$marker-width / 2;
         top: -$marker-height / 2;
 
-        border: $marker-border-width solid #00a7d0;
+        border: $marker-border-width solid lighten($primary-color, 15%);
         border-radius: 50%;
-        background-color: #4990E2;
+        background-color: $primary-color;
         text-align: center;
-        color: #ffffff;
+        color: $white;
 
         font-size: $marker-font-size;
         font-weight: bold;
@@ -504,8 +504,8 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     font-size: 14px;
 
     input, textarea, select {
-        background-color: $main-field-bg;
-        border-color: $main-border-color;
+        background-color: $form-bgc;
+        border-color: $border-color;
         font-size: 14px;
         border-radius: 5px;
     }
@@ -515,15 +515,15 @@ $statuses: (primary $brand-primary $white) (success $brand-success $white) (info
     }
 
     #PlacesAutocomplete__autocomplete-container {
-        border: 1px solid $main-border-color;
+        border: 1px solid $border-color;
         border-radius: 0 0 5px 5px;
-        color: $field-font-color;
+        color: $dark-gray;
 
         .places-autocomplete {
             padding: 5px 9px;
 
             &:hover {
-                background-color: $autocomplete-hover-bg;
+                background-color: $page-bgc;
             }
 
             strong {

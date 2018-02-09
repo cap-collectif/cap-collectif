@@ -3,16 +3,16 @@
 ================================================================*/
 
 .diff {
-    color: #808080;
+    color: $dark-gray;
     text-decoration: none;
 
     del {
-        color: #f00;
+        color: $danger-color;
         text-decoration: line-through;
     }
 
     ins {
-        color: #008000;
+        color: $success-color;
         text-decoration: none;
     }
 }
