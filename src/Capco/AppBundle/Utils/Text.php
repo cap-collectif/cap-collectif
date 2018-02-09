@@ -33,4 +33,11 @@ final class Text
 
         return $str;
     }
+
+    public static function snake_case(string $str)
+    {
+        $separatorPattern = '/((?<=[^$])[A-Z0-9])/u';
+
+        return strtolower(preg_replace($separatorPattern, '_$1', $str));
+    }
 }
