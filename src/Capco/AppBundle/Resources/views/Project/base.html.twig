@@ -24,15 +24,20 @@
         {% include '@CapcoApp/Project/show_title.html.twig' %}
     </div>
 
-    <section>
-        {{ react_render_component('ProjectStepTabsApp', {
-            'props': {
-                'projectId': project.id
-            },
-        })}}
-    </section>
+    {% if project.steps | length > 1 %}
+        <section>
+            {{ react_render_component('ProjectStepTabsApp', {
+                'props': {
+                    'projectId': project.id
+                },
+            })}}
+        </section>
+    {% endif %}
 
-    <div class="container container--custom" style="padding-top: 0">
+    <div
+        class="container container--custom {{ project.steps | length <= 1 ? 'project_no-step-tabs' }}"
+        style="padding-top: 0"
+    >
 
         <div class="row">
             <div class="col-xs-12" id="details">

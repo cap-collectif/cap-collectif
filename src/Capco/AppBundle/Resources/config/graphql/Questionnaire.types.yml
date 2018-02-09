@@ -8,4 +8,3 @@ Questionnaire:
                 type: "String!"
             questions:
                 type: "[Question!]!"
-                resolve: "@=resolver('questionnaire_questions', [value])"
