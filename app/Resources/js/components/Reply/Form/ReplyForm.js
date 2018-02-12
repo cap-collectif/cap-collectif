@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { type IntlShape, injectIntl } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 // import { Alert, Button } from 'react-bootstrap';
 import {
   type FormProps,
@@ -7,6 +7,7 @@ import {
   // SubmissionError,
   reduxForm,
   FieldArray,
+  Field,
   // formValueSelector,
 } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -19,6 +20,8 @@ import {
   renderResponses,
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
+// import Input from '../../Form/Input';
+import renderComponent from '../../Form/Field';
 // import { RadioGroup, RadioButton } from 'react-radio-buttons';
 // import FormMixin from '../../../utils/FormMixin';
 // import FlashMessages from '../../Utils/FlashMessages';
@@ -36,12 +39,17 @@ type FormValues = {|
 |}
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire } = this.props;
+  const { questionnaire } = props;
+  const { responses } = values;
 
+  console.log(responses);
+  console.warn(questionnaire);
   // ReplyAction.add
 };
 
-const validate = ({ responses }: Object, { questionnaire }: Props) => {
+const validate = (values: FormValues, props: Props) => { // Add FormValues
+  const { questionnaire } = props;
+  const { responses } = values;
   const errors = {};
 
   const responsesError = [];
@@ -61,7 +69,7 @@ const validate = ({ responses }: Object, { questionnaire }: Props) => {
 
     if (question.validationRule && question.type !== 'button' && response.value) {
       const rule = question.validationRule;
-      const responseValues = response.value.labels.length;
+      const responseValues =  response.value.labels && response.value.labels.length;
 
       if(rule.type === 'min' && (responseValues < rule.number)) {
         responsesError[index] = { value: 'reply.constraints.choices_min', nb: rule.number };
@@ -92,12 +100,28 @@ export class ReplyForm extends React.Component<Props> {
 
     return(
       <form id="reply-form" ref="form">
+        {questionnaire.description && (
+          <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
+        )}
         <FieldArray
           name="responses"
           component={renderResponses}
           questions={questionnaire.questions}
           intl={intl}
         />
+        {questionnaire.anonymousAllowed && (
+          <div>
+            <hr style={{ marginBottom: '30px' }} />
+            <Field
+              type="checkbox"
+              name="reply-private"
+              component={renderComponent}
+              // checkedLink={this.linkState('private')}
+              children={<FormattedMessage id="reply.form.private" />}
+              // disabled={false} // to change
+            />
+          </div>
+        )}
       </form>
     )
   }
@@ -467,6 +491,8 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire {
+      anonymousAllowed
+      description
       questions {
           id
           title

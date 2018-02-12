@@ -1829,6 +1829,8 @@ enum QuestionTypeValue {
 type Questionnaire implements Node {
   id: ID!
   title: String!
+  anonymousAllowed: Boolean!
+  description: String!
   questions: [Question!]!
 }
 

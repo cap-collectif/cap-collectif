@@ -8,9 +8,11 @@ import Loader from '../../Utils/Loader';
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {
   if (error) {
-    console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
+
+  // console.warn(props);
+
   if (props) {
     // eslint-disable-next-line
     if (props.questionnaire !== null) {
@@ -18,7 +20,8 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
         <div>
           <ReplyForm
             questionnaire={props.questionnaire}
-            disabled={false}
+            disabled={false} // to check
+            // passer anonymousAllowed,
           />
           <SubmitButton
             id="submit-create-reply"
