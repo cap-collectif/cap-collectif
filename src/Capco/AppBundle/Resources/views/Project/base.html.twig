@@ -35,8 +35,8 @@
     {% endif %}
 
     <div
-        class="container container--custom {{ project.steps | length <= 1 ? 'project_no-step-tabs' }}"
-        style="padding-top: 0"
+        class="container container--custom"
+        {{ project.steps | length > 1 ? "style='padding-top: 0'" }}
     >
 
         <div class="row">
