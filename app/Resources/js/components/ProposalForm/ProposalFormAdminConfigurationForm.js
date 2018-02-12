@@ -1,8 +1,8 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form';
+import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
@@ -16,20 +16,14 @@ import type { ProposalFormAdminConfigurationForm_proposalForm } from './__genera
 import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
-type Props = RelayProps & {
-  handleSubmit: () => void,
-  invalid: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-  pristine: boolean,
-  submitting: boolean,
-  usingAddress: boolean,
-  usingCategories: boolean,
-  usingThemes: boolean,
-  usingDistrict: boolean,
-  features: FeatureToggles,
-};
+type Props = RelayProps &
+  FormProps & {
+    usingAddress: boolean,
+    usingCategories: boolean,
+    usingThemes: boolean,
+    usingDistrict: boolean,
+    features: FeatureToggles,
+  };
 
 const zoomLevels = [
   { id: 1, name: '1 - Le monde' },
@@ -208,8 +202,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district, id: undefined })),
     categories: values.categories.map(category => ({ ...category, id: undefined })),
-    questions: values.questions.map(question => ({
-      position: question.position,
+    questions: values.questions.map((question, index) => ({
+      position: index,
       question: {
         ...question,
         position: undefined,
@@ -221,7 +215,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   return UpdateProposalFormMutation.commit({ input });
 };
 
-export class ProposalFormAdminConfigurationForm extends Component<Props> {
+export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
   render() {
     const {
       invalid,

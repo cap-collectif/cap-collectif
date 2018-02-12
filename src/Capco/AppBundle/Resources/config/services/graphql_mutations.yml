@@ -18,3 +18,13 @@ services:
           - "@capco.proposal.repository"
       tags:
           - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@form.factory"
+          - "@capco.proposal_forl.repository"
+          - "@logger"
+      tags:
+          - { name: overblog_graphql.mutation }

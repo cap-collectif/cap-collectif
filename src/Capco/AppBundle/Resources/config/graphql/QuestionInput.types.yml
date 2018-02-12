@@ -4,14 +4,16 @@ QuestionInput:
         fields:
             id:
                 type: "String"
-                description: "Nullable because of editing and to handle creation."
+                description: "If null, a new question will be created."
             title:
                 type: "String!"
             type:
                 type: "QuestionTypeValue!"
             private:
                 type: "Boolean!"
+                defaultValue: false
             required:
                 type: "Boolean!"
+                defaultValue: false
             helpText:
                 type: "String"

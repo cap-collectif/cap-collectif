@@ -124,7 +124,7 @@ Mutation:
               builderConfig:
                   inputType: UpdateProposalFormInput
                   payloadType: UpdateProposalFormPayload
-                  mutateAndGetPayload: "@=mutation('updateProposalForm', [value])"
+                  mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFormMutation", [value])'
           updateProposalFormNotificationsConfiguration:
               access: "@=hasRole('ROLE_ADMIN')"
               builder: "Relay::Mutation"

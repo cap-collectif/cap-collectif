@@ -4,10 +4,11 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { features } from '../../redux/modules/default';
 import { ProposalFormAdminConfigurationForm } from './ProposalFormAdminConfigurationForm';
-import { intlMock } from '../../mocks';
+import { intlMock, formMock } from '../../mocks';
 
 describe('<ProposalFormAdminConfigurationForm />', () => {
   const props = {
+    ...formMock,
     intl: intlMock,
     proposalForm: {
       id: 'proposalFormId',
@@ -51,13 +52,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
         },
       ],
     },
-    handleSubmit: jest.fn(),
-    invalid: false,
-    valid: false,
-    submitSucceeded: false,
-    submitFailed: false,
-    pristine: false,
-    submitting: false,
     usingAddress: true,
     usingCategories: true,
     usingThemes: true,
