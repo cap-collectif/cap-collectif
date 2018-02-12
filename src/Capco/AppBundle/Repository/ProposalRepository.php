@@ -498,6 +498,54 @@ class ProposalRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+//    public function getContributionsSince()
+//    {
+//        $date = new \DateTime('2015-02-01');
+//        $qb = $this->createQueryBuilder('p')
+//            ->select('p.title')
+//            ->addSelect('COUNT(selectionVote.id) as selectionVotes,COUNT(collectVote.id) as collectVotes,COUNT(comment.id) as comments, COUNT(pStatus.id) as status')
+//            ->leftJoin('p.selectionVotes', 'selectionVote')
+//            ->leftJoin('p.collectVotes', 'collectVote')
+//            ->leftJoin('collectVotes.collectStep', 'sc')
+//            ->leftJoin('p.comments', 'comment')
+//            ->leftJoin('p.progressSteps', 'pSteps')
+//            ->leftJoin('p.status', 'pStatus')
+//            ->leftJoin('p.proposalForm', 'f')
+//            ->leftJoin('f.step', 's')
+//            ->leftJoin('s.projectAbstractStep', 'pas')
+//            ->where('selectionVote.createdAt = :since')
+//            ->andWhere('collectVote.createdAt = :since')
+//            ->andWhere('comment.createdAt = :since')
+//            ->andWhere('p.updatedAt = :since')
+//            ->andWhere('pStatus.createdAt = :since')
+//            ->setParameter('since', new \DateTime());
+//
+//            $qb->getQuery()->getSQL();
+//        ;
+//
+//    }
+
+    public function getContributionsSince()
+    {
+        $qb = $this->getIsEnabledQueryBuilder('p')
+        ->select('p.title')
+        ->addSelect('COUNT(selectionVote.id) as selectionVotes,COUNT(collectVote.id) as collectVotes,COUNT(comment.id) as comments, user.username, user.email')
+        ->leftJoin('p.followers', 'followers')
+        ->leftJoin('followers.user', 'user')
+        ->leftJoin('p.selectionVotes', 'selectionVote')
+        ->leftJoin('p.collectVotes', 'collectVote')
+        ->leftJoin('p.comments', 'comment')
+        ->leftJoin('p.status', 'pStatus')
+        ->where('selectionVote.createdAt BETWEEN :from and :to')
+        ->orWhere('collectVote.createdAt BETWEEN :from and :to')
+        ->orWhere('comment.createdAt BETWEEN :from and :to')
+        ->orWhere('p.updatedAt  BETWEEN :from and :to')
+        ->setParameter('from', new \DateTime('2018-02-12 00:00:00'))
+        ->setParameter('to', new \DateTime('2018-02-12 23:59:59'));
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
