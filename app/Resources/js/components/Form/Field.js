@@ -55,6 +55,7 @@ const Field = React.createClass({
       value: PropTypes.any,
     }).isRequired,
     style: PropTypes.object,
+    radioImage: PropTypes.object
   },
   render() {
     const { touched, error } = this.props.meta;
@@ -78,6 +79,7 @@ const Field = React.createClass({
       choices,
       isOtherAllowed,
       style,
+      radioImage,
       radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
@@ -103,6 +105,7 @@ const Field = React.createClass({
         disabled={disabled}
         popover={popover}
         addonAfter={addonAfter}
+        image={radioImage ? radioImage.url : null}
         addonBefore={addonBefore}
         isOtherAllowed={isOtherAllowed}
         wrapperClassName={wrapperClassName || ''}

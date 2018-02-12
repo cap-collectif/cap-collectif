@@ -57,6 +57,8 @@ const acceptedMimeTypes = [
 type Props = {
   intl: IntlShape,
   name?: ?string,
+  name: ?string,
+  // radioImage?: ?Object,
   image?: ?string,
   id: ?string,
   children?: any,
@@ -128,6 +130,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     hasFeedback,
     popover,
     children,
+    // radioImage,
     value,
     type,
     formName,

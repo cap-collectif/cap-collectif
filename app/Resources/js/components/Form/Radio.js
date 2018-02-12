@@ -1,3 +1,5 @@
+// To remove
+
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import RadioGroup from 'react-radio';

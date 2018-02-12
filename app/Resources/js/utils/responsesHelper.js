@@ -151,6 +151,7 @@ const formattedChoicesInField = field => {
       label: choice.title,
       description: choice.description,
       color: choice.color,
+      image: choice.image
     };
   });
 };
@@ -195,7 +196,7 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
 
-        console.log(field);
+        // console.log(field);
 
         const inputType = field.type || 'text';
         const isOtherAllowed = field.isOtherAllowed;

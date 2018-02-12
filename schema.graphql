@@ -1800,6 +1800,7 @@ type QuestionChoice {
   title: String!
   description: String
   color: String
+  image: Media
 }
 
 input QuestionInput {

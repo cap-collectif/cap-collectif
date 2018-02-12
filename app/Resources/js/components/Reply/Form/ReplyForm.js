@@ -41,10 +41,45 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   // ReplyAction.add
 };
 
-const validate = () => {
+const validate = ({ responses }: Object, { questionnaire }: Props) => {
   const errors = {};
 
-  // add of validation
+  const responsesError = [];
+  questionnaire.questions.map((question, index) => {
+    responsesError[index] = {};
+    const response = responses.filter(res => res && res.question === question.id)[0];
+
+    if (question.required) {
+      if (question.type === 'medias') {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+        }
+      } else if (!response || !response.value) {
+        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+      }
+    }
+
+    if (question.validationRule && question.type !== 'button' && response.value) {
+      const rule = question.validationRule;
+      const responseValues = response.value.labels.length;
+
+      if(rule.type === 'min' && (responseValues < rule.number)) {
+        responsesError[index] = { value: 'reply.constraints.choices_min', nb: rule.number };
+      }
+
+      if(rule.type === 'max' && (responseValues > rule.number)) {
+        responsesError[index] = { value: 'reply.constraints.choices_max', nb: rule.number };
+      }
+
+      if(rule.type === 'equal' && (responseValues !== rule.number)) {
+        responsesError[index] = { value: 'reply.constraints.choices_equal', nb: rule.number };
+      }
+    }
+  });
+
+  if (responsesError.length) {
+    errors.responses = responsesError;
+  }
 
   return errors;
 };
@@ -54,8 +89,6 @@ export const formName = 'ReplyForm';
 export class ReplyForm extends React.Component<Props> {
   render() {
     const { intl, questionnaire } = this.props;
-
-    // console.log(questionnaire.questions);
 
     return(
       <form id="reply-form" ref="form">
@@ -452,6 +485,9 @@ export default createFragmentContainer(container, {
             title
             description
             color
+            image {
+              url
+            }
           }
         }
     }

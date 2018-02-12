@@ -84,6 +84,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               radioChecked={finalValue === choice.label}
               onChange={this.uncheckOtherRadio}
               normalize={this.normalize}
+              radioImage={choice.image}
               value={choice.label}>
               {choice.label}
             </Field>
