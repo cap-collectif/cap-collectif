@@ -6,4 +6,4 @@ MultipleChoiceQuestionValidationRule:
             type:
                 type: "String"
             number:
-                type: "String"
+                type: "Int"

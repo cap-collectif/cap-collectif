@@ -1,56 +1,50 @@
+// @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-// import { Alert, Button } from 'react-bootstrap';
-import {
-  type FormProps,
-  // change,
-  // SubmissionError,
-  reduxForm,
-  FieldArray,
-  Field,
-  // formValueSelector,
-} from 'redux-form';
+import { type FormProps, reduxForm, FieldArray, Field, SubmissionError } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { Button } from 'react-bootstrap';
 import type { Dispatch } from '../../../types';
 import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
 import {
   formatInitialResponsesValues,
-  // formatSubmitResponses,
   renderResponses,
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
-// import Input from '../../Form/Input';
 import renderComponent from '../../Form/Field';
-// import { RadioGroup, RadioButton } from 'react-radio-buttons';
-// import FormMixin from '../../../utils/FormMixin';
-// import FlashMessages from '../../Utils/FlashMessages';
-// import ArrayHelper from '../../../services/ArrayHelper';
+import ReplyActions from '../../../actions/ReplyActions';
+import AlertForm from '../../Alert/AlertForm';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
   +intl: IntlShape,
-  // +reply?: Object,
   // disabled?: boolean,
-}
+};
 
 type FormValues = {|
   responses: ResponsesInReduxForm,
-|}
+|};
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues,  dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;
   const { responses } = values;
 
-  console.log(responses);
-  console.warn(questionnaire);
-  // ReplyAction.add
+  return ReplyActions.add(questionnaire.id, responses)
+    .then()
+    .catch(() => {
+      throw new SubmissionError({
+        _error: 'global.error.server.form',
+      });
+    });
 };
 
 const validate = (values: FormValues, props: Props) => { // Add FormValues
   const { questionnaire } = props;
   const { responses } = values;
   const errors = {};
+
+  console.warn(responses);
 
   const responsesError = [];
   questionnaire.questions.map((question, index) => {
@@ -69,18 +63,20 @@ const validate = (values: FormValues, props: Props) => { // Add FormValues
 
     if (question.validationRule && question.type !== 'button' && response.value) {
       const rule = question.validationRule;
-      const responseValues =  response.value.labels && response.value.labels.length;
+      const labelsNumber =  response.value.labels && response.value.labels.length;
+      const hasOtherValue =  response.value.other ? 1 : 0;
+      const responsesNumber =  labelsNumber + hasOtherValue;
 
-      if(rule.type === 'min' && (responseValues < rule.number)) {
-        responsesError[index] = { value: 'reply.constraints.choices_min', nb: rule.number };
+      if(rule.type === 'min' && (responsesNumber < rule.number)) {
+        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_min'}, { nb: rule.number })};
       }
 
-      if(rule.type === 'max' && (responseValues > rule.number)) {
-        responsesError[index] = { value: 'reply.constraints.choices_max', nb: rule.number };
+      if(rule.type === 'max' && (responsesNumber > rule.number)) {
+        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_max'}, { nb: rule.number })};
       }
 
-      if(rule.type === 'equal' && (responseValues !== rule.number)) {
-        responsesError[index] = { value: 'reply.constraints.choices_equal', nb: rule.number };
+      if(rule.type === 'equal' && (responsesNumber !== rule.number)) {
+        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_equal'}, { nb: rule.number })};
       }
     }
   });
@@ -96,10 +92,20 @@ export const formName = 'ReplyForm';
 
 export class ReplyForm extends React.Component<Props> {
   render() {
-    const { intl, questionnaire } = this.props;
+    const {
+      intl,
+      questionnaire,
+      submitting,
+      pristine,
+      invalid,
+      valid,
+      submitSucceeded,
+      submitFailed,
+      handleSubmit,
+    } = this.props;
 
     return(
-      <form id="reply-form" ref="form">
+      <form id="reply-form" ref="form" onSubmit={handleSubmit}>
         {questionnaire.description && (
           <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
         )}
@@ -122,6 +128,20 @@ export class ReplyForm extends React.Component<Props> {
             />
           </div>
         )}
+        <Button
+          type="submit"
+          id="proposal_admin_content_save"
+          bsStyle="primary"
+          disabled={pristine || invalid || submitting}>
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+        </Button>
+        <AlertForm
+          valid={valid}
+          invalid={invalid}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+          submitting={submitting}
+        />
       </form>
     )
   }
@@ -291,16 +311,6 @@ export class ReplyForm extends React.Component<Props> {
   //     form,
   //     private: false,
   //   });
-  // }
-
-  // formValidationRules: {}
-
-  // renderFormErrors(field) {
-  //   const errors = this.getErrorsMessages(field);
-  //   if (errors.length === 0) {
-  //     return null;
-  //   }
-  //   return <FlashMessages errors={errors} form />;
   // }
 
   // render() {
@@ -481,9 +491,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, props: Props) => ({
 });
 
 const form = reduxForm({
-  form: formName,
   validate,
   onSubmit,
+  form: formName,
 })(ReplyForm);
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -493,6 +503,7 @@ export default createFragmentContainer(container, {
     fragment ReplyForm_questionnaire on Questionnaire {
       anonymousAllowed
       description
+      id
       questions {
           id
           title

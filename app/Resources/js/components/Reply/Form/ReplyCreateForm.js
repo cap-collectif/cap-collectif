@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import ReplyForm from './ReplyForm';
+import ReplyForm, { formName } from './ReplyForm';
 import SubmitButton from '../../Form/SubmitButton';
 import ReplyActions from '../../../actions/ReplyActions';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -21,12 +21,6 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
           <ReplyForm
             questionnaire={props.questionnaire}
             disabled={false} // to check
-            // passer anonymousAllowed,
-          />
-          <SubmitButton
-            id="submit-create-reply"
-            // onSubmit={this.handleSubmit}
-            disabled={false}
           />
         </div>
       );

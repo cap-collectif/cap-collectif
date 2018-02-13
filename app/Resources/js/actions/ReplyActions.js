@@ -43,16 +43,6 @@ export default {
         });
         return true;
       })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_REPLY_FAILURE,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'reply.request.create.failure' },
-        });
-        return false;
-      });
   },
 
   update: (form, reply, data) => {

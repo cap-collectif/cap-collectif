@@ -19,13 +19,14 @@ type Questions = $ReadOnlyArray<{|
   +isOtherAllowed: boolean,
   +validationRule: ?{|
     +type: ?string,
-    +number: ?string,
+    +number: ?number,
   |},
   +choices: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,
     +color: ?string,
+    +image: ?Object,
   |}>,
 |}>;
 
@@ -52,6 +53,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
         +name: string,
         +url: string,
         +size: string,
+        +labels: Array,
       |}>,
 |}>;
 
@@ -156,7 +158,9 @@ const formattedChoicesInField = field => {
   });
 };
 
-export const getRequiredFieldIndicationStrategory = (fields: Array<{ required: boolean }>) => {
+export const getRequiredFieldIndicationStrategory = (fields: Array<Object>) => {
+  console.warn(fields);
+
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
@@ -269,7 +273,7 @@ export const renderResponses = ({
               inputType === 'checkbox' ||
               inputType === 'button'
             ) {
-              choices = formattedChoicesInField(field, strategy);
+              choices = formattedChoicesInField(field);
               if (inputType === 'radio') {
                 return (
                   <ProposalPrivateField key={field.id} show={field.private}>

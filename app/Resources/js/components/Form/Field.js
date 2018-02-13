@@ -7,6 +7,7 @@ const Field = React.createClass({
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
+      dirty: PropTypes.bool.isRequired,
       error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,
@@ -58,7 +59,7 @@ const Field = React.createClass({
     radioImage: PropTypes.object
   },
   render() {
-    const { touched, error } = this.props.meta;
+    const { touched, error, dirty } = this.props.meta;
     const {
       popover,
       children,
@@ -83,10 +84,14 @@ const Field = React.createClass({
       radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
-    const check = touched && !disableValidation;
+    const check = touched || dirty && !disableValidation;
+    // const invalidCheckbox = type === "checkbox" && invalid && !disableValidation;
 
     let errorMessage = null;
 
+    // console.log(check);
+
+    // if ((check || invalidCheckbox) && error) {
     if (check && error) {
       if (error.id) {
         errorMessage = <FormattedMessage id={error.id} values={error.values} />;
@@ -94,6 +99,8 @@ const Field = React.createClass({
         errorMessage = <FormattedMessage id={error} />;
       }
     }
+
+    // console.warn(invalidCheckbox);
 
     const input = (
       <Input
