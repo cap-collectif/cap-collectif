@@ -7,8 +7,6 @@ use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactory;
 
