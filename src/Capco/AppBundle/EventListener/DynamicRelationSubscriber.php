@@ -5,6 +5,10 @@ namespace Capco\AppBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
 
+/**
+ * @see http://blog.theodo.fr/2013/11/dynamic-mapping-in-doctrine-and-symfony-how-to-extend-entities/
+ * @see http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/php-mapping.html
+ */
 class DynamicRelationSubscriber implements EventSubscriber
 {
     private $traits;
