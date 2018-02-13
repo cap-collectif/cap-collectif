@@ -24,7 +24,7 @@ services:
       arguments:
           - "@doctrine.orm.default_entity_manager"
           - "@form.factory"
-          - "@capco.proposal_forl.repository"
+          - "@capco.proposal_form.repository"
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }
