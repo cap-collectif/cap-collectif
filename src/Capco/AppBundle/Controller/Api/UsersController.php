@@ -120,15 +120,16 @@ class UsersController extends FOSRestController
      */
     public function postUserAction(Request $request)
     {
-        $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->createUser();
-
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
         $formClass = $creatingAnAdmin
           ? ApiAdminRegistrationFormType::class
           : ApiRegistrationFormType::class
         ;
+
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->createUser();
         $form = $this->createForm($formClass, $user);
         $form->submit($request->request->all(), false);
 
@@ -136,21 +137,7 @@ class UsersController extends FOSRestController
             return $form;
         }
 
-        // We generate a confirmation token to validate email
-        $token = $this->get('fos_user.util.token_generator')->generateToken();
-
-        $userManager->updatePassword($user);
-        $user->setEnabled(true); // the user can use the website but...
-        $user->setExpiresAt((new \DateTime())->modify('+ 12 hours')); // the account expires in 12 hours (if not confirmed)
-        $user->setConfirmationToken($token);
-
-        if ($creatingAnAdmin) {
-            $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
-        } else {
-            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
-        }
-
-        $userManager->updateUser($user);
+        $this->get('user_manager')->confirmRegistration($user, $creatingAnAdmin);
 
         return $user;
     }
@@ -281,7 +268,7 @@ class UsersController extends FOSRestController
         }
 
         // If phone is updated we have to make sure it's sms confirmed again
-        if ($previousPhone !== null && $previousPhone !== $user->getPhone()) {
+        if (null !== $previousPhone && $previousPhone !== $user->getPhone()) {
             $user->setPhoneConfirmed(false);
             // TODO: security breach user can send unlimited sms if he change his number
             $user->setSmsConfirmationSentAt(null);

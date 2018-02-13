@@ -32,7 +32,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     ];
 
     protected $samlId;
-
+    protected $parisId;
     protected $id;
 
     /**
@@ -319,6 +319,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getSamlId()
     {
         return $this->samlId;
+    }
+
+    public function setParisId(string $parisId): self
+    {
+        $this->parisId = $parisId;
+
+        return $this;
+    }
+
+    public function getParisId()
+    {
+        return $this->parisId;
     }
 
     // used as a lifecycleCallback
