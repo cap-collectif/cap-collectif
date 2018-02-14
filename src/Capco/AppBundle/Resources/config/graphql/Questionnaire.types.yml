@@ -11,7 +11,19 @@ Questionnaire:
                 type: "Boolean!"
             description:
                 type: "String!"
-            # Ordered by position
+            multipleRepliesAllowed:
+                type: "Boolean!"
+            open:
+                type: "Boolean!"
+                resolve: "@=resolver('questionnaire_open', [value])"
+                description: "accept answers or not"
+            phoneConfirmationRequired:
+                type: "Boolean!"
+                resolve: "@=resolver('questionnaire_phoneConfirmationRequired', [value])"
+#            add phoneConfirmationRequired
+#            add user
+#            add user.isPhoneConfirmed
+#            add userReplies
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"

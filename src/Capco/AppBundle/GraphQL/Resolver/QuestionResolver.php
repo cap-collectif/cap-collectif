@@ -93,6 +93,16 @@ class QuestionResolver implements ContainerAwareInterface
         return $this->container->get('capco.reply.repository')->getForUserAndQuestionnaire($questionnaire, $user);
     }
 
+    public function resolveQuestionnaireOpen(Questionnaire $questionnaire): bool
+    {
+        return $questionnaire->canContribute();
+    }
+
+    public function resolveQuestionnairePhoneConfirmationRequired(Questionnaire $questionnaire): bool
+    {
+        return $questionnaire->isPhoneConfirmationRequired();
+    }
+
     public function resolveQuestionType(AbstractQuestion $question): string
     {
         $typeResolver = $this->container->get('overblog_graphql.type_resolver');

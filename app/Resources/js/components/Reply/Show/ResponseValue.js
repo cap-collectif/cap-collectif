@@ -8,6 +8,7 @@ const ResponseValue = React.createClass({
 
   render() {
     const { response } = this.props;
+
     if (!response.value || (Array.isArray(response.value) && !response.value.length)) {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
@@ -36,7 +37,7 @@ const ResponseValue = React.createClass({
       if (response.value.other) {
         labels.push(response.value.other);
       }
-      return labels.length > 0 ? (
+      return  labels.length > 0 ? (
         <p>{labels.join(', ')}</p>
       ) : (
         <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>

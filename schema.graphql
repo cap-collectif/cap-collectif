@@ -1831,6 +1831,11 @@ type Questionnaire implements Node {
   title: String!
   anonymousAllowed: Boolean!
   description: String!
+  multipleRepliesAllowed: Boolean!
+
+  # accept answers or not
+  open: Boolean!
+  phoneConfirmationRequired: Boolean!
   questions: [Question!]!
 }
 

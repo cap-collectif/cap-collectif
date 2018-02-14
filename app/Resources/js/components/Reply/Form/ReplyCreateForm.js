@@ -20,7 +20,6 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
         <div>
           <ReplyForm
             questionnaire={props.questionnaire}
-            disabled={false} // to check
           />
         </div>
       );
