@@ -57,6 +57,10 @@ class ConsultationStepExtractor
             return $synthesis;
         }
 
+        if (!$consultationStep->getConsultationStepType()) {
+            return $synthesis;
+        }
+
         $this->synthesis = $synthesis;
         $this->consultationStep = $consultationStep;
         $this->previousElements = $synthesis->getElements();
