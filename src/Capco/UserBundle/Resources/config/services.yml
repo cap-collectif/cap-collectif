@@ -11,9 +11,17 @@ services:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
     arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
 
+  capco.simple_preauth.provider:
+    class: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
+    arguments: ["@capco.toggle.manager", "@saml_user_provider", "@capco.paris.provider"]
+
   saml_user_provider:
     class: Capco\UserBundle\Security\Core\User\SamlUserProvider
     arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
+
+  capco.paris.provider:
+    class: Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider
+    arguments: ["@fos_user.user_manager"]
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
@@ -50,9 +58,18 @@ services:
       class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
       arguments: ["@simplesamlphp.auth", "@router", "@capco.toggle.manager"]
 
+  # Custom authentications
+  capco.simple_preauth.authenticator:
+      class: Capco\UserBundle\Authenticator\SimplePreAuthenticator
+      arguments: ["@capco.toggle.manager", "@capco.saml.authenticator", "@capco.paris.authenticator"]
+
+  capco.paris.authenticator:
+      class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
+      arguments: ["@logger"]
+
   capco.saml.authenticator:
-      class: Capco\UserBundle\Saml\SamlAuthenticator
-      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@capco.toggle.manager", "@logger"]
+      class: Capco\UserBundle\Authenticator\SamlAuthenticator
+      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@logger"]
 
   # We override default security services:
   security.authentication.success_handler:

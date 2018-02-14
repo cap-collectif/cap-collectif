@@ -17,7 +17,7 @@ security:
         fos_userbundle:
             id: capco_user.user_provider.email
         saml:
-            id: saml_user_provider
+            id: capco.simple_preauth.provider
 
     firewalls:
         dev:
@@ -57,8 +57,8 @@ security:
             provider: fos_userbundle
             anonymous: true
             simple_preauth:
-                authenticator: capco.saml.authenticator
-                provider: saml
+                authenticator: capco.simple_preauth.authenticator
+                provider: simple_preauth
             form_login:
                 # authenticator: time_authenticator
                 # SimpleFormAuthenticatorInterface

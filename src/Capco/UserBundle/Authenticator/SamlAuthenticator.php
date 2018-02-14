@@ -1,8 +1,7 @@
 <?php
 
-namespace Capco\UserBundle\Saml;
+namespace Capco\UserBundle\Authenticator;
 
-use Capco\AppBundle\Toggle\Manager;
 use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
 use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
 use Psr\Log\LoggerInterface;
@@ -18,15 +17,13 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $samlAuth;
     protected $samlIdp;
     protected $httpUtils;
-    protected $toggleManager;
     protected $logger;
 
-    public function __construct(Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, Manager $toggleManager, LoggerInterface $logger)
+    public function __construct(Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, LoggerInterface $logger)
     {
         $this->samlAuth = $samlAuth;
         $this->samlIdp = $samlIdp;
         $this->httpUtils = $httpUtils;
-        $this->toggleManager = $toggleManager;
         $this->logger = $logger;
     }
 
@@ -64,10 +61,6 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
 
     public function createToken(Request $request, $providerKey)
     {
-        if (!$this->toggleManager->isActive('login_saml')) {
-            return null;
-        }
-
         $isOnLoginUrl = $this->httpUtils->checkRequestPath($request, '/login-saml');
         if (!$isOnLoginUrl && !$this->samlAuth->isAuthenticated()) {
             return null; // skip saml auth, to let users browse anonymously
