@@ -167,6 +167,9 @@ export default createFragmentContainer(
               title
               description
               color
+              image {
+                url
+              }
             }
           }
         }

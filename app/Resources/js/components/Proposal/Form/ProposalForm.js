@@ -601,6 +601,9 @@ export default createFragmentContainer(container, {
           title
           description
           color
+          image {
+            url
+          }
         }
       }
       usingDistrict

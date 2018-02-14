@@ -31,7 +31,7 @@ const onSubmit = (values: FormValues,  dispatch: Dispatch, props: Props) => {
   const { responses } = values;
 
   return ReplyActions.add(questionnaire.id, responses)
-    .then()
+    .then(() => {})
     .catch(() => {
       throw new SubmissionError({
         _error: 'global.error.server.form',
@@ -61,17 +61,23 @@ const validate = (values: FormValues, props: Props) => { // Add FormValues
       }
     }
 
-    if (question.validationRule && question.type !== 'button' && response.value) {
+    if (
+      question.validationRule &&
+      question.type !== 'button' &&
+      response.value &&
+      typeof response.value === "object" &&
+      Array.isArray(response.value.labels)
+    ) {
       const rule = question.validationRule;
-      const labelsNumber =  response.value.labels && response.value.labels.length;
+      const labelsNumber  =  response.value.labels.length;
       const hasOtherValue =  response.value.other ? 1 : 0;
       const responsesNumber =  labelsNumber + hasOtherValue;
 
-      if(rule.type === 'min' && (responsesNumber < rule.number)) {
+      if(rule.type === 'min' && (rule.number && responsesNumber < rule.number)) {
         responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_min'}, { nb: rule.number })};
       }
 
-      if(rule.type === 'max' && (responsesNumber > rule.number)) {
+      if(rule.type === 'max' && (rule.number && responsesNumber > rule.number)) {
         responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_max'}, { nb: rule.number })};
       }
 
@@ -503,6 +509,7 @@ export default createFragmentContainer(container, {
     fragment ReplyForm_questionnaire on Questionnaire {
       anonymousAllowed
       description
+      title
       id
       questions {
           id

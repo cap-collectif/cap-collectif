@@ -53,8 +53,11 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
         +name: string,
         +url: string,
         +size: string,
-        +labels: Array,
-      |}>,
+      |}>
+    | {|
+      labels: $ReadOnlyArray<string>,
+      other: ?string,
+      |}
 |}>;
 
 // The real type is
@@ -158,9 +161,7 @@ const formattedChoicesInField = field => {
   });
 };
 
-export const getRequiredFieldIndicationStrategory = (fields: Array<Object>) => {
-  console.warn(fields);
-
+export const getRequiredFieldIndicationStrategory = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
