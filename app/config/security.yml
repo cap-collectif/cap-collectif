@@ -60,6 +60,8 @@ security:
                 authenticator: capco.saml.authenticator
                 provider: saml
             form_login:
+                # authenticator: time_authenticator
+                # SimpleFormAuthenticatorInterface
                 check_path: /login_check
                 username_parameter: username
                 password_parameter: password
@@ -71,7 +73,7 @@ security:
                     google: /login/check-google
                 login_path: /
                 oauth_user_provider:
-                    service: my_user_provider
+                    service: capco_oauth_user_provider
             remember_me:
               always_remember_me: false
               key: "%remember_secret%"

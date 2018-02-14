@@ -219,7 +219,7 @@ hwi_oauth:
     http:
         client: httplug.client.hwi
     connect:
-        account_connector: my_user_provider
+        account_connector: capco_oauth_user_provider
     firewall_names: [main]
     target_path_parameter: _destination
     fosub:

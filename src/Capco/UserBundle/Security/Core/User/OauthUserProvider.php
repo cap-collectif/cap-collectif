@@ -6,10 +6,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class UserProvider.
- */
-class UserProvider extends FOSUBUserProvider
+class OauthUserProvider extends FOSUBUserProvider
 {
     /**
      * {@inheritdoc}

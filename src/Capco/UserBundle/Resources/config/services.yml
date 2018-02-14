@@ -7,8 +7,8 @@ services:
     abstract: false
     public: true
 
-  my_user_provider:
-    class: Capco\UserBundle\Security\Core\User\UserProvider
+  capco_oauth_user_provider:
+    class: Capco\UserBundle\Security\Core\User\OauthUserProvider
     arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
 
   saml_user_provider:
