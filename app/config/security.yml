@@ -73,7 +73,7 @@ security:
                     google: /login/check-google
                 login_path: /
                 oauth_user_provider:
-                    service: capco_oauth_user_provider
+                    service: capco.oauth.provider
             remember_me:
               always_remember_me: false
               key: "%remember_secret%"

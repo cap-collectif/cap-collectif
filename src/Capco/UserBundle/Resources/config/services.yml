@@ -7,15 +7,15 @@ services:
     abstract: false
     public: true
 
-  capco_oauth_user_provider:
+  capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
     arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
 
   capco.simple_preauth.provider:
     class: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
-    arguments: ["@capco.toggle.manager", "@saml_user_provider", "@capco.paris.provider"]
+    arguments: ["@capco.toggle.manager", "@capco.saml.provider", "@capco.paris.provider"]
 
-  saml_user_provider:
+  capco.saml.provider:
     class: Capco\UserBundle\Security\Core\User\SamlUserProvider
     arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
 
