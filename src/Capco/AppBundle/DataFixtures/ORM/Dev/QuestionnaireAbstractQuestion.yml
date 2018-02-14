@@ -58,11 +58,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
   qaq15:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion6'
-    position: 5
+    position: 6
   qaq16:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion7'
-    position: 6
+    position: 7
   qaq17:
     questionnaire: '@questionnaire4'
     question: '@simplequestion8'
