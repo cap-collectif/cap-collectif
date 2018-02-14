@@ -56,7 +56,7 @@ const Field = React.createClass({
       value: PropTypes.any,
     }).isRequired,
     style: PropTypes.object,
-    radioImage: PropTypes.object
+    radioImage: PropTypes.object,
   },
   render() {
     const { touched, error, dirty } = this.props.meta;
@@ -84,7 +84,7 @@ const Field = React.createClass({
       radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
-    const check = touched || dirty && !disableValidation;
+    const check = touched || (dirty && !disableValidation);
     // const invalidCheckbox = type === "checkbox" && invalid && !disableValidation;
 
     let errorMessage = null;

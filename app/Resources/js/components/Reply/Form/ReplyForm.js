@@ -26,11 +26,21 @@ type FormValues = {|
   responses: ResponsesInReduxForm,
 |};
 
-const onSubmit = (values: FormValues,  dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;
   const { responses } = values;
 
-  return ReplyActions.add(questionnaire.id, responses)
+  const data = {};
+
+  data.responses = responses;
+
+  if (questionnaire.anonymousAllowed) {
+    data.private = true; // to change with true value
+  }
+
+  console.log(questionnaire.id, data);
+
+  return ReplyActions.add(questionnaire.id, data)
     .then(() => {})
     .catch(() => {
       throw new SubmissionError({
@@ -39,12 +49,11 @@ const onSubmit = (values: FormValues,  dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = (values: FormValues, props: Props) => { // Add FormValues
+const validate = (values: FormValues, props: Props) => {
+  // Add FormValues
   const { questionnaire } = props;
   const { responses } = values;
   const errors = {};
-
-  console.warn(responses);
 
   const responsesError = [];
   questionnaire.questions.map((question, index) => {
@@ -65,24 +74,39 @@ const validate = (values: FormValues, props: Props) => { // Add FormValues
       question.validationRule &&
       question.type !== 'button' &&
       response.value &&
-      typeof response.value === "object" &&
+      typeof response.value === 'object' &&
       Array.isArray(response.value.labels)
     ) {
       const rule = question.validationRule;
-      const labelsNumber  =  response.value.labels.length;
-      const hasOtherValue =  response.value.other ? 1 : 0;
-      const responsesNumber =  labelsNumber + hasOtherValue;
+      const labelsNumber = response.value.labels.length;
+      const hasOtherValue = response.value.other ? 1 : 0;
+      const responsesNumber = labelsNumber + hasOtherValue;
 
-      if(rule.type === 'min' && (rule.number && responsesNumber < rule.number)) {
-        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_min'}, { nb: rule.number })};
+      if (rule.type === 'min' && (rule.number && responsesNumber < rule.number)) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_min' },
+            { nb: rule.number },
+          ),
+        };
       }
 
-      if(rule.type === 'max' && (rule.number && responsesNumber > rule.number)) {
-        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_max'}, { nb: rule.number })};
+      if (rule.type === 'max' && (rule.number && responsesNumber > rule.number)) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_max' },
+            { nb: rule.number },
+          ),
+        };
       }
 
-      if(rule.type === 'equal' && (responsesNumber !== rule.number)) {
-        responsesError[index] = { value: props.intl.formatMessage({id: 'reply.constraints.choices_equal'}, { nb: rule.number })};
+      if (rule.type === 'equal' && responsesNumber !== rule.number) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_equal' },
+            { nb: rule.number },
+          ),
+        };
       }
     }
   });
@@ -110,7 +134,7 @@ export class ReplyForm extends React.Component<Props> {
       handleSubmit,
     } = this.props;
 
-    return(
+    return (
       <form id="reply-form" ref="form" onSubmit={handleSubmit}>
         {questionnaire.description && (
           <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
@@ -149,7 +173,7 @@ export class ReplyForm extends React.Component<Props> {
           submitting={submitting}
         />
       </form>
-    )
+    );
   }
 
   // getInitialState() {
@@ -489,10 +513,7 @@ export class ReplyForm extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, props: Props) => ({
   initialValues: {
-    responses: formatInitialResponsesValues(
-      props.questionnaire.questions,
-      [],
-    ),
+    responses: formatInitialResponsesValues(props.questionnaire.questions, []),
   },
 });
 
@@ -512,28 +533,28 @@ export default createFragmentContainer(container, {
       title
       id
       questions {
+        id
+        title
+        position
+        private
+        required
+        helpText
+        type
+        isOtherAllowed
+        validationRule {
+          type
+          number
+        }
+        choices {
           id
           title
-          position
-          private
-          required
-          helpText
-          type
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          choices {
-            id
-            title
-            description
-            color
-            image {
-              url
-            }
+          description
+          color
+          image {
+            url
           }
         }
+      }
     }
   `,
-})
+});

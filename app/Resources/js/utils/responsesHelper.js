@@ -55,9 +55,9 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
         +size: string,
       |}>
     | {|
-      labels: $ReadOnlyArray<string>,
-      other: ?string,
-      |}
+        labels: $ReadOnlyArray<string>,
+        other: ?string,
+      |},
 |}>;
 
 // The real type is
@@ -156,7 +156,7 @@ const formattedChoicesInField = field => {
       label: choice.title,
       description: choice.description,
       color: choice.color,
-      image: choice.image
+      image: choice.image,
     };
   });
 };
@@ -208,10 +208,14 @@ export const renderResponses = ({
 
         const labelAppend = field.required
           ? strategy === 'minority_required'
-            ? ` <span class="warning small"> ${intl.formatMessage({ id: 'global.mandatory' })}</span>`
+            ? ` <span class="warning small"> ${intl.formatMessage({
+                id: 'global.mandatory',
+              })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
-            ? ` <span class="excerpt small"> ${intl.formatMessage({ id: 'global.optional' })}</span>`
+            ? ` <span class="excerpt small"> ${intl.formatMessage({
+                id: 'global.optional',
+              })}</span>`
             : '';
 
         const labelMessage = field.title + labelAppend;
@@ -247,8 +251,7 @@ export const renderResponses = ({
                   isOtherAllowed={isOtherAllowed}
                   placeholder="reply.your_response"
                   label={label}
-                  disabled={disabled}
-                >
+                  disabled={disabled}>
                   <option value="" disabled>
                     {<FormattedMessage id="global.select" />}
                   </option>

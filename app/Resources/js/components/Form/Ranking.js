@@ -66,9 +66,11 @@ const Ranking = React.createClass({
 
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
-        <label htmlFor={id} className={classNames(labelClasses)}>
-          {label}
-        </label>
+        {label && (
+          <label htmlFor={id} className={labelClasses}>
+            {label}
+          </label>
+        )}
         {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
         {field.description && (
           <div style={{ paddingTop: 15, paddingBottom: 25 }}>

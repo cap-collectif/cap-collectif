@@ -32,17 +32,16 @@ export default {
   },
 
   add: (form, data) => {
-    return Fetcher.post(`/questionnaires/${form}/replies`, data)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: CREATE_REPLY_SUCCESS,
-        });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'reply.request.create.success' },
-        });
-        return true;
-      })
+    return Fetcher.post(`/questionnaires/${form}/replies`, data).then(() => {
+      AppDispatcher.dispatch({
+        actionType: CREATE_REPLY_SUCCESS,
+      });
+      AppDispatcher.dispatch({
+        actionType: UPDATE_ALERT,
+        alert: { bsStyle: 'success', content: 'reply.request.create.success' },
+      });
+      return true;
+    });
   },
 
   update: (form, reply, data) => {

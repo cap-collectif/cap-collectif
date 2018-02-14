@@ -33,7 +33,7 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
 type Props = {
   form: Object,
   disabled: boolean,
-}
+};
 
 export class ReplyCreateForm extends React.Component<Props> {
   static defaultProps = {
