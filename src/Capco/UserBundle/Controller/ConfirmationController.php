@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,11 +33,16 @@ class ConfirmationController extends Controller
         $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
 
-        $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
+        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
+        if ($instanceName === 'preprod' || $instanceName === 'rennes' || $instanceName === 'rennespreprod') {
+            $hasRepublishedContributions = false;
+        } else {
+            $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
+        }
 
         // if user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password
-        if (null === $user->getPassword()) {
+        if ($user->getPassword() === null) {
             $user->setPasswordRequestedAt(new \DateTime());
             $manager->updateUser($user);
 

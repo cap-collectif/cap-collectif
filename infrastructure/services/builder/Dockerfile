@@ -30,14 +30,14 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     apt-get install -y -qq \
         php7.1-cli \
         php7.1-curl \
-				php7.1-apcu \
-				php7.1-apc \
+        php7.1-apcu \
+        php7.1-apc \
         php7.1-gd \
         php7.1-imagick \
         php7.1-intl \
         php7.1-mysql \
         php7.1-zip \
-				php7.1-xml \
+        php7.1-xml \
         php7.1-mbstring \
     && \
     apt-get clean && \

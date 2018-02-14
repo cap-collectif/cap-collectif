@@ -32,7 +32,8 @@ Scenario: User wants to see ideas on the homepage
 Scenario: Anonymous user wants to see ideas and apply filters
   Given feature "themes" is enabled
   And I go to the ideas page
-  Then there should be 10 ideas
+  And I wait 2 seconds
+  Then there should be 20 ideas
   And I change the ideas theme filter
   Then there should be 1 ideas
 
@@ -46,7 +47,8 @@ Scenario: Anonymous user wants to see ideas and sort them
 @javascript
 Scenario: Anonymous user wants to see ideas and search by term
   Given I go to the ideas page
-  Then there should be 10 ideas
+  And I wait 2 seconds
+  Then there should be 20 ideas
   When I search for ideas with terms "dernière"
   Then there should be 1 ideas
   And ideas should be filtered by terms
@@ -337,10 +339,11 @@ Scenario: Can not access trash if feature is disabled
   And I go to the ideas page
   Then I should not see "Corbeille des idées" in the "#main" element
 
-@javascript
+@javascript 
 Scenario: Ideas trash display correct number of elements
   Given feature "idea_trash" is enabled
   And I am logged in as user
   And I go to the ideas page
   And I click the ideas trash link
-  Then there should be 12 ideas
+  And I wait 2 seconds
+  Then there should be 1 ideas

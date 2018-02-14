@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\Idea:
     object: <p><text(300)></p>
     Theme: '@theme3'
     Author: '@user*'
-    isTrashed: <boolean()>
+    isTrashed: false
 
   Idea21:
     id: 21

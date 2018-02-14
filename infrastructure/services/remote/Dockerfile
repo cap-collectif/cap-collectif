@@ -30,26 +30,26 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php7.0-apcu \
-        php7.0-apc \
-        php7.0-cli \
-        php7.0-mbstring \
-        php7.0-common \
-        php7.0-curl \
-        php7.0-dev \
-        php7.0-fpm \
-        php7.0-gd \
-        php7.0-imagick \
-        php7.0-intl \
-        php7.0-json \
-        php7.0-mcrypt \
-        php7.0-mysql \
-        php7.0-sqlite3 \
-        php7.0-opcache \
-        php7.0-redis \
-        php7.0-xml \
-        php7.0-xsl \
-        php7.0-zip \
+        php7.1-apcu \
+        php7.1-apc \
+        php7.1-cli \
+        php7.1-mbstring \
+        php7.1-common \
+        php7.1-curl \
+        php7.1-dev \
+        php7.1-fpm \
+        php7.1-gd \
+        php7.1-imagick \
+        php7.1-intl \
+        php7.1-json \
+        php7.1-mysql \
+        php7.1-mcrypt \
+        php7.1-sqlite3 \
+        php7.1-opcache \
+        php7.1-redis \
+        php7.1-xml \
+        php7.1-xsl \
+        php7.1-zip \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -65,28 +65,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Install rabbitmq lib and php-amqp
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y vim git make cmake g++ libreadline-dev && \
-    cd /tmp && \
-    git clone https://github.com/alanxz/rabbitmq-c.git && \
-    cd /tmp/rabbitmq-c && \
-    git checkout v0.8.0 && \
-    mkdir build && cd build && \
-    cmake .. && \
-    cmake --build . --target install && \
-    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so.4 && \
-    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so && \
-    cd /tmp && \
-    git clone https://github.com/pdezwart/php-amqp.git && \
-    cd /tmp/php-amqp && \
-    git checkout v1.7.1 && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install && \
-    echo "extension=amqp.so" > /etc/php/7.0/fpm/conf.d/20-amqp.ini && \
-    echo "extension=amqp.so" > /etc/php/7.0/cli/conf.d/20-amqp.ini && \
-    apt-get purge -y vim git cmake make g++ libreadline-dev && \
-    apt-get autoremove -y && \
+    apt-get install -y php-amqp && \
     apt-get clean all
 
 # Install mariadb
@@ -101,8 +80,8 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD
 	  } > /etc/apt/preferences.d/mariadb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.30+maria-1~jessie \
-        mariadb-client=10.1.30+maria-1~jessie \
+        mariadb-server=10.1.31+maria-1~jessie \
+        mariadb-client=10.1.31+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -195,8 +174,8 @@ COPY supervisord/run            /etc/service/supervisord/run
 COPY mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini              /etc/php/7.0/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini              /etc/php/7.0/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl

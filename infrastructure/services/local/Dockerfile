@@ -27,24 +27,24 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php7.0-apcu \
-        php7.0-apc \
-        php7.0-cli \
-        php7.0-mbstring \
-        php7.0-common \
-        php7.0-curl \
-        php7.0-dev \
-        php7.0-fpm \
-        php7.0-gd \
-        php7.0-imagick \
-        php7.0-intl \
-        php7.0-json \
-        php7.0-sqlite3 \
-        php7.0-mysql \
-        php7.0-opcache \
-        php7.0-redis \
-        php7.0-xsl \
-        php7.0-zip \
+        php7.1-apcu \
+        php7.1-apc \
+        php7.1-cli \
+        php7.1-mbstring \
+        php7.1-common \
+        php7.1-curl \
+        php7.1-dev \
+        php7.1-fpm \
+        php7.1-gd \
+        php7.1-imagick \
+        php7.1-intl \
+        php7.1-json \
+        php7.1-sqlite3 \
+        php7.1-mysql \
+        php7.1-opcache \
+        php7.1-redis \
+        php7.1-xsl \
+        php7.1-zip \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -60,28 +60,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Install rabbitmq lib and php-amqp
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y vim git make cmake g++ libreadline-dev && \
-    cd /tmp && \
-    git clone https://github.com/alanxz/rabbitmq-c.git && \
-    cd /tmp/rabbitmq-c && \
-    git checkout v0.8.0 && \
-    mkdir build && cd build && \
-    cmake .. && \
-    cmake --build . --target install && \
-    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so.4 && \
-    ln -s /usr/local/lib64/librabbitmq.so.4.0.0 /usr/lib/librabbitmq.so && \
-    cd /tmp && \
-    git clone https://github.com/pdezwart/php-amqp.git && \
-    cd /tmp/php-amqp && \
-    git checkout v1.7.1 && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install && \
-    echo "extension=amqp.so" > /etc/php/7.0/fpm/conf.d/20-amqp.ini && \
-    echo "extension=amqp.so" > /etc/php/7.0/cli/conf.d/20-amqp.ini && \
-    apt-get purge -y vim git cmake make g++ libreadline-dev && \
-    apt-get autoremove -y && \
+    apt-get install -y php-amqp && \
     apt-get clean all
 
 # Install blackfire PHP Probe
@@ -92,12 +71,12 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
     mkdir -p /var/run/blackfire && \
-    curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70 && \
+    curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/71 && \
     tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
 COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-COPY blackfire/blackfire-php.ini /etc/php/7.0/fpm/conf.d/92-blackfire-config.ini
-COPY blackfire/blackfire-php.ini /etc/php/7.0/cli/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
+COPY blackfire/blackfire-php.ini /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
 
 # Install rabbitmq
 RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
@@ -146,8 +125,8 @@ COPY nodejs/run                 /etc/service/nodejs/run
 # Configuration
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini              /etc/php/7.0/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini              /etc/php/7.0/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
