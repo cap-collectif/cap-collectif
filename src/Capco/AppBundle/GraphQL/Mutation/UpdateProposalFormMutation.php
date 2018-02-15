@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 
 class UpdateProposalFormMutation
@@ -17,7 +18,7 @@ class UpdateProposalFormMutation
     private $proposalFormRepo;
     private $logger;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, ProposalFormRepository $proposalFormRepo, $logger)
+    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, ProposalFormRepository $proposalFormRepo, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -30,7 +31,7 @@ class UpdateProposalFormMutation
         $arguments = $input->getRawArguments();
         $id = $arguments['proposalFormId'];
 
-        $proposalForm = $this->proposalFormRepository->find($id);
+        $proposalForm = $this->proposalFormRepo->find($id);
 
         if (!$proposalForm) {
             throw new UserError(sprintf('Unknown proposal form with id "%s"', $id));
