@@ -31,6 +31,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             $this->samlAuth->logout($returnTo);
         }
 
-        return new RedirectResponse($returnTo);
+        $response = new RedirectResponse($returnTo);
+        $response->headers->clearCookie('mcpAuth', '/', '.paris.fr');
+
+        return $response;
     }
 }

@@ -12,7 +12,7 @@ class OpenAmCaller
         $this->cookie = $cookie;
     }
 
-    private function getUid(string $cookie): string
+    public function getUid(): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->baseApiUrl . 'sessions/' . $this->cookie . '?_action=validate');
@@ -34,11 +34,11 @@ class OpenAmCaller
         return $json['uid'];
     }
 
-    private function getUserInformations(string $uid)
+    public function getUserInformations(string $uid)
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->baseApiUrl . 'users/' . $uid . '?_fields=uid,mail,inetUserStatus,validatedAccount');
+        curl_setopt($ch, CURLOPT_URL, $this->baseApiUrl . 'users/' . $uid);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
@@ -52,10 +52,12 @@ class OpenAmCaller
         }
         curl_close($ch);
         $json = json_decode($result, true);
+        var_dump($json);
+        die;
 
         return [
-        'username' => $json['username'],
-        'mail' => $json['mail'],
-      ];
+          'username' => $json['username'],
+          'mail' => $json['mail'][0],
+        ];
     }
 }
