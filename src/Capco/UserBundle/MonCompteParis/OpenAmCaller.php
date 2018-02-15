@@ -34,6 +34,7 @@ class OpenAmCaller
         return $json['uid'];
     }
 
+    // OR http://fr.lutece.paris.fr/fr/wiki/gru-appeldirect-identitystore.html
     public function getUserInformations(string $uid)
     {
         $ch = curl_init();
