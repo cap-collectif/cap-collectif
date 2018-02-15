@@ -216,8 +216,7 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        $project = $this->get('capco.project.repository')->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }

@@ -22,12 +22,10 @@
 {% block jumbotron %}{% endblock %}
 
 {% block details %}
-    {% if currentStep.synthesis != null and (currentStep.synthesis.enabled or ( app.user and app.user.vip))  %}
-        {{ react_render_component('SynthesisViewBoxApp', {
-            'props': props,
-            'rendering': 'client_side'
-        }) }}
-    {% endif %}
+    {{ react_render_component('SynthesisViewBoxApp', {
+        'props': props,
+        'rendering': 'client_side'
+    }) }}
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

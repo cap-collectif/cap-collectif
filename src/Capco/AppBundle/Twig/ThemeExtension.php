@@ -27,7 +27,7 @@ class ThemeExtension extends \Twig_Extension
         Router $router,
         StepHelper $stepHelper,
         $urlResolver
-        ) {
+    ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
         $this->twig = $twig;
@@ -58,41 +58,42 @@ class ThemeExtension extends \Twig_Extension
                 $projectStepsStatus = [];
                 foreach ($realStep->getStatuses() as $status) {
                     $projectStepsStatus[] = [
-                      'id' => $status->getId(),
-                      'name' => $status->getName(),
+                        'id' => $status->getId(),
+                        'name' => $status->getName(),
                     ];
                 }
 
                 $stepData = [
-                  'id' => $realStep->getId(),
-                  'title' => $realStep->getTitle(),
-                  'label' => $realStep->getLabel(),
-                  'body' => $realStep->getBody(),
-                  'slug' => $realStep->getSlug(),
-                  'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
-                  'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
-                  'position' => $realStep->getPosition(),
-                  'type' => $realStep->getType(),
-                  'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),
-                  'statuses' => $projectStepsStatus,
-                  'status' => $this->stepHelper->getStatus($realStep),
-                  'open' => $realStep->isOpen(),
-                  'proposalFormId' => method_exists($realStep, 'getProposalFormId') ? $realStep->getProposalFormId() : null,
-                  'voteThreshold' => method_exists($realStep, 'getVoteThreshold') ? $realStep->getVoteThreshold() : null,
-                  'votesHelpText' => method_exists($realStep, 'getVotesHelpText') ? $realStep->getVotesHelpText() : null,
-                  'votesLimit' => method_exists($realStep, 'getVotesLimit') ? $realStep->getVotesLimit() : null,
-                  'votable' => method_exists($realStep, 'isVotable') ? $realStep->isVotable() : false,
-                  'voteType' => method_exists($realStep, 'getVoteType') ? $realStep->getVoteType() : false,
-                  'budget' => method_exists($realStep, 'getBudget') ? $realStep->getBudget() : null,
-                  'timeless' => $realStep->isTimeless(),
-                  'isPrivate' => method_exists($realStep, 'isPrivate') ? $realStep->isPrivate() : null,
-                  'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
-                  'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
-                  '_links' => [
-                      'show' => $this->urlResolver->getStepUrl($realStep, true),
-                      'stats' => $this->router->generate('app_project_show_stats', ['projectSlug' => $project->getSlug()], true),
-                      'editSynthesis' => $this->router->generate('app_project_edit_synthesis', ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()], true),
-                  ],
+                    'id' => $realStep->getId(),
+                    'title' => $realStep->getTitle(),
+                    'label' => $realStep->getLabel(),
+                    'body' => $realStep->getBody(),
+                    'slug' => $realStep->getSlug(),
+                    'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
+                    'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
+                    'position' => $realStep->getPosition(),
+                    'type' => $realStep->getType(),
+                    'enabled' => $realStep->getIsEnabled(),
+                    'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),
+                    'statuses' => $projectStepsStatus,
+                    'status' => $this->stepHelper->getStatus($realStep),
+                    'open' => $realStep->isOpen(),
+                    'proposalFormId' => method_exists($realStep, 'getProposalFormId') ? $realStep->getProposalFormId() : null,
+                    'voteThreshold' => method_exists($realStep, 'getVoteThreshold') ? $realStep->getVoteThreshold() : null,
+                    'votesHelpText' => method_exists($realStep, 'getVotesHelpText') ? $realStep->getVotesHelpText() : null,
+                    'votesLimit' => method_exists($realStep, 'getVotesLimit') ? $realStep->getVotesLimit() : null,
+                    'votable' => method_exists($realStep, 'isVotable') ? $realStep->isVotable() : false,
+                    'voteType' => method_exists($realStep, 'getVoteType') ? $realStep->getVoteType() : false,
+                    'budget' => method_exists($realStep, 'getBudget') ? $realStep->getBudget() : null,
+                    'timeless' => $realStep->isTimeless(),
+                    'isPrivate' => method_exists($realStep, 'isPrivate') ? $realStep->isPrivate() : null,
+                    'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
+                    'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
+                    '_links' => [
+                        'show' => $this->urlResolver->getStepUrl($realStep, true),
+                        'stats' => $this->router->generate('app_project_show_stats', ['projectSlug' => $project->getSlug()], true),
+                        'editSynthesis' => $this->router->generate('app_project_edit_synthesis', ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()], true),
+                    ],
                 ];
                 $projectStepsData[] = $stepData;
                 $projectStepsByIdData[$realStep->getId()] = $stepData;
