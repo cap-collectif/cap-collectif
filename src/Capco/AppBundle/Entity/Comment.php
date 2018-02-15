@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Traits\DateTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;

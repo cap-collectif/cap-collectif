@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\DateTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
@@ -60,6 +61,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SummarizableTrait;
     use DraftableTrait;
     use HasResponsesTrait;
+    use DateTrait;
 
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';

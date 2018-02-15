@@ -11,6 +11,37 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
+    public function getFollowersWithActivities()
+    {
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $followers = $em->getRepository('CapcoAppBundle:Follower')->findAll();
+        $followersWithActivities = [];
+
+        /** @var Follower $follower */
+        foreach ($followers as $follower) {
+            try {
+                $proposalId = $follower->getProposal()->getId();
+                $userId = $follower->getUser()->getId();
+            } catch (EntityNotFoundException $e) {
+                // TODO to log
+//                dump($e->getMessage());
+//                dump($follower);
+                continue;
+            }
+
+            if (!isset($followersWithActivities[$userId])) {
+                $followersWithActivities[$userId] = new \stdClass();
+                $followersWithActivities[$userId]->proposal = [$proposalId];
+                $followersWithActivities[$userId]->email = $follower->getUser()->getEmailCanonical();
+                $followersWithActivities[$userId]->username = $follower->getUser()->getUsername();
+                continue;
+            }
+
+            array_push($followersWithActivities[$userId]->proposal, $proposalId);
+        }
+    }
+
     protected function configure()
     {
         $this

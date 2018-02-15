@@ -74,4 +74,16 @@ class FollowerRepository extends EntityRepository
 
         return new Paginator($query);
     }
+
+    public function getProposalFollowedGroupByUser()
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('f.id as followerId')
+            ->addSelect('u.id as uId', 'u.username', 'u.email', 'p.id as proposalId')
+            ->join('f.proposal', 'p')
+            ->join('f.user', 'u')
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }
