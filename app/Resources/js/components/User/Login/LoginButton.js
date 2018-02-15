@@ -38,6 +38,16 @@ export const LoginButton = React.createClass({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClick: () => {
+    const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
+    const monCompte_backUrlAuth = 'http://capco.paris.fr/login-paris';
+    const wH = 600;
+    const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
+    window.open(
+      `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${monCompte_backUrlAuth}`,
+      '_blank',
+      `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
+    );
+
     dispatch(showLoginModal());
   },
 });

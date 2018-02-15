@@ -16,7 +16,7 @@ security:
     providers:
         fos_userbundle:
             id: capco_user.user_provider.email
-        saml:
+        simple_preauth:
             id: capco.simple_preauth.provider
 
     firewalls:

@@ -65,7 +65,7 @@ services:
 
   capco.paris.authenticator:
       class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
-      arguments: ["@logger"]
+      arguments: ["@security.http_utils", "@logger"]
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Authenticator\SamlAuthenticator

@@ -13,6 +13,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected $httpUtils;
     protected $logger;
+    protected $baseApiUrl = 'https://moncompte.paris.fr/v69/json/';
 
     public function __construct(HttpUtils $httpUtils, LoggerInterface $logger)
     {
@@ -29,22 +30,22 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
     {
         $isOnLoginUrl = $this->httpUtils->checkRequestPath($request, '/login-paris');
         $isAlreadyAuthenticated = false;
+
+        $cookies = $request->cookies;
+        // http://fr.lutece.paris.fr/fr/wiki/user-information.html
+        if ($cookies->has('mcpAuth')) { // Iplanetdirectorypro in test env
+            $isAlreadyAuthenticated = true;
+        }
+
         if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
             return null; // skip paris auth, to let users browse anonymously
         }
 
-        $cookies = $request->cookies;
-        var_dump($cookies);
-        if ($cookies->has('SYMFONY2_TEST')) {
-            var_dump($cookies->get('SYMFONY2_TEST'));
-        }
-        //$this->samlAuth->requireAuth(); // force the user to login with SAML
-        //$attributes = $this->samlAuth->getAttributes();
-        $this->logger->info('Creating Paris token from: ' . json_encode($attributes));
+        $username = $this->getUidFromCookie($cookies->get('mcpAuth'));
+        $this->logger->info('Creating Paris token for username: ' . $username);
 
-        $username = $this->findUsernameInResponse($attributes);
         $token = new SamlToken($username);
-        $token->setAttributes($attributes);
+        $token->setAttributes([]);
 
         return $token;
     }
@@ -65,5 +66,27 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
     public function supportsToken(TokenInterface $token, $providerKey): bool
     {
         return $token instanceof SamlToken;
+    }
+
+    private function getUidFromCookie(string $cookie): string
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $baseUrl . '/sessions/' . $cookie . '?_action=validate');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+        $headers = [];
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+        $json = json_encode($result);
+
+        return $json['uid'];
     }
 }

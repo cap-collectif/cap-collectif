@@ -24,6 +24,16 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/login-paris", name="paris_login")
+     */
+    public function loginParisAction(Request $request)
+    {
+        $destination = $request->query->get('_destination') ?? $this->generateUrl('app_homepage');
+
+        return $this->redirect($destination);
+    }
+
+    /**
      * @Route("/contact", name="app_contact")
      * @Template("CapcoAppBundle:Default:contact.html.twig")
      */

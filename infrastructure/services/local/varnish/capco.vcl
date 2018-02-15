@@ -57,18 +57,18 @@ sub vcl_recv {
   }
 
   # Remove all cookies except the Symfony or SAML session.
-  if (req.http.Cookie) {
-    set req.http.Cookie = ";" + req.http.Cookie;
-    set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID)=", "; \1=");
-    set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
-    set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
-
-    if (req.http.Cookie == "") {
-      # If there are no more cookies, remove the header to get page cached.
-      unset req.http.Cookie;
-    }
-  }
+  # if (req.http.Cookie) {
+  #   set req.http.Cookie = ";" + req.http.Cookie;
+  #   set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
+  #   set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID)=", "; \1=");
+  #   set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
+  #   set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
+  #
+  #   if (req.http.Cookie == "") {
+  #     # If there are no more cookies, remove the header to get page cached.
+  #     unset req.http.Cookie;
+  #   }
+  # }
 }
 
 sub vcl_deliver {
