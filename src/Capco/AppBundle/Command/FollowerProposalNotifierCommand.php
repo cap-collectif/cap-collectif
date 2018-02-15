@@ -29,10 +29,10 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
 //                dump($follower);
                 continue;
             }
-
+            // TODO may use anonymouse class ?
             if (!isset($followersWithActivities[$userId])) {
                 $followersWithActivities[$userId] = new \stdClass();
-                $followersWithActivities[$userId]->proposal = [$proposalId];
+                $followersWithActivities[$userId]->proposals = [$proposalId];
                 $followersWithActivities[$userId]->email = $follower->getUser()->getEmailCanonical();
                 $followersWithActivities[$userId]->username = $follower->getUser()->getUsername();
                 continue;
@@ -40,6 +40,8 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
 
             array_push($followersWithActivities[$userId]->proposal, $proposalId);
         }
+
+        return $followersWithActivities;
     }
 
     protected function configure()

@@ -36,4 +36,18 @@ final class FollowerNotifier extends BaseNotifier
             )
         );
     }
+
+    public function onReportActivities(\stdClass $userActivities)
+    {
+        $this->mailer->sendMessage(
+            FollowerActivitiesMessage::create(
+                $userActivities->email,
+                $userActivities->username,
+                null,
+                $userActivities->proposals,
+                static::$proposalActivities,
+                static::$projectsInfos
+            )
+        );
+    }
 }
