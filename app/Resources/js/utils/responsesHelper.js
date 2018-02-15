@@ -82,9 +82,6 @@ export const formatSubmitResponses = (
   if (!responses) return [];
   return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
-    // if (res.value !== null && res.value.labels === null && res.value.labels.other === null){
-    //   return { value: null, question: res.question };
-    // }
     if (question.type === 'medias') {
       return {
         question: res.question,

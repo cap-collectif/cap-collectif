@@ -20,10 +20,6 @@ Questionnaire:
             phoneConfirmationRequired:
                 type: "Boolean!"
                 resolve: "@=resolver('questionnaire_phoneConfirmationRequired', [value])"
-#            add phoneConfirmationRequired
-#            add user
-#            add user.isPhoneConfirmed
-#            add userReplies
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"

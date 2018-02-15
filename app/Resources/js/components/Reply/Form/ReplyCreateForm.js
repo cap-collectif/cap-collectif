@@ -11,8 +11,6 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
     return graphqlError;
   }
 
-  // console.warn(props);
-
   if (props) {
     // eslint-disable-next-line
     if (props.questionnaire !== null) {
@@ -38,33 +36,6 @@ export class ReplyCreateForm extends React.Component<Props> {
   static defaultProps = {
     disabled: false,
   };
-
-  // state = {
-  //   isSubmitting: false,
-  // };
-  //
-  // handleSubmit() {
-  //   this.setState({
-  //     isSubmitting: true,
-  //   });
-  // }
-  //
-  // handleSubmitSuccess() {
-  //   const { form } = this.props;
-  //   this.setState({
-  //     isSubmitting: false,
-  //   });
-  //   if (form.multipleRepliesAllowed) {
-  //     this.replyForm.emptyForm();
-  //   }
-  //   ReplyActions.loadUserReplies(form.id);
-  // }
-  //
-  // handleFailure() {
-  //   this.setState({
-  //     isSubmitting: false,
-  //   });
-  // }
 
   render() {
     return (

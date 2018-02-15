@@ -169,7 +169,7 @@ const Checkbox = React.createClass({
                   type="checkbox"
                   value={choice.label}
                   checked={finalValue.indexOf(choice.label) !== -1}
-                  disabledValidation
+                  // disabledValidation
                   description={choice.description}
                   disabled={disabled}
                   onBlur={event => {

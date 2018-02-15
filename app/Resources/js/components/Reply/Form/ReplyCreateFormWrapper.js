@@ -40,8 +40,6 @@ export const ReplyCreateFormWrapper = React.createClass({
   render() {
     const { form, user, userReplies } = this.props;
 
-    // console.log(form);
-
     return (
       <div>
         {form.contribuable && !user ? (

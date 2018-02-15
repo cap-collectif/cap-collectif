@@ -16,6 +16,24 @@ type AddProposalVotePayload {
   clientMutationId: String
 }
 
+input AddReplyInput {
+  # The id of the questionnaire
+  questionnaireId: ID!
+
+  # The responses to the questionnaire questions
+  responses: [ResponseInput]
+
+  # Anonymous or not.
+  private: Boolean
+  clientMutationId: String
+}
+
+type AddReplyPayload {
+  reply: Reply
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
 input AddUsersInGroupInput {
   # Users that will be added to the group.
   users: [ID!]!
@@ -867,6 +885,7 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
+  addReply(input: AddReplyInput!): AddReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
@@ -1837,6 +1856,7 @@ type Questionnaire implements Node {
   open: Boolean!
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
+  viewerReplies: [Reply!]!
 }
 
 type QuestionnaireAbstractQuestion {
@@ -1881,6 +1901,28 @@ type RemoveProposalVotePayload {
   proposal: Proposal!
   viewer: User!
   clientMutationId: String
+}
+
+# A reply contribution
+type Reply {
+  enabled: Boolean!
+  private: Boolean!
+  responses: [Response]!
+
+  # The author of the contribution.
+  author: User!
+
+  # The updated date.
+  updatedAt: DateTime
+
+  # The id of the contribution.
+  id: ID!
+
+  # Identifies the form where the contribution was submitted.
+  questionnaire: Questionnaire!
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 }
 
 # A report
@@ -2712,7 +2754,7 @@ type UserType {
 type ValueResponse implements Response {
   question: Question!
 
-  # The value
+  # The value, can be a JSON
   value: String
   formattedValue: String
 }

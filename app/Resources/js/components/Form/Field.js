@@ -85,13 +85,9 @@ const Field = React.createClass({
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
-    // const invalidCheckbox = type === "checkbox" && invalid && !disableValidation;
 
     let errorMessage = null;
 
-    // console.log(check);
-
-    // if ((check || invalidCheckbox) && error) {
     if (check && error) {
       if (error.id) {
         errorMessage = <FormattedMessage id={error.id} values={error.values} />;
@@ -99,8 +95,6 @@ const Field = React.createClass({
         errorMessage = <FormattedMessage id={error} />;
       }
     }
-
-    // console.warn(invalidCheckbox);
 
     const input = (
       <Input

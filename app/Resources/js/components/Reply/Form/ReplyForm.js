@@ -16,6 +16,7 @@ import {
 import renderComponent from '../../Form/Field';
 import ReplyActions from '../../../actions/ReplyActions';
 import AlertForm from '../../Alert/AlertForm';
+import AddReplyMutation from '../../../mutations/AddReplyMutation';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
@@ -32,13 +33,15 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
   const data = {};
 
+  data.questionnaireId = questionnaire.id;
+
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
 
   if (questionnaire.anonymousAllowed) {
-    data.private = values.private; // to change with true value
+    data.private = values.private;
   }
 
-  return ReplyActions.add(questionnaire.id, data)
+  return AddReplyMutation.commit({ input: data })
     .then(() => {
       ReplyActions.loadUserReplies(questionnaire.id);
       if(questionnaire.multipleRepliesAllowed) {
@@ -53,7 +56,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, props: Props) => {
-  // Add FormValues
   const { questionnaire } = props;
   const { responses } = values;
   const errors = {};
@@ -129,8 +131,8 @@ export class ReplyForm extends React.Component<Props> {
     return (
       !questionnaire.open ||
       !user ||
-      (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed)
-      // || (userReplies.length > 0 && !questionnaire.multipleRepliesAllowed)
+      (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
+      (questionnaire.viewerReplies.length > 0 && !questionnaire.multipleRepliesAllowed)
     );
   }
 
@@ -219,6 +221,9 @@ export default createFragmentContainer(container, {
       multipleRepliesAllowed
       phoneConfirmationRequired
       open
+      viewerReplies {
+        id
+      }
       title
       id
       questions {

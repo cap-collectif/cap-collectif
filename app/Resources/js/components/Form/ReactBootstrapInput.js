@@ -58,7 +58,6 @@ type Props = {
   intl: IntlShape,
   name?: ?string,
   name: ?string,
-  // radioImage?: ?Object,
   image?: ?string,
   id: ?string,
   children?: any,
@@ -130,8 +129,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     hasFeedback,
     popover,
     children,
-    checkedValue,
-    // radioImage,
     value,
     type,
     formName,
@@ -292,8 +289,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       } else {
         choices = props.choices;
       }
-
-      // console.warn(values); // undefined quand rien
 
       const field = {};
       field.id = props.id;
