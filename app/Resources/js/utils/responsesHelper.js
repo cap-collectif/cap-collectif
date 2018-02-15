@@ -204,8 +204,6 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
 
-        // console.log(field);
-
         const inputType = field.type || 'text';
         const isOtherAllowed = field.isOtherAllowed;
 

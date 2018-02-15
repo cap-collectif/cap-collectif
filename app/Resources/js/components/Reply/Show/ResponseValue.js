@@ -9,7 +9,7 @@ const ResponseValue = React.createClass({
   render() {
     const { response } = this.props;
 
-    if (!response.value || (Array.isArray(response.value) && !response.value.length)) {
+    if (!response.value || (Array.isArray(response.value) && !response.value.length) || (typeof response.value === "object" && response.value.labels )) {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
     if (response.field.type === 'editor') {

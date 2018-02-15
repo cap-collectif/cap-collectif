@@ -61,8 +61,15 @@ const Ranking = React.createClass({
     } = this.props;
     const labelClasses = {
       'control-label': true,
+<<<<<<< HEAD
     };
     labelClasses[labelClassName] = true;
+=======
+      [labelClassName]: true,
+    });
+
+    // console.log(this.props);
+>>>>>>> [ADD] reset after submit for checkbox
 
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>

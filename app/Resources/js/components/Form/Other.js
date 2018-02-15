@@ -27,6 +27,7 @@ const Other = React.createClass({
   },
 
   componentDidUpdate() {
+    const { field } = this.props;
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
     if (input instanceof HTMLInputElement) {
@@ -42,6 +43,9 @@ const Other = React.createClass({
         },
         true,
       );
+    }
+    if(field.checked === false) {
+      input.value = null;
     }
   },
 

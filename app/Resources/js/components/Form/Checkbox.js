@@ -127,11 +127,11 @@ const Checkbox = React.createClass({
       onBlur,
       isReduxForm,
     } = this.props;
-    const { mixinValue, currentValue } = this.state;
+    const { mixinValue } = this.state;
 
     let finalValue = mixinValue;
     if (isReduxForm) {
-      finalValue = value.labels ? value.labels : currentValue;
+      finalValue = value.labels ? value.labels : mixinValue;
     }
 
     const otherValue = isReduxForm ? value.other : undefined;
@@ -140,6 +140,7 @@ const Checkbox = React.createClass({
     const labelClasses = {
       'control-label': true,
     };
+
     if (labelClassName) {
       labelClasses[labelClassName] = true;
     }
