@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Authenticator;
 
+use Capco\UserBundle\Authenticator\Token\ParisToken;
+use Capco\UserBundle\MonCompteParis\OpenAmCaller;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -13,12 +15,13 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 {
     protected $httpUtils;
     protected $logger;
-    protected $baseApiUrl = 'https://moncompte.paris.fr/v69/json/';
+    protected $openAmCaller;
 
-    public function __construct(HttpUtils $httpUtils, LoggerInterface $logger)
+    public function __construct(HttpUtils $httpUtils, LoggerInterface $logger, OpenAmCaller $openAmCaller)
     {
         $this->httpUtils = $httpUtils;
         $this->logger = $logger;
+        $this->openAmCaller = $openAmCaller;
     }
 
     public function findUsernameInResponse(array $attributes)
@@ -41,23 +44,22 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
             return null; // skip paris auth, to let users browse anonymously
         }
 
-        $username = $this->getUidFromCookie($cookies->get('mcpAuth'));
-        $this->logger->info('Creating Paris token for username: ' . $username);
+        $this->openAmCaller->setCookie($cookies->get('mcpAuth'));
+        $parisId = $this->openAmCaller->getUid();
+        $this->logger->info('Creating Paris token for parisId: ' . $parisId);
 
-        $token = new SamlToken($username);
+        $token = new ParisToken($parisId);
         $token->setAttributes([]);
 
         return $token;
     }
 
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)//: SamlToken
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)//: ParisToken
     {
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
 
-        $user->setSamlAttributes($this->samlIdp, $token->getAttributes());
-
-        $authenticatedToken = new SamlToken($user, $user->getRoles());
+        $authenticatedToken = new ParisToken($user, $user->getRoles());
         $authenticatedToken->setAttributes($token->getAttributes());
 
         return $authenticatedToken;
@@ -65,28 +67,6 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 
     public function supportsToken(TokenInterface $token, $providerKey): bool
     {
-        return $token instanceof SamlToken;
-    }
-
-    private function getUidFromCookie(string $cookie): string
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $baseUrl . '/sessions/' . $cookie . '?_action=validate');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-        $headers = [];
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-
-        $json = json_encode($result);
-
-        return $json['uid'];
+        return $token instanceof ParisToken;
     }
 }

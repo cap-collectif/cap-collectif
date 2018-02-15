@@ -2,16 +2,19 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\UserBundle\MonCompteParis\OpenAmCaller;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class MonCompteParisUserProvider implements UserProviderInterface
 {
     private $userManager;
+    private $openAmCaller;
 
-    public function __construct($manager)
+    public function __construct($manager, OpenAmCaller $openAmCaller)
     {
         $this->userManager = $manager;
+        $this->openAmCaller = $openAmCaller;
     }
 
     public function loadUserByUsername($id)
@@ -19,12 +22,13 @@ class MonCompteParisUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['parisId' => $id]);
 
         if (null === $user) {
-            // Call Paris API ?
+            $infos = $this->openAmCaller->getUserInformations($id);
+
             $user = $this->userManager->createUser();
             $user->setParisId($id);
-            $user->setUsername($id);
-            $user->setEmail('trololo@paris.fr');
-            $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
+            $user->setUsername($infos['username']);
+            $user->setEmail($infos['mail']);
+            $user->setPlainPassword('No password is stored locally.');
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
         }
@@ -34,7 +38,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        return $this->userManager->findUserBy(['samlId' => $user->getParisId()]);
+        return $this->userManager->findUserBy(['parisId' => $user->getParisId()]);
     }
 
     public function supportsClass($class): bool

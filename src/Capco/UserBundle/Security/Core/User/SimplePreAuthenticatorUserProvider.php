@@ -39,9 +39,9 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlProvider;
         }
-        if ($this->toggleManager->isActive('login_paris')) {
-            return $this->parisProvider;
-        }
+        // if ($this->toggleManager->isActive('login_paris')) {
+        return $this->parisProvider;
+        // }
 
         return null;
     }

@@ -7,6 +7,9 @@ services:
     abstract: false
     public: true
 
+  capco.paris.opem_am_caller:
+    class: Capco\UserBundle\MonCompteParis\OpenAmCaller
+
   capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
     arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
@@ -21,7 +24,7 @@ services:
 
   capco.paris.provider:
     class: Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider
-    arguments: ["@fos_user.user_manager"]
+    arguments: ["@fos_user.user_manager", "@capco.paris.opem_am_caller"]
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
@@ -65,7 +68,7 @@ services:
 
   capco.paris.authenticator:
       class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
-      arguments: ["@security.http_utils", "@logger"]
+      arguments: ["@security.http_utils", "@logger", "@capco.paris.opem_am_caller"]
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Authenticator\SamlAuthenticator

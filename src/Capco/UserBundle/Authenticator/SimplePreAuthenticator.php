@@ -38,7 +38,7 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
 
     public function supportsToken(TokenInterface $token, $providerKey): bool
     {
-        return $this->getCurrentAuthenticator()->authenticateToken($token, $providerKey);
+        return $this->getCurrentAuthenticator()->supportsToken($token, $providerKey);
     }
 
     private function getCurrentAuthenticator()
@@ -46,9 +46,9 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlAuthenticator;
         }
-        if ($this->toggleManager->isActive('login_paris')) {
-            return $this->parisAuthenticator;
-        }
+        // if ($this->toggleManager->isActive('login_paris')) {
+        return $this->parisAuthenticator;
+        // }
 
         return null;
     }
