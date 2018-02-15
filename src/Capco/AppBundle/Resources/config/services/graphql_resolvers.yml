@@ -383,3 +383,8 @@ services:
             - '@logger'
         tags:
             - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ResponsesResolver:
+      class: Capco\AppBundle\GraphQL\Resolver\ResponsesResolver
+      tags:
+          - { name: overblog_graphql.resolver }

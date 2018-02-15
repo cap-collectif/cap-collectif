@@ -2,6 +2,13 @@ Mutation:
     type: object
     config:
         fields:
+          addReply:
+                 access: "@=hasRole('ROLE_USER')"
+                 builder: "Relay::Mutation"
+                 builderConfig:
+                     inputType: AddReplyInput
+                     payloadType: AddReplyPayload
+                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, user])'
         # User notifications
           changeUserNotificationsConfiguration:
                 access: "@=hasRole('ROLE_USER')"

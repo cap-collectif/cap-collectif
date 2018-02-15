@@ -119,16 +119,7 @@ Scenario: Logged in API client wants to add a reply
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
   """
   {
-    "responses": [
-      {
-        "question": 2,
-        "value": "Je pense que c'est la ville parfaite pour organiser les JO"
-      },
-      {
-        "question": 13,
-        "value": [2, 3]
-      }
-    ]
+    "responses": []
   }
   """
   Then the JSON response status code should be 400
@@ -422,81 +413,7 @@ Scenario: Logged in API client wants to add another reply when multiple replies 
   }
   """
 
-@database
-Scenario: logged in API client wants to edit a reply
-  Given I am logged in to api as admin
-  When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
-  """
-  {
-    "responses": [
-      {
-        "question": 2,
-        "value": "En fait c'est nul, je ne veux pas des JO à Paris"
-      },
-      {
-        "question": 13,
-        "value": {
-          "labels": ["Athlétisme", "Natation", "Sports collectifs"]
-        }
-      }
-    ]
-  }
-  """
-  Then the JSON response status code should be 200
-
-@security
-Scenario: logged in API client wants to edit a reply when he is not the author
-  Given I am logged in to api as user
-  When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
-  """
-  {
-    "responses": [
-      {
-        "question": 2,
-        "value": "En fait c'est nul, je ne veux pas des JO à Paris"
-      },
-      {
-        "question": 13,
-        "value": {
-          "labels": ["Athlétisme", "Natation", "Sports collectifs"]
-        }
-      }
-    ]
-  }
-  """
-  Then the JSON response status code should be 403
-
-@security
-Scenario: Logged in API client wants to edit a reply in a closed questionnaire step
-  Given I am logged in to api as admin
-  And I send a PUT request to "/api/questionnaires/questionnaire3/replies/3" with json:
-  """
-  {
-    "responses": [
-      {
-        "question": 2,
-        "value": "Je pense que c'est la ville parfaite pour organiser les JO"
-      },
-      {
-        "question": 13,
-        "value": {
-          "labels": ["Athlétisme", "Natation", "Sports collectifs"]
-        }
-      }
-    ]
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {
-    "code": 400,
-    "message": "This reply is no longer editable.",
-    "errors": @null@
-  }
-  """
-
-@database
+@database @elasticsearch
 Scenario: Logged in API client wants to remove a reply
   Given I am logged in to api as admin
   When I send a DELETE request to "api/questionnaires/questionnaire1/replies/2"

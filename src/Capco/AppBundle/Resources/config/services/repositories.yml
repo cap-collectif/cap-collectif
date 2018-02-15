@@ -284,6 +284,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserArchive']
 
+  capco.reply.repository:
+    class: Capco\AppBundle\Repository\ReplyRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Reply']
+
   capco.requirement.repository:
     class: Capco\AppBundle\Repository\RequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

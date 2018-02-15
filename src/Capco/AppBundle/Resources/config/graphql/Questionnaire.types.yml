@@ -11,3 +11,6 @@ Questionnaire:
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"
+            viewerReplies:
+                type: "[Reply!]!"
+                resolve: "@=resolver('questionnaire_viewerReplies', [value, user])"

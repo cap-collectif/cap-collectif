@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>Argument</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+    <ul>
+        <li  title="Query">
+            <a href="query.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Query
+            </a>
+        </li>
+        <li  title="Mutation">
+            <a href="mutation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Mutation
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+    <ul>
+        <li  title="Address">
+            <a href="address.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Address
+            </a>
+        </li>
+        <li  title="Boolean">
+            <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Boolean
+            </a>
+        </li>
+        <li  title="DateTime">
+            <a href="datetime.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DateTime
+            </a>
+        </li>
+        <li  title="Float">
+            <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Float
+            </a>
+        </li>
+        <li  title="GeoJSON">
+            <a href="geojson.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                GeoJSON
+            </a>
+        </li>
+        <li  title="HTML">
+            <a href="html.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                HTML
+            </a>
+        </li>
+        <li  title="ID">
+            <a href="id.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ID
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
+            </a>
+        </li>
+        <li  title="JSON">
+            <a href="json.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                JSON
+            </a>
+        </li>
+        <li  title="String">
+            <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String
+            </a>
+        </li>
+        <li  title="URI">
+            <a href="uri.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                URI
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+    <ul>
+        <li  title="ArgumentValue">
+            <a href="argumentvalue.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ArgumentValue
+            </a>
+        </li>
+        <li  title="ContributionOrderField">
+            <a href="contributionorderfield.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ContributionOrderField
+            </a>
+        </li>
+        <li  title="DistrictOrderField">
+            <a href="districtorderfield.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DistrictOrderField
+            </a>
+        </li>
+        <li  title="OrderDirection">
+            <a href="orderdirection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                OrderDirection
+            </a>
+        </li>
+        <li  title="ProposalAffiliation">
+            <a href="proposalaffiliation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalAffiliation
+            </a>
+        </li>
+        <li  title="PublicationStatus">
+            <a href="publicationstatus.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PublicationStatus
+            </a>
+        </li>
+        <li  title="QuestionTypeValue">
+            <a href="questiontypevalue.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                QuestionTypeValue
+            </a>
+        </li>
+        <li  title="ReportingType">
+            <a href="reportingtype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ReportingType
+            </a>
+        </li>
+        <li  title="YesNoPairedVoteValue">
+            <a href="yesnopairedvotevalue.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                YesNoPairedVoteValue
+            </a>
+        </li>
+        <li  title="__DirectiveLocation">
+            <a href="directivelocation.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __DirectiveLocation
+            </a>
+        </li>
+        <li  title="__TypeKind">
+            <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __TypeKind
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Interfaces</h4>
+    <ul>
+        <li  title="Contribution">
+            <a href="contribution.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Contribution
+            </a>
+        </li>
+        <li  title="ContributionWithAuthor">
+            <a href="contributionwithauthor.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ContributionWithAuthor
+            </a>
+        </li>
+        <li  title="EditableContribution">
+            <a href="editablecontribution.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                EditableContribution
+            </a>
+        </li>
+        <li  title="Node">
+            <a href="node.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Node
+            </a>
+        </li>
+        <li  title="Question">
+            <a href="question.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Question
+            </a>
+        </li>
+        <li  title="Response">
+            <a href="response.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Response
+            </a>
+        </li>
+        <li  title="Step">
+            <a href="step.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Step
+            </a>
+        </li>
+        <li  title="TrashableContribution">
+            <a href="trashablecontribution.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                TrashableContribution
+            </a>
+        </li>
+        <li  title="YesNoPairedVote">
+            <a href="yesnopairedvote.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                YesNoPairedVote
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Unions</h4>
+    <ul>
+        <li  title="OpinionOrVersion">
+            <a href="opinionorversion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                OpinionOrVersion
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+    <ul>
+        <li  title="AddUsersInGroupPayload">
+            <a href="addusersingrouppayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                AddUsersInGroupPayload
+            </a>
+        </li>
+        <li class="slds-is-active" title="Argument">
+            <a href="argument.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Argument
+            </a>
+        </li>
+        <li  title="ChangeCollectStatusPayload">
+            <a href="changecollectstatuspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeCollectStatusPayload
+            </a>
+        </li>
+        <li  title="ChangeDistrictPayload">
+            <a href="changedistrictpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeDistrictPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalContentPayload">
+            <a href="changeproposalcontentpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalContentPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalEvaluationPayload">
+            <a href="changeproposalevaluationpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalEvaluationPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalEvaluersPayload">
+            <a href="changeproposalevaluerspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalEvaluersPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalNotationPayload">
+            <a href="changeproposalnotationpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalNotationPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalProgressStepsPayload">
+            <a href="changeproposalprogressstepspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalProgressStepsPayload
+            </a>
+        </li>
+        <li  title="ChangeProposalPublicationStatusPayload">
+            <a href="changeproposalpublicationstatuspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalPublicationStatusPayload
+            </a>
+        </li>
+        <li  title="ChangeSelectionStatusPayload">
+            <a href="changeselectionstatuspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeSelectionStatusPayload
+            </a>
+        </li>
+        <li  title="ChangeUserNotificationsConfigurationPayload">
+            <a href="changeusernotificationsconfigurationpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeUserNotificationsConfigurationPayload
+            </a>
+        </li>
+        <li  title="CollectStep">
+            <a href="collectstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CollectStep
+            </a>
+        </li>
+        <li  title="Consultation">
+            <a href="consultation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Consultation
+            </a>
+        </li>
+        <li  title="ContributionConnection">
+            <a href="contributionconnection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ContributionConnection
+            </a>
+        </li>
+        <li  title="ContributionEdge">
+            <a href="contributionedge.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ContributionEdge
+            </a>
+        </li>
+        <li  title="CreateGroupPayload">
+            <a href="creategrouppayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateGroupPayload
+            </a>
+        </li>
+        <li  title="CreateProposalFormPayload">
+            <a href="createproposalformpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalFormPayload
+            </a>
+        </li>
+        <li  title="CreateProposalFusionPayload">
+            <a href="createproposalfusionpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalFusionPayload
+            </a>
+        </li>
+        <li  title="CreateProposalPayload">
+            <a href="createproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalPayload
+            </a>
+        </li>
+        <li  title="DeleteGroupPayload">
+            <a href="deletegrouppayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteGroupPayload
+            </a>
+        </li>
+        <li  title="DeleteProposalPayload">
+            <a href="deleteproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteProposalPayload
+            </a>
+        </li>
+        <li  title="DeleteUserInGroupPayload">
+            <a href="deleteuseringrouppayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteUserInGroupPayload
+            </a>
+        </li>
+        <li  title="District">
+            <a href="district.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                District
+            </a>
+        </li>
+        <li  title="EvaluationForm">
+            <a href="evaluationform.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                EvaluationForm
+            </a>
+        </li>
+        <li  title="Follower">
+            <a href="follower.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Follower
+            </a>
+        </li>
+        <li  title="FollowerConnection">
+            <a href="followerconnection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FollowerConnection
+            </a>
+        </li>
+        <li  title="FollowerEdge">
+            <a href="followeredge.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FollowerEdge
+            </a>
+        </li>
+        <li  title="FollowProposalPayload">
+            <a href="followproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FollowProposalPayload
+            </a>
+        </li>
+        <li  title="Group">
+            <a href="group.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Group
+            </a>
+        </li>
+        <li  title="Media">
+            <a href="media.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Media
+            </a>
+        </li>
+        <li  title="MediaQuestion">
+            <a href="mediaquestion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MediaQuestion
+            </a>
+        </li>
+        <li  title="MediaResponse">
+            <a href="mediaresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MediaResponse
+            </a>
+        </li>
+        <li  title="MultipleChoiceQuestion">
+            <a href="multiplechoicequestion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MultipleChoiceQuestion
+            </a>
+        </li>
+        <li  title="MultipleChoiceQuestionValidationRule">
+            <a href="multiplechoicequestionvalidationrule.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                MultipleChoiceQuestionValidationRule
+            </a>
+        </li>
+        <li  title="NotificationsConfiguration">
+            <a href="notificationsconfiguration.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NotificationsConfiguration
+            </a>
+        </li>
+        <li  title="Opinion">
+            <a href="opinion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Opinion
+            </a>
+        </li>
+        <li  title="OpinionType">
+            <a href="opiniontype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                OpinionType
+            </a>
+        </li>
+        <li  title="OtherStep">
+            <a href="otherstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                OtherStep
+            </a>
+        </li>
+        <li  title="PageInfo">
+            <a href="pageinfo.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PageInfo
+            </a>
+        </li>
+        <li  title="Post">
+            <a href="post.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Post
+            </a>
+        </li>
+        <li  title="PresentationStep">
+            <a href="presentationstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PresentationStep
+            </a>
+        </li>
+        <li  title="ProgressStep">
+            <a href="progressstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProgressStep
+            </a>
+        </li>
+        <li  title="Project">
+            <a href="project.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Project
+            </a>
+        </li>
+        <li  title="Proposal">
+            <a href="proposal.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Proposal
+            </a>
+        </li>
+        <li  title="ProposalCategory">
+            <a href="proposalcategory.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalCategory
+            </a>
+        </li>
+        <li  title="ProposalConnection">
+            <a href="proposalconnection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalConnection
+            </a>
+        </li>
+        <li  title="ProposalEdge">
+            <a href="proposaledge.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalEdge
+            </a>
+        </li>
+        <li  title="ProposalEvaluation">
+            <a href="proposalevaluation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalEvaluation
+            </a>
+        </li>
+        <li  title="ProposalForm">
+            <a href="proposalform.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalForm
+            </a>
+        </li>
+        <li  title="PropositionVote">
+            <a href="propositionvote.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PropositionVote
+            </a>
+        </li>
+        <li  title="QuestionChoice">
+            <a href="questionchoice.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                QuestionChoice
+            </a>
+        </li>
+        <li  title="Questionnaire">
+            <a href="questionnaire.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Questionnaire
+            </a>
+        </li>
+        <li  title="QuestionnaireAbstractQuestion">
+            <a href="questionnaireabstractquestion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                QuestionnaireAbstractQuestion
+            </a>
+        </li>
+        <li  title="RankingStep">
+            <a href="rankingstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                RankingStep
+            </a>
+        </li>
+        <li  title="Reporting">
+            <a href="reporting.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Reporting
+            </a>
+        </li>
+        <li  title="Section">
+            <a href="section.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Section
+            </a>
+        </li>
+        <li  title="SectionAppendixType">
+            <a href="sectionappendixtype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SectionAppendixType
+            </a>
+        </li>
+        <li  title="Selection">
+            <a href="selection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Selection
+            </a>
+        </li>
+        <li  title="SelectionStep">
+            <a href="selectionstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SelectionStep
+            </a>
+        </li>
+        <li  title="SelectProposalPayload">
+            <a href="selectproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SelectProposalPayload
+            </a>
+        </li>
+        <li  title="SetEvaluationFormInProposalFormPayload">
+            <a href="setevaluationforminproposalformpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SetEvaluationFormInProposalFormPayload
+            </a>
+        </li>
+        <li  title="SimpleQuestion">
+            <a href="simplequestion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SimpleQuestion
+            </a>
+        </li>
+        <li  title="Source">
+            <a href="source.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Source
+            </a>
+        </li>
+        <li  title="Status">
+            <a href="status.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Status
+            </a>
+        </li>
+        <li  title="SynthesisStep">
+            <a href="synthesisstep.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SynthesisStep
+            </a>
+        </li>
+        <li  title="Theme">
+            <a href="theme.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Theme
+            </a>
+        </li>
+        <li  title="UnfollowProposalPayload">
+            <a href="unfollowproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UnfollowProposalPayload
+            </a>
+        </li>
+        <li  title="UnselectProposalPayload">
+            <a href="unselectproposalpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UnselectProposalPayload
+            </a>
+        </li>
+        <li  title="UpdateGroupPayload">
+            <a href="updategrouppayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateGroupPayload
+            </a>
+        </li>
+        <li  title="UpdateProposalFormNotificationsConfigurationPayload">
+            <a href="updateproposalformnotificationsconfigurationpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFormNotificationsConfigurationPayload
+            </a>
+        </li>
+        <li  title="UpdateProposalFormPayload">
+            <a href="updateproposalformpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFormPayload
+            </a>
+        </li>
+        <li  title="UpdateProposalFusionPayload">
+            <a href="updateproposalfusionpayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFusionPayload
+            </a>
+        </li>
+        <li  title="User">
+            <a href="user.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                User
+            </a>
+        </li>
+        <li  title="UserGroup">
+            <a href="usergroup.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserGroup
+            </a>
+        </li>
+        <li  title="UserNotificationsConfiguration">
+            <a href="usernotificationsconfiguration.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserNotificationsConfiguration
+            </a>
+        </li>
+        <li  title="UsersConnection">
+            <a href="usersconnection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UsersConnection
+            </a>
+        </li>
+        <li  title="UsersEdge">
+            <a href="usersedge.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UsersEdge
+            </a>
+        </li>
+        <li  title="UserType">
+            <a href="usertype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserType
+            </a>
+        </li>
+        <li  title="ValueResponse">
+            <a href="valueresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ValueResponse
+            </a>
+        </li>
+        <li  title="Version">
+            <a href="version.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Version
+            </a>
+        </li>
+        <li  title="VersionVote">
+            <a href="versionvote.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                VersionVote
+            </a>
+        </li>
+        <li  title="__Directive">
+            <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Directive
+            </a>
+        </li>
+        <li  title="__EnumValue">
+            <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __EnumValue
+            </a>
+        </li>
+        <li  title="__Field">
+            <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Field
+            </a>
+        </li>
+        <li  title="__InputValue">
+            <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __InputValue
+            </a>
+        </li>
+        <li  title="__Schema">
+            <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Schema
+            </a>
+        </li>
+        <li  title="__Type">
+            <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Type
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Input Objects</h4>
+    <ul>
+        <li  title="AddUsersInGroupInput">
+            <a href="addusersingroupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                AddUsersInGroupInput
+            </a>
+        </li>
+        <li  title="ChangeCollectStatusInput">
+            <a href="changecollectstatusinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeCollectStatusInput
+            </a>
+        </li>
+        <li  title="ChangeDistrictInput">
+            <a href="changedistrictinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeDistrictInput
+            </a>
+        </li>
+        <li  title="ChangeProposalContentInput">
+            <a href="changeproposalcontentinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalContentInput
+            </a>
+        </li>
+        <li  title="ChangeProposalEvaluationInput">
+            <a href="changeproposalevaluationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalEvaluationInput
+            </a>
+        </li>
+        <li  title="ChangeProposalEvaluersInput">
+            <a href="changeproposalevaluersinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalEvaluersInput
+            </a>
+        </li>
+        <li  title="ChangeProposalNotationInput">
+            <a href="changeproposalnotationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalNotationInput
+            </a>
+        </li>
+        <li  title="ChangeProposalProgressStepsInput">
+            <a href="changeproposalprogressstepsinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalProgressStepsInput
+            </a>
+        </li>
+        <li  title="ChangeProposalPublicationStatusInput">
+            <a href="changeproposalpublicationstatusinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeProposalPublicationStatusInput
+            </a>
+        </li>
+        <li  title="ChangeSelectionStatusInput">
+            <a href="changeselectionstatusinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeSelectionStatusInput
+            </a>
+        </li>
+        <li  title="ChangeUserNotificationsConfigurationInput">
+            <a href="changeusernotificationsconfigurationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ChangeUserNotificationsConfigurationInput
+            </a>
+        </li>
+        <li  title="ContributionOrder">
+            <a href="contributionorder.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ContributionOrder
+            </a>
+        </li>
+        <li  title="CreateGroupInput">
+            <a href="creategroupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateGroupInput
+            </a>
+        </li>
+        <li  title="CreateProposalFormInput">
+            <a href="createproposalforminput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalFormInput
+            </a>
+        </li>
+        <li  title="CreateProposalFusionInput">
+            <a href="createproposalfusioninput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalFusionInput
+            </a>
+        </li>
+        <li  title="CreateProposalInput">
+            <a href="createproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateProposalInput
+            </a>
+        </li>
+        <li  title="DeleteGroupInput">
+            <a href="deletegroupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteGroupInput
+            </a>
+        </li>
+        <li  title="DeleteProposalInput">
+            <a href="deleteproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteProposalInput
+            </a>
+        </li>
+        <li  title="DeleteUserInGroupInput">
+            <a href="deleteuseringroupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DeleteUserInGroupInput
+            </a>
+        </li>
+        <li  title="DistrictInput">
+            <a href="districtinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DistrictInput
+            </a>
+        </li>
+        <li  title="FollowProposalInput">
+            <a href="followproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FollowProposalInput
+            </a>
+        </li>
+        <li  title="ProgressStepInput">
+            <a href="progressstepinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProgressStepInput
+            </a>
+        </li>
+        <li  title="ProposalCategoryInput">
+            <a href="proposalcategoryinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalCategoryInput
+            </a>
+        </li>
+        <li  title="ProposalsConnectionFilter">
+            <a href="proposalsconnectionfilter.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ProposalsConnectionFilter
+            </a>
+        </li>
+        <li  title="QuestionInput">
+            <a href="questioninput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                QuestionInput
+            </a>
+        </li>
+        <li  title="QuestionnaireAbstractQuestionInput">
+            <a href="questionnaireabstractquestioninput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                QuestionnaireAbstractQuestionInput
+            </a>
+        </li>
+        <li  title="ResponseInput">
+            <a href="responseinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ResponseInput
+            </a>
+        </li>
+        <li  title="SelectProposalInput">
+            <a href="selectproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SelectProposalInput
+            </a>
+        </li>
+        <li  title="SetEvaluationFormInProposalFormInput">
+            <a href="setevaluationforminproposalforminput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SetEvaluationFormInProposalFormInput
+            </a>
+        </li>
+        <li  title="UnfollowProposalInput">
+            <a href="unfollowproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UnfollowProposalInput
+            </a>
+        </li>
+        <li  title="UnselectProposalInput">
+            <a href="unselectproposalinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UnselectProposalInput
+            </a>
+        </li>
+        <li  title="UpdateGroupInput">
+            <a href="updategroupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateGroupInput
+            </a>
+        </li>
+        <li  title="UpdateProposalFormInput">
+            <a href="updateproposalforminput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFormInput
+            </a>
+        </li>
+        <li  title="UpdateProposalFormNotificationsConfigurationInput">
+            <a href="updateproposalformnotificationsconfigurationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFormNotificationsConfigurationInput
+            </a>
+        </li>
+        <li  title="UpdateProposalFusionInput">
+            <a href="updateproposalfusioninput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateProposalFusionInput
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+    <ul>
+        <li  title="deprecated">
+            <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                deprecated
+            </a>
+        </li>
+        <li  title="include">
+            <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                include
+            </a>
+        </li>
+        <li  title="skip">
+            <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                skip
+            </a>
+        </li>
+    </ul>
+</div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+    <div class="container slds-grid">
+        <div>
+        <button class="slds-button js-toggle-navigation less-than-medium">
+            <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+            <span class="slds-text-title--caps">Types<span>
+        </button>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">Argument</h1>
+        <div class="slds-text-body--regular"><p>An argument</p>
+</div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#graphql-schema-definition">
+                <i class="material-icons">link</i>
+            </a>
+            GraphQL Schema definition
+        </h2>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Argument</span> <span class="keyword operator ts">implements</span> <a class="support type" href="node.doc.html">Node</a>, <a class="support type" href="contribution.doc.html">Contribution</a>, <a class="support type" href="trashablecontribution.doc.html">TrashableContribution</a>, <a class="support type" href="contributionwithauthor.doc.html">ContributionWithAuthor</a>, <a class="support type" href="editablecontribution.doc.html">EditableContribution</a> {</li><li></li><li><span class="tab"><span class="comment line">#   Identifies the date and time when the object was created.</span></span></li><li><span class="tab"><span class="meta">createdAt</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Identifies the date and time when the object was last updated.</span></span></li><li><span class="tab"><span class="meta">updatedAt</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">url</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">expired</span>: <a class="support type" href="boolean.doc.html">Boolean</a>! </span></li><li></li><li><span class="tab"><span class="meta">published</span>: <a class="support type" href="boolean.doc.html">Boolean</a>! </span></li><li></li><li><span class="tab"><span class="meta">trashed</span>: <a class="support type" href="boolean.doc.html">Boolean</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Date of trash.</span></span></li><li><span class="tab"><span class="meta">trashedAt</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   Reason of trash.</span></span></li><li><span class="tab"><span class="meta">trashedReason</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   The author of the argument.</span></span></li><li><span class="tab"><span class="meta">author</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   The type.</span></span></li><li><span class="tab"><span class="meta">type</span>: <a class="support type" href="argumentvalue.doc.html">ArgumentValue</a>! </span></li><li></li><li><span class="tab"><span class="meta">votesCount</span>: <a class="support type" href="int.doc.html">Int</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   The content of the argument.</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   The content of the argument.</span></span></li><li><span class="tab"><span class="meta">body</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Return the related contribution if the contribution is related to another.</span></span></li><li><span class="tab"><span class="meta">related</span>: <a class="support type" href="contribution.doc.html">Contribution</a> </span></li><li></li><li><span class="tab"><span class="comment line">#   The kind of contribution (argument).</span></span></li><li><span class="tab"><span class="meta">kind</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li>}</li></ul></code>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="require-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#require-by">
+                <i class="material-icons">link</i>
+            </a>
+            Require by
+        </h2>
+        <ul class="require-by"><li><a href="opinion.doc.html" title="Opinion - A contribution">Opinion<em>A contribution</em></a><li><li><a href="opiniontype.doc.html" title="OpinionType - A type of opinion">OpinionType<em>A type of opinion</em></a><li><li><a href="version.doc.html" title="Version - A version of contribution">Version<em>A version of contribution</em></a><li></ul>
+    </div>
+</section>
+<footer>
+<div class="container slds-p-around--large">
+    <p class="slds-text-align--right slds-text-title--caps">
+        Generated with <a href="https://github.com/2fd/graphdoc#readme" target="_blank">graphdoc 2.4.0</a>
+    </p>
+</div>
+</footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
@@ -54,6 +55,9 @@ trait HasResponsesTrait
             if (!$found) {
                 if ($question instanceof MediaQuestion) {
                     $response = new MediaResponse();
+                } elseif ($question instanceof MultipleChoiceQuestion) {
+                    $response = new ValueResponse();
+                    $response->setValue(json_encode(['labels' => [], 'other' => null]));
                 } else {
                     $response = new ValueResponse();
                 }

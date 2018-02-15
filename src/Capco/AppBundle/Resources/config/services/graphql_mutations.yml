@@ -62,6 +62,7 @@ services:
           - "@capco.proposal.repository"
       tags:
           - { name: overblog_graphql.mutation }
+
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation
@@ -211,3 +212,18 @@ services:
         - "@logger"
     tags:
       - { name: overblog_graphql.mutation }
+
+  Capco\AppBundle\GraphQL\Mutation\AddReplyMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\AddReplyMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@form.factory"
+          - "@capco.reply.repository"
+          - "@capco.questionnaire.repository"
+          - "@redis_storage.helper"
+          - "@capco.notify_manager"
+          - "@responses.formatter"
+          - "@logger"
+      tags:
+          - { name: overblog_graphql.mutation }

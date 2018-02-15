@@ -8,6 +8,9 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Error\UserError;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -79,6 +82,15 @@ class QuestionResolver implements ContainerAwareInterface
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
         return $questionnaire->getRealQuestions();
+    }
+
+    public function resolveQuestionnaireViewerReplies(Questionnaire $questionnaire, $user): Collection
+    {
+        if (!$user instanceof User) {
+            return new ArrayCollection();
+        }
+
+        return $this->container->get('capco.reply.repository')->getForUserAndQuestionnaire($questionnaire, $user);
     }
 
     public function resolveQuestionType(AbstractQuestion $question): string

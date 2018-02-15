@@ -1,7 +1,6 @@
 @questionnaire
 Feature: Questionnaire
 
-@database
 Scenario: GraphQL client wants to retrieve questions
   Given I am logged in to graphql as user
   When I send a GraphQL request:
@@ -29,6 +28,71 @@ Scenario: GraphQL client wants to retrieve questions
           {"id":"16"},
           {"id":"18"},
           {"id":"19"}
+        ]
+      }
+    }
+  }
+  """
+
+Scenario: GraphQL client wants to retrieve replies
+  Given I am logged in to graphql as admin
+  When I send a GraphQL request:
+  """
+  {
+      questionnaire(id: 1) {
+        viewerReplies {
+          id
+          responses {
+            question {
+              id
+            }
+            ... on ValueResponse {
+              value
+            }
+          }
+       }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "questionnaire": {
+        "viewerReplies": [
+          {
+            "id": "reply2",
+            "responses": [
+                {
+                  "question": {"id": "2"},
+                  "value": "Youpi ! J\u0027adore des JO"
+                },
+                {
+                  "question": {"id": "13"},
+                  "value": "{\"labels\":[\"Natation\",\"Sports collectifs\"],\"other\":null}"
+                },
+                {
+                  "question": {"id": "14"},
+                  "value": "{\"labels\":[\"Maxime Arrouard\"],\"other\":null}"
+                },
+                {
+                  "question": {"id": "15"},
+                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                },
+                {
+                  "question": {"id": "16"},
+                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                },
+                {
+                  "question": {"id": "18"},
+                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                },
+                {
+                  "question": {"id": "19"},
+                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                }
+            ]
+          }
         ]
       }
     }
