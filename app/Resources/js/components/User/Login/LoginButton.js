@@ -40,7 +40,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClick: () => {
     if (window.location.href.indexOf('paris.fr') > -1) {
       const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-      const monCompte_backUrlAuth = 'http://capco.paris.fr/login-paris';
+      const monCompte_backUrlAuth = `${window.location.scheme}://${
+        window.location.host
+      }/login-paris`;
       const wH = 600;
       const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
       window.open(

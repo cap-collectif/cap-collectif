@@ -35,17 +35,26 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         $isAlreadyAuthenticated = false;
 
         $cookies = $request->cookies;
+
         // http://fr.lutece.paris.fr/fr/wiki/user-information.html
         if ($cookies->has(OpenAmCaller::COOKIE_NAME)) { // Iplanetdirectorypro in test env
-            $isAlreadyAuthenticated = true;
+            $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
+            $this->openAmCaller->setCookie($cookieValue);
+            try {
+                $parisId = $this->openAmCaller->getUid();
+                $isAlreadyAuthenticated = true;
+            } catch (\Exception $e) {
+                // Token not valid
+                $this->logger->info('Failed to get uuid from cookie: ' . $cookieValue);
+
+                return null;
+            }
         }
 
         if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
             return null; // skip paris auth, to let users browse anonymously
         }
 
-        $this->openAmCaller->setCookie($cookies->get(OpenAmCaller::COOKIE_NAME));
-        $parisId = $this->openAmCaller->getUid();
         $this->logger->info('Creating Paris token for parisId: ' . $parisId);
 
         $token = new ParisToken($parisId);
