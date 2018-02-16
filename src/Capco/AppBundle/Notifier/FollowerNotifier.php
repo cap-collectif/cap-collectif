@@ -41,12 +41,10 @@ final class FollowerNotifier extends BaseNotifier
     {
         $this->mailer->sendMessage(
             FollowerActivitiesMessage::create(
-                $userActivities->email,
-                $userActivities->username,
-                null,
-                $userActivities->proposals,
-                static::$proposalActivities,
-                static::$projectsInfos
+                $userActivity->getEmail(),
+                $userActivity->getUsername(),
+                'notifier@cap-collectif.com',
+                $userActivity->getUserProjects()
             )
         );
     }

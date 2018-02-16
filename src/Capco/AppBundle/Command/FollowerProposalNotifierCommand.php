@@ -11,9 +11,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
-    public function getFollowersWithActivities()
+    public function getFollowersWithActivities(): array
     {
         $container = $this->getContainer();
+        $logger = $container->get('logger');
         $em = $container->get('doctrine')->getManager();
         $followers = $em->getRepository('CapcoAppBundle:Follower')->findAll();
         $followersWithActivities = [];
@@ -24,21 +25,69 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $proposalId = $follower->getProposal()->getId();
                 $userId = $follower->getUser()->getId();
             } catch (EntityNotFoundException $e) {
-                // TODO to log
-//                dump($e->getMessage());
-//                dump($follower);
+                $logger->addError(__METHOD__ . $e->getMessage() . var_export($follower, true));
                 continue;
             }
-            // TODO may use anonymouse class ?
+            if (!filter_var($follower->getUser()->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
+                $logger->addError(sprintf('%s doesnt have a valid email %s', $follower->getUser()->getUsername(), $follower->getUser()->getEmailCanonical()));
+                continue;
+            }
             if (!isset($followersWithActivities[$userId])) {
-                $followersWithActivities[$userId] = new \stdClass();
-                $followersWithActivities[$userId]->proposals = [$proposalId];
-                $followersWithActivities[$userId]->email = $follower->getUser()->getEmailCanonical();
-                $followersWithActivities[$userId]->username = $follower->getUser()->getUsername();
+                $userActivity = new UserActivity();
+                $userActivity->setId($userId);
+                $userActivity->setEmail($follower->getUser()->getEmailCanonical());
+                $userActivity->setUsername($follower->getUser()->getUsername());
+                $userActivity->setFirstname($follower->getUser()->getFirstname());
+                $userActivity->setLastname($follower->getUser()->getLastname());
+                $userActivity->addUserProposal($proposalId);
+                /* UserActivity */
+                $followersWithActivities[$userId] = $userActivity;
+                continue;
+            }
+            $followersWithActivities[$userId]->addUserProposal($proposalId);
+        }
+
+        return $followersWithActivities;
+    }
+
+    public function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities)
+    {
+        /**
+         * @var UserActivity
+         */
+        foreach ($followersWithActivities as $userId => $userActivity) {
+            $userActivity->setUserProjects($projects);
+            if (!$userActivity->hasProposal()) {
+                unset($followersWithActivities[$userId]);
                 continue;
             }
 
-            array_push($followersWithActivities[$userId]->proposal, $proposalId);
+            foreach ($userActivity->getUserProposals() as $proposalId) {
+                if (isset($proposalActivities[$proposalId])) {
+                    $proposal = $proposalActivities[$proposalId];
+                    if (isset($projects[$proposal['projectId']])) {
+                        $project = $userActivity->getUserProject($proposal['projectId']);
+                        if (!isset($project['proposals'])) {
+                            $project['proposals'] = [];
+                        }
+                        $project['proposals'][$proposalId] = $proposal;
+                        $userActivity->addUserProject($project, $proposal['projectId']);
+                    }
+                }
+            }
+
+            foreach ($userActivity->getUserProjects() as $projectId => $project) {
+                if (empty($project['proposals'])) {
+                    $userActivity->removeUserProject($projectId);
+                }
+            }
+
+            $userActivity->setUserProposals([]);
+            if (!$userActivity->hasUserProject()) {
+                unset($followersWithActivities[$userId]);
+                continue;
+            }
+            $followersWithActivities[$userId] = $userActivity;
         }
 
         return $followersWithActivities;
