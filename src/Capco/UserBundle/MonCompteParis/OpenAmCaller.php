@@ -4,7 +4,10 @@ namespace Capco\UserBundle\MonCompteParis;
 
 class OpenAmCaller
 {
-    protected $baseApiUrl = 'https://moncompte.paris.fr/v69/json/';
+    const COOKIE_NAME = 'mcpAuth';
+    const COOKIE_DOMAIN = '.paris.fr';
+    const API_URL = 'https://moncompte.paris.fr/v69/json/';
+
     protected $cookie = null;
 
     public function setCookie(string $cookie)
@@ -15,7 +18,7 @@ class OpenAmCaller
     public function getUid(): string
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->baseApiUrl . 'sessions/' . $this->cookie . '?_action=validate');
+        curl_setopt($ch, CURLOPT_URL, self::API_URL . 'sessions/' . $this->cookie . '?_action=validate');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
 
@@ -39,12 +42,12 @@ class OpenAmCaller
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->baseApiUrl . 'users/' . $uid);
+        curl_setopt($ch, CURLOPT_URL, self::API_URL . 'users/' . $uid);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = [];
-        $headers[] = 'mcpAuth: ' . $this->cookie;
+        $headers[] = self::COOKIE_NAME . ': ' . $this->cookie;
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);

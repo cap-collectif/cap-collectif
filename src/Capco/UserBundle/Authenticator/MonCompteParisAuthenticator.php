@@ -36,7 +36,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 
         $cookies = $request->cookies;
         // http://fr.lutece.paris.fr/fr/wiki/user-information.html
-        if ($cookies->has('mcpAuth')) { // Iplanetdirectorypro in test env
+        if ($cookies->has(OpenAmCaller::COOKIE_NAME)) { // Iplanetdirectorypro in test env
             $isAlreadyAuthenticated = true;
         }
 
@@ -44,7 +44,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
             return null; // skip paris auth, to let users browse anonymously
         }
 
-        $this->openAmCaller->setCookie($cookies->get('mcpAuth'));
+        $this->openAmCaller->setCookie($cookies->get(OpenAmCaller::COOKIE_NAME));
         $parisId = $this->openAmCaller->getUid();
         $this->logger->info('Creating Paris token for parisId: ' . $parisId);
 

@@ -120,16 +120,15 @@ class UsersController extends FOSRestController
      */
     public function postUserAction(Request $request)
     {
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->createUser();
+
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
         $formClass = $creatingAnAdmin
           ? ApiAdminRegistrationFormType::class
           : ApiRegistrationFormType::class
         ;
-
-        $userManager = $this->get('fos_user.user_manager');
-
-        $user = $userManager->createUser();
         $form = $this->createForm($formClass, $user);
         $form->submit($request->request->all(), false);
 
@@ -137,7 +136,21 @@ class UsersController extends FOSRestController
             return $form;
         }
 
-        $this->get('user_manager')->confirmRegistration($user, $creatingAnAdmin);
+        // We generate a confirmation token to validate email
+        $token = $this->get('fos_user.util.token_generator')->generateToken();
+
+        $userManager->updatePassword($user);
+        $user->setEnabled(true); // the user can use the website but...
+        $user->setExpiresAt((new \DateTime())->modify('+ 12 hours')); // the account expires in 12 hours (if not confirmed)
+        $user->setConfirmationToken($token);
+
+        if ($creatingAnAdmin) {
+            $this->get('capco.notify_manager')->sendAdminConfirmationEmailMessage($user);
+        } else {
+            $this->get('capco.notify_manager')->sendConfirmationEmailMessage($user);
+        }
+
+        $userManager->updateUser($user);
 
         return $user;
     }

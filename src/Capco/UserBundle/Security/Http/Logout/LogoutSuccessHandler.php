@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Security\Http\Logout;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\MonCompteParis\OpenAmCaller;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,10 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         }
 
         $response = new RedirectResponse($returnTo);
-        $response->headers->clearCookie('mcpAuth', '/', '.paris.fr');
+
+        if ($response->headers->hasCookie(OpenAmCaller::COOKIE_NAME)) {
+            $response->headers->clearCookie(OpenAmCaller::COOKIE_NAME, '/', OpenAmCaller::COOKIE_DOMAIN);
+        }
 
         return $response;
     }
