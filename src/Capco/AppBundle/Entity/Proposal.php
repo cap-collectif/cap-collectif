@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\DateTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
@@ -59,6 +60,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SummarizableTrait;
     use DraftableTrait;
     use HasResponsesTrait;
+    use DateTrait;
 
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';
@@ -1038,5 +1040,15 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
+    }
+
+    public function hasFollowers()
+    {
+        return count($this->followers) > 0;
+    }
+
+    public function countFollowers()
+    {
+        return count($this->followers);
     }
 }

@@ -792,6 +792,44 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    public function findUsersFollowingProposal()
+    {
+        $followerQuery = $this->getEntityManager()->getRepository('CapcoAppBundle:Follower');
+        $followerQuery = $followerQuery->createQueryBuilder('f2')->select('f2.user');
+//        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder('u')
+            ->select('u, p, f1')
+            ->join('u.followingProposals', 'f1')
+            ->join('f1.proposal', 'p');
+        $qb->where($qb->expr()->in(
+            'u.id', $followerQuery->getDQL()
+        ));
+
+        return $qb->getQuery()->getResult();
+//        $query = $em->createQuery(
+//            'SELECT u.id, count(distinct pv) as proposals_votes_count
+//          FROM CapcoUserBundle:User u
+//          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
+//          LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+//          WHERE pv.user = u AND pv.expired = 0 AND p.draft = 0 AND p.expired = 0
+//          GROUP BY pv.user
+//        ');
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT u
+          FROM CapcoUserBundle:User u
+          LEFT JOIN CapcoAppBundle:Follower f1 WITH f1.user = u
+          LEFT JOIN CapcoAppBundle:Proposal p1 WITH f1.proposal = p1
+          WHERE u.id IN (SELECT f2.user_id FROM CapcoAppBundle:Follower f2)
+        ');
+
+        return $query->getSQL();
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this

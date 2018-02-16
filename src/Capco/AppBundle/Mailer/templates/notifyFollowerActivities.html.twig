@@ -1,0 +1,17 @@
+{% block body_text %}
+    {% autoescape false %}
+        <p>
+            {{ 'moderation.notification.body'|trans({'%title%': contribution}, 'CapcoAppBundle') | raw }}
+        </p>
+        {% if contribution.trashedReason %}
+            <p>{{ contribution.trashedReason }}</p>
+        {% endif %}
+        {% if trashUrl is not null %}
+            <p>
+                <a href="{{ trashUrl }}">{{ 'moderation.notification.contribution'|trans({}, 'CapcoAppBundle') }}</a>
+            </p>
+        {% endif %}
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}
+F

@@ -66,8 +66,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractVote implements VoteContribution, HasAuthorInterface
 {
-    use ExpirableTrait;
-    use IdTrait;
+    use ExpirableTrait, DateTrait, IdTrait;
 
     /**
      * @Gedmo\Timestampable(on="create")

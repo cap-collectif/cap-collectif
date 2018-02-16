@@ -498,9 +498,8 @@ class ProposalRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function getProposalsWithOwnFollowersAndProject()
+    public function getProposalsWithOwnFollowersAndProject(): array
     {
-//        $qb = $this->createQueryBuilder('p')
         $qb = $this->getIsEnabledQueryBuilder('p')
         ->addSelect('followers', 'pas', 'f', 's')
         ->innerJoin('p.followers', 'followers')
@@ -511,21 +510,21 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countVotesAndCommentsBetween(\DateTime $from, \DateTime $to, $proposalId): array
+    public function getProposalsActivities($from, $to): array
     {
-        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id')
             ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
-            ->addSelect('COUNT(comments.id) as countComment')
-        ->leftJoin('proposal.comments', 'comments')
-        ->leftJoin('proposal.collectVotes', 'collectVotes')
-        ->leftJoin('proposal.selectionVotes', 'selectionVotes')
-        ->andWhere(
-            $qb->expr()->between(
-                'comments.createdAt',
-                ':from',
-                ':to'
-            ))
+            ->addSelect('COUNT(comments.id) as countComment', 'project.title as pTitle')
+            ->leftJoin('proposal.comments', 'comments')
+            ->leftJoin('proposal.collectVotes', 'collectVotes')
+            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+            ->andWhere(
+                $qb->expr()->between(
+                    'comments.createdAt',
+                    ':from',
+                    ':to'
+                ))
             ->orWhere(
                 $qb->expr()->between(
                     'selectionVotes.createdAt',
@@ -542,7 +541,95 @@ class ProposalRepository extends EntityRepository
             ->setParameters([
                 'from' => $from,
                 'to' => $to,
-                'proposalId' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->select('proposal.id')
+        ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
+        ->leftJoin('proposal.collectVotes', 'collectVotes')
+        ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+        ->andWhere(
+            $qb->expr()->between(
+                'selectionVotes.createdAt',
+                ':from',
+                ':to'
+            ))
+            ->orWhere(
+                $qb->expr()->between(
+                    'collectVotes.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countProposalCommentsCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->select('proposal.id');
+        $qb->addSelect('COUNT(comments.id) as countComment')
+            ->leftJoin('proposal.comments', 'comments')
+            ->andWhere(
+                $qb->expr()->between(
+                    'comments.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function proposalStepChangedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+//        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->createQueryBuilder('proposal');
+        $qb->select('proposal.id')
+            ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name')
+            ->leftJoin('proposal.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'sStep')
+            ->leftJoin('selections.status', 'status')
+            ->andWhere(
+                $qb->expr()->between(
+                    'selections.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->orderBy('selections.createdAt', 'DESC')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
             ]);
 
         return $qb->getQuery()->getArrayResult();
