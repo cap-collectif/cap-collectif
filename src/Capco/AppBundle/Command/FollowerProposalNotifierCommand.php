@@ -12,37 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
-    public function getFollowersWithActivities()
-    {
-        $container = $this->getContainer();
-        $em = $container->get('doctrine')->getManager();
-        $followers = $em->getRepository('CapcoAppBundle:Follower')->findAll();
-        $followersWithActivities = [];
-
-        /** @var Follower $follower */
-        foreach ($followers as $follower) {
-            try {
-                $proposalId = $follower->getProposal()->getId();
-                $userId = $follower->getUser()->getId();
-            } catch (EntityNotFoundException $e) {
-                // TODO to log
-//                dump($e->getMessage());
-//                dump($follower);
-                continue;
-            }
-
-            if (!isset($followersWithActivities[$userId])) {
-                $followersWithActivities[$userId] = new \stdClass();
-                $followersWithActivities[$userId]->proposal = [$proposalId];
-                $followersWithActivities[$userId]->email = $follower->getUser()->getEmailCanonical();
-                $followersWithActivities[$userId]->username = $follower->getUser()->getUsername();
-                continue;
-            }
-
-            array_push($followersWithActivities[$userId]->proposal, $proposalId);
-        }
-    }
-
     protected function configure()
     {
         $this
@@ -55,12 +24,99 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $notifier = $container->get('capco.follower_notifier');
-        $em = $container->get('doctrine')->getManager();
-        $proposalRepository = $em->getRepository('CapcoAppBundle:Proposal');
 
         $followersWithActivities = $this->getFollowersWithActivities();
+        $proposalActivities = $this->getProposalActivities();
+        $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
+        unset($proposalActivities);
 
-        $proposalFormrepository = $em->getRepository('CapcoAppBundle:ProposalForm');
+        foreach ($followersWithActivities as $userId => $userActivity) {
+            $notifier->onReportActivities($userActivity);
+        }
+        $nbNewsletters = count($followersWithActivities);
+        $output->writeln(
+            '<info>Notification correctly send to ' . $nbNewsletters . ' users</info>'
+        );
+
+        return 0;
+    }
+
+    private function getFollowersWithActivities(): array
+    {
+        $container = $this->getContainer();
+        $logger = $container->get('logger');
+        $em = $container->get('doctrine')->getManager();
+        $followers = $em->getRepository('CapcoAppBundle:Follower')->findAll();
+        $followersWithActivities = [];
+
+        /** @var Follower $follower */
+        foreach ($followers as $follower) {
+            try {
+                $proposalId = $follower->getProposal()->getId();
+                $userId = $follower->getUser()->getId();
+            } catch (EntityNotFoundException $e) {
+                $logger->addError(__METHOD__ . $e->getMessage());
+                continue;
+            }
+
+            if (!isset($followersWithActivities[$userId])) {
+                $followersWithActivities[$userId] = new \stdClass();
+                $followersWithActivities[$userId]->proposal = [$proposalId];
+                $followersWithActivities[$userId]->email = $follower->getUser()->getEmailCanonical();
+                $followersWithActivities[$userId]->username = $follower->getUser()->getUsername();
+                continue;
+            }
+
+        return $followersWithActivities;
+    }
+
+    private function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities)
+    {
+        /*
+         * @var UserActivity
+         */
+        foreach ($followersWithActivities as $userId => $userActivity) {
+            $userActivity->setUserProjects($projects);
+            if (!$userActivity->hasProposal()) {
+                unset($followersWithActivities[$userId]);
+                continue;
+            }
+
+            foreach ($userActivity->getUserProposals() as $proposalId) {
+                if (isset($proposalActivities[$proposalId])) {
+                    $proposal = $proposalActivities[$proposalId];
+                    if (isset($projects[$proposal['projectId']])) {
+                        $project = $userActivity->getUserProject($proposal['projectId']);
+                        if (!isset($project['proposals'])) {
+                            $project['proposals'] = [];
+                        }
+                        $project['proposals'][$proposalId] = $proposal;
+                        $userActivity->addUserProject($project, $proposal['projectId']);
+                    }
+                }
+            }
+
+            foreach ($userActivity->getUserProjects() as $projectId => $project) {
+                if (empty($project['proposals'])) {
+                    $userActivity->removeUserProject($projectId);
+                }
+            }
+
+            $userActivity->setUserProposals([]);
+            if (!$userActivity->hasUserProject()) {
+                unset($followersWithActivities[$userId]);
+                continue;
+            }
+            $followersWithActivities[$userId] = $userActivity;
+        }
+    }
+
+    private function getProposalActivities(): array
+    {
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $proposalRepository = $em->getRepository('CapcoAppBundle:Proposal');
+        $proposalFormRepository = $em->getRepository('CapcoAppBundle:ProposalForm');
         $yesterdayMidnight = new \DateTime('yesterday midnight');
         $yesterdayLasTime = (new \DateTime('today midnight'))->modify('-1 second');
         $twentyFourHoursInterval = new \DateInterval('PT24H');

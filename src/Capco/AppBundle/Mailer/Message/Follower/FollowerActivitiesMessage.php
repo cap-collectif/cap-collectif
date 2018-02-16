@@ -15,8 +15,8 @@ final class FollowerActivitiesMessage extends DefaultMessage
     ): self {
         $message = new self(
             $recipentEmail,
-            null,
-            'follower.activities.notification.subject',
+            $recipientName,
+            'notification-subject-new-proposal',
             static::getMySubjectVars(),
             '@CapcoMail/notifyFollowerActivities.html.twig',
             static::getMyTemplateVars(
