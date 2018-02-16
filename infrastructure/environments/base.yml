@@ -10,6 +10,7 @@ application:
         SYMFONY_REDIS_HOST: redis
         SYMFONY_SAML_SP: daher
         SYMFONY_LOGIN_SAML_ALLOWED: 'True'
+        SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
     volumes_from:
         - applicationdata
     links:

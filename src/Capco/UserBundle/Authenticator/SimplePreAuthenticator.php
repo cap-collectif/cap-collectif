@@ -38,7 +38,9 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
 
     public function supportsToken(TokenInterface $token, $providerKey): bool
     {
-        return $this->getCurrentAuthenticator()->supportsToken($token, $providerKey);
+        $authenticator = $this->getCurrentAuthenticator();
+
+        return $authenticator ? $authenticator->supportsToken($token, $providerKey) : false;
     }
 
     private function getCurrentAuthenticator()
