@@ -38,7 +38,7 @@ export const LoginButton = React.createClass({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClick: () => {
-    if (window.location.href.indexOf.indexOf('paris.fr') > -1) {
+    if (window.location.href.indexOf('paris.fr') > -1) {
       const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
       const monCompte_backUrlAuth = 'http://capco.paris.fr/login-paris';
       const wH = 600;
