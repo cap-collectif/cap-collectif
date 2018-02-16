@@ -53,8 +53,6 @@ class OpenAmCaller
         }
         curl_close($ch);
         $json = json_decode($result, true);
-        var_dump($json);
-        die;
 
         return [
           'username' => $json['username'],
