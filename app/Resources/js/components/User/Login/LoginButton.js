@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
+import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
 import type { Dispatch } from '../../../types';
 
@@ -40,9 +41,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClick: () => {
     if (window.location.href.indexOf('paris.fr') > -1) {
       const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-      const monCompte_backUrlAuth = `${window.location.scheme}://${
-        window.location.host
-      }/login-paris`;
+      const monCompte_backUrlAuth = `${baseUrl}/login-paris`;
       const wH = 600;
       const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
       window.open(
