@@ -11,7 +11,36 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
-    public function getFollowersWithActivities(): array
+    protected function configure()
+    {
+        $this
+            ->setName('capco:follower-proposal-notifier')
+            ->setDescription('Send email to followers of proposals')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $container = $this->getContainer();
+        $notifier = $container->get('capco.follower_notifier');
+
+        $followersWithActivities = $this->getFollowersWithActivities();
+        $proposalActivities = $this->getProposalActivities();
+        $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
+        unset($proposalActivities);
+
+        foreach ($followersWithActivities as $userId => $userActivity) {
+            $notifier->onReportActivities($userActivity);
+        }
+        $nbNewsletters = count($followersWithActivities);
+        $output->writeln(
+            '<info>Notification correctly send to ' . $nbNewsletters . ' users</info>'
+        );
+
+        return 0;
+    }
+
+    private function getFollowersWithActivities(): array
     {
         $container = $this->getContainer();
         $logger = $container->get('logger');
@@ -25,7 +54,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $proposalId = $follower->getProposal()->getId();
                 $userId = $follower->getUser()->getId();
             } catch (EntityNotFoundException $e) {
-                $logger->addError(__METHOD__ . $e->getMessage() . var_export($follower, true));
+                $logger->addError(__METHOD__ . $e->getMessage());
                 continue;
             }
             if (!filter_var($follower->getUser()->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
@@ -50,9 +79,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         return $followersWithActivities;
     }
 
-    public function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities)
+    private function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities)
     {
-        /**
+        /*
          * @var UserActivity
          */
         foreach ($followersWithActivities as $userId => $userActivity) {
@@ -93,7 +122,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         return $followersWithActivities;
     }
 
-    protected function configure()
+    private function getProposalActivities(): array
     {
         $this
             ->setName('capco:follower-proposal-notifier')
