@@ -46,9 +46,9 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlAuthenticator;
         }
-        // if ($this->toggleManager->isActive('login_paris')) {
-        return $this->parisAuthenticator;
-        // }
+        if ($this->toggleManager->isActive('login_paris')) {
+            return $this->parisAuthenticator;
+        }
 
         return null;
     }

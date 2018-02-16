@@ -21,6 +21,7 @@ class Manager
         'login_facebook',
         'login_gplus',
         'login_saml',
+        'login_paris',
         'members_list',
         'newsletter',
         'profiles',
@@ -107,7 +108,7 @@ class Manager
 
     public function hasOneActive($names)
     {
-        if (count($names) === 0) {
+        if (0 === count($names)) {
             return true;
         }
 
@@ -157,7 +158,7 @@ class Manager
     {
         $toggle = new Toggle($name, $conditions);
 
-        if ($status === Toggle::INACTIVE) {
+        if (Toggle::INACTIVE === $status) {
             $toggle->deactivate();
         } else {
             $toggle->activate($status);

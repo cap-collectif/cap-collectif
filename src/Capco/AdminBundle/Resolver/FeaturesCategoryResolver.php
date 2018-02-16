@@ -112,8 +112,12 @@ class FeaturesCategoryResolver
             }
         }
 
-        if ($category === 'settings.modules' && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
+        if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_SAML_ALLOWED')) {
             $toggles['login_saml'] = $this->manager->isActive('login_saml');
+        }
+
+        if ('settings.modules' === $category && EnvHelper::get('SYMFONY_LOGIN_PARIS_ALLOWED')) {
+            $toggles['login_paris'] = $this->manager->isActive('login_paris');
         }
 
         return $toggles;
@@ -132,7 +136,7 @@ class FeaturesCategoryResolver
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
-            if (strrpos($name, 'pages.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
+            if (0 === strrpos($name, 'pages.') && $this->manager->hasOneActive($cat['conditions'])) {
                 $categories[] = $name;
             }
         }
@@ -144,7 +148,7 @@ class FeaturesCategoryResolver
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
-            if (strrpos($name, 'settings.') === 0 && $this->manager->hasOneActive($cat['conditions'])) {
+            if (0 === strrpos($name, 'settings.') && $this->manager->hasOneActive($cat['conditions'])) {
                 $categories[] = $name;
             }
         }
@@ -154,10 +158,10 @@ class FeaturesCategoryResolver
 
     public function getGroupNameForCategory($category)
     {
-        if (strrpos($category, 'settings.') === 0) {
+        if (0 === strrpos($category, 'settings.')) {
             return 'admin.group.parameters';
         }
-        if (strrpos($category, 'pages.') === 0) {
+        if (0 === strrpos($category, 'pages.')) {
             return 'admin.group.pages';
         }
     }
