@@ -11,6 +11,7 @@
     }*/
   },
   "plugins": [
+    "styled-components",
     "relay",
     "transform-class-properties",
     ["react-intl", {

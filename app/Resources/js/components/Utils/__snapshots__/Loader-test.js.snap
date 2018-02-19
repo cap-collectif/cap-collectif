@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader /> renders Loader 1`] = `
+<Loader__Container>
+  <__styled-spinkit__Circle
+    color="#333"
+    size={40}
+  />
+</Loader__Container>
+`;
+
+exports[`<Loader /> renders LoaderContainer 1`] = `
+.c0 {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+<div
+  className="col-xs-2 col-xs-offset-5 c0"
+/>
+`;
+
+exports[`<Loader /> renders nothing 1`] = `null`;

@@ -87,7 +87,6 @@ exports.config = {
       joinTo: {
         'css/style.css': [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
-          'bower_components/css-spinners/css/spinners.css',
           /^node_modules/,
           'app/Resources/scss/style.scss',
         ],
@@ -99,7 +98,6 @@ exports.config = {
         ],
         'css/style-admin.css': [
           'app/Resources/scss/style-admin.scss',
-          'bower_components/css-spinners/css/spinners.css',
           /^node_modules/,
         ],
       },
