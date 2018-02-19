@@ -45,7 +45,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
 
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.11.0
+ENV NODE_VERSION 8.9.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
