@@ -2,7 +2,8 @@
   "name": "platform",
   "private": true,
   "scripts": {
-    "test": "jest --coverage --maxWorkers=4",
+    "test": "jest --notify",
+    "test:ci": "jest --coverage --ci --maxWorkers=4",
     "test:watch": "jest --watchAll",
     "typecheck": "flow check",
     "typecheck:coverage": "flow-coverage-report --threshold 70 -i 'app/Resources/js/**/*.js'",
