@@ -56,12 +56,20 @@
   },
   "bundlesize": [
     {
+      "path": "./web/css/style.css",
+      "maxSize": "65 kB"
+    },
+    {
+      "path": "./web/css/style-admin.css",
+      "maxSize": "25 kB"
+    },
+    {
       "path": "./web/js/app.js",
-      "maxSize": "310KB"
+      "maxSize": "310 kB"
     },
     {
       "path": "./web/js/vendor.js",
-      "maxSize": "1.7MB"
+      "maxSize": "1.8 MB"
     }
   ],
   "prettier": {
