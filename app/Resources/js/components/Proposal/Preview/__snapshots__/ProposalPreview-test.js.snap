@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
+<Col
+  bsClass="col"
+  componentClass="li"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <div
+    className="block block--bordered proposal__preview"
+    id="proposal-undefined"
+  >
+    <div
+      className="box bg-vip"
+    >
+      <ProposalPreviewHeader
+        proposal={
+          Object {
+            "author": Object {
+              "vip": true,
+            },
+            "category": Object {},
+            "commentsCount": 5,
+            "referer": "http://capco.test",
+            "selections": Array [],
+            "viewerCanSeeEvaluation": true,
+            "votableStepId": "step2",
+            "votesByStepId": Object {
+              "collectstep1": Array [],
+              "selectionstep1": Array [],
+            },
+            "votesCountByStepId": Object {
+              "2": 0,
+            },
+          }
+        }
+      />
+      <Connect(ProposalPreviewBody)
+        proposal={
+          Object {
+            "author": Object {
+              "vip": true,
+            },
+            "category": Object {},
+            "commentsCount": 5,
+            "referer": "http://capco.test",
+            "selections": Array [],
+            "viewerCanSeeEvaluation": true,
+            "votableStepId": "step2",
+            "votesByStepId": Object {
+              "collectstep1": Array [],
+              "selectionstep1": Array [],
+            },
+            "votesCountByStepId": Object {
+              "2": 0,
+            },
+          }
+        }
+        showNullEstimation={true}
+        showThemes={true}
+      />
+      <div
+        className="proposal__buttons text-center"
+      >
+        <ProposalPreviewVote
+          proposal={
+            Object {
+              "author": Object {
+                "vip": true,
+              },
+              "category": Object {},
+              "commentsCount": 5,
+              "referer": "http://capco.test",
+              "selections": Array [],
+              "viewerCanSeeEvaluation": true,
+              "votableStepId": "step2",
+              "votesByStepId": Object {
+                "collectstep1": Array [],
+                "selectionstep1": Array [],
+              },
+              "votesCountByStepId": Object {
+                "2": 0,
+              },
+            }
+          }
+        />
+        <ProposalFollowButton
+          proposal={
+            Object {
+              "author": Object {
+                "vip": true,
+              },
+              "category": Object {},
+              "commentsCount": 5,
+              "referer": "http://capco.test",
+              "selections": Array [],
+              "viewerCanSeeEvaluation": true,
+              "votableStepId": "step2",
+              "votesByStepId": Object {
+                "collectstep1": Array [],
+                "selectionstep1": Array [],
+              },
+              "votesCountByStepId": Object {
+                "2": 0,
+              },
+            }
+          }
+        />
+      </div>
+    </div>
+    <ProposalPreviewFooter
+      proposal={
+        Object {
+          "author": Object {
+            "vip": true,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step2",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
+        }
+      }
+      showComments={true}
+      showVotes={true}
+      stepId="step2"
+    />
+    <ProposalStatus
+      proposal={
+        Object {
+          "author": Object {
+            "vip": true,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step2",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
+        }
+      }
+      stepId="step2"
+    />
+  </div>
+</Col>
+`;
+
+exports[`<ProposalPreview /> should render a proposal preview with different step id and vip false 1`] = `
+<Col
+  bsClass="col"
+  componentClass="li"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <div
+    className="block block--bordered proposal__preview"
+    id="proposal-undefined"
+  >
+    <div
+      className="box"
+    >
+      <ProposalPreviewHeader
+        proposal={
+          Object {
+            "author": Object {
+              "vip": false,
+            },
+            "category": Object {},
+            "commentsCount": 5,
+            "referer": "http://capco.test",
+            "selections": Array [],
+            "viewerCanSeeEvaluation": true,
+            "votableStepId": "step3",
+            "votesByStepId": Object {
+              "collectstep1": Array [],
+              "selectionstep1": Array [],
+            },
+            "votesCountByStepId": Object {
+              "2": 0,
+            },
+          }
+        }
+      />
+      <Connect(ProposalPreviewBody)
+        proposal={
+          Object {
+            "author": Object {
+              "vip": false,
+            },
+            "category": Object {},
+            "commentsCount": 5,
+            "referer": "http://capco.test",
+            "selections": Array [],
+            "viewerCanSeeEvaluation": true,
+            "votableStepId": "step3",
+            "votesByStepId": Object {
+              "collectstep1": Array [],
+              "selectionstep1": Array [],
+            },
+            "votesCountByStepId": Object {
+              "2": 0,
+            },
+          }
+        }
+        showNullEstimation={true}
+        showThemes={true}
+      />
+      <div
+        className="proposal__buttons text-center"
+      >
+        <ProposalPreviewVote
+          proposal={
+            Object {
+              "author": Object {
+                "vip": false,
+              },
+              "category": Object {},
+              "commentsCount": 5,
+              "referer": "http://capco.test",
+              "selections": Array [],
+              "viewerCanSeeEvaluation": true,
+              "votableStepId": "step3",
+              "votesByStepId": Object {
+                "collectstep1": Array [],
+                "selectionstep1": Array [],
+              },
+              "votesCountByStepId": Object {
+                "2": 0,
+              },
+            }
+          }
+        />
+        <ProposalFollowButton
+          proposal={
+            Object {
+              "author": Object {
+                "vip": false,
+              },
+              "category": Object {},
+              "commentsCount": 5,
+              "referer": "http://capco.test",
+              "selections": Array [],
+              "viewerCanSeeEvaluation": true,
+              "votableStepId": "step3",
+              "votesByStepId": Object {
+                "collectstep1": Array [],
+                "selectionstep1": Array [],
+              },
+              "votesCountByStepId": Object {
+                "2": 0,
+              },
+            }
+          }
+        />
+      </div>
+    </div>
+    <ProposalPreviewFooter
+      proposal={
+        Object {
+          "author": Object {
+            "vip": false,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step3",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
+        }
+      }
+      showComments={true}
+      showVotes={true}
+      stepId="step3"
+    />
+    <ProposalStatus
+      proposal={
+        Object {
+          "author": Object {
+            "vip": false,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step3",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
+        }
+      }
+      stepId="step3"
+    />
+  </div>
+</Col>
+`;
