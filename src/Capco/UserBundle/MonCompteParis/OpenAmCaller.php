@@ -4,7 +4,7 @@ namespace Capco\UserBundle\MonCompteParis;
 
 class OpenAmCaller
 {
-    const COOKIE_NAME = 'mcpAuth';
+    const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
     const COOKIE_DOMAIN = '.paris.fr';
     const API_URL = 'https://moncompte.paris.fr/v69/json/';
 
@@ -34,11 +34,15 @@ class OpenAmCaller
 
         $json = json_decode($result, true);
 
+        if (false === $json['valid']) {
+            throw new \Exception('Token not valid.');
+        }
+
         return $json['uid'];
     }
 
     // OR http://fr.lutece.paris.fr/fr/wiki/gru-appeldirect-identitystore.html
-    public function getUserInformations(string $uid)
+    public function getUserInformations(string $uid): array
     {
         $ch = curl_init();
 

@@ -24,11 +24,6 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         $this->openAmCaller = $openAmCaller;
     }
 
-    public function findUsernameInResponse(array $attributes)
-    {
-        return $attributes['result']['token'];
-    }
-
     public function createToken(Request $request, $providerKey)
     {
         $isOnLoginUrl = $this->httpUtils->checkRequestPath($request, '/login-paris');
@@ -36,29 +31,29 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 
         $cookies = $request->cookies;
 
-        // http://fr.lutece.paris.fr/fr/wiki/user-information.html
-        if ($cookies->has(OpenAmCaller::COOKIE_NAME)) { // Iplanetdirectorypro in test env
-            $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
-            $this->openAmCaller->setCookie($cookieValue);
-            try {
-                $parisId = $this->openAmCaller->getUid();
-                $isAlreadyAuthenticated = true;
-            } catch (\Exception $e) {
-                // Token not valid
-                $this->logger->info('Failed to get uuid from cookie: ' . $cookieValue);
-
-                return null;
-            }
+        if ($cookies->has(OpenAmCaller::COOKIE_NAME)) {
+            $isAlreadyAuthenticated = true;
         }
 
         if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
             return null; // skip paris auth, to let users browse anonymously
         }
 
+        $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
+        $this->openAmCaller->setCookie($cookieValue);
+        try {
+            $parisId = $this->openAmCaller->getUid();
+            $isAlreadyAuthenticated = true;
+        } catch (\Exception $e) {
+            // Token not valid
+            $this->logger->error('Failed to get uuid from cookie: ' . $cookieValue);
+
+            return null;
+        }
         $this->logger->info('Creating Paris token for parisId: ' . $parisId);
 
         $token = new ParisToken($parisId);
-        $token->setAttributes([]);
+        // $token->setAttributes([]);
 
         return $token;
     }
@@ -69,7 +64,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         $user = $userProvider->loadUserByUsername($username);
 
         $authenticatedToken = new ParisToken($user, $user->getRoles());
-        $authenticatedToken->setAttributes($token->getAttributes());
+        //$authenticatedToken->setAttributes($token->getAttributes());
 
         return $authenticatedToken;
     }
