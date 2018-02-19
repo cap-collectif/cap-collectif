@@ -2351,9 +2351,9 @@ brunch-skeletons@~0.1.4:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/brunch-skeletons/-/brunch-skeletons-0.1.6.tgz#f15102a1b6babc964ce3d7e3c141dc0daa9d28ac"
 
-brunch@^2.10.10:
-  version "2.10.12"
-  resolved "https://registry.yarnpkg.com/brunch/-/brunch-2.10.12.tgz#3aa0c515c216beb2e53a0c35a30546d0a04cee50"
+brunch@2.10.10:
+  version "2.10.10"
+  resolved "https://registry.yarnpkg.com/brunch/-/brunch-2.10.10.tgz#89d14bfbd7ca0c2e326167c2625ce1d4c937d4f8"
   dependencies:
     anymatch "~1.3"
     anysort "~1.0"
