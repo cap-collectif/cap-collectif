@@ -340,3 +340,18 @@ Capco\UserBundle\Entity\User:
         Media: null
         newEmailToConfirm: new-email-to-confirm@test.com
         newEmailConfirmationToken: check-my-new-email-token
+
+    user516:
+        id: 'user516'
+        username: mauriau
+        firstname: Maxime
+        lastname: AURIAU
+        email: maxime.auriau@cap-collectif.com
+        enabled: true
+        userType: '@UserType1'
+        plainPassword: toto
+        roles:
+         - 'ROLE_SUPER_ADMIN'
+        Media: '@MediaUser5'
+        vip: true
+        confirmationToken: ~
