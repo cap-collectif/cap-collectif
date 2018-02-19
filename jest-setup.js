@@ -14,7 +14,7 @@ global.$ = require('jquery')(window);
 global.window.__SERVER__ = false;
 
 const throwError = (warning) => {
-  if (!/node-uuid: crypto not usable|You are manually calling|Unknown props/.test(warning)) { // fix warnings and remove this
+  if (!/Shallow renderer has been moved to react-test-renderer|Accessing createClass via the main React package is deprecated|Accessing PropTypes via the main React package is deprecated|node-uuid: crypto not usable|You are manually calling|Unknown props/.test(warning)) { // fix warnings and remove this
     throw new Error(warning);
   }
 };

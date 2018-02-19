@@ -4,6 +4,7 @@ exports[`<ProposalDetailLikersTooltipLabel /> should render a formatted message 
 <Truncate
   ellipsis="…"
   lines={1}
+  trimWhitespace={false}
 >
   <FormattedMessage
     id="proposal.likers.label"
@@ -32,6 +33,7 @@ exports[`<ProposalDetailLikersTooltipLabel /> should render two formatted messag
   <Truncate
     ellipsis="…"
     lines={1}
+    trimWhitespace={false}
   >
     <div
       dangerouslySetInnerHTML={
