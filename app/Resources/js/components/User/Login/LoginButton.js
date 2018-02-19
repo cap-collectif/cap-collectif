@@ -39,9 +39,9 @@ export const LoginButton = React.createClass({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onClick: () => {
-    if (window.location.href.indexOf('paris.fr') > -1) {
+    if (window.location.host.indexOf('paris.fr') > -1) {
       const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-      const monCompte_backUrlAuth = `${baseUrl}/login-paris`;
+      const monCompte_backUrlAuth = `${baseUrl}/login-paris?_destination=${window.location.href}`;
       const wH = 600;
       const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
       window.open(
@@ -49,18 +49,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         '_blank',
         `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
       );
-
-      // $.fancybox({
-      //   href: `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${monCompte_backUrlAuth}`,
-      //   type: "iframe",
-      //   padding: 0,
-      //   margin: 50,
-      //   maxWidth: wW,
-      //   maxHeight: wH,
-      //   fitToView: false,
-      //   width: '90%',
-      //   height: '90%',
-      // });
     } else {
       dispatch(showLoginModal());
     }

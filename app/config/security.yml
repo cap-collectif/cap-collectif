@@ -60,8 +60,6 @@ security:
                 authenticator: capco.simple_preauth.authenticator
                 provider: simple_preauth
             form_login:
-                # authenticator: time_authenticator
-                # SimpleFormAuthenticatorInterface
                 check_path: /login_check
                 username_parameter: username
                 password_parameter: password
