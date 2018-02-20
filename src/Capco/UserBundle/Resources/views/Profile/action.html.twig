@@ -12,17 +12,21 @@
                     <a href="{{ path('capco_profile_edit') }}">{{ 'user.profile.edit.profile' | trans({}, 'CapcoAppBundle') }}</a>
                 </li>
             {% endif %}
+            {% if is_feature_enabled('login_paris') == false %}
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit_account' %}active{% endif %} ">
                 <a href="{{ path('capco_profile_edit_account') }}">{{ 'user.profile.edit.account' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
+            {% endif %}
             {% if is_feature_enabled('phone_confirmation') %}
                 <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit_mobile' %}active{% endif %} ">
                     <a href="{{ path('capco_profile_edit_mobile') }}">{{ 'user.profile.edit.mobile' | trans({}, 'CapcoAppBundle') }}</a>
                 </li>
             {% endif %}
+            {% if is_feature_enabled('login_paris') == false %}
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_change_password' %}active{% endif %} ">
                 <a href="{{ path('capco_change_password') }}">{{ 'user.profile.edit.password' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
+            {% endif %}
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_notifications_edit_account' %}active{% endif %} ">
                 <a href="{{ path('capco_profile_notifications_edit_account') }}">{{ 'user.profile.notifications.title' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
