@@ -42,12 +42,17 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
+        if (!$cookieValue) {
+            $this->logger->error('Skipping MonCompteParisAuthenticator because no cookie.');
+
+            return null;
+        }
+
         $this->openAmCaller->setCookie($cookieValue);
         try {
             $parisId = $this->openAmCaller->getUid();
             $isAlreadyAuthenticated = true;
         } catch (\Exception $e) {
-            // Token not valid
             $this->logger->error('Failed to get uuid from cookie: {cookie}', ['cookie' => $cookieValue]);
 
             return null;
