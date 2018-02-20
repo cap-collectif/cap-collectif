@@ -1,5 +1,5 @@
 [version]
-0.62.0
+0.66.0
 
 [lints]
 all=warn
@@ -20,7 +20,6 @@ flow-typed
 [options]
 emoji=true
 experimental.const_params=true
-experimental.strict_type_args=true
 module.use_strict=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable

@@ -157,6 +157,7 @@ export class ImageUpload extends React.Component<Props> {
             {value && (
               <Input
                 type="checkbox"
+                id={`${id}_delete`}
                 name="image-uploader__delete"
                 onChange={this.onToggleDelete}
                 // $FlowFixMe

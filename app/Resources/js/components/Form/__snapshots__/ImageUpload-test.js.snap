@@ -90,6 +90,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
       />
     </div>
     <InjectIntl(ReactBootstrapInput)
+      id="id_delete"
       name="image-uploader__delete"
       onChange={[Function]}
       type="checkbox"

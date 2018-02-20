@@ -55,7 +55,7 @@ const acceptedMimeTypes = [
 
 type Props = {
   intl: IntlShape,
-  name: ?string,
+  name?: ?string,
   image?: ?string,
   id: ?string,
   children?: any,
@@ -75,7 +75,7 @@ type Props = {
   isOtherAllowed?: boolean,
   label?: string | any,
   type: ?string,
-  errors?: Array<string>,
+  errors?: any,
   choices?: Array<any>,
   onChange?: any,
   radioChecked?: boolean,
