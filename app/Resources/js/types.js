@@ -27,6 +27,7 @@ export type FeatureToggles = {
   login_facebook: boolean,
   login_gplus: boolean,
   login_saml: boolean,
+  login_paris: boolean,
   members_list: boolean,
   newsletter: boolean,
   profiles: boolean,
@@ -60,6 +61,7 @@ export type FeatureToggle =
   | 'login_facebook'
   | 'login_gplus'
   | 'login_saml'
+  | 'login_paris'
   | 'members_list'
   | 'newsletter'
   | 'profiles'

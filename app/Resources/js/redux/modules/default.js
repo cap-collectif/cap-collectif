@@ -38,6 +38,7 @@ export type State = {
 
 export const features = {
   login_saml: false,
+  login_paris: false,
   blog: false,
   calendar: false,
   ideas: false,
