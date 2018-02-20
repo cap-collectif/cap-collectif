@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity\Questions;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -53,6 +52,7 @@ abstract class AbstractQuestion
     /**
      * Needed by sonata admin.
      *
+     * @Assert\NotNull()
      * @ORM\OneToOne(
      *  targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion",
      *  mappedBy="question",
@@ -63,7 +63,6 @@ abstract class AbstractQuestion
     protected $questionnaireAbstractQuestion;
 
     /**
-     * @var \DateTime
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
@@ -81,7 +80,6 @@ abstract class AbstractQuestion
     protected $required = false;
 
     /**
-     * @var bool
      * @ORM\Column(name="private", type="boolean", nullable=false)
      */
     protected $private = false;
@@ -112,29 +110,16 @@ abstract class AbstractQuestion
         return $this;
     }
 
-    /**
-     * Get helpText.
-     *
-     * @return string
-     */
-    public function getHelpText()
+    public function getHelpText(): ?string
     {
         return $this->helpText;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getResponses()
     {
         return $this->responses;
     }
 
-    /**
-     * @param ArrayCollection $responses
-     *
-     * @return $this
-     */
     public function setResponses($responses)
     {
         $this->responses = $responses;
@@ -142,70 +127,43 @@ abstract class AbstractQuestion
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRequired()
+    public function isRequired(): bool
     {
         return $this->required;
     }
 
-    /**
-     * @param bool $required
-     *
-     * @return $this
-     */
-    public function setRequired($required)
+    public function setRequired(bool $required): self
     {
         $this->required = $required;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getQuestionnaireAbstractQuestion()
+    public function getQuestionnaireAbstractQuestion(): ?QuestionnaireAbstractQuestion
     {
         return $this->questionnaireAbstractQuestion;
     }
 
-    /**
-     * @param mixed $questionnaireAbstractQuestion
-     *
-     * @return $this
-     */
-    public function setQuestionnaireAbstractQuestion($questionnaireAbstractQuestion)
+    public function setQuestionnaireAbstractQuestion(QuestionnaireAbstractQuestion $questionnaireAbstractQuestion): self
     {
         $this->questionnaireAbstractQuestion = $questionnaireAbstractQuestion;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isPrivate(): bool
     {
         return $this->private;
     }
 
-    /**
-     * @param bool $private
-     *
-     * @return $this
-     */
-    public function setPrivate(bool $private)
+    public function setPrivate(bool $private): self
     {
         $this->private = $private;
 
         return $this;
     }
 
-    /**
-     * @return null|int
-     */
-    public function getType()
+    public function getType(): ?int
     {
         return $this->type;
     }
@@ -260,24 +218,14 @@ abstract class AbstractQuestion
         }
     }
 
-    /**
-     * Get questionnaire id.
-     *
-     * @return int
-     */
-    public function getQuestionnaireId()
+    public function getQuestionnaireId(): ?int
     {
         $questionnaire = $this->getQuestionnaire();
 
         return $questionnaire ? $questionnaire->getId() : null;
     }
 
-    /**
-     * Get question id.
-     *
-     * @return int
-     */
-    public function getQuestionId()
+    public function getQuestionId(): ?int
     {
         $question = $this->getQuestion();
 

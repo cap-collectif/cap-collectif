@@ -220,7 +220,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "id": "proposalForm1",
           "questions": [
             {
-              "id": @string@,
+              "id": "25",
               "position": 1,
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
@@ -229,7 +229,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
               "type": "text"
             },
             {
-              "id": @string@,
+              "id": "24",
               "position": 2,
               "title": "Documents à remplir",
               "helpText": "5 fichiers max",

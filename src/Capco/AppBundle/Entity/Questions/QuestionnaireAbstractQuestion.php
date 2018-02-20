@@ -73,60 +73,26 @@ class QuestionnaireAbstractQuestion
         return 'undefined question';
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set questionnaire.
-     *
-     * @param $questionnaire
-     *
-     * @return QuestionnaireAbstractQuestion
-     */
-    public function setQuestionnaire(Questionnaire $questionnaire = null)
+    public function setQuestionnaire(Questionnaire $questionnaire = null): self
     {
         $this->questionnaire = $questionnaire;
 
         return $this;
     }
 
-    /**
-     * Get questionnaire.
-     *
-     * @return Questionnaire
-     */
-    public function getQuestionnaire()
+    public function getQuestionnaire(): ?Questionnaire
     {
         return $this->questionnaire;
     }
 
-    /**
-     * Set question.
-     *
-     * @param AbstractQuestion $question
-     *
-     * @return null|QuestionnaireAbstractQuestion
-     */
-    public function setQuestion(AbstractQuestion $question)
+    public function setQuestion(AbstractQuestion $question): self
     {
         $this->question = $question;
 
         return $this;
     }
 
-    /**
-     * Get question.
-     *
-     * @return null|AbstractQuestion
-     */
-    public function getQuestion()
+    public function getQuestion(): ?AbstractQuestion
     {
         return $this->question;
     }
@@ -148,7 +114,7 @@ class QuestionnaireAbstractQuestion
         return $this->registrationForm;
     }
 
-    public function setRegistrationForm(RegistrationForm $registrationForm = null)
+    public function setRegistrationForm(RegistrationForm $registrationForm = null): self
     {
         $this->registrationForm = $registrationForm;
 
