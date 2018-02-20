@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button } from 'react-bootstrap';
+import { Dropdown,DropdownButton, DropdownToggle, DropdownMenu, DropdownItem,MenuItem,Item , Panel, ListGroup, ListGroupItem, FormGroup, Radio} from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
 import type { ProposalFollowButton_proposal } from './__generated__/ProposalFollowButton_proposal.graphql';
@@ -50,55 +50,37 @@ export class ProposalFollowButton extends React.Component<Props, State> {
 
     return (
       <LoginOverlay>
-        <Button
-          className={`${style}`}
-          bsStyle={`${bsStyle}`}
-          onMouseOver={() => {
-            if (proposal.viewerIsFollowing) {
-              this.setState({
-                isHovering: true,
-              });
-            }
-          }}
-          onMouseOut={() => {
-            if (proposal.viewerIsFollowing) {
-              this.setState({
-                isHovering: false,
-              });
-            }
-          }}
-          onClick={() => {
-            if (proposal.viewerIsFollowing) {
-              return UnfollowProposalMutation.commit({ input: { proposalId: proposal.id } }).then(
-                () => {
-                  AppDispatcher.dispatch({
-                    actionType: UPDATE_ALERT,
-                    alert: {
-                      bsStyle: 'success',
-                      content: 'flash-message-unfollow',
-                    },
-                  });
-                  return true;
-                },
-              );
-            }
-            return FollowProposalMutation.commit({ input: { proposalId: proposal.id } }).then(
-              () => {
-                AppDispatcher.dispatch({
-                  actionType: UPDATE_ALERT,
-                  alert: {
-                    bsStyle: 'success',
-                    content: 'flash-message-following',
-                  },
-                });
-
-                return true;
-              },
-            );
-          }}
-          id={buttonFollowId}>
-          <FormattedMessage id={buttonText} />
-        </Button>
+        <span className="mb-0 proposal-follow-dropdown">
+        <DropdownButton
+          className="mb-0"
+          id={buttonFollowId}
+          title={
+            <FormattedMessage id={buttonText} />
+          }>
+          <Panel header={<FormattedMessage id="to-be-notified-of-new-of" />} className="mb-0 bn">
+            <FormGroup className="bn mb-0">
+              <ListGroup className="mb-0">
+                <ListGroupItem className="">
+                <Radio  name="radioGroup" inline>
+                  Label 1
+                </Radio>
+                </ListGroupItem>
+                <ListGroupItem className="">
+                <Radio  name="radioGroup" inline>
+                  Label 2
+                </Radio>
+                </ListGroupItem>
+                <ListGroupItem className="">
+                <Radio  name="radioGroup" inline>
+                  Label 3
+                </Radio>
+                </ListGroupItem>
+              </ListGroup>
+            </FormGroup>
+          </Panel>
+          <MenuItem eventKey="1" className="mt--1" ><FormattedMessage id="unfollow"/></MenuItem>
+        </DropdownButton>
+        </span>
       </LoginOverlay>
     );
   }

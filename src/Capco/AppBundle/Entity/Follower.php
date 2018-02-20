@@ -42,6 +42,9 @@ class Follower
      */
     protected $proposal;
 
+    /** @ORM\Column(name="notified_of", type="string", nullable=true) */
+    protected $notifiedOf;
+
     public function getFollowedAt(): \DateTime
     {
         return $this->followedAt;
@@ -86,5 +89,17 @@ class Follower
     public function deleteFollower()
     {
         $this->proposal->removeFollower($this);
+    }
+
+    public function getNotifiedOf():string
+    {
+        return $this->notifiedOf;
+    }
+
+    public function setNotifiedOf(string $notifiedOf):self
+    {
+        $this->notifiedOf = $notifiedOf;
+
+        return $this;
     }
 }
