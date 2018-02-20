@@ -14,12 +14,11 @@ type PassedProps = {
   placeholder: string,
   formName: string,
   disabled: boolean,
-  error: ?string,
 };
 type DefaultProps = { disabled: boolean };
 type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
-const autocompleteItem = ({
+const renderSuggestion = ({
   formattedSuggestion,
 }: {
   formattedSuggestion: { mainText: string, secondaryText: string },
@@ -39,7 +38,7 @@ class Address extends React.Component<Props> {
     this.props.updateAddressValue(null);
   };
 
-  handleAddressChange = address => {
+  handleAddressChange = (address: ?string) => {
     geocodeByAddress(address)
       .then(results => {
         const addressToSend = JSON.stringify(results);
@@ -54,7 +53,7 @@ class Address extends React.Component<Props> {
   };
 
   render() {
-    const { error, placeholder, value, id, onChange } = this.props;
+    const { placeholder, value, id, onChange } = this.props;
     return (
       <PlacesAutocomplete
         inputProps={{
@@ -66,34 +65,17 @@ class Address extends React.Component<Props> {
           type: 'text',
           id,
         }}
-        autocompleteItem={autocompleteItem}
+        renderSuggestion={renderSuggestion}
         onEnterKeyDown={this.handleAddressChange}
         onSelect={this.handleAddressChange}
         onError={() => {
           this.resetAddressField();
         }}
         classNames={{
-          root: `${error ? 'form-control-warning' : ''}`,
           input: 'form-control',
-          autocompleteContainer: {
-            zIndex: 9999,
-            position: 'absolute',
-            top: '100%',
-            backgroundColor: 'white',
-            border: '1px solid #555555',
-            width: '100%',
-          },
-          autocompleteItem: {
-            zIndex: 9999,
-            backgroundColor: '#ffffff',
-            padding: '10px',
-            color: '#555555',
-            cursor: 'pointer',
-          },
-          autocompleteItemActive: {
-            zIndex: 9999,
-            backgroundColor: '#fafafa',
-          },
+          autocompleteContainer: 'autocompleteContainer',
+          autocompleteItem: 'autocompleteItem',
+          autocompleteItemActive: 'autocompleteItemActive',
         }}
       />
     );
