@@ -87,6 +87,7 @@ class QuestionnaireAbstractQuestion
 
     public function setQuestion(AbstractQuestion $question): self
     {
+        $question->setQuestionnaireAbstractQuestion($this);
         $this->question = $question;
 
         return $this;

@@ -20,8 +20,7 @@ class QuestionnaireAbstractQuestionType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new QuestionSubscriber($builder->getFormFactory(), $this->arrayHydrator));
-        // Not used but avoid "extra fields" error
+        $builder->addEventSubscriber(new AddQuestionFieldSubscriber($builder->getFormFactory(), $this->arrayHydrator));
         $builder->add('position', IntegerType::class);
     }
 

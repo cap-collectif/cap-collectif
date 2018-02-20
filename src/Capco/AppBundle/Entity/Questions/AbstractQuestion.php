@@ -146,7 +146,6 @@ abstract class AbstractQuestion
 
     public function setQuestionnaireAbstractQuestion(QuestionnaireAbstractQuestion $questionnaireAbstractQuestion): self
     {
-        $questionnaireAbstractQuestion->setQuestion($this);
         $this->questionnaireAbstractQuestion = $questionnaireAbstractQuestion;
 
         return $this;

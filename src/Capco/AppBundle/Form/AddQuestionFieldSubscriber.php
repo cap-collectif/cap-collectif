@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -13,7 +12,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class QuestionSubscriber implements EventSubscriberInterface
+class AddQuestionFieldSubscriber implements EventSubscriberInterface
 {
     protected $factory;
     protected $arrayHydrator;
@@ -61,13 +60,6 @@ class QuestionSubscriber implements EventSubscriberInterface
 
         // We hydrate the question with submitted values
         $question = $this->arrayHydrator->hydrate($question, $data['question']);
-
-        // Hotfix for missing qaq
-        $qaq = new QuestionnaireAbstractQuestion();
-        $qaq->setPosition($data['position']);
-        $proposalForm = $form->getRoot()->getData();
-        $qaq->setProposalForm($proposalForm);
-        $question->setQuestionnaireAbstractQuestion($qaq);
 
         $this->addQuestionToForm($question, $form);
 
