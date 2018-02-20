@@ -112,3 +112,172 @@ svg.avatar {
 }
 
 
+
+.share-button-wrapper div {
+    display: inline-block;
+}
+
+.tabs__pills ul {
+    border-bottom: 0;
+}
+
+.tabs__pills {
+    border-bottom: 1px solid $border-color;
+
+    .container {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .tabs__pill {
+        float: none;
+        display: inline-block;
+        text-align: center;
+
+        a {
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+
+        &.active .badge {
+            background-color: $dark-gray;
+            color: $white;
+        }
+
+        &.active a,
+        &.active a:hover,
+        &.active a:focus,
+        a:focus,
+        a:hover {
+            background-color: $white;
+            color: $dark;
+            @include border-radius(0);
+            @include box-shadow(0 -3px 0 $brand-primary inset);
+        }
+    }
+}
+
+.tabs__container {
+    > .container {
+        padding-top: 20px;
+    }
+
+    .tabs{
+        margin-bottom: 30px;
+
+        .container {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            .tab {
+
+                a {
+                    padding: 15px 20px;
+                }
+
+                .badge {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+.PrivateList {
+    &__box {
+        padding: 30px 25px 0;
+        border: 1px $border-color solid;
+        border-radius: 5px;
+        background-color: $page-bgc;
+    }
+}
+
+.well .editor {
+    background-color: $white;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+select.form-control,
+textarea {
+    font-size: 16px;
+}
+
+.settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
+    font-weight: normal;
+    color: $dark;
+}
+
+.print {
+    display: none;
+}
+
+.label-default {
+    background-color: $dark-gray;
+}
+
+.label-success {
+    background-color: $success-color;
+}
+
+.label-danger {
+    background-color: $danger-color;
+}
+
+.label-info {
+    background-color: $info-color;
+
+    a, a:hover {
+        color: $white;
+        font-weight: 400;
+    }
+}
+
+.small.excerpt {
+    color: $dark-gray;
+}
+
+.proposal-follow-dropdown ul.dropdown-menu{
+    margin: 0px;
+    padding: 0px;
+}
+.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body{
+    margin: 0px;
+    padding: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body .form-group{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    margin-bottom: 0px;
+}
+//
+.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body li.list-group-item{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1.8px solid rgb(221, 221, 221);
+    border-radius: 0px;
+    -moz-border-radius: 0;
+}
+
+#proposal-follow-btn:focus{
+    background-color: white;
+}
+
