@@ -36,7 +36,9 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
-            return null; // skip paris auth, to let users browse anonymously
+            $this->logger->debug('Skipping MonCompteParisAuthenticator, to let user browse anonymously.');
+
+            return null;
         }
 
         $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
@@ -46,11 +48,11 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
             $isAlreadyAuthenticated = true;
         } catch (\Exception $e) {
             // Token not valid
-            $this->logger->error('Failed to get uuid from cookie: ' . $cookieValue);
+            $this->logger->error('Failed to get uuid from cookie: {cookie}', ['cookie' => $cookieValue]);
 
             return null;
         }
-        $this->logger->info('Creating Paris token for parisId: ' . $parisId);
+        $this->logger->info('Creating Paris token for parisId: {uuid}', ['uuid' => $parisId]);
 
         $token = new ParisToken($parisId);
         // $token->setAttributes([]);
