@@ -160,7 +160,7 @@ Scenario: GraphQL client wants to update a proposal form
   }
   """
 
-@database
+@dev
 Scenario: GraphQL client wants to update custom fields of a proposal form
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -220,7 +220,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "id": "proposalForm1",
           "questions": [
             {
-              "id": "25",
+              "id": @string@,
               "position": 1,
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
@@ -229,7 +229,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
               "type": "text"
             },
             {
-              "id": "24",
+              "id": @string@,
               "position": 2,
               "title": "Documents à remplir",
               "helpText": "5 fichiers max",

@@ -97,7 +97,7 @@ class QuestionnaireAbstractQuestion
         return $this->question;
     }
 
-    public function getProposalForm()
+    public function getProposalForm(): ?ProposalForm
     {
         return $this->proposalForm;
     }
@@ -109,7 +109,7 @@ class QuestionnaireAbstractQuestion
         return $this;
     }
 
-    public function getRegistrationForm()
+    public function getRegistrationForm(): ?RegistrationForm
     {
         return $this->registrationForm;
     }

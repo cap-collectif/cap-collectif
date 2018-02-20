@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -39,39 +40,53 @@ class QuestionSubscriber implements EventSubscriberInterface
 
         $form = $event->getForm();
         $question = $data->getQuestion();
-        $class = get_class($question);
-        if (SimpleQuestion::class === $class) {
-            $this->processQuestion($question, $form, SimpleQuestionType::class);
-        } elseif (MediaQuestion::class === $class) {
-            $this->processQuestion($question, $form, MediaQuestionType::class);
-        }
+        $this->addQuestionToForm($question, $form);
     }
 
     public function preSubmit(FormEvent $event)
     {
-        // if data doesn't have any id, it is considered as a creation.
-        // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
+        // if data has an id, it is considered as a update, so we can skip
         if ((!$data = $event->getData()) || !is_array($data) || isset($data['question']['id'])) {
             return;
         }
 
+        // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
         $form = $event->getForm();
 
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
-            $type = MediaQuestionType::class;
             $question = new MediaQuestion();
         } else {
-            $type = SimpleQuestionType::class;
             $question = new SimpleQuestion();
         }
 
+        // We hydrate the question with submitted values
         $question = $this->arrayHydrator->hydrate($question, $data['question']);
-        $this->processQuestion($question, $form, $type);
+
+        // Hotfix for missing qaq
+        $qaq = new QuestionnaireAbstractQuestion();
+        $qaq->setPosition($data['position']);
+        $proposalForm = $form->getRoot()->getData();
+        $qaq->setProposalForm($proposalForm);
+        $question->setQuestionnaireAbstractQuestion($qaq);
+
+        $this->addQuestionToForm($question, $form);
+
+        // We are creating so we don't need an id field
         $form->get('question')->remove('id');
     }
 
-    private function processQuestion(AbstractQuestion $question, FormInterface $form, string $type)
+    private function getFormType(AbstractQuestion $question): string
     {
-        $form->add($this->factory->createNamed('question', $type, $question, ['auto_initialize' => false]));
+        if ($question instanceof SimpleQuestion) {
+            return SimpleQuestionType::class;
+        }
+
+        return MediaQuestionType::class;
+    }
+
+    private function addQuestionToForm(AbstractQuestion $data, FormInterface $form)
+    {
+        $formElement = $this->factory->createNamed('question', $this->getFormType($data), $data, ['auto_initialize' => false]);
+        $form->add($formElement);
     }
 }
