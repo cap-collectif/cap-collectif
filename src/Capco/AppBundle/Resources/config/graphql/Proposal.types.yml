@@ -113,7 +113,7 @@ Proposal:
                 resolve: "@=value.getParentConnections()"
             followers:
                 type: "[User!]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserFollowingProposalResolver", [value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UsersFollowingProposalResolver", [value])'
                 description: "Array of users following proposal."
             followerConnection:
                 type: "FollowerConnection!"
@@ -138,6 +138,10 @@ Proposal:
             viewerIsFollowing:
                 type: "Boolean!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, user])'
+                description: "View follow current proposal"
+            viewerAsFollower:
+                type: "Follower"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, user])'
                 description: "View follow current proposal"
             postsCount:
                 type: "Int!"
