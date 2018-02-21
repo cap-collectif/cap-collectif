@@ -488,6 +488,9 @@ type EvaluationForm {
 input FollowProposalInput {
   # The proposal id
   proposalId: ID!
+
+  # The type of notification
+  notifiedOf: PickFollowTypeValue!
   clientMutationId: String
 }
 
@@ -495,7 +498,16 @@ type FollowProposalPayload {
   proposal: Proposal
   follower: User
   followerEdge: FollowerEdge
+  value: PickFollowTypeValue!
   clientMutationId: String
+}
+
+# A follower
+type Follower {
+  id: ID!
+  proposal: Proposal!
+  user: User!
+  notifiedOf: PickFollowTypeValue!
 }
 
 # A connection to a list of items.
@@ -608,6 +620,7 @@ type Mutation {
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   followProposal(input: FollowProposalInput!): FollowProposalPayload
+  UpdateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
@@ -856,6 +869,13 @@ type PageInfo {
   endCursor: String
 }
 
+# 3 possible values
+enum PickFollowTypeValue {
+  DEFAULT
+  DEFAULT_AND_COMMENTS
+  ALL
+}
+
 type Post {
   id: String!
   title: String!
@@ -994,6 +1014,9 @@ type Proposal implements Node {
 
   # View follow current proposal
   viewerIsFollowing: Boolean!
+
+  # View follow current proposal
+  viewerAsFollower: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
 }
@@ -1544,6 +1567,23 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateFollowProposalInput {
+  # The follower id
+  followerId: ID!
+
+  # The proposal id
+  proposalId: ID!
+  notifiedOf: PickFollowTypeValue!
+  clientMutationId: String
+}
+
+type UpdateFollowProposalPayload {
+  follower: Follower
+  followerEdge: FollowerEdge
+  proposal: Proposal
   clientMutationId: String
 }
 
