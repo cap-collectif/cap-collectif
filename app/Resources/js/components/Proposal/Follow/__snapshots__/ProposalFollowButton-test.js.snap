@@ -7,12 +7,10 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className=""
+    className="btn btn-default"
     disabled={false}
     id="proposal-follow-btn"
     onClick={[Function]}
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
   >
     <FormattedMessage
       id="follow"
@@ -24,22 +22,130 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
 
 exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 1`] = `
 <Connect(LoginOverlay)>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    className="btn-default_focus"
-    disabled={false}
-    id="proposal-unfollow-btn"
-    onClick={[Function]}
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
+  <span
+    className="mb-0 proposal-follow-dropdown"
   >
-    <FormattedMessage
-      id="following"
-      values={Object {}}
-    />
-  </Button>
+    <DropdownButton
+      className="mb-0"
+      id="proposal-follow-btn"
+      title={
+        <FormattedMessage
+          id="following"
+          values={Object {}}
+        />
+      }
+    >
+      <Panel
+        bsClass="panel"
+        bsStyle="default"
+        className="mb-0 bn"
+        defaultExpanded={false}
+        header={
+          <FormattedMessage
+            id="to-be-notified-of-new-of"
+            values={Object {}}
+          />
+        }
+      >
+        <FormGroup
+          bsClass="form-group"
+          className="bn mb-0"
+        >
+          <ListGroup
+            bsClass="list-group"
+            className="mb-0"
+          >
+            <ListGroupItem
+              bsClass="list-group-item"
+              className=""
+              listItem={false}
+            >
+              <Radio
+                bsClass="radio"
+                checked="checked"
+                disabled={false}
+                inline={true}
+                label="the-progress"
+                name="radioGroup"
+                onClick={[Function]}
+                title=""
+              >
+                <FormattedMessage
+                  id="list-of-progress-notifications"
+                  values={Object {}}
+                />
+              </Radio>
+            </ListGroupItem>
+            <ListGroupItem
+              bsClass="list-group-item"
+              className=""
+              listItem={false}
+            >
+              <Radio
+                bsClass="radio"
+                checked=""
+                disabled={false}
+                inline={true}
+                label={
+                  <FormattedMessage
+                    id="progress-and-comments"
+                    values={Object {}}
+                  />
+                }
+                name="radioGroup"
+                onClick={[Function]}
+                title=""
+              >
+                <FormattedMessage
+                  id="list-of-progress-notifications-and-comments"
+                  values={Object {}}
+                />
+              </Radio>
+            </ListGroupItem>
+            <ListGroupItem
+              bsClass="list-group-item"
+              className=""
+              listItem={false}
+            >
+              <Radio
+                bsClass="radio"
+                checked=""
+                disabled={false}
+                inline={true}
+                label={
+                  <FormattedMessage
+                    id="all-activities"
+                    values={Object {}}
+                  />
+                }
+                name="radioGroup"
+                onClick={[Function]}
+                title=""
+              >
+                <FormattedMessage
+                  id="list-of-activity-notifications"
+                  values={Object {}}
+                />
+              </Radio>
+            </ListGroupItem>
+          </ListGroup>
+        </FormGroup>
+      </Panel>
+      <MenuItem
+        bsClass="dropdown"
+        className="mt--1"
+        disabled={false}
+        divider={false}
+        eventKey="1"
+        header={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow"
+          values={Object {}}
+        />
+      </MenuItem>
+    </DropdownButton>
+  </span>
 </Connect(LoginOverlay)>
 `;
