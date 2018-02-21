@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\MonCompteParis;
 
+use Http\Client\HttpClient;
+
 class OpenAmClient
 {
     const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
@@ -10,6 +12,11 @@ class OpenAmClient
 
     protected $cookie = null;
 
+    public function __construct()
+    {
+        $this->client = new Client();
+    }
+
     public function setCookie(string $cookie)
     {
         $this->cookie = $cookie;
@@ -17,22 +24,8 @@ class OpenAmClient
 
     public function getUid(): string
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::API_URL . 'sessions/' . $this->cookie . '?_action=validate');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-        $headers = [];
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-
-        $json = json_decode($result, true);
+        $response = $this->client->post(self::API_URL . 'sessions/' . $this->cookie . '?_action=validate', ['Content-Type: application/json'])
+        $json = json_decode((string) $response->getBody(), true);
 
         if (false === $json['valid']) {
             throw new \Exception('Token not valid.');
@@ -44,22 +37,8 @@ class OpenAmClient
     // OR http://fr.lutece.paris.fr/fr/wiki/gru-appeldirect-identitystore.html
     public function getUserInformations(string $uid): array
     {
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, self::API_URL . 'users/' . $uid);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-        $headers = [];
-        $headers[] = self::COOKIE_NAME . ': ' . $this->cookie;
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-        $json = json_decode($result, true);
+        $response = $this->client->get(self::API_URL . 'users/' . $uid, [self::COOKIE_NAME . ': ' . $this->cookie])
+        $json = json_decode((string) $response->getBody(), true);
 
         return [
           'username' => $json['username'],
