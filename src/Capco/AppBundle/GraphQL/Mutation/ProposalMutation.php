@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
@@ -346,6 +347,7 @@ class ProposalMutation implements ContainerAwareInterface
         $follower = new Follower();
         $follower->setUser($user);
         $follower->setProposal($proposal);
+        $follower->setNotifiedOf(FollowerNotifiedOfInterface::DEFAULT);
 
         $proposal
             ->setDraft($draft)

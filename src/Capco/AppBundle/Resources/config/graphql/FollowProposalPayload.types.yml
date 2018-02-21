@@ -8,3 +8,5 @@ FollowProposalPayload:
                 type: "User"
             followerEdge:
                 type: "FollowerEdge"
+            value:
+                type: "PickFollowTypeValue!"
