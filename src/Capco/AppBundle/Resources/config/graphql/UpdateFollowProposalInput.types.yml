@@ -1,0 +1,12 @@
+UpdateFollowProposalInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            followerId:
+                type: "ID!"
+                description: "The follower id"
+            proposalId:
+                type: "ID!"
+                description: "The proposal id"
+            notifiedOf:
+                type: "PickFollowTypeValue!"
