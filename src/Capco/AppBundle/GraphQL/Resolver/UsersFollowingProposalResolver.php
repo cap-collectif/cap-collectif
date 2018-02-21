@@ -7,7 +7,7 @@ use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class UserFollowingProposalResolver implements ResolverInterface
+class UsersFollowingProposalResolver implements ResolverInterface
 {
     private $userRepository;
     private $logger;
