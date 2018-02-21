@@ -35,9 +35,8 @@ export class ProposalLastUpdateInfo extends React.PureComponent<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalLastUpdateInfo,
-  graphql`
+export default createFragmentContainer(ProposalLastUpdateInfo, {
+  proposal: graphql`
     fragment ProposalLastUpdateInfo_proposal on Proposal {
       updatedAt
       updatedBy {
@@ -46,4 +45,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

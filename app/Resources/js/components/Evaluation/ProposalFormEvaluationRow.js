@@ -19,11 +19,11 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
           <a href={proposal.show_url}>{proposal.title}</a>
         </td>
         <td>
-          {/* $FlowFixMe Probably typedef bug. */}
+          {/* $FlowFixMe $fragmentRefs is missing */}
           <ProposalCollectStatus proposal={proposal} />
         </td>
         <td>
-          {/* $FlowFixMe Probably typedef bug. */}
+          {/* $FlowFixMe $fragmentRefs is missing */}
           <ProposalLastUpdateInfo proposal={proposal} />
         </td>
         <td>
@@ -41,9 +41,8 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalFormEvaluationRow,
-  graphql`
+export default createFragmentContainer(ProposalFormEvaluationRow, {
+  proposal: graphql`
     fragment ProposalFormEvaluationRow_proposal on Proposal {
       show_url
       reference
@@ -52,4 +51,4 @@ export default createFragmentContainer(
       ...ProposalLastUpdateInfo_proposal
     }
   `,
-);
+});

@@ -39,13 +39,12 @@ export class ConsultationPropositionBox extends React.Component<Props> {
       if (props) {
         if (props.consultations[0].sections) {
           return (
-            // $FlowFixMe Propably libdef issue.
+            // $FlowFixMe
             <SectionRecursiveList consultation={step} sections={props.consultations[0].sections} />
           );
         }
         return graphqlError;
       }
-      // $FlowFixMe Propably libdef issue.
       return <Loader />;
     };
 

@@ -321,15 +321,15 @@ declare module "react-relay" {
   ) => Variables;
 
   declare export type PageInfo = {
-    endCursor: ?string,
-    hasNextPage: boolean,
-    hasPreviousPage: boolean,
-    startCursor: ?string
+    +endCursor: ?string,
+    +hasNextPage: boolean,
+    +hasPreviousPage: boolean,
+    +startCursor: ?string
   };
 
   declare export type ConnectionData = {
-    edges?: ?Array<any>,
-    pageInfo?: ?PageInfo
+    +edges?: ?$ReadOnlyArray<any>,
+    +pageInfo?: ?PageInfo
   };
 
   declare export type ConnectionConfig = {

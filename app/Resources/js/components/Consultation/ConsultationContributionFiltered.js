@@ -16,12 +16,11 @@ const renderConsultationPaginated = ({
   }
   if (props) {
     if (props.consultations && props.consultations.length) {
-      // $FlowFixMe Propably libdef issue.
+      // $FlowFixMe
       return <ContributionPaginatedList consultation={props.consultations[0]} />;
     }
     return graphqlError;
   }
-  // $FlowFixMe Propably libdef issue.
   return <Loader />;
 };
 

@@ -1,21 +1,26 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { graphql, createPaginationContainer } from 'react-relay';
+import * as React from 'react';
+import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Opinion from './Opinion';
+import type { ContributionPaginatedList_consultation } from './__generated__/ContributionPaginatedList_consultation.graphql';
 import { graphqlError } from '../../createRelayEnvironment';
 
 export const pageSize = 20;
 
-export const ContributionPaginatedList = React.createClass({
-  propTypes: {
-    consultation: PropTypes.object.isRequired,
-    relay: PropTypes.object.isRequired,
-  },
+type Props = {
+  consultation: ContributionPaginatedList_consultation,
+  relay: RelayPaginationProp,
+};
 
+export class ContributionPaginatedList extends React.Component<Props> {
   render() {
     const { relay, consultation } = this.props;
     const contributionConnection = consultation.contributionConnection;
-    if (!contributionConnection.edges) {
+    if (
+      !contributionConnection ||
+      typeof contributionConnection.edges === 'undefined' ||
+      contributionConnection.edges === null
+    ) {
       return graphqlError;
     }
     return (
@@ -29,9 +34,9 @@ export const ContributionPaginatedList = React.createClass({
         </div>
         <ul className="media-list  opinion__list">
           <div>
-            {contributionConnection.edges.map((edge, index) => (
-              <Opinion key={index} opinion={edge.node} />
-            ))}
+            {contributionConnection.edges
+              .filter(Boolean)
+              .map((edge, index) => <Opinion key={index} opinion={edge.node} />)}
           </div>
         </ul>
         {relay.hasMore() && (
@@ -50,8 +55,8 @@ export const ContributionPaginatedList = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default createPaginationContainer(
   ContributionPaginatedList,
@@ -68,30 +73,27 @@ export default createPaginationContainer(
         }
         pageInfo {
           hasNextPage
+          hasPreviousPage
           endCursor
+          startCursor
         }
-        # totalCount
       }
     }
   `,
   {
     direction: 'forward',
-    getConnectionFromProps(props) {
+    getConnectionFromProps(props: Props) {
       return props.consultation && props.consultation.contributionConnection;
     },
-    getFragmentVariables(prevVars, totalCount) {
-      console.log('getFragmentVariables', prevVars, totalCount); // eslint-disable-line
+    getFragmentVariables(prevVars) {
       return {
         ...prevVars,
-        // count: totalCount,
       };
     },
-    getVariables(props, { count, cursor }, fragmentVariables) {
-      console.log('getVariables', props, count, cursor, fragmentVariables); // eslint-disable-line
+    getVariables(props: Props, { count, cursor }) {
       return {
         count,
         cursor,
-        // orderBy: fragmentVariables.orderBy,
         consultationId: props.consultation.id,
       };
     },
