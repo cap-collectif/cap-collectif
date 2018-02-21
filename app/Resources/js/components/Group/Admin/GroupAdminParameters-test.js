@@ -6,6 +6,7 @@ import { GroupAdminParameters } from './GroupAdminParameters';
 
 describe('<GroupAdminParameters />', () => {
   const props = {
+    // $FlowFixMe $refType
     group: {
       id: 'group4',
       title: 'Comité de suvi',

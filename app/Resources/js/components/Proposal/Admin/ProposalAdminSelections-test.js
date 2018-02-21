@@ -20,6 +20,7 @@ describe('<ProposalAdminSelections />', () => {
     steps: [{}],
     selectionValues: [{ step: '2', selected: true, status: null }],
     projectId: 'projectId',
+    // $FlowFixMe $refType
     proposal: {
       id: '1',
       status: { id: '1' },

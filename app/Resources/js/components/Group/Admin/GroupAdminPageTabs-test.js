@@ -8,6 +8,7 @@ import { intlMock } from '../../../mocks';
 describe('<GroupAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
+    // $FlowFixMe $refType
     group: {},
   };
 

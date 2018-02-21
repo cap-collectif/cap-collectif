@@ -6,6 +6,7 @@ import { ProposalFormEvaluationList } from './ProposalFormEvaluationList';
 
 describe('<ProposalFormEvaluationList />', () => {
   const propsWithEvaluations = {
+    // $FlowFixMe $refType
     proposalForm: {
       step: {
         title: 'My form title',
@@ -15,7 +16,12 @@ describe('<ProposalFormEvaluationList />', () => {
       },
       proposals: {
         totalCount: 2,
-        edges: [{ node: { id: '1' } }, { node: { id: '2' } }],
+        edges: [
+          // $FlowFixMe
+          { node: { id: '1' } },
+          // $FlowFixMe
+          { node: { id: '2' } },
+        ],
       },
     },
   };
@@ -26,6 +32,7 @@ describe('<ProposalFormEvaluationList />', () => {
   });
 
   const propsWithoutEvaluations = {
+    // $FlowFixMe $refType
     proposalForm: {
       step: {
         title: 'My form title',

@@ -6,11 +6,13 @@ import { ProposalCollectStatus } from './ProposalCollectStatus';
 
 describe('<ProposalCollectStatus />', () => {
   const proposalWithoutStatus = {
+    // $FlowFixMe $refType
     proposal: {
       status: null,
     },
   };
   const proposalWithStatus = {
+    // $FlowFixMe $refType
     proposal: {
       status: { name: 'Terminé', color: 'success' },
     },

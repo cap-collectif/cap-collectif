@@ -10,6 +10,7 @@ describe('<ProposalForm />', () => {
   const props = {
     intl: intlMock,
     ...formMock,
+    // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalForm1',
       description: 'Description 1',
@@ -77,6 +78,7 @@ describe('<ProposalForm />', () => {
     },
     titleValue: 'Proposal title',
     addressValue: null,
+    // $FlowFixMe $refType
     proposal: {
       id: 'proposal1',
       title: 'Proposal title',

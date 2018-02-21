@@ -14,6 +14,7 @@ describe('<ProposalAdminContentForm />', () => {
     intl: intlMock,
     isSuperAdmin: true,
     themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
+    // $FlowFixMe $refType
     proposal: {
       id: '1',
       title: 'title-1',

@@ -2,8 +2,10 @@
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
+import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
+
 import component from '../components/Form/Field';
 
 type Questions = $ReadOnlyArray<{|
@@ -13,17 +15,7 @@ type Questions = $ReadOnlyArray<{|
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
-  // eslint-disable-next-line flowtype/space-after-type-colon
-  +type:
-    | 'text'
-    | 'textarea'
-    | 'editor'
-    | 'radio'
-    | 'select'
-    | 'checkbox'
-    | 'ranking'
-    | 'medias'
-    | 'button',
+  +type: QuestionTypeValue,
   +isOtherAllowed: boolean,
   +validationRule: ?{|
     +type: ?string,

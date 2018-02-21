@@ -7,6 +7,7 @@ import { intlMock } from '../../../mocks';
 
 describe('<ProposalAdminStatusForm />', () => {
   it('render correctly if published but user can soon expire', () => {
+    // $FlowFixMe $refType
     const proposalToBeExpired = {
       id: '1',
       trashedReason: null,
@@ -40,6 +41,7 @@ describe('<ProposalAdminStatusForm />', () => {
   });
 
   it('render correctly if expired', () => {
+    // $FlowFixMe $refType
     const proposalExpired = {
       id: '1',
       trashedReason: null,
@@ -73,6 +75,7 @@ describe('<ProposalAdminStatusForm />', () => {
   });
 
   it('render correctly if published and user is confirmed', () => {
+    // $FlowFixMe $refType
     const proposalConfirmed = {
       id: '1',
       author: {

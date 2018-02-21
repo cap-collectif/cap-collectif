@@ -6,6 +6,7 @@ import { ProposalLastUpdateInfo } from './ProposalLastUpdateInfo';
 
 describe('<ProposalLastUpdateInfo />', () => {
   const proposalNotUpdated = {
+    // $FlowFixMe $refType
     proposal: {
       updatedAt: null,
       updatedBy: null,
@@ -13,6 +14,7 @@ describe('<ProposalLastUpdateInfo />', () => {
   };
 
   const proposalUpdated = {
+    // $FlowFixMe $refType
     proposal: {
       updatedAt: '2017-07-10T18:53:58+0200',
       updatedBy: { show_url: 'http://capco.dev', displayName: 'Paul' },
@@ -20,6 +22,7 @@ describe('<ProposalLastUpdateInfo />', () => {
   };
 
   const proposalUpdatedButWithoutUpdateAuthor = {
+    // $FlowFixMe $refType
     proposal: {
       updatedAt: '2017-07-10T18:53:58+0200',
       updatedBy: null,

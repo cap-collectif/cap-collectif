@@ -81,6 +81,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
 
 export const validateProposalContent = (
   values: FormValues,
+  // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
 ) => {

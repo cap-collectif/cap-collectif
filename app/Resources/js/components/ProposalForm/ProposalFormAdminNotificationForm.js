@@ -145,9 +145,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
 
 const container = connect(mapStateToProps)(form);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  proposalForm: graphql`
     fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
       id
       notificationsConfiguration {
@@ -160,4 +159,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

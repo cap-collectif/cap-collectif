@@ -16,7 +16,6 @@ export class GroupAdminPageTabs extends Component<Props> {
       <div className="col-xs-12">
         <Tabs>
           <Tab eventKey={1} title={intl.formatMessage({ id: 'group.admin.users' })}>
-            {/* $FlowFixMe group is {||}. Probably typedef bug. */}
             <GroupAdminUsers group={group} />
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'group.admin.parameters' })}>

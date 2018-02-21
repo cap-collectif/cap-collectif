@@ -20,6 +20,7 @@ flow-typed
 [options]
 emoji=true
 experimental.const_params=true
+;module.system=haste
 module.use_strict=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable

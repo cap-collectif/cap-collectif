@@ -6,6 +6,7 @@ import { ProposalFormEvaluationRow } from './ProposalFormEvaluationRow';
 
 describe('<ProposalFormEvaluationRow />', () => {
   const props = {
+    // $FlowFixMe $refType
     proposal: {
       show_url: 'http://capco.dev/proposal',
       reference: '1-1',

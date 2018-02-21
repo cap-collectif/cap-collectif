@@ -11,6 +11,7 @@ describe('<ProposalAdminNotationForm />', () => {
     intl: intlMock,
     disabled: false,
     responses: [],
+    // $FlowFixMe $refType
     proposal: {
       id: '1',
       estimation: 1000,

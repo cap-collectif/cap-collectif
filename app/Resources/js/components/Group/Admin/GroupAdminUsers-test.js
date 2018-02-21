@@ -9,12 +9,14 @@ describe('<GroupAdminUsers />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
+    // $FlowFixMe $refType
     group: {
       id: 'group4',
       title: 'Comité de suvi',
       usersConnection: {
         edges: [
           {
+            // $FlowFixMe $fragmentRefs
             node: {
               id: 'id1',
             },

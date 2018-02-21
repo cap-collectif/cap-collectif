@@ -16,13 +16,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is i
     environment={
       RelayModernEnvironment {
         "__setNet": [Function],
-        "_debugger": EnvironmentDebugger {
-          "_envIsDirty": false,
-          "_environment": [Circular],
-          "_id": "RelayModernEnvironment1",
-          "_isRecordingMutationEvents": false,
-          "_recordedMutationEvents": Array [],
-        },
+        "_deferrableSelections": Array [],
         "_network": Object {
           "execute": [Function],
         },
@@ -35,6 +29,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is i
           "_pendingOptimisticUpdates": Array [],
           "_pendingUpdaters": Array [],
           "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
             "_hasScheduledGC": false,
             "_index": 0,
             "_recordSource": Object {},
@@ -44,6 +39,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is i
           },
         },
         "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
           "_hasScheduledGC": false,
           "_index": 0,
           "_recordSource": Object {},
@@ -58,7 +54,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is i
           "createOperationSelector": [Function],
           "getDataIDsFromObject": [Function],
           "getFragment": [Function],
-          "getOperation": [Function],
+          "getRequest": [Function],
           "getSelector": [Function],
           "getSelectorList": [Function],
           "getSelectorsFromObject": [Function],
@@ -89,13 +85,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is s
     environment={
       RelayModernEnvironment {
         "__setNet": [Function],
-        "_debugger": EnvironmentDebugger {
-          "_envIsDirty": false,
-          "_environment": [Circular],
-          "_id": "RelayModernEnvironment1",
-          "_isRecordingMutationEvents": false,
-          "_recordedMutationEvents": Array [],
-        },
+        "_deferrableSelections": Array [],
         "_network": Object {
           "execute": [Function],
         },
@@ -108,6 +98,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is s
           "_pendingOptimisticUpdates": Array [],
           "_pendingUpdaters": Array [],
           "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
             "_hasScheduledGC": false,
             "_index": 0,
             "_recordSource": Object {},
@@ -117,6 +108,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is s
           },
         },
         "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
           "_hasScheduledGC": false,
           "_index": 0,
           "_recordSource": Object {},
@@ -131,7 +123,7 @@ exports[`<NotificationsBox /> should render a disabled button when the form is s
           "createOperationSelector": [Function],
           "getDataIDsFromObject": [Function],
           "getFragment": [Function],
-          "getOperation": [Function],
+          "getRequest": [Function],
           "getSelector": [Function],
           "getSelectorList": [Function],
           "getSelectorsFromObject": [Function],
@@ -162,13 +154,7 @@ exports[`<NotificationsBox /> should render and enabled button when the form is 
     environment={
       RelayModernEnvironment {
         "__setNet": [Function],
-        "_debugger": EnvironmentDebugger {
-          "_envIsDirty": false,
-          "_environment": [Circular],
-          "_id": "RelayModernEnvironment1",
-          "_isRecordingMutationEvents": false,
-          "_recordedMutationEvents": Array [],
-        },
+        "_deferrableSelections": Array [],
         "_network": Object {
           "execute": [Function],
         },
@@ -181,6 +167,7 @@ exports[`<NotificationsBox /> should render and enabled button when the form is 
           "_pendingOptimisticUpdates": Array [],
           "_pendingUpdaters": Array [],
           "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
             "_hasScheduledGC": false,
             "_index": 0,
             "_recordSource": Object {},
@@ -190,6 +177,7 @@ exports[`<NotificationsBox /> should render and enabled button when the form is 
           },
         },
         "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
           "_hasScheduledGC": false,
           "_index": 0,
           "_recordSource": Object {},
@@ -204,7 +192,7 @@ exports[`<NotificationsBox /> should render and enabled button when the form is 
           "createOperationSelector": [Function],
           "getDataIDsFromObject": [Function],
           "getFragment": [Function],
-          "getOperation": [Function],
+          "getRequest": [Function],
           "getSelector": [Function],
           "getSelectorList": [Function],
           "getSelectorsFromObject": [Function],

@@ -16,6 +16,7 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     pristine: false,
     submitting: false,
     isSuperAdmin: true,
+    // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalFormId',
       title: 'title',

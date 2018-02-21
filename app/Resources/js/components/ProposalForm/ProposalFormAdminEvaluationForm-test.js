@@ -13,6 +13,7 @@ describe('<ProposalFormAdminEvaluationForm />', () => {
     submitFailed: false,
     pristine: false,
     submitting: false,
+    // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalFormId',
       evaluationForm: null,

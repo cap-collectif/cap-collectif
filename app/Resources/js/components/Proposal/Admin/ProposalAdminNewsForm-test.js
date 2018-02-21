@@ -6,11 +6,13 @@ import { ProposalAdminNewsForm } from './ProposalAdminNewsForm';
 
 describe('<ProposalAdminNewsForm />', () => {
   const props = {
+    // $FlowFixMe $refType
     proposal: {
       news: [{ id: '1', title: 'news-1' }],
     },
   };
   const props2 = {
+    // $FlowFixMe $refType
     proposal: {
       news: [],
     },

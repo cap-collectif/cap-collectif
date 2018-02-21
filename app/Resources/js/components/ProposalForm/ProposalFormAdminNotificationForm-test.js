@@ -15,6 +15,7 @@ describe('<ProposalFormAdminNotificationForm />', () => {
     valid: false,
     submitSucceeded: false,
     submitFailed: false,
+    // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalFormId',
       notificationsConfiguration: {

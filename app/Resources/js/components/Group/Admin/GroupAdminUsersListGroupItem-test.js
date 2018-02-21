@@ -7,6 +7,7 @@ import { GroupAdminUsersListGroupItem } from './GroupAdminUsersListGroupItem';
 describe('<GroupAdminUsers />', () => {
   const props = {
     groupId: 'group4',
+    // $FlowFixMe $refType
     user: {
       id: 'id1',
       displayName: 'toto',

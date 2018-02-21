@@ -41,13 +41,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
       environment={
         RelayModernEnvironment {
           "__setNet": [Function],
-          "_debugger": EnvironmentDebugger {
-            "_envIsDirty": false,
-            "_environment": [Circular],
-            "_id": "RelayModernEnvironment1",
-            "_isRecordingMutationEvents": false,
-            "_recordedMutationEvents": Array [],
-          },
+          "_deferrableSelections": Array [],
           "_network": Object {
             "execute": [Function],
           },
@@ -60,6 +54,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
             "_pendingOptimisticUpdates": Array [],
             "_pendingUpdaters": Array [],
             "_store": RelayMarkSweepStore {
+              "_gcEnabled": true,
               "_hasScheduledGC": false,
               "_index": 0,
               "_recordSource": Object {},
@@ -69,6 +64,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
             },
           },
           "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
             "_hasScheduledGC": false,
             "_index": 0,
             "_recordSource": Object {},
@@ -83,7 +79,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
             "createOperationSelector": [Function],
             "getDataIDsFromObject": [Function],
             "getFragment": [Function],
-            "getOperation": [Function],
+            "getRequest": [Function],
             "getSelector": [Function],
             "getSelectorList": [Function],
             "getSelectorsFromObject": [Function],
