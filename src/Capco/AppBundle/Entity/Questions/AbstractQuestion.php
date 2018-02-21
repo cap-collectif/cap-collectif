@@ -2,9 +2,11 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -115,12 +117,12 @@ abstract class AbstractQuestion
         return $this->helpText;
     }
 
-    public function getResponses()
+    public function getResponses(): Collection
     {
         return $this->responses;
     }
 
-    public function setResponses($responses)
+    public function setResponses(Collection $responses): self
     {
         $this->responses = $responses;
 
@@ -202,12 +204,12 @@ abstract class AbstractQuestion
         return $this->questionnaireAbstractQuestion->getPosition();
     }
 
-    public function getQuestionnaire()
+    public function getQuestionnaire(): ?Questionnaire
     {
         return $this->questionnaireAbstractQuestion->getQuestionnaire();
     }
 
-    public function getQuestion()
+    public function getQuestion(): ?self
     {
         return $this->questionnaireAbstractQuestion->getQuestion();
     }

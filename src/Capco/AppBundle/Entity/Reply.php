@@ -95,19 +95,11 @@ class Reply implements Contribution
         return $this;
     }
 
-    /**
-     * @return Questionnaire
-     */
-    public function getQuestionnaire()
+    public function getQuestionnaire(): ?Questionnaire
     {
         return $this->questionnaire;
     }
 
-    /**
-     * @param Questionnaire $questionnaire
-     *
-     * @return $this
-     */
     public function setQuestionnaire(Questionnaire $questionnaire)
     {
         $this->questionnaire = $questionnaire;

@@ -35,7 +35,7 @@ class ProposalFormMutation implements ContainerAwareInterface
         return ['proposalForm' => $proposalForm];
     }
 
-    public function updateNotificationsConfiguration(Argument $input)
+    public function updateNotificationsConfiguration(Argument $input): array
     {
         $arguments = $input->getRawArguments();
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);

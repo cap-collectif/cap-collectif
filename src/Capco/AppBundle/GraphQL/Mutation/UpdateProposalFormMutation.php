@@ -42,7 +42,7 @@ class UpdateProposalFormMutation
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $this->logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update this proposal form!');
         }
 
