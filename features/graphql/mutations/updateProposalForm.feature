@@ -160,7 +160,7 @@ Scenario: GraphQL client wants to update a proposal form
   }
   """
 
-@dev
+@database
 Scenario: GraphQL client wants to update custom fields of a proposal form
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

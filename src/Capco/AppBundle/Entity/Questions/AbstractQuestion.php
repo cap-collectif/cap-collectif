@@ -197,25 +197,19 @@ abstract class AbstractQuestion
         return $this;
     }
 
-    public function getPosition()
+    public function getPosition(): int
     {
-        if ($this->questionnaireAbstractQuestion) {
-            return $this->questionnaireAbstractQuestion->getPosition();
-        }
+        return $this->questionnaireAbstractQuestion->getPosition();
     }
 
     public function getQuestionnaire()
     {
-        if ($this->questionnaireAbstractQuestion) {
-            return $this->questionnaireAbstractQuestion->getQuestionnaire();
-        }
+        return $this->questionnaireAbstractQuestion->getQuestionnaire();
     }
 
     public function getQuestion()
     {
-        if ($this->questionnaireAbstractQuestion) {
-            return $this->questionnaireAbstractQuestion->getQuestion();
-        }
+        return $this->questionnaireAbstractQuestion->getQuestion();
     }
 
     public function getQuestionnaireId(): ?int
