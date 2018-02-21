@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180206163217 extends AbstractMigration implements ContainerAwareInterface
+class Version20180221163217 extends AbstractMigration implements ContainerAwareInterface
 {
     private $generator;
     private $em;
@@ -51,7 +51,7 @@ class Version20180206163217 extends AbstractMigration implements ContainerAwareI
         $proposals = $this->connection->fetchAll('SELECT id, author_id from proposal');
         foreach ($proposals as $proposal) {
             $uuid = $this->generator->generate($this->em, null);
-            $this->connection->insert('user_following_proposal', ['id'=>$uuid,'user_id' => $proposal['author_id'], 'proposal_id' => $proposal['id']]);
+            $this->connection->insert('user_following_proposal', ['id'=>$uuid,'user_id' => $proposal['author_id'], 'proposal_id' => $proposal['id'], 'notified_of' => '1']);
         }
     }
 }
