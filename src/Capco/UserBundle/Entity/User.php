@@ -328,7 +328,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function getParisId()
+    public function getParisId(): ?string
     {
         return $this->parisId;
     }

@@ -31,13 +31,11 @@ export class LoginButton extends React.Component<Props> {
           onClick={() => {
             if (loginWithMonCompteParis) {
               const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
-              const monCompte_backUrlAuth = `${baseUrl}/login-paris?_destination=${
-                window.location.href
-              }`;
+              const backUrl = `${baseUrl}/login-paris?_destination=${window.location.href}`;
               const wH = 600;
               const wW = $(window).innerWidth() < 768 ? $(window).innerWidth() : 800;
               window.open(
-                `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${monCompte_backUrlAuth}`,
+                `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${backUrl}`,
                 '_blank',
                 `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
               );

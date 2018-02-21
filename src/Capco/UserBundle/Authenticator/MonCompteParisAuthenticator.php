@@ -3,7 +3,7 @@
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\UserBundle\Authenticator\Token\ParisToken;
-use Capco\UserBundle\MonCompteParis\OpenAmCaller;
+use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -17,7 +17,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
     protected $logger;
     protected $openAmCaller;
 
-    public function __construct(HttpUtils $httpUtils, LoggerInterface $logger, OpenAmCaller $openAmCaller)
+    public function __construct(HttpUtils $httpUtils, LoggerInterface $logger, OpenAmClient $openAmCaller)
     {
         $this->httpUtils = $httpUtils;
         $this->logger = $logger;
@@ -31,7 +31,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
 
         $cookies = $request->cookies;
 
-        if ($cookies->has(OpenAmCaller::COOKIE_NAME)) {
+        if ($cookies->has(OpenAmClient::COOKIE_NAME)) {
             $isAlreadyAuthenticated = true;
         }
 
@@ -41,7 +41,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
             return null;
         }
 
-        $cookieValue = $cookies->get(OpenAmCaller::COOKIE_NAME);
+        $cookieValue = $cookies->get(OpenAmClient::COOKIE_NAME);
         if (!$cookieValue) {
             $this->logger->error('Skipping MonCompteParisAuthenticator because no cookie.');
 
@@ -60,20 +60,16 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         $this->logger->info('Creating Paris token for parisId: {uuid}', ['uuid' => $parisId]);
 
         $token = new ParisToken($parisId);
-        // $token->setAttributes([]);
 
         return $token;
     }
 
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)//: ParisToken
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey): ParisToken
     {
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
 
-        $authenticatedToken = new ParisToken($user, $user->getRoles());
-        //$authenticatedToken->setAttributes($token->getAttributes());
-
-        return $authenticatedToken;
+        return new ParisToken($user, $user->getRoles());
     }
 
     public function supportsToken(TokenInterface $token, $providerKey): bool

@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\MonCompteParis;
 
-class OpenAmCaller
+class OpenAmClient
 {
     const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
     const COOKIE_DOMAIN = '.paris.fr';

@@ -8,7 +8,7 @@ services:
     public: true
 
   capco.paris.opem_am_caller:
-    class: Capco\UserBundle\MonCompteParis\OpenAmCaller
+    class: Capco\UserBundle\MonCompteParis\OpenAmClient
 
   capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
