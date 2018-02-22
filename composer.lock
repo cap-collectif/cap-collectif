@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "65152c0ded504c82a9d7b0f19cd67818",
+    "content-hash": "4ae1e5728a2e2969ec5cf94713e32d6b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9677,8 +9677,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/graphql-php/zipball/8672cb610c4d6fb184b12afeb6c2450837625204",
-                "reference": "8672cb610c4d6fb184b12afeb6c2450837625204",
+                "url": "https://api.github.com/repos/cap-collectif/graphql-php/zipball/efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
+                "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
                 "shasum": ""
             },
             "require": {
@@ -9721,11 +9721,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/graphql-php/tree/master"
             },
-<<<<<<< HEAD
-            "time": "2018-02-21T13:34:09+00:00"
-=======
             "time": "2018-02-22T10:14:53+00:00"
->>>>>>> Fix schema.graphql
         },
         {
             "name": "whitehat101/apr1-md5",
