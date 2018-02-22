@@ -25,6 +25,7 @@
     "lint": "eslint --cache --fix app/Resources/js",
     "bundlesize": "bundlesize",
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook:static": "build-storybook -c .storybook -o doc",
     "prettier": "prettier --write 'app/Resources/js/**/*.js'",
     "precommit": "flow status && lint-staged"
   },
