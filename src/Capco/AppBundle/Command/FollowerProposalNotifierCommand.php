@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,6 +12,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
+    const NOT_FOLLOWED = 0;
+
     protected function configure()
     {
         $this
@@ -23,8 +26,13 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $notifier = $container->get('capco.follower_notifier');
-
-        $followersWithActivities = $this->getFollowersWithActivities();
+        try {
+            $followersWithActivities = $this->getFollowersWithActivities();
+        } catch (\Exception $e) {
+            $output->writeln(
+                '<error>' . $e->getMessage() . '</error>'
+            );
+        }
         $proposalActivities = $this->getProposalActivities();
         $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
         unset($proposalActivities);
@@ -69,6 +77,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $userActivity->setFirstname($follower->getUser()->getFirstname());
                 $userActivity->setLastname($follower->getUser()->getLastname());
                 $userActivity->addUserProposal($proposalId);
+                $userActivity->setNotifiedOf($follower->getNotifiedOf());
                 /* UserActivity */
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
@@ -79,11 +88,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         return $followersWithActivities;
     }
 
-    private function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities)
+    private function orderUserProposalActivitiesInProject(array $followersWithActivities, array $projects, array $proposalActivities): array
     {
-        /*
-         * @var UserActivity
-         */
+        /** @var UserActivity $userActivity * */
         foreach ($followersWithActivities as $userId => $userActivity) {
             $userActivity->setUserProjects($projects);
             if (!$userActivity->hasProposal()) {
@@ -99,12 +106,23 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                         if (!isset($project['proposals'])) {
                             $project['proposals'] = [];
                         }
+                        if (FollowerNotifiedOfInterface::DEFAULT === $userActivity->getNotifiedOf()) {
+                            $proposal['comments'] = self::NOT_FOLLOWED;
+                            $proposal['votes'] = self::NOT_FOLLOWED;
+                        }
+                        if (FollowerNotifiedOfInterface::DEFAULT_AND_COMMENTS === $userActivity->getNotifiedOf()) {
+                            $proposal['votes'] = self::NOT_FOLLOWED;
+                        }
+                        if (!$this->hasMinimalRequiredFields($proposal)) {
+                            continue;
+                        }
+
                         $project['proposals'][$proposalId] = $proposal;
                         $userActivity->addUserProject($project, $proposal['projectId']);
                     }
                 }
             }
-
+            // check if user project got a proposal and remove empty project
             foreach ($userActivity->getUserProjects() as $projectId => $project) {
                 if (empty($project['proposals'])) {
                     $userActivity->removeUserProject($projectId);
@@ -112,6 +130,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             }
 
             $userActivity->setUserProposals([]);
+            // check if user got a project and remove user without project
             if (!$userActivity->hasUserProject()) {
                 unset($followersWithActivities[$userId]);
                 continue;
@@ -129,19 +148,35 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             ->setDescription('Send email to followers of proposals');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $container = $this->getContainer();
-        $siteName = $container->get('capco.site_parameter.resolver')->getValue('global.site.fullname');
-        $notifier = $container->get('capco.follower_notifier');
-        $activitiesResolver = $container->get('capco.following.activities.resolver');
-        $followedProposalsByUserId = [];
-        try {
-            $followedProposalsByUserId = $activitiesResolver->getFollowedProposalsByUserId();
-        } catch (\Exception $e) {
-            $output->writeln(
-                '<error>' . $e->getMessage() . '</error>'
-            );
+        /** @var ProposalForm $proposalForm */
+        foreach ($proposalForms as $proposalForm) {
+            $project = $proposalForm->getStep()->getProject();
+            $projectId = $project->getId();
+            $proposals = $proposalForm->getProposals();
+            $projects[$projectId]['projectTitle'] = $project->getTitle();
+            $projects[$projectId]['projectType'] = $project->getProjectType()->getTitle();
+            $projects[$projectId]['proposals'] = [];
+            /** @var Proposal $proposal */
+            foreach ($proposals as $proposal) {
+                $currentProposal = [];
+                $proposalId = $proposal->getId();
+                $proposalCommentYesterdays = $proposalRepository->countProposalCommentsCreatedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
+                $proposalVotesInYesterday = $proposalRepository->countProposalVotesCreatedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
+                $proposalStepInYesterday = $proposalRepository->proposalStepChangedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
+                $currentProposal['title'] = $proposal->getTitle();
+                $currentProposal['isUpdated'] = $proposal->isUpdatedInLastInterval($yesterdayLasTime, $twentyFourHoursInterval);
+                $currentProposal['isDeleted'] = $proposal->isDeletedInLastInterval($yesterdayLasTime, $twentyFourHoursInterval);
+                $currentProposal['comments'] = (int) $proposalCommentYesterdays[0]['countComment'];
+                $currentProposal['votes'] = $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
+                $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday : false;
+                $currentProposal['projectId'] = $projectId;
+
+                if (!$this->hasMinimalRequiredFields($currentProposal)) {
+                    unset($currentProposal);
+                } else {
+                    $pProposals[$proposalId] = $currentProposal;
+                }
+            }
         }
         $proposalActivities = $activitiesResolver->getYesterdayProposalActivities();
         $followedProposalsActivitiesByUserId = $activitiesResolver->getMatchingActivitiesByUserId($followedProposalsByUserId, $proposalActivities);
@@ -157,5 +192,14 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         );
 
         return 0;
+    }
+
+    private function hasMinimalRequiredFields($proposal): bool
+    {
+        if (!$proposal['votes'] && !$proposal['comments'] && !$proposal['isUpdated'] && !$proposal['lastStep'] && !$proposal['isDeleted']) {
+            return false;
+        }
+
+        return true;
     }
 }
