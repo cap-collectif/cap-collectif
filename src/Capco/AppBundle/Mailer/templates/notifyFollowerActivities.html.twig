@@ -1,16 +1,31 @@
 {% block body_text %}
     {% autoescape false %}
-        <p>
-            {{ 'moderation.notification.body'|trans({'%title%': contribution}, 'CapcoAppBundle') | raw }}
-        </p>
-        {% if contribution.trashedReason %}
-            <p>{{ contribution.trashedReason }}</p>
-        {% endif %}
-        {% if trashUrl is not null %}
-            <p>
-                <a href="{{ trashUrl }}">{{ 'moderation.notification.contribution'|trans({}, 'CapcoAppBundle') }}</a>
-            </p>
-        {% endif %}
+        {% for currentProjectId, project in userProjectsActivities %}
+            <h1>{{ project.projectTitle }}</h1>
+            <h2>{{ project.projectType }}</h2>
+
+            {% for proposal in project.proposals %}
+                <h3>{{ proposal.title }}</h3>
+                <ul>
+                    {% if proposal.isUpdated %}
+                        <li>Proposition mise à jour</li>
+                    {% endif %}
+                    {% if proposal.isDeleted %}
+                        <li>Proposition supprimée</li>
+                    {% endif %}
+                    {% if proposal.comments > 0 %}
+                        <li>{{ proposal.comments }} nouveaux commentaires</li>
+                    {% endif %}
+                    {% if proposal.votes > 0 %}
+                        <li>{{ proposal.votes }} nouveaux votes</li>
+                    {% endif %}
+                    {% if proposal.lastStep %}
+                        <li>Est passé à l'étape : {{proposal.lastStep }}</li>
+                    {% endif %}
+                </ul>
+                <a href="{{ proposal.link }}">Afficher</a>
+            {% endfor %}
+        {% endfor %}
     {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
