@@ -34,7 +34,6 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $author = $proposal->getAuthor();
-        $proposalForm = $proposal->getProposalForm();
 
         $em->remove($proposal); // softdeleted
         $em->flush();
@@ -152,8 +151,6 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setStatus($status);
         $em->flush();
 
-        $this->container->get('capco.proposal_notifier')->onStatusChangeInCollect($proposal);
-
         // Synchronously index
         $indexer = $this->container->get('capco.elasticsearch.indexer');
         $indexer->index(get_class($proposal), $proposal->getId());
@@ -182,8 +179,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $selection->setStatus($status);
         $em->flush();
-
-        $this->container->get('capco.proposal_notifier')->onStatusChangeInSelection($selection);
 
         $proposal = $this->getProposal($proposalId);
 
