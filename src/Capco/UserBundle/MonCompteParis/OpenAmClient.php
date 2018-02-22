@@ -12,9 +12,9 @@ class OpenAmClient
 
     protected $cookie = null;
 
-    public function __construct()
+    public function __construct(HttpClient $client)
     {
-        $this->client = new Client();
+        $this->client = $client;
     }
 
     public function setCookie(string $cookie)
@@ -24,7 +24,7 @@ class OpenAmClient
 
     public function getUid(): string
     {
-        $response = $this->client->post(self::API_URL . 'sessions/' . $this->cookie . '?_action=validate', ['Content-Type: application/json'])
+        $response = $this->client->post(self::API_URL . 'sessions/' . $this->cookie . '?_action=validate', ['Content-Type: application/json']);
         $json = json_decode((string) $response->getBody(), true);
 
         if (false === $json['valid']) {
@@ -37,7 +37,7 @@ class OpenAmClient
     // OR http://fr.lutece.paris.fr/fr/wiki/gru-appeldirect-identitystore.html
     public function getUserInformations(string $uid): array
     {
-        $response = $this->client->get(self::API_URL . 'users/' . $uid, [self::COOKIE_NAME . ': ' . $this->cookie])
+        $response = $this->client->get(self::API_URL . 'users/' . $uid, [self::COOKIE_NAME . ': ' . $this->cookie]);
         $json = json_decode((string) $response->getBody(), true);
 
         return [

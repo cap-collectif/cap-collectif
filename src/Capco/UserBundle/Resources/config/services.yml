@@ -7,8 +7,9 @@ services:
     abstract: false
     public: true
 
-  capco.paris.opem_am_caller:
+  capco.paris.opem_am_client:
     class: Capco\UserBundle\MonCompteParis\OpenAmClient
+    arguments: ["httplug.client.default"]
 
   capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
@@ -24,7 +25,7 @@ services:
 
   capco.paris.provider:
     class: Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider
-    arguments: ["@fos_user.user_manager", "@capco.paris.opem_am_caller"]
+    arguments: ["@fos_user.user_manager", "@capco.paris.opem_am_client"]
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
@@ -68,7 +69,7 @@ services:
 
   capco.paris.authenticator:
       class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
-      arguments: ["@security.http_utils", "@logger", "@capco.paris.opem_am_caller"]
+      arguments: ["@security.http_utils", "@logger", "@capco.paris.opem_am_client"]
 
   capco.saml.authenticator:
       class: Capco\UserBundle\Authenticator\SamlAuthenticator
