@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
@@ -60,7 +60,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     protected $isEnabled = true;
 
     /**
-     * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
@@ -187,18 +186,12 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->getIsEnabled() && !$this->isExpired();
     }
 
-    /**
-     * @return null|int
-     */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param int $position
-     */
-    public function setPosition($position)
+    public function setPosition(int $position = null): self
     {
         $this->position = $position;
 
@@ -224,54 +217,32 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getVersionsCount()
+    public function getVersionsCount(): int
     {
         return $this->versionsCount;
     }
 
-    /**
-     * @param mixed $versionsCount
-     */
-    public function setVersionsCount($versionsCount)
+    public function setVersionsCount(int $versionsCount): self
     {
         $this->versionsCount = $versionsCount;
     }
 
-    /**
-     * @return int
-     */
-    public function getSourcesCount()
+    public function getSourcesCount(): int
     {
         return $this->sourcesCount;
     }
 
-    /**
-     * @param int $sourcesCount
-     */
-    public function setSourcesCount($sourcesCount): self
+    public function setSourcesCount(int $sourcesCount): self
     {
         $this->sourcesCount = $sourcesCount;
 
@@ -297,38 +268,26 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->argumentsCount;
     }
 
-    /**
-     * @param int $argumentsCount
-     */
-    public function setArgumentsCount($argumentsCount)
+    public function setArgumentsCount(int $argumentsCount): self
     {
         $this->argumentsCount = $argumentsCount;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->Author;
     }
 
-    /**
-     * @param string $Author
-     */
-    public function setAuthor($Author)
+    public function setAuthor(User $Author): self
     {
         $this->Author = $Author;
 
         return $this;
     }
 
-    /**
-     * @return null|OpinionType
-     */
-    public function getOpinionType()
+    public function getOpinionType(): ?OpinionType
     {
         return $this->OpinionType;
     }
@@ -345,40 +304,31 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->step->getProject();
     }
 
-    /**
-     * @return AbstractStep
-     */
-    public function getStep()
+    public function getStep(): ?ConsultationStep
     {
         return $this->step;
     }
 
-    /**
-     * @param mixed $step
-     */
-    public function setStep($step)
+    public function setStep(ConsultationStep $step): self
     {
         $this->step = $step;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSources()
+    public function getSources(): Collection
     {
         return $this->Sources;
     }
 
-    public function setSources($sources)
+    public function setSources(Collection $sources)
     {
         $this->Sources = $sources;
 
         return $this;
     }
 
-    public function addSource($source): self
+    public function addSource(Source $source): self
     {
         if (!$this->Sources->contains($source)) {
             $this->Sources->add($source);
@@ -387,12 +337,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * @param $source
-     *
-     * @return $this
-     */
-    public function removeSource($source)
+    public function removeSource(Source $source): self
     {
         $this->Sources->removeElement($source);
 
@@ -404,19 +349,14 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this->arguments;
     }
 
-    public function setArguments($arguments)
+    public function setArguments(Collection $arguments): self
     {
         $this->arguments = $arguments;
 
         return $this;
     }
 
-    /**
-     * @param $argument
-     *
-     * @return $this
-     */
-    public function addArgument(Argument $argument)
+    public function addArgument(Argument $argument): self
     {
         if (!$this->arguments->contains($argument)) {
             $this->arguments->add($argument);
@@ -425,24 +365,19 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * @param Argument $argument
-     *
-     * @return $this
-     */
-    public function removeArgument(Argument $argument)
+    public function removeArgument(Argument $argument): self
     {
         $this->arguments->removeElement($argument);
 
         return $this;
     }
 
-    public function getModals()
+    public function getModals(): Collection
     {
         return $this->modals;
     }
 
-    public function addModal(OpinionModal $modal)
+    public function addModal(OpinionModal $modal): self
     {
         if (!$this->modals->contains($modal)) {
             $this->modals->add($modal);
@@ -451,27 +386,19 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    public function removeModal(OpinionModal $modal)
+    public function removeModal(OpinionModal $modal): self
     {
         $this->modals->removeElement($modal);
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReports()
+    public function getReports(): Collection
     {
         return $this->Reports;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
-    public function addReport(Reporting $report)
+    public function addReport(Reporting $report): self
     {
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
@@ -480,11 +407,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
     public function removeReport(Reporting $report): self
     {
         $this->Reports->removeElement($report);
@@ -492,7 +414,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    public function getVersions()
+    public function getVersions(): Collection
     {
         return $this->versions;
     }
@@ -513,19 +435,19 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    public function getAppendices()
+    public function getAppendices(): Collection
     {
         return $this->appendices;
     }
 
-    public function setAppendices(ArrayCollection $appendices): self
+    public function setAppendices(Collection $appendices): self
     {
         $this->appendices = $appendices;
 
         return $this;
     }
 
-    public function addAppendice(OpinionAppendix $appendix)
+    public function addAppendice(OpinionAppendix $appendix): self
     {
         if (!$this->appendices->contains($appendix)) {
             $appendix->setOpinion($this);
@@ -535,24 +457,18 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return $this;
     }
 
-    public function removeAppendice(OpinionAppendix $appendix)
+    public function removeAppendice(OpinionAppendix $appendix): self
     {
         $this->appendices->removeElement($appendix);
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getRanking()
     {
         return $this->ranking;
     }
 
-    /**
-     * @param mixed $ranking
-     */
     public function setRanking($ranking)
     {
         $this->ranking = $ranking;
@@ -655,7 +571,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return 0;
     }
 
-    public function canAddVersions()
+    public function canAddVersions(): bool
     {
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->isVersionable();
@@ -664,7 +580,7 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return false;
     }
 
-    public function canAddSources()
+    public function canAddSources(): bool
     {
         if ($this->getOpinionType()) {
             return $this->getOpinionType()->isSourceable();
