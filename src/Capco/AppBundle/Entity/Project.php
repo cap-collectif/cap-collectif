@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -856,15 +855,6 @@ class Project implements IndexableInterface
     {
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep() && $step->getStep()->isOpen()) {
-                return $step->getStep();
-            }
-        }
-    }
-
-    public function getFirstCollectStep(): ?CollectStep
-    {
-        foreach ($this->steps as $step) {
-            if ($step->getStep()->isCollectStep()) {
                 return $step->getStep();
             }
         }

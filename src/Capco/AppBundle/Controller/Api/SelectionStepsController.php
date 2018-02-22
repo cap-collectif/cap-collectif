@@ -296,7 +296,7 @@ class SelectionStepsController extends FOSRestController
                 'title' => $proposal['title'],
                 'url' => $router->generate('app_project_show_proposal', ['proposalSlug' => $proposal['slug'],
                     'projectSlug' => $step->getProject()->getSlug(),
-                    'stepSlug' => $step->getProject()->getFirstCollectStep()->getSlug(),
+                    'stepSlug' => $step->getSlug(),
                 ], true),
                 'lat' => $location[0]['geometry']['location']['lat'],
                 'lng' => $location[0]['geometry']['location']['lng'],
