@@ -27,7 +27,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "storybook:static": "build-storybook -c .storybook -o docs",
     "prettier": "prettier --write 'app/Resources/js/**/*.js'",
-    "precommit": "lint-staged"
+    "precommit": "flow status && lint-staged"
   },
   "pre-commit": "precommit",
   "lint-staged": {
