@@ -10,6 +10,8 @@ import {
   FormGroup,
   Radio,
   Button,
+  Tooltip,
+  OverlayTrigger,
 } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
@@ -61,7 +63,22 @@ export class ProposalFollowButton extends React.Component<Props> {
               id="proposal-follow-btn"
               title={<FormattedMessage id="following" />}>
               <Panel
-                header={<FormattedMessage id="to-be-notified-of-new-of" />}
+                header={
+                  <span>
+                    <FormattedMessage id="to-be-notified-of-new-of" />
+                    <OverlayTrigger
+                      placement="right"
+                      overlay={
+                        <Tooltip placement="top" className="in" id="pinned-label">
+                          <FormattedMessage id="sqdqsd" />
+                        </Tooltip>
+                      }>
+                      <a>
+                        <span className="cap-information" />
+                      </a>
+                    </OverlayTrigger>
+                  </span>
+                }
                 className="mb-0 bn">
                 <FormGroup className="bn mb-0">
                   <ListGroup className="mb-0">
