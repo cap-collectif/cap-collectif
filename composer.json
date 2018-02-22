@@ -116,7 +116,8 @@
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "webonyx/graphql-php": "^0.11.2",
         "overblog/graphql-php-generator": "@dev",
-        "php-http/httplug-bundle": "^1.8"
+        "php-http/httplug-bundle": "^1.8",
+        "php-http/curl-client": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

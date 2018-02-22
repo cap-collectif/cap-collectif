@@ -9,7 +9,7 @@ services:
 
   capco.paris.opem_am_client:
     class: Capco\UserBundle\MonCompteParis\OpenAmClient
-    arguments: ["httplug.client.default"]
+    arguments: ["@httplug.client.default"]
 
   capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
