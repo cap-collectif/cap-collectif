@@ -347,7 +347,7 @@ class ProposalMutation implements ContainerAwareInterface
         $follower = new Follower();
         $follower->setUser($user);
         $follower->setProposal($proposal);
-        $follower->setNotifiedOf(FollowerNotifiedOfInterface::DEFAULT);
+        $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
 
         $proposal
             ->setDraft($draft)
