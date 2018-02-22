@@ -5,6 +5,10 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Model\UserActivity;
+use Doctrine\ORM\EntityNotFoundException;
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,6 +17,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
     const NOT_FOLLOWED = 0;
+
+    private static $userWithoutValidEmail = [];
 
     protected function configure()
     {
@@ -44,6 +50,11 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         $output->writeln(
             '<info>Notification correctly send to ' . $nbNewsletters . ' users</info>'
         );
+        $userWithoutEmail = array_unique(static::$userWithoutValidEmail);
+
+        $output->writeln(
+            '<comment>There are ' . count($userWithoutEmail) . ' users who follow some proposals, without valid email</comment>'
+        );
 
         return 0;
     }
@@ -51,6 +62,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
     private function getFollowersWithActivities(): array
     {
         $container = $this->getContainer();
+        /** @var Logger $logger */
         $logger = $container->get('logger');
         $em = $container->get('doctrine')->getManager();
         $followers = $em->getRepository('CapcoAppBundle:Follower')->findAll();
@@ -60,24 +72,28 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         foreach ($followers as $follower) {
             try {
                 $proposalId = $follower->getProposal()->getId();
-                $userId = $follower->getUser()->getId();
+                $user = $follower->getUser();
+                $userId = $user->getId();
             } catch (EntityNotFoundException $e) {
                 $logger->addError(__METHOD__ . $e->getMessage());
                 continue;
             }
-            if (!filter_var($follower->getUser()->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
-                $logger->addError(sprintf('%s doesnt have a valid email %s', $follower->getUser()->getUsername(), $follower->getUser()->getEmailCanonical()));
+            if (!filter_var($user->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
+                static::$userWithoutValidEmail[] = $userId;
+
+                $logger->error(sprintf('%s doesnt have a valid email %s', $user->getUsername(), $user->getEmailCanonical()));
                 continue;
             }
             if (!isset($followersWithActivities[$userId])) {
                 $userActivity = new UserActivity();
                 $userActivity->setId($userId);
-                $userActivity->setEmail($follower->getUser()->getEmailCanonical());
-                $userActivity->setUsername($follower->getUser()->getUsername());
-                $userActivity->setFirstname($follower->getUser()->getFirstname());
-                $userActivity->setLastname($follower->getUser()->getLastname());
+                $userActivity->setEmail($user->getEmailCanonical());
+                $userActivity->setUsername($user->getUsername());
+                $userActivity->setFirstname($user->getFirstname());
+                $userActivity->setLastname($user->getLastname());
                 $userActivity->addUserProposal($proposalId);
                 $userActivity->setNotifiedOf($follower->getNotifiedOf());
+//                $userActivity->setConnectionToken($user->getToken());
                 /* UserActivity */
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
@@ -143,10 +159,17 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
 
     private function getProposalActivities(): array
     {
-        $this
-            ->setName('capco:follower-proposal-notifier')
-            ->setDescription('Send email to followers of proposals');
-    }
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $proposalRepository = $em->getRepository('CapcoAppBundle:Proposal');
+        $proposalFormRepository = $em->getRepository('CapcoAppBundle:ProposalForm');
+        $yesterdayMidnight = new \DateTime('yesterday midnight');
+        $yesterdayLasTime = (new \DateTime('today midnight'))->modify('-1 second');
+        $twentyFourHoursInterval = new \DateInterval('PT24H');
+        $proposalForms = $proposalFormRepository->findAll();
+        $router = $container->get('router');
+        $pProposals = [];
+        $projects = [];
 
         /** @var ProposalForm $proposalForm */
         foreach ($proposalForms as $proposalForm) {
@@ -156,6 +179,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             $projects[$projectId]['projectTitle'] = $project->getTitle();
             $projects[$projectId]['projectType'] = $project->getProjectType()->getTitle();
             $projects[$projectId]['proposals'] = [];
+
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
                 $currentProposal = [];
@@ -164,6 +188,15 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $proposalVotesInYesterday = $proposalRepository->countProposalVotesCreatedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
                 $proposalStepInYesterday = $proposalRepository->proposalStepChangedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
                 $currentProposal['title'] = $proposal->getTitle();
+                $currentProposal['link'] = $router->generate(
+                    'app_project_show_proposal',
+                    [
+                        'projectSlug' => $project->getSlug(),
+                        'stepSlug' => $proposal->getStep()->getSlug(),
+                        'proposalSlug' => $proposal->getSlug(),
+                    ],
+                    0
+                );
                 $currentProposal['isUpdated'] = $proposal->isUpdatedInLastInterval($yesterdayLasTime, $twentyFourHoursInterval);
                 $currentProposal['isDeleted'] = $proposal->isDeletedInLastInterval($yesterdayLasTime, $twentyFourHoursInterval);
                 $currentProposal['comments'] = (int) $proposalCommentYesterdays[0]['countComment'];

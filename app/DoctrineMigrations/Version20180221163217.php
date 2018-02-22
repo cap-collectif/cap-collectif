@@ -49,10 +49,10 @@ class Version20180221163217 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $proposals = $this->connection->fetchAll('SELECT id, author_id from proposal');
+        $proposals = $this->connection->fetchAll('SELECT id, author_id, created_at from proposal');
         foreach ($proposals as $proposal) {
             $uuid = $this->generator->generate($this->em, null);
-            $this->connection->insert('user_following_proposal', ['id'=>$uuid,'user_id' => $proposal['author_id'], 'proposal_id' => $proposal['id'], 'notified_of' => FollowerNotifiedOfInterface::ALL]);
+            $this->connection->insert('user_following_proposal', ['id'=>$uuid,'user_id' => $proposal['author_id'], 'proposal_id' => $proposal['id'], 'notified_of' => FollowerNotifiedOfInterface::ALL, 'followed_at' => $proposal['created_at']]);
         }
     }
 }
