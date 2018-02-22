@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
+use Doctrine\ORM\EntityNotFoundException;
 
 class CommentResolver
 {
@@ -71,7 +72,11 @@ class CommentResolver
 
     public function getRelatedObject(Comment $comment)
     {
-        return $comment->getRelatedObject();
+        try {
+            return $comment->getRelatedObject();
+        } catch (EntityNotFoundException $e) {
+            return null;
+        }
     }
 
     public function getUrlOfObjectByTypeAndId($objectType, $objectId, $absolute = false)
