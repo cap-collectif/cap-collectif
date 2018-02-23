@@ -343,7 +343,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function isEqualTo(RealUserInterface $user)
     {
-        return $this->id === $user->getId();
+        return $user instanceof self && $this->id === $user->getId();
     }
 
     public function addResponse(AbstractResponse $response): self

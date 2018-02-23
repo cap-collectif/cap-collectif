@@ -272,16 +272,4 @@ class SiteParameter
 
         return $this;
     }
-
-    public function isCustomCodeDescription()
-    {
-        return $this->isCustomCodeDescription;
-    }
-
-    public function setIsCustomCodeDescription(bool $isCustomCodeDescription)
-    {
-        $this->isCustomCodeDescription = $isCustomCodeDescription;
-
-        return $this;
-    }
 }

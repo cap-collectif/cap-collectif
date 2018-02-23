@@ -11,6 +11,7 @@ class OpenAmClient
     const API_URL = 'https://moncompte.paris.fr/v69/json/';
 
     protected $cookie = null;
+    protected $client;
 
     public function __construct(HttpClient $client)
     {
