@@ -235,6 +235,8 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
     public function setVersionsCount(int $versionsCount): self
     {
         $this->versionsCount = $versionsCount;
+
+        return $this;
     }
 
     public function getSourcesCount(): int
