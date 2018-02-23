@@ -28,6 +28,7 @@ class ProposalProgressStepType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Capco\AppBundle\Entity\Proposal',
+            'validation_groups' => ['changeProgressSteps'],
             'csrf_protection' => false,
         ]);
     }
