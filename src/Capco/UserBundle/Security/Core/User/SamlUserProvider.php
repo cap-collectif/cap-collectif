@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -51,9 +50,7 @@ class SamlUserProvider implements UserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        if ($user instanceof User) {
-            return $this->userManager->findUserBy(['samlId' => $user->getSamlId()]);
-        }
+        return $this->userManager->findUserBy(['samlId' => $user->getSamlId()]);
     }
 
     public function supportsClass($class): bool

@@ -434,7 +434,9 @@ class Project implements IndexableInterface
     {
         $steps = [];
         foreach ($this->steps as $qaq) {
-            $steps[] = $qaq->getStep();
+            if ($qaq->getStep()) {
+                $steps[] = $qaq->getStep();
+            }
         }
 
         return $steps;

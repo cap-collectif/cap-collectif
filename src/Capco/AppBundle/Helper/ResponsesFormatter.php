@@ -21,10 +21,9 @@ class ResponsesFormatter
         // we need to set _type for polycollection
         // and position for reordering
         foreach ($responses as &$response) {
-            $questionId = (int) $response['question'];
-            $question = $this->questionRepo->find($questionId);
+            $question = $this->questionRepo->find((int) $response['question']);
             if (!$question) {
-                throw new UserError(sprintf('Unknown question with id "%d"', $questionId));
+                throw new UserError(sprintf('Unknown question with id "%d"', (int) $questionId));
             }
             $questions[] = $question;
             $response['question'] = $question->getId();

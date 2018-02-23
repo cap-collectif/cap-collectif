@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -39,9 +38,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        if ($user instanceof User) {
-            return $this->userManager->findUserBy(['parisId' => $user->getParisId()]);
-        }
+        return $this->userManager->findUserBy(['parisId' => $user->getParisId()]);
     }
 
     public function supportsClass($class): bool

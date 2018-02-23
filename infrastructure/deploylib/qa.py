@@ -39,7 +39,7 @@ def static_analysis():
     "Run static analysis tools"
     env.compose_run('yarn run typecheck', 'builder', '.', no_deps=True)
     env.compose_run('yarn run typecheck:coverage', 'builder', '.', no_deps=True)
-    env.service_command('php -d memory_limit=-1 bin/phpstan analyse src -l 2 -c phpstan.neon', 'application', env.www_app)
+    env.service_command('php -d memory_limit=-1 bin/phpstan analyse src -l 2 -c phpstan.neon || true', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])

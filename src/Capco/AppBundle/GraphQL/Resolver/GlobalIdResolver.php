@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Model\ModerableInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GlobalIdResolver
 {

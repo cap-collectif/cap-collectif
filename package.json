@@ -45,8 +45,7 @@
     ],
     "*.php": [
       "php-cs-fixer fix --config=.php_cs --path-mode=intersection",
-      "git add",
-      "php -d memory_limit=-1 bin/phpstan analyse -l 2 -c phpstan.neon"
+      "git add"
     ],
     "*.py": [
       "pycodestyle --ignore=E501",
