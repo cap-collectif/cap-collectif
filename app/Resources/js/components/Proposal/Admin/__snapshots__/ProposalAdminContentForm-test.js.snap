@@ -203,7 +203,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       </h3>
       <a
         className="pull-right link"
-        href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu"
+        href="admin.help.link.proposal.body"
         rel="noopener noreferrer"
         target="_blank"
       >

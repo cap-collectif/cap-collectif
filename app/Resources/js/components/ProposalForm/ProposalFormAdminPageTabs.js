@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
@@ -10,7 +10,7 @@ import ProposalFormAdminSettingsForm from './ProposalFormAdminSettingsForm';
 import type { ProposalFormAdminPageTabs_proposalForm } from './__generated__/ProposalFormAdminPageTabs_proposalForm.graphql';
 
 type DefaultProps = void;
-type Props = { proposalForm: ProposalFormAdminPageTabs_proposalForm, intl: Object };
+type Props = { proposalForm: ProposalFormAdminPageTabs_proposalForm, intl: IntlShape };
 type State = void;
 
 export class ProposalFormAdminPageTabs extends Component<Props, State> {

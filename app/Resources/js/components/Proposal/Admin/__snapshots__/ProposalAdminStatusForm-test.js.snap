@@ -17,7 +17,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      href="admin.help.link.proposal.state"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -142,7 +142,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      href="admin.help.link.proposal.state"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -258,7 +258,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication"
+      href="admin.help.link.proposal.state"
       rel="noopener noreferrer"
       target="_blank"
     >

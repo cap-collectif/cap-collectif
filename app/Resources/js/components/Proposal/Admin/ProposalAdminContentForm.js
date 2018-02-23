@@ -270,7 +270,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               className="pull-right link"
               target="_blank"
               rel="noopener noreferrer"
-              href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#contenu">
+              href={intl.formatMessage({ id: 'admin.help.link.proposal.body' })}>
               <i className="fa fa-info-circle" /> Aide
             </a>
           </div>

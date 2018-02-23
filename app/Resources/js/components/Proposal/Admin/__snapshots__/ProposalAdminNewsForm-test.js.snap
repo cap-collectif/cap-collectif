@@ -17,7 +17,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite"
+      href="admin.help.link.proposal.news"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -143,7 +143,7 @@ exports[`<ProposalAdminNewsForm /> render correctly when there are no news 1`] =
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite"
+      href="admin.help.link.proposal.news"
       rel="noopener noreferrer"
       target="_blank"
     >

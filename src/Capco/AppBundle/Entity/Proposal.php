@@ -971,7 +971,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->evaluers;
     }
 
-    public function setEvaluers(Collection $evaluers): self
+    public function setEvaluers(Collection $userGroups): self
     {
         $this->evaluers = $evaluers;
 

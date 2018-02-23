@@ -180,6 +180,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       handleSubmit,
       submitting,
       proposal,
+      intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
@@ -194,6 +195,13 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                   <h3 className="box-title">
                     <FormattedMessage id="Questionnaire" />
                   </h3>
+                  <a
+                    className="pull-right link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={intl.formatMessage({ id: 'admin.help.link.proposal.evaluation' })}>
+                    <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
+                  </a>
                 </div>
                 <Field
                   name="estimation"

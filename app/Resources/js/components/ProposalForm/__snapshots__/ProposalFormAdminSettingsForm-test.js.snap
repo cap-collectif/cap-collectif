@@ -17,7 +17,7 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot"
+      href="admin.help.link.form.settings"
       rel="noopener noreferrer"
     >
       <i

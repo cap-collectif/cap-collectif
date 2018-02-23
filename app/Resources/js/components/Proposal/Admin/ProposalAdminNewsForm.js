@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { baseUrl } from '../../../config';
@@ -9,13 +9,14 @@ import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdm
 type DefaultProps = void;
 type Props = {
   proposal: ProposalAdminNewsForm_proposal,
+  intl: IntlShape,
 };
 type State = void;
 
 export class ProposalAdminNewsForm extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
-    const { proposal } = this.props;
+    const { proposal, intl } = this.props;
 
     return (
       <div className="box box-primary container">
@@ -27,7 +28,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite">
+            href={intl.formatMessage({ id: 'admin.help.link.proposal.news' })}>
             <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
@@ -74,8 +75,10 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
   }
 }
 
+const container = injectIntl(ProposalAdminNewsForm);
+
 export default createFragmentContainer(
-  ProposalAdminNewsForm,
+  container,
   graphql`
     fragment ProposalAdminNewsForm_proposal on Proposal {
       news {

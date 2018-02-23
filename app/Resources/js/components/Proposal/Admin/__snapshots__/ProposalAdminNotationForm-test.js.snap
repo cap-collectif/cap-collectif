@@ -48,6 +48,21 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
                 values={Object {}}
               />
             </h3>
+            <a
+              className="pull-right link"
+              href="admin.help.link.proposal.evaluation"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <i
+                className="fa fa-info-circle"
+              />
+               
+              <FormattedMessage
+                id="global.help"
+                values={Object {}}
+              />
+            </a>
           </div>
           <Field
             addonAfter={

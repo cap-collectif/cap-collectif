@@ -85,7 +85,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#publication">
+            href={intl.formatMessage({ id: 'admin.help.link.proposal.state' })}>
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>

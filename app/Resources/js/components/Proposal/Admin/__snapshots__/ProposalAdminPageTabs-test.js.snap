@@ -40,7 +40,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       eventKey={3}
       title="proposal.admin.news"
     >
-      <Relay(ProposalAdminNewsForm)
+      <Relay(InjectIntl(ProposalAdminNewsForm))
         proposal={Object {}}
       />
     </Tab>

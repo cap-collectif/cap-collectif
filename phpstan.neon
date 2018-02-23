@@ -1,24 +1,7 @@
-includes:
-  - vendor/phpstan/phpstan-doctrine/extension.neon
 parameters:
+    includes:
+    	- vendor/phpstan/phpstan-doctrine/extension.neon
     excludes_analyse:
-        - %currentWorkingDirectory%/spec/*
-        - %currentWorkingDirectory%/src/Capco/UserBundle/Security/DrupalEncoder.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/DataFixtures/ORM/*
-        - %currentWorkingDirectory%/src/Capco/AdminBundle/*
-        - %currentWorkingDirectory%/src/Capco/AdminBundle/Controller/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Controller/Api/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Controller/Site/*
-        - %currentWorkingDirectory%/src/Capco/UserBundle/Controller
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Validator/Constraints
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Behat
-        - %currentWorkingDirectory%/src/Capco/AppBundle/EventListener/DynamicRelationSubscriber.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/EventListener/ReferenceEventListener.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/ConsultationResolver.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Resolver/ProjectStatsResolver.php
-        # @Liinkiing is refactoring this part
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ProposalNotifier.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Manager/Notify.php
+        - src/Capco/UserBundle/Security/DrupalEncoder.php
+        - src/Capco/AppBundle/DataFixtures/ORM/*
+        - src/Capco/AdminBundle/*

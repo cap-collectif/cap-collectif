@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
@@ -15,6 +15,7 @@ import Loader from '../Utils/Loader';
 
 type RelayProps = { proposalForm: ProposalFormAdminEvaluationForm_proposalForm };
 type Props = RelayProps & {
+  intl: IntlShape,
   handleSubmit: () => void,
   invalid: boolean,
   pristine: boolean,
@@ -46,6 +47,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
 
   render() {
     const {
+      intl,
       proposalForm,
       handleSubmit,
       pristine,
@@ -67,7 +69,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
           <a
             className="pull-right link"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/51-creer-un-formulaire-de-depot">
+            href={intl.formatMessage({ id: 'admin.help.link.form.evaluation' })}>
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
@@ -156,9 +158,10 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
 });
 
 const container = connect(mapStateToProps)(form);
+const intlContainer = injectIntl(container);
 
 export default createFragmentContainer(
-  container,
+  intlContainer,
   graphql`
     fragment ProposalFormAdminEvaluationForm_proposalForm on ProposalForm {
       id
