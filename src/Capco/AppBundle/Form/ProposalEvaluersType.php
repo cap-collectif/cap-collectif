@@ -22,6 +22,7 @@ class ProposalEvaluersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Proposal::class,
+            'validation_groups' => ['changeProposalEvaluers'],
             'csrf_protection' => false,
         ]);
     }
