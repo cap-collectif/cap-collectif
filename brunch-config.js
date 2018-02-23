@@ -32,7 +32,6 @@ exports.config = {
       'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
       'bower_components/compass-mixins/lib/_compass.scss',
       'app/Resources/js-server/registration.js',
-      /-stories.js$/,
       /-test.js$/,
       /.snap$/,
     ],

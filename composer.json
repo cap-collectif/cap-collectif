@@ -121,8 +121,7 @@
         "overblog/graphql-php-generator": "@dev",
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
-        "symfony/polyfill-apcu": "^1.7",
-        "overblog/graphql-bundle": "0.9.3"
+        "symfony/polyfill-apcu": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

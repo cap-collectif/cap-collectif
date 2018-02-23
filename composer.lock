@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "afc1f98fe045021b42aadc2162792de2",
+    "content-hash": "4ae1e5728a2e2969ec5cf94713e32d6b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5115,84 +5115,6 @@
             "time": "2017-03-20T20:12:10+00:00"
         },
         {
-            "name": "overblog/graphql-bundle",
-            "version": "v0.9.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "352700bbb806176461d22db2c1f587e706cba6d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/352700bbb806176461d22db2c1f587e706cba6d2",
-                "reference": "352700bbb806176461d22db2c1f587e706cba6d2",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-cache-bundle": "^1.2",
-                "overblog/graphql-php-generator": "^0.5.0",
-                "php": ">=5.5.9",
-                "symfony/cache": "^3.1",
-                "symfony/expression-language": "^2.8 || ^3.0",
-                "symfony/framework-bundle": "^2.8 || ^3.0",
-                "symfony/options-resolver": "^2.8 || ^3.0",
-                "symfony/property-access": "^2.8 || ^3.0",
-                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.11",
-                "phpunit/phpunit": "^4.1 || ^5.5 || ^6.0",
-                "react/promise": "^2.5",
-                "sensio/framework-extra-bundle": "^3.0",
-                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
-                "symfony/asset": "^2.8 || ^3.0",
-                "symfony/browser-kit": "^2.8 || ^3.0",
-                "symfony/css-selector": "^2.8 || ^3.0",
-                "symfony/dependency-injection": "^2.8 || ^3.0",
-                "symfony/phpunit-bridge": "^2.8 || ^3.0",
-                "symfony/security-bundle": "^2.8 || ^3.0",
-                "symfony/templating": "^2.8 || ^3.0",
-                "symfony/twig-bundle": "^2.8 || ^3.0",
-                "symfony/web-profiler-bundle": "^2.8 || ^3.0",
-                "symfony/yaml": "^2.8 || ^3.0"
-            },
-            "suggest": {
-                "nelmio/cors-bundle": "For more flexibility when using CORS prefight",
-                "react/promise": "To use ReactPHP promise adapter",
-                "twig/twig": "If you want to use graphiQL."
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overblog\\GraphQLBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Overblog",
-                    "homepage": "http://www.over-blog.com"
-                }
-            ],
-            "description": "This bundle provides tools to build a GraphQL server in your Symfony App.",
-            "keywords": [
-                "Relay",
-                "graphql"
-            ],
-            "time": "2017-10-28T16:57:46+00:00"
-        },
-        {
             "name": "overblog/graphql-php-generator",
             "version": "v0.5.1",
             "source": {
@@ -8698,73 +8620,6 @@
             "time": "2017-09-30T22:39:41+00:00"
         },
         {
-            "name": "symfony/cache",
-            "version": "v3.2.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/cache.git",
-                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/b3245bf59f63852e187e0b296a0300d8671c6ecd",
-                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "psr/cache": "~1.0",
-                "psr/log": "~1.0"
-            },
-            "provide": {
-                "psr/cache-implementation": "1.0"
-            },
-            "require-dev": {
-                "cache/integration-tests": "dev-master",
-                "doctrine/cache": "~1.6",
-                "doctrine/dbal": "~2.4",
-                "predis/predis": "~1.0"
-            },
-            "suggest": {
-                "symfony/polyfill-apcu": "For using ApcuAdapter on HHVM"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Cache\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony implementation of PSR-6",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "caching",
-                "psr6"
-            ],
-            "time": "2017-07-14T14:39:18+00:00"
-        },
-        {
             "name": "symfony/monolog-bundle",
             "version": "2.11.1",
             "source": {
@@ -12071,6 +11926,84 @@
             "time": "2015-09-16T18:59:23+00:00"
         },
         {
+            "name": "overblog/graphql-bundle",
+            "version": "v0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overblog/GraphQLBundle.git",
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/352700bbb806176461d22db2c1f587e706cba6d2",
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-cache-bundle": "^1.2",
+                "overblog/graphql-php-generator": "^0.5.0",
+                "php": ">=5.5.9",
+                "symfony/cache": "^3.1",
+                "symfony/expression-language": "^2.8 || ^3.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0",
+                "symfony/options-resolver": "^2.8 || ^3.0",
+                "symfony/property-access": "^2.8 || ^3.0",
+                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "^4.1 || ^5.5 || ^6.0",
+                "react/promise": "^2.5",
+                "sensio/framework-extra-bundle": "^3.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
+                "symfony/asset": "^2.8 || ^3.0",
+                "symfony/browser-kit": "^2.8 || ^3.0",
+                "symfony/css-selector": "^2.8 || ^3.0",
+                "symfony/dependency-injection": "^2.8 || ^3.0",
+                "symfony/phpunit-bridge": "^2.8 || ^3.0",
+                "symfony/security-bundle": "^2.8 || ^3.0",
+                "symfony/templating": "^2.8 || ^3.0",
+                "symfony/twig-bundle": "^2.8 || ^3.0",
+                "symfony/web-profiler-bundle": "^2.8 || ^3.0",
+                "symfony/yaml": "^2.8 || ^3.0"
+            },
+            "suggest": {
+                "nelmio/cors-bundle": "For more flexibility when using CORS prefight",
+                "react/promise": "To use ReactPHP promise adapter",
+                "twig/twig": "If you want to use graphiQL."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overblog\\GraphQLBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Overblog",
+                    "homepage": "http://www.over-blog.com"
+                }
+            ],
+            "description": "This bundle provides tools to build a GraphQL server in your Symfony App.",
+            "keywords": [
+                "Relay",
+                "graphql"
+            ],
+            "time": "2017-10-28T16:57:46+00:00"
+        },
+        {
             "name": "php-http/plugins",
             "version": "v1.0.1",
             "source": {
@@ -13773,6 +13706,73 @@
             ],
             "description": "An in memory filesystem context for behat.",
             "time": "2015-07-20T22:38:35+00:00"
+        },
+        {
+            "name": "symfony/cache",
+            "version": "v3.2.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache.git",
+                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/b3245bf59f63852e187e0b296a0300d8671c6ecd",
+                "reference": "b3245bf59f63852e187e0b296a0300d8671c6ecd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "psr/cache": "~1.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0"
+            },
+            "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/cache": "~1.6",
+                "doctrine/dbal": "~2.4",
+                "predis/predis": "~1.0"
+            },
+            "suggest": {
+                "symfony/polyfill-apcu": "For using ApcuAdapter on HHVM"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Cache\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony implementation of PSR-6",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "caching",
+                "psr6"
+            ],
+            "time": "2017-07-14T14:39:18+00:00"
         },
         {
             "name": "tonicforhealth/behat-parallel-scenario",

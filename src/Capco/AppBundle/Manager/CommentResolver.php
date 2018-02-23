@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Routing\Router;
 
 class CommentResolver
@@ -29,11 +30,11 @@ class CommentResolver
     public function createCommentForType($objectType)
     {
         $comment = null;
-        if ($objectType === 'Idea') {
+        if ('Idea' === $objectType) {
             $comment = new IdeaComment();
-        } elseif ($objectType === 'Event') {
+        } elseif ('Event' === $objectType) {
             $comment = new EventComment();
-        } elseif ($objectType === 'Post') {
+        } elseif ('Post' === $objectType) {
             $comment = new PostComment();
         }
 
@@ -43,11 +44,11 @@ class CommentResolver
     public function getObjectByTypeAndId($objectType, $objectId)
     {
         $object = null;
-        if ($objectType === 'Idea') {
+        if ('Idea' === $objectType) {
             $object = $this->em->getRepository('CapcoAppBundle:Idea')->find($objectId);
-        } elseif ($objectType === 'Event') {
+        } elseif ('Event' === $objectType) {
             $object = $this->em->getRepository('CapcoAppBundle:Event')->find($objectId);
-        } elseif ($objectType === 'Post') {
+        } elseif ('Post' === $objectType) {
             $object = $this->em->getRepository('CapcoAppBundle:Post')->find($objectId);
         }
 
@@ -71,7 +72,11 @@ class CommentResolver
 
     public function getRelatedObject(Comment $comment)
     {
-        return $comment->getRelatedObject();
+        try {
+            return $comment->getRelatedObject();
+        } catch (EntityNotFoundException $e) {
+            return null;
+        }
     }
 
     public function getUrlOfObjectByTypeAndId($objectType, $objectId, $absolute = false)
