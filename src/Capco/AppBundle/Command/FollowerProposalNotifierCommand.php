@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Model\UserActivity;
 use Doctrine\ORM\EntityNotFoundException;
 use Monolog\Logger;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class FollowerProposalNotifierCommand extends ContainerAwareCommand
 {
     const NOT_FOLLOWED = 0;
+    const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep'];
 
     private static $userWithoutValidEmail = [];
 
@@ -42,9 +44,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         $proposalActivities = $this->getProposalActivities();
         $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
         unset($proposalActivities);
-
+        $sendAt = (new \DateTime())->format('YYYY/m/d');
         foreach ($followersWithActivities as $userId => $userActivity) {
-            $notifier->onReportActivities($userActivity);
+            $notifier->onReportActivities($userActivity, $sendAt);
         }
         $nbNewsletters = count($followersWithActivities);
         $output->writeln(
@@ -93,7 +95,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $userActivity->setLastname($user->getLastname());
                 $userActivity->addUserProposal($proposalId);
                 $userActivity->setNotifiedOf($follower->getNotifiedOf());
-//                $userActivity->setConnectionToken($user->getToken());
+                $userActivity->setConnectionToken($user->getNotificationsConfiguration()->getUnsubscribeToken());
                 /* UserActivity */
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
@@ -118,6 +120,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 if (isset($proposalActivities[$proposalId])) {
                     $proposal = $proposalActivities[$proposalId];
                     if (isset($projects[$proposal['projectId']])) {
+                        if (0 === $proposal['countActivities']) {
+                            continue;
+                        }
                         $project = $userActivity->getUserProject($proposal['projectId']);
                         if (!isset($project['proposals'])) {
                             $project['proposals'] = [];
@@ -128,9 +133,6 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                         }
                         if (FollowerNotifiedOfInterface::DEFAULT_AND_COMMENTS === $userActivity->getNotifiedOf()) {
                             $proposal['votes'] = self::NOT_FOLLOWED;
-                        }
-                        if (!$this->hasMinimalRequiredFields($proposal)) {
-                            continue;
                         }
 
                         $project['proposals'][$proposalId] = $proposal;
@@ -182,6 +184,11 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
+                if ($proposal->getStep() instanceof SelectionStep) {
+                    if ($proposal->getStep()->isProposalHidden()) {
+                        continue;
+                    }
+                }
                 $currentProposal = [];
                 $proposalId = $proposal->getId();
                 $proposalCommentYesterdays = $proposalRepository->countProposalCommentsCreatedBetween($yesterdayMidnight, $yesterdayLasTime, $proposalId);
@@ -203,8 +210,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $currentProposal['votes'] = $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
                 $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday : false;
                 $currentProposal['projectId'] = $projectId;
+                $currentProposal['countActivities'] = $this->countProposalActivities($currentProposal);
 
-                if (!$this->hasMinimalRequiredFields($currentProposal)) {
+                if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);
                 } else {
                     $pProposals[$proposalId] = $currentProposal;
@@ -227,12 +235,15 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         return 0;
     }
 
-    private function hasMinimalRequiredFields($proposal): bool
+    private function countProposalActivities(array $proposalActivities): int
     {
-        if (!$proposal['votes'] && !$proposal['comments'] && !$proposal['isUpdated'] && !$proposal['lastStep'] && !$proposal['isDeleted']) {
-            return false;
+        $nbActivities = count(self::ACTIVITIES);
+        foreach (self::ACTIVITIES as $activity) {
+            if (!$proposalActivities[$activity]) {
+                --$nbActivities;
+            }
         }
 
-        return true;
+        return $nbActivities;
     }
 }

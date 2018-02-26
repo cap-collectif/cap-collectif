@@ -44,7 +44,8 @@ final class FollowerNotifier extends BaseNotifier
                 $userActivity->getEmail(),
                 $userActivity->getUsername(),
                 'notifier@cap-collectif.com',
-                $userActivity->getUserProjects()
+                $userActivity->getUserProjects(),
+                $sendAt
             )
         );
     }
