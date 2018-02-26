@@ -22,6 +22,7 @@ abstract class AbstractMaker extends ContainerAwareCommand
     protected $fqcns;
     protected $helper;
     protected $sourcePath;
+    protected $className;
 
     /**
      * This method is meant to be overrided by any classes which extends AbstractMaker,

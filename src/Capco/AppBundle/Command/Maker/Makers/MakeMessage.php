@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeMessage extends AbstractMaker
 {
-    protected $className;
     protected $type;
     protected $subject;
     protected $content;

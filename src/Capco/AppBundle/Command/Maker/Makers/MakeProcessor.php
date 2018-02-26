@@ -10,8 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeProcessor extends AbstractMaker
 {
-    protected $className;
-
     public function getTemplate(): string
     {
         return self::TEMPLATE_PATH . '/Processor.tpl.php';

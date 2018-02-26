@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\DefaultMessage;
+use Capco\AppBundle\Mailer\Message\AdminMessage;
 
-final class ContactMessage extends DefaultMessage
+final class ContactMessage extends AdminMessage
 {
     public static function create(
         string $recipentEmail,

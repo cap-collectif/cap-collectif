@@ -10,8 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeNotifier extends AbstractMaker
 {
-    protected $className;
-
     public function getTemplate(): string
     {
         return self::TEMPLATE_PATH . '/Notifier.tpl.php';
