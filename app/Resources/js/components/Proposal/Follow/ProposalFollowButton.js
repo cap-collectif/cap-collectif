@@ -26,9 +26,21 @@ type Props = {
   proposal: ProposalFollowButton_proposal,
 };
 
-export class ProposalFollowButton extends React.Component<Props> {
+type State = {
+  isJustFollowed: boolean
+};
+
+export class ProposalFollowButton extends React.Component<Props, State> {
+  constructor(props: Props){
+    super(props);
+    this.state = {
+      isJustFollowed: false,
+    };
+  }
   render() {
     const { proposal } = this.props;
+    const { isJustFollowed } = this.state;
+
     if (!proposal.viewerIsFollowing) {
       return (
         <LoginOverlay>
@@ -38,12 +50,8 @@ export class ProposalFollowButton extends React.Component<Props> {
               return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
               }).then(() => {
-                AppDispatcher.dispatch({
-                  actionType: UPDATE_ALERT,
-                  alert: {
-                    bsStyle: 'success',
-                    content: 'flash-message-following',
-                  },
+                this.state({
+                  isJustFollowed: true
                 });
                 return true;
               });
