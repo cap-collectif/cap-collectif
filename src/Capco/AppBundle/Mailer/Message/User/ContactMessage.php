@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\AppBundle\Mailer\Message\ExternalContactMessage;
+use Capco\AppBundle\Mailer\Message\DefaultMessage;
 
-final class ContactMessage extends ExternalContactMessage
+final class ContactMessage extends DefaultMessage
 {
     public static function create(
         string $recipentEmail,
         string $senderEmail,
         string $senderName,
         string $message,
+        string $sitename,
         string $recipientName = null
     ): self {
         return new self(
@@ -22,7 +23,10 @@ final class ContactMessage extends ExternalContactMessage
             ),
             'email-content-contact',
             static::getMyTemplateVars(
-                $message
+                $message,
+                $senderEmail,
+                $senderName,
+                $sitename
             ),
             $senderEmail,
             $senderName
@@ -30,10 +34,16 @@ final class ContactMessage extends ExternalContactMessage
     }
 
     private static function getMyTemplateVars(
-        string $message
+        string $message,
+        string $email,
+        string $name,
+        string $sitename
     ): array {
         return [
             '{message}' => $message,
+            '{email}' => $email,
+            '{name}' => $name,
+            '{sitename}' => $sitename,
         ];
     }
 

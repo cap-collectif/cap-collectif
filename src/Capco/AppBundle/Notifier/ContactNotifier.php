@@ -12,7 +12,8 @@ final class ContactNotifier extends BaseNotifier
             $recipient,
             $senderEmail,
             $senderName,
-            $message
+            $message,
+            $this->siteParams->getValue('global.site.fullname')
         ));
     }
 }
