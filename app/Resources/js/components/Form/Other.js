@@ -44,6 +44,8 @@ const Other = React.createClass({
         true,
       );
     }
+
+    // run after reset();
     if(field.checked === false) {
       input.value = null;
     }
@@ -110,7 +112,7 @@ const Other = React.createClass({
             id={`reply-${field.id}_choice-other--check`}
             name={fieldName}
             type={this.props.field.type}
-            checked={this.state.checked}
+            checked={field.checked === false ? false : this.state.checked}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
             {<FormattedMessage id="reply.other" />}

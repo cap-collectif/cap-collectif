@@ -880,8 +880,8 @@ type MultipleChoiceQuestion implements Question {
 
 # Multiple Choice Question Validation Rule
 type MultipleChoiceQuestionValidationRule {
-  type: String
-  number: Int
+  type: String!
+  number: Int!
 }
 
 type Mutation {

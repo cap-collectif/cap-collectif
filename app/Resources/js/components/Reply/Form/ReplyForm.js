@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { type FormProps, reduxForm, FieldArray, Field, SubmissionError } from 'redux-form';
+import { type FormProps, reduxForm, FieldArray, Field, SubmissionError, reset } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
@@ -46,6 +46,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ReplyActions.loadUserReplies(questionnaire.id);
       if(questionnaire.multipleRepliesAllowed) {
         dispatch(reset('ReplyForm'));
+        // reset();
       }
     })
     .catch(() => {
@@ -150,6 +151,8 @@ export class ReplyForm extends React.Component<Props> {
     } = this.props;
 
     const disabled = this.formIsDisabled();
+
+    // console.warn(submitSucceeded, submitFailed, invalid);
 
     return (
       <form id="reply-form" ref="form" onSubmit={handleSubmit}>
