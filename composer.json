@@ -143,7 +143,8 @@
         "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
         "sjparkinson/behat-file-system-context": "^0.1.0",
         "phpstan/phpstan-doctrine": "^0.8.0",
-        "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d"
+        "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d",
+        "lookyman/phpstan-symfony": "^0.4.1"
     },
     "scripts": {},
     "config": {

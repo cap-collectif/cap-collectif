@@ -155,7 +155,7 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $object->getTitle()->willReturn('test')->shouldBeCalled();
         $object->getBody()->willReturn('blabla')->shouldBeCalled();
         $object->getAuthor()->willReturn($author)->shouldBeCalled();
-        $object->getAppendices()->willReturn(null);
+        $object->getAppendices()->willReturn(new ArrayCollection([]));
         $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
         $object->getVotesCountOk()->willReturn(25)->shouldBeCalled();
         $object->getVotesCountNok()->willReturn(25)->shouldBeCalled();

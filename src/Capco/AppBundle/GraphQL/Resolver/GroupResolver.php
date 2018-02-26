@@ -27,7 +27,7 @@ class GroupResolver implements ContainerAwareInterface
     {
         $userRepo = $this->container->get('capco.user.repository');
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($userRepo, $group, $args) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($userRepo, $group) {
             return $userRepo->getUsersInGroup($group);
         });
 
