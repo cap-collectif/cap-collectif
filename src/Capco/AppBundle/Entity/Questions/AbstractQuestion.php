@@ -89,7 +89,7 @@ abstract class AbstractQuestion
     /**
      * @ORM\Column(name="help_text", type="text", nullable=true)
      */
-    protected $helpText = null;
+    protected $helpText;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})
@@ -148,6 +148,7 @@ abstract class AbstractQuestion
 
     public function setQuestionnaireAbstractQuestion(QuestionnaireAbstractQuestion $questionnaireAbstractQuestion): self
     {
+        $questionnaireAbstractQuestion->setQuestion($this);
         $this->questionnaireAbstractQuestion = $questionnaireAbstractQuestion;
 
         return $this;

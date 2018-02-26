@@ -21,9 +21,6 @@ class SimpleQuestion extends AbstractQuestion
         unset(self::$questionTypesInputs[self::QUESTION_TYPE_RADIO], self::$questionTypesInputs[self::QUESTION_TYPE_SELECT], self::$questionTypesInputs[self::QUESTION_TYPE_CHECKBOX], self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
     }
 
-    /**
-     * @return bool
-     */
     public function isSimpleQuestion()
     {
         return true;
