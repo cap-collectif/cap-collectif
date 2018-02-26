@@ -26,7 +26,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
     className="mb-0 proposal-follow-dropdown"
   >
     <DropdownButton
-      className="mb-0"
+      className="mb-0 width250"
       id="proposal-follow-btn"
       title={
         <FormattedMessage
@@ -38,7 +38,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
       <Panel
         bsClass="panel"
         bsStyle="default"
-        className="mb-0 bn"
+        className="mb-0 bn width250"
         defaultExpanded={false}
         header={
           <span>
@@ -49,19 +49,19 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
             <OverlayTrigger
               defaultOverlayShown={false}
               overlay={
-                <Tooltip
-                  bsClass="tooltip"
+                <Popover
+                  bsClass="popover"
                   className="in"
                   id="pinned-label"
                   placement="top"
                 >
                   <FormattedMessage
-                    id="sqdqsd"
+                    id="you-will-receive-a-summary-of-your-notifications-once-a-day"
                     values={Object {}}
                   />
-                </Tooltip>
+                </Popover>
               }
-              placement="right"
+              placement="top"
               trigger={
                 Array [
                   "hover",
@@ -96,11 +96,18 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                 checked="checked"
                 disabled={false}
                 inline={true}
-                label="the-progress"
                 name="radioGroup"
                 onClick={[Function]}
                 title=""
               >
+                <b>
+                  <FormattedMessage
+                    id="the-progress"
+                    values={Object {}}
+                  />
+                </b>
+                 
+                <br />
                 <FormattedMessage
                   id="list-of-progress-notifications"
                   values={Object {}}
@@ -117,16 +124,17 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                 checked=""
                 disabled={false}
                 inline={true}
-                label={
-                  <FormattedMessage
-                    id="progress-and-comments"
-                    values={Object {}}
-                  />
-                }
                 name="radioGroup"
                 onClick={[Function]}
                 title=""
               >
+                <b>
+                  <FormattedMessage
+                    id="progress-and-comments"
+                    values={Object {}}
+                  />
+                </b>
+                <br />
                 <FormattedMessage
                   id="list-of-progress-notifications-and-comments"
                   values={Object {}}
@@ -143,16 +151,17 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                 checked=""
                 disabled={false}
                 inline={true}
-                label={
-                  <FormattedMessage
-                    id="all-activities"
-                    values={Object {}}
-                  />
-                }
                 name="radioGroup"
                 onClick={[Function]}
                 title=""
               >
+                <b>
+                  <FormattedMessage
+                    id="all-activities"
+                    values={Object {}}
+                  />
+                </b>
+                <br />
                 <FormattedMessage
                   id="list-of-activity-notifications"
                   values={Object {}}

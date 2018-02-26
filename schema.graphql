@@ -490,7 +490,7 @@ input FollowProposalInput {
   proposalId: ID!
 
   # The type of notification
-  notifiedOf: PickFollowTypeValue!
+  notifiedOf: PickFollowTypeValue
   clientMutationId: String
 }
 
@@ -507,7 +507,7 @@ type Follower {
   id: ID!
   proposal: Proposal!
   user: User!
-  notifiedOf: PickFollowTypeValue!
+  notifiedOf: PickFollowTypeValue
 }
 
 # A connection to a list of items.

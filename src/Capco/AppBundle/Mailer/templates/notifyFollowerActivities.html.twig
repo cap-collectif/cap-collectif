@@ -1,7 +1,9 @@
 {% block body_text %}
     {% autoescape false %}
+        {% set siteName = capco_site_parameter_value('global.site.fullname') %}
+        <h2>      {{ siteName }}    </h2>
+        <h1>      {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}    </h1>
         {% for currentProjectId, project in userProjectsActivities %}
-            <h1>{{ project.projectTitle }}</h1>
             <h2>{{ project.projectType }}</h2>
 
             {% for proposal in project.proposals %}
@@ -20,7 +22,7 @@
                         <li>{{ proposal.votes }} nouveaux votes</li>
                     {% endif %}
                     {% if proposal.lastStep %}
-                        <li>Est passé à l'étape : {{proposal.lastStep }}</li>
+                        <li>Est passé à l'étape {{proposal.lastStep.titleStep }} avec le status {{ proposal.lastStep.sName}}</li>
                     {% endif %}
                 </ul>
                 <a href="{{ proposal.link }}">Afficher</a>

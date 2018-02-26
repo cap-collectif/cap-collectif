@@ -20,18 +20,16 @@ final class FollowerNotifier extends BaseNotifier
         $this->urlResolver = $urlResolver;
     }
 
-    public function onReportActivities(Contribution $contribution)
+    public function onReportActivities(UserActivity $userActivity, string $sendAt)
     {
-        $followersEmailList = [];
-        if ($contribution->getAuthor()) {
-            $this->mailer->sendMessage(
-                FollowerActivitiesMessage::create(
-                    $contribution,
-                    '',
-                    '',
-                    $followersEmailList
-                )
-            );
-        }
+        $this->mailer->sendMessage(
+            FollowerActivitiesMessage::create(
+                $userActivity->getEmail(),
+                $userActivity->getUsername(),
+                'notifier@cap-collectif.com',
+                $userActivity->getUserProjects(),
+                $sendAt
+            )
+        );
     }
 }

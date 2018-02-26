@@ -91,12 +91,12 @@ class Follower
         $this->proposal->removeFollower($this);
     }
 
-    public function getNotifiedOf():string
+    public function getNotifiedOf(): ?string
     {
         return $this->notifiedOf;
     }
 
-    public function setNotifiedOf(string $notifiedOf):self
+    public function setNotifiedOf(string $notifiedOf): self
     {
         $this->notifiedOf = $notifiedOf;
 

@@ -11,7 +11,9 @@ final class FollowerActivitiesMessage extends DefaultMessage
         Contribution $contribution,
         string $recipentEmail,
         string $recipientName = null,
-        array $followersEmailList
+        string $senderEmail = null,
+        array $userProjectsActivities = null,
+        $sendAt
     ): self {
         $message = new self(
             $recipentEmail,
@@ -20,8 +22,11 @@ final class FollowerActivitiesMessage extends DefaultMessage
             static::getMySubjectVars(),
             '@CapcoMail/notifyFollowerActivities.html.twig',
             static::getMyTemplateVars(
-                $contribution
-            )
+                $userProjectsActivities,
+                $sendAt,
+                $recipentEmail
+            ),
+            $senderEmail
         );
 
         $message->setBcc($followersEmailList);
@@ -33,10 +38,13 @@ final class FollowerActivitiesMessage extends DefaultMessage
     }
 
     private static function getMyTemplateVars(
-        Contribution $contribution
+        array $userProjectsActivities,
+        string $sendAt
     ): array {
         return [
-            'contribution' => $contribution,
+            'userProjectsActivities' => $userProjectsActivities,
+            'sendAt' => $sendAt,
+            '',
         ];
     }
 }

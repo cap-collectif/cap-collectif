@@ -10,7 +10,7 @@ import {
   FormGroup,
   Radio,
   Button,
-  Tooltip,
+  Popover,
   OverlayTrigger,
 } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -59,27 +59,27 @@ export class ProposalFollowButton extends React.Component<Props> {
         <LoginOverlay>
           <span className="mb-0 proposal-follow-dropdown">
             <DropdownButton
-              className="mb-0"
+              className="mb-0 width250"
               id="proposal-follow-btn"
               title={<FormattedMessage id="following" />}>
               <Panel
+                className="mb-0 bn width250"
                 header={
                   <span>
                     <FormattedMessage id="to-be-notified-of-new-of" />
                     <OverlayTrigger
-                      placement="right"
+                      placement="top"
                       overlay={
-                        <Tooltip placement="top" className="in" id="pinned-label">
-                          <FormattedMessage id="sqdqsd" />
-                        </Tooltip>
+                        <Popover placement="top" className="in" id="pinned-label">
+                          <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
+                        </Popover>
                       }>
                       <a>
                         <span className="cap-information" />
                       </a>
                     </OverlayTrigger>
                   </span>
-                }
-                className="mb-0 bn">
+                }>
                 <FormGroup className="bn mb-0">
                   <ListGroup className="mb-0">
                     <ListGroupItem className="">
@@ -112,8 +112,11 @@ export class ProposalFollowButton extends React.Component<Props> {
                               return true;
                             });
                           }
-                        }}
-                        label="the-progress">
+                        }}>
+                        <b>
+                          <FormattedMessage id="the-progress" />
+                        </b>{' '}
+                        <br />
                         <FormattedMessage id="list-of-progress-notifications" />
                       </Radio>
                     </ListGroupItem>
@@ -149,8 +152,12 @@ export class ProposalFollowButton extends React.Component<Props> {
                               return true;
                             });
                           }
-                        }}
-                        label={<FormattedMessage id="progress-and-comments" />}>
+                        }}>
+                        <b>
+                          <FormattedMessage id="progress-and-comments" />
+                        </b>
+                        <br />
+
                         <FormattedMessage id="list-of-progress-notifications-and-comments" />
                       </Radio>
                     </ListGroupItem>
@@ -182,8 +189,11 @@ export class ProposalFollowButton extends React.Component<Props> {
                               return true;
                             });
                           }
-                        }}
-                        label={<FormattedMessage id="all-activities" />}>
+                        }}>
+                        <b>
+                          <FormattedMessage id="all-activities" />
+                        </b>
+                        <br />
                         <FormattedMessage id="list-of-activity-notifications" />
                       </Radio>
                     </ListGroupItem>

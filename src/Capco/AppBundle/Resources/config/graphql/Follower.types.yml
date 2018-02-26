@@ -10,4 +10,4 @@ Follower:
             user:
                 type: "User!"
             notifiedOf:
-                type: "PickFollowTypeValue!"
+                type: "PickFollowTypeValue"

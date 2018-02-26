@@ -106,6 +106,7 @@ class ProfileController extends BaseController
      */
     public function disableNotificationsAction(Request $request, string $token)
     {
+        /** @var UserNotificationsConfiguration $userNotificationsConfiguration */
         $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();

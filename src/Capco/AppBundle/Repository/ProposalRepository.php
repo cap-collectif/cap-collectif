@@ -610,7 +610,7 @@ class ProposalRepository extends EntityRepository
 //        $qb = $this->getIsEnabledQueryBuilder();
         $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id')
-            ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name')
+            ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'sStep')
             ->leftJoin('selections.status', 'status')
