@@ -54,7 +54,6 @@ abstract class AbstractQuestion
     /**
      * Needed by sonata admin.
      *
-     * @Assert\NotNull()
      * @ORM\OneToOne(
      *  targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion",
      *  mappedBy="question",
