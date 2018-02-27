@@ -1,8 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import ReplyForm, { formName } from './ReplyForm';
-import SubmitButton from '../../Form/SubmitButton';
-import ReplyActions from '../../../actions/ReplyActions';
+import ReplyForm from './ReplyForm';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Utils/Loader';
 
@@ -16,9 +14,7 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
     if (props.questionnaire !== null) {
       return (
         <div>
-          <ReplyForm
-            questionnaire={props.questionnaire}
-          />
+          <ReplyForm questionnaire={props.questionnaire} />
         </div>
       );
     }

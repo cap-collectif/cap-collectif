@@ -7,7 +7,7 @@ const Field = React.createClass({
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
-      dirty: PropTypes.bool.isRequired,
+      dirty: PropTypes.bool,
       error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,

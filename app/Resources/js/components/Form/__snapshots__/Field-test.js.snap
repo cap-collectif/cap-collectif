@@ -6,6 +6,7 @@ exports[`<Field /> pass input props to children 1`] = `
   errors={null}
   hasFeedback={false}
   id="id"
+  image={null}
   label="label"
   labelClassName=""
   name="name"
@@ -22,6 +23,7 @@ exports[`<Field /> renders a default <Input /> element 1`] = `
   errors={null}
   hasFeedback={false}
   id="id"
+  image={null}
   label="label"
   labelClassName=""
   name="name"
@@ -42,6 +44,7 @@ exports[`<Field /> renders a div around <Input /> element 1`] = `
     errors={null}
     hasFeedback={false}
     id="id"
+    image={null}
     label="label"
     labelClassName=""
     name="name"
@@ -59,6 +62,7 @@ exports[`<Field /> renders a validated <Input /> element 1`] = `
   errors={null}
   hasFeedback={true}
   id="id"
+  image={null}
   label="label"
   labelClassName=""
   name="name"
@@ -76,6 +80,7 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
   errors={null}
   hasFeedback={false}
   id="id"
+  image={null}
   label="label"
   labelClassName=""
   name="name"
@@ -86,7 +91,7 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
 />
 `;
 
-exports[`<Field /> renders an errored <Input /> element 1`] = `
+exports[`<Field /> renders an error <Input /> element 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
   errors={
@@ -97,6 +102,7 @@ exports[`<Field /> renders an errored <Input /> element 1`] = `
   }
   hasFeedback={true}
   id="id"
+  image={null}
   label="label"
   labelClassName=""
   name="name"

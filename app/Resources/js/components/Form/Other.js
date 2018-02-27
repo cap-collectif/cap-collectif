@@ -46,8 +46,8 @@ const Other = React.createClass({
     }
 
     // run after reset();
-    if(field.checked === false) {
-      input.value = null;
+    if (field.checked === false) {
+      input.value = '';
     }
   },
 

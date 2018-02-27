@@ -1,8 +1,8 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
-import ReplyForm from './ReplyForm';
+import { intlMock, formMock } from '../../../mocks';
+import { ReplyForm } from './ReplyForm';
 
 describe('<ReplyForm />', () => {
   const requiredText = {
@@ -77,17 +77,15 @@ describe('<ReplyForm />', () => {
   };
 
   const props = {
-    isSubmitting: false,
-    onSubmitSuccess: jest.fn(),
-    onSubmitFailure: jest.fn(),
-    onValidationFailure: jest.fn(),
+    intl: intlMock,
+    ...formMock,
   };
 
   it('should render correctly with equal required and facultative fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
+        questionnaire={{
+          questions: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
         }}
         {...props}
       />,
@@ -98,8 +96,8 @@ describe('<ReplyForm />', () => {
   it('should render correctly with minority of required fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [
+        questionnaire={{
+          questions: [
             requiredText,
             facultativeCheckbox,
             requiredRadio,
@@ -115,14 +113,17 @@ describe('<ReplyForm />', () => {
 
   it('should render correctly with majority of required fields', () => {
     const wrapper = shallow(
-      <ReplyForm form={{ fields: [requiredText, requiredRadio, facultativeRanking] }} {...props} />,
+      <ReplyForm
+        questionnaire={{ questions: [requiredText, requiredRadio, facultativeRanking] }}
+        {...props}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with only required fields', () => {
     const wrapper = shallow(
-      <ReplyForm form={{ fields: [requiredText, requiredRadio] }} {...props} />,
+      <ReplyForm questionnaire={{ questions: [requiredText, requiredRadio] }} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -130,8 +131,8 @@ describe('<ReplyForm />', () => {
   it('should render correctly with only facultatives fields', () => {
     const wrapper = shallow(
       <ReplyForm
-        form={{
-          fields: [facultativeCheckbox, facultativeSelect, facultativeRanking],
+        questionnaire={{
+          questions: [facultativeCheckbox, facultativeSelect, facultativeRanking],
         }}
         {...props}
       />,

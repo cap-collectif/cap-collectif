@@ -28,7 +28,7 @@ const Checkbox = React.createClass({
     return {
       disabled: false,
       labelClassName: '',
-      // isReduxForm: false,
+      isReduxForm: false,
       value: {},
     };
   },

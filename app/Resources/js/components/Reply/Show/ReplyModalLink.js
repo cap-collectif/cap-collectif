@@ -50,7 +50,8 @@ const ReplyModalLink = React.createClass({
         />
         {reply.private && (
           <span>
-            {' '}<FormattedMessage id="reply.private" />
+            {' '}
+            <FormattedMessage id="reply.private" />
           </span>
         )}
         <ShowReplyModal

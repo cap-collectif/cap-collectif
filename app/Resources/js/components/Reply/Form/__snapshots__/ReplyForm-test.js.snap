@@ -3,7 +3,9 @@
 exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
 <form
   id="reply-form"
+  onSubmit={[MockFunction]}
 >
+<<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
     errors={null}
@@ -31,46 +33,111 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
   <Radio
     disabled={false}
     field={
+=======
+  <FieldArray
+    component={[Function]}
+    disabled={true}
+    intl={
+>>>>>>> [ADD] good jest test & [RMV] flow error
       Object {
-        "choices": Array [
-          Object {
-            "id": 24,
-            "label": "Maxime Arrouard",
-          },
-          Object {
-            "id": 25,
-            "label": "Spylou Super Sayen",
-          },
-          Object {
-            "id": 26,
-            "label": "Cyril Lage",
-          },
-          Object {
-            "id": 27,
-            "label": "Superman",
-          },
-        ],
-        "helpText": "Un seul choix possible",
-        "id": 12,
-        "isOtherAllowed": true,
-        "question": "Quel est ton athlète favori ?",
-        "required": true,
-        "slug": "quel-est-ton-athlete-favori",
-        "type": "radio",
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
       }
     }
-    getGroupStyle={[Function]}
-    id="reply-12"
-    isReduxForm={false}
-    label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ?",
-          }
-        }
-      />
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "helpText": "",
+          "id": 10,
+          "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+          "required": true,
+          "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+          "type": "text",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 24,
+              "label": "Maxime Arrouard",
+            },
+            Object {
+              "id": 25,
+              "label": "Spylou Super Sayen",
+            },
+            Object {
+              "id": 26,
+              "label": "Cyril Lage",
+            },
+            Object {
+              "id": 27,
+              "label": "Superman",
+            },
+          ],
+          "helpText": "Un seul choix possible",
+          "id": 12,
+          "isOtherAllowed": true,
+          "question": "Quel est ton athlète favori ?",
+          "required": true,
+          "slug": "quel-est-ton-athlete-favori",
+          "type": "radio",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 13,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "select",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 14,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "ranking",
+        },
+      ]
     }
+<<<<<<< HEAD
     labelClassName="h5"
     onChange={[Function]}
     renderFormErrors={[Function]}
@@ -166,13 +233,32 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
+=======
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_content_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+>>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
 `;
 
 exports[`<ReplyForm /> should render correctly with majority of required fields 1`] = `
 <form
   id="reply-form"
+  onSubmit={[MockFunction]}
 >
+<<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
     errors={null}
@@ -191,11 +277,27 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     placeholder="reply.your_response"
     type="text"
     valueLink={
+=======
+  <FieldArray
+    component={[Function]}
+    disabled={true}
+    intl={
+>>>>>>> [ADD] good jest test & [RMV] flow error
       Object {
-        "requestChange": [Function],
-        "value": "",
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
       }
     }
+<<<<<<< HEAD
   />
   <Radio
     disabled={false}
@@ -285,14 +387,94 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     labelClassName="h5"
     onChange={[Function]}
     renderFormErrors={[Function]}
+=======
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "helpText": "",
+          "id": 10,
+          "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+          "required": true,
+          "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+          "type": "text",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 24,
+              "label": "Maxime Arrouard",
+            },
+            Object {
+              "id": 25,
+              "label": "Spylou Super Sayen",
+            },
+            Object {
+              "id": 26,
+              "label": "Cyril Lage",
+            },
+            Object {
+              "id": 27,
+              "label": "Superman",
+            },
+          ],
+          "helpText": "Un seul choix possible",
+          "id": 12,
+          "isOtherAllowed": true,
+          "question": "Quel est ton athlète favori ?",
+          "required": true,
+          "slug": "quel-est-ton-athlete-favori",
+          "type": "radio",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 14,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "ranking",
+        },
+      ]
+    }
+>>>>>>> [ADD] good jest test & [RMV] flow error
   />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_content_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
 </form>
 `;
 
 exports[`<ReplyForm /> should render correctly with minority of required fields 1`] = `
 <form
   id="reply-form"
+  onSubmit={[MockFunction]}
 >
+<<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
     errors={null}
@@ -377,46 +559,138 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
   <Radio
     disabled={false}
     field={
+=======
+  <FieldArray
+    component={[Function]}
+    disabled={true}
+    intl={
+>>>>>>> [ADD] good jest test & [RMV] flow error
       Object {
-        "choices": Array [
-          Object {
-            "id": 24,
-            "label": "Maxime Arrouard",
-          },
-          Object {
-            "id": 25,
-            "label": "Spylou Super Sayen",
-          },
-          Object {
-            "id": 26,
-            "label": "Cyril Lage",
-          },
-          Object {
-            "id": 27,
-            "label": "Superman",
-          },
-        ],
-        "helpText": "Un seul choix possible",
-        "id": 12,
-        "isOtherAllowed": true,
-        "question": "Quel est ton athlète favori ?",
-        "required": true,
-        "slug": "quel-est-ton-athlete-favori",
-        "type": "radio",
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
       }
     }
-    getGroupStyle={[Function]}
-    id="reply-12"
-    isReduxForm={false}
-    label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ? <span class=\\"small warning\\">Obligatoire</span>",
-          }
-        }
-      />
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "helpText": "",
+          "id": 10,
+          "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+          "required": true,
+          "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+          "type": "text",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 20,
+              "label": "Athlétisme",
+            },
+            Object {
+              "id": 21,
+              "label": "Natation",
+            },
+            Object {
+              "id": 22,
+              "label": "Sports collectifs",
+            },
+            Object {
+              "id": 23,
+              "label": "Sports individuels",
+            },
+          ],
+          "helpText": "Plusieurs choix sont possibles",
+          "id": 11,
+          "isOtherAllowed": true,
+          "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+          "required": false,
+          "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+          "type": "checkbox",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 24,
+              "label": "Maxime Arrouard",
+            },
+            Object {
+              "id": 25,
+              "label": "Spylou Super Sayen",
+            },
+            Object {
+              "id": 26,
+              "label": "Cyril Lage",
+            },
+            Object {
+              "id": 27,
+              "label": "Superman",
+            },
+          ],
+          "helpText": "Un seul choix possible",
+          "id": 12,
+          "isOtherAllowed": true,
+          "question": "Quel est ton athlète favori ?",
+          "required": true,
+          "slug": "quel-est-ton-athlete-favori",
+          "type": "radio",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 13,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "select",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 14,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "ranking",
+        },
+      ]
     }
+<<<<<<< HEAD
     labelClassName="h5"
     onChange={[Function]}
     renderFormErrors={[Function]}
@@ -512,44 +786,50 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
+=======
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_content_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+>>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
 `;
 
 exports[`<ReplyForm /> should render correctly with only facultatives fields 1`] = `
 <form
   id="reply-form"
+  onSubmit={[MockFunction]}
 >
-  <Checkbox
-    disabled={false}
-    field={
+  <FieldArray
+    component={[Function]}
+    disabled={true}
+    intl={
       Object {
-        "choices": Array [
-          Object {
-            "id": 20,
-            "label": "Athlétisme",
-          },
-          Object {
-            "id": 21,
-            "label": "Natation",
-          },
-          Object {
-            "id": 22,
-            "label": "Sports collectifs",
-          },
-          Object {
-            "id": 23,
-            "label": "Sports individuels",
-          },
-        ],
-        "helpText": "Plusieurs choix sont possibles",
-        "id": 11,
-        "isOtherAllowed": true,
-        "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
-        "required": false,
-        "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
-        "type": "checkbox",
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
       }
     }
+<<<<<<< HEAD
     getGroupStyle={[Function]}
     id="reply-11"
     isReduxForm={false}
@@ -665,13 +945,108 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
+=======
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "choices": Array [
+            Object {
+              "id": 20,
+              "label": "Athlétisme",
+            },
+            Object {
+              "id": 21,
+              "label": "Natation",
+            },
+            Object {
+              "id": 22,
+              "label": "Sports collectifs",
+            },
+            Object {
+              "id": 23,
+              "label": "Sports individuels",
+            },
+          ],
+          "helpText": "Plusieurs choix sont possibles",
+          "id": 11,
+          "isOtherAllowed": true,
+          "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+          "required": false,
+          "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+          "type": "checkbox",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 13,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "select",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 28,
+              "label": "Pas assez fort (Mon sonotone est en panne)",
+            },
+            Object {
+              "id": 29,
+              "label": "Assez fort (Mon sonotone est mal réglé)",
+            },
+            Object {
+              "id": 30,
+              "label": "Trop fort (Mon sonotone est tout neuf)",
+            },
+          ],
+          "helpText": "Merci de répondre sincèrement",
+          "id": 14,
+          "question": "Nelson Monfort parle-t-il:",
+          "required": false,
+          "slug": "nelson-monfort-parle-t-il",
+          "type": "ranking",
+        },
+      ]
+    }
+  />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_content_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
+>>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
 `;
 
 exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
 <form
   id="reply-form"
+  onSubmit={[MockFunction]}
 >
+<<<<<<< HEAD
   <Alert
     bsClass="alert"
     bsStyle="warning"
@@ -706,49 +1081,86 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
   <Radio
     disabled={false}
     field={
+=======
+  <FieldArray
+    component={[Function]}
+    disabled={true}
+    intl={
+>>>>>>> [ADD] good jest test & [RMV] flow error
       Object {
-        "choices": Array [
-          Object {
-            "id": 24,
-            "label": "Maxime Arrouard",
-          },
-          Object {
-            "id": 25,
-            "label": "Spylou Super Sayen",
-          },
-          Object {
-            "id": 26,
-            "label": "Cyril Lage",
-          },
-          Object {
-            "id": 27,
-            "label": "Superman",
-          },
-        ],
-        "helpText": "Un seul choix possible",
-        "id": 12,
-        "isOtherAllowed": true,
-        "question": "Quel est ton athlète favori ?",
-        "required": true,
-        "slug": "quel-est-ton-athlete-favori",
-        "type": "radio",
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
       }
     }
-    getGroupStyle={[Function]}
-    id="reply-12"
-    isReduxForm={false}
-    label={
-      <span
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Quel est ton athlète favori ?",
-          }
-        }
-      />
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "helpText": "",
+          "id": 10,
+          "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+          "required": true,
+          "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+          "type": "text",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "id": 24,
+              "label": "Maxime Arrouard",
+            },
+            Object {
+              "id": 25,
+              "label": "Spylou Super Sayen",
+            },
+            Object {
+              "id": 26,
+              "label": "Cyril Lage",
+            },
+            Object {
+              "id": 27,
+              "label": "Superman",
+            },
+          ],
+          "helpText": "Un seul choix possible",
+          "id": 12,
+          "isOtherAllowed": true,
+          "question": "Quel est ton athlète favori ?",
+          "required": true,
+          "slug": "quel-est-ton-athlete-favori",
+          "type": "radio",
+        },
+      ]
     }
+<<<<<<< HEAD
     labelClassName="h5"
     onChange={[Function]}
     renderFormErrors={[Function]}
+=======
+>>>>>>> [ADD] good jest test & [RMV] flow error
   />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={true}
+    id="proposal_admin_content_save"
+    type="submit"
+  >
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
 </form>
 `;
