@@ -335,12 +335,26 @@ class Project implements IndexableInterface
         return $this->createdAt;
     }
 
+    public function setCreatedAt(\DateTime $value): self
+    {
+        $this->createdAt = $value;
+
+        return $this;
+    }
+
     /**
      * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $value): self
+    {
+        $this->updatedAt = $value;
+
+        return $this;
     }
 
     /**

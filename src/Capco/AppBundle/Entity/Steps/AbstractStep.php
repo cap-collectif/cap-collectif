@@ -346,9 +346,11 @@ abstract class AbstractStep
     /**
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): self
     {
         $this->label = $label;
+
+        return $this;
     }
 
     // ************************* Custom methods *********************
