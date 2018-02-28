@@ -265,12 +265,14 @@ ivory_ck_editor:
             skin: minimalist
             extraPlugins: autolink,autogrow
             extraAllowedContent: "a[!href,_src,target,class],iframe[data-type]"
+            entities: false
         empty_editor:
             removePlugins: 'toolbar,elementspath,resize'
             language: fr
             skin: minimalist
             extraPlugins: autolink,autogrow
             extraAllowedContent: "a[!href,_src,target,class]"
+            entities: false
         admin_editor:
             toolbar: admin_toolbar
             language: fr
@@ -279,6 +281,7 @@ ivory_ck_editor:
             allowedContent: true
             filebrowserBrowseRoute: admin_capco_media_media_browser
             filebrowserImageBrowseRoute: admin_capco_media_media_browser
+            entities: false
             # Display images by default when clicking the image dialog browse button
             filebrowserImageBrowseRouteParameters:
                 provider: sonata.media.provider.image
