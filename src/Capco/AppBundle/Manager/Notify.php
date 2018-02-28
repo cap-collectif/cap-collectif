@@ -253,6 +253,7 @@ class Notify implements MailerInterface
                 $template,
                 [
                     'contribution' => $contribution,
+                    'username' => $contribution->getAuthor()->getUsername(),
                     'trashUrl' => $this->urlResolver->getTrashedObjectUrl($contribution, true),
                 ]
             );
