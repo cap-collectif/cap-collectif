@@ -38,6 +38,7 @@ final class ContributionModerationMessage extends DefaultMessage
         return [
             'contribution' => $contribution,
             'trashUrl' => $trashUrl,
+            'username' => $contribution->getAuthor()->getUsername(),
         ];
     }
 }
