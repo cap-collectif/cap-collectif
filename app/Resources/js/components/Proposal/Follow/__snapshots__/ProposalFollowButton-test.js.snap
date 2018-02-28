@@ -25,167 +25,179 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
   <span
     className="mb-0 proposal-follow-dropdown"
   >
-    <DropdownButton
+    <Uncontrolled(Dropdown)
       className="mb-0 width250"
+      defaultOpen={false}
       id="proposal-follow-btn"
-      title={
+    >
+      <DropdownToggle
+        bsClass="dropdown-toggle"
+        bsRole="toggle"
+        open={false}
+        useAnchor={false}
+      >
         <FormattedMessage
           id="following"
           values={Object {}}
         />
-      }
-    >
-      <Panel
-        bsClass="panel"
-        bsStyle="default"
-        className="mb-0 bn width250"
-        defaultExpanded={false}
-        header={
-          <span>
-            <FormattedMessage
-              id="to-be-notified-of-new-of"
-              values={Object {}}
-            />
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              overlay={
-                <Popover
-                  bsClass="popover"
-                  className="in"
-                  id="pinned-label"
-                  placement="top"
-                >
-                  <FormattedMessage
-                    id="you-will-receive-a-summary-of-your-notifications-once-a-day"
-                    values={Object {}}
-                  />
-                </Popover>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <a>
-                <span
-                  className="cap-information"
-                />
-              </a>
-            </OverlayTrigger>
-          </span>
-        }
+      </DropdownToggle>
+      <DropdownMenu
+        bsClass="dropdown-menu"
+        bsRole="menu"
+        pullRight={false}
       >
-        <FormGroup
-          bsClass="form-group"
-          className="bn mb-0"
+        <Panel
+          bsClass="panel"
+          bsStyle="default"
+          className="mb-0 bn width250"
+          defaultExpanded={false}
+          header={
+            <span>
+              <FormattedMessage
+                id="to-be-notified-of-new-of"
+                values={Object {}}
+              />
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <Popover
+                    bsClass="popover"
+                    className="in"
+                    id="pinned-label"
+                    placement="top"
+                  >
+                    <FormattedMessage
+                      id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                      values={Object {}}
+                    />
+                  </Popover>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <a>
+                  <span
+                    className="cap-information"
+                  />
+                </a>
+              </OverlayTrigger>
+            </span>
+          }
         >
-          <ListGroup
-            bsClass="list-group"
-            className="mb-0"
+          <FormGroup
+            bsClass="form-group"
+            className="bn mb-0"
           >
-            <ListGroupItem
-              bsClass="list-group-item"
-              className=""
-              listItem={false}
+            <ListGroup
+              bsClass="list-group"
+              className="mb-0"
             >
-              <Radio
-                bsClass="radio"
-                checked="checked"
-                disabled={false}
-                inline={true}
-                name="radioGroup"
-                onClick={[Function]}
-                title=""
+              <ListGroupItem
+                bsClass="list-group-item"
+                className=""
+                listItem={false}
               >
-                <b>
+                <Radio
+                  bsClass="radio"
+                  checked="checked"
+                  disabled={false}
+                  inline={true}
+                  name="radioGroup"
+                  onClick={[Function]}
+                  title=""
+                >
+                  <b>
+                    <FormattedMessage
+                      id="the-progress"
+                      values={Object {}}
+                    />
+                  </b>
+                   
+                  <br />
                   <FormattedMessage
-                    id="the-progress"
+                    id="list-of-progress-notifications"
                     values={Object {}}
                   />
-                </b>
-                 
-                <br />
-                <FormattedMessage
-                  id="list-of-progress-notifications"
-                  values={Object {}}
-                />
-              </Radio>
-            </ListGroupItem>
-            <ListGroupItem
-              bsClass="list-group-item"
-              className=""
-              listItem={false}
-            >
-              <Radio
-                bsClass="radio"
-                checked=""
-                disabled={false}
-                inline={true}
-                name="radioGroup"
-                onClick={[Function]}
-                title=""
+                </Radio>
+              </ListGroupItem>
+              <ListGroupItem
+                bsClass="list-group-item"
+                className=""
+                listItem={false}
               >
-                <b>
+                <Radio
+                  bsClass="radio"
+                  checked=""
+                  disabled={false}
+                  inline={true}
+                  name="radioGroup"
+                  onClick={[Function]}
+                  title=""
+                >
+                  <b>
+                    <FormattedMessage
+                      id="progress-and-comments"
+                      values={Object {}}
+                    />
+                  </b>
+                  <br />
                   <FormattedMessage
-                    id="progress-and-comments"
+                    id="list-of-progress-notifications-and-comments"
                     values={Object {}}
                   />
-                </b>
-                <br />
-                <FormattedMessage
-                  id="list-of-progress-notifications-and-comments"
-                  values={Object {}}
-                />
-              </Radio>
-            </ListGroupItem>
-            <ListGroupItem
-              bsClass="list-group-item"
-              className=""
-              listItem={false}
-            >
-              <Radio
-                bsClass="radio"
-                checked=""
-                disabled={false}
-                inline={true}
-                name="radioGroup"
-                onClick={[Function]}
-                title=""
+                </Radio>
+              </ListGroupItem>
+              <ListGroupItem
+                bsClass="list-group-item"
+                className=""
+                listItem={false}
               >
-                <b>
+                <Radio
+                  bsClass="radio"
+                  checked=""
+                  disabled={false}
+                  inline={true}
+                  name="radioGroup"
+                  onClick={[Function]}
+                  title=""
+                >
+                  <b>
+                    <FormattedMessage
+                      id="all-activities"
+                      values={Object {}}
+                    />
+                  </b>
+                  <br />
                   <FormattedMessage
-                    id="all-activities"
+                    id="list-of-activity-notifications"
                     values={Object {}}
                   />
-                </b>
-                <br />
-                <FormattedMessage
-                  id="list-of-activity-notifications"
-                  values={Object {}}
-                />
-              </Radio>
-            </ListGroupItem>
-          </ListGroup>
-        </FormGroup>
-      </Panel>
-      <MenuItem
-        bsClass="dropdown"
-        className="mt--1"
-        disabled={false}
-        divider={false}
-        eventKey="1"
-        header={false}
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="unfollow"
-          values={Object {}}
-        />
-      </MenuItem>
-    </DropdownButton>
+                </Radio>
+              </ListGroupItem>
+            </ListGroup>
+          </FormGroup>
+        </Panel>
+        <MenuItem
+          bsClass="dropdown"
+          className="mt--1"
+          disabled={false}
+          divider={false}
+          eventKey="1"
+          header={false}
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="unfollow"
+            values={Object {}}
+          />
+        </MenuItem>
+      </DropdownMenu>
+    </Uncontrolled(Dropdown)>
   </span>
 </Connect(LoginOverlay)>
 `;

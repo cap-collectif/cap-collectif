@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
-  DropdownButton,
+  Dropdown,
   MenuItem,
   Panel,
   ListGroup,
@@ -27,15 +27,22 @@ type Props = {
 };
 
 type State = {
-  isJustFollowed: boolean
+  isJustFollowed: boolean,
 };
 
 export class ProposalFollowButton extends React.Component<Props, State> {
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
     this.state = {
       isJustFollowed: false,
     };
+  }
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props !== nextProps) {
+      this.setState({
+        isJustFollowed: !!nextProps.proposal.viewerIsFollowing,
+      });
+    }
   }
   render() {
     const { proposal } = this.props;
@@ -50,8 +57,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
               return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
               }).then(() => {
-                this.state({
-                  isJustFollowed: true
+                this.setState({
+                  isJustFollowed: true,
                 });
                 return true;
               });
@@ -66,170 +73,178 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       return (
         <LoginOverlay>
           <span className="mb-0 proposal-follow-dropdown">
-            <DropdownButton
+            <Dropdown
               className="mb-0 width250"
               id="proposal-follow-btn"
-              title={<FormattedMessage id="following" />}>
-              <Panel
-                className="mb-0 bn width250"
-                header={
-                  <span>
-                    <FormattedMessage id="to-be-notified-of-new-of" />
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Popover placement="top" className="in" id="pinned-label">
-                          <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
-                        </Popover>
-                      }>
-                      <a>
-                        <span className="cap-information" />
-                      </a>
-                    </OverlayTrigger>
-                  </span>
-                }>
-                <FormGroup className="bn mb-0">
-                  <ListGroup className="mb-0">
-                    <ListGroupItem className="">
-                      <Radio
-                        name="radioGroup"
-                        checked={
-                          proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
-                        }
-                        inline
-                        onClick={() => {
-                          if (
-                            proposal.viewerIsFollowing &&
-                            proposal.viewerAsFollower !== null &&
-                            typeof proposal.viewerAsFollower !== 'undefined'
-                          ) {
-                            return UpdateFollowProposalMutation.commit({
-                              input: {
-                                proposalId: proposal.id,
-                                followerId: proposal.viewerAsFollower.id,
-                                notifiedOf: 'DEFAULT',
-                              },
-                            }).then(() => {
-                              AppDispatcher.dispatch({
-                                actionType: UPDATE_ALERT,
-                                alert: {
-                                  bsStyle: 'success',
-                                  content: 'flash-message-follow-update',
-                                },
-                              });
-                              return true;
-                            });
+              defaultOpen={isJustFollowed}>
+              <Dropdown.Toggle>
+                <FormattedMessage id="following" />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Panel
+                  className="mb-0 bn width250"
+                  header={
+                    <span>
+                      <FormattedMessage id="to-be-notified-of-new-of" />
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={
+                          <Popover placement="top" className="in" id="pinned-label">
+                            <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
+                          </Popover>
+                        }>
+                        <a>
+                          <span className="cap-information" />
+                        </a>
+                      </OverlayTrigger>
+                    </span>
+                  }>
+                  <FormGroup className="bn mb-0">
+                    <ListGroup className="mb-0">
+                      <ListGroupItem className="">
+                        <Radio
+                          name="radioGroup"
+                          checked={
+                            proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
                           }
-                        }}>
-                        <b>
-                          <FormattedMessage id="the-progress" />
-                        </b>{' '}
-                        <br />
-                        <FormattedMessage id="list-of-progress-notifications" />
-                      </Radio>
-                    </ListGroupItem>
-                    <ListGroupItem className="">
-                      <Radio
-                        name="radioGroup"
-                        checked={
-                          proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
-                            ? 'checked'
-                            : ''
-                        }
-                        inline
-                        onClick={() => {
-                          if (
-                            proposal.viewerIsFollowing &&
-                            proposal.viewerAsFollower !== null &&
-                            typeof proposal.viewerAsFollower !== 'undefined'
-                          ) {
-                            return UpdateFollowProposalMutation.commit({
-                              input: {
-                                proposalId: proposal.id,
-                                followerId: proposal.viewerAsFollower.id,
-                                notifiedOf: 'DEFAULT_AND_COMMENTS',
-                              },
-                            }).then(() => {
-                              AppDispatcher.dispatch({
-                                actionType: UPDATE_ALERT,
-                                alert: {
-                                  bsStyle: 'success',
-                                  content: 'flash-message-follow-update',
+                          inline
+                          onClick={() => {
+                            if (
+                              proposal.viewerIsFollowing &&
+                              proposal.viewerAsFollower !== null &&
+                              typeof proposal.viewerAsFollower !== 'undefined'
+                            ) {
+                              return UpdateFollowProposalMutation.commit({
+                                input: {
+                                  proposalId: proposal.id,
+                                  followerId: proposal.viewerAsFollower.id,
+                                  notifiedOf: 'DEFAULT',
                                 },
+                              }).then(() => {
+                                AppDispatcher.dispatch({
+                                  actionType: UPDATE_ALERT,
+                                  alert: {
+                                    bsStyle: 'success',
+                                    content: 'flash-message-follow-update',
+                                  },
+                                });
+                                return true;
                               });
-                              return true;
-                            });
+                            }
+                          }}>
+                          <b>
+                            <FormattedMessage id="the-progress" />
+                          </b>{' '}
+                          <br />
+                          <FormattedMessage id="list-of-progress-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem className="">
+                        <Radio
+                          name="radioGroup"
+                          checked={
+                            proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                              ? 'checked'
+                              : ''
                           }
-                        }}>
-                        <b>
-                          <FormattedMessage id="progress-and-comments" />
-                        </b>
-                        <br />
+                          inline
+                          onClick={() => {
+                            if (
+                              proposal.viewerIsFollowing &&
+                              proposal.viewerAsFollower !== null &&
+                              typeof proposal.viewerAsFollower !== 'undefined'
+                            ) {
+                              return UpdateFollowProposalMutation.commit({
+                                input: {
+                                  proposalId: proposal.id,
+                                  followerId: proposal.viewerAsFollower.id,
+                                  notifiedOf: 'DEFAULT_AND_COMMENTS',
+                                },
+                              }).then(() => {
+                                AppDispatcher.dispatch({
+                                  actionType: UPDATE_ALERT,
+                                  alert: {
+                                    bsStyle: 'success',
+                                    content: 'flash-message-follow-update',
+                                  },
+                                });
+                                return true;
+                              });
+                            }
+                          }}>
+                          <b>
+                            <FormattedMessage id="progress-and-comments" />
+                          </b>
+                          <br />
 
-                        <FormattedMessage id="list-of-progress-notifications-and-comments" />
-                      </Radio>
-                    </ListGroupItem>
-                    <ListGroupItem className="">
-                      <Radio
-                        name="radioGroup"
-                        checked={proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''}
-                        inline
-                        onClick={() => {
-                          if (
-                            proposal.viewerIsFollowing &&
-                            proposal.viewerAsFollower !== null &&
-                            typeof proposal.viewerAsFollower !== 'undefined'
-                          ) {
-                            return UpdateFollowProposalMutation.commit({
-                              input: {
-                                proposalId: proposal.id,
-                                followerId: proposal.viewerAsFollower.id,
-                                notifiedOf: 'ALL',
-                              },
-                            }).then(() => {
-                              AppDispatcher.dispatch({
-                                actionType: UPDATE_ALERT,
-                                alert: {
-                                  bsStyle: 'success',
-                                  content: 'flash-message-follow-update',
+                          <FormattedMessage id="list-of-progress-notifications-and-comments" />
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem className="">
+                        <Radio
+                          name="radioGroup"
+                          checked={proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''}
+                          inline
+                          onClick={() => {
+                            if (
+                              proposal.viewerIsFollowing &&
+                              proposal.viewerAsFollower !== null &&
+                              typeof proposal.viewerAsFollower !== 'undefined'
+                            ) {
+                              return UpdateFollowProposalMutation.commit({
+                                input: {
+                                  proposalId: proposal.id,
+                                  followerId: proposal.viewerAsFollower.id,
+                                  notifiedOf: 'ALL',
                                 },
+                              }).then(() => {
+                                AppDispatcher.dispatch({
+                                  actionType: UPDATE_ALERT,
+                                  alert: {
+                                    bsStyle: 'success',
+                                    content: 'flash-message-follow-update',
+                                  },
+                                });
+                                return true;
                               });
-                              return true;
-                            });
-                          }
-                        }}>
-                        <b>
-                          <FormattedMessage id="all-activities" />
-                        </b>
-                        <br />
-                        <FormattedMessage id="list-of-activity-notifications" />
-                      </Radio>
-                    </ListGroupItem>
-                  </ListGroup>
-                </FormGroup>
-              </Panel>
-              <MenuItem
-                eventKey="1"
-                className="mt--1"
-                onClick={() => {
-                  if (proposal.viewerIsFollowing) {
-                    return UnfollowProposalMutation.commit({
-                      input: { proposalId: proposal.id },
-                    }).then(() => {
-                      AppDispatcher.dispatch({
-                        actionType: UPDATE_ALERT,
-                        alert: {
-                          bsStyle: 'success',
-                          content: 'flash-message-unfollow',
-                        },
+                            }
+                          }}>
+                          <b>
+                            <FormattedMessage id="all-activities" />
+                          </b>
+                          <br />
+                          <FormattedMessage id="list-of-activity-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                    </ListGroup>
+                  </FormGroup>
+                </Panel>
+                <MenuItem
+                  eventKey="1"
+                  className="mt--1"
+                  onClick={() => {
+                    if (proposal.viewerIsFollowing) {
+                      return UnfollowProposalMutation.commit({
+                        input: { proposalId: proposal.id },
+                      }).then(() => {
+                        AppDispatcher.dispatch({
+                          actionType: UPDATE_ALERT,
+                          alert: {
+                            bsStyle: 'success',
+                            content: 'flash-message-unfollow',
+                          },
+                        });
+                        this.setState({
+                          isJustFollowed: false,
+                        });
+                        return true;
                       });
-                      return true;
-                    });
-                  }
-                }}>
-                <FormattedMessage id="unfollow" />
-              </MenuItem>
-            </DropdownButton>
+                    }
+                  }}>
+                  <FormattedMessage id="unfollow" />
+                </MenuItem>
+              </Dropdown.Menu>
+            </Dropdown>
           </span>
         </LoginOverlay>
       );
