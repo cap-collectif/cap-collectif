@@ -1,7 +1,7 @@
 {% block body_text %}
     {% autoescape false %}
         <p>
-            {{ 'moderation.notification.body'|trans({'%title%': contribution, '%username%': username}, 'CapcoAppBundle') | raw }}
+            {{ 'moderation.notification.body'|trans({'%title%': contribution}, 'CapcoAppBundle') | raw }}
         </p>
         {% if contribution.trashedReason %}
             <p>{{ contribution.trashedReason }}</p>
