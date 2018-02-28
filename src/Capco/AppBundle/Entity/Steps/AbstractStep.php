@@ -249,9 +249,11 @@ abstract class AbstractStep
      *
      * @param \DateTime $startAt
      */
-    public function setStartAt($startAt)
+    public function setStartAt($startAt): self
     {
         $this->startAt = $startAt;
+
+        return $this;
     }
 
     /**
@@ -269,9 +271,11 @@ abstract class AbstractStep
      *
      * @param \DateTime $endAt
      */
-    public function setEndAt($endAt)
+    public function setEndAt($endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
     }
 
     /**
