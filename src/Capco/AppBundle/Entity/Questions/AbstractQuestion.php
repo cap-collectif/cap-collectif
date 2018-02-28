@@ -54,7 +54,6 @@ abstract class AbstractQuestion
     /**
      * Needed by sonata admin.
      *
-     * @Assert\NotNull()
      * @ORM\OneToOne(
      *  targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion",
      *  mappedBy="question",
@@ -89,7 +88,7 @@ abstract class AbstractQuestion
     /**
      * @ORM\Column(name="help_text", type="text", nullable=true)
      */
-    protected $helpText = null;
+    protected $helpText;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})

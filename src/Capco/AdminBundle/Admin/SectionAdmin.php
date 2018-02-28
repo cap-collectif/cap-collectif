@@ -167,11 +167,12 @@ class SectionAdmin extends Admin
             ]);
         }
 
-        if ($subject && $subject->getType() === 'proposals') {
+        if ($subject && 'proposals' === $subject->getType()) {
             $formMapper->add('step', 'sonata_type_model', [
                 'label' => 'admin.fields.section.collect_step',
                 'required' => true,
                 'query' => $this->createQueryForCollectSteps(),
+                'choices_as_values' => true,
             ]);
         }
     }
