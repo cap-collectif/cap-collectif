@@ -28,3 +28,19 @@ services:
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\FollowProposalMutation:
+      class: Capco\AppBundle\GraphQL\Mutation\FollowProposalMutation
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@capco.proposal.repository"
+          - "@capco.follower.repository"
+      tags:
+          - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation:
+      class: Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@capco.proposal.repository"
+          - "@capco.follower.repository"
+      tags:
+          - { name: overblog_graphql.mutation }

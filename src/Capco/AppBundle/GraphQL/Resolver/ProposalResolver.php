@@ -195,8 +195,20 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposals;
     }
 
-    public function resolveCreatedAt(CreatableInterface $object): string
+    public function resolveCreatedAt(CreatableInterface $object): \DateTime
     {
-        return $object->getCreatedAt()->format(\DateTime::ATOM);
+        return $object->getCreatedAt();
+    }
+
+    public function resolvePostsCount(Proposal $proposal): int
+    {
+        return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
+    }
+
+    public function resolveViewerCanSeeEvaluation(Proposal $proposal): bool
+    {
+        $evalForm = $proposal->getProposalForm()->getEvaluationForm();
+
+        return null !== $evalForm && !$evalForm->isFullyPrivate();
     }
 }

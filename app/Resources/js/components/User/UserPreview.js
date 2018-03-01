@@ -35,9 +35,11 @@ const UserPreview = React.createClass({
     if (!user && !username) {
       return null;
     }
+    const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
     const classes = {
       media: true,
       'media--user-thumbnail': true,
+      'media--macro__user': true,
       box: true,
       [className]: true,
     };
@@ -49,6 +51,16 @@ const UserPreview = React.createClass({
           <p className="media--macro__user  small">
             {user ? <UserLink user={user} /> : <span>{username}</span>}
           </p>
+          <span className="excerpt">
+            {contributionsCount === false ? null : (
+              <div>
+                <FormattedMessage
+                  id="global.counters.contributions"
+                  values={{ num: contributionsCount }}
+                />
+              </div>
+            )}
+          </span>
         </div>
       </div>
     );

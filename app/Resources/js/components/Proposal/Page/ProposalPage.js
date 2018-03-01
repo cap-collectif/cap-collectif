@@ -1,28 +1,17 @@
 // @flow
 import React from 'react';
-import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
-import ProposalPageContent from './ProposalPageContent';
-import ProposalPageLastNews from './ProposalPageLastNews';
-import ProposalPageVotes from './ProposalPageVotes';
-import ProposalPageBlog from './ProposalPageBlog';
-import ProposalPageEvaluation from './ProposalPageEvaluation';
-import ProposalVoteModal from '../Vote/ProposalVoteModal';
-import ProposalPageMetadata from './ProposalPageMetadata';
-import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
-import ProposalPageAdvancement from './ProposalPageAdvancement';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import ProposalPageTabs from './ProposalPageTabs';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
-import ProposalFusionList from './ProposalFusionList';
 import Loader from '../../Utils/Loader';
 import type { FeatureToggles, State } from '../../../types';
 import type { Proposal } from '../../../redux/modules/proposal';
+import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
@@ -52,163 +41,63 @@ export class ProposalPage extends React.Component<Props> {
     if (hash.indexOf('votes') !== -1) {
       key = 'votes';
     }
+    if (hash.indexOf('followers') !== -1) {
+      key = 'followers';
+    }
     return key;
   }
 
-  getDefaultKey() {
-    const hash = typeof window !== 'undefined' ? window.location.hash : null;
-    if (hash) {
-      return this.getHashKey(hash);
-    }
-    return 'content';
-  }
-
   render() {
-    const { proposal, form, categories, features, steps } = this.props;
-    const currentVotableStep = proposal.votableStepId
-      ? steps.filter(s => s.id === proposal.votableStepId)[0]
-      : null;
+    const { proposal, steps, features, categories, form } = this.props;
     // $FlowFixMe
-    const votesCount = Object.values(proposal.votesCountByStepId).reduce((a, b) => a + b, 0);
-    const showVotesTab = votesCount > 0 || currentVotableStep !== null;
-    const votableSteps = steps.filter(step => step.votable);
     return (
       <div>
         <ProposalDraftAlert proposal={proposal} />
         <ProposalPageAlert proposal={proposal} />
-        <ProposalPageHeader proposal={proposal} className="container container--custom" />
-        <Tab.Container
-          id="proposal-page-tabs"
-          defaultActiveKey={this.getDefaultKey()}
-          className="tabs__container container--custom">
-          <div>
-            <div className="tabs">
-              <div className="container">
-                <Nav bsStyle="tabs">
-                  <NavItem eventKey="content" className="tab">
-                    <FormattedMessage id="proposal.tabs.content" />
-                  </NavItem>
-                  <NavItem eventKey="blog" className="tab">
-                    <FormattedMessage id="proposal.tabs.blog" />
-                    <span className="badge">{proposal.postsCount}</span>
-                  </NavItem>
-                  {proposal.viewerCanSeeEvaluation && (
-                    <NavItem eventKey="evaluation" className="tab">
-                      <FormattedMessage id="proposal.tabs.evaluation" />
-                    </NavItem>
-                  )}
-                  {showVotesTab && (
-                    <NavItem eventKey="votes" className="tab">
-                      <FormattedMessage id="proposal.tabs.votes" />
-                      <span className="badge">{votesCount}</span>
-                    </NavItem>
-                  )}
-                </Nav>
-              </div>
-            </div>
-            <div className="container">
-              <Tab.Content animation={false}>
-                <Tab.Pane eventKey="content">
-                  <Row>
-                    <Col xs={12} sm={8}>
-                      <ProposalFusionList proposal={proposal} type="From" />
-                      <ProposalFusionList proposal={proposal} type="Into" />
-                      <ProposalPageLastNews proposal={proposal} />
-                      <ProposalPageContent
-                        proposal={proposal}
-                        form={form}
-                        categories={categories}
-                      />
-                    </Col>
-                    <Col xs={12} sm={4}>
-                      <ProposalPageMetadata
-                        proposal={proposal}
-                        showDistricts={features.districts}
-                        showCategories={form.usingCategories}
-                        showNullEstimation={
-                          !!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)
-                        }
-                        showThemes={features.themes && form.usingThemes}
-                      />
-                      <br />
-                      {currentVotableStep &&
-                        currentVotableStep.voteThreshold > 0 && (
-                          <span>
-                            <ProposalPageVoteThreshold
-                              proposal={proposal}
-                              step={currentVotableStep}
-                            />
-                            <br />
-                          </span>
-                        )}
-                      <ProposalPageAdvancement proposal={proposal} />
-                    </Col>
-                  </Row>
-                </Tab.Pane>
-                {showVotesTab && (
-                  <Tab.Pane eventKey="votes">
-                    <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
-                      <Row className="clearfix">
-                        <Nav bsStyle="pills">
-                          {votableSteps.map((step, index) => (
-                            <NavItem key={index} eventKey={index}>
-                              {step.title}{' '}
-                              <span className="badge">{proposal.votesCountByStepId[step.id]}</span>
-                            </NavItem>
-                          ))}
-                        </Nav>
-                        <Tab.Content animation={false}>
-                          {votableSteps.map((step, index) => (
-                            <Tab.Pane key={index} eventKey={index}>
-                              <ProposalPageVotes stepId={step.id} proposal={proposal} />
-                            </Tab.Pane>
-                          ))}
-                        </Tab.Content>
-                      </Row>
-                    </Tab.Container>
-                  </Tab.Pane>
-                )}
-                <Tab.Pane eventKey="blog">
-                  <ProposalPageBlog />
-                </Tab.Pane>
-                <Tab.Pane eventKey="evaluation">
-                  <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                      query ProposalPageQuery($proposalId: ID!) {
-                        proposal(id: $proposalId) {
-                          ...ProposalPageEvaluation_proposal
-                        }
-                      }
-                    `}
-                    variables={{ proposalId: proposal.id }}
-                    render={({
-                      error,
-                      props,
-                    }: {
-                      error: ?Error,
-                      props?: ProposalPageQueryResponse,
-                    }) => {
-                      if (error) {
-                        console.log(error); // eslint-disable-line no-console
-                        return graphqlError;
-                      }
-                      if (props) {
-                        // eslint-disable-next-line react/prop-types
-                        if (props.proposal) {
-                          return <ProposalPageEvaluation proposal={props.proposal} />;
-                        }
-                        return graphqlError;
-                      }
-                      return <Loader />;
-                    }}
-                  />
-                </Tab.Pane>
-              </Tab.Content>
-            </div>
-            {!proposal.isDraft && currentVotableStep && <ProposalVoteModal proposal={proposal} />}
-          </div>
-        </Tab.Container>
+
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ProposalPageQuery($proposalId: ID!, $count: Int!, $cursor: String) {
+              proposal(id: $proposalId) {
+                ...ProposalPageTabs_proposal
+                ...ProposalPageHeader_proposal
+              }
+            }
+          `}
+          variables={{ proposalId: proposal.id, count: PROPOSAL_FOLLOWERS_TO_SHOW, cursor: null }}
+          render={({ error, props }: { error: ?Error, props?: ProposalPageQueryResponse }) => {
+            if (error) {
+              console.log(error); // eslint-disable-line no-console
+              return graphqlError;
+            }
+            if (props) {
+              // eslint-disable-next-line react/prop-types
+              if (props.proposal) {
+                return (
+                  <div>
+                    <ProposalPageHeader
+                      proposal={props.proposal}
+                      oldProposal={proposal}
+                      className="container container--custom"
+                    />
+                    <ProposalPageTabs
+                      proposal={props.proposal}
+                      oldProposal={proposal}
+                      steps={steps}
+                      features={features}
+                      categories={categories}
+                      form={form}
+                    />
+                  </div>
+                );
+              }
+
+              return graphqlError;
+            }
+            return <Loader />;
+          }}
+        />
       </div>
     );
   }

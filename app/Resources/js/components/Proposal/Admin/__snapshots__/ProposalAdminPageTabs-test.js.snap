@@ -25,7 +25,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       title="proposal.admin.content"
     >
       <Relay(Connect(InjectIntl(ReduxForm)))
-        proposal={Object {}}
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
       />
     </Tab>
     <Tab
@@ -33,7 +39,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       title="proposal.admin.advancement"
     >
       <Relay(Connect(InjectIntl(ReduxForm)))
-        proposal={Object {}}
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
       />
     </Tab>
     <Tab
@@ -41,23 +53,67 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       title="proposal.admin.news"
     >
       <Relay(InjectIntl(ProposalAdminNewsForm))
-        proposal={Object {}}
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
       />
     </Tab>
     <Tab
       eventKey={4}
-      title="proposal.admin.notation"
+      title={
+        <div>
+          <FormattedMessage
+            id="proposal.tabs.followers"
+            values={Object {}}
+          />
+          <span
+            className="ml-10 badge"
+          >
+            169
+          </span>
+        </div>
+      }
     >
-      <Relay(Connect(InjectIntl(ReduxForm)))
-        proposal={Object {}}
+      <Relay(ProposalAdminFollowers)
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
       />
     </Tab>
     <Tab
       eventKey={5}
+      title="proposal.admin.notation"
+    >
+      <Relay(Connect(InjectIntl(ReduxForm)))
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={6}
       title="proposal.admin.publication"
     >
       <Relay(Connect(ReduxForm))
-        proposal={Object {}}
+        proposal={
+          Object {
+            "followerConnection": Object {
+              "totalCount": 169,
+            },
+          }
+        }
       />
     </Tab>
   </Uncontrolled(Tabs)>

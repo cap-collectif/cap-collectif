@@ -764,13 +764,7 @@ declare module "react-relay" {
       operation: COperationSelector<TNode, TOperation>
     |}): Disposable;
 
-    unstable_internal: CUnstableEnvironmentCore<
-      TEnvironment,
-      TFragment,
-      TGraphQLTaggedNode,
-      TNode,
-      TOperation
-    >;
+    unstable_internal: any;
   }
 
   declare export interface CUnstableEnvironmentCore<
@@ -1322,7 +1316,7 @@ declare module "react-relay" {
     isLoading: () => boolean,
     loadMore: (
       pageSize: number,
-      callback: (error: ?Error) => void,
+      callback?: (error: ?Error) => void,
       options?: RefetchOptions
     ) => ?Disposable,
     refetchConnection: (

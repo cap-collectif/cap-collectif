@@ -47,4 +47,5 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   };
 };
 
+// TODO create fragment query proposal news : title
 export default connect(mapStateToProps)(ProposalPageLastNews);

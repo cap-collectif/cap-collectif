@@ -473,6 +473,46 @@ type EvaluationForm {
   questions: [Question!]!
 }
 
+input FollowProposalInput {
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type FollowProposalPayload {
+  proposal: Proposal
+  follower: User
+  followerEdge: FollowerEdge
+  clientMutationId: String
+}
+
+# A Follower
+type Follower {
+  id: ID!
+  user: User!
+  proposal: Proposal!
+}
+
+# A connection to a list of items.
+type FollowerConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [FollowerEdge]
+}
+
+# An edge in a connection.
+type FollowerEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
 scalar GeoJSON
 
 # A list of groups
@@ -573,6 +613,8 @@ type Mutation {
   updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
+  followProposal(input: FollowProposalInput!): FollowProposalPayload
+  unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
@@ -925,6 +967,30 @@ type Proposal {
 
   # If the proposal listed in a fusion, contains the list of fusions.
   mergedIn: [Proposal!]!
+
+  # Array of users following proposal.
+  followers: [User!]!
+  followerConnection(
+    # Ordering options for followers returning from the connection
+    orderBy: String
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 32
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): FollowerConnection!
+
+  # View follow current proposal
+  viewerIsFollowing: Boolean!
+  postsCount: Int!
+  viewerCanSeeEvaluation: Boolean!
 }
 
 # The affiliation of a user to a proposal
@@ -1419,6 +1485,18 @@ interface TrashableContribution {
 
 scalar URI
 
+input UnfollowProposalInput {
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type UnfollowProposalPayload {
+  proposal: Proposal
+  unfollowerId: ID
+  clientMutationId: String
+}
+
 input UnselectProposalInput {
   # The step where the proposal is selected
   stepId: String!
@@ -1594,6 +1672,12 @@ type User {
 
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
+
+  # Array of proposals followed by current user.
+  followingProposal: [Proposal!]!
+
+  # Total of contributions count
+  contributionsCount: Int!
 }
 
 # A list of users in groups

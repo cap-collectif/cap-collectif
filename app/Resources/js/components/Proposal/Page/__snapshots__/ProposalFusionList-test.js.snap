@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFusionList /> should render a list of proposal merged from other proposal 1`] = `
+<div>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    header={
+      <FormattedMessage
+        id="proposal.mergedIn"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    }
+  >
+    <div>
+      <a
+        href={true}
+      >
+        Title Proposal 2
+      </a>
+    </div>
+    <div>
+      <a
+        href={true}
+      >
+        Title Proposal 3
+      </a>
+    </div>
+  </Panel>
+</div>
+`;
+
+exports[`<ProposalFusionList /> should render a list of proposal of merged in other proposal 1`] = `
+<div>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    header={
+      <FormattedMessage
+        id="proposal.mergedFrom"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    }
+  >
+    <div>
+      <a
+        href={true}
+      >
+        Title Proposal 2
+      </a>
+    </div>
+    <div>
+      <a
+        href={true}
+      >
+        Title Proposal 3
+      </a>
+    </div>
+  </Panel>
+</div>
+`;

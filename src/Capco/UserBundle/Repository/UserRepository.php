@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -21,11 +22,10 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-        ->select('COUNT(u.id)')
-        ->innerJoin('u.userGroups', 'ug')
-        ->andWhere('ug.group = :group')
-        ->setParameter('group', $group)
-        ;
+            ->select('COUNT(u.id)')
+            ->innerJoin('u.userGroups', 'ug')
+            ->andWhere('ug.group = :group')
+            ->setParameter('group', $group);
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -34,10 +34,9 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-        ->innerJoin('u.userGroups', 'ug')
-        ->andWhere('ug.group = :group')
-        ->setParameter('group', $group)
-      ;
+            ->innerJoin('u.userGroups', 'ug')
+            ->andWhere('ug.group = :group')
+            ->setParameter('group', $group);
 
         return $qb->getQuery()->getResult();
     }
@@ -74,73 +73,72 @@ class UserRepository extends EntityRepository
         $qbIdea->select('userIdea.id')->innerJoin('userIdea.ideas', 'idea', 'WITH', 'idea.expired = 0');
 
         $qb->select('count(DISTINCT u.id)')
-      ->orWhere(
-        $qb->expr()->in(
-          'u.id',
-          $qbIdea->getDQL()
-          )
-        )
-        ->orWhere(
-          $qb->expr()->in(
-            'u.id',
-            $qbReply->getDQL()
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbIdea->getDQL()
+                )
             )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbOpinion->getDQL()
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbReply->getDQL()
+                )
             )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbArgument->getDQL()
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbOpinion->getDQL()
+                )
             )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbProposal->getDQL()
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbArgument->getDQL()
+                )
             )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbOpinionVersions->getDQL()
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbProposal->getDQL()
+                )
             )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbVote->getDQL()
-              )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbComment->getDQL()
-              )
-          )
-          ->orWhere(
-            $qb->expr()->in(
-              'u.id',
-              $qbSource->getDQL()
-              )
-          )
-      ;
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbOpinionVersions->getDQL()
+                )
+            )
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbVote->getDQL()
+                )
+            )
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbComment->getDQL()
+                )
+            )
+            ->orWhere(
+                $qb->expr()->in(
+                    'u.id',
+                    $qbSource->getDQL()
+                )
+            );
 
         return $qb
-                ->getQuery()
-                ->useQueryCache(true)
-                ->getSingleScalarResult();
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
-    public function findProjectSourceContributorsWithCount(Project $project)
+    public function findProjectSourceContributorsWithCount(Project $project): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-         'SELECT u.id, count(distinct s) as sources_count
+            'SELECT u.id, count(distinct s) as sources_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -162,11 +160,11 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findProjectArgumentContributorsWithCount(Project $project)
+    public function findProjectArgumentContributorsWithCount(Project $project): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-          'SELECT u.id, count(distinct a) as arguments_count
+            'SELECT u.id, count(distinct a) as arguments_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.Author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -183,7 +181,7 @@ class UserRepository extends EntityRepository
           )
           GROUP BY u.id
         ')
-        ->setParameter('project', $project);
+            ->setParameter('project', $project);
 
         return $query->getResult();
     }
@@ -192,41 +190,38 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-        ->andWhere('u.newEmailConfirmationToken = :token')
-        ->setParameter('token', $token)
-      ;
+            ->andWhere('u.newEmailConfirmationToken = :token')
+            ->setParameter('token', $token);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function findUsersThatJustExpired()
+    public function findUsersThatJustExpired(): array
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-          ->andWhere('u.expired = false')
-          ->andWhere('u.expiresAt IS NOT NULL')
-          ->andWhere('u.expiresAt < :now')
-          ->setParameter('now', new \DateTime())
-        ;
+            ->andWhere('u.expired = false')
+            ->andWhere('u.expiresAt IS NOT NULL')
+            ->andWhere('u.expiresAt < :now')
+            ->setParameter('now', new \DateTime());
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findUsersThatWillExpireIn24Hours()
+    public function findUsersThatWillExpireIn24Hours(): array
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-          ->andWhere('u.expired = false')
-          ->andWhere('u.expiresAt IS NOT NULL')
-          ->andWhere('u.expiresAt < :tomorrow')
-          ->andWhere('u.alertExpirationSent = false')
-          ->setParameter('tomorrow', new \DateTime('+1 day'))
-        ;
+            ->andWhere('u.expired = false')
+            ->andWhere('u.expiresAt IS NOT NULL')
+            ->andWhere('u.expiresAt < :tomorrow')
+            ->andWhere('u.alertExpirationSent = false')
+            ->setParameter('tomorrow', new \DateTime('+1 day'));
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectOpinionContributorsWithCount(Project $project)
+    public function findProjectOpinionContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
@@ -235,13 +230,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectProposalContributorsWithCount(Project $project)
+    public function findProjectProposalContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
@@ -251,13 +245,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectReplyContributorsWithCount(Project $project, $excludePrivate = false)
+    public function findProjectReplyContributorsWithCount(Project $project, $excludePrivate = false): array
     {
         $replyWith = $excludePrivate ? '(replies.enabled = 1 AND replies.private = 0)' : 'replies.enabled = 1';
         $qb = $this->createQueryBuilder('u')
@@ -268,13 +261,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectVersionContributorsWithCount(Project $project)
+    public function findProjectVersionContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions) as versions_count')
@@ -284,13 +276,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectOpinionVotersWithCount(Project $project)
+    public function findProjectOpinionVotersWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
@@ -300,13 +291,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions_votes_opinion_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectVersionVotersWithCount(Project $project)
+    public function findProjectVersionVotersWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
@@ -317,17 +307,16 @@ class UserRepository extends EntityRepository
             ->leftJoin('versions_votes_version_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findProjectArgumentVotersWithCount(Project $project)
+    public function findProjectArgumentVotersWithCount(Project $project): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-         'SELECT u.id, count(distinct av) as arguments_votes_count
+            'SELECT u.id, count(distinct av) as arguments_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -340,16 +329,16 @@ class UserRepository extends EntityRepository
             (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :project)
           )
           GROUP BY av.user')
-        ->setParameter('project', $project);
+            ->setParameter('project', $project);
 
         return $query->getResult();
     }
 
-    public function findProjectSourceVotersWithCount(Project $project)
+    public function findProjectSourceVotersWithCount(Project $project): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-          'SELECT u.id, count(distinct sv) as sources_votes_count
+            'SELECT u.id, count(distinct sv) as sources_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
@@ -368,7 +357,7 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findProjectProposalVotersWithCount(Project $project, $excludePrivate = false)
+    public function findProjectProposalVotersWithCount(Project $project, $excludePrivate = false): array
     {
         $em = $this->getEntityManager();
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
@@ -382,13 +371,12 @@ class UserRepository extends EntityRepository
           GROUP BY pv.user
         ';
         $query = $em->createQuery($rawQuery)
-            ->setParameter('project', $project)
-        ;
+            ->setParameter('project', $project);
 
         return $query->getResult();
     }
 
-    public function countProjectProposalAnonymousVotersWithCount(Project $project, $excludePrivate = false)
+    public function countProjectProposalAnonymousVotersWithCount(Project $project, $excludePrivate = false): int
     {
         $query = $this->getEntityManager()
             ->createQueryBuilder()
@@ -411,7 +399,7 @@ class UserRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    public function findWithMediaByIds($ids)
+    public function findWithMediaByIds($ids): array
     {
         $qb = $this->createQueryBuilder('u');
         $qb->addSelect('m')
@@ -422,32 +410,29 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledWith($type = null, $from = null, $to = null)
+    public function getEnabledWith($type = null, $from = null, $to = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder();
 
         if ($type) {
             $qb->andWhere('u.userType = :type')
-               ->setParameter('type', $type)
-               ;
+                ->setParameter('type', $type);
         }
 
         if ($from) {
             $qb->andWhere('u.createdAt >= :from')
-               ->setParameter('from', $from)
-               ;
+                ->setParameter('from', $from);
         }
 
         if ($to) {
             $qb->andWhere('u.createdAt <= :to')
-               ->setParameter('to', $to)
-               ;
+                ->setParameter('to', $to);
         }
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step)
+    public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('SELECT u.id, count(distinct s) as sources_count
@@ -468,7 +453,7 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step)
+    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery('SELECT u.id, count(distinct a) as arguments_count
@@ -489,20 +474,19 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step)
+    public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) as opinions_count')
             ->leftJoin('u.opinions', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->where('opinions.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findCollectStepProposalContributorsWithCount(CollectStep $step)
+    public function findCollectStepProposalContributorsWithCount(CollectStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct proposals) as proposals_count')
@@ -510,13 +494,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findQuestionnaireStepReplyContributorsWithCount(QuestionnaireStep $step)
+    public function findQuestionnaireStepReplyContributorsWithCount(QuestionnaireStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct replies) as replies_count')
@@ -524,13 +507,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->where('questionnaire.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step)
+    public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions) as versions_count')
@@ -538,13 +520,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('versions.parent', 'opinions', 'WITH', 'opinions.isEnabled = 1 AND opinions.expired = 0')
             ->where('opinions.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step)
+    public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions_votes) as opinions_votes_count')
@@ -552,13 +533,12 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions_votes.opinion', 'opinions_votes_opinion', 'WITH', 'opinions_votes_opinion.isEnabled = 1 AND opinions_votes_opinion.expired = 0')
             ->where('opinions_votes_opinion.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepVersionVotersWithCount(ConsultationStep $step)
+    public function findConsultationStepVersionVotersWithCount(ConsultationStep $step): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions_votes) as versions_votes_count')
@@ -567,17 +547,16 @@ class UserRepository extends EntityRepository
             ->leftJoin('versions_votes_version.parent', 'versions_votes_version_parent', 'WITH', 'versions_votes_version_parent.isEnabled = 1 AND versions_votes_version_parent.expired = 0')
             ->where('versions_votes_version_parent.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step)
-        ;
+            ->setParameter('step', $step);
 
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step)
+    public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-          'SELECT u.id, count(distinct av) as arguments_votes_count
+            'SELECT u.id, count(distinct av) as arguments_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -596,11 +575,11 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findConsultationStepSourceVotersWithCount(ConsultationStep $step)
+    public function findConsultationStepSourceVotersWithCount(ConsultationStep $step): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-          'SELECT u.id, count(distinct sv) as sources_votes_count
+            'SELECT u.id, count(distinct sv) as sources_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
@@ -619,11 +598,11 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findSelectionStepProposalVotersWithCount(SelectionStep $step)
+    public function findSelectionStepProposalVotersWithCount(SelectionStep $step): array
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
-         'SELECT u.id, count(distinct pv) as proposals_votes_count
+            'SELECT u.id, count(distinct pv) as proposals_votes_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
@@ -635,7 +614,7 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function countSelectionStepProposalAnonymousVoters(SelectionStep $step)
+    public function countSelectionStepProposalAnonymousVoters(SelectionStep $step): int
     {
         $query = $this->getEntityManager()->createQueryBuilder()
             ->select('COUNT(DISTINCT proposal_selection_vote.email)')
@@ -665,7 +644,7 @@ class UserRepository extends EntityRepository
      *
      * @return Paginator
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $sort = null, $type = null)
+    public function getSearchResults($nbByPage = 8, $page = 1, $sort = null, $type = null): Paginator
     {
         if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
@@ -677,13 +656,11 @@ class UserRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('m', 'ut')
             ->leftJoin('u.Media', 'm')
-            ->leftJoin('u.userType', 'ut')
-        ;
+            ->leftJoin('u.userType', 'ut');
 
         if (null !== $type && UserType::FILTER_ALL !== $type) {
             $qb->andWhere('ut.slug = :type')
-                ->setParameter('type', $type)
-            ;
+                ->setParameter('type', $type);
         }
 
         if (isset(User::$sortOrder[$sort]) && User::SORT_ORDER_CONTRIBUTIONS_COUNT === User::$sortOrder[$sort]) {
@@ -700,14 +677,13 @@ class UserRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC')
+    public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC'): QueryBuilder
     {
         return $qb->addSelect('(u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
-            ->orderBy('contributionsCount', $order)
-        ;
+            ->orderBy('contributionsCount', $order);
     }
 
-    public function getAllUsersWithoutSuperAdmin()
+    public function getAllUsersWithoutSuperAdmin(): array
     {
         $query = $this->createQueryBuilder('user')
             ->andWhere('user.roles != :role')
@@ -716,10 +692,101 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findUsersFollowingAProposal(Proposal $proposal): array
+    {
+        $query = $this->createQueryBuilder('u')
+            ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
+            ->where('p.id = :proposalId')
+            ->setParameter('proposalId', $proposal->getId());
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findFollowersToExport(string $proposalId): array
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder()
+            ->select(['u.id, u.email, u.username, u.firstname, u.lastname, u.slug'])
+            ->from('CapcoUserBundle:User', 'u')
+            ->addSelect(' f.followedAt, ut.name as userTypeName, p.slug as proposalSlug')
+            ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
+            ->join('u.userType', 'ut')
+            ->where('p.id = :proposalId')
+            ->orderBy('f.followedAt', 'ASC')
+            ->setParameter('proposalId', $proposalId);
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function isViewerFollowingProposal(Proposal $proposal, User $viewer): bool
+    {
+        return $this->countFollower($proposal, $viewer) > 0;
+    }
+
+    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 32, $offset = 0): Paginator
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p');
+
+        if (isset($criteria['proposal'])) {
+            $qb
+                ->andWhere('p.id = :proposalId')
+                ->setParameter('proposalId', $criteria['proposal']->getId());
+        }
+
+        $sortField = array_keys($orderBy)[0];
+        $direction = $orderBy[$sortField];
+
+        switch ($sortField) {
+            case 'NAME':
+            case 'USERNAME':
+                $qb
+                    ->addOrderBy('u.username', $direction);
+                break;
+            case 'RANDOM':
+                $qb
+                    ->addSelect('RAND() as HIDDEN rand')
+                    ->addOrderBy('rand');
+                break;
+            default:
+                $qb
+                    ->addOrderBy('u.username', $direction);
+                break;
+        }
+        $query = $qb->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->useQueryCache(true)// ->useResultCache(true, 60)
+        ;
+
+        return new Paginator($query);
+    }
+
+    public function countFollower(Proposal $proposal, User $user = null): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
+            ->andWhere('p.id = :proposalId')
+            ->setParameter('proposalId', $proposal->getId());
+
+        if (null !== $user) {
+            $query->andWhere('u.id = :userId')
+                ->setParameter('userId', $user->getId());
+        }
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function getIsEnabledQueryBuilder()
+    protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.enabled = :enabled')

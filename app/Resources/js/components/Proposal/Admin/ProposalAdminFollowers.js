@@ -1,0 +1,98 @@
+// @flow
+import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage } from 'react-intl';
+import { MenuItem, DropdownButton } from 'react-bootstrap';
+import type { ProposalAdminFollowers_proposal } from './__generated__/ProposalAdminFollowers_proposal.graphql';
+import ProposalPageFollowers from '../Page/ProposalPageFollowers';
+
+type Props = {
+  proposal: ProposalAdminFollowers_proposal,
+};
+
+export class ProposalAdminFollowers extends React.Component<Props> {
+  render() {
+    const { proposal } = this.props;
+    const totalCount = proposal.followerConnection.totalCount;
+    const isAdmin = true;
+    return (
+      <div className="box box-primary container">
+        <div className="box-header">
+          <h3 className="box-title">
+            <FormattedMessage
+              id="proposal.follower.count"
+              values={{ num: proposal.followerConnection.totalCount }}
+            />
+          </h3>
+          <a
+            className="pull-right link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://aide.cap-collectif.com/article/143-suivre-une-proposition">
+            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
+          </a>
+        </div>
+        <div className="box-content">
+          <div className="btn-group pull-right mb-15" id="proposal-follower-dropdown-export">
+            {totalCount > 0 ? (
+              <DropdownButton
+                id={`proposal-follower-export-${proposal.id}`}
+                className="btn btn-default dropdown-toggle"
+                title={
+                  <span>
+                    <i className="cap " /> {<FormattedMessage id="project.download.button" />}
+                  </span>
+                }>
+                <MenuItem
+                  id="proposal-follower-dropdown-export-csv"
+                  eventKey="1"
+                  href={`/admin/capco/app/proposal/${proposal.id}/download/followers/csv`}>
+                  <i className="cap " /> <FormattedMessage id="export_format_csv" />
+                </MenuItem>
+                <MenuItem
+                  id="proposal-follower-dropdown-export-xlsx"
+                  eventKey="2"
+                  href={`/admin/capco/app/proposal/${proposal.id}/download/followers/xlsx`}>
+                  <i className="cap " />{' '}
+                  {
+                    <FormattedMessage
+                      id="project.download.modal.button"
+                      values={{ format: 'XLSX' }}
+                    />
+                  }
+                </MenuItem>
+              </DropdownButton>
+            ) : (
+              <DropdownButton
+                id={proposal.id}
+                className="btn btn-default dropdown-toggle"
+                disabled="true"
+                title={
+                  <span>
+                    <i className="cap " /> {<FormattedMessage id="project.download.button" />}
+                  </span>
+                }
+              />
+            )}
+          </div>
+          <div className="clearfix" />
+          {/* $FlowFixMe */}
+          <ProposalPageFollowers proposal={proposal} pageAdmin={isAdmin} />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default createFragmentContainer(
+  ProposalAdminFollowers,
+  graphql`
+    fragment ProposalAdminFollowers_proposal on Proposal {
+      ...ProposalPageFollowers_proposal
+      id
+      followerConnection(first: $count, after: $cursor) {
+        totalCount
+      }
+    }
+  `,
+);

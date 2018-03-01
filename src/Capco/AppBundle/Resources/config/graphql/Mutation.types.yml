@@ -60,6 +60,20 @@ Mutation:
                     inputType: ChangeProposalEvaluersInput
                     payloadType: ChangeProposalEvaluersPayload
                     mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value])"
+          followProposal:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: FollowProposalInput
+                    payloadType: FollowProposalPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowProposalMutation", [value["proposalId"], user])'
+          unfollowProposal:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: UnfollowProposalInput
+                    payloadType: UnfollowProposalPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowProposalMutation", [value["proposalId"], user])'
           selectProposal:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

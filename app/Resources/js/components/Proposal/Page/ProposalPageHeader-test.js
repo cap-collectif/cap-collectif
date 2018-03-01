@@ -1,32 +1,63 @@
 /* eslint-env jest */
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock } from '../../../mocks';
 import { ProposalPageHeader } from './ProposalPageHeader';
 
 describe('<ProposalPageHeader />', () => {
+  // $FlowFixMe $refType
   const proposal = {
+    title: 'titre',
     theme: {
-      title: 'Titre du thème',
+      title: 'titre du theme',
     },
-    title: 'Titre',
-    author: {},
+    author: {
+      username: 'userAdmin',
+      displayName: 'userAdmin',
+      media: {
+        url: 'http://media.url',
+      },
+    },
+    createdAt: '2015-01-01 00:00:00',
+    updatedAt: '2015-01-05 00:00:00',
+    publicationStatus: 'PUBLISHED',
+    show_url: 'true',
   };
-
+  // $FlowFixMe $refType
   const proposalWithoutTheme = {
-    title: 'Titre',
-    author: {},
-    referer: 'http://capco.test',
+    title: 'titre',
+    theme: null,
+    author: {
+      username: 'userAdmin',
+      displayName: 'userAdmin',
+      media: {
+        url: 'http://media.url',
+      },
+    },
+    createdAt: '2015-01-01 00:00:00',
+    updatedAt: '2015-01-05 00:00:00',
+    publicationStatus: 'PUBLISHED',
+    show_url: 'true',
   };
 
   const props = {
-    userHasVote: false,
-    intl: intlMock,
-    onVote: () => {},
+    className: '',
     referer: 'http://capco.test',
+    oldProposal: {
+      selections: [],
+      votesByStepId: {
+        selectionstep1: [],
+        collectstep1: [],
+      },
+      votableStepId: 'selectionstep1',
+      votesCountByStepId: {
+        selectionstep1: 0,
+        collectstep1: 0,
+      },
+      isDraft: false,
+      viewerCanSeeEvaluation: true,
+    },
   };
-
-  Date.now = jest.fn(() => 1517411601252);
 
   it('should render a proposal header', () => {
     const wrapper = shallow(<ProposalPageHeader proposal={proposal} {...props} />);
@@ -35,18 +66,6 @@ describe('<ProposalPageHeader />', () => {
 
   it('should not render theme if proposal has none', () => {
     const wrapper = shallow(<ProposalPageHeader proposal={proposalWithoutTheme} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not render theme if specified not to', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={proposal} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render a div with specified classes', () => {
-    const wrapper = shallow(
-      <ProposalPageHeader proposal={proposal} className="css-class" {...props} />,
-    );
     expect(wrapper).toMatchSnapshot();
   });
 });

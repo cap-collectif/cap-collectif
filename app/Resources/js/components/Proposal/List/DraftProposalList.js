@@ -11,7 +11,6 @@ import Loader from '../../Utils/Loader';
 type Props = {
   step: Object,
 };
-
 const renderDraftProposals = ({
   error,
   props,

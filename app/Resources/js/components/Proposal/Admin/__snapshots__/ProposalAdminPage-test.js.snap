@@ -58,6 +58,8 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
     render={[Function]}
     variables={
       Object {
+        "count": 32,
+        "cursor": null,
         "id": 1,
       }
     }

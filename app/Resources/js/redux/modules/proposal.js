@@ -132,6 +132,7 @@ export type State = {
   +lastNotifiedStepId: ?Uuid,
   +selectedViewByStep: string,
   +markers: ?Object,
+  +referer: ?string,
 };
 
 export const initialState: State = {
@@ -161,6 +162,7 @@ export const initialState: State = {
   lastNotifiedStepId: null,
   selectedViewByStep: 'mosaic',
   markers: null,
+  referer: null,
 };
 
 export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({

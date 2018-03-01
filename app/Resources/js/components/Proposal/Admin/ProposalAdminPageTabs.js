@@ -1,13 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalAdminSelections from './ProposalAdminSelections';
 import ProposalAdminStatusForm from './ProposalAdminStatusForm';
 import ProposalAdminContentForm from './ProposalAdminContentForm';
 import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
+import ProposalAdminFollowers from './ProposalAdminFollowers';
 
 type DefaultProps = void;
 type Props = { proposal: any, intl: Object };
@@ -34,10 +35,20 @@ export class ProposalAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
             <ProposalAdminNewsForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={4} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
+          <Tab
+            eventKey={4}
+            title={
+              <div>
+                <FormattedMessage id="proposal.tabs.followers" />
+                <span className="ml-10 badge">{proposal.followerConnection.totalCount}</span>
+              </div>
+            }>
+            <ProposalAdminFollowers proposal={proposal} />
+          </Tab>
+          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>
             <ProposalAdminNotationForm proposal={proposal} />
           </Tab>
-          <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
+          <Tab eventKey={6} title={intl.formatMessage({ id: 'proposal.admin.publication' })}>
             <ProposalAdminStatusForm proposal={proposal} />
           </Tab>
         </Tabs>
@@ -59,6 +70,10 @@ export default createFragmentContainer(
       ...ProposalAdminContentForm_proposal
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
+      ...ProposalAdminFollowers_proposal
+      followerConnection(first: $count, after: $cursor) {
+        totalCount
+      }
     }
   `,
 );

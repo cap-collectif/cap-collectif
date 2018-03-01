@@ -26,10 +26,10 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
   <h1
     className="consultation__header__title h1"
   >
-    Titre
+    titre
   </h1>
   <div
-    className="media"
+    className="media mb-15"
   >
     <UserAvatar
       anchor={true}
@@ -40,177 +40,15 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
       onMouseOver={[Function]}
       size={45}
       style={Object {}}
-      user={Object {}}
-    />
-    <div
-      className="media-body"
-    >
-      <p
-        className="media--aligned excerpt"
-      >
-        <FormattedMessage
-          id="proposal.infos.header"
-          values={
-            Object {
-              "createdDate": <FormattedDate
-                day="numeric"
-                hour="numeric"
-                minute="numeric"
-                month="long"
-                value={"2018-01-31T15:13:21.252Z"}
-                year="numeric"
-              />,
-              "user": <UserLink
-                className=""
-                user={Object {}}
-              />,
-            }
-          }
-        />
-      </p>
-    </div>
-    <Connect(ProposalVoteButtonWrapper)
-      className="btn-lg"
-      id="proposal-vote-btn"
-      proposal={
+      user={
         Object {
-          "author": Object {},
-          "referer": "http://capco.test",
-          "title": "Titre",
-        }
-      }
-    />
-  </div>
-</div>
-`;
-
-exports[`<ProposalPageHeader /> should not render theme if specified not to 1`] = `
-<div
-  className="proposal__header "
->
-  <div>
-    <a
-      href="http://capco.test"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-    >
-      <i
-        className="cap cap-arrow-65-1 icon--black"
-      />
-       
-      <FormattedMessage
-        id="proposal.back"
-        values={Object {}}
-      />
-    </a>
-  </div>
-  <h1
-    className="consultation__header__title h1"
-  >
-    Titre
-  </h1>
-  <div
-    className="media"
-  >
-    <UserAvatar
-      anchor={true}
-      className="pull-left"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
-      size={45}
-      style={Object {}}
-      user={Object {}}
-    />
-    <div
-      className="media-body"
-    >
-      <p
-        className="media--aligned excerpt"
-      >
-        <FormattedMessage
-          id="proposal.infos.header"
-          values={
-            Object {
-              "createdDate": <FormattedDate
-                day="numeric"
-                hour="numeric"
-                minute="numeric"
-                month="long"
-                value={"2018-01-31T15:13:21.252Z"}
-                year="numeric"
-              />,
-              "user": <UserLink
-                className=""
-                user={Object {}}
-              />,
-            }
-          }
-        />
-      </p>
-    </div>
-    <Connect(ProposalVoteButtonWrapper)
-      className="btn-lg"
-      id="proposal-vote-btn"
-      proposal={
-        Object {
-          "author": Object {},
-          "theme": Object {
-            "title": "Titre du thème",
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
           },
-          "title": "Titre",
+          "username": "userAdmin",
         }
       }
-    />
-  </div>
-</div>
-`;
-
-exports[`<ProposalPageHeader /> should render a div with specified classes 1`] = `
-<div
-  className="proposal__header css-class"
->
-  <div>
-    <a
-      href="http://capco.test"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-    >
-      <i
-        className="cap cap-arrow-65-1 icon--black"
-      />
-       
-      <FormattedMessage
-        id="proposal.back"
-        values={Object {}}
-      />
-    </a>
-  </div>
-  <h1
-    className="consultation__header__title h1"
-  >
-    Titre
-  </h1>
-  <div
-    className="media"
-  >
-    <UserAvatar
-      anchor={true}
-      className="pull-left"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
-      size={45}
-      style={Object {}}
-      user={Object {}}
     />
     <div
       className="media-body"
@@ -227,32 +65,85 @@ exports[`<ProposalPageHeader /> should render a div with specified classes 1`] =
                 hour="numeric"
                 minute="numeric"
                 month="long"
-                value={"2018-01-31T15:13:21.252Z"}
+                value={"2014-12-31T23:00:00.000Z"}
                 year="numeric"
               />,
               "user": <UserLink
                 className=""
-                user={Object {}}
+                user={
+                  Object {
+                    "displayName": "userAdmin",
+                    "media": Object {
+                      "url": "http://media.url",
+                    },
+                    "username": "userAdmin",
+                  }
+                }
               />,
             }
           }
         />
+        <span>
+           • 
+          <FormattedMessage
+            id="global.edited_on"
+            values={
+              Object {
+                "updated": <FormattedDate
+                  day="numeric"
+                  hour="numeric"
+                  minute="numeric"
+                  month="long"
+                  value={"2015-01-04T23:00:00.000Z"}
+                  year="numeric"
+                />,
+              }
+            }
+          />
+        </span>
       </p>
     </div>
-    <Connect(ProposalVoteButtonWrapper)
-      className="btn-lg"
-      id="proposal-vote-btn"
-      proposal={
-        Object {
-          "author": Object {},
-          "theme": Object {
-            "title": "Titre du thème",
-          },
-          "title": "Titre",
-        }
-      }
-    />
   </div>
+  <Connect(ProposalVoteButtonWrapper)
+    className="pull-right btn-lg"
+    id="proposal-vote-btn"
+    proposal={
+      Object {
+        "isDraft": false,
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "selectionstep1",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "collectstep1": 0,
+          "selectionstep1": 0,
+        },
+      }
+    }
+  />
+  <Relay(ProposalFollowButton)
+    className="pull-right btn-lg"
+    proposal={
+      Object {
+        "author": Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        },
+        "createdAt": "2015-01-01 00:00:00",
+        "publicationStatus": "PUBLISHED",
+        "show_url": "true",
+        "theme": null,
+        "title": "titre",
+        "updatedAt": "2015-01-05 00:00:00",
+      }
+    }
+  />
 </div>
 `;
 
@@ -282,10 +173,10 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
   <h1
     className="consultation__header__title h1"
   >
-    Titre
+    titre
   </h1>
   <div
-    className="media"
+    className="media mb-15"
   >
     <UserAvatar
       anchor={true}
@@ -296,7 +187,15 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
       onMouseOver={[Function]}
       size={45}
       style={Object {}}
-      user={Object {}}
+      user={
+        Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        }
+      }
     />
     <div
       className="media-body"
@@ -313,31 +212,86 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
                 hour="numeric"
                 minute="numeric"
                 month="long"
-                value={"2018-01-31T15:13:21.252Z"}
+                value={"2014-12-31T23:00:00.000Z"}
                 year="numeric"
               />,
               "user": <UserLink
                 className=""
-                user={Object {}}
+                user={
+                  Object {
+                    "displayName": "userAdmin",
+                    "media": Object {
+                      "url": "http://media.url",
+                    },
+                    "username": "userAdmin",
+                  }
+                }
               />,
             }
           }
         />
+        <span>
+           • 
+          <FormattedMessage
+            id="global.edited_on"
+            values={
+              Object {
+                "updated": <FormattedDate
+                  day="numeric"
+                  hour="numeric"
+                  minute="numeric"
+                  month="long"
+                  value={"2015-01-04T23:00:00.000Z"}
+                  year="numeric"
+                />,
+              }
+            }
+          />
+        </span>
       </p>
     </div>
-    <Connect(ProposalVoteButtonWrapper)
-      className="btn-lg"
-      id="proposal-vote-btn"
-      proposal={
-        Object {
-          "author": Object {},
-          "theme": Object {
-            "title": "Titre du thème",
-          },
-          "title": "Titre",
-        }
-      }
-    />
   </div>
+  <Connect(ProposalVoteButtonWrapper)
+    className="pull-right btn-lg"
+    id="proposal-vote-btn"
+    proposal={
+      Object {
+        "isDraft": false,
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "selectionstep1",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "collectstep1": 0,
+          "selectionstep1": 0,
+        },
+      }
+    }
+  />
+  <Relay(ProposalFollowButton)
+    className="pull-right btn-lg"
+    proposal={
+      Object {
+        "author": Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        },
+        "createdAt": "2015-01-01 00:00:00",
+        "publicationStatus": "PUBLISHED",
+        "show_url": "true",
+        "theme": Object {
+          "title": "titre du theme",
+        },
+        "title": "titre",
+        "updatedAt": "2015-01-05 00:00:00",
+      }
+    }
+  />
 </div>
 `;

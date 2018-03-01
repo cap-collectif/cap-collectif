@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
@@ -242,6 +243,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $alertExpirationSent = false;
 
+    protected $followingProposals;
+
     /**
      * @var UserNotificationsConfiguration
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"remove", "persist"})
@@ -279,6 +282,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
+        $this->followingProposals = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
     }
 
@@ -1404,6 +1408,34 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function removeUserGroup(UserGroup $userGroup): self
     {
         $this->userGroups->removeElement($userGroup);
+
+        return $this;
+    }
+
+    public function getFollowingProposals(): Collection
+    {
+        return $this->followingProposals;
+    }
+
+    public function addFollowingProposal(Follower $followingProposal): self
+    {
+        if (!$this->followingProposals->contains($followingProposal)) {
+            $this->followingProposals->add($followingProposal);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowingProposal(Follower $followingProposal): self
+    {
+        $this->followingProposals->removeElement($followingProposal);
+
+        return $this;
+    }
+
+    public function setFollowingProposals(Collection $followingProposals): self
+    {
+        $this->followingProposals = $followingProposals;
 
         return $this;
     }

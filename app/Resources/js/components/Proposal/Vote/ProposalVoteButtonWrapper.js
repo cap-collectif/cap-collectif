@@ -60,14 +60,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
           hasReachedLimit={
             !userHasVote && step.votesLimit && step.votesLimit - userVotesCount <= 0
           }>
-          <ProposalVoteButton
-            id={id}
-            proposal={proposal}
-            step={step}
-            user={user}
-            style={style}
-            className={`${className} mr-15`}
-          />
+          <ProposalVoteButton id={id} proposal={proposal} step={step} user={user} />
         </VoteButtonOverlay>
       );
     }
@@ -84,9 +77,8 @@ export const ProposalVoteButtonWrapper = React.createClass({
           proposal={proposal}
           step={step}
           user={user}
+          className={`${className}`}
           disabled={!userHasVote && !this.userHasEnoughCredits()}
-          style={style}
-          className={className}
         />
       </VoteButtonOverlay>
     );

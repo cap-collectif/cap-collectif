@@ -8,7 +8,11 @@ import { intlMock } from '../../../mocks';
 describe('<ProposalAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
-    proposal: {},
+    proposal: {
+      followerConnection: {
+        totalCount: 169,
+      },
+    },
   };
 
   it('render correctly', () => {

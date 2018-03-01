@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
+use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -35,7 +36,38 @@ class ProposalFormMutation implements ContainerAwareInterface
         return ['proposalForm' => $proposalForm];
     }
 
-    public function updateNotificationsConfiguration(Argument $input): array
+    public function update(Argument $input): array
+    {
+        $arguments = $input->getRawArguments();
+        $id = $arguments['proposalFormId'];
+        $proposalFormRepository = $this->container->get('capco.proposal_form.repository');
+        $proposalForm = $proposalFormRepository->find($id);
+
+        if (!$proposalForm) {
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
+        }
+
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
+
+        unset($arguments['proposalFormId']);
+
+        $form = $formFactory->create(ProposalFormUpdateType::class, $proposalForm);
+        $form->submit($arguments, false);
+
+        if (!$form->isValid()) {
+            $logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            throw new UserError('Can\'t update this proposal form!');
+        }
+
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $em->flush();
+        $em->clear();
+
+        return ['proposalForm' => $proposalFormRepository->find($id)];
+    }
+
+    public function updateNotificationsConfiguration(Argument $input)
     {
         $arguments = $input->getRawArguments();
         $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);

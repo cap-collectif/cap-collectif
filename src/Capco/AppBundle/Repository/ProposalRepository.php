@@ -454,6 +454,17 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.address IS NOT NULL');
     }
 
+    public function findFollowingProposalByUser($userid)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.followers', 'f')
+            ->leftJoin('f.user', 'u')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userid);
+
+        return $query->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

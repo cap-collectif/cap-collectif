@@ -1,0 +1,7 @@
+FollowProposalInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalId:
+                type: "ID!"
+                description: "The proposal id"

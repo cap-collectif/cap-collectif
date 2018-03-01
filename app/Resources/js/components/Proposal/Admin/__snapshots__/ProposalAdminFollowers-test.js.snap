@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminFollowers /> should render a proposal page follower with 3 users 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/143-suivre-une-proposition"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <div
+      className="btn-group pull-right mb-15"
+      id="proposal-follower-dropdown-export"
+    >
+      <DropdownButton
+        className="btn btn-default dropdown-toggle"
+        id="proposal-follower-export-proposal1"
+        title={
+          <span>
+            <i
+              className="cap "
+            />
+             
+            <FormattedMessage
+              id="project.download.button"
+              values={Object {}}
+            />
+          </span>
+        }
+      >
+        <MenuItem
+          bsClass="dropdown"
+          disabled={false}
+          divider={false}
+          eventKey="1"
+          header={false}
+          href="/admin/capco/app/proposal/proposal1/download/followers/csv"
+          id="proposal-follower-dropdown-export-csv"
+        >
+          <i
+            className="cap "
+          />
+           
+          <FormattedMessage
+            id="export_format_csv"
+            values={Object {}}
+          />
+        </MenuItem>
+        <MenuItem
+          bsClass="dropdown"
+          disabled={false}
+          divider={false}
+          eventKey="2"
+          header={false}
+          href="/admin/capco/app/proposal/proposal1/download/followers/xlsx"
+          id="proposal-follower-dropdown-export-xlsx"
+        >
+          <i
+            className="cap "
+          />
+           
+          <FormattedMessage
+            id="project.download.modal.button"
+            values={
+              Object {
+                "format": "XLSX",
+              }
+            }
+          />
+        </MenuItem>
+      </DropdownButton>
+    </div>
+    <div
+      className="clearfix"
+    />
+    <Relay(ProposalPageFollowers)
+      pageAdmin={true}
+      proposal={
+        Object {
+          "followerConnection": Object {
+            "totalCount": 3,
+          },
+          "id": "proposal1",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`<ProposalAdminFollowers /> should render a proposal page follower without users 1`] = `
+<div
+  className="box box-primary container"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 0,
+          }
+        }
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="https://aide.cap-collectif.com/article/143-suivre-une-proposition"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <div
+      className="btn-group pull-right mb-15"
+      id="proposal-follower-dropdown-export"
+    >
+      <DropdownButton
+        className="btn btn-default dropdown-toggle"
+        disabled="true"
+        id="proposal1"
+        title={
+          <span>
+            <i
+              className="cap "
+            />
+             
+            <FormattedMessage
+              id="project.download.button"
+              values={Object {}}
+            />
+          </span>
+        }
+      />
+    </div>
+    <div
+      className="clearfix"
+    />
+    <Relay(ProposalPageFollowers)
+      pageAdmin={true}
+      proposal={
+        Object {
+          "followerConnection": Object {
+            "totalCount": 0,
+          },
+          "id": "proposal1",
+        }
+      }
+    />
+  </div>
+</div>
+`;

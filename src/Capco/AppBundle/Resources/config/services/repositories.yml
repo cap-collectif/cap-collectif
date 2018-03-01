@@ -233,3 +233,8 @@ services:
     class: Capco\AppBundle\Repository\SourceRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Source']
+
+  capco.follower.repository:
+    class: Capco\AppBundle\Repository\FollowerRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Follower']

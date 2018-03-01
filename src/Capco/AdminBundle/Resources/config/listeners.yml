@@ -50,6 +50,8 @@ services:
           - { name: overblog_graphql.resolver, alias: "proposal_evaluation", method: "resolveEvaluation" }
           - { name: overblog_graphql.resolver, alias: "query_get_draft_proposals_for_user_in_step", method: "resolveDraftProposalsForUserInStep" }
           - { name: overblog_graphql.resolver, alias: "proposal_created_at", method: "resolveCreatedAt" }
+          - { name: overblog_graphql.resolver, alias: "proposal_posts_count", method: "resolvePostsCount" }
+          - { name: overblog_graphql.resolver, alias: "proposal_viewer_can_see_evaluation", method: "resolveViewerCanSeeEvaluation" }
 
   capco.mutation.user_notifications:
         class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
@@ -79,6 +81,7 @@ services:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation
     tags:
       - { name: overblog_graphql.mutation, alias: "createProposalForm", method: "create" }
+      - { name: overblog_graphql.mutation, alias: "updateProposalForm", method: "update" }
       - { name: overblog_graphql.mutation, alias: "changeProposalFormParameters", method: "changeParameters" }
       - { name: overblog_graphql.mutation, alias: "updateProposalFormNotificationsConfiguration", method: "updateNotificationsConfiguration" }
       - { name: overblog_graphql.mutation, alias: "setEvaluationFormInProposalForm", method: "setEvaluationForm" }
@@ -137,6 +140,38 @@ services:
         - { name: overblog_graphql.resolver, alias: "user_dateOfBirth", method: "resolveDateOfBirth" }
         - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
         - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
+
+  Capco\AppBundle\GraphQL\Resolver\UserFollowingProposalResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\UserFollowingProposalResolver
+    arguments:
+        - "@capco.user.repository"
+        - "@logger"
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\ViewerFollowProposalResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\ViewerFollowProposalResolver
+    arguments:
+        - "@capco.user.repository"
+        - "@logger"
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\ProposalsFollowedByUserResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\ProposalsFollowedByUserResolver
+    arguments:
+        - "@capco.proposal.repository"
+        - "@logger"
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\ProposalFollowerConnection:
+    class: Capco\AppBundle\GraphQL\Resolver\ProposalFollowerConnection
+    arguments:
+        - "@capco.user.repository"
+        - "@logger"
+    tags:
+      - { name: overblog_graphql.resolver }
 
   capco.resolvers.groups:
     class: Capco\AppBundle\GraphQL\Resolver\GroupResolver

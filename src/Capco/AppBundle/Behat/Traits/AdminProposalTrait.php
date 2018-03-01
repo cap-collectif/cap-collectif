@@ -121,7 +121,7 @@ trait AdminProposalTrait
      */
     public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
     {
-        $element = '#proposal-admin-page-tabs-pane-4 div[id="responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-responses[3]"][value="' . $value . '"]';
+        $element = '#proposal-admin-page-tabs-pane-5 div[id="responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-responses[3]"][value="' . $value . '"]';
         $this->getCurrentPage()->find('css', $element)->check();
     }
 
@@ -130,7 +130,7 @@ trait AdminProposalTrait
      */
     public function iCheckTheProposalResumeEvaluationWithValue(string $value)
     {
-        $element = '#proposal-admin-page-tabs-pane-4 div.radio input[type="radio"][value="' . $value . '"]';
+        $element = '#proposal-admin-page-tabs-pane-5 div.radio input[type="radio"][value="' . $value . '"]';
         $this->getCurrentPage()->find('css', $element)->click();
     }
 
@@ -147,7 +147,7 @@ trait AdminProposalTrait
      */
     public function iClickOnProposalStatus(string $status)
     {
-        $element = '#proposal-admin-page-tabs-pane-5 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
+        $element = '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element)->click();
         $this->iWait(1);
     }
@@ -157,7 +157,7 @@ trait AdminProposalTrait
      */
     public function iSaveTheProposalStatus()
     {
-        $element = '#proposal-admin-page-tabs-pane-5 button[type="submit"][class="btn btn-primary"]';
+        $element = '#proposal-admin-page-tabs-pane-6 button[type="submit"][class="btn btn-primary"]';
         $this->getCurrentPage()->find('css', $element)->click();
     }
 
@@ -166,7 +166,7 @@ trait AdminProposalTrait
      */
     public function iDeleteTheProposal()
     {
-        $element = '#proposal-admin-page-tabs-pane-5 button[type="button"][class="btn btn-danger"]';
+        $element = '#proposal-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
         $this->getCurrentPage()->find('css', $element)->click();
     }
 
@@ -183,7 +183,19 @@ trait AdminProposalTrait
      */
     public function iShouldSeeTheProposalStatus(string $status)
     {
-        $element = '#proposal-admin-page-tabs-pane-5 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
+        $element = '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element);
+    }
+
+    /**
+     * @Then I click on button :id
+     */
+    public function iClickOnButton(string $id)
+    {
+        $this->getCurrentPage()->find('css', $id)->click();
+    }
+
+    public function theDonwloadedFileShouldStartWith($header)
+    {
     }
 }

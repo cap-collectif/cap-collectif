@@ -250,6 +250,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      */
     private $proposalEvaluation;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="proposal", cascade={"persist"})
+     */
+    private $followers;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -262,6 +267,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->evaluers = new ArrayCollection();
+        $this->followers = new ArrayCollection();
         $this->progressSteps = new ArrayCollection();
         $this->childConnections = new ArrayCollection();
         $this->parentConnections = new ArrayCollection();
@@ -990,6 +996,34 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public function removeEvaluer(Group $group): self
     {
         $this->evaluers->removeElement($group);
+
+        return $this;
+    }
+
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Follower $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(Follower $follower): self
+    {
+        $this->followers->removeElement($follower);
+
+        return $this;
+    }
+
+    public function setFollowers(ArrayCollection $followers): self
+    {
+        $this->followers = $followers;
 
         return $this;
     }

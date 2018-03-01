@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower with more 32 users 1`] = `
+<div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+       
+    </h3>
+  </div>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 0,
+          "displayName": "myname",
+          "id": "userAdmin",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "admin",
+        }
+      }
+      username={null}
+    />
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 55,
+          "displayName": "akovacek",
+          "id": "user137",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "akovacek",
+        }
+      }
+      username={null}
+    />
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 44,
+          "displayName": "alva44",
+          "id": "user70",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "alva44",
+        }
+      }
+      username={null}
+    />
+  </Row>
+  <div
+    className="text-center"
+  >
+    <button
+      className="center text-center btn btn-secondary grey"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="see-more-followers"
+        values={Object {}}
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower with users 1`] = `
+<div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+       
+    </h3>
+  </div>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 0,
+          "displayName": "myname",
+          "id": "userAdmin",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "admin",
+        }
+      }
+      username={null}
+    />
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 55,
+          "displayName": "akovacek",
+          "id": "user137",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "akovacek",
+        }
+      }
+      username={null}
+    />
+    <UserBox
+      className="proposal__follower"
+      user={
+        Object {
+          "contributionsCount": 44,
+          "displayName": "alva44",
+          "id": "user70",
+          "media": Object {
+            "url": "http://capco.dev",
+          },
+          "show_url": true,
+          "username": "alva44",
+        }
+      }
+      username={null}
+    />
+  </Row>
+</div>
+`;
+
+exports[`<ProposalPageFollowers /> should render a proposal page follower without users 1`] = `
+<div>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 0,
+          }
+        }
+      />
+       
+    </h3>
+  </div>
+  <div
+    className="well well-lg text-center"
+  >
+    <FormattedMessage
+      id="no-followers"
+      values={Object {}}
+    />
+  </div>
+</div>
+`;

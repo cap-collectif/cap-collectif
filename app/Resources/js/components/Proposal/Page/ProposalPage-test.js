@@ -1,9 +1,10 @@
 /* eslint-env jest */
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Tab } from 'react-bootstrap';
 import { ProposalPage } from './ProposalPage';
-
+import { features } from '../../../redux/modules/default';
 import { VOTE_TYPE_SIMPLE, VOTE_TYPE_DISABLED } from '../../../constants/ProposalConstants';
 
 describe('<ProposalPage />', () => {
@@ -16,10 +17,12 @@ describe('<ProposalPage />', () => {
     districts: [],
     categories: [],
     features: {
+      ...features,
       themes: true,
       districts: false,
     },
     steps: [{ id: '1', voteType: VOTE_TYPE_DISABLED }, { id: '2', voteType: VOTE_TYPE_SIMPLE }],
+    viewerCanSeeEvaluation: true,
   };
 
   const proposalNoVotes = {
@@ -30,6 +33,12 @@ describe('<ProposalPage />', () => {
       '2': 0,
     },
     commentsCount: 5,
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
   };
   const proposalWithVotes = {
     id: 42,
@@ -38,6 +47,12 @@ describe('<ProposalPage />', () => {
     votesCountByStepId: {
       '2': 5,
     },
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
   };
 
   const proposalWithoutVotableStep = {
@@ -45,6 +60,12 @@ describe('<ProposalPage />', () => {
     referer: 'http://capco.test',
     votableStepId: null,
     votesCountByStepId: {},
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
   };
 
   it('should render a proposal page', () => {

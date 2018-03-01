@@ -24,10 +24,9 @@ const ProposalPageVotes = React.createClass({
   render() {
     const { proposal, stepId, showModal, dispatch } = this.props;
     const votes = proposal.votesByStepId[stepId] || [];
-    const votesCount = proposal.votesCountByStepId[stepId];
+    const votesCount = proposal.votesCountByStepId[stepId] || 0;
     const votesToDisplay = votes.slice(0, PROPOSAL_VOTES_TO_SHOW);
     const moreVotes = votesCount - PROPOSAL_VOTES_TO_SHOW > 0;
-
     if (votesCount === 0) {
       return (
         <p>

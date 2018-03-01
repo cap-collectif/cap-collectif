@@ -16,7 +16,11 @@ class ProposalPage extends Page
         'proposal comments counter' => '#proposal-page-comments-counter',
         'comments list' => '.proposal__comments',
         'first vote' => '.proposal__vote:nth-child(1)',
+        'first follower' => '.proposal__follower:nth-child(1)',
+        'last follower' => '.proposal__follower:last-child ',
         'proposal vote button' => '#proposal-vote-btn',
+        'proposal follow button' => '#proposal-follow-btn',
+        'proposal unfollow button' => '#proposal-unfollow-btn',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'edit proposal button' => '#proposal-edit-button',
         'delete proposal button' => '#proposal-delete-button',
@@ -28,6 +32,7 @@ class ProposalPage extends Page
         'proposal buttons' => '.proposal__content .proposal__buttons',
         'share button' => '#proposal-share-button',
         'votes tab' => '#proposal-page-tabs-tab-votes',
+        'followers tab' => '#proposal-page-tabs-tab-followers',
         'comments tab' => '#proposal-page-tabs-tab-comments',
     ];
 
@@ -79,6 +84,16 @@ class ProposalPage extends Page
     public function getFirstVoteSelector()
     {
         return $this->getSelector('first vote');
+    }
+
+    public function getFirstSelector($selector)
+    {
+        return $this->getSelector("first $selector");
+    }
+
+    public function getLastSelector($selector)
+    {
+        return $this->getSelector("last $selector");
     }
 
     public function getVoteButton()
@@ -153,8 +168,32 @@ class ProposalPage extends Page
         $this->getElement('votes tab')->click();
     }
 
+    public function clickFollowersTab()
+    {
+        $this->getElement('followers tab')->click();
+    }
+
     public function clickCommentsTab()
     {
         $this->getElement('comments tab')->click();
+    }
+
+    public function getFollowButton()
+    {
+        return $this->getElement('proposal follow button');
+    }
+
+    public function getUnfollowButton()
+    {
+        return $this->getElement('proposal unfollow button');
+    }
+
+    public function clickFollowButton(bool $follow = true)
+    {
+        if ($follow) {
+            $this->getFollowButton()->click();
+        } else {
+            $this->getUnfollowButton()->click();
+        }
     }
 }

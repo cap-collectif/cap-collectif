@@ -15,8 +15,9 @@ class AdminProposalPage extends Page
         'proposal content tab' => '#proposal-admin-page-tabs-tab-1',
         'proposal advancement tab' => '#proposal-admin-page-tabs-tab-2',
         'proposal actuality tab' => '#proposal-admin-page-tabs-tab-3',
-        'proposal evaluation tab' => '#proposal-admin-page-tabs-tab-4',
-        'proposal status tab' => '#proposal-admin-page-tabs-tab-5',
+        'proposal followers tab' => '#proposal-admin-page-tabs-tab-4',
+        'proposal evaluation tab' => '#proposal-admin-page-tabs-tab-5',
+        'proposal status tab' => '#proposal-admin-page-tabs-tab-6',
         'proposal title' => '#proposal_title',
         'proposal summary' => '#proposal_summary',
         'proposal save' => '#proposal_admin_content_save',
@@ -28,10 +29,11 @@ class AdminProposalPage extends Page
         'proposal advancement selection status' => '#item_0 select',
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
-        'proposal evaluation evaluate' => '#proposal-admin-page-tabs-pane-4 input[type="text"][id="responses[0]"]',
-        'proposal evaluation evaluate more information' => '#proposal-admin-page-tabs-pane-4 textarea[type="textarea"][id="responses[1]"]',
+        'proposal evaluation evaluate' => '#proposal-admin-page-tabs-pane-5 input[type="text"][id="responses[0]"]',
+        'proposal evaluation evaluate more information' => '#proposal-admin-page-tabs-pane-5 textarea[type="textarea"][id="responses[1]"]',
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
-        'proposal evaluation presentation' => '#proposal-admin-page-tabs-pane-4 div[id="responses[2]"]',
+        'proposal evaluation presentation' => '#proposal-admin-page-tabs-pane-5 div[id="responses[2]"]',
+        'proposal export' => '#proposal-follower-dropdown-export',
     ];
 
     public function clickSaveProposalContentButton()
@@ -83,5 +85,10 @@ class AdminProposalPage extends Page
 
         $element = $this->elements['proposal evaluation presentation'] . " > div:$child";
         $this->find('css', $element)->click();
+    }
+
+    public function clickOnButton($button)
+    {
+        $this->getElement($button)->click();
     }
 }

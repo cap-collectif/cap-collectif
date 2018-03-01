@@ -106,6 +106,12 @@ trait ProposalStepsTrait
         'proposalSlug' => 'proposition-plus-votable',
     ];
 
+    protected static $proposalWithOneFollower = [
+        'projectSlug' => 'budget-participatif-rennes',
+        'stepSlug' => 'collecte-des-propositions',
+        'proposalSlug' => 'installation-de-bancs-sur-la-place-de-la-mairie',
+    ];
+
     /** @var array */
     protected $currentCollectsStep = [];
 
@@ -166,6 +172,15 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByMSantoStefano()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
+        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+    }
+
+    /**
+     * @When I go to a proposal followed by user
+     */
+    public function iGoToAProposalFollowedByUser()
+    {
+        $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
@@ -727,7 +742,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('proposal.vote.delete');
+        $this->clickProposalVoteButtonWithLabel('proposal.vote.hasVoted');
     }
 
     /**
@@ -981,6 +996,34 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @Then I should see my subscription as :username in the proposal followers list
+     *
+     * @param mixed $username
+     */
+    public function iShouldSeeMySubscriptionInTheProposalFollowersList($username)
+    {
+        $this->assertFirstProposalFollowerContains($username);
+    }
+
+    /**
+     * @Then I should not see my subscription as :username in the proposal followers list
+     *
+     * @param mixed $username
+     */
+    public function iShouldNotSeeMySubscriptionInTheProposalFollowersList($username)
+    {
+        $this->assertFirstProposalFollowerNotContains($username);
+    }
+
+    /**
+     * @Then I should not see my subscription on the proposal followers list
+     */
+    public function iShouldNotSeeMySubscriptionOnTheProposalFollowersList()
+    {
+        $this->assertFirstProposalFollowerNotOnPage();
+    }
+
+    /**
      * @When I go to the proposal votes tab
      */
     public function iGoToTheProposalVotesTab()
@@ -990,6 +1033,38 @@ trait ProposalStepsTrait
         $this->getSession()->wait(3000, "$('" . $page->getSelector('votes tab') . "').length > 0");
         $page->clickVotesTab();
         $this->iWait(1);
+    }
+
+    /**
+     * @When I go to the proposal followers tab
+     */
+    public function iGoToTheProposalFollowersTab()
+    {
+        $page = $this->getCurrentPage();
+        $this->iWait(3); // Wait alert to disappear
+        $this->getSession()->wait(3000, "$('" . $page->getSelector('followers tab') . "').length > 0");
+        $page->clickFollowersTab();
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I click the proposal follow button
+     */
+    public function iClickTheProposalFollowButton()
+    {
+        $page = $this->getCurrentPage();
+        $page->clickFollowButton();
+        $this->iWait(2);
+    }
+
+    /**
+     * @When I click the proposal unfollow button
+     */
+    public function iClickTheProposalUnfollowButton()
+    {
+        $page = $this->getCurrentPage();
+        $page->clickFollowButton(false);
+        $this->iWait(2);
     }
 
     /**
@@ -1249,9 +1324,32 @@ trait ProposalStepsTrait
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
+    // TODO : refactor all assert proposal in one more scalable function ?
+    protected function assertFirstProposalFollowerContains($text)
+    {
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        $this->assertElementContainsText($lastFollowerSelector, $text);
+    }
+
     protected function assertFirstProposalVoteNotContains($text)
     {
         $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
         $this->assertElementNotContainsText($firstVoteSelector, $text);
+    }
+
+    protected function assertFirstProposalFollowerNotContains(string $text)
+    {
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        if ('null' === $text) {
+            $this->assertElementNotOnPage($lastFollowerSelector);
+        } else {
+            $this->assertElementNotContainsText($lastFollowerSelector, $text);
+        }
+    }
+
+    protected function assertFirstProposalFollowerNotOnPage()
+    {
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        $this->assertElementNotOnPage($lastFollowerSelector);
     }
 }

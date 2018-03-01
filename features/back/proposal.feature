@@ -1,4 +1,4 @@
-@proposals
+@proposal_page_admin
 Feature: Edit a proposal
 
 @database @elasticsearch
@@ -78,3 +78,26 @@ Scenario: Logged in admin, wants to delete a proposal and re published it
   And I save the proposal's status
   And I wait 2 seconds
   Then I should see "global.saved"
+
+@database @elasticsearch
+Scenario: Logged in admin, wants to view the proposal's followers
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal followers tab
+  And I should see 2 ".proposal__follower" elements
+
+@database @elasticsearch
+Scenario: Logged in admin, wants to download followers as CSV
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal followers tab
+  And I click on button "#proposal-follower-export-proposal10"
+  And I follow "export_format_csv"
+
+@database @elasticsearch
+Scenario: Logged in admin, wants to download followers as xlsx
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal followers tab
+  And I click on button "#proposal-follower-export-proposal10"
+  And I follow "project.download.modal.button"

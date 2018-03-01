@@ -4,6 +4,7 @@ import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
 import Loader from '../../Utils/Loader';
+import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 
 type DefaultProps = void;
 type Props = { proposalId: number };
@@ -32,7 +33,7 @@ export class ProposalAdminPage extends Component<Props, State> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalAdminPageQuery($id: ID!) {
+            query ProposalAdminPageQuery($id: ID!, $count: Int!, $cursor: String) {
               proposal(id: $id) {
                 ...ProposalAdminPageTabs_proposal
               }
@@ -40,6 +41,8 @@ export class ProposalAdminPage extends Component<Props, State> {
           `}
           variables={{
             id: this.props.proposalId,
+            count: PROPOSAL_FOLLOWERS_TO_SHOW,
+            cursor: null,
           }}
           render={component}
         />

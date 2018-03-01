@@ -143,6 +143,9 @@ Scenario: Logged in user wants to create a proposal with theme
   And I wait 3 seconds
   And I submit the create proposal form
   And I should see my new proposal
+  Then I should see text matching "proposal.tabs.followers"
+  And I click the "#proposal-page-tabs-tab-followers" element
+  And I should see my subscription as "user" in the proposal followers list
 
 @javascript @security
 Scenario: Logged in user wants to create a proposal without providing required response
@@ -217,7 +220,7 @@ Scenario: Author of a proposal should not be notified when someone comment if he
   Given I go to a proposal made by user@test.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
+    | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
 
 @javascript
 Scenario: Non author of a proposal wants to delete it

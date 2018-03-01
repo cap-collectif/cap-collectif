@@ -2,6 +2,7 @@
 /* eslint-env jest */
 import { type FormProps } from 'redux-form';
 import { type IntlShape } from 'react-intl';
+import { type RelayPaginationProp } from 'react-relay';
 
 export const intlMock: IntlShape = {
   locale: 'fr-FR',
@@ -57,4 +58,21 @@ export const formMock: FormProps = {
   untouch: jest.fn(),
   valid: true,
   warning: null,
+};
+
+export const relayPaginationMock: RelayPaginationProp = {
+  environment: {
+    applyMutation: jest.fn(),
+    sendMutation: jest.fn(),
+    lookup: jest.fn(),
+    sendQuery: jest.fn(),
+    subscribe: jest.fn(),
+    streamQuery: jest.fn(),
+    retain: jest.fn(),
+    unstable_internal: {},
+  },
+  hasMore: () => false,
+  isLoading: () => false,
+  loadMore: jest.fn(),
+  refetchConnection: jest.fn(),
 };

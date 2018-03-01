@@ -87,6 +87,10 @@ services:
     class: Capco\AppBundle\Resolver\ProjectStatsResolver
     arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.proposal_category.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_selection_vote.repository']
 
+  capco.project.resolver:
+    class: Capco\AppBundle\Resolver\ProjectResolver
+    arguments: ['@capco.project.repository', '@router.default']
+
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager
     arguments: ['@sonata.media.manager.media']
@@ -102,3 +106,7 @@ services:
   capco.project.search.resolver:
     class: Capco\AppBundle\Resolver\Project\ProjectSearchResolver
     arguments: ['@capco.project.repository']
+
+  capco.follower.resolver:
+    class: Capco\AppBundle\Resolver\ProposalResolver
+    arguments: ['@doctrine.orm.entity_manager', '%kernel.root_dir%','@capco.resolvers.users', '@monolog.logger']

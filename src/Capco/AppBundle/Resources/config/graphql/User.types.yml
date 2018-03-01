@@ -126,3 +126,10 @@ User:
             consentExternalCommunication:
                 type: "Boolean!"
                 description: "Is user accepted the external communication during the registration."
+            followingProposal:
+                type: "[Proposal!]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalsFollowedByUserResolver", [value])'
+                description: "Array of proposals followed by current user."
+            contributionsCount:
+                type: "Int!"
+                description: "Total of contributions count"

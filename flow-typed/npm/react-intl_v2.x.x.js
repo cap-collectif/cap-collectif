@@ -107,7 +107,7 @@ type $npm$ReactIntl$PluralCategoryString =
   | "few"
   | "many"
   | "other";
-
+// TODO remove any https://github.com/cap-collectif/platform/issues/5059
 type $npm$ReactIntl$DateParseable = number | string | Date | any;
 
 declare module "react-intl" {

@@ -5,6 +5,25 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
 
+export type User = {
+  +user: ?{
+    +id: string,
+    +username: string,
+    +isEmailConfirmed: boolean,
+    +isPhoneConfirmed: boolean,
+    +phone: string,
+    +isAdmin: boolean,
+    +email: string,
+    +newEmailToConfirm: ?string,
+    +media: ?{
+      +url: string,
+    },
+    +roles: Array<string>,
+    +displayName: string,
+    +uniqueId: string,
+  },
+};
+
 export type State = {
   +showLoginModal: boolean,
   +showRegistrationModal: boolean,
