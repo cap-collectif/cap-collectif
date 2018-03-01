@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Paris;
 use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
+use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
@@ -13,21 +14,37 @@ use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const HEADER_MAP = [
-        'title' => 0,
-        'body' => 1,
-        'excerpt' => 2,
-        'created_at' => 3,
-        'updated_at' => 4,
+    protected const PROJECT_HEADER_MAP = [
+        'id',
+        'title',
+        'body',
+        'excerpt',
+        'created_at',
+        'updated_at',
+        'project_id',
     ];
 
-    protected const BATCH_SIZE = 15;
+    protected const CATEGORY_HEADER_MAP = [
+        'project_id',
+        'name',
+    ];
+
+    protected const PROPOSAL_HEADER_MAP = [
+        'project_id',
+        'title',
+        'arrondissement',
+        'body_value',
+        'status',
+        'location',
+        'cost',
+        'objectif',
+        'created_at',
+    ];
 
     protected $em;
 
@@ -35,52 +52,51 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:import:paris')
-            ->setDescription('Import data from paris')
-        ;
+            ->setDescription('Import data from paris');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->em = $this->getContainer()->get('doctrine')->getManager();
-
-        $this->importProjects($output);
+        $categories = $this->createCategories();
+        $proposals = $this->createProposals();
+        $this->importProjects($output, $categories, $proposals);
     }
 
-    protected function importProjects(OutputInterface $output): void
+    protected function importProjects(OutputInterface $output, array $categories, array $proposals): void
     {
         $csv = Reader::createFromPath(__DIR__ . '/paris_projects.csv');
         $user = $this->em->getRepository(User::class)->findOneBy(['username' => 'welcomattic']);
         $type = $this->em->getRepository(ProjectType::class)->findOneBy(['title' => 'project.types.participatoryBudgeting']);
-        $rows = $csv->setOffset(1)->fetchAll();
-
+        $rows = [];
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::PROJECT_HEADER_MAP);
+        foreach ($iterator as $item) {
+            $rows[] = $item;
+        }
         $output->writeln('<info>Importing projects...</info>');
 
-        $progress = new ProgressBar($output, \count($rows));
         foreach ($rows as $row) {
             $introductionStep = (new PresentationStep())
                 ->setTitle('Présentation')
                 ->setLabel('Présentation')
-                ->setBody($row[self::HEADER_MAP['body']])
-            ;
+                ->setBody($row['body']);
             $collectStep = (new CollectStep())
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
-                ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE)
-            ;
+                ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
 
             $project = (new Project())
-                ->setTitle($row[self::HEADER_MAP['title']])
+                ->setTitle($row['title'])
                 ->setAuthor($user)
                 ->setProjectType($type)
-                ->setCreatedAt(new \DateTime($row[self::HEADER_MAP['created_at']]))
-                ->setPublishedAt(new \DateTime($row[self::HEADER_MAP['created_at']]))
-                ->setUpdatedAt(new \DateTime($row[self::HEADER_MAP['updated_at']]))
-            ;
+                ->setCreatedAt(new \DateTime($row['created_at']))
+                ->setPublishedAt(new \DateTime($row['created_at']))
+                ->setUpdatedAt(new \DateTime($row['updated_at']));
             $project->addStep(
                 (new ProjectAbstractStep())
-                ->setProject($project)
-                ->setStep($introductionStep)
-                ->setPosition(1)
+                    ->setProject($project)
+                    ->setStep($introductionStep)
+                    ->setPosition(1)
             );
             $project->addStep(
                 (new ProjectAbstractStep())
@@ -91,7 +107,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
             $this->em->persist($project);
 
-            $proposalForm = $this->createProposalForm($output, $project);
+            $proposalForm = $this->createProposalForm($output, $project, $row['id'], $categories);
 
             $collectStep->setProposalForm($proposalForm);
 
@@ -99,10 +115,12 @@ class ParisImportCommand extends ContainerAwareCommand
 
             $this->importDistricts($output, $proposalForm);
 
-            $progress->advance();
+//            $this->importsPropositions($output, $collectStep, $user);
+
+            $output->write("\n");
         }
         $this->em->flush();
-        $progress->finish();
+        $output->write("\n");
         $output->writeln('<info>Successfuly imported ' . \count($rows) . ' projects.</info>');
     }
 
@@ -123,7 +141,12 @@ class ParisImportCommand extends ContainerAwareCommand
         $output->writeln('<info>Successfuly imported districts.</info>');
     }
 
-    protected function createProposalForm(OutputInterface $output, Project $project): ProposalForm
+    protected function importsPropositions(OutputInterface $output, CollectStep $step = null, User $user = null): void
+    {
+        $proposals = $this->createProposals();
+    }
+
+    protected function createProposalForm(OutputInterface $output, Project $project, int $parisProjectId, array $categories): ProposalForm
     {
         $formName = 'Formulaire pour "' . $project->getTitle() . '"';
         $output->writeln('<info>Creating "' . $formName . '" form...</info>');
@@ -135,6 +158,7 @@ class ParisImportCommand extends ContainerAwareCommand
             ->setThemeHelpText('Sélectionnez un thème')
             ->setDistrictHelpText('Sélectionnez une zone géographique')
             ->setCategoryHelpText('Sélectionnez une catégorie.')
+            ->setUsingCategories(true)
             ->setUsingDistrict(true)
             ->setUsingAddress(true)
             ->setLatMap(48.8600561)
@@ -142,11 +166,88 @@ class ParisImportCommand extends ContainerAwareCommand
             ->setZoomMap(12)
             ->setProposalInAZoneRequired(true);
 
+        $projectCategories = [];
+
+        if (array_key_exists($parisProjectId, $categories)) {
+            $projectCategories[] = $categories[$parisProjectId];
+        }
+
+        if (\count($projectCategories) > 0) {
+            $projectCategories = array_map(function ($category) {
+                return array_keys($category);
+            }, $projectCategories)[0];
+        }
+
+        foreach ($projectCategories as $categoryName) {
+            $category = (new ProposalCategory())
+                ->setName($categoryName);
+            $proposalForm->addCategory($category);
+        }
+
         $this->em->persist($proposalForm);
         $this->em->flush();
 
         $output->writeln('<info>Successfuly added "' . $formName . '" form.</info>');
 
         return $proposalForm;
+    }
+
+    protected function createCategories(): array
+    {
+        $csv = Reader::createFromPath(__DIR__ . '/paris_categories.csv');
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::CATEGORY_HEADER_MAP);
+        $categories = [];
+        foreach ($iterator as $item) {
+            $categories[] = $item;
+        }
+
+        $categories = $this->array_group_by($categories, function ($i) {
+            return $i['project_id'];
+        });
+
+        return array_map(function ($category) {
+            return $this->array_unique_nested($category, 'name');
+        }, $categories);
+    }
+
+    protected function createProposals(): array
+    {
+        $csv = Reader::createFromPath(__DIR__ . '/paris_proposals.csv');
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::PROPOSAL_HEADER_MAP);
+        $proposals = [];
+        foreach ($iterator as $item) {
+            $proposals[] = $item;
+        }
+        $proposals = $this->array_group_by($proposals, function ($i) {
+            return $i['project_id'];
+        });
+
+        return $proposals;
+    }
+
+    private function array_group_by(array $arr, callable $key_selector): array
+    {
+        $result = [];
+        foreach ($arr as $i) {
+            $key = call_user_func($key_selector, $i);
+            $result[$key][] = $i;
+        }
+
+        return $result;
+    }
+
+    private function array_unique_nested(array $array, string $uniqueKey)
+    {
+        if (!is_array($array)) {
+            return [];
+        }
+        $uniqueKeys = [];
+        foreach ($array as $key => $item) {
+            if (!in_array($item[$uniqueKey], $uniqueKeys, true)) {
+                $uniqueKeys[$item[$uniqueKey]] = $item;
+            }
+        }
+
+        return $uniqueKeys;
     }
 }
