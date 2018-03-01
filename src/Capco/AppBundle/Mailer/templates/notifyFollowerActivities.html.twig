@@ -1,34 +1,119 @@
-{% block body_text %}
-    {% autoescape false %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Affichage du zoom avant pour les mobiles -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Active les media queries pour Windows Phone 8 -->
+    <meta name="format-detection" content="telephone=no"> <!-- Désactive les liens bleus des numéros de téléphone sous iOS -->
+    <title>Responsive & Flat - Un kit pour newsletters gratuit et libre</title>
+    <style type="text/css" media="screen">
+
+        .ExternalClass * {line-height:100%}
+
+        /* Début style responsive (via media queries) */
+
+        @media only screen and (max-width:480px) {
+            *[id=email-penrose-conteneur] {width:100% !important;}
+            table[class=resp-full-table] {width:100% !important; clear:both;}
+            td[class=resp-full-td] {width:100% !important; clear:both;}
+            td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
+            img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
+            a[class=resp-punchline] {font-size:50px !important;}
+            hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+        }
+
+        /* Fin style responsive */
+
+    </style>
+</head>
+<body bgcolor="#ecf0f1">
+<div align="center" style="background-color:#ecf0f1;">
         {% set siteName = capco_site_parameter_value('global.site.fullname') %}
-        <h2>      {{ siteName }}    </h2>
-        <h1>      {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}    </h1>
+    <table id="email-penrose-conteneur" width="660" align="center" style="padding: 20px; border-right:1px solid #e2e8ea; border-bottom:1px solid #e2e8ea; border-left:1px solid #e2e8ea; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="">
+                <table width="660" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="resp-full-td" valign="top" style="padding:0 20px; text-align:center;">
+                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}
+                            </a>
+                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}
+                            </h1>
+                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">
+								{#{{ dayte }}#} 20 février 2018
+							</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="resp-full-td-center" valign="top" style="padding:20px;">
+                            <b>Bonjour Cyril,</b><br>
+                            Voici l’actualité concernant {{ siteName }} pour la journée du
+                            <br>20 février 2018.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
         {% for currentProjectId, project in userProjectsActivities %}
-            <h2>{{ project.projectType }}</h2>
+            <tr>
+                <td style="">
+                    <table width="660" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0" style="padding:0 20px;">
+                        <tr>
+                            <td width="660">
+                                <table width="100%" align="left" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" style="border-color: #d9d9d9">
+                                    <tr>
+                                        <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
+                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">Projet</span>
+                                            <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectType }}</h2>
+                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">5 nouvelles activités</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
             {% for proposal in project.proposals %}
-                <h3>{{ proposal.title }}</h3>
-                <ul>
-                    {% if proposal.isUpdated %}
-                        <li>Proposition mise à jour</li>
-                    {% endif %}
-                    {% if proposal.isDeleted %}
-                        <li>Proposition supprimée</li>
-                    {% endif %}
-                    {% if proposal.comments > 0 %}
-                        <li>{{ proposal.comments }} nouveaux commentaires</li>
-                    {% endif %}
-                    {% if proposal.votes > 0 %}
-                        <li>{{ proposal.votes }} nouveaux votes</li>
-                    {% endif %}
-                    {% if proposal.lastStep %}
-                        <li>Est passé à l'étape {{proposal.lastStep.titleStep }} avec le status {{ proposal.lastStep.sName}}</li>
-                    {% endif %}
-                </ul>
-                <a href="{{ proposal.link }}">Afficher</a>
-            {% endfor %}
+                <tr style="border-bottom: 1px solid #e2e8ea">
+                    <td>
+                        <table width="660" class="resp-full-table" align="left" border="0" cellspacing="0" cellpadding="0" style="padding:20px;">
+                            <tr>
+                                <td width="660">
+                                    <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
+                                        <tr>
+                                            <td class="resp-full-td" valign="top" style="padding:20px 0; text-align:left;">
+                                                <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">Proposition</span>
+                                                <ul style="list-style: none"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4>
+                                                    {% if proposal.isUpdated %}
+                                                        <li>Proposition mise à jour</li>
+                                                    {% endif %}
+                                                    {% if proposal.isDeleted %}
+                                                        <li>Proposition supprimée</li>
+                                                    {% endif %}
+                                                    {% if proposal.votes > 0 %}
+                                                        <li>🗳<b>{{ proposal.votes }}</b> nouveaux votes</li>
+                                                    {% endif %}
+                                                    {% if proposal.comments > 0 %}
+                                                        <li>💬<b>{{ proposal.comments }}</b> nouveaux commentaires</li>
+                                                    {% endif %}
+                                                    {% if proposal.lastStep %}
+                                                        <li>✔️Est passé à l'étape <b>{{proposal.lastStep.titleStep }}</b> avec le status <b>{{ proposal.lastStep.sName}}</b></li>
+                                                    {% endif %}
+                                                </ul>
+                                                <a href="{{ proposal.link }}">Afficher</a>
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
         {% endfor %}
-    {% endautoescape %}
-{% endblock %}
-{% block body_html %}{% endblock %}
-F
+    </table>
+</div>
+</body>
+</html>

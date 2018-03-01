@@ -44,10 +44,10 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       });
     }
   }
+
   render() {
     const { proposal } = this.props;
     const { isJustFollowed } = this.state;
-
     if (!proposal.viewerIsFollowing) {
       return (
         <LoginOverlay>
@@ -248,11 +248,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
           </span>
         </LoginOverlay>
       );
-    }
-    if (proposal.viewerIsFollowing && !isHovering) {
-      buttonText = 'following';
-      style = 'btn-default_focus';
-      bsStyle = 'default';
     }
   }
 }
