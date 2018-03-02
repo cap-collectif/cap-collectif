@@ -13,14 +13,18 @@ use Psr\Log\LoggerInterface;
 final class FollowerNotifier extends BaseNotifier
 {
     protected $urlResolver;
+    protected $logger;
+    protected static $proposalActivities;
+    protected static $projectsInfos;
 
     public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, UrlResolver $urlResolver, LoggerInterface $logger)
     {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->urlResolver = $urlResolver;
+        $this->logger = $logger;
     }
 
-    public function onReportActivities(UserActivity $userActivity, string $sendAt)
+    public function onReportActivities(UserActivity $userActivity, \DateTime $sendAt, string $siteName)
     {
         $this->mailer->sendMessage(
             FollowerActivitiesMessage::create(
@@ -28,7 +32,8 @@ final class FollowerNotifier extends BaseNotifier
                 $userActivity->getUsername(),
                 'notifier@cap-collectif.com',
                 $userActivity->getUserProjects(),
-                $sendAt
+                $sendAt,
+                $siteName
             )
         );
     }

@@ -12,39 +12,48 @@ final class FollowerActivitiesMessage extends DefaultMessage
         string $recipentEmail,
         string $recipientName = null,
         string $senderEmail = null,
-        array $userProjectsActivities = null,
-        $sendAt
+        array $userProjectsActivities,
+        \DateTime $sendAt,
+        $siteName
     ): self {
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification-subject-new-proposal',
-            static::getMySubjectVars(),
+            'your-activity-summary-of',
+            static::getMySubjectVars($siteName),
             '@CapcoMail/notifyFollowerActivities.html.twig',
             static::getMyTemplateVars(
                 $userProjectsActivities,
                 $sendAt,
-                $recipentEmail
+                $recipientName,
+                $siteName
             ),
-            $senderEmail
+            null,
+            $siteName
         );
 
         $message->setBcc($followersEmailList);
     }
 
-    private static function getMySubjectVars(): array
+    private static function getMySubjectVars(string $siteName): array
     {
-        return [];
+        return [
+            'siteName' => $siteName,
+        ];
     }
 
     private static function getMyTemplateVars(
         array $userProjectsActivities,
-        string $sendAt
+        \DateTime $sendAt,
+        string $username,
+        string $siteName
     ): array {
         return [
             'userProjectsActivities' => $userProjectsActivities,
             'sendAt' => $sendAt,
-            '',
+            'username' => $username,
+            'siteName' => $siteName,
+            'timezone' => $sendAt->getTimezone(),
         ];
     }
 }
