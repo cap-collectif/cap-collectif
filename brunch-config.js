@@ -104,7 +104,6 @@ exports.config = {
         'css/style-storybook.css': [
           'bower_components/bootstrap/assets/stylesheets/bootstrap.scss',
           'app/Resources/scss/style-storybook.scss',
-          /^node_modules/,
         ],
       },
     },
