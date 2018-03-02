@@ -26,14 +26,15 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:follower-proposal-notifier')
-            ->setDescription('Send email to followers of proposals')
-        ;
+            ->setDescription('Send email to followers of proposals');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
+        $siteName = $container->get('capco.site_parameter.resolver')->getValue('global.site.fullname');
         $notifier = $container->get('capco.follower_notifier');
+        $followersWithActivities = [];
         try {
             $followersWithActivities = $this->getFollowersWithActivities();
         } catch (\Exception $e) {
@@ -44,9 +45,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         $proposalActivities = $this->getProposalActivities();
         $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
         unset($proposalActivities);
-        $sendAt = (new \DateTime())->format('YYYY/m/d');
+        $sendAt = (new \DateTime('yesterday'))->setTimezone(new \DateTimeZone('Europe/Paris'));
         foreach ($followersWithActivities as $userId => $userActivity) {
-            $notifier->onReportActivities($userActivity, $sendAt);
+            $notifier->onReportActivities($userActivity, $sendAt, $siteName);
         }
         $nbNewsletters = count($followersWithActivities);
         $output->writeln(
@@ -181,11 +182,13 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             $projects[$projectId]['projectTitle'] = $project->getTitle();
             $projects[$projectId]['projectType'] = $project->getProjectType()->getTitle();
             $projects[$projectId]['proposals'] = [];
+            $projects[$projectId]['countActivities'] = 0;
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
-                if ($proposal->getStep() instanceof SelectionStep) {
-                    if ($proposal->getStep()->isProposalHidden()) {
+                $step = $proposal->getStep();
+                if ($step instanceof SelectionStep) {
+                    if ($step->isProposalsHidden()) {
                         continue;
                     }
                 }
@@ -208,10 +211,10 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $currentProposal['isDeleted'] = $proposal->isDeletedInLastInterval($yesterdayLasTime, $twentyFourHoursInterval);
                 $currentProposal['comments'] = (int) $proposalCommentYesterdays[0]['countComment'];
                 $currentProposal['votes'] = $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
-                $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday : false;
+                $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday[0] : false;
                 $currentProposal['projectId'] = $projectId;
                 $currentProposal['countActivities'] = $this->countProposalActivities($currentProposal);
-
+                $projects[$projectId]['countActivities'] += $currentProposal['countActivities'];
                 if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);
                 } else {
