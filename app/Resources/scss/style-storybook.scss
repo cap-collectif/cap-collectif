@@ -25,7 +25,16 @@ a:focus, a:hover {
 }
 
 .excerpt {
+    font-size: 14px;
     color: #707070;
+
+    span {
+        color: #212529;
+    }
+
+    a {
+        color: #707070;
+    }
 }
 
 //

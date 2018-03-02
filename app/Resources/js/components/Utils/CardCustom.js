@@ -25,37 +25,14 @@ const Thumbnail = styled.div`
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
-
-const Type = styled.div`
-  background-color: rgb(91, 192, 222);
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-  text-align: center;
-  padding: 2px;
-  color: white;
-`; // do component
 
 const Image = styled.div` 
   width: 100%;
   background: url('https://source.unsplash.com/random') center;
   background-size: cover;
   height: 175px; 
-`; // do component
-
-const BodyUser = styled.div`
-  hr {
-    margin: 15px 0 5px;
-  }
-`; // do component
-
-const UserAvatar = styled.div` 
-  float: left;
-  margin-right: 10px;
-  width: 45px;
-  height: 45px;
-  background-color: red;
-  border-radius: 50%;
 `; // do component
 
 const Body = styled.div`
@@ -70,32 +47,18 @@ const BodyInfos = styled.div`
   margin-bottom: 15px;
 `;
 
-const BodyActions = styled.div`
-   color: #707070;
-   font-size: 14px;
-
-  a {
-    text-transform: uppercase;
-    margin-right: 10px;
-  }
- 
-  .remaining-time__number {
-    color: #212529;
-  }
-`;
-
-const Excerpt = styled.span`
-  font-size: 14px;
-  color: #707070;
-  
-  span {
-    color: #212529;
-  }
-  
-  a {
-    color: #707070;
-  }
-`;
+// const Excerpt = styled.span`
+//   font-size: 14px;
+//   color: #707070;
+//
+//   span {
+//     color: #212529;
+//   }
+//
+//   a {
+//     color: #707070;
+//   }
+// `;
 
 const Title = styled.h3`
   font-size: 18px;
@@ -117,9 +80,9 @@ export class CardCustom extends React.Component<Props> {
                 Customized Card
               </a>
             </Title>
-            <Excerpt>
+            <div className="excerpt">
               Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.
-            </Excerpt>
+            </div>
           </BodyInfos>
         </Body>
       </Thumbnail>

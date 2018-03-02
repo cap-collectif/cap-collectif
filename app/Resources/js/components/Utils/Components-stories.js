@@ -5,6 +5,8 @@ import styled from 'styled-components';
 // import { injectGlobal } from 'styled-components';
 import Card from './Card';
 import CardCustom from './CardCustom';
+import CardProject from './CardProject';
+import CardProposal from './CardProposal';
 import Progress from './Progress';
 
 const Row = styled.div.attrs({
@@ -31,19 +33,37 @@ storiesOf('Components', module)
           <Col>
             <CardCustom />
           </Col>
+          <Col>
+            <CardCustom />
+          </Col>
+          <Col>
+            <CardCustom />
+          </Col>
         </Row>
         <h3>Project Card</h3>
         <hr/>
         <Row>
           <Col>
-            <Card />
+            <CardProject />
+          </Col>
+          <Col>
+            <CardProject />
+          </Col>
+          <Col>
+            <CardProject />
           </Col>
         </Row>
         <h3>Proposal Card</h3>
         <hr/>
         <Row>
           <Col>
-            <Card />
+            <CardProposal />
+          </Col>
+          <Col>
+            <CardProposal />
+          </Col>
+          <Col>
+            <CardProposal />
           </Col>
         </Row>
         <h3>Idea Card</h3>
@@ -73,16 +93,16 @@ storiesOf('Components', module)
   .add('Progress', () => {
     return (
       <div className="container">
-        <h3>Customized Card</h3>
+        <h3>À venir</h3>
         <Progress />
         <hr/>
-        <h3>Customized Card</h3>
+        <h3>En cours</h3>
         <Progress />
         <hr/>
-        <h3>Customized Card</h3>
+        <h3>Participation en continue</h3>
         <Progress />
         <hr/>
-        <h3>Customized Card</h3>
+        <h3>Terminé</h3>
         <Progress />
         <hr/>
       </div>

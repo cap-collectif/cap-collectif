@@ -2,22 +2,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Progress from './Progress';
-// import {UserAvatar} from "../User/UserAvatar";
-// import UserLink from "../User/UserLink";
-// import { FormattedMessage } from 'react-intl';
 
 type Props = {};
-
-// const Row = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-//
-// const Col = styled.div.attrs({
-//   className: 'col-lg-3 col-md-4 col-sm-6 col-xs-12'
-// })`
-//   display: flex;
-// `;
 
 const Thumbnail = styled.div`
   border: 1px solid #e3e3e3;
@@ -142,16 +128,12 @@ const Status = styled.div`
   border-radius: 0 0 4px 4px;
 `;
 
-export class Card extends React.Component<Props> {
+export class CardProposal extends React.Component<Props> {
   static defaultProps = {};
 
   render() {
     return (
       <Thumbnail>
-        <Type>
-          Mon type
-        </Type>
-        <Image />
         <Body>
           <BodyUser>
             <UserAvatar />
@@ -166,9 +148,6 @@ export class Card extends React.Component<Props> {
             <hr/>
           </BodyUser>
           <BodyInfos>
-            <Excerpt>
-              Immobilier, Transport
-            </Excerpt>
             <Title>
               <a href="#">
                 Mon titre
@@ -177,16 +156,6 @@ export class Card extends React.Component<Props> {
             <Excerpt>
               Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.
             </Excerpt>
-            <div>
-              <Excerpt>
-                <span>0</span> contribution
-              </Excerpt>
-            </div>
-            <div>
-              <Excerpt>
-                <span>0</span> participant
-              </Excerpt>
-            </div>
             <Tag>
               <i className="cap glyphicon glyphicon-pushpin" /> {/* replace by true icons */}
               Justice
@@ -196,25 +165,6 @@ export class Card extends React.Component<Props> {
               Maurepas Patton
             </Tag>
           </BodyInfos>
-          <Progress
-            bsStyle="success"
-            now={50}
-            label="en cours"
-            className={null}
-          />
-          <BodyActions>
-            <div className="remaining-time__container">
-              <a href="">
-                Participer
-              </a>
-              <span className="remaining-time__number">
-                10
-              </span>{' '}
-              <span>
-                jours restants {/* <remainingTime /> */}
-              </span>
-            </div>
-          </BodyActions>
         </Body>
         <Footer>
           <Counters>
@@ -236,4 +186,4 @@ export class Card extends React.Component<Props> {
   }
 }
 
-export default Card;
+export default CardProposal;
