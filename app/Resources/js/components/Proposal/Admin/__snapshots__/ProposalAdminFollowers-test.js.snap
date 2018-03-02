@@ -36,37 +36,10 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
     </a>
   </div>
   <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="proposal.admin.followers"
-        values={Object {}}
-      />
-    </h3>
-    <a
-      className="pull-right link"
-      href="https://aide.cap-collectif.com/article/86-editer-une-proposition-dune-etape-de-depot#actualite"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <i
-        className="fa fa-info-circle"
-      />
-       
-      <FormattedMessage
-        id="global.help"
-        values={Object {}}
-      />
-    </a>
-  </div>
-  <div
     className="box-content"
   >
     <div
-      className="btn-group pull-right mb-15 proposal__follower"
+      className="btn-group pull-right mb-15"
       id="proposal-follower-dropdown-export"
     >
       <DropdownButton
@@ -138,7 +111,6 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
             "totalCount": 3,
           },
           "id": "proposal1",
-          "totalCount": 3,
         }
       }
     />
@@ -185,7 +157,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower witho
     className="box-content"
   >
     <div
-      className="btn-group pull-right mb-15 proposal__follower"
+      className="btn-group pull-right mb-15"
       id="proposal-follower-dropdown-export"
     >
       <DropdownButton
