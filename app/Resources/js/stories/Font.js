@@ -1,20 +1,5 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
-import Progress from './Progress';
-
-export const Excerpt = styled.span`
-  font-size: 14px;
-  color: #707070;
-  
-  span {
-    color: #212529;
-  }
-  
-  a {
-    color: #707070;
-  }
-`;
 
 export class Font extends React.Component<Props> {
   static defaultProps = {};
@@ -47,11 +32,16 @@ export class Font extends React.Component<Props> {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam dolore eligendi labore, nemo quidem veniam. Delectus est, similique! Aliquam aliquid assumenda commodi laborum natus quidem ratione repudiandae vel voluptates.
         </p>
         <hr/>
+        <h4>small text</h4>
+        <p className="small">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aperiam dolore eligendi labore, nemo quidem veniam. Delectus est, similique! Aliquam aliquid assumenda commodi laborum natus quidem ratione repudiandae vel voluptates.
+        </p>
+        <hr/>
         <h4>Excerpt</h4>
         <p>
-          <Excerpt>
+          <div className="excerpt">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores at, eaque fugiat ipsam, laudantium molestiae omnis quas quasi quidem reprehenderit repudiandae velit! Atque deserunt earum eligendi quae quod sequi.
-          </Excerpt>
+          </div>
         </p>
         <hr/>
         <h4>Bold text</h4>

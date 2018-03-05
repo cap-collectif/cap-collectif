@@ -1,32 +1,10 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import Progress from './Progress';
-// import {UserAvatar} from "../User/UserAvatar";
-// import UserLink from "../User/UserLink";
-// import { FormattedMessage } from 'react-intl';
+import { ProgressBar } from "react-bootstrap";
+import { CardContainer } from "../components/Ui/Card/CardContainer";
 
 type Props = {};
-
-// const Row = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-//
-// const Col = styled.div.attrs({
-//   className: 'col-lg-3 col-md-4 col-sm-6 col-xs-12'
-// })`
-//   display: flex;
-// `;
-
-const Thumbnail = styled.div`
-  border: 1px solid #e3e3e3;
-  background-color: #fff;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
 
 const Type = styled.div`
   background-color: rgb(91, 192, 222);
@@ -147,7 +125,7 @@ export class Card extends React.Component<Props> {
 
   render() {
     return (
-      <Thumbnail>
+      <CardContainer>
         <Type>
           Mon type
         </Type>
@@ -196,7 +174,7 @@ export class Card extends React.Component<Props> {
               Maurepas Patton
             </Tag>
           </BodyInfos>
-          <Progress
+          <ProgressBar
             bsStyle="success"
             now={50}
             label="en cours"
@@ -231,7 +209,7 @@ export class Card extends React.Component<Props> {
             Aucun statut
           </Status>
         </Footer>
-      </Thumbnail>
+      </CardContainer>
     );
   }
 }

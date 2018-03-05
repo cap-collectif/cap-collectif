@@ -3,11 +3,12 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 // import { injectGlobal } from 'styled-components';
+import { ProgressBar } from "react-bootstrap";
 import Card from './Card';
 import CardCustom from './CardCustom';
 import CardProject from './CardProject';
 import CardProposal from './CardProposal';
-import Progress from './Progress';
+import CardTheme from './CardTheme';
 
 const Row = styled.div.attrs({
   className: 'row'
@@ -22,12 +23,20 @@ const Col = styled.div.attrs({
   display: flex;
 `;
 
+const project = {
+  title: "Mon projet",
+  type: {
+    title: "Consultation",
+    color: "#337ab7"
+  }
+};
+
 storiesOf('Components', module)
   .add('Cards', () => {
     return (
-      <div className="container">
+      <div className="container storybook-container">
         <h3>Customized Card</h3>
-        <p>You can customized the card with "Knobs"</p>
+        <p>You can customized the card with "Knobs" tab</p>
         <hr/>
         <Row>
           <Col>
@@ -66,6 +75,19 @@ storiesOf('Components', module)
             <CardProposal />
           </Col>
         </Row>
+        <h3>Theme Card</h3>
+        <hr/>
+        <Row>
+          <Col>
+            <CardTheme />
+          </Col>
+          <Col>
+            <CardTheme />
+          </Col>
+          <Col>
+            <CardTheme />
+          </Col>
+        </Row>
         <h3>Idea Card</h3>
         <hr/>
         <Row>
@@ -94,16 +116,16 @@ storiesOf('Components', module)
     return (
       <div className="container">
         <h3>À venir</h3>
-        <Progress />
+        <ProgressBar />
         <hr/>
         <h3>En cours</h3>
-        <Progress />
+        <ProgressBar />
         <hr/>
         <h3>Participation en continue</h3>
-        <Progress />
+        <ProgressBar />
         <hr/>
         <h3>Terminé</h3>
-        <Progress />
+        <ProgressBar />
         <hr/>
       </div>
 

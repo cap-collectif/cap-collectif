@@ -195,8 +195,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const isCurrentStep = getCurrentStep(project);
 
     return (
-      <div className="box project__preview__body">
-        <div className="project__preview__body__infos">
+      <div className="card__body">
+        <div className="card__body__infos">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
@@ -208,7 +208,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             isCurrentStep={isCurrentStep}
           />
         )}
-        <div className="project__preview__actions">
+        <div className="card__body__actions excerpt small">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.status === 'open' &&

@@ -6,7 +6,7 @@ import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import NotificationsForm from './NotificationsForm';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 
 const query = graphql`
