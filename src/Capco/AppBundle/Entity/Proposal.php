@@ -356,10 +356,10 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->district;
     }
 
-    public function setDistrict(District $district = null): self
+    public function setDistrict(District $district = null, bool $add = true): self
     {
         $this->district = $district;
-        if ($district) {
+        if ($district && $add) {
             $district->addProposal($this);
         }
 

@@ -20,7 +20,7 @@ class District implements IndexableInterface
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts")
      * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $form;
@@ -49,8 +49,7 @@ class District implements IndexableInterface
     /**
      * @ORM\OneToMany(
      *  targetEntity="Capco\AppBundle\Entity\Proposal",
-     *  mappedBy="district",
-     *  cascade={"persist"}
+     *  mappedBy="district"
      *  )
      */
     private $proposals;

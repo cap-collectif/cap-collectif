@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const BATCH_SIZE = 100;
+    protected const BATCH_SIZE = 250;
 
     protected const PROJECT_HEADER = [
         'id',
@@ -63,7 +64,7 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:import:paris')
-            ->setDescription('Import data from paris');
+            ->setDescription('(Import data from paris');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -73,6 +74,14 @@ class ParisImportCommand extends ContainerAwareCommand
         $this->users = $this->em->getRepository(User::class)->findAll();
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
+        foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
+            foreach ($listeners as $key => $listener) {
+                if ($listener instanceof ReferenceEventListener) {
+                    $this->em->getEventManager()->removeEventListener(['preFlush'], $listener);
+                    $output->writeln('Disabled Reference Listener');
+                }
+            }
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -135,6 +144,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
             $this->importDistricts($output, $proposalForm);
         }
+        $this->em->flush();
         $this->em->clear();
 
         $this->reloadData();
@@ -161,8 +171,6 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setForm($proposalForm);
             $this->em->persist($entity);
         }
-        $this->em->flush();
-
         $output->writeln('<info>Successfuly imported districts.</info>');
     }
 
@@ -176,33 +184,29 @@ class ParisImportCommand extends ContainerAwareCommand
             $count = 1;
             $users = $this->em->getRepository(User::class)->findAll();
             foreach ($proposals as $proposal) {
-                $district = $step->getProposalForm()->getDistricts()->filter(function ($district) use ($proposal) {
-                    return $district->getName() === $proposal['district'];
-                })->first();
-                $user = $users[random_int(0, \count($users) - 1)];
+                $district = $this->em->getRepository(District::class)->findOneBy(['form' => $step->getProposalForm(), 'name' => $proposal['district']]);
+                $user = $users[\random_int(0, \count($users) - 1)];
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($user)
                     ->setProposalForm($step->getProposalForm())
                     ->setReference($count)
                     ->setBody($proposal['body'])
-                    ->setDistrict($district)
-                ;
+                    ->setDistrict($district, false);
                 $this->em->persist($proposal);
-
                 if (0 === $count % self::BATCH_SIZE) {
                     $this->printMemoryUsage($output);
-                    $output->writeln('<info>Entities which are going to be flushed</info>');
                     $output->writeln('<info>Flushing entities...</info>');
                     $this->em->flush();
                     $output->writeln('<info>Clearing Entity Manager...</info>');
-//                    $this->em->clear();
+                    $this->em->clear(Proposal::class);
+                    $users = $this->em->getRepository(User::class)->findAll();
                 }
                 $progress->advance();
                 ++$count;
             }
             $this->em->flush();
-            $this->em->clear();
+            $this->em->clear(Proposal::class);
             $progress->finish();
             $output->writeln('<info>Successfuly imported proposals.</info>');
         } else {
@@ -223,6 +227,7 @@ class ParisImportCommand extends ContainerAwareCommand
             ->setDistrictHelpText('Sélectionnez une zone géographique')
             ->setCategoryHelpText('Sélectionnez une catégorie.')
             ->setUsingCategories(true)
+            ->setReference($parisProjectId)
             ->setUsingDistrict(true)
             ->setUsingAddress(true)
             ->setLatMap(48.8600561)
