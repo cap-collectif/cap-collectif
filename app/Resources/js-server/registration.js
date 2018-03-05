@@ -40,6 +40,7 @@ import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
 import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
+import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
 
 moment.locale('fr');
 
@@ -50,6 +51,7 @@ global.setInterval = global.setInterval || emptyFunction;
 
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
+  AccountProfileFollowingsApp,
   AdminModalsApp,
   RegistrationAdminApp,
   ShieldApp,
