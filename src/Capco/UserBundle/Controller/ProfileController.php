@@ -73,6 +73,21 @@ class ProfileController extends BaseController
     }
 
     /**
+     * @Route("/followings", name="capco_profile_edit_followings")
+     * @Template("CapcoUserBundle:Profile:edit_followings.html.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editFollowingsAction(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        }
+
+        return [];
+    }
+
+    /**
      * @Route("/notifications", name="capco_profile_notifications_edit_account")
      * @Template("@CapcoUser/Profile/edit_notifications.twig")
      * @Security("has_role('ROLE_USER')")
