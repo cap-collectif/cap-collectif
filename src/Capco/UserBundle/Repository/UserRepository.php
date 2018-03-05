@@ -723,7 +723,7 @@ class UserRepository extends EntityRepository
 
     public function isViewerFollowingProposal(Proposal $proposal, User $viewer): bool
     {
-        return $this->countFollower($proposal, $viewer) > 0;
+        return $this->countFollowerForProposalAndUser($proposal, $viewer) > 0;
     }
 
     public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 32, $offset = 0): Paginator
@@ -806,25 +806,6 @@ class UserRepository extends EntityRepository
         ));
 
         return $qb->getQuery()->getResult();
-//        $query = $em->createQuery(
-//            'SELECT u.id, count(distinct pv) as proposals_votes_count
-//          FROM CapcoUserBundle:User u
-//          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH (pv.user = u AND pv.selectionStep = :step)
-//          LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-//          WHERE pv.user = u AND pv.expired = 0 AND p.draft = 0 AND p.expired = 0
-//          GROUP BY pv.user
-//        ');
-
-        $em = $this->getEntityManager();
-        $query = $em->createQuery(
-            'SELECT u
-          FROM CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:Follower f1 WITH f1.user = u
-          LEFT JOIN CapcoAppBundle:Proposal p1 WITH f1.proposal = p1
-          WHERE u.id IN (SELECT f2.user_id FROM CapcoAppBundle:Follower f2)
-        ');
-
-        return $query->getSQL();
     }
 
     /**
