@@ -21,12 +21,12 @@ class ProposalsFollowedByUserResolver implements ResolverInterface
     public function __invoke(User $user): array
     {
         try {
-            $proposal = $this->proposalRepository->findFollowingProposalByUser($user->getId());
+            $proposals = $this->proposalRepository->findFollowingProposalByUser($user->getId());
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
             throw new \RuntimeException('Find following proposal by user failed');
         }
 
-        return $proposal;
+        return $proposals;
     }
 }
