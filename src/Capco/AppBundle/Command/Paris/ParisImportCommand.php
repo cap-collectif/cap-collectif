@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\Command\Paris;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
@@ -23,7 +25,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const BATCH_SIZE = 250;
+    protected const PROPOSAL_BATCH_SIZE = 250;
+    protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
         'id',
@@ -40,8 +43,16 @@ class ParisImportCommand extends ContainerAwareCommand
         'name',
     ];
 
+    protected const COMMENT_HEADER = [
+        'proposal_id',
+        'body',
+        'created_at',
+        'updated_at',
+    ];
+
     protected const PROPOSAL_HEADER = [
         'project_id',
+        'proposal_id',
         'title',
         'district',
         'body',
@@ -59,6 +70,7 @@ class ParisImportCommand extends ContainerAwareCommand
     protected $projects = [];
     protected $proposals = [];
     protected $categories = [];
+    protected $comments = [];
 
     protected function configure()
     {
@@ -74,6 +86,7 @@ class ParisImportCommand extends ContainerAwareCommand
         $this->users = $this->em->getRepository(User::class)->findAll();
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
+        $this->comments = $this->createComments();
         foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
             foreach ($listeners as $key => $listener) {
                 if ($listener instanceof ReferenceEventListener) {
@@ -154,9 +167,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 $this->importProposals($output, $parisProjectId, $project);
             }
         }
-
-        $output->write("\n");
-        $output->writeln('<info>Successfuly imported ' . \count($this->projects) . ' projects.</info>');
+        $output->writeln("\n<info>Successfuly imported " . \count($this->projects) . ' projects.</info>');
     }
 
     protected function importDistricts(OutputInterface $output, ProposalForm $proposalForm): void
@@ -177,13 +188,14 @@ class ParisImportCommand extends ContainerAwareCommand
     protected function importProposals(OutputInterface $output, int $parisProjectId, Project $project): void
     {
         if (isset($this->proposals[$parisProjectId])) {
-            $output->writeln('<info>Importing proposals for project "' . $project->getTitle() . '"...</info>');
+            $output->writeln("\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>');
             $step = $project->getFirstCollectStep();
             $proposals = $this->proposals[$parisProjectId];
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             $users = $this->em->getRepository(User::class)->findAll();
             foreach ($proposals as $proposal) {
+                $proposalParisId = $proposal['proposal_id'];
                 $district = $this->em->getRepository(District::class)->findOneBy(['form' => $step->getProposalForm(), 'name' => $proposal['district']]);
                 $user = $users[\random_int(0, \count($users) - 1)];
                 $proposal = (new Proposal())
@@ -194,13 +206,11 @@ class ParisImportCommand extends ContainerAwareCommand
                     ->setBody($proposal['body'])
                     ->setDistrict($district, false);
                 $this->em->persist($proposal);
-                if (0 === $count % self::BATCH_SIZE) {
+                $this->importComments($output, $proposal, $proposalParisId, $users);
+                if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
                     $this->printMemoryUsage($output);
-                    $output->writeln('<info>Flushing entities...</info>');
                     $this->em->flush();
-                    $output->writeln('<info>Clearing Entity Manager...</info>');
                     $this->em->clear(Proposal::class);
-                    $users = $this->em->getRepository(User::class)->findAll();
                 }
                 $progress->advance();
                 ++$count;
@@ -208,9 +218,41 @@ class ParisImportCommand extends ContainerAwareCommand
             $this->em->flush();
             $this->em->clear(Proposal::class);
             $progress->finish();
-            $output->writeln('<info>Successfuly imported proposals.</info>');
+            $output->writeln("\n<info>Successfuly imported proposals.</info>");
         } else {
-            $output->writeln('<info>No proposals found for project "' . $project->getTitle() . '"</info>');
+            $output->writeln("\n<info>No proposals found for project \"" . $project->getTitle() . '"</info>');
+        }
+    }
+
+    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId, array $users): void
+    {
+        if (isset($this->comments[$proposalParisId])) {
+            $output->writeln("\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>');
+            $comments = $this->comments[$proposalParisId];
+            $progress = new ProgressBar($output, \count($comments));
+            $count = 1;
+            foreach ($comments as $comment) {
+                $user = $users[\random_int(0, \count($users) - 1)];
+                $comment = (new ProposalComment())
+                    ->setProposal($proposal, false)
+                    ->setAuthor($user)
+                    ->setCreatedAt(new \DateTime($comment['created_at']))
+                    ->setUpdatedAt(new \DateTime($comment['updated_at']))
+                    ->setBody($comment['body']);
+                $this->em->persist($comment);
+                if (0 === $count % self::COMMENT_BATCH_SIZE) {
+                    $this->em->flush();
+                    $this->em->clear(Comment::class);
+                }
+                $progress->advance();
+                ++$count;
+            }
+            $this->em->flush();
+            $this->em->clear(Comment::class);
+            $progress->finish();
+            $output->writeln("\n<info>Successfuly imported comments for proposal.</info>");
+        } else {
+            $output->writeln('<info>No comments found for proposal "' . $proposal->getTitle() . '"</info>');
         }
     }
 
@@ -294,6 +336,21 @@ class ParisImportCommand extends ContainerAwareCommand
         return $proposals;
     }
 
+    protected function createComments(): array
+    {
+        $csv = Reader::createFromPath(__DIR__ . '/paris_comments.csv');
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::COMMENT_HEADER);
+        $comments = [];
+        foreach ($iterator as $item) {
+            $comments[] = $item;
+        }
+        $comments = $this->array_group_by($comments, function ($i) {
+            return $i['proposal_id'];
+        });
+
+        return $comments;
+    }
+
     private function reloadData(): void
     {
         foreach ($this->projects as $parisProjectId => $project) {
@@ -321,7 +378,7 @@ class ParisImportCommand extends ContainerAwareCommand
         return $result;
     }
 
-    private function array_unique_nested(array $array, string $uniqueKey)
+    private function array_unique_nested(array $array, string $uniqueKey): array
     {
         if (!is_array($array)) {
             return [];

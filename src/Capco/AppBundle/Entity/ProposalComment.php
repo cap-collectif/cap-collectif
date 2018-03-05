@@ -23,10 +23,12 @@ class ProposalComment extends Comment
         return $this->proposal;
     }
 
-    public function setProposal(Proposal $proposal): self
+    public function setProposal(Proposal $proposal, bool $add = true): self
     {
         $this->proposal = $proposal;
-        $proposal->addComment($this);
+        if ($add) {
+            $proposal->addComment($this);
+        }
 
         return $this;
     }
