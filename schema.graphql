@@ -1125,6 +1125,7 @@ type ProposalForm implements Node {
   # Identifies the step that use the proposal form.
   step: CollectStep
   allowAknowledge: Boolean!
+  projectProposal: [ProposalForm]!
 }
 
 input ProposalsConnectionFilter {
@@ -1546,7 +1547,10 @@ scalar URI
 
 input UnfollowProposalInput {
   # The proposal id
-  proposalId: ID!
+  proposalId: ID
+
+  # Array of proposal id
+  ids: [ID!]
   clientMutationId: String
 }
 
@@ -1762,7 +1766,7 @@ type User implements Node {
   consentExternalCommunication: Boolean!
 
   # Array of proposals followed by current user.
-  followingProposal: [Proposal!]!
+  followingProposals: [Proposal!]!
 
   # Total of contributions count
   contributionsCount: Int!
