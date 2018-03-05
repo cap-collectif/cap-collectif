@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class UnfollowProposalMutation
 {
@@ -23,10 +24,29 @@ class UnfollowProposalMutation
         $this->followerRepository = $followerRepository;
     }
 
-    public function __invoke(string $proposalId, User $user): array
+    public function __invoke(Argument $args, User $user): array
     {
-        /** @var Proposal $proposal */
-        $proposal = $this->proposalRepository->find($proposalId);
+        if(isset($args['proposalId'])) {
+            /** @var Proposal $proposal */
+            $proposal = $this->proposalRepository->find($args['proposalId']);
+            $this->unfollowAProposal($proposal, $user);
+        }
+
+        if (isset($args['ids'])) {
+            foreach ($args['ids'] as $proposalId) {
+                /** @var Proposal $proposal */
+                $proposal = $this->proposalRepository->find($proposalId);
+                $this->unfollowAProposal($proposal, $user);
+            }
+        }
+
+        $this->em->flush();
+
+        return ['proposal' => $proposal, 'unfollowerId' => $user->getId()];
+    }
+
+    protected function unfollowAProposal(Proposal $proposal, User $user)
+    {
         /** @var Follower $follower */
         $follower = $this->followerRepository->findBy(['user' => $user, 'proposal' => $proposal]);
 
@@ -35,9 +55,5 @@ class UnfollowProposalMutation
         }
         $follower = $follower[0];
         $this->em->remove($follower);
-
-        $this->em->flush();
-
-        return ['proposal' => $proposal, 'unfollowerId' => $user->getId()];
     }
 }
