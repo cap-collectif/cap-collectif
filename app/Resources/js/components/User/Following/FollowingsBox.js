@@ -5,43 +5,43 @@ import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
-import NotificationsForm from './NotificationsForm';
 import Loader from '../../Utils/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
+import FollowingsProposals from "./FollowingsProposals";
 
 const query = graphql`
-  query NotificationsBoxQuery {
+  query FollowingsBoxQuery {
     viewer {
-      ...NotificationsForm_viewer
+     ...FollowingsProposals_viewer
     }
   }
 `;
 
 type Props = Object;
 
-export class FollowingBox extends Component<Props> {
+export class FollowingsBox extends Component<Props> {
   render() {
-    const renderNotificationsForm = ({ props, error }) => {
+    const renderFollowingProjectProposal = ({ props, error }) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
-        return <NotificationsForm viewer={props.viewer} />;
+        return <FollowingsProposals viewer={props.viewer}/>;
       }
       return <Loader />;
     };
     return (
-      <Panel header={<FormattedMessage id="profile.account.notifications.title" />}>
+      <Panel header={<FormattedMessage id="followings" />}>
         <QueryRenderer
           variables={{}}
           environment={environment}
           query={query}
-          render={renderNotificationsForm}
+          render={renderFollowingProjectProposal}
         />
       </Panel>
     );
   }
 }
 
-export default FollowingBox;
+export default FollowingsBox;
