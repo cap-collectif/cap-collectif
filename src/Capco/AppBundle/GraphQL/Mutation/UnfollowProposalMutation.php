@@ -10,6 +10,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class UnfollowProposalMutation
 {
