@@ -171,16 +171,15 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             $proposals = $proposalForm->getProposals();
             $projects[$projectId]['projectTitle'] = $project->getTitle();
             $projects[$projectId]['projectType'] = $project->getProjectType()->getTitle();
+            // init variable, not used yet
             $projects[$projectId]['proposals'] = [];
             $projects[$projectId]['countActivities'] = 0;
 
             /** @var Proposal $proposal */
             foreach ($proposals as $proposal) {
                 $step = $proposal->getStep();
-                if ($step instanceof SelectionStep) {
-                    if ($step->isProposalsHidden()) {
-                        continue;
-                    }
+                if ($step instanceof SelectionStep && $step->isProposalsHidden()) {
+                    continue;
                 }
                 $currentProposal = [];
                 $proposalId = $proposal->getId();
