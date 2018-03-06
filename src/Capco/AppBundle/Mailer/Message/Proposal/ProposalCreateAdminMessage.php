@@ -29,7 +29,7 @@ final class ProposalCreateAdminMessage extends AdminMessage
                 $proposal->getTitle(),
                 $proposal->getCreatedAt()->format('d/m/Y'),
                 $proposal->getCreatedAt()->format('H:i:s'),
-                $proposal->getBodyTextExcerpt(),
+                $proposal->getSummaryOrBodyExcerpt(),
                 $proposalUrl,
                 $proposalAdminUrl,
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
@@ -43,7 +43,7 @@ final class ProposalCreateAdminMessage extends AdminMessage
         string $proposalTitle,
         string $date,
         string $time,
-        $proposalExcerpt,
+        string $proposalExcerpt,
         string $proposalUrl,
         string $proposalAdminUrl,
         string $projectTitle
