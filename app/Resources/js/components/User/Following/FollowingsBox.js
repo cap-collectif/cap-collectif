@@ -7,12 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import Loader from '../../Utils/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import FollowingsProposals from "./FollowingsProposals";
+import FollowingsProposals from './FollowingsProposals';
 
 const query = graphql`
   query FollowingsBoxQuery {
     viewer {
-     ...FollowingsProposals_viewer
+      ...FollowingsProposals_viewer
     }
   }
 `;
@@ -27,7 +27,7 @@ export class FollowingsBox extends Component<Props> {
         return graphqlError;
       }
       if (props) {
-        return <FollowingsProposals viewer={props.viewer}/>;
+        return <FollowingsProposals viewer={props.viewer} />;
       }
       return <Loader />;
     };

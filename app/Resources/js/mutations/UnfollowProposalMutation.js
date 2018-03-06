@@ -27,19 +27,20 @@ const commit = (
   commitMutation(environnement, {
     mutation,
     variables,
-    configs: [
-      {
-        type: 'RANGE_DELETE',
-        parentID: variables.input.proposalId,
-        connectionKeys: [
-          {
-            key: 'ProposalPageFollowers_followerConnection',
-          },
-        ],
-        pathToConnection: ['proposal', 'followerConnection'],
-        deletedIDFieldName: 'unfollowerId',
-      },
-    ],
+    // TODO update in real type @spyl
+    // configs: [
+    //   {
+    //     type: 'RANGE_DELETE',
+    //     parentID: variables.input.proposalId,
+    //     connectionKeys: [
+    //       {
+    //         key: 'ProposalPageFollowers_followerConnection',
+    //       },
+    //     ],
+    //     pathToConnection: ['proposal', 'followerConnection'],
+    //     deletedIDFieldName: 'unfollowerId',
+    //   },
+    // ],
   });
 
 export default { commit };
