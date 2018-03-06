@@ -66,6 +66,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'proposal_id',
         'title',
         'district',
+        'category',
         'body',
         'status',
         'location',
@@ -227,6 +228,7 @@ class ParisImportCommand extends ContainerAwareCommand
             $output->writeln("\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>');
             $proposals = $this->proposals[$parisProjectId];
             $questions = $step->getProposalForm()->getRealQuestions();
+            $categories = $step->getProposalForm()->getCategories();
             $statuses = $step->getStatuses();
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
@@ -238,6 +240,9 @@ class ParisImportCommand extends ContainerAwareCommand
                 );
                 $user = $users[\random_int(0, \count($users) - 1)];
                 $responses = $this->createResponses($proposal, $questions);
+                $category = $categories->filter(function (ProposalCategory $category) use ($proposal) {
+                    return false !== stripos($category->getName(), $proposal['category']);
+                })->first();
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($user)
@@ -256,6 +261,9 @@ class ParisImportCommand extends ContainerAwareCommand
                         })->first()
                     )
                     ->setDistrict($district, false);
+                if ($category) {
+                    $proposal->setCategory($category);
+                }
                 $this->em->persist($proposal);
                 $this->importComments($output, $proposal, $proposalParisId, $users);
                 if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
