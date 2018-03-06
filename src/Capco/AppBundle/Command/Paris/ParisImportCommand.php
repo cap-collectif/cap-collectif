@@ -10,22 +10,29 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const PROPOSAL_BATCH_SIZE = 250;
+    protected const PROPOSAL_BATCH_SIZE = 200;
     protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
@@ -36,6 +43,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'created_at',
         'updated_at',
         'project_id',
+        'filename',
     ];
 
     protected const CATEGORY_HEADER = [
@@ -59,8 +67,10 @@ class ParisImportCommand extends ContainerAwareCommand
         'status',
         'location',
         'cost',
+        'diagnostic',
         'objectif',
         'created_at',
+        'updated_at',
     ];
 
     /** @var EntityManagerInterface */
@@ -99,7 +109,11 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $stopwatch = new Stopwatch();
+        $stopwatch->start('import');
         $this->importProjects($output);
+        $event = $stopwatch->stop('import');
+        $output->writeln("\n<info>Elapsed time : " . $event->getDuration() / 1000 . " seconds. \n Memory usage : " . $event->getMemory() / 1000000 . ' MB</info>');
     }
 
     protected function importProjects(OutputInterface $output): void
@@ -123,14 +137,17 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
                 ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
-
+            $thumbnail = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
+                __DIR__ . '/images/' . $row['filename']
+            );
             $project = (new Project())
                 ->setTitle($row['title'])
                 ->setAuthor($user)
                 ->setProjectType($type)
                 ->setCreatedAt(new \DateTime($row['created_at']))
                 ->setPublishedAt(new \DateTime($row['created_at']))
-                ->setUpdatedAt(new \DateTime($row['updated_at']));
+                ->setUpdatedAt(new \DateTime($row['updated_at']))
+                ->setCover($thumbnail);
             $project->addStep(
                 (new ProjectAbstractStep())
                     ->setProject($project)
@@ -187,21 +204,28 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function importProposals(OutputInterface $output, int $parisProjectId, Project $project): void
     {
-        if (isset($this->proposals[$parisProjectId])) {
+        $step = $project->getFirstCollectStep();
+        if ($step && isset($this->proposals[$parisProjectId])) {
             $output->writeln("\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>');
-            $step = $project->getFirstCollectStep();
             $proposals = $this->proposals[$parisProjectId];
+            $question = $step->getProposalForm()->getRealQuestions()->first();
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             $users = $this->em->getRepository(User::class)->findAll();
             foreach ($proposals as $proposal) {
                 $proposalParisId = $proposal['proposal_id'];
-                $district = $this->em->getRepository(District::class)->findOneBy(['form' => $step->getProposalForm(), 'name' => $proposal['district']]);
+                $district = $this->em->getRepository(District::class)->findOneBy(
+                    ['form' => $step->getProposalForm(), 'name' => $proposal['district']]
+                );
                 $user = $users[\random_int(0, \count($users) - 1)];
+                $responses = $this->createResponses($proposal, $question);
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($user)
                     ->setProposalForm($step->getProposalForm())
+                    ->setResponses(new ArrayCollection($responses))
+                    ->setCreatedAt(new \DateTime($proposal['created_at']))
+                    ->setUpdatedAt(new \DateTime($proposal['updated_at']))
                     ->setReference($count)
                     ->setBody($proposal['body'])
                     ->setDistrict($district, false);
@@ -210,12 +234,14 @@ class ParisImportCommand extends ContainerAwareCommand
                 if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
                     $this->printMemoryUsage($output);
                     $this->em->flush();
+                    $this->em->clear(AbstractResponse::class);
                     $this->em->clear(Proposal::class);
                 }
                 $progress->advance();
                 ++$count;
             }
             $this->em->flush();
+            $this->em->clear(AbstractResponse::class);
             $this->em->clear(Proposal::class);
             $progress->finish();
             $output->writeln("\n<info>Successfuly imported proposals.</info>");
@@ -256,6 +282,37 @@ class ParisImportCommand extends ContainerAwareCommand
         }
     }
 
+    protected function importQuestions(ProposalForm $proposalForm, array $questions): void
+    {
+        $i = 0;
+        foreach ($questions as $title) {
+            $question = (new SimpleQuestion())
+                ->setTitle($title)
+                ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT);
+            $questionnaireQuestion = (new QuestionnaireAbstractQuestion())
+                ->setPosition($i)
+                ->setQuestion($question);
+            $proposalForm->addQuestion($questionnaireQuestion);
+            ++$i;
+        }
+        unset($i);
+    }
+
+    protected function createResponses(array $row, AbstractQuestion $question): array
+    {
+        $responses = [];
+        $questionColumns = ['objectif', 'diagnostic'];
+        foreach ($questionColumns as $questionColumn) {
+            if ($row[$questionColumn]) {
+                $responses[] = (new ValueResponse())
+                    ->setValue($row[$questionColumn])
+                    ->setQuestion($question);
+            }
+        }
+
+        return $responses;
+    }
+
     protected function createProposalForm(OutputInterface $output, Project $project, int $parisProjectId): ProposalForm
     {
         $formName = 'Formulaire pour "' . $project->getTitle() . '"';
@@ -294,6 +351,11 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setName($categoryName);
             $proposalForm->addCategory($category);
         }
+
+        $this->importQuestions($proposalForm, [
+            'Objectif',
+            "Diagnostic / Inspiration / Exemples d'expérimentation passée",
+        ]);
 
         $this->em->persist($proposalForm);
         $this->em->flush();

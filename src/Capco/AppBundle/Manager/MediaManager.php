@@ -26,6 +26,18 @@ class MediaManager
         return $media;
     }
 
+    public function createImageFromPath(string $path, string $context = 'default')
+    {
+        $media = $this->mediaManager->create();
+        $media->setProviderName('sonata.media.provider.image');
+        $media->setBinaryContent($path);
+        $media->setContext($context);
+        $media->setEnabled(true);
+        $this->mediaManager->save($media);
+
+        return $media;
+    }
+
     protected function resolveProviderName(UploadedFile $file): string
     {
         return preg_match('/^image\/[a-z]+/', $file->getClientMimeType())

@@ -420,9 +420,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this->proposalForm->getRealQuestions();
     }
 
-    public function setResponseOn(AbstractResponse $response)
+    public function setResponseOn(AbstractResponse $response): self
     {
         $response->setProposal($this);
+
+        return $this;
     }
 
     public function getReports(): Collection

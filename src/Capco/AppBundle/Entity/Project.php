@@ -516,6 +516,8 @@ class Project implements IndexableInterface
     public function setCover($cover)
     {
         $this->Cover = $cover;
+
+        return $this;
     }
 
     /**
