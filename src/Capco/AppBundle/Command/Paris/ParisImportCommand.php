@@ -15,13 +15,16 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection as CollectionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -42,7 +45,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'excerpt',
         'created_at',
         'updated_at',
-        'project_id',
+        'end_at',
         'filename',
     ];
 
@@ -71,6 +74,17 @@ class ParisImportCommand extends ContainerAwareCommand
         'objectif',
         'created_at',
         'updated_at',
+    ];
+
+    protected const STATUSES = [
+        ['Arbitrage' => 'info'],
+        ['Atelier' => 'info'],
+        ['Discussion' => 'info'],
+        ['Étude' => 'info'],
+        ['Nouvelle' => 'info'],
+        ['Refusée' => 'danger'],
+        ['Retenu' => 'success'],
+        ['Vote' => 'success'],
     ];
 
     /** @var EntityManagerInterface */
@@ -125,8 +139,8 @@ class ParisImportCommand extends ContainerAwareCommand
         foreach ($iterator as $item) {
             $rows[] = $item;
         }
-        $output->writeln('<info>Importing projects...</info>');
 
+        $output->writeln('<info>Importing projects...</info>');
         foreach ($rows as $row) {
             $user = $this->users[random_int(0, \count($this->users) - 1)];
             $introductionStep = (new PresentationStep())
@@ -136,6 +150,8 @@ class ParisImportCommand extends ContainerAwareCommand
             $collectStep = (new CollectStep())
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
+                ->setStartAt(new \DateTime($row['created_at']))
+                ->setEndAt(new \DateTime($row['end_at']))
                 ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
             $thumbnail = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
                 __DIR__ . '/images/' . $row['filename']
@@ -168,7 +184,9 @@ class ParisImportCommand extends ContainerAwareCommand
 
             $proposalForm = $this->createProposalForm($output, $project, $row['id']);
 
-            $collectStep->setProposalForm($proposalForm);
+            $collectStep
+                ->setProposalForm($proposalForm)
+                ->setStatuses($this->createStatuses());
 
             $this->em->persist($collectStep);
 
@@ -208,7 +226,8 @@ class ParisImportCommand extends ContainerAwareCommand
         if ($step && isset($this->proposals[$parisProjectId])) {
             $output->writeln("\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>');
             $proposals = $this->proposals[$parisProjectId];
-            $question = $step->getProposalForm()->getRealQuestions()->first();
+            $questions = $step->getProposalForm()->getRealQuestions();
+            $statuses = $step->getStatuses();
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             $users = $this->em->getRepository(User::class)->findAll();
@@ -218,7 +237,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     ['form' => $step->getProposalForm(), 'name' => $proposal['district']]
                 );
                 $user = $users[\random_int(0, \count($users) - 1)];
-                $responses = $this->createResponses($proposal, $question);
+                $responses = $this->createResponses($proposal, $questions);
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($user)
@@ -228,6 +247,14 @@ class ParisImportCommand extends ContainerAwareCommand
                     ->setUpdatedAt(new \DateTime($proposal['updated_at']))
                     ->setReference($count)
                     ->setBody($proposal['body'])
+                    ->setStatus(
+                        $statuses->filter(function (Status $status) use ($proposal) {
+                            return false !== stripos(
+                                    Slugify::create()->slugify($status->getName()),
+                                    $proposal['status']
+                                );
+                        })->first()
+                    )
                     ->setDistrict($district, false);
                 $this->em->persist($proposal);
                 $this->importComments($output, $proposal, $proposalParisId, $users);
@@ -298,15 +325,20 @@ class ParisImportCommand extends ContainerAwareCommand
         unset($i);
     }
 
-    protected function createResponses(array $row, AbstractQuestion $question): array
+    protected function createResponses(array $row, CollectionInterface $questions): array
     {
         $responses = [];
         $questionColumns = ['objectif', 'diagnostic'];
         foreach ($questionColumns as $questionColumn) {
             if ($row[$questionColumn]) {
-                $responses[] = (new ValueResponse())
-                    ->setValue($row[$questionColumn])
-                    ->setQuestion($question);
+                $question = $questions->filter(function (AbstractQuestion $question) use ($questionColumn) {
+                    return false !== stripos($question->getTitle(), $questionColumn);
+                })->first();
+                if ($question) {
+                    $responses[] = (new ValueResponse())
+                        ->setValue($row[$questionColumn])
+                        ->setQuestion($question);
+                }
             }
         }
 
@@ -411,6 +443,24 @@ class ParisImportCommand extends ContainerAwareCommand
         });
 
         return $comments;
+    }
+
+    protected function createStatuses(): CollectionInterface
+    {
+        $statuses = new ArrayCollection();
+        $i = 0;
+        foreach (self::STATUSES as $status) {
+            $statusName = array_keys($status)[0];
+            $status = (new Status())
+                ->setName($statusName)
+                ->setPosition($i)
+                ->setColor($status[$statusName]);
+            ++$i;
+            $statuses->add($status);
+        }
+        unset($i);
+
+        return $statuses;
     }
 
     private function reloadData(): void

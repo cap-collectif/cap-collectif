@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -525,5 +526,14 @@ abstract class AbstractStep
     public function isParticipative()
     {
         return false;
+    }
+
+    public function setStatuses(Collection $value): self
+    {
+        foreach ($value as $item) {
+            $this->addStatus($item);
+        }
+
+        return $this;
     }
 }
