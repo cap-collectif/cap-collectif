@@ -38,6 +38,7 @@ export class FollowingsProposals extends Component<Props, State> {
     viewer.followingProposals.map(proposal => {
       projectsById[proposal.project.id] = proposal.project;
     });
+
     return (
       <div>
         <h2>
