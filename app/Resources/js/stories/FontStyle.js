@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 
-export class Font extends React.Component<Props> {
+export class FontStyle extends React.Component<Props> {
   static defaultProps = {};
 
   render() {

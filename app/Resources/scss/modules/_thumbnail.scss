@@ -3,14 +3,14 @@
 ================================================================*/
 
 .thumbnail--custom {
-    @include border-radius(0);
-    padding: 0;
-
-    &:hover {
-        .smart-fade:after {
-            background: $page-bgc;
-        }
-    }
+    //@include border-radius(0);
+    //padding: 0;
+    //
+    //&:hover {
+    //    .smart-fade:after {
+    //        background: $page-bgc;
+    //    }
+    //}
 
     //.project__preview {
     //    &__cover {

@@ -5,7 +5,6 @@ import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';
 import ProjectPreviewBody from './ProjectPreviewBody';
 import { CardContainer } from "../../Ui/Card/CardContainer";
-import CardType from "../../Ui/Card/CardType";
 
 type Props = {
   project: Object,

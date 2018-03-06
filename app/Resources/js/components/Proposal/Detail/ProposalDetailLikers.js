@@ -36,7 +36,7 @@ const ProposalDetailLikers = React.createClass({
     const { proposal, componentClass } = this.props;
     const Component = componentClass;
     if (proposal.likers.length > 0) {
-      return <Component className="proposal__info">{this.renderContent()}</Component>;
+      return <Component className="card__tag">{this.renderContent()}</Component>;
     }
 
     return null;

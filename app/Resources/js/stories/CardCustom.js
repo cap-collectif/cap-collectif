@@ -21,7 +21,7 @@ export class CardCustom extends React.Component<Props> {
         <Image />
         <div className="card__body">
           <div className="card__body__infos">
-            <h3>
+            <h3 className="card__title">
               <a href="#">
                 Customized Card
               </a>

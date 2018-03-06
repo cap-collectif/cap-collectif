@@ -3,84 +3,14 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ProgressBar } from "react-bootstrap";
 import { CardContainer } from "../components/Ui/Card/CardContainer";
+import CardType from "../components/Ui/Card/CardType";
+import CardCover from "../components/Ui/Card/CardCover";
+import {Progress} from "../components/Ui/Progress";
+import {CardUser} from "../components/Ui/Card/CardUser";
 
-type Props = {};
-
-const Type = styled.div`
-  background-color: rgb(91, 192, 222);
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-  text-align: center;
-  padding: 2px;
-  color: white;
-`; // do component
-
-const Image = styled.div` 
-  width: 100%;
-  background: url('https://source.unsplash.com/random') center;
-  background-size: cover;
-  height: 175px; 
-`; // do component
-
-const BodyUser = styled.div`
-  hr {
-    margin: 15px 0 5px;
-  }
-`; // do component
-
-const UserAvatar = styled.div` 
-  float: left;
-  margin-right: 10px;
-  width: 45px;
-  height: 45px;
-  background-color: red;
-  border-radius: 50%;
-`; // do component
-
-const Body = styled.div`
-  display: flex;
-  padding: 15px;
-  flex: 1 0 auto;
-  flex-direction: column;
-`;
-
-const BodyInfos = styled.div`
-  flex: 1 0 auto;
-  margin-bottom: 15px;
-`;
-
-const BodyActions = styled.div`
-   color: #707070;
-   font-size: 14px;
-
-  a {
-    text-transform: uppercase;
-    margin-right: 10px;
-  }
- 
-  .remaining-time__number {
-    color: #212529;
-  }
-`;
-
-const Excerpt = styled.span`
-  font-size: 14px;
-  color: #707070;
-  
-  span {
-    color: #212529;
-  }
-  
-  a {
-    color: #707070;
-  }
-`;
-
-const Title = styled.h3`
-  font-size: 18px;
-  line-height: 1.2;
-  margin-top: 5px;
-`;
+type Props = {
+  project: Object,
+};
 
 const Tag = styled.div`
   padding: 5px 0 0 5px; 
@@ -91,11 +21,6 @@ const Tag = styled.div`
   }
 `;
 
-const Footer = styled.div`
-  text-align: center;
-  font-size: 14px;
-`;
-
 const Counters = styled.div`
   padding: 5px;
   background-color: #f6f6f6;
@@ -104,7 +29,7 @@ const Counters = styled.div`
 
 const Counter = styled.div`
   
-`;
+`; // existe encore plusieurs counters ?
 
 const Value = styled.div`
   font-size: 18px;
@@ -124,46 +49,52 @@ export class Card extends React.Component<Props> {
   static defaultProps = {};
 
   render() {
+    const { project } = this.props;
+
     return (
       <CardContainer>
-        <Type>
-          Mon type
-        </Type>
-        <Image />
-        <Body>
-          <BodyUser>
-            <UserAvatar />
-            <div>
-              <a href="">welcomattic</a>
-              <p>
-                <Excerpt>
-                  1 janvier 2015
-                </Excerpt>
-              </p>
+        <CardType color={project.type.color}>
+          {project.type.title}
+        </CardType>
+        <CardCover>
+          <img src={project.cover} alt={project.title}/>
+        </CardCover>
+        <CardUser>
+          <div className="card__user__avatar">
+            <img src="https://source.unsplash.com/random" alt=""/>
+          </div>
+          <div>
+            <a href="">welcomattic</a>
+            <p>
+              <div className="excerpt">
+                1 janvier 2015
+              </div>
+            </p>
+          </div>
+          <hr/>
+        </CardUser>
+        <div className="card__body">
+          <div className="card__body__infos">
+            <div className="excerpt">
+              {project.theme}
             </div>
-            <hr/>
-          </BodyUser>
-          <BodyInfos>
-            <Excerpt>
-              Immobilier, Transport
-            </Excerpt>
-            <Title>
+            <h3 className="card__title">
               <a href="#">
-                Mon titre
+                {project.title}
               </a>
-            </Title>
-            <Excerpt>
+            </h3>
+            <div className="excerpt">
               Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.
-            </Excerpt>
-            <div>
-              <Excerpt>
-                <span>0</span> contribution
-              </Excerpt>
             </div>
             <div>
-              <Excerpt>
-                <span>0</span> participant
-              </Excerpt>
+              <div className="excerpt">
+                <span className="excerpt_dark">0</span> contribution
+              </div>
+            </div>
+            <div>
+              <div className="excerpt">
+                <span className="excerpt_dark">0</span> participant
+              </div>
             </div>
             <Tag>
               <i className="cap glyphicon glyphicon-pushpin" /> {/* replace by true icons */}
@@ -173,28 +104,30 @@ export class Card extends React.Component<Props> {
               <i className="cap glyphicon glyphicon-fire" />
               Maurepas Patton
             </Tag>
-          </BodyInfos>
-          <ProgressBar
-            bsStyle="success"
-            now={50}
-            label="en cours"
-            className={null}
-          />
-          <BodyActions>
-            <div className="remaining-time__container">
+          </div>
+          <Progress>
+            <ProgressBar
+              bsStyle={project.step.bsStyle}
+              now={project.step.now}
+              label={project.step.label}
+              className={project.step.className}
+            />
+          </Progress>
+          <div className="card__actions">
+            <div className="excerpt">
               <a href="">
                 Participer
               </a>
-              <span className="remaining-time__number">
+              <span className="excerpt_dark">
                 10
               </span>{' '}
               <span>
                 jours restants {/* <remainingTime /> */}
               </span>
             </div>
-          </BodyActions>
-        </Body>
-        <Footer>
+          </div>
+        </div>
+        <div className="small text-center">
           <Counters>
             <Counter>
               <Value>
@@ -208,7 +141,7 @@ export class Card extends React.Component<Props> {
           <Status>
             Aucun statut
           </Status>
-        </Footer>
+        </div>
       </CardContainer>
     );
   }

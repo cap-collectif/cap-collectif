@@ -28,13 +28,13 @@ const ProposalPreviewFooter = React.createClass({
     }
 
     return (
-      <div className="proposal__footer">
-        <div className="proposal__counters">
+      <div className="small text-center">
+        <div className="card__counters">
           {showComments && (
             <div
               className="proposal__counter proposal__counter--comments"
               style={{ width: counterVoteWidth }}>
-              <div className="proposal__counter__value">{proposal.commentsCount}</div>
+              <div className="card__counter__value">{proposal.commentsCount}</div>
               <div className="proposal__counter__label">
                 <FormattedMessage
                   id="comment.count_no_nb"
@@ -47,10 +47,9 @@ const ProposalPreviewFooter = React.createClass({
           )}
           {showVotes && (
             <div
-              className="proposal__counter proposal__counter--votes"
               style={{ width: counterCommentsWidth, borderLeft: '1px solid #ccc' }}>
-              <div className="proposal__counter__value">{votesCount}</div>
-              <div className="proposal__counter__label">
+              <div className="card__counter__value">{votesCount}</div>
+              <div>
                 <FormattedMessage
                   id="proposal.vote.count_no_nb"
                   values={{

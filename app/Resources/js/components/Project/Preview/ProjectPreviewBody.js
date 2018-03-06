@@ -158,18 +158,14 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (hasSecondTitle) {
       return (
-        <h2
-          className="project__preview__title"
-          style={{ height: 'auto', lineHeight: 'auto', marginTop: '5px' }}>
+        <h2 className="card__title">
           {this.getTitleContent()}
         </h2>
       );
     }
 
     return (
-      <h3
-        className="project__preview__title"
-        style={{ height: 'auto', lineHeight: 'auto', marginTop: '5px' }}>
+      <h3 className="card__title">
         {this.getTitleContent()}
       </h3>
     );
@@ -208,7 +204,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             isCurrentStep={isCurrentStep}
           />
         )}
-        <div className="card__body__actions excerpt small">
+        <div className="card__actions">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.status === 'open' &&

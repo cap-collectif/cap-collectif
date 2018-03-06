@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Progress = styled.div`
   .progress {
-    margin-bottom: 15px;
+    margin: 15px 0;
     background-color: #F6F6F6;
   }
   

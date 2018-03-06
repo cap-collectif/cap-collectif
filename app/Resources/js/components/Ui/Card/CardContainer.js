@@ -13,10 +13,10 @@ export const CardContainer = styled.div`
   width: 100%;
   border-radius: 4px;
   
-  h3, h2 {
+  .card__title {
     font-size: 18px;
     line-height: 1.2;
-    margin-top: 5px;
+    margin: 5px 0 10px;
   }
   
   .card__body {
@@ -27,21 +27,40 @@ export const CardContainer = styled.div`
     
     &__infos {
       flex: 1 0 auto;
-      margin-bottom: 15px;
-    }
-    
-    &__actions {
-      color: #707070;
-      font-size: 14px;
-    
-      a {
-        text-transform: uppercase;
-        margin-right: 10px;
-      }
-     
-      .remaining-time__number {
-        color: #212529;
-      }
     }
   }
+  
+  .card__tags {
+    margin-top: 5px;
+    font-size: 14px;
+  
+    .card__tag{
+      padding: 5px 0 0 5px;
+      display: block;
+      
+      .cap {
+        padding-right: 5px;
+      }
+    } 
+  }
+  
+  .card__actions {
+    color: #707070;
+    font-size: 14px;
+  
+    a {
+      text-transform: uppercase;
+      margin-right: 10px;
+    }
+  }
+  
+  .card__counters {
+    padding: 5px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #e3e3e3;
+  }
+  
+  .card__counter__value {
+      font-size: 18px;
+    }
 `;

@@ -1,38 +1,16 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
 import { ProgressBar } from 'react-bootstrap';
 import {CardContainer} from "../components/Ui/Card/CardContainer";
 import CardType from "../components/Ui/Card/CardType";
 import {Progress} from "../components/Ui/Progress";
+import CardCover from "../components/Ui/Card/CardCover";
 
 type Props = {
   project: Object,
 };
 
-const Image = styled.div` 
-  width: 100%;
-  background: url('https://source.unsplash.com/random') center;
-  background-size: cover;
-  height: 175px; 
-`; // do component
-
 export class CardProject extends React.Component<Props> {
-  static defaultProps = {
-    project: {
-      title: "Mon projet",
-      type: {
-        title: "Consultation",
-        color: "#337ab7"
-      },
-      step: {
-        bsStyle: "success",
-        now: 80,
-        label: "en cours",
-        className: null,
-      }
-    }
-  };
 
   render() {
     const { project } = this.props;
@@ -42,14 +20,18 @@ export class CardProject extends React.Component<Props> {
         <CardType color={project.type.color}>
           {project.type.title}
         </CardType>
-        <Image />
+        <CardCover>
+          <img src={project.cover} alt={project.title}/>
+        </CardCover>
         <div className="card__body">
           <div className="card__body__infos">
             <div className="excerpt small">
-              Immobilier, Transport
+              {project.theme}
             </div>
-            <h3>
-              {project.title}
+            <h3 className="card__title">
+              <a href="#">
+                {project.title}
+              </a>
             </h3>
             <div className="excerpt small">
               <span className="excerpt_dark">0</span> contribution
@@ -66,12 +48,12 @@ export class CardProject extends React.Component<Props> {
               className={project.step.className}
             />
           </Progress>
-          <div className="card__body__actions">
-            <div className="remaining-time__container">
+          <div className="card__actions">
+            <div className="excerpt">
               <a href="">
                 Participer
               </a>
-              <span className="remaining-time__number">
+              <span className="excerpt_dark">
                 10
               </span>{' '}
               <span>

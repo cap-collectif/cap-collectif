@@ -12,24 +12,6 @@ const Image = styled.div`
   height: 175px; 
 `; // do component
 
-const Body = styled.div`
-  display: flex;
-  padding: 15px;
-  flex: 1 0 auto;
-  flex-direction: column;
-`;
-
-const BodyInfos = styled.div`
-  flex: 1 0 auto;
-  margin-bottom: 15px;
-`;
-
-const Title = styled.h3`
-  font-size: 18px;
-  line-height: 1.2;
-  margin-top: 5px;
-`;
-
 const DotList = styled.ul.attrs({
   className: 'excerpt'
 })`
@@ -49,15 +31,15 @@ export class CardTheme extends React.Component<Props> {
 
   render() {
     return (
-      <CardContainer>
+      <CardContainer className="text-center">
         <Image />
-        <Body>
-          <BodyInfos>
-            <Title>
+        <div className="card__body">
+          <div className="card__body__infos">
+            <h3 className="card__title">
               <a href="#">
                 Mon titre
               </a>
-            </Title>
+            </h3>
             <DotList>
               <li>5 projets</li>
               <li>10 articles</li>
@@ -67,8 +49,8 @@ export class CardTheme extends React.Component<Props> {
             <span className="label label-danger">
               Danger
             </span>
-          </BodyInfos>
-        </Body>
+          </div>
+        </div>
       </CardContainer>
     );
   }
