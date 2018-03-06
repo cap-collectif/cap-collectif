@@ -257,6 +257,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'radio') {
+      console.log("ici radio");
       formControl = (
         <Radio value={value} {...props} checked={radioChecked}>
           {children}

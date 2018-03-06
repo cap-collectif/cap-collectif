@@ -145,6 +145,9 @@ export const formatInitialResponsesValues = (
     if (question.type === 'medias') {
       return { question: question.id, value: [] };
     }
+    if(question.type === 'radio' || question.type === 'checkbox') {
+      return { question: question.id, value: {labels: [], other: null} };
+    }
     return { question: question.id, value: null };
   });
 };
@@ -189,7 +192,7 @@ export const renderResponses = ({
   disabled,
 }: FieldArrayProps & {
   questions: Questions,
-  responses: ResponsesInReduxForm,
+  responses: ResponsesInReduxForm, // redux form ?
   change: (field: string, value: any) => void,
   intl: IntlShape,
   disabled: boolean,
@@ -277,6 +280,9 @@ export const renderResponses = ({
             ) {
               choices = formattedChoicesInField(field);
               if (inputType === 'radio') {
+
+                console.warn(responses);
+
                 return (
                   <ProposalPrivateField key={field.id} show={field.private}>
                     <div key={`${member}-container`}>

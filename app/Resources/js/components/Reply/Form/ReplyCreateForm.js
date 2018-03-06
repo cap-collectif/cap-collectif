@@ -40,7 +40,7 @@ export class ReplyCreateForm extends React.Component<Props> {
           environment={environment}
           query={graphql`
             query ReplyCreateFormQuery($id: ID!) {
-              questionnaire(id: $id) {
+              questionnaire: node(id: $id) {
                 ...ReplyForm_questionnaire
               }
             }

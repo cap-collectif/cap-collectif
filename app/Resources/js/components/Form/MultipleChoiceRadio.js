@@ -34,7 +34,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   }
 
   checkOtherRadio = () => {
-    this.props.change(`${this.props.name}.value.labels`, null);
+    this.props.change(`${this.props.name}.value.labels`, []);
     // $FlowFixMe
     ReactDOM.findDOMNode(this.textField)
       .getElementsByTagName('input')[0]
@@ -66,6 +66,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
 
     const finalValue = value && Array.isArray(value.labels) ? value.labels[0] : undefined;
     const otherValue = value ? value.other : undefined;
+
+    console.log(choices.map((choice) => choice));
 
     return (
       <div>

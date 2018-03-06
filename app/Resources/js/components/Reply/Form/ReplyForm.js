@@ -145,6 +145,7 @@ export class ReplyForm extends React.Component<Props> {
       pristine,
       invalid,
       valid,
+      change,
       submitSucceeded,
       submitFailed,
       handleSubmit,
@@ -159,6 +160,7 @@ export class ReplyForm extends React.Component<Props> {
         )}
         <FieldArray
           name="responses"
+          change={change}
           component={renderResponses}
           questions={questionnaire.questions}
           intl={intl}
