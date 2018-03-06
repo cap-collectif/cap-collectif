@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
-import type { Dispatch } from '../../types';
+import type { Dispatch, State } from '../../types';
 
 const selector = formValueSelector('proposal-form-admin-configuration');
 
@@ -128,7 +128,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   kind: selector(state, `${props.member}.kind`) || '',
 });
 
